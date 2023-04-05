@@ -63,7 +63,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
             ],
         }
 
-        const res = await fetch('http://max.posthog.cc/entries', {
+        const res = await fetch('https://max.posthog.cc/entries', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
