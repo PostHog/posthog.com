@@ -77,6 +77,17 @@ If you're looking to improve any of the above metrics, here is a handy cheat she
 | Images: Downlading and Rendering| 🟡 Medium (only if they are part of the initial content) | 🔴 Low | 🟢 High |
 | Fonts: Downloading and Rendering  | 🟡 Medium (only if they are part of the initial content)  | 🔴 Low |  🔴 Low  |
 
+## Identifying Opportunities on Your Own Site
+Posthog's performance monitoring shows you the size and speed of different requests made during page load. You can also filter these by request type, such as API, JS, image, and CSS requets.
+
+Combine this with the cheat sheet above and you'll be to pinpoint what are the contributing factors to your metric times.
+
+For example:
+![](https://i.imgur.com/JPeZeTe.png)
+
+Here we can see an API request that is happening during page load (indicated by the `LOAD` text next to it). Since it is blocking the initial rendering, it is contributing to the high FCP time as well as the Page Loaded time.
+
+
 ## Conclusion
 
 // TODO
