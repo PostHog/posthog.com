@@ -99,6 +99,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 continue
             }
 
+            const filteredReplies = replies.data.filter((reply) => reply.attributes.profile.data?.id)
+
             createNode({
                 type: `SqueakQuestion`,
                 id: createNodeId(`squeak-question-${question.id}`),
@@ -108,7 +110,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     type: `SqueakQuestion`,
                 },
                 ...(profile.data && { profile: { id: createNodeId(`squeak-profile-${profile.data.id}`) } }),
-                replies: replies.data.map((reply) => ({
+                replies: filteredReplies.map((reply) => ({
                     id: createNodeId(`squeak-reply-${reply.id}`),
                 })),
                 topics: topics.data.map((topic) => ({
@@ -117,7 +119,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 ...rest,
             })
 
-            for (let reply of replies.data) {
+            for (let reply of filteredReplies) {
                 const { profile, ...replyData } = reply.attributes
 
                 createNode({
