@@ -57,10 +57,6 @@ type QuestionPageProps = {
 export default function QuestionPage(props: QuestionPageProps) {
     const { squeakQuestion } = props.data
 
-    if (!squeakQuestion || !squeakQuestion?.profile) {
-        return null
-    }
-
     // Remap the data to match the Strapi format
     const question: StrapiRecord<QuestionData> = {
         id: squeakQuestion.squeakId,
