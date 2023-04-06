@@ -25,7 +25,7 @@ export const wrapPageElement = ({ element, props }) => {
                   'docs/api/user',
                   'docs/integrations',
                   'docs/product-analytics',
-                  'docs/session-recording',
+                  'docs/session-replay',
                   'docs/feature-flags',
                   'docs/experiments',
                   'docs/data',

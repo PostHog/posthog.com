@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/nextjs-analytics.png
-topics: ["configuration", "feature flags", "persons", "events"]
+tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
 Next.js is a popular web framework built on React. It provides optimizations and abstractions to help developers build fast and performant apps and sites.

@@ -94,7 +94,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Session recording',
-                url: '/docs/session-recording',
+                url: '/docs/session-replay',
             },
             {
                 title: 'Feature flags',
@@ -133,10 +133,6 @@ const linklist: IProps[] = [
             {
                 title: 'Contributors',
                 url: '/contributors',
-            },
-            {
-                title: 'Partners',
-                url: '/partners',
             },
             {
                 title: 'Newsletter',

@@ -17,8 +17,8 @@ import PairsWith from 'components/ProductLayout/PairsWith'
 import Documentation from 'components/ProductLayout/Documentation'
 import ProductLayout from 'components/ProductLayout'
 
-const Check = (props: any) => <CheckIcon {...props} className="w-5" />
-const Close2 = (props: any) => <CloseIcon {...props} className="w-5" />
+const Check = (props: any) => <CheckIcon {...props} className="w-5 mx-auto" />
+const Close = (props: any) => <CloseIcon {...props} className="w-5 mx-auto" />
 
 export default function Product({ data, location, pageContext }) {
     const { pageData, blogPosts, documentation, tutorials } = data
@@ -58,10 +58,8 @@ export default function Product({ data, location, pageContext }) {
         Sections: (props: any) => <Sections {...props} sections={productSections} />,
         Testimonial: (props: any) => <Testimonial {...props} {...productTestimonial} />,
         Check,
-        Close2,
-        Comparison: (props: any) => (
-            <Comparison {...props} description={`How does PostHog ${title.toLowerCase()} compare?`} />
-        ),
+        Close,
+        Comparison: (props: any) => <Comparison {...props} description={`How does PostHog ${title} compare?`} />,
         BlogPosts: (props: any) => <BlogPosts {...props} title={productBlog?.title} posts={blogPosts?.edges} />,
         Roadmap: (props: any) => (
             <Roadmap {...props} team={productTeam} subtitle={`Here's what the ${productTeam} Team is building next.`} />

@@ -5,7 +5,6 @@ import { Calendar, Edit, Issue } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
 import PostLayout from 'components/PostLayout'
 import Text from 'components/PostLayout/Text'
 import Topics from 'components/PostLayout/Topics'
@@ -25,6 +24,7 @@ import { NewsletterForm } from 'components/NewsletterForm'
 import blogMenu from 'components/Blog/blogMenu'
 import blog from 'sidebars/blog.json'
 import slugify from 'slugify'
+import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
@@ -121,12 +121,12 @@ export default function BlogPost({ data, pageContext, location }) {
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
     const components = {
-        h1: H1,
-        h2: H2,
-        h3: H3,
-        h4: H4,
-        h5: H5,
-        h6: H6,
+        h1: (props) => Heading({ as: 'h1', ...props }),
+        h2: (props) => Heading({ as: 'h2', ...props }),
+        h3: (props) => Heading({ as: 'h3', ...props }),
+        h4: (props) => Heading({ as: 'h4', ...props }),
+        h5: (props) => Heading({ as: 'h5', ...props }),
+        h6: (props) => Heading({ as: 'h6', ...props }),
         pre: MdxCodeBlock,
         inlineCode: InlineCode,
         blockquote: Blockquote,

@@ -36,7 +36,7 @@ PostHog goes beyond frontend monitoring by augmenting product analytics and sess
 
 ### 2. PostHog is open source and transparent
 
-PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/how-we-built-an-app-server), open their own PRs, or give feedback on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like LogRocket can't offer.
+PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/blog/how-we-built-an-app-server), open their own PRs, or give feedback on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like LogRocket can't offer.
 
 ### 3. PostHog constantly ships new features
 

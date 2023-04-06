@@ -5,7 +5,7 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/tutorial-12.png
 featuredTutorial: false
 author: ['joe-martin']
-topics: ['session recording']
+tags: ['session recording']
 featuredVideo: https://www.youtube-nocookie.com/embed/3BS5h2gkz90
 date: 2022-11-03
 ---

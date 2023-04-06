@@ -5,7 +5,7 @@ import { heading, section } from './classes'
 import airbus from './images/airbus.svg'
 import clickhouse from './images/clickhouse.svg'
 import hasura from './images/hasura.svg'
-import ing from './images/ing.svg'
+import assemblyai from './images/assemblyai.svg'
 import joybird from './images/joybird.svg'
 import landmark from './images/landmark.svg'
 import Logomark from './images/Logomark'
@@ -52,7 +52,7 @@ export default function Customers() {
                     <Customer className="max-h-[46px]" image={phantom} />
 
                     <Customer className="max-h-[51px]" image={hasura} />
-                    <Customer className="max-h-[50px]" image={ing} />
+                    <Customer className="max-h-[50px]" image={assemblyai} />
                     <Customer className="max-h-[40px]" image={outbrain} />
                     <Customer className="max-h-[35px]" image={clickhouse} />
 

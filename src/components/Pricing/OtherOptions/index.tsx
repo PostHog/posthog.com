@@ -39,7 +39,7 @@ const sections: ISection[] = [
         icon: <EnterpriseIcon />,
         description: <EnterpriseDescription />,
         cta: {
-            url: '/signup/cloud/enterprise',
+            url: '/contact-sales?edition=enterprise',
             label: 'Get in touch',
             type: 'primary',
         },

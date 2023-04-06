@@ -6,6 +6,7 @@
         { "source": "/integrations/:path*", "destination": "/apps/:path*" },
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
         { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/integrate/:path*" },
+        { "source": "/docs/session-recording/:path*", "destination": "/docs/session-replay/:path*" },
         { "source": "/docs/integrations/android-integration", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrations/community", "destination": "/docs/libraries/community" },
         { "source": "/docs/integrations/docusaurus-integration", "destination": "/docs/libraries/docusaurus" },
@@ -700,7 +701,7 @@
         },
         {
             "source": "/enterprise",
-            "destination": "/signup/cloud/enterprise"
+            "destination": "/contact-sales?edition=enterprise"
         },
         {
             "source": "/docs/self-host/open-source/deployment",
@@ -750,7 +751,6 @@
             "destination": "/docs/libraries/google-tag-manager"
         },
 
-        { "source": "/manual/recordings", "destination": "/docs/session-recording" },
         { "source": "/manual/feature-flags", "destination": "/docs/feature-flags/manual" },
         { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags/manual" },
@@ -781,8 +781,8 @@
         { "source": "/manual/persons", "destination": "/docs/data/persons" },
         { "source": "/manual/role-based-access", "destination": "/docs/data/role-based-access" },
         { "source": "/manual/sessions", "destination": "/docs/data/sessions" },
-        { "source": "/manual/session-recording", "destination": "/docs/session-recording" },
-        { "source": "/manual/session-recordings", "destination": "/docs/session-recording" },
+        { "source": "/manual/session-recording", "destination": "/docs/session-replay" },
+        { "source": "/manual/session-recordings", "destination": "/docs/session-replay" },
         { "source": "/manual/sso", "destination": "/docs/data/sso" },
         { "source": "/manual/subscriptions", "destination": "/docs/data/notifications-and-alerts" },
         { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },
@@ -811,6 +811,7 @@
         { "source": "/docs/self-host/deploy/digital-ocean", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/gcp", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" },
+        { "source": "/signup/cloud/enterprise", "destination": "/contact-sales?edition=enterprise" },
         {
             "source": "/docs/feature-flags/local-evaluation",
             "destination": "/docs/feature-flags/bootstrapping-and-local-evaluation"
@@ -820,7 +821,9 @@
             "destination": "/docs/feature-flags/bootstrapping-and-local-evaluation"
         },
         { "source": "/products/product-analytics", "destination": "/product-analytics" },
-        { "source": "/session-recording", "destination": "/session-replay" }
+        { "source": "/session-recording", "destination": "/session-replay" },
+        { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" },
+        { "source": "/docs/session-recording", "destination": "/docs/session-replay" }
     ],
     "rewrites": [
         {

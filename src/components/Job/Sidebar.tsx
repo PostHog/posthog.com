@@ -76,14 +76,14 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                     <Tooltip
                                         placement="top-end"
                                         className="whitespace-nowrap"
-                                        content={
+                                        content={() => (
                                             <div className="flex space-x-1 items-center">
                                                 <span className="text-xs">{name}</span>
                                                 <span className="w-[14px] flex">
                                                     <ReactCountryFlag width={14} svg countryCode={country} />
                                                 </span>
                                             </div>
-                                        }
+                                        )}
                                     >
                                         <span className="relative">
                                             <ContributorImage
