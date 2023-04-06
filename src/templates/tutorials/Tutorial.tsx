@@ -102,7 +102,11 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
             <PostLayout
-                questions={<CommunityQuestions />}
+                questions={
+                    <div id="squeak-questions" className="pb-8">
+                        <CommunityQuestions />
+                    </div>
+                }
                 body={body}
                 featuredImage={featuredImage}
                 featuredVideo={featuredVideo}
