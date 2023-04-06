@@ -50,7 +50,7 @@ Adding session replay increased the scope, but just three days later Mintlify ha
 ![Mintlify Analytics Powered By PostHog](../images/customers/mintlify/mintlify-analytics.png)
 <Caption>Mintlify's team built user-facing analytics in just three days, using PostHog and Tremor</Caption>
 
-Best of all, because all data is already tracked in Mintlify’s own PostHog instance, there’s no need for setting up additional projects or reports — all user-facing data is simply segmented out of Mintlify’s existing instance. 
+Best of all, because all data is already tracked in Mintlify’s own PostHog instance, there’s no need for setting up additional projects or reports — all user-facing data is simply segmented and pulled out of Mintlify’s existing instance. 
 
 Mintlify is also tracking engagement with its user-facing analytics in PostHog which, in turn, powers the user-facing analytics Mintlify has built. It’s a self-reinforcing product improvement loop!
 
