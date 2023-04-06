@@ -246,7 +246,7 @@ We can set this up by creating one more file, a `+layout.svelte` file in `src/ro
   import { browser } from "$app/environment";
   import posthog from 'posthog-js'
   
-  $: $page.url.path, browser && posthog.capture('$pageview')
+  $: $page.url.pathname, browser && posthog.capture('$pageview')
 </script>
 
 <slot></slot>
