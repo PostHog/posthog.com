@@ -347,6 +347,13 @@ const Style = createGlobalStyle`
         span {
             margin-left: .5rem;
         }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+        }
     }
 
     button.squeak-reply-skeleton {

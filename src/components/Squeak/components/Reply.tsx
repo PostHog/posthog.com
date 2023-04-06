@@ -4,6 +4,7 @@ import Days from './Days'
 import Markdown from './Markdown'
 import { StrapiRecord, ReplyData } from 'lib/strapi'
 import Avatar from './Avatar'
+import getAvatarURL from '../util/getAvatar'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -39,7 +40,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
             <div className="squeak-post-author">
                 {/* TODO: Add link to profile */}
                 <a className="squeak-profile-link" href={`/community/profiles/${profile.data.id}`}>
-                    <Avatar image={profile.data.attributes.avatar?.data?.attributes?.url} />
+                    <Avatar image={getAvatarURL(profile?.data)} />
                     <strong className="squeak-author-name">{profile.data.attributes.firstName || 'Anonymous'}</strong>
                 </a>
 
