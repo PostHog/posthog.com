@@ -33,7 +33,7 @@ Mintlify has used PostHog internally since launch, making regular use of both th
     />
 </BorderWrapper>
 
-## Session recording, analytics and user feedback
+## Session replay, analytics and user feedback
 
 After seeing first-hand how analytics could help them build better products, Mintlify decided to explore ways to provide users this same ability within their own product. Rather than building the feature from scratch, the team identified a simpler solution: use PostHog. 
 
