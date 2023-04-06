@@ -17,7 +17,7 @@ toolsUsed:
     - API
 ---
 
-Mintlify is a docs startup used by teams at [Y Combinator](/customers/ycombinator), Explo and  MindsDB to power their product and technical documentation. It helps teams with rapidly evolving products to create rich, well structured docs which convert users and empower colleagues. 
+Mintlify is startup powering product and technical documentation for the teams at [Y Combinator](/customers/ycombinator), Explo, MindsDB and others. It helps teams with rapidly evolving products to create rich, well structured docs which convert users and empower colleagues. 
 
 Mintlify has used PostHog internally since launch, making regular use of both the product analytics and session replay tools to help it build better products. 
 
