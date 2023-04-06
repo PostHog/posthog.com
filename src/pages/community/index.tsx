@@ -17,6 +17,7 @@ import QuestionsTable from 'components/Questions/QuestionsTable'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { ProfileData, StrapiRecord } from 'lib/strapi'
 import { useQuestions } from 'hooks/useQuestions'
+import getAvatarURL from 'components/Squeak/util/getAvatar'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -99,7 +100,7 @@ export const Profile = ({
                 to={`/community/profiles/${id}`}
                 className="flex items-center space-x-2 mt-2 mb-1 -mx-2 relative active:top-[1px] active:scale-[.99] hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark rounded p-2"
             >
-                <Avatar src={avatar?.data?.attributes?.url} className="w-[40px] h-[40px]" />
+                <Avatar src={getAvatarURL(profile)} className="w-[40px] h-[40px]" />
                 <div>{name && <p className="m-0 font-bold">{name}</p>}</div>
             </Link>
 

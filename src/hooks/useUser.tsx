@@ -184,7 +184,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             const userData = await res.json()
 
-            const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles`, {
+            const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?populate=avatar`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -194,8 +194,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                         user: userData.user.id,
                         firstName,
                         lastName,
+                        gravatarURL: avatar,
                     },
-                    populate: ['avatar'],
                 }),
             })
 
@@ -209,9 +209,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 ...userData.user,
                 profile: {
                     ...profileData,
-                    avatar: {
-                        url: avatar,
-                    },
                 },
             }
 

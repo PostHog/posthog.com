@@ -38,7 +38,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                     sort: ['createdAt:asc'],
                     populate: {
                         profile: {
-                            fields: ['id', 'firstName', 'lastName'],
+                            fields: ['id', 'firstName', 'lastName', 'gravatarURL'],
                             populate: {
                                 avatar: {
                                     fields: ['id', 'url'],
@@ -100,7 +100,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         mutate()
     }
 
-    let questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
+    const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
 
     return {
         question: questionData,

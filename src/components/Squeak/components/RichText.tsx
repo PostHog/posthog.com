@@ -140,7 +140,7 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
                     <a
                         href="https://www.markdownguide.org/cheat-sheet/"
                         target="_blank"
-                        rel="noopener"
+                        rel="noreferrer"
                         title="Supports Markdown syntax"
                     >
                         <MarkdownLogo />

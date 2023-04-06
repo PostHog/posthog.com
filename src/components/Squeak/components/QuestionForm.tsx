@@ -9,6 +9,7 @@ import Avatar from './Avatar'
 import Logo from './Logo'
 import RichText from './RichText'
 import { Theme } from './Theme'
+import getAvatarURL from '../util/getAvatar'
 
 type QuestionFormValues = {
     subject: string
@@ -58,7 +59,7 @@ function QuestionFormMain({
                 {({ setFieldValue, isValid }) => {
                     return (
                         <Form className="squeak-form">
-                            <Avatar image={user?.profile?.avatar} />
+                            <Avatar image={getAvatarURL(user?.profile)} />
 
                             <div className="squeak-inputs-wrapper">
                                 {subject && (
@@ -218,8 +219,7 @@ export const QuestionForm = ({
                     }[view]
                 ) : (
                     <div className="squeak-reply-buttons">
-                        <Avatar image={user?.profile?.attributes?.avatar?.data?.attributes?.url} />
-
+                        <Avatar image={getAvatarURL(user?.profile)} />
                         <button
                             className={formType === 'reply' ? 'squeak-reply-skeleton' : 'squeak-ask-button'}
                             onClick={() => setView('question-form')}

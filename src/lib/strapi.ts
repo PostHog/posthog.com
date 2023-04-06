@@ -55,6 +55,7 @@ export type ProfileData = {
     updatedAt: string | null
     publishedAt: string | null
     avatar?: StrapiData<AvatarData>
+    gravatarURL: string | null
 }
 
 export type ProfileQuestionsData = {
@@ -66,7 +67,7 @@ export type ReplyData = {
     createdAt: string
     updatedAt: string
     publishedAt: string
-    profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar'>>
+    profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar' | 'gravatarURL'>>
 }
 
 export type TopicData = {
