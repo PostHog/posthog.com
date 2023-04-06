@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-17.png
-topics: ["session recordings", "configuration"]
+tags: ["session recording", "configuration"]
 ---
 
 Session recordings help you get a deep understanding of how users are using your product. We strongly recommend them for [early-stage startups](/blog/early-stage-analytics), but as you scale the number of recordings can go beyond what you need.

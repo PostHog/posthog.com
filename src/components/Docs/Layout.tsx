@@ -112,14 +112,6 @@ export default function DocsLayout({
         ...shortcodes,
     }
 
-    const { hash } = useLocation()
-
-    React.useEffect(() => {
-        if (hash) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
-
     const showToc = !hideAnchor && tableOfContents?.length > 0
     const mainEl = React.useRef(null)
 

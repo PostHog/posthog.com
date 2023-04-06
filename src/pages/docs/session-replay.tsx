@@ -13,22 +13,22 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 export const quickLinks = [
     {
         name: 'Product manual',
-        to: '/docs/session-recording/manual',
-        description: 'How to use session recording.',
+        to: '/docs/session-replay/manual',
+        description: 'How to use session replay.',
     },
     {
         name: 'Configuration',
-        to: '/docs/session-recording/configure',
-        description: 'Settings for customizing session recording capture.',
+        to: '/docs/session-replay/configure',
+        description: 'Settings for customizing session replay capture.',
     },
     {
         name: 'Data retention',
-        to: '/docs/session-recording/data-retention',
-        description: 'Adjust how long session recordings are stored when self-hosting.',
+        to: '/docs/session-replay/data-retention',
+        description: 'Adjust how long session replays are stored when self-hosting.',
     },
     {
         name: 'Troublehsooting & FAQs',
-        to: '/docs/session-recording/troubleshooting',
+        to: '/docs/session-replay/troubleshooting',
         description: 'Common issues and how to resolve them.',
     },
 ]
@@ -48,9 +48,9 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
 
     return (
         <Layout>
-            <SEO title="Session recording - Docs - PostHog" />
+            <SEO title="Session replay - Docs - PostHog" />
 
-            <PostLayout title={'Session recording'} menu={docs} hideSurvey hideSidebar>
+            <PostLayout title={'Session replay'} menu={docs} hideSurvey hideSidebar>
                 <StaticImage
                     alt=""
                     placeholder="none"
@@ -58,7 +58,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                     className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
                     src="../../components/Home/Slider/images/session-recording-hog.png"
                 />
-                <h1 className="text-4xl mb-2 mt-6">Session recording</h1>
+                <h1 className="text-4xl mb-2 mt-6">Session replay</h1>
                 <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                     Play back sessions to diagnose UI issues, improve support, and get context for nuanced user
                     behavior.
@@ -75,8 +75,8 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                     <GettingStarted
                         articleType="Pinned"
                         title="Record your first session"
-                        description="Flip a switch to start capturing session recordings in minutes."
-                        link="/docs/session-recording/manual#enabling-session-recording"
+                        description="Flip a switch to start capturing session replays in minutes."
+                        link="/docs/session-replay/manual#enabling-session-recording"
                     ></GettingStarted>
                 </section>
 

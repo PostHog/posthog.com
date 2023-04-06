@@ -1,5 +1,5 @@
 import { useLocation } from '@reach/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePost } from './hooks'
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import { defaultMenuWidth } from './context'
@@ -38,26 +38,18 @@ export default function Post({ children }: { children: React.ReactNode }) {
         contentContainerClasses,
         stickySidebar,
     } = usePost()
-    const { hash, href } = useLocation()
-
-    useEffect(() => {
-        if (hash && !hideSearch) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
 
     const handleFullWidthContentChange = () => {
         localStorage.setItem('full-width-content', !fullWidthContent + '')
         setFullWidthContent(!fullWidthContent)
     }
 
-    useEffect(() => {
-        if (!hideSidebar && sidebar) {
-            setFullWidthContent(localStorage.getItem('full-width-content') === 'true')
-        } else {
-            setFullWidthContent(true)
+    const handleArticleTransitionEnd = (e) => {
+        const hash = window?.location?.hash
+        if (e?.propertyName === 'max-width' && hash) {
+            document.getElementById(hash?.replace('#', ''))?.scrollIntoView()
         }
-    }, [sidebar, hideSidebar])
+    }
 
     return (
         <div className="sm:border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
@@ -120,7 +112,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                             id="content-menu-wrapper"
                             className="lg:py-12 py-4 ml-auto w-full h-full box-border lg:overflow-auto"
                         >
-                            <div className={contentContainerClasses}>
+                            <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
                                 <div>{children}</div>
                                 {questions}
                             </div>
