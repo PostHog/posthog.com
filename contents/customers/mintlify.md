@@ -45,7 +45,7 @@ Adding session replay increased the scope, but just three days later Mintlify ha
 
 ## User-facing analytics, powered by PostHog
 
-“We were able to ship this so fast because we had some secret weapons up our sleeve,” says Han. “First was PostHog, which could handle all the data for us and meant there was nothing further to build or configure. Second was a tool called [Tremor](https://www.tremor.so/), which let us just pipe data in and generate some visuals.”
+“We were able to ship this so fast because we had some secret weapons up our sleeve,” says Han. “First was PostHog, which could handle all the data for us and meant there was nothing further to build or configure. Second, was a tool called [Tremor](https://www.tremor.so/), which let us just pipe data in and generate some visuals.”
 
 ![Mintlify Analytics Powered By PostHog](../images/customers/mintlify/mintlify-analytics.png)
 <Caption>Mintlify's team built user-facing analytics in just three days, using PostHog and Tremor</Caption>
