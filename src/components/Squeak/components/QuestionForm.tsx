@@ -44,6 +44,7 @@ function QuestionFormMain({
                 formType
             ))
     }
+
     return (
         <div className="squeak-form-frame">
             {title && <h2>{title}</h2>}
@@ -196,70 +197,67 @@ export const QuestionForm = ({
     }
 
     return (
-        <ErrorBoundary>
-            {/* @ts-ignore */}
-            <root.div ref={containerRef}>
-                <Theme containerRef={containerRef} />
-                <div className="squeak">
-                    {view ? (
-                        {
-                            'question-form': (
-                                <QuestionFormMain
-                                    subject={formType === 'question'}
-                                    initialValues={formValues}
-                                    loading={loading}
-                                    onSubmit={handleMessageSubmit}
-                                />
-                            ),
-                            auth: (
-                                <Authentication
-                                    buttonText={{
-                                        login: 'Login & post question',
-                                        signUp: 'Sign up & post question',
-                                    }}
-                                    setParentView={setView}
-                                    formValues={formValues}
-                                    handleMessageSubmit={handleMessageSubmit}
-                                    onSignUp={onSignUp}
-                                />
-                            ),
-                            login: (
-                                <Authentication
-                                    setParentView={setView}
-                                    formValues={formValues}
-                                    handleMessageSubmit={() => setView(null)}
-                                    onSignUp={onSignUp}
-                                />
-                            ),
-                            approval: <Approval handleConfirm={() => setView(null)} />,
-                        }[view]
-                    ) : (
-                        <div className="squeak-reply-buttons">
-                            <Avatar url={user?.profile} image={user?.profile?.avatar} />
+        <root.div ref={containerRef}>
+            <Theme containerRef={containerRef} />
+            <div className="squeak">
+                {view ? (
+                    {
+                        'question-form': (
+                            <QuestionFormMain
+                                subject={formType === 'question'}
+                                initialValues={formValues}
+                                loading={loading}
+                                onSubmit={handleMessageSubmit}
+                            />
+                        ),
+                        auth: (
+                            <Authentication
+                                buttonText={{
+                                    login: 'Login & post question',
+                                    signUp: 'Sign up & post question',
+                                }}
+                                setParentView={setView}
+                                formValues={formValues}
+                                handleMessageSubmit={handleMessageSubmit}
+                                onSignUp={onSignUp}
+                            />
+                        ),
+                        login: (
+                            <Authentication
+                                setParentView={setView}
+                                formValues={formValues}
+                                handleMessageSubmit={() => setView(null)}
+                                onSignUp={onSignUp}
+                            />
+                        ),
+                        approval: <Approval handleConfirm={() => setView(null)} />,
+                    }[view]
+                ) : (
+                    <div className="squeak-reply-buttons">
+                        <Avatar url={user?.profile} image={user?.profile?.avatar} />
+                        <button
+                            className={formType === 'reply' ? 'squeak-reply-skeleton' : 'squeak-ask-button'}
+                            onClick={() => setView('question-form')}
+                        >
+                            {buttonText}
+                        </button>
+                        {formType === 'question' && (
                             <button
-                                className={formType === 'reply' ? 'squeak-reply-skeleton' : 'squeak-ask-button'}
-                                onClick={() => setView('question-form')}
+                                onClick={() => {
+                                    if (user) {
+                                        logout()
+                                    } else {
+                                        setView('login')
+                                    }
+                                }}
+                                className="squeak-auth-button"
                             >
-                                {buttonText}
+                                {user ? 'Logout' : 'Login'}
                             </button>
-                            {formType === 'question' && (
-                                <button
-                                    onClick={() => {
-                                        if (user) {
-                                            logout()
-                                        } else {
-                                            setView('login')
-                                        }
-                                    }}
-                                    className="squeak-auth-button"
-                                >
-                                    {user ? 'Logout' : 'Login'}
-                                </button>
-                            )}
-                        </div>
-                    )}
-                </div>
-            </root.div>
-        </ErrorBoundary>
+                        )}
+                    </div>
+                )}
+            </div>
+        </root.div>
     )
 }
