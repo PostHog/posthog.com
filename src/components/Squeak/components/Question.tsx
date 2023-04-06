@@ -9,6 +9,7 @@ import Days from './Days'
 import Markdown from './Markdown'
 import { QuestionForm } from './QuestionForm'
 import { useQuestion } from '../hooks/useQuestion'
+import QuestionSkeleton from './QuestionSkeleton'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -26,7 +27,7 @@ export const Question = (props: QuestionProps) => {
     const { question: questionData, isLoading, isError, error, reply } = useQuestion(id, { data: question })
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return <QuestionSkeleton />
     }
 
     if (isError) {
@@ -37,28 +38,24 @@ export const Question = (props: QuestionProps) => {
         return <div>Question not found</div>
     }
 
-    const handleContainerClick = (e: React.MouseEvent) => {}
-
     return (
         <root.div ref={containerRef}>
             <Theme containerRef={containerRef} />
             <div className="squeak">
                 <div className="squeak-question-container squeak-post">
-                    <div onClick={handleContainerClick}>
-                        <div className="squeak-post-author">
-                            <Profile profile={questionData.attributes.profile?.data} />
+                    <div className="squeak-post-author">
+                        <Profile profile={questionData.attributes.profile?.data} />
 
-                            <Days created={questionData.attributes.createdAt} />
-                        </div>
-                        <div className="squeak-post-content">
-                            <h3 className="squeak-subject">
-                                <a href={`/questions/${questionData.attributes.permalink}`} className="!no-underline">
-                                    {questionData.attributes.subject}
-                                </a>
-                            </h3>
+                        <Days created={questionData.attributes.createdAt} />
+                    </div>
+                    <div className="squeak-post-content">
+                        <h3 className="squeak-subject">
+                            <a href={`/questions/${questionData.attributes.permalink}`} className="!no-underline">
+                                {questionData.attributes.subject}
+                            </a>
+                        </h3>
 
-                            <Markdown>{questionData.attributes.body}</Markdown>
-                        </div>
+                        <Markdown>{questionData.attributes.body}</Markdown>
                     </div>
 
                     <Replies
