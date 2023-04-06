@@ -49,27 +49,27 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <p className="m-0 text-sm font-bold dark:text-white">
                 Note: PostHog.com authentication is separate from your PostHog app.
             </p>
-            <p className="text-sm mt-2 dark:text-white">
+            <p className="text-sm my-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <SignIn onSuccess={onSubmit} />
+            <Authentication showBanner={false} showProfile={false} />
         </>
     ) : state === 'signup' ? (
         <>
             <p className="m-0 text-sm font-bold dark:text-white">
                 Note: PostHog.com authentication is separate from your PostHog app.
             </p>
-            <p className="text-sm mt-2 dark:text-white">
+            <p className="text-sm my-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <SignUp onSuccess={onSubmit} />
+            <Authentication initialView="sign-up" showBanner={false} showProfile={false} />
         </>
     ) : (
         <>
             <p className="m-0 text-sm dark:text-white">
                 Your PostHog.com community profile lets you ask questions and get early access to beta features.
             </p>
-            <p className="text-[13px] mt-2 dark:text-white p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
+            <p className="text-[13px] my-2 dark:text-white p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
                 <strong>Tip:</strong> If you've ever asked a question on PostHog.com, you already have an account!
             </p>
             <CallToAction onClick={() => setState('login')} width="full" size="sm">
