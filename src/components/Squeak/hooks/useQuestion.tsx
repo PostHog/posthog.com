@@ -73,7 +73,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     const reply = async (body: string) => {
         const token = await getJwt()
 
-        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

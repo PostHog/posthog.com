@@ -1,9 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { Field, Form, Formik } from 'formik'
 import root from 'react-shadow/styled-components'
-import { post } from '../lib/api'
 import { useUser } from 'hooks/useUser'
-import { useQuestion } from '../hooks/useQuestion'
 
 import { Approval } from './Approval'
 import Authentication from './Authentication'
@@ -12,14 +10,18 @@ import Logo from './Logo'
 import RichText from './RichText'
 import { Theme } from './Theme'
 
+type QuestionFormValues = {
+    subject: string
+    body: string
+}
+
 type QuestionFormMainProps = {
     title?: string
-    // TODO: Add type for onSubmit
-    onSubmit: any
+    onSubmit: (values: QuestionFormValues) => void
     subject: boolean
     loading: boolean
-    initialValues: any
-    formType?: string
+    initialValues?: Partial<QuestionFormValues> | null
+    formType?: 'question' | 'reply'
 }
 
 function QuestionFormMain({
@@ -31,18 +33,6 @@ function QuestionFormMain({
     formType,
 }: QuestionFormMainProps) {
     const { user, logout } = useUser()
-    const handleSubmit = async (values: any) => {
-        onSubmit &&
-            (await onSubmit(
-                {
-                    ...values,
-                    email: user?.email,
-                    firstName: user?.profile?.first_name,
-                    lastName: user?.profile?.last_name,
-                },
-                formType
-            ))
-    }
 
     return (
         <div className="squeak-form-frame">
@@ -50,12 +40,12 @@ function QuestionFormMain({
             <Formik
                 initialValues={{
                     subject: '',
-                    question: '',
+                    body: '',
                     ...initialValues,
                 }}
                 validate={(values) => {
                     const errors: any = {}
-                    if (!values.question) {
+                    if (!values.body) {
                         errors.question = 'Required'
                     }
                     if (subject && !values.subject) {
@@ -63,51 +53,46 @@ function QuestionFormMain({
                     }
                     return errors
                 }}
-                onSubmit={handleSubmit}
+                onSubmit={onSubmit}
             >
                 {({ setFieldValue, isValid }) => {
                     return (
                         <Form className="squeak-form">
-                            <Avatar url={user?.profile} image={user?.profile?.avatar} />
+                            <Avatar image={user?.profile?.avatar} />
 
-                            <div className="">
-                                <div className="squeak-inputs-wrapper">
-                                    {subject && (
-                                        <>
-                                            <Field
-                                                required
-                                                id="subject"
-                                                name="subject"
-                                                placeholder="Title"
-                                                maxLength="140"
-                                            />
-                                            <hr />
-                                        </>
-                                    )}
-                                    <div className="squeak-form-richtext">
-                                        <RichText
-                                            setFieldValue={setFieldValue}
-                                            initialValue={initialValues?.question}
+                            <div className="squeak-inputs-wrapper">
+                                {subject && (
+                                    <>
+                                        <Field
+                                            required
+                                            id="subject"
+                                            name="subject"
+                                            placeholder="Title"
+                                            maxLength="140"
                                         />
-                                    </div>
+                                        <hr />
+                                    </>
+                                )}
+                                <div className="squeak-form-richtext">
+                                    <RichText setFieldValue={setFieldValue} initialValue={initialValues?.body} />
                                 </div>
-                                <span className="squeak-reply-buttons-row">
-                                    <button
-                                        className="squeak-post-button"
-                                        style={loading || !isValid ? { opacity: '.5' } : {}}
-                                        disabled={loading || !isValid}
-                                        type="submit"
-                                    >
-                                        {user ? 'Post' : 'Login & post'}
-                                    </button>
-                                    <div className="squeak-by-line">
-                                        by
-                                        <a href="https://squeak.posthog.com?utm_source=post-form">
-                                            <Logo />
-                                        </a>
-                                    </div>
-                                </span>
                             </div>
+                            <span className="squeak-reply-buttons-row">
+                                <button
+                                    className="squeak-post-button"
+                                    style={loading || !isValid ? { opacity: '.5' } : {}}
+                                    disabled={loading || !isValid}
+                                    type="submit"
+                                >
+                                    {user ? 'Post' : 'Login & post'}
+                                </button>
+                                <div className="squeak-by-line">
+                                    by
+                                    <a href="https://squeak.posthog.com?utm_source=post-form">
+                                        <Logo />
+                                    </a>
+                                </div>
+                            </span>
                         </Form>
                     )
                 }}
@@ -133,8 +118,8 @@ export const QuestionForm = ({
     onSubmit,
     onSignUp,
 }: QuestionFormProps) => {
-    const { user, logout } = useUser()
-    const [formValues, setFormValues] = useState(null)
+    const { user, getJwt, logout } = useUser()
+    const [formValues, setFormValues] = useState<QuestionFormValues | null>(null)
     const [view, setView] = useState<string | null>(initialView || null)
     const [loading, setLoading] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
@@ -148,38 +133,38 @@ export const QuestionForm = ({
             </span>
         )
 
-    const insertMessage = async ({ subject, body, userID }: any) => {
-        // @ts-ignore
-        const { data } = await post(apiHost, '/api/question', {
-            subject,
-            body,
-            organizationId,
-            slug: window.location.pathname.replace(/\/$/, ''),
+    const createQuestion = async ({ subject, body }: QuestionFormValues) => {
+        const token = await getJwt()
+
+        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    subject,
+                    body,
+                    resolved: false,
+                    permalink: '',
+                },
+            }),
         })
-        return data
     }
 
-    const handleMessageSubmit = async (values: any) => {
+    const handleMessageSubmit = async (values: QuestionFormValues) => {
         setLoading(true)
         const userID = user?.id
+
         if (userID) {
             let view: any = null
             if (formType === 'question') {
-                const { published: messagePublished } = await insertMessage({
-                    subject: values.subject,
-                    body: values.question,
-                })
-                if (!messagePublished) {
-                    view = 'approval'
-                }
+                await createQuestion(values)
             }
 
             if (formType === 'reply' && questionId) {
-                reply(values.question)
-
-                /*if (!data.published) {
-                    view = 'approval'
-                }*/
+                reply(values.body)
             }
 
             if (onSubmit) {
@@ -233,7 +218,8 @@ export const QuestionForm = ({
                     }[view]
                 ) : (
                     <div className="squeak-reply-buttons">
-                        <Avatar url={user?.profile} image={user?.profile?.avatar} />
+                        <Avatar image={user?.profile?.attributes?.avatar?.data?.attributes?.url} />
+
                         <button
                             className={formType === 'reply' ? 'squeak-reply-skeleton' : 'squeak-ask-button'}
                             onClick={() => setView('question-form')}
