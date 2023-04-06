@@ -14,8 +14,13 @@ For boolean based feature flags, you can specify a payload to be returned when t
 
 ## Use cases
 
-Payloads give you the ability to configure functionality related to your flag right inside PostHog without limits. For example, if you wanted to flag the color and size of a button, you now can specify a payload that provides 
-a size value and a color value. Without payloads, you would have to have used the feature flag key as the value that determines the configuration of the button or write in your code a dictionary/switch of options based on the flag values. 
+Payloads give you the ability to configure functionality related to your flag inside PostHog. This means more flexibility and fewer updates to your code. For example, you can:
+- set the color, size, and text of a button
+- modify the title and subtitle of a page
+- trigger different functions with different arguments
+- access multiple different infrastructure options
+
+Without payloads, all of these options would need to be coded into your app, rather than accessing the payload values. 
 
 ## Using payloads in your code
 
