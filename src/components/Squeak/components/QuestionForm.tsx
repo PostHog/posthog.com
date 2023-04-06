@@ -11,7 +11,6 @@ import Avatar from './Avatar'
 import Logo from './Logo'
 import RichText from './RichText'
 import { Theme } from './Theme'
-import ErrorBoundary from './ErrorBoundary'
 
 type QuestionFormMainProps = {
     title?: string
