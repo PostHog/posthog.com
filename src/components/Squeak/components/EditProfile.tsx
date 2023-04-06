@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Form, Field, Formik } from 'formik'
+import { Form, Field, Formik, FormikHandlers } from 'formik'
 import Button from 'components/CommunityQuestions/Button'
-import Icons, { Markdown } from 'components/Icons'
+import { Markdown } from 'components/Icons'
 import * as Yup from 'yup'
 import TextareaAutosize from 'react-textarea-autosize'
+import { useUser } from 'hooks/useUser'
 
 const fields = {
     first_name: {
@@ -35,8 +36,8 @@ const fields = {
     },
 }
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1)
+function capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 const ValidationSchema = Yup.object().shape({
@@ -49,14 +50,21 @@ const ValidationSchema = Yup.object().shape({
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
 })
 
-export default function EditProfile({ profile, onSubmit }) {
-    if (!profile) return null
-    const [loading, setLoading] = useState(false)
+type EditProfileProps = {
+    onSubmit?: (() => void) | (() => Promise<void>)
+}
+
+export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
+    const { user, isLoading } = useUser()
+
+    if (!user) return null
+
     const { first_name, last_name, website, github, linkedin, twitter, biography, id } = profile
 
-    const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    const handleSubmit = async (values, { setSubmitting }) => {
         setSubmitting(true)
-        const profile = await fetch(
+
+        await fetch(
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`,
             {
                 method: 'PATCH',
@@ -69,7 +77,8 @@ export default function EditProfile({ profile, onSubmit }) {
             }
         ).then((res) => res.json())
         setSubmitting(false)
-        onSubmit && onSubmit(profile)
+
+        onSubmit?.()
     }
 
     return (
@@ -78,7 +87,7 @@ export default function EditProfile({ profile, onSubmit }) {
             validationSchema={ValidationSchema}
             onSubmit={handleSubmit}
         >
-            {({ isSubmitting, isValid, values, errors, setFieldValue, submitForm }) => {
+            {({ isSubmitting, isValid, values, errors }) => {
                 return (
                     <Form className="m-0">
                         <h2>Update profile</h2>
@@ -91,6 +100,7 @@ export default function EditProfile({ profile, onSubmit }) {
                                 const error = errors[key]
                                 const field = fields[key]
                                 const label = field?.label || capitalizeFirstLetter(key.replaceAll('_', ' '))
+
                                 return (
                                     <div className={field?.className ?? ''} key={key}>
                                         <label htmlFor={key}>{label}</label>
@@ -115,7 +125,7 @@ export default function EditProfile({ profile, onSubmit }) {
                             <span>Markdown is allowed - even encouraged!</span>
                         </p>
 
-                        <Button loading={isSubmitting} disabled={isSubmitting || !isValid} type="submit">
+                        <Button loading={isLoading} disabled={isSubmitting || !isValid} type="submit">
                             Update
                         </Button>
                     </Form>

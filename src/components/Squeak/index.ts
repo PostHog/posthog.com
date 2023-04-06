@@ -6,6 +6,7 @@ import { SignUp } from './components/auth/SignUp'
 import { Squeak } from './components/Squeak'
 import { Avatar } from './components/Avatar'
 import { Questions } from './components/Questions'
+import { EditProfile } from './components/EditProfile'
 import { useQuestion } from './hooks/useQuestion'
 
-export { Authentication, Squeak, Questions, Question, QuestionForm, Avatar, useQuestion, SignIn, SignUp }
+export { Authentication, Squeak, Questions, Question, QuestionForm, Avatar, useQuestion, SignIn, SignUp, EditProfile }

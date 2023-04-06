@@ -6,13 +6,14 @@ import { QuestionData, StrapiResult, StrapiRecord } from 'lib/strapi'
 
 type UseQuestionsOptions = {
     slug?: string
+    profileId?: number
     topicId?: number
     limit?: number
 }
 
 // TODO: Add sort by
 export const useQuestions = (options?: UseQuestionsOptions) => {
-    const { slug, topicId, limit = 20 } = options || {}
+    const { slug, topicId, profileId, limit = 20 } = options || {}
 
     const query = (offset: number) => {
         const params = {
@@ -50,6 +51,17 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
                 topics: {
                     id: {
                         $eq: topicId,
+                    },
+                },
+            }
+        }
+
+        if (profileId) {
+            params.filters = {
+                ...params.filters,
+                profile: {
+                    id: {
+                        $eq: profileId,
                     },
                 },
             }

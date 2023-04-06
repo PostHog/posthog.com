@@ -57,6 +57,10 @@ export type ProfileData = {
     avatar?: StrapiData<AvatarData>
 }
 
+export type ProfileQuestionsData = {
+    questions: StrapiData<QuestionData[]>
+}
+
 export type ReplyData = {
     body: string
     createdAt: string
