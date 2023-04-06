@@ -8,14 +8,13 @@ import PostLayout from 'components/PostLayout'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
 import Link from 'components/Link'
 import Markdown from 'markdown-to-jsx'
-import { Question } from 'components/Squeak'
+import { Questions } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
 import { EditProfile } from 'components/Squeak'
 import useSWR from 'swr'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { ProfileData, ProfileQuestionsData, StrapiData, StrapiRecord } from 'lib/strapi'
-import qs from 'qs'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -43,14 +42,8 @@ export default function ProfilePage({ params }: PageProps) {
 
     const [editModalOpen, setEditModalOpen] = React.useState(false)
 
-    const query = qs.stringify({
-        populate: {
-            questions: true,
-        },
-    })
-
-    const { data } = useSWR<StrapiRecord<ProfileData & ProfileQuestionsData>>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?${query}`,
+    const { data } = useSWR<StrapiRecord<ProfileData>>(
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}`,
         async (url) => {
             const res = await fetch(url)
             const { data } = await res.json()
@@ -99,37 +92,35 @@ export default function ProfilePage({ params }: PageProps) {
                     hideSurvey
                 >
                     {profile ? (
-                        <div className="space-y-8 my-8">
-                            <section className="">
-                                <Avatar
-                                    className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
-                                    src={profile.avatar?.data?.attributes?.url}
-                                />
+                        <>
+                            <div className="space-y-8 my-8">
+                                <section className="">
+                                    <Avatar
+                                        className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
+                                        src={profile.avatar?.data?.attributes?.url}
+                                    />
 
-                                <div className="space-y-3">
-                                    <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
-                                    {profile.companyRole && <p className="text-gray">{profile?.companyRole}</p>}
-                                </div>
+                                    <div className="space-y-3">
+                                        <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
+                                        {profile.companyRole && <p className="text-gray">{profile?.companyRole}</p>}
+                                    </div>
 
-                                {profile?.biography && (
-                                    <section>
-                                        <h3>Biography</h3>
+                                    {profile?.biography && (
+                                        <section>
+                                            <h3>Biography</h3>
 
-                                        <Markdown>{profile.biography}</Markdown>
-                                    </section>
-                                )}
-                            </section>
-                        </div>
+                                            <Markdown>{profile.biography}</Markdown>
+                                        </section>
+                                    )}
+                                </section>
+                            </div>
+
+                            <div className="mt-12">
+                                <h3>Discussions</h3>
+                                <Questions profileId={id} showForm={false} />
+                            </div>
+                        </>
                     ) : null}
-
-                    {profile.questions.data.length >= 1 && (
-                        <div className="mt-12">
-                            <h3>Discussions</h3>
-                            {profile.questions.data.map((question) => {
-                                return <Question key={question.id} id={question.id} question={question} />
-                            })}
-                        </div>
-                    )}
                 </PostLayout>
             </Layout>
         </>
