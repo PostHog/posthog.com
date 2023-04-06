@@ -1,19 +1,22 @@
-## Q1 2023 Goals
+## Q2 2023 Goals
 
-- Objective: Reduce TOIL
-  - KR: Migrate PostgreSQL out of Heroku and into the correct AWS account
-    - Why? Reduce cost and reduce risk of us maxing out the instance
-  - KR: Consolidate infrastructure into the correct AWS accounts (specifically US)
-    - Why? This will reduce the toil and AWS expenses
-- Objective: Support other teams and enable other teams to self-serve
-  - KR: Most of the pipeline team has written/contributed to their own alerting system
-    - Once the system is set up well, would be good to get the other teams doing this too
-    - Why? Enable the pipeline team to self-serve their issues
-  - Metric to track: % of non-infra hero time supporting other teams  
-- Objective: Keep infra spend flat at $120k/month
-  - Such as [Guido’s list](https://github.com/PostHog/posthog/issues/13153)
-  - *Will likely decrease cost first then increase with usage*
-  - Why? Improving our gross profit margin
+1. Support product teams as part of "infra hero
+  eg
+  - support kafka lag-based autoscaling (keda.sh)
+  - Temporal worker deployments
+  - determine the best clickhouse cluster structure
+  - figure out infra requirements for warehouse
+  - etc
+
+2. Keep infra spend under $120k/month
+
+3. Consolidate AWS account structure in the US
+  - Migrate Clickhouse US to the US AWS account, and structure in a more scalable way
+  - Migrate MSK US to the US AWS account
+  - Move prod US postgres to the Aurora RDS cluster
+
+4. Introduce capacity planning process for next 6mo, with load testing
+
 
 ## Roadmap
 
