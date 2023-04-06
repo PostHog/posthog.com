@@ -39,7 +39,7 @@ After seeing first-hand how analytics could help them build better products, Min
 
 “When we first scoped out user analytics, I was like: ‘Oh, God, do I have to explore some crappy third-vendor solution that does this specifically?’” says Han. “That would've been such a nightmare. Fortunately, we discovered we could just do this with PostHog.”
 
-The initial goal for Mintlify’s analytics was just to give users the ability to information they needed to identify success — basically, what the most popular pages and funnels are. However by talking to users the team discovered that users had needs beyond just this. Mintlify mostly used analytics and funnel insights, but users were also interested in using session recording to track detailed usage. As a result, Mintlify decided to share session recordings with users too. 
+The initial goal for Mintlify’s analytics was just to give users the ability to get information they needed to identify success — basically, what the most popular pages and funnels are. However, by talking to users, the team discovered that there were needs beyond just this. Mintlify mostly used analytics and funnel insights, but users were also interested in using session replay to track detailed usage. As a result, Mintlify decided to share session replays with users too. 
 
 Adding session recording massively increased the scope, but just three days later Mintlify had shipped an initial version which included both analytics _and_ session recordings.
 
