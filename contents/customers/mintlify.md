@@ -35,7 +35,7 @@ Mintlify has used PostHog internally since launch, making regular use of both th
 
 ## Session recording, analytics and user feedback
 
-After seeing first-hand how analytics could help them build better products, Mintlify decided to explore ways to give users this same ability within their own product. Rather than building the feature from scratch, the team identified a simpler solution: use PostHog. 
+After seeing first-hand how analytics could help them build better products, Mintlify decided to explore ways to provide users this same ability within their own product. Rather than building the feature from scratch, the team identified a simpler solution: use PostHog. 
 
 “When we first scoped out user analytics, I was like: ‘Oh, God, do I have to explore some crappy third-vendor solution that does this specifically?’” says Han. “That would've been such a nightmare. Fortunately, we discovered we could just do this with PostHog.”
 
