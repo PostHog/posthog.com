@@ -312,13 +312,6 @@ const Style = createGlobalStyle`
                 }
             }
         }
-
-        // replies to questions
-        .squeak-replies {
-            .squeak-post-content {
-                padding-left: calc(25px + 10px);
-            }
-        }
     }
 
     .squeak-question-container {
