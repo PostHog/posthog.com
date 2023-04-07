@@ -18,7 +18,7 @@ type QuestionFormValues = {
 
 type QuestionFormMainProps = {
     title?: string
-    onSubmit: (values: QuestionFormValues) => void
+    onSubmit: (values: QuestionFormValues, user: any) => void
     subject: boolean
     loading: boolean
     initialValues?: Partial<QuestionFormValues> | null
@@ -54,7 +54,7 @@ function QuestionFormMain({
                     }
                     return errors
                 }}
-                onSubmit={onSubmit}
+                onSubmit={(values) => onSubmit(values, user)}
             >
                 {({ setFieldValue, isValid }) => {
                     return (
@@ -107,7 +107,6 @@ type QuestionFormProps = {
     questionId?: number
     reply: (body: string) => Promise<void>
     onSubmit?: (values: any, formType: string) => void
-    onSignUp?: () => void
     initialView?: string
 }
 
@@ -117,7 +116,6 @@ export const QuestionForm = ({
     initialView,
     reply,
     onSubmit,
-    onSignUp,
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
     const [formValues, setFormValues] = useState<QuestionFormValues | null>(null)
@@ -149,17 +147,17 @@ export const QuestionForm = ({
                     body,
                     resolved: false,
                     permalink: '',
+                    page: window.location.pathname,
                 },
             }),
         })
     }
 
-    const handleMessageSubmit = async (values: QuestionFormValues) => {
+    const handleMessageSubmit = async (values: QuestionFormValues, user: any) => {
         setLoading(true)
         const userID = user?.id
 
         if (userID) {
-            let view: any = null
             if (formType === 'question') {
                 await createQuestion(values)
             }
@@ -172,7 +170,7 @@ export const QuestionForm = ({
                 onSubmit(values, formType)
             }
             setLoading(false)
-            setView(view)
+            setView(null)
             setFormValues(null)
         } else {
             setFormValues(values)
@@ -197,22 +195,9 @@ export const QuestionForm = ({
                         ),
                         auth: (
                             <Authentication
-                                buttonText={{
-                                    login: 'Login & post question',
-                                    signUp: 'Sign up & post question',
-                                }}
                                 setParentView={setView}
                                 formValues={formValues}
                                 handleMessageSubmit={handleMessageSubmit}
-                                onSignUp={onSignUp}
-                            />
-                        ),
-                        login: (
-                            <Authentication
-                                setParentView={setView}
-                                formValues={formValues}
-                                handleMessageSubmit={() => setView(null)}
-                                onSignUp={onSignUp}
                             />
                         ),
                         approval: <Approval handleConfirm={() => setView(null)} />,
@@ -232,7 +217,7 @@ export const QuestionForm = ({
                                     if (user) {
                                         logout()
                                     } else {
-                                        setView('login')
+                                        setView('auth')
                                     }
                                 }}
                                 className="squeak-auth-button"

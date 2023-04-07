@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
-import getGravatar from 'gravatar'
 import qs from 'qs'
 import { ProfileData, StrapiRecord, StrapiResult } from 'lib/strapi'
 
@@ -67,7 +66,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }, [])
 
     const getJwt = async () => {
-        return jwt
+        return jwt || localStorage.getItem('jwt')
     }
 
     const login = async ({ email, password }: { email: string; password: string }): Promise<User | null> => {
@@ -161,9 +160,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         lastName: string
     }): Promise<User | null> => {
         try {
-            const gravatar = getGravatar.url(email)
-            const avatar = await fetch(`https:${gravatar}?d=404`).then((res) => (res.ok && `https:${gravatar}`) || '')
-
             const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local/register`, {
                 method: 'POST',
                 headers: {
@@ -184,32 +180,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             const userData = await res.json()
 
-            const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?populate=avatar`, {
-                method: 'POST',
+            const meData = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?populate=profile`, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${userData.jwt}`,
                 },
-                body: JSON.stringify({
-                    data: {
-                        user: userData.user.id,
-                        firstName,
-                        lastName,
-                        gravatarURL: avatar,
-                    },
-                }),
-            })
-
-            if (!profileRes.ok) {
-                return null
-            }
-
-            const { data: profileData }: { data: StrapiRecord<ProfileData> } = await profileRes.json()
+            }).then((res) => res.json())
 
             const user: User = {
                 ...userData.user,
-                profile: {
-                    ...profileData,
-                },
+                profile: meData?.profile,
             }
 
             localStorage.setItem('user', JSON.stringify(user))

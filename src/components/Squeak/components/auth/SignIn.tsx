@@ -4,14 +4,14 @@ import { useUser } from 'hooks/useUser'
 
 type SignInProps = {
     buttonText?: string
-    onSuccess?: () => void
+    onSubmit?: (user: any) => void
 }
 
-export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSuccess }) => {
+export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit }) => {
     const { isLoading, login } = useUser()
 
     const handleSubmit = async (values: any) => {
-        let user = await login({
+        const user = await login({
             email: values.email,
             password: values.password,
         })
@@ -19,8 +19,7 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSuccess 
         if (!user) {
             // TODO: Handle error in the useUser hook
         } else {
-            // await handleMessageSubmit(formValues || { email: values.email })
-            onSuccess?.()
+            onSubmit?.(user)
         }
     }
 

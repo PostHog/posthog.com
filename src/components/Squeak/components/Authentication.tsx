@@ -15,7 +15,7 @@ type AuthenticationProps = {
     buttonText?: Record<string, string>
     showBanner?: boolean
     showProfile?: boolean
-    onSignUp?: () => void
+    handleMessageSubmit: (values: any, user: any) => void
 }
 
 export const Authentication = ({
@@ -25,7 +25,7 @@ export const Authentication = ({
     buttonText = { login: 'Login', signUp: 'Sign up' },
     showBanner = true,
     showProfile = true,
-    onSignUp,
+    handleMessageSubmit,
 }: AuthenticationProps) => {
     const [view, setView] = useState(initialView)
     const [message, setMessage] = useState(null)
@@ -82,16 +82,27 @@ export const Authentication = ({
                                     'sign-in': (
                                         <SignIn
                                             buttonText={buttonText.login}
-                                            formValues={formValues}
                                             setMessage={setMessage}
+                                            onSubmit={(user) => {
+                                                if (formValues) {
+                                                    handleMessageSubmit(formValues, user)
+                                                } else {
+                                                    setParentView?.(null)
+                                                }
+                                            }}
                                         />
                                     ),
                                     'sign-up': (
                                         <SignUp
                                             buttonText={buttonText.signUp}
-                                            formValues={formValues}
                                             setMessage={setMessage}
-                                            onSignUp={onSignUp}
+                                            onSubmit={(user) => {
+                                                if (formValues) {
+                                                    handleMessageSubmit(formValues, user)
+                                                } else {
+                                                    setParentView?.(null)
+                                                }
+                                            }}
                                         />
                                     ),
                                     'forgot-password': (

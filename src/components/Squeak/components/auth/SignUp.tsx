@@ -3,29 +3,16 @@ import { useUser } from 'hooks/useUser'
 import React from 'react'
 
 type SignUpProps = {
-    handleMessageSubmit: (message: any) => Promise<void> | void
-    formValues: any
     buttonText?: string
-    onSuccess?: (values: any) => void
+    onSubmit?: (user: any) => void
 }
 
-export const SignUp: React.FC<SignUpProps> = ({
-    handleMessageSubmit,
-    formValues,
-    buttonText = 'Sign up',
-    onSuccess,
-}) => {
+export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit }) => {
     const { signUp } = useUser()
 
     const handleSubmit = async (values: any) => {
-        await signUp(values)
-        await handleMessageSubmit(formValues || { email: values.email })
-
-        onSuccess?.({
-            email: values.email,
-            firstName: values.firstName,
-            lastName: values.lastName,
-        })
+        const user = await signUp(values)
+        onSubmit?.(user)
     }
 
     return (
