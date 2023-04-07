@@ -26,7 +26,7 @@ Every Friday we update this page with the latest new features, fixes, and update
 ### Dashboard template library
 ![posthog dashboard templates](../images/blog/array/template-library.png)
 
-We've not only created a wealth of new dashboard templates to help you get started, but [a public library](/templates) to help you navigate and understand them. You can now effortlessly build [an AARRR dashboard](/templates/aarrr-dashboard), a Google Analytics-like [landing page report](/templates/landing-dashboard), or a centralized location for your [user research](/templates/research-dashboard) as well as other typical use-cases. There are now more than 10 templates to choose from!
+We've not only created a wealth of new dashboard templates to help you get started, but [a public library](/templates) to help you navigate and understand them. You can now effortlessly build [an AARRR dashboard](/templates/aarrr-dashboard), a Google Analytics-like [landing page report](/templates/landing-dashboard), or a centralized location for your [user research](/templates/research-dashboard), as well as other typical use-cases. There are now more than 10 templates to choose from!
 
 These improvements came out of our company hackathon, which took place at our offsite in Aruba. Every year, we challenge everyone to pitch ideas and then develop them over a short period and present to the rest of the company. This idea was proposed by our technical content marketer, [Ian Vanagas](/handbook/company/team) - so be sure to let him know what you think of it in [the Slack](/slack)!
 
