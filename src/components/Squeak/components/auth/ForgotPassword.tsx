@@ -14,25 +14,26 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setMessage, setParentVi
 
     const handleSubmit = async (values: any) => {
         setLoading(true)
-        const { error } =
-            (await post(apiHost, '/api/password/forgot', {
-                email: values.email,
-                redirect: window.location.href,
-            })) || {}
+
+        const body = {
+            email: values.email,
+        }
+
+        const { error } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/forgot-password`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'content-type': 'application/json',
+            },
+        }).then((res) => res.json())
 
         if (error) {
-            // @ts-ignore
-            setMessage(error.message)
+            setMessage(error?.message)
         } else {
             setEmailSent(true)
         }
 
         setLoading(false)
-    }
-
-    const handleReturnToPost = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        setParentView?.('question-form')
     }
 
     return (
@@ -58,12 +59,6 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setMessage, setParentVi
                         {emailSent ? (
                             <div>
                                 <p>Check your email for password reset instructions</p>
-                                <p>
-                                    <button onClick={handleReturnToPost} className="squeak-return-to-post">
-                                        Click here
-                                    </button>{' '}
-                                    to return to your post
-                                </p>
                             </div>
                         ) : (
                             <button style={loading || !isValid ? { opacity: '.5' } : {}} type="submit">
