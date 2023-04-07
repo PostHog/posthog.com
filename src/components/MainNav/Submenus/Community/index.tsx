@@ -4,7 +4,7 @@ import React from 'react'
 import Header from '../Header'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
-import { TwoCol, Wrapper } from '../Wrapper'
+import { Block, TwoCol, Wrapper } from '../Wrapper'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import { Avatar, Login } from '../../../../pages/community'
@@ -164,32 +164,17 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </CallToAction>
                             </div>
                         </div>
-                        <TwoCol
-                            left={{
-                                title: 'Roadmap',
-                                cta: {
-                                    url: '/roadmap',
-                                    label: 'Browse roadmap',
-                                },
-                                children: (
+
+                        <div className="border-t border-gray-accent-light border-dashed">
+                            <div className="max-w-3xl mx-auto xl:max-w-auto">
+                                <Block title="Roadmap" cta={{ url: '/roadmap', label: 'Browse roadmap' }}>
                                     <p className="m-0 text-[14px] dark:text-white">
                                         See what we're building, and help us decide what to build next.
                                     </p>
-                                ),
-                            }}
-                            right={{
-                                title: 'Changelog',
-                                cta: {
-                                    url: '/roadmap/changelog',
-                                    label: 'Browse changelog',
-                                },
-                                children: (
-                                    <p className="m-0 text-[14px] dark:text-white">
-                                        Take a trip down memory lane of our top company and product milestones.
-                                    </p>
-                                ),
-                            }}
-                        />
+                                </Block>
+                            </div>
+                        </div>
+
                         <div className="py-7 md:px-6 lg:px-9 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
                             <div className="grid sm:grid-cols-2 items-center">
                                 <div>
