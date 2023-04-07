@@ -19,14 +19,15 @@ interface ColMenuItems {
 const Profile = () => {
     const { user } = useUser()
     const profile = user?.profile
+
     return profile ? (
         <div>
             <div className="flex items-center space-x-2 mt-4 mb-3">
-                <Avatar src={profile.avatar} className="w-[40px] h-[40px]" />
+                <Avatar src={profile.attributes.avatar?.data?.attributes?.url} className="w-[40px] h-[40px]" />
                 <div>
                     {
                         <p className="m-0 font-semibold dark:text-white">
-                            {[profile?.firstName, profile?.lastName].filter(Boolean).join(' ')}
+                            {[profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')}
                         </p>
                     }
                 </div>
@@ -140,12 +141,9 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                                                                 <span>{label}</span>
                                                                                 <span className="text-black dark:text-white opacity-50 font-semibold">
                                                                                     (
-                                                                                    {
-                                                                                        allTopics.find(
-                                                                                            (topic) =>
-                                                                                                topic.topic === label
-                                                                                        )?.count
-                                                                                    }
+                                                                                    {allTopics.find(
+                                                                                        (topic) => topic.topic === label
+                                                                                    )?.count || '0'}
                                                                                     )
                                                                                 </span>
                                                                             </Link>
