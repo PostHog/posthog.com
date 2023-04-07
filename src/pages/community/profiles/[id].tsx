@@ -8,40 +8,13 @@ import PostLayout from 'components/PostLayout'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
 import Link from 'components/Link'
 import Markdown from 'markdown-to-jsx'
-import { Question } from 'components/Squeak'
+import { Questions } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
-import EditProfile from 'components/Profiles/EditProfile'
+import { EditProfile } from 'components/Squeak'
 import useSWR from 'swr'
 import SidebarSection from 'components/PostLayout/SidebarSection'
-
-export type SqueakProfile = {
-    id: string
-    first_name?: string
-    last_name?: string
-    avatar?: string
-
-    biography?: string
-
-    website?: string
-    github?: string
-    twitter?: string
-    linkedin?: string
-
-    company?: string
-    company_role?: string
-
-    team?: {
-        name: string
-        profiles: {
-            id: string
-            avatar?: string
-            first_name?: string
-            last_name?: string
-            company_role?: string
-        }[]
-    }
-}
+import { ProfileData, ProfileQuestionsData, StrapiData, StrapiRecord } from 'lib/strapi'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -65,27 +38,30 @@ const Avatar = (props: { className?: string; src?: string }) => {
 }
 
 export default function ProfilePage({ params }: PageProps) {
-    const id = params.id || params['*']
+    const id = parseInt(params.id || params['*'])
 
     const [editModalOpen, setEditModalOpen] = React.useState(false)
 
-    const { data: profile, mutate: profileMutate } = useSWR<SqueakProfile>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`,
-        (url) => fetch(url).then((res) => res.json())
-    )
-    const { data: questions } = useSWR(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}&profileId=${id}&published=true`,
-        (url: string) =>
-            fetch(url)
-                .then((res) => res.json())
-                .then((data) => data.questions || [])
+    const { data } = useSWR<StrapiRecord<ProfileData>>(
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}`,
+        async (url) => {
+            const res = await fetch(url)
+            const { data } = await res.json()
+            return data
+        }
     )
 
-    const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
+    const { attributes: profile } = data || {}
+    const { firstName, lastName } = profile || {}
 
-    const handleEditProfile = (updatedProfile: SqueakProfile) => {
-        profileMutate({ ...profile, ...updatedProfile }, false)
+    const name = [firstName, lastName].filter(Boolean).join(' ')
+
+    const handleEditProfile = () => {
         setEditModalOpen(false)
+    }
+
+    if (!profile) {
+        return null
     }
 
     return (
@@ -101,7 +77,7 @@ export default function ProfilePage({ params }: PageProps) {
                             className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <EditProfile onSubmit={handleEditProfile} profile={profile} />
+                            <EditProfile onSubmit={handleEditProfile} />
                         </div>
                     </div>
                 </Modal>
@@ -116,58 +92,48 @@ export default function ProfilePage({ params }: PageProps) {
                     hideSurvey
                 >
                     {profile ? (
-                        <div className="space-y-8 my-8">
-                            <section className="">
-                                <Avatar
-                                    className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
-                                    src={profile.avatar}
-                                />
-
-                                <div className="space-y-3">
-                                    <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
-                                    {profile.company_role && <p className="text-gray">{profile?.company_role}</p>}
-                                </div>
-
-                                {profile?.biography && (
-                                    <section>
-                                        <h3>Biography</h3>
-
-                                        <Markdown>{profile.biography}</Markdown>
-                                    </section>
-                                )}
-                            </section>
-                        </div>
-                    ) : null}
-                    {questions && questions.length >= 1 && (
-                        <div className="mt-12">
-                            <h3>Discussions</h3>
-                            {questions.map((question) => {
-                                return (
-                                    <Question
-                                        key={question.id}
-                                        question={question}
-                                        apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                                        organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
+                        <>
+                            <div className="space-y-8 my-8">
+                                <section className="">
+                                    <Avatar
+                                        className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
+                                        src={profile.avatar?.data?.attributes?.url}
                                     />
-                                )
-                            })}
-                        </div>
-                    )}
+
+                                    <div className="space-y-3">
+                                        <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
+                                        {profile.companyRole && <p className="text-gray">{profile?.companyRole}</p>}
+                                    </div>
+
+                                    {profile?.biography && (
+                                        <section>
+                                            <h3>Biography</h3>
+
+                                            <Markdown>{profile.biography}</Markdown>
+                                        </section>
+                                    )}
+                                </section>
+                            </div>
+
+                            <div className="mt-12">
+                                <h3>Discussions</h3>
+                                <Questions profileId={id} showForm={false} />
+                            </div>
+                        </>
+                    ) : null}
                 </PostLayout>
             </Layout>
         </>
     )
 }
 
-const ProfileSidebar = ({
-    profile,
-    setEditModalOpen,
-}: {
-    profile?: SqueakProfile
-    setEditModalOpen: () => boolean
-}) => {
-    const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
-    const { user } = useUser()
+type ProfileSidebarProps = {
+    profile: ProfileData
+    setEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen }) => {
+    const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
 
     return profile ? (
         <>
@@ -249,13 +215,13 @@ const ProfileSidebar = ({
                 </>
             ) : null}
 
-            {user?.profile?.id === profile.id && (
+            {/*user?.profile?.id === profile.id && (
                 <SidebarSection>
                     <button onClick={() => setEditModalOpen(true)} className="text-base text-red font-semibold">
                         Edit profile
                     </button>
                 </SidebarSection>
-            )}
+            )*/}
         </>
     ) : (
         <></>

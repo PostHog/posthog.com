@@ -58,6 +58,10 @@ export type ProfileData = {
     gravatarURL: string | null
 }
 
+export type ProfileQuestionsData = {
+    questions: StrapiData<QuestionData[]>
+}
+
 export type ReplyData = {
     body: string
     createdAt: string

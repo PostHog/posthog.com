@@ -9,13 +9,15 @@ import { useQuestions } from 'hooks/useQuestions'
 type QuestionsProps = {
     slug?: string
     limit?: number
+    profileId?: number
     topicId?: number
+    showForm?: boolean
 }
 
-export const Questions = ({ slug, limit, topicId }: QuestionsProps) => {
+export const Questions = ({ slug, limit, topicId, profileId, showForm = true }: QuestionsProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
 
-    const { questions, fetchMore, refresh } = useQuestions({ slug, limit, topicId })
+    const { questions, fetchMore, refresh } = useQuestions({ slug, limit, topicId, profileId })
 
     return (
         <root.div ref={containerRef}>
@@ -26,7 +28,7 @@ export const Questions = ({ slug, limit, topicId }: QuestionsProps) => {
                         {questions.data.map((question) => {
                             return (
                                 <li key={question.id}>
-                                    <Question onSubmit={refresh} id={question.id} question={question} />
+                                    <Question id={question.id} question={question} />
                                 </li>
                             )
                         })}
@@ -39,7 +41,8 @@ export const Questions = ({ slug, limit, topicId }: QuestionsProps) => {
                     </button>
                 )*/}
 
-                <QuestionForm onSubmit={refresh} formType="question" />
+                {/* TODO: Pass refresh for now questions */}
+                {showForm && <QuestionForm onSubmit={refresh} formType="question" />}
             </div>
         </root.div>
     )

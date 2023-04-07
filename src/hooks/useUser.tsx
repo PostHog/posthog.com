@@ -205,8 +205,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             const { data: profileData }: { data: StrapiRecord<ProfileData> } = await profileRes.json()
 
-            console.log(profileData)
-
             const user: User = {
                 ...userData.user,
                 profile: {

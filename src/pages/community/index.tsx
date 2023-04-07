@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { graphql, PageProps } from 'gatsby'
 import community from 'sidebars/community.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
-import { Authentication, SignIn, SignUp } from 'components/Squeak'
+import { Authentication, EditProfile } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
-import EditProfile from 'components/Profiles/EditProfile'
-import { SqueakProfile } from './profiles/[id]'
 import { CallToAction } from 'components/CallToAction'
 import Spinner from 'components/Spinner'
 import { useStaticQuery } from 'gatsby'
@@ -106,7 +104,7 @@ export const Profile = ({
                 <div>{name && <p className="m-0 font-bold">{name}</p>}</div>
             </Link>
 
-            <CallToAction
+            {/*<CallToAction
                 onClick={() => setEditModalOpen(true)}
                 width="full"
                 size="xs"
@@ -114,7 +112,7 @@ export const Profile = ({
                 className="mt-2"
             >
                 Edit profile
-            </CallToAction>
+            </CallToAction>*/}
         </div>
     )
 }
@@ -274,88 +272,29 @@ const ActivePulls = ({ pulls }) => {
 }
 
 export default function CommunityPage({ params }: PageProps) {
-    const [profile, setProfile] = useState<SqueakProfile | undefined>(undefined)
-    const [editModalOpen, setEditModalOpen] = useState(false)
-    const [questions, setQuestions] = useState([])
-    const [questionsLoading, setQuestionsLoading] = useState(true)
+    const { user } = useUser()
+    const { questions, isLoading } = useQuestions({ profileId: user?.profile?.id })
+
     const { issues, pulls, postHogStats, postHogComStats } = useStaticQuery(query)
-
-    useEffect(() => {
-        if (profile) {
-            setQuestionsLoading(true)
-            fetch(`https://squeak.cloud/api/questions`, {
-                method: 'POST',
-                body: JSON.stringify({
-                    profileId: profile?.id,
-                    published: true,
-                    perPage: 5,
-                }),
-                headers: {
-                    'content-type': 'application/json',
-                },
-            })
-                .then((res) => {
-                    if (res.status === 404) {
-                        throw new Error('not found')
-                    }
-
-                    return res.json()
-                })
-                .then((questions) => {
-                    setQuestions(questions?.questions)
-                    setQuestionsLoading(false)
-                })
-                .catch((err) => {
-                    console.error(err)
-                    setQuestionsLoading(false)
-                })
-        }
-    }, [profile])
-
-    const handleEditProfile = (updatedProfile: SqueakProfile) => {
-        setProfile({ ...profile, ...updatedProfile })
-        setEditModalOpen(false)
-    }
 
     return (
         <>
             <SEO title={`Community - PostHog`} />
             <Layout>
-                <Modal setOpen={setEditModalOpen} open={editModalOpen}>
-                    <div
-                        onClick={() => setEditModalOpen(false)}
-                        className="flex flex-start justify-center absolute w-full p-4"
-                    >
-                        <div
-                            className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <EditProfile onSubmit={handleEditProfile} profile={profile} />
-                        </div>
-                    </div>
-                </Modal>
                 <PostLayout
                     menuWidth={{ right: 320 }}
                     title="Profile"
                     menu={community}
-                    sidebar={
-                        <ProfileSidebar
-                            setProfile={setProfile}
-                            setEditModalOpen={setEditModalOpen}
-                            profile={profile}
-                            postHogStats={postHogStats}
-                            postHogComStats={postHogComStats}
-                        />
-                    }
+                    sidebar={<ProfileSidebar postHogStats={postHogStats} postHogComStats={postHogComStats} />}
                     tableOfContents={[
-                        ...(profile ? [{ url: 'my-activity', value: 'My activity', depth: 0 }] : []),
+                        ...(user ? [{ url: 'my-activity', value: 'My activity', depth: 0 }] : []),
                         { url: 'recent-questions', value: 'Recent questions', depth: 0 },
                         { url: 'active-issues', value: 'Most active issues', depth: 0 },
                         { url: 'active-pulls', value: 'Most active PRs', depth: 0 },
                     ]}
                     hideSurvey
                 >
-                    {profile && <Activity questionsLoading={questionsLoading} questions={questions} />}
+                    {user && <Activity questionsLoading={isLoading} questions={questions} />}
                     <RecentQuestions />
                     <ActiveIssues issues={issues.nodes} />
                     <ActivePulls pulls={pulls.nodes} />
@@ -409,21 +348,31 @@ const Stats = ({
 }
 
 const ProfileSidebar = ({
-    setEditModalOpen,
     postHogStats,
     postHogComStats,
 }: {
-    setEditModalOpen: (open: boolean) => void
     postHogStats: IGitHubStats
     postHogComStats: IGitHubStats
 }) => {
     const { user, logout } = useUser()
-    /*useEffect(() => {
-        setProfile(user?.profile)
-    }, [user])*/
+
+    const [editModalOpen, setEditModalOpen] = useState(false)
 
     return (
         <>
+            <Modal setOpen={setEditModalOpen} open={editModalOpen}>
+                <div
+                    onClick={() => setEditModalOpen(false)}
+                    className="flex flex-start justify-center absolute w-full p-4"
+                >
+                    <div
+                        className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <EditProfile onSubmit={() => setEditModalOpen(false)} />
+                    </div>
+                </div>
+            </Modal>
             <SidebarSection>
                 <div className="mb-2 flex items-baseline justify-between">
                     <h4 className="m-0">My profile</h4>
