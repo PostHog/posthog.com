@@ -294,6 +294,8 @@ Now, when we sign in again, we are identified with the email we use with GitHub.
 
 ![Identify](../images/tutorials/svelte-analytics/identify.png)
 
+> **Note:** You can also call `posthog.identify()` in `+layout.svelte`, but not `+layout.js`. This is because `+layout.js` is run on the server, and `posthog.identify()` needs access to information from the client.
+
 ### Resetting identification
 
 To avoid having multiple users identified as one, make sure to call `posthog.reset()` when a user signs out. We can use the same callback URL check as signing in, but for signing out.
