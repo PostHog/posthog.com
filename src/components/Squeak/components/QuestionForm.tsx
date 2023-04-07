@@ -103,6 +103,7 @@ function QuestionFormMain({
 }
 
 type QuestionFormProps = {
+    slug?: string
     formType: string
     questionId?: number
     reply: (body: string) => Promise<void>
@@ -112,6 +113,7 @@ type QuestionFormProps = {
 }
 
 export const QuestionForm = ({
+    slug,
     formType = 'question',
     questionId,
     initialView,
@@ -148,6 +150,7 @@ export const QuestionForm = ({
                     subject,
                     body,
                     resolved: false,
+                    page: slug,
                     permalink: '',
                 },
             }),
@@ -171,6 +174,7 @@ export const QuestionForm = ({
             if (onSubmit) {
                 onSubmit(values, formType)
             }
+
             setLoading(false)
             setView(view)
             setFormValues(null)
