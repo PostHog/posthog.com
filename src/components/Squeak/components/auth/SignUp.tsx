@@ -5,13 +5,21 @@ import React from 'react'
 type SignUpProps = {
     buttonText?: string
     onSubmit?: (user: any) => void
+    setMessage?: (message: string) => void
 }
 
-export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit }) => {
+export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit, setMessage }) => {
     const { signUp } = useUser()
 
     const handleSubmit = async (values: any) => {
         const user = await signUp(values)
+
+        if (user?.error) {
+            setMessage?.(user?.error)
+        } else {
+            onSubmit?.(user)
+        }
+
         onSubmit?.(user)
     }
 

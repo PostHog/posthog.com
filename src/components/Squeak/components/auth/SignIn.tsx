@@ -5,9 +5,10 @@ import { useUser } from 'hooks/useUser'
 type SignInProps = {
     buttonText?: string
     onSubmit?: (user: any) => void
+    setMessage?: (message: string) => void
 }
 
-export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit }) => {
+export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, setMessage }) => {
     const { isLoading, login } = useUser()
 
     const handleSubmit = async (values: any) => {
@@ -16,8 +17,8 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit }
             password: values.password,
         })
 
-        if (!user) {
-            // TODO: Handle error in the useUser hook
+        if (user?.error) {
+            setMessage?.(user?.error)
         } else {
             onSubmit?.(user)
         }

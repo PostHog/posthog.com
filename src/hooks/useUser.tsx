@@ -69,7 +69,13 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         return jwt || localStorage.getItem('jwt')
     }
 
-    const login = async ({ email, password }: { email: string; password: string }): Promise<User | null> => {
+    const login = async ({
+        email,
+        password,
+    }: {
+        email: string
+        password: string
+    }): Promise<User | null | { error: string }> => {
         setIsLoading(true)
 
         try {
@@ -84,11 +90,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 }),
             })
 
-            if (!userRes.ok) {
-                return null
-            }
-
             const userData = await userRes.json()
+
+            if (!userRes.ok) {
+                return { error: userData?.error?.message }
+            }
 
             const profileQuery = qs.stringify(
                 {
@@ -150,7 +156,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         password: string
         firstName: string
         lastName: string
-    }): Promise<User | null> => {
+    }): Promise<User | null | { error: string }> => {
         try {
             const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local/register`, {
                 method: 'POST',
@@ -166,11 +172,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 }),
             })
 
-            if (!res.ok) {
-                return null
-            }
-
             const userData = await res.json()
+
+            if (!res.ok) {
+                return { error: userData?.error?.message }
+            }
 
             const meData = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?populate=profile`, {
                 headers: {
