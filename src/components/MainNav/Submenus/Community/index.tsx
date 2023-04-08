@@ -9,6 +9,7 @@ import { graphql, navigate, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import { Avatar, Login } from '../../../../pages/community'
 import { useUser } from 'hooks/useUser'
+import getAvatarURL from '../../../Squeak/util/getAvatar'
 
 interface ColMenuItems {
     title: string
@@ -23,11 +24,11 @@ const Profile = () => {
     return profile ? (
         <div>
             <div className="flex items-center space-x-2 mt-4 mb-3">
-                <Avatar src={profile.attributes.avatar?.data?.attributes?.url} className="w-[40px] h-[40px]" />
+                <Avatar src={getAvatarURL(profile)} className="w-[40px] h-[40px]" />
                 <div>
                     {
                         <p className="m-0 font-semibold dark:text-white">
-                            {[profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')}
+                            {[profile.firstName, profile.lastName].filter(Boolean).join(' ')}
                         </p>
                     }
                 </div>

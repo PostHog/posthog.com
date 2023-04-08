@@ -15,6 +15,7 @@ import { EditProfile } from 'components/Squeak'
 import useSWR from 'swr'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { ProfileData, ProfileQuestionsData, StrapiData, StrapiRecord } from 'lib/strapi'
+import getAvatarURL from '../../../components/Squeak/util/getAvatar'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -43,7 +44,7 @@ export default function ProfilePage({ params }: PageProps) {
     const [editModalOpen, setEditModalOpen] = React.useState(false)
 
     const { data } = useSWR<StrapiRecord<ProfileData>>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}`,
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?populate=avatar`,
         async (url) => {
             const res = await fetch(url)
             const { data } = await res.json()
@@ -97,7 +98,7 @@ export default function ProfilePage({ params }: PageProps) {
                                 <section className="">
                                     <Avatar
                                         className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
-                                        src={profile.avatar?.data?.attributes?.url}
+                                        src={getAvatarURL(profile)}
                                     />
 
                                     <div className="space-y-3">

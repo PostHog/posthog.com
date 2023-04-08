@@ -106,23 +106,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 }
             )
 
-            // TODO: Abstract this so signUp can share
-            const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${profileQuery}`, {
+            const meData = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?populate=profile`, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${userData.jwt}`,
                 },
-                method: 'GET',
-            })
-
-            if (!profileRes.ok) {
-                return null
-            }
-
-            const profileData: StrapiResult<ProfileData[]> = await profileRes.json()
+            }).then((res) => res.json())
 
             const user: User = {
                 ...userData.user,
-                profile: profileData.data[0],
+                profile: meData?.profile,
             }
 
             localStorage.setItem('user', JSON.stringify(user))

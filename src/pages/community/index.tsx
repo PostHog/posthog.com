@@ -88,11 +88,8 @@ export const Profile = ({
     profile: StrapiRecord<ProfileData>
     setEditModalOpen: (open: boolean) => void
 }) => {
-    const {
-        id,
-        attributes: { avatar },
-    } = profile
-    const name = [profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')
+    const { id } = profile
+    const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
 
     return (
         <div>
