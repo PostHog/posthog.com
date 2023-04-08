@@ -54,7 +54,7 @@ export default function App({ data, pageContext: { next, previous } }) {
         excerpt,
         fields: { slug },
     } = pageData
-    const { title, subtitle, featuredImage, description, filters } = pageData?.frontmatter
+    const { title, subtitle, thumbnail, description, filters } = pageData?.frontmatter
     const slugger = new GithubSlugger()
     const Documentation = () => {
         return (
@@ -125,8 +125,12 @@ export default function App({ data, pageContext: { next, previous } }) {
                 ]}
                 breadcrumb={[{ name: 'Apps', url: '/apps' }, { name: title }]}
             >
+                {thumbnail?.publicURL && (
+                    <figure className="m-0 text-center">
+                        <img src={thumbnail.publicURL} alt={title} className="h-24 mx-auto mb-6" />
+                    </figure>
+                )}
                 <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
-                <GatsbyImage image={getImage(featuredImage)} alt="" />
                 <article>
                     <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
                         <MDXRenderer>{body}</MDXRenderer>
@@ -158,10 +162,8 @@ export const query = graphql`
                     type
                     maintainer
                 }
-                featuredImage {
-                    childImageSharp {
-                        gatsbyImageData
-                    }
+                thumbnail {
+                    publicURL
                 }
             }
         }
