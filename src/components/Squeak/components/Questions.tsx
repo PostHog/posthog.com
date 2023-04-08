@@ -42,7 +42,7 @@ export const Questions = ({ slug, limit, topicId, profileId, showForm = true }: 
                 )*/}
 
                 {/* TODO: Pass refresh for now questions */}
-                {showForm && <QuestionForm onSubmit={refresh} formType="question" />}
+                {showForm && <QuestionForm onSubmit={refresh} formType="question" slug={slug} />}
             </div>
         </root.div>
     )
