@@ -96,27 +96,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 return { error: userData?.error?.message }
             }
 
-            const profileQuery = qs.stringify(
+            const meData = await fetch(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?populate[profile][populate][0]=avatar`,
                 {
-                    filters: {
-                        user: {
-                            id: {
-                                $eq: userData.user.id,
-                            },
-                        },
+                    headers: {
+                        Authorization: `Bearer ${userData.jwt}`,
                     },
-                    populate: ['avatar'],
-                },
-                {
-                    encodeValuesOnly: true,
                 }
-            )
-
-            const meData = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?populate=profile`, {
-                headers: {
-                    Authorization: `Bearer ${userData.jwt}`,
-                },
-            }).then((res) => res.json())
+            ).then((res) => res.json())
 
             const user: User = {
                 ...userData.user,
@@ -178,11 +165,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 return { error: userData?.error?.message }
             }
 
-            const meData = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?populate=profile`, {
-                headers: {
-                    Authorization: `Bearer ${userData.jwt}`,
-                },
-            }).then((res) => res.json())
+            const meData = await fetch(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?populate[profile][populate][0]=avatar`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${userData.jwt}`,
+                    },
+                }
+            ).then((res) => res.json())
 
             const user: User = {
                 ...userData.user,
