@@ -41,7 +41,9 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         if (slug) {
             params.filters = {
                 ...params.filters,
-                page: slug,
+                slugs: {
+                    slug,
+                },
             }
         }
 

@@ -148,9 +148,12 @@ export const QuestionForm = ({
                     subject,
                     body,
                     resolved: false,
-                    page: slug,
+                    slugs: [
+                        {
+                            slug,
+                        },
+                    ],
                     permalink: '',
-                    page: window.location.pathname,
                 },
             }),
         })
