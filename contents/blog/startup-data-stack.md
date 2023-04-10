@@ -71,7 +71,9 @@ Moving from individual sources to a CDP makes gathering data faster, but it's al
 
 ## The Series A data stack
 
-Series A is where data begins to get serious, and by serious, I mean the startup makes someone responsible for owning the data stack. This person is often a head of data, data engineer, or backend engineer focused on data. They see their goal as empowering engineers with data to evaluate the success of what they build. To do this, they implement the so-called "modern data stack" which contains four tools:
+Series A is where data begins to get serious. By serious, I mean (1) you need someone who is responsible for the data stack – normally a head of data, data engineer, or a backend engineer – and (2) accuracy becomes important.
+
+Whomever gets the thankless task will see their goal as empowering engineers with data to evaluate the success of what they build. To do this, they implement the so-called "modern data stack" which contains four tools:
 
 1. A data warehouse to store all the data and act as a single source of truth. Options include Snowflake, BigQuery, and RedShift.
 
