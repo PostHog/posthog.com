@@ -7,11 +7,11 @@ import TextareaAutosize from 'react-textarea-autosize'
 import { useUser } from 'hooks/useUser'
 
 const fields = {
-    first_name: {
+    firstName: {
         type: 'fname',
         label: 'First name',
     },
-    last_name: {
+    lastName: {
         type: 'lname',
         label: 'Last name',
     },
@@ -41,8 +41,8 @@ function capitalizeFirstLetter(str: string) {
 }
 
 const ValidationSchema = Yup.object().shape({
-    first_name: Yup.string().required('Required'),
-    last_name: Yup.string().required('Required'),
+    firstName: Yup.string().required('Required'),
+    lastName: Yup.string().required('Required'),
     website: Yup.string().url('Invalid URL').nullable(),
     github: Yup.string().url('Invalid URL').nullable(),
     linkedin: Yup.string().url('Invalid URL').nullable(),
@@ -55,35 +55,47 @@ type EditProfileProps = {
 }
 
 export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
-    const { user, isLoading } = useUser()
+    const { user, setUser, isLoading, getJwt } = useUser()
 
     if (!user) return null
 
-    const { first_name, last_name, website, github, linkedin, twitter, biography, id } = profile
+    const { firstName, lastName, website, github, linkedin, twitter, biography, id } = user?.profile || {}
 
     const handleSubmit = async (values, { setSubmitting }) => {
         setSubmitting(true)
+        const JWT = await getJwt()
 
-        await fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`,
+        const { data, error } = await fetch(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?populate=avatar`,
             {
-                method: 'PATCH',
-                body: JSON.stringify(values),
-                credentials: 'include',
+                method: 'PUT',
+                body: JSON.stringify({
+                    data: values,
+                }),
                 headers: {
-                    Accept: 'application/json',
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${JWT}`,
                 },
             }
         ).then((res) => res.json())
-        setSubmitting(false)
 
-        onSubmit?.()
+        setSubmitting(false)
+        if (data) {
+            const updatedUser = {
+                ...user,
+                profile: {
+                    id: data?.id,
+                    ...data?.attributes,
+                },
+            }
+            setUser(updatedUser)
+            onSubmit?.()
+        }
     }
 
     return (
         <Formik
-            initialValues={{ first_name, last_name, website, github, linkedin, twitter, biography }}
+            initialValues={{ firstName, lastName, website, github, linkedin, twitter, biography }}
             validationSchema={ValidationSchema}
             onSubmit={handleSubmit}
         >
@@ -91,7 +103,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                 return (
                     <Form className="m-0">
                         <h2>Update profile</h2>
-                        <p>
+                        <p className="mb-4">
                             Tip: Be sure to use full URLs when adding links to your website, GitHub, LinkedIn and
                             Twitter (start with https)
                         </p>
@@ -120,7 +132,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                             })}
                         </div>
 
-                        <p className=" text-sm flex items-center space-x-2">
+                        <p className=" text-sm flex items-center space-x-2 mb-4">
                             <Markdown />
                             <span>Markdown is allowed - even encouraged!</span>
                         </p>

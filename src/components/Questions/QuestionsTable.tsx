@@ -2,6 +2,7 @@ import React from 'react'
 
 import Link from 'components/Link'
 import { QuestionData, StrapiResult } from 'lib/strapi'
+import getAvatarURL from '../Squeak/util/getAvatar'
 
 type QuestionsTableProps = {
     questions: Omit<StrapiResult<QuestionData[]>, 'meta'>
@@ -27,7 +28,11 @@ export const QuestionsTable = ({
                               attributes: { profile, subject, permalink, body, replies },
                           } = question
 
+                          console.log(profile)
+
                           const numReplies = replies?.data?.length || 0
+
+                          const avatar = getAvatarURL(profile?.data?.attributes)
 
                           return profile ? (
                               <div key={question.id} className={`grid xl:grid-cols-4 sm:gap-2 py-4 ${className}`}>
@@ -37,12 +42,8 @@ export const QuestionsTable = ({
                                           className="flex items-center text-sm mt-0.5 space-x-1 text-primary group"
                                       >
                                           <div className={`w-5 h-5 overflow-hidden rounded-full flex-shrink-0`}>
-                                              {profile.data.attributes.avatar?.data ? (
-                                                  <img
-                                                      className="w-full h-full"
-                                                      alt=""
-                                                      src={profile.data.attributes.avatar?.data?.attributes?.url}
-                                                  />
+                                              {avatar ? (
+                                                  <img className="w-full h-full" alt="" src={avatar} />
                                               ) : (
                                                   <svg
                                                       viewBox="0 0 40 40"

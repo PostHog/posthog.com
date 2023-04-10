@@ -25,7 +25,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
             filters: {},
             populate: {
                 profile: {
-                    fields: ['firstName', 'lastName'],
+                    fields: ['firstName', 'lastName', 'gravatarURL'],
                     populate: {
                         avatar: {
                             fields: ['url'],

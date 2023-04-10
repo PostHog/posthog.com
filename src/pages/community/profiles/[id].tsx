@@ -43,7 +43,7 @@ export default function ProfilePage({ params }: PageProps) {
 
     const [editModalOpen, setEditModalOpen] = React.useState(false)
 
-    const { data } = useSWR<StrapiRecord<ProfileData>>(
+    const { data, mutate } = useSWR<StrapiRecord<ProfileData>>(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?populate=avatar`,
         async (url) => {
             const res = await fetch(url)
@@ -58,6 +58,7 @@ export default function ProfilePage({ params }: PageProps) {
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
     const handleEditProfile = () => {
+        mutate()
         setEditModalOpen(false)
     }
 
@@ -89,7 +90,7 @@ export default function ProfilePage({ params }: PageProps) {
                         { name: 'Profile', url: `/community/profiles/${id}` },
                     ]}
                     menu={community}
-                    sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={profile} />}
+                    sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={{ ...profile, id }} />}
                     hideSurvey
                 >
                     {profile ? (
@@ -216,13 +217,13 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                 </>
             ) : null}
 
-            {/*user?.profile?.id === profile.id && (
+            {
                 <SidebarSection>
                     <button onClick={() => setEditModalOpen(true)} className="text-base text-red font-semibold">
                         Edit profile
                     </button>
                 </SidebarSection>
-            )*/}
+            }
         </>
     ) : (
         <></>

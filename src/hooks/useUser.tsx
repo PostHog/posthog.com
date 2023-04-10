@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData, StrapiRecord, StrapiResult } from 'lib/strapi'
 
-type User = {
+export type User = {
     id: number
     email: string
     isMember: boolean
@@ -110,7 +110,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 profile: meData?.profile,
             }
 
-            localStorage.setItem('user', JSON.stringify(user))
             localStorage.setItem('jwt', userData.jwt)
 
             setUser(user)
@@ -179,7 +178,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 profile: meData?.profile,
             }
 
-            localStorage.setItem('user', JSON.stringify(user))
             localStorage.setItem('jwt', userData.jwt)
 
             setUser(user)
@@ -192,8 +190,12 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         }
     }
 
+    useEffect(() => {
+        localStorage.setItem('user', JSON.stringify(user))
+    }, [user])
+
     return (
-        <UserContext.Provider value={{ user, isLoading, getJwt, login, logout, signUp }}>
+        <UserContext.Provider value={{ user, setUser, isLoading, getJwt, login, logout, signUp }}>
             {children}
         </UserContext.Provider>
     )
