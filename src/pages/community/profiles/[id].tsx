@@ -136,6 +136,7 @@ type ProfileSidebarProps = {
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen }) => {
     const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
+    const { user } = useUser()
 
     return profile ? (
         <>
@@ -217,13 +218,13 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                 </>
             ) : null}
 
-            {
+            {user?.profile?.id === profile.id && (
                 <SidebarSection>
                     <button onClick={() => setEditModalOpen(true)} className="text-base text-red font-semibold">
                         Edit profile
                     </button>
                 </SidebarSection>
-            }
+            )}
         </>
     ) : (
         <></>
