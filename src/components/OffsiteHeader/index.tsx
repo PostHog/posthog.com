@@ -1,16 +1,13 @@
 import React from 'react'
 
-export function OffsiteHeader({
-    badge,
-    location,
-    date,
-    team,
-}: {
+interface OffsiteHeaderProps {
     badge?: string
     location: string
     date: string
     team?: string
-}): JSX.Element {
+}
+
+export const OffsiteHeader = ({ badge, location, date, team }: OffsiteHeaderProps) => {
     return (
         <header className="text-center pb-12">
             {badge && (

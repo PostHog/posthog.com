@@ -1,5 +1,9 @@
 import React from 'react'
 
-export function OffsiteDescription({ children }: { children: JSX.Element[] }): JSX.Element {
+interface OffsiteDescriptionProps {
+    children: JSX.Element[]
+}
+
+export const OffsiteDescription = ({ children }: OffsiteDescriptionProps) => {
     return <p className="max-w-2xl mx-auto opacity-70">{children}</p>
 }
