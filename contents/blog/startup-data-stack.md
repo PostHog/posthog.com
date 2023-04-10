@@ -119,7 +119,7 @@ Improving reliability, integrations, and UX is critical for success here. Being 
 
 ![PostHog CDP](../images/blog/startup-data-stack/posthog-cdp.png)
 
-To do one better, we are also working on making PostHog a data warehouse. This means storing and using data from many different sources. Our team [built what this looks like](https://github.com/PostHog/posthog/pull/14915) at our Aruba hackathon.
+To do one better, we are also working on making PostHog a data warehouse. This means storing and using arbitrary data from many different sources, scaling this up to users needs, and integrating with traditional data warehousing tools. Our team [built this](https://github.com/PostHog/posthog/pull/14915) at our Aruba hackathon.
 
 It consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like Stripe, Hubspot, Intercom, and more along with data from PostHog. 
 
