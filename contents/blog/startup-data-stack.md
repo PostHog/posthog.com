@@ -14,18 +14,24 @@ tags:
  - Explainers
 ---
 
-The goal of data is to help startups build a better product. To help them with this, startups use all sorts of tools, known as the startup data stack. 
+Every startup needs data to build a better product. This isn't up for debate. But, as we've found from working with hundreds of startups at all stages, the "startup data stack" can quickly devolve into a mess of tools that just slow you down.
 
-To help you understand the startup data stack, and be better able to leverage it, this post will go over:
-- What the startup data stack looks like from MVP to Series A
-- Examples of tools used and the problems they solve
-- PostHog's vision of the future for the startup data stack
+In this article, I'll explain why the startup data stack begins like this...
 
-This comes from working with hundreds of startups at all stages, conducting user interviews, researching the data stack landscape, and being part of the data stack ourselves.
+![MVP](../images/blog/startup-data-stack/mvp.png)
+
+devolves into this...
+
+![Series A](../images/blog/startup-data-stack/series-a.png)
+
+... and what we're building at PostHog to make the whole mess a little less painful for growing startups. 
+
+TL;DR: The so-called "modern data stack" sucks. We want to fix that.
 
 ## The MVP data stack
+At the start, data needs and collection is straightforward. A typical pre-product-market fit startup doesn't need many tools. We call this the MVP data stack.
 
-The goal of the MVP data stack is to get a signal that what you are building is working. Teams don’t want to spend time setting up complicated products this early, because their data needs aren’t large. They want something quick and proven to give them data like:
+The goal of the MVP data stack is to get a signal that what you are building is working. Teams need quick and easy tools that give them data for:
 
 - Site visitors
 - Leads, signups
@@ -34,56 +40,61 @@ The goal of the MVP data stack is to get a signal that what you are building is 
 
 To do this, they need:
 
-- Website and product analytics
-- Customer relationship manager (CRM)
+- Website and/or product analytics
+- A customer relationship manager (CRM)
 - Revenue, payments, subscription tracking
 
 ![MVP](../images/blog/startup-data-stack/mvp.png)
 
-To choose these products, they usually go with the "popular" choice, as they are [boring technologies](https://mcfunley.com/choose-boring-technology) that work for other people. The goal of the data stack at the MVP stage is to get basic data to find out if [what you are building is working](/blog/early-stage-analytics). Complicated solutions aren’t needed for this.
+At this stage, startups usually go with the "popular" tools because they're [boring technologies](https://mcfunley.com/choose-boring-technology) that work for other people. 
+
+The goal of the data stack at the MVP stage is to get basic data to find out if [what you are building is working](/blog/early-stage-analytics). Complicated solutions aren’t needed for this.
 
 ## The Seed stage data stack
 
-Once the MVP has initial traction and you enter the Seed stage, the data needs increase and the tools become more complicated. This is because it is less obvious how to spend your time and resources. For example, some questions asked at this stage include:
+Your data needs quickly spiral once you reach the Seed stage – as does the complexity and number of tools you need. Why? Because it's less obvious how to spend your time and resources. Typical questions at this stage include:
 
 - What features should we prioritize developing?
 - How do we best serve our [ideal customer](/blog/creating-ideal-customer-profile)?
 - How do we optimize our [conversion funnel](/tutorials/funnels)?
 - What channels should we [be advertising on](/blog/dev-marketing-for-startups)?
 
-To answer these questions, teams pull data from a growing number of sources like product analytics, CRM, help desk, and ad platforms. They also utilize more of the features of these sources, such as customer engagement and session recordings, generating more data.
+You'll need to pull data from a growing number of sources to answer these questions – product analytics, CRM, help desk, ad platform, etc. You'll also utilize more of the features of these sources than before, such as customer engagement and session recordings, generating even more data.
 
-Bringing all this data together and managing it often requires a [customer data platform](/docs/integrate/cdp) (CDP). CDPs collect the data from different sources and send it for use in destinations. For example, it might collect product data from PostHog, advertising data from Google, and revenue data from Stripe, and send it back to those same tools, a warehouse, or a business intelligence tool like Hex.
+This is where [customer data platforms](/docs/integrate/cdp) (CDP) like Segment come in. CDPs make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and revenue data from Stripe, and send it back to those same tools, a warehouse, or a business intelligence tool like Hex.
 
 ![Seed](../images/blog/startup-data-stack/seed.png)
 
 The goal of the stack at this stage is to give insights into how the product and specific features are doing. Teams want to answer questions about the product and get basic KPI reporting. This enables them to make decisions about what to work on and measure progress towards goals.
 
-Moving from individual sources to a CDP makes gathering data faster, but starts to create a web of integrations and mainteinance. It is a challenge to know if data is accurate, luckily at this stage, it doesn't need to be. The Seed stage strikes the balance of giving engineers enough data to know what to prioritize with having plenty of time to build it.
+Moving from individual sources to a CDP makes gathering data faster, but it's also where the rot, begins as complexity and maintenance needs increase. Data accuracy problems proliferate at this stage, though for now this isn't a critical issue – engineers just need enough data to know what to prioritize.
 
 ## The Series A data stack
 
 Series A is where data begins to get serious, and by serious, I mean the startup makes someone responsible for owning the data stack. This person is often a head of data, data engineer, or backend engineer focused on data. They see their goal as empowering engineers with data to evaluate the success of what they build. To do this, they implement the so-called "modern data stack" which contains four tools:
 
 1. A data warehouse to store all the data and act as a single source of truth. Options include Snowflake, BigQuery, and RedShift.
+
 2. An ETL pipeline to extract data from different sources, transform it, and load it into the warehouse. Options include Fivetran, Integrate.io, and Airbyte.
+
 3. A data transformation tool to model data, clean it up, and make it usable. dbt is basically the only option.
+
 4. A business intelligence or visualization tool to get insights from the data you’ve collected. Options include Metabase, Looker, and Hex.
 ![Series A](../images/blog/startup-data-stack/series-a.png)
 
-Startups need this stack because managing and accessing individual sources of data becomes unsustainable. Tools like analytics and the CDP don't give complete insight into performance. Teams need a single source of truth, and the modern data stack gives them that. This creates trust in the data and greater accuracy.
+Startups need this stack because managing and accessing individual sources of data becomes unsustainable. Tools like analytics and the CDP don't give complete insight into performance. Teams need a reliable, single source of truth they trust, and they hope the modern data stack will give them that.
 
-The downside of this stage is that a gap opens between engineers and the data that is valuable to them. They are unable to "self-serve" and must learn the modern data stack tools or rely on the data team for insights. There are many reasons for this:
+But this also where things start to go seriously wrong. All this complexity creates a gap between engineers and the data that is valuable to them. They are unable to "self-serve" and must learn the modern data stack tools, or rely on the data team for insights. There are many reasons for this:
 
 - The complexity of data and tools requires specialization.
 - Data security, safety, and privacy requirements.
 - Lack of knowledge of data available or how to use it.
 
-For example, engineers might need to write optimized SQL queries to understand customer feature usage. This requires an understanding of SQL, data availability, data structured, as well as access. These all create friction on what engineers want to do: build better products. 
+For example, engineers might need to write optimized SQL queries to understand customer feature usage. This requires an understanding of SQL, data availability, data structured, as well as access. All this does is slow down their work, blocking them shipping new features and improvements efficiently.
 
-## PostHog’s vision for the future of the startup data stack
+## How we want to fix the "modern data stack"
 
-PostHog is not content with the "modern data stack." The gaps and complexity it creates limits the ability to [build successful products](/handbook/strategy/overview). To change this, we are improving how startups gather and analyze data at the earliest stages and consolidating more of the stack as they scale.
+If you haven't figured it out already, we're not fans of this situation. To us, the "modern data stack" just creates costly barriers to building successful products. We want streamline how startups gather and analyze data at the earliest stages, consolidating more of the stack as they scale and delaying the need hire expensive heads of data and the like.
 
 To make this happen, we are improving PostHog as a [customer data platform (CDP)](https://github.com/PostHog/posthog/issues/13126). We have built the key functionality, such as the ability to:
 
