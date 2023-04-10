@@ -96,14 +96,30 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 return { error: userData?.error?.message }
             }
 
-            const meData = await fetch(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?populate[profile][populate][0]=avatar`,
+            const meQuery = qs.stringify(
                 {
-                    headers: {
-                        Authorization: `Bearer ${userData.jwt}`,
+                    populate: {
+                        profile: {
+                            populate: ['avatar'],
+                        },
                     },
+                },
+                {
+                    encodeValuesOnly: true,
                 }
-            ).then((res) => res.json())
+            )
+
+            const meRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?${meQuery}`, {
+                headers: {
+                    Authorization: `Bearer ${userData.jwt}`,
+                },
+            })
+
+            if (!meRes.ok) {
+                throw new Error('Failed to fetch profile data')
+            }
+
+            const meData = await meRes.json()
 
             const user: User = {
                 ...userData.user,

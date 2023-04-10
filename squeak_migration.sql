@@ -3,7 +3,8 @@
 -- Import users
 SELECT
     DISTINCT users.email,
-    -- sp.first_name || ' ' || sp.last_name AS username,
+    sp.first_name AS first_name,
+    sp.last_name AS last_name,
     users.email AS username,
     'local' AS provider,
     users.encrypted_password AS password,
@@ -71,6 +72,9 @@ INNER JOIN (
 ) reply ON reply.message_id = squeak_messages.id
 WHERE organization_id = 'a898bcf2-c5b9-4039-82a0-a00220a8c626';
 
+-- Import question slugs
+SELECT id, unnest(slug) AS slug FROM squeak_messages WHERE organization_id = 'a898bcf2-c5b9-4039-82a0-a00220a8c626';
+
 -- Import replies
 SELECT ranked_replies.id, body, created_at, CASE published WHEN TRUE THEN now() END AS published_at
 FROM (SELECT *,
@@ -93,9 +97,11 @@ WHERE organization_id = 'a898bcf2-c5b9-4039-82a0-a00220a8c626';
 SELECT id,
        title,
        date_completed,
+       complete,
+       NULL AS slug,
        description,
        projected_completion_date AS projected_complete,
-       array_to_json(github_urls)::jsonb,
+       array_to_json(github_urls)::jsonb AS github_urls,
        category,
        milestone,
        beta_available,
@@ -111,8 +117,8 @@ SELECT id, name, created_at, now() AS published_at, 1 AS created_by_id, 1 AS upd
 FROM squeak_teams
 WHERE organization_id = 'a898bcf2-c5b9-4039-82a0-a00220a8c626';
 
--- Link records together
 
+-- Link records together
 
 
 -- Connect profiles to users
@@ -166,9 +172,9 @@ FROM users
 WHERE sp.organization_id = 'a898bcf2-c5b9-4039-82a0-a00220a8c626';
 
 -- Import connections between teams and roadmaps
-SELECT created_at, id AS roadmap_id, "teamId" AS team_id
+SELECT id AS roadmap_id, "teamId" AS team_id
 FROM squeak_roadmaps
-WHERE organization_id = 'a898bcf2-c5b9-4039-82a0-a00220a8c626';
+WHERE organization_id = 'a898bcf2-c5b9-4039-82a0-a00220a8c626' AND "teamId" IS NOT NULL;
 
 -- Import connections between replies and profiles
 SELECT DISTINCT ranked_replies.id AS reply_id, rank_id AS profile_id FROM (
@@ -196,3 +202,14 @@ SELECT ranked_replies.id AS reply_id, message_id AS question_id FROM (
     WHERE organization_id = 'a898bcf2-c5b9-4039-82a0-a00220a8c626'
 ) ranked_replies
 WHERE rank > 1;
+
+-- Import connections between questions and slugs
+SELECT
+    id AS entity_id,
+    id AS component_id,
+    'questions.slugs' AS component_type,
+    'slugs' AS field
+FROM squeak_messages WHERE organization_id='a898bcf2-c5b9-4039-82a0-a00220a8c626';
+
+-- Set all user roles to 'Authenticated'
+SELECT id AS user_id, 1 AS role_id FROM up_users;
