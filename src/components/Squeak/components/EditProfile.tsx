@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import TextareaAutosize from 'react-textarea-autosize'
 import { useUser } from 'hooks/useUser'
 import { Avatar as DefaultAvatar } from '../../../pages/community'
+import getAvatarURL from '../util/getAvatar'
 
 const fields = {
     avatar: {
@@ -132,7 +133,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
 
     const { firstName, lastName, website, github, linkedin, twitter, biography, id } = user?.profile || {}
 
-    const avatar = user?.profile?.avatar?.data?.attributes?.url || user?.profile?.gravatarURL
+    const avatar = getAvatarURL(user?.profile)
 
     const handleSubmit = async ({ avatar, ...values }, { setSubmitting }) => {
         setSubmitting(true)
