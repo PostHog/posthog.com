@@ -5,5 +5,5 @@ interface OffsiteDescriptionProps {
 }
 
 export const OffsiteDescription = ({ children }: OffsiteDescriptionProps) => {
-    return <p className="max-w-2xl mx-auto opacity-70">{children}</p>
+    return <p className="max-w-2xl mx-auto pb-4 opacity-70">{children}</p>
 }

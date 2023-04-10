@@ -1,7 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
-import { OffsiteHeader } from 'components/OffsiteHeader'
-import { OffsiteDescription } from 'components/OffsiteDescription'
 import { Hero } from 'components/Hero'
 import { Check, Close } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
@@ -34,8 +32,6 @@ export default function Plain({ data }) {
         FeatureSnapshot,
         Check,
         Close,
-        OffsiteHeader,
-        OffsiteDescription,
         a: A,
         ...shortcodes,
     }
