@@ -27,16 +27,10 @@ pip install posthog
 In your app, import the `posthog` library and set your api key and host **before** making any calls.
 
 ```python
-import posthog
-
-# Substitutes posthog.api_key which still exists but has been deprecated
-posthog.project_api_key = '<ph_project_api_key>'
+from posthog import Posthog
 
 # Only necessary if you want to use local evaluation of feature flags
-posthog.personal_api_key = '<ph_personal_api_key>'
-
-# You can remove this line if you're using app.posthog.com
-posthog.host = '<ph_instance_address>'
+posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>', personal_api_key='<ph_personal_api_key>')
 ```
 
 You can read more about the differences between the project and personal API keys in the dedicated [API authentication section](/docs/api/overview#authentication) of the Docs.
