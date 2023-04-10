@@ -1,5 +1,4 @@
 import { MDXProvider } from '@mdx-js/react'
-import Breadcrumbs from 'components/Breadcrumbs'
 import FooterCTA from 'components/FooterCTA'
 import { RightArrow } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
@@ -14,6 +13,39 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import SectionLinks from 'components/SectionLinks'
+import PostLayout from 'components/PostLayout'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import Topics from 'components/PostLayout/Topics'
+import { capitalizeFirstLetter } from '../../src/utils'
+
+const AppSidebar = ({ filters: { type, maintainer } }) => {
+    return (
+        <>
+            {maintainer && (
+                <SidebarSection title="Maintainer">
+                    <Topics
+                        topics={[
+                            {
+                                name: capitalizeFirstLetter(maintainer),
+                                url: `/apps?filter=maintainer&value=${maintainer}`,
+                            },
+                        ]}
+                    />
+                </SidebarSection>
+            )}
+            {type?.length > 0 ? (
+                <SidebarSection title={`Type${type?.length === 1 ? '' : 's'}`}>
+                    <Topics
+                        topics={type?.map((type) => ({
+                            name: capitalizeFirstLetter(type),
+                            url: `/apps?filter=type&value=${type}`,
+                        }))}
+                    />
+                </SidebarSection>
+            ) : null}
+        </>
+    )
+}
 
 export default function App({ data, pageContext: { next, previous } }) {
     const { pageData, documentation } = data
@@ -22,7 +54,7 @@ export default function App({ data, pageContext: { next, previous } }) {
         excerpt,
         fields: { slug },
     } = pageData
-    const { title, subtitle, featuredImage, description } = pageData?.frontmatter
+    const { title, subtitle, thumbnail, description, filters } = pageData?.frontmatter
     const slugger = new GithubSlugger()
     const Documentation = () => {
         return (
@@ -55,31 +87,62 @@ export default function App({ data, pageContext: { next, previous } }) {
                 title={`${title} - PostHog`}
                 description={description || excerpt}
             />
-            <Breadcrumbs
-                crumbs={[{ title: 'Apps', url: '/apps' }, { title }]}
-                darkModeToggle
-                className="px-4 mt-4 sticky top-0 z-10 bg-tan dark:bg-primary"
-            />
-            <div
-                style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 880px) 1fr' }}
-                className="mt-10 w-full relative lg:grid lg:grid-flow-col lg:gap-12 items-start"
+            <PostLayout
+                searchFilter="apps"
+                sidebar={<AppSidebar filters={filters} />}
+                menu={[
+                    {
+                        name: 'Apps',
+                    },
+                    {
+                        name: 'All',
+                        url: '/apps',
+                    },
+                    {
+                        name: 'Data-in',
+                        url: '/apps?filter=type&value=data-in',
+                    },
+                    {
+                        name: 'Data-out',
+                        url: '/apps?filter=type&value=data-out',
+                    },
+                    {
+                        name: 'Ingestion-filtering',
+                        url: '/apps?filter=type&value=ingestion-filtering',
+                    },
+                    {
+                        name: 'Other',
+                        url: '/apps?filter=type&value=other',
+                    },
+                    {
+                        name: 'Official',
+                        url: '/apps?filter=maintainer&value=official',
+                    },
+                    {
+                        name: 'Community',
+                        url: '/apps?filter=maintainer&value=community',
+                    },
+                ]}
+                breadcrumb={[{ name: 'Apps', url: '/apps' }, { name: title }]}
             >
-                <section>
-                    <div className="lg:max-w-[880px] lg:pr-5 px-5 lg:px-0 mx-auto">
-                        <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
-                        <GatsbyImage image={getImage(featuredImage)} alt="" />
-                        <article>
-                            <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
-                                <MDXRenderer>{body}</MDXRenderer>
-                            </MDXProvider>
-                        </article>
-                        <div className="mt-12">
-                            <SectionLinks next={next} previous={previous} />
-                        </div>
-                        <FooterCTA />
-                    </div>
-                </section>
-            </div>
+                {thumbnail?.publicURL && (
+                    <figure className="m-0 text-center">
+                        <img src={thumbnail.publicURL} alt={title} className="h-24 mx-auto mb-6" />
+                    </figure>
+                )}
+                <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
+                <article>
+                    <MDXProvider components={{ ...shortcodes, Section, TutorialsSlider, Documentation }}>
+                        <MDXRenderer>{body}</MDXRenderer>
+                    </MDXProvider>
+                </article>
+                <div className="mt-12">
+                    <SectionLinks next={next} previous={previous} />
+                </div>
+                <div className="mb-12">
+                    <FooterCTA />
+                </div>
+            </PostLayout>
         </Layout>
     )
 }
@@ -95,10 +158,12 @@ export const query = graphql`
             frontmatter {
                 title
                 description
-                featuredImage {
-                    childImageSharp {
-                        gatsbyImageData
-                    }
+                filters {
+                    type
+                    maintainer
+                }
+                thumbnail {
+                    publicURL
                 }
             }
         }

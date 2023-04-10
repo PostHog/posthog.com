@@ -37,6 +37,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         setFullWidthContent,
         contentContainerClasses,
         stickySidebar,
+        searchFilter,
     } = usePost()
 
     const handleFullWidthContentChange = () => {
@@ -68,7 +69,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         >
                             {!hideSearch && (
                                 <div className="lg:sticky top-0 z-20 pt-4 -mx-2 px-1 bg-tan dark:bg-primary relative">
-                                    <SidebarSearchBox />
+                                    <SidebarSearchBox filter={searchFilter} />
                                 </div>
                             )}
                             <TableOfContents />
@@ -181,7 +182,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                                 </SidebarAction>
                                                 {darkMode && (
                                                     <SidebarAction
-                                                        className="pl-2 pr-2"
+                                                        className="pl-2 pr-2 h-8 my-1"
                                                         width="auto"
                                                         title="Toggle dark mode"
                                                     >
