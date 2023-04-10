@@ -1,19 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Form, Field, Formik, FormikHandlers } from 'formik'
 import Button from 'components/CommunityQuestions/Button'
 import { Markdown } from 'components/Icons'
 import * as Yup from 'yup'
 import TextareaAutosize from 'react-textarea-autosize'
 import { useUser } from 'hooks/useUser'
+import { Avatar as DefaultAvatar } from '../../../pages/community'
 
 const fields = {
+    avatar: {
+        label: 'Avatar',
+        component: Avatar,
+        hideLabel: true,
+        className: 'flex-grow flex items-end',
+    },
     firstName: {
         type: 'fname',
         label: 'First name',
+        className: 'w-[calc(50%-40px)] grid items-end',
     },
     lastName: {
         type: 'lname',
         label: 'Last name',
+        className: 'w-[calc(50%-40px)] grid items-end',
     },
     github: {
         label: 'GitHub',
@@ -22,9 +31,10 @@ const fields = {
         label: 'LinkedIn',
     },
     biography: {
-        component: (
+        component: () => (
             <Field
                 minRows={6}
+                rows={6}
                 as={TextareaAutosize}
                 type="text"
                 name="biography"
@@ -32,7 +42,7 @@ const fields = {
                 className="py-2 px-4 text-lg rounded-md w-full dark:text-primary border-gray-accent-light border mb-2"
             />
         ),
-        className: 'col-span-2',
+        className: 'w-full',
     },
 }
 
@@ -54,6 +64,67 @@ type EditProfileProps = {
     onSubmit?: (() => void) | (() => Promise<void>)
 }
 
+function Avatar({ values, setFieldValue }) {
+    const inputRef = useRef()
+    const [imageURL, setImageURL] = useState(values?.avatar)
+
+    const handleChange = (e) => {
+        const file = e.target.files[0]
+        setFieldValue('avatar', file)
+        const reader = new FileReader()
+        reader.onloadend = () => {
+            reader?.result && setImageURL(reader.result)
+        }
+
+        reader.readAsDataURL(file)
+    }
+
+    useEffect(() => {
+        if (!values.avatar && inputRef?.current) {
+            inputRef.current.value = null
+        }
+        setImageURL(values.avatar)
+    }, [values.avatar])
+
+    return (
+        <div className="relative w-full aspect-square rounded-full flex justify-center items-center border border-gray-accent-light dark:border-gray-accent-dark text-black/50 dark:text-white/50 overflow-hidden group">
+            {imageURL ? (
+                <img className="w-full h-full absolute inset-0 object-cover" src={imageURL} />
+            ) : (
+                <DefaultAvatar className="w-[60px] h-[60px] absolute bottom-0" />
+            )}
+            <div
+                className={`grid ${
+                    imageURL ? 'grid-cols-2' : 'grid-cols-1'
+                } items-center w-full h-full z-10 bg-white/90 dark:bg-black/80 divide divide-x divide-dashed divide-gray-accent-light opacity-0 group-hover:opacity-100 transition-opacity`}
+            >
+                {imageURL && (
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setFieldValue('avatar', null)
+                        }}
+                        className="w-full h-full flex items-center justify-center text-4xl group"
+                    >
+                        &#215;
+                    </button>
+                )}
+                <div className="relative w-full h-full flex items-center justify-center group">
+                    <span className="text-3xl">&#8593;</span>
+                    <input
+                        ref={inputRef}
+                        onChange={handleChange}
+                        accept=".jpg, .png, .gif, .jpeg"
+                        className="opacity-0 absolute w-full h-full top-0 left-0 cursor-pointer"
+                        name="avatar"
+                        type="file"
+                    />
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
     const { user, setUser, isLoading, getJwt } = useUser()
 
@@ -61,17 +132,39 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
 
     const { firstName, lastName, website, github, linkedin, twitter, biography, id } = user?.profile || {}
 
-    const handleSubmit = async (values, { setSubmitting }) => {
+    const avatar = user?.profile?.avatar?.data?.attributes?.url || user?.profile?.gravatarURL
+
+    const handleSubmit = async ({ avatar, ...values }, { setSubmitting }) => {
         setSubmitting(true)
         const JWT = await getJwt()
+        let image = avatar
+        if (avatar && typeof avatar === 'object') {
+            const formData = new FormData()
+            formData.append('files', avatar)
+            const uploadedImage = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/upload`, {
+                method: 'post',
+                body: formData,
+                headers: {
+                    Authorization: `Bearer ${JWT}`,
+                },
+            }).then((res) => res.json())
+            if (uploadedImage?.length > 0) {
+                image = uploadedImage[0]
+            }
+        }
+
+        const body = {
+            data: {
+                ...values,
+                ...((image && typeof image !== 'string') || image === null ? { avatar: image?.id ?? null } : {}),
+            },
+        }
 
         const { data, error } = await fetch(
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?populate=avatar`,
             {
                 method: 'PUT',
-                body: JSON.stringify({
-                    data: values,
-                }),
+                body: JSON.stringify(body),
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${JWT}`,
@@ -95,28 +188,28 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
 
     return (
         <Formik
-            initialValues={{ firstName, lastName, website, github, linkedin, twitter, biography }}
+            initialValues={{ avatar, firstName, lastName, website, github, linkedin, twitter, biography }}
             validationSchema={ValidationSchema}
             onSubmit={handleSubmit}
         >
-            {({ isSubmitting, isValid, values, errors }) => {
+            {({ isSubmitting, isValid, values, errors, setFieldValue }) => {
                 return (
                     <Form className="m-0">
                         <h2>Update profile</h2>
-                        <p className="mb-4">
-                            Tip: Be sure to use full URLs when adding links to your website, GitHub, LinkedIn and
-                            Twitter (start with https)
+                        <p className="border border-dashed border-gray-accent-light dark:border-gray-accent-dark p-4 rounded-md mb-4">
+                            <strong>Tip:</strong> Be sure to use full URLs when adding links to your website, GitHub,
+                            LinkedIn and Twitter (start with https)
                         </p>
-                        <div className="grid grid-cols-2 gap-x-4 gap-y-4 m-0">
+                        <div className="flex flex-wrap m-0">
                             {Object.keys(values).map((key) => {
                                 const error = errors[key]
                                 const field = fields[key]
                                 const label = field?.label || capitalizeFirstLetter(key.replaceAll('_', ' '))
 
                                 return (
-                                    <div className={field?.className ?? ''} key={key}>
-                                        <label htmlFor={key}>{label}</label>
-                                        {field?.component || (
+                                    <div className={`${field?.className ?? 'w-1/2'} p-2`} key={key}>
+                                        {!field?.hideLabel && <label htmlFor={key}>{label}</label>}
+                                        {(field?.component && field.component({ values, setFieldValue })) || (
                                             <Field
                                                 className="py-2 px-4 text-lg rounded-md w-full dark:text-primary border-gray-accent-light border m-0"
                                                 type={field?.type || 'text'}
