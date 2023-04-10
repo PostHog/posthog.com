@@ -1,5 +1,5 @@
 ---
-title: "How the startup data stack evolves, what we’ve found"
+title: "The "modern data stack" sucks"
 date: 2023-04-10
 author: ["ian-vanagas"]
 showTitle: true
