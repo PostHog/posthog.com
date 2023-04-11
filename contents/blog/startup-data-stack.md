@@ -22,7 +22,7 @@ In this article, I'll explain how and why the startup data stack begins like thi
 
 devolves into this...
 
-![Series A](../images/blog/startup-data-stack/series-a.png)
+![Modern data sith](../images/blog/startup-data-stack/modern-data-sith.png)
 
 ...and what we're building at PostHog to make this mess less painful for growing startups.
 
@@ -102,8 +102,6 @@ The problem with the modern data stack is that it often fails the people it was 
 - Lack of knowledge of data available or how to use it.
 
 For example, engineers might need to write optimized SQL queries to understand customer feature usage. This requires an understanding of SQL, data availability, data structure, as well as access. All this does is slow down their work, blocking them from shipping new features and improvements efficiently.
-
-![Modern data sith](../images/blog/startup-data-stack/modern-data-sith.png)
 
 ## How we are fixing the "modern data stack"
 
