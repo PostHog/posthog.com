@@ -36,7 +36,9 @@ We spent the first year and a half of PostHog prioritizing our open-source proje
 
 Our only company goal at this point was to get 5 reference, paying customers. By going really deep with this handful, we realized that we needed to improve our funnel experience – a core part of our product. We '[nailed funnels](new-vp-nailing-funnels)', and revenue started climbing as a result. However, delightfully, our _free_ user numbers also started growing much faster.
 
-This journey has since repeated itself with session replay. Since the free and paid session recording products are the same, except for a usage limit with the free product, focusing on more-demanding, paid users led to similar quality improvements for everyone.
+This journey has repeated itself with session replay. 
+
+Since the free and paid session replay products are largely the same, except for a usage limit with the free product, focusing on more demanding, paid users improved the product for everyone and drove word-of-mouth growth.
 
 And, better yet, it's very easy to justify making improvements for paying customers, since it's long-term sustainable.
 ## 3. It gives our small teams more autonomy
