@@ -10,6 +10,7 @@ export default function TeamRoadmap({ team }: { team?: string }) {
     } = useStaticQuery(query)
 
     const roadmap = team ? nodes.filter((node: IRoadmap) => node?.team?.name === team) : nodes
+
     return roadmap?.length <= 0 ? (
         <p className="!m-0 py-4 px-6 border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md">
             Check out the <Link to="/roadmap">company roadmap</Link> to see what we're working on next!

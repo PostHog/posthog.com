@@ -1,14 +1,13 @@
 import Layout from 'components/Layout'
-import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import groupBy from 'lodash.groupby'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import { UnderConsideration } from './UnderConsideration'
 import { InProgress } from './InProgress'
-import { ImageDataLike, StaticImage } from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image'
 import community from 'sidebars/community.json'
+import { useRoadmap } from 'hooks/useRoadmap'
 
 interface IGitHubPage {
     title: string
@@ -42,7 +41,7 @@ export interface IRoadmap {
     githubPages: IGitHubPage[]
 }
 
-const Complete = (props: { title: string; githubPages: IGitHubPage[] }) => {
+/*const Complete = (props: { title: string; githubPages: IGitHubPage[] }) => {
     const { title, githubPages } = props
     const url = githubPages?.length > 0 && githubPages[0]?.html_url
 
@@ -60,7 +59,7 @@ const Complete = (props: { title: string; githubPages: IGitHubPage[] }) => {
             )}
         </li>
     )
-}
+}*/
 
 export const Section = ({
     title,
@@ -96,9 +95,7 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default function Roadmap() {
-    const queryData = useStaticQuery(query)
-
-    const teams: ITeam[] = queryData.allSqueakTeam.nodes
+    const teams = useRoadmap()
 
     const underConsideration: ITeam[] = teams
         .map((team) => {
@@ -248,41 +245,3 @@ export default function Roadmap() {
         </Layout>
     )
 }
-
-const query = graphql`
-    query RoadmapQuery {
-        allSqueakTeam {
-            nodes {
-                name
-                roadmaps {
-                    ...roadmap
-                }
-            }
-        }
-    }
-
-    fragment roadmap on SqueakRoadmap {
-        squeakId
-        betaAvailable
-        complete
-        dateCompleted
-        title
-        description
-        image {
-            url
-        }
-        githubPages {
-            title
-            html_url
-            number
-            closed_at
-            reactions {
-                hooray
-                heart
-                eyes
-                plus1
-            }
-        }
-        projectedCompletion
-    }
-`
