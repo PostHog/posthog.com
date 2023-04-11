@@ -1,5 +1,5 @@
 ---
-title: "The "modern data stack" sucks"
+title: 'The "modern data stack" sucks'
 date: 2023-04-10
 author: ["ian-vanagas"]
 showTitle: true
