@@ -12,19 +12,18 @@ Waiting for slow web apps is like watching paint dry. It's the bane of productiv
 
 In this tutorial, we'll show you:
   * The three most important metrics for measuring page load speed
- 
-  *  How to identify opportunities to improve them using PostHog's [performance monitoring in session replays tool](https://posthog.com/blog/posthog-changelog#performance-monitoring-in-session-recordings).
+  *  How to identify opportunities to improve them using PostHog's [performance monitoring in session replays tool](https://posthog.com/tutorials/posthog-changelog#performance-monitoring-in-session-recordings).
   * A cheat sheet to help you prioritize the most important areas to focus on.
 
 ## Setting up performance monitoring
 
 First, ensure that session replays are [enabled]((https://posthog.com/docs/session-replay/manual)). Next, navigate to the Recordings tab on your PostHog Dashboard. Finally, click on the Network tab in the sidebar next to or below the video.
 
-![A screenshot showing where to find the performance monitoring in the session replays tool](https://i.imgur.com/nr0QSSy.png)
+![A screenshot showing where to find the performance monitoring in the session replays tool](../images/tutorials/performance-metrics/performance-tool.png)
 
 Here you'll see all the network requests that are made during the page load and user session, as well as how long they took. You'll also see the time taken for First Contentful Paint, DOM interactive, and Page Loaded. 
 
-![A screenshot of the network tab showing example values for First Contentful Paint, DOM interactive, and Page Loaded](https://i.imgur.com/Qlqt4c0.png)
+![A screenshot of the network tab showing example values for First Contentful Paint, DOM interactive, and Page Loaded](../images/tutorials/performance-metrics/network-tab.png)
 
 We'll go through what each one of these three metrics mean and how to improve them.
 
@@ -66,7 +65,7 @@ All of them are important for a good user experience! However, you may decide to
 - For content-heavy websites like blogs, FCP should be prioritized as it determines the time it takes for readers to see the first piece of content, which can impact their initial impression and the likelihood they'll continue reading.
 - For a site whose main goal is to attract SEO traffic and is looking to improve their [PageSpeed Insights performance score](https://pagespeed.web.dev/), then Page Loaded will be the most important since this contributes the most to [Total Blocking Time](https://web.dev/tbt/), which has the [highest weighting](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/?utm_source=lighthouse&utm_medium=lr#weightings) when calculating the performance score.
 - For an e-commerce site with a checkout form with many input fields and complex validation, a high DOM Interactive time means that the form is slow to respond to user input. 
-- For a personal finance app, DOM Interactive ensures that users can quickly navigate and interact with various financial tools on offer. However, Page Loaded guarantees that all the data visualizations, such as charts and graphs, are fully loaded and functional. 
+- For a personal finance app, DOM Interactive ensures that users can quickly navigate and interact with the various financial tools on offer. However, Page Loaded guarantees that all the data visualizations, such as charts and graphs, are fully loaded and functional. 
 
 ## Optimization cheat sheet
 If you're looking to improve any of the above metrics, here is a handy cheat sheet for where to look for opportunities. Each value in the table indicates how likely the metrics are to be affected.
@@ -83,24 +82,19 @@ If you're looking to improve any of the above metrics, here is a handy cheat she
 | Images: Downloading and Rendering| 🟡 Medium (only if they are part of the initial content) | 🔴 Low | 🟢 High |
 | Fonts: Downloading and Rendering  | 🟡 Medium (only if they are part of the initial content)  | 🔴 Low |  🔴 Low  |
 
-## Identifying opportunities on your own site
+## Identifying opportunities in your own app
 PostHog's performance monitoring tool shows you the size and speed of different requests made during page load. You can also filter these by request type, such as API, JS, image, and CSS requests.
 
 Combine this with the cheat sheet above and you'll be able to pinpoint what are the contributing factors to your metric times.
 
 ### **Examples**
-**1. API requests**
-![A screenshot of the network tab filtered to show API requests only. One API request is identified as taking too long.](https://i.imgur.com/JPeZeTe.png)
+**1. JS requests**
 
-Here we can see an API request that is happening during page load (indicated by the `LOAD` text next to it). Since it is blocking the initial rendering, it is contributing to the high FCP time as well as the Page Loaded time.
+![A screenshot of the network tab filtered to show JavaScript requests only](../images/tutorials/performance-metrics/javascript-requests.png)
+In this example we see fast times for downloading JavaScript. Expanding into one of the requests, we can also see that the request is not blocking the render of the screen. Thus we can conclude that this JS download is not contributing significantly to any of our metrics.
 
-**2. JS requests**
-
-![A screenshot of the network tab filtered to show JavaScript requests only](https://i.imgur.com/klPHLwK.png)
-In this example we see fast times for downloading JavaScript. Expanding into one of the requests, we can also see that the request is not blocking the render of the screen. Thus we can conclude that download JS is not contributing significantly to any of our metrics.
-
-**3. Image requests**
-![A screenshot of the network tab filtered to show image requests only. The list shows small images that are taking more than one second each to download.](https://i.imgur.com/4b45d2k.png)
+**2. Image requests**
+![A screenshot of the network tab filtered to show image requests only. The list shows small images that are taking more than one second each to download.](../images/tutorials/performance-metrics/image-requests.png)
 
 This example shows tiny images that are taking in excess of one second to download. This may be caused by server or network latency.
 
@@ -112,17 +106,22 @@ Once you have identified which factors are affected your page load times, here a
 * Optimize the order of files by ensuring that critical scripts load first.
 * Defer or asynchronously load non-critical JavaScript.
 * Minify files i.e. strip out comments, line breaks and other unnecessary characters. You can use tools such as [Google's Closure Compiler](https://developers.google.com/closure/compiler) or [UglifyJS](https://github.com/mishoo/UglifyJS).
+* Remove unnecessary libraries, packages, and dependencies, or switch to less resource-intensive alternatives.
 
 ### Images
 * Use image compression tools like [TinyPNG](https://tinypng.com/) or [ImageOptim](https://imageoptim.com/) to reduce file sizes without sacrificing quality.
 * Choose modern image formats like WebP or AVIF, which offer better compression ratios than traditional formats like JPEG and PNG.
-* Implement lazy-loading 
-* Use responsive images with the 'srcset' attribute to serve the right-sized image based on the user's screen size.
+* Implement lazy-loading.
+* Serve correctly sized images based on the user's screen size by using responsive images with the `srcset` attribute.
 
 ### Server and network latency
 * Use a Content Delivery Network (CDN). CDNs cache your static assets across multiple servers around the world, allowing users to access your content from the server closest to them.
 * Fine-tune your load balancer and cache control policies to reduce the number of steps between the browser and your source content.
+* Minimize your response payloads to return as little data as needed.
 * Use compression algorithms like [Gzip](https://www.gnu.org/software/gzip/) or [Brotli](https://www.brotli.org/) to reduce file sizes and API responses.
+
+![A screenshot showing the time saved downloading gzip-compressed API responses versus uncompressed responses](../images/tutorials/performance-metrics/gzip-compression.png)
+*Notice the big difference in time taken between network requests returning uncompressed responses (red) and gzip-compressed responses (green) *
 
 ## Further reading
 
