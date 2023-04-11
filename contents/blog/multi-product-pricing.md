@@ -16,9 +16,9 @@ PostHog started as a single product company. We just sold product analytics with
 
 We charged by event ingested. Obviously, we wound up with abuse – a handful of high volume users would send zero events, but would use our Javascript snippet to do just session replay, to store _millions_ of recordings.
 
-We decided a multi product pricing strategy had long term advantages, and - to be frank - we had to stop people abusing recording, and we didn't want to limit it for users already paying us a healthy amount.
+We decided a multi-product pricing strategy had long term advantages, and – to be frank – we had to stop people abusing recording, and we didn't want to limit it for users already paying us a healthy amount. This is what we've learned so far. 
 
-## It's a way to take extra products seriously
+## 1. Usage increased when we started charging
 
 The most important thing, but the one we didn't anticipate, was charging for session replay very quickly led to more usage.
 
@@ -30,9 +30,9 @@ The moment we started charging, awareness increased. Users took the feature more
 
 We put a small team on it, who quickly iterated with customers and improved the product. Session replay took off as a result – it now has similar daily usage to product analytics.
 
-## Focusing on paying customers can improve the free product
+## 2. Focusing on paying customers improves the free product (and drives growth)
 
-As context, PostHog spent the first year and a half prioritizing our open source project - we wanted to build an inbound sales model, so we could double down on product rather than investing in cold calling. Leverage, baby. This meant we'd need a great free product and a reasonably large community. After 18 months, we were ready to focus on our first paid product - product analytics.
+We spent the first year and a half of PostHog prioritizing our open-source project – we wanted to build an inbound sales model, so we could double down on product rather than investing in cold calling. Leverage, baby. This meant we'd need a great free product and a reasonably large community. After 18 months, we were ready to focus on our first paid product – product analytics.
 
 Our only company goal at this point was to get 5 reference, paying customers. By going really deep with this handful, we realized that we needed to improve our funnel experience – a core part of our product. We '[nailed funnels](new-vp-nailing-funnels)', and revenue started climbing as a result. However, delightfully, our _free_ user numbers also started growing much faster.
 
