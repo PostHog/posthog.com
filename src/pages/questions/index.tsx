@@ -15,7 +15,7 @@ import { useQuestions } from 'hooks/useQuestions'
 export default function Questions() {
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
 
-    const { questions, isLoading, refresh, fetchMore } = useQuestions({ limit: 20 })
+    const { questions, isLoading, refresh, fetchMore } = useQuestions({ limit: 20, sortBy })
 
     return (
         <Layout>

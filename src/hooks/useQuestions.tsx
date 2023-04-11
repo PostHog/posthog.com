@@ -9,11 +9,11 @@ type UseQuestionsOptions = {
     profileId?: number
     topicId?: number
     limit?: number
+    sortBy?: 'newest' | 'popular' | 'activity'
 }
 
-// TODO: Add sort by
 export const useQuestions = (options?: UseQuestionsOptions) => {
-    const { slug, topicId, profileId, limit = 20 } = options || {}
+    const { slug, topicId, profileId, limit = 20, sortBy = 'newest' } = options || {}
 
     const query = (offset: number) => {
         const params = {
@@ -36,6 +36,18 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
                     fields: ['id', 'createdAt', 'updatedAt'],
                 },
             },
+        }
+
+        switch (sortBy) {
+            case 'newest':
+                params.sort = 'createdAt:desc'
+                break
+            case 'popular':
+                params.sort = 'numReplies:desc'
+                break
+            case 'activity':
+                params.sort = 'updatedAt:desc'
+                break
         }
 
         if (slug) {
