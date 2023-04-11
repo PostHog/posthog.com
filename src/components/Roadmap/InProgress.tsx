@@ -9,7 +9,7 @@ import { useToast } from '../../hooks/toast'
 
 export function InProgress(props: IRoadmap & { className?: string; more?: boolean; stacked?: boolean }) {
     const { addToast } = useToast()
-    const { user } = useUser()
+    const { user, getJwt } = useUser()
     const [more, setMore] = useState(props.more ?? false)
     const [showAuth, setShowAuth] = useState(false)
     const [subscribed, setSubscribed] = useState(false)
@@ -20,53 +20,50 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
 
     async function subscribe(email: string) {
         setLoading(true)
-        if (email) {
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/subscribe`, {
-                method: 'POST',
-                body: JSON.stringify({ id: squeakId, organizationId: process.env.GATSBY_SQUEAK_ORG_ID }),
-                credentials: 'include',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-            })
+        const token = await getJwt()
 
-            if (res.ok) {
-                setSubscribed(true)
-                setShowAuth(false)
-                addToast({ message: `Subscribed to ${title}. We’ll email you with updates!` })
-            } else {
-                addToast({ error: true, message: 'Whoops! Something went wrong.' })
-            }
+        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/subscribe`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        if (res.ok) {
+            setSubscribed(true)
+            setShowAuth(false)
+            addToast({ message: `Subscribed to ${title}. We’ll email you with updates!` })
         } else {
-            setShowAuth(true)
+            addToast({ error: true, message: 'Whoops! Something went wrong.' })
         }
         setLoading(false)
     }
 
-    async function unsubscribe(email: string) {
+    async function unsubscribe() {
         setLoading(true)
-        if (email) {
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/unsubscribe`, {
-                method: 'POST',
-                body: JSON.stringify({ id: squeakId, organizationId: process.env.GATSBY_SQUEAK_ORG_ID }),
-                credentials: 'include',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-            })
+        const token = await getJwt()
 
-            if (res.ok) {
-                setSubscribed(false)
-                setShowAuth(false)
-                addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
-            } else {
-                addToast({ error: true, message: 'Whoops! Something went wrong.' })
-            }
+        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/unsubscribe`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        if (res.ok) {
+            setSubscribed(false)
+            setShowAuth(false)
+            addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
         } else {
-            setShowAuth(true)
+            addToast({ error: true, message: 'Whoops! Something went wrong.' })
         }
+
         setLoading(false)
     }
 
