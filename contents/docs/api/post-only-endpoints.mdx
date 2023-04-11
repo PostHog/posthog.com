@@ -259,7 +259,7 @@ Body:
 ```
 
 ### Example request & response: /decide v3
-`/decide` version 3 introduces support for [feature flag payloads](TODO: update link) and a change in response structure: flags that were evaluated as false are also passed in. Further, this endpoint returns a parameter `errorComputingFlags`, which is true when we didn't manage to compute some flags, because of, say the database being down or some other reason. This allows for making partial updates to currently active flags in your clients.
+`/decide` version 3 introduces support for [feature flag payloads](docs/feature-flags/payloads) and a change in response structure: flags that were evaluated as false are also passed in. Further, this endpoint returns a parameter `errorComputingFlags`, which is true when we didn't manage to compute some flags, because of, say the database being down or some other reason. This allows for making partial updates to currently active flags in your clients.
 
 ### Request
 
