@@ -1,5 +1,5 @@
 ---
-date: 2023-02-15
+date: 2023-04-11
 title: 'In-depth: ClickHouse vs BigQuery'
 rootPage: /blog
 sidebar: Blog
