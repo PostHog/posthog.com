@@ -28,8 +28,6 @@ export const QuestionsTable = ({
                               attributes: { profile, subject, permalink, body, replies },
                           } = question
 
-                          console.log(profile)
-
                           const numReplies = replies?.data?.length || 0
 
                           const avatar = getAvatarURL(profile?.data?.attributes)

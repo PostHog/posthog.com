@@ -69,8 +69,6 @@ const Collapsed = ({ setExpanded, replies }: CollapsedProps) => {
 
     let resolvedBy = 0
 
-    console.log(reply)
-
     return (
         <>
             <li>

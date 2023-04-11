@@ -56,8 +56,6 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
 
     const { data: roadmapData } = data || {}
 
-    console.log(squeakId)
-    console.log('roadmapData', roadmapData)
     const subscribed = roadmapData?.attributes?.roadmapSubscriptions?.data?.some(({ id }) => id === squeakId)
 
     async function subscribe() {
