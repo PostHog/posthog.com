@@ -83,4 +83,4 @@ And that's it!
 
 You've created a mechanism for getting user feedback with just a few lines of code, no backend, and that integrates seamlessly with the rest of your product data. 
 
-<NewsletterTutorial compact/>
+<TracksCTA/>

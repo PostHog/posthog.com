@@ -285,4 +285,4 @@ You can learn more about PostHog’s specific features to use in your Vue app by
 
 You can the access the project used in this tutorial [on GitHub](https://github.com/mathexl/posthog-vue-demo).
 
-<NewsletterTutorial compact/>
+<TracksCTA/>

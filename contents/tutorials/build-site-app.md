@@ -205,4 +205,4 @@ You now have a basic site app added to your site you can continue to customize a
 
 - [How to build your own app in PostHog](/tutorials/build-your-own-posthog-app): More interested in modifying, exporting, or adding events on the backend. This tutorial teaches you how to build a backend app that does just that.
 
-<NewsletterTutorial compact/>
+<TracksCTA/>

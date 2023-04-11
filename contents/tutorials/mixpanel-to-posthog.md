@@ -77,3 +77,5 @@ If you are interested in writing your own script, or just want to learn more abo
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
 - [Get feedback and book user interviews with site apps](/tutorials/feedback-interviews-site-apps)
+
+<TracksCTA/>

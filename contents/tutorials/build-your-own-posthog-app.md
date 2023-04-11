@@ -151,3 +151,5 @@ Alternatively, check out the following tutorials for more information in the mea
 [How to connect Patterns and PostHog](/tutorials/how-to-connect-patterns-and-posthog)
 [How to protect user privacy with the Property Filter app](/tutorials/property-filter)
 [How to correlate errors with product performance using Sentry](/tutorials/sentry-plugin-tutorial)
+
+<TracksCTA/>

@@ -221,5 +221,5 @@ Tracking revenue is just the start.
 - [Setting up and using feature flags](/manual/feature-flags)
 - [Analyzing your conversion with Funnels](/docs/tutorials/funnels)
 
-<NewsletterTutorial compact/>
+<TracksCTA/>
 

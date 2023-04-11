@@ -59,3 +59,5 @@ To export PostHog data to Patterns using the data extractor, follow the steps be
 6. Set a schedule for every time you wish to pull updated data.
 
 > There are hundreds of  questions which Patterns' activity schema can answer, such as conversion funnel analysis, modeling revenue, and calculating customer lifetime value (LTV).  Clone [this Patterns App](https://studio.patterns.app/graph/o9mtaek8n33qasl1oa3a/y3h6varjgt80sqq907gt/3evx4hiottnqeb0229ig?view=graph&dashboardId=1hx9fc) to get access to these analytics out of the box. 
+
+<TracksCTA/>

@@ -153,4 +153,4 @@ The benefit of the backend is that you donâ€™t have to call `reset()` when youâ€
 
 This should give you a better understanding of how you need to implement frontend vs backend group analytics. From here, you can utilize your group analytics to [view groups and their properties](/manual/group-analytics#viewing-groups-and-their-properties), [analyze group insights](/manual/group-analytics#analyzing-group-insights), and [setup group feature flags](/manual/group-analytics#integrating-groups-with-feature-flags). 
 
-<NewsletterTutorial compact/>
+<TracksCTA/>

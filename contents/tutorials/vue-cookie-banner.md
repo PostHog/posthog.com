@@ -296,3 +296,5 @@ Once we’ve done that, our cookie consent banner is fully functional. Try it ou
 - [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
 - [Building a tracking cookies consent banner in React](/tutorials/react-cookie-banner)
 - [PostHog for VueJS users – a code-snippet walkthrough](/tutorials/posthog-for-vuejs)
+
+<TracksCTA/>

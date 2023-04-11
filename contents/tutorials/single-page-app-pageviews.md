@@ -303,4 +303,4 @@ We can also track more events than just pageviews. The [event tracking guide](ht
 
 For more advanced PostHog users, you can use all of your new pageview data to help you build [an AARRR dashboard](https://posthog.com/blog/aarrr-pirate-funnel).
 
-<NewsletterTutorial compact/>
+<TracksCTA/>

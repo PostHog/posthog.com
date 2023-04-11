@@ -146,3 +146,5 @@ This is useful if you want to record specific parts or paths on a page such as:
 - [How to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
 - [How to use session recordings to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
 - [How to use session recordings to improve your support experience](/tutorials/session-recordings-for-support)
+
+<TracksCTA/>

@@ -92,4 +92,4 @@ This effectively makes it a third-party cookie, which many browsers, sites, and 
 - [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
 - [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
 
-<NewsletterTutorial compact/>
+<TracksCTA/>

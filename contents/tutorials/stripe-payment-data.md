@@ -67,3 +67,5 @@ If you’re interested in learning more about churn rate, check out our tutorial
 If you need more help building our funnels for conversion, see our tutorial on [analyzing your conversion with funnels](/tutorials/funnels).
 
 Finally, if you’re looking for more inspiration for metrics you can track in your business see our tutorial on [B2B metrics](/tutorials/metrics-tutorial) or [how our marketing team uses PostHog](/blog/posthog-marketing).
+
+<TracksCTA/>

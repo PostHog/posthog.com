@@ -267,3 +267,5 @@ Now, when you refresh the page, the call to action loads faster.
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 - [How to run Experiments without feature flags](/tutorials/experiments)
 - [Building and measuring a sign up funnel with Next.js, Supabase, and PostHog](/tutorials/nextjs-supabase-signup-funnel)
+
+<TracksCTA/>

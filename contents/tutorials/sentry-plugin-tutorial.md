@@ -54,4 +54,4 @@ For example, you can jump directly from an error in Sentry to a view of the spec
 
 There are many other ways to explore ```$exception``` events sent by Sentry and debug errors using tools such as [Funnels](/docs/user-guides/funnels), [Cohorts](/docs/user-guides/cohorts), [Lifecycle](/docs/user-guides/lifecycle) and more. [Check the docs for more ideas and inspiration](/docs)!
 
-<NewsletterTutorial compact/>
+<TracksCTA/>

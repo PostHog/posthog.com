@@ -79,3 +79,5 @@ In either case, you can filter recordings using the date and time controls at th
 Session recordings in PostHog are powerful tool for users such as support engineers, product designers and product managers who need context on the details of user behavior. 
 
 To find out more about session recordings, including how to [prevent PostHog from capturing sensitive user information](/manual/recordings#ignoring-sensitive-elements), check [the session recording docs](/manual/recordings). 
+
+<TracksCTA/>

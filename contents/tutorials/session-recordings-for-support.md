@@ -120,3 +120,5 @@ Doing this enables you to further improve the support experience for users, espe
 - [How to use filters + session recordings to understand user friction](/tutorials/filter-session-recordings)
 - [How to correlate errors with product performance using Sentry](/tutorials/sentry-plugin-tutorial)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+
+<TracksCTA/>

@@ -104,4 +104,4 @@ The ultimate goal of performance marketing is to help you make more money and gr
 - [How to calculate and lower churn rate](/tutorials/churn-rate)
 - [How to build, analyze and optimize conversion funnels](/tutorials/funnels)
 
-<NewsletterTutorial compact/>
+<TracksCTA/>

@@ -195,4 +195,4 @@ For more inspiration, we recommend reading our guide [building an AARRR pirate f
 
 Got a question about anything in this tutorial? Leave a question below, or [join our community Slack](/slack).
 
-<NewsletterTutorial compact/>
+<TracksCTA/>
