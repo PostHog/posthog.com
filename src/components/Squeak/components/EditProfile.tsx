@@ -135,6 +135,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
 
     const avatar = getAvatarURL(user?.profile)
 
+    // TODO: Move this logic into the useUser hook
     const handleSubmit = async ({ avatar, ...values }, { setSubmitting }) => {
         setSubmitting(true)
         const JWT = await getJwt()

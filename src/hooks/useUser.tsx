@@ -11,7 +11,7 @@ export type User = {
     blocked: boolean
     confirmed: boolean
     createdAt: string
-    provider: 'email' | 'github' | 'google'
+    provider: 'local' | 'github' | 'google'
     username: string
     profile: StrapiRecord<ProfileData>
 }
@@ -20,16 +20,26 @@ type UserContextValue = {
     isLoading: boolean
 
     user: User | null
+    // TODO: We shouldn't exposed the setUser action directly, instead we should expose methods that call this internally
+    setUser: React.Dispatch<React.SetStateAction<User | null>>
 
     getJwt: () => Promise<string | null>
-    login: (args: { email: string; password: string }) => Promise<User | null>
+    login: (args: { email: string; password: string }) => Promise<User | null | { error: string }>
     logout: () => Promise<void>
-    signUp: (args: { email: string; password: string; firstName: string; lastName: string }) => Promise<User | null>
+    signUp: (args: {
+        email: string
+        password: string
+        firstName: string
+        lastName: string
+    }) => Promise<User | null | { error: string }>
 }
 
 export const UserContext = createContext<UserContextValue>({
     isLoading: true,
     user: null,
+    setUser: () => {
+        // noop
+    },
 
     getJwt: async () => null,
     login: async () => null,
@@ -57,11 +67,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             setUser(JSON.parse(user))
         } else {
             // We shouldn't have a jwt without a user or vice versa. If we do, clear both and reset.
-            setJwt(null)
-            setUser(null)
-
-            localStorage.removeItem('jwt')
-            localStorage.removeItem('user')
+            logout()
         }
     }, [])
 
@@ -96,39 +102,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 return { error: userData?.error?.message }
             }
 
-            const meQuery = qs.stringify(
-                {
-                    populate: {
-                        profile: {
-                            populate: ['avatar'],
-                        },
-                    },
-                },
-                {
-                    encodeValuesOnly: true,
-                }
-            )
-
-            const meRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?${meQuery}`, {
-                headers: {
-                    Authorization: `Bearer ${userData.jwt}`,
-                },
-            })
-
-            if (!meRes.ok) {
-                throw new Error('Failed to fetch profile data')
-            }
-
-            const meData = await meRes.json()
-
-            const user: User = {
-                ...userData.user,
-                profile: meData?.profile,
-            }
+            await fetchUser(userData.jwt)
 
             localStorage.setItem('jwt', userData.jwt)
-
-            setUser(user)
             setJwt(userData.jwt)
 
             return user
@@ -180,23 +156,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 return { error: userData?.error?.message }
             }
 
-            const meData = await fetch(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?populate[profile][populate][0]=avatar`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${userData.jwt}`,
-                    },
-                }
-            ).then((res) => res.json())
-
-            const user: User = {
-                ...userData.user,
-                profile: meData?.profile,
-            }
+            await fetchUser(userData.jwt)
 
             localStorage.setItem('jwt', userData.jwt)
-
-            setUser(user)
             setJwt(userData.jwt)
 
             return user
@@ -204,6 +166,41 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             console.error(error)
             return null
         }
+    }
+
+    const fetchUser = async (token?: string | null): Promise<User | null> => {
+        const meQuery = qs.stringify(
+            {
+                populate: {
+                    profile: {
+                        populate: ['avatar'],
+                    },
+                },
+            },
+            {
+                encodeValuesOnly: true,
+            }
+        )
+
+        if (!token) {
+            token = await getJwt()
+        }
+
+        const meRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?${meQuery}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        if (!meRes.ok) {
+            throw new Error('Failed to fetch profile data')
+        }
+
+        const meData: User = await meRes.json()
+
+        setUser(meData)
+
+        return meData
     }
 
     useEffect(() => {
