@@ -20,9 +20,8 @@ type UserContextValue = {
     isLoading: boolean
 
     user: User | null
-    // TODO: We shouldn't exposed the setUser action directly, instead we should expose methods that call this internally
     setUser: React.Dispatch<React.SetStateAction<User | null>>
-
+    fetchUser: (token?: string | null) => Promise<User | null>
     getJwt: () => Promise<string | null>
     login: (args: { email: string; password: string }) => Promise<User | null | { error: string }>
     logout: () => Promise<void>
@@ -40,7 +39,7 @@ export const UserContext = createContext<UserContextValue>({
     setUser: () => {
         // noop
     },
-
+    fetchUser: async () => null,
     getJwt: async () => null,
     login: async () => null,
     logout: async () => {
@@ -208,7 +207,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }, [user])
 
     return (
-        <UserContext.Provider value={{ user, setUser, isLoading, getJwt, login, logout, signUp }}>
+        <UserContext.Provider value={{ user, setUser, isLoading, getJwt, login, logout, signUp, fetchUser }}>
             {children}
         </UserContext.Provider>
     )

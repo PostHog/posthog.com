@@ -127,7 +127,7 @@ function Avatar({ values, setFieldValue }) {
 }
 
 export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
-    const { user, setUser, isLoading, getJwt } = useUser()
+    const { user, fetchUser, isLoading, getJwt } = useUser()
 
     if (!user) return null
 
@@ -176,14 +176,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
 
         setSubmitting(false)
         if (data) {
-            const updatedUser = {
-                ...user,
-                profile: {
-                    id: data?.id,
-                    ...data?.attributes,
-                },
-            }
-            setUser(updatedUser)
+            await fetchUser(JWT)
             onSubmit?.()
         }
     }
