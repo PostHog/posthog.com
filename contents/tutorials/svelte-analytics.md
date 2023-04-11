@@ -1,6 +1,6 @@
 ---
 title: How to set up Svelte analytics, feature flags, and more
-date: 2023-04-06
+date: 2023-04-11
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
