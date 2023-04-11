@@ -121,8 +121,8 @@ Once you have identified which factors are affected your page load times, here a
 
 ### Server and network latency
 * Use a Content Delivery Network (CDN). CDNs cache your static assets across multiple servers around the world, allowing users to access your content from the server closest to them.
-* Implement Load Balancing.
-
+* Fine-tune your load balancer and cache control policies to reduce the number of steps between the browser and your source content.
+* Use compression algorithms like [Gzip](https://www.gnu.org/software/gzip/) or [Brotli](https://www.brotli.org/) to reduce file sizes and API responses.
 
 ## Further reading
 
