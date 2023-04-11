@@ -15,7 +15,8 @@ type AuthenticationProps = {
     buttonText?: Record<string, string>
     showBanner?: boolean
     showProfile?: boolean
-    handleMessageSubmit: (values: any, user: any) => void
+    handleMessageSubmit?: (values: any, user: any) => void
+    onAuth?: () => void
 }
 
 export const Authentication = ({
@@ -26,9 +27,10 @@ export const Authentication = ({
     showBanner = true,
     showProfile = true,
     handleMessageSubmit,
+    onAuth,
 }: AuthenticationProps) => {
     const [view, setView] = useState(initialView)
-    const [message, setMessage] = useState(null)
+    const [message, setMessage] = useState<string | null>(null)
     const containerRef = useRef<HTMLDivElement>(null)
 
     const handleForgotPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -85,10 +87,12 @@ export const Authentication = ({
                                             setMessage={setMessage}
                                             onSubmit={(user) => {
                                                 if (formValues) {
-                                                    handleMessageSubmit(formValues, user)
+                                                    handleMessageSubmit?.(formValues, user)
                                                 } else {
                                                     setParentView?.(null)
                                                 }
+
+                                                onAuth?.()
                                             }}
                                         />
                                     ),
@@ -98,10 +102,12 @@ export const Authentication = ({
                                             setMessage={setMessage}
                                             onSubmit={(user) => {
                                                 if (formValues) {
-                                                    handleMessageSubmit(formValues, user)
+                                                    handleMessageSubmit?.(formValues, user)
                                                 } else {
                                                     setParentView?.(null)
                                                 }
+
+                                                onAuth?.()
                                             }}
                                         />
                                     ),

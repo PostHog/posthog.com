@@ -5,7 +5,7 @@ import { useUser } from 'hooks/useUser'
 type SignInProps = {
     buttonText?: string
     onSubmit?: (user: any) => void
-    setMessage?: (message: string) => void
+    setMessage?: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, setMessage }) => {

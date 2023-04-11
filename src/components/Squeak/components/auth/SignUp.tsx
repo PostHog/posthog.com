@@ -5,7 +5,7 @@ import React from 'react'
 type SignUpProps = {
     buttonText?: string
     onSubmit?: (user: any) => void
-    setMessage?: (message: string) => void
+    setMessage?: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit, setMessage }) => {

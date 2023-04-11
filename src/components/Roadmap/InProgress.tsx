@@ -2,7 +2,7 @@ import { Check, ClosedIssue, OpenIssue, Plus } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React, { useState } from 'react'
 import { IRoadmap } from '.'
-import { SignIn } from 'components/Squeak'
+import { Authentication } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Spinner from 'components/Spinner'
 import { useToast } from '../../hooks/toast'
@@ -46,10 +46,10 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         }
     )
 
-    const { data, mutate } = useSWR<RoadmapSubscriptions | null>(
+    const { data, mutate } = useSWR<RoadmapSubscriptions>(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user?.profile?.id}?${query}`,
-        (url: string) => {
-            if (!user) return null
+        async (url: string) => {
+            if (!user) return { data: { attributes: { roadmapSubscriptions: [] } } }
             return fetch(url).then((r) => r.json())
         }
     )
@@ -59,91 +59,104 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
     const subscribed = roadmapData?.attributes?.roadmapSubscriptions?.data?.some(({ id }) => id === squeakId)
 
     async function subscribe() {
-        if (!user) {
-            setShowAuth(true)
-            return
-        } else if (!roadmapData) {
+        if (!roadmapData) {
             return
         }
 
-        setLoading(true)
-        const token = await getJwt()
+        try {
+            setLoading(true)
+            const token = await getJwt()
 
-        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/subscribe`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-        })
+            if (!token) {
+                setShowAuth(true)
+                return
+            }
 
-        if (res.ok) {
-            setShowAuth(false)
-            addToast({ message: `Subscribed to ${title}. We’ll email you with updates!` })
-            mutate({
-                data: {
-                    id: roadmapData?.id,
-                    attributes: {
-                        roadmapSubscriptions: {
-                            data: [
-                                ...roadmapData?.attributes?.roadmapSubscriptions?.data,
-                                {
-                                    id: props.squeakId,
-                                },
-                            ],
-                        },
-                    },
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/subscribe`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
             })
-        } else {
-            addToast({ error: true, message: 'Whoops! Something went wrong.' })
+
+            if (res.ok) {
+                setShowAuth(false)
+                addToast({ message: `Subscribed to ${title}. We’ll email you with updates!` })
+                mutate({
+                    data: {
+                        id: roadmapData?.id,
+                        attributes: {
+                            roadmapSubscriptions: {
+                                data: [
+                                    ...roadmapData?.attributes?.roadmapSubscriptions?.data,
+                                    {
+                                        id: props.squeakId,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                })
+            } else {
+                addToast({ error: true, message: 'Whoops! Something went wrong.' })
+            }
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setLoading(false)
         }
-        setLoading(false)
     }
 
     async function unsubscribe() {
-        if (!user) {
-            setShowAuth(true)
-            return
-        } else if (!roadmapData) {
-            return
-        }
+        try {
+            if (!roadmapData) {
+                return
+            }
 
-        setLoading(true)
-        const token = await getJwt()
+            setLoading(true)
+            const token = await getJwt()
 
-        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/unsubscribe`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-        })
+            if (!token) {
+                setShowAuth(true)
+                return
+            }
 
-        if (res.ok) {
-            setShowAuth(false)
-            addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
-            mutate({
-                data: {
-                    id: roadmapData?.id,
-                    attributes: {
-                        roadmapSubscriptions: {
-                            data: roadmapData?.attributes?.roadmapSubscriptions?.data.filter(
-                                ({ id }) => id !== props.squeakId
-                            ),
-                        },
-                    },
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/unsubscribe`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
             })
-        } else {
-            addToast({ error: true, message: 'Whoops! Something went wrong.' })
-        }
 
-        setLoading(false)
+            if (res.ok) {
+                setShowAuth(false)
+                addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
+                mutate({
+                    data: {
+                        id: roadmapData?.id,
+                        attributes: {
+                            roadmapSubscriptions: {
+                                data: roadmapData?.attributes?.roadmapSubscriptions?.data.filter(
+                                    ({ id }) => id !== props.squeakId
+                                ),
+                            },
+                        },
+                    },
+                })
+            } else {
+                addToast({ error: true, message: 'Whoops! Something went wrong.' })
+            }
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -220,7 +233,12 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                                 </p>
                             </div>
 
-                            <SignIn onSubmit={(data: { email: string }) => subscribe()} />
+                            <Authentication
+                                initialView="sign-in"
+                                onAuth={() => subscribe()}
+                                showBanner={false}
+                                showProfile={false}
+                            />
                         </>
                     ) : (
                         <button
