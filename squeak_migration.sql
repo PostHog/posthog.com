@@ -213,3 +213,23 @@ FROM squeak_messages WHERE organization_id='a898bcf2-c5b9-4039-82a0-a00220a8c626
 
 -- Set all user roles to 'Authenticated'
 SELECT id AS user_id, 1 AS role_id FROM up_users;
+
+
+
+-- Miscellaneous
+
+-- Ensure all questions have profiles
+SELECT * FROM squeak_messages WHERE profile_id IS NULL;
+
+UPDATE squeak_messages AS sm SET
+    profile_id = qs.profile_id
+FROM (SELECT squeak_messages.id AS id,
+             sr.profile_id      AS profile_id
+      FROM squeak_messages
+               INNER JOIN (SELECT *,
+                                  rank() OVER (PARTITION BY message_id ORDER BY created_at ASC) rank
+                           FROM squeak_replies
+                           WHERE organization_id = 'a898bcf2-c5b9-4039-82a0-a00220a8c626') sr
+                          on squeak_messages.id = sr.message_id
+      WHERE squeak_messages.profile_id IS NULL
+        AND rank = 1) qs WHERE qs.id = sm.id;
