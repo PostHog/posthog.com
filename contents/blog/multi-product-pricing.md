@@ -12,25 +12,23 @@ featuredImageType: full
 category: CEO diaries
 ---
 
-PostHog started as a single product company. We just sold product analytics with a bunch of large extra features thrown in - session replay, feature flagging, experimentation, and even a Customer Data Platform.
+PostHog started as a single product company. We just sold product analytics with a bunch of large extra features thrown in – session replay, feature flagging, experimentation, and even a Customer Data Platform.
 
-We charged by event ingested. Obviously, we wound up with abuse - a handful of high volume users would send zero events, but would use our Javascript snippet to do just session replay, to store _millions_ of recordings.
+We charged by event ingested. Obviously, we wound up with abuse – a handful of high volume users would send zero events, but would use our Javascript snippet to do just session replay, to store _millions_ of recordings.
 
 We decided a multi product pricing strategy had long term advantages, and - to be frank - we had to stop people abusing recording, and we didn't want to limit it for users already paying us a healthy amount.
 
 ## It's a way to take extra products seriously
 
-The most important thing, but the one we didn't anticipate, was charging for session recording very quickly led to more usage.
+The most important thing, but the one we didn't anticipate, was charging for session replay very quickly led to more usage.
 
-Eh? 
+Why? Positioning. 
 
-Positioning. If you see two products listed side-by-side on a website, you know each is being treated as a first class citizen. Beforehand, we were "product analytics++". That meant no one was taking our session replay feature seriously.
+If you see two products listed side-by-side on a website, you know each is being treated as a first-class citizen. Beforehand, we were "product analytics++". That meant no one was taking our session replay feature seriously.
 
 The moment we started charging, more users realized the feature existed, the more seriously they took it, and the more demanding their feedback. Paying users are less bug tolerant!
 
-We put a small team on it, who quickly iterated with customers and improved the quality.
-
-Growth of session replay took off - it now has similar daily usage to product analytics.
+We put a small team on it, who quickly iterated with customers and improved the product. Session replay took off as a result – it now has similar daily usage to product analytics.
 
 ## Focusing on paying customers can improve the free product
 
@@ -40,7 +38,7 @@ However, the secondary effect we didn't anticipate is that fixing the smaller is
 
 As context, PostHog spent the first year and a half prioritizing our open source project - we wanted to build an inbound sales model, so we could double down on product rather than investing in cold calling. Leverage, baby. This meant we'd need a great free product and a reasonably large community. After 18 months, we were ready to focus on our first paid product - product analytics.
 
-Our only company goal at this point was to get 5 reference, paying customers. By going really deep with this handful, we realized that we needed to improve our funnel experience - a core part of our product. We '[nailed funnels](new-vp-nailing-funnels)', and revenue started climbing as a result. However, delightfully, our _free_ user numbers also started growing much faster.
+Our only company goal at this point was to get 5 reference, paying customers. By going really deep with this handful, we realized that we needed to improve our funnel experience – a core part of our product. We '[nailed funnels](new-vp-nailing-funnels)', and revenue started climbing as a result. However, delightfully, our _free_ user numbers also started growing much faster.
 
 This journey has since repeated itself with session recording. We have a small team of 2 working on this product, and we set them the goal in Q4 last year of charging for their product and getting their first paying customers. Since the free and paid session recording products are the same, except for a usage limit with the free product, focusing on more-demanding, paid users led to similar quality improvements. 
 
@@ -66,8 +64,10 @@ Our pricing plans feed into this. In the long run, we want each small team to ha
 
 We charged for session recording in December. By March, it was 10% of our revenue. Most of the users paying are new.
 
-That sounds good, but in absolute terms - we'd get double the revenue from it with the same engineering input if we were twice the size when we launched it. As we get bigger and we ship more products, each one will get more traction with the same cost to deliver it. And, in fact, each new product brings us more top-of funnel growth - since it means there are more reasons for people to find PostHog in the first place.
+That sounds good but, in absolute terms, we'd get double the revenue from it with the same engineering input if we were twice the size when we launched it. 
 
-## What's the catch
+As we get bigger and we ship more products, each one will get more traction with the same cost to deliver it. And, in fact, each new product brings us more top-of funnel growth – since it means there are more reasons for people to find PostHog in the first place.
 
-We have a hideously complex internal billing and reporting system. We knew it'd need to be hyperflexible to cope with a wide range of differently-structured pricing mechanisms hence the decision to build it. We keep adding more functionality into it. Send help! We'd love any recommendations you may have. We know usage based pricing is becoming much more normal, thankfully.
+## What's the catch?
+
+We have a hideously complex internal billing and reporting system – it needs to be hyper-flexible to cope with a wide range of differently-structured pricing mechanisms, hence the decision to build it. We keep adding more functionality into it. Send help! We'd love any recommendations you may have. We know usage based pricing is becoming much more normal, thankfully.
