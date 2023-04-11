@@ -211,6 +211,9 @@ SELECT
     'slugs' AS field
 FROM squeak_messages WHERE organization_id='a898bcf2-c5b9-4039-82a0-a00220a8c626';
 
+-- Import connections between questions and resolutions
+SELECT id AS question_id, resolved_reply_id AS reply_id FROM squeak_messages WHERE resolved_reply_id IS NOT NULL AND organization_id = 'a898bcf2-c5b9-4039-82a0-a00220a8c626';
+
 -- Set all user roles to 'Authenticated'
 SELECT id AS user_id, 1 AS role_id FROM up_users;
 
@@ -233,3 +236,15 @@ FROM (SELECT squeak_messages.id AS id,
                           on squeak_messages.id = sr.message_id
       WHERE squeak_messages.profile_id IS NULL
         AND rank = 1) qs WHERE qs.id = sm.id;
+
+
+-- Ensure all questions marked as 'resolved' have a corresponding reply
+UPDATE questions SET resolved = false
+WHERE questions.id IN (
+    SELECT questions.id AS id
+    FROM questions
+    LEFT JOIN questions_resolved_by_links qrbl on questions.id = qrbl.question_id
+    WHERE resolved = True AND qrbl.reply_id IS NULL
+);
+
+
