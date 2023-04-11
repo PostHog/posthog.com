@@ -39,7 +39,13 @@ Our only company goal at this point was to get 5 reference, paying customers. By
 This journey has since repeated itself with session recording. We have a small team of 2 working on this product, and we set them the goal in Q4 last year of charging for their product and getting their first paying customers. Since the free and paid session recording products are the same, except for a usage limit with the free product, focusing on more-demanding, paid users led to similar quality improvements. 
 
 And, better yet, it's very easy to justify making improvements for paying customers, since it's long-term sustainable.
+## 3. It gives our small teams more autonomy
 
+One of the core learnings we've already had is that a small team structure suits a multi-product approach really well. The concept is a small, multi-disciplinary team should be able to ship into production with as little outside interference as possible. Each team is designed to work like a startup. 
+
+Our reasoning? If we want a wide product, we need to optimize for speed over control... and startups get the most functionality built per person. You won't manage to compete on both _polish_ via controlling a team more tightly _and_ being wider at the same time, which requires autonomy.
+
+Our pricing plans feed into this. In the long run, we want each small team to have control over their pricing – they've got all the user context after all, and they can get some coaching on how to do this from others in the company if needed.
 ## Our current thining - outcompeting on price, sustainably
 
 Do you want to buy 5 individual products at $10 each, or all 5 for $20?
