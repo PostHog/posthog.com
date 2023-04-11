@@ -1,6 +1,6 @@
 ---
 date: 2023-04-04
-title: What we've learned so far about multi product pricing, and our future plans
+title: What we've learned about multi-product pricing (so far)
 rootPage: /blog
 sidebar: Blog
 showTitle: true
