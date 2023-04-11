@@ -29,7 +29,7 @@ interface ITeam {
 }
 
 export interface IRoadmap {
-    squeakId: BigInt
+    squeakId: number
     title: string
     description: string
     betaAvailable: boolean

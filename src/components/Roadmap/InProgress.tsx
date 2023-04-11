@@ -1,24 +1,73 @@
 import { Check, ClosedIssue, OpenIssue, Plus } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { IRoadmap } from '.'
 import { SignIn } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Spinner from 'components/Spinner'
 import { useToast } from '../../hooks/toast'
+import useSWR from 'swr'
+import qs from 'qs'
+
+type RoadmapSubscriptions = {
+    data: {
+        id: number
+        attributes: {
+            roadmapSubscriptions: {
+                data: {
+                    id: number
+                }[]
+            }
+        }
+    }
+}
 
 export function InProgress(props: IRoadmap & { className?: string; more?: boolean; stacked?: boolean }) {
     const { addToast } = useToast()
     const { user, getJwt } = useUser()
     const [more, setMore] = useState(props.more ?? false)
     const [showAuth, setShowAuth] = useState(false)
-    const [subscribed, setSubscribed] = useState(false)
     const [loading, setLoading] = useState(false)
     const { title, githubPages, description, betaAvailable, image, squeakId } = props
     const completedIssues = githubPages && githubPages?.filter((page) => page.closed_at)
     const percentageComplete = githubPages && Math.round((completedIssues.length / githubPages?.length) * 100)
 
-    async function subscribe(email: string) {
+    const query = qs.stringify(
+        {
+            fields: ['id'],
+            populate: {
+                roadmapSubscriptions: {
+                    fields: ['id'],
+                },
+            },
+        },
+        {
+            encodeValuesOnly: true, // prettify URL
+        }
+    )
+
+    const { data, mutate } = useSWR<RoadmapSubscriptions | null>(
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user?.profile?.id}?${query}`,
+        (url: string) => {
+            if (!user) return null
+            return fetch(url).then((r) => r.json())
+        }
+    )
+
+    const { data: roadmapData } = data || {}
+
+    console.log(squeakId)
+    console.log('roadmapData', roadmapData)
+    const subscribed = roadmapData?.attributes?.roadmapSubscriptions?.data?.some(({ id }) => id === squeakId)
+
+    async function subscribe() {
+        if (!user) {
+            setShowAuth(true)
+            return
+        } else if (!roadmapData) {
+            return
+        }
+
         setLoading(true)
         const token = await getJwt()
 
@@ -33,9 +82,23 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         })
 
         if (res.ok) {
-            setSubscribed(true)
             setShowAuth(false)
             addToast({ message: `Subscribed to ${title}. We’ll email you with updates!` })
+            mutate({
+                data: {
+                    id: roadmapData?.id,
+                    attributes: {
+                        roadmapSubscriptions: {
+                            data: [
+                                ...roadmapData?.attributes?.roadmapSubscriptions?.data,
+                                {
+                                    id: props.squeakId,
+                                },
+                            ],
+                        },
+                    },
+                },
+            })
         } else {
             addToast({ error: true, message: 'Whoops! Something went wrong.' })
         }
@@ -43,6 +106,13 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
     }
 
     async function unsubscribe() {
+        if (!user) {
+            setShowAuth(true)
+            return
+        } else if (!roadmapData) {
+            return
+        }
+
         setLoading(true)
         const token = await getJwt()
 
@@ -57,21 +127,26 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         })
 
         if (res.ok) {
-            setSubscribed(false)
             setShowAuth(false)
             addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
+            mutate({
+                data: {
+                    id: roadmapData?.id,
+                    attributes: {
+                        roadmapSubscriptions: {
+                            data: roadmapData?.attributes?.roadmapSubscriptions?.data.filter(
+                                ({ id }) => id !== props.squeakId
+                            ),
+                        },
+                    },
+                },
+            })
         } else {
             addToast({ error: true, message: 'Whoops! Something went wrong.' })
         }
 
         setLoading(false)
     }
-
-    useEffect(() => {
-        if (user) {
-            setSubscribed(user?.profile?.subscriptions?.some((sub) => sub?.id === squeakId))
-        }
-    }, [user])
 
     return (
         <li
@@ -98,6 +173,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     </div>
                 )}
             </div>
+
             {githubPages && (
                 <div className="mt-4 mb-4">
                     <h5 className="text-sm mb-2 font-semibold opacity-60 !mt-0">Progress</h5>
@@ -109,6 +185,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     </div>
                 </div>
             )}
+
             {githubPages && more && (
                 <ul className="list-none m-0 p-0 pb-4 grid gap-y-2 mt-4">
                     {githubPages.map((page) => {
@@ -128,6 +205,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     })}
                 </ul>
             )}
+
             <div className="sm:flex-[0_0_250px] xl:flex-1 flex sm:justify-end xl:justify-start">
                 <div className="mt-2 w-full">
                     {showAuth ? (
@@ -144,12 +222,12 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                                 </p>
                             </div>
 
-                            <SignIn onSubmit={(data: { email: string }) => subscribe(data?.email)} />
+                            <SignIn onSubmit={(data: { email: string }) => subscribe()} />
                         </>
                     ) : (
                         <button
                             disabled={loading}
-                            onClick={() => (subscribed ? unsubscribe(user?.email) : subscribe(user?.email))}
+                            onClick={() => (subscribed ? unsubscribe() : subscribe())}
                             className="text-[15px] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold active:top-[0.5px] active:scale-[.98] w-auto"
                         >
                             <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
