@@ -10,13 +10,13 @@ tags: ["configuration", "feature flags", "persons", "events"]
 
 Svelte is a popular frontend JavaScript framework, similar to [Next.js](/tutorials/nextjs-analytics) and [Vue](/tutorials/posthog-for-vuejs). Svelte shifts much of the work for processing the app from the browser, to a compile step when you build your app.
 
-In this tutorial, we build a basic Svelte blog app with user authentication, add PostHog, and set up the features of PostHog including custom event capture, session recordings, user identification, feature flags, and more.
+In this tutorial, we'll build a basic Svelte blog app with user authentication, add PostHog, and set up the features of PostHog including custom event capture, session recordings, user identification, feature flags, and more.
 
 > Already built a Svelte app you want to add PostHog to? [Skip the app creation and go straight to the PostHog setup.](#adding-posthog)
 
 ## Creating our Svelte app
 
-First, we create a Svelte app using the `npm create` command. When prompted in the command line, chose `Skeleton project`, no type checking, and none of the additional options.
+First, we need to create a Svelte app using the `npm create` command. When prompted in the command line, choose `Skeleton project`, no type checking, and none of the additional options.
 
 ```bash
 npm create svelte@latest my-app
@@ -136,7 +136,7 @@ Next, we want to set up user authentication in our app so we can showcase user i
 npm i @auth/sveltekit @auth/core
 ```
 
-Next, in the `src` folder, create a `hooks.server.js` file to set up `SvelteKitAuth`. We use the GitHub authentication provider, but Auth.js comes with [many options](https://next-auth.js.org/configuration/providers/oauth).
+Next, in the `src` folder, create a `hooks.server.js` file to set up `SvelteKitAuth`. We'll use the GitHub authentication provider, but Auth.js comes with [many options](https://next-auth.js.org/configuration/providers/oauth).
 
 ```js
 // src/hooks.server.js
@@ -152,7 +152,7 @@ export const handle = SvelteKitAuth({
 
 To fill out all the secrets we use in this file, we need a GitHub OAuth app. To do this, go to your [developer settings in GitHub](https://github.com/settings/developers) and create a "New OAuth app." Choose a name, set your homepage URL to `http://127.0.0.1:5173/`, set your callback URL to `http://127.0.0.1:5173/auth/callback/github`, and click register application. 
 
-Keep the application creation page open and head back to your app. In the base `my-app` folder, create a `.env` file. In this file, add the Client ID and Client secret (you generated) from GitHub as well as an Auth secret (a 32-character string, [you can generate one here](https://generate-secret.vercel.app/32)). Once done, your .`env` file should look like this:
+Keep the application creation page open and head back to your app. In the base `my-app` folder, create a `.env` file. In this file, add the Client ID and Client secret you generated from GitHub as well as an Auth secret (a 32-character string, [you can generate one here](https://generate-secret.vercel.app/32)). Once done, your .`env` file should look like this:
 
 ```
 GITHUB_ID=c6c022a4494ecf3fef0d (from GitHub Client ID)
@@ -252,7 +252,7 @@ We can set this up by creating one more file, a `+layout.svelte` file in `src/ro
 <slot></slot>
 ```
 
-Once we save this, now when we navigate between pages, we get pageviews for each of them.
+Save this. Now when we navigate between pages, we get pageviews for each of them.
 
 ![Pageviews](../images/tutorials/svelte-analytics/pageviews.png)
 
