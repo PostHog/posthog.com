@@ -46,7 +46,7 @@ One of the core learnings we've already had is that a small team structure suits
 Our reasoning? If we want a wide product, we need to optimize for speed over control... and startups get the most functionality built per person. You won't manage to compete on both _polish_ via controlling a team more tightly _and_ being wider at the same time, which requires autonomy.
 
 Our pricing plans feed into this. In the long run, we want each small team to have control over their pricing – they've got all the user context after all, and they can get some coaching on how to do this from others in the company if needed.
-## Our current thining - outcompeting on price, sustainably
+## 4. It allows us to compete on price sustainably
 
 Do you want to buy 5 individual products at $10 each, or all 5 for $20?
 
@@ -54,7 +54,7 @@ Charging by product means you can outcompete all of your competitors on price.
 
 To get to this point, we're starting to build data on cross-selling to know that we'd get it right, so we'll figure that out over the next year and hopefully will be able to lower prices as a result.
 
-If you're thinking about applying this concept to your business, success depends on where in the market you focus (you need to be able to sell more to the same users, ideally - to avoid a complex sales motion) and how price sensitive they are. If people don't care about price in your market, there's no point either.
+If you're thinking about applying this concept to your business, success depends on where in the market you focus (you need to be able to sell more to the same users to avoid a complex sales motion) and how price sensitive they are. If people don't care about price in your market, there's no point either.
 
 ## More autonomy for small teams
 
