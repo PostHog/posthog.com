@@ -61,11 +61,10 @@ Now that we have some payment data, we can start to develop some insights and tr
 With some of those set up, you’ve setup Stripe and PostHog to combine product analytics with payment data. PostHog’s full suite of product tools offers you many more options for what to do with this data.
 
 ## Further reading
-
-If you’re interested in learning more about churn rate, check out our tutorial on [how to calculate and lower churn rate](/tutorials/churn-rate).
-
-If you need more help building our funnels for conversion, see our tutorial on [analyzing your conversion with funnels](/tutorials/funnels).
-
-Finally, if you’re looking for more inspiration for metrics you can track in your business see our tutorial on [B2B metrics](/tutorials/metrics-tutorial) or [how our marketing team uses PostHog](/blog/posthog-marketing).
+<TutorialsSlider slugs={[
+  "/tutorials/churn-rate",
+  "/tutorials/funnels",
+  "/tutorials/metrics-tutorial"
+]} />
 
 <TracksCTA/>

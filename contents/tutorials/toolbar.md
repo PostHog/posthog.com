@@ -214,4 +214,10 @@ Or in the same modal, click "Edit the selector" to use our element picker to bui
 - [How to build, analyze and optimize conversion funnels](/tutorials/funnels)
 - [B2B product metrics 101](/blog/b2b-saas-product-metrics)
 
+<TutorialsSlider slugs={[
+  "/tutorials/experiments",
+  "/tutorials/funnels",
+  "/blog/b2b-saas-product-metrics"
+]} />
+
 <TracksCTA/>

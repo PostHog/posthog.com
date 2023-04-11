@@ -71,4 +71,10 @@ At PostHog, we use path cleaning rules for both our person and session recording
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
 
+<TutorialsSlider slugs={[
+  "/tutorials/new-user-experiments",
+  "/tutorials/non-technical-guide-to-data",
+  "/tutorials/session-metrics"
+]} />
+
 <TracksCTA/>

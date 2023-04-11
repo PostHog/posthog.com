@@ -116,9 +116,10 @@ Once set up, this creates exception events with the properties `Sentry URL` (wit
 Doing this enables you to further improve the support experience for users, especially technical ones. It speeds up the debugging and triaging process for your team, giving you data and details on what is going wrong. Ultimately, it enables the product to be continually improved and fixed faster, which leads to a higher quality overall product.
 
 ## Further reading
-
-- [How to use filters + session recordings to understand user friction](/tutorials/filter-session-recordings)
-- [How to correlate errors with product performance using Sentry](/tutorials/sentry-plugin-tutorial)
-- [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+<TutorialsSlider slugs={[
+  "/tutorials/filter-session-recordings",
+  "/tutorials/sentry-plugin-tutorial",
+  "/tutorials/non-technical-guide-to-data"
+]} />
 
 <TracksCTA/>

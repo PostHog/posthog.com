@@ -167,9 +167,10 @@ Read more about setting up and using experiments in [our product manual](/manual
 
 ## Further reading
 
-- [The full documentation on the PostHog JavaScript SDK](/docs/integrate/client/js)
-- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
-- [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
+<TutorialsSlider slugs={[
+  "/tutorials/nextjs-analytics",
+  "/tutorials/event-tracking-guide",
+  "/tutorials/nextjs-analytics"
+]} />
 
 <TracksCTA/>

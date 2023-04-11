@@ -68,12 +68,11 @@ A “real” useful case is watching session recordings of parts of the site you
 Once you’ve done this, you’ve proved you can use the data, structures, and filters PostHog provides to gain insights about the usage of your product. You’ve accomplished the goals we set out at the beginning, and can expand your usage of PostHog to make full use of our tools.
 
 ## Further reading
-
-One of the first actions you’ll want to take after building knowledge of data in PostHog is building visualizations (we call them **insights**). Luckily, we have many tutorials to help you with this. Here are some recommendations:
-
-- [Building an AARRR pirate funnel (how and why)](/blog/aarrr-pirate-funnel)
-- [How to calculate and lower churn rate](/tutorials/churn-rate)
-- [How to build, analyze and optimize conversion funnels](/tutorials/funnels)
-- [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
+<TutorialsSlider slugs={[
+  "/blog/aarrr-pirate-funnel",
+  "/tutorials/churn-rate",
+  "/tutorials/funnels",
+  "/tutorials/session-metrics"
+]} />
 
 <TracksCTA/>
