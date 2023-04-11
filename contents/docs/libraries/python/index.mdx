@@ -229,6 +229,15 @@ posthog.get_all_flags('distinct id', groups={}, person_properties={'is_authorize
 # returns dict of flag key and value pairs.
 ```
 
+#### Feature Flag Payloads
+
+Payloads allow you to retrieve a value that is associated with the matched flag. The value can be a
+string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app.
+
+```python
+posthog.get_feature_flag_payload('feature-flag-key', 'distinct id')
+```
+
 #### Local Evaluation
 
 > **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
