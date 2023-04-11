@@ -1,23 +1,23 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import { CardContainer, IRoadmap } from 'components/Roadmap'
 import { InProgress } from 'components/Roadmap/InProgress'
 import Link from 'components/Link'
+import { useRoadmap } from 'hooks/useRoadmap'
 
 export default function TeamRoadmap({ team }: { team?: string }) {
-    const {
-        allSqueakRoadmap: { nodes },
-    } = useStaticQuery(query)
+    const teams = useRoadmap()
 
-    const roadmap = team ? nodes.filter((node: IRoadmap) => node?.team?.name === team) : nodes
+    const roadmaps = teams.find((t) => t.name === team)?.roadmaps || []
 
-    return roadmap?.length <= 0 ? (
+    const futureRoadmaps = roadmaps.filter((r) => r.projectedCompletion && !r.complete)
+
+    return futureRoadmaps.length <= 0 ? (
         <p className="!m-0 py-4 px-6 border border-dashed border-gray-accent-light dark:border-gray-accent-dark rounded-md">
             Check out the <Link to="/roadmap">company roadmap</Link> to see what we're working on next!
         </p>
     ) : (
         <CardContainer>
-            {roadmap?.map((node: IRoadmap) => {
+            {futureRoadmaps?.map((node: IRoadmap) => {
                 return (
                     <InProgress
                         more
@@ -30,37 +30,3 @@ export default function TeamRoadmap({ team }: { team?: string }) {
         </CardContainer>
     )
 }
-
-const query = graphql`
-    {
-        allSqueakRoadmap(filter: { complete: { ne: true }, projectedCompletion: { ne: null } }) {
-            nodes {
-                betaAvailable
-                complete
-                dateCompleted
-                title
-                description
-                teams {
-                    name
-                }
-                image {
-                    url
-                }
-                githubPages {
-                    title
-                    html_url
-                    number
-                    closed_at
-                    reactions {
-                        hooray
-                        heart
-                        eyes
-                        plus1
-                        minus1
-                    }
-                }
-                projectedCompletion
-            }
-        }
-    }
-`
