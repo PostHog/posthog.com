@@ -57,7 +57,7 @@ To get to this point, we're starting to build data on cross-selling to know that
 If you're thinking about applying this concept to your business, success depends on where in the market you focus (you need to be able to sell more to the same users to avoid a complex sales motion) and how price sensitive they are. If people don't care about price in your market, there's no point either.
 
 
-## Long term it's a clever way to scale exponentially, we think
+## 5. It's a clever way to scale exponentially (we think)
 
 We charged for session recording in December. By March, it was 10% of our revenue. Most of the users paying are new.
 
