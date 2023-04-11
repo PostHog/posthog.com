@@ -26,7 +26,7 @@ Why? Positioning.
 
 If you see two products listed side-by-side on a website, you know each is being treated as a first-class citizen. Beforehand, we were "product analytics++". That meant no one was taking our session replay feature seriously.
 
-The moment we started charging, more users realized the feature existed, the more seriously they took it, and the more demanding their feedback. Paying users are less bug tolerant!
+The moment we started charging, awareness increased. Users took the feature more seriously, and they shared more demanding feedback – paying users are less bug tolerant!
 
 We put a small team on it, who quickly iterated with customers and improved the product. Session replay took off as a result – it now has similar daily usage to product analytics.
 
