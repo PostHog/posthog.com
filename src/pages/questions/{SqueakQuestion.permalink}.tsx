@@ -165,7 +165,6 @@ export const query = graphql`
                 body
                 publishedAt
                 createdAt
-                updatedAt
             }
         }
     }

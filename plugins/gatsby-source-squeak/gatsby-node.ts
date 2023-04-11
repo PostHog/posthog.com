@@ -355,7 +355,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         type SqueakTopicGroup implements Node {
             id: ID!
             squeakId: Int!
-            slug: String!
+            slug: String
             label: String!
             topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
         }
