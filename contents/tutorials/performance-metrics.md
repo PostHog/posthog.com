@@ -28,7 +28,7 @@ Here you'll see all the network requests that are made during the page load and 
 
 We'll go through what each one of these three metrics mean and how to improve them.
 
-## First Contentful Paint
+## 1. First Contentful Paint
 [First Contentful Paint](https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint) (FCP) measures the time from when the page starts loading to when any element of the page's content is rendered on the screen. Note that it does not measure the time it takes the entire page to load.
 
 ![FCP happens in the second frame, as that's when the first text and image elements are rendered to the screen.](https://web-dev.imgix.net/image/admin/3UhlOxRc0j8Vc4DGd4dt.png?auto=format&w=1600)
@@ -44,7 +44,7 @@ Factors that can affect FCP are:
 * Caching, since it can reduce the time it takes to download and render resources.
 *  Network latency
 
-## Dom Interactive
+## 2. Dom Interactive
 [Dom Interactive](https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState) means that all HTML content on the page has been downloaded and parsed and is ready to be manipulated by JavaScript code. However, sub-resources such as scripts, images, stylesheets and frames are still loading. In general, DOM Interactive happens before FCP (since FCP requires the browser to have downloaded and rendered at least some content of the page). Any subsequent changes to the DOM beyond the initial page load also trigger DOM Interactive and thus it can be called multiple times.
 
 Factors affecting DOM Interactive are:
@@ -54,7 +54,7 @@ Factors affecting DOM Interactive are:
 * Third-party scripts.
 * Network latency.
 
-## Page Loaded
+## 3. Page Loaded
 The whole page has [loaded](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) and is ready for the user to interact with it, including all dependent resources such as stylesheets and images. 
 
 While there is no benchmark for what is a good time for Page Loaded, a [good time for Time to Interactive (TTI)]((https://developer.chrome.com/docs/lighthouse/performance/interactive/#how-lighthouse-determines-your-tti-score)), a closely related but more comprehensive metric, is under 3.8 seconds while over 7.3 seconds is considered slow.
