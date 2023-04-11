@@ -450,6 +450,10 @@
                 "name": "Multivariate feature flags",
                 "url": "/docs/feature-flags/multivariate-flags"
             },
+            {
+                "name": "Payloads",
+                "url": "/docs/feature-flags/payloads"
+            },
 
             {
                 "name": "Common questions about feature flags",
