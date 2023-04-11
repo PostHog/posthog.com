@@ -17,33 +17,31 @@ tags:
 
 Both BigQuery and ClickHouse are databases designed to handle lots of data (like *loads* of data), but they have distinct philosophies and use cases.
 
-BigQuery is exceptional at handling complex business queries that can tolerate many-second (sometimes dozens of seconds) loading times. Conversely, with some tuning ClickHouse can deliver sub-second performance on terabytes of data for predictable queries, making it apt for powering customer-facing dashboards and analytics.
+BigQuery is exceptional at handling complex business queries that can tolerate many-second (sometimes dozens of seconds) loading times. Conversely, with some tuning ClickHouse can deliver sub-second performance on terabytes of data for predictable queries, making it ideal for powering customer-facing dashboards and analytics.
 
-In this article, I’ll explain how BigQuery and ClickHouse work under the hood, and how their approaches create very different products and target use-cases. 
+In this article, I’ll explain how BigQuery and ClickHouse work, and how their approaches create very different products and target use-cases. 
 
 ## Background
 
 At first glance, comparing BigQuery and ClickHouse seems like a David versus Goliath situation. 
 
-While they both tackle search and analytics problems, are built on columnar data storage, and are available via managed infrastructure, BigQuery is an established name maintained by one of the infrastructure mob bosses (sorry, I mean *benevolent* *leaders*), while ClickHouse is a relative newcomer and open source one at that.
+While they both tackle search and analytics problems, are built on columnar data storage, and are available via managed infrastructure, BigQuery is an established name maintained by one of the infrastructure mob bosses (sorry, I mean *benevolent leaders*), while ClickHouse is a relative newcomer and an open source one at that.
 
 That said, ClickHouse is exploding in popularity, has a hugely active development community, and is already used by the likes of Spotify, Uber, Cloudflare, and popular analytics platforms like PostHog. Moreover, it has its origins in another big tech player, Yandex.
 
 ### What is ClickHouse?
 
-ClickHouse is a relatively new product, but has its roots in Yandex Metrica (a Google Analytics analog in Russia). Over a decade ago, Yandex Metrica needed to store pentabytes of data targeting sub-second retrieval. This tight constraint served as the bedrock for ClickHouse. In 2016, ClickHouse was spun out into an independent open-source project, and is now actively maintained by ClickHouse Inc. with contributions from Altinity Inc.
+Over a decade ago, Yandex Metrica (a Google Analytics analog in Russia) needed to store pentabytes of data targeting sub-second retrieval. This tight constraint served as the bedrock for ClickHouse. In 2016, ClickHouse was spun out into an independent open-source project, and is now actively maintained by ClickHouse Inc. with contributions from Altinity Inc.
 
-In its stock form, ClickHouse is just a data warehouse. It does not include a user interface nor any stateful management for querying data. Instead, developers directly interface with ClickHouse through the command line or an SDK wrapper library as they would any other database. However, ClickHouse Inc. also develops ClickHouse Cloud, a managed service that runs ClickHouse on the cloud in a style similar to BigQuery. 
+In its stock form, ClickHouse is just a data warehouse. It does not include a user interface, nor any stateful management for querying data. Instead, developers directly interface with ClickHouse through the command line or an SDK wrapper library as they would any other database. However, ClickHouse Inc. also develops ClickHouse Cloud, a managed service that runs ClickHouse on the cloud in a style similar to BigQuery. 
 
-While these managed services are paid products, ClickHouse’s core remains open source. While most literature on ClickHouse focuses on stock ClickHouse, I’ll also compare ClickHouse Cloud directly with BigQuery because they operate on the same decoupled infrastructure pattern. 
-
-That said, ClickHouse is no minnow. It has its own big-tech origins, an actively growing community, and is exploding in popularity thanks to its blazing fast performance.
+While these managed services are paid products, ClickHouse’s core remains open source. Most literature on ClickHouse focuses on stock ClickHouse, but I’ll also compare ClickHouse Cloud directly with BigQuery because they operate on the same decoupled infrastructure pattern. 
 
 ### What is BigQuery?
 
 BigQuery’s claim to fame was its novel way of decoupling storage and compute. Before BigQuery, databases would typically bundle storage and compute in the same box. Targeting reporting and analytical needs, BigQuery enables data engineers to store data without worrying about scaling clusters or storage. 
 
-BigQuery is exclusively available on GCP (Google Cloud Platform) and is tightly integrated with other GCP products. However, BigQuery can also connect to AWS and Azure storage through [BigQuery Omni](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-omni), but that defeats some of BigQuery’s all-in-one value-prop.  
+BigQuery is exclusively available on GCP (Google Cloud Platform) and is tightly integrated with other GCP products. However, BigQuery can also connect to AWS and Azure storage through [BigQuery Omni](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-omni), though that defeats some of BigQuery’s all-in-one value-prop.  
 
 One of the reasons that BigQuery touts a feature-rich and friendly user-interface is to appeal to marketers with some basic SQL skills. While BigQuery isn’t as non-technical friendly as Kibana or Snowflake, it does make using SQL easier by providing a wrap-around GUI with the ability to save progress. Of course, for development purposes, BigQuery can also be accessed via GCP’s command line suite. 
 
@@ -59,7 +57,7 @@ BigQuery extends many Google projects to make this happen. Specifically, BigQuer
 
 ![Google Infra.png](../images/blog/clickhouse-vs-bigquery/google-infra.png)
 
-Amid being built on titanic infrastructure, BigQuery usually returns results in the order of )_seconds_, not _milliseconds_, because it focuses on scalability, not per-query performance. 
+Amid being built on titanic infrastructure, BigQuery usually returns results in the order of _seconds_, not _milliseconds_, because it focuses on scalability, not per-query performance. 
 
 ### ClickHouse’s (Traditional) Architecture
 
@@ -75,7 +73,7 @@ ClickHouse’s magic happens in the way it compresses data, pre-aggregates data,
 
 ### ClickHouse Cloud’s Architecture
 
-ClickHouse Cloud flips ClickHouse’s monolithic architecture on its head. ClickHouse Cloud is ClickHouse Inc.’s paid offering that helps bridge the gap between ClickHouse and BigQuery (immensely). Not only does ClickHouse Cloud provide a UI for interfacing with ClickHouse like BigQuery, it deploys ClickHouse on decoupled storage and compute on AWS. 
+ClickHouse Cloud flips ClickHouse’s monolithic architecture on its head. ClickHouse Cloud is ClickHouse Inc.’s paid offering that helps bridge the gap between ClickHouse and BigQuery. Not only does ClickHouse Cloud provide a UI for interfacing with ClickHouse like BigQuery, it deploys ClickHouse on decoupled storage and compute on AWS. 
 
 ![ClickHouse Cloud Architecture.png](../images/blog/clickhouse-vs-bigquery/clickhouse-cloud-architecture.png)
 
@@ -83,17 +81,15 @@ ClickHouse Cloud is unquestionably modeled after BigQuery and GCP. It offers sim
 
 However, ClickHouse Cloud is still ***not*** a pure replacement for BigQuery. ClickHouse Cloud simply makes managing, scaling, and protecting a ClickHouse instance easy — it does ***not*** alter the way ClickHouse works, including what it is and isn’t good at. 
 
-### Using ClickHouse + GCS
+> **Using ClickHouse + GCS:** It’s worth mentioning that another hybrid architecture exists — ClickHouse + Google Cloud Storage (GCS). Specifically, developers could replace ClickHouse’s in-unit storage with Google Cloud Storage instead. ClickHouse’s [integration with GCS](https://clickhouse.com/docs/en/integrations/gcs) effectively decouples storage and compute, and works great for businesses that already use GCS. 
 
-It’s worth mentioning that another hybrid architecture exists — ClickHouse + Google Cloud Storage (GCS). Specifically, developers could replace ClickHouse’s in-unit storage with Google Cloud Storage instead. ClickHouse’s [integration with GCS](https://clickhouse.com/docs/en/integrations/gcs) effectively decouples storage and compute, and works great for businesses that already use GCS. 
-
-## Why ClickHouse is generally faster
+## Why ClickHouse is faster
 
 Data warehouses like BigQuery and ClickHouse are both used to return analytical queries. Queries might sound like “a list of average revenue for the last four years” or “the median household income”. Not only do these queries change on **every** data insert, but computing lots and lots of numbers can draw a lot of memory and processing power. 
 
-The performance between BigQuery and ClickHouse can be immense. BigQuery can take dozens of seconds to execute a query. ClickHouse, if tuned correctly, can execute the same query on *terabytes* of data with sub-second performance. 
+The performance difference between BigQuery and ClickHouse can be immense. BigQuery can take dozens of seconds to execute a query. ClickHouse, if tuned correctly, can execute the same query on *terabytes* of data with sub-second performance. 
 
-The “**tuned”** bit is important — ClickHouse gives developers a lot of tooling to expedite expected queries. While BigQuery does some standard optimizations, like columnar storage (which we discuss in more detail in our [ClickHouse and Postgres comparison](https://posthog.com/blog/clickhouse-vs-postgres)), ClickHouse goes farther. In particular, ClickHouse accomplishes its “fighter jet” speeds by leveraging four techniques:
+The **"tuned”** bit is important — ClickHouse gives developers a lot of tooling to expedite expected queries. While BigQuery does some standard optimizations, like columnar storage (which we discuss in more detail in our [ClickHouse and Postgres comparison](https://posthog.com/blog/clickhouse-vs-postgres)), ClickHouse goes farther. In particular, ClickHouse accomplishes its “fighter jet” speeds by leveraging four techniques:
 
 1. Granulated storage
 2. Materialized views
