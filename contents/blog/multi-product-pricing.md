@@ -32,10 +32,6 @@ We put a small team on it, who quickly iterated with customers and improved the 
 
 ## Focusing on paying customers can improve the free product
 
-Intuitively, if someone is paying, they will have a higher expectation.
-
-However, the secondary effect we didn't anticipate is that fixing the smaller issues can lead to much more usage from both paid and free users. It turns out that in 2021, a lot of UX weirdness and buginess we had was affecting all users of our platform, but our free users weren't complaining that loudly.
-
 As context, PostHog spent the first year and a half prioritizing our open source project - we wanted to build an inbound sales model, so we could double down on product rather than investing in cold calling. Leverage, baby. This meant we'd need a great free product and a reasonably large community. After 18 months, we were ready to focus on our first paid product - product analytics.
 
 Our only company goal at this point was to get 5 reference, paying customers. By going really deep with this handful, we realized that we needed to improve our funnel experience – a core part of our product. We '[nailed funnels](new-vp-nailing-funnels)', and revenue started climbing as a result. However, delightfully, our _free_ user numbers also started growing much faster.
