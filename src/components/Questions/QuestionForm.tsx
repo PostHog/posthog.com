@@ -30,7 +30,7 @@ export default function Questions(props: QuestionFormProps): JSX.Element {
                                 <Close className="w-3 h-3" />
                             </button>
                         </div>
-                        <QuestionForm formType="question" onSubmit={handleSubmit} />
+                        <QuestionForm initialView="question-form" formType="question" onSubmit={handleSubmit} />
                     </Dialog.Panel>
                 </div>
             </Dialog>
