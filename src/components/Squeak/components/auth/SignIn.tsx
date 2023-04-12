@@ -8,6 +8,10 @@ type SignInProps = {
     setMessage?: React.Dispatch<React.SetStateAction<string | null>>
 }
 
+const errorMessages = {
+    'Invalid identifier or password': 'Invalid email or password',
+}
+
 export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, setMessage }) => {
     const { isLoading, login } = useUser()
 
@@ -18,7 +22,7 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
         })
 
         if (user?.error) {
-            setMessage?.(user?.error)
+            setMessage?.(errorMessages[user?.error] || user?.error)
         } else {
             onSubmit?.(user)
         }
