@@ -23,8 +23,8 @@ export const Questions = ({ slug, limit, topicId, profileId, showForm = true, ti
     return (
         <root.div ref={containerRef}>
             <Theme containerRef={containerRef} />
-            {hasQuestions && title && <h3>{title}</h3>}
             <div className="squeak">
+                {hasQuestions && title && <h3>{title}</h3>}
                 {hasQuestions && (
                     <ul className="squeak-questions">
                         {questions.data.map((question) => {
