@@ -6,6 +6,7 @@ import Avatar from './Avatar'
 import { QuestionForm } from './QuestionForm'
 import Reply from './Reply'
 import { CurrentQuestionContext } from './Question'
+import getAvatarURL from '../util/getAvatar'
 
 const getBadge = (questionAuthorId: string, replyAuthorId: string, replyAuthorRole: string) => {
     if (replyAuthorRole === 'admin' || replyAuthorRole === 'moderator') {
@@ -46,25 +47,22 @@ type CollapsedProps = {
 }
 
 const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
-    const reply =
-        /*replies.data[replies.data.findIndex((reply) => reply?.id === resolvedBy)] ||*/ replies.data[
-            replies.data.length - 1
-        ]
-    const replyCount = replies.data.length - 2
+    const reply = replies?.data?.find((reply) => reply?.id === resolvedBy) || replies.data[replies.data.length - 1]
+    const replyCount = replies.data.length
     const maxAvatars = Math.min(replyCount, 3)
 
     // const badgeText = getBadge(questionAuthorId, reply?.profile?.id, replyAuthorMetadata?.role)
-    const badgeText = 'Author'
-
+    const badgeText = ''
     const avatars: any[] = []
 
-    /*for (let reply of replies) {
+    for (const reply of replies?.data || []) {
         if (avatars.length >= maxAvatars) break
-        const avatar = reply?.profile?.avatar
+        const avatar = getAvatarURL(reply?.attributes?.profile?.data)
+        console.log(reply?.attributes?.profile)
         if (avatar && !avatars.includes(avatar)) {
             avatars.push(avatar)
         }
-    }*/
+    }
 
     if (avatars.length < maxAvatars) {
         avatars.push(...Array(maxAvatars - avatars.length))
