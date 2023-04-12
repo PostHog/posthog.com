@@ -26,7 +26,7 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 Another hackathon project from our recent offsite in Aruba has just launched, called PostHog Tracks!
 
-PostHog Tracks is a series of curated courses of tutorials and other lessons which cover common uses for particular roles, as well as general advice for all users - and it's constantly expanding!
+[PostHog Tracks](/tracks) is a series of curated courses of tutorials and other lessons which cover common uses for particular roles, as well as general advice for all users - and it's constantly expanding!
 
 At the moment PostHog Tracks groups many of our existing tutorials together into role-based themes, but over time we plan to add to these tracks and form more robust learning opportunities. Let us know if you have any ideas for what could be included, in the [Slack](/slack)
 
