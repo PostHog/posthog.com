@@ -54,7 +54,7 @@ export const Authentication = ({
                         </div>
                     </div>
                 )}
-                <div className={`squeak-authentication-form-container ${!showProfile ? 'ml-[50px]' : ''}`}>
+                <div style={showProfile ? { marginLeft: 50 } : {}} className={`squeak-authentication-form-container`}>
                     {showBanner && (
                         <div className="squeak-authentication-form-message">
                             <h4>Please signup to post.</h4>

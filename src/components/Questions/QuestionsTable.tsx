@@ -127,11 +127,7 @@ export const QuestionsTable = ({
                                           to={`/questions/${permalink}`}
                                           className="whitespace-nowrap text-sm font-semibold"
                                       >
-                                          {numReplies === 0 || numReplies > 2 ? (
-                                              <>{numReplies} replies</>
-                                          ) : (
-                                              <>{numReplies} reply</>
-                                          )}
+                                          {numReplies} {numReplies === 1 ? 'reply' : 'replies'}
                                       </Link>
                                   </div>
                               </div>

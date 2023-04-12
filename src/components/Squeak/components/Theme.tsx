@@ -723,6 +723,7 @@ const Style = createGlobalStyle`
         margin: -1.5rem -1.5rem 1.5rem;
         padding: 1.5rem;
         color: red;
+        font-size: .9rem;
     }
 
     .squeak-return-to-post {
