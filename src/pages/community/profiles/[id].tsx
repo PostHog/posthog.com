@@ -18,6 +18,7 @@ import { ProfileData, ProfileQuestionsData, StrapiData, StrapiRecord } from 'lib
 import getAvatarURL from '../../../components/Squeak/util/getAvatar'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { RightArrow } from '../../../components/Icons/Icons'
+import qs from 'qs'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -45,8 +46,28 @@ export default function ProfilePage({ params }: PageProps) {
 
     const [editModalOpen, setEditModalOpen] = React.useState(false)
 
+    const profileQuery = qs.stringify(
+        {
+            populate: {
+                avatar: true,
+                role: {
+                    select: ['type'],
+                },
+                teams: {
+                    populate: {
+                        profiles: {
+                            populate: ['avatar'],
+                        },
+                    },
+                },
+            },
+        },
+        {
+            encodeValuesOnly: true,
+        }
+    )
     const { data, mutate } = useSWR<StrapiRecord<ProfileData>>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?populate=avatar`,
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?${profileQuery}`,
         async (url) => {
             const res = await fetch(url)
             const { data } = await res.json()
@@ -199,32 +220,37 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                 </SidebarSection>
             ) : null}
 
-            {profile.team ? (
-                <>
-                    <SidebarSection title="Team">
-                        <span className="text-xl font-bold">{profile.team.name}</span>
-                    </SidebarSection>
+            {profile.teams
+                ? profile.teams?.data?.map(({ attributes: { name, profiles } }) => {
+                      return (
+                          <>
+                              <SidebarSection title="Team">
+                                  <span className="text-xl font-bold">{name}</span>
+                              </SidebarSection>
 
-                    {profile.team.profiles.length > 0 ? (
-                        <SidebarSection title="Co-workers">
-                            <ul className="p-0 grid gap-y-2">
-                                {profile.team.profiles
-                                    .filter(({ id }) => id !== profile.id)
-                                    .map((profile) => {
-                                        return (
-                                            <li key={profile.id} className="flex items-center space-x-2">
-                                                <Avatar className="w-8 h-8" src={profile.avatar} />
-                                                <a href={`/community/profiles/${profile.id}`}>
-                                                    {profile.first_name} {profile.last_name}
-                                                </a>
-                                            </li>
-                                        )
-                                    })}
-                            </ul>
-                        </SidebarSection>
-                    ) : null}
-                </>
-            ) : null}
+                              {profiles?.data?.length > 0 ? (
+                                  <SidebarSection title="Co-workers">
+                                      <ul className="p-0 grid gap-y-2">
+                                          {profiles.data
+                                              .filter(({ id }) => id !== profile.id)
+                                              .map((profile) => {
+                                                  return (
+                                                      <li key={profile.id} className="flex items-center space-x-2">
+                                                          <Avatar className="w-8 h-8" src={getAvatarURL(profile)} />
+                                                          <a href={`/community/profiles/${profile.id}`}>
+                                                              {profile.attributes?.firstName}{' '}
+                                                              {profile.attributes?.lastName}
+                                                          </a>
+                                                      </li>
+                                                  )
+                                              })}
+                                      </ul>
+                                  </SidebarSection>
+                              ) : null}
+                          </>
+                      )
+                  })
+                : null}
 
             {user?.profile?.id === profile.id && (
                 <SidebarSection>
