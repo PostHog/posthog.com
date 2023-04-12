@@ -5,6 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/posthog-for-vuejs.png
+featuredVideo: https://www.youtube-nocookie.com/embed/uxkaYnX78_o
 tags: ['configuration']
 ---
 
