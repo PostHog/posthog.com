@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-For the quarterly goals of each team please see the team pages e.g. [Team Experimentation](/handbook/small-teams/experimentation).
+For the quarterly goals of each team please see the team pages e.g. [Team Feature Success](/handbook/small-teams/feature-success).
 
 We discuss the quarterly goals in every sprint planning meeting - the team leads explain progress against the goals.
 
