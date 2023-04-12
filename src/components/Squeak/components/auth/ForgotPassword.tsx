@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Field, Form, Formik } from 'formik'
-import { post } from '../../lib/api'
 
 type ForgotPasswordProps = {
     apiHost: string
