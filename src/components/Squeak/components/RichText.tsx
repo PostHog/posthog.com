@@ -115,6 +115,7 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
     return (
         <>
             <textarea
+                onBlur={(e) => e.preventDefault()}
                 name="body"
                 value={value}
                 onChange={handleChange}
