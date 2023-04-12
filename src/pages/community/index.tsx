@@ -18,6 +18,7 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import { ProfileData, StrapiRecord } from 'lib/strapi'
 import { useQuestions } from 'hooks/useQuestions'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
+import { User } from '../../hooks/useUser'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -81,13 +82,8 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
     )
 }
 
-export const Profile = ({
-    profile,
-    setEditModalOpen,
-}: {
-    profile: StrapiRecord<ProfileData>
-    setEditModalOpen: (open: boolean) => void
-}) => {
+export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOpen: (open: boolean) => void }) => {
+    const { profile, email } = user
     const { id } = profile
     const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
 
@@ -97,11 +93,16 @@ export const Profile = ({
                 to={`/community/profiles/${id}`}
                 className="flex items-center space-x-2 mt-2 mb-1 -mx-2 relative active:top-[1px] active:scale-[.99] hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark rounded p-2"
             >
-                <Avatar src={getAvatarURL(profile)} className="w-[40px] h-[40px]" />
-                <div>{name && <p className="m-0 font-bold">{name}</p>}</div>
+                <Avatar src={getAvatarURL(user?.profile)} className="w-[40px] h-[40px]" />
+                <div>
+                    {name && <p className="m-0 font-bold">{name}</p>}
+                    {email && (
+                        <p className="m-0 font-normal text-sm text-primary/60 dark:text-primary-dark/60">{email}</p>
+                    )}
+                </div>
             </Link>
 
-            {/*<CallToAction
+            <CallToAction
                 onClick={() => setEditModalOpen(true)}
                 width="full"
                 size="xs"
@@ -109,7 +110,7 @@ export const Profile = ({
                 className="mt-2"
             >
                 Edit profile
-            </CallToAction>*/}
+            </CallToAction>
         </div>
     )
 }
@@ -353,6 +354,8 @@ const ProfileSidebar = ({
 }) => {
     const { user, logout } = useUser()
 
+    console.log(user)
+
     const [editModalOpen, setEditModalOpen] = useState(false)
 
     return (
@@ -379,7 +382,7 @@ const ProfileSidebar = ({
                         </button>
                     )}
                 </div>
-                {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} profile={user.profile} /> : <Login />}
+                {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> : <Login />}
             </SidebarSection>
             <SidebarSection title="Stats for our popular repos">
                 <Stats
