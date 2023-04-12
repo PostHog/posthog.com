@@ -1,6 +1,6 @@
 ---
-title: 'The "modern data stack" sucks'
-date: 2023-04-10
+title: "The modern data stack sucks"
+date: 2023-04-12
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -18,15 +18,15 @@ Every startup needs data to build a better product. This isn't up for debate. Bu
 
 In this article, I'll explain how and why the startup data stack begins like this...
 
-![MVP](../images/blog/startup-data-stack/mvp.png)
+![MVP](../images/blog/modern-data-stack-sucks/mvp.png)
 
 devolves into this...
 
-![Modern data sith](../images/blog/startup-data-stack/modern-data-sith.png)
+![Modern data sith](../images/blog/modern-data-stack-sucks/modern-data-sith.png)
 
 ...and what we're building at PostHog to make this mess less painful for growing startups.
 
-TL;DR: The so-called "modern data stack" sucks. We want to fix that.
+TL;DR: The so-called "modern data stack" sucks, especially for startups. We want to fix that.
 
 ## The MVP data stack
 
@@ -45,7 +45,7 @@ To do this, they use:
 - A customer relationship manager (CRM)
 - Revenue, payments, subscription tracking
 
-![MVP](../images/blog/startup-data-stack/mvp.png)
+![MVP](../images/blog/modern-data-stack-sucks/mvp.png)
 
 At this stage, startups usually go with the "popular" tools because they are [boring technologies](https://mcfunley.com/choose-boring-technology) that work for others. Complicated solutions aren’t needed, and teams can spend their time building.
 
@@ -62,7 +62,7 @@ To answer these questions, you need to pull data from a growing number of source
 
 This is where [customer data platforms](/docs/integrate/cdp) (CDPs) like Segment or RudderStack come in. CDPs make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and revenue data from Stripe, and send it back to those same tools, a warehouse, or a business intelligence tool like Hex.
 
-![Seed](../images/blog/startup-data-stack/seed.png)
+![Seed](../images/blog/modern-data-stack-sucks/seed.png)
 
 The goal of the stack at this stage is to use data to make better decisions about all aspects of the product. This includes:
 - Feature prioritization
@@ -91,7 +91,7 @@ Whoever gets the thankless responsibility of the data stack see their goal as em
 
 5. A potential assortment of other tools such as reverse ETL, data orchestration, and data governance.
 
-![Series A](../images/blog/startup-data-stack/series-a.png)
+![Series A](../images/blog/modern-data-stack-sucks/series-a.png)
 
 Startups need this stack because managing and accessing individual sources of data becomes unsustainable. Tools like analytics and the CDP don't give complete insight into performance. Teams need a reliable, single source of truth they trust. They hope the modern data stack gives them that.
 
@@ -107,7 +107,11 @@ For example, engineers might need to write optimized SQL queries to understand c
 
 If you haven't figured it out already, we're not fans of this situation. To us, the "modern data stack" creates barriers to building successful products. We want to streamline how startups gather and analyze data at the earliest stages, consolidate more of the stack as they scale, and keep data close to the people who need and use it.
 
-To make this happen, we are improving PostHog as a [customer data platform (CDP)](https://github.com/PostHog/posthog/issues/13126). We built the key functionality, such as the ability to:
+We want to make it easy to evaluate whether products are working or not. Key to this is the ability for engineers to find and analyze the data they want, along with tools like experiments and session recordings. The modern data stack creates complexity and silos that make figuring out what to work on and what’s working unnecessarily difficult.
+
+### Improving PostHog as a CDP
+
+To change this, we are improving PostHog as a [customer data platform (CDP)](https://github.com/PostHog/posthog/issues/13126). We built the key functionality, such as the ability to:
 
 - Receive data from your app(s) and site(s) with our [SDKs](/docs/integrate?tab=sdks)
 - Receive data from sources like [Stripe](/apps/stripe-connector), [Hubspot](/apps/hubspot-connector), [Intercom](/apps/intercom)
@@ -115,15 +119,15 @@ To make this happen, we are improving PostHog as a [customer data platform (CDP)
 
 Improving reliability, integrations, and UX is critical for success here. Being a CDP gives startups access to their data and tools in one place with PostHog. More data also improves the depth of insights engineers can get from PostHog without having to use other tools such as BI or visualization.
 
-![PostHog CDP](../images/blog/startup-data-stack/posthog-cdp.png)
+![PostHog CDP](../images/blog/modern-data-stack-sucks/posthog-cdp.png)
+
+### Building a data warehouse
 
 To do one better, we are also working on making PostHog a data warehouse. This means storing and using arbitrary data from many different sources, scaling this up to users needs, and integrating with traditional data warehousing tools. Our team [built this](https://github.com/PostHog/posthog/pull/14915) at our Aruba hackathon.
 
 It consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like Stripe, Hubspot, Intercom, and more along with data from PostHog. 
 
 This improves data accuracy and reporting flexibility. It also enables teams to continue using PostHog (which they are familiar with), as they scale. This replaces many of the tools of the modern data stack, which means they don't have to set up or maintain it. They can spend their time and resources building a great product.
-
-We want to make it easy to evaluate whether products are working or not. Key to this is the ability for engineers to find and analyze the data they want, along with tools like experiments and session recordings. The modern data stack creates complexity and silos that make figuring out what to work on and what’s working unnecessarily difficult.
 
 Integrating more of the startup data stack into PostHog enables engineers to continue to access the data, insights, and tools for building a great product. The current data stack evolution becomes large, complicated, and siloed quickly. Building an ideal data stack for engineers is what PostHog aims to do, and by doing so, we achieve our goal of more successful products in the world.
 
