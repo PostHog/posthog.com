@@ -29,7 +29,7 @@ In your app, import the `posthog` library and set your api key and host **before
 ```python
 from posthog import Posthog
 
-# Only necessary if you want to use local evaluation of feature flags
+# The personal API key is necessary only if you want to use local evaluation of feature flags.
 posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>', personal_api_key='<ph_personal_api_key>')
 ```
 
