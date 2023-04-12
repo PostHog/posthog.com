@@ -138,6 +138,18 @@ export const QuestionForm = ({
     const createQuestion = async ({ subject, body }: QuestionFormValues) => {
         const token = await getJwt()
 
+        const data = {
+            subject,
+            body,
+            resolved: false,
+            slugs: [] as string[],
+            permalink: '',
+        }
+
+        if (slug) {
+            data.slugs = [slug]
+        }
+
         const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
             method: 'POST',
             headers: {
@@ -145,17 +157,7 @@ export const QuestionForm = ({
                 Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-                data: {
-                    subject,
-                    body,
-                    resolved: false,
-                    slugs: [
-                        {
-                            slug,
-                        },
-                    ],
-                    permalink: '',
-                },
+                data,
             }),
         })
     }
