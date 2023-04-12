@@ -48,7 +48,7 @@ export const Authentication = ({
                     <div className="squeak-post-preview-container">
                         <div className="squeak-post-preview">
                             {formValues?.subject && <h3>{formValues.subject}</h3>}
-                            {formValues.question}
+                            {formValues?.body}
                         </div>
                         <div className="squeak-button-container">
                             <button onClick={() => setParentView?.('question-form')}>Edit post</button>
