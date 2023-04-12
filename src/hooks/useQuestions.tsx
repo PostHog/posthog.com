@@ -73,11 +73,24 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         if (profileId) {
             params.filters = {
                 ...params.filters,
-                profile: {
-                    id: {
-                        $eq: profileId,
+                $or: [
+                    {
+                        profile: {
+                            id: {
+                                $eq: profileId,
+                            },
+                        },
                     },
-                },
+                    {
+                        replies: {
+                            profile: {
+                                id: {
+                                    $eq: profileId,
+                                },
+                            },
+                        },
+                    },
+                ],
             }
         }
 
