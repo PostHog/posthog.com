@@ -65,6 +65,7 @@ function QuestionFormMain({
                                 {subject && (
                                     <>
                                         <Field
+                                            onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"
                                             name="subject"
