@@ -197,7 +197,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 - **Correlation analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure. We use transparent, testable statistical models – no phony "AI" here.
 
-- **Query editor:** Mixpanel doesn't support SQL queries, instead opting for its own query language, JQL (JavaScript Query Language). PostHog's SQL query editor is [currently in development](/PostHog/posthog/issues/12352).
+- **Query editor:** Mixpanel doesn't support SQL queries, instead opting for its own query language, JQL (JavaScript Query Language). PostHog's SQL query editor is [currently in development](https://github.com/PostHog/posthog/issues/12352).
 
 <ArrayCTA />
 

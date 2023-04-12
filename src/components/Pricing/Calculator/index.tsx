@@ -118,7 +118,7 @@ const cloudEnterpriseOptions2 = {
 
     mainCTA: {
         title: 'Get in touch',
-        url: '/signup/cloud/enterprise',
+        url: '/contact-sales?edition=enterprise',
     },
     demoCTA: {
         title: 'Book a demo',

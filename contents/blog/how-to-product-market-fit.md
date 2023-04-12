@@ -27,7 +27,7 @@ But there are some great heuristics you can use to understand whether you’re o
 - [How to grow after achieving B2B product market fit](#how-to-grow-after-achieving-b2b-product-market-fit)
 - [Further reading](#further-reading)
 
-> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps. 
+> This article is part of our [PostHog Academy series](/tracks) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps. 
 
 ## Defining the market
 The first step in validating product market fit is to define your market. When starting with a new product, it’s not realistic to say “this is mass market” or “our audience is everyone.” The more focused you are, the better your product will fit your target market.

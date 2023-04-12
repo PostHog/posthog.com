@@ -36,8 +36,9 @@ We’re still an early stage company, and so is our product. We strongly value m
 - [ ] Discuss with relevant team leads (and/or managers if applicable).
 - [ ] Discuss with relevant team member(s).
 - [ ] Open a PR on `posthog.com` documenting the change on the handbook.
-    - [ ] Update the [Team structure](/handbook/small-teams/team-structure) page.
-- [ ] Let everyone else in the company know in the next PostHog News session.
+    - [ ] Update the relevant Small Team page.
+    - [ ] Update the [Org Chart](https://app.tryroots.io/org-chart) in Deel.
+- [ ] Let everyone else in the company know in the next all hands session.
 - [ ] Add/remove from relevant [Sentry teams](https://sentry.io/settings/posthog/teams/).
 - [ ] Add/remove from relevant [GitHub teams](https://github.com/orgs/PostHog/teams).
 - [ ] Add/remove from Slack `@` groups / team mentions (e.g. `@core-experience`).

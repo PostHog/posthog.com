@@ -31,6 +31,16 @@ export const quickLinks = [
         to: '/docs/feature-flags/multivariate-flags',
         description: 'Test features with multiple variants.',
     },
+    {
+        name: 'Payloads',
+        to: '/docs/feature-flags/payloads',
+        description: 'Add configuration data to your feature flags with JSON payloads',
+    },
+    {
+        name: 'Common questions',
+        to: '/docs/feature-flags/common-questions',
+        description: 'Common questions about feature flags and how to solve them.',
+    },
 ]
 
 type FeatureFlagsProps = {

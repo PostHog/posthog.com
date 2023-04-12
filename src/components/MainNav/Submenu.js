@@ -3,14 +3,14 @@ import Docs from './Submenus/Docs/index'
 import Company from './Submenus/Company/index'
 import Community from './Submenus/Community/index'
 import UsingPostHog from './Submenus/UsingPostHog/index'
-import Product from './Submenus/Product/index'
+import Products from './Submenus/Products/index'
 
 const submenus = {
     Docs,
     Company,
     Community,
     UsingPostHog,
-    Product,
+    Products,
 }
 
 export default function Submenu({ referenceElement, menu, open, parentURL }) {

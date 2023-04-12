@@ -86,11 +86,11 @@ export default function Contributors({
                                 <Tooltip
                                     placement="top-end"
                                     className="whitespace-nowrap"
-                                    content={
+                                    content={() => (
                                         <div className="flex space-x-1 items-center">
                                             <span className="text-xs font-semibold">{name}</span>
                                         </div>
-                                    }
+                                    )}
                                 >
                                     <span className="relative">
                                         <Contributor image={image} name={name} url={url} state={state} />

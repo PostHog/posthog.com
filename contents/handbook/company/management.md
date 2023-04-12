@@ -69,7 +69,7 @@ There are teams at PostHog that need to work across functions, so we have an ant
 That means:
 * Task setting happens transparently in [Small Teams](/handbook/company/small-teams). Anyone can read notes from or show up to any of the sprint planning meetings.
 * Anyone can give feedback to anyone else on their priorities, and it's our expectation they do so.
-* Every [Small Team](/structure) has complete control over what they ship.
+* Every [Small Team](/handbook/company/small-teams) has complete control over what they ship.
 
 This has the added benefit of cross functional teams forming as needed, whilst people having a specialist manager (i.e. an engineer managing engineers) as far as we are able. 
 

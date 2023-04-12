@@ -6,6 +6,7 @@ import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { Section } from 'components/Section'
 import { SEO } from 'components/seo'
+import TutorialsSlider from 'components/TutorialsSlider'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
@@ -33,6 +34,7 @@ export default function Plain({ data }) {
         Check,
         Close,
         a: A,
+        TutorialsSlider,
         ...shortcodes,
     }
     return (

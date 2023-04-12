@@ -12,7 +12,6 @@ export default function InternalSidebarLink({ url, name, depth, onClick, classNa
         <span className="block" style={{ marginLeft: `${depth / 1.5}rem` }}>
             <Link
                 style={style}
-                offset={-50}
                 smooth
                 duration={300}
                 to={url}

@@ -4,8 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We treat Marketing as the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. What this means in practice:
-- A small, talented team of in-house content creators with strong editorial capability - our default is to keep writing in-house, not farm it out to a network of freelancers.
+Marketing is the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. This means:
+
+- A small, talented team of in-house content creators with strong editorial capability – our default is to keep writing in-house, not farm it out to a network of freelancers.
  
 - Building a reputation for high quality, trustworthy content that is a go-to resource for our users and wider reading audience. 
 
@@ -39,7 +40,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 - **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
  
-- **Being really cool and interesting people in online communities:** We could do a lot more of this in relevant communities in Slack/Discord/StackOverflow etc, and it's more engaging than one-way social media. We also increase awareness in relevant communities by sponsoring them. Overall we want to be a net contributor to those communities.
+- **Being cool and interesting people in online communities:** We could do a lot more of this in relevant communities in Slack/Discord/Stack Overflow etc., and it's more engaging than one-way social media. We also increase awareness in relevant communities by sponsoring them. Overall, we want to be a net contributor to those communities.
 
 ### Things we don't want to spend time on
 
@@ -53,15 +54,15 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 These are our main values:
 
-- Be opinionated
-- Pull, don’t push
-- No sneaky shit
+1. Be opinionated
+2. Pull, don’t push
+3. No sneaky shit
 
 ### Be opinionated
 
-PostHog was created because we believed that product analytics was broken and we had a vision of how it could be much better. 
+PostHog was created because we believed that product analytics was broken, and we had a vision of how it could be much better. 
  
-We need to reflect this vision in our marketing, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us, than 80% mildly agree with us. 
+We need to reflect this vision in our marketing, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us. 
  
 We communicate clearly, directly, and honestly.
  
@@ -75,13 +76,15 @@ _We focus on word of mouth by default._ We believe customers will judge us first
  
 If a customer doesn't choose PostHog, that means either:
  
-a) The product isn't good enough
-b) The product isn't the right solution for them
-c) We didn't communicate the benefits of the product well enough
+1. The product isn't good enough
+2. The product isn't the right solution for them
+3. We didn't communicate the benefits of the product well enough
  
-We don't believe companies will be long term customers of a competitor because they did a better job of spamming them with generic content. We know this because we frequently have customers switching from a competitor to us - they are not afraid to do this.
+We don't believe companies will be long-term customers of a competitor because they did a better job of spamming them with generic content. We know this because we frequently have customers switching from a competitor to us – they are not afraid to do this.
  
-Tackling a) is the responsibility of everyone at PostHog. The marketing team's specific job is to avoid spending time advertising to people in group b), and making sure we do a great job avoiding c). This means:
+Tackling (1) is the responsibility of everyone at PostHog. The marketing team's specific job is to avoid spending time advertising to people in group (2), and making sure we do a great job avoiding (3). 
+
+This means:
  
 - Making sure our comms are extremely high quality
 - Sharing our messages in the right places, where relevant users can see them
@@ -103,19 +106,25 @@ For these reasons, we:
  
 - Don't bombard customers with 'deals', pop-ups, and other dark patterns. These devalue our product in the long term.
  
-- Don't pretend our customers are different from us - more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. If you wouldn't like it, assume our customers wouldn't either. 
+- Don't pretend our customers are different from us – i.e. more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. If you wouldn't like it, assume our customers wouldn't either. 
 
 ## Marketing channels and tactics today
 
-The Marketing team's main focus is acquisition of [high quality signups](https://posthog.com/handbook/strategy/overview#what-should-we-be-working-on-today). We have established that _word of mouth_ is the most effective way to do this - virtually all of our high quality signups have come organically. Here are the channels we use, in _rough_ order of priority:
+The Marketing team's main focus is acquisition of customers in our [ideal customer profile](/handbook/strategy/ideal-customer-persona) (ICP). 
+
+We have established that _word of mouth_ is the most effective way to do this – virtually all of our high quality signups have come organically. 
+
+Here are the channels we use, in _rough_ order of priority:
  
 #### [Content](/handbook/growth/marketing/blog)
 
-- **SEO content** is high value and genuinely useful content that targets the keywords we think are most relevant to our customers. We do 'clean' SEO, ie. no buying backlinks or writing clickbait. 'No clickbait' doesn't mean content has to be boring! Our aim is to increase our organic reach on Google, basically. We put a small percentage of our monthly paid ads budget behind this type of content on LinkedIn and Twitter to increase awareness.
+- **SEO content** is high value and genuinely useful content that targets the keywords we think are most relevant to our customers. We do 'clean' SEO – i.e. no buying backlinks or writing clickbait. 'No clickbait' doesn't mean content has to be boring! Our aim is to increase our organic reach on Google, basically. We put a small percentage of our monthly paid ads budget behind this type of content on LinkedIn and Twitter to increase awareness.
  
-- **Shareable content** is stuff we think users and audiences outside PostHog will just find interesting. These may be technical deep dives or articles that give an insight into how PostHog works. We don't expect these to turn directly into signups, but they help us to build our unique and distinctive brand in the open source community. We may post this content on sites like Hacker News and Reddit, but only when we think it will be of genuine interest to those communities (and sometimes people outside PostHog beat us to it, which is great).
+- **Shareable content** is content we think users and audiences outside PostHog will just find interesting. These may be technical deep dives, or articles that give an insight into how PostHog works. We don't expect these to turn directly into signups, but they help us to build our unique and distinctive brand in the open source community. We may post this content on sites like Hacker News and Reddit, but only when we think it will be of genuine interest to those communities (and sometimes people outside PostHog beat us to it, which is great).
  
-- **Email content:** We send out [Product for Engineers](/handbook/growth/marketing/newsletter) every 2-3 weeks. We run this on Substack. 
+- **Email content:** We send out [Product for Engineers](/handbook/growth/marketing/newsletter) every 2-3 weeks. We run this on Substack.
+ 
+ - **YouTube content** is tutorials or informative videos (usually based on blogs) targeting our ICP on [YouTube](https://www.youtube.com/@PostHog) to expand awareness of PostHog and provide an alternative to written content.
  
 #### [Paid ads](/handbook/growth/marketing/paid)
 

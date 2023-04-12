@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+p {
+    margin-bottom: 1.45rem;
+}
+
 @layer utilities {
     .text-shadow-none {
         text-shadow: none;
@@ -1172,7 +1176,8 @@ iframe[src*='youtube-nocookie.com'] {
 }
 
 .about-nav .slick-track,
-.careers-nav .slick-track {
+.careers-nav .slick-track,
+.product-nav .slick-track {
     @apply md:!flex md:!justify-center md:!w-auto md:!transform-none;
 }
 

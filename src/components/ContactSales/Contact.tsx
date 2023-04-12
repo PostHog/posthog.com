@@ -258,8 +258,10 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
             onClick={() => {
                 if (options && !openOptions.includes(other.name)) {
                     setOpenOptions([...openOptions, other.name])
-                    ref.current?.focus()
-                    setFieldValue(other.name, options[0]?.value || options[0]?.hubspotValue)
+                    if (!values[other.name]) {
+                        ref.current?.focus()
+                        setFieldValue(other.name, options[0]?.value || options[0]?.hubspotValue)
+                    }
                 }
             }}
             className={`${inputContainerClasses} ${error ? 'pb-8' : ''} cursor-pointer`}
@@ -324,13 +326,19 @@ const ValidationSchema = Yup.object().shape({
     details: Yup.string().nullable(),
 })
 
-export default function Contact() {
+export default function Contact({
+    initialValues = {},
+}: {
+    initialValues?: {
+        [k: string]: any
+    }
+}) {
     const { href } = useLocation()
     const [submitted, setSubmitted] = useState(false)
     const [openOptions, setOpenOptions] = useState<string[]>([])
     const [confetti, setConfetti] = useState(true)
     const { handleSubmit, values, handleChange, setFieldValue, errors, validateField } = useFormik({
-        initialValues: Object.fromEntries(fields.map((field) => [field.name, undefined])),
+        initialValues: Object.fromEntries(fields.map((field) => [field.name, initialValues[field.name]])),
         onSubmit: async (values) => {
             const submission = {
                 pageUri: href,

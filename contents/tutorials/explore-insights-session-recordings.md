@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-23
 featuredImage: ../images/tutorials/banners/deep-dive.png
-topics: ['insights', 'session recording']
+tags: ['insights', 'session recording']
 --- 
 
 One of the biggest benefits of PostHog is the connections from all your product data and tools being in one place. You don’t need to link together multiple products, find ways to connect the right data, and hop between them to create insights. PostHog builds in these links. For example, going from product data to visualizations to session recordings is literally three clicks.

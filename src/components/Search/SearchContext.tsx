@@ -21,7 +21,7 @@ export type SearchLocation =
     | 'questions'
     | 'mobile-header'
     | '404'
-export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
+export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual' | 'apps'
 
 const searchClient = algoliasearch(
     process.env.GATSBY_ALGOLIA_APP_ID as string,

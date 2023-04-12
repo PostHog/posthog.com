@@ -95,7 +95,7 @@ export default function Enterprise({ setOpen, open }: { setOpen: (open: boolean)
                                     </ul>
                                     <TrackedCTA
                                         className="mt-auto shadow-xl"
-                                        href="/signup/cloud/enterprise"
+                                        href="/contact-sales?edition=enterprise"
                                         event={{ name: `clicked Continue`, type: 'cloud' }}
                                     >
                                         Choose PostHog Enterprise Cloud

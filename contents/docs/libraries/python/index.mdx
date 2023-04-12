@@ -27,16 +27,10 @@ pip install posthog
 In your app, import the `posthog` library and set your api key and host **before** making any calls.
 
 ```python
-import posthog
+from posthog import Posthog
 
-# Substitutes posthog.api_key which still exists but has been deprecated
-posthog.project_api_key = '<ph_project_api_key>'
-
-# Only necessary if you want to use feature flags
-posthog.personal_api_key = '<ph_personal_api_key>'
-
-# You can remove this line if you're using app.posthog.com
-posthog.host = '<ph_instance_address>'
+# Only necessary if you want to use local evaluation of feature flags
+posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>', personal_api_key='<ph_personal_api_key>')
 ```
 
 You can read more about the differences between the project and personal API keys in the dedicated [API authentication section](/docs/api/overview#authentication) of the Docs.
@@ -233,6 +227,15 @@ You can also get all known flag values as well. This is useful when you want to 
 ```python
 posthog.get_all_flags('distinct id', groups={}, person_properties={'is_authorized': True}, group_properties={})
 # returns dict of flag key and value pairs.
+```
+
+#### Feature Flag Payloads
+
+Payloads allow you to retrieve a value that is associated with the matched flag. The value can be a
+string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app.
+
+```python
+posthog.get_feature_flag_payload('feature-flag-key', 'distinct id')
 ```
 
 #### Local Evaluation

@@ -183,6 +183,31 @@ tags: ["Using PostHog", "Privacy"]
 - `tags`: the more specific tag(s) the post belongs to. an array containing any number of the following:
   - <CategoryData type="tags" />
 
+##### Tutorials
+
+Markdown files located in /contents/tutorials
+
+```markdown
+---
+date: 2022-02-14
+title: How to filter out internal users
+author: ["joe-martin"]
+featuredTutorial: false
+featuredVideo: https://www.youtube-nocookie.com/embed/2bptTniYPGc
+featuredImage: ../images/tutorials/banners/tutorial-17.png
+tags: ['filters', 'settings']
+---
+```
+
+- `date`: the date the tutorial was posted
+- `title`: the title that appears at the top of the tutorial and on the tutorial listing page
+- `author`: the author(s) of the tutorial. correlates to your handle located in /src/data/authors.json
+- `featuredTutorial`: determines if tutorial should be featured on the homepage
+- `featuredVideo`: the iframe src of the video that appears at the top of the tutorial
+- `featuredImage`: the URL of the image that appears at the top of the tutorial and on the tutorial listing page
+- `tags`: the tag(s) the tutorial belongs to. an array containing any number of the following:
+  - <TutorialTags />
+
 
 
 ##### Docs & Handbook
