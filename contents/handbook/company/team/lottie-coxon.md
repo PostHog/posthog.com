@@ -8,19 +8,20 @@ This guide should help you understand my brain and how it works.
 
 ## Bio
 
-I am (painfully) English, to the point where I would love to have some culture and traditions other than crumpets, tea and my deep love of Marmite. I was born in London and grew up in Surrey (AKA the South East of the UK). At the end of 2020 I moved to Africa to live with my boyfriend George. We lived in Dakar, Senegal for a bit and now we are based in Kinshasa, the capital of the Democratic Republic of Congo - and who knows where we will end up next.
+I am (painfully) English, to the point where I would love to have some culture and traditions other than crumpets, tea and my deep love of Marmite. I was born in London and grew up in Surrey (AKA the South East of the UK). At the end of 2020 I moved to Africa to live with my boyfriend George. We lived in Dakar, Senegal for a bit and then Kinshasa, the capital of the Democratic Republic of Congo for 2 and a half years. I'm now back in the UK for a little bit until the next adventure presents itself.
 
-I am a part of the Design team, specialising in visual flare, AKA branding and hedgehogs. Basically, I take all the character of our company and the team and push it into the visuals. PostHog is my first official 'job' job, but during my time at university I created my own bespoke t-shirt painting business and worked as a brand designer for three Oxford Balls. 
+I am a part of the Marketing team, specialising in branding, AKA sparking joy and hedgehogs. Basically, I take all the character of our company and the team and push it into the visuals. PostHog is my first official 'job' job, but during my time at university I created my own bespoke t-shirt painting business and worked as a brand designer for three Oxford Balls. 
 
-I love good conversation, anything honey roasted and bright blue skies. My guilty pleasure is fashion but obviously I veto any fast fashion vendors - sustainable all the way, people! Oh, and I love to create things, and usually always have a small side project running at all times, such as making my own jewellery, painting flower pots or hand making thank you cards. I'm convinced I have no left brain, just one massive right one.  
+I love good conversation, anything honey roasted and bright blue skies. My guilty pleasure is fashion but obviously I veto any fast fashion vendors - sustainable all the way people! Oh, and I love to create things, and usually always have a small side project running at all times, such as making my own jewellery, painting flower pots or hand making thank you cards. I'm convinced I have no left brain, just one massive right one.  
 
 
 ## Areas of responsibility
 
+- Branding
 - Anything to do with hedgehog mascots - I'm all over it.
 - Custom blog artwork
-- Some marketing projects and branding
-- Sometimes I get involved with layouts but usually that is up to Cory
+- Some marketing projects
+- Sometimes I get involved with layouts
 - Team images and occasionally organising team bios
 - Merchandise 
 - Basically anything that requires artwork I'm ya (wo)man 
@@ -37,17 +38,13 @@ I love good conversation, anything honey roasted and bright blue skies. My guilt
 
 - For some reason I always think I am in trouble - so please start emails or messages with the subject of the message so I can stop worrying. 
 
-- I love telling people exciting things, and I am a massive blabber mouth. Therefore I will talk about the secret Christmas Party plans or secret Offsite locations if I am trusted with them. So don't trust me, please.
-
 - I am unashamedly open and will tell you if I'm stressed, sad, happy or confused - and even embarrassing stories if you are lucky.
-
-- I have a tendency to be a bit of a pushover and a people pleaser - I am working on it, but please be considerate when asking me to do something for you as I will try to bend over backwards to help someone in need. But if it is a real design emergency know that I will always be there to help.
 
 - I am not a perfectionist, but if something doesn't feel right I won't drop it until I am happy with the outcome. Sometimes this is jarring for some as I won't stop stirring the pot, but I trust my gut instinct, and my gut has a good track record. 
 
 - I love a good goofy joke so please indulge me with your good humour and charm - it really brightens my day. 
 
-- I, similarly to a golden retriever, think that everyone is great - no need to win me over.
+- I, similarly to a golden retriever, think that everyone is great - no need to win me over. 
 
 - I catergorically love my personal time, as should everyone else, so I don't reply before 9am, after 6:30pm and never on weekends. 
 

@@ -8,6 +8,7 @@ sidebar: Blog
 hideAnchor: true
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/9ttI9yYRAOg
 category: Startups
 tags:
  - Guides
