@@ -142,12 +142,16 @@ export const QuestionForm = ({
             subject,
             body,
             resolved: false,
-            slugs: [] as string[],
+            slugs: [] as { slug: string }[],
             permalink: '',
         }
 
         if (slug) {
-            data.slugs = [slug]
+            data.slugs = [
+                {
+                    slug,
+                },
+            ]
         }
 
         const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {

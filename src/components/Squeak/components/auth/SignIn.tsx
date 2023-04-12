@@ -51,9 +51,23 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
                 return (
                     <Form>
                         <label htmlFor="email">Email address</label>
-                        <Field required id="email" name="email" type="email" placeholder="Email address..." />
+                        <Field
+                            onBlur={(e) => e.preventDefault()}
+                            required
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="Email address..."
+                        />
                         <label htmlFor="password">Password</label>
-                        <Field required id="password" name="password" type="password" placeholder="Password..." />
+                        <Field
+                            onBlur={(e) => e.preventDefault()}
+                            required
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Password..."
+                        />
                         <button style={isLoading || !isValid ? { opacity: '.5' } : {}} type="submit">
                             {buttonText}
                         </button>
