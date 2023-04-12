@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-02
 featuredImage: ../images/tutorials/banners/tutorial-1.png
-topics: ['session recordings', 'sentry']
+tags: ['session recordings', 'sentry']
 ---
 
 On top of being useful for understanding user behavior, session recordings help solve problems with your product. You can use them to discover issues, understand why they are happening, and work to fix them. In this way, session recordings help you provide a better support experience to users.

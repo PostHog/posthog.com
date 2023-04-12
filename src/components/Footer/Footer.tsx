@@ -9,32 +9,28 @@ import { GitHub, LinkedIn, YouTube, SlackMonochrome, Twitter } from 'components/
 
 const linklist: IProps[] = [
     {
-        title: 'Product',
-        url: '/product',
+        title: 'Products',
+        url: '/products/product-analytics',
         items: [
             {
-                title: 'Overview',
-                url: '/product',
-            },
-            {
-                title: 'Pricing',
-                url: '/pricing',
-            },
-            {
                 title: 'Product analytics',
-                url: '/product#top-features',
+                url: '/product-analytics',
             },
             {
-                title: 'Session recording',
-                url: '/product/session-recording',
-            },
-            {
-                title: 'A/B testing',
-                url: '/product/experimentation-suite',
+                title: 'Session replay',
+                url: '/session-replay',
             },
             {
                 title: 'Feature flags',
-                url: '/product/feature-flags',
+                url: '/feature-flags',
+            },
+            {
+                title: 'A/B testing',
+                url: '/ab-testing',
+            },
+            {
+                title: 'Product OS',
+                url: '/product-os',
             },
             {
                 title: 'Apps',
@@ -47,6 +43,10 @@ const linklist: IProps[] = [
             {
                 title: 'PostHog vs...',
                 url: '/blog/tags/comparisons',
+            },
+            {
+                title: 'Pricing',
+                url: '/pricing',
             },
         ],
     },
@@ -94,7 +94,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Session recording',
-                url: '/docs/session-recording',
+                url: '/docs/session-replay',
             },
             {
                 title: 'Feature flags',
@@ -116,6 +116,10 @@ const linklist: IProps[] = [
                 title: 'Tutorials',
                 url: '/tutorials',
             },
+            {
+                title: 'Tracks',
+                url: '/tracks',
+            },
         ],
     },
     {
@@ -135,10 +139,6 @@ const linklist: IProps[] = [
                 url: '/contributors',
             },
             {
-                title: 'Partners',
-                url: '/partners',
-            },
-            {
                 title: 'Newsletter',
                 url: '/newsletter',
             },
@@ -153,6 +153,10 @@ const linklist: IProps[] = [
             {
                 title: 'PostHog on GitHub',
                 url: 'https://github.com/PostHog/posthog',
+            },
+            {
+                title: 'Startups',
+                url: '/startups',
             },
         ],
     },

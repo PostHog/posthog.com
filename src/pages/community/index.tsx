@@ -185,7 +185,7 @@ const Issue = ({
             <p className="m-0 text-base opacity-60 min-w-[50px] flex-shrink-0">#{number}</p>
             <Tooltip
                 className="text-ellipsis overflow-hidden whitespace-nowrap flex-grow text-red"
-                content={
+                content={() => (
                     <GitHubTooltip
                         reactions={reactions}
                         body={body}
@@ -195,7 +195,7 @@ const Issue = ({
                         title={title}
                         url={url}
                     />
-                }
+                )}
             >
                 <span className="relative">
                     <Link className="text-base font-bold" to={url}>

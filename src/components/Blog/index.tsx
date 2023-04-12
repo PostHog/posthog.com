@@ -25,25 +25,30 @@ interface IPost {
         name: string
         image: ImageDataLike
     }[]
+    imgClassName?: string
 }
 
-export const Post = ({ featuredImage, slug, title, category, date, authors }: IPost) => {
+export const Post = ({ featuredImage, slug, title, category, date, authors, imgClassName }: IPost) => {
     const image = featuredImage && getImage(featuredImage)
     return (
         <div className="relative rounded-md overflow-hidden z-10 h-full w-full">
             <Link className="!text-white !hover:text-white cta" to={slug}>
                 {image ? (
-                    <GatsbyImage alt={title} className="md:w-auto w-full" image={image} />
+                    <GatsbyImage alt={title} className={imgClassName ?? 'md:w-auto w-full'} image={image} />
                 ) : (
-                    <StaticImage className="md:w-auto w-full" alt={title} src="./images/default.jpg" />
+                    <StaticImage
+                        className={imgClassName ?? 'md:w-auto w-full'}
+                        alt={title}
+                        src="./images/default.jpg"
+                    />
                 )}
-                <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 p-5 flex flex-col h-full w-full">
+                <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 px-4 py-3 md:p-5 flex flex-col h-full w-full">
                     {category && <p className="m-0 text-sm opacity-80">{category}</p>}
-                    <h3 className="text-2xl m-0 leading-7 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] line-clamp-3">
+                    <h3 className="m-0 leading-tight md:leading-7 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] line-clamp-3 !mt-0 text-xl md:text-2xl">
                         {title}
                     </h3>
-                    <p className="m-0 text-sm font-light mt-1">{date}</p>
-                    <ul className="list-none m-0 p-0 mt-auto flex space-x-4">
+                    <p className="m-0 !text-sm font-light mt-1">{date}</p>
+                    <ul className="list-none m-0 p-0 mt-auto space-x-4 hidden md:flex">
                         {authors?.slice(0, 2).map(({ name, image }) => {
                             return (
                                 <li className="flex space-x-2 items-center" key={name}>

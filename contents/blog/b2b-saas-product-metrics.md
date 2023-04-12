@@ -178,7 +178,7 @@ In PostHog, users can:
 
 - Create and analyze insights that track trends over time such as how well users convert, what paths they take, and how well they retain.
 
-- Use dashboards to combine insights into cohesive reports on any element of the product experience.
+- Use dashboards to combine insights into cohesive reports on any element of the product experience. We've built a [B2B SaaS product metrics dashboard template](/templates/b2b-dashboard) you can use.
 
 - View session recordings of real customers to understand where they get stuck or how they use the product.
 

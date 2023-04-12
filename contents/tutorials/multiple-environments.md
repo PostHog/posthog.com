@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-13
 featuredImage: ../images/tutorials/banners/tutorial-1.png
-topics: ["configuration"]
+tags: ["configuration"]
 ---
 
 Many software development teams use multiple environments to split up their code, such as development, staging, and production. This ensures changes in development don’t affect production, helps teams test before release, and increases the quality of code that reaches end users.
@@ -165,6 +165,6 @@ You can automatically enable filtering in all new insights with the toggle at th
 
 ## Further reading
 
-- [How to capture fewer unwanted events](/fewer-unwanted-events)
-- [What to do after installing PostHog in 5 steps](/next-steps-after-installing)
-- [Setting up Django analytics, feature flags, and more with PostHog](/django-analytics)
+- [How to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
+- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+- [Setting up Django analytics, feature flags, and more with PostHog](/tutorials/django-analytics)

@@ -1,3 +1,4 @@
+import { SearchResultType } from 'components/Search/SearchContext'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import React from 'react'
 
@@ -77,7 +78,7 @@ export interface IProps {
         left?: number
         right?: number
     }
-    searchFilter?: string
+    searchFilter?: SearchResultType
     mobileMenu?: boolean
     darkMode?: boolean
     fullWidthContent?: boolean

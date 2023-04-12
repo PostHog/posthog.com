@@ -51,13 +51,13 @@ Session recordings replace number-crunching, database querying, and user testing
 
 ### 2. Build a key metrics dashboard
 
-A key metrics dashboard is useful for validating that users are actually using the product. This keeps metrics like signups, pageviews, and key feature usage all in one place for the team.
+A key metrics dashboard is useful for validating that users are actually using the product. This keeps metrics like signups, pageviews, and key feature usage all in one place for the team. Using one of our [pre-built templates](/templates) helps you set this up fast.
 
 ![Dashboard](../images/blog/early-stage-analytics/dashboard.png)
 
 It's probably too early to start optimizing your conversion funnel or set up a [dashboard like AARRR](/blog/aarrr-pirate-funnel), though. It encourages premature optimization, or worse, hides bigger problems (like no one wanting your product). A key metrics dashboard strikes the balance between being useful and overanalyzing. 
 
-PostHog's snippet or library [autocaptures](/docs/integrate/client/js#autocapture) the metrics you want, like pageviews, button clicks, and inputs without additional setup. We then offer a template for a product analytics dashboard, and our insights make it easy to customize it to work for you. With PostHog, none of these tasks require a lot of work, and you can get back to building.
+PostHog's snippet or library [autocaptures](/docs/integrate/client/js#autocapture) the metrics you want, like pageviews, button clicks, and inputs without additional setup. We then offer a [template for a product analytics dashboard](/templates/product-analytics), and our insights make it easy to customize it to work for you. With PostHog, none of these tasks require a lot of work, and you can get back to building.
 
 ### 3. Gather feedback and talk to users
 

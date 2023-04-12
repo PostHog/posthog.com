@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-2.png
-topics: ['experimentation', 'feature flags']
+tags: ['experimentation', 'feature flags']
 ---
 
 Optimizing your marketing site often requires testing small changes against each other, also known as A/B tests. Getting the best site possible requires tweaking, experimenting, and tracking results.

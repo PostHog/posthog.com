@@ -130,6 +130,14 @@ Note that there are some performance trade-offs here. Specifically,
 2. It disables local evaluation of the feature flag.
 3. It disables bootstrapping this feature flag.
 
+## Feature flags versus experiments
+
+Experiments are powered by feature flags, but they are a specific format with test and control variants. This means a feature flag cannot be converted into an experiment. We disallow this to avoid implementation changes, targeting errors, and confusion that would come from the conversion.
+
+For example, a boolean flag isn't able to turn into an experiment.
+
+If you want to reuse the same key, you can delete your flag and use the same key when creating the experiment.
+
 ## Further reading
 
 Want to know more about what's possible with Feature Flags in PostHog? Try these tutorials:
