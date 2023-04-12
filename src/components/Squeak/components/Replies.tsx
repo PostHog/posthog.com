@@ -1,23 +1,16 @@
 import React, { useContext } from 'react'
-import { useQuestion } from '../hooks/useQuestion'
 import { StrapiData, ReplyData } from 'lib/strapi'
-
 import Avatar from './Avatar'
-import { QuestionForm } from './QuestionForm'
 import Reply from './Reply'
 import { CurrentQuestionContext } from './Question'
 import getAvatarURL from '../util/getAvatar'
 
-const getBadge = (questionAuthorId: string, replyAuthorId: string, replyAuthorRole: string) => {
-    if (replyAuthorRole === 'admin' || replyAuthorRole === 'moderator') {
-        return 'Moderator'
-    }
-
-    if (!questionAuthorId || !replyAuthorId) {
+const getBadge = (questionProfileID: string, replyProfileID: string) => {
+    if (!questionProfileID || !replyProfileID) {
         return null
     }
 
-    return questionAuthorId === replyAuthorId ? 'Author' : null
+    return questionProfileID === replyProfileID ? 'Author' : null
 }
 
 type RepliesProps = {
@@ -50,15 +43,20 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
     const reply = replies?.data?.find((reply) => reply?.id === resolvedBy) || replies.data[replies.data.length - 1]
     const replyCount = replies.data.length
     const maxAvatars = Math.min(replyCount, 3)
+    const {
+        question: {
+            profile: {
+                data: { id: questionProfileID },
+            },
+        },
+    } = useContext(CurrentQuestionContext)
 
-    // const badgeText = getBadge(questionAuthorId, reply?.profile?.id, replyAuthorMetadata?.role)
-    const badgeText = ''
+    const badgeText = getBadge(questionProfileID, reply?.attributes?.profile?.data?.id)
     const avatars: any[] = []
 
     for (const reply of replies?.data || []) {
         if (avatars.length >= maxAvatars) break
         const avatar = getAvatarURL(reply?.attributes?.profile?.data)
-        console.log(reply?.attributes?.profile)
         if (avatar && !avatars.includes(avatar)) {
             avatars.push(avatar)
         }
@@ -100,14 +98,18 @@ type ExpandedProps = {
 }
 
 const Expanded = ({ replies, resolvedBy }: ExpandedProps) => {
-    // const { resolvedBy, questionAuthorId } = question
+    const {
+        question: {
+            profile: {
+                data: { id: questionProfileID },
+            },
+        },
+    } = useContext(CurrentQuestionContext)
 
     return (
         <>
             {replies.data.map((reply) => {
-                // const replyAuthorMetadata = reply?.profile?.profiles_readonly?.[0] || reply?.profile?.metadata?.[0]
-
-                const badgeText = '' // getBadge(questionAuthorId, reply?.profile?.id, replyAuthorMetadata?.role)
+                const badgeText = getBadge(questionProfileID, reply?.attributes?.profile?.data?.id)
 
                 return (
                     <li

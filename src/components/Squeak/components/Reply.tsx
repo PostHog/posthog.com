@@ -57,7 +57,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     <>
                         <span className="squeak-resolved-badge">Solution</span>
                         {(isAuthor || isModerator) && (
-                            <button onClick={() => handleResolve(false, id)} className="squeak-undo-resolved">
+                            <button onClick={() => handleResolve(false, null)} className="squeak-undo-resolved">
                                 Undo
                             </button>
                         )}
