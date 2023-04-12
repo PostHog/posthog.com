@@ -2056,7 +2056,7 @@ export const Markdown = (props: any) => {
             xmlns="http://www.w3.org/2000/svg"
             {...props}
         >
-            <g fill="#000">
+            <g fill="currentColor">
                 <path
                     clipRule="evenodd"
                     d="m15 10c-2.7614 0-5 2.2386-5 5v98c0 2.761 2.2386 5 5 5h178c2.761 0 5-2.239 5-5v-98c0-2.7614-2.239-5-5-5zm-15 5c0-8.28427 6.71573-15 15-15h178c8.284 0 15 6.71573 15 15v98c0 8.284-6.716 15-15 15h-178c-8.28427 0-15-6.716-15-15z"

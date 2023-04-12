@@ -599,10 +599,10 @@ const Style = createGlobalStyle`
         margin: 0 .5rem 0 0;
 
         a {
-            color: rgba(var(--primary-color), .3);
+            color: rgba(0, 0, 0, .3);
 
             &:hover {
-                color: rgba(var(--primary-color), .4);
+                color: rgba(0, 0, 0, .4);
             }
         }
     }
