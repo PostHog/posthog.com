@@ -34,7 +34,7 @@ There are two types of data which you can gather for product analytics:
 
 There are also frameworks which can be used to translate information between the two. NPS scores, for example, are often used to translate a user sentiment into a measurable data point.
 
-> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics.
+> This article is part of our [PostHog Academy series](/tracks) where we explain the fundamentals of product analytics.
 
 ## Why are product analytics tools important?
 

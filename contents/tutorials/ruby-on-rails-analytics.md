@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/ruby-on-rails-analytics.png
-topics: ["configuration", "feature flags", "persons", "events"]
+tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
 Ruby on Rails is a popular fullstack web framework used by companies like Shopify, GitHub, Twitch, and more.

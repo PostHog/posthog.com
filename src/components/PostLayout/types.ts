@@ -1,3 +1,4 @@
+import { SearchResultType } from 'components/Search/SearchContext'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import React from 'react'
 
@@ -15,7 +16,7 @@ export interface IContributor {
 }
 
 export interface IMenu {
-    icon?: React.ReactNode
+    icon?: string | React.ReactNode
     name: string
     url?: string
     children?: IMenu[]
@@ -77,11 +78,11 @@ export interface IProps {
         left?: number
         right?: number
     }
-    searchFilter?: string
+    searchFilter?: SearchResultType
     mobileMenu?: boolean
     darkMode?: boolean
     fullWidthContent?: boolean
-    setFullWidthContent: (fullWidth: boolean) => void
+    setFullWidthContent?: (fullWidth: boolean) => void
     contentContainerClasses?: string
     stickySidebar?: boolean
 }

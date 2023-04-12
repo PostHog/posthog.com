@@ -6,11 +6,27 @@ import {
     Analytics,
     API,
     AppLibrary,
+    DataManagement,
+    EventPipelines,
     FeatureFlags,
+    GroupAnalytics,
+    Integrations,
     Projects,
     SessionRecording,
+    UserPermissions,
+    Notifications,
 } from 'components/ProductIcons'
-import { HowPostHogWorks, JSSnippet, Privacy, Quickstart, SDK, Tutorials, Webhooks } from 'components/NotProductIcons'
+import {
+    HowPostHogWorks,
+    IdentifyUsers,
+    Migrate,
+    JSSnippet,
+    Privacy,
+    Quickstart,
+    SDK,
+    Tutorials,
+    Webhooks,
+} from 'components/NotProductIcons'
 
 interface IFeature {
     title: string
@@ -25,25 +41,32 @@ interface IColumn {
 }
 
 const gettingStarted: IFeature[] = [
-    { title: 'Quickstart', icon: <Quickstart />, url: '/docs/getting-started/cloud' },
-    { title: 'JS snippet', icon: <JSSnippet />, url: '/docs/integrate?tab=snippet' },
-    { title: 'SDKs', icon: <SDK />, url: '/docs/integrate?tab=sdks' },
+    { title: 'Start here', icon: <Quickstart />, url: '/docs/getting-started/cloud' },
+    { title: 'Install PostHog', icon: <JSSnippet />, url: '/docs/getting-started/install?tab=snippet' },
+    { title: 'Send events', icon: <EventPipelines />, url: '/docs/getting-started/send-events' },
+    { title: 'Identify users', icon: <IdentifyUsers />, url: '/docs/getting-started/identify-users' },
+    { title: 'User properties', icon: <UserPermissions />, url: '/docs/getting-started/user-properties' },
+    { title: 'Actions & insights', icon: <DataManagement />, url: '/docs/getting-started/actions-and-insights' },
+    { title: 'Group analytics', icon: <GroupAnalytics />, url: '/docs/getting-started/group-analytics' },
 ]
 
 const products: IFeature[] = [
-    { title: 'Product analytics', icon: <Analytics />, url: '/using-posthog#product-analytics' },
-    { title: 'Session recording', icon: <SessionRecording />, url: '/manual/recordings' },
-    { title: 'Feature flags', icon: <FeatureFlags />, url: '/manual/feature-flags' },
-    { title: 'A/B testing', icon: <AbTesting />, url: '/manual/experimentation' },
-    { title: 'Platform & data', icon: <Projects />, url: '/using-posthog#data' },
+    { title: 'Product analytics', icon: <Analytics />, url: '/docs/product-analytics' },
+    { title: 'Session recording', icon: <SessionRecording />, url: '/docs/session-replay' },
+    { title: 'Feature flags', icon: <FeatureFlags />, url: '/docs/feature-flags' },
+    { title: 'A/B testing', icon: <AbTesting />, url: '/docs/experiments' },
+    { title: 'Data', icon: <Projects />, url: '/docs/data' },
+    { title: 'Apps', icon: <AppLibrary />, url: '/docs/apps' },
+    { title: 'API', icon: <API />, url: '/docs/api' },
 ]
 
 const resources: IFeature[] = [
     { title: 'Tutorials', icon: <Tutorials />, url: '/tutorials' },
-    { title: 'Apps', icon: <AppLibrary />, url: '/apps' },
+    { title: 'Integrations', icon: <Integrations />, url: '/docs/integrations' },
+    { title: 'Templates', icon: <Notifications />, url: '/templates' },
     { title: 'Webhooks', icon: <Webhooks />, url: '/docs/integrate/webhooks/message-formatting' },
-    { title: 'API', icon: <API />, url: '/docs/api' },
     { title: 'How PostHog works', icon: <HowPostHogWorks />, url: '/docs/how-posthog-works' },
+    { title: 'Migrate to PostHog', icon: <Migrate />, url: '/docs/migrate/ingest-historic-data' },
     { title: 'Privacy', icon: <Privacy />, url: '/docs/privacy' },
 ]
 
@@ -71,7 +94,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
             <h5 className="text-[15px] font-semibold opacity-40 m-0 border-b border-dashed border-gray-accent-light pb-1">
                 {title}
             </h5>
-            <ul className="list-none p-0 m-0 grid grid-cols-3 md:grid-cols-6 gap-2 dark:text-primary-dark">
+            <ul className="list-none p-0 m-0 grid grid-cols-3 md:grid-cols-7 gap-2 dark:text-primary-dark">
                 {section.map(({ title, icon, url }) => {
                     return (
                         <li key={title} className="w-[6.5rem]">

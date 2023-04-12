@@ -5,7 +5,8 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-2.png
-topics: ['experimentation', 'feature flags', 'actions']
+featuredVideo: https://www.youtube-nocookie.com/embed/QfTMREUEc18
+tags: ['experimentation', 'feature flags', 'actions']
 ---
 
 Many of the features of Next.js optimize for creating the best possible user experience. It automates and abstracts functionality like static page generation, image loading optimization, and optional server-side rendering, allowing you to focus on the content of your app.

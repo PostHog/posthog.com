@@ -96,7 +96,7 @@ If you would like to dive even deeper the related source code can be found [here
 
 ### 1. Event buffer
 
-The event buffer sits right at the beginning of the ingestion pipeline, and gives us the ability to selectively delay the processing of certain events. For more information, take a look at the [all about the event buffer](#all-about-the-event-buffer) section in the appendix.
+The event buffer sits right at the beginning of the ingestion pipeline, and gives us the ability to selectively delay the processing of certain events. This is only enabled for teams who have requested to have Persons on Events queries enabled. For more information, take a look at the [all about the event buffer](#all-about-the-event-buffer) section in the appendix.
 
 ### 2. Apps - `processEvent`
 
@@ -155,16 +155,6 @@ If there are any conflicts when merging Person properties for these two persons,
 We choose to prioritize the history of the non-anonymous person (`person_1`), as it is far more likely that this person will have a history of previous events associated with the user that we want to preserve.
 For more information on exactly how the merging of properties is done, check out this overview of [user properties](/docs/integrate/user-properties).
 
-###### Consequences of merging
-
-This scenario typically isn't ideal, as merging two users will only affect events that are sent in the future.
-As a result, we will be left with two separate `person_id`'s in the events table that should be associated with the same user, but instead will be treated as entirely unique users.
-The only way to fully 'merge' these two people would be to go back and rewrite the `person_id` field on past events, which is not practical or performant.
-
-For more information on how these merges can affect the results of your queries, take a look at this page on how [querying data](/docs/how-posthog-works/queries) works.
-
-Avoiding this scenario is the primary goal of the event buffer: by [buffering certain events](#1-event-buffer), we can avoid creating a duplicate Person when other events arrive in suboptimal order from the user's initial sign-up flow.
-
 #### 3.1.2 - `$create_alias` events
 
 The process of handling `$create_alias` events is almost identical to the process for `$identify` events, except that instead of merging `$anon_distinct_id` into `$distinct_id`, we allow you to pass in two arbitrary `$distinct_id`'s you would like to combine and merge the second one (`alias`) into `distinct_id`.
@@ -205,6 +195,8 @@ It's worth noting that since this event has already been written to ClickHouse, 
 ### All about the event buffer
 
 #### Determining if an event should be buffered
+
+The buffer is only enabled for teams who have requested to have Persons on Events queries enabled.
 
 After an event is consumed from Kafka, the plugin server will check a number of things in order to determine whether or not to buffer an event.
 If any of these conditions are true the event will not be buffered and will immediately move on to the [next step](#2-apps---processevent).

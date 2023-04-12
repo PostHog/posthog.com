@@ -12,7 +12,7 @@ export default function Tooltip({
     placement = 'bottom',
 }: {
     children: JSX.Element
-    content: string | React.ReactNode
+    content: string | ((setOpen: React.Dispatch<React.SetStateAction<boolean>>) => React.ReactNode)
     offset?: [number, number]
     className?: string
     tooltipClassName?: string
@@ -47,7 +47,7 @@ export default function Tooltip({
                         <div
                             className={`bg-white dark:bg-[#484848] text-black dark:text-white rounded-md px-2 py-1 text-sm z-20 shadow-lg ${tooltipClassName}`}
                         >
-                            {content}
+                            {content && (typeof content === 'string' ? content : content(setOpen))}
                         </div>
                     </div>,
                     document.body

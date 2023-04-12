@@ -204,7 +204,7 @@ const icons = {
     product_analytics: <Analytics />,
     session_recording: <SessionRecording />,
     feature_flags: <FeatureFlags />,
-    experiments: <Experiments />,
+    experimentation: <Experiments />,
     integrations: <AppLibrary />,
     platform: <Platform />,
     support: <Support />,
@@ -348,12 +348,12 @@ export const PlanComparison = ({ className = '' }) => {
                                                 key={`comparison-row-key-${feature.name}`}
                                             >
                                                 <Tooltip
-                                                    content={
+                                                    content={() => (
                                                         <div className="p-2">
                                                             <p className="font-bold text-[15px] mb-1">{feature.name}</p>
                                                             <p className="mb-0 text-sm">{feature.description}</p>
                                                         </div>
-                                                    }
+                                                    )}
                                                     tooltipClassName="max-w-xs m-4"
                                                     placement={window.innerWidth > 767 ? 'right' : 'bottom'}
                                                 >

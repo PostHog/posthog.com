@@ -5,7 +5,8 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/nextjs-analytics.png
-topics: ["configuration", "feature flags", "persons", "events"]
+featuredVideo: https://www.youtube-nocookie.com/embed/nSBjr1Sz18o
+tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
 Next.js is a popular web framework built on React. It provides optimizations and abstractions to help developers build fast and performant apps and sites.
@@ -287,9 +288,9 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-    // Disable in development
+    // Enable debug mode in development
     loaded: (posthog) => {
-      if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
+      if (process.env.NODE_ENV === 'development') posthog.debug()
     }
   })
 }

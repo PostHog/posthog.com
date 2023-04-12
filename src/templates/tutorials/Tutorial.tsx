@@ -24,6 +24,7 @@ import slugify from 'slugify'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
+import TutorialsSlider from 'components/TutorialsSlider'
 
 const ViewButton = ({ title, view, setView }) => {
     return (
@@ -88,17 +89,11 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
         a: A,
+        TutorialsSlider,
         ...shortcodes,
     }
-    const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
-
-    useEffect(() => {
-        if (hash) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
 
     return (
         <Layout>
