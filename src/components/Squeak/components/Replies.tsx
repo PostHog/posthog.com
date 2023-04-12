@@ -24,7 +24,7 @@ export const Replies = ({ expanded, setExpanded }: RepliesProps) => {
     } = useContext(CurrentQuestionContext)
     return replies && replies.data.length > 0 ? (
         <ul className={`squeak-replies ${resolved ? 'squeak-thread-resolved' : ''}`}>
-            {expanded || replies.data.length <= 3 ? (
+            {expanded || replies.data.length < 3 ? (
                 <Expanded replies={replies} resolvedBy={resolvedBy?.data?.id} />
             ) : (
                 <Collapsed replies={replies} setExpanded={setExpanded} resolvedBy={resolvedBy?.data?.id} />
@@ -42,7 +42,7 @@ type CollapsedProps = {
 const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
     const reply = replies?.data?.find((reply) => reply?.id === resolvedBy) || replies.data[replies.data.length - 1]
     const replyCount = replies.data.length
-    const maxAvatars = Math.min(replyCount, 3)
+    const maxAvatars = Math.min(replyCount - 1, 3)
     const {
         question: {
             profile: {
@@ -75,7 +75,7 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
                     })}
 
                     <button className="squeak-other-replies" onClick={() => setExpanded(true)}>
-                        View {replyCount} other {replyCount === 1 ? 'reply' : 'replies'}
+                        View {replyCount - 1} other {replyCount === 1 ? 'reply' : 'replies'}
                     </button>
                 </div>
             </li>
