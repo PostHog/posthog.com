@@ -144,8 +144,7 @@ export default function ProfilePage({ params }: PageProps) {
                             </div>
 
                             <div className="mt-12">
-                                <h3>Discussions</h3>
-                                <Questions profileId={id} showForm={false} />
+                                <Questions title="Discussions" profileId={id} showForm={false} />
                             </div>
                         </>
                     ) : null}

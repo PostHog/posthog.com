@@ -12,18 +12,20 @@ type QuestionsProps = {
     profileId?: number
     topicId?: number
     showForm?: boolean
+    title?: string
 }
 
-export const Questions = ({ slug, limit, topicId, profileId, showForm = true }: QuestionsProps) => {
+export const Questions = ({ slug, limit, topicId, profileId, showForm = true, title }: QuestionsProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
 
     const { questions, fetchMore, refresh } = useQuestions({ slug, limit, topicId, profileId })
-
+    const hasQuestions = questions.data && questions.data.length > 0
     return (
         <root.div ref={containerRef}>
             <Theme containerRef={containerRef} />
+            {hasQuestions && title && <h3>{title}</h3>}
             <div className="squeak">
-                {questions.data && questions.data.length > 0 && (
+                {hasQuestions && (
                     <ul className="squeak-questions">
                         {questions.data.map((question) => {
                             return (
