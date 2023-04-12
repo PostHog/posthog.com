@@ -101,7 +101,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 return { error: userData?.error?.message }
             }
 
-            await fetchUser(userData.jwt)
+            const user = await fetchUser(userData.jwt)
 
             localStorage.setItem('jwt', userData.jwt)
             setJwt(userData.jwt)
@@ -155,7 +155,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 return { error: userData?.error?.message }
             }
 
-            await fetchUser(userData.jwt)
+            const user = await fetchUser(userData.jwt)
 
             localStorage.setItem('jwt', userData.jwt)
             setJwt(userData.jwt)

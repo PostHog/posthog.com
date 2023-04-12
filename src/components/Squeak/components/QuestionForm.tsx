@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { Field, Form, Formik } from 'formik'
 import root from 'react-shadow/styled-components'
-import { useUser } from 'hooks/useUser'
+import { useUser, User } from 'hooks/useUser'
 
 import { Approval } from './Approval'
 import Authentication from './Authentication'
@@ -18,7 +18,7 @@ type QuestionFormValues = {
 
 type QuestionFormMainProps = {
     title?: string
-    onSubmit: (values: QuestionFormValues, user: any) => void
+    onSubmit: (values: QuestionFormValues, user: User | null) => void
     subject: boolean
     loading: boolean
     initialValues?: Partial<QuestionFormValues> | null
@@ -159,11 +159,10 @@ export const QuestionForm = ({
         })
     }
 
-    const handleMessageSubmit = async (values: QuestionFormValues, user: any) => {
+    const handleMessageSubmit = async (values: QuestionFormValues, user: User | null) => {
         setLoading(true)
-        const userID = user?.id
 
-        if (userID) {
+        if (user) {
             if (formType === 'question') {
                 await createQuestion(values)
             }

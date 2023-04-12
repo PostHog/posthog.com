@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import root from 'react-shadow/styled-components'
 
+import type { User } from 'hooks/useUser'
 import ForgotPassword from './auth/ForgotPassword'
 import Avatar from './Avatar'
 import SignUp from './auth/SignUp'
@@ -15,7 +16,7 @@ type AuthenticationProps = {
     buttonText?: Record<string, string>
     showBanner?: boolean
     showProfile?: boolean
-    handleMessageSubmit?: (values: any, user: any) => void
+    handleMessageSubmit?: (values: any, user: User | null) => void
     onAuth?: () => void
 }
 

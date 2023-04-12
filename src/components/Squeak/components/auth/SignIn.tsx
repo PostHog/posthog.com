@@ -1,10 +1,10 @@
 import React from 'react'
 import { Field, Form, Formik } from 'formik'
-import { useUser } from 'hooks/useUser'
+import { User, useUser } from 'hooks/useUser'
 
 type SignInProps = {
     buttonText?: string
-    onSubmit?: (user: any) => void
+    onSubmit?: (user: User | null) => void
     setMessage?: React.Dispatch<React.SetStateAction<string | null>>
 }
 
