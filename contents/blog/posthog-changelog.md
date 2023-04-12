@@ -19,6 +19,17 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
 
+## April 14, 2023
+
+#### PostHog Tracks
+![posthog tracks](../images/blog/array/tracks.gif)
+
+Another hackathon project from our recent offsite in Aruba has just launched, called PostHog Tracks!
+
+PostHog Tracks is a series of curated courses of tutorials and other lessons which cover common uses for particular roles, as well as general advice for all users - and it's constantly expanding!
+
+At the moment PostHog Tracks groups many of our existing tutorials together into role-based themes, but over time we plan to add to these tracks and form more robust learning opportunities. Let us know if you have any ideas for what could be included, in the [Slack](/slack)
+
 ## April 7, 2023
 
 > There was no Changelog update last week because the team was away at our annual company offsite. We'll have some info on what we got up to on [the blog](/blog) soon!
