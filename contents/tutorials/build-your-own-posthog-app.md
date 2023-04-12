@@ -146,10 +146,10 @@ Finally, [email your GitHub URL to hey@posthog.com](mailto:hey@posthog.com?subje
 
 Want to know more about building your own apps? Join [the PostHog Slack community](/slack), where thousands of developers share ideas and app-building advice. 
 
-<TutorialsSlider slugs={[
-  "/tutorials/how-to-connect-patterns-and-posthog",
-  "/tutorials/property-filter",
-  "/tutorials/sentry-plugin-tutorial"
-]} />
+Alternatively, check out the following tutorials for more information in the mean time…
+
+[How to connect Patterns and PostHog](/tutorials/how-to-connect-patterns-and-posthog)
+[How to protect user privacy with the Property Filter app](/tutorials/property-filter)
+[How to correlate errors with product performance using Sentry](/tutorials/sentry-plugin-tutorial)
 
 <TracksCTA/>

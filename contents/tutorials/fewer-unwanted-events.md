@@ -134,10 +134,10 @@ On top of this, you must guess what percentage you need. A percentage of a large
 
 ## Further reading
 
-<TutorialsSlider slugs={[
-  "/tutorials/spa",
-  "/tutorials/cookieless-tracking",
-  "/tutorials/event-tracking-guide"
-]} />
+Hopefully, these options helped you get your event data ingestion and costs in control. From that, you can increase the amount you are capturing again. Here are some recommendations to help you out:
+
+- Not getting enough events? Check out our [event tracking guide](/tutorials/event-tracking-guide).
+- Trouble with pageview captures on your single page app? Check out our [tutorial on how to set it up](/tutorials/spa).
+- Want to avoid using cookies in your tracking? Follow our [cookieless tracking tutorial](/tutorials/cookieless-tracking).
 
 <TracksCTA/>

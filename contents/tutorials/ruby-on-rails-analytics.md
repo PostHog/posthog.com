@@ -340,10 +340,8 @@ Once done, you have a basic Ruby on Rails app with many of the key features of P
 
 ## Further reading
 
-<TutorialsSlider slugs={[
-  "/tutorials/next-steps-after-installing",
-  "/tutorials/frontend-vs-backend-group-analytics",
-  "/tutorials/event-tracking-guide"
-]} />
+- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+- [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)
+- [Complete guide to event tracking](/tutorials/event-tracking-guide)
 
 <TracksCTA/>

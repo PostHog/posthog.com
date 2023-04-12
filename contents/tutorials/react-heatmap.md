@@ -127,10 +127,4 @@ Once all these settings are set as you prefer, you’ve set up a heatmap for you
 - [How to create new events the easy way](/tutorials/how-to-capture-events-the-easy-way)
 - [How to use session recordings to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
 
-<TutorialsSlider slugs={[
-  "/tutorials/toolbar",
-  "/tutorials/how-to-capture-events-the-easy-way",
-  "/tutorials/explore-insights-session-recordings"
-]} />
-
 <TracksCTA/>

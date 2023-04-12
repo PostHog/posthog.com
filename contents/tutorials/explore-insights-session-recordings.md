@@ -72,9 +72,7 @@ Once created, click any of the days in the graph, and you get a list of people w
 
 ## Further reading
 
-<TutorialsSlider slugs={[
-  "/tutorials/funnels",
-  "/tutorials/filter-session-recordings"
-]} />
+- [How to build, analyze and optimize conversion funnels](https://posthog.com/tutorials/funnels)
+- [How to find relevant session recordings quickly](https://posthog.com/tutorials/filter-session-recordings)
 
 <TracksCTA/>

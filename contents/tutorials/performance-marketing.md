@@ -100,10 +100,8 @@ The ultimate goal of performance marketing is to help you make more money and gr
 
 ## Further reading
 
-<TutorialsSlider slugs={[
-  "/blog/aarrr-pirate-funnel",
-  "/tutorials/churn-rate",
-  "/tutorials/funnels"
-]} />
+- [Building an AARRR pirate funnel (how and why)](/blog/aarrr-pirate-funnel)
+- [How to calculate and lower churn rate](/tutorials/churn-rate)
+- [How to build, analyze and optimize conversion funnels](/tutorials/funnels)
 
 <TracksCTA/>

@@ -47,10 +47,9 @@ From here, you can analyze data from your Webflow site with our suite of product
 > **Note:** You must enable session recordings for to capture them on your Webflow site. To do this, go to Project settings in PostHog, scroll down to Recordings, and toggle on “Record user sessions.”
 
 ## Further reading
-<TutorialsSlider slugs={[
-  "/tutorials/performance-marketing",
-  "/tutorials/non-technical-guide-to-data",
-  "/tutorials/session-metrics"
-]} />
+
+- [How to track performance marketing in PostHog](/tutorials/performance-marketing)
+- [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+- [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
 
 <TracksCTA/>

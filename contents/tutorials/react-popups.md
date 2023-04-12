@@ -167,10 +167,4 @@ You can also set up an experiment to test that popups drive usage of the feature
 - [Running experiments on new users](/tutorials/new-user-experiments)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 
-<TutorialsSlider slugs={[
-  "/tutorials/feedback-interviews-site-apps",
-  "/tutorials/new-user-experiments",
-  "/tutorials/nextjs-ab-tests"
-]} />
-
 <TracksCTA/>

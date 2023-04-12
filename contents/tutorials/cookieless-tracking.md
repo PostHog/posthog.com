@@ -75,8 +75,7 @@ Now that your PostHog deployment isn’t using cookies you can, optionally and i
 
 ## Further reading
 
-<TutorialsSlider slugs={[
-  "/tutorials/react-cookie-banner"
+- [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
 
 <TracksCTA/>
 

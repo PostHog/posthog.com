@@ -291,10 +291,8 @@ Also, check out our [our API documentation](/docs/api) for all the information a
 
 ## Further reading
 
-<TutorialsSlider slugs={[
-  "/tutorials/api-capture-events",
-  "/tutorials/non-technical-guide-to-data",
-  "/tutorials/api-feature-flags"
-]} />
+- [Using the PostHog API to capture events](/tutorials/api-capture-events)
+- [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+- [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
 
 <TracksCTA/>

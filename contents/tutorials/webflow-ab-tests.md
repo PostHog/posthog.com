@@ -67,10 +67,9 @@ Once you launch this experiment, PostHog automatically tracks the results and ma
 Now that you set up an A/B test in Webflow with PostHog, you can use this same pattern to run experiments and A/B tests throughout your site. Happy testing!
 
 ## Further reading
-<TutorialsSlider slugs={[
-  "/tutorials/experiments",
-  "/tutorials/webflow",
-  "/tutorials/next-steps-after-installing"
-]} />
+
+- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)
+- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 
 <TracksCTA/>
