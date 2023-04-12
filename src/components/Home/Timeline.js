@@ -13,9 +13,7 @@ const categories = {
 }
 
 export default function Timeline() {
-    return null
-
-    /*const {
+    const {
         allSqueakRoadmap: { nodes },
     } = useStaticQuery(graphql`
         query {
@@ -28,7 +26,7 @@ export default function Timeline() {
                 }
             }
         }
-    `)*/
+    `)
 
     const pastEvents = groupBy(
         nodes.filter((node) => {
