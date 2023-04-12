@@ -23,7 +23,7 @@ However, Uber, Lyft, and co. came along and disrupted this market by understandi
 
 When building a product, your users don’t always know what they need; and when they do, they might not be able to express it clearly. The role of a Product Manager is to piece together multiple pieces of information to identify actual user needs and empower a team to solve them. Below are a few ways you can gather this information.
 
-> This article is part of our [PostHog Academy series](/blog/categories/posthog-academy) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps.
+> This article is part of our [PostHog Academy series](/tracks) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps.
 
 ## Interviews
 Speaking 1:1 with customers is a great way to immerse yourself in their experience and the daily problems they encounter. It’s key when interviewing customers that you avoid biased or leading questions. To get unfiltered answers, ask open questions such as “Can you talk me through how you would travel home from an airport?” rather than “Can you tell me about the last time you took a taxi?” or “Did you take a taxi in the last 7 days?”.
