@@ -17,6 +17,7 @@ import { ProductLayout } from './components/ProductLayout'
 import { Quote2 } from './components/Quote2'
 import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
+import { TracksCTA } from './components/TracksCTA'
 
 export const shortcodes = {
     ArrayCTA,
@@ -36,4 +37,5 @@ export const shortcodes = {
     Quote2,
     Squeak,
     StarRepoButton,
+    TracksCTA,
 }
