@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { PageProps } from 'gatsby'
 
 import community from 'sidebars/community.json'
@@ -16,6 +16,8 @@ import useSWR from 'swr'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { ProfileData, ProfileQuestionsData, StrapiData, StrapiRecord } from 'lib/strapi'
 import getAvatarURL from '../../../components/Squeak/util/getAvatar'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { RightArrow } from '../../../components/Icons/Icons'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -85,12 +87,15 @@ export default function ProfilePage({ params }: PageProps) {
                 </Modal>
                 <PostLayout
                     title="Profile"
-                    breadcrumb={[
-                        { name: 'Community', url: '/questions' },
-                        { name: 'Profile', url: `/community/profiles/${id}` },
-                    ]}
+                    breadcrumb={[{ name: 'Community', url: '/questions' }]}
                     menu={community}
-                    sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={{ ...profile, id }} />}
+                    sidebar={
+                        <ProfileSidebar
+                            handleEditProfile={handleEditProfile}
+                            setEditModalOpen={setEditModalOpen}
+                            profile={{ ...profile, id }}
+                        />
+                    }
                     hideSurvey
                 >
                     {profile ? (
@@ -132,13 +137,16 @@ export default function ProfilePage({ params }: PageProps) {
 type ProfileSidebarProps = {
     profile: ProfileData
     setEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+    handleEditProfile: () => void
 }
 
-const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen }) => {
+const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen, handleEditProfile }) => {
     const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
+    const [editProfile, setEditProfile] = useState(false)
     const { user } = useUser()
+    const breakpoints = useBreakpoint()
 
-    return profile ? (
+    return profile && !editProfile ? (
         <>
             {profile.github || profile.twitter || profile.linkedin || profile.website ? (
                 <SidebarSection title="Links">
@@ -220,13 +228,38 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
 
             {user?.profile?.id === profile.id && (
                 <SidebarSection>
-                    <button onClick={() => setEditModalOpen(true)} className="text-base text-red font-semibold">
+                    <button
+                        onClick={() => {
+                            if (breakpoints.md) {
+                                setEditProfile(true)
+                            } else {
+                                setEditModalOpen(true)
+                            }
+                        }}
+                        className="text-base text-red font-semibold"
+                    >
                         Edit profile
                     </button>
                 </SidebarSection>
             )}
         </>
     ) : (
-        <></>
+        <div className="pb-6">
+            <div className="mb-4 flex flex-start items-center relative">
+                <button
+                    onClick={() => setEditProfile(false)}
+                    className="inline-block font-bold bg-gray-accent-light dark:bg-gray-accent-dark mr-2 rounded-sm p-1"
+                >
+                    <RightArrow className="w-6 rotate-180" />
+                </button>
+                <h5 className="m-0 text-base font-bold">Back</h5>
+            </div>
+            <EditProfile
+                onSubmit={() => {
+                    handleEditProfile()
+                    setEditProfile(false)
+                }}
+            />
+        </div>
     )
 }
