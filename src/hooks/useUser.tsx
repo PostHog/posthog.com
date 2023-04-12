@@ -174,6 +174,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                     profile: {
                         populate: ['avatar'],
                     },
+                    role: {
+                        select: ['type'],
+                    },
                 },
             },
             {

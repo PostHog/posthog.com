@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, createContext } from 'react'
 import root from 'react-shadow/styled-components'
 
 import { Theme } from './Theme'
@@ -13,10 +13,12 @@ import QuestionSkeleton from './QuestionSkeleton'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
-    id: number | string
+    id: number
     question?: StrapiRecord<QuestionData>
     expanded?: boolean
 }
+
+export const CurrentQuestionContext = createContext<any>({})
 
 export const Question = (props: QuestionProps) => {
     const { id, question } = props
@@ -24,7 +26,16 @@ export const Question = (props: QuestionProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
 
     // TODO: Default to question data if passed in
-    const { question: questionData, isLoading, isError, error, reply } = useQuestion(id, { data: question })
+    const {
+        question: questionData,
+        isLoading,
+        isError,
+        error,
+        reply,
+        handlePublishReply,
+        handleResolve,
+        handleReplyDelete,
+    } = useQuestion(id, { data: question })
 
     if (isLoading) {
         return <QuestionSkeleton />
@@ -41,41 +52,45 @@ export const Question = (props: QuestionProps) => {
     return (
         <root.div ref={containerRef}>
             <Theme containerRef={containerRef} />
-            <div className="squeak">
-                <div className="squeak-question-container squeak-post">
-                    <div className="squeak-post-author">
-                        <Profile profile={questionData.attributes.profile?.data} />
+            <CurrentQuestionContext.Provider
+                value={{
+                    question: { id, ...(questionData?.attributes ?? {}) },
+                    handlePublishReply,
+                    handleResolve,
+                    handleReplyDelete,
+                }}
+            >
+                <div className="squeak">
+                    <div className="squeak-question-container squeak-post">
+                        <div className="squeak-post-author">
+                            <Profile profile={questionData.attributes.profile?.data} />
 
-                        <Days created={questionData.attributes.createdAt} />
-                    </div>
-                    <div className="squeak-post-content">
-                        <h3 className="squeak-subject">
-                            <a href={`/questions/${questionData.attributes.permalink}`} className="!no-underline">
-                                {questionData.attributes.subject}
-                            </a>
-                        </h3>
-
-                        <Markdown>{questionData.attributes.body}</Markdown>
-                    </div>
-
-                    <Replies
-                        expanded={expanded}
-                        setExpanded={setExpanded}
-                        resolved={questionData.attributes.resolved}
-                        replies={questionData.attributes.replies}
-                    />
-
-                    {questionData.attributes.resolved ? (
-                        <div className="squeak-locked-message">
-                            <p>This thread has been closed</p>
+                            <Days created={questionData.attributes.createdAt} />
                         </div>
-                    ) : (
-                        <div className="squeak-reply-form-container">
-                            <QuestionForm questionId={questionData.id} formType="reply" reply={reply} />
+                        <div className="squeak-post-content">
+                            <h3 className="squeak-subject">
+                                <a href={`/questions/${questionData.attributes.permalink}`} className="!no-underline">
+                                    {questionData.attributes.subject}
+                                </a>
+                            </h3>
+
+                            <Markdown>{questionData.attributes.body}</Markdown>
                         </div>
-                    )}
+
+                        <Replies expanded={expanded} setExpanded={setExpanded} />
+
+                        {questionData.attributes.resolved ? (
+                            <div className="squeak-locked-message">
+                                <p>This thread has been closed</p>
+                            </div>
+                        ) : (
+                            <div className="squeak-reply-form-container">
+                                <QuestionForm questionId={questionData.id} formType="reply" reply={reply} />
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </div>
+            </CurrentQuestionContext.Provider>
         </root.div>
     )
 }

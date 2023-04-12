@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useUser } from 'hooks/useUser'
 import Days from './Days'
 import Markdown from './Markdown'
 import { StrapiRecord, ReplyData } from 'lib/strapi'
 import Avatar from './Avatar'
 import getAvatarURL from '../util/getAvatar'
+import { CurrentQuestionContext } from './Question'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -15,21 +16,29 @@ type ReplyProps = {
 export default function Reply({ reply, badgeText }: ReplyProps) {
     const {
         id,
-        attributes: { body, createdAt, profile },
+        attributes: { body, createdAt, profile, publishedAt },
     } = reply
 
+    const {
+        question: { resolvedBy, id: questionID, profile: questionProfile, resolved },
+        handlePublishReply,
+        handleResolve,
+        handleReplyDelete,
+    } = useContext(CurrentQuestionContext)
+    const stuff = useContext(CurrentQuestionContext)
     const [confirmDelete, setConfirmDelete] = useState(false)
     const { user } = useUser()
-    //const isModerator = user?.isModerator
-    //const isAuthor = user?.id === questionAuthorId
-    /*const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const isModerator = user?.role?.type === 'moderator'
+    const isAuthor = user?.profile?.id === questionProfile?.data?.id
+
+    const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
         if (confirmDelete) {
-            handleReplyDelete(id)
+            await handleReplyDelete(id)
         } else {
             setConfirmDelete(true)
         }
-    }*/
+    }
 
     const handleContainerClick = () => {
         setConfirmDelete(false)
@@ -39,49 +48,42 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
         <div onClick={handleContainerClick}>
             <div className="squeak-post-author">
                 <a className="squeak-profile-link" href={`/community/profiles/${profile.data.id}`}>
-                    <Avatar image={getAvatarURL(profile?.data)} />
+                    <Avatar image={getAvatarURL(profile?.data?.attributes)} />
                     <strong className="squeak-author-name">{profile.data.attributes.firstName || 'Anonymous'}</strong>
                 </a>
-
                 {badgeText && <span className="squeak-author-badge">{badgeText}</span>}
                 <Days created={createdAt} />
-                {/*resolved && resolvedBy === id && (
+                {resolved && resolvedBy?.data?.id === id && (
                     <>
                         <span className="squeak-resolved-badge">Solution</span>
                         {(isAuthor || isModerator) && (
-                            <button onClick={() => handleResolve(false)} className="squeak-undo-resolved">
+                            <button onClick={() => handleResolve(false, id)} className="squeak-undo-resolved">
                                 Undo
                             </button>
                         )}
                     </>
-                )*/}
+                )}
             </div>
             <div className="squeak-post-content">
-                {/*{subject && (
-                    <h3 className="squeak-subject">{permalink ? <a href={permalink}>{subject}</a> : subject}</h3>
-                )}*/}
-
                 <Markdown>{body}</Markdown>
 
-                {/*{!subject && (
-                    <div className="squeak-reply-action-buttons">
-                        {!resolved && (isAuthor || isModerator) && (
-                            <button onClick={() => handleResolve(true, id)} className="squeak-resolve-button">
-                                Mark as solution
-                            </button>
-                        )}
-                        {isModerator && (
-                            <button onClick={() => handlePublish(id, !published)} className="squeak-publish-button">
-                                {published ? 'Unpublish' : 'Publish'}
-                            </button>
-                        )}
-                        {isModerator && (
-                            <button onClick={handleDelete} className="squeak-delete-button">
-                                {confirmDelete ? 'Click again to confirm' : 'Delete'}
-                            </button>
-                        )}
-                    </div>
-                )}*/}
+                <div className="squeak-reply-action-buttons">
+                    {!resolved && (isAuthor || isModerator) && (
+                        <button onClick={() => handleResolve(true, id)} className="squeak-resolve-button">
+                            Mark as solution
+                        </button>
+                    )}
+                    {isModerator && (
+                        <button onClick={() => handlePublishReply(!!publishedAt, id)} className="squeak-publish-button">
+                            {publishedAt ? 'Unpublish' : 'Publish'}
+                        </button>
+                    )}
+                    {isModerator && (
+                        <button onClick={handleDelete} className="squeak-delete-button">
+                            {confirmDelete ? 'Click again to confirm' : 'Delete'}
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
     ) : null
