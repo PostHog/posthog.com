@@ -201,6 +201,7 @@ export const QuestionForm = ({
                         ),
                         auth: (
                             <Authentication
+                                buttonText={{ login: 'Login & post', signUp: 'Sign up & post' }}
                                 setParentView={setView}
                                 formValues={formValues}
                                 handleMessageSubmit={handleMessageSubmit}
