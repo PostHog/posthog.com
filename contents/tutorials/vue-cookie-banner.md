@@ -292,9 +292,10 @@ In App.vue, we can handle the `hideBanner` message and set `showBanner` to `fals
 Once we’ve done that, our cookie consent banner is fully functional. Try it out by clicking accept and decline, making sure it disappears, and the correct values show up in cookies and local storage. Clear local storage to reset and test again.
 
 ## Further reading
-
-- [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
-- [Building a tracking cookies consent banner in React](/tutorials/react-cookie-banner)
-- [PostHog for VueJS users – a code-snippet walkthrough](/tutorials/posthog-for-vuejs)
+<TutorialsSlider slugs={[
+  "/tutorials/cookieless-tracking",
+  "/tutorials/react-cookie-banner",
+  "/tutorials/posthog-for-vuejs"
+]} />
 
 <TracksCTA/>

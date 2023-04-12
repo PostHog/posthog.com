@@ -322,9 +322,10 @@ To confirm the feature flag is working, you can go back to PostHog and set the r
 Once you confirm that, you successfully set up a React Native along with PostHog and many of the tools we offer. Check out [our React Native documentation](/docs/integrate/client/react-native) for more details about what you can do with PostHog.
 
 ## Further reading
-
-- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
-- [Running experiments on new users](/tutorials/new-user-experiments)
+<TutorialsSlider slugs={[
+  "/tutorials/event-tracking-guide",
+  "/tutorials/new-user-experiments",
+  "/tutorials/next-steps-after-installing"
+]} />
 
 <TracksCTA/>

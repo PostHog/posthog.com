@@ -88,8 +88,10 @@ This effectively makes it a third-party cookie, which many browsers, sites, and 
 
 ## Further reading
 
-- [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
-- [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
-- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/funnels)
+<TutorialsSlider slugs={[
+  "/tutorials/cookieless-tracking",
+  "/tutorials/react-cookie-banner",
+  "/tutorials/funnels"
+]} />
 
 <TracksCTA/>

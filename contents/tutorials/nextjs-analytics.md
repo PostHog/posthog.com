@@ -633,8 +633,11 @@ You now have a basic Next.js app with user authentication and many of the featur
 
 ## Further reading
 
-- [Building and measuring a sign up funnel with Next.js, Supabase, and PostHog](/tutorials/nextjs-supabase-signup-funnel)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
-- [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)
+<TutorialsSlider slugs={[
+  "/tutorials/nextjs-supabase-signup-funnel",
+  "/tutorials/event-tracking-guide",
+  "/tutorials/identifying-users-guide",
+  "/tutorials/next-steps-after-installing"
+]} />
 
 <TracksCTA/>

@@ -249,8 +249,10 @@ print(response.json())
 
 ## Further reading
 
-- [How to use the PostHog API to get insights and persons](/tutorials/api-get-insights-persons)
-- [Documentation on POST-only public endpoints](/docs/api/post-only-endpoints)
-- [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)
+<TutorialsSlider slugs={[
+  "/tutorials/api-get-insights-persons",
+  "/tutorials/api-feature-flags",
+  "/tutorials/next-steps-after-installing"
+]} />
 
 <TracksCTA/>

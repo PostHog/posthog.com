@@ -417,4 +417,10 @@ With autocapture, session recordings, feature flags, identification, and custom 
 - [Running experiments on new users](/tutorials/new-user-experiments)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
 
+<TutorialsSlider slugs={[
+  "/tutorials/frontend-vs-backend-group-analytics",
+  "/tutorials/new-user-experiments",
+  "/tutorials/event-tracking-guide"
+]} />
+
 <TracksCTA/>
