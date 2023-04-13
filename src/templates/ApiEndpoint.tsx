@@ -490,6 +490,8 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                 questions={<CommunityQuestions />}
                 menu={menu}
                 tableOfContents={tableOfContents}
+                fullWidthContent={true}
+                hideSidebar
                 contentWidth="100%"
                 breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
             >
