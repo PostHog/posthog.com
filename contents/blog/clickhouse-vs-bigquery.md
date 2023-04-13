@@ -17,7 +17,7 @@ tags:
 
 Both BigQuery and ClickHouse are databases designed to handle lots of data (like *loads* of data), but they have distinct philosophies and use cases.
 
-BigQuery is exceptional at handling complex business queries that can tolerate many-second (sometimes dozens of seconds) loading times. Conversely, with some tuning ClickHouse can deliver sub-second performance on terabytes of data for predictable queries, making it ideal for powering customer-facing dashboards and analytics.
+BigQuery is exceptional at handling complex business queries that can tolerate many-second (sometimes dozens of seconds) loading times at scale. Conversely, with some tuning ClickHouse can deliver sub-second performance on terabytes of data for predictable queries, making it ideal for powering customer-facing dashboards and analytics.
 
 In this article, I’ll explain how BigQuery and ClickHouse work, and how their approaches create very different products and target use-cases. 
 
@@ -43,7 +43,7 @@ BigQuery’s claim to fame was its novel way of decoupling storage and compute. 
 
 BigQuery is exclusively available on GCP (Google Cloud Platform) and is tightly integrated with other GCP products. However, BigQuery can also connect to AWS and Azure storage through [BigQuery Omni](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-omni), though that defeats some of BigQuery’s all-in-one value-prop.  
 
-One of the reasons that BigQuery touts a feature-rich and friendly user-interface is to appeal to marketers with some basic SQL skills. While BigQuery isn’t as non-technical friendly as Kibana or Snowflake, it does make using SQL easier by providing a wrap-around GUI with the ability to save progress. Of course, for development purposes, BigQuery can also be accessed via GCP’s command line suite. 
+One of the reasons that BigQuery touts a feature-rich and friendly user-interface is to appeal to marketers with some basic SQL skills. While BigQuery isn’t as non-technical friendly as [Kibana](/blog/clickhouse-vs-elasticsearch) or [Snowflake](/blog/clickhouse-vs-snowflake), it does make using SQL easier by providing a GUI wrapper with the ability to save progress. Of course, for development purposes, BigQuery can also be accessed via GCP’s command line suite. 
 
 ## Architecture
 
@@ -65,11 +65,11 @@ ClickHouse utilizes a shared-nothing architecture where CPU, Storage, and Memory
 
 ![Shared Nothing Architecture.png](../images/blog/clickhouse-vs-bigquery/shared-nothing-architecture.png)
 
-Accordingly, ClickHouse can scale in all three dimensions (storage, memory, and compute) by simply upgrading the machine. However, scaling is still tedious — new storage and compute cannot be added at a whim to the same instance; instead, a new instance needs to be provisioned and data needs to be migrated from one to another. 
+Accordingly, ClickHouse can scale in all three dimensions (storage, memory, and compute) by simply upgrading the machine. However, scaling is still tedious — new storage and compute cannot be added on a whim to the same instance; instead, a new instance needs to be provisioned and data needs to be migrated from one to another. 
 
 ![Clickhouse_ 3 Dimensions.png](../images/blog/clickhouse-vs-bigquery/clickhouse-3-dimensions.png)
 
-ClickHouse’s magic happens in the way it compresses data, pre-aggregates data, and uses specialized engines accessing a device’s full compute potential. If we consider BigQuery to be a United-scale commercial airliner, then ClickHouse is a fighter jet. 
+ClickHouse’s magic happens in the way it compresses data, pre-aggregates data, and uses specialized engines accessing a device’s full compute potential. If BigQuery is a commercial airliner, then ClickHouse is a fighter jet. 
 
 ### ClickHouse Cloud’s Architecture
 
@@ -85,11 +85,11 @@ However, ClickHouse Cloud is still ***not*** a pure replacement for BigQuery. Cl
 
 ## Why ClickHouse is faster
 
-Data warehouses like BigQuery and ClickHouse are both used to return analytical queries. Queries might sound like “a list of average revenue for the last four years” or “the median household income”. Not only do these queries change on **every** data insert, but computing lots and lots of numbers can draw a lot of memory and processing power. 
+Data warehouses like BigQuery and ClickHouse are used to return analytical queries. Queries might look like “a list of average revenue for the last four years” or “the median household income”. Not only do these queries change on **every** data insert, but computing many values can draw a lot of memory and processing power. 
 
 The performance difference between BigQuery and ClickHouse can be immense. BigQuery can take dozens of seconds to execute a query. ClickHouse, if tuned correctly, can execute the same query on *terabytes* of data with sub-second performance. 
 
-The **"tuned”** bit is important — ClickHouse gives developers a lot of tooling to expedite expected queries. While BigQuery does some standard optimizations, like columnar storage (which we discuss in more detail in our [ClickHouse and Postgres comparison](https://posthog.com/blog/clickhouse-vs-postgres)), ClickHouse goes farther. In particular, ClickHouse accomplishes its “fighter jet” speeds by leveraging four techniques:
+The **"tuned”** bit is important — ClickHouse gives developers tooling to expedite expected queries. While BigQuery does some standard optimizations, like columnar storage (which we discuss in more detail in our [ClickHouse and Postgres comparison](/blog/clickhouse-vs-postgres)), ClickHouse goes further. In particular, ClickHouse accomplishes its “fighter jet” speeds by leveraging four techniques:
 
 1. Granulated storage
 2. Materialized views
@@ -98,7 +98,7 @@ The **"tuned”** bit is important — ClickHouse gives developers a lot of tool
 
 ### Granulated Storage
 
-Most databases store data indexed via primary keys. When searching for that data, such as a specific column, a typical database will scan all data and return the result. This is sloooow. 
+Most databases store data indexed via primary keys. When searching for that data, such as a specific column, a typical database scans all data and return the result. This is sloooow. 
 
 ClickHouse achieves a magnificent speed boost by using granulated storage. Each ClickHouse table has a primary key defined as a tuple of multiple columns. Data is then sorted by those columns, first by the first entry, then by the second, and onwards. Afterwards, sorted entries are broken into granules, which are fixed length mini-tables, by default 8192 entries long. ClickHouse’s big advancement is that it exclusively saves just the **first** entry to each granule. 
 
@@ -108,11 +108,11 @@ Because data is sorted by primary key columns — and those columns are typicall
 
 ### Materialized views
 
-Materialized views are psuedo-tables generated by other table data. Materialized views are available in a lot of databases, including industry-favorite, Postgres. However, most databases generate materialized views at a *specific* point in time. They aren’t updated automatically when new data is available; but in ClickHouse, they are. 
+Materialized views are psuedo-tables generated by other table data. Materialized views are available in a lot of databases, including industry-favorite, [Postgres](/blog/clickhouse-vs-postgres]. However, most databases generate materialized views at a *specific* point in time. They aren’t updated automatically when new data is available; but in ClickHouse, they are. 
 
 ClickHouse doesn’t accomplish this by using a cron job. Instead, ClickHouse re-engineered how materialized views work. When data is ingested, typically in-bulk, it’s slowly added to a materialized view by merging with an intermediate data representation. 
 
-If you’ve ever implemented a MergeSort, ClickHouse’s underlying operation is similar. It is tuned for specific mathematical operations, like Mean or Count, and can append to a pre-existing materialized view incrementally.  
+If you’ve ever implemented a MergeSort, ClickHouse’s underlying operation is similar. It is tuned for specific mathematical operations, like mean or count, and can append to a pre-existing materialized view incrementally.  
 
 ### Specialized engines
 
@@ -122,7 +122,7 @@ This is one of the useful features we leverage extensively at PostHog – watch 
 
 ### Vectorized Query Execution
 
-Vectorized query execution allows ClickHouse to use SIMD (Single Instruction Multiple Data), which parallelize data aggregation of multiple memory values with a single instruction. This massively boosts computation. 
+Vectorized query execution enables ClickHouse to use SIMD (Single Instruction Multiple Data), which parallelize data aggregation of multiple memory values with a single instruction. This massively boosts computation. 
 
 While BigQuery doesn’t support vectorized query execution, Google does [offer it](https://cloud.google.com/bigquery/docs/bi-engine-query) through BI Engine, a separate GCP product that integrates with BigQuery. 
 
@@ -136,7 +136,7 @@ With this arrangement, BigQuery can act as a business’s core data warehouse wi
 
 ![Data FLow.png](../images/blog/clickhouse-vs-bigquery/data-flow.png)
 
-In order to effectively connect ClickHouse and BigQuery, data needs to be streamed from BigQuery to ClickHouse. This can happen through Google Cloud Storage, or using Google DataFlow + Apache Beam. This does take some serious set-up work (the ClickHouse + BigQuery connection is hardly “one-click”), but ClickHouse has a well-documented [process](https://clickhouse.com/blog/clickhouse-bigquery-migrating-data-for-realtime-queries) on it. 
+In order to effectively connect ClickHouse and BigQuery, data needs to be streamed from BigQuery to ClickHouse. This can happen through Google Cloud Storage, or using Google DataFlow + Apache Beam. This does take some serious setup work (the ClickHouse + BigQuery connection is hardly “one-click”), but ClickHouse has a well-documented [process](https://clickhouse.com/blog/clickhouse-bigquery-migrating-data-for-realtime-queries) on it. 
 
 ## Who uses BigQuery and ClickHouse (and ClickHouse Cloud)?
 
