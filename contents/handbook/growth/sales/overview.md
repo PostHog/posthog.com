@@ -34,7 +34,7 @@ As we get bigger, we're getting more inbound demand from larger organisations wh
 To avoid us going down the wrong path with deals like this, we have 4 simple principles for dealing with these larger deals.
 
 - **We don't contract deliverables**. Otherwise a single customer could have too much of an impact on team morale and priorities.
-- **We will built things for a big customer, as long as we are confident they won’t be the only user of that thing**
+- **We will build things for a big customer, as long as we are confident they won’t be the only user of that thing**
 - **Customers need to try PostHog before they ask us to change things**. We love feedback from customers. We don't love big requirement documents from people that haven't used our product before.
 - **We don’t care about losing deals**. If we have to walk away from a deal because we'd have to compromise on these principles, we will. We can do this because we have a really strong growth engine with our ICP customers
 
