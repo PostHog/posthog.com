@@ -33,7 +33,7 @@ You can check out [the MaxAI repo README for a full explanation of how his AI wo
 
 Currently Max pulls information from our docs, our GitHub repos, and our [Squeak](https://squeak.posthog.com/) questions. He can use these sources to answer questions about how PostHog works, what we're working on, how to solve common problems, and more. [He can also write poetry.](https://twitter.com/posthog/status/1643269734249406469)
 
-Want to test him our? [Tag @Max-AI in the PostHog Slack, or send him a DM!](/slack)
+Want to test him out? [Tag @Max-AI in the PostHog Slack, or send him a DM!](/slack)
 
 #### PostHog Tracks
 ![posthog tracks](../images/blog/array/tracks.gif)
