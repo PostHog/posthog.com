@@ -6,7 +6,9 @@ showTitle: true
 
 ## 1. Support Hero
 
-Every week, we assign one person to be the "Support Hero" per engineering team (alternative names "Secondary", "Support Sidekick", "Infra Hero", "Luigi"). If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the satisfaction of helping them out, and contribute to a lot of different parts of our system. You're responsible for prioritizing responding to customer support requests, Sentry errors and alerts and feature work.
+Every week, we assign one person to be the "Support Hero" per engineering team (alternative names "Secondary", "Support Sidekick", "Infra Hero", "Luigi"). If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the satisfaction of helping them out, and contribute to a lot of different parts of our system. Your first priority should be dealing with alerts or Sentry alerts are high priority. After that, it's responding to customer support requests. Depending on how busy the week is you can do some feature work too.
+
+
 
 ### Expectations
 
