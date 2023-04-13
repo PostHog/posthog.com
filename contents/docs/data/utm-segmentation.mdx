@@ -38,6 +38,18 @@ Here's an example of what an event looks like when all 5 UTM parameters are set.
 
 > **Note: ** Along with being set on events, these UTM properties will also be added to the profile of the user who sent the event.
 
+### Custom UTM parameters
+
+You can configure [posthog-js](/docs/libraries/js#config) to capture any custom query parameters that you want to track by adding them to the `custom_utm_params` array.
+
+```js
+posthog.init('<ph_project_api_key>', {
+    custom_campaign_params: ["my_custom_utm_source"]
+})
+
+// Will automatically capture `example.com?my_custom_utm_source=twitter`
+```
+
 ### Filtering based on UTM parameters
 
 One of the most common uses for UTM parameters is to filter down page views to only a single source or campaign. This allows you to then create insights that track and compare the effectiveness of different ad providers or using different content.

@@ -4,11 +4,12 @@ import React from 'react'
 import Header from '../Header'
 import RightCol from '../RightCol'
 import CallToAction from '../CallToAction'
-import { TwoCol, Wrapper } from '../Wrapper'
+import { Block, TwoCol, Wrapper } from '../Wrapper'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import { Avatar, Login } from '../../../../pages/community'
 import { useUser } from 'hooks/useUser'
+import getAvatarURL from '../../../Squeak/util/getAvatar'
 
 interface ColMenuItems {
     title: string
@@ -19,14 +20,15 @@ interface ColMenuItems {
 const Profile = () => {
     const { user } = useUser()
     const profile = user?.profile
+
     return profile ? (
         <div>
             <div className="flex items-center space-x-2 mt-4 mb-3">
-                <Avatar src={profile.avatar} className="w-[40px] h-[40px]" />
+                <Avatar src={getAvatarURL(profile)} className="w-[40px] h-[40px]" />
                 <div>
                     {
                         <p className="m-0 font-semibold dark:text-white">
-                            {[profile?.first_name, profile?.last_name].filter(Boolean).join(' ')}
+                            {[profile.firstName, profile.lastName].filter(Boolean).join(' ')}
                         </p>
                     }
                 </div>
@@ -140,12 +142,9 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                                                                 <span>{label}</span>
                                                                                 <span className="text-black dark:text-white opacity-50 font-semibold">
                                                                                     (
-                                                                                    {
-                                                                                        allTopics.find(
-                                                                                            (topic) =>
-                                                                                                topic.topic === label
-                                                                                        )?.count
-                                                                                    }
+                                                                                    {allTopics.find(
+                                                                                        (topic) => topic.topic === label
+                                                                                    )?.count || '0'}
                                                                                     )
                                                                                 </span>
                                                                             </Link>
@@ -166,32 +165,17 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </CallToAction>
                             </div>
                         </div>
-                        <TwoCol
-                            left={{
-                                title: 'Roadmap',
-                                cta: {
-                                    url: '/roadmap',
-                                    label: 'Browse roadmap',
-                                },
-                                children: (
+
+                        <div className="border-t border-gray-accent-light border-dashed">
+                            <div className="max-w-3xl mx-auto xl:max-w-auto">
+                                <Block title="Roadmap" cta={{ url: '/roadmap', label: 'Browse roadmap' }}>
                                     <p className="m-0 text-[14px] dark:text-white">
                                         See what we're building, and help us decide what to build next.
                                     </p>
-                                ),
-                            }}
-                            right={{
-                                title: 'Changelog',
-                                cta: {
-                                    url: '/roadmap/changelog',
-                                    label: 'Browse changelog',
-                                },
-                                children: (
-                                    <p className="m-0 text-[14px] dark:text-white">
-                                        Take a trip down memory lane of our top company and product milestones.
-                                    </p>
-                                ),
-                            }}
-                        />
+                                </Block>
+                            </div>
+                        </div>
+
                         <div className="py-7 md:px-6 lg:px-9 border-t md:border-b-0 border-b md:mb-0 mb-4 border-gray-accent-light border-dashed">
                             <div className="grid sm:grid-cols-2 items-center">
                                 <div>
@@ -221,7 +205,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </Link>
                                 .
                             </p>
-                            <CallToAction to="https://merch.posthog.com/collections/all" className="!w-full mt-4">
+                            <CallToAction to="https://merch.posthog.com" className="!w-full mt-4">
                                 Visit the merch store
                             </CallToAction>
                         </div>
@@ -267,8 +251,8 @@ const query = graphql`
                 }
             }
         }
-        questions: allQuestion {
-            allTopics: group(field: topics___topic___label) {
+        questions: allSqueakQuestion {
+            allTopics: group(field: topics___label) {
                 topic: fieldValue
                 count: totalCount
             }

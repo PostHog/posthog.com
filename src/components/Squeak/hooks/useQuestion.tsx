@@ -1,98 +1,183 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import { useOrg } from '../hooks/useOrg'
+import qs from 'qs'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
+import useSWR from 'swr'
 import { useUser } from 'hooks/useUser'
-import { doDelete, patch, post } from '../lib/api'
 
-type QuestionContextValue = {
-    [key: string]: any
+type UseQuestionOptions = {
+    data?: StrapiRecord<QuestionData>
 }
 
-export const Context = createContext<QuestionContextValue>({})
+export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
+    const isPermalink = typeof id === 'string'
 
-type QuestionProviderProps = {
-    children: React.ReactNode
-    question: Record<string, any> // TODO: Real question type
-    onResolve: (resolved: boolean, replyId: string | null) => void
-    onSubmit: React.FormEventHandler
-    [key: string]: any
-}
-
-export const Provider: React.FC<QuestionProviderProps> = ({ children, question, onResolve, onSubmit, ...other }) => {
-    const { organizationId, apiHost } = useOrg()
-    const { user } = useUser()
-    const [replies, setReplies] = useState<any[]>([])
-    const [resolvedBy, setResolvedBy] = useState(question?.resolved_reply_id)
-    const [resolved, setResolved] = useState<boolean>(question?.resolved)
-    const [firstReply] = replies
-    const questionAuthorId = firstReply?.profile?.id || null
-
-    const handleResolve = async (resolved: boolean, replyId: string | null = null) => {
-        await post(apiHost, '/api/question/resolve', {
-            messageId: question?.id,
-            replyId,
-            organizationId,
-            resolved,
-        })
-        setResolved(resolved)
-        setResolvedBy(replyId)
-        if (onResolve) {
-            onResolve(resolved, replyId)
+    const query = qs.stringify(
+        {
+            filters: {
+                ...(isPermalink
+                    ? {
+                          permalink: {
+                              $eq: id,
+                          },
+                      }
+                    : {
+                          id: {
+                              $eq: id,
+                          },
+                      }),
+            },
+            populate: {
+                resolvedBy: {
+                    select: ['id'],
+                },
+                profile: {
+                    select: ['id', 'firstName', 'lastName'],
+                    populate: {
+                        avatar: {
+                            select: ['id', 'url'],
+                        },
+                    },
+                },
+                replies: {
+                    publicationState: 'preview',
+                    sort: ['createdAt:asc'],
+                    populate: {
+                        profile: {
+                            fields: ['id', 'firstName', 'lastName', 'gravatarURL'],
+                            populate: {
+                                avatar: {
+                                    fields: ['id', 'url'],
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        {
+            encodeValuesOnly: true, // prettify URL
         }
-    }
+    )
 
-    const handleReply = async (reply: Record<string, any>) => {
-        setReplies((replies) => [...replies, reply])
-    }
+    const {
+        data: question,
+        error,
+        isLoading,
+        mutate,
+    } = useSWR<StrapiRecord<QuestionData>>(
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query}`,
+        async (url) => {
+            const res = await fetch(url)
+            const { data } = await res.json()
+            return data?.[0]
+        }
+    )
 
-    const handleReplyDelete = async (id: string) => {
-        await doDelete(apiHost, `/api/replies/${id}`, { organizationId })
-        setReplies(replies.filter((reply) => id !== reply.id))
-    }
+    const { getJwt } = useUser()
 
-    const handlePublish = async (id: string, published: boolean) => {
-        await patch(apiHost, `/api/replies/${id}`, {
-            organizationId: organizationId,
-            published,
+    const reply = async (body: string) => {
+        const token = await getJwt()
+
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    body,
+                    question: question?.id,
+                },
+                populate: {
+                    profile: {
+                        fields: ['id', 'firstName', 'lastName'],
+                        populate: {
+                            avatar: {
+                                fields: ['id', 'url'],
+                            },
+                        },
+                    },
+                },
+            }),
         })
-        const newReplies = [...replies]
-        newReplies.some((reply) => {
-            if (reply.id === id) {
-                reply.published = published
-                return true
-            }
-        })
-        setReplies(newReplies)
+
+        mutate()
     }
 
-    useEffect(() => {
-        setReplies(other.replies.filter((reply: any) => reply.published || (!reply.published && user?.isModerator)))
-    }, [other.replies, user?.id])
+    const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
 
-    useEffect(() => {
-        setResolved(question.resolved)
-    }, [question.resolved])
+    const handlePublishReply = async (published: boolean, id: number) => {
+        const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                data: {
+                    publishedAt: published ? null : new Date(),
+                },
+            }),
+            headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
 
-    useEffect(() => {
-        setResolvedBy(question.resolved_reply_id)
-    }, [question.resolved_reply_id])
+        if (!replyRes.ok) {
+            throw new Error('Failed to update reply data')
+        }
 
-    const value = {
-        replies,
-        resolvedBy,
-        resolved,
-        questionAuthorId,
-        question,
-        onSubmit,
-        handleReply,
+        await replyRes.json()
+
+        mutate()
+    }
+
+    const handleResolve = async (resolved: boolean, resolvedBy: number | null) => {
+        const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                data: {
+                    resolved,
+                    resolvedBy,
+                },
+            }),
+            headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        if (!replyRes.ok) {
+            throw new Error('Failed to update reply data')
+        }
+
+        await replyRes.json()
+
+        mutate()
+    }
+
+    const handleReplyDelete = async (id: number) => {
+        const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        if (!replyRes.ok) {
+            throw new Error('Failed to delete reply')
+        }
+
+        await replyRes.json()
+
+        mutate()
+    }
+
+    return {
+        question: questionData,
+        reply,
+        error,
+        isLoading: isLoading && !questionData,
+        isError: error,
+        handlePublishReply,
         handleResolve,
         handleReplyDelete,
-        handlePublish,
     }
-
-    return <Context.Provider value={value}>{children}</Context.Provider>
-}
-
-export const useQuestion = () => {
-    const question = useContext(Context)
-    return question
 }

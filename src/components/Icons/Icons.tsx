@@ -2019,11 +2019,7 @@ export const Ctrl = (props: any) => {
 export const K = (props: any) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="7" height="9" fill="currentColor" {...props}>
-            <path
-                fill="#000"
-                d="M1.496 8.7V6.027l.847-.869L4.741 8.7h1.87L3.366 4.08 6.336 1H4.367L1.496 4.047V1H0v7.7h1.496Z"
-                opacity=".25"
-            />
+            <path d="M1.496 8.7V6.027l.847-.869L4.741 8.7h1.87L3.366 4.08 6.336 1H4.367L1.496 4.047V1H0v7.7h1.496Z" />
         </svg>
     )
 }
@@ -2056,7 +2052,7 @@ export const Markdown = (props: any) => {
             xmlns="http://www.w3.org/2000/svg"
             {...props}
         >
-            <g fill="#000">
+            <g fill="currentColor">
                 <path
                     clipRule="evenodd"
                     d="m15 10c-2.7614 0-5 2.2386-5 5v98c0 2.761 2.2386 5 5 5h178c2.761 0 5-2.239 5-5v-98c0-2.7614-2.239-5-5-5zm-15 5c0-8.28427 6.71573-15 15-15h178c8.284 0 15 6.71573 15 15v98c0 8.284-6.716 15-15 15h-178c-8.28427 0-15-6.716-15-15z"
