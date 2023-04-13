@@ -3,7 +3,7 @@ title: How to improve web app performance using PostHog session replays
 sidebar: Docs
 showTitle: true
 author: ['lior-neu-ner']
-date: 2023-04-12
+date: 2023-04-13
 featuredImage: ../images/tutorials/banners/tutorial-13.png
 tags: ["session recordings"]
 ---
