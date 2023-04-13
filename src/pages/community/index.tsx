@@ -354,8 +354,6 @@ const ProfileSidebar = ({
 }) => {
     const { user, logout } = useUser()
 
-    console.log(user)
-
     const [editModalOpen, setEditModalOpen] = useState(false)
 
     return (
