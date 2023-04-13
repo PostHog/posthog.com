@@ -54,13 +54,11 @@ export default function NotFoundPage(): JSX.Element {
                     <div className="text-[15px] opacity-75 -mt-12 sm:mt-0 mb-4">
                         <strong>404:</strong> <s>Hog</s> Page not found
                     </div>
-                    <h2 className="text-5xl md:text-6xl text-white mb-4">
-                        "I don't belong in space <span className="md:inline-block">(and neither do you)!"</span>
-                    </h2>
+                    <h2 className="text-5xl md:text-7xl text-white mb-0">Lost in space</h2>
 
                     <div className="relative sm:w-1/2 md:w-3/4">
                         <div className="py-8">
-                            <h3 className="text-2xl mb-4 text-yellow">Try a search to beam us back to PostHog.com:</h3>
+                            <h3 className="text-2xl mb-4 text-yellow">Try a search to beam back to PostHog.com:</h3>
                             <SearchBox placeholder="Search..." location="404" />
                             <p className="text-sm pt-2 opacity-75 max-w-lg">
                                 Searches: Docs, API, Tutorials, Blog, Community Questions, and Company Handbook –{' '}
