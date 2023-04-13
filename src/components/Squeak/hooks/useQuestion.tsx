@@ -130,7 +130,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     }
 
     const handleResolve = async (resolved: boolean, resolvedBy: number | null) => {
-        const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${id}`, {
+        const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 data: {

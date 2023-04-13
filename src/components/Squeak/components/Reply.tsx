@@ -25,6 +25,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
         handleResolve,
         handleReplyDelete,
     } = useContext(CurrentQuestionContext)
+
     const stuff = useContext(CurrentQuestionContext)
     const [confirmDelete, setConfirmDelete] = useState(false)
     const { user } = useUser()
