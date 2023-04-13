@@ -144,7 +144,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Merch',
-                url: 'https://merch.posthog.com/collections/all',
+                url: 'https://merch.posthog.com',
             },
             {
                 title: 'PostHog FM',

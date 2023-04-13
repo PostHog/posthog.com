@@ -221,7 +221,7 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                 </Link>
                                 .
                             </p>
-                            <CallToAction to="https://merch.posthog.com/collections/all" className="!w-full mt-4">
+                            <CallToAction to="https://merch.posthog.com" className="!w-full mt-4">
                                 Visit the merch store
                             </CallToAction>
                         </div>
