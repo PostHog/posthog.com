@@ -93,7 +93,7 @@ Whoever gets the thankless responsibility of maintaining the data stack sees the
 
 Startups need this stack because managing and accessing individual sources of data becomes unsustainable. Tools like analytics and the CDP don't give complete insight into performance. Teams need a reliable, single source of truth they trust. They hope the modern data stack gives them that.
 
-The problem with the modern data stack is that it often fails the people it was originally meant to serve. It creates a gap between engineers and the data that is valuable to them. They are unable to self-serve and must learn the modern data stack tools, or rely on the data team for insights. There are many reasons for this:
+The problem with the modern data stack is that it often fails the people it was originally meant to serve. **It creates a gap between engineers and the data that is valuable to them.** They are unable to self-serve and must learn the modern data stack tools, or rely on the data team for insights. There are many reasons for this:
 
 - The complexity of data and tools requires specialization.
 - Data security, safety, and privacy requirements.
