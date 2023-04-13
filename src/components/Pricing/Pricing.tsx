@@ -14,6 +14,7 @@ import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { PlanComparison } from './PlanComparison'
 import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
+import '@dotlottie/player-component'
 
 export const section = cntl`
     max-w-6xl
@@ -125,19 +126,16 @@ const Pricing = (): JSX.Element => {
                     }
                 />
             </section>
-            <section className={`${section} mb-12 mt-16`}>
-                <div className="sm:flex-row flex-col-reverse flex items-center sm:items-start justify-center">
-                    <StaticImage src="./images/vacation-hog.png" alt="Vacation Hog" width={252} placeholder="none" />
-                    <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0">
-                        <p className="text-white m-0 text-[18px] font-bold font-comic">
-                            Looking for the signup button?
-                        </p>
-                        <p className="text-[15px] mt-0 mb-2 text-white font-comic">(I’ll take you there.)</p>
+            <section className={`${section} mb-4 mt-16`}>
+                <div className="sm:flex-row flex-col flex items-center sm:items-start justify-center">
+                    <div className="text-center bg-[#2D2D2D] p-5 rounded-[15px] relative -mb-8 sm:mb-2 sm:-mr-8 flex-shrink-0">
+                        <p className="text-white m-0 text-[16px] font-bold">Looking for the sign up button?</p>
+                        <p className="text-[14px] text-white/80 italic mt-2 mb-0">( I’ll take you there )</p>
                         <button
                             onClick={() => scroll.scrollToTop()}
-                            className="mx-auto flex space-x-2 items-center bg-red text-[15px] font-bold text-white px-3 py-2 rounded-sm relative active:top-[1px] active:scale-[.97]"
+                            className="mt-3 w-full inline-flex justify-center space-x-3 items-center bg-red text-[18px] font-bold text-white px-3 py-2.5 rounded-sm relative active:top-[1px] active:scale-[.97]"
                         >
-                            <span>Beam me up!</span>
+                            <span>Beam me up</span>
                             <svg
                                 width="17"
                                 height="23"
@@ -157,7 +155,7 @@ const Pricing = (): JSX.Element => {
                             </svg>
                         </button>
                         <svg
-                            className="absolute right-2 sm:left-2 sm:right-auto -bottom-5 -scale-x-1"
+                            className="absolute right-2 -bottom-5 -scale-x-1 md:scale-x-100"
                             width="35"
                             height="29"
                             viewBox="0 0 35 29"
@@ -170,6 +168,12 @@ const Pricing = (): JSX.Element => {
                             />
                         </svg>
                     </div>
+                    <dotlottie-player
+                        src="/lotties/alienhog.lottie"
+                        autoplay
+                        loop
+                        style={{ height: '400px', width: '400px' }}
+                    />
                 </div>
             </section>
         </Layout>
