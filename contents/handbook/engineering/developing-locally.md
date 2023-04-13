@@ -51,10 +51,9 @@ This is a faster alternative to get up and running. If you don't want to or can'
 
 
 1. Create your codespace
-<img width="441" alt="Screenshot 2023-04-12 at 16 27 53" src="https://user-images.githubusercontent.com/890921/231489405-cb2010b4-d9e3-4837-bfdf-b2d4ef5c5d0b.png">
+![](https://user-images.githubusercontent.com/890921/231489405-cb2010b4-d9e3-4837-bfdf-b2d4ef5c5d0b.png)
 2. Update it to 8-core machine type (the smallest is probably too small to get PostHog running properly). Consider also changing "Open in ..." to be your favorite editor.
-<img width="406" alt="Screenshot 2023-04-12 at 16 28 33" src="https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png">
-
+![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
 3. Open a terminal window and run `docker compose -f docker-compose.dev.yml up`
 4. Open a terminal window and run `./bin/migrate` and then `./bin/start`
 5. Open browser to http://localhost:8000/
