@@ -21,12 +21,27 @@ We believe that PostHog has the greatest value for the following Ideal Customer 
 - Have achieved product market fit
 - Have products aimed at businesses
 
-In addition, people looking at self-hosting will:
-- Need to control their user data
-- Want Enterprise features such as SSO Integration or Project permissioning
-
 ## Our values
 
 - No sales-y talk - we are direct, open and honest with customers. We share as much as possible publicly, rather than hiding it behind a mandatory demo call. We are honest when we don't know the answer, or if we're not sure that PostHog is the right solution for a customer. 
 - Speed - we are frighteningly responsive. If a customer is in a rush, we do our best to work at their pace. We are clear about expectations, and do not promise what we cannot deliver to close a deal. 
 - Engineers helping engineers - there is nothing more frustrating than talking to a salesperson who can't give you all the answers. We keep 'let me find out from the team' to an absolute minimum. 
+
+## Large or enterprise customers
+
+As we get bigger, we're getting more inbound demand from larger organisations which have a very different buying process from our smaller customers. If we want to reach our ambitious revenue goals we'll need to get good at selling to this segment of customer. However, we need to do this without compromising our focus on building a great product for our ICP.
+
+To avoid us going down the wrong path with deals like this, we have 4 simple principles for dealing with these larger deals.
+
+- **We don't contract deliverables**. Otherwise a single customer could have too much of an impact on team morale and priorities.
+- **We will built things for a big customer, as long as we are confident they won’t be the only user of that thing**
+- **Customers need to try PostHog before they ask us to change things**. We love feedback from customers. We don't love big requirement documents from people that haven't used our product before.
+- **We don’t care about losing deals**. If we have to walk away from a deal because we'd have to compromise on these principles, we will. We can do this because we have a really strong growth engine with our ICP customers
+
+We'd typically define a deal as a large deal if it has most of the following:
+
+- The customer puts us through a lengthy procurement process (3+ months)
+- The customer wants us to build new features or 
+- There are multiple stakeholders on the customer side, some or all of which are not engineers
+- The deal is larger than $250k/year
+
