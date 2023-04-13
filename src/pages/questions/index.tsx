@@ -81,7 +81,7 @@ export default function Questions() {
                         </div>
                         <div className="mt-8 flex flex-col">
                             <QuestionsTable
-                                className="sm:grid-cols-4"
+                                className=""
                                 questions={questions}
                                 size={size}
                                 setSize={setSize}
