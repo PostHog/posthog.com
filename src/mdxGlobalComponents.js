@@ -1,4 +1,4 @@
-// AUTO GENERATED FILE
+// AUTO GENERATED FILE 
 
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
@@ -20,22 +20,22 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { TracksCTA } from './components/TracksCTA'
 
 export const shortcodes = {
-    ArrayCTA,
-    BasicHedgehogImage,
-    BorderWrapper,
-    CallToAction,
-    Caption,
-    CompensationCalculator,
-    FeatureAvailability,
-    GDPRForm,
-    HiddenSection,
-    LPCTA,
-    NewsletterTutorial,
-    OverflowXSection,
-    Quote,
-    ProductLayout,
-    Quote2,
-    Squeak,
-    StarRepoButton,
-    TracksCTA,
+	ArrayCTA,
+	BasicHedgehogImage,
+	BorderWrapper,
+	CallToAction,
+	Caption,
+	CompensationCalculator,
+	FeatureAvailability,
+	GDPRForm,
+	HiddenSection,
+	LPCTA,
+	NewsletterTutorial,
+	OverflowXSection,
+	Quote,
+	ProductLayout,
+	Quote2,
+	Squeak,
+	StarRepoButton,
+	TracksCTA
 }

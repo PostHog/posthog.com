@@ -1,6 +1,10 @@
 import React from 'react'
 
-export const Days = ({ created }: { created: string }) => {
+export const Days = ({ created }: { created: string | undefined }) => {
+    if (!created) {
+        return null
+    }
+
     const today = new Date()
     const posted = new Date(created)
     const diff = today.getTime() - posted.getTime()
