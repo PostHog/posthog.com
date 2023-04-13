@@ -605,15 +605,11 @@
         "url": "",
         "children": [
             {
-                "name": "Growth strategy",
-                "url": "/handbook/growth/strategy"
-            },
-            {
                 "name": "Customer support",
                 "url": "/handbook/growth/customer-support"
             },
             {
-                "name": "Inbound sales model",
+                "name": "Sales overview",
                 "url": "/handbook/growth/sales/overview"
             },
             {
