@@ -17,7 +17,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ placeholder, location, fil
     }
 
     return (
-        <button onClick={handleSearchBoxClick} className="flex items-center relative m-0">
+        <button onClick={handleSearchBoxClick} className="flex items-center relative m-0 w-full">
             <div className="absolute left-4 w-4 h-4">
                 <svg className="opacity-50" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
                     <g opacity="1" clipPath="url(#a)">
