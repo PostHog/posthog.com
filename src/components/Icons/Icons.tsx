@@ -2019,11 +2019,7 @@ export const Ctrl = (props: any) => {
 export const K = (props: any) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="7" height="9" fill="currentColor" {...props}>
-            <path
-                fill="#000"
-                d="M1.496 8.7V6.027l.847-.869L4.741 8.7h1.87L3.366 4.08 6.336 1H4.367L1.496 4.047V1H0v7.7h1.496Z"
-                opacity=".25"
-            />
+            <path d="M1.496 8.7V6.027l.847-.869L4.741 8.7h1.87L3.366 4.08 6.336 1H4.367L1.496 4.047V1H0v7.7h1.496Z" />
         </svg>
     )
 }
