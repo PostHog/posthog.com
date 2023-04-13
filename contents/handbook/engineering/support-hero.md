@@ -48,7 +48,7 @@ As a business we need to ensure we are focusing support on our paying customers,
 
 1. Any requests where you are tagged by the Customer Success team in a dedicated slack channel as there will be some urgency needed.
 2. Any requests assigned to you in [Unthread](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) as they will be from a high priority customer in a dedicated Slack channel.
-3. Open Zendesk tickets for your team that have `high` priorty (high-paying customers).
+3. Open Zendesk tickets for your team that have `high` priority (high-paying customers).
 4. Open Zendesk tickets for your team that have `normal` priority (paying customers).
 5. [Squeak!](https://posthog.com/questions/) questions.
 6. [#community-support](https://posthogusers.slack.com/archives/C01GLBKHKQT) channel on the User Slack.
