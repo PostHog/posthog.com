@@ -26,7 +26,7 @@ In this article we’ll explore the crucial differences and similarities between
 
 However, if you’re in a rush and want to know the short version then we can keep it simple off the bat by explaining how PostHog and Pendo differ at a high level. 
 
-## What’s the difference between PostHog and Pendo?
+## Differences between PostHog and Pendo
 
 ### 1. PostHog is an all-in one platform
 PostHog solves this problem by bringing all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, experimentation, session capturing, and data warehouse features. Pendo, on the other hand, is a more limited product which doesn’t offer many of these features and requires you to adopt other platforms, such as HotJar or LaunchDarly, in order to get comparable functionality to PostHog.
@@ -46,7 +46,7 @@ Pendo has four pricing options — Free, Starter, Growth, and Portfolio. Pendo�
 
 PostHog has three pricing plans — Free, Scale, and Enterprise — but all three of these are billed based on usage. The Free plan is intended for hobbyists and early-stage teams who need basic features within generous usage limits up to 1 million events per month, while the Scale plan unlocks advanced features and is priced solely on usage. The Enterprise plan simply unlocks extra security, compliance and permissioning features in order to meet the needs of large businesses. 
 
-> **Are you an early-stage startup?** Get $50k in PostHog credit, and more, by joining [our PostHog for Startups programme](/startups)!
+> **Are you an early-stage startup?** Get $50k in PostHog credit, and more, by joining [our PostHog for Startups program](/startups)!
 
 In order to compare PostHog and Pendo simply and easily, we’ll focus on comparing Pendo Engage to PostHog and include features from all pricing tiers. In this way, you can clearly see how Pendo Engage stacks up against PostHog and defer pricing decisions until you’ve identified the best tool for the job. 
 
@@ -212,6 +212,7 @@ This difference is reflected in all levels of the product, but especially in pro
 
 - **[SQL access](/docs/product-analytics/hogql):** SQL, which stands for Structured Query Language, is a programming language for interrogating data. While both Pendo and PostHog offer the ability to analyze data with ready-made insights and visualizations types, SQL enables you to go beyond this and examine data in any way. Only PostHog offers SQL access to your data; in Pendo you are limited to the existing graphs and widgets.
 
+<h4 className="mb-0">Discover what's possible with <span className="text-red">product analytics</span></h4>
 <TutorialsSlider slugs={[
   "/tutorials/churn-rate",
   "/tutorials/funnels",
@@ -237,6 +238,7 @@ Below are some of the most popular ready-made apps which facilitate in-app messa
 
 - **[Pineapple Mode](/apps/pineapple-mode)**: Rains pineapples all over your product,  advancing the sense of chaos and entropy in the world. 
 
+<h4 className="mb-0">Discover what's possible with <span className="text-red">PostHog apps</span></h4>
 <TutorialsSlider slugs={[
   "/tutorials/build-site-app",
   "/tutorials/feedback-interviews-site-apps",
@@ -433,7 +435,7 @@ Below, we've listed a few of the most popular integrations used across PostHog a
 
 Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPPA and GDPR can require teams to store data in certain locations, or to protect data in certain ways. 
 
-div className="overflow-x-auto -mx-5 px-5">
+<div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
@@ -554,13 +556,15 @@ Autocapture is preferred by many users because its much faster to setup, but som
 
 ### Library support
 
+PostHog supports a wide range of client and server libraries, but not all features are equally available across all of them. We recommend using PostHog's JavaScript snippet to enjoy all features. See [our client library documentation](/docs/integrate?tab=snippet) for more information.
+
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td><strong>LogRocket</strong></td>
             <td><strong>Pendo</strong></td>
+            <td><strong>PostHog</strong></td>
         </tr>
     </thead>
     <tbody>
@@ -603,17 +607,13 @@ Autocapture is preferred by many users because its much faster to setup, but som
 </table>
 </div>
 
-> ### PostHog library support
->
-> PostHog supports a wide range of client and server libraries, but not all features are equally available across all of them. We recommend using PostHog's JavaScript snippet to enjoy all features. See [our client library documentation](/docs/integrate?tab=snippet) for more information.
-
 <ArrayCTA />
 
 ## Frequently asked questions
 
--   How much does Pendo cost?
--   How much does PostHog cost?
--   Do LogRocket and PostHog offer free trials?
+-   [How much does Pendo cost?](#how-much-does-pendo-cost)
+-   [How much does PostHog cost?](#how-much-does-posthog-cost)
+-   [Do Pendo and PostHog offer free trials?](#do-pendo-and-posthog-offer-free-trials)
 
 Got another question? You can [ask the PostHog team anything you want](/questions)!
 
