@@ -43,6 +43,8 @@ const fetchTopicGroups = async () => {
     return topicGroups.json().then((topicGroups) => topicGroups.data)
 }
 
+const topicGroupsSorted = ['Products', 'Platform', 'Data', 'Self-hosting']
+
 export default function Questions() {
     const [topicGroups, setTopicGroups] = useState([])
 
@@ -70,9 +72,15 @@ export default function Questions() {
 
                         {topicGroups?.length > 0 && (
                             <div className="mt-8 flex flex-col space-y-8">
-                                {topicGroups.map(({ attributes: { label, topics } }) => {
-                                    return <TopicsTable key={label} topicGroup={label} topics={topics} />
-                                })}
+                                {topicGroups
+                                    .sort(
+                                        (a, b) =>
+                                            topicGroupsSorted.indexOf(a?.attributes?.label) -
+                                            topicGroupsSorted.indexOf(b?.attributes?.label)
+                                    )
+                                    .map(({ attributes: { label, topics } }) => {
+                                        return <TopicsTable key={label} topicGroup={label} topics={topics} />
+                                    })}
                             </div>
                         )}
                     </section>
