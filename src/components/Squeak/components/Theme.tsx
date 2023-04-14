@@ -330,6 +330,9 @@ const Style = createGlobalStyle`
                 padding: 0;
                 border: 0;
                 position: relative;
+                &:disabled {
+                    opacity: .5
+                }
             }
         }
         

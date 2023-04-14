@@ -4,6 +4,21 @@ import { QuestionData, StrapiRecord } from 'lib/strapi'
 import React, { useEffect, useState } from 'react'
 import { useQuestion } from '../hooks/useQuestion'
 
+const Button = ({
+    className,
+    subscribed,
+    handleSubscribe,
+}: {
+    className?: string
+    subscribed: boolean | null
+    handleSubscribe: () => Promise<void>
+}) =>
+    subscribed === null ? null : (
+        <button className={className} onClick={handleSubscribe}>
+            {subscribed ? 'Unsubscribe' : 'Subscribe'}
+        </button>
+    )
+
 export default function SubscribeButton({
     question,
     className = '',
@@ -24,15 +39,23 @@ export default function SubscribeButton({
 
     const handleSubscribe = async () => (subscribed ? await unsubscribe() : await subscribe())
 
-    return subscribed !== null ? (
+    return (
         <Tooltip
             content={() => (
-                <div style={{ maxWidth: 250 }}>Get notified via email when someone responds to this question</div>
+                <div style={{ maxWidth: 250 }}>
+                    {user ? 'Get notified via email when someone responds to this question' : 'Sign in to subscribe!'}
+                </div>
             )}
         >
-            <button className={className} onClick={handleSubscribe}>
-                {subscribed ? 'Unsubscribe' : 'Subscribe'}
-            </button>
+            <span className="relative">
+                {user ? (
+                    <Button subscribed={subscribed} handleSubscribe={handleSubscribe} className={className} />
+                ) : (
+                    <button className={className} disabled>
+                        Subscribe
+                    </button>
+                )}
+            </span>
         </Tooltip>
-    ) : null
+    )
 }
