@@ -110,7 +110,7 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                                 <div className="flex items-center w-full justify-between opacity-70">
                                     <h3 className="text-[18px] font-bold m-0 text-black pl-2">{title}</h3>
                                 </div>
-                                <p className="pl-2 text-75 text-sm">
+                                <p className="pl-2 text-75 text-sm text-black dark:text-white opacity-50">
                                     Our customer &amp; event data platform that ships (free) with all products
                                 </p>
                                 <ol className="grid grid-cols-2 space-x-[1px] list-none p-0 mx-0 mt-2 mb-6">
@@ -133,7 +133,9 @@ export default function Product({ referenceElement }: { referenceElement: HTMLDi
                                                     <h3 className="text-[15px] m-0 opacity-70 font-bold leading-none">
                                                         {title}
                                                     </h3>
-                                                    <p className="text-xs opacity-60 mt-1 mb-0">{description}</p>
+                                                    <p className="text-xs opacity-60 mt-1 mb-0 text-black dark:text-white">
+                                                        {description}
+                                                    </p>
                                                 </div>
                                             </li>
                                         )
