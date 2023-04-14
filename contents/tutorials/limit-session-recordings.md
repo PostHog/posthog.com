@@ -108,7 +108,7 @@ if (typeof window !== 'undefined') {
 //...
 ```
 
-> **Note:** When evaluating flags for a new user, person properties won't be available until ingestion. This means flags depending on person properties won't evaluate correctly if done in the `loaded` method. GeoIP properties (like continent code, country, and city name) will work because they don't depend on ingestion. 
+> **Note:** When evaluating flags for a new user, person properties won't be available until ingestion. This means flags depending on person properties won't evaluate correctly if done in the `loaded` method. GeoIP properties (like continent code, country, and city name) will work because they don't depend on ingestion. To make flags with person properties work here, use bootstrapping.
 
 ## Record on specific pages
 
