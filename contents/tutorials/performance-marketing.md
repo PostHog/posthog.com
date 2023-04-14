@@ -5,6 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-08
 featuredImage: ../images/tutorials/banners/tutorial-18.png
+featuredVideo: https://www.youtube-nocookie.com/embed/ExaQmFuaSyo
 tags: ['funnels', 'insights']
 --- 
 

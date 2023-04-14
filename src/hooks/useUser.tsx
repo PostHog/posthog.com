@@ -1,44 +1,46 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
-import getGravatar from 'gravatar'
-import { post } from 'components/Squeak/lib/api'
+import qs from 'qs'
+import { ProfileData, StrapiRecord, StrapiResult } from 'lib/strapi'
 
-type User = {
-    id: string
+export type User = {
+    id: number
     email: string
     isMember: boolean
     isModerator: boolean
-    profile: {
-        avatar: string
-        first_name: string
-        last_name: string
-    }
+    blocked: boolean
+    confirmed: boolean
+    createdAt: string
+    provider: 'local' | 'github' | 'google'
+    username: string
+    profile: StrapiRecord<ProfileData>
 }
 
 type UserContextValue = {
-    organizationId: string
-    apiHost: string
     isLoading: boolean
 
     user: User | null
     setUser: React.Dispatch<React.SetStateAction<User | null>>
-
-    getSession: () => Promise<User | null>
-    login: (args: { email: string; password: string }) => Promise<User | null>
+    fetchUser: (token?: string | null) => Promise<User | null>
+    getJwt: () => Promise<string | null>
+    login: (args: { email: string; password: string }) => Promise<User | null | { error: string }>
     logout: () => Promise<void>
-    signUp: (args: { email: string; password: string; firstName: string; lastName: string }) => Promise<User | null>
+    signUp: (args: {
+        email: string
+        password: string
+        firstName: string
+        lastName: string
+    }) => Promise<User | null | { error: string }>
 }
 
 export const UserContext = createContext<UserContextValue>({
-    organizationId: '',
-    apiHost: '',
     isLoading: true,
     user: null,
     setUser: () => {
         // noop
     },
-
-    getSession: async () => null,
+    fetchUser: async () => null,
+    getJwt: async () => null,
     login: async () => null,
     logout: async () => {
         // noop
@@ -47,47 +49,64 @@ export const UserContext = createContext<UserContextValue>({
 })
 
 type UserProviderProps = {
-    organizationId: string
-    apiHost: string
     children: React.ReactNode
 }
 
-export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizationId, children }) => {
-    const [isLoading, setIsLoading] = useState(true)
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+    const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState<User | null>(null)
+    const [jwt, setJwt] = useState<string | null>(null)
 
     useEffect(() => {
-        getSession()
+        const jwt = localStorage.getItem('jwt')
+        const user = localStorage.getItem('user')
+
+        if (jwt && user) {
+            setJwt(jwt)
+            setUser(JSON.parse(user))
+        } else {
+            // We shouldn't have a jwt without a user or vice versa. If we do, clear both and reset.
+            logout()
+        }
     }, [])
 
-    const getSession = async (): Promise<User | null> => {
+    const getJwt = async () => {
+        return jwt || localStorage.getItem('jwt')
+    }
+
+    const login = async ({
+        email,
+        password,
+    }: {
+        email: string
+        password: string
+    }): Promise<User | null | { error: string }> => {
         setIsLoading(true)
 
-        if (user) {
-            return user
-        }
-
         try {
-            const res = await fetch(`${apiHost}/api/user?organizationId=${organizationId}`, {
-                method: 'GET',
-                credentials: 'include',
+            const userRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                method: 'POST',
+                body: JSON.stringify({
+                    identifier: email,
+                    password,
+                }),
             })
 
-            if (!res.ok) {
-                return null
+            const userData = await userRes.json()
+
+            if (!userRes.ok) {
+                return { error: userData?.error?.message }
             }
 
-            const data = await res.json()
+            const user = await fetchUser(userData.jwt)
 
-            if (data.error) {
-                return null
-            } else {
-                setUser(data)
-                return data as User
-            }
+            localStorage.setItem('jwt', userData.jwt)
+            setJwt(userData.jwt)
+
+            return user
         } catch (error) {
             console.error(error)
             return null
@@ -96,31 +115,12 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
         }
     }
 
-    const login = async ({ email, password }: { email: string; password: string }): Promise<User | null> => {
-        setIsLoading(true)
-
-        const { data, error } =
-            (await post(apiHost, '/api/login', {
-                email,
-                password,
-                organizationId,
-            })) || {}
-
-        if (error) {
-            setIsLoading(false)
-
-            // TODO: Should probably throw here
-            return null
-        } else {
-            setUser(data)
-
-            return data
-        }
-    }
-
     const logout = async (): Promise<void> => {
-        await post(apiHost, '/api/logout')
+        localStorage.removeItem('jwt')
+        localStorage.removeItem('user')
+
         setUser(null)
+        setJwt(null)
     }
 
     const signUp = async ({
@@ -133,37 +133,84 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
         password: string
         firstName: string
         lastName: string
-    }): Promise<User | null> => {
-        const gravatar = getGravatar.url(email)
-        const avatar = await fetch(`https:${gravatar}?d=404`).then((res) => (res.ok && `https:${gravatar}`) || '')
+    }): Promise<User | null | { error: string }> => {
+        try {
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: email,
+                    email,
+                    password,
+                    firstName,
+                    lastName,
+                }),
+            })
 
-        // FIXME: This doesn't seem to return the right format
-        const { error, data } =
-            (await post(apiHost, '/api/register', {
-                email,
-                password,
-                firstName,
-                lastName,
-                avatar,
-                organizationId,
-            })) || {}
+            const userData = await res.json()
 
-        if (error) {
-            // setMessage(error.message)
-            // TODO: Should probably throw here
-            return null
-        } else {
-            // setUser(data)
-            let user = await getSession()
+            if (!res.ok) {
+                return { error: userData?.error?.message }
+            }
+
+            const user = await fetchUser(userData.jwt)
+
+            localStorage.setItem('jwt', userData.jwt)
+            setJwt(userData.jwt)
 
             return user
+        } catch (error) {
+            console.error(error)
+            return null
         }
     }
 
+    const fetchUser = async (token?: string | null): Promise<User | null> => {
+        const meQuery = qs.stringify(
+            {
+                populate: {
+                    profile: {
+                        populate: ['avatar'],
+                    },
+                    role: {
+                        select: ['type'],
+                    },
+                },
+            },
+            {
+                encodeValuesOnly: true,
+            }
+        )
+
+        if (!token) {
+            token = await getJwt()
+        }
+
+        const meRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?${meQuery}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        if (!meRes.ok) {
+            throw new Error('Failed to fetch profile data')
+        }
+
+        const meData: User = await meRes.json()
+
+        setUser(meData)
+
+        return meData
+    }
+
+    useEffect(() => {
+        localStorage.setItem('user', JSON.stringify(user))
+    }, [user])
+
     return (
-        <UserContext.Provider
-            value={{ organizationId, apiHost, user, setUser, isLoading, getSession, login, logout, signUp }}
-        >
+        <UserContext.Provider value={{ user, setUser, isLoading, getJwt, login, logout, signUp, fetchUser }}>
             {children}
         </UserContext.Provider>
     )

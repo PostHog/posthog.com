@@ -135,8 +135,8 @@
                 "url": "/handbook/small-teams/exec"
             },
             {
-                "name": "Experimentation",
-                "url": "/handbook/small-teams/experimentation"
+                "name": "Feature Success",
+                "url": "/handbook/small-teams/feature-success"
             },
             {
                 "name": "Growth",
@@ -605,15 +605,11 @@
         "url": "",
         "children": [
             {
-                "name": "Growth strategy",
-                "url": "/handbook/growth/strategy"
-            },
-            {
                 "name": "Customer support",
                 "url": "/handbook/growth/customer-support"
             },
             {
-                "name": "Inbound sales model",
+                "name": "Sales overview",
                 "url": "/handbook/growth/sales/overview"
             },
             {

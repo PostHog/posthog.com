@@ -14,7 +14,7 @@ import usePostHog from '../../hooks/usePostHog'
 
 type Result = Hit<{
     id: string
-    type: 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual' | 'apps'
+    type: 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'apps'
     title: string
     slug: string
     schema?: {
@@ -39,10 +39,6 @@ const categories = [
     {
         type: 'docs',
         name: 'Docs',
-    },
-    {
-        type: 'manual',
-        name: 'Manual',
     },
     {
         type: 'apps',

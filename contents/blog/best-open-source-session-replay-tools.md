@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/open-source-hotjar-alternatives/replayhog.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/mWW3lJw81LE
 author:
   - hanna-crombie
   - andy-vandervell

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
-import useSWRInfinite from 'swr/infinite'
 
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
@@ -11,24 +10,12 @@ import PostLayout from 'components/PostLayout'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import QuestionForm from 'components/Questions/QuestionForm'
+import { useQuestions } from 'hooks/useQuestions'
 
 export default function Questions() {
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
 
-    const { data, size, setSize, isLoading, mutate } = useSWRInfinite<any[]>(
-        (offset) =>
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${
-                process.env.GATSBY_SQUEAK_ORG_ID
-            }&start=${offset * 20}&perPage=20&published=true&sortBy=${sortBy}`,
-        (url: string) =>
-            fetch(url)
-                .then((r) => r.json())
-                .then((r) => r.questions)
-    )
-
-    const questions = React.useMemo(() => {
-        return data?.flat() || []
-    }, [size, data])
+    const { questions, isLoading, refresh, fetchMore } = useQuestions({ limit: 20, sortBy })
 
     return (
         <Layout>
@@ -76,16 +63,15 @@ export default function Questions() {
                                     </Listbox.Options>
                                 </Listbox>
 
-                                <QuestionForm onSubmit={() => mutate()} />
+                                <QuestionForm onSubmit={refresh} />
                             </div>
                         </div>
                         <div className="mt-8 flex flex-col">
                             <QuestionsTable
                                 className="sm:grid-cols-4"
                                 questions={questions}
-                                size={size}
-                                setSize={setSize}
                                 isLoading={isLoading}
+                                fetchMore={fetchMore}
                             />
                         </div>
                     </section>

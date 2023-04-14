@@ -1,18 +1,27 @@
 import SidebarSection from 'components/PostLayout/SidebarSection'
-import slugify from 'slugify'
 import React from 'react'
 import Link from 'components/Link'
-import { Question } from './index'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
 
-export const QuestionSidebar = ({ question }: { question: Question | undefined }) => {
+type QuestionSidebarProps = {
+    question: StrapiRecord<QuestionData> | undefined
+}
+
+export const QuestionSidebar = (props: QuestionSidebarProps) => {
     const { user } = useUser()
+
+    const { id, attributes: question } = props.question || {}
+
     return question ? (
         <div>
             <SidebarSection title="Posted by">
                 <div className="flex items-center space-x-2">
-                    {question.profile.avatar ? (
-                        <img className="w-8 h-8 rounded-full" src={question.profile.avatar} />
+                    {question.profile?.data?.attributes?.avatar?.data?.attributes?.url ? (
+                        <img
+                            className="w-8 h-8 rounded-full"
+                            src={question.profile.data.attributes.avatar.data.attributes.url}
+                        />
                     ) : (
                         <svg
                             className="w-8 h-8 rounded-full bg-gray-accent-light"
@@ -29,31 +38,33 @@ export const QuestionSidebar = ({ question }: { question: Question | undefined }
                             ></path>
                         </svg>
                     )}
-                    <Link to={`/community/profiles/${question.profile.id}`}>
-                        {question.profile.first_name
-                            ? `${question.profile.first_name} ${question.profile.last_name}`
+                    <Link to={`/community/profiles/${question.profile?.data?.id}`}>
+                        {question.profile?.data?.attributes?.firstName
+                            ? `${question.profile?.data?.attributes?.firstName} ${question.profile?.data?.attributes?.lastName}`
                             : 'Anonymous'}
                     </Link>
                 </div>
             </SidebarSection>
 
-            {question.topics.length > 0 && (
+            {question?.topics?.data && question.topics.data.length > 0 && (
                 <SidebarSection title="Topics">
                     <div className="flex items-center space-x-2">
-                        {question.topics.map((topic) => (
-                            <Link
-                                key={topic.topic.label}
-                                to={`/questions/topics/${slugify(topic.topic.label, { lower: true })}`}
-                            >
-                                {topic.topic.label}
+                        {question.topics.data.map((topic) => (
+                            <Link key={topic.id} to={`/questions/topics/${topic.attributes.slug}`}>
+                                {topic.attributes.label}
                             </Link>
                         ))}
                     </div>
                 </SidebarSection>
             )}
+
             {user?.isModerator && (
                 <SidebarSection>
-                    <Link to={`https://squeak.cloud/question/${question.id}`}>View in Squeak!</Link>
+                    <Link
+                        to={`https://squeak.posthog.cc/admin/content-manager/collectionType/api::question.question/${id}`}
+                    >
+                        View in Squeak!
+                    </Link>
                 </SidebarSection>
             )}
         </div>

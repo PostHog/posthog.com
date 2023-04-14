@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Close } from 'components/Icons/Icons'
 
-import { Form } from 'components/Squeak'
+import { QuestionForm } from 'components/Squeak'
 
 type QuestionFormProps = {
     onSubmit: () => void
@@ -30,10 +30,10 @@ export default function Questions(props: QuestionFormProps): JSX.Element {
                                 <Close className="w-3 h-3" />
                             </button>
                         </div>
-                        <Form
-                            apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                            organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
+                        <QuestionForm
+                            slug={(typeof window !== 'undefined' && window.location.pathname) || ''}
                             initialView="question-form"
+                            formType="question"
                             onSubmit={handleSubmit}
                         />
                     </Dialog.Panel>

@@ -823,7 +823,9 @@
         { "source": "/products/product-analytics", "destination": "/product-analytics" },
         { "source": "/session-recording", "destination": "/session-replay" },
         { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" },
-        { "source": "/docs/session-recording", "destination": "/docs/session-replay" }
+        { "source": "/docs/session-recording", "destination": "/docs/session-replay" },
+        { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" },
+        { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" }
     ],
     "rewrites": [
         {
