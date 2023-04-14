@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["andy-vandervell"]
-featuredImage: ../images/blog/newsletter-hog.png
+featuredImage: ../images/blog/aruba/beach-hog.jpg
 featuredImageType: full
 category: Inside PostHog
 tags:
@@ -14,15 +14,15 @@ tags:
 
 Every year, Team PostHog congregate for our annual all-company offsite. In previous years we've been to Italy, Portugal and Iceland. This year, we went to the Aruba – a tiny, Caribbean island just off the north coast of Venezuela.
 
-// TODO: Photos here
+![posthog aruba](../images/blog/aruba/aruba-vibes.jpeg)
 
 As a remote company, our offsites are a hugely important part of our culture. We encourage everyone to meet up when they can, be that through co-working, ad-hoc visits (which we pay for), or small team offsites, but we only get the whole company together once a year.
 
-// TODO: Photos here
+![posthog aruba](../images/blog/aruba/aruba-fun-photos.jpeg)
 
 When we do, we like to plan a mixture of fun social activities, strategic sessions and workshops, culture exercises, and (the most important bit) a 24-hour hackathon.
 
-// TODO: Photos here 
+![posthog aruba](../images/blog/aruba/aruba-hackathon-photos.jpeg)
 
 Here's what we built.
 
@@ -38,6 +38,7 @@ Built using Weaviate, Haystack, and `gpt-3.5-turbo`, MaxAI works by taking a use
 
 Here's a flowchart of the process:
 
+```mermaid
 flowchart TD
     A[User Question] -->|Embed| I(Question Vector)
     I -->|Query Weaviate|J[Most Similar Docs]
@@ -49,14 +50,13 @@ flowchart TD
     E --> G
     D --> G
     G -->|Query OpenAI|H[AI Response]
+```
 
 On the whole, Max gives useful answers – even when using the general data and dealing with complex questions.
 
-// TODO: Image of MaxAI answering a question
+![maxai](../images/blog/aruba/max-ai.jpeg)
 
 Max is also dead handy for summarizing long support threads in Slack or GitHub issues.
-
-// TODO: Image of a summarized thread or GitHub issue
 
 That said, Max isn't immune to hallucinating solutions – or even URLs for docs that don't exist – if it doesn't know the answer. It's a work in progress we'll be releasing Max on our support Slack soon as a beta. 
 
@@ -68,11 +68,11 @@ Check out the [MaxAI repo](https://github.com/PostHog/max-ai) for more info.
 
 The marketing team worked together to build (and ship) a [public library of pre-built dashboards](/templates), including an [AARRR pirate metrics dashboard](/templates/aarrr-dashboard), [templates for B2C](/templates/b2c-dashboard) and [B2B products](/templates/b2c-dashboard), and a [landing page report](/templates/landing-dashboard) for marketers transitioning from Google Analytics.
 
-// TODO: New dashboard modal
+![dashboard templates](../images/blog/aruba/templates.png)
 
 These dashboards are accessible from the 'New Dashboard' modal in PostHog. Some templates require custom events, which you'll be asked to configure before creating the dashboard – you can also change the events you track later.
 
-// TODO: Template setup
+![dashboard templates](../images/blog/aruba/setup-events.png)
 
 Got a request for a dashboard? DM someone from the marketing on our community Slack.
 
@@ -84,15 +84,15 @@ Joe Martin also worked with Eli from the Website & Docs team to ship [PostHog Tr
 
 Dubbed DataBeach because Frank and Harry started building the feature while sipping Piña Coladas by the beach, DataBeach is all about our long-term vision of  [simplifying the modern data stack](/blog/modern-data-stack-sucks) for startups. Less time spent wrangling data = more time shipping products. 
 
-// TODO: Screenshot of a data table from DataBeach
+![databeach](../images/blog/aruba/data-beach.png)
 
-The MVP they built consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like Stripe, Hubspot, Intercom, and more, along with data from PostHog.
+The MVP they built consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like Stripe, Hubspot (see above), Intercom, and more, along with data from PostHog.
 
-There's much to build before our PostHog as a data warehouse is ready for you, but it's coming. Keep an eye on our [public roadmap](/roadmap) for updates.
+There's much to build before PostHog as a data warehouse is ready for you, but it's coming. Keep an eye on our [public roadmap](/roadmap) for updates.
 
 ## Building a Zendesk killer in PostHog
 
-- **Team Arubug:** Tiina Turban, Simon Fisher, Paul D'Ambra and Cameron DeLeone
+- **Team Arubug:** Tiina Turban, Simon Fisher, Paul D'Ambra, Cameron DeLeone, and Cory Watilo
 
 Last year, we adopted Zendesk to manage support for PostHog, but we don't love it. It's hard to prioritize tickets, and most lack the context a support hero or engineer needs to fix it. Enter team Arubug, who decided there had to be a better way.
 
@@ -126,7 +126,7 @@ Currently, Max – accessible via the help menu in PostHog – can jump around,
 
 They also set about revamping the PostHog Toolbar, replacing the dull but functional PostHog icon with an animated Max whose status changes when you select different toolbar features.
 
-## PostHog feature previews
+## PostHog beta feature previews
 
 - **Team WE WILL DE-FEAT-URE MANAGEMENT YOU:** James Hawkins, Michael Matloka and Annika Schmid
 
@@ -140,17 +140,17 @@ In future, we want to build this out so users can register their interest in fea
 
 We hope to roll this out as a usable feature soon.
 
-## Summer events
+## Summer social events
 
-- **Team Plops (People & Ops): Coua Phang and Kendal Hall
+- **Team Plops (People & Ops):** Coua Phang and Kendal Hall
 
 Our hackathon isn't just for engineering. The People & Ops team used the time to plan summer events (IRL and virtual) for the PostHog team.
 
-In June they've planned a virtual engraving workshop, in July a virtual escape room experience, and in August we're getting together in Cambridge, UK for a scavenger hunt around the city and a barbecue.
+In June they've planned a virtual engraving workshop, in July a virtual escape room experience, and in August we're getting together in Cambridge, UK for a scavenger hunt around the city, and a barbecue.
 
-## Built-in automations
+## Event-based automations
 
-- **Team Automations:** Luke Harries, Ben White, and Thomas Obermüller 
+- **Team Automations:** Luke Harries, Ben White, Thomas Obermüller, Cory Watilo 
 
 Luke and Thomas built an MVP for automations in PostHog. In the MVP, automations have a source (event, action or cron job), logic (pause for / pause until), and sources (e.g. send a Slack message, create a GitHub Issue, add to cohort, add to feature flag, send an in-app message etc.).
 
@@ -160,9 +160,9 @@ Even this basic functionality creates numerous helpful use cases, but long-term 
 
 ## HouseWatch: Centralized monitoring and management for ClickHouse
 
-- **Team HouseWatch:** Yakko and Tim Glaser
+- **Team HouseWatch:** Li Yi Yu, Yakko Majuri, and Tim Glaser
 
-PostHog uses ClickHouse as our main event database, but we end up using a huge range of tools (Grafana, Metabase etc.) to monitor and manage it. Team HouseWatch built a centralized dashboard so we can eliminate all this bloat and have everything in one place.
+PostHog uses ClickHouse as our main event database, but we end up using a huge range of tools (Grafana, Metabase, pganalyze etc.) to monitor and manage it. Team HouseWatch built a centralized dashboard, so we can eliminate all this bloat and have everything in one place.
 
 // TODO: Screenshot of House Watch
 
