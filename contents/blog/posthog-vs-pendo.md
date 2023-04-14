@@ -1,0 +1,640 @@
+---
+date: 2023-04-14
+title: PostHog vs Pendo
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: ../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg
+featuredImageType: full
+author:
+    - joe-martin
+category: General
+tags:
+    - Comparisons
+    - Guides
+---
+
+In this article we’ll explore the crucial differences and similarities between Pendo (specifically, Pendo Engage) and PostHog. We’ll cover topics such as:
+
+- Pendo and PostHog’s [core features](#core-features) and [focus](#who-are-pendo-and-posthog-useful-for)
+- [Product analytics](#product-analytics) and [in-app messaging](#in-app-messages-and-prompts) features in detail
+- [Integrations](#apps-and-integrations) and [data pipelines](#data-pipelines)
+- [Libraries](#library-support), [tracking differences and SDKs](#sdks-and-tracking)
+- [Privacy, security and regulatory compliance](#compliance-and-security)
+- [Pricing details](#how-much-does-pendo-cost), [free trials](#do-pendo-and-posthog-offer-free-trials) and other [frequently asked questions](#frequently-asked-questions)
+
+However, if you’re in a rush and want to know the short version then we can keep it simple off the bat by explaining how PostHog and Pendo differ at a high level. 
+
+## What’s the difference between PostHog and Pendo?
+
+### 1. PostHog is an all-in one platform
+PostHog solves this problem by bringing all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, experimentation, session capturing, and data warehouse features. Pendo, on the other hand, is a more limited product which doesn’t offer many of these features and requires you to adopt other platforms, such as HotJar or LaunchDarly, in order to get comparable functionality to PostHog.
+
+### 2. PostHog is built for engineers
+We built PostHog to suit the needs of coders, developers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). As such, PostHog includes many technical features which aren’t commonly available in tools like Pendo, which are built for more general audiences. [Feature flags](/feature-flags), for example, aren’t something Pendo offers. 
+
+### 3. PostHog is open source
+This focus on meeting the needs of engineers has also shaped the foundation of PostHog as a product, in that it’s completely open source. You can check out [PostHog’s source code](https://github.com/PostHog), [build integrations](/docs/apps/build) or [other services](/blog/how-we-built-an-app-server) on top of the product, and even [give feedback or interact with the team via GitHub](https://github.com/PostHog).
+
+<ArrayCTA />
+
+## Comparing PostHog and Pendo
+OK, let's get stuck into the nitty-gritty.
+
+Pendo has four pricing options — Free, Starter, Growth, and Portfolio. Pendo’s feature availability is additionally complicated by the fact that it breaks its features across two separate products — Pendo Engage, and Pendo Adopt, with the latter focusing on analytics for internal software used by teams. 
+
+PostHog has three pricing plans — Free, Scale, and Enterprise — but all three of these are billed based on usage. The Free plan is intended for hobbyists and early-stage teams who need basic features within generous usage limits up to 1 million events per month, while the Scale plan unlocks advanced features and is priced solely on usage. The Enterprise plan simply unlocks extra security, compliance and permissioning features in order to meet the needs of large businesses. 
+
+> **Are you an early-stage startup?** Get $50k in PostHog credit, and more, by joining [our PostHog for Startups programme](/startups)!
+
+In order to compare PostHog and Pendo simply and easily, we’ll focus on comparing Pendo Engage to PostHog and include features from all pricing tiers. In this way, you can clearly see how Pendo Engage stacks up against PostHog and defer pricing decisions until you’ve identified the best tool for the job. 
+
+## Who are Pendo and PostHog useful for?
+
+
+## Core features
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+          <td className="w-3/12"></td>
+            <td><strong>Pendo</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Product analytics</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track events and conversion; analyze user behavior</td>
+        </tr>
+        <tr>
+            <td><strong>Session replays</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Watch real users use your product; diagnose bugs</td>
+        </tr>
+        <tr>
+            <td><strong>Feature flags</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Roll out features safely; toggle features for cohorts or individuals</td>
+        </tr>
+        <tr>
+            <td><strong>A/B testing</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Test changes and analyze impact</td>
+        </tr>
+        <tr>
+            <td><strong>In-app prompts and messages</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Build your own apps and contribute code</td>
+        </tr>
+        <tr>
+            <td><strong>Apps/Integrations</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Push and pull data to other destinations</td>
+        </tr>
+        <tr>
+            <td><strong>Open source</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Build your own apps and contribute code</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+- **[Session replays](/session-replay):** Session replays in PostHog, otherwise known as session recording, enable you to capture video recordings of a user experience. Additionally, in PostHog, you can view built-in console logs, and network performance. These features are especially useful for diagnosing bug reports, or building user empathy. Pendo does not offer any session replay feature, forcing users to turn to tools such as HotJar. 
+
+- **[Feature flags](/feature-flags):** PostHog offers multivariate feature flags which support JSON payloads, enabling you to push real-time changes to a product without needing to redeploy. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more. Pendo, on the other hand, does not support any feature flag functionality and users will need to adopt an alternative feature flagging tool.
+
+- **[A/B testing](/ab-testing):** In PostHog, you can use the experimentation suite to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events and deploy a final version. You can’t do any of this in Pendo. 
+
+- **[Open source](/product-os):** PostHog is open source. You can [view our source code](httpw://github.com/posthog), contribute changes, engage with the team in [our open source community](/slack), [view our roadmap](/roadmap) and create your own [apps](/apps) or features. Pendo is not open source and, as a result, you can only suggest new features to the support team.
+
+### Product Analytics
+
+PostHog and Pendo both offer similar product analytics features at a surface level, but differ significantly when compared in greater depth. This is because PostHog and Pendo are ultimately built for different types of users. While PostHog is designed with engineers and technical users in mind, Pendo is intended more for marketers and UX designers. 
+
+This difference is reflected in all levels of the product, but especially in product analytics where many advanced features which are lacking in Pendo, are available in PostHog. 
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+			<td className="w-3/12"></td>
+            <td><strong>Pendo</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Graphs and trends</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Build custom insights and visualizations</td>
+        </tr>
+        <tr>
+            <td><strong>Dashboards</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Combine insights into shareable dashboards</td>
+        </tr>
+        <tr>
+            <td><strong>Funnels</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Understand conversion between events, pages</td>
+        </tr>
+        <tr>
+            <td><strong>Cohorts</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Combine users based on properties and events for group analysis</td>
+        </tr>
+        <tr>
+            <td><strong>User paths</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track user flows and where they drop-off</td>
+        </tr>
+        <tr>
+            <td><strong>Retention</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Analyze user and revenue retention</td>
+        </tr>
+        <tr>
+            <td><strong>UTM tracking</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track marketing campaigns with UTM tags</td>
+        </tr>
+        <tr>
+            <td><strong>Correlation analysis</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Suggested events and properties that lead to success or failure</td>
+        </tr>
+        <tr>
+            <td><strong>Group analytics</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Understand how organizations use your product</td>
+        </tr>
+        <tr>
+            <td><strong>Formulas</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Use custom formulas to calculate unique insights</td>
+        </tr>
+        <tr>
+            <td><strong>SQL access</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Write your own queries in SQL</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+- **[Correlation analysis](/product-analytics):** Correlation analysis is a feature which enables you to automatically discover significant linking properties or events relevant to an insight. For example, you can find if users who complete a funnel are likely to be from a certain location, or have completed another event. In PostHog, correlation analysis is a standard part of analytics. 
+
+- **[Formulas](/product-analytics):** In PostHog, a formula is exactly what it sounds like — a mathematical process you can use as part of your analysis. A simple example of a formula would be an equation to figure out a ratio or percentage, though advanced formulas can use more elaborate functions, such as `COS` and `SIN`. Pendo, however, doesn’t offer the ability to use formulas in analysis.
+
+- **[SQL access](/docs/product-analytics/hogql):** SQL, which stands for Structured Query Language, is a programming language for interrogating data. While both Pendo and PostHog offer the ability to analyze data with ready-made insights and visualizations types, SQL enables you to go beyond this and examine data in any way. Only PostHog offers SQL access to your data; in Pendo you are limited to the existing graphs and widgets.
+
+<TutorialsSlider slugs={[
+  "/tutorials/churn-rate",
+  "/tutorials/funnels",
+  "/tutorials/api-get-insights-persons",
+  "/tutorials/feature-retention",
+  "/tutorials/next-steps-after-installing"
+]} />
+
+### In-app messages and prompts
+The ability to send in-app messages and display prompts is a central feature of Pendo, which focuses on empowering users to create such pop-ups and tooltips in their product easily. Additionally, you can see how adding such prompts impacts adoption and retention, or display interactive prompts to solicit user feedback. 
+
+Just because such features are central to Pendo doesn’t mean they’re unique, however. PostHog also offers the ability to display in-app messages and interactive pop-ups through the use of [feature flag payloads](/docs/feature-flags/payloads) and [site apps](/tutorials/build-site-app).
+
+The main difference between PostHog and Pendo here is that, because Pendo is intended for less technical users, it offers an interface which is simpler, but less powerful. You can easily create tooltips, announcement pop-ups and polls in Pendo, but not other types of prompt such as a Calendly integration. In PostHog, there are ready made apps for displaying pop-ups and tooltips, but the true power is in the ability to [build custom solutions](/tutorials/build-site-app).
+
+Below are some of the most popular ready-made apps which facilitate in-app messages in PostHog:
+
+- **[Feedback Widget](/apps/feedback-widget)**: Displays a prompt with a text input, enabling users to write feedback messages which you can optionally sync to Slack, Zendesk or other tools using Zapier. 
+
+- **[Notification Bar](/apps/notification-bar)**: Displays a customizable banner in your product, suitable for alerting users to important messages — like discounts, outages, or announcements.
+
+- **[User Interviewer](/apps/user-interviews)**: Displays a prompt to users which match a filter or cohort, inviting them to schedule an online interview. Syncs with Calendly to make scheduling easy. 
+
+- **[Pineapple Mode](/apps/pineapple-mode)**: Rains pineapples all over your product,  advancing the sense of chaos and entropy in the world. 
+
+<TutorialsSlider slugs={[
+  "/tutorials/build-site-app",
+  "/tutorials/feedback-interviews-site-apps",
+  "/tutorials/build-your-own-posthog-app",
+  "/tutorials/how-to-connect-discord-to-posthog-with-zapier"
+]} />
+
+### Apps and integrations
+Both Pendo and PostHog have a wide selection of such apps and integrations available, for a number of popular platforms. Both also include integrations with tools such as Zapier, which enable you to move data to even more platforms.
+
+One unique advantage of PostHog is that, because it is open source, it’s easy to [create your own apps and integrations](/tutorials/build-your-own-posthog-app). This is useful if you’re, for example, using more niche software in your stack which hasn’t been widely adopted — or if you require a direct integration between PostHog and your product. 
+
+> The number of available apps is constantly increasing for both PostHog and Pendo, so rather than list all available apps, we’ve shortened this section to only list the most popular integrations in particular categories. Want the full list? Check [the PostHog app library](/apps)!
+
+### Data pipelines
+
+‘Data pipeline’ refers to apps which enable you to integrate with data warehouses, data lakes, or other forms of data storage. 
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>Pendo</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Export API</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Export data via API</td>
+        </tr>
+        <tr>
+            <td><strong>Import API</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Export data via API</td>
+        </tr>
+        <tr>
+            <td><strong>Amazon Redshift</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Export data to Redshift</td>
+        </tr>
+        <tr>
+            <td><strong>Amazon S3</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Export data to S3 bucket</td>
+        </tr>
+        <tr>
+            <td><strong>Azure Blob Storage</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Export data to Microsoft Azure</td>
+        </tr>
+        <tr>
+            <td><strong>Google Cloud Storage</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Export data to GCS</td>
+        </tr>
+        <tr>
+            <td><strong>Snowflake</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Export data to Snowflake database</td>
+        </tr>
+        <tr>
+            <td><strong>Google BigQuery</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Export data to BigQuery for analysis</td>
+        </tr>
+        <tr>
+            <td><strong>RudderStack</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Sync event and person data</td>
+        </tr>
+        <tr>
+            <td><strong>Airbyte</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Extract and load data to external platforms</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+### Other integrations 
+
+Below, we've listed a few of the most popular integrations used across PostHog and Pendo. 
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>Pendo</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Hubspot</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Sync event and person data</td>
+        </tr>
+        <tr>
+            <td><strong>Salesforce</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Sync event and person data</td>
+        </tr>
+        <tr>
+            <td><strong>Zapier</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Export events for use in Zaps</td>
+        </tr>
+        <tr>
+            <td><strong>Shopify</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Sync customer and order data </td>
+        </tr>
+        <tr>
+            <td><strong>Stripe</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Sync customer and invoice data</td>
+        </tr>
+        <tr>
+            <td><strong>Slack</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Receive notifications about new data</td>
+        </tr>
+        <tr>
+            <td><strong>Discord</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Receive notifications about new data</td>
+        </tr>
+        <tr>
+            <td><strong>MS Teams</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Receive notifications about new data</td>
+        </tr>
+        <tr>
+            <td><strong>PagerDuty</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Receive customized alerts from insights</td>
+        </tr>
+        <tr>
+            <td><strong>Intercom</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Extract and load data to external platforms</td>
+        </tr>
+        <tr>
+            <td><strong>Customer.io</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Sync data between platforms</td>
+        </tr>
+        <tr>
+            <td><strong>Sentry</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ingest Sentry errors for analysis</td>
+        </tr>
+        <tr>
+            <td><strong>Segment</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ingest events from Segment</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+> **Want more?** For a full list of PostHog’s available integrations, please [check the app directory](/apps).
+
+## Compliance and security
+
+Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPPA and GDPR can require teams to store data in certain locations, or to protect data in certain ways. 
+
+div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>Pendo</strong></td>
+            <td><strong>PostHog</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>GDPR ready</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>EU hosting available</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>US hosting available</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Data anonymization</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Cookie-less tracking option</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>SOC 2 certified</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        </tr>
+        <tr>
+            <td><strong>SAML/SSO available</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>2FA available</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+> PostHog is not currently SOC 2 certified, but is being audited in order to complete this certification.
+
+## SDKs and tracking
+
+Pendo and PostHog both support a variety of tracking and implementation options to get your data into their platform. However, while both platforms enable you to create tracked events manually, only PostHog offers autocapture to help you get started quickly.
+
+Autocapture is preferred by many users because its much faster to setup, but some argue that it creates too much noise or cost to be useful. We disagree, and it’s why PostHog gives you your first million events for free, every month — so you can capture events without worrying about these issues. [It’s something we feel quite strongly about](/blog/is-autocapture-still-bad).
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>Pendo</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td><strong>Event tracking</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track manually instrumented events</td>
+        </tr>
+        <tr>
+            <td><strong>Autocapture</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Automatically track events without instrumentation</td>
+        </tr>
+        <tr>
+            <td><strong>Combined events (actions)</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track related events as a single trackable action or behavior</td>
+        </tr>
+        <tr>
+            <td><strong>Reverse proxy available</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Send events from your own domain to capture more data</td>
+        </tr>
+        <tr>
+            <td><strong>Cross-domain tracking</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track users across domains and sub-domains</td>
+        </tr>
+        <tr>
+            <td><strong>Server-side tracking</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Send events from your server</td>
+        </tr>
+        <tr>
+            <td><strong>Capture API</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Send events through an API</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+### Library support
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>LogRocket</strong></td>
+            <td><strong>Pendo</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>JavaScript</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>React Native</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>React</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Flutter</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>iOS</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Android</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Ruby</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+> ### PostHog library support
+>
+> PostHog supports a wide range of client and server libraries, but not all features are equally available across all of them. We recommend using PostHog's JavaScript snippet to enjoy all features. See [our client library documentation](/docs/integrate?tab=snippet) for more information.
+
+<ArrayCTA />
+
+## Frequently asked questions
+
+-   How much does Pendo cost?
+-   How much does PostHog cost?
+-   Do LogRocket and PostHog offer free trials?
+
+Got another question? You can [ask the PostHog team anything you want](/questions)!
+
+### How much does Pendo cost?
+
+Pendo has complex, tier-based pricing which isn’t entirely transparent and is based on the number of monthly active users. 
+
+A free tier is available with basic features, but can only track up to 500 monthly active users. After this, the Starter tier offers greater in-app messaging features and support for up to 2,000 monthly active users — but costs $8,000 per year. 
+
+Two additional tiers are available for larger teams — Growth and Portfolio — but the pricing for each is custom and not available publicly.
+
+### How much does PostHog cost?
+
+PostHog has transparent pricing based on the usage. It’s free to get started and completely free for the first 1 million events and 15,000 sessions captured every month.
+
+After this free monthly allowance you'll pay $0.00045/event and $0.005/recording, and PostHog charges progressively less the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
+
+### Do Pendo and PostHog offer free trials?
+
+Pendo offers a free tier, called Pendo Free. This version is limited in scope, supporting only one web, iOS and Android application, basic features and up to 500 monthly active users. After this, you must pay additional fees.
+
+With PostHog, it’s free to get started and all users get their first 1 million events and 15,000 sessions for free, every month. There are no other restrictions and billing limits can be used to keep usage beneath this allowance, enabling you to use PostHog for free indefinitely.
+
+<ArrayCTA />
