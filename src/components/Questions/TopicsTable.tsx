@@ -3,38 +3,45 @@ import React from 'react'
 import Link from 'components/Link'
 import { dateToDays, dayFormat } from '../../utils'
 import {
-    FeatureFlags,
-    SessionRecording,
-    DataManagement,
-    Events,
-    Retention,
-    Funnels,
-    Trends,
-    Cohorts,
-    PathAnalysis,
-    DataWarehouse,
     API,
+    AbTesting,
+    Analytics,
     AppLibrary,
+    Cohorts,
+    DataManagement,
+    DataWarehouse,
+    Events,
+    FeatureFlags,
+    Funnels,
+    PathAnalysis,
+    Persons,
+    Retention,
+    SessionRecording,
+    Trends,
 } from 'components/ProductIcons'
 
+import { Deploy, Migrate } from 'components/NotProductIcons'
+
 const topicIcons = {
-    'session recording': SessionRecording,
-    'feature flags': FeatureFlags,
-    'identify users': DataManagement,
-    events: Events,
-    retention: Retention,
-    funnels: Funnels,
-    trends: Trends,
-    cohorts: Cohorts,
-    paths: PathAnalysis,
-    kubernetes: DataWarehouse,
-    'helm chart': DataWarehouse,
-    'migrating to posthog': DataManagement,
-    gcp: DataWarehouse,
+    'a/b testing': AbTesting,
     api: API,
     apps: AppLibrary,
-    migration: DataManagement,
-    deployment: DataManagement,
+    cohorts: Cohorts,
+    deployment: Deploy,
+    'events & actions': Events,
+    'feature flags': FeatureFlags,
+    funnels: Funnels,
+    gcp: DataWarehouse,
+    'helm chart': DataWarehouse,
+    'identify users': DataManagement,
+    kubernetes: DataWarehouse,
+    'migrating to posthog': DataManagement,
+    migration: Migrate,
+    paths: PathAnalysis,
+    'product analytics': Analytics,
+    'session replay': SessionRecording,
+    trends: Trends,
+    'people & properties': Persons,
 }
 
 export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
@@ -61,11 +68,11 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                             <Link
                                 to={`/questions/topics/${slug}`}
                                 key={id}
-                                className={`${className} block py-2 -ml-4 -mr-4 pl-4 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:bg-gray-accent-dark relative hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
+                                className={`${className} block py-2 -ml-4 -mr-4 pl-4 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
                             >
                                 <div className="grid grid-cols-12 items-center">
-                                    <div className="col-span-8 flex items-center space-x-4">
-                                        {Icon && <Icon className="w-4 text-black dark:text-white" />}
+                                    <div className="col-span-8 flex items-center space-x-3">
+                                        {Icon && <Icon className="w-5 opacity-60 text-black dark:text-white" />}
                                         <span className="text-red line-clamp-1">{label}</span>
                                     </div>
                                     <div className="col-span-2 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
