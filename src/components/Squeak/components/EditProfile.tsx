@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, ChangeEvent, ChangeEventHandler } from 'react'
 import { Form, Field, Formik, FormikHandlers } from 'formik'
 import Button from 'components/CommunityQuestions/Button'
 import { Markdown } from 'components/Icons'
@@ -7,6 +7,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 import { useUser } from 'hooks/useUser'
 import { Avatar as DefaultAvatar } from '../../../pages/community'
 import getAvatarURL from '../util/getAvatar'
+import usePostHog from 'hooks/usePostHog'
 
 const fields = {
     avatar: {
@@ -66,10 +67,10 @@ type EditProfileProps = {
 }
 
 function Avatar({ values, setFieldValue }) {
-    const inputRef = useRef()
+    const inputRef = useRef<HTMLInputElement>(null)
     const [imageURL, setImageURL] = useState(values?.avatar)
 
-    const handleChange = (e) => {
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         const file = e.target.files[0]
         setFieldValue('avatar', file)
         const reader = new FileReader()
@@ -84,6 +85,7 @@ function Avatar({ values, setFieldValue }) {
         if (!values.avatar && inputRef?.current) {
             inputRef.current.value = null
         }
+
         setImageURL(values.avatar)
     }, [values.avatar])
 
@@ -128,9 +130,11 @@ function Avatar({ values, setFieldValue }) {
 
 export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
     const { user, fetchUser, isLoading, getJwt } = useUser()
+    const posthog = usePostHog()
 
     if (!user) return null
 
+    // TODO: Need to grab these from `attributes`
     const { firstName, lastName, website, github, linkedin, twitter, biography, id } = user?.profile || {}
 
     const avatar = getAvatarURL(user?.profile)
@@ -138,46 +142,69 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
     // TODO: Move this logic into the useUser hook
     const handleSubmit = async ({ avatar, ...values }, { setSubmitting }) => {
         setSubmitting(true)
-        const JWT = await getJwt()
-        let image = avatar
-        if (avatar && typeof avatar === 'object') {
-            const formData = new FormData()
-            formData.append('files', avatar)
-            const uploadedImage = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/upload`, {
-                method: 'post',
-                body: formData,
-                headers: {
-                    Authorization: `Bearer ${JWT}`,
-                },
-            }).then((res) => res.json())
-            if (uploadedImage?.length > 0) {
-                image = uploadedImage[0]
-            }
-        }
 
-        const body = {
-            data: {
+        try {
+            posthog?.capture('squeak profile update start', {
+                profileId: id,
                 ...values,
-                ...((image && typeof image !== 'string') || image === null ? { avatar: image?.id ?? null } : {}),
-            },
-        }
+            })
 
-        const { data, error } = await fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?populate=avatar`,
-            {
+            const JWT = await getJwt()
+            let image = avatar
+
+            if (avatar && typeof avatar === 'object') {
+                const formData = new FormData()
+                formData.append('files', avatar)
+
+                const uploadedImage = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/upload`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        Authorization: `Bearer ${JWT}`,
+                    },
+                }).then((res) => res.json())
+
+                if (uploadedImage?.length > 0) {
+                    image = uploadedImage[0]
+                }
+            }
+
+            const body = {
+                data: {
+                    ...values,
+                    ...((image && typeof image !== 'string') || image === null ? { avatar: image?.id ?? null } : {}),
+                },
+            }
+
+            const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?populate=avatar`, {
                 method: 'PUT',
                 body: JSON.stringify(body),
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${JWT}`,
                 },
-            }
-        ).then((res) => res.json())
+            }).then((res) => res.json())
 
-        setSubmitting(false)
-        if (data) {
-            await fetchUser(JWT)
-            onSubmit?.()
+            if (data) {
+                await fetchUser(JWT)
+                onSubmit?.()
+            }
+
+            posthog?.capture('squeak profile update', {
+                profileId: id,
+                ...values,
+            })
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'EditProfile.handleSubmit',
+                error: JSON.stringify(error),
+                profileId: id,
+                ...values,
+            })
+
+            throw error
+        } finally {
+            setSubmitting(false)
         }
     }
 

@@ -8,6 +8,7 @@ import Spinner from 'components/Spinner'
 import { useToast } from '../../hooks/toast'
 import useSWR from 'swr'
 import qs from 'qs'
+import usePostHog from 'hooks/usePostHog'
 
 type RoadmapSubscriptions = {
     data: {
@@ -25,9 +26,12 @@ type RoadmapSubscriptions = {
 export function InProgress(props: IRoadmap & { className?: string; more?: boolean; stacked?: boolean }) {
     const { addToast } = useToast()
     const { user, getJwt } = useUser()
+    const posthog = usePostHog()
+
     const [more, setMore] = useState(props.more ?? false)
     const [showAuth, setShowAuth] = useState(false)
     const [loading, setLoading] = useState(false)
+
     const { title, githubPages, description, betaAvailable, image, squeakId } = props
     const completedIssues = githubPages && githubPages?.filter((page) => page.closed_at)
     const percentageComplete = githubPages && Math.round((completedIssues.length / githubPages?.length) * 100)
@@ -46,13 +50,22 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
         }
     )
 
-    const { data, mutate } = useSWR<RoadmapSubscriptions>(
+    const { data, error, mutate } = useSWR<RoadmapSubscriptions>(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user?.profile?.id}?${query}`,
         async (url: string) => {
             if (!user) return { data: { attributes: { roadmapSubscriptions: [] } } }
             return fetch(url).then((r) => r.json())
         }
     )
+
+    if (error) {
+        console.error(error)
+
+        posthog?.capture('squeak error', {
+            source: 'InProgress',
+            error: JSON.stringify(error),
+        })
+    }
 
     const { data: roadmapData } = data || {}
 
@@ -63,8 +76,13 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
             return
         }
 
+        setLoading(true)
+
         try {
-            setLoading(true)
+            posthog?.capture('roadmap subscribe start', {
+                roadmapId: squeakId,
+            })
+
             const token = await getJwt()
 
             if (!token) {
@@ -100,23 +118,39 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                         },
                     },
                 })
+
+                posthog?.capture('roadmap subscribe', {
+                    roadmapId: squeakId,
+                })
             } else {
                 addToast({ error: true, message: 'Whoops! Something went wrong.' })
+                throw new Error('Failed to subscribe to roadmap')
             }
         } catch (error) {
             console.error(error)
+
+            posthog?.capture('squeak error', {
+                source: 'InProgress.subscribe',
+                roadmapId: squeakId,
+                error: JSON.stringify(error),
+            })
         } finally {
             setLoading(false)
         }
     }
 
     async function unsubscribe() {
-        try {
-            if (!roadmapData) {
-                return
-            }
+        if (!roadmapData) {
+            return
+        }
 
-            setLoading(true)
+        setLoading(true)
+
+        try {
+            posthog?.capture('roadmap unsubscribe start', {
+                roadmapId: squeakId,
+            })
+
             const token = await getJwt()
 
             if (!token) {
@@ -149,11 +183,22 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                         },
                     },
                 })
+
+                posthog?.capture('roadmap unsubscribe', {
+                    roadmapId: squeakId,
+                })
             } else {
                 addToast({ error: true, message: 'Whoops! Something went wrong.' })
+                throw new Error('Failed to unsubscribe from roadmap')
             }
         } catch (error) {
             console.error(error)
+
+            posthog?.capture('squeak error', {
+                source: 'InProgress.subscribe',
+                roadmapId: squeakId,
+                error: JSON.stringify(error),
+            })
         } finally {
             setLoading(false)
         }

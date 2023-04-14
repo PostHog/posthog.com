@@ -1,6 +1,6 @@
+import React from 'react'
 import { Field, Form, Formik } from 'formik'
 import { User, useUser } from 'hooks/useUser'
-import React from 'react'
 
 type SignUpProps = {
     buttonText?: string
@@ -14,8 +14,10 @@ export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit
     const handleSubmit = async (values: any) => {
         const user = await signUp(values)
 
-        if (user?.error) {
-            setMessage?.(user?.error)
+        if (!user) {
+            setMessage?.('There was an error signing up. Please try again.')
+        } else if ('error' in user) {
+            setMessage?.(user.error)
         } else {
             onSubmit?.(user)
         }

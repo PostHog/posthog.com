@@ -2,18 +2,17 @@ import qs from 'qs'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
 import useSWR from 'swr'
 import { useUser } from 'hooks/useUser'
+import usePostHog from 'hooks/usePostHog'
 
 type UseQuestionOptions = {
     data?: StrapiRecord<QuestionData>
 }
 
-export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
-    const isPermalink = typeof id === 'string'
-
-    const query = qs.stringify(
+const query = (id: string | number) =>
+    qs.stringify(
         {
             filters: {
-                ...(isPermalink
+                ...(typeof id === 'string'
                     ? {
                           permalink: {
                               $eq: id,
@@ -58,13 +57,17 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     )
 
+export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
+    const { getJwt } = useUser()
+    const posthog = usePostHog()
+
     const {
         data: question,
         error,
         isLoading,
         mutate,
     } = useSWR<StrapiRecord<QuestionData>>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query}`,
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id)}`,
         async (url) => {
             const res = await fetch(url)
             const { data } = await res.json()
@@ -72,102 +75,196 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     )
 
-    const { getJwt } = useUser()
+    if (error) {
+        posthog?.capture('squeak error', {
+            source: 'useQuestion',
+            questionId: id,
+            error: JSON.stringify(error),
+        })
+    }
 
     const reply = async (body: string) => {
-        const token = await getJwt()
+        try {
+            posthog?.capture('squeak reply start', {
+                questionId: question?.id,
+            })
 
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                data: {
-                    body,
-                    question: question?.id,
+            const token = await getJwt()
+
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
-                populate: {
-                    profile: {
-                        fields: ['id', 'firstName', 'lastName'],
-                        populate: {
-                            avatar: {
-                                fields: ['id', 'url'],
+                body: JSON.stringify({
+                    data: {
+                        body,
+                        question: question?.id,
+                    },
+                    populate: {
+                        profile: {
+                            fields: ['id', 'firstName', 'lastName'],
+                            populate: {
+                                avatar: {
+                                    fields: ['id', 'url'],
+                                },
                             },
                         },
                     },
-                },
-            }),
-        })
+                }),
+            })
 
-        mutate()
+            posthog?.capture('squeak reply', {
+                questionId: question?.id,
+            })
+
+            mutate()
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useQuestion.reply',
+                questionId: question?.id,
+                body,
+                error: JSON.stringify(error),
+            })
+
+            throw error
+        }
     }
 
     const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
 
     const handlePublishReply = async (published: boolean, id: number) => {
-        const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}`, {
-            method: 'PUT',
-            body: JSON.stringify({
-                data: {
-                    publishedAt: published ? null : new Date(),
+        try {
+            posthog?.capture('squeak publish reply start', {
+                questionId: question?.id,
+                replyId: id,
+                published,
+            })
+
+            const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    data: {
+                        publishedAt: published ? null : new Date(),
+                    },
+                }),
+                headers: {
+                    'content-type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
                 },
-            }),
-            headers: {
-                'content-type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        })
+            })
 
-        if (!replyRes.ok) {
-            throw new Error('Failed to update reply data')
+            if (!replyRes.ok) {
+                throw new Error('Failed to update reply data')
+            }
+
+            await replyRes.json()
+
+            mutate()
+
+            posthog?.capture('squeak publish reply', {
+                questionId: question?.id,
+                replyId: id,
+                published,
+            })
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useQuestion.handlePublishReply',
+                questionId: question?.id,
+                published,
+                replyId: id,
+                error: JSON.stringify(error),
+            })
+
+            throw error
         }
-
-        await replyRes.json()
-
-        mutate()
     }
 
     const handleResolve = async (resolved: boolean, resolvedBy: number | null) => {
-        const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
-            method: 'PUT',
-            body: JSON.stringify({
-                data: {
-                    resolved,
-                    resolvedBy,
+        try {
+            posthog?.capture('squeak resolve start', {
+                questionId: question?.id,
+                resolved,
+                resolvedBy,
+            })
+
+            const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    data: {
+                        resolved,
+                        resolvedBy,
+                    },
+                }),
+                headers: {
+                    'content-type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
                 },
-            }),
-            headers: {
-                'content-type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        })
+            })
 
-        if (!replyRes.ok) {
-            throw new Error('Failed to update reply data')
+            if (!replyRes.ok) {
+                throw new Error('Failed to update reply data')
+            }
+
+            await replyRes.json()
+
+            mutate()
+
+            posthog?.capture('squeak resolve', {
+                questionId: question?.id,
+                resolved,
+                resolvedBy,
+            })
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useQuestion.handleResolve',
+                questionId: question?.id,
+                resolved,
+                resolvedBy,
+                error: JSON.stringify(error),
+            })
+
+            throw error
         }
-
-        await replyRes.json()
-
-        mutate()
     }
 
     const handleReplyDelete = async (id: number) => {
-        const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}`, {
-            method: 'DELETE',
-            headers: {
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        })
+        try {
+            posthog?.capture('squeak delete reply start', {
+                questionId: question?.id,
+                replyId: id,
+            })
 
-        if (!replyRes.ok) {
-            throw new Error('Failed to delete reply')
+            const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+
+            if (!replyRes.ok) {
+                throw new Error('Failed to delete reply')
+            }
+
+            await replyRes.json()
+
+            mutate()
+
+            posthog?.capture('squeak delete reply', {
+                questionId: question?.id,
+                replyId: id,
+            })
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useQuestion.handleReplyDelete',
+                questionId: question?.id,
+                replyId: id,
+                error: JSON.stringify(error),
+            })
+
+            throw error
         }
-
-        await replyRes.json()
-
-        mutate()
     }
 
     return {
