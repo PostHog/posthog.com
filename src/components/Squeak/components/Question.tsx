@@ -50,8 +50,6 @@ export const Question = (props: QuestionProps) => {
         return <div>Question not found</div>
     }
 
-    const resolved = questionData.attributes.resolved
-
     return (
         <root.div ref={containerRef}>
             <Theme containerRef={containerRef} />
@@ -68,11 +66,9 @@ export const Question = (props: QuestionProps) => {
                         <div className="squeak-post-author">
                             <Profile profile={questionData.attributes.profile?.data} />
                             <Days created={questionData.attributes.createdAt} />
-                            {!resolved && (
-                                <div className="squeak-subscribe-button-container">
-                                    <SubscribeButton question={questionData} />
-                                </div>
-                            )}
+                            <div className="squeak-subscribe-button-container">
+                                <SubscribeButton question={questionData} />
+                            </div>
                         </div>
                         <div className="squeak-post-content">
                             <h3 className="squeak-subject">
@@ -86,15 +82,9 @@ export const Question = (props: QuestionProps) => {
 
                         <Replies expanded={expanded} setExpanded={setExpanded} />
 
-                        {resolved ? (
-                            <div className="squeak-locked-message">
-                                <p>This thread has been closed</p>
-                            </div>
-                        ) : (
-                            <div className="squeak-reply-form-container">
-                                <QuestionForm questionId={questionData.id} formType="reply" reply={reply} />
-                            </div>
-                        )}
+                        <div className="squeak-reply-form-container">
+                            <QuestionForm questionId={questionData.id} formType="reply" reply={reply} />
+                        </div>
                     </div>
                 </div>
             </CurrentQuestionContext.Provider>
