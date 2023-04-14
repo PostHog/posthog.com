@@ -1,4 +1,4 @@
-import React, { useState, useRef, createContext } from 'react'
+import React, { useState, useRef, createContext, useEffect } from 'react'
 import root from 'react-shadow/styled-components'
 
 import { Theme } from './Theme'
@@ -10,6 +10,7 @@ import Markdown from './Markdown'
 import { QuestionForm } from './QuestionForm'
 import { useQuestion } from '../hooks/useQuestion'
 import QuestionSkeleton from './QuestionSkeleton'
+import SubscribeButton from './SubscribeButton'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -49,6 +50,8 @@ export const Question = (props: QuestionProps) => {
         return <div>Question not found</div>
     }
 
+    const resolved = questionData.attributes.resolved
+
     return (
         <root.div ref={containerRef}>
             <Theme containerRef={containerRef} />
@@ -64,8 +67,12 @@ export const Question = (props: QuestionProps) => {
                     <div className="squeak-question-container squeak-post">
                         <div className="squeak-post-author">
                             <Profile profile={questionData.attributes.profile?.data} />
-
                             <Days created={questionData.attributes.createdAt} />
+                            {!resolved && (
+                                <div className="squeak-subscribe-button-container">
+                                    <SubscribeButton question={questionData} />
+                                </div>
+                            )}
                         </div>
                         <div className="squeak-post-content">
                             <h3 className="squeak-subject">
@@ -79,7 +86,7 @@ export const Question = (props: QuestionProps) => {
 
                         <Replies expanded={expanded} setExpanded={setExpanded} />
 
-                        {questionData.attributes.resolved ? (
+                        {resolved ? (
                             <div className="squeak-locked-message">
                                 <p>This thread has been closed</p>
                             </div>
