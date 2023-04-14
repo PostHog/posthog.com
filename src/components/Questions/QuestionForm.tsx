@@ -30,7 +30,12 @@ export default function Questions(props: QuestionFormProps): JSX.Element {
                                 <Close className="w-3 h-3" />
                             </button>
                         </div>
-                        <QuestionForm initialView="question-form" formType="question" onSubmit={handleSubmit} />
+                        <QuestionForm
+                            slug={(typeof window !== 'undefined' && window.location.pathname) || ''}
+                            initialView="question-form"
+                            formType="question"
+                            onSubmit={handleSubmit}
+                        />
                     </Dialog.Panel>
                 </div>
             </Dialog>
