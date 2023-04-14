@@ -19,6 +19,29 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
 
+## April 14, 2023
+
+#### MaxAI PostHog Support AI
+**Beta feature**
+![posthog ai support](../images/blog/array/maxai.jpeg)
+
+Another hackathon project from our recent offsite in Aruba has just launched, called [MaxAI](https://github.com/PostHog/max-ai). He's an open-source AI designed to help PostHog users and, [as mentioned on Twitter](https://twitter.com/posthog/status/1643266039839334400), we built the first version in just two days.
+
+Max is currently in beta, and is deployed into our user [Slack](/slack) so he can provide help to support questions. In the future, we hope to release him onto the website, and into the PostHog app.
+
+You can check out [the MaxAI repo README for a full explanation of how his AI works](https://github.com/PostHog/max-ai#readme) and how we trained him. The short version is that we'be built a vector database of context using [Weaviate](https://weaviate.io/), we use [Haystack](https://haystack.deepset.ai/) to connect that to prompts and questions, then feed that to GPT using the [OpenAI API](https://platform.openai.com/docs/guides/chat/introduction).
+
+Currently Max pulls information from our docs, our GitHub repos, and our [Squeak](https://squeak.posthog.com/) questions. He can use these sources to answer questions about how PostHog works, what we're working on, how to solve common problems, and more. [He can also write poetry.](https://twitter.com/posthog/status/1643269734249406469)
+
+Want to test him out? [Tag @Max-AI in the PostHog Slack, or send him a DM!](/slack)
+
+#### PostHog Tracks
+![posthog tracks](../images/blog/array/tracks.gif)
+
+[PostHog Tracks](/tracks) is a series of curated courses of tutorials and other lessons which cover common uses for particular roles, as well as general advice for all users - and it's constantly expanding!
+
+At the moment PostHog Tracks groups many of our existing tutorials together into role-based themes, but over time we plan to add to these tracks and form more robust learning opportunities. Let us know if you have any ideas for what could be included, in the [Slack](/slack)
+
 ## April 7, 2023
 
 > There was no Changelog update last week because the team was away at our annual company offsite. We'll have some info on what we got up to on [the blog](/blog) soon!

@@ -14,11 +14,12 @@ import Modal from 'components/Modal'
 import { EditProfile } from 'components/Squeak'
 import useSWR from 'swr'
 import SidebarSection from 'components/PostLayout/SidebarSection'
-import { ProfileData, ProfileQuestionsData, StrapiData, StrapiRecord } from 'lib/strapi'
+import { ProfileData, StrapiRecord } from 'lib/strapi'
 import getAvatarURL from '../../../components/Squeak/util/getAvatar'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { RightArrow } from '../../../components/Icons/Icons'
 import qs from 'qs'
+import usePostHog from 'hooks/usePostHog'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -45,6 +46,7 @@ export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
 
     const [editModalOpen, setEditModalOpen] = React.useState(false)
+    const posthog = usePostHog()
 
     const profileQuery = qs.stringify(
         {
@@ -66,7 +68,8 @@ export default function ProfilePage({ params }: PageProps) {
             encodeValuesOnly: true,
         }
     )
-    const { data, mutate } = useSWR<StrapiRecord<ProfileData>>(
+
+    const { data, error, mutate } = useSWR<StrapiRecord<ProfileData>>(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?${profileQuery}`,
         async (url) => {
             const res = await fetch(url)
@@ -74,6 +77,13 @@ export default function ProfilePage({ params }: PageProps) {
             return data
         }
     )
+
+    if (error) {
+        posthog?.capture('squeak error', {
+            source: 'ProfilePage',
+            error: JSON.stringify(error),
+        })
+    }
 
     const { attributes: profile } = data || {}
     const { firstName, lastName } = profile || {}

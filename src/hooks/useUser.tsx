@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
-import { ProfileData, StrapiRecord, StrapiResult } from 'lib/strapi'
+import { ProfileData, StrapiData, StrapiRecord, StrapiResult } from 'lib/strapi'
+import usePostHog from './usePostHog'
 
 export type User = {
     id: number
@@ -13,7 +14,9 @@ export type User = {
     createdAt: string
     provider: 'local' | 'github' | 'google'
     username: string
-    profile: StrapiRecord<ProfileData>
+    profile: {
+        id: number
+    } & ProfileData
 }
 
 type UserContextValue = {
@@ -57,6 +60,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null)
     const [jwt, setJwt] = useState<string | null>(null)
 
+    const posthog = usePostHog()
+
     useEffect(() => {
         const jwt = localStorage.getItem('jwt')
         const user = localStorage.getItem('user')
@@ -84,6 +89,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         setIsLoading(true)
 
         try {
+            posthog?.capture('squeak login start')
+
             const userRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local`, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -98,17 +105,36 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             const userData = await userRes.json()
 
             if (!userRes.ok) {
-                return { error: userData?.error?.message }
+                throw new Error(userData?.error?.message)
             }
 
             const user = await fetchUser(userData.jwt)
+
+            if (!user) {
+                throw new Error('Failed to fetch user data')
+            }
+
+            posthog?.capture('squeak login success', {
+                email,
+            })
 
             localStorage.setItem('jwt', userData.jwt)
             setJwt(userData.jwt)
 
             return user
         } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useUser.login',
+                email,
+                error: JSON.stringify(error),
+            })
+
             console.error(error)
+
+            if (error instanceof Error) {
+                return { error: error.message }
+            }
+
             return null
         } finally {
             setIsLoading(false)
@@ -116,6 +142,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
 
     const logout = async (): Promise<void> => {
+        posthog?.capture('squeak logout')
+
         localStorage.removeItem('jwt')
         localStorage.removeItem('user')
 
@@ -134,7 +162,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         firstName: string
         lastName: string
     }): Promise<User | null | { error: string }> => {
+        setIsLoading(true)
+
         try {
+            posthog?.capture('squeak signup start')
+
             const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local/register`, {
                 method: 'POST',
                 headers: {
@@ -152,7 +184,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             const userData = await res.json()
 
             if (!res.ok) {
-                return { error: userData?.error?.message }
+                throw new Error(userData?.error?.message)
             }
 
             const user = await fetchUser(userData.jwt)
@@ -160,10 +192,29 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             localStorage.setItem('jwt', userData.jwt)
             setJwt(userData.jwt)
 
+            posthog?.capture('squeak signup success', {
+                email,
+            })
+
             return user
         } catch (error) {
+            posthog?.capture('squeak error', {
+                type: 'useUser.signup',
+                email,
+                firstName,
+                lastName,
+                error: JSON.stringify(error),
+            })
+
             console.error(error)
+
+            if (error instanceof Error) {
+                return { error: error.message }
+            }
+
             return null
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -201,6 +252,34 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const meData: User = await meRes.json()
 
         setUser(meData)
+
+        // We don't want any error thrown here to bubble up to the caller.
+        try {
+            // We use the existing distinct_id here so we don't clobber the currently identified user.
+            const distinctId = posthog?.get_distinct_id()
+
+            if (distinctId && meData?.profile) {
+                posthog?.identify(distinctId, {
+                    // IMPORTANT: Make sure all properties start with `squeak` so we don't override any existing properties!
+                    squeakEmail: meData.email,
+                    squeakUsername: meData.username,
+                    squeakCreatedAt: meData.createdAt,
+                    squeakProfileId: meData.profile.id,
+                    squeakFirstName: meData.profile.firstName,
+                    squeakLastName: meData.profile.lastName,
+                    squeakBiography: meData.profile.biography,
+                    squeakCompany: meData.profile.company,
+                    squeakCompanyRole: meData.profile.companyRole,
+                    squeakGithub: meData.profile.github,
+                    squeakLinkedIn: meData.profile.linkedin,
+                    squeakLocation: meData.profile.location,
+                    squeakTwitter: meData.profile.twitter,
+                    squeakWebsite: meData.profile.website,
+                })
+            }
+        } catch (error) {
+            console.error(error)
+        }
 
         return meData
     }

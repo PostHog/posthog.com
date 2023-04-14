@@ -45,6 +45,19 @@ Windows isn't supported natively. But, Windows users can run a Linux virtual mac
 
 In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/blob/master/contents/handbook/engineering/developing-locally.md)!
 
+## Developing with CodeSpaces
+
+This is a faster alternative to get up and running. If you don't want to or can't use Codespaces continue from the next section.
+
+
+1. Create your codespace
+![](https://user-images.githubusercontent.com/890921/231489405-cb2010b4-d9e3-4837-bfdf-b2d4ef5c5d0b.png)
+2. Update it to 8-core machine type (the smallest is probably too small to get PostHog running properly). Consider also changing "Open in ..." to be your favorite editor.
+![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
+3. Open a terminal window and run `docker compose -f docker-compose.dev.yml up`
+4. Open a terminal window and run `./bin/migrate` and then `./bin/start`
+5. Open browser to http://localhost:8000/
+
 ## macOS prerequisites
 
 1. Install Xcode Command Line Tools if you haven't already: `xcode-select --install`.
