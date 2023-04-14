@@ -311,7 +311,7 @@ export const CodeBlock = ({
                                 </pre>
                             )}
 
-                            <code className={`${className} block rounded-none !m-0 p-4 shrink-0`}>
+                            <code className={`${className} block rounded-none !m-0 p-4 shrink-0`} style={{ ...style }}>
                                 {tokens.map((line, i) => {
                                     const { className, ...props } = getLineProps({ line, key: i })
                                     return (

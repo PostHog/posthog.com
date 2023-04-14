@@ -27,30 +27,23 @@ pip install posthog
 In your app, import the `posthog` library and set your api key and host **before** making any calls.
 
 ```python
-from posthog.client import Client as PostHog
+from posthog import Posthog
 
 # The personal API key is necessary only if you want to use local evaluation of feature flags.
-posthog = PostHog('<ph_project_api_key>', host='<ph_instance_address>', personal_api_key='<ph_personal_api_key>')
+posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>', personal_api_key='<ph_personal_api_key>')
 ```
+
+> **Note:** For versions older than `2.5.0`, you'll need to import the `Client` class from `posthog.client` instead.
+>
+> ```python
+> from posthog.client import Client as Posthog
+> ```
 
 You can read more about the differences between the project and personal API keys in the dedicated [API authentication section](/docs/api/overview#authentication) of the Docs.
 
 > **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
 
 You can find your keys in the 'Project Settings' page in PostHog.
-
-To debug, you can toggle debug mode on:
-
-```python
-posthog.debug = True
-```
-
-And to make sure no calls happen during your tests, you can disable them, like so:
-
-```python
-if settings.TEST:
-    posthog.disabled = True
-```
 
 ## Making Calls
 
@@ -327,6 +320,21 @@ import posthog
 def purchase(request):
     # example capture
     posthog.capture(request.user.pk, 'purchase', ...)
+```
+
+## Debugging and testing
+
+To debug, you can toggle debug mode on:
+
+```python
+posthog.debug = True
+```
+
+And to make sure no calls happen during your tests, you can disable them, like so:
+
+```python
+if settings.TEST:
+    posthog.disabled = True
 ```
 
 # Integrations
