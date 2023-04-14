@@ -1,14 +1,19 @@
-import React from 'react'
-import { CallToAction } from 'components/CallToAction'
-import { Slack } from 'components/Icons/Icons'
+import React, { useState } from 'react'
+
+import { Listbox } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/outline'
+
 import Layout from 'components/Layout'
-import PostLayout from 'components/PostLayout'
 import { SEO } from 'components/seo'
-import { Squeak } from 'components/Squeak'
+import community from 'sidebars/community.json'
+import PostLayout from 'components/PostLayout'
+import SidebarSearchBox from 'components/Search/SidebarSearchBox'
+import QuestionsTable from 'components/Questions/QuestionsTable'
+import QuestionForm from 'components/Questions/QuestionForm'
+import { useQuestions } from 'hooks/useQuestions'
 import { graphql } from 'gatsby'
 import Link from 'components/Link'
-import community from 'sidebars/community.json'
-import SidebarSection from 'components/PostLayout/SidebarSection'
+import { RightArrow } from 'components/Icons'
 
 interface ITopic {
     label: string
@@ -26,46 +31,88 @@ interface IProps {
     pageContext: {
         id: string
         topics: ITopic[]
+        slug: string
     }
 }
 
-const TopicSidebar = () => {
-    return (
-        <div>
-            <SidebarSection>
-                <div className="flex items-center space-x-2">
-                    <Slack className="w-5" />
-                    <h3 className="m-0 text-lg">Slack community</h3>
-                </div>
-                <p className="mt-2 mb-3">Chat with the PostHog team and other community members</p>
-                <CallToAction type="secondary" size="sm" width="full" to="/slack" className="inline-block">
-                    Join our Slack
-                </CallToAction>
-            </SidebarSection>
-        </div>
-    )
-}
+export default function Questions({ data, pageContext }: IProps) {
+    const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
 
-export default function SqueakTopics({ data }: IProps) {
+    const { questions, isLoading, refresh, fetchMore } = useQuestions({
+        limit: 20,
+        sortBy,
+        topicId: data?.squeakTopic?.squeakId,
+    })
+
     return (
-        <>
-            <SEO title={`${data.squeakTopic.label} - PostHog`} />
-            <Layout>
-                <PostLayout title={data.squeakTopic.label} menu={community} sidebar={<TopicSidebar />} hideSurvey>
-                    <section className="pb-12">
-                        <div className="mb-4">
-                            <Link to="/questions" className="text-gray">
-                                &larr; Back to questions
+        <Layout>
+            <PostLayout hideSidebar title={'Questions'} menu={community} hideSurvey>
+                <SEO title={`${data.squeakTopic.label} - PostHog`} />
+
+                <div className="max-w-6xl mx-auto space-y-8 pb-12">
+                    <section className="max-w-6xl mx-auto">
+                        <div className="w-full flex items-center mb-8">
+                            <Link to={'/questions'} className="flex space-x-1">
+                                <RightArrow className="-scale-x-100 w-6" />
+                                <span className="text-black dark:text-white text-lg">Questions</span>
                             </Link>
+                            <div className="ml-auto">
+                                <QuestionForm onSubmit={refresh} />
+                            </div>
+                        </div>
+                        <div className="w-full sm:flex sm:items-center mb-4">
+                            <div>
+                                <h1 className="text-4xl m-0">{data?.squeakTopic?.label} questions</h1>
+                            </div>
+                            <div className="ml-auto sm:mt-0 mt-4 sm:w-32 z-20">
+                                <Listbox as="div" className="relative" value={sortBy} onChange={setSortBy}>
+                                    <Listbox.Label className="sr-only">Sort by</Listbox.Label>
+                                    <Listbox.Button className="relative w-full flex items-center py-2 px-3 text-left bg-white/50 rounded shadow-lg cursor-pointer text-sm text-gray border border-gray/30 dark:bg-gray-accent-dark">
+                                        <span className="block truncate">
+                                            {sortBy === 'newest'
+                                                ? 'Newest'
+                                                : sortBy === 'activity'
+                                                ? 'Activity'
+                                                : 'Popular'}
+                                        </span>
+
+                                        <ChevronDownIcon className="ml-auto w-4 h-4 pointer-events-none text-gray-accent-light" />
+                                    </Listbox.Button>
+
+                                    <Listbox.Options className="absolute z-10 w-full text-gray mt-1 py-1 text-sm border border-gray/30 overflow-auto text-base bg-white dark:bg-gray-accent-dark dark:text-white rounded shadow-lg max-h-60 focus:outline-none sm:text-sm list-none p-0">
+                                        {['Newest', 'Activity', 'Popular'].map((option) => (
+                                            <Listbox.Option
+                                                key={option}
+                                                className="px-2 py-1 text-sm hover:bg-red hover:text-white cursor-pointer"
+                                                value={option.toLowerCase()}
+                                            >
+                                                {option}
+                                            </Listbox.Option>
+                                        ))}
+                                    </Listbox.Options>
+                                </Listbox>
+                            </div>
+                        </div>
+                        <div className="full">
+                            <SidebarSearchBox filter="question" />
                         </div>
 
-                        <h2>Questions tagged with "{data.squeakTopic.label}"</h2>
-
-                        <Squeak limit={5} slug={undefined} topicId={data.squeakTopic.squeakId} />
+                        <div className="mt-8 flex flex-col">
+                            <QuestionsTable
+                                className="sm:grid-cols-4"
+                                questions={questions}
+                                isLoading={isLoading}
+                                fetchMore={fetchMore}
+                                currentPage={{
+                                    title: `${data?.squeakTopic?.label} questions`,
+                                    url: `/questions/topics/${pageContext.slug}`,
+                                }}
+                            />
+                        </div>
                     </section>
-                </PostLayout>
-            </Layout>
-        </>
+                </div>
+            </PostLayout>
+        </Layout>
     )
 }
 

@@ -14,6 +14,7 @@ type QuestionPageProps = {
     pageContext: {
         id: string
     }
+    location: any
     data: {
         squeakQuestion: {
             id: string
@@ -56,6 +57,7 @@ type QuestionPageProps = {
 
 export default function QuestionPage(props: QuestionPageProps) {
     const { squeakQuestion } = props.data
+    const previous = props?.location?.state?.previous || { title: 'Questions', url: '/questions' }
 
     // Remap the data to match the Strapi format
     const question: StrapiRecord<QuestionData> = {
@@ -121,8 +123,8 @@ export default function QuestionPage(props: QuestionPageProps) {
             >
                 <section className="max-w-5xl mx-auto pb-12">
                     <div className="mb-4">
-                        <Link to="/questions" className="text-gray hover:text-gray-accent-light">
-                            ← Back to Questions
+                        <Link to={previous.url} className="text-gray hover:text-gray-accent-light">
+                            ← Back to {previous.title}
                         </Link>
                     </div>
 
