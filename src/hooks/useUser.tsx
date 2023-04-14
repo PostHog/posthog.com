@@ -121,7 +121,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             return user
         } catch (error) {
-            posthog?.capture('squeak login error', {
+            posthog?.capture('squeak error', {
+                source: 'useUser.login',
                 email,
                 error: JSON.stringify(error),
             })
@@ -195,7 +196,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             return user
         } catch (error) {
-            posthog?.capture('squeak signup error', {
+            posthog?.capture('squeak error', {
+                type: 'useUser.signup',
                 email,
                 firstName,
                 lastName,
@@ -253,10 +255,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const distinctId = posthog?.get_distinct_id()
         if (distinctId) {
             posthog?.identify(distinctId, {
-                // Make sure all properties start with `squeak` so we don't override any existing properties!
+                // IMPORTANT: Make sure all properties start with `squeak` so we don't override any existing properties!
                 squeakEmail: meData.email,
                 squeakUsername: meData.username,
                 squeakCreatedAt: meData.createdAt,
+                squeakProfileId: meData.profile.id,
                 squeakFirstName: meData.profile.attributes.firstName,
                 squeakLastName: meData.profile.attributes.lastName,
                 squeakBiography: meData.profile.attributes.biography,
