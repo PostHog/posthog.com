@@ -108,7 +108,7 @@ export default function Questions({ data, pageContext }: IProps) {
                                 fetchMore={fetchMore}
                                 currentPage={{
                                     title: `${data?.squeakTopic?.label} questions`,
-                                    url: `/questions/topics/${pageContext.slug}`,
+                                    url: `/questions/topic/${pageContext.slug}`,
                                 }}
                             />
                         </div>

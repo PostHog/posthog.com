@@ -65,7 +65,7 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
 
                         return (
                             <Link
-                                to={`/questions/topics/${slug}`}
+                                to={`/questions/topic/${slug}`}
                                 key={id}
                                 className={`${className} block py-2 -ml-4 -mr-4 pl-4 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
                             >

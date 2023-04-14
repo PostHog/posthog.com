@@ -50,7 +50,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                 <SidebarSection title="Topics">
                     <div className="flex items-center space-x-2">
                         {question.topics.data.map((topic) => (
-                            <Link key={topic.id} to={`/questions/topics/${topic.attributes.slug}`}>
+                            <Link key={topic.id} to={`/questions/topic/${topic.attributes.slug}`}>
                                 {topic.attributes.label}
                             </Link>
                         ))}

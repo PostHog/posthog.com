@@ -121,22 +121,22 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                                     <ProductItem
                                         title="Product analytics"
                                         icon={<Analytics />}
-                                        url="/questions/topics/product-analytics"
+                                        url="/questions/topic/product-analytics"
                                     />
                                     <ProductItem
                                         title="Session replay"
                                         icon={<SessionRecording />}
-                                        url="/questions/topics/session-replay"
+                                        url="/questions/topic/session-replay"
                                     />
                                     <ProductItem
                                         title="Feature flags"
                                         icon={<FeatureFlags />}
-                                        url="/questions/topics/feature-flags"
+                                        url="/questions/topic/feature-flags"
                                     />
                                     <ProductItem
                                         title="A/B testing"
                                         icon={<AbTesting />}
-                                        url="/questions/topics/ab-testing"
+                                        url="/questions/topic/ab-testing"
                                     />
                                     <ProductItem title="More" icon={<More />} url="/questions" />
                                 </ol>

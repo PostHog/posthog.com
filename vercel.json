@@ -1,5 +1,6 @@
 {
     "redirects": [
+        { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/docs/integrate/third-party/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
