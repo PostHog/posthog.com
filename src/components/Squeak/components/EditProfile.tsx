@@ -83,7 +83,7 @@ function Avatar({ values, setFieldValue }) {
 
     useEffect(() => {
         if (!values.avatar && inputRef?.current) {
-            inputRef.current.value = ''
+            inputRef.current.value = null
         }
 
         setImageURL(values.avatar)
