@@ -71,7 +71,8 @@ In Cloudflare, create a new CNAME record for your domain. It should point to `ap
 If you are using Next.js, you can take advantage of [rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) to behave like a reverse proxy.
 
 ```js
-module.exports = {
+// next.config.js
+const nextConfig = {
   async rewrites() {
     return [
       {
@@ -80,14 +81,14 @@ module.exports = {
       },
     ];
   },
-};
+}
+module.exports = nextConfig
 ```
 
 Then configure the PostHog client to send requests via your redirection.
 
-```ts
+```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
  api_host: "https://your-host.com/ingest"
 })
-
 ```
