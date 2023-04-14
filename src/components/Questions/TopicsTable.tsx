@@ -49,8 +49,8 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
         <ul className="m-0 p-0 list-none">
             <li className="grid grid-cols-12 pb-1 items-center text-primary/75 dark:text-primary-dark/75 text-sm">
                 <div className="col-span-8">{topicGroup}</div>
-                <div className="col-span-2 text-center">Unresolved</div>
-                <div className="col-span-2 text-center">Activity</div>
+                <div className="hidden md:block md:col-span-2 text-center">Unresolved</div>
+                <div className="col-span-4 md:col-span-2 text-center">Last active</div>
             </li>
             <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none">
                 {topics?.data?.length > 0 &&
@@ -75,10 +75,10 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                                         {Icon && <Icon className="w-5 opacity-60 text-black dark:text-white" />}
                                         <span className="text-red line-clamp-1">{label}</span>
                                     </div>
-                                    <div className="col-span-2 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
+                                    <div className="hidden md:block md:col-span-2 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                         {questions?.data?.length}
                                     </div>
-                                    <div className="col-span-2 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
+                                    <div className="col-span-4 md:col-span-2 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                         {latestQuestion?.attributes?.createdAt &&
                                             dayFormat(dateToDays(latestQuestion?.attributes?.createdAt))}
                                     </div>
