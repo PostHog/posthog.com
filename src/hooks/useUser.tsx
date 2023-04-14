@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
-import { ProfileData, StrapiRecord, StrapiResult } from 'lib/strapi'
+import { ProfileData, StrapiData, StrapiRecord, StrapiResult } from 'lib/strapi'
 import usePostHog from './usePostHog'
 
 export type User = {
@@ -14,7 +14,9 @@ export type User = {
     createdAt: string
     provider: 'local' | 'github' | 'google'
     username: string
-    profile: StrapiRecord<ProfileData>
+    profile: {
+        id: number
+    } & ProfileData
 }
 
 type UserContextValue = {
@@ -260,16 +262,16 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 squeakUsername: meData.username,
                 squeakCreatedAt: meData.createdAt,
                 squeakProfileId: meData.profile.id,
-                squeakFirstName: meData.profile.attributes.firstName,
-                squeakLastName: meData.profile.attributes.lastName,
-                squeakBiography: meData.profile.attributes.biography,
-                squeakCompany: meData.profile.attributes.company,
-                squeakCompanyRole: meData.profile.attributes.companyRole,
-                squeakGithub: meData.profile.attributes.github,
-                squeakLinkedIn: meData.profile.attributes.linkedin,
-                squeakLocation: meData.profile.attributes.location,
-                squeakTwitter: meData.profile.attributes.twitter,
-                squeakWebsite: meData.profile.attributes.website,
+                squeakFirstName: meData.profile.firstName,
+                squeakLastName: meData.profile.lastName,
+                squeakBiography: meData.profile.biography,
+                squeakCompany: meData.profile.company,
+                squeakCompanyRole: meData.profile.companyRole,
+                squeakGithub: meData.profile.github,
+                squeakLinkedIn: meData.profile.linkedin,
+                squeakLocation: meData.profile.location,
+                squeakTwitter: meData.profile.twitter,
+                squeakWebsite: meData.profile.website,
             })
         }
 
