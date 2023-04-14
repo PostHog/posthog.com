@@ -1,7 +1,6 @@
 import React from 'react'
 import { Field, Form, Formik } from 'formik'
 import { User, useUser } from 'hooks/useUser'
-import usePostHog from 'hooks/usePostHog'
 
 type SignInProps = {
     buttonText?: string
@@ -15,7 +14,6 @@ const errorMessages: Record<string, string> = {
 
 export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, setMessage }) => {
     const { isLoading, login } = useUser()
-    const posthog = usePostHog()
 
     const handleSubmit = async (values: any) => {
         const user = await login({
@@ -24,17 +22,10 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
         })
 
         if (!user) {
-            posthog?.capture('squeak login error', { email: values.email })
-
             setMessage && setMessage('Invalid email or password')
         } else if ('error' in user) {
-            posthog?.capture('squeak login error', { email: values.email, error: user.error })
-
             setMessage?.(errorMessages[user?.error] || user?.error)
         } else {
-            posthog?.identify(user?.email)
-            posthog?.capture('squeak login')
-
             onSubmit?.(user)
         }
     }
