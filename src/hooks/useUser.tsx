@@ -253,26 +253,32 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
         setUser(meData)
 
-        // We use the existing distinct_id here so we don't clobber the currently identified user.
-        const distinctId = posthog?.get_distinct_id()
-        if (distinctId && meData?.profile) {
-            posthog?.identify(distinctId, {
-                // IMPORTANT: Make sure all properties start with `squeak` so we don't override any existing properties!
-                squeakEmail: meData.email,
-                squeakUsername: meData.username,
-                squeakCreatedAt: meData.createdAt,
-                squeakProfileId: meData.profile.id,
-                squeakFirstName: meData.profile.firstName,
-                squeakLastName: meData.profile.lastName,
-                squeakBiography: meData.profile.biography,
-                squeakCompany: meData.profile.company,
-                squeakCompanyRole: meData.profile.companyRole,
-                squeakGithub: meData.profile.github,
-                squeakLinkedIn: meData.profile.linkedin,
-                squeakLocation: meData.profile.location,
-                squeakTwitter: meData.profile.twitter,
-                squeakWebsite: meData.profile.website,
-            })
+        // We don't want any error thrown here to bubble up to the caller.
+        try {
+            // We use the existing distinct_id here so we don't clobber the currently identified user.
+            const distinctId = posthog?.get_distinct_id()
+
+            if (distinctId && meData?.profile) {
+                posthog?.identify(distinctId, {
+                    // IMPORTANT: Make sure all properties start with `squeak` so we don't override any existing properties!
+                    squeakEmail: meData.email,
+                    squeakUsername: meData.username,
+                    squeakCreatedAt: meData.createdAt,
+                    squeakProfileId: meData.profile.id,
+                    squeakFirstName: meData.profile.firstName,
+                    squeakLastName: meData.profile.lastName,
+                    squeakBiography: meData.profile.biography,
+                    squeakCompany: meData.profile.company,
+                    squeakCompanyRole: meData.profile.companyRole,
+                    squeakGithub: meData.profile.github,
+                    squeakLinkedIn: meData.profile.linkedin,
+                    squeakLocation: meData.profile.location,
+                    squeakTwitter: meData.profile.twitter,
+                    squeakWebsite: meData.profile.website,
+                })
+            }
+        } catch (error) {
+            console.error(error)
         }
 
         return meData
