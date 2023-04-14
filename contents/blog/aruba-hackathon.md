@@ -13,11 +13,11 @@ tags:
   - Offsites
 ---
 
-Every year, Team PostHog congregate for our annual all-company offsite. In previous years we've been to Italy, Portugal and Iceland. This year, we went to the Aruba – a tiny, Caribbean island just off the north coast of Venezuela.
+Every year, Team PostHog congregates for our annual all-company offsite. In previous years we've been to Italy, Portugal and Iceland. This year, we went to the Aruba – a tiny, Caribbean island just off the north coast of Venezuela.
 
 ![posthog aruba](../images/blog/aruba/aruba-vibes.jpeg)
 
-As a remote company, our offsites are a hugely important part of our culture. We encourage everyone to meet up when they can, be that through co-working, ad-hoc visits (which we pay for), or small team offsites, but we only get the whole company together once a year.
+As a remote company, our offsites are a hugely important part of our culture. We encourage everyone to meet up when they can, be that through co-working, ad-hoc visits ([which we pay for](/handbook/people/spending-money#budget-for-socializing), or [small team offsites](/handbook/company/offsites#small-team-offsites), but we only get the whole company together once a year.
 
 ![posthog aruba](../images/blog/aruba/people-shots.jpeg)
 
@@ -57,7 +57,7 @@ On the whole, Max gives useful answers – even when using the general data and 
 
 ![maxai](../images/blog/aruba/max-ai.jpeg)
 
-That said, Max isn't immune to hallucinating solutions – or even URLs for docs that don't exist – if it doesn't know the answer. It's a work in progress we'll be releasing Max on our support Slack soon as a beta. 
+That said, Max isn't immune to hallucinating solutions – or even URLs for docs that don't exist – if it doesn't know the answer. It's a work in progress, but we've released Max on [our community Slack](/slack) as a beta. Drop him a DM! 
 
 Check out the [MaxAI repo](https://github.com/PostHog/max-ai) for more info.
 
@@ -75,7 +75,7 @@ These dashboards are accessible from the 'New Dashboard' modal in PostHog. Some 
 
 Got a request for a dashboard? DM someone from the marketing on our community Slack.
 
-Joe Martin also worked with Eli from the Website & Docs team to ship [PostHog Tracks](/tracks), a new way to discover tutorials organized by role.
+For Joe, one hackathon project wasn't enough. He also worked with Eli Kinsey from the Website & Docs team to ship [PostHog Tracks](/tracks), a new way to discover tutorials organized by role.
 
 ## A built-in data warehouse for PostHog
 
@@ -87,13 +87,19 @@ Dubbed DataBeach because Frank and Harry started building the feature while sipp
 
 The MVP they built consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like Stripe, Hubspot (see above), Intercom, and more, along with data from PostHog.
 
-There's much to build before PostHog as a data warehouse is ready for you, but it's coming. Keep an eye on our [public roadmap](/roadmap) for updates.
+There's more to build before PostHog is ready to be your data warehouse, but we're working on it. Keep an eye on our [public roadmap](/roadmap) for updates.
 
 ## Building a Zendesk killer in PostHog
 
 - **Team Arubug:** Tiina Turban, Simon Fisher, Paul D'Ambra, Cameron DeLeone, and Cory Watilo
 
-Last year, we adopted Zendesk to manage support for PostHog, but we don't love it. It's hard to prioritize tickets, and most lack the context a support hero or engineer needs to fix it. Enter team Arubug, who decided there had to be a better way.
+Our amazing, direct-to-an-engineer support has anecdotally been a big reason why people love us. But there's a couple of inefficiencies we've been running into especially as we grow
+- lack the context a support hero or engineer needs to fix it, 
+  - furthermore we have session recordings, why are we wasting time trying to repro instead of just checking out the session recordings.
+- lack of ability to see trends/aggregated info about support requests
+- too many places for support requests to come in which makes doing support confusing and prioritising hard.
+
+Enter team Arubug, who decided there had to be a better way.
 
 // TODO: Video of site app
 
@@ -109,7 +115,11 @@ The team also built a communication tab into bug reports, so support can send em
 
 // TODO: Screenshot of communication tab
 
-Long term, we're looking at whether this could replace Zendesk for support, and be launched as a beta product for PostHog users one day.
+After the hackathon we've reviewed the plan:
+
+- We realised that there's another problem internally. Due to the increased complexity of our product, it’s become harder for a single engineer to provide good support for all of our products. Support heroes also shield product teams from feedback about their product, which means it’s harder to iterate on a product. So we're going to use this in-app integration to split out to the more specific team helping us do triaging effectively.
+
+- We've decided at this point not to continue the work on the communication tab and instead integrate better with Zendesk. That said, the way we handle support can be used by customers too – there will be a blog post coming to explain this further.
 
 ## Hedgehog mode + toolbar = awesomeness
 
@@ -153,7 +163,7 @@ Luke and Thomas built an MVP for automations in PostHog. In the MVP, automations
 
 ![automations](../images/blog/aruba/automation-posthog.png)
 
-Even this basic functionality creates numerous helpful use cases, but long-term we expect to add more sources and destinations, and the ability to create automations based on event thresholds.
+Even this basic functionality has numerous helpful use cases, but long-term we expect to add more sources and destinations, and the ability to create automations based on event thresholds.
 
 ## HouseWatch: Centralized monitoring and management for ClickHouse
 
@@ -163,7 +173,7 @@ PostHog uses ClickHouse as our main event database, but we end up using a huge r
 
 // TODO: Screenshot of House Watch
 
-The homepage allows us to monitor things like execution count (queries per hour), and memory usage. There's also a slow queries view, which will allow the team to proactively identify problematic queries and reach out to customers to help.
+The homepage enables us to monitor things like execution count (queries per hour), and memory usage. There's also a slow queries view, which will allow the team to proactively identify problematic queries and reach out to customers to help.
 
 Other features include:
 
