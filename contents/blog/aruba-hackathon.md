@@ -33,7 +33,7 @@ Here's what we built.
 
 Deployed on our Slack, app, website, and GitHub repos, MaxAI was the inevitable result of everyone wanting to play with GPT. 
 
-The goal of the team was to create an AI bot that could answer support questions, easing the load on our support heroes and making it easier for the community to find answers to their questions.
+The goal was to create an AI bot that could answer support questions, easing the load on our [support heroes](/handbook/engineering/support-hero) and making it easier for the community to find answers to their questions.
 
 Built using Weaviate, Haystack, and `gpt-3.5-turbo`, MaxAI works by taking a user's question, collecting all relevant docs and data for that question, generating a prompt with all that context, and querying OpenAI for an answer.
 
