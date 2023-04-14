@@ -88,6 +88,28 @@ export default function Home() {
 }
 ```
 
+### Evaluating the flag on load
+
+If you want to evaluate flags as soon as PostHog loads, you can use the `loaded` method in the initialization options. Make sure to use the `onFeatureFlags` method to ensure flags are loaded before evaluating it.
+
+```js
+// pages/_app.js
+if (typeof window !== 'undefined') {
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    disable_session_recording: true,
+    loaded: (posthog) => {
+      posthog.onFeatureFlags((flags) => {
+        if (posthog.isFeatureEnabled('record-na')) posthog.startSessionRecording()
+      })
+    }
+  })
+}
+//...
+```
+
+> **Note:** When evaluating flags for a new user, person properties won't be available until ingestion. This means flags depending on person properties won't evaluate correctly if done in the `loaded` method. GeoIP properties (like continent code, country, and city name) will work because they don't depend on ingestion. 
+
 ## Record on specific pages
 
 You can start recordings on specific pages by calling `startSessionRecording()` when those pages first load.
