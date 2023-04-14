@@ -9,7 +9,8 @@ author: ["andy-vandervell"]
 featuredImage: ../images/blog/aruba/beach-hog.jpg
 featuredImageType: full
 category: Inside PostHog
-tags:
+tags: 
+  - Offsites
 ---
 
 Every year, Team PostHog congregate for our annual all-company offsite. In previous years we've been to Italy, Portugal and Iceland. This year, we went to the Aruba – a tiny, Caribbean island just off the north coast of Venezuela.
@@ -52,11 +53,9 @@ flowchart TD
     G -->|Query OpenAI|H[AI Response]
 ```
 
-On the whole, Max gives useful answers – even when using the general data and dealing with complex questions.
+On the whole, Max gives useful answers – even when using the general data and dealing with complex questions. Max is also dead handy for summarizing long support threads in Slack or GitHub issues. 
 
 ![maxai](../images/blog/aruba/max-ai.jpeg)
-
-Max is also dead handy for summarizing long support threads in Slack or GitHub issues.
 
 That said, Max isn't immune to hallucinating solutions – or even URLs for docs that don't exist – if it doesn't know the answer. It's a work in progress we'll be releasing Max on our support Slack soon as a beta. 
 
