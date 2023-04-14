@@ -2,6 +2,40 @@ import React from 'react'
 
 import Link from 'components/Link'
 import { dateToDays, dayFormat } from '../../utils'
+import {
+    FeatureFlags,
+    SessionRecording,
+    DataManagement,
+    Events,
+    Retention,
+    Funnels,
+    Trends,
+    Cohorts,
+    PathAnalysis,
+    DataWarehouse,
+    API,
+    AppLibrary,
+} from 'components/ProductIcons'
+
+const topicIcons = {
+    'session recording': SessionRecording,
+    'feature flags': FeatureFlags,
+    'identify users': DataManagement,
+    events: Events,
+    retention: Retention,
+    funnels: Funnels,
+    trends: Trends,
+    cohorts: Cohorts,
+    paths: PathAnalysis,
+    kubernetes: DataWarehouse,
+    'helm chart': DataWarehouse,
+    'migrating to posthog': DataManagement,
+    gcp: DataWarehouse,
+    api: API,
+    apps: AppLibrary,
+    migration: DataManagement,
+    deployment: DataManagement,
+}
 
 export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
     return (
@@ -19,6 +53,8 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                             attributes: { label, slug, questions },
                         } = topic
 
+                        const Icon = topicIcons[label.toLowerCase()]
+
                         const [latestQuestion] = questions?.data || []
 
                         return (
@@ -29,6 +65,7 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                             >
                                 <div className="grid grid-cols-12 items-center">
                                     <div className="col-span-8 flex items-center space-x-4">
+                                        {Icon && <Icon className="w-4 text-black dark:text-white" />}
                                         <span className="text-red line-clamp-1">{label}</span>
                                     </div>
                                     <div className="col-span-2 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
