@@ -52,8 +52,10 @@ This is all we need for scroll depth tracking.
 
 There are multiple ways to measure scroll depth:
 
-1. **Depth in pixels.** To measure this, add the `window.innerHeight` and the `window.pageYOffset`. This isn’t always accurate because pages and viewports can vary in size. Two users might have different-sized viewports causing the same pixel scroll depth to be a different experience. 
-2. **Depth in percentage.** To measure this, take the pixel depth (`window.innerHeight + window.pageYOffset`) and divide it by the `document.body.offsetHeight`.  This is a better metric to use because it captures the relative depth of the scroll. Getting 50% down a page is roughly equal to getting through 50% of the page’s content. 
+1. **Depth in pixels.** To measure this, add the `window.innerHeight` and the `window.pageYOffset`. This isn’t always accurate because pages and viewports can vary in size. Two users might have different-sized viewports causing the same pixel scroll depth to be a different experience.
+ 
+2. **Depth in percentage.** To measure this, take the pixel depth (`window.innerHeight + window.pageYOffset`) and divide it by the `document.body.offsetHeight`.  This is a better metric to use because it captures the relative depth of the scroll. Getting 50% down a page is roughly equal to getting through 50% of the page’s content.
+ 
 3. **Scrolled at all** or **scrolled to the bottom of the page**. To calculate these, check if the depth percentage is either not 0 or equal to 1. For many sites, this might not be relevant, but it does provide an easy point to say someone started or completed a page. If a page "ends" earlier than the bottom, you can also set up a trigger at that point.
 
 ## Capturing scroll depth
