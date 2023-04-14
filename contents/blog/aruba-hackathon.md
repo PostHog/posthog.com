@@ -19,7 +19,7 @@ Every year, Team PostHog congregate for our annual all-company offsite. In previ
 
 As a remote company, our offsites are a hugely important part of our culture. We encourage everyone to meet up when they can, be that through co-working, ad-hoc visits (which we pay for), or small team offsites, but we only get the whole company together once a year.
 
-![posthog aruba](../images/blog/aruba/aruba-fun-photos.jpeg)
+![posthog aruba](../images/blog/aruba/people-shots.jpeg)
 
 When we do, we like to plan a mixture of fun social activities, strategic sessions and workshops, culture exercises, and (the most important bit) a 24-hour hackathon.
 
