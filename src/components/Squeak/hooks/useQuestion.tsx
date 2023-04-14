@@ -1,5 +1,5 @@
 import qs from 'qs'
-import { QuestionData, StrapiRecord } from 'lib/strapi'
+import { ProfileData, QuestionData, StrapiRecord } from 'lib/strapi'
 import useSWR from 'swr'
 import { useUser } from 'hooks/useUser'
 
@@ -72,7 +72,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     )
 
-    const { getJwt } = useUser()
+    const { getJwt, fetchUser } = useUser()
 
     const reply = async (body: string) => {
         const token = await getJwt()
@@ -170,6 +170,79 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         mutate()
     }
 
+    const isSubscribed = async (profile: StrapiRecord<ProfileData>): Promise<boolean> => {
+        const query = qs.stringify({
+            filters: {
+                id: {
+                    $eq: id,
+                },
+                profileSubscribers: {
+                    id: {
+                        $eq: profile?.id,
+                    },
+                },
+            },
+            populate: {
+                profileSubscribers: true,
+            },
+        })
+        const questionRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query}`)
+
+        if (!questionRes.ok) {
+            throw new Error('Failed to fetch question')
+        }
+
+        const { data } = await questionRes.json()
+
+        return data?.length > 0
+    }
+
+    const subscribe = async (profile: StrapiRecord<ProfileData> | undefined): Promise<void> => {
+        if (!profile) return
+
+        const body = {
+            data: {
+                questionSubscriptions: {
+                    connect: [id],
+                },
+            },
+        }
+
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profile?.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        await fetchUser()
+    }
+
+    const unsubscribe = async (profile: StrapiRecord<ProfileData> | undefined): Promise<void> => {
+        if (!profile) return
+
+        const body = {
+            data: {
+                questionSubscriptions: {
+                    disconnect: [id],
+                },
+            },
+        }
+
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profile?.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        await fetchUser()
+    }
+
     return {
         question: questionData,
         reply,
@@ -179,5 +252,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
+        isSubscribed,
+        subscribe,
+        unsubscribe,
     }
 }

@@ -324,6 +324,16 @@ const Style = createGlobalStyle`
         align-items: center;
         display: flex;
 
+        .squeak-subscribe-button-container {
+            margin-left: auto;
+            button {
+                padding: 0;
+                border: 0;
+                position: relative;
+            }
+        }
+        
+
         .squeak-avatar-container {
             margin-right: 10px;
         }
