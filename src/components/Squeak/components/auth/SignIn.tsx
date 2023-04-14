@@ -22,7 +22,7 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
         })
 
         if (!user) {
-            setMessage && setMessage('Invalid email or password')
+            setMessage && setMessage('There was an error signing in. Please try again.')
         } else if ('error' in user) {
             setMessage?.(errorMessages[user?.error] || user?.error)
         } else {
