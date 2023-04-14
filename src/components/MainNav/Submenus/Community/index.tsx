@@ -10,11 +10,27 @@ import slugify from 'slugify'
 import { Avatar, Login } from '../../../../pages/community'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from '../../../Squeak/util/getAvatar'
+import { AbTesting, Analytics, FeatureFlags, SessionRecording } from 'components/ProductIcons'
+import { More } from 'components/NotProductIcons'
 
 interface ColMenuItems {
     title: string
     description: string
     url: string
+}
+
+const ProductItem = ({ title, icon, url }) => {
+    return (
+        <li className="md:max-w-[100px]">
+            <Link
+                className="group h-full cursor-pointer rounded-sm md:px-2 py-2 hover:bg-tan hover:bg-opacity-50 flex flex-col justify-start items-center space-y-2 relative hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99]"
+                to={url}
+            >
+                <span className="w-7 h-7 text-black dark:text-white opacity-60 group-hover:opacity-100">{icon}</span>
+                <h3 className="text-sm m-0 opacity-70 font-bold text-center leading-none">{title}</h3>
+            </Link>
+        </li>
+    )
 }
 
 const Profile = () => {
@@ -89,79 +105,46 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
                 <Header title="Community" />
                 <div className="md:flex md:p-0 p-5">
                     <div className="md:border-r border-gray-accent-light border-dashed w-full md:w-[500px] lg:w-[650px]">
-                        <div className="md:p-6 lg:px-9 md:pr-3 md:mb-0 mb-4">
+                        <div className="md:p-6 lg:px-9 md:pr-3 md:mb-0">
                             <div>
                                 <div className="flex justify-between items-center mr-2">
                                     <h3 className="text-[18px] opacity-70 m-0 md:mr-6 text-black">
                                         Community questions
                                     </h3>
-                                    <CallToAction to="/questions">Ask a question</CallToAction>
                                 </div>
-                                <p className="mt-4 dark:text-white">
-                                    Ask and answer community questions about PostHog. These questions are posted across
-                                    PostHog.com and aggregated here.
+                                <p className="mt-2 text-sm dark:text-primary-dark">
+                                    Ask and answer community questions about PostHog.
                                 </p>
-                                <ul className="grid grid-cols-2 m-0 p-0 list-none mt-2 gap-x-6">
-                                    {topicGroups.nodes
-                                        .filter((node) => topicGroupsToShow.includes(node.label))
-                                        .map(({ label, topics }) => {
-                                            return (
-                                                topics.length > 0 && (
-                                                    <li>
-                                                        <h3 className="text-base opacity-70 m-0 md:mr-6 text-black">
-                                                            {label}
-                                                        </h3>
-                                                        <ul className="list-none m-0 p-0 mt-2 ">
-                                                            {topics
-                                                                .sort((a, b) => {
-                                                                    return (
-                                                                        allTopics.find(
-                                                                            (topic) => topic.topic === b.label
-                                                                        )?.count -
-                                                                        allTopics.find(
-                                                                            (topic) => topic.topic === a.label
-                                                                        )?.count
-                                                                    )
-                                                                })
-                                                                .slice(0, 4)
-                                                                .map(({ label }) => {
-                                                                    return (
-                                                                        <li
-                                                                            className="last:border-b-0 py-2 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark"
-                                                                            key={label}
-                                                                        >
-                                                                            <Link
-                                                                                className="text-sm font-bold text-red flex w-full space-x-2"
-                                                                                to={`/questions/topics/${slugify(
-                                                                                    label,
-                                                                                    {
-                                                                                        lower: true,
-                                                                                    }
-                                                                                )}`}
-                                                                            >
-                                                                                <span>{label}</span>
-                                                                                <span className="text-black dark:text-white opacity-50 font-semibold">
-                                                                                    (
-                                                                                    {allTopics.find(
-                                                                                        (topic) => topic.topic === label
-                                                                                    )?.count || '0'}
-                                                                                    )
-                                                                                </span>
-                                                                            </Link>
-                                                                        </li>
-                                                                    )
-                                                                })}
-                                                        </ul>
-                                                    </li>
-                                                )
-                                            )
-                                        })}
-                                </ul>
+
+                                <h3 className="text-base font-bold m-0 text-black pl-2">Topics</h3>
+                                <ol className="grid grid-cols-2 md:grid-cols-5 space-x-[1px] list-none p-0 pb-4 mt-2 -mx-6 px-6">
+                                    <ProductItem
+                                        title="Product analytics"
+                                        icon={<Analytics />}
+                                        url="/questions/topics/product-analytics"
+                                    />
+                                    <ProductItem
+                                        title="Session replay"
+                                        icon={<SessionRecording />}
+                                        url="/questions/topics/session-replay"
+                                    />
+                                    <ProductItem
+                                        title="Feature flags"
+                                        icon={<FeatureFlags />}
+                                        url="/questions/topics/feature-flags"
+                                    />
+                                    <ProductItem
+                                        title="A/B testing"
+                                        icon={<AbTesting />}
+                                        url="/questions/topics/ab-testing"
+                                    />
+                                    <ProductItem title="More" icon={<More />} url="/questions" />
+                                </ol>
                             </div>
 
-                            <div className="md:mr-2 mt-2">
+                            <div className="md:mr-2">
                                 <CallToAction to="/questions" className="!w-full mt-4">
-                                    Browse recent questions
+                                    Browse topics
                                 </CallToAction>
                             </div>
                         </div>

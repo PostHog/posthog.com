@@ -30,7 +30,7 @@ export const QuestionsTable = ({
     return (
         <ul className="m-0 p-0 list-none">
             <li className="grid grid-cols-12 pb-1 items-center text-primary/75 dark:text-primary-dark/75 text-sm">
-                <div className="col-span-8">Topic / Author</div>
+                <div className="col-span-8 pl-8">Topic / Author</div>
                 <div className="col-span-2 text-center">Replies</div>
                 <div className="col-span-2 text-center">Activity</div>
             </li>

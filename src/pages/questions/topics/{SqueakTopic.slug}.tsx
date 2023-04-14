@@ -52,9 +52,12 @@ export default function Questions({ data, pageContext }: IProps) {
                 <div className="max-w-6xl mx-auto space-y-8 pb-12">
                     <section className="max-w-6xl mx-auto">
                         <div className="w-full flex items-center mb-8">
-                            <Link to={'/questions'} className="flex space-x-1">
+                            <Link
+                                to={'/questions'}
+                                className="flex space-x-1 p-1 pr-2 rounded hover:bg-gray-accent-light dark:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-0"
+                            >
                                 <RightArrow className="-scale-x-100 w-6" />
-                                <span className="text-black dark:text-white text-lg">Questions</span>
+                                <span className="text-primary dark:text-primary-dark text-[15px]">Questions</span>
                             </Link>
                             <div className="ml-auto">
                                 <QuestionForm onSubmit={refresh} />
