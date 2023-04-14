@@ -65,6 +65,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     </>
                 )}
             </div>
+
             <div className="squeak-post-content">
                 <Markdown>{body}</Markdown>
 
