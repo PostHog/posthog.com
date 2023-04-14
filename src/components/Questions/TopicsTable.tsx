@@ -67,7 +67,7 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                             <Link
                                 to={`/questions/topic/${slug}`}
                                 key={id}
-                                className={`${className} block py-2 -ml-4 -mr-4 pl-4 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
+                                className={`${className} block py-2 -ml-4 -mr-4 pl-4 pr-4 mt-[1px] hover:rounded-md hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
                             >
                                 <div className="grid grid-cols-12 items-center">
                                     <div className="col-span-8 flex items-center space-x-3">

@@ -9,6 +9,7 @@ import community from 'sidebars/community.json'
 import QuestionSidebar from 'components/Questions/QuestionSidebar'
 import Link from 'components/Link'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
+import { RightArrow } from 'components/Icons'
 
 type QuestionPageProps = {
     pageContext: {
@@ -123,8 +124,12 @@ export default function QuestionPage(props: QuestionPageProps) {
             >
                 <section className="max-w-5xl mx-auto pb-12">
                     <div className="mb-4">
-                        <Link to={previous.url} className="text-gray hover:text-gray-accent-light">
-                            ← Back to {previous.title}
+                        <Link
+                            to={previous.url}
+                            className="inline-flex space-x-1 p-1 pr-2 rounded hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-0"
+                        >
+                            <RightArrow className="-scale-x-100 w-6" />
+                            <span className="text-primary dark:text-primary-dark text-[15px]">{previous.title}</span>
                         </Link>
                     </div>
 
