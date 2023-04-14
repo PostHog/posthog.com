@@ -117,11 +117,11 @@ Long term, we're looking at whether this could replace Zendesk for support, and 
 
 Hedgehog mode is one of PostHog's most powerful features – who wouldn't want to play with our adorable mascot? 
 
-// TODO: Gif/image of hats and costumes
+![hats](../images/blog/aruba/hats.gif)
 
 Currently, Max – accessible via the help menu in PostHog – can jump around, spin, wave, dance, and wave. For their hackathon, the team worked on accessories for Max, such as hats, glasses, and costumes, that PostHog users could unlock by completing certain tasks – e.g. watching a certain number of replays.
 
-// TODO: Gif of toolbar
+![toolbar](../images/blog/aruba/toolbar.gif)
 
 They also set about revamping the PostHog Toolbar, replacing the dull but functional PostHog icon with an animated Max whose status changes when you select different toolbar features.
 
@@ -133,11 +133,9 @@ We're constantly building new features, but we have to invite users personally t
 
 // TODO: Screenshot of feature preview
 
-Feature previews is pretty simple. It's a list of features we're testing, including screenshots and basic information, that users can simply enable or disable whenever they like. When they do, they're either automatically added to removed from the relevant feature flag.
+Feature previews is pretty simple. It's a list of features we're testing, including screenshots and basic information, that users can simply enable or disable whenever they like. When they do, they're either automatically added to, or removed from, the relevant feature flag.
 
-In future, we want to build this out so users can register their interest in features that aren't ready yet, so they get automatically added to the preview when it goes live.
-
-We hope to roll this out as a usable feature soon.
+In the future, we hope to extend this feature to PostHog users who want to do the same for their own users.
 
 ## Summer social events
 
@@ -153,7 +151,7 @@ In June they've planned a virtual engraving workshop, in July a virtual escape r
 
 Luke and Thomas built an MVP for automations in PostHog. In the MVP, automations have a source (event, action or cron job), logic (pause for / pause until), and sources (e.g. send a Slack message, create a GitHub Issue, add to cohort, add to feature flag, send an in-app message etc.).
 
-// TODO: Screenshot of Automation creation
+![automations](../images/blog/aruba/automation-posthog.png)
 
 Even this basic functionality creates numerous helpful use cases, but long-term we expect to add more sources and destinations, and the ability to create automations based on event thresholds.
 
