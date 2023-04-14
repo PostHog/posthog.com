@@ -1,9 +1,16 @@
 import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
 import React, { useEffect, useState } from 'react'
 import { useQuestion } from '../hooks/useQuestion'
 
-export default function SubscribeButton({ question, className = '' }: { question?: any; className?: string }) {
+export default function SubscribeButton({
+    question,
+    className = '',
+}: {
+    question?: StrapiRecord<QuestionData>
+    className?: string
+}) {
     if (!question) return null
     const [subscribed, setSubscribed] = useState<boolean | null>(null)
     const { user } = useUser()
