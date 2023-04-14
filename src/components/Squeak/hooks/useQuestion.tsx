@@ -101,6 +101,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             }),
         })
 
+        fetchUser()
+
         mutate()
     }
 
@@ -203,7 +205,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         const body = {
             data: {
                 questionSubscriptions: {
-                    connect: [id],
+                    connect: [question?.id],
                 },
             },
         }
@@ -226,7 +228,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         const body = {
             data: {
                 questionSubscriptions: {
-                    disconnect: [id],
+                    disconnect: [question?.id],
                 },
             },
         }

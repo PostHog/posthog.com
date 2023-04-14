@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { graphql, PageProps } from 'gatsby'
 import community from 'sidebars/community.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
-import { Authentication, EditProfile } from 'components/Squeak'
+import { Authentication, EditProfile, useQuestion } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
 import { CallToAction } from 'components/CallToAction'
@@ -15,7 +15,7 @@ import Tooltip from 'components/Tooltip'
 import GitHubTooltip, { Author } from 'components/GitHubTooltip'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import SidebarSection from 'components/PostLayout/SidebarSection'
-import { ProfileData, StrapiRecord } from 'lib/strapi'
+import { QuestionData } from 'lib/strapi'
 import { useQuestions } from 'hooks/useQuestions'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { User } from '../../hooks/useUser'
@@ -127,40 +127,52 @@ const ListItem = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-const Activity = ({ questions, questionsLoading }) => {
-    const { user } = useUser()
+const Subscription = ({ question, user }: { question: QuestionData; user: User }) => {
+    const { permalink, numReplies, id, subject } = question
+    const { unsubscribe } = useQuestion(id)
 
     return (
+        <ListItem>
+            <div className="flex-grow flex flex-col overflow-hidden">
+                <Link
+                    className="font-bold text-ellipsis overflow-hidden whitespace-nowrap text-base"
+                    to={`/questions/${permalink}`}
+                >
+                    {subject}
+                </Link>
+            </div>
+            <p className={`m-0 font-semibold opacity-60 flex-shrink-0 text-sm xl:w-[200px] flex space-x-1`}>
+                <span>
+                    {numReplies || 0} {numReplies === 1 ? 'reply' : 'replies'}
+                </span>
+            </p>
+            <div className="flex">
+                <button className="text-red font-bold text-sm" onClick={() => unsubscribe(user.profile)}>
+                    Unsubscribe
+                </button>
+            </div>
+        </ListItem>
+    )
+}
+
+const Subscriptions = () => {
+    const { user, fetchUser } = useUser()
+    const subscriptions = user?.profile?.questionSubscriptions
+
+    useEffect(() => {
+        if (user) fetchUser()
+    }, [])
+
+    if (!subscriptions) return null
+    return (
         <div id="my-activity" className="mb-12">
-            <SectionTitle>My activity</SectionTitle>
-            {questionsLoading ? (
-                <Spinner />
-            ) : questions?.length > 0 ? (
-                <ul className="m-0 p-0 list-none">
-                    {questions.map((q) => {
-                        const { question, numReplies, profile } = q
-                        return (
-                            <ListItem key={question?.id}>
-                                <div className="flex-grow flex flex-col overflow-hidden">
-                                    <p className="m-0 text-sm opacity-60">
-                                        {profile?.id === user?.profile?.id ? 'You started a thread' : 'You replied to'}:
-                                    </p>
-                                    <Link
-                                        className="font-bold text-ellipsis overflow-hidden whitespace-nowrap text-base"
-                                        to={`/questions/${question?.permalink}`}
-                                    >
-                                        {question?.subject}
-                                    </Link>
-                                </div>
-                                <p className="m-0 font-semibold opacity-60 flex-shrink-0 text-sm xl:w-[200px]">
-                                    {numReplies} {numReplies === 1 ? 'reply' : 'replies'}
-                                </p>
-                            </ListItem>
-                        )
-                    })}
-                </ul>
+            <SectionTitle>My subscriptions</SectionTitle>
+            {subscriptions?.length > 0 ? (
+                subscriptions.map((question) => {
+                    return <Subscription key={question.id} user={user} question={question} />
+                })
             ) : (
-                <p>You haven't asked / answered any questions yet!</p>
+                <p>You're not subscribed to any questions yet</p>
             )}
         </div>
     )
@@ -270,9 +282,6 @@ const ActivePulls = ({ pulls }) => {
 }
 
 export default function CommunityPage({ params }: PageProps) {
-    const { user } = useUser()
-    const { questions, isLoading } = useQuestions({ profileId: user?.profile?.id })
-
     const { issues, pulls, postHogStats, postHogComStats } = useStaticQuery(query)
 
     return (
@@ -285,14 +294,13 @@ export default function CommunityPage({ params }: PageProps) {
                     menu={community}
                     sidebar={<ProfileSidebar postHogStats={postHogStats} postHogComStats={postHogComStats} />}
                     tableOfContents={[
-                        ...(user ? [{ url: 'my-activity', value: 'My activity', depth: 0 }] : []),
                         { url: 'recent-questions', value: 'Recent questions', depth: 0 },
                         { url: 'active-issues', value: 'Most active issues', depth: 0 },
                         { url: 'active-pulls', value: 'Most active PRs', depth: 0 },
                     ]}
                     hideSurvey
                 >
-                    {user && <Activity questionsLoading={isLoading} questions={questions} />}
+                    <Subscriptions />
                     <RecentQuestions />
                     <ActiveIssues issues={issues.nodes} />
                     <ActivePulls pulls={pulls.nodes} />

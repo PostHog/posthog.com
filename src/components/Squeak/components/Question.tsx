@@ -10,8 +10,7 @@ import Markdown from './Markdown'
 import { QuestionForm } from './QuestionForm'
 import { useQuestion } from '../hooks/useQuestion'
 import QuestionSkeleton from './QuestionSkeleton'
-import { useUser } from '../../../hooks/useUser'
-import Tooltip from '../../Tooltip'
+import SubscribeButton from './SubscribeButton'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -25,9 +24,7 @@ export const CurrentQuestionContext = createContext<any>({})
 export const Question = (props: QuestionProps) => {
     const { id, question } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
-    const { user } = useUser()
     const containerRef = useRef<HTMLDivElement>(null)
-    const [subscribed, setSubscribed] = useState<boolean | null>(null)
 
     // TODO: Default to question data if passed in
     const {
@@ -39,9 +36,6 @@ export const Question = (props: QuestionProps) => {
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
-        subscribe,
-        unsubscribe,
-        isSubscribed,
     } = useQuestion(id, { data: question })
 
     if (isLoading) {
@@ -57,14 +51,6 @@ export const Question = (props: QuestionProps) => {
     }
 
     const resolved = questionData.attributes.resolved
-
-    useEffect(() => {
-        if (user) {
-            isSubscribed(user?.profile).then((subscribed) => setSubscribed(subscribed))
-        }
-    }, [user])
-
-    const handleSubscribe = async () => (subscribed ? await unsubscribe(user?.profile) : await subscribe(user?.profile))
 
     return (
         <root.div ref={containerRef}>
@@ -82,19 +68,9 @@ export const Question = (props: QuestionProps) => {
                         <div className="squeak-post-author">
                             <Profile profile={questionData.attributes.profile?.data} />
                             <Days created={questionData.attributes.createdAt} />
-                            {!resolved && subscribed !== null && (
+                            {!resolved && (
                                 <div className="squeak-subscribe-button-container">
-                                    <Tooltip
-                                        content={() => (
-                                            <div style={{ maxWidth: 250 }}>
-                                                Get notified via email when someone responds to this question
-                                            </div>
-                                        )}
-                                    >
-                                        <button onClick={handleSubscribe}>
-                                            {subscribed ? 'Unsubscribe' : 'Subscribe'}
-                                        </button>
-                                    </Tooltip>
+                                    <SubscribeButton question={questionData} />
                                 </div>
                             )}
                         </div>
