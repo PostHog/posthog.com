@@ -50,8 +50,14 @@ PostHog has three pricing plans — Free, Scale, and Enterprise — but all thre
 
 In order to compare PostHog and Pendo simply and easily, we’ll focus on comparing Pendo Engage to PostHog and include features from all pricing tiers. In this way, you can clearly see how Pendo Engage stacks up against PostHog and defer pricing decisions until you’ve identified the best tool for the job. 
 
-## Who are Pendo and PostHog useful for?
+## Who are these tools useful for?
+One of the biggest differences between PostHog and Pendo is that they're fundamentally built for different types of users, with different needs. 
 
+**Pendo** is designed primarily for marketers and UX specialists. It's key features are the ability to create in-app prompts and messages, such as tooltips, without technical know-how. Pendo enables these users to follow the performance of such messages and to monitor broad feature adoption and usage. 
+
+**PostHog** is built primarily with engineers, product managers and other technical users in mind. It also offers the ability to create in-app prompts and messages, but also offers a number of other tools which are useful for these sort of teams, such as feature flags and session recording. 
+
+This difference is ultimately reflected in many of the features both platforms offer, and how they are designed. PostHog's focus on breadth and supporting engineers in creating better products, for example, is reflected in it's core features. 
 
 ## Core features
 <div className="overflow-x-auto -mx-5 px-5">
