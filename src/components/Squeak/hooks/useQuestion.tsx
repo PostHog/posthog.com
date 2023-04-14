@@ -72,7 +72,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     )
 
-    const { getJwt, fetchUser } = useUser()
+    const { getJwt, fetchUser, user } = useUser()
 
     const reply = async (body: string) => {
         const token = await getJwt()
@@ -172,7 +172,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         mutate()
     }
 
-    const isSubscribed = async (profile: StrapiRecord<ProfileData>): Promise<boolean> => {
+    const isSubscribed = async (): Promise<boolean> => {
         const query = qs.stringify({
             filters: {
                 id: {
@@ -180,7 +180,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 },
                 profileSubscribers: {
                     id: {
-                        $eq: profile?.id,
+                        $eq: user?.profile?.id,
                     },
                 },
             },
@@ -199,7 +199,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         return data?.length > 0
     }
 
-    const subscribe = async (profile: StrapiRecord<ProfileData> | undefined): Promise<void> => {
+    const subscribe = async (): Promise<void> => {
+        const profile = user?.profile
         if (!profile) return
 
         const body = {
@@ -222,7 +223,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         await fetchUser()
     }
 
-    const unsubscribe = async (profile: StrapiRecord<ProfileData> | undefined): Promise<void> => {
+    const unsubscribe = async (): Promise<void> => {
+        const profile = user?.profile
         if (!profile) return
 
         const body = {

@@ -147,7 +147,7 @@ const Subscription = ({ question, user }: { question: QuestionData; user: User }
                 </span>
             </p>
             <div className="flex">
-                <button className="text-red font-bold text-sm" onClick={() => unsubscribe(user.profile)}>
+                <button className="text-red font-bold text-sm" onClick={unsubscribe}>
                     Unsubscribe
                 </button>
             </div>

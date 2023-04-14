@@ -18,11 +18,11 @@ export default function SubscribeButton({
 
     useEffect(() => {
         if (user) {
-            isSubscribed(user?.profile).then((subscribed) => setSubscribed(subscribed))
+            isSubscribed().then((subscribed) => setSubscribed(subscribed))
         }
     }, [user])
 
-    const handleSubscribe = async () => (subscribed ? await unsubscribe(user?.profile) : await subscribe(user?.profile))
+    const handleSubscribe = async () => (subscribed ? await unsubscribe() : await subscribe())
 
     return subscribed !== null ? (
         <Tooltip
