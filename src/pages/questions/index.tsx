@@ -20,15 +20,6 @@ const fetchTopicGroups = async () => {
                     },
                 },
             },
-            filters: {
-                topics: {
-                    questions: {
-                        resolved: {
-                            $eq: false,
-                        },
-                    },
-                },
-            },
         },
         {
             encodeValuesOnly: true,
@@ -43,7 +34,7 @@ const fetchTopicGroups = async () => {
     return topicGroups.json().then((topicGroups) => topicGroups.data)
 }
 
-const topicGroupsSorted = ['Products', 'Platform', 'Data', 'Self-hosting']
+const topicGroupsSorted = ['Products', 'Platform', 'Data', 'Self-hosting', 'Other']
 
 export default function Questions() {
     const [topicGroups, setTopicGroups] = useState([])
