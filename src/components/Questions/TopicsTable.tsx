@@ -64,22 +64,23 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                         const [latestQuestion] = questions?.data || []
 
                         return (
-                            <Link
-                                to={`/questions/topic/${slug}`}
-                                key={id}
-                                className={`${className} block py-2 -ml-4 -mr-4 pl-4 pr-4 mt-[1px] hover:rounded-md hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
-                            >
-                                <div className="grid grid-cols-12 items-center">
-                                    <div className="col-span-8 flex items-center space-x-3">
-                                        {Icon && <Icon className="w-5 opacity-60 text-black dark:text-white" />}
-                                        <span className="text-red line-clamp-1">{label}</span>
+                            <div key={id}>
+                                <Link
+                                    to={`/questions/topic/${slug}`}
+                                    className={`${className} block py-2 -ml-4 -mr-4 pl-4 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
+                                >
+                                    <div className="grid grid-cols-12 items-center">
+                                        <div className="col-span-8 flex items-center space-x-3">
+                                            {Icon && <Icon className="w-5 opacity-60 text-black dark:text-white" />}
+                                            <span className="text-red line-clamp-1">{label}</span>
+                                        </div>
+                                        <div className="col-span-4 text-right text-sm font-normal text-primary/60 dark:text-primary-dark/60">
+                                            {latestQuestion?.attributes?.createdAt &&
+                                                dayFormat(dateToDays(latestQuestion?.attributes?.createdAt))}
+                                        </div>
                                     </div>
-                                    <div className="col-span-4 text-right text-sm font-normal text-primary/60 dark:text-primary-dark/60">
-                                        {latestQuestion?.attributes?.createdAt &&
-                                            dayFormat(dateToDays(latestQuestion?.attributes?.createdAt))}
-                                    </div>
-                                </div>
-                            </Link>
+                                </Link>
+                            </div>
                         )
                     })}
             </li>
