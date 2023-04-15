@@ -23,7 +23,7 @@ export const Replies = ({ expanded, setExpanded }: RepliesProps) => {
         question: { replies, resolved, resolvedBy },
     } = useContext(CurrentQuestionContext)
     return replies && replies.data.length > 0 ? (
-        <ul className={`squeak-replies ${resolved ? 'squeak-thread-resolved' : ''}`}>
+        <ul className={`squeak-replies`}>
             {expanded || replies.data.length < 3 ? (
                 <Expanded replies={replies} resolvedBy={resolvedBy?.data?.id} />
             ) : (
@@ -80,12 +80,7 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
                 </div>
             </li>
 
-            <li
-                key={reply?.id}
-                className={`${resolvedBy === reply?.id ? 'squeak-solution' : ''} ${
-                    !reply?.attributes?.publishedAt ? 'squeak-reply-unpublished' : ''
-                }`}
-            >
+            <li key={reply?.id} className={!reply?.attributes?.publishedAt ? 'squeak-reply-unpublished' : ''}>
                 <Reply className="squeak-post-reply" reply={reply} badgeText={badgeText} />
             </li>
         </>
@@ -112,12 +107,7 @@ const Expanded = ({ replies, resolvedBy }: ExpandedProps) => {
                 const badgeText = getBadge(questionProfileID, reply?.attributes?.profile?.data?.id)
 
                 return (
-                    <li
-                        key={reply.id}
-                        className={`${resolvedBy === reply.id ? 'squeak-solution' : ''} ${
-                            !reply?.attributes?.publishedAt ? 'squeak-reply-unpublished' : ''
-                        }`}
-                    >
+                    <li key={reply.id} className={!reply?.attributes?.publishedAt ? 'squeak-reply-unpublished' : ''}>
                         <Reply className="squeak-post-reply" reply={reply} badgeText={badgeText} />
                     </li>
                 )
