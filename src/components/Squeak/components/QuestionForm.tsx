@@ -10,6 +10,8 @@ import Logo from './Logo'
 import RichText from './RichText'
 import { Theme } from './Theme'
 import getAvatarURL from '../util/getAvatar'
+import { usePost } from 'components/PostLayout/hooks'
+import qs from 'qs'
 
 type QuestionFormValues = {
     subject: string
@@ -125,6 +127,8 @@ export const QuestionForm = ({
     const [view, setView] = useState<string | null>(initialView || null)
     const [loading, setLoading] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
+    const { breadcrumb } = usePost()
+    const parentName = breadcrumb && breadcrumb?.length > 0 && breadcrumb[1]?.name
 
     const buttonText =
         formType === 'question' ? (
@@ -137,6 +141,22 @@ export const QuestionForm = ({
 
     const createQuestion = async ({ subject, body }: QuestionFormValues) => {
         const token = await getJwt()
+        const topicQuery = qs.stringify(
+            {
+                filters: {
+                    label: {
+                        $eq: parentName,
+                    },
+                },
+            },
+            {
+                encodeValuesOnly: true,
+            }
+        )
+
+        const topicID = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
+            .then((res) => res.json())
+            .then((topic) => topic?.data && topic?.data[0]?.id)
 
         const data = {
             subject,
@@ -144,6 +164,10 @@ export const QuestionForm = ({
             resolved: false,
             slugs: [] as { slug: string }[],
             permalink: '',
+            topics: {
+                // 50 is uncategorized topic
+                connect: [topicID || 50],
+            },
         }
 
         if (slug) {
