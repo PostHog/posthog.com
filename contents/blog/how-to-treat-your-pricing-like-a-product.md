@@ -72,6 +72,7 @@ Of course, based on my definition above, this tooling needs to be treated like a
 
 Nearly any good product built today wasn’t just built once and assumed to be the best possible version. There are always things to try. For a pricing product this can be experimenting with things such as:
 
+- How products and features are showcased on your pricing page
 - What is included on the free version vs paid version
 - How much to charge for each thing
 - Letting users trial your paid product before buying
@@ -79,10 +80,14 @@ Nearly any good product built today wasn’t just built once and assumed to be t
 
 Trying out these things can either happen in one go (switch everyone over and see how it goes!) or in a truly experimental format with one cohort seeing version A and another cohort seeing version B. Either way, testing out different versions of your pricing will help you come up with the most efficient way for you to acquire new users and convert them to paying customers.
 
-We, of course, use our own Feature flags for this - something I hope to write about in the near future.
-
 ### 5. Repeat steps 2-4
 
 Congrats! You built the first round of tooling for your pricing product. Great, now it’s time to go back to the customers and see how it’s working for them and what else they need. Maybe you ran an experiment and got some results? Cool, time for another one!
 
 Any good product manager will tell you that a product is (almost) never done. There are still more customers to talk to, the industry is always changing, your business is always changing. When you’re treating your pricing like a product, you need to take this mindset as well - rinse & repeat, over and over again.
+
+## How this works at PostHog
+
+We've been on this "pricing as a product" journey at PostHog for close to a year now. It started with realizing that our pricing wasn't serving the needs of both our internal and external customers, then hiring a growth engineer to own it. We built a completely new billing service from the ground up to satisfy those needs and have gone through multiple iterations of how we price and sell to customers in order for it to align with our company strategy.
+
+Thus far we've run some experiments on the pricing page, but the next step for us is to fully leverage feature flags and experiments in PostHog to try out different pricing models on different customers, simultaneously. We're excited to see how this really unlocks the potential in our pricing product to both give more value to our customers while also getting more value ourselves (when customer needs are met, this magic is what happens).
