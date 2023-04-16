@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Field, Form, Formik } from 'formik'
 import { useUser } from 'hooks/useUser'
 import { navigate } from 'gatsby'
+import { inputClasses, labelClasses } from '../Authentication'
+import Button from '../Button'
 
 type ResetPasswordProps = {
     setMessage: (message: any) => void
@@ -72,8 +74,11 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ setMessage, setParentView
                 {({ isValid }) => {
                     return (
                         <Form>
-                            <label htmlFor="password">New password</label>
+                            <label className={labelClasses} htmlFor="password">
+                                New password
+                            </label>
                             <Field
+                                className={inputClasses}
                                 disabled={!code}
                                 required
                                 id="password"
@@ -81,9 +86,14 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ setMessage, setParentView
                                 type="password"
                                 placeholder="New password"
                             />
-                            <button disabled={!code} style={loading || !isValid ? { opacity: '.5' } : {}} type="submit">
+                            <Button
+                                className="text-red border-red w-full"
+                                disabled={!code}
+                                style={loading || !isValid ? { opacity: '.5' } : {}}
+                                type="submit"
+                            >
                                 Reset password
-                            </button>
+                            </Button>
                         </Form>
                     )
                 }}

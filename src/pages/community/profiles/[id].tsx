@@ -86,9 +86,9 @@ export default function ProfilePage({ params }: PageProps) {
     }
 
     const { attributes: profile } = data || {}
-    const { firstName, lastName } = profile || {}
+    const { firstName } = profile || {}
 
-    const name = [firstName, lastName].filter(Boolean).join(' ')
+    const name = firstName
 
     const handleEditProfile = () => {
         mutate()
@@ -171,7 +171,6 @@ type ProfileSidebarProps = {
 }
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen, handleEditProfile }) => {
-    const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
     const [editProfile, setEditProfile] = useState(false)
     const { user } = useUser()
     const breakpoints = useBreakpoint()

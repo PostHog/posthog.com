@@ -1202,3 +1202,24 @@ iframe[src*='youtube-nocookie.com'] {
         @apply border-b-0;
     }
 }
+
+.squeak-left-border {
+    @apply before:border-l before:border-b before:border-dashed before:border-gray-accent-light dark:before:border-gray-accent-dark before:rounded-bl-md before:h-[13px] before:top-0 before:absolute before:w-[30px] before:left-0;
+}
+
+.squeak-post-markdown {
+    @apply text-base leading-normal break-words mb-3;
+
+    p {
+        @apply m-0 mb-2;
+    }
+
+    ol,
+    ul {
+        @apply pb-0 mb-2;
+    }
+
+    pre {
+        @apply text-base my-3 overflow-scroll p-4;
+    }
+}

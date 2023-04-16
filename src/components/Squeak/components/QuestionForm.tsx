@@ -1,17 +1,15 @@
 import React, { useState, useRef } from 'react'
 import { Field, Form, Formik } from 'formik'
-import root from 'react-shadow/styled-components'
 import { useUser, User } from 'hooks/useUser'
-
 import { Approval } from './Approval'
 import Authentication from './Authentication'
 import Avatar from './Avatar'
 import Logo from './Logo'
 import RichText from './RichText'
-import { Theme } from './Theme'
 import getAvatarURL from '../util/getAvatar'
 import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
+import Button from './Button'
 
 type QuestionFormValues = {
     subject: string
@@ -38,7 +36,7 @@ function QuestionFormMain({
     const { user, logout } = useUser()
 
     return (
-        <div className="squeak-form-frame">
+        <div className="flex-1 mb-4">
             {title && <h2>{title}</h2>}
             <Formik
                 initialValues={{
@@ -60,13 +58,14 @@ function QuestionFormMain({
             >
                 {({ setFieldValue, isValid }) => {
                     return (
-                        <Form className="squeak-form">
-                            <Avatar image={getAvatarURL(user?.profile)} />
+                        <Form>
+                            <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
 
-                            <div className="squeak-inputs-wrapper">
+                            <div className="bg-white border border-black/30 dark:border-white/30 rounded-md overflow-hidden mb-4">
                                 {subject && (
                                     <>
                                         <Field
+                                            className="font-bold text-black border-b border-black/30 text-base w-full py-3 px-4 outline-none"
                                             onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"
@@ -77,22 +76,24 @@ function QuestionFormMain({
                                         <hr />
                                     </>
                                 )}
-                                <div className="squeak-form-richtext">
+                                <div className="leading-[0]">
                                     <RichText setFieldValue={setFieldValue} initialValue={initialValues?.body} />
                                 </div>
                             </div>
-                            <span className="squeak-reply-buttons-row">
-                                <button
-                                    className="squeak-post-button"
+                            <span className="flex justify-between ml-[50px]">
+                                <Button
                                     style={loading || !isValid ? { opacity: '.5' } : {}}
                                     disabled={loading || !isValid}
                                     type="submit"
                                 >
                                     {user ? 'Post' : 'Login & post'}
-                                </button>
-                                <div className="squeak-by-line">
+                                </Button>
+                                <div className="flex items-center text-sm">
                                     by
-                                    <a href="https://squeak.posthog.com?utm_source=post-form">
+                                    <a
+                                        className="flex ml-1 !text-black dark:!text-white opacity-50 hover:opacity-60 active:opacity-[.55]"
+                                        href="https://squeak.posthog.com?utm_source=post-form"
+                                    >
                                         <Logo />
                                     </a>
                                 </div>
@@ -217,55 +218,56 @@ export const QuestionForm = ({
     }
 
     return (
-        <root.div ref={containerRef}>
-            <Theme containerRef={containerRef} />
-            <div className="squeak">
-                {view ? (
-                    {
-                        'question-form': (
-                            <QuestionFormMain
-                                subject={formType === 'question'}
-                                initialValues={formValues}
-                                loading={loading}
-                                onSubmit={handleMessageSubmit}
-                            />
-                        ),
-                        auth: (
-                            <Authentication
-                                buttonText={{ login: 'Login & post', signUp: 'Sign up & post' }}
-                                setParentView={setView}
-                                formValues={formValues}
-                                handleMessageSubmit={handleMessageSubmit}
-                            />
-                        ),
-                        approval: <Approval handleConfirm={() => setView(null)} />,
-                    }[view]
-                ) : (
-                    <div className="squeak-reply-buttons">
-                        <Avatar image={getAvatarURL(user?.profile)} />
+        <div>
+            {view ? (
+                {
+                    'question-form': (
+                        <QuestionFormMain
+                            subject={formType === 'question'}
+                            initialValues={formValues}
+                            loading={loading}
+                            onSubmit={handleMessageSubmit}
+                        />
+                    ),
+                    auth: (
+                        <Authentication
+                            buttonText={formValues ? { login: 'Login & post', signUp: 'Sign up & post' } : undefined}
+                            setParentView={setView}
+                            formValues={formValues}
+                            handleMessageSubmit={handleMessageSubmit}
+                        />
+                    ),
+                    approval: <Approval handleConfirm={() => setView(null)} />,
+                }[view]
+            ) : (
+                <div className="flex flex-1 space-x-2">
+                    <Avatar className="w-[40px]" image={getAvatarURL(user?.profile)} />
+                    <Button
+                        onClick={() => setView('question-form')}
+                        className={
+                            formType !== 'reply'
+                                ? 'text-red border-red'
+                                : 'border-black/30 dark:border-white/30 hover:border-black/50 dark:hover:border-white/50'
+                        }
+                    >
+                        {buttonText}
+                    </Button>
+                    {formType === 'question' && (
                         <button
-                            className={formType === 'reply' ? 'squeak-reply-skeleton' : 'squeak-ask-button'}
-                            onClick={() => setView('question-form')}
+                            onClick={() => {
+                                if (user) {
+                                    logout()
+                                } else {
+                                    setView('auth')
+                                }
+                            }}
+                            className="!ml-auto text-red opacity-80 hover:opacity-100 font-bold"
                         >
-                            {buttonText}
+                            {user ? 'Logout' : 'Login'}
                         </button>
-                        {formType === 'question' && (
-                            <button
-                                onClick={() => {
-                                    if (user) {
-                                        logout()
-                                    } else {
-                                        setView('auth')
-                                    }
-                                }}
-                                className="squeak-auth-button"
-                            >
-                                {user ? 'Logout' : 'Login'}
-                            </button>
-                        )}
-                    </div>
-                )}
-            </div>
-        </root.div>
+                    )}
+                </div>
+            )}
+        </div>
     )
 }

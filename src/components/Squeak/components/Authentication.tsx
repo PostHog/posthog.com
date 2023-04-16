@@ -1,14 +1,15 @@
 import React, { useState, useRef } from 'react'
-import root from 'react-shadow/styled-components'
-
 import type { User } from 'hooks/useUser'
 import ForgotPassword from './auth/ForgotPassword'
 import Avatar from './Avatar'
 import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import ResetPassword from './auth/ResetPassword'
+import Button from './Button'
 
-import { Theme } from './Theme'
+export const inputClasses = `rounded-md border border-black/30 dark:border-white/30 block mb-5 py-2 px-4 w-full text-base text-black`
+export const labelClasses = `block text-base font-semibold mb-1 opacity-60`
+
 type AuthenticationProps = {
     formValues?: any
     setParentView?: (view: string | null) => void
@@ -40,46 +41,70 @@ export const Authentication = ({
     }
 
     return (
-        <root.div ref={containerRef}>
-            <Theme containerRef={containerRef} />
-            <div className="squeak">
-                {showProfile && <Avatar />}
-                {formValues && (
-                    <div className="squeak-post-preview-container">
-                        <div className="squeak-post-preview">
-                            {formValues?.subject && <h3>{formValues.subject}</h3>}
-                            {formValues?.body}
-                        </div>
-                        <div className="squeak-button-container">
-                            <button onClick={() => setParentView?.('question-form')}>Edit post</button>
-                        </div>
+        <div>
+            {showProfile && <Avatar className="w-[40px] h-[40px] mr-[10px]" />}
+            {formValues && (
+                <div className="items-center border border-black/20 dark:border-white/20 rounded-md border-b-0 flex max-w-[600px] py-2 px-4 rounded-bl-none rounded-br-none">
+                    <div className="items-baseline flex flex-1 min-w-0 whitespace-nowrap overflow-hidden">
+                        {formValues?.subject && (
+                            <h3 className="overflow-hidden text-ellipsis whitespace-nowrap font-bold m-0 text-base mr-2 shrink-0">
+                                {formValues.subject}
+                            </h3>
+                        )}
+                        {formValues?.body}
+                    </div>
+                    <div className="ml-1 whitespace-nowrap">
+                        <button className="font-bold text-red" onClick={() => setParentView?.('question-form')}>
+                            Edit post
+                        </button>
+                    </div>
+                </div>
+            )}
+            <div style={showProfile ? { marginLeft: 50 } : {}}>
+                {showBanner && (
+                    <div className="bg-[#FFF7E9] border border-black/20 dark:border-white/20 text-black border-b-0 py-2 px-4 rounded-tr-md rounded-tl-md">
+                        <h4 className="m-0 text-base pb-1 !text-black">Please signup to post.</h4>
+                        <p className="m-0 text-sm">Create an account to ask questions & help others.</p>
                     </div>
                 )}
-                <div style={showProfile ? { marginLeft: 50 } : {}} className={`squeak-authentication-form-container`}>
-                    {showBanner && (
-                        <div className="squeak-authentication-form-message">
-                            <h4>Please signup to post.</h4>
-                            <p>Create an account to ask questions & help others.</p>
-                        </div>
-                    )}
-                    <div className="squeak-authentication-form">
-                        <div className="squeak-authentication-navigation">
-                            <button className={view === 'sign-in' ? 'active' : ''} onClick={() => setView('sign-in')}>
-                                Login
-                            </button>
-                            <button className={view === 'sign-up' ? 'active' : ''} onClick={() => setView('sign-up')}>
-                                Signup
-                            </button>
-                            <div
-                                style={{
-                                    opacity: view === 'forgot-password' || view === 'reset-password' ? 0 : 1,
-                                }}
-                                className={`squeak-authentication-navigation-rail ${view}`}
-                            />
-                        </div>
-                        <div className="squeak-authentication-form-wrapper">
-                            {message && <p className="squeak-auth-error">{message}</p>}
-
+                <div
+                    className={`border border-black/20 dark:border-white/20 border-t-0 rounded-md overflow-hidden relative ${
+                        showBanner ? 'rounded-tr-none rounded-tl-none' : ''
+                    }`}
+                >
+                    <div className="border-y grid grid-cols-2 relative border-black/[.2] dark:border-white/[.2]">
+                        <button
+                            className={`${
+                                view === 'sign-in' ? 'text-red' : 'text-black/50 dark:text-white/50'
+                            } text-sm font-bold py-3 px-1`}
+                            onClick={() => setView('sign-in')}
+                        >
+                            Login
+                        </button>
+                        <button
+                            className={`${
+                                view === 'sign-up' ? 'text-red' : 'text-black/50 dark:text-white/50'
+                            } text-sm font-bold py-3 px-1`}
+                            onClick={() => setView('sign-up')}
+                        >
+                            Signup
+                        </button>
+                        <div
+                            style={{
+                                opacity: view === 'forgot-password' || view === 'reset-password' ? 0 : 1,
+                            }}
+                            className={`bottom-[-1px] w-1/2 left-0 bg-red h-[2px] transition-all absolute rounded-md ${
+                                view === 'sign-up' ? 'translate-x-full' : ''
+                            }`}
+                        />
+                    </div>
+                    <div>
+                        {message && (
+                            <p className="bg-[#FFF7E9] border-b border-black/20 dark:border-white/20 py-2 px-4 m-0 text-[red] font-semibold">
+                                {message}
+                            </p>
+                        )}
+                        <div className="mt-4 px-6">
                             {
                                 {
                                     'sign-in': (
@@ -121,15 +146,15 @@ export const Authentication = ({
                                 }[view]
                             }
                             {view !== 'forgot-password' && view !== 'reset-password' && (
-                                <button onClick={handleForgotPassword} className="squeak-forgot-password">
+                                <Button className="border-0 w-full my-2 opacity-50" onClick={handleForgotPassword}>
                                     Forgot password
-                                </button>
+                                </Button>
                             )}
                         </div>
                     </div>
                 </div>
             </div>
-        </root.div>
+        </div>
     )
 }
 

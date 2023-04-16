@@ -49,9 +49,16 @@ export default function SubscribeButton({
         >
             <span className="relative">
                 {user ? (
-                    <Button subscribed={subscribed} handleSubscribe={handleSubscribe} className={className} />
+                    <Button
+                        subscribed={subscribed}
+                        handleSubscribe={handleSubscribe}
+                        className={`${className} p-0 border-0 relative font-bold text-red`}
+                    />
                 ) : (
-                    <button className={className} disabled>
+                    <button
+                        className={`${className} p-0 border-0 relative opacity-50 font-bold text-black dark:text-white`}
+                        disabled
+                    >
                         Subscribe
                     </button>
                 )}

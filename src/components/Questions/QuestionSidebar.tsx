@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'components/Link'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
+import getAvatarURL from 'components/Squeak/util/getAvatar'
 
 type QuestionSidebarProps = {
     question: StrapiRecord<QuestionData> | undefined
@@ -13,15 +14,14 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
 
     const { id, attributes: question } = props.question || {}
 
+    const avatar = getAvatarURL(question?.profile?.data)
+
     return question ? (
         <div>
             <SidebarSection title="Posted by">
                 <div className="flex items-center space-x-2">
-                    {question.profile?.data?.attributes?.avatar?.data?.attributes?.url ? (
-                        <img
-                            className="w-8 h-8 rounded-full"
-                            src={question.profile.data.attributes.avatar.data.attributes.url}
-                        />
+                    {avatar ? (
+                        <img className="w-8 h-8 rounded-full" src={avatar} />
                     ) : (
                         <svg
                             className="w-8 h-8 rounded-full bg-gray-accent-light"
@@ -40,7 +40,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                     )}
                     <Link to={`/community/profiles/${question.profile?.data?.id}`}>
                         {question.profile?.data?.attributes?.firstName
-                            ? `${question.profile?.data?.attributes?.firstName} ${question.profile?.data?.attributes?.lastName}`
+                            ? `${question.profile?.data?.attributes?.firstName}`
                             : 'Anonymous'}
                     </Link>
                 </div>

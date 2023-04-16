@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Field, Form, Formik } from 'formik'
+import { inputClasses, labelClasses } from '../Authentication'
+import Button from '../Button'
 
 type ForgotPasswordProps = {
     apiHost: string
@@ -53,16 +55,29 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setMessage, setParentVi
             {({ isValid }) => {
                 return (
                     <Form>
-                        <label htmlFor="email">Email address</label>
-                        <Field required id="email" name="email" type="email" placeholder="Email address..." />
+                        <label className={labelClasses} htmlFor="email">
+                            Email address
+                        </label>
+                        <Field
+                            className={inputClasses}
+                            required
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="Email address..."
+                        />
                         {emailSent ? (
                             <div>
                                 <p>Check your email for password reset instructions</p>
                             </div>
                         ) : (
-                            <button style={loading || !isValid ? { opacity: '.5' } : {}} type="submit">
+                            <Button
+                                className="text-red border-red w-full"
+                                style={loading || !isValid ? { opacity: '.5' } : {}}
+                                type="submit"
+                            >
                                 Send password reset instructions
-                            </button>
+                            </Button>
                         )}
                     </Form>
                 )

@@ -23,7 +23,7 @@ export const Replies = ({ expanded, setExpanded }: RepliesProps) => {
         question: { replies, resolved, resolvedBy },
     } = useContext(CurrentQuestionContext)
     return replies && replies.data.length > 0 ? (
-        <ul className={`squeak-replies`}>
+        <ul className="ml-5 p-0 list-none">
             {expanded || replies.data.length < 3 ? (
                 <Expanded replies={replies} resolvedBy={resolvedBy?.data?.id} />
             ) : (
@@ -68,20 +68,31 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
 
     return (
         <>
-            <li>
-                <div className="squeak-other-replies-container">
-                    {avatars.map((avatar, index) => {
-                        return <Avatar key={index} image={avatar} />
-                    })}
+            <li className="pr-[5px] pl-[30px] border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed squeak-left-border relative before:border-l-0">
+                <div className="pb-8 flex items-center space-x-4">
+                    <div className="flex items-center">
+                        {avatars.map((avatar, index) => {
+                            return (
+                                <div key={index} className="relative -mr-2">
+                                    <Avatar className="w-[25px]" image={avatar} />
+                                </div>
+                            )
+                        })}
+                    </div>
 
-                    <button className="squeak-other-replies" onClick={() => setExpanded(true)}>
+                    <button className="text-red text-base font-semibold" onClick={() => setExpanded(true)}>
                         View {replyCount - 1} other {replyCount === 1 ? 'reply' : 'replies'}
                     </button>
                 </div>
             </li>
 
-            <li key={reply?.id} className={!reply?.attributes?.publishedAt ? 'squeak-reply-unpublished' : ''}>
-                <Reply className="squeak-post-reply" reply={reply} badgeText={badgeText} />
+            <li
+                key={reply?.id}
+                className={`pr-[5px] pl-[30px] border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed squeak-left-border relative before:border-l-0`}
+            >
+                <div className={`${!reply?.attributes?.publishedAt ? 'opacity-50' : ''}`}>
+                    <Reply reply={reply} badgeText={badgeText} />
+                </div>
             </li>
         </>
     )
@@ -107,8 +118,13 @@ const Expanded = ({ replies, resolvedBy }: ExpandedProps) => {
                 const badgeText = getBadge(questionProfileID, reply?.attributes?.profile?.data?.id)
 
                 return (
-                    <li key={reply.id} className={!reply?.attributes?.publishedAt ? 'squeak-reply-unpublished' : ''}>
-                        <Reply className="squeak-post-reply" reply={reply} badgeText={badgeText} />
+                    <li
+                        key={reply.id}
+                        className={`pr-[5px] pl-[30px] border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed squeak-left-border relative before:border-l-0`}
+                    >
+                        <div className={`${!reply?.attributes?.publishedAt ? 'opacity-50' : ''}`}>
+                            <Reply reply={reply} badgeText={badgeText} />
+                        </div>
                     </li>
                 )
             })}

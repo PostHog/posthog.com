@@ -115,6 +115,7 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
     return (
         <>
             <textarea
+                className="bg-white border-none text-base h-[150px] py-3 px-4 resize-none w-full text-black"
                 onBlur={(e) => e.preventDefault()}
                 name="body"
                 value={value}
@@ -125,20 +126,24 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
                 placeholder="Type more details..."
                 maxLength={2000}
             />
-            <div className="squeak-form-richtext-buttons-container">
-                <ul className="squeak-form-richtext-buttons">
+            <div className="flex items-center justify-between py-1">
+                <ul className="flex items-center list-none p-0 ml-2 space-x-1">
                     {buttons.map((button, index) => {
                         return (
                             <li key={index}>
-                                <button onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}>
+                                <button
+                                    className="flex items-center bg-none border-none rounded-md text-black/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75"
+                                    onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
+                                >
                                     {button.icon}
                                 </button>
                             </li>
                         )
                     })}
                 </ul>
-                <div className="squeak-markdown-logo">
+                <div className="mr-2">
                     <a
+                        className="text-black/30 hover:text-black/40"
                         href="https://www.markdownguide.org/cheat-sheet/"
                         target="_blank"
                         rel="noreferrer"

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Field, Form, Formik } from 'formik'
 import { User, useUser } from 'hooks/useUser'
+import { inputClasses, labelClasses } from '../Authentication'
+import Button from '../Button'
 
 type SignInProps = {
     buttonText?: string
@@ -51,9 +53,12 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
         >
             {({ isValid }) => {
                 return (
-                    <Form>
-                        <label htmlFor="email">Email address</label>
+                    <Form className="m-0">
+                        <label className={labelClasses} htmlFor="email">
+                            Email address
+                        </label>
                         <Field
+                            className={inputClasses}
                             onBlur={(e) => e.preventDefault()}
                             required
                             id="email"
@@ -61,8 +66,11 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
                             type="email"
                             placeholder="Email address..."
                         />
-                        <label htmlFor="password">Password</label>
+                        <label className={labelClasses} htmlFor="password">
+                            Password
+                        </label>
                         <Field
+                            className={inputClasses}
                             onBlur={(e) => e.preventDefault()}
                             required
                             id="password"
@@ -70,9 +78,13 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
                             type="password"
                             placeholder="Password..."
                         />
-                        <button style={isLoading || !isValid ? { opacity: '.5' } : {}} type="submit">
+                        <Button
+                            className="text-red border-red w-full"
+                            style={isLoading || !isValid ? { opacity: '.5' } : {}}
+                            type="submit"
+                        >
                             {buttonText}
-                        </button>
+                        </Button>
                     </Form>
                 )
             }}
