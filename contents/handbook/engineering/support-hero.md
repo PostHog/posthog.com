@@ -53,7 +53,6 @@ As a business we need to ensure we are focusing support on our paying customers,
 3. Open Zendesk tickets for your team that have `high` priority (high-paying customers).
 4. Open Zendesk tickets for your team that have `normal` priority (paying customers).
 5. [Squeak!](https://posthog.com/questions/) questions.
-6. [#community-support](https://posthogusers.slack.com/archives/C01GLBKHKQT) channel on the User Slack.
 7. Open Zendesk tickets for your team that have `low` priority (non-paying users).
 
 ### Support for self-hosted users
@@ -131,6 +130,7 @@ Tips:
 * If need more information from the customer to solve the issue, respond and mark as pending. 
 * If you think you solved the issue mark as solved (if they reply it will re-open and it's easier for everyone if there's less open tickets around).
 * Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
+* Low priority tickets don't send emails to the requester and can be viewed in aggregation and closed without a public reply. High and normal priority tickets send an email about a helpdesk ticket being created, so we should respond publicly there.
 
 ### Unthread
 
