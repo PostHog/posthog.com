@@ -139,7 +139,7 @@ The notification app has actually been available for a while, but somehow missed
 #### 2FA authentication
 ![2fa support](../images/blog/array/2fa_posthog.png)
 
-Security is a big focus for us right now, as we work towards full SOC2 authentication - and two-factor authentication is the latest element of that. 
+Security is a big focus for us right now, as we work towards full SOC 2 authentication - and two-factor authentication is the latest element of that. 
 
 Want to enable 2FA? Head to your Project Settings to get started. You'll then get your own QR code like the one above (which, don't worry, is for a test environment) to set it up with apps such as Google Authenticator. 
 
