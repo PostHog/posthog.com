@@ -50,6 +50,7 @@ const query = (id: string | number) =>
                         },
                     },
                 },
+                topics: true,
             },
         },
         {
@@ -82,6 +83,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             error: JSON.stringify(error),
         })
     }
+
+    const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
 
     const reply = async (body: string) => {
         try {
@@ -133,8 +136,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             throw error
         }
     }
-
-    const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
 
     const handlePublishReply = async (published: boolean, id: number) => {
         try {
@@ -285,6 +286,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 profileSubscribers: true,
             },
         })
+
         const questionRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query}`)
 
         if (!questionRes.ok) {
@@ -344,6 +346,44 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         await fetchUser()
     }
 
+    const addTopic = async (topicId: number): Promise<void> => {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                data: {
+                    topics: {
+                        connect: [topicId],
+                    },
+                },
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        await mutate()
+    }
+
+    const removeTopic = async (topicId: number): Promise<void> => {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                data: {
+                    topics: {
+                        disconnect: [topicId],
+                    },
+                },
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        await mutate()
+    }
+
     return {
         question: questionData,
         reply,
@@ -356,5 +396,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         isSubscribed,
         subscribe,
         unsubscribe,
+        addTopic,
+        removeTopic,
     }
 }
