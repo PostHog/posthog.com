@@ -57,9 +57,7 @@ Charging by product means you can outcompete all of your competitors on price.
 To get to this point, we're starting to build data on cross-selling to know that we'd get it right, so we'll figure that out over the next year and hopefully will be able to lower prices as a result.
 
 If you're thinking about applying this concept to your business, success depends on where in the market you focus (you need to be able to sell more to the same users to avoid a complex sales motion) and how price sensitive they are. If people don't care about price in your market, there's no point either.
-
-
-## 5. It's a clever way to scale exponentially (we think)
+## 5. It's a clever way to scale exponentially (we think)
 
 We charged for session recording in December. By March, it was 10% of our revenue. Most of the users paying are new.
 
