@@ -493,6 +493,94 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 Unsurprisingly, Piwik PRO's roots in Matomo make it a popular choice for users who are familiar with Universal Analytics. It's less feature-rich than Matomo in some respects, but may be a better choice for larger organisations who require more support and scale.
 
+### Counter
+
+![counter](../images/blog/ga4-alternatives/counter.png)
+
+- **Best for:** Content and personal websites
+- **Tracking method:** Session-based
+- **GDPR compliance:** <span className="text-green text-lg">✔</span>
+- **GA data import:** <span className="text-red text-lg">✖</span>
+
+[Counter](https://counter.dev/) is a free and open source analytics tool that operates a "pay what you want" model. It's by no means a feature-complete alternative to GA4, but it's ideal if you just want to track basic website activity like visits, referral data, and user properties (device, platform, browser etc.).
+
+Counter's creators can offer it for free because it only collects aggregated data, reducing the complexity and load on the server, while also improving data privacy. To count unique users, Counter uses a combination of techniques including the browser's cache, `sessionStorage`, and referrer inspection. As a result, less data is saved to the database, and it's impossible to connect single page views to a user identity.
+
+#### Counter vs Google Analytics 4
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+	<thead>
+    	<tr>
+        	<td className="w-3/12"></td>
+        	<td className="w-3/12 text-center"><strong>Google Analytics 4</strong></td>
+        	<td className="w-3/12 text-center"><strong>Fathom</strong></td>
+    	</tr>
+	</thead>
+	<tbody>
+		<tr>
+        	<td>Website analytics</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+		<tr>
+        	<td>Funnels</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>User Paths</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+          <td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>Retention</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+       	<td>Revenue tracking</td>
+      		<td className="text-center"><span className="text-green text-lg">✔</span></td>
+       	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>User profiles</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+   		</tr>
+    	<tr>
+        	<td>Cohort analysis</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>A/B testing</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>Session recording</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>Feature flags</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+		<tr>
+        	<td>Self-hosting</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+	</tbody>
+</table>
+</div>
+
+#### Verdict
+
+Counter is a great choice if you have basic needs. It does most of the things the popular privacy-first analytics tools offer, but does so for free. The simple interface is easy to understand, though it doesn't allow you to drill down as deeply into individual page performance.
+
 ### Fathom
 
 ![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
