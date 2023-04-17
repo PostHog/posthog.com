@@ -67,7 +67,7 @@ const buttons = [
     },
 ]
 
-export default function RichText({ initialValue = '', setFieldValue }: any) {
+export default function RichText({ initialValue = '', setFieldValue, autoFocus }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
     const [cursor, setCursor] = useState<number | null>(null)
@@ -115,7 +115,8 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
     return (
         <>
             <textarea
-                className="bg-white border-none text-base h-[150px] py-3 px-4 resize-none w-full text-black"
+                autoFocus={autoFocus}
+                className="bg-white border-none text-base h-[150px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
                 onBlur={(e) => e.preventDefault()}
                 name="body"
                 value={value}

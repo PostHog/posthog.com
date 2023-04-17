@@ -65,6 +65,7 @@ function QuestionFormMain({
                                 {subject && (
                                     <>
                                         <Field
+                                            autoFocus
                                             className="font-bold text-black border-b border-black/30 text-base w-full py-3 px-4 outline-none rounded-none"
                                             onBlur={(e) => e.preventDefault()}
                                             required
@@ -77,7 +78,11 @@ function QuestionFormMain({
                                     </>
                                 )}
                                 <div className="leading-[0]">
-                                    <RichText setFieldValue={setFieldValue} initialValue={initialValues?.body} />
+                                    <RichText
+                                        autoFocus={!subject}
+                                        setFieldValue={setFieldValue}
+                                        initialValue={initialValues?.body}
+                                    />
                                 </div>
                             </div>
                             <span className="flex justify-between ml-[50px]">
