@@ -15,11 +15,11 @@ tags:
     - Guides
 ---
 
-Curious about the differences between Pendo and PostHog? The quick answer is that they are built to solve very different problem.
+Curious about the differences between Pendo and PostHog? The quick answer is that they are built to solve very different problems:
 
-- Pendo focuses on enabling users to add in tool-tips and in-app messages. It includes some product analytics tools.
+1. Pendo focuses on enabling users to add in tool-tips and in-app messages. It includes some product analytics tools.
 
-- PostHog is an all-in-one product improvement platform which includes the ability to add in-app messages, as well as analytics, feature flags, session replays and more.
+2. PostHog is an all-in-one product improvement platform that includes the ability to add in-app messages, as well as analytics, feature flags, session replays and more.
 
 Now it's time for the long answer...
 
@@ -32,15 +32,14 @@ In this article we’ll explore the crucial differences and similarities between
 - [Privacy, security and regulatory compliance](#compliance-and-security)
 - [Pricing details](#how-much-does-pendo-cost), [free trials](#do-pendo-and-posthog-offer-free-trials) and other [frequently asked questions](#frequently-asked-questions)
 
-However, if you’re in a rush and want to know the short version then we can keep it simple off the bat by explaining how PostHog and Pendo differ at a high level. 
 
 ## Differences between PostHog and Pendo
 
 ### 1. PostHog is an all-in one platform
-PostHog solves this problem by bringing all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, experimentation, session capturing, and data warehouse features. Pendo, on the other hand, is a more limited product which doesn’t offer many of these features and requires you to adopt other platforms, such as HotJar or LaunchDarly, in order to get comparable functionality to PostHog.
+PostHog brings all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, experimentation, session capturing, and data warehouse features. Pendo, on the other hand, is a more limited product which doesn’t offer many of these features and requires you to adopt other platforms, such as HotJar or LaunchDarly, in order to get comparable functionality to PostHog.
 
 ### 2. PostHog is built for engineers
-We built PostHog to suit the needs of coders, developers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). As such, PostHog includes many technical features which aren’t commonly available in tools like Pendo, which are built for more general audiences. [Feature flags](/feature-flags), for example, aren’t something Pendo offers. 
+We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). As such, PostHog includes many powerful features that aren’t commonly available in tools like Pendo, which are built for more general audiences. [Feature flags](/feature-flags), for example, aren’t something Pendo offers. 
 
 ### 3. PostHog is open source
 This focus on meeting the needs of engineers has also shaped the foundation of PostHog as a product, in that it’s completely open source. You can check out [PostHog’s source code](https://github.com/PostHog), [build integrations](/docs/apps/build) or [other services](/blog/how-we-built-an-app-server) on top of the product, and even [give feedback or interact with the team via GitHub](https://github.com/PostHog).
@@ -48,11 +47,15 @@ This focus on meeting the needs of engineers has also shaped the foundation of P
 <ArrayCTA />
 
 ## Comparing PostHog and Pendo
-OK, let's get stuck into the nitty-gritty.
+**Pendo** has four pricing tiers — Free, Starter, Growth, and Portfolio – for its main product, Pendo Engage. It also has a second product, Pendo Adopt, but it's focused on analytics for internal software used by teams. Pendo's Starter plan is limited to 2,000 active users a minimum of $8,000 per year.
 
-Pendo has four pricing options — Free, Starter, Growth, and Portfolio. Pendo’s feature availability is additionally complicated by the fact that it breaks its features across two separate products — Pendo Engage, and Pendo Adopt, with the latter focusing on analytics for internal software used by teams. 
+**PostHog** has three pricing plans — Free, Scale, and Enterprise:
 
-PostHog has three pricing plans — Free, Scale, and Enterprise — but all three of these are billed based on usage. The Free plan is intended for hobbyists and early-stage teams who need basic features within generous usage limits up to 1 million events per month, while the Scale plan unlocks advanced features and is priced solely on usage. The Enterprise plan simply unlocks extra security, compliance and permissioning features in order to meet the needs of large businesses. 
+- The Free plan includes everything early-stage companies need with a generous usage limit – 1 million events and 15k recordings per month.
+
+- The Scale plan unlocks advanced features, like group analytics and A/B testing. Your first 1 million events and 15k recordings each month are free – you pay for what you use thereafter. 
+
+- The Enterprise plan unlocks extra security, compliance and permissioning features in order to meet the needs of large businesses. 
 
 > **Are you an early-stage startup?** Get $50k in PostHog credit, and more, by joining [our PostHog for Startups program](/startups)!
 
@@ -98,7 +101,7 @@ In order to compare PostHog and Pendo simply and easily, we’ll focus on compar
             <td><strong>In-app prompts and messages</strong></td>
             <td className="text-center"><span className="text-red text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Build your own apps and contribute code</td>
+            <td>Send messages to users in your app</td>
         </tr>
         <tr>
             <td><strong>Apps/Integrations</strong></td>
@@ -116,17 +119,17 @@ In order to compare PostHog and Pendo simply and easily, we’ll focus on compar
 </table>
 </div>
 
-- **[Session replays](/session-replay):** Session replays in PostHog, otherwise known as session recording, enable you to capture video recordings of a user experience. Additionally, in PostHog, you can view built-in console logs, and network performance. These features are especially useful for diagnosing bug reports, or building user empathy. Pendo does not offer any session replay feature, forcing users to turn to tools such as HotJar. 
+- **[Session replays](/session-replay):** Session replays in PostHog recreate exactly what real users see and how they use your product, and enable you to debug problems using built-in console logs and network performance.
 
-- **[Feature flags](/feature-flags):** PostHog offers multivariate feature flags which support JSON payloads, enabling you to push real-time changes to a product without needing to redeploy. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more. Pendo, on the other hand, does not support any feature flag functionality and users will need to adopt an alternative feature flagging tool.
+- **[Feature flags](/feature-flags):** PostHog supports multivariate feature flags that support JSON payloads, enabling you to push real-time changes to your product without redeploying. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
 
-- **[A/B testing](/ab-testing):** In PostHog, you can use the experimentation suite to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events and deploy a final version. You can’t do any of this in Pendo. 
+- **[A/B testing](/ab-testing):** In PostHog, you can use the experimentation suite to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events and deploy a final version.
 
 - **[Open source](/product-os):** PostHog is open source. You can [view our source code](httpw://github.com/posthog), contribute changes, engage with the team in [our open source community](/slack), [view our roadmap](/roadmap) and create your own [apps](/apps) or features. Pendo is not open source and, as a result, you can only suggest new features to the support team.
 
 ### Product Analytics
 
-PostHog and Pendo both offer similar product analytics features at a surface level, but differ significantly when compared in greater depth. This is because PostHog and Pendo are ultimately built for different types of users. While PostHog is designed with engineers and technical users in mind, Pendo is intended more for marketers and UX designers. 
+PostHog and Pendo are ultimately built for different types of users. While PostHog is designed with engineers and technical users in mind, Pendo is intended more for marketers and UX designers. 
 
 This difference is reflected in all levels of the product, but especially in product analytics where many advanced features which are lacking in Pendo, are available in PostHog. 
 
@@ -227,11 +230,11 @@ This difference is reflected in all levels of the product, but especially in pro
 ]} />
 
 ### In-app messages and prompts
-The ability to send in-app messages and display prompts is a central feature of Pendo, which focuses on empowering users to create such pop-ups and tooltips in their product easily. Additionally, you can see how adding such prompts impacts adoption and retention, or display interactive prompts to solicit user feedback. 
+Pendo is all about creating in-app messages, prompts, tooltips, measuring their impact on adoption and retention, and collecting feedback. But these aren't unique features – PostHog also supports in-app messages and interactive pop-ups through the use of [feature flag payloads](/docs/feature-flags/payloads) and [site apps](/tutorials/build-site-app).
 
-Just because such features are central to Pendo doesn’t mean they’re unique, however. PostHog also offers the ability to display in-app messages and interactive pop-ups through the use of [feature flag payloads](/docs/feature-flags/payloads) and [site apps](/tutorials/build-site-app).
+The main difference between is, because Pendo is designed for less technical users, it offers an interface that is simpler, but less powerful. You can easily create tooltips, announcement pop-ups and polls in Pendo, but not other types of prompt such as a Calendly integration. 
 
-The main difference between PostHog and Pendo here is that, because Pendo is intended for less technical users, it offers an interface which is simpler, but less powerful. You can easily create tooltips, announcement pop-ups and polls in Pendo, but not other types of prompt such as a Calendly integration. In PostHog, there are ready made apps for displaying pop-ups and tooltips, but the true power is in the ability to [build custom solutions](/tutorials/build-site-app).
+PostHog has ready-made apps for displaying pop-ups and tooltips, but the true power is in the ability to [build custom solutions](/tutorials/build-site-app).
 
 Below are some of the most popular ready-made apps which facilitate in-app messages in PostHog:
 
@@ -252,7 +255,7 @@ Below are some of the most popular ready-made apps which facilitate in-app messa
 ]} />
 
 ### Apps and integrations
-Both Pendo and PostHog have a wide selection of such apps and integrations available, for a number of popular platforms. Both also include integrations with tools such as Zapier, which enable you to move data to even more platforms.
+Both Pendo and PostHog have a wide selection of apps and integration. Both also include integrations with tools such as Zapier, which enable you to move data to even more platforms.
 
 One unique advantage of PostHog is that, because it is open source, it’s easy to [create your own apps and integrations](/tutorials/build-your-own-posthog-app). This is useful if you’re, for example, using more niche software in your stack which hasn’t been widely adopted — or if you require a direct integration between PostHog and your product. 
 
