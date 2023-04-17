@@ -8,7 +8,6 @@ export const Markdown = ({ children }: { children: string }) => {
         <ReactMarkdown
             rehypePlugins={[rehypeSanitize]}
             className="squeak-post-markdown"
-            children={children}
             components={{
                 pre: ({ children }) => {
                     return (
@@ -37,7 +36,9 @@ export const Markdown = ({ children }: { children: string }) => {
                     return <a rel="nofollow" {...props} />
                 },
             }}
-        />
+        >
+            {children}
+        </ReactMarkdown>
     )
 }
 

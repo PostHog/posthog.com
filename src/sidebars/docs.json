@@ -376,7 +376,7 @@
                 "name": "Sampling",
                 "url": "/docs/product-analytics/sampling",
                 "badge": {
-                    "title": "Alpha",
+                    "title": "Beta",
                     "className": "uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
                 }
             },
@@ -449,6 +449,10 @@
             {
                 "name": "Multivariate feature flags",
                 "url": "/docs/feature-flags/multivariate-flags"
+            },
+            {
+                "name": "Payloads",
+                "url": "/docs/feature-flags/payloads"
             },
 
             {
@@ -1032,10 +1036,6 @@
                                     {
                                         "name": "Overview",
                                         "url": "/docs/runbook/services/plugin-server"
-                                    },
-                                    {
-                                        "name": "Ingestion lag",
-                                        "url": "/docs/runbook/services/plugin-server/ingestion-lag"
                                     },
                                     {
                                         "name": "Jobs not executing",

@@ -1,29 +1,32 @@
 import React from 'react'
 import { Field, Form, Formik } from 'formik'
-import { useUser } from 'hooks/useUser'
+import { User, useUser } from 'hooks/useUser'
 
 type SignInProps = {
-    setMessage: any
-    handleMessageSubmit: (message: any) => Promise<void> | void
-    formValues: any
-    apiHost: string
-    buttonText: string
-    organizationId: string
+    buttonText?: string
+    onSubmit?: (user: User | null) => void
+    setMessage?: React.Dispatch<React.SetStateAction<string | null>>
 }
 
-const SignIn: React.FC<SignInProps> = ({ setMessage, handleMessageSubmit, formValues, buttonText }) => {
+const errorMessages: Record<string, string> = {
+    'Invalid identifier or password': 'Invalid email or password',
+}
+
+export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, setMessage }) => {
     const { isLoading, login } = useUser()
 
     const handleSubmit = async (values: any) => {
-        let user = await login({
+        const user = await login({
             email: values.email,
             password: values.password,
         })
 
         if (!user) {
-            setMessage('Incorrect email/password. Please try again.')
+            setMessage && setMessage('There was an error signing in. Please try again.')
+        } else if ('error' in user) {
+            setMessage?.(errorMessages[user?.error] || user?.error)
         } else {
-            await handleMessageSubmit(formValues || { email: values.email })
+            onSubmit?.(user)
         }
     }
 
@@ -50,9 +53,23 @@ const SignIn: React.FC<SignInProps> = ({ setMessage, handleMessageSubmit, formVa
                 return (
                     <Form>
                         <label htmlFor="email">Email address</label>
-                        <Field required id="email" name="email" type="email" placeholder="Email address..." />
+                        <Field
+                            onBlur={(e) => e.preventDefault()}
+                            required
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="Email address..."
+                        />
                         <label htmlFor="password">Password</label>
-                        <Field required id="password" name="password" type="password" placeholder="Password..." />
+                        <Field
+                            onBlur={(e) => e.preventDefault()}
+                            required
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Password..."
+                        />
                         <button style={isLoading || !isValid ? { opacity: '.5' } : {}} type="submit">
                             {buttonText}
                         </button>

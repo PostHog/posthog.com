@@ -38,7 +38,7 @@ export const useTopicMenu = (): IMenu[] => {
                 ...group.topics.map((topic) => {
                     return {
                         name: topic.label,
-                        url: `/questions/topics/${topic.slug}`,
+                        url: `/questions/topic/${topic.slug}`,
                     }
                 }),
             ]

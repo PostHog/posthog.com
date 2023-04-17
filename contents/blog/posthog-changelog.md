@@ -19,6 +19,40 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
 
+## April 14, 2023
+
+#### MaxAI PostHog Support AI
+**Beta feature**
+![posthog ai support](../images/blog/array/maxai.jpeg)
+
+Another hackathon project from our recent offsite in Aruba has just launched, called [MaxAI](https://github.com/PostHog/max-ai). He's an open-source AI designed to help PostHog users and, [as mentioned on Twitter](https://twitter.com/posthog/status/1643266039839334400), we built the first version in just two days.
+
+Max is currently in beta, and is deployed into our user [Slack](/slack) so he can provide help to support questions. In the future, we hope to release him onto the website, and into the PostHog app.
+
+You can check out [the MaxAI repo README for a full explanation of how his AI works](https://github.com/PostHog/max-ai#readme) and how we trained him. The short version is that we'be built a vector database of context using [Weaviate](https://weaviate.io/), we use [Haystack](https://haystack.deepset.ai/) to connect that to prompts and questions, then feed that to GPT using the [OpenAI API](https://platform.openai.com/docs/guides/chat/introduction).
+
+Currently Max pulls information from our docs, our GitHub repos, and our [Squeak](https://squeak.posthog.com/) questions. He can use these sources to answer questions about how PostHog works, what we're working on, how to solve common problems, and more. [He can also write poetry.](https://twitter.com/posthog/status/1643269734249406469)
+
+Want to test him out? [Tag @Max-AI in the PostHog Slack, or send him a DM!](/slack)
+
+#### PostHog Tracks
+![posthog tracks](../images/blog/array/tracks.gif)
+
+[PostHog Tracks](/tracks) is a series of curated courses of tutorials and other lessons which cover common uses for particular roles, as well as general advice for all users - and it's constantly expanding!
+
+At the moment PostHog Tracks groups many of our existing tutorials together into role-based themes, but over time we plan to add to these tracks and form more robust learning opportunities. Let us know if you have any ideas for what could be included, in the [Slack](/slack)
+
+## April 7, 2023
+
+> There was no Changelog update last week because the team was away at our annual company offsite. We'll have some info on what we got up to on [the blog](/blog) soon!
+
+#### Dashboard template library
+![posthog dashboard templates](../images/blog/array/template-library.png)
+
+We've not only created a wealth of new dashboard templates to help you get started, but [a public library](/templates) to help you navigate and understand them. You can now effortlessly build [an AARRR dashboard](/templates/aarrr-dashboard), a Google Analytics-like [landing page report](/templates/landing-dashboard), or a centralized location for your [user research](/templates/research-dashboard), as well as other typical use-cases. There are now more than 10 templates to choose from!
+
+These improvements came out of our company hackathon, which took place at our offsite in Aruba. Every year, we challenge everyone to pitch ideas and then develop them over a short period and present to the rest of the company. This idea was proposed by our technical content marketer, [Ian Vanagas](/handbook/company/team) - so be sure to let him know what you think of it in [the Slack](/slack)!
+
 ## March 24, 2023 
 
 #### Autocapture toggle
@@ -36,33 +70,33 @@ You may remember our old newsletter, HogMail. Well, now it's grown up and moved 
 Every issue of Product for Engineers has a theme which we explore through curated links, original commentary, tutorials and advice about the way _we_ work. The theme for the first issue? [Talking to users](https://newsletter.posthog.com/p/what-weve-learned-about-talking-to).
 ## March 17, 2023
 
-## Beta: Lightning mode
+#### Beta: Lightning mode
 ![posthog lightning mode](../images/blog/array/lightning_mode.gif)
 
 As [teased on Twitter last week](https://twitter.com/posthog/status/1633061945598148608), we’re currently trialing a new speed setting for PostHog which we call Lightning Mode. When enabled, insights will sample only 10% of your data, so you can get results faster when interrogating very large data sets. 
 
 Lightning mode is currently in beta. Want to give it a go? Let us know in [the community Slack](/slack)!
 
-## Beta: Sampling selector
+#### Beta: Sampling selector
 ![posthog sampling](../images/blog/array/sampling.gif)
 
 In addition to lightning mode, we’ve also added a more detailed sampling selector which works only at the per-insight level. The idea is that, while lightning mode is useful for when you need answers in a hurry, there are other times when you may want to choose a more delicate balance between speed and accuracy. That’s where the sampling selector comes in. 
 
 Like lightning mode, sampling is currently available as an opt-in beta. [Raise your hand in the Slack if you want to try it out](/slack).
 
-## PostHog for Startups
+#### PostHog for Startups
 ![PostHog for Startups](../images/startup-hogs.png)
 
 When we launched PostHog, we benefitted tremendously from the advice of other founders and teams in the Y Combinator programme. Now, we’ve launched our own programme to share our knowledge and help other startups grow. 
 
 [PostHog for Startups](/startups) is open to companies that are less than two years old and have raised less than $2 million in funding. In addition to a $50k PostHog credit, you’ll also get access to exclusive ‘Office Hours’ events, promotion opportunities and free PostHog merch.
 
-## New docs navigation
+#### New docs navigation
 ![posthog docs](../images/blog/array/docs_nav.gif)
 
 We've fully overhauled the PostHog navigation to make it easier to find the help you need, and especially make it easier to find feature-specific information and help for getting started. Every part of PostHog now has it's own feature-specific hub page, and we've pinned important content such as [how to get started with session recording](/docs/session-replay/manual#enabling-session-recording). 
 
-## What’s New?
+#### What’s New?
 ![posthog changelog](../images/blog/array/whats_new.gif)
 
 To make it easier for you to keep up to date on what’s happening in PostHog, and to stay informed about our latest releases, we’ve added a new button to the help navigation. It’s called ‘What’s new?’ and it brings you here, to the changelog, so you can find out what’s new. 
@@ -74,7 +108,7 @@ You can log into PostHog now to try it out, and be bought right back to this ver
 #### Dashboard templates
 ![dashboard templates](../images/blog/array/dashboard-template-wizard.png)
 
-We want to make it easier and faster for users to find useful information in PostHog — dashboards are a key part of that because they’re often one of the first things users build. So, we’ve added a new selection of dashboard templates, as well as a new wizard that’s a little easier on the eye. 
+We want to make it easier and faster for users to find useful information in PostHog — dashboards are a key part of that because they’re often one of the first things users build. So, we’ve added a new selection of [dashboard templates](/templates), as well as a new wizard that’s a little easier on the eye. 
 
 We’ve added a few simple templates to start with, for getting insights into areas such as online advertising, website traffic and user research. Got other ideas? Let us know in [the PostHog Slack](/slack)!
 

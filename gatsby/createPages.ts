@@ -16,6 +16,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
+    const DashboardTemplate = path.resolve(`src/templates/Template.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
@@ -119,6 +120,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                     frontmatter {
                         documentation
+                    }
+                }
+            }
+            templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
+                nodes {
+                    id
+                    fields {
+                        slug
                     }
                 }
             }
@@ -433,6 +442,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 documentation: documentation || '',
                 next,
                 previous,
+            },
+        })
+    })
+    result.data.templates.nodes.forEach((node) => {
+        const { slug } = node.fields
+        createPage({
+            path: slug,
+            component: DashboardTemplate,
+            context: {
+                id: node.id,
             },
         })
     })

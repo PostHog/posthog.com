@@ -109,18 +109,19 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
     }, [cursor])
 
     useEffect(() => {
-        setFieldValue('question', value)
+        setFieldValue('body', value)
     }, [value])
 
     return (
         <>
             <textarea
-                name="question"
+                onBlur={(e) => e.preventDefault()}
+                name="body"
                 value={value}
                 onChange={handleChange}
                 ref={textarea}
                 required
-                id="question"
+                id="body"
                 placeholder="Type more details..."
                 maxLength={2000}
             />
@@ -140,7 +141,7 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
                     <a
                         href="https://www.markdownguide.org/cheat-sheet/"
                         target="_blank"
-                        rel="noopener"
+                        rel="noreferrer"
                         title="Supports Markdown syntax"
                     >
                         <MarkdownLogo />

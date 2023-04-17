@@ -28,11 +28,12 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
         if (
-            parent?.internal.type === 'Reply' ||
+            parent?.internal.type === 'SqueakReply' ||
             parent?.internal.type === 'PostHogPull' ||
             parent?.internal.type === 'PostHogIssue'
         )
             return
+
         const slug = createFilePath({ node, getNode, basePath: `pages` })
 
         createNodeField({

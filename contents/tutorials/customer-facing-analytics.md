@@ -12,7 +12,7 @@ If you are a host, content platform, or some other type of B2B2C product, your u
 
 This tutorial shows you how to set up customer-facing analytics using PostHog and its API, Next.js, and Tremor (a React visualization library). You need a PostHog instance ([sign up for free](https://app.posthog.com/signup)) as well as a way to filter your analytics for an individual user, such as a user or group property (like name, domain, ID).
 
-> Thanks to [Mintlify](https://mintlify.com/) for the inspiration for this tutorial.
+> Thanks to [Mintlify](https://mintlify.com/) for the inspiration for this tutorial. Find out [how and why Mintlify used PostHog and Tremor to launch user-facing analytics](/customers/mintlify) within their product!
 
 ## Creating sample customer-facing insights
 
@@ -361,6 +361,8 @@ This gives us a line chart of the pageviews from unique users from PostHog over 
 ![Line chart](../images/tutorials/customer-facing-analytics/line.png)
 
 From here, you can add other charts and metrics. See the [PostHog API](/docs/api) for what data you can get from PostHog, and [Tremor](https://www.tremor.so/components) for the ways you can display it.
+
+> Want to know more? Find out [how and why Mintlify used PostHog and Tremor to launch user-facing analytics](/customers/mintlify) within their product!
 
 ## Further reading
 
