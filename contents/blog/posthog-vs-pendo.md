@@ -110,7 +110,7 @@ This difference is ultimately reflected in many of the features both platforms o
             <td><strong>In-app prompts and messages</strong></td>
             <td className="text-center"><span className="text-red text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Build your own apps and contribute code</td>
+            <td>Send messages to users in your app</td>
         </tr>
         <tr>
             <td><strong>Apps/Integrations</strong></td>
