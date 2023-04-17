@@ -15,11 +15,11 @@ tags:
     - Guides
 ---
 
-Curious about the differences between Pendo and PostHog? The quick answer is that they are built to solve very different problem.
+Curious about the differences between Pendo and PostHog? The quick answer is that they are built to solve very different problems:
 
-- Pendo focuses on enabling users to add in tool-tips and in-app messages. It includes some product analytics tools.
+1. Pendo focuses on enabling users to add in tool-tips and in-app messages. It includes some product analytics tools.
 
-- PostHog is an all-in-one product improvement platform which includes the ability to add in-app messages, as well as analytics, feature flags, session replays and more.
+2. PostHog is an all-in-one product improvement platform that includes the ability to add in-app messages, as well as analytics, feature flags, session replays and more.
 
 Now it's time for the long answer...
 
@@ -261,7 +261,7 @@ Below are some of the most popular ready-made apps which facilitate in-app messa
 ]} />
 
 ### Apps and integrations
-Both Pendo and PostHog have a wide selection of such apps and integrations available, for a number of popular platforms. Both also include integrations with tools such as Zapier, which enable you to move data to even more platforms.
+Both Pendo and PostHog have a wide selection of apps and integration. Both also include integrations with tools such as Zapier, which enable you to move data to even more platforms.
 
 One unique advantage of PostHog is that, because it is open source, it’s easy to [create your own apps and integrations](/tutorials/build-your-own-posthog-app). This is useful if you’re, for example, using more niche software in your stack which hasn’t been widely adopted — or if you require a direct integration between PostHog and your product. 
 
