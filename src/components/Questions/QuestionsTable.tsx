@@ -92,7 +92,8 @@ export const QuestionsTable = ({
                                                               )}
                                                           </div>
                                                           <div className="text-primary dark:text-primary-dark font-medium opacity-60 group-hover:opacity-100 line-clamp-1 my-1">
-                                                              {profile.data.attributes.firstName}
+                                                              {profile.data.attributes.firstName}{' '}
+                                                              {profile.data.attributes.lastName}
                                                           </div>
                                                       </div>
                                                       <span className="text-xs text-primary/60 dark:text-primary-dark/60 md:hidden">
