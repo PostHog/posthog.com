@@ -65,7 +65,7 @@ function QuestionFormMain({
                                 {subject && (
                                     <>
                                         <Field
-                                            className="font-bold text-black border-b border-black/30 text-base w-full py-3 px-4 outline-none"
+                                            className="font-bold text-black border-b border-black/30 text-base w-full py-3 px-4 outline-none rounded-none"
                                             onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"
