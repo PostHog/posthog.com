@@ -57,6 +57,7 @@ You can find your key in the 'Project Settings' page in PostHog.
 | `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API                    | `300000`                   |
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
+| `disableGeoip`                | When true, disables automatic geoIP resolution for events and feature flags.                                         | `true`                    |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`.
 
@@ -246,6 +247,51 @@ The same holds for [groups](/manual/group-analytics). If you have a group named 
 ```node
 const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {groups:{'organisation': 'google'}, groupProperties:{'organisation': {'is_authorized': True}})
 ```
+
+**Default overridden properties**
+
+Before posthog-node v3.0, by default we added geoip properties to all incoming events, and for feature flag evaluation, based on the IP address of the request. This isn't ideal since it uses your server IP address, rather than the user's, leading to incorrect location resolution.
+
+As of posthog-node v3.0, the default now is to disregard the server IP.
+
+You can go back to previous behaviour by doing so:
+
+```node
+const posthog = new PostHog(PH_API_KEY, {
+  host: PH_HOST,
+  disableGeoip: false
+})
+```
+
+The list of properties that this overrides:
+
+1. $geoip_city_name
+2. $geoip_country_name
+3. $geoip_country_code
+4. $geoip_continent_name
+5. $geoip_continent_code
+6. $geoip_postal_code
+7. $geoip_time_zone
+
+
+You can also explicitly chose to override / not override properties for a single capture or feature flag request like so:
+
+```node
+const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {
+    personProperties: { is_authorized: true },
+    disableGeoip: `true|false`
+})
+```
+
+```node
+posthog.capture({
+  distinctId: distinctId,
+  event: 'test-event',
+  properties: { foo: 'bar' },
+  disableGeoip: `true|false`,
+})
+```
+
 
 **Getting all flag values**
 
