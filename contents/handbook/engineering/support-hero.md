@@ -131,6 +131,7 @@ Tips:
 * If need more information from the customer to solve the issue, respond and mark as pending. 
 * If you think you solved the issue mark as solved (if they reply it will re-open and it's easier for everyone if there's less open tickets around).
 * Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
+* Low priority tickets don't send emails to the requester and can be viewed in aggregation and closed without a public reply. High and normal priority tickets send an email about a helpdesk ticket being created, so we should respond publicly there.
 
 ### Unthread
 
