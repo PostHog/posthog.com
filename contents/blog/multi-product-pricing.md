@@ -1,5 +1,5 @@
 ---
-date: 2023-04-04
+date: 2023-04-17
 title: What we've learned about multi-product pricing (so far)
 rootPage: /blog
 sidebar: Blog
