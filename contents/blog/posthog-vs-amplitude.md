@@ -351,7 +351,6 @@ PostHog Open Source is free for life, but is limited to one project. It includes
 
 We ship weirdly fast. Here's a quick snapshot of what we're working on right now:
 
-- SOC 2 compliance
 - PostHog Customer Data Platform
 - See Users & Recordings linked to feature flags ([GitHub issue](https://github.com/PostHog/posthog/issues/12360))
 - Direct access to data via SQL ([GitHub issue](https://github.com/PostHog/posthog/issues/12352))
