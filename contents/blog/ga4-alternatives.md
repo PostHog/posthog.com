@@ -57,7 +57,7 @@ The following GA4 alternatives all solve one or more of these issues. Some provi
 
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-- **Best for:** Mobile and desktop apps
+- **Best for:** Mobile and web apps
 - **Tracking method:** Event-based
 - **GDPR compliance:** <span className="text-green text-lg">✔</span> (via self-hosting or EU Cloud)
 - **GA data import:** <span className="text-red text-lg">✖</span>
@@ -600,7 +600,7 @@ Counter's creators can offer it for free because it only collects aggregated dat
     	<tr>
         	<td className="w-3/12"></td>
         	<td className="w-3/12 text-center"><strong>Google Analytics 4</strong></td>
-        	<td className="w-3/12 text-center"><strong>Fathom</strong></td>
+        	<td className="w-3/12 text-center"><strong>Counter</strong></td>
     	</tr>
 	</thead>
 	<tbody>
