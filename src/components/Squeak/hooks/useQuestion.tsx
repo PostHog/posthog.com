@@ -1,6 +1,6 @@
 import qs from 'qs'
-import { ProfileData, QuestionData, StrapiRecord } from 'lib/strapi'
-import useSWR from 'swr'
+import { ProfileData, QuestionData, StrapiRecord, TopicData } from 'lib/strapi'
+import useSWR, { useSWRConfig, mutate as swrMutate } from 'swr'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 
@@ -58,23 +58,39 @@ const query = (id: string | number) =>
         }
     )
 
+async function generateSHA256Hash(str: string) {
+    // Convert the string to a Uint8Array
+    const encoder = new TextEncoder()
+    const data = encoder.encode(str)
+
+    // Generate the hash using the SubtleCrypto API
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+
+    // Convert the hash buffer to a hexadecimal string
+    const hashArray = Array.from(new Uint8Array(hashBuffer))
+    const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+
+    return hashHex
+}
+
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
     const { getJwt, fetchUser, user } = useUser()
     const posthog = usePostHog()
+
+    const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id)}`
 
     const {
         data: question,
         error,
         isLoading,
         mutate,
-    } = useSWR<StrapiRecord<QuestionData>>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id)}`,
-        async (url) => {
-            const res = await fetch(url)
-            const { data } = await res.json()
-            return data?.[0]
-        }
-    )
+    } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
+        const res = await fetch(url)
+        const { data } = await res.json()
+        return data?.[0]
+    })
+
+    console.dir(JSON.stringify(key))
 
     if (error) {
         posthog?.capture('squeak error', {
@@ -346,13 +362,13 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         await fetchUser()
     }
 
-    const addTopic = async (topicId: number): Promise<void> => {
+    const addTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
         await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 data: {
                     topics: {
-                        connect: [topicId],
+                        connect: [topic.id],
                     },
                 },
             }),
@@ -362,16 +378,20 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             },
         })
 
-        await mutate()
+        const copiedData = Object.assign({}, questionData)
+
+        copiedData.attributes?.topics?.data?.push(topic)
+
+        swrMutate(key)
     }
 
-    const removeTopic = async (topicId: number): Promise<void> => {
+    const removeTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
         await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 data: {
                     topics: {
-                        disconnect: [topicId],
+                        disconnect: [topic.id],
                     },
                 },
             }),
@@ -381,7 +401,14 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             },
         })
 
-        await mutate()
+        const copiedData = Object.assign({}, questionData)
+
+        if (!copiedData.attributes?.topics?.data) return
+
+        copiedData.attributes.topics.data = copiedData.attributes?.topics?.data?.filter((t) => t.id !== topic.id)
+
+        // FIXME: Need to mutate both permalink and question ID keys as they are different
+        swrMutate(key)
     }
 
     return {

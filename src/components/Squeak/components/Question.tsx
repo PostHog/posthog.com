@@ -14,7 +14,7 @@ import SubscribeButton from './SubscribeButton'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
-    id: number
+    id: number | string
     question?: StrapiRecord<QuestionData>
     expanded?: boolean
 }

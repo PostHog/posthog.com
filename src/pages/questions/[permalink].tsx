@@ -23,7 +23,7 @@ export default function QuestionPage(props: QuestionPageProps) {
             <PostLayout
                 title={question?.attributes?.subject || ''}
                 menu={community}
-                sidebar={<QuestionSidebar question={question} />}
+                sidebar={<QuestionSidebar permalink={props.params.permalink} />}
                 hideSurvey
             >
                 <section className="max-w-5xl mx-auto pb-12">

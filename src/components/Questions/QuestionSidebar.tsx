@@ -4,26 +4,27 @@ import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
 import { PlusIcon } from '@heroicons/react/outline'
 import SidebarSection from 'components/PostLayout/SidebarSection'
-import { TopicSelector } from 'components/Squeak'
+import { TopicSelector, useQuestion } from 'components/Squeak'
 import { Menu, Popover } from '@headlessui/react'
 
 type QuestionSidebarProps = {
-    question: StrapiRecord<QuestionData> | undefined
+    permalink: string
 }
 
 export const QuestionSidebar = (props: QuestionSidebarProps) => {
     const { user } = useUser()
+    const { question } = useQuestion(props.permalink)
 
-    const { id, attributes: question } = props.question || {}
+    console.log(question)
 
     return question ? (
         <div>
             <SidebarSection title="Posted by">
                 <div className="flex items-center space-x-2">
-                    {question.profile?.data?.attributes?.avatar?.data?.attributes?.url ? (
+                    {question.attributes?.profile?.data?.attributes?.avatar?.data?.attributes?.url ? (
                         <img
                             className="w-8 h-8 rounded-full"
-                            src={question.profile.data.attributes.avatar.data.attributes.url}
+                            src={question.attributes.profile.data.attributes.avatar.data.attributes.url}
                         />
                     ) : (
                         <svg
@@ -41,18 +42,18 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                             ></path>
                         </svg>
                     )}
-                    <Link to={`/community/profiles/${question.profile?.data?.id}`}>
-                        {question.profile?.data?.attributes?.firstName
-                            ? `${question.profile?.data?.attributes?.firstName} ${question.profile?.data?.attributes?.lastName}`
+                    <Link to={`/community/profiles/${question?.attributes?.profile?.data?.id}`}>
+                        {question.attributes?.profile?.data?.attributes?.firstName
+                            ? `${question.attributes?.profile?.data?.attributes?.firstName} ${question.attributes?.profile?.data?.attributes?.lastName}`
                             : 'Anonymous'}
                     </Link>
                 </div>
             </SidebarSection>
 
-            {question?.topics?.data && question.topics.data.length > 0 && (
+            {question.attributes?.topics?.data && question.attributes.topics.data.length > 0 && (
                 <SidebarSection title="Topics">
                     <ul className="flex items-center list-none p-0 flex-wrap">
-                        {question.topics.data.map((topic) => (
+                        {question.attributes.topics.data.map((topic) => (
                             <li
                                 key={topic.id}
                                 className="bg-gray-accent-light text-gray py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2"
@@ -63,19 +64,19 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                             </li>
                         ))}
 
-                        {id && (
+                        {question.id && user?.role?.type === 'moderator' && (
                             <li className="bg-gray-accent-light text-gray py-0.5 px-2 rounded-sm font-semibold">
-                                <TopicSelector questionId={id} />
+                                <TopicSelector questionId={question.id} />
                             </li>
                         )}
                     </ul>
                 </SidebarSection>
             )}
 
-            {user?.isModerator && (
+            {user?.role?.type === 'moderator' && (
                 <SidebarSection>
                     <Link
-                        to={`https://squeak.posthog.cc/admin/content-manager/collectionType/api::question.question/${id}`}
+                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question.question/${question?.id}`}
                     >
                         View in Squeak!
                     </Link>
