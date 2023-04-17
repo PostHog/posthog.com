@@ -79,7 +79,7 @@ Nothing comes for free and limiting what `posthog` can track between page loads 
 
 * **Higher anonymous user count** - each pageload that is not ["bootstrapped"](docs/libraries/js#bootstrapping-flags) with a known `distinctId` will count as a new user, and not a returning one
 * **Session Recording count** - as we can't track a "session" (multiple pageloads over time), Session Recordings will only be as long as the in-memory session and will reset (i.e. start a new recording) whenever the browser reloads. In addition, multiple window tracking is not possible.
-* **Cache optimisations** - we store some information in browser storage in order to load faster, for example using the last loaded values for Feature Flags. Without this optimisation there will be an increased average delay between the page loading and things like Feature Flags being available to query. 
+* **Cache optimizations** - we store some information in browser storage in order to load faster, for example using the last loaded values for Feature Flags. Without this optimization there will be an increased average delay between the page loading and things like Feature Flags being available to query. 
 
 
 ## Further reading
