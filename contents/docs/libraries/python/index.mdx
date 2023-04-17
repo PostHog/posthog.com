@@ -220,6 +220,41 @@ posthog.get_feature_flag('beta-feature', 'distinct id', groups={'organisation': 
 # returns string or None
 ```
 
+**Default overridden properties**
+
+Before posthog-python v3.0, by default we added geoip properties to all incoming events, and for feature flag evaluation, based on the IP address of the request. This isn't ideal since it uses your server IP address, rather than the user's, leading to incorrect location resolution.
+
+As of posthog-python v3.0, the default now is to disregard the server IP.
+
+You can go back to previous behaviour by doing so:
+
+```python
+
+posthog = Posthog('api_key', disable_geoip=False)
+
+```
+
+The list of properties that this overrides:
+
+1. $geoip_city_name
+2. $geoip_country_name
+3. $geoip_country_code
+4. $geoip_continent_name
+5. $geoip_continent_code
+6. $geoip_postal_code
+7. $geoip_time_zone
+
+
+You can also explicitly chose to override / not override properties for a single capture or feature flag request like so:
+
+```python
+posthog.get_feature_flag("beta-feature", "distinct_id", disable_geoip=True|False)
+```
+
+```python
+posthog.capture('test id', 'test event', disable_geoip=True|False)
+```
+
 **Getting all flag values**
 
 You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
