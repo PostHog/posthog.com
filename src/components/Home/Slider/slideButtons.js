@@ -4,7 +4,7 @@ import {
     DataWarehouse,
     EventPipelines,
     FeatureFlags,
-    SelfHosting,
+    OpenSource,
     SessionRecording,
 } from './Icons'
 
@@ -14,7 +14,7 @@ export const slideButtons = [
         Icon: Analytics,
     },
     {
-        title: 'Session recording',
+        title: 'Session replay',
         Icon: SessionRecording,
     },
     {
@@ -34,7 +34,7 @@ export const slideButtons = [
         Icon: DataWarehouse,
     },
     {
-        title: 'Self-hosting',
-        Icon: SelfHosting,
+        title: 'Open source',
+        Icon: OpenSource,
     },
 ]

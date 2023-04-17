@@ -3,6 +3,7 @@ title: How to filter out internal users
 sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/tutorial-17.png
+featuredVideo: https://www.youtube-nocookie.com/embed/2bptTniYPGc
 featuredTutorial: false
 author: ["joe-martin"]
 tags: ['filters', 'settings']

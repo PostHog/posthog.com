@@ -248,7 +248,6 @@ The maximum number of retries is documented with each function, as it might diff
 As of PostHog 1.37+, the following functions are _retriable_:
 - `setupPlugin`
 - `onEvent`
-- `onSnapshot`
 - `exportEvents`
 
 ## `setupPlugin` function
@@ -316,8 +315,6 @@ async function processEvent(event, { config, cache }) {
 
 As you can see, the function receives the event before it is ingested by PostHog, adds properties to it (or modifies them), and returns the enriched event, which will then be ingested by PostHog (after all apps run).
 
-> Please note that `$snapshot` events (used for session recordings) do not go through `processEvent`. Instead, you can access them via the `onSnapshot` function described below.
-
 ## `onEvent` function
 
 > **Minimum PostHog version:** 1.25.0 
@@ -340,15 +337,6 @@ async function onEvent(event) {
 ```
 
 `onEvent` can be retried up to 5 times (first retry after 5 s, then 10 s after that, 20 s, 40 s, lastly 80 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 5 times is ignored.
-
-## `onSnapshot` function
-
-> **Minimum PostHog version:** 1.25.0  
-> **Self-hosted installations-only** – not available on PostHog Cloud
-
-`onSnapshot` works exactly like `onEvent`. The only difference between the two is that the former receives session recording events, while latter – all other events.
-
-`onSnapshot` can be retried up to 5 times (first retry after 5 s, then 10 s after that, 20 s, 40 s, lastly 80 s) by throwing [`RetryError`](#maximizing-reliability-with-retryerror). Attempting to retry more than 5 times is ignored.
 
 ## Scheduled tasks
 

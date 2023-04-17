@@ -3,13 +3,15 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import React, { useRef, useState } from 'react'
 
-export default function TutorialsSlider({ topic }: { topic: string }): any {
+export default function TutorialsSlider({ topic, slugs }: { topic?: string; slugs?: string[] }): any {
     const {
         allMdx: { nodes },
     } = useStaticQuery(query)
-    const tutorials = nodes.filter((tutorial) =>
-        tutorial?.frontmatter?.tags?.some((tutorialTag) => tutorialTag === topic)
-    )
+    const tutorials = nodes.filter((tutorial) => {
+        return slugs
+            ? slugs.includes(tutorial.fields.slug)
+            : tutorial?.frontmatter?.tags?.some((tutorialTag) => tutorialTag === topic)
+    })
     const [activeSlide, setActiveSlide] = useState(0)
 
     return (

@@ -8,12 +8,13 @@ We offer our team unlimited time off, but with an expectation that you take _at 
 
 The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People & Ops team will look holiday usage occasionally to encourage people who haven't taken the minimum time off to do so. The 25 days is a minimum, not a guide.
 
+As general guidance, we don't care about a few days here and there. If you are taking significantly more vacation time than most - for example, 40 days, we would be very surprised if you aren't causing a strain on the rest of your team as a result.
 
 ## Permissionless time off
 
 We care about your results, not how long you work.
 
-You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. For example, having an entire Small Team off at the same time means we can't be responsive to community issues.  
+You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. For example, having an entire Small Team off at the same time means we can't be responsive to community issues.
 
 ### How to book time off in PTO by Roots
 
@@ -37,10 +38,6 @@ The same rules as above apply regardless of the holiday length and type. Sick le
 We operate on a trust basis and we don't count hours or days worked. We trust everyone to manage their own time. 
 
 Whether you have an appointment with your doctor, school run with your kids, or you want to finish an hour early to meet friends or family - we don't mind and you don't need to tell us. Please just add it to your calendar and, if you are doing anything that could require you to be immediately available (ie support hero / or any customer-facing role), please make sure you have cover. 
-
-### Sabbaticals
-
-As we have unlimited, permissionless time off, PostHog doesn’t offer ‘sabbaticals’ in the way that some companies do. Instead, we strongly encourage team members to use our existing policy to take a full month off every 3-4 years. We only ask that you organise this thoughtfully with your team by giving them enough notice to plan.
 
 ## When you should have time off
 
@@ -76,11 +73,11 @@ We are aware that there are local laws around time off for new parents in every 
 
 ## Birthday and anniversaries
 
-We celebrate all the big and little milestones at PostHog, including birthdays and work anniversaries. We celebrate each team member as a reminder of how much we appreciate them. Coua is currently responsible for organizing these. 
+We celebrate all the big and little milestones at PostHog, including birthdays and work anniversaries. We celebrate each team member as a reminder of how much we appreciate them. Kendal is currently responsible for organizing these. 
 
 ### Birthdays
 
-We have partnered with [Batch](https://batchusa.com/pages/about-us) to send all team members a personalized giftset for their birthday. All gifts are to arrive 1-3 business days prior to the actual day. 
+We have partnered with [Batch](https://batchusa.com/pages/about-us) to send all team members a personalized giftset for their birthday.
 
 These are the steps for making an order:
 
@@ -88,14 +85,14 @@ These are the steps for making an order:
 2. Bri will send an invoice to be paid with steps on how to make the purchase payment
 3. All set! 
 
-Birthday gifts will usually arrive on the day of or 1-3 days prior to the actual birthday. US shipping is free, while EU will have additional fees.
+The birthday gift usually arrives on the day of or 1-3 days prior to the birthday. Shipping fees: US shipping is free while all other countries will have shipping fees. 
 
 
 ### Anniversaries
 
-On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Batch](batchusa.com). 
+On your first-year anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) which can be used on a wide selection of brands. On your second-year anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third-year anniversary, you'll receive a personalized gift from [Batch](https://batchusa.com). 
 
-1st year anniversary - $50 for US gift cards/$55 for EU gift cards to cover service fees):
+1st year anniversary - $50 for US gift cards/$55 for for all other countries gift cards to cover service fees:
 
 1. Login into [Giftogram](https://app.giftogram.com/sign-in) by using your gmail credentials
 2. Two ways to create a new Giftogram, on the tool bar above where it says “Create and Send'' or you can click on the right hand side on the blue button “Send a Giftogram''. 
@@ -119,4 +116,4 @@ On your first-year anniversary with PostHog, you will receive a giftcard from [G
 1. Complete all necessary information on the “Third Anniversary tab” with the [customer order sheet](https://docs.google.com/spreadsheets/d/1OhYz-ws20VKtQ0NnoCEzw1i4V4XAiz3e/edit?usp=sharing&ouid=109235309101749414478&rtpof=true&sd=true) and send to Bri Nightingale, CSM at bri@batchusa.com 
 2. Bri will send an invoice to be paid with steps on how to make the purchase payment
 
-Gift(s) will usually arrive on the day of or 1-3 days prior to the actual anniversary date. Shipping fees: US shipping is free while EU will have additional fees for shipping.
+The gift will usually arrive on the day of or 1-3 days prior to the anniversary date. Shipping fees: US shipping is free while all other countries will have shipping fees. 

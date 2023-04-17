@@ -1,46 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { PageProps } from 'gatsby'
 
-import docs from 'sidebars/docs.json'
-
+import community from 'sidebars/community.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
-import PostLayout, { SidebarSection } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
 import Link from 'components/Link'
 import Markdown from 'markdown-to-jsx'
-import { OrgProvider, UserProvider, useUser, Question } from 'squeak-react'
+import { Questions } from 'components/Squeak'
+import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'
-import EditProfile from 'components/Profiles/EditProfile'
+import { EditProfile } from 'components/Squeak'
 import useSWR from 'swr'
-
-export type SqueakProfile = {
-    id: string
-    first_name?: string
-    last_name?: string
-    avatar?: string
-
-    biography?: string
-
-    website?: string
-    github?: string
-    twitter?: string
-    linkedin?: string
-
-    company?: string
-    company_role?: string
-
-    team?: {
-        name: string
-        profiles: {
-            id: string
-            avatar?: string
-            first_name?: string
-            last_name?: string
-            company_role?: string
-        }[]
-    }
-}
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import { ProfileData, StrapiRecord } from 'lib/strapi'
+import getAvatarURL from '../../../components/Squeak/util/getAvatar'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { RightArrow } from '../../../components/Icons/Icons'
+import qs from 'qs'
+import usePostHog from 'hooks/usePostHog'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -64,123 +43,141 @@ const Avatar = (props: { className?: string; src?: string }) => {
 }
 
 export default function ProfilePage({ params }: PageProps) {
-    const id = params.id || params['*']
+    const id = parseInt(params.id || params['*'])
 
     const [editModalOpen, setEditModalOpen] = React.useState(false)
+    const posthog = usePostHog()
 
-    const { data: profile, mutate: profileMutate } = useSWR<SqueakProfile>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}`,
-        (url) => fetch(url).then((res) => res.json())
+    const profileQuery = qs.stringify(
+        {
+            populate: {
+                avatar: true,
+                role: {
+                    select: ['type'],
+                },
+                teams: {
+                    populate: {
+                        profiles: {
+                            populate: ['avatar'],
+                        },
+                    },
+                },
+            },
+        },
+        {
+            encodeValuesOnly: true,
+        }
     )
-    const { data: questions } = useSWR(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}&profileId=${id}&published=true`,
-        (url: string) =>
-            fetch(url)
-                .then((res) => res.json())
-                .then((data) => data.questions || [])
+
+    const { data, error, mutate } = useSWR<StrapiRecord<ProfileData>>(
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?${profileQuery}`,
+        async (url) => {
+            const res = await fetch(url)
+            const { data } = await res.json()
+            return data
+        }
     )
 
-    const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
+    if (error) {
+        posthog?.capture('squeak error', {
+            source: 'ProfilePage',
+            error: JSON.stringify(error),
+        })
+    }
 
-    const handleEditProfile = (updatedProfile: SqueakProfile) => {
-        profileMutate({ ...profile, ...updatedProfile }, false)
+    const { attributes: profile } = data || {}
+    const { firstName, lastName } = profile || {}
+
+    const name = [firstName, lastName].filter(Boolean).join(' ')
+
+    const handleEditProfile = () => {
+        mutate()
         setEditModalOpen(false)
+    }
+
+    if (!profile) {
+        return null
     }
 
     return (
         <>
             <SEO title={`Community Profile - PostHog`} />
-            <OrgProvider
-                value={{
-                    organizationId: process.env.GATSBY_SQUEAK_ORG_ID as string,
-                    apiHost: process.env.GATSBY_SQUEAK_API_HOST as string,
-                }}
-            >
-                <Layout>
-                    <UserProvider>
-                        <Modal setOpen={setEditModalOpen} open={editModalOpen}>
-                            <div
-                                onClick={() => setEditModalOpen(false)}
-                                className="flex flex-start justify-center absolute w-full p-4"
-                            >
-                                <div
-                                    className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    <EditProfile onSubmit={handleEditProfile} profile={profile} />
-                                </div>
-                            </div>
-                        </Modal>
-                        <PostLayout
-                            title="Profile"
-                            breadcrumb={[
-                                { name: 'Community', url: '/questions' },
-                                { name: 'Profile', url: `/community/profiles/${id}` },
-                            ]}
-                            menu={docs}
-                            sidebar={<ProfileSidebar setEditModalOpen={setEditModalOpen} profile={profile} />}
-                            hideSurvey
+            <Layout>
+                <Modal setOpen={setEditModalOpen} open={editModalOpen}>
+                    <div
+                        onClick={() => setEditModalOpen(false)}
+                        className="flex flex-start justify-center absolute w-full p-4"
+                    >
+                        <div
+                            className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
+                            onClick={(e) => e.stopPropagation()}
                         >
-                            {profile ? (
-                                <div className="space-y-8 my-8">
-                                    <section className="">
-                                        <Avatar
-                                            className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
-                                            src={profile.avatar}
-                                        />
+                            <EditProfile onSubmit={handleEditProfile} />
+                        </div>
+                    </div>
+                </Modal>
+                <PostLayout
+                    title="Profile"
+                    breadcrumb={[{ name: 'Community', url: '/questions' }]}
+                    menu={community}
+                    sidebar={
+                        <ProfileSidebar
+                            handleEditProfile={handleEditProfile}
+                            setEditModalOpen={setEditModalOpen}
+                            profile={{ ...profile, id }}
+                        />
+                    }
+                    hideSurvey
+                >
+                    {profile ? (
+                        <>
+                            <div className="space-y-8 my-8">
+                                <section className="">
+                                    <Avatar
+                                        className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
+                                        src={getAvatarURL(profile)}
+                                    />
 
-                                        <div className="space-y-3">
-                                            <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
-                                            {profile.company_role && (
-                                                <p className="text-gray">{profile?.company_role}</p>
-                                            )}
-                                        </div>
+                                    <div className="space-y-3">
+                                        <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
+                                        {profile.companyRole && <p className="text-gray">{profile?.companyRole}</p>}
+                                    </div>
 
-                                        {profile?.biography && (
-                                            <section>
-                                                <h3>Biography</h3>
+                                    {profile?.biography && (
+                                        <section>
+                                            <h3>Biography</h3>
 
-                                                <Markdown>{profile.biography}</Markdown>
-                                            </section>
-                                        )}
-                                    </section>
-                                </div>
-                            ) : null}
-                            {questions && questions.length >= 1 && (
-                                <div className="mt-12">
-                                    <h3>Discussions</h3>
-                                    {questions.map((question) => {
-                                        return (
-                                            <Question
-                                                key={question.id}
-                                                question={question}
-                                                apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                                                organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
-                                            />
-                                        )
-                                    })}
-                                </div>
-                            )}
-                        </PostLayout>
-                    </UserProvider>
-                </Layout>
-            </OrgProvider>
+                                            <Markdown>{profile.biography}</Markdown>
+                                        </section>
+                                    )}
+                                </section>
+                            </div>
+
+                            <div className="mt-12">
+                                <Questions title="Discussions" profileId={id} showForm={false} />
+                            </div>
+                        </>
+                    ) : null}
+                </PostLayout>
+            </Layout>
         </>
     )
 }
 
-const ProfileSidebar = ({
-    profile,
-    setEditModalOpen,
-}: {
-    profile?: SqueakProfile
-    setEditModalOpen: () => boolean
-}) => {
-    const name = [profile?.first_name, profile?.last_name].filter(Boolean).join(' ')
-    const { user } = useUser()
+type ProfileSidebarProps = {
+    profile: ProfileData
+    setEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+    handleEditProfile: () => void
+}
 
-    return profile ? (
-        <div>
+const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen, handleEditProfile }) => {
+    const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
+    const [editProfile, setEditProfile] = useState(false)
+    const { user } = useUser()
+    const breakpoints = useBreakpoint()
+
+    return profile && !editProfile ? (
+        <>
             {profile.github || profile.twitter || profile.linkedin || profile.website ? (
                 <SidebarSection title="Links">
                     <ul className="p-0 flex space-x-2 items-center list-none m-0">
@@ -232,42 +229,72 @@ const ProfileSidebar = ({
                 </SidebarSection>
             ) : null}
 
-            {profile.team ? (
-                <>
-                    <SidebarSection title="Team">
-                        <span className="text-xl font-bold">{profile.team.name}</span>
-                    </SidebarSection>
+            {profile.teams
+                ? profile.teams?.data?.map(({ attributes: { name, profiles } }) => {
+                      return (
+                          <>
+                              <SidebarSection title="Team">
+                                  <span className="text-xl font-bold">{name}</span>
+                              </SidebarSection>
 
-                    {profile.team.profiles.length > 0 ? (
-                        <SidebarSection title="Co-workers">
-                            <ul className="p-0 grid gap-y-2">
-                                {profile.team.profiles
-                                    .filter(({ id }) => id !== profile.id)
-                                    .map((profile) => {
-                                        return (
-                                            <li key={profile.id} className="flex items-center space-x-2">
-                                                <Avatar className="w-8 h-8" src={profile.avatar} />
-                                                <a href={`/community/profiles/${profile.id}`}>
-                                                    {profile.first_name} {profile.last_name}
-                                                </a>
-                                            </li>
-                                        )
-                                    })}
-                            </ul>
-                        </SidebarSection>
-                    ) : null}
-                </>
-            ) : null}
+                              {profiles?.data?.length > 0 ? (
+                                  <SidebarSection title="Co-workers">
+                                      <ul className="p-0 grid gap-y-2">
+                                          {profiles.data
+                                              .filter(({ id }) => id !== profile.id)
+                                              .map((profile) => {
+                                                  return (
+                                                      <li key={profile.id} className="flex items-center space-x-2">
+                                                          <Avatar className="w-8 h-8" src={getAvatarURL(profile)} />
+                                                          <a href={`/community/profiles/${profile.id}`}>
+                                                              {profile.attributes?.firstName}{' '}
+                                                              {profile.attributes?.lastName}
+                                                          </a>
+                                                      </li>
+                                                  )
+                                              })}
+                                      </ul>
+                                  </SidebarSection>
+                              ) : null}
+                          </>
+                      )
+                  })
+                : null}
 
             {user?.profile?.id === profile.id && (
                 <SidebarSection>
-                    <button onClick={() => setEditModalOpen(true)} className="text-base text-red font-semibold">
+                    <button
+                        onClick={() => {
+                            if (breakpoints.md) {
+                                setEditProfile(true)
+                            } else {
+                                setEditModalOpen(true)
+                            }
+                        }}
+                        className="text-base text-red font-semibold"
+                    >
                         Edit profile
                     </button>
                 </SidebarSection>
             )}
-        </div>
+        </>
     ) : (
-        <></>
+        <div className="pb-6">
+            <div className="mb-4 flex flex-start items-center relative">
+                <button
+                    onClick={() => setEditProfile(false)}
+                    className="inline-block font-bold bg-gray-accent-light dark:bg-gray-accent-dark mr-2 rounded-sm p-1"
+                >
+                    <RightArrow className="w-6 rotate-180" />
+                </button>
+                <h5 className="m-0 text-base font-bold">Back</h5>
+            </div>
+            <EditProfile
+                onSubmit={() => {
+                    handleEditProfile()
+                    setEditProfile(false)
+                }}
+            />
+        </div>
     )
 }

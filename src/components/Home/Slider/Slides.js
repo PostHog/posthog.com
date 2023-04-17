@@ -57,12 +57,12 @@ const ImageContainer = ({ children, className = '' }) => {
 
 export const ProductAnalytics = () => {
     const features = [
-        { title: 'Funnels', Icon: Funnels, url: '/product/funnels' },
-        { title: 'User paths', Icon: PathAnalysis, url: '/product/user-paths' },
-        { title: 'Lifecycle', Icon: Lifecycle, url: '/product/correlation-analysis' },
-        { title: 'Trends', Icon: Trends, url: '/product/trends' },
-        { title: 'Stickiness', Icon: Stickiness, url: '/product/correlation-analysis' },
-        { title: 'Retention', Icon: Retention, url: '/product/correlation-analysis' },
+        { title: 'Funnels', Icon: Funnels, url: '/product-analytics#funnels' },
+        { title: 'User paths', Icon: PathAnalysis, url: '/product-analytics#user-paths' },
+        { title: 'Lifecycle', Icon: Lifecycle, url: '/product-analytics#more-insight-types' },
+        { title: 'Trends', Icon: Trends, url: '/product-analytics#graphs-and-trends' },
+        { title: 'Stickiness', Icon: Stickiness, url: '/product-analytics#more-insight-types' },
+        { title: 'Retention', Icon: Retention, url: '/product-analytics#more-insight-types' },
     ]
     return (
         <div className="relative grid grid-cols-4 lg:grid-cols-5 lg:gap-5 pt-5">
@@ -104,7 +104,7 @@ export const ProductAnalytics = () => {
                             )
                         })}
                     </ul>
-                    <CTA url="/product" title="Explore" />
+                    <CTA url="/product-analytics" title="Explore" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3">
@@ -161,11 +161,11 @@ export const SessionRecording = () => {
             </ImageContainer>
             <ContentContainer>
                 <Content>
-                    <Title title={'Session recording'} />
+                    <Title title={'Session replay'} />
                     <Subtitle subtitle="with console logs" />
                     <Description description="Watch a group of sessions for users in a cohort." />
 
-                    <CTA url="/product/session-recording" title="Explore" />
+                    <CTA url="/session-replay" title="Explore" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="mb-3 flex-grow md:px-0 px-5">
@@ -236,7 +236,7 @@ export const FeatureFlags = () => {
                     <Subtitle className="text-[14px] md:text-[18px]" subtitle="with multivariate testing" />
                     <Description description="Roll out features to groups or specific users." />
 
-                    <CTA url="/product/feature-flags" title="See how it works" />
+                    <CTA url="/feature-flags" title="See how it works" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="md:px-0 px-5 mb-3 flex-grow w-full md:w-auto">
@@ -329,7 +329,7 @@ export const ABTesting = () => {
                             )
                         })}
                     </ul>
-                    <CTA url="/product/experimentation-suite" title="See how it works" />
+                    <CTA url="/ab-testing" title="See how it works" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3 flex-grow">
@@ -394,18 +394,7 @@ export const EventPipelines = () => {
                 <Content>
                     <Title title={'Event pipelines'} />
                     <Subtitle subtitle="Enrich customer profiles in sales and marketing clouds with event data you send to PostHog." />
-                    <ul className="list-none m-0 p-0 mt-5 md:mt-0 grid grid-cols-3 md:flex md:space-x-3 space-y-2 md:space-y-0 items-center justify-center md:justify-start">
-                        {data.map(({ Icon, url }, index) => {
-                            return (
-                                <li key={index} className="m-0 mr-2 md:mr-0 p-0">
-                                    <Link className="text-primary hover:text-primary" to={url}>
-                                        <Icon className="w-[22px]" />
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    <CTA url="/docs/integrate" title="Browse all libraries" />
+                    <CTA url="/docs/integrations" title="Browse destinations" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3 flex-grow">
@@ -462,7 +451,7 @@ export const DataWarehouse = () => {
                 <Content>
                     <Title title={'Data warehouse'} />
                     <Subtitle className="text-[14px] md:text-[18px]" subtitle="Sync with your warehouse." />
-                    <Description description="Or keep customer data in-house by self-hosting and using PostHog’s built-in data warehouse." />
+                    <Description description="PostHog syncs easily with BigQuery, Snowflake, or Redshift via API." />
 
                     <CTA url="/docs/api" title="Explore what you can do" />
                 </Content>
@@ -499,32 +488,27 @@ export const SelfHosting = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
-                        alt="A hedgehog dressed as a professor pointing at a chalkboard with a complex SQL statement written on it"
+                        alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
                         className="w-full h-full"
-                        src="./images/self-hosting.png"
+                        src="./images/open-source.png"
                     />
                 </motion.div>
             </ImageContainer>
             <ContentContainer>
                 <Content>
-                    <Title title={'Self-hosting'} />
-                    <Subtitle className="text-[14px] md:text-[18px]" subtitle="Plus get full SQL access." />
-                    <Description description="Hosting on-prem or private cloud means customer data never has to leave your infrastructure." />
+                    <Title title={'Open source'} />
+                    <Subtitle className="text-[14px] md:text-[18px]" subtitle="Get full access to source code." />
+                    <p className="text-[16px] m-0 leading-tight text-primary/70">
+                        Audit the entire PostHog codebase for security or compliance on{' '}
+                        <a href="https://github.com/posthog/posthog">GitHub</a>. Or host your own hobby deployment.
+                    </p>
 
-                    <CTA url="/docs/self-host" title="Learn more" />
+                    <CTA url="/docs/self-host" title="Learn more about self-hosting" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="hidden md:block mb-3">
-                        <hr className="w-[20px] h-[3px] rounded-full" />
-                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
-                            Deploy with <Link to="/docs/self-host/deploy/aws">AWS</Link>,{' '}
-                            <Link to="/docs/self-host/deploy/gcp">Google Cloud</Link>,{' '}
-                            <Link to="/docs/self-host/deploy/digital-ocean">DigitalOcean</Link>, and more.
-                        </div>
-                    </div>
                     <div className="md:relative w-3/4">
                         <motion.div
                             transition={{ delay: 0.5 }}

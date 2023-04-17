@@ -5,8 +5,13 @@ import { Calendar, Edit, Issue } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import { H1, H2, H3, H4, H5, H6 } from 'components/MdxAnchorHeaders'
-import PostLayout, { Contributors, PageViews, ShareLinks, SidebarSection, Text, Topics } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
+import Text from 'components/PostLayout/Text'
+import Topics from 'components/PostLayout/Topics'
+import ShareLinks from 'components/PostLayout/ShareLinks'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import PageViews from 'components/PostLayout/PageViews'
+import Contributors, { Contributor } from 'components/PostLayout/Contributors'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
@@ -19,11 +24,13 @@ import { NewsletterForm } from 'components/NewsletterForm'
 import blogMenu from 'components/Blog/blogMenu'
 import blog from 'sidebars/blog.json'
 import slugify from 'slugify'
+import { Heading } from 'components/Heading'
+import TutorialsSlider from 'components/TutorialsSlider'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const Title = ({ children, className = '' }) => {
-    return <h1 className={`text-3xl md:text-4xl lg:text-4xl mt-3 mb-0 lg:my-5 ${className}`}>{children}</h1>
+    return <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 ${className}`}>{children}</h1>
 }
 
 export const Intro = ({
@@ -33,12 +40,14 @@ export const Intro = ({
     featuredImageType,
     contributors,
     titlePosition = 'bottom',
+    date,
+    tags,
 }) => {
     return (
-        <div className="mt-4 lg:mb-7 mb-4 overflow-hidden">
+        <div className="lg:mb-7 mb-4 overflow-hidden">
             {featuredVideo && <iframe src={featuredVideo} />}
             {!featuredVideo && featuredImage && (
-                <div className="relative">
+                <div className="relative flex flex-col">
                     <GatsbyImage
                         className={`rounded-md z-0 relative ${
                             featuredImageType === 'full'
@@ -52,22 +61,26 @@ export const Intro = ({
                         image={getImage(featuredImage)}
                     />
                     {featuredImageType === 'full' && (
-                        <Title
-                            className={`lg:absolute ${
-                                titlePosition === 'bottom' ? 'bottom-0' : 'top-0'
-                            } lg:text-white text-primary lg:px-8`}
-                        >
-                            {title}
-                        </Title>
+                        <>
+                            <div
+                                className={`lg:absolute flex flex-col lg:px-8 lg:py-4 ${
+                                    titlePosition === 'bottom' ? 'bottom-0' : 'top-0'
+                                }`}
+                            >
+                                <p className="m-0 opacity-70 order-last lg:order-first lg:text-white">{date}</p>
+                                <Title className="lg:text-white text-primary">{title}</Title>
+                            </div>
+                        </>
                     )}
                 </div>
             )}
             {(featuredVideo || featuredImageType !== 'full') && <Title className="lg:mt-7 mt-4">{title}</Title>}
             {contributors && (
-                <Contributors
-                    contributors={contributors}
-                    className="flex lg:hidden flex-row space-y-0 space-x-4 my-3"
-                />
+                <div className="lg:hidden my-3">
+                    {contributors.map((contributor) => (
+                        <Contributor image={contributor.image} name={contributor.name} key={contributor.name} text />
+                    ))}
+                </div>
             )}
         </div>
     )
@@ -77,34 +90,24 @@ const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, 
     return (
         <>
             {contributors && (
-                <SidebarSection className="lg:block hidden" title={`Author${contributors?.length > 1 ? 's' : ''}`}>
-                    <Contributors className="flex flex-col space-y-2" contributors={contributors} />
+                <SidebarSection>
+                    <Contributors contributors={contributors} />
                 </SidebarSection>
             )}
-            <SidebarSection title="Share">
-                <ShareLinks title={title} href={location.href} />
-            </SidebarSection>
             {pageViews?.length > 0 && (
                 <SidebarSection>
                     <PageViews pageViews={pageViews.toLocaleString()} />
                 </SidebarSection>
             )}
-            {tags && (
-                <SidebarSection title="Tag(s)">
+            {tags?.length > 0 && (
+                <SidebarSection title={`Tag${tags?.length === 1 ? '' : 's'}`}>
                     <Topics
                         topics={tags.map((tag) => ({ name: tag, url: `/blog/tags/${slugify(tag, { lower: true })}` }))}
                     />
                 </SidebarSection>
             )}
             <SidebarSection>
-                <Text>
-                    <Calendar className="h-[20px] w-[20px]" /> <time>{date}</time>
-                </Text>
-            </SidebarSection>
-            <SidebarSection>
-                <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded max-w-xs">
-                    <NewsletterForm sidebar />
-                </div>
+                <NewsletterForm sidebar />
             </SidebarSection>
         </>
     )
@@ -118,17 +121,18 @@ export default function BlogPost({ data, pageContext, location }) {
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
     const components = {
-        h1: H1,
-        h2: H2,
-        h3: H3,
-        h4: H4,
-        h5: H5,
-        h6: H6,
+        h1: (props) => Heading({ as: 'h1', ...props }),
+        h2: (props) => Heading({ as: 'h2', ...props }),
+        h3: (props) => Heading({ as: 'h3', ...props }),
+        h4: (props) => Heading({ as: 'h4', ...props }),
+        h5: (props) => Heading({ as: 'h5', ...props }),
+        h6: (props) => Heading({ as: 'h6', ...props }),
         pre: MdxCodeBlock,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         img: ZoomImage,
         a: A,
+        TutorialsSlider,
         ...shortcodes,
     }
     const { tableOfContents } = pageContext
@@ -146,6 +150,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 }
             />
             <PostLayout
+                stickySidebar
                 title={title}
                 contentWidth={790}
                 filePath={filePath}
@@ -176,6 +181,8 @@ export default function BlogPost({ data, pageContext, location }) {
                     featuredVideo={featuredVideo}
                     featuredImageType={featuredImageType}
                     contributors={contributors}
+                    date={date}
+                    tags={tags}
                 />
                 <div className="article-content">
                     <MDXProvider components={components}>

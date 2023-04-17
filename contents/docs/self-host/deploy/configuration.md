@@ -5,7 +5,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-*Only relevant for [PostHog Enterprise Self-Hosted](/docs/self-host/enterprise/overview) deployed with Kubernetes*
+import Sunset from '../\_snippets/sunset-disclaimer.mdx'
+
+<Sunset />
 
 This document outlines the most important configuration options available in the chart.
 

@@ -15,7 +15,7 @@ export const Block = ({
     cta: { url: string; label: string }
 }) => {
     return (
-        <div className="py-6 md:px-6 xl:px-12 flex flex-col">
+        <div className="py-6 md:px-6 xl:px-9 flex flex-col">
             <div className="mb-4">
                 <h3 className="text-[18px] font-bold mt-0 mb-2 text-black/70">{title}</h3>
                 <div>{children}</div>
@@ -83,7 +83,7 @@ export function Wrapper({
             <div className="z-10 lg:block text-almost-black relative top-0">
                 <motion.div
                     style={{ borderRadius }}
-                    className="lg:bg-white lg:shadow-lg lg:dark:bg-gray-accent-dark overflow-hidden lg:my-0 md:mt-6"
+                    className="bg-white lg:shadow-lg dark:bg-gray-accent-dark overflow-hidden lg:my-0 md:mt-6"
                     variants={variants}
                     initial="hidden"
                     animate="shown"

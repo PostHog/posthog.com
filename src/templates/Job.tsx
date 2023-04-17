@@ -10,7 +10,7 @@ import Apply from 'components/Job/Apply'
 import Sidebar from 'components/Job/Sidebar'
 import { sfBenchmark } from 'components/CompensationCalculator/compensation_data/sf_benchmark'
 import { benefits } from 'components/Careers/Benefits'
-import NotProductIcons from 'components/NotProductIcons'
+import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
@@ -62,7 +62,8 @@ export default function Job({
 }) {
     const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
     const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
-
+    const missionAndObjectives = parent?.customFields?.find(({ title }) => title === 'Mission & objectives')?.value
+    const showObjectives = missionAndObjectives !== 'false'
     const menu = [
         {
             name: 'Work at PostHog',
@@ -106,7 +107,7 @@ export default function Job({
                                 : {}),
                         },
                         {
-                            ...(objectives
+                            ...(showObjectives && objectives
                                 ? { value: "Your team's mission and objectives", url: 'mission-objectives', depth: 0 }
                                 : {}),
                         },
@@ -126,15 +127,13 @@ export default function Job({
                     title="careers"
                     menu={menu}
                 >
-                    <div className="mb-8 relative mt-8 lg:mt-0">
+                    <div className="relative">
                         <div>
                             <h1 className="m-0 text-5xl">{title}</h1>
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
-                                <Detail title="Department" value={departmentName} icon={NotProductIcons.department} />
-                                <Detail title="Location" value={locationName} icon={NotProductIcons.location} />
-                                {timezone && (
-                                    <Detail title="Timezone(s)" value={timezone} icon={NotProductIcons.timezone} />
-                                )}
+                                <Detail title="Department" value={departmentName} icon={<Department />} />
+                                <Detail title="Location" value={locationName} icon={<Location />} />
+                                {timezone && <Detail title="Timezone(s)" value={timezone} icon={<Timezone />} />}
                             </ul>
                             <div className="job-content mt-12 w-full flex-shrink-0 transition-all">
                                 <div
@@ -228,7 +227,7 @@ export default function Job({
                                         </div>
                                     </Accordion>
                                 )}
-                                {objectives && (
+                                {showObjectives && objectives && (
                                     <Accordion title="Your team's mission and objectives" id="mission-objectives">
                                         <div className="mb-6">
                                             <MDXProvider components={{ HideFromJobPosting: () => null }}>
@@ -261,7 +260,7 @@ export default function Job({
 
 export const query = graphql`
     query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!, $objectives: String!, $mission: String!) {
-        teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { eq: true } }) {
+        teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { in: [$teamName] } }) {
             id
             frontmatter {
                 name

@@ -60,14 +60,17 @@ export default function Link({
     ) : internal ? (
         preview ? (
             <Tooltip
-                content={
+                offset={[0, 0]}
+                placement="left-start"
+                content={(setOpen) => (
                     <TooltipContent
+                        setOpen={setOpen}
                         title={preview.title}
                         slug={url}
                         description={preview.description}
                         video={preview.video}
                     />
-                }
+                )}
             >
                 <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
                     {children}

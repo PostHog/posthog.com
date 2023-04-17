@@ -7,23 +7,22 @@ export default function HomeQuote() {
     return (
         <Quote
             className={section('text-left')}
-            name="Nicolas Grenié"
-            title="Developer Advocate, Typeform"
+            name="Cat Li"
+            title="Product & Engineering Lead, Y Combinator"
             image={
                 <StaticImage
                     width={100}
                     height={100}
-                    alt="Nicolas Grenié - Typeform"
+                    alt="Cat Li - Y Combinator"
                     outputPixelDensities={[1, 2]}
-                    src="../../images/nicolas_grenie.png"
+                    src="../../images/cat_li.png"
                 />
             }
             quote={
                 <span>
-                    "PostHog is a game-changer; it's a full-featured{' '}
-                    <span className="text-red">product analytics suite you can self-host.</span> There's no need to risk
-                    breaches by sending data to third parties or to waste time on lengthy compliance checks.{' '}
-                    <span className="text-red">You don't even need SQL!"</span>{' '}
+                    "Building is never just one-and-done. You always need to find ways to improve.
+                    <span className="text-red"> PostHog is central to how we do that at Y Combinator</span>. It helps us
+                    try ideas, measure results and make better products.”
                 </span>
             }
         />

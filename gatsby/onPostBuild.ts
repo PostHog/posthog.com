@@ -111,7 +111,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     `)
 
     const dir = path.resolve(__dirname, '../public/og-images')
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir)
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
     const fontDir = path.resolve(__dirname, '../fonts')
     if (!fs.existsSync(fontDir)) fs.mkdirSync(fontDir)
     const res = await fetch('https://d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff', {

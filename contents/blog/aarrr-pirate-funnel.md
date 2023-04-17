@@ -60,7 +60,9 @@ This version is what the funnel might look like for our product, PostHog, an all
 | Referral     | Recommends to a friend                               | 1%             |
 | Referral     | Reviews product                                      | 1%             |
 
-Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively. 
+Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively.
+
+> 📖 **Further reading:** How healthy is your product? Pirate metrics are useful for understanding the efficiency of your conversion funnel, but you may also want to track some product health metrics. They're like the vital signs of a product – i.e. metrics that should remain steady and improve slowly over time. See: [The most useful product health metrics](/blog/product-health-metrics) for more on how to choose your health metrics.
 
 ## Why should you use AARRR
 
@@ -88,7 +90,7 @@ There's no shortage of choice in the product analytics space. [Amplitude](/blog/
 
 If you don't already have product analytics, take a look at [what PostHog offers](https://posthog.com/) or [book a demo](/book-a-demo) to see the product in action. A business intelligence platform might be useful as well – we use Metabase.
 
-Once you've chosen an analytics platform, you're ready to start finding your pirate metrics and building a dashboard to track them.
+Once you've chosen an analytics platform, you're ready to start finding your pirate metrics and building a dashboard to track them. For simplicity, you can use the [AARRR dashboard template](/templates/aarrr-dashboard) we set up.
 
 Let's take a look at some pirate metrics examples, starting at the top.
 

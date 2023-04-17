@@ -16,9 +16,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
-    const ProductTemplate = path.resolve(`src/templates/Product.js`)
+    const DashboardTemplate = path.resolve(`src/templates/Template.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
+    const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -122,14 +123,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
+            templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
                 nodes {
                     id
                     fields {
                         slug
-                    }
-                    frontmatter {
-                        documentation
                     }
                 }
             }
@@ -139,6 +137,20 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     headings {
                         depth
                         value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            product: allMdx(filter: { frontmatter: { template: { eq: "product" } } }) {
+                nodes {
+                    id
+                    frontmatter {
+                        productBlog {
+                            tags
+                        }
+                        productTutorialTags
                     }
                     fields {
                         slug
@@ -348,20 +360,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
-    const tutorialsPageViewExport = await fetch(
-        'https://app.posthog.com/shared/4lYoM6fa3Sa8KgmljIIHbVG042Bd7Q.json'
-    ).then((res) => res.json())
-
     result.data.tutorials.nodes.forEach((node) => {
         const tableOfContents = formatToc(node.headings)
         const { slug } = node.fields
-        let pageViews
-        tutorialsPageViewExport.dashboard.items[0].result.some((insight) => {
-            if (insight.breakdown_value.includes(slug)) {
-                pageViews = insight.aggregated_value
-                return true
-            }
-        })
 
         createPage({
             path: replacePath(node.fields.slug),
@@ -370,7 +371,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 tableOfContents,
                 menu: sidebars.docs,
-                pageViews,
                 slug,
             },
         })
@@ -445,27 +445,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             },
         })
     })
-    result.data.product.nodes.forEach((node) => {
+    result.data.templates.nodes.forEach((node) => {
         const { slug } = node.fields
-        const { documentation } = node.frontmatter
-        let next = null
-        let previous = null
-        const sidebar = sidebars.product
-        sidebar.some((item, index) => {
-            if (item.url === slug) {
-                next = sidebar[index + 1]
-                previous = sidebar[index - 1]
-                return true
-            }
-        })
         createPage({
             path: slug,
-            component: ProductTemplate,
+            component: DashboardTemplate,
             context: {
                 id: node.id,
-                documentation: documentation || '',
-                next,
-                previous,
             },
         })
     })
@@ -504,6 +490,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             let gitHubIssues = []
             if (issues) {
                 for (const issue of issues) {
+                    if (!issue) continue
                     const { html_url, number, title, labels } = await fetch(
                         `https://api.github.com/repos/${repo}/issues/${issue.trim()}`,
                         {
@@ -535,4 +522,37 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             })
         }
     }
+
+    const productDocumentationMenuNames = {
+        '/session-replay': 'Session recording',
+        '/product-analytics': 'Product analytics',
+        '/feature-flags': 'Feature flags',
+        '/ab-testing': 'A/B testing',
+        '/product-os': 'Data',
+    }
+
+    const docsMenu = sidebars.docs
+
+    await Promise.all(
+        result.data.product.nodes.map((node) => {
+            return new Promise<void>((res) => {
+                const { slug } = node.fields
+                const documentationNav = docsMenu.find(
+                    (menuItem) => menuItem.name === productDocumentationMenuNames[slug]
+                )
+                createPage({
+                    path: slug,
+                    component: ProductTemplate,
+                    context: {
+                        id: node.id,
+                        blogTags: node?.frontmatter?.productBlog?.tags,
+                        tutorialTags: node?.frontmatter?.productTutorialTags,
+                        documentationNav,
+                        documentationURLs: documentationNav?.children?.map((child) => child.url),
+                    },
+                })
+                res()
+            })
+        })
+    )
 }

@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import { ContributorImage } from '../PostLayout/index'
+import { ContributorImage } from 'components/PostLayout/Contributors'
 
 export default function TeamMembers({ team }: { team: string }) {
     const {
@@ -10,7 +10,7 @@ export default function TeamMembers({ team }: { team: string }) {
     } = useStaticQuery(query)
     const teamMembers = nodes
         .filter((node) => node?.frontmatter?.team?.some((teamName) => teamName === team))
-        .sort((l, r) => (l.frontmatter.teamLead ? -1 : r.frontmatter.teamLead ? 1 : 0))
+        .sort((l, r) => (l.frontmatter.teamLead?.includes(team) ? -1 : r.frontmatter.teamLead?.includes(team) ? 1 : 0))
     if (!teamMembers || teamMembers.length <= 0) return null
 
     return (
@@ -36,7 +36,7 @@ export default function TeamMembers({ team }: { team: string }) {
                                             )}
                                         </span>
                                     )}
-                                    {teamLead && (
+                                    {teamLead?.includes(team) && (
                                         <span className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white">
                                             Team lead
                                         </span>

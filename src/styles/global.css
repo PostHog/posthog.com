@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+p {
+    margin-bottom: 1.45rem;
+}
+
 @layer utilities {
     .text-shadow-none {
         text-shadow: none;
@@ -345,7 +349,7 @@ div[class^='feature-'].text-center {
 
 /* When used in article on-page nav, only show on mobile viewports... */
 
-#content-menu-wrapper .jumpTo:before {
+.article-content .jumpTo:before {
     @apply xl:hidden;
 }
 
@@ -576,34 +580,36 @@ ul {
     transform: translate3d(0, 0, 0);
 }
 
-.slick-track {
-    position: relative;
-    top: 0;
-    left: 0;
+.about-nav {
+    .slick-track {
+        position: relative;
+        top: 0;
+        left: 0;
 
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
 
-    > div:first-child {
-        @apply pl-4;
+        > div:first-child {
+            @apply pl-4;
+        }
+
+        > div:last-child {
+            @apply pr-4;
+        }
     }
+    .slick-track:before,
+    .slick-track:after {
+        display: table;
 
-    > div:last-child {
-        @apply pr-4;
+        content: '';
     }
-}
-.slick-track:before,
-.slick-track:after {
-    display: table;
-
-    content: '';
-}
-.slick-track:after {
-    clear: both;
-}
-.slick-loading .slick-track {
-    visibility: hidden;
+    .slick-track:after {
+        clear: both;
+    }
+    .slick-loading .slick-track {
+        visibility: hidden;
+    }
 }
 
 .slick-slide {
@@ -1170,7 +1176,8 @@ iframe[src*='youtube-nocookie.com'] {
 }
 
 .about-nav .slick-track,
-.careers-nav .slick-track {
+.careers-nav .slick-track,
+.product-nav .slick-track {
     @apply md:!flex md:!justify-center md:!w-auto md:!transform-none;
 }
 
@@ -1185,4 +1192,13 @@ iframe[src*='youtube-nocookie.com'] {
 .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+.mobile-sidebar-container {
+    .dark\:border-gray-accent-dark {
+        @apply dark:border-gray-accent-light/20;
+    }
+    > div:last-of-type {
+        @apply border-b-0;
+    }
 }

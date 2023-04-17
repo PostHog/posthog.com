@@ -44,6 +44,40 @@ To configure the app to remove selected properties, simply select the blue gear 
 
 ![PostHog Property Filter](../images/tutorials/property-filter/property-filter-tutorial-2.png)
 
+## The full list of GeoIP properties
+
+...at time of writing are
+
+* $geoip_city_name
+* $geoip_country_name
+* $geoip_country_code
+* $geoip_continent_name
+* $geoip_continent_code
+* $geoip_postal_code
+* $geoip_latitude
+* $geoip_longitude
+* $geoip_time_zone
+* $geoip_subdivision_1_name
+* $geoip_subdivision_1_code
+* $geoip_subdivision_2_name
+* $geoip_subdivision_2_code
+* $geoip_subdivision_3_code
+* $geoip_subdivision_3_name
+
+You can [check the current list in the source code for the app.](https://github.com/PostHog/posthog-plugin-geoip)
+
+## Event and Person properties
+
+The GeoIP app sets [person properties using `$set` and `$set_once`](https://posthog.com/docs/integrate/user-properties). If you want to drop those properties prefix the geoip property name with either `$set` or `$set_once`.
+
+For example to ensure `$geoip_cityname` is _never_ stored on either events or persons you would configure:
+
+* $geoip_city_name (the event property)
+* $set.$geoip_city_name (the person proprty)
+* $set_once.$initial_geoip_city_name (the initial and never updated person property)
+
+## A working example
+
 Below is the full configuration Witty Works uses to filter out unwanted data before it is written to PostHog's event log:
 
 ```$geoip_city_name,$geoip_longitude,$geoip_latitude,$ip,$geoip_postal_code,$current_url,$performance_raw,$referrer,$initial_referrer,$pathname```

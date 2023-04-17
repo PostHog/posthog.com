@@ -1,4 +1,6 @@
+import { SearchResultType } from 'components/Search/SearchContext'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
+import React from 'react'
 
 export interface ITopic {
     name: string
@@ -14,6 +16,7 @@ export interface IContributor {
 }
 
 export interface IMenu {
+    icon?: string | React.ReactNode
     name: string
     url?: string
     children?: IMenu[]
@@ -58,12 +61,10 @@ export interface IProps {
         value: string
         depth: number
     }[]
-    children: React.ReactNode
     sidebar?: React.ReactNode
     contentWidth?: number | string
     questions?: React.ReactNode
     menu?: IMenu[]
-    article?: boolean
     title: string
     filePath?: string
     breadcrumb?: ICrumb[]
@@ -77,5 +78,11 @@ export interface IProps {
         left?: number
         right?: number
     }
-    searchFilter?: string
+    searchFilter?: SearchResultType
+    mobileMenu?: boolean
+    darkMode?: boolean
+    fullWidthContent?: boolean
+    setFullWidthContent?: (fullWidth: boolean) => void
+    contentContainerClasses?: string
+    stickySidebar?: boolean
 }

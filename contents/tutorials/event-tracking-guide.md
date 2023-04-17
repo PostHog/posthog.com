@@ -5,6 +5,7 @@ showTitle: true
 author: ['ian-vanagas', 'yakko-majuri']
 date: 2022-09-23
 featuredImage: ../images/tutorials/banners/tutorial-18.png
+featuredVideo: https://www.youtube-nocookie.com/embed/LIJ_TuyMq74
 tags: ['actions', 'events']
 ---
 
@@ -27,7 +28,7 @@ To set up autocapture:
 
 3. Paste the block into your site’s HTML in the `<head>` tags (ideally at the end). This should be an HTML page that acts as a base or template page (with other scripts your page loads) to ensure all possible events are captured.
 
-This allows autocapture to capture events like clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Once set up, those events flow automatically into PostHog for you to see and analyze. For a detailed guide on how to install the snippet, read our **[installation guide](https://posthog.com/docs/integrate/client/snippet-installation)**.
+This allows autocapture to capture events like clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Once set up, those events flow automatically into PostHog for you to see and analyze. For a detailed guide on how to install the snippet, read our **[installation guide](/docs/integrate?tab=snippet)**.
 
 Autocapture can also be set up by installing the **[posthog-js](https://github.com/PostHog/posthog-js)** library, details of which can be [found here](https://posthog.com/docs/integrate/client/js), but we’ll also explain it when we cover setting up custom events below.
 

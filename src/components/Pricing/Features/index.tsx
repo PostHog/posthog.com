@@ -1,6 +1,23 @@
 import Link from 'components/Link'
 import React from 'react'
-import { ProductIcons } from '../../ProductIcons/ProductIcons'
+import {
+    AbTesting,
+    Analytics,
+    API,
+    AppLibrary,
+    CorrelationAnalysis,
+    DataWarehouse,
+    EventAutocapture,
+    EventPipelines,
+    FeatureFlags,
+    GroupAnalytics,
+    Heatmaps,
+    Projects,
+    SessionRecording,
+    SQL,
+    TeamCollaboration,
+    UserPermissions,
+} from 'components/ProductIcons'
 
 interface IFeature {
     title: string
@@ -16,29 +33,29 @@ interface IColumn {
 }
 
 const features: IFeature[] = [
-    { title: 'Product analytics', icon: ProductIcons.analytics },
-    { title: 'Session recording', icon: ProductIcons.sessionRecording },
-    { title: 'Feature flags', icon: ProductIcons.featureFlags },
-    { title: 'Heatmaps', icon: ProductIcons.heatmaps },
-    { title: 'A/B testing', icon: ProductIcons.abTesting },
-    { title: 'Correlation analysis', icon: ProductIcons.correlationAnalysis },
-    { title: 'Group analytics', icon: ProductIcons.groupAnalytics },
-    { title: 'Team collaboration', icon: ProductIcons.teamCollaboration },
+    { title: 'Product analytics', icon: <Analytics /> },
+    { title: 'Session recording', icon: <SessionRecording /> },
+    { title: 'Feature flags', icon: <FeatureFlags /> },
+    { title: 'Heatmaps', icon: <Heatmaps /> },
+    { title: 'A/B testing', icon: <AbTesting /> },
+    { title: 'Correlation analysis', icon: <CorrelationAnalysis /> },
+    { title: 'Group analytics', icon: <GroupAnalytics /> },
+    { title: 'Team collaboration', icon: <TeamCollaboration /> },
 ]
 
 const dataStack: IFeature[] = [
-    { title: 'Event pipelines', icon: ProductIcons.eventPipelines },
-    { title: 'Data warehouse', icon: ProductIcons.dataWarehouse },
-    { title: 'SQL access', icon: ProductIcons.sql },
-    { title: 'App library', icon: ProductIcons.appLibrary },
-    { title: 'Event autocapture', icon: ProductIcons.eventAutocapture },
-    { title: 'API', icon: ProductIcons.api },
-    { title: 'Multiple projects', icon: ProductIcons.projects },
-    { title: 'User permissions', icon: ProductIcons.userPermissions },
+    { title: 'Event pipelines', icon: <EventPipelines /> },
+    { title: 'Data warehouse', icon: <DataWarehouse /> },
+    { title: 'SQL access', icon: <SQL /> },
+    { title: 'App library', icon: <AppLibrary /> },
+    { title: 'Event autocapture', icon: <EventAutocapture /> },
+    { title: 'API', icon: <API /> },
+    { title: 'Multiple projects', icon: <Projects /> },
+    { title: 'User permissions', icon: <UserPermissions /> },
 ]
 
 const planAllowances: IFeature[] = [
-    { title: '1 million events included every month!' },
+    { title: '1 million events free every month!' },
     { title: 'Unlimited tracked users' },
     { title: 'Unlimited teammates' },
     { title: 'Unlimited event tracking' },
@@ -51,7 +68,7 @@ const support: IFeature[] = [
 
 const enterpisePackage: IFeature[] = [
     { title: 'Dedicated support (email, Slack)' },
-    { title: 'SSO SAML' },
+    { title: 'SAML SSO' },
     { title: 'Advanced permissions' },
     { title: 'Team training' },
     { title: 'Dashboard configuration' },

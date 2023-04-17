@@ -9,6 +9,7 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/xWyDI4R-JR4
 category: Using PostHog
 tags:
   - Guides
@@ -76,7 +77,7 @@ One level below we have our main website dashboard. This is less focused on conv
 - The most read pages in each website section
 - A map view showing website users by country
 
-This is all straightforward stuff, but it's still useful to us as a marketing team. Recently, for example, we identified a tutorial that was getting loads of SEO traffic but was in serious need of updating.
+This is all straightforward stuff, but it's still useful to us as a marketing team. Recently, for example, we identified a tutorial that was getting loads of SEO traffic but was in serious need of updating. We've built a [template for this dashboard](/templates/website-dashboard) for you to use too.
 
 ![website dashboard](../images/blog/posthog-marketing/website-dashboard.png)
 

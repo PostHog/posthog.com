@@ -6,55 +6,36 @@ showTitle: true
 
 Content is the main pillar of our marketing strategy. As our products are quite technical in nature, we believe that frequent and regular content output helps improve acquisition and ongoing product engagement. The [blog](/blog) is where we publish interesting product content, share feature updates, and tell PostHog stories.
 
-## Content & SEO strategy
+**Other useful links:**
+- [PostHog style guide](../handbook/growth/marketing/posthog-style-guide)
+- [Exporting a blog post image](../handbook/growth/marketing/exporting-blog-post-image)
 
-Content & SEO is a long-term strategy. We are focused on generating a sustained output of high quality content that is genuinely valuable to users. Rather than scale up content output for the sake of it, our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets. 
+## Content strategy
 
-> We win on depth, not breadth, of content. We believe a small number of high quality pieces > a larger number of medium quality pieces. 
+Content is a long-term strategy and we'e focused on high-quality content that's genuinely valuable to users. Our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets.
 
-We use [SEMRush](https://www.semrush.com/) to track and optimize our ranking for the keywords that we think are target customers are using to search for solutions like PostHog online. If you need access, please ask Andy. 
+We **win on depth**, not breadth – a few high-quality pieces > a larger number of medium quality pieces. We have four content buckets:
 
-The top keywords are then used as the basis of our content strategy. We bucket our content into three buckets:
+1. **Top-of-funnel SEO content:** Our goals with this content is to improve our topical authority, generate inbound demand, and create brand awareness. This content includes list articles like the [best GA4 alternatives for apps and websites](/blog/ga4-alternatives), comparisons like [PostHog vs LogRocket](/blog/posthog-vs-logrocket), in-depth technical deep dives like [ClickHouse vs Snowflake](/blog/clickhouse-vs-snowflake), and explainers like [What is a product engineer (and why they're awesome)](/blog/what-is-a-product-engineer). It's mostly written by the marketing team and posted on the blog.
 
-- **SEO-optimized content**, written by the Marketing team. The purpose of these is to improve our topical authority and visibility in areas relevant to our target audience, and generate organic inbound demand and word of mouth awareness.
+2. **Tutorials:** The purpose of tutorials is to encourage new signups (because we show potential users how to solve their problems using PostHog), and help customers expand usage. Some tutorials are also SEO-optimized, especially when they cover general topics, such as [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics). It's mostly written by the marketing team and published in the tutorials section.
 
-- **Tutorials**, written mostly by the Marketing team. The purpose of these is to encourage new signups (because we show potential users how to solve their problems using PostHog), as well as helping existing customers. Some tutorials are also SEO-optimized, especially when they cover general product analytics topics (e.g. 'how to calculate and reduce churn.')
+3. **Brand building:** Can be written by anyone on the team, with the marketing team acting as editors. The purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit, share our culture / vision / philosophy. Examples include [10x engineers talk to users](/blog/10x-engineers-do-user-interviews), [What we've learned about developer marketing](/blog/dev-marketing-for-startups), and [Raising money is less stressful than bootstrapping](/blog/vc-or-bootstrap). This content is posted on the blog.
 
-- **Brand building and community engagement**, written by anyone on the team, with the Marketing team acting as editors. These can be about anything, and their purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit.
+4. **Behind-the-scenes:** Content about what we're doing at PostHog. This can also be brand building content, but is more directly relevant to our existing customers. Examples include [All the cool things we built at our Rome hackathon](/blog/rome-hackathon) and the [weekly changelog blog post](/blog/posthog-changelog). This content is posted on the blog.
 
-Andy and Ian are currently the main people responsible for our regular content output. James H and Joe are also frequent contributors. 
+### Good to knows
 
-You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter.
+- The marketing team is responsible for all the above – mostly Andy and Ian, but James Hawkins, Joe and Charles also contribute. The Website & Docs team owns our [reference documentation](/docs). 
 
-All planned content will have an issue created for it. We also maintain a long list of possible content ideas [in this GitHub issue](https://github.com/PostHog/posthog.com/issues/3607).
 
-Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y), raise an [issue](https://github.com/PostHog/posthog.com/issues/new/choose), or comment on the [ideas long list issue](https://github.com/PostHog/posthog.com/issues/3607) to suggest a content idea. Community members can suggest them to Andy directly or via [the User slack channel](/slack)!
+- You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter. All planned content should have an issue.
 
-## Content categories
-
-As we have a few different places where content lives on our site, follow these guidelines to figure out where your content fits best. Sometimes you will find that the content you've created fits better in Docs rather than on the Blog. 
-
-1. [Blog post](/blog) = Virtually all SEO-specific content (e.g. 7 best open source analytics solutions); brand building content (e.g. CEO diaries, news).
-2. [Docs - Tutorial](/tutorials) = Anything that basically explains 'how to do X'. This includes content created for SEO purposes that explains how do something in PostHog (e.g. how to build an AARRR funnel).
-3. [Docs - Manual](/using-posthog) = Reference guides to PostHog features (e.g. Actions, Funnels).
-4. [Docs - Everything else](/docs) = Everything else product-specific that isn't covered above (e.g. deployment documentation). 
-
-The Marketing team is responsible for 1. and 2. generally, while 3. and 4. usually sit with the Website & Docs team. We do encourage teams to step on toes, however.
+- Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y) to share ad-hoc ideas. If people like it, we'll turn it into an issue.
 
 ## Production workflow
 
-Our content production workflow is as follows:
-
 * **Create a GitHub issue**: Create [a new blog post issue in the posthog.com repo](https://github.com/PostHog/posthog.com/issues/new?assignees=&labels=Marketing&template=blog-post-idea-template.md&title=Blog+post%3A+%7Btitle%7D). Use the **New blog post idea** issue template. Fill in the required information as well as adding any additional information that you feel is beneficial to someone reviewing the issue. Add this issue to [the Marketing GitHub project](https://github.com/orgs/PostHog/projects/8).
-
-* **Shoot a video (optional):** This could be an interview, talk, panel discussion, or tutorial recording. We’ll eventually edit this down to about half or a third of its size.
-
-  * Content interviews usually take 40-60 minutes, and we generate 20-30 questions for each interviewee. These questions range from their career history to their current role and product, plus a few personal questions to add flavor to the interview. Here’s [an example](https://www.youtube.com/watch?v=gMYWond64lM) of one we did with Eltje.
-
-  * HogTalks are Zoom sessions where we invite an expert to speak on a specific topic. We package these videos for upload to our YouTube channel - no blog post required, just a transcript where appropriate. Here’s [an example](https://www.youtube.com/watch?v=JvjK-YA9Ieo). 
-  * The engineering team sometimes creates tutorials that we use to explain certain PostHog features. These can be turned into blog posts in their own right. Here’s [an example](https://www.youtube.com/watch?v=3_yH24Bh0HE).
- 
-  * **Get the transcript (optional):** We use [Rev.com](https://rev.com) to pull the transcript from the video. Rev also lets you get a quick draft in just a few minutes, though we recommend waiting for the proper version, which can take anywhere from a few hours if ‘rushed’ - which costs extra - to a day or two.
 
 * **Write the blog post:** We write up a concise blog post about the discussion or tutorial (with the help of the transcript, if available). This is where we add more context to the topic and include links to other content for further reading. The length of a blog post can vary wildly. If based on a video a 60-minute interview usually yields a ~1,500-word blog post.
 
@@ -62,11 +43,7 @@ Our content production workflow is as follows:
 
 * **Artwork:** Things that are more interesting to the eye are more likely to be clicked on. Each blog post or tutorial need an accompanying image. [Learn more in the Publishing section below.](#publishing)
 
-* **Extract the audio from the edited video (optional):** This goes into the podcast.
-
-* **Amplify the content:** After the blog post is complete, we pull snippets from it and schedule them for publishing across social media platforms and encourage the rest of the PostHog team to share within their networks. The blog post GitHub issue provides an "amplification checklist" that should be followed. Note that we generally discourage the use of hashtags on Twitter, especially when used mid-tweet. 
-
-### Publishing
+### Publishing to the blog
 
 Our [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) is our source of truth for all content. We use the 'content' label for all issues and PRs.
 
@@ -88,18 +65,50 @@ Submit a PR to [posthog/posthog.com](https://github.com/posthog/posthog.com) wit
 
 - Add the author of the post as an array (not a string), [like in this example](https://github.com/PostHog/posthog.com/blob/master/contents/blog/100-times-more-events.md). If this is your first time posting to the blog, add yourself to [authors.json](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json).
 
-- Assign the post categories (you can use more than one) using `categories` in the frontmatter section. The available categories are **Inside PostHog**, **Product updates**, **Engineering**, **Product analytics**, **Guides**, **Open source**, **Privacy**, **Startups** and **CEO diaries**. Categories should be listed as an array and can be written one of two ways:
+- Assign the post **just one** `category` and any relevant tags using `category` and `tags` in the frontmatter section, as follows:
 
   ```
-  categories:
-    - CEO diaries
-    - General
+  category: Startups
   ```
  
   ```
-  categories: ["CEO diaries", "General"]
+  tags:
+    - Guides
+    - Open source
   ```
-  
+
+The following are our pre-approved categories and tags. Please **don't create new ones without Andy's approval:**
+
+> **Categories:**
+>
+> - **Inside PostHog:** Behind-the-scenes on our culture, what we’re doing
+> - **Using PostHog:** Guides about doing stuff in PostHog
+> - **PostHog news:** Product updates, release notes and announcements
+> - **CEO diaries:** Insights from James Hawkins
+> - **Startups:** Guides and insights on startup life
+> - **HogMail:** The PostHog newsletter on the blog
+> - **Product growth:** Guides about product analytics, growth hacking et al.
+> - **Engineering:** Blogs about engineering at PostHog
+> - **General:** Category for blog posts with no obvious category
+
+>**Tags:**
+>
+> - **Guides:** Any and all guides from all categories (actionable)
+> - **Explainers:** Blogs explaining a concept or idea (non-actionable)
+> - **Product analytics:** Blogs about about product analytics
+> - **Product metrics:** Blogs about metrics and what to track
+> - **Product engineers:** Blog posts about product engineers
+> - **Session recording:** Blogs about using session recording
+> - **Feature flags:** Blogs about using feature flags
+> - **Marketing**: Blogs about marketing
+> - **Privacy:** Blogs about GDPR and other fun stuff
+> - **Open source:** Blogs about open source products and projects
+> - **Release notes:** PostHog release notes
+> - **Product updates:** General product updates
+> - **Comparisons:** Comparisons with PostHog and similar
+> - **ClickHouse**: Blogs about ClickHouse
+> - **Y Combinator:** Blogs about YC
+
 - Add a meta description using `description` in the frontmatter section (optional)
 
 - Set the date of the blog post to the intended publishing date in the format `YYYY-MM-DD`. Posts dated [in the future](https://github.com/PostHog/posthog.com/pull/2964) won't display on the site until their specified date, though a build is required day-of in order to publish the post. (The Website & Docs team or other Vercel admins can kick off a manual build.)
@@ -118,13 +127,32 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/series-b/series-b-baby.png
 featuredImageType: full
-author: ["joe-martin"]
-categories: ["Product analytics", "Guides"]
+author:
+  - joe-martin
+  - andy-vandervell
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
  ```
 
-### Distribution
+## Distribution
 
-The [blog post GitHub issue template](https://github.com/PostHog/posthog.com/blob/master/.github/ISSUE_TEMPLATE/blog-post-idea-template.md) outlines how the content should be amplified and distributed. This can and should be edited for each post using the team's experience and ideas to identify what's best on a post-by-post basis.
+We repurpose and distribute content in a mixture of channels - those we want to be good at, and those we put minimal effort into out of habit and good practice.
 
-This section excludes [Paid Ads](/handbook/growth/marketing/paid), which are covered elsewhere.
+### High effort
+
+- SEO - _Andy_
+- Newsletter - _Andy_
+- PostHog LinkedIn - _Andy (but other people post here as well)_
+- PostHog Twitter - _Charles (but other people post here as well)_
+- James' personal Twitter - _James H_
+- YouTube - _Ian_
+
+### Low effort/hygiene
+
+- User Slack - _whoever wrote the content_
+- Hacker News - _only for Show HN announcements, otherwise do not post here and hope others do it outside PostHog_
+- LinkedIn paid ads - _Charles (outsourced)_
+- Twitter paid ads - _Andy (outsourced)_

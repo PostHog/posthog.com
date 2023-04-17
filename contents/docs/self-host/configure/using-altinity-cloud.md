@@ -4,18 +4,20 @@ sidebar: Docs
 showTitle: true
 ---
 
-*Only relevant for [PostHog Enterprise Self-Hosted](/docs/self-host/enterprise/overview) deployed with Kubernetes*
+import Sunset from "../\_snippets/sunset-disclaimer.mdx"
+
+<Sunset />
 
 This document outlines how to deploy PostHog using Altinity Cloud ClickHouse clusters.
 
 ## Prerequisites
 
-- Altinity.Cloud ClickHouse cluster:
-    - Minimum ClickHouse version: 21.8.13
-    - Single shard and no data replication
-    - No dashes (`-`) in cluster name
-- PostHog helm chart version >= 16.1.1
-- PostHog version >= 1.33.0
+-   Altinity.Cloud ClickHouse cluster:
+    -   Minimum ClickHouse version: 21.8.13
+    -   Single shard and no data replication
+    -   No dashes (`-`) in cluster name
+-   PostHog helm chart version >= 16.1.1
+-   PostHog version >= 1.33.0
 
 ## Deployment instructions
 
@@ -25,27 +27,27 @@ PostHog uses Kafka to send data from the app to ClickHouse. For that reason, Kaf
 
 ```yaml
 env:
-  - name: CLICKHOUSE_DISABLE_EXTERNAL_SCHEMAS
-    value: "1"
+    - name: CLICKHOUSE_DISABLE_EXTERNAL_SCHEMAS
+      value: '1'
 
 kafka:
-  enabled: false
+    enabled: false
 
 externalKafka:
-  brokers:
-    - "broker-1.posthog.kafka.us-east-1.amazonaws.com:9094"
-    - "broker-2.posthog.kafka.us-east-1.amazonaws.com:9094"
-    - "broker-3.posthog.kafka.us-east-1.amazonaws.com:9094"
+    brokers:
+        - 'broker-1.posthog.kafka.us-east-1.amazonaws.com:9094'
+        - 'broker-2.posthog.kafka.us-east-1.amazonaws.com:9094'
+        - 'broker-3.posthog.kafka.us-east-1.amazonaws.com:9094'
 
 clickhouse:
-  enabled: false
+    enabled: false
 
 externalClickhouse:
-  host: "somecluster.demo.altinity.cloud"
-  user: "admin"
-  password: "password"
-  cluster: "clustername"
-  secure: true
+    host: 'somecluster.demo.altinity.cloud'
+    user: 'admin'
+    password: 'password'
+    cluster: 'clustername'
+    secure: true
 ```
 
 Read more about how to configure external Kafka in the chart [in our deployment documentation](https://posthog.com/docs/self-host/deploy/configuration#kafka).
@@ -58,47 +60,46 @@ To deploy using a version of Kafka managed by the PostHog Helm chart, follow the
 
 ```yaml
 kafka:
-  enabled: true
-  externalAccess:
     enabled: true
-    service:
-      type: LoadBalancer
-      ports:
-        external: 9094
-    autoDiscovery:
-      enabled: true
-  serviceAccount:
-    create: true
-  rbac:
-    create: true
-
+    externalAccess:
+        enabled: true
+        service:
+            type: LoadBalancer
+            ports:
+                external: 9094
+        autoDiscovery:
+            enabled: true
+    serviceAccount:
+        create: true
+    rbac:
+        create: true
 
 clickhouse:
-  enabled: false
+    enabled: false
 
 redis:
-  enabled: false
+    enabled: false
 
 postgresql:
-  enabled: false
+    enabled: false
 
 pgbouncer:
-  enabled: false
+    enabled: false
 
 plugins:
-  enabled: false
+    enabled: false
 
 worker:
-  enabled: false
+    enabled: false
 
 web:
-  enabled: false
+    enabled: false
 
 events:
-  enabled: false
+    enabled: false
 
 migrate:
-  enabled: false
+    enabled: false
 ```
 
 2. Get the external Kafka IP via `kubectl get svc -n posthog | grep kafka-0-external`
@@ -107,33 +108,33 @@ migrate:
 
 ```yaml
 env:
-  - name: KAFKA_URL_FOR_CLICKHOUSE
-    value: "kafka://KAFKA_IP:9094"
-  - name: CLICKHOUSE_DISABLE_EXTERNAL_SCHEMAS
-    value: "1"
+    - name: KAFKA_URL_FOR_CLICKHOUSE
+      value: 'kafka://KAFKA_IP:9094'
+    - name: CLICKHOUSE_DISABLE_EXTERNAL_SCHEMAS
+      value: '1'
 
 clickhouse:
-  enabled: false
+    enabled: false
 
 externalClickhouse:
-  host: "somecluster.demo.altinity.cloud"
-  user: "admin"
-  password: "password"
-  cluster: "clustername"
-  secure: true
+    host: 'somecluster.demo.altinity.cloud'
+    user: 'admin'
+    password: 'password'
+    cluster: 'clustername'
+    secure: true
 
 kafka:
-  enabled: true
-  externalAccess:
     enabled: true
-    service:
-      type: LoadBalancer
-      ports:
-        external: 9094
-    autoDiscovery:
-      enabled: true
-  serviceAccount:
-    create: true
-  rbac:
-    create: true
+    externalAccess:
+        enabled: true
+        service:
+            type: LoadBalancer
+            ports:
+                external: 9094
+        autoDiscovery:
+            enabled: true
+    serviceAccount:
+        create: true
+    rbac:
+        create: true
 ```

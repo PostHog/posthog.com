@@ -8,7 +8,7 @@ export default function CallToAction({
 }: {
     children: React.ReactNode
     to: string
-    className: string
+    className?: string
 }) {
     return (
         <CTA to={to} type="outline" size="sm" className={` !transition-all ${className}`}>

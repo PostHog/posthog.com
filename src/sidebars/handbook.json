@@ -135,8 +135,8 @@
                 "url": "/handbook/small-teams/exec"
             },
             {
-                "name": "Experimentation",
-                "url": "/handbook/small-teams/experimentation"
+                "name": "Feature Success",
+                "url": "/handbook/small-teams/feature-success"
             },
             {
                 "name": "Growth",
@@ -229,6 +229,10 @@
                         "url": "/handbook/people/ramp-up/product-manager"
                     }
                 ]
+            },
+            {
+                "name": "Finance",
+                "url": "/handbook/people/finance"
             },
             {
                 "name": "Merch store",
@@ -335,6 +339,10 @@
                         "url": "/handbook/engineering/incidents"
                     },
                     {
+                        "name": "On-call rotation",
+                        "url": "/handbook/engineering/oncall-rotation"
+                    },
+                    {
                         "name": "Bug prioritization",
                         "url": "/handbook/engineering/bug-prioritization"
                     }
@@ -367,6 +375,10 @@
                     {
                         "name": "Working with ClickHouse materialized columns",
                         "url": "/handbook/engineering/databases/materialized-columns"
+                    },
+                    {
+                        "name": "Writing HogQL queries in Python",
+                        "url": "/handbook/engineering/databases/hogql-python"
                     }
                 ]
             },
@@ -505,12 +517,12 @@
                 "url": "/handbook/product/user-feedback"
             },
             {
-                "name": "Paid features",
-                "url": "/handbook/product/paid-features"
-            },
-            {
                 "name": "Releasing as beta",
                 "url": "/handbook/product/releasing-as-beta"
+            },
+            {
+                "name": "In-app prompts",
+                "url": "/handbook/product/in-app-prompts"
             }
         ]
     },
@@ -573,6 +585,10 @@
                         "url": "/handbook/growth/marketing/newsletter"
                     },
                     {
+                        "name": "Startups",
+                        "url": "/handbook/growth/marketing/startups"
+                    },
+                    {
                         "name": "Press",
                         "url": "/handbook/growth/marketing/press"
                     },
@@ -589,15 +605,11 @@
         "url": "",
         "children": [
             {
-                "name": "Growth strategy",
-                "url": "/handbook/growth/strategy"
-            },
-            {
                 "name": "Customer support",
                 "url": "/handbook/growth/customer-support"
             },
             {
-                "name": "Inbound sales model",
+                "name": "Sales overview",
                 "url": "/handbook/growth/sales/overview"
             },
             {
@@ -609,12 +621,20 @@
                         "url": "/handbook/growth/sales/crm"
                     },
                     {
+                        "name": "New customer onboarding",
+                        "url": "/handbook/growth/sales/customer-onboarding"
+                    },
+                    {
                         "name": "YC onboarding",
                         "url": "/handbook/growth/sales/yc-onboarding"
                     },
                     {
                         "name": "Demos",
                         "url": "/handbook/growth/sales/demos"
+                    },
+                    {
+                        "name": "Contracts",
+                        "url": "/handbook/growth/sales/contracts"
                     },
                     {
                         "name": "Billing",
@@ -629,12 +649,16 @@
         ]
     },
     {
-        "name": "Growth engineering",
+        "name": "Growth",
         "url": "",
         "children": [
             {
                 "name": "Growth reviews",
                 "url": "/handbook/growth/growth-engineering/growth-sessions"
+            },
+            {
+                "name": "Pricing principles",
+                "url": "/handbook/engineering/feature-pricing"
             }
         ]
     }

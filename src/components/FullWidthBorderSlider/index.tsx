@@ -1,10 +1,8 @@
-import { Calendar } from 'components/Icons/Icons'
-import Link from 'components/Link'
+import { Post } from 'components/Blog'
 import SliderNav from 'components/SliderNav'
-import { graphql, useStaticQuery } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image'
-import React, { useRef, useState } from 'react'
+import { IGatsbyImageData, ImageDataLike } from 'gatsby-plugin-image'
+import React, { useRef } from 'react'
 import Slider from 'react-slick'
 
 interface ISliderItem {
@@ -13,59 +11,22 @@ interface ISliderItem {
     date: string
     url: string
     authors?: {
-        image: IGatsbyImageData
+        image: ImageDataLike
         name: string
         id: string
     }[]
 }
 
-const SlideTemplate = ({ date, url, authors, title, ...other }: ISliderItem) => {
-    const image = getImage(other.image)
-    return (
-        <>
-            <div className="flex justify-between items-center mb-4">
-                {authors && (
-                    <ul className="flex space-x-2 list-none p-0 !m-0">
-                        {authors.map(({ name, id, ...other }) => {
-                            const image = getImage(other.image)
-                            return (
-                                <li key={id} className="flex space-x-2 items-center">
-                                    {image && (
-                                        <div className="w-[36px] h-[36px] relative rounded-full overflow-hidden">
-                                            <GatsbyImage image={image} alt={name} />
-                                        </div>
-                                    )}
-                                    <span className="author text-[15px] font-semibold opacity-50">{name}</span>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                )}
-                <span className="flex space-x-2 items-center ml-auto">
-                    <Calendar className="text-gray" />
-                    <time className="font-semibold opacity-50 text-[13px]">{date}</time>
-                </span>
-            </div>
-
-            {image && (
-                <Link to={url} className="no-hover">
-                    <div className="block bg-gray-accent-light hover:bg-gray-accent/50 rounded relative active:top-[0.5px] active:scale-[.99]">
-                        {image ? (
-                            <GatsbyImage image={image} alt={title} />
-                        ) : (
-                            <img width={514} height={289} src="/banner.png" />
-                        )}
-                    </div>
-                </Link>
-            )}
-        </>
-    )
+const SlideTemplate = ({ date, url, authors, title, image }: ISliderItem) => {
+    return <Post authors={authors} title={title} date={date} slug={url} featuredImage={image} />
 }
 
 const Slide = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="p-3 sm:p-6 border-t border-b border-r border-dashed max-w-[80vw] sm:max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light dark:border-gray-accent-dark text-black dark:text-white">
-            {children}
+        <div className="py-4 px-4 bg-gray-accent-light dark:bg-gray-accent-dark max-w-[80vw] sm:max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light dark:border-gray-accent-dark text-black dark:text-white">
+            <div className="relative p-1 hover:top-[-.5px] hover:scale-[1.01] active:top-[0px] active:scale-[1] after:border-0 hover:after:border-1 after:border-black/25 after:rounded-md after:-inset-1.5 after:absolute">
+                {children}
+            </div>
         </div>
     )
 }
@@ -103,7 +64,7 @@ export default function FullWidthBorderSlider({
     return (
         slides.length > 1 && (
             <div>
-                <div className="flex justify-between items-end mb-6">
+                <div className="flex justify-between items-end mb-3">
                     {title && <h4 className="m-0">{title}</h4>}
                     {slides.length > 1 && slides.length > slidesToShow && (
                         <SliderNav

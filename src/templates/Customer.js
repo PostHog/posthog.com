@@ -12,7 +12,9 @@ import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import Link from 'components/Link'
 import FooterCTA from 'components/FooterCTA'
-import PostLayout, { SidebarSection, Topics } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import Topics from 'components/PostLayout/Topics'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 

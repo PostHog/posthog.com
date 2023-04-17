@@ -28,7 +28,6 @@ module.exports = {
             resolve: `gatsby-source-squeak`,
             options: {
                 apiHost: process.env.GATSBY_SQUEAK_API_HOST,
-                organizationId: process.env.GATSBY_SQUEAK_ORG_ID,
             },
         },
         {
@@ -53,7 +52,6 @@ module.exports = {
         },
         'gatsby-plugin-react-helmet',
         `gatsby-plugin-sass`,
-        `gatsby-plugin-typescript`,
         `gatsby-plugin-smoothscroll`,
         {
             resolve: `gatsby-source-filesystem`,

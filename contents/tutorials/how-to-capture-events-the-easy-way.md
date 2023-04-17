@@ -5,6 +5,7 @@ showTitle: true
 author: ['joe-martin']
 date: 2022-10-04
 featuredImage: ../images/tutorials/banners/create-new-events-the-easy-way.png
+featuredVideo: https://www.youtube-nocookie.com/embed/C_zNykBHlTI
 tags: ["actions", "toolbar"]
 ---
 
@@ -20,7 +21,7 @@ There are two main ways to create new events, including creating them from any o
 To follow this tutorial you’ll need…
 
 - To have successful deployed PostHog. 
-- Have added [the PostHog snippet to your website](/docs/integrate/client/snippet-installation) or product. 
+- Have added [the PostHog snippet to your website](/docs/integrate?tab=snippet) or product. 
 
 Note that the toolbar is currently only available using [the JavaScript library](/docs/integrate/client/js). 
 

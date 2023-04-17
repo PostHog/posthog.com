@@ -78,7 +78,7 @@ You will also see the below message – as with next week’s release you will n
 
 ![workers added to PostHog message](../images/04/Posthog-5.png)
 
-###[ Precalculate Events that match Actions](https://github.com/PostHog/posthog/pull/420)
+###[ Precalculate Events that match Actions](https://github.com/PostHog/posthog/pull/420)
 
 This is one of the most impactful updates to PostHog so far –  whenever we did a query involving actions in the frontend, the database had to do a lot of heavy lifting to calculate which events match the action. 
 
@@ -100,7 +100,7 @@ For a full breakdown of the changes and updates, please see our [changelog](http
 
 ### [Filtering by date and events in funnels](https://github.com/PostHog/posthog/issues/444)
 
-This was one of 4 issues raised by [jeremynevans](https://github.com/jeremynevans) at Savvy – it was raised in the [PostHog slack channel](https://join.slack.com/t/posthogusers/shared_invite/zt-1ghutt7jr-jRj0_iYDRS7R~uKeZLIbdQ) and resulted in an excellent conversation with Tim resulting in more feature requests which is amazing.
+This was one of 4 issues raised by [jeremynevans](https://github.com/jeremynevans) at Savvy – it was raised in the [PostHog slack channel](https://join.slack.com/t/posthogusers/shared_invite/zt-1ou84aphe-R3H5OE9Uu6i8Fq4EHCWzbg) and resulted in an excellent conversation with Tim resulting in more feature requests which is amazing.
 
 He is also using PostHog for analytics on [Crowd Cure](https://crowd-cure.com/) to help build the largest clinical trial dataset to yet to help with the Coronavirus crisis – check it out on [Producthunt](https://www.producthunt.com/posts/crowdcure-covid-19).
 

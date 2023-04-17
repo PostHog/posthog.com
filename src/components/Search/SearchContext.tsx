@@ -21,7 +21,7 @@ export type SearchLocation =
     | 'questions'
     | 'mobile-header'
     | '404'
-export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
+export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'apps'
 
 const searchClient = algoliasearch(
     process.env.GATSBY_ALGOLIA_APP_ID as string,
@@ -45,6 +45,8 @@ export const SearchProvider: React.FC = ({ children }) => {
 
     React.useEffect(() => {
         const handler = (event: KeyboardEvent) => {
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.shadowRoot)
+                return
             if (event.key === '/' && !isVisible) {
                 event.preventDefault()
                 open('slash')

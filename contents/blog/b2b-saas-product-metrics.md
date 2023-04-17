@@ -36,7 +36,7 @@ Product metrics capture how people use your product **and** how that impacts you
 
 For example, if the number of new users who successfully use your product (aka new user activation) declines, you can expect this to lead to a decline in the number of paying users.
 
-Product metrics are essential for understanding the overall health of your product and areas of weakness, and they also help guide your product decisions.
+Product metrics are essential for understanding the overall [health of your product](/blog/product-health-metrics) and areas of weakness, and they also help guide your product decisions.
 
 ## What makes a good B2B product metric?
 
@@ -178,7 +178,7 @@ In PostHog, users can:
 
 - Create and analyze insights that track trends over time such as how well users convert, what paths they take, and how well they retain.
 
-- Use dashboards to combine insights into cohesive reports on any element of the product experience.
+- Use dashboards to combine insights into cohesive reports on any element of the product experience. We've built a [B2B SaaS product metrics dashboard template](/templates/b2b-dashboard) you can use.
 
 - View session recordings of real customers to understand where they get stuck or how they use the product.
 

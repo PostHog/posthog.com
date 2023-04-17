@@ -6,7 +6,11 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout, { Contributors, PageViews, ShareLinks, SidebarSection, Topics } from 'components/PostLayout'
+import PostLayout from 'components/PostLayout'
+import Contributors from 'components/PostLayout/Contributors'
+import ShareLinks from 'components/PostLayout/ShareLinks'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import Topics from 'components/PostLayout/Topics'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -20,6 +24,7 @@ import slugify from 'slugify'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
+import TutorialsSlider from 'components/TutorialsSlider'
 
 const ViewButton = ({ title, view, setView }) => {
     return (
@@ -38,13 +43,12 @@ const ViewButton = ({ title, view, setView }) => {
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
-const TutorialSidebar = ({ contributors, location, title, pageViews, categories }) => {
+const TutorialSidebar = ({ contributors, location, title, categories }) => {
     return (
         <>
             {contributors?.length > 0 && (
-                <SidebarSection title={`Contributor${contributors?.length > 1 ? 's' : ''}`}>
+                <SidebarSection>
                     <Contributors
-                        className="flex flex-col space-y-2"
                         contributors={contributors.map((contributor) => ({
                             ...contributor,
                         }))}
@@ -54,11 +58,6 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
             <SidebarSection title="Share">
                 <ShareLinks title={title} href={location.href} />
             </SidebarSection>
-            {pageViews && (
-                <SidebarSection>
-                    <PageViews pageViews={pageViews.toLocaleString()} />
-                </SidebarSection>
-            )}
             {categories?.length > 0 && (
                 <SidebarSection title="Filed under...">
                     <Topics
@@ -73,10 +72,10 @@ const TutorialSidebar = ({ contributors, location, title, pageViews, categories 
     )
 }
 
-export default function Tutorial({ data, pageContext: { pageViews, tableOfContents, menu }, location }) {
+export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data
     const { body, excerpt, fields } = pageData
-    const { title, featuredImage, description, contributors, categories, featuredVideo } = pageData?.frontmatter
+    const { title, featuredImage, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
@@ -90,17 +89,11 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
         a: A,
+        TutorialsSlider,
         ...shortcodes,
     }
-    const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
-
-    useEffect(() => {
-        if (hash) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
 
     return (
         <Layout>
@@ -123,7 +116,6 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                         contributors={contributors}
                         location={location}
                         title={title}
-                        pageViews={pageViews}
                         categories={categories}
                     />
                 }
@@ -134,6 +126,7 @@ export default function Tutorial({ data, pageContext: { pageViews, tableOfConten
                     title={title}
                     featuredImageType="full"
                     titlePosition="top"
+                    date={date}
                 />
 
                 {featuredVideo && (
@@ -167,6 +160,7 @@ export const query = graphql`
             }
             frontmatter {
                 title
+                date(formatString: "MMM DD, YYYY")
                 description
                 categories: tags
                 contributors: authorData {

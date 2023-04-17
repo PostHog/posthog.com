@@ -37,7 +37,7 @@ We've built PostHog so companies don't have to run multiple services to get the 
 
 [PostHog Cloud](/pricing) delivers a complete set a tools to help you build better products, while our integration with numerous data platforms means many of our customers end up ditching products like Segment for organizing and syncing customer data. 
 
-And if you [self-host PostHog](/signup/self-host), you get a built-in data warehouse based on ClickHouse into the bargain. 
+And if you [self-host PostHog](/docs/self-host), you get a built-in data warehouse based on ClickHouse into the bargain. 
 
 ## 2. Build an AARRR pirate metrics dashboard
 

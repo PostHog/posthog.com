@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { CallToAction } from '../CallToAction'
 import { mergeClassList } from '../../lib/utils'
 import envelope from '../Blog/images/envelope.svg'
+import Logo from 'components/Logo'
+import SubstackForm from 'components/SubstackForm'
 
 export const NewsletterForm = ({
     sidebar = false,
@@ -20,53 +21,22 @@ export const NewsletterForm = ({
     const classList = mergeClassList('w-full p-4 relative z-10 text-center', className)
 
     return sidebar ? (
-        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md shadow-xl">
-            <div className={classList}>
-                <div className="flex flex-col">
-                    <img className="w-[75px] mx-auto" src={envelope} />
-                    <p className="leading-tight font-bold m-0 mt-2">
-                        The best of PostHog. <br />
-                        <span className="text-sm">
-                            Delivered <span className="text-red">twice</span> a month.
-                        </span>
-                    </p>
+        <div>
+            <div className="flex items-end space-x-2">
+                <div>
+                    <img className="w-full max-w-[47px]" src={envelope} />
                 </div>
-                <div className="mt-4 md:mt-2">
-                    <form
-                        action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a"
-                        method="post"
-                        id="mc-embedded-subscribe-form"
-                        name="mc-embedded-subscribe-form"
-                        className="validate w-full mb-0 space-y-2"
-                        target="_blank"
-                        noValidate
-                    >
-                        <input
-                            type="email"
-                            name="EMAIL"
-                            className="block w-full px-2 py-2 flex-1 bg-white border-gray-accent-light rounded-sm font-semibold text-sm outline-none max-w-sm"
-                            id="mce-EMAIL"
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="email@address.com"
-                            value={email}
-                            required
-                        />
-                        {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups*/}
-                        <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
-                            <input
-                                type="text"
-                                name="b_292207b434c26e77b45153b96_97194afa0a"
-                                tabIndex={-1}
-                                defaultValue
-                            />
-                        </div>
-                        <input
-                            type="submit"
-                            className="bg-red text-white shrink-0 grow-0 basis-auto font-bold lg:mt-0 text-sm border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm relative active:top-[1px] active:scale-[.99]"
-                            value="Sign me up!"
-                        />
-                    </form>
-                </div>
+                <p className="leading-tight text-sm font-bold m-0 flex-shrink-0">
+                    <span className="flex space-x-2 items-center">
+                        <span>The best of</span> <Logo className="w-[80px]" />
+                    </span>{' '}
+                    <span className="text-xs -mt-1 block">
+                        Delivered <span className="text-red">twice</span> a month.
+                    </span>
+                </p>
+            </div>
+            <div className="mt-4 md:mt-2">
+                <SubstackForm />
             </div>
         </div>
     ) : compact ? (
@@ -95,75 +65,14 @@ export const NewsletterForm = ({
                         </span>
                     </div>
                     <div className="md:ml-16 mt-2 md:mt-0">
-                        <form
-                            action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a"
-                            method="post"
-                            id="mc-embedded-subscribe-form"
-                            name="mc-embedded-subscribe-form"
-                            className="validate w-full flex flex-col md:flex-row items-center mb-0 space-y-2 md:space-y-0 md:space-x-2"
-                            target="_blank"
-                            noValidate
-                        >
-                            <input
-                                type="email"
-                                name="EMAIL"
-                                className="block w-full px-4 py-2 flex-1 bg-white dark:bg-gray-accent-dark rounded-md border-0 text-lg font-bold md:text-[18px] md:text-left outline-none text-center max-w-sm"
-                                id="mce-EMAIL"
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="email@address.com"
-                                value={email}
-                                required
-                            />
-                            {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups*/}
-                            <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
-                                <input
-                                    type="text"
-                                    name="b_292207b434c26e77b45153b96_97194afa0a"
-                                    tabIndex={-1}
-                                    defaultValue
-                                />
-                            </div>
-                            <input
-                                type="submit"
-                                className="bg-red dark:bg-white text-white dark:text-black text-lg shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm md:w-auto"
-                                value="Sign me up!"
-                            />
-                        </form>
+                        <SubstackForm />
                     </div>
                 </div>
             </div>
         </div>
     ) : subcompact ? (
         <div className={classList}>
-            <form
-                action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a"
-                method="post"
-                id="mc-embedded-subscribe-form"
-                name="mc-embedded-subscribe-form"
-                className="validate w-full flex flex-col md:flex-row items-center mb-0 space-y-2 md:space-y-0 md:space-x-2"
-                target="_blank"
-                noValidate
-            >
-                <input
-                    type="email"
-                    name="EMAIL"
-                    className="block w-full px-4 py-2 flex-1 bg-tan dark:bg-gray-accent-dark rounded-md border-0 text-base font-semibold md:text-left outline-none text-center max-w-sm"
-                    id="mce-EMAIL"
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="email@address.com"
-                    value={email}
-                    required
-                />
-                {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups*/}
-                <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
-                    <input type="text" name="b_292207b434c26e77b45153b96_97194afa0a" tabIndex={-1} defaultValue />
-                </div>
-                <input
-                    type="submit"
-                    className="bg-red dark:bg-white text-white dark:text-black shrink-0 grow-0 basis-auto font-bold lg:mt-0 border-none cursor-pointer px-5 py-3 md:py-2 w-full rounded-sm md:w-auto"
-                    value="Sign me up!"
-                />
-            </form>
+            <SubstackForm />
         </div>
     ) : (
         <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md mb-6 shadow-xl">
@@ -176,40 +85,7 @@ export const NewsletterForm = ({
                     </p>
                 </div>
                 <div className="flex-grow">
-                    <form
-                        action="https://posthog.us19.list-manage.com/subscribe/post?u=292207b434c26e77b45153b96&id=97194afa0a"
-                        method="post"
-                        id="mc-embedded-subscribe-form"
-                        name="mc-embedded-subscribe-form"
-                        className="validate w-full mb-0 flex md:flex-row flex-col items-center"
-                        target="_blank"
-                        noValidate
-                    >
-                        <input
-                            type="email"
-                            name="EMAIL"
-                            className="block w-full px-2 py-2 md:mr-2 md:mb-0 mb-2 flex-grow bg-white border-gray-accent-light rounded-sm font-semibold text-base outline-none max-w-sm"
-                            id="mce-EMAIL"
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="email@address.com"
-                            value={email}
-                            required
-                        />
-                        {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups*/}
-                        <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
-                            <input
-                                type="text"
-                                name="b_292207b434c26e77b45153b96_97194afa0a"
-                                tabIndex={-1}
-                                defaultValue
-                            />
-                        </div>
-                        <input
-                            type="submit"
-                            className="bg-red text-white h-full grow-0 basis-auto font-bold m-0 text-base border-none cursor-pointer px-5 py-3 md:py-2 w-full max-w-[250px] rounded-sm relative active:top-[1px] active:scale-[.99] flex-shrink"
-                            value="Sign me up!"
-                        />
-                    </form>
+                    <SubstackForm />
                 </div>
             </div>
         </div>

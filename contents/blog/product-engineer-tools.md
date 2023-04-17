@@ -11,6 +11,7 @@ featuredImageType: full
 category: Engineering
 tags:
   - Guides
+  - Product engineers
 ---
 
 Like every role, [product engineers](/blog/what-is-a-product-engineer/) have a set of essential tools for their work. Their need to gather insights, ideate, and deploy solutions independently makes creating an efficient stack all the more important. Here we explore the popular engineering, product, and automation tools that will help you gather insights and deploy product improvements fast.
@@ -37,7 +38,7 @@ For example, you set an OKR to increase feature usage by paid users. To measure 
 ![Session recordings](../images/blog/product-engineer-tools/session-recordings.png)
 <Caption>PostHog's <a href="/product/session-recording">session recordings</a> visualize what users are actually doing in your product</Caption>
 
-On top of PostHog, customer data platform or ETL tools like [Segment](/docs/integrate/third-party/segment), [Hightouch](/blog/hightouch-posthog-reverse-etl-integration), [Airbyte](/docs/apps/airbyte-export), Integrate.io, and Fivetran are useful for moving and combining data between sources and storage locations. This enables you to have the data you need for analysis, where you need it.
+On top of PostHog, customer data platform or ETL tools like [Segment](/docs/libraries/segment), [Hightouch](/blog/hightouch-posthog-reverse-etl-integration), [Airbyte](/docs/apps/airbyte-export), Integrate.io, and Fivetran are useful for moving and combining data between sources and storage locations. This enables you to have the data you need for analysis, where you need it.
 
 ## Tools for organizing knowledge and priorities
 

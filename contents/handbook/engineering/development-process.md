@@ -13,6 +13,10 @@ However, if we have no checks in place, we will release quickly but everything w
 
 * **Major Milestones:** Product + eng align on major milestones (e.g. Collaboration) which we have strong conviction will drive our success metrics 
 * **Assign Owner:** A single engineer will be accountable for a milestone partnering closely other functions to ensure it’s successful
+* **Decide if it could cause issues for another team** Most things won't. However, if it will - don't "align teams" or write a huge RFC (unless that'd help you). Do a quick 1/1 with the most relevant person on another team. Consider:
+  * who / the scale of the customer you're building for
+  * if you can get from your hacky MVP to production ready easily (it's ok to start with basic, but be mindful of making it harder to fully roll something out in future)
+  * if you know what you're doing or need someone from another team's expertise to get the right architecture or overall approach. We've lots of experienced people, get their help if you would benefit from it.
 * **Break into goals:** The owner turns this ambiguous milestone into a roadmap of ambitious meaningful sprint sized goals, thinking 2 - 3 sprints ahead to give other functions time
 * **Execute on goals:** Our sprint planning session is where the high level goals for the next sprint get decided. Each team takes these and breaks them down and adds their own smaller items like bugfixes.
   The sprint planning works like this:
@@ -30,6 +34,7 @@ However, if we have no checks in place, we will release quickly but everything w
 
 Everything can’t directly contribute to a company level goal, it’s important that the small stuff also gets done for us to succeed.
 
+* **Yes, and**: Be encouraging and helpful with others who are innovating. All of our biggest wins have looked like bad ideas early on.
 * **Dogfooding**: Use the product yourself, when you see something that annoys you, fix it
 * **Sidequests:** Smaller projects you are passionate about but may not shoot up our metrics (e.g. turbo mode)
 * **Support hero:** Support hero dedicates all of their time to customers, solving the wild and wonderful issues our customers find each week
