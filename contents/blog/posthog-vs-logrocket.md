@@ -719,7 +719,7 @@ Regulatory compliance can be make-or-break for many teams, especially those oper
         <tr>
             <td><strong>SOC 2 certified</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
         </tr>
         <tr>
             <td><strong>SAML/SSO available</strong></td>
@@ -734,8 +734,6 @@ Regulatory compliance can be make-or-break for many teams, especially those oper
     </tbody>
 </table>
 </div>
-
-> PostHog is not currently SOC 2 certified, but is currently being audited in order to complete this certification.
 
 ## Frequently asked questions
 

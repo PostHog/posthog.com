@@ -69,7 +69,6 @@ const Style = createGlobalStyle`
     }
 
     .squeak-authentication-form-container {
-        margin-left: 50px;
         max-width: 600px;
 
         .squeak-authentication-form-message {
@@ -313,13 +312,6 @@ const Style = createGlobalStyle`
                 }
             }
         }
-
-        // replies to questions
-        .squeak-replies {
-            .squeak-post-content {
-                padding-left: calc(25px + 10px);
-            }
-        }
     }
 
     .squeak-question-container {
@@ -331,6 +323,19 @@ const Style = createGlobalStyle`
     .squeak-post-author {
         align-items: center;
         display: flex;
+
+        .squeak-subscribe-button-container {
+            margin-left: auto;
+            button {
+                padding: 0;
+                border: 0;
+                position: relative;
+                &:disabled {
+                    opacity: .5
+                }
+            }
+        }
+        
 
         .squeak-avatar-container {
             margin-right: 10px;
@@ -347,6 +352,13 @@ const Style = createGlobalStyle`
         // add left margin to all elements that aren't the avatar
         span {
             margin-left: .5rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
         }
     }
 
@@ -600,10 +612,10 @@ const Style = createGlobalStyle`
         margin: 0 .5rem 0 0;
 
         a {
-            color: rgba(var(--primary-color), .3);
+            color: rgba(0, 0, 0, .3);
 
             &:hover {
-                color: rgba(var(--primary-color), .4);
+                color: rgba(0, 0, 0, .4);
             }
         }
     }
@@ -724,6 +736,7 @@ const Style = createGlobalStyle`
         margin: -1.5rem -1.5rem 1.5rem;
         padding: 1.5rem;
         color: red;
+        font-size: .9rem;
     }
 
     .squeak-return-to-post {

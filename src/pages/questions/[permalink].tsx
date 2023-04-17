@@ -1,15 +1,12 @@
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
-import { SEO } from 'components/seo'
-import { createHubSpotContact } from 'lib/utils'
 import React from 'react'
-import { FullQuestion } from 'components/Squeak'
-import useSWR from 'swr'
+import { Question, useQuestion } from 'components/Squeak'
 import community from 'sidebars/community.json'
 
-import type { Question } from 'components/Questions'
 import QuestionSidebar from 'components/Questions/QuestionSidebar'
 import Link from 'components/Link'
+import SEO from 'components/seo'
 
 type QuestionPageProps = {
     params: {
@@ -18,39 +15,26 @@ type QuestionPageProps = {
 }
 
 export default function QuestionPage(props: QuestionPageProps) {
-    const { data: question } = useSWR<Question>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/v1/questions?organizationId=${process.env.GATSBY_SQUEAK_ORG_ID}&permalink=${props.params.permalink}`,
-        (url) =>
-            fetch(url)
-                .then((res) => res.json())
-                .then(({ questions }) => questions[0])
-    )
+    const { question, isLoading } = useQuestion(props.params.permalink)
 
     return (
         <Layout>
-            <SEO title={`${question?.subject} - PostHog`} />
+            <SEO title={isLoading ? 'Squeak question - PostHog' : `${question?.attributes?.subject} - PostHog`} />
             <PostLayout
-                title={question?.subject || ''}
+                title={question?.attributes?.subject || ''}
                 menu={community}
                 sidebar={<QuestionSidebar question={question} />}
                 hideSurvey
             >
-                {question && (
-                    <section className="max-w-5xl mx-auto pb-12">
-                        <div className="mb-4">
-                            <Link to="/questions" className="text-gray hover:text-gray-accent-light">
-                                ← Back to Questions
-                            </Link>
-                        </div>
+                <section className="max-w-5xl mx-auto pb-12">
+                    <div className="mb-4">
+                        <Link to="/questions" className="text-gray hover:text-gray-accent-light">
+                            ← Back to Questions
+                        </Link>
+                    </div>
 
-                        <FullQuestion
-                            apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                            organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
-                            onSignUp={(user) => createHubSpotContact(user)}
-                            question={question}
-                        />
-                    </section>
-                )}
+                    <Question id={props.params.permalink} expanded={true} />
+                </section>
             </PostLayout>
         </Layout>
     )

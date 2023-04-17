@@ -82,6 +82,6 @@ Some of the features we are building may exist in other products already. It is 
 [Team Session Recording]: /handbook/small-teams/session-recording
 [Team Pipeline]: /handbook/small-teams/pipeline
 [Team Infrastructure]: /handbook/small-teams/infrastructure
-[Team Experimentation]: /handbook/small-teams/experimentation
+[Team Feature Success]: /handbook/small-teams/feature-success
 [Team Infrastructure]: /handbook/small-teams/infrastructure
 [Team Growth]: /handbook/small-teams/growth

@@ -22,10 +22,7 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <SearchProvider>
-            <UserProvider
-                apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
-            >
+            <UserProvider>
                 <div className={className}>
                     <Header />
                     <main>{children}</main>
