@@ -138,7 +138,7 @@ This difference is ultimately reflected in many of the features both platforms o
 
 ### Product Analytics
 
-PostHog and Pendo both offer similar product analytics features at a surface level, but differ significantly when compared in greater depth. This is because PostHog and Pendo are ultimately built for different types of users. While PostHog is designed with engineers and technical users in mind, Pendo is intended more for marketers and UX designers. 
+PostHog and Pendo are ultimately built for different types of users. While PostHog is designed with engineers and technical users in mind, Pendo is intended more for marketers and UX designers. 
 
 This difference is reflected in all levels of the product, but especially in product analytics where many advanced features which are lacking in Pendo, are available in PostHog. 
 
