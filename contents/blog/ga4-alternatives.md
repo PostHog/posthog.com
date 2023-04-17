@@ -1,5 +1,5 @@
 ---
-date: 2022-10-19
+date: 2023-04-17
 title: The best GA4 alternatives for apps and websites
 rootPage: /blog
 sidebar: Blog
@@ -493,6 +493,92 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 Unsurprisingly, Piwik PRO's roots in Matomo make it a popular choice for users who are familiar with Universal Analytics. It's less feature-rich than Matomo in some respects, but may be a better choice for larger organisations who require more support and scale.
 
+### Fathom
+
+![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
+
+- **Best for:** Content and marketing websites
+- **Tracking method:** Session-based
+- **GDPR compliance:** <span className="text-green text-lg">✔</span>
+- **GA data import:** <span className="text-red text-lg">✖</span>
+
+[Fathom](https://usefathom.com/) is another leading privacy-focused analytics tool that's similar in scope to Plausible. It's ideal for small and medium-size marketing websites, but it lacks the deeper features typical Google Analytics users will demand. It doesn't currently support GA data import, though it is in development. 
+
+#### Fathom vs Google Analytics 4
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+	<thead>
+    	<tr>
+        	<td className="w-3/12"></td>
+        	<td className="w-3/12 text-center"><strong>Google Analytics 4</strong></td>
+        	<td className="w-3/12 text-center"><strong>Fathom</strong></td>
+    	</tr>
+	</thead>
+	<tbody>
+		<tr>
+        	<td>Website analytics</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+		<tr>
+        	<td>Funnels</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>User Paths</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+          <td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>Retention</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+       	<td>Revenue tracking</td>
+      		<td className="text-center"><span className="text-green text-lg">✔</span></td>
+       	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>User profiles</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+   		</tr>
+    	<tr>
+        	<td>Cohort analysis</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>A/B testing</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>Session recording</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>Feature flags</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+		<tr>
+        	<td>Self-hosting</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+	</tbody>
+</table>
+</div>
+
+#### Verdict
+
+There isn't much to choose between Fathom and the other privacy-first option on this list, Plausible. Again, if you want lightweight website analytics without the feature bloat of Google, you can't go wrong with Fathom.
+
 ### Counter
 
 ![counter](../images/blog/ga4-alternatives/counter.png)
@@ -579,90 +665,4 @@ Counter's creators can offer it for free because it only collects aggregated dat
 
 #### Verdict
 
-Counter is a great choice if you have basic needs. It does most of the things the popular privacy-first analytics tools offer, but does so for free. The simple interface is easy to understand, though it doesn't allow you to drill down as deeply into individual page performance.
-
-### Fathom
-
-![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
-
-- **Best for:** Content and marketing websites
-- **Tracking method:** Session-based
-- **GDPR compliance:** <span className="text-green text-lg">✔</span>
-- **GA data import:** <span className="text-red text-lg">✖</span>
-
-[Fathom](https://usefathom.com/) is another leading privacy-focused analytics tool that's similar in scope to Plausible. It's ideal for small and medium-size marketing websites, but it lacks the deeper features typical Google Analytics users will demand. It doesn't currently support GA data import, though it is in development. 
-
-#### Fathom vs Google Analytics 4
-
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-	<thead>
-    	<tr>
-        	<td className="w-3/12"></td>
-        	<td className="w-3/12 text-center"><strong>Google Analytics 4</strong></td>
-        	<td className="w-3/12 text-center"><strong>Fathom</strong></td>
-    	</tr>
-	</thead>
-	<tbody>
-		<tr>
-        	<td>Website analytics</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-		<tr>
-        	<td>Funnels</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-    	</tr>
-    	<tr>
-        	<td>User Paths</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-          <td className="text-center"><span className="text-red text-lg">✖</span></td>
-    	</tr>
-    	<tr>
-        	<td>Retention</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-    	</tr>
-    	<tr>
-       	<td>Revenue tracking</td>
-      		<td className="text-center"><span className="text-green text-lg">✔</span></td>
-       	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-    	</tr>
-    	<tr>
-        	<td>User profiles</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-   		</tr>
-    	<tr>
-        	<td>Cohort analysis</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-    	</tr>
-    	<tr>
-        	<td>A/B testing</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-    	</tr>
-    	<tr>
-        	<td>Session recording</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-    	</tr>
-    	<tr>
-        	<td>Feature flags</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-    	</tr>
-		<tr>
-        	<td>Self-hosting</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-    	</tr>
-	</tbody>
-</table>
-</div>
-
-#### Verdict
-
-There isn't much to choose between Fathom and the other privacy-first option on this list, Plausible. Again, if you want lightweight website analytics without the feature bloat of Google, you can't go wrong with Fathom.
+Counter is a great choice if you have basic needs. It does most of the things the popular privacy-first analytics tools offer, but does so for free. The simple interface is easy to understand, though it doesn't allow you to drill down as deeply into individual page performance as Fathom or Plausible.
