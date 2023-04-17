@@ -1,8 +1,11 @@
-import SidebarSection from 'components/PostLayout/SidebarSection'
 import React from 'react'
 import Link from 'components/Link'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
+import { PlusIcon } from '@heroicons/react/outline'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import { TopicSelector } from 'components/Squeak'
+import { Menu, Popover } from '@headlessui/react'
 
 type QuestionSidebarProps = {
     question: StrapiRecord<QuestionData> | undefined
@@ -48,13 +51,24 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
 
             {question?.topics?.data && question.topics.data.length > 0 && (
                 <SidebarSection title="Topics">
-                    <div className="flex items-center space-x-2">
+                    <ul className="flex items-center list-none p-0 flex-wrap">
                         {question.topics.data.map((topic) => (
-                            <Link key={topic.id} to={`/questions/topic/${topic.attributes.slug}`}>
-                                {topic.attributes.label}
-                            </Link>
+                            <li
+                                key={topic.id}
+                                className="bg-gray-accent-light text-gray py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2"
+                            >
+                                <Link to={`/questions/topic/${topic.attributes.slug}`} className="">
+                                    {topic.attributes.label}
+                                </Link>
+                            </li>
                         ))}
-                    </div>
+
+                        {id && (
+                            <li className="bg-gray-accent-light text-gray py-0.5 px-2 rounded-sm font-semibold">
+                                <TopicSelector questionId={id} />
+                            </li>
+                        )}
+                    </ul>
                 </SidebarSection>
             )}
 
