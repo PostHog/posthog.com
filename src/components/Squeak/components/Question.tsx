@@ -1,4 +1,4 @@
-import React, { useState, useRef, createContext, useEffect } from 'react'
+import React, { useState, useRef, createContext } from 'react'
 import root from 'react-shadow/styled-components'
 
 import { Theme } from './Theme'
@@ -67,7 +67,11 @@ export const Question = (props: QuestionProps) => {
                             <Profile profile={questionData.attributes.profile?.data} />
                             <Days created={questionData.attributes.createdAt} />
                             <div className="squeak-subscribe-button-container">
-                                <SubscribeButton question={questionData} />
+                                <SubscribeButton
+                                    contentType="question"
+                                    id={questionData?.id}
+                                    tooltipMessage="Get notified via email when someone responds to this question"
+                                />
                             </div>
                         </div>
                         <div className="squeak-post-content">

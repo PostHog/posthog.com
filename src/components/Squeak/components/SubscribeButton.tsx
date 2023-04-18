@@ -1,10 +1,8 @@
 import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'
-import { QuestionData, StrapiRecord } from 'lib/strapi'
 import React, { useEffect, useState } from 'react'
-import { useQuestion } from '../hooks/useQuestion'
 
-const Button = ({
+export const Button = ({
     className,
     subscribed,
     handleSubscribe,
@@ -20,33 +18,32 @@ const Button = ({
     )
 
 export default function SubscribeButton({
-    question,
+    contentType,
+    id,
     className = '',
+    tooltipMessage,
 }: {
-    question?: StrapiRecord<QuestionData>
+    contentType: 'topic' | 'question'
+    id: number | string
     className?: string
+    tooltipMessage: string
 }) {
-    if (!question) return null
+    if (!id || !contentType || !tooltipMessage) return null
     const [subscribed, setSubscribed] = useState<boolean | null>(null)
-    const { user } = useUser()
-    const { subscribe, unsubscribe, isSubscribed } = useQuestion(question.id)
+    const { user, isSubscribed, setSubscription } = useUser()
 
     useEffect(() => {
         if (user) {
-            isSubscribed().then((subscribed) => setSubscribed(subscribed))
+            isSubscribed(contentType, id).then((subscribed) => setSubscribed(subscribed))
         }
     }, [user])
 
-    const handleSubscribe = async () => (subscribed ? await unsubscribe() : await subscribe())
+    const handleSubscribe = async () => {
+        await setSubscription(contentType, id, !subscribed)
+    }
 
     return (
-        <Tooltip
-            content={() => (
-                <div style={{ maxWidth: 250 }}>
-                    {user ? 'Get notified via email when someone responds to this question' : 'Sign in to subscribe!'}
-                </div>
-            )}
-        >
+        <Tooltip content={() => <div style={{ maxWidth: 250 }}>{user ? tooltipMessage : 'Sign in to subscribe'}</div>}>
             <span className="relative">
                 {user ? (
                     <Button subscribed={subscribed} handleSubscribe={handleSubscribe} className={className} />

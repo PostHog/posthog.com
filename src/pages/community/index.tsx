@@ -127,9 +127,9 @@ const ListItem = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-const Subscription = ({ question, user }: { question: QuestionData; user: User }) => {
+const Subscription = ({ question }: { question: QuestionData }) => {
     const { permalink, numReplies, id, subject } = question
-    const { unsubscribe } = useQuestion(id)
+    const { setSubscription } = useUser()
 
     return (
         <ListItem>
@@ -147,7 +147,7 @@ const Subscription = ({ question, user }: { question: QuestionData; user: User }
                 </span>
             </p>
             <div className="flex">
-                <button className="text-red font-bold text-sm" onClick={unsubscribe}>
+                <button className="text-red font-bold text-sm" onClick={() => setSubscription('question', id, false)}>
                     Unsubscribe
                 </button>
             </div>
