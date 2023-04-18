@@ -15,9 +15,9 @@ tags:
   - Guides
 
 ---
-It’s common knowledge that the way you price your product is extremely important to your business - price determines profit margin, which directly or indirectly determines nearly everything else. 
+"Pricing is important" is common knowledge – price determines profit margin, which directly or indirectly determines nearly everything else. 
 
-What’s isn't common knowledge is twofold:
+What isn't common knowledge is twofold:
 
 1. Your pricing should be as much of a product as the thing you actually market and sell
 2. How to go about treating your pricing like a product
