@@ -78,7 +78,11 @@ Nearly any good product built today wasn’t just built once and assumed to be t
 - Letting users trial your paid product before buying
 - Etc
 
-Trying out these things can either happen in one go (switch everyone over and see how it goes!) or in a truly experimental format with one cohort seeing version A and another cohort seeing version B. Either way, testing out different versions of your pricing will help you come up with the most efficient way for you to acquire new users and convert them to paying customers.
+Trying out these things can either happen in one go (switch everyone over and see how it goes!) or in a truly experimental format with one cohort seeing version A and another cohort seeing version B. 
+
+When we have the volume needed to run a proper experiment we almost always go that route - it allows us to see how much of an impact our changes make. For instance, we tested a more detailed feature comparison on our billing upgrade page and saw an over 30% improrovement in conversion to paid over the control. Running experiments like this is super exciting - and helps us catch changes that might actually be detrimental, too.
+
+Whether you just roll out new versions or run proper experiments with multiple variants, testing out different versions of your pricing will help you come up with the most efficient way for you to acquire new users and convert them to paying customers.
 
 ### 5. Repeat steps 2-4
 
