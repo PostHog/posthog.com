@@ -26,6 +26,7 @@ type UserContextValue = {
     isLoading: boolean
 
     user: User | null
+    isModerator: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
     fetchUser: (token?: string | null) => Promise<User | null>
     getJwt: () => Promise<string | null>
@@ -42,6 +43,7 @@ type UserContextValue = {
 export const UserContext = createContext<UserContextValue>({
     isLoading: true,
     user: null,
+    isModerator: false,
     setUser: () => {
         // noop
     },
