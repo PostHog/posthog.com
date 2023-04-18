@@ -11,40 +11,11 @@ showTitle: true
 Ask in the `#team-infrastructure` Slack channel for someone to add you.
 
 To give someone access (important to follow these steps!):
-1. navigate to [IAM](https://console.aws.amazon.com/iamv2/home#/users)
-2. Use the `Add Users` button at the top right to add their PostHog email as username and select 'password'.
-3. Important! Untick 'User must create a new password at next sign-in', as that'll cause issues with MFA.
-4. Pick `AWS Management Console access` and add them to the `Team` group
-5. Slack the username, password and console link to new user.
-6. User has to log in, set up MFA, log out, and then change password. They may need to log out again.
-
-#### IMPORTANT: You must log out and then log back in!
-
-This is because of MFA. Just adding MFA isn't quite enough for AWS console so if you are seeing a bunch of really weird permissions errors. Log out, then log back in using your MFA token. This should resolve everything!
-
-### Permissions errors using AWS CLI
-
-If you see something like:
-```
-<my-user> is not authorized to perform: <action> on resource: <resource> with an explicit deny
-```
-
-Note the "with an explicit deny" in the end which likely is due to the fact that we force Multi-Factor Authentication (MFA). Follow [this guide](https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/) to use a session token.
-
-TLDR:
-
-1. Look up your security credential MFA device name from AWS console from `https://console.aws.amazon.com/iam/home#/users/<user-name>?section=security_credentials`
-2. Run `aws sts get-session-token --serial-number <arn-of-the-mfa-device> --token-code <code-from-token> --duration 129600` where `code-from-token` is the same code you'd use to login to the AWS console (e.g. from Authy app).
-3. Run the following code, replacing the placeholder values with the appropriate ones:
-```
-export AWS_ACCESS_KEY_ID=example-access-key-as-in-previous-output
-export AWS_SECRET_ACCESS_KEY=example-secret-access-key-as-in-previous-output
-export AWS_SESSION_TOKEN=example-session-token-as-in-previous-output
-```
-4. Unset them when done (after they expire before running `get-session-token` again):
-```
-unset AWS_ACCESS_KEY_ID && unset AWS_SECRET_ACCESS_KEY && unset AWS_SESSION_TOKEN
-```
+1. navigate to [IAM](https://us-east-1.console.aws.amazon.com/singlesignon/home?region=us-east-1#!/instances/7223d5d28068c4d6/users)
+2. Use the `Add User` button at the top right.
+3. Under username, type the user’s email address, and fill in the rest of the fields (Email, First and Last name).
+3. Click next and choose the user group.
+4. Click next and then click on Add user.
 
 ### Deploying PostHog
 
