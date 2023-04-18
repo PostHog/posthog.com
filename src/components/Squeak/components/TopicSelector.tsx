@@ -28,7 +28,7 @@ export const TopicSelector = (props: TopicSelectorProps) => {
                 Add topics
             </Popover.Button>
 
-            <Popover.Panel className="absolute z-10 mb-0 w-64 h-80 px-4 mt-3 transform sm:px-0 right-0 overflow-y-scroll overscroll-contain bg-white dark:bg-gray-accent-dark rounded">
+            <Popover.Panel className="absolute z-10 mb-0 w-64 h-80 px-4 mt-3 transform sm:px-0 right-0 overflow-y-scroll overscroll-contain bg-white dark:bg-gray-accent-dark rounded border border-gray-accent-light/50 dark:border-gray-accent-dark/50 shadow-sm">
                 <ol className="list-none p-0 py-1.5">
                     {data?.map((topic) => {
                         const isSelected = question?.attributes?.topics?.data?.find((t) => t.id === topic.id)
