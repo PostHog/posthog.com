@@ -47,4 +47,4 @@ We have brought on a brilliant group of angel investors throughout PostHog's lif
 
 If you'd like to talk to us about an investment in PostHog, please drop us a line at [investors@posthog.com](mailto:investors@posthog.com).
 
-If you are a startup and want an introduction or advice, please email us at [hey@posthog.com](mailto:hey@posthog.com). We can get very busy but we'll do our best to at least respond in all cases.
+If you are a startup and want an introduction or advice, please email us at [startups@posthog.com](mailto:startups@posthog.com). We can get very busy but we'll do our best to at least respond in all cases.
