@@ -19,6 +19,17 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
 
+## April 21, 2023
+
+#### Support triage
+![posthog support](../images/blog/array/posthog-support.png)
+
+We've made a change to the way we handle support internally in order to give you a better experience. In the app this manifests through a new 'Report bug / get support' option on the help dropdown, which opens the modal above. 
+
+Previously, we'd assign an engineer to be a [Support Hero](/handbook/engineering/support-hero) each week and they would mostly drop other work to focus on support. That worked well initially, but as PostHog has grown in breadth it's become harder for engineers to offer support outside of their usual focus. The new system automatically triages requests and assigns them to a Support Hero from the relevant small team - meaning you'll always get the best possible support. 
+
+#### New billing
+
 ## April 14, 2023
 
 #### MaxAI PostHog Support AI
