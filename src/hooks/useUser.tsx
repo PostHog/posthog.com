@@ -313,11 +313,19 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
 
-    return (
-        <UserContext.Provider value={{ user, setUser, isLoading, getJwt, login, logout, signUp, fetchUser }}>
-            {children}
-        </UserContext.Provider>
-    )
+    const contextValue = {
+        user,
+        setUser,
+        isModerator: user?.role?.type === 'moderator',
+        isLoading,
+        getJwt,
+        login,
+        logout,
+        signUp,
+        fetchUser,
+    }
+
+    return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
 }
 
 export const useUser = () => {
