@@ -4,6 +4,7 @@ import { useUser } from 'hooks/useUser'
 import { XIcon } from '@heroicons/react/outline'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { TopicSelector, useQuestion } from 'components/Squeak'
+import getAvatarURL from 'components/Squeak/util/getAvatar'
 
 type QuestionSidebarProps = {
     permalink: string
@@ -11,17 +12,16 @@ type QuestionSidebarProps = {
 
 export const QuestionSidebar = (props: QuestionSidebarProps) => {
     const { user } = useUser()
+
     const { question, removeTopic } = useQuestion(props.permalink)
+    const avatar = getAvatarURL(question?.attributes?.profile?.data)
 
     return question ? (
         <div>
             <SidebarSection title="Posted by">
                 <div className="flex items-center space-x-2">
-                    {question.attributes?.profile?.data?.attributes?.avatar?.data?.attributes?.url ? (
-                        <img
-                            className="w-8 h-8 rounded-full"
-                            src={question.attributes.profile.data.attributes.avatar.data.attributes.url}
-                        />
+                    {avatar ? (
+                        <img className="w-8 h-8 rounded-full" src={avatar} />
                     ) : (
                         <svg
                             className="w-8 h-8 rounded-full bg-gray-accent-light"

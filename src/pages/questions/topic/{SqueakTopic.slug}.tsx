@@ -38,7 +38,7 @@ interface IProps {
 export default function Questions({ data, pageContext }: IProps) {
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
 
-    const { questions, isLoading, refresh, fetchMore } = useQuestions({
+    const { questions, isLoading, refresh, fetchMore, hasMore } = useQuestions({
         limit: 20,
         sortBy,
         topicId: data?.squeakTopic?.squeakId,
@@ -60,7 +60,7 @@ export default function Questions({ data, pageContext }: IProps) {
                                 <span className="text-primary dark:text-primary-dark text-[15px]">Questions</span>
                             </Link>
                             <div className="ml-auto">
-                                <QuestionForm onSubmit={refresh} />
+                                <QuestionForm topicID={data?.squeakTopic?.squeakId} onSubmit={refresh} />
                             </div>
                         </div>
                         <div className="w-full sm:flex sm:items-center mb-4">
@@ -102,6 +102,7 @@ export default function Questions({ data, pageContext }: IProps) {
 
                         <div className="mt-8 flex flex-col">
                             <QuestionsTable
+                                hasMore={hasMore}
                                 className="sm:grid-cols-4"
                                 questions={questions}
                                 isLoading={isLoading}

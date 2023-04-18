@@ -121,7 +121,11 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         }
     }, [size, data])
 
+    const total = data && data[0]?.meta?.pagination?.total
+    const hasMore = total ? questions?.data.length < total : false
+
     return {
+        hasMore,
         questions,
         fetchMore: () => setSize(size + 1),
         isLoading,
