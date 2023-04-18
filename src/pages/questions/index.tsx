@@ -18,6 +18,11 @@ const fetchTopicGroups = async () => {
                         questions: {
                             sort: 'createdAt:desc',
                             fields: ['id', 'createdAt'],
+                            filters: {
+                                archived: {
+                                    $ne: true,
+                                },
+                            },
                         },
                     },
                 },
