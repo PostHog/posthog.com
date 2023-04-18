@@ -6,6 +6,7 @@ import { StrapiRecord, ReplyData } from 'lib/strapi'
 import Avatar from './Avatar'
 import getAvatarURL from '../util/getAvatar'
 import { CurrentQuestionContext } from './Question'
+import Link from 'components/Link'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -47,18 +48,32 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
 
     return profile?.data ? (
         <div onClick={handleContainerClick}>
-            <div className="squeak-post-author">
-                <a className="squeak-profile-link" href={`/community/profiles/${profile.data.id}`}>
-                    <Avatar image={getAvatarURL(profile?.data?.attributes)} />
-                    <strong className="squeak-author-name">{profile.data.attributes.firstName || 'Anonymous'}</strong>
-                </a>
-                {badgeText && <span className="squeak-author-badge">{badgeText}</span>}
+            <div className="pb-1 flex items-center space-x-2">
+                <Link
+                    className="flex items-center !text-black dark:!text-white"
+                    to={`/community/profiles/${profile.data.id}`}
+                >
+                    <div className="mr-2">
+                        <Avatar className="w-[25px] h-[25px]" image={getAvatarURL(profile?.data?.attributes)} />
+                    </div>
+                    <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
+                </Link>
+                {badgeText && (
+                    <span className="border border-gray-accent-light dark:border-gray-accent-dark text-xs py-0.5 px-1 rounded-sm">
+                        {badgeText}
+                    </span>
+                )}
                 <Days created={createdAt} />
                 {resolved && resolvedBy?.data?.id === id && (
                     <>
-                        <span className="squeak-resolved-badge">Solution</span>
+                        <span className="border rounded-sm text-[#008200cc] text-xs font-semibold py-0.5 px-1 uppercase">
+                            Solution
+                        </span>
                         {(isAuthor || isModerator) && (
-                            <button onClick={() => handleResolve(false, null)} className="squeak-undo-resolved">
+                            <button
+                                onClick={() => handleResolve(false, null)}
+                                className="text-sm font-semibold text-red"
+                            >
                                 Undo
                             </button>
                         )}
@@ -66,22 +81,25 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                 )}
             </div>
 
-            <div className="squeak-post-content">
+            <div className="border-l-0 ml-[33px] pl-0 pb-1">
                 <Markdown>{body}</Markdown>
 
-                <div className="squeak-reply-action-buttons">
+                <div className="flex space-x-2 mb-4 relative -top-2 empty:hidden">
                     {!resolved && (isAuthor || isModerator) && (
-                        <button onClick={() => handleResolve(true, id)} className="squeak-resolve-button">
+                        <button onClick={() => handleResolve(true, id)} className="text-red font-semibold text-sm">
                             Mark as solution
                         </button>
                     )}
                     {isModerator && (
-                        <button onClick={() => handlePublishReply(!!publishedAt, id)} className="squeak-publish-button">
+                        <button
+                            onClick={() => handlePublishReply(!!publishedAt, id)}
+                            className="text-red font-semibold text-sm"
+                        >
                             {publishedAt ? 'Unpublish' : 'Publish'}
                         </button>
                     )}
                     {isModerator && (
-                        <button onClick={handleDelete} className="squeak-delete-button">
+                        <button onClick={handleDelete} className="text-[red] font-semibold text-sm">
                             {confirmDelete ? 'Click again to confirm' : 'Delete'}
                         </button>
                     )}
