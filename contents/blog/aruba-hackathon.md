@@ -13,7 +13,7 @@ tags:
   - Offsites
 ---
 
-Every year, Team PostHog congregates for our annual all-company offsite. In previous years we've been to Italy, Portugal and Iceland. This year, we went to the Aruba – a tiny, Caribbean island just off the north coast of Venezuela.
+Every year, Team PostHog congregates for our annual all-company offsite. In previous years we've been to Italy, Portugal and Iceland. This year, we went to Aruba – a tiny, Caribbean island just off the north coast of Venezuela.
 
 ![posthog aruba](../images/blog/aruba/aruba-vibes.jpeg)
 
@@ -89,7 +89,7 @@ The MVP they built consists of custom tables that are created and queried throug
 
 There's more to build before PostHog is ready to be your data warehouse, but we're working on it. Keep an eye on our [public roadmap](/roadmap) for updates.
 
-## Building a Zendesk killer in PostHog
+## Leveling up PostHog support
 
 - **Team Arubug:** Tiina Turban, Simon Fisher, Paul D'Ambra, Cameron DeLeone, and Cory Watilo
 
