@@ -48,12 +48,20 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
 
             {(question.attributes?.topics?.data && question.attributes.topics.data.length > 0) ||
             user?.role?.type == 'moderator' ? (
-                <SidebarSection title="Topics">
+                <SidebarSection
+                    title="Topics"
+                    action={
+                        question.id &&
+                        user?.role?.type === 'moderator' && (
+                            <TopicSelector questionId={question.id} permalink={props.permalink} />
+                        )
+                    }
+                >
                     <ul className="flex items-center list-none p-0 flex-wrap">
                         {question?.attributes?.topics?.data.map((topic) => (
                             <li
                                 key={topic.id}
-                                className="bg-gray-accent-light text-gray py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
+                                className="bg-gray-accent-light dark:bg-gray-accent-dark text-gray py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
                             >
                                 <Link to={`/questions/topic/${topic.attributes.slug}`} className="">
                                     {topic.attributes.label}
@@ -64,12 +72,6 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                                 </button>
                             </li>
                         ))}
-
-                        {question.id && user?.role?.type === 'moderator' && (
-                            <li className="bg-gray-accent-light text-gray py-0.5 px-2 rounded-sm font-semibold">
-                                <TopicSelector questionId={question.id} permalink={props.permalink} />
-                            </li>
-                        )}
                     </ul>
                 </SidebarSection>
             ) : null}
