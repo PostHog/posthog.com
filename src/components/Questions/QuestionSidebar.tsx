@@ -67,9 +67,11 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                                     {topic.attributes.label}
                                 </Link>
 
-                                <button onClick={() => removeTopic(topic)}>
-                                    <XIcon className="h-4 w-4 text-gray" />
-                                </button>
+                                {user?.role?.type == 'moderator' && (
+                                    <button onClick={() => removeTopic(topic)}>
+                                        <XIcon className="h-4 w-4 text-gray" />
+                                    </button>
+                                )}
                             </li>
                         ))}
                     </ul>
