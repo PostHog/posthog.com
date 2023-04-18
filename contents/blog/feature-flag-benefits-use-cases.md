@@ -8,6 +8,7 @@ hideAnchor: true
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/experiment-hog.jpg
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/ZgxabccQZzM
 category: Using PostHog
 tags:
   - Feature flags

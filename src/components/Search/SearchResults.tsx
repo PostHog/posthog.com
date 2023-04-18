@@ -14,7 +14,7 @@ import usePostHog from '../../hooks/usePostHog'
 
 type Result = Hit<{
     id: string
-    type: 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
+    type: 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'apps'
     title: string
     slug: string
     schema?: {
@@ -41,8 +41,8 @@ const categories = [
         name: 'Docs',
     },
     {
-        type: 'manual',
-        name: 'Manual',
+        type: 'apps',
+        name: 'Apps',
     },
     {
         type: 'blog',
@@ -414,7 +414,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                             </span>
                             <h4 className="text-2xl mb-3 leading-[1.125]">{activeOption.title}</h4>
                             <p className="text-black/70 dark:text-white/80 text-[15px] mb-0">{activeOption.excerpt}</p>
-                            {activeOption.type !== 'question' ? (
+                            {activeOption.type !== 'question' && activeOption.type !== 'apps' ? (
                                 <span className="block text-xs text-black/60 dark:text-white/60 font-semibold mt-5 mb-3">
                                     On this page
                                 </span>

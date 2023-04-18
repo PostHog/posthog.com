@@ -3,10 +3,12 @@ import React, { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Close } from 'components/Icons/Icons'
 
-import { Form } from 'components/Squeak'
+import { QuestionForm } from 'components/Squeak'
+import { CallToAction } from 'components/CallToAction'
 
 type QuestionFormProps = {
     onSubmit: () => void
+    topicID?: number
 }
 
 export default function Questions(props: QuestionFormProps): JSX.Element {
@@ -30,22 +32,19 @@ export default function Questions(props: QuestionFormProps): JSX.Element {
                                 <Close className="w-3 h-3" />
                             </button>
                         </div>
-                        <Form
-                            apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                            organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
+                        <QuestionForm
+                            topicID={props.topicID}
+                            slug={(typeof window !== 'undefined' && window.location.pathname) || ''}
                             initialView="question-form"
+                            formType="question"
                             onSubmit={handleSubmit}
                         />
                     </Dialog.Panel>
                 </div>
             </Dialog>
-            <button
-                type="button"
-                className="flex-shrink-0 inline-flex items-center justify-center rounded border border-transparent bg-red px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-red focus:ring-offset-2 sm:w-auto shadow-lg"
-                onClick={() => setShowModal(true)}
-            >
+            <CallToAction size="sm" onClick={() => setShowModal(true)}>
                 Ask a question
-            </button>
+            </CallToAction>
         </>
     )
 }

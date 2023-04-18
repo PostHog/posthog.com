@@ -46,7 +46,7 @@ posthog.init('<ph_project_api_key>', {
 
 ## Forcing feature flags to update
 
-In our client-side JavaScript library, we store flags as a cookie to reduce the load on the server and improve the performance of your app. This prevents always needing to make an HTTP request, flag evaluation can simply refer to data stored locally in the browser. This is known as 'local evaluation.'
+In our client-side JavaScript library, we store flags as a cookie to reduce the load on the server and improve the performance of your app. This prevents always needing to make an HTTP request, flag evaluation can simply refer to data stored locally in the browser.
 
 While this makes your app faster, it means if your user does something mid-session which causes the flag to turn on for them, this does not immediately update. As such, if you expect your app to have scenarios like this _and_ you want flags to update mid-session, you can reload them yourself, by using the `reloadFeatureFlags` function.
 

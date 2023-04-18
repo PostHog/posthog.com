@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/NWHv1HMS9_Q
 author:
   - hanna-crombie
 category: General

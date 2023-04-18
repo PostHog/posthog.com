@@ -116,6 +116,10 @@ const linklist: IProps[] = [
                 title: 'Tutorials',
                 url: '/tutorials',
             },
+            {
+                title: 'Tracks',
+                url: '/tracks',
+            },
         ],
     },
     {
@@ -140,7 +144,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Merch',
-                url: 'https://merch.posthog.com/collections/all',
+                url: 'https://merch.posthog.com',
             },
             {
                 title: 'PostHog FM',
@@ -149,6 +153,10 @@ const linklist: IProps[] = [
             {
                 title: 'PostHog on GitHub',
                 url: 'https://github.com/PostHog/posthog',
+            },
+            {
+                title: 'Startups',
+                url: '/startups',
             },
         ],
     },

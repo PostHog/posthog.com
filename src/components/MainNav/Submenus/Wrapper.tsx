@@ -15,7 +15,7 @@ export const Block = ({
     cta: { url: string; label: string }
 }) => {
     return (
-        <div className="py-6 md:px-6 xl:px-12 flex flex-col">
+        <div className="py-6 md:px-6 xl:px-9 flex flex-col">
             <div className="mb-4">
                 <h3 className="text-[18px] font-bold mt-0 mb-2 text-black/70">{title}</h3>
                 <div>{children}</div>
