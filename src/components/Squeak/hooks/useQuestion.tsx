@@ -58,21 +58,6 @@ const query = (id: string | number) =>
         }
     )
 
-async function generateSHA256Hash(str: string) {
-    // Convert the string to a Uint8Array
-    const encoder = new TextEncoder()
-    const data = encoder.encode(str)
-
-    // Generate the hash using the SubtleCrypto API
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data)
-
-    // Convert the hash buffer to a hexadecimal string
-    const hashArray = Array.from(new Uint8Array(hashBuffer))
-    const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
-
-    return hashHex
-}
-
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
     const { getJwt, fetchUser, user } = useUser()
     const { mutate: globalMutate } = useSWRConfig()
@@ -90,8 +75,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         return data?.[0]
     })
 
-    console.dir(key)
-
     if (error) {
         posthog?.capture('squeak error', {
             source: 'useQuestion',
@@ -103,12 +86,14 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
 
     const mutate = async (data?: any) => {
-        globalMutate(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id)}`, data, {
+        globalMutate(key, data, {
             optimisticData: data,
         })
 
+        if (!question) return
+
         if (typeof id === 'string') {
-            globalMutate(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question?.id)}`, data, {
+            globalMutate(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question.id)}`, data, {
                 optimisticData: data,
             })
         } else {
