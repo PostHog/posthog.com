@@ -112,6 +112,7 @@ type QuestionFormProps = {
     reply: (body: string) => Promise<void>
     onSubmit?: (values: any, formType: string) => void
     initialView?: string
+    topicID?: number
 }
 
 export const QuestionForm = ({
@@ -121,6 +122,7 @@ export const QuestionForm = ({
     initialView,
     reply,
     onSubmit,
+    ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
     const [formValues, setFormValues] = useState<QuestionFormValues | null>(null)
@@ -154,9 +156,11 @@ export const QuestionForm = ({
             }
         )
 
-        const topicID = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
-            .then((res) => res.json())
-            .then((topic) => topic?.data && topic?.data[0]?.id)
+        const topicID =
+            other.topicID ||
+            (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
+                .then((res) => res.json())
+                .then((topic) => topic?.data && topic?.data[0]?.id))
 
         const data = {
             subject,
