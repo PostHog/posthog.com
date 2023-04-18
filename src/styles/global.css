@@ -1214,6 +1214,10 @@ li.squeak-left-border {
 .squeak-post-markdown {
     @apply text-[15px] leading-normal break-words mb-3;
 
+    a {
+        @apply font-semibold;
+    }
+
     p {
         @apply m-0 mb-2 text-[15px];
     }
