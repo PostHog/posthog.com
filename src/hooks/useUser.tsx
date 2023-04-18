@@ -127,6 +127,25 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             localStorage.setItem('jwt', userData.jwt)
             setJwt(userData.jwt)
 
+            try {
+                const distinctId = posthog?.get_distinct_id()
+
+                if (distinctId) {
+                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${user.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${userData.jwt}`,
+                        },
+                        body: JSON.stringify({
+                            distinctId,
+                        }),
+                    })
+                }
+            } catch (error) {
+                console.error(error)
+            }
+
             return user
         } catch (error) {
             posthog?.capture('squeak error', {
