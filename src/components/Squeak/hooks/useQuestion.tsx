@@ -85,13 +85,20 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
     const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
 
+    // This mutate method takes into account the fact that both ids and permalinks can be
+    // used interchangeably to fetch a question.
+    //
+    // This ensures that data is kept in sync across all instances of the same question.
     const mutate = async (data?: any) => {
+        // First, we mutate the key for whichever type of identifier was passed in to,
+        // this specific hook.
         globalMutate(key, data, {
             optimisticData: data,
         })
 
         if (!question) return
 
+        // Then, based on if it's a permalink or an id, we mutate the other key as well.
         if (typeof id === 'string') {
             globalMutate(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question.id)}`, data, {
                 optimisticData: data,
