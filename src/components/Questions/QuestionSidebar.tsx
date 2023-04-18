@@ -35,13 +35,15 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
             <SidebarSection
                 title="Posted by"
                 action={
-                    <Link
-                        className="text-red text-sm font-semibold flex items-center justify-center text-gray-400 hover:text-gray-500 whitespace-nowrap"
-                        to={link}
-                        target="_blank"
-                    >
-                        View in PostHog
-                    </Link>
+                    isModerator ? (
+                        <Link
+                            className="text-red text-sm font-semibold flex items-center justify-center text-gray-400 hover:text-gray-500 whitespace-nowrap"
+                            to={link}
+                            target="_blank"
+                        >
+                            View in PostHog
+                        </Link>
+                    ) : undefined
                 }
             >
                 <div className="flex items-center space-x-2">
@@ -80,15 +82,12 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                 </div>
             </SidebarSection>
 
-            {(question.attributes?.topics?.data && question.attributes.topics.data.length > 0) ||
-            user?.role?.type == 'moderator' ? (
+            {(question.attributes?.topics?.data && question.attributes.topics.data.length > 0) || isModerator ? (
                 <SidebarSection
                     title="Topics"
                     action={
                         question.id &&
-                        user?.role?.type === 'moderator' && (
-                            <TopicSelector questionId={question.id} permalink={props.permalink} />
-                        )
+                        isModerator && <TopicSelector questionId={question.id} permalink={props.permalink} />
                     }
                 >
                     <ul className="flex items-center list-none p-0 flex-wrap">
