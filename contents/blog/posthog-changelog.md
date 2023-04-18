@@ -28,8 +28,6 @@ We've made a change to the way we handle support internally in order to give you
 
 Previously, we'd assign an engineer to be a [Support Hero](/handbook/engineering/support-hero) each week and they would mostly drop other work to focus on support. That worked well initially, but as PostHog has grown in breadth it's become harder for engineers to offer support outside of their usual focus. The new system automatically triages requests and assigns them to a Support Hero from the relevant small team - meaning you'll always get the best possible support. 
 
-#### New billing
-
 ## April 14, 2023
 
 #### MaxAI PostHog Support AI
