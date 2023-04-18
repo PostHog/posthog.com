@@ -54,7 +54,7 @@ export const Authentication = ({
                         {formValues?.body}
                     </div>
                     <div className="ml-1 whitespace-nowrap">
-                        <button className="font-bold text-red" onClick={() => setParentView?.('question-form')}>
+                        <button className="font-bold text-red text-sm" onClick={() => setParentView?.('question-form')}>
                             Edit post
                         </button>
                     </div>
@@ -62,7 +62,7 @@ export const Authentication = ({
             )}
             <div style={showProfile ? { marginLeft: 50 } : {}}>
                 {showBanner && (
-                    <div className="bg-[#FFF7E9] border border-black/20 dark:border-white/20 text-black border-b-0 py-2 px-4 rounded-tr-md rounded-tl-md">
+                    <div className="bg-[#FFF7E9] border border-black/20 dark:border-white/20 text-black border-b-0 py-2 px-4 rounded-tr-0 rounded-tl-0">
                         <h4 className="m-0 text-base pb-1 !text-black">Please signup to post.</h4>
                         <p className="m-0 text-sm">Create an account to ask questions & help others.</p>
                     </div>
@@ -146,7 +146,10 @@ export const Authentication = ({
                                 }[view]
                             }
                             {view !== 'forgot-password' && view !== 'reset-password' && (
-                                <Button className="border-0 w-full my-2 opacity-50" onClick={handleForgotPassword}>
+                                <Button
+                                    className="border-none bg-white dark:bg-transparent w-full my-2 opacity-75 font-semibold"
+                                    onClick={handleForgotPassword}
+                                >
                                     Forgot password
                                 </Button>
                             )}

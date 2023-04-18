@@ -87,9 +87,12 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ setMessage, setParentView
                                 placeholder="New password"
                             />
                             <Button
-                                className="text-red border-red w-full"
                                 disabled={!code}
-                                style={loading || !isValid ? { opacity: '.5' } : {}}
+                                className={`font-bold w-full relative ${
+                                    loading || !isValid
+                                        ? 'opacity-50 cursor-not-allowed'
+                                        : 'bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px]'
+                                }`}
                                 type="submit"
                             >
                                 Reset password
