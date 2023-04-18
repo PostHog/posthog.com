@@ -1,18 +1,18 @@
 import React from 'react'
 import { Popover } from '@headlessui/react'
-import { StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
+import { StrapiRecord, TopicData } from 'lib/strapi'
 import useSWR from 'swr'
-import qs from 'qs'
 import { CheckIcon } from '@heroicons/react/outline'
 import { useQuestion } from '../hooks/useQuestion'
 
 type TopicSelectorProps = {
     questionId: number
+    permalink: string
 }
 
 export const TopicSelector = (props: TopicSelectorProps) => {
     const { data } = useSWR<StrapiRecord<TopicData>[]>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?sort=label:asc`,
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?sort=label:asc&pagination[pageSize]=100`,
         async (url) => {
             const res = await fetch(url)
             const { data } = await res.json()
@@ -20,7 +20,7 @@ export const TopicSelector = (props: TopicSelectorProps) => {
         }
     )
 
-    const { question, addTopic, removeTopic } = useQuestion(props.questionId)
+    const { question, addTopic, removeTopic } = useQuestion(props.permalink)
 
     return (
         <Popover className="relative">

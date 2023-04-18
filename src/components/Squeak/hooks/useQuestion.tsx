@@ -1,6 +1,6 @@
 import qs from 'qs'
 import { ProfileData, QuestionData, StrapiRecord, TopicData } from 'lib/strapi'
-import useSWR, { useSWRConfig, mutate as swrMutate } from 'swr'
+import useSWR, { useSWRConfig } from 'swr'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 
@@ -75,6 +75,7 @@ async function generateSHA256Hash(str: string) {
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
     const { getJwt, fetchUser, user } = useUser()
+    const { mutate: globalMutate } = useSWRConfig()
     const posthog = usePostHog()
 
     const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id)}`
@@ -83,14 +84,13 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         data: question,
         error,
         isLoading,
-        mutate,
     } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
         const res = await fetch(url)
         const { data } = await res.json()
         return data?.[0]
     })
 
-    console.dir(JSON.stringify(key))
+    console.dir(key)
 
     if (error) {
         posthog?.capture('squeak error', {
@@ -101,6 +101,26 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     }
 
     const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
+
+    const mutate = async (data?: any) => {
+        globalMutate(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id)}`, data, {
+            optimisticData: data,
+        })
+
+        if (typeof id === 'string') {
+            globalMutate(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question?.id)}`, data, {
+                optimisticData: data,
+            })
+        } else {
+            globalMutate(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question?.attributes?.permalink)}`,
+                data,
+                {
+                    optimisticData: data,
+                }
+            )
+        }
+    }
 
     const reply = async (body: string) => {
         try {
@@ -382,7 +402,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
         copiedData.attributes?.topics?.data?.push(topic)
 
-        swrMutate(key)
+        await mutate(copiedData)
     }
 
     const removeTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
@@ -407,8 +427,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
         copiedData.attributes.topics.data = copiedData.attributes?.topics?.data?.filter((t) => t.id !== topic.id)
 
-        // FIXME: Need to mutate both permalink and question ID keys as they are different
-        swrMutate(key)
+        await mutate(copiedData)
     }
 
     return {

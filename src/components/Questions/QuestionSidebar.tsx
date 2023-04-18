@@ -1,11 +1,9 @@
 import React from 'react'
 import Link from 'components/Link'
-import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
-import { PlusIcon } from '@heroicons/react/outline'
+import { XIcon } from '@heroicons/react/outline'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { TopicSelector, useQuestion } from 'components/Squeak'
-import { Menu, Popover } from '@headlessui/react'
 
 type QuestionSidebarProps = {
     permalink: string
@@ -13,9 +11,7 @@ type QuestionSidebarProps = {
 
 export const QuestionSidebar = (props: QuestionSidebarProps) => {
     const { user } = useUser()
-    const { question } = useQuestion(props.permalink)
-
-    console.log(question)
+    const { question, removeTopic } = useQuestion(props.permalink)
 
     return question ? (
         <div>
@@ -50,28 +46,33 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                 </div>
             </SidebarSection>
 
-            {question.attributes?.topics?.data && question.attributes.topics.data.length > 0 && (
+            {(question.attributes?.topics?.data && question.attributes.topics.data.length > 0) ||
+            user?.role?.type == 'moderator' ? (
                 <SidebarSection title="Topics">
                     <ul className="flex items-center list-none p-0 flex-wrap">
-                        {question.attributes.topics.data.map((topic) => (
+                        {question?.attributes?.topics?.data.map((topic) => (
                             <li
                                 key={topic.id}
-                                className="bg-gray-accent-light text-gray py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2"
+                                className="bg-gray-accent-light text-gray py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
                             >
                                 <Link to={`/questions/topic/${topic.attributes.slug}`} className="">
                                     {topic.attributes.label}
                                 </Link>
+
+                                <button onClick={() => removeTopic(topic)}>
+                                    <XIcon className="h-4 w-4 text-gray" />
+                                </button>
                             </li>
                         ))}
 
                         {question.id && user?.role?.type === 'moderator' && (
                             <li className="bg-gray-accent-light text-gray py-0.5 px-2 rounded-sm font-semibold">
-                                <TopicSelector questionId={question.id} />
+                                <TopicSelector questionId={question.id} permalink={props.permalink} />
                             </li>
                         )}
                     </ul>
                 </SidebarSection>
-            )}
+            ) : null}
 
             {user?.role?.type === 'moderator' && (
                 <SidebarSection>
