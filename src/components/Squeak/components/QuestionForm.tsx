@@ -61,12 +61,12 @@ function QuestionFormMain({
                         <Form>
                             <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
 
-                            <div className="bg-white border border-black/30 dark:border-white/30 rounded-md overflow-hidden mb-4">
+                            <div className="bg-white border border-black/30 dark:bg-gray-accent-dark-hover dark:border-white/30 rounded-md overflow-hidden mb-4">
                                 {subject && (
                                     <>
                                         <Field
                                             autoFocus
-                                            className="font-bold text-black border-b border-black/30 text-base w-full py-3 px-4 outline-none rounded-none"
+                                            className="font-semibold text-black dark:text-primary-dark dark:bg-gray-accent-dark-hover border-b border-black/30 dark:border-primary-dark/30 text-base w-full py-3 px-4 outline-none rounded-none"
                                             onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"
@@ -85,23 +85,18 @@ function QuestionFormMain({
                                     />
                                 </div>
                             </div>
-                            <span className="flex justify-between ml-[50px]">
+                            <span className="ml-[50px]">
                                 <Button
-                                    style={loading || !isValid ? { opacity: '.5' } : {}}
                                     disabled={loading || !isValid}
                                     type="submit"
+                                    className={`w-[calc(100%_-_50px)] font-bold relative ${
+                                        loading || !isValid
+                                            ? ' opacity-50 cursor-not-allowed'
+                                            : 'bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px]'
+                                    } active:top-[0px] active:scale-[1]`}
                                 >
                                     {user ? 'Post' : 'Login & post'}
                                 </Button>
-                                <div className="flex items-center text-sm">
-                                    by
-                                    <a
-                                        className="flex ml-1 !text-black dark:!text-white opacity-50 hover:opacity-60 active:opacity-[.55]"
-                                        href="https://squeak.posthog.com?utm_source=post-form"
-                                    >
-                                        <Logo />
-                                    </a>
-                                </div>
                             </span>
                         </Form>
                     )
@@ -138,10 +133,10 @@ export const QuestionForm = ({
 
     const buttonText =
         formType === 'question' ? (
-            <span>Ask a question</span>
+            <span className="font-bold">Ask a question</span>
         ) : (
-            <span className="squeak-reply-label">
-                <strong>Reply</strong> to question
+            <span className="squeak-reply-label ">
+                <strong className="underline">Reply</strong> to question
             </span>
         )
 
@@ -252,7 +247,7 @@ export const QuestionForm = ({
                         className={
                             formType !== 'reply'
                                 ? 'text-red border-red'
-                                : 'border-black/30 dark:border-white/30 hover:border-black/50 dark:hover:border-white/50'
+                                : 'w-full text-left border-black/30 dark:border-white/30 hover:border-black/50 dark:hover:border-white/50'
                         }
                     >
                         {buttonText}

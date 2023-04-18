@@ -66,11 +66,11 @@ export const Question = (props: QuestionProps) => {
                             <SubscribeButton question={questionData} />
                         </div>
                     </div>
-                    <div className="ml-5 pl-[30px] border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                    <div className="ml-5 pl-[30px] border-l border-dashed border-gray-accent-light dark:border-opacity-50">
                         <h3 className="text-base font-semibold m-0 pb-1 leading-5">
                             <Link
                                 to={`/questions/${questionData.attributes.permalink}`}
-                                className="no-underline text-black dark:text-white"
+                                className="no-underline font-semibold text-black dark:text-white"
                             >
                                 {questionData.attributes.subject}
                             </Link>

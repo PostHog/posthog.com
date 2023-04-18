@@ -6,7 +6,7 @@ export default function Button({
     ...other
 }: { className?: string; children: React.ReactNode } & ButtonHTMLAttributes<HTMLButtonElement>) {
     return (
-        <button className={`border rounded-md px-4 py-2 font-bold ${className}`} {...other}>
+        <button className={`border-[1.5px] rounded-sm px-4 py-2.5 text-[15px] ${className}`} {...other}>
             {children}
         </button>
     )

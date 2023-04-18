@@ -116,7 +116,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus }
         <>
             <textarea
                 autoFocus={autoFocus}
-                className="bg-white border-none text-base h-[150px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
+                className="bg-white dark:bg-gray-accent-dark-hover dark:text-primary-dark border-none text-base h-[150px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
                 onBlur={(e) => e.preventDefault()}
                 name="body"
                 value={value}
@@ -133,7 +133,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus }
                         return (
                             <li key={index}>
                                 <button
-                                    className="flex items-center bg-none border-none rounded-md text-black/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75"
+                                    className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75"
                                     onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
                                 >
                                     {button.icon}
@@ -144,7 +144,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus }
                 </ul>
                 <div className="mr-2">
                     <a
-                        className="text-black/30 hover:text-black/40"
+                        className="text-primary/30 hover:text-primary/50 dark:text-primary-dark/30 dark:hover:text-primary-dark/50"
                         href="https://www.markdownguide.org/cheat-sheet/"
                         target="_blank"
                         rel="noreferrer"

@@ -59,14 +59,14 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
                 </Link>
                 {badgeText && (
-                    <span className="border border-gray-accent-light dark:border-gray-accent-dark text-xs py-1 px-2 rounded-md">
+                    <span className="border border-gray-accent-light dark:border-gray-accent-dark text-xs py-0.5 px-1 rounded-sm">
                         {badgeText}
                     </span>
                 )}
                 <Days created={createdAt} />
                 {resolved && resolvedBy?.data?.id === id && (
                     <>
-                        <span className="border rounded-md text-[#008200cc] text-xs font-semibold py-1 px-2 uppercase">
+                        <span className="border rounded-sm text-[#008200cc] text-xs font-semibold py-0.5 px-1 uppercase">
                             Solution
                         </span>
                         {(isAuthor || isModerator) && (
