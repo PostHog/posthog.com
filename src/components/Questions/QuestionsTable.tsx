@@ -17,6 +17,7 @@ type QuestionsTableProps = {
         url: string
         title: string
     }
+    hasMore?: boolean
 }
 
 export const QuestionsTable = ({
@@ -26,6 +27,7 @@ export const QuestionsTable = ({
     hideLoadMore,
     className = '',
     currentPage,
+    hasMore,
 }: QuestionsTableProps) => {
     return (
         <ul className="m-0 p-0 list-none">
@@ -131,7 +133,7 @@ export const QuestionsTable = ({
                       ))}
             </li>
 
-            {!hideLoadMore && (
+            {!hideLoadMore && hasMore && (
                 <li className="py-2 list-none">
                     <button
                         className="p-3 block w-full hover:bg-gray-accent-light text-primary/75 dark:text-primary-dark/75 hover:text-red rounded text-[15px] font-bold bg-gray-accent-light dark:bg-gray-accent-dark relative active:top-[0.5px] active:scale-[.99]"
