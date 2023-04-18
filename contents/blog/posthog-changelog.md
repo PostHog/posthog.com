@@ -31,9 +31,9 @@ Previously, we'd assign an engineer to be a [Support Hero](/handbook/engineering
 #### PostHog is now SOC 2 compliant
 IMAGE HERE
 
-PostHog is now officiall approved as being SOC 2 compliant. 
+PostHog has been audited and judged SOC 2 compliant. 
 
-We're no confident that anyone is _really_ interested in SOC 2 at a personal level, so...that's it. That's the update. 
+We're confident that nobody is _really_ interested in SOC 2 at a personal level. You either need it, or you don't. So... that's it. That's the update. 
 
 ## April 14, 2023
 
