@@ -17,16 +17,15 @@ const Button = ({
     subscribed === null ? null : (
         <button
             className={`flex rounded-sm p-1 ${
-                subscribed
+                !subscribed
                     ? 'relative bg-gray-accent-light hover:bg-gray-accent-light-hover/50 dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover/50 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px]'
                     : 'bg-red text-white dark:text-white'
             } ${className}`}
             onClick={handleSubscribe}
         >
-            <span className="w-6 h-6 rotate-6">
+            <span className={`w-6 h-6 rotate-6 ${subscribed ? 'animate-wiggle origin-top' : ''}`}>
                 <Bell />
             </span>
-            {/* {subscribed ? 'Unsubscribe' : 'Subscribe'} */}
         </button>
     )
 
@@ -48,13 +47,20 @@ export default function SubscribeButton({
         }
     }, [user])
 
-    const handleSubscribe = async () => (subscribed ? await unsubscribe() : await subscribe())
+    const handleSubscribe = async () => {
+        setSubscribed(!subscribed)
+        subscribed ? await unsubscribe() : await subscribe()
+    }
 
     return (
         <Tooltip
             content={() => (
-                <div style={{ maxWidth: 300 }}>
-                    {user ? 'Thread notifications: OFF (Press to enable)' : 'Sign in to subscribe to thread replies'}
+                <div style={{ maxWidth: 320 }}>
+                    {user
+                        ? `Email thread notifications: ${
+                              subscribed ? 'ON (Press to disable)' : 'OFF (Press to enable)'
+                          }`
+                        : 'Sign in to subscribe to thread replies'}
                 </div>
             )}
         >
