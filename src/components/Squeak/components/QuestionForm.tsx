@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Field, Form, Formik } from 'formik'
 import { useUser, User } from 'hooks/useUser'
 import { Approval } from './Approval'
@@ -119,6 +119,7 @@ type QuestionFormProps = {
     onSubmit?: (values: any, formType: string) => void
     initialView?: string
     topicID?: number
+    archived?: boolean
 }
 
 export const QuestionForm = ({
@@ -128,6 +129,7 @@ export const QuestionForm = ({
     initialView,
     reply,
     onSubmit,
+    archived,
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
@@ -226,6 +228,12 @@ export const QuestionForm = ({
         }
     }
 
+    useEffect(() => {
+        if (archived) {
+            setView(null)
+        }
+    }, [archived])
+
     return (
         <div>
             {view ? (
@@ -252,11 +260,14 @@ export const QuestionForm = ({
                 <div className="flex flex-1 space-x-2">
                     <Avatar className="w-[40px]" image={getAvatarURL(user?.profile)} />
                     <Button
+                        disabled={archived}
                         onClick={() => setView('question-form')}
                         className={
                             formType !== 'reply'
                                 ? 'text-red border-red'
-                                : 'border-black/30 dark:border-white/30 hover:border-black/50 dark:hover:border-white/50'
+                                : `border-black/30 dark:border-white/30 ${
+                                      archived ? '' : 'hover:border-black/50 dark:hover:border-white/50'
+                                  }`
                         }
                     >
                         {buttonText}

@@ -27,7 +27,6 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
         handleReplyDelete,
     } = useContext(CurrentQuestionContext)
 
-    const stuff = useContext(CurrentQuestionContext)
     const [confirmDelete, setConfirmDelete] = useState(false)
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
