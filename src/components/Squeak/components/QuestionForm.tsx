@@ -36,7 +36,7 @@ function QuestionFormMain({
     const { user, logout } = useUser()
 
     return (
-        <div className="flex-1 mb-4">
+        <div className="flex-1 mb-1">
             {title && <h2>{title}</h2>}
             <Formik
                 initialValues={{
@@ -58,7 +58,7 @@ function QuestionFormMain({
             >
                 {({ setFieldValue, isValid }) => {
                     return (
-                        <Form>
+                        <Form className="mb-0">
                             <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
 
                             <div className="bg-white border border-black/30 dark:bg-gray-accent-dark-hover dark:border-white/30 rounded-md overflow-hidden mb-4">
@@ -98,6 +98,11 @@ function QuestionFormMain({
                                     {user ? 'Post' : 'Login & post'}
                                 </Button>
                             </span>
+
+                            <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0">
+                                If you need to share personal info relating to a bug or issue with your account, we
+                                suggest filing a support ticket in the app.
+                            </p>
                         </Form>
                     )
                 }}
