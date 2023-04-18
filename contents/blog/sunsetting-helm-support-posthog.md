@@ -46,7 +46,7 @@ Regular updates to our Helm chart will cease **after May 31, 2023**. Security up
 We've already written to paying customers on Kubernetes deployments outlining how we'll support them in transitioning to PostHog Cloud, or an alternative PostHog deployment.
 
 To ease any transition to PostHog Cloud, we are:
-- Deep into the process of acquiring SOC 2 compliance for PostHog Cloud. We expect to have completed our SOC 2 audit by the end of Q2 2023.
+- Deep into the process of acquiring SOC 2 compliance for PostHog Cloud. We expect to have completed our SOC 2 audit by the end of Q2 2023. [**Update 17/04/2023:** PostHog Cloud is now SOC 2 certified.]
 
 - Making our cloud HIPAA compliant and will provide security updates for the customers requiring HIPAA until then. 
 
