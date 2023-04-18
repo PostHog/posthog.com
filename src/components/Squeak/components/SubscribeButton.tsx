@@ -53,8 +53,8 @@ export default function SubscribeButton({
     return (
         <Tooltip
             content={() => (
-                <div style={{ maxWidth: 250 }}>
-                    {user ? 'Get notified via email when someone responds to this question' : 'Sign in to subscribe!'}
+                <div style={{ maxWidth: 300 }}>
+                    {user ? 'Thread notifications: OFF (Press to enable)' : 'Sign in to subscribe to thread replies'}
                 </div>
             )}
         >
@@ -70,7 +70,7 @@ export default function SubscribeButton({
                         className={`${className} flex gap-1 p-0 border-0 relative opacity-50 font-bold text-black dark:text-white`}
                         disabled
                     >
-                        <span className="w-4 h-4">
+                        <span className="w-6 h-6 rotate-6">
                             <Bell />
                         </span>
                     </button>
