@@ -72,7 +72,7 @@ export const Question = (props: QuestionProps) => {
                                     {archived ? 'Unarchive' : 'Archive'}
                                 </button>
                             )}
-                            <SubscribeButton question={questionData} />
+                            {!archived && <SubscribeButton question={questionData} />}
                         </div>
                     </div>
                     <div className="ml-5 pl-[30px] border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
@@ -96,7 +96,7 @@ export const Question = (props: QuestionProps) => {
                 </div>
                 {archived && (
                     <div>
-                        <p className="font-semibold my-4">This thread has been archived</p>
+                        <p className="font-semibold m-0 mt-4">This thread has been archived</p>
                     </div>
                 )}
             </div>
