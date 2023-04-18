@@ -17,6 +17,9 @@ export type User = {
     profile: {
         id: number
     } & ProfileData
+    role: {
+        type: 'authenticated' | 'public' | 'moderator'
+    }
 }
 
 type UserContextValue = {
@@ -76,6 +79,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }, [])
 
     const getJwt = async () => {
+        console.log('getJwt', jwt)
         return jwt || localStorage.getItem('jwt')
     }
 
@@ -226,7 +230,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                         populate: ['avatar', 'questionSubscriptions'],
                     },
                     role: {
-                        select: ['type'],
+                        fields: ['type'],
                     },
                 },
             },

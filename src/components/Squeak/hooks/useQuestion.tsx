@@ -1,6 +1,6 @@
 import qs from 'qs'
-import { ProfileData, QuestionData, StrapiRecord } from 'lib/strapi'
-import useSWR from 'swr'
+import { ProfileData, QuestionData, StrapiRecord, TopicData } from 'lib/strapi'
+import useSWR, { useSWRConfig } from 'swr'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 
@@ -50,6 +50,7 @@ const query = (id: string | number) =>
                         },
                     },
                 },
+                topics: true,
             },
         },
         {
@@ -59,21 +60,20 @@ const query = (id: string | number) =>
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
     const { getJwt, fetchUser, user } = useUser()
+    const { mutate: globalMutate } = useSWRConfig()
     const posthog = usePostHog()
+
+    const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id)}`
 
     const {
         data: question,
         error,
         isLoading,
-        mutate,
-    } = useSWR<StrapiRecord<QuestionData>>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id)}`,
-        async (url) => {
-            const res = await fetch(url)
-            const { data } = await res.json()
-            return data?.[0]
-        }
-    )
+    } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
+        const res = await fetch(url)
+        const { data } = await res.json()
+        return data?.[0]
+    })
 
     if (error) {
         posthog?.capture('squeak error', {
@@ -81,6 +81,37 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             questionId: id,
             error: JSON.stringify(error),
         })
+    }
+
+    const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
+
+    // This mutate method takes into account the fact that both ids and permalinks can be
+    // used interchangeably to fetch a question.
+    //
+    // This ensures that data is kept in sync across all instances of the same question.
+    const mutate = async (data?: any) => {
+        // First, we mutate the key for whichever type of identifier was passed in to,
+        // this specific hook.
+        globalMutate(key, data, {
+            optimisticData: data,
+        })
+
+        if (!question) return
+
+        // Then, based on if it's a permalink or an id, we mutate the other key as well.
+        if (typeof id === 'string') {
+            globalMutate(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question.id)}`, data, {
+                optimisticData: data,
+            })
+        } else {
+            globalMutate(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question?.attributes?.permalink)}`,
+                data,
+                {
+                    optimisticData: data,
+                }
+            )
+        }
     }
 
     const reply = async (body: string) => {
@@ -133,8 +164,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             throw error
         }
     }
-
-    const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
 
     const handlePublishReply = async (published: boolean, id: number) => {
         try {
@@ -285,6 +314,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 profileSubscribers: true,
             },
         })
+
         const questionRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query}`)
 
         if (!questionRes.ok) {
@@ -344,6 +374,54 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         await fetchUser()
     }
 
+    const addTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                data: {
+                    topics: {
+                        connect: [topic.id],
+                    },
+                },
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        const copiedData = Object.assign({}, questionData)
+
+        copiedData.attributes?.topics?.data?.push(topic)
+
+        await mutate(copiedData)
+    }
+
+    const removeTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                data: {
+                    topics: {
+                        disconnect: [topic.id],
+                    },
+                },
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        const copiedData = Object.assign({}, questionData)
+
+        if (!copiedData.attributes?.topics?.data) return
+
+        copiedData.attributes.topics.data = copiedData.attributes?.topics?.data?.filter((t) => t.id !== topic.id)
+
+        await mutate(copiedData)
+    }
+
     return {
         question: questionData,
         reply,
@@ -356,5 +434,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         isSubscribed,
         subscribe,
         unsubscribe,
+        addTopic,
+        removeTopic,
     }
 }
