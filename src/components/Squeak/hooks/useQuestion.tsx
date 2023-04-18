@@ -77,11 +77,16 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         error,
         isLoading,
     } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
-        const res = await fetch(url, {
-            headers: {
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        })
+        const res = await fetch(
+            url,
+            isModerator
+                ? {
+                      headers: {
+                          Authorization: `Bearer ${await getJwt()}`,
+                      },
+                  }
+                : undefined
+        )
 
         const { data } = await res.json()
         return data?.[0]
