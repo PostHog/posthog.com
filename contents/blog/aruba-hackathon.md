@@ -17,7 +17,7 @@ Every year, Team PostHog congregates for our annual all-company offsite. In prev
 
 ![posthog aruba](../images/blog/aruba/aruba-vibes.jpeg)
 
-As a remote company, our offsites are a hugely important part of our culture. We encourage everyone to meet up when they can, be that through co-working, ad-hoc visits ([which we pay for](/handbook/people/spending-money#budget-for-socializing), or [small team offsites](/handbook/company/offsites#small-team-offsites), but we only get the whole company together once a year.
+As a remote company, our offsites are a hugely important part of our culture. We encourage everyone to meet up when they can, be that through co-working, ad-hoc visits ([which we pay for](/handbook/people/spending-money#budget-for-socializing)), or [small team offsites](/handbook/company/offsites#small-team-offsites), but we only get the whole company together once a year.
 
 ![posthog aruba](../images/blog/aruba/people-shots.jpeg)
 
@@ -81,7 +81,7 @@ For Joe, one hackathon project wasn't enough. He also worked with Eli Kinsey fro
 
 - **Team DataBeach:** Marius Andra, Frank Hamand and Harry Waye
 
-Dubbed DataBeach because Frank and Harry started building the feature while sipping Piña Coladas by the beach, DataBeach is all about our long-term vision of  [simplifying the modern data stack](/blog/modern-data-stack-sucks) for startups. Less time spent wrangling data = more time shipping products. 
+Dubbed DataBeach because Frank and Harry started building the feature while sipping Piña Coladas by the beach, DataBeach is all about our long-term vision of [simplifying the modern data stack](/blog/modern-data-stack-sucks) for startups. Less time spent wrangling data = more time shipping products. 
 
 ![databeach](../images/blog/aruba/data-beach.png)
 
@@ -101,23 +101,23 @@ Anecdotally, our direct-to-an-engineer support is a big reason why people love u
 
 Enter team Arubug, who decided there had to be a better way.
 
-// TODO: Video of site app
+![bug report](../images/blog/aruba/bug-report.gif)
 
 The team started by [building a site app](/tutorials/build-site-app) for bug reports based on our existing [Feedback Widget](/apps/feedback-widget), which sends a `$bug_report` event to PostHog.
 
 // TODO: Screenshot of dashboard
 
-These reports feed into a dashboard that tracks bug reports, helping us to identity trends. Bugs can broken down as tables with relevant properties, and session replays, attached.
+These reports feed into a dashboard that tracks bug reports, helping us to identity trends. Bugs can be broken down as tables with relevant properties, and session replays, attached.
 
-// TODO: Screenshot of bug report table 
+![bug table](../images/blog/aruba/arubug-table.png)
 
 The team also built a communication tab into bug reports, so support can send emails and leave notes on tickets with additional context without leaving the app. Every email is a ClickHouse event tied to the initial UUID of the report event, with emails (for now) sent and received via Zapier.
 
-// TODO: Screenshot of communication tab
+![communication-tab](../images/blog/aruba/conversation-tab.png)
 
 After the hackathon we've reviewed the plan:
 
-- We realised that there's another problem internally. Due to the increased complexity of our product, it’s become harder for a single engineer to provide good support for all of our products. Support heroes also shield product teams from feedback about their product, which means it’s harder to iterate on a product. So we're going to use this in-app integration to split out to the more specific team helping us do triaging effectively.
+- We realized that there's another problem internally. Due to the increased complexity of our product, it’s become harder for a single engineer to provide good support for all of our products. Support heroes also shield product teams from feedback about their product, which means it’s harder to iterate on a product. So we're going to use this in-app integration to split out to the more specific team helping us do triage effectively.
 
 - We've decided at this point not to continue the work on the communication tab and instead integrate better with Zendesk. That said, the way we handle support can be used by customers too – there will be a blog post coming to explain this further.
 
@@ -182,4 +182,4 @@ Other features include:
 - Ability to kill queries
 - Productized async migrations
 
-Needless to say, this is all backend work you will never see, but House Watch will make it easier for us to keep PostHog fast and reliable for you.
+Needless to say, this is all backend work you will never see, but HouseWatch will make it easier for us to keep PostHog fast and reliable for you.
