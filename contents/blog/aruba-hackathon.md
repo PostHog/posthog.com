@@ -93,11 +93,11 @@ There's more to build before PostHog is ready to be your data warehouse, but we'
 
 - **Team Arubug:** Tiina Turban, Simon Fisher, Paul D'Ambra, Cameron DeLeone, and Cory Watilo
 
-Our amazing, direct-to-an-engineer support has anecdotally been a big reason why people love us. But there's a couple of inefficiencies we've been running into especially as we grow
-- lack the context a support hero or engineer needs to fix it, 
-  - furthermore we have session recordings, why are we wasting time trying to repro instead of just checking out the session recordings.
-- lack of ability to see trends/aggregated info about support requests
-- too many places for support requests to come in which makes doing support confusing and prioritising hard.
+Anecdotally, our direct-to-an-engineer support is a big reason why people love us. But we've run into a few of inefficiencies as we've grown, such as:
+
+- Support requests that lack the context an engineer needs to fix it
+- Lack of trends and aggregated info about support requests
+- Difficulty managing multiple sources for support requests
 
 Enter team Arubug, who decided there had to be a better way.
 
