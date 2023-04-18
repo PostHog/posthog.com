@@ -60,7 +60,7 @@ export default function Questions({ data, pageContext }: IProps) {
                                 <span className="text-primary dark:text-primary-dark text-[15px]">Questions</span>
                             </Link>
                             <div className="ml-auto">
-                                <QuestionForm onSubmit={refresh} />
+                                <QuestionForm topicID={data?.squeakTopic?.squeakId} onSubmit={refresh} />
                             </div>
                         </div>
                         <div className="w-full sm:flex sm:items-center mb-4">
