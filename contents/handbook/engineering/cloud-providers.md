@@ -11,11 +11,12 @@ showTitle: true
 Ask in the `#team-infrastructure` Slack channel for someone to add you.
 
 To give someone access (important to follow these steps!):
-1. navigate to [IAM](https://us-east-1.console.aws.amazon.com/singlesignon/home?region=us-east-1#!/instances/7223d5d28068c4d6/users)
-2. Use the `Add User` button at the top right.
-3. Under username, type the user’s email address, and fill in the rest of the fields (Email, First and Last name).
-3. Click next and choose the user group.
-4. Click next and then click on Add user.
+1. Login to the AWS root account `#795637471508`.
+2. navigate to [IAM](https://us-east-1.console.aws.amazon.com/singlesignon/home?region=us-east-1#!/instances/7223d5d28068c4d6/users).
+3. Use the `Add User` button at the top right.
+4. Under username, type the user’s email address, and fill in the rest of the fields (Email, First and Last name).
+5. Click next and choose the user group.
+6. Click next and then click on Add user.
 
 ### Deploying PostHog
 
