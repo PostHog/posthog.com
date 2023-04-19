@@ -32,14 +32,12 @@ export default function SubscribeButton({
     contentType,
     id,
     className = '',
-    tooltipMessage,
 }: {
     contentType: 'topic' | 'question'
     id: number | string
     className?: string
-    tooltipMessage: string
 }) {
-    if (!id || !contentType || !tooltipMessage) return null
+    if (!id || !contentType) return null
     const [subscribed, setSubscribed] = useState<boolean | null>(null)
     const { user, isSubscribed, setSubscription } = useUser()
 

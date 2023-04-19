@@ -63,11 +63,7 @@ export const Question = (props: QuestionProps) => {
                         <Profile profile={questionData.attributes.profile?.data} />
                         <Days created={questionData.attributes.createdAt} />
                         <div className="!ml-auto">
-                            <SubscribeButton
-                                contentType="question"
-                                id={questionData?.id}
-                                tooltipMessage="Get notified via email when someone responds to this question"
-                            />
+                            <SubscribeButton contentType="question" id={questionData?.id} />
                         </div>
                     </div>
                     <div className="ml-5 pl-[30px] border-l border-dashed border-gray-accent-light dark:border-opacity-50">

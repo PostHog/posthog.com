@@ -71,7 +71,6 @@ export default function Questions({ data, pageContext }: IProps) {
                                     className="text-red font-bold disabled:text-black dark:disabled:text-white disabled:opacity-50"
                                     contentType="topic"
                                     id={data?.squeakTopic?.squeakId}
-                                    tooltipMessage="Get notified via email when someone posts a question related to this topic"
                                 />
                             </div>
                             <div className="ml-auto sm:mt-0 mt-4 sm:w-32 z-20">
