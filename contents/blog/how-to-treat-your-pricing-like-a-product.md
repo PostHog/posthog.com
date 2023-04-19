@@ -1,6 +1,6 @@
 ---
 date: 2023-04-19
-title: How to treat your pricing like a product (and why it matters)
+title: How to treat your pricing like a product (and how we do it)
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -101,7 +101,9 @@ Any good product manager will tell you that a product is (almost) never done. Th
 
 ## How "pricing as a product" works at PostHog
 
-We've been on this journey for close to a year now. It started with realizing that our pricing wasn't serving the needs of both our internal and external customers, then hiring a growth engineer to own it. We built a completely new billing service from the ground up to satisfy those needs, and have gone through multiple iterations of how we price and sell to customers to align with our company strategy.
+We've been on this journey for close to a year now. It started with realizing that our pricing wasn't serving the needs of both our internal and external customers, then hiring a growth engineer to own it. 
+
+We built a completely new billing service from the ground up to satisfy those needs, and have gone through multiple iterations of how we price and sell to customers to align with our company strategy.
 
 Thus far we've run some experiments on the pricing page, but the next step for us is to fully leverage feature flags and experiments in PostHog to try out different pricing models on different customers, simultaneously. 
 
@@ -109,7 +111,7 @@ We're excited to see how this really unlocks the potential in our pricing produc
 
 After all, when customer needs are met, this kind of mutually beneficial magic is what happens.
 
-### Further reading:
+### Further reading
 
 - [Counterintuitive lessons about our pricing](/blog/pricing-lessons): Imagine being able to grow twice as fast with just a few hours of work. Changing your pricing has a real chance to get you there. PostHog CEO, James Hawkins, shares what he's learned.
 
