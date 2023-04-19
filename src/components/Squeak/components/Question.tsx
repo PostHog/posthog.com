@@ -62,6 +62,15 @@ export const Question = (props: QuestionProps) => {
             }}
         >
             <div>
+                {archived && (
+                    <div className="font-medium text-sm m-0 mb-6 bg-gray-accent-light dark:bg-gray-accent-dark p-6 rounded text-center">
+                        <p className="font-bold m-0 pb-1">This thread has been archived.</p>
+                        <p className="text-sm m-0">
+                            It's likely out of date, no longer relevant, or the answer has been added to our{' '}
+                            <Link to="/docs">documentation</Link>.
+                        </p>
+                    </div>
+                )}
                 <div className={`flex flex-col ${archived ? 'opacity-50' : ''}`}>
                     <div className="flex items-center space-x-2 w-full">
                         <Profile profile={questionData.attributes.profile?.data} />
@@ -94,11 +103,6 @@ export const Question = (props: QuestionProps) => {
                         <QuestionForm archived={archived} questionId={questionData.id} formType="reply" reply={reply} />
                     </div>
                 </div>
-                {archived && (
-                    <div>
-                        <p className="font-semibold m-0 mt-4">This thread has been archived</p>
-                    </div>
-                )}
             </div>
         </CurrentQuestionContext.Provider>
     )
