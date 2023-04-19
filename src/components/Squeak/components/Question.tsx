@@ -1,4 +1,4 @@
-import React, { useState, useRef, createContext, useEffect } from 'react'
+import React, { useState, useRef, createContext } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
@@ -63,7 +63,7 @@ export const Question = (props: QuestionProps) => {
                         <Profile profile={questionData.attributes.profile?.data} />
                         <Days created={questionData.attributes.createdAt} />
                         <div className="!ml-auto">
-                            <SubscribeButton question={questionData} />
+                            <SubscribeButton contentType="question" id={questionData?.id} />
                         </div>
                     </div>
                     <div className="ml-5 pl-[30px] border-l border-dashed border-gray-accent-light dark:border-opacity-50">

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
-import { ProfileData, StrapiData, StrapiRecord, StrapiResult } from 'lib/strapi'
+import { ProfileData } from 'lib/strapi'
 import usePostHog from './usePostHog'
 
 export type User = {
@@ -24,7 +24,6 @@ export type User = {
 
 type UserContextValue = {
     isLoading: boolean
-
     user: User | null
     isModerator: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
@@ -38,6 +37,8 @@ type UserContextValue = {
         firstName: string
         lastName: string
     }) => Promise<User | null | { error: string }>
+    isSubscribed: (contentType: 'topic' | 'question', id: number | string) => Promise<boolean>
+    setSubscription: (contentType: 'topic' | 'question', id: number | string, subscribe: boolean) => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -54,6 +55,8 @@ export const UserContext = createContext<UserContextValue>({
         // noop
     },
     signUp: async () => null,
+    isSubscribed: async () => false,
+    setSubscription: async () => undefined,
 })
 
 type UserProviderProps = {
@@ -309,6 +312,69 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         return meData
     }
 
+    const isSubscribed = async (contentType: 'topic' | 'question', id: number | string) => {
+        const profileID = user?.profile?.id
+        if (!profileID || !contentType || !id) return false
+
+        const query = qs.stringify({
+            filters: {
+                id: {
+                    $eq: profileID,
+                },
+                [`${contentType}Subscriptions`]: {
+                    id: {
+                        $eq: id,
+                    },
+                },
+            },
+            populate: {
+                [`${contentType}Subscriptions`]: true,
+            },
+        })
+
+        const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
+
+        if (!profileRes.ok) {
+            throw new Error(`Failed to fetch profile`)
+        }
+
+        const { data } = await profileRes.json()
+
+        return data?.length > 0
+    }
+
+    const setSubscription = async (
+        contentType: 'topic' | 'question',
+        id: number | string,
+        subscribe: boolean
+    ): Promise<void> => {
+        const profileID = user?.profile?.id
+        if (!profileID || !contentType || !id) return
+
+        const body = {
+            data: {
+                [`${contentType}Subscriptions`]: {
+                    [subscribe ? 'connect' : 'disconnect']: [id],
+                },
+            },
+        }
+
+        const subscriptionRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        if (!subscriptionRes.ok) {
+            throw new Error(`Failed to update subscription`)
+        }
+
+        await fetchUser()
+    }
+
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
@@ -323,6 +389,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         logout,
         signUp,
         fetchUser,
+        isSubscribed,
+        setSubscription,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

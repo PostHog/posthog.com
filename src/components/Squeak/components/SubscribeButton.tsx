@@ -1,11 +1,10 @@
 import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'
-import { QuestionData, StrapiRecord } from 'lib/strapi'
 import React, { useEffect, useState } from 'react'
 import { useQuestion } from '../hooks/useQuestion'
 import { Bell } from 'components/NotProductIcons'
 
-const Button = ({
+export const Button = ({
     className,
     subscribed,
     handleSubscribe,
@@ -30,26 +29,27 @@ const Button = ({
     )
 
 export default function SubscribeButton({
-    question,
+    contentType,
+    id,
     className = '',
 }: {
-    question?: StrapiRecord<QuestionData>
+    contentType: 'topic' | 'question'
+    id: number | string
     className?: string
 }) {
-    if (!question) return null
+    if (!id || !contentType) return null
     const [subscribed, setSubscribed] = useState<boolean | null>(null)
-    const { user } = useUser()
-    const { subscribe, unsubscribe, isSubscribed } = useQuestion(question.id)
+    const { user, isSubscribed, setSubscription } = useUser()
 
     useEffect(() => {
         if (user) {
-            isSubscribed().then((subscribed) => setSubscribed(subscribed))
+            isSubscribed(contentType, id).then((subscribed) => setSubscribed(subscribed))
         }
     }, [user])
 
     const handleSubscribe = async () => {
         setSubscribed(!subscribed)
-        subscribed ? await unsubscribe() : await subscribe()
+        await setSubscription(contentType, id, !subscribed)
     }
 
     return (
@@ -57,10 +57,8 @@ export default function SubscribeButton({
             content={() => (
                 <div style={{ maxWidth: 320 }}>
                     {user
-                        ? `Email thread notifications: ${
-                              subscribed ? 'ON (Press to disable)' : 'OFF (Press to enable)'
-                          }`
-                        : 'Sign in to subscribe to thread replies'}
+                        ? `Email notifications: ${subscribed ? 'ON (Press to disable)' : 'OFF (Press to enable)'}`
+                        : 'Sign in to subscribe'}
                 </div>
             )}
         >
