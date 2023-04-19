@@ -1,5 +1,19 @@
 import React from 'react'
 
+export const Archive = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        className={`fill-current ${className}`}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        {...other}
+    >
+        <path d="M11.602 10.036c.22.219.576.219.796 0l2.363-2.363a.564.564 0 0 0-.396-.968.564.564 0 0 0-.4.172L12.563 8.28V4.125a.562.562 0 1 0-1.126 0V8.28l-1.402-1.403a.563.563 0 0 0-.796.796l2.363 2.363Z" />
+        <path d="M20.381 11.748 18.02 7.023a.562.562 0 0 0-.507-.31h-.787a.562.562 0 1 0 0 1.125h.44l1.8 3.6H15.15a.562.562 0 0 0-.563.562v1.8H9.413V12a.563.563 0 0 0-.562-.562H5.035l1.8-3.6h.44a.562.562 0 1 0 0-1.125h-.787a.561.561 0 0 0-.503.31l-2.363 4.725a.56.56 0 0 0-.06.252v5.894a2.546 2.546 0 0 0 2.544 2.544h11.788a2.546 2.546 0 0 0 2.544-2.544V12a.568.568 0 0 0-.057-.252Zm-2.487 7.565H6.106a1.42 1.42 0 0 1-1.418-1.419v-5.331h3.6v1.8a.563.563 0 0 0 .562.562h6.3a.563.563 0 0 0 .563-.563v-1.8h3.6v5.332a1.42 1.42 0 0 1-1.419 1.419Z" />
+    </svg>
+)
+
 export const Bell = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"
@@ -639,6 +653,23 @@ export const Tutorials = ({ className = '', ...other }: { className?: string }):
         </defs>
     </svg>
 )
+export const Undo = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        className={`fill-current ${className}`}
+        {...other}
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M19.997 12.998A7.988 7.988 0 0 0 11.8 5.007 7.99 7.99 0 0 0 6.14 7.57v-1.5a1.07 1.07 0 0 0-2.14 0v4.262c0 .591.479 1.07 1.07 1.07h4.269a1.07 1.07 0 1 0 0-2.14H7.48a5.862 5.862 0 0 1 9.472 6.874 5.863 5.863 0 0 1-4.95 2.724 1.07 1.07 0 1 0 0 2.14h.022a7.996 7.996 0 0 0 7.973-8.002Z"
+        />
+    </svg>
+)
+
 export const Unlock = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"
