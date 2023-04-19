@@ -14,6 +14,7 @@ import { useQuestions } from 'hooks/useQuestions'
 import { graphql } from 'gatsby'
 import Link from 'components/Link'
 import { RightArrow } from 'components/Icons'
+import SubscribeButton from 'components/Squeak/components/SubscribeButton'
 
 interface ITopic {
     label: string
@@ -64,8 +65,13 @@ export default function Questions({ data, pageContext }: IProps) {
                             </div>
                         </div>
                         <div className="w-full sm:flex sm:items-center mb-4">
-                            <div>
+                            <div className="flex space-x-4 items-baseline">
                                 <h1 className="text-4xl m-0">{data?.squeakTopic?.label} questions</h1>
+                                <SubscribeButton
+                                    className="text-red font-bold disabled:text-black dark:disabled:text-white disabled:opacity-50"
+                                    contentType="topic"
+                                    id={data?.squeakTopic?.squeakId}
+                                />
                             </div>
                             <div className="ml-auto sm:mt-0 mt-4 sm:w-32 z-20">
                                 <Listbox as="div" className="relative" value={sortBy} onChange={setSortBy}>
