@@ -1,5 +1,5 @@
 ---
-date: 2023-04-09
+date: 2023-04-19
 title: How to treat your pricing like a product (and why it matters)
 rootPage: /blog
 sidebar: Blog
@@ -48,6 +48,8 @@ And to keep it alive, we’ve got to treat it like a product.
 
 But how? I’m glad you asked.
 
+> 📖 **Further reading:** How do you price multiple, integrated products? PostHog CEO, James Hawkins, explores this in [What we've learned about multi-product pricing (so far)](/blog/multi-product-pricing)
+
 ## How to treat your pricing like a product
 
 ### 1. Hire or assign a team to own pricing
@@ -67,6 +69,8 @@ For PostHog, our pricing product’s customers are:
 - **Customer success (internal)**, who need a system that enables them to make custom packages for enterprise customers, anticipate invoices, manage accounts, and more.
 
 It’s also important to determine how each customer will "pay" for or transfer value to your product. Since people aren’t paying for pricing as a product (unless, of course, the product you sell is pricing as a product) then the value transfer is murkier. It often comes down to usage, or even revenue on the other products. Whatever it is, understand and track it so you can gauge the usefulness of your efforts.
+
+> 📖 **Further reading:** Creating an Ideal Customer Profile is one of the most important things we've ever done at PostHog, see [How we found our Ideal Customer Profile](/blog/creating-ideal-customer-profile) for more.
 
 ### 3. Build your tooling to satisfy the customers’ needs
 
@@ -104,3 +108,9 @@ Thus far we've run some experiments on the pricing page, but the next step for u
 We're excited to see how this really unlocks the potential in our pricing product to both give more value to our customers, while also getting more value ourselves. 
 
 After all, when customer needs are met, this kind of mutually beneficial magic is what happens.
+
+### Further reading:
+
+- [Counterintuitive lessons about our pricing](/blog/pricing-lessons): Imagine being able to grow twice as fast with just a few hours of work. Changing your pricing has a real chance to get you there. PostHog CEO, James Hawkins, shares what he's learned.
+
+- [10x engineers talk to users](/blog/10x-engineers-do-user-interviews): PostHog's Head of Product, Luke Harries, on why "best way to become a 10x engineer is to zoom out and solve for user impact."
