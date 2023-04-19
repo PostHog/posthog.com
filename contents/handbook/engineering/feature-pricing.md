@@ -18,11 +18,8 @@ showTitle: true
 ## Our goals with these principles are to: 
 
 - Keep the engineers at PostHog as close to our customers as possible, so they can build new products or improve existing in ways that are most impactful for them.
-
 - Maintain low barriers to entry for our customers, so they can see value in PostHog quickly.
-
 - Ensure transparency around the value we provide to our customers.
-
 - Tightly couple our success with that of our customers’. The more we can help them succeed, the more we will succeed – e.g. with usage-based pricing.
 
 It's important we evaluate all new features, and shifts in our pricing plans, to ensure they align with our pricing values.
@@ -51,11 +48,11 @@ For example, if someone were to consider moving from PostHog to some other provi
 
 - We should always ask ourselves how newly release features should be priced, even if it's launching as a free product. A default behavior is good, but it shouldn't be used as a replacement for critically thinking about where something fits into our pricing scheme.
 
-- Out default assumption for new features is that full usage is only available on the paid plans.
+- Our default assumption for new features is that full usage is only available on the paid plans.
 
 - Features that need to be experienced in order to demonstrate value should be available on the free plan but with a reasonable limit.
 
-- Features that have the potential to grow our word-of-mouth should be free – e.g. we shouldn't (and don't) charge for extra users in an org because the more people we get inside PostHog, the better.
+- Features that have the potential to grow our word-of-mouth should be free – e.g. we shouldn't (and don't) charge for extra users in an org. because the more people we get inside PostHog, the better.
 
 - Features that are focused around extra security, permissioning, compliance, or other enterprise-style upgrades should be reserved for our enterprise pricing tier.
 
