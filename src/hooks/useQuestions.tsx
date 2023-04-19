@@ -129,6 +129,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         questions,
         fetchMore: () => setSize(size + 1),
         isLoading,
+        total,
         refresh: () => mutate(),
     }
 }

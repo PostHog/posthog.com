@@ -230,7 +230,13 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             {
                 populate: {
                     profile: {
-                        populate: ['avatar', 'questionSubscriptions'],
+                        populate: {
+                            avatar: true,
+                            questionSubscriptions: {
+                                sort: ['createdAt:desc'],
+                            },
+                            topicSubscriptions: true,
+                        },
                     },
                     role: {
                         fields: ['type'],

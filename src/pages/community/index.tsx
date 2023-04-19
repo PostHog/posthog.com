@@ -15,7 +15,7 @@ import Tooltip from 'components/Tooltip'
 import GitHubTooltip, { Author } from 'components/GitHubTooltip'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import SidebarSection from 'components/PostLayout/SidebarSection'
-import { QuestionData } from 'lib/strapi'
+import { QuestionData, TopicData } from 'lib/strapi'
 import { useQuestions } from 'hooks/useQuestions'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { User } from '../../hooks/useUser'
@@ -127,27 +127,80 @@ const ListItem = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-const Subscription = ({ question }: { question: QuestionData }) => {
-    const { permalink, numReplies, id, subject } = question
+const QuestionSubscriptions = (props: { questions: QuestionData[] }) => {
+    const [showAll, setShowAll] = useState(false)
     const { setSubscription } = useUser()
+
+    const questions = showAll ? props.questions : props.questions.slice(0, 5)
+
+    return questions?.length > 0 ? (
+        <>
+            {questions.map((question) => {
+                const { permalink, numReplies, id, subject } = question
+                return (
+                    <ListItem key={id}>
+                        <div className="flex-grow flex flex-col overflow-hidden">
+                            <Link
+                                state={{ previous: { title: 'Dashboard', url: '/community' } }}
+                                className="font-bold text-ellipsis overflow-hidden whitespace-nowrap text-base"
+                                to={`/questions/${permalink}`}
+                            >
+                                {subject}
+                            </Link>
+                        </div>
+                        <p className={`m-0 font-semibold opacity-60 flex-shrink-0 text-sm xl:w-[200px] flex space-x-1`}>
+                            <span>
+                                {numReplies || 0} {numReplies === 1 ? 'reply' : 'replies'}
+                            </span>
+                        </p>
+                        <div className="flex">
+                            <button
+                                className="text-red font-bold text-sm"
+                                onClick={() => setSubscription('question', id, false)}
+                            >
+                                Unsubscribe
+                            </button>
+                        </div>
+                    </ListItem>
+                )
+            })}
+            {!showAll && props?.questions?.length > 5 && (
+                <CallToAction width="full" type="secondary" onClick={() => setShowAll(true)}>
+                    Show all
+                </CallToAction>
+            )}
+        </>
+    ) : (
+        <p>You're not subscribed to any questions yet</p>
+    )
+}
+
+const TopicSubscription = ({ topic }: { topic: TopicData }) => {
+    const { slug, label, id } = topic
+    const { setSubscription } = useUser()
+
+    const { total, isLoading } = useQuestions({ topicId: id, limit: 1 })
 
     return (
         <ListItem>
             <div className="flex-grow flex flex-col overflow-hidden">
                 <Link
+                    state={{ previous: { title: 'Dashboard', url: '/community' } }}
                     className="font-bold text-ellipsis overflow-hidden whitespace-nowrap text-base"
-                    to={`/questions/${permalink}`}
+                    to={`/questions/topic/${slug}`}
                 >
-                    {subject}
+                    {label}
                 </Link>
             </div>
             <p className={`m-0 font-semibold opacity-60 flex-shrink-0 text-sm xl:w-[200px] flex space-x-1`}>
-                <span>
-                    {numReplies || 0} {numReplies === 1 ? 'reply' : 'replies'}
-                </span>
+                {!isLoading && (
+                    <span>
+                        {total || 0} {total === 1 ? 'question' : 'questions'}
+                    </span>
+                )}
             </p>
             <div className="flex">
-                <button className="text-red font-bold text-sm" onClick={() => setSubscription('question', id, false)}>
+                <button className="text-red font-bold text-sm" onClick={() => setSubscription('topic', id, false)}>
                     Unsubscribe
                 </button>
             </div>
@@ -155,25 +208,50 @@ const Subscription = ({ question }: { question: QuestionData }) => {
     )
 }
 
+const TopicSubscriptions = (props: { topics: TopicData[] }) => {
+    const [showAll, setShowAll] = useState(false)
+
+    const topics = showAll ? props.topics : props.topics.slice(0, 5)
+
+    return topics?.length > 0 ? (
+        <>
+            {topics.map((topic) => (
+                <TopicSubscription key={topic?.id} topic={topic} />
+            ))}
+            {!showAll && props?.topics?.length > 5 && (
+                <CallToAction width="full" type="secondary" onClick={() => setShowAll(true)}>
+                    Show all
+                </CallToAction>
+            )}
+        </>
+    ) : (
+        <p>You're not subscribed to any topics yet</p>
+    )
+}
+
 const Subscriptions = () => {
     const { user, fetchUser } = useUser()
-    const subscriptions = user?.profile?.questionSubscriptions
+    const questionSubscriptions = user?.profile?.questionSubscriptions
+    const topicSubscriptions = user?.profile?.topicSubscriptions
 
     useEffect(() => {
         if (user) fetchUser()
     }, [])
 
-    if (!subscriptions) return null
+    if (!questionSubscriptions && !topicSubscriptions) return null
     return (
         <div id="my-activity" className="mb-12">
             <SectionTitle>My subscriptions</SectionTitle>
-            {subscriptions?.length > 0 ? (
-                subscriptions.map((question) => {
-                    return <Subscription key={question.id} user={user} question={question} />
-                })
-            ) : (
-                <p>You're not subscribed to any questions yet</p>
-            )}
+            <div className="grid gap-y-8">
+                <div>
+                    <h4>Topics</h4>
+                    <TopicSubscriptions topics={topicSubscriptions} />
+                </div>
+                <div>
+                    <h4>Questions</h4>
+                    <QuestionSubscriptions questions={questionSubscriptions} />
+                </div>
+            </div>
         </div>
     )
 }
