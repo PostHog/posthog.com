@@ -196,4 +196,31 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         }
     })
+
+    const planKeys: string | null = 'starter-20230117,scale-20230117'
+    const url = `${process.env.BILLING_SERVICE_URL + '/api/plans'}${planKeys ? `?keys=${planKeys}` : ''}`
+    const headers = {
+        'Content-Type': 'application/json',
+    }
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: headers,
+    })
+    response.json().then((data) => {
+        if (data?.plans?.length > 0) {
+            data.plans.forEach((plan) => {
+                const node = {
+                    id: createNodeId(`plan -${plan.name}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: `Plan`,
+                        contentDigest: createContentDigest(plan),
+                    },
+                    ...plan,
+                }
+                createNode(node)
+            })
+        }
+    })
 }

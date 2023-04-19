@@ -12,6 +12,7 @@ import MinusIcon from '../../../images/x.svg'
 import './styles/index.scss'
 import Modal from 'components/Modal'
 import { capitalizeFirstLetter } from '../../../utils'
+import { graphql, useStaticQuery } from 'gatsby'
 
 const convertLargeNumberToWords = (
     // The number to convert
@@ -224,9 +225,9 @@ export const getProductLimit = (product?: BillingProductV2Type): JSX.Element => 
 }
 
 export const PlanComparison = ({ className = '' }) => {
+    const data = useStaticQuery(query)
     const posthog = usePostHog()
-    const [availablePlans, setAvailablePlans] = useState<BillingV2PlanType[]>([])
-
+    const availablePlans: BillingV2PlanType[] = data?.allPlan?.nodes
     const excludedFeatures = [
         'dashboard_collaboration',
         'ingestion_taxonomy',
@@ -235,25 +236,6 @@ export const PlanComparison = ({ className = '' }) => {
         'app_metrics',
         'paths_advanced',
     ]
-
-    useEffect(() => {
-        const fetchPlans = async () => {
-            const planKeys: string | null = 'starter-20230117,scale-20230117'
-            const url = `${process.env.BILLING_SERVICE_URL + '/api/plans'}${planKeys ? `?keys=${planKeys}` : ''}`
-            const headers = {
-                'Content-Type': 'application/json',
-            }
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: headers,
-            })
-            response.json().then((data) => {
-                setAvailablePlans(data.plans)
-            })
-        }
-
-        fetchPlans().catch((e) => console.error(e))
-    }, [])
 
     return availablePlans?.length > 0 ? (
         <div className={`w-full relative mb-0 space-y-4 -mt-8 md:mt-0`}>
@@ -355,7 +337,11 @@ export const PlanComparison = ({ className = '' }) => {
                                                         </div>
                                                     )}
                                                     tooltipClassName="max-w-xs m-4"
-                                                    placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                    placement={
+                                                        (typeof window !== 'undefined' && window.innerWidth) > 767
+                                                            ? 'right'
+                                                            : 'bottom'
+                                                    }
                                                 >
                                                     <span
                                                         className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
@@ -454,3 +440,44 @@ export const PlanComparison = ({ className = '' }) => {
         </div>
     )
 }
+
+const query = graphql`
+    {
+        allPlan {
+            nodes {
+                name
+                description
+                is_free
+                key
+                products {
+                    type
+                    name
+                    description
+                    free_allocation
+                    feature_groups {
+                        group
+                        name
+                        features {
+                            key
+                            name
+                            description
+                            unit
+                            limit
+                            note
+                            group
+                        }
+                    }
+                    tiers {
+                        flat_amount_usd
+                        unit_amount_usd
+                        up_to
+                        current_amount_usd
+                        current_usage
+                    }
+                    tiered
+                    unit
+                }
+            }
+        }
+    }
+`
