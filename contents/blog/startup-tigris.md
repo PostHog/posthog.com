@@ -37,7 +37,7 @@ At mid-stage companies, what typically happens is that when those companies star
 
 ### What are you most excited about?
 
-The first thing I'm most excited about is actually about building - I put myself in that category of builder. In the past, I've built internal platforms, so this is my first opportunity to build something that end users are going to use directly. At Uber, our platform was business-critical, but we were still behind the scenes and not dealing with customers directly. 
+The first thing I'm most excited about is actually building - I put myself in that category of builder. In the past, I've built internal platforms, so this is my first opportunity to build something that end users are going to use directly. At Uber, our platform was business-critical, but we were still behind the scenes and not dealing with customers directly. 
 
 So, this is the first opportunity that excites me in that way - getting to build and sell a product, and talking directly to users.
 
