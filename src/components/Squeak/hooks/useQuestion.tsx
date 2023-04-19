@@ -422,6 +422,24 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         await mutate(copiedData)
     }
 
+    const archive = async (archive: boolean) => {
+        const body = JSON.stringify({
+            data: {
+                archived: archive,
+            },
+        })
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionData?.id}`, {
+            method: 'PUT',
+            body,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        mutate()
+    }
+
     return {
         question: questionData,
         reply,
@@ -436,5 +454,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         unsubscribe,
         addTopic,
         removeTopic,
+        archive,
     }
 }

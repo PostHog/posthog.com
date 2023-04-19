@@ -9,6 +9,7 @@ import { useQuestion } from '../hooks/useQuestion'
 import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
+import { useUser } from 'hooks/useUser'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -22,7 +23,7 @@ export const CurrentQuestionContext = createContext<any>({})
 export const Question = (props: QuestionProps) => {
     const { id, question } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
-    const containerRef = useRef<HTMLDivElement>(null)
+    const { user } = useUser()
 
     // TODO: Default to question data if passed in
     const {
@@ -34,6 +35,7 @@ export const Question = (props: QuestionProps) => {
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
+        archive,
     } = useQuestion(id, { data: question })
 
     if (isLoading) {
@@ -48,6 +50,8 @@ export const Question = (props: QuestionProps) => {
         return <div>Question not found</div>
     }
 
+    const archived = questionData?.attributes.archived
+
     return (
         <CurrentQuestionContext.Provider
             value={{
@@ -58,19 +62,24 @@ export const Question = (props: QuestionProps) => {
             }}
         >
             <div>
-                <div className="flex flex-col">
+                <div className={`flex flex-col ${archived ? 'opacity-50' : ''}`}>
                     <div className="flex items-center space-x-2 w-full">
                         <Profile profile={questionData.attributes.profile?.data} />
                         <Days created={questionData.attributes.createdAt} />
-                        <div className="!ml-auto">
-                            <SubscribeButton question={questionData} />
+                        <div className="!ml-auto flex space-x-2">
+                            {user?.role?.type === 'moderator' && (
+                                <button onClick={() => archive(!archived)} className="font-bold">
+                                    {archived ? 'Unarchive' : 'Archive'}
+                                </button>
+                            )}
+                            {!archived && <SubscribeButton question={questionData} />}
                         </div>
                     </div>
                     <div className="ml-5 pl-[30px] border-l border-dashed border-gray-accent-light dark:border-opacity-50">
                         <h3 className="text-base font-semibold m-0 pb-1 leading-5">
                             <Link
                                 to={`/questions/${questionData.attributes.permalink}`}
-                                className="no-underline font-semibold text-black dark:text-white"
+                                className="no-underline font-semibold text-black dark:text-white hover:text-black dark:hover:text-white"
                             >
                                 {questionData.attributes.subject}
                             </Link>
@@ -82,9 +91,14 @@ export const Question = (props: QuestionProps) => {
                     <Replies expanded={expanded} setExpanded={setExpanded} />
 
                     <div className="ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border">
-                        <QuestionForm questionId={questionData.id} formType="reply" reply={reply} />
+                        <QuestionForm archived={archived} questionId={questionData.id} formType="reply" reply={reply} />
                     </div>
                 </div>
+                {archived && (
+                    <div>
+                        <p className="font-semibold m-0 mt-4">This thread has been archived</p>
+                    </div>
+                )}
             </div>
         </CurrentQuestionContext.Provider>
     )
