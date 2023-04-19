@@ -21,7 +21,7 @@ Tigris is a developer data platform that provides an integrated suite of data se
 
 We chose these services because most real-time applications require a combination of them. If you think of an e-commerce application, you need a way to store the product data, store the user data, store the orders-management data, a way to search everything etc. Usually you need a combination of different types of products to do this. 
 
-What we are trying to do is, instead of having the developer deal with all these solutions and having them deal with connecting them together and having a complex infrastructure, we're providing them with everything integrated so that they can focus just on writing the application code and business logic, and we take care of all of the infrastructure related to data storage and access.
+What we are trying to do is, instead of having the developer deal with all these solutions and having them deal with connecting them together and having a complex infrastructure, we're providing them with everything integrated. That means they can focus on just writing the application code and business logic, and we take care of all the infrastructure related to data storage and access.
 
 ### How did you decide this was a problem worth solving?
 
