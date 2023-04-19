@@ -18,7 +18,7 @@ This page covers SOC 2, GDPR, CCPA and HIPAA compliance.
 
 PostHog is certified as SOC 2 compliant, following an external audit. 
 
-Our latest [security report](https://app.drata.com/security-report/805315dd-8452-461b-850d-fb1957ecb803/f665f462-0677-46cd-b183-36ebdeec8a30) is publicly available (last updated March 2023). 
+Our latest [security report](https://drive.google.com/file/d/1hSW8roswMjVn0HReVOs1lQFo3O9ToqXh/view?usp=share_link) is publicly available (last updated April 2023). 
 
 ### Policies
 
