@@ -1,5 +1,5 @@
 ---
-title: "Startup spotlight - Tigris Data"
+title: "Startup spotlight: Tigris Data"
 date: 2023-04-20
 author: ["charles-cook"]
 showTitle: true
