@@ -116,7 +116,7 @@ export const QuestionsTable = ({
                           ) : null
                       })
                     : new Array(10).fill(0).map((_, i) => (
-                          <li key={i} className="">
+                          <div key={i} className="">
                               <div className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 space-y-2">
                                   <div className="w-96 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
                                   <div className="w-60 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
@@ -129,7 +129,7 @@ export const QuestionsTable = ({
                               <div className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold animate-pulse">
                                   <div className="w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
                               </div>
-                          </li>
+                          </div>
                       ))}
             </li>
 
