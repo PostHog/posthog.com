@@ -1,7 +1,4 @@
 import React, { useState, useRef, createContext } from 'react'
-import root from 'react-shadow/styled-components'
-
-import { Theme } from './Theme'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
@@ -11,10 +8,11 @@ import { QuestionForm } from './QuestionForm'
 import { useQuestion } from '../hooks/useQuestion'
 import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
+import Link from 'components/Link'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
-    id: number
+    id: number | string
     question?: StrapiRecord<QuestionData>
     expanded?: boolean
 }
@@ -51,47 +49,47 @@ export const Question = (props: QuestionProps) => {
     }
 
     return (
-        <root.div ref={containerRef}>
-            <Theme containerRef={containerRef} />
-            <CurrentQuestionContext.Provider
-                value={{
-                    question: { id, ...(questionData?.attributes ?? {}) },
-                    handlePublishReply,
-                    handleResolve,
-                    handleReplyDelete,
-                }}
-            >
-                <div className="squeak">
-                    <div className="squeak-question-container squeak-post">
-                        <div className="squeak-post-author">
-                            <Profile profile={questionData.attributes.profile?.data} />
-                            <Days created={questionData.attributes.createdAt} />
-                            <div className="squeak-subscribe-button-container">
-                                <SubscribeButton
-                                    contentType="question"
-                                    id={questionData?.id}
-                                    tooltipMessage="Get notified via email when someone responds to this question"
-                                />
-                            </div>
-                        </div>
-                        <div className="squeak-post-content">
-                            <h3 className="squeak-subject">
-                                <a href={`/questions/${questionData.attributes.permalink}`} className="!no-underline">
-                                    {questionData.attributes.subject}
-                                </a>
-                            </h3>
-
-                            <Markdown>{questionData.attributes.body}</Markdown>
-                        </div>
-
-                        <Replies expanded={expanded} setExpanded={setExpanded} />
-
-                        <div className="squeak-reply-form-container">
-                            <QuestionForm questionId={questionData.id} formType="reply" reply={reply} />
+        <CurrentQuestionContext.Provider
+            value={{
+                question: { id, ...(questionData?.attributes ?? {}) },
+                handlePublishReply,
+                handleResolve,
+                handleReplyDelete,
+            }}
+        >
+            <div>
+                <div className="flex flex-col">
+                    <div className="flex items-center space-x-2 w-full">
+                        <Profile profile={questionData.attributes.profile?.data} />
+                        <Days created={questionData.attributes.createdAt} />
+                        <div className="!ml-auto">
+                            <SubscribeButton
+                                contentType="question"
+                                id={questionData?.id}
+                                tooltipMessage="Get notified via email when someone responds to this question"
+                            />
                         </div>
                     </div>
+                    <div className="ml-5 pl-[30px] border-l border-dashed border-gray-accent-light dark:border-opacity-50">
+                        <h3 className="text-base font-semibold m-0 pb-1 leading-5">
+                            <Link
+                                to={`/questions/${questionData.attributes.permalink}`}
+                                className="no-underline font-semibold text-black dark:text-white"
+                            >
+                                {questionData.attributes.subject}
+                            </Link>
+                        </h3>
+
+                        <Markdown>{questionData.attributes.body}</Markdown>
+                    </div>
+
+                    <Replies expanded={expanded} setExpanded={setExpanded} />
+
+                    <div className="ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border">
+                        <QuestionForm questionId={questionData.id} formType="reply" reply={reply} />
+                    </div>
                 </div>
-            </CurrentQuestionContext.Provider>
-        </root.div>
+            </div>
+        </CurrentQuestionContext.Provider>
     )
 }

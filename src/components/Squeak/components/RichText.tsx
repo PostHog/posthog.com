@@ -67,7 +67,7 @@ const buttons = [
     },
 ]
 
-export default function RichText({ initialValue = '', setFieldValue }: any) {
+export default function RichText({ initialValue = '', setFieldValue, autoFocus }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
     const [cursor, setCursor] = useState<number | null>(null)
@@ -115,6 +115,8 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
     return (
         <>
             <textarea
+                autoFocus={autoFocus}
+                className="bg-white dark:bg-gray-accent-dark-hover dark:text-primary-dark border-none text-base h-[150px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
                 onBlur={(e) => e.preventDefault()}
                 name="body"
                 value={value}
@@ -125,20 +127,24 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
                 placeholder="Type more details..."
                 maxLength={2000}
             />
-            <div className="squeak-form-richtext-buttons-container">
-                <ul className="squeak-form-richtext-buttons">
+            <div className="flex items-center justify-between py-1">
+                <ul className="flex items-center list-none p-0 ml-2 space-x-1">
                     {buttons.map((button, index) => {
                         return (
                             <li key={index}>
-                                <button onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}>
+                                <button
+                                    className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75"
+                                    onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
+                                >
                                     {button.icon}
                                 </button>
                             </li>
                         )
                     })}
                 </ul>
-                <div className="squeak-markdown-logo">
+                <div className="mr-2">
                     <a
+                        className="text-primary/30 hover:text-primary/50 dark:text-primary-dark/30 dark:hover:text-primary-dark/50"
                         href="https://www.markdownguide.org/cheat-sheet/"
                         target="_blank"
                         rel="noreferrer"

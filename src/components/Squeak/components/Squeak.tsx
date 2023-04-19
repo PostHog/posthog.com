@@ -1,8 +1,5 @@
-import React, { useRef } from 'react'
-import root from 'react-shadow/styled-components'
-
+import React from 'react'
 import { Questions } from './Questions'
-import { Theme } from './Theme'
 
 type SqueakProps = {
     slug?: string
@@ -11,8 +8,6 @@ type SqueakProps = {
 }
 
 export const Squeak = ({ slug, limit, topicId }: SqueakProps) => {
-    const containerRef = useRef<HTMLDivElement>(null)
-
     const currentSlug = topicId
         ? undefined
         : slug || typeof window !== 'undefined'
@@ -21,12 +16,5 @@ export const Squeak = ({ slug, limit, topicId }: SqueakProps) => {
 
     // TODO: Create hubspot contact on sign-up
 
-    return (
-        <root.div ref={containerRef}>
-            <Theme containerRef={containerRef} />
-            <div className="squeak">
-                <Questions limit={limit} slug={currentSlug} topicId={topicId} />
-            </div>
-        </root.div>
-    )
+    return <Questions limit={limit} slug={currentSlug} topicId={topicId} />
 }

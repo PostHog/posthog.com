@@ -1,19 +1,20 @@
-import SidebarSection from 'components/PostLayout/SidebarSection'
 import React from 'react'
 import Link from 'components/Link'
-import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
+import { XIcon } from '@heroicons/react/outline'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import { TopicSelector, useQuestion } from 'components/Squeak'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 
 type QuestionSidebarProps = {
-    question: StrapiRecord<QuestionData> | undefined
+    permalink: string
 }
 
 export const QuestionSidebar = (props: QuestionSidebarProps) => {
     const { user } = useUser()
 
-    const { id, attributes: question } = props.question || {}
-    const avatar = getAvatarURL(question?.profile?.data?.attributes)
+    const { question, removeTopic } = useQuestion(props.permalink)
+    const avatar = getAvatarURL(question?.attributes?.profile?.data)
 
     return question ? (
         <div>
@@ -37,30 +38,50 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                             ></path>
                         </svg>
                     )}
-                    <Link to={`/community/profiles/${question.profile?.data?.id}`}>
-                        {question.profile?.data?.attributes?.firstName
-                            ? `${question.profile?.data?.attributes?.firstName} ${question.profile?.data?.attributes?.lastName}`
+                    <Link to={`/community/profiles/${question?.attributes?.profile?.data?.id}`}>
+                        {question.attributes?.profile?.data?.attributes?.firstName
+                            ? `${question.attributes?.profile?.data?.attributes?.firstName} ${question.attributes?.profile?.data?.attributes?.lastName}`
                             : 'Anonymous'}
                     </Link>
                 </div>
             </SidebarSection>
 
-            {question?.topics?.data && question.topics.data.length > 0 && (
-                <SidebarSection title="Topics">
-                    <div className="flex items-center space-x-2">
-                        {question.topics.data.map((topic) => (
-                            <Link key={topic.id} to={`/questions/topic/${topic.attributes.slug}`}>
-                                {topic.attributes.label}
-                            </Link>
-                        ))}
-                    </div>
-                </SidebarSection>
-            )}
+            {(question.attributes?.topics?.data && question.attributes.topics.data.length > 0) ||
+            user?.role?.type == 'moderator' ? (
+                <SidebarSection
+                    title="Topics"
+                    action={
+                        question.id &&
+                        user?.role?.type === 'moderator' && (
+                            <TopicSelector questionId={question.id} permalink={props.permalink} />
+                        )
+                    }
+                >
+                    <ul className="flex items-center list-none p-0 flex-wrap">
+                        {question?.attributes?.topics?.data.map((topic) => (
+                            <li
+                                key={topic.id}
+                                className="bg-gray-accent-light dark:bg-gray-accent-dark text-gray py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
+                            >
+                                <Link to={`/questions/topic/${topic.attributes.slug}`} className="">
+                                    {topic.attributes.label}
+                                </Link>
 
-            {user?.isModerator && (
+                                {user?.role?.type == 'moderator' && (
+                                    <button onClick={() => removeTopic(topic)}>
+                                        <XIcon className="h-4 w-4 text-gray" />
+                                    </button>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                </SidebarSection>
+            ) : null}
+
+            {user?.role?.type === 'moderator' && (
                 <SidebarSection>
                     <Link
-                        to={`https://squeak.posthog.cc/admin/content-manager/collectionType/api::question.question/${id}`}
+                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question.question/${question?.id}`}
                     >
                         View in Squeak!
                     </Link>

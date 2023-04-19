@@ -9,12 +9,14 @@ import QuestionForm from 'components/Questions/QuestionForm'
 import TopicsTable from 'components/Questions/TopicsTable'
 
 const fetchTopicGroups = async () => {
+    // FIXME: This is has to fetch _every_ (or probably at most 25) quesiton that's part of a topic even though we only need the most recent one
     const topicGroupsQuery = qs.stringify(
         {
             populate: {
                 topics: {
                     populate: {
                         questions: {
+                            sort: 'createdAt:desc',
                             fields: ['id', 'createdAt'],
                         },
                     },
