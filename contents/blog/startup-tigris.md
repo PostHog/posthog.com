@@ -13,7 +13,7 @@ category: Startups
 
 This month we're chatting to Tigris co-founder & CEO Ovais Tariq. Prior to starting Tigris, Ovais spent several years at Uber where he was Head of Storage Infra.
 
-> Every month we're shining the spotlight on a different startup to show off the cool things they are building, as part of the PostHog for Startups program. Want to be in with a chance of getting featured? [Sign up here for $50k in PostHog credit and a bunch of other sweet perks!](/startups) 
+> Every month we shine the spotlight on a different startup to show off the cool things they're building, as part of the PostHog for Startups program. Want a chance to be featured? [Sign up here for $50k in PostHog credit and a bunch of other sweet perks!](/startups) 
 
 ### What is Tigris and why is it cool?
 
