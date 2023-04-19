@@ -17,7 +17,7 @@ This month we're chatting to Tigris co-founder & CEO Ovais Tariq. Prior to start
 
 ### What is Tigris and why is it cool?
 
-Tigris is a developer data platform that provides an integrated suite of data services that are needed by application developers to build data-driven applications. These services include a NoSQL database for storing structured and unstructured data, and an integrated search engine that allows users to do both full-text and vector searches. We've got more services coming soon, including event streaming and caching.
+Tigris is a developer data platform that provides an integrated suite of data services for application developers. These services include a NoSQL database for storing structured and unstructured data, and an integrated search engine that allows users to do both full-text and vector searches. We've got more services coming soon, including event streaming and caching.
 
 We chose these services because most real-time applications that are built require a combination of these services. If you think of an e-commerce application, you need a way to store the product data, store the user data, store the orders-management data, a way to search everything etc. Usually you need a combination of different types of products to do this. 
 
