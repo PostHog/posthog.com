@@ -1,6 +1,6 @@
 ---
 date: 2023-04-19
-title: How to treat your pricing like a product (and how we do it)
+title: How (and why) we treat pricing like a product
 rootPage: /blog
 sidebar: Blog
 showTitle: true
