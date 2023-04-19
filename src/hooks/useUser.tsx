@@ -25,6 +25,7 @@ export type User = {
 type UserContextValue = {
     isLoading: boolean
     user: User | null
+    isModerator: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
     fetchUser: (token?: string | null) => Promise<User | null>
     getJwt: () => Promise<string | null>
@@ -43,6 +44,7 @@ type UserContextValue = {
 export const UserContext = createContext<UserContextValue>({
     isLoading: true,
     user: null,
+    isModerator: false,
     setUser: () => {
         // noop
     },
@@ -127,6 +129,25 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
             localStorage.setItem('jwt', userData.jwt)
             setJwt(userData.jwt)
+
+            try {
+                const distinctId = posthog?.get_distinct_id()
+
+                if (distinctId) {
+                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${user.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${userData.jwt}`,
+                        },
+                        body: JSON.stringify({
+                            distinctId,
+                        }),
+                    })
+                }
+            } catch (error) {
+                console.error(error)
+            }
 
             return user
         } catch (error) {
@@ -358,24 +379,21 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
 
-    return (
-        <UserContext.Provider
-            value={{
-                user,
-                setUser,
-                isLoading,
-                getJwt,
-                login,
-                logout,
-                signUp,
-                fetchUser,
-                isSubscribed,
-                setSubscription,
-            }}
-        >
-            {children}
-        </UserContext.Provider>
-    )
+    const contextValue = {
+        user,
+        setUser,
+        isModerator: user?.role?.type === 'moderator',
+        isLoading,
+        getJwt,
+        login,
+        logout,
+        signUp,
+        fetchUser,
+        isSubscribed,
+        setSubscription,
+    }
+
+    return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
 }
 
 export const useUser = () => {

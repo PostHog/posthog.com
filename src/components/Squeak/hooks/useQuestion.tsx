@@ -8,7 +8,7 @@ type UseQuestionOptions = {
     data?: StrapiRecord<QuestionData>
 }
 
-const query = (id: string | number) =>
+const query = (id: string | number, isModerator: boolean) =>
     qs.stringify(
         {
             filters: {
@@ -34,6 +34,13 @@ const query = (id: string | number) =>
                         avatar: {
                             select: ['id', 'url'],
                         },
+                        ...(isModerator
+                            ? {
+                                  user: {
+                                      fields: ['distinctId', 'email'],
+                                  },
+                              }
+                            : null),
                     },
                 },
                 replies: {
@@ -59,18 +66,28 @@ const query = (id: string | number) =>
     )
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
-    const { getJwt, fetchUser, user } = useUser()
+    const { getJwt, fetchUser, user, isModerator } = useUser()
     const { mutate: globalMutate } = useSWRConfig()
     const posthog = usePostHog()
 
-    const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id)}`
+    const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
 
     const {
         data: question,
         error,
         isLoading,
     } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
-        const res = await fetch(url)
+        const res = await fetch(
+            url,
+            isModerator
+                ? {
+                      headers: {
+                          Authorization: `Bearer ${await getJwt()}`,
+                      },
+                  }
+                : undefined
+        )
+
         const { data } = await res.json()
         return data?.[0]
     })
@@ -100,12 +117,19 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
         // Then, based on if it's a permalink or an id, we mutate the other key as well.
         if (typeof id === 'string') {
-            globalMutate(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question.id)}`, data, {
-                optimisticData: data,
-            })
+            globalMutate(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question.id, isModerator)}`,
+                data,
+                {
+                    optimisticData: data,
+                }
+            )
         } else {
             globalMutate(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question?.attributes?.permalink)}`,
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(
+                    question?.attributes?.permalink,
+                    isModerator
+                )}`,
                 data,
                 {
                     optimisticData: data,

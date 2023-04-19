@@ -11,14 +11,41 @@ type QuestionSidebarProps = {
 }
 
 export const QuestionSidebar = (props: QuestionSidebarProps) => {
-    const { user } = useUser()
+    const { user, isModerator } = useUser()
 
     const { question, removeTopic } = useQuestion(props.permalink)
     const avatar = getAvatarURL(question?.attributes?.profile?.data)
 
+    const personsQuery = {
+        kind: 'DataTableNode',
+        source: {
+            kind: 'PersonsNode',
+            search:
+                question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.distinctId ||
+                question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email,
+        },
+        full: true,
+        propertiesViaUrl: true,
+    }
+
+    const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
+
     return question ? (
         <div>
-            <SidebarSection title="Posted by">
+            <SidebarSection
+                title="Posted by"
+                action={
+                    isModerator ? (
+                        <Link
+                            className="text-red text-sm font-semibold flex items-center justify-center text-gray-400 hover:text-gray-500 whitespace-nowrap"
+                            to={link}
+                            target="_blank"
+                        >
+                            View in PostHog
+                        </Link>
+                    ) : undefined
+                }
+            >
                 <div className="flex items-center space-x-2">
                     {avatar ? (
                         <img className="w-8 h-8 rounded-full" src={avatar} />
@@ -38,23 +65,29 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                             ></path>
                         </svg>
                     )}
-                    <Link to={`/community/profiles/${question?.attributes?.profile?.data?.id}`}>
-                        {question.attributes?.profile?.data?.attributes?.firstName
-                            ? `${question.attributes?.profile?.data?.attributes?.firstName} ${question.attributes?.profile?.data?.attributes?.lastName}`
-                            : 'Anonymous'}
-                    </Link>
+
+                    <div>
+                        <Link to={`/community/profiles/${question?.attributes?.profile?.data?.id}`}>
+                            {question.attributes?.profile?.data?.attributes?.firstName
+                                ? `${question.attributes?.profile?.data?.attributes?.firstName} ${question.attributes?.profile?.data?.attributes?.lastName}`
+                                : 'Anonymous'}
+                        </Link>
+
+                        {isModerator && (
+                            <p className="m-0 font-normal text-sm text-primary/60 dark:text-primary-dark/60">
+                                {question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}
+                            </p>
+                        )}
+                    </div>
                 </div>
             </SidebarSection>
 
-            {(question.attributes?.topics?.data && question.attributes.topics.data.length > 0) ||
-            user?.role?.type == 'moderator' ? (
+            {(question.attributes?.topics?.data && question.attributes.topics.data.length > 0) || isModerator ? (
                 <SidebarSection
                     title="Topics"
                     action={
                         question.id &&
-                        user?.role?.type === 'moderator' && (
-                            <TopicSelector questionId={question.id} permalink={props.permalink} />
-                        )
+                        isModerator && <TopicSelector questionId={question.id} permalink={props.permalink} />
                     }
                 >
                     <ul className="flex items-center list-none p-0 flex-wrap">
@@ -67,7 +100,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                                     {topic.attributes.label}
                                 </Link>
 
-                                {user?.role?.type == 'moderator' && (
+                                {isModerator && (
                                     <button onClick={() => removeTopic(topic)}>
                                         <XIcon className="h-4 w-4 text-gray" />
                                     </button>
@@ -78,7 +111,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                 </SidebarSection>
             ) : null}
 
-            {user?.role?.type === 'moderator' && (
+            {isModerator && (
                 <SidebarSection>
                     <Link
                         to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question.question/${question?.id}`}
