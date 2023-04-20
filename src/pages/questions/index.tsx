@@ -15,6 +15,20 @@ const fetchTopicGroups = async () => {
                         questions: {
                             sort: 'createdAt:desc',
                             fields: ['id', 'createdAt'],
+                            filters: {
+                                $or: [
+                                    {
+                                        archived: {
+                                            $null: true,
+                                        },
+                                    },
+                                    {
+                                        archived: {
+                                            $eq: false,
+                                        },
+                                    },
+                                ],
+                            },
                         },
                     },
                 },

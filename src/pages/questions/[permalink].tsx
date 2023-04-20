@@ -20,7 +20,10 @@ export default function QuestionPage(props: QuestionPageProps) {
 
     return (
         <Layout>
-            <SEO title={isLoading ? 'Squeak question - PostHog' : `${question?.attributes?.subject} - PostHog`} />
+            <SEO
+                title={isLoading ? 'Squeak question - PostHog' : `${question?.attributes?.subject} - PostHog`}
+                noindex={question?.attributes.archived}
+            />
             <PostLayout
                 title={question?.attributes?.subject || ''}
                 menu={community}
