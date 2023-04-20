@@ -23,7 +23,7 @@ export const TopicSelector = (props: TopicSelectorProps) => {
     const { question, addTopic, removeTopic } = useQuestion(props.permalink)
 
     return (
-        <Popover className="hidden sm:block relative">
+        <Popover className="block relative">
             <Popover.Button className="text-red text-sm font-semibold flex items-center justify-center text-gray-400 hover:text-gray-500 whitespace-nowrap">
                 Add topics
             </Popover.Button>
