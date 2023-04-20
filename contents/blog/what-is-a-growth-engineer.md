@@ -14,11 +14,7 @@ tags:
  - Explainers
 ---
 
-Every startup loves to see signups, subscriptions, and revenue go up, yet all engineers basically work on things indirectly related to doing so. The power of growth engineers is that they focus on making these numbers go up, working on whatever it takes.
-
-A growth engineer is an engineer who works on projects impacting the core business metrics, no matter where they are in the product. This is different than regular engineers who work on specific products and features to improve metrics for them. This indirectly improves the core business metrics.
-
-Growth engineers help companies grow faster by focusing on projects with high potential to impact core business metrics. We know this because we have a team of growth engineers at PostHog, and they’ve made a big impact on signups and revenue. 
+Every startup loves to see their growth metrics like signups, subscriptions, and revenue go up, yet all engineers basically work on things indirectly related to doing so. Growth engineers are different. They focus entirely on projects dedicated to driving as much growth as possible, no matter where they are in the product.
 
 To help you understand growth engineers better, this post will go over what we’ve learned about the type of people who succeed as growth engineers, what skills they have, what they work on, and why they matter.
 
@@ -28,7 +24,7 @@ To start to understand growth engineers, it is useful to understand who they are
 
 ![Characteristics](../images/blog/what-is-a-growth-engineer/characteristics.png)
 
-1. **Entrepreneurial**. Growth engineers have an interest in the business as a whole as well as the hustle to find ways to improve it. They find areas they can make a large impact on the core business metrics, and develop solutions themselves to improve those metrics. Like an entrepreneur, they are independent and scrappy.
+1. **Entrepreneurial**. Growth engineers have an interest in the business as a whole as well as the hustle to find ways to improve it. They find areas they can make a large impact on the growth metrics, and develop solutions themselves to improve those metrics. Like an entrepreneur, they are independent and scrappy.
 2. **Experimental.** Growth ideas need testing in the real world, and this means growth engineers are like scientists: they experiment a lot. This means developing multiple solutions for a problem, having a testing framework, building their implementations, and evaluating its success. Growth engineers care more about real results from experiments than designing the perfect experiment. 
 3. **Data-driven.** More so than other engineering roles, they care about usage data and it heavily informs how they work. They use data to inform and evaluate all the experiments they do. They need data, and the ability to analyze that data, to know which ideas to work on and how their proposed solutions are working.
 4. **Curious.** Although it sounds a bit cliche, being curious enables growth engineers to discover new opportunities, grasp new technologies, and figure out whatever they need to drive growth. Growth engineers work with more tools and technologies than traditional engineers do. This means more learning, and being unafraid to dive into new subjects.
@@ -49,7 +45,7 @@ First and most obvious, is **engineering skills**. Growth engineers write code t
 
 Second, the other part of creating and implementing ideas is **product and design knowledge**. Because a growth team works across the stack and teams, they are often "lone wolves." They need the ability to fend for themselves in product and design decisions. They don’t have to be Da Vinci, but product and design knowledge helps them create successful features.
 
-Third, to create growth ideas based on solid strategies, growth engineers must have an **understanding of business**. This includes areas like marketing and finance. This is because growth engineers work to improve core business metrics. If they don’t have an understanding of business fundamentals, they can’t be effective at improving those metrics. Growth engineers also regularly work with non-technical teams, and so they need this knowledge to collaborate well with them.
+Third, to create growth ideas based on solid strategies, growth engineers must have an **understanding of business**. This includes areas like marketing and finance. This is because growth engineers work to improve growth metrics. If they don’t have an understanding of business fundamentals, they can’t be effective at improving those metrics. Growth engineers also regularly work with non-technical teams, and so they need this knowledge to collaborate well with them.
 
 Last is **data literacy**. Since growth engineers do a lot of experiments, they must understand how those experiments perform. They should know what factors are relevant, how to calculate if something is significant, and what data to care about in the first place. All of this requires at least a basic knowledge of data and statistics.
 
@@ -74,11 +70,11 @@ To give a specific example of what growth teams work on, we can look at our [gro
 2. **Signup.** Improving the signup funnel. Running A/B tests of options like [single sign on buttons](https://github.com/PostHog/posthog/pull/13234). [Verifying emails](https://github.com/PostHog/posthog/pull/13632) and adding two-factor authentication.
 3. **Onboarding.** Setting up [in-app messaging](https://github.com/PostHog/posthog/pull/13108) and notifications. Set up customer.io. Add [autocapture](https://github.com/PostHog/posthog/pull/14687) and session recording toggles.
 
-Billing is a major focus recently because we believe we can provide a better offering to users if we charge for separate products. This will lead to grow across the signup, usage, and revenue metrics the growth team cares about. This also means implementing this is on the growth team’s plate, and it’s a big task.
+Billing is a major focus recently because we believe we can provide a better offering to users if we charge for separate products. This will lead to growth across the signup, usage, and revenue metrics the growth team cares about. This also means implementing this is on the growth team’s plate, and it’s a big task.
 
 ## Why do growth engineers matter?
 
-Many businesses and engineering teams lose focus on the core metrics needed to grow. Growth engineering work across teams, products, and code base to keep this focus. In doing so, they can make a massive impact on those metrics.
+Many businesses and engineering teams lose focus on the growth metrics. Growth engineering work across teams, products, and code base to keep this focus. In doing so, they can make a massive impact on those metrics.
 
 There are many growth opportunities a standard engineering team doesn’t care about, but growth engineers do. This is because those engineering teams don’t set their goals as driving signups or activation. They focus on making the product better, which is necessary for growth engineers to exist. You can’t growth a non-existent product. 
 
