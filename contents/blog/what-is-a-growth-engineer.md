@@ -59,8 +59,9 @@ So what do growth engineers use their skills to do? We’ve already covered that
 
 - Developing a growth strategy, experiment framework, and measurement for both.
 - Doing SEO optimization on the marketing site. Building landing pages. Optimizing the signup funnels.
-- Running A/B tests on specific parts of the signup and activation funnel. Trying to improve the conversion rate for both.
+- Running A/B tests on specific parts of the signup and activation funnel. Trying to improve the conversion rate and time to value.
 - Setting up in-app and push notification messaging systems. Building tools and systems for better product onboarding.
+- Developing features to access new markets such as localization and support for new types of payments.
 
 ### What do PostHog’s growth engineers work on?
 
