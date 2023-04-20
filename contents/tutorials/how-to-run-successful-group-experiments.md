@@ -1,3 +1,13 @@
+---
+title: How to run successful group-level A/B tests
+sidebar: Docs
+showTitle: true
+author: ['lior-neu-ner']
+date: // what to put here?
+featuredImage: //TODO
+tags: ['experimentation']
+---
+
 A/B tests are a powerful tool for measuring how product changes impact user behavior. However, sometimes changing how one person uses your product will affect how others interact with it too. For example, a change in the Uber App for Drivers will likely affect the experience of riders too. In these scenarios, group-level experiments allow us to measure the impact of changes beyond an individual and across a group of users.
 
 // TODO: Add image showing difference between group-level and user-level experiment
