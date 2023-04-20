@@ -47,7 +47,7 @@ export default function Questions() {
 
     return (
         <Layout>
-            <PostLayout hideSidebar title={'Questions'} menu={community} hideSurvey>
+            <PostLayout sidebar={<>Sidebar!</>} title={'Questions'} menu={community} hideSurvey>
                 <SEO title={'Questions - PostHog'} />
 
                 <div className="max-w-6xl mx-auto space-y-8 pb-12">

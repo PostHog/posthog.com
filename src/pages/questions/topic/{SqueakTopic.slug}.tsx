@@ -47,7 +47,7 @@ export default function Questions({ data, pageContext }: IProps) {
 
     return (
         <Layout>
-            <PostLayout hideSidebar title={'Questions'} menu={community} hideSurvey>
+            <PostLayout sidebar={<>Sidebar!</>} title={'Questions'} menu={community} hideSurvey>
                 <SEO title={`${data.squeakTopic.label} - PostHog`} />
 
                 <div className="max-w-6xl mx-auto space-y-8 pb-12">

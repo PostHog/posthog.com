@@ -3,12 +3,12 @@
         "name": "Community"
     },
     {
-        "name": "Questions",
+        "name": "Topics",
         "url": "/questions"
     },
     {
         "name": "My discussions",
-        "url": "/community"
+        "url": "/community/dashboard"
     },
     {
         "name": "New questions",
