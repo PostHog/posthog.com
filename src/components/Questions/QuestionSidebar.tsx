@@ -32,20 +32,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
 
     return question ? (
         <div>
-            <SidebarSection
-                title="Posted by"
-                action={
-                    isModerator ? (
-                        <Link
-                            className="text-red text-sm font-semibold flex items-center justify-center text-gray-400 hover:text-gray-500 whitespace-nowrap"
-                            to={link}
-                            target="_blank"
-                        >
-                            View in PostHog
-                        </Link>
-                    ) : undefined
-                }
-            >
+            <SidebarSection title="Posted by">
                 <div className="flex items-center space-x-2">
                     {avatar ? (
                         <img className="w-8 h-8 rounded-full" src={avatar} />
@@ -66,7 +53,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                         </svg>
                     )}
 
-                    <div>
+                    <div className="w-full">
                         <Link to={`/community/profiles/${question?.attributes?.profile?.data?.id}`}>
                             {question.attributes?.profile?.data?.attributes?.firstName
                                 ? `${question.attributes?.profile?.data?.attributes?.firstName} ${question.attributes?.profile?.data?.attributes?.lastName}`
@@ -76,7 +63,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                         {isModerator && (
                             <>
                                 <input
-                                    className="block m-0 font-normal text-sm text-primary/60 dark:text-primary-dark/60 border-none p-0 bg-transparent focus:ring-0"
+                                    className="block w-full m-0 font-normal text-sm text-primary/60 dark:text-primary-dark/60 border-none p-0 bg-transparent focus:ring-0"
                                     type="text"
                                     value={
                                         question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email
@@ -88,45 +75,60 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                         )}
                     </div>
                 </div>
+                {isModerator && (
+                    <p className="text-sm pt-0.5 pb-0 ml-9 mb-0 flex space-x-1.5">
+                        <Link className="" to={link} externalNoIcon>
+                            View in PostHog
+                        </Link>
+                        <span className="opacity-60">|</span>
+                        <Link
+                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question.question/${question?.id}`}
+                            externalNoIcon
+                        >
+                            Strapi
+                        </Link>
+                    </p>
+                )}
             </SidebarSection>
 
-            {(question.attributes?.topics?.data && question.attributes.topics.data.length > 0) || isModerator ? (
-                <SidebarSection
-                    title="Topics"
-                    action={
-                        question.id &&
-                        isModerator && <TopicSelector questionId={question.id} permalink={props.permalink} />
-                    }
-                >
-                    <ul className="flex items-center list-none p-0 flex-wrap">
-                        {question?.attributes?.topics?.data.map((topic) => (
-                            <li
-                                key={topic.id}
-                                className="bg-gray-accent-light dark:bg-gray-accent-dark text-gray py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
-                            >
-                                <Link to={`/questions/topic/${topic.attributes.slug}`} className="">
-                                    {topic.attributes.label}
-                                </Link>
+            {isModerator && (
+                <>
+                    {(question.attributes?.topics?.data && question.attributes.topics.data.length > 0) ||
+                    isModerator ? (
+                        <SidebarSection
+                            title="Topics"
+                            action={
+                                question.id &&
+                                isModerator && <TopicSelector questionId={question.id} permalink={props.permalink} />
+                            }
+                        >
+                            <ul className="flex items-center list-none p-0 flex-wrap">
+                                {question?.attributes?.topics?.data.map((topic) => (
+                                    <li
+                                        key={topic.id}
+                                        className="bg-gray-accent-light dark:bg-gray-accent-dark text-gray py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
+                                    >
+                                        <Link to={`/questions/topic/${topic.attributes.slug}`} className="">
+                                            {topic.attributes.label}
+                                        </Link>
 
-                                {isModerator && (
-                                    <button onClick={() => removeTopic(topic)}>
-                                        <XIcon className="h-4 w-4 text-gray" />
-                                    </button>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
-                </SidebarSection>
-            ) : null}
+                                        <button onClick={() => removeTopic(topic)}>
+                                            <XIcon className="h-4 w-4 text-gray" />
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </SidebarSection>
+                    ) : null}
+                </>
+            )}
 
             {isModerator && (
                 <SidebarSection>
-                    <Link
-                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question.question/${question?.id}`}
-                        external
-                    >
-                        View in Squeak!
-                    </Link>
+                    <iframe
+                        className="border-none -mx-3 lg:-mx-6 -my-4 w-[calc(100%_+_3rem)] h-[calc(100vh_-_380px)]"
+                        src={`https://sidecar-panel.vercel.app/?email=${question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}`}
+                    />
                 </SidebarSection>
             )}
         </div>
