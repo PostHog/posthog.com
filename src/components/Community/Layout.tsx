@@ -13,7 +13,15 @@ export default function CommunityLayout({ children, title }: { children: React.R
     return (
         <Layout>
             <SEO title={`${title} - PostHog`} />
-            <PostLayout hideSurvey menu={community} sidebar={<Sidebar />} title={title}>
+            <PostLayout
+                fullWidthContent
+                hideWidthToggle
+                hideSurvey
+                menu={community}
+                sidebar={<Sidebar />}
+                title={title}
+                menuWidth={{ right: 320 }}
+            >
                 {children}
             </PostLayout>
         </Layout>

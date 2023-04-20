@@ -38,6 +38,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         contentContainerClasses,
         stickySidebar,
         searchFilter,
+        hideWidthToggle,
     } = usePost()
 
     const handleFullWidthContentChange = () => {
@@ -173,13 +174,15 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                                 </div>
                                             )}
                                             <div className="ml-auto flex">
-                                                <SidebarAction
-                                                    className="hidden xl:block border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark"
-                                                    title="Toggle content width"
-                                                    onClick={handleFullWidthContentChange}
-                                                >
-                                                    <ExpandDocument expanded={fullWidthContent} />
-                                                </SidebarAction>
+                                                {!hideWidthToggle && (
+                                                    <SidebarAction
+                                                        className="hidden xl:block border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark"
+                                                        title="Toggle content width"
+                                                        onClick={handleFullWidthContentChange}
+                                                    >
+                                                        <ExpandDocument expanded={fullWidthContent} />
+                                                    </SidebarAction>
+                                                )}
                                                 {darkMode && (
                                                     <SidebarAction
                                                         className="pl-2 pr-2 h-8 my-1"
