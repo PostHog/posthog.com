@@ -33,7 +33,7 @@ This experience helped us to envision a product that would benefit other develop
 
 "We are looking at early- to mid-stage companies. For early-stage startups, adopting Tigris means they don't have to deal with infrastructure complexity right from the beginning. They can start building their product quickly on Tigris without having to deal with the infrastructure. 
 
-At mid-stage companies, what typically happens is that when those companies started small, they chose various different solutions to build their product on. So when they reach a certain scale, they hit the same integration issues. Often they end up re-writing or re-architecting their application to deal with these scaling challenges. Tigris can help you with take away all of that burden and allow you to build a modern application stack."
+At mid-stage companies, what typically happens is that when those companies started small, they chose various different solutions to build their product on. So when they reach a certain scale, they hit the same integration issues. Often they end up re-writing or re-architecting their application to deal with these scaling challenges. Tigris can help you take away all of that burden and allow you to build a modern application stack."
 
 ### What are you most excited about?
 
