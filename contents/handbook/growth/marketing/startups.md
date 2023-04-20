@@ -26,12 +26,13 @@ Any company that is <2 years old and has raised $5m in funding or less is eligib
 
 We host private monthly office hours with one of Luke (product), James (product, company building), Charles (ops, marketing), or Simon (sales, CS). Charles organizes these and sends out an email to the mailing list - template below. 
 
-Create the calendar event with Zoom link in advance and then just manually add people to it if they reply to the email. **Obviously you should BCC everyone.** We'll probably automate this more in the future. 
+Create the calendar event with a Meet link in advance and then just manually add people to it if they reply to the email. **Obviously you should BCC everyone.** We'll probably automate this more in the future. Use Meet so you don't have any issues with hosts not attending. 
 
+Product example:
 ``` 
 Hi everyone,
 
-Really excited to invite you to the first PostHog for Startups office hours on Tuesday April 18th at 4pm GMT! Luke, our Head of Product, will be on hand to answer any questions you have about product - specific problems or general questions welcome. 
+Really excited to invite you to the next PostHog for Startups office hours on [DATE, TIME]! Luke, our Head of Product, will be on hand to answer any questions you have about product - specific problems or general questions welcome. 
 
 If you're interested in joining, please reply to the email and I'll add you to the calendar invite. 
 
@@ -43,6 +44,29 @@ Some topics you might have questions around:
 - Creating a good working relationships between product & engineering
 - How to decide what to build next
 - How to figure out if you’re getting product-market fit
+
+(Please note - we can't cover product support questions in this session.)
+
+Hope to see you there!
+
+Charles
+```
+
+Sales & CS example:
+``` 
+Hi everyone,
+
+Really excited to invite you to the next PostHog for Startups office hours on [DATE, TIME]! Simon, our Customer Success Lead, will be on hand to answer any questions you have about sales and customer success - specific problems or general questions welcome. 
+
+If you're interested in joining, please reply to the email and I'll add you to the calendar invite. 
+
+Some topics you might have questions around:
+- How to manage your sales pipeline
+- How to prioritize different types of customers
+- How to set up great customer support
+- How to make sure inbound enterprises don't crush you
+- How to negotiate commercial agreements
+- How to build your sales and/or CS team
 
 (Please note - we can't cover product support questions in this session.)
 
