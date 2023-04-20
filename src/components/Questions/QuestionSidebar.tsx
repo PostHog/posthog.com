@@ -115,6 +115,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                 <SidebarSection>
                     <Link
                         to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question.question/${question?.id}`}
+                        external
                     >
                         View in Squeak!
                     </Link>
