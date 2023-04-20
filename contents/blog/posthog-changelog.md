@@ -29,11 +29,13 @@ We've made a change to the way we handle support internally in order to give you
 Previously, we'd assign an engineer to be a [Support Hero](/handbook/engineering/support-hero) each week and they would mostly drop other work to focus on support. That worked well initially, but as PostHog has grown in breadth it's become harder for engineers to offer support outside of their usual focus. The new system automatically triages requests and assigns them to a Support Hero from the relevant small team - meaning you'll always get the best possible support. 
 
 #### PostHog is SOC 2 compliant
-IMAGE HERE
+![posthog soc 2 compliance](../images/blog/array/soc2-hog.png)
 
 Following an audit, we've been approved as SOC 2 compliant. 
 
-We're confident that nobody is _really_ interested in SOC 2 at a personal level. You either need it, or you don't. So... that's it. That's the update. 
+We're confident that nobody is _really_ interested in SOC 2 at a personal level. You either need it, or you don't. So... that's it. That's the update.
+
+The image is our attempt to make SOC 2 seem cool. Maybe we've been listening to too much Boyz 2 Men?
 
 ## April 14, 2023
 
