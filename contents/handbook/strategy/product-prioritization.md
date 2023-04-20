@@ -15,7 +15,7 @@ Products we build into the platform should:
 * improve our other products
 * be designed to enable us to get in first with that product (even if in practise we often rip and replace an existing product)
 * help customers build more successful products (this doesn't _just_ mean writing code, it means commercial stuff too)
-* ideally work with our snippet
+* work with our snippet, so customers can switch on new functionality immediately
 
 Whilst it's possible for others to build on our platform, our priorties are:
 
@@ -45,7 +45,7 @@ Data stack = warehouse, CDP / etl / reverse etl, transformations, monitoring and
 BI stack = notebooks, querying, visalizations, forecasting
 Marketing stack = heatmaps, scrollmaps, attribution and performance, messaging, community and referral
 
-The stronger the above tools fit our prioritization, the sooner we can build them.
+The stronger the above tools fit our prioritization, the sooner we can build them. Overall, choosing the next product to build is more of an art than a science (some products might be easier to build, easier to maintain, more on trend, less competitive landscape, higher potential to pay etc.) so we need to use our best judgement. We expect to get better at this as we ship and charge for more products over time.
 
 ## Being able to build all of this stuff
 
