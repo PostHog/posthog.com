@@ -160,7 +160,7 @@ const Subscriptions = () => {
     const subscriptions = user?.profile?.questionSubscriptions
 
     useEffect(() => {
-        if (user) fetchUser()
+        fetchUser()
     }, [])
 
     if (!subscriptions) return null

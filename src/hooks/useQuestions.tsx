@@ -23,9 +23,18 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
         },
         sort: 'createdAt:desc',
         filters: {
-            archived: {
-                $ne: true,
-            },
+            $or: [
+                {
+                    archived: {
+                        $null: true,
+                    },
+                },
+                {
+                    archived: {
+                        $eq: false,
+                    },
+                },
+            ],
         },
         populate: {
             profile: {

@@ -19,9 +19,18 @@ const fetchTopicGroups = async () => {
                             sort: 'createdAt:desc',
                             fields: ['id', 'createdAt'],
                             filters: {
-                                archived: {
-                                    $ne: true,
-                                },
+                                $or: [
+                                    {
+                                        archived: {
+                                            $null: true,
+                                        },
+                                    },
+                                    {
+                                        archived: {
+                                            $eq: false,
+                                        },
+                                    },
+                                ],
                             },
                         },
                     },
