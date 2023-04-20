@@ -16,7 +16,7 @@ tags:
 
 Every startup loves to see its growth metrics like signups, subscriptions, and revenue go up, yet nearly all engineers work on things indirectly related to doing so. Growth engineers are different. They focus entirely on projects dedicated to driving as much growth as possible, no matter where they build those projects.
 
-The post goes over growth engineers, with a specific focus on our technical version role at PostHog. We'll cover the type of people who succeed as growth engineers, what skills they have, what they work on, and why you should hire them.
+The post goes over growth engineers, with a specific focus on our technical version role at PostHog. We cover the type of people who succeed as growth engineers, their skills, what they work on, and why you should hire them.
 
 ## What are the characteristics of a growth engineer?
 
@@ -30,7 +30,7 @@ To start, it is useful to understand who growth engineers are as people. When co
 
 3. **Data-driven.** More than other engineering roles, they care about usage data and it guides their work. They use data to inform and evaluate all the experiments they do. They need data, and the ability to analyze that data, to know which ideas to work on and how their solutions are working.
 
-4. **Curious.** Although it sounds a bit cliche, being curious enables growth engineers to discover new opportunities, grasp new technologies, and figure out whatever they need to drive growth. They work with more tools and technologies than traditional engineers do. This means more learning, and being unafraid to dive into new subjects.
+4. **Curious.** Although it sounds a bit cliche, curiosity enables growth engineers to discover new opportunities, grasp new technologies, and figure out whatever they need to drive growth. They work with more tools and technologies than traditional engineers do. This means more learning, and being unafraid to dive into new subjects.
 
 At PostHog, we find these characteristics often arise in former technical founders, and that means our growth team has always been entirely made up of them. Founders understand what it takes to build a product, have a combination of engineering and business skills, and are willing to figure out anything to drive growth.
 
@@ -60,11 +60,11 @@ As [Porter](https://www.workatastartup.com/jobs/46166) says:
 
 ### Business understanding
 
-Third, to create growth ideas based on solid strategies, growth engineers must have an **understanding of business**. This includes areas like marketing and finance. If they don’t have an understanding of business fundamentals, they can’t be effective at improving growth metrics related to these areas. They also need this knowledge to collaborate well with non-technical teams.
+Third, to create growth ideas based on solid strategies, growth engineers must have an **understanding of business**. This includes areas like marketing and finance. Without business knowledge, they can’t effectively make decisions about growth metrics related to those areas. They also need this knowledge to collaborate well with non-technical teams.
 
 ### Data literacy
 
-Since growth engineers run many experiments, they must be able to craft hypotheses and evaluate results. They should know what factors are relevant, how to calculate if something is significant, and what data to care about in the first place.
+Since growth engineers run many experiments, they must be able to craft hypotheses and evaluate results. They should know what factors are relevant, how to calculate significance, and what data to care about in the first place.
 
 As [Terra](https://www.workatastartup.com/jobs/59415) says:
 
@@ -78,7 +78,7 @@ If all this sounds like a unicorn, you aren’t wrong. This is again why we find
 
 ## What do growth engineers actually work on?
 
-So what do growth engineers use their skills to do? We’ve already covered that they work to increase signups, subscriptions, and revenue by working across the product, but what are some examples of what this looks like?
+So what do growth engineers use their skills to do? We already covered that they work to increase signups, subscriptions, and revenue by working across the product, but what are some examples of what this looks like?
 
 - Developing a growth strategy, experiment framework, and measurement for both.
 - Doing SEO optimization on the marketing site. Building landing pages. Optimizing the signup funnels.
@@ -92,7 +92,7 @@ At PostHog, our [growth engineers](/handbook/small-teams/growth) are key to how 
 
 ### Billing
 
-Billing is a major focus recently because we believe we can provide a better offering to users if we [charge for separate products](/handbook/engineering/feature-pricing). This will lead to growth across the signup, usage, and revenue metrics the growth team cares about. Implementing it is on the growth team’s plate, and it’s a big task.
+Billing is a major focus recently because we believe we can provide a better offering to users if we [charge for separate products](/handbook/engineering/feature-pricing). This leads to growth across the signup, usage, and revenue metrics the growth team cares about. Implementing it is on the growth team’s plate, and it’s a big task.
 
 It includes creating a [billing service](https://github.com/PostHog/posthog/pull/11986) enabling different pricing for different plans and [products](https://github.com/PostHog/posthog/pull/15035/files) such as session replays. It also means improving the billing page both on the [website](https://github.com/PostHog/posthog.com/pull/5181) and [in-app](https://github.com/PostHog/posthog/pull/14652) to work with this service.
 
@@ -111,7 +111,7 @@ The results of this include:
 
 ### Onboarding
 
-Onboarding is an area that is traditionally a big focus for growth teams, but isn't for us at the moment (it will be in the future though).
+Onboarding is an area that is traditionally a big focus for growth teams, but isn't for us at the moment (it is a future priority).
 
 Our team has set up [in-app messaging](https://github.com/PostHog/posthog/pull/13108) and notifications, using customer.io.They have also added [autocapture](https://github.com/PostHog/posthog/pull/14687) and session recording toggles to the onboarding flow, increasing the visibility of these features.
 
@@ -123,9 +123,9 @@ We've seen this from our growth team. Building cross-product features, like bill
 
 Growth engineers likely won't help you find traction, they need products to connect and optimize to thrive. Once you have traction, it might be the right time to hire a growth engineer to fuel rapid growth.
 
-From our experience, we'd recommend the type of growth engineer who is both technical and entrepreneurial, this often arises in former founders. Later-stage teams often find success with larger growth teams, and more marketing-focused roles, but we haven't made it that far yet. 
+From our experience, we'd recommend the technical and entreprenuerial growth engineer, this often arises in former founders. Later-stage teams often find success with larger growth teams, and more marketing-focused roles, but we haven't made it that far yet. 
 
-If you're still curious about our growth team, check out [their small team page](/handbook/small-teams/growth).
+Still curious about our growth team? Check out [their small team page](/handbook/small-teams/growth).
 
 ## Further reading
 
