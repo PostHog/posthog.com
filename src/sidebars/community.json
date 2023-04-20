@@ -11,12 +11,12 @@
                 "url": "/questions"
             },
             {
-                "name": "My discussions",
-                "url": "/community/dashboard"
-            },
-            {
                 "name": "Latest questions",
                 "url": "/community/latest"
+            },
+            {
+                "name": "Inbox",
+                "url": "/community/dashboard"
             }
         ]
     },
