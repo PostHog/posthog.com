@@ -1,5 +1,5 @@
 ---
-title: "Startup spotlight: Tigris Data"
+title: "Startup Spotlight: Tigris Data"
 date: 2023-04-20
 author: ["charles-cook"]
 showTitle: true
@@ -37,9 +37,9 @@ At mid-stage companies, what typically happens is that when those companies star
 
 ### What are you most excited about?
 
-"The first thing I'm most excited about is actually building - I put myself in that category of builder. In the past, I've built internal platforms, so this is my first opportunity to build something that end users are going to use directly. At Uber, our platform was business-critical, but we were still behind the scenes and not dealing with customers directly. 
+"The first thing I'm most excited about is actually building – I put myself in that category of builder. In the past, I've built internal platforms, so this is my first opportunity to build something that end users are going to use directly. At Uber, our platform was business-critical, but we were still behind the scenes and not dealing with customers directly. 
 
-So, this is the first opportunity that excites me in that way - getting to build and sell a product, and talking directly to users."
+So, this is the first opportunity that excites me in that way – getting to build and sell a product, and talking directly to users."
 
 ### What are you worried about?
 
@@ -53,4 +53,4 @@ Things that you would never imagine happening like SVB going bust don't help eit
 
 I found that I actually had to switch over to talking more about the business aspects - how is Tigris solving a problem, who is it solving the problem for, how is it different from what other products exist. That introduced a different kind of thought process. It's not that we didn't know who our ICP was, but we were thinking and pitching from a purely engineering perspective, not a user perspective. This has also helped us decide what to focus on." 
 
-> Want to be the next startup we spotlight? Check out [PostHog for Startups](/startups) and join us!
+> Want to be the next startup we spotlight? Check out [PostHog for Startups](/startups).
