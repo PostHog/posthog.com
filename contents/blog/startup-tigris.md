@@ -25,7 +25,7 @@ What we are trying to do is, instead of having the developer deal with all these
 
 ### How did you decide this was a problem worth solving?
 
-"I've been in the data infra space for 17 years. Before starting Tigris, I spent around 6 years at Uber where I was leading the teams that built Uber's internal database platform. At Uber it was very clear that a lot of developer time was spent dealing with different types of solutions and connecting them together. So we ended up dealing with operational infrastructure instead of focusing on writing features fast enough. We built a solution called Docstore which integrated many different data-access platforms together behind a single API. And that allowed us to move really fast and build new types of use cases. 
+"I've been in the data infra space for 17 years. Before starting Tigris, I spent around 6 years at Uber, where I was leading the teams that built Uber's internal database platform. At Uber, it was very clear that a lot of developer time was spent dealing with different types of database solutions and connecting them together. So developers would end up dealing with operational infrastructure instead of focusing on writing features fast enough. We built a solution called Docstore which was a general-purpose database platform supporting wide variety of workloads and data access patterns through a single unified API. And that allowed developers to move really fast and build new types of use cases. 
 
 This experience helped us to envision a product that would benefit other developers outside as well, so I started Tigris with two other former Uber colleagues."
 
