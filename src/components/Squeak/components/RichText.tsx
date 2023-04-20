@@ -1,5 +1,9 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState, useCallback } from 'react'
 import MarkdownLogo from './MarkdownLogo'
+import { useDropzone } from 'react-dropzone'
+import uploadImage from '../util/uploadImage'
+import { useUser } from 'hooks/useUser'
+import Spinner from 'components/Spinner'
 
 const buttons = [
     {
@@ -71,6 +75,38 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus }
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
     const [cursor, setCursor] = useState<number | null>(null)
+    const [imageLoading, setImageLoading] = useState(false)
+    const { getJwt, user } = useUser()
+
+    const onDrop = useCallback(
+        async (acceptedFiles) => {
+            if (!user) return
+            setImageLoading(true)
+            const file = acceptedFiles[0]
+            const profileID = user?.profile?.id
+            const jwt = await getJwt()
+            if (file && profileID && jwt) {
+                const image = await uploadImage(file, jwt, {
+                    field: 'images',
+                    id: profileID,
+                    type: 'api::profile.profile',
+                })
+                if (image) {
+                    setValue(value + `![${image.name}](${image.url})`)
+                }
+            }
+            setImageLoading(false)
+        },
+        [value]
+    )
+
+    const { getRootProps, getInputProps, open } = useDropzone({
+        onDrop,
+        noClick: true,
+        noKeyboard: true,
+        multiple: false,
+        accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'] },
+    })
 
     const replaceSelection = (selectionStart: number, selectionEnd: number, text: string) => {
         return value.substring(0, selectionStart) + text + value.substring(selectionEnd, value.length)
@@ -113,8 +149,10 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus }
     }, [value])
 
     return (
-        <>
+        <div className="relative" {...getRootProps()}>
+            <input className="hidden" {...getInputProps()} />
             <textarea
+                disabled={imageLoading}
                 autoFocus={autoFocus}
                 className="bg-white dark:bg-gray-accent-dark-hover dark:text-primary-dark border-none text-base h-[150px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
                 onBlur={(e) => e.preventDefault()}
@@ -141,6 +179,28 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus }
                             </li>
                         )
                     })}
+                    {user && (
+                        <li>
+                            <button
+                                className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    open()
+                                }}
+                            >
+                                <svg className="w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 14">
+                                    <path
+                                        d="M12 5.714a1.715 1.715 0 1 0 0-3.43 1.715 1.715 0 0 0 0 3.43Z"
+                                        fill="currentColor"
+                                    />
+                                    <path
+                                        d="M15 0H1C.443 0 0 .454 0 1.01v11.694c0 .557.443 1.01 1 1.01h14c.557 0 1-.453 1-1.01V1.01C16 .454 15.557 0 15 0Zm-3.682 7.06a.614.614 0 0 0-.457-.22c-.183 0-.311.085-.458.203l-.667.564c-.14.1-.25.168-.411.168a.59.59 0 0 1-.393-.146 4.668 4.668 0 0 1-.154-.147L6.857 5.404a.788.788 0 0 0-.596-.268c-.24 0-.461.118-.6.278l-4.518 5.45V1.561a.47.47 0 0 1 .468-.418h12.775c.246 0 .446.182.46.428l.011 9.3-3.54-3.81Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                            </button>
+                        </li>
+                    )}
                 </ul>
                 <div className="mr-2">
                     <a
@@ -154,6 +214,11 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus }
                     </a>
                 </div>
             </div>
-        </>
+            {imageLoading && (
+                <div className="w-full h-full inset-0 bg-white/50 dark:bg-black/50 absolute flex justify-center items-center">
+                    <Spinner className="w-10 h-10" />
+                </div>
+            )}
+        </div>
     )
 }
