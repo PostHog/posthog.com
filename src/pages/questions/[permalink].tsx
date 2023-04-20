@@ -8,6 +8,7 @@ import { RightArrow } from 'components/Icons'
 import QuestionSidebar from 'components/Questions/QuestionSidebar'
 import Link from 'components/Link'
 import SEO from 'components/seo'
+import { useUser } from 'hooks/useUser'
 
 type QuestionPageProps = {
     params: {
@@ -15,11 +16,11 @@ type QuestionPageProps = {
     }
 }
 
-export default function QuestionPage(props: QuestionPageProps) {
+const QuestionTemplate = (props: any) => {
     const { question, isLoading } = useQuestion(props.params.permalink)
-
+    const { user } = useUser()
     return (
-        <Layout>
+        <>
             <SEO
                 title={isLoading ? 'Squeak question - PostHog' : `${question?.attributes?.subject} - PostHog`}
                 noindex={question?.attributes.archived}
@@ -29,6 +30,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                 menu={community}
                 sidebar={<QuestionSidebar permalink={props.params.permalink} />}
                 hideSurvey
+                menuWidth={user?.role?.type === 'moderator' ? { right: 400 } : undefined}
             >
                 <section className="max-w-5xl mx-auto pb-12">
                     <div className="mb-4">
@@ -44,6 +46,14 @@ export default function QuestionPage(props: QuestionPageProps) {
                     <Question id={props.params.permalink} expanded={true} />
                 </section>
             </PostLayout>
+        </>
+    )
+}
+
+export default function QuestionPage(props: QuestionPageProps) {
+    return (
+        <Layout>
+            <QuestionTemplate {...props} />
         </Layout>
     )
 }
