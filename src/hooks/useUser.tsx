@@ -269,6 +269,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                                     ],
                                 },
                             },
+                            topicSubscriptions: {
+                                fields: ['slug', 'label'],
+                            },
                         },
                     },
                     role: {

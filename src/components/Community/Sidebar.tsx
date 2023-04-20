@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import { Authentication, EditProfile } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
@@ -106,9 +106,13 @@ export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOp
 }
 
 export default function Sidebar() {
-    const { user, logout } = useUser()
-
+    const { user, logout, fetchUser } = useUser()
     const [editModalOpen, setEditModalOpen] = useState(false)
+    const topicSubscriptions = user?.profile?.topicSubscriptions
+
+    useEffect(() => {
+        fetchUser()
+    }, [])
 
     return (
         <>
@@ -136,7 +140,19 @@ export default function Sidebar() {
                 </div>
                 {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> : <Login />}
             </SidebarSection>
-            <SidebarSection title="Subscribed topics">123</SidebarSection>
+            {topicSubscriptions && topicSubscriptions?.length > 0 && (
+                <SidebarSection title="Subscribed topics">
+                    <ul className="list-none m-0 p-0">
+                        {topicSubscriptions.map(({ label, slug }) => {
+                            return (
+                                <li key={label}>
+                                    <Link to={`/questions/topic/${slug}`}>{label}</Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </SidebarSection>
+            )}
         </>
     )
 }

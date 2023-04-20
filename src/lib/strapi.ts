@@ -60,6 +60,7 @@ export type ProfileData = {
     gravatarURL: string | null
     questionSubscriptions: StrapiData<QuestionData[]>
     user?: StrapiData<UserData>
+    topicSubscriptions: StrapiData<TopicData[]>
 }
 
 export type UserData = {
