@@ -29,7 +29,7 @@ We use metadata on these prices to allow the Billing Service to appropriately lo
 
 **On Stripe Product Prices**
 The following keys are used to manage Startup prices:
-* `plan` - Any startup plan prices must have the `plan` metadata set to `startup`. If not, when their subscription automatically ends they will not be moved to the default (paid) prices and will be instead switched to the free plans for all products. 
+* `plan` - Any Startup plan prices must have the `plan` metadata set to `startup`. If not, when their subscription automatically ends they will not be moved to the default (paid) prices and will be instead switched to the free plans for all products. 
 * `valid_days` -> The number of days a price is valid for, before automatically switching to another plan (the `default` plan unless `move_to_price_id` is set). Useful to create pricing that is only valid for a specific period, e.g. for the startup plans. Note: if more than one price with `valid_days` is added to a subscription, the validity period will be the *shortest* of the two, before resetting all plans to the default ones 
 * `move_to_price_id` -> Can be used to specify if the customer needs to be moved to a specific pricing, rather than the default one, at the end of the subscription period.
 
