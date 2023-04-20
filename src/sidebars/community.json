@@ -3,16 +3,22 @@
         "name": "Community"
     },
     {
-        "name": "Topics",
-        "url": "/questions"
-    },
-    {
-        "name": "My discussions",
-        "url": "/community/dashboard"
-    },
-    {
-        "name": "New questions",
-        "url": "/community/latest"
+        "name": "Questions",
+        "url": "",
+        "children": [
+            {
+                "name": "Topics",
+                "url": "/questions"
+            },
+            {
+                "name": "My discussions",
+                "url": "/community/dashboard"
+            },
+            {
+                "name": "Latest questions",
+                "url": "/community/latest"
+            }
+        ]
     },
     {
         "name": "Roadmap",
