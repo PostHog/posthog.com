@@ -74,9 +74,17 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                         </Link>
 
                         {isModerator && (
-                            <p className="m-0 font-normal text-sm text-primary/60 dark:text-primary-dark/60">
-                                {question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}
-                            </p>
+                            <>
+                                <input
+                                    className="block m-0 font-normal text-sm text-primary/60 dark:text-primary-dark/60 border-none p-0 bg-transparent focus:ring-0"
+                                    type="text"
+                                    value={
+                                        question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email
+                                    }
+                                    readOnly
+                                    onFocus={(e) => e.target.select()}
+                                />
+                            </>
                         )}
                     </div>
                 </div>
