@@ -220,30 +220,6 @@ const Issue = ({
     )
 }
 
-const ActiveIssues = ({ issues }) => {
-    return (
-        <div id="active-issues" className="mb-12">
-            <SectionTitle>Most active issues</SectionTitle>
-            <ul className="m-0 p-0 list-none mb-6">
-                {issues.map((issue) => {
-                    const { comments, ...other } = issue
-                    return (
-                        <ListItem key={issue?.id}>
-                            <Issue {...other} />
-                            <p className="m-0 text-ellipsis overflow-hidden whitespace-nowrap xl:w-[200px] flex-shrink-0 font-semibold opacity-60">
-                                {comments} comment{comments.length === 1 ? '' : 's'}
-                            </p>
-                        </ListItem>
-                    )
-                })}
-            </ul>
-            <CallToAction width="full" type="secondary" to="https://github.com/PostHog/posthog/issues">
-                See active issues on GitHub
-            </CallToAction>
-        </div>
-    )
-}
-
 const RecentQuestions = () => {
     // const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
 
@@ -260,30 +236,7 @@ const RecentQuestions = () => {
     )
 }
 
-const ActivePulls = ({ pulls }) => {
-    return (
-        <div id="active-pulls" className="mb-12">
-            <SectionTitle>Most active PRs</SectionTitle>
-            <ul className="m-0 p-0 list-none mb-6">
-                {pulls.map((pull) => {
-                    return (
-                        <ListItem key={pull?.id}>
-                            <Issue preview={false} {...pull} />
-                            <Author url={pull?.user?.url} avatar={pull?.user?.avatar} username={pull?.user?.username} />
-                        </ListItem>
-                    )
-                })}
-            </ul>
-            <CallToAction width="full" type="secondary" to="https://github.com/PostHog/posthog/pulls">
-                See active PRs on GitHub
-            </CallToAction>
-        </div>
-    )
-}
-
 export default function CommunityPage({ params }: PageProps) {
-    const { issues, pulls, postHogStats, postHogComStats } = useStaticQuery(query)
-
     return (
         <>
             <SEO title={`Community - PostHog`} />
@@ -292,7 +245,7 @@ export default function CommunityPage({ params }: PageProps) {
                     menuWidth={{ right: 320 }}
                     title="Profile"
                     menu={community}
-                    sidebar={<ProfileSidebar postHogStats={postHogStats} postHogComStats={postHogComStats} />}
+                    sidebar={<ProfileSidebar />}
                     tableOfContents={[
                         { url: 'recent-questions', value: 'Recent questions', depth: 0 },
                         { url: 'active-issues', value: 'Most active issues', depth: 0 },
@@ -302,64 +255,13 @@ export default function CommunityPage({ params }: PageProps) {
                 >
                     <Subscriptions />
                     <RecentQuestions />
-                    <ActiveIssues issues={issues.nodes} />
-                    <ActivePulls pulls={pulls.nodes} />
                 </PostLayout>
             </Layout>
         </>
     )
 }
 
-interface IGitHubStats {
-    commits: number
-    contributors: number
-    forks: number
-    stars: number
-}
-
-const Stat = ({ label, count }: { label: string; count: number }) => {
-    return (
-        <li className="flex flex-col flex-1">
-            <h5 className="m-0 text-sm opacity-60 font-semibold">{label}</h5>
-            <p className="m-0 text-sm font-semibold">{count.toLocaleString()}</p>
-        </li>
-    )
-}
-
-const Stats = ({
-    owner,
-    repo,
-    description,
-    stats,
-}: {
-    owner: string
-    repo: string
-    description: React.ReactNode
-    stats: IGitHubStats
-}) => {
-    return (
-        <div className="mb-6">
-            <Link to={`https://github.com/${owner}/${repo}`} external className="font-semibold">
-                {owner}/{repo}
-            </Link>
-            <p className="m-0 text-sm">{description}</p>
-            <ul className="m-0 p-0 list-none flex space-x-3 mt-2">
-                <Stat label="Stars" count={stats?.stars} />
-                <Stat label="Contributors" count={stats?.contributors} />
-                <Stat label="Forks" count={stats?.forks} />
-                <Stat label="Commits" count={stats?.commits} />
-            </ul>
-        </div>
-    )
-}
-
-const ProfileSidebar = ({
-    postHogStats,
-    postHogComStats,
-}: {
-    postHogStats: IGitHubStats
-    postHogComStats: IGitHubStats
-}) => {
+const ProfileSidebar = () => {
     const { user, logout } = useUser()
 
     const [editModalOpen, setEditModalOpen] = useState(false)
@@ -390,81 +292,7 @@ const ProfileSidebar = ({
                 </div>
                 {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> : <Login />}
             </SidebarSection>
-            <SidebarSection title="Stats for our popular repos">
-                <Stats
-                    stats={postHogStats}
-                    owner="posthog"
-                    repo="posthog"
-                    description="The app you're here to learn about"
-                />
-                <Stats
-                    stats={postHogComStats}
-                    owner="posthog"
-                    repo="posthog.com"
-                    description={
-                        <>
-                            The very website you're on <i>right now</i>!
-                        </>
-                    }
-                />
-            </SidebarSection>
+            <SidebarSection title="Subscribed topics">123</SidebarSection>
         </>
     )
 }
-
-const query = graphql`
-    {
-        issues: allPostHogIssue {
-            nodes {
-                id
-                number
-                title
-                url
-                comments
-                user {
-                    avatar
-                    url
-                    username
-                }
-                reactions {
-                    hooray
-                    heart
-                    eyes
-                    plus1
-                }
-                body
-                labels {
-                    name
-                }
-                updated_at(formatString: "MMMM DD, YYYY")
-            }
-        }
-        pulls: allPostHogPull {
-            nodes {
-                id
-                number
-                title
-                url
-                user {
-                    avatar
-                    url
-                    username
-                }
-                body
-                updated_at(formatString: "MMMM DD, YYYY")
-            }
-        }
-        postHogComStats: gitHubStats(repo: { eq: "posthog.com" }) {
-            commits
-            contributors
-            forks
-            stars
-        }
-        postHogStats: gitHubStats(repo: { eq: "posthog" }) {
-            commits
-            contributors
-            forks
-            stars
-        }
-    }
-`
