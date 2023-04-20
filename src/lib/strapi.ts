@@ -35,6 +35,7 @@ export type QuestionData = {
     replies?: StrapiData<ReplyData[]>
     topics?: StrapiData<TopicData[]>
     numReplies: number | null
+    archived: boolean
 }
 
 export type AvatarData = {

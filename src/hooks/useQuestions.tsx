@@ -22,7 +22,20 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
             limit,
         },
         sort: 'createdAt:desc',
-        filters: {},
+        filters: {
+            $or: [
+                {
+                    archived: {
+                        $null: true,
+                    },
+                },
+                {
+                    archived: {
+                        $eq: false,
+                    },
+                },
+            ],
+        },
         populate: {
             profile: {
                 fields: ['firstName', 'lastName', 'gravatarURL'],
