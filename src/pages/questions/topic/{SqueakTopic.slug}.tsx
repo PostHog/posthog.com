@@ -2,11 +2,6 @@ import React, { useState } from 'react'
 
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
-
-import Layout from 'components/Layout'
-import { SEO } from 'components/seo'
-import community from 'sidebars/community.json'
-import PostLayout from 'components/PostLayout'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import QuestionForm from 'components/Questions/QuestionForm'

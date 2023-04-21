@@ -2,13 +2,13 @@ import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import React from 'react'
 import { Question, useQuestion } from 'components/Squeak'
-import community from 'sidebars/community.json'
 import { RightArrow } from 'components/Icons'
 
 import QuestionSidebar from 'components/Questions/QuestionSidebar'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
+import { useNav } from 'components/Community/useNav'
 
 type QuestionPageProps = {
     params: {
@@ -34,6 +34,7 @@ const QuestionTemplate = (props: any) => {
 
     const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
 
+    const nav = useNav(user)
     return (
         <>
             <SEO
@@ -42,7 +43,7 @@ const QuestionTemplate = (props: any) => {
             />
             <PostLayout
                 title={question?.attributes?.subject || ''}
-                menu={community}
+                menu={nav}
                 sidebar={<QuestionSidebar permalink={props.params.permalink} />}
                 hideSurvey
                 menuWidth={user?.role?.type === 'moderator' ? { right: 400 } : undefined}
