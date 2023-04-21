@@ -47,9 +47,8 @@ export const QuestionsTable = ({
                               attributes: { profile, subject, permalink, replies, createdAt, resolved, topics },
                           } = question
 
+                          const latestAuthor = replies?.data?.[0]?.attributes?.profile || profile
                           const numReplies = replies?.data?.length || 0
-
-                          const avatar = getAvatarURL(profile?.data?.attributes)
 
                           return profile ? (
                               <div key={question.id}>
@@ -72,47 +71,6 @@ export const QuestionsTable = ({
 
                                               <div className="w-full">
                                                   <span className="text-red line-clamp-1">{subject}</span>
-                                                  {showAuthor && (
-                                                      <div className="flex justify-between items-center">
-                                                          <div className="flex items-center text-sm mt-0.5 space-x-1 text-primary group">
-                                                              <div
-                                                                  className={`w-5 h-5 overflow-hidden rounded-full flex-shrink-0`}
-                                                              >
-                                                                  {avatar ? (
-                                                                      <img
-                                                                          className="w-full h-full"
-                                                                          alt=""
-                                                                          src={avatar}
-                                                                      />
-                                                                  ) : (
-                                                                      <svg
-                                                                          viewBox="0 0 40 40"
-                                                                          fill="none"
-                                                                          xmlns="http://www.w3.org/2000/svg"
-                                                                          className="bg-gray-accent-light"
-                                                                      >
-                                                                          <path
-                                                                              d="M20.0782 41.0392H5.42978C4.03134 41.0392 3.1173 40.1642 3.09386 38.7736C3.07823 37.7814 3.07042 36.797 3.10948 35.8048C3.15636 34.6329 3.72668 33.7345 4.74228 33.1798C8.0782 31.3595 11.4299 29.5783 14.7659 27.7658C15.0081 27.633 15.1565 27.758 15.3362 27.8517C18.1878 29.3439 21.0942 29.4689 24.0626 28.2267C24.1485 28.1955 24.2423 28.1721 24.3126 28.1096C24.9298 27.5861 25.4845 27.7971 26.1251 28.1486C29.1173 29.7971 32.1331 31.4143 35.1487 33.0238C36.4534 33.7191 37.094 34.766 37.0706 36.2426C37.0549 37.0785 37.0706 37.9067 37.0706 38.7426C37.0628 40.1254 36.1409 41.0395 34.7659 41.0395H20.0783L20.0782 41.0392Z"
-                                                                              fill="#BFBFBC"
-                                                                          ></path>
-                                                                          <path
-                                                                              d="M19.8359 27.0625C17.0859 26.9687 14.8047 25.6094 13.1251 23.1953C10.3751 19.2344 10.7032 13.6093 13.8516 10.0001C17.2735 6.08599 22.9452 6.10943 26.336 10.0469C29.9376 14.2345 29.711 20.8437 25.8126 24.6405C24.2188 26.1952 22.3126 27.0312 19.8362 27.0624L19.8359 27.0625Z"
-                                                                              fill="#BFBFBC"
-                                                                          ></path>
-                                                                      </svg>
-                                                                  )}
-                                                              </div>
-
-                                                              <div className="text-primary dark:text-primary-dark font-medium opacity-60 group-hover:opacity-100 line-clamp-1 my-1">
-                                                                  {profile.data.attributes.firstName}{' '}
-                                                                  {profile.data.attributes.lastName}
-                                                              </div>
-                                                          </div>
-                                                          <span className="text-xs text-primary/60 dark:text-primary-dark/60 md:hidden">
-                                                              Updated {dayFormat(dateToDays(createdAt))}
-                                                          </span>
-                                                      </div>
-                                                  )}
                                                   {showTopic && (
                                                       <div className="flex justify-between items-center">
                                                           <div className="flex items-center text-sm mt-0.5 space-x-1 text-primary group">
@@ -129,7 +87,15 @@ export const QuestionsTable = ({
                                               {numReplies}
                                           </div>
                                           <div className="hidden md:block md:col-span-2 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
-                                              {dayFormat(dateToDays(createdAt))}
+                                              <div className="flex items-center">
+                                                  <span className="flex-shrink-0">
+                                                      {dayFormat(dateToDays(createdAt))} ago by
+                                                  </span>
+                                                  <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-1">
+                                                      {latestAuthor?.data.attributes.firstName}{' '}
+                                                      {latestAuthor?.data.attributes.lastName} {}
+                                                  </div>
+                                              </div>
                                           </div>
                                       </div>
                                   </Link>

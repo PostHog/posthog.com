@@ -47,6 +47,11 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
                 },
             },
             replies: {
+                populate: {
+                    profile: {
+                        fields: ['firstName', 'lastName'],
+                    },
+                },
                 fields: ['id', 'createdAt', 'updatedAt'],
             },
         },
