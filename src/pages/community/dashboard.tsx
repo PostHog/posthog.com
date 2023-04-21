@@ -51,7 +51,7 @@ const Subscriptions = () => {
 
             <QuestionsTable
                 showTopic
-                showAuthor={true}
+                showAuthor={false}
                 fetchMore={fetchMore}
                 isLoading={isLoading}
                 questions={questions}
