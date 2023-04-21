@@ -65,7 +65,7 @@ const QuestionTemplate = (props: any) => {
                     <Question id={props.params.permalink} expanded={true} />
                 </section>
 
-                {isModerator && (
+                {isModerator && question && (
                     <div className="bg-almost-black dark:bg-white/25 rounded-md p-6 text-primary-dark bg:text-primary">
                         <h4 className="text-xs text-primary-dark opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">
                             Moderator tools
@@ -109,7 +109,7 @@ const QuestionTemplate = (props: any) => {
                             <h4 className="text-xs text-primary-dark opacity-70 p-0 m-0 font-semibold uppercase">
                                 Forum topics
                             </h4>
-                            <TopicSelector questionId={question.id} permalink={props.permalink} />
+                            <TopicSelector questionId={question?.id} permalink={props.permalink} />
                         </div>
                         <ul className="flex items-center list-none p-0 flex-wrap">
                             {question?.attributes?.topics?.data.map((topic) => (
