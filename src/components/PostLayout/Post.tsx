@@ -85,7 +85,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                     : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                             }}
                             className={
-                                'sm:pt-4 sm:pb-4 pb-0 sm:border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
+                                'pt-4 sm:pb-4 pb-0 sm:border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
                             }
                         >
                             <div className={`${contentContainerClasses} grid-cols-1`}>

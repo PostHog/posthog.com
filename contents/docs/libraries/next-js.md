@@ -163,6 +163,10 @@ export async function getServerSideProps(ctx) {
 > **Note**: Make sure to _always_ call `client.shutdownAsync()` after sending events from the server-side.
 > PostHog queues events into larger batches, and this call will force all batched events to be flushed immediately.
 
+## Configuring a reverse proxy to PostHog
+
+To improve the reliability of client-side tracking and make it less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. See [deploying a reverse proxy](/docs/advanced/proxy#using-nextjs).
+
 ## Further reading
 
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)

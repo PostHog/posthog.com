@@ -381,10 +381,10 @@ export function Footer(): JSX.Element {
                         </li>
                         <li>
                             <Link
-                                to="/docs/contribute/code-of-conduct"
+                                to="/handbook/company/security#soc-2"
                                 className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
                             >
-                                Code of conduct
+                                SOC 2
                             </Link>
                         </li>
                         <li>

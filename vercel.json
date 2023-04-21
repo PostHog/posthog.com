@@ -1,5 +1,6 @@
 {
     "redirects": [
+        { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/docs/integrate/third-party/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
@@ -824,7 +825,9 @@
         { "source": "/session-recording", "destination": "/session-replay" },
         { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" },
         { "source": "/docs/session-recording", "destination": "/docs/session-replay" },
-        { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" }
+        { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" },
+        { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
+        { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" }
     ],
     "rewrites": [
         {

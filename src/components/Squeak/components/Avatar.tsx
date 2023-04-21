@@ -1,10 +1,16 @@
+import Link from 'components/Link'
 import React from 'react'
 
-const Image = ({ src }: { src: string | null | undefined }) => {
+const Image = ({ src, className = '' }: { src: string | null | undefined; className?: '' }) => {
     return src ? (
-        <img src={src} />
+        <img className={`rounded-full ${className}`} src={src} />
     ) : (
-        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+        <svg
+            className={`bg-gray-accent-light rounded-full ${className}`}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 40 40"
+        >
             <path d="M0 0h40v40H0z" />
             <path
                 fillRule="evenodd"
@@ -16,15 +22,23 @@ const Image = ({ src }: { src: string | null | undefined }) => {
     )
 }
 
-export const Avatar = ({ image, url }: { image?: string | null; url?: string | null }) => {
+export const Avatar = ({
+    image,
+    url,
+    className = '',
+}: {
+    image?: string | null
+    url?: string | null
+    className?: string
+}) => {
     return (
-        <div className="squeak-avatar-container">
+        <div className="float-left shrink-0 leading-[0]">
             {url ? (
-                <a href={url}>
-                    <Image src={image} />
-                </a>
+                <Link to={url}>
+                    <Image className={className} src={image} />
+                </Link>
             ) : (
-                <Image src={image} />
+                <Image className={className} src={image} />
             )}
         </div>
     )

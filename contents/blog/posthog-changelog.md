@@ -1,5 +1,5 @@
 ---
-date: 2023-03-24
+date: 2023-04-21
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -18,6 +18,47 @@ featuredImageType: full
 Every Friday we update this page with the latest new features, fixes, and updates on PostHog Cloud in the last seven days. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+
+## April 21, 2023
+
+#### Support triage
+![posthog support](../images/blog/array/posthog-support.png)
+
+We've made a change to the way we handle support internally in order to give you a better experience. In the app this manifests through a new 'Report bug / get support' option on the help dropdown, which opens the modal above. 
+
+Previously, we'd assign an engineer to be a [Support Hero](/handbook/engineering/support-hero) each week and they would mostly drop other work to focus on support. That worked well initially, but as PostHog has grown in breadth it's become harder for engineers to offer support outside of their usual focus. The new system automatically triages requests and assigns them to a Support Hero from the relevant small team - meaning our engineers can stay focused on shipping. 
+
+#### PostHog is SOC 2 compliant
+![posthog soc 2 compliance](../images/blog/array/soc2-hog.png)
+
+Following an audit, we've been approved as SOC 2 compliant. 
+
+We're confident that nobody is _really_ interested in SOC 2 at a personal level. You either need it, or you don't. So... that's it. That's the update.
+
+The image is our attempt to make SOC 2 seem cool. Maybe we've been listening to too much Boyz 2 Men?
+
+## April 14, 2023
+
+#### MaxAI PostHog Support AI
+**Beta feature**
+![posthog ai support](../images/blog/array/maxai.jpeg)
+
+Another hackathon project from our recent offsite in Aruba has just launched, called [MaxAI](https://github.com/PostHog/max-ai). He's an open-source AI designed to help PostHog users and, [as mentioned on Twitter](https://twitter.com/posthog/status/1643266039839334400), we built the first version in just two days.
+
+Max is currently in beta, and is deployed into our user [Slack](/slack) so he can provide help to support questions. In the future, we hope to release him onto the website, and into the PostHog app.
+
+You can check out [the MaxAI repo README for a full explanation of how his AI works](https://github.com/PostHog/max-ai#readme) and how we trained him. The short version is that we'be built a vector database of context using [Weaviate](https://weaviate.io/), we use [Haystack](https://haystack.deepset.ai/) to connect that to prompts and questions, then feed that to GPT using the [OpenAI API](https://platform.openai.com/docs/guides/chat/introduction).
+
+Currently Max pulls information from our docs, our GitHub repos, and our [Squeak](https://squeak.posthog.com/) questions. He can use these sources to answer questions about how PostHog works, what we're working on, how to solve common problems, and more. [He can also write poetry.](https://twitter.com/posthog/status/1643269734249406469)
+
+Want to test him out? [Tag @Max-AI in the PostHog Slack, or send him a DM!](/slack)
+
+#### PostHog Tracks
+![posthog tracks](../images/blog/array/tracks.gif)
+
+[PostHog Tracks](/tracks) is a series of curated courses of tutorials and other lessons which cover common uses for particular roles, as well as general advice for all users - and it's constantly expanding!
+
+At the moment PostHog Tracks groups many of our existing tutorials together into role-based themes, but over time we plan to add to these tracks and form more robust learning opportunities. Let us know if you have any ideas for what could be included, in the [Slack](/slack)
 
 ## April 7, 2023
 
@@ -116,7 +157,7 @@ The notification app has actually been available for a while, but somehow missed
 #### 2FA authentication
 ![2fa support](../images/blog/array/2fa_posthog.png)
 
-Security is a big focus for us right now, as we work towards full SOC2 authentication - and two-factor authentication is the latest element of that. 
+Security is a big focus for us right now, as we work towards full SOC 2 authentication - and two-factor authentication is the latest element of that. 
 
 Want to enable 2FA? Head to your Project Settings to get started. You'll then get your own QR code like the one above (which, don't worry, is for a test environment) to set it up with apps such as Google Authenticator. 
 
