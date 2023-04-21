@@ -310,7 +310,7 @@ order by part_zoo) format TSVRaw" > tmp_zk_orphans
 4. Start up the ZK CLI (`zkCli.sh`) and paste the delete statements
 5. Check that the query from step 1 no longer returns anything
 
-## Orphan replication queue records
+#### Orphan replication queue records
 
 A more confusing issue can also happen when the replication queue contains operations that reference inexistent parts. 
 
