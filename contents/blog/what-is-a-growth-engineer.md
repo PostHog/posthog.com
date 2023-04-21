@@ -115,7 +115,7 @@ The results of this include:
 
 Onboarding is an area that is traditionally a big focus for growth teams, but isn't for us at the moment (it is a future priority).
 
-Our team has set up [in-app messaging](https://github.com/PostHog/posthog/pull/13108) and notifications, using customer.io.They have also added [autocapture](https://github.com/PostHog/posthog/pull/14687) and session recording toggles to the onboarding flow, increasing the visibility of these features.
+Our team has set up [in-app messaging](https://github.com/PostHog/posthog/pull/13108) and notifications, using customer.io. They have also added [autocapture](https://github.com/PostHog/posthog/pull/14687) and session recording toggles to the onboarding flow, increasing the visibility of these features.
 
 ## Why you should hire a growth engineer
 
