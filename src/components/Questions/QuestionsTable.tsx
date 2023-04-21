@@ -35,8 +35,8 @@ export const QuestionsTable = ({
 }: QuestionsTableProps) => {
     return (
         <ul className="m-0 p-0 list-none">
-            <li className="grid grid-cols-12 pb-1 items-center text-primary/75 dark:text-primary-dark/75 text-sm">
-                <div className="col-span-12 xl:col-span-7 2xl:col-span-8 pl-10">Question / Topic</div>
+            <li className="grid grid-cols-12 pl-2 pr-4 pb-1 items-center text-primary/75 dark:text-primary-dark/75 text-sm">
+                <div className="col-span-12 xl:col-span-7 2xl:col-span-8 pl-8">Question / Topic</div>
                 <div className="hidden xl:block xl:col-span-2 2xl:col-span-1 text-center">Replies</div>
                 <div className="hidden xl:block xl:col-span-3">Created</div>
             </li>
