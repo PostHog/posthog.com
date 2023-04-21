@@ -36,9 +36,9 @@ export const QuestionsTable = ({
     return (
         <ul className="m-0 p-0 list-none">
             <li className="grid grid-cols-12 pb-1 items-center text-primary/75 dark:text-primary-dark/75 text-sm">
-                <div className="col-span-12 md:col-span-8 pl-8">Topic / Author</div>
+                <div className="col-span-12 md:col-span-8 pl-8">Question / Topic</div>
                 <div className="hidden md:block md:col-span-2 text-center">Replies</div>
-                <div className="hidden md:block md:col-span-2 text-center">Activity</div>
+                <div className="hidden md:block md:col-span-2 text-center">Last activity</div>
             </li>
             <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none">
                 {questions.data.length > 0
@@ -89,8 +89,9 @@ export const QuestionsTable = ({
                                           <div className="hidden md:block md:col-span-2 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                               <div className="flex items-center">
                                                   <span className="flex-shrink-0">
-                                                      {dayFormat(dateToDays(createdAt))} ago by
+                                                      {dayFormat(dateToDays(createdAt))} by
                                                   </span>
+                                                  &nbsp;
                                                   <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-1">
                                                       {latestAuthor?.data?.attributes?.firstName}{' '}
                                                       {latestAuthor?.data?.attributes?.lastName} {}
