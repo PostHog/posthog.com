@@ -8,7 +8,7 @@ export const useNav = (user: User | null) => {
         ...(user
             ? [
                   {
-                      name: 'Inbox',
+                      name: 'Notifications',
                       url: '/community/dashboard',
                   },
               ]
