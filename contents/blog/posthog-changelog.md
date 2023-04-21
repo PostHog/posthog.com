@@ -26,7 +26,7 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 We've made a change to the way we handle support internally in order to give you a better experience. In the app this manifests through a new 'Report bug / get support' option on the help dropdown, which opens the modal above. 
 
-Previously, we'd assign an engineer to be a [Support Hero](/handbook/engineering/support-hero) each week and they would mostly drop other work to focus on support. That worked well initially, but as PostHog has grown in breadth it's become harder for engineers to offer support outside of their usual focus. The new system automatically triages requests and assigns them to a Support Hero from the relevant small team - meaning you'll always get the best possible support. 
+Previously, we'd assign an engineer to be a [Support Hero](/handbook/engineering/support-hero) each week and they would mostly drop other work to focus on support. That worked well initially, but as PostHog has grown in breadth it's become harder for engineers to offer support outside of their usual focus. The new system automatically triages requests and assigns them to a Support Hero from the relevant small team - which means we're able to keep everyone in our small team focused on shipping new things. 
 
 #### PostHog is SOC 2 compliant
 ![posthog soc 2 compliance](../images/blog/array/soc2-hog.png)
