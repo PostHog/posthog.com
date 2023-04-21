@@ -256,16 +256,6 @@ h4 {
     container-type: inline-size;
 }
 
-@container (min-width: 583px) and (max-width: 650px) {
-    #recent-questions ul li .grid {
-        @apply block;
-
-        > div {
-            @apply mb-2;
-        }
-    }
-}
-
 /* scope to left nav */
 .z-20 {
     /* make active nav item full strength */
