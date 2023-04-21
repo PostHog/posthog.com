@@ -59,36 +59,8 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                                 ? `${question.attributes?.profile?.data?.attributes?.firstName} ${question.attributes?.profile?.data?.attributes?.lastName}`
                                 : 'Anonymous'}
                         </Link>
-
-                        {isModerator && (
-                            <>
-                                <input
-                                    className="block w-full m-0 font-normal text-sm text-primary/60 dark:text-primary-dark/60 border-none p-0 bg-transparent focus:ring-0"
-                                    type="text"
-                                    value={
-                                        question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email
-                                    }
-                                    readOnly
-                                    onFocus={(e) => e.target.select()}
-                                />
-                            </>
-                        )}
                     </div>
                 </div>
-                {isModerator && (
-                    <p className="text-sm pt-0.5 pb-0 ml-9 mb-0 flex space-x-1.5">
-                        <Link className="" to={link} externalNoIcon>
-                            View in PostHog
-                        </Link>
-                        <span className="opacity-60">|</span>
-                        <Link
-                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question.question/${question?.id}`}
-                            externalNoIcon
-                        >
-                            Strapi
-                        </Link>
-                    </p>
-                )}
             </SidebarSection>
 
             {isModerator && (
@@ -127,7 +99,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                 <SidebarSection>
                     <iframe
                         className="border-none -mx-3 lg:-mx-6 -my-4 w-[calc(100%_+_3rem)] h-[calc(100vh_-_380px)]"
-                        src={`https://sidecar-panel.vercel.app/?email=${question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}`}
+                        src={`http://localhost:5173/?email=${question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}`}
                     />
                 </SidebarSection>
             )}

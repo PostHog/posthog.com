@@ -18,7 +18,22 @@ type QuestionPageProps = {
 
 const QuestionTemplate = (props: any) => {
     const { question, isLoading } = useQuestion(props.params.permalink)
-    const { user } = useUser()
+    const { user, isModerator } = useUser()
+
+    const personsQuery = {
+        kind: 'DataTableNode',
+        source: {
+            kind: 'PersonsNode',
+            search:
+                question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.distinctId ||
+                question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email,
+        },
+        full: true,
+        propertiesViaUrl: true,
+    }
+
+    const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
+
     return (
         <>
             <SEO
@@ -45,6 +60,45 @@ const QuestionTemplate = (props: any) => {
 
                     <Question id={props.params.permalink} expanded={true} />
                 </section>
+
+                {isModerator && (
+                    <div className="bg-almost-black rounded-lg p-6 text-white">
+                        <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">Moderator tools</h4>
+
+                        <div className="w-full relative">
+                            <p className="text-sm pt-0.5 pb-0  mb-0 flex flex-col items-end space-y-1.5 absolute top-0 right-0">
+                                <Link className="" to={link} external>
+                                    View in PostHog
+                                </Link>
+                                <Link
+                                    to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question?.question/${question?.id}`}
+                                    external
+                                >
+                                    View in Strapi
+                                </Link>
+                            </p>
+
+                            <Link
+                                to={`/community/profiles/${question?.attributes?.profile?.data?.id}`}
+                                className="text-yellow font-bold"
+                            >
+                                {question?.attributes?.profile?.data?.attributes?.firstName
+                                    ? `${question?.attributes?.profile?.data?.attributes?.firstName} ${question?.attributes?.profile?.data?.attributes?.lastName}`
+                                    : 'Anonymous'}
+                            </Link>
+                        </div>
+
+                        <>
+                            <input
+                                className=" w-full m-0 font-normal text-sm text-white/60 dark:text-white/60 border-none p-0 bg-transparent focus:ring-0"
+                                type="text"
+                                value={question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}
+                                readOnly
+                                onFocus={(e) => e.target.select()}
+                            />
+                        </>
+                    </div>
+                )}
             </PostLayout>
         </>
     )
