@@ -106,13 +106,9 @@ export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOp
 }
 
 export default function Sidebar() {
-    const { user, logout, fetchUser } = useUser()
+    const { user, logout } = useUser()
     const [editModalOpen, setEditModalOpen] = useState(false)
     const topicSubscriptions = user?.profile?.topicSubscriptions
-
-    useEffect(() => {
-        fetchUser()
-    }, [])
 
     return (
         <>
