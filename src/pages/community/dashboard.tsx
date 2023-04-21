@@ -28,7 +28,7 @@ const Subscriptions = () => {
             <SectionTitle>My discussions</SectionTitle>
             <QuestionsTable
                 showTopic
-                showAuthor={false}
+                showAuthor={true}
                 fetchMore={fetchMore}
                 isLoading={isLoading}
                 questions={questions}
