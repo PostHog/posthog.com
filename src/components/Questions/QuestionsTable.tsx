@@ -36,7 +36,7 @@ export const QuestionsTable = ({
     return (
         <ul className="m-0 p-0 list-none">
             <li className="grid grid-cols-12 pb-1 items-center text-primary/75 dark:text-primary-dark/75 text-sm">
-                <div className="col-span-12 xl:col-span-7 2xl:col-span-8 pl-8">Question / Topic</div>
+                <div className="col-span-12 xl:col-span-7 2xl:col-span-8 pl-10">Question / Topic</div>
                 <div className="hidden xl:block xl:col-span-2 2xl:col-span-1 text-center">Replies</div>
                 <div className="hidden xl:block xl:col-span-3">Created</div>
             </li>
@@ -55,7 +55,7 @@ export const QuestionsTable = ({
                                   <Link
                                       state={currentPage && { previous: currentPage }}
                                       to={`/questions/${permalink}`}
-                                      className={`${className} block py-2 -ml-4 -mr-4 pl-4 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
+                                      className={`${className} block py-2 pl-2 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
                                   >
                                       <div className="grid grid-cols-12 items-center">
                                           <div className="col-span-12 xl:col-span-7 2xl:col-span-8 flex items-center space-x-4">
