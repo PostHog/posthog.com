@@ -105,8 +105,6 @@ Enter team Arubug, who decided there had to be a better way.
 
 The team started by [building a site app](/tutorials/build-site-app) for bug reports based on our existing [Feedback Widget](/apps/feedback-widget), which sends a `$bug_report` event to PostHog.
 
-// TODO: Screenshot of dashboard
-
 These reports feed into a dashboard that tracks bug reports, helping us to identity trends. Bugs can be broken down as tables with relevant properties, and session replays, attached.
 
 ![bug table](../images/blog/aruba/arubug-table.png)
@@ -122,8 +120,6 @@ After the hackathon, we reviewed the plan and realized:
 2. Support heroes shield product teams from feedback about their product, impeding an important feedback loop.
 
 Consequently, we decided to use the hackathon in-app integration to triage support requests by product/team, and improve our integration with Zendesk instead of developing the communication tab further. 
-
-// TODO: Add in-app bug report screenshot
 
 Now, instead of our single support hero, each team will handle support requests for their product, and tickets will be enhanced with useful context, such as session replays and product usage data. This process also enables us to collect aggregated info on bugs and requests, so we can identify common issues faster.
 
@@ -178,7 +174,7 @@ Even this basic functionality has numerous helpful use cases, but long-term we e
 
 PostHog uses ClickHouse as our main event database, but we end up using a huge range of tools (Grafana, Metabase, pganalyze etc.) to monitor and manage it. Team HouseWatch built a centralized dashboard, so we can eliminate all this bloat and have everything in one place.
 
-// TODO: Screenshot of House Watch
+![housewatch](../images/blog/aruba/housewatch.png)
 
 The homepage enables us to monitor things like execution count (queries per hour), and memory usage. There's also a slow queries view, which will allow the team to proactively identify problematic queries and reach out to customers to help.
 
