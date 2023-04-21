@@ -4,6 +4,7 @@ import { useUser } from 'hooks/useUser'
 import CommunityLayout, { SectionTitle } from 'components/Community/Layout'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import { useQuestions } from 'hooks/useQuestions'
+import Link from 'components/Link'
 
 const Subscriptions = () => {
     const { user, fetchUser } = useUser()
@@ -16,6 +17,7 @@ const Subscriptions = () => {
             },
         },
     })
+    const topicSubscriptions = user?.profile?.topicSubscriptions
 
     useEffect(() => {
         if (!user) {
@@ -26,6 +28,27 @@ const Subscriptions = () => {
     return (
         <div id="my-activity" className="mb-12">
             <SectionTitle>My discussions</SectionTitle>
+
+            {topicSubscriptions && topicSubscriptions?.length > 0 && (
+                <div className="border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark py-4 mb-4">
+                    <h4 className="text-sm font-semibold opacity-60 mb-0">Jump to subscribed topics:</h4>
+                    <ul className="list-none m-0 p-0 flex flex-wrap">
+                        {topicSubscriptions.map(({ label, slug }) => {
+                            return (
+                                <li
+                                    key={label}
+                                    className="relative after:content-['|'] last:after:content-none mr-1 after:pl-1 after:opacity-50"
+                                >
+                                    <Link to={`/questions/topic/${slug}`} className="text-sm">
+                                        {label}
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+            )}
+
             <QuestionsTable
                 showTopic
                 showAuthor={true}

@@ -137,16 +137,26 @@ export default function Sidebar() {
                 {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> : <Login />}
             </SidebarSection>
             {topicSubscriptions && topicSubscriptions?.length > 0 && (
-                <SidebarSection title="Subscribed topics">
-                    <ul className="list-none m-0 p-0">
-                        {topicSubscriptions.map(({ label, slug }) => {
-                            return (
-                                <li key={label}>
-                                    <Link to={`/questions/topic/${slug}`}>{label}</Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
+                <SidebarSection title="Jump to subscribed topics">
+                    <>
+                        <ul className="list-none m-0 p-0">
+                            {topicSubscriptions.map(({ label, slug }) => {
+                                return (
+                                    <li
+                                        key={label}
+                                        className="mt-1 pt-1 first:mt-0 border-t first:border-none border-dashed border-gray-accent-light dark:border-gray-accent-dark"
+                                    >
+                                        <Link
+                                            to={`/questions/topic/${slug}`}
+                                            className="block text-sm p-1  rounded-sm hover:bg-gray-accent-light dark:bg-gray-accent-dark hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] top-[.5px] "
+                                        >
+                                            {label}
+                                        </Link>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </>
                 </SidebarSection>
             )}
         </>
