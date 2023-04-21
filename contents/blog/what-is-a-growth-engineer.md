@@ -9,12 +9,12 @@ sidebar: Blog
 hideAnchor: true
 featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
-category: Engineering
+category: Startups
 tags:
  - Explainers
 ---
 
-Every startup loves to see its growth metrics like signups, subscriptions, and revenue go up, yet nearly all engineers work on things indirectly related to doing so. Growth engineers are different. They focus entirely on projects dedicated to driving as much growth as possible, no matter where they build those projects.
+Every startup loves to see its growth metrics – signups, subscriptions, and revenue, etc. – go up, yet most engineers work on things that don't directly impact those metrics. Growth engineers are different. They focus entirely on projects dedicated to driving as much growth as possible, no matter where they build those projects.
 
 The post goes over growth engineers, with a specific focus on our technical version role at PostHog. We cover the type of people who succeed as growth engineers, their skills, what they work on, and why you should hire them.
 
@@ -54,7 +54,7 @@ Growth engineers write code to implement their ideas and experiments. If they co
 
 Second, the other part of creating and implementing ideas is **product and design knowledge**. Because a growth team works across the stack and teams, they are often "lone wolves." They need the ability to fend for themselves in product and design decisions. They don’t have to be Da Vinci, but this knowledge helps them create successful features.
 
-As [Porter](https://www.workatastartup.com/jobs/46166) says:
+As [Porter](https://www.workatastartup.com/jobs/46166), a YC-backed devtool company founded in 2020, says:
 
 > We're looking for a product engineer with strong design chops who is fluent in React/Typescript and CSS. Simply put, we want someone who will take Porter's usability and UX/visual polish to the next level. You will be involved in all feature discussions and will shape the trajectory of our product.
 
@@ -66,19 +66,19 @@ Third, to create growth ideas based on solid strategies, growth engineers must h
 
 Since growth engineers run many experiments, they must be able to craft hypotheses and evaluate results. They should know what factors are relevant, how to calculate significance, and what data to care about in the first place.
 
-As [Terra](https://www.workatastartup.com/jobs/59415) says:
+As [Terra](https://www.workatastartup.com/jobs/59415), a YC and Samsung-backed health API, says:
 
-> The ideal candidate will have a deep understanding of data analytics, website optimization, user acquisition, and user engagement strategies. You will be responsible for developing and executing strategies to grow web traffic and engagement with our target customers. This includes optimizing websites, analyzing user data, and making recommendations for changes to the product that will help us reach our goals.
+> The ideal candidate will have a deep understanding of data analytics, website optimization, user acquisition, and user engagement strategies. You will be responsible for developing and executing strategies to grow web traffic and engagement with our target customers... and making recommendations for changes to the product that will help us reach our goals.
 
 If all this sounds like a unicorn, you aren’t wrong. This is again why we find former technical founders as a good fit for this role. They have the business and product knowledge to develop growth ideas and strategies, the practical technical knowledge to implement them, as well as a familiarity with the data a product produces.
 
 ![Growth engineers' power](../images/blog/what-is-a-growth-engineer/thanos.jpg)
 
-> **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. Product engineers focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
+> **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. [Product engineers](/blog/what-is-a-product-engineer) focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
 
 ## What do growth engineers actually work on?
 
-So what do growth engineers use their skills to do? We already covered that they work to increase signups, subscriptions, and revenue by working across the product, but what are some examples of what this looks like?
+So what do growth engineers apply their skills to? We already covered that they work to increase signups, subscriptions, and revenue by working across the product, but what does this look like?
 
 - Developing a growth strategy, experiment framework, and measurement for both.
 - Doing SEO optimization on the marketing site. Building landing pages. Optimizing the signup funnels.
