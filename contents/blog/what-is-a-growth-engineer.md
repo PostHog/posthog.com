@@ -16,7 +16,7 @@ tags:
 
 Every startup loves to see its growth metrics – signups, subscriptions, and revenue, etc. – go up, yet most engineers work on things that don't directly impact those metrics. Growth engineers are different. They focus entirely on projects dedicated to driving as much growth as possible, no matter where they build those projects.
 
-The post goes over growth engineers, with a specific focus on our technical version role at PostHog. We cover the type of people who succeed as growth engineers, their skills, what they work on, and why you should hire them.
+In this post, we'll explain the benefits of growth engineers, the type of people who succeed as growth engineers, their skills, what they work on, why you should hire them, and how growth engineering works at PostHog.
 
 > **Who are we?** [PostHog](/) is an open source suite of product and data tools built to help engineers build successful products. Relevant to this post, we have a [team of growth engineers](/handbook/small-teams/growth) who work to maximize the number of people who get value out of PostHog.
 
@@ -74,7 +74,7 @@ As [Terra](https://www.workatastartup.com/jobs/59415), a YC and Samsung-backed h
 
 If all this sounds like a unicorn, you aren’t wrong. This is again why we find former technical founders as a good fit for this role. They have the business and product knowledge to develop growth ideas and strategies, the practical technical knowledge to implement them, as well as a familiarity with the data a product produces.
 
-![Growth engineers' power](../images/blog/what-is-a-growth-engineer/thanos.jpg)
+![Growth engineers' power](../images/blog/what-is-a-growth-engineer/thanos.png)
 
 > **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. [Product engineers](/blog/what-is-a-product-engineer) focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
 
