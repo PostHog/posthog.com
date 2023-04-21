@@ -3,22 +3,12 @@
         "name": "Community"
     },
     {
-        "name": "Questions",
-        "url": "",
-        "children": [
-            {
-                "name": "Topics",
-                "url": "/questions"
-            },
-            {
-                "name": "Latest questions",
-                "url": "/community/latest"
-            },
-            {
-                "name": "Inbox",
-                "url": "/community/dashboard"
-            }
-        ]
+        "name": "Topics",
+        "url": "/questions"
+    },
+    {
+        "name": "Latest questions",
+        "url": "/community/latest"
     },
     {
         "name": "Roadmap",

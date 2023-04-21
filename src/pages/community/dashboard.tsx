@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
-import { PageProps } from 'gatsby'
-import Link from 'components/Link'
+import { navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import { QuestionData } from 'lib/strapi'
 import CommunityLayout, { SectionTitle } from 'components/Community/Layout'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import { useQuestions } from 'hooks/useQuestions'
@@ -20,23 +18,21 @@ const Subscriptions = () => {
     })
 
     useEffect(() => {
-        if (user) fetchUser()
-    }, [])
+        if (!user) {
+            fetchUser().catch(() => navigate('/questions'))
+        }
+    }, [user])
 
     return (
         <div id="my-activity" className="mb-12">
             <SectionTitle>My discussions</SectionTitle>
-            {questions?.data.length > 0 ? (
-                <QuestionsTable
-                    showTopic
-                    showAuthor={false}
-                    fetchMore={fetchMore}
-                    isLoading={isLoading}
-                    questions={questions}
-                />
-            ) : (
-                <p>You're not subscribed to any questions yet</p>
-            )}
+            <QuestionsTable
+                showTopic
+                showAuthor={false}
+                fetchMore={fetchMore}
+                isLoading={isLoading}
+                questions={questions}
+            />
         </div>
     )
 }

@@ -6,8 +6,9 @@ import PostLayout from 'components/PostLayout'
 import { UnderConsideration } from './UnderConsideration'
 import { InProgress } from './InProgress'
 import { StaticImage } from 'gatsby-plugin-image'
-import community from 'sidebars/community.json'
 import { useRoadmap } from 'hooks/useRoadmap'
+import { useNav } from 'components/Community/useNav'
+import { useUser } from 'hooks/useUser'
 
 interface IGitHubPage {
     title: string
@@ -94,7 +95,9 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
     return <ul className="list-none m-0 p-0 grid">{children}</ul>
 }
 
-export default function Roadmap() {
+const RoadmapTemplate = () => {
+    const { user } = useUser()
+    const nav = useNav(user)
     const teams = useRoadmap()
 
     const underConsideration: ITeam[] = teams
@@ -133,115 +136,120 @@ export default function Roadmap() {
         }),
         ({ team }: { team: ITeam }) => team?.name
     )*/
-
     return (
-        <Layout>
-            <SEO title="PostHog Roadmap" />
-            <div className="border-t border-dashed border-gray-accent-light">
-                <PostLayout
-                    contentWidth={'100%'}
-                    article={false}
-                    title={'Roadmap'}
-                    hideSurvey
-                    menu={community}
-                    darkMode={false}
-                    contentContainerClassName="lg:-mb-12 -mb-8"
-                >
-                    <div className="relative">
-                        <h1 className="font-bold text-5xl mx-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
-                        <figure className="-mt-8 sm:-mt-20 xl:-mt-32 mb-0">
-                            <StaticImage
-                                className="w-full"
-                                imgClassName="w-full aspect-auto"
-                                placeholder="blurred"
-                                alt={`Look at those views!'`}
-                                src="./images/hike-hog.png"
-                            />
-                        </figure>
-                    </div>
-                    <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed">
-                        <Section
-                            title="Under consideration"
-                            description="The top features we might build next. Your feedback is requested."
-                        >
-                            <CardContainer>
-                                {underConsideration.sort().map((team) => {
+        <div className="border-t border-dashed border-gray-accent-light">
+            <PostLayout
+                contentWidth={'100%'}
+                article={false}
+                title={'Roadmap'}
+                hideSurvey
+                menu={nav}
+                darkMode={false}
+                contentContainerClassName="lg:-mb-12 -mb-8"
+            >
+                <div className="relative">
+                    <h1 className="font-bold text-5xl mx-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
+                    <figure className="-mt-8 sm:-mt-20 xl:-mt-32 mb-0">
+                        <StaticImage
+                            className="w-full"
+                            imgClassName="w-full aspect-auto"
+                            placeholder="blurred"
+                            alt={`Look at those views!'`}
+                            src="./images/hike-hog.png"
+                        />
+                    </figure>
+                </div>
+                <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed">
+                    <Section
+                        title="Under consideration"
+                        description="The top features we might build next. Your feedback is requested."
+                    >
+                        <CardContainer>
+                            {underConsideration.sort().map((team) => {
+                                return (
+                                    <Card key={team.name} team={team.name}>
+                                        <CardContainer>
+                                            {team.roadmaps.map((node) => {
+                                                return <UnderConsideration key={node.title} {...node} />
+                                            })}
+                                        </CardContainer>
+                                    </Card>
+                                )
+                            })}
+                        </CardContainer>
+                    </Section>
+
+                    <Section
+                        title="In progress"
+                        description={
+                            <>
+                                Here’s what we're building <strong>right now</strong>. (We choose milestones using
+                                community feedback.)
+                            </>
+                        }
+                    >
+                        <CardContainer>
+                            {inProgress
+                                .sort((a, b) =>
+                                    a.roadmaps.some((goal) => goal.betaAvailable)
+                                        ? -1
+                                        : b.roadmaps.some((goal) => goal.betaAvailable)
+                                        ? 1
+                                        : 0
+                                )
+                                .map((team) => {
                                     return (
                                         <Card key={team.name} team={team.name}>
                                             <CardContainer>
                                                 {team.roadmaps.map((node) => {
-                                                    return <UnderConsideration key={node.title} {...node} />
+                                                    return <InProgress stacked key={node.title} {...node} />
+                                                })}
+                                            </CardContainer>
+                                        </Card>
+                                    )
+                                })}
+                        </CardContainer>
+                    </Section>
+
+                    <Section
+                        title="Recently shipped"
+                        // description="Here's what was included in our last array."
+                        className=""
+                    >
+                        <p className="p-4 border border-dashed border-gray-accent-light rounded-sm text-[15px]">
+                            Check out <Link to="/blog/categories/product-updates">product updates</Link> on our blog to
+                            see what we've shipped recently.
+                        </p>
+                        {/*
+                            hidden until we have more historical content loaded
+                            <CardContainer>
+                            {Object.keys(complete)
+                                .sort()
+                                .map((key) => {
+                                    return (
+                                        <Card key={key} team={key}>
+                                            <CardContainer>
+                                                {complete[key]?.map((node: IRoadmap) => {
+                                                    return <Complete key={node.title} {...node} />
                                                 })}
                                             </CardContainer>
                                         </Card>
                                     )
                                 })}
                             </CardContainer>
-                        </Section>
+                        */}
+                    </Section>
+                </div>
+            </PostLayout>
+        </div>
+    )
+}
 
-                        <Section
-                            title="In progress"
-                            description={
-                                <>
-                                    Here’s what we're building <strong>right now</strong>. (We choose milestones using
-                                    community feedback.)
-                                </>
-                            }
-                        >
-                            <CardContainer>
-                                {inProgress
-                                    .sort((a, b) =>
-                                        a.roadmaps.some((goal) => goal.betaAvailable)
-                                            ? -1
-                                            : b.roadmaps.some((goal) => goal.betaAvailable)
-                                            ? 1
-                                            : 0
-                                    )
-                                    .map((team) => {
-                                        return (
-                                            <Card key={team.name} team={team.name}>
-                                                <CardContainer>
-                                                    {team.roadmaps.map((node) => {
-                                                        return <InProgress stacked key={node.title} {...node} />
-                                                    })}
-                                                </CardContainer>
-                                            </Card>
-                                        )
-                                    })}
-                            </CardContainer>
-                        </Section>
-
-                        <Section
-                            title="Recently shipped"
-                            // description="Here's what was included in our last array."
-                            className=""
-                        >
-                            <p className="p-4 border border-dashed border-gray-accent-light rounded-sm text-[15px]">
-                                Check out <Link to="/blog/categories/product-updates">product updates</Link> on our blog
-                                to see what we've shipped recently.
-                            </p>
-                            {/*
-                                        hidden until we have more historical content loaded
-                                        <CardContainer>
-                                        {Object.keys(complete)
-                                            .sort()
-                                            .map((key) => {
-                                                return (
-                                                    <Card key={key} team={key}>
-                                                        <CardContainer>
-                                                            {complete[key]?.map((node: IRoadmap) => {
-                                                                return <Complete key={node.title} {...node} />
-                                                            })}
-                                                        </CardContainer>
-                                                    </Card>
-                                                )
-                                            })}
-                                        </CardContainer>
-                                    */}
-                        </Section>
-                    </div>
-                </PostLayout>
-            </div>
+export default function Roadmap() {
+    return (
+        <Layout>
+            <SEO title="PostHog Roadmap" />
+            <RoadmapTemplate />
         </Layout>
     )
 }

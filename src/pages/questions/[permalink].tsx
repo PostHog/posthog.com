@@ -2,13 +2,13 @@ import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import React from 'react'
 import { Question, useQuestion } from 'components/Squeak'
-import community from 'sidebars/community.json'
 import { RightArrow } from 'components/Icons'
 
 import QuestionSidebar from 'components/Questions/QuestionSidebar'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
+import { useNav } from 'components/Community/useNav'
 
 type QuestionPageProps = {
     params: {
@@ -19,6 +19,7 @@ type QuestionPageProps = {
 const QuestionTemplate = (props: any) => {
     const { question, isLoading } = useQuestion(props.params.permalink)
     const { user } = useUser()
+    const nav = useNav(user)
     return (
         <>
             <SEO
@@ -27,7 +28,7 @@ const QuestionTemplate = (props: any) => {
             />
             <PostLayout
                 title={question?.attributes?.subject || ''}
-                menu={community}
+                menu={nav}
                 sidebar={<QuestionSidebar permalink={props.params.permalink} />}
                 hideSurvey
                 menuWidth={user?.role?.type === 'moderator' ? { right: 400 } : undefined}
