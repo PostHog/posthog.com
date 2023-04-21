@@ -1,7 +1,7 @@
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import React from 'react'
-import { Question, useQuestion } from 'components/Squeak'
+import { Question, TopicSelector, useQuestion } from 'components/Squeak'
 import { RightArrow } from 'components/Icons'
 
 import QuestionSidebar from 'components/Questions/QuestionSidebar'
@@ -9,6 +9,8 @@ import Link from 'components/Link'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
 import { useNav } from 'components/Community/useNav'
+
+import { XIcon } from '@heroicons/react/outline'
 
 type QuestionPageProps = {
     params: {
@@ -19,6 +21,7 @@ type QuestionPageProps = {
 const QuestionTemplate = (props: any) => {
     const { question, isLoading } = useQuestion(props.params.permalink)
     const { user, isModerator } = useUser()
+    const { removeTopic } = useQuestion(props.permalink)
 
     const personsQuery = {
         kind: 'DataTableNode',
@@ -63,17 +66,20 @@ const QuestionTemplate = (props: any) => {
                 </section>
 
                 {isModerator && (
-                    <div className="bg-almost-black rounded-lg p-6 text-white">
-                        <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">Moderator tools</h4>
+                    <div className="bg-almost-black dark:bg-white/25 rounded-md p-6 text-primary-dark bg:text-primary">
+                        <h4 className="text-xs text-primary-dark opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">
+                            Moderator tools
+                        </h4>
 
                         <div className="w-full relative">
                             <p className="text-sm pt-0.5 pb-0  mb-0 flex flex-col items-end space-y-1.5 absolute top-0 right-0">
-                                <Link className="" to={link} external>
+                                <Link className="font-bold" to={link} externalNoIcon>
                                     View in PostHog
                                 </Link>
                                 <Link
                                     to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question?.question/${question?.id}`}
-                                    external
+                                    externalNoIcon
+                                    className="font-bold"
                                 >
                                     View in Strapi
                                 </Link>
@@ -89,15 +95,41 @@ const QuestionTemplate = (props: any) => {
                             </Link>
                         </div>
 
-                        <>
+                        <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-dark">
                             <input
-                                className=" w-full m-0 font-normal text-sm text-white/60 dark:text-white/60 border-none p-0 bg-transparent focus:ring-0"
+                                className="w-full m-0 font-normal text-sm text-primary-dark/60 border-none p-0 bg-transparent focus:ring-0"
                                 type="text"
                                 value={question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}
                                 readOnly
                                 onFocus={(e) => e.target.select()}
                             />
-                        </>
+                        </div>
+
+                        <div className="flex items-center justify-between mb-2">
+                            <h4 className="text-xs text-primary-dark opacity-70 p-0 m-0 font-semibold uppercase">
+                                Forum topics
+                            </h4>
+                            <TopicSelector questionId={question.id} permalink={props.permalink} />
+                        </div>
+                        <ul className="flex items-center list-none p-0 flex-wrap">
+                            {question?.attributes?.topics?.data.map((topic) => (
+                                <li
+                                    key={topic.id}
+                                    className="bg-gray-accent-dark dark:bg-gray-accent-light text-primary-dark dark:text-primary py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
+                                >
+                                    <Link
+                                        to={`/questions/topic/${topic.attributes.slug}`}
+                                        className="text-yellow text-sm"
+                                    >
+                                        {topic.attributes.label}
+                                    </Link>
+
+                                    <button onClick={() => removeTopic(topic)}>
+                                        <XIcon className="h-4 w-4 text-primary-dark dark:text-primary" />
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 )}
             </PostLayout>
