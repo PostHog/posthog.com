@@ -93,8 +93,8 @@ export const QuestionsTable = ({
                                           <div className="hidden xl:block xl:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                               <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-2">
                                                   {dayFormat(dateToDays(createdAt))} by{' '}
-                                                  {latestAuthor?.data?.attributes?.firstName}{' '}
-                                                  {latestAuthor?.data?.attributes?.lastName} {}
+                                                  {profile.data?.attributes?.firstName}{' '}
+                                                  {profile.data?.attributes?.lastName} {}
                                               </div>
                                           </div>
                                       </div>
