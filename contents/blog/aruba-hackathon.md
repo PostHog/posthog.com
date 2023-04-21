@@ -1,5 +1,5 @@
 ---
-date: 2023-04-12
+date: 2023-04-21
 title: "What we built at our sun-kissed Aruba hackathon"
 rootPage: /blog
 sidebar: Blog
@@ -147,7 +147,8 @@ They also set about revamping the PostHog Toolbar, replacing the dull but functi
 
 We're constantly building new features, but we have to invite users personally to try them out. It's inefficient and not cool. James, Michael and Annika thought it would be better if PostHog users could join PostHog betas themselves. So, they built it. That is cool.
 
-// TODO: Screenshot of feature preview
+![feature previews](../images/blog/aruba/feature-previews.png)
+<Caption>Interface for creating feature preview entries, including screenshots and docs options</Caption>
 
 Feature previews is pretty simple. It's a list of features we're testing, including screenshots and basic information, that users can simply enable or disable whenever they like. When they do, they're either automatically added to, or removed from, the relevant feature flag.
 
