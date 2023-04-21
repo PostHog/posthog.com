@@ -5,7 +5,7 @@ import { Markdown } from 'components/Icons'
 import * as Yup from 'yup'
 import TextareaAutosize from 'react-textarea-autosize'
 import { useUser } from 'hooks/useUser'
-import { Avatar as DefaultAvatar } from '../../../pages/community'
+import { Avatar as DefaultAvatar } from '../../../pages/community/dashboard'
 import getAvatarURL from '../util/getAvatar'
 import usePostHog from 'hooks/usePostHog'
 

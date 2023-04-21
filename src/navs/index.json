@@ -20,10 +20,7 @@
         },
         {
             "title": "Community",
-            "url": "/community",
-            "sub": {
-                "component": "Community"
-            }
+            "url": "/questions"
         },
         {
             "title": "Company",
