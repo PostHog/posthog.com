@@ -20,7 +20,7 @@ The post goes over growth engineers, with a specific focus on our technical vers
 
 ## What are the characteristics of a growth engineer?
 
-To start, it is useful to understand who growth engineers are as people. When comparing them to regular engineers, here are the characteristics that stand out:
+To start, it is useful to understand who growth engineers are as people. When comparing them to software engineers, here are the characteristics that stand out:
 
 ![Characteristics](../images/blog/what-is-a-growth-engineer/characteristics.png)
 
