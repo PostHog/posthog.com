@@ -1,11 +1,11 @@
 ---
-date: 2023-04-14
+date: 2023-04-21
 title: PostHog vs Pendo
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg
+featuredImage: ../images/blog/posthog-vs-pendo/posthog-vs-pendo.jpg
 featuredImageType: full
 author:
     - joe-martin
@@ -31,7 +31,6 @@ In this article we’ll explore the crucial differences and similarities between
 - [Libraries](#library-support), [tracking differences and SDKs](#sdks-and-tracking)
 - [Privacy, security and regulatory compliance](#compliance-and-security)
 - [Pricing details](#how-much-does-pendo-cost), [free trials](#do-pendo-and-posthog-offer-free-trials) and other [frequently asked questions](#frequently-asked-questions)
-
 
 ## Differences between PostHog and Pendo
 
