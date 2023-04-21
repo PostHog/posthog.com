@@ -12,7 +12,7 @@ const RecentQuestions = () => {
     return (
         <div id="recent-questions" className="mb-12">
             <SectionTitle>Recent questions</SectionTitle>
-            <QuestionsTable hideLoadMore questions={questions} fetchMore={fetchMore} isLoading={isLoading} />
+            <QuestionsTable hideLoadMore questions={questions} showTopic fetchMore={fetchMore} isLoading={isLoading} />
             <CallToAction className="mt-4" type="secondary" width="full" to="/questions">
                 Browse all questions
             </CallToAction>
