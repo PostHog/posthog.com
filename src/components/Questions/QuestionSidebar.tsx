@@ -69,7 +69,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                 <SidebarSection>
                     <iframe
                         className="border-none -mx-3 -mt-4 lg:-mx-6 -mb-8 w-[calc(100%_+_3rem_+_1px)] relative left-[-1px] h-[calc(100vh_-_120px)]"
-                        src={`http://localhost:5173/?email=${question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}`}
+                        src={`https://app.sidecar.posthog.com/?email=${question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}`}
                     />
                 </SidebarSection>
             )}
