@@ -18,7 +18,7 @@ When it comes to new features, success can be tough to define. Although a busine
 
 At PostHog, we care about enabling teams to understand and measure feature success (we have [an entire team dedicated to it](/handbook/small-teams/feature-success)). As part of helping you do this, this post details what feature success is, and how we measure it at PostHog. We go through the real launch of a new feature (sampling) and explain how we measured success along the way.
 
-## What is feature success?
+## Defining feature success
 
 Measuring feature success starts after deciding to work on a feature. We decide to build a feature based on quantitative and qualitative feedback combined with our thoughts on what’s best. Once we decide to build a feature, we start to judge its success based on if it:
 
@@ -31,17 +31,30 @@ Feature success is the process of enabling, measuring, and evaluating both of th
 
 Measuring feature success at PostHog is a multi-step process that goes hand-in-hand with our release process. The multi-step approach to feature success ensures we are building the right solution and that users actually care and use the solution we are building.
 
-To help you connect this to reality, we will follow along with how [Yakko](/handbook/company/team) recently built, measured, and evaluated [sampling](/docs/product-analytics/sampling).
+To help you connect this to reality, we will follow along with how one of our engineers, [Yakko](/handbook/company/team), recently built, measured, and evaluated [sampling](/docs/product-analytics/sampling).
 
-> **What is sampling?** The sampling feature speeds up queries by analyzing a portion of the data and extrapolating the results. Yakko decided to work on this feature because slow queries were causing frustrations, sampling felt like an intuitive solution, and manually benchmarking the impact of sampling on large customers confirmed this intuition (3-10x improvements).
+> **What is sampling?** The sampling feature speeds up queries by analyzing a portion of the data and extrapolating the results.
 
 ![Sampling in action](../images/blog/measuring-feature-success/sampling.gif)
 
+### 0. Deciding to build a feature
+
+A feature needs to exist for us to measure its success. Deciding to build a feature comes before everything in the feature success process.
+
+From the thinking and decision about building a feature comes the criteria for evaluating its success. 
+
+Yakko decided to work on sampling because:
+1. Slow queries were causing frustrations
+2. Sampling felt like an intuitive solution that could be implemented quickly
+3. Manually benchmarking the impact of 10% sampling on large customers' queries confirmed 3-10x improvements in speeds with only a 1-2% loss in accuracy.
+
+This showed that sampling was technically feasible and it was worth doing now.
+
 ### 1. Build it and make sure it isn’t broken
 
-Once we decide to build a feature, we move fast and build it, review that it matches what we envisioned, and ship it behind a feature flag. The flag rolls out to a single developer to start. This helps them to check if it has the smallest bit of success in solving the problem in production.
+Once we decide to build a feature, the success evaluation can begin. We move fast and build the feature, review that it matches what we envisioned, and ship it behind a feature flag. The flag rolls out to a single developer to start. This helps them to check if it has the smallest bit of success in solving the problem in production.
 
-This is exactly what Yakko did with sampling. He picked one insight (lifecycle was easiest), updated the API, built a quick UI, and [shipped it](https://github.com/PostHog/posthog/pull/14283) behind a feature flag. He moved quickly to test in production with production data. 
+This is exactly what Yakko did with sampling. He picked one insight (lifecycle was easiest), updated the API, built a quick UI, and [shipped it](https://github.com/PostHog/posthog/pull/14283) behind a feature flag. Within hours, the feature was working in production with production data. 
 
 ![Lifecycle](../images/blog/measuring-feature-success/lifecycle.png)
 
@@ -69,9 +82,15 @@ Yakko continued to update the simple UI for sampling (it changed four times) to 
 
 ![Sampling UI](../images/blog/measuring-feature-success/sampling.png)
 
-At this stage, feature success is broad usage. A significant portion of target users should be using the feature. What this portion is depends on the usage of similar features. The feature should also be issue free and work as intended.
+At this stage, success is significant usage by the target user. What this portion is depends on the usage of similar features. At PostHog, this looks like:
 
-To evaluate this, we watch session replays and track metrics that match specific criteria we care about. For example, we might look at the session recordings for high ICP, paid users in the 99th percentile of feature usage to see how power users are utilizing the product. We also might create a dashboard to show usage and the feature’s impact (such as average insight load time).
+- 10-12% of our daily active users use individual products (like product analytics or session recordings)
+- 15-40% of daily active product users use a large features (like flag payloads or funnels) within those products.
+- 4-12% of daily active product users use a small features (like sampling, replay network tab, or dashboard templates) within those products.
+
+The feature should also be issue free and work as intended. Bug reports or confusion on how to use the feature are bad signs.
+
+To evaluate success after launch, we watch session replays and track metrics that match specific criteria we care about. For example, we might look at the session recordings for high ICP, paid users in the 99th percentile of feature usage to see how power users are utilizing the product. We also might create a dashboard to show usage and the feature’s impact (such as average insight load time).
 
 In Yakko’s case, he: 
 
@@ -97,9 +116,9 @@ Sampling is a relatively self-contained feature. It likely won’t get charged f
 
 One of the largest factors in how to measure feature success is the size of your feature, product, and company.
 
-- For early-stage startups and small features, it means obvious increases in key metrics.
+- For early-stage startups and small features, it means obvious increases in key metrics like product adoption, retention, and revenue.
 - For growth or mid-stage startups and small products, it means increases in specific feature usage metrics and qualitative feedback from beta users.
-- For late-stage companies and large products, it means complicated experiments and analysis to ensure features have a positive impact on the specific metrics and don’t have unintended consequences.
+- For late-stage companies and large products, it means experiments and analysis to ensure features have a positive impact on the specific metrics and don’t have unintended consequences.
 
 Although we laid out a step-by-step guide to measuring feature success, it is usually relatively fluid at PostHog. We don’t enforce mandatory reports, guidelines, or processes. We let small teams, and the individuals in those teams, decide what feature success means to them. 
 
