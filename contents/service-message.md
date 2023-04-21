@@ -23,7 +23,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
   <br />
 We're migrating the Postgres database for our US cloud to make PostHog faster, and more scalable. We can't migrate the database efficiently while it's in use, so we've temporarily paused ingestion. This is a planned event and is not related to an incident or outage.
 
-We started work at 11:00 UTC and expect it to take up to four hours. If it takes longer, we'll keep this page updated with the latest information. We'll remove the in-app banner once work is finished.
+We started work at 11:00 UTC, April 28 and expect it to take up to four hours. If it takes longer, we'll keep this page updated with the latest information. We'll remove the in-app banner once work is finished.
 </details>
 
 <details> 
