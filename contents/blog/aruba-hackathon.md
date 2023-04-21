@@ -115,11 +115,17 @@ The team also built a communication tab into bug reports, so support can send em
 
 ![communication-tab](../images/blog/aruba/conversation-tab.png)
 
-After the hackathon we've reviewed the plan:
+After the hackathon, we reviewed the plan and realized: 
 
-- We realized that there's another problem internally. Due to the increased complexity of our product, it’s become harder for a single engineer to provide good support for all of our products. Support heroes also shield product teams from feedback about their product, which means it’s harder to iterate on a product. So we're going to use this in-app integration to split out to the more specific team helping us do triage effectively.
+1. Due to the increased complexity of our product, it's hard for a single engineer to provide good support for all of our products. 
 
-- We've decided at this point not to continue the work on the communication tab and instead integrate better with Zendesk. That said, the way we handle support can be used by customers too – there will be a blog post coming to explain this further.
+2. Support heroes shield product teams from feedback about their product, impeding an important feedback loop.
+
+Consequently, we decided to use the hackathon in-app integration to triage support requests by product/team, and improve our integration with Zendesk instead of developing the communication tab further. 
+
+// TODO: Add in-app bug report screenshot
+
+Now, instead of our single support hero, each team will handle support requests for their product, and tickets will be enhanced with useful context, such as session replays and product usage data. This process also enables us to collect aggregated info on bugs and requests, so we can identify common issues faster.
 
 ## Hedgehog mode + toolbar = awesomeness
 
