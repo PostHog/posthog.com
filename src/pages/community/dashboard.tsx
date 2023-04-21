@@ -30,7 +30,7 @@ const Subscriptions = () => {
             <SectionTitle>My discussions</SectionTitle>
 
             {topicSubscriptions && topicSubscriptions?.length > 0 && (
-                <div className="border-y border-dashed border-gray-accent-light dark:border-gray-accent-dark py-4 mb-4">
+                <div className="bg-gray-accent-light dark:bg-gray-accent-dark p-4 mb-4 rounded">
                     <h4 className="text-sm font-semibold opacity-60 mb-0">Jump to subscribed topics:</h4>
                     <ul className="list-none m-0 p-0 flex flex-wrap">
                         {topicSubscriptions.map(({ label, slug }) => {
