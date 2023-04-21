@@ -5,14 +5,6 @@ export const useNav = (user: User | null) => {
         {
             name: 'Community',
         },
-        ...(user
-            ? [
-                  {
-                      name: 'Notifications',
-                      url: '/community/dashboard',
-                  },
-              ]
-            : []),
         {
             name: 'Topics',
             url: '/questions',
@@ -21,7 +13,14 @@ export const useNav = (user: User | null) => {
             name: 'Latest questions',
             url: '/community/latest',
         },
-
+        ...(user
+            ? [
+                  {
+                      name: 'Notifications',
+                      url: '/community/dashboard',
+                  },
+              ]
+            : []),
         {
             name: 'Roadmap',
             url: '/roadmap',
