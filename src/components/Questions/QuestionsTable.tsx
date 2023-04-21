@@ -92,8 +92,8 @@ export const QuestionsTable = ({
                                                       {dayFormat(dateToDays(createdAt))} ago by
                                                   </span>
                                                   <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-1">
-                                                      {latestAuthor?.data.attributes.firstName}{' '}
-                                                      {latestAuthor?.data.attributes.lastName} {}
+                                                      {latestAuthor?.data?.attributes?.firstName}{' '}
+                                                      {latestAuthor?.data?.attributes?.lastName} {}
                                                   </div>
                                               </div>
                                           </div>
