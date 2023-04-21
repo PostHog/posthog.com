@@ -19,7 +19,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need access to the Google Cloud Storage bucket you want to export to.
 
-### How do I install the PostgreSQL Export app?
+### How do I install the Google Cloud Storage Export app?
 
 Before installing the Google Cloud Storage Export app, you will need your Google Cloud .json file. Find out how to get this in [Google's BigQuery API documentation](https://cloud.google.com/bigquery/docs/reference/libraries).
 
