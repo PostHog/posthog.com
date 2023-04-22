@@ -6,7 +6,7 @@ import QuestionsTable from 'components/Questions/QuestionsTable'
 import { useQuestions } from 'hooks/useQuestions'
 import Link from 'components/Link'
 
-const Subscriptions = () => {
+export default function CommunityPage() {
     const { user, fetchUser } = useUser()
     const { questions, isLoading, fetchMore } = useQuestions({
         filters: {
@@ -26,7 +26,7 @@ const Subscriptions = () => {
     }, [user])
 
     return (
-        <div id="my-activity" className="mb-12">
+        <CommunityLayout title="Inbox">
             <SectionTitle>My discussions</SectionTitle>
 
             {topicSubscriptions && topicSubscriptions?.length > 0 && (
@@ -56,14 +56,6 @@ const Subscriptions = () => {
                 isLoading={isLoading}
                 questions={questions}
             />
-        </div>
-    )
-}
-
-export default function CommunityPage() {
-    return (
-        <CommunityLayout title="Inbox">
-            <Subscriptions />
         </CommunityLayout>
     )
 }

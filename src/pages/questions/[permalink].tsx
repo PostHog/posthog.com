@@ -18,10 +18,11 @@ type QuestionPageProps = {
     }
 }
 
-const QuestionTemplate = (props: any) => {
-    const { question, isLoading } = useQuestion(props.params.permalink)
+export default function QuestionPage(props: QuestionPageProps) {
+    const { permalink } = props?.params || {}
+    const { question, isLoading } = useQuestion(permalink)
     const { user, isModerator } = useUser()
-    const { removeTopic } = useQuestion(props.permalink)
+    const { removeTopic } = useQuestion(permalink)
 
     const personsQuery = {
         kind: 'DataTableNode',
@@ -39,7 +40,7 @@ const QuestionTemplate = (props: any) => {
 
     const nav = useNav(user)
     return (
-        <>
+        <Layout>
             <SEO
                 title={isLoading ? 'Squeak question - PostHog' : `${question?.attributes?.subject} - PostHog`}
                 noindex={question?.attributes.archived}
@@ -47,7 +48,7 @@ const QuestionTemplate = (props: any) => {
             <PostLayout
                 title={question?.attributes?.subject || ''}
                 menu={nav}
-                sidebar={<QuestionSidebar permalink={props.params.permalink} />}
+                sidebar={<QuestionSidebar permalink={permalink} />}
                 hideSurvey
                 menuWidth={user?.role?.type === 'moderator' ? { right: 400 } : undefined}
             >
@@ -62,7 +63,7 @@ const QuestionTemplate = (props: any) => {
                         </Link>
                     </div>
 
-                    <Question id={props.params.permalink} expanded={true} />
+                    <Question id={permalink} expanded={true} />
                 </section>
 
                 {isModerator && question && (
@@ -109,7 +110,7 @@ const QuestionTemplate = (props: any) => {
                             <h4 className="text-xs text-primary-dark opacity-70 p-0 m-0 font-semibold uppercase">
                                 Forum topics
                             </h4>
-                            <TopicSelector questionId={question?.id} permalink={props.permalink} />
+                            <TopicSelector questionId={question?.id} permalink={permalink} />
                         </div>
                         <ul className="flex items-center list-none p-0 flex-wrap">
                             {question?.attributes?.topics?.data.map((topic) => (
@@ -133,14 +134,6 @@ const QuestionTemplate = (props: any) => {
                     </div>
                 )}
             </PostLayout>
-        </>
-    )
-}
-
-export default function QuestionPage(props: QuestionPageProps) {
-    return (
-        <Layout>
-            <QuestionTemplate {...props} />
         </Layout>
     )
 }
