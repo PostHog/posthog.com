@@ -36,7 +36,7 @@ export const TopicSelector = (props: TopicSelectorProps) => {
                         return (
                             <li key={topic.id}>
                                 <button
-                                    className="w-full border-b border-solid border-gray-accent-light text-sm px-3 py-1.5 flex items-center space-x-2 hover:bg-gray-accent-light dark:hover:bg-black/30"
+                                    className="w-full border-b border-solid border-gray-accent-light text-sm px-3 py-1.5 flex items-center space-x-2 hover:bg-gray-accent-light dark:hover:bg-black/30 dark:text-white"
                                     onClick={isSelected ? () => removeTopic(topic) : () => addTopic(topic)}
                                 >
                                     {isSelected ? (

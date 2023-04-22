@@ -148,7 +148,7 @@ export default function Sidebar() {
                                     >
                                         <Link
                                             to={`/questions/topic/${slug}`}
-                                            className="block text-sm p-1  rounded-sm hover:bg-gray-accent-light dark:bg-gray-accent-dark hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] top-[.5px] "
+                                            className="block text-sm p-1  rounded-sm hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] top-[.5px] "
                                         >
                                             {label}
                                         </Link>
