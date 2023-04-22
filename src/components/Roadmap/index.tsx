@@ -8,7 +8,6 @@ import { InProgress } from './InProgress'
 import { StaticImage } from 'gatsby-plugin-image'
 import { useRoadmap } from 'hooks/useRoadmap'
 import { useNav } from 'components/Community/useNav'
-import { useUser } from 'hooks/useUser'
 
 interface IGitHubPage {
     title: string
@@ -96,8 +95,7 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default function Roadmap() {
-    const { user } = useUser()
-    const nav = useNav(user)
+    const nav = useNav()
     const teams = useRoadmap()
 
     const underConsideration: ITeam[] = teams

@@ -38,7 +38,7 @@ export default function QuestionPage(props: QuestionPageProps) {
 
     const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
 
-    const nav = useNav(user)
+    const nav = useNav()
     return (
         <Layout>
             <SEO
