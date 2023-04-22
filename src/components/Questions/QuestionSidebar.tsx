@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import { XIcon } from '@heroicons/react/outline'
 import SidebarSection from 'components/PostLayout/SidebarSection'
-import { TopicSelector, useQuestion } from 'components/Squeak'
+import { useQuestion } from 'components/Squeak'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 
 type QuestionSidebarProps = {
@@ -11,27 +10,36 @@ type QuestionSidebarProps = {
 }
 
 export const QuestionSidebar = (props: QuestionSidebarProps) => {
-    const { user, isModerator } = useUser()
-
-    const { question, removeTopic } = useQuestion(props.permalink)
+    const containerRef = useRef<HTMLDivElement>(null)
+    const [sidecarHeight, setSidecarHeight] = useState(0)
+    const { isModerator } = useUser()
+    const { question } = useQuestion(props.permalink)
     const avatar = getAvatarURL(question?.attributes?.profile?.data)
 
-    const personsQuery = {
-        kind: 'DataTableNode',
-        source: {
-            kind: 'PersonsNode',
-            search:
-                question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.distinctId ||
-                question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email,
-        },
-        full: true,
-        propertiesViaUrl: true,
+    const adjustHeight = () => {
+        if (window.innerWidth < 1024) return setSidecarHeight(400)
+        const actions = document.getElementById('post-actions')
+        const containerTop = containerRef?.current?.getBoundingClientRect().top ?? 0
+        const actionsTop = actions?.getBoundingClientRect().top ?? 0
+        const height = actionsTop - containerTop
+        setSidecarHeight(height)
     }
 
-    const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
+    useEffect(() => {
+        if (typeof window !== 'undefined' && containerRef.current) {
+            window.addEventListener('scroll', adjustHeight)
+            window.addEventListener('resize', adjustHeight)
+            adjustHeight()
+        }
+
+        return () => {
+            window.removeEventListener('scroll', adjustHeight)
+            window.addEventListener('resize', adjustHeight)
+        }
+    }, [])
 
     return question ? (
-        <div>
+        <div className="relative" ref={containerRef}>
             {!isModerator && (
                 <SidebarSection title="Posted by">
                     <div className="flex items-center space-x-2">
@@ -66,12 +74,11 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
             )}
 
             {isModerator && (
-                <SidebarSection>
-                    <iframe
-                        className="border-none -mx-3 -mt-4 lg:-mx-6 -mb-8 w-[calc(100%_+_3rem_+_1px)] relative left-[-1px] h-[calc(100vh_-_120px)]"
-                        src={`https://app.sidecar.posthog.com/?email=${question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}`}
-                    />
-                </SidebarSection>
+                <iframe
+                    style={{ height: sidecarHeight }}
+                    className="m-0 border-none w-full h-full lg:absolute"
+                    src={`https://app.sidecar.posthog.com/?email=${question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}`}
+                />
             )}
         </div>
     ) : null

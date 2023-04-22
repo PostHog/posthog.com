@@ -115,7 +115,7 @@ const QuestionTemplate = (props: any) => {
                             {question?.attributes?.topics?.data.map((topic) => (
                                 <li
                                     key={topic.id}
-                                    className="bg-gray-accent-dark dark:bg-gray-accent-light text-primary-dark dark:text-primary py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
+                                    className="bg-gray-accent-dark text-primary-dark dark:text-primary py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
                                 >
                                     <Link
                                         to={`/questions/topic/${topic.attributes.slug}`}
@@ -125,7 +125,7 @@ const QuestionTemplate = (props: any) => {
                                     </Link>
 
                                     <button onClick={() => removeTopic(topic)}>
-                                        <XIcon className="h-4 w-4 text-primary-dark dark:text-primary" />
+                                        <XIcon className="h-4 w-4 text-primary-dark " />
                                     </button>
                                 </li>
                             ))}
