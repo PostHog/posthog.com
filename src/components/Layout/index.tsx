@@ -23,14 +23,12 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <SearchProvider>
-            <UserProvider>
-                <div className={className}>
-                    <Header />
-                    <main>{children}</main>
-                    <Footer />
-                    <CookieBanner />
-                </div>
-            </UserProvider>
+            <div className={className}>
+                <Header />
+                <main>{children}</main>
+                <Footer />
+                <CookieBanner />
+            </div>
         </SearchProvider>
     )
 }

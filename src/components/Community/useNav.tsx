@@ -1,6 +1,8 @@
-import { User } from 'hooks/useUser'
+import { useUser } from 'hooks/useUser'
 
-export const useNav = (user: User | null) => {
+export const useNav = () => {
+    const { user } = useUser()
+
     return [
         {
             name: 'Community',

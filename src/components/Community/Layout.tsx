@@ -1,7 +1,6 @@
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import SEO from 'components/seo'
-import { useUser } from 'hooks/useUser'
 import React from 'react'
 import Sidebar from './Sidebar'
 import { useNav } from './useNav'
@@ -16,8 +15,7 @@ export const SectionTitle = ({ children }: { children: React.ReactNode }) => {
 }
 
 const Community = ({ children, title }: IProps) => {
-    const { user } = useUser()
-    const nav = useNav(user)
+    const nav = useNav()
 
     return (
         <PostLayout
