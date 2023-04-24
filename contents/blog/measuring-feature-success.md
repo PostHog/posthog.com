@@ -1,6 +1,6 @@
 ---
 title: How we measure feature success at PostHog
-date: 2023-04-20
+date: 2023-04-24
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -39,12 +39,10 @@ To help you connect this to reality, we will follow along with how one of our en
 
 ### 0. Deciding to build a feature
 
-A feature needs to exist for us to measure its success. Deciding to build a feature comes before everything in the feature success process.
-
 From the thinking and decision about building a feature comes the criteria for evaluating its success. 
 
 Yakko decided to work on sampling because:
-1. Slow results on complex queries were causing frustrations for large customers. This ties to the objective of "[make PostHog performance frustration free for our 10 largest customers](/handbook/small-teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
+1. Slow results on complex queries were causing frustrations for large customers. This ties to the product analytics team objective of "[make PostHog performance frustration free for our 10 largest customers](/handbook/small-teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
 2. Sampling felt like a simple solution that could be implemented quickly.
 3. Manually benchmarking the impact of 10% sampling on large customers' queries confirmed 3-10x improvements in speeds with only a 1-2% loss in accuracy.
 
@@ -112,19 +110,13 @@ The success of the feature post-launch determines future effort and investment i
 
 Sampling is a relatively self-contained feature. It likely won’t get charged for. Yakko continues to ask for feedback about sampling, but more work will go into improving query performance generally as it continues to be a challenge for some. The success of sampling led to more investment in improving query performance.
 
-## How you can measure feature success
+## Why we measure feature success like this
 
-One of the largest factors in how to measure feature success is the size of your feature, product, and company.
+You may have noticed that this process was relatively fluid. We don’t enforce mandatory reports, guidelines, or processes. We let small teams, and the individuals in those teams, decide what feature success means to them.
 
-- For early-stage startups and small features, it means obvious increases in key metrics like product adoption, retention, and revenue.
-- For growth or mid-stage startups and small products, it means increases in specific feature usage metrics and qualitative feedback from beta users.
-- For late-stage companies and large products, it means experiments and analysis to ensure features have a positive impact on the specific metrics and don’t have unintended consequences.
+This is because we bias for impact and believe that ownership is key to building successful features. Without people or teams owning features, there is little incentive to make them successful. No feature success process can make ownerless features successful.
 
-Although we laid out a step-by-step guide to measuring feature success, it is usually relatively fluid at PostHog. We don’t enforce mandatory reports, guidelines, or processes. We let small teams, and the individuals in those teams, decide what feature success means to them. 
-
-The feature success process aims to build more successful features. Ownership is key to this. Without people or teams owning features, they don’t have people incentivized to make them successful. No feature success process can make ownerless features successful.
-
-We continue to work to build features that help enable feature success like feature flags and experiments. You can find out more about what the feature success team is up to on [their small team page](/handbook/small-teams/feature-success). 
+Because every team, inside and outside of PostHog, has different ways of evaluating success, we continue to build more tools to help them do this. Providing every tool needed for evaluating feature success is a [key focus](/handbook/strategy/overview#strategy) for us. If you're curious exactly what that looks like, you can check out what the feature success team is up to on [their small team page](/handbook/small-teams/feature-success).
 
 ## Further reading
 
