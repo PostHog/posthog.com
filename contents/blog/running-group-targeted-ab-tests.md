@@ -3,7 +3,7 @@ title: When and how to run group-targeted A/B tests
 sidebar: Docs
 showTitle: true
 author: ['lior-neu-ner']
-date: 2023-04-25
+date: 2023-04-24
 featuredImage: ../images/tutorials/running-group-targeted-ab-tests/featured-image.png
 tags: ['experimentation']
 ---
