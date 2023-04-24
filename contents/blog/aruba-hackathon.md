@@ -1,5 +1,5 @@
 ---
-date: 2023-04-21
+date: 2023-04-24
 title: "What we built at our sun-kissed Aruba hackathon"
 rootPage: /blog
 sidebar: Blog
