@@ -122,7 +122,6 @@ This is one of the useful features we leverage extensively at PostHog – watch 
 
 ### Vectorized Query Execution
 
-Vectorized query execution enables ClickHouse to use SIMD (Single Instruction Multiple Data), which parallelize data aggregation of multiple memory values with a single instruction. This massively boosts computation. 
 
 While BigQuery doesn’t support vectorized query execution, Google does [offer it](https://cloud.google.com/bigquery/docs/bi-engine-query) through BI Engine, a separate GCP product that integrates with BigQuery. 
 
@@ -163,6 +162,7 @@ Consider the following resources if you want to learn more about ClickHouse and 
 - [ClickHouse Documentation](https://clickhouse.com/docs/en/home/)
 - [BigQuery Documentation](https://cloud.google.com/bigquery/docs)
 - [BigQuery Whitepaper](https://github.com/tpn/pdfs/blob/master/BigQuery%20Technical%20Whitepaper%20-%20Google.pdf)
-- [Why PostHog chose ClickHouse](https://youtu.be/6IwLWEx_mg4)
+- [Why PostHog chose ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion)
 - [Andy Pavlo - Vectorized Query Execution](https://www.youtube.com/watch?v=FrspnYbFSxQ)
 - [ClickHouse Cloud](https://clickhouse.com/cloud)
+- [Our comparions of ClickHouse and Druid](/blog/clickhouse-vs-druid)
