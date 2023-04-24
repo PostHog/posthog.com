@@ -65,7 +65,7 @@ ClickHouse utilizes a shared-nothing architecture where CPU, Storage, and Memory
 
 ![Shared Nothing Architecture.png](../images/blog/clickhouse-vs-bigquery/shared-nothing-architecture.png)
 
-Accordingly, ClickHouse can scale in all three dimensions (storage, memory, and compute) by simply upgrading the machine. However, scaling is still tedious — new storage and compute cannot be added on a whim to the same instance; instead, a new instance needs to be provisioned and data needs to be migrated from one to another. 
+Accordingly, ClickHouse can scale in all three dimensions (storage, memory, and compute) by simply upgrading the machine. However, scaling isn't as straightforward compared to BigQuery — compute cannot be added on a whim to the same instance, though you can add additional disks to an instance to scale capacity.
 
 ![Clickhouse_ 3 Dimensions.png](../images/blog/clickhouse-vs-bigquery/clickhouse-3-dimensions.png)
 
