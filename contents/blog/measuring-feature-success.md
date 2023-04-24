@@ -117,7 +117,7 @@ As a TL;DR of the above, we measure feature success by:
 1. Making sure our MVP works in production
 2. Getting positive qualitative feedback from team members and then beta users
 3. Launching, seeing significant usage by our target user, and the feature working as intended
-4. Continuing growth in usage metrics, recommendations, public praise, and potentially even revenue
+4. Continuing growth in usage metrics, recommendations, public praise, and potentially revenue
 
 You may have noticed that this process was relatively fluid. We don’t enforce mandatory reports, guidelines, metrics, or processes. We let small teams, and the individuals in those teams, decide what feature success means to them.
 
