@@ -45,7 +45,7 @@ From the thinking and decision about building a feature comes the criteria for e
 
 Yakko decided to work on sampling because:
 1. Slow results on complex queries were causing frustrations for large customers. This ties to the objective of "[make PostHog performance frustration free for our 10 largest customers](/handbook/small-teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
-2. Sampling felt like an simple solution that could be implemented quickly.
+2. Sampling felt like a simple solution that could be implemented quickly.
 3. Manually benchmarking the impact of 10% sampling on large customers' queries confirmed 3-10x improvements in speeds with only a 1-2% loss in accuracy.
 
 This showed that sampling was technically feasible and it was worth doing now.
@@ -74,7 +74,7 @@ Sampling got its first real users through the support hero tagging Yakko in plac
 
 A feature is successful at this stage if users use it and the qualitative feedback we receive from them is positive. A common goal at this stage is "5 happy teams using it."
 
-### 3. Launch
+### 3. Launch and monitor usage
 
 When we have positive feedback and usage in beta, and the feature reaches the point we are ready to release. The flag rolls out further, eventually to 100% of users.
 
@@ -95,14 +95,14 @@ To evaluate success after launch, we watch session replays and track metrics tha
 In Yakko’s case, he: 
 
 - created a key metrics dashboard that he would dig into a few times a day.
-- watched session replays of the feature to see if it was having the intended impact or causing any confusion (he fixed a few visual regressions as a result of this).
+- watched [session replays](/tutorials/explore-insights-session-recordings) of the feature to see if it was having the intended impact or causing any confusion (he fixed a few visual regressions as a result of this).
 - used the [user interview app](/docs/apps/user-interview) to prompt users who tried sampling for a user interview.
 
 ![Dashboard](../images/blog/measuring-feature-success/dashboard.png)
 
 After doing all these, he was confident the feature was trending towards success and continued the rolling out until he hit 100% of users.
 
-### 4. Post-launch
+### 4. Continued development post-launch
 
 Success after launch looks like continued growth in usage metrics. It also looks like recommendations or public praise for that feature. If the feature has a large enough impact, it may even inspire a marketing push or case study. 
 
