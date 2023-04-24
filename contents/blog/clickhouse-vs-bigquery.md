@@ -27,7 +27,7 @@ At first glance, comparing BigQuery and ClickHouse seems like a David versus Gol
 
 While they both tackle search and analytics problems, are built on columnar data storage, and are available via managed infrastructure, BigQuery is an established name maintained by one of the infrastructure mob bosses (sorry, I mean *benevolent leaders*), while ClickHouse is a relative newcomer and an open source one at that.
 
-That said, ClickHouse is exploding in popularity, has a hugely active development community, and is already used by the likes of Spotify, Uber, Cloudflare, and popular analytics platforms like PostHog. Moreover, it has its origins in another big tech player, Yandex.
+That said, ClickHouse is exploding in popularity, has a hugely active development community, and is already used by the likes of Spotify, Uber, Cloudflare, and popular analytics platforms like [PostHog](https://posthog.com/). Moreover, it has its origins in another big tech player, Yandex.
 
 ### What is ClickHouse?
 
@@ -160,9 +160,9 @@ ClickHouse specifically is an ideal solution for analytics products like us. Its
 
 Consider the following resources if you want to learn more about ClickHouse and BigQuery’s differences.
 
-- **[ClickHouse Documentation](https://clickhouse.com/docs/en/home/)**
-- [**BigQuery Documentation**](https://cloud.google.com/bigquery/docs)
-- [**BigQuery Whitepaper**](https://github.com/tpn/pdfs/blob/master/BigQuery%20Technical%20Whitepaper%20-%20Google.pdf)
-- **[Why PostHog chose ClickHouse](https://youtu.be/6IwLWEx_mg4)**
-- **[Andy Pavlo - Vectorized Query Execution](https://www.youtube.com/watch?v=FrspnYbFSxQ)**
-- [**ClickHouse Cloud**](https://clickhouse.com/cloud)
+- [ClickHouse Documentation](https://clickhouse.com/docs/en/home/)
+- [BigQuery Documentation](https://cloud.google.com/bigquery/docs)
+- [BigQuery Whitepaper](https://github.com/tpn/pdfs/blob/master/BigQuery%20Technical%20Whitepaper%20-%20Google.pdf)
+- [Why PostHog chose ClickHouse](https://youtu.be/6IwLWEx_mg4)
+- [Andy Pavlo - Vectorized Query Execution](https://www.youtube.com/watch?v=FrspnYbFSxQ)
+- [ClickHouse Cloud](https://clickhouse.com/cloud)
