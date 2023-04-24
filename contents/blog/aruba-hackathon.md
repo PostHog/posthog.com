@@ -13,7 +13,7 @@ tags:
   - Offsites
 ---
 
-Every year, Team PostHog congregates for our annual all-company offsite. In previous years we've been to Italy, Portugal and Iceland. This year, we went to Aruba – a tiny, Caribbean island just off the north coast of Venezuela.
+Every year, Team PostHog congregates for our [annual all-company offsite](/handbook/company/offsites). In previous years we've been to Italy, Portugal and Iceland. This year, we went to Aruba – a tiny, Caribbean island just off the north coast of Venezuela.
 
 ![posthog aruba](../images/blog/aruba/aruba-vibes.jpeg)
 
@@ -53,7 +53,7 @@ flowchart TD
     G -->|Query OpenAI|H[AI Response]
 ```
 
-On the whole, Max gives useful answers – even when using the general data and dealing with complex questions. Max is also dead handy for summarizing long support threads in Slack or GitHub issues. 
+On the whole, Max gives useful answers – even when dealing with complex questions. Max is also dead handy for summarizing long support threads in Slack or GitHub issues. 
 
 ![maxai](../images/blog/aruba/max-ai.jpeg)
 
@@ -73,9 +73,17 @@ These dashboards are accessible from the 'New Dashboard' modal in PostHog. Some 
 
 ![dashboard templates](../images/blog/aruba/setup-events.png)
 
-Got a request for a dashboard? DM someone from the marketing on our community Slack.
+Got a request for a dashboard? DM the team on our community Slack!
+
+## A curated set of PostHog tutorials
+
+- **Team Not-ShuffleHog:** Joe Martin and Eli Kinsey
 
 For Joe, one hackathon project wasn't enough. He also worked with Eli Kinsey from the Website & Docs team to ship [PostHog Tracks](/tracks), a new way to discover tutorials organized by role.
+
+Tracks groups tutorials into curated lesson groups based on the common use-cases we see in PostHog. There are lesson tracks for Product Engineers, Front-end Developers, and Product Managers. 
+
+The team name is a reference to a hackathon project Joe is especially passionate about, but wasn't able to work on this year. One day. 
 
 ## A built-in data warehouse for PostHog
 
@@ -85,7 +93,7 @@ Dubbed DataBeach because Frank and Harry started building the feature while sipp
 
 ![databeach](../images/blog/aruba/data-beach.png)
 
-They teamed up with Marius to an build MVP consisting of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like Stripe, Hubspot (see above), Intercom, and more, along with data from PostHog.
+They teamed up with Marius to an build MVP consisting of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources such as Stripe, Hubspot (see above), Intercom, and more, along with data from PostHog.
 
 There's more to build before PostHog is ready to be your data warehouse, but we're working on it. Keep an eye on our [public roadmap](/roadmap) for updates.
 
