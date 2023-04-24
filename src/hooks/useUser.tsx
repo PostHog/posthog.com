@@ -1,126 +1,182 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
-import getGravatar from 'gravatar'
-import { post } from 'components/Squeak/lib/api'
+import qs from 'qs'
+import { ProfileData } from 'lib/strapi'
+import usePostHog from './usePostHog'
 
-type User = {
-    id: string
+export type User = {
+    id: number
     email: string
     isMember: boolean
     isModerator: boolean
+    blocked: boolean
+    confirmed: boolean
+    createdAt: string
+    provider: 'local' | 'github' | 'google'
+    username: string
     profile: {
-        avatar: string
-        first_name: string
-        last_name: string
+        id: number
+    } & ProfileData
+    role: {
+        type: 'authenticated' | 'public' | 'moderator'
     }
 }
 
 type UserContextValue = {
-    organizationId: string
-    apiHost: string
     isLoading: boolean
-
     user: User | null
+    isModerator: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
-
-    getSession: () => Promise<User | null>
-    login: (args: { email: string; password: string }) => Promise<User | null>
+    fetchUser: (token?: string | null) => Promise<User | null>
+    getJwt: () => Promise<string | null>
+    login: (args: { email: string; password: string }) => Promise<User | null | { error: string }>
     logout: () => Promise<void>
-    signUp: (args: { email: string; password: string; firstName: string; lastName: string }) => Promise<User | null>
+    signUp: (args: {
+        email: string
+        password: string
+        firstName: string
+        lastName: string
+    }) => Promise<User | null | { error: string }>
+    isSubscribed: (contentType: 'topic' | 'question', id: number | string) => Promise<boolean>
+    setSubscription: (contentType: 'topic' | 'question', id: number | string, subscribe: boolean) => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
-    organizationId: '',
-    apiHost: '',
     isLoading: true,
     user: null,
+    isModerator: false,
     setUser: () => {
         // noop
     },
-
-    getSession: async () => null,
+    fetchUser: async () => null,
+    getJwt: async () => null,
     login: async () => null,
     logout: async () => {
         // noop
     },
     signUp: async () => null,
+    isSubscribed: async () => false,
+    setSubscription: async () => undefined,
 })
 
 type UserProviderProps = {
-    organizationId: string
-    apiHost: string
     children: React.ReactNode
 }
 
-export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizationId, children }) => {
-    const [isLoading, setIsLoading] = useState(true)
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+    const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState<User | null>(null)
+    const [jwt, setJwt] = useState<string | null>(null)
+
+    const posthog = usePostHog()
 
     useEffect(() => {
-        getSession()
+        const jwt = localStorage.getItem('jwt')
+        const user = localStorage.getItem('user')
+
+        if (jwt && user) {
+            setJwt(jwt)
+            setUser(JSON.parse(user))
+        } else {
+            // We shouldn't have a jwt without a user or vice versa. If we do, clear both and reset.
+            logout()
+        }
     }, [])
 
-    const getSession = async (): Promise<User | null> => {
+    const getJwt = async () => {
+        console.log('getJwt', jwt)
+        return jwt || localStorage.getItem('jwt')
+    }
+
+    const login = async ({
+        email,
+        password,
+    }: {
+        email: string
+        password: string
+    }): Promise<User | null | { error: string }> => {
         setIsLoading(true)
 
-        if (user) {
-            return user
-        }
-
         try {
-            const res = await fetch(`${apiHost}/api/user?organizationId=${organizationId}`, {
-                method: 'GET',
-                credentials: 'include',
+            posthog?.capture('squeak login start')
+
+            const userRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                method: 'POST',
+                body: JSON.stringify({
+                    identifier: email,
+                    password,
+                }),
             })
 
-            if (!res.ok) {
-                return null
+            const userData = await userRes.json()
+
+            if (!userRes.ok) {
+                throw new Error(userData?.error?.message)
             }
 
-            const data = await res.json()
+            const user = await fetchUser(userData.jwt)
 
-            if (data.error) {
-                return null
-            } else {
-                setUser(data)
-                return data as User
+            if (!user) {
+                throw new Error('Failed to fetch user data')
             }
+
+            posthog?.capture('squeak login success', {
+                email,
+            })
+
+            localStorage.setItem('jwt', userData.jwt)
+            setJwt(userData.jwt)
+
+            try {
+                const distinctId = posthog?.get_distinct_id()
+
+                if (distinctId) {
+                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${user.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${userData.jwt}`,
+                        },
+                        body: JSON.stringify({
+                            distinctId,
+                        }),
+                    })
+                }
+            } catch (error) {
+                console.error(error)
+            }
+
+            return user
         } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useUser.login',
+                email,
+                error: JSON.stringify(error),
+            })
+
             console.error(error)
+
+            if (error instanceof Error) {
+                return { error: error.message }
+            }
+
             return null
         } finally {
             setIsLoading(false)
         }
     }
 
-    const login = async ({ email, password }: { email: string; password: string }): Promise<User | null> => {
-        setIsLoading(true)
-
-        const { data, error } =
-            (await post(apiHost, '/api/login', {
-                email,
-                password,
-                organizationId,
-            })) || {}
-
-        if (error) {
-            setIsLoading(false)
-
-            // TODO: Should probably throw here
-            return null
-        } else {
-            setUser(data)
-
-            return data
-        }
-    }
-
     const logout = async (): Promise<void> => {
-        await post(apiHost, '/api/logout')
+        posthog?.capture('squeak logout')
+
+        localStorage.removeItem('jwt')
+        localStorage.removeItem('user')
+
         setUser(null)
+        setJwt(null)
     }
 
     const signUp = async ({
@@ -133,40 +189,232 @@ export const UserProvider: React.FC<UserProviderProps> = ({ apiHost, organizatio
         password: string
         firstName: string
         lastName: string
-    }): Promise<User | null> => {
-        const gravatar = getGravatar.url(email)
-        const avatar = await fetch(`https:${gravatar}?d=404`).then((res) => (res.ok && `https:${gravatar}`) || '')
+    }): Promise<User | null | { error: string }> => {
+        setIsLoading(true)
 
-        // FIXME: This doesn't seem to return the right format
-        const { error, data } =
-            (await post(apiHost, '/api/register', {
+        try {
+            posthog?.capture('squeak signup start')
+
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/local/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: email,
+                    email,
+                    password,
+                    firstName,
+                    lastName,
+                }),
+            })
+
+            const userData = await res.json()
+
+            if (!res.ok) {
+                throw new Error(userData?.error?.message)
+            }
+
+            const user = await fetchUser(userData.jwt)
+
+            localStorage.setItem('jwt', userData.jwt)
+            setJwt(userData.jwt)
+
+            posthog?.capture('squeak signup success', {
                 email,
-                password,
-                firstName,
-                lastName,
-                avatar,
-                organizationId,
-            })) || {}
-
-        if (error) {
-            // setMessage(error.message)
-            // TODO: Should probably throw here
-            return null
-        } else {
-            // setUser(data)
-            let user = await getSession()
+            })
 
             return user
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                type: 'useUser.signup',
+                email,
+                firstName,
+                lastName,
+                error: JSON.stringify(error),
+            })
+
+            console.error(error)
+
+            if (error instanceof Error) {
+                return { error: error.message }
+            }
+
+            return null
+        } finally {
+            setIsLoading(false)
         }
     }
 
-    return (
-        <UserContext.Provider
-            value={{ organizationId, apiHost, user, setUser, isLoading, getSession, login, logout, signUp }}
-        >
-            {children}
-        </UserContext.Provider>
-    )
+    const fetchUser = async (token?: string | null): Promise<User | null> => {
+        const meQuery = qs.stringify(
+            {
+                populate: {
+                    profile: {
+                        populate: {
+                            avatar: true,
+                            questionSubscriptions: {
+                                filters: {
+                                    $or: [
+                                        {
+                                            archived: {
+                                                $null: true,
+                                            },
+                                        },
+                                        {
+                                            archived: {
+                                                $eq: false,
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                            topicSubscriptions: {
+                                fields: ['slug', 'label'],
+                            },
+                        },
+                    },
+                    role: {
+                        fields: ['type'],
+                    },
+                },
+            },
+            {
+                encodeValuesOnly: true,
+            }
+        )
+
+        if (!token) {
+            token = await getJwt()
+        }
+
+        const meRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?${meQuery}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        if (!meRes.ok) {
+            throw new Error('Failed to fetch profile data')
+        }
+
+        const meData: User = await meRes.json()
+
+        setUser(meData)
+
+        // We don't want any error thrown here to bubble up to the caller.
+        try {
+            // We use the existing distinct_id here so we don't clobber the currently identified user.
+            const distinctId = posthog?.get_distinct_id()
+
+            if (distinctId && meData?.profile) {
+                posthog?.identify(distinctId, {
+                    // IMPORTANT: Make sure all properties start with `squeak` so we don't override any existing properties!
+                    squeakEmail: meData.email,
+                    squeakUsername: meData.username,
+                    squeakCreatedAt: meData.createdAt,
+                    squeakProfileId: meData.profile.id,
+                    squeakFirstName: meData.profile.firstName,
+                    squeakLastName: meData.profile.lastName,
+                    squeakBiography: meData.profile.biography,
+                    squeakCompany: meData.profile.company,
+                    squeakCompanyRole: meData.profile.companyRole,
+                    squeakGithub: meData.profile.github,
+                    squeakLinkedIn: meData.profile.linkedin,
+                    squeakLocation: meData.profile.location,
+                    squeakTwitter: meData.profile.twitter,
+                    squeakWebsite: meData.profile.website,
+                })
+            }
+        } catch (error) {
+            console.error(error)
+        }
+
+        return meData
+    }
+
+    const isSubscribed = async (contentType: 'topic' | 'question', id: number | string) => {
+        const profileID = user?.profile?.id
+        if (!profileID || !contentType || !id) return false
+
+        const query = qs.stringify({
+            filters: {
+                id: {
+                    $eq: profileID,
+                },
+                [`${contentType}Subscriptions`]: {
+                    id: {
+                        $eq: id,
+                    },
+                },
+            },
+            populate: {
+                [`${contentType}Subscriptions`]: true,
+            },
+        })
+
+        const profileRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
+
+        if (!profileRes.ok) {
+            throw new Error(`Failed to fetch profile`)
+        }
+
+        const { data } = await profileRes.json()
+
+        return data?.length > 0
+    }
+
+    const setSubscription = async (
+        contentType: 'topic' | 'question',
+        id: number | string,
+        subscribe: boolean
+    ): Promise<void> => {
+        const profileID = user?.profile?.id
+        if (!profileID || !contentType || !id) return
+
+        const body = {
+            data: {
+                [`${contentType}Subscriptions`]: {
+                    [subscribe ? 'connect' : 'disconnect']: [id],
+                },
+            },
+        }
+
+        const subscriptionRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        if (!subscriptionRes.ok) {
+            throw new Error(`Failed to update subscription`)
+        }
+
+        await fetchUser()
+    }
+
+    useEffect(() => {
+        localStorage.setItem('user', JSON.stringify(user))
+    }, [user])
+
+    const contextValue = {
+        user,
+        setUser,
+        isModerator: user?.role?.type === 'moderator',
+        isLoading,
+        getJwt,
+        login,
+        logout,
+        signUp,
+        fetchUser,
+        isSubscribed,
+        setSubscription,
+    }
+
+    return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
 }
 
 export const useUser = () => {

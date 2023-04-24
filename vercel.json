@@ -1,5 +1,6 @@
 {
     "redirects": [
+        { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/docs/integrate/third-party/:path*", "destination": "/docs/libraries/:path*" },
         { "source": "/plugins/:path*", "destination": "/apps/:path*" },
@@ -584,7 +585,7 @@
         { "source": "/handbook/people/team-structure/platform", "destination": "/handbook/small-teams/platform" },
         {
             "source": "/handbook/people/team-structure/session-recording",
-            "destination": "/handbook/small-teams/session-recording"
+            "destination": "/handbook/small-teams/monitoring"
         },
         {
             "source": "/handbook/people/team-structure/website-docs",
@@ -823,7 +824,12 @@
         { "source": "/products/product-analytics", "destination": "/product-analytics" },
         { "source": "/session-recording", "destination": "/session-replay" },
         { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" },
-        { "source": "/docs/session-recording", "destination": "/docs/session-replay" }
+        { "source": "/docs/session-recording", "destination": "/docs/session-replay" },
+        { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" },
+        { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/monitoring" },
+        { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
+        { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" },
+        { "source": "/community", "destination": "/questions" }
     ],
     "rewrites": [
         {

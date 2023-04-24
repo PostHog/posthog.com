@@ -29,7 +29,7 @@ In your app, import the `posthog` library and set your api key and host **before
 ```python
 from posthog import Posthog
 
-# Only necessary if you want to use local evaluation of feature flags
+# The personal API key is necessary only if you want to use local evaluation of feature flags.
 posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>', personal_api_key='<ph_personal_api_key>')
 ```
 
@@ -220,6 +220,41 @@ posthog.get_feature_flag('beta-feature', 'distinct id', groups={'organisation': 
 # returns string or None
 ```
 
+**Default overridden properties**
+
+Before posthog-python v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
+
+As of posthog-python v3.0, the default now is to disregard the server IP, not add the GeoIP properties, and not use the values for feature flag evaluations.
+
+You can go back to previous behaviour by doing setting the `disable_geoip` argument in your initialization to `False`:
+
+```python
+
+posthog = Posthog('api_key', disable_geoip=False)
+
+```
+
+The list of properties that this overrides:
+
+1. $geoip_city_name
+2. $geoip_country_name
+3. $geoip_country_code
+4. $geoip_continent_name
+5. $geoip_continent_code
+6. $geoip_postal_code
+7. $geoip_time_zone
+
+
+You can also explicitly chose to override / not override properties for a single capture or feature flag request like so:
+
+```python
+posthog.get_feature_flag("beta-feature", "distinct_id", disable_geoip=True|False)
+```
+
+```python
+posthog.capture('test id', 'test event', disable_geoip=True|False)
+```
+
 **Getting all flag values**
 
 You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
@@ -227,6 +262,15 @@ You can also get all known flag values as well. This is useful when you want to 
 ```python
 posthog.get_all_flags('distinct id', groups={}, person_properties={'is_authorized': True}, group_properties={})
 # returns dict of flag key and value pairs.
+```
+
+#### Feature Flag Payloads
+
+Payloads allow you to retrieve a value that is associated with the matched flag. The value can be a
+string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app.
+
+```python
+posthog.get_feature_flag_payload('feature-flag-key', 'distinct id')
 ```
 
 #### Local Evaluation

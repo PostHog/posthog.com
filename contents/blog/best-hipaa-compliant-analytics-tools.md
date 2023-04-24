@@ -49,6 +49,8 @@ We may be biased in claiming the top spot, but we believe the combination of [se
 - Integrations with HubSpot, Salesforce and more
 - Self-serve platform, no SQL required
 - Open-source, via permissive MIT License
+- SOC 2 certified
+
 
 ### Is PostHog HIPAA compliant?
 
@@ -110,7 +112,7 @@ _Unlike_ PostHog, Mixpanel isn’t open source and can’t be deployed into a us
 - All-in-one product analytics suite
 - Group Analytics, for B2B organizations
 - Self-serve, no SQL required
-- SOC 2 certification
+- SOC 2 certified
 
 ### Is Mixpanel HIPAA compliant?
 

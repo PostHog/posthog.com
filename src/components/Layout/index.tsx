@@ -5,6 +5,7 @@ import CookieBanner from 'components/CookieBanner'
 import usePostHog from '../../hooks/usePostHog'
 import { SearchProvider } from 'components/Search/SearchContext'
 import { UserProvider } from 'hooks/useUser'
+import { SWRConfig } from 'swr'
 
 import './Fonts.scss'
 import './Layout.scss'
@@ -22,17 +23,12 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <SearchProvider>
-            <UserProvider
-                apiHost={process.env.GATSBY_SQUEAK_API_HOST as string}
-                organizationId={process.env.GATSBY_SQUEAK_ORG_ID as string}
-            >
-                <div className={className}>
-                    <Header />
-                    <main>{children}</main>
-                    <Footer />
-                    <CookieBanner />
-                </div>
-            </UserProvider>
+            <div className={className}>
+                <Header />
+                <main>{children}</main>
+                <Footer />
+                <CookieBanner />
+            </div>
         </SearchProvider>
     )
 }

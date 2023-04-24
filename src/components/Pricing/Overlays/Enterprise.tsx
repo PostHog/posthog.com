@@ -7,7 +7,7 @@ const sections = [
     {
         title: 'Security & data management',
         description: `Access control and compliance`,
-        features: ['SAML SSO', 'Advanced permissioning', 'Private projects', 'SOC 2 compliance (coming soon)'],
+        features: ['SAML SSO', 'Advanced permissioning', 'Private projects', 'SOC 2 compliance'],
     },
     {
         title: 'Success',

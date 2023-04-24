@@ -116,6 +116,10 @@ const linklist: IProps[] = [
                 title: 'Tutorials',
                 url: '/tutorials',
             },
+            {
+                title: 'Tracks',
+                url: '/tracks',
+            },
         ],
     },
     {
@@ -140,7 +144,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Merch',
-                url: 'https://merch.posthog.com/collections/all',
+                url: 'https://merch.posthog.com',
             },
             {
                 title: 'PostHog FM',
@@ -149,6 +153,10 @@ const linklist: IProps[] = [
             {
                 title: 'PostHog on GitHub',
                 url: 'https://github.com/PostHog/posthog',
+            },
+            {
+                title: 'Startups',
+                url: '/startups',
             },
         ],
     },
@@ -373,10 +381,10 @@ export function Footer(): JSX.Element {
                         </li>
                         <li>
                             <Link
-                                to="/docs/contribute/code-of-conduct"
+                                to="/handbook/company/security#soc-2"
                                 className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
                             >
-                                Code of conduct
+                                SOC 2
                             </Link>
                         </li>
                         <li>

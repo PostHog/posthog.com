@@ -135,8 +135,8 @@
                 "url": "/handbook/small-teams/exec"
             },
             {
-                "name": "Experimentation",
-                "url": "/handbook/small-teams/experimentation"
+                "name": "Feature Success",
+                "url": "/handbook/small-teams/feature-success"
             },
             {
                 "name": "Growth",
@@ -163,8 +163,8 @@
                 "url": "/handbook/small-teams/product-analytics"
             },
             {
-                "name": "Session Recording",
-                "url": "/handbook/small-teams/session-recording"
+                "name": "Monitoring",
+                "url": "/handbook/small-teams/monitoring"
             },
             {
                 "name": "Website & Docs",
@@ -585,6 +585,10 @@
                         "url": "/handbook/growth/marketing/newsletter"
                     },
                     {
+                        "name": "In-app",
+                        "url": "/handbook/growth/marketing/in-app"
+                    },
+                    {
                         "name": "Startups",
                         "url": "/handbook/growth/marketing/startups"
                     },
@@ -605,15 +609,11 @@
         "url": "",
         "children": [
             {
-                "name": "Growth strategy",
-                "url": "/handbook/growth/strategy"
-            },
-            {
                 "name": "Customer support",
                 "url": "/handbook/growth/customer-support"
             },
             {
-                "name": "Inbound sales model",
+                "name": "Sales overview",
                 "url": "/handbook/growth/sales/overview"
             },
             {

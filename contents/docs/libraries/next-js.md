@@ -49,9 +49,9 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-    // Disable in development
+    // Enable debug mode in development
     loaded: (posthog) => {
-      if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
+      if (process.env.NODE_ENV === 'development') posthog.debug()
     }
   })
 }
@@ -162,6 +162,10 @@ export async function getServerSideProps(ctx) {
 
 > **Note**: Make sure to _always_ call `client.shutdownAsync()` after sending events from the server-side.
 > PostHog queues events into larger batches, and this call will force all batched events to be flushed immediately.
+
+## Configuring a reverse proxy to PostHog
+
+To improve the reliability of client-side tracking and make it less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. See [deploying a reverse proxy](/docs/advanced/proxy#using-nextjs).
 
 ## Further reading
 
