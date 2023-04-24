@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['lior-neu-ner']
 date: 2023-04-24
-featuredImage: ../images/tutorials/running-group-targeted-ab-tests/featured-image.png
+featuredImage: ../images/blog/running-group-targeted-ab-tests/featured-image.png
 tags: ['experimentation']
 ---
 
@@ -16,11 +16,17 @@ In group-targeted experiments, the test applies to an entire group rather than i
 
 Groups can be companies, geographic locations, or any other set of users with common characteristics.
 
-![Screenshot of setting the participant type in an experiment](../images/tutorials/running-group-targeted-ab-tests/user-vs-group-a-b-tests.png)
+![Screenshot of setting the participant type in an experiment](../images/blog/running-group-targeted-ab-tests/user-vs-group-a-b-tests.png)
 
 ## When to run group-targeted experiments
 
-When the change in how an individual user uses your product will significantly affect the behavior of other users, or when you want to measure the impact of a change on an entire group of users. This is usually seen in the following types of products:
+Run group-targeted experiments when:
+
+* The change in how an individual user uses your product significantly affects the behavior of other users.
+
+* You want to measure the impact of a change on an entire group of users. 
+
+This is usually seen in the following types of products:
 
 1. B2B SaaS apps, in order to test how a change will affect how an entire company uses your product.
 
@@ -74,14 +80,14 @@ First, ensure you have [set up a group](docs/product-analytics/group-analytics#g
 
 In the New Experiment screen, select the Participant type. By default, it will show `Persons` (i.e. a user-level experiment). Click on the drop-down and select your new group.
 
-![Screenshot of setting the participant type in an experiment](../images/tutorials/running-group-targeted-ab-tests/participant-type.png)
+![Screenshot of setting the participant type in an experiment](../images/blog/running-group-targeted-ab-tests/participant-type.png)
 
 Then set your experiment goal and secondary metrics as usual. A handy feature especially useful for group-level experiments is the Minimum Acceptable Improvement calculator at the bottom of the page. Since group-level experiments have lower statistical power, this will recommend a time for how long you should run your experiment in order to see results.
 
-![Screenshot of the Minimum Acceptable Improvement calculator](../images/tutorials/running-group-targeted-ab-tests/minimum-acceptable-improvement.png)
+![Screenshot of the Minimum Acceptable Improvement calculator](../images/blog/running-group-targeted-ab-tests/minimum-acceptable-improvement.png)
 
 ## Further reading
 
-- [Running experiments on new users](/tutorials/new-user-experiments)
-- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/frontend-vs-backend-group-analytics)
-- [How to run Experiments without feature flags](https://posthog.com/tutorials/experiments)
+- [Running experiments on new users](/blog/new-user-experiments)
+- [How to build, analyze and optimize conversion funnels in PostHog](/blog/frontend-vs-backend-group-analytics)
+- [How to run Experiments without feature flags](https://posthog.com/blog/experiments)
