@@ -290,7 +290,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                             disabled={loading}
                             onClick={() => (subscribed ? unsubscribe() : subscribe())}
                             className="text-[15px] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold active:top-[0.5px] active:scale-[.98] w-auto"
-                            data-attr={`roadmap-subscribe:${title}`}
+                            data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
                         >
                             <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
                                 {loading ? (
