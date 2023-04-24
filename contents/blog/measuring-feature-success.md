@@ -20,18 +20,18 @@ At PostHog, we care about enabling teams to understand and measure feature succe
 
 ## Defining feature success
 
-Measuring feature success starts after deciding to work on a feature. We decide to build a feature based on quantitative and qualitative feedback combined with our thoughts on what’s best. Once we decide to build a feature, we start to judge its success based on if it:
+We decide to build a feature based on quantitative and qualitative feedback combined with our thoughts on what’s best. Once we decide to build a feature, we start to judge its success based on if it:
 
 1. Solves a user problem. Key to this is understanding and defining users’ problems, then figuring out ways to solve them that fit with the product and business. 
 2. Is actually used. No matter how good you think your feature is, if it doesn’t get used, it isn’t benefitting users.
 
-Feature success is the process of enabling, measuring, and evaluating both of these. It is planning for how to develop a successful feature, a system for measuring its ongoing usage, and a process for evaluating its success.
+Feature success is the process of enabling, measuring, and evaluating the combination of the above points. It is planning for how to develop a successful feature, a system for measuring its ongoing usage, and a process for evaluating its success.
 
 ## How we measure feature success at PostHog
 
 Measuring feature success at PostHog is a multi-step process that goes hand-in-hand with our release process. The multi-step approach to feature success ensures we are building the right solution and that users actually care and use the solution we are building.
 
-To help you connect this to reality, we will follow along with how one of our engineers, [Yakko](/handbook/company/team), recently built, measured, and evaluated [sampling](/docs/product-analytics/sampling).
+To help you connect this to reality, we will follow along with how one of our engineers, [Yakko](/handbook/company/team), recently built, measured, and evaluated one of our new features: [sampling](/docs/product-analytics/sampling).
 
 > **What is sampling?** The sampling feature speeds up queries by analyzing a portion of the data and extrapolating the results.
 
@@ -44,13 +44,13 @@ A feature needs to exist for us to measure its success. Deciding to build a feat
 From the thinking and decision about building a feature comes the criteria for evaluating its success. 
 
 Yakko decided to work on sampling because:
-1. Slow queries were causing frustrations
-2. Sampling felt like an intuitive solution that could be implemented quickly
+1. Slow results on complex queries were causing frustrations for large customers. This ties to the objective of "[make PostHog performance frustration free for our 10 largest customers](/handbook/small-teams/product-analytics#objective-2-make-posthog-performance-frustration-free-for-our-10-largest-customers)."
+2. Sampling felt like an simple solution that could be implemented quickly.
 3. Manually benchmarking the impact of 10% sampling on large customers' queries confirmed 3-10x improvements in speeds with only a 1-2% loss in accuracy.
 
 This showed that sampling was technically feasible and it was worth doing now.
 
-### 1. Build it and make sure it isn’t broken
+### 1. Build an MVP and test it's working as intended
 
 Once we decide to build a feature, the success evaluation can begin. We move fast and build the feature, review that it matches what we envisioned, and ship it behind a feature flag. The flag rolls out to a single developer to start. This helps them to check if it has the smallest bit of success in solving the problem in production.
 
