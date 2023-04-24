@@ -71,8 +71,11 @@ Same flow as updating a customer to Enterprise.
 Create custom prices in Stripe, then follow the **Update Subscriptions** flow.
 
 ### Giving customers a free trial
-1. Ask the customer to upgrade in the interface
-2. Give them a free trial on Stripe
+
+1. Find the Organization in the Billing Service Admin portal
+2. Find the `Free Trial Until` field and update that to the appropriate date
+3. The next time that Customer visits PostHog, their `AvailableFeatures` will be updated to reflect the standard premium features (they might have to refresh their page to properly sync the new billing information).
+4. Once this date passes their `AvailableFeatures` will be reset to the free plan unless they have subscribed within this time.
 
 
 ### Updating subscriptions
