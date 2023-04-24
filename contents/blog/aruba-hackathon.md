@@ -25,7 +25,7 @@ When we do, we like to plan a mixture of fun social activities, strategic sessio
 
 ![posthog aruba](../images/blog/aruba/aruba-hackathon-photos.jpeg)
 
-Here's what we built.
+Here's what we built during our Aruba hackathon.
 
 ## MaxAI: Our friendly, PostHog support AI
 
@@ -35,7 +35,7 @@ Deployed on our Slack, app, website, and GitHub repos, MaxAI was the inevitable 
 
 The goal was to create an AI bot that could answer support questions, easing the load on our [support heroes](/handbook/engineering/support-hero) and making it easier for the community to find answers to their questions.
 
-Built using Weaviate, Haystack, and `gpt-3.5-turbo`, MaxAI works by taking a user's question, collecting all relevant docs and data for that question, generating a prompt with all that context, and querying OpenAI for an answer.
+Built using Weaviate, Haystack, and `gpt-3.5-turbo`, MaxAI works by taking a user's question, collecting all relevant docs and data to that question, generating a prompt with that context, and querying OpenAI for an answer.
 
 Here's a flowchart of the process:
 
@@ -85,7 +85,7 @@ Dubbed DataBeach because Frank and Harry started building the feature while sipp
 
 ![databeach](../images/blog/aruba/data-beach.png)
 
-The MVP they built consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like Stripe, Hubspot (see above), Intercom, and more, along with data from PostHog.
+They teamed up with Marius to an build MVP consisting of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like Stripe, Hubspot (see above), Intercom, and more, along with data from PostHog.
 
 There's more to build before PostHog is ready to be your data warehouse, but we're working on it. Keep an eye on our [public roadmap](/roadmap) for updates.
 
@@ -162,7 +162,7 @@ In June they've planned a virtual engraving workshop, in July a virtual escape r
 
 - **Team Automations:** Luke Harries, Ben White, Thomas Obermüller, Cory Watilo 
 
-Luke and Thomas built an MVP for automations in PostHog. In the MVP, automations have a source (event, action or cron job), logic (pause for / pause until), and sources (e.g. send a Slack message, create a GitHub Issue, add to cohort, add to feature flag, send an in-app message etc.).
+Luke, Thomas, Ben and Cory built an MVP for automations in PostHog. In the MVP, automations have a source (event, action or cron job), logic (pause for / pause until), and sources (e.g. send a Slack message, create a GitHub Issue, add to cohort, add to feature flag, send an in-app message etc.).
 
 ![automations](../images/blog/aruba/automation-posthog.png)
 
@@ -186,3 +186,9 @@ Other features include:
 - Productized async migrations
 
 Needless to say, this is all backend work you will never see, but HouseWatch will make it easier for us to keep PostHog fast and reliable for you.
+
+## What's next?
+
+Some hackathon projects, such as our new dashboard templates, have already shipped, while we've also revamped how we do support based on the work of Team Arubug. Others are still work-in-progress projects that we expect to ship in future – see our [public roadmap](/roadmap) and [GitHub repo](/PostHog/posthog) for updates on what we're working on.
+
+Fancy joining us at our next all-company offsite? We're [always hiring](/careers).
