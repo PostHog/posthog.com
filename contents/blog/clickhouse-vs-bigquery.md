@@ -165,4 +165,4 @@ Consider the following resources if you want to learn more about ClickHouse and 
 - [Why PostHog chose ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion)
 - [Andy Pavlo - Vectorized Query Execution](https://www.youtube.com/watch?v=FrspnYbFSxQ)
 - [ClickHouse Cloud](https://clickhouse.com/cloud)
-- [Our comparions of ClickHouse and Druid](/blog/clickhouse-vs-druid)
+- [Our comparisons of ClickHouse and Druid](/blog/clickhouse-vs-druid)
