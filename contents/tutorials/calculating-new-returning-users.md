@@ -70,7 +70,7 @@ For example, an 8 week pageview retention graph looks like this:
 
 You can learn more about retention in our [guide to churn analysis](/blog/customer-churn-analysis-guide).
 
-## Calculating new vs returning users
+## Comparing new vs returning users
 
 With both new and returning users calculated, you can compare them for analysis. To do this, create an insight with two unique user trends: one filtered by the new user cohort, the other filtered by the returning user cohort. 
 
