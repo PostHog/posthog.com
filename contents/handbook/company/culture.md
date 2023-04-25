@@ -73,7 +73,9 @@ One of the benefits of hiring high-performing, self-sufficient, empowered team m
 
 We have optimised for this by introducing [Small Teams](/handbook/small-teams/team-structure), which prioritise speed by delegating decision-making autonomy as much as possible. 
 
-Right now, our [management approach](/handbook/company/management) is super simple - James H, Tim and Charles are the only managers, and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
+Right now, our [management approach](/handbook/company/management) is super simple - James H, Tim and the team leaders are the only managers, and everyone else reports to one of them. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
+
+It's up to you how to get things done. If you want to make a change, feel free to just create the pull request. If you want to discuss something more widely, perhaps use an RFC for a change inside your team, or book a call with people outside your team if it's something that could have a significant impact on their work - communicating with the relevant team and often doing this as a meeting tends to work better and ultimately saves time.
 
 ## A day in the life
 
