@@ -15,9 +15,9 @@ tags:
     - Guides
 ---
 
-Want to understand the differences between Pendo and PostHog? Here's the short answer:
+Want to understand the difference between Pendo and PostHog? Here's the short answer:
 
-1. Pendo focuses on enabling users to add in tool-tips and in-app messages. It includes some product analytics tools.
+1. Pendo enables users to add in tool-tips and in-app messages. It includes some product analytics tools.
 
 2. PostHog is an all-in-one product improvement platform that includes the ability to add in-app messages, as well as analytics, feature flags, session replays and more.
 
