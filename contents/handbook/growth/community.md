@@ -10,7 +10,7 @@ Rather than using an off-the-shelf community platform, the [Website & Docs team]
 
 Our community forums are hosted at [posthog.com/questions](/questions) – but they come with a twist...
 
-Anyone can ask a question within the forums, but they can _also_ ask a question at the end of any docs page (under the "Questions?" subheading). We've found this to be a great place for people to ask very specfic questions after attempting to find an answer in documentation, as it acts as a mini-FAQ section.
+Anyone can ask a question within the forums, but they can _also_ ask a question at the end of any docs page (under the "Questions?" subheading). We've found this to be a great place for people to ask very specific questions after attempting to find an answer in documentation, as it acts as a mini-FAQ section.
 
 Questions that are asked within the docs are also automatically aggreagated to the correct category in the community forums.
 
