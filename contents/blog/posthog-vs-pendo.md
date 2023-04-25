@@ -337,7 +337,7 @@ One unique advantage of PostHog is that, because it is open source, it’s easy 
 </table>
 </div>
 
-### Other integrations 
+### Popular integrations 
 
 Below, we've listed a few of the most popular integrations used across PostHog and Pendo. 
 
