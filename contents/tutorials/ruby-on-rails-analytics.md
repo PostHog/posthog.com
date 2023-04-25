@@ -338,21 +338,6 @@ You can then turn off the flag to check that it is redirecting back to the artic
 
 Once done, you have a basic Ruby on Rails app with many of the key features of PostHog setup. You can customize it to your liking. There are also more PostHog features to explore like group analytics, user and event properties, and experiments. Read more in [our Ruby documentation](/docs/integrate/server/ruby).
 
-### Evaluating feature flags locally in unicorn server
-
-If you have `preload_app true` in your unicorn config, you can use `after_fork` [hook](https://www.rubydoc.info/gems/unicorn/Unicorn%2FConfigurator:after_fork) which is part of the unicorn's configuration so that the feature flag cache will receive the updates from posthog dashboard.
-
-```ruby
-after_fork do |server, worker|
-  $posthog = PostHog::Client.new(
-    api_key: '<ph_project_api_key>',
-    personal_api_key: '<ph_personal_api_key>'
-    host: '<ph_instance_address>',
-    on_error: Proc.new { |status, msg| print msg }
-  )
-end
-```
-
 ## Further reading
 
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
