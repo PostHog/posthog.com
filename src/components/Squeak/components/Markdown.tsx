@@ -7,7 +7,7 @@ export const Markdown = ({ children }: { children: string }) => {
     return (
         <ReactMarkdown
             rehypePlugins={[rehypeSanitize]}
-            className="squeak-post-markdown"
+            className="flex-1 text-base overflow-hidden text-ellipsis squeak-post-markdown"
             components={{
                 pre: ({ children }) => {
                     return (
@@ -20,9 +20,9 @@ export const Markdown = ({ children }: { children: string }) => {
                                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
                                     <pre className={className} style={style}>
                                         {tokens.map((line, i) => (
-                                            <div {...getLineProps({ line, key: i })}>
+                                            <div key={i} {...getLineProps({ line, key: i })}>
                                                 {line.map((token, key) => (
-                                                    <span {...getTokenProps({ token, key })} />
+                                                    <span key={key} {...getTokenProps({ token, key })} />
                                                 ))}
                                             </div>
                                         ))}

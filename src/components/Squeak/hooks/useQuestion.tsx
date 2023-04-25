@@ -1,6 +1,6 @@
 import qs from 'qs'
-import { ProfileData, QuestionData, StrapiRecord } from 'lib/strapi'
-import useSWR from 'swr'
+import { ProfileData, QuestionData, StrapiRecord, TopicData } from 'lib/strapi'
+import useSWR, { useSWRConfig } from 'swr'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 
@@ -8,7 +8,7 @@ type UseQuestionOptions = {
     data?: StrapiRecord<QuestionData>
 }
 
-const query = (id: string | number) =>
+const query = (id: string | number, isModerator: boolean) =>
     qs.stringify(
         {
             filters: {
@@ -34,6 +34,13 @@ const query = (id: string | number) =>
                         avatar: {
                             select: ['id', 'url'],
                         },
+                        ...(isModerator
+                            ? {
+                                  user: {
+                                      fields: ['distinctId', 'email'],
+                                  },
+                              }
+                            : null),
                     },
                 },
                 replies: {
@@ -50,6 +57,7 @@ const query = (id: string | number) =>
                         },
                     },
                 },
+                topics: true,
             },
         },
         {
@@ -58,22 +66,31 @@ const query = (id: string | number) =>
     )
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
-    const { getJwt, fetchUser, user } = useUser()
+    const { getJwt, fetchUser, user, isModerator } = useUser()
+    const { mutate: globalMutate } = useSWRConfig()
     const posthog = usePostHog()
+
+    const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
 
     const {
         data: question,
         error,
         isLoading,
-        mutate,
-    } = useSWR<StrapiRecord<QuestionData>>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id)}`,
-        async (url) => {
-            const res = await fetch(url)
-            const { data } = await res.json()
-            return data?.[0]
-        }
-    )
+    } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
+        const res = await fetch(
+            url,
+            isModerator
+                ? {
+                      headers: {
+                          Authorization: `Bearer ${await getJwt()}`,
+                      },
+                  }
+                : undefined
+        )
+
+        const { data } = await res.json()
+        return data?.[0]
+    })
 
     if (error) {
         posthog?.capture('squeak error', {
@@ -81,6 +98,44 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             questionId: id,
             error: JSON.stringify(error),
         })
+    }
+
+    const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
+
+    // This mutate method takes into account the fact that both ids and permalinks can be
+    // used interchangeably to fetch a question.
+    //
+    // This ensures that data is kept in sync across all instances of the same question.
+    const mutate = async (data?: any) => {
+        // First, we mutate the key for whichever type of identifier was passed in to,
+        // this specific hook.
+        globalMutate(key, data, {
+            optimisticData: data,
+        })
+
+        if (!question) return
+
+        // Then, based on if it's a permalink or an id, we mutate the other key as well.
+        if (typeof id === 'string') {
+            globalMutate(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question.id, isModerator)}`,
+                data,
+                {
+                    optimisticData: data,
+                }
+            )
+        } else {
+            globalMutate(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(
+                    question?.attributes?.permalink,
+                    isModerator
+                )}`,
+                data,
+                {
+                    optimisticData: data,
+                }
+            )
+        }
     }
 
     const reply = async (body: string) => {
@@ -133,8 +188,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             throw error
         }
     }
-
-    const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
 
     const handlePublishReply = async (published: boolean, id: number) => {
         try {
@@ -269,79 +322,70 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     }
 
-    const isSubscribed = async (): Promise<boolean> => {
-        const query = qs.stringify({
-            filters: {
-                id: {
-                    $eq: id,
-                },
-                profileSubscribers: {
-                    id: {
-                        $eq: user?.profile?.id,
+    const addTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                data: {
+                    topics: {
+                        connect: [topic.id],
                     },
                 },
-            },
-            populate: {
-                profileSubscribers: true,
-            },
-        })
-        const questionRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query}`)
-
-        if (!questionRes.ok) {
-            throw new Error('Failed to fetch question')
-        }
-
-        const { data } = await questionRes.json()
-
-        return data?.length > 0
-    }
-
-    const subscribe = async (): Promise<void> => {
-        const profile = user?.profile
-        if (!profile) return
-
-        const body = {
-            data: {
-                questionSubscriptions: {
-                    connect: [question?.id],
-                },
-            },
-        }
-
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profile?.id}`, {
-            method: 'PUT',
-            body: JSON.stringify(body),
+            }),
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${await getJwt()}`,
             },
         })
 
-        await fetchUser()
+        const copiedData = Object.assign({}, questionData)
+
+        copiedData.attributes?.topics?.data?.push(topic)
+
+        await mutate(copiedData)
     }
 
-    const unsubscribe = async (): Promise<void> => {
-        const profile = user?.profile
-        if (!profile) return
-
-        const body = {
-            data: {
-                questionSubscriptions: {
-                    disconnect: [question?.id],
-                },
-            },
-        }
-
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profile?.id}`, {
+    const removeTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${question?.id}`, {
             method: 'PUT',
-            body: JSON.stringify(body),
+            body: JSON.stringify({
+                data: {
+                    topics: {
+                        disconnect: [topic.id],
+                    },
+                },
+            }),
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${await getJwt()}`,
             },
         })
 
-        await fetchUser()
+        const copiedData = Object.assign({}, questionData)
+
+        if (!copiedData.attributes?.topics?.data) return
+
+        copiedData.attributes.topics.data = copiedData.attributes?.topics?.data?.filter((t) => t.id !== topic.id)
+
+        await mutate(copiedData)
+    }
+
+    const archive = async (archive: boolean) => {
+        const body = JSON.stringify({
+            data: {
+                archived: archive,
+            },
+        })
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionData?.id}`, {
+            method: 'PUT',
+            body,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        mutate()
     }
 
     return {
@@ -353,8 +397,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
-        isSubscribed,
-        subscribe,
-        unsubscribe,
+        addTopic,
+        removeTopic,
+        archive,
     }
 }

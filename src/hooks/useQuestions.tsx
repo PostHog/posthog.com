@@ -11,19 +11,33 @@ type UseQuestionsOptions = {
     topicId?: number
     limit?: number
     sortBy?: 'newest' | 'popular' | 'activity'
+    filters?: any
 }
 
 const query = (offset: number, options?: UseQuestionsOptions) => {
-    const { slug, topicId, profileId, limit = 20, sortBy = 'newest' } = options || {}
-
+    const { slug, topicId, profileId, limit = 20, sortBy = 'newest', filters } = options || {}
     const params = {
         pagination: {
             start: offset * limit,
             limit,
         },
         sort: 'createdAt:desc',
-        filters: {},
+        filters: {
+            $or: [
+                {
+                    archived: {
+                        $null: true,
+                    },
+                },
+                {
+                    archived: {
+                        $eq: false,
+                    },
+                },
+            ],
+        },
         populate: {
+            topics: true,
             profile: {
                 fields: ['firstName', 'lastName', 'gravatarURL'],
                 populate: {
@@ -33,6 +47,11 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
                 },
             },
             replies: {
+                populate: {
+                    profile: {
+                        fields: ['firstName', 'lastName'],
+                    },
+                },
                 fields: ['id', 'createdAt', 'updatedAt'],
             },
         },
@@ -94,6 +113,13 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
         }
     }
 
+    if (filters) {
+        params.filters = {
+            ...params.filters,
+            ...filters,
+        }
+    }
+
     return qs.stringify(params, {
         encodeValuesOnly: true, // prettify URL
     })
@@ -121,7 +147,11 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         }
     }, [size, data])
 
+    const total = data && data[0]?.meta?.pagination?.total
+    const hasMore = total ? questions?.data.length < total : false
+
     return {
+        hasMore,
         questions,
         fetchMore: () => setSize(size + 1),
         isLoading,

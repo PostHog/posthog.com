@@ -97,7 +97,7 @@ module.exports = {
             {
                 query: `
                             {
-                              questions: allSqueakQuestion(filter: {permalink: {ne: null}}) {
+                              questions: allSqueakQuestion(filter: {permalink: {ne: null}, archived: {ne: true}}) {
                                 nodes {
                                   id
                                   title: subject

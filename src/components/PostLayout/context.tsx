@@ -26,7 +26,8 @@ export const PostProvider: React.FC<ProviderProps> = ({
     children,
 }) => {
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
-        hideSidebar ||
+        other.fullWidthContent ||
+            hideSidebar ||
             !sidebar ||
             (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
@@ -34,11 +35,11 @@ export const PostProvider: React.FC<ProviderProps> = ({
     const contentContainerClasses =
         contentContainerClassName ||
         `px-5 lg:px-6 xl:px-12 w-full transition-all ${
-            hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-full'
+            hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-screen-2xl'
         } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
+        if (typeof window !== 'undefined' && !other.fullWidthContent) {
             const lsFullWidthContent = localStorage.getItem('full-width-content') === 'true'
             if (lsFullWidthContent !== fullWidthContent) {
                 setFullWidthContent(lsFullWidthContent)

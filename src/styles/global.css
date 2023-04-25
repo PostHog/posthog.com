@@ -256,16 +256,6 @@ h4 {
     container-type: inline-size;
 }
 
-@container (min-width: 583px) and (max-width: 650px) {
-    #recent-questions ul li .grid {
-        @apply block;
-
-        > div {
-            @apply mb-2;
-        }
-    }
-}
-
 /* scope to left nav */
 .z-20 {
     /* make active nav item full strength */
@@ -1200,5 +1190,34 @@ iframe[src*='youtube-nocookie.com'] {
     }
     > div:last-of-type {
         @apply border-b-0;
+    }
+}
+
+.squeak-left-border {
+    @apply before:border-l before:border-b before:border-dashed before:border-gray-accent-light dark:before:border-opacity-50 before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:left-0;
+}
+
+li.squeak-left-border {
+    @apply before:h-[14px]; /* exiting thread replies - this overrides the reply box (for the user) */
+}
+
+.squeak-post-markdown {
+    @apply text-[15px] leading-normal break-words pb-3;
+
+    a {
+        @apply font-semibold;
+    }
+
+    p {
+        @apply m-0 mb-2 text-[15px];
+    }
+
+    ol,
+    ul {
+        @apply pb-0 mb-2 text-[15px];
+    }
+
+    pre {
+        @apply text-base my-3 overflow-scroll p-4 text-[15px];
     }
 }

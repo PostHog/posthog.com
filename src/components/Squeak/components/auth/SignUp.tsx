@@ -1,6 +1,8 @@
 import React from 'react'
 import { Field, Form, Formik } from 'formik'
 import { User, useUser } from 'hooks/useUser'
+import { inputClasses, labelClasses } from '../Authentication'
+import Button from '../Button'
 
 type SignUpProps = {
     buttonText?: string
@@ -49,11 +51,14 @@ export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit
         >
             {({ isValid, isSubmitting }) => {
                 return (
-                    <Form>
-                        <div className="squeak-authentication-form-name">
+                    <Form className="m-0">
+                        <div className="grid grid-cols-2 gap-x-2">
                             <span>
-                                <label htmlFor="firstName">First name</label>
+                                <label className={labelClasses} htmlFor="firstName">
+                                    First name
+                                </label>
                                 <Field
+                                    className={inputClasses}
                                     onBlur={(e) => e.preventDefault()}
                                     required
                                     id="firstName"
@@ -63,8 +68,11 @@ export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit
                                 />
                             </span>
                             <span>
-                                <label htmlFor="lastName">Last name</label>
+                                <label className={labelClasses} htmlFor="lastName">
+                                    Last name
+                                </label>
                                 <Field
+                                    className={inputClasses}
                                     onBlur={(e) => e.preventDefault()}
                                     id="lastName"
                                     name="lastName"
@@ -73,8 +81,11 @@ export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit
                                 />
                             </span>
                         </div>
-                        <label htmlFor="email">Email address</label>
+                        <label className={labelClasses} htmlFor="email">
+                            Email address
+                        </label>
                         <Field
+                            className={inputClasses}
                             required
                             onBlur={(e) => e.preventDefault()}
                             id="email"
@@ -82,8 +93,11 @@ export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit
                             type="email"
                             placeholder="Email address..."
                         />
-                        <label htmlFor="password">Password</label>
+                        <label className={labelClasses} htmlFor="password">
+                            Password
+                        </label>
                         <Field
+                            className={inputClasses}
                             required
                             onBlur={(e) => e.preventDefault()}
                             id="password"
@@ -91,9 +105,16 @@ export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit
                             type="password"
                             placeholder="Password..."
                         />
-                        <button style={isSubmitting || !isValid ? { opacity: '.5' } : {}} type="submit">
+                        <Button
+                            className={`font-bold w-full relative ${
+                                isSubmitting || !isValid
+                                    ? 'opacity-50 cursor-not-allowed'
+                                    : 'bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px]'
+                            }`}
+                            type="submit"
+                        >
                             {buttonText}
-                        </button>
+                        </Button>
                     </Form>
                 )
             }}

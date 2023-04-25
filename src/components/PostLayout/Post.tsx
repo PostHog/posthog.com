@@ -38,6 +38,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         contentContainerClasses,
         stickySidebar,
         searchFilter,
+        hideWidthToggle,
     } = usePost()
 
     const handleFullWidthContentChange = () => {
@@ -130,7 +131,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                     {sidebar}
                                 </div>
                                 <div className="flex flex-grow items-end">
-                                    <div className="lg:pt-6 !border-t-0 sticky bottom-0 w-full">
+                                    <div className="!border-t-0 sticky bottom-0 w-full">
                                         {tableOfContents && tableOfContents?.length > 1 && (
                                             <div className="px-4 lg:px-8 lg:pb-4 lg:block hidden">
                                                 <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
@@ -155,7 +156,10 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                                 </Scrollspy>
                                             </div>
                                         )}
-                                        <ul className="list-none p-0 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur">
+                                        <ul
+                                            id="post-actions"
+                                            className="list-none p-0 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur"
+                                        >
                                             {filePath && (
                                                 <div className="flex divide-x divide-dashed divide-gray-accent-light dark:divide-gray-accent-dark border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                                                     <SidebarAction
@@ -173,13 +177,15 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                                 </div>
                                             )}
                                             <div className="ml-auto flex">
-                                                <SidebarAction
-                                                    className="hidden xl:block border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark"
-                                                    title="Toggle content width"
-                                                    onClick={handleFullWidthContentChange}
-                                                >
-                                                    <ExpandDocument expanded={fullWidthContent} />
-                                                </SidebarAction>
+                                                {!hideWidthToggle && (
+                                                    <SidebarAction
+                                                        className="hidden xl:block border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark"
+                                                        title="Toggle content width"
+                                                        onClick={handleFullWidthContentChange}
+                                                    >
+                                                        <ExpandDocument expanded={fullWidthContent} />
+                                                    </SidebarAction>
+                                                )}
                                                 {darkMode && (
                                                     <SidebarAction
                                                         className="pl-2 pr-2 h-8 my-1"

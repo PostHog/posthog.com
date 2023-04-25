@@ -163,8 +163,8 @@
                 "url": "/handbook/small-teams/product-analytics"
             },
             {
-                "name": "Session Recording",
-                "url": "/handbook/small-teams/session-recording"
+                "name": "Monitoring",
+                "url": "/handbook/small-teams/monitoring"
             },
             {
                 "name": "Website & Docs",
@@ -583,6 +583,10 @@
                     {
                         "name": "Email",
                         "url": "/handbook/growth/marketing/newsletter"
+                    },
+                    {
+                        "name": "In-app",
+                        "url": "/handbook/growth/marketing/in-app"
                     },
                     {
                         "name": "Startups",

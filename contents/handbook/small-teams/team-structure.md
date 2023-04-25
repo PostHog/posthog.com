@@ -13,7 +13,7 @@ Our small teams are:
 
 - [Product Analytics](/handbook/small-teams/product-analytics)
 - [Feature Success](/handbook/small-teams/feature-success)
-- [Session Recording](/handbook/small-teams/session-recording)
+- [Monitoring](/handbook/small-teams/monitoring)
 - [Infrastructure](/handbook/small-teams/infrastructure)
 - [Pipeline](/handbook/small-teams/pipeline)
 - [Marketing](/handbook/small-teams/marketing)

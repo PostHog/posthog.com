@@ -158,6 +158,15 @@ module.exports = {
                 'fluid-video': '56.25%',
                 '1/2': '50%',
             },
+            keyframes: {
+                wiggle: {
+                    '0%, 100%': { transform: 'rotate(6deg)' },
+                    '50%': { transform: 'rotate(-6deg)' },
+                },
+            },
+            animation: {
+                wiggle: 'wiggle .2s ease-in-out 3',
+            },
         },
     },
     plugins: [require('@tailwindcss/forms'), require('@tailwindcss/line-clamp'), require('@headlessui/tailwindcss')],

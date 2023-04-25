@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Field, Form, Formik } from 'formik'
+import { inputClasses, labelClasses } from '../Authentication'
+import Button from '../Button'
 
 type ForgotPasswordProps = {
     apiHost: string
@@ -53,16 +55,32 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setMessage, setParentVi
             {({ isValid }) => {
                 return (
                     <Form>
-                        <label htmlFor="email">Email address</label>
-                        <Field required id="email" name="email" type="email" placeholder="Email address..." />
+                        <label className={labelClasses} htmlFor="email">
+                            Email address
+                        </label>
+                        <Field
+                            className={inputClasses}
+                            required
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="Email address..."
+                        />
                         {emailSent ? (
                             <div>
                                 <p>Check your email for password reset instructions</p>
                             </div>
                         ) : (
-                            <button style={loading || !isValid ? { opacity: '.5' } : {}} type="submit">
+                            <Button
+                                className={`font-bold w-full relative ${
+                                    loading || !isValid
+                                        ? 'opacity-50 cursor-not-allowed'
+                                        : 'bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px]'
+                                }`}
+                                type="submit"
+                            >
                                 Send password reset instructions
-                            </button>
+                            </Button>
                         )}
                     </Form>
                 )

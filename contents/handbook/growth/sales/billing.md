@@ -28,9 +28,10 @@ We use metadata on these prices to allow the Billing Service to appropriately lo
 * `posthog_product_key`: `posthog_analytics` | `session_replay` | ... -> This allows PostHog to find and map the relevant products. **Important:** There should never be more than 1 Stripe product with the same `posthog_product_key`. The list of keys is defined in the main billing config.
 
 **On Stripe Product Prices**
-The following keys are used to manage Startup prices, might be deprecated:
+The following keys are used to manage Startup prices:
+* `plan` - Any Startup plan prices must have the `plan` metadata set to `startup` to have their subscription automatically moved to the default (paid) prices. If not, when their subscription ends they will instead be switched to the free plans for all products. 
 * `valid_days` -> The number of days a price is valid for, before automatically switching to another plan (the `default` plan unless `move_to_price_id` is set). Useful to create pricing that is only valid for a specific period, e.g. for the startup plans. Note: if more than one price with `valid_days` is added to a subscription, the validity period will be the *shortest* of the two, before resetting all plans to the default ones 
-* `move_to_price_id` -> Can be used together with `valid_days` to specify if the customer needs to be moved to a specific pricing, rather than the default one, at the end of the validity period.
+* `move_to_price_id` -> Can be used to specify if the customer needs to be moved to a specific pricing, rather than the default one, at the end of the subscription period.
 
 
 ### Custom pricing 
@@ -71,8 +72,11 @@ Same flow as updating a customer to Enterprise.
 Create custom prices in Stripe, then follow the **Update Subscriptions** flow.
 
 ### Giving customers a free trial
-1. Ask the customer to upgrade in the interface
-2. Give them a free trial on Stripe
+
+1. Find the Organization in the Billing Service Admin portal
+2. Find the `Free Trial Until` field and update that to the appropriate date
+3. The next time that Customer visits PostHog, their `AvailableFeatures` will be updated to reflect the standard premium features (they might have to refresh their page to properly sync the new billing information).
+4. Once this date passes their `AvailableFeatures` will be reset to the free plan unless they have subscribed within this time.
 
 
 ### Updating subscriptions

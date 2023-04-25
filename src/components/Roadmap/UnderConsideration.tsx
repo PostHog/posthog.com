@@ -57,6 +57,7 @@ export function UnderConsideration(props: IRoadmap) {
                 <Link
                     to={html_url}
                     className="text-[15px] active:top-[0.5px] active:scale-[.98] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold"
+                    data-attr={`vote-on-github:${title}`}
                 >
                     <GitHub className="w-[24px]" />
                     <span>Vote on GitHub</span>
