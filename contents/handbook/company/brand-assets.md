@@ -25,6 +25,10 @@ If you're looking for the PostHog logo, you came to the right place. Please keep
 
 The @2x version of PNGs are designed for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display). When using the logo in third party services that support uploading multiple versions (standard and hi-dpi), please be sure to include the @2x logo as it will appear crisper on newer devices, tablets and high resolution mobile devices.
 
+> **Important:** We updated our logo in 2021. Please be sure to use the _correct_ version. 👇🏼
+
+![Logo usage examples](/brand/logo-usage.png)
+
 If you have any questions or need clarification about which version to use, ask Cory, or reach out in the [PostHog Users Slack](/slack) and we'll be happy to help.
 
 ## Typography
