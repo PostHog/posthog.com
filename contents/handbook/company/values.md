@@ -18,7 +18,7 @@ This enables the strongest community growth possible. It causes the core team to
 
 Ideas are fragile. Be direct but encouraging when you encounter new ideas. If we default to providing negative criticism of new ideas, then they'll simply stop coming. Instead, default to "yes and" rather than "no but", before rejecting an idea.
 
-We should never stop iterating. You learn faster and help PostHog perform better by getting what you're working on into the real world. We expect you to ship new designs, features, or whatever is needed for your role in tiny chunks, frequently, and often before you feel ready. Do not stop iterating.
+We should never stop iterating. You learn faster and help PostHog perform better by getting what you're working on into the real world. We expect you to ship new designs, features, or whatever is needed for your role in tiny chunks, frequently, and often before you feel ready.
 
 ## Everyone codes
 
