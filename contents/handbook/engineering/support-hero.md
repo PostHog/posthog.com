@@ -28,7 +28,8 @@ If you are planning on taking a day off or you won't be available, please find s
 
 There are a few channels where customer requests can appear, so be sure to keep an eye on all of them (in order of priority):
 - [Unthread](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) is used by the CS team to track issues with our high priority customers in dedicated Slack Connect channels.
-- [Zendesk](https://posthoghelp.zendesk.com/agent/filters/5586845866651) - look for the dedicated folder for your team. If new tickets are created, then a slack notification will be sent also to your team's dedicated support channel.
+- [Zendesk](https://posthoghelp.zendesk.com/agent/filters/5586845866651) - look for the dedicated folder for your team. If new tickets are created, then a Slack notification will be sent also to your team's dedicated support channel.
+- [Community forums](/questions) - each small team can decide how to handle questions pertaining to their part of the product, but we suggest working with your small team's marketing representative to make sure each question gets answered. (Read more in the [Community](/handbook/growth/community) section of the handbook.)
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
 - [PostHog Users's Slack](https://posthog.com/slack), specifically `#community-support` and `#general` or elsewhere should be redirected to using the bug button within the app, which provides us with all the context and helps triage.
 

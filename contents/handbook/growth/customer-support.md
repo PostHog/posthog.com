@@ -16,10 +16,10 @@ We have a few different routes for users to contact us. As an open source compan
 
 These are the ways in which customers can currently reach us:
 
-- **Questions** - this offers users the best possible experience, as they can search [previously answered questions](/questions) that have been asked anywhere on posthog.com in our Docs!
-- **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions, and for higher-paying (or potential higher-paying) customers, through a dedicated channel on our main company Slack
-- **Email** - a user may email hey@posthog.com with a specific support query
-- **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
+- **[Community forums](/questions)** - This offers users the best possible experience, as the forums contain many questions that were asked directly inside docs articles.
+- **Slack (community chat)** - Our active [PostHog Users Slack](https://posthog.com/slack) is a great way to show that there are real humans building PostHog on the other side of the screen. For higher-paying (or potential higher-paying) customers, dedicated Slack channels are used within our main company Slack.
+- **Support ticket** - Customers can create a support ticket (focused around bugs or feedback) directly within the PostHog app (under the help menu).
+- **GitHub** - Sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them.
 
 ### Engineers are Support Heroes
 
@@ -27,9 +27,15 @@ We intentionally have not hired a single person dedicated to customer support. T
 
 Providing support is a responsibility shared across our engineering teams - we expect everyone to jump in and help a user if you see they have a question or problem (though obviously not at the same time!) Once you have made the initial contact or response, it is your responsibility to see it through or explicitly hand over to someone else if they are better-equipped to help.
 
-One person takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
+Support can be handled differently for each Small Team, but generally one person within a team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across the community forums and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback.
 
-### Tutorial content and workshops
+## Community forums
+
+The [Website & Docs team](/handbook/small-teams/website-docs) has rolled our own community forums, which are hosted at [posthog.com/questions](/questions) – but with a twist...
+
+[Learn more about how they work](/handbook/growth/community)
+
+## Tutorial content and workshops
 
 We want to help teams of all sizes learn how to ask the right product analytics questions to grow their product. To help, we create content in the form of [tutorials](https://posthog.com/docs/tutorials), [blog posts](https://posthog.com/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA).
 
@@ -37,4 +43,4 @@ We've also created a [AARRR Pirate Metrics Worksheet](https://docs.google.com/sp
 
 ## Customer support runbook
 
-This is maintained at the [Support Hero page](/handbook/engineering/support-hero). 
+This is maintained at the [support hero page](/handbook/engineering/support-hero). 

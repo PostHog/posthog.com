@@ -613,6 +613,10 @@
                 "url": "/handbook/growth/customer-support"
             },
             {
+                "name": "PostHog community",
+                "url": "/handbook/growth/community"
+            },
+            {
                 "name": "Sales overview",
                 "url": "/handbook/growth/sales/overview"
             },
