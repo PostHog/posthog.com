@@ -4,33 +4,33 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## 1. Support Hero
+## Overview
 
-Every week, we assign one person to be the "Support Hero" per engineering team (alternative names "Secondary", "Support Sidekick", "Infra Hero", "Luigi"). If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the satisfaction of helping them out, and contribute to a lot of different parts of our system. Your first priority should be dealing with alerts or Sentry alerts are high priority. After that, it's responding to customer support requests. Depending on how busy the week is you can do some feature work too.
+Every week, we assign one person in each engineering small team to be the "Support Hero". (Alternative names: "Secondary", "Support Sidekick", "Infra Hero", "Luigi"). If this is you, congratulations! Support hero is an intense (but super fun) week where you get to talk to a bunch of users, get the satisfaction of helping them out, and contribute to a lot of different parts of our system.
 
-
+Your first priority should be dealing with Sentry alerts that are high priority. After that, it's responding to customer support requests. Depending on how busy the week is you can do some feature work too.
 
 ### Expectations
 
-You should work your 'normal' hours during this week. There will likely be more issues than you'll have time to fix so be sure to prioritise. If there's an important and urgent issue near the end of your day, hand it off to someone on the other side of the Atlantic.
+You should work your 'normal' hours during this week. There will likely be more issues than you'll have time to fix so be sure to prioritize. If there's an important and urgent issue near the end of your day, hand it off to someone on the other side of the Atlantic.
 
 If you are planning on taking a day off or you won't be available, please find someone to swap with and update the rotation on PagerDuty. Be sure to schedule an override for both swaps and **do not alter the rotation order** to avoid affecting other members.
 
 ### Rotations
 
 - [Secondary - Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
-- [Secondary - Experimentation](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Secondary - Session recordings](https://posthog.pagerduty.com/schedules#PUPERAV)
+- [Secondary - Feature Success](https://posthog.pagerduty.com/schedules#P04FUTJ)
+- [Secondary - Monitoring](https://posthog.pagerduty.com/schedules#PUPERAV)
 - [Secondary – Pipeline](https://posthog.pagerduty.com/schedules#PM8YSH8)
 - [Secondary - Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
 ### Channels
 
-There are a couple of channels that customer requests come in so make sure you keep an eye on all of them (in order of priority):
+There are a few channels where customer requests can appear, so be sure to keep an eye on all of them (in order of priority):
 - [Unthread](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) is used by the CS team to track issues with our high priority customers in dedicated Slack Connect channels.
 - [Zendesk](https://posthoghelp.zendesk.com/agent/filters/5586845866651) - look for the dedicated folder for your team. If new tickets are created, then a slack notification will be sent also to your team's dedicated support channel.
-- [PostHog Users's Slack](https://posthog.com/slack), specifically `#community-support` and `#general` or elsewhere should be redirected to using the bug button within the app, which provides us with all the context and helps triage.
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
+- [PostHog Users's Slack](https://posthog.com/slack), specifically `#community-support` and `#general` or elsewhere should be redirected to using the bug button within the app, which provides us with all the context and helps triage.
 
 ### Communication
 
@@ -48,7 +48,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 
 As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero. At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
 
-1. Any requests where you are tagged by the Customer Success team in a dedicated slack channel as there will be some urgency needed.
+1. Any requests where you are tagged by the Customer Success Team in a dedicated Slack channel as there will be some urgency needed.
 2. Any requests assigned to you in [Unthread](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) as they will be from a high priority customer in a dedicated Slack channel.
 3. Open Zendesk tickets for your team that have `high` priority (high-paying customers).
 4. Open Zendesk tickets for your team that have `normal` priority (paying customers).
@@ -119,7 +119,7 @@ Zendesk will get populated with new issues from people outside the PostHog organ
 
 You can access the app via [posthoghelp.zendesk.com](https://posthoghelp.zendesk.com).
 
-The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
+The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting with!
 
 #### How to use Zendesk
 
@@ -150,24 +150,6 @@ Our Customer Success team uses Unthread to track the resolution of threads in Sl
 
 * Try and close conversations once resolved, so we can track MTTR for our high priority customers.
 
-### Squeak!
+### Community forums
 
-Squeak! is a community curation toolkit created by the [Website & Docs team](/handbook/small-teams/website-docs). The ultimate goal of Squeak! is to support our customers and make our community self-sustaining.
-
-#### Q&A.js by Squeak!
-
-At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (It also appears on the pricing page, and will be used in other places in the future.) This is an embedded JavaScript snippet we call [Q&A.js](https://squeak.posthog.com/toolkit/qna.js), powered by Squeak!
-
-Squeak questions appear in Zendesk.
-
-#### Answering questions using Squeak!
-
-When a question is posted, it'll appear in Zendesk with a link to Squeak. A notification is also sent to the [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification.
-
-The first time you answer a question, you'll need to create a Squeak! account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
-
-> **Important:** Do not sign up directly on squeak.cloud. Start by answering a question on the site - this creates an account within PostHog's Squeak! Cloud account. (As an alternate, you can ask an existing admin to invite you.) (Signing up directly on squeak.cloud creates a new account for you to use Squeak! on another site, which isn't what we want.)
-
-Ask in [#squeak-ping](https://posthog.slack.com/archives/C03B04XGLAZ) to be upgraded to a moderator. This will also give you access to the [admin panel](https://squeak.posthog.com/toolkit/discussion-warehouse/) hosted on [squeak.cloud](https://squeak.cloud) to manage questions with moderator controls.
-
-_Note: Squeak! currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/squeak/issues/112) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._
+The [Website & Docs team](/handbook/small-teams/website-docs) developed the community forums with the goal of making our community self-sustaining. Ensuring these questions are answered is a shared responbility of the Support Hero and the marketing team member assigned to your team. [Learn more about the community forums.](/handbook/growth/customer-support)
