@@ -9,11 +9,13 @@ availability:
 
 ---
 
-HogQL is the name of our take on SQL. It's effectively a wrapper around ClickHouse SQL, with a few tweaks, such as simplified event and person property access.
+### What is HogQL?
+
+HogQL is our take on SQL. It's effectively a wrapper around ClickHouse SQL, with a few tweaks, such as simplified event and person property access.
 
 ### Is HogQL real SQL?
 
-HogQL is real SQL. It's a translation layer over ClickHouse SQL, with a few extras such as JSON property access.
+Yes, HogQL is real SQL. It's a translation layer over ClickHouse SQL. You can use most ClickHouse features in HogQL, including JOINs and subqueries.
 
 To learn more about ClickHouse, and how it differs from traditional SQL databases, read [PostHog's ClickHouse Manual](https://posthog.com/handbook/engineering/clickhouse).
 
@@ -27,7 +29,7 @@ We've launched "HogQL Expressions" as a public beta. These expressions can be us
 
 We're also running a **private beta** of full SQL query support.
 
-![HogQL SQL insight](../../images/features/hogql/insights-hogql.png)
+![HogQL SQL insight](../../images/features/hogql/insights-sql.png)
 
 Together with a new "Event Explorer".
 
