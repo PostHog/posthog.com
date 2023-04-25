@@ -215,7 +215,7 @@ This difference is reflected in all levels of the product, but especially in pro
 
 - **Formulas:** Formulas in PostHog enable you to create custom insights using your data. A simple example of a formula would be an equation to figure out a ratio or percentage (e.g. the percentage of user who completed two different events), though advanced formulas can use more elaborate functions, such as `COS` and `SIN`.
 
-- **[SQL access](/docs/product-analytics/hogql):** SQL, which stands for Structured Query Language, is a programming language for interrogating data. While both Pendo and PostHog offer the ability to analyze data with ready-made insights and visualizations types, SQL enables you to go beyond this and examine data in any way. Only PostHog offers SQL access to your data; in Pendo you are limited to the existing graphs and widgets.
+- **SQL access:** While both PostHog and Pendo have ready-made insights and visualization types, only PostHog gives you unlimited access to your data by [writing your own SQL queries](/docs/product-analytics/hogql). This is ideal for data scientists, product managers, and engineers who want to perform advanced analysis on user data.
 
 <h4 className="mb-0">Discover what's possible with <span className="text-red">product analytics</span></h4>
 <TutorialsSlider slugs={[
