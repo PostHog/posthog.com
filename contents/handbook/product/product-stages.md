@@ -16,7 +16,7 @@ Our products fall under three main categories within the product development spe
 
 1. Minimum Viable Product (MVP)
 2. Product-Market Fit (PMF)
-3. Standalone Best-in-Class
+3. Best-in-Class
 
 ### 1. Minimum Viable Product (MVP)
 
@@ -30,7 +30,10 @@ To reach the MVP stage:
 - Move fast, things might break, but fix issues quickly
 - Ruthlessly cut scope
 - Work with a small team (about 2 people)
-- Should move quickly based on gut/existing solutions in the market.
+- Should move quickly based on gut/existing solutions in the market
+
+Anti goal:
+- Build an initial product that doesn't already exist in the market and won't feel familiar to users of competing products - for the MVP, building something totally unique feeling will be _many times_ slower and less likely to work
 
 When to go from an idea to an MVP:
 
@@ -44,8 +47,6 @@ When to go from an idea to an MVP:
 - Near feature parity with established tools
 - Differentiation mainly through integration with our other tools (If we can’t get to PMF through this then we consider doing bigger feature innovations)
 - Scalable, reliable, and profitable
-- API access for everything
-
 To progress from MVP to PMF:
 - Base decisions on customer feedback and market solutions
 - Prioritize features based on paying or potential paying customers' feedback
@@ -57,7 +58,7 @@ To progress from MVP to PMF:
 When should a product try to go from MVP to PMF:
 - Success for a product is reaching the PMF stage. We should only stop before that if the confidence in the product drops such as due to low uptake or high technical complexity
 
-### 3. Standalone Best-in-Class
+### 3. Best-in-Class
 
 - Customers are signing up and paying for that specific tool
 - Frequently mentioned and rated as the best product in that category
@@ -68,11 +69,12 @@ To advance from PMF to best-in-class:
 - Pay attention to small details
 - Innovate with major new feature bets
 - Conduct deep customer interviews to explore problems and find novel solutions
+- Our biggest customers can use this product at scale
 
-When should a product try to go from PMF to standalone best-in-class:
+When should a product try to go from PMF to best-in-class:
 
 - Not every product must reach this stage; instead, focus on deep integration with other products for combined best-in-class status
-- Pursue standalone best-in-class when the product is meant to be a core growth engine, driving customer acquisition and word of mouth
+- Pursue best-in-class when the product is meant to be a core growth engine, driving customer acquisition and word of mouth
 
 ## Avoiding Overextension
 
@@ -87,3 +89,11 @@ When should a product try to go from PMF to standalone best-in-class:
 - Teams may work on multiple products at different stages
 - Different people will excel at different stages
 - Continue investing in products even at the PMF stage to improve them for existing customers and drive adoption
+
+## When should we deprecate a product?
+
+If there already exists a product with PMF for our ICP, and we don't have PMF then likely it's an execution problem and we will likely want to switch up the team or the approach rather than deprecate the product.
+
+However, we may look to deprecate the product if:
+1. The maintenance cost is very high
+2. Or if it's a new type of product and we can't get it to PMF and the team has lost confidence in it being a good idea (however we should be wary of building these in the first place)
