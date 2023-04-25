@@ -1,6 +1,6 @@
 ---
 date: 2022-12-22
-title: PostHog vs Mixpanel
+title: "In-depth: PostHog vs Mixpanel"
 rootPage: /blog
 sidebar: Blog
 showTitle: true

@@ -1,6 +1,6 @@
 ---
 date: 2022-05-13
-title: PostHog vs Amplitude
+title: "In-depth: PostHog vs Amplitude"
 rootPage: /blog
 sidebar: Blog
 showTitle: true

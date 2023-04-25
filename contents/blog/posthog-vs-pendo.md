@@ -1,6 +1,6 @@
 ---
 date: 2023-04-25
-title: PostHog vs Pendo
+title: "In-depth: PostHog vs Pendo"
 rootPage: /blog
 sidebar: Blog
 showTitle: true

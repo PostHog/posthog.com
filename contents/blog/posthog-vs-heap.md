@@ -1,6 +1,6 @@
 ---
 date: 2023-03-10
-title: PostHog vs Heap
+title: "In-depth: PostHog vs Heap"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
