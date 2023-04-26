@@ -1,5 +1,5 @@
 ---
-title: What is a growth engineer (and how they help your startup)
+title: What is a growth engineer? (And why they're awesome)
 date: 2023-04-20
 author:
     - ian-vanagas
