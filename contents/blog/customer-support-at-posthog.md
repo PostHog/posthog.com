@@ -35,6 +35,8 @@ Naturally, it would be harder for a company that started with frictional systems
 
 ## Tools and platforms: Papercups, Slack, email, and social
 
+> Since this article was published we've launched a new way to get in touch. We now prefer to [handle bug reports, customer support and feedback via the app](https://app.posthog.com/home#supportModal) - but we've left the post below intact for posterity. 
+
 [Papercups](https://papercups.io) is a lightweight customer support tool that we chose for several reasons:
 It’s open-source, which aligns with our business philosophy.
 Its core UX is delightful and straightforward to use, making it easy to onboard new support heroes.

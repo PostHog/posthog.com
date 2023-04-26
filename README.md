@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://posthog.com/slack">Support community</a> - <a href="https://posthog.com/roadmap">Roadmap</a> - <a href="https://github.com/PostHog/posthog.com/issues/new">Open an issue</a> - <a href="https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md">Style guide</a>
+  <a href="https://app.posthog.com/home#supportModal">Support</a> - <a href="https://posthog.com/roadmap">Roadmap</a> - <a href="https://github.com/PostHog/posthog.com/issues/new">Open an issue</a> - <a href="https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md">Style guide</a>
 </p>
 
 
@@ -91,7 +91,8 @@ You’ll need to set environment variables for these. [See (private) instruction
 
 We <3 contributions big and small. In priority order (although everything is appreciated) with the most helpful first:
 
-- Give us feedback in our [Slack community](https://posthog.com/slack)
+- Join our [Slack community](https://posthog.com/slack)
+- Submit [bug reports and give us feedback in the app](https://app.posthog.com/home#supportModal)! 
 - Vote on features or get early access to beta functionality in our [roadmap](https://posthog.com/roadmap)
 - Open a PR
     - Read [our instructions above](#quick-start) on developing PostHog.com locally
