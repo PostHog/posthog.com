@@ -18,7 +18,7 @@ There are multiple ways to calculate new users in PostHog depending on your situ
 
 ### Completed event for the first time cohort
 
-The first and easiest is creating a cohort where the users completed an event (such as pageviews, identify, custom sign up) for the first time. To set this up, go to the cohort tab, click new cohort, enter a title and description, then choose "completed an event for the first time" with your event and recency. 
+The first and easiest is creating a cohort where the users completed an event (such as pageviews, [identify](/docs/getting-started/identify-users), or a custom event) for the first time. To set this up, go to the cohort tab, click new cohort, enter a title and description, then choose "completed an event for the first time" with your event and recency. 
 
 ![New users](../images/tutorials/calculating-new-returning-users//new.png)
 
@@ -28,13 +28,13 @@ You can then use this cohort of new users for further analysis.
 
 ### First time event tracker
 
-You can set up and use the [first time event tracker app](/docs/apps/first-time-event-tracker) to add a property on users to say when they completed the pageview, identify, or custom event for the first time.
+You can set up and use the [first time event tracker app](/docs/apps/first-time-event-tracker) to add property to events that says if it was the first time it happened.
 
 To set it up, search for "First Time Event Tracker" in your PostHog instance, set the event you want to track in the configuration (like `$pageview`) and enable the app. 
 
 ![First time event tracker](../images/tutorials/calculating-new-returning-users/first.png)
 
-You can then filter for recent events where `is_first_event_user` is `true` to get new users for analysis.
+You can then filter for events where `is_first_event_user` is `true` recently to get new users for analysis. This method is useful if you don't want to set up or use cohorts in your analysis. 
 
 ### Manually set user property
 
@@ -54,11 +54,11 @@ This is especially useful for projects that are on the backend, not using autoca
 
 ## Calculating returning users
 
-Unlike new users, there is only one way to calculate returning users: by identifying users who aren’t new and have completed an event recently. To create a cohort for this, you can use the new user cohort as an anti-cohort (choose "Not in cohort"), and include another criteria for completing an event recently.
+Calculating returning users is done by identifying users who aren’t new and completed an event recently. To create a cohort for this, you can use the new user cohort as an anti-cohort (choose "Not in cohort"), and include another criteria for completing an event recently.
 
 ![Returning users](../images/tutorials/calculating-new-returning-users/returning.png)
 
-If you created a `created_at` user property, you can also filter for users who weren’t created recently but completed the event. 
+Alternatively, if you created a `created_at` user property, you can also filter for users who weren’t created recently but completed the event. 
 
 ### Using a retention insight
 
