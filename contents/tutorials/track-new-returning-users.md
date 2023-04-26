@@ -20,7 +20,7 @@ There are multiple ways to calculate new users in PostHog depending on your situ
 
 The first and easiest is creating a cohort where the users completed an event (such as pageviews, [identify](/docs/getting-started/identify-users), or a custom event) for the first time. To set this up, go to the cohort tab, click new cohort, enter a title and description, then choose "completed an event for the first time" with your event and recency. 
 
-![New users](../images/tutorials/calculating-new-returning-users//new.png)
+![New users](../images/tutorials/calculating-new-returning-users/new.png)
 
 You can then use this cohort of new users for further analysis.
 
