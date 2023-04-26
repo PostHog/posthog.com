@@ -133,6 +133,16 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus }
         setValue(e.target.value)
     }
 
+    const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+        const images = Array.from(e.clipboardData.items).filter((item) =>
+            ['image/jpeg', 'image/png'].includes(item.type)
+        )
+        if (images.length > 0) {
+            const image = images[0].getAsFile()
+            await onDrop([image])
+        }
+    }
+
     useEffect(() => {
         if (cursor && textarea.current) {
             textarea.current.focus()
@@ -152,6 +162,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus }
         <div className="relative" {...getRootProps()}>
             <input className="hidden" {...getInputProps()} />
             <textarea
+                onPaste={handlePaste}
                 disabled={imageLoading}
                 autoFocus={autoFocus}
                 className="bg-white dark:bg-gray-accent-dark-hover dark:text-primary-dark border-none text-base h-[150px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
