@@ -526,10 +526,10 @@ Autocapture is preferred by many users because it's faster to setup, but some ar
             <td>Track related events as a single trackable action or behavior</td>
         </tr>
         <tr>
-            <td><strong>Reverse proxy available</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td><strong>Send events from your own domain</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send events from your own domain to capture more data</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ensure ad blockers don't block data capture</td>
         </tr>
         <tr>
             <td><strong>Cross-domain tracking</strong></td>
