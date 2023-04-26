@@ -1,5 +1,5 @@
 ---
-title: How to calculate new and returning users in PostHog
+title: How to track new and returning users in PostHog
 date: 2023-04-25
 author: ["ian-vanagas"]
 showTitle: true
@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-18.png
 tags: ["trends", "cohorts"]
 ---
 
-Understanding user growth is critical to a successful product. A lack of new users or many users failing to return is a bad sign. This tutorial goes over the different ways to calculate new and returning users in PostHog, as well as insights you can create using those calculations.
+Understanding user growth is critical to a successful product. A lack of new users or existing users churning is a bad sign. This tutorial goes over the different ways to calculate new and returning users in PostHog, as well as insights you can create using those calculations.
 
 > **How does Google Analytics calculate new vs returning users?** When you first visit a site, Google Analytics generates a client ID for your device and sets it in your cookies. GA uses this client ID cookie to calculate if a user is new (didn’t have cookie set) or returning (had cookie set). This, like any tracking, isn’t 100% accurate.
 
@@ -34,7 +34,7 @@ To set it up, search for "First Time Event Tracker" in your PostHog instance, se
 
 ![First time event tracker](../images/tutorials/calculating-new-returning-users/first.png)
 
-You can then filter for events where `is_first_event_user` is `true` recently to get new users for analysis.
+You can then filter for recent events where `is_first_event_user` is `true` to get new users for analysis.
 
 ### Manually set user property
 
@@ -50,11 +50,11 @@ posthog.capture(
 )
 ```
 
-This is especially useful for projects with many custom events, on the backend, not using autocapture, or not using `posthog-js`. 
+This is especially useful for projects that are on the backend, not using autocapture, or not using `posthog-js`, or have many custom events. 
 
 ## Calculating returning users
 
-Unlike new users, there is one way to calculate returning users. It is identifying users who aren’t new but completed an event recently. To create a cohort for this, you can use the new user cohort as an anti-cohort (choose "Not in cohort"), and include another criteria for completing an event recently.
+Unlike new users, there is only one way to calculate returning users: by identifying users who aren’t new and have completed an event recently. To create a cohort for this, you can use the new user cohort as an anti-cohort (choose "Not in cohort"), and include another criteria for completing an event recently.
 
 ![Returning users](../images/tutorials/calculating-new-returning-users/returning.png)
 
@@ -62,7 +62,7 @@ If you created a `created_at` user property, you can also filter for users who w
 
 ### Using a retention insight
 
-If you care specifically about returning users, you can set up a retention insight. This shows the number of users who complete an event, then return to complete another event at a later date. You can customize the event and timeframe depending on what you care about.
+If you care specifically about returning users, you can set up a retention insight. This shows the number of users who completed an event and then return to complete another event at a later date. You can customize the event and timeframe depending on what you care about.
 
 For example, an 8 week pageview retention graph looks like this:
 
