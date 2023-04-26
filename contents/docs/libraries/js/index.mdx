@@ -309,15 +309,15 @@ using the `getFeatureFlag()` or `isFeatureEnabled()` functions.
 Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls:
 
 ```js
-posthog.personPropertiesForFlags({'property1': 'value', property2: 'value2'})
+posthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'})
 ```
 
-Note that these are set for the entire session, and successive calls are additive: all properties you set are combined together and sent for flag evaluation.
+Note that these are set for the entire session. Successive calls are additive: all properties you set are combined together and sent for flag evaluation.
 
 Whenever you set these properties, we also trigger a reload of feature flags to ensure we have the latest values. You can disable this by passing in the optional parameter for reloading:
 
 ```js
-posthog.personPropertiesForFlags({'property1': 'value', property2: 'value2'}, false)
+posthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'}, false)
 ```
 
 At any point, you can reset these properties by calling `resetPersonPropertiesForFlags`:
@@ -328,10 +328,9 @@ posthog.resetPersonPropertiesForFlags()
 
 The same holds for [group](/manual/group-analytics) properties:
 
-
 ```js
 // set properties for a group
-posthog.groupPropertiesForFlags({'organization': {'property1': 'value', property2: 'value2'}})
+posthog.setGroupPropertiesForFlags({'organization': {'property1': 'value', property2: 'value2'}})
 
 // reset properties for a given group:
 posthog.resetGroupPropertiesForFlags('organization')
@@ -339,11 +338,11 @@ posthog.resetGroupPropertiesForFlags('organization')
 // reset properties for all groups:
 posthog.resetGroupPropertiesForFlags()
 ```
+> **Note:** You don't need to add the group names here, since these properties are automatically attached to the current group (set via `posthog.group()`). When you change the group, these properties are reset.
 
 **Automatic overrides**
 
-Whenever you call `posthog.people.set` or `posthog.identify` with person properties, we automatically add these properties to be sent to flags. The same is true for when you call `posthog.group()`.
-
+Whenever you call `posthog.people.set` or `posthog.identify` with person properties, we automatically add these properties to flag evaluation calls. The same is true for when you call `posthog.group()`.
 
 **Default overridden properties**
 
@@ -359,9 +358,7 @@ The list of properties that this overrides:
 6. $geoip_postal_code
 7. $geoip_time_zone
 
-
-This is usually what you want so any geo location based flags can work without depending on properties you manually set.
-
+This enables any geolocation-based flags to work without manually setting these properties.
 
 #### Feature Flag Payloads
 
