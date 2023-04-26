@@ -12,7 +12,6 @@ author:
 category: General
 tags:
     - Comparisons
-    - Guides
 ---
 
 Want to understand the difference between Pendo and PostHog? Here's the short answer:
