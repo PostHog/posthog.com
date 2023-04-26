@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://posthog.com/slack">Support community</a> - <a href="https://posthog.com/roadmap">Roadmap</a> - <a href="https://github.com/PostHog/posthog.com/issues/new">Open an issue</a> - <a href="https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md">Style guide</a>
+  <a href="https://app.posthog.com/home#supportModal">Support</a> - <a href="https://posthog.com/roadmap">Roadmap</a> - <a href="https://github.com/PostHog/posthog.com/issues/new">Open an issue</a> - <a href="https://github.com/PostHog/posthog.com/blob/master/STYLEGUIDE.md">Style guide</a>
 </p>
 
 
