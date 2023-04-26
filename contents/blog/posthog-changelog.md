@@ -58,7 +58,7 @@ Want to test him out? [Tag @Max-AI in the PostHog Slack, or send him a DM!](/sla
 
 [PostHog Tracks](/tracks) is a series of curated courses of tutorials and other lessons which cover common uses for particular roles, as well as general advice for all users - and it's constantly expanding!
 
-At the moment PostHog Tracks groups many of our existing tutorials together into role-based themes, but over time we plan to add to these tracks and form more robust learning opportunities. Let us know if you have any ideas for what could be included, in the [Slack](/slack)
+At the moment PostHog Tracks groups many of our existing tutorials together into role-based themes, but over time we plan to add to these tracks and form more robust learning opportunities. [Let us know if you have any ideas for what could be included](https://app.posthog.com/home#supportModal).
 
 ## April 7, 2023
 
@@ -93,7 +93,7 @@ Every issue of Product for Engineers has a theme which we explore through curate
 
 As [teased on Twitter last week](https://twitter.com/posthog/status/1633061945598148608), we’re currently trialing a new speed setting for PostHog which we call Lightning Mode. When enabled, insights will sample only 10% of your data, so you can get results faster when interrogating very large data sets. 
 
-Lightning mode is currently in beta. Want to give it a go? Let us know in [the community Slack](/slack)!
+Lightning mode is currently in beta. Want to give it a go? [Drop us a line!](https://app.posthog.com/home#supportModal)
 
 #### Beta: Sampling selector
 ![posthog sampling](../images/blog/array/sampling.gif)
@@ -128,7 +128,7 @@ You can log into PostHog now to try it out, and be bought right back to this ver
 
 We want to make it easier and faster for users to find useful information in PostHog — dashboards are a key part of that because they’re often one of the first things users build. So, we’ve added a new selection of [dashboard templates](/templates), as well as a new wizard that’s a little easier on the eye. 
 
-We’ve added a few simple templates to start with, for getting insights into areas such as online advertising, website traffic and user research. Got other ideas? Let us know in [the PostHog Slack](/slack)!
+We’ve added a few simple templates to start with, for getting insights into areas such as online advertising, website traffic and user research. Got other ideas? [Let us know!](https://app.posthog.com/home#supportModal)
 
 #### Hedgehog Mode collisions
 ![hedgehog mode collisions](../images/blog/array/when-hogs-collide.gif)

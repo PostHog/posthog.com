@@ -78,7 +78,7 @@ PostHog is open source and we love it when people contribute to making the produ
 
 We also recently ran a [PostHog App Bounty](https://github.com/PostHog/posthog/issues/8437) for a few specific apps we'd like have on PostHog. All current bounties have been assigned, but we're always open to suggestions.
 
-Whether you have an idea for an app or just need some help, please [join our community Slack channel](/slack) to get involved.
+Whether you have an idea for an app or just need some help, please [let us know](https://app.posthog.com/home#supportModal) if you'd like to get involved.
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 

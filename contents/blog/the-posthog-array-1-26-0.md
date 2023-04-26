@@ -103,7 +103,7 @@ Export data to Redshift, Postgres, and Salesforce, and leverage the PagerDuty ap
 
 We've redesigned and significantly improved the performance of the query builder in PostHog 'Trends'! 
 
-Let us know what you think about it on [Slack](/slack).
+[Let us know what you think about it](https://app.posthog.com/home#supportModal).
 
 ### [User Interviews](https://calendly.com/posthog-feedback)
 
