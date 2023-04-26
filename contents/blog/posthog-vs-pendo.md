@@ -35,13 +35,13 @@ In this article we’ll explore the crucial differences and similarities between
 ## How is PostHog different?
 
 ### 1. PostHog is an all-in one platform
-PostHog brings all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, A/B testing, and session capturing features. Pendo, on the other hand, is a more limited, and requires you to adopt other platforms, such as HotJar or LaunchDarkly, to get comparable functionality to PostHog.
+PostHog brings all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, A/B testing, and session capturing features. Pendo, on the other hand, is a more limited, and requires you to adopt other platforms, such as Hotjar or LaunchDarkly, to get comparable functionality to PostHog.
 
 ### 2. PostHog is built for engineers
-We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). As such, PostHog includes many powerful features that aren’t commonly available in tools like Pendo, which are built for more general audiences.
+We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). As such, PostHog includes many powerful features that aren’t available in tools like Pendo, which are built for more general audiences.
 
 ### 3. PostHog is open source
-Because we build for engineers first, we're also open source. You can check out [PostHog’s source code](https://github.com/PostHog), [build integrations](/docs/apps/build) or [other services](/blog/how-we-built-an-app-server) on top of the product, and even [give feedback or interact with the team via GitHub](https://github.com/PostHog).Transparency, including transparent pricing, is one of our core values.
+Because we build for engineers first, we're also open source. You can check out [PostHog’s source code](https://github.com/PostHog), [build integrations](/docs/apps/build) or [other services](/blog/how-we-built-an-app-server) on top of the product, and even [give feedback or interact with the team via GitHub](https://github.com/PostHog). Transparency, including transparent pricing, is one of our core values.
 
 <ArrayCTA />
 
@@ -52,13 +52,13 @@ Because we build for engineers first, we're also open source. You can check out 
 
 - The Free plan includes everything early-stage companies need with a generous usage limit – 1 million events and 15k recordings per month.
 
-- The Scale plan unlocks advanced features, like group analytics and A/B testing. Your first 1 million events and 15k recordings each month are free – you pay for what you use thereafter. 
+- The Scale plan unlocks advanced features, like group analytics and A/B testing. Your first 1 million events and 15k recordings each month are still free – you pay for what you use thereafter. 
 
-- The Enterprise plan unlocks extra security, compliance and permissioning features in order to meet the needs of large businesses. 
+- The Enterprise plan unlocks extra security, compliance, and permissioning features to meet the needs of large businesses. 
 
 > **Are you an early-stage startup?** Get $50k in PostHog credit, and more, by joining [our PostHog for Startups program](/startups)!
 
-In order to compare PostHog and Pendo simply and easily, we’ll focus on comparing Pendo Engage to PostHog and include features from all pricing tiers.
+To make a clean comparison between PostHog and Pendo, we’ll focus on comparing Pendo Engage to PostHog and include features from all pricing tiers.
 
 ## Core features
 <div className="overflow-x-auto -mx-5 px-5">
@@ -98,7 +98,7 @@ In order to compare PostHog and Pendo simply and easily, we’ll focus on compar
         </tr>
         <tr>
             <td><strong>In-app prompts and messages</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Send messages to users in your app</td>
         </tr>
@@ -118,11 +118,11 @@ In order to compare PostHog and Pendo simply and easily, we’ll focus on compar
 </table>
 </div>
 
-- **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product, and enable you to debug problems using built-in console logs and network performance.
+- **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product. They also enable you to debug problems using built-in console logs and network performance.
 
 - **Feature flags:** PostHog includes [multivariate feature flags](/feature-flags) that support JSON payloads, enabling you to push real-time changes to your product without redeploying. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
 
-- **A/B testing:** In PostHog, you can use the [experimentation suite](/ab-testing) to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events and deploy a final version.
+- **A/B testing:** In PostHog, you can use the [experimentation suite](/ab-testing) to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events, and deploy a final version.
 
 ### Product Analytics
 
@@ -217,7 +217,7 @@ This difference is reflected in all levels of the product, but especially in pro
 
 - **SQL access:** While both PostHog and Pendo have ready-made insights and visualization types, only PostHog gives you unlimited access to your data by [writing your own SQL queries](/docs/product-analytics/hogql). This is ideal for data scientists, product managers, and engineers who want to perform advanced analysis on user data.
 
-<h4 className="mb-0">Discover what's possible with <span className="text-red">product analytics</span></h4>
+<h4 className="mb-0">Discover what's possible with <span className="text-blue">product analytics</span></h4>
 <TutorialsSlider slugs={[
   "/tutorials/churn-rate",
   "/tutorials/funnels",
@@ -243,12 +243,13 @@ Below are some of the most popular ready-made apps which facilitate in-app messa
 
 - [Pineapple Mode](/apps/pineapple-mode): Rains pineapples all over your product, advancing the sense of chaos and entropy in the world. 🍍
 
-<h4 className="mb-0">Discover what's possible with <span className="text-red">PostHog apps</span></h4>
+<h4 className="mb-0">Discover what's possible with <span className="text-blue">PostHog apps</span></h4>
 <TutorialsSlider slugs={[
   "/tutorials/build-site-app",
   "/tutorials/feedback-interviews-site-apps",
   "/tutorials/build-your-own-posthog-app",
-  "/tutorials/how-to-connect-discord-to-posthog-with-zapier"
+  "/tutorials/how-to-connect-discord-to-posthog-with-zapier",
+  "/tutorials/react-popups"
 ]} />
 
 ### Apps and integrations
@@ -457,11 +458,6 @@ Regulatory compliance can be a critical need for many teams, especially if they 
         </tr>
         <tr>
             <td><strong>EU hosting available</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>US hosting available</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
         </tr>
