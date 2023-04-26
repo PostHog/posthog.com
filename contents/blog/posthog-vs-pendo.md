@@ -492,7 +492,7 @@ Regulatory compliance can be a critical need for many teams, especially if they 
 
 ## SDKs and tracking
 
-Pendo and PostHog both support a variety of tracking and implementation options to get your data into their platform. However, while both platforms enable you to create tracked events manually, only PostHog offers autocapture to help you get started quickly.
+Pendo and PostHog both support a variety of tracking and implementation options to get your data into their platform. Both platforms enable you to create tracked events manually, as well as offering autocapture to help you get started quickly.
 
 Autocapture is preferred by many users because it's faster to setup, but some argue that it creates too much noise or cost to be useful. We disagree, and it’s why PostHog gives you your first million events for free, every month — so you can capture events without worrying about these issues. [It’s something we feel quite strongly about](/blog/is-autocapture-still-bad).
 
