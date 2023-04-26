@@ -515,7 +515,7 @@ Autocapture is preferred by many users because it's faster to setup, but some ar
         </tr>
         <tr>
             <td><strong>Autocapture</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Automatically track events without instrumentation</td>
         </tr>
