@@ -2,6 +2,7 @@ import React from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
+import { ZoomImage } from 'components/ZoomImage'
 
 export const Markdown = ({ children }: { children: string }) => {
     return (
@@ -35,6 +36,7 @@ export const Markdown = ({ children }: { children: string }) => {
                 a: ({ node, ...props }) => {
                     return <a rel="nofollow" {...props} />
                 },
+                img: ZoomImage,
             }}
         >
             {children}
