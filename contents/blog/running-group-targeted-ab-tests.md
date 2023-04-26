@@ -1,11 +1,18 @@
 ---
 title: When and how to run group-targeted A/B tests
-sidebar: Docs
+rootPage: /blog
+sidebar: Blog
 showTitle: true
-author: ['lior-neu-ner']
-date: 2023-04-24
-featuredImage: ../images/blog/running-group-targeted-ab-tests/featured-image.png
-tags: ['experimentation']
+hideAnchor: true
+author:
+  - lior-neu-ner
+date: 2023-04-26
+featuredImage: ../images/blog/open-source-testing-tools/testinghog.png
+featuredImageType: full
+tags: 
+  - Guides
+  - Product metrics
+category: Product growth
 ---
 
 A/B tests are a powerful tool for measuring how product changes impact user behavior. However, sometimes changing how one user interacts with your product will affect how others use it too. For example, a change in the Uber app for drivers likely affects riders' experience too. In these scenarios, group-targeted experiments enable us to measure the impact of changes beyond an individual user and across a group of users.
@@ -44,7 +51,7 @@ There are three key differences to take into account when running a group-target
 
 Since you treat a group of users as a single data point in group-targeted experiments, you have less statistical power. For example, Slack has 20 million users, but only 600,000 companies using it.
 
-In practice, this means that you'll usually have to run group-targeted experiments longer than you would user-targeted experiments. It also means that your results may be more susceptible to noise.
+In practice, this means that you'll usually have to run group-targeted experiments longer than you would user-targeted experiments.
 
 ### 2. Higher randomization risk
 
@@ -62,11 +69,11 @@ For example, say a B2B SaaS tool wants users to invite coworkers to use the app.
 
 To improve the quality of insights from group-targeted experiments and address the risks mentioned above, you may want to consider running an experiment with your change at a user-level before running it at a group-level. This can help you in the following ways:
 
-### 1. Save time for changes that don't have an impact. 
+### 1. Save time for changes that don't have an impact
 
 As mentioned, lower statistical power in group-targeted experiments means you need to run your experiments longer. However, a change that does not impact behavior at a user-level will not likely translate into impact at a group-level. So you may waste time waiting for results from a group-level test that has no impact.
 
-In this case, it may be worth running a user-targeted experiment first in order to see if there is any impact on individual user behavior (which should be quicker to gain insights from because of higher statistical power) before running a group-targeted experiment.
+In this case, it may be worth running a user-targeted experiment first in order to see if there is any impact on individual user behavior (where it should be quicker to gain results from because of higher statistical power) before running a group-targeted experiment.
 
 ### 2. Gain user-level insights and identify randomization risks
 
