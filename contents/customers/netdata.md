@@ -10,7 +10,7 @@ users:
     - Product
     - Engineering
 toolsUsed:
-    - Session Recording
+    - Session replay
     - Autocapture
     - PostHog Cloud
     - Apps
@@ -38,9 +38,9 @@ Netdata is an open source monitoring and troubleshooting platform used by engine
     />
 </BorderWrapper>
 
-Netdata knows there’s more to getting product market fit than just the data, however. Teams also need to have empathy with their users and understand how they actually use the platform. [Session recording](/product/session-recording) is therefore an essential tool for Netdata.
+Netdata knows there’s more to getting product market fit than just the data, however. Teams also need to have empathy with their users and understand how they actually use the platform. [Session replay](/product/session-recording) is therefore an essential tool for Netdata.
 
-“I turned on session recording in PostHog,” said Andrew. “It’s so much better than Smartlook, which we used to use, because you can tie it to every individual event and user. If someone in our community has a problem we can get their user ID, look at their events and see how they’re using the product. We don’t have to ask for so much info… it makes a real difference.”
+“I turned on session replay in PostHog,” said Andrew. “It’s so much better than Smartlook, which we used to use, because you can tie it to every individual event and user. If someone in our community has a problem we can get their user ID, look at their events and see how they’re using the product. We don’t have to ask for so much info… it makes a real difference.”
 
 ## Forwarding analytics data to BigQuery
 
