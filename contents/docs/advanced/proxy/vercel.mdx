@@ -6,7 +6,8 @@ showTitle: true
 
 Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-configuration#rewrites) which we can use as a reverse proxy. Create a `vercel.json` file and add a `rewrites` object from the `/ingest` route to `https://app.posthog.com` or `https://eu.posthog.com`.
 
-```jsx
+```json
+// vercel.json
 {
   "rewrites": [
     {
@@ -19,7 +20,7 @@ Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-con
 
 Once done, set the `/ingest` route of your domain as the API host in your PostHog initialization like this:
 
-```jsx
+```js
 posthog.init('<ph_project_api_key>',
   {
     api_host: 'https://www.your-domain.com/ingest',
@@ -28,3 +29,10 @@ posthog.init('<ph_project_api_key>',
 ```
 
 Once updated, deploy your changes on Vercel and check that PostHog requests are going to `https://www.your-domain.com/ingest` by checking the network tab on your domain.
+
+## Setup video
+
+<iframe
+  src="https://www.youtube-nocookie.com/embed/MD-jI2moPV0"
+  className="rounded shadow-xl"
+/>
