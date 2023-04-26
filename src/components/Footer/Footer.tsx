@@ -140,7 +140,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Newsletter',
-                url: '/newsletter',
+                url: 'https://newsletter.posthog.com',
             },
             {
                 title: 'Merch',

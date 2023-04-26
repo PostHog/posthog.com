@@ -130,5 +130,5 @@ If you enjoyed reading this look at improving PostHog deployments, we recommend 
 
 > Interested on chatting about those topics? Send us an email: [harry@posthog.com](mailto:harry@posthog), [guido@posthog.com](mailto:guido@posthog), or [join our community Slack](/slack).
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
 

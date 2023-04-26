@@ -25,5 +25,5 @@ The app is maintained by PostHog - [check the repo here](https://github.com/Post
 
 We recently got the chance to meet the Avo team in Iceland at our last PostHog offsite, so we're delighted to have been able to work together on this app so quickly. We're also interested to hear your feedback as always, so let us know what you think in the [community Slack](/slack)
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
 

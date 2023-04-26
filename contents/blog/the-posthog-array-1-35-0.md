@@ -20,7 +20,7 @@ tags:
 
 PostHog 1.35.0 introduces audit logs and a brand new world map view to help you visualize where your users are coming from. Additionally, we now support organization-level SAML login on both Cloud and Self-Hosted instances. Plus, check out your project homepage for a few additional goodies!
 
-We've also recently launched a new newsletter, which we send once every two weeks! [Subscribe today](/newsletter) to hear about our latest news, what we're reading and how to get the most out of PostHog. Each issue also includes a bonus hedgehog cartoon!
+We've also recently launched a new newsletter, which we send once every two weeks! [Subscribe today](http://newsletter.posthog.com/subscribe) to hear about our latest news, what we're reading and how to get the most out of PostHog. 
 
 <blockquote class='warning-note'>
 <b>IMPORTANT!</b> If you use SAML, please read our <a href="#deprecation-and-removal-notices">deprecation notices below</a>.

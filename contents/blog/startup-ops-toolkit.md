@@ -138,4 +138,5 @@ Congrats, you have hopefully saved a bunch of precious time and mental energy th
 
 You should probably document all this stuff in your handbook! Don't have one yet? Feel free to [copy ours](https://posthog.com/handbook).
 
-> _Enjoy this? [Try to our newsletter](/newsletter) and get more like it in your inbox twice a month_ 
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+

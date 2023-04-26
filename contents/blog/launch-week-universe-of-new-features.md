@@ -90,5 +90,6 @@ Today, Neil Kakkar shares three things we've learned about running effective A/B
 
 "So good, I wrote a 1,000 word Twitter thread about it" - A Twitter user, probably
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+
 

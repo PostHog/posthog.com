@@ -121,4 +121,4 @@ However, it is tough pulling this off while making sure the entire company runs 
 
 * **New feature buzz.** We should get more marketing benefit from all the cool stuff we ship. Lots of ideas about doing more with our [public roadmap](/roadmap) here.
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_

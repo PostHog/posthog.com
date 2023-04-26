@@ -110,4 +110,5 @@ Most importantly, we hope our website is a reflection of who we are: quirky, out
 
 *P.S. If you want to join in on the fun, [we're always hiring talented people](https://posthog.com/careers). If this post resonates with you, we'd love to hear from you!*
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+

@@ -11,7 +11,7 @@ featuredImageType: full
 category: Newsletter
 ---
 
-> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](/newsletter) so you don't miss it.
+> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
 
 In [HogMail #20](https://posthog.com/blog/hogmail-20), we looked at a failed startup with product-market fit and 500k active users. So, what comes after product-market fit? More on that soon, but first...  
   
@@ -71,4 +71,4 @@ Balfour makes three final points:
 
 * [How to Measure “Hard-to-Measure” Marketing Channels](https://sparktoro.com/blog/how-to-measure-hard-to-measure-marketing-channels/) – Rand Fishkin on how to stop avoiding hard-to-measure marketing channels (e.g. native social, PR, events etc.) by learning how to measure them.
 
-> We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
+> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
