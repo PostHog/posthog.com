@@ -96,7 +96,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
         [value]
     )
 
-    const { getRootProps, getInputProps, open } = useDropzone({
+    const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
         onDrop,
         noClick: true,
         noKeyboard: true,
@@ -171,21 +171,28 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                     </Markdown>
                 </div>
             ) : (
-                <textarea
-                    onPaste={handlePaste}
-                    disabled={imageLoading}
-                    autoFocus={autoFocus}
-                    className="bg-white dark:bg-gray-accent-dark-hover dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
-                    onBlur={(e) => e.preventDefault()}
-                    name="body"
-                    value={value}
-                    onChange={handleChange}
-                    ref={textarea}
-                    required
-                    id="body"
-                    placeholder="Type more details..."
-                    maxLength={2000}
-                />
+                <div className="relative">
+                    <textarea
+                        onPaste={handlePaste}
+                        disabled={imageLoading}
+                        autoFocus={autoFocus}
+                        className="bg-white dark:bg-gray-accent-dark-hover dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
+                        onBlur={(e) => e.preventDefault()}
+                        name="body"
+                        value={value}
+                        onChange={handleChange}
+                        ref={textarea}
+                        required
+                        id="body"
+                        placeholder={'Type more details...'}
+                        maxLength={2000}
+                    />
+                    {isDragActive && (
+                        <div className="bg-white dark:bg-gray-accent-dark-hover z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-gray-accent-light after:dark:border-gray-accent-dark after:rounded-md">
+                            <p className="m-0 font-semibold">Drop image here</p>
+                        </div>
+                    )}
+                </div>
             )}
             <div className="flex items-center justify-between py-1">
                 <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full">
@@ -273,7 +280,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                 </div>
             )}
             {!value && (
-                <div className="absolute top-3 right-4">
+                <div className="absolute top-4 right-4">
                     <a
                         className="text-primary/30 hover:text-primary/50 dark:text-primary-dark/30 dark:hover:text-primary-dark/50"
                         href="https://www.markdownguide.org/cheat-sheet/"
