@@ -26,6 +26,13 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 Feature flags are a staple feature for PostHog, but we've added a bunch of new ways to add them to your product this week, depending on which libraries you're using. You can now choose to see a payload, bootstrap, or local evaluation version of the snippet, making it easier to add feature flags to your app and start testing changes.
 
+#### Experimental: DOM explorer mode
+![posthog recording dom explorer](../images/blog/array/dom-recording.png)
+
+Session replays usually capture images, rather than the DOM, but engineer Ben White thought it would be 'a cool thing' to change that. And, presto, we now have an explorable DOM mode.
+
+This is still an experimental feature. Entering DOM explorer mode will give you an interactive snapshot of the site. Most things won't work (it's just a snapshot), but you can use Browser Developer Tools to inspect the content and debug faster. 
+
 #### Beta: View insight sources
 ![posthog sql source](../images/blog/array/view-source.png)
 
