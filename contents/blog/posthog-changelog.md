@@ -24,7 +24,7 @@ Every Friday we update this page with the latest new features, fixes, and update
 #### Feature flag snippet
 ![posthog feature flag snippet](../images/blog/array/flag-snippet.png)
 
-Feature flags are a staple feature for PostHog, but we've added a bunch of new ways to add them to your product this week, depending on which libraries you're using. You can now choose to see a payload, bootstrap or local evaluation version of the snippet, making it easier to add feature flags to your app and start testing changes.
+Feature flags are a staple feature for PostHog, but we've added a bunch of new ways to add them to your product this week, depending on which libraries you're using. You can now choose to see a payload, bootstrap, or local evaluation version of the snippet, making it easier to add feature flags to your app and start testing changes.
 
 #### Beta: View insight sources
 ![posthog sql source](../images/blog/array/view-source.png)
