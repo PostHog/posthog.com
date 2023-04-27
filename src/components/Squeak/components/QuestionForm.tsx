@@ -10,10 +10,12 @@ import getAvatarURL from '../util/getAvatar'
 import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
 import Button from './Button'
+import uploadImage from '../util/uploadImage'
 
 type QuestionFormValues = {
     subject: string
     body: string
+    images: { fakeImagePath: string; file: File; objectURL: string }[]
 }
 
 type QuestionFormMainProps = {
@@ -42,6 +44,7 @@ function QuestionFormMain({
                 initialValues={{
                     subject: '',
                     body: '',
+                    images: [],
                     ...initialValues,
                 }}
                 validate={(values) => {
@@ -56,7 +59,7 @@ function QuestionFormMain({
                 }}
                 onSubmit={(values) => onSubmit(values, user)}
             >
-                {({ setFieldValue, isValid }) => {
+                {({ setFieldValue, isValid, values }) => {
                     return (
                         <Form className="mb-0">
                             <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
@@ -82,6 +85,7 @@ function QuestionFormMain({
                                         autoFocus={!subject}
                                         setFieldValue={setFieldValue}
                                         initialValue={initialValues?.body}
+                                        values={values}
                                     />
                                 </div>
                             </div>
@@ -202,20 +206,50 @@ export const QuestionForm = ({
         })
     }
 
+    const transformValues = async (values: QuestionFormValues, user: User) => {
+        if (values.images.length <= 0) return values
+        const jwt = await getJwt()
+        const profileID = user?.profile?.id
+        if (!jwt || !profileID) return values
+        let transformedBody = values.body
+        for (const image of values.images) {
+            const { file, fakeImagePath, objectURL } = image
+            URL.revokeObjectURL(objectURL)
+            if (transformedBody.includes(fakeImagePath)) {
+                try {
+                    const uploadedImage = await uploadImage(file, jwt, {
+                        field: 'images',
+                        id: profileID,
+                        type: 'api::profile.profile',
+                    })
+                    if (uploadedImage?.url) {
+                        transformedBody = transformedBody.replaceAll(fakeImagePath, uploadedImage.url)
+                    }
+                } catch (err) {
+                    console.error(err)
+                    return { ...values, body: transformedBody }
+                }
+            }
+        }
+
+        return { ...values, body: transformedBody }
+    }
+
     const handleMessageSubmit = async (values: QuestionFormValues, user: User | null) => {
         setLoading(true)
 
         if (user) {
+            const transformedValues = await transformValues(values, user)
             if (formType === 'question') {
-                await createQuestion(values)
+                await createQuestion(transformedValues)
             }
 
             if (formType === 'reply' && questionId) {
-                reply(values.body)
+                reply(transformedValues.body)
             }
 
             if (onSubmit) {
-                onSubmit(values, formType)
+                onSubmit(transformedValues, formType)
             }
 
             setLoading(false)
