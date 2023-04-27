@@ -27,7 +27,7 @@ And, that being the case, good product engineers have to care about pricing beca
 
 **This week’s theme is:** Pricing for SaaS products
 
-### 1. Talk to your customers about pricing
+## 1. Talk to your customers about pricing
 
 In his [2014 article](https://longform.asmartbear.com/pricing-determines-your-business-model?utm_source=posthog-newsletter&utm_medium=email), WP Engine founder Jason Cohen argues “price is as important as any other feature to determine product/market fit”, so it’s vital to talk to customers about it.
 
@@ -43,7 +43,7 @@ Price “fundamentally determines the nature of the product”. Failing to talk 
 
 Read [Pricing determines your business model](https://longform.asmartbear.com/pricing-determines-your-business-model) for more.
 
-### 2. Treat your pricing like a product
+## 2. Treat your pricing like a product
 Given price “fundamentally determines the nature of the product”, it makes sense to treat pricing like a product, argues PostHog’s Raquel Smith.
 
 Here’s how to do it:
@@ -60,7 +60,7 @@ Here’s how to do it:
 
 Read [How (and why) we treat pricing like a product](https://posthog.com/blog/how-to-treat-your-pricing-like-a-product?utm_source=posthog-newsletter&utm_medium=email) for more.
 
-### 3. Define your pricing principles
+## 3. Define your pricing principles
 Once you’re treating your pricing like a product, it’s important to define some principles to apply as your product and pricing evolves.
 
 What does this look like? Here’s an excerpt from ours:
@@ -69,7 +69,7 @@ What does this look like? Here’s an excerpt from ours:
 
 Read [PostHog’s pricing principles](https://posthog.com/handbook/engineering/feature-pricing?utm_source=posthog-newsletter&utm_medium=email) in our public handbook for more.
 
-### 4. Freemium + free trial can work together
+## 4. Freemium + free trial can work together
 Freemium models are better for bottom-up user growth; trials are better for driving revenue... and you can have both.
 
 Airtable ($11bn valuation) combines its freemium model with a 14-day reverse trial, where new users get time-limited access to its “most popular” paid tier, and default to the free product if they don’t convert.
@@ -82,7 +82,7 @@ Here’s Airtable’s Head of Growth, Lauren Isford, on the benefits of reverse 
 
 Read this [great primer on the different types of free trial](https://elenaverna.substack.com/p/trial-configurations-explained?utm_source=posthog-newsletter&utm_medium=email) for more.
 
-### 5. Price your product for teams, not individuals
+## 5. Price your product for teams, not individuals
 Why? As Kyle Poyar explains:
 
 > “Single-user products see poor unit economics (low retention, low LTV:CAC, high support burden). Teams products look more like the B2B SaaS economics we know and love. Team revenue is worth $$$ – it should be valued accordingly.”
@@ -93,7 +93,7 @@ PLG companies should:
 
 Read [Your guide to PLG pricing 201](https://kylepoyar.substack.com/p/your-guide-to-plg-pricing-201?utm_source=posthog-newsletter&utm_medium=email) from Kyle Poyar’s Growth Unhinged for more.
 
-### 6. Sticky features should be free (with a reasonable limit)
+## 6. Sticky features should be free (with a reasonable limit)
 This is one of our pricing principles.
 
 In PostHog, cohorts are free with a limit because porting them to another provider is tedious, making cohorts a sticky feature for us.
@@ -102,7 +102,7 @@ Sticky features improve retention, so making them free will make your product st
 
 Read [How to discover features that drive user retention](https://posthog.com/tutorials/feature-retention?utm_source=posthog-newsletter&utm_medium=email) using PostHog.
 
-### 7. Pricing changes can be great PR
+## 7. Pricing changes can be great PR
 A pricing change is just as good a marketing/growth opportunity as a flashy new feature.
 
 [Tailscale recently](https://tailscale.com/blog/pricing-v3?utm_source=posthog-newsletter&utm_medium=email) announced an improved free tier and payment plans that “should save money for essentially everyone”. Users [were delighted](https://news.ycombinator.com/item?id=35615848):
@@ -113,7 +113,7 @@ Tailscale is also a classic example of how to price for teams, not individuals.
 
 Read [How our free plan stays free](https://tailscale.com/blog/free-plan?utm_source=posthog-newsletter&utm_medium=email) for more on Tailscale’s freemium model.
 
-### 8. Charging as much as you can is short-sighted
+## 8. Charging as much as you can is short-sighted
 Also known as “pricing to value”, here’s why we don’t do it:
 
 > ”[Pricing to value] gives you no room – if the service is at all below initial expectations, the customer may churn. And given you likely don't know the precise dollar value for a given customer, you'll end up losing customers for pricing reasons, or at least being a pain to negotiate with. As a VC-backed company, I'd prefer happy customers, momentum and more growth.
@@ -122,7 +122,7 @@ Also known as “pricing to value”, here’s why we don’t do it:
 
 Read [Counterintuitive lessons about our pricing](https://posthog.com/blog/pricing-lessons?utm_source=posthog-newsletter&utm_medium=email) for more.
 
-### 9. Don’t assume $x.99 pricing is better
+## 9. Don’t assume $x.99 pricing is better
 
 Conventional pricing wisdom dictates you should pick a round number price and subtract 1 cent, but don’t assume this is right for you.
 
@@ -132,7 +132,7 @@ As highlighted by Gergely Orosz, Substack recently ran an experiment showing a �
 
 Don’t assume $x.99 is better for your product. Test it.
 
-### 10. Charging for a feature can increase usage
+## 10. Charging for a feature can increase usage
 
 It sounds counterintuitive, but this was our experience when we started charging for session replays – previously a free feature – in PostHog.
 
