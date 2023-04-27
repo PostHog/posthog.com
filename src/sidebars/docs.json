@@ -425,7 +425,7 @@
         ]
     },
     {
-        "name": "Session recording",
+        "name": "Session replay",
         "url": "/docs/session-replay",
         "icon": "SessionRecording",
         "children": [
