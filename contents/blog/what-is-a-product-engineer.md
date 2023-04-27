@@ -81,7 +81,7 @@ The end goal of a product engineer is to ship a great product. Briefs, mockups, 
 
 Product engineers ideate new ways to make the product better. They then iterate on these ideas for improving the product and do it fast. This means a lot of experiments and tests. Tools like A/B tests and feature flags help with this.
 
-> **Product engineer vs growth engineer:** Product engineers experiment to improve a specific product they own. Growth engineers experiment at a higher level, focusing on increasing growth metrics like signups, subscriptions, and revenue across products. [Learn more about growth engineers in our post about them](/blog/what-is-a-growth-engineer).
+> **Product engineers vs growth engineers:** Product engineers experiment to improve a specific product they own. Growth engineers experiment at a higher level, focusing on increasing growth metrics like signups, subscriptions, and revenue across products. Read our [guide to growth engineers](/blog/what-is-a-growth-engineer) and why they're awesome to learn more.
 
 Because they build prototypes and are self-reliant, product engineers often have a history of doing just that. They are more likely to have side projects they’ve built themselves. Some might be former founders or have unorthodox, self-taught backgrounds. They make great teammates in hackathons. [Ghost](https://ghost.org/) looks for these people:
 
