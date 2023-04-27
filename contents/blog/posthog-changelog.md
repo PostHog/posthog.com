@@ -29,7 +29,7 @@ Feature flags are a staple feature for PostHog, but we've added a bunch of new w
 #### Experimental: DOM explorer mode
 ![posthog recording dom explorer](../images/blog/array/dom-recording.png)
 
-Session replays usually capture images, rather than the DOM, but engineer Ben White thought it would be 'a cool thing' to change that. And, presto, we now have an explorable DOM mode.
+Our session replays look like video, but we really we capture the DOM and make that look like video. Engineer Ben White thought it would be 'a cool thing' to use the DOM for debugging. And, presto, we now have an explorable DOM mode.
 
 This is still an experimental feature. Entering DOM explorer mode will give you an interactive snapshot of the site. Most things won't work (it's just a snapshot), but you can use Browser Developer Tools to inspect the content and debug faster. 
 
