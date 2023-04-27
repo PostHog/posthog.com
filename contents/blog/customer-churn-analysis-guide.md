@@ -230,7 +230,7 @@ If you're interested in early-stage startups and product-led growth, you may fin
 
 - Another piece from James on [how we made something people want](/blog/making-something-people-want)
 
-You can also [sign up to our newsletter](/newsletter). We send it every two weeks. It's full of articles like this.
+You can also [sign up to our newsletter](https://newsletter.posthog.com/subscribe). We send it every two weeks. It's full of articles like this.
 
 > ## Appendix
 >
