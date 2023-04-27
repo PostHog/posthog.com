@@ -43,9 +43,9 @@ This is usually seen in the following types of products:
 
 > **Example:** Suppose Slack wants to improve the usage of a new video calling feature. Improving the feature's discoverability for a single user will increase their own usage with it, but since they use it with their coworkers, their coworkers will also discover it.
 
-## Group-targeted vs user-level experiments
+## Risks in group-targeted experiments
 
-There are three key differences to take into account when running a group-targeted experiment versus a user-level one:
+There are three key risks to take into consideration when running a group-targeted experiment:
 
 ### 1. Less statistical power
 
@@ -67,11 +67,11 @@ For example, say a B2B SaaS tool wants users to invite coworkers to use the app.
 
 The results show an increase in invites sent, but it's hard to know how individual users used the button. For example, what are the roles or skill sets of team members who are most likely to interact with the button and send invites?
 
-## Combining user-targeted and group-targeted experiments to reduce risk
+## How to reduce risk in group-target experiments
 
-To improve the quality of insights from group-targeted experiments and address the risks mentioned above, you may want to consider running an experiment with your change at a user-level before running it at a group-level. This can help you in the following ways:
+To reduce these risks, consider running a small user-level experiment before running a larger group-level one. This can help you in the following ways:
 
-### 1. Save time for changes that don't have an impact
+### 1. Quickly eliminate changes that have no impact
 
 As mentioned, lower statistical power in group-targeted experiments means you need to run your experiments longer. However, a change that doesn't impact behavior at a user-level won't, in all likelihood, impact behavior at a group-level either.
 
@@ -87,20 +87,27 @@ This can also help you identify randomization risks. For example, let's say a B2
 
 First, ensure you have [set up a group](docs/product-analytics/group-analytics#getting-started) in PostHog. Next, go to your PostHog dashboard and create a [new experiment](docs/experiments/manual#creating-an-experiment).
 
-In the New Experiment screen, select the Participant type. By default, it will show `Persons` (i.e. a user-level experiment). Click on the drop-down and select your new group.
+In the New Experiment screen, select the Participant type. By default, it will show `Persons` (i.e. a user-targeted experiment). Click on the drop-down and select your new group.
 
 ![Screenshot of setting the participant type in an experiment](../images/blog/running-group-targeted-ab-tests/participant-type.png)
 
 Next, set your experiment goal and secondary metrics as usual. 
 
-A handy feature especially useful for group-level experiments is the Minimum Acceptable Improvement calculator at the bottom of the page. Since group-level experiments have lower statistical power, this will recommend a time for how long you should run your experiment in order to see results.
+A handy feature especially useful for group-targeted experiments is the Minimum Acceptable Improvement calculator at the bottom of the page. Since group-targeted experiments have lower statistical power, this will recommend a time for how long you should run your experiment in order to see results.
 
 ![Screenshot of the Minimum Acceptable Improvement calculator](../images/blog/running-group-targeted-ab-tests/minimum-acceptable-improvement.png)
 
+## Conclusion
 
+To summarize, remember these 3 points when running group-targeted experiments:
+
+1. Group-targeted experiments enable you to measure the impact of a change on an entire group of users,
+2. Group-targeted experiments have less stastical power and provide fewer user-level insights.
+3. You can reduce your risks by running a small, user-targeted experiment first.
 
 ## Further reading
 
-- [Running experiments on new users](/blog/new-user-experiments)
-- [How to build, analyze and optimize conversion funnels in PostHog](/blog/frontend-vs-backend-group-analytics)
-- [How to run Experiments without feature flags](https://posthog.com/blog/experiments)
+To learn more about running product experiments, read our guides on:
+- [How to measure product engagement](/blog/how-to-measure-product-engagement)
+- [The most useful product health metrics](/blog/product-health-metrics)
+- [The most useful B2B SaaS product metrics](https://posthog.com/blog/b2b-saas-product-metrics)
