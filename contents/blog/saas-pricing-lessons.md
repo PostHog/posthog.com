@@ -13,7 +13,7 @@ tags:
   - Guides
 ---
 
-> This post is from our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> Orginally published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. Don't miss out... [subscribe here](https://newsletter.posthog.com/subscribe).
 
 We build PostHog for [product engineers](/blog/what-is-a-product-engineer). We define product engineers as full-stack engineers who:
 
@@ -146,4 +146,4 @@ Read [What we've learned about multi-product pricing (so far)](https://posthog.c
 
 *Words by Andy Vandervell, who is enduring a years-long unscheduled disassembly.*
 
-> This post is from our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> Orginally published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. Don't miss out... [subscribe here](https://newsletter.posthog.com/subscribe).
