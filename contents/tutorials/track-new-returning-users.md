@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-18.png
 tags: ["trends", "cohorts"]
 ---
 
-Understanding user growth is critical to a successful product. A lack of new users or existing users churning is a bad sign. This tutorial goes over the different ways to calculate new and returning users in PostHog, as well as insights you can create using those calculations.
+Understanding user growth is critical to building a successful product. A lack of new users or existing users churning is a bad sign. This tutorial goes over the different ways to calculate new and returning users in PostHog, as well as insights you can create using these calculations.
 
 > **How does Google Analytics calculate new vs returning users?** When you first visit a site, Google Analytics generates a client ID for your device and sets it in your cookies. GA uses this client ID cookie to calculate if a user is new (didn’t have cookie set) or returning (had cookie set). This, like any tracking, isn’t 100% accurate.
 
@@ -28,7 +28,7 @@ You can then use this cohort of new users for further analysis.
 
 ### First time event tracker
 
-You can set up and use the [first time event tracker app](/docs/apps/first-time-event-tracker) to add property to events that says if it was the first time it happened.
+You can set up and use the [first time event tracker app](/docs/apps/first-time-event-tracker) to add a property to events that indicates if it was the first time it happened.
 
 To set it up, search for "First Time Event Tracker" in your PostHog instance, set the event you want to track in the configuration (like `$pageview`) and enable the app. 
 
@@ -54,7 +54,7 @@ This is especially useful for projects that are on the backend, not using autoca
 
 ## Calculating returning users
 
-Calculating returning users is done by identifying users who aren’t new and completed an event recently. To create a cohort for this, you can use the new user cohort as an anti-cohort (choose "Not in cohort"), and include another criteria for completing an event recently.
+Calculating returning users is done by identifying users who aren’t new and have completed an event recently. To create a cohort for this, you can use the new user cohort as an anti-cohort (choose "Not in cohort"), and include another criteria for completing an event recently.
 
 ![Returning users](../images/tutorials/track-new-returning-users/returning.png)
 
