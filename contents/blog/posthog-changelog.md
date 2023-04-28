@@ -1,5 +1,5 @@
 ---
-date: 2023-04-21
+date: 2023-04-28
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -18,6 +18,32 @@ featuredImageType: full
 Every Friday we update this page with the latest new features, fixes, and updates on PostHog Cloud in the last seven days. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+
+## April 28, 2023
+
+#### Feature flag snippet
+![posthog feature flag snippet](../images/blog/array/flag-snippet.png)
+
+Feature flags are a staple feature for PostHog, but we've added a bunch of new ways to add them to your product this week, depending on which libraries you're using. You can now choose to see a payload, bootstrap, or local evaluation version of the snippet, making it easier to add feature flags to your app and start testing changes.
+
+#### Experimental: DOM explorer mode
+![posthog recording dom explorer](../images/blog/array/dom-recording.png)
+
+Our session replays look like video, but we really we capture the DOM and make that look like video. Engineer Ben White thought it would be 'a cool thing' to use the DOM for debugging. And, presto, we now have an explorable DOM mode.
+
+This is still an experimental feature. Entering DOM explorer mode will give you an interactive snapshot of the site. Most things won't work (it's just a snapshot), but you can use Browser Developer Tools to inspect the content and debug faster. 
+
+#### Beta: View insight sources
+![posthog sql source](../images/blog/array/view-source.png)
+
+Insight filters follow a declarative format which you can now view and edit directly. Open the insight editor by clicking on the `{}` icon next to the save insight button and you'll see the source for the current insight configuration. You can copy-and-paste complete or partial insights to build insights in new ways.
+
+This is a beta feature, so find out more in [the docs](/docs/product-analytics/trends#view-source-beta) or [drop us a request](https://app.posthog.com/home#supportModal) if you want to try it out!
+
+#### Data management history
+![posthog history](../images/blog/array/history-management.png)
+
+"I forgot that I meant to demo this," is how Paul D'Ambra announced this feature to the team this week. It adds an activity log for event and property definition edits in PostHog's data management tool. Confused by a sudden change in metrics? This will help you find out if it's because someone has tinkered with your events and defintions. 
 
 ## April 21, 2023
 
