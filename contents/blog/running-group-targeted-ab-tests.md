@@ -101,8 +101,8 @@ To conclude, there are three key points to remember when running experiments on 
 
 1. They're useful for understanding if/how changes in individual usage impact related groups
 
-2. Group-targeted experiments have less stastical power, therefore they prodive fewer user-level insights, and take longer to run.
+2. Group-targeted experiments have less statistical power than user-level tests. This means they take longer to run and fewer user-level insights.
 
-3. Running smaller, user-levels tests first is a good way to reduce the unique risks of group-targeted experiments.
+3. Running smaller, user-level tests first is a good way to reduce the unique risks of group-targeted experiments.
 
-Read our [A/B testing product manual](/docs/experiments) and [what we've learned abour running A/B tests](/blog/experiments) at PostHog for more A/B testing tips.
+Read our [A/B testing product manual](/docs/experiments) and [what we've learned about running A/B tests](/blog/experiments) at PostHog for more A/B testing tips.
