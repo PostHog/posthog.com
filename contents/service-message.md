@@ -45,7 +45,7 @@ No. No events or data will be lost. Instead, data will be delayed during the mai
 <details> 
   <summary> How do I report an issue not covered here? </summary>
     <br />
-If you're seeing a bug or other unexpected behaviour, you can report it in the app using the drop down menu in the top right and selecting 'Report bug / get support'. Alternatively, you can ask us a question using the button below. 
+If you're seeing a bug or other unexpected behaviour, you can [report it in the app](http://app.posthog.com/home#supportModal). Alternatively, you can [ask us a question via the community forum](/questions). 
 
 If you suspect an outage or incident affecting PostHog services, we recommend checking [our status metrics](https://status.posthog.com/) before reporting.
 </details>
