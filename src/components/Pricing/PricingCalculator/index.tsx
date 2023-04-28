@@ -28,7 +28,20 @@ export const PricingCalculator = () => {
 
     useEffect(() => {
         setSliderValue(13.815510557964274)
+        setSessionRecordingSliderValue(9.615805480084347)
     }, [])
+
+    const handleSlider = (value: number) => {
+        if (value >= 13.815510557964274) {
+            setSliderValue(value)
+        }
+    }
+
+    const handleSessionRecordingSlider = (value: number) => {
+        if (value >= 9.615805480084347) {
+            setSessionRecordingSliderValue(value)
+        }
+    }
 
     return (
         <section className={`${section} mb-12`}>
@@ -56,10 +69,10 @@ export const PricingCalculator = () => {
                             <div className="pt-4 pb-6">
                                 <LogSlider
                                     stepsInRange={100}
-                                    marks={[1000000, 10000000, 100000000, 1000000000]}
-                                    min={1000000}
+                                    marks={[1, 1000, 1000000, 1000000000]}
+                                    min={1}
                                     max={1000000000}
-                                    onChange={(value) => setSliderValue(value)}
+                                    onChange={handleSlider}
                                     value={sliderValue}
                                 />
                             </div>
@@ -82,10 +95,10 @@ export const PricingCalculator = () => {
                             <div className="pt-4 pb-6">
                                 <LogSlider
                                     stepsInRange={100}
-                                    marks={[15000, 50000, 150000, 500000]}
-                                    min={15000}
+                                    marks={[1, 50, 15000, 500000]}
+                                    min={1}
                                     max={500000}
-                                    onChange={(value) => setSessionRecordingSliderValue(value)}
+                                    onChange={handleSessionRecordingSlider}
                                     value={sessionRecordingSliderValue}
                                 />
                             </div>
