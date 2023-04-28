@@ -1,6 +1,6 @@
 import qs from 'qs'
-import { ProfileData, QuestionData, StrapiRecord, TopicData } from 'lib/strapi'
-import useSWR, { useSWRConfig } from 'swr'
+import { QuestionData, StrapiRecord, TopicData } from 'lib/strapi'
+import useSWR from 'swr'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 
@@ -66,8 +66,7 @@ const query = (id: string | number, isModerator: boolean) =>
     )
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
-    const { getJwt, fetchUser, user, isModerator } = useUser()
-    const { mutate: globalMutate } = useSWRConfig()
+    const { getJwt, fetchUser, isModerator } = useUser()
     const posthog = usePostHog()
 
     const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
@@ -76,6 +75,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         data: question,
         error,
         isLoading,
+        mutate,
     } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
         const res = await fetch(
             url,
@@ -101,42 +101,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     }
 
     const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
-
-    // This mutate method takes into account the fact that both ids and permalinks can be
-    // used interchangeably to fetch a question.
-    //
-    // This ensures that data is kept in sync across all instances of the same question.
-    const mutate = async (data?: any) => {
-        // First, we mutate the key for whichever type of identifier was passed in to,
-        // this specific hook.
-        globalMutate(key, data, {
-            optimisticData: data,
-        })
-
-        if (!question) return
-
-        // Then, based on if it's a permalink or an id, we mutate the other key as well.
-        if (typeof id === 'string') {
-            globalMutate(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(question.id, isModerator)}`,
-                data,
-                {
-                    optimisticData: data,
-                }
-            )
-        } else {
-            globalMutate(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(
-                    question?.attributes?.permalink,
-                    isModerator
-                )}`,
-                data,
-                {
-                    optimisticData: data,
-                }
-            )
-        }
-    }
 
     const reply = async (body: string) => {
         try {
@@ -338,11 +302,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             },
         })
 
-        const copiedData = Object.assign({}, questionData)
-
-        copiedData.attributes?.topics?.data?.push(topic)
-
-        await mutate(copiedData)
+        mutate()
     }
 
     const removeTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
@@ -361,13 +321,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             },
         })
 
-        const copiedData = Object.assign({}, questionData)
-
-        if (!copiedData.attributes?.topics?.data) return
-
-        copiedData.attributes.topics.data = copiedData.attributes?.topics?.data?.filter((t) => t.id !== topic.id)
-
-        await mutate(copiedData)
+        mutate()
     }
 
     const archive = async (archive: boolean) => {
