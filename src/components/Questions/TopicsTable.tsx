@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Link from 'components/Link'
-import { dateToDays, dayFormat } from '../../utils'
 import {
     API,
     AbTesting,
@@ -26,6 +25,9 @@ import {
 } from 'components/ProductIcons'
 
 import { Billing, Deploy, Migrate, More } from 'components/NotProductIcons'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 
 const topicIcons = {
     'a/b testing': AbTesting,
@@ -88,7 +90,7 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                                         </div>
                                         <div className="col-span-4 md:col-span-2 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                             {latestQuestion?.attributes?.createdAt &&
-                                                dayFormat(dateToDays(latestQuestion?.attributes?.createdAt))}
+                                                dayjs(latestQuestion.attributes.createdAt).fromNow()}
                                         </div>
                                     </div>
                                 </Link>

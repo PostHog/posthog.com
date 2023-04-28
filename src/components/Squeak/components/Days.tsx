@@ -1,16 +1,14 @@
 import React from 'react'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 
 export const Days = ({ created }: { created: string | undefined }) => {
     if (!created) {
         return null
     }
 
-    const today = new Date()
-    const posted = new Date(created)
-    const diff = today.getTime() - posted.getTime()
-    const days = Math.round(diff / (1000 * 3600 * 24))
-
-    return <span className="text-sm opacity-50">{days <= 0 ? 'Today' : `${days} day${days === 1 ? '' : 's'} ago`}</span>
+    return <span className="text-sm opacity-50">{dayjs(created).fromNow()}</span>
 }
 
 export default Days
