@@ -55,7 +55,7 @@ import posthog from "posthog-js";
 #### Step 2: Initialize the Plugin 
 
 Next, I will create a plugin and assign PostHog to Vue’s global properties. The code will differ depending on my version of Vue. 
-Note, in Vue 3.x you can't use globalProperties with the composition api. If you are using the composition api use [Provide/Inject](https://posthog.com/tutorials/posthog-for-vuejs#method-2-use-provide--inject)
+In Vue 3.x, you can't use `globalProperties` with the composition API. If you are using the composition API use [Provide/Inject](#method-2-use-provide--inject)
 
 **Vue 3.x:** 
 
