@@ -10,6 +10,9 @@ export default function CommunityPage() {
     const { user, fetchUser } = useUser()
     const { questions, isLoading, fetchMore } = useQuestions({
         filters: {
+            resolved: {
+                $ne: true,
+            },
             profileSubscribers: {
                 id: {
                     $eq: user?.profile?.id,
