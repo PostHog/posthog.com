@@ -5,7 +5,7 @@ showTitle: true
 author: ['lior-neu-ner']
 date: 2023-04-13
 featuredImage: ../images/tutorials/banners/tutorial-13.png
-tags: ["session recordings"]
+tags: ["session recording"]
 ---
 
 Waiting for slow web apps is like watching paint dry. It's the bane of productivity, the destroyer of efficiency, and a leading cause of [customer churn](/blog/customer-churn-analysis-guide).
