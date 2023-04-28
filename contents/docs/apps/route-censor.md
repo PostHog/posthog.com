@@ -26,7 +26,7 @@ Information and examples of the properties which can be configured are found in 
 
 To provide routes, attach a JSON file, similar to the example at `./src/assets/exampleRoutes.json`, that matches the Routes type defined in `./src/types/index.ts`.
 
-The routes JSON includes an array of all pathnames that you would like to censor. The routes should match the pattern defined by the first parameter of the React Router V6 matchRoutes function, with an extra attribte included. Includes should contain a list of variables from the path pattern that you wish to censor.
+The routes JSON includes an array of all pathnames that you would like to censor. The routes should match the pattern defined by the first parameter of the React Router V6 matchRoutes function, with an extra attribute included. Includes should contain a list of variables from the path pattern that you wish to censor.
 
 All properties in these lists should contain either a full URL (ex: "https://www.example.com/super-secret-id/1234") or a pathname (ex: "/super-secret-id/1234"). The default values should already include all properties with URLs that PostHog tracks by default, but more can be added to this list when configuring your plugin if needed.
 
