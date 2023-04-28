@@ -52,7 +52,6 @@ export default function Plain({ data }) {
                     <MDXRenderer images={images}>{body}</MDXRenderer>
                 </MDXProvider>
             </article>
-            <Section />
         </Layout>
     )
 }
