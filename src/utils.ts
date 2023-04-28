@@ -19,3 +19,7 @@ export function dayFormat(days: number) {
 export function capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1)
 }
+
+export function determineIfInIframe(): boolean {
+    return window.self !== window.top
+}

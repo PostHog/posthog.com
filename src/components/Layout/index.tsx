@@ -3,9 +3,8 @@ import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
 import usePostHog from '../../hooks/usePostHog'
+import { determineIfInIframe } from '../../utils'
 import { SearchProvider } from 'components/Search/SearchContext'
-import { UserProvider } from 'hooks/useUser'
-import { SWRConfig } from 'swr'
 
 import './Fonts.scss'
 import './Layout.scss'
@@ -21,13 +20,16 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
         }
     }, [])
 
+    // We only render layout content in iframes - this is for the 500 page of the PostHog app (/service-message)
+    const isInFrame = determineIfInIframe()
+
     return (
         <SearchProvider>
             <div className={className}>
-                <Header />
+                {!isInFrame && <Header />}
                 <main>{children}</main>
-                <Footer />
-                <CookieBanner />
+                {!isInFrame && <Footer />}
+                {!isInFrame && <CookieBanner />}
             </div>
         </SearchProvider>
     )
