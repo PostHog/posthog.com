@@ -3,7 +3,6 @@ import React, { Dispatch, InputHTMLAttributes, SetStateAction, useRef, useState 
 import { useFormik } from 'formik'
 import { button } from 'components/CallToAction'
 import * as Yup from 'yup'
-import { useLocation } from '@reach/router'
 import Link from 'components/Link'
 import { animateScroll as scroll } from 'react-scroll'
 import { motion } from 'framer-motion'
@@ -19,6 +18,7 @@ export interface IField {
     hubspotField: string
     options?: { value?: string; hubspotValue: string | number; label?: string }[]
     type?: string
+    objectTypeId?: string
 }
 
 interface IInputProps {
@@ -42,9 +42,19 @@ interface IInputProps {
     placeholder?: string
 }
 
-export const TextArea = (props: React.RefAttributes<HTMLTextAreaElement> & IInputProps) => {
-    const { setFieldValue, values, reference, options, errors, validateField, openOptions, setOpenOptions, ...other } =
-        props
+export const TextArea = (props: React.RefAttributes<HTMLTextAreaElement> & IInputProps & { fields: IField[] }) => {
+    const {
+        setFieldValue,
+        values,
+        reference,
+        options,
+        errors,
+        validateField,
+        openOptions,
+        setOpenOptions,
+        fields,
+        ...other
+    } = props
     const error = errors[props.name]
     const [height, setHeight] = useState<string | number>('auto')
     return (
@@ -66,9 +76,19 @@ export const TextArea = (props: React.RefAttributes<HTMLTextAreaElement> & IInpu
     )
 }
 
-export const Input = (props: InputHTMLAttributes<HTMLInputElement> & IInputProps) => {
-    const { setFieldValue, values, reference, options, errors, validateField, openOptions, setOpenOptions, ...other } =
-        props
+export const Input = (props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { fields: IField[] }) => {
+    const {
+        setFieldValue,
+        values,
+        reference,
+        options,
+        errors,
+        validateField,
+        openOptions,
+        setOpenOptions,
+        fields,
+        ...other
+    } = props
     const error = errors[props.name]
     return (
         <label className={`${inputContainerClasses} ${error ? 'pb-8' : ''}`} htmlFor={other.name}>
@@ -88,7 +108,9 @@ export const Input = (props: InputHTMLAttributes<HTMLInputElement> & IInputProps
     )
 }
 
-export const Radio = (props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { label?: string }) => {
+export const Radio = (
+    props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { label?: string; fields: IField[] }
+) => {
     const {
         setFieldValue,
         values,
@@ -99,6 +121,7 @@ export const Radio = (props: InputHTMLAttributes<HTMLInputElement> & IInputProps
         label,
         openOptions,
         setOpenOptions,
+        fields,
         ...other
     } = props
 
@@ -149,8 +172,9 @@ export const Radio = (props: InputHTMLAttributes<HTMLInputElement> & IInputProps
     )
 }
 
-export const RadioGroup = (props: InputHTMLAttributes<HTMLInputElement> & IInputProps) => {
-    const { options, errors, validateField, openOptions, setOpenOptions, values, setFieldValue, ...other } = props
+export const RadioGroup = (props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { fields: IField[] }) => {
+    const { options, errors, validateField, openOptions, setOpenOptions, values, setFieldValue, fields, ...other } =
+        props
     const error = errors[props.name]
     const open = openOptions.includes(props.name)
     const ref = useRef()
@@ -221,52 +245,23 @@ export default function Form({
     initialValues = {},
     fields,
     validationSchema,
+    onSubmit,
 }: {
     initialValues?: {
         [k: string]: any
     }
     fields: IField[]
     validationSchema: any
+    postURL: string
+    pageName: string
+    onSubmit: () => void
 }) {
-    const { href } = useLocation()
     const [submitted, setSubmitted] = useState(false)
     const [openOptions, setOpenOptions] = useState<string[]>([])
     const [confetti, setConfetti] = useState(true)
     const { handleSubmit, values, handleChange, setFieldValue, errors, validateField } = useFormik({
         initialValues: Object.fromEntries(fields.map((field) => [field.name, initialValues[field.name]])),
-        onSubmit: async (values) => {
-            const submission = {
-                pageUri: href,
-                pageName: 'Contact sales',
-                fields: fields.map((field) => {
-                    const value = values[field.name]
-                    const option = field.options?.find((option) => value === option.value)?.hubspotValue
-                    return {
-                        objectTypeId: '0-1',
-                        name: field.hubspotField,
-                        value: option || value,
-                    }
-                }),
-            }
-
-            const res = await fetch(
-                `https://api.hsforms.com/submissions/v3/integration/submit/6958578/21de475a-af2c-47c2-ae02-414aefdfdeb4`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify(submission),
-                }
-            ).catch((err) => {
-                console.log(err)
-                return err
-            })
-            if (res.status === 200) {
-                setSubmitted(true)
-                scroll.scrollToTop()
-            }
-        },
+        onSubmit: (values) => onSubmit(values, setSubmitted),
         validationSchema,
         validateOnChange: false,
     })
@@ -305,27 +300,42 @@ export default function Form({
                 to advance through the form at a breakneck pace!
             </p>
             <div className="grid divide-y divide-dashed divide-gray-accent-light border border-gray-accent-light border-dashed">
-                {fields.map(({ Component, name, placeHolder, type = 'text', options = [], ...other }, index) => {
-                    return (
-                        <Component
-                            autoFocus={index === 0}
-                            key={name}
-                            onChange={handleChange}
-                            value={values[name]}
-                            name={name}
-                            placeholder={placeHolder}
-                            setFieldValue={setFieldValue}
-                            values={values}
-                            type={type}
-                            options={options}
-                            errors={errors}
-                            validateField={validateField}
-                            openOptions={openOptions}
-                            setOpenOptions={setOpenOptions}
-                            {...other}
-                        />
-                    )
-                })}
+                {fields.map(
+                    (
+                        {
+                            Component,
+                            name,
+                            placeHolder,
+                            type = 'text',
+                            options = [],
+                            objectTypeId,
+                            hubspotField,
+                            ...other
+                        },
+                        index
+                    ) => {
+                        return (
+                            <Component
+                                autoFocus={index === 0}
+                                key={name}
+                                onChange={handleChange}
+                                value={values[name]}
+                                name={name}
+                                placeholder={placeHolder}
+                                setFieldValue={setFieldValue}
+                                values={values}
+                                type={type}
+                                options={options}
+                                errors={errors}
+                                validateField={validateField}
+                                openOptions={openOptions}
+                                setOpenOptions={setOpenOptions}
+                                fields={fields}
+                                {...other}
+                            />
+                        )
+                    }
+                )}
             </div>
             <button className={button(undefined, 'full', 'mt-4', 'sm')} type="submit">
                 Send message

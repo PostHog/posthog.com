@@ -7,6 +7,8 @@ import Form, { IField, Input, RadioGroup, TextArea } from 'components/Contact/Fo
 import * as Yup from 'yup'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
+import SEO from 'components/seo'
+import { useLocation } from '@reach/router'
 
 const benefits = [
     'A year of PostHog',
@@ -40,34 +42,43 @@ const fields = [
         name: 'companyName',
         placeHolder: 'Company name',
         Component: Input,
-        hubspotField: 'company',
+        hubspotField: 'name',
+        objectTypeId: '0-2',
     },
     {
         name: 'companyDomain',
         placeHolder: 'Company domain',
         Component: Input,
-        hubspotField: 'companydomain',
+        hubspotField: 'domain',
     },
     {
         name: 'postHogOrganizationName',
         placeHolder: 'PostHog organization name',
         Component: Input,
-        hubspotField: 'postHogOrganizationName',
+        hubspotField: 'self_registration_organization_name',
     },
     {
         name: 'totalFunding',
         placeHolder: 'How much in total funding have you raised (USD)',
-        Component: Input,
-        type: 'number',
-        min: 0,
-        hubspotField: 'maus',
+        Component: RadioGroup,
+        options: [
+            { label: 'Boostrapped', hubspotValue: -1 },
+            { label: 'Under $100k', hubspotValue: 100_000 },
+            { label: '$100k - $500k', hubspotValue: 500_000 },
+            { label: '$500k - $1m', hubspotValue: 1_000_000 },
+            { label: '$1m - $5m', hubspotValue: 5_000_000 },
+            { label: 'More than $5m', hubspotValue: 100_000_000_000 },
+        ],
+        hubspotField: 'self_registration_raised',
+        objectTypeId: '0-2',
     },
     {
         name: 'dateIncorporated',
         placeHolder: 'The date that your company was incorporated',
         Component: Input,
         type: 'date',
-        hubspotField: 'dateIncorporated',
+        hubspotField: 'self_registration_company_founded',
+        objectTypeId: '0-2',
     },
 ]
 
@@ -79,7 +90,7 @@ const validationSchema = Yup.object().shape({
     companyDomain: Yup.string().required('Please enter your company name'),
     postHogOrganizationName: Yup.string().required('Please enter your company name'),
     totalFunding: Yup.number().required('Please select a value'),
-    dateIncorporated: Yup.date().required('Please enter a date'),
+    dateIncorporated: Yup.string().required('Please enter a date'),
 })
 
 const Spotlight = ({ frontmatter: { title, featuredImage }, excerpt, fields: { slug } }) => {
@@ -94,6 +105,8 @@ const Spotlight = ({ frontmatter: { title, featuredImage }, excerpt, fields: { s
 }
 
 export default function Startups() {
+    const { href } = useLocation()
+
     const { spotlight } = useStaticQuery(graphql`
         {
             spotlight: mdx(fields: { slug: { eq: "/blog/startup-tigris" } }) {
@@ -113,8 +126,44 @@ export default function Startups() {
         }
     `)
 
+    const handleSubmit = async (values, setSubmitted) => {
+        const submission = {
+            pageUri: href,
+            pageName: 'Startups',
+            fields: fields.map((field) => {
+                const value = values[field.name]
+                const option = field.options?.find((option) => value === option.value)?.hubspotValue
+                return {
+                    objectTypeId: field.objectTypeId ?? '0-1',
+                    name: field.hubspotField,
+                    value: option || value,
+                }
+            }),
+        }
+
+        const res = await fetch(
+            `https://api.hsforms.com/submissions/v3/integration/submit/6958578/aa91765b-e790-4e90-847e-46c7ebf43705`,
+            {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify(submission),
+            }
+        ).catch((err) => {
+            console.log(err)
+            return err
+        })
+
+        if (res.status === 200) {
+            setSubmitted(true)
+            scroll.scrollToTop()
+        }
+    }
+
     return (
         <Layout>
+            <SEO title={'Startups - PostHog'} />
             <section className="text-center py-40 max-w-screen-lg mx-auto relative px-5">
                 <StaticImage
                     width={240}
@@ -150,7 +199,12 @@ export default function Startups() {
                 </div>
                 <div className="flex-shrink-0">
                     <h3>Apply for the PostHog for startups program</h3>
-                    <Form validationSchema={validationSchema} fields={fields} />
+                    <Form
+                        pageName="Startups"
+                        validationSchema={validationSchema}
+                        fields={fields}
+                        onSubmit={handleSubmit}
+                    />
                 </div>
             </section>
         </Layout>
