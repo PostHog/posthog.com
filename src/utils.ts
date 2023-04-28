@@ -21,5 +21,5 @@ export function capitalizeFirstLetter(string: string): string {
 }
 
 export function determineIfInIframe(): boolean {
-    return window.self !== window.top
+    return typeof window !== 'undefined' && window.self !== window.top
 }
