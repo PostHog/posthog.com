@@ -73,15 +73,13 @@ To reduce these risks, consider running a small user-level experiment before run
 
 ### 1. Quickly eliminate changes that have no impact
 
-As mentioned, lower statistical power in group-targeted experiments means you need to run your experiments longer. However, a change that doesn't impact behavior at a user-level won't, in all likelihood, impact behavior at a group-level either.
-
-To rule this out, consider running a user-targeted experiment first in order to see if there is any impact on individual user behavior (where it should be quicker to gain results from because of higher statistical power) before running a group-targeted experiment.
+A change that doesn't impact behavior at a user-level won't, in all likelihood, impact behavior at a group-level either. Running a user-level test first allows you to eliminate ineffective changes and, due to their greater statistical power, you'll get results faster.
 
 ### 2. Gain user-level insights and identify randomization risks
 
-By running a user-targeted experiment first, you'll gain insight into how individual users interact with your change and what characteristics they may possess. This will then give you an understanding of what results you can expect from a group-targeted experiment.
+Running a user-targeted experiment first gives you insight into how individual users interact with your change and what properties they possess. This will then give you an understanding of what results you can expect from a group-targeted experiment.
 
-This can also help you identify randomization risks. For example, let's say a B2B SaaS app runs a user-targeted experiment and notices that users in large companies are more likely to interact with their new feature. In this case, when they run a group-targeted experiment, they can ensure to filter out small and medium-sized companies in their experiment in order to obtain more accurate results.
+This can also help you identify randomization risks. For example, let's say a B2B SaaS app runs a user-targeted experiment, and notices that users in large companies are more likely to interact with their new feature. In this case, when they run a group-targeted experiment, they can ensure to filter out small and medium-sized companies in their experiment in order to obtain more accurate results.
 
 ## How to set up group-targeted experiments in PostHog
 
