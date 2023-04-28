@@ -6,7 +6,7 @@ showTitle: true
 hideAnchor: true
 author:
   - lior-neu-ner
-date: 2023-04-26
+date: 2023-04-28
 featuredImage: ../images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
 tags: 
@@ -95,17 +95,14 @@ A handy feature especially useful for group-targeted experiments is the Minimum 
 
 ![Screenshot of the Minimum Acceptable Improvement calculator](../images/blog/running-group-targeted-ab-tests/minimum-acceptable-improvement.png)
 
-## Conclusion
+## Summary
 
-To summarize, remember these 3 points when running group-targeted experiments:
+To conclude, there are three key points to remember when running experiments on groups:
 
-1. Group-targeted experiments enable you to measure the impact of a change on an entire group of users,
-2. Group-targeted experiments have less stastical power and provide fewer user-level insights.
-3. You can reduce your risks by running a small, user-targeted experiment first.
+1. They're useful for understanding if/how changes in individual usage impact related groups
 
-## Further reading
+2. Group-targeted experiments have less stastical power, therefore they prodive fewer user-level insights, and take longer to run.
 
-To learn more about running product experiments, read our guides on:
-- [How to measure product engagement](/blog/how-to-measure-product-engagement)
-- [The most useful product health metrics](/blog/product-health-metrics)
-- [The most useful B2B SaaS product metrics](https://posthog.com/blog/b2b-saas-product-metrics)
+3. Running smaller, user-levels tests first is a good way to reduce the unique risks of group-targeted experiments.
+
+Read our [A/B testing product manual](/docs/experiments) and [what we've learned abour running A/B tests](/blog/experiments) at PostHog for more A/B testing tips.
