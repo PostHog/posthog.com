@@ -95,7 +95,15 @@ export default function Menu({
     const MenuLink = { standard: Link, scroll: ScrollLink }[menuType]
     const menuLinkProps = {
         standard: {},
-        scroll: { offset: -50, smooth: true, duration: 300, hashSpy: true, spy: true },
+        scroll: {
+            offset: -50,
+            smooth: true,
+            duration: 300,
+            hashSpy: true,
+            spy: true,
+            onSetActive: () => setIsActive(true),
+            onSetInactive: () => setIsActive(false),
+        },
     }[menuType]
     return (
         <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden mb-[1px] ml-4 ${className}`}>
