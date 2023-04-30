@@ -1,0 +1,191 @@
+---
+title: PostHog for startups
+showTitle: false
+showSidebar: true
+width: lg
+noindex: true
+images:
+    - './images/rockwall-mobile.png'
+    - './images/rockwall.png'
+    - './images/on-belay.png'
+    - './images/belay-on.png'
+    - './images/cat_li.png'
+    - './images/startup-spotlight.png'
+    - './images/startup-merch.png'
+    - './images/startup-launch.png'
+    - './images/startup-credit.png'
+    
+    
+---
+
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+
+<div class="w-[calc(100%_+_4rem)] relative -mx-4 px-8 md:-mx-16 pt-32 pb-48 -mt-32 md:-mt-44">
+  <div class="md:hidden absolute top-0 left-0 w-full bottom-0 opacity-40">
+    <GatsbyImage image={getImage(props?.images[0])} alt="PostHog for startups" objectFit="cover" className="" />
+  </div>
+  <div class="hidden md:block absolute top-0 left-0 w-full bottom-0">
+    <GatsbyImage image={getImage(props?.images[1])} alt="PostHog for startups" objectFit="cover" className="" />
+  </div>
+  <div class="absolute bottom-0 left-4 w-24 md:left-16 md:w-48">
+    <GatsbyImage image={getImage(props?.images[2])} alt="PostHog for startups" objectFit="contain" className="" />
+  </div>
+  <div class="absolute bottom-0 -right-4 w-28 md:right-16 md:w-60">
+    <GatsbyImage image={getImage(props?.images[3])} alt="PostHog for startups" objectFit="contain" className="" />
+  </div>
+
+  <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-tan/100 via-tan/85 to-tan/0"></div>
+
+  <Hero
+    title="PostHog for startups"
+    subtitle="$50k in credits (plus extras you'll actually use) to help you get to product-market fit"
+    ctas={[
+        <CallToAction href="https://app.posthog.com/signup">Get started - free</CallToAction>
+    ]}
+/>
+
+<p class="text-center text-xs p-4 relative">
+  Apply for the program by following three simple steps:
+   <ul class="list-none">
+   <li>1. Create an account using the button above</li>
+   <li>2. Subscribe to the Scale plan on the billing page in-app</li>
+   <li>3. Fill in this <a href="/startups/apply">form</a> and we will review your application</li>
+   </ul>
+</p>
+</div>
+
+
+
+<Section title="Here's what you get:" titleSize="sm" cols={3}>
+    <div>
+        <h4 class="mb-1">A year of PostHog</h4>
+        <p>
+            <strong>Get $50k credit</strong> toward PostHog Cloud for 12 months
+        </p>
+    </div>
+    <div>
+        <h4 class="mb-1">Generous allowance</h4>
+        <p>
+            Credit is equivalent to over <strong>30m events and 50k recordings per month</strong>
+        </p>
+    </div>
+    <div>
+        <h4 class="mb-1">Office hours</h4>
+        <p>
+            <strong>Exclusive private office hours</strong> with PostHog's exec team every month
+        </p>
+    </div>
+</Section>
+
+
+<section class="my-24 px-5">
+
+  <div class="max-w-screen-lg mx-auto font-bold">
+    
+    <blockquote class="text-xl text-primary dark:text-primary-dark m-0 quote md:text-[32px] md:leading-tight">
+      <span class="leading-tight">
+        "Building is never just one-and-done. You always need to find ways to improve.
+        <span class="text-red"> PostHog is central to how we do that at Y Combinator</span>. It helps us try ideas, measure results and make better products.”
+      </span>
+      <footer class="flex items-center space-x-8 mt-9">
+        <GatsbyImage image={getImage(props?.images[4])} alt="Cat Li" objectFit="contain" style={{ maxWidth: 100 }} />
+        <span class="flex flex-col"><cite class="not-italic text-lg md:text-xl">Cat Li</cite><cite class="not-italic font-medium text-lg opacity-50 md:text-lg">Product &amp; Engineering Lead, <span class="inline-block">Y Combinator</span></cite></span>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<section class="my-24 px-5">
+  <div class="max-w-screen-2xl mx-auto">
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16">Extra perks</h3>
+    <div class="flex justify-center">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 justify-evenly relative after:border-t after:border-dashed after:border-gray-accent-light after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 before:border-l before:border-dashed before:border-gray-accent-light sm:after:block after:hidden sm:before:block before:hidden">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 sm:border-b-0 border-b border-dashed border-gray-accent-light last:border-b-0">
+          <GatsbyImage image={getImage(props?.images[5])} alt="Startup spotlight" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Startup spotlight</h5>
+          <p class="m-0 text-[15px]">Every month, we will pick a startup of the month to spotlight. We'll do a short interview with you which we'll share on posthog.com and our socials.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 sm:border-b-0 border-b border-dashed border-gray-accent-light last:border-b-0">
+          <GatsbyImage image={getImage(props?.images[6])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Free PostHog merch</h5>
+          <p class="m-0 text-[15px]">Because you can never have too much</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 sm:border-b-0 border-b border-dashed border-gray-accent-light last:border-b-0">
+          <GatsbyImage image={getImage(props?.images[7])} alt="Startup launch" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">We'll promote your launch</h5>
+          <p class="m-0 text-[15px]">Doing a launch? Let us know and we'll retweet, upvote you on ProductHunt, and generally spread the word.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 sm:border-b-0 border-b border-dashed border-gray-accent-light last:border-b-0">
+          <GatsbyImage image={getImage(props?.images[8])} alt="Startup credit" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Extra credit</h5>
+          <p class="m-0 text-[15px]">Send this page to your investor or accelerator where they can apply to be a partner. If they sign up, we'll double your credits <em>and</em> send you a custom pair of PostHog AirPods.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<section class="my-24 px-5">
+  <div class="max-w-screen-md mx-auto">
+    <h3 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl m-0 text-center mb-6 sm:mb-8">Docs & resources</h3>
+    <ul class="border border-dashed border-gray-accent-light p-0">
+      <li class="list-none px-4 py-2"><a href="/tracks">PostHog Tracks: How to use PostHog</a></li>
+      <li class="list-none px-4 py-2"><a href="/blog/story-about-pivots">A story about pivots</a></li>
+      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/early-stage-analytics">The 80/20 of early-stage startup analytics</a></li>
+      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/posthog-first-five">What we learned about hiring from our first five employees</a></li>
+      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/how-to-run-a-transparent-company">How to run a transparent startup</a></li>
+      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/making-something-people-want">How we made something people want</a></li>
+      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/startup-ops-toolkit">The ops toolkit for early-stage startups</a></li>
+      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/startup-finance-without-finance">How to run finance at your startup without hiring a finance person</a></li>
+      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/dev-marketing-for-startups">Developer marketing for early-stage startups – what we’ve learned</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="my-24 px-5">
+<div class="max-w-screen-md mx-auto">
+<h3 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl m-0 text-center mb-6 sm:mb-8">FAQs</h3>
+    <details>
+        <summary>How do I apply?</summary>
+        <br />
+        Just sign up to the Scale plan in PostHog and then fill in this <a href="/signup/cloud/startup">form</a>.  We will review and apply the credit if you're eligible.
+    </details>
+
+<details> 
+<summary>Who's eligible? </summary>
+<br />
+Your company needs to be less than 2 years old and have raised less than $5m funding. You need to have signed up any time from Jan 1st 2023 onwards. 
+</details>
+
+<details>
+<summary>I signed up before this deal launched, can I still get it?</summary>
+<br />
+Yes, but only if you signed up after Jan 1st 2023. If your startup meets the eligibility criteria but you signed up to PostHog before Jan 1st, we won't apply the credits but are still happy to enroll you in the rest of the program. 
+</details>
+
+<details>
+<summary>Can I get this deal if I'm part of YC?</summary>
+<br />
+We have a separate deal for YC folks - check out Bookface. No, they don't stack!
+</details>
+
+<details>
+<summary>What if I go over the $50k limit? </summary>
+<br />
+At that point you can either move onto <a href="/pricing">PostHog Free or PostHog Scale</a>.
+</details>
+
+<details>
+<summary>What happens at the end of the 12 months?</summary>
+<br />
+At that point you can either move onto <a href="/pricing">PostHog Free or PostHog Scale</a>.
+</details>
+
+<details>
+<summary>How come you don't offer credits for AWS, Segment etc. like Mixpanel does?</summary>
+<br />
+Because all of those are available if you just go to the company <a href="https://startupcredits.io/">directly</a> anyway.
+</details>
+</div>
+</section>
