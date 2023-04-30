@@ -6,7 +6,6 @@ import * as Yup from 'yup'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import SEO from 'components/seo'
-import { useLocation } from '@reach/router'
 import HubSpotForm from 'components/HubSpotForm'
 
 const benefits = [
@@ -41,8 +40,6 @@ const Spotlight = ({ frontmatter: { title, featuredImage }, excerpt, fields: { s
 }
 
 export default function Startups() {
-    const { href } = useLocation()
-
     const { spotlight } = useStaticQuery(graphql`
         {
             spotlight: mdx(fields: { slug: { eq: "/blog/startup-tigris" } }) {
@@ -62,55 +59,16 @@ export default function Startups() {
         }
     `)
 
-    const handleSubmit = async (values, setSubmitted) => {
-        const submission = {
-            pageUri: href,
-            pageName: 'Startups',
-            fields: fields.map((field) => {
-                const value = values[field.name]
-                const option = field.options?.find((option) => value === option.value)?.hubspotValue
-                return {
-                    objectTypeId: field.objectTypeId ?? '0-1',
-                    name: field.hubspotField,
-                    value: option || value,
-                }
-            }),
-        }
-
-        const res = await fetch(
-            `https://api.hsforms.com/submissions/v3/integration/submit/6958578/aa91765b-e790-4e90-847e-46c7ebf43705`,
-            {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify(submission),
-            }
-        ).catch((err) => {
-            console.log(err)
-            return err
-        })
-
-        if (res.status === 200) {
-            setSubmitted(true)
-            scroll.scrollToTop()
-        }
-    }
-
     return (
         <Layout>
             <SEO title={'Startups - PostHog'} />
             <section className="text-center py-40 max-w-screen-lg mx-auto relative px-5">
-                <StaticImage
-                    width={240}
-                    className="absolute right-0 md:bottom-0 -bottom-12 md:max-w-[240px] max-w-[150px]"
-                    src="./images/belay-on.png"
-                />
-                <StaticImage
-                    width={200}
-                    className="absolute left-0 bottom-0 max-w-[120px] md:max-w-[200px]"
-                    src="./images/on-belay.png"
-                />
+                <div className="absolute right-0 md:bottom-0 -bottom-12 md:max-w-[240px] max-w-[150px]">
+                    <StaticImage width={240} src="./images/belay-on.png" />
+                </div>
+                <div className="absolute left-0 bottom-0 max-w-[120px] md:max-w-[200px]">
+                    <StaticImage width={200} src="./images/on-belay.png" />
+                </div>
                 <div className="relative">
                     <h1>Let's do this together</h1>
                     <p>PostHog can help your startup get to where it needs to be</p>
