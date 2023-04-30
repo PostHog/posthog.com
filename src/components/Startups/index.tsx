@@ -2,8 +2,6 @@ import { Check2 } from 'components/Icons'
 import Layout from 'components/Layout'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import Contact from 'components/ContactSales/Contact'
-import Form, { IField, Input, RadioGroup, TextArea } from 'components/Contact/Form'
 import * as Yup from 'yup'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
@@ -18,69 +16,6 @@ const benefits = [
     'Private office hours',
     'Startup spotlight',
     'Opportunities for extra credit',
-]
-
-const fields = [
-    {
-        name: 'email',
-        placeHolder: 'Email',
-        Component: Input,
-        hubspotField: 'email',
-    },
-    {
-        name: 'firstName',
-        placeHolder: 'First name',
-        Component: Input,
-        hubspotField: 'firstname',
-    },
-    {
-        name: 'lastName',
-        placeHolder: 'Last name',
-        Component: Input,
-        hubspotField: 'lastname',
-    },
-    {
-        name: 'companyName',
-        placeHolder: 'Company name',
-        Component: Input,
-        hubspotField: 'name',
-        objectTypeId: '0-2',
-    },
-    {
-        name: 'companyDomain',
-        placeHolder: 'Company domain',
-        Component: Input,
-        hubspotField: 'domain',
-    },
-    {
-        name: 'postHogOrganizationName',
-        placeHolder: 'PostHog organization name',
-        Component: Input,
-        hubspotField: 'self_registration_organization_name',
-    },
-    {
-        name: 'totalFunding',
-        placeHolder: 'How much in total funding have you raised (USD)',
-        Component: RadioGroup,
-        options: [
-            { label: 'Boostrapped', hubspotValue: -1 },
-            { label: 'Under $100k', hubspotValue: 100_000 },
-            { label: '$100k - $500k', hubspotValue: 500_000 },
-            { label: '$500k - $1m', hubspotValue: 1_000_000 },
-            { label: '$1m - $5m', hubspotValue: 5_000_000 },
-            { label: 'More than $5m', hubspotValue: 100_000_000_000 },
-        ],
-        hubspotField: 'self_registration_raised',
-        objectTypeId: '0-2',
-    },
-    {
-        name: 'dateIncorporated',
-        placeHolder: 'The date that your company was incorporated',
-        Component: Input,
-        type: 'date',
-        hubspotField: 'self_registration_company_founded',
-        objectTypeId: '0-2',
-    },
 ]
 
 const validationSchema = Yup.object().shape({
