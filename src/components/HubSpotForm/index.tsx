@@ -273,17 +273,23 @@ const inputContainerClasses = `p-4 bg-tan group active:bg-white focus-within:bg-
 const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     const { name, placeholder } = props
     if (!name) return null
+    const [type, setType] = useState('text')
     const { errors, validateField, setFieldValue } = useFormikContext()
     const error = errors[name]
     return (
         <label className={`${inputContainerClasses} ${error ? 'pb-8' : ''}`} htmlFor={props.id}>
             <input
                 onChange={(e) => setFieldValue(name, e.target.value)}
-                onBlur={() => validateField(name)}
+                onBlur={() => {
+                    validateField(name)
+                    setType('text')
+                }}
                 className={`bg-transparent w-full outline-none absolute left-0 px-4 ${
                     error ? 'bottom-6 placeholder-shown:bottom-8' : 'bottom-2 placeholder-shown:bottom-4'
                 } peer placeholder-shown:placeholder-transparent transition-all border-0 py-0 shadow-none ring-0 focus:ring-0`}
                 {...props}
+                onFocus={() => setType(props.type ?? 'text')}
+                type={type}
             />
             <span className="relative -top-3 peer-placeholder-shown:top-0 text-xs peer-placeholder-shown:text-base peer-placeholder-shown:opacity-50 transition-all">
                 {placeholder}
