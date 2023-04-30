@@ -16,9 +16,73 @@ import CTA from 'components/ProductLayout/CTA'
 import PairsWith from 'components/ProductLayout/PairsWith'
 import Documentation from 'components/ProductLayout/Documentation'
 import ProductLayout from 'components/ProductLayout'
+import PostLayout from 'components/PostLayout'
+import { IMenu } from 'components/PostLayout/types'
+import { AbTesting, Analytics, FeatureFlags, SessionRecording } from 'components/ProductIcons'
+import { Platform } from 'components/NotProductIcons'
 
 const Check = (props: any) => <CheckIcon {...props} className="w-5 mx-auto" />
 const Close = (props: any) => <CloseIcon {...props} className="w-5 mx-auto" />
+
+const menu: IMenu[] = [
+    {
+        icon: <Analytics className="w-5" />,
+        name: 'Product analytics',
+        url: '/product-analytics',
+        children: [
+            { name: 'Features', url: '/product-analytics#features' },
+            { name: 'Comparisons', url: '/product-analytics#comparisons' },
+            { name: 'Docs', url: '/product-analytics#documentation' },
+            { name: 'Tutorials', url: '/product-analytics#tutorials' },
+            { name: 'Roadmap', url: '/product-analytics#roadmap' },
+        ],
+    },
+    {
+        icon: <SessionRecording className="w-5" />,
+        name: 'Session replay',
+        url: '/session-replay',
+        children: [
+            { name: 'Features', url: '/session-replay#features' },
+            { name: 'Comparisons', url: '/session-replay#comparisons' },
+            { name: 'Docs', url: '/session-replay#documentation' },
+            { name: 'Tutorials', url: '/session-replay#tutorials' },
+            { name: 'Roadmap', url: '/session-replay#roadmap' },
+        ],
+    },
+    {
+        icon: <FeatureFlags className="w-5" />,
+        name: 'Feature flags',
+        url: '/feature-flags',
+        children: [
+            { name: 'Features', url: '/feature-flags#features' },
+            { name: 'Comparisons', url: '/feature-flags#comparisons' },
+            { name: 'Docs', url: '/feature-flags#documentation' },
+            { name: 'Tutorials', url: '/feature-flags#tutorials' },
+            { name: 'Roadmap', url: '/feature-flags#roadmap' },
+        ],
+    },
+    {
+        icon: <AbTesting className="w-5" />,
+        name: 'A/B testing',
+        url: '/ab-testing',
+        children: [
+            { name: 'Features', url: '/ab-testing#features' },
+            { name: 'Docs', url: '/ab-testing#documentation' },
+            { name: 'Tutorials', url: '/ab-testing#tutorials' },
+            { name: 'Roadmap', url: '/ab-testing#roadmap' },
+        ],
+    },
+    {
+        icon: <Platform className="w-5" />,
+        name: 'Product OS',
+        url: '/product-os',
+        children: [
+            { name: 'Features', url: '/product-os#features' },
+            { name: 'Blog posts', url: '/product-os#posts' },
+            { name: 'Roadmap', url: '/product-os#roadmap' },
+        ],
+    },
+]
 
 export default function Product({ data, location, pageContext }) {
     const { pageData, blogPosts, documentation, tutorials } = data
@@ -39,7 +103,6 @@ export default function Product({ data, location, pageContext }) {
         productPricingCTA,
         productPairsWith,
         productHero,
-        productDocumentation,
         productBlog,
     } = pageData?.frontmatter
 
@@ -55,14 +118,36 @@ export default function Product({ data, location, pageContext }) {
             />
         ),
         MainFeatures: (props: any) => <MainFeatures {...props} features={productFeatures} />,
-        Sections: (props: any) => <Sections {...props} sections={productSections} />,
-        Testimonial: (props: any) => <Testimonial {...props} {...productTestimonial} />,
+        Sections: (props: any) => (
+            <div id="features">
+                <Sections {...props} sections={productSections} />
+            </div>
+        ),
+        Testimonial: (props: any) => (
+            <div id="customers">
+                <Testimonial {...props} {...productTestimonial} />
+            </div>
+        ),
         Check,
         Close,
-        Comparison: (props: any) => <Comparison {...props} description={`How does PostHog ${title} compare?`} />,
-        BlogPosts: (props: any) => <BlogPosts {...props} title={productBlog?.title} posts={blogPosts?.edges} />,
+        Comparison: (props: any) => (
+            <div id="comparisons">
+                <Comparison {...props} description={`How does PostHog ${title} compare?`} />
+            </div>
+        ),
+        BlogPosts: (props: any) => (
+            <div id="posts">
+                <BlogPosts {...props} title={productBlog?.title} posts={blogPosts?.edges} />
+            </div>
+        ),
         Roadmap: (props: any) => (
-            <Roadmap {...props} team={productTeam} subtitle={`Here's what the ${productTeam} Team is building next.`} />
+            <div id="roadmap">
+                <Roadmap
+                    {...props}
+                    team={productTeam}
+                    subtitle={`Here's what the ${productTeam} Team is building next.`}
+                />
+            </div>
         ),
         CTA: (props: any) => (
             <CTA
@@ -99,11 +184,18 @@ export default function Product({ data, location, pageContext }) {
                 description={description || excerpt}
             />
 
-            <ProductLayout title={title}>
+            <PostLayout
+                menu={menu}
+                title={title}
+                hideSidebar
+                hideSearch
+                hideSurvey
+                contentContainerClassName="px-5 lg:px-6 xl:px-12 w-full transition-all mx-auto"
+            >
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>
-            </ProductLayout>
+            </PostLayout>
         </Layout>
     )
 }

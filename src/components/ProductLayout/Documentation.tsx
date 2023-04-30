@@ -54,7 +54,7 @@ export default function Documentation({ documentation, title, tutorials }: IDocu
                     })}
                 </ul>
             </div>
-            <div>
+            <div id="tutorials">
                 <h4 className="m-0 opacity-60 mt-6 md:mt-12">Tutorials</h4>
                 <ul className="m-0 p-0 list-none">
                     {tutorials.map(({ frontmatter, fields }: any) => {
