@@ -9,6 +9,7 @@ import { CompensationCalculator } from './components/CompensationCalculator'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
+import { HubSpotForm } from './components/HubSpotForm'
 import { LPCTA } from './components/LPCTA'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { OverflowXSection } from './components/OverflowXSection'
@@ -30,6 +31,7 @@ export const shortcodes = {
     FeatureAvailability,
     GDPRForm,
     HiddenSection,
+    HubSpotForm,
     LPCTA,
     NewsletterTutorial,
     OverflowXSection,

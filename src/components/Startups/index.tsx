@@ -9,6 +9,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { useLocation } from '@reach/router'
+import HubSpotForm from 'components/HubSpotForm'
 
 const benefits = [
     'A year of PostHog',
@@ -83,14 +84,14 @@ const fields = [
 ]
 
 const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('Please enter your first name'),
-    lastName: Yup.string(),
+    firstname: Yup.string().required('Please enter your first name'),
+    lastname: Yup.string(),
     email: Yup.string().email('Please enter a valid email address').required('Please enter a valid email address'),
-    companyName: Yup.string().required('Please enter your company name'),
-    companyDomain: Yup.string().required('Please enter your company name'),
-    postHogOrganizationName: Yup.string().required('Please enter your company name'),
-    totalFunding: Yup.number().required('Please select a value'),
-    dateIncorporated: Yup.string().required('Please enter a date'),
+    name: Yup.string().required('Please enter your company name'),
+    domain: Yup.string().required('Please enter your company name'),
+    self_registration_organization_name: Yup.string().required('Please enter your company name'),
+    self_registration_raised: Yup.number().required('Please select a value'),
+    self_registration_company_founded: Yup.string().required('Please enter a date'),
 })
 
 const Spotlight = ({ frontmatter: { title, featuredImage }, excerpt, fields: { slug } }) => {
@@ -199,11 +200,36 @@ export default function Startups() {
                 </div>
                 <div className="flex-shrink-0">
                     <h3>Apply for the PostHog for startups program</h3>
-                    <Form
-                        pageName="Startups"
+                    <HubSpotForm
                         validationSchema={validationSchema}
-                        fields={fields}
-                        onSubmit={handleSubmit}
+                        formID="aa91765b-e790-4e90-847e-46c7ebf43705"
+                        customMessage={
+                            <>
+                                <h4>
+                                    ✅ <strong>Message received!</strong>
+                                </h4>
+                                <p>
+                                    A member of the PostHog team will get back to you as soon as we've had a chance to
+                                    review your information.&nbsp;
+                                </p>
+                                <p className="mb-0">
+                                    In the meantime, why not join <Link to="/slack">our Slack community</Link>?
+                                </p>
+                            </>
+                        }
+                        customFields={{
+                            self_registration_raised: {
+                                type: 'radioGroup',
+                                options: [
+                                    { label: 'Boostrapped', value: -1 },
+                                    { label: 'Under $100k', value: 100_000 },
+                                    { label: '$100k - $500k', value: 500_000 },
+                                    { label: '$500k - $1m', value: 1_000_000 },
+                                    { label: '$1m - $5m', value: 5_000_000 },
+                                    { label: 'More than $5m', value: 100_000_000_000 },
+                                ],
+                            },
+                        }}
                     />
                 </div>
             </section>
