@@ -50,6 +50,4 @@ spec:
   - name: https
     protocol: TCP
     port: 443
-
 ```
-
