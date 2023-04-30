@@ -114,7 +114,7 @@ export default function Startups() {
                             self_registration_raised: {
                                 type: 'radioGroup',
                                 options: [
-                                    { label: 'Boostrapped', value: -1 },
+                                    { label: 'Boostrapped', value: 0 },
                                     { label: 'Under $100k', value: 100_000 },
                                     { label: '$100k - $500k', value: 500_000 },
                                     { label: '$500k - $1m', value: 1_000_000 },
