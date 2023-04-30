@@ -48,12 +48,13 @@ export default function Menu({
     className = '',
     handleLinkClick,
     topLevel,
-    menuType = 'standard',
     icon,
     badge,
+    ...other
 }: IMenu): JSX.Element | null {
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
+    const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
     const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1.5 inline-block w-full rounded-sm text-[15px] leading-tight relative active:top-[0.5px] active:scale-[.99] cursor-pointer ${
@@ -114,7 +115,7 @@ export default function Menu({
                         className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${
                             isActive || isWithChild ? 'active' : ''
                         }`}
-                        to={url}
+                        to={menuType === 'scroll' ? url.replace(pathname + '#', '') : url}
                         {...menuLinkProps}
                     >
                         <AnimatePresence>
@@ -186,7 +187,14 @@ export default function Menu({
                         animate={{ height: open ? 'auto' : 0 }}
                     >
                         {children.map((child) => {
-                            return <Menu handleLinkClick={handleLinkClick} key={child.name} {...child} />
+                            return (
+                                <Menu
+                                    handleLinkClick={handleLinkClick}
+                                    key={child.name}
+                                    menuType={menuType}
+                                    {...child}
+                                />
+                            )
                         })}
                     </motion.div>
                 )}

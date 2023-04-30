@@ -15,7 +15,6 @@ import Roadmap from 'components/ProductLayout/Roadmap'
 import CTA from 'components/ProductLayout/CTA'
 import PairsWith from 'components/ProductLayout/PairsWith'
 import Documentation from 'components/ProductLayout/Documentation'
-import ProductLayout from 'components/ProductLayout'
 import PostLayout from 'components/PostLayout'
 import { IMenu } from 'components/PostLayout/types'
 import { AbTesting, Analytics, FeatureFlags, SessionRecording } from 'components/ProductIcons'
@@ -161,18 +160,16 @@ export default function Product({ data, location, pageContext }) {
         ),
         PairsWith: (props: any) => <PairsWith {...props} products={productPairsWith} />,
         Documentation: (props: any) => (
-            <div id="documentation">
-                <SectionWrapper {...props}>
-                    <Documentation
-                        documentation={{
-                            indexURL: pageContext?.documentationNav?.url,
-                            pages: documentation?.nodes,
-                        }}
-                        title={title}
-                        tutorials={tutorials?.nodes}
-                    />
-                </SectionWrapper>
-            </div>
+            <SectionWrapper {...props}>
+                <Documentation
+                    documentation={{
+                        indexURL: pageContext?.documentationNav?.url,
+                        pages: documentation?.nodes,
+                    }}
+                    title={title}
+                    tutorials={tutorials?.nodes}
+                />
+            </SectionWrapper>
         ),
     }
 
@@ -185,6 +182,7 @@ export default function Product({ data, location, pageContext }) {
             />
 
             <PostLayout
+                menuType="scroll"
                 menu={menu}
                 title={title}
                 hideSidebar
