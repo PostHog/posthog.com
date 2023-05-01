@@ -2,10 +2,11 @@ import React from 'react'
 
 import Link from 'components/Link'
 import { QuestionData, StrapiResult } from 'lib/strapi'
-import getAvatarURL from '../Squeak/util/getAvatar'
-import { dateToDays, dayFormat } from '../../utils'
 import { Check2 } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 
 type QuestionsTableProps = {
     questions: Omit<StrapiResult<QuestionData[]>, 'meta'>
@@ -81,7 +82,7 @@ export const QuestionsTable = ({
                                                           </div>
 
                                                           <div className="xl:hidden text-primary dark:text-primary-dark text-sm font-medium opacity-60 line-clamp-2">
-                                                              {dayFormat(dateToDays(createdAt))}
+                                                              {dayjs(createdAt).fromNow()}
                                                           </div>
                                                       </div>
                                                   )}
@@ -92,8 +93,7 @@ export const QuestionsTable = ({
                                           </div>
                                           <div className="hidden xl:block xl:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                               <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-2">
-                                                  {dayFormat(dateToDays(createdAt))} by{' '}
-                                                  {profile.data?.attributes?.firstName}{' '}
+                                                  {dayjs(createdAt).fromNow()} by {profile.data?.attributes?.firstName}{' '}
                                                   {profile.data?.attributes?.lastName} {}
                                               </div>
                                           </div>
