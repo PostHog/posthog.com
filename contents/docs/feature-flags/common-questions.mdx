@@ -45,5 +45,5 @@ However, note that this has a few consequences:
 
 ## Is the rollout percentage for a flag deterministic? How about multiple flags?
 
-For a specific feature flag, a user who falls under a percentage rollout will always remain in that same percentage so you don't have to worry about users flip flopping.
+For any given feature flag, a user who is within the rollout bound will always remain within the rollout bound as the rollout percentage increases. Thus, the rollout percentage is deterministic.
 With multiple feature flags, users can fall under different points of rollout percentages per flag, so for a "50% rollout" for feature flag A and feature flag B, you won't always have the same users that see both features at once.
