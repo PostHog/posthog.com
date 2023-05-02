@@ -6,7 +6,7 @@ thumbnail: ../../apps/thumbnails/censor-app
     - route-censor
 ---
 
-### What does the Avo Inspector do?
+### What does the Router censor do?
 
 This app enables you to censor variables from URLs that are passed to PostHog. This is useful because PostHog tracks certain URLs automatically, so if your app contains sensitive data within the URLs (such as sensitive IDs, addresses, etc.), then this offers away to censor that data before it is stored in the PostHog database. 
 
