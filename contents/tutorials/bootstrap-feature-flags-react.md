@@ -1,6 +1,6 @@
 ---
 title: How to bootstrap feature flags in React and Express
-date: 2023-04-28
+date: 2023-05-02
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-3.png
 tags: ['feature flags']
 ---
 
-Bootstrapping feature flags make them available before React and PostHog load on the client side. This enables many uses including routing to different pages before load, content being available on first load, and visual consistency. 
+Bootstrapping feature flags make them available before React and PostHog load on the client side. This enables uses like routing to different pages before load, content being available on first load, and visual consistency. 
 
 To show you how you can set up bootstrap feature flags, we are going to build a React app, add PostHog, set up an Express server to render our React app on the server-side, and finally bootstrap our flags from the server to the client.
 
@@ -56,7 +56,7 @@ root.render(
 
 ### Create and setup a feature flag
 
-While we focus on PostHog, we can set up a feature flag to bootstrap later. This also gives us a chance to show why bootstrapping is valuable.
+While we focus on PostHog, we can set up a feature flag to bootstrap later.
 
 In the feature flag tab, create a new flag, set a key (I chose `test-flag`), set the rollout to 100% of users, and save it. Once done, you can check for your flag in the `loaded()` method on initialization like this:
 
@@ -72,13 +72,13 @@ posthog.init(
 );
 ```
 
-On the first load of the site (before the flag is set in cookies), you see `false` in the console even though the flag should return `true`. This is because the flag isn’t loaded yet when you check it. This means the flag might not show the right code on the initial load for that user. Bootstrapping flags solves this.
+This also gives us a chance to show why bootstrapping is valuable. On the first load of the site (before the flag is set in cookies), you see `false` in the console even though the flag should return `true`. This is because the flag isn’t loaded yet when you check it. This means the flag might not show the right code on the initial load for that user. Bootstrapping flags solves this.
 
 ![False](../images/tutorials/bootstrap-feature-flags-react/false.png)
 
 ## Set up the React app for server-side rendering
 
-To bootstrap on the frontend (our React app), we get the feature flag data on the backend, and pass it to the frontend before the frontend loads. This means we server-side rendering our React app. To do this, we set up:
+To bootstrap our flags, we fetch the feature flag data on the backend and pass it to the frontend before it loads. This requires server-side rendering our React app. To do this, we set up:
 
 1. The bundler and build the React app.
 2. An Express server to get feature flag data from PostHog and serve the React app.
