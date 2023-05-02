@@ -42,3 +42,8 @@ However, note that this has a few consequences:
 2. Experiments that depend on trend goals won't work since we use this event to calculate relative exposure. Convert your trend experiments to funnel experiments instead to make this work.
 
 ---
+
+## How are flags rolled out? Are they deterministic?
+
+For a specific feature flag, a user who falls under a percentage rollout will always remain in that same percentage so you don't have to worry about users flip flopping.
+With multiple feature flags, users can fall under different points of rollout percentages per flag, so for a "50% rollout" for feature flag A and feature flag B, you won't always have the same users that see both features at once.
