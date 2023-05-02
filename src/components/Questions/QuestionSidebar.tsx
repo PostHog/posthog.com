@@ -77,7 +77,7 @@ export const QuestionSidebar = (props: QuestionSidebarProps) => {
                 <iframe
                     style={{ height: sidecarHeight }}
                     className="m-0 border-none w-full h-full lg:absolute"
-                    src={`https://sidecar-panel.vercel.app/?email=${question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}`}
+                    src={`https://app.sidecar.posthog.com/?email=${question.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}`}
                 />
             )}
         </div>
