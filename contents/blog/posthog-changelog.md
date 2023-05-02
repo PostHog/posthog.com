@@ -34,7 +34,7 @@ Our session replays look like video, but we really we capture the DOM and make t
 This is still an experimental feature. Entering DOM explorer mode will give you an interactive snapshot of the site. Most things won't work (it's just a snapshot), but you can use Browser Developer Tools to inspect the content and debug faster. 
 
 #### Beta: View insight sources
-![posthog sql source](../images/blog/array/view-source.png)
+![posthog sql source](../images/blog/array/sql_insight.png)
 
 Insight filters follow a declarative format which you can now view and edit directly. Open the insight editor by clicking on the `{}` icon next to the save insight button and you'll see the source for the current insight configuration. You can copy-and-paste complete or partial insights to build insights in new ways.
 
