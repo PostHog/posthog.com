@@ -42,3 +42,8 @@ However, note that this has a few consequences:
 2. Experiments that depend on trend goals won't work since we use this event to calculate relative exposure. Convert your trend experiments to funnel experiments instead to make this work.
 
 ---
+
+## Is the rollout percentage for a flag deterministic? How about multiple flags?
+
+For any given feature flag, a user who is within the rollout bound will always remain within the rollout bound as the rollout percentage increases. Thus, the rollout percentage is deterministic.
+With multiple feature flags, users can fall under different points of rollout percentages per flag, so for a "50% rollout" for feature flag A and feature flag B, you won't always have the same users that see both features at once.
