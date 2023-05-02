@@ -11,15 +11,15 @@ import HubSpotForm from 'components/HubSpotForm'
 const benefits = [
     'A year of PostHog',
     'Free PostHog merch',
-    '50k of credit',
+    '$50,000 in PostHog credit',
     'Private office hours',
     'Startup spotlight',
-    'Opportunities for extra credit',
+    'Opportunities for extra credits',
 ]
 
 const validationSchema = Yup.object().shape({
     firstname: Yup.string().required('Please enter your first name'),
-    lastname: Yup.string(),
+    lastname: Yup.string().required('Please enter your last name'),
     email: Yup.string().email('Please enter a valid email address').required('Please enter a valid email address'),
     name: Yup.string().required('Please enter your company name'),
     domain: Yup.string().required('Please enter your company name'),
@@ -30,11 +30,13 @@ const validationSchema = Yup.object().shape({
 
 const Spotlight = ({ frontmatter: { title, featuredImage }, excerpt, fields: { slug } }) => {
     return (
-        <div className="p-4 border border-gray-accent-light rounded-md">
+        <div className="p-4 border border-gray-accent-light rounded-md max-w-sm">
             <h4>{title}</h4>
             <GatsbyImage className="rounded-md" image={getImage(featuredImage)} />
-            <p className="my-4">{excerpt}</p>
-            <Link to={slug}>Read the full article here</Link>
+            <p className="my-4 text-[15px]">{excerpt}</p>
+            <Link to={slug} external>
+                Read the full story
+            </Link>
         </div>
     )
 }
@@ -62,27 +64,63 @@ export default function Startups() {
     return (
         <Layout>
             <SEO title={'Startups - PostHog'} />
-            <section className="text-center py-40 max-w-screen-lg mx-auto relative px-5">
-                <div className="absolute right-0 md:bottom-0 -bottom-12 md:max-w-[240px] max-w-[150px]">
+            <section className="text-center py-20 max-w-screen-lg mx-auto relative px-5">
+                <div className="absolute right-0 -bottom-12 md:-bottom-20 md:max-w-[240px] max-w-[150px]">
                     <StaticImage width={240} src="./images/belay-on.png" />
                 </div>
                 <div className="absolute left-0 bottom-0 max-w-[120px] md:max-w-[200px]">
                     <StaticImage width={200} src="./images/on-belay.png" />
                 </div>
-                <div className="relative">
-                    <h1>Let's do this together</h1>
-                    <p>PostHog can help your startup get to where it needs to be</p>
+                <div className="relative hidden lg:block">
+                    <h1 className="max-w-lg mx-auto pb-2 text-center">Apply for PostHog's startup program</h1>
+
+                    <div className="max-w-sm rounded p-4 text-left bg-gray-accent-light mx-auto">
+                        <h3 className="text-lg mb-1">How to apply:</h3>
+                        <ol>
+                            <li>
+                                <Link to="https://app.posthog.com/signup" externalNoIcon>
+                                    Sign up
+                                </Link>{' '}
+                                for PostHog Cloud
+                            </li>
+                            <li>
+                                Visit the billing page and upgrade to the <em>Paid</em> plan
+                            </li>
+                            <li>Complete the application below</li>
+                        </ol>
+                    </div>
                 </div>
             </section>
-            <section className="grid md:grid-cols-2 gap-y-8 md:gap-y-0 md:gap-x-12 max-w-[1100px] mx-auto px-5 my-16">
+
+            <div className="relative lg:hidden -mb-12">
+                <h1 className="max-w-lg mx-auto pb-2 text-center">Apply for PostHog's startup program</h1>
+
+                <div className="max-w-sm rounded p-4 text-left bg-gray-accent-light mx-auto">
+                    <h3 className="text-lg mb-1">How to apply:</h3>
+                    <ol>
+                        <li>
+                            <Link to="https://app.posthog.com/signup" externalNoIcon>
+                                Sign up
+                            </Link>{' '}
+                            for PostHog Cloud
+                        </li>
+                        <li>
+                            Visit the billing page and upgrade to the <em>Paid</em> plan
+                        </li>
+                        <li>Complete the application below</li>
+                    </ol>
+                </div>
+            </div>
+
+            <section className="grid md:grid-cols-2 gap-y-8 md:gap-y-0 md:gap-x-12 max-w-[1100px] mx-auto px-5 my-24">
                 <div>
-                    <h4>Benefits with PostHog for startups</h4>
+                    <h4>Benefits of joining</h4>
                     <ul className="list-none p-0 m-0 grid grid-flow-row md:grid-cols-2 gap-y-4">
                         {benefits.map((benefit) => {
                             return (
                                 <li className="flex items-start space-x-2" key={benefit}>
                                     <Check2 className="w-4 opacity-57 flex-shrink-0 mt-[2px]" />
-                                    <span className="leading-tight">{benefit}</span>
+                                    <span className="leading-tight text-[15px]">{benefit}</span>
                                 </li>
                             )
                         })}
@@ -92,18 +130,20 @@ export default function Startups() {
                     </div>
                 </div>
                 <div className="flex-shrink-0">
-                    <h3>Apply for the PostHog for startups program</h3>
+                    <h3 className="mb-0">Finish your application</h3>
+                    <p>Remember to complete the steps listed above!</p>
                     <HubSpotForm
                         validationSchema={validationSchema}
                         formID="aa91765b-e790-4e90-847e-46c7ebf43705"
                         customMessage={
                             <>
                                 <h4>
-                                    ✅ <strong>Message received!</strong>
+                                    ✅ <strong>Application received!</strong>
                                 </h4>
+                                <p>We'll get back to you once we've had a chance to review your information.&nbsp;</p>
                                 <p>
-                                    A member of the PostHog team will get back to you as soon as we've had a chance to
-                                    review your information.&nbsp;
+                                    <strong>Reminder:</strong> If you haven't signed up for PostHog yet, be sure to
+                                    follow steps 1-2 above!
                                 </p>
                                 <p className="mb-0">
                                     In the meantime, why not join <Link to="/slack">our Slack community</Link>?
