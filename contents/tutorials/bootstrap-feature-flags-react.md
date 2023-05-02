@@ -10,7 +10,7 @@ tags: ['feature flags']
 
 Bootstrapping feature flags make them available before React and PostHog load on the client side. This enables many uses including routing to different pages before load, content being available on first load, and visual consistency. 
 
-To show you how you can set up bootstrap feature flags, we are going to build a React app, add PostHog, set up an Express server to server-side render our React app, and finally bootstrap our flags.
+To show you how you can set up bootstrap feature flags, we are going to build a React app, add PostHog, set up an Express server to render our React app on the server-side, and finally bootstrap our flags from the server to the client.
 
 > Already have an app set up? [Skip straight to the feature flag bootstrapping implementation](#handle-feature-flags-on-the-backend).
 
@@ -58,7 +58,7 @@ root.render(
 
 While we focus on PostHog, we can set up a feature flag to bootstrap later. This also gives us a chance to show why bootstrapping is valuable.
 
-In the feature flag tab, create a new flag, set a key (I chose `test-flag`), set the rollout to 100% of users, and saved it. Once done, you can check for your flag in the `loaded()` method on initialization like this:
+In the feature flag tab, create a new flag, set a key (I chose `test-flag`), set the rollout to 100% of users, and save it. Once done, you can check for your flag in the `loaded()` method on initialization like this:
 
 ```js
 posthog.init(
@@ -80,8 +80,8 @@ On the first load of the site (before the flag is set in cookies), you see `fals
 
 To bootstrap on the frontend (our React app), we get the feature flag data on the backend, and pass it to the frontend before the frontend loads. This means we server-side rendering our React app. To do this, we set up:
 
-1. the bundler and build the React app.
-2. an Express server to get feature flag data from PostHog and serve the React app.
+1. The bundler and build the React app.
+2. An Express server to get feature flag data from PostHog and serve the React app.
 
 To start, install the package to compile, transform assets, and hot reload the server on file change.
 
@@ -111,7 +111,7 @@ npm run build
 
 ## Set up our server-rendering Express app
 
-To start, in the client folder, create another folder named `server`. Inside this folder, create an `index.js` file. In this file, we:
+To start, create another folder named `server` in the client folder. Inside this folder, create an `index.js` file. In this file, we:
 
 1. Set up Babel.
 2. Import the packages for React, Express, and the file system.
@@ -202,7 +202,7 @@ const client = new PostHog(
 
 To get the feature flags, we need a distinct user ID. `posthog-js` automatically creates one once users visit, but that isn’t helpful for first-time users where `posthog-js` hasn’t loaded. What we can do is check for a user ID in the cookies of the request. If it doesn’t exist, we can create a UUID for use as one.
 
-First, install a `cookie-parser` library.
+First, install the `cookie-parser` library.
 
 ```bash
 npm i cookie-parser
@@ -256,7 +256,7 @@ app.get('/*', async (req, res, next) => {
       return res.status(500).send(err);
     }
 		
-	  const html = data.replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`);
+    const html = data.replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`);
     const serializedFlags = JSON.stringify(flags);
     const serializedDistinctId = JSON.stringify(distinctId);
     const scriptTag = `<script>window.__FLAG_DATA__ = ${serializedFlags}; window.__PH_DISTINCT_ID__ = ${serializedDistinctId};</script>`;
