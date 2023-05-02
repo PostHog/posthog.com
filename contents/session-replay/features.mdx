@@ -2,9 +2,6 @@
 title: Session replay
 subtitle: <span class="text-red font-semibold bg-yellow/10">Watch recordings of visitors</span> using your product or website.
 template: product
-productHero: {
-  image: ./images/products/session-replay/session-replay.png,
-}
 productFeatures: [
     {
         icon: 'Actions',
@@ -56,7 +53,7 @@ productSections: [
               ]
     },
     {
-      image: ./images/products/session-replay/timeline.png
+      image: ../images/products/session-replay/timeline.png
     }
   ],
   [
@@ -67,7 +64,7 @@ productSections: [
      
     },
     {
-      image: ./images/products/session-replay/console.png
+      image: ../images/products/session-replay/console.png
     },
   ],
   [
@@ -78,90 +75,27 @@ productSections: [
       align: 'center',
     },
     {
-      image: ./images/products/session-replay/network.png
+      image: ../images/products/session-replay/network.png
     }
   ],
 ]
-productTestimonial: {
-  author: {
-      name: "Anubhuti Mishra",
-      role: "UI/UX Designer",
-      image: "/images/customers/mishra.jpeg",
-      company: { name: Hasura, image: "/images/customers/hasura.svg" }
-  },
-  quote: "\"I was watching session recordings for our sign-up page and realized a lot of people were trying to click something that wasn’t actually a button. <strong>We wouldn’t have noticed that needed fixing without PostHog’s session recordings.</strong>\"",
-  image: ./images/products/hogs/session-replay.png
-}
-productBlog: {
-  title: "Blog posts that mention Session replay",
-  tags: ["Session recording"]
-}
-productTutorialTags: ["session recording"]
-productTeam: Monitoring
 productMainCTA: {
   title: Try Session replay,
   subtitle: "First 15,000 sessions/mo are free.",
-  image: ./images/products/hogs/session-replay.png,
+  image: ../images/products/hogs/session-replay.png,
   url: https://app.posthog.com/signup
 }
 productPricingCTA: {
     title: View pricing,
     url: /pricing
 }
-productPairsWith: [
-    {
-        icon: 'Analytics',
-        title: 'Product analytics',
-        description:
-            'Jump into a playlist of session recordings directly from any time series in a graph',
-        url: '/product-analytics',
-    },
-    {
-        icon: 'FeatureFlags',
-        title: 'Feature flags',
-        description: "See which feature flags are enabled for a user's session",
-        url: '/feature-flags',
-    },
-    {
-        icon: 'AbTesting',
-        title: 'A/B testing',
-        description:
-            'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
-        url: '/ab-testing',
-    },
-]
-productMenuItems: [
-  "Overview",
-  "Features",
-  "Pairs with",
-  "PostHog vs...",
-  "Documentation",
-  "Roadmap"
-]
+
 ---
 
-import ComparisonTable from './_includes/session-replay/comparison-table.mdx'
-
 <Hero />
-
-<Testimonial />
 
 <Sections />
 
 <MainFeatures />
-
-<PairsWith />
-
-<Comparison>
-
-  <ComparisonTable />
-
-</Comparison>
-
-<Documentation />
-
-<BlogPosts />
-
-<Roadmap />
 
 <CTA />

@@ -28,7 +28,7 @@ export default function Hero({
     const gatsbyImage = image?.image && getImage(image?.image)
     const imageStyles = { maxWidth: image?.width || '56rem', maxHeight: image?.height || 'auto' }
     return (
-        <>
+        <div className="mb-12">
             <div>
                 <h1 id="overview" className="text-center text-5xl lg:text-6xl 2xl:text-7xl mb-0 mt-8 md:mt-14">
                     <span className="text-red">{title}?</span> <span className="inline-block">PostHog does that.</span>
@@ -56,6 +56,6 @@ export default function Hero({
                     <GatsbyImage alt={title} image={gatsbyImage} className="rounded-md shadow-xl" />
                 </div>
             )}
-        </>
+        </div>
     )
 }

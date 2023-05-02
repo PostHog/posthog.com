@@ -1,0 +1,221 @@
+---
+title: Product analytics
+subtitle: Funnels, path analysis, trend charts, retention graphs, and more
+template: product
+productFeatures: [
+    {
+        icon: 'EventAutocapture',
+        title: 'Autocapture',
+        description:
+            'Add PostHog.js to your website or web app to track all event data and retroactively define events',
+    },
+    {
+        icon: 'Cohorts',
+        title: 'Data visualization',
+        description: 'Filter data by user property, group data, and use formulas in queries',
+    },
+    {
+        icon: 'SQL',
+        title: 'SQL',
+        description:
+            'Use PostHog’s filtering interface or switch into SQL mode for more powerful querying',
+    },
+    {
+        icon: 'Notifications',
+        title: 'Dashboards and insight subscriptions',
+        description: 'Share insights with teams, and get updates when results change',
+    },
+    {
+        icon: 'GroupAnalytics',
+        title: 'Group analytics',
+        description: 'Analyze how any group of people (like an organization) use your product',
+    },
+]
+productSections: [
+  [
+    {
+      title: "Funnels",
+      subtitle: "Find drop-off across a series of actions",
+      features: [
+          {
+              title: 'Filtering',
+              description:
+                  'Set filters for individual steps – or the entire funnel – by user property, group or cohort, or event property',
+          },
+          {
+              title: 'Graph types',
+              description:
+                  'Track user progression between steps, conversion time between each step, and how a funnel’s conversion rate changes over time',
+          },
+          {
+              title: 'Step ordering',
+              description:
+                  'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
+          },
+          {
+              title: 'Granular controls',
+              description:
+                  'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
+          },
+      ]
+    },
+    {
+      image: ../images/products/product-analytics/funnels.png,
+      imageFrame: false
+    }
+  ],
+  [
+    
+    {
+      title: "Graphs & trends",
+      subtitle: "Visualize user data with graphs, tables, charts, maps, and more",
+     features: [
+          {
+              title: 'Trends',
+              description:
+                  'Plot any event over time, such as a feature being used. You can even do math and multiple series',
+          },
+                    {
+              title: 'Advanced filtering',
+              description: 'Apply however many filters you need to or breakdown by any event, user or group property with advanced logic',
+          },
+          {
+              title: 'Breakdown tables',
+              description:
+                  'Break out your trends by any event property',
+          },
+          {
+              title: 'Querying',
+              description:
+                  'Speed up long running queries across large datasets in one click, if you want to',
+          },
+      ]
+    },
+    {
+      image: ../images/products/product-analytics/trends.png
+    },
+  ],
+  [
+    {
+      title: "User paths",
+      subtitle: "Set start and end points to see how users navigate your product, website, or conversion funnel",
+      features: [
+          {
+              title: 'Step insights',
+              description:
+                  'See who dropped off at each step, who did or didn’t complete a step, and the drop-off rate',
+          },
+          {
+              title: 'Wildcard groups',
+              description:
+                  'Group similar steps into a mega-step (where any of a group of events can trigger a step)',
+          },
+          {
+              title: 'Exclusion events',
+              description: 'Prevent specific events from appearing in a path',
+          },
+          {
+              title: 'Granular controls',
+              description:
+                  'Visualize any sequence of page views, screen views or events, with up to 20 steps',
+          },
+      ]
+    },
+    {
+      image: ../images/products/product-analytics/user-paths.png
+    }
+  ],
+  [
+    {
+      align: 'center',
+      title: "Correlation analysis",
+      subtitle: "When analyzing funnels, correlation analysis highlights significant events or properties that may be useful in determining how likely someone is to converting or churning.",
+    },
+    {
+      image: ../images/products/product-analytics/correlation-analysis.png
+    },
+  ],
+  [
+    {
+      title: "More insight types",
+      subtitle: "Retention, stickiness, and lifecycle views",
+      features: [
+          {
+              title: 'Retention',
+              description:
+                  'See how many users return on subsequent days after first visiting your site or product',
+          },
+          {
+              title: 'Stickiness',
+              description:
+                  'Learn how many times users perform a specific event in a period of time',
+          },
+          {
+              title: 'Lifecycle',
+              description:
+                  'Discover how your active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time',
+          },
+      ]
+    },
+    {
+      image: ../images/products/product-analytics/retention.png
+    },
+  ],
+  [
+    
+    {
+      image: ../images/products/product-analytics/dashboards.png
+    },
+    {
+      title: "Dashboards",
+      features: [
+          {
+              title: 'Dashboard filtering',
+              description:
+                  'Filter saved insights on a dashboard by anything - event properties, user properties, cohorts - even if a feature flag was active during a user’s session',
+          },
+          {
+              title: 'Embeddable dashboards with auto-refresh',
+              description:
+                  'Embed a dashboard iframe and always have near-realtime data - great for showing KPIs on a TV',
+          },
+          {
+              title: 'Weekly updates by Slack or email',
+              description:
+                  'Send dashboard updates to a Slack channel or to colleagues via email at any recurring frequency',
+          },
+          {
+              title: 'Access restrictions',
+              description:
+                  'Limit dashboard access with role-based permissions or using private projects',
+          },
+          {
+              title: 'Customizable layouts',
+              description: 'Configure how many insights appear per row or column',
+          },
+      ]
+    },
+    {
+      image: ../images/products/product-analytics/dashboards.png
+    },
+  ],
+]
+productMainCTA: {
+  title: Try PostHog,
+  url: https://app.posthog.com/signup,
+  subtitle: "First 1,000,000 events/mo are free.",
+  image: ../images/products/hogs/product-analytics.png
+}
+productPricingCTA: {
+    title: View pricing,
+    url: /pricing
+}
+---
+
+<Hero />
+
+<Sections />
+
+<MainFeatures />
+
+<CTA />

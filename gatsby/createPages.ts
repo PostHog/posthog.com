@@ -524,11 +524,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     const productDocumentationMenuNames = {
-        '/session-replay': 'Session replay',
-        '/product-analytics': 'Product analytics',
-        '/feature-flags': 'Feature flags',
-        '/ab-testing': 'A/B testing',
-        '/product-os': 'Data',
+        '/session-replay/documentation': 'Session replay',
+        '/product-analytics/documentation': 'Product analytics',
+        '/feature-flags/documentation': 'Feature flags',
+        '/ab-testing/documentation': 'A/B testing',
+        '/product-os/documentation': 'Data',
     }
 
     const docsMenu = sidebars.docs
@@ -545,10 +545,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     component: ProductTemplate,
                     context: {
                         id: node.id,
-                        blogTags: node?.frontmatter?.productBlog?.tags,
-                        tutorialTags: node?.frontmatter?.productTutorialTags,
+                        blogTags: node?.frontmatter?.productBlog?.tags ?? [''],
+                        tutorialTags: node?.frontmatter?.productTutorialTags ?? [''],
                         documentationNav,
-                        documentationURLs: documentationNav?.children?.map((child) => child.url),
+                        documentationURLs: documentationNav?.children?.map((child) => child.url) ?? [''],
                     },
                 })
                 res()

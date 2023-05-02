@@ -1,11 +1,6 @@
 ---
 title: A/B testing
 subtitle: A/B testing, multivariate testing, and statistical significance
-productHero: {
-  image: ./images/products/ab-testing.png,
-  height: 'auto',
-  width: '900px'
-}
 template: product
 productFeatures: [
     {
@@ -59,7 +54,7 @@ productSections: [
         ]
     },
     {
-      image: ./images/products/ab-testing/secondary-metrics.png
+      image: ../images/products/ab-testing/secondary-metrics.png
     }
   ],
   [
@@ -69,7 +64,7 @@ productSections: [
      align: 'center',
     },
     {
-      image: ./images/products/ab-testing/targeting.png
+      image: ../images/products/ab-testing/targeting.png
     },
   ],
   [
@@ -80,83 +75,27 @@ productSections: [
       align: 'center',
     },
     {
-      image: ./images/products/ab-testing/recommendations.png
+      image: ../images/products/ab-testing/recommendations.png
     },
     
   ],
 ]
-productTestimonial: {
-    "author": {
-        "name": "Taric Santos de Andrade",
-        "image": "/images/customers/taric.jpg",
-        "role": "Product Manager",
-        "company": { "name": "Vendasta", "image": "/images/customers/vendasta.svg" }
-    },
-    "quote": "I'm always trying to find the next experiment to run with PostHog. Every day, I'm checking reports and trying to push the boundaries by testing new hypotheses.",
-    image: ./images/products/hogs/ab-testing.png
-}
-productBlog: {
-  title: Blog posts that mention Feature flags,
-  tags: ["Experimentation"]
-}
-productTutorialTags: ["experimentation"]
-productTeam: Feature Success
 productMainCTA: {
   title: Try PostHog,
   subtitle: "First 1,000,000 events/mo are free.",
-  image: ./images/products/hogs/ab-testing.png,
+  image: ../images/products/hogs/ab-testing.png,
   url: https://app.posthog.com/signup
 }
 productPricingCTA: {
     title: View pricing,
     url: /pricing
 }
-productPairsWith: [
-    {
-        icon: 'Analytics',
-        title: 'Product analytics',
-        description:
-            'Run analysis based on the value of a test, or build a cohort of users from a test variant',
-            url: '/product-analytics'
-    },
-    {
-        icon: 'SessionRecording',
-        title: 'Session replay',
-        description:
-            'Watch recordings of users in a variant to discover nuances in why they did or didn’t complete the goal',
-            url: '/session-replay'
-    },
-    {
-        icon: 'FeatureFlags',
-        title: 'Feature flags',
-        description:
-            'Make changes to the feature flag the experiment uses - including JSON payload for each variant',
-            url: '/feature-flags'
-    },
-]
-productMenuItems: [
-  "Overview",
-  "Features",
-  "Pairs with",
-  "Documentation",
-  "Roadmap"
-]
 ---
 
 <Hero />
 
-<Testimonial />
-
 <Sections />
 
 <MainFeatures />
-
-<PairsWith />
-
-<Documentation />
-
-<BlogPosts />
-
-<Roadmap />
 
 <CTA />

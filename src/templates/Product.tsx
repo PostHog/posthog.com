@@ -19,6 +19,7 @@ import PostLayout from 'components/PostLayout'
 import { IMenu } from 'components/PostLayout/types'
 import { AbTesting, Analytics, FeatureFlags, SessionRecording } from 'components/ProductIcons'
 import { Platform } from 'components/NotProductIcons'
+import Tutorials from 'components/ProductLayout/Tutorials'
 
 const Check = (props: any) => <CheckIcon {...props} className="w-5 mx-auto" />
 const Close = (props: any) => <CloseIcon {...props} className="w-5 mx-auto" />
@@ -29,11 +30,11 @@ const menu: IMenu[] = [
         name: 'Product analytics',
         url: '/product-analytics',
         children: [
-            { name: 'Features', url: '/product-analytics#features' },
-            { name: 'Comparisons', url: '/product-analytics#comparisons' },
-            { name: 'Docs', url: '/product-analytics#documentation' },
-            { name: 'Tutorials', url: '/product-analytics#tutorials' },
-            { name: 'Roadmap', url: '/product-analytics#roadmap' },
+            { name: 'Features', url: '/product-analytics/features' },
+            { name: 'Comparisons', url: '/product-analytics/comparisons' },
+            { name: 'Docs', url: '/product-analytics/documentation' },
+            { name: 'Tutorials', url: '/product-analytics/tutorials' },
+            { name: 'Roadmap', url: '/product-analytics/roadmap' },
         ],
     },
     {
@@ -41,11 +42,11 @@ const menu: IMenu[] = [
         name: 'Session replay',
         url: '/session-replay',
         children: [
-            { name: 'Features', url: '/session-replay#features' },
-            { name: 'Comparisons', url: '/session-replay#comparisons' },
-            { name: 'Docs', url: '/session-replay#documentation' },
-            { name: 'Tutorials', url: '/session-replay#tutorials' },
-            { name: 'Roadmap', url: '/session-replay#roadmap' },
+            { name: 'Features', url: '/session-replay/features' },
+            { name: 'Comparisons', url: '/session-replay/comparisons' },
+            { name: 'Roadmap', url: '/session-replay/roadmap' },
+            { name: 'Docs', url: '/session-replay/documentation' },
+            { name: 'Tutorials', url: '/session-replay/tutorials' },
         ],
     },
     {
@@ -53,11 +54,11 @@ const menu: IMenu[] = [
         name: 'Feature flags',
         url: '/feature-flags',
         children: [
-            { name: 'Features', url: '/feature-flags#features' },
-            { name: 'Comparisons', url: '/feature-flags#comparisons' },
-            { name: 'Docs', url: '/feature-flags#documentation' },
-            { name: 'Tutorials', url: '/feature-flags#tutorials' },
-            { name: 'Roadmap', url: '/feature-flags#roadmap' },
+            { name: 'Features', url: '/feature-flags/features' },
+            { name: 'Comparisons', url: '/feature-flags/comparisons' },
+            { name: 'Docs', url: '/feature-flags/documentation' },
+            { name: 'Tutorials', url: '/feature-flags/tutorials' },
+            { name: 'Roadmap', url: '/feature-flags/roadmap' },
         ],
     },
     {
@@ -65,10 +66,10 @@ const menu: IMenu[] = [
         name: 'A/B testing',
         url: '/ab-testing',
         children: [
-            { name: 'Features', url: '/ab-testing#features' },
-            { name: 'Docs', url: '/ab-testing#documentation' },
-            { name: 'Tutorials', url: '/ab-testing#tutorials' },
-            { name: 'Roadmap', url: '/ab-testing#roadmap' },
+            { name: 'Features', url: '/ab-testing/features' },
+            { name: 'Docs', url: '/ab-testing/documentation' },
+            { name: 'Tutorials', url: '/ab-testing/tutorials' },
+            { name: 'Roadmap', url: '/ab-testing/roadmap' },
         ],
     },
     {
@@ -76,9 +77,9 @@ const menu: IMenu[] = [
         name: 'Product OS',
         url: '/product-os',
         children: [
-            { name: 'Features', url: '/product-os#features' },
-            { name: 'Blog posts', url: '/product-os#posts' },
-            { name: 'Roadmap', url: '/product-os#roadmap' },
+            { name: 'Features', url: '/product-os/features' },
+            { name: 'Blog posts', url: '/product-os/posts' },
+            { name: 'Roadmap', url: '/product-os/roadmap' },
         ],
     },
 ]
@@ -167,8 +168,12 @@ export default function Product({ data, location, pageContext }) {
                         pages: documentation?.nodes,
                     }}
                     title={title}
-                    tutorials={tutorials?.nodes}
                 />
+            </SectionWrapper>
+        ),
+        Tutorials: (props: any) => (
+            <SectionWrapper {...props}>
+                <Tutorials tutorials={tutorials?.nodes} />
             </SectionWrapper>
         ),
     }
@@ -182,7 +187,6 @@ export default function Product({ data, location, pageContext }) {
             />
 
             <PostLayout
-                menuType="scroll"
                 menu={menu}
                 title={title}
                 hideSidebar
