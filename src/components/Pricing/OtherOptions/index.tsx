@@ -1,19 +1,52 @@
 import { CallToAction } from 'components/CallToAction'
 import { GitHub } from 'components/Icons'
 import { Enterprise as EnterpriseIcon } from 'components/NotProductIcons'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from '../../../hooks/usePostHog'
 import React from 'react'
 
 const descriptionClassName = `list-none m-0 p-0 grid gap-y-1`
 const descriptionItemClassName = `text-sm opacity-80`
 
 const OpenSourceDescription = () => {
+    const posthog = usePostHog()
     return (
         <ul className={descriptionClassName}>
-            <li className={descriptionItemClassName}>Deploy with Docker on your own server. </li>
-            <li className={descriptionItemClassName}>Made for hobby projects with {'<100k'} events/month. </li>
-            <li className={descriptionItemClassName}>
-                <strong>MIT licensed without guarantee.</strong>
-            </li>
+            <li className={descriptionItemClassName}>Deploy with Docker on your own server.</li>
+            <RenderInClient
+                render={() => {
+                    return posthog?.getFeatureFlag &&
+                        posthog?.getFeatureFlag('more-foss-friendly-language') === 'test' ? (
+                        <>
+                            <li className={descriptionItemClassName}>
+                                Great for internal tools or evaluating without vendor approvals.
+                            </li>
+                            <li className={descriptionItemClassName}>
+                                <strong>MIT licensed, BYOEngineers!</strong>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li className={descriptionItemClassName}>
+                                Made for hobby projects with {'<100k'} events/month.
+                            </li>
+                            <li className={descriptionItemClassName}>
+                                <strong>MIT licensed without guarantee.</strong>
+                            </li>
+                        </>
+                    )
+                }}
+                placeholder={
+                    <>
+                        <li className={descriptionItemClassName}>
+                            Made for hobby projects with {'<100k'} events/month.
+                        </li>
+                        <li className={descriptionItemClassName}>
+                            <strong>MIT licensed without guarantee.</strong>
+                        </li>
+                    </>
+                }
+            />
         </ul>
     )
 }
