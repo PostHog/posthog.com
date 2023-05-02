@@ -207,6 +207,14 @@ if (isMyFlagEnabledForUser) {
 }
 ```
 
+**Disable feature flag events**
+
+By default, calling `isFeatureEnabled()` sends a `$feature_flag_called` event so you can analyze flag usage. You can disable this by passing the `sendFeatureFlagEvents` property:
+
+```node
+const isMyFlagEnabledForUser = await client.isFeatureEnabled('flag-key', 'user distinct id', { sendFeatureFlagEvents: false })
+```
+
 **Get a flag value**
 
 If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled.
@@ -217,6 +225,8 @@ If you're using multivariate feature flags, you can also get the value of the fl
 // getFeatureFlag(key: string, distinctId: string, options: {}): Promise<string | boolean | undefined>
 const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id')
 ```
+
+
 
 
 **Overriding server properties**
