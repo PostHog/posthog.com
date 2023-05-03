@@ -42,7 +42,7 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>', 
   { 
-    api_host: 'https://app.posthog.com' 
+    api_host: '<ph_instance_address>', 
   }
 );
 
@@ -185,7 +185,7 @@ To bootstrap the flags, first, we need the flag data from PostHog. To do this, w
 npm i posthog-node
 ```
 
-Next, set up a PostHog client in your `server.js` file.
+Next, set up a PostHog client in your `server.js` file with your project API key, instance address, and a personal API key you can create in your [account settings](https://app.posthog.com/me/settings). We need the personal API key to locally evaluate flags on the backend to make them as fast as possible.
 
 ```js
 // server/index.js
@@ -193,7 +193,10 @@ Next, set up a PostHog client in your `server.js` file.
 const { PostHog } = require('posthog-node')
 const client = new PostHog(
     '<ph_project_api_key>',
-    { host: '<ph_instance_address>'}
+    { 
+      host: '<ph_instance_address>',
+      personalApiKey: '<ph_personal_api_key>'
+    }
 )
 //...
 ```
@@ -265,8 +268,9 @@ app.get('/*', async (req, res, next) => {
     return res.send(finalHtml);
   });
 });
-	
 ```
+
+> If your feature flag relies on person or group properties, you need to include them in the `getAllFlags()` call so it can [evaluate locally](/docs/libraries/node#local-evaluation). To do this, add `personProperties` or `groupProperties` to the option argument. Your call looks like this `client.getAllFlags(distinctId, { personProperties: { active: true } })`
 
 ## Bootstrap flags on the frontend
 
