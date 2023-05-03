@@ -6,6 +6,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { Check as CheckIcon, Close2 as CloseIcon } from '../components/Icons'
 import Hero from 'components/ProductLayout/Hero'
+import HeroCondensed from 'components/ProductLayout/HeroCondensed'
 import { MainFeatures } from 'components/ProductLayout/Feature'
 import { Sections, SectionWrapper } from 'components/ProductLayout/Section'
 import Testimonial from 'components/ProductLayout/Testimonial'
@@ -121,6 +122,16 @@ export default function Product({ data, location, pageContext }) {
     const components = {
         Hero: (props: any) => (
             <Hero
+                {...props}
+                mainCTA={productMainCTA}
+                pricingCTA={productPricingCTA}
+                title={title}
+                subtitle={subtitle}
+                image={productHero}
+            />
+        ),
+        HeroCondensed: (props: any) => (
+            <HeroCondensed
                 {...props}
                 mainCTA={productMainCTA}
                 pricingCTA={productPricingCTA}
