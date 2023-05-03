@@ -26,11 +26,11 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
     <span className="mx-2">•</span>
     <a href={
         'mailto:support@posthog.com?subject=Encountered server error'
-        + (location.hash ? ` (ID ${location.hash.slice(1)})` : '')
+        + ((typeof window !== 'undefined' && location.hash) ? ` (ID ${location.hash.slice(1)})` : '')
     }>Contact PostHog</a>
 </p>
 
-<>{location.hash && (
+<>{typeof window !== 'undefined' && location.hash && (
     <span className="absolute bottom-4 left-1/2 -translate-x-1/2 font-semibold text-sm text-center opacity-50">
         Error ID: {location.hash.slice(1)}
     </span>
