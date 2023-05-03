@@ -8,12 +8,15 @@ import { TransformImage } from 'react-markdown/lib/ast-to-react'
 export const Markdown = ({
     children,
     transformImageUri,
+    allowedElements,
 }: {
     children: string
     transformImageUri?: TransformImage | undefined
+    allowedElements?: string[]
 }) => {
     return (
         <ReactMarkdown
+            allowedElements={allowedElements}
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
             className="flex-1 text-base overflow-hidden text-ellipsis squeak-post-markdown"

@@ -6,6 +6,7 @@ import getAvatarURL from '../Squeak/util/getAvatar'
 import { dateToDays, dayFormat } from '../../utils'
 import { Check2 } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
+import Markdown from 'components/Squeak/components/Markdown'
 
 type QuestionsTableProps = {
     questions: Omit<StrapiResult<QuestionData[]>, 'meta'>
@@ -20,6 +21,7 @@ type QuestionsTableProps = {
     hasMore?: boolean
     showAuthor?: boolean
     showTopic?: boolean
+    showBody?: boolean
 }
 
 export const QuestionsTable = ({
@@ -31,6 +33,7 @@ export const QuestionsTable = ({
     currentPage,
     hasMore,
     showTopic,
+    showBody,
     showAuthor = true,
 }: QuestionsTableProps) => {
     return (
@@ -44,7 +47,7 @@ export const QuestionsTable = ({
                 {questions.data.length > 0
                     ? questions.data.filter(Boolean).map((question) => {
                           const {
-                              attributes: { profile, subject, permalink, replies, createdAt, resolved, topics },
+                              attributes: { profile, subject, permalink, replies, createdAt, resolved, topics, body },
                           } = question
 
                           const latestAuthor = replies?.data?.[0]?.attributes?.profile || profile
@@ -59,7 +62,7 @@ export const QuestionsTable = ({
                                   >
                                       <div className="grid grid-cols-12 items-center">
                                           <div className="col-span-12 xl:col-span-7 2xl:col-span-8 flex items-center space-x-4">
-                                              <div className="w-4 text-green">
+                                              <div className="w-4 text-green flex-shrink-0">
                                                   {resolved && (
                                                       <Tooltip content="Resolved">
                                                           <span className="relative">
@@ -83,6 +86,11 @@ export const QuestionsTable = ({
                                                           <div className="xl:hidden text-primary dark:text-primary-dark text-sm font-medium opacity-60 line-clamp-2">
                                                               {dayFormat(dateToDays(createdAt))}
                                                           </div>
+                                                      </div>
+                                                  )}
+                                                  {showBody && (
+                                                      <div className="text-black items-baseline flex flex-1 min-w-0 whitespace-nowrap overflow-hidden dark:text-white question-table-body-container">
+                                                          <Markdown allowedElements={['p']}>{body}</Markdown>
                                                       </div>
                                                   )}
                                               </div>

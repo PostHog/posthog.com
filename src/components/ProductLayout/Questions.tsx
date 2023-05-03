@@ -20,6 +20,7 @@ export default function Questions({ topicId }: { topicId: number }) {
                 questions={questions}
                 isLoading={isLoading}
                 fetchMore={fetchMore}
+                showBody
             />
         </div>
     )
