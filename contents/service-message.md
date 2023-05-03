@@ -3,13 +3,18 @@ title: Scheduled Maintenance
 showTitle: false
 showSidebar: true
 noindex: true
+images:
+    - './images/service-message/worker-hog.png'
 ---
 
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
-![Builder Hog](./images/service-message/worker-hog.png)
-<br />
 
-<h1 className="text-center px-2 pt-4 pb-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative z-20" style={{ marginTop: "-2rem", marginBottom: "-.5rem" }}>
+<div className="block mb-8 mx-auto" style={{ maxWidth: '370px' }}>
+  <GatsbyImage image={getImage(props.images[0])} alt="Worker hog" placeholder="none" />
+</div>
+
+<h1 className="text-center px-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative z-20">
   PostHog is undergoing <span className="text-red">scheduled</span> maintenance
 </h1>
 
