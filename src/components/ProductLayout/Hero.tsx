@@ -29,33 +29,41 @@ export default function Hero({
     const imageStyles = { maxWidth: image?.width || '56rem', maxHeight: image?.height || 'auto' }
     return (
         <div className="mb-12">
-            <div>
-                <h1 id="overview" className="text-center text-5xl lg:text-6xl 2xl:text-7xl mb-0 mt-8 md:mt-14">
-                    <span className="text-red">{title}?</span> <span className="inline-block">PostHog does that.</span>
-                </h1>
-                <p
-                    className="text-center text-lg font-semibold text-black/70 mt-4"
-                    dangerouslySetInnerHTML={{ __html: subtitle }}
-                />
-                {pricingCTA && mainCTA && (
-                    <div className="flex flex-col space-y-3 md:space-y-0 md:flex-row md:space-x-4 md:items-center justify-center">
-                        <CallToAction to={mainCTA.url} size="sm" className="md:min-w-[200px]">
-                            {mainCTA.title}
-                        </CallToAction>
-                        <CallToAction type="secondary" to={pricingCTA.url} size="sm" className="md:min-w-[200px]">
-                            {pricingCTA.title}
-                        </CallToAction>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h1 id="overview" className="text-red text-5xl lg:text-6xl 2xl:text-7xl my-2 md:mt-0">
+                        {title}
+                    </h1>
+                    <h2>PostHog does that.</h2>
+                    <p
+                        className="text-lg font-semibold text-black/70 mt-4"
+                        dangerouslySetInnerHTML={{ __html: subtitle }}
+                    />
+                    {pricingCTA && mainCTA && (
+                        <div className="flex space-x-4 items-center">
+                            <CallToAction to={mainCTA.url} size="sm" className=" xl:min-w-[200px]">
+                                {mainCTA.title}
+                            </CallToAction>
+                            <CallToAction type="secondary" to={pricingCTA.url} size="sm" className=" xl:min-w-[200px]">
+                                {pricingCTA.title}
+                            </CallToAction>
+                        </div>
+                    )}
+                </div>
+
+                {gatsbyImage && (
+                    <div
+                        style={imageStyles}
+                        className="
+                            leading-0
+                            relative !max-w-xl xl:!max-w-none after:absolute after:bottom-0 after:left-0 after:w-full after:content-[''] after:h-36 after:bg-gradient-to-b after:from-tan/0 after:via-tan/60 after:to-tan/100
+                            md:after:hidden
+                            md:-mr-16 xl:-mr-32"
+                    >
+                        <GatsbyImage alt={title} image={gatsbyImage} objectFit="contain" className="w-full" />
                     </div>
                 )}
             </div>
-            {gatsbyImage && (
-                <div
-                    style={imageStyles}
-                    className="leading-0 mx-auto mt-8 -mb-12 text-center relative after:absolute after:bottom-12 after:left-0 after:w-full after:content-[''] after:h-36 after:bg-gradient-to-b after:from-tan/0 after:via-tan/60 after:to-tan/100"
-                >
-                    <GatsbyImage alt={title} image={gatsbyImage} className="rounded-md shadow-xl" />
-                </div>
-            )}
         </div>
     )
 }
