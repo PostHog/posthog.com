@@ -20,6 +20,7 @@ import { IMenu } from 'components/PostLayout/types'
 import { AbTesting, Analytics, FeatureFlags, SessionRecording } from 'components/ProductIcons'
 import { Platform } from 'components/NotProductIcons'
 import Tutorials from 'components/ProductLayout/Tutorials'
+import { PlanComparison } from 'components/Pricing/PlanComparison'
 
 const Check = (props: any) => <CheckIcon {...props} className="w-5 mx-auto" />
 const Close = (props: any) => <CloseIcon {...props} className="w-5 mx-auto" />
@@ -31,6 +32,7 @@ const menu: IMenu[] = [
         url: '/product-analytics',
         children: [
             { name: 'Features', url: '/product-analytics/features' },
+            { name: 'Pricing', url: '/product-analytics/pricing' },
             { name: 'Comparisons', url: '/product-analytics/comparisons' },
             { name: 'Docs', url: '/product-analytics/documentation' },
             { name: 'Tutorials', url: '/product-analytics/tutorials' },
@@ -43,6 +45,7 @@ const menu: IMenu[] = [
         url: '/session-replay',
         children: [
             { name: 'Features', url: '/session-replay/features' },
+            { name: 'Pricing', url: '/session-replay/pricing' },
             { name: 'Comparisons', url: '/session-replay/comparisons' },
             { name: 'Roadmap', url: '/session-replay/roadmap' },
             { name: 'Docs', url: '/session-replay/documentation' },
@@ -55,6 +58,7 @@ const menu: IMenu[] = [
         url: '/feature-flags',
         children: [
             { name: 'Features', url: '/feature-flags/features' },
+            { name: 'Pricing', url: '/feature-flags/pricing' },
             { name: 'Comparisons', url: '/feature-flags/comparisons' },
             { name: 'Docs', url: '/feature-flags/documentation' },
             { name: 'Tutorials', url: '/feature-flags/tutorials' },
@@ -67,6 +71,7 @@ const menu: IMenu[] = [
         url: '/ab-testing',
         children: [
             { name: 'Features', url: '/ab-testing/features' },
+            { name: 'Pricing', url: '/ab-testing/pricing' },
             { name: 'Docs', url: '/ab-testing/documentation' },
             { name: 'Tutorials', url: '/ab-testing/tutorials' },
             { name: 'Roadmap', url: '/ab-testing/roadmap' },
@@ -78,6 +83,7 @@ const menu: IMenu[] = [
         url: '/product-os',
         children: [
             { name: 'Features', url: '/product-os/features' },
+            { name: 'Pricing', url: '/product-os/pricing' },
             { name: 'Blog posts', url: '/product-os/posts' },
             { name: 'Roadmap', url: '/product-os/roadmap' },
         ],
@@ -175,6 +181,11 @@ export default function Product({ data, location, pageContext }) {
             <SectionWrapper {...props}>
                 <Tutorials tutorials={tutorials?.nodes} />
             </SectionWrapper>
+        ),
+        PlanComparison: (props: any) => (
+            <div className="max-w-screen-2xl mx-auto">
+                <PlanComparison {...props} showCTA={false} />
+            </div>
         ),
     }
 

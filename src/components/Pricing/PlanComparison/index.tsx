@@ -223,7 +223,7 @@ export const getProductLimit = (product?: BillingProductV2Type): JSX.Element => 
     )
 }
 
-export const PlanComparison = ({ className = '' }) => {
+export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?: string[]; showCTA?: boolean }) => {
     const posthog = usePostHog()
     const [availablePlans, setAvailablePlans] = useState<BillingV2PlanType[]>([])
 
@@ -280,22 +280,24 @@ export const PlanComparison = ({ className = '' }) => {
                                     <p className="font-bold mb-0 text-center md:text-left">{plan.name}</p>
                                     <p className="hidden md:block text-black/50 text-sm mb-3">{plan.description}</p>
                                 </div>
-                                <TrackedCTA
-                                    event={{
-                                        name: `clicked Get started - free`,
-                                        type: 'cloud',
-                                    }}
-                                    type="primary"
-                                    size="sm"
-                                    className="shadow-md !w-auto"
-                                    to={`https://${
-                                        posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                            ? 'eu'
-                                            : 'app'
-                                    }.posthog.com/signup`}
-                                >
-                                    Get started - free
-                                </TrackedCTA>
+                                {showCTA && (
+                                    <TrackedCTA
+                                        event={{
+                                            name: `clicked Get started - free`,
+                                            type: 'cloud',
+                                        }}
+                                        type="primary"
+                                        size="sm"
+                                        className="shadow-md !w-auto"
+                                        to={`https://${
+                                            posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                ? 'eu'
+                                                : 'app'
+                                        }.posthog.com/signup`}
+                                    >
+                                        Get started - free
+                                    </TrackedCTA>
+                                )}
                             </div>
                         </div>
                     ))}
@@ -304,149 +306,156 @@ export const PlanComparison = ({ className = '' }) => {
             {/* PRODUCTS */}
             {availablePlans?.[availablePlans.length - 1]?.products?.map((product) => (
                 <React.Fragment key={`product-${product.type}`}>
-                    {product.feature_groups?.map((feature_group) => (
-                        <div key={`product-${product.type}-feature-group-${feature_group.name}`}>
-                            <div className="flex flex-wrap">
-                                <div
-                                    key={`${feature_group.name}-group`}
-                                    className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
-                                >
-                                    <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
-                                        <span className="inline-block h-6 w-6">{icons[feature_group.group]}</span>{' '}
-                                        {feature_group.name}
-                                    </h4>
-                                </div>
-                                <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
-                                    {product.tiered
-                                        ? availablePlans.map((plan) => (
-                                              <div
-                                                  className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
-                                                  key={`${plan.key}-${product.name}-free-allocation-or-limit`}
-                                              >
-                                                  <div>
-                                                      {getProductLimit(
-                                                          plan.products?.find((p) => p.type === product.type)
-                                                      )}
-                                                  </div>
-                                              </div>
-                                          ))
-                                        : null}
-                                </div>
-                            </div>
-                            {/* SUB-FEATURES */}
-                            <div className="bg-gray-accent-light/80 p-1 rounded md:ml-6">
-                                {feature_group.features
-                                    // don't include features that are in the excluded features list
-                                    ?.filter((f) => !excludedFeatures.includes(f.key))
-                                    ?.map((feature) => (
-                                        <div
-                                            className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
-                                            key={`${feature_group.name}-subfeature-${feature.name}`}
-                                        >
-                                            <div
-                                                className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
-                                                key={`comparison-row-key-${feature.name}`}
-                                            >
-                                                <Tooltip
-                                                    content={() => (
-                                                        <div className="p-2">
-                                                            <p className="font-bold text-[15px] mb-1">{feature.name}</p>
-                                                            <p className="mb-0 text-sm">{feature.description}</p>
-                                                        </div>
-                                                    )}
-                                                    tooltipClassName="max-w-xs m-4"
-                                                    placement={window.innerWidth > 767 ? 'right' : 'bottom'}
-                                                >
-                                                    <span
-                                                        className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
-                                                    >
-                                                        {feature.name}
-                                                    </span>
-                                                </Tooltip>
-                                            </div>
-                                            <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
-                                                {availablePlans.map((plan, i) => (
-                                                    <div
-                                                        className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
-                                                        key={`${plan.name}-${feature.name}-value`}
-                                                    >
-                                                        <PlanIcon
-                                                            feature={plan.products
-                                                                .find((p) => p.type === product.type)
-                                                                ?.feature_groups?.find(
-                                                                    (fg) => fg.name === feature_group.name
-                                                                )
-                                                                ?.features?.find((f) => f.name === feature.name)}
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    ))}
-                            </div>
-                            {/* PRODUCT PRICING */}
-                            {product.tiers && (
-                                <div className="flex flex-wrap md:pl-8 px-2">
+                    {product.feature_groups?.map((feature_group) => {
+                        if (groupsToShow && !groupsToShow.includes(feature_group.group)) return null
+                        return (
+                            <div key={`product-${product.type}-feature-group-${feature_group.name}`}>
+                                <div className="flex flex-wrap">
                                     <div
-                                        className={`hidden md:block basis-[100%] md:basis-0 flex-1 pt-4 text-center md:text-left font-bold md:bg-transparent`}
+                                        key={`${feature_group.name}-group`}
+                                        className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
                                     >
-                                        {feature_group.name} pricing
+                                        <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
+                                            <span className="inline-block h-6 w-6">{icons[feature_group.group]}</span>{' '}
+                                            {feature_group.name}
+                                        </h4>
                                     </div>
-                                    <div className="w-full md:flex-[0_0_60%] flex">
-                                        {availablePlans.map((plan, i) => (
+                                    <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
+                                        {product.tiered
+                                            ? availablePlans.map((plan) => (
+                                                  <div
+                                                      className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
+                                                      key={`${plan.key}-${product.name}-free-allocation-or-limit`}
+                                                  >
+                                                      <div>
+                                                          {getProductLimit(
+                                                              plan.products?.find((p) => p.type === product.type)
+                                                          )}
+                                                      </div>
+                                                  </div>
+                                              ))
+                                            : null}
+                                    </div>
+                                </div>
+                                {/* SUB-FEATURES */}
+                                <div className="bg-gray-accent-light/80 p-1 rounded md:ml-6">
+                                    {feature_group.features
+                                        // don't include features that are in the excluded features list
+                                        ?.filter((f) => !excludedFeatures.includes(f.key))
+                                        ?.map((feature) => (
                                             <div
-                                                key={plan.name + '-' + product.name + '-' + 'pricing'}
-                                                className={`flex-1 pl-2 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
+                                                className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
+                                                key={`${feature_group.name}-subfeature-${feature.name}`}
                                             >
-                                                <ProductTiers
-                                                    product={plan.products.find((p) => p.type === product.type)}
-                                                    planKey={plan.key}
-                                                />
+                                                <div
+                                                    className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
+                                                    key={`comparison-row-key-${feature.name}`}
+                                                >
+                                                    <Tooltip
+                                                        content={() => (
+                                                            <div className="p-2">
+                                                                <p className="font-bold text-[15px] mb-1">
+                                                                    {feature.name}
+                                                                </p>
+                                                                <p className="mb-0 text-sm">{feature.description}</p>
+                                                            </div>
+                                                        )}
+                                                        tooltipClassName="max-w-xs m-4"
+                                                        placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                    >
+                                                        <span
+                                                            className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                                        >
+                                                            {feature.name}
+                                                        </span>
+                                                    </Tooltip>
+                                                </div>
+                                                <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
+                                                    {availablePlans.map((plan, i) => (
+                                                        <div
+                                                            className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
+                                                            key={`${plan.name}-${feature.name}-value`}
+                                                        >
+                                                            <PlanIcon
+                                                                feature={plan.products
+                                                                    .find((p) => p.type === product.type)
+                                                                    ?.feature_groups?.find(
+                                                                        (fg) => fg.name === feature_group.name
+                                                                    )
+                                                                    ?.features?.find((f) => f.name === feature.name)}
+                                                            />
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         ))}
-                                    </div>
                                 </div>
-                            )}
-                        </div>
-                    ))}
+                                {/* PRODUCT PRICING */}
+                                {product.tiers && (
+                                    <div className="flex flex-wrap md:pl-8 px-2">
+                                        <div
+                                            className={`hidden md:block basis-[100%] md:basis-0 flex-1 pt-4 text-center md:text-left font-bold md:bg-transparent`}
+                                        >
+                                            {feature_group.name} pricing
+                                        </div>
+                                        <div className="w-full md:flex-[0_0_60%] flex">
+                                            {availablePlans.map((plan, i) => (
+                                                <div
+                                                    key={plan.name + '-' + product.name + '-' + 'pricing'}
+                                                    className={`flex-1 pl-2 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
+                                                >
+                                                    <ProductTiers
+                                                        product={plan.products.find((p) => p.type === product.type)}
+                                                        planKey={plan.key}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )
+                    })}
                 </React.Fragment>
             ))}
-            <div className="flex flex-wrap z-10 -mx-4 md:mx-0 pb-6">
-                <div
-                    className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan pb-4`}
-                ></div>
+            {showCTA && (
+                <div className="flex flex-wrap z-10 -mx-4 md:mx-0 pb-6">
+                    <div
+                        className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan pb-4`}
+                    ></div>
 
-                <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex px-4 md:gap-4">
-                    {availablePlans.map((plan) => (
-                        <div
-                            key={`${plan.name}-header`}
-                            className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
-                        >
-                            <div className="flex-1 flex flex-col h-full justify-between">
-                                <div>
-                                    <p className="font-bold mb-2 text-center md:text-left">{plan.name}</p>
+                    <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex px-4 md:gap-4">
+                        {availablePlans.map((plan) => (
+                            <div
+                                key={`${plan.name}-header`}
+                                className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
+                            >
+                                <div className="flex-1 flex flex-col h-full justify-between">
+                                    <div>
+                                        <p className="font-bold mb-2 text-center md:text-left">{plan.name}</p>
+                                    </div>
+                                    <TrackedCTA
+                                        event={{
+                                            name: `clicked Get started - free`,
+                                            type: 'cloud',
+                                        }}
+                                        type="primary"
+                                        size="sm"
+                                        className="shadow-md !w-auto"
+                                        to={`https://${
+                                            posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                ? 'eu'
+                                                : 'app'
+                                        }.posthog.com/signup`}
+                                    >
+                                        Get started - free
+                                    </TrackedCTA>
                                 </div>
-                                <TrackedCTA
-                                    event={{
-                                        name: `clicked Get started - free`,
-                                        type: 'cloud',
-                                    }}
-                                    type="primary"
-                                    size="sm"
-                                    className="shadow-md !w-auto"
-                                    to={`https://${
-                                        posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                            ? 'eu'
-                                            : 'app'
-                                    }.posthog.com/signup`}
-                                >
-                                    Get started - free
-                                </TrackedCTA>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     ) : (
         <div className="bg-gray-accent-light p-12 rounded flex justify-center">
