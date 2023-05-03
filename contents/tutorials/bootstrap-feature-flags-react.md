@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-3.png
 tags: ['feature flags']
 ---
 
-Bootstrapping feature flags make them available before React and PostHog load on the client side. This enables uses like routing to different pages before load, content being available on first load, and visual consistency. 
+Bootstrapping feature flags make them available as soon as React and PostHog load on the client side. This enables use cases like routing to different pages on load, all feature flagged content being available on first load, and visual consistency. 
 
 To show you how you can set up bootstrap feature flags, we are going to build a React app, add PostHog, set up an Express server to render our React app on the server-side, and finally bootstrap our flags from the server to the client.
 
