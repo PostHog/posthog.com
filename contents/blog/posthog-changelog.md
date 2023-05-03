@@ -27,7 +27,7 @@ Every Friday we update this page with the latest new features, fixes, and update
 We've updated the PostHog toolbar, which enables you to toggle feature flags, heatmaps and create actions right in your product, by taking some inspiration from [hedgehog mode](/blog/rome-hackathon#hedgehog-mode). Hit the '🦔' toggle to switch between the Classic and Hedgehog toolbars. Don't worry, you can still summon hedgehog mode separately from the the help menu.
 
 #### Hats for hedgehogs
-![toolbar](../images/blog/array/hats.png)
+![toolbar](../images/blog/array/hats.gif)
 
 The trickle of projects from [our offsite](/blog/aruba-hackathon) continues, with an update which improves hedgehog mode by giving Max a wealth of new clothes to try on. Why? Because! 
 
