@@ -1,0 +1,37 @@
+---
+title: Something went wrong
+showTitle: false
+showSidebar: true
+noindex: true
+width: 'md'
+images:
+    - './images/service-message/worker-hog.png'
+---
+
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+
+
+<div className="block mb-8 -mt-8 mx-auto" style={{ maxWidth: '370px' }}>
+  <GatsbyImage image={getImage(props.images[0])} alt="Worker hog" placeholder="none" />
+</div>
+
+<h1 className="text-center px-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative">
+  <span className='text-red'>Oops!</span> Things went south
+</h1>
+
+<Hero subtitle="We weren't able to handle this request." />
+
+<p className='text-center -mt-4'>
+    <a href="https://status.posthog.com/">Check PostHog Status</a>
+    <span className="mx-2">•</span>
+    <a href={
+        'mailto:support@posthog.com?subject=Encountered server error'
+        + (location.hash ? ` (ID ${location.hash.slice(1)})` : '')
+    }>Contact PostHog</a>
+</p>
+
+<>{location.hash && (
+    <span className="absolute bottom-4 left-1/2 -translate-x-1/2 font-semibold text-sm text-center opacity-50">
+        Error ID: {location.hash.slice(1)}
+    </span>
+)}</>

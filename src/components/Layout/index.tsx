@@ -27,7 +27,7 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
         <SearchProvider>
             <div className={className}>
                 {!isInFrame && <Header />}
-                <main>{children}</main>
+                <main className={isInFrame ? 'in-iframe' : undefined}>{children}</main>
                 {!isInFrame && <Footer />}
                 {!isInFrame && <CookieBanner />}
             </div>
