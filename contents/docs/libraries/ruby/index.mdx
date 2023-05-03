@@ -288,7 +288,7 @@ Sometimes, performance might matter to you so much that you never want an HTTP r
 
 <CohortExpansionSnippet />
 
-### Evaluating feature flags locally in unicorn server
+#### Evaluating feature flags locally in unicorn server
 
 If you have `preload_app true` in your unicorn config, you can use `after_fork` [hook](https://www.rubydoc.info/gems/unicorn/Unicorn%2FConfigurator:after_fork) which is part of the unicorn's configuration so that the feature flag cache will receive the updates from posthog dashboard.
 
