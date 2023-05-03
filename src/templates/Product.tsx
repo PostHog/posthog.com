@@ -21,6 +21,7 @@ import { AbTesting, Analytics, FeatureFlags, SessionRecording } from 'components
 import { Platform } from 'components/NotProductIcons'
 import Tutorials from 'components/ProductLayout/Tutorials'
 import { PlanComparison } from 'components/Pricing/PlanComparison'
+import Questions from 'components/ProductLayout/Questions'
 
 const Check = (props: any) => <CheckIcon {...props} className="w-5 mx-auto" />
 const Close = (props: any) => <CloseIcon {...props} className="w-5 mx-auto" />
@@ -37,6 +38,7 @@ const menu: IMenu[] = [
             { name: 'Docs', url: '/product-analytics/documentation' },
             { name: 'Tutorials', url: '/product-analytics/tutorials' },
             { name: 'Roadmap', url: '/product-analytics/roadmap' },
+            { name: 'Questions', url: '/product-analytics/questions' },
         ],
     },
     {
@@ -50,6 +52,7 @@ const menu: IMenu[] = [
             { name: 'Roadmap', url: '/session-replay/roadmap' },
             { name: 'Docs', url: '/session-replay/documentation' },
             { name: 'Tutorials', url: '/session-replay/tutorials' },
+            { name: 'Questions', url: '/session-replay/questions' },
         ],
     },
     {
@@ -63,6 +66,7 @@ const menu: IMenu[] = [
             { name: 'Docs', url: '/feature-flags/documentation' },
             { name: 'Tutorials', url: '/feature-flags/tutorials' },
             { name: 'Roadmap', url: '/feature-flags/roadmap' },
+            { name: 'Questions', url: '/feature-flags/questions' },
         ],
     },
     {
@@ -75,6 +79,7 @@ const menu: IMenu[] = [
             { name: 'Docs', url: '/ab-testing/documentation' },
             { name: 'Tutorials', url: '/ab-testing/tutorials' },
             { name: 'Roadmap', url: '/ab-testing/roadmap' },
+            { name: 'Questions', url: '/ab-testing/questions' },
         ],
     },
     {
@@ -86,6 +91,7 @@ const menu: IMenu[] = [
             { name: 'Pricing', url: '/product-os/pricing' },
             { name: 'Blog posts', url: '/product-os/posts' },
             { name: 'Roadmap', url: '/product-os/roadmap' },
+            { name: 'Questions', url: '/product-os/questions' },
         ],
     },
 ]
@@ -187,6 +193,7 @@ export default function Product({ data, location, pageContext }) {
                 <PlanComparison {...props} showCTA={false} />
             </div>
         ),
+        Questions,
     }
 
     return (
