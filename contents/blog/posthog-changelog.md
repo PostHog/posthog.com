@@ -39,7 +39,12 @@ posthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'})
 Sometimes, you may want to use leverage feature flags against new properties which haven't been ingested yet. Or, you may want to resolve flags immediately and without waiting for any ingestion. So, we've added the option to set properties a flag depends on with calls such as the one above. There are other options, so [check the docs for more info](/docs/libraries/js#overriding-server-properties). 
 
 #### Route censor app
-The team at [Ava Labs](https://www.avalabs.org/) has contributed a new app which enables you to censor variables from any URLs passed to PostHog. It's especially helpful if you have security concerns around sensitive data embedded into an URL, as this helps you prevent that information ever being ingested. [Check the docs for more information](/docs/apps/route-censor). 
+The team at [Ava Labs](https://www.avalabs.org/) has contributed a new app which enables you to censor variables from any URLs passed to PostHog. It's especially helpful if you have security concerns around sensitive data embedded into an URL, as this helps you prevent that information ever being ingested. [Check the docs for more information](/docs/apps/route-censor).
+
+#### Community spotlight: Add blogposts as annotations
+We love it when our community create things for PostHog, so we wanted to throw a spotlight on Brian Morrison's latest work. He's created a tool which automatically creates annotations in PostHog whenever a new blogpost is released, so you can track how it impacts pageviews. 
+
+Brian's put together a wonderful [Twitter thread](https://twitter.com/brianmmdev/status/1651287581550575620) about how he used the PostHog API to do this, but it's worth reading [the full blogpost too](https://brianmorrison.me/blog/automating-posthog-annotations/). Thanks, Brian!
 
 ## April 28, 2023
 
