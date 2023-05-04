@@ -16,7 +16,7 @@ Make sure your DNS records point to your machine and that ports 80 and 443 are o
 
 If you want to use a config file instead, you can use something of the form:
 
-```bash
+```
 :{$PORT} {
   header {
     Access-Control-Allow-Origin https://<your domain name>
