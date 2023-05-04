@@ -17,15 +17,15 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
   <span className='text-red'>Oops!</span> Things went south
 </h1>
 
-<Hero subtitle="Our hedgehog wasn't able to handle this request. We're on it." />
+<Hero subtitle="Our hedgehog wasn't able to handle this request. We're on it." />
 
-<p className='text-center -mt-4'>
-    <a href="https://status.posthog.com/">Check PostHog Status</a>
-    <span className="mx-2">•</span>
+<p className='-mt-4 flex flex-col items-center justify-center text-center sm:block'>
+    <a href="https://status.posthog.com/">Check PostHog Status</a>
+    <span className="mx-2 hidden sm:inline-flex">•</span>
     <a href={
         'mailto:support@posthog.com?subject=Encountered server error'
         + ((typeof window !== 'undefined' && location.hash) ? ` (ID ${location.hash.slice(1)})` : '')
-    }>Contact PostHog</a>
+    }>Contact PostHog</a>
 </p>
 
 <>{typeof window !== 'undefined' && location.hash && (
