@@ -131,6 +131,11 @@ export default function BlogPost({ data, pageContext, location }) {
         inlineCode: InlineCode,
         blockquote: Blockquote,
         img: ZoomImage,
+        video: (props) => (
+            <ZoomImage>
+                <video {...props} />
+            </ZoomImage>
+        ),
         a: A,
         TutorialsSlider,
         ...shortcodes,
