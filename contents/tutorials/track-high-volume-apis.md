@@ -1,6 +1,6 @@
 ---
 title: How to track high-volume APIs
-date: 2023-05-02
+date: 2023-05-05
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -11,7 +11,7 @@ tags: ['feature flags', 'configuration']
 Tracking high-volume APIs is a balancing act. You want to keep them as efficient as possible, while still capturing the usage data to improve them. This tutorial aims to help you find this balance. In it, we build an API in Express, add PostHog, then implement two solutions for tracking:
 
 1. Sampling using feature flags
-2. Caching usage and batching capture requests
+2. Caching usage and batching event capture
 
 After doing this, we also show the different ways you can calculate insights.
 
