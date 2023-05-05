@@ -1,5 +1,5 @@
 ---
-date: 2023-04-28
+date: 2023-05-05
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -18,6 +18,33 @@ featuredImageType: full
 Every Friday we update this page with the latest new features, fixes, and updates on PostHog Cloud in the last seven days. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+
+## May 5, 2023
+
+#### Hedgehog toolbar
+![toolbar](../images/blog/array/hedgehog_toolbar.gif)
+
+We've updated the PostHog toolbar, which enables you to toggle feature flags, heatmaps and create actions right in your product, by taking some inspiration from [hedgehog mode](/blog/rome-hackathon#hedgehog-mode). Hit the '🦔' toggle to switch between the Classic and Hedgehog toolbars. Don't worry, you can still summon hedgehog mode separately from the the help menu.
+
+#### Hats for hedgehogs
+![toolbar](../images/blog/array/hats.gif)
+
+The trickle of projects from [our offsite](/blog/aruba-hackathon) continues, with an update which improves hedgehog mode by giving Max a wealth of new clothes to try on. Why? Because! 
+
+#### Override server side properties for feature flags
+```js
+posthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'})
+```
+
+Sometimes, you may want to leverage feature flags against new properties that haven't been ingested yet, or resolve flags immediately without waiting for any ingestion. To enable this, we've added the option to set properties a flag depends on with calls such as the one above. There are other options, so [check the docs for more info](/docs/libraries/js#overriding-server-properties). 
+
+#### Route censor app
+The team at [Ava Labs](https://www.avalabs.org/) has contributed a new app which enables you to censor variables from any URLs passed to PostHog. It's especially helpful if you have security concerns around sensitive data embedded into an URL, as this helps you prevent that information ever being ingested. [Check the docs for more information](/docs/apps/route-censor).
+
+#### Community spotlight: Add blogposts as annotations
+We love it when our community create things for PostHog, so we wanted to throw a spotlight on Brian Morrison's latest work. He's created a tool which automatically creates annotations in PostHog whenever a new blogpost is released, so you can track how it impacts pageviews. 
+
+Brian's put together a wonderful [Twitter thread](https://twitter.com/brianmmdev/status/1651287581550575620) about how he used the PostHog API to do this, but it's worth reading [the full blogpost too](https://brianmorrison.me/blog/automating-posthog-annotations/). Thanks, Brian!
 
 ## April 28, 2023
 
