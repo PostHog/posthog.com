@@ -89,8 +89,8 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                                             <span className="text-red line-clamp-1">{label}</span>
                                         </div>
                                         <div className="col-span-4 md:col-span-2 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
-                                            {latestQuestion?.attributes?.createdAt &&
-                                                dayjs(latestQuestion.attributes.createdAt).fromNow()}
+                                            {latestQuestion?.attributes?.activeAt &&
+                                                dayjs(latestQuestion.attributes.activeAt).fromNow()}
                                         </div>
                                     </div>
                                 </Link>
