@@ -68,7 +68,9 @@ Next, we install and set up PostHog.
 npm i posthog-node
 ```
 
-We set up the PostHog client with our project API key and instance address, both of which you can get from your [project settings](https://app.posthog.com/project/settings). We add a `client.capture()` call to our `/big` route. The capture call includes the route distinct ID and an event name. We also include a `firstRouteCalled` user property to use for a filter later. 
+We set up the PostHog client with our project API key, instance address, and personal API key. The first two you can get from your [project settings](https://app.posthog.com/project/settings). The personal API key can be created in your [account settings](https://app.posthog.com/me/settings).
+
+ We add a `client.capture()` call to our `/big` route. The capture call includes the route distinct ID and an event name. We also include a `firstRouteCalled` user property to use for a filter later. 
 
 ```node
 const express = require('express');
@@ -78,7 +80,10 @@ const port = 3000
 
 const client = new PostHog(
   '<ph_project_api_key>',
-  { host: '<ph_instance_address>'}
+  { 
+    host: '<ph_instance_address>',
+    personalApiKey: '<ph_personal_api_key>'
+  }
 )
 
 //...
@@ -155,7 +160,7 @@ const sample = await client.isFeatureEnabled(
 
 Another problem is that every feature flag called on the server side sends a request to PostHog to evaluate the flag. Over a high volume of API calls, this small difference can add up. We can limit this by locally evaluating the flag with person properties the flag relies on.
 
-To do this, add `firstRouteCalled` in `personProperties` to the options in our `client.isFeatureEnabled()` call.
+Because we initialize the `posthog-node` SDK with our personal API key, setting this up is simple. Just add `firstRouteCalled` in `personProperties` to the options in our `client.isFeatureEnabled()` call.
 
 ```node
 //...
@@ -172,7 +177,7 @@ const sample = await client.isFeatureEnabled(
 //...
 ```
 
-In my small example, this cut response time by about 10ms, and every millisecond counts for high-volume APIs.
+In our small example, this reduced response time by about 100ms. A massive amount for high-volume APIs where every millisecond counts.
 
 ## 2. Cache usage and batch events
 
