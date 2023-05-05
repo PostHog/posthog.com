@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-10.png
 tags: ['feature flags', 'configuration']
 ---
 
-Tracking high-volume APIs is a balancing act. You want to keep them as efficient as possible, while still capturing the usage data to improve them. This tutorial aims to help you find this balance. In it, we build an API in Express, add PostHog, then implement two solutions for tracking:
+Tracking high-volume APIs is a balancing act. You want to keep them as efficient as possible, while still capturing the usage data to improve them. This tutorial aims to help you find this balance. We'll build an API in Express, add PostHog, and then implement two solutions for tracking:
 
 1. Sampling using feature flags
 2. Caching usage and batching event capture
@@ -50,7 +50,7 @@ app.listen(port, () => {
 })
 ```
 
-Lastly, create one more route as our high volume requests route. We set this route as  `/big/:id`. For now, it returns a message using the request ID.
+Lastly, add a new route that will handle high volume requests and set its path to `/big/:id`. For now, return a string in the response using the request ID.
 
 ```node
 //...
@@ -103,25 +103,32 @@ app.get('/big/:id', (req, res) => {
 //...
 ```
 
-When we go to the big route again, we capture an event that we can see in our PostHog instance.
+When we go to our route again, we capture an event that we can see in our PostHog instance.
 
 ![Event](../images/tutorials/track-high-volume-apis/event.png)
 
-In our situation, capturing every single request to this route creates many requests. It hurts the performance of our API to make a capture request every time. Instead, we will use two different strategies for capturing them: sampling and batching.
+In our situation, capturing every single request to this route creates many requests. It hurts the performance of our API to make a capture request every time. Instead, we can use two different strategies for capturing them: sampling and batching.
 
 ## 1. Sampling with feature flags and local evaluation
 
-We can use feature flags to sample users. This way we can easily control what amount of events we capture. For example, we can set up a flag to only capture specific or a percentage of:
+We can use feature flags to sample users. This way, we can easily control how many events we capture without needing to redeploy. For example, we can set up a flag to only capture specific or a percentage of:
 
 - Users
 - Cohorts
 - Groups
 
-To set this up, we must create a feature flag. In PostHog, go to the feature flags tab, click new feature flag, add a key (I chose "sample"), select a rollout out (I chose "100% of users where `firstRouteCalled` equals `/big/1`"), and click save. At any point, we can edit this flag to change the number of events we capture (sample). 
+To set this up, we must create a new feature flag:
+
+1. In PostHog, go to the feature flags tab, click new feature flag.
+2. Set your key name. 
+3. Select your rollout conditions, such as 100% of users in a specific cohort. I chose "100% of users where the `firstRouteCalled` person property we set earlier equals `/big/1`"
+4. Click save. 
+
+This setup enables us to edit this flag at any time to change the number of events we capture. 
 
 ### Adding our flag to our code
 
-With our flag created, we can add it to our code around our `client.capture()` call. We just need to make our route async, then call `client.isFeaturedEnabled()` with our flag key and distinct ID.
+We can now wrap our existing `client.capture()`call with our feature flag code. To do this, we need to make our route async, and then call `client.isFeaturedEnabled()` with our flag key and distinct ID.
 
 ```node
 // index.js
@@ -158,7 +165,7 @@ const sample = await client.isFeatureEnabled(
 
 ### Locally evaluating our flag
 
-Another problem is that every feature flag called on the server side sends a request to PostHog to evaluate the flag. Over a high volume of API calls, this small difference can add up. We can limit this by locally evaluating the flag with person properties the flag relies on.
+Another problem is that every feature flag call on the server side sends a request to PostHog to evaluate the flag. In a high volume API endpoint, the time it takes to make this request can add up. We can limit this by evaluating the flag locally using the person properties the flag relies on.
 
 Because we initialize the `posthog-node` SDK with our personal API key, setting this up is simple. Just add `firstRouteCalled` in `personProperties` to the options in our `client.isFeatureEnabled()` call.
 
@@ -181,7 +188,7 @@ In our small example, this reduced response time by about 100ms. A massive amoun
 
 ## 2. Cache usage and batch events
 
-Another way to capture events for high-volume APIs is to cache usage of the API and then capture a batch of events at a time interval. 
+Another way to capture events for high-volume APIs is to cache usage of the API and then capture a batch of events at regular intervals. 
 
 To do this, we use [node-cache](https://www.npmjs.com/package/node-cache) to create a basic cache to store the number of requests, then use [node-cron](https://www.npmjs.com/package/node-cron) to set up a cron job to read the cache, capture values for each of the IDs, and clear the cache. 
 
@@ -211,7 +218,7 @@ app.get('/big/:id', async (req, res) => {
 //...
 ```
 
-After, we can set up our cron job to loop through the keys in the cache, get the number of events for that key, capture a batch event with a distinct ID (we use later), then clear the cache once completed.
+We can now set up our cron job to loop through the keys in the cache, get the number of events for that key, capture a batch event with a distinct ID (we use later), and then clear the cache once completed.
 
 ```node
 // index.js
@@ -229,7 +236,7 @@ cron.schedule('*/10 * * * * *', () => {
         distinctId: key,
         properties: { 
           calls: calls,
-					distinctId: key
+	  distinctId: key
         },
       },
     );
@@ -252,11 +259,11 @@ If we want sampled events to represent actual usage, we can multiply the rollout
 
 ![Extrapolated](../images/tutorials/track-high-volume-apis/extrapolated.png)
 
-If you are doing this, it is important to make sure your rollout percentage matches your formula multiple to avoid large inaccuracies. Of course, any extrapolation isn’t perfectly accurate anyways.
+If you are doing this, it is important to make sure your rollout percentage matches your formula multiple to avoid large inaccuracies.
 
 ### Aggregating event properties
 
-For our batched events, we can create an insight that uses the big route batch event, then sums the property value of calls to give us our total number of calls.
+For our batched events, we can create an insight that uses the big route batch event, and then sums the property value of calls to give us our total number of calls.
 
 ![Sum](../images/tutorials/track-high-volume-apis/sum.png)
 
