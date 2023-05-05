@@ -11,7 +11,7 @@ features:
     autoCapture: false
     sessionRecording: false
     featureFlags: true
-    groupAnalytics: false
+    groupAnalytics: true
 ---
 This is a <b>community maintained</b> library. It is not officially supported by PostHog.
 
@@ -76,7 +76,10 @@ class MyApp extends StatelessWidget {
                   'number': 1337,
                   'clicked': true,
                   '$set': {
-                    'userProp': 'value1'
+                    'userProp': 'value1',
+                    '$groups': {
+                      'company': 'twitter',
+                    },
                   },
                   '$set_once': {
                     'userProp': 'value2'
