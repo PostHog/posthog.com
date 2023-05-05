@@ -109,7 +109,7 @@ When we go to our route again, we capture an event that we can see in our PostHo
 
 In our situation, capturing every single request to this route creates many requests. It hurts the performance of our API to make a capture request every time. Instead, we can use two different strategies for capturing them: sampling and batching.
 
-## 1. Sampling with feature flags and local evaluation
+## Option 1. Sampling with feature flags and local evaluation
 
 We can use feature flags to sample users. This way, we can easily control how many events we capture without needing to redeploy. For example, we can set up a flag to only capture specific or a percentage of:
 
@@ -120,8 +120,8 @@ We can use feature flags to sample users. This way, we can easily control how ma
 To set this up, we must create a new feature flag:
 
 1. In PostHog, go to the feature flags tab, click new feature flag.
-2. Set your key name. 
-3. Select your rollout conditions, such as 100% of users in a specific cohort. I chose "100% of users where the `firstRouteCalled` person property we set earlier equals `/big/1`"
+2. Set your key name, such as `sample-flag`.
+3. Select your rollout conditions, such as 100% of users in a specific cohort. I chose "100% of users where the `firstRouteCalled` person property (we set earlier) equals `/big/1`"
 4. Click save. 
 
 This setup enables us to edit this flag at any time to change the number of events we capture. 
@@ -134,8 +134,8 @@ We can now wrap our existing `client.capture()`call with our feature flag code. 
 // index.js
 //...
 app.get('/big/:id', async (req, res) => {
-  const sample = await client.isFeatureEnabled('sample', req.params.id);
-  if (sample) {
+  const eventSampling = await client.isFeatureEnabled('sample-flag', req.params.id);
+  if (eventSampling) {
     client.capture(
       { 
         event: 'big route',
@@ -155,8 +155,8 @@ You might notice that this sends a "Feature Flag Called" event to PostHog on eve
 
 ```node
 //...
-const sample = await client.isFeatureEnabled(
-	'sample',
+const eventSampling = await client.isFeatureEnabled(
+	'sample-flag',
 	req.params.id,
 	{ sendFeatureFlagEvents: false }
 );
@@ -171,8 +171,8 @@ Because we initialize the `posthog-node` SDK with our personal API key, setting 
 
 ```node
 //...
-const sample = await client.isFeatureEnabled(
-    'sample',
+const eventSampling = await client.isFeatureEnabled(
+    'sample-flag',
     req.params.id,
     { 
       sendFeatureFlagEvents: false,
@@ -186,7 +186,7 @@ const sample = await client.isFeatureEnabled(
 
 In our small example, this reduced response time by about 100ms. A massive amount for high-volume APIs where every millisecond counts.
 
-## 2. Cache usage and batch events
+## Option 2. Cache usage and batch events
 
 Another way to capture events for high-volume APIs is to cache usage of the API and then capture a batch of events at regular intervals. 
 
@@ -198,7 +198,7 @@ First, install them both.
 npm i node-cache node-cron
 ```
 
-Next, set up our cache which simply gets the current value for the param ID and then increments it.
+Next, set up our cache. It simply gets the amount of API calls for a param ID and then increments it.
 
 ```node
 // index.js
@@ -209,9 +209,9 @@ const cache = new NodeCache()
 //...
 
 app.get('/big/:id', async (req, res) => {
-  let calls = cache.get(req.params.id) || 0;
-  calls++;
-  cache.set(req.params.id, calls);
+  let apiCalls = cache.get(req.params.id) || 0;
+  apiCalls++;
+  cache.set(req.params.id, apiCalls);
 
   res.send(`Welcome to the big route, ${req.params.id}`);
 })
@@ -229,13 +229,13 @@ const cron = require('node-cron');
 
 cron.schedule('*/10 * * * * *', () => {
   cache.keys().forEach((key) => {
-    let calls = cache.get(key);
+    let apiCalls = cache.get(key);
     client.capture(
       { 
         event: 'big route batch',
         distinctId: key,
         properties: { 
-          calls: calls,
+          calls: apiCalls,
 	  distinctId: key
         },
       },
@@ -245,7 +245,7 @@ cron.schedule('*/10 * * * * *', () => {
 });
 ```
 
-Once you run this and send multiple events to different IDs, you see batch events with calls as a property.
+Once you restart the server and send multiple events to different IDs, you will see the event batches in your PostHog instance. Each batch event has the amount of API calls as a property which we can use for our analysis.
 
 ![Batch](../images/tutorials/track-high-volume-apis/batch.png)
 
