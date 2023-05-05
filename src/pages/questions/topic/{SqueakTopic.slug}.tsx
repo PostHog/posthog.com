@@ -66,7 +66,7 @@ export default function Questions({ data, pageContext }: IProps) {
                                 id={data?.squeakTopic?.squeakId}
                             />
                         </div>
-                        <div className="ml-auto sm:mt-0 mt-4 sm:w-32 z-20">
+                        <div className="ml-auto sm:mt-0 mt-4 sm:w-32 z-50 relative">
                             <Listbox as="div" className="relative" value={sortBy} onChange={setSortBy}>
                                 <Listbox.Label className="sr-only">Sort by</Listbox.Label>
                                 <Listbox.Button className="relative w-full flex items-center py-2 px-3 text-left bg-white/50 rounded shadow-lg cursor-pointer text-sm text-gray border border-gray/30 dark:bg-gray-accent-dark">
