@@ -13,8 +13,8 @@ const fetchTopicGroups = async () => {
                 topics: {
                     populate: {
                         questions: {
-                            sort: 'createdAt:desc',
-                            fields: ['id', 'createdAt'],
+                            sort: 'activeAt:desc',
+                            fields: ['id', 'activeAt'],
                             filters: {
                                 $or: [
                                     {

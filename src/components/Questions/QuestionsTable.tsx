@@ -21,6 +21,7 @@ type QuestionsTableProps = {
     hasMore?: boolean
     showAuthor?: boolean
     showTopic?: boolean
+    sortBy?: 'newest' | 'activity' | 'popular'
 }
 
 export const QuestionsTable = ({
@@ -32,20 +33,29 @@ export const QuestionsTable = ({
     currentPage,
     hasMore,
     showTopic,
-    showAuthor = true,
+    sortBy,
 }: QuestionsTableProps) => {
     return (
         <ul className="m-0 p-0 list-none">
             <li className="grid grid-cols-12 pl-2 pr-4 pb-1 items-center text-primary/75 dark:text-primary-dark/75 text-sm">
                 <div className="col-span-12 xl:col-span-7 2xl:col-span-8 pl-8">Question / Topic</div>
                 <div className="hidden xl:block xl:col-span-2 2xl:col-span-1 text-center">Replies</div>
-                <div className="hidden xl:block xl:col-span-3">Created</div>
+                <div className="hidden xl:block xl:col-span-3">{sortBy === 'activity' ? 'Last active' : 'Created'}</div>
             </li>
             <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none">
                 {questions.data.length > 0
                     ? questions.data.filter(Boolean).map((question) => {
                           const {
-                              attributes: { profile, subject, permalink, replies, createdAt, resolved, topics },
+                              attributes: {
+                                  profile,
+                                  subject,
+                                  permalink,
+                                  replies,
+                                  createdAt,
+                                  resolved,
+                                  topics,
+                                  activeAt,
+                              },
                           } = question
 
                           const latestAuthor = replies?.data?.[0]?.attributes?.profile || profile
@@ -82,7 +92,9 @@ export const QuestionsTable = ({
                                                           </div>
 
                                                           <div className="xl:hidden text-primary dark:text-primary-dark text-sm font-medium opacity-60 line-clamp-2">
-                                                              {dayjs(createdAt).fromNow()}
+                                                              {dayjs(
+                                                                  sortBy === 'activity' ? activeAt : createdAt
+                                                              ).fromNow()}
                                                           </div>
                                                       </div>
                                                   )}
@@ -93,7 +105,8 @@ export const QuestionsTable = ({
                                           </div>
                                           <div className="hidden xl:block xl:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                               <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-2">
-                                                  {dayjs(createdAt).fromNow()} by {profile.data?.attributes?.firstName}{' '}
+                                                  {dayjs(sortBy === 'activity' ? activeAt : createdAt).fromNow()} by{' '}
+                                                  {profile.data?.attributes?.firstName}{' '}
                                                   {profile.data?.attributes?.lastName} {}
                                               </div>
                                           </div>
