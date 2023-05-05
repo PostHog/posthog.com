@@ -41,6 +41,8 @@ By not supporting Kubernetes, we will free up a lot of time to focus on our main
 
 ## What's next?
 
+> Subscriptions for self-hosted Scale and Enterprise users will end on May 31st, 2023. As a result, these users will lose access to premium features such as SSO, multiple and private projects, A/B experimentation and more. We strongly recommend that customers affected by this change [migrate to PostHog Cloud](/docs/migrate/migrate-between-cloud-and-self-hosted). 
+
 Regular updates to our Helm chart will cease **after May 31, 2023**. Security updates on the last available version will continue for **at least the next 12 months**.
 
 We've already written to paying customers on Kubernetes deployments outlining how we'll support them in transitioning to PostHog Cloud, or an alternative PostHog deployment.
