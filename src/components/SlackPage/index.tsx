@@ -25,7 +25,7 @@ export default function SlackPage(): JSX.Element {
                     chatbot)!
                 </p>
 
-                <CallToAction href="https://posthog.com/slack-invite" type="primary" width="84">
+                <CallToAction href="/slack-invite" type="primary" width="84">
                     Join us on Slack
                 </CallToAction>
 
