@@ -3,23 +3,91 @@ title: Nuxt.js
 icon: ../../images/docs/integrate/frameworks/nuxt.svg
 ---
 
-If you are using Nuxt.js and want to track your application using PostHog this tutorial might help you out. 
+PostHog makes it easy to get data about traffic and usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
-It will guide you through an example integration of PostHog using Nuxt.js. 
+This guide walks you through integrating PostHog into your app for both Nuxt.js major versions `2` and `3`. We'll use the PostHog [JavaScript](/docs/libraries/js).
 
-### Is this tutorial for me?
+This tutorial is aimed at Nuxt.js users which run Nuxt in `spa` or `universal` mode. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
 
-This tutorial is aimed at Nuxt.js users which run Nuxt in `spa` or `universal` mode. 
-We are going to look at some minimal example code which should get you started quickly and provide a base for further customization.
+## Nuxt v3.0 and above
 
 ### Prerequisites
 
-To follow this tutorial along, you need to:
+To follow this guide along, you need:
 
-1. Have [deployed PostHog](/docs/deployment).
-2. Have a running Nuxt.js application
+1. a PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
+2. a running Nuxt.js application running version `3.0` or above.
 
-### Minimal example
+### Setting up PostHog
+
+1. Install posthog-js using your package manager:
+
+```shell
+yarn add posthog-js
+# or
+npm install --save posthog-js
+```
+
+2. Add your environment variables to your `nuxt.config.js` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in the PostHog app under Project Settings > API Keys.
+
+```js file=nuxt.config.js
+export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      posthogPublicKey: '<posthog_key>',
+      posthogHost: '<posthog_host>'
+    }
+  }
+})
+```
+
+3. Create a new plugin by creating a new file `posthog.client.js` in your [plugins directory](https://nuxt.com/docs/guide/directory-structure/plugins).
+
+```react file=plugins/posthog.client.js
+import { defineNuxtPlugin } from '#app'
+import posthog from 'posthog-js'
+export default defineNuxtPlugin(nuxtApp => {
+  const runtimeConfig = useRuntimeConfig();
+  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
+    api_host: runtimeConfig.public.posthogHost || 'https://app.posthog.com',
+    loaded: (posthog) => {
+      if (import.meta.env.MODE === 'development') posthog.debug();
+    }
+  })
+
+  // Make sure that pageviews are captured with each route change
+  const router = useRouter();
+  router.afterEach((to) => {
+    posthog.capture('$pageview', {
+      current_url: to.fullPath
+    });
+  });
+  
+  return {
+    provide: {
+      posthog: () => posthogClient
+    }
+  }
+})
+```
+
+PostHog can then be accessed throughout your Nuxt.js using the provider accessor, for example:
+
+```vue filename=index.vue
+<script setup lang="ts">
+   const { $posthog } = useNuxtApp()
+   if ($posthog) {
+      const posthog =$posthog()
+      posthog?.capture('<event_name>')
+   }
+</script>
+```
+
+See the [JavaScript SDK docs](/docs/libraries/js) for all usable functions, such as:
+- [Capture custom event capture, identify users, and more.](/docs/libraries/js#send-custom-events-with-posthogcapture)
+- [Feature flags including variants and payloads.](/docs/libraries/js#feature-flags)
+
+## Nuxt v2.16 and below
 
 We are going to implement PostHog as a [Nuxt.js integration](https://nuxtjs.org/docs/2.x/directory-structure/plugins) which gives us the possibility to inject
 the posthog object and make it available across our application.
@@ -99,3 +167,9 @@ Let's say for example the user makes a purchase you could track an event like th
 ...
 </script>
 ```
+
+## Further reading
+
+- [PostHog for VueJS users](tutorials/posthog-for-vuejs)
+- [Tracking pageviews in single page apps (SPA)](/tutorials/spa)
+- [Building a Vue cookie consent banner](tutorials/vue-cookie-banner)
