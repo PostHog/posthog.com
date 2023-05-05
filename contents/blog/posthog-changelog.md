@@ -36,7 +36,7 @@ The trickle of projects from [our offsite](/blog/aruba-hackathon) continues, wit
 posthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'})
 ```
 
-Sometimes, you may want to use leverage feature flags against new properties which haven't been ingested yet. Or, you may want to resolve flags immediately and without waiting for any ingestion. So, we've added the option to set properties a flag depends on with calls such as the one above. There are other options, so [check the docs for more info](/docs/libraries/js#overriding-server-properties). 
+Sometimes, you may want to leverage feature flags against new properties that haven't been ingested yet, or resolve flags immediately without waiting for any ingestion. To enable this, we've added the option to set properties a flag depends on with calls such as the one above. There are other options, so [check the docs for more info](/docs/libraries/js#overriding-server-properties). 
 
 #### Route censor app
 The team at [Ava Labs](https://www.avalabs.org/) has contributed a new app which enables you to censor variables from any URLs passed to PostHog. It's especially helpful if you have security concerns around sensitive data embedded into an URL, as this helps you prevent that information ever being ingested. [Check the docs for more information](/docs/apps/route-censor).
