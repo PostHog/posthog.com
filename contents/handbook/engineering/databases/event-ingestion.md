@@ -75,7 +75,7 @@ You can find relevant kafka topics [in the PostHog codebase](https://github.com/
 
 ClickHouse is our main analytics backend.
 
-Instead of data being inserted directly into ClickHouse, it itself data from Kafka. This makes our ingestion pipeline more resilient towards outages.
+Instead of data being inserted directly into ClickHouse, it ingest data from Kafka. This makes our ingestion pipeline more resilient towards outages.
 
 Read more in the [ClickHouse manual](/handbook/engineering/clickhouse/data-ingestion).
 
