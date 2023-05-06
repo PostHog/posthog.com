@@ -76,21 +76,21 @@ const Select = ({
         <div className="relative border-b border-black/30 dark:border-primary-dark/30">
             <Listbox value={value || {}} onChange={handleChange}>
                 <Listbox.Button
-                    className={`font-semibold text-black dark:text-primary-dark dark:bg-gray-accent-dark-hover text-base w-full py-3 px-4 outline-none rounded-none text-left ${
+                    className={`font-semibold text-black dark:text-primary-dark text-base w-full py-3 px-4 outline-none rounded-none text-left ${
                         !value?.attributes?.label ? 'opacity-60' : ''
                     }`}
                 >
                     {value?.attributes?.label || 'Please select a topic'}
                 </Listbox.Button>
-                <Listbox.Options className="list-none p-0 m-0 absolute z-20 bg-white w-full max-h-[180px] overflow-auto shadow-md rounded-br-md rounded-bl-md border-t border-gray-accent-light grid divide-y divide-gray-accent-light">
+                <Listbox.Options className="list-none p-0 m-0 absolute z-20 bg-white dark:bg-gray-accent-dark-hover w-full max-h-[180px] overflow-auto shadow-md rounded-br-md rounded-bl-md border-t divide-y border-black/30 dark:border-primary-dark/30 divide-black/30 dark:divide-primary-dark/30">
                     {topics.map((topic) => (
                         <Listbox.Option key={topic.id} value={topic}>
                             {({ selected }) => (
                                 <div
                                     className={`${
                                         selected
-                                            ? 'bg-gray-accent-light text-black'
-                                            : 'bg-white text-black hover:bg-opacity-30 hover:bg-gray-accent-light '
+                                            ? 'bg-gray-accent-light text-black dark:bg-gray-accent-dark dark:text-primary-dark'
+                                            : 'bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-gray-accent-dark/30 dark:text-primary-dark'
                                     } py-2 px-4 cursor-pointer transition-all`}
                                 >
                                     {topic.attributes.label}
