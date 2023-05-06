@@ -4,18 +4,26 @@ import { useUser, User } from 'hooks/useUser'
 import { Approval } from './Approval'
 import Authentication from './Authentication'
 import Avatar from './Avatar'
-import Logo from './Logo'
 import RichText from './RichText'
 import getAvatarURL from '../util/getAvatar'
 import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
 import Button from './Button'
 import uploadImage from '../util/uploadImage'
+import { Listbox } from '@headlessui/react'
 
 type QuestionFormValues = {
     subject: string
     body: string
     images: { fakeImagePath: string; file: File; objectURL: string }[]
+    topic?: Topic
+}
+
+interface Topic {
+    id: number
+    attributes: {
+        label: string
+    }
 }
 
 type QuestionFormMainProps = {
@@ -25,6 +33,75 @@ type QuestionFormMainProps = {
     loading: boolean
     initialValues?: Partial<QuestionFormValues> | null
     formType?: 'question' | 'reply'
+    showTopicSelector?: boolean
+}
+
+const Select = ({
+    value,
+    setFieldValue,
+}: {
+    value?: Topic
+    setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void
+}) => {
+    const [topics, setTopics] = useState<Topic[]>([])
+
+    const handleChange = (topic: Topic) => {
+        setFieldValue('topic', topic)
+    }
+
+    useEffect(() => {
+        const topicQuery = qs.stringify(
+            {
+                pagination: {
+                    pageSize: 100,
+                },
+                fields: ['label'],
+                filters: {
+                    label: {
+                        $notContainsi: 'Internal:',
+                    },
+                },
+                sort: 'label:asc',
+            },
+            {
+                encodeValuesOnly: true,
+            }
+        )
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
+            .then((res) => res.json())
+            .then(({ data }) => setTopics(data))
+    }, [])
+
+    return (
+        <div className="relative border-b border-black/30 dark:border-primary-dark/30">
+            <Listbox value={value || {}} onChange={handleChange}>
+                <Listbox.Button
+                    className={`font-semibold text-black dark:text-primary-dark dark:bg-gray-accent-dark-hover text-base w-full py-3 px-4 outline-none rounded-none text-left ${
+                        !value?.attributes?.label ? 'opacity-60' : ''
+                    }`}
+                >
+                    {value?.attributes?.label || 'Please select a topic'}
+                </Listbox.Button>
+                <Listbox.Options className="list-none p-0 m-0 absolute z-20 bg-white w-full max-h-[180px] overflow-auto shadow-md rounded-br-md rounded-bl-md border-t border-gray-accent-light grid divide-y divide-gray-accent-light">
+                    {topics.map((topic) => (
+                        <Listbox.Option key={topic.id} value={topic}>
+                            {({ selected }) => (
+                                <div
+                                    className={`${
+                                        selected
+                                            ? 'bg-gray-accent-light text-black'
+                                            : 'bg-white text-black hover:bg-opacity-30 hover:bg-gray-accent-light '
+                                    } py-2 px-4 cursor-pointer transition-all`}
+                                >
+                                    {topic.attributes.label}
+                                </div>
+                            )}
+                        </Listbox.Option>
+                    ))}
+                </Listbox.Options>
+            </Listbox>
+        </div>
+    )
 }
 
 function QuestionFormMain({
@@ -33,7 +110,7 @@ function QuestionFormMain({
     subject = true,
     loading,
     initialValues,
-    formType,
+    showTopicSelector,
 }: QuestionFormMainProps) {
     const { user, logout } = useUser()
 
@@ -45,6 +122,7 @@ function QuestionFormMain({
                     subject: '',
                     body: '',
                     images: [],
+                    topic: undefined,
                     ...initialValues,
                 }}
                 validate={(values) => {
@@ -54,6 +132,9 @@ function QuestionFormMain({
                     }
                     if (subject && !values.subject) {
                         errors.subject = 'Required'
+                    }
+                    if (showTopicSelector && !values.topic) {
+                        errors.topic = 'Required'
                     }
                     return errors
                 }}
@@ -65,6 +146,7 @@ function QuestionFormMain({
                             <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
 
                             <div className="bg-white border border-black/30 dark:bg-gray-accent-dark-hover dark:border-white/30 rounded-md overflow-hidden mb-4">
+                                {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
                                 {subject && (
                                     <>
                                         <Field
@@ -124,6 +206,7 @@ type QuestionFormProps = {
     initialView?: string
     topicID?: number
     archived?: boolean
+    showTopicSelector?: boolean
 }
 
 export const QuestionForm = ({
@@ -134,6 +217,7 @@ export const QuestionForm = ({
     reply,
     onSubmit,
     archived,
+    showTopicSelector,
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
@@ -153,7 +237,7 @@ export const QuestionForm = ({
             </span>
         )
 
-    const createQuestion = async ({ subject, body }: QuestionFormValues) => {
+    const createQuestion = async ({ subject, body, topic }: QuestionFormValues) => {
         const token = await getJwt()
         const topicQuery = qs.stringify(
             {
@@ -169,7 +253,8 @@ export const QuestionForm = ({
         )
 
         const topicID =
-            other.topicID ||
+            topic?.id ||
+            other?.topicID ||
             (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
                 .then((res) => res.json())
                 .then((topic) => topic?.data && topic?.data[0]?.id))
@@ -278,6 +363,7 @@ export const QuestionForm = ({
                             initialValues={formValues}
                             loading={loading}
                             onSubmit={handleMessageSubmit}
+                            showTopicSelector={showTopicSelector}
                         />
                     ),
                     auth: (

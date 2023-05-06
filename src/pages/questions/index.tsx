@@ -63,7 +63,7 @@ export default function Questions() {
                     <div className="w-full sm:flex items-center mb-8">
                         <h1 className="text-4xl m-0">Community questions</h1>
                         <div className="ml-auto sm:mt-0 mt-4">
-                            <QuestionForm onSubmit={() => null} />
+                            <QuestionForm showTopicSelector onSubmit={() => null} />
                         </div>
                     </div>
 
