@@ -77,7 +77,7 @@ export default function FullWidthBorderSlider({
                     )}
                 </div>
 
-                <div className="w-screen">
+                <div className="w-full">
                     <Slider
                         className="tutorials-slider"
                         beforeChange={handleChange}
