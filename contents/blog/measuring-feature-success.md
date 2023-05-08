@@ -1,6 +1,6 @@
 ---
 title: How we measure feature success at PostHog
-date: 2023-04-24
+date: 2023-05-08
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
