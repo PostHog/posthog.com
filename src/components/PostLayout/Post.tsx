@@ -112,7 +112,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         <article
                             key={`${title}-article`}
                             id="content-menu-wrapper"
-                            className="lg:py-12 py-4 ml-auto w-full h-full box-border lg:overflow-auto"
+                            className="lg:py-12 py-4 ml-auto w-full h-full box-border lg:overflow-hidden"
                         >
                             <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
                                 <div>{children}</div>
