@@ -8,7 +8,9 @@ featuredImage: ../images/tutorials/banners/tutorial-10.png
 tags: ['feature flags', 'configuration']
 ---
 
-Tracking high-volume APIs is a balancing act. You want to keep them as efficient as possible, while still capturing the usage data to improve them. This tutorial aims to help you find this balance. We'll build an API in Express, add PostHog, and then implement two solutions for tracking:
+Tracking high-volume APIs is a balancing act. You want to keep them as efficient as possible, while still capturing data to improve them. This tutorial aims to help you find this balance. 
+
+We'll build an API in Express, add PostHog, and then implement two solutions for tracking:
 
 1. Sampling using feature flags
 2. Caching usage and batching event capture
@@ -17,7 +19,7 @@ After doing this, we also show the different ways you can calculate insights.
 
 ## Building our API
 
-To start, we will build a basic API that captures and returns the ID we passed to it. We use [Express, the Node server framework](/tutorials/node-express-analytics), to do this
+To start, we will build a basic API that captures and returns the ID that is passed to it. We'll use [Express, the Node server framework,](/tutorials/node-express-analytics) to do this.
 
 Create a folder for our project, go into the folder, and initialize npm. When prompted, select all the default options.
 
@@ -107,7 +109,7 @@ When we go to our route again, we capture an event that we can see in our PostHo
 
 ![Event](../images/tutorials/track-high-volume-apis/event.png)
 
-In our situation, capturing every single request to this route creates many requests. It hurts the performance of our API to make a capture request every time. Instead, we can use two different strategies for capturing them: sampling and batching.
+In this scenario, capturing every single request to this route creates many capture requests. It hurts the performance of our API to make a request every time. Instead, we can use two different strategies for capturing them: sampling and batching.
 
 ## Option 1. Sampling with feature flags and local evaluation
 
@@ -121,7 +123,7 @@ To set this up, we must create a new feature flag:
 
 1. In PostHog, go to the feature flags tab, click new feature flag.
 2. Set your key name, such as `sample-flag`.
-3. Select your rollout conditions, such as 100% of users in a specific cohort. I chose "100% of users where the `firstRouteCalled` person property (we set earlier) equals `/big/1`"
+3. Select your rollout conditions, such as 100% of users in a specific cohort. I chose "100% of users where the `firstRouteCalled` person property (we set earlier) equals `/big/1`".
 4. Click save. 
 
 This setup enables us to edit this flag at any time to change the number of events we capture. 
@@ -218,7 +220,7 @@ app.get('/big/:id', async (req, res) => {
 //...
 ```
 
-We can now set up our cron job to loop through the keys in the cache, get the number of events for that key, capture a batch event with a distinct ID (we use later), and then clear the cache once completed.
+We can now set up our cron job to loop through the keys in the cache, get the number of events for that key, capture a batch event with a distinct ID (which we'll use later), and then clear the cache once completed.
 
 ```node
 // index.js
