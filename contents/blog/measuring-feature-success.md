@@ -6,7 +6,7 @@ showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/open-source-testing-tools/testinghog.png
+featuredImage: ../images/blog/green-blog-image.jpg
 featuredImageType: full
 category: Inside PostHog
 tags:
