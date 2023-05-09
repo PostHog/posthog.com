@@ -3,9 +3,9 @@ title: Nuxt.js
 icon: ../../images/docs/integrate/frameworks/nuxt.svg
 ---
 
-PostHog makes it easy to get data about traffic and usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
-This guide walks you through integrating PostHog into your app for both Nuxt.js major versions `2` and `3`. We'll use the PostHog [JavaScript](/docs/libraries/js).
+This guide walks you through integrating PostHog into your app for both Nuxt.js major versions `2` and `3`. We'll use the [JavaScript](/docs/libraries/js) SDK.
 
 This tutorial is aimed at Nuxt.js users which run Nuxt in `spa` or `universal` mode. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
 
@@ -15,7 +15,7 @@ This tutorial is aimed at Nuxt.js users which run Nuxt in `spa` or `universal` m
 
 To follow this guide along, you need:
 
-1. a PostHog account (either [Cloud](/docs/getting-started/cloud) or [self-hosted](/docs/self-host))
+1. A PostHog instance ([signup for free](https://app.posthog.com/signup)])
 2. a running Nuxt.js application running version `3.0` or above.
 
 ### Setting up PostHog
@@ -28,14 +28,14 @@ yarn add posthog-js
 npm install --save posthog-js
 ```
 
-2. Add your environment variables to your `nuxt.config.js` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in the PostHog app under Project Settings > API Keys.
+2. Add your environment variables to your `nuxt.config.js` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in the PostHog app under Project Settings > Project Variables.
 
 ```js file=nuxt.config.js
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      posthogPublicKey: '<posthog_key>',
-      posthogHost: '<posthog_host>'
+      posthogPublicKey: '<ph_project_api_key>',
+      posthogHost: '<ph_instance_address>'
     }
   }
 })
