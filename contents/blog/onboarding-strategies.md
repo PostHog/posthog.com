@@ -19,7 +19,7 @@ SaaS app onboarding strategies are changing. Better said, evolving. Sure, anythi
 
 However, today, this interruption-heavy approach is competing with newer, user-driven onboarding models. In this piece, we’ll explore the chaos of the SaaS onboarding landscape in 2023, and then drill into why measuring feature success is the only sure-fire strategy for crafting the right onboarding strategy. 
 
-## The application tour—the outgoing champ
+## The application tour – the outgoing champ
 
 WalkMe (founded 2011), AppCues (2013), and Pendo (2013) dominated SaaS onboarding in the late 2010s. These companies tout self-service application tours. You can use any of these tools to create lightbox sequences that highlight core features with helper text. They are fairly no-code to implement and easy to iterate on. 
 
