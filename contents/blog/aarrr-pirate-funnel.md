@@ -1,6 +1,6 @@
 ---
 date: 2023-05-09
-title: Building an AARRR pirate funnel (how and why)
+title: "In-depth: The AARRR pirate funnel explained"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
