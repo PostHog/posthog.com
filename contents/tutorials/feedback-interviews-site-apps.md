@@ -4,7 +4,8 @@ date: 2023-02-14
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-1.png
+featuredTutorial: true
+featuredImage: ../images/tutorials/banners/growth.png
 tags: ["apps", "site-apps"]
 ---
 
