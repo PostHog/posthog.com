@@ -37,7 +37,7 @@ You can also use aggregations, such as `count`, `min`, `minIf`, `max`, `maxIf`, 
 We recommend checking the docs for a more detailed [explanation of ClickHouse SQL functions which are supported in HogQL](/manual/hogql).
 
 ## HogQL breakdowns
-![HogQL trends breakdown filter](../images/features/hogql/trends-breakdown.png)
+![HogQL breakdowns](../images/blog/array/hog_breakdown.gif)
 
 A frequent request from teams using PostHog has been the ability to breakdown insight results across multiple properties. To accommodate this, we've added the ability to use HogQL expressions within a breakdown. 
 
@@ -46,7 +46,7 @@ In other words, you can now breakdown results however you like - including by mu
 ## HogQL filters
 ![HogQL filter](../images/blog/array/hog_filters.gif)
 
-Oh, look. You can use HogQL in filters too. Useful for filtering by multiple properties, or using ranges. 
+Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple properties!
 
 ## SQL insights
 ![PostHog SQL insights](../images/features/hogql/sql.gif)
