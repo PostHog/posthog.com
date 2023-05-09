@@ -282,7 +282,7 @@ This difference is ultimately reflected in many of the features both platforms o
 
 ### How much does Hotjar cost?
 
-Hotjar has tier-based pricing: Basic, Plus, Business and Scale. All plans offer session replays, although the costs and limits differ. Addtional features such as API access and SAML single sign-on are only available on some plans.
+Hotjar has tier-based pricing: Basic, Plus, Business and Scale. All plans offer session replays, although the costs and limits differ. Additional features such as API access and SAML single sign-on are only available on some plans.
 
 The free can only record up to 35 daily session replays. After this, the Plus tier offers 100 daily session replays for $32 per month and the Business tier offers 500 daily sessions for $80 per month (with the option to pay for more sessions). Finally, the Scale tier offers 500 daily sessions for $171 per month, but offers access to additional features such as Console tracking and the Hotjar API.
 
