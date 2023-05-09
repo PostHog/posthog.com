@@ -88,13 +88,13 @@ export const Question = (props: QuestionProps) => {
                                 >
                                     {!archived ? (
                                         <Tooltip content={() => <div style={{ maxWidth: 320 }}>Archive thread</div>}>
-                                            <span className="inline-block w-6 h-6">
+                                            <span className="flex w-6 h-6">
                                                 <Archive />
                                             </span>
                                         </Tooltip>
                                     ) : (
                                         <Tooltip content={() => <div style={{ maxWidth: 320 }}>Restore thread</div>}>
-                                            <span className="inline-block w-6 h-6">
+                                            <span className="flex w-6 h-6">
                                                 <Undo />
                                             </span>
                                         </Tooltip>

@@ -11,11 +11,11 @@ type UseQuestionsOptions = {
     topicId?: number
     limit?: number
     sortBy?: 'newest' | 'popular' | 'activity'
+    filters?: any
 }
 
 const query = (offset: number, options?: UseQuestionsOptions) => {
-    const { slug, topicId, profileId, limit = 20, sortBy = 'newest' } = options || {}
-
+    const { slug, topicId, profileId, limit = 20, sortBy = 'newest', filters } = options || {}
     const params = {
         pagination: {
             start: offset * limit,
@@ -37,6 +37,7 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
             ],
         },
         populate: {
+            topics: true,
             profile: {
                 fields: ['firstName', 'lastName', 'gravatarURL'],
                 populate: {
@@ -46,6 +47,11 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
                 },
             },
             replies: {
+                populate: {
+                    profile: {
+                        fields: ['firstName', 'lastName'],
+                    },
+                },
                 fields: ['id', 'createdAt', 'updatedAt'],
             },
         },
@@ -59,7 +65,7 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
             params.sort = 'numReplies:desc'
             break
         case 'activity':
-            params.sort = 'updatedAt:desc'
+            params.sort = 'activeAt:desc'
             break
     }
 
@@ -104,6 +110,13 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
                     },
                 },
             ],
+        }
+    }
+
+    if (filters) {
+        params.filters = {
+            ...params.filters,
+            ...filters,
         }
     }
 

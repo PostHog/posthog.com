@@ -133,7 +133,7 @@ For example, JavaScript uses `PascalCase` for class/constructor names, and `came
 
 Don't just write "You can contact us to learn more" and not link it to anything.
 
-Write "To learn more, [join our Slack community](https://posthog.com/slack) or email us at [hey@posthog.com](mailto:hey@posthog.com)."
+Write "To learn more, [log a ticket with details of your request](https://app.posthog.com/home#supportModal)."
 
 ### The backtick is your friend
 

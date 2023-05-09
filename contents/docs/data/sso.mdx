@@ -202,6 +202,7 @@ For SAML to work your IdP and PostHog (SP) need to exchange information. To do t
 3. You will now need to obtain some parameters from your IdP and configure them in PostHog for the appropriate domain in Authentication domains. Depending on your provider, they may only provide this information as an XML metadata file. If this is the case, you can open the file in a text editor and obtain the required values from there.
 
     - **SAML Entity ID**: Will be identified as EntityID or IdP issuer. This can vary greatly between providers, but it usually looks like a URL.
+      - If using Azure AD the setting to use for this field is called `Azure AD Identifier`.
     - **SAML ACS URL**: The endpoint to which the SAML requests are posted. It's usually called SAML endpoint or IdP sign-on URL.
     - **SAML X.509 certificate**: The public certificate used to validate SAML assertions from your IdP. It must be in X509 (almost all providers will provide it in this format). If your provider gives you the certificate as a file (usually `.pem`), just open it with a text editor to get the contents. When setting this certificate be sure to **keep any spaces and new lines** (don't format it). The first and last line of the certificate (e.g. `-----BEGIN CERTIFICATE-----`) are optional.
 

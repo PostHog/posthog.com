@@ -585,7 +585,7 @@
         { "source": "/handbook/people/team-structure/platform", "destination": "/handbook/small-teams/platform" },
         {
             "source": "/handbook/people/team-structure/session-recording",
-            "destination": "/handbook/small-teams/session-recording"
+            "destination": "/handbook/small-teams/monitoring"
         },
         {
             "source": "/handbook/people/team-structure/website-docs",
@@ -826,16 +826,18 @@
         { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" },
         { "source": "/docs/session-recording", "destination": "/docs/session-replay" },
         { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" },
+        { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/monitoring" },
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
-        { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" }
+        { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" },
+        { "source": "/community", "destination": "/questions" }
     ],
     "rewrites": [
         {
-            "source": "/community/profiles/(.*)",
-            "destination": "/community/profiles"
+            "source": "/community/profiles/:path*",
+            "destination": "/community/profiles/[id]/index.html"
         },
-        { "source": "/next-steps/(.*)", "destination": "/next-steps" },
-        { "source": "/question/(.*)", "destination": "/question" },
+        { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
+        { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
         { "source": "/careers/(.*)", "destination": "/careers" },
         { "source": "/api", "destination": "/docs/api" }
     ]

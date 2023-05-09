@@ -1,5 +1,5 @@
 ---
-date: 2023-03-24
+date: 2023-05-05
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -18,6 +18,77 @@ featuredImageType: full
 Every Friday we update this page with the latest new features, fixes, and updates on PostHog Cloud in the last seven days. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+
+## May 5, 2023
+
+#### Hedgehog toolbar
+![toolbar](../images/blog/array/hedgehog_toolbar.gif)
+
+We've updated the PostHog toolbar, which enables you to toggle feature flags, heatmaps and create actions right in your product, by taking some inspiration from [hedgehog mode](/blog/rome-hackathon#hedgehog-mode). Hit the '🦔' toggle to switch between the Classic and Hedgehog toolbars. Don't worry, you can still summon hedgehog mode separately from the the help menu.
+
+#### Hats for hedgehogs
+![toolbar](../images/blog/array/hats.gif)
+
+The trickle of projects from [our offsite](/blog/aruba-hackathon) continues, with an update which improves hedgehog mode by giving Max a wealth of new clothes to try on. Why? Because! 
+
+#### Override server side properties for feature flags
+```js
+posthog.setPersonPropertiesForFlags({'property1': 'value', property2: 'value2'})
+```
+
+Sometimes, you may want to leverage feature flags against new properties that haven't been ingested yet, or resolve flags immediately without waiting for any ingestion. To enable this, we've added the option to set properties a flag depends on with calls such as the one above. There are other options, so [check the docs for more info](/docs/libraries/js#overriding-server-properties). 
+
+#### Route censor app
+The team at [Ava Labs](https://www.avalabs.org/) has contributed a new app which enables you to censor variables from any URLs passed to PostHog. It's especially helpful if you have security concerns around sensitive data embedded into an URL, as this helps you prevent that information ever being ingested. [Check the docs for more information](/docs/apps/route-censor).
+
+#### Community spotlight: Add blogposts as annotations
+We love it when our community create things for PostHog, so we wanted to throw a spotlight on Brian Morrison's latest work. He's created a tool which automatically creates annotations in PostHog whenever a new blogpost is released, so you can track how it impacts pageviews. 
+
+Brian's put together a wonderful [Twitter thread](https://twitter.com/brianmmdev/status/1651287581550575620) about how he used the PostHog API to do this, but it's worth reading [the full blogpost too](https://brianmorrison.me/blog/automating-posthog-annotations/). Thanks, Brian!
+
+## April 28, 2023
+
+#### Feature flag snippet
+![posthog feature flag snippet](../images/blog/array/flag-snippet.png)
+
+Feature flags are a staple feature for PostHog, but we've added a bunch of new ways to add them to your product this week, depending on which libraries you're using. You can now choose to see a payload, bootstrap, or local evaluation version of the snippet, making it easier to add feature flags to your app and start testing changes.
+
+#### Experimental: DOM explorer mode
+![posthog recording dom explorer](../images/blog/array/dom-recording.png)
+
+Our session replays look like video, but we really we capture the DOM and make that look like video. Engineer Ben White thought it would be 'a cool thing' to use the DOM for debugging. And, presto, we now have an explorable DOM mode.
+
+This is still an experimental feature. Entering DOM explorer mode will give you an interactive snapshot of the site. Most things won't work (it's just a snapshot), but you can use Browser Developer Tools to inspect the content and debug faster. 
+
+#### Beta: View insight sources
+![posthog sql source](../images/blog/array/sql_insight.png)
+
+Insight filters follow a declarative format which you can now view and edit directly. Open the insight editor by clicking on the `{}` icon next to the save insight button and you'll see the source for the current insight configuration. You can copy-and-paste complete or partial insights to build insights in new ways.
+
+This is a beta feature, so find out more in [the docs](/docs/product-analytics/trends#view-source-beta) or [drop us a request](https://app.posthog.com/home#supportModal) if you want to try it out!
+
+#### Data management history
+![posthog history](../images/blog/array/history-management.png)
+
+"I forgot that I meant to demo this," is how Paul D'Ambra announced this feature to the team this week. It adds an activity log for event and property definition edits in PostHog's data management tool. Confused by a sudden change in metrics? This will help you find out if it's because someone has tinkered with your events and defintions. 
+
+## April 21, 2023
+
+#### Support triage
+![posthog support](../images/blog/array/posthog-support.png)
+
+We've made a change to the way we handle support internally in order to give you a better experience. In the app this manifests through a new 'Report bug / get support' option on the help dropdown, which opens the modal above. 
+
+Previously, we'd assign an engineer to be a [Support Hero](/handbook/engineering/support-hero) each week and they would mostly drop other work to focus on support. That worked well initially, but as PostHog has grown in breadth it's become harder for engineers to offer support outside of their usual focus. The new system automatically triages requests and assigns them to a Support Hero from the relevant small team - meaning our engineers can stay focused on shipping. 
+
+#### PostHog is SOC 2 compliant
+![posthog soc 2 compliance](../images/blog/array/soc2-hog.jpg)
+
+Following an audit, we've been approved as SOC 2 compliant. 
+
+We're confident that nobody is _really_ interested in SOC 2 at a personal level. You either need it, or you don't. So... that's it. That's the update.
+
+The image is our attempt to make SOC 2 seem cool. Maybe we've been listening to too much Boyz 2 Men?
 
 ## April 14, 2023
 
@@ -40,7 +111,7 @@ Want to test him out? [Tag @Max-AI in the PostHog Slack, or send him a DM!](/sla
 
 [PostHog Tracks](/tracks) is a series of curated courses of tutorials and other lessons which cover common uses for particular roles, as well as general advice for all users - and it's constantly expanding!
 
-At the moment PostHog Tracks groups many of our existing tutorials together into role-based themes, but over time we plan to add to these tracks and form more robust learning opportunities. Let us know if you have any ideas for what could be included, in the [Slack](/slack)
+At the moment PostHog Tracks groups many of our existing tutorials together into role-based themes, but over time we plan to add to these tracks and form more robust learning opportunities. [Let us know if you have any ideas for what could be included](https://app.posthog.com/home#supportModal).
 
 ## April 7, 2023
 
@@ -75,7 +146,7 @@ Every issue of Product for Engineers has a theme which we explore through curate
 
 As [teased on Twitter last week](https://twitter.com/posthog/status/1633061945598148608), we’re currently trialing a new speed setting for PostHog which we call Lightning Mode. When enabled, insights will sample only 10% of your data, so you can get results faster when interrogating very large data sets. 
 
-Lightning mode is currently in beta. Want to give it a go? Let us know in [the community Slack](/slack)!
+Lightning mode is currently in beta. Want to give it a go? [Drop us a line!](https://app.posthog.com/home#supportModal)
 
 #### Beta: Sampling selector
 ![posthog sampling](../images/blog/array/sampling.gif)
@@ -110,7 +181,7 @@ You can log into PostHog now to try it out, and be bought right back to this ver
 
 We want to make it easier and faster for users to find useful information in PostHog — dashboards are a key part of that because they’re often one of the first things users build. So, we’ve added a new selection of [dashboard templates](/templates), as well as a new wizard that’s a little easier on the eye. 
 
-We’ve added a few simple templates to start with, for getting insights into areas such as online advertising, website traffic and user research. Got other ideas? Let us know in [the PostHog Slack](/slack)!
+We’ve added a few simple templates to start with, for getting insights into areas such as online advertising, website traffic and user research. Got other ideas? [Let us know!](https://app.posthog.com/home#supportModal)
 
 #### Hedgehog Mode collisions
 ![hedgehog mode collisions](../images/blog/array/when-hogs-collide.gif)

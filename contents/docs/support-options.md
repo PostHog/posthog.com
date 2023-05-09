@@ -91,10 +91,11 @@ By default, the Scale plan does not include items marked with a '+'.
 
 ## Community Support
 
-There are three ways to get free support from the PostHog community:
+There are four ways to get free support:
 
-* Ask a question directly in these Docs at the bottom of the page, or check out [our database](/questions) of previously answered questions
-* Join >1,500 developers in [our public Slack group](/slack)
+* Ask a question directly in these Docs at the bottom of the page, or check out [our database](/questions) of previously answered questions. We try to respond to as many of these as we can!
+* [Send a support ticket via the app](https://app.posthog.com/home#supportModal) to send it to the relevant team. We try to respond to as many of these as we can. 
+* Join >1,500 developers in [our public Slack group](/slack) to ask other PostHog users, or our AI support bot Max-AI. 
 * Open an issue in our [main project's GitHub repo](https://github.com/posthog/posthog)
 
 We are very grateful for folks that do this the other way around and help answer others' questions. You may just end up with some [merch](https://merch.posthog.com/) for particularly good answers :)

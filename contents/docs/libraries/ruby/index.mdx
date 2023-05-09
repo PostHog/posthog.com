@@ -288,6 +288,21 @@ Sometimes, performance might matter to you so much that you never want an HTTP r
 
 <CohortExpansionSnippet />
 
+#### Evaluating feature flags locally in unicorn server
+
+If you have `preload_app true` in your unicorn config, you can use `after_fork` [hook](https://www.rubydoc.info/gems/unicorn/Unicorn%2FConfigurator:after_fork) which is part of the unicorn's configuration so that the feature flag cache will receive the updates from posthog dashboard.
+
+```ruby
+after_fork do |server, worker|
+  $posthog = PostHog::Client.new(
+    api_key: '<ph_project_api_key>',
+    personal_api_key: '<ph_personal_api_key>'
+    host: '<ph_instance_address>',
+    on_error: Proc.new { |status, msg| print msg }
+  )
+end
+```
+
 #### Reloading feature flags
 
 When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `reloadFeatureFlags`:

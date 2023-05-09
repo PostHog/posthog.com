@@ -524,7 +524,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     const productDocumentationMenuNames = {
-        '/session-replay': 'Session recording',
+        '/session-replay': 'Session replay',
         '/product-analytics': 'Product analytics',
         '/feature-flags': 'Feature flags',
         '/ab-testing': 'A/B testing',

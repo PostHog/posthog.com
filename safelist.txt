@@ -51,6 +51,7 @@ hover:text-light-yellow
 justify-start
 justify-start
 left-16
+lg:before:hidden
 lg:grid-cols-1
 lg:grid-cols-2
 lg:grid-cols-3
@@ -65,6 +66,7 @@ lg:grid-rows-1
 lg:grid-rows-2
 lg:grid-rows-3
 lg:grid-rows-4
+lg:mb-8
 lg:ml-6
 lg:my-0
 max-w-2xl
@@ -85,6 +87,7 @@ opacity-40
 opacity-60
 opacity-75
 opacity-100
+pb-72
 pb-48
 pr-32
 rotate-180

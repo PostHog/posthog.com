@@ -79,7 +79,7 @@ Some of the features we are building may exist in other products already. It is 
 [@yakkomajuri]: https://github.com/yakkomajuri
 [@timgl]: https://github.com/timgl
 [Team Product Analytics]: /handbook/small-teams/product-analytics
-[Team Session Recording]: /handbook/small-teams/session-recording
+[Team Monitoring]: /handbook/small-teams/monitoring
 [Team Pipeline]: /handbook/small-teams/pipeline
 [Team Infrastructure]: /handbook/small-teams/infrastructure
 [Team Feature Success]: /handbook/small-teams/feature-success

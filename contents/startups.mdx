@@ -20,7 +20,7 @@ images:
 
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
-<div class="w-[calc(100%_+_4rem)] relative -mx-4 px-8 md:-mx-16 pt-32 pb-48 -mt-32 md:-mt-44">
+<div class="w-[calc(100%_+_4rem)] relative -mx-4 px-8 md:-mx-16 pt-32 pb-72 -mt-32 md:-mt-44">
   <div class="md:hidden absolute top-0 left-0 w-full bottom-0 opacity-40">
     <GatsbyImage image={getImage(props?.images[0])} alt="PostHog for startups" objectFit="cover" className="" />
   </div>
@@ -40,18 +40,10 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
     title="PostHog for startups"
     subtitle="$50k in credits (plus extras you'll actually use) to help you get to product-market fit"
     ctas={[
-        <CallToAction href="https://app.posthog.com/signup">Get started - free</CallToAction>
+        <CallToAction href="/startups/apply">Apply now</CallToAction>
     ]}
 />
 
-<p class="text-center text-xs p-4 relative">
-  Apply for the program by following three simple steps:
-   <ul class="list-none">
-   <li>1. Create an account using the button above</li>
-   <li>2. Subscribe to the Scale plan on the billing page in-app</li>
-   <li>3. Fill in this <a href="/signup/cloud/startup">form</a> and we will review your application</li>
-   </ul>
-</p>
 </div>
 
 
@@ -97,25 +89,25 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
 <section class="my-24 px-5">
   <div class="max-w-screen-2xl mx-auto">
-    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16">Extra perks</h3>
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Extra perks</h3>
     <div class="flex justify-center">
-      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 justify-evenly relative after:border-t after:border-dashed after:border-gray-accent-light after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 before:border-l before:border-dashed before:border-gray-accent-light sm:after:block after:hidden sm:before:block before:hidden">
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 sm:border-b-0 border-b border-dashed border-gray-accent-light last:border-b-0">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative after:border-t lg:after:border-t-0 after:border-dashed after:border-gray-accent-light after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 before:border-l lg:before:border-0 before:border-dashed before:border-gray-accent-light sm:after:block after:hidden sm:before:block lg:before:hidden lg:after:hidden before:hidden">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
           <GatsbyImage image={getImage(props?.images[5])} alt="Startup spotlight" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Startup spotlight</h5>
           <p class="m-0 text-[15px]">Every month, we will pick a startup of the month to spotlight. We'll do a short interview with you which we'll share on posthog.com and our socials.</p>
         </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 sm:border-b-0 border-b border-dashed border-gray-accent-light last:border-b-0">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
           <GatsbyImage image={getImage(props?.images[6])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Free PostHog merch</h5>
           <p class="m-0 text-[15px]">Because you can never have too much</p>
         </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 sm:border-b-0 border-b border-dashed border-gray-accent-light last:border-b-0">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
           <GatsbyImage image={getImage(props?.images[7])} alt="Startup launch" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">We'll promote your launch</h5>
           <p class="m-0 text-[15px]">Doing a launch? Let us know and we'll retweet, upvote you on ProductHunt, and generally spread the word.</p>
         </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 sm:border-b-0 border-b border-dashed border-gray-accent-light last:border-b-0">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
           <GatsbyImage image={getImage(props?.images[8])} alt="Startup credit" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Extra credit</h5>
           <p class="m-0 text-[15px]">Send this page to your investor or accelerator where they can apply to be a partner. If they sign up, we'll double your credits <em>and</em> send you a custom pair of PostHog AirPods.</p>
@@ -130,15 +122,15 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
   <div class="max-w-screen-md mx-auto">
     <h3 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl m-0 text-center mb-6 sm:mb-8">Docs & resources</h3>
     <ul class="border border-dashed border-gray-accent-light p-0">
-      <li class="list-none px-4 py-2"><a href="/academy">PostHog Academy: How to use PostHog</a></li>
-      <li class="list-none px-4 py-2"><a href="/blog/story-about-pivots">A story about pivots</a></li>
-      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/early-stage-analytics">The 80/20 of early-stage startup analytics</a></li>
-      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/posthog-first-five">What we learned about hiring from our first five employees</a></li>
-      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/how-to-run-a-transparent-company">How to run a transparent startup</a></li>
-      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/making-something-people-want">How we made something people want</a></li>
-      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/startup-ops-toolkit">The ops toolkit for early-stage startups</a></li>
-      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/startup-finance-without-finance">How to run finance at your startup without hiring a finance person</a></li>
-      <li class="list-none px-4 py-2 border-t border-dashed border-gray-accent-light"><a href="/blog/dev-marketing-for-startups">Developer marketing for early-stage startups – what we’ve learned</a></li>
+      <li class="list-none px-4 py-2"><a href="/tracks">PostHog Tracks: How to use PostHog</a></li>
+      <li class="list-none px-4 py-2 font-semibold"><a href="/blog/story-about-pivots">A story about pivots</a></li>
+      <li class="list-none px-4 py-2 font-semibold border-t border-dashed border-gray-accent-light"><a href="/blog/early-stage-analytics">The 80/20 of early-stage startup analytics</a></li>
+      <li class="list-none px-4 py-2 font-semibold border-t border-dashed border-gray-accent-light"><a href="/blog/posthog-first-five">What we learned about hiring from our first five employees</a></li>
+      <li class="list-none px-4 py-2 font-semibold border-t border-dashed border-gray-accent-light"><a href="/blog/how-to-run-a-transparent-company">How to run a transparent startup</a></li>
+      <li class="list-none px-4 py-2 font-semibold border-t border-dashed border-gray-accent-light"><a href="/blog/making-something-people-want">How we made something people want</a></li>
+      <li class="list-none px-4 py-2 font-semibold border-t border-dashed border-gray-accent-light"><a href="/blog/startup-ops-toolkit">The ops toolkit for early-stage startups</a></li>
+      <li class="list-none px-4 py-2 font-semibold border-t border-dashed border-gray-accent-light"><a href="/blog/startup-finance-without-finance">How to run finance at your startup without hiring a finance person</a></li>
+      <li class="list-none px-4 py-2 font-semibold border-t border-dashed border-gray-accent-light"><a href="/blog/dev-marketing-for-startups">Developer marketing for early-stage startups – what we’ve learned</a></li>
     </ul>
   </div>
 </section>
@@ -189,3 +181,10 @@ Because all of those are available if you just go to the company <a href="https:
 </details>
 </div>
 </section>
+
+<div className="text-center">
+
+<h2 className="text-3xl lg:text-5xl pb-8">Ready to get started?</h2>
+<CallToAction href="/startups/apply">Apply now</CallToAction>
+
+</div>

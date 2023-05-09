@@ -42,6 +42,8 @@ Product engineers are less focused on implementation and focus more on solving t
 
 Software engineers are more idealistic. They look for the best solution to the problem in front of them, focus on best practices, and build off prior work. Security, risk, and scaling weigh heavier in their minds.
 
+> **What about growth engineers?** [Growth engineers]((/blog/what-is-a-growth-engineer) are a type of software engineer that focuses on projects that drive growth metrics like signups, subscriptions, and revenue. They have share many characteristics with product engineers, but have a broader focus on growth across the company rather than a specific product.
+
 ## How do they spend their time?
 
 Product engineers still spend the majority of their time coding, but they have responsibilities outside of coding that software engineers don't.

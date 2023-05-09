@@ -362,7 +362,7 @@ noindex: true
 - `noindex`: `true` | `false` - determines whether to index the page or not
 
 
-You can often refer to the source of existing pages for more examples, but if in doubt, you can always ask for help in the [PostHog Community Slack](/slack). 
+You can often refer to the source of existing pages for more examples, but if in doubt, you can always [ask for help](https://app.posthog.com/home#supportModal).
 
 #### Images/GIFs
 

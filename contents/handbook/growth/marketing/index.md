@@ -178,3 +178,17 @@ The Marketing Small Team page is maintained [here](/handbook/small-teams/marketi
 - T-shaped people (wide breadth with a spike), rather than specialists
 - Hands-on people not motivated by managing a team
 - We're agnostic as to experience
+
+## Small team support
+
+In order to effectively support other small teams across the business, we assign someone from the marketing team to each of the other small teams, except for Joe who coordinates across all teams. Once a week we have a thread in Slack for sharing news from across the small teams with the rest of Marketing. The product team is also invited to join this thread, which is started by Joe. 
+
+Here is the current small team assignment: 
+
+- Product analytics: Andy Vandervell
+- Session recording: Charles Cook
+- Monitoring: Lior Neu-ner
+- Experimentation & Feature Success: Ian Vanagas
+- Overall view and growth: Joe Martin
+
+Support members for each small team are encouraged to work directly with their team, joining sprint meetings and relevant Slack channels. 

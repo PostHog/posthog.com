@@ -6,8 +6,8 @@ import PostLayout from 'components/PostLayout'
 import { UnderConsideration } from './UnderConsideration'
 import { InProgress } from './InProgress'
 import { StaticImage } from 'gatsby-plugin-image'
-import community from 'sidebars/community.json'
 import { useRoadmap } from 'hooks/useRoadmap'
+import { useNav } from 'components/Community/useNav'
 
 interface IGitHubPage {
     title: string
@@ -95,6 +95,7 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default function Roadmap() {
+    const nav = useNav()
     const teams = useRoadmap()
 
     const underConsideration: ITeam[] = teams
@@ -121,19 +122,6 @@ export default function Roadmap() {
         })
         .filter((team) => team.roadmaps.length > 0)
 
-    /*const complete = groupBy(
-        nodes.filter((node: IRoadmap) => {
-            const goalDate = node.dateCompleted && new Date(node.dateCompleted)
-            const currentDate = new Date()
-            const currentQuarter = Math.floor(currentDate.getMonth() / 3 + 1)
-            const goalQuarter = goalDate && Math.floor(goalDate.getMonth() / 3 + 1)
-            return (
-                goalDate && goalDate.getUTCFullYear() === currentDate.getUTCFullYear() && goalQuarter === currentQuarter
-            )
-        }),
-        ({ team }: { team: ITeam }) => team?.name
-    )*/
-
     return (
         <Layout>
             <SEO title="PostHog Roadmap" />
@@ -143,7 +131,7 @@ export default function Roadmap() {
                     article={false}
                     title={'Roadmap'}
                     hideSurvey
-                    menu={community}
+                    menu={nav}
                     darkMode={false}
                     contentContainerClassName="lg:-mb-12 -mb-8"
                 >
@@ -221,23 +209,23 @@ export default function Roadmap() {
                                 to see what we've shipped recently.
                             </p>
                             {/*
-                                        hidden until we have more historical content loaded
-                                        <CardContainer>
-                                        {Object.keys(complete)
-                                            .sort()
-                                            .map((key) => {
-                                                return (
-                                                    <Card key={key} team={key}>
-                                                        <CardContainer>
-                                                            {complete[key]?.map((node: IRoadmap) => {
-                                                                return <Complete key={node.title} {...node} />
-                                                            })}
-                                                        </CardContainer>
-                                                    </Card>
-                                                )
-                                            })}
-                                        </CardContainer>
-                                    */}
+                            hidden until we have more historical content loaded
+                            <CardContainer>
+                            {Object.keys(complete)
+                                .sort()
+                                .map((key) => {
+                                    return (
+                                        <Card key={key} team={key}>
+                                            <CardContainer>
+                                                {complete[key]?.map((node: IRoadmap) => {
+                                                    return <Complete key={node.title} {...node} />
+                                                })}
+                                            </CardContainer>
+                                        </Card>
+                                    )
+                                })}
+                            </CardContainer>
+                        */}
                         </Section>
                     </div>
                 </PostLayout>

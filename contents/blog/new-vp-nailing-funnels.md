@@ -81,4 +81,5 @@ But you can't just assume everyone will buy into the strategy because you posted
 
 Read more about our strategy [here](/handbook/strategy/overview).
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+

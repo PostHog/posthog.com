@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { PageProps } from 'gatsby'
-
-import community from 'sidebars/community.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
@@ -20,6 +18,7 @@ import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { RightArrow } from '../../../components/Icons/Icons'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
+import { useNav } from 'components/Community/useNav'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -43,6 +42,7 @@ const Avatar = (props: { className?: string; src?: string }) => {
 }
 
 export default function ProfilePage({ params }: PageProps) {
+    const nav = useNav()
     const id = parseInt(params.id || params['*'])
 
     const [editModalOpen, setEditModalOpen] = React.useState(false)
@@ -119,7 +119,7 @@ export default function ProfilePage({ params }: PageProps) {
                 <PostLayout
                     title="Profile"
                     breadcrumb={[{ name: 'Community', url: '/questions' }]}
-                    menu={community}
+                    menu={nav}
                     sidebar={
                         <ProfileSidebar
                             handleEditProfile={handleEditProfile}

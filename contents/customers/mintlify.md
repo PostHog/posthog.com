@@ -11,7 +11,7 @@ users:
     - Product
     - Users
 toolsUsed:
-    - Session Recording
+    - Session replay
     - Autocapture
     - PostHog Cloud
     - API

@@ -3,12 +3,12 @@
         "name": "Community"
     },
     {
-        "name": "Dashboard",
-        "url": "/community"
+        "name": "Topics",
+        "url": "/questions"
     },
     {
-        "name": "Questions",
-        "url": "/questions"
+        "name": "Latest questions",
+        "url": "/community/latest"
     },
     {
         "name": "Roadmap",

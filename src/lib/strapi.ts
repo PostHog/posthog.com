@@ -36,6 +36,7 @@ export type QuestionData = {
     topics?: StrapiData<TopicData[]>
     numReplies: number | null
     archived: boolean
+    activeAt: string
 }
 
 export type AvatarData = {
@@ -60,6 +61,7 @@ export type ProfileData = {
     gravatarURL: string | null
     questionSubscriptions: StrapiData<QuestionData[]>
     user?: StrapiData<UserData>
+    topicSubscriptions: StrapiData<TopicData[]>
 }
 
 export type UserData = {

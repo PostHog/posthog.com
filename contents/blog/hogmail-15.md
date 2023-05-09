@@ -12,7 +12,7 @@ featuredImageType: full
 category: Newsletter
 ---
 
-> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](/newsletter) so you don't miss it.
+> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
 
 ## #posthog-blog
 
@@ -70,4 +70,4 @@ category: Newsletter
 
 * [How Do You Prove a Secret?](https://www.quantamagazine.org/how-to-prove-you-know-a-secret-without-giving-it-away-20221011/)
 
-> We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
+> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.

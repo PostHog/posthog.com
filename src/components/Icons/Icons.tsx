@@ -477,7 +477,7 @@ export const Close = ({ className = '', opacity = '0.4' }: React.SVGProps<SVGSVG
     )
 }
 
-export const Close2 = ({ className = '' }: { className: string }): JSX.Element => {
+export const Close2 = ({ className = '', fill = '#F54E00' }: { className: string; fill?: string }): JSX.Element => {
     return (
         <svg
             className={className}
@@ -488,7 +488,7 @@ export const Close2 = ({ className = '' }: { className: string }): JSX.Element =
             xmlns="http://www.w3.org/2000/svg"
         >
             <path
-                fill="#F54E00"
+                fill={fill}
                 fillRule="evenodd"
                 d="M6.414 4.414a1.414 1.414 0 0 0-2 2l4 4-4 4a1.414 1.414 0 0 0 2 2l4-4 4 4a1.414 1.414 0 1 0 2-2l-4-4 4-4a1.414 1.414 0 1 0-2-2l-4 4-4-4Z"
                 clipRule="evenodd"

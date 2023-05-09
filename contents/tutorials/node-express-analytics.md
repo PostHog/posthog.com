@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-05
-featuredTutorial: true
+featuredTutorial: false
 featuredImage: ../images/tutorials/banners/nodejs.png
 featuredVideo: https://www.youtube-nocookie.com/embed/aYRzmDP-Mwc
 tags: ["configuration", "feature flags", "persons", "events"]

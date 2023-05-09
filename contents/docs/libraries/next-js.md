@@ -165,7 +165,7 @@ export async function getServerSideProps(ctx) {
 
 ## Configuring a reverse proxy to PostHog
 
-To improve the reliability of client-side tracking and make it less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. See [deploying a reverse proxy](/docs/advanced/proxy#using-nextjs).
+To improve the reliability of client-side tracking and make it less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. See [deploying a reverse proxy using Next.js rewrites](/docs/advanced/proxy/nextjs) or [using Vercel writes](/docs/advanced/proxy/vercel).
 
 ## Further reading
 
