@@ -77,7 +77,11 @@ Contextual onboarding can reduce frustration by onboarding users at the right ti
 
 ### Contender 4: universal onboarding
 
-Universal onboarding is the opposite of contextual onboarding: providing product assistance agnostic to the user’s app history. To be clear, universal onboarding isn’t inherently a bad thing! Some evergreen onboarding features are great for certain apps. A command bar, an always available actionable search bar, has a low UI profile and is a fantastic universal onboarding tool. Another is a button to explore help content in-app. Or an icon to fire off the product tour. 
+Universal onboarding is the opposite of contextual onboarding: providing product assistance agnostic to the user’s app history. To be clear, universal onboarding isn’t inherently a bad thing! Some evergreen onboarding features are great for certain apps. 
+
+A command bar, an always available actionable search bar, has a low UI profile and is a fantastic universal onboarding tool. Another is a button to explore help content in-app. Or an icon to fire off the product tour.
+
+![In-app help](../images/blog/onboarding-strategies/app-help.png)
 
 A pre-requisite, however, is that universal onboarding strategies are simply an _option_ for the user. They are annoying if forced.
 
