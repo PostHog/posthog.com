@@ -690,6 +690,10 @@
         },
         {
             "source": "/blog/introduction-to-customer-retention",
+            "destination": "https://merch.posthog.com/"
+        },
+        {
+            "source": "/merch",
             "destination": "/blog/customer-churn-analysis-guide"
         },
         {
