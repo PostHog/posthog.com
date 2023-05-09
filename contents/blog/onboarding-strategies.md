@@ -1,6 +1,6 @@
 ---
 date: 2023-05-08
-title: Measuring feature success navigates the struggle of onboarding strategies
+title: Navigating onboarding strategies through measurement
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -82,8 +82,6 @@ A pre-requisite, however, is that universal onboarding strategies are simply an 
 Onboarding strategies are varied across two axes, but they all work in certain contexts and backfire in others. 
 
 ![Quadrant of main onboarding strategies ](../images/blog/onboarding-strategies/quadrant.png)
-
-Quadrant of main onboarding strategies 
 
 Unfortunately, all of this isn’t a proven science. Appcues, Pendo, WalkMe etc. conduct studies on product tours but, understandably, are biased. CommandBar, too, is biased. And, of course, so are we (evidenced by this article). 
 
