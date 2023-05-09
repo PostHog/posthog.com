@@ -829,7 +829,8 @@
         { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/monitoring" },
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
         { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" },
-        { "source": "/community", "destination": "/questions" }
+        { "source": "/community", "destination": "/questions" },
+        { "source": "/blog/customer-churn-analysis-guide", "destination": "/blog/churn-rate-vs-retention-rate" }
     ],
     "rewrites": [
         {

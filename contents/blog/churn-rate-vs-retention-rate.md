@@ -1,6 +1,6 @@
 ---
-date: 2023-02-08
-title: "Retention Rate vs Churn Rate: Your guide to churn analysis"
+date: 2023-05-09
+title: "Retention Rate vs Churn Rate: An intro to churn analysis"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -17,30 +17,21 @@ tags:
   - Explainers
 ---
 
-You know what's cooler than gaining new customers? Retaining them.
-
-In this guide to customer churn analysis, I'm exploring churn rate and retention rate:
-- How they're different
-- How to measure them
-- Why you should care
-
-These and other questions (like [how to reduce churn](#how-to-improve-retention-and-reduce-churn)) will be answered. Let's get to it.
-
-## ❓What's the difference between retention rate and churn rate?
-
-Not much, really: 
+Here's what you need to know about churn rate and retention rate:
 
 - **Churn rate** is the percentage of customers who **stop using** your product during a given period of time.
 
 - **Retention rate** is the percentage of **existing customers** who **continue using** your product. 
 
-In other words, if you have 1,000 customers and 100 of them cancel their subscription, your monthly churn rate would be 10% and your retention rate would be 90%. That's it.
+So, if you have 1,000 customers and 100 of them cancel their subscription, your monthly churn rate would be 10% and your retention rate would be 90%.
 
-Typically, "churn" and "customer churn" are used interchangeably, but there are numerous formulas for revenue churn/retention metrics – e.g. net revenue retention, gross revenue churn etc. I won't be covering them here, but [this is a good intro](https://openviewpartners.com/blog/saas-metrics-cmrr-net-dollar-retention/) on the topic.
+In this guide, I'll cover:
+- How and when to use each metric
+- How to measure churn rate and retention
+- Industry benchmarks for churn and retention rates
+- And [how to reduce customer churn](#how-to-improve-retention-and-reduce-churn)
 
-Those are the basics, but there's more worth learning. Let's start with churn rate.
-
-## 🧐 Understanding churn rate
+## Churn rate formula explained 📉
 
 Here's the simplest formula for churn rate:
 
@@ -54,17 +45,17 @@ The majority of companies should track churn monthly and/or annually. Those inte
 
 🚨 **Important:** Do not confuse monthly and annual churn rates. Monthly churn compounds into annual churn – i.e. a monthly churn rate of 5% equals a massive 46% annual churn rate. You can't just multiply your monthly churn rate by 12 to get your annual number, either. See [how to convert monthly churn to annual](#converting-monthly-churn-into-annual-churn-and-vice-versa) in the appendix.
 
-### Why should you care about churn?
+### Why should you care about your churn rate?
 
 Reducing churn makes intuitive sense, but it's worth considering the practical impact of high churn and reducing it. You can boil it down to three points:
 
   1. High churn is a likely sign you don't have product-market fit.
-
   2. High churn leads to increased sales and/or marketing spend to compensate.
-
   3. Reducing churn compounds – i.e. revenue **and** marketing ROI increase.
 
-All are compelling reasons to reduce churn, but you need some context before you do. Is your current churn rate actually bad, or does it just **feel** bad? Let's dig into that next.
+All are compelling reasons to reduce churn, but you need some context before you do. 
+
+Is your current churn rate actually bad, or does it just **feel** bad? Let's dig into that next.
 
 ### What is a good churn rate?
 
@@ -76,13 +67,13 @@ I've collated the better sources [in the appendix](#more-on-churn-rate-benchmark
 
 - **Mid-Market B2B SaaS:** Anything up to 5% monthly churn is OK for a B2B SaaS that **doesn't** sell to big enterprises, but something around 3% is preferable if your average revenue per customer (ARPC) is above $250 per month. Anything below 2% is excellent. A monthly churn rate of 3% is equivalent to 30.6% annually – i.e. a company with 1,000 customers would lose 306 over 12 months.
 
-- **Early-stage B2B SaaS:** A monthly churn rate above 5% is to be expected for any early-stage company B2B SaaS, so don't worry too much if you're growing fast and you're above that benchmark. Just monitor your trend and dig deeper if you don't see it decline as you mature. A monthly churn of 5.65% is equivalent to 50.24% annually – i.e. a company with 1,000 companies would lose 502 over 12 months, more than half.
+- **Early-stage B2B SaaS:** A monthly churn rate above 5% is to be expected for any early-stage company B2B SaaS, so don't worry too much if you're growing fast, and you're above that benchmark. Just monitor your trend and dig deeper if you don't see it decline as you mature. A monthly churn of 5.65% is equivalent to 50.24% annually – i.e. a company with 1,000 companies would lose 502 over 12 months, more than half.
 
 - **Enterprise B2B SaaS:** Products selling to large enterprises (think more than 1,000 employees) have lower churn, mainly because large companies change slowly and are billed annually. A monthly churn rate up to 2% is good. Anything less than 1% is excellent. A monthly churn rate of 1% is equivalent to 11.3% annually – i.e. a company with 1,000 customers will lose 114 over 12 months.
 
 Good retention rates are the same, but inverted – 5% churn equals 95% retention, and so on.
 
-## 🤔 Understanding retention rate
+## Retention rate formula explained 📈
 
 So that's churn rate, but what about retention rate? The basic formula is very similar:
 
@@ -107,7 +98,7 @@ Retention tables allow you to answer questions like:
 
 If you can answer these questions, you're on the way the improving retention and reducing churn.
 
-### How to read (and use) a cohort retention table
+### How to read cohort retention tables
 
 Below is a PostHog retention table for an imaginary Dropbox clone called Hedgebox. In this retention table we're looking at weekly repeat usage, configured as:
 
@@ -154,31 +145,51 @@ This is just one example using demo data in PostHog. You could also filter users
 - The types of files they upload
 - User job titles, company type, or myriad other properties
 
-Cohort retention tables are also useful for tracking revenue retention, especially if you charge based on usage. Positive revenue retention (i.e. more than 100%) indicates users increase their spend over time. Needless to say, this is a good thing.
+Cohort retention tables are also useful for tracking revenue retention, especially if you charge based on usage. 
 
-## 🚀 How to improve retention and reduce churn
+Positive revenue retention (i.e. more than 100%) indicates users increase their spend over time. Needless to say, this is a good thing.
 
-So, how do you improve retention and reduce churn? Talking to users is a vital component – we're [constantly talking to users](/blog/making-something-people-want) – but here are some tactical moves to consider:
+## 9 ways improve retention and reduce churn 🚀
 
-- **Check for involuntary churn:** Involuntary churn typically means billing problems – e.g. expired cards, out-of-date info etc. In e-commerce, abandoned baskets are a form involuntary churn.
+So, how do you improve retention and reduce churn? Talking to users is a vital component – we're [constantly talking to users](/blog/10x-engineers-do-user-interviews) – but here are some tactical moves to consider.
 
-- **Target different users:** Sometimes poor retention comes from acquiring the wrong users. This could be a marketing problem, or you might have the wrong [ideal customer profile](/blog/creating-ideal-customer-profile) for your product.
+> 🚨 **Important: Each lever you pull to reduce churn compounds, so pull more than one if you can. It doesn't matter which one works the best, just that one or more them do.
 
-- **Learn about your power users:** It's great to have power users, but they're also more sensitive to product changes. It's important to identify who they are, what they do, and what they value. They're your biggest advocates, so keep them happy. See: [How to identify and analyze power users in PostHog](/tutorials/power-users).
+### 1. Check for involuntary churn
 
-- **Ship useful new features:** If you're talking to your users, and learning about your power users, then you should be well-placed to build awesome new features your existing (and potential) customers will love. If you solve more problems for your customers, they're more likely to retain.
+Involuntary churn typically means billing problems – e.g. expired cards, out-of-date info etc. In e-commerce, abandoned baskets are a form involuntary churn.
 
-- **Improve speed/reliability/ease of use:** Users may love your product, but find it slow, buggy or hard to use. Again, talking to users will make it obvious if you have a problem here.
+### 2. Target different users
 
-- **Move customers to annual contracts:** Remember how companies selling to enterprises have lower churn? It's not an accident. Consider offering discounts or incentives to existing customers to move onto annual contracts. Once they do, they're less likely to churn.
+Sometimes poor retention comes from acquiring the wrong users. This could be a marketing problem, or you might have the wrong [ideal customer profile](/blog/creating-ideal-customer-profile) for your product.
 
-- **Improve your onboarding process:** Users who don't get full value out of your product are more likely the churn, and the best time to educate them is at the start. The better your new users understand your product (and its value), the better they'll retain.
+### 3. Learn about your power users
 
-- **Focus on customer success:** Customer success > outbound sales a lot of the time. [Our customer success team](/handbook/small-teams/customer-success) owns all inbound contact requests, assisting new users and introducing them to the right PostHog people at the right time. If you can't afford a dedicated team, give the job to someone until you do. PostHog CEO, James Hawkins, owned this area in our early days.
+It's great to have power users, but they're also more sensitive to product changes. It's important to identify who they are, what they do, and what they value. They're your biggest advocates, so keep them happy. See: [How to identify and analyze power users in PostHog](/tutorials/power-users).
 
-- **Re-engage your users:** Users who like your product can sometimes be distracted by other things. Well-timed outreach messages, such as showcasing an underused featured, can be extremely powerful. [Path analysis](/product/user-paths) is a useful tool for understanding where users get distracted.
+### 4. Ship useful new features
 
-Tactics for reducing churn is an article in itself, but these are all good starting points. Just remember each lever you pull to reduce churn compounds, so it's important to pull more than one if you can. It doesn't matter so much which one works the best, just that one or more them do.
+If you're talking to your users, and learning about your power users, then you should be well-placed to build awesome new features your existing (and potential) customers will love. If you solve more problems for your customers, they're more likely to retain.
+
+### 5. Improve speed/reliability/ease of use
+
+Users may love your product, but find it slow, buggy or hard to use. Again, talking to users will make it obvious if you have a problem here.
+
+### 6. Move customers to annual contracts
+
+Remember how companies selling to enterprises have lower churn? It's not an accident. Consider offering discounts or incentives to existing customers to move onto annual contracts. Once they do, they're less likely to churn.
+
+### 7. Improve your onboarding process
+
+Users who don't get full value out of your product are more likely the churn, and the best time to educate them is at the start. The better your new users understand your product (and its value), the better they'll retain.
+
+### 8. Focus on customer success
+
+Customer success > outbound sales a lot of the time. [Our customer success team](/handbook/small-teams/customer-success) owns all inbound contact requests, assisting new users and introducing them to the right PostHog people at the right time. If you can't afford a dedicated team, give the job to someone until you do. PostHog CEO, James Hawkins, owned this area in our early days.
+
+### 9. Re-engage your users
+
+Users who like your product can sometimes be distracted by other things. Well-timed outreach messages, such as showcasing an underused featured, can be extremely powerful. [Path analysis](/product/user-paths) is a useful tool for understanding where users get distracted.
 
 ### The things you need to improve retention
 
@@ -204,7 +215,7 @@ Check out [our product page](/product) if this sounds interesting to you.
 
 /pitch over
 
-## 👍 Takeaways
+## Takeaways 👍
 
 Phew, ok, that was lot. Hopefully you know a little more about how churn and retention rate work, interact, and impact your product now.
 
@@ -220,7 +231,7 @@ To conclude, here are five takeaways:
 
 1. PostHog is awesome and you should totally adopt it at your startup. "Nobody got fired for buying PostHog" said someone, probably me.
 
-### Further reading
+## Further reading 📖
 
 If you're interested in early-stage startups and product-led growth, you may find these articles useful: 
 
