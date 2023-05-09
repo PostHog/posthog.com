@@ -1,6 +1,6 @@
 ---
 title: How we measure feature success at PostHog
-date: 2023-05-08
+date: 2023-05-09
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -18,8 +18,8 @@ Is my new feature working? It's the question PostHog exists to answer – we eve
 
 We define a successful new feature as one that:
 
-**1. Solves a real user problem.** Key to this is understanding and defining users’ problems, then figuring out ways to solve them that fit with the product and business. 
-**2. Is actually used.** No matter how good you think your feature is, if it doesn’t get used, it isn’t benefitting users.
+1. **Solves a real user problem.** Key to this is understanding and defining users’ problems, then figuring out ways to solve them that fit with the product and business. 
+2. **Is actually used.** No matter how good you think your feature is, if it doesn’t get used, it isn’t benefitting users.
 
 If that sounds simple, well... that's kind of the point. The principles _are_ simple, but how deep you go in either is entirely up to you. 
 
@@ -28,8 +28,9 @@ In this post, I'll share how we measure feature success at PostHog using a real-
 > **What is sampling?** The sampling feature speeds up queries by analyzing a portion of the data and extrapolating the results.
 >
 > ![Sampling in action](../images/blog/measuring-feature-success/sampling.gif)
+ 
 ## Step 1: Deciding to build a feature
-
+ 
 Measuring feature success at PostHog is a multi-step process that goes hand-in-hand with our release process. Deciding what to build starts with identifying a user problem we can solve, which we'll do using a combination of:
 
 1. **Quantitative data** – Usage metrics showing users have a specific problem 
@@ -45,7 +46,7 @@ In this case, Yakko decided to work on data sampling because:
 
 This showed that sampling was technically feasible, and it was worth doing now.
 
-## Step 2: Building an MVP and testing it's working as intended
+## Step 2: Building an MVP and testing it
 
 Once we decide to build a feature, the success evaluation can begin. We move fast and build the feature, review that it matches what we envisioned, and ship it behind a feature flag. The flag rolls out to a single developer to start. This helps them to check if it has the smallest bit of success in solving the problem in production.
 
@@ -97,7 +98,7 @@ In Yakko’s case, he:
 
 After doing all these, he was confident the feature was trending towards success, and continued the rolling out until he hit 100% of users.
 
-### 4. Continued development post-launch
+## Step 5: Continued development post-launch
 
 Success after launch looks like continued growth in usage metrics. It also looks like recommendations, or public praise for that feature. If the feature has a large enough impact, it may even inspire a marketing push or case study. 
 
