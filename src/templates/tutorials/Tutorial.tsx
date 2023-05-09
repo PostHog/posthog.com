@@ -104,6 +104,11 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
             <PostLayout
+                isMenuItemActive={({ url }) =>
+                    categories.some((category) => {
+                        return url === `/tutorials/categories/${slugify(category, { lower: true })}`
+                    })
+                }
                 questions={
                     <div id="squeak-questions" className="pb-8">
                         <CommunityQuestions />
