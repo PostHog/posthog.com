@@ -16,6 +16,7 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
 import { ProductLayout } from './components/ProductLayout'
 import { Quote2 } from './components/Quote2'
+import { SlackPage } from './components/SlackPage'
 import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
 import { Startups } from './components/Startups'
@@ -38,6 +39,7 @@ export const shortcodes = {
     Quote,
     ProductLayout,
     Quote2,
+    SlackPage,
     Squeak,
     StarRepoButton,
     Startups,
