@@ -262,19 +262,11 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                 <div
                     className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4 pl-4 md:pl-0`}
                 >
-                    {availablePlans?.[availablePlans.length - 1]?.products?.map((product) => (
-                        <React.Fragment key={`product-${product.type}`}>
-                            {product.feature_groups?.map((feature_group) => {
-                                if (groupsToShow && !groupsToShow.includes(feature_group.group)) return null
-                                return (
-                                    <div key={feature_group.group} className="flex gap-2">
-                                        <span className="inline-block h-6 w-6">{icons[feature_group.group]}</span>{' '}
-                                        <h3 className="text-xl">{feature_group.name}</h3>
-                                    </div>
-                                )
-                            })}
-                        </React.Fragment>
-                    ))}
+                    <p className="font-bold mb-0">PostHog OS ships with all products</p>
+                    <p className="text-black/50 text-sm mb-0">
+                        You can set billing limits for each, so you only pay for what you want and never receive an
+                        unexpected bill.
+                    </p>
                 </div>
 
                 <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light px-4 md:gap-4">
@@ -323,8 +315,9 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                         key={`${feature_group.name}-group`}
                                         className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
                                     >
-                                        <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 md:pl-8 border-y border-gray-accent-light md:border-0">
-                                            Plan limit
+                                        <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
+                                            <span className="inline-block h-6 w-6">{icons[feature_group.group]}</span>{' '}
+                                            {feature_group.name}
                                         </h4>
                                     </div>
                                     <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
