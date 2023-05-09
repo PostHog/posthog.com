@@ -105,9 +105,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
             />
             <PostLayout
                 isMenuItemActive={({ url }) =>
-                    categories.some((category) => {
-                        return url === `/tutorials/categories/${slugify(category, { lower: true })}`
-                    })
+                    url === `/tutorials/categories/${slugify(categories[0], { lower: true })}`
                 }
                 questions={
                     <div id="squeak-questions" className="pb-8">
