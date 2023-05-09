@@ -411,6 +411,25 @@ client.shutdown()
 await client.shutdownAsync()
 ```
 
+## Debugging and exceptions
+
+If you are experiencing issues with the SDK it could be a number of things from an incorrectly confgiured API key, to some other network related issues. 
+
+The SDK does not throw errors for things happening in the background to ensure it doesn't affect your process. You can however hook into the errors to get more information:
+
+```node
+client.on("error", (err) => {
+  // Whatever handling you want
+  console.error("PostHog had an error!", err)
+})
+```
+
+Or you can enable debugging to get verbose logs about all the inner workings of the SDK.
+
+```node
+client.debug()
+```
+
 ## Using in a short-lived process like AWS Lambda
 
 PostHogs's client SDKs are all designed to queue and batch requests in the background to optimise API calls and network time. For lambda environments (or also when shutting down a standard Node.js app) we provide a method .shutdownAsync which can be awaited and ensures the queued events are all flushed to the API.
