@@ -52,7 +52,7 @@ export default function SlackPage(): JSX.Element {
                         </li>
                         <li className="list-none">
                             <Link
-                                to="/questions"
+                                to="/docs"
                                 className="flex gap-3 p-4 text-primary hover:text-primary rounded relative hover:bg-black/5 hover:scale-[1.005] hover:top-[-0.5px] active:scale-[1] active:top-[.5px]"
                             >
                                 <figure className="h-8 w-8 mt-1 opacity-60">
@@ -66,7 +66,7 @@ export default function SlackPage(): JSX.Element {
                         </li>
                         <li className="list-none">
                             <Link
-                                to="/questions"
+                                to="/slack-invite"
                                 className="flex gap-3 p-4 text-primary hover:text-primary rounded relative hover:bg-black/5 hover:scale-[1.005] hover:top-[-0.5px] active:scale-[1] active:top-[.5px]"
                             >
                                 <figure className="h-8 w-8 mt-1 opacity-60">
