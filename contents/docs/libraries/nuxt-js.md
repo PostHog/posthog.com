@@ -28,7 +28,7 @@ yarn add posthog-js
 npm install --save posthog-js
 ```
 
-2. Add your environment variables to your `nuxt.config.js` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in the PostHog app under Project Settings > Project Variables.
+2. Add your PostHog API key and host to your `nuxt.config.js` file. You can find your project API key in the PostHog app under Project Settings > Project Variables.
 
 ```js file=nuxt.config.js
 export default defineNuxtConfig({
