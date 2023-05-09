@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredTutorial: true
-featuredImage: ../images/tutorials/banners/tutorial-1.png
+featuredImage: ../images/tutorials/banners/growth.png
 tags: ["apps", "site-apps"]
 ---
 
