@@ -247,7 +247,7 @@ cron.schedule('*/10 * * * * *', () => {
 });
 ```
 
-Once you restart the server and send multiple events to different IDs, you will see the event batches in your PostHog instance. Each batch event has the amount of API calls as a property which we can use for our analysis.
+Once you restart the server to implement the changes and send multiple events to an ID, you will see the event batches in your PostHog instance. Each batch event has the amount of API calls as a property which we can use for our analysis. Try sending groups of events to multiple different IDs for comparison later.
 
 ![Batch](../images/tutorials/track-high-volume-apis/batch.png)
 
