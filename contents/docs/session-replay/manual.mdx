@@ -33,4 +33,4 @@ To avoid recording passwords or other sensitive information, the default PostHog
 
 If your application displays sensitive user information outside of input fields, you need to update your codebase to prevent PostHog from capturing this information during session recordings.
 
-To do so, you should add the CSS class name `ph-no-capture` to elements which should not be recorded. This will lead to the element being replaced with a block of the same size when you play back the recordings. Make sure everyone who watches recordings in your team is aware of this, so that they don't think your product is broken when something doesn't show up!
+To do so, you should add the CSS class name `[ph-no-capture](https://posthog.com/tutorials/fewer-unwanted-events#adding-the-no-capture-class)` to elements which should not be recorded. This will lead to the element being replaced with a block of the same size when you play back the recordings. Make sure everyone who watches recordings in your team is aware of this, so that they don't think your product is broken when something doesn't show up!
