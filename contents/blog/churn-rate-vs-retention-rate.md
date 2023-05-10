@@ -29,7 +29,8 @@ In this guide, I'll cover:
 - How and when to use each metric
 - How to measure churn rate and retention
 - Industry benchmarks for churn and retention rates
-- And [how to reduce customer churn](#how-to-improve-retention-and-reduce-churn)
+
+And... [how to reduce customer churn](#how-to-improve-retention-and-reduce-churn).
 
 ## Churn rate formula explained 📉
 
