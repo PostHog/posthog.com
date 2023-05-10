@@ -100,7 +100,11 @@ After doing all these, he was confident the feature was trending towards success
 
 ## Step 5: Continued development post-launch
 
-Success after launch looks like continued growth in usage metrics. It also looks like recommendations, or public praise for that feature. If the feature has a large enough impact, it may even inspire a marketing push or case study. 
+Success after launch looks like continued growth in usage metrics. It also looks like recommendations, or public praise for that feature, such as this feedback we got about sampling:
+
+> Btw, love the new sampling feature - makes queries much faster
+
+If the feature has a large enough impact, it may even inspire a marketing push or case study.
 
 If a large feature is successful to warrant dedicated, sustained work, such as session recordings or group analytics, we might plan to [charge for it](/handbook/engineering/feature-pricing). If this is the case, then success becomes users paying for it. As an example, charging for our feature flags product is a goal for Q2 2023. Follow-on goals are likely growing the revenue of the product. 
 
