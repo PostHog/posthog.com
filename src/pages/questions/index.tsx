@@ -5,7 +5,7 @@ import QuestionForm from 'components/Questions/QuestionForm'
 import TopicsTable from 'components/Questions/TopicsTable'
 import CommunityLayout from 'components/Community/Layout'
 
-const fetchTopicGroups = async () => {
+export const fetchTopicGroups = async () => {
     // FIXME: This is has to fetch _every_ (or probably at most 25) quesiton that's part of a topic even though we only need the most recent one
     const topicGroupsQuery = qs.stringify(
         {
@@ -47,7 +47,7 @@ const fetchTopicGroups = async () => {
     return topicGroups.json().then((topicGroups) => topicGroups.data)
 }
 
-const topicGroupsSorted = ['Products', 'Platform', 'Data', 'Self-hosting', 'Other']
+export const topicGroupsSorted = ['Products', 'Platform', 'Data', 'Self-hosting', 'Other']
 
 export default function Questions() {
     const [topicGroups, setTopicGroups] = useState([])
