@@ -1,5 +1,5 @@
 ---
-date: 2023-05-05
+date: 2023-05-09
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -17,7 +17,22 @@ featuredImageType: full
 
 Every Friday we update this page with the latest new features, fixes, and updates on PostHog Cloud in the last seven days. We also feature notable additions to the blog and docs. 
 
-> Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+> Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap). We also [welcome your feedback](http://app.posthog.com/home#supportModal) on all new features! 
+
+## May 12, 2023
+
+#### Beta: Feature management
+
+
+#### Idle session detection
+We've improved the detection logic for session replays so that we'll no longer capture sessions if the user is idle for 300 seconds (5 minutes) or longer. The idea is that you'll capture fewer sessions where the user isn't actually doing anything, though it _may_ also mean we trigger resets of the session more often. 
+
+Basically, its a balancing act and [we'd welcome your feedback about it](http://app.posthog.com/home#supportModal) if you start to notice sessions ending prematurely, or a substantial increase in the number of recordings. 
+
+#### Funnels by sessions
+![funnels by sessions](../images/blog/array/funnels_session.mp4)
+
+We've added a new way to aggregate the results of a funnel: by session. One possible use-case for this would be comparing funnel performance when aggregated by unique users and sessions, to understand if your users generally require multiple session to convert, or to get a feel for how 'sticky' your content is. 
 
 ## May 5, 2023
 
