@@ -16,7 +16,7 @@ tags:
 
 Want to understand the difference between Hotjar and PostHog? Here's the short answer:
 
-1. Hotjar enables you to see how customers are using your product with session replays and heatmaps. It also provides widgets for collecting feedback and tools for scheduling customer interviews. Hotjar is built for marketers and user experience (UX) researchers.
+1. Hotjar enables you to see how customers use your product with session replays and heatmaps. It also provides widgets for collecting feedback and tools for scheduling customer interviews. Hotjar is built for marketers and user experience (UX) researchers.
 
 2. PostHog is an all-in-one product improvement platform for product analytics, session recording, feature flags, in-app prompts, and more. PostHog is built for engineers and product teams.
 
@@ -26,18 +26,18 @@ In this guide, we'll cover:
 
 - Hotjar and PostHog [feature comparison](#feature-comparison)
 - [Session replay](#session-replay) capabilities
-- [Privacy](#privacy-compliance) and [security](#admin--security)
+- [Privacy, compliance, and security](#compliance-and-security)
 - [Frequently asked questions](#frequently-asked-questions)
 
 ## How is PostHog different?
 
 ### 1. PostHog is an all-in one platform
 
-Hotjar focuses mainly on session replays, heatmaps, and user research. That means you need to adopt additional tools for things like product analytics, feature management, and A/B testing. PostHog integrates all these features into one platform (in addition to session replays and heatmaps). PostHog is like mission control for your product.
+Hotjar focuses mainly on session replays, heatmaps, and user research. That means you need to adopt additional tools for things like [product analytics](/product-analytics), [feature management](/feature-flags), and [A/B testing](/ab-testing). PostHog integrates all these features into one platform (in addition to [session replays and heatmaps](/session-replay). PostHog is like mission control for your product, rather than just a single tool. 
 
 ### 2. PostHog is built for engineers
 
- As such, PostHog includes many powerful features that aren’t available in tools like Hotjar, which is built for more general audiences.
+As such, PostHog includes many powerful features that aren’t available in tools like Hotjar, which is built for more general audiences. These features include tools like feature flags with JSON payloads, which enable you to trigger in-app notifications or other UI changes. 
 
 We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). Although anyone can use PostHog ([just ask our marketing team](blog/posthog-marketing), our goal is to help engineers be better at product by giving them the insights and tools they need to ship impactful features at speed.
 
@@ -114,7 +114,7 @@ Because we build for engineers first, we're also open source. You can check out 
             <td>Recruit and schedule customer interviews. </td>
         </tr>
         <tr>
-            <td><strong>Apps/Integrations</strong></td>
+            <td><strong>Apps</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Push and pull data to other destinations</td>
@@ -125,7 +125,7 @@ Because we build for engineers first, we're also open source. You can check out 
 
 - **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product. They also enable you to debug problems using built-in console logs and network performance.
 
-- **Feature flags:** PostHog includes [multivariate feature flags](/feature-flags) that support JSON payloads, In-app prompts. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
+- **Feature flags:** PostHog includes [multivariate feature flags](/feature-flags) that support JSON payloads. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
 
 - **A/B testing:** In PostHog, you can use the [experimentation suite](/ab-testing) to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events, and deploy a final version.
 
