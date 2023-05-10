@@ -23,11 +23,11 @@ We define a successful new feature as one that:
 
 If that sounds simple, well... that's kind of the point. The principles _are_ simple, but how deep you go in either is entirely up to you. 
 
-In this post, I'll share how we measure feature success at PostHog using a real-world new feature launch, [data sampling](/blog/measuring-feature-success), which was defined, built, and measured by a single engineer, Yakko.
+In this post, I'll share how we measure feature success at PostHog to build features users love. We'll use a real-world new feature launch, [data sampling](/blog/measuring-feature-success), which was defined, built, and measured by a single engineer, Yakko.
 
 > **What is sampling?** The sampling feature speeds up queries by analyzing a portion of the data and extrapolating the results.
 >
-> ![Sampling in action](../images/blog/measuring-feature-success/sampling.gif)
+> ![Sampling in action](../images/blog/measuring-feature-success/sampling.mp4)
  
 ## Step 1: Deciding to build a feature
  
