@@ -16,30 +16,33 @@ tags:
 
 Want to understand the difference between Hotjar and PostHog? Here's the short answer:
 
-1. Hotjar enables you to see how customers use your product with session replays and heatmaps. It also provides widgets for collecting feedback and tools for scheduling customer interviews. Hotjar is built for marketers and user experience (UX) researchers.
+1. **Hotjar** enables you to see how customers use your product with session replays and heatmaps. It also provides widgets for collecting feedback and tools for scheduling customer interviews. Hotjar is built for marketers and user experience (UX) researchers.
 
-2. PostHog is an all-in-one product improvement platform for product analytics, session recording, feature flags, in-app prompts, and more. PostHog is built for engineers and product teams.
+2. **PostHog** is an all-in-one product improvement platform for product analytics, session replays, feature flags, in-app prompts, and more. PostHog is built for engineers and product teams.
 
 Now it's time for the long answer...
 
 In this guide, we'll cover:
 
-- Hotjar and PostHog [feature comparison](#feature-comparison)
+- Hotjar and PostHog [feature comparison](#core-features)
 - [Session replay](#session-replay) capabilities
-- [Privacy, compliance, and security](#compliance-and-security)
+- [Heatmap](#Heatmaps) capabilities
+- [In-app messages and user research](#in-app-messages-and-user-research)
+- [Apps and integrations](#apps-and-integrations)
+- [Privacy, compliance, and security](#privacy-compliance-and-security)
 - [Frequently asked questions](#frequently-asked-questions)
 
 ## How is PostHog different?
 
 ### 1. PostHog is an all-in one platform
 
-Hotjar focuses mainly on session replays, heatmaps, and user research. That means you need to adopt additional tools for things like [product analytics](/product-analytics), [feature management](/feature-flags), and [A/B testing](/ab-testing). PostHog integrates all these features into one platform (in addition to [session replays and heatmaps](/session-replay). PostHog is like mission control for your product, rather than just a single tool. 
+Hotjar focuses mainly on session replays, heatmaps, and user research. That means you need to adopt additional tools for things like [product analytics](/product-analytics), [feature management](/feature-flags), and [A/B testing](/ab-testing). PostHog integrates all these features into one platform (in addition to [session replays and heatmaps](/session-replay)). PostHog is like mission control for your product, rather than just a single tool. 
 
 ### 2. PostHog is built for engineers
 
-As such, PostHog includes many powerful features that aren’t available in tools like Hotjar, which is built for more general audiences. These features include tools like feature flags with JSON payloads, which enable you to trigger in-app notifications or other UI changes. 
+As such, PostHog includes many powerful features that aren’t available in tools like Hotjar, which is built for more general audiences. These features include tools like feature flags with JSON payloads, which enable you to trigger in-app messages or other notifications. 
 
-We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). Although anyone can use PostHog ([just ask our marketing team](blog/posthog-marketing), our goal is to help engineers be better at product by giving them the insights and tools they need to ship impactful features at speed.
+We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). Although anyone can use PostHog ([just ask our marketing team](blog/posthog-marketing)), our goal is to help engineers be better at product by giving them the insights and tools they need to ship impactful features at speed.
 
 ### 3. PostHog is open source
 
@@ -107,11 +110,17 @@ Because we build for engineers first, we're also open source. You can check out 
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Capture user feedback with surveys. </td>
         </tr>
-        <atr>
-            <td><strong>Customer interviews</strong></td>
+        <tr>
+            <td><strong>Customer interview scheduling</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>In-app widget for requesting customer interviews.</td>
+        </tr>
+        <tr>
+            <td><strong>User research tooling</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Recruit and schedule customer interviews. </td>
+            <td>Integrated tools to assist you in research sessions.</td>
         </tr>
         <tr>
             <td><strong>Apps</strong></td>
@@ -123,15 +132,24 @@ Because we build for engineers first, we're also open source. You can check out 
 </table>
 </div>
 
-- **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product. They also enable you to debug problems using built-in console logs and network performance.
+- **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product. They also enable you to debug problems using built-in [console logs](/docs/session-replay/configure#console-logs-recording-beta), [performance monitoring](/tutorials/performance-metrics) and the [DOM explorer](/blog/posthog-changelog#experimental-dom-explorer-mode).
 
 - **Feature flags:** PostHog includes [multivariate feature flags](/feature-flags) that support JSON payloads. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
 
 - **A/B testing:** In PostHog, you can use the [experimentation suite](/ab-testing) to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events, and deploy a final version.
 
-### Session replay
+<h4 className="mb-4">Discover what's possible with <span className="text-blue">product analytics</span></h4>
+<TutorialsSlider slugs={[
+  "/tutorials/churn-rate",
+  "/tutorials/funnels",
+  "/tutorials/api-get-insights-persons",
+  "/tutorials/feature-retention",
+  "/tutorials/next-steps-after-installing"
+]} />
 
-Session recording is an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Hotjar and PostHog offer session recording:
+### Session replays
+
+Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Hotjar and PostHog offer session replays:
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -166,43 +184,49 @@ Session recording is an essential tool for understanding how people use your pro
             <td><strong>Browser app recording</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch real users use your product; diagnose bugs</td>
+            <td>Watch real users use your product; diagnose bugs.</td>
+        </tr>
+        <tr>
+            <td><strong>Connected to product analytics</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖ Requires additional integration</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>View replays for specific users and events.</td>
         </tr>
         <tr>
             <td><strong>Console logs</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖ Only in Scale plan</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Debug user problems and app errors</td>
+            <td>Debug user problems and app errors.</td>
         </tr>
         <tr>
             <td><strong>Network activity</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Monitor network activity and performance</td>
+            <td>Monitor network activity and performance.</td>
         </tr>   
         <tr>
             <td><strong>iOS app recording</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center">Planned Q2 2023</td>
-            <td>Record user sessions in iOS apps</td>
+            <td>Record user sessions in iOS apps.</td>
         </tr>
         <tr>
             <td><strong>Android app recording</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center">Planned 2023</td>
-            <td>Record user sessions in Android apps</td>
+            <td>Record user sessions in Android apps.</td>
         </tr>     
         <tr>
             <td><strong>Custom playlists</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Create playlists of related recordings</td>
+            <td>Create playlists of related recordings.</td>
         </tr>   
         <tr>
             <td><strong>Download recordings</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Save recording files offline for storage</td>
+            <td>Save recording files offline for storage.</td>
         </tr>
     </tbody>
 </table>
@@ -210,7 +234,225 @@ Session recording is an essential tool for understanding how people use your pro
 
 - **Recording retention:** Hotjar keeps all recordings for 365 days. PostHog retains all recordings for three weeks, but retains recordings saved to a playlist forever. PostHog also allows you to download recordings as a `.json` file for safe keeping.
 
-## Compliance and security
+### Heatmaps
+
+Heatmaps visualize user activity in your app. They use colors or numbers to show which parts of the page people are interacting with the most. Both Hotjar and PostHog offer heatmaps, although PostHog's offering is more limited:
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+			<td className="w-3/12"></td>
+            <td><strong>Hotjar</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Click and tap heatmaps</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Show where users are clicking.</td>
+        </tr>
+        <tr>
+            <td><strong>Move heatmaps</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Show where users have moved their mouse on the screen.</td>
+        </tr>
+        <tr>
+            <td><strong>Scroll heatmaps</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Show how far down the page your users scroll.</td>
+        </tr>
+        <tr>
+            <td><strong>Rage clicks</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Show where users repeatedly click in a short period of time.</td>
+        </tr>
+        <tr>
+            <td><strong>Combine rage click data with product analytics</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>View related events and funnel data for users who rage click.</td>
+        </tr>
+        <tr>
+            <td><strong>Heatmap data filters</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Filter heatmaps by date, country etc.</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+### In-app messages and user research
+
+Hotjar enables you to hear from users with feedback widgets, surveys, and an integrated user research tool. PostHog also supports [feedback widgets](/apps/feedback-widget) and [user research scheduling](/apps/user-interviews), although not surveys. However, PostHog offers additional ways to communicate with your users, such as a [notification bar](/apps/notification-bar) and interactive [pop-ups](tutorials/react-popups) through the use of [feature flag payloads](/docs/feature-flags/payloads) and [site apps](/tutorials/build-site-app). Also, since PostHog provides product analytics, you can easily define your target users who should see your widgets.
+
+The main difference is, because Hotjar is designed for less technical users, it offers an interface that is simpler, but less powerful. You can easily create surveys and feedback widgets in Hotjar, but not other types of prompt such as a Calendly integration.
+
+Below, we've listed the different methods for communicating with and collecting user feedback in Hotjar and PostHog.
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+			<td className="w-3/12"></td>
+            <td><strong>Hotjar</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Feedback widget</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Suggestion box on your site where users can express frustration or delight.</td>
+        </tr>
+        <tr>
+            <td><strong>Customer interview scheduling</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>In-app widget for requesting customer interviews.</td>
+        </tr>
+        <tr>
+            <td><strong>Custom user targeting</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖ Requires additional integration</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Define who should see your widgets with your own data.</td>
+        </tr>
+        <tr>
+            <td><strong>Surveys</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Capture user feedback with surveys. </td>
+        </tr>
+        <tr>
+            <td><strong>User research tooling</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Integrated tools to assist you in research sessions.</td>
+        </tr>
+        <tr>
+            <td><strong>Notification bar</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Display a customised banner on your site.</td>
+        </tr>
+        <tr>
+            <td><strong>In-app popups</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Highlight features in your app.</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+### Apps and integrations
+Both Hotjar and PostHog have a wide selection of apps and integration. Both also include integrations with tools such as Zapier, which enable you to move data to even more platforms.
+
+One unique advantage of PostHog is that, because it is open source, it’s easy to [create your own apps and integrations](/tutorials/build-your-own-posthog-app). This is useful if you’re, for example, using niche software in your stack that hasn’t been widely adopted, or if you require a direct integration between PostHog and your product. 
+
+> The number of available apps is constantly increasing for both PostHog and Hotjar, so rather than list all available apps, we’ve shortened this section to only list the most popular integrations in particular categories. Want the full list? Check [the PostHog app library](/apps)!
+
+Below, we've listed a few of the most popular integrations used across PostHog and Pendo. 
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>Hotjar</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Hubspot</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖ Surveys only</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Sync event and person data</td>
+        </tr>
+        <tr>
+            <td><strong>Salesforce</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Sync event and person data</td>
+        </tr>
+        <tr>
+            <td><strong>Zapier</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Export events for use in Zaps</td>
+        </tr>
+        <tr>
+            <td><strong>Stripe</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Sync customer and invoice data</td>
+        </tr>
+        <tr>
+            <td><strong>Slack</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Receive notifications about new data</td>
+        </tr>
+        <tr>
+            <td><strong>Discord</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Receive notifications about new data</td>
+        </tr>
+        <tr>
+            <td><strong>MS Teams</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Receive notifications about new data</td>
+        </tr>
+        <tr>
+            <td><strong>PagerDuty</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Receive customized alerts from insights</td>
+        </tr>
+        <tr>
+            <td><strong>Intercom</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Extract and load data to external platforms</td>
+        </tr>
+        <tr>
+            <td><strong>Customer.io</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Sync data between platforms</td>
+        </tr>
+        <tr>
+            <td><strong>Sentry</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ingest Sentry errors for analysis</td>
+        </tr>
+        <tr>
+            <td><strong>Segment</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ingest events from Segment</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+> **Want more?** For a full list of PostHog’s available integrations, please [check the app directory](/apps).
+
+## Privacy, compliance, and security
 
 Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPPA and GDPR can require teams to store data in certain locations, or to protect data in certain ways. 
 
@@ -259,8 +501,11 @@ Regulatory compliance can be a critical need for many teams, especially if they 
   - [2. PostHog is built for engineers](#2-posthog-is-built-for-engineers)
   - [3. PostHog is open source](#3-posthog-is-open-source)
 - [Core features](#core-features)
-  - [Session replay](#session-replay)
-- [Compliance and security](#compliance-and-security)
+  - [Session replays](#session-replays)
+  - [Heatmaps](#heatmaps)
+  - [In-app messages and user research](#in-app-messages-and-user-research)
+  - [Apps and integrations](#apps-and-integrations)
+- [Privacy, compliance, and security](#privacy-compliance-and-security)
 - [Frequently asked questions](#frequently-asked-questions)
   - [Who is Hotjar useful for?](#who-is-hotjar-useful-for)
   - [Who is PostHog useful for?](#who-is-posthog-useful-for)
@@ -282,9 +527,9 @@ This difference is ultimately reflected in many of the features both platforms o
 
 ### How much does Hotjar cost?
 
-Hotjar has tier-based pricing: Basic, Plus, Business and Scale. All plans offer session replays, although the costs and limits differ. Additional features such as API access and SAML single sign-on are only available on some plans.
+Hotjar has tier-based pricing: Basic, Plus, Business and Scale. All plans offer session recordings, although the costs and limits differ. Additional features such as API access and SAML single sign-on are only available on some plans.
 
-The free can only record up to 35 daily session replays. After this, the Plus tier offers 100 daily session replays for $32 per month and the Business tier offers 500 daily sessions for $80 per month (with the option to pay for more sessions). Finally, the Scale tier offers 500 daily sessions for $171 per month, but offers access to additional features such as Console tracking and the Hotjar API.
+The free can only record up to 35 daily session recordings. After this, the Plus tier offers 100 daily session recordings for $32 per month and the Business tier offers 500 daily sessions for $80 per month (with the option to pay for more sessions). Finally, the Scale tier offers 500 daily sessions for $171 per month, but offers access to additional features such as Console tracking and the Hotjar API.
 
 ### How much does PostHog cost?
 
