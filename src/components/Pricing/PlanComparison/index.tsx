@@ -41,7 +41,7 @@ const convertLargeNumberToWords = (
     return `${previousNum ? `${(previousNum / denominator).toFixed(0)}-` : multipleTiers ? 'first ' : ''}${(
         num / denominator
     ).toFixed(0)}${denominator === 1000000 ? ' million' : denominator === 1000 ? 'k' : ''}${
-        !previousNum && multipleTiers ? ` ${productType}/mo` : ''
+        !previousNum && multipleTiers ? ` ${productType}s/mo` : ''
     }`
 }
 
@@ -84,17 +84,17 @@ export function PlanIcon({
 }
 
 const ProductTiersModal = ({
-    product,
+    plan,
     modalOpen,
     setModalOpen,
 }: {
-    product: BillingProductV2Type
+    plan: BillingV2PlanType
     modalOpen: boolean
     setModalOpen: (open: boolean) => void
 }): JSX.Element | null => {
-    const tiers = product?.tiers
+    const tiers = plan?.tiers
 
-    if (!product || !tiers) {
+    if (!plan || !tiers) {
         return null
     }
     const isFirstTierFree = parseFloat(tiers[0].unit_amount_usd) === 0
@@ -104,7 +104,7 @@ const ProductTiersModal = ({
         <Modal open={modalOpen} setOpen={setModalOpen}>
             <div className="flex items-center w-full h-full justify-center">
                 <div className="text-left max-w-xl bg-white rounded-md relative w-full p-8 m-8">
-                    <p className="text-gray mb-1">{capitalizeFirstLetter(product.type)} pricing</p>
+                    <p className="text-gray mb-1">{capitalizeFirstLetter(plan.name)} pricing</p>
                     <p className="mb-1">
                         <span className="font-bold text-base">
                             $
@@ -113,11 +113,11 @@ const ProductTiersModal = ({
                             ).toFixed(numberOfSigFigs)}
                         </span>
                         {/* the product types we have are plural, so we need to singularlize them and this works for now */}
-                        <span className="text-gray">/{product.type.replace(/s$/, '')}</span>
+                        <span className="text-gray">/{plan.unit ? plan.unit.replace(/s$/, '') : 'unit'}</span>
                     </p>
                     {isFirstTierFree && (
                         <p className="text-gray">
-                            First {convertLargeNumberToWords(tiers[0].up_to)} {product.type}/mo free
+                            First {convertLargeNumberToWords(tiers[0].up_to)} {plan.unit}s/mo free
                         </p>
                     )}
                     <div>
@@ -125,13 +125,13 @@ const ProductTiersModal = ({
                         <div className="grid grid-cols-2">
                             {tiers.map((tier, i) => {
                                 return (
-                                    <React.Fragment key={`tiers-modal-${product.name}-tier-${i}`}>
+                                    <React.Fragment key={`tiers-modal-${plan.product_key}-tier-${i}`}>
                                         <p className="col-span-1 mb-0 border-b border-gray-accent-light border-dashed py-1">
                                             {convertLargeNumberToWords(
                                                 tier.up_to,
                                                 tiers[i - 1]?.up_to,
                                                 true,
-                                                product.type
+                                                plan.unit
                                             )}
                                         </p>
                                         <p className="font-bold col-span-1 mb-0 border-b border-gray-accent-light border-dashed py-1">
@@ -150,11 +150,11 @@ const ProductTiersModal = ({
     )
 }
 
-const ProductTiers = ({ product, planKey }: { product?: BillingProductV2Type; planKey: string }): JSX.Element => {
-    const tiers = product?.tiers
+const ProductTiers = ({ plan }: { plan?: BillingV2PlanType }): JSX.Element => {
+    const tiers = plan?.tiers
     const [modalOpen, setModalOpen] = useState(false)
 
-    if (!product || !tiers) {
+    if (!plan || !tiers) {
         return (
             <>
                 <span className="font-bold text-base">Free</span>
@@ -165,31 +165,27 @@ const ProductTiers = ({ product, planKey }: { product?: BillingProductV2Type; pl
         <div>
             {tiers.map((tier, i) => {
                 if ((parseFloat(tiers[0]?.unit_amount_usd) !== 0 && i > 0) || i > 1) {
-                    return <React.Fragment key={product.name + '-tiers-' + i}></React.Fragment>
+                    return <React.Fragment key={plan.product_key + plan.plan_key + '-tiers-' + i}></React.Fragment>
                 }
 
                 return (
-                    <div key={product.name + '-tiers-' + i} className="pr-4">
+                    <div key={plan.product_key + plan.plan_key + '-tiers-' + i} className="pr-4">
                         {parseFloat(tier.unit_amount_usd) === 0 ? (
                             <div>
                                 <span className="font-bold text-base">Free</span> up to{' '}
-                                {convertLargeNumberToWords(tier.up_to, null, true, product.type)}, then
+                                {convertLargeNumberToWords(tier.up_to, null, true, plan.unit)}, then
                             </div>
                         ) : (
                             <>
                                 <span className="font-bold text-base">${parseFloat(tier.unit_amount_usd)}</span>
                                 {/* the product types we have are plural, so we need to singularlize them and this works for now */}
-                                <span className="text-gray">/{product.type.replace(/s$/, '')}</span>
+                                <span className="text-gray">/{plan.unit ? plan.unit.replace(/s$/, '') : 'unit'}</span>
                                 <p className="text-sm mb-0">
                                     <Link to="" onClick={() => setModalOpen(true)} className="text-red font-bold">
                                         Volume discounts
                                     </Link>{' '}
                                     after {convertLargeNumberToWords(tier.up_to)}/mo
-                                    <ProductTiersModal
-                                        modalOpen={modalOpen}
-                                        setModalOpen={setModalOpen}
-                                        product={product}
-                                    />
+                                    <ProductTiersModal modalOpen={modalOpen} setModalOpen={setModalOpen} plan={plan} />
                                 </p>
                             </>
                         )}
@@ -202,33 +198,32 @@ const ProductTiers = ({ product, planKey }: { product?: BillingProductV2Type; pl
 
 const icons = {
     product_analytics: <Analytics />,
-    session_recording: <SessionRecording />,
+    session_replay: <SessionRecording />,
     feature_flags: <FeatureFlags />,
     experimentation: <Experiments />,
     integrations: <AppLibrary />,
-    platform: <Platform />,
-    support: <Support />,
+    platform_and_support: <Platform />,
 }
 
-export const getProductLimit = (product?: BillingProductV2Type): JSX.Element => {
-    if (!product) return <></>
-    if (!product.free_allocation) {
+export const getPlanLimit = (plan?: BillingV2PlanType): JSX.Element => {
+    if (!plan) return <></>
+    if (!plan.free_allocation) {
         return <span className="font-bold">Unlimited</span>
     }
     return (
         <span className="font-bold">
-            {convertLargeNumberToWords(product.free_allocation)} {product.type}
+            {convertLargeNumberToWords(plan.free_allocation)} {plan.unit}s
             <span className="font-normal text-black/50">/mo</span>
         </span>
     )
 }
 
-export const PlanComparison = ({ className = '' }) => {
+export const PlanComparison = (): JSX.Element => {
     const posthog = usePostHog()
     const [availablePlans, setAvailablePlans] = useState<BillingV2PlanType[]>([])
+    const [availableProducts, setAvailableProducts] = useState<BillingProductV2Type[]>([])
 
     const excludedFeatures = [
-        'dashboard_collaboration',
         'ingestion_taxonomy',
         'terms_and_conditions',
         'security_assessment',
@@ -237,9 +232,8 @@ export const PlanComparison = ({ className = '' }) => {
     ]
 
     useEffect(() => {
-        const fetchPlans = async () => {
-            const planKeys: string | null = 'starter-20230117,scale-20230117'
-            const url = `${process.env.BILLING_SERVICE_URL + '/api/plans'}${planKeys ? `?keys=${planKeys}` : ''}`
+        const fetchProductPlans = async () => {
+            const url = `${process.env.BILLING_SERVICE_URL + '/api/products-v2'}`
             const headers = {
                 'Content-Type': 'application/json',
             }
@@ -248,14 +242,15 @@ export const PlanComparison = ({ className = '' }) => {
                 headers: headers,
             })
             response.json().then((data) => {
-                setAvailablePlans(data.plans)
+                setAvailableProducts(data.products)
+                setAvailablePlans(data.products?.[0]?.plans)
             })
         }
 
-        fetchPlans().catch((e) => console.error(e))
+        fetchProductPlans().catch((e) => console.error(e))
     }, [])
 
-    return availablePlans?.length > 0 ? (
+    return availableProducts?.length > 0 ? (
         <div className={`w-full relative mb-0 space-y-4 -mt-8 md:mt-0`}>
             {/* PLAN HEADERS */}
             <div className="flex flex-wrap sticky top-0 z-10 -mx-4 md:mx-0">
@@ -272,13 +267,19 @@ export const PlanComparison = ({ className = '' }) => {
                 <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light px-4 md:gap-4">
                     {availablePlans.map((plan) => (
                         <div
-                            key={`${plan.name}-header`}
+                            key={`${plan.plan_key}-header`}
                             className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4  border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
                         >
                             <div className="flex-1 flex flex-col h-full justify-between">
                                 <div>
-                                    <p className="font-bold mb-0 text-center md:text-left">{plan.name}</p>
-                                    <p className="hidden md:block text-black/50 text-sm mb-3">{plan.description}</p>
+                                    <p className="font-bold mb-0 text-center md:text-left">
+                                        {plan.free_allocation ? 'Free' : 'Paid'}
+                                    </p>
+                                    <p className="hidden md:block text-black/50 text-sm mb-3">
+                                        {plan.free_allocation
+                                            ? 'Best for early-stage startups and hobbyists. Generous free usage. Community-based support.'
+                                            : 'The whole hog. Pay per use. Priority support.'}
+                                    </p>
                                 </div>
                                 <TrackedCTA
                                     event={{
@@ -302,113 +303,105 @@ export const PlanComparison = ({ className = '' }) => {
                 </div>
             </div>
             {/* PRODUCTS */}
-            {availablePlans?.[availablePlans.length - 1]?.products?.map((product) => (
+            {availableProducts?.map((product) => (
                 <React.Fragment key={`product-${product.type}`}>
-                    {product.feature_groups?.map((feature_group) => (
-                        <div key={`product-${product.type}-feature-group-${feature_group.name}`}>
-                            <div className="flex flex-wrap">
-                                <div
-                                    key={`${feature_group.name}-group`}
-                                    className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
-                                >
-                                    <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
-                                        <span className="inline-block h-6 w-6">{icons[feature_group.group]}</span>{' '}
-                                        {feature_group.name}
-                                    </h4>
-                                </div>
-                                <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
-                                    {product.tiered
-                                        ? availablePlans.map((plan) => (
-                                              <div
-                                                  className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
-                                                  key={`${plan.key}-${product.name}-free-allocation-or-limit`}
-                                              >
-                                                  <div>
-                                                      {getProductLimit(
-                                                          plan.products?.find((p) => p.type === product.type)
-                                                      )}
-                                                  </div>
-                                              </div>
-                                          ))
-                                        : null}
-                                </div>
+                    <div key={`product-${product.type}-feature-group-${product.type}`}>
+                        <div className="flex flex-wrap">
+                            <div
+                                key={`${product.name}-group`}
+                                className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
+                            >
+                                <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
+                                    <span className="inline-block h-6 w-6">
+                                        <img
+                                            src={product.image_url}
+                                            alt={`logo for PostHog's ${product.name} product`}
+                                        />
+                                    </span>{' '}
+                                    {product.name}
+                                </h4>
                             </div>
-                            {/* SUB-FEATURES */}
-                            <div className="bg-gray-accent-light/80 p-1 rounded md:ml-6">
-                                {feature_group.features
-                                    // don't include features that are in the excluded features list
-                                    ?.filter((f) => !excludedFeatures.includes(f.key))
-                                    ?.map((feature) => (
+                            <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
+                                {product.plans?.map((plan) => (
+                                    <div
+                                        className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
+                                        key={`${plan.key}-${product.name}-free-allocation-or-limit`}
+                                    >
+                                        <div>{getPlanLimit(plan)}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        {/* PRODUCT FEATURES */}
+                        <div className="bg-gray-accent-light/80 p-1 rounded md:ml-6">
+                            {product.plans?.[product.plans.length - 1]?.features
+                                // don't include features that are in the excluded features list
+                                ?.filter((f) => !excludedFeatures.includes(f.key))
+                                ?.map((feature) => (
+                                    <div
+                                        className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
+                                        key={`${product.type}-subfeature-${feature.name}`}
+                                    >
                                         <div
-                                            className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
-                                            key={`${feature_group.name}-subfeature-${feature.name}`}
+                                            className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
+                                            key={`comparison-row-key-${feature.name}`}
                                         >
-                                            <div
-                                                className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
-                                                key={`comparison-row-key-${feature.name}`}
-                                            >
-                                                <Tooltip
-                                                    content={() => (
-                                                        <div className="p-2">
-                                                            <p className="font-bold text-[15px] mb-1">{feature.name}</p>
-                                                            <p className="mb-0 text-sm">{feature.description}</p>
-                                                        </div>
-                                                    )}
-                                                    tooltipClassName="max-w-xs m-4"
-                                                    placement={window.innerWidth > 767 ? 'right' : 'bottom'}
-                                                >
-                                                    <span
-                                                        className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
-                                                    >
-                                                        {feature.name}
-                                                    </span>
-                                                </Tooltip>
-                                            </div>
-                                            <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
-                                                {availablePlans.map((plan, i) => (
-                                                    <div
-                                                        className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
-                                                        key={`${plan.name}-${feature.name}-value`}
-                                                    >
-                                                        <PlanIcon
-                                                            feature={plan.products
-                                                                .find((p) => p.type === product.type)
-                                                                ?.feature_groups?.find(
-                                                                    (fg) => fg.name === feature_group.name
-                                                                )
-                                                                ?.features?.find((f) => f.name === feature.name)}
-                                                        />
+                                            <Tooltip
+                                                content={() => (
+                                                    <div className="p-2">
+                                                        <p className="font-bold text-[15px] mb-1">{feature.name}</p>
+                                                        <p className="mb-0 text-sm">{feature.description}</p>
                                                     </div>
-                                                ))}
-                                            </div>
+                                                )}
+                                                tooltipClassName="max-w-xs m-4"
+                                                placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                            >
+                                                <span
+                                                    className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                                >
+                                                    {feature.name}
+                                                </span>
+                                            </Tooltip>
                                         </div>
-                                    ))}
-                            </div>
-                            {/* PRODUCT PRICING */}
-                            {product.tiers && (
+                                        <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
+                                            {product.plans.map((plan, i) => (
+                                                <div
+                                                    className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
+                                                    key={`${plan.name}-${feature.name}-value`}
+                                                >
+                                                    <PlanIcon
+                                                        feature={plan.features?.find((f) => f.name === feature.name)}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                        </div>
+                        {/* PRODUCT PRICING */}
+                        {
+                            // If there is any plan with tiers, show the pricing
+                            product.plans.find((plan) => plan.tiers && plan.tiers?.length > 0) && (
                                 <div className="flex flex-wrap md:pl-8 px-2">
                                     <div
                                         className={`hidden md:block basis-[100%] md:basis-0 flex-1 pt-4 text-center md:text-left font-bold md:bg-transparent`}
                                     >
-                                        {feature_group.name} pricing
+                                        {product.name} pricing
                                     </div>
                                     <div className="w-full md:flex-[0_0_60%] flex">
-                                        {availablePlans.map((plan, i) => (
+                                        {product.plans?.map((plan, i) => (
                                             <div
                                                 key={plan.name + '-' + product.name + '-' + 'pricing'}
                                                 className={`flex-1 pl-2 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
                                             >
-                                                <ProductTiers
-                                                    product={plan.products.find((p) => p.type === product.type)}
-                                                    planKey={plan.key}
-                                                />
+                                                <ProductTiers plan={plan} />
                                             </div>
                                         ))}
                                     </div>
                                 </div>
-                            )}
-                        </div>
-                    ))}
+                            )
+                        }
+                    </div>
                 </React.Fragment>
             ))}
             <div className="flex flex-wrap z-10 -mx-4 md:mx-0 pb-6">
