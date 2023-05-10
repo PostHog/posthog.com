@@ -9,6 +9,7 @@ import { CallToAction } from 'components/CallToAction'
 type QuestionFormProps = {
     onSubmit: () => void
     topicID?: number
+    showTopicSelector?: boolean
 }
 
 export default function Questions(props: QuestionFormProps): JSX.Element {
@@ -33,6 +34,7 @@ export default function Questions(props: QuestionFormProps): JSX.Element {
                             </button>
                         </div>
                         <QuestionForm
+                            showTopicSelector={props.showTopicSelector}
                             topicID={props.topicID}
                             slug={(typeof window !== 'undefined' && window.location.pathname) || ''}
                             initialView="question-form"
