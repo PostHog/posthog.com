@@ -196,15 +196,6 @@ const ProductTiers = ({ plan }: { plan?: BillingV2PlanType }): JSX.Element => {
     )
 }
 
-const icons = {
-    product_analytics: <Analytics />,
-    session_replay: <SessionRecording />,
-    feature_flags: <FeatureFlags />,
-    experimentation: <Experiments />,
-    integrations: <AppLibrary />,
-    platform_and_support: <Platform />,
-}
-
 export const getPlanLimit = (plan?: BillingV2PlanType): JSX.Element => {
     if (!plan) return <></>
     if (!plan.free_allocation) {
@@ -215,6 +206,48 @@ export const getPlanLimit = (plan?: BillingV2PlanType): JSX.Element => {
             {convertLargeNumberToWords(plan.free_allocation)} {plan.unit}s
             <span className="font-normal text-black/50">/mo</span>
         </span>
+    )
+}
+
+const AddonTag = () => {
+    return <span className="ml-2 px-2 py-1 bg-red text-white rounded text-xs font-normal">Addon</span>
+}
+
+const AddonTooltipContent = ({
+    addon,
+    parentProductName,
+}: {
+    addon: BillingProductV2Type
+    parentProductName: string
+}): JSX.Element => {
+    const referencePlan = addon.plans?.[0]
+    const tiers = referencePlan?.tiers
+    const isFirstTierFree = parseFloat(tiers?.[0].unit_amount_usd || '') === 0
+    const [modalOpen, setModalOpen] = useState(false)
+
+    return (
+        <div className="p-2">
+            <p className="font-bold text-[15px] mb-2">
+                {addon.name} <AddonTag />
+            </p>
+            <p className="text-sm mb-3">{addon.description}</p>
+            <p className="text-sm text-black/50">
+                {isFirstTierFree &&
+                    `First ${convertLargeNumberToWords(tiers?.[0].up_to || null)} ${
+                        referencePlan.unit
+                    }s/mo free, then `}
+                <span className="font-bold text-base text-black">
+                    ${parseFloat((isFirstTierFree ? tiers?.[1]?.unit_amount_usd : tiers?.[0]?.unit_amount_usd) || '')}
+                </span>
+                {/* the product types we have are plural, so we need to singularlize them and this works for now */}
+                <span className="">/{addon.unit ? addon.unit.replace(/s$/, '') : 'unit'} with</span>{' '}
+                <Link to="" onClick={() => setModalOpen(true)} className="text-red font-bold">
+                    volume discounts
+                </Link>
+                , billed on top of {parentProductName}.
+                <ProductTiersModal modalOpen={modalOpen} setModalOpen={setModalOpen} plan={referencePlan} />
+            </p>
+        </div>
     )
 }
 
@@ -259,8 +292,8 @@ export const PlanComparison = (): JSX.Element => {
                 >
                     <p className="font-bold mb-0">PostHog OS ships with all products</p>
                     <p className="text-black/50 text-sm mb-0">
-                        You can set billing limits for each, so you only pay for what you want and never receive an
-                        unexpected bill.
+                        Start with our generous free tiers and subcribe when you need more volume. Set billing limits so
+                        you never receive an unexpected bill.
                     </p>
                 </div>
 
@@ -277,8 +310,8 @@ export const PlanComparison = (): JSX.Element => {
                                     </p>
                                     <p className="hidden md:block text-black/50 text-sm mb-3">
                                         {plan.free_allocation
-                                            ? 'Best for early-stage startups and hobbyists. Generous free usage. Community-based support.'
-                                            : 'The whole hog. Pay per use. Priority support.'}
+                                            ? 'Generous free usage on every product. Best for early-stage startups and hobbyists.'
+                                            : 'The whole hog. Pay per use with billing limits to control spend. Priority support.'}
                                     </p>
                                 </div>
                                 <TrackedCTA
@@ -332,7 +365,7 @@ export const PlanComparison = (): JSX.Element => {
                                 ))}
                             </div>
                         </div>
-                        {/* PRODUCT FEATURES */}
+                        {/* PRODUCT FEATURES & ADDONS */}
                         <div className="bg-gray-accent-light/80 p-1 rounded md:ml-6">
                             {product.plans?.[product.plans.length - 1]?.features
                                 // don't include features that are in the excluded features list
@@ -377,6 +410,64 @@ export const PlanComparison = (): JSX.Element => {
                                         </div>
                                     </div>
                                 ))}
+                            {/* PRODUCT ADDONS */}
+                            {product.addons?.map((addon) => (
+                                <div
+                                    className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
+                                    key={`${product.type}-addon-${addon.type}`}
+                                >
+                                    <div
+                                        className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
+                                        key={`comparison-row-key-${addon.type}`}
+                                    >
+                                        <Tooltip
+                                            content={() => (
+                                                <AddonTooltipContent addon={addon} parentProductName={product.name} />
+                                            )}
+                                            tooltipClassName="max-w-xs m-4"
+                                            placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                        >
+                                            <span>
+                                                <span
+                                                    className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                                >
+                                                    {addon.name}{' '}
+                                                </span>
+                                                <AddonTag />
+                                            </span>
+                                        </Tooltip>
+                                    </div>
+                                    <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
+                                        {product.plans.map((plan, i) => (
+                                            <div
+                                                className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
+                                                key={`${plan.name}-${addon.name}-value`}
+                                            >
+                                                {plan.free_allocation ? (
+                                                    <PlanIcon />
+                                                ) : (
+                                                    <Tooltip
+                                                        content={() => (
+                                                            <AddonTooltipContent
+                                                                addon={addon}
+                                                                parentProductName={product.name}
+                                                            />
+                                                        )}
+                                                        tooltipClassName="max-w-xs m-4"
+                                                        placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                    >
+                                                        <span
+                                                            className={`pb-0.25 cursor-default border-b border-dashed border-gray-accent-light`}
+                                                        >
+                                                            Available
+                                                        </span>
+                                                    </Tooltip>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                         {/* PRODUCT PRICING */}
                         {
@@ -417,7 +508,9 @@ export const PlanComparison = (): JSX.Element => {
                         >
                             <div className="flex-1 flex flex-col h-full justify-between">
                                 <div>
-                                    <p className="font-bold mb-2 text-center md:text-left">{plan.name}</p>
+                                    <p className="font-bold mb-2 text-center md:text-left">
+                                        {plan.free_allocation ? 'Free' : 'Paid'}
+                                    </p>
                                 </div>
                                 <TrackedCTA
                                     event={{
