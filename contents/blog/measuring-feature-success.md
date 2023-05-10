@@ -1,6 +1,6 @@
 ---
 title: How we measure feature success at PostHog
-date: 2023-05-09
+date: 2023-05-10
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -110,18 +110,19 @@ Sampling is a relatively self-contained feature. It likely won’t get charged f
 
 ## Why we measure feature success like this
 
-As a TL;DR of the above, we measure feature success by:
+To summarize, we build successful features by:
 
-1. Making sure our MVP works in production
-2. Getting positive qualitative feedback from team members and then beta users
-3. Launching, seeing significant usage by our target user, and the feature working as intended
-4. Continuing growth in usage metrics, recommendations, public praise, and potentially revenue
+1. Finding real user problems we know we can solve
+2. Building an MVP that works in production
+3. Gathering qualitative feedback from team members, and then beta users
+4. Launching and verifying significant usage by our target user
+5. Constantly measuring usage, iterating, and testing the impact of changes 
 
-You may have noticed that this process was relatively fluid. We don’t enforce mandatory reports, guidelines, metrics, or processes. We let small teams, and the individuals in those teams, decide what feature success means to them.
+You may have noticed that this process is relatively fluid. We don’t enforce mandatory reports, guidelines, metrics, or processes. We let small teams, and the individuals in those teams, decide what feature success means to them.
 
-This is because we bias for impact and believe that ownership is key to building successful features. Without people or teams owning features, there is little incentive to make them successful. No feature success process can make ownerless features successful.
+This is because we bias for impact, and believe that ownership is key to building successful features. Without people or teams owning features, there is little incentive to make them successful. No process can make ownerless features successful.
 
-We know that every team, inside and outside of PostHog, has different ways of evaluating success, it is a [key focus of ours](/handbook/strategy/overview#strategy) to build tools to help them do this. If you're curious exactly what that looks like, you can check out what the feature success team is up to on [their small team page](/handbook/small-teams/feature-success).
+We know that every team, inside and outside of PostHog, has different ways of evaluating success, it's a [key focus of ours](/handbook/strategy/overview#strategy) to build tools to help them do this. If you're curious exactly what that looks like, you can check out what the feature success team is up to on [their small team page](/handbook/small-teams/feature-success).
 
 ## Further reading
 
