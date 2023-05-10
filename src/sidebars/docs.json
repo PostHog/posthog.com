@@ -482,6 +482,11 @@
             },
 
             {
+                "name": "Early Access Feature Management",
+                "url": "/docs/feature-flags/early-access-feature-management"
+            },
+
+            {
                 "name": "Common questions about feature flags",
                 "url": "/docs/feature-flags/common-questions"
             }

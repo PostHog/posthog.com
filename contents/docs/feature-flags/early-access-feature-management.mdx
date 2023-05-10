@@ -1,0 +1,30 @@
+---
+title: Early Access Feature Management
+---
+
+Early Access Feature Management give you the option to provide your users with self beta opt-in capabilities. This means your users can determine themselves 
+whether or not they would like to have beta features active
+
+## Use Case
+
+Self opt-in betas are useful for your users to leave beta features they do not want to be a part of. This gives you more information on how well your beta feature is performing. 
+Likewise, users who opt-in give you a strong signal that the beta feature is preferred.
+
+## How it works
+
+Early access features can be configued in the early access scene. The features are powered by feature flags so each early access feature must be linked to an existing feature flag or a feature flag with the equivalent name to the feature will be implicitly created and linked.
+The default stage of an early access feature is beta. Users who manually opt-in to the feature will appear in the person list.
+
+Early access feature opt-in is an *overriding condition*. This means that a user opt-in or opt-out will override any existing release condition on the feature flag. Only when a user has not explicitly selected to opt-in or opt-out 
+will the release conditions on the feature flag be used to determine feature flag availability.
+
+## Setup
+
+### Option 1
+
+We've prebuilt a site app that will give you a widget out of the box. Any configured early access features will appear on this panel that you can configure to appear your app for your users to use.
+The site app just requires that you specify a data-attr that should be clicked on to trigger the widget to appear.
+
+### Option 2
+
+Posthog-js 1.55 exposes `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` which allow you to wrap your own experience around early access features.
