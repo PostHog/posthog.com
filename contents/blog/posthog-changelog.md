@@ -26,7 +26,9 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 We heard you like betas, so here's a beta for your betas. 
 
-Early access feature management got it's start at [our recent offsite hackathon](/blog/aruba-hackathon) and was intended to make it easier for us to accept users into our beta process, but we're also rolling it out as a feature for you to take advantage of in your own products. Leveraging feature flags, it enables you to present an early access menu to your users so that they can self opt-in or out of betas and other early access features. In the image above you can see it in action as we demo a user opting in to a beta of our new, upcoming UI refresh. 
+Early access feature management came from [our recent offsite hackathon](/blog/aruba-hackathon) and was intended to make it easier for us to accept users into our beta process, but we're also rolling it out as a feature for you to take advantage of in your own products. 
+
+Leveraging feature flags, it enables you to present an early-access menu to your users so that they can self opt-in or out of betas, and other early-access features. In the image above you can see it in action as we demo a user opting in to a beta of our new, upcoming UI refresh. 
 
 Feature management is still very much in beta, so we'd [love feedback about it](http://app.posthog.com/home#supportModal) - and you can [find out more in the docs](/docs/feature-flags/early-access-feature-management). 
 
