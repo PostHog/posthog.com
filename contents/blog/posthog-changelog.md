@@ -35,7 +35,7 @@ Feature management is still very much in beta, so we'd [love feedback about it](
 #### Idle session detection
 We've improved the detection logic for session replays so that we'll no longer capture sessions if the user is idle for 300 seconds (5 minutes) or longer. The idea is that you'll capture fewer sessions where the user isn't actually doing anything, though it _may_ also mean we trigger resets of the session more often. 
 
-Basically, its a balancing act and [we'd welcome your feedback about it](http://app.posthog.com/home#supportModal) if you start to notice sessions ending prematurely, or a substantial increase in the number of recordings. 
+Basically, it's a balancing act and [we'd welcome your feedback about it](http://app.posthog.com/home#supportModal) if you start to notice sessions ending prematurely, or a substantial increase in the number of recordings. 
 
 #### Funnels by sessions
 ![funnels by sessions](../images/blog/array/funnels_session.mp4)
