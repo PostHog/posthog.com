@@ -40,7 +40,7 @@ Basically, it's a balancing act and [we'd welcome your feedback about it](http:/
 #### Funnels by sessions
 ![funnels by sessions](../images/blog/array/funnels_session.mp4)
 
-We've added a new way to aggregate the results of a funnel: by session. One possible use-case for this would be comparing funnel performance when aggregated by unique users and sessions, to understand if your users generally require multiple session to convert, or to get a feel for how 'sticky' your content is. 
+We've added a new way to aggregate the results of a funnel: by session. One possible use-case for this would be comparing funnel performance when aggregated by unique users and sessions, to understand if your users generally require multiple sessions to convert, or to get a feel for how 'sticky' your content is. 
 
 ## May 5, 2023
 
