@@ -50,23 +50,7 @@ McClure visualized the AARRR funnel in a table like the one below, though you co
 
 This version is what the funnel might look like for our product, PostHog, an [all-in-one analytics platform](https://posthog.com/) comprising product analytics, session replay, feature flags, and A/B testing.
 
-| **Category** | **User Status**                                      | **Conversion** |
-|--------------|------------------------------------------------------|----------------|
-| Acquisition  | Visits website                                       | 100%           |
-| Acquisition  | Goes to signup page                                  | 30%            |
-| Acquisition  | Creates account                                      | 25%            |
-|              |                                                      |                |
-| Activation   | Deploys product and ingests events                   | 15%            |
-| Activation   | Make a [discovery](/handbook/product/metrics)                                     | 10%            |
-|              |                                                      |                |
-| Retention    | Logs in at least once per week                       | 7%             |
-| Retention    | Invites a colleague / creates a team                 | 4%             |
-|              |                                                      |                |
-| Revenue      | User starts paying / enters card details             | 3%             |
-| Revenue      | User continues to pay long term                      | 2%             |
-|              |                                                      |                |
-| Referral     | Recommends to a friend                               | 1%             |
-| Referral     | Reviews or shares product online                     | 0.5%           |
+![aarrr funnel breakdown](../images/blog/aarrr-pirate-funnel/arrrr-funnel-table.png)
 
 Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively.
 
@@ -192,27 +176,11 @@ AARRR is sometimes considered a "marketing framework". This is nonsense. It span
 
 At PostHog, we're [organized into small teams](/handbook/company/small-teams).
 
-Here's how our earlier table might look if we assigned different PostHog teams to it:
+Here's how our earlier breakdown might look like if we assigned different PostHog teams to each user status:
 
-| **Category** | **User Status**                                      | **Team**                   |
-|--------------|------------------------------------------------------|----------------------------|
-| Acquisition  | Visits website                                       | Marketing                  |
-| Acquisition  | Goes to signup page                                  | Marketing / Growth         |
-| Acquisition  | Creates account                                      | Growth                     |
-|              |                                                      |                            |
-| Activation   | Deploys product and ingests events                   | Growth                     |
-| Activation   | Make a [discovery](/handbook/product/metrics)                                     | Growth / App teams         |
-|              |                                                      |                            |
-| Retention    | Logs in at least once per week                       | Growth / Product teams               |
-| Retention    | Invites a colleague / creates a team                 | Growth / Product teams               |
-|              |                                                      |                            |
-| Revenue      | User enters card details / pays                      | Growth / Customer success          |
-| Revenue      | User continues to pay long term                      | Customer success / Product teams        |
-|              |                                                      |                            |
-| Referral     | Recommends to a friend                               | Growth                     |
-| Referral     | Reviews product                                      | Marketing                  |
+![aarrr funnel team](../images/blog/aarrr-pirate-funnel/aarrr-funnel-team.png)
 
-As you can see, there is overlap at all levels of the funnel. "Recommending to a friend" is a quality metric that all teams influence through their work. 
+As you can see, there is overlap at all levels of the funnel, and we could go further. Activation is influenced by whether people coming into the funnel match our Ideal Customer Profile (ICP), so marketing also influences it even if they don't own activation directly. 
 
 ### 4. Research, test and iterate
 
