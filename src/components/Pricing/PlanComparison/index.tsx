@@ -6,8 +6,6 @@ import usePostHog from '../../../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import CheckIcon from '../../../images/check.svg'
-import { Analytics, AppLibrary, Experiments, FeatureFlags, SessionRecording } from 'components/ProductIcons'
-import { Platform, Support } from 'components/NotProductIcons'
 import MinusIcon from '../../../images/x.svg'
 import './styles/index.scss'
 import Modal from 'components/Modal'
@@ -460,7 +458,7 @@ export const PlanComparison = (): JSX.Element => {
                                             </Tooltip>
                                         </div>
                                         <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
-                                            {product.plans.map((plan, i) => (
+                                            {product.plans.map((plan) => (
                                                 <div
                                                     className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
                                                     key={`${plan.plan_key}-${addon.type}-value`}
