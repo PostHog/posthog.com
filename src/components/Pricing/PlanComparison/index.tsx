@@ -284,7 +284,7 @@ export const PlanComparison = (): JSX.Element => {
         fetchProductPlans().catch((e) => console.error(e))
     }, [])
 
-    return availableProducts?.length > 0 ? (
+    return availableProducts?.length > 0 && availablePlans.length > 0 ? (
         <div className={`w-full relative mb-0 space-y-4 -mt-8 md:mt-0`}>
             {/* PLAN HEADERS */}
             <div className="flex flex-wrap sticky top-0 z-10 -mx-4 md:mx-0">
@@ -338,10 +338,8 @@ export const PlanComparison = (): JSX.Element => {
             </div>
             {/* PRODUCTS */}
             {availableProducts?.map((product) => {
-                const productPlans = product.plans
-                if (productPlans.length != availablePlans.length) {
-                    // add free plan to product plans
-                }
+                // some products only have a paid plan, but we need to show something for the free plan, so we stub out values using this var
+                const stubMissingPlan = product.plans.length !== availablePlans.length
                 return (
                     <React.Fragment key={`product-${product.type}`}>
                         <div key={`product-${product.type}-feature-group-${product.type}`}>
@@ -361,13 +359,16 @@ export const PlanComparison = (): JSX.Element => {
                                     </h4>
                                 </div>
                                 <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
-                                    {product.plans?.map((plan) => (
-                                        <div
-                                            className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
-                                            key={`${plan.key}-${product.name}-free-allocation-or-limit`}
-                                        >
-                                            <div>{getPlanLimit(plan)}</div>
-                                        </div>
+                                    {product.plans?.map((plan, i) => (
+                                        <>
+                                            {i === 0 && stubMissingPlan && <div className={`flex-1`} />}
+                                            <div
+                                                className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
+                                                key={`${plan.key}-${product.name}-free-allocation-or-limit`}
+                                            >
+                                                <div>{getPlanLimit(plan)}</div>
+                                            </div>
+                                        </>
                                     ))}
                                 </div>
                             </div>
@@ -404,16 +405,26 @@ export const PlanComparison = (): JSX.Element => {
                                             </div>
                                             <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
                                                 {product.plans.map((plan, i) => (
-                                                    <div
-                                                        className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
-                                                        key={`${plan.name}-${feature.name}-value`}
-                                                    >
-                                                        <PlanIcon
-                                                            feature={plan.features?.find(
-                                                                (f) => f.name === feature.name
-                                                            )}
-                                                        />
-                                                    </div>
+                                                    <>
+                                                        {i === 0 && stubMissingPlan ? (
+                                                            <div
+                                                                className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
+                                                                key={`${plan.name}-${feature.name}-value`}
+                                                            >
+                                                                <PlanIcon feature={undefined} />
+                                                            </div>
+                                                        ) : null}
+                                                        <div
+                                                            className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
+                                                            key={`${plan.name}-${feature.name}-value`}
+                                                        >
+                                                            <PlanIcon
+                                                                feature={plan.features?.find(
+                                                                    (f) => f.name === feature.name
+                                                                )}
+                                                            />
+                                                        </div>
+                                                    </>
                                                 ))}
                                             </div>
                                         </div>
