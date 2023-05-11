@@ -34,7 +34,7 @@ export const pricing = {
         [100_000_000, 0.00009],
         [Number.MAX_SAFE_INTEGER, 0.000025],
     ],
-    cloud: [
+    'product-analytics': [
         [1_000_000, 0],
         [2_000_000, 0.00045],
         [10_000_000, 0.000225],

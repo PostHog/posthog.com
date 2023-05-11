@@ -1,6 +1,9 @@
 import { kea } from 'kea'
-import { CLOUD_ENTERPRISE_MINIMUM_PRICING, ENTERPRISE_MINIMUM_PRICING, pricing } from '../constants'
+import { pricing } from '../constants'
 import { inverseCurve, prettyInt, sliderCurve } from './LogSlider'
+import { pricingLogic } from '../pricingLogic'
+
+import type { pricingSliderLogicType } from './pricingSliderLogicType'
 
 const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) => {
     let finalCost = 0
@@ -15,21 +18,16 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
         alreadyCountedEvents = threshold
     }
 
-    if (pricingOption === 'cloud-enterprise' || pricingOption === 'self-hosted-enterprise') {
-        finalCost += 450
-    }
-
     return Math.round(finalCost)
 }
 
-export type PricingOptionType =
-    | 'self-hosted'
-    | 'self-hosted-enterprise'
-    | 'cloud'
-    | 'cloud-enterprise'
-    | 'session-recording'
+export type PricingOptionType = 'product-analytics' | 'session-recording'
 
-export const pricingSliderLogic = kea({
+export const pricingSliderLogic = kea<pricingSliderLogicType>({
+    connect: {
+        values: [pricingLogic, ['availableProducts']],
+        actions: [pricingLogic, ['loadAvailableProducts']],
+    },
     actions: {
         setEventNumber: (value: number) => ({ value }),
         setInputValue: (value: number) => ({ value }),
@@ -84,13 +82,13 @@ export const pricingSliderLogic = kea({
             },
         ],
         pricingOption: [
-            'cloud',
+            'product-analytics',
             {
                 setPricingOption: (_: null, { option }: { option: string }) => option,
             },
         ],
     },
-    selectors: () => ({
+    selectors: ({ actions, values }) => ({
         finalCost: [
             (s) => [s.eventNumber, s.pricingOption],
             (eventNumber: number, pricingOption: PricingOptionType) => {
@@ -103,35 +101,17 @@ export const pricingSliderLogic = kea({
                 return calculatePrice(sessionRecordingEventNumber, 'session-recording')
             },
         ],
-        cloudCost: [
+        productAnalyticsCost: [
             (s) => [s.eventNumber],
             (eventNumber: number) => {
-                return calculatePrice(eventNumber, 'cloud')
-            },
-        ],
-        selfHostedCost: [
-            (s) => [s.eventNumber],
-            (eventNumber: number) => {
-                return calculatePrice(eventNumber, 'self-hosted')
-            },
-        ],
-        cloudEnterpriseCost: [
-            (s) => [s.eventNumber],
-            (eventNumber: number) => {
-                return calculatePrice(eventNumber, 'cloud-enterprise')
-            },
-        ],
-        selfHostedEnterpriseCost: [
-            (s) => [s.eventNumber],
-            (eventNumber: number) => {
-                return calculatePrice(eventNumber, 'self-hosted-enterprise')
+                return calculatePrice(eventNumber, 'product-analytics')
             },
         ],
         monthlyTotal: [
             (s) => [s.sessionRecordingEventNumber, s.eventNumber],
             (sessionRecordingEventNumber: number, eventNumber: number) => {
                 return (
-                    calculatePrice(eventNumber, 'cloud') +
+                    calculatePrice(eventNumber, 'product-analytics') +
                     calculatePrice(sessionRecordingEventNumber, 'session-recording')
                 )
             },
@@ -149,5 +129,10 @@ export const pricingSliderLogic = kea({
                 return finalAnnualCost.toLocaleString()
             },
         ],
+    }),
+    events: ({ actions }) => ({
+        afterMount: () => {
+            actions.loadAvailableProducts()
+        },
     }),
 })

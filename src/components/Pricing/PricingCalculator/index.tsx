@@ -6,6 +6,7 @@ import { Analytics, SessionRecording } from 'components/ProductIcons'
 import { useActions, useValues } from 'kea'
 import React, { useEffect } from 'react'
 import Link from 'components/Link'
+import { pricingLogic } from '../pricingLogic'
 
 export const section = cntl`
     max-w-6xl
@@ -16,7 +17,7 @@ export const section = cntl`
 
 export const PricingCalculator = () => {
     const {
-        cloudCost,
+        productAnalyticsCost,
         sessionRecordingCost,
         sliderValue,
         sessionRecordingSliderValue,
@@ -65,7 +66,7 @@ export const PricingCalculator = () => {
                             </div>
                         </div>
                         <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
-                            <span className="text-lg font-bold">${cloudCost.toLocaleString()}</span>
+                            <span className="text-lg font-bold">${productAnalyticsCost.toLocaleString()}</span>
                         </div>
 
                         <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
@@ -107,15 +108,6 @@ export const PricingCalculator = () => {
                 </div>
                 <div>
                     <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Discounts</h4>
-
-                    <div className="pl-10 relative mb-4">
-                        <span className="w-6 h-6 absolute top-0 left-1">
-                            <Discount />
-                        </span>
-
-                        <h5 className="text-base mb-0">B2C with millions of users?</h5>
-                        <p className="text-[15px] mb-1">Get in touch for volume discounts after signing up.</p>
-                    </div>
 
                     <div className="pl-10 relative mb-4">
                         <span className="w-6 h-6 absolute top-0 left-1">
