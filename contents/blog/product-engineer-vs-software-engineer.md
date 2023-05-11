@@ -42,7 +42,7 @@ Product engineers are less focused on implementation, and focus more on solving 
 
 Software engineers are more idealistic. They look for the best solution to the problem in front of them, focus on best practices, and build off prior work. Security, risk, and scaling weigh heavier in their minds.
 
-> **What about growth engineers?** [Growth engineers]((/blog/what-is-a-growth-engineer) are a type of software engineer that focuses on projects that drive growth metrics like signups, subscriptions, and revenue. They share many characteristics with product engineers, but have a broader focus on growth across the company rather than a specific product.
+> **What about growth engineers?** [Growth engineers](/blog/what-is-a-growth-engineer) are a type of software engineer that focuses on projects that drive growth metrics like signups, subscriptions, and revenue. They share many characteristics with product engineers, but have a broader focus on growth across the company rather than a specific product.
 
 ## How do they spend their time?
 
@@ -84,10 +84,6 @@ Just remember product engineering is more of a way of working, and thinking, tha
 Product engineers are ideal for startups, and companies that want to be agile and move fast, such as B2B SaaS or consumer subscription service. They take a holistic view of the product, and the ability to move fast when the need arises. They're less effective for companies with large, technically complex products, like a data tool, or platforms for large enterprises.
 
 Picking what's right is up to the company and its goals. If you're a small team focusing on building great products, multi-skilled product engineers who can talk to users are a great choice. If your larger product requires specialization to scale and maintain, software engineers are the better choice. Companies with both types of roles have succeeded, and more will continue to succeed.
-
-## How to become a product engineer?
-
-//TODO: Ian to add this?
 
 ## Further reading
 
