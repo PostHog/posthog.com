@@ -360,15 +360,16 @@ export const PlanComparison = (): JSX.Element => {
                                 </div>
                                 <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
                                     {product.plans?.map((plan, i) => (
-                                        <>
+                                        <React.Fragment
+                                            key={`${plan.plan_key}-${product.type}-free-allocation-or-limit`}
+                                        >
                                             {i === 0 && stubMissingPlan && <div className={`flex-1`} />}
                                             <div
                                                 className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
-                                                key={`${plan.key}-${product.name}-free-allocation-or-limit`}
                                             >
                                                 <div>{getPlanLimit(plan)}</div>
                                             </div>
-                                        </>
+                                        </React.Fragment>
                                     ))}
                                 </div>
                             </div>
@@ -405,18 +406,17 @@ export const PlanComparison = (): JSX.Element => {
                                             </div>
                                             <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
                                                 {product.plans.map((plan, i) => (
-                                                    <>
+                                                    <React.Fragment key={`${plan.plan_key}-${feature.key}-value`}>
                                                         {i === 0 && stubMissingPlan ? (
                                                             <div
                                                                 className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
-                                                                key={`${plan.name}-${feature.name}-value`}
+                                                                key={`stubbed-plan-${feature.key}-value`}
                                                             >
                                                                 <PlanIcon feature={undefined} />
                                                             </div>
                                                         ) : null}
                                                         <div
                                                             className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
-                                                            key={`${plan.name}-${feature.name}-value`}
                                                         >
                                                             <PlanIcon
                                                                 feature={plan.features?.find(
@@ -424,7 +424,7 @@ export const PlanComparison = (): JSX.Element => {
                                                                 )}
                                                             />
                                                         </div>
-                                                    </>
+                                                    </React.Fragment>
                                                 ))}
                                             </div>
                                         </div>
@@ -463,7 +463,7 @@ export const PlanComparison = (): JSX.Element => {
                                             {product.plans.map((plan, i) => (
                                                 <div
                                                     className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
-                                                    key={`${plan.name}-${addon.name}-value`}
+                                                    key={`${plan.plan_key}-${addon.type}-value`}
                                                 >
                                                     {plan.free_allocation ? (
                                                         <PlanIcon />
@@ -502,9 +502,9 @@ export const PlanComparison = (): JSX.Element => {
                                             {product.name} pricing
                                         </div>
                                         <div className="w-full md:flex-[0_0_60%] flex">
-                                            {product.plans?.map((plan, i) => (
+                                            {product.plans?.map((plan) => (
                                                 <div
-                                                    key={plan.name + '-' + product.name + '-' + 'pricing'}
+                                                    key={plan.plan_key + '-' + product.type + '-pricing'}
                                                     className={`flex-1 pl-2 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
                                                 >
                                                     <ProductTiers plan={plan} />
@@ -526,7 +526,7 @@ export const PlanComparison = (): JSX.Element => {
                 <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex px-4 md:gap-4">
                     {availablePlans.map((plan) => (
                         <div
-                            key={`${plan.name}-header`}
+                            key={`${plan.plan_key}-header`}
                             className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
                         >
                             <div className="flex-1 flex flex-col h-full justify-between">
