@@ -26,6 +26,13 @@ export const useNav = () => {
         {
             name: 'Roadmap',
             url: '/roadmap',
+            children: [
+                {
+                    name: 'Changelog',
+                    url: '/roadmap/changelog',
+                    children: [{ name: '2023', url: '/roadmap/changelog/2023' }],
+                },
+            ],
         },
         {
             name: 'Contributors',

@@ -2,6 +2,7 @@ import fetch from 'node-fetch'
 import { MenuBuilder } from 'redoc'
 import { GatsbyNode } from 'gatsby'
 import parseLinkHeader from 'parse-link-header'
+import qs from 'qs'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -195,5 +196,32 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
             createNode(node)
         }
+    })
+
+    const changelogQuery = qs.stringify(
+        {
+            populate: ['change', 'change.media', 'change.team', 'change.topic', 'change.cta'],
+        },
+        {
+            encodeValuesOnly: true,
+        }
+    )
+
+    const changelogURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/changelogs?${changelogQuery}`
+
+    const { data: changelog } = await fetch(changelogURL).then((res) => res.json())
+
+    changelog.forEach(({ id, ...other }) => {
+        const node = {
+            id: createNodeId(`changelog-${id}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: `Changelog`,
+                contentDigest: createContentDigest(other),
+            },
+            ...other,
+        }
+        createNode(node)
     })
 }

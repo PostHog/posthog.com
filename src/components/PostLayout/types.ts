@@ -55,12 +55,14 @@ export interface INextPost {
     }
 }
 
+export interface TableOfContents {
+    url: string
+    value: string
+    depth: number
+}
+
 export interface IProps {
-    tableOfContents?: {
-        url: string
-        value: string
-        depth: number
-    }[]
+    tableOfContents?: TableOfContents[]
     sidebar?: React.ReactNode
     contentWidth?: number | string
     questions?: React.ReactNode
