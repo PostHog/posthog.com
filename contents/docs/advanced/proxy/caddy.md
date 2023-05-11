@@ -6,25 +6,30 @@ showTitle: true
 
 We like [using Caddy because it makes setting up the reverse proxy](https://caddyserver.com/docs/quick-starts/reverse-proxy) and TLS a breeze.
 
+Run it as
+
 ```bash
-docker run -p 80:80 -p 443:443 caddy caddy reverse-proxy --to app.posthog.com:443 --from <YOUR_TRACKING_DOMAIN> --change-host-header
+docker run -p 80:80 -p 443:443 \
+  -v $PWD/Caddyfile:/etc/caddy/Caddyfile \
+  -v caddy_data:/data \
+  caddy
 ```
 
-You'll want to sub out `YOUR_TRACKING_DOMAIN` for whatever domain you use for proxying to PostHog. We'd suggest something like `e.yourdomain.com` or the like.
-
-Make sure your DNS records point to your machine and that ports 80 and 443 are open to the public and directed toward Caddy.
-
-If you want to use a config file instead, you can use something of the form:
+with a `Caddyfile` of the form like:
 
 ```
-:{$PORT} {
-  header {
-    Access-Control-Allow-Origin https://<your domain name>
-  }
-
-  reverse_proxy https://app.posthog.com {
+${YOUR_TRACKING_DOMAIN} {
+  reverse_proxy https://app.posthog.com:443 {
     header_up Host app.posthog.com
-    header_down -Access-Control-Allow-Origin
+    header_up X-Forwarded-Host ${YOUR_TRACKING_DOMAIN}
+    header_up X-Forwarded-Port {http.reverse_proxy.upstream.port}
+    header_up X-Forwarded-Proto {http.reverse_proxy.upstream.scheme}
+    header_down -Server
   }
 }
 ```
+
+You'll want to sub out `YOUR_TRACKING_DOMAIN` for whatever domain you use for proxying to PostHog. We'd suggest something like `e.yourdomain.com` or the like.
+See ["⚠️ A note about persisted data"](https://hub.docker.com/_/caddy) for more information about why it is important to use a docker volume for `/data` folder.
+
+Make sure your DNS records point to your machine and that ports 80 and 443 are open to the public and directed toward Caddy.
