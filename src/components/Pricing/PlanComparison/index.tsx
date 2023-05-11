@@ -12,6 +12,7 @@ import MinusIcon from '../../../images/x.svg'
 import './styles/index.scss'
 import Modal from 'components/Modal'
 import { capitalizeFirstLetter } from '../../../utils'
+import Label from 'components/Label'
 
 const convertLargeNumberToWords = (
     // The number to convert
@@ -210,7 +211,7 @@ export const getPlanLimit = (plan?: BillingV2PlanType): JSX.Element => {
 }
 
 const AddonTag = () => {
-    return <span className="ml-2 px-2 py-1 bg-red text-white rounded text-xs font-normal">Addon</span>
+    return <Label text="Addon" className="ml-2" />
 }
 
 const AddonTooltipContent = ({
@@ -336,63 +337,114 @@ export const PlanComparison = (): JSX.Element => {
                 </div>
             </div>
             {/* PRODUCTS */}
-            {availableProducts?.map((product) => (
-                <React.Fragment key={`product-${product.type}`}>
-                    <div key={`product-${product.type}-feature-group-${product.type}`}>
-                        <div className="flex flex-wrap">
-                            <div
-                                key={`${product.name}-group`}
-                                className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
-                            >
-                                <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
-                                    <span className="inline-block h-6 w-6">
-                                        <img
-                                            src={product.image_url}
-                                            alt={`logo for PostHog's ${product.name} product`}
-                                        />
-                                    </span>{' '}
-                                    {product.name}
-                                </h4>
+            {availableProducts?.map((product) => {
+                const productPlans = product.plans
+                if (productPlans.length != availablePlans.length) {
+                    // add free plan to product plans
+                }
+                return (
+                    <React.Fragment key={`product-${product.type}`}>
+                        <div key={`product-${product.type}-feature-group-${product.type}`}>
+                            <div className="flex flex-wrap">
+                                <div
+                                    key={`${product.name}-group`}
+                                    className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
+                                >
+                                    <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
+                                        <span className="inline-block h-6 w-6">
+                                            <img
+                                                src={product.image_url}
+                                                alt={`logo for PostHog's ${product.name} product`}
+                                            />
+                                        </span>{' '}
+                                        {product.name}
+                                    </h4>
+                                </div>
+                                <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
+                                    {product.plans?.map((plan) => (
+                                        <div
+                                            className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
+                                            key={`${plan.key}-${product.name}-free-allocation-or-limit`}
+                                        >
+                                            <div>{getPlanLimit(plan)}</div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
-                                {product.plans?.map((plan) => (
-                                    <div
-                                        className={`flex-1 text-center py-4 md:text-left md:pt-6 justify-center`}
-                                        key={`${plan.key}-${product.name}-free-allocation-or-limit`}
-                                    >
-                                        <div>{getPlanLimit(plan)}</div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        {/* PRODUCT FEATURES & ADDONS */}
-                        <div className="bg-gray-accent-light/80 p-1 rounded md:ml-6">
-                            {product.plans?.[product.plans.length - 1]?.features
-                                // don't include features that are in the excluded features list
-                                ?.filter((f) => !excludedFeatures.includes(f.key))
-                                ?.map((feature) => (
+                            {/* PRODUCT FEATURES & ADDONS */}
+                            <div className="bg-gray-accent-light/80 p-1 rounded md:ml-6">
+                                {product.plans?.[product.plans.length - 1]?.features
+                                    // don't include features that are in the excluded features list
+                                    ?.filter((f) => !excludedFeatures.includes(f.key))
+                                    ?.map((feature) => (
+                                        <div
+                                            className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
+                                            key={`${product.type}-subfeature-${feature.name}`}
+                                        >
+                                            <div
+                                                className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
+                                                key={`comparison-row-key-${feature.name}`}
+                                            >
+                                                <Tooltip
+                                                    content={() => (
+                                                        <div className="p-2">
+                                                            <p className="font-bold text-[15px] mb-1">{feature.name}</p>
+                                                            <p className="mb-0 text-sm">{feature.description}</p>
+                                                        </div>
+                                                    )}
+                                                    tooltipClassName="max-w-xs m-4"
+                                                    placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                >
+                                                    <span
+                                                        className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                                    >
+                                                        {feature.name}
+                                                    </span>
+                                                </Tooltip>
+                                            </div>
+                                            <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
+                                                {product.plans.map((plan, i) => (
+                                                    <div
+                                                        className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
+                                                        key={`${plan.name}-${feature.name}-value`}
+                                                    >
+                                                        <PlanIcon
+                                                            feature={plan.features?.find(
+                                                                (f) => f.name === feature.name
+                                                            )}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                {/* PRODUCT ADDONS */}
+                                {product.addons?.map((addon) => (
                                     <div
                                         className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
-                                        key={`${product.type}-subfeature-${feature.name}`}
+                                        key={`${product.type}-addon-${addon.type}`}
                                     >
                                         <div
                                             className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
-                                            key={`comparison-row-key-${feature.name}`}
+                                            key={`comparison-row-key-${addon.type}`}
                                         >
                                             <Tooltip
                                                 content={() => (
-                                                    <div className="p-2">
-                                                        <p className="font-bold text-[15px] mb-1">{feature.name}</p>
-                                                        <p className="mb-0 text-sm">{feature.description}</p>
-                                                    </div>
+                                                    <AddonTooltipContent
+                                                        addon={addon}
+                                                        parentProductName={product.name}
+                                                    />
                                                 )}
                                                 tooltipClassName="max-w-xs m-4"
                                                 placement={window.innerWidth > 767 ? 'right' : 'bottom'}
                                             >
-                                                <span
-                                                    className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
-                                                >
-                                                    {feature.name}
+                                                <span>
+                                                    <span
+                                                        className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                                    >
+                                                        {addon.name}{' '}
+                                                    </span>
+                                                    <AddonTag />
                                                 </span>
                                             </Tooltip>
                                         </div>
@@ -400,101 +452,61 @@ export const PlanComparison = (): JSX.Element => {
                                             {product.plans.map((plan, i) => (
                                                 <div
                                                     className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
-                                                    key={`${plan.name}-${feature.name}-value`}
+                                                    key={`${plan.name}-${addon.name}-value`}
                                                 >
-                                                    <PlanIcon
-                                                        feature={plan.features?.find((f) => f.name === feature.name)}
-                                                    />
+                                                    {plan.free_allocation ? (
+                                                        <PlanIcon />
+                                                    ) : (
+                                                        <Tooltip
+                                                            content={() => (
+                                                                <AddonTooltipContent
+                                                                    addon={addon}
+                                                                    parentProductName={product.name}
+                                                                />
+                                                            )}
+                                                            tooltipClassName="max-w-xs m-4"
+                                                            placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                        >
+                                                            <span
+                                                                className={`pb-0.25 cursor-default border-b border-dashed border-gray-accent-light`}
+                                                            >
+                                                                Available
+                                                            </span>
+                                                        </Tooltip>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
                                 ))}
-                            {/* PRODUCT ADDONS */}
-                            {product.addons?.map((addon) => (
-                                <div
-                                    className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
-                                    key={`${product.type}-addon-${addon.type}`}
-                                >
-                                    <div
-                                        className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
-                                        key={`comparison-row-key-${addon.type}`}
-                                    >
-                                        <Tooltip
-                                            content={() => (
-                                                <AddonTooltipContent addon={addon} parentProductName={product.name} />
-                                            )}
-                                            tooltipClassName="max-w-xs m-4"
-                                            placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                            </div>
+                            {/* PRODUCT PRICING */}
+                            {
+                                // If there is any plan with tiers, show the pricing
+                                product.plans.find((plan) => plan.tiers && plan.tiers?.length > 0) && (
+                                    <div className="flex flex-wrap md:pl-8 px-2">
+                                        <div
+                                            className={`hidden md:block basis-[100%] md:basis-0 flex-1 pt-4 text-center md:text-left font-bold md:bg-transparent`}
                                         >
-                                            <span>
-                                                <span
-                                                    className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                            {product.name} pricing
+                                        </div>
+                                        <div className="w-full md:flex-[0_0_60%] flex">
+                                            {product.plans?.map((plan, i) => (
+                                                <div
+                                                    key={plan.name + '-' + product.name + '-' + 'pricing'}
+                                                    className={`flex-1 pl-2 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
                                                 >
-                                                    {addon.name}{' '}
-                                                </span>
-                                                <AddonTag />
-                                            </span>
-                                        </Tooltip>
+                                                    <ProductTiers plan={plan} />
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                    <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
-                                        {product.plans.map((plan, i) => (
-                                            <div
-                                                className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
-                                                key={`${plan.name}-${addon.name}-value`}
-                                            >
-                                                {plan.free_allocation ? (
-                                                    <PlanIcon />
-                                                ) : (
-                                                    <Tooltip
-                                                        content={() => (
-                                                            <AddonTooltipContent
-                                                                addon={addon}
-                                                                parentProductName={product.name}
-                                                            />
-                                                        )}
-                                                        tooltipClassName="max-w-xs m-4"
-                                                        placement={window.innerWidth > 767 ? 'right' : 'bottom'}
-                                                    >
-                                                        <span
-                                                            className={`pb-0.25 cursor-default border-b border-dashed border-gray-accent-light`}
-                                                        >
-                                                            Available
-                                                        </span>
-                                                    </Tooltip>
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
+                                )
+                            }
                         </div>
-                        {/* PRODUCT PRICING */}
-                        {
-                            // If there is any plan with tiers, show the pricing
-                            product.plans.find((plan) => plan.tiers && plan.tiers?.length > 0) && (
-                                <div className="flex flex-wrap md:pl-8 px-2">
-                                    <div
-                                        className={`hidden md:block basis-[100%] md:basis-0 flex-1 pt-4 text-center md:text-left font-bold md:bg-transparent`}
-                                    >
-                                        {product.name} pricing
-                                    </div>
-                                    <div className="w-full md:flex-[0_0_60%] flex">
-                                        {product.plans?.map((plan, i) => (
-                                            <div
-                                                key={plan.name + '-' + product.name + '-' + 'pricing'}
-                                                className={`flex-1 pl-2 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
-                                            >
-                                                <ProductTiers plan={plan} />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )
-                        }
-                    </div>
-                </React.Fragment>
-            ))}
+                    </React.Fragment>
+                )
+            })}
             <div className="flex flex-wrap z-10 -mx-4 md:mx-0 pb-6">
                 <div
                     className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan pb-4`}
