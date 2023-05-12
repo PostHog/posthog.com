@@ -102,3 +102,29 @@ flowchart LR
     kafka_recordings_topic --> recordings_consumer
     kafka_recordings_topic --> recordings_blob_consumer
 ```
+
+## End state
+
+After 90 days have passed the (very large) session_recording_events table is redundant and the system simplifies to:
+
+```mermaid
+flowchart TB
+    clickhouse_replay_summary_table[(Session replay summary table)]
+    received_snapshot_event[clients send snapshot data]
+    kafka_recordings_topic>Kafka recordings topic]
+    kafka_clickhouse_replay_summary_topic>Kafka clickhouse replay summary topic]
+    
+    subgraph recordings ingestion workload
+        recordings_consumer-->kafka_clickhouse_replay_summary_topic
+        kafka_clickhouse_replay_summary_topic-->clickhouse_replay_summary_table
+    end
+    subgraph recordings blob ingestion workload
+        recordings_blob_consumer-->|1. statefully batch|disk
+        disk-->recordings_blob_consumer
+        recordings_blob_consumer-->|2. periodic flush|blob_storage
+    end
+    received_snapshot_event --> capture
+    capture -->|compress and chunk to fit into kafka messages| kafka_recordings_topic
+    kafka_recordings_topic --> recordings_consumer
+    kafka_recordings_topic --> recordings_blob_consumer
+```
