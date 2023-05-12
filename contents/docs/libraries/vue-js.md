@@ -141,7 +141,7 @@ _Note: For Vue 3.x users only_
 
 With Vue 3.x, developers can use `provide()` and `inject()` to pipe global values into any component without prop drilling. And if you don’t know what prop drilling is, good for you.
 
-While this method is more declarative — as you need to inject PostHog into every component — it avoids “polluting” globals (such as in Method 1). Some engineers prefer this approach, while others to include PostHog in globals since it doesn’t need to be reactive and will be called throughout your application. 
+While this method is more declarative — as you need to inject PostHog into every component — it avoids “polluting” globals (like method 1 does). Some engineers prefer this approach, while others include PostHog in globals since it doesn’t need to be reactive and will be called throughout your application. 
 
 #### Step 1: Initialize Vue
 
