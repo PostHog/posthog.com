@@ -61,20 +61,19 @@ To give you a sense of what's possible with SQL, here's an example query we use 
 
 ```
    select properties.$geoip_country_name,
-          if(countIf(not properties.does_pineapple_go_on_pizza) > countIf(properties.does_pineapple_go_on_pizza),
-            '🍅 Does not belong on pizza',
-            if(countIf(not properties.does_pineapple_go_on_pizza) = countIf(properties.does_pineapple_go_on_pizza),
-              '🥦 It is a tie',
-              '🍍 Belongs on pizza'
-          )) as Result,
+          countIf(not properties.does_pineapple_go_on_pizza) > countIf(properties.does_pineapple_go_on_pizza)
+            ? '🍅 Does not belong on pizza'
+            : countIf(not properties.does_pineapple_go_on_pizza) = countIf(properties.does_pineapple_go_on_pizza)
+              ? '🥦 It is a tie'
+              : '🍍 Belongs on pizza'
+          as Result,
           concat(
              repeat('🍍', countIf(properties.does_pineapple_go_on_pizza)),
              repeat('🍅', countIf(not properties.does_pineapple_go_on_pizza))
           ) as Answers,
           count() as `Number of answers`,
           concat(
-            toString(round(countIf(properties.does_pineapple_go_on_pizza) / count() * 1000) / 10), 
-            '%'
+            toString(round(countIf(properties.does_pineapple_go_on_pizza) / count() * 1000) / 10), '%'
           ) as `Percentage pineapple`
      from events
     where event = 'pineapple_on_pizza_survey'
