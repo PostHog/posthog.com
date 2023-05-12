@@ -211,17 +211,20 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const { data: changelog } = await fetch(changelogURL).then((res) => res.json())
 
-    changelog.forEach(({ id, ...other }) => {
-        const node = {
-            id: createNodeId(`changelog-${id}`),
-            parent: null,
-            children: [],
-            internal: {
-                type: `Changelog`,
-                contentDigest: createContentDigest(other),
-            },
-            ...other,
-        }
-        createNode(node)
+    changelog.forEach(({ id, attributes: { change, date } }) => {
+        change.forEach(({ id, ...other }) => {
+            const data = { date, ...other }
+            const changeNode = {
+                id: createNodeId(`change-${id}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Change`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(changeNode)
+        })
     })
 }
