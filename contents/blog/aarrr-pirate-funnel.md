@@ -94,7 +94,7 @@ For an e-commerce website, overall unique users is an important metric, but user
 
 It may also be prudent to add a quality metric here, too. Tracking signups based on an ideal customer profile (ICP) can be important to avoid over optimizing for the wrong kind of new users.
 
-> 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate what you shoul optimize first. Most B2B SaaS products should prioritize retention – it's a great indicator of [product-market fit](/blog/how-to-product-market-fit).
+> 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate what you should optimize first. Most B2B SaaS products should prioritize retention – it's a great indicator of [product-market fit](/blog/how-to-product-market-fit).
  
 ### 2. Activation
 
@@ -148,7 +148,7 @@ Is there a better validation for your product than someone inviting a colleague,
 
 It's a great sign that people enjoy using what you've built and a powerful driver for word-of-mouth growth – aka, the best kind of growth.
 
-Referral metrics are especially important for products or services that have a growth loop – i.e. when the product experience is improved through multiple users, or when friends are using it together.
+Referral metrics are especially important for products or services that have a [growth loop](/blog/growth-loops) – i.e. when the product experience is improved through multiple users, or when friends are using it together.
 
 Referrals can also be both internal (more users from the same organization) or external.
 
@@ -180,7 +180,7 @@ Here's how our earlier breakdown might look like if we assigned different PostHo
 
 ![aarrr funnel team](../images/blog/aarrr-pirate-funnel/aarrr-funnel-team.png)
 
-As you can see, there is overlap at all levels of the funnel, and we could go further. Activation is influenced by whether people coming into the funnel match our Ideal Customer Profile (ICP), so marketing also influences it even if they don't own activation directly. 
+As you can see, there is trickle down to all levels of the funnel, and we could go further. Activation is influenced by whether people coming into the funnel match our Ideal Customer Profile (ICP), so marketing also influences it even if they don't own activation directly. 
 
 ### 4. Research, test and iterate
 
@@ -196,7 +196,7 @@ Dave McClure's original framework suggests you spend 80% of your effort on refin
  
 ## Takeaways
 
-1. There's a reason pirate metrics is still popular 15 years since its inception. It's simple on the surface, but unlocks great depths of insight into user behavior, products and their trajectory. It's a not a cure-all for success, but it provides clarity and alignment for all teams in a startup.
+1. There's a reason pirate metrics is still popular 15 years since its inception. It's simple on the surface, but unlocks deep insights into user behavior, products and their trajectory. It's a not a cure-all for success, but it provides clarity and alignment for all teams in a startup.
 
 2. When implementing it, it's best to focus on one or two metrics to improve at a time. Trying to optimize all of them simultaneously is maddening unless you have enough dedicated resource to deploy. 
 

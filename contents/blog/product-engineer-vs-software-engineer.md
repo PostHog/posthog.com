@@ -1,6 +1,6 @@
 ---
 date: 2023-05-10
-title: "Product engineers vs software engineers: How are they different?"
+title: "Product engineer vs software engineer: How are they different?"
 rootPage: /blog
 sidebar: Blog
 showTitle: true

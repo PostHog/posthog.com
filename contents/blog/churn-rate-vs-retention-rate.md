@@ -152,7 +152,7 @@ Positive revenue retention (i.e. more than 100%) indicates users increase their 
 
 ## 9 ways improve retention and reduce churn 🚀
 
-So, how do you improve retention and reduce churn? Talking to users is a vital component – we're [constantly talking to users](/blog/10x-engineers-do-user-interviews) – but here are some tactical moves to consider.
+So, how do you improve retention and reduce churn? Talking to users is a vital component – we're [constantly talking to users](/blog/10x-engineers-do-user-interviews) – but here are some other tactics to consider.
 
 > 🚨 **Important: Each lever you pull to reduce churn compounds, so pull more than one if you can. It doesn't matter which one works the best, just that one or more them do.
 
