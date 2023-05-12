@@ -188,13 +188,13 @@ Session replays are an essential tool for understanding how people use your prod
         </tr>
         <tr>
             <td><strong>Connected to product analytics</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖ Requires additional integration</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span> Requires additional integration</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>View replays for specific users and events.</td>
         </tr>
         <tr>
             <td><strong>Console logs</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖ Only in Scale plan</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span> Only in Scale plan</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Debug user problems and app errors.</td>
         </tr>
@@ -322,7 +322,7 @@ Below, we've listed the different methods for communicating with and collecting 
         </tr>
         <tr>
             <td><strong>Custom user targeting</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖ Requires additional integration</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span> Requires additional integration</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Define who should see your widgets with your own data.</td>
         </tr>
@@ -376,7 +376,7 @@ Below, we've listed a few of the most popular integrations used across PostHog a
     <tbody>
         <tr>
             <td><strong>Hubspot</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖ Surveys only</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span> Surveys only</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Sync event and person data</td>
         </tr>
