@@ -273,7 +273,7 @@ Heatmaps visualize user activity in your app. They use colors or numbers to show
         <tr>
             <td><strong>Heatmap data filters</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Filter heatmaps by date, country etc.</td>
         </tr>
     </tbody>
