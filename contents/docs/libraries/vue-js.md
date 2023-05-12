@@ -194,7 +194,7 @@ import posthog from "posthog-js";
 Object.defineProperty(Vue.prototype, '$posthog', { value: posthog });
 ```
 
-Then, access PostHog. I can do this by calling `this.$posthog`. 
+Then, access PostHog by calling `this.$posthog`. 
 
 ```js
 //component.vue
