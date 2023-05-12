@@ -19,14 +19,14 @@ Today, we're excited to announce a major new feature which we're making availabl
 
 We've added several new ways to use SQL in PostHog - you can use expressions to enhance insights, you can use SQL to filter a revamped events list, and you can even use full SQL queries to analyse data in any way you want. 
 
-We've even created [our own SQL dialect, called HogQL](/docs/product-analytics/hogql), which enables direct access to data without the insecurities that come from using ClickHouse SQL directly.
+We've even created [our own SQL dialect, called HogQL](/docs/product-analytics/hogql).
 
 PostHog's existing insights will remain valuable for the vast majority of queries, but this gives them a massive upgrade, and the ability to create your own SQL queries provides an alternative when off-the-shelf insights don't fit the bill. 
 
 Speaking of bills, these features are free for all users while in public beta - all we ask is that you [share any feedback with us](http://app.posthog.com/home#supportModal). 
 
 ## What is HogQL?
-HogQL is basically our take on SQL. 
+Basically, HogQL is our take on SQL. 
 
 Less basically, it's a transition layer over ClickHouse SQL that we've created to empower a wide range of users, from technical product managers who need multi-property breakdowns, to engineers who need to dissect data in more nuanced ways. It's intuitive for teams who are familiar with SQL, but offers a few extra advantages and features.
 
@@ -37,19 +37,28 @@ You can also use subqueries, joins, table expressions, arrays, aggregations, lam
 We recommend checking the docs for a more detailed [explanation of ClickHouse SQL functions which are supported in HogQL](/manual/hogql).
 
 ## HogQL breakdowns
-![HogQL breakdowns](../images/blog/array/hog_breakdown.gif)
+![HogQL breakdowns](../images/blog/array/hog_breakdown.mp4)
+<Caption>Using a `concat(properties.$browser, ' ', properties.$browser_version)` HogQL expression to breakdown by multiple properties</Caption>
 
 A frequent request from teams using PostHog has been the ability to breakdown insight results across multiple properties. To accommodate this, we've added the ability to use HogQL expressions within a breakdown. 
 
 In other words, you can now breakdown results however you like - including by multiple properties at once. Want to breakdown new sign-ups by both pricing tier _and_ overall usage? Now you can.
 
 ## HogQL filters
-![HogQL filter](../images/blog/array/hog_filters.gif)
+![HogQL filter](../images/blog/array/hog_filters.mp4)
+<Caption>Using a `properties.$screen_width < properties.$screen_height` HogQL expression as a filter</Caption>
 
 Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple properties!
 
+## HogQL aggregations
+![HogQL aggregations](../images/blog/array/hog_aggregation.mp4)
+<Caption></Caption>
+
+_And_ you can use HogQL to aggregate results in a funnel too. Is there anything HogQL can't do? Probably, yes. 
+
 ## SQL insights
 ![PostHog SQL insights](../images/features/hogql/sql.gif)
+<Caption></Caption>
 
 If you're familiar with SQL, the easiest and most powerful way to leverage it within PostHog is via the new SQL insight type. This gives you direct SQL access to your data in PostHog, so you can create custom tables, visualization and more. 
 
@@ -93,6 +102,7 @@ This is helpful not just for generating tables which summarize person and event 
 
 ## Custom insights
 ![custom insights](../images/blog/array/custom_insights.gif)
+<Caption></Caption>
 
 Finally, we're introducing custom insights, which enable you to create a very wide range of insights and visualizations. 
 
@@ -100,7 +110,7 @@ Custom insights basically turn any list of events or persons - almost every tabl
 
 You can add tables directly by hitting the new 'Open as a new insight' button (above) to reveal the source behind the table, and editing it to create new views. You can also also use the 'View source' button on existing insights to accomplish the same. 
 
-## The history and future of HogQL
+## The history (and future) of HogQL
 
 We originally started thinking about HogQL back in January, while thinking about [a concept for universal search within PostHog](https://github.com/PostHog/posthog/issues/7963). Over time, that plan evolved into creating [new ways for users to explore data](https://github.com/PostHog/meta/issues/86) via direct queries. We wanted users to be able to run formulas powered by HogQL in what was then called the Live Events view, but is now the Event Explorer. 
 
