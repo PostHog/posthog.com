@@ -167,7 +167,7 @@ Once you've got some usage, get qualitative and quantiative feedback. Measure wh
 
 Start "closing the loop" with users. This is a simple process to improve your product:
 
-// TODO: Maybe turn the below into a grahic?
+// TODO: Maybe turn the below into a graphic?
 
 * User uses product
 * You get feedback / insight / support questions (make it incredibly obvious how to reach you, and reach out to users in the channels they prefer)
@@ -245,7 +245,7 @@ For a SaaS business, there are some principles I'd follow:
 
 * **Critical:** You _both_ must be happy to talk to users. The person who winds up writing the code the most, will need to fix problems with users – and is often better placed to understand them, so will still need to talk to users to do this well.
 
-You are getting commited to something that may outlast the average marriage. Let that sink in. Your goal is never to be right, but to figure out problems out together.
+You are getting committed to something that may outlast the average marriage. Let that sink in. Your goal is never to be right, but to figure out problems out together.
 
 Treat each other as partners. Failure mode is when the CEO bosses the CTO around and makes all the decisions. Then you aren't co-founders. There are a few ways we've done this:
 
