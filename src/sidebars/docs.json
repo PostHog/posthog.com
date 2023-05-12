@@ -186,7 +186,7 @@
             },
             {
                 "name": "Vue.js",
-                "to": "/docs/libraries/vue-js"
+                "url": "/docs/libraries/vue-js"
             },
             {
                 "name": "WordPress",
