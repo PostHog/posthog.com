@@ -98,7 +98,7 @@ Finally, we're introducing custom insights, which enable you to create a very wi
 
 Custom insights basically turn any list of events or persons - almost every table in PostHog, basically - into an insight which can be added to a dashboard. 
 
-You can add tables directly by hitting the new 'Open as a new insight' button (above) to reveal the source behind the table, and editing it to create new views. You can also also use the 'Edit source' button on existing insights to accomplish the same. 
+You can add tables directly by hitting the new 'Open as a new insight' button (above) to reveal the source behind the table, and editing it to create new views. You can also also use the 'View source' button on existing insights to accomplish the same. 
 
 ## The history and future of HogQL
 
