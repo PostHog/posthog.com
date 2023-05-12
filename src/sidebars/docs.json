@@ -185,6 +185,10 @@
                 "url": "/docs/libraries/shopify"
             },
             {
+                "name": "Vue.js",
+                "url": "/docs/libraries/vue-js"
+            },
+            {
                 "name": "WordPress",
                 "url": "/docs/libraries/wordpress"
             }

@@ -649,6 +649,10 @@
             "destination": "/manual/feature-flags"
         },
         {
+            "source": "/tutorials/posthog-for-vuejs",
+            "destination": "/docs/libraries/vue-js"
+        },
+        {
             "source": "/blog/categories/comparisons",
             "destination": "/blog/tags/comparisons"
         },
