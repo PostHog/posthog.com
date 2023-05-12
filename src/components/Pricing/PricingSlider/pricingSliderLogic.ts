@@ -1,6 +1,5 @@
 import { kea } from 'kea'
-import { pricing } from '../constants'
-import { inverseCurve, prettyInt, sliderCurve } from './LogSlider'
+import { inverseCurve, sliderCurve } from './LogSlider'
 import { pricingLogic } from '../pricingLogic'
 
 import type { pricingSliderLogicType } from './pricingSliderLogicType'
