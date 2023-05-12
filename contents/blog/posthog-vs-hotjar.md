@@ -137,16 +137,7 @@ Because we build for engineers first, we're also open source. You can check out 
 - **Feature flags:** PostHog includes [multivariate feature flags](/feature-flags) that support JSON payloads. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
 
 - **A/B testing:** In PostHog, you can use the [experimentation suite](/ab-testing) to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events, and deploy a final version.
-
-<h4 className="mb-4">Discover what's possible with <span className="text-blue">product analytics</span></h4>
-<TutorialsSlider slugs={[
-  "/tutorials/churn-rate",
-  "/tutorials/funnels",
-  "/tutorials/api-get-insights-persons",
-  "/tutorials/feature-retention",
-  "/tutorials/next-steps-after-installing"
-]} />
-
+- 
 ### Session replays
 
 Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Hotjar and PostHog offer session replays:
