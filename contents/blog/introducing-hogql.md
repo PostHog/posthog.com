@@ -32,7 +32,7 @@ Less basically, it's a transition layer over ClickHouse SQL that we've created t
 
 Unique features to HogQL include simplified access to event and person properties, as well as automatically added joins when you query fields with data on a different table, such as `events.person.properties.$browser`.
 
-You can also use aggregations, such as `count`, `min`, `minIf`, `max`, `maxIf`, `sum`, `sumIf`, `avg`, `any`, and `anyIf`. 
+You can also use subqueries, joins, table expressions, arrays, aggregations, lambdas and a whole host of other neat SQL features, including aggregations.
 
 We recommend checking the docs for a more detailed [explanation of ClickHouse SQL functions which are supported in HogQL](/manual/hogql).
 
