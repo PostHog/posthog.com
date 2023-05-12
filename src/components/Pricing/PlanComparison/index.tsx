@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import Spinner from 'components/Spinner'
 import Tooltip from 'components/Tooltip'
 import usePostHog from '../../../hooks/usePostHog'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import CheckIcon from '../../../images/check.svg'
 import MinusIcon from '../../../images/x.svg'
@@ -11,6 +11,8 @@ import './styles/index.scss'
 import Modal from 'components/Modal'
 import { capitalizeFirstLetter } from '../../../utils'
 import Label from 'components/Label'
+import { pricingLogic } from '../pricingLogic'
+import { useValues } from 'kea'
 
 const convertLargeNumberToWords = (
     // The number to convert
@@ -252,8 +254,7 @@ const AddonTooltipContent = ({
 
 export const PlanComparison = (): JSX.Element => {
     const posthog = usePostHog()
-    const [availablePlans, setAvailablePlans] = useState<BillingV2PlanType[]>([])
-    const [availableProducts, setAvailableProducts] = useState<BillingProductV2Type[]>([])
+    const { availableProducts, availablePlans } = useValues(pricingLogic)
 
     const excludedFeatures = [
         'ingestion_taxonomy',
@@ -262,25 +263,6 @@ export const PlanComparison = (): JSX.Element => {
         'app_metrics',
         'paths_advanced',
     ]
-
-    useEffect(() => {
-        const fetchProductPlans = async () => {
-            const url = `${process.env.BILLING_SERVICE_URL + '/api/products-v2'}`
-            const headers = {
-                'Content-Type': 'application/json',
-            }
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: headers,
-            })
-            response.json().then((data) => {
-                setAvailableProducts(data.products)
-                setAvailablePlans(data.products?.[0]?.plans)
-            })
-        }
-
-        fetchProductPlans().catch((e) => console.error(e))
-    }, [])
 
     return availableProducts?.length > 0 && availablePlans.length > 0 ? (
         <div className={`w-full relative mb-0 space-y-4 -mt-8 md:mt-0`}>
