@@ -23,7 +23,7 @@ Oftentimes, these questions don't have a straight-forward answer, and, more ofte
 
 However, there are some questions that have straightforward answers - the difficulty comes in getting that answer across. 
 
-Enter the PostHog Toolbar. 
+Enter the [PostHog Toolbar](/docs/product-analytics/toolbar). 
 
 Consider the question: _"Where are my users clicking?"_
 
@@ -63,6 +63,8 @@ Overall, the toolbar offers valuable context on how users are navigating your we
 The PostHog Toolbar will only be enabled for you – not your users. The little floating hedgehog will only appear if the current visitor is authenticated into your PostHog instance.
 
 To launch the toolbar, access your website and it should appear for you. If that does not work, you can go over to PostHog, click the dropdown arrow on 'Toolbar' in the sidebar menu, and click the URL you want to launch the toolbar on.
+
+![How to setup the PostHog toolbar](../images/tutorials/toolbar/toolbar-setup.png)
 
 ## Using the heatmap
 
