@@ -72,7 +72,7 @@ export const PricingCalculator = () => {
                         <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
                             <span className="w-5 h-5 flex absolute top-3 left-3">{<SessionRecording />}</span>
                             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-                                <strong>Session recording</strong>
+                                <strong>Session replay</strong>
                                 <span>
                                     <span className="text-lg font-bold">
                                         {sessionRecordingEventNumber.toLocaleString()}

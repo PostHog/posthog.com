@@ -9,19 +9,33 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
     let finalCost = 0
     let alreadyCountedEvents = 0
 
-    const thresholdPrices = pricing[pricingOption] || [[]]
+    const tiers = pricingSliderLogic.values.availableProducts
+        .find((product) => product.type === pricingOption)
+        ?.plans.find((plan) => plan.tiers)?.tiers
 
-    for (const [threshold, unitPricing] of thresholdPrices) {
+    if (!tiers) {
+        return 0
+    }
+    for (const { up_to, unit_amount_usd } of tiers) {
+        console.log(up_to, unit_amount_usd)
         finalCost =
             finalCost +
-            Math.max(0, Math.min(eventNumber - alreadyCountedEvents, threshold - alreadyCountedEvents)) * unitPricing
-        alreadyCountedEvents = threshold
+            Math.max(
+                0,
+                Math.min(
+                    eventNumber - alreadyCountedEvents,
+                    // the final tier does not have an up_to, so we use a very high number here so it can keep counting up the cost
+                    up_to || 10000000000 - alreadyCountedEvents
+                )
+            ) *
+                parseFloat(unit_amount_usd)
+        alreadyCountedEvents = up_to ?? 10000000000
     }
 
     return Math.round(finalCost)
 }
 
-export type PricingOptionType = 'product-analytics' | 'session-recording'
+export type PricingOptionType = 'product_analytics' | 'session_replay'
 
 export const pricingSliderLogic = kea<pricingSliderLogicType>({
     connect: {
@@ -98,21 +112,21 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
         sessionRecordingCost: [
             (s) => [s.sessionRecordingEventNumber],
             (sessionRecordingEventNumber: number) => {
-                return calculatePrice(sessionRecordingEventNumber, 'session-recording')
+                return calculatePrice(sessionRecordingEventNumber, 'session_replay')
             },
         ],
         productAnalyticsCost: [
             (s) => [s.eventNumber],
             (eventNumber: number) => {
-                return calculatePrice(eventNumber, 'product-analytics')
+                return calculatePrice(eventNumber, 'product_analytics')
             },
         ],
         monthlyTotal: [
             (s) => [s.sessionRecordingEventNumber, s.eventNumber],
             (sessionRecordingEventNumber: number, eventNumber: number) => {
                 return (
-                    calculatePrice(eventNumber, 'product-analytics') +
-                    calculatePrice(sessionRecordingEventNumber, 'session-recording')
+                    calculatePrice(eventNumber, 'product_analytics') +
+                    calculatePrice(sessionRecordingEventNumber, 'session_replay')
                 )
             },
         ],
