@@ -42,7 +42,7 @@ Hotjar focuses mainly on session replays, heatmaps, and user research. That mean
 
 As such, PostHog integrates numerous powerful features that aren’t available in tools like Hotjar, such as feature flags with JSON payloads, which enable you to trigger in-app messages, or other notifications. 
 
-We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). Although anyone can use PostHog ([just ask our marketing team](blog/posthog-marketing)), our goal is to help engineers be better at product by giving them the insights and tools they need to ship impactful features at speed.
+We built PostHog to support technically-savvy product managers and engineers – especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). Anyone can use PostHog ([just ask our marketing team](blog/posthog-marketing)), but our primary goal is to give engineers the tools they need to ship impactful features at speed.
 
 ### 3. PostHog is open source
 
@@ -155,19 +155,19 @@ Session replays are an essential tool for understanding how people use your prod
     <tbody>
         <tr>
             <td><strong>Free recording allowance</strong></td>
-            <td className="text-center">~1,000 per month (max 35 per day) on Basic plan</td>
-            <td className="text-center">15,000 per month</td>
-            <td>Free recordings before being charged</td>
+            <td className="text-center">~1k per month (max 35 per day) on Basic plan</td>
+            <td className="text-center">15k per month</td>
+            <td></td>
         </tr>
         <tr>
-            <td><strong>Price for first 50,000 sessions</strong></td>
-            <td className="text-center">~$200 per month (max 1,500 sessions per day)</td>
+            <td><strong>Price for first 50k sessions</strong></td>
+            <td className="text-center">~$200 per month (max 1.5k sessions per day)</td>
             <td className="text-center">$175 per month</td>
             <td></td>
         </tr>
         <tr>
-            <td><strong>Price for first 50,000 sessions</strong></td>
-            <td className="text-center">~$200 per month (max 1,500 sessions per day)</td>
+            <td><strong>Price for first 50k sessions</strong></td>
+            <td className="text-center">~$200 per month (max 1.5k sessions per day)</td>
             <td className="text-center">$175 per month</td>
             <td></td>
         </tr>
@@ -179,13 +179,13 @@ Session replays are an essential tool for understanding how people use your prod
         </tr>
         <tr>
             <td><strong>Connected to product analytics</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span> Requires additional integration</td>
+            <td className="text-center">Requires additional integration</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>View replays for specific users and events.</td>
         </tr>
         <tr>
             <td><strong>Console logs</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span> Only in Scale plan</td>
+            <td className="text-center">Only in Scale plan</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Debug user problems and app errors.</td>
         </tr>
@@ -282,7 +282,9 @@ Heatmaps visualize user activity in your app. They use colors or numbers to show
 
 ### In-app messages and user research
 
-Hotjar enables you to hear from users with feedback widgets, surveys, and an integrated user research tool. PostHog also supports [feedback widgets](/apps/feedback-widget) and [user research scheduling](/apps/user-interviews), although not surveys. However, PostHog offers additional ways to communicate with your users, such as a [notification bar](/apps/notification-bar) and interactive [pop-ups](tutorials/react-popups) through the use of [feature flag payloads](/docs/feature-flags/payloads) and [site apps](/tutorials/build-site-app). Also, since PostHog provides product analytics, you can easily define your target users who should see your widgets.
+Hotjar includes feedback widgets, surveys, and an integrated user research tool for gathering feedback from users. PostHog also supports [feedback widgets](/apps/feedback-widget) and [user research scheduling](/apps/user-interviews), although not surveys.
+
+PostHog also offers additional ways to communicate with your users, such as a [notification bar](/apps/notification-bar) and interactive [pop-ups](tutorials/react-popups) through the use of [feature flag payloads](/docs/feature-flags/payloads), and [site apps](/tutorials/build-site-app). Also, since PostHog provides product analytics, you can easily define your target users who should see your widgets.
 
 The main difference is, because Hotjar is designed for less technical users, it offers an interface that is simpler, but less powerful. You can easily create surveys and feedback widgets in Hotjar, but not other types of prompt such as a Calendly integration.
 
@@ -313,7 +315,7 @@ Below, we've listed the different methods for communicating with and collecting 
         </tr>
         <tr>
             <td><strong>Custom user targeting</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span> Requires additional integration</td>
+            <td className="text-center">Requires additional integration</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Define who should see your widgets with your own data.</td>
         </tr>
@@ -350,7 +352,6 @@ Both Hotjar and PostHog have a wide selection of apps and integration. Both also
 
 One unique advantage of PostHog is that, because it is open source, it’s easy to [create your own apps and integrations](/tutorials/build-your-own-posthog-app). This is useful if you’re, for example, using niche software in your stack that hasn’t been widely adopted, or if you require a direct integration between PostHog and your product. 
 
-> The number of available apps is constantly increasing for both PostHog and Hotjar, so rather than list all available apps, we’ve shortened this section to only list the most popular integrations in particular categories. Want the full list? Check [the PostHog app library](/apps)!
 
 Below, we've listed a few of the most popular integrations used across PostHog and Pendo. 
 
@@ -441,7 +442,7 @@ Below, we've listed a few of the most popular integrations used across PostHog a
 </table>
 </div>
 
-> **Want more?** For a full list of PostHog’s available integrations, please [check the app directory](/apps).
+> **Want more?** Visit the [PostHog the app directory](/apps) for a full list of supported integrations.
 
 ## Privacy, compliance, and security
 
@@ -520,7 +521,7 @@ This difference is ultimately reflected in many of the features both platforms o
 
 Hotjar has tier-based pricing: Basic, Plus, Business and Scale. All plans offer session recordings, although the costs and limits differ. Additional features such as API access and SAML single sign-on are only available on some plans.
 
-The free can only record up to 35 daily session recordings. After this, the Plus tier offers 100 daily session recordings for $32 per month and the Business tier offers 500 daily sessions for $80 per month (with the option to pay for more sessions). Finally, the Scale tier offers 500 daily sessions for $171 per month, but offers access to additional features such as Console tracking and the Hotjar API.
+Hotjar's free plan only records up to 35 daily session recordings. After this, the Plus tier offers 100 daily session recordings for $32 per month and the Business tier offers 500 daily sessions for $80 per month (with the option to pay for more sessions). Finally, the Scale tier offers 500 daily sessions for $171 per month, but offers access to additional features such as Console tracking and the Hotjar API.
 
 ### How much does PostHog cost?
 
