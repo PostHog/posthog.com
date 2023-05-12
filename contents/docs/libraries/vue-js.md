@@ -110,7 +110,7 @@ import posthogPlugin from "./plugins/posthog"; // import the plugin
 Vue.use(posthogPlugin); // install the plugin, before new Vue()
 ```
 
-You can now use PostHog throughout your Vue app using `this.$posthog`.  For example, 
+You can now use PostHog throughout your Vue app using `this.$posthog`. For example:
 
 ```js
 //component.vue
