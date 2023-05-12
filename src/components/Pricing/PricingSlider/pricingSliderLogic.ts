@@ -17,18 +17,15 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
         return 0
     }
     for (const { up_to, unit_amount_usd } of tiers) {
-        console.log(up_to, unit_amount_usd)
-        finalCost =
-            finalCost +
-            Math.max(
-                0,
-                Math.min(
-                    eventNumber - alreadyCountedEvents,
-                    // the final tier does not have an up_to, so we use a very high number here so it can keep counting up the cost
-                    up_to || 10000000000 - alreadyCountedEvents
-                )
-            ) *
-                parseFloat(unit_amount_usd)
+        const remainingEvents = Math.max(eventNumber - alreadyCountedEvents, 0)
+        const eventsInThisTier = up_to
+            ? remainingEvents < up_to - alreadyCountedEvents
+                ? remainingEvents
+                : up_to - alreadyCountedEvents
+            : remainingEvents
+        const tierCost = eventsInThisTier * parseFloat(unit_amount_usd)
+        finalCost = finalCost + tierCost
+        // the last tier has null up_to so we set it to an arbitrarily high number
         alreadyCountedEvents = up_to ?? 10000000000
     }
 
