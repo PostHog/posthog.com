@@ -16,9 +16,9 @@ tags:
 
 Want to understand the difference between Hotjar and PostHog? Here's the short answer:
 
-1. **Hotjar** enables you to see how customers use your product with session replays and heatmaps. It also provides widgets for collecting feedback and tools for scheduling customer interviews. Hotjar is built for marketers and user experience (UX) researchers.
+1. **Hotjar** is a user research tool that offers session replays, heatmaps, and tools for collecting feedback and scheduling customer interviews. It's built for marketers and user experience (UX) researchers.
 
-2. **PostHog** is an all-in-one product improvement platform for product analytics, session replays, feature flags, in-app prompts, and more. PostHog is built for engineers and product teams.
+2. **PostHog** is an all-in-one platform for building successful products. It includes product analytics, session replays, feature flags, in-app prompts, and more. It's built for engineers and product teams.
 
 Now it's time for the long answer...
 
@@ -36,11 +36,11 @@ In this guide, we'll cover:
 
 ### 1. PostHog is an all-in one platform
 
-Hotjar focuses mainly on session replays, heatmaps, and user research. That means you need to adopt additional tools for things like [product analytics](/product-analytics), [feature management](/feature-flags), and [A/B testing](/ab-testing). PostHog integrates all these features into one platform (in addition to [session replays and heatmaps](/session-replay)). PostHog is like mission control for your product, rather than just a single tool. 
+Hotjar focuses mainly on session replays, heatmaps, and user research. That means you need to adopt additional tools for things like [product analytics](/product-analytics), [feature management](/feature-flags), and [A/B testing](/ab-testing). PostHog integrates all these features into one platform (in addition to [session replays and heatmaps](/session-replay)).
 
 ### 2. PostHog is built for engineers
 
-As such, PostHog includes many powerful features that aren’t available in tools like Hotjar, which is built for more general audiences. These features include tools like feature flags with JSON payloads, which enable you to trigger in-app messages or other notifications. 
+As such, PostHog integrates numerous powerful features that aren’t available in tools like Hotjar, such as feature flags with JSON payloads, which enable you to trigger in-app messages, or other notifications. 
 
 We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). Although anyone can use PostHog ([just ask our marketing team](blog/posthog-marketing)), our goal is to help engineers be better at product by giving them the insights and tools they need to ship impactful features at speed.
 
