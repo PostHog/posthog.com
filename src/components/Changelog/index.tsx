@@ -6,6 +6,7 @@ import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import groupBy from 'lodash.groupby'
+import get from 'lodash.get'
 import slugify from 'slugify'
 import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
@@ -30,7 +31,7 @@ const Select = ({ onChange, values }) => {
     return (
         <div className="relative">
             <Listbox onChange={onChange} defaultValue={defaultValue}>
-                <Listbox.Button className="py-2 px-4 bg-white rounded-md w-[180px] text-left shadow-md flex justify-between items-center font-semibold">
+                <Listbox.Button className="py-2 px-4 bg-white dark:bg-gray-accent-dark rounded-md w-[180px] text-left shadow-md flex justify-between items-center font-semibold">
                     {({ value }) => (
                         <>
                             <span>{value.label}</span>
@@ -38,15 +39,18 @@ const Select = ({ onChange, values }) => {
                         </>
                     )}
                 </Listbox.Button>
-                <Listbox.Options className="absolute w-full shadow-md bg-white list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-gray-accent-light/50">
+                <Listbox.Options className="absolute w-full shadow-md bg-white dark:bg-gray-accent-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-gray-accent-light/50">
                     {values.map((value) => (
-                        <Listbox.Option
-                            className="py-2 px-4 cursor-pointer hover:bg-gray-accent/50 transition-colors"
-                            key={value.label}
-                            value={value}
-                            as="li"
-                        >
-                            {({ active, selected }) => <span>{value.label}</span>}
+                        <Listbox.Option key={value.label} value={value} as={React.Fragment}>
+                            {({ selected }) => (
+                                <li
+                                    className={`py-2 px-4 cursor-pointer hover:bg-gray-accent-light/40 dark:hover:bg-gray-accent-light/20 transition-colors ${
+                                        selected ? 'bg-gray-accent-light/80 dark:bg-gray-accent-light/40' : ''
+                                    }`}
+                                >
+                                    {value.label}
+                                </li>
+                            )}
                         </Listbox.Option>
                     ))}
                 </Listbox.Options>
@@ -93,13 +97,15 @@ export default function Changelog() {
                 }
             }
             filterOptions: allChange {
-                topics: group(field: topic___data___attributes___label) {
+                products: group(field: topic___data___attributes___label) {
                     label: fieldValue
                     value: fieldValue
+                    field
                 }
-                teams: group(field: team___data___attributes___name) {
+                types: group(field: type) {
                     label: fieldValue
                     value: fieldValue
+                    field
                 }
             }
         }
@@ -114,12 +120,12 @@ export default function Changelog() {
     })
     const tableOfContents = Object.keys(changesByMonth).map((month) => ({ url: month, value: month, depth: 0 }))
 
-    const handleChange = (key, { value }, match) => {
+    const handleChange = (key, { value }, field) => {
         const newFilters = { ...filters }
         if (value === null) {
             delete newFilters[key]
         } else {
-            newFilters[key] = { value, match }
+            newFilters[key] = { value, field }
         }
         setFilters(newFilters)
     }
@@ -131,8 +137,8 @@ export default function Changelog() {
                 ? allChange.nodes
                 : allChange.nodes.filter((change) =>
                       filterKeys.every((filter) => {
-                          const { value, match } = filters[filter]
-                          return change[filter]?.data?.attributes?.[match] === value
+                          const { value, field } = filters[filter]
+                          return get(change, field) === value
                       })
                   )
         setChanges(newChanges)
@@ -140,20 +146,22 @@ export default function Changelog() {
 
     return (
         <CommunityLayout title="Changelog" tableOfContents={tableOfContents}>
-            <section className="mb-12 flex justify-between items-center">
+            <section className="mb-12 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
                 <div>
                     <h1 className="m-0 text-3xl">Changelog</h1>
                     <p className="m-0 mt-2">Here's a history of everything we've built</p>
                 </div>
                 <div className="flex space-x-2 items-center">
-                    <Select
-                        onChange={(value) => handleChange('topic', value, 'label')}
-                        values={[{ label: `All topics`, value: null }, ...filterOptions.topics]}
-                    />
-                    <Select
-                        onChange={(value) => handleChange('team', value, 'name')}
-                        values={[{ label: `All teams`, value: null }, ...filterOptions.teams]}
-                    />
+                    {Object.keys(filterOptions).map((filter) => {
+                        const { field } = filterOptions[filter][0]
+                        return (
+                            <Select
+                                key={filter}
+                                onChange={(value) => handleChange(filter, value, field)}
+                                values={[{ label: `All ${filter}`, value: null }, ...filterOptions[filter]]}
+                            />
+                        )
+                    })}
                 </div>
             </section>
             <section className="grid gap-y-12">
@@ -165,7 +173,7 @@ export default function Changelog() {
                                 {month}
                             </h2>
                             <ul className="list-none m-0 p-0 grid gap-y-12">
-                                {nodes.map(({ description, media, topic, team, title, type, cta, date }) => {
+                                {nodes.map(({ description, media, topic, team, title, cta }) => {
                                     const topicName = topic?.data?.attributes.label
                                     const teamName = team?.data?.attributes?.name
                                     const mediaURL = media?.data?.attributes?.url
