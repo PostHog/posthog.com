@@ -19,12 +19,19 @@ with a `Caddyfile` of the form like:
 
 ```
 ${YOUR_TRACKING_DOMAIN} {
+  header {
+    # If `YOUR_TRACKING_DOMAIN` points to your "production"
+    # domain then below is sufficient for the proxy to work
+    # for requests originating from that domain.
+    # If you'd like to test your proxy from other domains, such
+    # as 'localhost', you'll need to tweak this line
+    # or `YOUR_TRACKING_DOMAIN` accordingly
+    Access-Control-Allow-Origin https://${YOUR_TRACKING_DOMAIN}
+  }
+
   reverse_proxy https://app.posthog.com:443 {
     header_up Host app.posthog.com
-    header_up X-Forwarded-Host ${YOUR_TRACKING_DOMAIN}
-    header_up X-Forwarded-Port {http.reverse_proxy.upstream.port}
-    header_up X-Forwarded-Proto {http.reverse_proxy.upstream.scheme}
-    header_down -Server
+    header_down -Access-Control-Allow-Origin
   }
 }
 ```
