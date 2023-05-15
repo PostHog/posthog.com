@@ -140,7 +140,7 @@ To submit apps made with the source editor, you’ll need to move them onto a pu
 - Copy the contents of `index.js` in the source editor into the new `index.js` file within the repo
 - Copy the contents of `plugin.json` in the source editor into the new `plugin.json` file within the repo
 
-Finally, however you create your app, [let us know that it's ready for review](http://app.posthog.com/home#supportModal), what it does, and how you would like to be credited. Once we receive your message we’ll review the app for security and performance reasons, then make it available to all PostHog users.
+Finally, however you create your app, [let us know that it's ready for review](https://app.posthog.com/home#supportModal=support%3Aapps), what it does, and how you would like to be credited. Once we receive your message we’ll review the app for security and performance reasons, then make it available to all PostHog users.
 
 ### Further reading
 
