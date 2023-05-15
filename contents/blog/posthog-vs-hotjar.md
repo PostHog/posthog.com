@@ -24,7 +24,7 @@ Now it's time for the long answer...
 
 In this guide, we'll cover:
 
-- Hotjar and PostHog [feature comparison](#core-features)
+- [Hotjar and PostHog feature comparison](#core-features)
 - [Session replay](#session-replays) capabilities
 - [Heatmap](#Heatmaps) capabilities
 - [In-app messages and user research](#in-app-messages-and-user-research)
@@ -488,16 +488,6 @@ Regulatory compliance can be a critical need for many teams, especially if they 
 
 ## Frequently asked questions
 
-- [How is PostHog different?](#how-is-posthog-different)
-  - [1. PostHog is an all-in one platform](#1-posthog-is-an-all-in-one-platform)
-  - [2. PostHog is built for engineers](#2-posthog-is-built-for-engineers)
-  - [3. PostHog is open source](#3-posthog-is-open-source)
-- [Core features](#core-features)
-  - [Session replays](#session-replays)
-  - [Heatmaps](#heatmaps)
-  - [In-app messages and user research](#in-app-messages-and-user-research)
-  - [Apps and integrations](#apps-and-integrations)
-- [Privacy, compliance, and security](#privacy-compliance-and-security)
 - [Frequently asked questions](#frequently-asked-questions)
   - [Who is Hotjar useful for?](#who-is-hotjar-useful-for)
   - [Who is PostHog useful for?](#who-is-posthog-useful-for)
