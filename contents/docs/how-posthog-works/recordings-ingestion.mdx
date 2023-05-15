@@ -13,7 +13,7 @@ Because we use kafka for ingestion there is a maximum allowed message size and s
 So, in Capture we compress the data and split it into chunks. The plugin server runs a "recordings ingestion" workload which uses our ingestion pipeline to send each recording event for storage in ClickHouse
 
 ```mermaid
-flowchart LR
+flowchart TB
     clickHouse_session_recording_events_table[(Session recording events table)]
     received_snapshot_event[clients send snapshot data]
     kafka_recordings_topic>Kafka recordings topic]
