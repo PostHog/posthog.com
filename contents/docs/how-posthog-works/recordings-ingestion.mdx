@@ -38,7 +38,7 @@ Storing snapshot data in ClickHouse is not ideal. It's not a good fit for the da
 This uses a new ingestion workload which batches sessions to disk and periodically flushes them to blob storage. This is to allow us to write fewer files to storage reducing the operational cost of the system.
 
 ```mermaid
-flowchart LR
+flowchart TB
     clickHouse_session_recording_events_table[(Session recording events table)]
     received_snapshot_event[clients send snapshot data]
     kafka_recordings_topic>Kafka recordings topic]
