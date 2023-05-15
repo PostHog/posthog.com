@@ -488,7 +488,6 @@ Regulatory compliance can be a critical need for many teams, especially if they 
 
 ## Frequently asked questions
 
-- [Frequently asked questions](#frequently-asked-questions)
   - [Who is Hotjar useful for?](#who-is-hotjar-useful-for)
   - [Who is PostHog useful for?](#who-is-posthog-useful-for)
   - [How much does Hotjar cost?](#how-much-does-hotjar-cost)
