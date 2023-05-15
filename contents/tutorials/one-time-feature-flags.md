@@ -10,7 +10,7 @@ tags: ['feature flags']
 
 Sometimes you want to show users a component or some content only once. You use a field in their user model or store it locally, but this can get messy fast. It also might prevent you from changing it remotely. A better way to do this is a feature flag that changes once a user completes what you want.
 
-In this tutorial, we show how to set up a one-time feature flag by building a basic Express.js API that provides one response on the first request, and a different one on subsequence requests.
+In this tutorial, we show how to set up a one-time feature flag using PostHog by building a basic Express.js API that provides one response on the first request, and a different one on subsequence requests.
 
 ## Creating our Express app
 
@@ -53,7 +53,7 @@ Next, install PostHog through the [Node SDK](/docs/libraries/node) as Express is
 npm i posthog-node
 ```
 
-Once done require `posthog-node` in our Express app and set up the PostHog client with our project API key and instance address. You can find these in the getting started flow or in your [project settings](https://app.posthog.com/project/settings)
+Next, add `posthog-node` to your Express app and set up the PostHog client with our project API key and instance address. You can find these in the getting started flow or in your [project settings](https://app.posthog.com/project/settings)
 
 ```js
 // server.js
@@ -72,7 +72,7 @@ const client = new PostHog(
 
 Once PostHog is set up, create a custom event that triggers when a user makes a request to the base route. Make sure to both:
 
-1. Include a user ID in the request. I did so by including an ID param in the URL like `http://localhost:3000/?id=ian` then handling with `req.query.id`.
+1. Include a user ID in the request. I did so by including an ID param in the URL like `http://localhost:3000/?id=ian` and then retrieving it with `req.query.id`.
 2. `$set` a person property in the event capture that says they’ve made a request. Without the person property, you can’t filter this user from the feature flag.
 
 With these, our route now looks like this:
