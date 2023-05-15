@@ -1,6 +1,6 @@
 ---
 date: 2022-06-30
-title: One shot VC finance
+title: VC is a tool, not a religion
 rootPage: /blog
 sidebar: Blog
 showTitle: true
