@@ -64,7 +64,7 @@ The PostHog Toolbar will only be enabled for you – not your users. The little 
 
 To launch the toolbar, access your website and it should appear for you. If that does not work, you can go over to PostHog, click the dropdown arrow on 'Toolbar' in the sidebar menu, and click the URL you want to launch the toolbar on.
 
-![How to setup the PostHog toolbar](../images/tutorials/toolbar/toolbar-setup.png)
+![How to setup the PostHog toolbar](../images/tutorials/toolbar/toolbar-setup.mp4)
 
 ## Using the heatmap
 
