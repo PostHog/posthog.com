@@ -27,7 +27,6 @@ If you are planning on taking a day off or you won't be available, please find s
 ### Channels
 
 There are a couple of channels that customer requests come in so make sure you keep an eye on all of them (in order of priority):
-- [Unthread](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) is used by the CS team to track issues with our high priority customers in dedicated Slack Connect channels.
 - [Zendesk](https://posthoghelp.zendesk.com/agent/filters/5586845866651) - look for the dedicated folder for your team. If new tickets are created, then a slack notification will be sent also to your team's dedicated support channel.
 - [PostHog Users's Slack](/slack), specifically `#community` and `#general` or elsewhere should be redirected to using [the bug button](https://app.posthog.com/home#supportModal) within the app, which provides us with all the context and helps triage. We do not commit to providing support through Slack, and should suggest users who prefer this channel ask @Max-AI as a first port of call.
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
@@ -48,12 +47,10 @@ As an engineer, when a question comes in your first instinct is to give them an 
 
 As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero. At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
 
-1. Any requests where you are tagged by the Customer Success team in a dedicated slack channel as there will be some urgency needed.
-2. Any requests assigned to you in [Unthread](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) as they will be from a high priority customer in a dedicated Slack channel.
-3. Open Zendesk tickets for your team that have `high` priority (high-paying customers).
-4. Open Zendesk tickets for your team that have `normal` priority (paying customers).
-5. [Squeak!](https://posthog.com/questions/) questions.
-7. Open Zendesk tickets for your team that have `low` priority (non-paying users).
+1. Open Zendesk tickets for your team that have `high` priority (high-paying customers).
+1. Open Zendesk tickets for your team that have `normal` priority (paying customers).
+1. [Squeak!](https://posthog.com/questions/) questions.
+1. Open Zendesk tickets for your team that have `low` priority (non-paying users).
 
 ### Support for self-hosted users
 
@@ -134,7 +131,7 @@ Tips:
 
 ### Unthread
 
-Our Customer Success team uses Unthread to track the resolution of threads in Slack connect channels with our high priority customers.  By default, threads are assigned to the CS person who owns the relationship with the customer.  If they need Support Hero assistance they will re-assign the thread accordingly.
+Our Customer Success team uses Unthread to track the resolution of threads in Slack connect channels with our high priority customers.  By default, threads are assigned to the CS person who owns the relationship with the customer.  If they need Support Hero assistance they will create a Zendesk ticket for the team.
 
 #### Using Unthread
 
