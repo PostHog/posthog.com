@@ -134,7 +134,7 @@ App chains can be used for specific purposes, such as [filtering unwanted inform
 
 While it’s totally optional, we greatly appreciate everyone who contributes to PostHog by submitting their apps for inclusion in [our public app library](/apps) so that other users can benefit from them. 
 
-To submit apps made with the source editor, you’ll need to move them onto a GitHub repo. We’ve made an app starter kit to simplify this process:
+To submit apps made with the source editor, you’ll need to move them onto a public GitHub repo. We’ve made an app starter kit to simplify this process:
 
 - Create a new GitHub repo using [this template](https://github.com/PostHog/posthog-plugin-starter-kit/generate)
 - Copy the contents of `index.js` in the source editor into the new `index.js` file within the repo
