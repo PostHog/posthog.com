@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-4.png
 tags: ['feature flags']
 ---
 
-Sometimes you want to show users a component or some content only once. You use a field in their user model or store it locally, but this can get messy fast. It also might prevent you from changing it remotely. A better way to do this is a feature flag that changes once a user completes what you want.
+Sometimes you want to show users a component or some content only once. You can use a field in their user model or store it locally, but this gets messy fast. It also might prevent you from changing it remotely. A better way to do this is a feature flag that changes once a user completes what you want.
 
 In this tutorial, we show how to set up a one-time feature flag using PostHog by building a basic Express.js API that provides one response on the first request, and a different one on subsequence requests.
 
@@ -53,7 +53,7 @@ Next, install PostHog through the [Node SDK](/docs/libraries/node) as Express is
 npm i posthog-node
 ```
 
-Next, add `posthog-node` to your Express app and set up the PostHog client with our project API key and instance address. You can find these in the getting started flow or in your [project settings](https://app.posthog.com/project/settings)
+Add `posthog-node` to your Express app and set up the PostHog client with your project API key and instance address. You can find these in the getting started flow or in your [project settings](https://app.posthog.com/project/settings)
 
 ```js
 // server.js
@@ -70,7 +70,7 @@ const client = new PostHog(
 
 ### Capture the first time event
 
-Once PostHog is set up, create a custom event that triggers when a user makes a request to the base route. Make sure to both:
+Once PostHog is set up, create a custom event that triggers when a user makes a request to the base route. Make sure to:
 
 1. Include a user ID in the request. I did so by including an ID param in the URL like `http://localhost:3000/?id=ian` and then retrieving it with `req.query.id`.
 2. `$set` a person property in the event capture that says they’ve made a request. Without the person property, you can’t filter this user from the feature flag.
@@ -94,7 +94,7 @@ After making a request again to this route, we get a `first request` event in ou
 
 ![Events](../images/tutorials/one-time-feature-flags/event.png)
 
-We haven’t set up a way to check if users made their first request. With only this, we treat every request like it’s the first. We can set up a feature flag to handle this.
+We haven’t set up a way to check if users made their first request. With only this, we treat every request like it’s the first. We can set up a feature flag to change this.
 
 ## Creating the one-time feature flag
 
@@ -102,9 +102,9 @@ To create our feature flag, go to the feature flags tab in PostHog, create a new
 
 ![Conditions](../images/tutorials/one-time-feature-flags/condition.png)
 
-Now we can go back to our `server.js` file and implement the flag. Check the `completed-first-request` flag with `client.isFeatureEnabled()`:
+Go back to your `server.js` file and implement the flag. Check the `completed-first-request` flag with `client.isFeatureEnabled()`:
 
-- If it is `false`, capture our `first request` event and send "Hello World!"
+- If it is `false`, capture the `first request` event and send "Hello World!"
 - If it is `true`, capture a `subsequent request` event and send "Welcome Back!"
 
 ```js
@@ -149,7 +149,7 @@ To handle cookies, we install the `cookie-parser` library.
 npm i cookie-parser
 ```
 
-Once, installed we add it to our `server.js` file.
+Once installed, add it to our `server.js` file.
 
 ```js
 //...
@@ -158,7 +158,7 @@ app.use(cookieParser());
 //...
 ```
 
-Under our `first request` event capture, we can set a cookie with the ID to say the first request is complete. We can then check for this cookie if the flag returns false. Together, this looks like this:
+Under our `first request` event capture, set a cookie with the ID to say the first request is complete. Check for this cookie if the flag returns `false`. Together, this looks like this:
 
 ```js
 // server.js
