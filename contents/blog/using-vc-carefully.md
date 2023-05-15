@@ -67,11 +67,11 @@ I couldn't be more glad that's what we picked. Results:
 
 This we nailed.
 
-First, we made clear that we would have or had some kind of paid offering from when we launched the free open source product by explaining our different offerings on our pricing page.
+First, we made clear that we would have or had a paid offering from when we launched the free open source product. We did this by explaining our different offerings on our pricing page.
 
-As we started focusing on a 
+Once we started getting regular demand for the paid product and after feeling that the open source product was building a big community and users were really getting value from it, we decided to focus on revenue.
 
-At the same time, we set the goal of '5 reference customers' for the entire organization.
+We quickly set the goal of '5 reference customers' for the entire organization. We tracked the things each potential customer had in common - very specific things like "do they have product market fit" / "do they have a data warehouse" / "have they used our free product before". Quickly we could spot the kind of deals that would close and the kind that wouldn't - it was really useful tracking both the deals that closed _and_ the ones that dragged on.
 
 There were three surprising lessons we had during this phase:
 
@@ -91,8 +91,27 @@ However, now that figure is getting close - we're no-longer convinced this is th
 * Add extra products to the platform
 * Content marketing (👋)
 
+Normal companies probably _should_ raise venture capital, since most grow by hiring a big sales team whilst the product tries to keep up. PostHog's main growth lever is shipping.
+
+## Developer math
+
+So, if we grow by shipping, and we want to grow as fast as possible - we need to be able to ship as fast as possible.
+
+Adding developers is an intense process for us - particularly as we have found we work best with experienced people. We think it's the nature of an all remote company with a wide product - we need people that thrive in autonomy, and those folk normally don't need as much coaching.
+
+So, if we add lots of people, will we ship faster?
+
+To a certain extent.
+
+* Every hire involves dozens of interviews
+* New technical hires require onboarding
+
+Since our revenue is growing fast, we could triple or more our team next year, just from revenue growth. Hiring more than that feels like our developers won't really be writing code. So, we don't think a huge fundraise is the right thing to do.
+
 ## So what should you take from this?
 
-Venture Capital is a tool, not a religion. Don't blindly follow what others are doing on TechCrunch.
+For us, I think we probably will fundraise again. However, our goals may be different to the norm - like just making sure we have more working capital so we can stay long term focused, to provide employee secondaries, or to get the ideal board member into the company.
 
-Instead, have a clear purpose. If it's to accelerate growth, great. Just ask yourself if it will _actually_ help achieve that!
+Venture Capital is a tool, not a religion. Don't blindly follow what you hear others are doing on TechCrunch.
+
+Instead, have a clear fundraising purpose. If it's to accelerate growth, great. Just ask yourself if it will _actually_ help achieve that - based on how _your company_ is growing.
