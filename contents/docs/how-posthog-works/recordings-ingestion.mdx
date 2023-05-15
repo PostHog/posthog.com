@@ -31,7 +31,7 @@ flowchart LR
 
 This is in progress.
 
-Storing snapshot data in ClickHouse is not ideal. It's not a good fit for the data model and it's not a good fit for the workload. So, recordings storage is being moved to blob storage. We use [minio](https://min.io/product/kubernetes) for blob storage. 
+Storing snapshot data in ClickHouse is not ideal. It's not a good fit for the data model and it's not a good fit for the workload. So, recordings storage is being moved to blob storage. We use AWS S3 for blob storage but in theory any S3 compatible API such as Minio would work as well. 
 
 This uses a new ingestion workload which batches sessions to disk and periodically flushes them to blob storage. This is to allow us to write fewer files to storage reducing the operational cost of the system.
 
