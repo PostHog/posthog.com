@@ -83,7 +83,7 @@ After a few weeks of iteration, it was rolled out to employees, who loved it. Th
 
 ![Spotify metrics](../images/blog/build-features-users-love/spotify.jpeg)
 
-Not all companies can generate as much useable internal test data, but Spotify has the scale to generate lots of reliable usage insights before showing new features to customers.
+Not all companies can generate as much usable internal test data, but Spotify has the scale to generate lots of reliable usage insights before showing new features to customers.
 
 ### 4. Limited rollout
 Next, they rolled Discover Weekly out to 1% of users. They gathered qualitative feedback using a Google Form in the description. The responses were overwhelmingly positive. When asked “Did you like the music in your Discover Weekly?” 65% of users gave it a 5/5 rating.
