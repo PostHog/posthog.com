@@ -25,7 +25,7 @@ Now it's time for the long answer...
 In this guide, we'll cover:
 
 - Hotjar and PostHog [feature comparison](#core-features)
-- [Session replay](#session-replay) capabilities
+- [Session replay](#session-replays) capabilities
 - [Heatmap](#Heatmaps) capabilities
 - [In-app messages and user research](#in-app-messages-and-user-research)
 - [Apps and integrations](#apps-and-integrations)
@@ -40,7 +40,7 @@ Hotjar focuses mainly on session replays, heatmaps, and user research. That mean
 
 ### 2. PostHog is built for engineers
 
-As such, PostHog integrates numerous powerful features that aren’t available in tools like Hotjar, such as feature flags with JSON payloads, which enable you to trigger in-app messages, or other notifications. 
+PostHog integrates powerful features that aren’t available in Hotjar and which are designed for technical users, such as feature flags with JSON payloads, which enable you to trigger in-app messages, or other notifications. 
 
 We built PostHog to support technically-savvy product managers and engineers – especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). Anyone can use PostHog ([just ask our marketing team](blog/posthog-marketing)), but our primary goal is to give engineers the tools they need to ship impactful features at speed.
 
@@ -66,7 +66,7 @@ Because we build for engineers first, we're also open source. You can check out 
             <td><strong>Session replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch real users use your product; diagnose bugs</td>
+            <td>Watch real users use your product</td>
         </tr>
         <tr>
             <td><strong>Heatmaps</strong></td>
@@ -190,7 +190,7 @@ Session replays are an essential tool for understanding how people use your prod
             <td>Debug user problems and app errors.</td>
         </tr>
         <tr>
-            <td><strong>Network activity</strong></td>
+            <td><strong>Performance monitoring</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Monitor network activity and performance.</td>
@@ -223,7 +223,7 @@ Session replays are an essential tool for understanding how people use your prod
 </table>
 </div>
 
-- **Recording retention:** Hotjar keeps all recordings for 365 days. PostHog retains all recordings for three weeks, but retains recordings saved to a playlist forever. PostHog also allows you to download recordings as a `.json` file for safe keeping.
+- **Recording retention:** Hotjar keeps all recordings for 365 days. PostHog retains all recordings for three weeks, but retains recordings saved to a playlist forever. PostHog also enables you to download recordings as a `.json` file for safe keeping.
 
 ### Heatmaps
 
@@ -294,7 +294,7 @@ Below, we've listed the different methods for communicating with and collecting 
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-			<td className="w-3/12"></td>
+	<td className="w-3/12"></td>
             <td><strong>Hotjar</strong></td>
             <td><strong>PostHog</strong></td>
             <td></td>
@@ -348,12 +348,12 @@ Below, we've listed the different methods for communicating with and collecting 
 </div>
 
 ### Apps and integrations
-Both Hotjar and PostHog have a wide selection of apps and integration. Both also include integrations with tools such as Zapier, which enable you to move data to even more platforms.
+Both Hotjar and PostHog have a wide selection of apps and integrations. Both also include integrations with tools such as Zapier, which enable you to move data to even more platforms.
 
 One unique advantage of PostHog is that, because it is open source, it’s easy to [create your own apps and integrations](/tutorials/build-your-own-posthog-app). This is useful if you’re, for example, using niche software in your stack that hasn’t been widely adopted, or if you require a direct integration between PostHog and your product. 
 
 
-Below, we've listed a few of the most popular integrations used across PostHog and Pendo. 
+Below, we've listed a few of the most popular integrations used across PostHog and HotJar. PostHog offers more than 50 apps, so for a full list of PostHog's integrations, please [check the app library](/apps).
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
