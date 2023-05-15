@@ -18,13 +18,13 @@ We raised over $27,000,000 then realized we should be growing out of our own rev
 
 ## Day 1 - we started bootstrapping, then changed our minds
 
-Fresh-faced, but not carefree - in the early days, when it was just my cofounder Tim and me, we used to work out of cafés and we were bootstrapped.
+Fresh-faced, but not carefree - in the early days, when it was just my cofounder, Tim, and me, we used to work out of cafés and we were bootstrapped.
 
 A few months in, we had a discussion on what we wanted out of life. Pro tip - do this _before_ you start working with someone else. Luckily we were on the same page - we decided it was _more_ stressful to bootstrap than to raise VC.
 
 Why?
 
-* No money coming in meant we were having to be exceptioanlly careful about spending.
+* No money coming in meant we were having to be exceptionally careful about spending anything.
 * We'd spend years rebuilding to the same salaries that we'd just left behind, but with added downside risk of not finding product market fit.
 * A slower pace felt like it'd be boring. We'd find it more engaging to own a smaller slice of a bigger pie. We wanted to work on something we'd enjoy.
 
@@ -39,7 +39,7 @@ Raising money, especially coming into 2021, felt self fulfilling. It felt like y
 1. Founder: Check it out, we raised tons of money
 2. VC: Whoah, that's some compelling social proof! You're now on our radar.
 3. Users: We should pick _this_ technology since they're featured in techcrunch with a huge funding round!
-4. Founder: We should keep raising. Maybe even sell a few $MM in secondaries way ahead of being an obvious success.
+4. Founder: We should keep raising. If we can raise the next round right now, not doing that feels stupid.
 5. VC: Interest rates are low... let's do it.
 6. Go back to step 1 (until founder raises too much, has big unweildy team and no product market fit, with high burn, has to fire people and will struggle to raise again)
 
