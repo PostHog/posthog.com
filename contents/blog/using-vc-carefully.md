@@ -67,6 +67,32 @@ I couldn't be more glad that's what we picked. Results:
 
 This we nailed.
 
+First, we made clear that we would have or had some kind of paid offering from when we launched the free open source product by explaining our different offerings on our pricing page.
 
+As we started focusing on a 
 
-## good bits and bad bits about focusing on revenue
+At the same time, we set the goal of '5 reference customers' for the entire organization.
+
+There were three surprising lessons we had during this phase:
+
+1 - charging customers for a product led to more usage. Early paying customers were more demanding of quality. When we fixed quality issues, our free _and_ paid products both accelerated
+2 - how imoportant it is to track your anti-Ideal Customer Profile. Don't just monitor deals that close, but track those that are dragging on - what do they have in common?
+3 - how quickly we went from getting the first 5 paying customers, to 100.
+
+## We have Product Market Fit, time to raise more money?
+
+Many companies do this. The reason is pretty simple - if you grow by hiring salespeople, you can use venture capital to hire faster than you could otherwise afford.
+
+We took the stance that we should get to $10M in recurring revenue, and then could go nuts. This would mean we could raise capital easily, on great terms, and it'd mean we had very solid product market fit.
+
+However, now that figure is getting close - we're no-longer convinced this is the right thing to do. The way we grow is pretty simple:
+
+* Make the existing products we have work better
+* Add extra products to the platform
+* Content marketing (👋)
+
+## So what should you take from this?
+
+Venture Capital is a tool, not a religion. Don't blindly follow what others are doing on TechCrunch.
+
+Instead, have a clear purpose. If it's to accelerate growth, great. Just ask yourself if it will _actually_ help achieve that!
