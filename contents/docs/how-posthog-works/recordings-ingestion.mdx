@@ -76,7 +76,7 @@ So, we're adding a new ingestion workload which will generate this metadata and 
 In combination with the blob storage ingestion workload this means we're storing at least a hundred times less data per row in ClickHouse. And compressing it about twice as much. 🔥
 
 ```mermaid
-flowchart LR
+flowchart TB
     clickHouse_session_recording_events_table[(Session recording events table)]
     clickhouse_replay_summary_table[(Session replay summary table)]
     received_snapshot_event[clients send snapshot data]
