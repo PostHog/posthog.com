@@ -1,5 +1,5 @@
 ---
-title: Advanced breakdowns with HogQL
+title: Using HogQL for advanced breakdowns
 date: 2023-05-16
 author: ["ian-vanagas"]
 showTitle: true
