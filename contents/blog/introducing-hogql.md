@@ -57,7 +57,7 @@ SQL insights are especially useful for when you need to do exotic or novel analy
 
 We're incredibly excited to hear your feedback and see what's possible with SQL access in PostHog, and believe it will give engineers a unique edge and better information than they'd be able to get with other product analytics tools.
 
-To give you a sense of what's possible with SQL, here's an example query we use to summarize data from our from [our 404 page](/hedgehogsgalore) and display which countries prefer their pizzas with pineapple on them.
+To give you a sense of what's possible with SQL, here's an example query we use to summarize data from a survey we ran to determine which countries prefer pineapple on a pizza.
 
 ```
    select properties.$geoip_country_name,
