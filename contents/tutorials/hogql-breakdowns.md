@@ -10,7 +10,7 @@ tags: ['hogql', 'trends']
 
 HogQL opens limitless possibilities for how you can breakdown your trends, funnels, and more. This tutorial showcases some of the advanced breakdowns you can create using HogQL.
 
-To create a breakdown using HogQL, create an insight then under "Breakdown by," click "Add breakdown," select HogQL from the options, and add your statement.
+To create a breakdown using HogQL, create an insight then under "Breakdown by," click "Add breakdown," select HogQL from the options, and add your expression.
 
 > To understand the full possibilities of HogQL, check out the [available functions in our docs](/docs/product-analytics/hogql#supported-clickhouse-functions) as well as the [events](https://app.posthog.com/data-management/events) and [properties](https://app.posthog.com/data-management/properties) lists from your PostHog instance.
 
@@ -18,7 +18,7 @@ To create a breakdown using HogQL, create an insight then under "Breakdown by," 
 
 HogQL includes the "All events" series, which can break down in many ways, including by individual events. This enables you to visualize the breakdown of all your events at once. 
 
-To do this, search for the "All events" trend, then breakdown with the HogQL statement `event`.
+To do this, search for the "All events" trend, then breakdown with the HogQL expression `event`.
 
 ![Events](../images/tutorials/hogql-breakdowns/events.png)
 
@@ -28,7 +28,7 @@ You could also breakdown all events by `person_id` to find your most active user
 
 Many strings, such as URLs, include repetitive values combined with unique values. It is common to want to replace that unique value with a placeholder value to combine the repetitive values into one for analysis.
 
-For example, you have a path that uses a specific user’s UUID like `/users/123e4567-e89b-12d3-a456-426655440000`. You can use `replaceRegexpOne` to replace `123e4567-e89b-12d3-a456-426655440000` with `:uuid` . The HogQL statement for this looks like this:
+For example, you have a path that uses a specific user’s UUID like `/users/123e4567-e89b-12d3-a456-426655440000`. You can use `replaceRegexpOne` to replace `123e4567-e89b-12d3-a456-426655440000` with `:uuid` . The HogQL expression for this looks like this:
 
 ```
 replaceRegexpOne(
@@ -44,13 +44,13 @@ Another way to replace a repetitive value is to use `replaceOne`. If we wanted t
 replaceOne(properties.$current_url, 'https://app.posthog.com', '/')
 ```
 
-> **Note:** Make sure you use straight apostrophes (`'`) or backticks (`) in your statements.
+> **Note:** Make sure you use straight apostrophes (`'`) for string literals and backticks (\`) or quotes (`"`) for database identifiers in your expressions. **Don't use** curly apostrophes (`’`) or curly quotes (`“` or `”`).
 
 ## Excluding values
 
-Instead of filtering to remove values, you can exclude them with HogQL. You can use `if` statements to remove specific values.
+Instead of filtering to remove values, you can exclude them with HogQL. You can use `if` expressions to remove specific values.
 
-For example, if we wanted to remove the path `/insights` from our breakdown, we can use an `if` statement to set the route to `null` like this:
+For example, if we wanted to remove the path `/insights` from our breakdown, we can use an `if` expression to set the route to `null` like this:
 
 ```
 if(properties.$pathname == '/insights', null, properties.$pathname)
@@ -102,7 +102,7 @@ concat(
 
 ## Bin events
 
-HogQL provides more options for putting events into bins or groups. You can use if or  `multiIf`statements to do so.
+HogQL provides more options for putting events into bins or groups. You can use `if` or `multiIf`expressions to do so.
 
 For example, you can group events into mobile and desktop by checking the `$os` property for Android and iOS:
 
