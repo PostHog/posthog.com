@@ -50,7 +50,7 @@ As a business we need to ensure we are focusing support on our paying customers,
 1. Any requests where you are tagged by the Customer Success team in a dedicated slack channel as there will be some urgency needed.
 1. Open Zendesk tickets for your team that have `high` priority (high-paying customers).
 1. Open Zendesk tickets for your team that have `normal` priority (paying customers).
-1. [Squeak!](https://posthog.com/questions/) questions.
+1. [Community questions](https://posthog.com/questions/).
 1. Open Zendesk tickets for your team that have `low` priority (non-paying users).
 
 ### Support for self-hosted users
