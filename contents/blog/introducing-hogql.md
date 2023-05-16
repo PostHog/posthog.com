@@ -66,7 +66,7 @@ SQL insights are especially useful for when you need to do exotic or novel analy
 
 We're incredibly excited to hear your feedback and see what's possible with SQL access in PostHog, and believe it will give engineers a unique edge and better information than they'd be able to get with other product analytics tools.
 
-To give you a sense of what's possible with SQL, here's an example query we use to summarize data from our from [our 404 page](/hedgehogsgalore) and display which countries prefer their pizzas with pineapple on them.
+To give you a sense of what's possible with SQL, here's an example query we use to summarize data from a survey we ran to determine which countries prefer pineapple on a pizza.
 
 ```
    select properties.$geoip_country_name,
@@ -114,7 +114,7 @@ You can add tables directly by hitting the new 'Open as a new insight' button (a
 
 We originally started thinking about HogQL back in January, while thinking about [a concept for universal search within PostHog](https://github.com/PostHog/posthog/issues/7963). Over time, that plan evolved into creating [new ways for users to explore data](https://github.com/PostHog/meta/issues/86) via direct queries. We wanted users to be able to run formulas powered by HogQL in what was then called the Live Events view, but is now the Event Explorer. 
 
-However, while this work was underway we realized we could potentially take it a step further and [build full SQL support](https://github.com/PostHog/meta/issues/86) directly into PostHog as a new insight type. You'd simply write a new SQL query in PostHog, press 'Run' and get a table with your desired results. 
+However, while this work was underway we realized we could potentially take it a step further and [build full SQL support](https://github.com/PostHog/meta/issues/81) directly into PostHog as a new insight type. You'd simply write a new SQL query in PostHog, press 'Run' and get a table with your desired results. 
 
 We're still actively developing these ideas, as well as the implementation of HogQL within PostHog. If you have any feedback, we'd love to here from you in [the PostHog Slack group](/slack).
 
