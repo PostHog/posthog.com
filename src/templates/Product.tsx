@@ -155,7 +155,7 @@ export default function Product({ data, location, pageContext }) {
         Close,
         Comparison: (props: any) => (
             <div id="comparisons">
-                <Comparison {...props} description={`How does PostHog ${title} compare?`} />
+                <Comparison {...props} description={`How does PostHog compare?`} />
             </div>
         ),
         BlogPosts: (props: any) => (

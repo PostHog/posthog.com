@@ -26,8 +26,8 @@ export const SectionHeading = ({ title, subtitle }: ISectionHeading) => {
 
 export const SectionWrapper = ({ children, className = '' }: ISectionWrapper) => {
     return (
-        <section className={`list-none my-1 py-4 md:py-12 ${className}`}>
-            <div className={`max-w-7xl mx-auto`}>{children}</div>
+        <section className={`list-none my-1 py-4 md:py-6 ${className}`}>
+            <div className={`max-w-screen-2xl mx-auto`}>{children}</div>
         </section>
     )
 }
