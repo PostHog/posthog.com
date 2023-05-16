@@ -367,6 +367,6 @@ SOME KIND OF CONCLUSION
 
 [^1]: Of course, there are exceptions – a fundamental shift in technology may unlock the ability to solve problems that were previously unsolved – but it means you are a solution looking for a problem, and that hardly ever works.
 
- [^2]: Speaking as a founder, I'm always happy to help early-stage founders validate their problems, but I probably won't take your call if I sense you're trying to sell to me unless I already know you well.
+[^2]: Speaking as a founder, I'm always happy to help early-stage founders validate their problems, but I probably won't take your call if I sense you're trying to sell to me unless I already know you well.
  
- [^3]: We also saw instances where companies debated pivoting for several weeks – if you have tried everything in the list above, and are questioning yourself constantly, then you probably should have pivoted already.
+[^3]: We also saw instances where companies debated pivoting for several weeks – if you have tried everything in the list above, and are questioning yourself constantly, then you probably should have pivoted already.
