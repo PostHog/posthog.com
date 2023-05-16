@@ -599,7 +599,7 @@ This difference is ultimately reflected in many of the features both platforms o
 
 Hotjar has a complex pricing structure: There are three different plans: Observe, Ask, and Engage. Each plan consists of four tiers: Basic, Plus, Business and Scale. Each plan offers discounts for annual subscriptions.
 
-Not all features are available on every tier and plan. Below is a breakdown of which features are avaiable on each plan, as well as their cost:
+Not all features are available on every tier and plan. Below is a breakdown of which features are available on each plan, as well as their cost:
 
 #### Hotjar Observe features and pricing
 
