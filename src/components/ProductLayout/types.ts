@@ -98,6 +98,13 @@ export interface ISection {
     sections?: ISection[]
     imageFrame?: boolean
     className?: string
+    callout?: {
+        content: string
+        cta: {
+            label: string
+            url: string
+        }
+    }
 }
 
 export interface ISectionHeading {

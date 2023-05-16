@@ -4,6 +4,8 @@ import { ISection, ISectionHeading, ISectionWrapper } from './types'
 import { FeatureList } from './Feature'
 import TwoCol from './TwoCol'
 import slugify from 'slugify'
+import { CallToAction } from 'components/CallToAction'
+import { LightBulbIcon } from '@heroicons/react/outline'
 
 export const SectionHeading = ({ title, subtitle }: ISectionHeading) => {
     return (
@@ -67,6 +69,7 @@ export default function Section({
     sections,
     imageFrame = true,
     className = '',
+    callout,
 }: ISection) {
     const gatsbImage = image && getImage(image)
     return (
@@ -91,6 +94,19 @@ export default function Section({
                 ) : (
                     <Section {...sections[0]} />
                 ))}
+            {callout && (
+                <div className="p-5 border border-dashed border-gray-accent-light rounded-md mt-4 inline-block">
+                    <div className="flex space-x-2 items-start">
+                        <LightBulbIcon className="w-6 flex-shrink-0" />
+                        <div>
+                            <div dangerouslySetInnerHTML={{ __html: callout.content }} />
+                            <CallToAction size="sm" type="secondary" to={callout.cta.url}>
+                                {callout.cta.label}
+                            </CallToAction>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
