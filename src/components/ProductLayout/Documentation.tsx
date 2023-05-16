@@ -3,55 +3,92 @@ import GithubSlugger from 'github-slugger'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import { IDocumentation } from './types'
+import { StaticImage } from 'gatsby-plugin-image'
+import { LinkGrid } from 'components/Docs/LinkGrid'
 
+export const quickLinks = [
+    {
+        icon: 'Trends',
+        name: 'Graphs & trends',
+        to: '/docs/product-analytics/trends',
+    },
+    {
+        icon: 'Funnels',
+        name: 'Funnels',
+        to: '/docs/product-analytics/funnels',
+    },
+    {
+        icon: 'PathAnalysis',
+        name: 'User paths',
+        to: '/docs/product-analytics/paths',
+    },
+    {
+        icon: 'Dashboards',
+        name: 'Dashboards',
+        to: '/docs/product-analytics/dashboards',
+    },
+    {
+        icon: 'Retention',
+        name: 'Retention',
+        to: '/docs/product-analytics/retention',
+    },
+    {
+        icon: 'Stickiness',
+        name: 'Stickiness',
+        to: '/docs/product-analytics/stickiness',
+    },
+    {
+        icon: 'Lifecycle',
+        name: 'Lifecycle',
+        to: '/docs/product-analytics/lifecycle',
+    },
+    {
+        icon: 'CorrelationAnalysis',
+        name: 'Correlation analysis',
+        to: '/docs/product-analytics/correlation',
+    },
+    {
+        icon: 'GroupAnalytics',
+        name: 'Groups',
+        to: '/docs/product-analytics/group-analytics',
+    },
+    {
+        icon: 'Toolbar',
+        name: 'Toolbar',
+        to: '/docs/product-analytics/toolbar',
+    },
+    {
+        icon: 'Sampling',
+        name: 'Sampling',
+        to: '/docs/product-analytics/sampling',
+    },
+]
 export default function Documentation({ documentation, title }: IDocumentation) {
     const slugger = new GithubSlugger()
     return (
-        <div id="documentation" className="max-w-2xl mx-auto">
-            <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-light flex justify-between items-end">
-                <h2 className="m-0">Docs & resources</h2>
+        <div id="documentation" className="max-w-screen-2xl mx-auto">
+            <div>
+                <StaticImage
+                    alt=""
+                    placeholder="none"
+                    quality={100}
+                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                />
+                <h1 className="text-4xl mb-2 mt-6">{title}</h1>
+                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+                    Learn how to use product analytics to understand your users.
+                </h3>
+
                 <CallToAction size="sm" type="secondary" to={documentation?.indexURL}>
                     Visit docs
                 </CallToAction>
-            </div>
-            <div>
-                <h4 className="m-0 opacity-60">{title} docs</h4>
-                <ul className="m-0 p-0 grid list-none divide-y-1 divide-dashed divide-gray-accent-light">
-                    {documentation?.pages?.map(({ frontmatter, fields, headings }: any, index: number) => {
-                        const slug = fields?.slug
-                        return (
-                            <li key={slug} className="py-4 flex space-x-4">
-                                <span className="font-bold text-sm opacity-60 mt-1.5 ml-1.5">{index + 1}.</span>
-                                <div className="w-full">
-                                    <Link
-                                        to={slug}
-                                        className="block font-semibold text-sm px-2 py-1 -ml-2 rounded-sm relative  hover:bg-gray-accent-light hover:text-red hover:scale-[1.01] active:scale-[1] active:top-[.5px]"
-                                    >
-                                        <h5 className="text-[17px] m-0">{frontmatter.title}</h5>
-                                    </Link>
-                                    <ul className="m-0 p-0 list-none">
-                                        {headings
-                                            .filter(({ depth }: any) => depth <= 3)
-                                            .slice(0, 3)
-                                            .map(({ value }: any) => {
-                                                const id = slugger.slug(value)
-                                                return (
-                                                    <li key={id} className="">
-                                                        <Link
-                                                            to={`${slug}#${id}`}
-                                                            className="block text-primary/75 font-semibold text-sm px-2 py-1 -ml-2 rounded-[3px] relative hover:bg-gray-accent-light hover:text-primary hover:scale-[1.01] active:scale-[1] active:top-[.5px]"
-                                                        >
-                                                            {value}
-                                                        </Link>
-                                                    </li>
-                                                )
-                                            })}
-                                    </ul>
-                                </div>
-                            </li>
-                        )
-                    })}
-                </ul>
+
+                {/* Quick links */}
+                <section className="my-12">
+                    <h3 className="mb-3 mt-0">Chapters</h3>
+                    <LinkGrid links={quickLinks} />
+                </section>
             </div>
         </div>
     )
