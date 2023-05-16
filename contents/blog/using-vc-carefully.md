@@ -76,7 +76,7 @@ We quickly set the goal of '5 reference customers' for the entire organization. 
 There were three surprising lessons we had during this phase:
 
 1 - charging customers for a product led to more usage. Early paying customers were more demanding of quality. When we fixed quality issues, our free _and_ paid products both accelerated
-2 - how imoportant it is to track your anti-Ideal Customer Profile. Don't just monitor deals that close, but track those that are dragging on - what do they have in common?
+2 - how important it is to track your anti-Ideal Customer Profile. Don't just monitor deals that close, but track those that are dragging on - what do they have in common?
 3 - how quickly we went from getting the first 5 paying customers, to 100.
 
 ## We have Product Market Fit, time to raise more money?
