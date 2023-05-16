@@ -5,6 +5,7 @@ import Spinner from 'components/Spinner'
 import Markdown from './Markdown'
 import slugify from 'slugify'
 import { Edit } from 'components/Icons'
+import Tooltip from 'components/Tooltip'
 
 const buttons = [
     {
@@ -18,6 +19,7 @@ const buttons = [
                 />
             </svg>
         ),
+        tooltipContent: 'Bold',
     },
     {
         cursor: -1,
@@ -30,6 +32,7 @@ const buttons = [
                 />
             </svg>
         ),
+        tooltipContent: 'Italic',
     },
     {
         cursor: -4,
@@ -46,6 +49,7 @@ const buttons = [
                 />
             </svg>
         ),
+        tooltipContent: 'Code',
     },
     {
         cursor: -1,
@@ -69,6 +73,7 @@ const buttons = [
                 </defs>
             </svg>
         ),
+        tooltipContent: 'Link',
     },
 ]
 
@@ -199,78 +204,86 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                     {buttons.map((button, index) => {
                         return (
                             <li key={index}>
-                                <button
-                                    className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75"
-                                    onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
-                                >
-                                    {button.icon}
-                                </button>
+                                <Tooltip content={button.tooltipContent}>
+                                    <button
+                                        className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
+                                        onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
+                                    >
+                                        {button.icon}
+                                    </button>
+                                </Tooltip>
                             </li>
                         )
                     })}
                     <li>
-                        <button
-                            className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                open()
-                            }}
-                        >
-                            <svg className="w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 14">
-                                <path
-                                    d="M12 5.714a1.715 1.715 0 1 0 0-3.43 1.715 1.715 0 0 0 0 3.43Z"
-                                    fill="currentColor"
-                                />
-                                <path
-                                    d="M15 0H1C.443 0 0 .454 0 1.01v11.694c0 .557.443 1.01 1 1.01h14c.557 0 1-.453 1-1.01V1.01C16 .454 15.557 0 15 0Zm-3.682 7.06a.614.614 0 0 0-.457-.22c-.183 0-.311.085-.458.203l-.667.564c-.14.1-.25.168-.411.168a.59.59 0 0 1-.393-.146 4.668 4.668 0 0 1-.154-.147L6.857 5.404a.788.788 0 0 0-.596-.268c-.24 0-.461.118-.6.278l-4.518 5.45V1.561a.47.47 0 0 1 .468-.418h12.775c.246 0 .446.182.46.428l.011 9.3-3.54-3.81Z"
-                                    fill="currentColor"
-                                />
-                            </svg>
-                        </button>
+                        <Tooltip content="Image">
+                            <button
+                                className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    open()
+                                }}
+                            >
+                                <svg className="w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 14">
+                                    <path
+                                        d="M12 5.714a1.715 1.715 0 1 0 0-3.43 1.715 1.715 0 0 0 0 3.43Z"
+                                        fill="currentColor"
+                                    />
+                                    <path
+                                        d="M15 0H1C.443 0 0 .454 0 1.01v11.694c0 .557.443 1.01 1 1.01h14c.557 0 1-.453 1-1.01V1.01C16 .454 15.557 0 15 0Zm-3.682 7.06a.614.614 0 0 0-.457-.22c-.183 0-.311.085-.458.203l-.667.564c-.14.1-.25.168-.411.168a.59.59 0 0 1-.393-.146 4.668 4.668 0 0 1-.154-.147L6.857 5.404a.788.788 0 0 0-.596-.268c-.24 0-.461.118-.6.278l-4.518 5.45V1.561a.47.47 0 0 1 .468-.418h12.775c.246 0 .446.182.46.428l.011 9.3-3.54-3.81Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                            </button>
+                        </Tooltip>
                     </li>
                     <li className="!ml-auto">
-                        <button
-                            onClick={() => setShowPreview(false)}
-                            type="button"
-                            className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 ${
-                                showPreview
-                                    ? ''
-                                    : 'bg-black/[.15] text-black/75 dark:bg-primary-dark/[.15] dark:text-primary-dark/75'
-                            }`}
-                        >
-                            <Edit />
-                        </button>
+                        <Tooltip content="Edit">
+                            <button
+                                onClick={() => setShowPreview(false)}
+                                type="button"
+                                className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
+                                    showPreview
+                                        ? ''
+                                        : 'bg-black/[.15] text-black/75 dark:bg-primary-dark/[.15] dark:text-primary-dark/75'
+                                }`}
+                            >
+                                <Edit />
+                            </button>
+                        </Tooltip>
                     </li>
                     <li>
-                        <button
-                            onClick={() => setShowPreview(true)}
-                            type="button"
-                            className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 ${
-                                showPreview
-                                    ? 'bg-black/[.15] text-black/75 dark:bg-primary-dark/[.15] dark:text-primary-dark/75'
-                                    : ''
-                            }`}
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-5 h-5"
+                        <Tooltip content="Preview">
+                            <button
+                                onClick={() => setShowPreview(true)}
+                                type="button"
+                                className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
+                                    showPreview
+                                        ? 'bg-black/[.15] text-black/75 dark:bg-primary-dark/[.15] dark:text-primary-dark/75'
+                                        : ''
+                                }`}
                             >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
-                                />
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                />
-                            </svg>
-                        </button>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-5 h-5"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                                    />
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                </svg>
+                            </button>
+                        </Tooltip>
                     </li>
                 </ul>
             </div>
