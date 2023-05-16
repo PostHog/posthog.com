@@ -1,5 +1,5 @@
 ---
-date: 2022-06-30
+date: 2023-05-16
 title: VC is a tool, not a religion
 rootPage: /blog
 sidebar: Blog
@@ -61,7 +61,7 @@ We figured it was an existential problem not to have revenue, and that it'd be e
 
 I couldn't be more glad that's what we picked. Results:
 
-<INSERT REVENUE GROWTH>
+![A graph showing revenue over time for PostHog - it climbs exponentially](../images/blog/vc-as-tool/revenue.jpg)
 
 ## How to start focusing on revenue in the first place
 
