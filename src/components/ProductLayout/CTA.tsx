@@ -14,9 +14,11 @@ export default function CTA({ title, subtitle, image, mainCTA, pricingCTA }: ICT
                     <p className="m-0 mb-6">{subtitle}</p>
                     <div className="flex space-x-2 items-center">
                         <CallToAction to={mainCTA.url}>{mainCTA.title}</CallToAction>
-                        <CallToAction type="secondary" to={pricingCTA.url}>
-                            {pricingCTA.title}
-                        </CallToAction>
+                        {pricingCTA && (
+                            <CallToAction type="secondary" to={pricingCTA.url}>
+                                {pricingCTA.title}
+                            </CallToAction>
+                        )}
                     </div>
                 </div>
                 {gatsbyImage && (

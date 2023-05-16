@@ -39,16 +39,18 @@ export default function HeroCondensed({
                     {/* <p className="font-medium text-black/70 m-0 mt-1 p-0" dangerouslySetInnerHTML={{ __html: subtitle }} /> */}
                 </div>
 
-                {pricingCTA && mainCTA && (
-                    <div className="flex-[0_0_auto] flex space-x-4 items-center">
+                <div className="flex-[0_0_auto] flex space-x-4 items-center">
+                    {mainCTA && (
                         <CallToAction to={mainCTA.url} size="sm" className="">
                             {mainCTA.title}
                         </CallToAction>
+                    )}
+                    {pricingCTA && (
                         <CallToAction type="secondary" to={pricingCTA.url} size="sm" className="">
                             {pricingCTA.title}
                         </CallToAction>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         </div>
     )
