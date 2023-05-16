@@ -4,17 +4,19 @@ import { IComparison } from './types'
 
 export default function Comparison({ description, children }: IComparison) {
     return (
-        <div id="comparison" className="max-w-5xl mx-auto">
+        <div id="comparison" className="max-w-screen-2xl mx-auto">
             <div className="flex justify-between items-end">
                 <div>
                     <h2 className="m-0">PostHog vs...</h2>
-                    <p className="m-0">{description}</p>
+                    {/*<p className="m-0">{description}</p>*/}
                 </div>
                 <div>
+                    {/*
                     <StaticImage className="max-w-[530px]" alt="PostHog vs..." src="./images/vs.png" />
+                    */}
                 </div>
             </div>
-            <div className="overflow-x-auto article-content mt-12">{children}</div>
+            <div className="overflow-x-auto article-content mt-0">{children}</div>
         </div>
     )
 }
