@@ -19,6 +19,27 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap). We also [welcome your feedback](http://app.posthog.com/home#supportModal) on all new features! 
 
+## May 19, 2023
+
+#### Infinite scrolling for session replays
+![infinite scrolling in posthog](../images/blog/array/infinite_posthog.mp4)
+
+We've had an autoplay function in session replays for a while, but it's always had room for improvement. The biggest problem was that we sorted replays into lists, which interfered with autoplay in predictable fashion. 
+
+You'll notice we're using the past tense here, because we've now enabled infinite scrolling for replays - meaning autoplay will now autoload more replays if needed. 
+
+#### Bugfixes galore
+It's been a heavy week of bugfixes and backend work, so here are some of the highlights just so you know we've not been resting on our laurels:
+
+- Yakko [fixed some typos](https://github.com/PostHog/posthog/pull/15550) in our plugin server metric code
+- Paul [upgraded Celery](https://github.com/PostHog/posthog/pull/15540) to a newer, better version
+- Paul also [added a delay to S3 flushing](https://github.com/PostHog/posthog/pull/15470), to avoid overlaps
+- Neil [fixed some Sentry issues](https://github.com/PostHog/posthog/pull/15450) arising from cohorts and breakdowns
+
+Want to keep a close eye on every PR we file? [Check the PostHog repo](https://github.com/PostHog/posthog)!
+
+#### 
+
 ## May 12, 2023
 
 #### Idle session detection
