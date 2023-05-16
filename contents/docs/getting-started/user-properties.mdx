@@ -51,6 +51,8 @@ posthog.capture(
     }
 ```
 
+User property values can be strings, booleans, numbers, objects, or arrays. Note that for objects and arrays, you'll need to use the [Property Flattener app](apps/property-flattener) in order to flatten nested properties and make them accessible through filters in the PostHog app.
+
 ## When to use `set` and `set_once`?
 
 Use `set` when we want the value to be the most recently sent value. For example, to update the email for a user.
