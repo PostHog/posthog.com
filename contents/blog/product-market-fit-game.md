@@ -107,7 +107,7 @@ Yet, despite all this, there's only so much you can validate in this way.
 
 You will get the clearest lessons from seeing if people _actually_ use, return to and pay for, your product – hence the need to move onto the next level. Do not lose too much time to validation in advance. This should be a quick, intense period – a weeks-not-months exercise.
 
-In the early days of PostHog, we found it helpful to have Tim (my co-founder) coding constantly, while I spent most of my time getting feedback. We were willing to throw away all our work. And we did, through six pivots. Having one of us constantly building meant we could validate clearly by seeing if the most excited users would use our products, much faster.
+In the early days of PostHog, we found it helpful to have Tim (my co-founder) coding constantly, while I spent most of my time getting feedback. We were willing to throw away all our work. And we did, through six pivots. This approach allowed us to validate/invalidate our ideas much faster.
 
 If there's an obvious desire from the user to see if you can solve their problem, be ultra-accessible to these early potential users. People's emails are filled with junk, and they feel weirdly formal. Instead, add your customer to a WhatsApp group, or in a private Slack/Discord channel – whatever channel _they_ prefer. This communication will be critical throughout the rest of the levels.
 
@@ -127,7 +127,7 @@ Work your way from top to bottom:
 
 * **The problem you want to solve isn't there.** Pivot. Find a new problem to solve.
 
-### Level 3 - Get users to use your product
+### Level 3 - Validate your MVP by recruiting real users
 
 //TODO: Level 3 image here
 
