@@ -36,11 +36,23 @@ The following keys are used to manage Startup prices:
 * `move_to_price_id` -> Can be used to specify if the customer needs to be moved to a specific pricing, rather than the default one, at the end of the subscription period.
 
 
-### Custom pricing 
+### Working with pricing
 
 Each Product has multiple prices that can be used in a subscription. Which price is default depends on the billing config file.
 The `default` price in Stripe does not affect the actual default price for a product. This is instead defined in the billing config.
 In general, if coming from the UI, a customer will subscribe to certain prices depending on the config. There are special prices named `Free` which can be used to give a product for free. These can be added manually and are typically used for Enterprisey customers who pay a flat fee up-front and $0 for the actual usage (which we still want to track but not charge for).
+
+#### Types of billing plans we support
+We generally support the following types of billing plans:
+
+- Standard metered
+  - This includes usage-based and metered, even if it has custom price tiers or is a special program like the Startup program.
+- Metered, but with discount coupon
+- Flat first tier, metered after
+- Up-front payment, $0 first tier, metered after
+- Flat up-front, no metering (renegotiate contract if they go over)
+
+If at all possible, it's best to stay with these types of billing plans because we already support them, and adding extra stuff will increase complexity. If you do need to add a different type of billing plan, chat with the growth team before agreeing to anything with a customer to make sure it's possible!
 
 #### Coupons and Discounts
 As much as possible the existing prices should be used in combination with `Coupons` to offer custom deals to customers. Coupons are applied to the _Customer_ in Stripe, not to the customer's subscription. 
