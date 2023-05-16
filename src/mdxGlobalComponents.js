@@ -1,4 +1,4 @@
-// AUTO GENERATED FILE 
+// AUTO GENERATED FILE
 
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
@@ -6,6 +6,7 @@ import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { CompensationCalculator } from './components/CompensationCalculator'
+import { ContentViewer } from './components/ContentViewer'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
@@ -20,22 +21,23 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { TracksCTA } from './components/TracksCTA'
 
 export const shortcodes = {
-	ArrayCTA,
-	BasicHedgehogImage,
-	BorderWrapper,
-	CallToAction,
-	Caption,
-	CompensationCalculator,
-	FeatureAvailability,
-	GDPRForm,
-	HiddenSection,
-	LPCTA,
-	NewsletterTutorial,
-	OverflowXSection,
-	Quote,
-	ProductLayout,
-	Quote2,
-	Squeak,
-	StarRepoButton,
-	TracksCTA
+    ArrayCTA,
+    BasicHedgehogImage,
+    BorderWrapper,
+    CallToAction,
+    Caption,
+    CompensationCalculator,
+    ContentViewer,
+    FeatureAvailability,
+    GDPRForm,
+    HiddenSection,
+    LPCTA,
+    NewsletterTutorial,
+    OverflowXSection,
+    Quote,
+    ProductLayout,
+    Quote2,
+    Squeak,
+    StarRepoButton,
+    TracksCTA,
 }

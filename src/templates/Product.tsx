@@ -23,6 +23,7 @@ import { Platform } from 'components/NotProductIcons'
 import Tutorials from 'components/ProductLayout/Tutorials'
 import { PlanComparison } from 'components/Pricing/PlanComparison'
 import Questions from 'components/ProductLayout/Questions'
+import Customers from 'components/ProductLayout/Customers'
 
 const Check = (props: any) => <CheckIcon {...props} className="w-5 mx-auto" />
 const Close = (props: any) => <CloseIcon {...props} className="w-5 mx-auto" />
@@ -36,6 +37,7 @@ const menu: IMenu[] = [
             { name: 'Features', url: '/product-analytics/features' },
             { name: 'Pricing', url: '/product-analytics/pricing' },
             { name: 'Comparisons', url: '/product-analytics/comparisons' },
+            { name: 'Customers', url: '/product-analytics/customers' },
             { name: 'Docs', url: '/product-analytics/documentation' },
             { name: 'Tutorials', url: '/product-analytics/tutorials' },
             { name: 'Roadmap', url: '/product-analytics/roadmap' },
@@ -98,7 +100,7 @@ const menu: IMenu[] = [
 ]
 
 export default function Product({ data, location, pageContext }) {
-    const { pageData, blogPosts, documentation, tutorials } = data
+    const { pageData, blogPosts, documentation, tutorials, customers } = data
     const {
         body,
         excerpt,
@@ -205,6 +207,7 @@ export default function Product({ data, location, pageContext }) {
             </div>
         ),
         Questions,
+        Customers: (props: any) => <Customers {...props} customers={customers?.nodes} />,
     }
 
     return (
@@ -232,7 +235,13 @@ export default function Product({ data, location, pageContext }) {
 }
 
 export const query = graphql`
-    query Product($id: String!, $blogTags: [String!]!, $tutorialTags: [String!]!, $documentationURLs: [String!]!) {
+    query Product(
+        $id: String!
+        $blogTags: [String!]!
+        $tutorialTags: [String!]!
+        $documentationURLs: [String!]!
+        $customerURLs: [String!]!
+    ) {
         pageData: mdx(id: { eq: $id }) {
             body
             excerpt(pruneLength: 150)
@@ -359,6 +368,20 @@ export const query = graphql`
                     depth
                     value
                 }
+            }
+        }
+        customers: allMdx(filter: { fields: { slug: { in: $customerURLs } } }) {
+            nodes {
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                    logo {
+                        publicURL
+                    }
+                }
+                body
             }
         }
     }
