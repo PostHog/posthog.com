@@ -24,7 +24,7 @@ import {
     Toolbar,
 } from 'components/ProductIcons'
 
-import { Billing, Deploy, Migrate, More, SparksJoy } from 'components/NotProductIcons'
+import { Billing, Deploy, Migrate, Megaphone, More, SparksJoy } from 'components/NotProductIcons'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
@@ -54,6 +54,7 @@ export const topicIcons = {
     'product analytics': Analytics,
     'session replay': SessionRecording,
     'sparks joy': SparksJoy,
+    spotlight: Megaphone,
     trends: Trends,
     toolbar: Toolbar,
     uncategorized: More,

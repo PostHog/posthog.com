@@ -332,6 +332,29 @@ export const Mask = ({ className = '', ...other }: { className?: string }): JSX.
     </svg>
 )
 
+export const Megaphone = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        className={`fill-current ${className}`}
+        {...other}
+    >
+        <g clipPath="url(#a)">
+            <path
+                fill="#000"
+                d="m15.049 2.228 5.399 9.351a1.587 1.587 0 1 1-2.75 1.588l-5.4-9.351a1.588 1.588 0 1 1 2.75-1.588Zm1.523 11.53-2.608.586a2.538 2.538 0 0 1-.973 3.374l-.55.318.952 1.65a1.906 1.906 0 0 1-3.3 1.905l-3.176-5.5-1.1.635a2.541 2.541 0 0 1-2.54-4.4l1.572-.909 6.375-6.922 5.348 9.263Zm-3.896.874-1.948.438 1.077 1.866.55-.318a1.272 1.272 0 0 0 .465-1.735l-.144-.25Z"
+            />
+        </g>
+        <defs>
+            <clipPath id="a">
+                <path fill="#fff" d="M0 0h24v24H0z" />
+            </clipPath>
+        </defs>
+    </svg>
+)
+
 export const More = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"
