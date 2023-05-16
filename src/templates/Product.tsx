@@ -304,6 +304,13 @@ export const query = graphql`
                     subtitle
                     content
                     align
+                    callout {
+                        content
+                        cta {
+                            label
+                            url
+                        }
+                    }
                     sections {
                         features {
                             title

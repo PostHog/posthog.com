@@ -8,7 +8,9 @@ export default function HeroCondensed({
     image,
     mainCTA,
     pricingCTA,
+    sticky = true,
 }: {
+    sticky?: boolean
     title: string
     subtitle: string
     image: {
@@ -28,7 +30,7 @@ export default function HeroCondensed({
     const gatsbyImage = image?.image && getImage(image?.image)
     const imageStyles = { maxWidth: image?.width || '56rem', maxHeight: image?.height || 'auto' }
     return (
-        <div className="mb-6 sticky -top-4">
+        <div className={`mb-6 ${sticky ? 'sticky top-0 bg-tan py-2 z-20' : ''}`}>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 sm:items-center w-full">
                 <div className="flex-1">
                     <h1 id="overview" className="text-red text-2xl sm:text-xl xl:text-2xl my-2 md:mt-0">
