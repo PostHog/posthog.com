@@ -21,6 +21,15 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 ## May 19, 2023
 
+#### NPS score collector
+![nps score collector](../images/blog/array/nps_posthog.mp4)
+
+You can now use PostHog to collect [net promoter score (NPS)](https://github.com/PostHog/nps-score-app) ratings from your users. NPS is a metric for determining how satisfied your users are with your product, and how they contribute to word of mouth growth. 
+
+Interestingly, this site app wasn't built by our engineering team. It wasn't even built by an engineer. It was built by Joe, from our marketing team, who had never coded before joining PostHog. _That's_ how easy it is to create a new app or integration for PostHog. 
+
+> **Curious about how our 'everybody codes' culture works?** [Joe has written about reflected on his experience on the blog](https://posthog.com/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two). 
+
 #### Infinite scrolling for session replays
 ![infinite scrolling in posthog](../images/blog/array/infinite_posthog.mp4)
 
