@@ -25,12 +25,12 @@ Now it's time for the long answer...
 In this guide, we'll cover:
 
 - [Hotjar and PostHog feature comparison](#core-features)
-- [Session replay](#session-replays) capabilities
-- [Heatmap](#Heatmaps) capabilities
+- [Session replays](#session-replays) 
+- [Heatmaps](#heatmaps)
+- [Product analytics](#product-analytics)
 - [In-app messages and user research](#in-app-messages-and-user-research)
 - [Apps and integrations](#apps-and-integrations)
-- [Privacy, compliance, and security](#privacy-compliance-and-security)
-- [Frequently asked questions](#frequently-asked-questions)
+- [Pricing](#how-much-does-hotjar-cost)
 
 ## How is PostHog different?
 
@@ -66,31 +66,31 @@ Because we build for engineers first, we're also open source. You can check out 
             <td><strong>Session replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch real users use your product</td>
+            <td>Watch real users use your product.</td>
         </tr>
         <tr>
             <td><strong>Heatmaps</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Visualize where users click in your app or website</td>
+            <td>Visualize where users click in your app or website.</td>
         </tr>
         <tr>
             <td><strong>Product analytics</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track events and conversion; analyze user behavior</td>
+            <td>Track events and conversion; analyze user behavior.</td>
         </tr>
         <tr>
             <td><strong>Feature flags</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Roll out features safely; toggle features for cohorts or individuals</td>
+            <td>Roll out features safely; toggle features for cohorts or individuals.</td>
         </tr>
         <tr>
             <td><strong>A/B testing</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Test changes and analyze impact</td>
+            <td>Test changes and analyze impact.</td>
         </tr>
         <tr>
             <td><strong>Feedback widgets</strong></td>
@@ -102,7 +102,7 @@ Because we build for engineers first, we're also open source. You can check out 
             <td><strong>In-app prompts and messages</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send messages to users in your app</td>
+            <td>Send messages to users in your app.</td>
         </tr>
         <tr>
             <td><strong>Surveys</strong></td>
@@ -117,10 +117,10 @@ Because we build for engineers first, we're also open source. You can check out 
             <td>In-app widget for requesting customer interviews.</td>
         </tr>
         <tr>
-            <td><strong>User research tooling</strong></td>
+            <td><strong>User interview recordings and transcriptions</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Integrated tools to assist you in research sessions.</td>
+            <td></td>
         </tr>
         <tr>
             <td><strong>Apps</strong></td>
@@ -137,10 +137,15 @@ Because we build for engineers first, we're also open source. You can check out 
 - **Feature flags:** PostHog includes [multivariate feature flags](/feature-flags) that support JSON payloads. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
 
 - **A/B testing:** In PostHog, you can use the [experimentation suite](/ab-testing) to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events, and deploy a final version.
-- 
+
+
 ### Session replays
 
-Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Hotjar and PostHog offer session replays:
+Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. 
+
+> Learn [how Contra used session replays](/customers/contra) to increase registrations by 30%. 
+
+Both Hotjar and PostHog offer session replays:
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -156,19 +161,13 @@ Session replays are an essential tool for understanding how people use your prod
         <tr>
             <td><strong>Free recording allowance</strong></td>
             <td className="text-center">~1k per month (max 35 per day) on Basic plan</td>
-            <td className="text-center">15k per month</td>
+            <td className="text-center">15k per month.</td>
             <td></td>
         </tr>
         <tr>
             <td><strong>Price for first 50k sessions</strong></td>
             <td className="text-center">~$200 per month (max 1.5k sessions per day)</td>
-            <td className="text-center">$175 per month</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong>Price for first 50k sessions</strong></td>
-            <td className="text-center">~$200 per month (max 1.5k sessions per day)</td>
-            <td className="text-center">$175 per month</td>
+            <td className="text-center">$175 per month.</td>
             <td></td>
         </tr>
         <tr>
@@ -179,7 +178,7 @@ Session replays are an essential tool for understanding how people use your prod
         </tr>
         <tr>
             <td><strong>Connected to product analytics</strong></td>
-            <td className="text-center">Requires additional integration</td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>View replays for specific users and events.</td>
         </tr>
@@ -280,9 +279,97 @@ Heatmaps visualize user activity in your app. They use colors or numbers to show
 </table>
 </div>
 
+### Product analytics
+
+Although product analytics is not a core focus for Hotjar, they do offer basic features, such as event tracking, funnels, and trend insights. However, these are **only available on Hotjar's Observe Scale plan**, and their offering is more limited than PostHog's:
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+			<td className="w-3/12"></td>
+            <td><strong>Hotjar</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Event tracking</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Log page views, clicks and other custom events.</td>
+        </tr>
+        <tr>
+            <td><strong>Trends</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track your data over time and visualize in charts.</td>
+        </tr>
+        <tr>
+            <td><strong>Funnels</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Visualize conversion rates and drop-offs.</td>
+        </tr>
+        <tr>
+            <td><strong>Dashboards</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Display a collection of insights and trends.</td>
+        </tr>
+        <tr>
+            <td><strong>Correlation analysis</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Automatically highlight factors affecting funnel conversion rates.</td>
+        </tr>
+        <tr>
+            <td><strong>Group analytics</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Group events by users in the same company, project, or any other attribute.</td>
+        </tr>
+        <tr>
+            <td><strong>Lifecycle insights</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Break down events from new, returning, resurrecting, and dormant users.</td>
+        </tr>
+        <tr>
+            <td><strong>Retention insights</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Understand churn with returning user actions.</td>
+        </tr>
+       <tr>
+            <td><strong>Stickiness insights</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>See how many times users perform an event in a period of time.</td>
+        </tr>
+         <tr>
+            <td><strong>Path insights</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Inspect how users journey through your product.</td>
+        </tr>
+        <tr>
+            <td><strong>Toolbar</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>View insights on your live website or app with an overlay.</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+
 ### In-app messages and user research
 
-Hotjar includes feedback widgets, surveys, and an integrated user research tool for gathering feedback from users. PostHog also supports [feedback widgets](/apps/feedback-widget) and [user research scheduling](/apps/user-interviews), although not surveys.
+Hotjar includes feedback widgets, surveys, and an integrated user research tool for gathering feedback from users. PostHog also supports [feedback widgets](/apps/feedback-widget) and [user research scheduling](/apps/user-interviews), although not surveys. 
+
+> Note that because PostHog is entirely open source, it's possible for users to build their own user surveys if needed. Our guide on [building your own apps](https://posthog.com/docs/apps/build) dives into more detail.
 
 PostHog also offers additional ways to communicate with your users, such as a [notification bar](/apps/notification-bar) and interactive [pop-ups](tutorials/react-popups) through the use of [feature flag payloads](/docs/feature-flags/payloads), and [site apps](/tutorials/build-site-app). Also, since PostHog provides product analytics, you can easily define your target users who should see your widgets.
 
@@ -315,7 +402,7 @@ Below, we've listed the different methods for communicating with and collecting 
         </tr>
         <tr>
             <td><strong>Custom user targeting</strong></td>
-            <td className="text-center">Requires additional integration</td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Define who should see your widgets with your own data.</td>
         </tr>
@@ -326,10 +413,10 @@ Below, we've listed the different methods for communicating with and collecting 
             <td>Capture user feedback with surveys. </td>
         </tr>
         <tr>
-            <td><strong>User research tooling</strong></td>
+            <td><strong>User interview recordings and transcriptions</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Integrated tools to assist you in research sessions.</td>
+            <td></td>
         </tr>
         <tr>
             <td><strong>Notification bar</strong></td>
@@ -368,75 +455,75 @@ Below, we've listed a few of the most popular integrations used across PostHog a
     <tbody>
         <tr>
             <td><strong>Hubspot</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span> Surveys only</td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync event and person data</td>
+            <td>Sync event and person data.</td>
         </tr>
         <tr>
             <td><strong>Salesforce</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync event and person data</td>
+            <td>Sync event and person data.</td>
         </tr>
         <tr>
             <td><strong>Zapier</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Export events for use in Zaps</td>
+            <td>Export events for use in Zaps.</td>
         </tr>
         <tr>
             <td><strong>Stripe</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync customer and invoice data</td>
+            <td>Sync customer and invoice data.</td>
         </tr>
         <tr>
             <td><strong>Slack</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive notifications about new data</td>
+            <td>Receive notifications about new data.</td>
         </tr>
         <tr>
             <td><strong>Discord</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive notifications about new data</td>
+            <td>Receive notifications about new data.</td>
         </tr>
         <tr>
             <td><strong>MS Teams</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive notifications about new data</td>
+            <td>Receive notifications about new data.</td>
         </tr>
         <tr>
             <td><strong>PagerDuty</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive customized alerts from insights</td>
+            <td>Receive customized alerts from insights.</td>
         </tr>
         <tr>
             <td><strong>Intercom</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Extract and load data to external platforms</td>
+            <td>Extract and load data to external platforms.</td>
         </tr>
         <tr>
             <td><strong>Customer.io</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync data between platforms</td>
+            <td>Sync data between platforms.</td>
         </tr>
         <tr>
             <td><strong>Sentry</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ingest Sentry errors for analysis</td>
+            <td>Ingest Sentry errors for analysis.</td>
         </tr>
         <tr>
             <td><strong>Segment</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ingest events from Segment</td>
+            <td>Ingest events from Segment.</td>
         </tr>
     </tbody>
 </table>
@@ -462,37 +549,39 @@ Regulatory compliance can be a critical need for many teams, especially if they 
             <td><strong>GDPR compliant</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>EU hosting or data residency available</td>
+            <td>EU hosting or data residency available.</td>
         </tr>
         <tr>
             <td><strong>HIPAA compliant</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Self-host only</td>
-            <td>Business Associate Agreement available</td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Business Associate Agreement available.</td>
         </tr>
         <tr>
             <td><strong>Data anonymization</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Remove personally identifiable information</td>
+            <td>Remove personally identifiable information.</td>
         </tr>
         <tr>
-            <td><strong>Self-hosting option</strong></td>
+            <td><strong>Cookie-less tracking option</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Self-host and keep complete control of your data</td>
+            <td>Use session replays and analytics without cookie consent banners</td>
         </tr>
     </tbody>
 </table>
 </div>
 
 ## Frequently asked questions
-
-  - [Who is Hotjar useful for?](#who-is-hotjar-useful-for)
-  - [Who is PostHog useful for?](#who-is-posthog-useful-for)
-  - [How much does Hotjar cost?](#how-much-does-hotjar-cost)
-  - [How much does PostHog cost?](#how-much-does-posthog-cost)
-  - [Do Hotjar and PostHog offer free trials?](#do-hotjar-and-posthog-offer-free-trials)
+- [Who is Hotjar useful for?](#who-is-hotjar-useful-for)
+- [Who is PostHog useful for?](#who-is-posthog-useful-for)
+- [How much does Hotjar cost?](#how-much-does-hotjar-cost)
+  - [Hotjar Observe features and pricing](#hotjar-observe-features-and-pricing)
+  - [Hotjar Ask features and pricing](#hotjar-ask-features-and-pricing)
+  - [Hotjar Engage features and pricing](#hotjar-engage-features-and-pricing)
+- [How much does PostHog cost?](#how-much-does-posthog-cost)
+- [Do Hotjar and PostHog offer free trials?](#do-hotjar-and-posthog-offer-free-trials)
 
 Got another question? You can [ask the PostHog team anything you want](/questions)!
 
@@ -508,13 +597,417 @@ This difference is ultimately reflected in many of the features both platforms o
 
 ### How much does Hotjar cost?
 
-Hotjar has tier-based pricing: Basic, Plus, Business and Scale. All plans offer session recordings, although the costs and limits differ. Additional features such as API access and SAML single sign-on are only available on some plans.
+Hotjar has a complex pricing structure: There are three different plans: Observe, Ask, and Engage. Each plan consists of four tiers: Basic, Plus, Business and Scale. Each plan offers discounts for annual subscriptions.
 
-Hotjar's free plan only records up to 35 daily session recordings. After this, the Plus tier offers 100 daily session recordings for $32 per month and the Business tier offers 500 daily sessions for $80 per month (with the option to pay for more sessions). Finally, the Scale tier offers 500 daily sessions for $171 per month, but offers access to additional features such as Console tracking and the Hotjar API.
+Not all features are available on every tier and plan. Below is a breakdown of which features are avaiable on each plan, as well as their cost:
+
+#### Hotjar Observe features and pricing
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 400px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>Basic</strong></td>
+            <td><strong>Plus</strong></td>
+            <td><strong>Business</strong></td>
+            <td><strong>Scale</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Price per month, paid annually</strong></td>
+            <td className="text-center">$0</td>
+            <td className="text-center">$48</td>
+            <td className="text-center">$64</td>
+            <td className="text-center">Contact sales</td>
+        </tr>
+        <tr>
+            <td><strong>Price per month, paid monthly</strong></td>
+            <td className="text-center">$0</td>
+            <td className="text-center">$59</td>
+            <td className="text-center">$79</td>
+            <td className="text-center">Contact sales</td>
+        </tr>
+        <tr>
+            <td><strong>Session replays</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Session replays limit</strong></td>
+            <td className="text-center">35/day</td>
+            <td className="text-center">100/day</td>
+            <td className="text-center">500/day (additional cost for more)</td>
+            <td className="text-center">500/day (additional cost for more)</td>
+        </tr>
+        <tr>
+            <td><strong>Heatmaps</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Identify API: track custom user attributes</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Integrations</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+                <tr>
+            <td><strong>Funnels</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Trends</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Hotjar API</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>SAML single sign-on (SSO)</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Feedback widgets</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        </tr>
+        <tr>
+            <td><strong>Surveys</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        </tr>
+        <tr>
+            <td><strong>User interview recordings and transcriptions</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+#### Hotjar Ask features and pricing
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 400px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>Basic</strong></td>
+            <td><strong>Plus</strong></td>
+            <td><strong>Business</strong></td>
+            <td><strong>Scale</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Price per month, paid annually</strong></td>
+            <td className="text-center">$0</td>
+            <td className="text-center">$32</td>
+            <td className="text-center">$80</td>
+            <td className="text-center">$171</td>
+        </tr>
+        <tr>
+            <td><strong>Price per month, paid monthly</strong></td>
+            <td className="text-center">$0</td>
+            <td className="text-center">$39</td>
+            <td className="text-center">$99</td>
+            <td className="text-center">$213</td>
+        </tr>
+        <tr>
+            <td><strong>Session replays</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Session replays limit</strong></td>
+            <td className="text-center">35/day</td>
+            <td className="text-center">35/day</td>
+            <td className="text-center">35/day</td>
+            <td className="text-center">35/day</td>
+        </tr>
+        <tr>
+            <td><strong>Heatmaps</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Identify API: track custom user attributes</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Integrations</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+                <tr>
+            <td><strong>Funnels</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Trends</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Hotjar API</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Feedback widgets</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Surveys</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Feedback/survey response limit </strong></td>
+            <td className="text-center">20/month</td>
+            <td className="text-center">250/month</td>
+            <td className="text-center">500/month (additional cost for more)</td>
+            <td className="text-center">Unlimited</td>
+        </tr>
+        <tr>
+            <td><strong>Create unlimited surveys & feedback widgets</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Events API: target survey & feedback widgets by custom user actions</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Remove Hotjar logo and branding</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>User interview recordings and transcriptions</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+#### Hotjar Engage features and pricing
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 400px;">
+    <thead>
+        <tr>
+            <td className="w-3/12"></td>
+            <td><strong>Basic</strong></td>
+            <td><strong>Plus</strong></td>
+            <td><strong>Business</strong></td>
+            <td><strong>Scale</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Price per month, paid annually</strong></td>
+            <td className="text-center">$0</td>
+            <td className="text-center">$280</td>
+            <td className="text-center">$440</td>
+            <td className="text-center">Contact sales</td>
+        </tr>
+        <tr>
+            <td><strong>Price per month, paid monthly</strong></td>
+            <td className="text-center">$0</td>
+            <td className="text-center">$350</td>
+            <td className="text-center">$550</td>
+            <td className="text-center">Contact sales</td>
+        </tr>
+        <tr>
+            <td><strong>Session replays</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Session replays limit</strong></td>
+            <td className="text-center">35/day</td>
+            <td className="text-center">35/day</td>
+            <td className="text-center">35/day</td>
+            <td className="text-center">35/day</td>
+        </tr>
+        <tr>
+            <td><strong>Heatmaps</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Identify API: track custom user attributes</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Integrations</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Funnels</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Trends</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Hotjar API</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Feedback widgets</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Surveys</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Feedback/survey response limit </strong></td>
+            <td className="text-center">20/month</td>
+            <td className="text-center">20/month</td>
+            <td className="text-center">20/month</td>
+            <td className="text-center">Unlimited</td>
+        </tr>
+        <tr>
+            <td><strong>Remove Hotjar logo and branding</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>User interview recordings and transcriptions</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
+        <tr>
+            <td><strong>Interview limit</strong></td>
+            <td className="text-center">6</td>
+            <td className="text-center">15</td>
+            <td className="text-center">30</td>
+            <td className="text-center">60</td>
+        </tr>
+        <tr>
+            <td><strong>Recruit interviewees from Hotjar participant pool</strong></td>
+            <td className="text-center">Only 1</td>
+            <td className="text-center">Up to 5</td>
+            <td className="text-center">Up to 10</td>
+            <td className="text-center">Up to 20</td>
+        </tr>
+        <tr>
+            <td><strong>Recruit interviewees from your own network</strong></td>
+            <td className="text-center">Up to 5</td>
+            <td className="text-center">Up to 10</td>
+            <td className="text-center">Up to 20</td>
+            <td className="text-center">Up to 40</td>
+        </tr>
+        <tr>
+            <td><strong>Max. interview length</strong></td>
+            <td className="text-center">30 minutes</td>
+            <td className="text-center">30 minutes</td>
+            <td className="text-center">60 minutes</td>
+            <td className="text-center">120 minutes</td>
+        </tr>
+    </tbody>
+</table>
+</div>
 
 ### How much does PostHog cost?
 
-PostHog has transparent pricing based on the usage. It’s free to get started and completely free for the first 15,000 sessions and 1 million events captured every month.
+PostHog has simple and transparent pricing based on the usage – every features is available on the Paid plan. It’s free to get started and completely free for the first 15,000 sessions and 1 million events captured every month.
 
 After this free monthly allowance you'll pay from $0.005/recording and $0.00045/event, with charges decreasing the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
 
