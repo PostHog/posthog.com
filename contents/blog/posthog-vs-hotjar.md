@@ -159,7 +159,7 @@ Both Hotjar and PostHog offer session replays:
     </thead>
     <tbody>
         <tr>
-            <td><strong>Free recording allowance</strong></td>
+            <td><strong>Free replay allowance</strong></td>
             <td className="text-center">~1k per month (max 35 per day) on Basic plan</td>
             <td className="text-center">15k per month.</td>
             <td></td>
@@ -171,10 +171,10 @@ Both Hotjar and PostHog offer session replays:
             <td></td>
         </tr>
         <tr>
-            <td><strong>Browser app recording</strong></td>
+            <td><strong>Browser app replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch real users use your product; diagnose bugs.</td>
+            <td>Watch real users use your product.</td>
         </tr>
         <tr>
             <td><strong>Connected to product analytics</strong></td>
@@ -195,13 +195,13 @@ Both Hotjar and PostHog offer session replays:
             <td>Monitor network activity and performance.</td>
         </tr>   
         <tr>
-            <td><strong>iOS app recording</strong></td>
+            <td><strong>iOS app replays</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center">Planned Q2 2023</td>
             <td>Record user sessions in iOS apps.</td>
         </tr>
         <tr>
-            <td><strong>Android app recording</strong></td>
+            <td><strong>Android app replays</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center">Planned 2023</td>
             <td>Record user sessions in Android apps.</td>
@@ -210,19 +210,19 @@ Both Hotjar and PostHog offer session replays:
             <td><strong>Custom playlists</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Create playlists of related recordings.</td>
+            <td>Create playlists of related replays.</td>
         </tr>   
         <tr>
-            <td><strong>Download recordings</strong></td>
+            <td><strong>Download replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Save recording files offline for storage.</td>
+            <td>Save replay files offline for storage.</td>
         </tr>
     </tbody>
 </table>
 </div>
 
-- **Recording retention:** Hotjar keeps all recordings for 365 days. PostHog retains all recordings for three weeks, but retains recordings saved to a playlist forever. PostHog also enables you to download recordings as a `.json` file for safe keeping.
+- **Recording retention:** Hotjar keeps all replays for 365 days. PostHog retains all replays for three weeks, but retains replays saved to a playlist forever. PostHog also enables you to download replays as a `.json` file for safe keeping.
 
 ### Heatmaps
 
@@ -603,6 +603,8 @@ Not all features are available on every tier and plan. Below is a breakdown of w
 
 #### Hotjar Observe features and pricing
 
+This plan includes the session replays and heatmaps features, but not the feedback widgets, surveys, or user research features.
+
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 400px;">
     <thead>
@@ -718,6 +720,8 @@ Not all features are available on every tier and plan. Below is a breakdown of w
 </div>
 
 #### Hotjar Ask features and pricing
+
+This plan focuses on feedback widgets and surveys features. It also includes features from the Hotjar Observe Basic plan. It does not include user research features.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 400px;">
@@ -855,6 +859,8 @@ Not all features are available on every tier and plan. Below is a breakdown of w
 </div>
 
 #### Hotjar Engage features and pricing
+
+This plan focuses on user research features. It also includes features from the Hotjar Observe Basic plan and the Hotjar Ask Basic plan.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 400px;">
@@ -1009,11 +1015,11 @@ Not all features are available on every tier and plan. Below is a breakdown of w
 
 PostHog has simple and transparent pricing based on the usage – every features is available on the Paid plan. It’s free to get started and completely free for the first 15,000 sessions and 1 million events captured every month.
 
-After this free monthly allowance you'll pay from $0.005/recording and $0.00045/event, with charges decreasing the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
+After this free monthly allowance you'll pay from $0.005/replay and $0.00045/event, with charges decreasing the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
 
 ### Do Hotjar and PostHog offer free trials?
 
-Hotjar offers a free tier, called Hotjar Basic. This version is limited in scope, supporting only 35 daily recordings and limited feature access.
+Hotjar offers a free tier, called Hotjar Basic. This version is limited in scope, supporting only 35 daily replays and limited feature access.
 
 With PostHog, it’s free to get started, and all users get their first 1 million events and 15,000 sessions for free, every month. There are no other restrictions and billing limits can be used to keep usage beneath this allowance, enabling you to use PostHog for free indefinitely.
 
