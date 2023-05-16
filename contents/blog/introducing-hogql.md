@@ -104,7 +104,7 @@ You can add tables directly by hitting the new 'Open as a new insight' button (a
 
 We originally started thinking about HogQL back in January, while thinking about [a concept for universal search within PostHog](https://github.com/PostHog/posthog/issues/7963). Over time, that plan evolved into creating [new ways for users to explore data](https://github.com/PostHog/meta/issues/86) via direct queries. We wanted users to be able to run formulas powered by HogQL in what was then called the Live Events view, but is now the Event Explorer. 
 
-However, while this work was underway we realized we could potentially take it a step further and [build full SQL support](https://github.com/PostHog/meta/issues/86) directly into PostHog as a new insight type. You'd simply write a new SQL query in PostHog, press 'Run' and get a table with your desired results. 
+However, while this work was underway we realized we could potentially take it a step further and [build full SQL support](https://github.com/PostHog/meta/issues/81) directly into PostHog as a new insight type. You'd simply write a new SQL query in PostHog, press 'Run' and get a table with your desired results. 
 
 We're still actively developing these ideas, as well as the implementation of HogQL within PostHog. If you have any feedback, we'd love to here from you in [the PostHog Slack group](/slack).
 
