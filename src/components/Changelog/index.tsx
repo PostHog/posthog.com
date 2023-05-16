@@ -31,20 +31,20 @@ const Select = ({ onChange, values }) => {
     return (
         <div className="relative">
             <Listbox onChange={onChange} defaultValue={defaultValue}>
-                <Listbox.Button className="py-2 px-4 bg-white dark:bg-gray-accent-dark rounded-md w-[180px] text-left shadow-md flex justify-between items-center font-semibold">
+                <Listbox.Button className="py-2 px-4 bg-white dark:bg-gray-accent-dark rounded-md text-left shadow-md flex justify-between items-center font-semibold text-sm">
                     {({ value }) => (
                         <>
                             <span>{value.label}</span>
-                            <Chevron className="w-2.5" />
+                            <Chevron className="w-2.5 ml-2 opacity-50" />
                         </>
                     )}
                 </Listbox.Button>
-                <Listbox.Options className="absolute w-full shadow-md bg-white dark:bg-gray-accent-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-gray-accent-light/50">
+                <Listbox.Options className="absolute min-w-full shadow-md bg-white dark:bg-gray-accent-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-gray-accent-light/50">
                     {values.map((value) => (
                         <Listbox.Option key={value.label} value={value} as={React.Fragment}>
                             {({ selected }) => (
                                 <li
-                                    className={`py-2 px-4 cursor-pointer hover:bg-gray-accent-light/40 dark:hover:bg-gray-accent-light/20 transition-colors ${
+                                    className={`py-2 px-4 text-sm cursor-pointer hover:bg-gray-accent-light/40 dark:hover:bg-gray-accent-light/20 transition-colors ${
                                         selected ? 'bg-gray-accent-light/80 dark:bg-gray-accent-light/40' : ''
                                     }`}
                                 >
@@ -149,7 +149,9 @@ export default function Changelog() {
             <section className="mb-12 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
                 <div>
                     <h1 className="m-0 text-3xl">Changelog</h1>
-                    <p className="m-0 mt-2">Here's a history of everything we've built</p>
+                    <p className="m-0 mt-2">
+                        <em>"All the updates that are fit to print"</em>
+                    </p>
                 </div>
                 <div className="flex space-x-2 items-center">
                     {Object.keys(filterOptions).map((filter) => {
