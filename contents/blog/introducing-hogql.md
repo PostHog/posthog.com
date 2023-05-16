@@ -38,7 +38,7 @@ We recommend checking the docs for a more detailed [explanation of ClickHouse SQ
 
 ## HogQL breakdowns
 ![HogQL breakdowns](../images/blog/array/hog_breakdown.mp4)
-<Caption>Using a `concat(properties.$browser, ' ', properties.$browser_version)` HogQL expression to breakdown by multiple properties</Caption>
+<Caption>Using a `properties.$browser_version` HogQL expression to breakdown results</Caption>
 
 A frequent request from teams using PostHog has been the ability to breakdown insight results across multiple properties. To accommodate this, we've added the ability to use HogQL expressions within a breakdown. 
 
@@ -51,14 +51,14 @@ In other words, you can now breakdown results however you like - including by mu
 Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple properties!
 
 ## HogQL aggregations
-![HogQL aggregations](../images/blog/array/hog_aggregation.mp4)
-<Caption></Caption>
+![HogQL aggregations](../images/blog/array/hog_aggregate.mp4)
+<Caption>Using a `properties.$session_id` HogQL expression to aggregate by unique sessions</Caption>
 
-_And_ you can use HogQL to aggregate results in a funnel too. Is there anything HogQL can't do? Probably, yes. 
+_And_ you can use HogQL to aggregate results in a funnel too. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
 
 ## SQL insights
-![PostHog SQL insights](../images/features/hogql/sql.gif)
-<Caption></Caption>
+![PostHog SQL insights](../images/features/hogql/pinepple_sql.gif)
+<Caption>Using an SQL insight to run the query below</Caption>
 
 If you're familiar with SQL, the easiest and most powerful way to leverage it within PostHog is via the new SQL insight type. This gives you direct SQL access to your data in PostHog, so you can create custom tables, visualization and more. 
 
@@ -102,7 +102,6 @@ This is helpful not just for generating tables which summarize person and event 
 
 ## Custom insights
 ![custom insights](../images/blog/array/custom_insights.gif)
-<Caption></Caption>
 
 Finally, we're introducing custom insights, which enable you to create a very wide range of insights and visualizations. 
 
