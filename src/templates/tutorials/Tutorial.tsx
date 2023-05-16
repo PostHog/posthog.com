@@ -26,7 +26,7 @@ import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
 import TutorialsSlider from 'components/TutorialsSlider'
 
-const ViewButton = ({ title, view, setView }) => {
+export const ViewButton = ({ title, view, setView }) => {
     return (
         <button
             onClick={() => setView(title)}

@@ -196,11 +196,7 @@ export default function Product({ data, location, pageContext }) {
                 />
             </SectionWrapper>
         ),
-        Tutorials: (props: any) => (
-            <SectionWrapper {...props}>
-                <Tutorials tutorials={tutorials?.nodes} />
-            </SectionWrapper>
-        ),
+        Tutorials: (props: any) => <Tutorials tutorials={tutorials?.nodes} />,
         PlanComparison: (props: any) => (
             <div className="max-w-screen-2xl mx-auto">
                 <PlanComparison {...props} showCTA={false} />
@@ -353,7 +349,13 @@ export const query = graphql`
                 }
                 frontmatter {
                     title
+                    tags
+                    featuredVideo
+                    authorData {
+                        name
+                    }
                 }
+                body
             }
         }
         documentation: allMdx(filter: { fields: { slug: { in: $documentationURLs } } }) {
