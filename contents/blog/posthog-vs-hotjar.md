@@ -422,7 +422,7 @@ Below, we've listed the different methods for communicating with and collecting 
             <td><strong>Notification bar</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Display a customised banner on your site.</td>
+            <td>Display a customized banner on your site.</td>
         </tr>
         <tr>
             <td><strong>In-app popups</strong></td>
