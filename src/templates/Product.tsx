@@ -36,8 +36,8 @@ const menu: IMenu[] = [
         children: [
             { name: 'Features', url: '/product-analytics/features' },
             { name: 'Pricing', url: '/product-analytics/pricing' },
-            { name: 'Comparisons', url: '/product-analytics/comparisons' },
             { name: 'Customers', url: '/product-analytics/customers' },
+            { name: 'Comparisons', url: '/product-analytics/comparisons' },
             { name: 'Docs', url: '/product-analytics/documentation' },
             { name: 'Tutorials', url: '/product-analytics/tutorials' },
             { name: 'Roadmap', url: '/product-analytics/roadmap' },
@@ -51,6 +51,7 @@ const menu: IMenu[] = [
         children: [
             { name: 'Features', url: '/session-replay/features' },
             { name: 'Pricing', url: '/session-replay/pricing' },
+            { name: 'Customers', url: '/session-replay/customers' },
             { name: 'Comparisons', url: '/session-replay/comparisons' },
             { name: 'Roadmap', url: '/session-replay/roadmap' },
             { name: 'Docs', url: '/session-replay/documentation' },

@@ -85,7 +85,7 @@ export default function ContentViewer({ content }: IProps) {
                                                         })}
                                                     </ul>
                                                 )}
-                                                {video && <Video className="w-4 flex-shrink-0" />}
+                                                {video && <Video className="w-6 opacity-50 flex-shrink-0" />}
                                             </div>
                                         )}
 
