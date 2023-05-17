@@ -29,7 +29,7 @@ export const useNav = () => {
             children: [
                 {
                     name: 'Changelog',
-                    url: '/roadmap/changelog',
+                    url: '',
                     children: [{ name: '2023', url: '/roadmap/changelog/2023' }],
                 },
             ],

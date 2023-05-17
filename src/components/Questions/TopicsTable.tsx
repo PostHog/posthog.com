@@ -54,11 +54,11 @@ export const topicIcons = {
     'product analytics': Analytics,
     'session replay': SessionRecording,
     'sparks joy': SparksJoy,
-    spotlight: Megaphone,
     trends: Trends,
     toolbar: Toolbar,
     uncategorized: More,
     sdks: API,
+    'community spotlight': Megaphone,
 }
 
 export const TopicsTable = ({ topics, topicGroup, className = '' }) => {

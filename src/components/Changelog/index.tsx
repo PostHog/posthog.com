@@ -44,7 +44,7 @@ const Select = ({ onChange, values }) => {
                         <Listbox.Option key={value.label} value={value} as={React.Fragment}>
                             {({ selected }) => (
                                 <li
-                                    className={`py-2 px-4 text-sm cursor-pointer hover:bg-gray-accent-light/40 dark:hover:bg-gray-accent-light/20 transition-colors ${
+                                    className={`py-2 px-4 text-sm cursor-pointer hover:bg-gray-accent-light/40 dark:hover:bg-gray-accent-light/20 transition-colors whitespace-nowrap ${
                                         selected ? 'bg-gray-accent-light/80 dark:bg-gray-accent-light/40' : ''
                                     }`}
                                 >
@@ -97,7 +97,7 @@ export default function Changelog() {
                 }
             }
             filterOptions: allChange {
-                products: group(field: topic___data___attributes___label) {
+                topics: group(field: topic___data___attributes___label) {
                     label: fieldValue
                     value: fieldValue
                     field
@@ -180,7 +180,6 @@ export default function Changelog() {
                                     const teamName = team?.data?.attributes?.name
                                     const mediaURL = media?.data?.attributes?.url
                                     const Icon = topicIcons[topicName?.toLowerCase()]
-                                    const Title = cta ? Link : 'span'
                                     return (
                                         <li key={title}>
                                             {topicName && (
@@ -189,9 +188,7 @@ export default function Changelog() {
                                                     <span>{topicName}</span>
                                                 </p>
                                             )}
-                                            <h3 className="mt-0 mb-1">
-                                                <Title {...(cta ? { to: cta.url } : null)}>{title}</Title>
-                                            </h3>
+                                            <h3 className="mt-0 mb-1">{title}</h3>
                                             {teamName && (
                                                 <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>
                                             )}
@@ -215,7 +212,7 @@ export default function Changelog() {
                                                 <Markdown>{description}</Markdown>
                                             </div>
                                             {cta && (
-                                                <CallToAction type="secondary" to={cta.url}>
+                                                <CallToAction type="secondary" size="sm" to={cta.url}>
                                                     {cta.label}
                                                 </CallToAction>
                                             )}
