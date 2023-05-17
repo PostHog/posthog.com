@@ -16,6 +16,7 @@ interface IProps {
 export default function Customers({ customers }: IProps) {
     return (
         <ContentViewer
+            title="Customer stories"
             content={customers.map((customer) => ({
                 body: customer.body,
                 title: customer.frontmatter.title,

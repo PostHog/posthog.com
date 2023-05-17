@@ -25,9 +25,10 @@ interface IProps {
         tags?: string[]
         video?: string
     }[]
+    title?: string
 }
 
-export default function ContentViewer({ content }: IProps) {
+export default function ContentViewer({ content, title }: IProps) {
     const [currentIndex, setCurrentIndex] = useState<number | null>(null)
     const [contentView, setContentView] = useState('Article')
     const currentContent = currentIndex !== null && content[currentIndex]
@@ -52,7 +53,7 @@ export default function ContentViewer({ content }: IProps) {
         <div className="flex gap-x-6 lg:gap-x-12 relative">
             <motion.div className="md:flex-[0_0_350px]">
                 <div className="sticky top-4">
-                    <h3 className="text-lg mb-2">Customer stories / Tutorials</h3>
+                    {title && <h3 className="text-lg mb-2">{title}</h3>}
                     <ul className="list-none m-0 p-0 grid gap-y-1">
                         {content.map(({ title, author, image, tags, video }, index) => {
                             const active = currentIndex === index

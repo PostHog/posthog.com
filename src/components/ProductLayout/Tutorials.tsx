@@ -7,6 +7,7 @@ export default function Tutorials({ tutorials }: IDocumentation) {
     return (
         <div id="tutorials">
             <ContentViewer
+                title="Tutorials"
                 content={tutorials.map((tutorial) => ({
                     title: tutorial.frontmatter.title,
                     body: tutorial.body,
