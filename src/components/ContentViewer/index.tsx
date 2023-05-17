@@ -49,9 +49,10 @@ export default function ContentViewer({ content }: IProps) {
     }, [breakpoints])
 
     return (
-        <div className="grid md:grid-cols-5 gap-x-6 relative">
-            <motion.div className="md:col-span-2">
-                <ul className="list-none m-0 p-0 sticky top-16 grid gap-y-2">
+        <div className="flex gap-x-6 relative">
+            <motion.div className="md:flex-[0_0_350px]">
+                <h3 className="text-lg mb-2">Customer stories / Tutorials</h3>
+                <ul className="list-none m-0 p-0 sticky top-16 grid gap-y-1">
                     {content.map(({ title, author, image, tags, video }, index) => {
                         const active = currentIndex === index
                         const hasTags = tags && tags.length
@@ -62,19 +63,19 @@ export default function ContentViewer({ content }: IProps) {
                                         setCurrentIndex(index)
                                         scroll.scrollToTop()
                                     }}
-                                    className={`p-2 rounded-md w-full text-left ${
-                                        active ? 'bg-gray-accent-light' : ''
+                                    className={`p-4 rounded-md w-full text-left relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px] hover:bg-gray-accent-light ${
+                                        active ? 'bg-gray-accent-light hover:top-[0px] hover:scale-[1]' : ''
                                     }`}
                                 >
-                                    {image && <img className="w-[140px] mb-2" src={image} />}
+                                    {image && <img className="max-h-[30px] mb-2" src={image} />}
                                     {(hasTags || video) && (
                                         <div className="flex justify-between lg:space-x-2 lg:space-y-0 space-y-2 space-y-reverse lg:flex-row flex-col-reverse items-start">
                                             {hasTags && (
-                                                <ul className="list-none m-0 p-0 flex space-x-2 items-center flex-wrap">
+                                                <ul className="list-none m-0 mb-1 p-0 flex items-center flex-wrap">
                                                     {tags.map((tag) => {
                                                         return (
                                                             <li
-                                                                className="rounded-full px-2 border border-gray-accent-light text-sm whitespace-nowrap my-1"
+                                                                className="rounded-full px-2 py-1 mr-1 bg-red/10 text-red text-xs whitespace-nowrap mb-1"
                                                                 key={tag}
                                                             >
                                                                 {tag}
@@ -87,7 +88,7 @@ export default function ContentViewer({ content }: IProps) {
                                         </div>
                                     )}
 
-                                    <p className="m-0 font-semibold">{title}</p>
+                                    <p className="m-0 font-semibold leading-tight text-[15px]">{title}</p>
                                     {author && <p className="text-sm font-semibold m-0 opacity-60 mt-1">by {author}</p>}
                                 </button>
                             </li>
@@ -96,10 +97,10 @@ export default function ContentViewer({ content }: IProps) {
                 </ul>
             </motion.div>
             {currentContent && (
-                <div className="z-[999999999999999] article-content md:col-span-3">
+                <div className="z-[999999999999999] article-content md:flex-1">
                     <ContentContainer {...(breakpoints.sm ? { setOpen: setCurrentIndex } : {})}>
                         <div className="max-h-[70vh] md:max-h-[initial] overflow-auto">
-                            <h1 className="mb-6 md:text-4xl text-2xl">{currentContent.title}</h1>
+                            <h1 className="mb-6 text-xl md:text-2xl">{currentContent.title}</h1>
                             {currentContent.video && (
                                 <div className="mb-6 flex space-x-2">
                                     <ViewButton view={contentView} title="Article" setView={setContentView} />
