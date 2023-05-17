@@ -4,12 +4,15 @@ import { Caption } from 'components/Caption'
 import { FloatedImage } from 'components/FloatedImage'
 import { ImageBlock } from 'components/ImageBlock'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
 import { animateScroll as scroll } from 'react-scroll'
 import { ViewButton } from '../../templates/tutorials/Tutorial'
 import { Video } from 'components/NotProductIcons'
+import { motion } from 'framer-motion'
+import { MenuContainer } from 'components/PostLayout/MobileNav'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -25,10 +28,11 @@ interface IProps {
 }
 
 export default function ContentViewer({ content }: IProps) {
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [view, setView] = useState('Article')
-    const currentContent = content[currentIndex]
-
+    const [currentIndex, setCurrentIndex] = useState<number | null>(null)
+    const [contentView, setContentView] = useState('Article')
+    const currentContent = currentIndex !== null && content[currentIndex]
+    const breakpoints = useBreakpoint()
+    const ContentContainer = breakpoints.sm ? MenuContainer : React.Fragment
     const components = {
         ...shortcodes,
         BorderWrapper,
@@ -38,9 +42,15 @@ export default function ContentViewer({ content }: IProps) {
         a: A,
     }
 
+    useEffect(() => {
+        if (breakpoints.sm !== undefined) {
+            setCurrentIndex(breakpoints.sm ? null : 0)
+        }
+    }, [breakpoints])
+
     return (
-        <div className="grid grid-cols-5 gap-x-6">
-            <div className="col-span-2">
+        <div className="grid md:grid-cols-5 gap-x-6 relative">
+            <motion.div className="md:col-span-2">
                 <ul className="list-none m-0 p-0 sticky top-16 grid gap-y-2">
                     {content.map(({ title, author, image, tags, video }, index) => {
                         const active = currentIndex === index
@@ -84,23 +94,29 @@ export default function ContentViewer({ content }: IProps) {
                         )
                     })}
                 </ul>
-            </div>
-            <div className={'article-content col-span-3'}>
-                <h1 className="mb-6">{currentContent.title}</h1>
-                {currentContent.video && (
-                    <div className="mb-6 flex space-x-2">
-                        <ViewButton view={view} title="Article" setView={setView} />
-                        <ViewButton view={view} title="Video" setView={setView} />
-                    </div>
-                )}
-                {currentContent.video && view === 'Video' ? (
-                    <iframe src={currentContent.video} />
-                ) : (
-                    <MDXProvider components={components}>
-                        <MDXRenderer>{currentContent.body}</MDXRenderer>
-                    </MDXProvider>
-                )}
-            </div>
+            </motion.div>
+            {currentContent && (
+                <div className="z-[999999999999999] article-content md:col-span-3">
+                    <ContentContainer {...(breakpoints.sm ? { setOpen: setCurrentIndex } : {})}>
+                        <div className="max-h-[70vh] md:max-h-[initial] overflow-auto">
+                            <h1 className="mb-6 md:text-4xl text-2xl">{currentContent.title}</h1>
+                            {currentContent.video && (
+                                <div className="mb-6 flex space-x-2">
+                                    <ViewButton view={contentView} title="Article" setView={setContentView} />
+                                    <ViewButton view={contentView} title="Video" setView={setContentView} />
+                                </div>
+                            )}
+                            {currentContent.video && contentView === 'Video' ? (
+                                <iframe src={currentContent.video} />
+                            ) : (
+                                <MDXProvider components={components}>
+                                    <MDXRenderer>{currentContent.body}</MDXRenderer>
+                                </MDXProvider>
+                            )}
+                        </div>
+                    </ContentContainer>
+                </div>
+            )}
         </div>
     )
 }

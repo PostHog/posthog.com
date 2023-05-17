@@ -220,6 +220,7 @@ export default function Product({ data, location, pageContext }) {
                 hideSidebar
                 hideSearch
                 hideSurvey
+                darkMode={false}
                 contentContainerClassName="px-5 lg:px-6 xl:px-12 w-full transition-all mx-auto"
             >
                 <MDXProvider components={components}>
