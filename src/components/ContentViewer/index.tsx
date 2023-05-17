@@ -1,5 +1,3 @@
-import { ImageDataLike, getImageData } from 'gatsby-plugin-image'
-
 import { MDXProvider } from '@mdx-js/react'
 import { BorderWrapper } from 'components/BorderWrapper'
 import { Caption } from 'components/Caption'
@@ -14,15 +12,6 @@ import { ViewButton } from '../../templates/tutorials/Tutorial'
 import { Video } from 'components/NotProductIcons'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
-
-const components = {
-    ...shortcodes,
-    BorderWrapper,
-    Caption,
-    ImageBlock,
-    FloatedImage,
-    a: A,
-}
 
 interface IProps {
     content: {
@@ -39,6 +28,15 @@ export default function ContentViewer({ content }: IProps) {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [view, setView] = useState('Article')
     const currentContent = content[currentIndex]
+
+    const components = {
+        ...shortcodes,
+        BorderWrapper,
+        Caption,
+        ImageBlock,
+        FloatedImage,
+        a: A,
+    }
 
     return (
         <div className="grid grid-cols-5 gap-x-6">
