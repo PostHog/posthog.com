@@ -78,6 +78,29 @@ type ProductAnalyticsProps = {
     }
 }
 
+export const Intro = ({ image = true }) => (
+    <>
+        {image && (
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                src="../../components/Home/Slider/images/product-analytics-hog.png"
+            />
+        )}
+        <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
+        <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+            Learn how to use product analytics to understand your users.
+        </h3>
+        {/* Quick links */}
+        <section className="my-12 clear-both">
+            <h3 className="mb-6 mt-0">Chapters</h3>
+            <LinkGrid links={quickLinks} />
+        </section>
+    </>
+)
+
 const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
     const { tutorials } = data
     return (
@@ -85,24 +108,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
             <SEO title="Product analytics - Documentation - PostHog" />
 
             <PostLayout title={'Product Analytics'} menu={docs} hideSurvey hideSidebar>
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/product-analytics-hog.png"
-                />
-                <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                    Learn how to use product analytics to understand your users.
-                </h3>
-
-                {/* Quick links */}
-                <section className="my-12 clear-both">
-                    <h3 className="mb-6 mt-0">Chapters</h3>
-                    <LinkGrid links={quickLinks} />
-                </section>
-
+                <Intro />
                 <Tutorials tutorials={tutorials} />
             </PostLayout>
         </Layout>
