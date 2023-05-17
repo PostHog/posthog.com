@@ -1,5 +1,5 @@
 ---
-title: "How Spotify (and PostHog) build succesful features"
+title: "How Spotify (and PostHog) build successful features"
 date: 2023-05-17
 rootPage: /blog
 sidebar: Blog
