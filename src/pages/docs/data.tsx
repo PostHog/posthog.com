@@ -37,8 +37,8 @@ export const quickLinks = [
         description: 'Organize your data into projects and manage access to them.',
     },
     {
-        name: 'Notifications & alerts',
-        to: '/docs/data/notifications-and-alerts',
+        name: 'Subscriptions',
+        to: '/docs/data/subscriptions',
         description: 'Set up notifications for when specific actions occur',
     },
 ]

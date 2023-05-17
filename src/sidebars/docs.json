@@ -565,10 +565,6 @@
                 "url": "/docs/data/events"
             },
             {
-                "name": "Notifications & alerts",
-                "url": "/docs/data/notifications-and-alerts"
-            },
-            {
                 "name": "Organizations & projects",
                 "url": "/docs/data/organizations-and-projects"
             },
