@@ -43,8 +43,6 @@ At your [localhost](http://localhost:3000/), you should see a basic webpage like
 
 ![Next](../images/tutorials/nextjs-analytics/next.png)
 
-
-
 ## Adding blog functionality to our Next.js app
 
 The structure of our blog will be:

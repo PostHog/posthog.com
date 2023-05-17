@@ -28,16 +28,18 @@ yarn add posthog-js
 npm install --save posthog-js
 ```
 
-Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in the PostHog app under [Project Settings](https://app.posthog.com/project/settings) under API Keys.
+Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in your [project settings](https://app.posthog.com/project/settings).
 
 ```shell file=.env.local
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
 ```
 
+These values need to start with `NEXT_PUBLIC_` to be accessible on the client-side.
+
 ### Pages router
 
-If you set up your Next.js app to use the [pages router](https://nextjs.org/docs/pages), you can integrate PostHog at the root of your app (`pages/_app.js`).
+If your Next.js app uses the [pages router](https://nextjs.org/docs/pages), you can integrate PostHog at the root of your app (`pages/_app.js`).
 
 ```js
 // pages/_app.js
@@ -81,7 +83,7 @@ export default function App({ Component, pageProps }) {
 
 ### App router
 
-If you set up your Next.js app to use the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers.js` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js `'use client'` directive. 
+If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers.js` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js `'use client'` directive. 
 
 ```js
 // app/providers.js
@@ -102,7 +104,7 @@ export default function PHProvider({ children }) {
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
+  // Track pageviews
   useEffect(() => {
     if (pathname) {
       let url = window.origin + pathname
@@ -122,7 +124,7 @@ export default function PHProvider({ children }) {
 }
 ```
 
-Once created, you can import the `providers.js` file into your app/layout.js file, then wrap your app in the provider component.
+Once created, you can import the `providers.js` file into your `app/layout.js` file, then wrap your app in the provider component.
 
 ```js
 // app/layout.js
@@ -140,7 +142,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-Files and components accessing PostHog on the client-side will need to have the `'use client'` directive.
+Files and components accessing PostHog on the client-side need the `'use client'` directive.
 
 ### Accessing PostHog using the provider
 
@@ -153,9 +155,9 @@ You can also read [the full posthog-js documentation](/docs/libraries/js) for al
 
 ## Server-side analytics (analytics, feature flags)
 
-Server-side rendering is a Next.js feature that enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
+Server-side rendering  enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
 
-To integrate PostHog into your Next.js for server-side analytics you should use the [Node SDK](/docs/libraries/node).
+To integrate PostHog into your Next.js app on the server-side you should use the [Node SDK](/docs/libraries/node).
 
 First, install the `posthog-node` library:
 
@@ -206,9 +208,9 @@ export async function getServerSideProps(ctx) {
 
   if (session) {
     const client = new PostHog(
-      '<ph_project_api_key>',
+      process.env.NEXT_PUBLIC_POSTHOG_KEY,
       {
-        api_host: '<ph_instance_address>',
+        host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
       }
     )
 
@@ -230,11 +232,11 @@ export async function getServerSideProps(ctx) {
 ```
 
 > **Note**: Make sure to _always_ call `client.shutdownAsync()` after sending events from the server-side.
-> PostHog queues events into larger batches, and this call will force all batched events to be flushed immediately.
+> PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
 ### App router
 
-For the app router, we can create initialize the `posthog-node` SDK in every component we need it, or we can create a PostHogClient component to import into files like this:
+For the app router, we can initialize the `posthog-node` SDK in every component we need it, or we can create a `PostHogClient` component to import into files like this:
 
 ```js
 // app/posthog.js
