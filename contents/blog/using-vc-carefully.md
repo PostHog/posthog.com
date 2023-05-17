@@ -1,5 +1,5 @@
 ---
-date: 2023-05-16
+date: 2023-05-17
 title: VC is a tool, not a religion
 rootPage: /blog
 sidebar: Blog
