@@ -1,6 +1,6 @@
 ---
-title: "How to build new features users love"
-date: 2023-05-15
+title: "How Spotify (and PostHog) build succesful features"
+date: 2023-05-17
 rootPage: /blog
 sidebar: Blog
 showTitle: true
