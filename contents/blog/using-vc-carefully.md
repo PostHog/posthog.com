@@ -28,7 +28,7 @@ Why?
 * We'd spend years rebuilding to the same salaries that we'd just left behind, but with added downside risk of not finding product market fit.
 * A slower pace felt like it'd be boring. We'd find it more engaging to own a smaller slice of a bigger pie. We wanted to work on something we'd enjoy.
 
-The YCombinator application was coming up, so we went for it. We got in.
+The Y Combinator application was coming up, so we went for it. We got in.
 
 ## Raising money got intoxicating
 
@@ -67,7 +67,7 @@ I couldn't be more glad that's what we picked. Results:
 
 This we nailed.
 
-First, we made clear that we would have or had a paid offering from when we launched the free open source product. We did this by explaining our different offerings on our pricing page.
+First, when we launched the free open source product we made clear from the outset that we would have a paid offering. We did this by explaining our different offerings on our pricing page.
 
 Once we started getting regular demand for the paid product and after feeling that the open source product was building a big community and users were really getting value from it, we decided to focus on revenue.
 
