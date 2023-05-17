@@ -31,7 +31,7 @@ export default function HeroCondensed({
     const imageStyles = { maxWidth: image?.width || '56rem', maxHeight: image?.height || 'auto' }
     return (
         <div
-            className={`sm:-mt-4 lg:-mt-12 xl:-mt-12 pt-3 pb-3 mb-12 -mx-5 lg:-mx-6 px-5 lg:px-6 xl:-mx-12 xl:px-12 bg-gray-accent/30 backdrop-blur ${
+            className={`sm:-mt-4 lg:-mt-12 xl:-mt-12 pt-3 pb-3 mb-8 -mx-5 lg:-mx-6 px-5 lg:px-6 xl:-mx-12 xl:px-12 bg-gray-accent/30 backdrop-blur ${
                 sticky ? 'sticky top-0 bg-tan py-2 z-20' : ''
             }`}
         >
