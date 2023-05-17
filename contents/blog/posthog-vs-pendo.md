@@ -234,7 +234,7 @@ PostHog has ready-made apps for displaying pop-ups and tooltips, but the true po
 
 Below are some of the most popular ready-made apps which facilitate in-app messages in PostHog:
 
-- [NPS Score Collector](/apps/nps-score-collector): Asks users how likely they are to recommend your product, on a scale of 0-10. Using this information, you can compute your Net Promoter Score. 
+- [NPS Survey App](/apps/nps-survey-app): Asks users how likely they are to recommend your product, on a scale of 0-10. Using this information, you can compute your Net Promoter Score. 
 
 - [Feedback Widget](/apps/feedback-widget): Displays a prompt with a text input, enabling users to write feedback messages that you can optionally sync to Slack, Zendesk or other tools using Zapier. 
 

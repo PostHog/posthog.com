@@ -118,7 +118,7 @@ Any score above zero is technically good, but most sources put the industry aver
 
 **Is it useful?** There's a reason NPS is an industry standard. Measuring NPS over time is a powerful way to understand the evolution of your product, and improving it is a clear sign your customers are happy with the changes you're making. Definitely worth tracking, but you need other metrics or follow-up questions to understand changes in your NPS score.
 
-> **Want to collect your NPS score in PostHog?** Try [the NPS Score Collector app](/apps/nps-score-collector)!
+> **Want to collect your NPS score in PostHog?** Try [the NPS survey app](/apps/nps-survey-app)!
 
 ### New user activation
 

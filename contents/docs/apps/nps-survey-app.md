@@ -1,25 +1,25 @@
 ---
-title: NPS Score Collector
-github: https://github.com/PostHog/nps-score-app
+title: NPS Survey App
+github: https://github.com/PostHog/nps-survey-app
 installUrl: https://app.posthog.com/project/apps?name=nps
-thumbnail: ../../apps/thumbnails/nps_score_collector.png
+thumbnail: ../../apps/thumbnails/nps_survey_app.png
 tags:
     - nps
 ---
 
-### What does the NPS Score Collector do?
+### What does the NPS survey app do?
 
 This is a basic site app which displays a simple 0-10 scale for users to tell you how likely they are to recommend your product. You can use this information to figure out your [Net Promoter Score (NPS)](https://en.wikipedia.org/wiki/Net_promoter_score)
 
 ### What are the requirements for this app?
 
-The NPS score collector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+The NPS survey app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You also need to have enabled `opt_in_site_apps: true` in your posthog-js config.
 
-### How do I install the NPS Score Collector?
+### How do I install the NPS survey app?
 
 1. Make sure you have enabled `opt_in_site_apps: true` in your posthog-js config.
 2. Install the app from [the PostHog App Repository](posthog.com/apps).
@@ -53,13 +53,11 @@ The resulting score is your NPS score.
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the NPS Score Collector](https://github.com/PostHog/nps-score-app) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code for the NPS survey app](https://github.com/PostHog/nps-survey-app) is available on GitHub.
 
 ### Who created this app?
 
-This app was created by [PostHog's Product Marketer, Joe Martin](/handbook/company/team/joe-martin). 
-
-He's [not an engineer](/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two), so expect some rough edges. 
+This app was created by [PostHog's Product Marketer, Joe Martin](/handbook/company/team/joe-martin). He's [not an engineer](/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two), so (he says) you should expect some rough edges. 
 
 ### Who maintains this app?
 
