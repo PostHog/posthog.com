@@ -10,7 +10,7 @@ tags: ['hogql', 'trends']
 
 HogQL opens limitless possibilities for how you can breakdown your trends, funnels, and more. This tutorial showcases some of the advanced breakdowns you can create using HogQL.
 
-To create a breakdown using HogQL, create an insight then under "Breakdown by," click "Add breakdown," select HogQL from the options, and add your expression.
+To create a breakdown using [HogQL](/docs/product-analytics/hogql), create an insight then under "Breakdown by," click "Add breakdown," select HogQL from the options, and add your expression.
 
 > To understand the full possibilities of HogQL, check out the [available functions in our docs](/docs/product-analytics/hogql#supported-clickhouse-functions) as well as the [events](https://app.posthog.com/data-management/events) and [properties](https://app.posthog.com/data-management/properties) lists from your PostHog instance.
 
@@ -28,7 +28,7 @@ You could also breakdown all events by `person_id` to find your most active user
 
 Many strings, such as URLs, include repetitive values combined with unique values. It is common to want to replace that unique value with a placeholder value to combine the repetitive values into one for analysis.
 
-For example, you have a path that uses a specific user’s UUID like `/users/123e4567-e89b-12d3-a456-426655440000`. You can use `replaceRegexpOne` to replace `123e4567-e89b-12d3-a456-426655440000` with `:uuid` . The HogQL expression for this looks like this:
+For example, if you have a path that uses a specific user’s UUID like `/users/123e4567-e89b-12d3-a456-426655440000` then you can use `replaceRegexpOne` to replace `123e4567-e89b-12d3-a456-426655440000` with `:uuid`. The HogQL expression for this looks like this:
 
 ```
 replaceRegexpOne(
@@ -44,7 +44,7 @@ Another way to replace a repetitive value is to use `replaceOne`. If we wanted t
 replaceOne(properties.$current_url, 'https://app.posthog.com', '/')
 ```
 
-> **Note:** Make sure you use straight apostrophes (`'`) for string literals and backticks (\`) or quotes (`"`) for database identifiers in your expressions. **Don't use** curly apostrophes (`’`) or curly quotes (`“` or `”`).
+> **Note:** Make sure you use straight apostrophes (`'`) for string literals and backticks (\`) or quotes (`"`) for database identifiers in your expressions. **Don't use** curly apostrophes (`’`) or curly quotes (`“` or `”`) as they won't be recognized.
 
 ## Excluding values
 
