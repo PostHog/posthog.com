@@ -65,7 +65,7 @@ We'd like to thank PostHog team members [Luke Harries](https://github.com/lharri
 
 ### Who maintains this app?
 
-This app is maintained by the PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
 ### What if I have feedback on this app?
 
