@@ -15,7 +15,7 @@ A/B tests are a way to make sure this content performs as well as possible. A/B 
 
 PostHog’s experimentation tool makes this entire process simple. This tutorial shows you how to build a basic Next.js app, add PostHog to it, and finally set up and run an A/B test experiment.
 
-> Already have a Next.js app? [Skip to adding PostHog](#adding-posthog).
+> Already have a Next.js app? [Skip to adding PostHog and setting up the experiment](#adding-posthog).
 
 ## Creating a Next.js app
 
@@ -27,7 +27,7 @@ First, make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-
 npx create-next-app@latest
 ```
 
-Name it whatever you like (we call ours `next-ab`), select `No` for TypeScript, then press Enter to pick the defaults for the rest of the options.
+Name it whatever you like (we call ours `next-ab`), select `No` for TypeScript, `No` for using the app router, and pick the defaults for the rest of the options.
 
 Once created, go into the `next-ab` folder it creates, then go to `pages/index.js` and replace the code with just a heading and a button (which our A/B test runs on). 
 
@@ -265,6 +265,6 @@ Now, when you refresh the page, the call to action loads faster.
 
 ## Further reading
 
+- [How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 - [How to run Experiments without feature flags](/tutorials/experiments)
-- [Building and measuring a sign up funnel with Next.js, Supabase, and PostHog](/tutorials/nextjs-supabase-signup-funnel)

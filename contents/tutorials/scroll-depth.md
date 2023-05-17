@@ -14,10 +14,10 @@ In this tutorial, we go over the different ways of measuring scroll depth, calcu
 
 ## Setup
 
-To showcase all this, first create a [Next.js app](/tutorials/nextjs-analytics). Run the script below, choose **not** to use TypeScript, and the defaults for everything else.
+To showcase all this, first create a [Next.js app](/tutorials/nextjs-analytics). Run the script below, choose **not** to use TypeScript, **not** to use the app router, and the defaults for everything else.
 
 ```bash
-npx create-next-app@latest
+npx create-next-app@latest scroll-depth
 ```
 
 Once created, create another page in the `pages` folder named `big`. It contains a long page with can scroll through.
