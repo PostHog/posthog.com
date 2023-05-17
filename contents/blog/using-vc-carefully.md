@@ -10,8 +10,6 @@ author:
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
-tags:
-  - Marketing
 ---
 
 We raised over $27,000,000 then realized we should be growing out of our own revenue instead.
