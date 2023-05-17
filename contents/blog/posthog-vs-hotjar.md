@@ -1,5 +1,5 @@
 ---
-date: 2023-05-08
+date: 2023-05-17
 title: "In-depth: PostHog vs Hotjar"
 rootPage: /blog
 sidebar: Blog
@@ -545,6 +545,12 @@ Regulatory compliance can be a critical need for many teams, especially if they 
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td><strong>SOC 2 certified</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>EU hosting or data residency available.</td>
+        </tr>	    
         <tr>
             <td><strong>GDPR compliant</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
