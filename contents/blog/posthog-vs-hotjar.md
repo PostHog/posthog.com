@@ -549,7 +549,7 @@ Regulatory compliance can be a critical need for many teams, especially if they 
             <td><strong>SOC 2 certified</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>EU hosting or data residency available.</td>
+            <td>Information security process audited</td>
         </tr>	    
         <tr>
             <td><strong>GDPR compliant</strong></td>
