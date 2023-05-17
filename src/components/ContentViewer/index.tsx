@@ -49,52 +49,56 @@ export default function ContentViewer({ content }: IProps) {
     }, [breakpoints])
 
     return (
-        <div className="flex gap-x-6 relative">
+        <div className="flex gap-x-6 lg:gap-x-12 relative">
             <motion.div className="md:flex-[0_0_350px]">
-                <h3 className="text-lg mb-2">Customer stories / Tutorials</h3>
-                <ul className="list-none m-0 p-0 sticky top-16 grid gap-y-1">
-                    {content.map(({ title, author, image, tags, video }, index) => {
-                        const active = currentIndex === index
-                        const hasTags = tags && tags.length
-                        return (
-                            <li key={title + index}>
-                                <button
-                                    onClick={() => {
-                                        setCurrentIndex(index)
-                                        scroll.scrollToTop()
-                                    }}
-                                    className={`p-4 rounded-md w-full text-left relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px] hover:bg-gray-accent-light ${
-                                        active ? 'bg-gray-accent-light hover:top-[0px] hover:scale-[1]' : ''
-                                    }`}
-                                >
-                                    {image && <img className="max-h-[30px] mb-2" src={image} />}
-                                    {(hasTags || video) && (
-                                        <div className="flex justify-between lg:space-x-2 lg:space-y-0 space-y-2 space-y-reverse lg:flex-row flex-col-reverse items-start">
-                                            {hasTags && (
-                                                <ul className="list-none m-0 mb-1 p-0 flex items-center flex-wrap">
-                                                    {tags.map((tag) => {
-                                                        return (
-                                                            <li
-                                                                className="rounded-full px-2 py-1 mr-1 bg-red/10 text-red text-xs whitespace-nowrap mb-1"
-                                                                key={tag}
-                                                            >
-                                                                {tag}
-                                                            </li>
-                                                        )
-                                                    })}
-                                                </ul>
-                                            )}
-                                            {video && <Video className="w-4 flex-shrink-0" />}
-                                        </div>
-                                    )}
+                <div className="sticky top-4">
+                    <h3 className="text-lg mb-2">Customer stories / Tutorials</h3>
+                    <ul className="list-none m-0 p-0 grid gap-y-1">
+                        {content.map(({ title, author, image, tags, video }, index) => {
+                            const active = currentIndex === index
+                            const hasTags = tags && tags.length
+                            return (
+                                <li key={title + index}>
+                                    <button
+                                        onClick={() => {
+                                            setCurrentIndex(index)
+                                            scroll.scrollToTop()
+                                        }}
+                                        className={`p-4 rounded-md w-full text-left relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px] hover:bg-gray-accent-light ${
+                                            active ? 'bg-gray-accent-light hover:top-[0px] hover:scale-[1]' : ''
+                                        }`}
+                                    >
+                                        {image && <img className="max-h-[30px] mb-2" src={image} />}
+                                        {(hasTags || video) && (
+                                            <div className="flex justify-between lg:space-x-2 lg:space-y-0 space-y-2 space-y-reverse lg:flex-row flex-col-reverse items-start">
+                                                {hasTags && (
+                                                    <ul className="list-none m-0 mb-1 p-0 flex items-center flex-wrap">
+                                                        {tags.map((tag) => {
+                                                            return (
+                                                                <li
+                                                                    className="rounded-full px-2 py-1 mr-1 bg-red/10 text-red text-xs whitespace-nowrap mb-1"
+                                                                    key={tag}
+                                                                >
+                                                                    {tag}
+                                                                </li>
+                                                            )
+                                                        })}
+                                                    </ul>
+                                                )}
+                                                {video && <Video className="w-4 flex-shrink-0" />}
+                                            </div>
+                                        )}
 
-                                    <p className="m-0 font-semibold leading-tight text-[15px]">{title}</p>
-                                    {author && <p className="text-sm font-semibold m-0 opacity-60 mt-1">by {author}</p>}
-                                </button>
-                            </li>
-                        )
-                    })}
-                </ul>
+                                        <p className="m-0 font-semibold leading-tight text-[15px]">{title}</p>
+                                        {author && (
+                                            <p className="text-sm font-semibold m-0 opacity-60 mt-1">by {author}</p>
+                                        )}
+                                    </button>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
             </motion.div>
             {currentContent && (
                 <div className="z-[999999999999999] article-content md:flex-1">
