@@ -143,7 +143,7 @@ Because we build for engineers first, we're also open source. You can check out 
 
 Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. 
 
-> Learn [how Contra used session replays](/customers/contra) to increase registrations by 30%. 
+> **Ready to learn more?** Find out [how Contra used PostHog's session replays](/customers/contra) to increase registrations by 30%. 
 
 Both Hotjar and PostHog offer session replays:
 
