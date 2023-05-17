@@ -183,10 +183,10 @@ To restart ingestion, recreate the dropped table(s).
 
 ### Changing table engines
 
-When changing table engines, you can leverage [`ALTER PARTITION`](https://clickhouse.com/docs/en/sql-reference/statements/alter/partition/)
+When changing table engines, you can leverage [`ATTACH PARTITION`](https://clickhouse.com/docs/en/sql-reference/statements/alter/partition/)
 commands to move data between tables.
 
-**Note:** ALTER PARTITION commands only work if the two tables have identical structure: same columns and ORDER BY/PARTITION BY. It works by
+**Note:** ATTACH PARTITION commands only work if the two tables have identical structure: same columns and ORDER BY/PARTITION BY. It works by
 creating hard links between partitions, so the operation does not require any extra disk space until merges happen.
 
 Thus it's important to stop ingesting new data and merges during this operation.
