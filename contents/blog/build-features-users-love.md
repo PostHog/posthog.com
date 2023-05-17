@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["ian-vanagas"]
-featuredImage: ../images/blog/newsletter-hog.png
+featuredImage: ../images/blog/prodhog.png
 featuredImageType: full
 category: Newsletter
 tags:
