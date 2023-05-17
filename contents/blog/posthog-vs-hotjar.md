@@ -536,7 +536,7 @@ Below, we've listed a few of the most popular integrations used across PostHog a
 Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPPA and GDPR can require teams to store data in certain locations, or to protect data in certain ways. 
 
 <div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 400px;">
+<table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
             <td className="w-3/12"></td>
