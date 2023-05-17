@@ -30,10 +30,14 @@ export default function HeroCondensed({
     const gatsbyImage = image?.image && getImage(image?.image)
     const imageStyles = { maxWidth: image?.width || '56rem', maxHeight: image?.height || 'auto' }
     return (
-        <div className={`-mt-6 mb-6 bg-tan backdrop-blur ${sticky ? 'sticky top-0 bg-tan py-2 z-20' : ''}`}>
+        <div
+            className={`sm:-mt-4 lg:-mt-12 xl:-mt-12 pt-3 pb-3 mb-12 -mx-5 lg:-mx-6 px-5 lg:px-6 xl:-mx-12 xl:px-12 bg-gray-accent/30 backdrop-blur ${
+                sticky ? 'sticky top-0 bg-tan py-2 z-20' : ''
+            }`}
+        >
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 sm:items-center w-full">
                 <div className="flex-1">
-                    <h1 id="overview" className="text-primary text-lg my-2 md:my-0">
+                    <h1 id="overview" className="text-primary text-lg mt-2 mb-0 md:my-0">
                         {title} by PostHog
                     </h1>
                     {/* <p className="font-medium text-black/70 m-0 mt-1 p-0" dangerouslySetInnerHTML={{ __html: subtitle }} /> */}
