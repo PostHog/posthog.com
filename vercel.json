@@ -834,7 +834,8 @@
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
         { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" },
         { "source": "/community", "destination": "/questions" },
-        { "source": "/blog/customer-churn-analysis-guide", "destination": "/blog/churn-rate-vs-retention-rate" }
+        { "source": "/blog/customer-churn-analysis-guide", "destination": "/blog/churn-rate-vs-retention-rate" },
+        { "source": "/blog/questions/autocapture", "destination": "/docs/data/autocapture" }
     ],
     "rewrites": [
         {
