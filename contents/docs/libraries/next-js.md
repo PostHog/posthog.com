@@ -16,7 +16,7 @@ This guide walks you through integrating PostHog into your Next.js app using the
 
 > You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nextjs)
 
-Next.js has both client and server-side rendering as well as pages and app routers. We'll cover all of these options in this guide.
+Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
 
 ## Prerequisites
 
