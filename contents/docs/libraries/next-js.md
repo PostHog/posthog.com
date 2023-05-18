@@ -1,6 +1,13 @@
 ---
 title: Next.js
 icon: ../../images/docs/integrate/frameworks/nextjs.svg
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
@@ -18,7 +25,7 @@ To follow this guide along, you need:
 1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
 2. A Next.js application
 
-## Client-side setup (analytics, pageviews, feature flags)
+## Client-side setup
 
 Install `posthog-js` using your package manager:
 
@@ -83,7 +90,7 @@ export default function App({ Component, pageProps }) {
 
 ### App router
 
-If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers.js` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js `'use client'` directive. 
+If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers.js` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/getting-started/react-essentials#client-components). 
 
 ```js
 // app/providers.js
@@ -153,7 +160,7 @@ PostHog can then be accessed throughout your Next.js app by using the `usePostHo
 
 You can also read [the full posthog-js documentation](/docs/libraries/js) for all the usable functions.
 
-## Server-side analytics (analytics, feature flags)
+## Server-side analytics
 
 Server-side rendering  enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
 
