@@ -35,7 +35,7 @@ Click "Test & Save" and you should receive a message on Slack.
 
 ### 4. Post actions to the webhook
 
-For each action that should be posted to Slack, select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/integrate/webhooks#message-formatting).
+For each action that should be posted to Slack, select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
 
 ![PostHog Edit Action](../../images/post-action-slack.png)
 
