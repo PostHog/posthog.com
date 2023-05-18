@@ -64,7 +64,7 @@ const resources: IFeature[] = [
     { title: 'Tutorials', icon: <Tutorials />, url: '/tutorials' },
     { title: 'Integrations', icon: <Integrations />, url: '/docs/integrations' },
     { title: 'Templates', icon: <Notifications />, url: '/templates' },
-    { title: 'Webhooks', icon: <Webhooks />, url: '/docs/integrate/webhooks/message-formatting' },
+    { title: 'Webhooks', icon: <Webhooks />, url: '/docs/integrate/webhooks' },
     { title: 'How PostHog works', icon: <HowPostHogWorks />, url: '/docs/how-posthog-works' },
     { title: 'Migrate to PostHog', icon: <Migrate />, url: '/docs/migrate/ingest-historic-data' },
     { title: 'Privacy', icon: <Privacy />, url: '/docs/privacy' },
