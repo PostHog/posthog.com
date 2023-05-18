@@ -16,29 +16,33 @@ You can create and view actions by going to Data Management in the left-hand nav
 
 ![How to view actions in PostHog](../../images/docs/data/actions/viewing-actions.mp4)
 
-## Creating actions
+## How to create an action
 
 Actions can be created by either:
 1. Clicking the "New action" button in the Actions tab, or
 2. Using the [PostHog Toolbar](/docs/product-analytics/toolbar) to tag the elements that are relevant. We have a step-by-step tutorial on [creating actions using the toolbar](/tutorials/toolbar#creating-actions).
 
-> Note: Actions can be created retroactively, meaning they also tag events that happened in the past and not only events that happened after the action was created.
+> Note: Actions are retroactive, meaning they also tag events that happened in the past, not only events that happen after the action was created.
 
 You can create actions using events from three sources:
 
 ### 1. Autocapture
 
-Autocapture-based actions are based on frontend elements from your website, such as a button or an input. The easiest way to select them is using the toolbar. However, you can also set them manually if you wish by providing something to identify the element, like a selector.
+Autocapture-based actions are based on frontend elements from your website, such as a button or an input. The easiest way to select them is [using the toolbar](/tutorials/toolbar#creating-actions). However, you can also set them manually if you wish by providing something to identify the element, like a selector.
 
-Our [Autocapture](/docs/data/autocapture) functionality will capture a lot of frontend elements by default, but you will need to manually set anything else you want to be captured. Currently, autocapture will capture any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This important to note if you deviate from established HTML practices, such as using a `div` as a button.
+Our [autocapture](/docs/data/autocapture) functionality captures a lot of frontend elements by default, but you'll need to manually set anything else you want to be captured. 
+ 
+Currently, autocapture captures any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This important to note if you deviate from established HTML practices, such as using a `div` as a button.
 
 > Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [Autocapture](/docs/data/autocapture) for more details.
 
 There are three ways to match your elements:
 
-1. Text: The text on the element, if applicable. If you have buttons across your site, all saying ‘Sign Up’, you can track ALL of them, site-wide, as the same action, by choosing `Text: "Sign Up"` and not matching the URL.
-2. Only match if URL contains: The URL where this action needs to take place. If you choose to match the URL as well, it will track any button on that page if it contains the ‘Sign Up’ text (which could be more than one button).
-3. Matching selectors: details below.
+1. **Text:** The text on the element, if applicable. If you have buttons across your site, all saying ‘Sign Up’, you can track ALL of them, site-wide, as the same action, by choosing `Text: "Sign Up"` and not matching the URL.
+
+2. **Only match if URL contains:** The URL where this action needs to take place. If you choose to match the URL as well, it will track any button on that page if it contains the ‘Sign Up’ text (which could be more than one button).
+
+3. **Matching selectors:** details below.
 
 > _You can have more than one match type selected_. Having multiple fields selected is an `AND` statement, so all of them will need to match an event for it to count as the action.
 
@@ -89,7 +93,7 @@ Regex matching is commonly used for URLs containing id-s like `/some/path/123/vi
 
 ### 3. Custom events
 
-Custom events can be sent to your PostHog instance via our [API](/docs/api) or one of our [libraries](/docs/integrate/overview).
+Custom events can be sent to your PostHog instance via our [API](/docs/api), or one of our [libraries](/docs/integrate/overview).
 
 > It is possible for an action to match multiple events. To do this, click `Add another match group` when you are creating your action. Actions with multiple events work based on `OR` operations. That means that an action like "Clicked Read More Button" OR "Clicked More Information Button" will trigger as soon as the user clicks either of the buttons. Both clicks are not required for the action.
 
