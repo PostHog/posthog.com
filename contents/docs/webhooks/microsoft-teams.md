@@ -1,14 +1,12 @@
 ---
-title: Microsoft Teams
+title: How to setup the Microsoft Teams webhook
 sidebar: Docs
 showTitle: true
 ---
 
 You can receive messages in Teams whenever an [action](/docs/user-guides/actions) triggers.
 
-## How to setup the Teams webhook
-
-### 1. Create an incoming webhook in Teams
+## 1. Create an incoming webhook in Teams
 
 1. Navigate to the channel where you want to add the webhook and select (•••) More Options from the top navigation bar.
 1. Choose Connectors from the drop-down menu and search for Incoming Webhook.
@@ -18,7 +16,7 @@ You can receive messages in Teams whenever an [action](/docs/user-guides/actions
 
 For more details, see the [Microsoft Teams documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#add-an-incoming-webhook-to-a-teams-channel).
 
-### 2. Setup the webhook in PostHog
+## 2. Setup the webhook in PostHog
 
 Navigate to [project settings](https://app.posthog.com/project/settings) in PostHog paste the URL you copied from Teams into the "Webhook integration section".
 
@@ -26,12 +24,12 @@ Navigate to [project settings](https://app.posthog.com/project/settings) in Post
 
 Click "Test & Save" and you should receive a message on Teams. 
 
-### 3. Post actions to the webhook
+## 3. Post actions to the webhook
 
 For each action that should be posted to Teams, select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
 
 ![PostHog Edit Action](../../images/post-action-slack.png)
 
-### 4. Celebrate!
+## 4. Celebrate!
 
 ![](../../images/mt-message.png)

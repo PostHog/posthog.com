@@ -1,14 +1,12 @@
 ---
-title: Discord
+title: How to setup the Discord webhook
 sidebar: Docs
 showTitle: true
 ---
 
-You can send messages to Discord whenever an [action](/docs/user-guides/actions) triggers. 
+You can send messages to Discord whenever an [action](/docs/user-guides/actions) triggers.  
 
-## How to setup the Discord webhook
-
-### 1. Create an incoming webhook in Discord 
+## 1. Create an incoming webhook in Discord 
 
 1. Navigate to the channel where you want to add the webhook and select the 'Edit Channel' option from left navigation pane. 
 1. Select the 'Integrations' option from the left navigation pane. 
@@ -23,7 +21,7 @@ It should look something like this.
 
 For more information, see the [Discord webhook docs](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
 
-### 2. Setup the webhook in PostHog
+## 2. Setup the webhook in PostHog
 
 Copy the Webhook URL from Discord, navigate to project settings in PostHog, and paste the URL into the "Webhook integration section".
 
@@ -31,12 +29,12 @@ Copy the Webhook URL from Discord, navigate to project settings in PostHog, and 
 
 Click "Test & Save" and you should receive a message on Discord. 
 
-### 3. Post actions to the webhook
+## 3. Post actions to the webhook
 
 For each action that should be posted to Discord, select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
 
 ![PostHog edit action](../../images/post-action-slack.png)
 
-### 4. Celebrate
+## 4. Celebrate
 ![](../../images/discord-message.png)
 
