@@ -33,7 +33,7 @@ interface IProps {
 }
 
 export default function Questions({ data, pageContext }: IProps) {
-    const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
+    const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('activity')
 
     const { questions, isLoading, refresh, fetchMore, hasMore } = useQuestions({
         limit: 20,
