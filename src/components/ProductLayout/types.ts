@@ -88,6 +88,11 @@ export interface ITestimonial {
     quote: string
 }
 
+export interface IMarquee {
+    text: string
+    url: string
+}
+
 export interface ISection {
     title?: string
     subtitle?: string
@@ -98,6 +103,7 @@ export interface ISection {
     sections?: ISection[]
     imageFrame?: boolean
     className?: string
+    marquee?: IMarquee[]
     callout?: {
         content: string
         cta: {

@@ -1,11 +1,13 @@
 import React from 'react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { ISection, ISectionHeading, ISectionWrapper } from './types'
+import { IMarquee, ISection, ISectionHeading, ISectionWrapper } from './types'
 import { FeatureList } from './Feature'
 import TwoCol from './TwoCol'
 import slugify from 'slugify'
 import { CallToAction } from 'components/CallToAction'
 import { LightBulbIcon } from '@heroicons/react/outline'
+import GatsbyLink from 'components/Link'
+import MarqueeContainer from 'react-fast-marquee'
 
 export const SectionHeading = ({ title, subtitle }: ISectionHeading) => {
     return (
@@ -20,6 +22,23 @@ export const SectionHeading = ({ title, subtitle }: ISectionHeading) => {
             ) : (
                 subtitle
             )}
+        </div>
+    )
+}
+
+const Marquee = ({ slides }: { slides: IMarquee[] }) => {
+    return (
+        <div className="w-full absolute left-0 bg-gray-accent-light py-4">
+            <MarqueeContainer autoFill pauseOnHover>
+                {slides.map(({ text, url }, index) => {
+                    const Container = url ? GatsbyLink : 'div'
+                    return (
+                        <Container {...(url ? { to: url } : null)} key={text + index} className="mx-2">
+                            "{text}"
+                        </Container>
+                    )
+                })}
+            </MarqueeContainer>
         </div>
     )
 }
@@ -49,6 +68,8 @@ export const Sections = ({ sections }: { sections: ISection[][] }) => {
                                     />
                                 ))}
                             </TwoCol>
+                        ) : section[0].marquee ? (
+                            <Marquee slides={section[0].marquee} />
                         ) : (
                             <Section {...section[0]} />
                         )}

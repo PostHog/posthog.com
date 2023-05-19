@@ -307,6 +307,10 @@ export const query = graphql`
                     icon
                 }
                 productSections {
+                    marquee {
+                        text
+                        url
+                    }
                     title
                     subtitle
                     content
