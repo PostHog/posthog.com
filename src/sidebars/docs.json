@@ -305,8 +305,8 @@
         "url": "",
         "children": [
             {
-                "name": "Message formatting",
-                "url": "/docs/webhooks/message-formatting"
+                "name": "Overview",
+                "url": "/docs/webhooks"
             },
             {
                 "name": "Microsoft Teams",
