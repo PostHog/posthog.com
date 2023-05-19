@@ -1,5 +1,5 @@
 ---
-date: 2023-05-12
+date: 2023-05-19
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
