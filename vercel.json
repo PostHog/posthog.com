@@ -338,7 +338,7 @@
         { "source": "/docs/contribute/stack", "destination": "/handbook/engineering/stack" },
         {
             "source": "/tutorials/categories/session-recordings",
-            "destination": "/tutorials/categories/session-recording"
+            "destination": "/tutorials/categories/session-replay"
         },
         {
             "source": "/docs/contribute/contribute-to-website",

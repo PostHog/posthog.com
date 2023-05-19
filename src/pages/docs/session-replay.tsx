@@ -93,10 +93,7 @@ export const query = graphql`
         tutorials: allMdx(
             limit: 6
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: {
-                frontmatter: { tags: { in: ["session recording"] } }
-                fields: { slug: { regex: "/^/tutorials/" } }
-            }
+            filter: { frontmatter: { tags: { in: ["session replay"] } }, fields: { slug: { regex: "/^/tutorials/" } } }
         ) {
             edges {
                 node {
