@@ -30,9 +30,9 @@ So, what's the list of stuff?
 
 This is 95% of it.
 
-We hire people that are scrappy, proactive, fast, optimistic and usually technical.
+We hire people that are scrappy, proactive, fast, optimistic, low ego and in nearly every role, technical.
 
-... and we optimize the company for them. The first thing to avoid is being slow at letting people go. In many companies, 80% of the management energy goes into the 20% of the team that are underperforming. The cycle looks like this:
+... and we optimize the company for them. Having and maintaining a high bar is very important if you want a smaller group of stronger people - which I think is critical if you're shipping a very technically demanding product. The first thing to avoid is being slow at letting people go. In many companies, 80% of the management energy goes into the 20% of the team that are underperforming. The cycle looks like this:
 
 1. Someone is struggling to perform
 2. Manager starts to micromanage them
@@ -41,11 +41,9 @@ We hire people that are scrappy, proactive, fast, optimistic and usually technic
 
 Instead of going through this cycle, but to be as kind as we can whilst we're at it - ie we offer 4 months' severance.
 
-
+Pay matters too - we have a system for this (INSERT LINK), aim to pay generously, provide kind terms around options, and we have a very rational system for paying people. We review pay _proactively_ and _frequently_ as we don't want to reward people that complain - we want to reward people who are improving, hopefully as a pleasant surprise (we even scrapped performance reviews since these felt high stress and like the "one shot" to get a rise each year). With pay, as a founder, you are by default between a rock and a hard place (if we pay too much we'll run out of cash, but everyone wants to get paid more), so being very thoughtful up front here can remove a huge amount of negativity.
 
 ## Avoid dealing with customers that are a pain to deal with
-
-
 
 We're well on our way to $10M ARR. We don't do any outbound - that means we aren't spending a ton of time dealing with people that aren't very interested in us.
 
@@ -78,7 +76,9 @@ The first set of things matter, but we think discussing the actual work together
 
 ## Swap your roles around and work on things you want to work on
 
-* Be flexible
+## Be flexible
+
+We move deadlines around. We stop work on new shiny stuff and remove the pressure if it becomes obvious the product is getting too buggy. We don't stigmatise changing the goalposts.
 
 ## Be _reasonably_ thrifty
 
