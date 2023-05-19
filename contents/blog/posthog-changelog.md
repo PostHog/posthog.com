@@ -37,7 +37,7 @@ You can now use PostHog to collect [net promoter score (NPS)](https://github.com
 
 Interestingly, this site app wasn't built by our engineering team. It wasn't even built by an engineer. It was built by Joe, from our marketing team, who had never coded before joining PostHog. _That's_ how easy it is to create a new app or integration for PostHog. 
 
-> **Curious about how our 'everybody codes' culture works?** [Joe has written about reflected on his experience on the blog](https://posthog.com/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two). 
+> **Curious about how our 'everybody codes' culture works?** [Joe has reflected on his experience on the blog](https://posthog.com/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two). 
 
 #### Infinite scrolling for session replays
 ![infinite scrolling in posthog](../images/blog/array/infinite_posthog.mp4)
