@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-You can receive messages in Teams whenever any of your specified [actions](/docs/user-guides/actions) are triggered. 
+You can receive messages in Teams whenever an [action](/docs/user-guides/actions) triggers.
 
 ## How to setup the Teams webhook
 
@@ -20,7 +20,7 @@ For more details, see the [Microsoft Teams documentation](https://docs.microsoft
 
 ### 2. Setup the webhook in PostHog
 
-Navigate to project settings in PostHog paste the url you copied from Teams into the "Webhook integration section".
+Navigate to [project settings](https://app.posthog.com/project/settings) in PostHog paste the URL you copied from Teams into the "Webhook integration section".
 
 ![Add webhook integration](../../images/docs/webhooks/webhook-integration.png)
 
@@ -28,7 +28,7 @@ Click "Test & Save" and you should receive a message on Teams.
 
 ### 3. Post actions to the webhook
 
-For each action that should be posted to Slack, select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
+For each action that should be posted to Teams, select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
 
 ![PostHog Edit Action](../../images/post-action-slack.png)
 
