@@ -24,8 +24,6 @@ Every Friday we update this page with the latest new features, fixes, and update
 #### Beta: Early access feature management
 ![feature management](../images/blog/array/feature_management.mp4)
 
-We heard you like betas, so here's a beta for your betas. 
-
 Early access feature management got it's start at [our recent offsite hackathon](/blog/aruba-hackathon) and was intended to make it easier for us to accept users into our beta process, but we're also rolling it out as a feature for you to take advantage of in your own products.
 
 Leveraging feature flags, feature management enables you to present an early access menu to your users so that they can self opt-in or out of betas and other early access features. In the image above you can see it in action as we demo a user opting in to a beta of our new, upcoming UI refresh. 
