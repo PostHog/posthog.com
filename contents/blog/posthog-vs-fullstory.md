@@ -22,12 +22,12 @@ PostHog and FullStory are both powerful tools for understanding user behavior an
 
 In this comparison, we'll explore, compare and contrast PostHog and FullStory in detail, so you can decide which tool is right for you. We’ll look at areas such as…
 
-- Core features and what types of users PostHog and FullStory are built for
-- Product analytics capabilities and how these features connect to others
-- Session replays, performance monitoring and privacy protection
-- Integrations with other software, and PostHog’s app platform
-- Privacy, security and compliance 
-- Pricing details and other frequently asked questions 
+Core features and what types of users PostHog and FullStory are built for
+Product analytics capabilities and how these features connect to others
+Session replays, performance monitoring and privacy protection
+Integrations with other software, and PostHog’s app platform
+Privacy, security and compliance 
+Pricing details and other frequently asked questions 
 
 ### How is PostHog different from FullStory?
 Before delving into the weeds, it’s worth understanding how PostHog is built for a different audience than FullStory and why it has a broader feature set. 
@@ -57,3 +57,143 @@ We say ‘presumably’ because FullStory’s pricing isn’t transparent and th
 In order to offer a straightforward comparison of PostHog and FullStory, we’ll focus this article on the _enterprise_ versions of both products — that is, the most feature-complete tiers. In this way we can clearly establish the features which both products do or do not have without getting bogged down in what features are available on each tier. However, if a particular feature is critically important to you, we strongly advise checking the details of FullStory’s pricing, as it isn’t as straightforward as PostHog’s. 
 
 ### Core feature comparison
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+          <td className="w-3/12"></td>
+            <td><strong>FullStory</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Product analytics</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track events and conversion; analyze user behavior</td>
+        </tr>
+        <tr>
+            <td><strong>Session replays</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Watch real users use your product; diagnose bugs</td>
+        </tr>
+        <tr>
+            <td><strong>Feature flags</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Roll out features safely; toggle features for cohorts or individuals</td>
+        </tr>
+        <tr>
+            <td><strong>A/B testing</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Test changes and analyze impact</td>
+        </tr>
+        <tr>
+            <td><strong>In-app prompts and messages</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Send messages to users in your app</td>
+        </tr>
+        <tr>
+            <td><strong>Apps/Integrations</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Push and pull data to other destinations</td>
+        </tr>
+        <tr>
+            <td><strong>Open source</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Build your own apps and contribute code</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+- **Product analytics:** Both FullStory and PostHog offer product analytic features, but while both can tick this box broadly there’s a drastic difference in the implementation for these features. We’ll therefore explore this comparison in greater detail below. 
+
+- **Apps/Integrations:** While both FullStory and PostHog offer standard integrations between themselves and other platforms — for example, for sending data to Salesforce — PostHog also gets a step further. On PostHog, users can additionally build their own apps on top of the platform, including site apps which can be used to inject surveys, messages and prompts into a product. We’ll explore this in more detail below, or you can [check the PostHog app library](/apps) for more info. 
+
+### Product Analytics
+
+PostHog and FullStory are ultimately positioned for different types of users, and this is reflected in the scope of their analytics offering. While FullStory is aimed most squarely at UI designers and general product managers, PostHog is suited to product engineers, front-end developers and more technical users. As a result, PostHog offers a wider range of analytics tools, including [its own SQL dialect for detailed analysis](/docs/product-analytics/hogql).
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+	<td className="w-3/12"></td>
+            <td><strong>FullStory</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Event tracking</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Log page views, clicks and other custom events.</td>
+        </tr>
+        <tr>
+            <td><strong>Trends</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Track your data over time and visualize in charts.</td>
+        </tr>
+        <tr>
+            <td><strong>Funnels</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Visualize conversion rates and drop-offs.</td>
+        </tr>
+        <tr>
+            <td><strong>Dashboards</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Display a collection of insights and trends.</td>
+        </tr>
+        <tr>
+            <td><strong>Correlation analysis</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Automatically highlight factors affecting funnel conversion rates.</td>
+        </tr>
+        <tr>
+            <td><strong>Group analytics</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Group events by users in the same company, project, or any other attribute.</td>
+        </tr>
+        <tr>
+            <td><strong>Lifecycle insights</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Break down events from new, returning, resurrecting, and dormant users.</td>
+        </tr>
+        <tr>
+            <td><strong>Retention insights</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Understand churn with returning user actions.</td>
+        </tr>
+       <tr>
+            <td><strong>Stickiness insights</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>See how many times users perform an event in a period of time.</td>
+        </tr>
+         <tr>
+            <td><strong>Path insights</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Inspect how users journey through your product.</td>
+        </tr>
+    </tbody>
+</table>
+</div>
