@@ -16,7 +16,7 @@
             },
             {
                 "name": "Install PostHog",
-                "url": "/docs/getting-started/install"
+                "url": "/docs/getting-started/install?tab=snippet"
             },
             {
                 "name": "Send events",
