@@ -131,6 +131,7 @@ export default function Product({ data, location, pageContext }) {
                 title={title}
                 subtitle={subtitle}
                 image={productHero}
+                customers={customers}
             />
         ),
         HeroCondensed: (props: any) => (
@@ -384,6 +385,7 @@ export const query = graphql`
                     slug
                 }
                 frontmatter {
+                    customer
                     title
                     logo {
                         publicURL

@@ -1,4 +1,5 @@
 import { CallToAction } from 'components/CallToAction'
+import Link from 'components/Link'
 import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image'
 import React from 'react'
 
@@ -8,6 +9,7 @@ export default function Hero({
     image,
     mainCTA,
     pricingCTA,
+    customers,
 }: {
     title: string
     subtitle: string
@@ -24,7 +26,9 @@ export default function Hero({
         title: string
         url: string
     }
+    customers: any
 }) {
+    console.log(customers)
     const gatsbyImage = image?.image && getImage(image?.image)
     const imageStyles = { maxWidth: image?.width || '56rem', maxHeight: image?.height || 'auto' }
     return (
@@ -48,6 +52,27 @@ export default function Hero({
                                 {pricingCTA.title}
                             </CallToAction>
                         </div>
+                    )}
+                    {customers && customers.nodes.length > 0 && (
+                        <ul className="m-0 p-0 list-none mt-12 flex lg:space-x-4 lg:items-center items-start lg:flex-row flex-col space-y-6 lg:space-y-0">
+                            {customers.nodes.map(
+                                ({
+                                    fields: { slug },
+                                    frontmatter: {
+                                        customer,
+                                        logo: { publicURL },
+                                    },
+                                }) => {
+                                    return (
+                                        <li key={slug}>
+                                            <Link to={slug}>
+                                                <img alt={customer} src={publicURL} className="max-w-[180px]" />
+                                            </Link>
+                                        </li>
+                                    )
+                                }
+                            )}
+                        </ul>
                     )}
                 </div>
 
