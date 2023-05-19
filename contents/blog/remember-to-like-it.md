@@ -12,7 +12,7 @@ featuredImageType: full
 category: CEO diaries
 ---
 
-I shouldn't be embarassed to admit that I have an exec coach, but here we are.
+I shouldn't be embarrassed to admit that I have an exec coach, but here we are.
 
 After a few months of a call every couple of weeks, my cofounder and I were in San Francisco so we met our coach together for dinner. The restaurant was dark and expensive. We weren't sure who was going to get the bill.
 
