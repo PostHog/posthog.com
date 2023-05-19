@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
 import { ZoomImage } from 'components/ZoomImage'
 import { TransformImage } from 'react-markdown/lib/ast-to-react'
+import remarkGfm from 'remark-gfm'
 
 export const Markdown = ({
     children,
@@ -14,6 +15,7 @@ export const Markdown = ({
 }) => {
     return (
         <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
             className="flex-1 text-base overflow-hidden text-ellipsis squeak-post-markdown"
