@@ -28,7 +28,7 @@ Early access feature management got it's start at [our recent offsite hackathon]
 
 Leveraging feature flags, feature management enables you to present an early access menu to your users so that they can self opt-in or out of betas and other early access features. In the image above you can see it in action as we demo a user opting in to a beta of our new, upcoming UI refresh. 
 
-> Early access feature management is currently in beta. You can [check the docs](/docs/feature-flags/early-access-feature-management) for more information, but we'd really [love feedback about it](http://app.posthog.com/home#supportModal) too! 
+> **Early access feature management is currently in beta.** You can [check the docs](/docs/feature-flags/early-access-feature-management) for more information, but we'd really [love feedback about it](http://app.posthog.com/home#supportModal) too! 
 
 #### NPS survey app
 ![nps score collector](../images/blog/array/nps_posthog.mp4)
@@ -37,7 +37,7 @@ You can now use PostHog to collect [net promoter score (NPS)](https://github.com
 
 Interestingly, this site app wasn't built by our engineering team. It wasn't even built by an engineer. It was built by Joe, from our marketing team, who had never coded before joining PostHog. _That's_ how easy it is to create a new app or integration for PostHog. 
 
-> **Curious about how our 'everybody codes' culture works?** [Joe has written about reflected on his experience on the blog](https://posthog.com/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two). 
+> **Curious about how our 'everybody codes' culture works?** [Joe has reflected on his experience on the blog](https://posthog.com/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two). 
 
 #### Infinite scrolling for session replays
 ![infinite scrolling in posthog](../images/blog/array/infinite_posthog.mp4)
