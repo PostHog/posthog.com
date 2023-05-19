@@ -541,6 +541,10 @@
                 "url": "/docs/data/annotations"
             },
             {
+                "name": "Autocapture",
+                "url": "/docs/data/autocapture"
+            },
+            {
                 "name": "Cohorts",
                 "url": "/docs/data/cohorts"
             },
