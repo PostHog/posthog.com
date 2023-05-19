@@ -285,11 +285,11 @@ analytics.track('[event name]', {
 
 This allows these groups to be used for analyzing, filtering, and visualizing events in PostHog. An example of a metric that benefits from group event tracking is the unique number of organizations signed up (rather than individuals). For more details about group analytics, you can check out [our product manual](https://posthog.com/manual/group-analytics). 
 
-## Combining events into Actions
+## Combining events into actions
 
 Often a single event does not make up an entire behavior that you want to track. For example, a signup can include not only pressing the signup button, but entering the correct information, and making it past the basic information input stage. 
 
-[Actions](/docs/data/actions) enable you to combine events that you want to be tracked together. You can then visualize actions in [Insights](/docs/product-analytics/insights) and [Dashboards](/docs/product-analytics/dashboards). For more detail, see our [Action docs](/docs/data/actions).
+[Actions](/docs/data/actions) enable you to combine events that you want to be tracked together. You can then visualize actions in [insights](/docs/product-analytics/insights) and [dashboards](/docs/product-analytics/dashboards). For more detail, see our [action docs](/docs/data/actions).
 
 ## What’s next?
 

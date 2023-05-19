@@ -10,9 +10,9 @@ availability:
 
 Often a single event does not make up an entire behavior that you want to track. For example, a signup can include not only pressing the signup button, but entering the correct information, and making it past the basic information input stage. 
 
-Actions enable you to combine events that you want to be tracked together. You can then visualize actions in [Insights](/docs/product-analytics/insights) and [Dashboards](/docs/product-analytics/dashboards).
+Actions enable you to combine events that you want to be tracked together. You can then visualize actions in [insights](/docs/product-analytics/insights) and [dashboards](/docs/product-analytics/dashboards).
 
-You can create and view actions by going to Data Management in the left-hand navigation sidebar, and then click on the Actions tab.
+You can create and view actions by going to "Data Management" in the left-hand navigation sidebar, and then click on the ["Actions" tab](https://app.posthog.com/data-management/actions).
 
 ![How to view actions in PostHog](../../images/docs/data/actions/viewing-actions.mp4)
 
@@ -20,15 +20,15 @@ You can create and view actions by going to Data Management in the left-hand nav
 
 Actions can be created by either:
 1. Clicking the "New action" button in the Actions tab, or
-2. Using the [PostHog Toolbar](/docs/product-analytics/toolbar) to tag the elements that are relevant. We have a step-by-step tutorial on [creating actions using the toolbar](/tutorials/toolbar#creating-actions).
+2. Using the [PostHog Toolbar](/docs/product-analytics/toolbar) to tag the elements that are relevant. We have a step-by-step tutorial on [creating actions using the toolbar](/tutorials/toolbar#using-inspect-and-creating-actions).
 
-> Note: Actions are retroactive, meaning they also tag events that happened in the past, not only events that happen after the action was created.
+> Note: Actions are retroactive, meaning they also apply to past events, not only events that happen after the action was created.
 
 You can create actions using events from three sources:
 
 ### 1. Autocapture
 
-Autocapture-based actions are based on frontend elements from your website, such as a button or an input. The easiest way to select them is [using the toolbar](/tutorials/toolbar#creating-actions). However, you can also set them manually if you wish by providing something to identify the element, like a selector.
+Autocapture-based actions are based on frontend elements from your website, such as a button or an input. The easiest way to select them is [using the toolbar](/tutorials/toolbar#using-inspect-and-creating-actions). However, you can also set them manually if you wish by providing something to identify the element, like a selector.
 
 Our [autocapture](/docs/data/autocapture) functionality captures a lot of frontend elements by default, but you'll need to manually set anything else you want to be captured. 
  
@@ -38,7 +38,7 @@ Currently, autocapture captures any click or change of input or submission of `a
 
 There are three ways to match your elements:
 
-1. **Text:** The text on the element, if applicable. If you have buttons across your site, all saying ‘Sign Up’, you can track ALL of them, site-wide, as the same action, by choosing `Text: "Sign Up"` and not matching the URL.
+1. **Text:** The text on the element, if applicable. If you have buttons across your site, all saying ‘Sign Up’, you can track **ALL** of them, site-wide, as the same action, by choosing `Text: "Sign Up"` and not matching the URL.
 
 2. **Only match if URL contains:** The URL where this action needs to take place. If you choose to match the URL as well, it will track any button on that page if it contains the ‘Sign Up’ text (which could be more than one button).
 
@@ -89,11 +89,11 @@ You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Select
 
 Actions can be creating using page view events that match urls containing a string, based on a regex or match exactly.
 
-Regex matching is commonly used for URLs containing id-s like `/some/path/123/view`, which could be matched by a regex like `/some/path/\d+/view` into a single action, allowing for further analysis in other areas of PostHog.
+Regex matching is commonly used for URLs containing IDs like `/some/path/123/view`, which could be matched by a regex like `/some/path/\d+/view` into a single action.
 
 ### 3. Custom events
 
-Custom events can be sent to your PostHog instance via our [API](/docs/api), or one of our [libraries](/docs/integrate/overview).
+Custom events can be sent to your PostHog instance via our [API](/docs/api), or one of our [SDKs](/docs/getting-started/install?tab=sdks).
 
 > It is possible for an action to match multiple events. To do this, click `Add another match group` when you are creating your action. Actions with multiple events work based on `OR` operations. That means that an action like "Clicked Read More Button" OR "Clicked More Information Button" will trigger as soon as the user clicks either of the buttons. Both clicks are not required for the action.
 
