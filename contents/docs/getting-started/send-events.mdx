@@ -112,7 +112,7 @@ In general, our guidance is to track events on both the frontend and backend whe
 
 That said, we strongly recommend tracking the following events from the server-side:
 
-1. **Sign-up events**: Given how high value these events are, you should also send a server-side events whenever possible
+1. **Sign-up events**: Given how high value these events are, you should also send server-side events whenever possible
 
 2. **C(R)UD events**: This is a broad class of events, but generally speaking, whenever you receive an API request to create or update a specific resource within your application, it's useful to forward these to PostHog. We also recommend including context about the request itself in the event (latency, errors, any properties passed in the request payload, etc.)
 
