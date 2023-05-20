@@ -22,7 +22,7 @@ Actions can be created by either:
 1. Clicking the "New action" button in the Actions tab, or
 2. Using the [PostHog Toolbar](/docs/product-analytics/toolbar) to tag the elements that are relevant. We have a step-by-step tutorial on [creating actions using the toolbar](/tutorials/toolbar#using-inspect-and-creating-actions).
 
-> Note: Actions are retroactive, meaning they also apply to past events, not only events that happen after the action was created.
+> Note: Actions are retroactive, meaning they also apply to past events, not only events that happen after the action was created.
 
 You can create actions using events from three sources:
 
@@ -48,27 +48,25 @@ There are three ways to match your elements:
 
 #### Matching selectors
 
-You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" target="_blank" rel="noopener">standard basic CSS selectors</a> to uniquely identify the elements you care about. The following types of selectors are supported:
+You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" target="_blank" rel="noopener">standard basic CSS selectors</a> to uniquely identify the elements you care about.
+
+The following types of selectors are supported:
+
 <ul>
     <li>
         <strong>Recommended:</strong> Attribute selectors. Example:
-        <code>[data-attr="value"]</code> will match elements that have the
-        given attribute and value.
-        <blockquote>
-            Please note that special attribute operators (e.g. <code>*</code>, <code>~</code>
-            <code>|</code>, ...) are currently <b>not</b> supported. Combining multiple attribute selectors is also <b>not</b> supported.
-        </blockquote>
+        <code>[data-attr="value"]</code> will match elements that have the given attribute and value.
     </li>
     <li>
-        ID selectors. Example: <code>#special-link</code> will match
+        <strong>ID selectors.</strong> Example: <code>#special-link</code> will match
         elements with ID "special-link".
     </li>
     <li>
-        Class selectors. Example: <code>.important-link</code> will match
+        <strong>Class selectors.</strong> Example: <code>.important-link</code> will match
         elements with CSS class "important-link".
     </li>
     <li>
-        Type selectors. Example: <code>input</code> will match any
+        <strong>Type selectors.</strong> Example: <code>input</code> will match any
         <code>&lt;input&gt;</code> elements.
     </li>
     <li>
@@ -84,6 +82,12 @@ You can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Select
         about combinators. Examples: <code>form > [data-attr="submit"]</code> or <code>button span</code>.
     </li>
 </ul>
+
+The following patterns _are not_ currently supported:
+
+- Wildcard operators (e.g. <code>*</code>, <code>~</code>, <code>|</code>)
+- Combining multiple attribute selectors
+- [Non-alphanumeric classes](https://github.com/PostHog/posthog/issues/15480) (like clases containing `-`, `[]`, `.`)
 
 ### 2. Page views
 
