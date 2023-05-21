@@ -2,6 +2,7 @@ import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image'
 import React from 'react'
+import { useLocation } from '@reach/router'
 
 export default function Hero({
     title,
@@ -28,7 +29,7 @@ export default function Hero({
     }
     customers: any
 }) {
-    console.log(customers)
+    const { pathname } = useLocation()
     const gatsbyImage = image?.image && getImage(image?.image)
     const imageStyles = { maxWidth: image?.width || '56rem', maxHeight: image?.height || 'auto' }
     return (
@@ -66,7 +67,8 @@ export default function Hero({
                                     return (
                                         <li key={slug} className="mb-2 mr-2 lg:mr-4 last:mr-0">
                                             <Link
-                                                to={slug}
+                                                state={{ customer }}
+                                                to={`/${pathname.split('/')[1]}/customers`}
                                                 className="inline-block hover:bg-gray-accent-light rounded-sm p-1 cursor-pointer relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px]"
                                             >
                                                 <img alt={customer} src={publicURL} className="max-h-[30px]" />

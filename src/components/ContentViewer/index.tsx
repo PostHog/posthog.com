@@ -26,10 +26,11 @@ interface IProps {
         video?: string
     }[]
     title?: string
+    initialIndex?: number
 }
 
-export default function ContentViewer({ content, title }: IProps) {
-    const [currentIndex, setCurrentIndex] = useState<number | null>(null)
+export default function ContentViewer({ content, title, initialIndex }: IProps) {
+    const [currentIndex, setCurrentIndex] = useState<number | null>(initialIndex ?? null)
     const [contentView, setContentView] = useState('Article')
     const currentContent = currentIndex !== null && content[currentIndex]
     const breakpoints = useBreakpoint()
@@ -45,7 +46,7 @@ export default function ContentViewer({ content, title }: IProps) {
 
     useEffect(() => {
         if (breakpoints.sm !== undefined) {
-            setCurrentIndex(breakpoints.sm ? null : 0)
+            setCurrentIndex(breakpoints.sm ? null : initialIndex ?? null)
         }
     }, [breakpoints])
 

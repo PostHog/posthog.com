@@ -249,7 +249,9 @@ export default function Product({ data, location, pageContext }) {
             </div>
         ),
         Questions,
-        Customers: (props: any) => <Customers {...props} customers={customers?.nodes} />,
+        Customers: (props: any) => (
+            <Customers {...props} initialCustomer={location.state?.customer} customers={customers?.nodes} />
+        ),
     }
 
     return (
