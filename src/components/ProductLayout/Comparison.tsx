@@ -8,7 +8,7 @@ export default function Comparison({ children }: IComparison) {
             <div className="flex justify-between items-end">
                 <div>
                     <h2 className="m-0">PostHog vs...</h2>
-                    {/*<p className="m-0">{description}</p>*/}
+                    <p className="m-0">How does PostHog compare?</p>
                 </div>
             </div>
 

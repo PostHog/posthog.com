@@ -86,6 +86,7 @@ const menu = [
             { name: 'Features', url: '/ab-testing/features' },
             { name: 'Pricing', url: '/ab-testing/pricing' },
             { name: 'Customers', url: '/ab-testing/customers' },
+            { name: 'Comparisons', url: '/ab-testing/comparisons' },
             { name: 'Docs', url: '/ab-testing/documentation' },
             { name: 'Tutorials', url: '/ab-testing/tutorials' },
             { name: 'Roadmap', url: '/ab-testing/roadmap' },
@@ -100,6 +101,7 @@ const menu = [
         children: [
             { name: 'Features', url: '/product-os/features' },
             { name: 'Pricing', url: '/product-os/pricing' },
+            { name: 'Comparisons', url: '/product-os/comparisons' },
             { name: 'Roadmap', url: '/product-os/roadmap' },
             { name: 'Questions', url: '/product-os/questions' },
         ],
