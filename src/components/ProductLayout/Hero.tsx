@@ -54,7 +54,7 @@ export default function Hero({
                         </div>
                     )}
                     {customers && customers.nodes.length > 0 && (
-                        <ul className="m-0 p-0 list-none mt-12 flex lg:space-x-4 lg:items-center items-start lg:flex-row flex-col space-y-6 lg:space-y-0">
+                        <ul className="m-0 p-0 list-none mt-16 flex flex-wrap items-center">
                             {customers.nodes.map(
                                 ({
                                     fields: { slug },
@@ -64,9 +64,12 @@ export default function Hero({
                                     },
                                 }) => {
                                     return (
-                                        <li key={slug}>
-                                            <Link to={slug}>
-                                                <img alt={customer} src={publicURL} className="max-w-[180px]" />
+                                        <li key={slug} className="mb-2 mr-2 lg:mr-4 last:mr-0">
+                                            <Link
+                                                to={slug}
+                                                className="inline-block hover:bg-gray-accent-light rounded-sm p-1 cursor-pointer relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px]"
+                                            >
+                                                <img alt={customer} src={publicURL} className="max-h-[30px]" />
                                             </Link>
                                         </li>
                                     )
