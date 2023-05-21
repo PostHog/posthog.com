@@ -46,7 +46,7 @@ export default function ContentViewer({ content, title, initialIndex }: IProps) 
 
     useEffect(() => {
         if (breakpoints.sm !== undefined) {
-            setCurrentIndex(breakpoints.sm ? null : initialIndex ?? null)
+            setCurrentIndex(breakpoints.sm ? null : initialIndex ?? 0)
         }
     }, [breakpoints])
 
