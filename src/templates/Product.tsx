@@ -112,34 +112,34 @@ const Footer = ({ location }) => {
     return (
         currentMenu?.children &&
         currentMenu?.children?.length > 0 && (
-            <section className="bg-gray-accent-light mt-24 mb-12 xl:-mx-12 lg:-mx-6 -mx-5 py-12 px-5 lg:px-6 xl:px-12">
-                <div className="flex justify-between max-w-5xl mx-auto md:flex-row flex-col">
-                    <div>
-                        <h4>More about {currentMenu.name.toLowerCase()}</h4>
-                        <ul className="m-0 p-0 list-none grid gap-y-2">
-                            {currentMenu?.children?.map(({ name, url }) => {
-                                const active = location.pathname.startsWith(url)
-                                return (
-                                    <li className="flex items-center space-x-2" key={url}>
-                                        <Link
-                                            className={`${
-                                                active ? 'text-red font-semibold active-link' : 'text-black font-normal'
-                                            } relative pl-2`}
-                                            to={url}
-                                        >
-                                            {name}
-                                        </Link>
-                                        {active && <span className="opacity-60 text-sm">(You are here)</span>}
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </div>
-                    <div className="relative md:w-[450px] md:mt-0 md:pt-0 pt-6 mt-6 md:border-none border-t border-gray-accent-light border-dashed">
-                        <div className="md:absolute top-[-117px]">{currentMenu.Receipt}</div>
-                    </div>
-                </div>
-            </section>
+            <>
+                <section className="mt-8 -mx-5 px-5 md:mx-0 md:px-0">
+                    <h4>More about {currentMenu.name.toLowerCase()}</h4>
+                    <ul className="flex m-0 px-0 pb-2.5 md:pb-0 relative after:w-full after:md:border-t after:border-gray-accent-light after:border-dashed after:absolute after:top-0  w-full overflow-x-auto">
+                        {currentMenu?.children?.map(({ name, url }) => {
+                            const active = location.pathname.startsWith(url)
+                            return (
+                                <li
+                                    className="flex items-center !text-primary/75 hover:border-gray-accent-light mb-1.5 pt-0.5 text-sm [font-variation-settings:_'wght'_700] whitespace-nowrap rounded relative z-20 hover:scale-[1.01] active:scale-[.99] tracking-[-.1px] group"
+                                    key={url}
+                                >
+                                    <Link
+                                        className={`${
+                                            active
+                                                ? 'text-red font-bold before:bg-red'
+                                                : 'text-black font-normal text-primary/75 hover:text-primary hover:bg-gray-accent-light rounded-sm relative mt-1'
+                                        } relative px-4 border-solid py-1.5 before:absolute before:h-[2px] before:-top-1 before:left-0 before:w-full`}
+                                        to={url}
+                                    >
+                                        {name}
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </section>
+                {/* <div className="">{currentMenu.Receipt}</div> */}
+            </>
         )
     )
 }
