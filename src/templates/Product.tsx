@@ -17,18 +17,19 @@ import CTA from 'components/ProductLayout/CTA'
 import PairsWith from 'components/ProductLayout/PairsWith'
 import Documentation from 'components/ProductLayout/Documentation'
 import PostLayout from 'components/PostLayout'
-import { IMenu } from 'components/PostLayout/types'
 import { AbTesting, Analytics, FeatureFlags, SessionRecording } from 'components/ProductIcons'
 import { Platform } from 'components/NotProductIcons'
 import Tutorials from 'components/ProductLayout/Tutorials'
 import { PlanComparison } from 'components/Pricing/PlanComparison'
 import Questions from 'components/ProductLayout/Questions'
 import Customers from 'components/ProductLayout/Customers'
+import Link from 'components/Link'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const Check = (props: any) => <CheckIcon {...props} className="w-5 mx-auto" />
 const Close = (props: any) => <CloseIcon {...props} className="w-5 mx-auto" />
 
-const menu: IMenu[] = [
+const menu = [
     {
         icon: <Analytics className="w-5" />,
         name: 'Product analytics',
@@ -43,6 +44,7 @@ const menu: IMenu[] = [
             { name: 'Roadmap', url: '/product-analytics/roadmap' },
             { name: 'Questions', url: '/product-analytics/questions' },
         ],
+        Receipt: <StaticImage width={450} src="../../contents/images/products/product-analytics/receipt.png" />,
     },
     {
         icon: <SessionRecording className="w-5" />,
@@ -58,6 +60,7 @@ const menu: IMenu[] = [
             { name: 'Tutorials', url: '/session-replay/tutorials' },
             { name: 'Questions', url: '/session-replay/questions' },
         ],
+        Receipt: <StaticImage src="../../contents/images/products/product-analytics/receipt.png" />,
     },
     {
         icon: <FeatureFlags className="w-5" />,
@@ -72,6 +75,7 @@ const menu: IMenu[] = [
             { name: 'Roadmap', url: '/feature-flags/roadmap' },
             { name: 'Questions', url: '/feature-flags/questions' },
         ],
+        Receipt: <StaticImage src="../../contents/images/products/product-analytics/receipt.png" />,
     },
     {
         icon: <AbTesting className="w-5" />,
@@ -85,6 +89,7 @@ const menu: IMenu[] = [
             { name: 'Roadmap', url: '/ab-testing/roadmap' },
             { name: 'Questions', url: '/ab-testing/questions' },
         ],
+        Receipt: <StaticImage src="../../contents/images/products/product-analytics/receipt.png" />,
     },
     {
         icon: <Platform className="w-5" />,
@@ -97,8 +102,46 @@ const menu: IMenu[] = [
             { name: 'Roadmap', url: '/product-os/roadmap' },
             { name: 'Questions', url: '/product-os/questions' },
         ],
+        Receipt: <StaticImage src="../../contents/images/products/product-analytics/receipt.png" />,
     },
 ]
+
+const Footer = ({ location }) => {
+    const currentMenu = menu.find(({ url }) => location.pathname.startsWith(url))
+    return (
+        currentMenu?.children &&
+        currentMenu?.children?.length > 0 && (
+            <section className="bg-gray-accent-light mt-24 mb-12 xl:-mx-12 lg:-mx-6 -mx-5 py-12 px-5 lg:px-6 xl:px-12">
+                <div className="flex justify-between max-w-5xl mx-auto md:flex-row flex-col">
+                    <div>
+                        <h4>More about {currentMenu.name.toLowerCase()}</h4>
+                        <ul className="m-0 p-0 list-none grid gap-y-2">
+                            {currentMenu?.children?.map(({ name, url }) => {
+                                const active = location.pathname.startsWith(url)
+                                return (
+                                    <li className="flex items-center space-x-2" key={url}>
+                                        <Link
+                                            className={`${
+                                                active ? 'text-red font-semibold active-link' : 'text-black font-normal'
+                                            } relative pl-2`}
+                                            to={url}
+                                        >
+                                            {name}
+                                        </Link>
+                                        {active && <span className="opacity-60 text-sm">(You are here)</span>}
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                    <div className="relative md:w-[450px] md:mt-0 md:pt-0 pt-6 mt-6 md:border-none border-t border-gray-accent-light border-dashed">
+                        <div className="md:absolute top-[-117px]">{currentMenu.Receipt}</div>
+                    </div>
+                </div>
+            </section>
+        )
+    )
+}
 
 export default function Product({ data, location, pageContext }) {
     const { pageData, blogPosts, documentation, tutorials, customers } = data
@@ -228,6 +271,7 @@ export default function Product({ data, location, pageContext }) {
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>
+                <Footer location={location} />
             </PostLayout>
         </Layout>
     )
