@@ -69,6 +69,7 @@ const menu = [
         children: [
             { name: 'Features', url: '/feature-flags/features' },
             { name: 'Pricing', url: '/feature-flags/pricing' },
+            { name: 'Customers', url: '/feature-flags/customers' },
             { name: 'Comparisons', url: '/feature-flags/comparisons' },
             { name: 'Docs', url: '/feature-flags/documentation' },
             { name: 'Tutorials', url: '/feature-flags/tutorials' },
@@ -84,6 +85,7 @@ const menu = [
         children: [
             { name: 'Features', url: '/ab-testing/features' },
             { name: 'Pricing', url: '/ab-testing/pricing' },
+            { name: 'Customers', url: '/ab-testing/customers' },
             { name: 'Docs', url: '/ab-testing/documentation' },
             { name: 'Tutorials', url: '/ab-testing/tutorials' },
             { name: 'Roadmap', url: '/ab-testing/roadmap' },
