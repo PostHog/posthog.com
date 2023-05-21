@@ -100,7 +100,6 @@ const menu = [
         children: [
             { name: 'Features', url: '/product-os/features' },
             { name: 'Pricing', url: '/product-os/pricing' },
-            { name: 'Blog posts', url: '/product-os/posts' },
             { name: 'Roadmap', url: '/product-os/roadmap' },
             { name: 'Questions', url: '/product-os/questions' },
         ],
