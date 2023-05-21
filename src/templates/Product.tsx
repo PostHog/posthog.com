@@ -33,7 +33,7 @@ const menu = [
     {
         icon: <Analytics className="w-5" />,
         name: 'Product analytics',
-        url: '/product-analytics',
+        url: '/product-analytics/features',
         children: [
             { name: 'Features', url: '/product-analytics/features' },
             { name: 'Pricing', url: '/product-analytics/pricing' },
@@ -49,7 +49,7 @@ const menu = [
     {
         icon: <SessionRecording className="w-5" />,
         name: 'Session replay',
-        url: '/session-replay',
+        url: '/session-replay/features',
         children: [
             { name: 'Features', url: '/session-replay/features' },
             { name: 'Pricing', url: '/session-replay/pricing' },
@@ -65,7 +65,7 @@ const menu = [
     {
         icon: <FeatureFlags className="w-5" />,
         name: 'Feature flags',
-        url: '/feature-flags',
+        url: '/feature-flags/features',
         children: [
             { name: 'Features', url: '/feature-flags/features' },
             { name: 'Pricing', url: '/feature-flags/pricing' },
@@ -81,7 +81,7 @@ const menu = [
     {
         icon: <AbTesting className="w-5" />,
         name: 'A/B testing',
-        url: '/ab-testing',
+        url: '/ab-testing/features',
         children: [
             { name: 'Features', url: '/ab-testing/features' },
             { name: 'Pricing', url: '/ab-testing/pricing' },
@@ -96,7 +96,7 @@ const menu = [
     {
         icon: <Platform className="w-5" />,
         name: 'Product OS',
-        url: '/product-os',
+        url: '/product-os/features',
         children: [
             { name: 'Features', url: '/product-os/features' },
             { name: 'Pricing', url: '/product-os/pricing' },
@@ -108,7 +108,7 @@ const menu = [
 ]
 
 const Footer = ({ location }) => {
-    const currentMenu = menu.find(({ url }) => location.pathname.startsWith(url))
+    const currentMenu = menu.find(({ url }) => location.pathname.startsWith('/' + url.split('/')[1]))
     return (
         currentMenu?.children &&
         currentMenu?.children?.length > 0 && (
