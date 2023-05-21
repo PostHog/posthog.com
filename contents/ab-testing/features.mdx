@@ -140,6 +140,29 @@ customerURLs: [
     "/customers/vendasta",
     "/customers/brainboard"
 ]
+productPairsWith: [
+    {
+        icon: 'Analytics',
+        title: 'Product analytics',
+        description:
+            'Run analysis based on the value of a test, or build a cohort of users from a test variant',
+            url: '/product-analytics'
+    },
+    {
+        icon: 'SessionRecording',
+        title: 'Session replay',
+        description:
+            'Watch recordings of users in a variant to discover nuances in why they did or didn’t complete the goal',
+            url: '/session-replay'
+    },
+    {
+        icon: 'FeatureFlags',
+        title: 'Feature flags',
+        description:
+            'Make changes to the feature flag the experiment uses - including JSON payload for each variant',
+            url: '/feature-flags'
+    },
+]
 ---
 
 <Hero />
@@ -149,5 +172,7 @@ customerURLs: [
 <Sections />
 
 <MainFeatures />
+
+<PairsWith />
 
 <CTA />

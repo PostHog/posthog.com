@@ -304,7 +304,6 @@ export const query = graphql`
                 productBlog {
                     title
                 }
-                productMenuItems
                 productHero {
                     image {
                         childImageSharp {

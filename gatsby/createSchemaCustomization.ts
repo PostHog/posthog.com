@@ -38,6 +38,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       username: String
       teamData: TeamData
     }
+    type MdxFrontmatterProductSections implements Node {
+      image: File
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
