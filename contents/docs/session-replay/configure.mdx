@@ -22,7 +22,7 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-## Console logs recording (beta)
+## Console logs recording
 
 PostHog can also capture console logs from your application. This is useful for debugging, providing extra context on what is happening in your users browser environment. As console logs can contain sensitive information we do not capture these logs automatically. You can enable this feature globally from your PostHog [project settings page](https://app.posthog.com/project/settings) or client-side by setting `enable_recording_console_log` in our [JavaScript library config](/docs/integrate/client/js/#config) to `true`.
 
@@ -36,6 +36,30 @@ posthog.init('<ph_project_api_key>', {
     // ... other options
 })
 ```
+
+## Network recording
+
+PostHog can capture network requests that occur during the browser session so you can see the effect of slow network requests or errors on the user experience.
+
+These network request can be modified before capture to remove sensitive information from the URL like so.
+
+```javascript
+posthog.init('<ph_project_api_key>', {
+    session_recording: {
+        maskNetworkRequestFn: (request) => {
+            // For example: ignoring a request entirely
+            if (request.url.includes('example.com')) {
+                return null
+            }
+
+            // ... or remove the query string from the URL
+            request.url = request.url.split('?')[0]
+            return request
+        }
+    }
+})
+```
+
 
 ## Further controls
 

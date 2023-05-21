@@ -86,4 +86,5 @@ export interface IProps {
     contentContainerClasses?: string
     stickySidebar?: boolean
     hideWidthToggle?: boolean
+    isMenuItemActive?: ({ name, url }: { name: string; url?: string }) => boolean
 }

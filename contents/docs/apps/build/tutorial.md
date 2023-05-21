@@ -98,7 +98,7 @@ There are four ways to use apps you build:
 1. Reference the location of the app on your local instance (e.g. /Users/yourname/path/to/app)  
 
     This can be configured in 'Settings' -> 'Project Apps'.
-1. Submit it to the official repository. [See below](#submitting-your-plugin) 
+1. Submit it to the official repository so that it can be installed on PostHog Cloud. [See below](#submitting-your-plugin) 
 
 ## Submitting your app
 

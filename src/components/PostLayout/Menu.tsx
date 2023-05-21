@@ -7,6 +7,7 @@ import { Link as ScrollLink } from 'react-scroll'
 import { AnimatePresence, motion } from 'framer-motion'
 import * as ProductIcons from '../ProductIcons'
 import * as NotProductIcons from '../NotProductIcons'
+import { usePost } from './hooks'
 
 const Chevron = ({ open, className = '' }: { open: boolean; className?: string }) => {
     return (
@@ -52,6 +53,7 @@ export default function Menu({
     badge,
     ...other
 }: IMenu): JSX.Element | null {
+    const { isMenuItemActive } = usePost()
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
@@ -69,12 +71,16 @@ export default function Menu({
             return (
                 children &&
                 children.some((child: IMenu) => {
-                    return child.url === pathname || isOpen(child.children)
+                    return (
+                        isMenuItemActive?.({ name: child.name, url: child.url }) ||
+                        child.url === pathname ||
+                        isOpen(child.children)
+                    )
                 })
             )
         }
-        setOpen(url === pathname || (children && isOpen(children)))
-        setIsActive(url === pathname)
+        setOpen(isMenuItemActive?.({ name, url }) || url === pathname || (children && isOpen(children)))
+        setIsActive(isMenuItemActive?.({ name, url }) || url === pathname)
     }, [pathname])
 
     const variants = {

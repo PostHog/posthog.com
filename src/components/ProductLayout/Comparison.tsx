@@ -2,7 +2,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { IComparison } from './types'
 
-export default function Comparison({ description, children }: IComparison) {
+export default function Comparison({ children }: IComparison) {
     return (
         <div id="comparison" className="max-w-screen-2xl mx-auto">
             <div className="flex justify-between items-end">

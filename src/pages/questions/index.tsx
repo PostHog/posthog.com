@@ -5,7 +5,7 @@ import QuestionForm from 'components/Questions/QuestionForm'
 import TopicsTable from 'components/Questions/TopicsTable'
 import CommunityLayout from 'components/Community/Layout'
 
-const fetchTopicGroups = async () => {
+export const fetchTopicGroups = async () => {
     // FIXME: This is has to fetch _every_ (or probably at most 25) quesiton that's part of a topic even though we only need the most recent one
     const topicGroupsQuery = qs.stringify(
         {
@@ -13,8 +13,8 @@ const fetchTopicGroups = async () => {
                 topics: {
                     populate: {
                         questions: {
-                            sort: 'createdAt:desc',
-                            fields: ['id', 'createdAt'],
+                            sort: 'activeAt:desc',
+                            fields: ['id', 'activeAt'],
                             filters: {
                                 $or: [
                                     {
@@ -47,7 +47,7 @@ const fetchTopicGroups = async () => {
     return topicGroups.json().then((topicGroups) => topicGroups.data)
 }
 
-const topicGroupsSorted = ['Products', 'Platform', 'Data', 'Self-hosting', 'Other']
+export const topicGroupsSorted = ['Products', 'Platform', 'Data', 'Self-hosting', 'Other']
 
 export default function Questions() {
     const [topicGroups, setTopicGroups] = useState([])
@@ -63,7 +63,7 @@ export default function Questions() {
                     <div className="w-full sm:flex items-center mb-8">
                         <h1 className="text-4xl m-0">Community questions</h1>
                         <div className="ml-auto sm:mt-0 mt-4">
-                            <QuestionForm onSubmit={() => null} />
+                            <QuestionForm showTopicSelector onSubmit={() => null} />
                         </div>
                     </div>
 

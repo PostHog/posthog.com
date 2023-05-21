@@ -8,9 +8,6 @@ import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
-import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
-import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
-import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { PlanComparison } from './PlanComparison'
 import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
@@ -54,15 +51,10 @@ export const gridCellBottom = cntl`
 
 const Pricing = (): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
-    const [whyCloudOpen, setWhyCloudOpen] = useState(false)
 
     return (
         <Layout>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
-            <EnterpriseOverlay open={currentModal === 'enterprise'} setOpen={setCurrentModal} />
-            <WhyCloud open={whyCloudOpen} setOpen={setWhyCloudOpen} />
-            <Enterprise open={enterpriseModalOpen} setOpen={setEnterpriseModalOpen} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
                 <div

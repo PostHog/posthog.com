@@ -18,11 +18,12 @@
         { "source": "/docs/integrations/ios-integration", "destination": "/docs/libraries/ios" },
         { "source": "/docs/integrations/javascript-integration", "destination": "/docs/libraries/js" },
         { "source": "/docs/integrations/js-integration", "destination": "/docs/libraries/js" },
-        { "source": "/docs/integrations/message-formatting", "destination": "/docs/webhooks/message-formatting" },
-        { "source": "/docs/libraries/message-formatting", "destination": "/docs/webhooks/message-formatting" },
+        { "source": "/docs/integrations/message-formatting", "destination": "/docs/webhooks" },
+        { "source": "/docs/libraries/message-formatting", "destination": "/docs/webhooks" },
         { "source": "/docs/libraries/microsoft-teams", "destination": "/docs/integrate/webhooks/microsoft-teams" },
         { "source": "/docs/libraries/slack", "destination": "/docs/integrate/webhooks/slack" },
-        { "source": "/docs/integrate/webhooks/message-formatting", "destination": "/docs/webhooks/message-formatting" },
+        { "source": "/docs/integrate/webhooks/message-formatting", "destination": "/docs/webhooks" },
+        { "source": "/docs/webhooks/message-formatting", "destination": "/docs/webhooks" },
         { "source": "/docs/integrate/webhooks/microsoft-teams", "destination": "/docs/webhooks/microsoft-teams" },
         { "source": "/docs/integrate/webhooks/discord", "destination": "/docs/webhooks/discord" },
         { "source": "/docs/integrate/webhooks/slack", "destination": "/docs/webhooks/slack" },
@@ -337,7 +338,7 @@
         { "source": "/docs/contribute/stack", "destination": "/handbook/engineering/stack" },
         {
             "source": "/tutorials/categories/session-recordings",
-            "destination": "/tutorials/categories/session-recording"
+            "destination": "/tutorials/categories/session-replay"
         },
         {
             "source": "/docs/contribute/contribute-to-website",
@@ -649,6 +650,10 @@
             "destination": "/manual/feature-flags"
         },
         {
+            "source": "/tutorials/posthog-for-vuejs",
+            "destination": "/docs/libraries/vue-js"
+        },
+        {
             "source": "/blog/categories/comparisons",
             "destination": "/blog/tags/comparisons"
         },
@@ -829,15 +834,17 @@
         { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/monitoring" },
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
         { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" },
-        { "source": "/community", "destination": "/questions" }
+        { "source": "/community", "destination": "/questions" },
+        { "source": "/blog/customer-churn-analysis-guide", "destination": "/blog/churn-rate-vs-retention-rate" },
+        { "source": "/questions/autocapture", "destination": "/docs/data/autocapture" }
     ],
     "rewrites": [
         {
-            "source": "/community/profiles/(.*)",
-            "destination": "/community/profiles"
+            "source": "/community/profiles/:path*",
+            "destination": "/community/profiles/[id]/index.html"
         },
-        { "source": "/next-steps/(.*)", "destination": "/next-steps" },
-        { "source": "/question/(.*)", "destination": "/question" },
+        { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
+        { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
         { "source": "/careers/(.*)", "destination": "/careers" },
         { "source": "/api", "destination": "/docs/api" }
     ]

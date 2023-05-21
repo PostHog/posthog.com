@@ -244,6 +244,8 @@ Body:
 ### Example request & response: /decide v3
 `/decide` version 3 introduces support for [feature flag payloads](docs/feature-flags/payloads) and a change in response structure: flags that were evaluated as false are also passed in. Further, this endpoint returns a parameter `errorComputingFlags`, which is true when we didn't manage to compute some flags, because of, say the database being down or some other reason. This allows for making partial updates to currently active flags in your clients.
 
+You can optionally pass in an object containing person or group properties to override server values. This is how posthog-js handles [overriding server properties](/docs/libraries/js#overriding-server-properties), which can be useful if you want to make feature flag decisions without waiting for these changes to be ingested and available on PostHog's servers.
+
 ### Request
 
 ```shell
@@ -252,7 +254,9 @@ curl -v -L --header "Content-Type: application/json" -d '  {
     "distinct_id": "1234",
     "groups" : {
         "<groupType>": "<groupKey>"
-    }
+    },
+    "person_properties": {"<personProp1>": "<personVal1>"},
+    "group_properties": {"group type": {"<groupProp1>":"<groupVal1>"}}
 }' https://app.posthog.com/decide?v=3
 ```
 

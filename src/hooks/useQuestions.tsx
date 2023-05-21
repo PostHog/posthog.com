@@ -65,7 +65,7 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
             params.sort = 'numReplies:desc'
             break
         case 'activity':
-            params.sort = 'updatedAt:desc'
+            params.sort = 'activeAt:desc'
             break
     }
 

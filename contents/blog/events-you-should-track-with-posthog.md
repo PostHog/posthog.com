@@ -14,9 +14,9 @@ tags:
   - Guides
 ---
 
-It can be tricky to know which events you should start tracking first if you haven’t used product analytics before. That’s why we recommend using PostHog’s autocapture. It's also why we give everyone their first million events for free, every month – so you can track many of the events you need out of the box and without worrying about cost. 
+It can be tricky to know which events you should start tracking first if you haven’t used product analytics before. That’s why we recommend using PostHog’s [autocapture](/docs/data/autocapture). It's also why we give everyone their first million events for free, every month – so you can track many of the events you need out of the box and without worrying about cost. 
 
-But what if you don’t want to use [autocapture](/docs/integrate/client/js#autocapture), or you’re struggling to separate the signal from the noise when it comes to which events to focus on? 
+But what if you don’t want to use autocapture, or you’re struggling to separate the signal from the noise when it comes to which events to focus on? 
 
 This guide outlines five of the most essential events we recommend tracking with PostHog. You may need to adjust them slightly so they map to your product – a free product won’t need to track purchases, for example – but these events should be common to most organizations. 
 
