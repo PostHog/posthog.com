@@ -259,7 +259,7 @@ export default function Product({ data, location, pageContext }) {
     return (
         <Layout>
             <SEO
-                image={`/images/product/${slug.split('/')[2]}.png`}
+                image={`/images/product/${slug.split('/')[1]}.png`}
                 title={`${title} - PostHog`}
                 description={description || excerpt}
             />
