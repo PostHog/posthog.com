@@ -383,7 +383,7 @@ response = requests.${item.httpVerb}(
                         {item.httpVerb.toUpperCase()}{' '}
                     </code>
                     <code className="min-w-0 break-words">
-                        {path.split('/').map((token) => {
+                        {curlPath.split('/').map((token) => {
                             if (token === '') {
                                 return <wbr key={token} />
                             } else {
