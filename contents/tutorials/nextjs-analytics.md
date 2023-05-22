@@ -4,8 +4,10 @@ date: 2023-02-20
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/nextjs-analytics.png
-topics: ["configuration", "feature flags", "persons", "events"]
+featuredTutorial: true
+featuredImage: ../images/tutorials/banners/flags.png
+featuredVideo: https://www.youtube-nocookie.com/embed/nSBjr1Sz18o
+tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
 Next.js is a popular web framework built on React. It provides optimizations and abstractions to help developers build fast and performant apps and sites.
@@ -26,7 +28,11 @@ First, [install Node](https://nodejs.dev/en/learn/how-to-install-nodejs/) (14.6.
 npx create-next-app@latest
 ```
 
-Press "y" to install `create-next-app` if needed, name your app (I chose `tutorial`), select "No" for using TypeScript using the arrow keys, then press enter to select the defaults for the rest. Once installed and created, use the terminal go into the new folder with the app name you chose (mine is `tutorial`) and start the server:
+Press "y" to install `create-next-app` if needed, name your app (I chose `tutorial`), select "No" for using TypeScript using the arrow keys, select "No" for using the app router, and then press enter to select the defaults for the rest. 
+
+> If you want to use the latest version of Next.js with the app router, check out "[How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)."
+
+Once installed and created, use the terminal go into the new folder with the app name you chose (mine is `tutorial`) and start the server:
 
 ```bash
 cd tutorial
@@ -280,7 +286,6 @@ Now we will set up the `PostHogProvider` for our app. This enables you to access
 ```js
 // pages/_app.js
 import { SessionProvider } from "next-auth/react"
-import Script from "next/script"
 import posthog from "posthog-js"
 import { PostHogProvider } from 'posthog-js/react'
 
@@ -288,9 +293,9 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-    // Disable in development
+    // Enable debug mode in development
     loaded: (posthog) => {
-      if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
+      if (process.env.NODE_ENV === 'development') posthog.debug()
     }
   })
 }
@@ -325,7 +330,6 @@ To solve this, we can capture a custom event when the route changes using `next/
 ```js
 // pages/_app.js
 import { SessionProvider } from "next-auth/react"
-import Script from "next/script"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import posthog from "posthog-js"
@@ -523,7 +527,6 @@ The PostHog provider gives you hooks to work with feature flags in your client s
 
 ```js
 // pages/posts/[id].js
-import { useContext, useEffect, useState } from 'react'
 import { useFeatureFlagEnabled } from 'posthog-js/react'
  
 export default function Post({ post }) {
@@ -536,7 +539,7 @@ export default function Post({ post }) {
       <p>By: {post.author}</p>
       <p>{post.content}</p>
       {ctaState && 
-        <p><a href="/">Go to PostHog</a></p>
+        <p><a href="http://posthog.com/">Go to PostHog</a></p>
       }
       <button onClick={likePost}>Like</button>
     </div>
@@ -578,12 +581,12 @@ This looks like this:
 
 ```js
 // pages/posts/[id].js
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getServerSession } from "next-auth/next"
 import { PostHog } from 'posthog-node'
 
 export default function Post({ post, flags }) {
-	//...
+  const [ctaState, setCtaState] = useState(false);
 
   useEffect(() => {
     if (flags) {
@@ -597,7 +600,7 @@ export default function Post({ post, flags }) {
       <p>By: {post.author}</p>
       <p>{post.content}</p>
       {ctaState && 
-        <p><a href="/">Go to PostHog</a></p>
+        <p><a href="http://posthog.com/">Go to PostHog</a></p>
       }
       <button onClick={likePost}>Like</button>
     </div>
@@ -611,9 +614,9 @@ export async function getServerSideProps(ctx) {
 
   if (session) {
     const client = new PostHog(
-      '<ph_project_api_key>',
+      process.env.NEXT_PUBLIC_POSTHOG_KEY,
       {
-        api_host: '<ph_instance_address>',
+        host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
       }
     )
     flags = await client.getAllFlags(session.user.email);
@@ -636,6 +639,6 @@ You now have a basic Next.js app with user authentication and many of the featur
 
 ## Further reading
 
-- [Building and measuring a sign up funnel with Next.js, Supabase, and PostHog](/tutorials/nextjs-supabase-signup-funnel)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
+- [How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)

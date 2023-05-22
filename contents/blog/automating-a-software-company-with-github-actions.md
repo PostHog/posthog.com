@@ -553,4 +553,4 @@ jobs:
 
 Hopefully these real-life examples inspire you to build the right workflow for your work, spending a bit of time _once_ to reap the rewards of saved time indefinitely.
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_

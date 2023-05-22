@@ -4,8 +4,9 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-13
+featuredTutorial: false
 featuredImage: ../images/tutorials/banners/tutorial-1.png
-topics: ["configuration"]
+tags: ["configuration"]
 ---
 
 Many software development teams use multiple environments to split up their code, such as development, staging, and production. This ensures changes in development don’t affect production, helps teams test before release, and increases the quality of code that reaches end users.
@@ -125,7 +126,7 @@ posthog.init(
   )
 ```
 
-This method enables you to run whatever checks you want, making it useful for changing PostHog's behavior between environments. You can see the full list of config options in [our JavaScript docs](/docs/integrate/client/js#config).
+The `loaded` method enables you to run whatever checks you want, making it useful for changing PostHog's behavior between environments. If you wanted to make opting in conditional, call `opt_in_capturing()` instead. You can see the full list of config options in [our JavaScript docs](/docs/integrate/client/js#config).
 
 ### Opt-out of capturing based on URL
 
@@ -165,6 +166,6 @@ You can automatically enable filtering in all new insights with the toggle at th
 
 ## Further reading
 
-- [How to capture fewer unwanted events](/fewer-unwanted-events)
-- [What to do after installing PostHog in 5 steps](/next-steps-after-installing)
-- [Setting up Django analytics, feature flags, and more with PostHog](/django-analytics)
+- [How to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
+- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+- [Setting up Django analytics, feature flags, and more with PostHog](/tutorials/django-analytics)

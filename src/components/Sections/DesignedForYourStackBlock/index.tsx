@@ -59,7 +59,7 @@ export const DesignedForYourStackBlock = () => {
                         </Link>
                     </div>
                     <div className="yourStackLogos">
-                        <Link to="/docs/integrate/third-party/gatsby">
+                        <Link to="/docs/libraries/gatsby">
                             <img alt="Gatsby" className="imageShow" loading="lazy" src={stackGatsby} />
                         </Link>
                     </div>

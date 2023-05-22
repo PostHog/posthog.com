@@ -1,14 +1,16 @@
 ---
-date: 2022-04-07
+date: 2023-03-16
 title: Open source (and self-hosted) alternatives to Hotjar & FullStory
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: ../images/blog/open-source-hotjar-alternatives/replayhog.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/mWW3lJw81LE
 author:
   - hanna-crombie
+  - andy-vandervell
 category: General
 tags:
   - Open source
@@ -17,167 +19,134 @@ tags:
   - Session recording
 ---
 
-Most analytics tools just give you the hard numbers: views, clicks, conversions. This is a good starting point, but statistics alone give you an incomplete picture – why did the user rageclick or fail to convert? Enter session recording.
+Analytics is great when you need hard numbers, but hard numbers don't give you the full picture. What else do you need to do? [Talk to users](/blog/10x-engineers-do-user-interviews)? Sure. Gather feedback? That's useful, too. But, for us, there's nothing better than watching session replays for understanding a user's pain points.
 
-### Why you need session recording
+Replays (aka session recordings) are a great way to understand:
 
-Session recordings, also known as session replays, are video renderings of actions taken by your users in real-time. They capture mouse movement, clicks, taps, and scrolling across your site or app’s pages.
-
-Aside from making for some fascinating watching, recordings facilitate a detailed investigation of user behavior, allowing you to identify friction areas such as: 
-
-- Where users are getting stuck on your site
-- Hesitation at different stages of your funnel
-- How bugs come about
+- What causes bugs and user frustration.
+- Where users are getting stuck on your site.
+- Hesitation at different stages of your funnel.
 - How your users are interacting with individual elements of your product.
 
-This context can help you to optimize user experience, build user-led products and, ultimately, improve conversion and retention. 
+Hotjar and Fullstory are popular session replay products, but they're expensive, inflexible, and primarily designed with marketing teams. In this guide, we're looking at the best free and open-source session replay tools, which often offer the same features (or more) for less.
 
-**Bottom line:** session recording is an essential tool for making better products.
+> **Changelog:**
+>
+> - **Mar 16, 2023:** Removed SessionStack, added Highlight.io. Updated copy and screenshots.
 
-### Why self-host your session recording?
-Most popular session recording tools, such as Hotjar, FullStory and LogRocket, are exclusively cloud-based. This is convenient, but comes with several drawbacks:
-
-1. They're expensive
-2. You don't control your user data
-3. GDPR and HIPAA compliance is a headache (or not possible)
-
-<GDPRForm />
-
-Self-hosting your session recording eliminates these drawbacks and allows you to keep control of your data, while open source tools give you the freedom to study, modify, and run the tools at no extra cost.
-
-If that sounds good to you, coming up are the best open source (or self-hosted) session recording tools right now.
-
-## 1. [PostHog](https://posthog.com/)
+## 1. PostHog
 ![PostHog - open source product analytics replay](../images/blog/open-source-hotjar-alternatives/img1_PostHog.png)
 
-PostHog is an all-in-one, [open-source Product OS](/blog/best-open-source-analytics-tools) that offers all the tools required to build better products, including but not limited to [session recording](/product/session-recording). Other features include product analytics, [feature flags](/product/feature-flags), [funnels](/product/funnels), [heatmaps](/product/heatmaps), [experimentation](/product/experimentation-suite), [trends](/product/trends) and [much more](/product). All of PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
+[PostHog](https://posthog.com/) is an all-in-one, Product OS that offers all the tools required to build better products, including but not limited to [session replay](/product/session-recording).
+
+PostHog's session replay tool includes console logs and network activity, so you can identify the causes of bugs or performance problems. There's also a playlist feature, allowing you to save similar replays based on specific events or user properties into one list, and you can save recordings offline for safe keeping.
+
+Other features include product analytics, [feature flags](/product/feature-flags), [funnels](/product/funnels), [heatmaps](/product/heatmaps), [experimentation](/product/experimentation-suite), [trends](/product/trends) and [much more](/product). 
+
+All PostHog’s tools work together natively, offering extensive, actionable user insights beyond what's possible with standalone session replay tools.
 
 ### Who is PostHog for?
 
-We think PostHog is the best tool for product-minded developers, data engineers and product teams. The comprehensive suite of analytics tools make it an ideal choice for any company that wants to gain wide-ranging insights into their usage and engagement metrics, while keeping all of their data in one manageable platform. 
+PostHog is ideal for [product-minded developers](/blog/what-is-a-product-engineer) and product teams. Unlike Hotjar and Fullstory, it's designed for technical users. Its broad range of features means PostHog can replace several tools.
 
-Are we biased here? Yes. Are we wrong? We'll let you be the judge. As we're open source, you can [self-host PostHog](/docs/self-host) to find out for yourself.
+### Features and benefits
 
-### Strengths
-
+- Console logs and network performance
+- Filter recordings by user or event
+- Export recordings offline
 - Fully-featured product analytics suite
 - Front-end events captured out of the box
 - CSS selectors block sensitive data to protect user privacy
-- Customisable data retention
-- Enable session recording for specific user segments for more granular insights
-- Flexible self-hosting and managed SaaS options
-- Session recording is a no additional cost feature
 
-### How much does it cost?
+### How much does PostHog cost?
 
-PostHog Cloud is free up to 1 million captured events and 10,000 recordings per month when you enter a card. You can set billing limits to avoid surprise bills.
+PostHog Cloud is free up to 1 million captured events and 15,000 recordings per month, and you can set billing limits to avoid surprise bills. 
 
-### Is it open source?
+You can also self-host PostHog Open Source (available under an MIT license) using Docker Compose, though PostHog Cloud is recommended for event volumes exceeding 100k per month.
 
-Yes! PostHog Open Source is available under an MIT license and can be deployed with Docker Compose.
-
-**Further reading:**
-- [The best free and open source A/B testing tools](/blog/best-open-source-ab-testing-tools)
-- [The best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools)
-- [The best HIPAA-compliant analytics tools](/blog/best-hipaa-compliant-analytics-tools)
-
-## 2. [OpenReplay](https://openreplay.com/)
+## 2. OpenReplay
 ![OpenReplay - open source session replay](../images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 
-OpenReplay is an open source session replay stack that provides insights into user actions inside web apps. It does lack additional analysis tools to give a more cohesive view of the user experience at large and assist with optimized product development. 
-Its tooling is particularly effective for application state and customer support, however – features like DevTools and co-browsing sessions are useful for monitoring performance.
+[OpenReplay](https://openreplay.com/) is an open-source session replay stack that provides insights into user actions inside web apps. Its tooling is particularly effective for application state and customer support. It has some basic analytics features, such as funnel analysis, though it falls some way short of feature-complete product analytics tools.
 
 ### Who is OpenReplay for?
 
-OpenReplay is a developer-friendly tool. It allows engineers to see how users are interacting with their web apps and respond to issues faster.
+OpenReplay is a developer-friendly tool. It allows engineers to see how users are interacting with their web apps, respond to issues faster, and troubleshoot problems with users.
 
-### Strengths
+### Features and benefits
 
-- Co-browsing feature to assist users at critical moments
+- Error and rage click tracking
+- Bug reporting and reproduction 
 - Network activity inspection
 - Performance and state monitoring
-- Error tracking
+- Co-browsing feature to assist users at critical moments
 
-### How much does it cost?
+### How much does OpenReplay cost?
 
-OpenReplay’s self-hosted plan is available for free.
+OpenReplay’s self-hosted plan is available for free. It also offers a cloud option starting at $3.95 per month for 1,000 recordings with 30 days data retention.
 
-It also offers a cloud option starting at $3.95 per month for 1,000 recordings with 30 days data retention.
+## 3. Highlight.io
 
-### Is it open source?
+![higlightio](../images/blog/open-source-hotjar-alternatives/highlightio.png)
 
-Yes. OpenReplay’s open source library is available under the ELv2 license, via [the OpenReplay repo](https://github.com/openreplay/openreplay).
+[Highlight.io](https://www.highlight.io/) is a popular open-source monitoring platform that's similar, in some ways, to OpenReplay. Core features include session replay with console logs and network monitoring, error monitoring, and customizable log alerts. It lacks some of OpenReplay's additional features, such as click maps and customer support features.
 
-## 3. [UXWizz](https://www.uxwizz.com/)
+### Who is Highlight.io for?
+
+Highlight.io is a developer focused tool with a particular focus on debugging user problems and errors.
+
+### Features and benefits
+
+- Log alerts 
+- Open source and self hostable
+- Session replay with console logs and network monitoring
+- Error monitoring and customizable alerts
+
+### How much does Highlight.io cost?
+
+You can self-host for free – Highlight.io recommends an upper limit of 10k sessions and 50k errors per month for hobby deployments. The managed cloud service is free up to 500 monthly sessions and 1,000 errors. Costs thereafter vary depending on usage and retention requirements.
+
+## 4. UXWizz
 ![UXWizz - self hosted session replay](../images/blog/open-source-hotjar-alternatives/img3_UXWizz.png)
 
-UXWizz is a pared-down product analytics platform offering features like visitor insights, session recording, segments and A/B testing.
+[UXWizz](https://www.uxwizz.com/) is a simplified, self-hosted product analytics tool offering features like visitor insights, session recording, segments and A/B testing. 
 
-A lightweight version of session recording is available, which only stores the URL of the page and the user actions. This is designed to optimize your data storage and remove some of the manual maintenance otherwise required by UXWizz.
+It offers a lightweight version of session recording that only stores the URL of the page and the user actions. This is designed to optimize your data storage and remove the manual maintenance otherwise required by UXWizz.
+
+UXWizz is maintained by a single developer.
 
 ### Who is UXWizz for?
 
-UXWizz is a good choice for individuals, and marketing and product teams in small businesses who want quick, qualitative insights into their user analytics from one simple and accessible dashboard.
+UXWizz is a good choice for individuals and small businesses who want quick, qualitative insights and session recordings. A Wordpress plugin is also available.
 
-### Strengths
+### Features and benefits
 
 - Broad range of engagement-focused insights
 - Low database usage with lightweight version
+- Unlimited usage with one-time license fee
 
-### How much does it cost?
+### How much does UXWizz cost?
 
-UXWizz is available as a self-hosted solution only and pricing ranges from £79 to £1,199 for a lifetime license, including 1-year support. Additional updates and support are priced as add-on subscriptions.
+UXWizz is available as a self-hosted solution only and with prices starting at £129 for a lifetime license, including 1-year support. Additional updates and support are priced as add-on subscriptions.
 
-### Is it open source?
-
-No. UXWizz is not open source.
-
-## 4. [UXlens](https://uxlens.com/)
+## 5. UXlens
 ![UXlens - self hosted session replay](../images/blog/open-source-hotjar-alternatives/img4_UXlens.png)
 
-UXlens is a developer-first session recording tool which provides insight into user interface and conversion issues. It does not include any additional analytics tools, but includes useful segment filtering features that help businesses locate blocks in their funnel.
+[UXlens](https://uxlens.com/) is a developer-first session recording tool that provides insight into user interface and conversion issues. It does not include any additional analytics tools, but does have useful segment filtering features that help businesses locate blocks in their funnel.
 
 ### Who is UXlens for?
 
-UXlens is a good choice for UX designers and product teams who want to study the impact of their UI on the user journey.
+UXlens is a good choice for UX designers and product teams who want to study the impact of their UI on the user journey without spending too much.
 
 ### Strengths
 
-- Customisable filters to track sessions on specific user segments
+- Customizable filters to track sessions on specific user segments
 - Input elements masked by default to protect user data
 - UI to assist with complex filter building
 
-### How much does it cost?
+### How much does UXlens cost?
 
-Self-hosting is free. A cloud-hosted version is also available starting at $5 per month.
-
-### Is it open source?
-
-No. UXlens is not open source.
-
-## 5. [SessionStack](https://www.sessionstack.com/)
-
-![SessionStack - open source GA alternative](../images/blog/open-source-hotjar-alternatives/img6_SessionStack.png)
-
-SessionStack is a user session insights tool with a focus on critical issues and error tracing. Without additional analytics features, it doesn’t necessarily give a cohesive overview of the user experience at large or assist with product development. Its tooling is particularly effective for customer support use cases; error messages and co-browsing sessions help teams to pinpoint issues and track down problems related to specific users, devices or releases.
-
-### Who is SessionStack for?
-
-SessionStack enables product managers, customer support teams and engineers to harness user navigation insights to identify friction points and bugs, and to assist users in real-time.
-
-### Strengths
-
-- Notification alerts when issues arise
-- Network traffic monitoring
-- Ability to co-browse with users to offer guidance
-- Cloud-hosting and self-hosting options available
-
-### How much does it cost?
-Cloud plans with SessionStack start from $99 a month for up to 1,000 sessions. A self-hosted deployment option is available on custom plan, which includes implementation support and customisable data volume and retention. Pricing for SessionStack’s self-hosted plan is not publicly available.
-
-### Is it open source?
-
-SessionStack’s code is not open source. It does offer a self-hosted deployment option, though, which allows customers to keep their user data off the cloud, but you can expect to pay a premium for the privilege.
+The cloud version starts at just $6 per month for 6,000 recordings. Lifetime self-host licenses start at $200.
 
 ## 6. [Matomo](https://matomo.org/)
 ![Matomo - open source GA alternative](../images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
@@ -188,23 +157,13 @@ Matomo is an open web analytics platform. Touted as an alternative to Google Ana
 
 Matomo is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release. To learn more, read our [PostHog vs Matomo comparison](/blog/posthog-vs-matomo).
 
-### Strengths
+### Features and benefits
 
 - Funnels, acquisition analysis and other insight features
 - Unlimited session recordings
 - Out-of-the-box solution meaning no developer required to get set up
 
-### How much does it cost?
+### How much does Matomo cost?
 
-The session recording add-on for a self-hosted Matomo solution has a 30-day free trial, after which the cost ranges from $199 to $599 per year depending on the number of users in your team.
-
-Session recording is also included in Matomo’s cloud Business plan. Pricing is calculated depending on the volume of your site traffic. 
-
-### Is it open source?
-
-Yes. Matomo is available under a AGPLv3 license. Check out [the Matomo repo](https://github.com/matomo-org/matomo) for more info.
-
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
+The session recording add-on for a self-hosted Matomo solution has a 30-day free trial, after which the cost ranges from $199 to $599 per year depending on the number of users in your team. Session recording is also included in Matomo’s cloud Business plan. Pricing is calculated depending on the volume of your site traffic.
 

@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-1.png
-topics: ["configuration", "events"]
+tags: ["configuration", "events"]
 ---
 
 The need to migrate from a product analytics platform like Mixpanel to a fully-featured platform like PostHog is a common one. In this tutorial, we'll walk through how to pull, format, and ingest data from Mixpanel into PostHog.

@@ -72,7 +72,7 @@ In the async migrations page at `/instance/async_migrations` you can choose to `
 
 ### The migration is in an Error state - what should I do?
 
-Try to rollback the migration to make sure we're in a safe state. You can do so from the async migrations page at `/instance/async_migrations` from `...` button on the right most column. If you're unable to rollback reachout to us in [slack](/slack).
+Try to rollback the migration to make sure we're in a safe state. You can do so from the async migrations page at `/instance/async_migrations` from `...` button on the right most column. If you're unable to rollback [reach out to us](https://app.posthog.com/home#supportModal).
 
 ![Rollback errored migration](../../../images/async-migrations-error-rollback-button.png)
 

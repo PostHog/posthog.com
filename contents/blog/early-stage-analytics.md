@@ -8,6 +8,7 @@ sidebar: Blog
 hideAnchor: true
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/9ttI9yYRAOg
 category: Startups
 tags:
  - Guides
@@ -45,19 +46,19 @@ Session recordings are the most useful analytical tool for early-stage startups.
 
 PostHog includes 15k monthly recordings for free – more than enough for any early-stage product. Just include the [snippet or library](/docs/integrate) in your app and turn them on in project settings. Once done, you get a steady stream of session recordings (if you have users) in your PostHog instance. 
 
-To maximize your problem-solving potential, add [Sentry](/docs/integrate/third-party/sentry) and connect it to PostHog to monitor errors. When Sentry captures an error, the PostHog connection links the session recording. The recording becomes the re-creation steps that make squashing bugs and fixing issues easier.
+To maximize your problem-solving potential, add [Sentry](/docs/libraries/sentry) and connect it to PostHog to monitor errors. When Sentry captures an error, the PostHog connection links the session recording. The recording becomes the re-creation steps that make squashing bugs and fixing issues easier.
 
 Session recordings replace number-crunching, database querying, and user testing to give you the details on the good and bad of your product fast.
 
 ### 2. Build a key metrics dashboard
 
-A key metrics dashboard is useful for validating that users are actually using the product. This keeps metrics like signups, pageviews, and key feature usage all in one place for the team.
+A key metrics dashboard is useful for validating that users are actually using the product. This keeps metrics like signups, pageviews, and key feature usage all in one place for the team. Using one of our [pre-built templates](/templates) helps you set this up fast.
 
 ![Dashboard](../images/blog/early-stage-analytics/dashboard.png)
 
 It's probably too early to start optimizing your conversion funnel or set up a [dashboard like AARRR](/blog/aarrr-pirate-funnel), though. It encourages premature optimization, or worse, hides bigger problems (like no one wanting your product). A key metrics dashboard strikes the balance between being useful and overanalyzing. 
 
-PostHog's snippet or library [autocaptures](/docs/integrate/client/js#autocapture) the metrics you want, like pageviews, button clicks, and inputs without additional setup. We then offer a template for a product analytics dashboard, and our insights make it easy to customize it to work for you. With PostHog, none of these tasks require a lot of work, and you can get back to building.
+PostHog's snippet or library [autocaptures](/docs/data/autocapture) the metrics you want, like pageviews, button clicks, and inputs without additional setup. We then offer a [template for a product analytics dashboard](/templates/product-analytics), and our insights make it easy to customize it to work for you. With PostHog, none of these tasks require a lot of work, and you can get back to building.
 
 ### 3. Gather feedback and talk to users
 

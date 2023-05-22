@@ -135,8 +135,8 @@
                 "url": "/handbook/small-teams/exec"
             },
             {
-                "name": "Experimentation",
-                "url": "/handbook/small-teams/experimentation"
+                "name": "Feature Success",
+                "url": "/handbook/small-teams/feature-success"
             },
             {
                 "name": "Growth",
@@ -163,8 +163,8 @@
                 "url": "/handbook/small-teams/product-analytics"
             },
             {
-                "name": "Session Recording",
-                "url": "/handbook/small-teams/session-recording"
+                "name": "Monitoring",
+                "url": "/handbook/small-teams/monitoring"
             },
             {
                 "name": "Website & Docs",
@@ -375,6 +375,10 @@
                     {
                         "name": "Working with ClickHouse materialized columns",
                         "url": "/handbook/engineering/databases/materialized-columns"
+                    },
+                    {
+                        "name": "Writing HogQL queries in Python",
+                        "url": "/handbook/engineering/databases/hogql-python"
                     }
                 ]
             },
@@ -581,6 +585,14 @@
                         "url": "/handbook/growth/marketing/newsletter"
                     },
                     {
+                        "name": "In-app",
+                        "url": "/handbook/growth/marketing/in-app"
+                    },
+                    {
+                        "name": "Startups",
+                        "url": "/handbook/growth/marketing/startups"
+                    },
+                    {
                         "name": "Press",
                         "url": "/handbook/growth/marketing/press"
                     },
@@ -597,15 +609,11 @@
         "url": "",
         "children": [
             {
-                "name": "Growth strategy",
-                "url": "/handbook/growth/strategy"
-            },
-            {
                 "name": "Customer support",
                 "url": "/handbook/growth/customer-support"
             },
             {
-                "name": "Inbound sales model",
+                "name": "Sales overview",
                 "url": "/handbook/growth/sales/overview"
             },
             {

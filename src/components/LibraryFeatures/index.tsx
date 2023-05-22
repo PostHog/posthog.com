@@ -9,7 +9,7 @@ const features = [
     {
         key: 'autoCapture',
         name: 'Autocapture',
-        url: 'https://posthog.com/docs/user-guides/events#autocapture-event-tracking',
+        url: 'https://posthog.com/docs/data/autocapture',
     },
     {
         key: 'userIdentification',

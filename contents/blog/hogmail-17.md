@@ -9,10 +9,10 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/hogmail.png
 featuredImageType: full
-category: HogMail
+category: Newsletter
 ---
 
-> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](/newsletter) so you don't miss it.
+> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
 
 Welcome insight seekers, very British ContentHog here. Some quick updates for you:
 
@@ -81,4 +81,4 @@ Charles shares his practical guide to how we run finance without a dedicated fin
 
 - [Marie Kondo your software stack with open source](https://github.com/readme/featured/open-source-minimalism) (17 min read)
 
-> We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
+> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.

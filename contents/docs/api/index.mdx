@@ -54,7 +54,7 @@ There are three options:
 
 Any one of these methods works, but only the value encountered first (in the order above) will be used for authentication!
 
-For PostHog Cloud, use `app.posthog.com` as the host address.
+For PostHog Cloud US, use `app.posthog.com` as the host (replacing `posthog.example.com`). For PostHog Cloud EU, use `eu.posthog.com`.
 
 ##### Specifying a project when using the API
 
@@ -118,7 +118,7 @@ For all CRUD endpoints, the rate limits are `480/minute` and `4800/hour`.
 
 For all analytics endpoints (such as calculating insights, retrieving persons, retrieving session recordings), the rate limits are `240/minute` and `1200/hour`.
 
-Note that these limits apply to the entire team, so if you have a feature-flag requesting script that hits the rate limit, and another user, using a different API key, makes just a single request to the persons API, this would get rate limited as well.
+Note that these limits apply to the entire team (ie all users within your PostHog Organization), so if you have a feature-flag requesting script that hits the rate limit, and another user, using a different API key, makes just a single request to the persons API, this would get rate limited as well.
 
 For large or regular exports of events we would recommend [using export apps](https://posthog.com/docs/migrate/export-events).
 

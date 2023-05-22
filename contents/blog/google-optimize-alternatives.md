@@ -9,6 +9,7 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/rooOi7rxi8Y
 category: General
 tags:
   - Guides
@@ -40,7 +41,7 @@ PostHog supports A/B and multivariate experiments that target by geography, devi
 
 As an all-in-one platform, PostHog simplifies your data and analytics stack by replacing multiple tools. This makes it easy to quickly create experiments using existing data and cohorts in your product analytics, rather than connecting an external data source.
 
-PostHog has a range of [libraries and SDKs](/docs/integrate), from [JavaScript](/docs/integrate/client/js) to [Python](/docs/integrate/server/python) to [iOS](/docs/integrate/client/ios), to help integrate into your website or apps' codebase. It has has an HTML snippet for easy setup with basic sites, [Shopify](/docs/integrate/third-party/shopify), [Wordpress](/docs/integrate/third-party/wordpress), [Webflow](/tutorials/webflow), and more.
+PostHog has a range of [libraries and SDKs](/docs/integrate), from [JavaScript](/docs/integrate/client/js) to [Python](/docs/integrate/server/python) to [iOS](/docs/integrate/client/ios), to help integrate into your website or apps' codebase. It has has an HTML snippet for easy setup with basic sites, [Shopify](/docs/libraries/shopify), [Wordpress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), and more.
 
 ### How much does PostHog cost?
 
@@ -70,7 +71,7 @@ The downside is Unbounce is only suitable for use on marketing websites – it c
 
 ### How much does Unbounce cost?
 
-Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 'Launch' plan is $99 per month and supports "up to 500 conversions", 20k visitors, and one website domain – "conversions" being any time a user completes a conversion goal. Additional plans increase these limits and there's a 25% discount for paying annually. 
+Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 'Launch' plan is $99 per month and supports "up to 500 conversions", 20k visitors, and one website domain – "conversions" being any time a user completes a conversion goal. Additional plans increase these limits and there's a 25% discount for paying annually. 
 
 ### Companies that use Unbounce
 
@@ -87,7 +88,7 @@ Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
-[GrowthBook](https"//www.growthbook.io/) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
+[GrowthBook](https://www.growthbook.io/) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
 
 It offers a basic visual editor so non-technical users can create experiments without writing code. GrowthBook's 'Guardrail' feature monitors for unintended second order effects of your change which you're not actively testing for.
 

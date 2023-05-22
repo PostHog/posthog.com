@@ -26,7 +26,7 @@ interface ISidebarProps {
     teamSlug: string
 }
 
-const pineappleText = (percentage: number) => {
+export const pineappleText = (percentage: number) => {
     if (percentage === 50) return 'This team is evenly split on whether pineapple belongs on pizza'
     if (percentage < 50) return 'Shockingly, this team prefers their pizza without pineapple'
     return (
@@ -38,7 +38,7 @@ const pineappleText = (percentage: number) => {
 
 export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebarProps) {
     const teamLength = team?.length
-    if (!team || !teamLength || !teamLead) return null
+    if (!team || !teamLength) return null
     const pineapplePercentage =
         teamLength &&
         teamLength > 0 &&
@@ -76,14 +76,14 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                     <Tooltip
                                         placement="top-end"
                                         className="whitespace-nowrap"
-                                        content={
+                                        content={() => (
                                             <div className="flex space-x-1 items-center">
                                                 <span className="text-xs">{name}</span>
                                                 <span className="w-[14px] flex">
                                                     <ReactCountryFlag width={14} svg countryCode={country} />
                                                 </span>
                                             </div>
-                                        }
+                                        )}
                                     >
                                         <span className="relative">
                                             <ContributorImage
@@ -101,25 +101,27 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                 </ul>
             </SidebarSection>
 
-            <SidebarSection title="Team lead" className="-mt-2">
-                <Link
-                    to={`/handbook/company/team#${
-                        kebabCase(teamLead?.frontmatter?.name) + '-' + kebabCase(teamLead?.frontmatter?.jobTitle)
-                    }`}
-                    className="flex space-x-2 items-center rounded p-1 -mx-1 -mt-1 hover:bg-gray-accent/50 
+            {teamLead && (
+                <SidebarSection title="Team lead" className="-mt-2">
+                    <Link
+                        to={`/handbook/company/team#${
+                            kebabCase(teamLead?.frontmatter?.name) + '-' + kebabCase(teamLead?.frontmatter?.jobTitle)
+                        }`}
+                        className="flex space-x-2 items-center rounded p-1 -mx-1 -mt-1 hover:bg-gray-accent/50 
                     relative
                     active:top-[0.5px]
                     active:scale-[.98]"
-                >
-                    <ContributorImage
-                        className="w-[40px] h-[40px] bg-orange border-2 border-white dark:border-primary border-solid"
-                        image={teamLead?.frontmatter?.headshot}
-                        name={teamLead?.frontmatter?.name}
-                    />
-                    <p className="author text-base font-semibold m-0 text-[15px]">{teamLead?.frontmatter?.name}</p>
-                    <ReactCountryFlag svg countryCode={teamLead?.frontmatter?.country} />
-                </Link>
-            </SidebarSection>
+                    >
+                        <ContributorImage
+                            className="w-[40px] h-[40px] bg-orange border-2 border-white dark:border-primary border-solid"
+                            image={teamLead?.frontmatter?.headshot}
+                            name={teamLead?.frontmatter?.name}
+                        />
+                        <p className="author text-base font-semibold m-0 text-[15px]">{teamLead?.frontmatter?.name}</p>
+                        <ReactCountryFlag svg countryCode={teamLead?.frontmatter?.country} />
+                    </Link>
+                </SidebarSection>
+            )}
 
             <SidebarSection title="Pineapple on pizza?" className="-mt-2">
                 <div className="space-x-2 flex items-center mb-4 text-lg font-semibold">

@@ -1,31 +1,35 @@
 ---
 title: Group analytics
 nextPage: ./next-steps.mdx
+featuredImage: ./images/docs-groups.png
 ---
 
 import CreateGroupType from "./\_snippets/group-type-create.mdx"
 import ChatGroupType from "./\_snippets/group-type-create-chat.mdx"
 import SetGroupProperties from "./\_snippets/set-group-properties.mdx"
 
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+> **Note: ** This is a paid feature and is not available on the open source or free cloud plan. See our [pricing page](/pricing) for more.
 
-Group analytics is a powerful feature in PostHog that allows you to perform analytics on entities other than single users.
-This feature is slightly more advanced, but opens up entirely new avenues for analytics which are essential for most B2B use cases.
+Group analytics is a powerful feature in PostHog that allows you to perform analytics on entities (e.g. companies, teams etc.) other than single users.
+This feature is slightly more advanced, but opens up entirely new avenues for analytics that are essential for most B2B use cases.
 
-Group analytics can sometimes feel confusing to new users, and this often times comes from skipping over the basic concepts too quickly.
+Group analytics can sometimes feel confusing to new users, and this often comes from skipping over the basic concepts too quickly.
 We'll start with an overview of how Group analytics works, and then jump into creating new groups and viewing them within PostHog.
 
 ## 1. What is a group?
 
 In PostHog, a 'Group' is an entity that we can send events and hold properties that is beyond a single user.
 
-To get a more concrete idea of what this looks like in practice, here are a couple examples of common entities that we can model using groups:
+Here are two examples of common entities we can model using groups:
 
-1. **Organizations/Teams**: It's very common in B2B apps to have multiple users under the same 'Team' account, in which case groups allow us to perform analytics on individual teams exactly as if they were users.
-2. **Threads/Chats/Posts**: If you're creating a social app, you might want to track events that are connected with specific conversations such as replies
+1. **Organizations/Teams**: It's very common in B2B apps to have multiple users under the same 'Team' account, in which case groups allow us to investigate analytics on individual teams.
+
+2. **Threads/Chats/Posts**: If you're creating a social app, you might want to track events that are connected with specific conversations, such as replies.
 
 Looking at these examples, it might be tempting to think that a group is just a group of users; however, this is not exactly the case.
+
 We'll see this later, but the basic idea is that **only events are connected to groups directly, and any user who sent one of those events will also be linked indirectly**.
+
 In this way, there isn't a way to directly 'assign' a user to a group - instead, this user would send an event with a special property linking the event to a group.
 
 ### Groups vs. group types
@@ -40,8 +44,10 @@ In this example, let's imagine that we have a B2B app and want to track when a u
 
 <CreateGroupType />
 
-To associate an event with a specific group, we provide two pieces of information the group type (`company`) and the ID of the specific group (`84359520`).
+To associate an event with a specific group, we provide two pieces of information: the group type (`company`), and the ID of the specific group (`84359520`).
+
 This will create a new `company` group type in PostHog and associate the `User joined company` event with the ID of the group we specified.
+
 This ID behaves similar to the `distinct_id` for users we saw before, and best practice is to use the unique ID of the object within your database.
 
 We can also use groups to associate events with other entities. Let's imagine our B2B app has a chat feature, and we want to track when a user sends a message in a group chat.
@@ -64,6 +70,9 @@ Our app is now fully set up to track events for each of our companies and view t
 Furthermore, we can use groups now in the following places:
 
 1. **Creating insights**: Groups can be used in insights exactly the same as people - we can analyze the total number of active groups and filter events based on group properties.
+
 2. **Related groups**: See all the different groups a specific user is related to.
+
 3. **Feature flags**: Roll out features to entire teams without worrying about different users seeing different things.
+
 4. **Experiments**: Run A/B tests on entire groups instead of individual users.

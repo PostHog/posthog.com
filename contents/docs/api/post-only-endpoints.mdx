@@ -83,8 +83,6 @@ curl -v -L --header "Content-Type: application/json" -d '{
         "alias": "456"
     },
     "timestamp": "2020-08-16 09:03:11.913767",
-    "context": "{}",
-    "type": "alias",
     "event": "$create_alias"
 }' https://app.posthog.com/capture/
 ```
@@ -96,11 +94,8 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "properties": {},
     "timestamp": "2020-08-16 09:03:11.913767",
-    "context": {},
     "distinct_id": "1234",
-    "type": "capture",
-    "event": "$event",
-    "messageId": "1234"
+    "event": "$event"
 }' https://app.posthog.com/capture/
 ```
 
@@ -111,45 +106,33 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "timestamp": "2020-08-16 09:03:11.913767",
     "context": {},
-    "type": "screen",
     "distinct_id": "1234",
     "$set": {},
-    "event": "$identify",
-    "messageId": "123"
+    "event": "$identify"
 }' https://app.posthog.com/capture/
 ```
 
-### Page
+### Page view
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "properties": {},
-    "timestamp": "2020-08-16 09:03:11.913767",
-    "category": "some category",
-    "context": {},
+    "timestamp": "2020-08-16T09:03:11.913767",
     "distinct_id": "1234",
-    "type": "page",
-    "event": "$page",
-    "name": "a page",
-    "messageId": "123"
+    "event": "$pageview"
 }' https://app.posthog.com/capture/
 ```
 
-### Screen
+### Screen view
 
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "properties": {},
-    "timestamp": "2020-08-16 09:03:11.913767",
-    "category": "some category",
-    "context": {},
+    "timestamp": "2020-08-16T09:03:11.913767",
     "distinct_id": "1234",
-    "type": "screen",
-    "event": "$screen",
-    "name": "a page",
-    "messageId": "123"
+    "event": "$screen"
 }' https://app.posthog.com/capture/
 ```
 
@@ -258,7 +241,52 @@ Body:
 }
 ```
 
-### Example request & response: /decide v2
+### Example request & response: /decide v3
+`/decide` version 3 introduces support for [feature flag payloads](docs/feature-flags/payloads) and a change in response structure: flags that were evaluated as false are also passed in. Further, this endpoint returns a parameter `errorComputingFlags`, which is true when we didn't manage to compute some flags, because of, say the database being down or some other reason. This allows for making partial updates to currently active flags in your clients.
+
+You can optionally pass in an object containing person or group properties to override server values. This is how posthog-js handles [overriding server properties](/docs/libraries/js#overriding-server-properties), which can be useful if you want to make feature flag decisions without waiting for these changes to be ingested and available on PostHog's servers.
+
+### Request
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "1234",
+    "groups" : {
+        "<groupType>": "<groupKey>"
+    },
+    "person_properties": {"<personProp1>": "<personVal1>"},
+    "group_properties": {"group type": {"<groupProp1>":"<groupVal1>"}}
+}' https://app.posthog.com/decide?v=3
+```
+
+#### Response
+
+```shell
+{
+  "config": {
+    "enable_collect_everything": true
+  },
+  "editorParams": {},
+  "isAuthenticated": false,
+  "supportedCompression": [
+    "gzip",
+    "lz64"
+  ],
+  "featureFlags": {
+    "my-awesome-flag": true,
+    "my-awesome-flag-2": true,
+    "my-multivariate-flag": "some-string-value",
+    "flag-thats-not-on": false,
+  },
+  "featureFlagPayloads": {
+    "my-awesome-flag": "example-payload-string",
+    "my-awesome-flag-2": {"color": "blue", "animal": "hedgehog"}
+  }
+}
+```
+
+### Example request & response: /decide v2 (legacy)
 
 `/decide` version 2 introduces support for [multivariate feature flags](/docs/user-guides/feature-flags#multivariate-feature-flags-alpha) and has a slightly different schema for the response. `posthog-js` version 1.13 and up will use version 2 of the decide endpoint by default.
 
@@ -337,4 +365,4 @@ Note that if a multivariate feature flag is enabled for a given user, it will st
 
 We have another set of APIs to read/modify anything in PostHog. See our [API documentation](/docs/api/overview) for more information.
 
-Also, feel free to reach out in the [PostHog Users Slack](/slack) if you'd like help with the API.
+Also, feel free to [reach out](https://app.posthog.com/home#supportModal) if you'd like help with the API.

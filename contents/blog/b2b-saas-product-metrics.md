@@ -118,6 +118,8 @@ Any score above zero is technically good, but most sources put the industry aver
 
 **Is it useful?** There's a reason NPS is an industry standard. Measuring NPS over time is a powerful way to understand the evolution of your product, and improving it is a clear sign your customers are happy with the changes you're making. Definitely worth tracking, but you need other metrics or follow-up questions to understand changes in your NPS score.
 
+> **Want to collect your NPS score in PostHog?** Try [the NPS survey app](/apps/nps-survey-app)!
+
 ### New user activation
 
 **What is it?** New user activation is similar in purpose to adoption rate, but it's more specific. It measures the percentage of new users who completed a specific task in their first week.
@@ -178,7 +180,7 @@ In PostHog, users can:
 
 - Create and analyze insights that track trends over time such as how well users convert, what paths they take, and how well they retain.
 
-- Use dashboards to combine insights into cohesive reports on any element of the product experience.
+- Use dashboards to combine insights into cohesive reports on any element of the product experience. We've built a [B2B SaaS product metrics dashboard template](/templates/b2b-dashboard) you can use.
 
 - View session recordings of real customers to understand where they get stuck or how they use the product.
 

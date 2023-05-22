@@ -8,10 +8,10 @@ hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/hogmail.png
 featuredImageType: full
-category: HogMail
+category: Newsletter
 ---
 
-> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](/newsletter) so you don't miss it.
+> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
 
 This week's theme is why startup's fail. It's a simple question to answer... not enough hedgehogs, obviously.
 
@@ -79,4 +79,4 @@ Kite's source code is [now open source](https://github.com/kiteco).
  
 - [Corey Haines on SaaS metrics that lie](https://twitter.com/coreyhainesco/status/1612943630997819394) – Former Head of Growth at Baremetrics shares some insightful points on popular metrics that might mislead you.
 
-> We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
+> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.

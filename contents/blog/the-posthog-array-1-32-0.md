@@ -96,7 +96,7 @@ Want to get involved? [Email us to schedule a 30 minute call](mailto:hey@posthog
 
 ### Experimentation launch 🚀
 
-We've been working hard on a brand new Experimentation feature which will let you quickly and confidently run experiments to test product improvements. This feature is currently available on Beta on PostHog Cloud, but if you'd like to be a beta tester or get a demo, please [reach out](https://posthog.com/slack) or schedule a [demo call](https://calendly.com/posthog-feedback) with the Engineering Team that created it.
+We've been working hard on a brand new Experimentation feature which will let you quickly and confidently run experiments to test product improvements. This feature is currently available on Beta on PostHog Cloud, but if you'd like to be a beta tester or get a demo, please [reach out](https://app.posthog.com/home#supportModal) or schedule a [demo call](https://calendly.com/posthog-feedback) with the Engineering Team that created it.
 
 <img src="https://posthog-static-files.s3.us-east-2.amazonaws.com/Website-Assets/Array/1_32_0-experiments-sneak-peek.png" alt="Example screenshot: Experiments sneak peek" />
 
@@ -133,6 +133,6 @@ Don't see a role for you? We're always looking for exceptional people, so reach 
 
 <hr/>
 
-_Follow us on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](https://posthog.com/newsletter) for more posts on startups, growth, and analytics._
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
 
 <ArrayCTA />

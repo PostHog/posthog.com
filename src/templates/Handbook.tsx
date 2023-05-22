@@ -34,6 +34,7 @@ import WarningIcon from '../images/warning.svg'
 import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
+import { TutorialTags } from 'components/Tutorials/constants/tags'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -189,7 +190,6 @@ export default function Handbook({
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
     location,
 }) {
-    const { hash } = useLocation()
     const {
         body,
         frontmatter,
@@ -247,14 +247,9 @@ export default function Handbook({
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
+        TutorialTags,
         ...shortcodes,
     }
-
-    useEffect(() => {
-        if (hash) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
 
     return (
         <>

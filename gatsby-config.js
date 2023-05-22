@@ -28,7 +28,6 @@ module.exports = {
             resolve: `gatsby-source-squeak`,
             options: {
                 apiHost: process.env.GATSBY_SQUEAK_API_HOST,
-                organizationId: process.env.GATSBY_SQUEAK_ORG_ID,
             },
         },
         {
@@ -81,6 +80,9 @@ module.exports = {
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                     {
                         resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
+                    },
+                    {
+                        resolve: require.resolve('./plugins/gatsby-remark-video'),
                     },
                 ],
                 plugins: [`gatsby-remark-static-images`],
