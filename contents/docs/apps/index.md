@@ -20,7 +20,9 @@ Apps can be used for a wide variety of use cases, such as:
 
 ## Enabling apps
 
-Head to 'Project' -> 'Apps' on the left sidebar in the PostHog app. Here you can install official PostHog apps, install a custom app by pasting a link to its public repository, or write your own app directly in PostHog.
+Head to 'Project' -> 'Apps' on the left sidebar in the PostHog app. Here you can install official PostHog apps.
+
+If you're self-hosting, you can install a custom app by pasting a link to its public repository, or write your own app directly in PostHog.
 
 ## Self-host app troubleshooting
 

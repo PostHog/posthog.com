@@ -4,9 +4,10 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-05
-featuredTutorial: true
+featuredTutorial: false
 featuredImage: ../images/tutorials/banners/nodejs.png
-topics: ["configuration", "feature flags", "persons", "events"]
+featuredVideo: https://www.youtube-nocookie.com/embed/aYRzmDP-Mwc
+tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
 Node.js is a JavaScript runtime and server environment. Express.js is a web application framework for Node.js. Express is the most popular backend JavaScript framework and one of the most popular web frameworks across all languages.

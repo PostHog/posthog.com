@@ -1,162 +1,143 @@
 import React from 'react'
 
-import { dayFormat, dateToDays } from '../../utils'
-import slugify from 'slugify'
-
 import Link from 'components/Link'
-import { Question } from './index'
+import { QuestionData, StrapiResult } from 'lib/strapi'
+import { Check2 } from 'components/Icons'
+import Tooltip from 'components/Tooltip'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 
 type QuestionsTableProps = {
-    questions: Question[]
+    questions: Omit<StrapiResult<QuestionData[]>, 'meta'>
     isLoading: boolean
-    size: number
-    setSize: (size: number | ((_size: number) => number)) => any
+    fetchMore: () => void
     hideLoadMore?: boolean
     className?: string
+    currentPage?: {
+        url: string
+        title: string
+    }
+    hasMore?: boolean
+    showAuthor?: boolean
+    showTopic?: boolean
+    sortBy?: 'newest' | 'activity' | 'popular'
 }
 
 export const QuestionsTable = ({
     questions,
     isLoading,
-    setSize,
+    fetchMore,
     hideLoadMore,
     className = '',
+    currentPage,
+    hasMore,
+    showTopic,
+    sortBy,
 }: QuestionsTableProps) => {
     return (
-        <ul className="m-0 p-0">
+        <ul className="m-0 p-0 list-none">
+            <li className="grid grid-cols-12 pl-2 pr-4 pb-1 items-center text-primary/75 dark:text-primary-dark/75 text-sm">
+                <div className="col-span-12 xl:col-span-7 2xl:col-span-8 pl-8">Question / Topic</div>
+                <div className="hidden xl:block xl:col-span-2 2xl:col-span-1 text-center">Replies</div>
+                <div className="hidden xl:block xl:col-span-3">{sortBy === 'activity' ? 'Last active' : 'Created'}</div>
+            </li>
             <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none">
-                {questions.length > 0
-                    ? questions.map((question) => {
-                          const latestReply = question.replies[question.replies.length - 1]
+                {questions.data.length > 0
+                    ? questions.data.filter(Boolean).map((question) => {
+                          const {
+                              attributes: {
+                                  profile,
+                                  subject,
+                                  permalink,
+                                  replies,
+                                  createdAt,
+                                  resolved,
+                                  topics,
+                                  activeAt,
+                              },
+                          } = question
 
-                          return (
-                              <div key={question.id} className={`grid xl:grid-cols-4 sm:gap-2 py-4 ${className}`}>
-                                  <div className="hidden sm:block">
-                                      <a
-                                          href={`/community/profiles/${question.profile.id}`}
-                                          className="flex items-center text-sm mt-0.5 space-x-1 text-primary group"
-                                      >
-                                          <div className={`w-5 h-5 overflow-hidden rounded-full flex-shrink-0`}>
-                                              {question.profile.avatar ? (
-                                                  <img className="w-full h-full" alt="" src={question.profile.avatar} />
-                                              ) : (
-                                                  <svg
-                                                      viewBox="0 0 40 40"
-                                                      fill="none"
-                                                      xmlns="http://www.w3.org/2000/svg"
-                                                      className="bg-gray-accent-light"
-                                                  >
-                                                      <path
-                                                          d="M20.0782 41.0392H5.42978C4.03134 41.0392 3.1173 40.1642 3.09386 38.7736C3.07823 37.7814 3.07042 36.797 3.10948 35.8048C3.15636 34.6329 3.72668 33.7345 4.74228 33.1798C8.0782 31.3595 11.4299 29.5783 14.7659 27.7658C15.0081 27.633 15.1565 27.758 15.3362 27.8517C18.1878 29.3439 21.0942 29.4689 24.0626 28.2267C24.1485 28.1955 24.2423 28.1721 24.3126 28.1096C24.9298 27.5861 25.4845 27.7971 26.1251 28.1486C29.1173 29.7971 32.1331 31.4143 35.1487 33.0238C36.4534 33.7191 37.094 34.766 37.0706 36.2426C37.0549 37.0785 37.0706 37.9067 37.0706 38.7426C37.0628 40.1254 36.1409 41.0395 34.7659 41.0395H20.0783L20.0782 41.0392Z"
-                                                          fill="#BFBFBC"
-                                                      ></path>
-                                                      <path
-                                                          d="M19.8359 27.0625C17.0859 26.9687 14.8047 25.6094 13.1251 23.1953C10.3751 19.2344 10.7032 13.6093 13.8516 10.0001C17.2735 6.08599 22.9452 6.10943 26.336 10.0469C29.9376 14.2345 29.711 20.8437 25.8126 24.6405C24.2188 26.1952 22.3126 27.0312 19.8362 27.0624L19.8359 27.0625Z"
-                                                          fill="#BFBFBC"
-                                                      ></path>
-                                                  </svg>
-                                              )}
+                          const latestAuthor = replies?.data?.[0]?.attributes?.profile || profile
+                          const numReplies = replies?.data?.length || 0
+
+                          return profile ? (
+                              <div key={question.id}>
+                                  <Link
+                                      state={currentPage && { previous: currentPage }}
+                                      to={`/questions/${permalink}`}
+                                      className={`${className} block py-2 pl-2 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
+                                  >
+                                      <div className="grid grid-cols-12 items-center">
+                                          <div className="col-span-12 xl:col-span-7 2xl:col-span-8 flex items-center space-x-4">
+                                              <div className="w-4 text-green">
+                                                  {resolved && (
+                                                      <Tooltip content="Resolved">
+                                                          <span className="relative">
+                                                              <Check2 />
+                                                          </span>
+                                                      </Tooltip>
+                                                  )}
+                                              </div>
+
+                                              <div className="w-full">
+                                                  <span className="text-red line-clamp-1">{subject}</span>
+                                                  {showTopic && (
+                                                      <div className="flex justify-between items-center">
+                                                          <div className="flex items-center text-sm space-x-1 text-primary group">
+                                                              <div className="text-primary dark:text-primary-dark font-medium opacity-60 group-hover:opacity-100 line-clamp-1">
+                                                                  {topics?.data?.[0].attributes.label ||
+                                                                      'Uncategorized'}
+                                                              </div>
+                                                          </div>
+
+                                                          <div className="xl:hidden text-primary dark:text-primary-dark text-sm font-medium opacity-60 line-clamp-2">
+                                                              {dayjs(
+                                                                  sortBy === 'activity' ? activeAt : createdAt
+                                                              ).fromNow()}
+                                                          </div>
+                                                      </div>
+                                                  )}
+                                              </div>
                                           </div>
-                                          <span className="text-primary dark:text-primary-dark font-medium opacity-60 group-hover:opacity-100 line-clamp-1">
-                                              {question.profile.first_name} {question.profile.last_name}
-                                          </span>
-                                      </a>
-                                  </div>
-                                  <div className="sm:col-span-3">
-                                      <Link
-                                          to={`/questions/${question.permalink}`}
-                                          className="block font-bold whitespace-normal leading-snug"
-                                      >
-                                          {question.subject}
-                                      </Link>
-                                      <a
-                                          href={`/community/profiles/${question.profile.id}`}
-                                          className="flex items-center text-sm mt-0.5 space-x-1 text-primary group sm:hidden"
-                                      >
-                                          <div className={`w-5 h-5 overflow-hidden rounded-full flex-shrink-0`}>
-                                              {question.profile.avatar ? (
-                                                  <img className="w-full h-full" alt="" src={question.profile.avatar} />
-                                              ) : (
-                                                  <svg
-                                                      viewBox="0 0 40 40"
-                                                      fill="none"
-                                                      xmlns="http://www.w3.org/2000/svg"
-                                                      className="bg-gray-accent-light"
-                                                  >
-                                                      <path
-                                                          d="M20.0782 41.0392H5.42978C4.03134 41.0392 3.1173 40.1642 3.09386 38.7736C3.07823 37.7814 3.07042 36.797 3.10948 35.8048C3.15636 34.6329 3.72668 33.7345 4.74228 33.1798C8.0782 31.3595 11.4299 29.5783 14.7659 27.7658C15.0081 27.633 15.1565 27.758 15.3362 27.8517C18.1878 29.3439 21.0942 29.4689 24.0626 28.2267C24.1485 28.1955 24.2423 28.1721 24.3126 28.1096C24.9298 27.5861 25.4845 27.7971 26.1251 28.1486C29.1173 29.7971 32.1331 31.4143 35.1487 33.0238C36.4534 33.7191 37.094 34.766 37.0706 36.2426C37.0549 37.0785 37.0706 37.9067 37.0706 38.7426C37.0628 40.1254 36.1409 41.0395 34.7659 41.0395H20.0783L20.0782 41.0392Z"
-                                                          fill="#BFBFBC"
-                                                      ></path>
-                                                      <path
-                                                          d="M19.8359 27.0625C17.0859 26.9687 14.8047 25.6094 13.1251 23.1953C10.3751 19.2344 10.7032 13.6093 13.8516 10.0001C17.2735 6.08599 22.9452 6.10943 26.336 10.0469C29.9376 14.2345 29.711 20.8437 25.8126 24.6405C24.2188 26.1952 22.3126 27.0312 19.8362 27.0624L19.8359 27.0625Z"
-                                                          fill="#BFBFBC"
-                                                      ></path>
-                                                  </svg>
-                                              )}
+                                          <div className="hidden xl:block xl:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
+                                              {numReplies}
                                           </div>
-                                          <div className="text-primary dark:text-primary-dark font-medium opacity-60 group-hover:opacity-100 line-clamp-1 my-1">
-                                              {question.profile.first_name} {question.profile.last_name}
+                                          <div className="hidden xl:block xl:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
+                                              <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-2">
+                                                  {dayjs(sortBy === 'activity' ? activeAt : createdAt).fromNow()} by{' '}
+                                                  {profile.data?.attributes?.firstName}{' '}
+                                                  {profile.data?.attributes?.lastName} {}
+                                              </div>
                                           </div>
-                                      </a>
-                                      {/*
-                                            Last activity: 
-                                            <span className="whitespace-nowrap p-4 text-sm font-semibold">
-                                                {dayFormat(dateToDays(latestReply.created_at))}
-                                            </span>
-                                        */}
-                                      {question.topics.map(({ topic }: { topic: { id: string; label: string } }) => {
-                                          return (
-                                              <Link
-                                                  key={topic.id}
-                                                  to={`/questions/topics/${slugify(topic.label, {
-                                                      lower: true,
-                                                  })}`}
-                                                  className="bg-gray-accent-light rounded-sm"
-                                              >
-                                                  {topic.label}
-                                              </Link>
-                                          )
-                                      })}
-                                      <p className="break-words whitespace-normal line-clamp-2 text-sm m-0 mt-1">
-                                          {question.replies[0].body}
-                                      </p>
-                                      <Link
-                                          to={`/questions/${question.permalink}`}
-                                          className="whitespace-nowrap text-sm font-semibold"
-                                      >
-                                          {question.replies.length === 1 || question.replies.length > 2 ? (
-                                              <>{question.replies.length - 1} replies</>
-                                          ) : (
-                                              <>{question.replies.length - 1} reply</>
-                                          )}
-                                      </Link>
-                                  </div>
+                                      </div>
+                                  </Link>
                               </div>
-                          )
+                          ) : null
                       })
                     : new Array(10).fill(0).map((_, i) => (
-                          <tr key={i} className="">
-                              <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 space-y-2">
+                          <div key={i} className="">
+                              <div className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 space-y-2">
                                   <div className="w-96 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
                                   <div className="w-60 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
                                   <div className="w-36 w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
-                              </td>
+                              </div>
 
-                              <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 font-semibold animate-pulse">
+                              <div className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 font-semibold animate-pulse">
                                   <div className="w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
-                              </td>
-                              <td className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold animate-pulse">
+                              </div>
+                              <div className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold animate-pulse">
                                   <div className="w-3/4 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
-                              </td>
-                          </tr>
+                              </div>
+                          </div>
                       ))}
             </li>
 
-            {!hideLoadMore && (
+            {!hideLoadMore && hasMore && (
                 <li className="py-2 list-none">
                     <button
                         className="p-3 block w-full hover:bg-gray-accent-light text-primary/75 dark:text-primary-dark/75 hover:text-red rounded text-[15px] font-bold bg-gray-accent-light dark:bg-gray-accent-dark relative active:top-[0.5px] active:scale-[.99]"
-                        onClick={() => setSize((size) => size + 1)}
+                        onClick={fetchMore}
                         disabled={isLoading}
                     >
                         Load more

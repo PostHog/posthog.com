@@ -173,7 +173,7 @@ When did we know this idea was right?
 
 When we saw real life actual people on the internet start using our thing, without us having to manually get them to do so.
 
-Even better was seeing a community starting to appear. We got [our first ever issue from someone else](https://github.com/PostHog/posthog/issues/100) on February 15th, and our first community discussion [on the 23rd](https://github.com/PostHog/posthog/issues/149). This started to spiral. We now get a stream of issues every day in our [PostHog Users Slack](https://posthog.com/slack) or the [repo](https://github.com/posthog/posthog).
+Even better was seeing a community starting to appear. We got [our first ever issue from someone else](https://github.com/PostHog/posthog/issues/100) on February 15th, and our first community discussion [on the 23rd](https://github.com/PostHog/posthog/issues/149). This started to spiral. We now get a stream of issues every day in our [PostHog Users Slack](/slack) or the [repo](https://github.com/posthog/posthog).
 
 Growth suddenly went from being the hardest part of what we were doing, to being quite easy - we started getting swamped with product work. The problem was keeping up rather than getting something to happen.
 
@@ -248,4 +248,5 @@ Those very early decisions are the most leveraged you will ever take for your st
 
 It turns out that PostHog has been about building something people want, that we also wanted to work on. If you're reading this article and having a tough time working out if you should pivot, drop us [an email](mailto:blog@posthog.com).
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+

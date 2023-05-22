@@ -1,5 +1,5 @@
 import { useLocation } from '@reach/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePost } from './hooks'
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import { defaultMenuWidth } from './context'
@@ -37,27 +37,21 @@ export default function Post({ children }: { children: React.ReactNode }) {
         setFullWidthContent,
         contentContainerClasses,
         stickySidebar,
+        searchFilter,
+        hideWidthToggle,
     } = usePost()
-    const { hash, href } = useLocation()
-
-    useEffect(() => {
-        if (hash && !hideSearch) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
 
     const handleFullWidthContentChange = () => {
         localStorage.setItem('full-width-content', !fullWidthContent + '')
         setFullWidthContent(!fullWidthContent)
     }
 
-    useEffect(() => {
-        if (!hideSidebar && sidebar) {
-            setFullWidthContent(localStorage.getItem('full-width-content') === 'true')
-        } else {
-            setFullWidthContent(true)
+    const handleArticleTransitionEnd = (e) => {
+        const hash = window?.location?.hash
+        if (e?.propertyName === 'max-width' && hash) {
+            document.getElementById(hash?.replace('#', ''))?.scrollIntoView()
         }
-    }, [sidebar, hideSidebar])
+    }
 
     return (
         <div className="sm:border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
@@ -76,7 +70,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         >
                             {!hideSearch && (
                                 <div className="lg:sticky top-0 z-20 pt-4 -mx-2 px-1 bg-tan dark:bg-primary relative">
-                                    <SidebarSearchBox />
+                                    <SidebarSearchBox filter={searchFilter} />
                                 </div>
                             )}
                             <TableOfContents />
@@ -92,7 +86,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                     : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                             }}
                             className={
-                                'sm:pt-4 sm:pb-4 pb-0 sm:border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
+                                'pt-4 sm:pb-4 pb-0 sm:border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
                             }
                         >
                             <div className={`${contentContainerClasses} grid-cols-1`}>
@@ -118,9 +112,9 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         <article
                             key={`${title}-article`}
                             id="content-menu-wrapper"
-                            className="lg:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:py-12 py-4 ml-auto w-full h-full box-border lg:overflow-auto"
+                            className="lg:py-12 py-4 ml-auto w-full h-full box-border lg:overflow-auto"
                         >
-                            <div className={contentContainerClasses}>
+                            <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
                                 <div>{children}</div>
                                 {questions}
                             </div>
@@ -131,13 +125,13 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         {!hideSidebar && sidebar && (
                             <aside
                                 key={`${title}-sidebar`}
-                                className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border lg:flex hidden flex-col"
+                                className="lg:border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border lg:flex hidden flex-col"
                             >
                                 <div className={`${stickySidebar ? 'sticky top-0' : ''} bg-tan dark:bg-primary z-10`}>
                                     {sidebar}
                                 </div>
                                 <div className="flex flex-grow items-end">
-                                    <div className="lg:pt-6 !border-t-0 sticky bottom-0 w-full">
+                                    <div className="!border-t-0 sticky bottom-0 w-full">
                                         {tableOfContents && tableOfContents?.length > 1 && (
                                             <div className="px-4 lg:px-8 lg:pb-4 lg:block hidden">
                                                 <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
@@ -162,7 +156,10 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                                 </Scrollspy>
                                             </div>
                                         )}
-                                        <ul className="list-none p-0 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur">
+                                        <ul
+                                            id="post-actions"
+                                            className="list-none p-0 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur"
+                                        >
                                             {filePath && (
                                                 <div className="flex divide-x divide-dashed divide-gray-accent-light dark:divide-gray-accent-dark border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark">
                                                     <SidebarAction
@@ -180,16 +177,18 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                                 </div>
                                             )}
                                             <div className="ml-auto flex">
-                                                <SidebarAction
-                                                    className="hidden xl:block border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark"
-                                                    title="Toggle content width"
-                                                    onClick={handleFullWidthContentChange}
-                                                >
-                                                    <ExpandDocument expanded={fullWidthContent} />
-                                                </SidebarAction>
+                                                {!hideWidthToggle && (
+                                                    <SidebarAction
+                                                        className="hidden xl:block border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark"
+                                                        title="Toggle content width"
+                                                        onClick={handleFullWidthContentChange}
+                                                    >
+                                                        <ExpandDocument expanded={fullWidthContent} />
+                                                    </SidebarAction>
+                                                )}
                                                 {darkMode && (
                                                     <SidebarAction
-                                                        className="pl-2 pr-2"
+                                                        className="pl-2 pr-2 h-8 my-1"
                                                         width="auto"
                                                         title="Toggle dark mode"
                                                     >

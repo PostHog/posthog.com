@@ -1,0 +1,28 @@
+---
+title: Deploying a reverse proxy to PostHog Cloud
+sidebar: Docs
+showTitle: true
+---
+
+A reverse proxy allows you to send events to PostHog Cloud using your own domain.
+
+This means that events are sent from your own domain and are less likely to be intercepted by tracking blockers. You be able to capture more usage data without having to self-host PostHog.
+
+Setting up a reverse proxy means setting up a service to redirect requests from a subdomain you choose (like `e.yourdomain.com`) to PostHog. It is best practice to use a subdomain that does not include `posthog`, `analytics`, `tracking`, or other similar words. 
+
+You then use this subdomain as your instance host in the initialization of PostHog instead of `app.posthog.com` or `eu.posthog.com`.
+
+> **Note:** PostHog Cloud requires that the proxy sets the `Host` header to `eu.posthog.com` for requests sent to `https://eu.posthog.com`
+> and `app.posthog.com` for requests sent to `https://app.posthog.com`.
+
+## Deploying a reverse proxy
+
+Options for deploying a reverse proxy include:
+
+- [AWS CloudFront](/docs/advanced/proxy/cloudfront)
+- [Caddy](/docs/advanced/proxy/caddy)
+- [Cloudflare](/docs/advanced/proxy/cloudflare)
+- [Kubernetes Ingress Controller](/docs/advanced/proxy/kubernetes-ingress-controller)
+- [Netlify](/docs/advanced/proxy/netlify)
+- [Next.js](/docs/advanced/proxy/nextjs)
+- [Vercel](/docs/advanced/proxy/vercel)

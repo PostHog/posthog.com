@@ -80,4 +80,4 @@ The weeks that followed were quite stressful. We suddenly had to find a lawyer t
 
 We immediately started doing regular calls with the partners and we chose to send a regular update once a week with our progress. Knowing this was coming up every Friday kept our urgency up.
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Want to know more about what we're up to? [Subscribe to our new newsletter](https://newsletter.posthog.com/subscribe), which we send once every two weeks!_

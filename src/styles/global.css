@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+p {
+    margin-bottom: 1.45rem;
+}
+
 @layer utilities {
     .text-shadow-none {
         text-shadow: none;
@@ -209,7 +213,7 @@ h4 {
         @apply p-2 pl-4 cursor-pointer border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
 
         > summary {
-            @apply text-red list-none pl-4 relative before:absolute before:left-[3px] before:top-[8px] before:w-[10px] before:h-[7px];
+            @apply text-red font-semibold list-none pl-4 relative before:absolute before:left-[0] before:top-[9px] before:w-[10px] before:h-[7px];
 
             &:before {
                 background: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%0A%3E%3Cpath d='M8.15448 0.316976L5.00049 3.47201L1.8465 0.316976C1.42387 -0.105659 0.73923 -0.105659 0.316596 0.316976C-0.105532 0.739104 -0.105532 1.42425 0.316596 1.84636L4.23586 5.76563C4.65799 6.18726 5.34211 6.18726 5.76421 5.76563L9.68296 1.84688V1.84637C10.1056 1.42425 10.1056 0.740128 9.68347 0.317507C9.26134 -0.105115 8.57722 -0.105128 8.1546 0.317L8.15448 0.316976Z' fill='%23EF7632' /%3E%3C/svg%3E");
@@ -227,6 +231,10 @@ h4 {
                 transform: rotate(0deg);
                 transition: all 0.25s ease-out;
             }
+        }
+
+        p:last-child {
+            @apply mb-0;
         }
 
         > div {
@@ -250,16 +258,6 @@ h4 {
 
 #recent-questions {
     container-type: inline-size;
-}
-
-@container (min-width: 583px) and (max-width: 650px) {
-    #recent-questions ul li .grid {
-        @apply block;
-
-        > div {
-            @apply mb-2;
-        }
-    }
 }
 
 /* scope to left nav */
@@ -1172,7 +1170,8 @@ iframe[src*='youtube-nocookie.com'] {
 }
 
 .about-nav .slick-track,
-.careers-nav .slick-track {
+.careers-nav .slick-track,
+.product-nav .slick-track {
     @apply md:!flex md:!justify-center md:!w-auto md:!transform-none;
 }
 
@@ -1195,5 +1194,34 @@ iframe[src*='youtube-nocookie.com'] {
     }
     > div:last-of-type {
         @apply border-b-0;
+    }
+}
+
+.squeak-left-border {
+    @apply before:border-l before:border-b before:border-dashed before:border-gray-accent-light dark:before:border-opacity-50 before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:left-0;
+}
+
+li.squeak-left-border {
+    @apply before:h-[14px]; /* exiting thread replies - this overrides the reply box (for the user) */
+}
+
+.squeak-post-markdown {
+    @apply text-[15px] leading-normal break-words pb-3;
+
+    a {
+        @apply font-semibold;
+    }
+
+    p {
+        @apply m-0 mb-2 text-[15px];
+    }
+
+    ol,
+    ul {
+        @apply pb-0 mb-2 text-[15px];
+    }
+
+    pre {
+        @apply text-base my-3 overflow-scroll p-4 text-[15px];
     }
 }

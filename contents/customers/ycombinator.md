@@ -45,7 +45,7 @@ PostHog also offered the benefit of autocapture, which enabled the team to get s
 ![Y Combinator analytics screenshot](../images/customers/ycombinator/ycombinator-analytics.png)
 
 ## How Y Combinator boosted Co-founder Matching engagement by 40% 
-Since starting with PostHog, Y Combinator has gone beyond analytics and begun using more PostHog features, such as [experiments](/product/experimentation-suite) and [session recordings](/product/session-recording), to explore data from multiple angles at once.
+Since starting with PostHog, Y Combinator has gone beyond analytics and begun using more PostHog features, such as [experiments](/product/experimentation-suite) and [session replays](/product/session-recording), to explore data from multiple angles at once.
 
 For Startup School, for example, the team uses [trends insights](/manual/trends) to monitor weekly users and share results in [dashboards](/manual/dashboards). For Co-Founder Matching, Y Combinator uses PostHog's [experimentation suite](/manual/experimentation) to try new ideas, some of which have led to significant improvements.  
 
@@ -53,7 +53,7 @@ For Startup School, for example, the team uses [trends insights](/manual/trends)
 
 “And, perhaps more importantly, this experiment group had 35% more of their requests accepted - which translates to having 35% more matches than the control group.”
 
-Experiments and session recordings have also helped Y Combinator avoid pitfalls borne from misleading feedback.
+Experiments and session replays have also helped Y Combinator avoid pitfalls borne from misleading feedback.
 
 "A lot of people asked us to build a feature that let co-founders collaborate on a trial project," said Cat. "But, when we ran that experiment and looked at the results, we found nobody actually used it at all. Thanks to that, we were able to redirect our efforts and avoid wasting resources.”
 

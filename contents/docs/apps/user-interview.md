@@ -38,11 +38,13 @@ After installing the app, you'll need to create a feature flag starting with `in
 - Name
   - By default, any feature flag starting with `interview-` will trigger the popup. You can change this by adding the name of the feature flag to the app config.
 - Payload
-  - Add your booking link as a JSON payload as follows:
+  - Add your booking link (and other optional modifications) as a JSON payload as follows:
 
     ```json
     {
-        "bookingLink": "https://calendly.com/posthog-luke-harries/test"
+        "bookingLink": "https://calendly.com/posthog-luke-harries/test",
+        "invitationTitle": "How easy was it to get started with PostHog?",
+        "invitationBody": "<div style='display: flex'><p>You're invited to a 30-minute user interview.<br><br>Help us improve our onboarding experience and get <strong>$30 of merch.</strong></p></div>"
     }
     ```
 

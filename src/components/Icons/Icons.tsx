@@ -30,16 +30,9 @@ export const Minus = (): JSX.Element => {
     )
 }
 
-export const Chevron = ({ className }: { className: string }): JSX.Element => {
+export const Chevron = ({ className = '' }: { className?: string }): JSX.Element => {
     return (
-        <svg
-            className={className}
-            width="10"
-            height="7"
-            viewBox="0 0 10 7"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg className={className} viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M8.15448 0.316976L5.00049 3.47201L1.8465 0.316976C1.42387 -0.105659 0.73923 -0.105659 0.316596 0.316976C-0.105532 0.739104 -0.105532 1.42425 0.316596 1.84636L4.23586 5.76563C4.65799 6.18726 5.34211 6.18726 5.76421 5.76563L9.68296 1.84688V1.84637C10.1056 1.42425 10.1056 0.740128 9.68347 0.317507C9.26134 -0.105115 8.57722 -0.105128 8.1546 0.317L8.15448 0.316976Z"
                 fill="currentColor"
@@ -479,6 +472,26 @@ export const Close = ({ className = '', opacity = '0.4' }: React.SVGProps<SVGSVG
                 clipRule="evenodd"
                 d="M1.51386 14.4497C0.53755 15.426 0.53755 17.009 1.51386 17.9853C2.49017 18.9616 4.07308 18.9616 5.0494 17.9853L9.9989 13.0358L14.9485 17.9854C15.9248 18.9617 17.5077 18.9617 18.484 17.9854C19.4604 17.0091 19.4604 15.4261 18.484 14.4498L13.5344 9.50023L18.4844 4.55024C19.4607 3.57393 19.4607 1.99101 18.4844 1.0147C17.5081 0.0383929 15.9252 0.0383932 14.9489 1.0147L9.9989 5.96469L5.04902 1.01481C4.07271 0.0384963 2.48979 0.0384963 1.51348 1.01481C0.537172 1.99112 0.537173 3.57403 1.51348 4.55034L6.46337 9.50023L1.51386 14.4497Z"
                 fill="currentColor"
+            />
+        </svg>
+    )
+}
+
+export const Close2 = ({ className = '', fill = '#F54E00' }: { className: string; fill?: string }): JSX.Element => {
+    return (
+        <svg
+            className={className}
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                fill={fill}
+                fillRule="evenodd"
+                d="M6.414 4.414a1.414 1.414 0 0 0-2 2l4 4-4 4a1.414 1.414 0 0 0 2 2l4-4 4 4a1.414 1.414 0 1 0 2-2l-4-4 4-4a1.414 1.414 0 1 0-2-2l-4 4-4-4Z"
+                clipRule="evenodd"
             />
         </svg>
     )
@@ -2006,11 +2019,7 @@ export const Ctrl = (props: any) => {
 export const K = (props: any) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="7" height="9" fill="currentColor" {...props}>
-            <path
-                fill="#000"
-                d="M1.496 8.7V6.027l.847-.869L4.741 8.7h1.87L3.366 4.08 6.336 1H4.367L1.496 4.047V1H0v7.7h1.496Z"
-                opacity=".25"
-            />
+            <path d="M1.496 8.7V6.027l.847-.869L4.741 8.7h1.87L3.366 4.08 6.336 1H4.367L1.496 4.047V1H0v7.7h1.496Z" />
         </svg>
     )
 }
@@ -2043,7 +2052,7 @@ export const Markdown = (props: any) => {
             xmlns="http://www.w3.org/2000/svg"
             {...props}
         >
-            <g fill="#000">
+            <g fill="currentColor">
                 <path
                     clipRule="evenodd"
                     d="m15 10c-2.7614 0-5 2.2386-5 5v98c0 2.761 2.2386 5 5 5h178c2.761 0 5-2.239 5-5v-98c0-2.7614-2.239-5-5-5zm-15 5c0-8.28427 6.71573-15 15-15h178c8.284 0 15 6.71573 15 15v98c0 8.284-6.716 15-15 15h-178c-8.28427 0-15-6.716-15-15z"

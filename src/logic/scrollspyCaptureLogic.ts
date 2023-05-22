@@ -1,6 +1,8 @@
 import { kea, key, actions, reducers, listeners, connect, events } from 'kea'
 
-export const scrollspyCaptureLogic = kea([
+import type { scrollspyCaptureLogicType } from './scrollspyCaptureLogicType'
+
+export const scrollspyCaptureLogic = kea<scrollspyCaptureLogicType>([
     key((props) => props.key as string),
 
     actions({

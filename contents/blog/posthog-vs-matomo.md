@@ -1,6 +1,6 @@
 ---
 date: 2022-06-01
-title: PostHog vs Matomo
+title: "In-depth: PostHog vs Matomo"
 rootPage: /blog
 sidebar: Blog
 showTitle: true

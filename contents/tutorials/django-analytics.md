@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-15
-featuredTutorial: true
+featuredTutorial: false
 featuredImage: ../images/tutorials/banners/django.png
 featuredVideo: https://www.youtube-nocookie.com/embed/QB-PI_ZXkwo
 tags: ["configuration", "feature flags", "persons", "events"]
@@ -12,7 +12,7 @@ tags: ["configuration", "feature flags", "persons", "events"]
 
 Django is a popular Python web framework. It’s used by thousands of teams and developers around the world, including PostHog, to build apps, websites, APIs, and more.
 
-In this tutorial, we go from nothing to a full Django app with all of the PostHog tools setup. These include [autocapture](/docs/integrate/client/js#autocapture), [session recordings](/manual/recordings), custom event capture, connecting frontend and backend user identification, and [feature flags](/manual/feature-flags).
+In this tutorial, we go from nothing to a full Django app with all of the PostHog tools setup. These include [autocapture](/docs/data/autocapture), [session recordings](/manual/recordings), custom event capture, connecting frontend and backend user identification, and [feature flags](/manual/feature-flags).
 
 > Already know how to setup a Django app? [Skip the app setup and go straight to the PostHog setup](#3-adding-posthog).
 

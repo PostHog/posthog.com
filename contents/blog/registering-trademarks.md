@@ -23,7 +23,9 @@ Those first crucial months present bigger problems to worry about - like finding
 
 A word mark is basically just the name of the brand (as written in a specific font, if applicable). In our case, it's the word 'PostHog.' A logo mark is typically pictorial - in our case, the hedgehog logo either alone or combined with a stylized word. The word mark is the most versatile, so that should be your first trademark priority.
 
-![The PostHog Logo](../images/logos/posthog-logo-800x155-png.png) 
+<div class="text-center my-8">
+<img src="/brand/posthog-logo.svg" class="w-full" />
+</div>
 
 When you decide to register your trademark, you don't need to spend a fortune doing it. With a tactical combination of using the right type of lawyer and doing it yourself, you should be able to get trademarks filed in the US, UK, EU and China for ~$3,000 _in total_.
 
@@ -40,4 +42,5 @@ We’ve currently secured our brand name ('PostHog') and word mark in the four t
 
 The phrase 'open source' might denote a public codebase, but a brand name can definitely be trademarked. For example, we want people to [deploy our open source edition](https://github.com/PostHog/posthog) wherever they please, but we don't want them to slap the 'PostHog' name on random products. Besides, if you’re [raising money](https://posthog.com/blog/open-source-business-models) for your startup in the future, IP is a box that investors will want you to check as part of their diligence. 
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+

@@ -45,7 +45,7 @@ const components = {
             data-path={path}
             required={required}
             className="flex-grow w-full block !bg-white dark:!bg-white/10 box-border px-3 py-2 rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
-            placeholder={placeholder || title}
+            placeholder={typeof placeholder === 'string' ? placeholder : title}
             name={title}
         />
     ),
@@ -301,7 +301,7 @@ export default function Apply({ id, info }) {
                                         )}
                                     </AnimatePresence>
                                     {copied ? (
-                                        <Check2 className="w-[18px] h-[18px[ text-green" />
+                                        <Check2 className="w-[18px] h-[18px] text-green" />
                                     ) : (
                                         <svg
                                             width="18"
@@ -385,7 +385,7 @@ export default function Apply({ id, info }) {
                                     <h5 className="text-base mb-0">Self-hosted</h5>
                                     <p className="text-sm opacity-60 mb-2">Install on your private cloud</p>
                                     <TrackedCTA
-                                        to="/signup/self-host"
+                                        to="/docs/self-host"
                                         className="mt-auto"
                                         size="sm"
                                         event={{ name: `clicked Continue`, type: 'self-hosted' }}

@@ -5,6 +5,9 @@ import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import { Link as ScrollLink } from 'react-scroll'
 import { AnimatePresence, motion } from 'framer-motion'
+import * as ProductIcons from '../ProductIcons'
+import * as NotProductIcons from '../NotProductIcons'
+import { usePost } from './hooks'
 
 const Chevron = ({ open, className = '' }: { open: boolean; className?: string }) => {
     return (
@@ -31,6 +34,14 @@ const Chevron = ({ open, className = '' }: { open: boolean; className?: string }
     )
 }
 
+const getIcon = (name: string) => {
+    return ProductIcons[name]
+        ? ProductIcons[name]({ className: 'w-5' })
+        : NotProductIcons[name]
+        ? NotProductIcons[name]({ className: 'w-5' })
+        : null
+}
+
 export default function Menu({
     name,
     url,
@@ -42,6 +53,7 @@ export default function Menu({
     icon,
     badge,
 }: IMenu): JSX.Element | null {
+    const { isMenuItemActive } = usePost()
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const [isActive, setIsActive] = useState(false)
@@ -58,12 +70,16 @@ export default function Menu({
             return (
                 children &&
                 children.some((child: IMenu) => {
-                    return child.url === pathname || isOpen(child.children)
+                    return (
+                        isMenuItemActive?.({ name: child.name, url: child.url }) ||
+                        child.url === pathname ||
+                        isOpen(child.children)
+                    )
                 })
             )
         }
-        setOpen(url === pathname || (children && isOpen(children)))
-        setIsActive(url === pathname)
+        setOpen(isMenuItemActive?.({ name, url }) || url === pathname || (children && isOpen(children)))
+        setIsActive(isMenuItemActive?.({ name, url }) || url === pathname)
     }, [pathname])
 
     const variants = {
@@ -119,8 +135,10 @@ export default function Menu({
                             )}
                         </AnimatePresence>
                         {icon ? (
-                            <span className="cursor-pointer flex items-center space-x-2 text-[17px] font-semibold text-black hover:text-black">
-                                <span className="w-[25px]">{icon}</span>
+                            <span className="cursor-pointer flex items-center space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark">
+                                <span className="w-[25px] opacity-70">
+                                    {typeof icon === 'string' ? getIcon(icon) : icon}
+                                </span>
                                 <span>{name}</span>
                             </span>
                         ) : (
@@ -168,7 +186,11 @@ export default function Menu({
                     </button>
                 )}
                 {isWithChild && (
-                    <motion.div initial={{ height: 0 }} animate={{ height: open ? 'auto' : 0 }}>
+                    <motion.div
+                        className={icon ? 'pl-[25px] -ml-2' : ''}
+                        initial={{ height: 0 }}
+                        animate={{ height: open ? 'auto' : 0 }}
+                    >
                         {children.map((child) => {
                             return <Menu handleLinkClick={handleLinkClick} key={child.name} {...child} />
                         })}

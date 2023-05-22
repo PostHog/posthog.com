@@ -23,7 +23,7 @@ The app is maintained by PostHog - [check the repo here](https://github.com/Post
 <div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.loom.com/embed/7601e527e64e4d48855de25c3ee25028" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 <br/>
 
-We recently got the chance to meet the Avo team in Iceland at our last PostHog offsite, so we're delighted to have been able to work together on this app so quickly. We're also interested to hear your feedback as always, so let us know what you think in the [community Slack](/slack)
+We recently got the chance to meet the Avo team in Iceland at our last PostHog offsite, so we're delighted to have been able to work together on this app so quickly. We're also interested to hear your feedback as always, so [let us know what you think](https://app.posthog.com/home#supportModal)
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
 

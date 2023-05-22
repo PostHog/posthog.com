@@ -10,6 +10,8 @@ author:
 featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
 category: Inside PostHog
+tags:
+  - Offsites
 ---
 
 As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our [product analytics team](/handbook/small-teams/product-analytics) (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome – see also [how we plan a killer offsite in 8 weeks](/blog/planning-a-company-offsite). 
@@ -80,4 +82,4 @@ Many of the projects related to this objective (on top of being fun and sparking
 
 We like to be transparent with what we build. The details are found in the linked PRs as well as more expansively on the teams page in [our handbook](/handbook/small-teams/team-structure). We do this because we value feedback a lot. For example, users have been asking for better data exploration tools, which helped it become a priority. 
 
-If you have more feedback about your use cases or what we're planning to build, let us know on [our community Slack](/slack) or [raise an issue](https://github.com/PostHog/posthog/issues) on our repo. 
+If you have more feedback about your use cases or what we're planning to build, let us know on [get in touch](https://app.posthog.com/home#supportModal) or [raise an issue](https://github.com/PostHog/posthog/issues) on our repo. 

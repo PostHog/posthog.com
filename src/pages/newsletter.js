@@ -23,7 +23,7 @@ export const NewsletterPage = () => {
                     <StaticImage src="../images/newsletter-signup.png" objectFit="contain" className="w-full h-full" />
                 </div>
                 <div className="col-span-3">
-                    <h1 className="text-6xl mb-2 text-center md:text-left">Subscribe to HogMail</h1>
+                    <h1 className="text-6xl mb-2 text-center md:text-left">Subscribe to Product for Engineers</h1>
                     <h4 className="font-semibold opacity-60 text-center md:text-left">
                         A newsletter about making better products
                     </h4>
@@ -33,10 +33,14 @@ export const NewsletterPage = () => {
                     </div>
 
                     <ul className="space-y-4 m-0 p-0">
-                        <Benefit text="Never miss a PostHog blog post" />
-                        <Benefit text="The latest PostHog tutorials and tips" />
+                        <Benefit text="Info to help engineers build better products" />
+                        <Benefit text="The latest tutorials and tips from fast-growing startups" />
                         <Benefit text="Curated advice on building great products" />
                     </ul>
+                    <div>
+                        <p></p>
+                        <p></p>
+                    </div>
                 </div>
             </div>
         </Layout>

@@ -9,10 +9,10 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/hogmail.png
 featuredImageType: full
-category: HogMail
+category: Newsletter
 ---
 
-> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](/newsletter) so you don't miss it.
+> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
 
 Sad news, newsletter friends, this is the last HogMail of 2022! Normal service will resume on Jan 4, 2023.
 
@@ -75,4 +75,4 @@ Mental note: y'all love articles with 'how' in the title, eh? Thanks for your su
  
 - [How The New York Times Uses Machine Learning To Make Its Paywall Smarter](https://open.nytimes.com/how-the-new-york-times-uses-machine-learning-to-make-its-paywall-smarter-e5771d5f46f8) – one for the data science and ML fans out there.
 
-> We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
+> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.

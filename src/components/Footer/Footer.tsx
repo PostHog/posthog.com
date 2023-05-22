@@ -9,32 +9,28 @@ import { GitHub, LinkedIn, YouTube, SlackMonochrome, Twitter } from 'components/
 
 const linklist: IProps[] = [
     {
-        title: 'Product',
-        url: '/product',
+        title: 'Products',
+        url: '/products/product-analytics',
         items: [
             {
-                title: 'Overview',
-                url: '/product',
-            },
-            {
-                title: 'Pricing',
-                url: '/pricing',
-            },
-            {
                 title: 'Product analytics',
-                url: '/product#top-features',
+                url: '/product-analytics',
             },
             {
-                title: 'Session recording',
-                url: '/product/session-recording',
-            },
-            {
-                title: 'A/B testing',
-                url: '/product/experimentation-suite',
+                title: 'Session replay',
+                url: '/session-replay',
             },
             {
                 title: 'Feature flags',
-                url: '/product/feature-flags',
+                url: '/feature-flags',
+            },
+            {
+                title: 'A/B testing',
+                url: '/ab-testing',
+            },
+            {
+                title: 'Product OS',
+                url: '/product-os',
             },
             {
                 title: 'Apps',
@@ -48,6 +44,10 @@ const linklist: IProps[] = [
                 title: 'PostHog vs...',
                 url: '/blog/tags/comparisons',
             },
+            {
+                title: 'Pricing',
+                url: '/pricing',
+            },
         ],
     },
     {
@@ -55,19 +55,23 @@ const linklist: IProps[] = [
         url: '/docs',
         items: [
             {
-                title: 'Quickstart guide',
-                url: '/docs/getting-started/cloud',
+                title: 'Start here',
+                url: '/docs/getting-started/start-here',
             },
             {
-                title: 'Self-hosting',
-                url: '/docs/self-host',
+                title: 'Install PostHog',
+                url: '/docs/getting-started/install',
             },
             {
-                title: 'Installing PostHog',
-                url: '/docs/integrate',
+                title: 'Send events',
+                url: '/docs/getting-started/send-events',
             },
             {
-                title: 'Building an app',
+                title: 'Integrations',
+                url: '/docs/integrations',
+            },
+            {
+                title: 'Build an app',
                 url: '/docs/apps/build',
             },
             {
@@ -76,15 +80,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Webhooks',
-                url: '/docs/integrate/webhooks/message-formatting',
-            },
-            {
-                title: 'How PostHog works',
-                url: '/docs/how-posthog-works',
-            },
-            {
-                title: 'Data privacy',
-                url: '/docs/privacy',
+                url: '/docs/integrate/webhooks',
             },
         ],
     },
@@ -93,16 +89,36 @@ const linklist: IProps[] = [
         url: '/using-posthog',
         items: [
             {
-                title: 'Product manual',
-                url: '/using-posthog/',
+                title: 'Product analytics',
+                url: '/docs/product-analytics/',
             },
             {
-                title: 'Apps manuals',
+                title: 'Session recording',
+                url: '/docs/session-replay',
+            },
+            {
+                title: 'Feature flags',
+                url: '/docs/feature-flags',
+            },
+            {
+                title: 'A/B testing',
+                url: '/docs/experiments',
+            },
+            {
+                title: 'Data',
+                url: '/docs/data',
+            },
+            {
+                title: 'Apps',
                 url: '/docs/apps',
             },
             {
                 title: 'Tutorials',
                 url: '/tutorials',
+            },
+            {
+                title: 'Tracks',
+                url: '/tracks',
             },
         ],
     },
@@ -123,16 +139,12 @@ const linklist: IProps[] = [
                 url: '/contributors',
             },
             {
-                title: 'Partners',
-                url: '/partners',
-            },
-            {
                 title: 'Newsletter',
-                url: '/newsletter',
+                url: 'https://newsletter.posthog.com',
             },
             {
                 title: 'Merch',
-                url: 'https://merch.posthog.com/collections/all',
+                url: 'https://merch.posthog.com',
             },
             {
                 title: 'PostHog FM',
@@ -141,6 +153,10 @@ const linklist: IProps[] = [
             {
                 title: 'PostHog on GitHub',
                 url: 'https://github.com/PostHog/posthog',
+            },
+            {
+                title: 'Startups',
+                url: '/startups',
             },
         ],
     },
@@ -365,10 +381,10 @@ export function Footer(): JSX.Element {
                         </li>
                         <li>
                             <Link
-                                to="/docs/contribute/code-of-conduct"
+                                to="/handbook/company/security#soc-2"
                                 className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
                             >
-                                Code of conduct
+                                SOC 2
                             </Link>
                         </li>
                         <li>

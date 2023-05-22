@@ -24,6 +24,7 @@ import slugify from 'slugify'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
+import TutorialsSlider from 'components/TutorialsSlider'
 
 const ViewButton = ({ title, view, setView }) => {
     return (
@@ -75,6 +76,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
     const { pageData } = data
     const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
+    const filePath = pageData?.parent?.relativePath
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
@@ -88,17 +90,11 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
         a: A,
+        TutorialsSlider,
         ...shortcodes,
     }
-    const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
-
-    useEffect(() => {
-        if (hash) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
 
     return (
         <Layout>
@@ -109,10 +105,18 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
             <PostLayout
-                questions={<CommunityQuestions />}
+                isMenuItemActive={({ url }) =>
+                    url === `/tutorials/categories/${slugify(categories[0], { lower: true })}`
+                }
+                questions={
+                    <div id="squeak-questions" className="pb-8">
+                        <CommunityQuestions />
+                    </div>
+                }
                 body={body}
                 featuredImage={featuredImage}
                 featuredVideo={featuredVideo}
+                filePath={filePath}
                 tableOfContents={tableOfContents}
                 title={title}
                 menu={menu}
@@ -183,6 +187,11 @@ export const query = graphql`
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE)
                     }
+                }
+            }
+            parent {
+                ... on File {
+                    relativePath
                 }
             }
         }

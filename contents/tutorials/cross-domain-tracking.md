@@ -4,6 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-08
+featuredTutorial: false
 featuredImage: ../images/tutorials/banners/tutorial-3.png
 tags: ['configuration', 'persons', 'sessions']
 ---

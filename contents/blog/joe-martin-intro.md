@@ -46,4 +46,5 @@ Joe has found his match in PostHog: the company is well-known for [pivoting](htt
 
 Connect with Joe on [LinkedIn](https://www.linkedin.com/in/joemartinwords/) and [online](https://joemartin.work), and check out his current read on [Amazon](https://www.amazon.com/House-Leaves-Mark-Z-Danielewski/dp/0375703764).
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+

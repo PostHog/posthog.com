@@ -63,7 +63,7 @@ const TabList: typeof HeadlessTab.List = ({ children, className, ...props }) => 
     return (
         <HeadlessTab.List
             {...props}
-            className={`flex whitespace-nowrap gap-x-[1px] border-b border-gray-accent-light dark:border-gray-accent-dark ${className}`}
+            className={`-mx-4 px-4 sm:mx-0 sm:px-0 flex whitespace-nowrap gap-x-[1px] border-b border-gray-accent-light dark:border-gray-accent-dark overflow-x-auto ${className}`}
         >
             {children}
         </HeadlessTab.List>

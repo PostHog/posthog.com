@@ -23,7 +23,7 @@ You'll also need access to a RudderStack workspace.
 
 Before integrating with RudderStack, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating your CDP with PostHog.
 
-When you are ready to integrate, read the PostHog [integration guide with RudderStack](/docs/integrate/third-party/rudderstack).
+When you are ready to integrate, read the PostHog [integration guide with RudderStack](/docs/libraries/rudderstack).
 
 ### Who maintains this app?
 

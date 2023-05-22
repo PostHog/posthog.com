@@ -8,10 +8,10 @@ hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/hogmail.png
 featuredImageType: full
-category: HogMail
+category: Newsletter
 ---
 
-> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](/newsletter) so you don't miss it.
+> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
 
 I have good news and bad news. The bad news... this is the last ever HogMail. 😢
 
@@ -67,4 +67,4 @@ Dissent fuels innovation, but a "challenge everything" culture can "quickly meta
 
 **Read:** [Challenging the status quo at work](https://workweek.com/2022/11/28/challenging-the-status-quo-at-work/) by Hebba Youseff
 
-> We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
+> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
