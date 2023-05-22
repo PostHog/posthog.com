@@ -91,13 +91,13 @@ toDayOfWeek(timestamp) != 6 and toDayOfWeek(timestamp) != 7
 
 HogQL lets you analyze users based on dates too. This enables you to filter for events based on users in trial or recently subscribed.
 
-For example, you want to events from users in the last 3 days of their trial period and you only have a `trial_started` person property. You can use the `addDays()` function to add 30 days and check if that date is less than or equal to 3 days away from `now()` like this: 
+For example, you want to events from users in the last 3 days of their trial period and you only have a `trial_started` person property. You can use the `interval` type to add 30 days and check if that date is less than or equal to 3 days away from `now()` like this: 
 
 ```
 dateDiff(
 	'day', 
 	now(), 
-	addDays(toDateTime(person.properties.trial_started), 30)
+	person.properties.trial_started + interval 30 day
 ) <= 3
 ```
 
