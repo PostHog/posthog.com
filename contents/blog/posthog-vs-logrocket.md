@@ -17,9 +17,9 @@ tags:
 
 LogRocket is a frontend monitoring platform which, like PostHog, combines multiple tools into one platform. In this article we’ll explain some of the biggest similarities and differences between PostHog and LogRocket, but here’s the short version:
 
-- LogRocket focuses on helping frontend developers detect and solve issues. It offers tools such as session recording, analytics, and performance monitoring.
+- LogRocket focuses on helping frontend developers detect and solve issues. It offers tools such as session replays, analytics, and performance monitoring.
 
-- PostHog is an all-in-one platform that helps teams build better products. It includes many of the same tools as LogRocket, including session recording, analytics and performance monitoring — but also extends to feature flags, A/B testing and more.
+- PostHog is an all-in-one platform that helps teams build better products. It includes many of the same tools as LogRocket, including session replays, analytics and performance monitoring — but also extends to feature flags, A/B testing and more.
 
 In this article, we will:
 
@@ -32,7 +32,7 @@ In this article, we will:
 
 ### 1. PostHog does more than frontend monitoring
 
-PostHog goes beyond frontend monitoring by augmenting product analytics and session recording with powerful product and data tools, such as feature flags, A/B testing, and SQL querying. While LogRocket’s focus on the frontend means it offers a few specialist features, PostHog offers greater value and is more widely useful for the majority of teams and organizations
+PostHog goes beyond frontend monitoring by augmenting product analytics and session replays with powerful product and data tools, such as feature flags, A/B testing, and SQL querying. While LogRocket’s focus on the frontend means it offers a few specialist features, PostHog offers greater value and is more widely useful for the majority of teams and organizations
 
 ### 2. PostHog is open source and transparent
 
@@ -64,7 +64,7 @@ PostHog offers a much wider selection of tools than LogRocket, including several
             <td>Track events and conversion; analyze user behavior</td>
         </tr>
         <tr>
-            <td><strong>Session recording</strong></td>
+            <td><strong>Session replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Watch real users use your product; diagnose bugs</td>
@@ -202,7 +202,7 @@ While LogRocket contains some product analytics features, it isn’t primarily i
 
 ### Session recording
 
-LogRocket and PostHog both offer robust, full-featured session recording tools that outperform even dedicated tools, such as [Hotjar](/blog/best-open-source-session-replay-tools). LogRocket’s session recording offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
+LogRocket and PostHog both offer robust, full-featured session replays tools that outperform even dedicated tools, such as [Hotjar](/blog/best-open-source-session-replay-tools). LogRocket’s session replay offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -216,22 +216,22 @@ LogRocket and PostHog both offer robust, full-featured session recording tools t
     </thead>
     <tbody>
         <tr>
-            <td><strong>Desktop app recordings</strong></td>
+            <td><strong>Desktop app replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Capture recordings from single-page apps</td>
+            <td>Capture replays from single-page apps</td>
         </tr>
         <tr>
-            <td><strong>Mobile app recordings</strong></td>
+            <td><strong>Mobile app replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Capture recordings in iOS and Android apps</td>
+            <td>Capture replays from iOS and Android apps</td>
         </tr>
         <tr>
             <td><strong>Identity detection</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Link recordings to user IDs</td>
+            <td>Link replays to user IDs</td>
         </tr>
         <tr>
             <td><strong>Console logs</strong></td>
@@ -258,13 +258,13 @@ LogRocket and PostHog both offer robust, full-featured session recording tools t
             <td>Censor personal information from playback</td>
         </tr>
         <tr>
-            <td><strong>Conditional recording</strong></td>
+            <td><strong>Conditional replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Only capture the sessions you want</td>
         </tr>
         <tr>
-            <td><strong>Export recordings</strong></td>
+            <td><strong>Export replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Take recordings in/out of the platform</td>
@@ -273,7 +273,7 @@ LogRocket and PostHog both offer robust, full-featured session recording tools t
 </table>
 </div>
 
--   **Mobile app recordings:** PostHog does not currently offer recordings for mobile apps, but it is something we’re actively working on. Check [our roadmap](/roadmap) for more info!
+-   **Mobile app replays:** PostHog does not currently offer replays for mobile apps, but it is something we’re actively working on. Check [our roadmap](/roadmap) for more info!
 
 ### Heatmaps and click tracking
 
@@ -753,7 +753,7 @@ More feature-rich product tiers begin at $550 USD per month, but increase depend
 
 PostHog has transparent pricing based on usage. It’s free to get started and completely free for the first 1 million events and 15,000 sessions captured every month.
 
-After this free monthly allowance you'll pay $0.00045/event and $0.005/recording, and PostHog charges progressively less the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
+After this free monthly allowance you'll pay $0.00045/event and $0.005/replay, and PostHog charges progressively less the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
 
 ### Do LogRocket and PostHog offer free trials?
 
