@@ -333,7 +333,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
         })
     }
 
-    const path: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
+    const curlPath: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
 
     const languages = [
         {
@@ -345,7 +345,7 @@ curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '
                 item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
             }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
-    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
+    https://app.posthog.com${curlPath}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
             `,
         },
         {
@@ -355,8 +355,8 @@ curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '
 api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
-    "https://app.posthog.com${path}".format(
-        project_id=project_id${path.includes('{id}') ? ',\n\t\tid=response["id"]' : ''}
+    "https://app.posthog.com${item.pathName}".format(
+        project_id=project_id${item.pathName.includes('{id}') ? ',\n\t\tid=response["id"]' : ''}
     ),
     headers={"Authorization": "Bearer {}".format(api_key)},${
         params.length > 0
