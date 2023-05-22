@@ -34,7 +34,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
  
 - **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasionally be useful.
 
-- - **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out Twitter. 
+- **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out Twitter. 
 
 ### Things we might want to be good at but haven't tested yet
 
