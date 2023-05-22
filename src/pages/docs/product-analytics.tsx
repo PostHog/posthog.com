@@ -66,6 +66,11 @@ export const quickLinks = [
         name: 'Sampling',
         to: '/docs/product-analytics/sampling',
     },
+    {
+        icon: 'HogQL',
+        name: 'HogQL',
+        to: '/docs/product-analytics/hogql',
+    },
 ]
 
 type ProductAnalyticsProps = {

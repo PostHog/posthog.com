@@ -906,3 +906,20 @@ export const WebPerformance = ({ className = '', ...other }: { className?: strin
         />
     </svg>
 )
+export const HogQL = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        className={`fill-current ${className}`}
+        {...other}
+    >
+        <path d="M12 22h-1.25V2H12v20Zm-8.75-2.5v-15c0-.345.28-.625.625-.625h6.875c.345 0 .625.28.625.625v15c0 .345-.28.625-.625.625H3.875a.625.625 0 0 1-.625-.625Zm2.5-13.125a.625.625 0 1 0-1.25 0 .625.625 0 0 0 1.25 0Zm0 1.875a.625.625 0 1 0-1.25 0 .625.625 0 0 0 1.25 0Zm-1.25 10h5.625V17H4.5v1.25Zm0-2.5h5.625V14.5H4.5v1.25Zm0-2.5h5.625V12H4.5v1.25Z" />
+        <path opacity=".6" d="M14.5 5.125v5h5v-5h-5Zm6.25-1.25v7.5h-7.5v-7.5h7.5Z" />
+        <path
+            opacity=".7"
+            d="M12.625 13.75h-1.25v-1.25h1.25v1.25Zm0-2.5h-1.25v-1.25h1.25v1.25Zm0-2.5h-1.25V7.5h1.25v1.25Zm7.5 7.5h-6.25v-1.25h6.25v1.25Zm0-2.5h-6.25v-1.25h6.25v1.25Zm0-2.5h-6.25v-1.25h6.25v1.25Z"
+        />
+    </svg>
+)
