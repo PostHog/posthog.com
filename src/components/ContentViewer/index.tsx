@@ -105,7 +105,7 @@ export default function ContentViewer({ content, title, initialIndex }: IProps) 
                 </div>
             </motion.div>
             {currentContent && (
-                <div className="z-[999999999999999] article-content md:flex-1">
+                <div className="md:z-auto z-[999999999999999] article-content md:flex-1">
                     <ContentContainer {...(breakpoints.sm ? { setOpen: setCurrentIndex } : {})}>
                         <div className="max-h-[70vh] md:max-h-[initial] overflow-auto">
                             <h1 className="mb-6 text-xl md:text-2xl">{currentContent.title}</h1>
