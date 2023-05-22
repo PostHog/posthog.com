@@ -152,6 +152,7 @@ export default function Product({ data, location, pageContext }) {
         body,
         excerpt,
         fields: { slug },
+        parent,
     } = pageData
     const {
         title,
@@ -260,7 +261,7 @@ export default function Product({ data, location, pageContext }) {
         <Layout>
             <SEO
                 image={`/images/product/${slug.split('/')[1]}.png`}
-                title={`${title} - PostHog`}
+                title={`${title} ${parent.name} - PostHog`}
                 description={description || excerpt}
             />
 
@@ -291,6 +292,11 @@ export const query = graphql`
         $customerURLs: [String!]!
     ) {
         pageData: mdx(id: { eq: $id }) {
+            parent {
+                ... on File {
+                    name
+                }
+            }
             body
             excerpt(pruneLength: 150)
             fields {
