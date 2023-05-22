@@ -45,7 +45,7 @@ export default function Hero({
                         dangerouslySetInnerHTML={{ __html: subtitle }}
                     />
                     {pricingCTA && mainCTA && (
-                        <div className="flex space-x-4 items-center">
+                        <div className="flex space-x-3 items-center">
                             <CallToAction to={mainCTA.url} size="sm" className="">
                                 {mainCTA.title}
                             </CallToAction>
