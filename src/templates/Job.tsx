@@ -172,7 +172,7 @@ export default function Job({
                                             return (
                                                 <li
                                                     key={title}
-                                                    className="flex space-x-4 items-center font-medium leading-tight text-[15px]"
+                                                    className="flex space-x-3 items-center font-medium leading-tight text-[15px]"
                                                 >
                                                     <img className="max-w-[30px]" alt={title} src={image} />
                                                     <span>{title}</span>

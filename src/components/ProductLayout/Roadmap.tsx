@@ -54,7 +54,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
     return (
         <div id="roadmap">
             <SectionWrapper>
-                <div className="mt-8 flex items-start md:space-y-0 space-y-4 md:space-x-8 md:flex-row flex-col">
+                <div className="flex items-start md:space-y-0 space-y-4 md:space-x-8 md:flex-row flex-col">
                     <div className="flex-1">
                         <h3 className="m-0">Roadmap</h3>
                         <p className="">{subtitle}</p>

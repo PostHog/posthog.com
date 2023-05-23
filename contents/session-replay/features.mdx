@@ -3,7 +3,7 @@ title: Session replay
 subtitle: <span class="text-red font-semibold bg-yellow/10">Watch recordings of visitors</span> using your product or website.
 template: product
 productHero: {
-  image: ./images/products/session-replay/session-replay.png,
+  image: ./../images/products/session-replay/session-replay.png,
 }
 productFeatures: [
     {
@@ -35,8 +35,29 @@ productFeatures: [
 productSections: [
   [
     {
+      image: ../images/products/session-replay/timeline.png,
+      marquee: [
+        {text: "Where do key events happen in my user’s sessions?"},
+        {text: "How do I understand my users' behavior in funnels?", url: "/tutorials/explore-insights-session-recordings#watching-users-through-funnels"},
+        {text: "How do I understand my user journeys?", url: "/tutorials/explore-insights-session-recordings#watching-journeys-from-user-paths"},
+        {text: "How can I understand what my power users are doing?", url: "/tutorials/explore-insights-session-recordings#find-and-analyze-outliers-in-trend-graphs"},
+        {text: "How do I figure out how to lower churn?", url: "/tutorials/churn-rate#session-recordings"},
+        {text: "How do I improve my support experience?", url: "/tutorials/session-recordings-for-support"},
+        {text: "How do I see where errors happen?", url: "/tutorials/session-recordings-for-support"},
+        {text: "How do I get bug recreation steps easily?"},
+        {text: "Why are users dropping off in my funnel?", url: "/tutorials/explore-insights-session-recordings#watching-users-through-funnels"},
+        {text: "What’s making my users angry or frustrated?", url: "/tutorials/toolbar"},
+        {text: "Which screens are loading slowly?", url: "/tutorials/performance-metrics"},
+        {text: "How can I improve customer support with screen recordings?", url: "/tutorials/session-recordings-for-support"},
+        {text: "How do I understand sources of friction in my app?",  url: "/tutorials/filter-session-recordings"},
+      ]
+    }
+  ],
+  [
+    {
       title: "Event timeline",
       subtitle: "History of everything that happened in a user's session",
+      align: "center",
       features: [
                   {
                       title: 'Filter',
@@ -56,19 +77,40 @@ productSections: [
               ]
     },
     {
-      image: ./images/products/session-replay/timeline.png
+      image: ../images/products/session-replay/timeline.png
     }
   ],
   [
+    {
+      marquee: [
+        {text: "What errors are being logged to the console?"},
+        {text: "What warnings are being logged to the console?"}
+      ]
+    }
+  ],
+  [
+    {
+      image: ../images/products/session-replay/console.png
+    },
     {
       align: 'center',
       title: "Built-in console logs",
       subtitle: "Debug issues faster with the console log - just like if you asked them to open Inspector.",
      
-    },
+    }
+  ],
+  [
     {
-      image: ./images/products/session-replay/console.png
-    },
+      marquee: [
+        {text: "What is a user’s First Contentful Paint time", url: "/tutorials/performance-metrics#1-first-contentful-paint"},
+        {text: "What is a user’s Dom Interactive time", url: "/tutorials/performance-metrics#2-dom-interactive"},
+        {text: "What is a user’s Page Loaded time", url: "/tutorials/performance-metrics#3-page-loaded"},
+        {text: "How fast does my app load?"},
+        {text: "How does my user experience differ across devices?"},
+        {text: "How does my user experience differ across regions?"},
+        {text: "How do I optimize site performance?", url: "/tutorials/performance-metrics#optimization-cheat-sheet"}
+      ]
+    }
   ],
   [
     {
@@ -78,10 +120,20 @@ productSections: [
       align: 'center',
     },
     {
-      image: ./images/products/session-replay/network.png
+      image: ../images/products/session-replay/network.png
     }
   ],
 ]
+productMainCTA: {
+  title: Get started - free,
+  subtitle: "First 15,000 sessions/mo are free.",
+  image: ../images/products/hogs/session-replay.png,
+  url: https://app.posthog.com/signup
+}
+productPricingCTA: {
+    title: View pricing,
+    url: /pricing
+}
 productTestimonial: {
   author: {
       name: "Anubhuti Mishra",
@@ -90,24 +142,13 @@ productTestimonial: {
       company: { name: Hasura, image: "/images/customers/hasura.svg" }
   },
   quote: "\"I was watching session recordings for our sign-up page and realized a lot of people were trying to click something that wasn’t actually a button. <strong>We wouldn’t have noticed that needed fixing without PostHog’s session recordings.</strong>\"",
-  image: ./images/products/hogs/session-replay.png
+  image: ../images/products/hogs/session-replay.png
 }
-productBlog: {
-  title: "Blog posts that mention Session replay",
-  tags: ["Session recording"]
-}
-productTutorialTags: ["session recording"]
-productTeam: Session Recording
-productMainCTA: {
-  title: Try Session replay,
-  subtitle: "First 15,000 sessions/mo are free.",
-  image: ./images/products/hogs/session-replay.png,
-  url: https://app.posthog.com/signup
-}
-productPricingCTA: {
-    title: View pricing,
-    url: /pricing
-}
+customerURLs: [
+    "/customers/contra",
+    "/customers/hasura",
+    "/customers/netdata"
+]
 productPairsWith: [
     {
         icon: 'Analytics',
@@ -130,17 +171,7 @@ productPairsWith: [
         url: '/ab-testing',
     },
 ]
-productMenuItems: [
-  "Overview",
-  "Features",
-  "Pairs with",
-  "PostHog vs...",
-  "Documentation",
-  "Roadmap"
-]
 ---
-
-import ComparisonTable from './_includes/session-replay/comparison-table.mdx'
 
 <Hero />
 
@@ -151,17 +182,5 @@ import ComparisonTable from './_includes/session-replay/comparison-table.mdx'
 <MainFeatures />
 
 <PairsWith />
-
-<Comparison>
-
-  <ComparisonTable />
-
-</Comparison>
-
-<Documentation />
-
-<BlogPosts />
-
-<Roadmap />
 
 <CTA />

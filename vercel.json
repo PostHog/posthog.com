@@ -836,7 +836,12 @@
         { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" },
         { "source": "/community", "destination": "/questions" },
         { "source": "/blog/customer-churn-analysis-guide", "destination": "/blog/churn-rate-vs-retention-rate" },
-        { "source": "/questions/autocapture", "destination": "/docs/data/autocapture" }
+        { "source": "/questions/autocapture", "destination": "/docs/data/autocapture" },
+        { "source": "/product-analytics", "destination": "/product-analytics/features" },
+        { "source": "/session-replay", "destination": "/session-replay/features" },
+        { "source": "/feature-flags", "destination": "/feature-flags/features" },
+        { "source": "/ab-testing", "destination": "/ab-testing/features" },
+        { "source": "/product-os", "destination": "/product-os/features" }
     ],
     "rewrites": [
         {

@@ -252,7 +252,7 @@ const AddonTooltipContent = ({
     )
 }
 
-export const PlanComparison = (): JSX.Element => {
+export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?: string[] }): JSX.Element => {
     const posthog = usePostHog()
     const { availableProducts, availablePlans } = useValues(pricingLogic)
 
@@ -295,22 +295,24 @@ export const PlanComparison = (): JSX.Element => {
                                             : 'The whole hog. Pay per use with billing limits to control spend. Priority support.'}
                                     </p>
                                 </div>
-                                <TrackedCTA
-                                    event={{
-                                        name: `clicked Get started - free`,
-                                        type: 'cloud',
-                                    }}
-                                    type="primary"
-                                    size="sm"
-                                    className="shadow-md !w-auto"
-                                    to={`https://${
-                                        posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                            ? 'eu'
-                                            : 'app'
-                                    }.posthog.com/signup`}
-                                >
-                                    Get started - free
-                                </TrackedCTA>
+                                {showCTA && (
+                                    <TrackedCTA
+                                        event={{
+                                            name: `clicked Get started - free`,
+                                            type: 'cloud',
+                                        }}
+                                        type="primary"
+                                        size="sm"
+                                        className="shadow-md !w-auto"
+                                        to={`https://${
+                                            posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                ? 'eu'
+                                                : 'app'
+                                        }.posthog.com/signup`}
+                                    >
+                                        Get started - free
+                                    </TrackedCTA>
+                                )}
                             </div>
                         </div>
                     ))}
@@ -318,6 +320,7 @@ export const PlanComparison = (): JSX.Element => {
             </div>
             {/* PRODUCTS */}
             {availableProducts?.map((product) => {
+                if (groupsToShow && !groupsToShow.includes(product.type)) return null
                 // some products only have a paid plan, but we need to show something for the free plan, so we stub out values using this var
                 const stubMissingPlan = product.plans.length !== availablePlans.length
                 return (
@@ -515,22 +518,24 @@ export const PlanComparison = (): JSX.Element => {
                                         {plan.free_allocation ? 'Free' : 'Paid'}
                                     </p>
                                 </div>
-                                <TrackedCTA
-                                    event={{
-                                        name: `clicked Get started - free`,
-                                        type: 'cloud',
-                                    }}
-                                    type="primary"
-                                    size="sm"
-                                    className="shadow-md !w-auto"
-                                    to={`https://${
-                                        posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                            ? 'eu'
-                                            : 'app'
-                                    }.posthog.com/signup`}
-                                >
-                                    Get started - free
-                                </TrackedCTA>
+                                {showCTA && (
+                                    <TrackedCTA
+                                        event={{
+                                            name: `clicked Get started - free`,
+                                            type: 'cloud',
+                                        }}
+                                        type="primary"
+                                        size="sm"
+                                        className="shadow-md !w-auto"
+                                        to={`https://${
+                                            posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                ? 'eu'
+                                                : 'app'
+                                        }.posthog.com/signup`}
+                                    >
+                                        Get started - free
+                                    </TrackedCTA>
+                                )}
                             </div>
                         </div>
                     ))}

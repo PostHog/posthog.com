@@ -58,6 +58,30 @@ type FeatureFlagsProps = {
     }
 }
 
+export const Intro = ({ image = true }) => (
+    <>
+        {image && (
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                src="../../components/Home/Slider/images/feature-flags-hog.png"
+            />
+        )}
+        <h1 className="text-4xl mb-2 mt-6">Feature flags</h1>
+        <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+            Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
+        </h3>
+
+        {/* Quick links */}
+        <section className="my-6">
+            <h3 className="mb-6 mt-0">Pages</h3>
+            <LinkGrid links={quickLinks} />
+        </section>
+    </>
+)
+
 const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
     const { tutorials } = data
 
@@ -66,24 +90,7 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
             <SEO title="Feature flags - Docs - PostHog" />
 
             <PostLayout title={'Feature flags'} menu={docs} hideSurvey hideSidebar>
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/feature-flags-hog.png"
-                />
-                <h1 className="text-4xl mb-2 mt-6">Feature flags</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                    Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
-                </h3>
-
-                {/* Quick links */}
-                <section className="my-6">
-                    <h3 className="mb-6 mt-0">Pages</h3>
-                    <LinkGrid links={quickLinks} />
-                </section>
-
+                <Intro />
                 {/* Get started section */}
                 <section className="py-6 sm:py-12">
                     <GettingStarted
