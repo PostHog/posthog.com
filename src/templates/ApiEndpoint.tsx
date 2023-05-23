@@ -309,7 +309,7 @@ function ResponseBody({ item, objects }) {
     )
 }
 
-function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) {
+function RequestExample({ name, item, objects, exampleLanguage, setExampleLanguage }) {
     let params = []
 
     if (item.requestBody) {
@@ -334,6 +334,7 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
     }
 
     const curlPath: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
+    const object: string = name.toLowerCase().slice(0, -1)
 
     const languages = [
         {
@@ -355,8 +356,8 @@ curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '
 api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
-    "https://app.posthog.com${item.pathName}".format(
-        project_id=project_id${item.pathName.includes('{id}') ? ',\n\t\tid=response["id"]' : ''}
+    "https://app.posthog.com${item.pathName.replace('{id}', `{${object}_id}`)}".format(
+        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="the ${object} id"` : ''}
     ),
     headers={"Authorization": "Bearer {}".format(api_key)},${
         params.length > 0
@@ -534,6 +535,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                 <div className="lg:sticky top-0">
                                     <h4>Request</h4>
                                     <RequestExample
+                                        name={name}
                                         item={item}
                                         objects={objects}
                                         exampleLanguage={exampleLanguage}
