@@ -335,6 +335,9 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
 
     const path: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
     const object: string = name.toLowerCase().slice(0, -1)
+    const additionalPathParams = item.parameters
+        ?.filter((param) => param.in === 'path')
+        .filter((param) => !['project_id', 'id'].includes(param.name))
 
     const languages = [
         {
@@ -357,7 +360,13 @@ api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
     "https://app.posthog.com${item.pathName.replace('{id}', `{${object}_id}`)}".format(
-        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="the ${object} id"` : ''}
+        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="the ${object} id"` : ''}${
+                additionalPathParams.length > 0
+                    ? additionalPathParams.map(
+                          (param) => `,\n\t\t${param.name}="[the ${param.name.replaceAll('_', ' ')}]"`
+                      )
+                    : ''
+            }
     ),
     headers={"Authorization": "Bearer {}".format(api_key)},${
         params.length > 0
