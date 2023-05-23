@@ -21,6 +21,13 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 ## May 26, 2023
 
+#### Analyse all the events
+![everything everywhere all at once](../images/blog/array/all_events.png)
+
+Questions, like arrows, function best when they are aimed at a specific target. But sometimes you just want to let fly and analyze everything all at once with reckless abandon. So, we've added and 'All events' option to the insight builder to help you do exactly that. 
+
+Now you can get a feel for your overall event volume and narrow down to the correct events from there, rather than having to choose a target from the start.
+
 #### Report a login issue
 ![login issues posthog](../images/blog/array/report_login.mp4)
 
