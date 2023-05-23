@@ -182,11 +182,13 @@ Start "closing the loop" with users. This is a simple process to improve your pr
 * Repeat the above
 
 
-Closing the loop above is the way to cement your product-market fit. First, your product will get better – you should weight user feedback very heavily compared to your instincts around what to build. 
+Closing the loop above is the way to cement your product-market fit because:
 
-Second, it will bring you more users through word of mouth. The one thing you can compete on is speed – you can outperform any competitors by providing a ridiculously excellent experience to your early users, so they will tell their friends. 
+1. **Your product will get better fast.** You should weight user feedback very heavily compared to your instincts around what to build. 
 
-Third, and best of all, it means that you will demonstrate to users that you listen to their feedback so that you get more feedback.
+2. **It will generate word of mouth growth.** The one thing you can compete on is speed – you can outperform any competitors by providing a ridiculously excellent experience to your early users, so they will tell their friends. 
+
+3. **Listening to users compounds.** Like a snowball rolling down a hill, the more you listen to users and act on their feedback, the more useful feedback they'll share with you. 
 
 #### Failure modes
 
