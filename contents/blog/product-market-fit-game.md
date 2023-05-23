@@ -73,13 +73,7 @@ It's too late to tell you this, but the more helpful you've been to other people
 
 Here are a list of ways to get meetings, ranked from easiest to hardest:
 
-1. People you're buddies with – "hey Joe, can I ask a favor?"
-1. People you have worked with before – similar message to above
-1. People who follow you on social media... if you have them!
-1. People who have worked at the same company as you – "hey, I'm also an alum of X"
-1. People you're introduced to via your friends or colleagues that already know them
-1. People in professional networking groups. You'll need to give/take here. Figure out where these are – sometimes it's Slack, sometimes it's a paid network (like [Pavilion](www.joinpavilion.com)), sometimes it's meetups or forums
-1. Cold outreach (LinkedIn is probably easiest, if your target audience are there, since you can filter on job title, but this means others are messaging them and low response rates)
+![6 ways to get meetings](../images/blog/pmf-game-guide/ways-to-get-meetings-posthog.png)
 
 Some tips for getting meetings:
 
@@ -139,7 +133,7 @@ With one of the ideas Tim and I worked on before we pivoted to PostHog, we had 1
 
 The most obvious users to start with here are those that you've already met during levels 1 and 2. You should have been identifying a _problem_ that these users have during those calls. Now you have a _solution_, you should email them saying so.
 
-## Failure modes
+#### Failure modes
 
 These are all the reasons why users may not use your product:
 
@@ -173,14 +167,7 @@ If they're willing, ask them to perform tasks live in front of you, and ask them
 
 Start "closing the loop" with users. This is a simple process to improve your product:
 
-// TODO: Maybe turn the below into a graphic?
-
-* User uses product
-* You get feedback / insight / support questions (make it incredibly obvious how to reach you, and reach out to users in the channels they prefer)
-* You build new feature or fix based on the above
-* You go back to the user with the outcome of the above (like a link or gif to a new feature, or a clarification question), or you provide a detailed explanation if you couldn't do something
-* Repeat the above
-
+![product improvement loop](../images/blog/pmf-game-guide/product-loop.png)
 
 Closing the loop above is the way to cement your product-market fit because:
 
@@ -216,17 +203,7 @@ Write down needs, haves and attributes you think your Ideal Customer Profile use
 
 Do not just assume one or two things like "engineers in startups with over 100 staff". Definitely do not just list an industry. The specific things we considered at PostHog were:
 
-* **Needs:**
-  * to control user data
-  * to excel at product-led growth to remain competitive
-  * have budget and savvy engineers are the decision makers
-  * do _not_ need to put us through a formal procurement process
-* **Haves:**
-  * achieved product market fit
-  * an unsuccessful centra analytics function
-  * products aimed at businesses
-  * deployed our open source product successfully
-  * used one of our free products
+![psothog icp](../images/blog/pmf-game-guide/posthog-icp.png)
 
 Feel free to include some anti-needs and haves too – i.e. things your Ideal Customer Profile _doesn't_ need or have.
 
@@ -361,7 +338,7 @@ The five levels of The Product-Market Fit Game should help you work out when you
 
 - **Be decisive.** During our YC batch, we saw a few companies have one founder work on X, while another worked on Y. Finding product-market fit is already complex, so don't make it harder by dividing your effort. Pick one idea and go all in. If you fail, quickly move to the other idea.[^3]
 
-- **_Do _not_ become a solution looking for a problem.** It's easy to become attached to your existing code or problem. Be especially wary of very fractional pivots. One of our first ideas was a tool to monitor tech debt – it inserted a survey as a GitHub check asking the engineer where they encountered problems, and how much time was wasted. We had to pivot when it was impossible to sell it. When then moved into using the same surveys to monitor engineering happiness, re-using our code. The result? A week of wasted meetings.
+- ** _Do not_ become a solution looking for a problem.** It's easy to become attached to your existing code or problem. Be especially wary of very fractional pivots. One of our first ideas was a tool to monitor tech debt – it inserted a survey as a GitHub check asking the engineer where they encountered problems, and how much time was wasted. We had to pivot when it was impossible to sell it. When then moved into using the same surveys to monitor engineering happiness, re-using our code. The result? A week of wasted meetings.
 
 ## Summary / Final Thoughts
 
