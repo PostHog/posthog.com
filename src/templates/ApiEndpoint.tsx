@@ -335,9 +335,10 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
 
     const path: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
     const object: string = name.toLowerCase().slice(0, -1)
-    const additionalPathParams = item.parameters
-        ?.filter((param) => param.in === 'path')
-        .filter((param) => !['project_id', 'id'].includes(param.name))
+    const additionalPathParams =
+        item.parameters
+            ?.filter((param) => param.in === 'path')
+            .filter((param) => !['project_id', 'id'].includes(param.name)) || []
 
     const languages = [
         {
