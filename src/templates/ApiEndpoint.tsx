@@ -333,7 +333,7 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
         })
     }
 
-    const curlPath: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
+    const path: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
     const object: string = name.toLowerCase().slice(0, -1)
 
     const languages = [
@@ -346,7 +346,7 @@ curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '
                 item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
             }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
-    https://app.posthog.com${curlPath}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
+    https://app.posthog.com${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
             `,
         },
         {
@@ -384,7 +384,7 @@ response = requests.${item.httpVerb}(
                         {item.httpVerb.toUpperCase()}{' '}
                     </code>
                     <code className="min-w-0 break-words">
-                        {curlPath.split('/').map((token) => {
+                        {path.split('/').map((token) => {
                             if (token === '') {
                                 return <wbr key={token} />
                             } else {
