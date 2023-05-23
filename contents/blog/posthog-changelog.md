@@ -1,5 +1,5 @@
 ---
-date: 2023-05-19
+date: 2023-05-26
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -18,6 +18,13 @@ featuredImageType: full
 Every Friday we update this page with the latest new features, fixes, and updates on PostHog Cloud in the last seven days. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap). We also [welcome your feedback](http://app.posthog.com/home#supportModal) on all new features! 
+
+## May 26, 2023
+
+#### Report a login issue
+![login issues posthog](../images/blog/array/report_login.mp4)
+
+We previously introduced [this support form](http://app.posthog.com/home#supportModal) within the app so that it was easier to submit bug reports, feedback, and support tickets. Responses are then routed to the relevant small team, so we can look into them. But what if your issue is that you can't login to the app in the first place? Well, you _could_ use [the PostHog forum](####the-posthog-forum) - or you could use this new button to report it directly!
 
 ## May 19, 2023
 
