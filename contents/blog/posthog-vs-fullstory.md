@@ -1,11 +1,11 @@
 ---
-date: 2023-05-25
+date: 2023-05-23
 title: "In-depth: PostHog vs FullStory"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-pendo/posthog-vs-fullstory.jpg
+featuredImage: ../images/blog/posthog-vs-fullstory/posthog-vs-fullstory.jpg
 featuredImageType: full
 author:
     - joe-martin
@@ -22,14 +22,14 @@ PostHog and FullStory are both powerful tools for understanding user behavior an
 
 In this comparison, we'll explore, compare and contrast PostHog and FullStory in detail, so you can decide which tool is right for you. We’ll look at areas such as…
 
-Core features and what types of users PostHog and FullStory are built for
-Product analytics capabilities and how these features connect to others
-Session replays, performance monitoring and privacy protection
-Heatmaps, clickmaps and scrollmaps
-Integrations with other software, and PostHog’s app platform
-Event tracking
-Privacy, security and compliance 
-Other frequently asked questions 
+- [Core features and who PostHog and FullStory are built for](#core-feature-comparison)
+- [Product analytics capabilities and how these features connect to others](#product-analytics)
+- [Session replays, performance monitoring and privacy protection](#session-replays)
+- [Heatmaps, clickmaps and scrollmaps](#heatmaps-clickmaps-and-scrollmaps)
+- [Integrations with other software, and PostHog’s app platform](#apps-integrations-and-plugins)
+- [Event tracking and data management](#event-tracking)
+- [Privacy, security and compliance](#security-and-compliance) 
+- [Other frequently asked questions](#frequently-asked-questions)
 
 ### How is PostHog different from FullStory?
 Before delving into the weeds, it’s worth understanding how PostHog is built for a different audience than FullStory and why it has a broader feature set. 
