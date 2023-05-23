@@ -283,7 +283,7 @@ You are trying to figure out if anyone cares, so the speed you can ship your fir
 
 Ship features embarassingly early. The kind of user that'll pick up a random piece of software that no one has ever used before is an early adopter. 
 
-Unless your software's main priority is being better designed, it's preferable to ship clunky/ugly/slightly broken functionality and quickly improve it, than to waste months on something no one cares about.
+Unless your product's USP is superior design, it's preferable to ship clunky/ugly/slightly broken functionality, and quickly improve it, than to waste months on something no one cares about.
 
 ### An open and responsive attitude 
 
