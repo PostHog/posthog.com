@@ -58,7 +58,7 @@ We say ‘presumably’ because FullStory’s pricing isn’t transparent and th
 
 In order to offer a straightforward comparison of PostHog and FullStory, we’ll focus this article on the _enterprise_ versions of both products — that is, the most feature-complete tiers. In this way we can clearly establish the features which both products do or do not have without getting bogged down in what features are available on each tier. 
 
-> If a particular feature is critically important to you, we strongly advise checking the details of FullStory’s pricing, as not all features are equally available and pricing is not transparent.
+> If a particular feature is critically important to you, we strongly advise checking the details of FullStory’s pricing, as not all features are equally available and pricing is not transparent. [Unlike PostHog's](/pricing). 
 
 ### Core feature comparison
 
@@ -81,9 +81,9 @@ In order to offer a straightforward comparison of PostHog and FullStory, we’ll
         </tr>
         <tr>
             <td><strong>Session replays</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch real users use your product; diagnose bugs</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Watch real users use your product; debug behaviour</td>
         </tr>
         <tr>
             <td><strong>Feature flags</strong></td>
