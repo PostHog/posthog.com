@@ -52,7 +52,7 @@ There are two methods to create a new cohort:
 
 You can create cohorts using data from insights such as trends, [funnels](/product-analytics/funnels), [user paths](/docs/product-analytics/paths) and [lifecycle](/docs/product-analytics/lifecycle).
 
-**Step 1:** Go to [insights](https://app.posthog.com/insights) and open any insight. Click on any data point to view persons represented in the underlying data.
+**Step 1:** Go to [insights](https://app.posthog.com/insights) and open any insight. Click on any data point to view the [persons](/docs/data/persons) represented in the underlying data.
 
 **Step 2:** In the modal popup, click 'Save as cohort' in the bottom right.
 
@@ -62,7 +62,7 @@ The video below shows how to create a new cohort from a trend, although you can 
 
 ### Method 2: Create a new cohort from the cohorts page
 
-**Step 1:** Navigate to the 'Cohorts' page in the sidebar:
+**Step 1:** Navigate to the [Cohorts](https://app.posthog.com/cohorts) page in the sidebar:
 
 **Step 2:** Click '+ New Cohort' on the top right.
 
@@ -93,7 +93,7 @@ Dynamic cohorts are created by matching users who meet a certain criteria. You c
 
 You may want to differentiate between traffic from your team and traffic from your users. To do so, you can identify your team members in PostHog by:
 
-1. Either using [`posthog.identify`](/docs/getting-started/identify-users) and setting a unique ID for your team members, or
+1. Either using [`posthog.identify`](/docs/getting-started/identify-users) and, for example, setting an email as the ID, or
 2. By setting [properties](/docs/getting-started/user-properties) on your team members – e.g., `is_team_member = true`.
 
 You can then create a cohort of your team members, or a cohort that excludes your team. This enables you to differentiate between your team and your users when analyzing your data.
