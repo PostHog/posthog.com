@@ -841,7 +841,8 @@
         { "source": "/session-replay", "destination": "/session-replay/features" },
         { "source": "/feature-flags", "destination": "/feature-flags/features" },
         { "source": "/ab-testing", "destination": "/ab-testing/features" },
-        { "source": "/product-os", "destination": "/product-os/features" }
+        { "source": "/product-os", "destination": "/product-os/features" },
+        { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" }
     ],
     "rewrites": [
         {
