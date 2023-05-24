@@ -60,16 +60,16 @@ If you are using a different SDK, you'll need to manually the `email` property f
 
 We'd like to thank PostHog team member [Emanuele Capparelli](https://github.com/kappa90) for his work creating this app. Thank you, Emanuele!
 
-#### Who maintains this app?
+### Who maintains this app?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/posthog/posthog-intercom-plugin) to let us know!
+This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-#### What if I have feedback on this app?
+### What if I have feedback on this app?
 
-We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think.
+We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 
-#### What if my question isn't answered above?
+Or, if you see the feedback widget enabled, use that!
 
-We love answering questions. Ask us anything via [our Support page](/questions).
+### What if my question isn't answered above?
 
-You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 

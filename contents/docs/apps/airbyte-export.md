@@ -46,10 +46,8 @@ This app is maintained by Airbyte. For more information, check [Airbyte's integr
 
 ### What if I have feedback on this app?
 
-We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think.
+We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 
 ### What if my question isn't answered above?
 
-We love answering questions. Ask us anything via [our Support page](/questions).
-
-You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
