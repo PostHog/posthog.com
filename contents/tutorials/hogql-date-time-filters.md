@@ -1,6 +1,6 @@
 ---
 title: Using HogQL for advanced time and date filters
-date: 2023-05-19
+date: 2023-05-24
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
