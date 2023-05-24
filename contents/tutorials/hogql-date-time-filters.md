@@ -10,7 +10,13 @@ tags: ["hogql", "insights"]
 
 Because there are infinite ways to break down time, there are infinite ways to filter based on time. HogQL unlocks more of these in PostHog, and in this tutorial we'll go through examples of how to use do that.
 
-To add a HogQL filter, create a new insight, open the filter dropdown, click "Add filter" below your data series, select HogQL from the options, write your expression, and click "Add HogQL expression." HogQL filters are available on every type of insight from trends to funnels to lifecycle.
+To add a HogQL filter:
+1. Create a new insight
+2. Open the filter dropdown, and click "Add filter" below your data series
+3. Select HogQL from the options
+4. Write your expression, and click "Add HogQL expression" to apply it
+
+HogQL filters are available on every type of insight from trends to funnels to lifecycle.
 
 ![hogql.mp4](../images/tutorials/hogql-date-time-filters/hogql.mp4)
 
@@ -22,7 +28,8 @@ Below is a non-exhaustive list of time properties that are commonly used in HogQ
 - [Persons](/docs/data/persons) have a `created_at` property, which you can access with `person.created_at`.
 - For custom events or person properties, you can access them with `person.properties.{custom_property_name}`.
 
-> **Note:** you might need to convert strings to date time objects with the `toDateTime()` function or convert date time objects to strings with `toString()`.
+> **Note:** if the type of your property is a string, rather than a `DateTime`, you can convert it using `toDateTime()`, and vice versa with `toString()`. You can view the type of your properties in your [data management tab](https://app.posthog.com/data-management/properties).
+
 
 The [ClickHouse SQL statements](https://clickhouse.com/docs/en/sql-reference) we built HogQL on also have useful helper functions that are good to know when working with dates. These include:
 
@@ -45,7 +52,7 @@ and timestamp < toDateTime('2022-10-01 14:34:00')
 
 ## Using the Unix timestamp
 
-If you'd like to filter using a Unix timestamp, you can use `toUnixTimestamp` to convert a date time object into a Unix timestamp, or `fromUnixTimestamp` to do the reverse. 
+If you'd like to filter using a Unix timestamp, you can use []`toUnixTimestamp`](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#tounixtimestamp) to convert a date time object into a Unix timestamp, or `fromUnixTimestamp` to do the reverse. 
 
 For example, if you wanted to filter for events after the Unix timestamp `1674259200`, you could use the expression:
 
@@ -55,19 +62,19 @@ fromUnixTimestamp(1674259200) < timestamp
 
 ## Relative time filters
 
-If you'd like to query events relative to today's date (or any other date), you can use the `[dateDiff()](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#date_diff)` function. 
+If you'd like to query events relative to today's date (or any other date), you can use the [`dateDiff()`](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#date_diff) function. 
 
 For example, to get events older than 5 days, use the expression:
 
-``
+```
 dateDiff('day', timestamp, now()) > 5
-``
+```
 
 You can also replace `day` with `second`, `minute`, `hour`, `week`, `month`, `quarter`, and `year`.
 
 ## Weekly and quarterly reports
 
-Many companies report on a weekly or quarterly basis. For this, standard 7 or 90-day date range filters may include values beyond the days or weeks you want to report. HogQL lets us easily create these reports.
+Many companies report on a weekly or quarterly basis. Filtering for events in the last 7 or 90 days may include ones outside of the current week or quarter, making these reports inaccurate. HogQL enables us easily create reports for specific weeks and quarters.
 
 For example, if we wanted events for this quarter, we can use the expression:
 
@@ -75,13 +82,13 @@ For example, if we wanted events for this quarter, we can use the expression:
 toStartOfQuarter(timestamp) == toStartOfQuarter(now())
 ```
 
-We can do the same with the current week with `toStartOfWeek`:
+We can do the same with the current week with [`toStartOfWeek`](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#tostartofweek):
 
 ```
 toStartOfWeek(timestamp) == toStartOfWeek(now())
 ```
 
-Alternatively, if you wanted a weekly report for only weekdays, you can use `toDayOfWeek` to filter out Saturday and Sunday with their day’s number:
+Alternatively, if you wanted a weekly report for only weekdays, you can use [`toDayOfWeek`](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#todayofweek) to filter out Saturday and Sunday with their day’s number:
 
 ```
 toDayOfWeek(timestamp) != 6 and toDayOfWeek(timestamp) != 7
@@ -91,7 +98,7 @@ toDayOfWeek(timestamp) != 6 and toDayOfWeek(timestamp) != 7
 
 HogQL lets you analyze users based on dates too. This enables you to filter for events based on users in trial or recently subscribed.
 
-For example, you may want to filter events from users who are in the last 3 days of their trial period, but you only have a `trial_started` person property. Using `interval` type, you can to add 30 days and check if that date is less than or equal to 3 days away from `now()` like this: 
+For example, you may want to filter events from users who are in the last 3 days of their trial period, but you only have a `trial_started` person property. Using [`interval`](https://clickhouse.com/docs/en/sql-reference/data-types/special-data-types/interval) type, you can to add 30 days and use `dateDiff()` to check if that date is less than or equal to 3 days away from `now()` like this: 
 
 ```
 dateDiff(
@@ -108,7 +115,7 @@ A use case for this is creating an action for `pricing pageviews` during the las
 Another similar example is using HogQL to understand usage in the first two weeks after subscribing. To do this, use `dateDiff()` again but with `'week'`, your signed up property, and `now()` like this:
 
 ```
-dateDiff('week', toDateTime(person.properties.signed_up_at), now()) <= 2
+dateDiff('week', person.properties.signed_up_at, now()) <= 2
 ```
 
 This is useful to learn what features are used immediately after sign up and others that might go undiscovered.
