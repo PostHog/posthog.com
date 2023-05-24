@@ -5,7 +5,6 @@ import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
-import { Changelog } from './components/Changelog'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { GDPRForm } from './components/GDPRForm'
@@ -29,7 +28,6 @@ export const shortcodes = {
     BorderWrapper,
     CallToAction,
     Caption,
-    Changelog,
     CompensationCalculator,
     FeatureAvailability,
     GDPRForm,

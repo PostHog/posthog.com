@@ -20,6 +20,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
+    const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -224,6 +225,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             }
                         }
                     }
+                }
+            }
+            roadmapYears: allRoadmap {
+                group(field: year) {
+                    fieldValue
                 }
             }
         }
@@ -555,4 +561,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             })
         })
     )
+
+    result.data.roadmapYears.group.forEach(({ fieldValue: year }) => {
+        createPage({
+            path: `/roadmap/changelog/${year}`,
+            component: ChangelogTemplate,
+            context: {
+                year: Number(year),
+            },
+        })
+    })
 }

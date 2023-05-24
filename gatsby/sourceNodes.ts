@@ -198,33 +198,49 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     })
 
-    const changelogQuery = qs.stringify(
-        {
-            populate: ['change', 'change.media', 'change.team', 'change.topic', 'change.cta'],
-        },
-        {
-            encodeValuesOnly: true,
-        }
-    )
+    const createRoadmapItems = async (page = 1) => {
+        const roadmapQuery = qs.stringify(
+            {
+                pagination: {
+                    page,
+                    pageSize: 100,
+                },
+                populate: ['image', 'teams', 'topic', 'cta'],
+            },
+            {
+                encodeValuesOnly: true,
+            }
+        )
+        const roadmapsURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${roadmapQuery}`
+        const { data: roadmaps, meta } = await fetch(roadmapsURL).then((res) => res.json())
+        roadmaps.forEach((roadmap) => {
+            const {
+                id,
+                attributes: { image, projectedCompletion, dateCompleted, category, ...other },
+            } = roadmap
 
-    const changelogURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/changelogs?${changelogQuery}`
+            const date = dateCompleted || projectedCompletion
 
-    const { data: changelog } = await fetch(changelogURL).then((res) => res.json())
-
-    changelog.forEach(({ id, attributes: { change, date } }) => {
-        change.forEach(({ id, ...other }) => {
-            const data = { date, ...other }
-            const changeNode = {
-                id: createNodeId(`change-${id}`),
+            const data = {
+                date,
+                media: image,
+                type: category,
+                year: date && new Date(date)?.getFullYear(),
+                ...other,
+            }
+            const roadmapNode = {
+                id: createNodeId(`roadmap-${id}`),
                 parent: null,
                 children: [],
                 internal: {
-                    type: `Change`,
+                    type: `Roadmap`,
                     contentDigest: createContentDigest(data),
                 },
                 ...data,
             }
-            createNode(changeNode)
+            createNode(roadmapNode)
         })
-    })
+        if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
+    }
+    await createRoadmapItems()
 }

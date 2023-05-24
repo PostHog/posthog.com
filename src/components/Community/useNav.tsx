@@ -1,6 +1,16 @@
+import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 
 export const useNav = () => {
+    const { roadmapYears } = useStaticQuery(graphql`
+        {
+            roadmapYears: allRoadmap {
+                group(field: year) {
+                    fieldValue
+                }
+            }
+        }
+    `)
     const { user } = useUser()
 
     return [
@@ -25,12 +35,18 @@ export const useNav = () => {
             : []),
         {
             name: 'Roadmap',
-            url: '/roadmap',
+            url: '',
             children: [
+                { name: 'Roadmap', url: '/roadmap' },
                 {
                     name: 'Changelog',
                     url: '',
-                    children: [{ name: '2023', url: '/roadmap/changelog/2023' }],
+                    children: roadmapYears.group
+                        .sort((a, b) => Number(b.fieldValue) - Number(a.fieldValue))
+                        .map(({ fieldValue: year }) => ({
+                            name: year,
+                            url: `/roadmap/changelog/${year}`,
+                        })),
                 },
             ],
         },

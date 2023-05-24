@@ -1,9 +1,8 @@
 import CommunityLayout from 'components/Community/Layout'
 import { topicIcons } from 'components/Questions/TopicsTable'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import React, { useEffect, useState } from 'react'
 import Markdown from 'components/Squeak/components/Markdown'
-import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import groupBy from 'lodash.groupby'
 import get from 'lodash.get'
@@ -39,7 +38,7 @@ const Select = ({ onChange, values }) => {
                         </>
                     )}
                 </Listbox.Button>
-                <Listbox.Options className="absolute min-w-full shadow-md bg-white dark:bg-gray-accent-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-gray-accent-light/50">
+                <Listbox.Options className="absolute right-0 min-w-full shadow-md bg-white dark:bg-gray-accent-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-gray-accent-light/50">
                     {values.map((value) => (
                         <Listbox.Option key={value.label} value={value} as={React.Fragment}>
                             {({ selected }) => (
@@ -59,59 +58,8 @@ const Select = ({ onChange, values }) => {
     )
 }
 
-export default function Changelog() {
-    const { allChange, filterOptions } = useStaticQuery(graphql`
-        {
-            allChange(sort: { fields: date, order: DESC }) {
-                nodes {
-                    date
-                    description
-                    media {
-                        data {
-                            attributes {
-                                url
-                                mime
-                            }
-                        }
-                    }
-                    topic {
-                        data {
-                            attributes {
-                                label
-                            }
-                        }
-                    }
-                    team {
-                        data {
-                            attributes {
-                                name
-                            }
-                        }
-                    }
-                    cta {
-                        url
-                        label
-                    }
-                    title
-                    type
-                }
-            }
-            filterOptions: allChange {
-                topics: group(field: topic___data___attributes___label) {
-                    label: fieldValue
-                    value: fieldValue
-                    field
-                }
-                types: group(field: type) {
-                    label: fieldValue
-                    value: fieldValue
-                    field
-                }
-            }
-        }
-    `)
-
-    const [changes, setChanges] = useState(allChange.nodes)
+export default function Changelog({ data: { allRoadmap, filterOptions } }) {
+    const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
 
     const changesByMonth = groupBy(changes, (node) => {
@@ -134,8 +82,8 @@ export default function Changelog() {
         const filterKeys = Object.keys(filters)
         const newChanges =
             filterKeys.length <= 0
-                ? allChange.nodes
-                : allChange.nodes.filter((change) =>
+                ? allRoadmap.nodes
+                : allRoadmap.nodes.filter((change) =>
                       filterKeys.every((filter) => {
                           const { value, field } = filters[filter]
                           return get(change, field) === value
@@ -155,7 +103,8 @@ export default function Changelog() {
                 </div>
                 <div className="flex space-x-2 items-center">
                     {Object.keys(filterOptions).map((filter) => {
-                        const { field } = filterOptions[filter][0]
+                        const { field } = filterOptions[filter][0] ?? {}
+                        if (!field) return null
                         return (
                             <Select
                                 key={filter}
@@ -175,9 +124,10 @@ export default function Changelog() {
                                 {month}
                             </h2>
                             <ul className="list-none m-0 p-0 grid gap-y-12">
-                                {nodes.map(({ description, media, topic, team, title, cta }) => {
+                                {nodes.map(({ description, media, topic, teams, title, cta }) => {
+                                    const team = teams?.data[0]
                                     const topicName = topic?.data?.attributes.label
-                                    const teamName = team?.data?.attributes?.name
+                                    const teamName = team?.attributes?.name
                                     const mediaURL = media?.data?.attributes?.url
                                     const Icon = topicIcons[topicName?.toLowerCase()]
                                     return (
@@ -227,3 +177,54 @@ export default function Changelog() {
         </CommunityLayout>
     )
 }
+
+export const query = graphql`
+    query ChangelogQuery($year: Int!) {
+        allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: $year } }) {
+            nodes {
+                date
+                description
+                media {
+                    data {
+                        attributes {
+                            url
+                            mime
+                        }
+                    }
+                }
+                topic {
+                    data {
+                        attributes {
+                            label
+                        }
+                    }
+                }
+                teams {
+                    data {
+                        attributes {
+                            name
+                        }
+                    }
+                }
+                cta {
+                    url
+                    label
+                }
+                title
+                type
+            }
+        }
+        filterOptions: allRoadmap(filter: { year: { eq: $year } }) {
+            topics: group(field: topic___data___attributes___label) {
+                label: fieldValue
+                value: fieldValue
+                field
+            }
+            types: group(field: type) {
+                label: fieldValue
+                value: fieldValue
+                field
+            }
+        }
+    }
+`
