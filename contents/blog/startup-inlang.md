@@ -31,7 +31,6 @@ For now we’re focusing on localization, but if we solve this problem in that p
 
 I created an initial prototype, put it on Reddit, and got a lot of feedback from developers facing the same issue — but then I actually scrapped the idea. I wanted to get a Masters in Computer Science and I shut down the business to do it. 
 
-
 Then, on the first day on campus, you know what happens? I find out I didn't get into any courses that I wanted to, because they were oversubscribed except for one and that was the entrepreneurship course. My prototype ended up turning into a whole semester project where I then realized that this issue impacts literally every software company out there. And nobody was solving the real problem!
 
 The real problem isn’t doing the translations. The problem is: I want to offer my software in multiple languages, so how do I refactor my code base? How do I ensure that my code base will continuously work? That's the real challenge.”
