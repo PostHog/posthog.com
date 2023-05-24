@@ -35,7 +35,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 - **Content for our ideal customer:** We deliver genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’. Ahrefs and HubSpot are examples of companies who do this brilliantly for their audience.
 
-- **Documentation** Working with Website & Docs, the content team ensures docs are maintained to a high standard, and users can easily find answers to their questions before resorting to support.
+- **Documentation** We work with Website & Docs, and product teams, to maintain docs to a high standard, and ensure users can easily find answers to their questions
  
 ### Things we want to be good at
 
