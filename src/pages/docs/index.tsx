@@ -84,7 +84,6 @@ const otherLinks = [
         links: [
             { name: 'Organizations & projects', to: '/manual/organizations-and-projects' },
             { name: 'UTM parameters', to: '/manual/utm-segmentation' },
-            { name: 'Notifications & alerts', to: '/manual/notifications-and-alerts' },
             { name: 'Events', to: '/manual/events' },
             { name: 'Annotations', to: '/manual/annotations' },
         ],

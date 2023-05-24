@@ -423,6 +423,10 @@
                 "url": "/docs/product-analytics/stickiness"
             },
             {
+                "name": "Subscriptions",
+                "url": "/docs/product-analytics/subscriptions"
+            },
+            {
                 "name": "Toolbar",
                 "url": "/docs/product-analytics/toolbar"
             },
@@ -565,10 +569,6 @@
                 "url": "/docs/data/events"
             },
             {
-                "name": "Notifications & alerts",
-                "url": "/docs/data/notifications-and-alerts"
-            },
-            {
                 "name": "Organizations & projects",
                 "url": "/docs/data/organizations-and-projects"
             },
@@ -587,10 +587,6 @@
             {
                 "name": "Settings",
                 "url": "/docs/data/application-settings"
-            },
-            {
-                "name": "Subscriptions",
-                "url": "/docs/data/subscriptions"
             },
             {
                 "name": "SSO & SAML",
