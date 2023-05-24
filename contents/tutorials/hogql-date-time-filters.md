@@ -96,7 +96,7 @@ toDayOfWeek(timestamp) != 6 and toDayOfWeek(timestamp) != 7
 
 ## Analyzing subscribers or trial users
 
-HogQL lets you analyze users based on dates too. This enables you to filter for events based on users in trial or recently subscribed.
+HogQL lets you filter users properties too. A use case of this is filtering for events based on users in trial or recently subscribed.
 
 For example, you may want to filter events from users who are in the last 3 days of their trial period, but you only have a `trial_started` person property. Using [`interval`](https://clickhouse.com/docs/en/sql-reference/data-types/special-data-types/interval) type, you can to add 30 days and use `dateDiff()` to check if that date is less than or equal to 3 days away from `now()` like this: 
 
