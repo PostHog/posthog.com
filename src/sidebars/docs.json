@@ -403,6 +403,10 @@
                 }
             },
             {
+                "name": "Insights",
+                "url": "/docs/product-analytics/insights"
+            },
+            {
                 "name": "Lifecycle",
                 "url": "/docs/product-analytics/lifecycle"
             },

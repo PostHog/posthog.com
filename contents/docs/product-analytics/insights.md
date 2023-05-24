@@ -9,7 +9,7 @@ availability:
 
 ---
 
-Insights allow you to visualize your Events and Actions in several different ways. Each type of Insight has its own manual in these Docs:
+Insights enable you to visualize your Events and Actions. There are several different types of insights:
 
 -   [Trends](/docs/user-guides/trends)
 -   [Funnels](/docs/user-guides/funnels)
@@ -17,8 +17,10 @@ Insights allow you to visualize your Events and Actions in several different way
 -   [Paths](/docs/user-guides/paths)
 -   [Lifecycle](/docs/user-guides/lifecycle)
 
-## Creating Insights
+## How to create an insight
 
-To create a new Insight, click on `+` next to Insights in the left hand sidebar. You can also click on 'Insights' itself to view and search through your current list of Insights.
+To create a new Insight, navigate to the [insights tab](https://app.posthog.com/insights) and click on `New insight`. Then select the type of insight you'd like to create, customize it, and press save.
 
-You can then create [Dashboards](/docs/product-analytics/dashboards) to collect and present multiple Insights in one place.
+You can then create [Dashboards](/docs/product-analytics/dashboards) to collect and present multiple insights in one place.
+
+![How to create a new insight](../../images/products/product-analytics/create-new-insight.mp4)
