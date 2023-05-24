@@ -41,7 +41,7 @@ You can customize the message when creating or editing actions.
 
 ### Event
 
-- `name`: name of the event which triggered the Action with link.
+- `name`: name of the event which triggered the Action
 - `properties`: See below.
 
 #### Accessing event properties
