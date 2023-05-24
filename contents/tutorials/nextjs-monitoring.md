@@ -87,9 +87,17 @@ Enabling these provides the key monitoring tools including performance monitorin
 
 ## Custom error capture
 
-Another part of monitoring is error capture. There are a couple of ways to set this up with PostHog. First, you could set up and use our [Sentry integration](/docs/libraries/sentry). Second, you could set up custom error capture, which we show here.
+Another part of monitoring is error capturing. There are two ways to set this up with PostHog:
 
-To do this, we can create a React error boundary. In the `app` folder, create a file named `error.js`. In this file, set up a basic component that uses `usePostHog` to capture an `$exception` event and returns an error page. It should look like this:
+1. You could set up and use our [Sentry integration](/docs/libraries/sentry). 
+2. Alternatively, you could set up custom error capture (shown below).
+
+To set up custom error capturing, we can create a [React error boundary](https://nextjs.org/docs/pages/building-your-application/configuring/error-handling#handling-client-errors):
+
+1. In the `app` folder, create a file named `error.js`. 
+2. In this file, set up a basic component that uses `usePostHog` to capture an `$exception` event and returns an error page. 
+
+It should look like this:
 
 ```js
 'use client'
@@ -109,7 +117,7 @@ export default function Error({ error }) {
 }
 ```
 
-Now, in your `app` folder, create a new folder named `about` and add a file named `page.js`. In this file, set up a component that errors like this:
+Now, in your `app` folder, create a new folder named `about` and add a file named `page.js`. In this file, set up a component that throws an error:
 
 ```js
 // app/about/page.js
@@ -135,11 +143,11 @@ This also captures an `exception` event in PostHog with details like the current
 
 ![Exception](../images/tutorials/nextjs-monitoring/exception.png)
 
-This captures errors thrown from your app in PostHog, wherever they happen.
+This will capture errors thrown in your app (wherever they happen) into PostHog.
 
 ## Custom performance capture
 
-Another key part of monitoring your Next.js application is performance monitoring. Session replays track performance metrics like first contentful paint, DOM interactive, and page loaded times at a session level. If you want these values in the aggregate, we can capture them using `useReportWebVitals`.
+Another key part of monitoring your Next.js app is performance monitoring. Session replays track performance metrics like First Contentful Paint, DOM interactive, and page loaded times at a session level. If you want these values in the aggregate, we can capture them using `useReportWebVitals`.
 
 To set this up, create a new file in your `app` folder named `web-vitals.js`. In this file, import `useReportWebVitals` and `usePostHog`, then export a function that captures an event with the same name as the metric with all the metric details as properties.
 
@@ -179,7 +187,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-Once done, you start to see metrics in your PostHog instance.
+Once done, you'll start to see performance metrics in your PostHog instance.
 
 ![Performance metrics](../images/tutorials/nextjs-monitoring/monitoring-metrics.png)
 
@@ -189,7 +197,7 @@ Once done, you start to see metrics in your PostHog instance.
 
 With everything set up for monitoring our Next.js app, we can create a dashboard that gives us a complete overview. On this dashboard, we will create insights for page load, time to first byte, first contentful paint, cumulative layout shift, and errors.
 
-To start go to the [dashboards tab](https://app.posthog.com/dashboard), click new dashboard, choose blank dashboard, then add an insight. 
+To start, go to the [dashboards tab](https://app.posthog.com/dashboard), click new dashboard, choose blank dashboard, and then add an insight. 
 
 We start with averages for our page load metrics. Select `LCP` as your series, then aggregate by average property value, select value as your property, enable formula mode, and divide `A` by 1000 to get seconds. Both the trend and number chart type work well for this. Once done, click "Save & add to dashboard." 
 
@@ -199,7 +207,7 @@ Afterward, you can create similar insights the other performance metrics like TT
 
 ![Dashboard](../images/tutorials/nextjs-monitoring/dashboard.png)
 
-Next, we can do some analysis of our errors. We can create insights for errors broken down by current URL and message. Use the `Exception` event as the series, aggregate by total count, break down by current URL, and choose the total value bar chart. You can duplicate the insight, change the breakdown to `message`, and add both to your dashboard.
+Next, we can analyze our errors. We can create insights for errors broken down by current URL and message. Use the `Exception` event as the series, aggregate by total count, break down by current URL, and choose the total value bar chart. You can duplicate the insight, change the breakdown to `message`, and add both to your dashboard.
 
 ![Error](../images/tutorials/nextjs-monitoring/errors.png)
 
