@@ -135,7 +135,7 @@ export default function About() {
 }
 ```
 
-When you go to `http://localhost:3000/about`, you get the error page.
+When you go to `http://localhost:3000/about`, you'll see the error page.
 
 ![Error](../images/tutorials/nextjs-monitoring/app-error.png)
 
