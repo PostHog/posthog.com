@@ -7,7 +7,7 @@ showTitle: true
 Marketing & Content exists to drive organic, word-of-mouth growth by:
 
 1. Producing world-class top-of-funnel content for our ICP
-2. Ensuring users can autonomously find answers to their questions
+2. Ensuring the information users need is easy to find and maintained to a high standard
 
 Marketing is the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. This means:
 
