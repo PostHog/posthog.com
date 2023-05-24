@@ -177,7 +177,7 @@ export default function RootLayout({ children }) {
 
 Once done, you start to see metrics in your PostHog instance.
 
-![Peformance metrics](../images/tutorials/nextjs-monitoring/monitoring-metrics.png)
+![Performance metrics](../images/tutorials/nextjs-monitoring/monitoring-metrics.png)
 
 > **Note:** you might want to filter for specific web vital events by checking their name or sample using specific criteria as this method generates **a lot of events** for each pageview.
 
