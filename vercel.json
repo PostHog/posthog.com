@@ -782,7 +782,7 @@
         { "source": "/manual/cohorts", "destination": "/docs/data/cohorts" },
         { "source": "/manual/data-management", "destination": "/docs/data/data-management" },
         { "source": "/manual/events", "destination": "/docs/data/events" },
-        { "source": "/manual/notifications-and-alerts", "destination": "/docs/data/subscriptions" },
+        { "source": "/manual/notifications-and-alerts", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/manual/organizations-and-projects", "destination": "/docs/data/organizations-and-projects" },
         { "source": "/manual/persons", "destination": "/docs/data/persons" },
         { "source": "/manual/role-based-access", "destination": "/docs/data/role-based-access" },
@@ -790,7 +790,7 @@
         { "source": "/manual/session-recording", "destination": "/docs/session-replay" },
         { "source": "/manual/session-recordings", "destination": "/docs/session-replay" },
         { "source": "/manual/sso", "destination": "/docs/data/sso" },
-        { "source": "/manual/subscriptions", "destination": "/docs/data/subscriptions" },
+        { "source": "/manual/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },
         { "source": "/manual/utm-segmentation", "destination": "/docs/data/utm-segmentation" },
 
@@ -804,7 +804,7 @@
         { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
         { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" },
 
-        { "source": "/docs/data/notifications-and-alerts", "destination": "/docs/data/subscriptions" },
+        { "source": "/docs/data/notifications-and-alerts", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/handbook/engineering/oncall-rotation", "destination": "/handbook/engineering/oncall" },
         { "source": "/docs/integrate/next-js", "destination": "/docs/libraries/next-js" },
         { "source": "/docs/integrate/sentry", "destination": "/docs/libraries/sentry" },
@@ -852,6 +852,7 @@
         { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
         { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
         { "source": "/careers/(.*)", "destination": "/careers" },
-        { "source": "/api", "destination": "/docs/api" }
+        { "source": "/api", "destination": "/docs/api" },
+        { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" }
     ]
 }

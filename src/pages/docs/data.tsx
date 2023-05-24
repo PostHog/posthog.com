@@ -36,11 +36,6 @@ export const quickLinks = [
         to: '/docs/data/organizations-and-projects',
         description: 'Organize your data into projects and manage access to them.',
     },
-    {
-        name: 'Subscriptions',
-        to: '/docs/data/subscriptions',
-        description: 'Set up notifications for when specific actions occur',
-    },
 ]
 
 type DataProps = {
