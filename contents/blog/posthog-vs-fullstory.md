@@ -16,7 +16,7 @@ tags:
 
 PostHog and FullStory are both powerful tools for understanding user behavior and improving your digital product, but there are several important differences between them. Want to cut to the chase? Here’s the short answer.
 
-- **PostHog** is an all-in-one product improvement platform built primarily for engineers and technical users. It offers a wide range of features to help teams build better products, including analytics, feature flags, session replays, and more. It’s also entirely open-source. 
+- **PostHog** is an all-in-one product improvement platform built primarily for engineers and technical users. It offers a wide range of features to help teams build better products, including analytics, feature flags, session replays, and more.
 
 - **FullStory** is primarily a session replay tool focused on helping product managers and UX specialists to understand more about how their users interact with product UI. 
 
@@ -60,7 +60,7 @@ In order to offer a straightforward comparison of PostHog and FullStory, we’ll
 
 > If a particular feature is critically important to you, we strongly advise checking the details of FullStory’s pricing, as not all features are equally available and pricing is not transparent. [Unlike PostHog's](/pricing). 
 
-### Core feature comparison
+## Core features
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -119,13 +119,13 @@ In order to offer a straightforward comparison of PostHog and FullStory, we’ll
 </table>
 </div>
 
-- **Product analytics:** Both FullStory and PostHog offer product analytic features, but while both can tick this box broadly there’s a drastic difference in the implementation for these features. We’ll therefore explore this comparison in greater detail below. 
+- **Product analytics:** Both FullStory and PostHog offer product analytics, but _what_ they offer is drastically different. We explore this comparison in greater detail below. 
 
-- **Apps/Integrations:** While both FullStory and PostHog offer standard integrations between themselves and other platforms — for example, for sending data to Salesforce — PostHog also gets a step further. On PostHog, users can additionally build their own apps on top of the platform, including site apps which can be used to inject surveys, messages and prompts into a product. We’ll explore this in more detail below, or you can [check the PostHog app library](/apps) for more info. 
+- **Build your own apps:** PostHog makes it easy to build your own apps and integrations, including site apps that can be used to inject surveys, messages and prompts into your product.
 
 ### Product Analytics
 
-PostHog and FullStory are ultimately positioned for different types of users, and this is reflected in the scope of their analytics offering. While FullStory is aimed most squarely at UI designers and general product managers, PostHog is suited to product engineers, front-end developers and more technical users. As a result, PostHog offers a wider range of analytics tools, including [its own SQL dialect for detailed analysis](/docs/product-analytics/hogql).
+FullStory is aimed at UI designers and general product managers, while PostHog is suited to product engineers, front-end developers and more technical users. As a result, PostHog offers a wider range of analytics tools, including [its own SQL dialect for detailed analysis](/docs/product-analytics/hogql).
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -202,15 +202,15 @@ PostHog and FullStory are ultimately positioned for different types of users, an
 </table>
 </div>
 
-Product analytics tools in PostHog are closely integrated with other tools, such as feature flags and session replays. You can, for example, use a Trends insight to examine the performance of a particular metric and, by clicking on a point in the graph, see a sample of the persons who have contributed to it. You can even jump directly to their session replays to see the event as it occurs. 
+Product analytics in PostHog is closely integrated with other tools, such as feature flags and session replays. You can, for example, use a Trends insight to examine the performance of a particular metric, click on a point in the graph to see users who contributed to it, and then jump directly to their session replay to see what they did.
 
 If you prefer, you can also do this in reverse by filtering for session replays where particular events occur and creating dynamic playlists. We cover these session replay features in greater depth below. 
 
 > **PostHog ships weirdly fast.** New features ship very regularly, so to keep up to date with our latest updates check [the weekly changelog](/blog/changelog). Or, take a look at what we’re planning in [our public roadmap](/roadmap)!
 
-### Session replays
+### Session replay
 
-Both PostHog and FullStory include session replay tools, but the same difference as before is also true here. FullStory is _primarily_ a session replay tool, while PostHog has a much broader vision. As a result of its speciality in this area FullStory has some additional features over PostHog — though the gap isn’t as large as you may think…
+FullStory is _primarily_ a session replay tool, while PostHog is all-in-one platform. FullStory's specialism means it has some extra features compared to Posthog, though the gap isn’t as large as you may imagine... and it's closing fast.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -236,7 +236,7 @@ Both PostHog and FullStory include session replay tools, but the same difference
             <td>Record user sessions in Android apps.</td>
         </tr>
         <tr>
-            <td><strong>Desktop app replays</strong></td>
+            <td><strong>Web app replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Capture replays from single-page apps.</td>
@@ -269,7 +269,7 @@ Both PostHog and FullStory include session replay tools, but the same difference
             <td><strong>Share replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Generate a short link for sharing.</td>
+            <td>Generate timestamped short links for sharing.</td>
         </tr>
         <tr>
             <td><strong>Add notes to replays</strong></td>
@@ -291,13 +291,13 @@ Both PostHog and FullStory include session replay tools, but the same difference
         </tr> 
         <tr>
             <td><strong>Data retention</strong></td>
-            <td className="text-center">1 month</td>
+            <td className="text-center">1 month[^1]</td>
             <td className="text-center">3 weeks</td>
             <td></td>
         </tr>
         <tr>
             <td><strong>Free replay allowance</strong></td>
-            <td className="text-center">No free allowance</td>
+            <td className="text-center">No free allowance[^2]</td>
             <td className="text-center">15,000 sessions each month</td>
             <td></td>
         </tr>
@@ -305,10 +305,8 @@ Both PostHog and FullStory include session replay tools, but the same difference
 </table>
 </div>
 
-FullStory’s complex, opaque plan-based pricing requires two important caveats:
-
-1. Data retention on FullStory can be increased with more expensive plans.
-2. FullStory does offer 5,000 free sessions on its free trial, but lasts only 14 days before changing to a premium Business plan.
+[^1]: Data retention increases on more expensive plans.
+[^2]: FullStory offers a 14-day trial with 5,000 free sessions before forcing you to pay.
 
 Beyond this, PostHog and FullStory are roughly comparable even in spite of FullStory’s near-exclusive focus on session replays as a feature. A major exception is PostHog’s lack of mobile app recording features, but [we’re working on it](/roadmap).
 
@@ -324,7 +322,7 @@ PostHog’s toolbar can be made to [look like a hedgehog though](/blog/posthog-c
 <ArrayCTA />
 
 ### Apps, integrations and plugins
-Apps are a major point of difference for PostHog and FullStory because, while both have the ability to integrate with other platforms, PostHog also offers the ability to inject code into your site (we call these [site apps](/tutorials/build-site-app). Some of the site apps which are available include:
+Apps are a major point of difference between FullStory and PosthHog because PostHog offers the ability to inject code into your site. We call these [site apps](/tutorials/build-site-app) – here are some examples:
 
 - **[NPS surveys](/apps/nps-survey-app)** for tracking your word of mouth growth. 
 - **[Interview scheduler](/apps/user-interviews)** for scaling product feedback.
@@ -332,9 +330,9 @@ Apps are a major point of difference for PostHog and FullStory because, while bo
 - **[Notification banners](/apps/notification-bar)** to tell users about important messages.
 - **[Raining pineapples](/apps/pineapple-mode)**, just in case.
 
-PostHog is also open source, meaning [users can easily create their own apps](/tutorials/build-your-own-posthog-app). It’s so easy to create your own apps in PostHog in fact that some of the apps we already offer have been developed by non-engineers! 
+PostHog is also open source, meaning [users can easily create their own apps](/tutorials/build-your-own-posthog-app). In fact, it’s so easy to create your own apps in PostHog that some of the apps we already offer have been developed by non-engineers! 
 
-Both PostHog and FullStory offer integrations with over 50 different platforms, so rather than comparing each and every one, we’ve listed some of the most popular apps below. 
+Below are some of the most popular apps and integrations for FullStory and PostHog:
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -512,7 +510,7 @@ Both PostHog and FullStory support a broad range of tracking options and librari
 >
 > Autocapture is much faster to setup than manual instrumentation, but some argue that it creates too much noise to be useful. We disagree, and it’s why PostHog gives you your first million events for free, every month — so you can capture events without having to worry about tracking limits. [It’s something we feel quite strongly about](/blog/is-autocapture-still-bad).
 
-### Security and compliance
+## Security and compliance
 For some type of organization regulatory compliance can be an essential concern — and security is worth thinking about even when it’s not a legal requirement. Luckily, both FullStory and PostHog have robust features for protecting user privacy. However, only PostHog is open source to the extent that you can create your own apps to add extra functionality if needed!
 
 <div className="overflow-x-auto -mx-5 px-5">
@@ -559,7 +557,7 @@ For some type of organization regulatory compliance can be an essential concern 
 </table>
 </div>
 
-### Frequently asked questions
+## Frequently asked questions
 
 #### Do PostHog and FullStory offer free trials?
 
