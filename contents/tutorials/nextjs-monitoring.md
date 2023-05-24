@@ -8,7 +8,9 @@ featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ['configuration', 'session replay', 'insights']
 ---
 
-Monitoring a Next.js app ensures the best possible experience for your users. It ensures the optimizations Next.js provides are working as well as possible, and minmizes errors hurting user experience.
+Monitoring a Next.js app creates the best possible experience for your users. It ensures your Next.js app is performing well, loading fast, and doesn't have significant errors hurting user experience.
+
+> Already have a Next.js app? [Click here to skip to the PostHog installation](#set-up-posthog).
 
 ## Create a Next.js app
 
@@ -31,7 +33,7 @@ This starts up your Next.js site, which we can now add PostHog to set up monitor
 
 ## Set up PostHog
 
-To add PostHog, install `posthog-js`. 
+To add PostHog, install [`posthog-js`](/docs/libraries/js). 
 
 ```bash
 npm i posthog-js
@@ -76,8 +78,10 @@ export default function RootLayout({ children }) {
 
 Once this is set up, go to your [project settings](https://app.posthog.com/project/settings), and make sure:
 
-- Autocapture is enabled
+- [Autocapture](/docs/data/autocapture) is enabled
 - Under recordings, record user sessions, capture console logs, and capture network performance are all enabled.
+
+![Settings](../images/tutorials/nextjs-monitoring/settings.png)
 
 Enabling these provides the key monitoring tools including performance monitoring, app usage, and session replays. It also enables capturing custom events which we use for errors and more performance data next.
 
@@ -123,7 +127,7 @@ export default function About() {
 }
 ```
 
-When you go to `[http://localhost:3000/about](http://localhost:3000/about)`, you get the error page.
+When you go to `http://localhost:3000/about`, you get the error page.
 
 ![Error](../images/tutorials/nextjs-monitoring/app-error.png)
 
