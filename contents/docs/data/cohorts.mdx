@@ -77,11 +77,15 @@ When creating a cohort, you'll choose between a static or dynamic cohort:
 
 ![two types of cohorts: static and dynamic](../../images/features/cohorts/static-and-dynamic-cohorts.png)
 
-**Static cohorts** are lists of users that do not change over time. For example, all users who signed up for your app in January 2023. 
+### Static cohorts
+Static cohorts are lists of users that do not change over time. For example, all users who signed up for your app in January 2023. 
 
-Static cohorts are created by uploading a csv of users, or from insights. You can then update the list manually if you'd like to add or remove users.
+Static cohorts are created from insights, or by uploading a csv of users. The CSV file only requires a single column with the user’s distinct ID. The very first row (the header) will be skipped during import.
 
-On the other hand, **dynamic cohorts** are defined by a continuously evaluated condition. This means that the members of the cohort can change over time. For example, a dynamic cohort could be all users who have have used a certain feature in your app.
+To update the list, you can either upload another CSV to add more users, or use the interface to remove users.
+
+### Dynamic cohorts
+Dynamic cohorts are defined by a continuously evaluated condition. This means that the members of the cohort can change over time. For example, a dynamic cohort could be all users who have have used a certain feature in your app.
 
 Dynamic cohorts are created by matching users who meet a certain criteria. You can define this criteria by combining any number of the following conditions:
 
@@ -91,17 +95,6 @@ Dynamic cohorts are created by matching users who meet a certain criteria. You c
 - Users matching other cohorts.
 
 ![Different criteria options for creating a dynamic cohort](../../images/features/cohorts/creating-dynamic-cohorts.png)
-
-## Using cohorts to differentiate traffic from your team vs. your users
-
-You may want to differentiate between traffic from your team and traffic from your users. To do so, you can identify your team members in PostHog by:
-
-1. Either using [`posthog.identify`](/docs/getting-started/identify-users) and, for example, setting an email as the ID, or
-2. By setting [properties](/docs/getting-started/user-properties) on your team members – e.g., `is_team_member = true`.
-
-You can then create a cohort of your team members, or a cohort that excludes your team. This enables you to differentiate between your team and your users when analyzing your data.
-
-Using this method, you'll continue receiving events for both your team members and your users. However, if you want to stop receiving events from your team completely, you should use [`posthog.opt_out_capturing`](/docs/integrate/client/js#opt-users-out).
 
 ### Further reading
 
