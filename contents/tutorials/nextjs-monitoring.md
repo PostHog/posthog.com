@@ -1,6 +1,6 @@
 ---
 title: How to set up Next.js monitoring
-date: 2023-05-23
+date: 2023-05-24
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
