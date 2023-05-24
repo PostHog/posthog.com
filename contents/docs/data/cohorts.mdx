@@ -22,25 +22,28 @@ availability:
             enterprise: true
 ---
 
-Cohorts enable you to easily create a list of users who have something in common. You can use the cohorts to view a list of users who all did the same action or have the same property.
+Cohorts enable you to easily create a list of users who have something in common, such as completing an action or having the same property.
 
 Here are a few examples of the cohorts you can create:
 
 - Users who work at the same company.
 - Users who used your app in the last week.
 - Users who have churned from your product.
+- Users who signed up recently.
+- Users who viewed the signup page, but didn't convert.
 
 You can also analyze [trends](docs/product-analytics/trends), [insights](docs/product-analytics/insights), and [dashboards](/docs/product-analytics/dashboards) for your cohorts. This enables you to understand things like:
 
 - "Are people at company X using our app frequently?"
 - "What percentage of the users who signed up last week are still using our app?"
+- "Which features are our power users using?"
 
 ## Cohorts vs. groups
 
 Cohorts are often confused with [groups](/docs/data/groups), but they each serve different purposes:
 
 - Cohorts represent a specific set of users – e.g., a list of users that all belong to the same company.
-- Groups aggregate events based on entities, such as organizations or companies, and do not necessarily have to be connected to a user. They enable you to analyze trends, insights, and dashboards at an entity-level, as opposed to a user-level.
+- Groups aggregate events based on entities, such as organizations or companies, and do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level, as opposed to a user-level.
  
 Groups require additional code in your app to set up, while cohorts are created in PostHog and don't require additional code. This makes cohorts easier to use and quicker to get started. If your only goal is to create a list of **users** with something in common, we recommend cohorts instead of groups.
 
@@ -50,9 +53,9 @@ There are two methods to create a new cohort:
 
 ### Method 1: Create a new cohort directly from an insight
 
-You can create cohorts using data from insights such as trends, [funnels](/product-analytics/funnels), [user paths](/docs/product-analytics/paths) and [lifecycle](/docs/product-analytics/lifecycle).
+You can create cohorts using data from insights such as trends, [funnels](/product-analytics/funnels), [user paths](/docs/product-analytics/paths) and [lifecycles](/docs/product-analytics/lifecycle).
 
-**Step 1:** Go to [insights](https://app.posthog.com/insights) and open any insight. Click on any data point to view the [persons](/docs/data/persons) represented in the underlying data.
+**Step 1:** Go to [insights](https://app.posthog.com/insights) and open any insight. Click a data point on the visualization to view the [persons](/docs/data/persons) represented in the underlying data.
 
 **Step 2:** In the modal popup, click 'Save as cohort' in the bottom right.
 
