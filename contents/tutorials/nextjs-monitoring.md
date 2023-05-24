@@ -8,11 +8,11 @@ featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ['configuration', 'session replay', 'insights']
 ---
 
-Monitoring a Next.js app ensures the best possible experience for your users. It ensures all of the optimizations Next.js provides are working as well as possible, and the minimization of errors hurting user experience.
+Monitoring a Next.js app ensures the best possible experience for your users. It ensures the optimizations Next.js provides are working as well as possible, and minmizes errors hurting user experience.
 
 ## Create a Next.js app
 
-You need to create a Next.js app if you are going to monitor it. Run the following command, choose not to use TypeScript and the defaults for all the other options (including using the app router).
+You need to create a Next.js app if you are going to monitor it. To create one, run the following command, choose **not** to use TypeScript, and the defaults for all the other options (including using the app router).
 
 ```bash
 npx create-next-app@latest monitor
@@ -79,7 +79,7 @@ Once this is set up, go to your [project settings](https://app.posthog.com/proje
 - Autocapture is enabled
 - Under recordings, record user sessions, capture console logs, and capture network performance are all enabled.
 
-Enabling both of these provides the key monitoring tools including performance monitoring, app usage, and session replays. It also enables capturing custom events which we use for errors and more performance data next.
+Enabling these provides the key monitoring tools including performance monitoring, app usage, and session replays. It also enables capturing custom events which we use for errors and more performance data next.
 
 ## Custom error capture
 
@@ -105,10 +105,10 @@ export default function Error({ error }) {
 }
 ```
 
-Now, in your app folder, create a new folder named `about` and add a file named `page.js`. In this file, set up a component that errors like this:
+Now, in your `app` folder, create a new folder named `about` and add a file named `page.js`. In this file, set up a component that errors like this:
 
 ```js
-// app/page.js
+// app/about/page.js
 const session = null
 
 export default function About() {
@@ -127,11 +127,11 @@ When you go to `[http://localhost:3000/about](http://localhost:3000/about)`, you
 
 ![Error](../images/tutorials/nextjs-monitoring/app-error.png)
 
-This also captures an `exception` event in PostHog with all the details.
+This also captures an `exception` event in PostHog with details like the current URL, OS, browser, time, and more.
 
 ![Exception](../images/tutorials/nextjs-monitoring/exception.png)
 
-This captures errors thrown from your app, wherever they happen.
+This captures errors thrown from your app in PostHog, wherever they happen.
 
 ## Custom performance capture
 
@@ -179,11 +179,11 @@ Once done, you start to see metrics in your PostHog instance.
 
 ![Peformance metrics](../images/tutorials/nextjs-monitoring/monitoring-metrics.png)
 
-> **Note:** you might want to filter for specific web vital events by checking their name or sample using specific criteria as this method generates a lot of events for each pageview.
+> **Note:** you might want to filter for specific web vital events by checking their name or sample using specific criteria as this method generates **a lot of events** for each pageview.
 
 ## Creating a monitoring dashboard
 
-With everything set up for monitoring our Next.js app, we can create a dashboard that gives us a complete overview. On this dashboard, create insights for page load with LCP, time to first byte with TTFB, first contentful paint, cumulative layout shift, and errors. 
+With everything set up for monitoring our Next.js app, we can create a dashboard that gives us a complete overview. On this dashboard, we will create insights for page load, time to first byte, first contentful paint, cumulative layout shift, and errors.
 
 To start go to the [dashboards tab](https://app.posthog.com/dashboard), click new dashboard, choose blank dashboard, then add an insight. 
 
@@ -191,7 +191,7 @@ We start with averages for our page load metrics. Select `LCP` as your series, t
 
 ![LCP insight](../images/tutorials/nextjs-monitoring//lcp-insight.mp4)
 
-Afterward, you can create similar insights for TTFB, FCP, and CLS. Your dashboard will look like this:
+Afterward, you can create similar insights the other performance metrics like TTFB, FCP, and CLS. Your dashboard will look like this:
 
 ![Dashboard](../images/tutorials/nextjs-monitoring/dashboard.png)
 
@@ -199,7 +199,7 @@ Next, we can do some analysis of our errors. We can create insights for errors b
 
 ![Error](../images/tutorials/nextjs-monitoring/errors.png)
 
-This gives you a base dashboard to monitor your Next.js application. Some insights you could add to your monitoring dashboard include:
+This gives you a base dashboard to monitor your Next.js application. Some more insights you could add to your monitoring dashboard include:
 
 - 90, 95, 99% percentile values for performance metrics.
 - Exceptions broken down by users.
