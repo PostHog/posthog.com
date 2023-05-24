@@ -98,6 +98,24 @@ export const AppLibrary = ({ className = '', ...other }: { className?: string })
         <path d="M13.999 7.5h2.5V10a1 1 0 0 0 2 0V7.5H21a1 1 0 0 0 0-2h-2.5V3a1 1 0 1 0-2 0v2.5H14a1 1 0 1 0 0 2Z" />
     </svg>
 )
+
+export const Bell = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        className={`fill-current ${className}`}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        {...other}
+    >
+        <path
+            fillRule="evenodd"
+            d="M18.578 17.677s.922-.075.922-1.107c0-1.033-2.192-3.585-2.192-3.585V8.474c0-1.757-1.405-2.874-3.192-3.352a2.277 2.277 0 1 0-4.232 0c-1.787.478-3.192 1.596-3.192 3.352v4.512S4.5 15.537 4.5 16.57c0 1.032.922 1.107.922 1.107h13.156ZM12 3.198a1.078 1.078 0 1 1 0 2.157 1.078 1.078 0 0 1 0-2.157Zm2.277 15.565c-.025 1.31-1.035 2.364-2.277 2.364-1.242 0-2.251-1.054-2.276-2.364h4.553Z"
+            clipRule="evenodd"
+        />
+    </svg>
+)
+
 export const Bootstrapping = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"

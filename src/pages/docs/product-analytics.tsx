@@ -72,6 +72,7 @@ export const quickLinks = [
         to: '/docs/product-analytics/hogql',
     },
     {
+        icon: 'Bell',
         name: 'Subscriptions',
         to: '/docs/product-analytics/subscriptions',
         description: 'Set up notifications for when specific actions occur',
