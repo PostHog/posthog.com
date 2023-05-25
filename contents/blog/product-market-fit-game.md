@@ -37,7 +37,7 @@ Let's press start...
 
 //TODO: Graphic for level here
 
-Start by solving a problem you've had yourself. It needs to be a problem you've _actually tried to solve_, otherwise it can't be a significant problem.
+Start by solving a problem you've had yourself. It needs to be a problem you've _both had, and actually tried to solve_, otherwise it can't be a significant problem.
 
 The type of idea, _and_ thus the types of users you are targeting, will greatly influence your life. I recommend trying out a bunch of ideas _and then_ figuring out what you like and why.
 
