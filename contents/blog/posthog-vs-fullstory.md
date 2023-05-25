@@ -285,7 +285,7 @@ FullStory is _primarily_ a session replay tool, while PostHog is all-in-one plat
         <tr>
             <td><strong>Free replay allowance</strong></td>
             <td className="text-center">No free allowance[^2]</td>
-            <td className="text-center">15,000 sessions each month</td>
+            <td className="text-center">15,000 sessions every month</td>
             <td></td>
         </tr>
     </tbody>
@@ -300,11 +300,48 @@ Beyond this, PostHog and FullStory are roughly comparable even in spite of FullS
 ### Heatmaps, clickmaps and scrollmaps
 While technically a different feature in PostHog, heatmaps are nevertheless closely associated with session replays because they function as a way to aggregate the same level of data. Using different types of heatmaps, you can see where users are focusing their attention — or even precisely where they are looking on a page.
 
-PostHog’s heatmaps are, admittedly, a nascent function of [the toolbar](/docs/product-analytics/toolbar) and can only help you to visualize where users are clicking on a page. They cannot currently surface where a user scrolls to on a page, nor track cursor movements. 
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+	<td className="w-3/12"></td>
+            <td><strong>FullStory</strong></td>
+            <td><strong>PostHog</strong></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Clickmaps</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Visualize where users click on a page.</td>
+        </tr>
+        <tr>
+            <td><strong>Scrollmaps</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Check where users scroll to.</td>
+        </tr>
+        <tr>
+            <td><strong>Movement maps</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Visualize mouse movements.</td>
+        </tr>
+        <tr>
+            <td><strong>Eye tracking</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Support for eye-tracking tools.</td>
+        </tr>
+    </tbody>
+</table>
+</div>
 
-FullStory, on the other hand, offers many of these features and is inarguably a better heatmapping tool. We feel that clickmaps offer all the essential information — especially when working in conjunction with session replays and product analytics — but, if scrollmaps are essential for you then FullStory is the better tool for the job.
+FullStory is inarguably a better heatmapping tool, but we feel that clickmaps offer all the essential information — especially when working in conjunction with session replays and product analytics.
 
-PostHog’s toolbar can be made to [look like a hedgehog though](/blog/posthog-changelog#hedgehog-toolbar), which is nice. 
+PostHog’s heatmapping toolbar can be made to [look like a hedgehog though](/blog/posthog-changelog#hedgehog-toolbar), which is nice. 
 
 <ArrayCTA />
 
