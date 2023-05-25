@@ -1,5 +1,5 @@
 ---
-date: 2023-05-25
+date: 2022-05-13
 title: "In-depth: PostHog vs Amplitude"
 rootPage: /blog
 sidebar: Blog
