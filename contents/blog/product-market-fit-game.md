@@ -57,7 +57,8 @@ During this phase, write down every single potential customer conversation. Be t
 
 Many people spend months or years attempting to validate their idea in advance, and make no progress as a result. You will always get more clarity by doing something rather than hypothesizing forever. 
 
-Many people spend months or years attempting to validate their idea in advance, and make no progress as a result. You will always get more clarity by building something and getting it into users' hands, so don't spend ages at this level.
+Many people spend months or years attempting to validate their idea in advance, and make no progress as a result. You will always get more clarity by building something and getting it into users' hands
+, so don't spend ages at this level.
 
 ### Level 2 - Validate the problem really exists by talking to users
 
@@ -111,7 +112,7 @@ Work your way from top to bottom:
 
 * **You aren't working hard enough.** Realize no one else is going to do this for you. Set a goal for how many meetings you want to get. I got 2 meetings a day, 5 days a week while doing any other random tasks, like building a website. Try to meet in person if you can afford to do so – most communication is non-verbal, so it'll make it easier to learn what people are thinking. Move to a hub for your industry if you can. Also consider moving in with your co-founder, so you can focus 100% on the work for this intense period. Running out of momentum is your biggest risk.
 
-* **You aren't being clear what the problem is,** so it's hard to recruit users to validate it. Create a simple, single sentence description of the problem you think you're solving (ahead of doing the same for the _product_ you eventually build), and the user you are targeting. If what you're working on feels vague, you'll get a lukewarm response to your messages trying to book meetings. Do not use benefits-language here – users won't have the attention span to figure out what your product does.
+* **You aren't being clear what the problem is,** so it's hard to recruit users to validate it. Create a simple, single sentence description of the problem you think you're solving (ahead of doing the same for the _product_ you eventually build), and the user you are targeting. If what you're working on feels vague, you'll get a lukewarm response to your messages trying to book meetings. Do not use benefits-language here – users won't have the attention span to figure out what your product does. We were working on "open source product analytics", so people could "self host their product analytics". We were not, for example, "helping engineers build better products", "providing a product optimization system" or "saving time for data analysts".
 
 * **You are talking to the wrong users.** If so, no one will take calls, or if they do, they don't have your problem. Ask yourself – why did you have this problem, but those speaking to you don't? When you do get calls, ask who would have this problem. Change the user you are targeting.
 
