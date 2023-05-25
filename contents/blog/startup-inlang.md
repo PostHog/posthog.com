@@ -49,7 +49,7 @@ Now, the current status quo is, well, you need to delete the whole video. But we
 
 “Well, you cannot go to non-technical people, and ask them, 'Hey, do you want to use Git?' Because they will have a million questions. It's one of those things where we have to build it and find out by ourselves. Right now it's looking good, but that doesn't mean it’s without risk.
 
-The biggest fear I have though is that I see a lot of tech people dreaming up ideas for us — like, what about continuous deployment? — which seem to make a lot of sense in a vacuum. But then in reality, there are some things, some confounding variables, some confounding insights which break it.
+The biggest fear I have, though, is I see a lot of tech people dreaming up ideas for us – like, what about continuous deployment? – which seem to make a lot of sense in a vacuum. But then in reality, there are some things, some confounding variables, some confounding insights which break it.
 
 That said, it seems good right now. We have a very, very concrete use case and we know what we have to do to solve the software localization challenge.”
 
