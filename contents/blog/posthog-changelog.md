@@ -21,6 +21,23 @@ Every Friday we update this page with the latest new features, fixes, and update
 
 ## May 26, 2023
 
+#### HouseWatch: an open source tool for managing ClickHouse clusters
+![housewatch by posthog](../images/blog/array/housewatch_overview.png)
+
+Another project from [our recent hackathon in Aruba](/blog/aruba-hackathon), HouseWatch is now available to the public under an open source MIT license. We built HouseWatch to help us monitor and manage the large ClickHouse clusters which power PostHog. You can use it to...
+
+- Get an overview of cluster load and performance
+- Drill down into your queries and understand the load they put on your cluster
+- Search through logs and errors
+- Monitor and kill running queries with the click of a button
+- Get stats on your disk usage per node, and understand how much disk space tables, columns, and parts take up
+- Run your own queries straight from the interface to further dig into performance and cluster issues
+- Setup operations to run in the background with automatic rollbacks for failures
+
+And that's just for starters! Our ultimate vision is that HouseWatch can act as a pganalyze for the ClickHouse ecosystem, while also providing tooling for taking actions on insights derived from the analysis.
+
+> **HouseWatch is open-source, free and in beta.** Check [the GitHub repo for deployment instructions](https://github.com/PostHog/HouseWatch), leave us a star if you like what we're doing!
+
 #### Analyse all the events
 ![everything everywhere all at once](../images/blog/array/all_events.png)
 
