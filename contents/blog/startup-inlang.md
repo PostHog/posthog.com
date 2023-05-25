@@ -29,7 +29,7 @@ For now we’re focusing on localization, but if we solve this problem in that p
 
 “Really, other people forced me to solve it. I had previously bootstrapped a company and I had to offer the app in German and English. And that was a pain. I was the sole person in that business, so that means I was also the translator. The translations themselves were never the problem, but the engineering side of offering my app in German and English? That was a continuous problem. 
 
-I created an initial prototype, put it on Reddit, and got a lot of feedback from developers facing the same issue — but then I actually scrapped the idea. I wanted to get a Masters in Computer Science and I shut down the business to do it. 
+I created an initial prototype, put it on Reddit, and got a lot of feedback from developers facing the same issue – but then I actually scrapped the idea. I wanted to get a Masters in Computer Science and I shut down the business to do it. 
 
 Then, on the first day on campus, you know what happens? I find out I didn't get into any courses that I wanted to, because they were oversubscribed except for one and that was the entrepreneurship course. My prototype ended up turning into a whole semester project where I then realized that this issue impacts literally every software company out there. And nobody was solving the real problem!
 
