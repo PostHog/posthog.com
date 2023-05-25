@@ -525,7 +525,7 @@ Both PostHog and FullStory support a broad range of tracking options and librari
 </table>
 </div>
 
-> ### Should you autocapture events?
+> #### Should you autocapture events?
 >
 > Autocapture is much faster to setup than manual instrumentation, but some argue that it creates too much noise to be useful. We disagree, and it’s why PostHog gives you your first million events for free, every month – so you can capture events without worrying about event limits. [It’s something we feel strongly about](/blog/is-autocapture-still-bad).
 
