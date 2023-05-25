@@ -796,6 +796,10 @@
                         "name": "Event Sequence Timer"
                     },
                     {
+                        "url": "/docs/apps/filter-out",
+                        "name": "Filter Out"
+                    },
+                    {
                         "url": "/docs/apps/first-time-event-tracker",
                         "name": "First Time Event Tracker"
                     },
