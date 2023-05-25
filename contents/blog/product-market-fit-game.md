@@ -57,7 +57,7 @@ During this phase, write down every single potential customer conversation. Be t
 
 Many people spend months or years attempting to validate their idea in advance, and make no progress as a result. You will always get more clarity by doing something rather than hypothesizing forever. 
 
-If an idea fails, there's _zero_ downside to pivoting.
+Many people spend months or years attempting to validate their idea in advance, and make no progress as a result. You will always get more clarity by building something and getting it into users' hands, so don't spend ages at this level.
 
 ### Level 2 - Validate the problem really exists by talking to users
 
