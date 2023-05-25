@@ -14,7 +14,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const BlogTagTemplate = path.resolve(`src/templates/BlogTag.tsx`)
     const BlogTemplate = path.resolve(`src/templates/Blog.tsx`)
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
-    const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
@@ -196,12 +195,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 tags: group(field: frontmatter___tags) {
                     tag: fieldValue
                     totalCount
-                }
-            }
-            plugins: allPlugin(filter: { url: { regex: "/github.com/" } }) {
-                nodes {
-                    id
-                    slug
                 }
             }
             hostHog: allMdx(filter: { fields: { slug: { regex: "/^/hosthog/" } } }) {
@@ -455,18 +448,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
             },
         })
-    })
-    result.data.plugins.nodes.forEach((node) => {
-        const { id, slug } = node
-        if (slug) {
-            createPage({
-                path: slug,
-                component: PluginTemplate,
-                context: {
-                    id,
-                },
-            })
-        }
     })
     result.data.hostHog.nodes.forEach((node) => {
         const { id, slug } = node
