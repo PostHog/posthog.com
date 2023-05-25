@@ -22,7 +22,7 @@ PostHog and FullStory are both popular tools for understanding user behavior, bu
 
 In this comparison, we'll explore, compare and contrast PostHog and FullStory in detail, so you can decide which tool is right for you. We’ll look at areas such as…
 
-- [Core features and product focu](#core-feature-comparison)
+- [Core features and product focus](#core-feature-comparison)
 - [Product analytics capabilities](#product-analytics)
 - [Session replay capabilities](#session-replays)
 - [Heatmapsping capabilities](#heatmaps-clickmaps-and-scrollmaps)
