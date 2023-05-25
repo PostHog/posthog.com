@@ -22,16 +22,19 @@ PostHog and FullStory are both popular tools for understanding user behavior, bu
 
 In this comparison, we'll explore, compare and contrast PostHog and FullStory in detail, so you can decide which tool is right for you. We’ll look at areas such as…
 
-- [Core features and who PostHog and FullStory are built for](#core-feature-comparison)
-- [Product analytics capabilities and how these features connect to others](#product-analytics)
-- [Session replays, performance monitoring and privacy protection](#session-replays)
-- [Heatmaps, clickmaps and scrollmaps](#heatmaps-clickmaps-and-scrollmaps)
-- [Integrations with other software, and PostHog’s app platform](#apps-integrations-and-plugins)
+- [Core features and product focu](#core-feature-comparison)
+- [Product analytics capabilities](#product-analytics)
+- [Session replay capabilities](#session-replays)
+- [Heatmapsping capabilities](#heatmaps-clickmaps-and-scrollmaps)
+- [Integrations with other software](#apps-integrations-and-plugins)
 - [Event tracking and data management](#event-tracking)
 - [Privacy, security and compliance](#security-and-compliance) 
-- [Other frequently asked questions](#frequently-asked-questions)
+- [Pricing and other frequently asked questions](#pricing-and-other-frequently-asked-questions)
 
 ## How is PostHog different?
+> In order to offer a comparison of PostHog and FullStory, we’ll focus just on features, regardless of pricing tier. For more information on pricing, check the pricing section at the end of the article.
+
+### How is PostHog different?
 
 #### 1. PostHog is an all-in-one product improvement platform
 FullStory includes a few additional features, but it's mostly focused on session replay. In contrast, PostHog is a comprehensive, all-in-one platform that easily replaces an entire stack of traditional tools, such as LaunchDarkly, Amplitude, and FullStory.  
@@ -43,21 +46,6 @@ PostHog is designed from the ground up to meet the needs of developers, and prod
 As an open source company, we build in public and give you unrivalled access. You can check out the PostHog repo to monitor code changes, build your own features and apps, and interact directly with our engineering team.
 
 <ArrayCTA /> 
-
-### PostHog and FullStory pricing
-Both PostHog and FullStory offer three main pricing tiers, but how these tiers differ is actually quite different. 
-
-**PostHog** has a simple free tier with a limited feature set and a generous allowance of 1 million free events and 15,000 free sessions each month, after which users move to a more full featured paid plan which is billed based on usage. The third tier is an enterprise add-on, which expands the feature set further with the permissioning and privacy tools needed by large organizations.
-
->  Check [PostHog’s pricing page](/pricing) to find out more about what’s included in each tier, or to see how per-event pricing scales.
-
-**FullStory**, on the other hand, offers only three premium, paid-for tiers, which differ in available features. The basic Business plan offers minimal features and a limited 14-day trial, while the following Advanced and Enterprise plans increase the feature scope and, presumably, cost. 
-
-We say ‘presumably’ because FullStory’s pricing isn’t transparent and there’s no way to know exactly how much each tier costs. At PostHog, that’s [an approach we strongly disagree with](/blog/transparent-enterprise-pricing). 
-
-In order to offer a straightforward comparison of PostHog and FullStory, we’ll focus this article on the _enterprise_ versions of both products — that is, the most feature-complete tiers. In this way we can clearly establish the features which both products do or do not have without getting bogged down in what features are available on each tier. 
-
-> If a particular feature is critically important to you, we strongly advise checking the details of FullStory’s pricing, as not all features are equally available and pricing is not transparent. [Unlike PostHog's](/pricing). 
 
 ## Core features
 
@@ -510,7 +498,6 @@ Both PostHog and FullStory support a broad range of tracking options and librari
 > Autocapture is much faster to setup than manual instrumentation, but some argue that it creates too much noise to be useful. We disagree, and it’s why PostHog gives you your first million events for free, every month — so you can capture events without having to worry about tracking limits. [It’s something we feel quite strongly about](/blog/is-autocapture-still-bad).
 
 ## Security and compliance
-For some type of organization regulatory compliance can be an essential concern — and security is worth thinking about even when it’s not a legal requirement. Luckily, both FullStory and PostHog have robust features for protecting user privacy. However, only PostHog is open source to the extent that you can create your own apps to add extra functionality if needed!
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -556,7 +543,20 @@ For some type of organization regulatory compliance can be an essential concern 
 </table>
 </div>
 
-## Frequently asked questions
+## Pricing and other frequently asked questions
+
+### How are PostHog and FullStory priced?
+Both PostHog and FullStory offer three main pricing tiers, but how these tiers differ is actually quite different. 
+
+**PostHog** has a free tier with a limited feature set and a generous allowance of 1 million free events and 15,000 free sessions each month, after which users move to a more full featured paid plan which is billed based on usage. The third tier is an enterprise add-on, which expands the feature set further with the permissioning and privacy tools needed by large organizations.
+
+>  Check [PostHog’s pricing page](/pricing) to find out more about what’s included in each tier, or to see how per-event pricing scales.
+
+**FullStory**, on the other hand, offers only three premium, paid-for tiers, which differ in available features. The basic Business plan offers minimal features and a limited 14-day trial, while the following Advanced and Enterprise plans increase the feature scope and, presumably, cost. 
+
+We say ‘presumably’ because FullStory’s pricing isn’t transparent and there’s no way to know exactly how much each tier costs. At PostHog, that’s [an approach we strongly disagree with](/blog/transparent-enterprise-pricing). 
+
+> If a particular feature is critically important to you, we strongly advise checking the details of FullStory’s pricing, as not all features are equally available and pricing is not transparent. [Unlike PostHog's](/pricing). 
 
 #### Do PostHog and FullStory offer free trials?
 
