@@ -59,7 +59,7 @@ You can find your key in the 'Project Settings' page in PostHog.
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
 | `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                         | `true`                    |
 
-> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`.
+> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdownAsync()` at the end to flush and send all pending events.
 
 ## Making calls
 
