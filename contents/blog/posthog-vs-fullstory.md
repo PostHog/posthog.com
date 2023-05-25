@@ -33,14 +33,14 @@ In this comparison, we'll explore, compare and contrast PostHog and FullStory in
 
 ### How is PostHog different from FullStory?
 
-#### PostHog is an all-in-one product improvement platform
-While FullStory includes a few additional features, it is mostly focused on being a session replay tool, while PostHog has a much wider scope. That’s because PostHog is intended to be an all-in-one platform and can easily replace an entire stack of traditionally disparate tools, such as LaunchDarkly, Amplitude, and FullStory.  
+#### 1. PostHog is an all-in-one product improvement platform
+FullStory includes a few additional features, but it's mostly focused on session replay. In contrast, PostHog is a comprehensive, all-in-one platform that easily replaces an entire stack of traditional tools, such as LaunchDarkly, Amplitude, and FullStory.  
 
-#### PostHog is for engineers, technical users, _builders_
-PostHog has been designed from the ground up to meet the needs of developers and product-focused engineers. This is reflected not only in the scope of the features, but also the documentation and platform architecture. For example, PostHog offers advanced tools for debugging user issues within session replays. 
+#### 2. PostHog is for engineers, technical users, _builders_
+PostHog is designed from the ground up to meet the needs of developers, and product-focused engineers. Session replay includes advanced tools for debugging errors and performance issues, while feature flags make it easy to test, and roll out, new features at scale 
 
-#### PostHog is open source
-As an open source platform, PostHog is almost entirely transparent. You can check out the PostHog repo to monitor code changes, build your own features and apps, and even interact with the team directly. FullStory, on the other hand, is entirely closed source.
+#### 3. PostHog is open source
+As an open source company, we build in public and give you unrivalled access. You can check out the PostHog repo to monitor code changes, build your own features and apps, and interact directly with our engineering team.
 
 <ArrayCTA /> 
 
