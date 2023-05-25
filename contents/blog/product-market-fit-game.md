@@ -53,9 +53,7 @@ Here are some pointers:
 
 - **Conservative buyers demand differentiation.** You could probably get someone to try a new social app, but you won't get an enterprise to use an unproven CRM. A rip and replace strategy is harder to execute than a blue ocean strategy. It is easier to sell a product to someone who hasn't got anything in place.
 
-During this phase, write down every single potential customer conversation. It's easy to get recency bias, and you may want to come back to a detail that didn't seem important at the time. Be thorough and open ended in your questions.
-
-At PostHog, we built a Google Doc over 100 pages long in the first few weeks of doing this. Capture seemingly innocuous details. You never know if you'll re-use your hard-earned research with a different idea later.
+During this phase, write down every single potential customer conversation. Be thorough and open ended in your questions. It's easy to get recency bias, and you may want to come back to a detail that didn't seem important at the time. They may even be important for a different idea later. At PostHog, we built a Google Doc over 100 pages long in the first few weeks of doing this.
 
 Many people spend months or years attempting to validate their idea in advance, and make no progress as a result. You will always get more clarity by doing something rather than hypothesizing forever. 
 
