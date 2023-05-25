@@ -47,7 +47,7 @@ Here are some pointers:
 
 - **Known problems are easier to validate,** but your solution must be very different. If you want to build a venture scale business then, in the long run, your solution must be 10x better, or 10x cheaper, than the existing solutions for significant numbers of people to use and/or pay for it.
 
-- **Be careful when validating problems no one else has tackled.** It's much less likely the problem you're interested in is one that others have. 
+- **Be careful when validating problems no one else has worked on.** Maybe you see something others are missing, but it's more likely the problem isn't important.
 
 - **Be wary about building what's trendy.** It's easier to beat unsexy, badly run, non-innovative companies than software companies with VC funding _and_ using the latest technology. Do not be fooled about news articles covering huge fundraises by startups working in these areas – fundraising + press ≠ success. In fact, the trendier the space, the less likely a big round means the company is succeeding.[^1]
 
