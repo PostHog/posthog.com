@@ -31,7 +31,7 @@ In this comparison, we'll explore, compare and contrast PostHog and FullStory in
 - [Privacy, security and compliance](#security-and-compliance) 
 - [Other frequently asked questions](#frequently-asked-questions)
 
-### How is PostHog different from FullStory?
+## How is PostHog different?
 
 #### 1. PostHog is an all-in-one product improvement platform
 FullStory includes a few additional features, but it's mostly focused on session replay. In contrast, PostHog is a comprehensive, all-in-one platform that easily replaces an entire stack of traditional tools, such as LaunchDarkly, Amplitude, and FullStory.  
