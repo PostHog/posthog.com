@@ -11,7 +11,7 @@ featuredImageType: full
 category: Startups
 ---
 
-This month we're chatting to Inlang co-founder & CEO Samuel Stroschein. Prior to starting Inlang, Sam was studying a Master's degree in Computer Science - but he dropped out to work on Inlang and has been pursuing the idea since.
+This month we're chatting to Inlang co-founder & CEO Samuel Stroschein. Prior to starting Inlang, Sam was studying a Master's degree in Computer Science – but he dropped out to work on Inlang and has been pursuing the idea since.
 
 > Every month we shine the spotlight on a different startup to show off the cool things they're building, as part of the PostHog for Startups program. Want a chance to be featured? [Sign up here for $50k in PostHog credit and a bunch of other sweet perks!](/startups) 
 
