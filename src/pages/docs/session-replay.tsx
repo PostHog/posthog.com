@@ -43,6 +43,32 @@ type SessionRecordingProps = {
     }
 }
 
+export const Intro = ({ image = true }) => {
+    return (
+        <>
+            {image && (
+                <StaticImage
+                    alt=""
+                    placeholder="none"
+                    quality={100}
+                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                    src="../../components/Home/Slider/images/session-recording-hog.png"
+                />
+            )}
+            <h1 className="text-4xl mb-2 mt-6">Session replay</h1>
+            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+                Play back sessions to diagnose UI issues, improve support, and get context for nuanced user behavior.
+            </h3>
+
+            {/* Quick links */}
+            <section className="my-12">
+                <h3 className="mb-6 mt-0">Pages</h3>
+                <LinkGrid links={quickLinks} />
+            </section>
+        </>
+    )
+}
+
 const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
     const { tutorials } = data
 
@@ -51,25 +77,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
             <SEO title="Session replay - Docs - PostHog" />
 
             <PostLayout title={'Session replay'} menu={docs} hideSurvey hideSidebar>
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/session-recording-hog.png"
-                />
-                <h1 className="text-4xl mb-2 mt-6">Session replay</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                    Play back sessions to diagnose UI issues, improve support, and get context for nuanced user
-                    behavior.
-                </h3>
-
-                {/* Quick links */}
-                <section className="my-12">
-                    <h3 className="mb-6 mt-0">Pages</h3>
-                    <LinkGrid links={quickLinks} />
-                </section>
-
+                <Intro />
                 {/* Get started section */}
                 <section className="pt-4 pb-0">
                     <GettingStarted
@@ -93,10 +101,7 @@ export const query = graphql`
         tutorials: allMdx(
             limit: 6
             sort: { order: DESC, fields: [frontmatter___date] }
-            filter: {
-                frontmatter: { tags: { in: ["session recording"] } }
-                fields: { slug: { regex: "/^/tutorials/" } }
-            }
+            filter: { frontmatter: { tags: { in: ["session replay"] } }, fields: { slug: { regex: "/^/tutorials/" } } }
         ) {
             edges {
                 node {

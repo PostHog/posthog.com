@@ -8,15 +8,19 @@ export default function CTA({ title, subtitle, image, mainCTA, pricingCTA }: ICT
     const gatsbyImage = image && getImage(image)
     return (
         <SectionWrapper>
-            <div className="flex md:space-y-0 space-y-4 md:flex-row flex-col md:space-x-4 justify-between p-12 bg-gray-accent-light rounded-lg md:items-center">
+            <div className="flex mt-8 md:space-y-0 space-y-4 md:flex-row flex-col md:space-x-4 justify-between py-4 px-6 bg-gray-accent-light rounded-lg md:items-center">
                 <div>
-                    <h2 className="m-0">{title}</h2>
-                    <p className="m-0 mb-6">{subtitle}</p>
+                    <h2 className="m-0 text-2xl">{title}</h2>
+                    <p className="m-0 mb-3 text-[15px] opacity-75">{subtitle}</p>
                     <div className="flex space-x-2 items-center">
-                        <CallToAction to={mainCTA.url}>{mainCTA.title}</CallToAction>
-                        <CallToAction type="secondary" to={pricingCTA.url}>
-                            {pricingCTA.title}
+                        <CallToAction to={mainCTA.url} size="sm">
+                            {mainCTA.title}
                         </CallToAction>
+                        {pricingCTA && (
+                            <CallToAction type="secondary" to={pricingCTA.url} size="sm">
+                                {pricingCTA.title}
+                            </CallToAction>
+                        )}
                     </div>
                 </div>
                 {gatsbyImage && (

@@ -55,6 +55,10 @@ export const quickLinks = [
         to: '/docs/libraries/shopify',
     },
     {
+        name: 'Vue.js',
+        to: '/docs/libraries/vue-js',
+    },
+    {
         name: 'WordPress',
         to: '/docs/libraries/wordpress',
     },

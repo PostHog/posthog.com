@@ -7,6 +7,7 @@ import { Link as ScrollLink } from 'react-scroll'
 import { AnimatePresence, motion } from 'framer-motion'
 import * as ProductIcons from '../ProductIcons'
 import * as NotProductIcons from '../NotProductIcons'
+import { usePost } from './hooks'
 
 const Chevron = ({ open, className = '' }: { open: boolean; className?: string }) => {
     return (
@@ -48,12 +49,14 @@ export default function Menu({
     className = '',
     handleLinkClick,
     topLevel,
-    menuType = 'standard',
     icon,
     badge,
+    ...other
 }: IMenu): JSX.Element | null {
+    const { isMenuItemActive } = usePost()
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
+    const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
     const buttonClasses = `mb-[1px] text-left flex justify-between items-center relative text-primary hover:text-primary dark:text-white dark:hover:text-white pl-3 pr-2 py-1.5 inline-block w-full rounded-sm text-[15px] leading-tight relative active:top-[0.5px] active:scale-[.99] cursor-pointer ${
@@ -68,12 +71,16 @@ export default function Menu({
             return (
                 children &&
                 children.some((child: IMenu) => {
-                    return child.url === pathname || isOpen(child.children)
+                    return (
+                        isMenuItemActive?.({ name: child.name, url: child.url }) ||
+                        child.url === pathname ||
+                        isOpen(child.children)
+                    )
                 })
             )
         }
-        setOpen(url === pathname || (children && isOpen(children)))
-        setIsActive(url === pathname)
+        setOpen(isMenuItemActive?.({ name, url }) || url === pathname || (children && isOpen(children)))
+        setIsActive(isMenuItemActive?.({ name, url }) || url === pathname)
     }, [pathname])
 
     const variants = {
@@ -94,7 +101,15 @@ export default function Menu({
     const MenuLink = { standard: Link, scroll: ScrollLink }[menuType]
     const menuLinkProps = {
         standard: {},
-        scroll: { offset: -50, smooth: true, duration: 300, hashSpy: true, spy: true },
+        scroll: {
+            offset: -50,
+            smooth: true,
+            duration: 300,
+            hashSpy: true,
+            spy: true,
+            onSetActive: () => setIsActive(true),
+            onSetInactive: () => setIsActive(false),
+        },
     }[menuType]
     return (
         <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden mb-[1px] ml-4 ${className}`}>
@@ -114,7 +129,7 @@ export default function Menu({
                         className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${
                             isActive || isWithChild ? 'active' : ''
                         }`}
-                        to={url}
+                        to={menuType === 'scroll' ? url.replace(pathname + '#', '') : url}
                         {...menuLinkProps}
                     >
                         <AnimatePresence>
@@ -186,7 +201,14 @@ export default function Menu({
                         animate={{ height: open ? 'auto' : 0 }}
                     >
                         {children.map((child) => {
-                            return <Menu handleLinkClick={handleLinkClick} key={child.name} {...child} />
+                            return (
+                                <Menu
+                                    handleLinkClick={handleLinkClick}
+                                    key={child.name}
+                                    menuType={menuType}
+                                    {...child}
+                                />
+                            )
                         })}
                     </motion.div>
                 )}

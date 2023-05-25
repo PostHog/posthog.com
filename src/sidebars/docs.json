@@ -16,7 +16,7 @@
             },
             {
                 "name": "Install PostHog",
-                "url": "/docs/getting-started/install"
+                "url": "/docs/getting-started/install?tab=snippet"
             },
             {
                 "name": "Send events",
@@ -185,6 +185,10 @@
                 "url": "/docs/libraries/shopify"
             },
             {
+                "name": "Vue.js",
+                "url": "/docs/libraries/vue-js"
+            },
+            {
                 "name": "WordPress",
                 "url": "/docs/libraries/wordpress"
             }
@@ -301,8 +305,8 @@
         "url": "",
         "children": [
             {
-                "name": "Message formatting",
-                "url": "/docs/webhooks/message-formatting"
+                "name": "Overview",
+                "url": "/docs/webhooks"
             },
             {
                 "name": "Microsoft Teams",
@@ -391,6 +395,14 @@
                 "url": "/docs/product-analytics/group-analytics"
             },
             {
+                "name": "HogQL",
+                "url": "/docs/product-analytics/hogql",
+                "badge": {
+                    "title": "Beta",
+                    "className": "uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            },
+            {
                 "name": "Lifecycle",
                 "url": "/docs/product-analytics/lifecycle"
             },
@@ -409,6 +421,10 @@
             {
                 "name": "Stickiness",
                 "url": "/docs/product-analytics/stickiness"
+            },
+            {
+                "name": "Subscriptions",
+                "url": "/docs/product-analytics/subscriptions"
             },
             {
                 "name": "Toolbar",
@@ -482,6 +498,11 @@
             },
 
             {
+                "name": "Early Access Feature Management",
+                "url": "/docs/feature-flags/early-access-feature-management"
+            },
+
+            {
                 "name": "Common questions about feature flags",
                 "url": "/docs/feature-flags/common-questions"
             }
@@ -532,6 +553,10 @@
                 "url": "/docs/data/annotations"
             },
             {
+                "name": "Autocapture",
+                "url": "/docs/data/autocapture"
+            },
+            {
                 "name": "Cohorts",
                 "url": "/docs/data/cohorts"
             },
@@ -542,10 +567,6 @@
             {
                 "name": "Events",
                 "url": "/docs/data/events"
-            },
-            {
-                "name": "Notifications & alerts",
-                "url": "/docs/data/notifications-and-alerts"
             },
             {
                 "name": "Organizations & projects",
@@ -566,10 +587,6 @@
             {
                 "name": "Settings",
                 "url": "/docs/data/application-settings"
-            },
-            {
-                "name": "Subscriptions",
-                "url": "/docs/data/subscriptions"
             },
             {
                 "name": "SSO & SAML",
@@ -1269,8 +1286,8 @@
                 "url": "/tutorials/categories/retention"
             },
             {
-                "name": "Session recording",
-                "url": "/tutorials/categories/session-recording"
+                "name": "Session replay",
+                "url": "/tutorials/categories/session-replay"
             },
             {
                 "name": "Toolbar",

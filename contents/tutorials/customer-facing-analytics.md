@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-9.png
-topics: ['insights']
+tags: ['insights']
 ---
 
 If you are a host, content platform, or some other type of B2B2C product, your users might want to know their traffic or usage metrics. To put it another way: if your users have their own users, sometimes your users want analytics about their users. Customer-facing analytics are analytics you capture and display to your users to fulfill this need.
@@ -68,10 +68,10 @@ The objects and arrays we want are under `results` → `filters` → `events`, `
 You will likely build customer-facing analytics into your app, but for this tutorial, we'll build ours as a [Next.js app](/tutorials/nextjs-analytics). The first step is to create a basic Next.js app:
 
 ```bash
-npx create-next-app@latest
+npx create-next-app@latest analytics
 ```
 
-We name our app `analytics`, choose **not** to use TypeScript, then choose the defaults for the rest. Once done creating, go into our newly created `analytics` folder and run our app. 
+Choose **not** to use TypeScript, **not** to use the app router, and the defaults for the rest. Once done creating, go into our newly created `analytics` folder and run our app. 
 
 ```bash
 cd analytics

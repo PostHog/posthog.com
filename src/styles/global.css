@@ -1225,3 +1225,9 @@ li.squeak-left-border {
         @apply text-base my-3 overflow-scroll p-4 text-[15px];
     }
 }
+
+.question-table-body-container {
+    p {
+        @apply inline m-0;
+    }
+}

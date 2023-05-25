@@ -62,7 +62,7 @@ This question revolves around value and cost, but how do we measure these? Look 
 
 If your focus segment has a large number of small clients, you’ll want survey responses or data from at least 50 unbiased customers. There are a few options for common surveys used to validate product market fit:
 
-- **Net Promoter Survey(NPS):** If you ask your customers whether they would recommend your product, you want a higher ratio of people recommending than not-recommending.
+- **Net Promoter Survey(NPS):** If you ask your customers whether they would recommend your product, you want a higher ratio of people recommending than not-recommending. You can use [PostHog's NPS survey app](/apps/nps-survey-app) app to gather this information.
 
 - **Disappointment:** If you ask your customers how disappointed they would be if they couldn’t use your product any more, you want >40% to suggest they would be very disappointed.
 

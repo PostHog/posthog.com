@@ -33,14 +33,12 @@ Avo maintains robust [documentation about integrating PostHog and Avo](https://w
 
 ### Who maintains this app?
 
-This app is maintained by the PostHog community. 
+This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
 ### What if I have feedback on this app?
 
-We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog-avo-plugin/new) to tell us what you think.
+We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 
 ### What if my question isn't answered above?
 
-We love answering questions. Ask us anything via [our Support page](/questions).
-
-You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 

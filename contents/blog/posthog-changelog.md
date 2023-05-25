@@ -1,5 +1,5 @@
 ---
-date: 2023-05-05
+date: 2023-05-19
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -17,7 +17,58 @@ featuredImageType: full
 
 Every Friday we update this page with the latest new features, fixes, and updates on PostHog Cloud in the last seven days. We also feature notable additions to the blog and docs. 
 
-> Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap)!
+> Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap). We also [welcome your feedback](http://app.posthog.com/home#supportModal) on all new features! 
+
+## May 19, 2023
+
+#### Beta: Early access feature management
+![feature management](../images/blog/array/feature_management.mp4)
+
+Early access feature management got it's start at [our recent offsite hackathon](/blog/aruba-hackathon) and was intended to make it easier for us to accept users into our beta process, but we're also rolling it out as a feature for you to take advantage of in your own products.
+
+Leveraging feature flags, feature management enables you to present an early access menu to your users so that they can self opt-in or out of betas and other early access features. In the image above you can see it in action as we demo a user opting in to a beta of our new, upcoming UI refresh. 
+
+> **Early access feature management is currently in beta.** You can [check the docs](/docs/feature-flags/early-access-feature-management) for more information, but we'd really [love feedback about it](http://app.posthog.com/home#supportModal) too! 
+
+#### NPS survey app
+![nps score collector](../images/blog/array/nps_posthog.mp4)
+
+You can now use PostHog to collect [net promoter score (NPS)](https://github.com/PostHog/nps-score-app) ratings from your users. NPS is a metric for determining how satisfied your users are with your product, and how they contribute to word of mouth growth. 
+
+Interestingly, this site app wasn't built by our engineering team. It wasn't even built by an engineer. It was built by Joe, from our marketing team, who had never coded before joining PostHog. _That's_ how easy it is to create a new app or integration for PostHog. 
+
+> **Curious about how our 'everybody codes' culture works?** [Joe has reflected on his experience on the blog](https://posthog.com/blog/a-non-coders-thoughts-on-everybody-codes-culture-part-two). 
+
+#### Infinite scrolling for session replays
+![infinite scrolling in posthog](../images/blog/array/infinite_posthog.mp4)
+
+We've had an autoplay function in session replays for a while, but it's always had room for improvement. The biggest problem was that we sorted replays into lists, which interfered with autoplay in predictable fashion. 
+
+You'll notice we're using the past tense here, because we've now enabled infinite scrolling for replays - meaning autoplay will now autoload more replays if needed. 
+
+#### Bugfixes galore
+It's been a heavy week of bugfixes and backend work, so here are some of the highlights just so you know we've not been resting on our laurels:
+
+- Yakko [fixed some typos](https://github.com/PostHog/posthog/pull/15550) in our plugin server metric code
+- Paul [upgraded Celery](https://github.com/PostHog/posthog/pull/15540) to a newer, better version
+- Paul also [added a delay to S3 flushing](https://github.com/PostHog/posthog/pull/15470), to avoid overlaps
+- Neil [fixed some Sentry issues](https://github.com/PostHog/posthog/pull/15450) arising from cohorts and breakdowns
+
+Want to keep a close eye on every PR we file? [Check the PostHog repo](https://github.com/PostHog/posthog)!
+
+#### 
+
+## May 12, 2023
+
+#### Idle session detection
+We've improved the detection logic for session replays so that we'll no longer capture sessions if the user is idle for 300 seconds (5 minutes) or longer. The idea is that you'll capture fewer sessions where the user isn't actually doing anything, though it _may_ also mean we trigger resets of the session more often. 
+
+Basically, it's a balancing act and [we'd welcome your feedback about it](http://app.posthog.com/home#supportModal) if you start to notice sessions ending prematurely, or a substantial increase in the number of recordings. 
+
+#### Funnels by sessions
+![funnels by sessions](../images/blog/array/funnels_session.mp4)
+
+We've added a new way to aggregate the results of a funnel: by session. One possible use-case for this would be comparing funnel performance when aggregated by unique users and sessions, to understand if your users generally require multiple sessions to convert, or to get a feel for how 'sticky' your content is. 
 
 ## May 5, 2023
 

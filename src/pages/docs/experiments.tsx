@@ -48,6 +48,30 @@ type ExperimentsProps = {
     }
 }
 
+export const Intro = ({ image = true }) => (
+    <>
+        {image && (
+            <StaticImage
+                alt=""
+                placeholder="none"
+                quality={100}
+                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
+                src="../../components/Home/Slider/images/ab-testing-hog.png"
+            />
+        )}
+        <h1 className="text-4xl mb-2 mt-6">Experiments</h1>
+        <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tighttext-lg text-gray">
+            Test changes in production with an experimentation suite that makes it easy to get the results you want.
+        </h3>
+
+        {/* Quick links */}
+        <section className="my-6">
+            <h3 className="mb-6 mt-0">Pages</h3>
+            <LinkGrid links={quickLinks} />
+        </section>
+    </>
+)
+
 const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
     const { tutorials } = data
 
@@ -56,25 +80,7 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
             <SEO title="Experiments - Docs - PostHog" />
 
             <PostLayout title={'Experiments'} menu={docs} hideSurvey hideSidebar>
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
-                    src="../../components/Home/Slider/images/ab-testing-hog.png"
-                />
-                <h1 className="text-4xl mb-2 mt-6">Experiments</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tighttext-lg text-gray">
-                    Test changes in production with an experimentation suite that makes it easy to get the results you
-                    want.
-                </h3>
-
-                {/* Quick links */}
-                <section className="my-6">
-                    <h3 className="mb-6 mt-0">Pages</h3>
-                    <LinkGrid links={quickLinks} />
-                </section>
-
+                <Intro />
                 {/* Get started section */}
                 <section className="py-6 sm:py-12">
                     <GettingStarted

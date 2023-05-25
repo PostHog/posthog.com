@@ -6,11 +6,13 @@ import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { CompensationCalculator } from './components/CompensationCalculator'
+import { ContentViewer } from './components/ContentViewer'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
 import { LPCTA } from './components/LPCTA'
+import { Label } from './components/Label'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
@@ -29,11 +31,13 @@ export const shortcodes = {
     CallToAction,
     Caption,
     CompensationCalculator,
+    ContentViewer,
     FeatureAvailability,
     GDPRForm,
     HiddenSection,
     HubSpotForm,
     LPCTA,
+    Label,
     NewsletterTutorial,
     OverflowXSection,
     Quote,

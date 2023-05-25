@@ -4,6 +4,7 @@ import Link from 'components/Link'
 import { QuestionData, StrapiResult } from 'lib/strapi'
 import { Check2 } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
+import Markdown from 'components/Squeak/components/Markdown'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
@@ -21,6 +22,7 @@ type QuestionsTableProps = {
     hasMore?: boolean
     showAuthor?: boolean
     showTopic?: boolean
+    showBody?: boolean
     sortBy?: 'newest' | 'activity' | 'popular'
 }
 
@@ -33,6 +35,8 @@ export const QuestionsTable = ({
     currentPage,
     hasMore,
     showTopic,
+    showBody,
+    showAuthor = true,
     sortBy,
 }: QuestionsTableProps) => {
     return (
@@ -55,6 +59,7 @@ export const QuestionsTable = ({
                                   resolved,
                                   topics,
                                   activeAt,
+                                  body,
                               },
                           } = question
 
@@ -69,8 +74,8 @@ export const QuestionsTable = ({
                                       className={`${className} block py-2 pl-2 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
                                   >
                                       <div className="grid grid-cols-12 items-center">
-                                          <div className="col-span-12 xl:col-span-7 2xl:col-span-8 flex items-center space-x-4">
-                                              <div className="w-4 text-green">
+                                          <div className="col-span-12 md:col-span-7 2xl:col-span-8 flex items-center space-x-4">
+                                              <div className="w-4 text-green flex-shrink-0">
                                                   {resolved && (
                                                       <Tooltip content="Resolved">
                                                           <span className="relative">
@@ -91,19 +96,24 @@ export const QuestionsTable = ({
                                                               </div>
                                                           </div>
 
-                                                          <div className="xl:hidden text-primary dark:text-primary-dark text-sm font-medium opacity-60 line-clamp-2">
+                                                          <div className="md:hidden text-primary dark:text-primary-dark text-sm font-medium opacity-60 line-clamp-2">
                                                               {dayjs(
                                                                   sortBy === 'activity' ? activeAt : createdAt
                                                               ).fromNow()}
                                                           </div>
                                                       </div>
                                                   )}
+                                                  {showBody && (
+                                                      <div className="text-black items-baseline flex flex-1 min-w-0 whitespace-nowrap overflow-hidden dark:text-white question-table-body-container">
+                                                          <Markdown allowedElements={['p']}>{body}</Markdown>
+                                                      </div>
+                                                  )}
                                               </div>
                                           </div>
-                                          <div className="hidden xl:block xl:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
+                                          <div className="hidden md:block md:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                               {numReplies}
                                           </div>
-                                          <div className="hidden xl:block xl:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
+                                          <div className="hidden md:block md:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                               <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-2">
                                                   {dayjs(sortBy === 'activity' ? activeAt : createdAt).fromNow()} by{' '}
                                                   {profile.data?.attributes?.firstName}{' '}

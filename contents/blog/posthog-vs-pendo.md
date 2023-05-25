@@ -216,7 +216,7 @@ This difference is reflected in all levels of the product, but especially in pro
 
 - **SQL access:** While both PostHog and Pendo have ready-made insights and visualization types, only PostHog gives you unlimited access to your data by [writing your own SQL queries](/docs/product-analytics/hogql). This is ideal for data scientists, product managers, and engineers who want to perform advanced analysis on user data.
 
-<h4 className="mb-0">Discover what's possible with <span className="text-blue">product analytics</span></h4>
+<h4 className="mb-4">Discover what's possible with <span className="text-blue">product analytics</span></h4>
 <TutorialsSlider slugs={[
   "/tutorials/churn-rate",
   "/tutorials/funnels",
@@ -234,6 +234,8 @@ PostHog has ready-made apps for displaying pop-ups and tooltips, but the true po
 
 Below are some of the most popular ready-made apps which facilitate in-app messages in PostHog:
 
+- [NPS Survey App](/apps/nps-survey-app): Asks users how likely they are to recommend your product, on a scale of 0-10. Using this information, you can compute your Net Promoter Score. 
+
 - [Feedback Widget](/apps/feedback-widget): Displays a prompt with a text input, enabling users to write feedback messages that you can optionally sync to Slack, Zendesk or other tools using Zapier. 
 
 - [Notification Bar](/apps/notification-bar): Displays a customizable banner in your product, suitable for alerting users to important messages — like discounts, outages, or announcements.
@@ -242,7 +244,7 @@ Below are some of the most popular ready-made apps which facilitate in-app messa
 
 - [Pineapple Mode](/apps/pineapple-mode): Rains pineapples all over your product, advancing the sense of chaos and entropy in the world. 🍍
 
-<h4 className="mb-0">Discover what's possible with <span className="text-blue">PostHog apps</span></h4>
+<h4 className="mb-4">Discover what's possible with <span className="text-blue">PostHog apps</span></h4>
 <TutorialsSlider slugs={[
   "/tutorials/build-site-app",
   "/tutorials/feedback-interviews-site-apps",

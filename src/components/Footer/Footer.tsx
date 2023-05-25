@@ -80,7 +80,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Webhooks',
-                url: '/docs/integrate/webhooks/message-formatting',
+                url: '/docs/webhooks',
             },
         ],
     },

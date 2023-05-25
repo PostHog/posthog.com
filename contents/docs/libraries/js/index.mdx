@@ -28,44 +28,12 @@ import JSInstall from './\_snippets/install.mdx'
 
 ### Autocapture
 
-import JSAutoCapture from './\_snippets/autocapture.mdx'
-import JSCaptureIgnoreElements from './\_snippets/capture-ignore-elements.mdx'
+When you call `posthog.init` the PostHog JS library begins automatically capturing user events:
 
-<JSAutoCapture />
+- **pageviews**, including the URL
+- **autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
 
-#### Tuning autocapture
-
-You can configure autocapture using allowlists. If an array is passed for an allowlist, autocapture events will only be sent for elements matching at least one of the items in the array.
-
-For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture` you can do:
-
-```js
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    autocapture: {
-        event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
-        url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
-        element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
-        css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
-    },
-})
-```
-
-The allowlists only filter autocapture events, they won't affect the data collected by session recordings.
-
-<JSCaptureIgnoreElements />
-
-Alternatively you can disable autocapture completely by setting `autocapture: false` in the config.
-
-Disabling autocapture **will not disable session recording**. You can disable session recording using `disable_session_recording` or by turning it off in your project's settings.
-
-#### Autocapture on input elements
-
-For security reasons, PostHog is very conservative regarding `input` tags to prevent passwords or other sensitive data from being collected.
-
-Specifically, PostHog autocapture will grab only the `name`, `id`, and `class` attributes from `input` tags.
-
-Sometimes less data might be collected than expected. If you need to collect more data from inputs, you should look into [Custom events and Actions](/docs/user-guides/actions).
+Autocapture tracks a significant amount of user behavior without needing to instrument event capture. You can learn more about autocapture and how to configure it in our [autocapture docs](/docs/data/autocapture).
 
 ### Track across marketing website &amp; app
 
@@ -411,6 +379,21 @@ posthog.init('<ph_project_api_key>', {
 ```
 
 > **Note:** Passing in a distinctID to bootstrap replaces any existing IDs, which means you may fail to connect any old anonymous user events with the logged in person, if your logic calls identify in the frontend immediately on login. In this case, you can omit passing in the distinctID.
+
+#### Early Access Feature Management
+
+Early access features give you the option to release feature flags that can be controlled by your users. [More information](/docs/feature-flags/early-access-feature-management)
+
+```js
+posthog.getEarlyAccessFeatures((previewItemData) => {
+    // do something with early access feature
+})
+```
+
+```js
+posthog.updateEarlyAccessFeatureEnrollment(flagKey, 'true')
+```
+
 
 ### Group analytics
 

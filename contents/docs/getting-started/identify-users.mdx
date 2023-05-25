@@ -73,7 +73,7 @@ posthog.identify('my_user_12345', {
 ```
 
 You'll usually want to call `identify` every time your application initially loads, or directly after log in if a user first landed on your website while logged out.
-Typically you'll want this to be the first call you make to PostHog - before sending any events with `capture` - so making the call _as soon as you can determine the `distinct_id` of the user_ is best.
+Typically you'll want this to be the first call you make to PostHog - before sending any events with `capture` – so making the call _as soon as you can determine the `distinct_id` of the user_ is best.
 
 There's no gotcha's with calling `identify` multiple times for the same user **as long as you continue to pass the same `distinct_id`**, so feel free to call it multiple times throughout a session.
 
@@ -132,8 +132,9 @@ Identifying users is a powerful feature, but it also has the potential to create
 
 An important mistake to avoid is using non-unique distinct IDs to identify users. Two common ways in which this can happen are:
 
-- Your logic for generating IDs does not generate sufficiently strong IDs and you can end up with a clash where 2 users have the same ID
-- There's a bug, typo, or mistake in your code leading to most or all users being identified with generic IDs like `null`, `true`, or `distinctId`
+- Your logic for generating IDs does not generate sufficiently strong IDs and you can end up with a clash where 2 users have the same ID.
+
+- There's a bug, typo, or mistake in your code leading to most or all users being identified with generic IDs like `null`, `true`, or `distinctId`.
 
 All of the above scenarios are highly problematic, as they will cause distinct users to be merged together in PostHog.
 
@@ -168,15 +169,11 @@ If we encounter an `$identify` or `$create_alias` event with one of the above pr
 - We refuse to merge users and an ingestion warning will be logged (see [ingestion warnings](/manual/data-management#ingestion-warnings) for more details).
 - The event will be only be tied to user behind the first passed `distinct_id`
 
-## Filtering internal users
-
-If you want to avoid tracking users within your organization, [you can do this](/tutorials/filter-internal-users) within your project's settings.
-
 ## Signup flow with frontend and backend
 
-To use PostHog effectively we want all of the events tied to the same user to be tied to the same `person_id` (see [consequences of merging users](/docs/how-posthog-works/ingestion-pipeline#consequences-of-merging)). 
+To use PostHog effectively, we want all of the events tied to the same user to be tied to the same `person_id`.
 
-For when a user signs up to your service you may trigger some events on the frontend and the backend. The key is to make sure that **both frontend and backend use the same distinctId at least once.**
+You may trigger some events on the frontend and the backend when a user signs up to your service. The key is to make sure that **both frontend and backend use the same** `distinctId` **at least once.**
 
 ### Example login flow
 
@@ -211,7 +208,9 @@ posthog.alias({
 
 There's a few things to keep in mind when using a sign-up flow that involves both the frontend and backend: 
 1. We have an event buffer to delay creating persons from backend events (see [all about the event buffer](/docs/how-posthog-works/ingestion-pipeline#all-about-the-event-buffer)) that will help.
-2. The event buffer has a limited time window, so the (identify or alias) event that merges the frontend and backend user should come in within that window (60s)
+
+2. The event buffer has a limited time window, so the (identify or alias) event that merges the frontend and backend user should come in within that window (60s).
+
 3. We don't buffer `$identify` events, so from the backend take care to not send those for setting properties before the users are merged. For setting user properties you can use any custom event, e.g. 
 ```python
 posthog.capture(

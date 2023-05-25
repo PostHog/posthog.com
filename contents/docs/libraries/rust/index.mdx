@@ -8,7 +8,7 @@ features:
     autoCapture: false
     sessionRecording: false
     featureFlags: false
-    groupAnalytics: false
+    groupAnalytics: true
 ---
 
 > **Warning:** This crate is still under development and is not recommended for production use yet.
@@ -34,7 +34,7 @@ let client = posthog_rs::client(env!("POSTHOG_API_KEY"));
 
 ### Capturing events
 
-Currently, the only functionality this library supports is sending events, which can be done using the `capture` and `cature_batch` methods.
+Currently, the only functionality this library supports is sending events, which can be done using the `capture` and `capture_batch` methods. User properties and groups can both be set as props on events.
 
 ```rust
 let mut event = Event::new("<event_name>", "<distinct_id>");

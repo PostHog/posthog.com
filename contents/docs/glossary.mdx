@@ -32,7 +32,7 @@ In PostHog, the output of one app can impact the actions of the next app to crea
 Annual recurring revenue - basically how much revenue you expect to make each year.
 
 #### Autocapture
-The ability to capture user behavior (events, pageviews) automatically, without having to implement dedicated instrumentation. PostHog enables you to autocapture data by using out [JavaScript library or snippet](/docs/integrate/client/js#autocapture).
+The ability to capture user behavior (events, pageviews) automatically, without having to implement dedicated instrumentation. PostHog enables you to [autocapture](/docs/data/autocapture) data by using our [JavaScript library or snippet](/docs/libraries/js#autocapture).
 
 #### A/B test
 A/B tests are when you test two versions of an idea by serving each version to portion of your userbase, so you can monitor which performs best. If you're using more than two versions, it's a [multivariate test](/manual/glossary#multivariate-test). PostHog can do both, via [Experiments](/manual/experimentation). 
@@ -214,6 +214,8 @@ A single metric or objective which guides your decision making. Find out more ab
 
 #### NPS 
 Net Promoter Score. A metric for understanding customer satisfaction and loyalty, based on asking users how likely they are to recommend your product, on a scale of 0 (not likely) to 10 (certainly likely). Users are then grouped into buckets based on their score - those who score 9-10 are labelled as Promoters, while those who score 0 to 6 are labelled as Detractors. Everyone else is labelled as Passive. By subtracting the percentage of Detractors from the percentage of Promoters, you determine an NPS score between -100 (very poor) and +100 (excellent).
+
+You can use [PostHog's NPS survey app](/apps/nps_survey_app) to collect your NPS scores. 
 
 ## O
 

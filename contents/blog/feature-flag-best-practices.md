@@ -1,6 +1,6 @@
 ---
 date: 2023-01-05
-title: "Master Feature Flags: Best practice, tips and examples"
+title: "Feature flag best practices and tips (with examples)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
