@@ -50,8 +50,8 @@ Now you can get a feel for your overall event volume and narrow down to the corr
 
 We previously introduced [this form](http://app.posthog.com/home#supportModal) within the app to make it easier to submit bug reports, feedback, and support tickets. Responses are then routed to the relevant small team, so we can look into them. But what if your issue is that you can't login to the app in the first place? Well, you _could_ use [the PostHog forum](####the-posthog-forum) – or you could use this new button to report it directly!
 
-#### Session ~recordings~ replays
-A small but consequential change: we've retitled the Session Recording feature to be called Session Replay instead. Replay seems to be a more standard industry term but also, as ~recordings~ replays have grown to include [other](#performance-monitoring-in-session-recordings) [new](#experimental-dom-explorer-mode) [features](#idle-session-detection), replay has started to feel like a better name anyway.
+#### Session recordings are now session replays
+A small but consequential change: we've retitled the Session Recording feature to be called Session Replay instead. Replay seems to be a more standard industry term but also, as replays have grown to include [other](#performance-monitoring-in-session-recordings) [new](#experimental-dom-explorer-mode) [features](#idle-session-detection), replay has started to feel like a better name anyway.
 
 Now, we enter the next stage of the debate: Should it be _session replay_, or _session replays_? The former, obviously.
 
