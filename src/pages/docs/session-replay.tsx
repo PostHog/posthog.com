@@ -22,6 +22,11 @@ export const quickLinks = [
         description: 'Settings for customizing session replay capture.',
     },
     {
+        name: 'Sharing and emedding',
+        to: '/docs/session-replay/sharing',
+        description: 'Share and embed session replays in your product.',
+    },
+    {
         name: 'Data retention',
         to: '/docs/session-replay/data-retention',
         description: 'Adjust how long session replays are stored when self-hosting.',
