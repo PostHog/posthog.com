@@ -1,5 +1,5 @@
 ---
-date: 2023-05-19
+date: 2023-05-26
 title: "The PostHog Changelog"
 rootPage: /blog
 sidebar: Blog
@@ -18,6 +18,54 @@ featuredImageType: full
 Every Friday we update this page with the latest new features, fixes, and updates on PostHog Cloud in the last seven days. We also feature notable additions to the blog and docs. 
 
 > Some new features you read about below may still be in beta, behind a feature flag, or only available to paying users. Want to see which betas are currently available? [Check the roadmap](/roadmap). We also [welcome your feedback](http://app.posthog.com/home#supportModal) on all new features! 
+
+## May 26, 2023
+
+#### HouseWatch: an open source tool for managing ClickHouse clusters
+![housewatch by posthog](../images/blog/array/housewatch_overview.png)
+
+Another project from [our recent hackathon in Aruba](/blog/aruba-hackathon), HouseWatch is now available to the public under an open source MIT license. We built HouseWatch to help us monitor and manage the large ClickHouse clusters which power PostHog. You can use it to...
+
+- Get an overview of cluster load and performance
+- Drill down into your queries and understand the load they put on your cluster
+- Search through logs and errors
+- Monitor and kill running queries with the click of a button
+- Get stats on your disk usage per node, and understand how much disk space tables, columns, and parts take up
+- Run your own queries straight from the interface to further dig into performance and cluster issues
+- Setup operations to run in the background with automatic rollbacks for failures
+
+And that's just for starters! Our ultimate vision is that HouseWatch can act as a pganalyze for the ClickHouse ecosystem, while also providing tooling for taking actions on insights derived from the analysis.
+
+> **HouseWatch is open-source, free and in beta.** Check [the GitHub repo for deployment instructions](https://github.com/PostHog/HouseWatch), leave us a star if you like what we're doing!
+
+#### Analyse all the events
+![everything everywhere all at once](../images/blog/array/all_events.png)
+
+Questions, like arrows, function best when they are aimed at a specific target. But sometimes you just want to let fly and analyze everything all at once with reckless abandon. So, we've added and 'All events' option to the insight builder to help you do exactly that. 
+
+Now you can get a feel for your overall event volume and narrow down to the correct events from there, rather than having to choose a target from the start.
+
+#### Report a login issue
+![login issues posthog](../images/blog/array/report_login.mp4)
+
+We previously introduced [this form](http://app.posthog.com/home#supportModal) within the app to make it easier to submit bug reports, feedback, and support tickets. Responses are then routed to the relevant small team, so we can look into them. But what if your issue is that you can't login to the app in the first place? Well, you _could_ use [the PostHog forum](####the-posthog-forum) – or you could use this new button to report it directly!
+
+#### Session recordings are now session replays
+A small but consequential change: we've retitled the Session Recording feature to be called Session Replay instead. Replay seems to be a more standard industry term but also, as replays have grown to include [other](#performance-monitoring-in-session-recordings) [new](#experimental-dom-explorer-mode) [features](#idle-session-detection), replay has started to feel like a better name anyway.
+
+Now, we enter the next stage of the debate: Should it be _session replay_, or _session replays_? The former, obviously.
+
+#### Bugfixes galore (again)
+It's been another heavy week of bugfixes for the team, so here are some of the highlights!
+
+- Joe has made [several design tweaks to the NPS app](/apps/nps-survey-app)
+- Raquel has [improved the billing display for users with discounts](https://github.com/PostHog/posthog/pull/15654)
+- Neil fixed some [breadcrumb issues](https://github.com/PostHog/posthog/pull/15613) with [the new early access beta](#beta-early-access-feature-management)
+- Michael made some [UI tweaks for the instance settings page](https://github.com/PostHog/posthog/pull/15645)
+
+Want to keep a close eye on every PR we file? [Check the PostHog repo](https://github.com/PostHog/posthog)!
+
+> **Curious what else we're working on?** Check [the roadmap for more info](/roadmap)!
 
 ## May 19, 2023
 
