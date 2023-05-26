@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Dashboard templates are a way to simultaneously showcase the use cases of PostHog and make it easier for users to get started. You can find a full list of them on the [templates page](/templates).
+Dashboard templates simultaneously showcase the use cases of PostHog and make it easier for users to get started. You can find a full list of them on the [templates page](/templates).
 
 ## Creating a new dashboard template
 
