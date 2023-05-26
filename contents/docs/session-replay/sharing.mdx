@@ -1,0 +1,50 @@
+---
+title: Sharing or embedding recordings
+---
+
+Recordings are typically consumed from the `Session Replay` part of PostHog but in some cases you may want to share specific Recordings with people outside of your PostHog Organization. 
+
+
+<iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://app.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
+
+> Above is an embedded recording of posthog.com ...in posthog.com  - very meta.
+
+
+## Sharing via the UI
+
+When viewing any recording you can press `Share` and from their you can configure the recording for public 
+
+
+## Sharing via the API
+
+A more advanced use case may be automating this process, for example if you want to automatically embed particular recordings in some sort of support tool whenever a user reports a bug.
+
+1. Retrieve the `$session_id` of the recording you want to share.
+
+```js
+// Frontend - where the recording is taking place
+const sessionID = posthog.get_session_id()
+// You need to handle sending this to your backend
+sendToSupportTool(sessionID)
+```
+
+
+2. Once you have the `session_id`, in your backend you can use your [Personal API Key](/docs/api#personal-api-keys-recommended) to enable that recording for sharing
+
+```node
+const projectID = 123 // Found in Project Settings
+const sessionID = '{FROM_STEP_1}'
+const url = `https://app.posthog.com/api/projects/${projectID}/session_recordings/${sessionID}/sharing?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`
+
+const response = axios.post(url, {
+    enabled: true,
+})
+
+
+
+// Frontend - where the recording is taking place
+const sessionID = posthog.get_session_id()
+// You need to handle sending this to your backend
+sendToSupportTool(sessionID)
+```
+
