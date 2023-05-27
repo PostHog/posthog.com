@@ -1,4 +1,6 @@
 import { GatsbyNode } from 'gatsby'
+import { buildGatsbyImageDataObject } from '@imgix/gatsby/dist/pluginHelpers'
+import path from 'path'
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
     const { createTypes } = actions
@@ -180,6 +182,82 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       number: Int
     }
   `)
+
+    const imageFields = ['featuredImage']
+    const frontmatterFields = schema.buildObjectType({
+        name: 'Frontmatter',
+        interfaces: ['Node'],
+        fields: Object.fromEntries(imageFields.map((field) => [field, { type: 'ImgixAsset' }])),
+    })
+    const imageTypes = imageFields.map((field) => {
+        return schema.buildObjectType({
+            name: 'ImgixAsset',
+            interfaces: ['Node'],
+            fields: {
+                publicURL: {
+                    type: 'String',
+                    resolve: async (source, _args, context, _info) => {
+                        const relativeImagePath = source[field]
+                        const { relativePath } = await context.nodeModel.findRootNodeAncestor(source)
+                        const imagePath = `https://raw.githubusercontent.com/PostHog/posthog.com/master/contents/${path.join(
+                            path.dirname(relativePath),
+                            relativeImagePath
+                        )}`
+                        return `https://${process.env.IMIGIX_URL}/${imagePath}?s=${process.env.IMGIX_TOKEN}`
+                    },
+                },
+                gatsbyImageData: {
+                    type: 'GatsbyImageData',
+                    resolve: async (source, _args, context, _info) => {
+                        const relativeImagePath = source[field]
+                        const { relativePath } = await context.nodeModel.findRootNodeAncestor(source)
+                        const imagePath = `https://raw.githubusercontent.com/PostHog/posthog.com/master/contents/${path.join(
+                            path.dirname(relativePath),
+                            relativeImagePath
+                        )}`
+                        return buildGatsbyImageDataObject({
+                            // Image url, required. See note in section 'Note about url and imgixClientOptions' about what to do based on what kind of url this is
+                            url: imagePath,
+                            // Any extra configuration to pass to new ImgixClient from @imgix/js-core (see [here](https://github.com/imgix/js-core#configuration) for more information)
+                            imgixClientOptions: {
+                                domain: process.env.IMIGIX_URL,
+                                secureURLToken: process.env.IMGIX_TOKEN,
+                            },
+                            // Mimicking GraphQL field args
+                            resolverArgs: {
+                                // The gatsby-plugin-image layout parameter
+                                layout: 'fullWidth',
+                                // Imgix params, optional
+                                imgixParams: {},
+                                // Imgix params for the placeholder image, optional
+                                placeholderImgixParams: {},
+                                // The width or max-width (depending on the layout setting) of the image in px, optional.
+                                width: 100,
+                                // The height or max-height (depending on the layout setting) of the image in px, optional.
+                                height: 200,
+                                // The aspect ratio of the srcsets to generate, optional
+                                aspectRatio: 2,
+                                // Custom srcset breakpoints to use, optional
+                                breakpoints: [100, 200],
+                                // Custom 'sizes' attribute to set, optional
+                                sizes: '100vw',
+                                // Custom srcset max width, optional
+                                srcSetMaxWidth: 8000,
+                                // Custom srcset min width, optional
+                                srcSetMinWidth: 100,
+                                // The factor used to scale the srcsets up, optional.
+                                // E.g. if srcsetMinWidth is 100, then the srcsets are generated as follows
+                                // while (width < maxWidth) nextSrcSet = prevSrcSet * (1 + widthTolerance)
+                                widthTolerance: 0.08,
+                            },
+                            // source width and of the uncropped image
+                            dimensions: { width: 5000, height: 3000 },
+                        })
+                    },
+                },
+            },
+        })
+    })
     createTypes([
         schema.buildObjectType({
             name: 'Mdx',
@@ -191,5 +269,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                 },
             },
         }),
+        ...imageTypes,
+        frontmatterFields,
     ])
 }
