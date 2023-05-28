@@ -1,6 +1,7 @@
 import { GatsbyNode } from 'gatsby'
 import { buildGatsbyImageDataObject } from '@imgix/gatsby/dist/pluginHelpers'
 import path from 'path'
+import sizeOf from 'image-size'
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
     const { createTypes } = actions
@@ -183,80 +184,109 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
   `)
 
-    const imageFields = ['featuredImage']
+    const getImageData = async (source, context, field) => {
+        try {
+            const { relativePath, absolutePath } = await context.nodeModel.findRootNodeAncestor(source)
+            const relativeImagePath = source[field]
+            return {
+                relativeFilePath: relativePath,
+                relativeImagePath,
+                absoluteImagePath: path.join(path.dirname(absolutePath), relativeImagePath),
+            }
+        } catch (err) {
+            return null
+        }
+    }
+
+    const imageFields = ['featuredImage', 'headshot', 'thumbnail', 'logo', 'ogImage']
     const frontmatterFields = schema.buildObjectType({
         name: 'Frontmatter',
         interfaces: ['Node'],
-        fields: Object.fromEntries(imageFields.map((field) => [field, { type: 'ImgixAsset' }])),
+        fields: {
+            ...Object.fromEntries(
+                imageFields.map((field) => [
+                    field,
+                    {
+                        type: 'ImgixAsset',
+                        resolve: (source, _args, context) => getImageData(source, context, field),
+                    },
+                ])
+            ),
+            images: {
+                type: '[ImgixAsset]',
+                resolve: async (source, _args, context) => {
+                    try {
+                        const { relativePath, absolutePath } = await context.nodeModel.findRootNodeAncestor(source)
+                        const relativeImagePaths = source.images
+                        return relativeImagePaths.map((relativeImagePath) => ({
+                            relativeFilePath: relativePath,
+                            relativeImagePath,
+                            absoluteImagePath: path.join(path.dirname(absolutePath), relativeImagePath),
+                        }))
+                    } catch (err) {
+                        return null
+                    }
+                },
+            },
+        },
     })
-    const imageTypes = imageFields.map((field) => {
-        return schema.buildObjectType({
-            name: 'ImgixAsset',
-            interfaces: ['Node'],
-            fields: {
-                publicURL: {
-                    type: 'String',
-                    resolve: async (source, _args, context, _info) => {
-                        const relativeImagePath = source[field]
-                        const { relativePath } = await context.nodeModel.findRootNodeAncestor(source)
+    const imgixAsset = schema.buildObjectType({
+        name: 'ImgixAsset',
+        fields: {
+            absolutePath: {
+                type: 'String',
+                resolve: async (source) => source?.absoluteImagePath,
+            },
+            publicURL: {
+                type: 'String',
+                resolve: async (source, _args, context, _info) => {
+                    try {
+                        const { relativeFilePath, relativeImagePath } = source
+                        if (!relativeFilePath || !relativeImagePath) return null
                         const imagePath = `https://raw.githubusercontent.com/PostHog/posthog.com/master/contents/${path.join(
-                            path.dirname(relativePath),
+                            path.dirname(relativeFilePath),
                             relativeImagePath
                         )}`
                         return `https://${process.env.IMIGIX_URL}/${imagePath}?s=${process.env.IMGIX_TOKEN}`
-                    },
+                    } catch (err) {
+                        return null
+                    }
                 },
-                gatsbyImageData: {
-                    type: 'GatsbyImageData',
-                    resolve: async (source, _args, context, _info) => {
-                        const relativeImagePath = source[field]
-                        const { relativePath } = await context.nodeModel.findRootNodeAncestor(source)
-                        const imagePath = `https://raw.githubusercontent.com/PostHog/posthog.com/master/contents/${path.join(
-                            path.dirname(relativePath),
-                            relativeImagePath
-                        )}`
+            },
+            gatsbyImageData: {
+                type: 'GatsbyImageData',
+                args: {
+                    width: 'Int',
+                    height: 'Int',
+                },
+                resolve: async (source, args, context, info) => {
+                    const { width, height } = args
+                    try {
+                        const { relativeFilePath, relativeImagePath } = source
+                        if (!relativeFilePath || !relativeImagePath) return null
+                        const imagePath = `contents/${path.join(path.dirname(relativeFilePath), relativeImagePath)}`
+                        const imageURL = `https://raw.githubusercontent.com/PostHog/posthog.com/master/${imagePath}`
+                        const dimensions = sizeOf(imagePath)
                         return buildGatsbyImageDataObject({
-                            // Image url, required. See note in section 'Note about url and imgixClientOptions' about what to do based on what kind of url this is
-                            url: imagePath,
-                            // Any extra configuration to pass to new ImgixClient from @imgix/js-core (see [here](https://github.com/imgix/js-core#configuration) for more information)
+                            url: imageURL,
                             imgixClientOptions: {
                                 domain: process.env.IMIGIX_URL,
                                 secureURLToken: process.env.IMGIX_TOKEN,
                             },
-                            // Mimicking GraphQL field args
                             resolverArgs: {
-                                // The gatsby-plugin-image layout parameter
+                                breakpoints: [750, 1080, 1366, 1920],
                                 layout: 'fullWidth',
-                                // Imgix params, optional
-                                imgixParams: {},
-                                // Imgix params for the placeholder image, optional
-                                placeholderImgixParams: {},
-                                // The width or max-width (depending on the layout setting) of the image in px, optional.
-                                width: 100,
-                                // The height or max-height (depending on the layout setting) of the image in px, optional.
-                                height: 200,
-                                // The aspect ratio of the srcsets to generate, optional
-                                aspectRatio: 2,
-                                // Custom srcset breakpoints to use, optional
-                                breakpoints: [100, 200],
-                                // Custom 'sizes' attribute to set, optional
-                                sizes: '100vw',
-                                // Custom srcset max width, optional
-                                srcSetMaxWidth: 8000,
-                                // Custom srcset min width, optional
-                                srcSetMinWidth: 100,
-                                // The factor used to scale the srcsets up, optional.
-                                // E.g. if srcsetMinWidth is 100, then the srcsets are generated as follows
-                                // while (width < maxWidth) nextSrcSet = prevSrcSet * (1 + widthTolerance)
-                                widthTolerance: 0.08,
+                                ...(width ? { width } : null),
+                                ...(height ? { height } : null),
                             },
-                            // source width and of the uncropped image
-                            dimensions: { width: 5000, height: 3000 },
+                            dimensions: { width: dimensions.width, height: dimensions.height },
                         })
-                    },
+                    } catch (err) {
+                        return null
+                    }
                 },
             },
-        })
+        },
     })
     createTypes([
         schema.buildObjectType({
@@ -269,7 +299,47 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                 },
             },
         }),
-        ...imageTypes,
+        imgixAsset,
         frontmatterFields,
+        schema.buildObjectType({
+            name: 'MdxFrontmatterProductHero',
+            interfaces: ['Node'],
+            fields: {
+                image: {
+                    type: 'ImgixAsset',
+                    resolve: (source, _args, context) => getImageData(source, context, 'image'),
+                },
+            },
+        }),
+        schema.buildObjectType({
+            name: 'MdxFrontmatterProductMainCTA',
+            interfaces: ['Node'],
+            fields: {
+                image: {
+                    type: 'ImgixAsset',
+                    resolve: (source, _args, context) => getImageData(source, context, 'image'),
+                },
+            },
+        }),
+        schema.buildObjectType({
+            name: 'MdxFrontmatterProductTestimonial',
+            interfaces: ['Node'],
+            fields: {
+                image: {
+                    type: 'ImgixAsset',
+                    resolve: (source, _args, context) => getImageData(source, context, 'image'),
+                },
+            },
+        }),
+        schema.buildObjectType({
+            name: 'MdxFrontmatterProductSections',
+            interfaces: ['Node'],
+            fields: {
+                image: {
+                    type: 'ImgixAsset',
+                    resolve: (source, _args, context) => getImageData(source, context, 'image'),
+                },
+            },
+        }),
     ])
 }

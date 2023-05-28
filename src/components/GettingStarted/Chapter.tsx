@@ -15,9 +15,7 @@ const query = graphql`
                     title
                     description
                     featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
-                        }
+                        gatsbyImageData
                     }
                 }
                 headings {

@@ -267,10 +267,7 @@ export const query = graphql`
                 country
                 jobTitle
                 headshot {
-                    id
-                    childImageSharp {
-                        gatsbyImageData
-                    }
+                    gatsbyImageData
                 }
             }
         }
@@ -283,10 +280,7 @@ export const query = graphql`
                     jobTitle
                     pineappleOnPizza
                     headshot {
-                        id
-                        childImageSharp {
-                            gatsbyImageData
-                        }
+                        gatsbyImageData
                     }
                 }
             }

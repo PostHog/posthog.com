@@ -212,9 +212,7 @@ export const BlogFragment = graphql`
             category
             featuredImage {
                 publicURL
-                childImageSharp {
-                    gatsbyImageData(width: 480, height: 270)
-                }
+                gatsbyImageData(width: 480, height: 270)
             }
             authors: authorData {
                 handle

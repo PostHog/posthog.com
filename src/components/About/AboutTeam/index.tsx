@@ -102,9 +102,7 @@ const query = graphql`
                     country
                     name
                     headshot {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
-                        }
+                        gatsbyImageData
                     }
                 }
             }

@@ -58,9 +58,7 @@ const query = graphql`
             nodes {
                 frontmatter {
                     headshot {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
+                        gatsbyImageData
                     }
                     team
                     jobTitle

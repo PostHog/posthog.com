@@ -128,10 +128,7 @@ const query = graphql`
                     date(formatString: "MMMM DD, YYYY")
                     title
                     featuredImage {
-                        id
-                        childImageSharp {
-                            gatsbyImageData(width: 350)
-                        }
+                        gatsbyImageData(width: 350)
                     }
                 }
             }

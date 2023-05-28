@@ -85,6 +85,7 @@
         "git-url-parse": "^11.6.0",
         "github-slugger": "^1.4.0",
         "gravatar": "^1.8.2",
+        "image-size": "^1.0.2",
         "instantsearch.js": "^4.49.1",
         "is-plain-object": "^5.0.0",
         "jsdom": "^20.0.0",

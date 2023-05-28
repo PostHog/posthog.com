@@ -65,6 +65,7 @@ module.exports = {
             options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
+                ignore: [`**/*\.{png,jpg,jpeg,gif}`],
             },
         },
         {
@@ -76,7 +77,6 @@ module.exports = {
                     node.url.includes('https://raw.githubusercontent.com/'),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
-                    `gatsby-remark-static-images`,
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                     {
                         resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),

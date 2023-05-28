@@ -68,7 +68,6 @@ const query = graphql`
                     description
                     documentation
                     thumbnail {
-                        id
                         publicURL
                     }
                 }

@@ -24,7 +24,7 @@ export default function CTA({ title, subtitle, image, mainCTA, pricingCTA }: ICT
                     </div>
                 </div>
                 {gatsbyImage && (
-                    <div className="md:max-w-[400px]">
+                    <div className="md:max-w-[400px] w-full">
                         <GatsbyImage alt={title} image={gatsbyImage} />
                     </div>
                 )}

@@ -184,9 +184,7 @@ export const query = graphql`
                 featuredVideo
                 featuredImage {
                     publicURL
-                    childImageSharp {
-                        gatsbyImageData(placeholder: NONE)
-                    }
+                    gatsbyImageData
                 }
             }
             parent {

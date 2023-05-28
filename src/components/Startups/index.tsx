@@ -48,9 +48,7 @@ export default function Startups() {
                 frontmatter {
                     title
                     featuredImage {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
+                        gatsbyImageData
                     }
                 }
                 fields {

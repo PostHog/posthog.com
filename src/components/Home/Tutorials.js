@@ -51,9 +51,7 @@ const query = graphql`
                 frontmatter {
                     title
                     featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
-                        }
+                        gatsbyImageData
                     }
                 }
             }

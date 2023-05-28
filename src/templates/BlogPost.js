@@ -222,9 +222,7 @@ export const query = graphql`
                 featuredVideo
                 featuredImage {
                     publicURL
-                    childImageSharp {
-                        gatsbyImageData
-                    }
+                    gatsbyImageData
                 }
                 contributors: authorData {
                     id

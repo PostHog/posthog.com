@@ -126,9 +126,7 @@ export const query = graphql`
                             name
                         }
                         featuredImage {
-                            childImageSharp {
-                                gatsbyImageData(placeholder: NONE)
-                            }
+                            gatsbyImageData
                         }
                     }
                 }

@@ -77,9 +77,7 @@ const query = graphql`
                 frontmatter {
                     date
                     featuredImage {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
+                        gatsbyImageData
                     }
                     title
                 }

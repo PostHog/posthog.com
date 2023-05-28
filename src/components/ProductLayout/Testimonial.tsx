@@ -33,7 +33,7 @@ export default function Testimonial({ author, image, quote }: ITestimonial & { i
                         </div>
                     </div>
                 </div>
-                <div>{gatsbyImage && <GatsbyImage alt="" image={gatsbyImage} />}</div>
+                <div>{gatsbyImage && <GatsbyImage alt="" image={gatsbyImage} className="max-w-[400px]" />}</div>
             </Quote>
         </SectionWrapper>
     )

@@ -85,9 +85,7 @@ export const query = graphql`
                     publicURL
                 }
                 images {
-                    childImageSharp {
-                        gatsbyImageData
-                    }
+                    gatsbyImageData
                 }
                 width
                 noindex

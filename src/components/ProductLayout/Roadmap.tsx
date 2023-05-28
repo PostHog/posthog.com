@@ -22,9 +22,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
                 nodes {
                     frontmatter {
                         headshot {
-                            childImageSharp {
-                                gatsbyImageData
-                            }
+                            gatsbyImageData
                         }
                         team
                         jobTitle

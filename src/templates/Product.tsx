@@ -312,9 +312,7 @@ export const query = graphql`
                 }
                 productHero {
                     image {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
+                        gatsbyImageData
                     }
                     width
                     height
@@ -330,9 +328,7 @@ export const query = graphql`
                     subtitle
                     url
                     image {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
+                        gatsbyImageData
                     }
                 }
                 productPricingCTA {
@@ -351,9 +347,7 @@ export const query = graphql`
                     }
                     quote
                     image {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
+                        gatsbyImageData
                     }
                 }
                 productFeatures {
@@ -389,9 +383,7 @@ export const query = graphql`
                     }
                     imageFrame
                     image {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
+                        gatsbyImageData
                     }
                 }
             }

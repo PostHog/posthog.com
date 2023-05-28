@@ -103,10 +103,9 @@ export default function HostHog({ data }) {
                     className="flex space-x-6 p-0 px-4 sm:px-0 sm:space-x-4 justify-between whitespace-nowrap overflow-x-auto"
                     style={{ listStyle: 'none', margin: 0 }}
                 >
-                    {speakers.map(({ name, title, company, linkedIn, image }) => {
+                    {speakers.map(({ name, title, company, linkedIn }) => {
                         return (
                             <li key={name}>
-                                <GatsbyImage image={getImage(image)} />
                                 <h5 style={{ marginTop: 22, fontSize: 18, margin: 0 }}>{name}</h5>
                                 <p
                                     style={{ fontSize: 16, color: 'black', opacity: '.50', margin: 0 }}
@@ -215,11 +214,6 @@ export const query = graphql`
                     title
                     company
                     linkedIn
-                    image {
-                        childImageSharp {
-                            gatsbyImageData(width: 100, height: 124)
-                        }
-                    }
                 }
                 city
                 from

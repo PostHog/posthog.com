@@ -66,9 +66,7 @@ const query = graphql`
                 body
                 frontmatter {
                     headshot {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
+                        gatsbyImageData
                     }
                     jobTitle
                     name

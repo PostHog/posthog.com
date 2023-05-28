@@ -407,9 +407,7 @@ export const query = graphql`
                     enterprise
                 }
                 thumbnail {
-                    childImageSharp {
-                        gatsbyImageData(placeholder: NONE, width: 36)
-                    }
+                    gatsbyImageData(width: 36)
                 }
                 related {
                     childMdx {

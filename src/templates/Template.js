@@ -76,9 +76,7 @@ export const query = graphql`
                 subtitle
                 description
                 featuredImage {
-                    childImageSharp {
-                        gatsbyImageData
-                    }
+                    gatsbyImageData
                 }
             }
         }
