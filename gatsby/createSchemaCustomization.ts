@@ -3,19 +3,21 @@ import { buildGatsbyImageDataObject } from '@imgix/gatsby/dist/pluginHelpers'
 import path from 'path'
 import sizeOf from 'image-size'
 import { generateImageData } from 'gatsby-plugin-image'
-import simpleGit from 'simple-git'
 import mime from 'mime'
 import fs from 'fs'
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
-    const git = simpleGit()
-    const diff = await git.diffSummary([`..master`])
-    console.log(diff)
+    const diff = await fetch(
+        `https://api.github.com/repos/posthog/posthog.com/compare/master...${
+            process.env.VERCEL_GIT_COMMIT_REF || 'master'
+        }`
+    ).then((res) => res.json())
 
     const generateImgixGatsbyImageData = (imagePath, args) => {
         const branch = diff.files.some(({ file }) => imagePath === file)
             ? process.env.VERCEL_GIT_COMMIT_REF || 'master'
             : 'master'
+        console.log(branch, imagePath)
         const imageURL = `https://raw.githubusercontent.com/PostHog/posthog.com/${branch}/${imagePath}`
         const dimensions = sizeOf(imagePath)
         const { width, height } = args
