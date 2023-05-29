@@ -18,26 +18,28 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         const imageURL = `https://raw.githubusercontent.com/PostHog/posthog.com/${branch}/${imagePath}`
         const dimensions = sizeOf(imagePath)
         const { width, height } = args
-        return buildGatsbyImageDataObject({
+        return {
+            gatsbyImageData: buildGatsbyImageDataObject({
+                url: imageURL,
+                imgixClientOptions: {
+                    domain: process.env.IMIGIX_URL,
+                    secureURLToken: process.env.IMGIX_TOKEN,
+                },
+                resolverArgs: {
+                    breakpoints: [750, 1080, 1366, 1920],
+                    layout: 'fullWidth',
+                    ...(width ? { width } : null),
+                    ...(height ? { height } : null),
+                },
+                dimensions: { width: dimensions.width, height: dimensions.height },
+            }),
             url: imageURL,
-            imgixClientOptions: {
-                domain: process.env.IMIGIX_URL,
-                secureURLToken: process.env.IMGIX_TOKEN,
-            },
-            resolverArgs: {
-                breakpoints: [750, 1080, 1366, 1920],
-                layout: 'fullWidth',
-                ...(width ? { width } : null),
-                ...(height ? { height } : null),
-            },
-            dimensions: { width: dimensions.width, height: dimensions.height },
-        })
+        }
     }
 
     const generateStaticGatsbyImageData = (imagePath) => {
         const dimensions = sizeOf(imagePath)
         const { width, height } = dimensions
-        if (!width || !height) return null
         const filename = imagePath.replaceAll('/', '-')
         const publicPath = path.join(process.cwd(), `public`, `static`, filename)
         fs.copyFileSync(imagePath, publicPath)
@@ -53,7 +55,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             filename,
             generateImageSource: () => ({ src, width, height, format: 'auto' }),
         }
-        return generateImageData(imageDataArgs)
+        return { gatsbyImageData: generateImageData(imageDataArgs), url: src }
     }
 
     const { createTypes } = actions
@@ -291,15 +293,15 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             },
             publicURL: {
                 type: 'String',
-                resolve: async (source, _args, context, _info) => {
+                resolve: async (source, args) => {
                     try {
                         const { relativeFilePath, relativeImagePath } = source
                         if (!relativeFilePath || !relativeImagePath) return null
                         const imagePath = `contents/${path.join(path.dirname(relativeFilePath), relativeImagePath)}`
                         if (process.env.NODE_ENV?.toLowerCase() === 'development') {
-                            return generateStaticGatsbyImageData(imagePath)?.images.fallback?.src
+                            return generateStaticGatsbyImageData(imagePath).url
                         } else {
-                            return generateImgixGatsbyImageData(imagePath, args).images.fallback?.src
+                            return generateImgixGatsbyImageData(imagePath, args).url
                         }
                     } catch (err) {
                         return null
@@ -312,15 +314,15 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                     width: 'Int',
                     height: 'Int',
                 },
-                resolve: async (source, args, context, info) => {
+                resolve: async (source, args) => {
                     try {
                         const { relativeFilePath, relativeImagePath } = source
                         if (!relativeFilePath || !relativeImagePath) return null
                         const imagePath = `contents/${path.join(path.dirname(relativeFilePath), relativeImagePath)}`
                         if (process.env.NODE_ENV?.toLowerCase() === 'development') {
-                            return generateStaticGatsbyImageData(imagePath)
+                            return generateStaticGatsbyImageData(imagePath).gatsbyImageData
                         } else {
-                            return generateImgixGatsbyImageData(imagePath, args)
+                            return generateImgixGatsbyImageData(imagePath, args).gatsbyImageData
                         }
                     } catch (err) {
                         return null
