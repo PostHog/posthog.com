@@ -14,10 +14,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     ).then((res) => res.json())
 
     const generateImgixGatsbyImageData = (imagePath, args) => {
-        const branch = diff.files.some(({ file }) => imagePath === file)
-            ? process.env.VERCEL_GIT_COMMIT_REF || 'master'
-            : 'master'
-        console.log(branch, imagePath)
+        const branch = diff.files.some(({ filename }) => imagePath === filename)
         const imageURL = `https://raw.githubusercontent.com/PostHog/posthog.com/${branch}/${imagePath}`
         const dimensions = sizeOf(imagePath)
         const { width, height } = args
