@@ -295,11 +295,12 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                     try {
                         const { relativeFilePath, relativeImagePath } = source
                         if (!relativeFilePath || !relativeImagePath) return null
-                        const imagePath = `https://raw.githubusercontent.com/PostHog/posthog.com/master/contents/${path.join(
-                            path.dirname(relativeFilePath),
-                            relativeImagePath
-                        )}`
-                        return `https://${process.env.IMIGIX_URL}/${imagePath}?s=${process.env.IMGIX_TOKEN}`
+                        const imagePath = `contents/${path.join(path.dirname(relativeFilePath), relativeImagePath)}`
+                        if (process.env.NODE_ENV?.toLowerCase() === 'development') {
+                            return generateStaticGatsbyImageData(imagePath)?.images.fallback?.src
+                        } else {
+                            return generateImgixGatsbyImageData(imagePath, args).images.fallback?.src
+                        }
                     } catch (err) {
                         return null
                     }
