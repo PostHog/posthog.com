@@ -10,6 +10,7 @@ import fs from 'fs'
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
     const git = simpleGit()
     const diff = await git.diffSummary([`..master`])
+    console.log(diff)
 
     const generateImgixGatsbyImageData = (imagePath, args) => {
         const branch = diff.files.some(({ file }) => imagePath === file)
