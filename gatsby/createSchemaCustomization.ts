@@ -2,8 +2,60 @@ import { GatsbyNode } from 'gatsby'
 import { buildGatsbyImageDataObject } from '@imgix/gatsby/dist/pluginHelpers'
 import path from 'path'
 import sizeOf from 'image-size'
+import { generateImageData } from 'gatsby-plugin-image'
+import simpleGit from 'simple-git'
+import mime from 'mime'
+import fs from 'fs'
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
+    const git = simpleGit()
+    const diff = await git.diffSummary([`..master`])
+
+    const generateImgixGatsbyImageData = (imagePath, args) => {
+        const branch = diff.files.some(({ file }) => imagePath === file)
+            ? process.env.VERCEL_GIT_COMMIT_REF || 'master'
+            : 'master'
+        const imageURL = `https://raw.githubusercontent.com/PostHog/posthog.com/${branch}/${imagePath}`
+        const dimensions = sizeOf(imagePath)
+        const { width, height } = args
+        return buildGatsbyImageDataObject({
+            url: imageURL,
+            imgixClientOptions: {
+                domain: process.env.IMIGIX_URL,
+                secureURLToken: process.env.IMGIX_TOKEN,
+            },
+            resolverArgs: {
+                breakpoints: [750, 1080, 1366, 1920],
+                layout: 'fullWidth',
+                ...(width ? { width } : null),
+                ...(height ? { height } : null),
+            },
+            dimensions: { width: dimensions.width, height: dimensions.height },
+        })
+    }
+
+    const generateStaticGatsbyImageData = (imagePath) => {
+        const dimensions = sizeOf(imagePath)
+        const { width, height } = dimensions
+        if (!width || !height) return null
+        const filename = imagePath.replaceAll('/', '-')
+        const publicPath = path.join(process.cwd(), `public`, `static`, filename)
+        fs.copyFileSync(imagePath, publicPath)
+        const src = `/static/${filename}`
+        const sourceMetadata = {
+            width,
+            height,
+            format: mime.getType(imagePath)?.split('/')[1],
+        }
+        const imageDataArgs = {
+            pluginName: `gatsby-source-local-images`,
+            sourceMetadata,
+            filename,
+            generateImageSource: () => ({ src, width, height, format: 'auto' }),
+        }
+        return generateImageData(imageDataArgs)
+    }
+
     const { createTypes } = actions
     createTypes(`
     type Mdx implements Node {
@@ -260,27 +312,15 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                     height: 'Int',
                 },
                 resolve: async (source, args, context, info) => {
-                    const { width, height } = args
                     try {
                         const { relativeFilePath, relativeImagePath } = source
                         if (!relativeFilePath || !relativeImagePath) return null
                         const imagePath = `contents/${path.join(path.dirname(relativeFilePath), relativeImagePath)}`
-                        const imageURL = `https://raw.githubusercontent.com/PostHog/posthog.com/master/${imagePath}`
-                        const dimensions = sizeOf(imagePath)
-                        return buildGatsbyImageDataObject({
-                            url: imageURL,
-                            imgixClientOptions: {
-                                domain: process.env.IMIGIX_URL,
-                                secureURLToken: process.env.IMGIX_TOKEN,
-                            },
-                            resolverArgs: {
-                                breakpoints: [750, 1080, 1366, 1920],
-                                layout: 'fullWidth',
-                                ...(width ? { width } : null),
-                                ...(height ? { height } : null),
-                            },
-                            dimensions: { width: dimensions.width, height: dimensions.height },
-                        })
+                        if (process.env.NODE_ENV?.toLowerCase() === 'development') {
+                            return generateStaticGatsbyImageData(imagePath)
+                        } else {
+                            return generateImgixGatsbyImageData(imagePath, args)
+                        }
                     } catch (err) {
                         return null
                     }
