@@ -316,6 +316,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                         const { relativeFilePath, relativeImagePath } = source
                         if (!relativeFilePath || !relativeImagePath) return null
                         const imagePath = `contents/${path.join(path.dirname(relativeFilePath), relativeImagePath)}`
+                        console.log(process.env.NODE_ENV)
                         if (process.env.NODE_ENV?.toLowerCase() === 'development') {
                             return generateStaticGatsbyImageData(imagePath)
                         } else {
