@@ -1,6 +1,6 @@
 ---
 title: How to calculate DAU/MAU ratio
-date: 2023-05-26
+date: 2023-05-29
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -41,6 +41,7 @@ Although your DAU/MAU ratio is a great measurement of engagement and stickiness,
 ## How to calculate your DAU/MAU ratio
 
 In PostHog, create an insight with two series, one for "all events" aggregated by "unique users" and another for "all events" aggregated by "monthly active users," then use enable formula mode, and use the formula `A/B`. Use a trend or a number chart to visualize with the Y-axis unit set to "Percent (0-1)."
+In PostHog, [create an insight](https://app.posthog.com/insights/new) with two series, one for "all events" aggregated by "unique users" and another for "all events" aggregated by "monthly active users," then use enable formula mode, and use the formula `A/B`. Use a trend or a number chart to visualize with the Y-axis unit set to "Percent (0-1)."
 
 ![DAU/MAU ratio](../images/tutorials/dau-mau-ratio/dau-mau.mp4)
 
@@ -66,7 +67,7 @@ To better capture the details of your product, you can create per feature DAU/MA
 
 ### New user DAU/MAU ratio
 
-To understand how sticky your product is with new users, you can create a new user cohort and filter your insights by that cohort. To do this, go to cohorts, and create a new cohort that matches persons who completed a "signed up" event or action for the first time in the last 3 months. What you choose for your event or action and time range is up to you.
+To understand how sticky your product is with new users, you can create a new user [cohort](/docs/data/cohorts) and filter your insights by that cohort. To do this, go to cohorts, and create a new cohort that matches persons who completed a "signed up" event or action for the first time in the last 3 months. What you choose for your event or action and time range is up to you.
 
 ![New user](../images/tutorials/dau-mau-ratio/new.png)
 
