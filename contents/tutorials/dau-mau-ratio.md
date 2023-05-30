@@ -1,6 +1,6 @@
 ---
 title: How to calculate DAU/MAU ratio
-date: 2023-05-26
+date: 2023-05-29
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-14.png
 tags: ["insights", "trends"]
 ---
 
-The ratio of daily active users over monthly active users, or DAU/MAU ratio, is a popular engagement metric measuring stickiness. It shows what percentage of your users are active users, defining active as having one event captured in your product today.
+The ratio of daily active users over monthly active users, or DAU/MAU ratio, is a popular engagement metric measuring stickiness. It shows what percentage of your users are active and use your product every day.
 
 Products with high DAU/MAU ratios get users to return often. It shows a deep, repeated desire to use the product. Facebook popularized the DAU/MAU ratio, which they used to judge the success of their products (and still do).
 
@@ -30,17 +30,17 @@ A good DAU/MAU ratio depends on the type of product, industry, audience, and man
 
 ## The limitations of the DAU/MAU ratio
 
-Although your DAU/MAU ratio is a great measurement of engagement and stickiness, it is less relevant for products that don’t care about that or not expecting users to engage daily. These include:
+Although your DAU/MAU ratio is a great measurement of engagement and stickiness, it is less relevant for products that don’t care about that or are not expecting users to engage daily. These include:
 
 - **B2B SaaS:** many B2B SaaS users have no choice but to use the product. Their employer chooses a product and they come along for the ride. The DAU/MAU ratio doesn’t provide valuable insights. Instead, these companies care more about adoption, retention, feature usage, and net promoter score. Read "[The most useful B2B SaaS product metrics](/blog/b2b-saas-product-metrics)" for more.
 
-- **Ecommerce:** transactions happen less frequently than daily, meaning DAU/MAU ratio will be low. Daily transactions are not expected here, who would order books from Amazon or clothes from H&M daily? These companies care more about conversion, order value, lifetime value, and customer acquisition costs.
+- **Ecommerce:** transactions happen less frequently than daily, meaning DAU/MAU ratio will be low. Daily transactions are not expected here – few people order books from Amazon or clothes from H&M daily. These companies care more about conversion, order value, lifetime value, and customer acquisition costs.
 
 - **Travel:** like ecommerce, people travel infrequently. For example, Airbnb users only book a couple of trips per year. Even apps like Uber care more about weekly active users, as they don’t expect users to ride or order daily. These companies care about similar metrics to commerce companies, like conversion, lifetime value, and customer acquisition cost.
 
 ## How to calculate your DAU/MAU ratio
 
-In PostHog, create an insight with two series, one for "all events" aggregated by "unique users" and another for "all events" aggregated by "monthly active users," then use enable formula mode, and use the formula `A/B`. Use a trend or a number chart to visualize with the Y-axis unit set to "Percent (0-1)."
+In PostHog, [create an insight](https://app.posthog.com/insights/new) with two series, one for "all events" aggregated by "unique users" and another for "all events" aggregated by "monthly active users," then use enable formula mode, and use the formula `A/B`. Use a trend or a number chart to visualize with the Y-axis unit set to "Percent (0-1)."
 
 ![DAU/MAU ratio](../images/tutorials/dau-mau-ratio/dau-mau.mp4)
 
@@ -66,7 +66,7 @@ To better capture the details of your product, you can create per feature DAU/MA
 
 ### New user DAU/MAU ratio
 
-To understand how sticky your product is with new users, you can create a new user cohort and filter your insights by that cohort. To do this, go to cohorts, and create a new cohort that matches persons who completed a "signed up" event or action for the first time in the last 3 months. What you choose for your event or action and time range is up to you.
+To understand how sticky your product is with new users, you can create a new user [cohort](/docs/data/cohorts) and filter your insights by that cohort. To do this, go to cohorts, and create a new cohort that matches persons who completed a "signed up" event or action for the first time in the last 3 months. What you choose for your event or action and time range is up to you.
 
 ![New user](../images/tutorials/dau-mau-ratio/new.png)
 
@@ -74,7 +74,7 @@ Once created, you can use this cohort as a filter in your DAU/MAU ratio calculat
 
 ### Power user DAU/MAU ratio
 
-Although you can use DAU/MAU ratio as a measure of power users, it doesn’t fully reflect them. Power users are better represented by intensity and volume of usage, rather than the repeated usage a DAU/MAU ratio measures.
+Although you can use DAU/MAU ratio as a proxy for power users, it doesn’t fully represent them. Power users are better represented by intensity and volume of usage, rather than the repeated usage a DAU/MAU ratio measures.
 
 To combine these two definitions, you can create a power user cohort, then use it as a filter in your DAU/MAU ratio calculation. To create this cohort, match persons who completed a key usage metric multiple times. For my example, I chose `Edited document at least 30 times in the last 30 days`.
 
