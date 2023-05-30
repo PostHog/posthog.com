@@ -1,6 +1,6 @@
 ---
 title: How to set up Next.js monitoring
-date: 2023-05-24
+date: 2023-05-30
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -79,7 +79,7 @@ export default function RootLayout({ children }) {
 Once this is set up, go to your [project settings](https://app.posthog.com/project/settings), and make sure:
 
 - [Autocapture](/docs/data/autocapture) is enabled
-- Under recordings, record user sessions, capture console logs, and capture network performance are all enabled.
+- Under [recordings](https://app.posthog.com/project/settings#recordings), record user sessions, capture console logs, and capture network performance are all enabled.
 
 ![Settings](../images/tutorials/nextjs-monitoring/settings.png)
 
