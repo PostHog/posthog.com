@@ -1,31 +1,31 @@
 import React from 'react'
 import { graphql, useStaticQuery, Link } from 'gatsby'
 
-export const IngestionAppsList = () => {
+export const IngestionPipelinesList = () => {
     const {
-        apps: { nodes: apps },
+        pipelines: { nodes: pipelines },
     } = useStaticQuery<QueryResult>(query)
 
     return (
         <ul className="list-none p-0 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-            {apps.map((app) => {
+            {pipelines.map((pipeline) => {
                 return (
                     <li
-                        key={app.id}
+                        key={pipeline.id}
                         style={{ margin: 0 }}
                         className="border-r border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark"
                     >
-                        <Link to={app.frontmatter.documentation} className="flex p-2 !bg-none">
+                        <Link to={pipeline.frontmatter.documentation} className="flex p-2 !bg-none">
                             <div className="shrink-0 grow-0 basis-[84px] flex justify-center pt-1">
-                                <img className="icon w-8 h-8" src={app.frontmatter.thumbnail.publicURL} />
+                                <img className="icon w-8 h-8" src={pipeline.frontmatter.thumbnail.publicURL} />
                             </div>
 
                             <div className="flex-1">
                                 <div className="text-black dark:text-white leading-none pt-2">
-                                    {app.frontmatter.title}
+                                    {pipeline.frontmatter.title}
                                 </div>
                                 <p className="text-black/60 dark:text-white/60 font-normal mt-0.5 !text-[15px] !mb-2">
-                                    {app.frontmatter.description}
+                                    {pipeline.frontmatter.description}
                                 </p>
                             </div>
                         </Link>
@@ -37,7 +37,7 @@ export const IngestionAppsList = () => {
 }
 
 type QueryResult = {
-    apps: {
+    pipelines: {
         nodes: {
             id: string
             frontmatter: {
@@ -55,9 +55,9 @@ type QueryResult = {
 
 const query = graphql`
     query {
-        apps: allMdx(
+        pipelines: allMdx(
             filter: {
-                fields: { slug: { regex: "/^/apps/(?!.*/docs).*/" } }
+                fields: { slug: { regex: "/^/pipelines/(?!.*/docs).*/" } }
                 frontmatter: { filters: { type: { regex: "/data-in/" } } }
             }
         ) {
@@ -77,4 +77,4 @@ const query = graphql`
     }
 `
 
-export default IngestionAppsList
+export default IngestionPipelinesList

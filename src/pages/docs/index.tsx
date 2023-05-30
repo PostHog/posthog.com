@@ -158,7 +158,7 @@ type DocsData = {
             }
         }[]
     }
-    apps: {
+    pipelines: {
         nodes: {
             fields: {
                 slug: string
@@ -174,7 +174,7 @@ type DocsData = {
 }
 
 export const DocsIndex = ({ data }: PageProps<DocsData>) => {
-    const { gettingStarted, sdks, apps } = data
+    const { gettingStarted, sdks, pipelines } = data
 
     const gettingStartedLinks = React.useMemo(() => {
         const gettingStartedSection = docs.find((section) => section.name === 'Getting started')?.children || []
@@ -266,17 +266,17 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
 
                             <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
                                 <div className="mb-3">
-                                    <h4 className="font-bold mb-0">Popular apps</h4>
+                                    <h4 className="font-bold mb-0">Popular pipelines</h4>
                                     <p className="text-sm text-gray">Import, transform, and export data</p>
                                 </div>
                                 <ul className="grid sm:grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {apps.nodes.map((app) => {
+                                    {pipelines.nodes.map((pipeline) => {
                                         return (
-                                            <li className="flex-grow" key={app.fields.slug}>
+                                            <li className="flex-grow" key={pipeline.fields.slug}>
                                                 <ImportantLink
-                                                    to={app.fields.slug}
-                                                    title={app.frontmatter.title}
-                                                    icon={app.frontmatter.thumbnail?.publicURL}
+                                                    to={pipeline.fields.slug}
+                                                    title={pipeline.frontmatter.title}
+                                                    icon={pipeline.frontmatter.thumbnail?.publicURL}
                                                     badge={undefined}
                                                 />
                                             </li>
@@ -353,8 +353,8 @@ export const query = graphql`
                 }
             }
         }
-        apps: allMdx(
-            filter: { slug: { regex: "/^docs/apps/(?!build)\\w+/" } }
+        pipelines: allMdx(
+            filter: { slug: { regex: "/^docs/pipelines/(?!build)\\w+/" } }
             sort: { fields: fields___pageViews, order: DESC }
             limit: 6
         ) {
