@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-9.png
 tags: ["hogql", "insights"]
 ---
 
-Because there are infinite ways to break down time, there are infinite ways to filter based on time. HogQL unlocks more of these in PostHog, and in this tutorial we'll go through examples of how to use do that.
+Since there are infinite ways to break down time, there are infinite ways to filter based on time. HogQL unlocks more of these in PostHog, and in this tutorial we'll go through examples of how to use do that.
 
 To add a HogQL filter:
 1. Create a new insight
@@ -74,7 +74,7 @@ You can also replace `day` with `second`, `minute`, `hour`, `week`, `month`, `qu
 
 ## Weekly and quarterly reports
 
-Many companies report on a weekly or quarterly basis. Filtering for events in the last 7 or 90 days may include ones outside of the current week or quarter, making these reports inaccurate. HogQL enables us easily create reports for specific weeks and quarters.
+Many companies report on a weekly or quarterly basis. A simple filter, such as `events in the last 7 days` or `events in the last 90 days`, likely includes events from the previous week or quarter, making these reports inaccurate. HogQL provides an alternative filter to get events from specific weeks and quarters.
 
 For example, if we wanted events for this quarter, we can use the expression:
 
