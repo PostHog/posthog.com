@@ -40,7 +40,6 @@ Although your DAU/MAU ratio is a great measurement of engagement and stickiness,
 
 ## How to calculate your DAU/MAU ratio
 
-In PostHog, create an insight with two series, one for "all events" aggregated by "unique users" and another for "all events" aggregated by "monthly active users," then use enable formula mode, and use the formula `A/B`. Use a trend or a number chart to visualize with the Y-axis unit set to "Percent (0-1)."
 In PostHog, [create an insight](https://app.posthog.com/insights/new) with two series, one for "all events" aggregated by "unique users" and another for "all events" aggregated by "monthly active users," then use enable formula mode, and use the formula `A/B`. Use a trend or a number chart to visualize with the Y-axis unit set to "Percent (0-1)."
 
 ![DAU/MAU ratio](../images/tutorials/dau-mau-ratio/dau-mau.mp4)
