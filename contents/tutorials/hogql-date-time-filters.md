@@ -1,6 +1,6 @@
 ---
 title: Using HogQL for advanced time and date filters
-date: 2023-05-24
+date: 2023-05-30
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -11,7 +11,7 @@ tags: ["hogql", "insights"]
 Since there are infinite ways to break down time, there are infinite ways to filter based on time. HogQL unlocks more of these in PostHog, and in this tutorial we'll go through examples of how to use do that.
 
 To add a HogQL filter:
-1. Create a new insight
+1. Create a [new insight](https://app.posthog.com/insights/new)
 2. Open the filter dropdown, and click "Add filter" below your data series
 3. Select HogQL from the options
 4. Write your expression, and click "Add HogQL expression" to apply it
@@ -29,7 +29,6 @@ Below is a non-exhaustive list of time properties that are commonly used in HogQ
 - For custom events or person properties, you can access them with `person.properties.{custom_property_name}`.
 
 > **Note:** if the type of your property is a string, rather than a `DateTime`, you can convert it using `toDateTime()`, and vice versa with `toString()`. You can view the type of your properties in your [data management tab](https://app.posthog.com/data-management/properties).
-
 
 The [ClickHouse SQL statements](https://clickhouse.com/docs/en/sql-reference) we built HogQL on also have useful helper functions that are good to know when working with dates. These include:
 
