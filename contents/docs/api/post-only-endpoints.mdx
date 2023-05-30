@@ -101,6 +101,8 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 ### Group
 
+> **Note:** `company` is a [group type](/docs/product-analytics/group-analytics#groups-vs-group-types). You can set it to the value you want such as `organization`, `project`, or `channel`.
+
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
@@ -111,7 +113,6 @@ curl -v -L --header "Content-Type: application/json" -d '{
     }
 }' https://app.posthog.com/capture/
 ```
-
 
 ### Group identify
 
@@ -125,7 +126,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
         "$group_key": "<company_name>",
         "$group_set": {
             "name": "<company_name>",
-            "user_count": 5,
+            "subscription": "premium"
             "date_joined": "2020-01-23T00:00:00.000Z"
         }
     }
