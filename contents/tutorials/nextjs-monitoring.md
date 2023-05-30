@@ -8,13 +8,15 @@ featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ['configuration', 'session replay', 'insights']
 ---
 
-Monitoring a Next.js app creates the best possible experience for your users. It ensures your Next.js app is performing well, loading fast, and doesn't have significant errors hurting user experience.
+Monitoring a Next.js app for performance regressions, loading speed, and errors enables you to be confident your app is providing the best possible experience.
+
+In this tutorial, we'll create a basic Next.js app, setup PostHog to monitor errors and performance, and then build a dashboard to analyze this information.```
 
 > Already have a Next.js app? [Click here to skip to the PostHog installation](#set-up-posthog).
 
 ## Create a Next.js app
 
-You need to create a Next.js app if you are going to monitor it. To create one, run the following command, choose **not** to use TypeScript, and the defaults for all the other options (including using the app router).
+To create a Next.js app, run the following command, choose **not** to use TypeScript, and the defaults for all the other options (including using the app router).
 
 ```bash
 npx create-next-app@latest monitor
@@ -87,7 +89,7 @@ Enabling these provides the key monitoring tools including performance monitorin
 
 ## Custom error capture
 
-Another part of monitoring is error capturing. There are two ways to set this up with PostHog:
+Error capture gives you insights into the errors your users experience. There are two ways to set this up with PostHog:
 
 1. You could set up and use our [Sentry integration](/docs/libraries/sentry). 
 2. Alternatively, you could set up custom error capture (shown below).
