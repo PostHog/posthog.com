@@ -88,6 +88,4 @@ Due to the complexity of browser rendering and replay, some web resources are un
 - **WebGL**
 - **Object elements** - Most object elements cannot be played back. Non-HTML native plugins such as Flash or Silverlight cannot be recorded
 - **Heavy animations** - Some heavier animations such as SVG or Lottie animations may be _throttled_ or ignored entirely due to the performance overhead in recording and replaying
-* **Iframes** 
-  - iframes from the _same origin_ **can** be recorded and played back as long as posthog-js is installed and recording on both the parent and the child iframe
-  - iframes from an origin _not under your control_ cannot be recorded as the parent is unable to control the child.
+- **Iframes** - iframes from the origins under your control **can** be recorded and played back. See [iframe recording](/docs/session-replay/iframes) for more info.
