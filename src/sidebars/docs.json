@@ -466,6 +466,10 @@
                 "url": "/docs/session-replay/data-retention"
             },
             {
+                "name": "Iframe recording",
+                "url": "/docs/session-replay/iframes"
+            },
+            {
                 "name": "Troubleshooting and FAQs",
                 "url": "/docs/session-replay/troubleshooting"
             }
