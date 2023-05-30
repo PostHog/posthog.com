@@ -106,10 +106,6 @@ const query = graphql`
                     slug
                 }
                 frontmatter {
-                    thumbnail {
-                        id
-                        publicURL
-                    }
                     title
                     badge
                     price

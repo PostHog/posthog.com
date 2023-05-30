@@ -406,11 +406,6 @@ export const query = graphql`
                     selfServe
                     enterprise
                 }
-                thumbnail {
-                    childImageSharp {
-                        gatsbyImageData(placeholder: NONE, width: 36)
-                    }
-                }
                 related {
                     childMdx {
                         fields {
