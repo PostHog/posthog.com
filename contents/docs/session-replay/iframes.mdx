@@ -20,7 +20,7 @@ There is nothing special that is needed if the iframe is from the same domain as
 
 In order to record from a cross-origin iframe, you need to ensure that `posthog-js` is installed on both the parent domain and the iframe one.
 
-In addition, PostHog needs to be initialised with an explicit configuration as below:
+In addition, PostHog needs to be initialised **on both domains** with an explicit configuration as below:
 
 ```js
 posthog.init('<ph_project_api_key>', {
@@ -30,3 +30,5 @@ posthog.init('<ph_project_api_key>', {
     }
 })
 ```
+
+With this setting enabled, the child iframe will post events to the parent instead, resulting in a single replayable recording. If the parent page does not have this enabled, then the content of the embedded iframe will not be captured at all.
