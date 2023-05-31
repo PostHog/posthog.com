@@ -19,7 +19,7 @@ export const Markdown = ({
             allowedElements={allowedElements}
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
-            className="flex-1 !text-sm overflow-hidden text-ellipsis squeak-post-markdown !pb-0 opacity-75 font-normal"
+            className="flex-1 !text-sm overflow-hidden text-ellipsis squeak-post-markdown !pb-0 text-primary/75 dark:text-primary-dark/75 font-normal"
             components={{
                 pre: ({ children }) => {
                     return (
