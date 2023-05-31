@@ -1,0 +1,222 @@
+[
+    {
+        "name": "Pipelines",
+        "url": "/pipelines"
+    },
+    {
+        "name": "Variance Connector",
+        "url": "/pipelines/variance-connector"
+    },
+    {
+        "name": "Engage Connector",
+        "url": "/pipelines/engage-connector"
+    },
+    {
+        "name": "Airbyte Export",
+        "url": "/pipelines/airbyte-export"
+    },
+    {
+        "name": "Amazon Kinesis Import",
+        "url": "/pipelines/amazon-kinesis"
+    },
+    {
+        "name": "Automatic Cohort Creator",
+        "url": "/pipelines/automatic-cohort-creator"
+    },
+    {
+        "name": "BigQuery Export",
+        "url": "/pipelines/bigquery-export"
+    },
+    {
+        "name": "BitBucket Release Tracker",
+        "url": "/pipelines/bitbucket-release-tracker"
+    },
+    {
+        "name": "Currency Normalizer",
+        "url": "/pipelines/currency-normalization"
+    },
+    {
+        "name": "Customer.io Connector",
+        "url": "/pipelines/customer-io"
+    },
+    {
+        "name": "Databricks Export",
+        "url": "/pipelines/databricks"
+    },
+    {
+        "name": "Downsampler",
+        "url": "/pipelines/downsampling"
+    },
+    {
+        "name": "Email Scoring",
+        "url": "/pipelines/email-scoring"
+    },
+    {
+        "name": "Event Sequence Timer",
+        "url": "/pipelines/event-sequence-timer"
+    },
+    {
+        "name": "User Paths",
+        "url": "/product/user-paths"
+    },
+    {
+        "name": "Correlation Analysis",
+        "url": "/product/correlation-analysis"
+    },
+    {
+        "name": "Session Recording",
+        "url": "/product/session-recording"
+    },
+    {
+        "name": "Feature Flags",
+        "url": "/product/feature-flags"
+    },
+    {
+        "name": "First Time Event Tracker",
+        "url": "/pipelines/first-time-event-tracker"
+    },
+    {
+        "name": "GeoIP Enricher",
+        "url": "/pipelines/geoip-enrichment"
+    },
+    {
+        "name": "Experimentation",
+        "url": "/product/experimentation-suite"
+    },
+    {
+        "name": "GitHub Release Tracker",
+        "url": "/pipelines/github-release-tracker"
+    },
+    {
+        "name": "GitHub Star Sync",
+        "url": "/pipelines/github-star-sync"
+    },
+    {
+        "name": "GitLab Release Tracker",
+        "url": "/pipelines/gitlab-release-tracker"
+    },
+    {
+        "name": "Google Cloud Export",
+        "url": "/pipelines/google-cloud-export"
+    },
+    {
+        "name": "Google Pub/Sub Connector",
+        "url": "/pipelines/google-pub-sub-connector"
+    },
+    {
+        "name": "Heartbeat",
+        "url": "/pipelines/heartbeat"
+    },
+    {
+        "name": "Hubspot Connector",
+        "url": "/pipelines/hubspot-connector"
+    },
+    {
+        "name": "Intercom Connector",
+        "url": "/pipelines/intercom"
+    },
+    {
+        "name": "Ingestion Alerts",
+        "url": "/pipelines/ingestion-alert"
+    },
+    {
+        "name": "n8n Connector",
+        "url": "/pipelines/n8n"
+    },
+    {
+        "name": "Orbit Connector",
+        "url": "/pipelines/orbit"
+    },
+    {
+        "name": "Pagerduty Connector",
+        "url": "/pipelines/pagerduty-connector"
+    },
+    {
+        "name": "Postgres Export",
+        "url": "/pipelines/postgres-export"
+    },
+    {
+        "name": "Property Filter",
+        "url": "/pipelines/property-filter"
+    },
+    {
+        "name": "Property Flattener",
+        "url": "/pipelines/property-flattener"
+    },
+    {
+        "name": "Redshift Export",
+        "url": "/pipelines/redshift-export"
+    },
+    {
+        "name": "Redshift Import",
+        "url": "/pipelines/redshift-import"
+    },
+    {
+        "name": "Replicator",
+        "url": "/pipelines/replicator"
+    },
+    {
+        "name": "RudderStack Export",
+        "url": "/pipelines/rudderstack-export"
+    },
+    {
+        "name": "S3 Export",
+        "url": "/pipelines/s3-export"
+    },
+    {
+        "name": "Salesforce Connector",
+        "url": "/pipelines/salesforce-connector"
+    },
+    {
+        "name": "Schema Enforcer",
+        "url": "/pipelines/schema-enforcer"
+    },
+    {
+        "name": "Segment Connector",
+        "url": "/pipelines/segment"
+    },
+    {
+        "name": "Sendgrid Connector",
+        "url": "/pipelines/sendgrid-connector"
+    },
+    {
+        "name": "Sentry Connector",
+        "url": "/pipelines/sentry-connector"
+    },
+    {
+        "name": "Shopify Connector",
+        "url": "/pipelines/shopify"
+    },
+    {
+        "name": "Snowflake Export",
+        "url": "/pipelines/snowflake-export"
+    },
+    {
+        "name": "Taxonomy Standardizer",
+        "url": "/pipelines/taxonomy-standardizer"
+    },
+    {
+        "name": "Timestamp Parser",
+        "url": "/pipelines/timestamp-parser"
+    },
+    {
+        "name": "Twilio Connector",
+        "url": "/pipelines/twilio"
+    },
+    {
+        "name": "Twitter Followers Tracker",
+        "url": "/pipelines/twitter-followers"
+    },
+    {
+        "name": "User Agent Populator",
+        "url": "/pipelines/user-agent-populator"
+    },
+    {
+        "name": "Zapier Connector",
+        "url": "/pipelines/zapier-connector"
+    },
+    {
+        "name": "Zendesk Connector",
+        "url": "/pipelines/zendesk-connector"
+    }
+]

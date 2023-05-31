@@ -65,6 +65,7 @@ module.exports = {
             retrievePages('blog', '/^blog/'),
             retrievePages('customers', '/^customers/'),
             retrievePages('apps', '/^apps/'),
+            retrievePages('pipelines', '/^pipelines/'),
             {
                 query: `
                             {

@@ -1,15 +1,15 @@
 ---
-title: Pipelines
+title: Apps
 sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
 
-Pipelines are part of PostHog's CDP (officially coming soon) and extends PostHog's functionality by either pulling data into or sending data out of PostHog. They allow anyone to extend and customize PostHog in order to better fit their needs.
+Apps extend PostHog's functionality by either pulling data into or sending data out of PostHog. They allow anyone to extend and customize PostHog in order to better fit their needs.
 
-> We have a [comprehensive library of pipelines](/pipelines), including data warehouses (Snowflake, BigQuery, Redshift) and marketing tools (HubSpot, Sendgrid, Customer.io, Salesforce).
+> We have a [comprehensive library of apps](/apps), including data warehouses (Snowflake, BigQuery, Redshift) and marketing tools (HubSpot, Sendgrid, Customer.io, Salesforce).
 
-Pipelines can be used for a wide variety of use cases, such as:
+Apps can be used for a wide variety of use cases, such as:
 
 - **Sending the event data to a data warehouse.**
     If you have a data lake or data warehouse, you can use apps to send PostHog event data there, while ensuring you still have that data in PostHog to perform your analytics processes.
@@ -18,16 +18,12 @@ Pipelines can be used for a wide variety of use cases, such as:
 - **Labeling events.** In order to facilitate sorting through your events, apps can be used to determine arbitrary logic that can label an event (e.g. by setting a `label` property). This can help you tailor your metrics in PostHog, as well as facilitate data ordering if you ever use PostHog data somewhere else.
 - **Enforcing event schemas.** By default, PostHog does not enforce schemas on events it receives. However, an app could do so, preventing ingestion of events that do not match the specified schema in order to keep your data clean and following specific guidelines you need it to follow.
 
-## Enabling pipelines
+## Enabling apps
 
-Head to 'Project' -> 'Apps' on the left sidebar in the PostHog app.
+Head to 'Project' -> 'Apps' on the left sidebar in the PostHog app. Here you can install official PostHog apps.
 
 If you're self-hosting, you can install a custom app by pasting a link to its public repository, or write your own app directly in PostHog.
 
 ## Self-host app troubleshooting
 
 If you're having issues getting apps to work on your self-hosted instance of PostHog, check out our [troubleshooting guide](/docs/pipelines/enabling).
-
-## Next steps
-
-- Can't find the one you're looking for? Consider [building your own](/docs/pipelines/build)!

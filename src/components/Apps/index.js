@@ -77,19 +77,20 @@ function AppsPage({ location }) {
         <Layout>
             <SEO
                 title="PostHog Apps"
-                description="Do more with your data with PostHog Apps"
+                description="Do even more cool stuff with PostHog Apps"
                 image={`/og-images/apps.jpeg`}
             />
             <header className="py-12">
                 <h2 className="m-0 text-center text-[2.75rem] leading-none  md:text-6xl text-primary">
-                    Do more with your data with <br className="hidden lg:block" />
+                    Do even more cool stuff <br className="hidden lg:block" />
                     <span className="text-blue">PostHog Apps</span>
                 </h2>
                 <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
-                    50-ish apps available
+                    Apps can leverage the PostHog API. They appear in the PostHog product and, if using PostHog.js, can
+                    also inject code directly into your website or product.
                 </p>
             </header>
-            <div className="flex justify-start px-4 md:justify-center items-center mb-6 space-x-2 overflow-auto whitespace-nowrap">
+            <div className="hidden flex justify-start px-4 md:justify-center items-center mb-6 space-x-2 overflow-auto whitespace-nowrap">
                 <Chip onClick={resetFilters} active={currentFilter === 'all'} text="All" />
                 {filters.map(({ type, name }) => (
                     <Chip

@@ -77,7 +77,7 @@ function PipelinesPage({ location }) {
         <Layout>
             <SEO
                 title="CDP pipelines"
-                description="Get all your data in PostHog with 50+ CDP pipelines"
+                description="Get all your data into PostHog with 60+ CDP pipelines"
                 image={`/og-images/apps.jpeg`}
             />
             <header className="py-12">

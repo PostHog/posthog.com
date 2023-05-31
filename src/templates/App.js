@@ -95,32 +95,8 @@ export default function App({ data, pageContext: { next, previous } }) {
                         name: 'Apps',
                     },
                     {
-                        name: 'All',
+                        name: '← Back',
                         url: '/apps',
-                    },
-                    {
-                        name: 'Data-in',
-                        url: '/apps?filter=type&value=data-in',
-                    },
-                    {
-                        name: 'Data-out',
-                        url: '/apps?filter=type&value=data-out',
-                    },
-                    {
-                        name: 'Ingestion-filtering',
-                        url: '/apps?filter=type&value=ingestion-filtering',
-                    },
-                    {
-                        name: 'Other',
-                        url: '/apps?filter=type&value=other',
-                    },
-                    {
-                        name: 'Official',
-                        url: '/apps?filter=maintainer&value=official',
-                    },
-                    {
-                        name: 'Community',
-                        url: '/apps?filter=maintainer&value=community',
                     },
                 ]}
                 breadcrumb={[{ name: 'Apps', url: '/apps' }, { name: title }]}

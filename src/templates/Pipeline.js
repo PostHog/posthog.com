@@ -83,7 +83,7 @@ export default function Pipeline({ data, pageContext: { next, previous } }) {
     return (
         <Layout>
             <SEO
-                image={`/images/apps/${slug.split('/')[2]}.png`}
+                image={`/images/pipelines/${slug.split('/')[2]}.png`}
                 title={`${title} - PostHog`}
                 description={description || excerpt}
             />

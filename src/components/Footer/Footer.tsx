@@ -33,6 +33,10 @@ const linklist: IProps[] = [
                 url: '/product-os',
             },
             {
+                title: 'CDP pipelines',
+                url: '/pipelines',
+            },
+            {
                 title: 'Apps',
                 url: '/apps',
             },
