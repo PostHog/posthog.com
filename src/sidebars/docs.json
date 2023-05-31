@@ -581,6 +581,10 @@
                 "url": "/docs/data/events"
             },
             {
+                "name": "Identify",
+                "url": "/docs/data/identify"
+            },
+            {
                 "name": "Organizations & projects",
                 "url": "/docs/data/organizations-and-projects"
             },
