@@ -9,6 +9,8 @@ import get from 'lodash.get'
 import slugify from 'slugify'
 import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
+import { Heading } from 'components/Heading'
+import { ZoomImage } from 'components/ZoomImage'
 
 const months = [
     'January',
@@ -138,23 +140,29 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                                                     <span>{topicName}</span>
                                                 </p>
                                             )}
-                                            <h3 className="mt-0 mb-1">{title}</h3>
+                                            <Heading as="h3" id={slugify(title, { lower: true })} className="mt-0 mb-1">
+                                                {title}
+                                            </Heading>
                                             {teamName && (
                                                 <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>
                                             )}
                                             {mediaURL && (
                                                 <div className="my-4">
                                                     {media?.data?.attributes?.mime === 'video/mp4' ? (
-                                                        <video
-                                                            className="w-full"
-                                                            src={mediaURL}
-                                                            autoPlay
-                                                            loop
-                                                            muted
-                                                            playsInline
-                                                        />
+                                                        <ZoomImage>
+                                                            <video
+                                                                className="max-w-2xl w-full"
+                                                                src={mediaURL}
+                                                                autoPlay
+                                                                loop
+                                                                muted
+                                                                playsInline
+                                                            />
+                                                        </ZoomImage>
                                                     ) : (
-                                                        <img src={mediaURL} className="w-full" />
+                                                        <ZoomImage>
+                                                            <img src={mediaURL} className="max-w-2xl w-full" />
+                                                        </ZoomImage>
                                                     )}
                                                 </div>
                                             )}
@@ -180,7 +188,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
 
 export const query = graphql`
     query ChangelogQuery($year: Int!) {
-        allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: $year } }) {
+        allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: 2023 }, complete: { eq: true } }) {
             nodes {
                 date
                 description
