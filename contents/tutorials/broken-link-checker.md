@@ -1,6 +1,6 @@
 ---
 title: How to create a broken link (404) checker
-date: 2023-05-31
+date: 2023-06-01
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
