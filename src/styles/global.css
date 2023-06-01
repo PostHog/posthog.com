@@ -1205,7 +1205,7 @@ li.squeak-left-border {
     @apply before:h-[14px]; /* exiting thread replies - this overrides the reply box (for the user) */
 }
 
-.squeak-post-markdown {
+.community-post-markdown {
     @apply text-[15px] leading-normal break-words pb-3;
 
     a {
