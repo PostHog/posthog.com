@@ -349,9 +349,17 @@ The five levels of The Product-Market Fit Game should help you work out when you
 
 - ** _Do not_ become a solution looking for a problem.** It's easy to become attached to your existing code or problem. Be especially wary of very fractional pivots. One of our first ideas was a tool to monitor tech debt – it inserted a survey as a GitHub check asking the engineer where they encountered problems, and how much time was wasted. We had to pivot when it was impossible to sell it. When then moved into using the same surveys to monitor engineering happiness, re-using our code. The result? A week of wasted meetings.
 
-## Summary / Final Thoughts
+## Final thoughts
 
-SOME KIND OF CONCLUSION
+For Tim and me, one of the most important parts of getting to product market fit, was simply driving from our house to dinners at YC and back  for an hour a few times a week.
+
+Getting to product market fit is very hard because it's a multi variate problem - you simply do not know _exactly_ why things are or are not working in the early days. As you get further along, you start to figure out what the variables are, and you realize there are more and more of them than you realized.
+
+As a result, you'll be filled with doubt by default in the early days. At the same time, you should be cranking as fast as humanly possible because you'll learn the most by doing.
+
+So, why the drives?
+
+The ultimate failure mode is not to grasp the big picture of what you're working on. One of the most important things you can do is remind yourself - you are playing this game. Take time out every week. For us, being in a car meant we didn't have our laptops and it forced us to reflect. Give yourself the space to look at this game as the big picture.
 
 [^1]: Of course, there are exceptions – a fundamental shift in technology may unlock the ability to solve problems that were previously unsolved – but it means you are a solution looking for a problem, and that hardly ever works.
 
