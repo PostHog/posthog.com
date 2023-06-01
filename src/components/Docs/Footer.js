@@ -65,12 +65,6 @@ export default function Footer({ contributors, filePath, title }) {
                             <h3 className="text-lg text-white">Community & support</h3>
                             <ul className="m-0 p-0 list-none">
                                 <li>
-                                    Join our{' '}
-                                    <Link className="text-yellow hover:text-yellow" to="/slack">
-                                        Slack community
-                                    </Link>
-                                </li>
-                                <li>
                                     Add a{' '}
                                     <a
                                         className="text-yellow hover:text-yellow"
