@@ -37,6 +37,7 @@ export type QuestionData = {
     numReplies: number | null
     archived: boolean
     activeAt: string
+    pinnedTopics: StrapiData<TopicData[]>
 }
 
 export type AvatarData = {

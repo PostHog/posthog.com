@@ -58,6 +58,7 @@ const query = (id: string | number, isModerator: boolean) =>
                     },
                 },
                 topics: true,
+                pinnedTopics: true,
             },
         },
         {
@@ -342,6 +343,26 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         mutate()
     }
 
+    const pinTopics = async (topicIDs: number[]) => {
+        if (!topicIDs) return
+        const body = JSON.stringify({
+            data: {
+                pinnedTopics: topicIDs,
+            },
+        })
+
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionData?.id}`, {
+            method: 'PUT',
+            body,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        mutate()
+    }
+
     return {
         question: questionData,
         reply,
@@ -354,5 +375,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         addTopic,
         removeTopic,
         archive,
+        pinTopics,
     }
 }
