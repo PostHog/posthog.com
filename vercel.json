@@ -844,7 +844,8 @@
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
         { "source": "/blog/posthog-changelog", "destination": "/roadmap/changelog" },
         { "source": "/community", "destination": "/questions", "statusCode": 302 },
-        { "source": "/roadmap/changelog", "destination": "/roadmap/changelog/2023" }
+        { "source": "/roadmap/changelog", "destination": "/roadmap/changelog/2023" },
+        { "source": "/blog/posthog-changelog", "destination": "/roadmap/changelog/2023" }
     ],
     "rewrites": [
         {
