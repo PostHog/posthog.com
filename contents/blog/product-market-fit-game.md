@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["james-hawkins"]
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: ../images/blog/pmf-game-guide/pmf-guide-hero.png
 featuredImageType: full
 category: Startups
 tags:
@@ -35,7 +35,7 @@ Let's press start...
 
 ### Level 1 - Find a significant problem work on
 
-//TODO: Graphic for level here
+![pmf-guide](../images/blog/pmf-game-guide/pmf-level-1.png)
 
 Start by solving a problem you've had yourself. It needs to be a problem you've _both had, and actually tried to solve_, otherwise it can't be a significant problem.
 
@@ -62,7 +62,7 @@ Many people spend months or years attempting to validate their idea in advance, 
 
 ### Level 2 - Validate the problem really exists by talking to users
 
-// TODO: Level 2 image here
+![pmf-guide](../images/blog/pmf-game-guide/pmf-level-2.png)
 
 Now that you _think_ there is a problem, you should figure out if others see the same issue. To do this, talk to them.
 
@@ -72,7 +72,7 @@ It's too late to tell you this, but the more helpful you've been to other people
 
 Here are a list of ways to get meetings, ranked from easiest to hardest:
 
-![6 ways to get meetings](../images/blog/pmf-game-guide/ways-to-get-meetings-posthog.png)
+![6 ways to get meetings](../images/blog/pmf-game-guide/ways-to-get-meetings.png)
 
 Some tips for getting meetings:
 
@@ -122,7 +122,7 @@ Work your way from top to bottom:
 
 ### Level 3 - Validate your MVP by recruiting real users
 
-//TODO: Level 3 image here
+![pmf-guide](../images/blog/pmf-game-guide/pmf-level-3.png)
 
 You should start level 3 as soon as you have something for users to use. You need to _keep_ talking to users throughout this level, but now you can validate better because you have a product they can see.
 
@@ -155,6 +155,8 @@ These are all the reasons why users may not use your product:
 * **Users don't really have the problem** you thought they had from your interviews. Pivot to a new problem. Back to Level 0.
 
 ### Level 4 – Validate your product by retaining users
+
+![pmf-guide](../images/blog/pmf-game-guide/pmf-level-4.png)
 
 Hooray, so people are showing up. Now you need to see if they're coming back or not. Figure out what your expected frequency is for usage, and check if that's roughly how often users are using your product. Users will return if you can repeatedly solve a problem for them.
 
@@ -195,6 +197,8 @@ Closing the loop above is the way to cement your product-market fit because:
 * **Users use your product but don't encounter your problem often.** Proceed to level 5. It may be hard to get significant revenue for an infrequent problem, or it may be that you don't experience much demand. If the number of users that experience this problem is huge even if the order value is tiny, that's ok. If it was extremely hard finding the first users _and_ it's hard to charge much for the product, this problem isn't a big enough one – go back to level 1.
 
 ### Level 5 - Onboard your first 5 reference paying customers
+
+![pmf-guide](../images/blog/pmf-game-guide/pmf-level-5.png)
 
 Start by figuring out your [Ideal Customer Profile](/blog/creating-ideal-customer-profile).
 
