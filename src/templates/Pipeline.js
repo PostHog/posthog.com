@@ -57,7 +57,7 @@ export default function Pipeline({ data, pageContext: { next, previous } }) {
     const { title, subtitle, thumbnail, description, filters } = pageData?.frontmatter
     const slugger = new GithubSlugger()
     const Documentation = () => {
-        return (
+        return documentation ? (
             <>
                 <h4 className="mt-6 mb-2">{title} documentation</h4>
                 <ul className="m-0 p-0 list-none">
@@ -77,7 +77,7 @@ export default function Pipeline({ data, pageContext: { next, previous } }) {
                     })}
                 </ul>
             </>
-        )
+        ) : null
     }
 
     return (

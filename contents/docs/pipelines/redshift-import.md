@@ -2,7 +2,7 @@
 title: Redshift Import
 github: https://github.com/PostHog/posthog-redshift-import-plugin
 installUrl: https://app.posthog.com/project/apps?name=Redshift+Import
-thumbnail: ../../apps/thumbnails/redshift.svg
+thumbnail: ../../pipelines/thumbnails/redshift.svg
 tags:
     - redshift-import
 ---

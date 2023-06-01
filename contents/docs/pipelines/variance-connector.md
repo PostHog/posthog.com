@@ -2,7 +2,7 @@
 title: Variance Connector
 github: https://github.com/PostHog/posthog-variance-plugin
 installUrl: https://app.posthog.com/project/apps?name=Variance
-thumbnail: ../../apps/thumbnails/variance.png
+thumbnail: ../../pipelines/thumbnails/variance.png
 tags:
     - variance-connector
 ---

@@ -2,7 +2,7 @@
 title: GitLab Release Tracker
 github: https://github.com/PostHog/gitlab-release-tracking-plugin
 installUrl: https://app.posthog.com/project/apps?name=Gitlab+Release+Tracker
-thumbnail: ../../apps/thumbnails/gitlab.png
+thumbnail: ../../pipelines/thumbnails/gitlab.png
 tags:
     - gitlab-release-tracker
 ---

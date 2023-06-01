@@ -2,7 +2,7 @@
 title: Stripe Connector
 github: https://github.com/posthog/stripe-plugin
 installUrl: https://app.posthog.com/project/apps?name=stripe
-thumbnail: ../../apps/thumbnails/stripe-connector.png
+thumbnail: ../../pipelines/thumbnails/stripe-connector.png
 tags:
     - stripe-connector
 ---

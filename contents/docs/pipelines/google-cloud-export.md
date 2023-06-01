@@ -2,7 +2,7 @@
 title: Google Cloud Export
 github: https://github.com/PostHog/posthog-gcs-plugin
 installUrl: https://app.posthog.com/project/apps?name=GCS+Export
-thumbnail: ../../apps/thumbnails/gcs-export.png
+thumbnail: ../../pipelines/thumbnails/gcs-export.png
 tags:
     - gcs-export
 ---

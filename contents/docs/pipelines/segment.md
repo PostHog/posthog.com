@@ -1,7 +1,7 @@
 ---
 title: Segment Connector
 github: https://github.com/PostHog/posthog-segment
-thumbnail: ../../apps/thumbnails/segment.png
+thumbnail: ../../pipelines/thumbnails/segment.png
 tags:
     - segment
 ---

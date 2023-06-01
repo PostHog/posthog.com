@@ -2,7 +2,7 @@
 title: Intercom Connector
 github: https://github.com/posthog/posthog-intercom-plugin
 installUrl: https://app.posthog.com/project/apps?name=Intercom
-thumbnail: ../../apps/thumbnails/intercom.png
+thumbnail: ../../pipelines/thumbnails/intercom.png
 tags:
     - intercom
 ---

@@ -1,6 +1,6 @@
 ---
 title: RudderStack Import
-thumbnail: ../../apps/thumbnails/rudderstack-export.png
+thumbnail: ../../pipelines/thumbnails/rudderstack-export.png
 topics:
     - rudderstack
 ---

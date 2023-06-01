@@ -2,7 +2,7 @@
 title: Databricks Export
 github: https://github.com/posthog/posthog-databricks-plugin
 installUrl: https://app.posthog.com/project/apps?name=posthog+databricks+plugin
-thumbnail: ../../apps/thumbnails/databricks.png
+thumbnail: ../../pipelines/thumbnails/databricks.png
 tags:
     - databricks
 ---

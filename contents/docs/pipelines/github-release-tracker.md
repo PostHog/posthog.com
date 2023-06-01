@@ -2,7 +2,7 @@
 title: GitHub Release Tracker
 github: https://github.com/PostHog/github-release-tracking-plugin
 installUrl: https://app.posthog.com/project/apps?name=Github+Release+Tracker
-thumbnail: ../../apps/thumbnails/github.png
+thumbnail: ../../pipelines/thumbnails/github.png
 tags:
     - github-release-tracker
 ---

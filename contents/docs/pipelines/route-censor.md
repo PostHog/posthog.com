@@ -2,7 +2,7 @@
 title: Route censor
 github: https://github.com/PostHog/posthog-route-censor-plugin
 installUrl: https://app.posthog.com/project/apps?name=route-censor
-thumbnail: ../../apps/thumbnails/censor-app
+thumbnail: ../../pipelines/thumbnails/censor-app
     - route-censor
 ---
 

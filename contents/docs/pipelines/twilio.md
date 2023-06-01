@@ -2,7 +2,7 @@
 title: Twilio Connector
 github: https://github.com/PostHog/posthog-twilio-plugin
 installUrl: https://app.posthog.com/project/apps?name=posthog-twilio-plugin
-thumbnail: ../../apps/thumbnails/twilio.png
+thumbnail: ../../pipelines/thumbnails/twilio.png
 tags:
     - twilio
 ---

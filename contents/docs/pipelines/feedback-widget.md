@@ -2,7 +2,7 @@
 title: Feedback Widget
 github: https://github.com/PostHog/feedback-app
 installUrl: https://app.posthog.com/project/apps?name=Feedback%20Widget
-thumbnail: ../../apps/thumbnails/feedback-widget.png
+thumbnail: ../../pipelines/thumbnails/feedback-widget.png
 tags:
     - feedback-widget
 ---

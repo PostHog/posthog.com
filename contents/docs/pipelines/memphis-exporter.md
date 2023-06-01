@@ -2,7 +2,7 @@
 title: Memphis Exporter
 github: https://github.com/PostHog/posthog-memphisdev-app
 installUrl: https://app.posthog.com/project/apps?name=memphis
-thumbnail: ../../apps/thumbnails/memphis_logo.jpg
+thumbnail: ../../pipelines/thumbnails/memphis_logo.jpg
 tags:
     - memphis-exporter
 ---

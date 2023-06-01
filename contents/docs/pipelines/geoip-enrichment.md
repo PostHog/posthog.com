@@ -2,7 +2,7 @@
 title: GeoIP Enricher
 github: https://github.com/PostHog/posthog-plugin-geoip
 installUrl: https://app.posthog.com/project/apps?name=GeoIP
-thumbnail: ../../apps/thumbnails/geoip.png
+thumbnail: ../../pipelines/thumbnails/geoip.png
 tags:
     - geoip
 ---

@@ -1,6 +1,6 @@
 ---
 title: n8n Connector
-thumbnail: ../../apps/thumbnails/n8n.png
+thumbnail: ../../pipelines/thumbnails/n8n.png
 tags:
     - n8n
 ---

@@ -1,7 +1,7 @@
 ---
 title: Airbyte Exporter
 installUrl: https://docs.airbyte.com/integrations/sources/posthog/
-thumbnail: ../../apps/thumbnails/airbyte.png
+thumbnail: ../../pipelines/thumbnails/airbyte.png
 tags:
     - airbyte
 ---

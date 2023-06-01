@@ -2,7 +2,7 @@
 title: Outfunnel Exporter
 github: https://github.com/PostHog/outfunnel-export-plugin
 installUrl: https://app.posthog.com/project/apps?name=Outfunnel 
-thumbnail: ../../apps/thumbnails/outfunnel-logo.png
+thumbnail: ../../pipelines/thumbnails/outfunnel-logo.png
 tags:
     - outfunnel-export
 ---
