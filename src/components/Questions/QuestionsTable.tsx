@@ -48,7 +48,7 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
                         <div className="w-4 flex-shrink-0">
                             {pinned ? (
                                 <Tooltip content="Pinned">
-                                    <span className="relative text-black/60">
+                                    <span className="relative text-primary/60 dark:text-primary-dark/60">
                                         <Pin className="w-4 h-4" />
                                     </span>
                                 </Tooltip>
@@ -122,7 +122,7 @@ export const QuestionsTable = ({
                 <div className="hidden xl:block xl:col-span-3">{sortBy === 'activity' ? 'Last active' : 'Created'}</div>
             </li>
             {pinnedQuestions?.data?.length > 0 ? (
-                <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none px-4 py-2 rounded-md bg-gray-accent-light">
+                <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none bg-gray-accent-light dark:bg-gray-accent-dark">
                     {pinnedQuestions.data.filter(Boolean).map((question) => {
                         return (
                             <Row
