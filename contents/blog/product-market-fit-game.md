@@ -217,9 +217,7 @@ You will also need some pricing. You are likely to change this numerous times:
 
 > **Important:** Don't leap straight to self-serve. Remember that, at this stage, you're optimizing for learning, not revenue. Jumping too soon to self-serve will reduce your opportunities for learn. Talk to your early users about what they're prepared to pay.
 
-Now it's to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others. 
-
-If you reach this point... congratulations, you've completed the product-market fit game.
+Now it's to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others. If you manage this five times - congratulations, you've completed the product-market fit game.
 
 #### Failure modes
 
