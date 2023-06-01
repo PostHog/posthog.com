@@ -4,6 +4,8 @@ import { ThumbsDown, ThumbsUp } from 'components/Icons/Icons'
 import { motion } from 'framer-motion'
 import usePostHog from '../../hooks/usePostHog'
 import { button as callToAction } from 'components/CallToAction'
+import { useQuestions } from 'hooks/useQuestions'
+import { Squeak } from 'components/Squeak/components/Squeak'
 
 const button = cntl`
     text-base
@@ -35,14 +37,14 @@ const button = cntl`
 const ResponseButtons: React.FC<{ submitResponse: (helpful: boolean) => void }> = ({ submitResponse }) => {
     return (
         <>
-            <h3 className="text-xl font-bold m-0 mb-3">Was this page useful?</h3>
+            <h3 className="text-xl font-bold m-0 mb-3">Did this page answer your question?</h3>
             <div className="flex space-x-3 items-center">
                 <button onClick={() => submitResponse(true)} className={button}>
                     <span>Yes</span>
                     <ThumbsUp />
                 </button>
                 <button onClick={() => submitResponse(false)} className={button}>
-                    <span>Could be better</span>
+                    <span>No</span>
                     <ThumbsDown />
                 </button>
             </div>
@@ -94,6 +96,7 @@ const ResponseMessage = () => {
 export const DocsPageSurvey = () => {
     const [state, setState] = React.useState<'base' | 'helpful' | 'not-helpful' | 'thanks'>('base')
     const posthog = usePostHog()
+    const { refresh } = useQuestions({})
 
     const submitResponse = (wasHelpful: boolean) => {
         if (posthog) {
@@ -128,13 +131,7 @@ export const DocsPageSurvey = () => {
                 />
             )
         case 'not-helpful':
-            return (
-                <ResponseFeedback
-                    title="What can we improve?"
-                    placeholder="Let us know what we can improve on"
-                    onSubmit={submitFeedback}
-                />
-            )
+            return <Squeak />
         case 'thanks':
             return <ResponseMessage />
     }
