@@ -212,8 +212,8 @@ Be upfront with customers. This step may prove tricky if you never set any comme
 
 You will also need some pricing. You are likely to change this numerous times:
 - **Step 1** is to create some kind of internal table for you to use and iterate with each handful of sales calls.
-- **Step 2** may be to make this transparent online.
-- **Step 3**, for companies focusing on self-serve, is to enable people to pay without talking to you. 
+- **Step 2** may be to make this transparent online. Don't do this until step 1 is working reasonably well.
+- **Step 3**, for companies focusing on self-serve, is to enable people to pay without talking to you. Do this only after step 2, and only if it suits your go to market - if you're enterprise focused and selling from the top down, it's a bad idea. If you're product-led then go for it.
 
 > **Important:** Don't leap straight to self-serve. Remember that, at this stage, you're optimizing for learning, not revenue. Jumping too soon to self-serve will reduce your opportunities for learn. Talk to your early users about what they're prepared to pay.
 
