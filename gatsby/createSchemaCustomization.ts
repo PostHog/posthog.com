@@ -24,7 +24,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             gatsbyImageData: buildGatsbyImageDataObject({
                 url: imageURL,
                 imgixClientOptions: {
-                    domain: process.env.IMIGIX_URL,
+                    domain: process.env.IMGIX_URL,
                     secureURLToken: process.env.IMGIX_TOKEN,
                 },
                 resolverArgs: {
