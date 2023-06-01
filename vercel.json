@@ -834,7 +834,6 @@
         { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/monitoring" },
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },
         { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" },
-        { "source": "/community", "destination": "/questions" },
         { "source": "/blog/customer-churn-analysis-guide", "destination": "/blog/churn-rate-vs-retention-rate" },
         { "source": "/questions/autocapture", "destination": "/docs/data/autocapture" },
         { "source": "/product-analytics", "destination": "/product-analytics/features" },
@@ -842,7 +841,11 @@
         { "source": "/feature-flags", "destination": "/feature-flags/features" },
         { "source": "/ab-testing", "destination": "/ab-testing/features" },
         { "source": "/product-os", "destination": "/product-os/features" },
-        { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" }
+        { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
+        { "source": "/blog/posthog-changelog", "destination": "/roadmap/changelog" },
+        { "source": "/community", "destination": "/questions", "statusCode": 302 },
+        { "source": "/roadmap/changelog", "destination": "/roadmap/changelog/2023" },
+        { "source": "/blog/posthog-changelog", "destination": "/roadmap/changelog/2023" }
     ],
     "rewrites": [
         {
