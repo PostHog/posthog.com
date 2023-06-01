@@ -41,6 +41,18 @@ export default function Questions({ data, pageContext }: IProps) {
         topicId: data?.squeakTopic?.squeakId,
     })
 
+    const { questions: pinnedQuestions } = useQuestions({
+        limit: 5,
+        sortBy,
+        filters: {
+            pinnedTopics: {
+                id: {
+                    $eq: data?.squeakTopic?.squeakId,
+                },
+            },
+        },
+    })
+
     return (
         <CommunityLayout title={data.squeakTopic.label}>
             <div className="max-w-6xl mx-auto space-y-8 pb-12">
@@ -111,6 +123,7 @@ export default function Questions({ data, pageContext }: IProps) {
                                 title: `${data?.squeakTopic?.label} questions`,
                                 url: `/questions/topic/${pageContext.slug}`,
                             }}
+                            pinnedQuestions={pinnedQuestions}
                         />
                     </div>
                 </section>
