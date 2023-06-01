@@ -138,8 +138,8 @@ export default function ProfilePage({ params }: PageProps) {
                                         src={getAvatarURL(profile)}
                                     />
 
-                                    <div className="space-y-3">
-                                        <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
+                                    <div className="space-y-3 mb-8">
+                                        <h1 className="m-0">{name || 'Anonymous'}</h1>
                                         {profile.companyRole && <p className="text-gray">{profile?.companyRole}</p>}
                                     </div>
 
