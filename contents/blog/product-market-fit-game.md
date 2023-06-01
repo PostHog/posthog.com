@@ -211,15 +211,23 @@ List out all the potential users you could sell down the first column in a sprea
 Be upfront with customers. This step may prove tricky if you never set any commercial expectation with them early on. If so, you may find it easier to sell to newer users with clearer expectations. Use your website to make clear that your service is a paid one, or will be once you're of beta. 
 
 You will also need some pricing. You are likely to change this numerous times:
-- **Step 1** is to create some kind of internal table for you to use and iterate. 
+- **Step 1** is to create some kind of internal table for you to use and iterate with each handful of sales calls.
 - **Step 2** may be to make this transparent online.
 - **Step 3**, for companies focusing on self-serve, is to enable people to pay without talking to you. 
 
 > **Important:** Don't leap straight to self-serve. Remember that, at this stage, you're optimizing for learning, not revenue. Jumping too soon to self-serve will reduce your opportunities for learn. Talk to your early users about what they're prepared to pay.
+
 Now it's to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others. 
 
-If you reach this point... congratulations, you've completed the product-market fit game. If not, 
-go back to Level 0.
+If you reach this point... congratulations, you've completed the product-market fit game.
+
+#### Failure modes
+
+* **You outsource sales to someone else.** It is already a multivariate problem trying to get product market fit, don't also add in the question of "is it the product, or the person selling it" by relying on someone else. Realistically, a founder (regardless of the level of experience) is _the_ best person in the world to sell the product they made. Lots of people want to outsource or even skip this step - fear of failure at the final hurdle, a lack of confidence through never having sold before, laziness (it is a painful, hard experience to sell a product) or ego (I've raised a lot of money, this isn't the best use of my time). The reason a founder should focus on this, is that having a valid business model is critical _and_ getting there may require lots of iteration on product, pricing, positioning and so on. A founder can change all of these things more quickly and easily than an employee.
+* **You can't get the first customer** 
+* **People aren't truly happy but you are managing to get revenue from them** It's likely you have the combination of charging very little but not actually solving the problem - they're paying _something_ out of politness or a hope you'll one day solve their problem. If they aren't happy _and_ are paying a lot, they must have a huge problem and are just hopeful you'll figure it out. In either case, go back to the previous level and try to solve the problem more fully. 
+* **You can't get all five customers to look like each other** Well done on getting something sold. However, you can't sell a different product to every customer and call that product market fit! Can you repeat one of the sales you made four more times? Then you've completed this level. If not, go back a level.
+* **You keep getting stuck on this step** if you repeatedly get a little traction but cannot convert that to revenue, you perhaps don't have the skills to solve the problem you're tackling properly, even if the problem exists. If you _want_ to keep trying again, I suggest you do, but if this has happened a bunch of times, you'll probably have an easier time if you just choose an easier-to-solve problem.
 
 ## What you need to complete the game
 
