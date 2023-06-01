@@ -403,6 +403,10 @@
                 }
             },
             {
+                "name": "Insights",
+                "url": "/docs/product-analytics/insights"
+            },
+            {
                 "name": "Lifecycle",
                 "url": "/docs/product-analytics/lifecycle"
             },
@@ -460,6 +464,10 @@
             {
                 "name": "Data retention",
                 "url": "/docs/session-replay/data-retention"
+            },
+            {
+                "name": "Iframe recording",
+                "url": "/docs/session-replay/iframes"
             },
             {
                 "name": "Troubleshooting and FAQs",
@@ -794,6 +802,10 @@
                     {
                         "url": "/docs/apps/event-sequence-timer",
                         "name": "Event Sequence Timer"
+                    },
+                    {
+                        "url": "/docs/apps/filter-out",
+                        "name": "Filter Out"
                     },
                     {
                         "url": "/docs/apps/first-time-event-tracker",

@@ -113,6 +113,17 @@ analytics.track('user signed up', {
 })
 ```
 
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "user signed up",
+    "distinct_id": "[distinct id]",
+    "properties": {
+        "$groups": {"company": "42dlsfj23f"}
+    }
+}' <ph_instance_address>/capture/
+```
+
 </MultiLanguage>
 
 > **Tip:** When specifying the group type, use the singular version for clarity (`company` instead of `companies`).
@@ -182,6 +193,23 @@ analytics.group('42dlsfj23f', {
     "user_count": 33,
     "date_joined": "2020-01-23T00:00:00.000Z"
 })
+```
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "$groupidentify",
+    "properties": {
+        "distinct_id": "company_42dlsfj23f",
+        "$group_type": "company",
+        "$group_key": "42dlsfj23f",
+        "$group_set": {
+            "name": "PostHog",
+            "user_count": 33,
+            "date_joined": "2020-01-23T00:00:00.000Z"
+        }
+    }
+}' <ph_instance_address>/capture/
 ```
 
 </MultiLanguage>
