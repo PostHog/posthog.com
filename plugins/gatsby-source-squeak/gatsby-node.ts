@@ -385,9 +385,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             dateCompleted: Date @dateformat
             projectedCompletion: Date @dateformat
             category: String!
-            milestone: Boolean!
-            completed: Boolean!
-            betaAvailable: Boolean!
+            milestone: Boolean
+            completed: Boolean
+            betaAvailable: Boolean
             githubUrls: [String!]!
             githubPages: [GithubPage!]!
             teams: [SqueakTeam!] @link(by: "id", from: "teams.id")
