@@ -16,11 +16,11 @@ tags:
 
 Before anyone can use your product, you must make sure it actually works. Figuring this out is more tricky than just running it locally. Changes often have unintended consequences on other parts of the app or create non-obvious issues. To track and prevent this, companies rely on monitoring.
 
-There are a couple of ways to do monitoring. The first is synthetic monitoring which relies on  simulated behaviors and software tests. The second way, which we cover in this post, is real user monitoring. This is relying on the behavior of real users to ensure your product is working as intended. 
+There are a few ways to do monitoring. The first is synthetic monitoring, which relies on  simulated behaviors and software tests. The second way, which we cover in this post, is real user monitoring. This is monitoring the behavior of real users in your product to ensure that it is working as intended. 
 
 ## Real user monitoring in detail
 
-Real user monitoring is tracking the usage, performance, and quality of your product based on how users are experiencing it. It is different from synthetic monitoring which tracks similar metrics but with tests and simulations. 
+Real user monitoring is tracking the usage, performance, and quality of your product based on how users are experiencing it. It is different from synthetic monitoring, which tracks similar metrics but with tests and simulations. 
 
 Because of this difference, real user monitoring is a closer representation of reality. It identifies real issues, largely broken down into two classes:
 
@@ -67,11 +67,11 @@ Real user monitoring creates trust, which is both useful for internal prediction
 
 ## How to setup real user monitoring with PostHog
 
-With a knowledge of what real user monitoring is and why it is important, we can show you how to set it up for yourself. Setup happens over three stages: capture, analyze, and action. PostHog has the tools to do all three.
+Setup happens over three stages: capture, analyze, and action. PostHog has the tools to do all three.
 
 ### 1. Capture
 
-To setup real user monitoring in PostHog, we rely on session replays and custom event capture. 
+To capture data for real user monitoring in PostHog, we rely on [session replays](/docs/session-replay) and [custom event capture](/docs/getting-started/send-events#2-capture-custom-events). 
 
 Session replays capture exactly how users are interacting with your app. They also include errors, console logs, and performance measurements. To enable session replays, initialize a `posthog-js` client or add the [snippet](/docs/getting-started/install?tab=snippet) to your site and make sure to enable the options related to "Recordings" in your [project settings](https://app.posthog.com/project/settings#recordings).
 
@@ -81,7 +81,7 @@ To capture errors, query speed, aggregate performance metrics, and any other eve
 
 ### 2. Analyze
 
-Once you’ve begun to capture data, you can start to analyze it. This helps you identify usability and performance issues in your product. You can [create insights](https://app.posthog.com/insights/new), and add them to a monitoring [dashboard](/docs/product-analytics/dashboards). Some insights you might want to add to your dashboard include:
+Once you’ve begun to capture data, you can start to analyze it. This helps you identify usability and performance issues in your product. You can [create insights](https://posthog.com/docs/product-analytics/insights#how-to-create-an-insight), and add them to a monitoring [dashboard](/docs/product-analytics/dashboards). Some insights you might want to add to your dashboard include:
 
 - Errors broken down by page, group, or user.
 - Average or p95 page load speed broken down by page.
@@ -91,11 +91,11 @@ Once you’ve begun to capture data, you can start to analyze it. This helps you
 
 ![Dashboard](../images/blog/real-user-monitoring//dashboard.png)
 
-For each of these insights, you can use session replays to dive deeper into exactly what is happening in the related sessions. Just click the visualization to get a list of users and their replays. In those replays, you can see where events like errors or queries happen, console logs, and performance details for that specific session. 
+For each of these insights, you can use session replays to dive deeper into exactly what is happening in the related sessions. Click the visualization to get a list of users and their replays. In those replays, you can see where events like errors or queries happen, console logs, and performance details for that specific session. 
 
 ![Dive](../images/blog/real-user-monitoring/dive.mp4)
 
-The combination of these enables you to understand your current experience, understand what areas need improvement, and monitor the quality of the service you are providing.
+The combination of these insights enables you to understand your current experience, understand what areas need improvement, and monitor the quality of the service you are providing.
 
 ### 3. Action
 
