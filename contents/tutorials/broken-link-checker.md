@@ -7,7 +7,7 @@ sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-12.png
 tags: ['actions', 'configuration']
 ---
-Broken links and 404s are frustrating for users. Without a way to check for them, you might not realize they exist and can’t fix them. This tutorial shows you how to create a broken link checker that sends a notification in Slack when a user visits a page that doesn’t exist.
+Broken links and 404s are frustrating for users. Without a way to check for them, you might not realize they exist and can’t fix them. This tutorial shows you how to create a broken link checker for a Next.js app that sends a notification in Slack when a user visits a page that doesn’t exist.
 
 ## Creating a Next.js app and adding PostHog
 
