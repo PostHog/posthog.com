@@ -104,7 +104,7 @@ When you go to a route that doesn’t exist, like [http://localhost:3000/test](h
 
 ## Setting up our Slack webhook
 
-Since we want to send our 404s and broken links to somewhere we actually check, we will set up a Slack webhook to send notifications.
+Since we want to send our 404s and broken links to somewhere we check frequently, we will set up a Slack webhook to send notifications.
 
 To do this: 
 
