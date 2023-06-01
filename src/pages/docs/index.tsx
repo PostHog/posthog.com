@@ -364,6 +364,9 @@ export const query = graphql`
                 }
                 frontmatter {
                     title
+                    thumbnail {
+                        publicURL
+                    }
                 }
             }
         }

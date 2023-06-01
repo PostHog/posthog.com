@@ -138,6 +138,9 @@ export const query = graphql`
                     type
                     maintainer
                 }
+                thumbnail {
+                    publicURL
+                }
             }
         }
         documentation: mdx(fields: { slug: { eq: $documentation } }) {
