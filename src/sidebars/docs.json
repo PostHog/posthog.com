@@ -462,6 +462,10 @@
                 "url": "/docs/session-replay/configure"
             },
             {
+                "name": "Sharing and emedding",
+                "url": "/docs/session-replay/sharing"
+            },
+            {
                 "name": "Data retention",
                 "url": "/docs/session-replay/data-retention"
             },
