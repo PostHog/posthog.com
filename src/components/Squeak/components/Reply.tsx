@@ -7,6 +7,7 @@ import Avatar from './Avatar'
 import getAvatarURL from '../util/getAvatar'
 import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
+import Logomark from 'components/Home/images/Logomark'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -31,6 +32,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
+    const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
@@ -52,8 +54,13 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     className="flex items-center !text-black dark:!text-white"
                     to={`/community/profiles/${profile.data.id}`}
                 >
-                    <div className="mr-2">
+                    <div className="mr-2 relative">
                         <Avatar className="w-[25px] h-[25px]" image={getAvatarURL(profile?.data?.attributes)} />
+                        {isTeamMember && (
+                            <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
+                                <Logomark className="w-[16px]" />
+                            </span>
+                        )}
                     </div>
                     <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
                 </Link>

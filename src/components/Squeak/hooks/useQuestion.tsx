@@ -53,6 +53,9 @@ const query = (id: string | number, isModerator: boolean) =>
                                 avatar: {
                                     fields: ['id', 'url'],
                                 },
+                                teams: {
+                                    fields: ['id'],
+                                },
                             },
                         },
                     },

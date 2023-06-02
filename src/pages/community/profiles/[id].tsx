@@ -19,6 +19,7 @@ import { RightArrow } from '../../../components/Icons/Icons'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
 import { useNav } from 'components/Community/useNav'
+import Logomark from 'components/Home/images/Logomark'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -58,7 +59,7 @@ export default function ProfilePage({ params }: PageProps) {
                 teams: {
                     populate: {
                         profiles: {
-                            populate: ['avatar'],
+                            populate: ['avatar', 'teams'],
                         },
                     },
                 },
@@ -89,6 +90,7 @@ export default function ProfilePage({ params }: PageProps) {
     const { firstName, lastName } = profile || {}
 
     const name = [firstName, lastName].filter(Boolean).join(' ')
+    const isTeamMember = profile?.teams?.data?.length > 0
 
     const handleEditProfile = () => {
         mutate()
@@ -133,14 +135,23 @@ export default function ProfilePage({ params }: PageProps) {
                         <>
                             <div className="space-y-8 my-8">
                                 <section className="">
-                                    <Avatar
-                                        className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
-                                        src={getAvatarURL(profile)}
-                                    />
+                                    <div className="relative w-24 h-24 float-right">
+                                        <Avatar
+                                            className=" bg-gray-accent dark:gray-accent-dark"
+                                            src={getAvatarURL(profile)}
+                                        />
+                                        {isTeamMember && (
+                                            <span className="absolute -right-1 -bottom-1 h-[32px] w-[32px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
+                                                <Logomark className="w-[24px]" />
+                                            </span>
+                                        )}
+                                    </div>
 
-                                    <div className="space-y-3">
-                                        <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
-                                        {profile.companyRole && <p className="text-gray">{profile?.companyRole}</p>}
+                                    <div className="space-y-3 mb-8">
+                                        <h1 className="m-0">{name || 'Anonymous'}</h1>
+                                        {isTeamMember && profile.companyRole && (
+                                            <p className="text-gray">{profile?.companyRole}, PostHog</p>
+                                        )}
                                     </div>
 
                                     {profile?.biography && (

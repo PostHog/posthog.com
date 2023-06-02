@@ -79,7 +79,7 @@ export type ReplyData = {
     createdAt: string
     updatedAt: string
     publishedAt: string
-    profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar' | 'gravatarURL'>>
+    profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar' | 'gravatarURL' | 'teams'>>
 }
 
 export type TopicData = {
