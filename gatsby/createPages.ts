@@ -566,7 +566,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.roadmapYears.group.forEach(({ fieldValue: year }) => {
         createPage({
-            path: `/roadmap/changelog/${year}`,
+            path: `/changelog/${year}`,
             component: ChangelogTemplate,
             context: {
                 year: Number(year),
