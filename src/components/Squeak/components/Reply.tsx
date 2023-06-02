@@ -47,6 +47,8 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
         setConfirmDelete(false)
     }
 
+    const pronouns = profile?.data?.attributes?.pronouns
+
     return profile?.data ? (
         <div onClick={handleContainerClick}>
             <div className="pb-1 flex items-center space-x-2">
@@ -63,6 +65,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                         )}
                     </div>
                     <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
+                    {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
                 </Link>
                 {badgeText && (
                     <span className="border border-gray-accent-light dark:border-gray-accent-dark text-xs py-0.5 px-1 rounded-sm">
