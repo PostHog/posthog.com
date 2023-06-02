@@ -76,7 +76,6 @@ export default function ProfilePage({ params }: PageProps) {
         async (url) => {
             const res = await fetch(url)
             const { data } = await res.json()
-            console.log(data, 'THE DATA')
             return data
         }
     )
