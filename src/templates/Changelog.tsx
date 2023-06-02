@@ -188,7 +188,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
 
 export const query = graphql`
     query ChangelogQuery($year: Int!) {
-        allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: 2023 }, complete: { eq: true } }) {
+        allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: $year }, complete: { eq: true } }) {
             nodes {
                 date
                 description

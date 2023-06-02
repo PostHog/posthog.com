@@ -842,10 +842,11 @@
         { "source": "/ab-testing", "destination": "/ab-testing/features" },
         { "source": "/product-os", "destination": "/product-os/features" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
-        { "source": "/blog/posthog-changelog", "destination": "/roadmap/changelog" },
         { "source": "/community", "destination": "/questions", "statusCode": 302 },
-        { "source": "/roadmap/changelog", "destination": "/roadmap/changelog/2023" },
-        { "source": "/blog/posthog-changelog", "destination": "/roadmap/changelog/2023" }
+        { "source": "/roadmap/changelog", "destination": "/changelog/2023" },
+        { "source": "/blog/posthog-changelog", "destination": "/changelog/2023" },
+        { "source": "/roadmap/changelog/2023", "destination": "/changelog/2023" },
+        { "source": "/changelog", "destination": "/changelog/2023" }
     ],
     "rewrites": [
         {
