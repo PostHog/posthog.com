@@ -63,6 +63,7 @@ export type ProfileData = {
     questionSubscriptions: StrapiData<QuestionData[]>
     user?: StrapiData<UserData>
     topicSubscriptions: StrapiData<TopicData[]>
+    pronouns?: string | null
 }
 
 export type UserData = {
