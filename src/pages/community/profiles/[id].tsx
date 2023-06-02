@@ -20,6 +20,7 @@ import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
 import { useNav } from 'components/Community/useNav'
 import Logomark from 'components/Home/images/Logomark'
+import Label from 'components/Label'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -59,7 +60,7 @@ export default function ProfilePage({ params }: PageProps) {
                 teams: {
                     populate: {
                         profiles: {
-                            populate: ['avatar', 'teams'],
+                            populate: ['avatar', 'teams', 'pronouns'],
                         },
                     },
                 },
@@ -148,7 +149,14 @@ export default function ProfilePage({ params }: PageProps) {
                                     </div>
 
                                     <div className="space-y-3 mb-8">
-                                        <h1 className="m-0">{name || 'Anonymous'}</h1>
+                                        <div className="flex gap-x-4 items-center">
+                                            <h1 className="m-0">{name || 'Anonymous'}</h1>
+                                            {profile.pronouns && (
+                                                <div>
+                                                    <Label text={profile.pronouns} size="large" />
+                                                </div>
+                                            )}
+                                        </div>
                                         {isTeamMember && profile.companyRole && (
                                             <p className="text-gray">{profile?.companyRole}, PostHog</p>
                                         )}

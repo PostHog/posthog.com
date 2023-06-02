@@ -63,6 +63,7 @@ export type ProfileData = {
     questionSubscriptions: StrapiData<QuestionData[]>
     user?: StrapiData<UserData>
     topicSubscriptions: StrapiData<TopicData[]>
+    pronouns?: string | null
 }
 
 export type UserData = {
@@ -79,7 +80,7 @@ export type ReplyData = {
     createdAt: string
     updatedAt: string
     publishedAt: string
-    profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar' | 'gravatarURL' | 'teams'>>
+    profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar' | 'gravatarURL' | 'teams' | 'pronouns'>>
 }
 
 export type TopicData = {
