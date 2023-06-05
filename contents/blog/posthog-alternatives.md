@@ -1,5 +1,5 @@
 ---
-title: "What users say about popular PostHog alternatives"
+title: "In-depth: PostHog alternatives, compared"
 date: 2023-05-25
 rootPage: /blog
 sidebar: Blog
