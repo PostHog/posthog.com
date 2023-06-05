@@ -1,0 +1,169 @@
+The easiest way to set user properties is to include them when capturing an event:
+
+<MultiLanguage selector="tabs">
+
+```javascript
+posthog.capture(
+    'event_name', 
+    { 
+        $set: { name: 'Max Hedgehog'  },
+        $set_once: { initial_url: '/blog' },
+    }
+)
+```
+
+```node
+client.capture({
+    distinctId: 'distinct_id',
+    event: 'event_name',
+    properties: {
+        $set: { name: 'Max Hedgehog'  },
+        $set_once: { initial_url: '/blog' },
+    },
+})
+```
+
+```python
+posthog.capture(
+    'distinct_id',
+    event='event_name',
+    properties={
+        '$set': {'name': 'Max Hedgehog'},
+        '$set_once': {'initial_url': '/blog'}
+    }
+)
+```
+
+```php
+PostHog::capture(array(
+    'distinctId' => 'distinct_id',
+    'event' => 'event_name',
+    'properties' => array(
+        '$set' => array(
+            'name' => 'Max Hedgehog'
+        ),
+        '$set_once' => array(
+            'initial_url' => '/blog'
+        )
+    )
+));
+```
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id',
+    event: 'event_name',
+    properties: {
+        '$set': { name: 'Max Hedgehog' },
+        '$set_once': { initial_url: '/blog' }
+    }
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "distinct_id",
+    Event:      "event_name",
+    Properties: map[string]interface{}{
+        "$set": map[string]interface{}{
+            "name": "Max Hedgehog",
+        },
+        "$set_once": map[string]interface{}{
+            "initial_url": "/blog",
+        },
+    },
+})
+```
+
+```java
+posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
+  {
+    put("$set",  new HashMap<String, Object>() {       
+      {
+        put("name", "Max Hedgehog");
+      }
+    });
+    put("$set_once",  new HashMap<String, Object>() {
+      {
+        put("initial_url", "/blog");
+      }
+    });
+  }
+});
+```
+
+</MultiLanguage>
+
+You can also set user properties when you call the [`identify`](/docs/data/identify) method:
+
+<MultiLanguage selector="tabs">
+
+```node
+client.identify({
+    distinctId: 'distinct_id',
+    properties: {
+        name: 'Max Hedgehog',
+    },
+})
+```
+
+```javascript
+posthog.identify(
+    'distinct_id',
+    { name: 'Max Hedgehog' } // $set
+    { initial_url: '/blog' }, // $set_once
+);
+```
+
+```python
+posthog.identify(
+    'distinct_id',
+    {
+        'name': 'Max Hedgehog',
+    }
+)
+```
+
+```php
+PostHog::identify(array(
+  'distinctId' => 'distinct_id',
+  'properties' => array(
+    'name' => 'Max Hedgehog',
+  )
+));
+```
+
+```ruby
+posthog.identify({
+  distinct_id: "distinct_id",
+  properties: {
+    name: "Max Hedgehog"
+  }
+})
+```
+
+```go
+client.Enqueue(posthog.Identify{
+  DistinctId: "distinct_id",
+  Properties: posthog.NewProperties().
+    Set("name", "Max Hedgehog"),
+})
+```
+
+```java
+posthog.identify(
+  "distinct_id",
+  new HashMap<String, Object>() {
+    {
+      put("name", "Max Hedgehog");
+    }
+  }
+);
+```
+
+</MultiLanguage>
+
+User property values can be strings, booleans, numbers, objects, or arrays. Note that for objects and arrays, you'll need to use the [Property Flattener app](apps/property-flattener) in order to flatten nested properties and make them accessible through filters in the PostHog app.
+
+> Note that user properties are set in the order the events are ingested, and not according to event timestamps. Since we typically ingest events as soon as we receive them, you only need to take this into consideration when you're [importing historical data](/docs/migrate/ingest-historic-data).
+
