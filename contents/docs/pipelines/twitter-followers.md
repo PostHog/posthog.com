@@ -7,22 +7,20 @@ tags:
     - twitter-followers
 ---
 
-### What are the requirements for this app?
-
 The Twitter Followers Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 You'll also need a Twitter account and, ideally, some followers.
 
-### How do I install the Twitter Followers Tracker for PostHog?
+## Installation
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
 3. Search for 'Twitter'
 4. Select the app, press 'Install' and follow the on-screen instructions
 
-### How do I view my follower count in PostHog?
+## How do I view my follower count in PostHog?
 
 To view your follower count as a PostHog Insight, do the following:
 
@@ -31,9 +29,11 @@ To view your follower count as a PostHog Insight, do the following:
 3. A new dropdown will appear, titled 'Select property'. Select `follower_count`
 4. Visualize your follower count over time!
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

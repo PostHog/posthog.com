@@ -7,8 +7,6 @@ tags:
     - first-time
 ---
 
-### What does the First Time Event Tracker do?
-
 This app adds two new properties to events which you specify:
 
 -   `is_event_first_ever`
@@ -18,13 +16,13 @@ Using these events, you can track if each event is the first time that event has
 
 > **Note:** For Pageview and Identify events, use the event names `$pageview` and `$identify` respectively.
 
-### What are the requirements for this app?
+## Requirements
 
 The First Time Event Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the First Time Event Tracker app?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'First Time Event Tracker' and select the app, press Install.
@@ -32,15 +30,17 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 This app will only work on events ingested _after_ the app was enabled.
 
-### Does this app work retroactively?
+## Does this app work retroactively?
 
 No. This app will only work on events ingested _after_ the app was enabled.
 
 This means it will register events as being the first if there were events that occurred before it was enabled. To mitigate this, you could consider renaming the relevant events and creating an action that matches both the old event name and the new one.
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

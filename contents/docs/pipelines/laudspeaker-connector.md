@@ -7,19 +7,17 @@ tags:
     - laudspeaker-connector
 ---
 
-### What does the Laudspeaker Connector app do?
-
 The Laudspeaker Connector sends event data from PostHog to Laudspeaker, so it can be used to trigger immediate or time-delayed customer communications across multiple channels, including Slack and email. 
 
 [Laudspeaker](https://laudspeaker.com/) is an open source customer messaging service and an alternative to tools such as Braze or [Customer.io](/apps/customer-io). 
 
-### What are the requirements for this app?
+## Requirements
 
 The Laudspeaker Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the Lauspeaker Connector?
+## Installation
 
 It is recommended to start by importing PostHog users into Laudspeaker via the event integration on Laudspeaker. More information on this is available in [Laudspeaker's docs](https://laudspeaker.com/docs/).
 
@@ -35,6 +33,8 @@ To configure the app, you must provide the app with your API for `write-key`. Th
 Finally, you must provide (in PostHog) `[your_server's_url]/events/posthog` for `Lauspeaker URL` (or, if using a Laudspeaker hosted plan, `app.laudspeaker.com/events/posthog`). When this is entered, enable the app in PostHog. 
 
 Other fields (email, phone number, custom) are optional and can be specified if you want to be able to message people from PostHog through those channels with Laudspeaker
+
+## FAQ
 
 ### Is the source code for this app available?
 

@@ -7,23 +7,23 @@ tags:
     - url-query
 ---
 
-### What does the URL query parameter converter app do?
-
 This app automatically converts URL query parameters for specific terms into event properties in PostHog, enabling you to analyse them like any other data point. This can be useful for seeing how your product or content converts based on search terms. 
 
-### What are the requirements for this app?
+## Requirements
 
 This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the this app?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'URL query parameter converter' and select the app, press Install.
 3. Configure the app to whitelist the parameters you want to turn into events.
 
 That's it!
+
+## FAQ
 
 ### Is the source code for this app available?
 

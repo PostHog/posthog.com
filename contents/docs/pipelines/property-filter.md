@@ -7,19 +7,17 @@ tags:
     - property-filter
 ---
 
-### What does the Property Filter app do?
-
 This app sets all specified properties on ingested events to `null`, effectively preventing PostHog from collecting information you do not want it to use.
 
 It is [used by teams such as WittyWorks to protect user privacy](https://posthog.com/customers/wittyworks) by removing unneeded geographic data.
 
-### What are the requirements for this app?
+## Requirements
 
 The Property Filter app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the Property Filter app?
+## Installation
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
@@ -30,13 +28,15 @@ It's important to note that this app effectively removes information from PostHo
 
 Note: If you are filtering `$ip`, `event.ip` will also be set to null.
 
-### Does this filter properties for retrospective events?
+## Does this filter properties for retrospective events?
 
 No. The Property Filter app will only work on events ingested _after_ it was enabled.
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

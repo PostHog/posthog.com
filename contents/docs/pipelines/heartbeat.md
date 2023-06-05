@@ -7,26 +7,26 @@ tags:
     - heartbeat
 ---
 
-### What does the Heartbeat app do?
-
 The Heartbeat app simply sends one event to your project every minute for as long as it is enabled. It's mainly useful for testing and works well in conjunction with the Ingestion Alert app.
 
-### What are the requirements for this app?
+## Requirements
 
 The Heartbeat app doesn't require a living heart, but it _does_ require either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the Heartbeat app?
+## Installation
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
 3. Search for 'Heartbeat' press 'Install'
 4. Configure the by app by following the instructions below.
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

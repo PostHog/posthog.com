@@ -7,11 +7,9 @@ tags:
     - unduplicator
 ---
 
-### What does the Unduplicator do?
-
 This app prevents duplicate events from being ingested into PostHog. It's particularly helpful if you're backfilling information while you're already ingesting ongoing events.
 
-### How does the Unduplicator work?
+## How it works
 
 The Unduplicator crafts an event UUID based on key properties for the event, so if the event is the same (see below for definition) it'll end with the same UUID.
 
@@ -22,13 +20,13 @@ The app has two modes that define what's considered a duplicate event. Either mo
 -   **Event and Timestamp**. An event will be treated as duplicate if the timestamp, event name and user's distinct ID matches exactly, regardless of what internal properties are included.
 -   **All Properties**. An event will be treated as duplicate only if all properties match exactly, as well as the timestamp, event name and user's distinct ID.
 
-### What are the requirements for this app?
+## Requirements
 
 The Unduplicator requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the Unduplicator app for PostHog?
+## Installation
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
@@ -36,9 +34,11 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 4. Select the Unduplicator app, press 'Install'.
 5. Once the app is installed, press the blue button to configure the app and select which of the de-duplication methods you want to use (described above).
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

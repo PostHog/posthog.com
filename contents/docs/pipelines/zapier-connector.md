@@ -7,8 +7,6 @@ tags:
     - zapier-connector
 ---
 
-### What does the Zapier Connector app do?
-
 The Zapier app for PostHog enables you to connect PostHog with _thousands_ of services through Zapier.
 
 The following steps are at your disposal:
@@ -20,7 +18,7 @@ The following steps are at your disposal:
 | Trigger | Action Defined     | Any **paid** plan   |
 | Trigger | Annotation Created | Any **paid** plan   |
 
-### What are the requirements for this app?
+## Requirements
 
 Connecting Zapier requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -28,11 +26,11 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need a Zapier account which can connect to the other services you want to use via this app.
 
-### How do I connect PostHog to other services with Zapier?
+## Connecting PostHog to other services with Zapier
 
 [Our official Zapier app](https://zapier.com/apps/posthog/integrations) is compatible with PostHog Cloud, as well as with self-hosted instances. No additional setup needed.
 
-### How can I create a private PostHog connection with Zapier?
+## Creating a private PostHog connection with Zapier
 
 Create a private Zapier app for PostHog easily with a few simple steps:
 
@@ -65,9 +63,11 @@ Create a private Zapier app for PostHog easily with a few simple steps:
     ```
 9. Finish by filling in integration details in the [Zapier Platform dashboard](https://zapier.com/app/developer). And don't forget to invite users!
 
-### Where can I find out more?
+## Where can I find out more?
 
 Further information about the Zapier Connector is available in [Zapier's integration documentation](https://zapier.com/help/doc/how-to-get-started-with-posthog-on-zapier).
+
+## FAQ
 
 ### Who maintains this app?
 

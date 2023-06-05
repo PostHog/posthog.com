@@ -7,33 +7,33 @@ tags:
     - twilio
 ---
 
-### What does the Twilio Connector app do?
-
 This app triggers SMS messages in Twilio when specified events or actions are detected in PostHog.
 
 You can set a timeout period of between 1 second and 31536000 seconds (1 calendar year) to avoid accidentally spamming users with too many messages.
 
-### What are the requirements for this app?
+## Requirements
 
 This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install this app for PostHog?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Twilio' and select the app, press 'Install'.
 3. Follow the steps below to configure the app.
 
-### How do I configure the Twilio Connector app for PostHog?
+## Configuration
 
 To configure this app, you will need your Account SID and Auth Token from Twilio. You can find these in Twilio in your account menu under `Account > Keys & Credentials > API Keys and tokens > Live credentials`.
 
 Additionally, you will need to know your Twilio Phone Number. Follow [Twilio's documentation for buying or finding your Twilio phone numbers](https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account#get-your-first-twilio-phone-number).
 
-### Configuration
+## Additional configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

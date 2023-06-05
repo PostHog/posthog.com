@@ -7,13 +7,11 @@ tags:
     - pace-integration
 ---
 
-### What does the Pace Integration app do?
-
 [Pace](https://www.paceapp.com/) is a tool that equips sellers with relevant insights at the right time so they can spend time growing revenue. It allows them to convert, retain, and grow customers by prioritizing time and effort on the users who need it most.
 
 PostHog's Pace integration simply forwards any events that PostHog receives to Pace's internal ingestion endpoint
 
-### What are the requirements for this app?
+## Requirements
 
 The Pace Integrations requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -21,11 +19,13 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need access to the relevant Pace account.
 
-### How do I install the Pace Integration?
+### Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Pace' and select the app, press Install.
 3. Enable the app enter your Pace API key to authenticate with Pace.
+
+## FAQ
 
 ### Is the source code for this app available?
 

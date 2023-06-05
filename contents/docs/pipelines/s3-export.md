@@ -12,16 +12,16 @@ This app enables you to export events to Amazon S3 on ingestion. Archive your da
 
 > **Note: ** Currently, this plugin does not support exporting of historical data and will only export data that is ingested while the app is enabled. We're actively looking into adding support for historical exports.
 
-### Install
+## Installation
 
-#### PostHog Cloud
+### PostHog Cloud
 
 PostHog Cloud users can find the app [here on the apps page](https://app.posthog.com/project/apps?name=S3+Export+Plugin).
 
 Before you can enable the app, you will need to [configure it](#configure) by clicking on the settings icon.
 Once the app has been configured, you can enable it by flipping the toggle and it will start exporting newly ingested events to S3.
 
-#### PostHog Self-hosted
+### PostHog Self-hosted
 
 > The S3 Export Plugin requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
 > Not running 1.24.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
@@ -33,13 +33,13 @@ Once the app has been configured, you can enable it by flipping the toggle and i
 5. [Configure the app](#configure) by entering your AWS credentials and S3 bucket details
 6. Enable the app and Watch events roll into S3!
 
-### Configure
+## Configuration
 
 Before we can get things set up in PostHog, we will need to work on creating an S3 Bucket in AWS which we will use as a destination for our events.
 
 Already have a bucket set up? Skip [here](#set-up-access) to start configuring access to your bucket.
 
-#### Creating a bucket
+### Creating a bucket
 
 1. Log in to [AWS](https://console.aws.amazon.com/).
 2. Open [S3](https://s3.console.aws.amazon.com/) in the AWS console and create a new bucket in your chosen region.
@@ -48,7 +48,7 @@ Already have a bucket set up? Skip [here](#set-up-access) to start configuring a
 
 > Make sure to take note of both the name of your bucket and the region that it's in, we'll need these later.
 
-#### Set up access
+### Set up access
 
 Next, we'll need to create a new user in our AWS console with programmatic access to our newly created bucket.
 
@@ -112,16 +112,16 @@ Finally, we'll configure the rest of the settings. Below is a list of a few impo
     -   Default: **1 MB**
     -   Each time an upload is ingested into PostHog, this plugin will check whether its internal buffer is under this limit. If at any point it exceeds this limit, it will immediately flush events to S3. As a result, this plugin may upload more frequently than specified in the `Upload at most every X minutes` settings if the buffer frequently reaches this limit.
 
-#### Batch uploads
+### Batch uploads
 
 To vastly increase export throughput, this app batches events in memory before uploading them to S3.
 Upload frequency (every minute by default) and maximum upload size (1 MB by default) can be configured when the app is installed.
 
 You should make sure to keep these numbers reasonable to avoid running out of memory on your server. Note that the values apply to **each** concurrent app server thread.
 
-### Configuration
+## Additional configuration
 
-#### Basic Options
+### Basic Options
 
 | Option                                                                                                                         | Description                                                                                                                                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -136,7 +136,7 @@ You should make sure to keep these numbers reasonable to avoid running out of me
 | <span class="whitespace-nowrap">`Format of uploaded files`</span><br /><br />**Options:** `jsonl`<br />**Default:** `jsonl`    | Currently, we only support exports in `jsonl`, which serializes events in JSON, one event per line.                                                                                              |
 | <span class="whitespace-nowrap">`Compression`</span><br /><br />**Options:** `gzip`, `brotli`, `none`<br />**Default:** `gzip` | The method used to compress events before sending. Upload size limits are applied _before_ compression.                                                                                          |
 
-#### Advanced Options
+### Advanced Options
 
 | Option                                                                                                                                             | Description                                                                                                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -145,9 +145,9 @@ You should make sure to keep these numbers reasonable to avoid running out of me
 | <span class="whitespace-nowrap">`Server-side encryption`</span><br /><br />**Options:** `disabled`, `AES256`, `aws:kms`<br />**Default:** `AES256` | Specifies server-side encryption of the object in S3.                                                                                                                                          |
 | <span class="whitespace-nowrap">`SSE KMS key ID`</span><br /><br />**Type:** String<br />**Required:** No                                          | The customer-managed AWS Key Management Service (KMS) key ID that should be used to server-side encrypt the object in S3. Only used if the `Server-side encryption` option is set to `aws:kms` |
 
-### Further information
+## FAQ
 
-#### Who created this app?
+### Who created this app?
 
 A lot of people worked on this app! We'd like to thank the following contributors for creating the S3 Export app. Thank you, all!
 

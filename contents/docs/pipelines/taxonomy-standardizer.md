@@ -7,11 +7,9 @@ tags:
     - taxonomy-standardizer
 ---
 
-### What does the Taxonomy Standardizer app do?
-
 This app standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.
 
-### What taxonomies are supported?
+## Supported taxonomies
 
 This app can convert from any of these taxonomies, to any other.
 
@@ -21,21 +19,23 @@ This app can convert from any of these taxonomies, to any other.
 -   Kebab Case: `hello-there-hedgehog`
 -   Spaces: `hello there hedgehog`
 
-### What are the requirements for this app?
+## Requirements
 
 The Taxonomy Standardizer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the Taxonomy Standardizer app?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Taxonomy Standardizer' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

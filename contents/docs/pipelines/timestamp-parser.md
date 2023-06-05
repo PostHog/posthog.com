@@ -18,20 +18,20 @@ This app parses the timestamp of each event that comes in to PostHog and adds th
 | `hour`            | Numeric value for the hour in UTC (24-hour clock) | 21         |
 | `minute`          | Numeric value for the minute                      | 37         |
 
-### Example event
+## Example event
 
 Here is an example of what these properties look like after they have been added to an event.
 
 ![event with timestamp properties added](../../images/docs/apps/timestamp-parser/timestamp-properties.png)
 
-### Installation
+## Installation
 
-##### PostHog Cloud
+### PostHog Cloud
 
 PostHog Cloud users can find the app [here](https://app.posthog.com/project/apps?name=Timestamp+Parser) and click on the toggle to enable the app.
 Once the app has been enabled, it will automatically start parsing all new events which come in to PostHog.
 
-##### PostHog Self-hosted
+### PostHog Self-hosted
 
 > The Timestamp Parser requires a PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 > Not running 1.30.0? Find out [how to update](https://posthog.com/docs/runbook/upgrading-posthog).
@@ -42,7 +42,7 @@ Once the app has been enabled, it will automatically start parsing all new event
 
 Any new events that come in to PostHog will now be automatically parsed!
 
-### Using the Timestamp Parser
+## Using the Timestamp Parser
 
 The timestamp parser is a great tool for answering time-based questions that are sometimes very challenging to tackle with PostHog alone.
 
@@ -55,7 +55,7 @@ By filtering and breaking down events, we can now easily answer questions such a
 
 > **Note: ** This app only works on _new_ events sent to PostHog, and as a result you won't be able to filter events that were sent before it was enabled.
 
-#### Examples
+## Examples
 
 Here's an example of creating a filter in a [trends](/docs/user-guides/trends) insight to only show events that were send on a Saturday or Sunday.
 
@@ -69,13 +69,11 @@ Overall, the timestamp parser is a simple yet incredibly powerful app that these
 
 ### Have a question?
 
-We love answering questions. Ask us anything via [our Support page](/questions) or using the Q&A widget at the bottom of this page.
+We love answering questions. Ask us anything [in the company forums](/questions) or using the Q&A widget at the bottom of this page.
 
-You can also join the [PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
+## FAQ
 
-### Further information
-
-##### Who created this app?
+### Who created this app?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) and community member [Victor Campuzano](https://github.com/vicampuzano) for creating the Timestamp Parser. Thank you, both!
 

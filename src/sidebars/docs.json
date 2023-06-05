@@ -913,6 +913,10 @@
         "icon": "AppLibrary",
         "children": [
             {
+                "url": "/docs/apps/feedback-widget",
+                "name": "Feedback Widget"
+            },
+            {
                 "url": "/docs/apps/notification-bar",
                 "name": "Notification Bar"
             },

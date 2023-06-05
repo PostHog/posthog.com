@@ -9,13 +9,13 @@ tags:
 
 With the Intercom Connector, you can send event data from PostHog to Intercom whenever an event matches a user who has been identified by their email address.
 
-### What are the requirements for this app?
+## Requirements
 
 Using this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### Installation
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Intercom' and select the app, press 'Install'.
@@ -23,14 +23,14 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 > **Important:** Only events that have an `email` property will be sent to Intercom. For more information on how to configure this, take a look at [this section](#setting-up-tracking).
 
-### Configuration
+## Configuration
 
 After you've pressed 'Install', you need to add your Intercom API key at the configuration step, as well as add triggering events you want to send to Intercom.
 
 -   **Intercom API Key (required)**: you can get this one from the [Intercom Developer Hub](https://developers.intercom.com/building-apps/), by creating a new app and receiving an API Key
 -   **Triggering events (required)**: A comma-separated list of PostHog events you want to send to Intercom (e.g.: `$identify,mycustomevent` ).
 
-### Additional configuration
+## Additional configuration
 
 <AppParameters />
 
@@ -54,9 +54,9 @@ This will then send this as a property on all future events, including autocaptu
 Currently, [Super Properties](/docs/integrate/client/js#super-properties) are only available in the `posthog-js` library or when using the PostHog snippet.
 If you are using a different SDK, you'll need to manually the `email` property for every event that you want to send to Intercom.
 
-### Further information
+## FAQ
 
-#### Who created this app?
+### Who created this app?
 
 We'd like to thank PostHog team member [Emanuele Capparelli](https://github.com/kappa90) for his work creating this app. Thank you, Emanuele!
 

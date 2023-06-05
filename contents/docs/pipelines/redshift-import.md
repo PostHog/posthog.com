@@ -7,11 +7,9 @@ tags:
     - redshift-import
 ---
 
-### What does the Redshift Import app do?
-
 The Redshift Import app for PostHog enables you, predictably, to import data from a Redshift table into PostHog. Data appears in PostHog as a stream of events.
 
-### What are the requirements for this app?
+## Requirements
 
 Using the Redshift Import app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -19,7 +17,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need access to a Redshift table to import from.
 
-### How do I install the Redshift Import app?
+## Installation
 
 First, create and select a Redshift table to use. You will also need to create a new user with sufficient privileges to access data in your selected table.
 
@@ -36,7 +34,7 @@ Finally, you must determine what transformation to apply to your Redshift data. 
 
 IMPORTANT: Make sure your Redshift table has a [sort key](https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html) and use the sort key column in the "Order by column" field of the app config.
 
-### What transformations are available?
+## Which transformations are available?
 
 This app receives data from your table and transforms it into a PostHog event.
 
@@ -94,7 +92,7 @@ async function transform (row, { attachments }) {
 }
 ```
 
-### How can I contribute a transformation?
+## Contributing to a transformation
 
 If none of the transformations listed above suits your use case, you're more than welcome to contribute your own transformation!
 
@@ -124,9 +122,11 @@ A transformation entry looks like this:
 
 Your GitHub username is important so that we only allow changes to transformations by the authors themselves.
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

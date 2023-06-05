@@ -7,11 +7,9 @@ tags:
     - gcs-export
 ---
 
-### What does the Google Cloud Storage Export app do?
-
 The Google Cloud Storage Export app enables you to send events from PostHog to a Google Cloud Storage bucket upon ingestion.
 
-### What are the requirements for this app?
+## Requirements
 
 The Google Cloud Storage Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -19,7 +17,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need access to the Google Cloud Storage bucket you want to export to.
 
-### How do I install the Google Cloud Storage Export app?
+## Installation
 
 Before installing the Google Cloud Storage Export app, you will need your Google Cloud .json file. Find out how to get this in [Google's BigQuery API documentation](https://cloud.google.com/bigquery/docs/reference/libraries).
 
@@ -29,9 +27,11 @@ Before installing the Google Cloud Storage Export app, you will need your Google
 4. Enter your Project ID.
 5. Enter your bucket name.
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

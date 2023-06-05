@@ -4,8 +4,6 @@ tags:
     - sentry-connector
 ---
 
-### What does the Sentry Connector do?
-
 Our Sentry Connector integration is a two-way integration which works on Javascript & Python.
 
 Once installed, it will:
@@ -15,7 +13,7 @@ Once installed, it will:
 
 This way, debugging issues becomes a lot easier, and you can also correlate error data with your product metrics.
 
-### What are the requirements for this app?
+## Requirements
 
 The Sentry Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -23,7 +21,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need an account with Sentry.
 
-### How do I install the Sentry Connector with Javascript?
+## Installation
 
 Make sure you're using both PostHog and Sentry as JS modules. You'll need to replace `'your organization'` and `project-id` with the organization and project-id from Sentry.
 
@@ -42,7 +40,7 @@ Sentry.init({
 })
 ```
 
-### How do I install the Sentry Connector with Python?
+## How do I install the Sentry Connector with Python?
 
 ```bash
 pip install posthog
@@ -82,11 +80,13 @@ if settings.TEST:
     posthog.disabled = True
 ```
 
-### How do I use the Sentry Connector?
+## Using the Sentry Connector
 
 Once installed you'll now have `$exception` events in PostHog, which have a "Sentry URL" link to take you to the exception:
 
 From Sentry you will now be able to go directly to the affected person in PostHog and watch the session recording for when the exception happened, see what else the user has done, and find their details. Don't forget to click the little icon to the side of the URL, not the URL itself.
+
+## FAQ
 
 ### Who maintains this app?
 

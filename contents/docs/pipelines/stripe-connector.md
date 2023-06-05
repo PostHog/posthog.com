@@ -7,24 +7,24 @@ tags:
     - stripe-connector
 ---
 
-### What does the Stripe Connector do?
-
 Stripe is a payments platform used by millions of companies. The Stripe Connector enables you to get information about revenue and payments from Stripe, into PostHog. 
 
 Once revenue information is in PostHog, you can analyze it just like any other PostHog event using insights and dashboards. 
 
-### How do I install the Stripe Connector?
+## Installation
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
 3. Search for 'Stripe'
 4. Select the app, press 'Install' and follow the configuration instructions accessed by pressing the cog button.
 
-### What are the requirements for this app?
+## Requirements
 
 The Stripe Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+
+## FAQ
 
 ### Is the source code for this app available?
 

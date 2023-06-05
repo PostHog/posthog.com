@@ -7,8 +7,6 @@ tags:
     - property-flattener
 ---
 
-### What does the Property Flattener app do?
-
 This app flattens nested properties in PostHog events, making it easier to access them through filters if needed.
 
 This is useful if, for example, you're an online retailer and have purchase events with the following property structure:
@@ -53,19 +51,19 @@ This app will keep the nested properties unchanged, but also add any nested prop
 
 As such, you can now filter your purchase events based on product**size**number for example.
 
-### What are the requirements for this app?
+## Requirements
 
 The Property Flattener requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the Property Flattener?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Property Flattener' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 
-### How do I separate nested properties?
+## Separating nested properties
 
 The default separator for nested properties is two subsequent underscores (\_\_), but you can also change this to:
 
@@ -75,9 +73,11 @@ The default separator for nested properties is two subsequent underscores (\_\_)
 
 When picking your separator, make sure it will not clash with your property naming patterns! There be dragons.
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ 
 
 ### Is the source code for this app available?
 

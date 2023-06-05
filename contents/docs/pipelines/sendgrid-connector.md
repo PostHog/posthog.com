@@ -7,11 +7,9 @@ tags:
     - sendgrid-connector
 ---
 
-### What does the Sendgrid Connector app do?
-
 The Sendgrid Connector sends event and emails data from PostHog into Sendgrid whenever a user is identified in PostHog.
 
-### What are the requirements for this app?
+## Requirements
 
 The Sendgrid Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -19,16 +17,18 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need Sendgrid access, obviously.
 
-### How do I install the Sendgrid Connector app?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Sendgrid' and select the app, press Install.
 3. Add your Sendgrid API key at the configuration step.
 4. Enable the app and watch your contacts list get populated in Sendgrid!
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

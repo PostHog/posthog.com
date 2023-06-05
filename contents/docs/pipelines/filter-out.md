@@ -7,17 +7,15 @@ tags:
     - filter-out
 ---
 
-### What does the Filter Out app do?
-
 This app enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 
 
-###### What are the requirements for this app?
+## Requirements
 
 Using the Filter Out app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the Filter Out app?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Filter Out' and select the app, press Install.
@@ -25,7 +23,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 This app will only work on events ingested _after_ the app was enabled.
 
-### How do I configure the Filter Out app?
+## Configuration
 
 The app can be configured via a JSON file which specifies the properties you would like to filter.
 
@@ -66,6 +64,7 @@ The followed types and operators are allowed:
 | string  | is, is_not, contains, not_contains, regex, not_regex |
 | boolean | is, is_not                                           |
 
+## FAQ
 
 ### Who maintains this app?
 

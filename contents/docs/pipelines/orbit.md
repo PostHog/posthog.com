@@ -7,11 +7,9 @@ tags:
     - orbit
 ---
 
-### What does the Orbit Connector app do?
-
 The Orbit app for PostHog pulls data from the Orbit.love workspace API into PostHog, enabling you to track your community as a product metric.
 
-### What are the requirements for this app?
+## Requirements
 
 The Orbit Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -19,13 +17,13 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need an Orbit workspace you can connect to.
 
-### How do I install the Orbit Connector app?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Orbit' and select the app, press Install.
 3. Follow the on-screen steps to configure the app.
 
-### How do I use the Orbit Connector app?
+## How do I use the Orbit Connector app?
 
 Workspace stats are sent into your PostHog instance as an `orbit love report` event, which you can filter and explore using PostHog. Supported report types include: overview, members, and activities.
 
@@ -34,6 +32,8 @@ Refer to [Orbit's API documentation](https://docs.orbit.love/reference/about-the
 ### Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

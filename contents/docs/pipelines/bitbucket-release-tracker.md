@@ -7,7 +7,7 @@ tags:
     - bitbucket-release-tracker
 ---
 
-### How do I install the BitBucket Release Tracker PostHog app?
+## Installation
 
 To install this app, follow these simple steps...
 
@@ -18,15 +18,17 @@ To install this app, follow these simple steps...
 
 And follow the on-screen instructions to complete configuration.
 
-### What are the requirements for this app?
+## Requirements
 
 The BitBucket Release Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

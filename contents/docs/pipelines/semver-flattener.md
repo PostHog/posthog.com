@@ -7,8 +7,6 @@ tags:
     - semver-flattener
 ---
 
-### What does the SemVer Flattener do?
-
 The SemVer Flattener splits a valid SemVer version into the following 
 
 ```
@@ -47,18 +45,20 @@ Becomes this...
 
 This is especially helpful for comparing versions when filtering in PostHog insights, as it isn't possible to correctly use string comparison in all situations. 
 
-### What are the requirements for this app?
+## Requirements
 
 This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the SemVer Flattener app?
+### Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'SemVer Flattener' and select the app, press Install.
 
 That's it!
+
+## FAQ
 
 ### Is the source code for this app available?
 

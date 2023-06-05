@@ -15,7 +15,7 @@ The BigQuery Export app requires either PostHog Cloud, or a self-hosted PostHog 
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### Enabling the app
+## Enabling the destination
 
 1. Visit the 'Apps' page from PostHog.
 2. Search for 'BigQuery' and select the 'BigQuery Export' app.
@@ -25,7 +25,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
     3. Enter your Table ID
 4. Watch events roll into BigQuery
 
-### Setting up BigQuery access
+## Setting up BigQuery access
 
 To set the right permissions up for the BigQuery plugin, you'll need:
 
@@ -56,7 +56,7 @@ Use the Share Dataset button to share your dataset with your new service account
 
 That's it! Once you've done the steps above, your data should start flowing from PostHog to BigQuery.
 
-### Event schema
+## Event schema
 
 Here is a summary of all the fields that are exported to BigQuery.
 
@@ -75,7 +75,7 @@ Here is a summary of all the fields that are exported to BigQuery.
 | timestamp             | `TIMESTAMP` | The timestamp when the event was ingested into PostHog                                  |
 | bq_ingested_timestamp | `TIMESTAMP` | The timestamp when the event was sent to BigQuery                                       |
 
-### Configuration
+## Configuration
 
 <AppParameters />
 
@@ -117,7 +117,7 @@ SELECT *
 FROM   raw_data_deduplicated ;
 ```
 
-## Further information
+## FAQ
 
 ### Who created this app?
 

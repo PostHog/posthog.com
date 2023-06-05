@@ -7,17 +7,15 @@ tags:
     - amazon-kinesis
 ---
 
-## What does the Amazon Kinesis Import app do?
+This source imports event data into PostHog from an Amazon Kinesis stream. Kinesis Records must be delivered in a JSON schema in order to be imported.
 
-This app imports event data into PostHog from an Amazon Kinesis stream. Kinesis Records must be delivered in a JSON schema in order to be imported.
-
-## What are the requirements for this app?
+## Requirements
 
 Using the Amazon Kinesis Import app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-## How should I configure the Kinesis Record schema?
+## Configuration
 
 Kinesis Records must be delivered in a JSON schema.
 
@@ -59,7 +57,7 @@ Will be parsed as:
 }
 ```
 
-## What is the correct IAM policy?
+## IAM policy
 
 You need to provide an AccessKeyID and a SecretAccessKey for a AWS IAM user with at least the following Kinesis Action rights:
 
@@ -69,18 +67,18 @@ GetShardIterator
 GetRecords
 ```
 
-## What app parameters are available?
+## Parameters
 
 <AppParameters />
 
-## How do I install the Amazon Kinesis Import app for PostHog?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'AWS Kinesis' and select the app, press Install.
 3. Follow the steps to configure the app.
 4. Watch events roll in to PostHog.
 
-## Further information
+## FAQ
 
 ### Is the source code for this app available?
 

@@ -7,26 +7,26 @@ tags:
     - gitlab-release-tracker
 ---
 
-### What does the GitHub Release Tracker app do?
-
 The GitHub Release Tracker adds an [Annotation](/docs/user-guides/annotations) to PostHog whenever a specified repo launches a new GitHub release. This is useful for correlating the impact of new releases on other metrics, such as sign-ups, as well as other performance-related issues.
 
-### How do I install the GitHub Release Tracker for PostHog?
+## Installation
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
 3. Search for 'GitLab Release Tracker'
 4. Select the app, press 'Install' and follow the on-screen instructions
 
-### What are the requirements for this app?
+## Requirements
 
 The GitHub Release Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

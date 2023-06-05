@@ -7,25 +7,25 @@ tags:
     - currency-normalizer
 ---
 
-### What does the Currency Normalizer app do?
-
 This app normalizes currencies in events. E.g. amounts in EUR, USD and GBP will all be converted to EUR.
 
-### What are the requirements for this app?
+## Requiurements
 
 The Currency Normalizer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the Currency Normalizer app for PostHog?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Currency Normalization' and select the app, press Install.
 3. Update the required settings (get the API key [here](https://openexchangerates.org/)) and enable the plugin.
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

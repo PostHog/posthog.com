@@ -5,21 +5,21 @@ tags:
     - n8n
 ---
 
-### What does the n8n Connector app do?
-
 This n8n app enables you to automate PostHog workflows and create workflows using other services, using n8n.
 
-### How do I get started with the n8n Connector app?
+## Getting started
 
 The n8n app is an API integration. You will need a [PostHog Personal API key](https://posthog.com/docs/api), which must be [authenticated with n8n](https://docs.n8n.io/credentials/posthog/) in order to [connect n8n](https://docs.n8n.io/nodes/n8n-nodes-base.posthog/#basic-operations) and get started.
 
 For more information, please check [n8n's integration documentation](https://docs.n8n.io/credentials/posthog/#posthog).
 
-### What are the requirements for this app?
+## Requirements
 
 Using the n8n Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+
+## FAQ
 
 ### Where can I find out more?
 

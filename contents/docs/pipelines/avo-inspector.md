@@ -7,13 +7,11 @@ tags:
     - avo-inspector
 ---
 
-### What does the Avo Inspector do?
-
 [Avo](https://www.avo.app/) is a data governance platform which helps teams plan, implement and verify analytics at any scale. The Avo Inspector app sends event schema - but not events themselves - to Avo. This enables you to, for example, avoid losing data or events due to naming issues in your analytics. 
 
 You can read more about the Avo Inspector in [the official announcement](/blog/avo-plugin-announcement). 
 
-###### What are the requirements for this app?
+## Requirements
 
 Using the Avo Inspector app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -21,11 +19,13 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need to have an [Avo](https://www.avo.app/) account, obviously. 
 
-##### How do I get started with the Avo Inspector?
+## Installation
 
 First, you need to set PostHog as a data source in Avo. We recommend checking Avo's [documentation for setting PostHog as a source in Avo](https://www.avo.app/docs/workspace/connect-inspector-to-posthog).
 
 Once PostHog is set as a source in Avo, simply install and enable the app in your PostHog instance by heading to the Apps section. You'll need to enter your Avo API key to complete the setup. 
+
+## FAQ
 
 ### Where can I find out more?
 

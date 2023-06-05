@@ -7,8 +7,6 @@ tags:
     - pagerduty connector
 ---
 
-### What does the PagerDuty Connector do?
-
 This app alerts PagerDuty when a PostHog insights/trends graph goes below or above a threshold.
 
 Example use cases:
@@ -16,7 +14,7 @@ Example use cases:
 -   Alert when there is no $pageviews captured on my site the past hour,
 -   Alert when the rate of $billing_error events crosses a threshold.
 
-### What are the requirements for this app?
+## Requirements
 
 The PagerDuty Connector app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.26.0](https://posthog.com/blog/the-posthog-array-1-26-0) or later.
 
@@ -24,7 +22,7 @@ Not running 1.26.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need access to a PagerDuty account.
 
-### How do I install the PagerDuty Connector for PostHog?
+## Installation
 
 This app requires PostHog 1.26.0 or above, or PostHog Cloud.
 
@@ -33,7 +31,7 @@ This app requires PostHog 1.26.0 or above, or PostHog Cloud.
 3. Search for 'PagerDuty'
 4. Select the app, press 'Install' and follow the on-screen instructions
 
-### How do I configure the PagerDuty Connector?
+## Configuration
 
 -   Get the trends URL.
 -   Go to Insights.
@@ -42,15 +40,17 @@ This app requires PostHog 1.26.0 or above, or PostHog Cloud.
 -   Choose threshold and operator (less than or equal, greater than or equal).
 -   Enter PagerDuty service integration key (for Events API v2).
 
-### Configuration
+### Additonial configuration
 
 <AppParameters />
 
-### Are there any limitations?
+## Limitations
 
 This PagerDuty Connector only works when reading from single-line trend graphs.
 
 It also requires PostHog 1.26.0 or above, or PostHog Cloud.
+
+## FAQ
 
 ### Is the source code for this app available?
 

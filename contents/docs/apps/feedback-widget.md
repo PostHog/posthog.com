@@ -7,8 +7,6 @@ tags:
     - feedback-widget
 ---
 
-### What does the Feedback Widget app do?
-
 This app enables you to gather feedback from your users and ingest it as an event into PostHog. The app accomplishes this by injecting code into your website, such that a small widget appears to prompt users to share feedback.
 
 Sending feedback looks like this...
@@ -23,7 +21,7 @@ You can also use Zapier to send feedback to other tools like Slack, Zendesk, and
 
 ![Feedback widget](../../images/docs/apps/feedback-widget/feedback-slack.png)
 
-### What are the requirements for this app?
+## Requirements
 
 First, you need to opt in to the site apps beta. You'll need to be on PostHog cloud or if self-hosting using PostHog 1.41.0 or later.
 
@@ -31,7 +29,7 @@ You can opt in to the beta by configuring your `posthog-js` initialization to in
 
 Self-hosted and not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
 
-### How do I install the Feedback Widget?
+## Install
 
 1. Opt into the site apps beta by setting your `posthog-js` initialization to include `opt_in_site_apps: true`.  
 2. Visit the 'Apps' page in your instance of PostHog.
@@ -51,7 +49,9 @@ Self-hosted and not running 1.41.0? Find out [how to update your self-hosted Pos
 5. [Copy the Webhook URL into the PostHog Setup page](https://posthog.com/docs/integrate/webhooks/slack)
 
 
-## Can I make my own site apps?
+## FAQ
+
+### Can I make my own apps?
 
 You certainly can. Check our tutorial about [how to build a site app in PostHog](/tutorials/build-site-app) to get started.
 

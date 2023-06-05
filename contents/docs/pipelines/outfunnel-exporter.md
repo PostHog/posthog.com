@@ -7,11 +7,9 @@ tags:
     - outfunnel-export
 ---
 
-### What does the Outfunnel Exporter do?
-
 The Outfunnel Exporter sends events from PostHog to Outfunnel as they are ingested. Outfunnel is a platform for connecting sales and marketing tools with the data you need to prioritize leads. 
 
-### How do I install the GitHub Release Tracker for PostHog?
+## Installation
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
@@ -19,9 +17,11 @@ The Outfunnel Exporter sends events from PostHog to Outfunnel as they are ingest
 4. Select the app, press 'Install'
 5. Configure the plugin by entering your Outfunnel User ID
 
-### What are the requirements for this app?
+## Requirements
 
 The Outfunnel Exporter requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+
+## FAQ
 
 ### Is the source code for this app available?
 

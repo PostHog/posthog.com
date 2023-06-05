@@ -20,16 +20,16 @@ This app extracts the following properties from the provided `$useragent`:
 | `$os` | The operating system of the user | Windows, Mac OS X |
 | `$browser_type` | The type of client that made the request | bot, browser |
 
-### Installation
+## Installation
 
-#### PostHog Cloud
+### PostHog Cloud
 
 PostHog Cloud users can find the app [here](https://app.posthog.com/project/apps?name=User+Agent+Populator) in their dashboard.
 
 Before you can enable the app, you will need to [configure](#configure) it by clicking on the settings icon.
 Once the app has been configured, you can enable it by flipping the toggle and it will start transforming all new events.
 
-#### PostHog Self-hosted
+### PostHog Self-hosted
 
 > The User Agent Populator requires a PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 > Not running 1.30.0? Find out [how to update](https://posthog.com/docs/runbook/upgrading-posthog)!
@@ -41,13 +41,13 @@ Once the app has been configured, you can enable it by flipping the toggle and i
 
 Once the app has been configured and enabled, it will begin to transform all new events which come into PostHog.
 
-### Configure
+## Configuration
 
 Before an app can be enabled in PostHog, it has to be configured.
 
 <AppParameters />
 
-### Using the User Agent Populator
+## Using the User Agent Populator
 
 This app works by parsing the `$useragent` property on events as they are ingested.
 As a result, if an event is ingested without the `$useragent` (or `$user-agent`) property set, this app will do nothing.
@@ -58,14 +58,11 @@ This property can be set using any of our [client](/docs/integrate#client-librar
 One common use-case for this app is populating client information when sending events from the server-side. Typically, a `UserAgent` header will be set when a client sends a request to your server, which your server can then forward to PostHog with the `$useragent` property.
 This gives you an idea of what types of clients are using your service and allows you to create insights that filter based on these properties.
 
+## What if my question isn't answered above?
 
-### What if my question isn't answered above?
+We love answering questions. Ask us anything [in our community forums](/questions) or using the Q&A widget at the bottom of this page.
 
-We love answering questions. Ask us anything via [our Questions page](/questions) or using the Q&A widget at the bottom of this page.
-
-You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
-
-### Further information
+## FAQ
 
 ### Who maintains this app?
 

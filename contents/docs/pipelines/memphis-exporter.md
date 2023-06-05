@@ -7,11 +7,9 @@ tags:
     - memphis-exporter
 ---
 
-### What does the Memphis Exporter app do?
-
 This app enables you to publish events to Memphis as they are ingested into PostHog. [Memphis](https://memphis.dev) is an alternative to traditional message brokers and a real-time data processing platform.    
 
-### What are the requirements for this app?
+## Requirements
 
 This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -19,7 +17,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need to have a Memphis account. 
 
-### How do I install the this app?
+## Install
 
 1. Access PostHog's Apps page from the sidebar.
 2. Search for Memphis Exporter to find the app, and press install. Alternatively, you can install directly from the repo via the Advanced tab by fetching the following URL: https://github.com/PostHog/posthog-memphisdev-app.
@@ -27,6 +25,8 @@ You'll also need to have a Memphis account.
 4. Watch events roll into your station!
 
 To get started with Memphis, please visit [Memphis.dev](https://memphis.dev)
+
+## FAQ
 
 ### Is the source code for this app available?
 

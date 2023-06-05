@@ -7,23 +7,21 @@ tags:
     - databricks
 ---
 
-### What does the Databricks Export app do?
-
 The Databricks Export app for PostHog will push data from PostHog to Databricks, once every minute. The app creates a table and migrates data from DBFS to a database.
 
-### What are the requirements for this app?
+## Requirements
 
 Using this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the Databricks Export app for PostHog?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Databricks' and select the app, press Install.
 3. Follow the steps below to configure the app.
 
-### Configuration
+## Configuration
 
 You will need the following, in order to full configure this app:
 
@@ -35,11 +33,13 @@ You will also need to give a temporary filename path for saving raw data, and a 
 
 <AppParameters />
 
-### What are the limitations for this app?
+### Limitations
 
 The Databricks Export app cannot currently sync historic data, or change the frequency with which it pushes data to PostHog.
 
 Interesting in contributing to the app to remove these limitations? Check [the GitHub repo](https://github.com/posthog/posthog-databricks-plugin)!
+
+## FAQ
 
 ### Is the source code for this app available?
 

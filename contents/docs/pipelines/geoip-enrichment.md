@@ -7,30 +7,28 @@ tags:
     - geoip
 ---
 
-### What does the GeoIP Enricher app do?
-
 This app enriches PostHog events and persons with IP location data. Simply enable this app and from that point on, your new events will have GeoIP data added, allowing you to locate users and run queries based on geographic data.
 
-### How does the GeoIP Enricher app work?
+## How it works
 
 This app prefers to use event property `$ip` (which should be of type `string`), but if that is not provided, it uses the IP address of the client that sent the event.
 
 This way the app can, in most cases, infer the IP address without any work on your side.
 
-### What are the requirements for this app?
+## Requirements
 
 The GeoIP Enricher requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the GeoIP Enrichment app for PostHog?
+## Installation
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
 3. Search for 'GeoIP'
 4. Select the GeoIP app, press 'Install' and follow the on-screen instructions
 
-### How do I add properties?
+## Adding properties
 
 The following properties can be added to the event if its IP address can be matched to a GeoLite2 City location:
 
@@ -53,12 +51,14 @@ $geoip_subdivision_3_name?: string
 
 They are also set on the associated person same as above, plus set*once in `$initial_geoip*...` form, to record where the user was when they were first seen.
 
-### How do I skip events without applying GeoIP enrichment?
+## How do I skip events without applying GeoIP enrichment?
 
 A case to be aware of is sending events from a server – such events, if not provided with custom property `$ip`, will be detected as sent from the location of the data center, instead of the related user.
 
 If you'd like this app to skip over an event and not add the above properties,
 set property `$geoip_disable` to `true` on that event.
+
+## FAQ
 
 ### Is the source code for this app available?
 

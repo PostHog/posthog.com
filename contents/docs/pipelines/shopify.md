@@ -7,8 +7,6 @@ tags:
     - shopify
 ---
 
-### What does the Shopify Connector app do?
-
 The Shopify Connector for PostHog enables you to sync customer and order data from Shopify, into PostHog.
 
 This app will:
@@ -19,19 +17,19 @@ This app will:
 
 If there is an error while fetching orders, the next run of `runEveryMinute()` will try to re-read information from where it was previously interrupted.
 
-### What are the requirements for this app?
+## Requirements
 
 Using this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install this app for PostHog?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Shopify' and select the app, press 'Install'.
 3. Follow the steps below to configure the app.
 
-### How do I configure the Shopify Connector for PostHog?
+## Configuration
 
 To configure the Shopify Connector you will need to set the store name from your Shopify account.
 
@@ -39,9 +37,11 @@ Additionally, you will need to create a Shopify Access Token, which the Shopify 
 
 To create a Shopify Access Token, create an app on the admin page of your Shopify Account and generate `Admin API access token` in the API Credentials tab or your newly created Shopify app.
 
-### Configuration
+### Additional configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

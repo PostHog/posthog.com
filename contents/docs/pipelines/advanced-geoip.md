@@ -7,11 +7,9 @@ tags:
     - advanced-geoip
 ---
 
-### What does the Advanced GeoIP app do?
-
 This app extends functionality for [the GeoIP Entricher app](/apps/geoip-enrichment), offering the ability to automatically discard unwanted information in a way which is helpful users with privacy or compliance needs.  
 
-### What are the requirements for this app?
+## Requirements
 
 This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -19,12 +17,13 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need to have [the GeoIP Entricher app](/apps/geoip-enrichment) installed. 
 
-### How do I install the this app?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'Advanced GeoIP' and select the app, press Install.
 
-That's it!
+
+## FAQ
 
 ### Is the source code for this app available?
 

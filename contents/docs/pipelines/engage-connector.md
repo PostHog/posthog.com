@@ -7,8 +7,6 @@ tags:
     - engage
 ---
 
-### What does the Engage Connector do?
-
 This app connects PostHog to [Engage](https://engage.so/), a marketing automation platform, and sends data to Engage for use in segmentation, targeting and automation.
 
 Specifically, this app only exports your `Custom` and `$identify` events to Engage.
@@ -25,7 +23,7 @@ posthog.identify(
 
 The example above, using the PostHog JS SDK, appends extra properties to the identify event. These extra properties are also sent to Engage.
 
-### What are the requirements for this app?
+## Requirements
 
 The Engage Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -33,7 +31,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need access to a Engage account, obviously.
 
-### How do I install the Engage Connector?
+## Installation
 
 To install this app, you will need your Engage secret key and public key to send data to PostHog. These are available on the 'Settings' page of your Engage dashboard, under the 'Account' > 'API' Keys section.
 
@@ -46,9 +44,11 @@ Once you have made a note of your keys, log in to your PostHog instance and foll
 
 Now, as soon as the app is enabled, PostHog will start sending your events to Engage in real-time.
 
-### Configuration
+## Configuration
 
 <AppParameters />
+
+## FAQ
 
 ### Is the source code for this app available?
 

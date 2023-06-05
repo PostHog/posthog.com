@@ -8,17 +8,15 @@ tags:
     - patterns
 ---
 
-### What is Patterns?
-
 Patterns is a data science platform for building and deploying data pipelines, machine learning models, and complex automations. It’s built for data engineers, scientists, and analysts and abstracts away the overhead associated with setting up data infrastructure and having to configure many different tools. At the core is the Patterns protocol, a functional reactive declarative data pipelining framework that makes it easy to chain together Python and SQL scripts.
 
 Use Patterns with PostHog to calculate metrics such as cohort churn, retention and customer LTV. Or, integrate your PostHog data with other sources such as your marketing data, email marketing tools, payment and billing systems.
 
-### What does the Patterns Connector do?
+## What does the Patterns Connector do?
 
 The Patterns Connector enables you to send event data from PostHog, to Patterns. This is useful for a number of reasons, including centralizing data into a CDP, or using it to generate customer models.
 
-###### What are the requirements for this app?
+## Requirements
 
 Using the Patterns Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -26,7 +24,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 You'll also need an account with [Patterns](https://www.patterns.app/).
 
-### How do I install the Patterns Connector on PostHog?
+## Installation
 
 This app requires PostHog 1.30.0 or above, or PostHog Cloud. You also need a Patterns account. 
 
@@ -43,9 +41,11 @@ You can install the connector via [the GitHub repo](https://github.com/PostHog/p
 
 Once you’ve installed the app and configured the webhook, data will begin streaming into Patterns in real-time. Here is [an example app](https://studio.patterns.app/graph/o9mtaek8n33qasl1oa3a/nffx8k2ox23r0h5i6f6o/3evx4hiottnqeb0229ig?view=graph) you can clone that can be used to enrich, score, and prioritize new leads to your website —- this is common for optimizing a customer conversion funnel.
 
-### Are there other ways to connect PostHog and Patterns?
+## Are there other ways to connect PostHog and Patterns?
 
 Yes. You can also use the PostHog data extractor within Patterns to extract a full historical and incremental load of events. Check [this tutorial about connecting PostHog and Patterns](/tutorials/how-to-connect-patterns-and-posthog) for more information.
+
+## FAQ
 
 ### Is the source code for this app available?
 

@@ -7,28 +7,28 @@ tags:
     - url-normalizer
 ---
 
-### What does the URL Normalizer app do?
-
 This app normalizes the format of URLs so you can more easily compare them in insights.
 
 By default, the URL Normalizer converts all URLs to lowercase and strips trailing /s, overriding the old `current_url` property.
 
-### What are the requirements for this app?
+## Requirements
 
 The URL Normalizer app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How do I install the URL Normalizer?
+## Installation
 
 1. Visit the 'Apps' page in your instance of PostHog.
 2. Search for 'URL Normalizer' and select the app, press Install.
 
-### How do I configure the URL Normalizer?
+## Configuration
 
 No configuration is needed. The URL Normalizer will automatically convert all URLs to lowercase and remove any trailing slashes.
 
 If you'd like to normalize URLs into a different format, please consider contributing a PR to [the repo](https://github.com/PostHog/posthog-url-normalizer-plugin).
+
+## FAQ
 
 ### Is the source code for this app available?
 

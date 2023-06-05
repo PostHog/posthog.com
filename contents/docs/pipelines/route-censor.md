@@ -6,17 +6,15 @@ thumbnail: ../../pipelines/thumbnails/censor-app
     - route-censor
 ---
 
-### What does the Router censor do?
-
 This app enables you to censor variables from URLs that are passed to PostHog. This is useful because PostHog tracks certain URLs automatically, so if your app contains sensitive data within the URLs (such as sensitive IDs, addresses, etc.), then this offers away to censor that data before it is stored in the PostHog database. 
 
-### What are the requirements for this app?
+## Requirements
 
 This app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-### How can I setup and configure this app?
+## Configuration
 
 First, install the app from the PostHog app library within your PostHog instance.
 
@@ -33,6 +31,8 @@ All properties in these lists should contain either a full URL (ex: "https://www
 Any properties previously defined for a user by $set_once cannot be overwritten by this plugin. It can only overwrite $set_once properties when they are initially set.
 
 The routes JSON must be updated whenever a new route is added to your app.
+
+## FAQ
 
 ### Where can I find out more?
 
