@@ -82,8 +82,8 @@ function PipelinesPage({ location }) {
             />
             <header className="py-12">
                 <h2 className="m-0 text-center text-[2.75rem] leading-none  md:text-6xl text-primary">
-                    Get all your data in PostHog with <br className="hidden lg:block" />
-                    <span className="text-blue">CDP pipelines</span>
+                    Get all your data into PostHog with <br className="hidden lg:block" />
+                    <span className="text-blue">data connections</span>
                 </h2>
                 <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
                     (Our full customer data platform is coming soon.)

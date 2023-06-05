@@ -611,12 +611,12 @@
         ]
     },
     {
-        "name": "Pipelines",
+        "name": "Data connections",
         "url": "/docs/pipelines",
         "icon": "EventPipelines",
         "children": [
             {
-                "name": "Import",
+                "name": "Sources",
                 "url": "",
                 "children": [
                     {
@@ -694,7 +694,7 @@
                 ]
             },
             {
-                "name": "Export",
+                "name": "Destinations",
                 "url": "",
                 "children": [
                     {
@@ -868,7 +868,7 @@
                 ]
             },
             {
-                "name": "Build a pipeline",
+                "name": "Build a data connection",
                 "url": "",
                 "children": [
                     {
@@ -913,8 +913,20 @@
         "icon": "AppLibrary",
         "children": [
             {
+                "url": "/docs/apps/notification-bar",
+                "name": "Notification Bar"
+            },
+            {
+                "url": "/docs/apps/nps-survey-app",
+                "name": "NPS Survey"
+            },
+            {
                 "url": "/docs/apps/pineapple-mode",
                 "name": "Pineapple Mode"
+            },
+            {
+                "url": "/docs/apps/user-interviews",
+                "name": "User Interviews"
             }
         ]
     },
