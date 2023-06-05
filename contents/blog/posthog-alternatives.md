@@ -252,7 +252,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 ### Key differences
 
-1. **Autocapture:** PostHog automatically captures events, which means you don't have to manually decide what events to track, unless you want to. It saves time for engineers and product managers, and ensures you'll always have useable data even if you forgot to create a custom event. 
+1. **Autocapture:** PostHog automatically captures events, which means you don't have to manually decide what events to track, unless you want to. It saves time for engineers and product managers, and ensures you'll always have usable data even if you forgot to create a custom event. 
 
 2. **Single tool vs all-in-one:** While it offers integrations with third-party A/B testing, feature flag, and session replay tools, Mixpanel doesn't offer much outside typical product analytics features. PostHog integrates all these features into one platform.
 
@@ -294,7 +294,7 @@ The lack of autocapture, and the need to maintain tracking plans, comes up often
 
 - "In order to pull the most significant value out of Mixpanel, your administrator must take time to organize tracking."
 
-- "The dependency to the tech team to add and mantain the track in the code."
+- "The dependency to the tech team to add and maintain the track in the code."
 
 - "Some of the event definition structures can be forced rather than keeping everything open ended."
 
