@@ -6,6 +6,7 @@ import AppsList from '../AppsList'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
 import { navigate } from 'gatsby'
+import Link from 'components/Link'
 
 const filters = [
     {
@@ -86,8 +87,8 @@ function AppsPage({ location }) {
                     <span className="text-blue">PostHog Apps</span>
                 </h2>
                 <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
-                    Apps can leverage the PostHog API. They appear in the PostHog product and, if using PostHog.js, can
-                    also inject code directly into your website or product.
+                    Apps are built on the <Link to="/docs/api">PostHog API</Link>. They appear right inside PostHog, and
+                    if using PostHog.js, apps can also inject code directly into your website or product.
                 </p>
             </header>
             <div className="hidden flex justify-start px-4 md:justify-center items-center mb-6 space-x-2 overflow-auto whitespace-nowrap">
