@@ -370,18 +370,12 @@ The five levels of product-market fit should help you work out when you need to 
 
 ## Final thoughts
 
-For Tim and me, one of the most important parts of getting to product market fit, was simply driving from our house to dinners at YC and back for an hour a few times a week.
+Getting to product-market fit is hard because it's a multivariate problem. Most of the time, you simply do not know _exactly_ why things are, or are not, working. As a result, you'll (rightly) be filled with doubt in the early days. This is normal.
 
-Getting to product market fit is very hard because it's a multi variate problem - you simply do not know _exactly_ why things are or are not working in the early days. As you get further along, you start to figure out what the variables are, and you realize there are more and more of them than you realized.
+In hindsight, one of the keys to PostHog achieving product-market fit was the the regular downtime Tim and I shared when driving to and from YC dinners a few times each week.
 
-As a result, you'll be filled with doubt by default in the early days. At the same time, you should be cranking as fast as humanly possible because you'll learn the most by doing.
+Why?
 
-So, why was driving helpful?
+Because the ultimate failure mode is not grasping the big picture. Those hour-long drives without our laptops forced us to reflect. Forced us to step away from the grind and interrogate everything we'd learned so far.
 
-The ultimate failure mode is not to grasp the big picture of what you're working on. One of the most important things you can do is remind yourself - you are playing this game. Take time out every week. For us, being in a car meant we didn't have our laptops and it forced us to reflect. Give yourself the space to look at this game as the big picture.
-
-[^1]: Of course, there are exceptions – a fundamental shift in technology may unlock the ability to solve problems that were previously unsolved – but it means you are a solution looking for a problem, and that hardly ever works.
-
-[^2]: Speaking as a founder, I'm always happy to help early-stage founders validate their problems, but I probably won't take your call if I sense you're trying to sell to me unless I already know you well.
- 
-[^3]: We also saw instances where companies debated pivoting for several weeks – if you have tried everything in the list above, and are questioning yourself constantly, then you probably should have pivoted already.
+You can't complete the product-market fit game without hard work and persistence. But sometimes you need to pause, look at the map, find your bearings, and choose your next objective. So, every week - make time to reflect.
