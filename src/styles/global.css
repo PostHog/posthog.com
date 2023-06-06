@@ -195,7 +195,7 @@ h4 {
     }
     td,
     th {
-        @apply border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b pt-2;
+        @apply pt-2;
         padding-bottom: calc(0.5rem - 1px);
 
         &:not(:first-child) {
@@ -210,7 +210,7 @@ h4 {
 
     /* expandable/collapsible sections */
     details {
-        @apply p-2 pl-4 cursor-pointer border-gray-accent-light dark:border-gray-accent-dark border-dashed border;
+        @apply p-2 pl-4 cursor-pointer border-gray-accent-light dark:border-gray-accent-dark border border;
 
         > summary {
             @apply text-red font-semibold list-none pl-4 relative before:absolute before:left-[0] before:top-[9px] before:w-[10px] before:h-[7px];
@@ -299,24 +299,6 @@ h4 {
 }
 .timeline-entry li[data-type='milestone']:before {
     background: #c849f4;
-}
-
-/* Product page */
-
-.product-hero-image {
-    &:after {
-        @apply absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-tan z-20;
-        content: '';
-    }
-}
-
-div[class^='feature-'].text-center {
-    @apply border-gray border-dashed border-1 md:mb-0 relative overflow-hidden;
-}
-
-.feature-event-autocapture {
-    /* @apply border-r border-gray border-dashed; */
-    background: url('../images/dash-vertical.svg') 100% / 1px repeat-y;
 }
 
 /* Handbook + Docs */

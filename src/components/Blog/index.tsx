@@ -91,7 +91,7 @@ export const Posts = ({ posts, title, action, titleBorder }) => {
 
                     return (
                         <li
-                            className="relative active:top-[1px] active:scale-[.99] shadow-lg after:border-0 hover:after:border-1 after:border-black/25 after:rounded-md after:-inset-1.5 after:absolute"
+                            className="relative active:top-[1px] active:scale-[.99] shadow-lg after:rounded-md after:-inset-1.5 after:absolute"
                             key={id}
                         >
                             <Post

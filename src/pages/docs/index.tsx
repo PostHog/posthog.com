@@ -191,7 +191,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
 
             <PostLayout article={false} title={'Docs'} menu={docs} hideSidebar hideSurvey>
                 <div className="space-y-16 lg:space-y-20 lg:mt-0 mt-8 mb-8">
-                    <section className="border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pb-8">
+                    <section className="pb-8">
                         <div className="w-full z-20">
                             <StaticImage
                                 objectFit="contain"

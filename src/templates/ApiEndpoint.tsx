@@ -40,7 +40,7 @@ function Endpoints({ paths }) {
                             {Object.keys(value).map((verb) => (
                                 <tr
                                     key={verb}
-                                    className="border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b first:border-t-0 last:border-b-0"
+                                    className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0"
                                 >
                                     <td>
                                         <code className={`method text-${mapVerbsColor[verb]}`}>

@@ -44,7 +44,7 @@ export function BlogPostLayout({
                                         key={index}
                                         title={title}
                                         url={url}
-                                        className="whitespace-nowrap border-r-0 last:border-r flex dark:even:before:content-['\002C'] even:before:content-['\002C'] even:before:ml-[-10px] items-baseline"
+                                        className="whitespace-nowrap flex dark:even:before:content-['\002C'] even:before:content-['\002C'] even:before:ml-[-10px] items-baseline"
                                     />
                                 )
                             })}

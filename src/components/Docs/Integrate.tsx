@@ -73,7 +73,7 @@ export const SDKs = () => {
     )
 
     return (
-        <div className="grid grid-cols-3 -mt-2 mb-6 dark:border-gray-accent-dark">
+        <div className="grid grid-cols-3 -mt-2 mb-6">
             {sdks.nodes.map((node) => (
                 <IntegrateOption key={node.frontmatter.title} {...node} />
             ))}
@@ -85,7 +85,7 @@ export const Frameworks = () => {
     const { frameworks } = useStaticQuery<LibraryData>(query)
 
     return (
-        <div className="grid grid-cols-2 -mt-2 mb-6 dark:border-gray-accent-dark">
+        <div className="grid grid-cols-2 -mt-2 mb-6">
             {frameworks.nodes.map((node) => (
                 <IntegrateOption key={node.frontmatter.title} {...node} />
             ))}

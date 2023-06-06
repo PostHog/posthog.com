@@ -117,7 +117,7 @@ const Footer = ({ location }) => {
             <>
                 <section className="mt-8 -mx-5 px-5 md:mx-0 md:px-0">
                     <h4>More about {currentMenu.name.toLowerCase()}</h4>
-                    <ul className="flex m-0 px-0 pb-2.5 md:pb-0 relative after:w-full after:md:border-t after:border-gray-accent-light after:border-dashed after:absolute after:top-0  w-full overflow-x-auto">
+                    <ul className="flex m-0 px-0 pb-2.5 md:pb-0 relative after:w-full after:md:border-t after:border-gray-accent-light after:border-solid after:absolute after:top-0  w-full overflow-x-auto">
                         {currentMenu?.children?.map(({ name, url }) => {
                             const active = location.pathname.startsWith(url)
                             return (
