@@ -15,24 +15,27 @@ featuredImage: ../images/blog/hog_ql.png
 featuredImageType: full
 ---
 
-Today, we're excited to announce a major new feature that's now available all users as a public beta on PostHog Cloud - the ability to directly query data stored in PostHog via SQL.
+Today, we're excited to announce a major new feature that's now available for all users as a public beta on PostHog Cloud - the ability to directly query data stored in PostHog via SQL.
 
 We've added several new ways to use SQL in PostHog - you can use expressions to enhance insights, you can use SQL to filter a revamped events list, and you can even use full SQL queries to analyze data in any way you want. 
 
 We've even created [our own SQL dialect, called HogQL](/docs/product-analytics/hogql).
 
-PostHog's existing insights will remain valuable for the vast majority of queries, but this gives them a massive upgrade, and the ability to create your own SQL queries provides an alternative when off-the-shelf insights don't fit the bill. 
+While PostHog's existing insights remain valuable for the vast majority of queries, HogQL gives them a massive upgrade for those times when off-the-shelf insights don't fit the bill. 
 
-Speaking of bills, these features are free for all users while in public beta – all we ask is that you [share any feedback with us](http://app.posthog.com/home#supportModal). 
+Speaking of bills... these features are free for all users while in public beta – all we ask is that you [share any feedback with us](http://app.posthog.com/home#supportModal). 
 
 ## What is HogQL?
+
 Basically, HogQL is our take on SQL. 
 
-Less basically, it's a transition layer over ClickHouse SQL that we've created to empower a wide range of users, from technical product managers who need multi-property breakdowns, to engineers who need to dissect data in more nuanced ways. It's intuitive for teams who are familiar with SQL, but offers a few extra advantages and features.
+Less basically, it's a transition layer over ClickHouse SQL that's intuitive for anyone familiar with SQL, but offers a few extra advantages and features.
 
 Unique features to HogQL include simplified access to event and person properties, as well as automatically added joins when you query fields with data on a different table, such as `events.person.properties.$browser`.
 
 You can also use subqueries, joins, table expressions, arrays, aggregations, lambdas and a whole host of other neat SQL features, including aggregations.
+
+Whether you're a technical product manager who needs multi-property breakdowns, or an engineer wishing to dissect data in more nuanced ways, HogQL unlocks a whole new world of insights to PostHog users.
 
 We recommend checking the docs for a more detailed [explanation of ClickHouse SQL functions which are supported in HogQL](/manual/hogql).
 
