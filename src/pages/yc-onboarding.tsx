@@ -1,24 +1,22 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
-import { DemoScheduler } from '../components/DemoScheduler'
+import HubspotForm from 'react-hubspot-form'
 import { Spacer } from '../components/Spacer'
 import { Link } from 'gatsby'
 
 const DemoCallInfo = () => (
     <>
         <p>
-            Welcome to our super secret YC onboarding page! We're very happy to see you. Please book in a call with us
-            using the form below. If you simply can't find a time that suits you (maybe you're in Perth?), then feel
-            free to email us at <i>yc@posthog.com</i> and we'll be happy to find a time that works.
+            Welcome to our super secret YC onboarding page! We're very happy to see you. Please let us know what you're
+            interested in using the form below.
         </p>
         <br />
         <p>
-            The setup calls take place in small groups with Cameron from our Customer Success team, and run for about an
-            hour. Before the call, we recommend you <a href="https://app.posthog.com/">sign up to our Cloud version</a>{' '}
-            and try your hand at
+            The setup calls take place with our Customer Success team, and run for about an hour. Before the call, we
+            recommend you <a href="https://app.posthog.com/">sign up to our Cloud version</a> and try your hand at
             <Link to="/docs/integrate"> installing our snippet</Link> on your website. Doing so would allow us to tailor
             the onboarding to your needs, leveraging data from your own website instead of demo data. However, if you
-            prefer to get a demo first, we'll give you access to a demo playground during our call.
+            prefer to get a demo first, we'll be happy to spend 30 minutes to walk you through our features.
         </p>
         <br />
         <p>
@@ -43,7 +41,11 @@ export const YCOnboarding = () => {
                 </button>
                 <Spacer height={25} />
                 {showInfo ? <DemoCallInfo /> : null}
-                <DemoScheduler iframeSrc="https://calendly.com/d/dsb-3y3-9v9" />
+                <HubspotForm
+                    portalId="6958578"
+                    formId="1c421f4a-320a-4c2a-8879-e37ccfcdea87"
+                    //onSubmit={() => setSubmitted(true)}
+                />
             </div>
         </Layout>
     )
