@@ -224,6 +224,13 @@ You will also need some pricing. You are likely to change this numerous times:
 
 Now it's to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others. If you manage this five times – congratulations, you've completed the product-market fit game.
 
+Once you get 5 reference customers, you are _well_ on your way to product market fit. After this:
+
+* repeat your formula to around $1M in ARR, by yourself (I'd advocate for a minimum of $500K if you are confident at sales and everything is feeling easy and repeatable, more than $1M if you are still feeling things are different every time you sell or it's proving tough)
+* then see if other people are successful at following your playbook - try with two other people to reduce the chance it's a person problem, not a product market fit problem.
+
+Now you're likely at product market fit - it should just feel easy to grow. If not, [talk to me](https://twitter.com/james406).
+
 #### Failure modes
 
 * **You outsource sales to someone else.** It is already a multivariate problem trying to get product market fit, don't also add in the question of "is it the product, or the person selling it" by relying on someone else. Realistically, a founder (regardless of the level of experience) is _the_ best person in the world to sell the product they made. Lots of people want to outsource or even skip this step - fear of failure at the final hurdle, a lack of confidence through never having sold before, laziness (it is a painful, hard experience to sell a product) or ego (I've raised a lot of money, this isn't the best use of my time). The reason a founder should focus on this, is that having a valid business model is critical _and_ getting there may require lots of iteration on product, pricing, positioning and so on. A founder can change all of these things more quickly and easily than an employee.
