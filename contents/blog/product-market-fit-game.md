@@ -17,7 +17,7 @@ In a startup, the _only_ objective that matters _before_ you have product-market
 
 To me, finding product-market fit is a bit like playing [snakes and ladders](https://en.wikipedia.org/wiki/Snakes_and_ladders). There are numerous traps, winning takes a little luck, and the only certainty is it's never a straight line to the finish.  
 
-This guide is based on what I've learned at PostHog through 5 or 6 pivots, eventually finding product-market fit, growing revenue to $MM, and onboarding more than 20k customers. It also incorporates what we've seen from ~50 Y Combinator startups we've consulted with on this topic.
+This guide is based on what I've learned as CEO of PostHog through 6 pivots, eventually finding product-market fit, growing revenue to $MM, and onboarding more than 20k customers. It also incorporates what we've seen from ~50 Y Combinator startups we've consulted with on this topic.
 
 ## The 5 levels of product-market fit
 
@@ -31,6 +31,8 @@ Finding product-market fit is a game, and games have levels. My product-market f
 
 You need to complete all five levels to win. All but the first have multiple failure modes, which I've listed – go through them sequentially. You might find you cannot complete a level. This is a sign you need to pivot your entire company. I touch on this at the end.
 
+Remember to keep detailed notes on all the conversations you have with potential / actual customers at each level. You may want to come back to a detail that didn't seem important at the time, and your notes may be useful for a different idea later. At PostHog, we built a Google Doc over 100 pages long in the first few weeks.
+
 Let's press start...
 
 ### Level 1 - Find a significant problem work on
@@ -43,22 +45,19 @@ The type of idea, _and_ thus the types of users you are targeting, will greatly 
 
 Here are some pointers:
 
-- **Pursue ideas for users you want to work with.** Early in PostHog's life, we worked on a tool for sales leaders. We quickly grew frustrated at extroverted people who were positive on calls, but didn't follow through on promises. As a result, we decided to work with customer support or engineers – two groups we felt would be more reliable to work with, albeit with their own downsides.
+- **Pursue ideas for users you want to work with.** Early in PostHog's life, we worked on a tool for sales leaders. We quickly grew frustrated at extroverted people who were positive on calls, but didn't follow through on promises. We switched to ideas for customer support or engineers, who we felt would be more reliable.
 
 - **Known problems are easier to validate,** but your solution must be very different. If you want to build a venture scale business then, in the long run, your solution must be 10x better, or 10x cheaper, than the existing solutions for significant numbers of people to use and/or pay for it.
 
 - **Be careful when validating problems no one else has worked on.** Maybe you see something others are missing, but it's more likely the problem isn't important.
 
-- **Be wary about building what's trendy.** It's easier to beat unsexy, badly run, non-innovative companies than software companies with VC funding _and_ using the latest technology. Do not be fooled about news articles covering huge fundraises by startups working in these areas – fundraising + press ≠ success. In fact, the trendier the space, the less likely a big round means the company is succeeding.[^1]
+- **Be wary about building what's trendy.** It's easier to beat unsexy, badly run, non-innovative companies than software companies with VC funding _and_ using the latest technology. Do not be fooled huge fundraises by startups working in these areas: `big funding rounds + press ≠ product-market fit`. In fact, the trendier the space, the less likely a big round means the company is succeeding.[^1]
 
 - **Conservative buyers demand differentiation.** You could probably get someone to try a new social app, but you won't get an enterprise to use an unproven CRM. A rip and replace strategy is harder to execute than a blue ocean strategy. It is easier to sell a product to someone who hasn't got anything in place.
 
-During this phase, write down every single potential customer conversation. Be thorough and open ended in your questions. It's easy to get recency bias, and you may want to come back to a detail that didn't seem important at the time. They may even be important for a different idea later. At PostHog, we built a Google Doc over 100 pages long in the first few weeks of doing this.
 
-Many people spend months or years attempting to validate their idea in advance, and make no progress as a result. You will always get more clarity by doing something rather than hypothesizing forever. 
 
-Many people spend months or years attempting to validate their idea in advance, and make no progress as a result. You will always get more clarity by building something and getting it into users' hands
-, so don't spend ages at this level.
+Many people spend months or years attempting to validate their idea in advance, and make no progress as a result. You will always get more clarity by building something and getting it into users' hands, so don't spend ages at this level.
 
 ### Level 2 - Validate the problem really exists by talking to users
 
@@ -78,7 +77,7 @@ Some tips for getting meetings:
 
 - **Be as concise as you can** when asking for a meeting. That means 2-3 sentences – not a wall of text. Remember: anything you're doing on the internet is competing with cat videos.
 
-- **Be clear about what you want** both when you message them and during the meeting. If you want feedback, state that. If you want to sell to them, be transparent about it. Remember: you can always come back to a prospect to sell to them later if you've validated they have your problem.[^2]
+- **Be clear about what you want** both when you message them and during the meeting. If you want feedback, state that. If you want to sell to them, be transparent about it. You can always come back to a prospect to sell to them after you've validated they have your problem.[^2]
 
 - **Avoid heavily automated outreach** – it's a waste of energy. Sure, hustle and send lots of messages, but don't set up dedicated software to mass email thousands of people. You're already in failure mode if you go to this extreme – it proves no one cares.
 
@@ -86,7 +85,7 @@ Some tips for getting meetings:
 
 - **Speed matters.** You should aim to respond within 30 seconds if someone messages you back – yes, it's that extreme. In a past life, I ran a call center business. We had a 90% greater chance of booking time if we called back potential customers within 5 minutes. Startups win on speed. Be glued to your messages.
 
-Be aware that many people you talk to will show interest out of politeness, or because they genuinely _could_ see themselves using your product one day. Neither will help you get actual usage. [The Mom Test](https://www.momtestbook.com/) provides plenty more information here if you want to learn more. 
+Be aware that many people you talk to will show interest out of politeness, or because they genuinely _could_ see themselves using your product one day. Neither will help you get actual usage. [The Mom Test](https://www.momtestbook.com/) is an essential read on how to talk to potential customers and users.
 
 If the problem is a high priority one, it's likely your potential customer will have already gone to considerable lengths to solve it. Recalling the words of Dalton Caldwell, one of the YC partners we worked most closely with: 
 
@@ -112,7 +111,7 @@ Work your way from top to bottom:
 
 * **You aren't working hard enough.** Realize no one else is going to do this for you. Set a goal for how many meetings you want to get. I got 2 meetings a day, 5 days a week while doing any other random tasks, like building a website. Try to meet in person if you can afford to do so – most communication is non-verbal, so it'll make it easier to learn what people are thinking. Move to a hub for your industry if you can. Also consider moving in with your co-founder, so you can focus 100% on the work for this intense period. Running out of momentum is your biggest risk.
 
-* **You aren't being clear what the problem is,** so it's hard to recruit users to validate it. Create a simple, single sentence description of the problem you think you're solving (ahead of doing the same for the _product_ you eventually build), and the user you are targeting. If what you're working on feels vague, you'll get a lukewarm response to your messages trying to book meetings. Do not use benefits-language here – users won't have the attention span to figure out what your product does. We were working on "open source product analytics", so people could "self host their product analytics". We were not, for example, "helping engineers build better products", "providing a product optimization system" or "saving time for data analysts".
+* **You can't clearly describe the problem,** making it hard to recruit users to validate it. Create a simple, single sentence description of the problem you think you're solving (ahead of doing the same for the _product_ you eventually build), and the user you are targeting. If what you're working on feels vague, you'll get a lukewarm response to your messages trying to book meetings. Do not use benefits-language here – users won't have the attention span to figure out what your product does. We were working on "open source product analytics", so people could "self host their product analytics". We were not, for example, "helping engineers build better products", "providing a product optimization system" or "saving time for data analysts".
 
 * **You are talking to the wrong users.** If so, no one will take calls, or if they do, they don't have your problem. Ask yourself – why did you have this problem, but those speaking to you don't? When you do get calls, ask who would have this problem. Change the user you are targeting.
 
@@ -124,7 +123,7 @@ Work your way from top to bottom:
 
 ![pmf-guide](../images/blog/pmf-game-guide/pmf-level-3.png)
 
-You should start level 3 as soon as you have something for users to use. You need to _keep_ talking to users throughout this level, but now you can validate better because you have a product they can see.
+You should start level 3 as soon as you have something for users to use. You _must_ keep talking to users throughout this level, but now you can validate better because you have a product they can see.
 
 The goal here is to see if people actually care, as quickly as possible. No matter how excited you get after interviewing people about their problems, there's no substitute for seeing what people _do_ instead of what they _say_. 
 
@@ -136,7 +135,7 @@ The most obvious users to start with are the ones you've already met during leve
 
 These are all the reasons why users may not use your product:
 
-* **Users have no idea what your solution is**, so they think it could be a waste of time. Even if your product is free, people's time is not. The more senior your users, the stronger the effect. Can you work with someone that _reports_ to the person you were targeting to get things setup? If you struggle to get responses, start questioning if something else is causing issues – even a senior stakeholder will put in work to solve a serious problem they have.
+* **Users have no idea what your solution is**, so they think it will be a waste of time. Even if your product is free, people's time is not. The more senior your users, the stronger the effect. Can you work with someone that _reports_ to the person you were targeting to get things set up? If you struggle to get responses, start questioning if something else is causing issues – even a senior stakeholder will put in work to solve a serious problem they have.
 
 - **You're not explaining your product clearly.** The way you explain your product matters. If it's complicated, people won't understand it. Describe it like you would when speaking to a friend. Ask users for direct feedback on your explanation.
 
@@ -158,7 +157,7 @@ These are all the reasons why users may not use your product:
 
 ![pmf-guide](../images/blog/pmf-game-guide/pmf-level-4.png)
 
-Hooray, so people are showing up. Now you need to see if they're coming back or not. Figure out what your expected frequency is for usage, and check if that's roughly how often users are using your product. Users will return if you can repeatedly solve a problem for them.
+Hooray, so people are showing up. Now you need to see if they're coming back or not. Figure out what your expected frequency is for usage, and check if that's roughly how often users are using your product. Users will return if you can repeatedly solve a problem for them. If you haven't already, [setup analytics to track retention](/blog/early-stage-analytics). 
 
 Avoid relying on things like reminder emails or push notifications purely designed to get users to log back into your product. If it takes this sort of effort to retain users, your product probably isn't valuable to them. Focus _exclusively_ on building features that make your product more powerful or easier to use.
 
@@ -180,9 +179,9 @@ Closing the loop above is the way to cement your product-market fit because:
 
 #### Failure modes
 
-* **Users aren't activating.** This means although they _signed up_, but they can't _configure_  or _get started_ with your product, so they _never_ get any value from it. You have two options here:
+* **Users aren't activating.** This means they _signed up_, but can't _configure_  or _get started_ with your product, so they _never_ get any value from it. You have two options here:
 
-  1. Activate your users manually. The classic example is the founders of Stripe who [used to visit their first users in person](http://paulgraham.com/ds.html#Manual) to set up their product for them. Do things that don't scale. The bonus of this approach is that you get a deeper customer interaction, so you learn more and create a better relationship which helps you get more feedback.
+  1. Activate your users manually. The classic example is the founders of Stripe, who [used to visit their first users in person](http://paulgraham.com/ds.html#Manual) to set up their product for them. Do things that don't scale. You'll develop a closer relationship doing this, which helps you get more feedback.
   
   2. Make your activation/onboarding simpler. Can you make it 10x simpler?
 
@@ -216,12 +215,14 @@ Be upfront with customers. This step may prove tricky if you never set any comme
 
 You will also need some pricing. You are likely to change this numerous times:
 - **Step 1** is to create some kind of internal table for you to use and iterate with each handful of sales calls.
+
 - **Step 2** may be to make this transparent online. Don't do this until step 1 is working reasonably well.
-- **Step 3**, for companies focusing on self-serve, is to enable people to pay without talking to you. Do this only after step 2, and only if it suits your go to market - if you're enterprise focused and selling from the top down, it's a bad idea. If you're product-led then go for it.
+
+- **Step 3**, for companies focusing on self-serve, is to enable people to pay without talking to you. Do this only after step 2, and only if it suits your go to market. If you're enterprise focused and selling from the top down, it's a bad idea. If you're product-led then go for it.
 
 > **Important:** Don't leap straight to self-serve. Remember that, at this stage, you're optimizing for learning, not revenue. Jumping too soon to self-serve will reduce your opportunities for learn. Talk to your early users about what they're prepared to pay.
 
-Now it's to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others. If you manage this five times - congratulations, you've completed the product-market fit game.
+Now it's to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others. If you manage this five times – congratulations, you've completed the product-market fit game.
 
 #### Failure modes
 
@@ -231,7 +232,7 @@ Now it's to get your first reference customer. This means a customer that pays f
 * **You can't get all five customers to look like each other** Well done on getting something sold. However, you can't sell a different product to every customer and call that product market fit! Can you repeat one of the sales you made four more times? Then you've completed this level. If not, go back a level.
 * **You keep getting stuck on this step** if you repeatedly get a little traction but cannot convert that to revenue, you perhaps don't have the skills to solve the problem you're tackling properly, even if the problem exists. If you _want_ to keep trying again, I suggest you do, but if this has happened a bunch of times, you'll probably have an easier time if you just choose an easier-to-solve problem.
 
-## What you need to complete the game
+## The things you need to complete the game
 
 ### A co-founder
 
@@ -249,13 +250,11 @@ You're both getting committing to something that may outlast the average marriag
 
 Treat each other as partners. Failure mode is when the CEO bosses the CTO around and makes all the decisions. Then you aren't co-founders. There are a few ways we've done this:
 
-* **Company design / people and hiring / culture:** The company is the parent product you are building – and it's the one input you can directly control. You should both think frequently about what kind of company you want to build together, and the people and hiring/culture decisions/behaviors you build are the most important part of getting there.
+* **Company design / people and hiring / culture:** Your company is the parent product you are building – and it's the one input you can directly control. You should both think frequently about what kind of company you want to build, and the people and hiring/culture decisions/behaviors you value most.
 
 * **Strategy / vision:** While one co-founder may drive, the other is closely involved. If you can't get on the same page as each other, it'll be 10x worse for everyone else.
 
-* **Roles and responsibilities:** Be willing to swap responsibilities around to play to your strengths. A few examples of things that have caused us to swap things around:
-  * The first $1M in sales are different to scaling to $10M.
-  * Pre-product market fit and post-product market fit may require a different approach to product.
+* **Roles and responsibilities:** Be willing to swap responsibilities around to play to your strengths. The first $1M in sales are different to scaling to $10M, and pre-product-market fit and post-product-market fit may require a different approach to product. Tim and I have switch roles periodically as PostHog has evolved.
 
 * **Board / fundraising:** This ties closely to company strategy. While the CEO should do _all_ investor calls, so the other can drive the business in the meantime, it's important to update each other on progress via shared notes, or weekly discussions. Both co-founders should attend board meetings / existing investor catchups, and have areas they own in them.
 
@@ -300,40 +299,40 @@ Unless your product's unique selling point is superior design, it's preferable t
 
 ### An open and responsive attitude 
 
-Aside from closing the loop, don't put anyone or anything between the person(s) writing the code and your users. This slows you down and causes confusion. Moreover, it's a better experience for a user to spend time with the person that actually built the product. It is more effective in the long run to productize answers to users' problems, than it is to spent lots of time triaging issues.
+Don't put anyone or anything between the person(s) writing the code and your users. This slows you down and causes confusion. It's more effective to productize answers to user problems than triaging issues, and users will appreciate spending time with the people who actually built the product
 
 Set a clear responsibility for this with your co-founder. When Tim and I started getting users, I kept trying to get _more_ users while he focused completely on our existing ones.
 
-Remember that users are human beings, and your success entirely depends on them. Make sure their experience with you is a joyful one. The way you even open a call sets the tone for the whole conversation. Be energetic and happy to be there! 
-
-Do the legwork for them – it shows them that their opinions are valued and thus they'll keep interacting with you. This means writing up your notes, and creating issues, or features in response, all of which you send to them. It means responding quickly to them – within minutes if you can.
+Remember that users are human beings, and your success entirely depends on them. The way you open a call sets the tone for the whole conversation. Be energetic and happy to be there! Do the legwork for them – write-up notes and create issues/tickets for them, keep them in the loop, respond within minutes if you can.
 
 ### A simple, repeatable sales motion
 
-When you're trying to get to product-market fit, do _not_ prioritize scaling your sales. Just focus on getting one deal done at a time. Here is how to do that:
+Do _not_ prioritize scaling your sales when you're trying to get to product-market fit. Just focus on getting one deal done at a time. Here is how to do that:
 
 1. Intros through your own network, people you worked with, went to school with, where your family work or went to school. Everybody has _some_ network – don't feel like you need to be a sales legend to do this.
+
 2. If you're in an accelerator, message other companies. Be personalized.
+
 3. People from companies that your product is perfect for.
+
 4. Events. You may be able to get free tickets via a partner.
 
-In general, do not do marketing (paid ads / content) expecting to get a sale – these are more scalable methods. Be hands on. Other companies in your space will have heavily invested in how to do outbound or marketing, so the most likely way you can win is on quality and personalization with your approach.
+In general, don't expect sales from marketing (paid ads / content) – these are more scalable methods. Instead, be hands on. Early on, you'll win on the quality and personalization of your sales approach.
 
-Keep yourself accountable – set some goals for meetings booked and stick to them.
+Keep yourself accountable – set some goals for meetings booked and stick to them. Be hyper responsive.
 
-As with booking feedback calls, be hyper responsive. If you respond to people within minutes (whether booking a meeting, or progressing a deal), you'll get them while they're available and happy to engage. I used to obsessively respond to people on LinkedIn all day while in this phase.
 
-When it comes to pricing, reduce the risk for your earliest customers. Charge them monthly rather than annually, unless they prefer the latter.
+When it comes to pricing, reduce the risk for your earliest customers. Charge them monthly rather than annually, unless they prefer the latter. There are multiple methods available. You can charge a recurring monthly rate, or you can charge on usage.
 
-There are multiple methods available. You can charge a recurring monthly rate, or you can charge on usage.
-
-Once you're on a call, get the prospect to open up about their challenges, and figure out with them if your product could solve their problems. It's worth qualifying the lead as you do this. The simplest method is BANT (Budget, Authority, Need, Timeline).
+Once you're on a call, get the prospect to open up about their challenges, and figure out with them if your product could solve their problems. It's worth qualifying the lead as you do this. The simplest method is [BANT](https://www.techtarget.com/searchcustomerexperience/definition/BANT) (Budget, Authority, Need, Timeline).
 
 Layer your questions.
 
-* Level 1 - "What are the requirements for this project?", "how will you pick a vendor?", "do you have a set budget?"
-* Level 2 - "This sounds important, why?", "would you consider a product that didn't include that feature?" and so on. 
-* Level 3 - "If your end users were thoroughly trained and using this product effecitvely, what impact would that have on your revenue?", "what does solving this mean for you?".
+* **Level 1** – "What are the requirements for this project?", "how will you pick a vendor?", "do you have a set budget?"
+
+* **Level 2** – "This sounds important, why?", "would you consider a product that didn't include that feature?" and so on. 
+
+* **Level 3** – "If your end users were thoroughly trained and using this product effecitvely, what impact would that have on your revenue?", "what does solving this mean for you?".
 
 Prioritize time with those that are best-qualified.
 
@@ -345,9 +344,9 @@ A lot of the hustle/grind culture around startups would have you believe the ver
 
 It felt like the _majority_ of the best companies there pivoted. Since most startups fail, you're probably doing something wrong if you _don't_ pivot! At PostHog, we pivoted six times in the first six months!
 
-The five levels of The Product-Market Fit Game should help you work out when you need to pivot, but here are a few more pointers:
+The five levels of product-market fit should help you work out when you need to pivot, but here are a few more pointers:
 
-- **Motivation matters.** If you aren't excited about what you're working on, pivot. It's as simple as that. You'll achieve more if you're working on something that feels like it's _your_ startup.
+- **Motivation matters.** If you aren't excited about what you're working on, pivot. It's as simple as that. You'll achieve more if you're working on something that feels _yours_.
 
 - **Be decisive.** During our YC batch, we saw a few companies have one founder work on X, while another worked on Y. Finding product-market fit is already complex, so don't make it harder by dividing your effort. Pick one idea and go all in. If you fail, quickly move to the other idea.[^3]
 
