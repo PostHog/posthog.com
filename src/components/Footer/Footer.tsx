@@ -343,7 +343,7 @@ export function Footer(): JSX.Element {
                 </Link>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:border-r-0 last:border-r-0 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto">
                 {linklist.map((item) => (
                     <LinkListItem {...item} key={item.url} />
                 ))}
@@ -356,7 +356,7 @@ export function Footer(): JSX.Element {
                             <li key={url}>
                                 <Link
                                     to={url}
-                                    className="rounded p-2 inline-flex hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark opacity-70 hover:opacity-90 relative hover:scale-[1.01] active:top-[1px] active:scale-[.99] transition-all"
+                                    className="rounded p-2 inline-flex opacity-70 hover:opacity-90 relative hover:scale-[1.01] active:top-[1px] active:scale-[.99] transition-all"
                                 >
                                     {Icon}
                                 </Link>

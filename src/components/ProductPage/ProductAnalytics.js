@@ -91,11 +91,7 @@ export default function ProductAnalytics({ children, className = '' }) {
                 >
                     {features.map(({ title, description, cta }) => {
                         return (
-                            <motion.li
-                                key={title}
-                                variants={item}
-                                className="px-0 py-12 md:px-12 md:odd:border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark odd:border-b md:odd:border-b-0 even:border-b md:last:!border-b-0 first:!border-b first:border-t md:first:border-t-0"
-                            >
+                            <motion.li key={title} variants={item} className="px-0 py-12 md:px-12">
                                 <h3>{title}</h3>
                                 <p>{description}</p>
                                 <CallToAction

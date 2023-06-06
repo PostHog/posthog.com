@@ -54,7 +54,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <div className="sm:border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+        <div className="">
             <div
                 style={{
                     gridAutoColumns: menu ? `${menuWidth?.left ?? defaultMenuWidth?.left}px 1fr` : `1fr 1fr`,
@@ -62,7 +62,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                 className="w-full relative lg:grid lg:grid-flow-col"
             >
                 {menu && (
-                    <div className="h-full border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:block hidden relative z-20">
+                    <div className="h-full lg:block hidden relative z-20">
                         <aside
                             className={`lg:sticky bg-tan dark:bg-primary top-0 flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10 ${
                                 hideSearch ? 'pt-5' : ''
@@ -85,9 +85,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                     ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
                                     : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
                             }}
-                            className={
-                                'pt-4 sm:pb-4 pb-0 sm:border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed lg:grid lg:grid-flow-col items-center'
-                            }
+                            className={'pt-4 sm:pb-4 pb-0 lg:grid lg:grid-flow-col items-center'}
                         >
                             <div className={`${contentContainerClasses} grid-cols-1`}>
                                 <Breadcrumb />
@@ -125,13 +123,13 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         {!hideSidebar && sidebar && (
                             <aside
                                 key={`${title}-sidebar`}
-                                className="lg:border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border lg:flex hidden flex-col"
+                                className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border lg:flex hidden flex-col"
                             >
                                 <div className={`${stickySidebar ? 'sticky top-0' : ''} bg-tan dark:bg-primary z-10`}>
                                     {sidebar}
                                 </div>
                                 <div className="flex flex-grow items-end">
-                                    <div className="!border-t-0 sticky bottom-0 w-full">
+                                    <div className="sticky bottom-0 w-full">
                                         {tableOfContents && tableOfContents?.length > 0 && (
                                             <div className="px-4 lg:px-8 lg:pb-4 lg:block hidden">
                                                 <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
@@ -158,10 +156,10 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                         )}
                                         <ul
                                             id="post-actions"
-                                            className="list-none p-0 flex mt-0 mb-10 lg:mb-0 border-t border-gray-accent-light border-dashed dark:border-gray-accent-dark items-center bg-tan/40 dark:bg-primary/40 backdrop-blur"
+                                            className="list-none p-0 flex mt-0 mb-10 lg:mb-0 items-center bg-tan/40 dark:bg-primary/40 backdrop-blur"
                                         >
                                             {filePath && (
-                                                <div className="flex divide-x divide-dashed divide-gray-accent-light dark:divide-gray-accent-dark border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                                                <div className="flex">
                                                     <SidebarAction
                                                         href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
                                                         title="Edit this page"
@@ -179,7 +177,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                             <div className="ml-auto flex">
                                                 {!hideWidthToggle && (
                                                     <SidebarAction
-                                                        className="hidden xl:block border-r border-dashed border-gray-accent-light dark:border-gray-accent-dark"
+                                                        className="hidden xl:block"
                                                         title="Toggle content width"
                                                         onClick={handleFullWidthContentChange}
                                                     >
