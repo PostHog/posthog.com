@@ -15,11 +15,10 @@ featuredImage: ../images/blog/hog_ql.png
 featuredImageType: full
 ---
 
-Today, we're excited to announce a major new feature that's now available for all users as a public beta on PostHog Cloud - the ability to directly query data stored in PostHog via SQL.
+Today, we're excited to announce a major new feature that's now available for all users as a public beta on PostHog Cloud - the ability to directly query data stored in PostHog via SQL. We call this [HogQL](/docs/product-analytics/hogql).
 
-We've added several new ways to use SQL in PostHog - you can use expressions to enhance insights, you can use SQL to filter a revamped events list, and you can even use full SQL queries to analyze data in any way you want. 
+We've added several new ways to use HogQL in PostHog - you can use expressions to enhance insights, you can use HogQL to filter a revamped events list, and you can even use full queries to analyze data in any way you want. 
 
-We've even created [our own SQL dialect, called HogQL](/docs/product-analytics/hogql).
 
 While PostHog's existing insights remain valuable for the vast majority of queries, HogQL gives them a massive upgrade for those times when off-the-shelf insights don't fit the bill. 
 
@@ -37,7 +36,7 @@ You can also use subqueries, joins, table expressions, arrays, aggregations, lam
 
 Whether you're a technical product manager who needs multi-property breakdowns, or an engineer wishing to dissect data in more nuanced ways, HogQL unlocks a whole new world of insights to PostHog users.
 
-We recommend checking the docs for a more detailed [explanation of ClickHouse SQL functions which are supported in HogQL](/manual/hogql).
+We recommend checking the docs for a more detailed [explanation of ClickHouse SQL functions which are supported in HogQL](/docs/product-analytics/hogql#supported-clickhouse-functions).
 
 ## HogQL breakdowns
 
@@ -49,7 +48,7 @@ A frequent request from teams using PostHog has been the ability to breakdown in
 
 In other words, you can now break down results however you like – including by multiple properties at once. Want to break down new signups by both pricing tier _and_ overall usage? Now you can.
 
-> **Ready to get started?** Read our tutorial on [how to use HogQL for running advanced breakdowns](docs/tutorials/hogql-breakdowns)
+> **Ready to get started?** Read our tutorial on [how to use HogQL for running advanced breakdowns](/tutorials/hogql-breakdowns)
 
 ## HogQL filters
 
@@ -59,7 +58,10 @@ In other words, you can now break down results however you like – including by
 
 Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple properties!
 
+> **Ready to get started?** Read our tutorial on [how to use HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
+
 ## HogQL aggregations
+
 ![HogQL aggregations](../images/blog/array/hog_aggregate.mp4)
 <Caption>Using a `properties.$session_id` HogQL expression to aggregate by unique sessions</Caption>
 
@@ -69,11 +71,11 @@ _And_ you can use HogQL to aggregate results in a funnel too. Is there anything 
 ![PostHog SQL insights](../images/features/hogql/pinepple_sql.gif)
 <Caption>Using an SQL insight to run the query below</Caption>
 
-If you're familiar with SQL, the easiest and most powerful way to leverage it within PostHog is via the new SQL insight type. This gives you direct SQL access to your data in PostHog, so you can create custom tables, visualization and more. 
+If you're familiar with SQL, the most powerful way to leverage it within PostHog is via the new SQL insight type. This gives you direct SQL access to your data in PostHog, so you can create custom tables, visualizations, and more. 
 
 SQL insights are especially useful for when you need to do exotic or novel analysis that isn't immediately possible with existing insight types. For example, while you can use a retention insight to discover which product features keep users coming back for more, you could use an SQL insight to find which users keep coming back and identify outliers. 
 
-We can't wait to hear your feedback, and see what's possible with SQL access in PostHog. We're confident it will give engineers a unique edge, and better information, than other analytics tools.
+We can't wait to hear [your feedback](http://app.posthog.com/home#supportModal), and see what's possible with SQL access in PostHog. We're confident it will give engineers a unique edge, and better information, than other analytics tools.
 
 To give you a sense of what's possible with SQL, here's an example query we use to summarize data from a survey we ran to determine which countries prefer pineapple on a pizza.
 
@@ -101,11 +103,12 @@ To give you a sense of what's possible with SQL, here's an example query we use 
 ```
 
 ## The PostHog event explorer 
+
 We haven't introduced HogQL in isolation – we've also bought it into existing parts of PostHog, supercharging them to deliver new functionality. 
 
-The Event Explorer (previously the Live Events tab) is a great example of this. What was previously a stream of incoming events now offers wholly new ways to interact with your data and filter it into custom tables. 
+The "Event Explorer" (previously the "Live Events" tab) is a great example of this. What was previously a stream of incoming events now offers wholly new ways to interact with your data and filter it into custom tables. 
 
-The event explorer enables you to view and edit the JSON source behind the table, so you can create tables in PostHog and add them to dashboards. You can also use HogQL expressions (e.g. `properties.$screen_width * $properties.screen_height`) and aggregations (e.g. `sum(properties.price)`) as columns.
+The event explorer enables you to view and edit the JSON schema behind the table, so you can create tables in PostHog and add them to dashboards. You can also use HogQL expressions (e.g. `properties.$screen_width * $properties.screen_height`) and aggregations (e.g. `sum(properties.price)`) as columns.
 
 This is helpful not just for generating tables that summarize person and event information according to your needs, but also for exploring the data in new and totally custom ways. 
 
