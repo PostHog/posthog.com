@@ -8,9 +8,11 @@ availability:
     enterprise: full
 ---
 
-Often a single event does not make up an entire behavior that you want to track. For example, a signup can include not only pressing the signup button, but entering the correct information, and making it past the basic information input stage. 
+Often a single event is not specific enough to represent a behavior. For example, to track signups from Google Ads, a pageview or button click isn't enough. You need a valid signup submission where the user has properties showing they came from a Google Ad.
 
-Actions enable you to combine events that you want to be tracked together. You can then visualize actions in [insights](/docs/product-analytics/insights) and [dashboards](/docs/product-analytics/dashboards).
+Also, multiple events might represent the same behavior. For example, "trying a feature" could include visiting its page, enabling it, or generating a related backend event.
+
+Actions are a collection of events fitting event types and filters that represent a single behavior. They are created using a combination of autocapture events, custom events, or pageviews, along with filters. They can then be analyzed in [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and more.
 
 You can create and view actions by going to "Data Management" in the left-hand navigation sidebar, and then click on the ["Actions" tab](https://app.posthog.com/data-management/actions).
 

@@ -1205,7 +1205,7 @@ li.squeak-left-border {
     @apply before:h-[14px]; /* exiting thread replies - this overrides the reply box (for the user) */
 }
 
-.squeak-post-markdown {
+.community-post-markdown {
     @apply text-[15px] leading-normal break-words pb-3;
 
     a {
@@ -1223,5 +1223,11 @@ li.squeak-left-border {
 
     pre {
         @apply text-base my-3 overflow-scroll p-4 text-[15px];
+    }
+}
+
+.question-table-body-container {
+    p {
+        @apply inline m-0;
     }
 }

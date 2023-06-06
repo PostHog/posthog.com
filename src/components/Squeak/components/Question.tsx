@@ -1,7 +1,7 @@
-import React, { useState, useRef, createContext } from 'react'
+import React, { useState, createContext, useEffect, useContext } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
-import { QuestionData, StrapiRecord } from 'lib/strapi'
+import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
 import Days from './Days'
 import Markdown from './Markdown'
 import { QuestionForm } from './QuestionForm'
@@ -10,8 +10,11 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import { Archive, Undo } from 'components/NotProductIcons'
+import { Archive, Pin, Undo } from 'components/NotProductIcons'
 import Tooltip from 'components/Tooltip'
+import { Listbox } from '@headlessui/react'
+import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
+import { Check2 } from 'components/Icons'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -21,6 +24,101 @@ type QuestionProps = {
 }
 
 export const CurrentQuestionContext = createContext<any>({})
+
+const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
+    const { pinTopics } = useContext(CurrentQuestionContext)
+    const [topicGroups, setTopicGroups] = useState([])
+    const [selectedTopics, setSelectedTopics] = useState<StrapiRecord<TopicData>[]>([])
+
+    const handleChange = async (topics: StrapiRecord<TopicData>[]) => {
+        setSelectedTopics(topics)
+        await pinTopics(topics.map((topic) => topic.id))
+    }
+
+    useEffect(() => {
+        fetchTopicGroups().then((topicGroups) => {
+            setTopicGroups(topicGroups)
+            const selectedTopics: StrapiRecord<TopicData>[] = []
+            topicGroups.forEach(({ attributes: { topics } }) => {
+                topics.data.forEach((topic) => {
+                    if (props.selectedTopics.data.some((selectedTopic) => selectedTopic.id === topic.id)) {
+                        selectedTopics.push(topic)
+                    }
+                })
+            })
+            setSelectedTopics(selectedTopics)
+        })
+    }, [])
+
+    return (
+        <div className="relative">
+            <Listbox value={selectedTopics} onChange={handleChange} multiple>
+                <Listbox.Button className="flex items-center leading-none rounded-sm p-1 relative bg-gray-accent-light hover:bg-gray-accent-light-hover/50 dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover/50 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px]  border-0 font-bold">
+                    <Tooltip content={() => <div style={{ maxWidth: 320 }}>Pin thread</div>}>
+                        <span className="flex items-center h-6 justify-center">
+                            <Pin className="w-5 h-5" />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                                />
+                            </svg>
+                        </span>
+                    </Tooltip>
+                </Listbox.Button>
+                {topicGroups?.length > 0 && (
+                    <Listbox.Options
+                        className={`list-none p-0 m-0 absolute z-20 bg-white dark:bg-gray-accent-dark-hover max-h-[247px] overflow-auto shadow-md rounded-md divide-y divide-black/30 dark:divide-primary-dark/30 mt-2`}
+                    >
+                        {topicGroups
+                            .sort(
+                                (a, b) =>
+                                    topicGroupsSorted.indexOf(a?.attributes?.label) -
+                                    topicGroupsSorted.indexOf(b?.attributes?.label)
+                            )
+                            .map(({ attributes: { label, topics } }) => {
+                                return (
+                                    <div key={label}>
+                                        <h5 className="m-0 py-2 px-4 sticky top-0 bg-white dark:bg-gray-accent-dark-hover whitespace-nowrap">
+                                            {label}
+                                        </h5>
+                                        {topics?.data.map((topic) => {
+                                            const active = selectedTopics.some(
+                                                (selectedTopic) => selectedTopic.id === topic.id
+                                            )
+                                            return (
+                                                <Listbox.Option key={topic.id} value={topic}>
+                                                    <div
+                                                        className={`${
+                                                            active ? 'font-semibold' : ''
+                                                        } py-2 px-4 cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-gray-accent-dark/30 dark:text-primary-dark`}
+                                                    >
+                                                        <span className="flex-shrink-0 w-3">
+                                                            {active && <Check2 />}
+                                                        </span>
+
+                                                        <span>{topic.attributes.label}</span>
+                                                    </div>
+                                                </Listbox.Option>
+                                            )
+                                        })}
+                                    </div>
+                                )
+                            })}
+                    </Listbox.Options>
+                )}
+            </Listbox>
+        </div>
+    )
+}
 
 export const Question = (props: QuestionProps) => {
     const { id, question } = props
@@ -38,6 +136,7 @@ export const Question = (props: QuestionProps) => {
         handleResolve,
         handleReplyDelete,
         archive,
+        pinTopics,
     } = useQuestion(id, { data: question })
 
     if (isLoading) {
@@ -61,6 +160,7 @@ export const Question = (props: QuestionProps) => {
                 handlePublishReply,
                 handleResolve,
                 handleReplyDelete,
+                pinTopics,
             }}
         >
             <div>
@@ -82,24 +182,31 @@ export const Question = (props: QuestionProps) => {
                         <Days created={questionData.attributes.createdAt} />
                         <div className="!ml-auto flex space-x-2">
                             {user?.role?.type === 'moderator' && (
-                                <button
-                                    onClick={() => archive(!archived)}
-                                    className="flex items-center leading-none rounded-sm p-1 relative bg-gray-accent-light hover:bg-gray-accent-light-hover/50 dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover/50 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px]  border-0 font-bold"
-                                >
-                                    {!archived ? (
-                                        <Tooltip content={() => <div style={{ maxWidth: 320 }}>Archive thread</div>}>
-                                            <span className="flex w-6 h-6">
-                                                <Archive />
-                                            </span>
-                                        </Tooltip>
-                                    ) : (
-                                        <Tooltip content={() => <div style={{ maxWidth: 320 }}>Restore thread</div>}>
-                                            <span className="flex w-6 h-6">
-                                                <Undo />
-                                            </span>
-                                        </Tooltip>
-                                    )}
-                                </button>
+                                <>
+                                    {!archived && <TopicSelect selectedTopics={questionData.attributes.pinnedTopics} />}
+                                    <button
+                                        onClick={() => archive(!archived)}
+                                        className="flex items-center leading-none rounded-sm p-1 relative bg-gray-accent-light hover:bg-gray-accent-light-hover/50 dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover/50 text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px]  border-0 font-bold"
+                                    >
+                                        {!archived ? (
+                                            <Tooltip
+                                                content={() => <div style={{ maxWidth: 320 }}>Archive thread</div>}
+                                            >
+                                                <span className="flex w-6 h-6">
+                                                    <Archive />
+                                                </span>
+                                            </Tooltip>
+                                        ) : (
+                                            <Tooltip
+                                                content={() => <div style={{ maxWidth: 320 }}>Restore thread</div>}
+                                            >
+                                                <span className="flex w-6 h-6">
+                                                    <Undo />
+                                                </span>
+                                            </Tooltip>
+                                        )}
+                                    </button>
+                                </>
                             )}
                             {!archived && <SubscribeButton contentType="question" id={questionData?.id} />}
                         </div>

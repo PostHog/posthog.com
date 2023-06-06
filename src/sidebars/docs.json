@@ -243,7 +243,7 @@
                 "url": "/docs/api/funnel"
             },
             {
-                "name": "Groups",
+                "name": "Group analytics",
                 "url": "/docs/api/groups"
             },
             {
@@ -403,6 +403,10 @@
                 }
             },
             {
+                "name": "Insights",
+                "url": "/docs/product-analytics/insights"
+            },
+            {
                 "name": "Lifecycle",
                 "url": "/docs/product-analytics/lifecycle"
             },
@@ -421,6 +425,10 @@
             {
                 "name": "Stickiness",
                 "url": "/docs/product-analytics/stickiness"
+            },
+            {
+                "name": "Subscriptions",
+                "url": "/docs/product-analytics/subscriptions"
             },
             {
                 "name": "Toolbar",
@@ -454,8 +462,16 @@
                 "url": "/docs/session-replay/configure"
             },
             {
+                "name": "Sharing and emedding",
+                "url": "/docs/session-replay/sharing"
+            },
+            {
                 "name": "Data retention",
                 "url": "/docs/session-replay/data-retention"
+            },
+            {
+                "name": "Iframe recording",
+                "url": "/docs/session-replay/iframes"
             },
             {
                 "name": "Troubleshooting and FAQs",
@@ -565,10 +581,6 @@
                 "url": "/docs/data/events"
             },
             {
-                "name": "Notifications & alerts",
-                "url": "/docs/data/notifications-and-alerts"
-            },
-            {
                 "name": "Organizations & projects",
                 "url": "/docs/data/organizations-and-projects"
             },
@@ -587,10 +599,6 @@
             {
                 "name": "Settings",
                 "url": "/docs/data/application-settings"
-            },
-            {
-                "name": "Subscriptions",
-                "url": "/docs/data/subscriptions"
             },
             {
                 "name": "SSO & SAML",
@@ -798,6 +806,10 @@
                     {
                         "url": "/docs/apps/event-sequence-timer",
                         "name": "Event Sequence Timer"
+                    },
+                    {
+                        "url": "/docs/apps/filter-out",
+                        "name": "Filter Out"
                     },
                     {
                         "url": "/docs/apps/first-time-event-tracker",

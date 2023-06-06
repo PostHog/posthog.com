@@ -278,9 +278,9 @@ const categories: {
                 icon: <Toolbar />,
             },
             {
-                name: 'Notifications & alerts',
+                name: 'Subscriptions',
                 url: '/manual/subscriptions',
-                category: 'notifications and alerts',
+                category: 'subscriptions',
                 description: 'Receive updates from your insights an dashboards',
                 icon: <Notifications />,
             },

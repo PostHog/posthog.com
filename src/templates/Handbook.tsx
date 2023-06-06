@@ -327,11 +327,6 @@ export default function Handbook({
 
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!, $mission: String, $objectives: String) {
-        countries: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
-            group(field: frontmatter___country) {
-                totalCount
-            }
-        }
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
             nodes {
                 fields {

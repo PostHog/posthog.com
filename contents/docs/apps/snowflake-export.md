@@ -200,8 +200,17 @@ A lot of people worked on this app! We'd like to thank the following contributor
 -   [Michael Matloka](https://github.com/Twixes)
 -   [Paolo D'Amico](https://github.com/paolodamico) (We miss you Paolo!)
 
-#### What if my question isn't answered above?
+### Who maintains this app?
 
-We love answering questions. Ask us anything via [our Support page](/questions) or using the Q&A widget at the bottom of the page.
+This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
-You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
+### What if I have feedback on this app?
+
+We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
+
+Or, if you see the feedback widget enabled, use that!
+
+### What if my question isn't answered above?
+
+We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+

@@ -2,6 +2,7 @@ import fetch from 'node-fetch'
 import { MenuBuilder } from 'redoc'
 import { GatsbyNode } from 'gatsby'
 import parseLinkHeader from 'parse-link-header'
+import qs from 'qs'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -196,4 +197,50 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         }
     })
+
+    const createRoadmapItems = async (page = 1) => {
+        const roadmapQuery = qs.stringify(
+            {
+                pagination: {
+                    page,
+                    pageSize: 100,
+                },
+                populate: ['image', 'teams', 'topic', 'cta'],
+            },
+            {
+                encodeValuesOnly: true,
+            }
+        )
+        const roadmapsURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${roadmapQuery}`
+        const { data: roadmaps, meta } = await fetch(roadmapsURL).then((res) => res.json())
+        roadmaps.forEach((roadmap) => {
+            const {
+                id,
+                attributes: { image, projectedCompletion, dateCompleted, category, ...other },
+            } = roadmap
+
+            const date = dateCompleted || projectedCompletion
+
+            const data = {
+                date,
+                media: image,
+                type: category,
+                year: date && new Date(date)?.getFullYear(),
+                ...other,
+            }
+            const roadmapNode = {
+                id: createNodeId(`roadmap-${id}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Roadmap`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(roadmapNode)
+        })
+        if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
+    }
+    await createRoadmapItems()
 }

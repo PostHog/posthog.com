@@ -64,7 +64,7 @@ const getActiveMenu = ({
     }
 }
 
-const MenuContainer = ({
+export const MenuContainer = ({
     children,
     setOpen,
     className = '',

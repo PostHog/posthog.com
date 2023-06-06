@@ -121,9 +121,11 @@ export default function Docs({ referenceElement }: { referenceElement: HTMLDivEl
 
 const query = graphql`
     {
-        teamMembers: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }) {
+        teamMembers: allSqueakProfile(
+            filter: { teams: { data: { elemMatch: { attributes: { name: { ne: null } } } } } }
+        ) {
             totalCount
-            group(field: frontmatter___country) {
+            group(field: country) {
                 fieldValue
             }
         }

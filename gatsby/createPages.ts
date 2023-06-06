@@ -20,6 +20,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
+    const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -151,6 +152,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             tags
                         }
                         productTutorialTags
+                        customerURLs
                     }
                     fields {
                         slug
@@ -224,6 +226,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             }
                         }
                     }
+                }
+            }
+            roadmapYears: allRoadmap {
+                group(field: year) {
+                    fieldValue
                 }
             }
         }
@@ -524,11 +531,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     const productDocumentationMenuNames = {
-        '/session-replay': 'Session replay',
-        '/product-analytics': 'Product analytics',
-        '/feature-flags': 'Feature flags',
-        '/ab-testing': 'A/B testing',
-        '/product-os': 'Data',
+        '/session-replay/documentation': 'Session replay',
+        '/product-analytics/documentation': 'Product analytics',
+        '/feature-flags/documentation': 'Feature flags',
+        '/ab-testing/documentation': 'A/B testing',
+        '/product-os/documentation': 'Data',
     }
 
     const docsMenu = sidebars.docs
@@ -545,14 +552,25 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     component: ProductTemplate,
                     context: {
                         id: node.id,
-                        blogTags: node?.frontmatter?.productBlog?.tags,
-                        tutorialTags: node?.frontmatter?.productTutorialTags,
+                        blogTags: node?.frontmatter?.productBlog?.tags ?? [''],
+                        tutorialTags: node?.frontmatter?.productTutorialTags ?? [''],
+                        customerURLs: node?.frontmatter?.customerURLs ?? [''],
                         documentationNav,
-                        documentationURLs: documentationNav?.children?.map((child) => child.url),
+                        documentationURLs: documentationNav?.children?.map((child) => child.url) ?? [''],
                     },
                 })
                 res()
             })
         })
     )
+
+    result.data.roadmapYears.group.forEach(({ fieldValue: year }) => {
+        createPage({
+            path: `/changelog/${year}`,
+            component: ChangelogTemplate,
+            context: {
+                year: Number(year),
+            },
+        })
+    })
 }

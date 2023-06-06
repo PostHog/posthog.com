@@ -545,7 +545,7 @@
         ]
     },
     {
-        "name": "Marketing",
+        "name": "Marketing & Content",
         "url": "",
         "children": [
             {
@@ -599,6 +599,10 @@
                     {
                         "name": "YouTube",
                         "url": "/handbook/growth/marketing/youtube"
+                    },
+                    {
+                        "name": "Dashboard templates",
+                        "url": "/handbook/growth/marketing/templates"
                     }
                 ]
             }
