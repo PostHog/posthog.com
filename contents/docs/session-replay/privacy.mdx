@@ -61,7 +61,7 @@ You can use a CSS selector to mask specific elements. For example, you may want 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskTextSelector: ".password #sensitive" // masks all elements with the class "password" or the ID "sensitive"
+        maskTextSelector: ".password, #sensitive" // masks all elements with the class "password" or the ID "sensitive"
         
     }
 })
