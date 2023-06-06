@@ -15,7 +15,7 @@ By default, the webhook message format is:
 [action.name] was triggered by [person]
 ```
 
-The parts in brackets are called _message tokens_. You can use tokens to customize your message based on the event that triggered the webhook. Three types of tokens are available:
+The parts in square brackets `[]` are called _message tokens_. You can use tokens to customize your message based on the event that triggered the webhook. There are three types of tokens:
 
 ### Event tokens
 
@@ -23,12 +23,12 @@ The parts in brackets are called _message tokens_. You can use tokens to customi
 - `[event.event]`: Same as `[event]` except not formatted as a link.
 - `[event.uuid]`: ID of the event. Always in UUID format.
 - `[event.distinct_id]`: Person distinct ID associated with the event.
-- `[event.properties.PROPERTY]`: Value of event property `PROPERTY`. Example: `[event.properties.$os]`, `[event.properties.amountUSD]`, or `[event.properties.object.nested_prop]`.
+- `[event.properties.{property_name}]`: Value of property `{property_name}` – e.g., `[event.properties.$os]`, `[event.properties.amountUSD]`, or `[event.properties.object.nested_prop]`.
 
 ### Person tokens
 
 - `[person]`: Display name of the person. Based on the Person Display Name preference in Project Settings. If none of the properties from the preference are available, the distinct ID is used.
-- `[person.properties.PROPERTY]`: Value of person property `PROPERTY`. Example: `[person.properties.$browser]`, `[person.properties.subscriptionPlan]`, or `[person.properties.object.nested_prop]`.
+- `[person.properties.{property_name}]`: Value of person `{property_name}` – e.g., `[person.properties.$browser]`, `[person.properties.subscriptionPlan]`, or `[person.properties.object.nested_prop]`.
 
 ### Action tokens
 
