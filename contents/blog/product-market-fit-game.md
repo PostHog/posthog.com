@@ -193,7 +193,7 @@ Closing the loop above is the way to cement your product-market fit because:
 
 * **Your users don't need to come back repeatedly.** Perhaps you've automatically solved the problem with no further user work. Proceed to level 5 and validate their willingness to pay. Don't force product engagement if it's irrelevant to solving the problem.
 
-* **Users use your product but don't encounter your problem often.** Proceed to level 5. It may be hard to get significant revenue for an infrequent problem, or it may be that you don't experience much demand. If the number of users that experience this problem is huge even if the order value is tiny, that's ok. If it was extremely hard finding the first users _and_ it's hard to charge much for the product, this problem isn't a big enough one – go back to level 1.
+* **Users use your product but don't encounter your problem often.** Proceed to level 5. It may be hard to get significant revenue for an infrequent problem, or you may not experience much demand. A low order value is okay if the potential market is huge. Go back to level 1, however, if it's extremely hard to recruit users _and_ you can't charge much. This means your problem isn't big enough.
 
 ### Level 5 - Onboard your first 5 reference paying customers
 
