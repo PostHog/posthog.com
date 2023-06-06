@@ -13,6 +13,10 @@ import { Video } from 'components/NotProductIcons'
 import { motion } from 'framer-motion'
 import { MenuContainer } from 'components/PostLayout/MobileNav'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { InlineCode } from 'components/InlineCode'
+import { Blockquote } from 'components/BlockQuote'
+import { MdxCodeBlock } from 'components/CodeBlock'
+import { ZoomImage } from 'components/ZoomImage'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -42,6 +46,11 @@ export default function ContentViewer({ content, title, initialIndex }: IProps) 
         ImageBlock,
         FloatedImage,
         a: A,
+        inlineCode: InlineCode,
+        blockquote: Blockquote,
+        pre: MdxCodeBlock,
+        MultiLanguage: MdxCodeBlock,
+        img: ZoomImage,
     }
 
     useEffect(() => {
