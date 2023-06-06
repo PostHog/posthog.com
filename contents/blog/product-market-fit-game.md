@@ -312,20 +312,16 @@ Do the legwork for them – it shows them that their opinions are valued and thu
 
 When you're trying to get to product-market fit, do _not_ prioritize scaling your sales. Just focus on getting one deal done at a time. Here is how to do that:
 
-1. Intros through your own network, people you worked with, went to school with, where your family work or went to school. Everybody has _some_ network – don't feel like you need to be a sales legend to do this.
+1. Introductions through your own network, people you worked with, went to school with, where your family work or went to school. Everybody has _some_ network – don't feel like you need to be a sales legend to do this.
 2. If you're in an accelerator, message other companies. Be personalized.
 3. People from companies that your product is perfect for.
 4. Events. You may be able to get free tickets via a partner.
 
 In general, do not do marketing (paid ads / content) expecting to get a sale – these are more scalable methods. Be hands on. Other companies in your space will have heavily invested in how to do outbound or marketing, so the most likely way you can win is on quality and personalization with your approach.
 
-Keep yourself accountable – set some goals for meetings booked and stick to them.
+Keep yourself accountable – set some goals for meetings booked and stick to them. As with booking feedback calls, be hyper responsive. If you respond to people within minutes (whether booking a meeting, or progressing a deal), you'll get them while they're available and happy to engage. I used to obsessively respond to people on LinkedIn all day while in this phase.
 
-As with booking feedback calls, be hyper responsive. If you respond to people within minutes (whether booking a meeting, or progressing a deal), you'll get them while they're available and happy to engage. I used to obsessively respond to people on LinkedIn all day while in this phase.
-
-When it comes to pricing, reduce the risk for your earliest customers. Charge them monthly rather than annually, unless they prefer the latter.
-
-There are multiple methods available. You can charge a recurring monthly rate, or you can charge on usage.
+### How to do sales calls
 
 Once you're on a call, get the prospect to open up about their challenges, and figure out with them if your product could solve their problems. It's worth qualifying the lead as you do this. The simplest method is BANT (Budget, Authority, Need, Timeline).
 
@@ -338,6 +334,16 @@ Layer your questions.
 Prioritize time with those that are best-qualified.
 
 Once someone decides to move forward, you'll need something for people to sign. YC provide a [free sales agreement](https://www.ycombinator.com/sales_agreement/) for SaaS companies. Be flexible around your earliest customers for the terms they need – it's not about maximizing revenue or contract length, it's about getting your first deal signed and learning.
+
+### Structure your early pricing for getting _something_ sold
+
+When it comes to pricing, reduce the risk for your earliest customers. Charge them monthly rather than annually, unless they prefer the latter.
+
+There are multiple methods available. You can charge a recurring monthly rate, or you can charge on usage. I'd advocate for doing either of these early on and not shooting for annual contracts unless there's a good reason not to.
+
+If you are dealing with companies that expect or want annual contracts, then you can use a break clause so customers can get out of the contract easily to reduce their risk.
+
+Offering a small free tier or a free trial for a set period will allow customers to try out your software before they spend anything, which helps them de-risk.
 
 ## The why, when, and how of pivoting
 
