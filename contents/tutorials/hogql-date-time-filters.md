@@ -51,7 +51,7 @@ and timestamp < toDateTime('2022-10-01 14:34:00')
 
 ## Using the Unix timestamp
 
-If you'd like to filter using a Unix timestamp, you can use []`toUnixTimestamp`](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#tounixtimestamp) to convert a date time object into a Unix timestamp, or `fromUnixTimestamp` to do the reverse. 
+If you'd like to filter using a Unix timestamp, you can use [`toUnixTimestamp`](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#tounixtimestamp) to convert a date time object into a Unix timestamp, or `fromUnixTimestamp` to do the reverse. 
 
 For example, if you wanted to filter for events after the Unix timestamp `1674259200`, you could use the expression:
 
