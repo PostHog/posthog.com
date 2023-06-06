@@ -1000,7 +1000,7 @@ body.dark {
     .slick-track {
         @apply flex;
         & > div {
-            @apply border-r border-dashed border-gray-accent-light h-[inherit];
+            @apply h-[inherit];
         }
     }
 }

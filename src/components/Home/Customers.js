@@ -20,7 +20,7 @@ import { motion } from 'framer-motion'
 const Customer = ({ image, width, height, className = '' }) => {
     return (
         <li
-            className="border-t border-l border-dashed border-gray-accent-light flex items-center justify-center 
+            className="flex items-center justify-center 
             w-full 
             h-24
             py-6 
@@ -49,7 +49,7 @@ export default function Customers() {
                 className="mt-8 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row"
             >
                 {inView && (
-                    <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 border-b border-r border-dashed border-gray-accent-light flex-grow w-full">
+                    <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full">
                         <Customer className="max-h-[44px]" image={yCombinator} />
                         <Customer className="max-h-[36px]" image={staples} />
                         <Customer className="max-h-[36px]" image={airbus} />

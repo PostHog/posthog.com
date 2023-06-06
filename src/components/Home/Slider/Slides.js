@@ -93,7 +93,7 @@ export const ProductAnalytics = () => {
                                 <li key={title} className="p-[3px]">
                                     <Link
                                         to={url}
-                                        className="text-black hover:text-black hover:bg-gray-accent/25 focus:bg-gray-accent/40 flex items-center space-x-2 text-[13px] lg:text-[14px] py-2 md:py-3 px-2 xl:px-2 md:border-b-0 border-b border-dashed border-gray-accent-light hover:bg-gray-accent-light rounded transition-all"
+                                        className="text-primary hover:text-primary dark:text-primary-dark hover:bg-gray-accent/25 focus:bg-gray-accent/40 flex items-center space-x-2 text-[13px] lg:text-[14px] py-2 md:py-3 px-2 xl:px-2 rounded transition-all"
                                     >
                                         <span>
                                             <Icon className="w-[20px]" />

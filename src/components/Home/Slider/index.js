@@ -54,8 +54,8 @@ export default function Slider() {
 
     return (
         <div>
-            <div className="md:border-t border-b border-gray-accent-light border-dashed -mt-8 md:mt-0">
-                <div className="hidden md:block border-b border-dashed border-gray-accent-light">
+            <div className="-mt-8 md:mt-0">
+                <div className="hidden md:block">
                     <SliderComponent
                         beforeChange={handleButtonChange}
                         ref={(buttonRef) => setButtonRef(buttonRef)}
@@ -63,7 +63,7 @@ export default function Slider() {
                         arrows={false}
                         slidesToShow={7}
                         focusOnSelect
-                        className="home-slider-buttons list-none max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl mx-auto m-0 p-0 border-r border-l border-gray-accent-light border-dashed"
+                        className="home-slider-buttons list-none max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl mx-auto m-0 p-0"
                     >
                         {slideButtons.map((slide, index) => {
                             return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
@@ -119,7 +119,7 @@ export default function Slider() {
                         arrows={false}
                         slidesToShow={1}
                         infinite
-                        className="home-slider flex-shrink-0 list-none max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex items-center justify-center divide divide-x divide-gray-accent-light divide-dashed overflow-auto md:border-l md:border-r border-gray-accent-light border-dashed"
+                        className="home-slider flex-shrink-0 list-none max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex items-center justify-center overflow-auto"
                     >
                         <ProductAnalytics />
                         <SessionRecording />
