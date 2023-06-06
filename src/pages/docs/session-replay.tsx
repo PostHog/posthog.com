@@ -17,9 +17,9 @@ export const quickLinks = [
         description: 'How to use session replay.',
     },
     {
-        name: 'Configuration',
-        to: '/docs/session-replay/configure',
-        description: 'Settings for customizing session replay capture.',
+        name: 'Privacy Controls',
+        to: '/docs/session-replay/privacy',
+        description: 'Settings for customizing session replay privacy.',
     },
     {
         name: 'Sharing and emedding',
