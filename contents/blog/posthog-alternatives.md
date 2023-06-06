@@ -136,7 +136,7 @@ Users also praise its accessibility for non-technical users, such as marketing, 
 
 - "As a senior product designer... for the first time, I feel comfortable exploring data.
 
-### What people dislike
+### What people dislike about Amplitude
 
 High prices and limited free features are frequent complaints:
 
@@ -254,13 +254,13 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 1. **Autocapture:** PostHog automatically captures events, which means you don't have to manually decide what events to track, unless you want to. It saves time for engineers and product managers, and ensures you'll always have usable data even if you forgot to create a custom event. 
 
-2. **Single tool vs all-in-one:** While it offers integrations with third-party A/B testing, feature flag, and session replay tools, Mixpanel doesn't offer much outside typical product analytics features. PostHog integrates all these features into one platform.
+2. **Single tool vs all-in-one:** While it offers integrations with third-party A/B testing, feature flag, and session replay tools, Mixpanel doesn't offer much outside typical product analytics features like event tracking and visualization. PostHog integrates all these features into one platform.
 
 3. **Avoiding surprise bills:** PostHog allows you to set billing limits, so you can avoid surprise bills. Mixpanel charges you for any overage above your pre-paid events volume.
 
 **Read more:** [In-depth PostHog vs Mixpanel comparison](/blog/posthog-vs-mixpanel) 
 
-### What people like
+### What people like about Mixpanel
 
 Users frequently praise Mixpanel's customer support:
 
@@ -276,7 +276,7 @@ Most also think it's easy to use:
 
 - "The UI is super intuitive - even with a ton of data I am able to pull the insights I need to inform decisions."
 
-### What people dislike
+### What people dislike about Mixpanel
 
 Users frequently complain about Flows, Mixpanel's user path feature:
 
@@ -408,7 +408,7 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 
 **Read more:** [In-depth PostHog vs FullStory comparison](/blog/posthog-vs-fullstory) 
 
-### What people like
+### What people like about FullStory
 
 Customer experience and UX researchers like FullStory for troubleshooting:
 
@@ -422,7 +422,7 @@ Autocapture is also popular:
 
 - "A huge benefit is not requiring development work to set up new events or track site behavior as fullstory does this automatically."
 
-### What people dislike
+### What people dislike about FullStory
 
 High costs and paywalled features are frequently complaints:
 
@@ -550,7 +550,7 @@ While users like FullStory's session replay features, some find it falls short f
 
 **Read more:** [In-depth PostHog vs Heap comparison](/blog/posthog-vs-heap) 
 
-### What people like
+### What people like about Heap
 
 Heap's visual labeling tool, which allows non-technical user to define events, is very popular:
 
@@ -566,7 +566,7 @@ As is its support for autocapturing events, a feature it shares with PostHog:
 
 - "Most importantly, data is collected from Day 1 - even if the event hasn't been defined, unlike other platforms. This is really useful as requests for analysis often ask for things you haven't been actively tracking."
 
-### What people dislike
+### What people dislike about Heap
 
 Users frequently find it unintuitive:
 
