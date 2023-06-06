@@ -49,7 +49,7 @@ A frequent request from teams using PostHog has been the ability to breakdown in
 
 In other words, you can now break down results however you like – including by multiple properties at once. Want to break down new signups by both pricing tier _and_ overall usage? Now you can.
 
-> **Ready to get started?** Check out our tutorial about [how to use HogQL for running advanced breakdowns](docs/tutorials/hogql-breakdowns)
+> **Ready to get started?** Read our tutorial on [how to use HogQL for running advanced breakdowns](docs/tutorials/hogql-breakdowns)
 
 ## HogQL filters
 
