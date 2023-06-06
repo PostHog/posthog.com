@@ -363,13 +363,13 @@ The five levels of product-market fit should help you work out when you need to 
 
 ## Final thoughts
 
-For Tim and me, one of the most important parts of getting to product market fit, was simply driving from our house to dinners at YC and back  for an hour a few times a week.
+For Tim and me, one of the most important parts of getting to product market fit, was simply driving from our house to dinners at YC and back for an hour a few times a week.
 
 Getting to product market fit is very hard because it's a multi variate problem - you simply do not know _exactly_ why things are or are not working in the early days. As you get further along, you start to figure out what the variables are, and you realize there are more and more of them than you realized.
 
 As a result, you'll be filled with doubt by default in the early days. At the same time, you should be cranking as fast as humanly possible because you'll learn the most by doing.
 
-So, why the drives?
+So, why was driving helpful?
 
 The ultimate failure mode is not to grasp the big picture of what you're working on. One of the most important things you can do is remind yourself - you are playing this game. Take time out every week. For us, being in a car meant we didn't have our laptops and it forced us to reflect. Give yourself the space to look at this game as the big picture.
 
