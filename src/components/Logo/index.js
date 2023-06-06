@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Logo({ noText, color, className = '' }) {
+export default function Logo({ noText, color, className = '', pride = false }) {
     return (
         <svg
             className={className}
@@ -10,20 +10,46 @@ export default function Logo({ noText, color, className = '' }) {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <path
-                style={color ? { fill: color } : {}}
-                d="M10.8914 17.2058C10.5229 17.9429 9.47109 17.9429 9.10256 17.2058L8.2212 15.4431C8.08043 15.1616 8.08043 14.8302 8.2212 14.5487L9.10256 12.7859C9.47109 12.0489 10.5229 12.0489 10.8914 12.7859L11.7728 14.5487C11.9135 14.8302 11.9135 15.1616 11.7728 15.4431L10.8914 17.2058Z"
-                fill="#1D4AFF"
-            />
-            <path
-                style={color ? { fill: color } : {}}
-                d="M10.8914 27.2026C10.5229 27.9397 9.47109 27.9397 9.10256 27.2026L8.2212 25.4399C8.08043 25.1584 8.08043 24.827 8.2212 24.5455L9.10256 22.7828C9.47109 22.0457 10.5229 22.0457 10.8914 22.7828L11.7728 24.5455C11.9135 24.827 11.9135 25.1584 11.7728 25.4399L10.8914 27.2026Z"
-                fill="#1D4AFF"
-            />
+            {pride && (
+                <>
+                    <linearGradient id="left" x1="1" x2="0" y1="0" y2="0" spreadMethod="pad">
+                        <stop offset="0%" stopColor="#ff8e00" />
+                        <stop offset="50%" stopColor="#ff8e00" />
+                        <stop offset="50%" stopColor="#e60000" />
+                        <stop offset="100%" stopColor="#e60000" />
+                    </linearGradient>
+                    <linearGradient id="left-bottom" x1="1" x2="0" y1="0" y2="0" spreadMethod="pad">
+                        <stop offset="0%" stopColor="#ff8e00" />
+                        <stop offset="25%" stopColor="#ff8e00" />
+                        <stop offset="25%" stopColor="#e60000" />
+                        <stop offset="100%" stopColor="#e60000" />
+                    </linearGradient>
+                    <linearGradient id="mid" x1="1" x2="0" y1="0" y2="0" spreadMethod="pad">
+                        <stop offset="0%" stopColor="#00821b" />
+                        <stop offset="50%" stopColor="#00821b" />
+                        <stop offset="50%" stopColor="#ffef00" />
+                        <stop offset="100%" stopColor="#ffef00" />
+                    </linearGradient>
+                    <linearGradient id="mid-bottom" x1="1" x2="0" y1="0" y2="0" spreadMethod="pad">
+                        <stop offset="0%" stopColor="#00821b" />
+                        <stop offset="25%" stopColor="#00821b" />
+                        <stop offset="25%" stopColor="#ffef00" />
+                        <stop offset="100%" stopColor="#ffef00" />
+                    </linearGradient>
+                    <linearGradient id="right" x1="1" x2="0" y1="0" y2="0" spreadMethod="pad">
+                        <stop offset="0%" stopColor="#780089" />
+                        <stop offset="16.666%" stopColor="#780089" />
+                        <stop offset="16.666%" stopColor="#004bff" />
+                        <stop offset="33.333%" stopColor="#004bff" />
+                        <stop offset="33.333%" stopColor="#F9BD2B" />
+                        <stop offset="100%" stopColor="#F9BD2B" />
+                    </linearGradient>
+                </>
+            )}
             <path
                 style={color ? { fill: color } : {}}
                 d="M0 23.4082C0 22.5173 1.07714 22.0711 1.70711 22.7011L6.29049 27.2845C6.92046 27.9145 6.47429 28.9916 5.58339 28.9916H0.999999C0.447715 28.9916 0 28.5439 0 27.9916V23.4082ZM0 18.5804C0 18.8456 0.105357 19.1 0.292893 19.2875L9.70411 28.6987C9.89164 28.8862 10.146 28.9916 10.4112 28.9916H15.5804C16.4713 28.9916 16.9175 27.9145 16.2875 27.2845L1.70711 12.7041C1.07714 12.0741 0 12.5203 0 13.4112V18.5804ZM0 8.58339C0 8.8486 0.105357 9.10296 0.292893 9.29049L19.7011 28.6987C19.8886 28.8862 20.143 28.9916 20.4082 28.9916H25.5774C26.4683 28.9916 26.9145 27.9145 26.2845 27.2845L1.70711 2.70711C1.07715 2.07715 0 2.52331 0 3.41421V8.58339ZM9.997 8.58339C9.997 8.8486 10.1024 9.10296 10.2899 9.29049L28.2839 27.2845C28.9139 27.9145 29.991 27.4683 29.991 26.5774V21.4082C29.991 21.143 29.8856 20.8886 29.6981 20.7011L11.7041 2.7071C11.0741 2.07714 9.997 2.52331 9.997 3.41421V8.58339ZM21.7011 2.70711C21.0711 2.07714 19.994 2.52331 19.994 3.41421V8.58339C19.994 8.8486 20.0994 9.10296 20.2869 9.29049L28.2839 17.2875C28.9139 17.9175 29.991 17.4713 29.991 16.5804V11.4112C29.991 11.146 29.8856 10.8916 29.6981 10.7041L21.7011 2.70711Z"
-                fill="#F9BD2B"
+                fill={pride ? "url(#right)" : "#F9BD2B"}
             />
             <path
                 style={color ? { fill: color } : {}}
@@ -34,32 +60,32 @@ export default function Logo({ noText, color, className = '' }) {
             <path
                 style={color ? { fill: color } : {}}
                 d="M0 27.9915C0 28.5438 0.447715 28.9915 1 28.9915H5.58339C6.47429 28.9915 6.92046 27.9144 6.2905 27.2844L1.70711 22.701C1.07714 22.071 0 22.5172 0 23.4081V27.9915Z"
-                fill="#1D4AFF"
+                fill={pride ? "url(#left-bottom)" : "#1D4AFF"}
             />
             <path
                 style={color ? { fill: color } : {}}
                 d="M9.997 10.997L1.70711 2.70711C1.07714 2.07714 0 2.52331 0 3.41421V8.58339C0 8.8486 0.105357 9.10296 0.292893 9.29049L9.997 18.9946V10.997Z"
-                fill="#1D4AFF"
+                fill={pride ? "url(#left)" : "#1D4AFF"}
             />
             <path
                 style={color ? { fill: color } : {}}
                 d="M1.70711 12.7042C1.07714 12.0742 0 12.5204 0 13.4113V18.5805C0 18.8457 0.105357 19.1 0.292893 19.2876L9.997 28.9917V20.9941L1.70711 12.7042Z"
-                fill="#1D4AFF"
+                fill={pride ? "url(#left)" : "#1D4AFF"}
             />
             <path
                 style={color ? { fill: color } : {}}
                 d="M19.994 11.4112C19.994 11.146 19.8887 10.8916 19.7011 10.7041L11.7041 2.70711C11.0742 2.07714 9.99701 2.52331 9.99701 3.41421V8.58339C9.99701 8.8486 10.1024 9.10296 10.2899 9.29049L19.994 18.9946V11.4112Z"
-                fill="#F54E00"
+                fill={pride ? "url(#mid)" : "#F54E00"}
             />
             <path
                 style={color ? { fill: color } : {}}
                 d="M9.99701 28.9915H15.5804C16.4713 28.9915 16.9175 27.9144 16.2875 27.2844L9.99701 20.9939V28.9915Z"
-                fill="#F54E00"
+                fill={pride ? "url(#mid-bottom)" : "#F54E00"}
             />
             <path
                 style={color ? { fill: color } : {}}
                 d="M9.99701 10.9971V18.5805C9.99701 18.8457 10.1024 19.1 10.2899 19.2876L19.994 28.9917V21.4083C19.994 21.1431 19.8887 20.8887 19.7011 20.7012L9.99701 10.9971Z"
-                fill="#F54E00"
+                fill={pride ? "url(#mid)" : "#F54E00"}
             />
             <path
                 style={color ? { fill: color } : {}}

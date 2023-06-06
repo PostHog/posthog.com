@@ -39,6 +39,8 @@ export default function MainNav() {
 
     const { open } = useSearch()
 
+    const isPrideMonth = new Date().getMonth() === 5
+
     return (
         <div className="flex justify-between items-center max-w-screen-3xl mx-auto lg:relative">
             <button
@@ -51,7 +53,7 @@ export default function MainNav() {
                 className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark block lg:hidden"
                 to="/"
             >
-                <Logo />
+                <Logo pride={isPrideMonth}/>
             </Link>
             <AnimatedBurger
                 className="active:top-[0.5px] active:scale-[.98] bg-gray-accent-light dark:bg-gray-accent-dark lg:hidden w-[36px] h-[36px] flex items-center justify-center rounded-full"
