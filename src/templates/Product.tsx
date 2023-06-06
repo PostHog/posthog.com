@@ -253,7 +253,15 @@ export default function Product({ data, location, pageContext }) {
         ),
         Questions,
         Customers: (props: any) => (
-            <Customers {...props} initialCustomer={location.state?.customer} customers={customers?.nodes} />
+            <Customers
+                {...props}
+                initialCustomer={location.state?.customer}
+                customers={customers?.nodes.sort(
+                    (a, b) =>
+                        pageContext?.customerURLs.indexOf(a.fields.slug) -
+                        pageContext?.customerURLs.indexOf(b.fields.slug)
+                )}
+            />
         ),
     }
 
