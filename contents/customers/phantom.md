@@ -21,7 +21,7 @@ toolsUsed:
 
 After discovering PostHog, Phantom went through a rapid testing process with the open-source version of the platform. After validating that PostHog met the teams’ needs, Phantom rolled PostHog out fully. 
 
-<BorderWrapper>
+
     <Quote
         imageSource="/images/customers/francesco.jpg"
         size="md"
@@ -29,7 +29,7 @@ After discovering PostHog, Phantom went through a rapid testing process with the
         title="CTO & Co-founder, Phantom"
         quote={`“I liked how PostHog was open-source and how it just worked out of the box from the get-go. It lets you use your own database and it was really easy to deploy and get going.”`}
     />
-</BorderWrapper>
+
 
 ## Using analytics to identify growth drivers and improve RPC infrastructure
 
@@ -41,7 +41,7 @@ Phantom’s failure rate fell by 90% as a result of this switch and the team now
 
 “Feature flags are crucial for us,” says Francesco. “We use them as kill switches for all our features, because a Chrome extension is similar to a mobile app in the sense that we can’t deploy a new version on demand. Feature flags give us a level of remote control to protect the user experience.”
 
-<BorderWrapper>
+
     <Quote
         imageSource="/images/customers/francesco.jpg"
         size="md"
@@ -49,7 +49,7 @@ Phantom’s failure rate fell by 90% as a result of this switch and the team now
         title="CTO & Co-founder, Phantom"
         quote={`“Feature flags are really, really critical for us and you don’t see them as a feature in other analytics tools. They very valuable though, because you can often use feature flag data to make other product decisions.”`}
     />
-</BorderWrapper>
+
 
 ## Scaling to (and tracking) one million users within a year
 

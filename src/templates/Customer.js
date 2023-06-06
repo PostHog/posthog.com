@@ -1,5 +1,4 @@
 import { MDXProvider } from '@mdx-js/react'
-import { BorderWrapper } from 'components/BorderWrapper'
 import Breadcrumbs from 'components/Breadcrumbs'
 import { Caption } from 'components/Caption'
 import { FloatedImage } from 'components/FloatedImage'
@@ -20,7 +19,6 @@ const A = (props) => <Link {...props} className="text-red hover:text-red font-se
 
 const components = {
     ...shortcodes,
-    BorderWrapper,
     Caption,
     ImageBlock,
     FloatedImage,
@@ -29,7 +27,7 @@ const components = {
 
 const Tags = ({ tags }) => {
     return (
-        <li className="border-b border-dashed border-gray-accent-light">
+        <li className="">
             <ul className="list-none m-0 p-0 text-lg flex flex-wrap">
                 {tags.map((tag, index) => {
                     return (

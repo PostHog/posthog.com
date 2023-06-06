@@ -23,7 +23,7 @@ Y Combinator is the world’s top startup accelerator, helping to fund, train an
 
 “We use PostHog for [Startup School](https://www.startupschool.org/), our public [YC Startup Library](https://www.ycombinator.com/library), and for [Co-Founder Matching](https://www.ycombinator.com/cofounder-matching),” said Cat Li, Product and Engineering Lead for Y Combinator Startup School. “PostHog is especially useful for Co-Founder Matching, which is essentially a dating app for co-founders.”
 
-<BorderWrapper>
+
     <Quote
         imageSource="/images/customers/cat.jpeg"
         size="md"
@@ -31,7 +31,7 @@ Y Combinator is the world’s top startup accelerator, helping to fund, train an
         title="Product & Engineering Lead, Y Combinator"
         quote={`“One thing I love about PostHog is that we have a shared Slack channel, for support and feedback. We can chat directly to the engineers building PostHog and they're always really responsive.”`}
     />
-</BorderWrapper>
+
 
 ## How Y Combinator gathers 30% more data with PostHog than Google Analytics
 Y Combinator empowers each team to choose its own processes, tools, and OKRs. Some teams use tools like Segment or Amplitude — but for the flagship Startup School project, Cat's team decided PostHog was the best tool for the job. 

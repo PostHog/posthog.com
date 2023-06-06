@@ -2,7 +2,6 @@
 
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
-import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { CompensationCalculator } from './components/CompensationCalculator'
@@ -27,7 +26,6 @@ import { TracksCTA } from './components/TracksCTA'
 export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
-    BorderWrapper,
     CallToAction,
     Caption,
     CompensationCalculator,
