@@ -42,7 +42,7 @@ Your contributor level is determined by how many pull requests you have had merg
 
 <blockquote class='warning-note'>
 
-While we have created cards for all past contributors, the we have only started tracking levels from 26/03/2021, which is why your card might say 'lvl 0' even if you had a PR merged before.
+While we have created cards for all past contributors, we have only started tracking levels from 26/03/2021, which is why your card might say 'lvl 0' even if you had a PR merged before.
 
 </blockquote>
 
