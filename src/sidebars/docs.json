@@ -462,6 +462,10 @@
                 "url": "/docs/session-replay/configure"
             },
             {
+                "name": "Privacy Controls",
+                "url": "/docs/session-replay/privacy"
+            },
+            {
                 "name": "Sharing and emedding",
                 "url": "/docs/session-replay/sharing"
             },
