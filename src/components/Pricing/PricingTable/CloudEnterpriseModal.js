@@ -36,7 +36,7 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
                         <Plan
                             title="Calculate your price"
                             subtitle="Pay based on the events you capture each month."
-                            className="border border-dashed border-gray-accent-light rounded-sm lg:flex-shrink-0 w-full md:w-auto"
+                            className=" rounded-sm lg:flex-shrink-0 w-full md:w-auto"
                         >
                             <div className="mb-4">
                                 <div className="flex justify-between items-center mt-7">

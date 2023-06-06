@@ -292,7 +292,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                             <h2 className="font-bold mb-1">More handy links</h2>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 dark:border-gray-accent-dark">
                             {otherLinks.map((category) => {
                                 return (
                                     <div

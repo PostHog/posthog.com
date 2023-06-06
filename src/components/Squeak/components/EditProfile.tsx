@@ -218,7 +218,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                 return (
                     <Form className="m-0">
                         <h2>Update profile</h2>
-                        <p className="border border-dashed border-gray-accent-light dark:border-gray-accent-dark p-4 rounded-md mb-4">
+                        <p className=" dark:border-gray-accent-dark p-4 rounded-md mb-4">
                             <strong>Tip:</strong> Be sure to use full URLs when adding links to your website, GitHub,
                             LinkedIn and Twitter (start with https)
                         </p>

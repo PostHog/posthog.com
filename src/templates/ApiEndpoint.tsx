@@ -115,10 +115,7 @@ function Params({ params, objects, object, depth = 0 }) {
         <>
             <ul className="list-none pl-0">
                 {params.map((param, index) => (
-                    <li
-                        key={index}
-                        className="py-1 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark first:border-0"
-                    >
+                    <li key={index} className="py-1  first:border-0">
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex flex-col">
                                 <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>

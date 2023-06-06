@@ -21,9 +21,7 @@ const FeatureButton = ({ title, index, activeFeature, sliderRef }) => {
 const SliderItem = ({ image, description, icon, feature }) => {
     return (
         <div>
-            <div className="p-6 sm:p-10 border-r border-dashed max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light">
-                {image}
-            </div>
+            <div className="p-6 sm:p-10 max-w-lg md:max-w-2xl lg:max-w-4xl w-full">{image}</div>
         </div>
     )
 }
@@ -116,7 +114,7 @@ export default function Features({ title }) {
                 currentIndex={activeFeature}
                 length={6}
             />
-            <div className="max-w-screen-2xl mx-auto border-t border-b border-dashed border-gray-accent-light">
+            <div className="max-w-screen-2xl mx-auto">
                 <Slider beforeChange={handleChange} ref={sliderRef} {...sliderSettings}>
                     <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-trends.png" />} />
                     <SliderItem image={<StaticImage {...sliderImageProps} src="./images/slide-funnels.png" />} />

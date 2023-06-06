@@ -95,7 +95,7 @@ export default function Job({
     return (
         <Layout>
             <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
-            <div className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+            <div className="">
                 <PostLayout
                     tableOfContents={[
                         ...tableOfContents,

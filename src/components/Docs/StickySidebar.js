@@ -36,7 +36,7 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
         <div
             style={{ opacity: navStyle ? 1 : 0, transition: 'opacity .3s' }}
             ref={navRef}
-            className="self-stretch flex-1 relative border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark hidden xl:block"
+            className="self-stretch flex-1 relative hidden xl:block"
         >
             <aside style={navStyle} className="sticky flex flex-col pb-14 overflow-y-auto ml-[-5px] pl-[5px]">
                 <div ref={contentRef} className="pl-7 mt-auto">

@@ -22,7 +22,7 @@ export const AboutStory = () => {
                         Continue reading
                     </CallToAction>
                 </div>
-                <div className="border-t border-dashed border-gray-accent-light inline-flex sm:flex-col mdlg:flex-row  gap-8 sm:gap-2 mdlg:gap-8 items-center sm:items-start mdlg:items-center pt-3 pb-5 mt-6 sm:mr-12 mdlg:mr-24">
+                <div className="inline-flex sm:flex-col mdlg:flex-row  gap-8 sm:gap-2 mdlg:gap-8 items-center sm:items-start mdlg:items-center pt-3 pb-5 mt-6 sm:mr-12 mdlg:mr-24">
                     <p className="pb-0 mb-0 text-sm opacity-75">Want to be our next star?</p>
                     <span className="h-[28px] w-[125px]">
                         <GitHubButton

@@ -82,10 +82,7 @@ export default function EventPipelines() {
                 <ul>
                     {pipelines.map(({ Icon, title }) => {
                         return (
-                            <li
-                                key={title}
-                                className=" flex items-center justify-center text-center border-b border-r border-dashed border-gray-accent-light py-6"
-                            >
+                            <li key={title} className=" flex items-center justify-center text-center  py-6">
                                 <span className="flex flex-col justify-center items-center">
                                     <Icon className="md:h-[100px] md:w-[100px] h-[50px] w-[50px]" />
                                     <p className="text-black/70 m-0 mt-2">{title}</p>

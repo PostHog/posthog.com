@@ -27,7 +27,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
     const diffOpenSource = typeof availability !== 'boolean' && 'openSource' in availability
 
     return (
-        <div className="border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark py-2 space-y-2 mt-2 mb-5 ">
+        <div className="border-t border-b border-solid border-gray-accent-light dark:border-gray-accent-dark py-2 space-y-2 mt-2 mb-5 ">
             <h6 className="text-primary/50 dark:text-primary-dark/50 !my-0 font-semibold text-base">
                 Where is this feature available?
             </h6>

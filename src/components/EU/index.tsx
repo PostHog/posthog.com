@@ -16,7 +16,7 @@ export default function EU() {
                     <StaticImage placeholder="none" src="./images/eu-hog.png" alt="EU hog" className="max-w-2xl" />
                 </div>
                 <div className="max-w-[530px]">
-                    <h1 className="text-xl sm:text-2xl m-0 mb-5 pb-5 border-b border-dashed border-gray-accent-light inline-block">
+                    <h1 className="text-xl sm:text-2xl m-0 mb-5 pb-5 inline-block">
                         Introducing PostHog Cloud{' '}
                         <span className="bg-[#003399] text-[#FFCC00] rounded-sm px-1">EU</span>
                     </h1>

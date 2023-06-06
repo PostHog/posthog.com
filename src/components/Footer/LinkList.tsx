@@ -15,7 +15,7 @@ export const LinkListItem = ({ title, url, items }: IProps) => {
     return (
         <>
             {items && (
-                <ul className="px-2 pt-8 lg:pt-16 pb-4 lg:pb-12 m-0 space-y-[1px] border-l border-b lg:border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark last:border-r">
+                <ul className="px-2 pt-8 lg:pt-16 pb-4 lg:pb-12 m-0 space-y-[1px]">
                     <li className="list-none">
                         <h4 className="text-[17px] mb-0">
                             <Link

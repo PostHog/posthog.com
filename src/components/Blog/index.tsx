@@ -71,7 +71,7 @@ export const Posts = ({ posts, title, action, titleBorder }) => {
                 <div
                     className={
                         titleBorder
-                            ? 'pb-2 mb-5 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center'
+                            ? 'pb-2 mb-5 flex justify-between items-center'
                             : 'pb-2 mb-2 flex justify-between items-center'
                     }
                 >
@@ -173,7 +173,7 @@ const Blog = ({
                 />
                 <NewsletterForm />
 
-                <div className="pb-2 mb-5 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center">
+                <div className="pb-2 mb-5 flex justify-between items-center">
                     <h4 className="opacity-50 text-base m-0">Browse by topic</h4>
                 </div>
 

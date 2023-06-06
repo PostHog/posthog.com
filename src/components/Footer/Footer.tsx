@@ -331,11 +331,11 @@ export function Footer(): JSX.Element {
     ]
 
     return (
-        <footer className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+        <footer className="">
             <div className="relative -top-6">
                 <Link
                     to="/"
-                    className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded dark:!bg-primary !bg-tan hover:!bg-gray-accent-light/90 px-4 active:!bg-gray-accent-light/100 dark:!hover:gray-accent-dark border border-dashed border-gray-accent-light dark:border-gray-accent-dark hover:scale-[1.02] active:top-[1px] active:scale-[.99] transition-all"
+                    className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded dark:!bg-primary !bg-tan hover:!bg-gray-accent-light/90 px-4 active:!bg-gray-accent-light/100 dark:!hover:gray-accent-dark  dark:border-gray-accent-dark hover:scale-[1.02] active:top-[1px] active:scale-[.99] transition-all"
                 >
                     <span className="inline-block">
                         <PosthogMonochrome />
@@ -365,7 +365,7 @@ export function Footer(): JSX.Element {
                     })}
                 </ul>
             </div>
-            <div className="py-5 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark border-l-0 border-r-0">
+            <div className="py-5  border-l-0 border-r-0">
                 <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center text-lg px-5">
                     <small className="font-semibold dark:text-gray">
                         &copy; {new Date().getFullYear()} PostHog, Inc.

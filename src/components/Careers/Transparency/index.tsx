@@ -63,8 +63,8 @@ export const Transparency = () => {
                 />
             </Structure.Section>
 
-            <div className="w-full my-16 text-left grid sm:grid-cols-2 border-gray-accent-light border-dashed border-l-0 border-r-0 border-t border-b">
-                <div className="border-gray-accent-light border-dashed border-b-0 border-t-0 sm:border-t-0 sm:border-l px-4 py-8 md:py-12 border-r-0">
+            <div className="w-full my-16 text-left grid sm:grid-cols-2 ">
+                <div className="px-4 py-8 md:py-12">
                     <TransparencyFeature title="Compensation" image={compensationImg} className="max-w-md mx-auto">
                         <p className="mb-0 text-lg text-black font-lightish">
                             We pay generously and built a{' '}
@@ -75,7 +75,7 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="border-gray-accent-light border-dashed border-b-0 border-t sm:border-t-0 border-l px-4 py-8 md:py-12 border-r">
+                <div className="px-4 py-8 md:py-12">
                     <TransparencyFeature title="Board meetings" image={boardMeetingsImg} className="max-w-md mx-auto">
                         <p className="mb-0 text-lg text-black font-lightish">
                             We share slides from each board meeting internally. When everyone knows the direction we're
@@ -84,7 +84,7 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="border-gray-accent-light border-dashed border-b-0 border-t border-l px-4 py-8 md:py-12 border-r-0">
+                <div className="px-4 py-8 md:py-12">
                     <TransparencyFeature
                         title="Fundraising & finances"
                         image={financesImg}
@@ -98,7 +98,7 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="border-gray-accent-light border-dashed border-b-0 border-t border-l px-4 py-8 md:py-12 border-r">
+                <div className="px-4 py-8 md:py-12">
                     <TransparencyFeature title="Constructive feedback" image={feedbackImg} className="max-w-md mx-auto">
                         <p className="mb-0 text-lg text-black font-lightish">
                             Transparency is a two-way street. We encourage individual feedback and run regular

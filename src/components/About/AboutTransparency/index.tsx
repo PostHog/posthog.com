@@ -13,7 +13,7 @@ interface PopularPageProps {
 const PopularPage = ({ icon, label, url }: PopularPageProps) => {
     return (
         <li
-            className="border-r border-dashed border-gray-accent-dark last:border-r-0 pr-1 last:pr-0 list-none
+            className="pr-1 last:pr-0 list-none
           [&:nth-child(1)>a>div]:bg-red
           [&:nth-child(2)>a>div]:bg-blue
           [&:nth-child(3)>a>div]:bg-yellow"
@@ -54,7 +54,7 @@ export const AboutTransparency = () => {
             <div className="flex flex-col-reverse mdlg:flex-row mdlg:items-end gap-8 max-w-5xl mx-auto text-white">
                 <aside className="basis-[60%] flex flex-col relative h-full">
                     <div className="border-2 border-white/50 border-solid px-8 py-6 max-w-sm">
-                        <div className="flex items-center justify-between border-b border-dashed border-gray-accent-light pb-3 mb-3">
+                        <div className="flex items-center justify-between pb-3 mb-3">
                             <h4 className="text-xl mb-0">Transparency</h4>
                             <div className="flex space-x-1">
                                 <Star />

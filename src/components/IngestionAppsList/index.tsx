@@ -7,7 +7,7 @@ export const IngestionAppsList = () => {
     } = useStaticQuery<QueryResult>(query)
 
     return (
-        <ul className="list-none p-0 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+        <ul className="list-none p-0 dark:border-gray-accent-dark">
             {apps.map((app) => {
                 return (
                     <li

@@ -204,7 +204,7 @@ export default function Roadmap() {
                             // description="Here's what was included in our last array."
                             className=""
                         >
-                            <p className="p-4 border border-dashed border-gray-accent-light rounded-sm text-[15px]">
+                            <p className="p-4  rounded-sm text-[15px]">
                                 Check out <Link to="/blog/categories/product-updates">product updates</Link> on our blog
                                 to see what we've shipped recently.
                             </p>

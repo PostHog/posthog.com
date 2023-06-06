@@ -192,7 +192,7 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
     return (
         <MenuContainer setOpen={setOpen}>
             {breadcrumb && (
-                <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-light/20 ">
+                <div className="pb-4 mb-4">
                     <Crumbs crumbs={breadcrumb} />
                 </div>
             )}
@@ -301,13 +301,7 @@ const MobileSidebar = ({ setOpen }: { setOpen: (open: null | string) => void }) 
         <MenuContainer className="py-0" setOpen={setOpen}>
             <div className={`flex flex-col`}>
                 {sidebar && <div className="mobile-sidebar-container max-h-[40vh] overflow-auto">{sidebar}</div>}
-                <div
-                    className={`mt-auto flex text-sm ${
-                        sidebar
-                            ? 'border-t border-dashed border-gray-accent-light dark:border-gray-accent-light/20'
-                            : ''
-                    }`}
-                >
+                <div className={`mt-auto flex text-sm ${sidebar ? '' : ''}`}>
                     {filePath && (
                         <a
                             className="p-3"
@@ -318,14 +312,14 @@ const MobileSidebar = ({ setOpen }: { setOpen: (open: null | string) => void }) 
                     )}
                     {filePath && title && (
                         <a
-                            className="p-3 border-l border-gray-accent-light dark:border-gray-accent-light/20 border-dashed"
+                            className="p-3 "
                             href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
                         >
                             Raise an issue
                         </a>
                     )}
                     {darkMode && (
-                        <div className="ml-auto p-3 border-l border-gray-accent-light dark:border-gray-accent-light/20 border-dashed">
+                        <div className="ml-auto p-3">
                             <DarkModeToggle />
                         </div>
                     )}

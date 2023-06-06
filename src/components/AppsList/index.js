@@ -4,7 +4,7 @@ import builderHog from './builder-hog.png'
 
 const Listing = ({ name, image, url, badge, price }) => {
     return (
-        <li className="border-b border-r border-dashed border-gray-accent-light">
+        <li className="">
             <Link
                 to={url}
                 className="flex flex-col relative items-center text-center px-2 py-8 justify-center hover:bg-gray-accent-light"
@@ -23,7 +23,7 @@ const Listing = ({ name, image, url, badge, price }) => {
 
 export default function AppsList({ apps, hideBuildYourOwn }) {
     return (
-        <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-t border-l border-dashed border-gray-accent-light max-w-screen-2xl mx-auto">
+        <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 max-w-screen-2xl mx-auto">
             {apps.map((app) => {
                 const {
                     id,
@@ -42,7 +42,7 @@ export default function AppsList({ apps, hideBuildYourOwn }) {
                 )
             })}
             {!hideBuildYourOwn && (
-                <li className="border-dashed border-gray-accent-light inline-flex items-center justify-center relative overflow-hidden bg-red min-h-[160px]">
+                <li className="inline-flex items-center justify-center relative overflow-hidden bg-red min-h-[160px]">
                     <Link className="flex justify-center space-x-4 items-center w-full h-full" to="/docs/apps/build">
                         <img
                             className="md:absolute left-[-37px] bottom-[-32px] -scale-x-1 max-w-[32%] min-w-[100px]"

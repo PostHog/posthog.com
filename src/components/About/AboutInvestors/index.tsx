@@ -14,7 +14,7 @@ interface InvestorProps {
 
 const Investor = ({ SvgLogo, logo, width, height, photo, large, name, role }: InvestorProps) => {
     return (
-        <div className="flex flex-col text-center justify-center items-center border-t border-l border-dashed border-gray-accent-light">
+        <div className="flex flex-col text-center justify-center items-center">
             {SvgLogo ? (
                 <div className="py-8 px-4">
                     {/* if logo is svg, use actual dimensions */}
@@ -61,7 +61,7 @@ export const AboutInvestors = () => {
                 ($27.125 million, to be exact...)
             </h4>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 border-b border-r border-dashed border-gray-accent-light">
+            <div className="grid grid-cols-2 lg:grid-cols-4 ">
                 <Investor name="Y Combinator" SvgLogo="/images/investors/yc.svg" width={81} height={81} />
                 <Investor name="GV" SvgLogo="/images/investors/gv.svg" width={130} height={81} />
                 <Investor name="1984 Ventures" SvgLogo="/images/investors/1984.svg" width={50} height={80} />
@@ -90,7 +90,7 @@ export const AboutInvestors = () => {
                 <Investor name="Solomon Hykes" role="Docker Founder" photo="/images/investors/solomon-hykes.jpg" />
                 <Investor name="Rujul Zaparde" role="Flightcar Founder" photo="/images/investors/rujul-zaparde.jpg" />
 
-                <div className="py-4 px-4 flex flex-col justify-center border-t border-l border-dashed border-gray-accent-light">
+                <div className="py-4 px-4 flex flex-col justify-center">
                     <figure className="mb-2 mx-auto p-[2px] rounded-full bg-gray-accent-light border border-solid border-gray w-[50px] h-[50px] flex justify-center items-center">
                         <span className="inline-block w-8 h-8">
                             <Investors />

@@ -97,7 +97,7 @@ export const Handbook: React.FC = () => {
                         </div>
 
                         <h4>Top links</h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 dark:border-gray-accent-dark">
                             {otherLinks.map((category) => {
                                 return (
                                     <div

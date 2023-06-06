@@ -272,7 +272,7 @@ export default function Apply({ id, info }) {
                             <p className="m-0 mb-3 text-sm">
                                 This code is our token of appreciation for taking the time to apply.
                             </p>
-                            <div className="rounded-md bg-tan dark:bg-primary border border-dashed border-gray-accent-light py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
+                            <div className="rounded-md bg-tan dark:bg-primary  py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
                                 <p className="font-semibold font-code m-0">{code}</p>
                                 <button
                                     disabled={copied}

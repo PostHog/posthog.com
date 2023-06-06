@@ -409,7 +409,7 @@ export default function Contact({
                 </kbd>{' '}
                 to advance through the form at a breakneck pace!
             </p>
-            <div className="grid divide-y divide-dashed divide-gray-accent-light border border-gray-accent-light border-dashed">
+            <div className="grid">
                 {fields.map(({ Component, name, placeHolder, type = 'text', options = [] }, index) => {
                     return (
                         <Component

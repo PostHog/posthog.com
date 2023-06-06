@@ -4,7 +4,7 @@ import builderHog from './builder-hog.png'
 
 const Listing = ({ name, image, url, badge, price }) => {
     return (
-        <li className="border-b border-r border-dashed border-gray-accent-light">
+        <li className="">
             <Link
                 to={url}
                 className="flex flex-col relative items-center text-center px-2 py-8 justify-center hover:bg-gray-accent-light"
@@ -23,7 +23,7 @@ const Listing = ({ name, image, url, badge, price }) => {
 
 export default function TemplatesList({ templates }) {
     return (
-        <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-t border-l border-dashed border-gray-accent-light max-w-screen-2xl mx-auto">
+        <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 max-w-screen-2xl mx-auto">
             {templates.map((template) => {
                 const {
                     id,
