@@ -69,7 +69,7 @@ _And_ you can use HogQL to aggregate results in a funnel too. Is there anything 
 
 ## SQL insights
 
-![PostHog SQL insights](../images/features/hogql/pinepple_sql.gif)
+![PostHog SQL insights](../images/blog/array/pineapple_sql.mp4)
 <Caption>Using an SQL insight to run the query below</Caption>
 
 If you're familiar with SQL, the most powerful way to leverage it within PostHog is via the new SQL insight type. This gives you direct SQL access to your data in PostHog, so you can create custom tables, visualizations, and more. 
