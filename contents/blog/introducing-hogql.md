@@ -26,7 +26,7 @@ HogQL is free for all users while in public beta – all we ask is that you [sha
 
 ## What is HogQL?
 
-It's a transition layer over ClickHouse SQL. It's intuitive for anyone familiar with SQL, but it offers a few advantages and features.
+It's a translation layer over ClickHouse SQL. It's intuitive for anyone familiar with SQL, but it offers a few advantages and features.
 
 Features unique to HogQL include simplified access to event and person properties, as well as automatically added joins when you query fields with data on a different table, such as `events.person.properties.$browser`.
 
