@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-8.png
 tags: ['hogql', 'trends', 'insights']
 ---
 
-HogQL enables custom series aggregations. This enables you to customize the data filtered, visualized, and broken down in your insights. One of the most powerful aggregations is `sum()`, which we will showcase in this tutorial.
+PostHog provides multiple options for aggregating data series including total count, count per user, unique sessions, property values, and more. HogQL unlocks a new level of aggregation customization, enabling you to use expressions to aggregate your data however you want. To showcase this, this tutorial goes over one of the most powerful aggregations: `sum()`.
 
 ## The basics of sum()
 
@@ -18,7 +18,7 @@ Sum is simple: it calculates the sum of the numbers it is provided. In its simpl
 
 > **Note:** Sum only works for numbers. You can use `toInt()` to convert any strings to numbers.
 
-## Conditional sums with `sumIf`
+## Conditional sums with `sumIf()`
 
 Sum gets more interesting when we use it with conditions. This lets us sum occurrences of properties, properties that match criteria, and more. 
 
@@ -67,7 +67,7 @@ When we breakdown by `person_id`, this gives us a list of users with the highest
 
 Using sum, you can access both the total sum and a subset of the same series. This enables powerful options for working with percentages and creating percentage-based series.
 
-For example, if you wanted to compare the percentages of Chrome vs Safari, you can create a series where your divide the Safari pageviews by the total Safari and Chrome pageviews. 
+For example, you wanted to compare the percentages of Chrome vs Safari pageviews in a visualization summing to 100%. First, create a series where your divide the Safari pageviews by the total Safari and Chrome pageviews. 
 
 ```
 sumIf(
@@ -93,11 +93,11 @@ sumIf(
 
 Finally, chose the time series bar, and set the Y-axis to "Percent (0-1)."
 
-**Want to add a gif, but [blocked by this issue.](https://posthog.slack.com/archives/C045L1VEG87/p1686066149103449)**
+![Chrome vs Safari](../images/tutorials/hogql-sum-aggregation/sum.mp4)
 
 ## Calculating net promoter score (NPS)
 
-A similar use case for `sumIf()` is calculating your NPS score. NPS asks how likely would you recommend a product to a friend or colleague on a scale of 1-10. 9s and 10s are promoters, 7s and 8s are passives, and 6s and below are detractors. To calculate your NPS score, subtract your detractors percentage from your promoters percentage.
+A similar use case for `sumIf()` is calculating your [NPS score](/blog/b2b-saas-product-metrics#net-promoter-score-nps). NPS asks how likely would you recommend a product to a friend or colleague on a scale of 1-10. 9s and 10s are promoters, 7s and 8s are passives, and 6s and below are detractors. To calculate your NPS score, subtract your detractors percentage from your promoters percentage.
 
 > **Want to add an NPS survey to your product?** Check out our [NPS survey app](/docs/apps/nps-survey-app). 
 
