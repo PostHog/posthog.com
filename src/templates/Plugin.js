@@ -12,7 +12,7 @@ export default function Integration({ data }) {
         <>
             <SEO title={`${name} - PostHog`} description={description} image={logo?.publicURL} />
             <Layout>
-                <div className="px-4 sticky top-[-2px] bg-tan dark:bg-primary z-10">
+                <div className="px-4 sticky top-[-2px] z-10">
                     <Breadcrumbs
                         crumbs={[
                             {
