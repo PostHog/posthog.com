@@ -2,20 +2,24 @@ import {
     Android,
     DiagonalArrow,
     Experimentation,
-    Funnels,
     Ios,
     JS,
-    Lifecycle,
     NodeJS,
-    PathAnalysis,
     ReactIcon,
-    Retention,
     RightArrow,
     Ruby,
-    Stickiness,
-    Trends,
 } from 'components/Icons/Icons'
-import { Clock, Console, Pulse } from 'components/NewIcons'
+import {
+    Clock,
+    Console,
+    Pulse,
+    Funnels,
+    Trends,
+    Stickiness,
+    Lifecycle,
+    Retention,
+    UserPaths,
+} from 'components/NewIcons'
 import Link from 'components/Link'
 import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -64,7 +68,7 @@ const FeatureList = ({ features }) => {
                 return (
                     <li key={title} className="flex gap-4 items-center">
                         <span className="inline-flex p-2 rounded-sm bg-dark/10">
-                            <Icon className="w-[20px]" />
+                            <Icon className="w-6" />
                         </span>
                         <span className="opacity-70">{title}</span>
                     </li>
@@ -77,14 +81,14 @@ const FeatureList = ({ features }) => {
 export const ProductAnalytics = () => {
     const features = [
         { title: 'Funnels', Icon: Funnels },
-        { title: 'User paths', Icon: PathAnalysis },
-        { title: 'Lifecycle', Icon: Lifecycle },
-        { title: 'Trends', Icon: Trends },
+        { title: 'Graphs & trends', Icon: Trends },
+        { title: 'User paths', Icon: UserPaths },
         { title: 'Stickiness', Icon: Stickiness },
+        { title: 'Lifecycle', Icon: Lifecycle },
         { title: 'Retention', Icon: Retention },
     ]
     return (
-        <div className="relative grid grid-cols-4 lg:grid-cols-5 lg:gap-5 pt-5">
+        <div className="bg-[#1371FF] text-white relative grid grid-cols-4 lg:grid-cols-5 lg:gap-5 pt-5">
             <ImageContainer className="col-span-2 lg:col-span-3 px-8 pt-4 -ml-8 md:-ml-0">
                 <motion.div
                     transition={{ delay: 0.4 }}
