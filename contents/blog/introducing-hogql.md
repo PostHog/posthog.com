@@ -1,5 +1,5 @@
 ---
-date: 2023-06-06
+date: 2023-06-07
 title: "Introducing HogQL: Direct SQL access for PostHog"
 rootPage: /blog
 sidebar: Blog
@@ -117,11 +117,15 @@ You could, for example, use HogQL to run currency conversions and normalize data
 ## Custom insights
 ![custom insights](../images/blog/array/custom_insights.gif)
 
-Finally, we're introducing custom insights, which enable you to create a very wide range of insights and visualizations. 
+Finally, we're introducing custom insights. All of our insights have been reworked as JSON objects, which can fully customized by you.
 
-Custom insights basically turn any list of events or persons - almost every table in PostHog, basically - into an insight that can be added to a dashboard. 
+Now any list of events or persons, almost every table in PostHog, can be customized with the data sources, filters, and visualizations you want.
 
-You can add tables directly by hitting the new 'Open as a new insight' button (above) to reveal the source behind the table, and editing it to create new views. You can also use the 'View source' button on existing insights to accomplish the same. 
+You can create or edit custom insights in two ways:
+
+1.  You can add tables from the event explorer directly by hitting the new 'Open as a new insight' button (above) to reveal the source behind the table, and editing it to create new views. 
+
+2. You can also use the 'View source' button on existing insights to accomplish the same. 
 
 ## The history (and future) of HogQL
 
