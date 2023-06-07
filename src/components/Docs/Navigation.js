@@ -18,7 +18,7 @@ const CommunityLink = ({ icon, text, url }) => {
     return (
         <li className="py-2 px-3">
             <a
-                className={`text-sm text-gray hover:text-gray-2 dark:hover:text-white flex items-center font-normal space-x-1`}
+                className={`text-sm text-primary/50 hover:text-primary/75 dark:text-primary/50 dark:hover:text-primary-dark/75 flex items-center font-normal space-x-1`}
                 href={url}
             >
                 {icon}
