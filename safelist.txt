@@ -23,8 +23,6 @@ border-opacity-75
 border-opacity-75
 border-red
 col-span-7
-dark:hover:text-almost-black
-dark:text-almost-black
 flex
 flex
 flex-row-reverse
@@ -46,7 +44,6 @@ grid-rows-2
 grid-rows-3
 grid-rows-4
 h-full
-hover:text-almost-black
 hover:text-light-yellow
 justify-start
 justify-start
@@ -95,7 +92,6 @@ rotate-45
 rotate-90
 sm:hidden
 space-x-reverse
-text-almost-black
 text-green
 text-light-yellow
 text-opacity-100

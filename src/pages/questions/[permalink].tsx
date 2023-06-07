@@ -67,7 +67,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                 </section>
 
                 {isModerator && question && (
-                    <div className="bg-almost-black dark:bg-white/25 rounded-md p-6 mb-6 text-primary-dark bg:text-primary">
+                    <div className="bg-primary dark:bg-primary-dark/25 rounded-md p-6 mb-6 text-primary-dark bg:text-primary">
                         <h4 className="text-xs text-primary-dark opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">
                             Moderator tools
                         </h4>

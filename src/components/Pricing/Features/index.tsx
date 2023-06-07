@@ -127,7 +127,7 @@ const Section = ({ title, section, className = '' }: IColumn) => {
                             key={title}
                             className={`text-white font-semibold text-[14px] flex space-x-2 items-center leading-tight ${
                                 enterpriseSelfHostOnly
-                                    ? 'relative after:w-[9px] after:h-[9px] after:rounded-full after:bg-dark-yellow after:ml-1'
+                                    ? 'relative after:w-[9px] after:h-[9px] after:rounded-full after:bg-yellow after:ml-1'
                                     : ''
                             }`}
                         >

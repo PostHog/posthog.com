@@ -18,7 +18,7 @@ const CommunityLink = ({ icon, text, url }) => {
     return (
         <li className="py-2 px-3">
             <a
-                className={`text-sm text-gray hover:text-gray-2 dark:hover:text-white flex items-center font-normal space-x-1`}
+                className={`text-sm text-primary/50 hover:text-primary/75 dark:text-primary/50 dark:hover:text-primary-dark/75 flex items-center font-normal space-x-1`}
                 href={url}
             >
                 {icon}
@@ -62,7 +62,7 @@ export default function Navigation({
             }}
             className="max-w-screen-3xl mx-auto sticky top-[-1px]"
         >
-            <div className="bg-tan dark:bg-almost-black flex items-center mt-4">
+            <div className="bg-tan dark:bg-primary flex items-center mt-4">
                 <button onClick={handleMobileMenuClick} className="py-2 px-3 block md:hidden">
                     <MobileMenu style={{ transform: `rotate(${menuOpen ? '180deg' : '0deg'})` }} />
                 </button>
