@@ -378,7 +378,7 @@ export function Footer(): JSX.Element {
                         <li>
                             <Link
                                 to="https://status.posthog.com"
-                                className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
+                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
                             >
                                 System status
                             </Link>
@@ -386,7 +386,7 @@ export function Footer(): JSX.Element {
                         <li>
                             <Link
                                 to="/handbook/company/security#soc-2"
-                                className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
+                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
                             >
                                 SOC 2
                             </Link>
@@ -394,7 +394,7 @@ export function Footer(): JSX.Element {
                         <li>
                             <Link
                                 to="/privacy"
-                                className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
+                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
                             >
                                 Privacy policy
                             </Link>
@@ -402,7 +402,7 @@ export function Footer(): JSX.Element {
                         <li>
                             <Link
                                 to="/terms"
-                                className="font-bold text-sm text-almost-black/70 hover:text-almost-black/90 dark:text-gray dark dark:hover:text-gray"
+                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
                             >
                                 Terms
                             </Link>

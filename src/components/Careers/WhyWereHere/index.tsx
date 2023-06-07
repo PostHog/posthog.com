@@ -129,7 +129,7 @@ export const WhyWereHere = () => {
                             <ul className="list-none m-0 p-0 flex flex-col">
                                 <li className="relative leading-none m-0 active-product">
                                     <span className="block">
-                                        <a className="text-almost-black leading-tight font-medium hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]">
+                                        <a className="text-primary dark:text-primary-dark leading-tight font-medium hover:text-red dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]">
                                             Introduction
                                         </a>
                                     </span>

@@ -80,7 +80,7 @@ export function Wrapper({
             style={!breakpoints.md ? styles.popper : {}}
             {...attributes.popper}
         >
-            <div className="z-10 lg:block text-almost-black relative top-0">
+            <div className="z-10 lg:block text-primary dark:text-primary-dark relative top-0">
                 <motion.div
                     style={{ borderRadius }}
                     className="bg-white lg:shadow-lg dark:bg-gray-accent-dark overflow-hidden lg:my-0 md:mt-6"

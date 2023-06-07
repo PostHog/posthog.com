@@ -56,7 +56,9 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
 
                             <div className="mb-4 border border-white/10 rounded">
                                 <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
-                                    <div className="mb-0 text-sm text-almost-black text-opacity-75">Event volume</div>
+                                    <div className="mb-0 text-sm text-primary dark:text-primary-dark text-opacity-75">
+                                        Event volume
+                                    </div>
                                     <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                                 </div>
                                 <dl className="flex justify-between mb-0 p-2">
@@ -82,7 +84,7 @@ export default function CloudEnterpriseModal({ setOpen, open, hideActions, hideB
                             </div>
 
                             <div className="flex justify-between items-baseline">
-                                <div className="mb-0 text-sm font-bold text-almost-black text-opacity-75">
+                                <div className="mb-0 text-sm font-bold text-primary dark:text-primary-dark text-opacity-75">
                                     Monthly minimum price
                                 </div>
                                 <div className="mb-0 flex items-baseline">

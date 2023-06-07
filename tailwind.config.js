@@ -9,7 +9,6 @@ module.exports = {
     theme: {
         fill: {
             current: 'currentColor',
-            'almost-black': '#151515',
             white: 'white',
             blue: '#1D4AFF',
             yellow: '#F7A501',
@@ -68,7 +67,6 @@ module.exports = {
             transparent: 'transparent',
             'dark-yellow': '#DC9300',
             'light-yellow': '#F1A82C',
-            'almost-black': '#151515',
             tan: '#EEEFE9',
             'gray-accent': '#D0D1C9',
             'gray-accent-dark': '#2C2C2C',
@@ -122,7 +120,6 @@ module.exports = {
                 pink: '#A970DC',
                 'dark-yellow': '#DC9300',
                 'light-yellow': '#F1A82C',
-                'almost-black': '#151515',
                 tan: '#EEEFE9',
                 gray: '#8F8F8C',
                 'gray-2': '#777',
