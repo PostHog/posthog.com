@@ -2,10 +2,7 @@
     "main": [
         {
             "title": "Products",
-            "url": "/product-analytics",
-            "sub": {
-                "component": "Products"
-            }
+            "url": "/product-analytics"
         },
         {
             "title": "Pricing",
@@ -13,10 +10,7 @@
         },
         {
             "title": "Docs",
-            "url": "/docs",
-            "sub": {
-                "component": "Docs"
-            }
+            "url": "/docs"
         },
         {
             "title": "Community",
@@ -24,16 +18,7 @@
         },
         {
             "title": "Company",
-            "url": "/about",
-            "sub": {
-                "component": "Company"
-            }
-        },
-        {
-            "title": "Login",
-            "classes": "text-center w-full",
-            "url": "https://app.posthog.com/login",
-            "hideBorder": true
+            "url": "/about"
         }
     ]
 }

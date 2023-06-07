@@ -1,8 +1,8 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import CallToAction from 'components/MainNav/Submenus/CallToAction'
 import { Link } from 'gatsby'
 import { BusinessModel, Compensation, Strategy } from 'components/NotProductIcons'
+import { CallToAction } from 'components/CallToAction'
 
 interface PopularPageProps {
     icon: JSX.Element

@@ -1,8 +1,8 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import CallToAction from 'components/MainNav/Submenus/CallToAction'
 import GitHubButton from 'react-github-btn'
 import { YCBadge } from './yc-badge'
+import { CallToAction } from 'components/CallToAction'
 
 export const AboutStory = () => {
     return (

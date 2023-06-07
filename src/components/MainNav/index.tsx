@@ -1,99 +1,98 @@
-import AnimatedBurger from 'components/AnimatedBurger'
-import Link from 'components/Link'
 import Logo from 'components/Logo'
-import { Search } from 'components/Icons/Icons'
-import { useSearch } from 'components/Search/SearchContext'
-import { motion } from 'framer-motion'
 import { graphql, useStaticQuery } from 'gatsby'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import React, { useState } from 'react'
-import MenuItem from './MenuItem'
+import React from 'react'
+import { useValues } from 'kea'
+import { layoutLogic } from '../../logic/layoutLogic'
+import Link from 'components/Link'
+import { CallToAction } from 'components/CallToAction'
+import { Search } from 'components/Icons'
+import { Person } from 'components/NotProductIcons'
+import { useSearch } from 'components/Search/SearchContext'
+import Tooltip from 'components/Tooltip'
 
 export default function MainNav() {
+    const { websiteTheme } = useValues(layoutLogic)
     const data = useStaticQuery(graphql`
         query MainNavQuery {
             navsJson {
                 main {
                     title
                     url
-                    classes
-                    hideBorder
-                    sub {
-                        component
-                    }
                 }
             }
         }
     `)
-
-    const [expanded, expandMenu] = useState(false)
-    const [referenceElement, setReferenceElement] = useState(null)
-    const menu = data?.navsJson?.main
-    const breakpoints = useBreakpoint()
-    const variants = {
-        hidden: { height: 0 },
-        shown: { height: 'auto' },
-    }
-    const menuLength = menu.length
-    const halfMenu = Math.floor(menuLength / 2)
-
     const { open } = useSearch()
 
+    const menu = data?.navsJson?.main
+
     return (
-        <div className="flex justify-between items-center max-w-screen-3xl mx-auto lg:relative">
-            <button
-                className="active:top-[0.5px] active:scale-[.98] lg:hidden bg-gray-accent-light dark:bg-gray-accent-dark w-[36px] h-[36px] flex items-center justify-center rounded-full"
-                onClick={() => open('mobile-header')}
-            >
-                <Search className="w-[16px] h-[16px]" />
-            </button>
-            <Link
-                className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark block lg:hidden"
-                to="/"
-            >
-                <Logo />
-            </Link>
-            <AnimatedBurger
-                className="active:top-[0.5px] active:scale-[.98] bg-gray-accent-light dark:bg-gray-accent-dark lg:hidden w-[36px] h-[36px] flex items-center justify-center rounded-full"
-                onClick={() => expandMenu(!expanded)}
-                active={expanded}
-            />
-            {(expanded || !breakpoints.md) && (
-                <motion.nav
-                    className="lg:static absolute w-full left-0 top-full lg:overflow-visible overflow-hidden hidden lg:block"
-                    variants={breakpoints.md && variants}
-                    initial="hidden"
-                    animate="shown"
-                >
-                    <div
-                        ref={setReferenceElement}
-                        className="z-50 flex justify-between lg:items-center items-start flex-col lg:flex-row bg-white dark:bg-gray-accent-dark lg:bg-transparent lg:dark:bg-transparent font-nav lg:py-0 py-5 text-white lg:dark:text-white lg:text-almost-black max-w-screen-3xl mx-auto lg:-mx-3"
-                    >
-                        <ul className="flex-1 flex flex-col lg:flex-row list-none m-0 p-0 w-full space-x-[1px] lg:w-auto">
-                            {menu.slice(0, halfMenu).map((menuItem, index) => {
-                                return <MenuItem referenceElement={referenceElement} key={index} menuItem={menuItem} />
-                            })}
-                        </ul>
-                        {!breakpoints.md && (
-                            <Link
-                                className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark hidden lg:block 
-                                relative
-                                hover:scale-[1.01]
-                                active:top-[0.5px]
-                                active:scale-[.99]"
-                                to="/"
-                            >
-                                <Logo />
-                            </Link>
-                        )}
-                        <ul className="flex-1 flex flex-col lg:flex-row list-none m-0 p-0 w-full lg:w-auto justify-end">
-                            {menu.slice(halfMenu, menu.length).map((menuItem, index) => {
-                                return <MenuItem referenceElement={referenceElement} key={index} menuItem={menuItem} />
-                            })}
-                        </ul>
-                    </div>
-                </motion.nav>
-            )}
+        <div className="border-b border-[#4d4e52] bg-[#202228] mb-5">
+            <div className="grid grid-cols-3 max-w-screen-3xl mx-auto px-5">
+                <Link className="py-4" to="/">
+                    <Logo color={'white'} />
+                </Link>
+
+                <ul className="flex list-none m-0 p-0 justify-center items-center">
+                    {menu.map(({ title, url }) => {
+                        const active = typeof window !== 'undefined' && window.location.pathname === url
+                        return (
+                            <li className="h-full" key={title}>
+                                <Link
+                                    to={url}
+                                    className={`text-base py-4 inline-block relative h-full ${
+                                        active ? 'px-[30px]' : 'px-5'
+                                    }`}
+                                >
+                                    {active && (
+                                        <span
+                                            className={`bg-[#1d1f27] absolute w-full h-[calc(100%+1px)] left-0 inset-0
+                                            before:absolute before:border-r before:top-0 before:h-full before:border-[#4d4e52] before:w-[10px] before:rounded-br-lg before:border-b before:left-0 before:bg-[#202228] before:z-10
+                                            after:absolute after:border-l after:top-0 after:h-full after:border-[#4d4e52] after:w-[10px] after:rounded-bl-lg after:border-b after:right-0 after:bg-[#202228]`}
+                                        >
+                                            <span className="absolute bottom-0 left-0 border-b border-[#1d1f27] w-full" />
+                                        </span>
+                                    )}
+                                    <span className="relative">{title}</span>
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
+                <div className="self-center flex justify-end items-center space-x-4">
+                    <CallToAction size="xs">Get started</CallToAction>
+                    <button onClick={() => open('header')}>
+                        <Search className="opacity-50" />
+                    </button>
+                    <button>
+                        <Tooltip
+                            placement="bottom-end"
+                            title="Login"
+                            content={() => (
+                                <ul className="list-none m-0 p-0 grid gap-y-2 w-[200px]">
+                                    <li className="w-full">
+                                        <Link
+                                            className="text-sm px-2 py-2 rounded-sm hover:bg-black"
+                                            to="https://app.posthog.com"
+                                        >
+                                            PostHog app
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="text-sm px-2 py-2 rounded-sm hover:bg-black" to="/community">
+                                            Community
+                                        </Link>
+                                    </li>
+                                </ul>
+                            )}
+                        >
+                            <span className="relative">
+                                <Person className="opacity-50" />
+                            </span>
+                        </Tooltip>
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }
