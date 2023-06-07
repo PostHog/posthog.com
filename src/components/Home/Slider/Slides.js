@@ -11,13 +11,13 @@ import {
 } from 'components/Icons/Icons'
 import {
     Clock,
-    Console,
     Pulse,
     Funnels,
     Trends,
     Stickiness,
     Lifecycle,
     Retention,
+    Terminal,
     UserPaths,
 } from 'components/NewIcons'
 import Link from 'components/Link'
@@ -148,7 +148,7 @@ export const ProductAnalytics = () => {
 export const SessionRecording = () => {
     const features = [
         { title: 'Event timeline', Icon: Clock },
-        { title: 'Console logs', Icon: Console },
+        { title: 'Console logs', Icon: Terminal },
         { title: 'Network requests', Icon: Pulse },
     ]
     return (

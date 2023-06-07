@@ -1,40 +1,36 @@
-import {
-    ABTesting,
-    Analytics,
-    DataWarehouse,
-    EventPipelines,
-    FeatureFlags,
-    OpenSource,
-    SessionRecording,
-} from './Icons'
+import { Graph, RewindPlay, Toggle, Flask, Person, Server, Database, Terminal } from './../../NewIcons'
 
 export const slideButtons = [
     {
         title: 'Product analytics',
-        Icon: Analytics,
+        Icon: Graph,
     },
     {
         title: 'Session replay',
-        Icon: SessionRecording,
+        Icon: RewindPlay,
     },
     {
         title: 'Feature flags',
-        Icon: FeatureFlags,
+        Icon: Toggle,
     },
     {
         title: 'A/B testing',
-        Icon: ABTesting,
+        Icon: Flask,
     },
     {
-        title: 'Event pipelines',
-        Icon: EventPipelines,
+        title: 'CDP',
+        Icon: Person,
     },
     {
         title: 'Data warehouse',
-        Icon: DataWarehouse,
+        Icon: Server,
     },
     {
-        title: 'Open source',
-        Icon: OpenSource,
+        title: 'SQL',
+        Icon: Database,
+    },
+    {
+        title: 'API',
+        Icon: Terminal,
     },
 ]

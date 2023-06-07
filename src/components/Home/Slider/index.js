@@ -21,10 +21,8 @@ const SlideButton = ({ title, Icon, activeSlide, index }) => {
                     active ? 'bg-gray-accent/40 hover:bg-gray-accent/40 active ' : 'group '
                 }`}
             >
-                <span className="w-[52px] h-[52px] flex justify-center items-center opacity-60 group-hover:opacity-90">
-                    <span className="absolute">
-                        <Icon active={active} />
-                    </span>
+                <span className="w-6 h-6 flex justify-center items-center opacity-60 group-hover:opacity-90">
+                    <Icon active={active} />
                 </span>
                 <p
                     className={`leading-tight text-sm lg:text-md opacity-90 m-0 -mt-2 ${
