@@ -26,7 +26,7 @@ The Toolbar is like the 'Inspect Element' dev tool, but specifically for PostHog
 
 Heatmaps is a feature in the toolbar that shows you how users are interacting with elements on your website or app. 
 
-> Note that to use the heatmaps feature, [autocapture](/docs/data/autocapture) must be enabled
+> Note that to use heatmaps, [autocapture](/docs/data/autocapture) must be enabled.
 
 To view your heatmaps, click on the toolbar and then click on the red fire (🔥) icon.
 
@@ -34,15 +34,23 @@ To view your heatmaps, click on the toolbar and then click on the red fire (🔥
 
 With the heatmap on, clickable elements on your website will have a red overlay with numbers on them. Here's an example of our website with the heatmap enabled:
 
-![An example from the PostHog website showing the heatmap highlighting a number of page elements. Some showing a count of clicks and one also showing a rage-click](../images/tutorials/toolbar/posthog-heatmap-example.png)
+![An example from the PostHog website showing the heatmap highlighting a number of page elements. Some showing a count of clicks and one also showing a rage-click](../../images/tutorials/toolbar/posthog-heatmap-example.png)
 
-Each number in the top right box of each element represents the number of clicks it received. The number in the top left of the element is the number of rage-clicks.
+Each number in the top right box of each element represents the number of clicks it received. The number in the top left of the element is the number of rage-clicks. 
+
+Numbers at the bottom or top of the screen indicate that there are more elements that are not currently being displayed on the page.
 
 You can change the date range of the heatmap by clicking on the number next to the (🔥) icon on the toolbar. This displays a menu where you can select a new date range.
 
+![How to change the heatmap date range](../../images/products/product-analytics/heatmaps-date-filter.mp4)
+
 You can also load more data, change how links are matched, and view a list of the most clicked on elements in descending order.
 
-![How to change the heatmap date range](../../images/products/product-analytics/heatmaps-date-filter.mp4)
+### How to create an action from a heatmap
+
+Once you have enabled the heatmap, click on any element. You will then be able to create an [action](/docs/data/actions) from it.
+
+![How to create an action using heatmaps](../../images/products/product-analytics/heatmaps-create-action.mp4)
 
 ### Loading more data
 
@@ -50,25 +58,87 @@ If you have many events, you may need to load more data to see everything on the
 
 ![How to load more data in the heatmap menu](../../images/products/product-analytics/heatmaps-load-more.png)
 
-### Matching links within the page
+### Matching links by their target URL
+
+By default, the toolbar matches clicks using the elements on the page, and not by their target URLs (i.e., `href` attribute). This is fine for most scenarios, where you have static elements that always have the same target URL. However, this may not be ideal for dynamic lists that may have different target URLs depending on the underlying data.
+
+For example, consider the following screenshot of a list of elements for "Newly seen persons" from the PostHog app:
+
+![the list of recent insights showing several clicks](../../images/products/product-analytics/heatmaps-target-url-off.png)
+
+The "Newly seen persons" shows the most recent list of persons using the app and is constantly being updated as new users use the app. In the heatmap, we see 106 clicks for the **first element**. This doesn't mean that the this specific person in the list received 106 clicks, but rather that the first element in the list received 106 elements, regardless of which person was shown.
+
+If we were more interested in the number of clicks each specific person in the list received (regardless of which position they appeared in), then we can turn on "Match links by their target URL" in the heatmap menu. This matches clicks to elements based on their target URLs.
+
+![How to enable link matching in the heatmap](../../images/products/product-analytics/heatmaps-match-link.png)
+
+For example, if we enable this for our previous example, we see much fewer clicks. This is because we are now seeing clicks on each specific user:
+
+![How to enable link matching in the heatmap](../../images/products/product-analytics/heatmaps-target-url-on.png)
+
+### Combining heatmaps from similar pages
+
+If you have similar pages that are mostly the same but have dynamic content based on an identifier in the url (e.g., product pages on an ecommerce site), you can search and display their combined heatmap using wildcards `*` in the heatmap menu.
+
+For example, if the product pages on an ecommerce site use a URL format of `https://yourwebsite.com/products/product-id`, you can use the wildcard URL `https://yourwebsite.com/products/*` to display a combined heatmap from all the product pages.
+
+![a gif of the toolbar popover menu being used to add a wildcard into the URL](../../images/tutorials/toolbar/wildcards.gif)
+
+## Creating actions from the toolbar using Inspect
+
+The toolbar enables you to easily create [actions](/docs/data/actions) by clicking elements directly on your website. 
+
+To do this, click on the 🔍 Inspect button on the Toolbar. This will add a blue overlay to your website. Then, if you click on an element, you will be shown the option to create an action from it.
+
+![How to create a new action using the toolbar](../../images/products/product-analytics/toolbar-create-new-action.mp4)
+
+You can also create a more advanced action using the following additional options:
+
+### 1. Add another element
+
+If you want your action to cover more than one element, you can click 'Add another element' right above 'Create Action'. 
+
+This is an `OR` operation, meaning that the action will be recorded if either Element A _or_ Element B are clicked. 
+
+This is useful if you have various buttons that take you to the same page, for instance, and only care that the user clicks one of them. A common use case for this is leveraging the action as a [funnel step](/docs/user-guides/funnels). 
 
 
+### 2. Element filters
 
-## Toolbar features
-  
--   **Inspect.** With the PostHog Toolbar, you are able to get the `class` and `id` of an element much faster and without any extra noise. Click the element to inspect and you'll have access to everything you need to know about that element.
--   **Heatmap.** Easily see the ranking of which parts of the page your users are interacting with the most.
--   **Actions.** Inspect an element, see how often it has triggered an event, and immediately create an [Action](/docs/user-guides/actions) with that data. With the Toolbar, everything you need to tailor your analytics is right in front of you: your website, the user data, and the functionality to create an Action.
--   **Feature flags.** See which feature flags are turned on for a particular page.
+These are used by PostHog to find the specific element you're creating the action for. 
+
+- **Link target:** Where a click on the element leads to (if available).
+
+- **Text:** Inner text of the element (if available).
+
+- **Page URL:** If you have the same element at the same position in various pages (e.g. navbar elements), the default action will capture them all. To prevent this, you can set an exact URL or specify a pattern for pages where this exact action should be recorded.
+
+- **Selector:** Path to the element on the page. If you're not happy with the selector PostHog is using automatically, you could, for example, select elements based on their `id` or `data-attr`. You can type a selector into the "Selector" field in the action creation modal to do this.
+
+![The create action modal showing the selector text box being used to edit the selector](../../images/tutorials/toolbar/type-it.gif)
+
+Or in the same modal, click "Edit the selector" to use our element picker to build the selector you want.
+
+![The selector modal being used to discover the more meaningful selector](../../images/tutorials/toolbar/toolbar-selector-edit.gif)
+
+## Viewing your existing actions
+
+TODO
+
+## Toggling feature flags with the toolbar
+
+TODO 
+[feature flags](/product/feature-flags) 
 
 ## Troubleshooting and FAQ
-## Toolbar not loading or displaying?
+
+### Toolbar not loading or displaying
 
 When launched, the toolbar injects an API token in the format `#__posthog=JSON` in your site's URL, like this: `http://mysite.com/#__posthog=JSON`.
 
 The toolbar won't load if you have a frontend that overrides the injected API token (the information after the #) before the `posthog-js` library (or snippet) loads and has a chance to read the API token.
 
-To solve this, get the `__posthog` JSON from the URL before it is overridden and call `posthog.loadToolbar(JSON)`:
+To solve this, retrieve the `__posthog` JSON from the URL before it is overridden and call `posthog.loadToolbar(JSON)`:
 
 ```js
 const toolbarJSON = new URLSearchParams(window.location.hash.substring(1)).get('__posthog')
@@ -77,4 +147,4 @@ if (toolbarJSON) {
 }
 ```
 
-We are also working on other solutions. Go to [the related issue](https://github.com/PostHog/posthog/issues/9100) to see progress (and encourage us to get it done faster).
+We are also working on other solutions. Go to [the related issue](https://github.com/PostHog/posthog/issues/9100) to see progress updates (and encourage us to get it done faster!).
