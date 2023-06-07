@@ -76,8 +76,8 @@ function PipelinesPage({ location }) {
     return (
         <Layout>
             <SEO
-                title="CDP pipelines"
-                description="Get all your data into PostHog with 60+ CDP pipelines"
+                title="CDP data connections"
+                description="Get all your data into PostHog with 60+ sources & destinations"
                 image={`/og-images/apps.jpeg`}
             />
             <header className="py-12">
@@ -111,7 +111,7 @@ function PipelinesPage({ location }) {
 
 const query = graphql`
     query {
-        pipelines: allMdx(filter: { fields: { slug: { regex: "/^/pipelines/(?!.*/docs).*/" } } }) {
+        pipelines: allMdx(filter: { fields: { slug: { regex: "/^/cdp/(?!.*/docs).*/" } } }) {
             nodes {
                 id
                 fields {

@@ -20,4 +20,4 @@ If you're self-hosting, you can install a custom app by pasting a link to its pu
 
 ## Self-host app troubleshooting
 
-If you're having issues getting apps to work on your self-hosted instance of PostHog, check out our [troubleshooting guide](/docs/pipelines/enabling).
+If you're having issues getting apps to work on your self-hosted instance of PostHog, check out our [troubleshooting guide](/docs/cdp/enabling).

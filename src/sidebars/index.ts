@@ -3,7 +3,7 @@ import handbook from './handbook.json'
 import apps from './apps.json'
 import product from './product.json'
 import blog from './blog.json'
-import pipelines from './pipelines.json'
+import cdp from './pipelines.json'
 
 export default {
     docs,
@@ -11,5 +11,5 @@ export default {
     apps,
     product,
     blog,
-    pipelines,
+    cdp,
 }

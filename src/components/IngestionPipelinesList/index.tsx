@@ -57,7 +57,7 @@ const query = graphql`
     query {
         pipelines: allMdx(
             filter: {
-                fields: { slug: { regex: "/^/pipelines/(?!.*/docs).*/" } }
+                fields: { slug: { regex: "/^/cdp/(?!.*/docs).*/" } }
                 frontmatter: { filters: { type: { regex: "/data-in/" } } }
             }
         ) {

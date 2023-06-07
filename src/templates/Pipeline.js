@@ -27,7 +27,7 @@ const PipelineSidebar = ({ filters: { type, maintainer } }) => {
                         topics={[
                             {
                                 name: capitalizeFirstLetter(maintainer),
-                                url: `/pipelines?filter=maintainer&value=${maintainer}`,
+                                url: `/cdp?filter=maintainer&value=${maintainer}`,
                             },
                         ]}
                     />
@@ -38,7 +38,7 @@ const PipelineSidebar = ({ filters: { type, maintainer } }) => {
                     <Topics
                         topics={type?.map((type) => ({
                             name: capitalizeFirstLetter(type),
-                            url: `/pipelines?filter=type&value=${type}`,
+                            url: `/cdp?filter=type&value=${type}`,
                         }))}
                     />
                 </SidebarSection>
@@ -88,42 +88,42 @@ export default function Pipeline({ data, pageContext: { next, previous } }) {
                 description={description || excerpt}
             />
             <PostLayout
-                searchFilter="pipelines"
+                searchFilter="cdp"
                 sidebar={<PipelineSidebar filters={filters} />}
                 menu={[
                     {
-                        name: 'Pipelines',
+                        name: 'CDP',
                     },
                     {
                         name: 'All',
-                        url: '/pipelines',
+                        url: '/cdp',
                     },
                     {
                         name: 'Data-in',
-                        url: '/pipelines?filter=type&value=data-in',
+                        url: '/cdp?filter=type&value=data-in',
                     },
                     {
                         name: 'Data-out',
-                        url: '/pipelines?filter=type&value=data-out',
+                        url: '/cdp?filter=type&value=data-out',
                     },
                     {
                         name: 'Ingestion-filtering',
-                        url: '/pipelines?filter=type&value=ingestion-filtering',
+                        url: '/cdp?filter=type&value=ingestion-filtering',
                     },
                     {
                         name: 'Other',
-                        url: '/pipelines?filter=type&value=other',
+                        url: '/cdp?filter=type&value=other',
                     },
                     {
                         name: 'Official',
-                        url: '/pipelines?filter=maintainer&value=official',
+                        url: '/cdp?filter=maintainer&value=official',
                     },
                     {
                         name: 'Community',
-                        url: '/pipelines?filter=maintainer&value=community',
+                        url: '/cdp?filter=maintainer&value=community',
                     },
                 ]}
-                breadcrumb={[{ name: 'Pipelines', url: '/pipelines' }, { name: title }]}
+                breadcrumb={[{ name: 'CDP', url: '/cdp' }, { name: title }]}
             >
                 {thumbnail?.publicURL && (
                     <figure className="m-0 text-center">
