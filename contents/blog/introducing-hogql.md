@@ -41,9 +41,7 @@ We recommend checking the docs for a more detailed [explanation of ClickHouse SQ
 
 ![HogQL breakdowns](../images/blog/array/hog_breakdown.mp4)
 
-<Caption>Using a `properties.$browser_version HogQL expression` to breakdown results</Caption>
-
-A frequent request from teams using PostHog has been the ability to breakdown insight results across multiple properties. To accommodate this, we've added the ability to use HogQL expressions within a breakdown. 
+A frequent request from teams using PostHog has been the ability to breakdown insight results across multiple properties. To accommodate this, we've added the ability to use HogQL expressions within a breakdown, like `properties.$browser_version` above.
 
 In other words, you can now break down results however you like – including by multiple properties at once. Want to break down new signups by both pricing tier _and_ overall usage? Now you can.
 
@@ -53,18 +51,15 @@ In other words, you can now break down results however you like – including by
 
 ![HogQL filter](../images/blog/array/hog_filters.mp4)
 
-<Caption>Using a `properties.$screen_width < properties.$screen_height` HogQL expression as a filter</Caption>
-
-Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple properties!
+Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple properties! For example, the above video uses the expression `properties.$screen_width < properties.$screen_height` as a filter.
 
 > **Ready to get started?** Read our tutorial on [how to use HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
 
 ## HogQL aggregations
 
 ![HogQL aggregations](../images/blog/array/hog_aggregate.mp4)
-<Caption>Using a `properties.$session_id HogQL expression` to aggregate by unique sessions</Caption>
 
-_And_ you can use HogQL to aggregate results in a funnel too. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
+_And_ you can use HogQL to aggregate results in a funnel too, like we do with `properties.$session_id` above. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
 
 ## SQL insights
 
