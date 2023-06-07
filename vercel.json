@@ -906,7 +906,9 @@
         { "source": "/apps/user-agent-populator", "destination": "/cdp/user-agent-populator" },
         { "source": "/apps/variance-connector", "destination": "/cdp/variance-connector" },
         { "source": "/apps/zapier-connector", "destination": "/cdp/zapier-connector" },
-        { "source": "/apps/zendesk-connector", "destination": "/cdp/zendesk-connector" }
+        { "source": "/apps/zendesk-connector", "destination": "/cdp/zendesk-connector" },
+        { "source": "/apps/user-interview", "destination": "/apps/user-interviewer" },
+        { "source": "/docs/apps/replicator", "destination": "/docs/cdp/replicator" }
     ],
     "rewrites": [
         {
