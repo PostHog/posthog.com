@@ -206,7 +206,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
 
     return (
         <li
-            className={`border-t border-dashed border-gray-accent-light first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-white rounded-sm shadow-xl ${
+            className={` first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-white rounded-sm shadow-xl ${
                 props?.className ?? ''
             }`}
         >

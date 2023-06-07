@@ -328,7 +328,7 @@ export default function Apply({ id, info }) {
                             </CallToAction>
                         </div>
 
-                        <div className="mx-6 md:mx-12 py-6 border-t border-dashed border-gray-accent-light">
+                        <div className="mx-6 md:mx-12 py-6 ">
                             <h4 className="mb-0">Be our next star?</h4>
                             <aside className="float-right h-[28px] w-[125px] ml-8">
                                 <GitHubButton href="https://github.com/PostHog/posthog" />
@@ -338,13 +338,13 @@ export default function Apply({ id, info }) {
                             </p>
                         </div>
 
-                        <div className="mx-6 md:mx-12 py-6 border-t border-dashed border-gray-accent-light">
+                        <div className="mx-6 md:mx-12 py-6 ">
                             <h4 className="mb-0">Join our mailing list</h4>
                             <p className="text-sm mb-0">The best of PostHog. Delivered twice a month.</p>
                             <NewsletterForm subcompact className="px-0" />
                         </div>
 
-                        <div className="mx-6 md:mx-12 py-6 border-t border-dashed border-gray-accent-light">
+                        <div className="mx-6 md:mx-12 py-6 ">
                             <h4 className="mb-0">Install PostHog on a side project</h4>
                             <p className="text-sm">
                                 Feel free to give PostHog a whirl - we’d love to hear your feedback!
@@ -396,7 +396,7 @@ export default function Apply({ id, info }) {
                             </div>
                         </div>
 
-                        <div className="mx-6 md:mx-12 pt-2 pb-6 border-t border-dashed border-gray-accent-light text-center">
+                        <div className="mx-6 md:mx-12 pt-2 pb-6  text-center">
                             <Link to="/" className="font-bold text-red hover:bg-tan/50 w-full block px-4 py-2 rounded">
                                 Go back to PostHog.com
                             </Link>
