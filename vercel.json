@@ -830,6 +830,7 @@
         { "source": "/session-recording", "destination": "/session-replay" },
         { "source": "/manual/recordings", "destination": "/docs/session-replay/manual" },
         { "source": "/docs/session-recording", "destination": "/docs/session-replay" },
+        { "source": "/docs/session-replay/configure", "destination": "/docs/session-replay/manual" },
         { "source": "/handbook/small-teams/experimentation", "destination": "/handbook/small-teams/feature-success" },
         { "source": "/handbook/small-teams/session-recording", "destination": "/handbook/small-teams/monitoring" },
         { "source": "/handbook/growth/strategy", "destination": "/handbook/growth/sales/overview" },

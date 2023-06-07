@@ -67,7 +67,7 @@ Questions like these used to be hard to answer with PostHog, but no more! Use th
 
 We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
 
-We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log too](/manual/recordings#console-logs-recording-beta)!
+We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log too](/manual/recordings#console-logs-recording)!
 
 ### New: Text cards on dashboards
 
