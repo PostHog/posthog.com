@@ -27,30 +27,30 @@ export default function MainNav() {
     const menu = data?.navsJson?.main
 
     return (
-        <div className="border-b border-[#4d4e52] bg-[#202228] mb-5">
-            <div className="grid grid-cols-3 max-w-screen-3xl mx-auto px-5">
-                <Link className="py-4" to="/">
-                    <Logo color={'white'} />
+        <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-5">
+            <div className="flex max-w-screen-3xl mx-auto px-5 justify-between">
+                <Link className="py-4 grow-0 shrink-0 basis-[auto]" to="/">
+                    <Logo color={'white'} className="h-[20px]" />
                 </Link>
 
-                <ul className="flex list-none m-0 p-0 justify-center items-center">
+                <ul className="flex list-none m-0 p-0">
                     {menu.map(({ title, url }) => {
                         const active = typeof window !== 'undefined' && window.location.pathname === url
                         return (
                             <li className="h-full" key={title}>
                                 <Link
                                     to={url}
-                                    className={`text-base py-4 inline-block relative h-full ${
-                                        active ? 'px-[30px]' : 'px-5'
+                                    className={`text-sm flex h-full items-center relative p-4 ${
+                                        active ? 'px-[calc(1rem_+_10px)] mx-[-10px]' : ''
                                     }`}
                                 >
                                     {active && (
                                         <span
-                                            className={`bg-[#1d1f27] absolute w-full h-[calc(100%+1px)] left-0 inset-0
-                                            before:absolute before:border-r before:top-0 before:h-full before:border-[#4d4e52] before:w-[10px] before:rounded-br-lg before:border-b before:left-0 before:bg-[#202228] before:z-10
-                                            after:absolute after:border-l after:top-0 after:h-full after:border-[#4d4e52] after:w-[10px] after:rounded-bl-lg after:border-b after:right-0 after:bg-[#202228]`}
+                                            className={`bg-light dark:bg-dark absolute w-full h-[calc(100%+1px)] left-0 inset-0
+                                            before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:rounded-br-lg before:border-b before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
+                                            after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:rounded-bl-lg after:border-b after:right-0 after:bg-accent dark:after:bg-accent-dark`}
                                         >
-                                            <span className="absolute bottom-0 left-0 border-b border-[#1d1f27] w-full" />
+                                            <span className="absolute bottom-0 left-0 border-b border-bg-light dark:border-bg-dark w-full" />
                                         </span>
                                     )}
                                     <span className="relative">{title}</span>
@@ -59,7 +59,7 @@ export default function MainNav() {
                         )
                     })}
                 </ul>
-                <div className="self-center flex justify-end items-center space-x-4">
+                <div className="flex items-center justify-end space-x-4">
                     <CallToAction size="xs">Get started</CallToAction>
                     <button onClick={() => open('header')}>
                         <Search className="opacity-50" />

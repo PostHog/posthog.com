@@ -54,6 +54,10 @@ module.exports = {
             full: '0 0 100%',
         },
         backgroundColor: (theme) => ({
+            light: '#EEEFE9',
+            dark: '#1D1F27',
+            accent: '#E5E7E0',
+            'accent-dark': '#202228',
             white: '#fff',
             black: '#000',
             primary: '#151515',
@@ -108,6 +112,11 @@ module.exports = {
             colors: {
                 primary: '#151515',
                 'primary-dark': '#EEEFE9',
+                accent: '#E5E7E0',
+                'accent-dark': '#202228',
+                border: '#D0D1C9',
+                'border-dark': '#4A4C52',
+
                 orange: '#EF7632',
                 yellow: '#F7A501',
                 'light-yellow': '#F1A82C',
@@ -123,7 +132,12 @@ module.exports = {
             minHeight: {
                 780: '780px',
             },
-            borderColor: {},
+            borderColor: {
+                light: '#D0D1C9',
+                dark: '#4A4C52',
+                'bg-light': '#EEEFE9',
+                'bg-dark': '#1D1F27',
+            },
             borderRadius: {
                 sm: '4px',
                 lg: '20px',
