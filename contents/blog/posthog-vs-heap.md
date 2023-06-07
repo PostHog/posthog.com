@@ -571,7 +571,7 @@ As an open source platform designed for technical teams, PostHog integrates with
 
 > ### Making it easy to talk to users
 >
-> You can't build a great product without talking to users, which is why we built the [User Interview Scheduler](/apps/user-interviews) app for PostHog. You can use it to automatically invite users to an interview based user properties or actions they've completed.
+> You can't build a great product without talking to users, which is why we built the [User Interview Scheduler](/apps/user-interview) app for PostHog. You can use it to automatically invite users to an interview based user properties or actions they've completed.
 >
 > We also built a simple [Feedback Widget app](/apps/feedback-widget) for collecting ad hoc feedback from users. You can analyse this data in PostHog, or use Zapier to send this feedback to other tools like Slack, Zendesk, and more.
 >

@@ -367,7 +367,7 @@ Although product analytics is not a core focus for Hotjar, they do offer basic f
 
 ### In-app messages and user research
 
-Hotjar includes feedback widgets, surveys, and an integrated user research tool for gathering feedback from users. PostHog also supports [feedback widgets](/apps/feedback-widget) and [user research scheduling](/apps/user-interviews), although not surveys. 
+Hotjar includes feedback widgets, surveys, and an integrated user research tool for gathering feedback from users. PostHog also supports [feedback widgets](/apps/feedback-widget) and [user research scheduling](/apps/user-interview), although not surveys. 
 
 > Note that because PostHog is entirely open source, it's possible for users to build their own user surveys if needed. Our guide on [building your own apps](https://posthog.com/docs/apps/build) dives into more detail.
 
