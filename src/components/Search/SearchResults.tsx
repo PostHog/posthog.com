@@ -45,6 +45,10 @@ const categories = [
         name: 'Apps',
     },
     {
+        type: 'pipelines',
+        name: 'Pipelines',
+    },
+    {
         type: 'blog',
         name: 'Blog',
     },
