@@ -19,7 +19,6 @@ Today, we're excited to announce a major new feature that's now available for al
 
 We've added several new ways to use HogQL in PostHog - you can use expressions to enhance insights, you can use HogQL to filter a revamped events list, and you can even use full queries to analyze data in any way you want. 
 
-
 While PostHog's existing insights remain valuable for the vast majority of queries, HogQL gives them a massive upgrade for those times when off-the-shelf insights don't fit the bill. 
 
 Speaking of bills... these features are free for all users while in public beta – all we ask is that you [share any feedback with us](http://app.posthog.com/home#supportModal). 
