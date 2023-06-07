@@ -62,7 +62,7 @@ const FeatureList = ({ features }) => {
         <ul className="list-none m-0 p-0 space-y-2 lg:mt-2 mr-8 lg:mr-3">
             {features.map(({ title, Icon }) => {
                 return (
-                    <li key={type} className="flex gap-4 items-center">
+                    <li key={title} className="flex gap-4 items-center">
                         <span className="inline-flex p-2 rounded-sm bg-dark/10">
                             <Icon className="w-[20px]" />
                         </span>
