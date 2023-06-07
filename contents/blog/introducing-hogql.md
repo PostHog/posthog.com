@@ -70,7 +70,7 @@ If you're familiar with SQL, the most powerful way to leverage it within PostHog
 
 SQL insights are especially useful for when you need to do exotic or novel analysis that isn't immediately possible with existing insight types. For example, while you can use a retention insight to discover which product features keep users coming back for more, you could use an SQL insight to find which users keep coming back and identify outliers. 
 
-We can't wait to hear [your feedback](http://app.posthog.com/home#supportModal), and see what's possible with SQL access in PostHog. We're confident it will give engineers a unique edge, and better information, than other analytics tools.
+We can't wait to hear [your feedback](http://app.posthog.com/home#supportModal), and see what's possible with SQL access in PostHog. We're confident it will give engineers a unique edge and better information, than other analytics tools.
 
 To give you a sense of what's possible with SQL, here's an example query we use to summarize data from a survey we ran to determine which countries prefer pineapple on a pizza.
 
