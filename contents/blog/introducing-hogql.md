@@ -58,7 +58,7 @@ Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple p
 
 ### HogQL aggregations
 
-_And_ you can use HogQL to aggregate results in a funnel too. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
+_And_ you can use HogQL to aggregate results in a funnel too, like we do with `properties.$session_id` above. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
 
 ![HogQL aggregations](../images/blog/array/hog_aggregate.mp4)
 
