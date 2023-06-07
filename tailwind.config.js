@@ -57,7 +57,7 @@ module.exports = {
             white: '#fff',
             black: '#000',
             primary: '#151515',
-            'primary-dark': '#EEEFE9',
+            'primary-dark': '#fff',
             orange: '#EF7632',
             yellow: '#F7A501',
             footer: '#08042f',
