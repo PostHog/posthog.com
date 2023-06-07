@@ -2,23 +2,29 @@ import {
     Android,
     DiagonalArrow,
     Experimentation,
-    Funnels,
     Ios,
     JS,
-    Lifecycle,
     NodeJS,
-    PathAnalysis,
     ReactIcon,
-    Retention,
     RightArrow,
     Ruby,
-    Stickiness,
-    Trends,
 } from 'components/Icons/Icons'
+import {
+    Clock,
+    Console,
+    Pulse,
+    Funnels,
+    Trends,
+    Stickiness,
+    Lifecycle,
+    Retention,
+    UserPaths,
+} from 'components/NewIcons'
 import Link from 'components/Link'
 import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
+import { feature } from 'components/Pricing/PricingTable/classes'
 
 const Title = ({ title }) => {
     return <h3 className="text-lg lg:text-3xl lg:mt-5 mb-0">{title}</h3>
@@ -55,17 +61,34 @@ const ImageContainer = ({ children, className = '' }) => {
     return <div className={`relative h-[300px] xl:h-[400px] order-2 md:order-1 ${className}`}>{children}</div>
 }
 
+const FeatureList = ({ features }) => {
+    return (
+        <ul className="list-none m-0 p-0 space-y-2 lg:mt-2 mr-8 lg:mr-3">
+            {features.map(({ title, Icon }) => {
+                return (
+                    <li key={title} className="flex gap-4 items-center">
+                        <span className="inline-flex p-2 rounded-sm bg-dark/10">
+                            <Icon className="w-6" />
+                        </span>
+                        <span className="opacity-70">{title}</span>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
 export const ProductAnalytics = () => {
     const features = [
-        { title: 'Funnels', Icon: Funnels, url: '/product-analytics#funnels' },
-        { title: 'User paths', Icon: PathAnalysis, url: '/product-analytics#user-paths' },
-        { title: 'Lifecycle', Icon: Lifecycle, url: '/product-analytics#more-insight-types' },
-        { title: 'Trends', Icon: Trends, url: '/product-analytics#graphs-and-trends' },
-        { title: 'Stickiness', Icon: Stickiness, url: '/product-analytics#more-insight-types' },
-        { title: 'Retention', Icon: Retention, url: '/product-analytics#more-insight-types' },
+        { title: 'Funnels', Icon: Funnels },
+        { title: 'Graphs & trends', Icon: Trends },
+        { title: 'User paths', Icon: UserPaths },
+        { title: 'Stickiness', Icon: Stickiness },
+        { title: 'Lifecycle', Icon: Lifecycle },
+        { title: 'Retention', Icon: Retention },
     ]
     return (
-        <div className="relative grid grid-cols-4 lg:grid-cols-5 lg:gap-5 pt-5">
+        <div className="bg-[#1371FF] text-white relative grid grid-cols-4 lg:grid-cols-5 lg:gap-5 pt-5">
             <ImageContainer className="col-span-2 lg:col-span-3 px-8 pt-4 -ml-8 md:-ml-0">
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -87,23 +110,7 @@ export const ProductAnalytics = () => {
             <ContentContainer className="col-span-2">
                 <Content>
                     <Title title={'Product analytics'} />
-                    <ul className="list-none m-0 p-0 lg:mt-2 mr-8 lg:mr-3">
-                        {features.map(({ title, Icon, url }) => {
-                            return (
-                                <li key={title} className="p-[3px]">
-                                    <Link
-                                        to={url}
-                                        className="text-primary hover:text-primary dark:text-primary-dark hover:bg-gray-accent/25 focus:bg-gray-accent/40 flex items-center space-x-2 text-[13px] lg:text-[14px] py-2 md:py-3 px-2 xl:px-2 rounded transition-all"
-                                    >
-                                        <span>
-                                            <Icon className="w-[20px]" />
-                                        </span>
-                                        <span className="opacity-70">{title}</span>
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
+                    <FeatureList features={features} />
                     <CTA url="/product-analytics" title="Explore" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
@@ -139,6 +146,11 @@ export const ProductAnalytics = () => {
 }
 
 export const SessionRecording = () => {
+    const features = [
+        { title: 'Event timeline', Icon: Clock },
+        { title: 'Console logs', Icon: Console },
+        { title: 'Network requests', Icon: Pulse },
+    ]
     return (
         <div className="relative grid grid-cols-2 md:gap-7 pt-5">
             <ImageContainer className="md:px-8 pt-4 pb-3">
@@ -164,6 +176,7 @@ export const SessionRecording = () => {
                     <Title title={'Session replay'} />
                     <Subtitle subtitle="with console logs" />
                     <Description description="Watch a group of sessions for users in a cohort." />
+                    <FeatureList features={features} />
 
                     <CTA url="/session-replay" title="Explore" />
                 </Content>
@@ -270,8 +283,8 @@ export const FeatureFlags = () => {
 
 export const ABTesting = () => {
     const features = [
-        { title: 'Experimentation Suite', Icon: Experimentation, url: '/product/experimentation-suite' },
-        { title: 'Correlation Analysis', Icon: DiagonalArrow, url: '/product/correlation-analysis' },
+        { title: 'Experimentation Suite', Icon: Experimentation },
+        { title: 'Correlation Analysis', Icon: DiagonalArrow },
     ]
 
     return (
@@ -312,23 +325,7 @@ export const ABTesting = () => {
                 <Content>
                     <Title title={'A/B testing'} />
                     <Subtitle subtitle="with multivariate testing" />
-                    <ul className="list-none m-0 p-0 inline-block">
-                        {features.map(({ title, Icon, url }) => {
-                            return (
-                                <li className="odd:border-b border-gray-accent-light border-dashed" key={title}>
-                                    <Link
-                                        to={url}
-                                        className="text-black hover:text-black flex items-center space-x-2 text-[14px] md:text-[14px] py-3"
-                                    >
-                                        <span>
-                                            <Icon className="w-[16px] md:w-[20px]" />
-                                        </span>
-                                        <span className="opacity-70">{title}</span>
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
+                    <FeatureList features={features} />
                     <CTA url="/ab-testing" title="See how it works" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
