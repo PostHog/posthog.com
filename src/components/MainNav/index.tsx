@@ -1,14 +1,97 @@
 import Logo from 'components/Logo'
 import { graphql, useStaticQuery } from 'gatsby'
-import React from 'react'
-import { useValues } from 'kea'
+import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
-import { Search } from 'components/Icons'
+import { Chevron, Search } from 'components/Icons'
 import { Person } from 'components/NotProductIcons'
 import { useSearch } from 'components/Search/SearchContext'
-import Tooltip from 'components/Tooltip'
+
+import { Placement } from '@popperjs/core'
+import React, { useEffect, useRef, useState } from 'react'
+import { usePopper } from 'react-popper'
+import { DarkModeToggle } from 'components/DarkModeToggle'
+
+function Tooltip({
+    className = '',
+    children,
+    content,
+    tooltipClassName = '',
+    placement = 'bottom',
+    title,
+}: {
+    children: JSX.Element
+    content: string | ((setOpen: React.Dispatch<React.SetStateAction<boolean>>) => React.ReactNode)
+    tooltipClassName?: string
+    placement?: Placement
+    title?: string
+    className?: string
+}) {
+    const [open, setOpen] = useState(false)
+    const [referenceElement, setReferenceElement] = useState(null)
+    const [popperElement, setPopperElement] = useState(null)
+    const { setWebsiteTheme } = useActions(layoutLogic)
+
+    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+        placement,
+        modifiers: [
+            {
+                name: 'offset',
+            },
+        ],
+    })
+    const containerEl = useRef(null)
+
+    useEffect(() => {
+        function handleClick(e) {
+            console.log(containerEl?.current?.contains(e.target))
+            if (containerEl?.current && !containerEl?.current.contains(e.target)) {
+                setOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClick)
+        return () => {
+            document.removeEventListener('mousedown', handleClick)
+        }
+    }, [containerEl])
+
+    return (
+        <span ref={containerEl} className={className}>
+            <button
+                ref={setReferenceElement}
+                onClick={() => setOpen(!open)}
+                className={`px-3 py-2 rounded-tr-md rounded-tl-md ${open ? 'dark:bg-[#484848]' : ''}`}
+            >
+                {children}
+            </button>
+            {open && (
+                <div
+                    className="z-[10000]"
+                    role="tooltip"
+                    ref={setPopperElement}
+                    style={{ ...styles.popper, paddingTop: 0, paddingBottom: 0 }}
+                    {...attributes.popper}
+                >
+                    <div className={`rounded-md shadow-lg overflow-hidden ${tooltipClassName}`}>
+                        {title && (
+                            <h5
+                                className={`bg-white text-sm dark:bg-[#484848] text-black dark:text-white px-4 py-2 z-20 m-0 font-semibold`}
+                            >
+                                {title}
+                            </h5>
+                        )}
+                        <div
+                            className={`bg-white dark:bg-gray-accent-dark text-black dark:text-white px-2 py-2 text-sm z-20`}
+                        >
+                            {content && (typeof content === 'string' ? content : content(setOpen))}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </span>
+    )
+}
 
 export default function MainNav() {
     const { websiteTheme } = useValues(layoutLogic)
@@ -59,38 +142,69 @@ export default function MainNav() {
                         )
                     })}
                 </ul>
-                <div className="flex items-center justify-end space-x-4">
+                <div className="flex items-center justify-end">
                     <CallToAction size="xs">Get started</CallToAction>
-                    <button onClick={() => open('header')}>
+                    <button className="p-3" onClick={() => open('header')}>
                         <Search className="opacity-50" />
                     </button>
-                    <button>
-                        <Tooltip
-                            placement="bottom-end"
-                            title="Login"
-                            content={() => (
-                                <ul className="list-none m-0 p-0 grid gap-y-2 w-[200px]">
-                                    <li className="w-full">
+                    <Tooltip
+                        placement="bottom-end"
+                        title="Login"
+                        tooltipClassName="!rounded-tr-none"
+                        content={() => {
+                            return (
+                                <ul className="list-none m-0 p-0 w-[200px]">
+                                    <li>
                                         <Link
-                                            className="text-sm px-2 py-2 rounded-sm hover:bg-black"
+                                            className="text-sm px-2 py-2 rounded-sm hover:bg-black/50 block"
                                             to="https://app.posthog.com"
                                         >
                                             PostHog app
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="text-sm px-2 py-2 rounded-sm hover:bg-black" to="/community">
+                                        <Link
+                                            className="text-sm px-2 py-2 rounded-sm hover:bg-black/50 block"
+                                            to="/community"
+                                        >
                                             Community
                                         </Link>
                                     </li>
                                 </ul>
-                            )}
-                        >
-                            <span className="relative">
-                                <Person className="opacity-50" />
-                            </span>
-                        </Tooltip>
-                    </button>
+                            )
+                        }}
+                    >
+                        <span className="relative">
+                            <Person className="opacity-50" />
+                        </span>
+                    </Tooltip>
+                    <Tooltip
+                        className="border-l dark:border-white/20 border-black/20"
+                        placement="bottom-end"
+                        title="Site settings"
+                        tooltipClassName="rounded-tr-none"
+                        content={() => {
+                            return (
+                                <ul className="list-none m-0 p-0 w-[200px]">
+                                    <li>
+                                        <button className="text-sm px-2 py-2 flex justify-between items-center rounded-sm hover:bg-black/50 w-full text-left">
+                                            <span>Dark mode</span>
+                                            <DarkModeToggle />
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button className="text-sm px-2 py-2 rounded-sm hover:bg-black/50 w-full text-left">
+                                            Full-width text
+                                        </button>
+                                    </li>
+                                </ul>
+                            )
+                        }}
+                    >
+                        <span className="relative w-5 h-5 flex justify-center items-center">
+                            <Chevron className="opacity-50 w-2" />
+                        </span>
+                    </Tooltip>
                 </div>
             </div>
         </div>
