@@ -41,7 +41,7 @@ We recommend checking the docs for a more detailed [explanation of ClickHouse SQ
 
 ![HogQL breakdowns](../images/blog/array/hog_breakdown.mp4)
 
-<Caption>Using a `properties.$browser_version` HogQL expression to breakdown results</Caption>
+<Caption>Using a properties.$browser_version HogQL expression to breakdown results</Caption>
 
 A frequent request from teams using PostHog has been the ability to breakdown insight results across multiple properties. To accommodate this, we've added the ability to use HogQL expressions within a breakdown. 
 
@@ -53,7 +53,7 @@ In other words, you can now break down results however you like – including by
 
 ![HogQL filter](../images/blog/array/hog_filters.mp4)
 
-<Caption>Using a `properties.$screen_width < properties.$screen_height` HogQL expression as a filter</Caption>
+<Caption>Using a properties.$screen_width < properties.$screen_height HogQL expression as a filter</Caption>
 
 Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple properties!
 
@@ -62,7 +62,7 @@ Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple p
 ## HogQL aggregations
 
 ![HogQL aggregations](../images/blog/array/hog_aggregate.mp4)
-<Caption>Using a `properties.$session_id` HogQL expression to aggregate by unique sessions</Caption>
+<Caption>Using a properties.$session_id HogQL expression to aggregate by unique sessions</Caption>
 
 _And_ you can use HogQL to aggregate results in a funnel too. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
 
