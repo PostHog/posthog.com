@@ -96,7 +96,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                             </Link>
                         </div>
 
-                        <div className="pb-4 mb-4 border-b border-dashed border-gray-accent-dark">
+                        <div className="pb-4 mb-4">
                             <input
                                 className="w-full m-0 font-normal text-sm text-primary-dark/60 border-none p-0 bg-transparent focus:ring-0"
                                 type="text"

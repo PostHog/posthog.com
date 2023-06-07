@@ -993,20 +993,6 @@ body.dark {
     }
 }
 
-.home-product-analytics-features {
-    @media (min-width: 768px) {
-        > li:nth-of-type(2),
-        > li:nth-of-type(5) {
-            @apply border-l border-r border-dashed border-gray-accent-light;
-        }
-        > li:nth-of-type(1),
-        > li:nth-of-type(2),
-        > li:nth-of-type(3) {
-            @apply border-b border-dashed border-gray-accent-light;
-        }
-    }
-}
-
 .docsearch-no-label {
     @apply -mr-3;
     .DocSearch-Button-Keys {

@@ -122,7 +122,7 @@ export const QuestionsTable = ({
                 <div className="hidden xl:block xl:col-span-3">{sortBy === 'activity' ? 'Last active' : 'Created'}</div>
             </li>
             {pinnedQuestions?.data?.length > 0 ? (
-                <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none bg-gray-accent-light dark:bg-gray-accent-dark">
+                <li className="list-none">
                     {pinnedQuestions.data.filter(Boolean).map((question) => {
                         return (
                             <Row
@@ -140,7 +140,7 @@ export const QuestionsTable = ({
                     })}
                 </li>
             ) : null}
-            <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none">
+            <li className="list-none">
                 {questions.data.length > 0
                     ? questions.data.filter(Boolean).map((question) => {
                           return (
