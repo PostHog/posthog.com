@@ -12,6 +12,7 @@ import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
 import { LPCTA } from './components/LPCTA'
 import { Label } from './components/Label'
+import { NewIcons } from './components/NewIcons'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
@@ -36,6 +37,7 @@ export const shortcodes = {
     HubSpotForm,
     LPCTA,
     Label,
+    NewIcons,
     NewsletterTutorial,
     OverflowXSection,
     Quote,
