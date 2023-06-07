@@ -12,17 +12,17 @@ HogQL enables custom series aggregations. This enables you to customize the data
 
 ## The basics of sum()
 
-Sum is simple, it calculates the sum of the numbers it is provided. In its most basic form, we can use this to sum event properties (or nested one). For example, to sum your revenue, chose your payment event, then sum the amount paid property. The HogQL expression for this is `sum(properties.amount_paid)`
+Sum is simple: it calculates the sum of the numbers it is provided. In its simplest form, we can use it to sum event properties (or nested ones). For example, to sum your revenue, chose your payment event, then sum the `amount_paid` property. The HogQL expression for this is `sum(properties.amount_paid)`
 
 ![Sum](../images/tutorials/hogql-sum-aggregation/sum.png)
 
-> **Note:** sum only works for numbers, you can use `toInt()` to convert any strings to numbers.
+> **Note:** Sum only works for numbers. You can use `toInt()` to convert any strings to numbers.
 
-## Basic conditional sum
+## Conditional sums with `sumIf`
 
-Sum gets more interesting when we use it with conditions. A way to think about this is that "Total count" (or`count()` in HogQL) is just `sumIf(1, true)`. 
+Sum gets more interesting when we use it with conditions. This lets us sum occurrences of properties, properties that match criteria, and more. 
 
-From this, we can create sums that meet certain conditions. For example, if we wanted a count of events during the current month, we could do:
+For example, if we wanted a count of events during the current month, we could do:
 
 ```
 sumIf(
@@ -31,13 +31,12 @@ sumIf(
 )
 ```
 
-This lets us sum occurrences of properties, properties that match criteria, and more.
 
 ## Scoring criteria
 
-A more creative way to use `sumIf()`  is to give different weights to different values. 
+A more creative way to use `sumIf()` is to give different weights to different values. 
 
-For example, if you wanted to rank sign up events based on specific criteria, you could use a chain of  `sumIf` and different values for different properties. For example, we can sum the `user signed up` event, and give:
+For example, if you wanted to rank sign up events based on specific criteria, you could use a chain of `sumIf` and different values for different properties. For example, you could sum the `user signed up` event like this:
 
 - 10 points for `is_organization_first_user`
 - 5 for `realm = ‘cloud’`
@@ -62,11 +61,11 @@ When we breakdown by `person_id`, this gives us a list of users with the highest
 
 ![Score](../images/tutorials/hogql-sum-aggregation/score.png)
 
-> **Note:** person properties can’t be used with HogQL expression series, only event properties.
+> **Note:** [Person properties](/docs/getting-started/user-properties) can’t be used with HogQL expression series, only event properties.
 
-## Sum to percentages
+## Sum with percentages
 
-Sum provides more options for percentages, because we can access both the total sum and a subset in the same series. This enables us to create percentage series.
+Using sum, you can access both the total sum and a subset of the same series. This enables powerful options for working with percentages and creating percentage-based series.
 
 For example, if you wanted to compare the percentages of Chrome vs Safari, you can create a series where your divide the Safari pageviews by the total Safari and Chrome pageviews. 
 
