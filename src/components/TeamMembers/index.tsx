@@ -9,8 +9,14 @@ export default function TeamMembers({ team }: { team: string }) {
         team: { nodes },
     } = useStaticQuery(query)
     const teamMembers = nodes
-        .filter((node) => node?.frontmatter?.team?.some((teamName) => teamName === team))
-        .sort((l, r) => (l.frontmatter.teamLead?.includes(team) ? -1 : r.frontmatter.teamLead?.includes(team) ? 1 : 0))
+        .filter((node) => node?.teams?.data?.some(({ attributes: { name: teamName } }) => teamName === team))
+        .sort((l, r) =>
+            l.leadTeams?.data?.some(({ attributes: { name: teamName } }) => teamName === team)
+                ? -1
+                : r.leadTeams?.data?.some(({ attributes: { name: teamName } }) => teamName === team)
+                ? 1
+                : 0
+        )
     if (!teamMembers || teamMembers.length <= 0) return null
 
     return (
@@ -18,11 +24,19 @@ export default function TeamMembers({ team }: { team: string }) {
             <h4>Team members</h4>
             <ul className="list-none m-0 p-0 grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                 {teamMembers.map((member) => {
-                    const { name, headshot, jobTitle, teamLead, country } = member?.frontmatter
+                    const {
+                        firstName,
+                        lastName,
+                        avatar: { url: avatar },
+                        companyRole,
+                        leadTeams,
+                        country,
+                    } = member
+                    const name = [firstName, lastName].filter(Boolean).join(' ')
                     return (
                         <li className="!m-0 flex space-x-4 items-center py-4" key={name}>
                             <figure className="mb-0">
-                                <ContributorImage image={getImage(headshot)} />
+                                <ContributorImage image={avatar} />
                             </figure>
                             <div>
                                 <span className="flex items-center md:flex-row space-x-2">
@@ -36,13 +50,15 @@ export default function TeamMembers({ team }: { team: string }) {
                                             )}
                                         </span>
                                     )}
-                                    {teamLead?.includes(team) && (
+                                    {leadTeams?.data?.some(
+                                        ({ attributes: { name: teamName } }) => teamName === team
+                                    ) && (
                                         <span className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white">
                                             Team lead
                                         </span>
                                     )}
                                 </span>
-                                <p className="!text-sm !mb-0 opacity-50 !leading-none !mt-1">{jobTitle}</p>
+                                <p className="!text-sm !mb-0 opacity-50 !leading-none !mt-1">{companyRole}</p>
                             </div>
                         </li>
                     )
@@ -54,20 +70,32 @@ export default function TeamMembers({ team }: { team: string }) {
 
 const query = graphql`
     query {
-        team: allMdx(filter: { fields: { slug: { regex: "/^/team/" } } }, sort: { fields: frontmatter___startDate }) {
+        team: allSqueakProfile(
+            filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
+            sort: { fields: startDate, order: ASC }
+        ) {
             nodes {
-                frontmatter {
-                    headshot {
-                        childImageSharp {
-                            gatsbyImageData
+                avatar {
+                    url
+                }
+                teams {
+                    data {
+                        attributes {
+                            name
                         }
                     }
-                    team
-                    jobTitle
-                    name
-                    country
-                    github
-                    teamLead
+                }
+                companyRole
+                firstName
+                lastName
+                country
+                github
+                leadTeams {
+                    data {
+                        attributes {
+                            name
+                        }
+                    }
                 }
             }
         }

@@ -37,6 +37,7 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
             ],
         },
         populate: {
+            pinnedTopics: true,
             topics: true,
             profile: {
                 fields: ['firstName', 'lastName', 'gravatarURL'],

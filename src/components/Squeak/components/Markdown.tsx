@@ -19,7 +19,7 @@ export const Markdown = ({
             allowedElements={allowedElements}
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
-            className="flex-1 !text-sm overflow-hidden text-ellipsis squeak-post-markdown !pb-0 opacity-75 font-normal"
+            className="flex-1 !text-sm overflow-hidden text-ellipsis community-post-markdown !pb-0 text-primary/75 dark:text-primary-dark/75 font-normal"
             components={{
                 pre: ({ children }) => {
                     return (
@@ -30,7 +30,7 @@ export const Markdown = ({
                                 language={'js' as Language}
                             >
                                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                                    <pre className={className} style={style}>
+                                    <pre className={`${className} whitespace-pre-wrap`} style={style}>
                                         {tokens.map((line, i) => (
                                             <div key={i} {...getLineProps({ line, key: i })}>
                                                 {line.map((token, key) => (

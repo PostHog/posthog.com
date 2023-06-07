@@ -98,7 +98,7 @@ What can we learn from this process?
 
 2. Give users a simple way to provide feedback, like a Google Form, a feedback box, or even direct messages.
 
-Y3. ou might not be able to copy Discover Weekly’s outcome, but you can copy the process. A path towards success is building lots of ideas, A/B testing and measuring them, and working on the ones that drive results.
+3. You might not be able to copy Discover Weekly’s outcome, but you can copy the process. A path towards success is building lots of ideas, A/B testing and measuring them, and working on the ones that drive results.
 
 ## 📚 Further reading on building successful features
 

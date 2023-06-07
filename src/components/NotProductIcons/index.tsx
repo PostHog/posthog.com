@@ -332,6 +332,29 @@ export const Mask = ({ className = '', ...other }: { className?: string }): JSX.
     </svg>
 )
 
+export const Megaphone = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        className={`fill-current ${className}`}
+        {...other}
+    >
+        <g clipPath="url(#a)">
+            <path
+                fill="#000"
+                d="m15.049 2.228 5.399 9.351a1.587 1.587 0 1 1-2.75 1.588l-5.4-9.351a1.588 1.588 0 1 1 2.75-1.588Zm1.523 11.53-2.608.586a2.538 2.538 0 0 1-.973 3.374l-.55.318.952 1.65a1.906 1.906 0 0 1-3.3 1.905l-3.176-5.5-1.1.635a2.541 2.541 0 0 1-2.54-4.4l1.572-.909 6.375-6.922 5.348 9.263Zm-3.896.874-1.948.438 1.077 1.866.55-.318a1.272 1.272 0 0 0 .465-1.735l-.144-.25Z"
+            />
+        </g>
+        <defs>
+            <clipPath id="a">
+                <path fill="#fff" d="M0 0h24v24H0z" />
+            </clipPath>
+        </defs>
+    </svg>
+)
+
 export const More = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"
@@ -539,6 +562,24 @@ export const SDK = ({ className = '', ...other }: { className?: string }): JSX.E
         />
     </svg>
 )
+
+export const SparksJoy = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        className={`fill-current ${className}`}
+        {...other}
+    >
+        <path
+            fill="#000"
+            d="M21.923 9.925a.715.715 0 0 1-.76.388l-3.075-.497a.098.098 0 0 0-.103.05l-1.415 2.778h.001a.71.71 0 0 1-.641.393.655.655 0 0 1-.116 0 .713.713 0 0 1-.604-.6l-.487-3.077a.095.095 0 0 0-.082-.082l-3.078-.488a.726.726 0 0 1-.216-1.361l2.775-1.414a.095.095 0 0 0 .053-.103l-.488-3.075a.725.725 0 0 1 1.23-.625l2.188 2.19h.001a.1.1 0 0 0 .112.018L20 3.004v-.001a.724.724 0 0 1 .973.973l-1.416 2.78h-.001a.097.097 0 0 0 .019.113l2.19 2.19a.712.712 0 0 1 .159.866ZM3.984 5.415a.477.477 0 0 1 .254-.504l1.02-.516-.18-1.132a.476.476 0 0 1 .81-.413l.807.81 1.023-.52h.001a.474.474 0 0 1 .64.642L7.84 4.811l.81.807h.001a.48.48 0 0 1 .087.557.473.473 0 0 1-.5.253L7.106 6.25 6.59 7.27a.48.48 0 0 1-.426.26.418.418 0 0 1-.079 0 .48.48 0 0 1-.397-.398L5.51 6.003 4.38 5.812a.478.478 0 0 1-.397-.397ZM20.618 18.046a.472.472 0 0 1-.5.256l-1.132-.179-.52 1.02a.48.48 0 0 1-.425.26h-.075a.48.48 0 0 1-.397-.397l-.179-1.13-1.132-.18a.48.48 0 0 1-.14-.898l1.019-.52-.178-1.144a.479.479 0 0 1 .81-.413l.795.819 1.023-.523a.48.48 0 0 1 .625.645l-.49 1.035.81.81c.139.143.174.358.086.539Z"
+        />
+        <path fill="#000" d="M14.44 11.59 4.432 21.598a1.436 1.436 0 0 1-2.03-2.03l10.01-10.01 1.755.275.275 1.755Z" />
+    </svg>
+)
+
 export const SplitTesting = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"
@@ -786,5 +827,11 @@ export const Video = ({ className = '', ...other }: { className?: string }): JSX
                 <path fill="#fff" d="M3 3h18v18H3z" />
             </clipPath>
         </defs>
+    </svg>
+)
+
+export const Pin = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg {...other} className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M18 3V5H17V11L19 14V16H13V23H11V16H5V14L7 11V5H6V3H18Z"></path>
     </svg>
 )
