@@ -266,7 +266,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
 
                             <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
                                 <div className="mb-3">
-                                    <h4 className="font-bold mb-0">Popular pipelines</h4>
+                                    <h4 className="font-bold mb-0">Popular data connections</h4>
                                     <p className="text-sm text-gray">Import, transform, and export data</p>
                                 </div>
                                 <ul className="grid sm:grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
@@ -354,7 +354,7 @@ export const query = graphql`
             }
         }
         pipelines: allMdx(
-            filter: { slug: { regex: "/^docs/pipelines/(?!build)\\w+/" } }
+            filter: { slug: { regex: "/^docs/cdp/(?!build)\\w+/" } }
             sort: { fields: fields___pageViews, order: DESC }
             limit: 6
         ) {
