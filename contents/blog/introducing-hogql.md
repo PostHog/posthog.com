@@ -68,6 +68,7 @@ Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple p
 _And_ you can use HogQL to aggregate results in a funnel too. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
 
 ## SQL insights
+
 ![PostHog SQL insights](../images/features/hogql/pinepple_sql.gif)
 <Caption>Using an SQL insight to run the query below</Caption>
 
