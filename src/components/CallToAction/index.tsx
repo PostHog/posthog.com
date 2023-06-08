@@ -4,24 +4,17 @@ import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const sizes = {
-    xs: 'text-sm font-bold px-4 py-2',
-    sm: 'text-sm font-bold px-6 py-2.5',
-    md: 'text-base font-bold px-5 py-3',
-    lg: 'text-base font-bold px-6 py-3',
+    xs: 'text-sm font-bold px-4 py-2 border-2 border-b-3',
+    sm: 'text-sm font-bold px-5 py-2.5 border-2 border-b-3',
+    md: 'text-[15px] font-bold px-5 py-2 border-2 border-b-3',
+    lg: 'text-base font-bold px-5 py-2  border-2 border-b-4',
 }
 
 const primary = cntl`
     border-yellow
-    border-2
     text-primary
-    dark:text-white
-    hover:text-white
-    hover:dark:text-white
-    hover:bg-red-hover
-    hover:border-red-hover
-    active:bg-red-active
-    active:border-red-active
-    dark:primary-dark
+    dark:text-primary-dark
+    hover:dark:text-primary-dark
 `
 
 const secondary = cntl`
@@ -31,7 +24,8 @@ const secondary = cntl`
     border-text-primary
     dark:border-white
     border-2
-    text-primary-dark
+    text-primary
+    dark:text-primary-dark
 `
 
 const outline = cntl`
