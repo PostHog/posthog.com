@@ -10,14 +10,26 @@ import {
     Ruby,
 } from 'components/Icons/Icons'
 import {
+    Badge,
+    Brackets,
     Clock,
-    Pulse,
+    Columns,
+    Download,
+    Filter,
     Funnels,
+    Gear,
+    GridMasonry,
+    Lifecycle,
     Trends,
     Stickiness,
-    Lifecycle,
+    Pulse,
     Retention,
+    Rewind,
+    People,
+    Share,
+    Target,
     Terminal,
+    TestTube,
     UserPaths,
 } from 'components/NewIcons'
 import Link from 'components/Link'
@@ -63,10 +75,10 @@ const ImageContainer = ({ children, className = '' }) => {
 
 const FeatureList = ({ features }) => {
     return (
-        <ul className="list-none m-0 p-0 space-y-2 lg:mt-2 mr-8 lg:mr-3">
+        <ul className="list-none m-0 p-0 space-y-2 lg:mt-2 pt-2 pb-4">
             {features.map(({ title, Icon }) => {
                 return (
-                    <li key={title} className="flex gap-4 items-center">
+                    <li key={title} className="flex gap-2 items-center text-[15px]">
                         <span className="inline-flex p-2 rounded-sm bg-dark/10">
                             <Icon className="w-6" />
                         </span>
@@ -114,14 +126,6 @@ export const ProductAnalytics = () => {
                     <CTA url="/product-analytics" title="Explore" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="hidden md:block mb-3">
-                        <hr className="w-[20px] h-[3px] rounded-full" />
-                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
-                            Compare to <Link to="/blog/posthog-vs-amplitude">Amplitude</Link>,{' '}
-                            <Link to="/blog/why-i-ditched-google-analytics-for-posthog">Google Analytics</Link>,{' '}
-                            <Link to="/blog/posthog-vs-matomo">Matomo</Link>
-                        </div>
-                    </div>
                     <div className="md:relative w-3/4">
                         <div className="absolute -bottom-2 right-0">
                             <motion.div
@@ -145,14 +149,14 @@ export const ProductAnalytics = () => {
     )
 }
 
-export const SessionRecording = () => {
+export const SessionReplay = () => {
     const features = [
         { title: 'Event timeline', Icon: Clock },
         { title: 'Console logs', Icon: Terminal },
         { title: 'Network requests', Icon: Pulse },
     ]
     return (
-        <div className="relative grid grid-cols-2 md:gap-7 pt-5">
+        <div className="bg-[#F2AD46] text-primary relative grid grid-cols-2 md:gap-7 pt-5">
             <ImageContainer className="md:px-8 pt-4 pb-3">
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -174,9 +178,9 @@ export const SessionRecording = () => {
             <ContentContainer>
                 <Content>
                     <Title title={'Session replay'} />
-                    <Subtitle subtitle="with console logs" />
-                    <Description description="Watch a group of sessions for users in a cohort." />
+                    <Description description="Watch users interacting with your app or website. Available for web and iOS.*" />
                     <FeatureList features={features} />
+                    <p className="text-sm">*Android coming soon</p>
 
                     <CTA url="/session-replay" title="Explore" />
                 </Content>
@@ -211,8 +215,13 @@ export const SessionRecording = () => {
 }
 
 export const FeatureFlags = () => {
+    const features = [
+        { title: 'Multivariate flags', Icon: TestTube },
+        { title: 'JSON payloads', Icon: Brackets },
+        { title: 'Instant rollbacks', Icon: Rewind },
+    ]
     return (
-        <div className="relative grid grid-cols-2 gap-7 pt-5">
+        <div className="bg-[#29DBBB] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded">
             <ImageContainer className="h-[40vw] md:h-[300px] xl:h-[400px] md:ml-4">
                 <motion.div
                     transition={{ delay: 0.2 }}
@@ -246,8 +255,9 @@ export const FeatureFlags = () => {
             <ContentContainer>
                 <Content>
                     <Title title={'Feature flags'} />
-                    <Subtitle className="text-[14px] md:text-[18px]" subtitle="with multivariate testing" />
-                    <Description description="Roll out features to groups or specific users." />
+                    <Subtitle className="text-[14px] md:text-[18px]" />
+                    <Description description="Safely roll out features to select users or cohorts." />
+                    <FeatureList features={features} />
 
                     <CTA url="/feature-flags" title="See how it works" />
                 </Content>
@@ -283,12 +293,13 @@ export const FeatureFlags = () => {
 
 export const ABTesting = () => {
     const features = [
-        { title: 'Experimentation Suite', Icon: Experimentation },
-        { title: 'Correlation Analysis', Icon: DiagonalArrow },
+        { title: 'Goals & secondary metrics', Icon: Badge },
+        { title: 'Targeting & exclusion rules ', Icon: Target },
+        { title: 'Dynamic cohort support', Icon: People },
     ]
 
     return (
-        <div className="relative grid grid-cols-2 gap-7 pt-5">
+        <div className="bg-[#9C19BD] text-primary-dark relative grid grid-cols-2 gap-7 pt-5 rounded">
             <ImageContainer className="md:ml-4">
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -324,7 +335,7 @@ export const ABTesting = () => {
             <ContentContainer>
                 <Content>
                     <Title title={'A/B testing'} />
-                    <Subtitle subtitle="with multivariate testing" />
+                    <Description description={'Run tests with statistical significance.'} />
                     <FeatureList features={features} />
                     <CTA url="/ab-testing" title="See how it works" />
                 </Content>
@@ -358,7 +369,13 @@ export const ABTesting = () => {
     )
 }
 
-export const EventPipelines = () => {
+export const Cdp = () => {
+    const features = [
+        { title: 'Sources', Icon: Download },
+        { title: 'Destinations', Icon: Share },
+        { title: 'Transformations', Icon: Gear },
+    ]
+
     const data = [
         { Icon: JS, url: '/docs/integrate/client/js' },
         { Icon: ReactIcon, url: '/docs/integrate/client/react-native' },
@@ -369,7 +386,7 @@ export const EventPipelines = () => {
     ]
 
     return (
-        <div className="relative grid grid-cols-2 gap-7 pt-5">
+        <div className="bg-[#FCC779] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded">
             <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -389,18 +406,13 @@ export const EventPipelines = () => {
             </ImageContainer>
             <ContentContainer>
                 <Content>
-                    <Title title={'Event pipelines'} />
-                    <Subtitle subtitle="Enrich customer profiles in sales and marketing clouds with event data you send to PostHog." />
+                    <Title title={'Customer data platform'} />
+                    <Description description="60+ data connections available now. Full CDP coming soon." />
+                    <FeatureList features={features} />
+
                     <CTA url="/docs/integrations" title="Browse destinations" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="hidden md:block mb-3 flex-grow">
-                        <hr className="w-[20px] h-[3px] rounded-full" />
-                        <p className="text-[14px] m-0">Use another service?</p>
-                        <Link className="text-[14px]" to="/docs/apps/build">
-                            Build an app connector
-                        </Link>
-                    </div>
                     <div className="md:relative w-3/4">
                         <div className="absolute bottom-0 right-0">
                             <motion.div
@@ -426,7 +438,7 @@ export const EventPipelines = () => {
 
 export const DataWarehouse = () => {
     return (
-        <div className="relative grid grid-cols-2 gap-7 pt-5">
+        <div className="bg-[#29DBBB] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded">
             <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -447,8 +459,11 @@ export const DataWarehouse = () => {
             <ContentContainer>
                 <Content>
                     <Title title={'Data warehouse'} />
-                    <Subtitle className="text-[14px] md:text-[18px]" subtitle="Sync with your warehouse." />
-                    <Description description="PostHog syncs easily with BigQuery, Snowflake, or Redshift via API." />
+                    <Subtitle
+                        className="text-[14px] md:text-[18px]"
+                        subtitle="Full data warehouse product coming soon."
+                    />
+                    <Description description="Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API." />
 
                     <CTA url="/docs/api" title="Explore what you can do" />
                 </Content>
@@ -474,9 +489,15 @@ export const DataWarehouse = () => {
     )
 }
 
-export const SelfHosting = () => {
+export const Sql = () => {
+    const features = [
+        { title: 'Breakdowns', Icon: Columns },
+        { title: 'Filters', Icon: Filter },
+        { title: 'Aggregations', Icon: GridMasonry },
+    ]
+
     return (
-        <div className="relative grid grid-cols-2 gap-7 pt-5">
+        <div className="bg-[#940DB6] text-primary-dark relative grid grid-cols-2 gap-7 pt-5 rounded">
             <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -496,12 +517,56 @@ export const SelfHosting = () => {
             </ImageContainer>
             <ContentContainer>
                 <Content>
-                    <Title title={'Open source'} />
-                    <Subtitle className="text-[14px] md:text-[18px]" subtitle="Get full access to source code." />
-                    <p className="text-[16px] m-0 leading-tight text-primary/70">
-                        Audit the entire PostHog codebase for security or compliance on{' '}
-                        <a href="https://github.com/posthog/posthog">GitHub</a>. Or host your own hobby deployment.
-                    </p>
+                    <Title title={'SQL'} />
+                    <Subtitle
+                        className="text-[14px] md:text-[18px]"
+                        subtitle="Directly query data stored in PostHog via SQL."
+                    />
+                    <FeatureList features={features} />
+
+                    <CTA url="/docs/self-host" title="Learn more about self-hosting" />
+                </Content>
+                <div className="flex items-end mt-auto w-full">
+                    <div className="md:relative w-3/4">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateY: '100%' }}
+                            animate={{ translateY: 0 }}
+                        ></motion.div>
+                    </div>
+                </div>
+            </ContentContainer>
+        </div>
+    )
+}
+
+export const Api = () => {
+    return (
+        <div className="bg-[#EB9D2A] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded">
+            <ImageContainer>
+                <motion.div
+                    transition={{ delay: 0.4 }}
+                    className="h-full"
+                    initial={{ translateY: '100%' }}
+                    animate={{ translateY: 0 }}
+                >
+                    <StaticImage
+                        alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
+                        placeholder="none"
+                        quality={100}
+                        objectFit="contain"
+                        className="w-full h-full"
+                        src="./images/open-source.png"
+                    />
+                </motion.div>
+            </ImageContainer>
+            <ContentContainer>
+                <Content>
+                    <Title title={'API'} />
+                    <Subtitle
+                        className="text-[14px] md:text-[18px]"
+                        subtitle="Build custom functionality or create bespoke views specific to your business needs."
+                    />
 
                     <CTA url="/docs/self-host" title="Learn more about self-hosting" />
                 </Content>

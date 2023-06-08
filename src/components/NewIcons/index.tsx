@@ -716,7 +716,6 @@ export const RewindPlay = ({ className = '', ...other }: { className?: string })
     <svg
         width="100%"
         className={`fill-current ${className}`}
-        fill="none"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         {...other}

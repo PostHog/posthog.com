@@ -117,7 +117,12 @@ module.exports = {
                 border: '#D0D1C9',
                 'border-dark': '#4A4C52',
 
-                orange: '#EF7632',
+                blue: '#2F80FA',
+                orange: '#EB9D2A',
+                teal: '#29DBBB',
+                purple: '#B62AD9',
+                seagreen: '#30ABC6',
+
                 yellow: '#F7A501',
                 'light-yellow': '#F1A82C',
                 tan: '#EEEFE9',
@@ -126,7 +131,6 @@ module.exports = {
                 'gray-accent-dark': '#2C2C2C',
                 'gray-accent-light': '#BFBFBC',
                 red: '#F54E00',
-                blue: '#1D4AFF',
                 green: '#6AA84F',
             },
             minHeight: {
