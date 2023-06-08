@@ -109,3 +109,13 @@ w-64
 w-72
 w-full
 w-[(100%_+_4rem)]
+text-blue
+text-teal
+text-seagreen
+text-purple
+text-salmon
+border-blue
+border-teal
+border-seagreen
+border-purple
+border-salmon

@@ -1,23 +1,24 @@
 {
     "main": [
         {
-            "title": "Products",
-            "url": "/product-analytics"
+            "name": "Products",
+            "url": "/product-analytics",
+            "children": [{}]
         },
         {
-            "title": "Pricing",
+            "name": "Pricing",
             "url": "/pricing"
         },
         {
-            "title": "Docs",
+            "name": "Docs",
             "url": "/docs"
         },
         {
-            "title": "Community",
+            "name": "Community",
             "url": "/questions"
         },
         {
-            "title": "Company",
+            "name": "Company",
             "url": "/about"
         }
     ]

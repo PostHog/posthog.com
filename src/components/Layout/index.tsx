@@ -4,13 +4,12 @@ import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
 import usePostHog from '../../hooks/usePostHog'
 import { SearchProvider } from 'components/Search/SearchContext'
-import { UserProvider } from 'hooks/useUser'
-import { SWRConfig } from 'swr'
 
 import './Fonts.scss'
 import './Layout.scss'
 import './SkeletonLoading.css'
 import './DarkMode.scss'
+import { LayoutProvider } from './context'
 
 const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
     const posthog = usePostHog()
@@ -23,12 +22,14 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <SearchProvider>
-            <div className={className}>
-                <Header />
-                <main>{children}</main>
-                <Footer />
-                <CookieBanner />
-            </div>
+            <LayoutProvider>
+                <div className={className}>
+                    <Header />
+                    <main>{children}</main>
+                    <Footer />
+                    <CookieBanner />
+                </div>
+            </LayoutProvider>
         </SearchProvider>
     )
 }
