@@ -22,7 +22,7 @@ You can use HogQL expressions to, among other things, enhance insights, filter e
 
 PostHog's existing insights are already incredibly powerful. HogQL turns insights Super Saiyan.
 
-HogQL is free for all users while in public beta – all we ask is that you [share your feedback with us](http://app.posthog.com/home#supportModal).
+HogQL is free for all users of PostHog Cloud while in public beta – all we ask is that you [share your feedback with us](http://app.posthog.com/home#supportModal).
 
 ## What is HogQL?
 
