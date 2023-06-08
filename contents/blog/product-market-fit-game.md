@@ -13,7 +13,9 @@ tags:
   - Guides
 ---
 
-In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. Knowing when you've found it is easy – there's no shortage of descriptions of how it _feels_ to have product-market fit. _How_ you find it is much harder, hence this guide.
+In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. 
+
+Knowing when you've found it is easy – there's no shortage of descriptions of how it _feels_ to have product-market fit. _How_ you find it is much harder, hence this guide.
 
 To me, finding product-market fit is a bit like playing [snakes and ladders](https://en.wikipedia.org/wiki/Snakes_and_ladders). There are numerous traps, winning takes a little luck, and the only certainty is it's never a straight line to the finish.  
 
@@ -31,7 +33,7 @@ Finding product-market fit is a game, and games have levels. My product-market f
 
 You need to complete all five levels to win. All but the first have multiple failure modes, which I've listed – go through them sequentially. You might find you cannot complete a level. This is a sign you need to pivot your entire company. I touch on this at the end.
 
-Remember to keep detailed notes on all the conversations you have with potential / actual customers at each level. You may want to come back to a detail that didn't seem important at the time, and your notes may be useful for a different idea later. At PostHog, we built a Google Doc over 100 pages long in the first few weeks.
+Remember to keep detailed notes on all the conversations you have with potential / actual customers at each level. You may want to come back to a detail, and your notes may be useful for a different idea later. At PostHog, we built a Google Doc over 100 pages long in the first few weeks.
 
 Let's press start...
 
@@ -47,7 +49,7 @@ Here are some pointers:
 
 - **Pursue ideas for users you want to work with.** Early in PostHog's life, we worked on a tool for sales leaders. We quickly grew frustrated at extroverted people who were positive on calls, but didn't follow through on promises. We switched to ideas for customer support or engineers, who we felt would be more reliable.
 
-- **Known problems are easier to validate,** but your solution must be very different. If you want to build a venture scale business then, in the long run, your solution must be 10x better, or 10x cheaper, than the existing solutions for significant numbers of people to use and/or pay for it.
+- **Known problems are easier to validate,** but your solution must be very different. If you want to build a venture-scale business, your solution must be 10x better, or 10x cheaper, than the existing solutions.
 
 - **Be careful when validating problems no one else has worked on.** Maybe you see something others are missing, but it's more likely the problem isn't important.
 
@@ -109,7 +111,7 @@ Work your way from top to bottom:
 
 * **You aren't working hard enough.** Realize no one else is going to do this for you. Set a goal for how many meetings you want to get. I got 2 meetings a day, 5 days a week while doing any other random tasks, like building a website. Try to meet in person if you can afford to do so – most communication is non-verbal, so it'll make it easier to learn what people are thinking. Move to a hub for your industry if you can. Also consider moving in with your co-founder, so you can focus 100% on the work for this intense period. Running out of momentum is your biggest risk.
 
-* **You can't clearly describe the problem,** making it hard to recruit users to validate it. Create a simple, single sentence description of the problem you think you're solving (ahead of doing the same for the _product_ you eventually build), and the user you are targeting. If what you're working on feels vague, you'll get a lukewarm response to your messages trying to book meetings. Do not use benefits-language here – users won't have the attention span to figure out what your product does. We were working on "open source product analytics", so people could "self-host their product analytics". We were not, for example, "helping engineers build better products", "providing a product optimization system" or "saving time for data analysts".
+* **You can't clearly describe the problem,** making it hard to recruit users to validate it. Create a simple, single sentence description of the problem you think you're solving, and the user you are targeting. You'll get a lukewarm response if what you're working on feels vague. Do not use benefits-language here. Users won't have the attention span to figure out what your product does. We were working on "open source product analytics", so people could "self-host their product analytics". We were't "helping engineers build better products", "providing a product optimization system" or "saving time for data analysts".
 
 * **You are talking to the wrong users.** If so, no one will take calls, or if they do, they don't have your problem. Ask yourself – why did you have this problem, but those speaking to you don't? When you do get calls, ask who would have this problem. Change the user you are targeting.
 
@@ -232,7 +234,7 @@ Now you're likely at product market fit - it should just feel easy to grow. If n
 
 #### Failure modes
 
-* **You outsource sales to someone else.** Achieving product-market fit is already a multivariate problem, so avoid adding an additional "is it the product, or the person selling it?" variable. Realistically, a founder is, regardless of experience, _the_ best person in the world to sell the product they made. Founders outsource or skip this step for various reasons (e.g. fear of failure, lack of confidence, laziness, or ego), but you must resist these. Having a valid business model is critical _and_ getting there may require lots of iteration on product, pricing, positioning and so on. A founder can change all of these things more quickly and easily than an employee.
+* **You outsource sales to someone else.** Achieving product-market fit is already a multivariate problem, so avoid adding an additional "is it the product, or the person selling it?" variable. Realistically, a founder is, regardless of experience, _the_ best person in the world to sell the product they made. Founders outsource or skip this step for various reasons (e.g. fear of failure, lack of confidence, laziness, or ego), but you must resist these. Having a valid business model is critical _and_ getting there may require lots of iteration on product, pricing, positioning, and so on. A founder can change all these things more quickly and easily than an employee.
 
 * **You can't get the first customer.** If people are repeatedly using your product, but not willing to pay – it's either (i) they have a bad problem and wish your product could solve it, but it doesn't or (ii) the problem is there but not very high value. If it's the former, you need to figure out how to make your product solve the problem better. Are you missing a key piece of functionality? Is it just hideously bug, so people resent paying? If the problem is low value, go back to Level 1 – find a new idea to work on.
 
@@ -363,12 +365,12 @@ The five levels of product-market fit should help you work out when you need to 
 
 Getting to product-market fit is hard because it's a multivariate problem. Most of the time, you simply do not know _exactly_ why things are, or are not, working. As a result, you'll (rightly) be filled with doubt in the early days. This is normal.
 
-In hindsight, one of the keys to PostHog achieving product-market fit was the regular downtime Tim and I shared when driving to and from YC dinners a few times each week.
+In hindsight, a vital element of PostHog's success was the regular downtime Tim and I shared when driving to and from YC dinners a few times each week.
 
 Why?
 
 Because the ultimate failure mode is not grasping the big picture. Those hour-long drives without our laptops forced us to reflect. Forced us to step away from the grind and interrogate everything we'd learned so far.
 
-You can't complete the product-market fit game without hard work and persistence. But sometimes you need to pause, look at the map, find your bearings, and choose your next objective. So, every week – make time to reflect.
+You can't complete the product-market fit game without hard work and persistence. But sometimes you need to pause, look at the map, find your bearings, and carefully choose your next objective. So, every week – make time to reflect.
 
 > Thanks for reading. If you found this guide useful, consider [subscribing to our Substack](https://newsletter.posthog.com/) – Product for Engineers. It's all about helping engineers and founders flex their product muscles. We send it every few weeks.
