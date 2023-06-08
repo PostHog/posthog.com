@@ -186,7 +186,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
     }, [])
 
     return (
-        <Layout parent="Docs">
+        <Layout>
             <SEO title="Documentation - PostHog" />
 
             <PostLayout article={false} title={'Docs'} menu={docs} hideSidebar hideSurvey>

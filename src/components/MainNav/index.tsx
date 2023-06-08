@@ -46,7 +46,6 @@ function Tooltip({
 
     useEffect(() => {
         function handleClick(e) {
-            console.log(containerEl?.current?.contains(e.target))
             if (containerEl?.current && !containerEl?.current.contains(e.target)) {
                 setOpen(false)
             }
@@ -96,8 +95,7 @@ function Tooltip({
 
 export default function MainNav() {
     const { open } = useSearch()
-    const { menu, parent } = useLayoutData()
-    const internalMenu = menu.find(({ name }) => name === parent)?.internal
+    const { menu, parent, internalMenu, activeInternalMenu } = useLayoutData()
     return (
         <div>
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-5">
@@ -106,8 +104,9 @@ export default function MainNav() {
                         <Logo color={'white'} className="h-[20px]" />
                     </Link>
                     <ul className="flex list-none m-0 p-0">
-                        {menu.map(({ name, url }) => {
-                            const active = typeof window !== 'undefined' && window.location.pathname === url
+                        {menu.map((menuItem) => {
+                            const active = menuItem === parent
+                            const { name, url } = menuItem
                             return (
                                 <li className="h-full" key={name}>
                                     <Link
@@ -198,15 +197,19 @@ export default function MainNav() {
                 </div>
             </div>
             {internalMenu?.length > 0 && (
-                <ul className="flex justify-center space-x-12 list-none m-0 p-0 py-12">
-                    {internalMenu.map(({ name, Icon }) => {
+                <ul className="flex justify-center space-x-12 list-none m-0 p-0  mb-8 border-b border-light dark:border-dark relative">
+                    {internalMenu.map(({ name, url, Icon }) => {
                         return (
-                            <li className="flex flex-col items-center justify-center space-y-2" key={name}>
-                                <span className="w-6 h-6">
-                                    <Icon />
-                                </span>
-
-                                <span>{name}</span>
+                            <li key={name}>
+                                <Link to={url} className="flex relative pb-5">
+                                    <span className="w-6 h-6 mr-2">
+                                        <Icon />
+                                    </span>
+                                    <span>{name}</span>
+                                    {activeInternalMenu?.name === name && (
+                                        <span className="absolute bottom-0 left-0 w-full border-b dark:border-white border-black rounded-full" />
+                                    )}
+                                </Link>
                             </li>
                         )
                     })}

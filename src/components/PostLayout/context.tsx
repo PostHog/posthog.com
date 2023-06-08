@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { IProps } from './types'
+import { useLayoutData } from 'components/Layout/hooks'
 
 export const Context = createContext<IProps | undefined>(undefined)
 
@@ -20,11 +21,14 @@ export const PostProvider: React.FC<ProviderProps> = ({
         darkMode = true,
         hideSidebar,
         sidebar,
-        menu,
         ...other
     },
     children,
 }) => {
+    const { activeInternalMenu } = useLayoutData()
+
+    const menu = activeInternalMenu?.children
+
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         other.fullWidthContent ||
             hideSidebar ||
