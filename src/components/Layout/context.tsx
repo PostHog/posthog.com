@@ -37,6 +37,7 @@ const menu = [
             {
                 name: 'Getting started',
                 Icon: Flag,
+                color: 'teal',
                 url: '/docs/getting-started/start-here',
                 children: [
                     {
@@ -480,6 +481,7 @@ const menu = [
             {
                 name: 'Product OS',
                 Icon: Stack,
+                color: 'salmon',
                 url: '/docs/data',
                 children: [
                     {
@@ -641,6 +643,7 @@ const menu = [
             {
                 name: 'Product analytics',
                 Icon: Graph,
+                color: 'blue',
                 url: '/docs/product-analytics',
                 children: [
                     {
@@ -723,6 +726,7 @@ const menu = [
             {
                 name: 'Session replay',
                 url: '/docs/session-replay',
+                color: 'yellow',
                 Icon: RewindPlay,
                 children: [
                     {
@@ -765,6 +769,7 @@ const menu = [
             {
                 name: 'Feature flags',
                 Icon: Toggle,
+                color: 'seagreen',
                 url: '/docs/feature-flags',
                 children: [
                     {
@@ -813,6 +818,7 @@ const menu = [
             {
                 name: 'A/B testing',
                 Icon: Flask,
+                color: 'purple',
                 url: '/docs/experiments',
                 children: [
                     {

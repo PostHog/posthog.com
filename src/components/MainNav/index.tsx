@@ -14,6 +14,10 @@ import { usePopper } from 'react-popper'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { useLayoutData } from 'components/Layout/hooks'
 
+const getTailwindClasses = (color: string) => {
+    return { text: `text-${color}`, border: `border-${color}` }
+}
+
 function Tooltip({
     className = '',
     children,
@@ -198,16 +202,25 @@ export default function MainNav() {
             </div>
             {internalMenu?.length > 0 && (
                 <ul className="flex justify-center space-x-12 list-none m-0 p-0  mb-8 border-b border-light dark:border-dark relative">
-                    {internalMenu.map(({ name, url, Icon }) => {
+                    {internalMenu.map(({ name, url, Icon, color }) => {
+                        const active = activeInternalMenu?.name === name
                         return (
                             <li key={name}>
-                                <Link to={url} className="flex relative pb-5">
-                                    <span className="w-6 h-6 mr-2">
+                                <Link to={url} className={`flex relative pb-5`}>
+                                    <span className={`w-6 h-6 mr-2 text-${color}`}>
                                         <Icon />
                                     </span>
-                                    <span>{name}</span>
-                                    {activeInternalMenu?.name === name && (
-                                        <span className="absolute bottom-0 left-0 w-full border-b dark:border-white border-black rounded-full" />
+                                    <span
+                                        className={`text-sm ${
+                                            active ? 'font-bold opacity-100' : 'font-semibold opacity-60'
+                                        }`}
+                                    >
+                                        {name}
+                                    </span>
+                                    {active && (
+                                        <span
+                                            className={`absolute bottom-0 left-0 w-full border-b rounded-full border-${color}`}
+                                        />
                                     )}
                                 </Link>
                             </li>
