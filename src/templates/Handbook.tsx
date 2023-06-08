@@ -259,7 +259,7 @@ export default function Handbook({
                 article
                 image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
             />
-            <Layout>
+            <Layout parent="Docs">
                 <PostLayout
                     searchFilter={searchFilter}
                     title={title}

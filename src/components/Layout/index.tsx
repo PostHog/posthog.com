@@ -11,8 +11,17 @@ import './Fonts.scss'
 import './Layout.scss'
 import './SkeletonLoading.css'
 import './DarkMode.scss'
+import { LayoutProvider } from './context'
 
-const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
+const Layout = ({
+    children,
+    className = '',
+    parent,
+}: {
+    parent?: 'Products' | 'Pricing' | 'Docs' | 'Community' | 'About'
+    children: React.ReactNode
+    className?: string
+}): JSX.Element => {
     const posthog = usePostHog()
 
     useEffect(() => {
@@ -23,12 +32,14 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <SearchProvider>
-            <div className={className}>
-                <Header />
-                <main>{children}</main>
-                <Footer />
-                <CookieBanner />
-            </div>
+            <LayoutProvider parent={parent}>
+                <div className={className}>
+                    <Header />
+                    <main>{children}</main>
+                    <Footer />
+                    <CookieBanner />
+                </div>
+            </LayoutProvider>
         </SearchProvider>
     )
 }
