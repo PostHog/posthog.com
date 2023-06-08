@@ -1,5 +1,5 @@
 ---
-date: 2023-05-16
+date: 2023-06-08
 title: The Product-Market Fit Game
 rootPage: /blog
 sidebar: Blog
@@ -54,8 +54,6 @@ Here are some pointers:
 - **Be wary about building what's trendy.** It's easier to beat unsexy, badly run, non-innovative companies than software companies with VC funding _and_ using the latest technology. Do not be fooled huge fundraises by startups working in these areas: `big funding rounds + press ≠ product-market fit`. In fact, the trendier the space, the less likely a big round means the company is succeeding.[^1]
 
 - **Conservative buyers demand differentiation.** You could probably get someone to try a new social app, but you won't get an enterprise to use an unproven CRM. A rip and replace strategy is harder to execute than a blue ocean strategy. It is easier to sell a product to someone who hasn't got anything in place.
-
-
 
 Many people spend months or years attempting to validate their idea in advance, and make no progress as a result. You will always get more clarity by building something and getting it into users' hands, so don't spend ages at this level.
 
@@ -226,18 +224,23 @@ Now it's to get your first reference customer. This means a customer that pays f
 
 Once you get 5 reference customers, you are _well_ on your way to product market fit. After this:
 
-* repeat your formula to around $1M in ARR, by yourself (I'd advocate for a minimum of $500K if you are confident at sales and everything is feeling easy and repeatable, more than $1M if you are still feeling things are different every time you sell or it's proving tough)
-* then see if other people are successful at following your playbook - try with two other people to reduce the chance it's a person problem, not a product market fit problem.
+* Repeat your formula to around $1M in ARR, by yourself. I'd advocate for a minimum of $500K if you are confident at sales and everything is feeling easy and repeatable, more than $1M if you are still feeling things are different every time you sell or it's proving tough.
+
+* Then see if other people are successful at following your playbook. Try with two other people to reduce the chance it's a person problem, not a product market fit problem.
 
 Now you're likely at product market fit - it should just feel easy to grow. If not, [talk to me](https://twitter.com/james406).
 
 #### Failure modes
 
-* **You outsource sales to someone else.** It is already a multivariate problem trying to get product market fit, don't also add in the question of "is it the product, or the person selling it" by relying on someone else. Realistically, a founder (regardless of the level of experience) is _the_ best person in the world to sell the product they made. Lots of people want to outsource or even skip this step - fear of failure at the final hurdle, a lack of confidence through never having sold before, laziness (it is a painful, hard experience to sell a product) or ego (I've raised a lot of money, this isn't the best use of my time). The reason a founder should focus on this, is that having a valid business model is critical _and_ getting there may require lots of iteration on product, pricing, positioning and so on. A founder can change all of these things more quickly and easily than an employee.
-* **You can't get the first customer** If people are repeatedly using your product, but not willing to pay - it's either (i) they have a bad problem and wish your product could solve it, but it doesn't or (ii) the problem is there but not very high value. If it's the former, you need to figure out how to make your product solve the problem better - are you missing a key piece of functionality? Is it just hideously buggy so people don't really feel like it's making their lives easier and they resent paying? If the problem is low value, go back to Level 1 - find a new idea to work on.
-* **People aren't truly happy but you are managing to get revenue from them** It's likely you have the combination of charging very little but not actually solving the problem - they're paying _something_ out of politness or a hope you'll one day solve their problem. If they aren't happy _and_ are paying a lot, they must have a huge problem and are just hopeful you'll figure it out. In either case, go back to the previous level and try to solve the problem more fully. 
+* **You outsource sales to someone else.** Achieving product-market fit is already a multivariate problem, so avoid adding an additional "is it the product, or the person selling it?" variable. Realistically, a founder is, regardless of experience, _the_ best person in the world to sell the product they made. Founders outsource or skip this step for various reasons (e.g. fear of failure, lack of confidence, laziness, or ego), but you must resist these. Having a valid business model is critical _and_ getting there may require lots of iteration on product, pricing, positioning and so on. A founder can change all of these things more quickly and easily than an employee.
+
+* **You can't get the first customer.** If people are repeatedly using your product, but not willing to pay – it's either (i) they have a bad problem and wish your product could solve it, but it doesn't or (ii) the problem is there but not very high value. If it's the former, you need to figure out how to make your product solve the problem better. Are you missing a key piece of functionality? Is it just hideously bug, so people resent paying? If the problem is low value, go back to Level 1 – find a new idea to work on.
+
+* **People are paying but aren't truly happy.** It's likely you have the combination of charging very little but not actually solving the problem – i.e. they're paying _something_ out of politeness, or a hope you'll one day solve their problem. If they aren't happy _and_ are paying a lot, they must have a huge problem and are just hopeful you'll figure it out. In either case, go back to the previous level and try to solve the problem more fully. 
+
 * **You can't get all five customers to look like each other** Well done on getting something sold. However, you can't sell a different product to every customer and call that product market fit! Can you repeat one of the sales you made four more times? Then you've completed this level. If not, go back a level.
-* **You keep getting stuck on this step** if you repeatedly get a little traction but cannot convert that to revenue, you perhaps don't have the skills to solve the problem you're tackling properly, even if the problem exists. If you _want_ to keep trying again, I suggest you do, but if this has happened a bunch of times, you'll probably have an easier time if you just choose an easier-to-solve problem.
+
+* **You keep getting stuck on this step.** If you repeatedly get a little traction but cannot convert that to revenue, you perhaps don't have the skills to solve the problem you're tackling properly, even if the problem exists. If you _want_ to keep trying again, I suggest you do, but if this has happened a bunch of times, you'll probably have an easier time if you just choose an easier problem.
 
 ## The things you need to complete the game
 
@@ -284,9 +287,7 @@ Website design is probably more important than you think.
 
 When it comes to the website, most people will grab a template to get something thrown together quickly, which is fine at first.
 
-Cory, PostHog's lead designer, and self-proclaimed webmaster, put this really nicely: 
-
-> "We didn't start by thinking we could build the slickest website, so we built one that felt different instead".
+Cory, PostHog's lead designer, and self-proclaimed webmaster, put this really nicely: "We didn't start by thinking we could build the slickest website, so we built one that felt different instead".
 
 When it comes to the product, you want to ship a competent-feeling product, but in most cases, it doesn't need to be best-in-class. I'd argue that your website's design is _more_ important when you're in a phase of trying to get anyone to sign up, since it's probably where you're losing 90% or more of potential signups.
 
@@ -378,4 +379,4 @@ Why?
 
 Because the ultimate failure mode is not grasping the big picture. Those hour-long drives without our laptops forced us to reflect. Forced us to step away from the grind and interrogate everything we'd learned so far.
 
-You can't complete the product-market fit game without hard work and persistence. But sometimes you need to pause, look at the map, find your bearings, and choose your next objective. So, every week - make time to reflect.
+You can't complete the product-market fit game without hard work and persistence. But sometimes you need to pause, look at the map, find your bearings, and choose your next objective. So, every week – make time to reflect.
