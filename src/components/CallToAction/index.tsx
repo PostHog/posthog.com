@@ -4,70 +4,63 @@ import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const sizes = {
-    xs: 'text-sm font-bold',
-    sm: 'text-sm font-bold',
-    md: 'text-[15px] font-bold',
-    lg: 'text-base font-bold',
+    xs: 'text-sm font-bold px-4 py-2',
+    sm: 'text-sm font-bold px-6 py-2.5',
+    md: 'text-base font-bold px-5 py-3',
+    lg: 'text-base font-bold px-6 py-3',
 }
 
 const primary = cntl`
-    bg-button-shadow
-    text-bg-dark
+    bg-yellow
+    !text-white
 `
 
 const secondary = cntl`
-    text-primary
-    border-yellow
-    dark:border-white
-    border-text-primary
-    dark:border-white
-    border-2
-    text-primary
-    dark:text-primary-dark
+    bg-white
+    !text-primary
+    dark:!text-white
+    
 `
 
 const outline = cntl`
-    bg-white
-    border-black/10
-    hover:border-black/30
-    border
-    text-primary
-    hover:text-primary
+    bg-transparent
+    !text-primary
+    dark:!text-white
 `
 
 const buttonTypes = {
     primary,
     secondary,
     outline,
-    custom: '',
 }
 
-export const outerButton = (type: keyof typeof buttonTypes = 'primary', width = 'auto', className = '') => cntl`
-    rounded-md
-    inline-block
-    inline-flex
-    cta
-    relative
-    w-${width}
-    ${buttonTypes[type] || ''}
-    ${className}
-`
-
-export const innerButton = (
+export const button = (
     type: keyof typeof buttonTypes = 'primary',
     width = 'auto',
     className = '',
     size: keyof typeof sizes = 'lg'
-) => cntl`
-    !bg-yellow
-    text-center
-    select-none
+) =>
+    type === 'custom'
+        ? ''
+        : cntl`
     rounded-md
-    text-primary
-    cta
-    px-5 py-2 font-semibold inline-flex -translate-y-1 hover:-translate-y-1.5 active:-translate-y-0.5 active:transition-all
+    shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
+    active:bottom-[-2.5px]
+    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
+    relative
+    after:absolute
+    after:border-[1.5px]
+    after:border-[#B17816]
+    after:w-full
+    active:after:h-[calc(100%+1.5px)]
+    after:h-[calc(100%+4px)]
+    after:inset-0
+    after:rounded-md
+    hover:after:h-[calc(100%+5px)]
+    hover:bottom-[1px]
+    hover:shadow-[0px_3.5px_#CD8407,inset_0px_-2px_#B17816]
     w-${width}
-    ${buttonTypes[type] || ''}
+    ${buttonTypes[type] || ''}    
     ${sizes[size]}
     ${className}
 `
@@ -128,12 +121,12 @@ export const CallToAction = ({
             state={state}
             external={external}
             externalNoIcon={externalNoIcon}
-            className={outerButton(type, width, className)}
+            className={button(type, width, className, size)}
             onClick={onClick}
             to={url}
             event={event}
         >
-            <span className={innerButton(type, width, className, size)}>{children}</span>
+            {children}
         </Link>
     )
 }
