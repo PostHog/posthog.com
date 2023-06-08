@@ -58,6 +58,9 @@ module.exports = {
             dark: '#1D1F27',
             accent: '#E5E7E0',
             'accent-dark': '#202228',
+            border: '#D0D1C9',
+            'border-dark': '#4A4C52',
+
             white: '#fff',
             black: '#000',
             primary: '#151515',
@@ -122,6 +125,7 @@ module.exports = {
                 teal: '#29DBBB',
                 purple: '#B62AD9',
                 seagreen: '#30ABC6',
+                salmon: '#F35454',
 
                 yellow: '#F7A501',
                 'light-yellow': '#F1A82C',

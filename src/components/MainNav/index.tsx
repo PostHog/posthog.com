@@ -4,9 +4,9 @@ import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
-import { Chevron, Search } from 'components/Icons'
-import { Person } from 'components/NotProductIcons'
 import { useSearch } from 'components/Search/SearchContext'
+
+import { App, Brightness, Chat, Search, TextWidth, User } from 'components/NewIcons'
 
 import { Placement } from '@popperjs/core'
 import React, { useEffect, useRef, useState } from 'react'
@@ -19,13 +19,11 @@ function Tooltip({
     content,
     tooltipClassName = '',
     placement = 'bottom',
-    title,
 }: {
     children: JSX.Element
     content: string | ((setOpen: React.Dispatch<React.SetStateAction<boolean>>) => React.ReactNode)
     tooltipClassName?: string
     placement?: Placement
-    title?: string
     className?: string
 }) {
     const [open, setOpen] = useState(false)
@@ -61,7 +59,9 @@ function Tooltip({
             <button
                 ref={setReferenceElement}
                 onClick={() => setOpen(!open)}
-                className={`px-3 py-2 rounded-tr-md rounded-tl-md ${open ? 'dark:bg-[#484848]' : ''}`}
+                className={`my-1 p-2 rounded hover:bg-border dark:hover:bg-border-dark ${
+                    open ? 'rounded-br-none rounded-bl-none bg-border dark:bg-border-dark' : ''
+                }`}
             >
                 {children}
             </button>
@@ -73,16 +73,11 @@ function Tooltip({
                     style={{ ...styles.popper, paddingTop: 0, paddingBottom: 0 }}
                     {...attributes.popper}
                 >
-                    <div className={`rounded-md shadow-lg overflow-hidden ${tooltipClassName}`}>
-                        {title && (
-                            <h5
-                                className={`bg-white text-sm dark:bg-[#484848] text-black dark:text-white px-4 py-2 z-20 m-0 font-semibold`}
-                            >
-                                {title}
-                            </h5>
-                        )}
+                    <div
+                        className={`mt-[-4px] rounded-md border-light dark:border-dark border overflow-hidden ${tooltipClassName}`}
+                    >
                         <div
-                            className={`bg-white dark:bg-gray-accent-dark text-black dark:text-white px-2 py-2 text-sm z-20`}
+                            className={`bg-accent dark:bg-accent-dark text-primary dark:text-primary-dark text-sm z-20`}
                         >
                             {content && (typeof content === 'string' ? content : content(setOpen))}
                         </div>
@@ -142,68 +137,69 @@ export default function MainNav() {
                         )
                     })}
                 </ul>
+
                 <div className="flex items-center justify-end">
-                    <CallToAction size="xs">Get started</CallToAction>
-                    <button className="p-3" onClick={() => open('header')}>
-                        <Search className="opacity-50" />
+                    <CallToAction size="xs" className="mr-2">
+                        Get started
+                    </CallToAction>
+
+                    <button
+                        className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded"
+                        onClick={() => open('header')}
+                    >
+                        <Search className="opacity-50 inline-block w-6 group-hover:opacity-75" />
                     </button>
                     <Tooltip
                         placement="bottom-end"
-                        title="Login"
                         tooltipClassName="!rounded-tr-none"
+                        className="group/parent relative text-primary dark:text-primary-dark"
                         content={() => {
                             return (
-                                <ul className="list-none m-0 p-0 w-[200px]">
-                                    <li>
+                                <ul className="list-none text-left m-0 p-0 pb-[3px] space-y-[2px] w-[200px]">
+                                    <li className="bg-border/20 dark:bg-border-dark/20 border-b border-light dark:border-dark text-[13px] px-2 py-1.5 text-primary/50 dark:text-primary-dark/60 z-20 m-0 !mb-[3px] font-semibold">
+                                        Login to...
+                                    </li>
+                                    <li className="px-1">
                                         <Link
-                                            className="text-sm px-2 py-2 rounded-sm hover:bg-black/50 block"
+                                            className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
                                             to="https://app.posthog.com"
                                         >
+                                            <App className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                             PostHog app
                                         </Link>
                                     </li>
-                                    <li>
+                                    <li className="px-1">
                                         <Link
-                                            className="text-sm px-2 py-2 rounded-sm hover:bg-black/50 block"
+                                            className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
                                             to="/community"
                                         >
+                                            <Chat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                             Community
                                         </Link>
                                     </li>
-                                </ul>
-                            )
-                        }}
-                    >
-                        <span className="relative">
-                            <Person className="opacity-50" />
-                        </span>
-                    </Tooltip>
-                    <Tooltip
-                        className="border-l dark:border-white/20 border-black/20"
-                        placement="bottom-end"
-                        title="Site settings"
-                        tooltipClassName="rounded-tr-none"
-                        content={() => {
-                            return (
-                                <ul className="list-none m-0 p-0 w-[200px]">
-                                    <li>
-                                        <button className="text-sm px-2 py-2 flex justify-between items-center rounded-sm hover:bg-black/50 w-full text-left">
-                                            <span>Dark mode</span>
+                                    <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
+                                        Site settings
+                                    </li>
+                                    <li className="px-1">
+                                        <button className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full">
+                                            <div>
+                                                <Brightness className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                <span>Dark mode</span>
+                                            </div>
                                             <DarkModeToggle />
                                         </button>
                                     </li>
-                                    <li>
-                                        <button className="text-sm px-2 py-2 rounded-sm hover:bg-black/50 w-full text-left">
-                                            Full-width text
+                                    <li className="px-1">
+                                        <button className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block w-full text-left">
+                                            <TextWidth className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                            Wide mode
                                         </button>
                                     </li>
                                 </ul>
                             )
                         }}
                     >
-                        <span className="relative w-5 h-5 flex justify-center items-center">
-                            <Chevron className="opacity-50 w-2" />
-                        </span>
+                        <User className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
                     </Tooltip>
                 </div>
             </div>

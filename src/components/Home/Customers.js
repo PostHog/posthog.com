@@ -38,8 +38,8 @@ export default function Customers() {
     const { ref, inView, entry } = useInView({ triggerOnce: true })
     return (
         <section className="mb-16 -mt-[1px]">
-            <div className="bg-primary dark:bg-primary-dark py-8 md:py-12 xl:py-16 px-4 relative z-20">
-                <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-6xl text-primary-dark dark:text-primary max-w-screen-2xl mx-auto">
+            <div className="bg-black dark:bg-dark py-8 md:py-12 xl:py-16 px-4 relative z-20">
+                <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-6xl text-primary-dark max-w-screen-2xl mx-auto">
                     These folks <span className="text-yellow">build products users want</span> with
                     <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14 fill-current" />
                 </h2>
@@ -49,7 +49,7 @@ export default function Customers() {
                 className="mt-8 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row"
             >
                 {inView && (
-                    <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full">
+                    <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark">
                         <Customer className="max-h-[44px]" image={yCombinator} />
                         <Customer className="max-h-[36px]" image={staples} />
                         <Customer className="max-h-[36px]" image={airbus} />
