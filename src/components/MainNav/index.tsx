@@ -97,10 +97,10 @@ export default function MainNav() {
     const { menu, parent, internalMenu, activeInternalMenu } = useLayoutData()
     return (
         <div>
-            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-5">
+            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-2">
                 <div className="flex max-w-screen-3xl mx-auto px-5 justify-between">
-                    <Link className="py-4 grow-0 shrink-0 basis-[auto]" to="/">
-                        <Logo color={'white'} className="h-[20px]" />
+                    <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark" to="/">
+                        <Logo className="h-[24px] fill-current " />
                     </Link>
                     <ul className="flex list-none m-0 p-0">
                         {menu.map((menuItem) => {
@@ -196,12 +196,17 @@ export default function MainNav() {
                 </div>
             </div>
             {internalMenu?.length > 0 && (
-                <ul className="flex justify-center space-x-12 list-none m-0 p-0  mb-8 border-b border-light dark:border-dark relative">
+                <ul className="flex justify-center space-x-4 list-none m-0 p-0 mb-8 border-b border-light dark:border-dark relative">
                     {internalMenu.map(({ name, url, Icon, color }) => {
                         const active = activeInternalMenu?.name === name
                         return (
                             <li key={name}>
-                                <Link to={url} className={`flex relative pb-5`}>
+                                <Link
+                                    to={url}
+                                    className={`flex items-center relative px-2 pt-1.5 pb-1 mb-2 rounded ${
+                                        active ? '' : 'hover:bg-accent dark:hover:bg-accent-dark'
+                                    }`}
+                                >
                                     <span className={`w-6 h-6 mr-2 text-${color}`}>
                                         <Icon />
                                     </span>
@@ -214,7 +219,7 @@ export default function MainNav() {
                                     </span>
                                     {active && (
                                         <span
-                                            className={`absolute bottom-0 left-0 w-full border-b rounded-full border-${color}`}
+                                            className={`absolute bottom-[calc(-.5rem_-_1px)] left-0 w-full border-b-[1.5px] rounded-full border-${color}`}
                                         />
                                     )}
                                 </Link>
