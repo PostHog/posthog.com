@@ -394,7 +394,7 @@ export const EventPipelines = () => {
                 <Content>
                     <Title title={'Event pipelines'} />
                     <Subtitle subtitle="Enrich customer profiles in sales and marketing clouds with event data you send to PostHog." />
-                    <CTA url="/docs/integrations" title="Browse destinations" />
+                    <CTA url="/cdp" title="Browse destinations" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="hidden md:block mb-3 flex-grow">
