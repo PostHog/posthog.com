@@ -61,6 +61,10 @@ module.exports = {
             border: '#D0D1C9',
             'border-dark': '#4A4C52',
 
+            'button-shadow': '#B17816',
+            'button-border': '#CD8407',
+            'button-shadow-dark': '#CD8407',
+
             white: '#fff',
             black: '#000',
             primary: '#151515',

@@ -4,9 +4,7 @@ import { Link } from 'gatsby'
 import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
-import { PricingCTA } from 'components/PricingCTA'
 import { SignupCTA } from 'components/SignupCTA'
-import { Demo } from 'components/NotProductIcons'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -55,19 +53,14 @@ export default function Hero() {
 
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
                         <SignupCTA className="" />
-                        <PricingCTA />
-                    </div>
-                    <div className="justify-center mt-6 flex">
+
                         <TrackedCTA
                             event={{ name: `clicked Get a demo` }}
-                            type="custom"
-                            className={`shadow-none !text-sm !font-bold flex items-center text-blue hover:text-blue space-x-1 !px-3 !py-2 hover:bg-gray-accent-light rounded`}
                             href="/book-a-demo"
+                            type="secondary"
+                            size="md"
                         >
-                            <span className="inline-block w-6 h-6 opacity-30 group-hover:opacity-50">
-                                <Demo />
-                            </span>
-                            <span>Get a demo</span>
+                            Get a demo
                         </TrackedCTA>
                     </div>
                 </div>
