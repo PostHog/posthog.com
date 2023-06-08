@@ -53,7 +53,7 @@ export const button = (
     relative
     after:absolute
     after:border-[1.5px]
-    after:border-[#B17816]
+    after:border-button
     after:w-full
     active:after:h-[calc(100%+1.5px)]
     after:h-[calc(100%+4px)]

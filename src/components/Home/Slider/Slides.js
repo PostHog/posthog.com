@@ -37,6 +37,7 @@ import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { feature } from 'components/Pricing/PricingTable/classes'
+import { CallToAction } from 'components/CallToAction'
 
 const Title = ({ title }) => {
     return <h3 className="text-lg lg:text-3xl lg:mt-5 mb-0">{title}</h3>
@@ -79,7 +80,7 @@ const FeatureList = ({ features }) => {
             {features.map(({ title, Icon }) => {
                 return (
                     <li key={title} className="flex gap-2 items-center text-[15px]">
-                        <span className="inline-flex p-2 rounded-sm bg-dark/10">
+                        <span className="inline-flex p-1 rounded-sm bg-dark/10">
                             <Icon className="w-6" />
                         </span>
                         <span className="opacity-70 font-semibold">{title}</span>
@@ -123,7 +124,9 @@ export const ProductAnalytics = () => {
                 <Content>
                     <Title title={'Product analytics'} />
                     <FeatureList features={features} />
-                    <CTA url="/product-analytics" title="Explore" />
+                    <CallToAction href="/product-analytics" type="outline" size="sm">
+                        Explore
+                    </CallToAction>
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="md:relative w-3/4 ml-auto">

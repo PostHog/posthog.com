@@ -132,7 +132,7 @@ export default function MainNav() {
                         })}
                     </ul>
                     <div className="flex items-center justify-end">
-                        <CallToAction size="xs" className="mr-2">
+                        <CallToAction size="sm" type="secondary" className="mr-2">
                             Get started
                         </CallToAction>
 

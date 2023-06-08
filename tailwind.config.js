@@ -151,6 +151,7 @@ module.exports = {
                 dark: '#4A4C52',
                 'bg-light': '#EEEFE9',
                 'bg-dark': '#1D1F27',
+                button: '#B17816',
             },
             borderRadius: {
                 sm: '4px',
