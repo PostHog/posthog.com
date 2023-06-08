@@ -53,25 +53,24 @@ posthog.capture(
 
 User property values can be strings, booleans, numbers, objects, or arrays. Note that for objects and arrays, you'll need to use the [Property Flattener app](apps/property-flattener) in order to flatten nested properties and make them accessible through filters in the PostHog app.
 
-## When to use `set` and `set_once`?
+### What is the difference between `set` and `set_once`?
 
-Use `set` when we want the value to be the most recently sent value. For example, to update the email for a user.
+When using `set`, it will replace any value that may have been set on a person for a specific property. In contrast, `set_once` will only set the property if it has never been set before.
 
-Use `set_once` when we want to set the first value and it to never be updated afterwards, e.g. the first URL that referred a user to the site.
-
-In summary: `set` always overrides, `set_once` only writes when the property doesn't already exist on the user.
+`set` is typically used for properties that may change over time – e.g., email, current plan, organization name. `set_once` is typically only used for information that is guaranteed to never change – e.g., the first URL a user visited, or the date a user first logged in.
 
 For example:
-```js
-posthog.people.set( { location: 'London'  })
-posthog.people.set( { location: 'Rome'  })
 
-// { location: 'Rome' }
+```javascript
+posthog.people.set({ plan: 'free_trail' })
+posthog.people.set({ plan: 'premium' })
 
-posthog.people.set_once( { initial_location: 'London'  })
-posthog.people.set_once( { initial_location: 'Rome'  })
+// { plan: 'premium' }
 
-// { location: 'London' }
+posthog.people.set_once({ first_visited_URL: '/blog' })
+posthog.people.set_once({ first_visited_URL: '/pricing' })
+
+// { first_visited_URL: '/blog' }
 ```
 
 Note: that we ignore the event timestamps and just process everything at ingestion time.
