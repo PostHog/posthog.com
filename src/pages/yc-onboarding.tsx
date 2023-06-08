@@ -22,8 +22,8 @@ const DemoCallInfo = () => (
         <p>
             Following the demo, we'll send over to you your choice of either Apple AirPods or a Timbuk2 backpack. Due to
             boring customs reasons, if you live outside the US or Canada, we'll offer you a $150 merch gift card or make
-            a $150 Open Collective donation of your choice. We'll also upgrade your Cloud account to our YC Deal - a
-            super generous 20m events _and_ 50k session recordings per month absolutely free for your first year.
+            a $150 Open Collective donation of your choice. We'll also add $50K of credit to your PostHog Stripe account
+            which is valid for 12 months ($25K / 6 months for YC Alumni).
         </p>
         <br />
     </>
