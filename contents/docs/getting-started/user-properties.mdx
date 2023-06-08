@@ -51,7 +51,7 @@ posthog.capture(
     }
 ```
 
-User property values can be strings, booleans, numbers, objects, or arrays. Note that for objects and arrays, you'll need to use the [Property Flattener app](apps/property-flattener) in order to flatten nested properties and make them accessible through filters in the PostHog app.
+User property values can be strings, booleans, numbers, objects, or arrays. For objects and arrays, you can use [HogQL](/docs/product-analytics/hogql) to access nested properties.
 
 ### What is the difference between `set` and `set_once`?
 
