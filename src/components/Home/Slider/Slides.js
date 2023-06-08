@@ -82,7 +82,7 @@ const FeatureList = ({ features }) => {
                         <span className="inline-flex p-2 rounded-sm bg-dark/10">
                             <Icon className="w-6" />
                         </span>
-                        <span className="opacity-70">{title}</span>
+                        <span className="opacity-70 font-semibold">{title}</span>
                     </li>
                 )
             })}
@@ -126,7 +126,7 @@ export const ProductAnalytics = () => {
                     <CTA url="/product-analytics" title="Explore" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="md:relative w-3/4">
+                    <div className="md:relative w-3/4 ml-auto">
                         <div className="absolute -bottom-2 right-0">
                             <motion.div
                                 transition={{ delay: 0.5 }}
@@ -185,13 +185,8 @@ export const SessionReplay = () => {
                     <CTA url="/session-replay" title="Explore" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="mb-3 flex-grow md:px-0 px-5">
-                        <hr className="w-[20px] h-[3px] rounded-full" />
-                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
-                            Compare to Hotjar, Logrocket, Matomo
-                        </div>
-                    </div>
-                    <div className="md:relative w-1/2 md:w-3/4">
+                    <div></div>
+                    <div className="md:relative w-1/2 md:w-3/4 ml-auto">
                         <div className="absolute bottom-0 right-0">
                             <motion.div
                                 transition={{ delay: 0.5 }}
@@ -262,13 +257,7 @@ export const FeatureFlags = () => {
                     <CTA url="/feature-flags" title="See how it works" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="md:px-0 px-5 mb-3 flex-grow w-full md:w-auto">
-                        <hr className="w-[20px] h-[3px] rounded-full" />
-                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
-                            Compare to LaunchDarkly, Flagsmith, GrowthBook
-                        </div>
-                    </div>
-                    <div className="md:relative w-3/4">
+                    <div className="md:relative w-3/4 ml-auto">
                         <div className="absolute bottom-0 right-0">
                             <motion.div
                                 transition={{ delay: 0.5 }}
@@ -340,13 +329,7 @@ export const ABTesting = () => {
                     <CTA url="/ab-testing" title="See how it works" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="hidden md:block mb-3 flex-grow">
-                        <hr className="w-[20px] h-[3px] rounded-full" />
-                        <div className="text-primary/80 inline-block leading-tight text-[12px]">
-                            Compare to Mixpanel, Optimizely, VWO
-                        </div>
-                    </div>
-                    <div className="md:relative w-1/2">
+                    <div className="md:relative w-1/2 ml-auto">
                         <div className="absolute bottom-0 right-0">
                             <motion.div
                                 transition={{ delay: 0.5 }}
@@ -375,16 +358,6 @@ export const Cdp = () => {
         { title: 'Destinations', Icon: Share },
         { title: 'Transformations', Icon: Gear },
     ]
-
-    const data = [
-        { Icon: JS, url: '/docs/integrate/client/js' },
-        { Icon: ReactIcon, url: '/docs/integrate/client/react-native' },
-        { Icon: NodeJS, url: '/docs/integrate/server/node' },
-        { Icon: Ruby, url: '/docs/integrate/server/ruby' },
-        { Icon: Ios, url: '/docs/integrate/client/ios' },
-        { Icon: Android, url: '/docs/integrate/client/android' },
-    ]
-
     return (
         <div className="bg-[#FCC779] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded">
             <ImageContainer>
@@ -413,7 +386,7 @@ export const Cdp = () => {
                     <CTA url="/docs/integrations" title="Browse destinations" />
                 </Content>
                 <div className="flex items-end mt-auto w-full">
-                    <div className="md:relative w-3/4">
+                    <div className="md:relative w-3/4 ml-auto">
                         <div className="absolute bottom-0 right-0">
                             <motion.div
                                 transition={{ delay: 0.5 }}
