@@ -95,7 +95,7 @@ export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOp
             <CallToAction
                 onClick={() => setEditModalOpen(true)}
                 width="full"
-                size="xs"
+                size="sm"
                 type="secondary"
                 className="mt-2"
             >

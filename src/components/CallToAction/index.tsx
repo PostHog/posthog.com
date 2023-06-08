@@ -4,10 +4,54 @@ import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const sizes = {
-    xs: 'rounded-sm after:rounded-sm text-xs font-semibold px-2 py-1',
-    sm: 'rounded-sm after:rounded-sm text-sm font-semibold px-3 py-1.5',
-    md: 'rounded-md after:rounded-md text-base font-bold px-4 py-2',
-    lg: 'rounded-md after:rounded-md text-base font-bold px-5 py-2.5',
+    sm: `
+    rounded-sm
+    after:rounded-sm
+    text-sm
+    font-semibold
+    px-3
+    py-1.5
+    shadow-[0px_1.5px_#CD8407,inset_0px_-1px_#B17816]
+    active:bottom-[-1.5px]
+    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
+    active:after:h-[calc(100%+1.5px)]
+    after:h-[calc(100%+3px)]
+    hover:after:h-[calc(100%+4px)]
+    hover:bottom-[1px]
+    hover:shadow-[0px_2.5px_#CD8407,inset_0px_-1px_#B17816]
+    `,
+    md: `
+    rounded-md
+    after:rounded-md
+    text-base
+    font-bold
+    px-4
+    py-2
+    shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
+    active:bottom-[-2.5px]
+    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
+    active:after:h-[calc(100%+1.5px)]
+    after:h-[calc(100%+4px)]
+    hover:after:h-[calc(100%+5px)]
+    hover:bottom-[1px]
+    hover:shadow-[0px_3.5px_#CD8407,inset_0px_-2px_#B17816]
+    `,
+    lg: `
+    rounded-md
+    after:rounded-md
+    text-base
+    font-bold
+    px-5
+    py-2.5
+    shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
+    active:bottom-[-2.5px]
+    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
+    active:after:h-[calc(100%+1.5px)]
+    after:h-[calc(100%+4px)]
+    hover:after:h-[calc(100%+5px)]
+    hover:bottom-[1px]
+    hover:shadow-[0px_3.5px_#CD8407,inset_0px_-2px_#B17816]
+    `,
 }
 
 const primary = cntl`
@@ -47,20 +91,12 @@ export const button = (
     type === 'custom'
         ? ''
         : cntl`
-    shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
-    active:bottom-[-2.5px]
-    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
     relative
     after:absolute
     after:border-[1.5px]
     after:border-button
     after:w-full
-    active:after:h-[calc(100%+1.5px)]
-    after:h-[calc(100%+4px)]
     after:inset-0
-    hover:after:h-[calc(100%+5px)]
-    hover:bottom-[1px]
-    hover:shadow-[0px_3.5px_#CD8407,inset_0px_-2px_#B17816]
     w-${width}
     ${buttonTypes[type] || ''}    
     ${sizes[size]}
