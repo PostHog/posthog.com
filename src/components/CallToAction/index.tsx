@@ -97,6 +97,7 @@ export const button = (
     after:border-button
     after:w-full
     after:inset-0
+    text-center
     w-${width}
     ${buttonTypes[type] || ''}    
     ${sizes[size]}
