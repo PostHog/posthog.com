@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-The Toolbar is like the 'Inspect Element' dev tool, but specifically for PostHog features and data. When enabled, the Toolbar appears as an overlay **on your product or website** (it is not visible to your users). With it you can seamlessly interact with the elements to [create Actions](/tutorials/how-to-capture-events-the-easy-ways), visualize heatmaps, override feature flags, and more.
+The Toolbar is like the 'Inspect Element' dev tool, but specifically for PostHog features and data. When enabled, the Toolbar appears as an overlay **on your product or website** (it's not visible to your users). With it you can seamlessly interact with the elements to [create Actions](/tutorials/how-to-capture-events-the-easy-ways), visualize heatmaps, override feature flags, and more.
 
 ![PostHog toolbar](../../images/docs/product-analytics/toolbar.png)
 
@@ -26,7 +26,7 @@ The Toolbar is like the 'Inspect Element' dev tool, but specifically for PostHog
 
 Heatmaps is a feature in the toolbar that shows you how users are interacting with elements on your website or app. 
 
-> Note that to use heatmaps, [autocapture](/docs/data/autocapture) must be enabled.
+> **Note:** To use heatmaps, [autocapture](/docs/data/autocapture) must be enabled.
 
 To view your heatmaps, click on the toolbar and then click on the red fire (🔥) icon.
 
@@ -102,7 +102,6 @@ This is an `OR` operation, meaning that the action will be recorded if either El
 
 This is useful if you have various buttons that take you to the same page, for instance, and only care that the user clicks one of them. A common use case for this is leveraging the action as a [funnel step](/docs/user-guides/funnels). 
 
-
 ### 2. Element filters
 
 These are used by PostHog to find the specific element you're creating the action for. 
@@ -123,12 +122,23 @@ Or in the same modal, click "Edit the selector" to use our element picker to bui
 
 ## Viewing your existing actions
 
-TODO
+You can view your existing actions on your page by clicking the "Actions" button on the Toolbar. This will highlight any elements that are associated with an action. This is a useful way to check that elements are associated with the correct actions.
 
-## Toggling feature flags with the toolbar
+By clicking on a specific element, you can update or delete the action.
 
-TODO 
-[feature flags](/product/feature-flags) 
+Note that the number in the green box on the top left of the element is the action's index in your list of actions (and does not represent how many times that action was triggered). The number in the yellow box next to the "Actions" button in the toolbar represents the total number of actions you have created.
+
+![How to setup the PostHog toolbar](../../images/products/product-analytics/toolbar-view-actions.mp4)
+
+## Overriding feature flags with the toolbar
+
+The toolbar also enables you to test your feature flags. You can enable, disable, or override your feature flags, and then view how your website or app changes with the new feature flags values.
+
+To do this, click on the "Feature Flags" button in the toolbar. Then, search for any feature flag of choice and click on the toggles to change it's value. 
+
+Note that overriding feature flags will only affect *your* browser. You may also need to refresh the page to see how your change affect your website.
+
+![How to override feature flags using the tool](../../images/products/product-analytics/toolbar-feature-flags.mp4) 
 
 ## Troubleshooting and FAQ
 
