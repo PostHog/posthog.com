@@ -18,4 +18,7 @@ At the same time, we want you to be able to express yourself and feel safe doing
   - Keep it optional - not everyone wants to do this at work
   - Keep it kind
 
-To give a specific example of the above - INSERT EXAMPLE
+Here are a few examples:
+
+- INSERT SLACK EXAMPLE
+- Some team members wish to put on an event to celebrate Pride. This is something that we encourage, including during working hours, but activities should be internally focused, strictly optional and kind-natured. For example, talks with people explaining their personal experiences / Pride-specific book reading clubs. We ask you exercise your own judgement as we would any other activity that helps bring people together, over how much time you spend here and how to get the most out of the time spent. For example, make things well organized, with a plan for the session (even if simple) and so on!
