@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-16.png
 tags: ['hogql', 'trends']
 --- 
 
-Autocapture is a powerful way to capture usage data without having to implement any tracking yourself. HogQL unlocks more of that data for analysis. In this tutorial, we go over examples of how you can use HogQL to analyze autocapture events.
+[Autocapture](/docs/data/autocapture) is a powerful way to capture usage data without having to implement any tracking yourself. [HogQL](/docs/product-analytics/hogql) unlocks more of that data for analysis. In this tutorial, we go over examples of how you can use HogQL to analyze autocapture events.
 
 ## The autocapture element chain
 
@@ -18,11 +18,11 @@ We can access the element chain by using the autocapture series, then using `ele
 
 ![Element chain](../images/tutorials/hogql-autocapture/element-chain.mp4)
 
-In its default form, this data isn’t super useful. When we begin to use HogQL’s functions, it becomes a lot more useful.
+In its default form, this data isn’t super useful. When we begin to use HogQL’s functions, it becomes incredibly powerful.
 
 ## Breaking down by first and last elements
 
-We can use HogQL to turn the element chain into an array with `splitByChar()`. From this array, we can get the element at any index, including the first. To do this, use the expression `arrayElement(splitByChar('.', elements_chain), 1)`.
+We can use HogQL to turn the element chain into an array with `splitByChar()`. From this array, we can get the element at any index. To get the element at the first index, use the expression `arrayElement(splitByChar('.', elements_chain), 1)`.
 
 ![Broken down elements](../images/tutorials/hogql-autocapture/elements.png)
 
@@ -46,7 +46,7 @@ Examples of attribute breakdowns include:
 
 ## Filter for specific components
 
-We can use HogQL to filter for events where the elements or components contain a certain value. We can filter using `match` against the whole element chain or we can use the same `splitByChar()`  method as before. 
+We can use HogQL to filter for events where the elements or components contain a certain value. We can filter using `match` against the whole element chain, or we can use the same `splitByChar()`  method as before. 
 
 For example, if we want to compare components with `collapsed` vs `not-collapsed` classes, we can create two series. One filtered for `collapsed` with the expression:
 
