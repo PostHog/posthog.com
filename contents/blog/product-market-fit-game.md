@@ -13,7 +13,7 @@ tags:
   - Guides
 ---
 
-In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. Knowing when you've found it is easy – there's no shortage of descriptions of how it _feels_ to have product-market fit. _How_ you find it is much harder. Hence this guide.
+In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. Knowing when you've found it is easy – there's no shortage of descriptions of how it _feels_ to have product-market fit. _How_ you find it is much harder, hence this guide.
 
 To me, finding product-market fit is a bit like playing [snakes and ladders](https://en.wikipedia.org/wiki/Snakes_and_ladders). There are numerous traps, winning takes a little luck, and the only certainty is it's never a straight line to the finish.  
 
@@ -109,7 +109,7 @@ Work your way from top to bottom:
 
 * **You aren't working hard enough.** Realize no one else is going to do this for you. Set a goal for how many meetings you want to get. I got 2 meetings a day, 5 days a week while doing any other random tasks, like building a website. Try to meet in person if you can afford to do so – most communication is non-verbal, so it'll make it easier to learn what people are thinking. Move to a hub for your industry if you can. Also consider moving in with your co-founder, so you can focus 100% on the work for this intense period. Running out of momentum is your biggest risk.
 
-* **You can't clearly describe the problem,** making it hard to recruit users to validate it. Create a simple, single sentence description of the problem you think you're solving (ahead of doing the same for the _product_ you eventually build), and the user you are targeting. If what you're working on feels vague, you'll get a lukewarm response to your messages trying to book meetings. Do not use benefits-language here – users won't have the attention span to figure out what your product does. We were working on "open source product analytics", so people could "self host their product analytics". We were not, for example, "helping engineers build better products", "providing a product optimization system" or "saving time for data analysts".
+* **You can't clearly describe the problem,** making it hard to recruit users to validate it. Create a simple, single sentence description of the problem you think you're solving (ahead of doing the same for the _product_ you eventually build), and the user you are targeting. If what you're working on feels vague, you'll get a lukewarm response to your messages trying to book meetings. Do not use benefits-language here – users won't have the attention span to figure out what your product does. We were working on "open source product analytics", so people could "self-host their product analytics". We were not, for example, "helping engineers build better products", "providing a product optimization system" or "saving time for data analysts".
 
 * **You are talking to the wrong users.** If so, no one will take calls, or if they do, they don't have your problem. Ask yourself – why did you have this problem, but those speaking to you don't? When you do get calls, ask who would have this problem. Change the user you are targeting.
 
@@ -159,7 +159,7 @@ Hooray, so people are showing up. Now you need to see if they're coming back or 
 
 Avoid relying on things like reminder emails or push notifications purely designed to get users to log back into your product. If it takes this sort of effort to retain users, your product probably isn't valuable to them. Focus _exclusively_ on building features that make your product more powerful or easier to use.
 
-Once you've got some usage, get qualitative and quantiative feedback. Measure which features are being used the most, ask for feedback calls, and watch users using your product. There are plenty of good session replay tools... ours is [one of them](/session-replay)!
+Once you've got some usage, get qualitative and quantitative feedback. Measure which features are being used the most, ask for feedback calls, and watch users using your product. There are plenty of good session replay tools... ours is [one of them](/session-replay)!
 
 If they're willing, ask them to perform tasks live in front of you, and ask them why they clicked certain things. You'll be shocked at how many ways people get confused – that's a _great_ problem to have if they're coming back.
 
@@ -177,7 +177,7 @@ Closing the loop above is the way to cement your product-market fit because:
 
 #### Failure modes
 
-* **Users aren't activating.** This means they _signed up_, but can't _configure_  or _get started_ with your product, so they _never_ get any value from it. You have two options here:
+* **Users aren't activating.** This means they _signed up_, but can't _configure_ or _get started_ with your product, so they _never_ get any value from it. You have two options here:
 
   1. Activate your users manually. The classic example is the founders of Stripe, who [used to visit their first users in person](http://paulgraham.com/ds.html#Manual) to set up their product for them. Do things that don't scale. You'll develop a closer relationship doing this, which helps you get more feedback.
   
@@ -218,13 +218,13 @@ You will also need some pricing. You are likely to change this numerous times:
 
 - **Step 3**, for companies focusing on self-serve, is to enable people to pay without talking to you. Do this only after step 2, and only if it suits your go to market. If you're enterprise focused and selling from the top down, it's a bad idea. If you're product-led then go for it.
 
-> **Important:** Don't leap straight to self-serve. Remember that, at this stage, you're optimizing for learning, not revenue. Jumping too soon to self-serve will reduce your opportunities for learn. I (with hindsight, corectly) felt it was very important to talk to our early users about what they're prepared to pay.
+> **Important:** Don't leap straight to self-serve. Remember that, at this stage, you're optimizing for learning, not revenue. Jumping too soon to self-serve will reduce your opportunities for learn. I (with hindsight, correctly) felt it was very important to talk to our early users about what they're prepared to pay.
 
 Now it's to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others. If you manage this five times – congratulations, you've completed the product-market fit game.
 
 Once you get 5 reference customers, you are _well_ on your way to product market fit. After this:
 
-* Repeat your formula to around $1M in ARR, by yourself. I'd advocate for a minimum of $500K if you are confident at sales and everything is feeling easy and repeatable, more than $1M if you are still feeling things are different every time you sell or it's proving tough.
+* Repeat your formula to around $1M in ARR, by yourself. I'd advocate for a minimum of $500K if you are confident at sales and everything is feeling easy and repeatable, more than $1M if you are still feeling things are different every time you sell, or it's proving tough.
 
 * Then see if other people are successful at following your playbook. Try with two other people to reduce the chance it's a person problem, not a product market fit problem.
 
@@ -266,7 +266,7 @@ Treat each other as partners. Failure mode is when the CEO bosses the CTO around
 
 * **Roles and responsibilities:** Be willing to swap responsibilities around to play to your strengths. The first $1M in sales are different to scaling to $10M, and pre-product-market fit and post-product-market fit may require a different approach to product. Tim and I have switch roles periodically as PostHog has evolved.
 
-* **Board / fundraising:** This ties closely to company strategy. While the CEO should do _all_ investor calls, so the other can drive the business in the meantime, it's important to update each other on progress via shared notes, or weekly discussions. Both co-founders should attend board meetings / existing investor catchups, and have areas they own in them.
+* **Board / fundraising:** This ties closely to company strategy. While the CEO should do _all_ investor calls, so the other can drive the business in the meantime, it's important to update each other on progress via shared notes, or weekly discussions. Both co-founders should attend board meetings / existing investor catch ups, and have areas they own in them.
 
 > #### Choosing a co-founder
 > 
@@ -301,7 +301,7 @@ As with most early-stage startup stuff, you're more likely to be wrong than righ
 
 You are trying to figure out if anyone cares, so the speed you can ship your first feature is the most important factor. Scalability is irrelevant. Use a software stack you've used before, as long as it's reasonably popular. We used Django and React in the early days.
 
-Ship features embarassingly early. Appeal to the kind of user that'll pick up a random piece of software that no one has ever used before. 
+Ship features embarrassingly early. Appeal to the kind of user that'll pick up a random piece of software that no one has ever used before. 
 
 Unless your product's unique selling point is superior design, it's preferable to ship clunky/ugly/slightly broken functionality, and quickly improve it, than to waste months on something no one cares about.
 
@@ -315,21 +315,11 @@ Remember that users are human beings, and your success entirely depends on them.
 
 ### A simple, repeatable sales motion
 
-Do _not_ prioritize scaling your sales when you're trying to get to product-market fit. Just focus on getting one deal done at a time. Here is how to do that:
+Do _not_ prioritize scaling your sales when you're trying to get to product-market fit. Just focus on getting one deal done at a time. User your network, directly approach companies you think your product is perfect for, go to events.
 
-1. Introductions through your own network, people you worked with, went to school with, where your family work or went to school. Everybody has _some_ network – don't feel like you need to be a sales legend to do this.
+In general, don't expect sales from marketing (paid ads / content) – these are more scalable methods. Instead, be hands-on. Early on, you'll win on the quality and personalization of your sales approach.
 
-2. If you're in an accelerator, message other companies. Be personalized.
-
-3. People from companies that your product is perfect for.
-
-4. Events. You may be able to get free tickets via a partner.
-
-In general, don't expect sales from marketing (paid ads / content) – these are more scalable methods. Instead, be hands on. Early on, you'll win on the quality and personalization of your sales approach.
-
-Keep yourself accountable – set some goals for meetings booked and stick to them. As with booking feedback calls, be hyper responsive. If you respond to people within minutes (whether booking a meeting, or progressing a deal), you'll get them while they're available and happy to engage. I used to obsessively respond to people on LinkedIn all day while in this phase.
-
-### How to do sales calls
+Keep yourself accountable – set some goals for meetings booked and stick to them. As with booking feedback calls, be hyper responsive.
 
 Once you're on a call, get the prospect to open up about their challenges, and figure out with them if your product could solve their problems. It's worth qualifying the lead as you do this. The simplest method is BANT (Budget, Authority, Need, Timeline).
 
@@ -339,21 +329,21 @@ Layer your questions.
 
 * **Level 2** – "This sounds important, why?", "would you consider a product that didn't include that feature?" and so on. 
 
-* **Level 3** – "If your end users were thoroughly trained and using this product effecitvely, what impact would that have on your revenue?", "what does solving this mean for you?".
+* **Level 3** – "If your end users were thoroughly trained and using this product effectively, what impact would that have on your revenue?", "what does solving this mean for you?".
 
 Prioritize time with those that are best-qualified.
 
-Once someone decides to move forward, you'll need something for people to sign. YC provide a [free sales agreement](https://www.ycombinator.com/sales_agreement/) for SaaS companies. Be flexible around your earliest customers for the terms they need – it's not about maximizing revenue or contract length, it's about getting your first deal signed and learning.
+Once someone decides to move forward, you'll need something for people to sign. YC provides a [free sales agreement](https://www.ycombinator.com/sales_agreement/) for SaaS companies. Be flexible around your earliest customers for the terms they need – it's not about maximizing revenue or contract length, it's about getting your first deal signed and learning.
 
-### Structure your early pricing for getting _something_ sold
+### Risk-free pricing
 
-When it comes to pricing, reduce the risk for your earliest customers. Charge them monthly rather than annually, unless they prefer the latter.
+Structure your early pricing for getting _something_ sold.
 
-There are multiple methods available. You can charge a recurring monthly rate, or you can charge on usage. I'd advocate for doing either of these early on and not shooting for annual contracts unless there's a good reason not to.
+This means reducing the risk for your earliest customers. Charge them monthly rather than annually, unless they prefer the latter.
 
-If you are dealing with companies that expect or want annual contracts, then you can use a break clause so customers can get out of the contract easily to reduce their risk.
+If you're dealing with companies that expect or want annual contracts, give them a break clause to give them an out and reduce their risk.
 
-Offering a small free tier or a free trial for a set period will allow customers to try out your software before they spend anything, which helps them de-risk.
+Offering a small free tier or a free trial for a set period will allow customers to try out your software before they spend anything, which (again) helps them reduce risk.
 
 ## The why, when, and how of pivoting
 
@@ -373,10 +363,12 @@ The five levels of product-market fit should help you work out when you need to 
 
 Getting to product-market fit is hard because it's a multivariate problem. Most of the time, you simply do not know _exactly_ why things are, or are not, working. As a result, you'll (rightly) be filled with doubt in the early days. This is normal.
 
-In hindsight, one of the keys to PostHog achieving product-market fit was the the regular downtime Tim and I shared when driving to and from YC dinners a few times each week.
+In hindsight, one of the keys to PostHog achieving product-market fit was the regular downtime Tim and I shared when driving to and from YC dinners a few times each week.
 
 Why?
 
 Because the ultimate failure mode is not grasping the big picture. Those hour-long drives without our laptops forced us to reflect. Forced us to step away from the grind and interrogate everything we'd learned so far.
 
 You can't complete the product-market fit game without hard work and persistence. But sometimes you need to pause, look at the map, find your bearings, and choose your next objective. So, every week – make time to reflect.
+
+> Thanks for reading. If you found this guide useful, consider [subscribing to our Substack](https://newsletter.posthog.com/) – Product for Engineers. It's all about helping engineers and founders flex their product muscles. We send it every few weeks.
