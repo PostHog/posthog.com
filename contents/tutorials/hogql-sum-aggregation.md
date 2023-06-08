@@ -67,7 +67,7 @@ When we breakdown by `person_id`, this gives us a list of users with the highest
 
 Using sum, you can access both the total sum and a subset of the same series. This enables powerful options for working with percentages and creating percentage-based series.
 
-For example, you wanted to compare the percentages of Chrome vs Safari pageviews in a visualization summing to 100%. First, create a series where your divide the Safari pageviews by the total Safari and Chrome pageviews. 
+For example, let's say you wanted to compare the percentage of your total pageviews on Chrome vs Safari. To do this, first create a series where your divide the Safari pageviews by the total sum of Safari and Chrome pageviews. 
 
 ```
 sumIf(
@@ -79,7 +79,7 @@ sumIf(
 )
 ```
 
-Next, create another series for Chrome pageviews divided by the total Safari and Chrome pageviews.
+Next, do the same from Chrome. Divide your Chrome pageviews by the total sum of Safari and Chrome pageviews.
 
 ```
 sumIf(
