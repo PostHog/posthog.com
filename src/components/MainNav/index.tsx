@@ -110,8 +110,10 @@ export default function MainNav() {
                                 <li className="h-full" key={name}>
                                     <Link
                                         to={url}
-                                        className={`text-sm flex h-full items-center relative p-4 ${
-                                            active ? 'px-[calc(1rem_+_10px)] mx-[-10px]' : ''
+                                        className={`text-[13.5px] font-medium flex h-full items-center relative p-4 ${
+                                            active
+                                                ? 'px-[calc(1rem_+_10px)] mx-[-10px]'
+                                                : 'opacity-70 hover:opacity-100'
                                         }`}
                                     >
                                         {active && (
@@ -203,8 +205,8 @@ export default function MainNav() {
                             <li key={name}>
                                 <Link
                                     to={url}
-                                    className={`flex items-center relative px-2 pt-1.5 pb-1 mb-2 rounded ${
-                                        active ? '' : 'hover:bg-accent dark:hover:bg-accent-dark'
+                                    className={`group flex items-center relative px-2 pt-1.5 pb-1 mb-2 rounded ${
+                                        active ? '' : 'hover:bg-border/50 dark:hover:bg-border-dark/50'
                                     }`}
                                 >
                                     <span className={`w-6 h-6 mr-2 text-${color}`}>
@@ -212,7 +214,9 @@ export default function MainNav() {
                                     </span>
                                     <span
                                         className={`text-sm ${
-                                            active ? 'font-bold opacity-100' : 'font-semibold opacity-60'
+                                            active
+                                                ? 'font-bold opacity-100'
+                                                : 'font-semibold opacity-60 group-hover:opacity-100'
                                         }`}
                                     >
                                         {name}
