@@ -40,6 +40,8 @@ module.exports = {
 
             '2xl': '1536px',
             // => @media (min-width: 1536px) { ... }
+
+            reasonable: { raw: '(min-height: 640px)' },
         },
         scale: {
             '-1': '-1',
@@ -142,7 +144,7 @@ module.exports = {
                 green: '#6AA84F',
             },
             minHeight: {
-                780: '780px',
+                md: '780px',
             },
             borderColor: {
                 light: '#D0D1C9',
