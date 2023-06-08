@@ -64,7 +64,7 @@ _And_ you can use HogQL to aggregate results in a funnel, too. Is there anything
 
 ### Custom SQL insights
 
-Of course, the most powerful way to leverage HogQL within PostHog is via the new SQL insight type. This gives you direct SQL access to your data in PostHog, so you can create custom tables, visualizations, and more. 
+Of course, the most powerful way to leverage HogQL within PostHog is via the new SQL insight type. This gives you direct SQL access to your data in PostHog, so you can create custom table insights that answer complex questions.
 
 For example, while you can use a retention insight to discover which **features** keep users coming back for more, you could build an SQL insight to find which **users** keep coming back, and identify outliers. 
 
@@ -117,7 +117,7 @@ Moving on... you can also use HogQL expressions (e.g. `properties.$screen_width 
 
 You could, for example, use HogQL to run currency conversions and normalize data into a single currency in its own column, or even extrapolate and project revenue, and usage figures, into the future. 
 
-## The history (and future) of HogQL
+## Why did we build HogQL and what's next?
 
 It started with a small idea and just got bigger.
 
