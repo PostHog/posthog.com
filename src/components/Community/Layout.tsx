@@ -17,13 +17,11 @@ export const SectionTitle = ({ children }: { children: React.ReactNode }) => {
 }
 
 const Community = ({ children, title, tableOfContents }: IProps) => {
-    const nav = useNav()
     return (
         <PostLayout
             fullWidthContent
             hideWidthToggle
             hideSurvey
-            menu={nav}
             sidebar={<Sidebar />}
             tableOfContents={tableOfContents}
             title={title}
