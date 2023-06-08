@@ -1,4 +1,4 @@
-import { Flag, Flask, Graph, RewindPlay, Stack, Toggle } from 'components/NewIcons'
+import { Calendar, Flag, Flask, Graph, Map, Message, Newspaper, RewindPlay, Stack, Toggle } from 'components/NewIcons'
 import React, { createContext } from 'react'
 
 export const Context = createContext<any>(undefined)
@@ -902,7 +902,50 @@ const menu = [
     },
     {
         name: 'Community',
-        url: '/questions',
+        url: '/questions/topic/product-analytics',
+        internal: [
+            {
+                name: 'Edition',
+                Icon: Newspaper,
+            },
+            {
+                name: 'Questions',
+                Icon: Message,
+                color: 'teal',
+                url: '/questions/topic/product-analytics',
+                children: [
+                    { name: 'Topics' },
+                    { name: 'Product analytics', url: '/questions/topic/product-analytics' },
+                    { name: 'Session replay', url: '/questions/topic/session-replay' },
+                    { name: 'Feature flags', url: '/questions/topic/feature-flags' },
+                    { name: 'A/B testing', url: '/questions/topic/ab-testing' },
+                    { name: 'Product OS' },
+                    { name: 'API', url: '/questions/topic/api' },
+                    { name: 'Apps', url: '/questions/topic/apps' },
+                    { name: 'Data management' },
+                    { name: 'Events & actions', url: '/questions/topic/events-actions' },
+                    { name: 'Persons', url: '/questions/topic/people-and-properties' },
+                ],
+            },
+            {
+                name: 'Roadmap',
+                Icon: Map,
+                color: 'orange',
+                url: '/roadmap',
+            },
+            {
+                name: 'Changelog',
+                Icon: Calendar,
+                color: 'seagreen',
+                url: '/changelog/2023',
+                children: [
+                    { name: '2023', url: '/changelog/2023' },
+                    { name: '2022', url: '/changelog/2022' },
+                    { name: '2021', url: '/changelog/2021' },
+                    { name: '2020', url: '/changelog/2020' },
+                ],
+            },
+        ],
     },
     {
         name: 'Company',
@@ -936,9 +979,10 @@ export const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
 
     const internalMenu = parent?.internal
 
-    const activeInternalMenu = internalMenu?.find((menuItem) =>
-        recursiveSearch(menuItem.children, window?.location?.pathname + (window?.location?.search ?? ''))
-    )
+    const activeInternalMenu = internalMenu?.find((menuItem) => {
+        const currentURL = window?.location?.pathname + (window?.location?.search ?? '')
+        return currentURL === menuItem.url || recursiveSearch(menuItem.children, currentURL)
+    })
 
     return <Context.Provider value={{ menu, parent, internalMenu, activeInternalMenu }}>{children}</Context.Provider>
 }

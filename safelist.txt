@@ -114,8 +114,10 @@ text-teal
 text-seagreen
 text-purple
 text-salmon
+text-orange
 border-blue
 border-teal
 border-seagreen
 border-purple
 border-salmon
+border-orange
