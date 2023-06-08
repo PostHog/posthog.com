@@ -1,34 +1,26 @@
-import { RightArrow } from 'components/Icons/Icons'
+import { ArrowLeft, ArrowRight } from 'components/NewIcons'
 import React, { useState } from 'react'
 import SliderComponent from 'react-slick'
 import { slideButtons } from './slideButtons'
-import {
-    ABTesting,
-    DataWarehouse,
-    EventPipelines,
-    FeatureFlags,
-    ProductAnalytics,
-    SelfHosting,
-    SessionRecording,
-} from './Slides'
+import { ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Cdp, DataWarehouse, Sql, Api } from './Slides'
 
 const SlideButton = ({ title, Icon, activeSlide, index }) => {
     const active = activeSlide === index
     return (
-        <li className="p-1">
+        <li className="px-1 pb-3">
             <button
-                className={`flex flex-col items-center justify-center pt-1 px-1 pb-3 w-full rounded-md transition-opacity transition-colors hover:bg-gray-accent/25 focus:bg-gray-accent/40 relative active:top-[1px] active:scale-[.99] space-y-2 md:space-y-0 h-full ${
-                    active ? 'bg-gray-accent/40 hover:bg-gray-accent/40 active ' : 'group '
+                className={`flex flex-col items-center justify-center pt-1 px-1 pb-3 w-full rounded-md transition-opacity transition-colors hover:bg-gray-accent/25 focus:bg-gray-accent/40 relative active:top-[1px] active:scale-[.99] space-y-1 h-full ${
+                    active
+                        ? 'after:absolute after:bottom-0 after:h-[3px] after:w-full after:bg-blue after:rounded-full active '
+                        : 'group '
                 }`}
             >
-                <span className="w-[52px] h-[52px] flex justify-center items-center opacity-60 group-hover:opacity-90">
-                    <span className="absolute">
-                        <Icon active={active} />
-                    </span>
+                <span className="w-6 h-6 flex justify-center items-center opacity-60 group-hover:opacity-90">
+                    <Icon active={active} />
                 </span>
                 <p
-                    className={`leading-tight text-sm lg:text-md opacity-90 m-0 -mt-2 ${
-                        active ? 'font-bold' : 'font-semibold'
+                    className={`leading-tight text-sm lg:text-md m-0 -mt-2 ${
+                        active ? 'font-bold' : 'font-medium opacity/75'
                     }`}
                 >
                     {title}
@@ -61,9 +53,9 @@ export default function Slider() {
                         ref={(buttonRef) => setButtonRef(buttonRef)}
                         asNavFor={slideRef}
                         arrows={false}
-                        slidesToShow={7}
+                        slidesToShow={8}
                         focusOnSelect
-                        className="home-slider-buttons list-none max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl mx-auto m-0 p-0"
+                        className="home-slider-buttons list-none max-w-full lg:max-w-7xl mx-auto m-0 p-0"
                     >
                         {slideButtons.map((slide, index) => {
                             return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
@@ -105,9 +97,9 @@ export default function Slider() {
                     <div className="flex-grow hidden md:flex justify-center items-center md:absolute md:left-2 xl:static">
                         <button
                             onClick={() => slideRef.slickPrev()}
-                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97] md:z-30"
+                            className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30"
                         >
-                            <RightArrow className="rotate-180 w-5" />
+                            <ArrowLeft className="w-10" />
                         </button>
                     </div>
                     <SliderComponent
@@ -119,22 +111,23 @@ export default function Slider() {
                         arrows={false}
                         slidesToShow={1}
                         infinite
-                        className="home-slider flex-shrink-0 list-none max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex items-center justify-center overflow-auto"
+                        className="home-slider flex-shrink-0 list-none max-w-full lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex items-center justify-center overflow-auto"
                     >
                         <ProductAnalytics />
-                        <SessionRecording />
+                        <SessionReplay />
                         <FeatureFlags />
                         <ABTesting />
-                        <EventPipelines />
+                        <Cdp />
                         <DataWarehouse />
-                        <SelfHosting />
+                        <Sql />
+                        <Api />
                     </SliderComponent>
                     <div className="flex-grow hidden md:flex justify-center items-center md:absolute md:right-2 xl:static">
                         <button
                             onClick={() => slideRef.slickNext()}
-                            className="px-3 py-2 bg-white rounded-sm shadow-md text-primary relative active:top-[1px] active:scale-[.97] md:z-30"
+                            className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30"
                         >
-                            <RightArrow className="w-5" />
+                            <ArrowRight className="w-10" />
                         </button>
                     </div>
                 </div>

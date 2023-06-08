@@ -11,10 +11,9 @@ const sizes = {
 }
 
 const primary = cntl`
-    bg-red
-    border-red
-    dark:bg-red
-    text-white
+    border-yellow
+    border-2
+    text-primary
     dark:text-white
     hover:text-white
     hover:dark:text-white
@@ -26,10 +25,13 @@ const primary = cntl`
 `
 
 const secondary = cntl`
-    bg-white
-    border-white
     text-primary
-    hover:text-primary
+    border-text-primary
+    dark:border-white
+    border-text-primary
+    dark:border-white
+    border-2
+    text-primary-dark
 `
 
 const outline = cntl`
@@ -59,8 +61,6 @@ export const button = (
     rounded-sm
     inline-block
     cta
-    button-shadow
-    shadow-xl
     relative
     active:top-[0.5px]
     active:scale-[.98]

@@ -15,7 +15,7 @@ export const MainFeatures = (props: IFeatureGridProps) => {
 
 export const FeatureList = ({ features }: { features: IFeature[] }) => {
     return (
-        <ul className="list-none m-0 p-0 space-y-6">
+        <ul className="list-none m-0 mb-4 p-0 space-y-6">
             {features.map(({ title, description }) => {
                 return (
                     <li key={title}>
