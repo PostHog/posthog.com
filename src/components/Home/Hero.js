@@ -58,7 +58,7 @@ export default function Hero() {
                             event={{ name: `clicked Get a demo` }}
                             href="/book-a-demo"
                             type="secondary"
-                            size="md"
+                            size="lg"
                         >
                             Get a demo
                         </TrackedCTA>

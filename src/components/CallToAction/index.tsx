@@ -4,28 +4,32 @@ import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const sizes = {
-    xs: 'text-sm font-bold px-4 py-2',
-    sm: 'text-sm font-bold px-6 py-2.5',
-    md: 'text-base font-bold px-5 py-3',
-    lg: 'text-base font-bold px-6 py-3',
+    xs: 'rounded-sm after:rounded-sm text-xs font-semibold px-2 py-1',
+    sm: 'rounded-sm after:rounded-sm text-sm font-semibold px-3 py-1.5',
+    md: 'rounded-md after:rounded-md text-base font-bold px-4 py-2',
+    lg: 'rounded-md after:rounded-md text-base font-bold px-5 py-2.5',
 }
 
 const primary = cntl`
     bg-yellow
-    !text-white
+    text-primary
+    hover:text-primary
+    dark:text-primary
+    dark:hover:text-primary
 `
 
 const secondary = cntl`
     bg-white
-    !text-primary
-    dark:!text-white
-    
+    dark:text-primary
+    dark:hover:text-primary
 `
 
 const outline = cntl`
     bg-transparent
-    !text-primary
-    dark:!text-white
+    text-primary
+    hover:text-primary
+    dark:text-primary-dark
+    dark:hover:text-primary-dark
 `
 
 const buttonTypes = {
@@ -43,7 +47,6 @@ export const button = (
     type === 'custom'
         ? ''
         : cntl`
-    rounded-md
     shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
     active:bottom-[-2.5px]
     active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
@@ -55,7 +58,6 @@ export const button = (
     active:after:h-[calc(100%+1.5px)]
     after:h-[calc(100%+4px)]
     after:inset-0
-    after:rounded-md
     hover:after:h-[calc(100%+5px)]
     hover:bottom-[1px]
     hover:shadow-[0px_3.5px_#CD8407,inset_0px_-2px_#B17816]
