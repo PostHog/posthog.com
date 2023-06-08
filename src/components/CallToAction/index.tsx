@@ -4,22 +4,20 @@ import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const sizes = {
-    xs: 'text-sm font-bold px-4 py-2 border-2 border-b-3',
-    sm: 'text-sm font-bold px-5 py-2.5 border-2 border-b-3',
-    md: 'text-[15px] font-bold px-5 py-2 border-2 border-b-3',
-    lg: 'text-base font-bold px-5 py-2  border-2 border-b-4',
+    xs: 'text-sm font-bold',
+    sm: 'text-sm font-bold',
+    md: 'text-[15px] font-bold',
+    lg: 'text-base font-bold',
 }
 
 const primary = cntl`
-    border-yellow
-    text-primary
-    dark:text-primary-dark
-    hover:dark:text-primary-dark
+    bg-button-shadow
+    text-bg-dark
 `
 
 const secondary = cntl`
     text-primary
-    border-text-primary
+    border-yellow
     dark:border-white
     border-text-primary
     dark:border-white
@@ -44,20 +42,30 @@ const buttonTypes = {
     custom: '',
 }
 
-export const button = (
+export const outerButton = (type: keyof typeof buttonTypes = 'primary', width = 'auto', className = '') => cntl`
+    rounded-md
+    inline-block
+    inline-flex
+    cta
+    relative
+    w-${width}
+    ${buttonTypes[type] || ''}
+    ${className}
+`
+
+export const innerButton = (
     type: keyof typeof buttonTypes = 'primary',
     width = 'auto',
     className = '',
     size: keyof typeof sizes = 'lg'
 ) => cntl`
+    !bg-yellow
     text-center
     select-none
-    rounded-sm
-    inline-block
+    rounded-md
+    text-primary
     cta
-    relative
-    active:top-[0.5px]
-    active:scale-[.98]
+    px-5 py-2 font-semibold inline-flex -translate-y-1 hover:-translate-y-1.5 active:-translate-y-0.5 active:transition-all
     w-${width}
     ${buttonTypes[type] || ''}
     ${sizes[size]}
@@ -120,12 +128,12 @@ export const CallToAction = ({
             state={state}
             external={external}
             externalNoIcon={externalNoIcon}
-            className={button(type, width, className, size)}
+            className={outerButton(type, width, className)}
             onClick={onClick}
             to={url}
             event={event}
         >
-            {children}
+            <span className={innerButton(type, width, className, size)}>{children}</span>
         </Link>
     )
 }
