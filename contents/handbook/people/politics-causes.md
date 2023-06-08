@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-At PostHog, the highest performing culture is an apolitical one. Politics are more important than work, and hence will distract us from it. We also want a diverse team for performance reasons. This means sometimes people will have different and strongly held political opinions.
+At PostHog, the highest performing culture is an apolitical one. Politics and social causes are more important than work, and hence will distract us from it. We also want a diverse team for performance reasons. This means sometimes people will have different and strongly held political opinions.
 
 We want to signal both internally and externally that we are a neutral at an organizational level so that all people feel safe and accepted at work. For example:
   - This means we will not support _as a company_ political or social causes no matter what our personal views are
