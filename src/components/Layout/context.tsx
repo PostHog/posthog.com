@@ -763,6 +763,32 @@ const menu = [
     {
         name: 'Pricing',
         url: '/pricing',
+        internal: [
+            {
+                name: 'Product analytics',
+                Icon: Graph,
+                color: 'blue',
+                url: '/pricing?product=product-analytics',
+            },
+            {
+                name: 'Session replay',
+                url: '/pricing?product=session-replay',
+                color: 'yellow',
+                Icon: RewindPlay,
+            },
+            {
+                name: 'Feature flags',
+                Icon: Toggle,
+                color: 'seagreen',
+                url: '/pricing?product=feature-flags',
+            },
+            {
+                name: 'A/B testing',
+                Icon: Flask,
+                color: 'purple',
+                url: '/pricing?product=experiments',
+            },
+        ],
     },
     {
         name: 'Docs',
@@ -1709,9 +1735,10 @@ function recursiveSearch(array, value) {
 }
 
 export const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
-    const parent = menu.find(({ internal }) =>
-        recursiveSearch(internal, window?.location?.pathname + (window?.location?.search ?? ''))
-    )
+    const parent = menu.find(({ internal, url }) => {
+        const currentURL = window?.location?.pathname + (window?.location?.search ?? '')
+        return currentURL === url || recursiveSearch(internal, currentURL)
+    })
 
     const internalMenu = parent?.internal
 

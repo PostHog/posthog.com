@@ -1,6 +1,6 @@
 import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -11,6 +11,7 @@ import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import { PlanComparison } from './PlanComparison'
 import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
+import { useLocation } from '@reach/router'
 
 export const section = cntl`
     max-w-6xl
@@ -49,8 +50,22 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
+const internalProductNames = {
+    'product-analytics': 'product_analytics',
+    'session-replay': 'session_replay',
+    'feature-flags': 'feature_flags',
+    experiments: 'experimentation',
+}
+
 const Pricing = (): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
+    const { search } = useLocation()
+    const [groupsToShow, setGropsToShow] = useState<undefined | string>()
+
+    useEffect(() => {
+        const product = new URLSearchParams(search).get('product')
+        setGropsToShow((product && internalProductNames[product]) || undefined)
+    }, [search])
 
     return (
         <Layout>
@@ -79,7 +94,7 @@ const Pricing = (): JSX.Element => {
                 </div>
             </section>
             <section className={`${section} mb-12 mt-12 md:px-4`}>
-                <PlanComparison />
+                <PlanComparison groupsToShow={groupsToShow} />
             </section>
 
             <PricingCalculator />
