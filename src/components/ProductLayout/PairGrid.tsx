@@ -13,11 +13,13 @@ const PairItem = ({ title, description, className = '', icon, url }: IPairItem) 
         <li className={` ${className}`}>
             <Link
                 to={url ?? ''}
-                className="block h-full text-primary hover:text-primary p-6 pb-8 bg-white rounded-md md:mx-4 shadow relative hover:scale-[1.02] hover:top-[-.25px] active:top-[.5px] active:scale-[1]"
+                className="block h-full text-primary hover:text-primary p-6 pb-8 bg-border/75 dark:bg-border-dark/75 rounded-md md:mx-4 shadow relative hover:scale-[1.02] hover:top-[-.25px] active:top-[.5px] active:scale-[1]"
             >
-                {Icon && <Icon className="w-8 h-8 mb-4 opacity-75" />}
+                {Icon && <Icon className="w-8 h-8 mb-4 opacity-75 text-primary dark:text-primary-dark" />}
                 <FeatureTitle className="text-red">{title}</FeatureTitle>
-                <FeatureDescription className="text-primary/75">{description}</FeatureDescription>
+                <FeatureDescription className="text-primary/75 dark:text-primary-dark/75">
+                    {description}
+                </FeatureDescription>
             </Link>
         </li>
     )

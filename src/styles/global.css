@@ -32,7 +32,7 @@ a {
 
 main a,
 .article-content a:not(.cta) {
-    @apply text-red hover:text-red font-semibold;
+    @apply text-red hover:text-red dark:text-yellow dark:hover:text-yellow font-semibold;
 }
 
 a.no-hover {

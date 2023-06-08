@@ -57,7 +57,7 @@ module.exports = {
             light: '#EEEFE9',
             dark: '#1D1F27',
             accent: '#E5E7E0',
-            'accent-dark': '#202228',
+            'accent-dark': '#232429',
             border: '#D0D1C9',
             'border-dark': '#4A4C52',
 
@@ -120,7 +120,7 @@ module.exports = {
                 primary: '#151515',
                 'primary-dark': '#EEEFE9',
                 accent: '#E5E7E0',
-                'accent-dark': '#202228',
+                'accent-dark': '#232429',
                 border: '#D0D1C9',
                 'border-dark': '#4A4C52',
 

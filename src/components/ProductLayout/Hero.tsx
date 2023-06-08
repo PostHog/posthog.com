@@ -36,12 +36,12 @@ export default function Hero({
         <div className="mb-12">
             <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <h1 id="overview" className="text-red text-5xl lg:text-6xl 2xl:text-7xl my-2 md:mt-0">
+                    <h1 id="overview" className="text-5xl lg:text-6xl 2xl:text-7xl my-2 md:mt-0">
                         {title}
                     </h1>
-                    <h2>PostHog does that.</h2>
+                    <h2 className="opacity-75">PostHog does that.</h2>
                     <p
-                        className="text-lg font-semibold text-black/70 mt-4"
+                        className="text-lg font-semibold opacity-70 mt-4"
                         dangerouslySetInnerHTML={{ __html: subtitle }}
                     />
                     {pricingCTA && mainCTA && (
