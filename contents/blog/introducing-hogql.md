@@ -1,5 +1,5 @@
 ---
-date: 2023-06-07
+date: 2023-06-08
 title: "Introducing HogQL: Direct SQL access for PostHog"
 rootPage: /blog
 sidebar: Blog
@@ -20,13 +20,13 @@ Today, we're releasing a major new feature as a public beta: the ability to dire
 
 You can use HogQL expressions to, among other things, enhance insights, filter event lists, and (most importantly) write full queries to analyze data in any way you want. 
 
-PostHog's existing insights are already incredibly powerful. HogQL is PostHog insights, but Super Saiyan.
+PostHog's existing insights are already incredibly powerful. HogQL turns insights Super Saiyan.
 
 HogQL is free for all users while in public beta – all we ask is that you [share your feedback with us](http://app.posthog.com/home#supportModal).
 
 ## What is HogQL?
 
-It's a translation layer over ClickHouse SQL. It's intuitive for anyone familiar with SQL, but it offers a few advantages and features.
+It's a translation layer over ClickHouse SQL. It's intuitive for anyone familiar with SQL, but it offers a few advantages and customizations.
 
 Features unique to HogQL include simplified access to event and person properties, as well as automatically added joins when you query fields with data on a different table, such as `events.person.properties.$browser`.
 
@@ -58,7 +58,7 @@ Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple p
 
 ### HogQL aggregations
 
-_And_ you can use HogQL to aggregate results in a funnel too, like we do with `properties.$session_id` above. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
+_And_ you can use HogQL to aggregate results in a funnel, too. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
 
 ![HogQL aggregations](../images/blog/array/hog_aggregate.mp4)
 
@@ -68,7 +68,7 @@ Of course, the most powerful way to leverage HogQL within PostHog is via the new
 
 For example, while you can use a retention insight to discover which **features** keep users coming back for more, you could build an SQL insight to find which **users** keep coming back, and identify outliers. 
 
-We're confident SQL insights will unlock unique insights into how users use your products, and we can't wait to hear [your feedback](http://app.posthog.com/home#supportModal) how you use SQL access in PostHog. 
+We're confident SQL insights will unlock deep analysis into how users use your products, and we can't wait to hear [your feedback](http://app.posthog.com/home#supportModal) and see how you use SQL access in PostHog. 
 
 To get a flavor, here's an example query summarizing survey data. It's purpose? Determining which countries prefer pineapple on a pizza. This is serious analysis:[^1]
 
@@ -111,7 +111,7 @@ You can also create custom table insights directly from the Events Explorer (pre
 
 Just hit that 'Open as a new insight' button (see above), tweak the JSON (if you want), and save your table to a dashboard or notebook... 
 
-[_What's that? Notebooks haven't launched, yet? But they're the future of everyth... oh, my bad!"_]. 🥸
+_What's that? Notebooks haven't launched, yet? But they're the future of everyth... oh, my bad!"_. 🥸
 
 Moving on... you can also use HogQL expressions (e.g. `properties.$screen_width * $properties.screen_height`) and aggregations (e.g. `sum(properties.price)`) as columns. This is helpful not just for generating tables that summarize person and event information, but also for exploring the data in new and totally custom ways. 
 
@@ -127,10 +127,10 @@ Over time, that plan evolved into creating [new ways for users to explore data](
 
 However, while this work was underway we realized we could potentially take it a step further and build full SQL support directly into PostHog as a new insight type... so we did! It was a short conversation. 
 
-We're still actively developing all these ideas, as well as the implementation of HogQL within PostHog – seriously, check out this [massive mega issue](https://github.com/PostHog/meta/issues/81). This is, as the cliché goes, just the beginning. There's at least 19 more Super Saiyan forms to go...
+We're still actively developing all these ideas, as well as the implementation of HogQL within PostHog – seriously, check out this [massive mega issue](https://github.com/PostHog/meta/issues/81). This is, as the cliché goes, just the beginning. There's at least 19 more Super Saiyan forms to go... 🔥
 
-Got an opinion on what we should do next? Share it in [the PostHog Slack group](/slack), or via the [feedback modal in PostHog](https://app.posthog.com/home#supportModal=feedback%3A).
+Got an opinion on what we should do next? Share it via the [feedback modal in PostHog](https://app.posthog.com/home#supportModal=feedback%3A), or let us know [on Twitter](https://twitter.com/posthog).
 
 > **Not a PostHog user?** [Get started for free](https://app.posthog.com/signup?utm_source=hogql-blog-bottom) – all users get 1 million events and 15k recordings free every month, **no card required.**
 
-[^1]: 68.5% of 🇺🇸 residents think 🍍 belongs on 🍕. People in 🇪🇸 are the greatest 🍍 deniers at 10%. One person in Aruba 🇦🇼 voted, but we're pretty sure that was one of us during our [2023 all-company offsite](/blog/aruba-hackathon). We built some cool hackathon projects there, like our [dashboard template library](/blog/aruba-hackathon), and an open-source tool for [monitoring and managing ClickHouse clusters](https://github.com/PostHog/HouseWatch). You could say it was openly... sourcey. "_Hello, HR? Are bad puns a firing offense?_"
+[^1]: 68.5% of 🇺🇸 residents think 🍍 belongs on 🍕. People in 🇪🇸 are the greatest 🍍 deniers at 10%. One person in Aruba 🇦🇼 voted, but we're pretty sure that was one of us during our [2023 all-company offsite](/blog/aruba-hackathon). We built some cool hackathon projects there, like our [dashboard template library](/templates), and an open-source tool for [monitoring and managing ClickHouse clusters](https://github.com/PostHog/HouseWatch). You could say it was openly... sourcey. "_Hello, HR? Are bad puns a firing offense?_"
