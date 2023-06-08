@@ -28,9 +28,9 @@ HogQL is free for all users while in public beta – all we ask is that you [sha
 
 It's a translation layer over ClickHouse SQL. It's intuitive for anyone familiar with SQL, but it offers a few advantages and customizations.
 
-Features unique to HogQL include simplified access to event and person properties, as well as automatically added joins when you query fields with data on a different table, such as `events.person.properties.$browser`.
+Features unique to HogQL include simplified access to event and person properties, like the [autocapture element chain](/tutorials/hogql-autocapture). It also automatically adds joins when you query fields with data on a different table, such as `events.person.properties.$browser`.
 
-You can also use subqueries, joins, table expressions, arrays, aggregations, lambdas, and a whole host of other neat SQL features, including aggregations. 
+You can also use subqueries, joins, table expressions, arrays, lambdas, and a whole host of other neat SQL features, including aggregations. 
 
 See our [HogQL documentation](/docs/product-analytics/hogql) for a full [list of supported ClickHouse SQL functions](/docs/product-analytics/hogql#supported-clickhouse-functions).
 
@@ -61,6 +61,8 @@ Oh, look. You can use HogQL in filters too. Useful for _filtering_ by multiple p
 _And_ you can use HogQL to aggregate results in a funnel, too. Is there anything HogQL can't do? Probably, yes, but we'll enjoy finding out for sure. 
 
 ![HogQL aggregations](../images/blog/array/hog_aggregate.mp4)
+
+> **🎓 Related tutorial** [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)
 
 ### Custom SQL insights
 
