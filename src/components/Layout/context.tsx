@@ -10,6 +10,7 @@ import {
     Message,
     Newspaper,
     Profile,
+    Receipt,
     RewindPlay,
     Stack,
     Toggle,
@@ -764,6 +765,12 @@ const menu = [
         name: 'Pricing',
         url: '/pricing',
         internal: [
+            {
+                name: 'All products',
+                Icon: Receipt,
+                color: 'red',
+                url: '/pricing',
+            },
             {
                 name: 'Product analytics',
                 Icon: Graph,

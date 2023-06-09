@@ -150,7 +150,7 @@ export default function MainNav() {
                                 return (
                                     <ul className="list-none text-left m-0 p-0 pb-[3px] space-y-[2px] w-[200px]">
                                         <li className="bg-border/20 dark:bg-border-dark/20 border-b border-light dark:border-dark text-[13px] px-2 py-1.5 text-primary/50 dark:text-primary-dark/60 z-20 m-0 !mb-[3px] font-semibold">
-                                            Login to...
+                                            Go to...
                                         </li>
                                         <li className="px-1">
                                             <Link
@@ -164,7 +164,7 @@ export default function MainNav() {
                                         <li className="px-1">
                                             <Link
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
-                                                to="/community"
+                                                to="/questions"
                                             >
                                                 <Chat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                 Community

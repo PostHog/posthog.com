@@ -125,6 +125,7 @@ module.exports = {
                 'accent-dark': '#232429',
                 border: '#D0D1C9',
                 'border-dark': '#4A4C52',
+                light: '#EEEFE9',
                 dark: '#1D1F27',
 
                 blue: '#2F80FA',
