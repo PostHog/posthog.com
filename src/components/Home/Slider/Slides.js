@@ -48,18 +48,7 @@ const Subtitle = ({ subtitle, className = '' }) => {
 }
 
 const Description = ({ description, className = '' }) => {
-    return <p className={`text-[16px] opacity-70 m-0 leading-tight ${className}`}>{description}</p>
-}
-
-const CTA = ({ url, title }) => {
-    return (
-        <Link className="text-[15px] flex space-x-1 items-center font-bold mt-4 group" to={url}>
-            <span>{title}</span>
-            <span className="text-gray-accent-light">
-                <RightArrow className="w-[20px] bounce" />
-            </span>
-        </Link>
-    )
+    return <p className={`text-[16px] opacity-70 leading-tight ${className}`}>{description}</p>
 }
 
 const ContentContainer = ({ children, className = '' }) => {
@@ -101,7 +90,7 @@ export const ProductAnalytics = () => {
         { title: 'Retention', Icon: Retention },
     ]
     return (
-        <div className="bg-[#1371FF] text-white relative grid grid-cols-4 lg:grid-cols-5 lg:gap-5 pt-5">
+        <div className="bg-[#1371FF] rounded-md text-white relative grid grid-cols-4 lg:grid-cols-5 lg:gap-5 pt-5">
             <ImageContainer className="col-span-2 lg:col-span-3 px-8 pt-4 -ml-8 md:-ml-0">
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -124,7 +113,14 @@ export const ProductAnalytics = () => {
                 <Content>
                     <Title title={'Product analytics'} />
                     <FeatureList features={features} />
-                    <CallToAction href="/product-analytics" type="outline" size="sm" color={false}>
+                    <CallToAction
+                        href="/product-analytics"
+                        type="outline"
+                        size="sm"
+                        className="group border-white bg-white"
+                        childClassName="bg-[#1371FF] border-white text-white group-hover:text-white
+                    "
+                    >
                         Explore
                     </CallToAction>
                 </Content>
@@ -159,7 +155,7 @@ export const SessionReplay = () => {
         { title: 'Network requests', Icon: Pulse },
     ]
     return (
-        <div className="bg-[#F2AD46] text-primary relative grid grid-cols-2 md:gap-7 pt-5">
+        <div className="bg-[#F2AD46] rounded-md text-primary relative grid grid-cols-2 md:gap-7 pt-5">
             <ImageContainer className="md:px-8 pt-4 pb-3">
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -185,7 +181,16 @@ export const SessionReplay = () => {
                     <FeatureList features={features} />
                     <p className="text-sm">*Android coming soon</p>
 
-                    <CTA url="/session-replay" title="Explore" />
+                    <CallToAction
+                        href="/session-replay"
+                        type="outline"
+                        size="sm"
+                        className="group border-black bg-black/50"
+                        childClassName="bg-[#F2AD46] border-black text-black group-hover:text-black
+                    "
+                    >
+                        Explore
+                    </CallToAction>
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div></div>
@@ -219,7 +224,7 @@ export const FeatureFlags = () => {
         { title: 'Instant rollbacks', Icon: Rewind },
     ]
     return (
-        <div className="bg-[#29DBBB] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded">
+        <div className="bg-[#29DBBB] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded-md">
             <ImageContainer className="h-[40vw] md:h-[300px] xl:h-[400px] md:ml-4">
                 <motion.div
                     transition={{ delay: 0.2 }}
@@ -257,7 +262,16 @@ export const FeatureFlags = () => {
                     <Description description="Safely roll out features to select users or cohorts." />
                     <FeatureList features={features} />
 
-                    <CTA url="/feature-flags" title="See how it works" />
+                    <CallToAction
+                        href="/feature-flags"
+                        type="outline"
+                        size="sm"
+                        className="group border-black bg-black/50"
+                        childClassName="bg-[#29DBBB] border-black text-black group-hover:text-black
+                    "
+                    >
+                        Explore
+                    </CallToAction>
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="md:relative w-3/4 ml-auto">
@@ -291,7 +305,7 @@ export const ABTesting = () => {
     ]
 
     return (
-        <div className="bg-[#9C19BD] text-primary-dark relative grid grid-cols-2 gap-7 pt-5 rounded">
+        <div className="bg-[#9C19BD] text-primary-dark relative grid grid-cols-2 gap-7 pt-5 rounded-md">
             <ImageContainer className="md:ml-4">
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -329,7 +343,17 @@ export const ABTesting = () => {
                     <Title title={'A/B testing'} />
                     <Description description={'Run tests with statistical significance.'} />
                     <FeatureList features={features} />
-                    <CTA url="/ab-testing" title="See how it works" />
+
+                    <CallToAction
+                        href="/ab-testing"
+                        type="outline"
+                        size="sm"
+                        className="group border-white bg-white"
+                        childClassName="bg-[#9C19BD] border-white text-white group-hover:text-white
+                    "
+                    >
+                        Explore
+                    </CallToAction>
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="md:relative w-1/2 ml-auto">
@@ -362,7 +386,7 @@ export const Cdp = () => {
         { title: 'Transformations', Icon: Gear },
     ]
     return (
-        <div className="bg-[#FCC779] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded">
+        <div className="bg-[#FCC779] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded-md">
             <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -386,7 +410,16 @@ export const Cdp = () => {
                     <Description description="60+ data connections available now. Full CDP coming soon." />
                     <FeatureList features={features} />
 
-                    <CTA url="/docs/integrations" title="Browse destinations" />
+                    <CallToAction
+                        href="/session-replay"
+                        type="outline"
+                        size="sm"
+                        className="group border-black bg-black/50"
+                        childClassName="bg-[#FCC779] border-black text-black group-hover:text-black
+                    "
+                    >
+                        Browse integrations
+                    </CallToAction>
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="md:relative w-3/4 ml-auto">
@@ -414,7 +447,7 @@ export const Cdp = () => {
 
 export const DataWarehouse = () => {
     return (
-        <div className="bg-[#29DBBB] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded">
+        <div className="bg-[#29DBBB] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded-md">
             <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -441,7 +474,16 @@ export const DataWarehouse = () => {
                     />
                     <Description description="Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API." />
 
-                    <CTA url="/docs/api" title="Explore what you can do" />
+                    <CallToAction
+                        href="/docs/cdp"
+                        type="outline"
+                        size="sm"
+                        className="group border-black bg-black/50"
+                        childClassName="bg-[#29DBBB] border-black text-black group-hover:text-black
+                    "
+                    >
+                        Learn more
+                    </CallToAction>
                 </Content>
                 <div className="mt-auto w-full">
                     <div className="w-1/2 md:w-full md:relative absolute bottom-0 right-0">
@@ -473,7 +515,7 @@ export const Sql = () => {
     ]
 
     return (
-        <div className="bg-[#940DB6] text-primary-dark relative grid grid-cols-2 gap-7 pt-5 rounded">
+        <div className="bg-[#940DB6] text-primary-dark relative grid grid-cols-2 gap-7 pt-5 rounded-md">
             <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -500,7 +542,16 @@ export const Sql = () => {
                     />
                     <FeatureList features={features} />
 
-                    <CTA url="/docs/self-host" title="Learn more about self-hosting" />
+                    <CallToAction
+                        href="/docs/product-analytics/hogql"
+                        type="outline"
+                        size="sm"
+                        className="group border-white bg-white/50"
+                        childClassName="bg-[#940DB6] border-white text-white group-hover:text-white
+                    "
+                    >
+                        Explore
+                    </CallToAction>
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="md:relative w-3/4">
@@ -518,7 +569,7 @@ export const Sql = () => {
 
 export const Api = () => {
     return (
-        <div className="bg-[#EB9D2A] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded">
+        <div className="bg-[#EB9D2A] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded-md">
             <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -544,7 +595,16 @@ export const Api = () => {
                         subtitle="Build custom functionality or create bespoke views specific to your business needs."
                     />
 
-                    <CTA url="/docs/self-host" title="Learn more about self-hosting" />
+                    <CallToAction
+                        href="/docs/api"
+                        type="outline"
+                        size="sm"
+                        className="group border-black bg-black/50"
+                        childClassName="bg-[#EB9D2A] border-black text-black group-hover:text-black
+                    "
+                    >
+                        Explore the API
+                    </CallToAction>
                 </Content>
                 <div className="flex items-end mt-auto w-full">
                     <div className="md:relative w-3/4">

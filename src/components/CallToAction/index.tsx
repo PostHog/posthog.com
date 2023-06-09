@@ -10,11 +10,11 @@ const sizes = {
     font-semibold
     px-4
     py-2
-    -translate-y-0.5
-    hover:-translate-y-1
-    active:-translate-y-0
-    border
-    mx-[-1px]
+    translate-y-[-2px]
+    hover:translate-y-[-3px]
+    active:translate-y-[-1px]
+    border-[1.5px]
+    mx-[-1.5px]
     `,
     md: `
     rounded-sm
@@ -22,19 +22,19 @@ const sizes = {
     font-semibold
     px-4
     py-2
-    -translate-y-1
-    hover:-translate-y-1.5
-    active:translate-y-[-2px]
-    border
-    mx-[-1px]
+    translate-y-[-2px]
+    hover:translate-y-[-4px]
+    active:translate-y-[-1px]
+    border-[1.5px]
+    mx-[-1.5px]
     `,
     lg: `
     rounded-[8px]
-    text-base
+    text-[15px]
     font-bold
     border-[1.5px]
     px-5
-    py-2.5
+    py-2
     -translate-y-1
     hover:-translate-y-1.5
     active:-translate-y-0.5
@@ -49,6 +49,7 @@ const primary = cntl`
     dark:text-primary
     dark:hover:text-primary
     border-button
+    dark:border-orange
 `
 
 const secondary = cntl`
@@ -58,10 +59,12 @@ const secondary = cntl`
     dark:text-primary
     dark:hover:text-primary
     border-button
+    dark:border-white
+    
 `
 
 const outline = cntl`
-    bg-transparent
+    border-[1.5px]
     text-primary
     hover:text-primary
     dark:text-primary-dark
@@ -77,15 +80,15 @@ const containerTypes = {
         bg-orange
     `,
     outline: `
-        bg-transparent
+        
 
     `,
 }
 
 const containerSizes = {
-    sm: `border-[1px] rounded-sm`,
-    md: `border-[1px] rounded-md`,
-    lg: `border-[1.5px] rounded-[8px]`,
+    sm: `border-[1.5px] dark:border-transparent rounded-sm`,
+    md: `border-[1.5px] dark:border-transparent rounded-md`,
+    lg: `border-[1.5px] dark:border-transparent rounded-[8px]`,
 }
 
 const container = (type, size, width) => `
@@ -132,6 +135,7 @@ export type CTAPropsType = {
     onClick?: () => void
     children?: JSX.Element | string
     className?: string
+    childClassName?: string
     external?: boolean
     externalNoIcon?: boolean
     state?: any
@@ -168,7 +172,8 @@ export const CallToAction = ({
     to,
     onClick,
     children,
-    className,
+    className = '',
+    childClassName = '',
     external,
     externalNoIcon,
     state = {},
@@ -186,7 +191,15 @@ export const CallToAction = ({
             event={event}
             className={`${container(type, size, width)} ${className}`}
         >
-            <span className={button(type, width, `block active:transition-all duration-100 select-none`, size, color)}>
+            <span
+                className={`${button(
+                    type,
+                    width,
+                    `block active:transition-all duration-100 select-none`,
+                    size,
+                    color
+                )} ${childClassName}`}
+            >
                 {children}
             </span>
         </Link>
