@@ -18,7 +18,8 @@ interface IProps {
     customFields?: {
         [key: string]: {
             type: 'radioGroup'
-            options: CustomFieldOption[]
+            options?: CustomFieldOption[]
+            cols?: 1 | 2
         }
     }
 }
@@ -197,10 +198,12 @@ function RadioGroup({
     options,
     name,
     placeholder,
+    cols = 2,
 }: {
     options: CustomFieldOption[]
     name: string
     placeholder: string
+    cols?: 1 | 2
 }) {
     if (!name) return null
     const { openOptions, setOpenOptions } = useContext(FormContext)
@@ -247,7 +250,9 @@ function RadioGroup({
                 <div
                     role="radiogroup"
                     aria-labelledby={`group-${name}`}
-                    className={`mt-2 grid grid-cols-2 gap-x-2 gap-y-2 ${open ? 'opacity-100' : 'opacity-0 absolute'}`}
+                    className={`mt-2 grid grid-cols-${cols} gap-x-2 gap-y-2 ${
+                        open ? 'opacity-100' : 'opacity-0 absolute'
+                    }`}
                 >
                     {options?.map((option, index) => {
                         const { value, label } = option
@@ -378,17 +383,21 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
                 >
                     <Form>
                         <div className="grid divide-y divide-dashed divide-gray-accent-light border border-gray-accent-light border-dashed">
-                            {form.fields.map(({ name, label, type, required }, index) => {
+                            {form.fields.map(({ name, label, type, required, options }, index) => {
                                 if (customFields && customFields[name])
                                     return {
                                         radioGroup: (
                                             <RadioGroup
-                                                options={customFields[name].options}
+                                                options={customFields[name].options || options}
                                                 name={name}
                                                 placeholder={label}
+                                                cols={customFields[name].cols}
                                             />
                                         ),
                                     }[customFields[name]?.type]
+
+                                if (type === 'enumeration')
+                                    return <RadioGroup options={options} name={name} placeholder={label} />
 
                                 return (
                                     <Input
