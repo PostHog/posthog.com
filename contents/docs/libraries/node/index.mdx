@@ -16,7 +16,7 @@ features:
 
 import CohortExpansionSnippet from '../\_snippets/cohort-expansion'
 
-If you're working with Node.js, the official `posthog-node` library is the simple way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/user-guides/feature-flags) are supported as well.
+If you're working with Node.js, the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/user-guides/feature-flags) are supported as well.
 
 ## Installation
 
@@ -74,10 +74,10 @@ A `capture` call requires:
 
 *   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
 
-Optionally you can submit:
+Optionally, you can also submit:
 
 -   `properties`, which is an object with any information you'd like to add
--   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, this makes things slow. [Read this tutorial for manually computing this information and speeding things up](/tutorials/experiments#step-2-sending-the-right-events)
+-   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/tutorials/experiments#step-2-sending-the-right-events) so that we can avoid making the request.
 
 For example:
 
@@ -92,91 +92,32 @@ client.capture({
 })
 ```
 
-#### Setting user properties via an event
+### Setting user properties
 
-To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `$set` and `$set_once`.
-
-##### $set
+To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
 ```node
 client.capture({
     distinctId: 'distinct id',
     event: 'movie played',
     properties: {
-        $set: { userProperty: 'value' },
+        $set: { name: 'Max Hedgehog'  },
+        $set_once: { initial_url: '/blog' },
     },
 })
 ```
 
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
-
-##### $set_once
-
-```node
-client.capture({
-    distinctId: 'distinct id',
-    event: 'movie played',
-    properties: {
-        $set_once: { userProperty: 'value' },
-    },
-})
-```
-
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
-
-### Identify
-
-> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
-
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things
-like segment users by these properties.
-
-An `identify` call requires:
-
--   `distinctId` – a distinct ID belonging to the user
--   `properties` – a user properties object
-
-For example:
-
-```node
-client.identify({
-    distinctId: 'user:123',
-    properties: {
-        email: 'john@doe.com',
-        proUser: false,
-    },
-})
-```
-
-The most obvious place to make this call is whenever a user signs up, or when they update their information.
+For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
 ### Alias
 
-To connect whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like "Which marketing channels leads to users churning after a month?" or "What do users do on our website before signing up?"
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-In a purely back-end implementation, this means whenever an anonymous user does something, you'll want to send a session ID with the capture call. Then, when that users signs up, you want to do an alias call with the session ID and the newly created user ID.
-
-The same concept applies for when a user logs in.
-
-If you're using PostHog in the front-end and back-end, doing the `identify` call in the frontend will be enough.
-
-An `alias` call requires:
-
--   `distinctId` – the user id
--   `alias` – the anonymous session distinct ID
-
-For example:
-
-```node
-client.alias({
-    distinctId: 'user:123',
-    alias: 'session:12345',
-})
-```
+We strongly recommend reading our docs on [alias](/data/integrate/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ### Sending page views
 
-If you're aiming for a full back-end implementation of PostHog, you can send `pageviews` from your backend, like so:
+If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
 
 ```node
 client.capture({
@@ -262,7 +203,7 @@ Before posthog-node v3.0, we added GeoIP properties to all incoming events by de
 
 As of posthog-node v3.0, the default now is to disregard the server IP, not add the GeoIP properties, and not use the values for feature flag evaluations.
 
-You can go back to previous behaviour by setting `disableGeoip` to false in your initialization:
+You can go back to previous behavior by setting `disableGeoip` to false in your initialization:
 
 ```node
 const posthog = new PostHog(PH_API_KEY, {

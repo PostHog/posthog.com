@@ -77,13 +77,9 @@ import JSIdentify from './\_snippets/identify.mdx'
 
 ### Alias
 
-> We strongly recommend reading our docs on [alias](/docs/data/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to better understand how to correctly use this method.
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-Sometimes, you want to assign multiple distinct IDs to a single user. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code, you can use `alias` to connect the frontend distinct ID to one accessible on the backend.
-
-```javascript
-posthog.alias('alias_id', 'distinct_id');
-```
+We strongly recommend reading our docs on [alias](/docs/data/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ### Reset after logout
 
