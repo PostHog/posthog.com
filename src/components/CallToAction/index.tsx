@@ -19,7 +19,7 @@ const sizes = {
     md: `
     rounded-sm
     text-[13px]
-    font-semibold
+    font-bold
     px-4
     py-2
     translate-y-[-2px]

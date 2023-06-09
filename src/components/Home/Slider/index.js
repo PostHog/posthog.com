@@ -4,18 +4,18 @@ import SliderComponent from 'react-slick'
 import { slideButtons } from './slideButtons'
 import { ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Cdp, DataWarehouse, Sql, Api } from './Slides'
 
-const SlideButton = ({ title, Icon, activeSlide, index }) => {
+const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
     const active = activeSlide === index
     return (
         <li className="px-1 pb-3">
             <button
                 className={`flex flex-col items-center justify-center pt-1 px-1 pb-3 w-full rounded-md transition-opacity transition-colors hover:bg-gray-accent/25 focus:bg-gray-accent/40 relative active:top-[1px] active:scale-[.99] space-y-1 h-full ${
                     active
-                        ? 'after:absolute after:bottom-0 after:h-[3px] after:w-full after:bg-blue after:rounded-full active '
+                        ? `after:absolute after:bottom-0 after:h-[3px] after:w-full after:bg-${color} after:rounded-full active `
                         : 'group '
                 }`}
             >
-                <span className="w-6 h-6 flex justify-center items-center opacity-60 group-hover:opacity-90">
+                <span className={`w-6 h-6 text-${color} flex justify-center items-center`}>
                     <Icon active={active} />
                 </span>
                 <p

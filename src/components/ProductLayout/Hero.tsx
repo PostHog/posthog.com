@@ -46,10 +46,10 @@ export default function Hero({
                     />
                     {pricingCTA && mainCTA && (
                         <div className="flex space-x-3 items-center">
-                            <CallToAction to={mainCTA.url} size="sm" className="">
+                            <CallToAction to={mainCTA.url} size="md" className="">
                                 {mainCTA.title}
                             </CallToAction>
-                            <CallToAction type="secondary" to={pricingCTA.url} size="sm" className="">
+                            <CallToAction type="secondary" to={pricingCTA.url} size="md" className="">
                                 {pricingCTA.title}
                             </CallToAction>
                         </div>

@@ -44,7 +44,6 @@ grid-rows-2
 grid-rows-3
 grid-rows-4
 h-full
-hover:text-light-yellow
 justify-start
 justify-start
 left-16
@@ -93,7 +92,6 @@ rotate-90
 sm:hidden
 space-x-reverse
 text-green
-text-light-yellow
 text-opacity-100
 text-opacity-50
 text-primary
