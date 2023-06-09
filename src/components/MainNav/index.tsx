@@ -104,7 +104,7 @@ export default function MainNav() {
                     </Link>
                     <ul className="flex list-none m-0 p-0">
                         {menu.map((menuItem) => {
-                            const active = menuItem.name === parent.name
+                            const active = menuItem.name === parent?.name
                             const { name, url } = menuItem
                             return (
                                 <li className="h-full" key={name}>
