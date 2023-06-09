@@ -124,7 +124,7 @@ export const ProductAnalytics = () => {
                 <Content>
                     <Title title={'Product analytics'} />
                     <FeatureList features={features} />
-                    <CallToAction href="/product-analytics" type="outline" size="sm">
+                    <CallToAction href="/product-analytics" type="outline" size="sm" color={false}>
                         Explore
                     </CallToAction>
                 </Content>

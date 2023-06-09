@@ -4,53 +4,85 @@ import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const sizes = {
-    sm: `
+    sm: (color) => `
     rounded-sm
     after:rounded-sm
-    text-sm
+    text-xs
     font-semibold
     px-3
     py-1.5
-    shadow-[0px_1.5px_#CD8407,inset_0px_-1px_#B17816]
     active:bottom-[-1.5px]
-    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
     active:after:h-[calc(100%+1.5px)]
     after:h-[calc(100%+3px)]
     hover:after:h-[calc(100%+4px)]
     hover:bottom-[1px]
+    ${
+        color
+            ? `
+    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
+    shadow-[0px_1.5px_#CD8407,inset_0px_-1px_#B17816]
     hover:shadow-[0px_2.5px_#CD8407,inset_0px_-1px_#B17816]
+    `
+            : `
+    active:shadow-[0px_0px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
+    shadow-[0px_1.5px_rgb(255_255_255_/_85%),inset_0px_-1px_white]
+    hover:shadow-[0px_2.5px_rgb(255_255_255_/_85%),inset_0px_-1px_white]
+    `
+    }
+    
     `,
-    md: `
+    md: (color) => `
     rounded-md
     after:rounded-md
     text-base
     font-bold
     px-4
     py-2
-    shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
     active:bottom-[-2.5px]
-    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
     active:after:h-[calc(100%+1.5px)]
     after:h-[calc(100%+4px)]
     hover:after:h-[calc(100%+5px)]
     hover:bottom-[1px]
+    ${
+        color
+            ? `
+    shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
+    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
     hover:shadow-[0px_3.5px_#CD8407,inset_0px_-2px_#B17816]
+    `
+            : `
+    shadow-[0px_2.5px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
+    active:shadow-[0px_0px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
+    hover:shadow-[0px_3.5px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
+    `
+    }
+    
     `,
-    lg: `
+    lg: (color) => `
     rounded-md
     after:rounded-md
     text-base
     font-bold
     px-5
     py-2.5
-    shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
     active:bottom-[-2.5px]
-    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
     active:after:h-[calc(100%+1.5px)]
     after:h-[calc(100%+4px)]
     hover:after:h-[calc(100%+5px)]
     hover:bottom-[1px]
+    ${
+        color
+            ? `
+    shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
+    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
     hover:shadow-[0px_3.5px_#CD8407,inset_0px_-2px_#B17816]
+    `
+            : `
+    shadow-[0px_2.5px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
+    active:shadow-[0px_0px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
+    hover:shadow-[0px_3.5px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
+    `
+    }
     `,
 }
 
@@ -86,7 +118,8 @@ export const button = (
     type: keyof typeof buttonTypes = 'primary',
     width = 'auto',
     className = '',
-    size: keyof typeof sizes = 'lg'
+    size: keyof typeof sizes = 'lg',
+    color = true
 ) =>
     type === 'custom'
         ? ''
@@ -94,13 +127,14 @@ export const button = (
     relative
     after:absolute
     after:border-[1.5px]
-    after:border-button
+    ${color ? `after:border-button` : `after:border-white`}
+    ${color ? `` : `!text-white`}
     after:w-full
     after:inset-0
     text-center
     w-${width}
     ${buttonTypes[type] || ''}    
-    ${sizes[size]}
+    ${sizes[size](color)}
     ${className}
 `
 
@@ -117,6 +151,7 @@ export type CTAPropsType = {
     externalNoIcon?: boolean
     state?: any
     event?: any
+    color?: boolean
 }
 
 export interface TrackedCTAPropsType extends CTAPropsType {
@@ -153,6 +188,7 @@ export const CallToAction = ({
     externalNoIcon,
     state = {},
     event,
+    color = true,
 }: CTAPropsType): JSX.Element => {
     const url = to || href
     return (
@@ -160,7 +196,7 @@ export const CallToAction = ({
             state={state}
             external={external}
             externalNoIcon={externalNoIcon}
-            className={button(type, width, className, size)}
+            className={button(type, width, className, size, color)}
             onClick={onClick}
             to={url}
             event={event}
