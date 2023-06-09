@@ -71,7 +71,7 @@ module.exports = {
             black: '#000',
             primary: '#151515',
             'primary-dark': '#fff',
-            orange: '#EF7632',
+            orange: '#F1A82C',
             yellow: '#F7A501',
             footer: '#08042f',
             transparent: 'transparent',

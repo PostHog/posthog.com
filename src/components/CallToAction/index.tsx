@@ -87,7 +87,7 @@ const sizes = {
 }
 
 const primary = cntl`
-    bg-yellow
+    bg-orange
     text-primary
     hover:text-primary
     dark:text-primary
