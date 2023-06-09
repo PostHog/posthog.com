@@ -735,7 +735,7 @@
         },
         {
             "source": "/docs/integrate/user-properties",
-            "destination": "/docs/getting-started/user-properties"
+            "destination": "/docs/data/user-properties"
         },
         {
             "source": "/docs/integrate",
