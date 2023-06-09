@@ -731,7 +731,7 @@
         { "source": "/docs/integrate/rust", "destination": "/docs/libraries/rust" },
         {
             "source": "/docs/integrate/identifying-users",
-            "destination": "/docs/getting-started/identify-users"
+            "destination": "/docs/data/identify"
         },
         {
             "source": "/docs/integrate/user-properties",
