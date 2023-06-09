@@ -20,7 +20,7 @@ const PopularPage = ({ icon, label, url }: PopularPageProps) => {
         >
             <Link
                 to={url}
-                className="text-white flex flex-col items-center hover:bg-white/10 rounded p-4 group relative
+                className="text-white hover:text-white flex flex-col items-center hover:bg-white/10 rounded p-4 group relative
                     active:top-[0.5px]
                     active:scale-[.98]"
             >
@@ -53,8 +53,8 @@ export const AboutTransparency = () => {
         <section id="transparency" className="bg-black pt-12 mdlg:pt-16 relative px-4 mdlg:px-8 mb-12">
             <div className="flex flex-col-reverse mdlg:flex-row mdlg:items-end gap-8 max-w-5xl mx-auto text-white">
                 <aside className="basis-[60%] flex flex-col relative h-full">
-                    <div className="border-2 border-white/50 border-solid px-8 py-6 max-w-sm">
-                        <div className="flex items-center justify-between pb-3 mb-3">
+                    <div className="border-2 border-bg-light border-solid px-8 py-6 max-w-sm">
+                        <div className="flex items-center justify-between pb-3 mb-3 border-b-2 border-bg-light">
                             <h4 className="text-xl mb-0">Transparency</h4>
                             <div className="flex space-x-1">
                                 <Star />
@@ -84,7 +84,7 @@ export const AboutTransparency = () => {
                         <Link to="/roadmap">product roadmap</Link>.
                     </h4>
                     <p className="opacity-70">Here are some popular pages from our company handbook:</p>
-                    <ul className="p-0 m-0 mb-2 gap-x-1 grid grid-cols-3">
+                    <ul className="p-0 m-0 mb-4 gap-x-1 grid grid-cols-3">
                         <PopularPage
                             icon={<Compensation />}
                             label="Compensation calculator"
@@ -97,7 +97,12 @@ export const AboutTransparency = () => {
                             url="/handbook/strategy/business-model"
                         />
                     </ul>
-                    <CallToAction to="/handbook/getting-started/start-here" type="secondary" className="!w-full">
+                    <CallToAction
+                        to="/handbook/getting-started/start-here"
+                        type="outline"
+                        color={false}
+                        className="!w-full"
+                    >
                         Browse the handbook
                     </CallToAction>
                 </div>

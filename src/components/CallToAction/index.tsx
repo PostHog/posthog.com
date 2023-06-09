@@ -9,8 +9,8 @@ const sizes = {
     after:rounded-sm
     text-xs
     font-semibold
-    px-3
-    py-1.5
+    px-4
+    py-2
     active:bottom-[-1.5px]
     active:after:h-[calc(100%+1.5px)]
     after:h-[calc(100%+3px)]
@@ -32,16 +32,16 @@ const sizes = {
     
     `,
     md: (color) => `
-    rounded-md
-    after:rounded-md
-    text-base
-    font-bold
+    rounded-sm
+    after:rounded-sm
+    text-[13px]
+    font-semibold
     px-4
     py-2
-    active:bottom-[-2.5px]
+    active:bottom-[-1.5px]
     active:after:h-[calc(100%+1.5px)]
-    after:h-[calc(100%+4px)]
-    hover:after:h-[calc(100%+5px)]
+    after:h-[calc(100%+3px)]
+    hover:after:h-[calc(100%+4px)]
     hover:bottom-[1px]
     ${
         color
@@ -59,8 +59,8 @@ const sizes = {
     
     `,
     lg: (color) => `
-    rounded-md
-    after:rounded-md
+    rounded-[8px]
+    after:rounded-[8px]
     text-base
     font-bold
     px-5
@@ -96,6 +96,8 @@ const primary = cntl`
 
 const secondary = cntl`
     bg-white
+    text-primary
+    hover:text-primary
     dark:text-primary
     dark:hover:text-primary
 `
