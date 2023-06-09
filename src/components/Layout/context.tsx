@@ -690,20 +690,6 @@ const handbookSidebar = [
     },
 ]
 
-export const questionsSidebar = [
-    { name: 'Topics' },
-    { name: 'Product analytics', url: '/questions/topic/product-analytics' },
-    { name: 'Session replay', url: '/questions/topic/session-replay' },
-    { name: 'Feature flags', url: '/questions/topic/feature-flags' },
-    { name: 'A/B testing', url: '/questions/topic/ab-testing' },
-    { name: 'Product OS' },
-    { name: 'API', url: '/questions/topic/api' },
-    { name: 'Apps', url: '/questions/topic/apps' },
-    { name: 'Data management' },
-    { name: 'Events & actions', url: '/questions/topic/events-actions' },
-    { name: 'Persons', url: '/questions/topic/people-and-properties' },
-]
-
 export const communityMenu = {
     name: 'Community',
     url: '/questions/topic/product-analytics',
@@ -716,8 +702,21 @@ export const communityMenu = {
             name: 'Questions',
             Icon: Message,
             color: 'teal',
-            url: '/questions/topic/product-analytics',
-            children: questionsSidebar,
+            url: '/questions',
+            children: [
+                { name: 'Topics' },
+                { name: 'All', url: '/questions' },
+                { name: 'Product analytics', url: '/questions/topic/product-analytics' },
+                { name: 'Session replay', url: '/questions/topic/session-replay' },
+                { name: 'Feature flags', url: '/questions/topic/feature-flags' },
+                { name: 'A/B testing', url: '/questions/topic/ab-testing' },
+                { name: 'Product OS' },
+                { name: 'API', url: '/questions/topic/api' },
+                { name: 'Apps', url: '/questions/topic/apps' },
+                { name: 'Data management' },
+                { name: 'Events & actions', url: '/questions/topic/events-actions' },
+                { name: 'Persons', url: '/questions/topic/people-and-properties' },
+            ],
         },
         {
             name: 'Roadmap',
