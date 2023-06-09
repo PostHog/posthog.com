@@ -11,7 +11,15 @@ import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { LayoutProvider } from './context'
 
-const Layout = ({ children, className = '' }: { children: React.ReactNode; className?: string }): JSX.Element => {
+const Layout = ({
+    children,
+    parent,
+    activeInternalMenu,
+    className = '',
+}: {
+    children: React.ReactNode
+    className?: string
+}): JSX.Element => {
     const posthog = usePostHog()
 
     useEffect(() => {
@@ -22,7 +30,7 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     return (
         <SearchProvider>
-            <LayoutProvider>
+            <LayoutProvider parent={parent} activeInternalMenu={activeInternalMenu}>
                 <div className={className}>
                     <Header />
                     <main>{children}</main>

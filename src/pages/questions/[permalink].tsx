@@ -11,6 +11,7 @@ import { useUser } from 'hooks/useUser'
 import { useNav } from 'components/Community/useNav'
 
 import { XIcon } from '@heroicons/react/outline'
+import { communityMenu } from 'components/Layout/context'
 
 type QuestionPageProps = {
     params: {
@@ -40,7 +41,7 @@ export default function QuestionPage(props: QuestionPageProps) {
 
     const nav = useNav()
     return (
-        <Layout>
+        <Layout parent={communityMenu} activeInternalMenu={communityMenu.internal[1]}>
             <SEO
                 title={isLoading ? 'Squeak question - PostHog' : `${question?.attributes?.subject} - PostHog`}
                 noindex={question?.attributes.archived}

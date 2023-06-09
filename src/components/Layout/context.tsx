@@ -19,7 +19,7 @@ import React, { createContext } from 'react'
 
 export const Context = createContext<any>(undefined)
 
-const handbookMenu = [
+const handbookSidebar = [
     {
         name: 'Handbook',
         url: '/handbook',
@@ -689,6 +689,56 @@ const handbookMenu = [
         ],
     },
 ]
+
+export const questionsSidebar = [
+    { name: 'Topics' },
+    { name: 'Product analytics', url: '/questions/topic/product-analytics' },
+    { name: 'Session replay', url: '/questions/topic/session-replay' },
+    { name: 'Feature flags', url: '/questions/topic/feature-flags' },
+    { name: 'A/B testing', url: '/questions/topic/ab-testing' },
+    { name: 'Product OS' },
+    { name: 'API', url: '/questions/topic/api' },
+    { name: 'Apps', url: '/questions/topic/apps' },
+    { name: 'Data management' },
+    { name: 'Events & actions', url: '/questions/topic/events-actions' },
+    { name: 'Persons', url: '/questions/topic/people-and-properties' },
+]
+
+export const communityMenu = {
+    name: 'Community',
+    url: '/questions/topic/product-analytics',
+    internal: [
+        {
+            name: 'Edition',
+            Icon: Newspaper,
+        },
+        {
+            name: 'Questions',
+            Icon: Message,
+            color: 'teal',
+            url: '/questions/topic/product-analytics',
+            children: questionsSidebar,
+        },
+        {
+            name: 'Roadmap',
+            Icon: Map,
+            color: 'orange',
+            url: '/roadmap',
+        },
+        {
+            name: 'Changelog',
+            Icon: Calendar,
+            color: 'seagreen',
+            url: '/changelog/2023',
+            children: [
+                { name: '2023', url: '/changelog/2023' },
+                { name: '2022', url: '/changelog/2022' },
+                { name: '2021', url: '/changelog/2021' },
+                { name: '2020', url: '/changelog/2020' },
+            ],
+        },
+    ],
+}
 
 const menu = [
     {
@@ -1619,53 +1669,7 @@ const menu = [
             },
         ],
     },
-    {
-        name: 'Community',
-        url: '/questions/topic/product-analytics',
-        internal: [
-            {
-                name: 'Edition',
-                Icon: Newspaper,
-            },
-            {
-                name: 'Questions',
-                Icon: Message,
-                color: 'teal',
-                url: '/questions/topic/product-analytics',
-                children: [
-                    { name: 'Topics' },
-                    { name: 'Product analytics', url: '/questions/topic/product-analytics' },
-                    { name: 'Session replay', url: '/questions/topic/session-replay' },
-                    { name: 'Feature flags', url: '/questions/topic/feature-flags' },
-                    { name: 'A/B testing', url: '/questions/topic/ab-testing' },
-                    { name: 'Product OS' },
-                    { name: 'API', url: '/questions/topic/api' },
-                    { name: 'Apps', url: '/questions/topic/apps' },
-                    { name: 'Data management' },
-                    { name: 'Events & actions', url: '/questions/topic/events-actions' },
-                    { name: 'Persons', url: '/questions/topic/people-and-properties' },
-                ],
-            },
-            {
-                name: 'Roadmap',
-                Icon: Map,
-                color: 'orange',
-                url: '/roadmap',
-            },
-            {
-                name: 'Changelog',
-                Icon: Calendar,
-                color: 'seagreen',
-                url: '/changelog/2023',
-                children: [
-                    { name: '2023', url: '/changelog/2023' },
-                    { name: '2022', url: '/changelog/2022' },
-                    { name: '2021', url: '/changelog/2021' },
-                    { name: '2020', url: '/changelog/2020' },
-                ],
-            },
-        ],
-    },
+    communityMenu,
     {
         name: 'Company',
         url: '/about',
@@ -1715,8 +1719,8 @@ const menu = [
                     },
                 ],
             },
-            { name: 'Team', Icon: Profile, color: 'yellow', url: '/handbook/company/team', children: handbookMenu },
-            { name: 'Handbook', Icon: Book, color: 'seagreen', url: '/handbook', children: handbookMenu },
+            { name: 'Team', Icon: Profile, color: 'yellow', url: '/handbook/company/team', children: handbookSidebar },
+            { name: 'Handbook', Icon: Book, color: 'seagreen', url: '/handbook', children: handbookSidebar },
             { name: 'Careers', Icon: Laptop, color: 'purple', url: '/careers' },
         ],
     },
@@ -1741,18 +1745,22 @@ function recursiveSearch(array, value) {
     return false
 }
 
-export const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
-    const parent = menu.find(({ internal, url }) => {
-        const currentURL = window?.location?.pathname + (window?.location?.search ?? '')
-        return currentURL === url || recursiveSearch(internal, currentURL)
-    })
+export const LayoutProvider = ({ children, ...other }: { children: React.ReactNode }) => {
+    const parent =
+        other.parent ??
+        menu.find(({ internal, url }) => {
+            const currentURL = window?.location?.pathname + (window?.location?.search ?? '')
+            return currentURL === url || recursiveSearch(internal, currentURL)
+        })
 
     const internalMenu = parent?.internal
 
-    const activeInternalMenu = internalMenu?.find((menuItem) => {
-        const currentURL = window?.location?.pathname + (window?.location?.search ?? '')
-        return currentURL === menuItem.url || recursiveSearch(menuItem.children, currentURL)
-    })
+    const activeInternalMenu =
+        other.activeInternalMenu ??
+        internalMenu?.find((menuItem) => {
+            const currentURL = window?.location?.pathname + (window?.location?.search ?? '')
+            return currentURL === menuItem.url || recursiveSearch(menuItem.children, currentURL)
+        })
 
     return <Context.Provider value={{ menu, parent, internalMenu, activeInternalMenu }}>{children}</Context.Provider>
 }
