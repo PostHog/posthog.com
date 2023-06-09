@@ -4,85 +4,41 @@ import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const sizes = {
-    sm: (color) => `
+    sm: `
     rounded-sm
-    after:rounded-sm
     text-xs
     font-semibold
     px-4
     py-2
-    active:bottom-[-1.5px]
-    active:after:h-[calc(100%+1.5px)]
-    after:h-[calc(100%+3px)]
-    hover:after:h-[calc(100%+4px)]
-    hover:bottom-[1px]
-    ${
-        color
-            ? `
-    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
-    shadow-[0px_1.5px_#CD8407,inset_0px_-1px_#B17816]
-    hover:shadow-[0px_2.5px_#CD8407,inset_0px_-1px_#B17816]
-    `
-            : `
-    active:shadow-[0px_0px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
-    shadow-[0px_1.5px_rgb(255_255_255_/_85%),inset_0px_-1px_white]
-    hover:shadow-[0px_2.5px_rgb(255_255_255_/_85%),inset_0px_-1px_white]
-    `
-    }
-    
+    -translate-y-0.5
+    hover:-translate-y-1
+    active:-translate-y-0
+    border
+    mx-[-1px]
     `,
-    md: (color) => `
+    md: `
     rounded-sm
-    after:rounded-sm
     text-[13px]
     font-semibold
     px-4
     py-2
-    active:bottom-[-1.5px]
-    active:after:h-[calc(100%+1.5px)]
-    after:h-[calc(100%+3px)]
-    hover:after:h-[calc(100%+4px)]
-    hover:bottom-[1px]
-    ${
-        color
-            ? `
-    shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
-    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
-    hover:shadow-[0px_3.5px_#CD8407,inset_0px_-2px_#B17816]
-    `
-            : `
-    shadow-[0px_2.5px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
-    active:shadow-[0px_0px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
-    hover:shadow-[0px_3.5px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
-    `
-    }
-    
+    -translate-y-1
+    hover:-translate-y-1.5
+    active:translate-y-[-2px]
+    border
+    mx-[-1px]
     `,
-    lg: (color) => `
+    lg: `
     rounded-[8px]
-    after:rounded-[8px]
     text-base
     font-bold
+    border-[1.5px]
     px-5
     py-2.5
-    active:bottom-[-2.5px]
-    active:after:h-[calc(100%+1.5px)]
-    after:h-[calc(100%+4px)]
-    hover:after:h-[calc(100%+5px)]
-    hover:bottom-[1px]
-    ${
-        color
-            ? `
-    shadow-[0px_2.5px_#CD8407,inset_0px_-2px_#B17816]
-    active:shadow-[0px_0px_#CD8407,inset_0px_-2px_#B17816]
-    hover:shadow-[0px_3.5px_#CD8407,inset_0px_-2px_#B17816]
-    `
-            : `
-    shadow-[0px_2.5px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
-    active:shadow-[0px_0px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
-    hover:shadow-[0px_3.5px_rgb(255_255_255_/_85%),inset_0px_-2px_white]
-    `
-    }
+    -translate-y-1
+    hover:-translate-y-1.5
+    active:-translate-y-0.5
+    mx-[-1.5px]
     `,
 }
 
@@ -92,6 +48,7 @@ const primary = cntl`
     hover:text-primary
     dark:text-primary
     dark:hover:text-primary
+    border-button
 `
 
 const secondary = cntl`
@@ -100,6 +57,7 @@ const secondary = cntl`
     hover:text-primary
     dark:text-primary
     dark:hover:text-primary
+    border-button
 `
 
 const outline = cntl`
@@ -108,6 +66,36 @@ const outline = cntl`
     hover:text-primary
     dark:text-primary-dark
     dark:hover:text-primary-dark
+`
+
+const containerTypes = {
+    primary: `
+        bg-button-shadow
+        
+    `,
+    secondary: `
+        bg-orange
+    `,
+    outline: `
+        bg-transparent
+
+    `,
+}
+
+const containerSizes = {
+    sm: `border-[1px] rounded-sm`,
+    md: `border-[1px] rounded-md`,
+    lg: `border-[1.5px] rounded-[8px]`,
+}
+
+const container = (type, size, width) => `
+    ${containerTypes[type]}
+    ${containerSizes[size]}
+    w-${width}
+    text-primary
+    inline-block
+    border-button
+    text-center
 `
 
 const buttonTypes = {
@@ -127,16 +115,11 @@ export const button = (
         ? ''
         : cntl`
     relative
-    after:absolute
-    after:border-[1.5px]
-    ${color ? `after:border-button` : `after:border-white`}
     ${color ? `` : `!text-white`}
-    after:w-full
-    after:inset-0
     text-center
     w-${width}
     ${buttonTypes[type] || ''}    
-    ${sizes[size](color)}
+    ${sizes[size]}
     ${className}
 `
 
@@ -198,12 +181,14 @@ export const CallToAction = ({
             state={state}
             external={external}
             externalNoIcon={externalNoIcon}
-            className={button(type, width, className, size, color)}
             onClick={onClick}
             to={url}
             event={event}
+            className={`${container(type, size, width)} ${className}`}
         >
-            {children}
+            <span className={button(type, width, `block active:transition-all duration-100 select-none`, size, color)}>
+                {children}
+            </span>
         </Link>
     )
 }

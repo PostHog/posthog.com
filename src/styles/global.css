@@ -466,11 +466,6 @@ ul {
     list-style: disc;
 }
 
-.bg-primary-dark {
-    background: rgba(218, 72, 16, 0.9);
-    border-color: rgba(218, 72, 16, 0.9);
-}
-
 .contributor-images > .gatsby-image-wrapper {
     height: 50px;
     width: 50px;
