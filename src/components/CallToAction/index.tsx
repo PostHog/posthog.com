@@ -4,7 +4,7 @@ import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const sizes = {
-    sm: `
+    sm: cntl`
     rounded-sm
     text-xs
     font-semibold
@@ -16,7 +16,7 @@ const sizes = {
     border-[1.5px]
     mx-[-1.5px]
     `,
-    md: `
+    md: cntl`
     rounded-sm
     text-[13px]
     font-bold
@@ -28,7 +28,7 @@ const sizes = {
     border-[1.5px]
     mx-[-1.5px]
     `,
-    lg: `
+    lg: cntl`
     rounded-[8px]
     text-[15px]
     font-bold
@@ -72,26 +72,22 @@ const outline = cntl`
 `
 
 const containerTypes = {
-    primary: `
+    primary: cntl`
         bg-button-shadow
-        
     `,
-    secondary: `
+    secondary: cntl`
         bg-orange
     `,
-    outline: `
-        
-
-    `,
+    outline: cntl``,
 }
 
 const containerSizes = {
-    sm: `border-[1.5px] dark:border-transparent rounded-sm`,
-    md: `border-[1.5px] dark:border-transparent rounded-md`,
-    lg: `border-[1.5px] dark:border-transparent rounded-[8px]`,
+    sm: cntl`border-[1.5px] dark:border-transparent rounded-sm`,
+    md: cntl`border-[1.5px] dark:border-transparent rounded-md`,
+    lg: cntl`border-[1.5px] dark:border-transparent rounded-[8px]`,
 }
 
-const container = (type, size, width) => `
+const container = (type, size, width) => cntl`
     ${containerTypes[type]}
     ${containerSizes[size]}
     w-${width}
