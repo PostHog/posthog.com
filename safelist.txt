@@ -119,3 +119,9 @@ border-seagreen
 border-purple
 border-salmon
 border-orange
+after:bg-blue
+after:bg-teal
+after:bg-seagreen
+after:bg-purple
+after:bg-salmon
+after:bg-orange

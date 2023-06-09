@@ -191,7 +191,7 @@ export const CallToAction = ({
                 className={`${button(
                     type,
                     width,
-                    `block active:transition-all duration-100 select-none`,
+                    `block active:transition-all active:duration-100 select-none`,
                     size,
                     color
                 )} ${childClassName}`}
