@@ -116,7 +116,7 @@ export const ProductAnalytics = () => {
                     <CallToAction
                         href="/product-analytics"
                         type="outline"
-                        size="sm"
+                        size="md"
                         className="group border-white bg-white"
                         childClassName="bg-[#1371FF] border-white text-white group-hover:text-white
                     "
@@ -184,7 +184,7 @@ export const SessionReplay = () => {
                     <CallToAction
                         href="/session-replay"
                         type="outline"
-                        size="sm"
+                        size="md"
                         className="group border-black bg-black/50"
                         childClassName="bg-[#F2AD46] border-black text-black group-hover:text-black
                     "
@@ -265,7 +265,7 @@ export const FeatureFlags = () => {
                     <CallToAction
                         href="/feature-flags"
                         type="outline"
-                        size="sm"
+                        size="md"
                         className="group border-black bg-black/50"
                         childClassName="bg-[#29DBBB] border-black text-black group-hover:text-black
                     "
@@ -347,7 +347,7 @@ export const ABTesting = () => {
                     <CallToAction
                         href="/ab-testing"
                         type="outline"
-                        size="sm"
+                        size="md"
                         className="group border-white bg-white"
                         childClassName="bg-[#9C19BD] border-white text-white group-hover:text-white
                     "
@@ -413,7 +413,7 @@ export const Cdp = () => {
                     <CallToAction
                         href="/session-replay"
                         type="outline"
-                        size="sm"
+                        size="md"
                         className="group border-black bg-black/50"
                         childClassName="bg-[#FCC779] border-black text-black group-hover:text-black
                     "
@@ -477,7 +477,7 @@ export const DataWarehouse = () => {
                     <CallToAction
                         href="/docs/cdp"
                         type="outline"
-                        size="sm"
+                        size="md"
                         className="group border-black bg-black/50"
                         childClassName="bg-[#29DBBB] border-black text-black group-hover:text-black
                     "
@@ -545,7 +545,7 @@ export const Sql = () => {
                     <CallToAction
                         href="/docs/product-analytics/hogql"
                         type="outline"
-                        size="sm"
+                        size="md"
                         className="group border-white bg-white/50"
                         childClassName="bg-[#940DB6] border-white text-white group-hover:text-white
                     "
@@ -598,7 +598,7 @@ export const Api = () => {
                     <CallToAction
                         href="/docs/api"
                         type="outline"
-                        size="sm"
+                        size="md"
                         className="group border-black bg-black/50"
                         childClassName="bg-[#EB9D2A] border-black text-black group-hover:text-black
                     "
