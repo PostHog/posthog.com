@@ -62,10 +62,10 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <p className="text-[13px] my-2 dark:text-white p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
                 <strong>Tip:</strong> If you've ever asked a question on PostHog.com, you already have an account!
             </p>
-            <CallToAction onClick={() => setState('login')} width="full" size="sm">
+            <CallToAction onClick={() => setState('login')} width="full" size="md">
                 Login to posthog.com
             </CallToAction>
-            <CallToAction onClick={() => setState('signup')} width="full" type="secondary" size="sm" className="mt-2">
+            <CallToAction onClick={() => setState('signup')} width="full" type="secondary" size="md" className="mt-2">
                 Create an account
             </CallToAction>
         </>
