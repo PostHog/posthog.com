@@ -28,7 +28,7 @@ No matter your role, being able to use the basics of GitHub helps you understand
 
 ## Trust and feedback over process
 
-There are two ways to scale - trust and feedback, or process. We choose the former because we're building a wide platform with many products, so autonomy is more important than control. We hire people that work well with high level direction and are will step on toes if needed to get things done.
+There are two ways to scale - trust and feedback, or process. We choose the former because we're building a wide platform with many products, so autonomy is more important than control. We hire people that work well with high level direction and will step on toes if needed to get things done.
 
 When giving / receiving feedback, we assume positive intentions and focus on giving specific examples. Many of our team's peak experiences at PostHog have been receiving direct feedback. Feedback should be acknowledged, but what you do with it is up to you - no one built anything great by committee.
 
