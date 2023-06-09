@@ -45,7 +45,8 @@ export default function Hero() {
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative md:!mb-8')}>
                     <h1 className={heading()}>
-                        How engineers <span className="text-yellow inline-block">build better products</span>
+                        How engineers{' '}
+                        <span className="text-red dark:text-yellow inline-block">build better products</span>
                     </h1>
                     <h2 className={heading('subtitle', 'primary', 'my-6')}>
                         The single platform to analyze, test, observe, and deploy new features
