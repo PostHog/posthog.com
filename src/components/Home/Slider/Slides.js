@@ -115,7 +115,7 @@ export const ProductAnalytics = () => {
                     <FeatureList features={features} />
                     <CallToAction
                         href="/product-analytics"
-                        type="outline"
+                        type="custom"
                         size="md"
                         className=""
                         childClassName="!bg-[#1371FF]
@@ -183,7 +183,7 @@ export const SessionReplay = () => {
 
                     <CallToAction
                         href="/session-replay"
-                        type="outline"
+                        type="custom"
                         size="md"
                         className="group !border-black/25 !bg-black/10"
                         childClassName="!bg-[#F2AD46] border-black !text-black group-hover:text-black
@@ -264,7 +264,7 @@ export const FeatureFlags = () => {
 
                     <CallToAction
                         href="/feature-flags"
-                        type="outline"
+                        type="custom"
                         size="md"
                         className="group !border-black/25 !bg-black/10"
                         childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black
@@ -346,7 +346,7 @@ export const ABTesting = () => {
 
                     <CallToAction
                         href="/ab-testing"
-                        type="outline"
+                        type="custom"
                         size="md"
                         className=""
                         childClassName="!bg-[#9C19BD]
@@ -412,7 +412,7 @@ export const Cdp = () => {
 
                     <CallToAction
                         href="/session-replay"
-                        type="outline"
+                        type="custom"
                         size="md"
                         className="group !border-black/25 !bg-black/10"
                         childClassName="!bg-[#FCC779] border-black !text-black group-hover:text-black
@@ -476,7 +476,7 @@ export const DataWarehouse = () => {
 
                     <CallToAction
                         href="/docs/cdp"
-                        type="outline"
+                        type="custom"
                         size="md"
                         className="group !border-black/25 !bg-black/10"
                         childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black
@@ -544,7 +544,7 @@ export const Sql = () => {
 
                     <CallToAction
                         href="/docs/product-analytics/hogql"
-                        type="outline"
+                        type="custom"
                         size="md"
                         className=""
                         childClassName="!bg-[#D42F18]
@@ -597,7 +597,7 @@ export const Api = () => {
 
                     <CallToAction
                         href="/docs/api"
-                        type="outline"
+                        type="custom"
                         size="md"
                         className="group !border-black/25 !bg-black/10"
                         childClassName="!bg-[#EB9D2A] border-black !text-black group-hover:text-black

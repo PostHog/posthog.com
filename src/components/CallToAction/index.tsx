@@ -5,7 +5,7 @@ import React from 'react'
 
 const sizes = {
     sm: cntl`
-    rounded-sm
+    rounded-[6px]
     text-[13px]
     font-semibold
     px-3.5
@@ -17,7 +17,7 @@ const sizes = {
     mx-[-1.5px]
     `,
     md: cntl`
-    rounded-sm
+    rounded-[6px]
     text-[13px]
     font-bold
     px-4
@@ -65,12 +65,19 @@ const secondary = cntl`
 `
 
 const outline = cntl`
-    border-[1.5px]
+    border-yellow
+    bg-white
     text-primary
     hover:text-primary
     dark:bg-dark
     dark:text-primary-dark
     dark:hover:text-primary-dark
+`
+
+const custom = cntl`
+    bg-dark
+    text-primary-dark
+    hover:text-primary-dark
 `
 
 const containerTypes = {
@@ -84,14 +91,20 @@ const containerTypes = {
         dark:border-button-secondary-dark
     `,
     outline: cntl`
-        dark:bg-white/20
-        dark:border-white/30
+        bg-yellow/50
+        border-dark/30
+        dark:bg-white/10
+        dark:border-white/20
+    `,
+    custom: cntl`
+        bg-white/20
+        border-white/30
     `,
 }
 
 const containerSizes = {
-    sm: cntl`border-[1.5px] relative top-[1px] rounded-sm`,
-    md: cntl`border-[1.5px] relative top-[2px] rounded-md`,
+    sm: cntl`border-[1.5px] relative top-[1px] rounded-[6px]`,
+    md: cntl`border-[1.5px] relative top-[2px] rounded-[6px]`,
     lg: cntl`border-[1.5px] relative top-[2px] rounded-[8px]`,
 }
 
@@ -109,6 +122,7 @@ const buttonTypes = {
     primary,
     secondary,
     outline,
+    custom,
 }
 
 export const button = (
@@ -118,9 +132,7 @@ export const button = (
     size: keyof typeof sizes = 'lg',
     color = true
 ) =>
-    type === 'custom'
-        ? ''
-        : cntl`
+    cntl`
     relative
     ${color ? `` : `!text-white`}
     text-center
