@@ -6,10 +6,10 @@ import React from 'react'
 const sizes = {
     sm: cntl`
     rounded-sm
-    text-xs
+    text-[13px]
     font-semibold
-    px-4
-    py-2
+    px-3.5
+    py-1.5
     translate-y-[-2px]
     hover:translate-y-[-3px]
     active:translate-y-[-1px]
@@ -49,24 +49,26 @@ const primary = cntl`
     dark:text-primary
     dark:hover:text-primary
     border-button
-    dark:border-orange
+    dark:border-button-dark
+    dark:bg-orange
 `
 
 const secondary = cntl`
     bg-white
     text-primary
     hover:text-primary
-    dark:text-primary
-    dark:hover:text-primary
+    dark:text-primary-dark
+    dark:hover:text-primary-dark
     border-button
-    dark:border-white
-    
+    dark:border-orange
+    dark:bg-dark
 `
 
 const outline = cntl`
     border-[1.5px]
     text-primary
     hover:text-primary
+    dark:bg-dark
     dark:text-primary-dark
     dark:hover:text-primary-dark
 `
@@ -74,17 +76,23 @@ const outline = cntl`
 const containerTypes = {
     primary: cntl`
         bg-button-shadow
+        dark:bg-button-shadow-dark
     `,
     secondary: cntl`
         bg-orange
+        dark:bg-button-secondary-shadow-dark
+        dark:border-button-secondary-dark
     `,
-    outline: cntl``,
+    outline: cntl`
+        dark:bg-white/20
+        dark:border-white/30
+    `,
 }
 
 const containerSizes = {
-    sm: cntl`border-[1.5px] dark:border-transparent rounded-sm`,
-    md: cntl`border-[1.5px] dark:border-transparent rounded-md`,
-    lg: cntl`border-[1.5px] dark:border-transparent rounded-[8px]`,
+    sm: cntl`border-[1.5px] relative top-[1px] rounded-sm`,
+    md: cntl`border-[1.5px] relative top-[2px] rounded-md`,
+    lg: cntl`border-[1.5px] relative top-[2px] rounded-[8px]`,
 }
 
 const container = (type, size, width) => cntl`

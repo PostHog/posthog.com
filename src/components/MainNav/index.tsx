@@ -132,12 +132,7 @@ export default function MainNav() {
                         })}
                     </ul>
                     <div className="flex items-center justify-end">
-                        <CallToAction
-                            size="sm"
-                            type="primary"
-                            className="mr-2 dark:!bg-white dark:border-white"
-                            childClassName="dark:!bg-accent-dark dark:border-white dark:!text-white"
-                        >
+                        <CallToAction size="sm" type="outline" className="mr-2 " childClassName="">
                             Get started
                         </CallToAction>
 

@@ -117,8 +117,8 @@ export const ProductAnalytics = () => {
                         href="/product-analytics"
                         type="outline"
                         size="md"
-                        className="group border-white bg-white"
-                        childClassName="bg-[#1371FF] border-white text-white group-hover:text-white
+                        className=""
+                        childClassName="!bg-[#1371FF]
                     "
                     >
                         Explore
@@ -185,8 +185,8 @@ export const SessionReplay = () => {
                         href="/session-replay"
                         type="outline"
                         size="md"
-                        className="group border-black bg-black/50"
-                        childClassName="bg-[#F2AD46] border-black text-black group-hover:text-black
+                        className="group !border-black/25 !bg-black/10"
+                        childClassName="!bg-[#F2AD46] border-black !text-black group-hover:text-black
                     "
                     >
                         Explore
@@ -266,8 +266,8 @@ export const FeatureFlags = () => {
                         href="/feature-flags"
                         type="outline"
                         size="md"
-                        className="group border-black bg-black/50"
-                        childClassName="bg-[#29DBBB] border-black text-black group-hover:text-black
+                        className="group !border-black/25 !bg-black/10"
+                        childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black
                     "
                     >
                         Explore
@@ -348,8 +348,8 @@ export const ABTesting = () => {
                         href="/ab-testing"
                         type="outline"
                         size="md"
-                        className="group border-white bg-white"
-                        childClassName="bg-[#9C19BD] border-white text-white group-hover:text-white
+                        className=""
+                        childClassName="!bg-[#9C19BD]
                     "
                     >
                         Explore
@@ -414,8 +414,8 @@ export const Cdp = () => {
                         href="/session-replay"
                         type="outline"
                         size="md"
-                        className="group border-black bg-black/50"
-                        childClassName="bg-[#FCC779] border-black text-black group-hover:text-black
+                        className="group !border-black/25 !bg-black/10"
+                        childClassName="!bg-[#FCC779] border-black !text-black group-hover:text-black
                     "
                     >
                         Browse integrations
@@ -478,8 +478,8 @@ export const DataWarehouse = () => {
                         href="/docs/cdp"
                         type="outline"
                         size="md"
-                        className="group border-black bg-black/50"
-                        childClassName="bg-[#29DBBB] border-black text-black group-hover:text-black
+                        className="group !border-black/25 !bg-black/10"
+                        childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black
                     "
                     >
                         Learn more
@@ -515,7 +515,7 @@ export const Sql = () => {
     ]
 
     return (
-        <div className="bg-[#940DB6] text-primary-dark relative grid grid-cols-2 gap-7 pt-5 rounded-md">
+        <div className="bg-[#D42F18] text-primary-dark relative grid grid-cols-2 gap-7 pt-5 rounded-md">
             <ImageContainer>
                 <motion.div
                     transition={{ delay: 0.4 }}
@@ -546,8 +546,8 @@ export const Sql = () => {
                         href="/docs/product-analytics/hogql"
                         type="outline"
                         size="md"
-                        className="group border-white bg-white/50"
-                        childClassName="bg-[#940DB6] border-white text-white group-hover:text-white
+                        className=""
+                        childClassName="!bg-[#D42F18]
                     "
                     >
                         Explore
@@ -599,8 +599,8 @@ export const Api = () => {
                         href="/docs/api"
                         type="outline"
                         size="md"
-                        className="group border-black bg-black/50"
-                        childClassName="bg-[#EB9D2A] border-black text-black group-hover:text-black
+                        className="group !border-black/25 !bg-black/10"
+                        childClassName="!bg-[#EB9D2A] border-black !text-black group-hover:text-black
                     "
                     >
                         Explore the API

@@ -66,7 +66,8 @@ module.exports = {
 
             'button-shadow': '#CD8407',
             'button-border': '#B17816',
-            'button-shadow-dark': '#CD8407',
+            'button-shadow-dark': '#99660E',
+            'button-secondary-shadow-dark': '#925D05',
 
             blue: '#2F80FA',
             orange: '#EB9D2A',
@@ -158,6 +159,8 @@ module.exports = {
                 'bg-light': '#EEEFE9',
                 'bg-dark': '#1D1F27',
                 button: '#B17816',
+                'button-dark': '#835C19',
+                'button-secondary-dark': '#C78617',
             },
             borderRadius: {
                 sm: '4px',
