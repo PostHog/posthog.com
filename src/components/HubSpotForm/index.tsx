@@ -15,6 +15,7 @@ interface IProps {
     formID: string
     validationSchema?: any
     customMessage?: React.ReactNode
+    onSubmit?: (values: any) => void
     customFields?: {
         [key: string]: {
             type: 'radioGroup'
@@ -304,7 +305,7 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     )
 }
 
-export default function HubSpotForm({ formID, customFields, customMessage, validationSchema }: IProps) {
+export default function HubSpotForm({ formID, customFields, customMessage, validationSchema, onSubmit }: IProps) {
     const { href } = useLocation()
     const [openOptions, setOpenOptions] = useState<string[]>([])
     const [form, setForm] = useState<{ fields: Field[]; buttonText: string; message: string }>({
@@ -341,6 +342,7 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
         if (res.status === 200) {
             setSubmitted(true)
             scroll.scrollToTop()
+            onSubmit && onSubmit(values)
         }
     }
 
@@ -350,7 +352,7 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
             .then((form: Form) => {
                 const fields = form.formFieldGroups
                     .map((group) => {
-                        return group.fields
+                        return group.fields.filter((field) => !field?.hidden)
                     })
                     .flat()
                 setForm({
@@ -370,7 +372,7 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
                     </div>
                 )}
                 <div className="bg-gray-accent-light px-6 py-8 rounded-md mt-4">
-                    {customMessage || <p>{form.message}</p>}
+                    {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message }} />}
                 </div>
             </>
         ) : (
