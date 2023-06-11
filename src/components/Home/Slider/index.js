@@ -7,12 +7,12 @@ import { ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Cdp, DataWare
 const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
     const active = activeSlide === index
     return (
-        <li className="px-1 pb-3">
+        <li className="pb-1 border-b border-primary/25 dark:border-primary-dark/25">
             <button
-                className={`flex flex-col items-center justify-center pt-1 px-1 pb-3 w-full rounded-md transition-opacity transition-colors hover:bg-gray-accent/25 focus:bg-gray-accent/40 relative active:top-[1px] active:scale-[.99] space-y-1 h-full ${
+                className={`flex flex-col items-center justify-center mt-1 p-2 w-full rounded-md transition-opacity transition-colors border border-b-3 border-transparent relative space-y-1 h-full ${
                     active
-                        ? `after:absolute after:bottom-0 after:h-[3px] after:w-full after:bg-${color} after:rounded-full active `
-                        : 'group '
+                        ? `after:absolute after:bottom-[calc(-.5rem_-_1px)] after:h-[3px] after:w-full after:bg-${color} after:rounded-full active `
+                        : 'group hover:border-light dark:hover:border-dark hover:translate-y-[-2px] active:translate-y-[1px]'
                 }`}
             >
                 <span className={`w-6 h-6 text-${color} flex justify-center items-center`}>
@@ -55,7 +55,7 @@ export default function Slider() {
                         arrows={false}
                         slidesToShow={8}
                         focusOnSelect
-                        className="home-slider-buttons list-none max-w-full lg:max-w-7xl mx-auto m-0 p-0"
+                        className="home-slider-buttons list-none max-w-full lg:max-w-7xl mx-auto m-0 p-0 pb-4"
                     >
                         {slideButtons.map((slide, index) => {
                             return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
