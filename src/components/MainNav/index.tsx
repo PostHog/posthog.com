@@ -205,8 +205,10 @@ export default function MainNav() {
                             <li key={name}>
                                 <Link
                                     to={url}
-                                    className={`group flex items-center relative px-2 pt-1.5 pb-1 mb-2 rounded ${
-                                        active ? '' : 'hover:bg-border/50 dark:hover:bg-border-dark/50'
+                                    className={`group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded  ${
+                                        active
+                                            ? ''
+                                            : 'border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                                     }`}
                                 >
                                     <span className={`w-6 h-6 mr-2 text-${color}`}>
@@ -221,9 +223,14 @@ export default function MainNav() {
                                     >
                                         {name}
                                     </span>
-                                    {active && (
+
+                                    {active ? (
                                         <span
-                                            className={`absolute bottom-[calc(-.5rem_-_1px)] left-0 w-full border-b-[1.5px] rounded-full border-${color}`}
+                                            className={`absolute bottom-[calc(-.5rem_-_2px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors border-${color}`}
+                                        />
+                                    ) : (
+                                        <span
+                                            className={`absolute bottom-[calc(-.5rem_-_2px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors border-transparent`}
                                         />
                                     )}
                                 </Link>
