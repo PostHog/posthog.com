@@ -337,6 +337,15 @@ If you're aiming for a full back-end implementation of PostHog, you can send `pa
 posthog.capture('distinct id', '$pageview', {'$current_url': 'https://example.com'})
 ```
 
+## Serverless environments (Render/Lambda/...)
+
+By default, the library buffers events before sending them to the capture endpoint, for better performance. This can
+lead to lost events in serverless environments, if the python process is terminated by the platform before the buffer
+is fully flushed. To avoid this, you can either:
+
+- ensure that `posthog.flush()` is called after processing every request, by adding a middleware to your server: this allows `posthog.capture()` to remain asynchronous for better performance.
+- enable the `sync_mode` option when initializing the client, so that all calls to `posthog.capture()` become synchronous.
+
 ## Django
 
 For Django, you can do the initialisation of the key in the AppConfig, so that it's available everywhere.
