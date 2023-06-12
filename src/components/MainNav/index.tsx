@@ -13,6 +13,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
 import { DarkModeToggle } from 'components/DarkModeToggle'
 import { useLayoutData } from 'components/Layout/hooks'
+import { useLocation } from '@reach/router'
 
 const getTailwindClasses = (color: string) => {
     return { text: `text-${color}`, border: `border-${color}` }
@@ -92,16 +93,31 @@ function Tooltip({
     )
 }
 
+const ActiveBackground = () => {
+    return (
+        <span
+            className={`bg-light dark:bg-dark absolute w-full h-[calc(100%+1px)] left-0 inset-0
+                before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:rounded-br-lg before:border-b before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
+                after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:rounded-bl-lg after:border-b after:right-0 after:bg-accent dark:after:bg-accent-dark`}
+        >
+            <span className="absolute bottom-0 left-0 border-b border-bg-light dark:border-bg-dark w-full" />
+        </span>
+    )
+}
+
 export default function MainNav() {
     const { open } = useSearch()
     const { menu, parent, internalMenu, activeInternalMenu } = useLayoutData()
+    const { pathname } = useLocation()
     return (
         <div>
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-2">
                 <div className="flex max-w-screen-3xl mx-auto px-5 justify-between">
-                    <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark" to="/">
-                        <Logo className="h-[24px] fill-current " />
+                    <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
+                        {pathname === '/' && <ActiveBackground />}
+                        <Logo className="h-[24px] fill-current relative px-2 box-content" />
                     </Link>
+
                     <ul className="flex list-none m-0 p-0">
                         {menu.map((menuItem) => {
                             const active = menuItem.name === parent?.name
@@ -116,15 +132,7 @@ export default function MainNav() {
                                                 : 'opacity-70 hover:opacity-100'
                                         }`}
                                     >
-                                        {active && (
-                                            <span
-                                                className={`bg-light dark:bg-dark absolute w-full h-[calc(100%+1px)] left-0 inset-0
-                                            before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:rounded-br-lg before:border-b before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
-                                            after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:rounded-bl-lg after:border-b after:right-0 after:bg-accent dark:after:bg-accent-dark`}
-                                            >
-                                                <span className="absolute bottom-0 left-0 border-b border-bg-light dark:border-bg-dark w-full" />
-                                            </span>
-                                        )}
+                                        {active && <ActiveBackground />}
                                         <span className="relative">{name}</span>
                                     </Link>
                                 </li>
