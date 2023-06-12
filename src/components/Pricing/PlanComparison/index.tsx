@@ -266,7 +266,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
     return availableProducts?.length > 0 && availablePlans.length > 0 ? (
         <div className={`w-full relative mb-0 space-y-4 -mt-8 md:mt-0`}>
             {/* PLAN HEADERS */}
-            <div className="flex flex-wrap sticky top-0 z-10 -mx-4 md:mx-0">
+            <div className="flex flex-wrap sticky top-[108px] z-10 -mx-4 md:mx-0">
                 <div
                     className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-primary dark:bg-dark bg-light dark:text-primary-dark pb-4 pl-4 md:pl-0`}
                 >
