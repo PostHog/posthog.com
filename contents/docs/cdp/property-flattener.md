@@ -7,6 +7,8 @@ tags:
     - property-flattener
 ---
 
+> **Note:** With the release of [HogQL](/docs/product-analytics/hogql), you can access nested properties without the need for this app. We have disabled new installations of it, but you can still use it if you have it installed.
+
 This app flattens nested properties in PostHog events, making it easier to access them through filters if needed.
 
 This is useful if, for example, you're an online retailer and have purchase events with the following property structure:
@@ -89,7 +91,7 @@ We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkom
 
 ### Who maintains this app?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+This app is maintained by PostHog, but we have stopped actively developing it with the release of [HogQL](/docs/product-analytics/hogql). If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
 ### What if I have feedback on this app?
 
