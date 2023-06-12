@@ -340,7 +340,7 @@ posthog.capture('distinct id', '$pageview', {'$current_url': 'https://example.co
 ## Serverless environments (Render/Lambda/...)
 
 By default, the library buffers events before sending them to the capture endpoint, for better performance. This can
-lead to lost events in serverless environments, if the python processs is termined by the platform before the buffer
+lead to lost events in serverless environments, if the python process is terminated by the platform before the buffer
 is fully flushed. To avoid this, you can either:
 
 - ensure that `posthog.flush()` is called after processing every request, by adding a middleware to your server: this allows `posthog.capture()` to remain asynchronous for better performance.
