@@ -139,7 +139,7 @@ const ActiveBackground = () => {
 
 export default function MainNav() {
     const { open } = useSearch()
-    const { menu, parent, internalMenu, activeInternalMenu } = useLayoutData()
+    const { menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
     return (
         <div>
@@ -217,9 +217,15 @@ export default function MainNav() {
                                             <DarkModeToggle />
                                         </li>
                                         <li className="px-1">
-                                            <button className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block w-full text-left">
-                                                <TextWidth className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                Wide mode
+                                            <button
+                                                onClick={() => setFullWidthContent(!fullWidthContent)}
+                                                className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
+                                            >
+                                                <div>
+                                                    <TextWidth className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                    <span>Wide mode</span>
+                                                </div>
+                                                <Toggle checked={fullWidthContent} />
                                             </button>
                                         </li>
                                     </ul>

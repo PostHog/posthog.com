@@ -15,7 +15,7 @@ import {
     Stack,
     Toggle,
 } from 'components/NewIcons'
-import React, { createContext } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 
 export const Context = createContext<any>(undefined)
 
@@ -1745,6 +1745,9 @@ function recursiveSearch(array, value) {
 }
 
 export const LayoutProvider = ({ children, ...other }: { children: React.ReactNode }) => {
+    const [fullWidthContent, setFullWidthContent] = useState<boolean>(
+        typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true'
+    )
     const parent =
         other.parent ??
         menu.find(({ internal, url }) => {
@@ -1761,5 +1764,15 @@ export const LayoutProvider = ({ children, ...other }: { children: React.ReactNo
             return currentURL === menuItem.url || recursiveSearch(menuItem.children, currentURL)
         })
 
-    return <Context.Provider value={{ menu, parent, internalMenu, activeInternalMenu }}>{children}</Context.Provider>
+    useEffect(() => {
+        localStorage.setItem('full-width-content', fullWidthContent + '')
+    }, [fullWidthContent])
+
+    return (
+        <Context.Provider
+            value={{ menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent }}
+        >
+            {children}
+        </Context.Provider>
+    )
 }

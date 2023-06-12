@@ -25,26 +25,16 @@ export default function Post({ children }: { children: React.ReactNode }) {
         questions,
         menu,
         title,
-        filePath,
         breadcrumb,
         hideSidebar,
         nextPost,
         hideSurvey,
         hideSearch,
         mobileMenu,
-        darkMode,
-        fullWidthContent,
-        setFullWidthContent,
         contentContainerClasses,
         stickySidebar,
         searchFilter,
-        hideWidthToggle,
     } = usePost()
-
-    const handleFullWidthContentChange = () => {
-        localStorage.setItem('full-width-content', !fullWidthContent + '')
-        setFullWidthContent(!fullWidthContent)
-    }
 
     const handleArticleTransitionEnd = (e) => {
         const hash = window?.location?.hash
