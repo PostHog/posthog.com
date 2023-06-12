@@ -59,6 +59,23 @@ analytics.group('company_id_in_your_db', {
     "subscription": "subscription",
     "date_joined": "2020-01-23T00:00:00.000Z"
 })
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "$groupidentify",
+    "properties": {
+        "distinct_id": "company_id_in_your_db",
+        "$group_type": "company",
+        "$group_key": "company_id_in_your_db",
+        "$group_set": {
+            "name": "PostHog",
+            "user_count": 33,
+            "date_joined": "2020-01-23T00:00:00.000Z"
+        }
+    }
+}' <ph_instance_address>/capture/
+```
 ```
 
 </MultiLanguage>
