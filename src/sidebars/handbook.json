@@ -667,6 +667,10 @@
             {
                 "name": "Pricing principles",
                 "url": "/handbook/engineering/feature-pricing"
+            },
+            {
+                "name": "Usage reports",
+                "url": "/handbook/engineering/usage_reports"
             }
         ]
     }
