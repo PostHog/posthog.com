@@ -11,12 +11,44 @@ import { App, Brightness, Chat, Search, TextWidth, User } from 'components/NewIc
 import { Placement } from '@popperjs/core'
 import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
-import { DarkModeToggle } from 'components/DarkModeToggle'
 import { useLayoutData } from 'components/Layout/hooks'
 import { useLocation } from '@reach/router'
+import Toggle from 'components/Toggle'
+import usePostHog from 'hooks/usePostHog'
 
-const getTailwindClasses = (color: string) => {
-    return { text: `text-${color}`, border: `border-${color}` }
+const DarkModeToggle = () => {
+    const { websiteTheme } = useValues(layoutLogic)
+    const { setWebsiteTheme } = useActions(layoutLogic)
+    const posthog = usePostHog()
+
+    useEffect(() => {
+        if (window) {
+            setWebsiteTheme(window.__theme)
+            window.__onThemeChange = () => {
+                setWebsiteTheme(window.__theme)
+                if (posthog) {
+                    posthog.people.set({ preferred_theme: window.__theme })
+                }
+            }
+        }
+    }, [])
+
+    const handleClick = () => {
+        window.__setPreferredTheme(websiteTheme === 'light' ? 'dark' : 'light')
+    }
+
+    return (
+        <button
+            onClick={handleClick}
+            className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
+        >
+            <div>
+                <Brightness className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                <span>Dark mode</span>
+            </div>
+            <Toggle checked={websiteTheme === 'dark'} />
+        </button>
+    )
 }
 
 function Tooltip({
@@ -182,13 +214,7 @@ export default function MainNav() {
                                             Site settings
                                         </li>
                                         <li className="px-1">
-                                            <button className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full">
-                                                <div>
-                                                    <Brightness className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                    <span>Dark mode</span>
-                                                </div>
-                                                <DarkModeToggle />
-                                            </button>
+                                            <DarkModeToggle />
                                         </li>
                                         <li className="px-1">
                                             <button className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block w-full text-left">
