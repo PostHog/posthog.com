@@ -8,14 +8,14 @@ availability:
     enterprise: full
 ---
 
-The Toolbar is like the 'Inspect Element' dev tool, but specifically for PostHog features and data. When enabled, the Toolbar appears as an overlay **on your product or website** (it's not visible to your users). With it you can seamlessly interact with the elements to [create Actions](/tutorials/how-to-capture-events-the-easy-ways), visualize heatmaps, override feature flags, and more.
+The toolbar is like "Inspect Element" for PostHog features and data. When enabled, the toolbar appears as an overlay **on your product or website** (it's not visible to your users). With it, you can interact with elements to [create actions](/tutorials/how-to-capture-events-the-easy-ways), visualize heatmaps, override feature flags, and more.
 
 ![PostHog toolbar](../../images/docs/product-analytics/toolbar.png)
 
-## How to launch the Toolbar
+## How to launch the toolbar
 
-1. Go to 'Launch Toolbar' in the left-hand menu
-2. Click 'Enable PostHog Toolbar'
+1. In your PostHog instance, Go to '[Launch Toolbar](https://app.posthog.com/toolbar)' in the left-hand menu
+2. Click 'Enable the PostHog toolbar'
 3. Add the URLs you wish to enable the toolbar for. Only you will be able to see it – not your users.
 4. Click Save and then Launch.    
 5. A new window will open with toolbar on your website. Click on the toolbar to interact with it.
@@ -40,11 +40,12 @@ Each number in the top right box of each element represents the number of clicks
 
 Numbers at the bottom or top of the screen indicate that there are more elements that are not currently being displayed on the page.
 
-You can change the date range of the heatmap by clicking on the number next to the (🔥) icon on the toolbar. This displays a menu where you can select a new date range.
+### Changing the date range
+
+You can change the date range of the heatmap by clicking on the number next to the 🔥 icon on the toolbar to open the heatmap menu.
 
 ![How to change the heatmap date range](../../images/products/product-analytics/heatmaps-date-filter.mp4)
 
-You can also load more data, change how links are matched, and view a list of the most clicked on elements in descending order.
 
 ### How to create an action from a heatmap
 
@@ -54,13 +55,13 @@ Once you have enabled the heatmap, click on any element. You will then be able t
 
 ### Loading more data
 
-If you have many events, you may need to load more data to see everything on the heatmap. To do this, click on the load more button in the menu.
+If you have many events, you may need to load more data to see everything on the heatmap. To do this, click on the load more button in the heatmap menu.
 
 ![How to load more data in the heatmap menu](../../images/products/product-analytics/heatmaps-load-more.png)
 
 ### Matching links by their target URL
 
-By default, the toolbar matches clicks using the elements on the page, and not by their target URLs (i.e., `href` attribute). This is fine for most scenarios, where you have static elements that always have the same target URL. However, this may not be ideal for dynamic lists that may have different target URLs depending on the underlying data.
+By default, the toolbar matches clicks using the elements on the page, and not by their target URLs (i.e., `href` attribute). This is fine for most scenarios where you have static elements with the same target URL. However, this may not be ideal for dynamic lists that have different target URLs depending on the underlying data.
 
 For example, consider the following screenshot of a list of elements for "Newly seen persons" from the PostHog app:
 
@@ -76,19 +77,19 @@ For example, if we enable this for our previous example, we see much fewer click
 
 ![How to enable link matching in the heatmap](../../images/products/product-analytics/heatmaps-target-url-on.png)
 
-### Combining heatmaps from similar pages
+### Combining heatmaps from similar pages using wildcards
 
-If you have similar pages that are mostly the same but have dynamic content based on an identifier in the url (e.g., product pages on an ecommerce site), you can search and display their combined heatmap using wildcards `*` in the heatmap menu.
+If you have similar pages that are mostly the same but have dynamic content based on an identifier in the URL (e.g., product pages on an ecommerce site), you can search and display their combined heatmap using wildcards `*` in the heatmap menu.
 
 For example, if the product pages on an ecommerce site use a URL format of `https://yourwebsite.com/products/product-id`, you can use the wildcard URL `https://yourwebsite.com/products/*` to display a combined heatmap from all the product pages.
 
 ![a gif of the toolbar popover menu being used to add a wildcard into the URL](../../images/tutorials/toolbar/wildcards.gif)
 
-## Creating actions from the toolbar using Inspect
+## Creating actions from the toolbar
 
 The toolbar enables you to easily create [actions](/docs/data/actions) by clicking elements directly on your website. 
 
-To do this, click on the 🔍 Inspect button on the Toolbar. This will add a blue overlay to your website. Then, if you click on an element, you will be shown the option to create an action from it.
+To do this, click on the 🔍 Inspect button on the toolbar. This will add a blue overlay to your website. Then, if you click on an element, you will be shown the option to create an action from it.
 
 ![How to create a new action using the toolbar](../../images/products/product-analytics/toolbar-create-new-action.mp4)
 
@@ -126,7 +127,7 @@ You can view your existing actions on your page by clicking the "Actions" button
 
 By clicking on a specific element, you can update or delete the action.
 
-Note that the number in the green box on the top left of the element is the action's index in your list of actions (and does not represent how many times that action was triggered). The number in the yellow box next to the "Actions" button in the toolbar represents the total number of actions you have created.
+The number in the green box on the top left of the element is the **action's index** in your list of actions (and **does not** represent how many times that action was triggered). The number in the yellow box next to the "Actions" button in the toolbar represents the total number of actions you have created.
 
 ![How to setup the PostHog toolbar](../../images/products/product-analytics/toolbar-view-actions.mp4)
 
@@ -134,9 +135,9 @@ Note that the number in the green box on the top left of the element is the acti
 
 The toolbar also enables you to test your feature flags. You can enable, disable, or override your feature flags, and then view how your website or app changes with the new feature flags values.
 
-To do this, click on the "Feature Flags" button in the toolbar. Then, search for any feature flag of choice and click on the toggles to change it's value. 
+To do this, click on the "Feature Flags" button in the toolbar, search for any feature flag, and click on the toggles to change its value. 
 
-Note that overriding feature flags will only affect *your* browser. You may also need to refresh the page to see how your change affect your website.
+Overriding feature flags will only affect *your* browser. You may also need to refresh the page to see how your change affect your website. It does not affect feature flags evaluation for your backend.
 
 ![How to override feature flags using the tool](../../images/products/product-analytics/toolbar-feature-flags.mp4) 
 
