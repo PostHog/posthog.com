@@ -152,47 +152,6 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                                 </Scrollspy>
                                             </div>
                                         )}
-                                        <ul
-                                            id="post-actions"
-                                            className="list-none p-0 flex mt-0 mb-10 lg:mb-0 items-center bg-tan/40 dark:bg-primary/40 backdrop-blur"
-                                        >
-                                            {filePath && (
-                                                <div className="flex">
-                                                    <SidebarAction
-                                                        href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                                        title="Edit this page"
-                                                    >
-                                                        <Edit />
-                                                    </SidebarAction>
-                                                    <SidebarAction
-                                                        title="Raise an issue"
-                                                        href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
-                                                    >
-                                                        <Issue />
-                                                    </SidebarAction>
-                                                </div>
-                                            )}
-                                            <div className="ml-auto flex">
-                                                {!hideWidthToggle && (
-                                                    <SidebarAction
-                                                        className="hidden xl:block"
-                                                        title="Toggle content width"
-                                                        onClick={handleFullWidthContentChange}
-                                                    >
-                                                        <ExpandDocument expanded={fullWidthContent} />
-                                                    </SidebarAction>
-                                                )}
-                                                {darkMode && (
-                                                    <SidebarAction
-                                                        className="pl-2 pr-2 h-8 my-1"
-                                                        width="auto"
-                                                        title="Toggle dark mode"
-                                                    >
-                                                        <DarkModeToggle />
-                                                    </SidebarAction>
-                                                )}
-                                            </div>
-                                        </ul>
                                     </div>
                                 </div>
                             </aside>
