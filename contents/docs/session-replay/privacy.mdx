@@ -2,27 +2,24 @@
 title: Privacy Controls
 ---
 
-PostHog offers a range of controls to limit what data is captured. 
+PostHog offers a range of controls to limit what data is captured by session recordings. 
 
 
-## Inputs
+## Input elements
 
-As inputs are highly likely to contain sensitive text such as emails or passwords, **we mask these by default**. You can set this explicitly to false to enable the recording of inputs.
-
-### Mask all inputs
+As any input element is highly likely to contain sensitive text such as email or password, **we mask these by default**. You can explicitly set this to false to disable the masking.
 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        // This is the default
-        maskAllInputs: true
+        maskAllInputs: false
     }
 })
 ```
 
 ### Mask or un-mask specific inputs
 
-You can control the masking more directly by using the `maskInputFn` to customize how the masking behaves. For example, you may want to only redact text that looks like an email address or that comes from inputs that aren't search boxes.
+You can control the masking more granularly by using `maskInputFn` to customize how the masking behaves. For example, you may want to only redact text that looks like an email address, or comes from inputs that aren't search boxes.
 
 ```ts
 posthog.init('<ph_project_api_key>', {
@@ -40,9 +37,9 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-## Text
+## Text elements
 
-General text on the website is not masked by default but we provide multiple options for masking text.
+General text is not masked by default, but we provide multiple options for masking text:
 
 ### Mask all text
 
@@ -62,12 +59,11 @@ You can use a CSS selector to mask specific elements. For example, you may want 
 posthog.init('<ph_project_api_key>', {
     session_recording: {
         maskTextSelector: ".password, #sensitive" // masks all elements with the class "password" or the ID "sensitive"
-        
     }
 })
 ```
 
-You can further control the text that gets masked, for example only masking text that looks like an email
+You can further control the text that gets masked. For example, by only masking text that looks like an email
 
 ```ts
 posthog.init('<ph_project_api_key>', {
@@ -97,3 +93,5 @@ To do so, you should add the CSS class name `ph-no-capture` to elements which sh
 ```html
 <div class="ph-no-capture">I won't be captured at all!</div>
 ```
+
+Note that adding `ph-no-capture` will also prevent any [autocapture](/docs/data/autocapture) events from being captured from that element.
