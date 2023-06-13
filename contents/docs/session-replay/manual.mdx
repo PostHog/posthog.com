@@ -11,7 +11,9 @@ availability:
 
 Session replay enables you to record users navigating through your website and play back the individual sessions to watch how real users use your product.
 
-// TODO add video here
+<iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://app.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
+
+> Above is a recording of posthog.com… on posthog.com – very meta.
 
 ## How to enable session replay
 
@@ -26,15 +28,17 @@ Once enabled, the JS library will start recording sessions by default.
 
 It can be toggled on and off in the JS library by appropriately setting the `disable_session_recording` flag in the [config](/docs/integrate/client/js/#config). 
 
-Users who opt out of event capturing will not have their sessions recorded.
+Users who [opt out](/docs/libraries/js#opt-users-out) of event capturing will not have their sessions recorded.
 
 ## How to watch recordings
 
-To watch recordings, you can either visit the '[Replay](https://app.posthog.com/replay)' page, or click on any data point in an insight and from the list of persons related to that data point. This is specially useful in [funnels](/docs/product-analytics/funnels), where you can drill down and watch recordings of users who converted or dropped off.
+To watch recordings, you can visit the '[Replay](https://app.posthog.com/replay)' page. When watching replays, you can change the playback speed, as well as select the option 'skip inactivity' - this will skip parts of the recording where the user was inactive on the page.
 
-When watching replays, you can change the playback speed, as well as select the option 'skip inactivity' - this will skip parts of the recording where the user was inactive on the page.
+You can also watch recordings by clicking on any data point in an insight. This will open the list of persons and display a "watch recording" button if it is available. This is specially useful in [funnels](/docs/product-analytics/funnels), where you can drill down and watch recordings of users who converted or dropped off. 
 
-// TODO add video of how to watch recording
+You can also click into the person to view all their recordings.
+
+![How to watch recordings via insights](../../images/docs/session-replay/how-to-watch-recordings.mp4)
 
 ## How to ignore sensitive elements
 
