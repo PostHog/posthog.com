@@ -48,7 +48,9 @@ To make this happen, you must have visibility into what the current user experie
 There are always endless potential improvements to your product. To get the largest impact on what you build, real user monitoring provides metrics to prioritize these improvements. For example:
 
 - A slow query might not matter for a free user but might be a top priority for a large potential customer in a trial stage.
+
 - Multiple users complain about slow queries, but you don’t know which ones or how slow they are without tracking.
+
 - A user complains a feature "sucks." This feedback by itself is unclear. It could mean slow page speed, poor design, a bug, or a lack of knowledge.
 
 Real user monitoring helps you get the information to understand and prioritize the issues. It also provides details on how to solve those issues; for example, session replays being bug recreation steps or query metrics showing which ones are slow.
@@ -95,15 +97,15 @@ The combination of these insights enables you to understand your current user ex
 
 ### 3. Action
 
-Once you’ve set up capture and analysis,  you must take action on what you've discovered. There are two key ways of doing this: feature development and business processes.
+Once you’ve set up capture and analysis, you must take action on what you've discovered. There are two key ways of doing this: feature development and business processes.
 
 Your monitoring can inform what you are working on. It can show the most common issues hurting user experience, errors, slow queries, and more. Understanding the full landscape of your product’s user experience enables you to prioritize solutions.
 
-For example, breaking your insights down by page enable you to see what pages have the highest number of errors. You can then work to fix errors on that page to improve users’ experience with it. Session replays show you the exact details, enabling you to figure this out quickly. 
+For example, breaking your insights down by page enables you to see what pages have the highest number of errors. You can then work to fix errors on that page to improve users’ experience with it. Session replays show you the exact details, enabling you to figure this out quickly. 
 
 Real user monitoring can also integrate with your business processes because a high-quality experience doesn’t only mean the product, but also your interactions with users. For example, you can use actions to send notifications to webhooks on errors. You can then use these webhooks to send details to the places your team spends time in like Slack or Teams. 
 
-In PostHog’s case, we do this with a [broken link checker](/tutorials/broken-link-checker). It  send us a notification in Slack when someone navigates to a page that doesn’t exist and gets a 404. This helps us fix these links and provide a better user experience.
+In PostHog’s case, we do this with a [broken link checker](/tutorials/broken-link-checker), which sends us a notification in Slack when someone navigates to a page that doesn’t exist and gets a 404. This helps us fix these links and provide a better user experience.
 
 ![404s](../images/blog/real-user-monitoring/404.png)
 
