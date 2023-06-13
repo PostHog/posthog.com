@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: false
 ---
 
-Lottie, PostHog's in-house graphic designer, handles all requests for branding and art work. Lottie can help you with things like:
+Lottie, PostHog's in-house graphic designer, handles all requests for branding and artwork. Lottie can help you with things like:
 
 - Custom visuals for paid-ad campaigns
 - Blog and social media art work
