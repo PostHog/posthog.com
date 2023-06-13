@@ -80,13 +80,13 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-## How to configure which sessions you record
+## How to control which sessions you record
 
-If you want more granular controls on selecting which sessions to record, you can combine session recording with [feature flags](/docs/feature-flags). This enables you to control session recordings based on users with certain properties, actions, or events. You can also use feature flags to capture a percentage of all sessions.
+If you want more granular controls on selecting which sessions to record, first set `disable_session_recording: true` in your [config](/docs/integrate/client/js/#config) and then manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
 
-To do this set `disable_session_recording: true` in the [JavaScript library config](/docs/integrate/client/js/#config). Then, when you'd like to start recording, call the method `posthog.startSessionRecording`. 
+You can then achieve even finer control by combining the above methods with [feature flags](/docs/feature-flags). This enables you to control session recordings based on users with certain user properties, actions, or events. You can also use feature flags to capture a percentage of all sessions.
 
-You can do this based on the value in a feature flag e.g.,:
+For example:
 
 ```javascript
 posthog.init('<ph_project_api_key>', {
@@ -99,12 +99,6 @@ window.posthog.onFeatureFlags(function () {
         window.posthog.startSessionRecording()
     }
 })
-```
-
-Similarly, you can stop the recording at any point using:
-
-```
-posthog.stopSessionRecording()
 ```
 
 For even more configuration options on which sessions you record, see our tutorial on [how to only record the sessions you want](/tutorials/limit-session-recordings).
