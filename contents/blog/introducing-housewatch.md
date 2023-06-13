@@ -1,6 +1,6 @@
 ---
 date: 2023-06-12
-title: "Introducing HouseWatch: An open source toolkit for ClickHouse"
+title: "Introducing HouseWatch: An open-source toolkit for ClickHouse"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -23,7 +23,7 @@ To formalize and share these, we’ve recently built and launched [HouseWatch](h
 
 ## Why we built HouseWatch
 
-We started using ClickHouse in August 2021 when we [moved away from Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion). During this time, we’ve gained a lot of expertise in using and debugging ClickHouse. 
+We started using ClickHouse in August 2021 when we [moved away from Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion).
 
 ClickHouse provides tons of easily queryable metadata about your system, but knowing how and what to query is difficult. From our usage of ClickHouse, we’ve built an intuition for this – some of which we’ve documented in our [ClickHouse manual](/handbook/engineering/clickhouse). 
 
