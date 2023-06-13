@@ -38,7 +38,7 @@ To share our expertise, formalize these tools, and centralize them in one place,
 
 ## Features
 
-HouseWatch provides multiple battle-tested tools for monitoring and managing ClickHouse.
+HouseWatch provides a central location for the tools we use to monitor and manage ClickHouse.
 
 ### Query performance and analysis
 
@@ -74,7 +74,7 @@ Like any good monitoring tool, HouseWatch provides access to logs and errors fro
 
 ### Operations
 
-Last but not least is our operations tool. This enables you to run and monitor long-running operations like migrations or SQL commands. You can monitor their status, pause or stop them, and retry them if they fail. Failures come with automatic rollbacks as well.
+Last but not least is our operations tool. This is inspired by our [async migrations tool](/handbook/engineering/databases/async-migrations), which we've used in production for over a year. It enables you to run and monitor long-running operations like migrations or SQL commands. You can monitor their status, pause or stop them, and retry them if they fail. Failures come with automatic rollbacks as well.
 
 ![Operations](../images/blog/introducing-housewatch/operations.png)
 
