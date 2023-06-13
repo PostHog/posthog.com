@@ -14,36 +14,30 @@ tags:
   - Explainers
 ---
 
-Before anyone can use your product, you must make sure it actually works. Figuring this out is more tricky than just running it locally. Changes often have unintended consequences on other parts of the app or create non-obvious issues. To track and prevent this, companies rely on monitoring.
+Before anyone can use your product, you must make sure it actually works. Figuring this out is more tricky than just running it locally. Changes often have unintended consequences on other parts of the app or create non-obvious issues. 
 
-There are a few ways to do monitoring. The first is synthetic monitoring, which relies on  simulated behaviors and software tests. The second way, which we cover in this post, is real user monitoring. This is monitoring the behavior of real users in your product to ensure that it is working as intended. 
+One way to track and prevent this is synthetic monitoring, which relies on simulated behaviors and software tests. The second way, which we cover in this post, is real user monitoring. 
 
-## Real user monitoring in detail
+## What is real user monitoring?
 
 Real user monitoring is tracking the usage, performance, and quality of your product based on how users are experiencing it.
 
-Because of this, it is a closer representation of reality. It identifies real issues, largely broken down into two classes:
+Because it tracks real user behavior, it is a closer representation of reality. It identifies real issues, largely broken down into two classes:
 
-- Performance: loading, page, and query speed
-- Usability: errors, confusion, bugs
+- Performance: loading, page, and query speed, core web vitals
+- Usability: errors, confusion, bugs, rageclicks, unclear UI
 
 ![Types](../images/blog/real-user-monitoring/classes.png)
 
 The ideal real user monitoring system identifies these problems, provides details, supports planning of fixes, and ultimately, supports creating a better user experience.
 
-## Why do real user monitoring?
+## Benefits of real user monitoring
 
-Real user monitoring is important because it helps you understand your current user experience, discover ways to improve it, and manage the risk of future issues.
+By helping you understand your current user experience, real user monitoring helps you discover ways to improve it and manage the risk of future issues.
 
 ![Why](../images/blog/real-user-monitoring/why.png)
 
-### 1. Understand current experience
-
-The first reason to do real user monitoring is to ensure your product performs well and provides a good user experience. This means it loads fast, is issue-free, and enables users to accomplish their goals efficiently.
-
-To make this happen, you must have visibility into what the current user experience is like.This means understanding query performance, core web vitals, front and backend error rates, unclear UI, rageclicks, and more. These are signs of a negative user experience to be fixed.
-
-### 2. Improve experience
+### 1. Improve experience
 
 There are always endless potential improvements to your product. To get the largest impact on what you build, real user monitoring provides metrics to prioritize these improvements. For example:
 
@@ -55,9 +49,9 @@ There are always endless potential improvements to your product. To get the larg
 
 Real user monitoring helps you get the information to understand and prioritize the issues. It also provides details on how to solve those issues; for example, session replays being bug recreation steps or query metrics showing which ones are slow.
 
-### 3. Manage risk
+### 2. Manage risk
 
-The third and final reason to do real user monitoring is to manage risk. It supports this by uncovering potential risks, providing details for planning, and being part of the solution. 
+Real user monitoring uncovers potential risks, provides details for planning, and is part of the incident alerting process.
 
 By knowing error rates, page and query speeds, and product usage, teams are able to monitor the the health of the product and prevent incidents. These metrics also enables companies to make promises about their experience quality, and back those promises with data. 
 
@@ -65,7 +59,9 @@ For large companies, this is critical. These promises are often solidified in a 
 
 ## How to setup real user monitoring with PostHog
 
-Setup happens over three stages: capture, analyze, and action. PostHog has the tools to do all three.
+Setup happens over three stages: capture, analyze, and action. PostHog, as an all-in-one product OS, has the tools to do all three.
+
+> Not a PostHog user? [Get started for free](https://app.posthog.com/signup?utm_source=real-user-monitoring-blog) – all users get 1 million events and 15k recordings free every month, no card required.
 
 ### 1. Capture
 
