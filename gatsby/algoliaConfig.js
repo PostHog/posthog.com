@@ -17,7 +17,6 @@ const retrievePages = (type, regex) => {
                     pageViews
                   }
                   rawBody
-                  body
                   excerpt
                   frontmatter {
                     title
