@@ -6,22 +6,20 @@ This is straight forward to do when [capturing backend events](/docs/getting-sta
 
 ```javascript
 posthog.identify(
-    'distinct_id',
-    { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } 
-    {}, 
+  'distinct_id',
+  { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } 
+  {}, 
 );
-```
 
 ```Android
 PostHog.with(this)
-       .identify(distinctID, new Properties()
-                                .putValue("name", "My Name")
-                                .putValue("email", "user@posthog.com"));
-```
+     .identify(distinctID, new Properties()
+        .putValue("name", "Max Hedgehog")
+        .putValue("email", "max@hedgehogmail.com));
 
 ```iOS
 posthog.identify("distinct_id", 
-          properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"])
+  properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"])
 ```
 
 </MultiLanguage>

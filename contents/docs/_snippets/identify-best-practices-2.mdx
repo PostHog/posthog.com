@@ -1,4 +1,4 @@
-If two users have the same distinct ID, their data will be merged and they will be considered as one user in PostHog. Two common ways this can happen are:
+If two users have the same distinct ID, their data is merged and they are considered one user in PostHog. Two common ways this can happen are:
 
 - Your logic for generating IDs does not generate sufficiently strong IDs and you can end up with a clash where 2 users have the same ID.
 - There's a bug, typo, or mistake in your code leading to most or all users being identified with generic IDs like `null`, `true`, or `distinctId`.

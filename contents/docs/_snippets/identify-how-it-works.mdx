@@ -6,6 +6,6 @@ By calling `identify` with a `distinct_id` of your choice (usually the user's ID
 
 Thus all past and future events made with that anonymous ID are now associated with the distinct ID. This enables you to do things like associate events with a user from before they log in for the first time, or associate their events across different devices or platforms.
 
-> **A note on using `identify` in the backend:**
+> **Using `identify` in the backend:**
 >
 > Although it is technically possible to call `identify` using our backend SDKs, it is typically most useful in frontends. This is because there is no concept of anonymous sessions in the backend SDKs.
