@@ -17,17 +17,17 @@ featuredImage: ../images/blog/posthog-engineering-blog.png
 featuredImageType: full
 ---
 
-We are big fans of ClickHouse, we rely on it heavily to store and retrieve the massive amount of data we process every day. In doing this at scale for multiple years now, we’ve built a lot of expertise and systems related to ClickHouse. 
+We are big fans of ClickHouse. We rely on it heavily to store and retrieve the massive amount of data we process every day. In doing this at scale for multiple years now, we’ve built a lot of expertise and systems related to ClickHouse. 
 
 To formalize and share these, we’ve recently built and launched [HouseWatch](https://github.com/PostHog/HouseWatch), an open-source suite of tools for monitoring and managing ClickHouse. HouseWatch is free and works with your existing ClickHouse instance. You can [clone it from GitHub](https://github.com/PostHog/HouseWatch) and deploy it via Docker Compose.
 
 ## Why we built HouseWatch
 
-We have used ClickHouse at PostHog since August 2021, when we [moved from Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion). During this time, we’ve gained a lot of expertise using and debugging ClickHouse. 
+We started using ClickHouse in August 2021 when we [moved away from Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion). During this time, we’ve gained a lot of expertise in using and debugging ClickHouse. 
 
-ClickHouse provides tons of easily queryable metadata about the system, but knowing how and what to query is difficult. From our usage of ClickHouse, we’ve built an intuition for this, some of which we’ve documented in our [ClickHouse manual](/handbook/engineering/clickhouse). 
+ClickHouse provides tons of easily queryable metadata about your system, but knowing how and what to query is difficult. From our usage of ClickHouse, we’ve built an intuition for this – some of which we’ve documented in our [ClickHouse manual](/handbook/engineering/clickhouse). 
 
-We’ve also built a lot of systems and processes for managing clusters. These include:
+We’ve also built many systems and processes for managing clusters. These include:
 
 - Tracking metrics via Grafana
 - Querying via Metabase
@@ -42,15 +42,15 @@ HouseWatch provides multiple battle-tested tools for monitoring and managing Cli
 
 ### Query performance and analysis
 
-To help understand the performance of all the queries on your ClickHouse clusters, we list queries, with emphasis placed on active and slow queries. 
+To help understand the performance of all the queries on your ClickHouse clusters, we provide a list of normalized queries and their performance metrics, with an emphasis on active and slow queries. 
 
-Each includes metrics on average run time, calls per minute, percentage of all IOPs, total IOPs, and percentage of run time. It also includes details on the query itself and the `EXPLAIN` statement. From this, you can monitor and improve important, slow, or high-stress queries.
+Each query includes metrics on average run time, calls per minute, percentage of all IOPs, total IOPs, and percentage of run time. It also includes details on the query itself and the `EXPLAIN` statement. From this, you can sort, monitor, and improve important, slow, or high-stress queries.
 
 ![Slow](../images/blog/introducing-housewatch/slow.png)
 
 ### Schema stats
 
-HouseWatch provides stats for all the tables for your cluster and lets you dive into the details for each of them. For each table, see columns, parts, compressed and uncompressed disk space sizes, disk usage, and more.
+HouseWatch provides stats for all the tables for your cluster and lets you dive into the details for each of them. For each table, you can see columns, parts, compressed and uncompressed disk space sizes, disk usage, and more.
 
 ![Schema](../images/blog/introducing-housewatch/table.png)
 
@@ -105,10 +105,9 @@ docker compose -f docker-compose.yml up
 
 We aspire for HouseWatch to be like [pganalyze](https://pganalyze.com/) for ClickHouse. There is more to build to make this a reality including:
 
-- System issues tab
-- `EXPLAIN` visualizer
-- Multiple instance support
-- Stats on page cache hit percentage
-- More operations controls like view, delete, edit, re-run, and display errors
+- An index advisor tool
+- A visualizer for `EXPLAIN` statements
+- Support for monitoring multiple instances
+- Automatic surfacing of known system issues 
 
 > You can see our full to-do list, suggest a feature, find installation details, or contribute by going to the [HouseWatch repo](https://github.com/PostHog/HouseWatch).
