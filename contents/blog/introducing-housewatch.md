@@ -34,7 +34,7 @@ We’ve also built many systems and processes for managing clusters. These inclu
 - Running operations on nodes through `ssh`
 - Managing async migrations with [custom-built tools](/blog/async-migrations)
 
-To share our expertise, formalize these tools, and centralize them in one place, Li, Yakko, and Tim built the first version of HouseWatch at our [Aruba offsite](/blog/aruba-hackathon). We felt it would be useful to us, and support other ClickHouse users as well.
+To share our expertise, formalize these tools, and centralize them in one place, our engineers Li, Yakko, and CTO Tim built the first version of HouseWatch at our [Aruba offsite](/blog/aruba-hackathon). We felt it would be useful to us, and support other ClickHouse users as well.
 
 ## Features
 
