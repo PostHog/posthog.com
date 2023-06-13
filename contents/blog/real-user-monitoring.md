@@ -1,6 +1,6 @@
 ---
-title: "Real user monitoring: what it is, why do it, and how to set it up"
-date: 2023-05-31
+title: "What is real user monitoring (and how to set it up)"
+date: 2023-06-13
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
