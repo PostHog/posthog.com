@@ -8,116 +8,41 @@ availability:
     enterprise: full
 
 ---
-Linking events to specific users enables you to gain full insights as to how they're using your product across different sessions, devices, and platforms. 
 
-This is straight forward to do when [capturing backend events](/docs/getting-started/send-events#3-capture-backend-events), as you associate events to a specific user using `distinct_id`, which is a required argument. However, on the [frontend]((/docs/getting-started/send-events#sending-custom-properties-on-an-event)), a `distinct_id` is not a required argument and thus events can be submitted anonymously. To link events from anonymous to specific users, you need to use `identify`:
+import JSIdentifyIntro from "../\_snippets/identify-intro.mdx"
+import JSIdentifyHowItWorks from "../\_snippets/identify-how-it-works"
+import JSIdentifyWhenToCall from "../\_snippets/identify-when-to-call.mdx"
+import JSIdentifyUseUniqueIds from "../\_snippets/identify-use-unique-ids.mdx"
+import JSIdentifyReset from "../\_snippets/identify-reset.mdx"
+import JSIdentifySetUserProperties from "../\_snippets/identify-setting-user-properties.mdx"
 
-<MultiLanguage selector="tabs">
-
-```javascript
-posthog.identify(
-    'distinct_id',
-    { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } 
-    {}, 
-);
-```
-
-```Android
-PostHog.with(this)
-       .identify(distinctID, new Properties()
-                                .putValue("name", "My Name")
-                                .putValue("email", "user@posthog.com"));
-```
-
-```iOS
-posthog.identify("distinct_id", 
-          properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"])
-```
-
-</MultiLanguage>
+<JSIdentifyIntro/> 
 
 ## How `identify` works
 
-When a user starts browsing your website or app, PostHog automatically assigns them an **anonymous ID**, which is stored locally. This enables us to track anonymous users – even across different sessions.
-
-> **Note:** depending on your [persistence configuration](/docs/libraries/js#persistence), the anonymous ID may not be stored, and thus regenerated across sessions.
-
-By calling `identify` with a `distinct_id` of your choice (usually the user's ID in your database, or their email), you link the anonymous ID and distinct ID together.
-
-Thus all past and future events made with that anonymous ID are now associated with the distinct ID. This enables you to do things like associate events with a user from before they log in for the first time, or associate their events across different devices or platforms.
-
-> **A note on using `identify` in the backend:**
->
-> Although it is technically possible to call `identify` using our backend SDKs, it is typically most useful in frontends. This is because there is no concept of anonymous sessions in the backend SDKs.
+<JSIdentifyHowItWorks/>
 
 ## Best practices when using `identify`
 
 ### 1. Call `identify` as soon as you're able to
 
-In your frontend, you should call `identify` as soon as you're able to. Typically, this is every time your app loads for the first time, or directly after your users log in. This ensures that events sent during your users' sessions are correctly associated with them. 
-
-You only need to call `identify` once per session.
+<JSIdentifyWhenToCall/>
 
 ### 2. Use unique strings for distinct IDs
 
-If two users have the same distinct ID, their data will be merged and they will be considered as one user in PostHog. Two common ways this can happen are:
-
-- Your logic for generating IDs does not generate sufficiently strong IDs and you can end up with a clash where 2 users have the same ID.
-- There's a bug, typo, or mistake in your code leading to most or all users being identified with generic IDs like `null`, `true`, or `distinctId`.
-
-PostHog also has built-in protections to stop the most common distinct ID mistakes. See the [FAQ](/docs/data/identify#what-happens-if-you-call-identify-or-alias-with-invalid-inputs) at the end of this page for more details.
+<JSIdentifyUseUniqueIds/>
 
 ### 3. Reset after logout
 
-If a user logs out on your frontend, you should call `reset` to unlink any future events made on that device with that user. 
-
-This is important if your users are sharing a computer, as otherwise all of those users are grouped together into a single user due to shared cookies between sessions. **We strongly recommend you call `reset` on logout even if you don't expect users to share a computer.**
-
-You can do that like so:
-
-<MultiLanguage selector="tabs">
-
-```javascript
-posthog.reset()
-```
-
-```iOS
-posthog.reset()
-```
-```Android
-PostHog.with(this)
-       .reset();
-```
-
-</MultiLanguage>
-
-If you _also_ want to reset the `device_id` so that the device will be considered a new device in future events, you can pass `true` as an argument:
-
-<MultiLanguage selector="tabs">
-
-```javascript
-posthog.reset(true)
-```
-
-```iOS
-posthog.reset(true)
-```
-
-```Android
-PostHog.with(this)
-       .reset(true);
-```
-</MultiLanguage>
+<JSIdentifyReset/>
 
 ### 4. Setting user properties
 
-You'll notice that one of the parameters in the `identify` method is a `properties` object. This enables you to set [user properties](/docs/getting-started/user-properties). Whenever possible, we recommend passing in all user properties you have available each time you call identify, as this will ensure that their user profile on PostHog is up to date.
-
-User properties can also be set using a `capture` and not only with `identify`. See our [user properties docs](/docs/getting-started/user-properties) for more details on how to work with them and best practices.
+<JSIdentifySetUserProperties/>
 
 ## Alias: Assigning multiple distinct IDs to the same user 
 
-Sometimes you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user:
+Sometimes, you want to assign multiple distinct IDs to a single user. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code, you can use `alias` to connect the frontend distinct ID to one accessible on the backend.
 
 In the below example, we assign the user with `distinct_id` another ID: `alias_id`. This means that any events submitted using either `distinct_id` or `alias_id` will be associated with the same user.
 
