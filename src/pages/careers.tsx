@@ -64,7 +64,7 @@ const IndexPage = () => {
             <CareersHero />
             <div className="careers-anchor-navbar">
                 <WhyWereHere />
-                <div className="bg-tan sticky top-0 py-2 z-10 careers-nav">
+                <div className="bg-accent dark:bg-accent-dark sticky top-[108px] py-2 z-10 careers-nav">
                     <AnchorScrollNavbar autoScroll={breakpoints.md} menu={menu} />
                 </div>
                 <Transparency />
@@ -122,7 +122,6 @@ const IndexPage = () => {
                 <Benefits />
                 <TeamQuote
                     backgroundColor=""
-                    textColor="text-primary"
                     fontSize="text-3xl"
                     width="max-w-4xl"
                     value={

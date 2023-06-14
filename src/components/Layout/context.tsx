@@ -741,6 +741,61 @@ export const communityMenu = {
     ],
 }
 
+export const companyMenu = {
+    name: 'Company',
+    url: '/about',
+    internal: [
+        { name: 'About', Icon: Logomark, url: '/about' },
+        {
+            name: 'Blog',
+            Icon: Newspaper,
+            color: 'teal',
+            url: '/blog',
+            children: [
+                {
+                    name: 'Blog',
+                    url: '/blog',
+                },
+                {
+                    name: 'CEO diaries',
+                    url: '/blog/categories/ceo-diaries',
+                },
+                {
+                    name: 'Engineering',
+                    url: '/blog/categories/engineering',
+                },
+                {
+                    name: 'Inside PostHog',
+                    url: '/blog/categories/inside-posthog',
+                },
+                {
+                    name: 'Newsletter',
+                    url: '/blog/categories/newsletter',
+                },
+                {
+                    name: 'PostHog news',
+                    url: '/blog/categories/posthog-news',
+                },
+                {
+                    name: 'Product growth',
+                    url: '/blog/categories/product-growth',
+                },
+                {
+                    name: 'Startups',
+                    url: '/blog/categories/startups',
+                },
+                {
+                    name: 'Using PostHog',
+                    url: '/blog/categories/using-posthog',
+                },
+            ],
+        },
+        { name: 'Team', Icon: Profile, color: 'yellow', url: '/handbook/company/team', children: handbookSidebar },
+        { name: 'Handbook', Icon: Book, color: 'seagreen', url: '/handbook', children: handbookSidebar },
+        { name: 'Careers', Icon: Laptop, color: 'purple', url: '/careers' },
+    ],
+}
+
 const menu = [
     {
         name: 'Products',
@@ -1671,60 +1726,7 @@ const menu = [
         ],
     },
     communityMenu,
-    {
-        name: 'Company',
-        url: '/about',
-        internal: [
-            { name: 'About', Icon: Logomark, url: '/about' },
-            {
-                name: 'Blog',
-                Icon: Newspaper,
-                color: 'teal',
-                url: '/blog',
-                children: [
-                    {
-                        name: 'Blog',
-                        url: '/blog',
-                    },
-                    {
-                        name: 'CEO diaries',
-                        url: '/blog/categories/ceo-diaries',
-                    },
-                    {
-                        name: 'Engineering',
-                        url: '/blog/categories/engineering',
-                    },
-                    {
-                        name: 'Inside PostHog',
-                        url: '/blog/categories/inside-posthog',
-                    },
-                    {
-                        name: 'Newsletter',
-                        url: '/blog/categories/newsletter',
-                    },
-                    {
-                        name: 'PostHog news',
-                        url: '/blog/categories/posthog-news',
-                    },
-                    {
-                        name: 'Product growth',
-                        url: '/blog/categories/product-growth',
-                    },
-                    {
-                        name: 'Startups',
-                        url: '/blog/categories/startups',
-                    },
-                    {
-                        name: 'Using PostHog',
-                        url: '/blog/categories/using-posthog',
-                    },
-                ],
-            },
-            { name: 'Team', Icon: Profile, color: 'yellow', url: '/handbook/company/team', children: handbookSidebar },
-            { name: 'Handbook', Icon: Book, color: 'seagreen', url: '/handbook', children: handbookSidebar },
-            { name: 'Careers', Icon: Laptop, color: 'purple', url: '/careers' },
-        ],
-    },
+    companyMenu,
 ]
 
 function recursiveSearch(array, value) {

@@ -15,9 +15,9 @@ const SliderItem = ({ image, title, subtitle, description }) => {
     return (
         <div className="flex sm:max-w-[calc(100vw/2+50px)] md:max-w-[calc(100vw/3+50px)] xl:max-w-[calc(100vw/4+50px)] 2xl:max-w-[calc(100vw/5+50px)] flex-col py-5 px-10 items-start">
             <img className="mb-9" src={image} />
-            <h4 className="text-primary m-0">{title}</h4>
-            <h5 className="text-primary font-semibold mb-3 leading-tight">{subtitle}</h5>
-            <p className="text-[15px] text-primary m-0">{description}</p>
+            <h4 className="m-0">{title}</h4>
+            <h5 className="font-semibold mb-3 leading-tight">{subtitle}</h5>
+            <p className="text-[15px] m-0">{description}</p>
         </div>
     )
 }

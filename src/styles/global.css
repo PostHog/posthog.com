@@ -362,6 +362,7 @@ article .article-content {
 /* Careers page */
 
 .benefits-grid {
+    @apply border-gray-accent-light border-t border-dashed;
     > div {
         @apply border-gray-accent-light border-r border-b border-dashed;
 
