@@ -1733,7 +1733,7 @@ function recursiveSearch(array, value) {
     for (let i = 0; i < array?.length || 0; i++) {
         const element = array[i]
 
-        if (element === value) {
+        if (typeof element === 'string' && element.split('?')[0] === value) {
             return true
         }
 
@@ -1755,8 +1755,8 @@ export const LayoutProvider = ({ children, ...other }: { children: React.ReactNo
     const parent =
         other.parent ??
         menu.find(({ internal, url }) => {
-            const currentURL = window?.location?.pathname + (window?.location?.search ?? '')
-            return currentURL === url || recursiveSearch(internal, currentURL)
+            const currentURL = window?.location?.pathname
+            return currentURL === url.split('?')[0] || recursiveSearch(internal, currentURL)
         })
 
     const internalMenu = parent?.internal
@@ -1764,8 +1764,8 @@ export const LayoutProvider = ({ children, ...other }: { children: React.ReactNo
     const activeInternalMenu =
         other.activeInternalMenu ??
         internalMenu?.find((menuItem) => {
-            const currentURL = window?.location?.pathname + (window?.location?.search ?? '')
-            return currentURL === menuItem.url || recursiveSearch(menuItem.children, currentURL)
+            const currentURL = window?.location?.pathname
+            return currentURL === menuItem.url.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
         })
 
     useEffect(() => {
