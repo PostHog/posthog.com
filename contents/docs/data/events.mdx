@@ -31,13 +31,13 @@ You may notice that some events or properties are prefixed with `$` e.g., `$page
 
 ### Pageview events
 
-By default, pageview events are automatically sent when using the [JavaScript snippet or SDK](/docs/libraries/js). You can disable this by setting `capture_pageview: false` in the [config](/docs/libraries/js#config).
+`$pageview` events are automatically sent when using the [JavaScript snippet or SDK](/docs/libraries/js). You can disable this by setting `capture_pageview: false` in the initialization [config](/docs/libraries/js#config).
 
-You can manually send pageview events by calling `posthog.capture('$pageview')`. You'll need to do this in single-page applications like [React](/docs/libraries/react), [Next.js](/docs/libraries/next-js#pages-router) or [Vue](/docs/libraries/vue-js#capturing-page-views), since otherwise a pageview event will only be sent for the first page.
+You can manually send pageview events by calling `posthog.capture('$pageview')`. This is necessary for single-page applications like [React](/docs/libraries/react), [Next.js](/docs/libraries/next-js#pages-router) or [Vue](/docs/libraries/vue-js#capturing-page-views), since otherwise a pageview event is only sent for the first page.
 
 ### Pageleave events
 
-Similar to pageview, pageleave events are automatically sent and be disabled by setting `capture_pageview: false` in the [config](/docs/libraries/js#config). For single-page applications, you'll also need to manually send these events using `posthog.capture('$pageleave')`.
+Similar to pageview, `$pageleave` events are automatically sent. You can disable them by setting `capture_pageleave: false` in the [config](/docs/libraries/js#config). For single-page applications, you'll also need to manually send these events using `posthog.capture('$pageleave')`.
 
 ## Event filtering
 
