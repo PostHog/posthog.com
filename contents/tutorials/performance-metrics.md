@@ -155,8 +155,7 @@ Once you have identified which factors are affected your page load times, here a
 
 ## Further reading
 
-- [How to use session replays to get a deeper understanding of user behavior](https://posthog.com/tutorials/explore-insights-session-recordings)
-- [How to use session replays to improve your support experience](https://posthog.com/tutorials/session-recordings-for-support)
-- [How to use filters + session replays to understand user friction](https://posthog.com/tutorials/filter-session-recordings)
-
+- [How to use session replays to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
+- [How to use session replays to improve your support experience](/tutorials/session-recordings-for-support)
+- [What is real user monitoring (and how to set it up)](/blog/real-user-monitoring)
 
