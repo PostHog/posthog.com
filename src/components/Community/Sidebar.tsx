@@ -42,7 +42,7 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <p className="text-sm my-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <Authentication showBanner={false} showProfile={false} />
+            <Authentication onAuth={onSubmit} showBanner={false} showProfile={false} />
         </>
     ) : state === 'signup' ? (
         <>
@@ -52,7 +52,7 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <p className="text-sm my-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <Authentication initialView="sign-up" showBanner={false} showProfile={false} />
+            <Authentication onAuth={onSubmit} initialView="sign-up" showBanner={false} showProfile={false} />
         </>
     ) : (
         <>

@@ -21,6 +21,7 @@ import usePostHog from 'hooks/usePostHog'
 import { useNav } from 'components/Community/useNav'
 import Logomark from 'components/Home/images/Logomark'
 import Label from 'components/Label'
+import { communityMenu } from 'components/Layout/context'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -105,7 +106,7 @@ export default function ProfilePage({ params }: PageProps) {
     return (
         <>
             <SEO title={`Community Profile - PostHog`} />
-            <Layout>
+            <Layout parent={communityMenu} activeInternalMenu={communityMenu.internal[1]}>
                 <Modal setOpen={setEditModalOpen} open={editModalOpen}>
                     <div
                         onClick={() => setEditModalOpen(false)}

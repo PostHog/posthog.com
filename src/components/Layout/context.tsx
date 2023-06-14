@@ -697,6 +697,8 @@ export const communityMenu = {
         {
             name: 'Edition',
             Icon: Newspaper,
+            color: 'tan',
+            url: '/edition',
         },
         {
             name: 'Questions',

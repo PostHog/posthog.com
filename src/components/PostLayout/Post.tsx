@@ -94,7 +94,9 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         style={{
                             gridAutoColumns: menu
                                 ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
-                                : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
+                                : `minmax(auto, ${
+                                      typeof contentWidth === 'number' ? contentWidth + 'px' : contentWidth
+                                  }) minmax(max-content, ${menuWidth?.right}px)`,
                         }}
                     >
                         <article
