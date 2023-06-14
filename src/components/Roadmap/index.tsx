@@ -75,7 +75,7 @@ export const Section = ({
     return (
         <div className={`xl:px-7 2xl:px-8 px-5 py-8 ${className ?? ''}`}>
             <h3 className="text-xl m-0">{title}</h3>
-            {description && <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>}
+            {description && <p className="text-[15px] m-0 text-black/60 dark:text-white/60 mb-4">{description}</p>}
             {children}
         </div>
     )
