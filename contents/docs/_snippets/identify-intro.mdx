@@ -10,12 +10,15 @@ posthog.identify(
   { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } 
   {}, 
 );
+```
 
 ```Android
 PostHog.with(this)
      .identify(distinctID, new Properties()
         .putValue("name", "Max Hedgehog")
         .putValue("email", "max@hedgehogmail.com));
+```
+
 
 ```iOS
 posthog.identify("distinct_id", 
