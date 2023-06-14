@@ -73,7 +73,7 @@ Finally, we can run the app with `npm run dev`. When we go to the page running l
 
 First, make sure to activate the [GeoIP app](https://app.posthog.com/project/apps?name=geoip) (it should be by default).
 
-Once you confirm that, we can create our feature flag controling the site banner. Go to feature flags, click "Create new flag," and set the key as "site-banner." For release conditions, match users where the continent code equals NA (or whatever geography you want), roll out to 100% of users, and press save.
+Once you confirm that, we can create our feature flag controlling the site banner. Go to feature flags, click "Create new flag," and set the key as "site-banner." For release conditions, match users where the continent code equals NA (or whatever geography you want), roll out to 100% of users, and press save.
 
 ![Creating flag video](../images/tutorials/location-based-banner/create-flag.mp4)
 
