@@ -93,6 +93,26 @@ const Sidebar = () => {
 export default function Edition() {
     const data = useStaticQuery(graphql`
         {
+            notes: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/notes/" } }
+                }
+                limit: 10
+                sort: { fields: frontmatter___date, order: DESC }
+            ) {
+                nodes {
+                    frontmatter {
+                        title
+                        date
+                        authorData {
+                            name
+                        }
+                    }
+                    body
+                }
+            }
             blogPosts: allMdx(
                 filter: {
                     isFuture: { eq: false }
@@ -102,7 +122,6 @@ export default function Edition() {
                 limit: 10
                 sort: { fields: frontmatter___date, order: DESC }
             ) {
-                totalCount
                 nodes {
                     frontmatter {
                         title
@@ -152,7 +171,21 @@ export default function Edition() {
         }
     })
 
-    const content = [...blogPosts, ...roadmaps].sort((a, b) => b.date - a.date)
+    const notes = data.notes.nodes.map((note) => {
+        const {
+            frontmatter: { authorData, title, date },
+            body,
+        } = note
+        return {
+            title,
+            body,
+            author: authorData && authorData[0]?.name,
+            type: 'Note',
+            date: new Date(date),
+        }
+    })
+
+    const content = [...blogPosts, ...roadmaps, ...notes].sort((a, b) => b.date - a.date)
 
     return (
         <Layout>
