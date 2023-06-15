@@ -11,16 +11,16 @@ This is a basic site app which displays a simple 0-10 scale for users to tell yo
 
 ## Requirements
 
-The NPS survey app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+The NPS survey app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](/blog/the-posthog-array-1-30-0) or later.
 
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
 
 You also need to have enabled `opt_in_site_apps: true` in your posthog-js config.
 
 ## Installation
 
 1. Make sure you have enabled `opt_in_site_apps: true` in your posthog-js config.
-2. Install the app from [the PostHog App Repository](posthog.com/apps).
+2. Install the app from [the PostHog App Repository](/apps).
 
 ## What is a Net Promoter Score (NPS)?
 

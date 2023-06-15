@@ -166,4 +166,4 @@ To read up more on experimentation, check out our guides on:
 
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
 - [How to measure product engagement](/blog/how-to-measure-product-engagement)
-- [The most useful product health metrics](blog/product-health-metrics)
+- [The most useful product health metrics](/blog/product-health-metrics)
