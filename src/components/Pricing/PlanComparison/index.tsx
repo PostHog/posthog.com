@@ -343,6 +343,8 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
         'paths_advanced',
     ]
 
+    const tooltipPlacement = typeof window !== 'undefined' && window.innerWidth > 767 ? 'right' : 'bottom'
+
     return (
         <div className={`w-full relative mb-0 space-y-4 -mt-8 md:mt-0`}>
             {/* PLAN HEADERS */}
@@ -457,7 +459,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                         </div>
                                                     )}
                                                     tooltipClassName="max-w-xs m-4"
-                                                    placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                    placement={tooltipPlacement}
                                                 >
                                                     <span
                                                         className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
@@ -509,7 +511,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                     />
                                                 )}
                                                 tooltipClassName="max-w-xs m-4"
-                                                placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                placement={tooltipPlacement}
                                             >
                                                 <span>
                                                     <span
@@ -538,7 +540,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                                 />
                                                             )}
                                                             tooltipClassName="max-w-xs m-4"
-                                                            placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                            placement={tooltipPlacement}
                                                         >
                                                             <span
                                                                 className={`pb-0.25 cursor-default border-b border-dashed border-gray-accent-light`}
