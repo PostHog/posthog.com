@@ -548,6 +548,17 @@
         ]
     },
     {
+        "name": "Surveys",
+        "url": "/docs/surveys",
+        "icon": "Surveys",
+        "children": [
+            {
+                "name": "Manual",
+                "url": "/docs/surveys/manual"
+            }
+        ]
+    },
+    {
         "name": "Data",
         "url": "/docs/data",
         "icon": "DataManagement",

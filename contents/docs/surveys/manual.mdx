@@ -1,0 +1,51 @@
+---
+title: Surveys (beta)
+---
+
+Surveys are a great way to collect qualitative feedback from your users. Qualitative feedback allows you to gain more descriptive insight into your users' experience.
+
+With surveys you'll be able to ask your users questions, target based on page url, selectors, feature flag, and user properties, and then analyze the results.
+
+## Getting started
+
+Setting up surveys is easy! We recommend option 1 if you're just getting started, but if you want to build your own custom survey components, option 2 will let you do that.
+
+### Option 1 (recommended)
+
+1. Make sure you've installed and enabled the surveys app in your project's apps.
+
+2. You must have the `opt_in_site_apps` option enabled in your PostHog's initialization code.
+
+```js
+posthog.init("<ph_project_api_key>", { 
+    "api_host": "<ph_instance_address>",
+    "opt_in_site_apps": true 
+})
+```
+
+3. That's it! Now you can create surveys in the PostHog UI.
+
+### Option 2
+
+1. Make sure you're up to date on PostHog's [JavaScript library](/docs/libraries/js), or at least on version 1.67.1.
+
+2. You should be able to call `posthog.getSurveys()` and get a list of all surveys back, and `posthog.getActiveMatchingSurveys()` to get a list of active matching surveys that should display for the current user client.
+
+```js
+posthog.getActiveMatchingSurveys((surveys) => {
+    // do something with surveys
+})
+```
+
+Note: You'll need to handle whether a user has seen a survey already or not manually if you're using this option. The [survey app](https://github.com/PostHog/feature-surveys/blob/main/site.ts) uses localStorage to keep track of this, which you can implement similarly in your code.
+
+3. In order for survey responses to be recorded, you'll need to send in a capture call event with the survey's name and and any properties you'd want.
+
+For example, if the survey's name is "New feature beta interest", you'd send in a capture call like this:
+
+```js
+posthog.capture("New feature beta interest survey sent", {
+    $survey_id: {survey.id} // required
+    $survey_response: {survey_response} // required
+})
+```
