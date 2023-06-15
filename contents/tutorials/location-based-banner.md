@@ -1,6 +1,6 @@
 ---
 title: How to set up a location-based site banner
-date: 2023-06-14
+date: 2023-06-15
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-3.png
 tags: ['feature flags']
 ---
 
-Many sites want to set up banners to display information for different users, such as regional announcements or country-based alerts. Doing this with feature flags is simple and this tutorial shows you how to set it up.
+Many sites want to set up banners to display information for different users, such as regional announcements or country-based alerts. Doing this with [feature flags](/docs/feature-flags) is simple and this tutorial shows you how to set it up for a Next.js app (but it can be done with any framework).
 
 ## Create a Next.js app
 
