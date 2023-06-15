@@ -977,6 +977,15 @@
         { "source": "/docs/apps/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" },
         { "source": "/docs/apps/variance-connector", "destination": "/docs/cdp/variance-connector" },
         { "source": "/docs/apps/zapier-connector", "destination": "/docs/cdp/zapier-connector" },
+        {
+            "source": "/questions/aliasing-device-i-ds-to-user-i-ds",
+            "destination": "/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user"
+        },
+        { "source": "/questions/how-do-i-trigger-custom-pageview", "destination": "/docs/data/events#pageview-events" },
+        {
+            "source": "/questions/what-does-pageview-means-scattered-across-the-site",
+            "destination": "/docs/data/events#pageview-events"
+        },
         { "source": "/docs/apps/zendesk-connector", "destination": "/docs/cdp/zendesk-connector" }
     ],
     "rewrites": [
