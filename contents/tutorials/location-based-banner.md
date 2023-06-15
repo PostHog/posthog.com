@@ -12,7 +12,7 @@ Many sites want to set up banners to display information for different users, su
 
 ## Create a Next.js app
 
-The first step is creating a basic app, which we Next.js to do. Run the script below, chose no to using TypeScript, yes to using the app router, and the defaults for everything else.
+The first step is creating a basic app, which we Next.js to do. Run the script below, choose no to using TypeScript, yes to using the app router, and the defaults for everything else.
 
 ```bash
 npx create-next-app@latest banner
@@ -71,9 +71,9 @@ Finally, we can run the app with `npm run dev`. When we go to the page running l
 
 ## Set up the banner feature flag
 
-First, make sure to activate the [GeoIP app](https://app.posthog.com/project/apps?name=geoip) (it should be by default).
+First, make sure that the [GeoIP app](https://app.posthog.com/project/apps?name=geoip) is enabled (it should be by default).
 
-Once you confirm that, we can create our feature flag controlling the site banner. Go to feature flags, click "Create new flag," and set the key as "site-banner." For release conditions, match users where the continent code equals NA (or whatever geography you want), roll out to 100% of users, and press save.
+Once you have confirmed that, we can create our feature flag controlling the site banner. Go to [feature flags](https://app.posthog.com/feature_flags), click "Create new flag," and name the key as "site-banner." For release conditions, match users where the continent code equals NA (or whichever geography you want), roll out to 100% of users, and press save.
 
 ![Creating flag video](../images/tutorials/location-based-banner/create-flag.mp4)
 
