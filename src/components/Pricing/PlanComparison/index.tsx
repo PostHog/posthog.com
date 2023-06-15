@@ -335,6 +335,11 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
     const staticProducts: BillingProductV2Type[] = useStaticQuery(allProductsData).allProductData.edges[0].node.products
     const staticPlans = staticProducts?.[0]?.plans
 
+    const inclusionOnlyProducts = staticProducts
+        .filter((product) => product.inclusion_only)
+        .map((product) => product.type)
+    console.log(inclusionOnlyProducts, 'inclusionOnlyProducts')
+
     const excludedFeatures = [
         'ingestion_taxonomy',
         'terms_and_conditions',
@@ -367,14 +372,33 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                         >
                             <div className="flex-1 flex flex-col h-full justify-between">
                                 <div>
-                                    <p className="font-bold mb-0 text-center md:text-left">
-                                        {plan.free_allocation ? 'Free' : 'Paid'}
-                                    </p>
-                                    <p className="hidden md:block text-black/50 text-sm mb-3">
-                                        {plan.free_allocation
-                                            ? 'Generous free usage on every product. Best for early-stage startups and hobbyists.'
-                                            : 'The whole hog. Pay per use with billing limits to control spend. Priority support.'}
-                                    </p>
+                                    {!groupsToShow ? (
+                                        <>
+                                            <p className="font-bold mb-0 text-center md:text-left">
+                                                {plan.free_allocation ? 'Free' : 'Paid'}
+                                            </p>
+                                            <p className="hidden md:block text-black/50 text-sm mb-3">
+                                                {plan.free_allocation
+                                                    ? 'Generous free usage on every product. Best for early-stage startups and hobbyists.'
+                                                    : 'The whole hog. Pay per use with billing limits to control spend. Priority support.'}
+                                            </p>
+                                        </>
+                                    ) : groupsToShow.some((product_name) =>
+                                          inclusionOnlyProducts.includes(product_name)
+                                      ) ? (
+                                        <>
+                                            <div className="mb-2">
+                                                <p className="font-bold mb-0 text-center md:text-left">
+                                                    {plan.free_allocation ? 'Free' : 'Free'}
+                                                </p>
+                                                {!plan.free_allocation && (
+                                                    <p className="hidden md:block text-black/50 text-sm mb-3">
+                                                        Included with any paid product plan
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </>
+                                    ) : null}
                                 </div>
                                 {showCTA && (
                                     <TrackedCTA
@@ -595,9 +619,26 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                         >
                             <div className="flex-1 flex flex-col h-full justify-between">
                                 <div>
-                                    <p className="font-bold mb-2 text-center md:text-left">
-                                        {plan.free_allocation ? 'Free' : 'Paid'}
-                                    </p>
+                                    {!groupsToShow ? (
+                                        <p className="font-bold mb-2 text-center md:text-left">
+                                            {plan.free_allocation ? 'Free' : 'Paid'}
+                                        </p>
+                                    ) : groupsToShow.some((product_name) =>
+                                          inclusionOnlyProducts.includes(product_name)
+                                      ) ? (
+                                        <>
+                                            <div className="mb-2">
+                                                <p className="font-bold mb-0 text-center md:text-left">
+                                                    {plan.free_allocation ? 'Free' : 'Free'}
+                                                </p>
+                                                {!plan.free_allocation && (
+                                                    <p className="text-sm text-black/50">
+                                                        Included with any paid product plan
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </>
+                                    ) : null}
                                 </div>
                                 {showCTA && (
                                     <TrackedCTA
