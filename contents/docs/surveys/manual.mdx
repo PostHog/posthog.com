@@ -2,19 +2,19 @@
 title: Surveys (beta)
 ---
 
-Surveys are a great way to collect qualitative feedback from your users. Qualitative feedback allows you to gain more descriptive insight into your users' experience.
+Surveys are a great way to collect qualitative feedback from your users. Qualitative feedback enables you to gain more insight into your users' and how they view their experience with your product.
 
-With surveys you'll be able to ask your users questions, target based on page url, selectors, feature flag, and user properties, and then analyze the results.
+With PostHog you can target surveys based on page url, selectors, feature flag, and user properties. Then, you can analyze the results right in PostHog too!
 
 ## Getting started
 
-Setting up surveys is easy! We recommend option 1 if you're just getting started, but if you want to build your own custom survey components, option 2 will let you do that.
+Setting up surveys is easy, and there are two ways to do it. The first option will enable you to get started quickly with a pre-built survey, while the second option involves creating your own UI components.
 
 ### Option 1 (recommended)
 
 1. Make sure you've installed and enabled the surveys app in your project's apps.
 
-2. You must have the `opt_in_site_apps` option enabled in your PostHog's initialization code.
+2. You must have the `opt_in_site_apps` option enabled in your PostHog initialization code.
 
 ```js
 posthog.init("<ph_project_api_key>", { 
@@ -27,9 +27,9 @@ posthog.init("<ph_project_api_key>", {
 
 ### Option 2 (custom UI component)
 
-1. Make sure you're up to date on PostHog's [JavaScript library](/docs/libraries/js), or at least on version 1.67.1.
+1. Make sure you're up to date on PostHog's [JavaScript library](/docs/libraries/js). Surveys requires version 1.67.1, or later.
 
-2. You should be able to call `posthog.getSurveys()` and get a list of all surveys back, and `posthog.getActiveMatchingSurveys()` to get a list of active matching surveys that should display for the current user client.
+2. Call `posthog.getSurveys()` and get a list of all surveys back, and `posthog.getActiveMatchingSurveys()` to get a list of active matching surveys that should display for the current user client.
 
 ```js
 posthog.getActiveMatchingSurveys((surveys) => {
