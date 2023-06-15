@@ -549,12 +549,16 @@
     },
     {
         "name": "Surveys",
-        "url": "/docs/surveys",
+        "url": "/docs/surveys/manual",
         "icon": "Surveys",
         "children": [
             {
                 "name": "Manual",
-                "url": "/docs/surveys/manual"
+                "url": "/docs/surveys/manual",
+                "badge": {
+                    "title": "Beta",
+                    "className": "uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
             }
         ]
     },
