@@ -119,7 +119,7 @@ If a user **opts out** then you must stop data capturing and processing. Here ar
 
 ### Step 5: Enable the Property Filter app (optional)
 
-If you are self-hosting PostHog outside the EU, or are using PostHog Cloud US, and are capturing EU users' data, you should enable the [Property Filter app](https://posthog.com/apps/property-filter). This will allow you to anonymize user data. 
+If you are self-hosting PostHog outside the EU, or are using PostHog Cloud US, and are capturing EU users' data, you should enable the [Property Filter app](/apps/property-filter). This will allow you to anonymize user data. 
 
 ## Complying with 'right to be forgotten' requests
 
