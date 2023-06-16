@@ -3,7 +3,7 @@ import { GatsbyNode } from 'gatsby'
 import path from 'path'
 import slugify from 'slugify'
 import fetch from 'node-fetch'
-import sidebars from '../src/sidebars/index'
+import menu from '../src/navs/index'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -252,9 +252,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         return Promise.reject(result.errors)
     }
 
-    function createPosts(data, menu, template, breadcrumbBase, context) {
-        const menuFlattened = flattenMenu(sidebars[menu])
+    const menuFlattened = flattenMenu(menu)
 
+    function createPosts(data, menu, template, breadcrumbBase, context) {
         data.forEach((node) => {
             const links =
                 node?.rawBody &&
@@ -283,7 +283,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     nextURL,
                     next,
                     previous,
-                    menu: sidebars[menu],
                     breadcrumb,
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
@@ -389,7 +388,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 id: node.id,
                 tableOfContents,
-                menu: sidebars.docs,
                 slug,
             },
         })
@@ -443,24 +441,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.apps.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
-        let next = null
-        let previous = null
-        const sidebar = sidebars.apps
-        sidebar.some((item, index) => {
-            if (item.url === slug) {
-                next = sidebar[index + 1]
-                previous = sidebar[index - 1]
-                return true
-            }
-        })
         createPage({
             path: slug,
             component: AppTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',
-                next,
-                previous,
             },
         })
     })
@@ -468,24 +454,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.pipelines.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
-        let next = null
-        let previous = null
-        const sidebar = sidebars.pipelines
-        sidebar.some((item, index) => {
-            if (item.url === slug) {
-                next = sidebar[index + 1]
-                previous = sidebar[index - 1]
-                return true
-            }
-        })
         createPage({
             path: slug,
             component: PipelineTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',
-                next,
-                previous,
             },
         })
     })
@@ -568,23 +542,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         }
     }
 
-    const productDocumentationMenuNames = {
-        '/session-replay/documentation': 'Session replay',
-        '/product-analytics/documentation': 'Product analytics',
-        '/feature-flags/documentation': 'Feature flags',
-        '/ab-testing/documentation': 'A/B testing',
-        '/product-os/documentation': 'Data',
-    }
-
-    const docsMenu = sidebars.docs
-
     await Promise.all(
         result.data.product.nodes.map((node) => {
             return new Promise<void>((res) => {
                 const { slug } = node.fields
-                const documentationNav = docsMenu.find(
-                    (menuItem) => menuItem.name === productDocumentationMenuNames[slug]
-                )
                 createPage({
                     path: slug,
                     component: ProductTemplate,
@@ -593,8 +554,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         blogTags: node?.frontmatter?.productBlog?.tags ?? [''],
                         tutorialTags: node?.frontmatter?.productTutorialTags ?? [''],
                         customerURLs: node?.frontmatter?.customerURLs ?? [''],
-                        documentationNav,
-                        documentationURLs: documentationNav?.children?.map((child) => child.url) ?? [''],
                     },
                 })
                 res()

@@ -5,7 +5,7 @@ import SEO from 'components/seo'
 import React from 'react'
 import Sidebar from './Sidebar'
 import { useNav } from './useNav'
-import { communityMenu } from 'components/Layout/context'
+import { communityMenu } from '../../navs'
 
 interface IProps {
     children: React.ReactNode
@@ -35,7 +35,7 @@ const Community = ({ children, title, tableOfContents }: IProps) => {
 
 export default function CommunityLayout({ children, title, tableOfContents }: IProps) {
     return (
-        <Layout parent={communityMenu} activeInternalMenu={communityMenu.internal[1]}>
+        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[1]}>
             <SEO title={`${title} - PostHog`} />
             <Community title={title} tableOfContents={tableOfContents}>
                 {children}

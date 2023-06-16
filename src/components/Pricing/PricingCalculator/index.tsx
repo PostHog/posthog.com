@@ -37,15 +37,15 @@ export const PricingCalculator = () => {
                 <div className="col-span-2">
                     <h4 className="mb-3">Pricing calculator</h4>
 
-                    <div className="rounded-md bg-gray-accent-light grid grid-cols-4">
-                        <div className="font-semibold opacity-70 text-sm border-b border-dashed border-gray-accent-light col-span-3 px-4 py-2">
+                    <div className="rounded-md bg-accent dark:bg-accent-dark grid grid-cols-4">
+                        <div className="font-semibold opacity-70 text-sm border-b border-border dark:border-dark col-span-3 px-4 py-2">
                             Product
                         </div>
-                        <div className="font-semibold opacity-70 text-sm border-b border-dashed border-gray-accent-light px-4 py-2 text-center">
+                        <div className="font-semibold opacity-70 text-sm border-b border-border dark:border-dark px-4 py-2 text-center">
                             Subtotal
                         </div>
 
-                        <div className="border-b border-dashed  border-gray-accent-light col-span-3 p-2 pl-10 relative">
+                        <div className="border-b border-border dark:border-dark col-span-3 p-2 pl-10 relative">
                             <span className="w-5 h-5 flex absolute top-3 left-3">{<Analytics />}</span>
                             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                 <strong>Product analytics + data stack</strong>
@@ -65,11 +65,11 @@ export const PricingCalculator = () => {
                                 />
                             </div>
                         </div>
-                        <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
+                        <div className="border-b border-border dark:border-dark p-2 text-center">
                             <span className="text-lg font-bold">${productAnalyticsCost.toLocaleString()}</span>
                         </div>
 
-                        <div className="border-b border-dashed border-gray-accent-light col-span-3 p-2 pl-10 relative">
+                        <div className="border-b border-border dark:border-dark col-span-3 p-2 pl-10 relative">
                             <span className="w-5 h-5 flex absolute top-3 left-3">{<SessionRecording />}</span>
                             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                                 <strong>Session replay</strong>
@@ -91,7 +91,7 @@ export const PricingCalculator = () => {
                                 />
                             </div>
                         </div>
-                        <div className="border-b border-dashed border-gray-accent-light p-2 text-center">
+                        <div className="border-b border-border dark:border-dark p-2 text-center">
                             <span className="text-lg font-bold">${sessionRecordingCost.toLocaleString()}</span>
                         </div>
 
@@ -107,7 +107,7 @@ export const PricingCalculator = () => {
                     </div>
                 </div>
                 <div>
-                    <h4 className="border-b border-dashed border-gray-accent-light pb-2 mb-3">Discounts</h4>
+                    <h4 className="border-b border-border dark:border-dark pb-2 mb-3">Discounts</h4>
 
                     <div className="pl-10 relative mb-4">
                         <span className="w-6 h-6 absolute top-0 left-1">

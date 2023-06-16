@@ -15,6 +15,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import { useLocation } from '@reach/router'
 import Toggle from 'components/Toggle'
 import usePostHog from 'hooks/usePostHog'
+import * as icons from 'components/NewIcons'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -239,7 +240,8 @@ export default function MainNav() {
             </div>
             {internalMenu?.length > 0 && (
                 <ul className="flex justify-center space-x-4 list-none m-0 p-0 mb-8 border-b border-light dark:border-dark relative">
-                    {internalMenu.map(({ name, url, Icon, color }) => {
+                    {internalMenu.map(({ name, url, icon, color }) => {
+                        const Icon = icons[icon]
                         const active = activeInternalMenu?.name === name
                         return (
                             <li key={name}>

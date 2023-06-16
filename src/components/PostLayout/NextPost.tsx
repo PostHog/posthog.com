@@ -13,7 +13,7 @@ export default function NextPost() {
                 <h3 className="text-xl font-bold m-0 my-1">{frontmatter?.title}</h3>
                 <p className="relative max-h-24 overflow-hidden">
                     {excerpt}
-                    <span className="bg-gradient-to-t from-tan dark:from-primary to-transparent absolute w-full h-full inset-0" />
+                    <span className="bg-gradient-to-t from-tan dark:from-dark to-transparent absolute w-full h-full inset-0" />
                 </p>
                 <CallToAction to={fields?.slug}>Read next article</CallToAction>
             </div>

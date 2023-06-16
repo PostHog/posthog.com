@@ -147,7 +147,7 @@ const Footer = ({ location }) => {
 }
 
 export default function Product({ data, location, pageContext }) {
-    const { pageData, blogPosts, documentation, tutorials, customers } = data
+    const { pageData, blogPosts, tutorials, customers } = data
     const {
         body,
         excerpt,
@@ -236,13 +236,7 @@ export default function Product({ data, location, pageContext }) {
         PairsWith: (props: any) => <PairsWith {...props} products={productPairsWith} />,
         Documentation: (props: any) => (
             <SectionWrapper {...props}>
-                <Documentation
-                    documentation={{
-                        indexURL: pageContext?.documentationNav?.url,
-                        pages: documentation?.nodes,
-                    }}
-                    title={title}
-                />
+                <Documentation title={title} />
             </SectionWrapper>
         ),
         Tutorials: (props: any) => <Tutorials tutorials={tutorials?.nodes} />,
@@ -292,13 +286,7 @@ export default function Product({ data, location, pageContext }) {
 }
 
 export const query = graphql`
-    query Product(
-        $id: String!
-        $blogTags: [String!]!
-        $tutorialTags: [String!]!
-        $documentationURLs: [String!]!
-        $customerURLs: [String!]!
-    ) {
+    query Product($id: String!, $blogTags: [String!]!, $tutorialTags: [String!]!, $customerURLs: [String!]!) {
         pageData: mdx(id: { eq: $id }) {
             parent {
                 ... on File {
@@ -425,20 +413,6 @@ export const query = graphql`
                     }
                 }
                 body
-            }
-        }
-        documentation: allMdx(filter: { fields: { slug: { in: $documentationURLs } } }) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                }
-                headings {
-                    depth
-                    value
-                }
             }
         }
         customers: allMdx(filter: { fields: { slug: { in: $customerURLs } } }) {

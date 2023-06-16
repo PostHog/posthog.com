@@ -47,7 +47,7 @@ const PipelineSidebar = ({ filters: { type, maintainer } }) => {
     )
 }
 
-export default function Pipeline({ data, pageContext: { next, previous } }) {
+export default function Pipeline({ data }) {
     const { pageData, documentation } = data
     const {
         body,
@@ -136,9 +136,6 @@ export default function Pipeline({ data, pageContext: { next, previous } }) {
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
                 </article>
-                <div className="mt-12">
-                    <SectionLinks next={next} previous={previous} />
-                </div>
                 <div className="mb-12">
                     <FooterCTA />
                 </div>

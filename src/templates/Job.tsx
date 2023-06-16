@@ -13,7 +13,7 @@ import { benefits } from 'components/Careers/Benefits'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { companyMenu } from 'components/Layout/context'
+import { companyMenu } from '../navs'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -94,7 +94,7 @@ export default function Job({
     ]
 
     return (
-        <Layout parent={companyMenu} activeInternalMenu={companyMenu.internal[4]}>
+        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[4]}>
             <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
             <div className="">
                 <PostLayout
