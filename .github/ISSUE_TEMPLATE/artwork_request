@@ -1,0 +1,24 @@
+---
+name: New art request template
+about: For when you absolutely, 100% need some new art
+title: "Art request - {title}"
+labels: artwork
+assignees: lottiecoxon
+
+---
+
+## Description
+
+_Explain the art that you want, in just a sentence or two. Focus on creative direction._
+
+## Specifications and usage
+
+_Explain where you'll use the art, and if there are any resolution, animation, format, or other requirements._
+
+## Priority
+
+_Is this urgent? Plus points for putting a deadline._
+
+## Outline
+
+_Bullet point outline of structure / questions / topics to be covered_
