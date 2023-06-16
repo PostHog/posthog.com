@@ -372,7 +372,10 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                         >
                             <div className="flex-1 flex flex-col h-full justify-between">
                                 <div>
-                                    {!groupsToShow ? (
+                                    {!groupsToShow ||
+                                    !groupsToShow.some((product_name) =>
+                                        inclusionOnlyProducts.includes(product_name)
+                                    ) ? (
                                         <>
                                             <p className="font-bold mb-0 text-center md:text-left">
                                                 {plan.free_allocation ? 'Free' : 'Paid'}
@@ -389,11 +392,11 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                         <>
                                             <div className="mb-2">
                                                 <p className="font-bold mb-0 text-center md:text-left">
-                                                    {plan.free_allocation ? 'Free' : 'Free'}
+                                                    {plan.free_allocation ? 'Free' : 'Included'}
                                                 </p>
                                                 {!plan.free_allocation && (
                                                     <p className="hidden md:block text-black/50 text-sm mb-3">
-                                                        Included with any paid product plan
+                                                        With any paid product plan
                                                     </p>
                                                 )}
                                             </div>
@@ -629,12 +632,10 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                         <>
                                             <div className="mb-2">
                                                 <p className="font-bold mb-0 text-center md:text-left">
-                                                    {plan.free_allocation ? 'Free' : 'Free'}
+                                                    {plan.free_allocation ? 'Free' : 'Included'}
                                                 </p>
                                                 {!plan.free_allocation && (
-                                                    <p className="text-sm text-black/50">
-                                                        Included with any paid product plan
-                                                    </p>
+                                                    <p className="text-sm text-black/50">With any paid product plan</p>
                                                 )}
                                             </div>
                                         </>
