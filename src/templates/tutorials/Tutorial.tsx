@@ -25,6 +25,7 @@ import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
 import TutorialsSlider from 'components/TutorialsSlider'
+import { docsMenu } from '../../navs'
 
 export const ViewButton = ({ title, view, setView }) => {
     return (
@@ -97,7 +98,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
     const [view, setView] = useState('Article')
 
     return (
-        <Layout>
+        <Layout parent={docsMenu} activeInternalMenu={docsMenu.children[0]}>
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
