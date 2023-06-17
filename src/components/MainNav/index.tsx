@@ -19,20 +19,6 @@ import * as icons from 'components/NewIcons'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
-    const { setWebsiteTheme } = useActions(layoutLogic)
-    const posthog = usePostHog()
-
-    useEffect(() => {
-        if (window) {
-            setWebsiteTheme(window.__theme)
-            window.__onThemeChange = () => {
-                setWebsiteTheme(window.__theme)
-                if (posthog) {
-                    posthog.people.set({ preferred_theme: window.__theme })
-                }
-            }
-        }
-    }, [])
 
     const handleClick = () => {
         window.__setPreferredTheme(websiteTheme === 'light' ? 'dark' : 'light')
@@ -142,13 +128,32 @@ export default function MainNav() {
     const { open } = useSearch()
     const { menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
+    const { websiteTheme } = useValues(layoutLogic)
+    const { setWebsiteTheme } = useActions(layoutLogic)
+    const posthog = usePostHog()
+
+    useEffect(() => {
+        if (window) {
+            setWebsiteTheme(window.__theme)
+            window.__onThemeChange = () => {
+                setWebsiteTheme(window.__theme)
+                if (posthog) {
+                    posthog.people.set({ preferred_theme: window.__theme })
+                }
+            }
+        }
+    }, [])
+
     return (
         <div>
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-2">
                 <div className="flex max-w-screen-3xl mx-auto px-5 justify-between">
                     <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
                         {pathname === '/' && <ActiveBackground />}
-                        <Logo className="h-[24px] fill-current relative px-2 box-content" />
+                        <Logo
+                            color={websiteTheme === 'dark' && 'white'}
+                            className="h-[24px] fill-current relative px-2 box-content"
+                        />
                     </Link>
 
                     <ul className="flex list-none m-0 p-0">
