@@ -2082,15 +2082,15 @@ export const docsMenu = {
 const menu = [
     {
         name: 'Products',
-        url: '/product-analytics/features',
+        url: '/product-analytics',
         children: [
             {
                 name: 'Product analytics',
                 icon: 'Graph',
                 color: 'blue',
-                url: '/product-analytics/features',
+                url: '/product-analytics',
                 children: [
-                    { name: 'Features', url: '/product-analytics/features' },
+                    { name: 'Features', url: '/product-analytics' },
                     { name: 'Pricing', url: '/product-analytics/pricing' },
                     { name: 'Customers', url: '/product-analytics/customers' },
                     { name: 'Comparisons', url: '/product-analytics/comparisons' },
@@ -2104,9 +2104,9 @@ const menu = [
                 name: 'Session replay',
                 icon: 'RewindPlay',
                 color: 'yellow',
-                url: '/session-replay/features',
+                url: '/session-replay',
                 children: [
-                    { name: 'Features', url: '/session-replay/features' },
+                    { name: 'Features', url: '/session-replay' },
                     { name: 'Pricing', url: '/session-replay/pricing' },
                     { name: 'Customers', url: '/session-replay/customers' },
                     { name: 'Comparisons', url: '/session-replay/comparisons' },
@@ -2120,9 +2120,9 @@ const menu = [
                 name: 'Feature flags',
                 icon: 'Toggle',
                 color: 'seagreen',
-                url: '/feature-flags/features',
+                url: '/feature-flags',
                 children: [
-                    { name: 'Features', url: '/feature-flags/features' },
+                    { name: 'Features', url: '/feature-flags' },
                     { name: 'Pricing', url: '/feature-flags/pricing' },
                     { name: 'Customers', url: '/feature-flags/customers' },
                     { name: 'Comparisons', url: '/feature-flags/comparisons' },
@@ -2136,9 +2136,9 @@ const menu = [
                 name: 'A/B testing',
                 icon: 'Flask',
                 color: 'purple',
-                url: '/ab-testing/features',
+                url: '/ab-testing',
                 children: [
-                    { name: 'Features', url: '/ab-testing/features' },
+                    { name: 'Features', url: '/ab-testing' },
                     { name: 'Pricing', url: '/ab-testing/pricing' },
                     { name: 'Customers', url: '/ab-testing/customers' },
                     { name: 'Comparisons', url: '/ab-testing/comparisons' },

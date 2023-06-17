@@ -33,9 +33,9 @@ const menu = [
     {
         icon: <Analytics className="w-5" />,
         name: 'Product analytics',
-        url: '/product-analytics/features',
+        url: '/product-analytics',
         children: [
-            { name: 'Features', url: '/product-analytics/features' },
+            { name: 'Features', url: '/product-analytics' },
             { name: 'Pricing', url: '/product-analytics/pricing' },
             { name: 'Customers', url: '/product-analytics/customers' },
             { name: 'Comparisons', url: '/product-analytics/comparisons' },
@@ -49,9 +49,9 @@ const menu = [
     {
         icon: <SessionRecording className="w-5" />,
         name: 'Session replay',
-        url: '/session-replay/features',
+        url: '/session-replay',
         children: [
-            { name: 'Features', url: '/session-replay/features' },
+            { name: 'Features', url: '/session-replay' },
             { name: 'Pricing', url: '/session-replay/pricing' },
             { name: 'Customers', url: '/session-replay/customers' },
             { name: 'Comparisons', url: '/session-replay/comparisons' },
@@ -65,9 +65,9 @@ const menu = [
     {
         icon: <FeatureFlags className="w-5" />,
         name: 'Feature flags',
-        url: '/feature-flags/features',
+        url: '/feature-flags',
         children: [
-            { name: 'Features', url: '/feature-flags/features' },
+            { name: 'Features', url: '/feature-flags' },
             { name: 'Pricing', url: '/feature-flags/pricing' },
             { name: 'Customers', url: '/feature-flags/customers' },
             { name: 'Comparisons', url: '/feature-flags/comparisons' },
@@ -81,9 +81,9 @@ const menu = [
     {
         icon: <AbTesting className="w-5" />,
         name: 'A/B testing',
-        url: '/ab-testing/features',
+        url: '/ab-testing',
         children: [
-            { name: 'Features', url: '/ab-testing/features' },
+            { name: 'Features', url: '/ab-testing' },
             { name: 'Pricing', url: '/ab-testing/pricing' },
             { name: 'Customers', url: '/ab-testing/customers' },
             { name: 'Comparisons', url: '/ab-testing/comparisons' },
@@ -97,9 +97,9 @@ const menu = [
     {
         icon: <Platform className="w-5" />,
         name: 'Product OS',
-        url: '/product-os/features',
+        url: '/product-os',
         children: [
-            { name: 'Features', url: '/product-os/features' },
+            { name: 'Features', url: '/product-os' },
             { name: 'Pricing', url: '/product-os/pricing' },
             { name: 'Comparisons', url: '/product-os/comparisons' },
             { name: 'Roadmap', url: '/product-os/roadmap' },
