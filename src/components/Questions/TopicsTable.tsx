@@ -20,11 +20,15 @@ import {
     Toolbar,
     Upload,
     User,
+    Funnels,
+    Trends,
 } from 'components/NewIcons'
 
 import { Megaphone, SparksJoy } from 'components/NotProductIcons'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { Cohorts, PathAnalysis } from 'components/Icons'
+import { API, DataManagement, DataWarehouse } from 'components/ProductIcons'
 dayjs.extend(relativeTime)
 
 export const topicIcons = {
