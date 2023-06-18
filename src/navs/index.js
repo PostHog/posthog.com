@@ -671,7 +671,7 @@ const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: '/questions/topic/product-analytics',
+    url: '/questions',
     children: [
         {
             name: 'Edition',
