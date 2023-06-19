@@ -12,6 +12,6 @@ Fundraising principles:
 
 * It will speed us up.
 * We can use the money effectively.
-* The partner should improve our board.
+* The partner would improve our board.
 * The increased chance of success offsets dilution.
 * It reduces stress.
