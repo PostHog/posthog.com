@@ -244,7 +244,7 @@ export default function MainNav() {
                 </div>
             </div>
             {internalMenu?.length > 0 && (
-                <ul className="flex justify-center space-x-4 list-none m-0 mx-4 p-0 mb-8 border-b border-light dark:border-dark relative">
+                <ul className="flex justify-center space-x-4 list-none m-0 pt-1 px-4 mb-8 border-b border-light dark:border-dark relative overflow-x-auto overflow-y-hidden">
                     {internalMenu.map(({ name, url, icon, color }) => {
                         const Icon = icons[icon]
                         const active = activeInternalMenu?.name === name
@@ -262,7 +262,7 @@ export default function MainNav() {
                                         <Icon />
                                     </span>
                                     <span
-                                        className={`text-sm ${
+                                        className={`text-sm whitespace-nowrap ${
                                             active
                                                 ? 'font-bold opacity-100'
                                                 : 'font-semibold opacity-60 group-hover:opacity-100'
