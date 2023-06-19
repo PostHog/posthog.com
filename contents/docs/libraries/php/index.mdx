@@ -69,102 +69,35 @@ PostHog::capture(array(
 ));
 ```
 
-#### Setting user properties via an event
+### Setting user properties
 
-To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
-
-##### $set
-
-**Example**
+To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
 ```php
 PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
-  'properties' => array(
-    '$set' => array(
-      'userProperty' => 'value'
+    'distinctId' => 'distinct_id',
+    'event' => 'event_name',
+    'properties' => array(
+        '$set' => array(
+            'name' => 'Max Hedgehog'
+        ),
+        '$set_once' => array(
+            'initial_url' => '/blog'
+        )
     )
-  )
 ));
 ```
 
-**Usage**
-
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
-
-##### $set_once
-
-**Example**
-
-```php
-PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
-  'properties' => array(
-    '$set_once' => array(
-      'userProperty' => 'value'
-    )
-  )
-));
-```
-
-**Usage**
-
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
-
-### Identify
-
-> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
-
-Identify lets you add metadata to your users so you can easily identify who they are in PostHog, as well as do things 
-like segment users by these properties.
-
-An `identify` call requires:
-- `distinct id` which uniquely identifies your user
-- `properties` with a dict with any key: value pairs 
-
-
-For example:
-
-```php
-PostHog::identify(array(
-  'distinctId' => 'user:123',
-  'properties' => array(
-    'email' => 'john@doe.com',
-    'proUser' => false
-  )
-));
-```
-
-The most obvious place to make this call is whenever a user signs up, or when they update their information.
+For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
 ### Alias
 
-To connect whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like "Which marketing channels leads to users churning after a month?" or "What do users do on our website before signing up?"
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-In a purely back-end implementation, this means whenever an anonymous user does something, you'll want to send a session ID with the capture call. Then, when that users signs up, you want to do an alias call with the session ID and the newly created user ID.
-
-The same concept applies for when a user logs in.
-
-If you're using PostHog in the front-end and back-end, doing the identify call in the frontend will be enough.
-
-An alias call requires:
--   `distinctId` – the user id
--   `alias` – the anonymous session distinct ID
-
-For example:
-
-```php
-PostHog::alias(array(
-  'distinctId' => 'user:123',
-  'alias' => 'session:12345'
-));
-```
-
+We strongly recommend reading our docs on [alias](/data/integrate/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 ### Sending page views
 
-If you're aiming for a full back-end implementation of PostHog, you can send pageviews from your backend
+If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
 
 ```php
 PostHog::capture(array(

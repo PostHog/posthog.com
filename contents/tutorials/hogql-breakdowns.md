@@ -133,6 +133,6 @@ You can also replace `week` in all of these with `second`, `minute`, `hour`, `da
 
 ## Further reading
 
+- [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)
+- [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
 - [How to segment users](/tutorials/how-to-segment-users)
-- [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
-- [How to track performance marketing in PostHog](/tutorials/performance-marketing)

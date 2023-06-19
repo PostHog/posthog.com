@@ -7,7 +7,7 @@ export default function Label({
 }: {
     text: string
     className?: string
-    size: 'small' | 'medium' | 'large'
+    size?: 'small' | 'medium' | 'large'
 }): JSX.Element {
     const sizeClasses = size === 'large' ? 'text-base px-2' : size === 'medium' ? 'text-sm px-1' : 'text-xs px-1'
     return (

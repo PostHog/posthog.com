@@ -34,7 +34,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Data connections',
-                url: '/pipelines',
+                url: '/cdp',
             },
             {
                 title: 'Apps',

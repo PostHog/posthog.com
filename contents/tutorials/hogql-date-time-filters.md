@@ -123,4 +123,4 @@ This is useful to learn what features are used immediately after sign up and oth
 
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [Running experiments on new users](/tutorials/new-user-experiments)
-- [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
+- [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)

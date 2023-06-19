@@ -52,7 +52,7 @@ In addition to hey@posthog.com and sales@posthog.com, we sometimes create specia
 ### New PostHog signups
 
 When a `user signed up` (Cloud signup) or `license purchased` (Self-host license purchase) event is ingested into PostHog 
-we use the [HubSpot App](https://posthog.com/apps/hubspot-connector) to sync contact data into HubSpot.  We also populate
+we use the [HubSpot App](/apps/hubspot-connector) to sync contact data into HubSpot.  We also populate
 the following HubSpot properties if they are set in the PostHog event:
 - selected_deployment_type - usually `cloud` or `hosted_clickhouse`
 - product_signup_ts - the time they signed up/purchased a license
@@ -106,7 +106,7 @@ We use [Clearbit](https://clearbit.com/) to enhance our contact information as i
 | Email provider | Non-work email | -10  |
 
 
-We also sync the HubSpot score back into PostHog as the `hubspot_score` person property using the [HubSpot App](https://posthog.com/apps/hubspot-connector).  Our current dividing line between High and Low ICP score is **12**.
+We also sync the HubSpot score back into PostHog as the `hubspot_score` person property using the [HubSpot App](/apps/hubspot-connector).  Our current dividing line between High and Low ICP score is **12**.
 
 ## Deals
 

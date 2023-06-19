@@ -240,7 +240,7 @@ Below are some of the most popular ready-made apps which facilitate in-app messa
 
 - [Notification Bar](/apps/notification-bar): Displays a customizable banner in your product, suitable for alerting users to important messages — like discounts, outages, or announcements.
 
-- [User Interviewer](/apps/user-interviews): Displays a prompt to users that match a filter or cohort, inviting them to schedule an online interview. Syncs with Calendly to make scheduling easy. 
+- [User Interviewer](/apps/user-interview): Displays a prompt to users that match a filter or cohort, inviting them to schedule an online interview. Syncs with Calendly to make scheduling easy. 
 
 - [Pineapple Mode](/apps/pineapple-mode): Rains pineapples all over your product, advancing the sense of chaos and entropy in the world. 🍍
 

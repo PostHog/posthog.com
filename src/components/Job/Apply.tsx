@@ -79,20 +79,9 @@ const components = {
 
         return (
             <div className="relative h-24 w-full border border-gray-accent-light dark:border-gray-accent-dark border-dashed rounded-md flex justify-center items-center text-black/50 dark:text-white/50">
-                <input
-                    ref={inputRef}
-                    onChange={handleDrop}
-                    data-path={path}
-                    required={required}
-                    className="opacity-0 absolute w-full h-full inset-0 cursor-pointer"
-                    placeholder={placeholder || title}
-                    name={title}
-                    type="file"
-                    accept={allowedFileTypes.join(',')}
-                />
                 <div className="absolute">
                     {fileName ? (
-                        <p className="m-0">{fileName}</p>
+                        <p className="!m-0">{fileName}</p>
                     ) : (
                         <p className="flex space-x-3 items-center !m-0">
                             <button
@@ -106,6 +95,17 @@ const components = {
                         </p>
                     )}
                 </div>
+                <input
+                    ref={inputRef}
+                    onChange={handleDrop}
+                    data-path={path}
+                    required={required}
+                    className="opacity-0 absolute w-full h-full inset-0 cursor-pointer"
+                    placeholder={placeholder || title}
+                    name={title}
+                    type="file"
+                    accept={allowedFileTypes.join(',')}
+                />
             </div>
         )
     },

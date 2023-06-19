@@ -47,6 +47,16 @@ PostHog::capture(array(
 analytics.track('user_signed_up', {
     $groups: { segment_group: 'company_id_in_your_db' }
 })
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "user_signed_up",
+    "distinct_id": "[distinct id]",
+    "properties": {
+        "$groups": {"company": "company_id_in_your_db"}
+    }
+}' <ph_instance_address>/capture/
 ```
 
 </MultiLanguage>

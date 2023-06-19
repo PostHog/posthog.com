@@ -172,4 +172,4 @@ Let's say for example the user makes a purchase you could track an event like th
 
 - [PostHog for VueJS users](tutorials/posthog-for-vuejs)
 - [Tracking pageviews in single page apps (SPA)](/tutorials/spa)
-- [Building a Vue cookie consent banner](tutorials/vue-cookie-banner)
+- [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)

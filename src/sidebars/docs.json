@@ -548,6 +548,21 @@
         ]
     },
     {
+        "name": "Surveys",
+        "url": "/docs/surveys/manual",
+        "icon": "Surveys",
+        "children": [
+            {
+                "name": "Manual",
+                "url": "/docs/surveys/manual",
+                "badge": {
+                    "title": "Beta",
+                    "className": "uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
+                }
+            }
+        ]
+    },
+    {
         "name": "Data",
         "url": "/docs/data",
         "icon": "DataManagement",
@@ -581,6 +596,10 @@
                 "url": "/docs/data/events"
             },
             {
+                "name": "Identify",
+                "url": "/docs/data/identify"
+            },
+            {
                 "name": "Organizations & projects",
                 "url": "/docs/data/organizations-and-projects"
             },
@@ -609,6 +628,10 @@
                 "url": "/docs/data/team-collaboration"
             },
             {
+                "name": "User properties",
+                "url": "/docs/data/user-properties"
+            },
+            {
                 "name": "UTM segmentation",
                 "url": "/docs/data/utm-segmentation"
             }
@@ -616,7 +639,7 @@
     },
     {
         "name": "Data connections",
-        "url": "/docs/pipelines",
+        "url": "/docs/cdp",
         "icon": "EventPipelines",
         "children": [
             {
@@ -624,75 +647,75 @@
                 "url": "",
                 "children": [
                     {
-                        "url": "/docs/pipelines/amazon-kinesis",
+                        "url": "/docs/cdp/amazon-kinesis",
                         "name": "Amazon Kinesis Import"
                     },
                     {
-                        "url": "/docs/pipelines/bitbucket-release-tracker",
+                        "url": "/docs/cdp/bitbucket-release-tracker",
                         "name": "BitBucket Release Tracker"
                     },
                     {
-                        "url": "/docs/pipelines/replicator",
+                        "url": "/docs/cdp/replicator",
                         "name": "Event Replicator"
                     },
                     {
-                        "url": "/docs/pipelines/github-release-tracker",
+                        "url": "/docs/cdp/github-release-tracker",
                         "name": "GitHub Release Tracker"
                     },
                     {
-                        "url": "/docs/pipelines/github-star-sync",
+                        "url": "/docs/cdp/github-star-sync",
                         "name": "GitHub Star Sync"
                     },
                     {
-                        "url": "/docs/pipelines/gitlab-release-tracker",
+                        "url": "/docs/cdp/gitlab-release-tracker",
                         "name": "GitLab Release Tracker"
                     },
                     {
-                        "url": "/docs/pipelines/heartbeat",
+                        "url": "/docs/cdp/heartbeat",
                         "name": "Heartbeat"
                     },
                     {
-                        "url": "/docs/pipelines/ingestion-alert",
+                        "url": "/docs/cdp/ingestion-alert",
                         "name": "Ingestion Alert"
                     },
                     {
-                        "url": "/docs/pipelines/email-scoring",
+                        "url": "/docs/cdp/email-scoring",
                         "name": "Email Scoring"
                     },
                     {
-                        "url": "/docs/pipelines/n8n",
+                        "url": "/docs/cdp/n8n",
                         "name": "n8n Connector"
                     },
                     {
-                        "url": "/docs/pipelines/orbit",
+                        "url": "/docs/cdp/orbit",
                         "name": "Orbit Connector"
                     },
                     {
-                        "url": "/docs/pipelines/redshift-import",
+                        "url": "/docs/cdp/redshift-import",
                         "name": "Redshift Import"
                     },
                     {
-                        "url": "/docs/pipelines/rudderstack-import",
+                        "url": "/docs/cdp/rudderstack-import",
                         "name": "Rudderstack Import"
                     },
                     {
-                        "url": "/docs/pipelines/segment",
+                        "url": "/docs/cdp/segment",
                         "name": "Segment Connector"
                     },
                     {
-                        "url": "/docs/pipelines/shopify",
+                        "url": "/docs/cdp/shopify",
                         "name": "Shopify Connector"
                     },
                     {
-                        "url": "/docs/pipelines/stripe-connector",
+                        "url": "/docs/cdp/stripe-connector",
                         "name": "Stripe Connector"
                     },
                     {
-                        "url": "/docs/pipelines/twitter-followers",
+                        "url": "/docs/cdp/twitter-followers",
                         "name": "Twitter Followers Tracker"
                     },
                     {
-                        "url": "/docs/pipelines/zendesk-connector",
+                        "url": "/docs/cdp/zendesk-connector",
                         "name": "Zendesk Connector"
                     }
                 ]
@@ -702,95 +725,95 @@
                 "url": "",
                 "children": [
                     {
-                        "url": "/docs/pipelines/airbyte-export",
+                        "url": "/docs/cdp/airbyte-export",
                         "name": "Airbyte Exporter"
                     },
                     {
-                        "url": "/docs/pipelines/s3-export",
+                        "url": "/docs/cdp/s3-export",
                         "name": "Amazon S3 Export"
                     },
                     {
-                        "url": "/docs/pipelines/s3-export",
+                        "url": "/docs/cdp/s3-export",
                         "name": "Avo Inspector"
                     },
                     {
-                        "url": "/docs/pipelines/bigquery-export",
+                        "url": "/docs/cdp/bigquery-export",
                         "name": "BigQuery Export"
                     },
                     {
-                        "url": "/docs/pipelines/customer-io",
+                        "url": "/docs/cdp/customer-io",
                         "name": "Customer.io Connector"
                     },
                     {
-                        "url": "/docs/pipelines/databricks",
+                        "url": "/docs/cdp/databricks",
                         "name": "Databricks Export"
                     },
                     {
-                        "url": "/docs/pipelines/engage-connector",
+                        "url": "/docs/cdp/engage-connector",
                         "name": "Engage Connector"
                     },
                     {
-                        "url": "/docs/pipelines/google-pub-sub-connector",
+                        "url": "/docs/cdp/google-pub-sub-connector",
                         "name": "GCP Pub/Sub Connector"
                     },
                     {
-                        "url": "/docs/pipelines/google-cloud-export",
+                        "url": "/docs/cdp/google-cloud-export",
                         "name": "Google Cloud Storage Export"
                     },
                     {
-                        "url": "/docs/pipelines/hubspot-connector",
+                        "url": "/docs/cdp/hubspot-connector",
                         "name": "Hubspot Connector"
                     },
                     {
-                        "url": "/docs/pipelines/intercom",
+                        "url": "/docs/cdp/intercom",
                         "name": "Intercom Connector"
                     },
                     {
-                        "url": "/docs/pipelines/pagerduty-connector",
+                        "url": "/docs/cdp/pagerduty-connector",
                         "name": "PagerDuty Connector"
                     },
                     {
-                        "url": "/docs/pipelines/postgres-export",
+                        "url": "/docs/cdp/postgres-export",
                         "name": "PostgreSQL Export"
                     },
                     {
-                        "url": "/docs/pipelines/redshift-export",
+                        "url": "/docs/cdp/redshift-export",
                         "name": "Redshift Export"
                     },
                     {
-                        "url": "/docs/pipelines/rudderstack-export",
+                        "url": "/docs/cdp/rudderstack-export",
                         "name": "RudderStack Export"
                     },
                     {
-                        "url": "/docs/pipelines/salesforce-connector",
+                        "url": "/docs/cdp/salesforce-connector",
                         "name": "Salesforce Connector"
                     },
                     {
-                        "url": "/docs/pipelines/sendgrid-connector",
+                        "url": "/docs/cdp/sendgrid-connector",
                         "name": "Sendgrid Connector"
                     },
                     {
-                        "url": "/docs/pipelines/sentry-connector",
+                        "url": "/docs/cdp/sentry-connector",
                         "name": "Sentry Connector"
                     },
                     {
-                        "url": "/docs/pipelines/snowflake-export",
+                        "url": "/docs/cdp/snowflake-export",
                         "name": "Snowflake Export"
                     },
                     {
-                        "url": "/docs/pipelines/twilio",
+                        "url": "/docs/cdp/twilio",
                         "name": "Twilio Connector"
                     },
                     {
-                        "url": "/docs/pipelines/variance-connector",
+                        "url": "/docs/cdp/variance-connector",
                         "name": "Variance Connector"
                     },
                     {
-                        "url": "/docs/pipelines/pace-integration",
+                        "url": "/docs/cdp/pace-integration",
                         "name": "Pace Integration"
                     },
                     {
-                        "url": "/docs/pipelines/zapier-connector",
+                        "url": "/docs/cdp/zapier-connector",
                         "name": "Zapier Connector"
                     }
                 ]
@@ -800,39 +823,39 @@
                 "url": "",
                 "children": [
                     {
-                        "url": "/docs/pipelines/downsampling",
+                        "url": "/docs/cdp/downsampling",
                         "name": "Downsampler"
                     },
                     {
-                        "url": "/docs/pipelines/event-sequence-timer",
+                        "url": "/docs/cdp/event-sequence-timer",
                         "name": "Event Sequence Timer"
                     },
                     {
-                        "url": "/docs/pipelines/filter-out",
+                        "url": "/docs/cdp/filter-out",
                         "name": "Filter Out"
                     },
                     {
-                        "url": "/docs/pipelines/first-time-event-tracker",
+                        "url": "/docs/cdp/first-time-event-tracker",
                         "name": "First Time Event Tracker"
                     },
                     {
-                        "url": "/docs/pipelines/property-filter",
+                        "url": "/docs/cdp/property-filter",
                         "name": "Property Filter"
                     },
                     {
-                        "url": "/docs/pipelines/property-flattener",
+                        "url": "/docs/cdp/property-flattener",
                         "name": "Property Flattener"
                     },
                     {
-                        "url": "/docs/pipelines/schema-enforcer",
+                        "url": "/docs/cdp/schema-enforcer",
                         "name": "Schema Enforcer"
                     },
                     {
-                        "url": "/docs/pipelines/taxonomy-standardizer",
+                        "url": "/docs/cdp/taxonomy-standardizer",
                         "name": "Taxonomy Standardizer"
                     },
                     {
-                        "url": "/docs/pipelines/unduplicator",
+                        "url": "/docs/cdp/unduplicator",
                         "name": "Unduplicator"
                     }
                 ]
@@ -842,31 +865,31 @@
                 "url": "",
                 "children": [
                     {
-                        "url": "/docs/pipelines/advanced-geoip",
+                        "url": "/docs/cdp/advanced-geoip",
                         "name": "Advanced GeoIP Enricher"
                     },
                     {
-                        "url": "/docs/pipelines/automatic-cohort-creator",
+                        "url": "/docs/cdp/automatic-cohort-creator",
                         "name": "Automatic Cohort Creator"
                     },
                     {
-                        "url": "/docs/pipelines/currency-normalization",
+                        "url": "/docs/cdp/currency-normalization",
                         "name": "Currency Normalizer"
                     },
                     {
-                        "url": "/docs/pipelines/geoip-enrichment",
+                        "url": "/docs/cdp/geoip-enrichment",
                         "name": "GeoIP Enricher"
                     },
                     {
-                        "url": "/docs/pipelines/timestamp-parser",
+                        "url": "/docs/cdp/timestamp-parser",
                         "name": "Timestamp Parser"
                     },
                     {
-                        "url": "/docs/pipelines/url-normalizer",
+                        "url": "/docs/cdp/url-normalizer",
                         "name": "URL Normalizer"
                     },
                     {
-                        "url": "/docs/pipelines/user-agent-populator",
+                        "url": "/docs/cdp/user-agent-populator",
                         "name": "User Agent Populator"
                     }
                 ]
@@ -877,35 +900,35 @@
                 "children": [
                     {
                         "name": "Overview",
-                        "url": "/docs/pipelines/build"
+                        "url": "/docs/cdp/build"
                     },
                     {
                         "name": "Tutorial",
-                        "url": "/docs/pipelines/build/tutorial"
+                        "url": "/docs/cdp/build/tutorial"
                     },
                     {
                         "name": "Troubleshooting",
-                        "url": "/docs/pipelines/enabling"
+                        "url": "/docs/cdp/enabling"
                     },
                     {
                         "name": "Developer reference",
-                        "url": "/docs/pipelines/build/reference"
+                        "url": "/docs/cdp/build/reference"
                     },
                     {
                         "name": "Using the PostHog API",
-                        "url": "/docs/pipelines/build/api"
+                        "url": "/docs/cdp/build/api"
                     },
                     {
                         "name": "Jobs",
-                        "url": "/docs/pipelines/build/jobs"
+                        "url": "/docs/cdp/build/jobs"
                     },
                     {
                         "name": "Testing",
-                        "url": "/docs/pipelines/build/testing"
+                        "url": "/docs/cdp/build/testing"
                     },
                     {
                         "name": "TypeScript types",
-                        "url": "/docs/pipelines/build/types"
+                        "url": "/docs/cdp/build/types"
                     }
                 ]
             }

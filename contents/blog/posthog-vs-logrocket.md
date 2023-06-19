@@ -618,7 +618,7 @@ Some examples of PostHog’s site apps include:
 
 -   **[User Notifications](/apps/notification-bar):** Display a site banner to alert users about important information.
 
--   **[Schedule interviews](/apps/user-interviews):** Target different types of users to receive Calendly notification, so you can arrange feedback calls.
+-   **[Schedule interviews](/apps/user-interview):** Target different types of users to receive Calendly notification, so you can arrange feedback calls.
 
 -   **[In-app prompts](/apps/feedback-widget):** Display in-app prompts which ask for written feedback, or bug reports.
 

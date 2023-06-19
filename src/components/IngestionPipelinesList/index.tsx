@@ -7,7 +7,7 @@ export const IngestionPipelinesList = () => {
     } = useStaticQuery<QueryResult>(query)
 
     return (
-        <ul className="list-none p-0 dark:border-gray-accent-dark">
+        <ul className="list-none p-0 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
             {pipelines.map((pipeline) => {
                 return (
                     <li
@@ -57,7 +57,7 @@ const query = graphql`
     query {
         pipelines: allMdx(
             filter: {
-                fields: { slug: { regex: "/^/pipelines/(?!.*/docs).*/" } }
+                fields: { slug: { regex: "/^/cdp/(?!.*/docs).*/" } }
                 frontmatter: { filters: { type: { regex: "/data-in/" } } }
             }
         ) {
