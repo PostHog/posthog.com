@@ -454,24 +454,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.cdp.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
-        let next = null
-        let previous = null
-        const sidebar = sidebars.cdp
-        sidebar.some((item, index) => {
-            if (item.url === slug) {
-                next = sidebar[index + 1]
-                previous = sidebar[index - 1]
-                return true
-            }
-        })
         createPage({
             path: slug,
             component: PipelineTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',
-                next,
-                previous,
             },
         })
     })
