@@ -20,7 +20,7 @@ This month we’re chatting to [Unified.to](https://unified.to/) co-founder and 
 We don’t believe software companies should be building customer-facing integrations anymore. It just takes up too many resources. We don’t host our websites on servers in a closet anymore, so why are we still building integrations? Businesses are starting to catch on to this. You see a lot of other X-as-a-service developer tools out there: Stripe for payments, Twilio for SMS, Okta for authentication. We believe integrations should also follow that model.”
 
 ### How has the journey been so far?
-“Unified.to is five months old and, while you’d think we’re pretty early on, we’re actually not. We have [product-market fit](/blog/how-to-product-market-fit) and we’re beating incumbent competitors when we face off against them, we’re getting our processes in order and our first customers. It’s quite exciting.
+“Unified.to is five months old and, while you’d think we’re pretty early on, we’re actually not. We have [product-market fit](/blog/product-market-fit-game) and we’re beating incumbent competitors when we face off against them, we’re getting our processes in order and our first customers. It’s quite exciting.
 
 We were able to progress so quickly because we really understood the problem we were trying to solve. We’re our own target customer in a lot of ways, but we also went out and did a lot of interviews with users. We spoke to about 30 organizations and that led to a lot of learnings that we didn't think about. 
 
