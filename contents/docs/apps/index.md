@@ -5,6 +5,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+> Looking to get data in or out of PostHog? Check out our [data connections library](/cdp) or visit their [docs](/docs/cdp/).
+
 Apps extend PostHog's functionality by either pulling data into or sending data out of PostHog. They allow anyone to extend and customize PostHog in order to better fit their needs. [Explore our app library](/apps)
 
 Apps can be used for a wide variety of use cases, such as:
