@@ -2,11 +2,7 @@
 title: Engage Connector
 github: https://github.com/PostHog/posthog-engage-so-plugin
 installUrl: https://app.posthog.com/project/apps?name=Engage
-<<<<<<<< HEAD:contents/docs/pipelines/engage-connector.md
-thumbnail: ../../pipelines/thumbnails/engage_logo.png
-========
 thumbnail: ../../cdp/thumbnails/engage_logo.png
->>>>>>>> master:contents/docs/cdp/engage-connector.md
 tags:
     - engage
 ---

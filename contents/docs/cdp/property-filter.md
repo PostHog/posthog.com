@@ -2,11 +2,7 @@
 title: Property Filter
 github: https://github.com/witty-works/posthog-property-filter-plugin
 installUrl: https://app.posthog.com/project/apps?name=Property%20Filter
-<<<<<<<< HEAD:contents/docs/pipelines/property-filter.md
-thumbnail: ../../pipelines/thumbnails/property-filter.png
-========
 thumbnail: ../../cdp/thumbnails/property-filter.png
->>>>>>>> master:contents/docs/cdp/property-filter.md
 tags:
     - property-filter
 ---

@@ -1,10 +1,6 @@
 ---
 title: n8n Connector
-<<<<<<<< HEAD:contents/docs/pipelines/n8n.md
-thumbnail: ../../pipelines/thumbnails/n8n.png
-========
 thumbnail: ../../cdp/thumbnails/n8n.png
->>>>>>>> master:contents/docs/cdp/n8n.md
 tags:
     - n8n
 ---

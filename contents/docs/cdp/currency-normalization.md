@@ -2,11 +2,7 @@
 title: Currency Normalizer
 github: https://github.com/PostHog/currency-normalization-plugin
 installUrl: https://app.posthog.com/project/apps?name=Currency%20Normalization
-<<<<<<<< HEAD:contents/docs/pipelines/currency-normalization.md
-thumbnail: ../../pipelines/thumbnails/currency-normalization.png
-========
 thumbnail: ../../cdp/thumbnails/currency-normalization.png
->>>>>>>> master:contents/docs/cdp/currency-normalization.md
 tags:
     - currency-normalizer
 ---

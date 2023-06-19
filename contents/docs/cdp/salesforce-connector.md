@@ -2,11 +2,7 @@
 title: Salesforce Connector
 github: https://github.com/Vinovest/posthog-salesforce
 installUrl: https://app.posthog.com/project/apps?name=Salesforce
-<<<<<<<< HEAD:contents/docs/pipelines/salesforce-connector.md
-thumbnail: ../../pipelines/thumbnails/salesforce.svg
-========
 thumbnail: ../../cdp/thumbnails/salesforce.svg
->>>>>>>> master:contents/docs/cdp/salesforce-connector.md
 tags:
     - salesforce
 ---

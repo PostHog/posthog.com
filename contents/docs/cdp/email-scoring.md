@@ -2,11 +2,7 @@
 title: Email Scoring
 github: https://github.com/PostHog/mailboxlayer-plugin
 installUrl: https://app.posthog.com/project/apps?name=Posthog+Ingestion+Alert+Plugin
-<<<<<<<< HEAD:contents/docs/pipelines/email-scoring.md
-thumbnail: ../../pipelines/thumbnails/email-scoring.png
-========
 thumbnail: ../../cdp/thumbnails/email-scoring.png
->>>>>>>> master:contents/docs/cdp/email-scoring.md
 tags:
     - email-scoring
 ---

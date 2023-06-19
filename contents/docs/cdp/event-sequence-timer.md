@@ -2,11 +2,7 @@
 title: Event Sequence Timer
 github: https://github.com/PostHog/event-sequence-timer-plugin
 installUrl: https://app.posthog.com/project/apps?name=Event%20Sequence%20Timer%20Plugin
-<<<<<<<< HEAD:contents/docs/pipelines/event-sequence-timer.md
-thumbnail: ../../pipelines/thumbnails/event-sequence-timer-plugin.png
-========
 thumbnail: ../../cdp/thumbnails/event-sequence-timer-plugin.png
->>>>>>>> master:contents/docs/cdp/event-sequence-timer.md
 tags:
     - event-timer
 ---

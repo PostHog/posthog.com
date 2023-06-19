@@ -2,11 +2,7 @@
 title: First Time Event Tracker
 github: https://github.com/PostHog/first-time-event-tracker
 installUrl: https://app.posthog.com/project/apps?name=First%20Time%20Event%20Tracker
-<<<<<<<< HEAD:contents/docs/pipelines/first-time-event-tracker.md
-thumbnail: ../../pipelines/thumbnails/first-time-event-tracker.png
-========
 thumbnail: ../../cdp/thumbnails/first-time-event-tracker.png
->>>>>>>> master:contents/docs/cdp/first-time-event-tracker.md
 tags:
     - first-time
 ---

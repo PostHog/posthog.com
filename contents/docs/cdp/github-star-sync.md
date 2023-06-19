@@ -2,11 +2,7 @@
 title: GitHub Star Sync
 github: https://github.com/PostHog/github-star-sync-plugin
 installUrl: https://app.posthog.com/project/apps?name=Github+Star+Sync
-<<<<<<<< HEAD:contents/docs/pipelines/github-star-sync.md
-thumbnail: ../../pipelines/thumbnails/github.png
-========
 thumbnail: ../../cdp/thumbnails/github.png
->>>>>>>> master:contents/docs/cdp/github-star-sync.md
 tags:
     - star-sync
 ---

@@ -2,11 +2,7 @@
 title: GCP Pub/Sub Connector
 github: https://github.com/vendasta/pubsub-plugin
 installUrl: https://app.posthog.com/project/apps?name=Pub%2FSub%20Export
-<<<<<<<< HEAD:contents/docs/pipelines/google-pub-sub-connector.md
-thumbnail: ../../pipelines/thumbnails/pub-sub-export.png
-========
 thumbnail: ../../cdp/thumbnails/pub-sub-export.png
->>>>>>>> master:contents/docs/cdp/google-pub-sub-connector.md
 tags:
     - pub-sub
 ---

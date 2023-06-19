@@ -2,11 +2,7 @@
 title: Timestamp Parser
 github: https://github.com/PostHog/timestamp-parser-plugin
 installUrl: https://app.posthog.com/project/apps?name=Timestamp%20Parser
-<<<<<<<< HEAD:contents/docs/pipelines/timestamp-parser.md
-thumbnail: ../../pipelines/thumbnails/timestamp-parser.png
-========
 thumbnail: ../../cdp/thumbnails/timestamp-parser.png
->>>>>>>> master:contents/docs/cdp/timestamp-parser.md
 tags:
     - timestamp-parser
 ---

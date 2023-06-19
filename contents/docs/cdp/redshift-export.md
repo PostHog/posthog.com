@@ -2,11 +2,7 @@
 title: Redshift Export
 github: https://github.com/PostHog/redshift-plugin
 installUrl: https://app.posthog.com/project/apps?name=Redshift+Export
-<<<<<<<< HEAD:contents/docs/pipelines/redshift-export.md
-thumbnail: ../../pipelines/thumbnails/redshift.svg
-========
 thumbnail: ../../cdp/thumbnails/redshift.svg
->>>>>>>> master:contents/docs/cdp/redshift-export.md
 tags:
     - redshift-export
 ---

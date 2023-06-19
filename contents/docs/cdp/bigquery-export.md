@@ -2,11 +2,7 @@
 title: BigQuery Export
 github: https://github.com/PostHog/bigquery-plugin
 installUrl: https://app.posthog.com/project/apps?name=BigQuery+Export
-<<<<<<<< HEAD:contents/docs/pipelines/bigquery-export.md
-thumbnail: ../../pipelines/thumbnails/bigquery.svg
-========
 thumbnail: ../../cdp/thumbnails/bigquery.svg
->>>>>>>> master:contents/docs/cdp/bigquery-export.md
 tags:
     - bigquery-export
 ---

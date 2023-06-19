@@ -2,11 +2,7 @@
 title: SemVer Flattener
 github: https://github.com/PostHog/semver-flattener-plugin
 installUrl: https://app.posthog.com/project/apps?name=SemVer
-<<<<<<<< HEAD:contents/docs/pipelines/semver-flattener.md
-thumbnail: ../../pipelines/thumbnails/semver-flattener.png
-========
 thumbnail: ../../cdp/thumbnails/semver-flattener.png
->>>>>>>> master:contents/docs/cdp/semver-flattener.md
 tags:
     - semver-flattener
 ---

@@ -2,11 +2,7 @@
 title: BitBucket Release Tracker
 github: https://github.com/PostHog/bitbucket-release-tracker
 installUrl: https://app.posthog.com/project/apps?name=Bitbucket+Release+Tracker
-<<<<<<<< HEAD:contents/docs/pipelines/bitbucket-release-tracker.md
-thumbnail: ../../pipelines/thumbnails/bitbucket-release-tracker.png
-========
 thumbnail: ../../cdp/thumbnails/bitbucket-release-tracker.png
->>>>>>>> master:contents/docs/cdp/bitbucket-release-tracker.md
 tags:
     - bitbucket-release-tracker
 ---

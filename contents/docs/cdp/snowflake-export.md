@@ -2,11 +2,7 @@
 title: Snowflake Export
 github: https://github.com/PostHog/snowflake-export-plugin
 installUrl: https://app.posthog.com/project/apps?name=Snowflake
-<<<<<<<< HEAD:contents/docs/pipelines/snowflake-export.md
-thumbnail: ../../pipelines/thumbnails/snowflake.svg
-========
 thumbnail: ../../cdp/thumbnails/snowflake.svg
->>>>>>>> master:contents/docs/cdp/snowflake-export.md
 official: true
 tags:
     - snowflake-export

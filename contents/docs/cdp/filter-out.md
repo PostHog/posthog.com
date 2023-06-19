@@ -2,11 +2,7 @@
 title: Filter Out
 github: https://github.com/PostHog/posthog-filter-out-plugin
 installUrl: https://app.posthog.com/project/apps?name=Filter%Out%20Plugin
-<<<<<<<< HEAD:contents/docs/pipelines/filter-out.md
-thumbnail: ../../pipelines/thumbnails/filter-out.png
-========
 thumbnail: ../../cdp/thumbnails/filter-out.png
->>>>>>>> master:contents/docs/cdp/filter-out.md
 tags:
     - filter-out
 ---

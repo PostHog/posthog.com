@@ -3,11 +3,7 @@ title: Patterns Connector
 layout: app
 github: https://github.com/PostHog/posthog-patterns-app
 installUrl: https://app.posthog.com/project/apps?name=Patterns
-<<<<<<<< HEAD:contents/docs/pipelines/patterns-connector.md
-thumbnail: ../../pipelines/thumbnails/patterns-logo.svg
-========
 thumbnail: ../../cdp/thumbnails/patterns-logo.svg
->>>>>>>> master:contents/docs/cdp/patterns-connector.md
 tags:
     - patterns
 ---

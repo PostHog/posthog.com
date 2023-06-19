@@ -2,11 +2,7 @@
 title: Pace Integration
 github: https://github.com/PostHog/pace-posthog-integration
 installUrl: https://app.posthog.com/project/apps?name=Pace
-<<<<<<<< HEAD:contents/docs/pipelines/pace-integration.md
-thumbnail: ../../pipelines/thumbnails/pace-integration.png
-========
 thumbnail: ../../cdp/thumbnails/pace-integration.png
->>>>>>>> master:contents/docs/cdp/pace-integration.md
 tags:
     - pace-integration
 ---

@@ -2,11 +2,7 @@
 title: Taxonomy Standardizer
 installUrl: https://app.posthog.com/project/apps?name=Taxonomy+Plugin
 github: https://github.com/PostHog/taxonomy-plugin
-<<<<<<<< HEAD:contents/docs/pipelines/taxonomy-standardizer.md
-thumbnail: ../../pipelines/thumbnails/taxonomy-standardizer.png
-========
 thumbnail: ../../cdp/thumbnails/taxonomy-standardizer.png
->>>>>>>> master:contents/docs/cdp/taxonomy-standardizer.md
 tags:
     - taxonomy-standardizer
 ---

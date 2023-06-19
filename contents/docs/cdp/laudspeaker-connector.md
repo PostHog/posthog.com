@@ -2,11 +2,7 @@
 title: Laudspeaker Connector
 github: https://github.com/PostHog/posthog-laudspeaker-app
 installUrl: https://app.posthog.com/project/apps?name=Laudspeaker
-<<<<<<<< HEAD:contents/docs/pipelines/laudspeaker-connector.md
-thumbnail: ../../pipelines/thumbnails/laudspeaker-connector.png
-========
 thumbnail: ../../cdp/thumbnails/laudspeaker-connector.png
->>>>>>>> master:contents/docs/cdp/laudspeaker-connector.md
 tags:
     - laudspeaker-connector
 ---

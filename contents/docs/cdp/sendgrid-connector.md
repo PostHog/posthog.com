@@ -2,11 +2,7 @@
 title: Sendgrid Connector
 github: https://github.com/PostHog/sendgrid-plugin
 installUrl: https://app.posthog.com/project/apps?name=Sendgrid
-<<<<<<<< HEAD:contents/docs/pipelines/sendgrid-connector.md
-thumbnail: ../../pipelines/thumbnails/sendgrid-connector.png
-========
 thumbnail: ../../cdp/thumbnails/sendgrid-connector.png
->>>>>>>> master:contents/docs/cdp/sendgrid-connector.md
 tags:
     - sendgrid-connector
 ---

@@ -1,10 +1,6 @@
 ---
 title: RudderStack Import
-<<<<<<<< HEAD:contents/docs/pipelines/rudderstack-import.md
-thumbnail: ../../pipelines/thumbnails/rudderstack-export.png
-========
 thumbnail: ../../cdp/thumbnails/rudderstack-export.png
->>>>>>>> master:contents/docs/cdp/rudderstack-import.md
 topics:
     - rudderstack
 ---

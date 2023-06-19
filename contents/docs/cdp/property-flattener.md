@@ -2,20 +2,13 @@
 title: Property Flattener
 github: https://github.com/PostHog/flatten-properties-plugin
 installUrl: https://app.posthog.com/project/apps?name=Property%20Flattener%20Plugin
-<<<<<<<< HEAD:contents/docs/pipelines/property-flattener.md
-thumbnail: ../../pipelines/thumbnails/property-flattener.png
-========
 thumbnail: ../../cdp/thumbnails/property-flattener.png
->>>>>>>> master:contents/docs/cdp/property-flattener.md
 tags:
     - property-flattener
 ---
 
-<<<<<<<< HEAD:contents/docs/pipelines/property-flattener.md
-========
 > **Note:** With the release of [HogQL](/docs/product-analytics/hogql), you can access nested properties without the need for this app. We have disabled new installations of it, but you can still use it if you have it installed.
 
->>>>>>>> master:contents/docs/cdp/property-flattener.md
 This app flattens nested properties in PostHog events, making it easier to access them through filters if needed.
 
 This is useful if, for example, you're an online retailer and have purchase events with the following property structure:

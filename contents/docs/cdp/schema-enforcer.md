@@ -2,11 +2,7 @@
 title: Schema Enforcer
 github: https://github.com/PostHog/schema-enforcer-plugin
 installUrl: https://app.posthog.com/project/apps?name=Schema%20Enforcer
-<<<<<<<< HEAD:contents/docs/pipelines/schema-enforcer.md
-thumbnail: ../../pipelines/thumbnails/schema-enforcer.png
-========
 thumbnail: ../../cdp/thumbnails/schema-enforcer.png
->>>>>>>> master:contents/docs/cdp/schema-enforcer.md
 tags:
     - schema-enforcer
 ---

@@ -2,11 +2,7 @@
 title: Amazon Kinesis Import
 github: https://github.com/posthog/posthog-kinesis-plugin
 installUrl: https://app.posthog.com/project/apps?name=Kinesis
-<<<<<<<< HEAD:contents/docs/pipelines/amazon-kinesis.md
-thumbnail: ../../pipelines/thumbnails/kinesis.png
-========
 thumbnail: ../../cdp/thumbnails/kinesis.png
->>>>>>>> master:contents/docs/cdp/amazon-kinesis.md
 tags:
     - amazon-kinesis
 ---

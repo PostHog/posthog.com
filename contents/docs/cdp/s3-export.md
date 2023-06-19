@@ -2,11 +2,7 @@
 title: Amazon S3 Export
 github: https://github.com/PostHog/s3-export-plugin
 installUrl: https://app.posthog.com/project/apps?name=S3+Export+Plugin
-<<<<<<<< HEAD:contents/docs/pipelines/s3-export.md
-thumbnail: ../../pipelines/thumbnails/s3.svg
-========
 thumbnail: ../../cdp/thumbnails/s3.svg
->>>>>>>> master:contents/docs/cdp/s3-export.md
 official: true
 tags:
     - s3 export

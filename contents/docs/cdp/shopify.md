@@ -2,11 +2,7 @@
 title: Shopify Connector
 github: https://github.com/posthog/posthog-shopify-sync-plugin
 installUrl: https://app.posthog.com/project/apps?name=Posthog+Shopify
-<<<<<<<< HEAD:contents/docs/pipelines/shopify.md
-thumbnail: ../../pipelines/thumbnails/shopify.png
-========
 thumbnail: ../../cdp/thumbnails/shopify.png
->>>>>>>> master:contents/docs/cdp/shopify.md
 tags:
     - shopify
 ---

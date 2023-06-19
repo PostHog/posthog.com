@@ -2,11 +2,7 @@
 title: Heartbeat
 github: https://github.com/PostHog/posthog-heartbeat-plugin
 installUrl: https://app.posthog.com/project/apps?name=Heartbeat
-<<<<<<<< HEAD:contents/docs/pipelines/heartbeat.md
-thumbnail: ../../pipelines/thumbnails/heartbeat.png
-========
 thumbnail: ../../cdp/thumbnails/heartbeat.png
->>>>>>>> master:contents/docs/cdp/heartbeat.md
 tags:
     - heartbeat
 ---

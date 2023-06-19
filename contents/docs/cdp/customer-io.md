@@ -2,11 +2,7 @@
 title: Customer.io Connector
 github: https://github.com/PostHog/customerio-plugin
 installUrl: https://app.posthog.com/project/apps?name=Customer.io
-<<<<<<<< HEAD:contents/docs/pipelines/customer-io.md
-thumbnail: ../../pipelines/thumbnails/customerio-connector.png
-========
 thumbnail: ../../cdp/thumbnails/customerio-connector.png
->>>>>>>> master:contents/docs/cdp/customer-io.md
 tags:
     - customer.io-connector
 ---
