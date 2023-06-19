@@ -46,7 +46,7 @@ What I _do_ worry about is funding. We're going through a really weird and uniqu
 How long are we going to stay in this weird funding cycle? I'm hoping it is over by the end of this year. I don't think it's going to go back to the way it used to be, but I hope it improves.”
 
 ### Finally, as a serial entrepreneur, what advice would you give to other startups now?
-“I think a lot of tech entrepreneurs, like me, are very technical and I one issue there is that we overbuild before we launch. You can launch anytime you want, but it doesn't matter if a tree falls in the forest if nobody's there. 
+“I think a lot of tech entrepreneurs, like me, are very technical and one issue there is that we overbuild before we launch. You can launch anytime you want, but it doesn't matter if a tree falls in the forest if nobody's there. 
 
 What I always tell entrepreneurs is to solve one problem. It doesn’t matter if your product is just a form, if you’re solving a real problem you’re going to get quite far. Don't over-engineer in pursuit of five billion users — solve one problem for a thousand users and really solve it well. 
 
