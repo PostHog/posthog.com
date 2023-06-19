@@ -1998,6 +1998,92 @@ export const docsMenu = {
                 },
             ],
         },
+        {
+            name: 'CDP',
+            url: '/docs/cdp',
+            color: 'yellow',
+            icon: 'Person',
+            children: [
+                {
+                    name: 'Session replay',
+                    url: '/docs/session-replay',
+                    icon: 'SessionRecording',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/session-replay',
+                        },
+                        {
+                            name: 'Product manual',
+                            url: '/docs/session-replay/manual',
+                        },
+                        {
+                            name: 'Privacy Controls',
+                            url: '/docs/session-replay/privacy',
+                        },
+                        {
+                            name: 'Sharing and emedding',
+                            url: '/docs/session-replay/sharing',
+                        },
+                        {
+                            name: 'Data retention',
+                            url: '/docs/session-replay/data-retention',
+                        },
+                        {
+                            name: 'Iframe recording',
+                            url: '/docs/session-replay/iframes',
+                        },
+                        {
+                            name: 'Troubleshooting and FAQs',
+                            url: '/docs/session-replay/troubleshooting',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            name: 'Data warehouse',
+            url: '/docs/session-replay',
+            color: 'seagreen',
+            icon: 'Server',
+            children: [
+                {
+                    name: 'Session replay',
+                    url: '/docs/session-replay',
+                    icon: 'SessionRecording',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/session-replay',
+                        },
+                        {
+                            name: 'Product manual',
+                            url: '/docs/session-replay/manual',
+                        },
+                        {
+                            name: 'Privacy Controls',
+                            url: '/docs/session-replay/privacy',
+                        },
+                        {
+                            name: 'Sharing and emedding',
+                            url: '/docs/session-replay/sharing',
+                        },
+                        {
+                            name: 'Data retention',
+                            url: '/docs/session-replay/data-retention',
+                        },
+                        {
+                            name: 'Iframe recording',
+                            url: '/docs/session-replay/iframes',
+                        },
+                        {
+                            name: 'Troubleshooting and FAQs',
+                            url: '/docs/session-replay/troubleshooting',
+                        },
+                    ],
+                },
+            ],
+        },
     ],
 }
 
