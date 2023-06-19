@@ -2,11 +2,7 @@
 title: Twitter Followers Tracker
 github: https://github.com/PostHog/twitter-followers-plugin
 installUrl: https://app.posthog.com/project/apps?name=Twitter+Followers
-<<<<<<<< HEAD:contents/docs/pipelines/twitter-followers.md
-thumbnail: ../../pipelines/thumbnails/twitter-followers.png
-========
 thumbnail: ../../cdp/thumbnails/twitter-followers.png
->>>>>>>> master:contents/docs/cdp/twitter-followers.md
 tags:
     - twitter-followers
 ---

@@ -2,11 +2,7 @@
 title: Unduplicator
 github: https://github.com/paolodamico/posthog-app-unduplicates
 installUrl: https://app.posthog.com/project/apps?name=Unduplicates
-<<<<<<<< HEAD:contents/docs/pipelines/unduplicator.md
-thumbnail: ../../pipelines/thumbnails/unduplicator.png
-========
 thumbnail: ../../cdp/thumbnails/unduplicator.png
->>>>>>>> master:contents/docs/cdp/unduplicator.md
 tags:
     - unduplicator
 ---

@@ -2,11 +2,7 @@
 title: Zapier Connector
 github: https://github.com/PostHog/posthog-zapier/
 installUrl: https://zapier.com/apps/posthog/integrations
-<<<<<<<< HEAD:contents/docs/pipelines/zapier-connector.md
-thumbnail: ../../pipelines/thumbnails/zapier.svg
-========
 thumbnail: ../../cdp/thumbnails/zapier.svg
->>>>>>>> master:contents/docs/cdp/zapier-connector.md
 tags:
     - zapier-connector
 ---

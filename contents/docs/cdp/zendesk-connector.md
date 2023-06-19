@@ -2,11 +2,7 @@
 title: Zendesk Connector
 github: https://github.com/PostHog/posthog-zendesk-plugin
 installUrl: https://app.posthog.com/project/apps?name=posthog-zendesk-plugin
-<<<<<<<< HEAD:contents/docs/pipelines/zendesk-connector.md
-thumbnail: ../../pipelines/thumbnails/zendesk.svg
-========
 thumbnail: ../../cdp/thumbnails/zendesk.svg
->>>>>>>> master:contents/docs/cdp/zendesk-connector.md
 tags:
     - zendesk-connector
 ---

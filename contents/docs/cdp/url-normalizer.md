@@ -2,11 +2,7 @@
 title: URL Normalizer
 github: https://github.com/PostHog/posthog-url-normalizer-plugin
 installUrl: https://app.posthog.com/project/apps?name=URL%20Normalizer
-<<<<<<<< HEAD:contents/docs/pipelines/url-normalizer.md
-thumbnail: ../../pipelines/thumbnails/url_normalizer.png
-========
 thumbnail: ../../cdp/thumbnails/url_normalizer.png
->>>>>>>> master:contents/docs/cdp/url-normalizer.md
 tags:
     - url-normalizer
 ---
