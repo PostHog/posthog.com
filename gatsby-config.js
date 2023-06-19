@@ -356,7 +356,13 @@ module.exports = {
                                     url: `${siteUrl}/${slug}`,
                                     guid: id,
                                     author: authors && authors[0].name,
-                                    custom_elements: [{ 'content:encoded': html }],
+                                    custom_elements: [
+                                        {
+                                            'content:encoded': {
+                                                _cdata: html,
+                                            },
+                                        },
+                                    ],
                                     enclosure: {
                                         url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
                                     },
