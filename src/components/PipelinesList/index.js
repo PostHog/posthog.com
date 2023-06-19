@@ -4,15 +4,15 @@ import builderHog from './builder-hog.png'
 
 const Listing = ({ name, image, url, badge, price }) => {
     return (
-        <li className="border-b border-r border-dashed border-gray-accent-light">
+        <li className="">
             <Link
                 to={url}
-                className="flex flex-col relative items-center text-center px-2 py-8 justify-center hover:bg-gray-accent-light"
+                className="group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded  border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
             >
-                <img className="icon w-12 h-12 p-2 mb-2 rounded-sm" src={image} />
+                <img className="icon w-12 h-12 p-2 mr-2 rounded-sm" src={image} />
 
                 <span className="text-primary">{name}</span>
-                <div className="absolute top-4 right-4 inline-flex space-x-2 items-center text-[12px] uppercase text-primary text-opacity-50">
+                <div className="ml-auto inline-flex px-2 items-center text-[12px] uppercase text-primary text-opacity-50">
                     {badge && <span className="bg-gray-accent-light rounded-[2px] px-2 py-1">{badge}</span>}
                     {badge?.toLowerCase() !== 'built-in' && <span>{price || 'Free'}</span>}
                 </div>
@@ -23,7 +23,7 @@ const Listing = ({ name, image, url, badge, price }) => {
 
 export default function PipelinesList({ pipelines, hideBuildYourOwn }) {
     return (
-        <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-4 border-t border-l border-dashed border-gray-accent-light max-w-screen-2xl mx-auto">
+        <ul className="list-none m-0 p-0 max-w-2xl mx-auto">
             {pipelines.map((pipeline) => {
                 const {
                     id,
@@ -42,14 +42,13 @@ export default function PipelinesList({ pipelines, hideBuildYourOwn }) {
                 )
             })}
             {!hideBuildYourOwn && (
-                <li className="border-dashed border-gray-accent-light inline-flex items-center justify-center relative overflow-hidden bg-red min-h-[160px]">
-                    <Link className="flex justify-center space-x-4 items-center w-full h-full" to="/docs/apps/build">
-                        <img
-                            className="md:absolute left-[-37px] bottom-[-32px] -scale-x-1 max-w-[32%] min-w-[100px]"
-                            src={builderHog}
-                            alt=""
-                        />
-                        <h3 className="m-0 text-[1.2rem] md:text-[1.5rem] text-white relative">Build your own</h3>
+                <li className="">
+                    <Link
+                        className="group flex items-center relative px-2 pb-1 mb-1 rounded  border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                        to="/docs/cdp/build"
+                    >
+                        <img className="w-16 -scale-x-1 icon h-16 p-2 -ml-2 mr-0" src={builderHog} alt="" />
+                        <span className="text-red m-0 relative">Build your own &rarr;</span>
                     </Link>
                 </li>
             )}
