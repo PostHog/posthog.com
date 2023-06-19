@@ -60,11 +60,11 @@ const internalProductNames = {
 const Pricing = (): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const { search } = useLocation()
-    const [groupsToShow, setGropsToShow] = useState<undefined | string>()
+    const [groupsToShow, setGropsToShow] = useState<undefined | string[]>()
 
     useEffect(() => {
         const product = new URLSearchParams(search).get('product')
-        setGropsToShow((product && internalProductNames[product]) || undefined)
+        setGropsToShow((product && [internalProductNames[product]]) || undefined)
     }, [search])
 
     return (
