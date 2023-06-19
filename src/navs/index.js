@@ -8,6 +8,9 @@ const handbookSidebar = [
         url: '',
         children: [
             {
+                name: 'Gewtting started',
+            },
+            {
                 name: 'Start here',
                 url: '/handbook/getting-started/start-here',
             },
@@ -1227,8 +1230,15 @@ export const docsMenu = {
             name: 'Product OS',
             icon: 'Stack',
             color: 'salmon',
-            url: '/docs/data',
+            url: '/docs/product-os',
             children: [
+                {
+                    name: 'Product OS',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/product-os',
+                },
                 {
                     name: 'Data',
                     url: '/docs/data',
@@ -1297,303 +1307,6 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Data connections',
-                    url: '/docs/pipelines',
-                    icon: 'EventPipelines',
-                    children: [
-                        {
-                            name: 'Sources',
-                            url: '',
-                            children: [
-                                {
-                                    url: '/docs/pipelines/amazon-kinesis',
-                                    name: 'Amazon Kinesis Import',
-                                },
-                                {
-                                    url: '/docs/pipelines/bitbucket-release-tracker',
-                                    name: 'BitBucket Release Tracker',
-                                },
-                                {
-                                    url: '/docs/pipelines/replicator',
-                                    name: 'Event Replicator',
-                                },
-                                {
-                                    url: '/docs/pipelines/github-release-tracker',
-                                    name: 'GitHub Release Tracker',
-                                },
-                                {
-                                    url: '/docs/pipelines/github-star-sync',
-                                    name: 'GitHub Star Sync',
-                                },
-                                {
-                                    url: '/docs/pipelines/gitlab-release-tracker',
-                                    name: 'GitLab Release Tracker',
-                                },
-                                {
-                                    url: '/docs/pipelines/heartbeat',
-                                    name: 'Heartbeat',
-                                },
-                                {
-                                    url: '/docs/pipelines/ingestion-alert',
-                                    name: 'Ingestion Alert',
-                                },
-                                {
-                                    url: '/docs/pipelines/email-scoring',
-                                    name: 'Email Scoring',
-                                },
-                                {
-                                    url: '/docs/pipelines/n8n',
-                                    name: 'n8n Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/orbit',
-                                    name: 'Orbit Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/redshift-import',
-                                    name: 'Redshift Import',
-                                },
-                                {
-                                    url: '/docs/pipelines/rudderstack-import',
-                                    name: 'Rudderstack Import',
-                                },
-                                {
-                                    url: '/docs/pipelines/segment',
-                                    name: 'Segment Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/shopify',
-                                    name: 'Shopify Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/stripe-connector',
-                                    name: 'Stripe Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/twitter-followers',
-                                    name: 'Twitter Followers Tracker',
-                                },
-                                {
-                                    url: '/docs/pipelines/zendesk-connector',
-                                    name: 'Zendesk Connector',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Destinations',
-                            url: '',
-                            children: [
-                                {
-                                    url: '/docs/pipelines/airbyte-export',
-                                    name: 'Airbyte Exporter',
-                                },
-                                {
-                                    url: '/docs/pipelines/s3-export',
-                                    name: 'Amazon S3 Export',
-                                },
-                                {
-                                    url: '/docs/pipelines/s3-export',
-                                    name: 'Avo Inspector',
-                                },
-                                {
-                                    url: '/docs/pipelines/bigquery-export',
-                                    name: 'BigQuery Export',
-                                },
-                                {
-                                    url: '/docs/pipelines/customer-io',
-                                    name: 'Customer.io Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/databricks',
-                                    name: 'Databricks Export',
-                                },
-                                {
-                                    url: '/docs/pipelines/engage-connector',
-                                    name: 'Engage Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/google-pub-sub-connector',
-                                    name: 'GCP Pub/Sub Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/google-cloud-export',
-                                    name: 'Google Cloud Storage Export',
-                                },
-                                {
-                                    url: '/docs/pipelines/hubspot-connector',
-                                    name: 'Hubspot Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/intercom',
-                                    name: 'Intercom Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/pagerduty-connector',
-                                    name: 'PagerDuty Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/postgres-export',
-                                    name: 'PostgreSQL Export',
-                                },
-                                {
-                                    url: '/docs/pipelines/redshift-export',
-                                    name: 'Redshift Export',
-                                },
-                                {
-                                    url: '/docs/pipelines/rudderstack-export',
-                                    name: 'RudderStack Export',
-                                },
-                                {
-                                    url: '/docs/pipelines/salesforce-connector',
-                                    name: 'Salesforce Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/sendgrid-connector',
-                                    name: 'Sendgrid Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/sentry-connector',
-                                    name: 'Sentry Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/snowflake-export',
-                                    name: 'Snowflake Export',
-                                },
-                                {
-                                    url: '/docs/pipelines/twilio',
-                                    name: 'Twilio Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/variance-connector',
-                                    name: 'Variance Connector',
-                                },
-                                {
-                                    url: '/docs/pipelines/pace-integration',
-                                    name: 'Pace Integration',
-                                },
-                                {
-                                    url: '/docs/pipelines/zapier-connector',
-                                    name: 'Zapier Connector',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Ingestion filtering',
-                            url: '',
-                            children: [
-                                {
-                                    url: '/docs/pipelines/downsampling',
-                                    name: 'Downsampler',
-                                },
-                                {
-                                    url: '/docs/pipelines/event-sequence-timer',
-                                    name: 'Event Sequence Timer',
-                                },
-                                {
-                                    url: '/docs/pipelines/filter-out',
-                                    name: 'Filter Out',
-                                },
-                                {
-                                    url: '/docs/pipelines/first-time-event-tracker',
-                                    name: 'First Time Event Tracker',
-                                },
-                                {
-                                    url: '/docs/pipelines/property-filter',
-                                    name: 'Property Filter',
-                                },
-                                {
-                                    url: '/docs/pipelines/property-flattener',
-                                    name: 'Property Flattener',
-                                },
-                                {
-                                    url: '/docs/pipelines/schema-enforcer',
-                                    name: 'Schema Enforcer',
-                                },
-                                {
-                                    url: '/docs/pipelines/taxonomy-standardizer',
-                                    name: 'Taxonomy Standardizer',
-                                },
-                                {
-                                    url: '/docs/pipelines/unduplicator',
-                                    name: 'Unduplicator',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Event transformation',
-                            url: '',
-                            children: [
-                                {
-                                    url: '/docs/pipelines/advanced-geoip',
-                                    name: 'Advanced GeoIP Enricher',
-                                },
-                                {
-                                    url: '/docs/pipelines/automatic-cohort-creator',
-                                    name: 'Automatic Cohort Creator',
-                                },
-                                {
-                                    url: '/docs/pipelines/currency-normalization',
-                                    name: 'Currency Normalizer',
-                                },
-                                {
-                                    url: '/docs/pipelines/geoip-enrichment',
-                                    name: 'GeoIP Enricher',
-                                },
-                                {
-                                    url: '/docs/pipelines/timestamp-parser',
-                                    name: 'Timestamp Parser',
-                                },
-                                {
-                                    url: '/docs/pipelines/url-normalizer',
-                                    name: 'URL Normalizer',
-                                },
-                                {
-                                    url: '/docs/pipelines/user-agent-populator',
-                                    name: 'User Agent Populator',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Build a data connection',
-                            url: '',
-                            children: [
-                                {
-                                    name: 'Overview',
-                                    url: '/docs/pipelines/build',
-                                },
-                                {
-                                    name: 'Tutorial',
-                                    url: '/docs/pipelines/build/tutorial',
-                                },
-                                {
-                                    name: 'Troubleshooting',
-                                    url: '/docs/pipelines/enabling',
-                                },
-                                {
-                                    name: 'Developer reference',
-                                    url: '/docs/pipelines/build/reference',
-                                },
-                                {
-                                    name: 'Using the PostHog API',
-                                    url: '/docs/pipelines/build/api',
-                                },
-                                {
-                                    name: 'Jobs',
-                                    url: '/docs/pipelines/build/jobs',
-                                },
-                                {
-                                    name: 'Testing',
-                                    url: '/docs/pipelines/build/testing',
-                                },
-                                {
-                                    name: 'TypeScript types',
-                                    url: '/docs/pipelines/build/types',
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
                     name: 'Apps',
                     url: '/docs/apps',
                     icon: 'AppLibrary',
@@ -1617,6 +1330,44 @@ export const docsMenu = {
                         {
                             url: '/docs/apps/user-interviewer',
                             name: 'User Interviewer',
+                        },
+                        {
+                            name: 'Build an app',
+                            url: '',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/apps/build',
+                                },
+                                {
+                                    name: 'Tutorial',
+                                    url: '/docs/apps/build/tutorial',
+                                },
+                                {
+                                    name: 'Troubleshooting',
+                                    url: '/docs/apps/enabling',
+                                },
+                                {
+                                    name: 'Developer reference',
+                                    url: '/docs/apps/build/reference',
+                                },
+                                {
+                                    name: 'Using the PostHog API',
+                                    url: '/docs/apps/build/api',
+                                },
+                                {
+                                    name: 'Jobs',
+                                    url: '/docs/apps/build/jobs',
+                                },
+                                {
+                                    name: 'Testing',
+                                    url: '/docs/apps/build/testing',
+                                },
+                                {
+                                    name: 'TypeScript types',
+                                    url: '/docs/apps/build/types',
+                                },
+                            ],
                         },
                     ],
                 },
@@ -1796,78 +1547,74 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Product analytics',
+                },
+                {
+                    name: 'Overview',
                     url: '/docs/product-analytics',
-                    icon: 'Analytics',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/product-analytics',
-                        },
-                        {
-                            name: 'Correlation analysis',
-                            url: '/docs/product-analytics/correlation',
-                        },
-                        {
-                            name: 'Dashboards',
-                            url: '/docs/product-analytics/dashboards',
-                        },
-                        {
-                            name: 'Funnels',
-                            url: '/docs/product-analytics/funnels',
-                        },
-                        {
-                            name: 'Group analytics',
-                            url: '/docs/product-analytics/group-analytics',
-                        },
-                        {
-                            name: 'HogQL',
-                            url: '/docs/product-analytics/hogql',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            name: 'Insights',
-                            url: '/docs/product-analytics/insights',
-                        },
-                        {
-                            name: 'Lifecycle',
-                            url: '/docs/product-analytics/lifecycle',
-                        },
-                        {
-                            name: 'Retention',
-                            url: '/docs/product-analytics/retention',
-                        },
-                        {
-                            name: 'Sampling',
-                            url: '/docs/product-analytics/sampling',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
-                            name: 'Stickiness',
-                            url: '/docs/product-analytics/stickiness',
-                        },
-                        {
-                            name: 'Subscriptions',
-                            url: '/docs/product-analytics/subscriptions',
-                        },
-                        {
-                            name: 'Toolbar',
-                            url: '/docs/product-analytics/toolbar',
-                        },
-                        {
-                            name: 'Trends',
-                            url: '/docs/product-analytics/trends',
-                        },
-                        {
-                            name: 'User paths',
-                            url: '/docs/product-analytics/paths',
-                        },
-                    ],
+                },
+                {
+                    name: 'Correlation analysis',
+                    url: '/docs/product-analytics/correlation',
+                },
+                {
+                    name: 'Dashboards',
+                    url: '/docs/product-analytics/dashboards',
+                },
+                {
+                    name: 'Funnels',
+                    url: '/docs/product-analytics/funnels',
+                },
+                {
+                    name: 'Group analytics',
+                    url: '/docs/product-analytics/group-analytics',
+                },
+                {
+                    name: 'HogQL',
+                    url: '/docs/product-analytics/hogql',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Insights',
+                    url: '/docs/product-analytics/insights',
+                },
+                {
+                    name: 'Lifecycle',
+                    url: '/docs/product-analytics/lifecycle',
+                },
+                {
+                    name: 'Retention',
+                    url: '/docs/product-analytics/retention',
+                },
+                {
+                    name: 'Sampling',
+                    url: '/docs/product-analytics/sampling',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Stickiness',
+                    url: '/docs/product-analytics/stickiness',
+                },
+                {
+                    name: 'Subscriptions',
+                    url: '/docs/product-analytics/subscriptions',
+                },
+                {
+                    name: 'Toolbar',
+                    url: '/docs/product-analytics/toolbar',
+                },
+                {
+                    name: 'Trends',
+                    url: '/docs/product-analytics/trends',
+                },
+                {
+                    name: 'User paths',
+                    url: '/docs/product-analytics/paths',
                 },
             ],
         },
@@ -1879,38 +1626,34 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Session replay',
+                },
+                {
+                    name: 'Overview',
                     url: '/docs/session-replay',
-                    icon: 'SessionRecording',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/session-replay',
-                        },
-                        {
-                            name: 'Product manual',
-                            url: '/docs/session-replay/manual',
-                        },
-                        {
-                            name: 'Privacy Controls',
-                            url: '/docs/session-replay/privacy',
-                        },
-                        {
-                            name: 'Sharing and emedding',
-                            url: '/docs/session-replay/sharing',
-                        },
-                        {
-                            name: 'Data retention',
-                            url: '/docs/session-replay/data-retention',
-                        },
-                        {
-                            name: 'Iframe recording',
-                            url: '/docs/session-replay/iframes',
-                        },
-                        {
-                            name: 'Troubleshooting and FAQs',
-                            url: '/docs/session-replay/troubleshooting',
-                        },
-                    ],
+                },
+                {
+                    name: 'Product manual',
+                    url: '/docs/session-replay/manual',
+                },
+                {
+                    name: 'Privacy Controls',
+                    url: '/docs/session-replay/privacy',
+                },
+                {
+                    name: 'Sharing and emedding',
+                    url: '/docs/session-replay/sharing',
+                },
+                {
+                    name: 'Data retention',
+                    url: '/docs/session-replay/data-retention',
+                },
+                {
+                    name: 'Iframe recording',
+                    url: '/docs/session-replay/iframes',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/session-replay/troubleshooting',
                 },
             ],
         },
@@ -1922,44 +1665,40 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Feature flags',
+                },
+                {
+                    name: 'Overview',
                     url: '/docs/feature-flags',
-                    icon: 'FeatureFlags',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/feature-flags',
-                        },
-                        {
-                            name: 'Product manual',
-                            url: '/docs/feature-flags/manual',
-                        },
-                        {
-                            name: 'Bootstrapping & local evaluation',
-                            url: '/docs/feature-flags/bootstrapping-and-local-evaluation',
-                        },
-                        {
-                            name: 'Rollout strategies',
-                            url: '/docs/feature-flags/rollout-strategies',
-                        },
-                        {
-                            name: 'Multivariate feature flags',
-                            url: '/docs/feature-flags/multivariate-flags',
-                        },
-                        {
-                            name: 'Payloads',
-                            url: '/docs/feature-flags/payloads',
-                        },
+                },
+                {
+                    name: 'Product manual',
+                    url: '/docs/feature-flags/manual',
+                },
+                {
+                    name: 'Bootstrapping & local evaluation',
+                    url: '/docs/feature-flags/bootstrapping-and-local-evaluation',
+                },
+                {
+                    name: 'Rollout strategies',
+                    url: '/docs/feature-flags/rollout-strategies',
+                },
+                {
+                    name: 'Multivariate feature flags',
+                    url: '/docs/feature-flags/multivariate-flags',
+                },
+                {
+                    name: 'Payloads',
+                    url: '/docs/feature-flags/payloads',
+                },
 
-                        {
-                            name: 'Early Access Feature Management',
-                            url: '/docs/feature-flags/early-access-feature-management',
-                        },
+                {
+                    name: 'Early Access Feature Management',
+                    url: '/docs/feature-flags/early-access-feature-management',
+                },
 
-                        {
-                            name: 'Common questions about feature flags',
-                            url: '/docs/feature-flags/common-questions',
-                        },
-                    ],
+                {
+                    name: 'Common questions about feature flags',
+                    url: '/docs/feature-flags/common-questions',
                 },
             ],
         },
@@ -1971,30 +1710,26 @@ export const docsMenu = {
             children: [
                 {
                     name: 'A/B testing',
+                },
+                {
+                    name: 'Overview',
                     url: '/docs/experiments',
-                    icon: 'Experiments',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/experiments',
-                        },
-                        {
-                            name: 'Product manual',
-                            url: '/docs/experiments/manual',
-                        },
-                        {
-                            name: 'Statistical significance',
-                            url: '/docs/experiments/significance',
-                        },
-                        {
-                            name: 'Under the hood',
-                            url: '/docs/experiments/under-the-hood',
-                        },
-                        {
-                            name: 'Common questions about experiments',
-                            url: '/docs/experiments/common-questions',
-                        },
-                    ],
+                },
+                {
+                    name: 'Product manual',
+                    url: '/docs/experiments/manual',
+                },
+                {
+                    name: 'Statistical significance',
+                    url: '/docs/experiments/significance',
+                },
+                {
+                    name: 'Under the hood',
+                    url: '/docs/experiments/under-the-hood',
+                },
+                {
+                    name: 'Common questions about experiments',
+                    url: '/docs/experiments/common-questions',
                 },
             ],
         },
@@ -2005,37 +1740,303 @@ export const docsMenu = {
             icon: 'Person',
             children: [
                 {
-                    name: 'Session replay',
-                    url: '/docs/session-replay',
-                    icon: 'SessionRecording',
+                    name: 'Customer data platform',
+                },
+                {
+                    name: 'CDP overview',
+                    url: '/docs/cdp',
+                    badge: {
+                        title: 'Preview',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Sources',
+                    url: '',
+                    children: [
+                        {
+                            url: '/docs/cdp/amazon-kinesis',
+                            name: 'Amazon Kinesis Import',
+                        },
+                        {
+                            url: '/docs/cdp/bitbucket-release-tracker',
+                            name: 'BitBucket Release Tracker',
+                        },
+                        {
+                            url: '/docs/cdp/replicator',
+                            name: 'Event Replicator',
+                        },
+                        {
+                            url: '/docs/cdp/github-release-tracker',
+                            name: 'GitHub Release Tracker',
+                        },
+                        {
+                            url: '/docs/cdp/github-star-sync',
+                            name: 'GitHub Star Sync',
+                        },
+                        {
+                            url: '/docs/cdp/gitlab-release-tracker',
+                            name: 'GitLab Release Tracker',
+                        },
+                        {
+                            url: '/docs/cdp/heartbeat',
+                            name: 'Heartbeat',
+                        },
+                        {
+                            url: '/docs/cdp/ingestion-alert',
+                            name: 'Ingestion Alert',
+                        },
+                        {
+                            url: '/docs/cdp/email-scoring',
+                            name: 'Email Scoring',
+                        },
+                        {
+                            url: '/docs/cdp/n8n',
+                            name: 'n8n Connector',
+                        },
+                        {
+                            url: '/docs/cdp/orbit',
+                            name: 'Orbit Connector',
+                        },
+                        {
+                            url: '/docs/cdp/redshift-import',
+                            name: 'Redshift Import',
+                        },
+                        {
+                            url: '/docs/cdp/rudderstack-import',
+                            name: 'Rudderstack Import',
+                        },
+                        {
+                            url: '/docs/cdp/segment',
+                            name: 'Segment Connector',
+                        },
+                        {
+                            url: '/docs/cdp/shopify',
+                            name: 'Shopify Connector',
+                        },
+                        {
+                            url: '/docs/cdp/stripe-connector',
+                            name: 'Stripe Connector',
+                        },
+                        {
+                            url: '/docs/cdp/twitter-followers',
+                            name: 'Twitter Followers Tracker',
+                        },
+                        {
+                            url: '/docs/cdp/zendesk-connector',
+                            name: 'Zendesk Connector',
+                        },
+                    ],
+                },
+                {
+                    name: 'Destinations',
+                    url: '',
+                    children: [
+                        {
+                            url: '/docs/cdp/airbyte-export',
+                            name: 'Airbyte Exporter',
+                        },
+                        {
+                            url: '/docs/cdp/s3-export',
+                            name: 'Amazon S3 Export',
+                        },
+                        {
+                            url: '/docs/cdp/s3-export',
+                            name: 'Avo Inspector',
+                        },
+                        {
+                            url: '/docs/cdp/bigquery-export',
+                            name: 'BigQuery Export',
+                        },
+                        {
+                            url: '/docs/cdp/customer-io',
+                            name: 'Customer.io Connector',
+                        },
+                        {
+                            url: '/docs/cdp/databricks',
+                            name: 'Databricks Export',
+                        },
+                        {
+                            url: '/docs/cdp/engage-connector',
+                            name: 'Engage Connector',
+                        },
+                        {
+                            url: '/docs/cdp/google-pub-sub-connector',
+                            name: 'GCP Pub/Sub Connector',
+                        },
+                        {
+                            url: '/docs/cdp/google-cloud-export',
+                            name: 'Google Cloud Storage Export',
+                        },
+                        {
+                            url: '/docs/cdp/hubspot-connector',
+                            name: 'Hubspot Connector',
+                        },
+                        {
+                            url: '/docs/cdp/intercom',
+                            name: 'Intercom Connector',
+                        },
+                        {
+                            url: '/docs/cdp/pagerduty-connector',
+                            name: 'PagerDuty Connector',
+                        },
+                        {
+                            url: '/docs/cdp/postgres-export',
+                            name: 'PostgreSQL Export',
+                        },
+                        {
+                            url: '/docs/cdp/redshift-export',
+                            name: 'Redshift Export',
+                        },
+                        {
+                            url: '/docs/cdp/rudderstack-export',
+                            name: 'RudderStack Export',
+                        },
+                        {
+                            url: '/docs/cdp/salesforce-connector',
+                            name: 'Salesforce Connector',
+                        },
+                        {
+                            url: '/docs/cdp/sendgrid-connector',
+                            name: 'Sendgrid Connector',
+                        },
+                        {
+                            url: '/docs/cdp/sentry-connector',
+                            name: 'Sentry Connector',
+                        },
+                        {
+                            url: '/docs/cdp/snowflake-export',
+                            name: 'Snowflake Export',
+                        },
+                        {
+                            url: '/docs/cdp/twilio',
+                            name: 'Twilio Connector',
+                        },
+                        {
+                            url: '/docs/cdp/variance-connector',
+                            name: 'Variance Connector',
+                        },
+                        {
+                            url: '/docs/cdp/pace-integration',
+                            name: 'Pace Integration',
+                        },
+                        {
+                            url: '/docs/cdp/zapier-connector',
+                            name: 'Zapier Connector',
+                        },
+                    ],
+                },
+                {
+                    name: 'Ingestion filtering',
+                    url: '',
+                    children: [
+                        {
+                            url: '/docs/cdp/downsampling',
+                            name: 'Downsampler',
+                        },
+                        {
+                            url: '/docs/cdp/event-sequence-timer',
+                            name: 'Event Sequence Timer',
+                        },
+                        {
+                            url: '/docs/cdp/filter-out',
+                            name: 'Filter Out',
+                        },
+                        {
+                            url: '/docs/cdp/first-time-event-tracker',
+                            name: 'First Time Event Tracker',
+                        },
+                        {
+                            url: '/docs/cdp/property-filter',
+                            name: 'Property Filter',
+                        },
+                        {
+                            url: '/docs/cdp/property-flattener',
+                            name: 'Property Flattener',
+                        },
+                        {
+                            url: '/docs/cdp/schema-enforcer',
+                            name: 'Schema Enforcer',
+                        },
+                        {
+                            url: '/docs/cdp/taxonomy-standardizer',
+                            name: 'Taxonomy Standardizer',
+                        },
+                        {
+                            url: '/docs/cdp/unduplicator',
+                            name: 'Unduplicator',
+                        },
+                    ],
+                },
+                {
+                    name: 'Event transformation',
+                    url: '',
+                    children: [
+                        {
+                            url: '/docs/cdp/advanced-geoip',
+                            name: 'Advanced GeoIP Enricher',
+                        },
+                        {
+                            url: '/docs/cdp/automatic-cohort-creator',
+                            name: 'Automatic Cohort Creator',
+                        },
+                        {
+                            url: '/docs/cdp/currency-normalization',
+                            name: 'Currency Normalizer',
+                        },
+                        {
+                            url: '/docs/cdp/geoip-enrichment',
+                            name: 'GeoIP Enricher',
+                        },
+                        {
+                            url: '/docs/cdp/timestamp-parser',
+                            name: 'Timestamp Parser',
+                        },
+                        {
+                            url: '/docs/cdp/url-normalizer',
+                            name: 'URL Normalizer',
+                        },
+                        {
+                            url: '/docs/cdp/user-agent-populator',
+                            name: 'User Agent Populator',
+                        },
+                    ],
+                },
+                {
+                    name: 'Build a data connection',
+                    url: '',
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/session-replay',
+                            url: '/docs/cdp/build',
                         },
                         {
-                            name: 'Product manual',
-                            url: '/docs/session-replay/manual',
+                            name: 'Tutorial',
+                            url: '/docs/cdp/build/tutorial',
                         },
                         {
-                            name: 'Privacy Controls',
-                            url: '/docs/session-replay/privacy',
+                            name: 'Troubleshooting',
+                            url: '/docs/cdp/enabling',
                         },
                         {
-                            name: 'Sharing and emedding',
-                            url: '/docs/session-replay/sharing',
+                            name: 'Developer reference',
+                            url: '/docs/cdp/build/reference',
                         },
                         {
-                            name: 'Data retention',
-                            url: '/docs/session-replay/data-retention',
+                            name: 'Using the PostHog API',
+                            url: '/docs/cdp/build/api',
                         },
                         {
-                            name: 'Iframe recording',
-                            url: '/docs/session-replay/iframes',
+                            name: 'Jobs',
+                            url: '/docs/cdp/build/jobs',
                         },
                         {
-                            name: 'Troubleshooting and FAQs',
-                            url: '/docs/session-replay/troubleshooting',
+                            name: 'Testing',
+                            url: '/docs/cdp/build/testing',
+                        },
+                        {
+                            name: 'TypeScript types',
+                            url: '/docs/cdp/build/types',
                         },
                     ],
                 },
@@ -2043,44 +2044,16 @@ export const docsMenu = {
         },
         {
             name: 'Data warehouse',
-            url: '/docs/session-replay',
+            url: '/docs/data-warehouse',
             color: 'seagreen',
             icon: 'Server',
             children: [
                 {
-                    name: 'Session replay',
-                    url: '/docs/session-replay',
-                    icon: 'SessionRecording',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/session-replay',
-                        },
-                        {
-                            name: 'Product manual',
-                            url: '/docs/session-replay/manual',
-                        },
-                        {
-                            name: 'Privacy Controls',
-                            url: '/docs/session-replay/privacy',
-                        },
-                        {
-                            name: 'Sharing and emedding',
-                            url: '/docs/session-replay/sharing',
-                        },
-                        {
-                            name: 'Data retention',
-                            url: '/docs/session-replay/data-retention',
-                        },
-                        {
-                            name: 'Iframe recording',
-                            url: '/docs/session-replay/iframes',
-                        },
-                        {
-                            name: 'Troubleshooting and FAQs',
-                            url: '/docs/session-replay/troubleshooting',
-                        },
-                    ],
+                    name: 'Data warehouse',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/data-warehouse',
                 },
             ],
         },
