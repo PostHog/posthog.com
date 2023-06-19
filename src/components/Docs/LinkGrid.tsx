@@ -17,14 +17,13 @@ export const LinkGrid: React.FC<LinkGridProps> = ({ links }) => {
                             to={link.to}
                             key={link.name}
                             disablePrefetch
-                            className="group px-2 py-2 rounded-sm flex items-center space-x-3 hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative
-                            hover:scale-[1.01] hover:top-[-.5px] active:top-[0.25px] active:scale-[.99]"
+                            className="group flex items-center relative px-2 py-0.5 mb-1 gap-2 rounded  border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                         >
                             {Icon && (
-                                <Icon className="w-10 h-10 p-2 text-primary dark:text-primary-dark bg-gray-accent-light group-hover:bg-gray-accent/50 dark:bg-gray-accent-dark grou-hover:bg-gray-accent/50 rounded-sm mt-1 lg:mt-0.5 shrink-0" />
+                                <Icon className="w-10 h-10 p-2 text-primary dark:text-primary-dark bg-accent dark:bg-accent-dark group-hover:bg-accent dark:group-hover:bg-accent-dark rounded-sm mt-1 lg:mt-0.5 shrink-0" />
                             )}
                             <div>
-                                <h3 className="text-base font-semibold text-red m-0">{link.name}</h3>
+                                <h3 className="text-base font-semibold m-0">{link.name}</h3>
                                 {/* {link.description} */}
                             </div>
                         </Link>

@@ -106,7 +106,7 @@ export const Intro = ({ image = true }) => (
         </h3>
         {/* Quick links */}
         <section className="my-12 clear-both">
-            <h3 className="mb-6 mt-0">Chapters</h3>
+            <h3 className="mb-6 mt-0">Topics</h3>
             <LinkGrid links={quickLinks} />
         </section>
     </>

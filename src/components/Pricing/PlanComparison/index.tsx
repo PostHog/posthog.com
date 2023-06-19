@@ -277,7 +277,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                     </p>
                 </div>
 
-                <div className="w-full dark:bg-dark bg-light md:flex-[0_0_60%] flex px-4 md:gap-4">
+                <div className="w-full dark:bg-dark bg-light md:flex-[0_0_60%] flex md:gap-4">
                     {availablePlans.map((plan) => (
                         <div
                             key={`${plan.plan_key}-header`}
@@ -301,7 +301,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                             type: 'cloud',
                                         }}
                                         type="primary"
-                                        size="sm"
+                                        size="md"
                                         className="shadow-md !w-auto"
                                         to={`https://${
                                             posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
@@ -334,7 +334,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                         {product.name}
                                     </h4>
                                 </div>
-                                <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
+                                <div className="w-full md:flex-[0_0_60%] flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
                                     {product.plans?.map((plan, i) => (
                                         <React.Fragment
                                             key={`${plan.plan_key}-${product.type}-free-allocation-or-limit`}
@@ -503,7 +503,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                     className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-primary dark:text-primary-dark bg-opacity-95 pb-4`}
                 ></div>
 
-                <div className="w-full md:flex-[0_0_60%] flex px-4 md:gap-4">
+                <div className="w-full md:flex-[0_0_60%] flex md:gap-4">
                     {availablePlans.map((plan) => (
                         <div
                             key={`${plan.plan_key}-header`}

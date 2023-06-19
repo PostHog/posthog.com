@@ -244,7 +244,7 @@ export default function MainNav() {
                 </div>
             </div>
             {internalMenu?.length > 0 && (
-                <ul className="flex justify-center space-x-4 list-none m-0 p-0 mb-8 border-b border-light dark:border-dark relative">
+                <ul className="flex justify-center space-x-4 list-none m-0 mx-4 p-0 mb-8 border-b border-light dark:border-dark relative">
                     {internalMenu.map(({ name, url, icon, color }) => {
                         const Icon = icons[icon]
                         const active = activeInternalMenu?.name === name
