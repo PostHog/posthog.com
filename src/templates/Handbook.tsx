@@ -290,7 +290,7 @@ export default function Handbook({
                             <div className="flex items-center mt-0 flex-wrap justify-between">
                                 <div className="flex items-center space-x-2 mb-1">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
-                                    <h1 className="dark:text-white text-3xl sm:text-5xl m-0">{title}</h1>
+                                    <h1 className="dark:text-white text-3xl sm:text-4xl m-0">{title}</h1>
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     {github && (

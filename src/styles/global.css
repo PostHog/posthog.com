@@ -71,7 +71,7 @@ h6 {
 }
 
 h1 {
-    @apply text-5xl font-bold !leading-none;
+    @apply text-4xl font-bold !leading-none;
     letter-spacing: -0.03em;
 }
 
@@ -93,7 +93,7 @@ h3 {
 }
 
 h4 {
-    @apply text-xl leading-normal mb-3;
+    @apply text-base leading-normal mb-3;
 
     code {
         @apply !font-bold !text-xl;
@@ -1103,18 +1103,18 @@ iframe[src*='youtube-nocookie.com'] {
             @apply hidden;
         }
     }
-    h2 {
+    h1 {
         @apply text-2xl;
     }
-    h3 {
+    h2 {
         @apply text-xl;
+    }
+    h3 {
+        @apply text-lg;
     }
     h4,
     h5 {
-        @apply text-lg;
-    }
-    h1 {
-        @apply text-4xl;
+        @apply text-base;
     }
     p {
         @apply !min-h-0 mb-4;
