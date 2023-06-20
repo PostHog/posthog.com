@@ -1,9 +1,11 @@
 import React from 'react'
 import { Investors } from 'components/NotProductIcons'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 interface InvestorProps {
-    SvgLogo?: string
     logo?: string
+    logoDark?: string
     width?: number
     height?: number
     photo?: string
@@ -12,21 +14,21 @@ interface InvestorProps {
     role?: string
 }
 
-const Investor = ({ SvgLogo, logo, width, height, photo, large, name, role }: InvestorProps) => {
+const Investor = ({ logo, logoDark, width, height, photo, large, name, role }: InvestorProps) => {
+    const { websiteTheme } = useValues(layoutLogic)
+
     return (
         <div className="flex flex-col text-center justify-center items-center">
-            {SvgLogo ? (
-                <div className="py-8 px-4">
-                    {/* if logo is svg, use actual dimensions */}
-                    <figure className="mb-0 text-center">
-                        <img src={SvgLogo} width={width} height={height} alt={name} />
-                    </figure>
-                </div>
-            ) : logo ? (
+            {logo ? (
                 <div className="py-8 px-4">
                     {/* if logo (not angel) is png, specify 50% dimensions (all images @2x) */}
                     <figure className="mb-0 text-center">
-                        <img src={logo} width={width} height={height} alt={name} />
+                        <img
+                            src={logoDark && websiteTheme === 'dark' ? logoDark : logo}
+                            width={width}
+                            height={height}
+                            alt={name}
+                        />
                     </figure>
                 </div>
             ) : photo ? (
@@ -62,12 +64,18 @@ export const AboutInvestors = () => {
             </h4>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 ">
-                <Investor name="Y Combinator" SvgLogo="/images/investors/yc.svg" width={81} height={81} />
-                <Investor name="GV" SvgLogo="/images/investors/gv.svg" width={130} height={81} />
-                <Investor name="1984 Ventures" SvgLogo="/images/investors/1984.svg" width={50} height={80} />
+                <Investor name="Y Combinator" logo="/images/investors/yc.svg" width={81} height={81} />
+                <Investor
+                    name="GV"
+                    logo="/images/investors/gv.svg"
+                    logoDark="/images/investors/gv_dark.svg"
+                    width={130}
+                    height={81}
+                />
+                <Investor name="1984 Ventures" logo="/images/investors/1984.svg" width={50} height={80} />
                 <Investor name="Tapas Capital" logo="/images/investors/tapas-capital.png" width={172} height={59} />
                 <Investor name="Jason Warner" role="GitHub CTO" photo="/images/investors/jason-warner.jpg" large />
-                <Investor name="Unusual Ventures" SvgLogo="/images/investors/unusual.svg" width={167} height={22} />
+                <Investor name="Unusual Ventures" logo="/images/investors/unusual.svg" width={167} height={22} />
                 <Investor name="L2 Ventures" logo="/images/investors/l2-ventures.png" width={166} height={71} />
                 <Investor name="Kima Ventures" logo="/images/investors/kima-ventures.png" width={118} height={66} />
                 <Investor name="Sunflower Ventures" />
