@@ -54,8 +54,6 @@ function Tooltip({
     const [open, setOpen] = useState(false)
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
-    const { setWebsiteTheme } = useActions(layoutLogic)
-
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement,
         modifiers: [
@@ -84,21 +82,21 @@ function Tooltip({
                 ref={setReferenceElement}
                 onClick={() => setOpen(!open)}
                 className={`my-1 p-2 rounded hover:bg-border dark:hover:bg-border-dark ${
-                    open ? 'rounded-br-none rounded-bl-none bg-border dark:bg-border-dark' : ''
+                    open ? 'bg-border dark:bg-border-dark' : ''
                 }`}
             >
                 {children}
             </button>
             {open && (
                 <div
-                    className="z-[10000]"
+                    className="z-[10000] pt-1"
                     role="tooltip"
                     ref={setPopperElement}
-                    style={{ ...styles.popper, paddingTop: 0, paddingBottom: 0 }}
+                    style={styles.popper}
                     {...attributes.popper}
                 >
                     <div
-                        className={`mt-[-4px] rounded-md border-light dark:border-dark border overflow-hidden ${tooltipClassName}`}
+                        className={`rounded-md border-light dark:border-dark border overflow-hidden ${tooltipClassName}`}
                     >
                         <div
                             className={`bg-accent dark:bg-accent-dark text-primary dark:text-primary-dark text-sm z-20`}
@@ -190,7 +188,6 @@ export default function MainNav() {
                         </button>
                         <Tooltip
                             placement="bottom-end"
-                            tooltipClassName="!rounded-tr-none"
                             className="group/parent relative text-primary dark:text-primary-dark"
                             content={() => {
                                 return (
