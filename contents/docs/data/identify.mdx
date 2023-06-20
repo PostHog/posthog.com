@@ -175,6 +175,10 @@ posthog.alias("any_other_id", "distinct_id_one");
 
 </MultiLanguage>
 
+You can view whether a user can be merged into another user using `alias` when [viewing their properties]((/docs/data/user-properties#how-to-view-user-properties)) in the PostHog app: Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not – i.e., whether you can use their ID as an `alias_id` or not.
+
+![Merge restrictions tooltip](../../images/docs/data/identify/merge-restrictions-tooltip.png)
+
 > Note that when calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they will be merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
 
 ## Troubleshooting and FAQs
