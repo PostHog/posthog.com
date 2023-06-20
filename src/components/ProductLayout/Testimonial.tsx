@@ -2,6 +2,8 @@ import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image'
 import React from 'react'
 import { SectionWrapper } from './Section'
 import { ITestimonial } from './types'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 function Quote({ children, className = '' }: { children: React.ReactNode[]; className?: string }) {
     return (
@@ -15,12 +17,14 @@ function Quote({ children, className = '' }: { children: React.ReactNode[]; clas
 }
 
 export default function Testimonial({ author, image, quote }: ITestimonial & { image: ImageDataLike }) {
+    const { websiteTheme } = useValues(layoutLogic)
     const gatsbyImage = image && getImage(image)
+    const logo = websiteTheme === 'dark' ? author.company.imageDark || author.company.image : author.company.image
     return (
         <SectionWrapper className="!pt-0 mt-0 relative">
             <Quote className="items-end">
                 <div>
-                    <img className="text-black max-h-[45px]" src={author.company.image} />
+                    <img className="text-black max-h-[45px]" src={logo} />
                     <p className="my-6 text-[17px]" dangerouslySetInnerHTML={{ __html: quote }} />
 
                     <div className="flex space-x-4 items-center">

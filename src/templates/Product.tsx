@@ -343,6 +343,7 @@ export const query = graphql`
                         company {
                             name
                             image
+                            imageDark
                         }
                     }
                     quote
@@ -424,6 +425,9 @@ export const query = graphql`
                     customer
                     title
                     logo {
+                        publicURL
+                    }
+                    logoDark {
                         publicURL
                     }
                 }

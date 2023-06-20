@@ -1,7 +1,8 @@
 ---
 title: How Phantom enhanced its product and cut failure rates by 90%
 customer: Phantom
-logo: ../images/customers/phantom/phantom.png
+logo: ../images/customers/phantom/phantom_logo.svg
+logoDark: ../images/customers/phantom/phantom_logo_dark.svg
 featuredImage: ../images/customers/phantom/featured.png
 industries:
     - Cryptocurrency & blockchain

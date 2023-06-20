@@ -3,6 +3,8 @@ import Link from 'components/Link'
 import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image'
 import React from 'react'
 import { useLocation } from '@reach/router'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 export default function Hero({
     title,
@@ -29,6 +31,7 @@ export default function Hero({
     }
     customers: any
 }) {
+    const { websiteTheme } = useValues(layoutLogic)
     const { pathname } = useLocation()
     const gatsbyImage = image?.image && getImage(image?.image)
     const imageStyles = { maxWidth: image?.width || '56rem', maxHeight: image?.height || 'auto' }
@@ -56,27 +59,24 @@ export default function Hero({
                     )}
                     {customers && customers.nodes.length > 0 && (
                         <ul className="m-0 p-0 list-none mt-16 flex flex-wrap items-center">
-                            {customers.nodes.map(
-                                ({
-                                    fields: { slug },
-                                    frontmatter: {
-                                        customer,
-                                        logo: { publicURL },
-                                    },
-                                }) => {
-                                    return (
-                                        <li key={slug} className="mb-2 mr-2 lg:mr-4 last:mr-0">
-                                            <Link
-                                                state={{ customer }}
-                                                to={`/${pathname.split('/')[1]}/customers`}
-                                                className="inline-block hover:bg-gray-accent-light rounded-sm p-1 cursor-pointer relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px]"
-                                            >
-                                                <img alt={customer} src={publicURL} className="max-h-[30px]" />
-                                            </Link>
-                                        </li>
-                                    )
-                                }
-                            )}
+                            {customers.nodes.map(({ fields: { slug }, frontmatter: { customer, logo, logoDark } }) => {
+                                const logoToShow = websiteTheme === 'dark' ? logoDark || logo : logo
+                                return (
+                                    <li key={slug} className="mb-2 mr-2 lg:mr-4 last:mr-0">
+                                        <Link
+                                            state={{ customer }}
+                                            to={`/${pathname.split('/')[1]}/customers`}
+                                            className="inline-block hover:bg-accent dark:hover:bg-accent-dark rounded-sm p-1 cursor-pointer relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px]"
+                                        >
+                                            <img
+                                                alt={customer}
+                                                src={logoToShow?.publicURL}
+                                                className="max-h-[30px] w-full"
+                                            />
+                                        </Link>
+                                    </li>
+                                )
+                            })}
                         </ul>
                     )}
                 </div>

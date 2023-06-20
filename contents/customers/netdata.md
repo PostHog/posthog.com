@@ -1,7 +1,8 @@
 ---
 title: How Netdata uses PostHog and BigQuery to build modern devtools
 customer: Netdata
-logo: ../images/customers/netdata/netdata_logo.png
+logo: ../images/customers/netdata/netdata_logo.svg
+logoDark: ../images/customers/netdata/netdata_logo_dark.svg
 featuredImage: ../images/customers/netdata/netdata_featured.png
 industries:
     - SaaS

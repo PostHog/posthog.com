@@ -1,7 +1,8 @@
 ---
 title: Why AssemblyAI switched from Mixpanel to PostHog
 customer: AssemblyAI
-logo: ../images/customers/assemblyai/logo.png
+logo: ../images/customers/assemblyai/logo.svg
+logoDark: ../images/customers/assemblyai/logo_dark.svg
 featuredImage: ../images/customers/assemblyai/featured.png
 industries:
     - API Platform
