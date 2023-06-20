@@ -119,7 +119,7 @@ const Footer = ({ location }) => {
                     <h4>More about {currentMenu.name.toLowerCase()}</h4>
                     <ul className="flex m-0 px-0 pb-2.5 md:pb-0 relative after:w-full after:md:border-t after:border-gray-accent-light after:border-solid after:absolute after:top-0  w-full overflow-x-auto">
                         {currentMenu?.children?.map(({ name, url }) => {
-                            const active = location.pathname.startsWith(url)
+                            const active = location.pathname === url.split('?')[0]
                             return (
                                 <li
                                     className="flex items-center !text-primary/75 hover:border-gray-accent-light mb-1.5 pt-0.5 text-sm [font-variation-settings:_'wght'_700] whitespace-nowrap rounded relative z-20 hover:scale-[1.01] active:scale-[.99] tracking-[-.1px] group"

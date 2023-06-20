@@ -102,8 +102,8 @@ const ProductTiersModal = ({
     return (
         <Modal open={modalOpen} setOpen={setModalOpen}>
             <div className="flex items-center w-full h-full justify-center">
-                <div className="text-left max-w-xl bg-white rounded-md relative w-full p-8 m-8">
-                    <p className="text-gray mb-1">{capitalizeFirstLetter(plan.name)} pricing</p>
+                <div className="text-left max-w-xl bg-accent dark:bg-accent-dark rounded-md relative w-full p-8 m-8">
+                    <p className="mb-1">{capitalizeFirstLetter(plan.name)} pricing</p>
                     <p className="mb-1">
                         <span className="font-bold text-base">
                             $
@@ -112,20 +112,22 @@ const ProductTiersModal = ({
                             ).toFixed(numberOfSigFigs)}
                         </span>
                         {/* the product types we have are plural, so we need to singularlize them and this works for now */}
-                        <span className="text-gray">/{plan.unit ? plan.unit.replace(/s$/, '') : 'unit'}</span>
+                        <span className="text-black/50 dark:text-white/50">
+                            /{plan.unit ? plan.unit.replace(/s$/, '') : 'unit'}
+                        </span>
                     </p>
                     {isFirstTierFree && (
-                        <p className="text-gray">
+                        <p className="text-black/50 dark:text-white/50">
                             First {convertLargeNumberToWords(tiers[0].up_to)} {plan.unit}s/mo free
                         </p>
                     )}
                     <div>
-                        <p className="text-gray">Volume discounts</p>
+                        <p className="text-black/50 dark:text-white/50">Volume discounts</p>
                         <div className="grid grid-cols-2">
                             {tiers.map((tier, i) => {
                                 return (
                                     <React.Fragment key={`tiers-modal-${plan.product_key}-tier-${i}`}>
-                                        <p className="col-span-1 mb-0 border-b border-gray-accent-light border-dashed py-1">
+                                        <p className="col-span-1 mb-0 border-b border-border dark:border-dark py-1">
                                             {convertLargeNumberToWords(
                                                 tier.up_to,
                                                 tiers[i - 1]?.up_to,
@@ -133,7 +135,7 @@ const ProductTiersModal = ({
                                                 plan.unit
                                             )}
                                         </p>
-                                        <p className="font-bold col-span-1 mb-0 border-b border-gray-accent-light border-dashed py-1">
+                                        <p className="font-bold col-span-1 mb-0 border-b border-border dark:border-dark py-1">
                                             {isFirstTierFree && i === 0
                                                 ? 'Free'
                                                 : `$${parseFloat(tier.unit_amount_usd).toFixed(numberOfSigFigs)}`}
@@ -203,7 +205,7 @@ export const getPlanLimit = (plan?: BillingV2PlanType): JSX.Element => {
     return (
         <span className="font-bold">
             {convertLargeNumberToWords(plan.free_allocation)} {plan.unit}s
-            <span className="font-normal text-black/50">/mo</span>
+            <span className="font-normal text-black/50 dark:text-white/50">/mo</span>
         </span>
     )
 }
@@ -355,20 +357,20 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
             {/* PLAN HEADERS */}
             <div className="flex flex-wrap sticky top-0 z-10 -mx-4 md:mx-0">
                 <div
-                    className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan border-b border-gray-accent-light pb-4 pl-4 md:pl-0`}
+                    className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium border-b border-border dark:border-dark pb-4 pl-4 md:pl-0`}
                 >
                     <p className="font-bold mb-0">PostHog OS ships with all products</p>
-                    <p className="text-black/50 text-sm mb-0">
+                    <p className="text-black/50 dark:text-white/50 text-sm mb-0">
                         Start with our generous free tiers and subcribe when you need more volume. Set billing limits so
                         you never receive an unexpected bill.
                     </p>
                 </div>
 
-                <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light px-4 md:gap-4">
+                <div className="w-full md:flex-[0_0_60%] flex border-b border-border dark:border-border-dark px-4 md:gap-4">
                     {staticPlans.map((plan) => (
                         <div
                             key={`${plan.plan_key}-header`}
-                            className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4  border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
+                            className={`py-2 px-2 text-sm leading-tight w-full pb-4  border-l border-accent dark:border-accent-dark first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
                         >
                             <div className="flex-1 flex flex-col h-full justify-between">
                                 <div>
@@ -380,7 +382,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                             <p className="font-bold mb-0 text-center md:text-left">
                                                 {plan.free_allocation ? 'Free' : 'Paid'}
                                             </p>
-                                            <p className="hidden md:block text-black/50 text-sm mb-3">
+                                            <p className="hidden md:block text-black/50 dark:text-white/50 text-sm mb-3">
                                                 {plan.free_allocation
                                                     ? 'Generous free usage on every product. Best for early-stage startups and hobbyists.'
                                                     : 'The whole hog. Pay per use with billing limits to control spend. Priority support.'}
@@ -395,7 +397,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                     {plan.free_allocation ? 'Free' : 'Included'}
                                                 </p>
                                                 {!plan.free_allocation && (
-                                                    <p className="hidden md:block text-black/50 text-sm mb-3">
+                                                    <p className="hidden md:block text-black/50 dark:text-white/50 text-sm mb-3">
                                                         With any paid product plan
                                                     </p>
                                                 )}
@@ -428,6 +430,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
             </div>
             {/* PRODUCTS */}
             {staticProducts?.map((product) => {
+                console.log(product.name)
                 if (groupsToShow && !groupsToShow.includes(product.type)) return null
                 // some products only have a paid plan, but we need to show something for the free plan, so we stub out values using this var
                 const stubMissingPlan = product.plans.length !== staticPlans.length
@@ -437,9 +440,9 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                             <div className="flex flex-wrap">
                                 <div
                                     key={`${product.name}-group`}
-                                    className={`flex-1 basis-[100%] md:basis-0 text-center text-primary pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
+                                    className={`flex-1 basis-[100%] md:basis-0 text-center pt-6 md:pb-2 md:text-left justify-center -mx-4 md:mx-0`}
                                 >
-                                    <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-gray-accent-light md:bg-transparent py-4 md:py-0 border-y border-gray-accent-light md:border-0">
+                                    <h4 className="mb-0 flex items-center gap-2 w-full justify-center md:justify-start bg-accent dark:bg-accent-dark md:!bg-transparent py-4 md:py-0 border-y border-border dark:border-dark md:border-0">
                                         <span className="inline-block h-6 w-6">
                                             <img
                                                 src={product.image_url}
@@ -449,7 +452,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                         {product.name}
                                     </h4>
                                 </div>
-                                <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-gray-accent-light/50 md:gap-4">
+                                <div className="w-full md:flex-[0_0_60%] px-4 flex divide-x md:divide-x-0 divide-border dark:divide-border-dark md:gap-4">
                                     {product.plans?.map((plan, i) => (
                                         <React.Fragment
                                             key={`${plan.plan_key}-${product.type}-free-allocation-or-limit`}
@@ -465,17 +468,17 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                 </div>
                             </div>
                             {/* PRODUCT FEATURES & ADDONS */}
-                            <div className="bg-gray-accent-light/80 p-1 rounded md:ml-6">
+                            <div className="bg-accent dark:bg-accent-dark p-1 rounded md:ml-6">
                                 {product.plans?.[product.plans.length - 1]?.features
                                     // don't include features that are in the excluded features list
                                     ?.filter((f) => !excludedFeatures.includes(f.key))
                                     ?.map((feature) => (
                                         <div
-                                            className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
+                                            className="md:p-2 rounded md:hover:bg-light dark:md:hover:bg-dark md:flex"
                                             key={`${product.type}-subfeature-${feature.name}`}
                                         >
                                             <div
-                                                className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
+                                                className={`flex-1 bg-accent/25 dark:bg-accent-dark/25 rounded py-2 text-center md:py-0 md:!bg-transparent md:text-left`}
                                                 key={`comparison-row-key-${feature.name}`}
                                             >
                                                 <Tooltip
@@ -489,13 +492,13 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                     placement={tooltipPlacement}
                                                 >
                                                     <span
-                                                        className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                                        className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-border dark:border-dark`}
                                                     >
                                                         {feature.name}
                                                     </span>
                                                 </Tooltip>
                                             </div>
-                                            <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
+                                            <div className="divide-x md:divide-x-0 divide-border dark:divide-border-dark w-full md:flex-[0_0_60%] flex md:gap-4">
                                                 {product.plans.map((plan, i) => (
                                                     <React.Fragment key={`${plan.plan_key}-${feature.key}-value`}>
                                                         {i === 0 && stubMissingPlan ? (
@@ -523,11 +526,11 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                 {/* PRODUCT ADDONS */}
                                 {product.addons?.map((addon) => (
                                     <div
-                                        className="md:p-2 rounded md:hover:bg-gray-accent/50 md:flex"
+                                        className="md:p-2 rounded md:hover:bg-accent dark:md:hover:bg-accent-dark md:flex"
                                         key={`${product.type}-addon-${addon.type}`}
                                     >
                                         <div
-                                            className={`flex-1 bg-gray-accent/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
+                                            className={`flex-1 bg-accent/25 dark:bg-accent-dark/25 rounded py-2 text-center md:py-0 md:bg-transparent md:text-left`}
                                             key={`comparison-row-key-${addon.type}`}
                                         >
                                             <Tooltip
@@ -542,7 +545,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                             >
                                                 <span>
                                                     <span
-                                                        className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
+                                                        className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-border dark:border-dark`}
                                                     >
                                                         {addon.name}{' '}
                                                     </span>
@@ -550,7 +553,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                 </span>
                                             </Tooltip>
                                         </div>
-                                        <div className="divide-x md:divide-x-0 divide-gray-accent-light/50 w-full md:flex-[0_0_60%] flex md:gap-4">
+                                        <div className="divide-x md:divide-x-0 divide-border dark:divide-border-dark w-full md:flex-[0_0_60%] flex md:gap-4">
                                             {product.plans.map((plan) => (
                                                 <div
                                                     className={`flex-1 flex justify-center py-4 md:py-0 md:text-left md:justify-start md:border-none`}
@@ -570,7 +573,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                             placement={tooltipPlacement}
                                                         >
                                                             <span
-                                                                className={`pb-0.25 cursor-default border-b border-dashed border-gray-accent-light`}
+                                                                className={`pb-0.25 cursor-default border-b border-border dark:border-dark`}
                                                             >
                                                                 Available
                                                             </span>
@@ -596,7 +599,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                             {product.plans?.map((plan) => (
                                                 <div
                                                     key={plan.plan_key + '-' + product.type + '-pricing'}
-                                                    className={`flex-1 pl-2 first:pl-0 text-sm font-medium text-almost-black pt-4 md:border-none`}
+                                                    className={`flex-1 pl-2 first:pl-0 text-sm font-medium pt-4 md:border-none`}
                                                 >
                                                     <ProductTiers plan={plan} />
                                                 </div>
@@ -611,14 +614,14 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
             })}
             <div className="flex flex-wrap z-10 -mx-4 md:mx-0 pb-6">
                 <div
-                    className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium text-almost-black bg-opacity-95 bg-tan pb-4`}
+                    className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium bg-opacity-95 pb-4`}
                 ></div>
 
-                <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex px-4 md:gap-4">
+                <div className="w-full md:flex-[0_0_60%] flex px-4 md:gap-4">
                     {staticPlans.map((plan) => (
                         <div
                             key={`${plan.plan_key}-header`}
-                            className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
+                            className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4 border-l border-border dark:border-dark first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
                         >
                             <div className="flex-1 flex flex-col h-full justify-between">
                                 <div>
@@ -635,7 +638,9 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                     {plan.free_allocation ? 'Free' : 'Included'}
                                                 </p>
                                                 {!plan.free_allocation && (
-                                                    <p className="text-sm text-black/50">With any paid product plan</p>
+                                                    <p className="text-sm text-black/50 dark:text-white/50">
+                                                        With any paid product plan
+                                                    </p>
                                                 )}
                                             </div>
                                         </>

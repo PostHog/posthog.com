@@ -32,13 +32,13 @@ Recognizing the need for a self-serve solution, Kedar Page, a Data Scientist at 
 “I’m always trying to find the next [experiment](/docs/user-guides/experimentation) to run with PostHog,” says Product Manager Taric Santos de Andrade, who leads the product team responsible for Vendasta’s growth metrics. “I use it to check user behaviors and share reports everyday, but I’m also always looking to push boundaries or test new hypotheses.”
 
 
-    <Quote
-        imageSource="/images/customers/taric.jpg"
-        size="md"
-        name="Taric Santos de Andrade"
-        title="Product Manager, Vendasta "
-        quote={`“I use PostHog on a daily basis. My team has four engineers, as well as designers, and we need to collaborate closely across areas of the product we own, such as our onboarding flow.”`}
-    />
+<Quote
+    imageSource="/images/customers/taric.jpg"
+    size="md"
+    name="Taric Santos de Andrade"
+    title="Product Manager, Vendasta "
+    quote={`“I use PostHog on a daily basis. My team has four engineers, as well as designers, and we need to collaborate closely across areas of the product we own, such as our onboarding flow.”`}
+/>
 
 
 One example of a recent experiment is in Vendasta’s account creation process, where analysis revealed one step where users can provide optional information correlated to drop-off later down the funnel. So, Vendasta is experimenting with removing the option to skip this step so users provide information which results in the best experience later. 

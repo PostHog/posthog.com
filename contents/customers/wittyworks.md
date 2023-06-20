@@ -25,13 +25,13 @@ After searching for a new solution which could track data at scale, Witty Works 
 Once Witty Works’ Engineering team had deployed PostHog internally, other teams began using the platform too. Marketing, for example, wanted to use PostHog to track onboarding funnels and understand when users updated [the Witty browser extension](https://chrome.google.com/webstore/detail/witty-your-inclusive-writ/meojhlodfiihbjkcnehkdcgncnhgagog?hl=en). As a result, Witty Works used [PostHog's app system](/docs/apps) to integrate with many tools in its stack. 
 
 
-    <Quote
-        imageSource="/images/customers/lukas-witty.jpeg"
-        size="md"
-        name="Lukas Smith"
-        title="CTO & Co-founder, Witty Works"
-        quote={`“I have a long history in open source. I found the community very responsive and open to both feedback and even to code changes. That gave me assurance that, if PostHog can’t do something, there’s a realistic path to building it myself.”`}
-    />
+<Quote
+    imageSource="/images/customers/lukas-witty.jpeg"
+    size="md"
+    name="Lukas Smith"
+    title="CTO & Co-founder, Witty Works"
+    quote={`“I have a long history in open source. I found the community very responsive and open to both feedback and even to code changes. That gave me assurance that, if PostHog can’t do something, there’s a realistic path to building it myself.”`}
+/>
 
 
 “We connected all of my usual tools, such as [HubSpot](/apps/hubspot-connector), using PostHog’s apps,” said Head of Marketing Alexander Groschup. “That enabled me to start putting information into [dashboards](/docs/user-guides/dashboards) and to really get started. Once I could see the dashboards, I started to understand how valuable PostHog would be.”
@@ -41,13 +41,13 @@ While ready-made integrations were available for many tools, such as Sentry and 
 “User privacy is one of our key features and we’re very careful about the data we collect,” explained Lukas Smith. “PostHog has a [GeoIP Enricher](/apps/geoip-enrichment), but we didn’t want to log IP addresses for every user. We only wanted to know the country they were from. So, [we built an app of our own](/docs/apps/build) to achieve that.”
 
 
-    <Quote
-        imageSource="/images/customers/lukas-witty.jpeg"
-        size="md"
-        name="Lukas Smith"
-        title="CTO & Co-founder, Witty Works"
-        quote={`“The app system is sort of like an insurance policy. We don’t know everything we’ll need in the future, but if we need Feature X then apps give us a path to getting it even if it isn’t part of PostHog.”`}
-    />
+<Quote
+    imageSource="/images/customers/lukas-witty.jpeg"
+    size="md"
+    name="Lukas Smith"
+    title="CTO & Co-founder, Witty Works"
+    quote={`“The app system is sort of like an insurance policy. We don’t know everything we’ll need in the future, but if we need Feature X then apps give us a path to getting it even if it isn’t part of PostHog.”`}
+/>
 
 
 [Witty Works’ Property Filter app](/integrations/property-filter) does this by deleting all configured properties inside an ingested event so that PostHog doesn’t collect any unwanted data. Running this app last in a chain makes sure that it applies to data bought in by any other apps too.
