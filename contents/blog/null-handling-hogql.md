@@ -13,11 +13,11 @@ category: Engineering
 
 The value (or non-value) null can be the bane of a programmer’s existence. Null can work as expected in one language and context, then act in completely unexpected ways in another language or context.
 
-We recently had challenges with null during the [release of HogQL](/blog/introducing-hogql). Our engineers Marius and Michael realized null values for properties were leading to inaccurate results and customer confusion. This post covers their efforts to figure out and implement a solution for this.
+We had challenges with null during the [release of HogQL](/blog/introducing-hogql), which added direct SQL access to your data. Our engineers Marius and Michael realized null values for properties were leading to inaccurate results and customer confusion. This post covers their efforts to figure out and implement a solution for this.
 
 ## The problem with null in HogQL
 
-The issue with null in HogQL was that ClickHouse is strict about nulls. If any value in an expression is null, then [the entire expression is null](https://clickhouse.com/docs/en/sql-reference/functions#null-processing). Here are two HogQL expressions showcasing why this is a problem:
+The issue with null in HogQL was that [ClickHouse](/docs/how-posthog-works/clickhouse), the database we use to store and process data, is strict about nulls. If any value in an expression is null, then [the entire expression is null](https://clickhouse.com/docs/en/sql-reference/functions#null-processing). Here are two HogQL expressions showcasing why this is a problem:
 
 1. `sumIf(properties.money, event = 'no problems') + sumIf(properties.money - 10, event = 'some problems')` returns null if either of the sides of the equation are null. This  happens if there are no matching events (named `no problems` or `some problems`) or the property (`money`) is null.
 2. `concat('money: ', properties.money)` returns null if there's no `money` property, though users might expect either `'money: '`  or `'money: null'`
@@ -25,7 +25,7 @@ The issue with null in HogQL was that ClickHouse is strict about nulls. If any v
 PostHog’s existing solutions for handling null did not work with the full access HogQL provides. Specifically:
 
 - ClickHouse skips null during aggregation, but users could want to concat or check null values with HogQL.
-- PostHog previously treated nulls as strings, but this could include null values in counts when they shouldn’t be.
+- Pre-HogQL, PostHog previously treated nulls as empty strings, but this could include null values in counts when they shouldn’t be.
 
 At this stage in HogQL’s development, if a value could be null, users must handle it themselves. For example, users must wrap each `sumIf` function in the first example above in a `ifNull(x, 0)` like this:
 
@@ -51,19 +51,15 @@ To solve the issue with nulls, Marius and Michael came up with a few potential s
 
 3. **Create JS-like `'bla' (NOT) IN properties` expression logic.** We felt this was too complex for users and makes the question of `is null` for an unset property unclear. 
 
-4. **Use the ClickHouse function `sumOrDefaultIf`.** Faces the same problem of being null if any values are null.
+4. **Use the ClickHouse function `sumOrDefaultIf`.** We hadn't implemented this function yet, but it faces a similar usability problem to wrapping `sumIf` in `ifNull` forcing users to handle nulls themselves.
 
 5. **Use non-ANSI compliant string operator.** ANSI is SQL standards for function and syntax. For example, `f'{NULL}-haha-{properties.bla}'` is non-ANSI compliant because it doesn’t conform to standard SQL string concatenation syntax. We decided it is better to keep the standard operators and be flexible with types instead.
 
 ## The solution(s) to our null problems
 
-The solution was to handle null for values we expect to be strings differently than numbers.
+The solution was relatively simple: we modified how `concat` worked (as well as how strings were added together with `||`) to be null-tolerant. This means converting every value in the concat function, including null, to a string. For example, `concat(null, 'a', 3, toString(4), toString(NULL), properties.$screen_width)` turns into `concat('', 'a', toString(3), toString(4), '')`.
 
-For numbers, returning `0` for null number properties meaningfully affects calculations, because they get added as non-null to counts. To prevent this, PostHog continues to return null and lets ClickHouse skip these in aggregations.
-
-Strings don’t need the same accuracy, users mostly want to return or concat strings anyway. To solve the specific issue with the concat function, Marius made it null-tolerant. This means every value converts to a string. For example, `concat(null, 'a', 3, toString(4), toString(NULL), properties.$screen_width)` turns into `concat('', 'a', toString(3), toString(4), '')`. 
-
-To do this, PostHog automatically adds `ifNull` falling back to empty strings (`''`) to concat functions. HogQL abstracts this away because the functionality creates a long and "dorky" ClickHouse SQL string like:
+Marius did this by automatically modifying the ClickHouse SQL string to add `ifNull` falling back to empty strings (`''`) to `concat` functions. HogQL abstracts this away because the functionality creates a long and "dorky" ClickHouse SQL string like:
 
 ```
 -- hogql
@@ -73,7 +69,17 @@ concat(properties.$screen_width, 'x', properties.$screen_height)
 concat(ifNull(toString(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, '$screen_width', ''), 'null'), '^\"|\"$', '')), ''), 'x', ifNull(toString(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, '$screen_height'), ''), 'null'), '^\"|\"$', '')), ''))
 ```
 
-By understanding the common use cases and objectives of users when interacting with nulls, Marius implemented these solutions to streamline the user experience. He also didn’t implement a solution moving us too far away from standard practice, making HogQL more maintainable for us and understandable for users.
+Handling numbers remained the same because returning `0` for null number properties meaningfully affects calculations, because they get added as non-null to counts. To prevent this, PostHog continues to return null and lets ClickHouse skip these in aggregations.
+
+## Modifying SQL with HogQL
+
+Modifying the `concat` function is an example of how we can use HogQL to make SQL more user-friendly. With HogQL, we can enhance ClickHouse functions, add our own, or even introduce new language constructs. 
+
+Other examples include:
+- Adding [sparklines](https://github.com/PostHog/posthog/pull/16096) as a chart function.
+- Adding a new language construct to check for [`person_id` in a cohort](https://github.com/PostHog/posthog/pull/16119) with `in cohort 'my cohort'`.
+
+By understanding the common use cases and objectives of users, we can modify SQL with HogQL to streamline the user experience. As more use cases and pain points are discovered, we can continue to improve HogQL to make it easier to get insights from data.
 
 ## Further reading
 
