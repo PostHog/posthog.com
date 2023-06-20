@@ -1,7 +1,8 @@
 ---
 title: How Witty Works created open-source plugins with the PostHog community
 customer: Witty Works
-logo: ../images/customers/wittyworks/witty-logo.png
+logo: ../images/customers/wittyworks/logo.svg
+logoDark: ../images/customers/wittyworks/logo_dark.svg
 featuredImage: ../images/customers/wittyworks/featured.png
 industries:
     - SaaS
