@@ -7,6 +7,7 @@ import { sfBenchmark } from './compensation_data/sf_benchmark'
 import { levelModifier } from './compensation_data/level_modifier'
 import { stepModifier } from './compensation_data/step_modifier'
 import { currencyData } from './compensation_data/currency'
+import { Multiply } from 'components/NewIcons'
 
 const formatCur = (val: number, currency = 'USD') => {
     currency = currencyData[currency] ? currency : 'USD'
@@ -37,11 +38,7 @@ const Section = ({
 }
 
 const Factor: React.FC = (props) => {
-    return (
-        <div className="px-1.5 bg-white dark:bg-gray-accent-dark rounded border border-black/10 text-gray-accent-dark dark:text-gray whitespace-nowrap text-2xs my-1">
-            {props.children}
-        </div>
-    )
+    return <li className="list-none px-1 py-2 flex justify-between">{props.children}</li>
 }
 
 export const CompensationCalculator = ({
@@ -198,7 +195,7 @@ export const CompensationCalculator = ({
             </Section>
 
             <Section title="Base salary">
-                <div className="text-xl mt-1 mb-2 font-bold p-3 rounded" id="compensation">
+                <div className="text-xl mt-1 mb-2 font-bold py-3 rounded" id="compensation">
                     {job && country && region && currentLocation && level && step
                         ? formatCur(
                               sfBenchmark[job] *
@@ -219,15 +216,32 @@ export const CompensationCalculator = ({
                         : '--'}
                 </div>
                 {!hideFormula && job && country && currentLocation && level && step && (
-                    <div className="flex items-center flex-wrap space-x-2 text-gray">
-                        <Factor>SF Benchmark: {formatCur(sfBenchmark[job], currentLocation?.currency)}</Factor>&nbsp;
-                        <span>&times;</span>
-                        <Factor>Location factor: {currentLocation?.locationFactor}</Factor>&nbsp;<span>&times;</span>
-                        <Factor>Level modifier: {levelModifier[level]}</Factor>&nbsp;<span>&times;</span>
+                    <ol className="m-0 p-4 border border-light dark:border-dark rounded">
                         <Factor>
-                            Step modifier: {stepModifier[step][0]} - {stepModifier[step][1]}
+                            <span>Benchmark (San Francisco)</span>{' '}
+                            <span>{formatCur(sfBenchmark[job], currentLocation?.currency)}</span>
                         </Factor>
-                    </div>
+                        <Factor>
+                            <span>
+                                <Multiply className="w-6 h-6 inline-flex" /> Location factor
+                            </span>{' '}
+                            <strong>{currentLocation?.locationFactor}</strong>
+                        </Factor>
+                        <Factor>
+                            <span>
+                                <Multiply className="w-6 h-6 inline-flex" /> Level modifier
+                            </span>{' '}
+                            <strong>{levelModifier[level]}</strong>
+                        </Factor>
+                        <Factor>
+                            <span>
+                                <Multiply className="w-6 h-6 inline-flex" /> Step modifier
+                            </span>{' '}
+                            <strong>
+                                {stepModifier[step][0]} - {stepModifier[step][1]}
+                            </strong>
+                        </Factor>
+                    </ol>
                 )}
             </Section>
         </div>
