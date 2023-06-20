@@ -76,7 +76,7 @@ Handling numbers remained the same because returning `0` for null number propert
 Modifying the `concat` function is an example of how we can use HogQL to make SQL more user-friendly. With HogQL, we can enhance ClickHouse functions, add our own, or even introduce new language constructs. 
 
 Other examples include:
-- Adding [sparklines](https://github.com/PostHog/posthog/pull/16096) as a chart function.
+- Adding [sparklines](https://github.com/PostHog/posthog/pull/16096) as a chart function like counts or values. 
 - Adding a new language construct to check for [`person_id` in a cohort](https://github.com/PostHog/posthog/pull/16119) with `in cohort 'my cohort'`.
 
 By understanding the common use cases and objectives of users, we can modify SQL with HogQL to streamline the user experience. As more use cases and pain points are discovered, we can continue to improve HogQL to make it easier to get insights from data.
