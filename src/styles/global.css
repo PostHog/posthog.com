@@ -189,7 +189,11 @@ h4 {
         }
     }
     blockquote:not(.quote) {
-        @apply p-6 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-4;
+        @apply px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-4;
+
+        p {
+            @apply !text-[15px];
+        }
     }
 
     iframe {
