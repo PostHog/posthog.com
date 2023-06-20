@@ -27,7 +27,7 @@ export const PostProvider: React.FC<ProviderProps> = ({
 }) => {
     const { activeInternalMenu, fullWidthContent } = useLayoutData()
 
-    const menu = activeInternalMenu?.children
+    const menu = activeInternalMenu?.children || other.menu
 
     const tableOfContents = other.tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
     const contentContainerClasses =
