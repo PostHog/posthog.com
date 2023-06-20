@@ -1,6 +1,5 @@
 import { TrackedCTA } from 'components/CallToAction'
 import Link from 'components/Link'
-import Spinner from 'components/Spinner'
 import Tooltip from 'components/Tooltip'
 import usePostHog from '../../../hooks/usePostHog'
 import React, { useState } from 'react'
@@ -11,8 +10,7 @@ import './styles/index.scss'
 import Modal from 'components/Modal'
 import { capitalizeFirstLetter } from '../../../utils'
 import Label from 'components/Label'
-import { pricingLogic } from '../pricingLogic'
-import { useValues } from 'kea'
+import { graphql, useStaticQuery } from 'gatsby'
 
 const convertLargeNumberToWords = (
     // The number to convert
@@ -252,9 +250,95 @@ const AddonTooltipContent = ({
     )
 }
 
+export const allProductsData = graphql`
+    query GetAllProductData {
+        allProductData {
+            edges {
+                node {
+                    products {
+                        description
+                        docs_url
+                        image_url
+                        inclusion_only
+                        contact_support
+                        addons {
+                            contact_support
+                            description
+                            docs_url
+                            image_url
+                            inclusion_only
+                            name
+                            type
+                            unit
+                            plans {
+                                description
+                                docs_url
+                                image_url
+                                name
+                                plan_key
+                                product_key
+                                unit
+                                features {
+                                    description
+                                    key
+                                    name
+                                }
+                                tiers {
+                                    current_amount_usd
+                                    current_usage
+                                    flat_amount_usd
+                                    unit_amount_usd
+                                    up_to
+                                }
+                            }
+                        }
+                        name
+                        type
+                        unit
+                        usage_key
+                        plans {
+                            description
+                            docs_url
+                            features {
+                                description
+                                key
+                                limit
+                                name
+                                note
+                                unit
+                            }
+                            free_allocation
+                            image_url
+                            included_if
+                            name
+                            plan_key
+                            product_key
+                            tiers {
+                                current_amount_usd
+                                current_usage
+                                flat_amount_usd
+                                unit_amount_usd
+                                up_to
+                            }
+                            unit
+                        }
+                    }
+                }
+            }
+        }
+    }
+`
+
 export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?: string[] }): JSX.Element => {
     const posthog = usePostHog()
-    const { availableProducts, availablePlans } = useValues(pricingLogic)
+
+    const staticProducts: BillingProductV2Type[] = useStaticQuery(allProductsData).allProductData.edges[0].node.products
+    const staticPlans = staticProducts?.[0]?.plans
+
+    const inclusionOnlyProducts = staticProducts
+        .filter((product) => product.inclusion_only)
+        .map((product) => product.type)
+    console.log(inclusionOnlyProducts, 'inclusionOnlyProducts')
 
     const excludedFeatures = [
         'ingestion_taxonomy',
@@ -264,7 +348,9 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
         'paths_advanced',
     ]
 
-    return availableProducts?.length > 0 && availablePlans.length > 0 ? (
+    const tooltipPlacement = typeof window !== 'undefined' && window.innerWidth > 767 ? 'right' : 'bottom'
+
+    return (
         <div className={`w-full relative mb-0 space-y-4 -mt-8 md:mt-0`}>
             {/* PLAN HEADERS */}
             <div className="flex flex-wrap sticky top-0 z-10 -mx-4 md:mx-0">
@@ -279,21 +365,43 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                 </div>
 
                 <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex border-b border-gray-accent-light px-4 md:gap-4">
-                    {availablePlans.map((plan) => (
+                    {staticPlans.map((plan) => (
                         <div
                             key={`${plan.plan_key}-header`}
                             className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4  border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
                         >
                             <div className="flex-1 flex flex-col h-full justify-between">
                                 <div>
-                                    <p className="font-bold mb-0 text-center md:text-left">
-                                        {plan.free_allocation ? 'Free' : 'Paid'}
-                                    </p>
-                                    <p className="hidden md:block text-black/50 text-sm mb-3">
-                                        {plan.free_allocation
-                                            ? 'Generous free usage on every product. Best for early-stage startups and hobbyists.'
-                                            : 'The whole hog. Pay per use with billing limits to control spend. Priority support.'}
-                                    </p>
+                                    {!groupsToShow ||
+                                    !groupsToShow.some((product_name) =>
+                                        inclusionOnlyProducts.includes(product_name)
+                                    ) ? (
+                                        <>
+                                            <p className="font-bold mb-0 text-center md:text-left">
+                                                {plan.free_allocation ? 'Free' : 'Paid'}
+                                            </p>
+                                            <p className="hidden md:block text-black/50 text-sm mb-3">
+                                                {plan.free_allocation
+                                                    ? 'Generous free usage on every product. Best for early-stage startups and hobbyists.'
+                                                    : 'The whole hog. Pay per use with billing limits to control spend. Priority support.'}
+                                            </p>
+                                        </>
+                                    ) : groupsToShow.some((product_name) =>
+                                          inclusionOnlyProducts.includes(product_name)
+                                      ) ? (
+                                        <>
+                                            <div className="mb-2">
+                                                <p className="font-bold mb-0 text-center md:text-left">
+                                                    {plan.free_allocation ? 'Free' : 'Included'}
+                                                </p>
+                                                {!plan.free_allocation && (
+                                                    <p className="hidden md:block text-black/50 text-sm mb-3">
+                                                        With any paid product plan
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </>
+                                    ) : null}
                                 </div>
                                 {showCTA && (
                                     <TrackedCTA
@@ -319,10 +427,10 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                 </div>
             </div>
             {/* PRODUCTS */}
-            {availableProducts?.map((product) => {
+            {staticProducts?.map((product) => {
                 if (groupsToShow && !groupsToShow.includes(product.type)) return null
                 // some products only have a paid plan, but we need to show something for the free plan, so we stub out values using this var
-                const stubMissingPlan = product.plans.length !== availablePlans.length
+                const stubMissingPlan = product.plans.length !== staticPlans.length
                 return (
                     <React.Fragment key={`product-${product.type}`}>
                         <div key={`product-${product.type}-feature-group-${product.type}`}>
@@ -378,7 +486,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                         </div>
                                                     )}
                                                     tooltipClassName="max-w-xs m-4"
-                                                    placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                    placement={tooltipPlacement}
                                                 >
                                                     <span
                                                         className={`pb-0.5 cursor-default font-bold text-[15px] border-b border-dashed border-gray-accent-light`}
@@ -430,7 +538,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                     />
                                                 )}
                                                 tooltipClassName="max-w-xs m-4"
-                                                placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                placement={tooltipPlacement}
                                             >
                                                 <span>
                                                     <span
@@ -459,7 +567,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                                 />
                                                             )}
                                                             tooltipClassName="max-w-xs m-4"
-                                                            placement={window.innerWidth > 767 ? 'right' : 'bottom'}
+                                                            placement={tooltipPlacement}
                                                         >
                                                             <span
                                                                 className={`pb-0.25 cursor-default border-b border-dashed border-gray-accent-light`}
@@ -507,16 +615,31 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                 ></div>
 
                 <div className="w-full bg-tan/90 md:flex-[0_0_60%] flex px-4 md:gap-4">
-                    {availablePlans.map((plan) => (
+                    {staticPlans.map((plan) => (
                         <div
                             key={`${plan.plan_key}-header`}
                             className={`py-2 px-2 text-sm text-almost-black leading-tight w-full pb-4 border-l border-gray-accent-light/50 first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
                         >
                             <div className="flex-1 flex flex-col h-full justify-between">
                                 <div>
-                                    <p className="font-bold mb-2 text-center md:text-left">
-                                        {plan.free_allocation ? 'Free' : 'Paid'}
-                                    </p>
+                                    {!groupsToShow ? (
+                                        <p className="font-bold mb-2 text-center md:text-left">
+                                            {plan.free_allocation ? 'Free' : 'Paid'}
+                                        </p>
+                                    ) : groupsToShow.some((product_name) =>
+                                          inclusionOnlyProducts.includes(product_name)
+                                      ) ? (
+                                        <>
+                                            <div className="mb-2">
+                                                <p className="font-bold mb-0 text-center md:text-left">
+                                                    {plan.free_allocation ? 'Free' : 'Included'}
+                                                </p>
+                                                {!plan.free_allocation && (
+                                                    <p className="text-sm text-black/50">With any paid product plan</p>
+                                                )}
+                                            </div>
+                                        </>
+                                    ) : null}
                                 </div>
                                 {showCTA && (
                                     <TrackedCTA
@@ -541,10 +664,6 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                     ))}
                 </div>
             </div>
-        </div>
-    ) : (
-        <div className="bg-gray-accent-light p-12 rounded flex justify-center">
-            <Spinner />
         </div>
     )
 }
