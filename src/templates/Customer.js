@@ -14,6 +14,8 @@ import FooterCTA from 'components/FooterCTA'
 import PostLayout from 'components/PostLayout'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Topics from 'components/PostLayout/Topics'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -59,15 +61,19 @@ const CustomerSidebar = ({ industries, users, toolsUsed, logo }) => {
 }
 
 export default function Customer({ data, pageContext: { tableOfContents } }) {
+    const { websiteTheme } = useValues(layoutLogic)
+
     const {
         allCustomers,
         customerData: {
             body,
             excerpt,
             fields,
-            frontmatter: { title, customer, logo, description, industries, users, toolsUsed, featuredImage },
+            frontmatter: { title, customer, logo, logoDark, description, industries, users, toolsUsed, featuredImage },
         },
     } = data
+
+    const logoToShow = websiteTheme === 'dark' ? logoDark || logo : logo
 
     return (
         <>
@@ -91,7 +97,12 @@ export default function Customer({ data, pageContext: { tableOfContents } }) {
                     title={title}
                     hideSurvey
                     sidebar={
-                        <CustomerSidebar logo={logo} industries={industries} toolsUsed={toolsUsed} users={users} />
+                        <CustomerSidebar
+                            logo={logoToShow}
+                            industries={industries}
+                            toolsUsed={toolsUsed}
+                            users={users}
+                        />
                     }
                     breadcrumb={[
                         {
@@ -141,6 +152,9 @@ export const query = graphql`
                 title
                 customer
                 logo {
+                    publicURL
+                }
+                logoDark {
                     publicURL
                 }
                 description

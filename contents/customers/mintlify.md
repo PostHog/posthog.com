@@ -1,7 +1,8 @@
 ---
 title: How Mintlify launched user-facing analytics, powered by PostHog
 customer: Mintlify
-logo: ../images/customers/mintlify/logo.png
+logo: ../images/customers/mintlify/logo.svg
+logoDark: ../images/customers/mintlify/logo_dark.svg
 featuredImage: ../images/customers/mintlify/featured.png
 industries:
     - SaaS, DevTool
