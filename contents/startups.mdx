@@ -13,8 +13,6 @@ images:
     - './images/startup-merch.png'
     - './images/startup-launch.png'
     - './images/startup-credit.png'
-    
-    
 ---
 
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
@@ -47,7 +45,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
 <section class="my-24 px-5">
   <div class="max-w-screen-2xl mx-auto">
-    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Here's what you get</h3>
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Here's what you get when you join up</h3>
     <div class="flex justify-center">
       <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative after:border-t lg:after:border-t-0 after:border-dashed after:border-gray-accent-light after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 before:border-l lg:before:border-0 before:border-dashed before:border-gray-accent-light sm:after:block after:hidden sm:before:block lg:before:hidden lg:after:hidden before:hidden">
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
@@ -61,12 +59,12 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
           <p class="m-0 text-[15px]">You can never have too many mugs, stickers, backpacks or origami hedgehogs.</p>
         </li>
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
-          <GatsbyImage image={getImage(props?.images[7])} alt="Startup launch" objectFit="contain" style={{ maxWidth: 200 }} />
+          <GatsbyImage image={getImage(props?.images[5])} alt="Startup launch" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Startup spotlights</h5>
           <p class="m-0 text-[15px]">Each month we pick a startup to spotlight, featuring the lucky team on our site and socials.</p>
         </li>
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
-          <GatsbyImage image={getImage(props?.images[8])} alt="Startup events" objectFit="contain" style={{ maxWidth: 200 }} />
+          <GatsbyImage image={getImage(props?.images[7])} alt="Startup events" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Exclusive events</h5>
           <p class="m-0 text-[15px]">Get invited to our office hour events to get advice from our co-founders and exec team.</p>
         </li>
@@ -75,18 +73,22 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
   </div>
 </section>
 
-<Section title="Earn extra credits by sharing the program" titleSize="md">
-    <FeatureSnapshot
-        features={[
-            <>
-                <strong>Invte,</strong> so you can effortlessly roll-back if an issue arises.
-            </>,
-            <>
-                <strong>Toggle features for specific cohorts</strong> or beta-testing groups before a full release.
-            </>,
-        ]}
-    />
-</Section>
+<section class="my-24 px-5">
+
+  <div class="max-w-screen-lg mx-auto font-bold">
+    
+    <blockquote class="text-xl text-primary dark:text-primary-dark m-0 quote md:text-[32px] md:leading-tight">
+      <span class="leading-tight">
+        "Building is never just one-and-done. You always need to find ways to improve.
+        <span class="text-red"> PostHog is central to how we do that at Y Combinator</span>. It helps us try ideas, measure results and make better products.”
+      </span>
+      <footer class="flex items-center space-x-8 mt-9">
+        <GatsbyImage image={getImage(props?.images[4])} alt="Cat Li" objectFit="contain" style={{ maxWidth: 100 }} />
+        <span class="flex flex-col"><cite class="not-italic text-lg md:text-xl">Cat Li</cite><cite class="not-italic font-medium text-lg opacity-50 md:text-lg">Product &amp; Engineering Lead, <span class="inline-block">Y Combinator</span></cite></span>
+      </footer>
+    </blockquote>
+  </div>
+</section>
 
 <Section title="What can you get with $50,000 on PostHog?" titleSize="sm" cols={3}>
     <div>
@@ -108,24 +110,6 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
         </p>
     </div>
 </Section>
-
-<section class="my-24 px-5">
-
-  <div class="max-w-screen-lg mx-auto font-bold">
-    
-    <blockquote class="text-xl text-primary dark:text-primary-dark m-0 quote md:text-[32px] md:leading-tight">
-      <span class="leading-tight">
-        "Building is never just one-and-done. You always need to find ways to improve.
-        <span class="text-red"> PostHog is central to how we do that at Y Combinator</span>. It helps us try ideas, measure results and make better products.”
-      </span>
-      <footer class="flex items-center space-x-8 mt-9">
-        <GatsbyImage image={getImage(props?.images[4])} alt="Cat Li" objectFit="contain" style={{ maxWidth: 100 }} />
-        <span class="flex flex-col"><cite class="not-italic text-lg md:text-xl">Cat Li</cite><cite class="not-italic font-medium text-lg opacity-50 md:text-lg">Product &amp; Engineering Lead, <span class="inline-block">Y Combinator</span></cite></span>
-      </footer>
-    </blockquote>
-  </div>
-</section>
-
 
 <Section title="The only startup program with laptop stickers" titleSize="sm" subtitle="subtitlelolol">
 <div className="overflow-x-auto -mx-5 px-5">
