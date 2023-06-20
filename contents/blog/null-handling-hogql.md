@@ -27,13 +27,13 @@ PostHog’s existing solutions for handling null did not work with the full acce
 - ClickHouse skips null during aggregation, but users could want to concat or check null values with HogQL.
 - PostHog previously treated nulls as strings, but this could include null values in counts when they shouldn’t be.
 
-At this stage in HogQL’s development, if a value could be null, users must handle it themselves. For example, users must wrap each `sumIf` function in the first example above in a `nullIf(x, 0)` like this:
+At this stage in HogQL’s development, if a value could be null, users must handle it themselves. For example, users must wrap each `sumIf` function in the first example above in a `ifNull(x, 0)` like this:
 
 ```
-nullIf(
+ifNull(
 	sumIf(properties.money, event = 'no problems'), 
 	0
-) + nullIf(
+) + ifNull(
 	sumIf(properties.money - 10, event = 'some problems'),
 	0
 )
@@ -43,7 +43,7 @@ This is not a good user experience as it is non-obvious they must do this and le
 
 ## Brainstorming potential solutions
 
-To solve the issue with nulls, Marius and Michael came up with a bunch of potential solutions, (none of which were inevitably chosen):
+To solve the issue with nulls, Marius and Michael came up with a few potential solutions, but each had its own pitfalls.
 
 1. **Returning a default value depending on type.** For example, returning `""` for strings, `0` for numbers, or `false` for booleans. This didn’t handle the expression `properties.bla is null` and required rewriting `is set` and `is not set` logic. Defaulting to `0` also might mess up aggregation when you expect null fields to be discarded.
 
@@ -63,7 +63,7 @@ For numbers, returning `0` for null number properties meaningfully affects calcu
 
 Strings don’t need the same accuracy, users mostly want to return or concat strings anyway. To solve the specific issue with the concat function, Marius made it null-tolerant. This means every value converts to a string. For example, `concat(null, 'a', 3, toString(4), toString(NULL), properties.$screen_width)` turns into `concat('', 'a', toString(3), toString(4), '')`. 
 
-To do this, PostHog automatically adds `ifNull` falling back to empty strings (`''`) to concat functions. HogQL abstracts this away because the functionality creates a long and "dorky" ClickHouse SQL strings like:
+To do this, PostHog automatically adds `ifNull` falling back to empty strings (`''`) to concat functions. HogQL abstracts this away because the functionality creates a long and "dorky" ClickHouse SQL string like:
 
 ```
 -- hogql
