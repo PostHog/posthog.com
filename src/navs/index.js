@@ -899,7 +899,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Integrations',
+                    name: 'Framework guides',
                     url: '',
                     children: [
                         {

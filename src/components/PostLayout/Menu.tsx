@@ -174,7 +174,7 @@ export default function Menu({
                         {isWithChild ? (
                             <>
                                 <Link
-                                    className="text-inherit hover:text-inherit flex-grow pl-3 py-1 leading-tight"
+                                    className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark flex-grow pl-3 py-1 leading-tight"
                                     to={children[0]?.url || ''}
                                 >
                                     <span>
