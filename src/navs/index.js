@@ -8,9 +8,6 @@ const handbookSidebar = [
         url: '',
         children: [
             {
-                name: 'Gewtting started',
-            },
-            {
                 name: 'Start here',
                 url: '/handbook/getting-started/start-here',
             },
@@ -789,8 +786,7 @@ export const docsMenu = {
             url: '/docs/getting-started/start-here',
             children: [
                 {
-                    name: 'Overview',
-                    url: '/docs',
+                    name: 'Getting started',
                 },
                 {
                     name: 'Start here',
@@ -1743,7 +1739,7 @@ export const docsMenu = {
                     name: 'Customer data platform',
                 },
                 {
-                    name: 'CDP overview',
+                    name: 'CDP',
                     url: '/docs/cdp',
                     badge: {
                         title: 'Preview',
