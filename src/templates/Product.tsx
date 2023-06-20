@@ -269,6 +269,7 @@ export default function Product({ data, location, pageContext }) {
 
             <PostLayout
                 menu={menu}
+                menuWidth={{ left: 180 }}
                 title={title}
                 hideSidebar
                 hideSearch
