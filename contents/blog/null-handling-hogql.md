@@ -17,7 +17,7 @@ We recently had challenges with null during the [release of HogQL](/blog/introdu
 
 ## The problem with null in HogQL
 
-The issue with null in HogQL was that SQL is strict about nulls. If any value in an expression is null, then the entire expression is null. Here are two HogQL expressions showcasing why this is a problem:
+The issue with null in HogQL was that ClickHouse is strict about nulls. If any value in an expression is null, then [the entire expression is null](https://clickhouse.com/docs/en/sql-reference/functions#null-processing). Here are two HogQL expressions showcasing why this is a problem:
 
 1. `sumIf(properties.money, event = 'no problems') + sumIf(properties.money - 10, event = 'some problems')` returns null if either of the sides of the equation are null. This  happens if there are no matching events (named `no problems` or `some problems`) or the property (`money`) is null.
 2. `concat('money: ', properties.money)` returns null if there's no `money` property, though users might expect either `'money: '`  or `'money: null'`
@@ -45,7 +45,7 @@ This is not a good user experience as it is non-obvious they must do this and le
 
 To solve the issue with nulls, Marius and Michael came up with a bunch of potential solutions, (none of which were inevitably chosen):
 
-1. **Returning a default value depending on type.** For example, returning `""` for strings, `0` for numbers, or `false` for booleans. This didn’t handle the expression `properties.bla is null` and required rewriting `is set` and `is not set` logic.
+1. **Returning a default value depending on type.** For example, returning `""` for strings, `0` for numbers, or `false` for booleans. This didn’t handle the expression `properties.bla is null` and required rewriting `is set` and `is not set` logic. Defaulting to `0` also might mess up aggregation when you expect null fields to be discarded.
 
 2. **Including a nullable checkbox in data management.** Similar to the previous option, but required users to input if they expect a property to be null. This required a lot of user work and remains confusing if they didn’t understand how to handle null.
 
