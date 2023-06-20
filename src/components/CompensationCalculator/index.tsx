@@ -199,7 +199,7 @@ export const CompensationCalculator = ({
             </Section>
 
             <Section title="Salary calculator">
-                <div className="px-4 py-2 my-2 border border-light dark:border-dark rounded">
+                <div className="px-4 py-2 my-2 max-w-lg border border-light dark:border-dark rounded">
                     {!hideFormula && job && country && currentLocation && level && step && (
                         <ol className="ml-0 !mb-2 p-0 border-b-2 border-light dark:border-dark">
                             <Factor>
