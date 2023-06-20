@@ -10,11 +10,9 @@ availability:
 
 The PostHog Data Warehouse gives you a place to put all of your most important data and query across these datasets, combined with the product analytics data already in PostHog. Powered by Clickhouse, the Data Warehouse allows you to query across big data sets quickly. 
 
-
 Data Warehouse is currently in **private beta**. This means we're inviting a select number of people to try this product out.
 
-
-## How does it work?
+## How does it work?
 
 Each table you create is backed by one or more files in your object storage system (ie S3, GCS). We never "ingest" your data into our systems. Instead, on every query, we'll read directly from your s3 bucket. This means you can query as much data as you want. We'll only charge you for the data we actually query.
 
