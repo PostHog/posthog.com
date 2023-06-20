@@ -146,7 +146,7 @@ export default function MainNav() {
 
     return (
         <div>
-            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-2">
+            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div className="flex max-w-screen-3xl mx-auto px-5 justify-between">
                     <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
                         {pathname === '/' && <ActiveBackground />}
@@ -244,7 +244,7 @@ export default function MainNav() {
                 </div>
             </div>
             {internalMenu?.length > 0 && (
-                <ul className="flex justify-center space-x-4 list-none m-0 pt-1 px-4 mb-8 border-b border-light dark:border-dark relative overflow-x-auto overflow-y-hidden">
+                <ul className="flex justify-center space-x-4 list-none m-0 pt-1 px-4 mb-8 border-b border-light dark:border-dark relative">
                     {internalMenu.map(({ name, url, icon, color }) => {
                         const Icon = icons[icon]
                         const active = activeInternalMenu?.name === name
@@ -252,7 +252,7 @@ export default function MainNav() {
                             <li key={name}>
                                 <Link
                                     to={url}
-                                    className={`group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded  ${
+                                    className={`group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded ${
                                         active
                                             ? ''
                                             : 'border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
@@ -273,11 +273,11 @@ export default function MainNav() {
 
                                     {active ? (
                                         <span
-                                            className={`absolute bottom-[calc(-.5rem_-_2px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors border-${color}`}
+                                            className={`absolute bottom-[calc(-.5rem_-_1px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors border-${color}`}
                                         />
                                     ) : (
                                         <span
-                                            className={`absolute bottom-[calc(-.5rem_-_2px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors border-transparent`}
+                                            className={`absolute bottom-[calc(-.5rem_-_1px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors border-transparent`}
                                         />
                                     )}
                                 </Link>
