@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
-import HubspotForm from 'react-hubspot-form'
 import { Spacer } from '../components/Spacer'
 import { Link } from 'gatsby'
+import HubSpotForm from 'components/HubSpotForm'
 
 export const YCOnboarding = () => {
     return (
@@ -31,10 +31,14 @@ export const YCOnboarding = () => {
                     credit to your PostHog Stripe account which is valid for 12 months ($25K / 6 months for past YC
                     batches).
                 </p>
-                <HubspotForm
-                    portalId="6958578"
-                    formId="1c421f4a-320a-4c2a-8879-e37ccfcdea87"
-                    //onSubmit={() => setSubmitted(true)}
+                <HubSpotForm
+                    customFields={{
+                        yc_reason: {
+                            type: 'radioGroup',
+                            cols: 1,
+                        },
+                    }}
+                    formID="1c421f4a-320a-4c2a-8879-e37ccfcdea87"
                 />
             </div>
         </Layout>

@@ -14,9 +14,9 @@ features:
     groupAnalytics: true
 ---
 
-> **Note:** You can just use our [snippet](/docs/integrate) to start capturing events with our JS.
+> **Note:** You can use our [snippet](/docs/integrate) to start capturing events without installing our JavaScript library.
 
-This page of the Docs refers to our [posthog-js](https://github.com/PostHog/posthog-js) library.
+This doc refers to our [posthog-js](https://github.com/PostHog/posthog-js) library.
 
 ## Installation
 
@@ -51,70 +51,41 @@ import JSCapture from './\_snippets/capture.mdx'
 
 <JSCapture />
 
-#### Setting user properties via an event
+### Setting user properties
 
-To set properties on a user, you can use the `posthog.people.set` and `posthog.people.set_once` methods.
+To set [user properties](/docs/data/user-properties), include them when capturing an event:
 
-However, you can also leverage the event properties `$set` and `$set_once` to do this via an event.
-
-##### $set
-
-**Example**
-
-```js
-posthog.capture('some event', { $set: { userProperty: 'value' } })
+```javascript
+posthog.capture(
+  'event_name', 
+  { 
+    $set: { name: 'Max Hedgehog'  },
+    $set_once: { initial_url: '/blog' },
+  }
+)
 ```
 
-**Usage**
-
-When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
-
-This works the same way as `posthog.people.set`.
-
-##### $set_once
-
-**Example**
-
-```js
-posthog.capture('some event', { $set_once: { userProperty: 'value' } })
-```
-
-**Usage**
-
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
-
-This works the same way as `posthog.people.set_once`.
+For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
 ### Identifying users
 
-> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
+> We strongly recommend reading our docs on [identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
 import JSIdentify from './\_snippets/identify.mdx'
 
 <JSIdentify />
 
-#### Multiple IDs
+### Alias
 
-If you use multiple distinct IDs for the same user (e.g. a logical ID and a UUID), you may want to set both for the same user. This way, if PostHog receives events for either ID, it will properly match them to the same person. This is also helpful if you want to associate anonymous IDs with an identified person (we actually do this automatically when you call `.identify`). To associate multiple IDs to the same person, you do an **alias** call, as shown below.
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-```js
-posthog.alias('[alias ID]', '[distinct ID]')
-```
-
-Any events sent to either will be received under the same person.
-
-Note: the `'[alias ID]'` cannot be already identified, i.e. associated with multiple distinct IDs.
+We strongly recommend reading our docs on [alias](/docs/data/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ### Reset after logout
 
-If a user is logged out, you most likely want to call `reset` to unset any `distinct_ids`.
+If a user logs out, you should call `reset` to unlink any future events made on that device with that user. 
 
-<blockquote class="warning-note">
-    This is especially important if your users are sharing a computer, as otherwise all of those users will be grouped
-    together into a single user due to shared cookies between sessions.
-</blockquote>
-
-**We strongly recommend you do this on logout even if you don't expect users to share a computer.** This can help make sure all your users are properly tracked in the odd case a user logs in with a different account.
+This is important if your users are sharing a computer, as otherwise all of those users are grouped together into a single user due to shared cookies between sessions. **We strongly recommend you call `reset` on logout even if you don't expect users to share a computer.**
 
 You can do that like so:
 
@@ -128,16 +99,6 @@ If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
 posthog.reset(true)
 ```
 
-### Sending user information
-
-An ID alone might not be enough to work out which user is who within PostHog. That's why it's useful to send over more metadata of the user. At minimum, we recommend sending the `email` property, which is also what we use to display in PostHog.
-
-You can make this call on every page view to make sure this information is up-to-date. Alternatively, you can also do this whenever a user first appears (after signup) or when they change their information.
-
-```js
-posthog.people.set({ email: 'john@gmail.com' })
-```
-
 ### One-page apps and page views
 
 This JS snippet automatically sends `pageview` events whenever it gets loaded. If you have a one-page app, that means it'll only send a pageview once, when your app loads.
@@ -149,22 +110,6 @@ posthog.capture('$pageview')
 ```
 
 This will automatically send the current URL.
-
-### Signup example
-
-As an example, here is how to put some of the above concepts together:
-
-```js
-function signup(email) {
-    // Your own internal logic for creating an account and getting a user_id
-    let userId = createAccount(email)
-
-    // Identify user with internal ID
-    posthog.identify(userId)
-    // Set email or any other data
-    posthog.people.set({ email: email })
-}
-```
 
 ### Super Properties
 
@@ -310,7 +255,7 @@ posthog.resetGroupPropertiesForFlags()
 
 **Automatic overrides**
 
-Whenever you call `posthog.people.set` or `posthog.identify` with person properties, we automatically add these properties to flag evaluation calls. The same is true for when you call `posthog.group()`.
+Whenever you call `posthog.identify` with person properties, we automatically add these properties to flag evaluation calls to help determine the correct flag values. The same is true for when you call `posthog.group()`.
 
 **Default overridden properties**
 
