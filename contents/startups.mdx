@@ -16,6 +16,8 @@ images:
 ---
 
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+import { FeatureSnapshot } from 'components/FeatureSnapshot'
+import refer from './images/startup-refer.png'
 
 <div class="w-[calc(100%_+_4rem)] relative -mx-4 px-8 md:-mx-16 pt-32 pb-72 -mt-32 md:-mt-44">
   <div class="md:hidden absolute top-0 left-0 w-full bottom-0 opacity-40">
@@ -73,6 +75,40 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
   </div>
 </section>
 
+<Section>
+<h2 className="text-3xl lg:text-5xl text-center">"Can $50k really get me to product-market fit?"</h2>
+<h3 className="m-0 font-semibold mt-2 md:mt-3 opacity-75 text-primary text-center pb-5">We think so. Here's what $50,000 of free credits gets you.</h3>
+<FeatureSnapshot
+        image={'./images/startup-refer.png'}
+        features={[
+            <>
+                <strong>30 million events</strong>. Analyze events, create funnels, build dashboards and more. All in one platform.
+            </>,
+            <>
+                <strong>50k session replays</strong>. Watch user sessions, with console logs and network performance tracking. No extra code needed.
+            </>,
+            <>
+                <strong>Dedicated Slack support</strong>. Got a question? Ask our engineers for help directly in a private Slack channel.
+            </>,
+        ]}
+    />
+</Section>
+
+<Section title="Unlock even more benefits for your team" titleSize="sm" cols={2}>
+    <div>
+        <h4>Double your credits to $100,000</h4>
+        <p>
+          Introduce us to your investors, or accelerator program. If they sign up as a PostHog partner then we'll double your credits to a total of $100,000. 
+        </p>
+    </div>
+    <div>
+        <h4>Share $10,000 with a friend</h4>
+        <p>
+          Know someone else who needs PostHog? Tell them to mention your name and, if they sign up, we'll give you both an extra $5,000 of PostHog credits.
+        </p>
+    </div>
+</Section>
+
 <section class="my-24 px-5">
 
   <div class="max-w-screen-lg mx-auto font-bold">
@@ -90,26 +126,53 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
   </div>
 </section>
 
-<Section title="What can you get with $50,000 on PostHog?" titleSize="sm" cols={3}>
-    <div>
-        <h4 class="mb-1">30 million events</h4>
-        <p>
-            Analyze events, create funnels, build dashboards and integrate with other common tools.
-        </p>
-    </div>
-    <div>
-        <h4 class="mb-1">50k session replays</h4>
-        <p>
-            Watch user sessions, with console logs and network performance tracking. No extra code needed.
-        </p>
-    </div>
-    <div>
-        <h4 class="mb-1">Slack support</h4>
-        <p>
-            Get a dedicated Slack channel to request help from our Customer Support team when you need. 
-        </p>
-    </div>
-</Section>
+<section class="my-24 px-5">
+<div class="max-w-screen-md mx-auto">
+<h3 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl m-0 text-center mb-6 sm:mb-8">FAQs</h3>
+
+<details>
+<summary>How do I apply?</summary>
+<br />
+Just sign up to the Scale plan in PostHog and then fill in this <a href="/signup/cloud/startup">form</a>.  We will review and apply the credit if you're eligible.
+</details>
+
+<details> 
+<summary>Who's eligible? </summary>
+<br />
+Your company needs to be less than 2 years old and have raised less than $5m funding. You need to have signed up any time from Jan 1st 2023 onwards. 
+</details>
+
+<details>
+<summary>I signed up before this deal launched, can I still get it?</summary>
+<br />
+Yes, but only if you signed up after Jan 1st 2023. If your startup meets the eligibility criteria but you signed up to PostHog before Jan 1st, we won't apply the credits but are still happy to enroll you in the rest of the program. 
+</details>
+
+<details>
+<summary>Can I get this deal if I'm part of YC?</summary>
+<br />
+We have a separate deal for YC folks - check out Bookface. No, they don't stack!
+</details>
+
+<details>
+<summary>What if I go over the $50k limit? </summary>
+<br />
+At that point you can either move onto <a href="/pricing">PostHog Free or PostHog Scale</a>.
+</details>
+
+<details>
+<summary>What happens at the end of the 12 months?</summary>
+<br />
+At that point you can either move onto <a href="/pricing">PostHog Free or PostHog Scale</a>.
+</details>
+
+<details>
+<summary>How come you don't offer credits for AWS, Segment etc. like Mixpanel does?</summary>
+<br />
+Because all of those are available if you just go to the company <a href="https://startupcredits.io/">directly</a> anyway.
+</details>
+</div>
+</section>
 
 <Section title="The only startup program with laptop stickers" titleSize="sm" subtitle="subtitlelolol">
 <div className="overflow-x-auto -mx-5 px-5">
@@ -177,54 +240,6 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 </table>
 </div>
 </Section>
-
-<section class="my-24 px-5">
-<div class="max-w-screen-md mx-auto">
-<h3 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl m-0 text-center mb-6 sm:mb-8">FAQs</h3>
-
-<details>
-<summary>How do I apply?</summary>
-<br />
-Just sign up to the Scale plan in PostHog and then fill in this <a href="/signup/cloud/startup">form</a>.  We will review and apply the credit if you're eligible.
-</details>
-
-<details> 
-<summary>Who's eligible? </summary>
-<br />
-Your company needs to be less than 2 years old and have raised less than $5m funding. You need to have signed up any time from Jan 1st 2023 onwards. 
-</details>
-
-<details>
-<summary>I signed up before this deal launched, can I still get it?</summary>
-<br />
-Yes, but only if you signed up after Jan 1st 2023. If your startup meets the eligibility criteria but you signed up to PostHog before Jan 1st, we won't apply the credits but are still happy to enroll you in the rest of the program. 
-</details>
-
-<details>
-<summary>Can I get this deal if I'm part of YC?</summary>
-<br />
-We have a separate deal for YC folks - check out Bookface. No, they don't stack!
-</details>
-
-<details>
-<summary>What if I go over the $50k limit? </summary>
-<br />
-At that point you can either move onto <a href="/pricing">PostHog Free or PostHog Scale</a>.
-</details>
-
-<details>
-<summary>What happens at the end of the 12 months?</summary>
-<br />
-At that point you can either move onto <a href="/pricing">PostHog Free or PostHog Scale</a>.
-</details>
-
-<details>
-<summary>How come you don't offer credits for AWS, Segment etc. like Mixpanel does?</summary>
-<br />
-Because all of those are available if you just go to the company <a href="https://startupcredits.io/">directly</a> anyway.
-</details>
-</div>
-</section>
 
 <div className="text-center">
 
