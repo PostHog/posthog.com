@@ -45,23 +45,66 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
 </div>
 
-<Section title="Here's what you get:" titleSize="sm" cols={3}>
+<section class="my-24 px-5">
+  <div class="max-w-screen-2xl mx-auto">
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Here's what you get</h3>
+    <div class="flex justify-center">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative after:border-t lg:after:border-t-0 after:border-dashed after:border-gray-accent-light after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 before:border-l lg:before:border-0 before:border-dashed before:border-gray-accent-light sm:after:block after:hidden sm:before:block lg:before:hidden lg:after:hidden before:hidden">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
+          <GatsbyImage image={getImage(props?.images[8])} alt="Startup credit" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">$50,000 in credit</h5>
+          <p class="m-0 text-[15px]">That's equivalent to 30m events and 50k session replays per month, for a whole year!</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
+          <GatsbyImage image={getImage(props?.images[6])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Free PostHog merch</h5>
+          <p class="m-0 text-[15px]">You can never have too many mugs, stickers, backpacks or origami hedgehogs.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
+          <GatsbyImage image={getImage(props?.images[7])} alt="Startup launch" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Startup spotlights</h5>
+          <p class="m-0 text-[15px]">Each month we pick a startup to spotlight, featuring the lucky team on our site and socials.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
+          <GatsbyImage image={getImage(props?.images[8])} alt="Startup events" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Exclusive events</h5>
+          <p class="m-0 text-[15px]">Get invited to our office hour events to get advice from our co-founders and exec team.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<Section title="Earn extra credits by sharing the program" titleSize="md">
+    <FeatureSnapshot
+        features={[
+            <>
+                <strong>Invte,</strong> so you can effortlessly roll-back if an issue arises.
+            </>,
+            <>
+                <strong>Toggle features for specific cohorts</strong> or beta-testing groups before a full release.
+            </>,
+        ]}
+    />
+</Section>
+
+<Section title="What can you get with $50,000 on PostHog?" titleSize="sm" cols={3}>
     <div>
-        <h4 class="mb-1">A year of PostHog</h4>
+        <h4 class="mb-1">30 million events</h4>
         <p>
-            <strong>Get $50k credit</strong> toward PostHog Cloud for 12 months
+            Analyze events, create funnels, build dashboards and integrate with other common tools.
         </p>
     </div>
     <div>
-        <h4 class="mb-1">Generous allowance</h4>
+        <h4 class="mb-1">50k session replays</h4>
         <p>
-            Credit is equivalent to over <strong>30m events and 50k recordings per month</strong>
+            Watch user sessions, with console logs and network performance tracking. No extra code needed.
         </p>
     </div>
     <div>
-        <h4 class="mb-1">Office hours</h4>
+        <h4 class="mb-1">Slack support</h4>
         <p>
-            <strong>Exclusive private office hours</strong> with PostHog's exec team every month
+            Get a dedicated Slack channel to request help from our Customer Support team when you need. 
         </p>
     </div>
 </Section>
@@ -83,95 +126,68 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
   </div>
 </section>
 
-<section class="my-24 px-5">
-  <div class="max-w-screen-2xl mx-auto">
-    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Extra perks</h3>
-    <div class="flex justify-center">
-      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative after:border-t lg:after:border-t-0 after:border-dashed after:border-gray-accent-light after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 before:border-l lg:before:border-0 before:border-dashed before:border-gray-accent-light sm:after:block after:hidden sm:before:block lg:before:hidden lg:after:hidden before:hidden">
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
-          <GatsbyImage image={getImage(props?.images[5])} alt="Startup spotlight" objectFit="contain" style={{ maxWidth: 200 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Startup spotlight</h5>
-          <p class="m-0 text-[15px]">Every month, we will pick a startup of the month to spotlight. We'll do a short interview with you which we'll share on posthog.com and our socials.</p>
-        </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
-          <GatsbyImage image={getImage(props?.images[6])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 200 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Free PostHog merch</h5>
-          <p class="m-0 text-[15px]">Because you can never have too many mugs, stickers, and origami...</p>
-        </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
-          <GatsbyImage image={getImage(props?.images[7])} alt="Startup launch" objectFit="contain" style={{ maxWidth: 200 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">We'll promote your launch</h5>
-          <p class="m-0 text-[15px]">Doing a launch? Let us know and we'll retweet, upvote you on ProductHunt, and generally spread the word.</p>
-        </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
-          <GatsbyImage image={getImage(props?.images[8])} alt="Startup credit" objectFit="contain" style={{ maxWidth: 200 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Extra credit</h5>
-          <p class="m-0 text-[15px]">Send this page to your investor or accelerator where they can apply to be a partner. If they sign up, we'll double your credits <em>and</em> send you a custom pair of PostHog AirPods.</p>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
 
-<Section title="The best (and most generous) startup program available" titleSize="sm">
+<Section title="The only startup program with laptop stickers" titleSize="sm" subtitle="subtitlelolol">
 <div className="overflow-x-auto -mx-5 px-5">
-<table className="w-400 mt-4" style="min-width: 600px;">
+<table className="w-400 mt-4" style="min-width: 400px;">
     <thead>
-        <tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
             <td className="w-3/12"></td>
             <td className="w-2/12 text-center"><a href="/blog/posthog-vs-pendo">Pendo</a></td>
             <td className="w-2/12 text-center"><a href="/blog/posthog-vs-logrocket">LogRocket</a></td>
-            <td className="w-2/12 text-center"><a href="/blog/posthog-vs-heap">Heap</a></td>
             <td className="w-2/12 text-center"><a href="/blog/posthog-vs-amplitude">Amplitude</a></td>
             <td className="w-2/12 text-center"><a href="/blog/posthog-vs-mixpanel">Mixpanel</a></td>
             <td className="w-2/12 text-center bg-gray-accent bg-opacity-50"><strong>PostHog</strong></td>
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
             <td><strong>Startup offer</strong></td>
-            <td>Free plan only</td>
-            <td>Free plan only</td>
-            <td>Free plan only</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td className="bg-gray-accent bg-opacity-50 text-center">Yes</td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
         </tr>
-        <tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
             <td><strong>Eligibility criteria</strong></td>
-            <td>None</td>
-            <td>None</td>
-            <td>None</td>
-            <td>Less than $5m in funding and less than 20 staff</td>
-            <td>Less than $8m in funding and less than 5 years old</td>
-            <td className="bg-gray-accent bg-opacity-50 text-center">Less than $5m in funding and less than 2 years old</td>
+            <td className="text-center">Free plan only</td>
+            <td className="text-center">Free plan only</td>
+            <td className="text-center">&lt;$5m in funding and &lt;20 staff members</td>
+            <td className="text-center">&lt;$8m in funding and less than 5 years old</td>
+            <td className="bg-gray-accent bg-opacity-50 text-center">&lt;$5m in funding and less than 5 years old</td>
         </tr>
-        <tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
             <td><strong>Limitations</strong></td>
-            <td>500 monthly users</td>
-            <td>1,000 monthly sessions</td>
-            <td>10,000 monthly sessions</td>
-            <td>One year duration</td>
-            <td>One year duration</td>
+            <td className="text-center">500 monthly users</td>
+            <td className="text-center">1,000 monthly sessions</td>
+            <td className="text-center">One year duration</td>
+            <td className="text-center">One year duration</td>
             <td className="bg-gray-accent bg-opacity-50 text-center">One year duration</td>
         </tr>
-        <tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
             <td><strong>Benefits</strong></td>
-            <td>None</td>
-            <td>None</td>
-            <td>None</td>
-            <td>200,000 MTUs</td>
-            <td>$50,000 credit</td>
+            <td className="text-center">None</td>
+            <td className="text-center">None</td>
+            <td className="text-center">200,000 MTUs</td>
+            <td className="text-center">$50,000 credit</td>
             <td className="bg-gray-accent bg-opacity-50 text-center">$50,000 credit</td>
         </tr>
-        <tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
             <td><strong>Extra perks</strong></td>
-            <td>None</td>
-            <td>None</td>
-            <td>None</td>
-            <td>Slack community</td>
-            <td>Slack community</td>
-            <td className="bg-gray-accent bg-opacity-50 text-center">Exclusive merch and event access; promotion opportunities; Slack community</td>
+            <td className="text-center">None</td>
+            <td className="text-center">None</td>
+            <td className="text-center">Slack community</td>
+            <td className="text-center">Slack community</td>
+            <td className="bg-gray-accent bg-opacity-50 text-center">Exclusive merch and events; promotion opportunities; Slack community</td>
+        </tr>
+        <tr style="border-bottom: 1px dashed; border-color: #bfbfbc">
+            <td><strong>Laptop stickers</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="bg-gray-accent bg-opacity-50 text-center"><span className="text-green text-lg">✔</span></td>
         </tr>
     </tbody>
 </table>
