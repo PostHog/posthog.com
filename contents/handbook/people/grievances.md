@@ -1,3 +1,9 @@
+---
+title: Grievances and Disciplinary Process
+sidebar: Handbook
+showTitle: true
+---
+
 Hopefully the below will never be relevant to your time at PostHog! However, it’s important to have a clear process around how we do this stuff in order to ensure everyone is treated fairly and transparently. 
 
 
