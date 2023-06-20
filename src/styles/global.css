@@ -169,7 +169,7 @@ h4 {
         & + h2,
         & + h3,
         & + h4 {
-            @apply mt-4;
+            @apply mt-8;
         }
     }
 
@@ -181,6 +181,12 @@ h4 {
         ol {
             @apply mb-2;
         }
+
+        & + h2,
+        & + h3,
+        & + h4 {
+            @apply mt-8;
+        }
     }
     blockquote:not(.quote) {
         @apply p-6 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-4;
@@ -191,12 +197,27 @@ h4 {
     }
 
     thead {
+        @apply rounded-sm bg-accent dark:bg-accent-dark;
         text-align: left;
+
+        th {
+            @apply opacity-75 text-sm;
+        }
+    }
+    tr:not(:first-child) {
+        td,
+        th {
+            @apply border-t border-light dark:border-dark;
+        }
     }
     td,
     th {
-        @apply pt-2;
+        @apply pt-2 text-[15px];
         padding-bottom: calc(0.5rem - 1px);
+
+        &:first-child {
+            @apply pl-2;
+        }
 
         &:not(:first-child) {
             @apply px-4;

@@ -148,7 +148,7 @@ const handbookSidebar = [
                 url: '/handbook/small-teams/marketing',
             },
             {
-                name: 'People & Ops',
+                name: 'People & ops',
                 url: '/handbook/small-teams/people',
             },
             {
@@ -170,7 +170,7 @@ const handbookSidebar = [
         ],
     },
     {
-        name: 'People & Ops',
+        name: 'People & ops',
         url: '',
         children: [
             {
@@ -542,7 +542,7 @@ const handbookSidebar = [
         ],
     },
     {
-        name: 'Marketing & Content',
+        name: 'Marketing & content',
         url: '',
         children: [
             {
