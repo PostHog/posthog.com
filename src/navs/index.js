@@ -777,20 +777,16 @@ export const companyMenu = {
 
 export const docsMenu = {
     name: 'Docs',
-    url: '/docs',
+    url: '/docs/getting-started/install',
     children: [
         {
             name: 'Getting started',
             icon: 'Flag',
             color: 'teal',
-            url: '/docs/getting-started/start-here',
+            url: '/docs/getting-started/install',
             children: [
                 {
                     name: 'Getting started',
-                },
-                {
-                    name: 'Start here',
-                    url: '/docs/getting-started/start-here',
                 },
                 {
                     name: 'Install PostHog',

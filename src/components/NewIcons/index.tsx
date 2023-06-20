@@ -495,6 +495,19 @@ export const Gear = ({ className = '', ...other }: { className?: string }): JSX.
     </svg>
 )
 
+export const GraduationCap = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        className={`fill-current ${className}`}
+        {...other}
+    >
+        <path d="M11.956 5.002a.707.707 0 0 0-.19.037L1.468 8.652a.703.703 0 0 0 0 1.323L5.242 11.3v5.098c0 .303.195.571.483.666l6.063 1.945a.701.701 0 0 0 .424 0l6.063-1.945a.702.702 0 0 0 .483-.666v-5.105l.65-.227a.703.703 0 1 0-.467-1.324L12 12.177 3.823 9.31 12 6.443l9.596 3.371v3.409a.702.702 0 1 0 1.404 0V9.31a.703.703 0 0 0-.468-.659L12.234 5.038a.701.701 0 0 0-.278-.036Zm-5.31 6.787 5.12 1.8a.698.698 0 0 0 .468 0l5.12-1.8v4.096L12 17.604l-5.354-1.72V11.79Z" />
+    </svg>
+)
+
 export const Graph = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"
