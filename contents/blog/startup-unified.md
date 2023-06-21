@@ -32,7 +32,7 @@ That was super important because it allowed our customers a lot of flexibility i
 The second thing we learned from our user interviews is that there was a specific need from HR software companies. We initially thought we’d focus on sales-oriented software companies, but nearly all the customers coming in were HR software teams. So, we tweaked the roadmap to reflect their interest.”
 
 ### Looking forward, what are you most excited about?
-“I'm a big data nerd and I geek out most on seeing what users are doing on my platform. I insist our teams don’t build anything they can’t measure, and that’s where PostHog comes in. I’m really excited to see the funnels, customer journeys, and understand how they change as we built. Then you can do a bunch of analysis and understand how your product _is_ being used instead of _assuming_ how it’s used.
+“I'm a big data nerd and I geek out most on seeing what users are doing on my platform. I insist our teams don’t build anything they can’t measure, and that’s where PostHog comes in. I’m really excited to see the funnels, customer journeys, and understand how they change as we grow. Then you can do a bunch of analysis and understand how your product _is_ being used instead of _assuming_ how it’s used.
 
 This sort of data makes your product better. It allows us to tweak our messaging as well, tweak the product, and generally make a lot of improvements. 
 
