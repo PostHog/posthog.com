@@ -42,7 +42,7 @@ import JSIdentifySetUserProperties from "../\_snippets/identify-setting-user-pro
 
 ## Alias: Assigning multiple distinct IDs to the same user 
 
-Sometimes, you want to assign multiple distinct IDs to a single user. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code, you can use `alias` to connect the frontend distinct ID to one accessible on the backend.
+Sometimes, you want to assign multiple distinct IDs to a single user. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code, you can use `alias` to connect the frontend distinct ID to one accessible on the backend. This will merge all past and future events into the same user.
 
 In the below example, we assign the user with `distinct_id` another ID: `alias_id`. This means that any events submitted using either `distinct_id` or `alias_id` will be associated with the same user.
 
@@ -105,8 +105,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
 There are two requirements when assigning an `alias_id`:
 
 1. It cannot be associated with more than one `distinct_id`.
-2. The `alias_id` **must not** be the `distinct_id` of any other user. For example, assume we previously identified a user with `distinct_id_one` in a different session and device e.g., in [posthog-js](https://posthog.com/docs/libraries/js) using `posthog.identify('distinct_id_one')`. It is not possible to use `distinct_id_one` as an alias for any another distinct ID:
-
+2. The `alias_id` **must not** have been previously used as the `distinct_id` argument of an `identify()` or `alias()` call. For example: Assume we previously called `posthog.identify('distinct_id_one')`. It is not possible to use `distinct_id_one` as an alias ID:
 
 <MultiLanguage selector="tabs">
 
@@ -175,6 +174,10 @@ posthog.alias("any_other_id", "distinct_id_one");
 ```
 
 </MultiLanguage>
+
+You can view whether a user can be merged into another user using `alias` when [viewing their properties]((/docs/data/user-properties#how-to-view-user-properties)) in the PostHog app: Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not – i.e., whether you can use their ID as an `alias_id` or not.
+
+![Merge restrictions tooltip](../../images/docs/data/identify/merge-restrictions-tooltip.png)
 
 > Note that when calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they will be merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
 
@@ -268,6 +271,16 @@ client.capture({
     distinctId: 'distinct_id_of_user_to_merge_into',
     event: '$merge_dangerously',
     properties: {
+        alias: 'distinct_id_of_user_to_be_merged',
+    },
+})
+```
+
+```javascript
+// This will merge distinct_id_of_user_to_be_merged into the user sending this event
+posthog.capture({
+    '$merge_dangerously',
+    {
         alias: 'distinct_id_of_user_to_be_merged',
     },
 })
