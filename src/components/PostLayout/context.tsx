@@ -31,10 +31,7 @@ export const PostProvider: React.FC<ProviderProps> = ({
 
     const tableOfContents = other.tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
     const contentContainerClasses =
-        contentContainerClassName ||
-        `px-5 lg:px-6 xl:px-12 w-full transition-all ${
-            hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-screen-2xl'
-        } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
+        contentContainerClassName || `px-5 lg:px-6 xl:px-12 transition-all ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
         <Context.Provider
