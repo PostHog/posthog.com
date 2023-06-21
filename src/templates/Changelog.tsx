@@ -117,13 +117,18 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                     })}
                 </div>
             </section>
-            <section className="grid gap-y-12">
+            <section className="grid">
                 {Object.keys(changesByMonth).map((month) => {
                     const nodes = changesByMonth[month]
                     return (
-                        <div key={month} id={slugify(month)} className="flex">
-                            <h2 className="pb-2 mb-8 text-2xl flex-0 basis-[80px]">{month}</h2>
-                            <ul className="list-none m-0 p-0 grid gap-y-12 flex-1">
+                        <div key={month} id={slugify(month)} className="flex gap-4">
+                            <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
+                                <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
+                                    <h2 className="text-sm font-bold uppercase m-0">{month}</h2>
+                                    <div className="text-xs font-semibold">2023</div>
+                                </div>
+                            </div>
+                            <ul className="list-none m-0 p-0 grid gap-y-12 flex-1 pb-12">
                                 {nodes.map(({ description, media, topic, teams, title, cta }) => {
                                     const team = teams?.data[0]
                                     const topicName = topic?.data?.attributes.label
@@ -133,9 +138,11 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                                     return (
                                         <li key={title}>
                                             {topicName && (
-                                                <p className="m-0 font-bold flex space-x-2 mb-3 opacity-80">
-                                                    {Icon && <Icon className="w-5" />}
-                                                    <span>{topicName}</span>
+                                                <p className="font-bold flex my-3 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
+                                                    <span className="inline-flex space-x-2 bg-light dark:bg-dark px-2 z-20">
+                                                        {Icon && <Icon className="w-5" />}
+                                                        <span>{topicName}</span>
+                                                    </span>
                                                 </p>
                                             )}
                                             <Heading as="h3" id={slugify(title, { lower: true })} className="mt-0 mb-1">
