@@ -10,7 +10,7 @@ featuredImage: ../images/blog/spotlight_unified.png
 featuredImageType: full
 category: Startups
 ---
-This month we’re chatting to [Unified.to](https://unified.to/) co-founder and CEO, Roy Pereira. Roy is a serial entrepreneur, and Unified.to is his fifth startup. Previously, Roy had been a GM at [Vendasta](/customers/vendasta), the world’s leading end-to-end platform for channel partners selling digital solutions to small and medium-sized businesses.
+This month we’re chatting to [Unified.to](https://unified.to/) co-founder and CEO, Roy Pereira. Roy is a serial entrepreneur, and Unified.to is his fifth startup. Previously, Roy had been the CEO and founder of CalendarHero (formerly known as Zoom.ai), which was acquired by [Vendasta](/customers/vendasta) in 2021.
 
 > Every month we shine the spotlight on a different startup to show off the cool things they're building, as part of [the PostHog for Startups program](/startups). Sign up today for $50k in PostHog credit and a bunch of other sweet perks!
 
