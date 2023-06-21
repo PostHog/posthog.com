@@ -2,6 +2,7 @@ import React from 'react'
 
 import Link from 'components/Link'
 import { Posts } from 'components/Blog'
+import List from 'components/List'
 
 type TutorialsProps = {
     tutorials: {
@@ -18,7 +19,22 @@ export const Tutorials: React.FC<TutorialsProps> = ({ tutorials }) => {
                 <h3 className="m-0">Tutorials</h3>
                 <Link to="/docs/tutorials">View all</Link>
             </div>
-            <Posts posts={tutorials.edges} action={<Link to="/tutorials/all">View all</Link>} />
+            <List
+                className="grid gap-2"
+                items={tutorials.edges.map(
+                    ({
+                        node: {
+                            excerpt,
+                            frontmatter: { title },
+                            fields: { slug },
+                        },
+                    }) => ({
+                        label: title,
+                        url: slug,
+                        description: excerpt,
+                    })
+                )}
+            />
         </section>
     )
 }

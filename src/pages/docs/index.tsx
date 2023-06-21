@@ -6,8 +6,8 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import { LinkGrid } from 'components/Docs/LinkGrid'
 import { graphql, PageProps } from 'gatsby'
+import List from 'components/List'
 
 const quickLinks = [
     {
@@ -213,7 +213,15 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                             </h5>
                         </div>
 
-                        <LinkGrid links={quickLinks} />
+                        <List
+                            className="grid md:grid-cols-2 gap-1"
+                            items={quickLinks.map(({ icon, name, to, description }) => ({
+                                label: name,
+                                url: to,
+                                icon,
+                                description,
+                            }))}
+                        />
                     </section>
 
                     <section className="space-y-8">

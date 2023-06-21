@@ -2,10 +2,10 @@ import Chip from 'components/Chip'
 import FooterCTA from 'components/FooterCTA'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useEffect, useState } from 'react'
-import PipelinesList from '../PipelinesList'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
 import { navigate } from 'gatsby'
+import List from 'components/List'
 
 const filters = [
     {
@@ -100,8 +100,20 @@ function PipelinesPage({ location }) {
                     />
                 ))}
             </div>
-            <PipelinesList pipelines={filteredPipelines || pipelines} />
-
+            <List
+                className="max-w-2xl mx-auto"
+                items={[
+                    ...(filteredPipelines || pipelines)?.map(
+                        ({ fields: { slug }, frontmatter: { thumbnail, title, badge, price } }) => ({
+                            label: title,
+                            url: slug,
+                            badge: badge?.toLowerCase() !== 'built-in' && (price || 'Free'),
+                            image: thumbnail?.publicURL,
+                        })
+                    ),
+                    { label: <>Build your own &rarr;</>, url: '/docs/cdp/build', image: '/images/builder-hog.png' },
+                ]}
+            />
             <div className="my-12 md:my-24 px-5 max-w-[960px] mx-auto">
                 <FooterCTA />
             </div>

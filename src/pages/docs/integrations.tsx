@@ -6,8 +6,8 @@ import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
-import { LinkGrid } from 'components/Docs/LinkGrid'
 import Link from 'components/Link'
+import List from 'components/List'
 
 export const quickLinks = [
     {
@@ -95,7 +95,16 @@ const Integrations: React.FC<IntegrationsProps> = () => {
                 {/* Quick links */}
                 <section className="my-12 clear-both">
                     <h3 className="mb-6 mt-0">Library</h3>
-                    <LinkGrid links={quickLinks} />
+                    <List
+                        className="grid md:grid-cols-2 gap-1"
+                        items={quickLinks.map(({ color, icon, name, to, description }) => ({
+                            label: name,
+                            url: to,
+                            icon,
+                            iconColor: color,
+                            description,
+                        }))}
+                    />
                 </section>
 
                 <hr />

@@ -293,22 +293,6 @@ h4 {
     }
 }
 
-/* animated underlined links */
-.article-content a:not(.cta) {
-    background: linear-gradient(to right, rgba(191, 191, 188, 0), rgba(191, 191, 188, 0)),
-        linear-gradient(to right, rgba(191, 191, 188, 1), rgba(191, 191, 188, 1));
-    background-size: 100% 0.1em, 0 0.1em;
-    background-position: 100% 100%, 0 100%;
-    background-repeat: no-repeat;
-    padding-bottom: 0.2rem;
-    transition: background-size 400ms !important; /* unfortunately necessary until antd is removed */
-
-    &:hover,
-    &:focus {
-        background-size: 0 0.1em, 100% 0.1em;
-    }
-}
-
 .share-links a {
     background: none;
     transition: none;

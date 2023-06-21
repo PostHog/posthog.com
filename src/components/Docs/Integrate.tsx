@@ -4,6 +4,7 @@ import Link from 'components/Link'
 import docs from 'sidebars/docs.json'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
+import List from 'components/List'
 
 type LibraryNode = {
     fields: {
@@ -50,20 +51,6 @@ type LibraryData = {
 
 const sdkSidebar = docs.find((item) => item.name === 'SDKs')?.children || []
 
-const IntegrateOption = (props: LibraryNode | FrameworkNode) => (
-    <Link
-        to={props.fields.slug}
-        className="cta p-0.5 text-primary/75 hover:text-primary/90 dark:text-primary-dark/75 dark:hover:text-primary-dark/90"
-    >
-        <div className="px-4 !py-3 flex items-center relative rounded active:top-[0.5px] active:scale-[.99]">
-            <span className="w-8 h-8 rounded flex items-center justify-center mr-1.5">
-                <img src={props.frontmatter.icon?.publicURL} className="w-6 h-6" />
-            </span>
-            <h4 className="!text-base font-semibold !m-0 p-0 whitespace-nowrap">{props.frontmatter.title}</h4>
-        </div>
-    </Link>
-)
-
 export const SDKs = () => {
     const { sdks } = useStaticQuery<LibraryData>(query)
 
@@ -73,11 +60,14 @@ export const SDKs = () => {
     )
 
     return (
-        <div className="grid grid-cols-3 -mt-2 mb-6">
-            {sdks.nodes.map((node) => (
-                <IntegrateOption key={node.frontmatter.title} {...node} />
-            ))}
-        </div>
+        <List
+            className="grid sm:grid-cols-2 md:grid-cols-3"
+            items={sdks.nodes.map(({ fields: { slug }, frontmatter: { title, icon } }) => ({
+                label: title,
+                url: slug,
+                image: icon?.publicURL,
+            }))}
+        />
     )
 }
 
@@ -85,11 +75,14 @@ export const Frameworks = () => {
     const { frameworks } = useStaticQuery<LibraryData>(query)
 
     return (
-        <div className="grid grid-cols-2 -mt-2 mb-6">
-            {frameworks.nodes.map((node) => (
-                <IntegrateOption key={node.frontmatter.title} {...node} />
-            ))}
-        </div>
+        <List
+            className="grid sm:grid-cols-2 md:grid-cols-3"
+            items={frameworks.nodes.map(({ fields: { slug }, frontmatter: { title, icon } }) => ({
+                label: title,
+                url: slug,
+                image: icon?.publicURL,
+            }))}
+        />
     )
 }
 

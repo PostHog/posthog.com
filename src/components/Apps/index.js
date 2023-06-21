@@ -2,11 +2,11 @@ import Chip from 'components/Chip'
 import FooterCTA from 'components/FooterCTA'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useEffect, useState } from 'react'
-import AppsList from '../AppsList'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
 import { navigate } from 'gatsby'
 import Link from 'components/Link'
+import List from 'components/List'
 
 const filters = [
     {
@@ -102,7 +102,20 @@ function AppsPage({ location }) {
                     />
                 ))}
             </div>
-            <AppsList apps={filteredApps || apps} />
+            <List
+                className="max-w-2xl mx-auto"
+                items={[
+                    ...(filteredApps || apps)?.map(
+                        ({ fields: { slug }, frontmatter: { thumbnail, title, badge, price } }) => ({
+                            label: title,
+                            url: slug,
+                            badge: badge?.toLowerCase() !== 'built-in' && (price || 'Free'),
+                            image: thumbnail?.publicURL,
+                        })
+                    ),
+                    { label: <>Build your own &rarr;</>, url: '/docs/cdp/build', image: '/images/builder-hog.png' },
+                ]}
+            />
 
             <div className="my-12 md:my-24 px-5 max-w-[960px] mx-auto">
                 <FooterCTA />

@@ -113,6 +113,12 @@ text-seagreen
 text-purple
 text-salmon
 text-orange
+bg-blue
+bg-teal
+bg-seagreen
+bg-purple
+bg-salmon
+bg-orange
 border-blue
 border-teal
 border-seagreen

@@ -7,8 +7,8 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
-import { LinkGrid } from 'components/Docs/LinkGrid'
 import { GettingStarted } from 'components/Docs/GettingStarted'
+import List from 'components/List'
 
 export const quickLinks = [
     {
@@ -73,7 +73,16 @@ export const Intro = ({ image = true }) => (
         {/* Quick links */}
         <section className="my-6">
             <h3 className="mb-6 mt-0">Pages</h3>
-            <LinkGrid links={quickLinks} />
+            <List
+                className="grid md:grid-cols-2 gap-1"
+                items={quickLinks.map(({ color, icon, name, to, description }) => ({
+                    label: name,
+                    url: to,
+                    icon,
+                    iconColor: color,
+                    description,
+                }))}
+            />
         </section>
     </>
 )
@@ -114,6 +123,7 @@ export const query = graphql`
         ) {
             edges {
                 node {
+                    excerpt
                     id
                     fields {
                         slug
