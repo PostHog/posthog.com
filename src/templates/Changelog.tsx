@@ -121,9 +121,9 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                 {Object.keys(changesByMonth).map((month) => {
                     const nodes = changesByMonth[month]
                     return (
-                        <div key={month} id={slugify(month)}>
-                            <h2 className="pb-2 mb-8 text-2xl">{month}</h2>
-                            <ul className="list-none m-0 p-0 grid gap-y-12">
+                        <div key={month} id={slugify(month)} className="flex">
+                            <h2 className="pb-2 mb-8 text-2xl flex-0 basis-[80px]">{month}</h2>
+                            <ul className="list-none m-0 p-0 grid gap-y-12 flex-1">
                                 {nodes.map(({ description, media, topic, teams, title, cta }) => {
                                     const team = teams?.data[0]
                                     const topicName = topic?.data?.attributes.label

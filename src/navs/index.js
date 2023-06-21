@@ -675,15 +675,9 @@ export const communityMenu = {
     icon: 'Chat',
     children: [
         {
-            name: 'Edition',
-            icon: 'Newspaper',
-            color: 'tan',
-            url: '/edition',
-        },
-        {
             name: 'Questions',
             icon: 'Message',
-            color: 'teal',
+            color: 'blue',
             url: '/questions',
             children: [
                 { name: 'Topics' },
@@ -699,6 +693,12 @@ export const communityMenu = {
                 { name: 'Events & actions', url: '/questions/topic/events-actions' },
                 { name: 'Persons', url: '/questions/topic/people-and-properties' },
             ],
+        },
+        {
+            name: 'Edition',
+            icon: 'Newspaper',
+            color: 'purple',
+            url: '/edition',
         },
         {
             name: 'Roadmap',

@@ -77,15 +77,23 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
                                             setCurrentIndex(index)
                                             scrollToTop && scroll.scrollToTop()
                                         }}
-                                        className={`p-4 rounded-md w-full text-left relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px] hover:bg-gray-accent-light dark:hover:bg-accent-dark ${
+                                        className={`w-full text-left group items-center relative px-4 pt-2.5 pb-2 rounded border border-b-3 hover:border-light dark:hover:border-dark ${
                                             active
-                                                ? 'bg-gray-accent-light dark:bg-accent-dark hover:top-[0px] hover:scale-[1]'
-                                                : ''
+                                                ? 'bg-accent dark:bg-accent-dark border-light dark:border-dark hover:top-[0px] hover:scale-[1]'
+                                                : 'border-transparent hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                                         }`}
                                     >
                                         {image && <img className="max-h-[30px] mb-2" src={image} />}
+
+                                        <p className="m-0 font-semibold leading-tight text-[15px]">{title}</p>
+                                        {(author || type) && (
+                                            <p className="text-[13px] font-semibold m-0 opacity-60 mt-0.5">
+                                                {type} {author && `by ${author}`}
+                                            </p>
+                                        )}
+
                                         {(hasTags || video) && (
-                                            <div className="flex justify-between lg:space-x-2 lg:space-y-0 space-y-2 space-y-reverse lg:flex-row flex-col-reverse items-start">
+                                            <div className="flex justify-between space-y-2 lg:space-x-2 lg:space-y-0 space-y-reverse lg:flex-row flex-col-reverse items-start mt-1">
                                                 {hasTags && (
                                                     <ul className="list-none m-0 mb-1 p-0 flex items-center flex-wrap">
                                                         {tags.map((tag) => {
@@ -104,13 +112,6 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
                                                     <Video className="w-6 opacity-50 flex-shrink-0 right-4 top-3 absolute lg:relative" />
                                                 )}
                                             </div>
-                                        )}
-
-                                        <p className="m-0 font-semibold leading-tight text-[15px]">{title}</p>
-                                        {(author || type) && (
-                                            <p className="text-sm font-semibold m-0 opacity-60 mt-1">
-                                                {type} {author && `by ${author}`}
-                                            </p>
                                         )}
                                     </button>
                                 </li>

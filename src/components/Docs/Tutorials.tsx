@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'components/Link'
 import { Posts } from 'components/Blog'
 import List from 'components/List'
+import { CallToAction } from 'components/CallToAction'
 
 type TutorialsProps = {
     tutorials: {
@@ -17,7 +18,9 @@ export const Tutorials: React.FC<TutorialsProps> = ({ tutorials }) => {
         <section className="my-12">
             <div className="flex items-center justify-between mb-6">
                 <h3 className="m-0">Tutorials</h3>
-                <Link to="/docs/tutorials">View all</Link>
+                <CallToAction to="/docs/tutorials" type="secondary" size="sm">
+                    View all
+                </CallToAction>
             </div>
             <List
                 className="grid gap-2"
