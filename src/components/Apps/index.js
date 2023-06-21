@@ -82,11 +82,11 @@ function AppsPage({ location }) {
                 image={`/og-images/apps.jpeg`}
             />
             <header className="py-12">
-                <h2 className="m-0 text-center text-[2.75rem] leading-none  md:text-6xl text-primary">
+                <h2 className="m-0 text-center text-[2.75rem] leading-none  md:text-6xl dark:text-primary-dark">
                     Do even more cool stuff <br className="hidden lg:block" />
                     <span className="text-blue">PostHog Apps</span>
                 </h2>
-                <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
+                <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary/75 dark:text-primary-dark/75 max-w-2xl">
                     Apps are built on the <Link to="/docs/api">PostHog API</Link>. They appear right inside PostHog, and
                     if using PostHog.js, apps can also inject code directly into your website or product.
                 </p>

@@ -46,7 +46,7 @@ export default function Tooltip({
                         style={{ ...styles.popper, paddingTop: offset[1], paddingBottom: offset[1] }}
                         {...attributes.popper}
                     >
-                        <div className={`rounded-md shadow-lg overflow-hidden ${tooltipClassName}`}>
+                        <div className={`rounded-sm overflow-hidden ${tooltipClassName}`}>
                             {title && (
                                 <h5
                                     className={`bg-white text-sm dark:bg-[#484848] text-black dark:text-white px-4 py-2 z-20 m-0 font-semibold`}
@@ -55,7 +55,7 @@ export default function Tooltip({
                                 </h5>
                             )}
                             <div
-                                className={`bg-white dark:bg-[#484848] text-black dark:text-white px-2 py-2 text-sm z-20`}
+                                className={`bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary dark:text-primary-dark px-2 py-2 text-sm z-20`}
                             >
                                 {content && (typeof content === 'string' ? content : content(setOpen))}
                             </div>

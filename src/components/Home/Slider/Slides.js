@@ -411,14 +411,14 @@ export const Cdp = () => {
                     <FeatureList features={features} />
 
                     <CallToAction
-                        href="/session-replay"
+                        href="/cdp"
                         type="custom"
                         size="md"
                         className="group !border-black/25 !bg-black/10"
                         childClassName="!bg-[#FCC779] border-black !text-black group-hover:text-black
                     "
                     >
-                        Browse integrations
+                        Browse connections
                     </CallToAction>
                 </Content>
                 <div className="flex items-end mt-auto w-full">
