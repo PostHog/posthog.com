@@ -14,7 +14,7 @@ Data Warehouse is currently in **private beta**. This means we're inviting a sel
 
 ## How does it work?
 
-Each table you create is backed by one or more files in your object storage system (ie S3, GCS). We never "ingest" your data into our systems. Instead, on every query, we'll read directly from your s3 bucket. This means you can query as much data as you want. We'll only charge you for the data we actually query.
+Each table in the warehouse is backed by one or more files in your object storage system (i.e. S3, GCS). We never "ingest" your data into our systems. Instead, on every query, we'll read directly from your object storage system. This means you can query as much data as you want. We'll only charge you for the data we actually query.
 
 > Data Warehouse is free to use while in private beta. After that, you'll be charged for each GB of data read while querying.
 
