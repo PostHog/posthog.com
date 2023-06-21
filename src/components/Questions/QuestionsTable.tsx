@@ -37,13 +37,13 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
     const numReplies = replies?.data?.length || 0
 
     return profile ? (
-        <div key={question.id}>
+        <div key={question.id} className="py-2.5">
             <Link
                 state={currentPage && { previous: currentPage }}
                 to={`/questions/${permalink}`}
-                className={`${className} block py-2 pl-2 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
+                className={`${className} group flex items-center relative px-2 py-2.5 -mt-2.5 mx-[-2px] -mb-3 rounded active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0`}
             >
-                <div className="grid grid-cols-12 items-center">
+                <div className="grid grid-cols-12 items-center w-full">
                     <div className="col-span-12 md:col-span-7 2xl:col-span-8 flex items-center space-x-4">
                         <div className="w-4 flex-shrink-0">
                             {pinned ? (
@@ -116,7 +116,7 @@ export const QuestionsTable = ({
 }: QuestionsTableProps) => {
     return (
         <ul className="m-0 p-0 list-none">
-            <li className="grid grid-cols-12 pl-2 pr-4 pb-1 items-center text-primary/75 dark:text-primary-dark/75 text-sm">
+            <li className="grid grid-cols-12 pl-2 pr-3 pb-1 items-center text-primary/75 dark:text-primary-dark/75 text-sm">
                 <div className="col-span-12 xl:col-span-7 2xl:col-span-8 pl-8">Question / Topic</div>
                 <div className="hidden xl:block xl:col-span-2 2xl:col-span-1 text-center">Replies</div>
                 <div className="hidden xl:block xl:col-span-3">{sortBy === 'activity' ? 'Last active' : 'Created'}</div>
@@ -140,7 +140,7 @@ export const QuestionsTable = ({
                     })}
                 </li>
             ) : null}
-            <li className="list-none">
+            <li className="list-none px-[2px] divide-y divide-light dark:divide-dark">
                 {questions.data.length > 0
                     ? questions.data.filter(Boolean).map((question) => {
                           return (

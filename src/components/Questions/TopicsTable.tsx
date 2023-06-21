@@ -5,13 +5,15 @@ import {
     Apps,
     Brackets,
     Cursor,
-    Database,
     Dashboard,
     Ellipsis,
     Flask,
     Gear,
     Graph,
+    HogQL,
     People,
+    Privacy,
+    Pulse,
     RewindPlay,
     Receipt,
     Rocket,
@@ -46,15 +48,18 @@ export const topicIcons = {
     gcp: DataWarehouse,
     groups: People,
     'helm chart': DataWarehouse,
-    hogql: Database,
+    hogql: HogQL,
     'identify users': DataManagement,
     kubernetes: DataWarehouse,
     'migrating to posthog': DataManagement,
     migration: Upload,
+    more: Ellipsis,
     paths: PathAnalysis,
     'people & properties': Brackets,
     'pricing & billing': Receipt,
+    monitoring: Pulse,
     'product analytics': Graph,
+    security: Privacy,
     'session replay': RewindPlay,
     'sparks joy': SparksJoy,
     trends: Trends,
@@ -71,7 +76,7 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                 <div className="col-span-8 md:col-span-10">{topicGroup}</div>
                 <div className="col-span-4 md:col-span-2">Last active</div>
             </li>
-            <li className="list-none">
+            <li className="list-none px-[2px] divide-y divide-light dark:divide-dark">
                 {topics?.data?.length > 0 &&
                     topics.data.filter(Boolean).map((topic) => {
                         const {
@@ -84,12 +89,12 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                         const [latestQuestion] = questions?.data || []
 
                         return (
-                            <div key={id}>
+                            <div key={id} className="py-2.5">
                                 <Link
                                     to={`/questions/topic/${slug}`}
-                                    className={`${className} block py-2 -ml-4 -mr-4 pl-4 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
+                                    className={`${className} group flex items-center relative px-2 py-2.5 -mt-2.5 mx-[-2px] -mb-3 rounded active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0`}
                                 >
-                                    <div className="grid grid-cols-12 items-center">
+                                    <div className="grid grid-cols-12 items-center w-full">
                                         <div className="col-span-8 md:col-span-10 flex items-center space-x-3">
                                             {Icon && <Icon className="w-5 opacity-60 text-black dark:text-white" />}
                                             <span className="text-red line-clamp-1">{label}</span>
