@@ -60,7 +60,7 @@ export default function Questions({ data, pageContext }: IProps) {
                     <div className="w-full flex items-center mb-8">
                         <Link
                             to={'/questions'}
-                            className="flex space-x-1 p-1 pr-2 rounded hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-0"
+                            className="inline-flex space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-1 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                         >
                             <RightArrow className="-scale-x-100 w-6" />
                             <span className="text-primary dark:text-primary-dark text-[15px]">Topics</span>
