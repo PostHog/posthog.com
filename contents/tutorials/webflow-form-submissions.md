@@ -51,16 +51,16 @@ submitButton.addEventListener('click', function(event) {
 
   // Get the input elements
   const name = document.getElementById('form-name').value;
-	const email = document.getElementById('form-email').value;
+  const email = document.getElementById('form-email').value;
 
   // Capture the values in PostHog
   posthog.capture(
-		'form submitted', 
-		{
-			name: name, 
-			email: email
-		}
-	);
+    'form submitted', 
+    {
+      name: name, 
+      email: email
+    }
+  );
 });
 </script>
 ```
