@@ -672,6 +672,7 @@ const handbookSidebar = [
 export const communityMenu = {
     name: 'Community',
     url: '/questions',
+    icon: 'Chat',
     children: [
         {
             name: 'Edition',
@@ -723,6 +724,7 @@ export const communityMenu = {
 export const companyMenu = {
     name: 'Company',
     url: '/about',
+    icon: 'Logomark',
     children: [
         { name: 'About', icon: 'Logomark', url: '/about' },
         {
@@ -778,6 +780,7 @@ export const companyMenu = {
 export const docsMenu = {
     name: 'Docs',
     url: '/docs/getting-started/install',
+    icon: 'Book',
     children: [
         {
             name: 'Getting started',
@@ -2056,6 +2059,7 @@ const menu = [
     {
         name: 'Products',
         url: '/product-analytics',
+        icon: 'Features',
         children: [
             {
                 name: 'Product analytics',
@@ -2126,6 +2130,7 @@ const menu = [
     {
         name: 'Pricing',
         url: '/pricing',
+        icon: 'Receipt',
         children: [
             {
                 name: 'All products',

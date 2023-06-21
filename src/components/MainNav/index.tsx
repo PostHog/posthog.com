@@ -17,6 +17,7 @@ import usePostHog from 'hooks/usePostHog'
 import * as icons from 'components/NewIcons'
 import { Menu } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
+import { motion } from 'framer-motion'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -123,7 +124,85 @@ const ActiveBackground = () => {
     )
 }
 
-export default function MainNav() {
+const InternalMenuMobile = () => {
+    const { internalMenu, activeInternalMenu } = useLayoutData()
+    const ActiveInternalMenuIcon = activeInternalMenu?.icon && icons[activeInternalMenu.icon]
+
+    const container = {
+        hidden: { opacity: 0, height: 0 },
+        shown: { opacity: 1, height: 'auto', transition: { duration: 0.2, staggerChildren: 0.025 } },
+    }
+
+    const child = {
+        hidden: { opacity: -1, translateX: '-100%' },
+        shown: { opacity: 1, translateX: 0, transition: { type: 'spring', duration: 0.5 } },
+    }
+
+    return (
+        <div className="lg:hidden relative">
+            <Menu>
+                {({ open }) => (
+                    <>
+                        <Menu.Button className="font-bold px-5 py-2 flex w-full items-center justify-between border-b border-border dark:border-border-dark group">
+                            <span className="flex items-center space-x-2 group-active:top-[0.5px] group-active:scale-[.98] transition-all">
+                                {ActiveInternalMenuIcon && (
+                                    <ActiveInternalMenuIcon
+                                        className={`w-6 h-6 ${
+                                            activeInternalMenu?.color ? `text-${activeInternalMenu?.color}` : ''
+                                        }`}
+                                    />
+                                )}
+                                <span>{activeInternalMenu?.name}</span>
+                            </span>
+                            <Chevron
+                                className={`w-4 h-4 origin-[center_40%] transition-all group-active:top-[0.5px] group-active:scale-[.98] ${
+                                    open ? 'rotate-180' : 'opacity-60'
+                                }`}
+                            />
+                        </Menu.Button>
+                        <Menu.Items
+                            className="w-full list-none m-0 shadow-lg rounded-md px-5 py-4 dark:bg-accent-dark bg-accent absolute grid space-y-4"
+                            as={motion.ul}
+                            variants={container}
+                            initial="hidden"
+                            animate="shown"
+                        >
+                            {internalMenu.map(({ name, url, icon, color }) => (
+                                <Menu.Item variants={child} as={motion.li} key={url}>
+                                    {() => {
+                                        const Icon = icons[icon]
+                                        const active = activeInternalMenu?.name === name
+                                        return (
+                                            <Link
+                                                className="flex items-center active:top-[0.5px] active:scale-[.98] transition-all"
+                                                to={url}
+                                            >
+                                                <span className={`w-6 h-6 mr-2 text-${color} inline-block`}>
+                                                    <Icon />
+                                                </span>
+                                                <span
+                                                    className={`text-sm whitespace-nowrap ${
+                                                        active
+                                                            ? 'font-bold opacity-100'
+                                                            : 'font-semibold opacity-60 group-hover:opacity-100'
+                                                    }`}
+                                                >
+                                                    {name}
+                                                </span>
+                                            </Link>
+                                        )
+                                    }}
+                                </Menu.Item>
+                            ))}
+                        </Menu.Items>
+                    </>
+                )}
+            </Menu>
+        </div>
+    )
+}
+
+export const Main = () => {
     const { open } = useSearch()
     const { menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
@@ -155,7 +234,7 @@ export default function MainNav() {
                         />
                     </Link>
 
-                    <ul className="flex list-none m-0 p-0">
+                    <ul className="lg:flex hidden list-none m-0 p-0">
                         {menu.map((menuItem) => {
                             const active = menuItem.name === parent?.name
                             const { name, url } = menuItem
@@ -279,45 +358,38 @@ export default function MainNav() {
                             )
                         })}
                     </ul>
-                    <div className="lg:hidden relative">
-                        <Menu>
-                            <Menu.Button className="font-bold px-5 py-4 flex w-full items-center justify-between border-b border-border dark:border-border-dark">
-                                <span>{activeInternalMenu?.name}</span>
-                                <Chevron className="w-4" />
-                            </Menu.Button>
-                            <Menu.Items
-                                className="w-full list-none m-0 shadow-lg rounded-md px-5 py-4 dark:bg-accent-dark bg-accent absolute grid space-y-4"
-                                as="ul"
-                            >
-                                {internalMenu.map(({ name, url, icon, color }) => (
-                                    <Menu.Item key={url}>
-                                        {() => {
-                                            const Icon = icons[icon]
-                                            const active = activeInternalMenu?.name === name
-                                            return (
-                                                <Link className="flex items-center" to={url}>
-                                                    <span className={`w-6 h-6 mr-2 text-${color} inline-block`}>
-                                                        <Icon />
-                                                    </span>
-                                                    <span
-                                                        className={`text-sm whitespace-nowrap ${
-                                                            active
-                                                                ? 'font-bold opacity-100'
-                                                                : 'font-semibold opacity-60 group-hover:opacity-100'
-                                                        }`}
-                                                    >
-                                                        {name}
-                                                    </span>
-                                                </Link>
-                                            )
-                                        }}
-                                    </Menu.Item>
-                                ))}
-                            </Menu.Items>
-                        </Menu>
-                    </div>
+                    <InternalMenuMobile />
                 </>
             )}
         </div>
+    )
+}
+
+export const Mobile = () => {
+    const { menu, parent } = useLayoutData()
+
+    return (
+        <ul className="flex justify-between fixed bottom-0 w-full lg:hidden list-none m-0 p-0 border-t border-border dark:border-dark bg-accent dark:bg-accent-dark z-[9999] px-4">
+            {menu.map((menuItem) => {
+                const active = menuItem.name === parent?.name
+                const { name, url, icon } = menuItem
+                const Icon = icons[icon]
+                return (
+                    <li className="h-full" key={name}>
+                        <Link
+                            to={url}
+                            className={`text-xs font-medium relative p-2 flex flex-col space-y-1 items-center ${
+                                active ? '' : 'opacity-70 hover:opacity-100'
+                            }`}
+                        >
+                            <span className={`w-5 h-5 inline-block`}>
+                                <Icon />
+                            </span>
+                            <span>{name}</span>
+                        </Link>
+                    </li>
+                )
+            })}
+        </ul>
     )
 }

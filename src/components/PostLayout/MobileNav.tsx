@@ -10,8 +10,8 @@ import { Crumbs } from './Breadcrumb'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import slugify from 'slugify'
 
-const menuButtonClasses = `bg-white flex space-x-2 items-center font-semibold active:top-[0.5px]
-active:scale-[.98] transition-transform text-black shadow-md`
+const menuButtonClasses = `bg-border/20 dark:bg-border-dark/20 bg-accent dark:bg-accent-dark border border-border dark:border-dark flex space-x-2 items-center font-semibold active:top-[0.5px]
+active:scale-[.98] transition-transform text-black dark:text-white shadow-md rounded-md`
 
 const container = {
     hidden: { opacity: 0 },
@@ -108,7 +108,7 @@ export const MenuContainer = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed w-full h-full bg-black/70 dark:bg-black/70 top-0 left-0"
+            className="fixed w-full h-full bg-accent/70 dark:bg-accent-dark/70 top-0 left-0"
         >
             <motion.div
                 onClick={(e) => e.stopPropagation()}
@@ -124,7 +124,7 @@ export const MenuContainer = ({
                     dragControls={dragControls}
                     drag="y"
                     dragListener={false}
-                    className={`bg-white dark:bg-gray-accent-dark pb-4 pt-2 px-6 rounded-tr-md rounded-tl-md shadow ${className}`}
+                    className={`bg-white dark:bg-gray-accent-dark pb-4 pt-2 px-6 rounded-tr-md rounded-tl-md border border-border dark:border-dark shadow ${className}`}
                 >
                     <div
                         onPointerDown={startDrag}
@@ -142,7 +142,7 @@ export const MenuContainer = ({
 }
 
 const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => {
-    const { menu: postMenu, breadcrumb } = usePost()
+    const { menu: postMenu } = usePost()
     if (!postMenu) return null
     const { pathname } = useLocation()
     const [animationDirection, setAnimationDirection] = useState<'forward' | 'backward'>('forward')
@@ -191,16 +191,10 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
 
     return (
         <MenuContainer setOpen={setOpen}>
-            {breadcrumb && (
-                <div className="pb-4 mb-4">
-                    <Crumbs crumbs={breadcrumb} />
-                </div>
-            )}
-
             <motion.ul
                 key={menu?.parent?.name}
                 {...motionListContainer}
-                className="list-none m-0 p-0 max-h-[40vh] overflow-auto"
+                className="list-none m-0 p-0 h-[40vh] overflow-auto"
             >
                 {menu?.parent?.menu && (
                     <motion.li
@@ -272,10 +266,9 @@ const MobileTOC = ({ setOpen }: { setOpen: (open: null | string) => void }) => {
     }
     return (
         <MenuContainer setOpen={setOpen}>
-            <p className="opacity-40 text-base mt-0 mb-3 font-semibold">On this page</p>
             <motion.ul
                 {...motionListContainer}
-                className="list-none m-0 p-0 flex flex-col space-y-1 px-6 max-h-[40vh] overflow-auto"
+                className="list-none m-0 p-0 flex flex-col space-y-2 px-6 h-[40vh] overflow-auto"
             >
                 {tableOfContents?.map((navItem, index) => {
                     return (
@@ -285,7 +278,6 @@ const MobileTOC = ({ setOpen }: { setOpen: (open: null | string) => void }) => {
                                 url={navItem.url}
                                 name={navItem.value}
                                 depth={navItem.depth}
-                                className="jumpTo text-[15px] pl-6"
                             />
                         </motion.li>
                     )
@@ -333,38 +325,21 @@ export default function MobileNav() {
     const [open, setOpen] = useState<null | string>(null)
     const { tableOfContents, filePath, title, sidebar, darkMode } = usePost()
     return (
-        <div className="sticky bottom-0 px-4 pb-4 z-[99999999] block lg:hidden">
+        <div className="sticky bottom-[57px] px-5 pb-4 z-[99999999] block lg:hidden">
             <div className="flex">
-                <button onClick={() => setOpen('menu')} className={`py-2 px-4 rounded-full ${menuButtonClasses}`}>
-                    <Bookmark />
-                    <span>Menu</span>
-                </button>
-                <div className="ml-auto flex justify-end divide-x divide-dashed divide-gray-accent-light">
-                    {tableOfContents && tableOfContents?.length > 0 && (
-                        <button
-                            onClick={() => setOpen('toc')}
-                            className={`aspect-square h-full flex items-center justify-center rounded-tl-full rounded-bl-full ${menuButtonClasses}`}
-                        >
-                            <TableOfContents />
+                <span className="bg-accent dark:bg-accent-dark">
+                    <button onClick={() => setOpen('menu')} className={`py-2 px-4 ${menuButtonClasses}`}>
+                        Chapters
+                    </button>
+                </span>
+
+                {tableOfContents && tableOfContents?.length > 0 && (
+                    <span className="bg-accent dark:bg-accent-dark ml-auto">
+                        <button onClick={() => setOpen('toc')} className={`py-2 px-4 ${menuButtonClasses}`}>
+                            On this page...
                         </button>
-                    )}
-                    {(filePath && title) || sidebar ? (
-                        <button
-                            onClick={() => setOpen('sidebar')}
-                            className={`aspect-square h-full flex items-center justify-center ${
-                                tableOfContents?.length ? ' rounded-tr-full rounded-br-full' : 'rounded-full'
-                            }  ${menuButtonClasses}`}
-                        >
-                            <InfoOutlined />
-                        </button>
-                    ) : (
-                        darkMode && (
-                            <div className={`py-2 px-4 rounded-full ${menuButtonClasses}`}>
-                                <DarkModeToggle />
-                            </div>
-                        )
-                    )}
-                </div>
+                    </span>
+                )}
             </div>
             <AnimatePresence>
                 {open === 'menu' && <MobileMenu setOpen={setOpen} />}

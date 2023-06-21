@@ -10,6 +10,7 @@ import './Layout.scss'
 import './SkeletonLoading.css'
 import './DarkMode.scss'
 import { LayoutProvider } from './context'
+import { Mobile as MobileNav } from 'components/MainNav'
 
 const Layout = ({
     children,
@@ -36,6 +37,7 @@ const Layout = ({
                     <main>{children}</main>
                     <Footer />
                     <CookieBanner />
+                    <MobileNav />
                 </div>
             </LayoutProvider>
         </SearchProvider>
