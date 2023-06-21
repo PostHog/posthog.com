@@ -160,7 +160,6 @@ export default function Job({
                                                     location: `The benchmark for each role we are hiring for is based on the market rate in San Francisco.`,
                                                     level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
                                                 }}
-                                                hideFormula
                                                 hideRole
                                                 initialJob={salaryRole}
                                             />
