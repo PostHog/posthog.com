@@ -300,17 +300,17 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 export function Footer(): JSX.Element {
     const social: Social[] = [
         {
-            Icon: <SlackMonochrome className="w-8 h-8 box-border fill-current" />,
+            Icon: <SlackMonochrome className="w-6 h-6 box-border fill-current" />,
             url: '/slack',
         },
         {
-            Icon: <Twitter className="w-8 h-8 box-border fill-current" />,
+            Icon: <Twitter className="w-6 h-6 box-border fill-current" />,
             url: 'https://twitter.com/posthog',
         },
         {
             Icon: (
                 <span className="fill-current">
-                    <LinkedIn className="w-8 h-8 box-border" />
+                    <LinkedIn className="w-6 h-6 box-border" />
                 </span>
             ),
             url: 'https://www.linkedin.com/company/posthog',
@@ -318,7 +318,7 @@ export function Footer(): JSX.Element {
         {
             Icon: (
                 <span className="fill-current">
-                    <YouTube className="w-8 h-8 box-border" />
+                    <YouTube className="w-6 h-6 box-border" />
                 </span>
             ),
             url: 'https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA',
@@ -326,7 +326,7 @@ export function Footer(): JSX.Element {
         {
             Icon: (
                 <span className="fill-current">
-                    <GitHub className="w-8 h-8 box-border" />
+                    <GitHub className="w-6 h-6 box-border" />
                 </span>
             ),
             url: 'https://github.com/PostHog',
@@ -334,7 +334,7 @@ export function Footer(): JSX.Element {
     ]
 
     return (
-        <footer className="">
+        <footer className="bg-accent dark:bg-accent-dark">
             <div className="relative -top-6">
                 <Link
                     to="/"
@@ -352,14 +352,14 @@ export function Footer(): JSX.Element {
                 ))}
             </div>
 
-            <div className="flex lg:border-t border-gray-accent-light dark:border-gray-accent-dark border-dashed justify-center">
+            <div className="flex justify-center">
                 <ul className="list-none px-0 py-2 flex space-x-4">
                     {social.map(({ Icon, url }: Social) => {
                         return (
                             <li key={url}>
                                 <Link
                                     to={url}
-                                    className="rounded p-2 inline-flex opacity-70 hover:opacity-90 relative hover:scale-[1.01] active:top-[1px] active:scale-[.99] transition-all"
+                                    className="flex items-center relative px-2.5 pt-2 pb-1.5 mb-1 rounded border border-b-3 border-transparent opacity-70 hover:opacity-100 hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                                 >
                                     {Icon}
                                 </Link>
