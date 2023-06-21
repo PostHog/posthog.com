@@ -1,6 +1,6 @@
 ---
 title: "Startup Spotlight: Unified.to"
-date: 2023-06-19
+date: 2023-06-21
 author: ["joe-martin"]
 showTitle: true
 rootpage: /blog
