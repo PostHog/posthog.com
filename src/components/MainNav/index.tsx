@@ -1,5 +1,4 @@
 import Logo from 'components/Logo'
-import { graphql, useStaticQuery } from 'gatsby'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import Link from 'components/Link'
@@ -16,6 +15,8 @@ import { useLocation } from '@reach/router'
 import Toggle from 'components/Toggle'
 import usePostHog from 'hooks/usePostHog'
 import * as icons from 'components/NewIcons'
+import { Menu } from '@headlessui/react'
+import { Chevron } from 'components/Icons'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -241,47 +242,81 @@ export default function MainNav() {
                 </div>
             </div>
             {internalMenu?.length > 0 && (
-                <ul className="flex justify-center space-x-4 list-none m-0 pt-1 px-4 mb-8 border-b border-light dark:border-dark relative">
-                    {internalMenu.map(({ name, url, icon, color }) => {
-                        const Icon = icons[icon]
-                        const active = activeInternalMenu?.name === name
-                        return (
-                            <li key={name}>
-                                <Link
-                                    to={url}
-                                    className={`group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded ${
-                                        active
-                                            ? ''
-                                            : 'border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
-                                    }`}
-                                >
-                                    <span className={`w-6 h-6 mr-2 text-${color}`}>
-                                        <Icon />
-                                    </span>
-                                    <span
-                                        className={`text-sm whitespace-nowrap ${
+                <>
+                    <ul className="hidden lg:flex justify-center space-x-4 list-none m-0 pt-1 px-4 mb-8 border-b border-light dark:border-dark relative">
+                        {internalMenu.map(({ name, url, icon, color }) => {
+                            const Icon = icons[icon]
+                            const active = activeInternalMenu?.name === name
+                            return (
+                                <li key={name}>
+                                    <Link
+                                        to={url}
+                                        className={`group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded ${
                                             active
-                                                ? 'font-bold opacity-100'
-                                                : 'font-semibold opacity-60 group-hover:opacity-100'
+                                                ? ''
+                                                : 'border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                                         }`}
                                     >
-                                        {name}
-                                    </span>
-
-                                    {active ? (
+                                        <span className={`w-6 h-6 mr-2 text-${color}`}>
+                                            <Icon />
+                                        </span>
                                         <span
-                                            className={`absolute bottom-[calc(-.5rem_-_1px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors border-${color}`}
-                                        />
-                                    ) : (
+                                            className={`text-sm whitespace-nowrap ${
+                                                active
+                                                    ? 'font-bold opacity-100'
+                                                    : 'font-semibold opacity-60 group-hover:opacity-100'
+                                            }`}
+                                        >
+                                            {name}
+                                        </span>
                                         <span
-                                            className={`absolute bottom-[calc(-.5rem_-_1px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors border-transparent`}
+                                            className={`absolute bottom-[calc(-.5rem_-_1px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
+                                                active ? `border-${color}` : `border-transparent`
+                                            }`}
                                         />
-                                    )}
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    <div className="lg:hidden relative">
+                        <Menu>
+                            <Menu.Button className="font-bold px-5 py-4 flex w-full items-center justify-between border-b border-border dark:border-border-dark">
+                                <span>{activeInternalMenu?.name}</span>
+                                <Chevron className="w-4" />
+                            </Menu.Button>
+                            <Menu.Items
+                                className="w-full list-none m-0 shadow-lg rounded-md px-5 py-4 dark:bg-accent-dark bg-accent absolute grid space-y-4"
+                                as="ul"
+                            >
+                                {internalMenu.map(({ name, url, icon, color }) => (
+                                    <Menu.Item key={url}>
+                                        {() => {
+                                            const Icon = icons[icon]
+                                            const active = activeInternalMenu?.name === name
+                                            return (
+                                                <Link className="flex items-center" to={url}>
+                                                    <span className={`w-6 h-6 mr-2 text-${color} inline-block`}>
+                                                        <Icon />
+                                                    </span>
+                                                    <span
+                                                        className={`text-sm whitespace-nowrap ${
+                                                            active
+                                                                ? 'font-bold opacity-100'
+                                                                : 'font-semibold opacity-60 group-hover:opacity-100'
+                                                        }`}
+                                                    >
+                                                        {name}
+                                                    </span>
+                                                </Link>
+                                            )
+                                        }}
+                                    </Menu.Item>
+                                ))}
+                            </Menu.Items>
+                        </Menu>
+                    </div>
+                </>
             )}
         </div>
     )
