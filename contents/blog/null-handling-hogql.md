@@ -13,14 +13,14 @@ category: Engineering
 
 The value (or non-value) null can be the bane of a programmer’s existence. Null can work as expected in one language and context, then act in completely unexpected ways in another language or context.
 
-We had challenges with null during the [release of HogQL](/blog/introducing-hogql), which added direct SQL access to your data. Our engineers Marius and Michael realized null values for properties were leading to inaccurate results and customer confusion. This post covers their efforts to figure out and implement a solution for this.
+We had challenges working with null during the [release of HogQL](/blog/introducing-hogql), which added direct SQL access to your data. Our engineers Marius and Michael realized null values for properties were leading to inaccurate results and customer confusion. This post covers their efforts to figure out and implement a solution for this.
 
 ## The problem with null in HogQL
 
-The issue with null in HogQL was that [ClickHouse](/docs/how-posthog-works/clickhouse), the database we use to store and process data, is strict about nulls. If any value in an expression is null, then [the entire expression is null](https://clickhouse.com/docs/en/sql-reference/functions#null-processing). Here are two HogQL expressions showcasing why this is a problem:
+The issue with null in HogQL was that [ClickHouse](/docs/how-posthog-works/clickhouse), the database we use to store and process data, is **strict** about nulls. If any value in an expression is null, then [the entire expression is null](https://clickhouse.com/docs/en/sql-reference/functions#null-processing). Here are two HogQL expressions showcasing why this is a problem:
 
-1. `sumIf(properties.money, event = 'no problems') + sumIf(properties.money - 10, event = 'some problems')` returns null if either of the sides of the equation is null. This  happens if there are no matching events (named `no problems` or `some problems`) or the property (`money`) is null.
-2. `concat('money: ', properties.money)` returns null if there's no `money` property, though users might expect either `'money: '`  or `'money: null'`
+1. `sumIf(properties.money, event = 'no problems') + sumIf(properties.money - 10, event = 'some problems')` returns null if either of the sides of the equation is null. This happens if there are no matching events (named `no problems` or `some problems`) or the property (`money`) is null.
+2. `concat('money: ', properties.money)` returns null if the `money` property does not exist, though users might expect either `'money: '`  or `'money: null'`
 
 PostHog’s existing solutions for handling null did not work with the full access HogQL provides. Specifically:
 
@@ -43,7 +43,7 @@ This is not a good user experience as it is non-obvious they must do this and le
 
 ## Brainstorming potential solutions
 
-To solve the issue with nulls, Marius and Michael came up with a few potential solutions, but each had pitfalls.
+To solve the issue with nulls, Marius and Michael came up with a few potential solutions, but each had pitfalls:
 
 1. **Returning a default value depending on type.** For example, returning `""` for strings, `0` for numbers, or `false` for booleans. This didn’t handle the expression `properties.bla is null` and required rewriting `is set` and `is not set` logic. Defaulting to `0` also might mess up aggregation when you expect null fields to be discarded.
 
