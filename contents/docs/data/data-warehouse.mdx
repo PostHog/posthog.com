@@ -47,7 +47,7 @@ Next, we need to create a new user in our AWS console with programmatic access t
 4. Under "Actions," select:
     1. "Write" -> "PutObject"
     2. "Permission Management" -> "PutObjectAcl"
-5. Under "Resources" select "Specific" and click "object" -> "Add ARN"
+5. Under "Resources," select "Specific," and click "object" -> "Add ARN"
 6. Specify your bucket name and choose "any" for the object name. In the example below, replace `posthog-s3-export` with the bucket name you chose in the previous section
 
 ![bucket arn config](../../images/docs/apps/s3-export/bucket-arn.png)
@@ -59,7 +59,7 @@ Next, we need to create a new user in our AWS console with programmatic access t
 6. Click "Next" until you end up on the "Review Policy" page
 7. Give your policy a name and click "Create policy"
 
-The final step is now to create a new user and give them access to our Bucket by attaching our newly created Policy.
+The final step to create a new user and give them access to our bucket by attaching our newly created policy.
 
 1. Open [IAM](https://console.aws.amazon.com/iam/home) and navigate to "Users" on the left
 2. Click "Add Users"
@@ -84,7 +84,7 @@ The final step is now to create a new user and give them access to our Bucket by
 
 1. Go to [Airbyte](https://airbyte.com) and sign up for an account if you haven't already.
 2. Go to connections and click "New connection"
-3. Select a source. For this example we'll be grabbing data from **Stripe**, but you can use any of Airbyte's sources.
+3. Select a source. For this example, we'll grab data from **Stripe**, but you can use any of Airbyte's sources.
 4. Click "Set up a new destination"
 5. Select "S3" as the destination
 6. Fill in the "S3 Bucket Name", "S3 Bucket Region" with the name and region you created earlier.
@@ -96,7 +96,7 @@ The final step is now to create a new user and give them access to our Bucket by
 
 ![creating the s3 destination](../../images/features/data-warehouse/airbyte-destination.png)
 
-### Step 4: Create the table
+### Step 4: Create the table in PostHog
 
 1. In PostHog, go to the "Data Warehouse" tab and click "New table"
 2. Fill in the table name.
@@ -110,7 +110,7 @@ The final step is now to create a new user and give them access to our Bucket by
 
 ### Step 5: Query the table.
 
-Amazing! You can now query your new table in any HogQL query.
+Amazing! You can now query your new table in any [HogQL query](/docs/product-analytics/hogql).
 
 ## Roadmap
 
