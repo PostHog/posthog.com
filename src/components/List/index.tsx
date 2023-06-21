@@ -18,29 +18,31 @@ export const ListItem = ({ label, image, url, badge, icon, iconColor, descriptio
         <li>
             <Link
                 to={url}
-                className={`group flex items-center space-x-2 relative px-2 pt-1.5 pb-1 mb-1 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all !text-inherit hover:!text-inherit`}
+                className={`group flex justify-between items-center space-x-2 relative px-2 pt-1.5 pb-1 mb-1 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all !text-inherit hover:!text-inherit`}
             >
-                {image && <img className="icon w-12 h-12 p-2 rounded-sm" src={image} />}
-                {Icon && (
-                    <Icon
-                        className={`w-10 h-10 p-2 ${
-                            iconColor
-                                ? `text-${iconColor} bg-${iconColor} bg-opacity-20`
-                                : `bg-accent dark:bg-accent-dark`
-                        }  rounded-sm shrink-0`}
-                    />
-                )}
-
-                <span className="grid">
-                    <span className="overflow-hidden text-ellipsis whitespace-nowrap">{label}</span>
-                    {description && (
-                        <span className="text-sm font-normal opacity-60 overflow-hidden text-ellipsis whitespace-nowrap">
-                            {description}
-                        </span>
+                <span className="flex items-center space-x-2">
+                    {image && <img className="icon w-12 h-12 p-2 rounded-sm" src={image} />}
+                    {Icon && (
+                        <Icon
+                            className={`w-10 h-10 p-2 ${
+                                iconColor
+                                    ? `text-${iconColor} bg-${iconColor} bg-opacity-20`
+                                    : `bg-accent dark:bg-accent-dark`
+                            }  rounded-sm shrink-0`}
+                        />
                     )}
+
+                    <span className="grid">
+                        <span className="overflow-hidden text-ellipsis whitespace-nowrap">{label}</span>
+                        {description && (
+                            <span className="text-sm font-normal opacity-60 overflow-hidden text-ellipsis whitespace-nowrap">
+                                {description}
+                            </span>
+                        )}
+                    </span>
                 </span>
                 {badge && (
-                    <span className="ml-auto inline-flex px-2 items-center text-[12px] uppercase text-opacity-50">
+                    <span className="inline-flex px-2 items-center text-[12px] uppercase text-primary/50 dark:text-primary-dark/50">
                         {badge}
                     </span>
                 )}
