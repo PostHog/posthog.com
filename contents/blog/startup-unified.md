@@ -41,7 +41,7 @@ I'm also an API nerd — and this industry is all about APIs. The engineers that
 ### On the other hand, what are you most worried about?
 “Well, I’m _not_ worried about AI! My last startup started off as an AI chatbot eight years ago, in the last hype cycle of AI chat. I saw people asking me when the AI robots were going to kill us and all that, and that was eight years ago. We're getting the exact same thing now. AI now is a thousand times more powerful, but it’s still not general AI.
 
-What I _do_ worry about is funding. We're going through a really weird and unique cycle in tech funding right now, of the type not seen since the dot com crash in the 2000s. Smart investors are putting money elsewhere, thanks to Covid, so that's causing a ripple effect throughout the entire market.
+What I _do_ worry about is funding. We're going through a really weird and unique cycle in tech funding right now, of the type not seen since the dot com crash in the 2000s. Smart investors are putting money elsewhere, thanks to high interest rates, so that's causing a ripple effect throughout the entire market.
 
 How long are we going to stay in this weird funding cycle? I'm hoping it is over by the end of this year. I don't think it's going to go back to the way it used to be, but I hope it improves.”
 
