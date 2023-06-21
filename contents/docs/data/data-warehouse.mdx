@@ -100,7 +100,7 @@ The final step is now to create a new user and give them access to our Bucket by
 
 1. In PostHog, go to the "Data Warehouse" tab and click "New table"
 2. Fill in the table name.
-3. For the URL pattern, copy the URL from s3, up to the bucket name. Replace the file name with `*`, as Airbyte will split larges streams out into multiple files.
+3. For the URL pattern, copy the URL from S3, up to the bucket name. Replace the file name with `*`, as Airbyte will split larges streams out into multiple files.
   - For example: `https://your-bucket.s3.amazonaws.com/airbyte/invoices/*`
 4. For file format, select Parquet. Fill in the access key and secret key.
 
