@@ -5,7 +5,6 @@ import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import { defaultMenuWidth } from './context'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import TableOfContents from './TableOfContents'
-import Breadcrumb from './Breadcrumb'
 import ShareLinks from './ShareLinks'
 import Survey from './Survey'
 import NextPost from './NextPost'
@@ -25,7 +24,6 @@ export default function Post({ children }: { children: React.ReactNode }) {
         questions,
         menu,
         title,
-        breadcrumb,
         hideSidebar,
         nextPost,
         hideSurvey,
@@ -34,6 +32,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
         contentContainerClasses,
         stickySidebar,
         searchFilter,
+        fullWidthContent,
     } = usePost()
 
     const handleArticleTransitionEnd = (e) => {
@@ -46,13 +45,15 @@ export default function Post({ children }: { children: React.ReactNode }) {
     return (
         <div className="">
             <div
-                style={{
-                    gridAutoColumns: menu ? `${menuWidth?.left ?? defaultMenuWidth?.left}px 1fr` : `1fr 1fr`,
-                }}
-                className="w-full relative lg:grid lg:grid-flow-col"
+                className={`w-full relative lg:flex justify-between mx-auto ${
+                    fullWidthContent ? '' : 'max-w-screen-2xl'
+                }`}
             >
                 {menu && (
-                    <div className="h-full lg:block hidden relative z-20">
+                    <div
+                        style={{ maxWidth: menuWidth?.left ?? defaultMenuWidth.left }}
+                        className="w-full flex-shrink-0 lg:block hidden relative z-20"
+                    >
                         <aside
                             className={`lg:sticky top-[108px] flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10 ${
                                 hideSearch ? 'pt-5' : ''
@@ -67,89 +68,58 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         </aside>
                     </div>
                 )}
-                <div className="flex flex-col">
-                    {breadcrumb && breadcrumb?.length > 0 && (
-                        <section
-                            style={{
-                                gridAutoColumns: menu
-                                    ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
-                                    : `minmax(auto, ${contentWidth}px) minmax(max-content, 1fr)`,
-                            }}
-                            className={'pt-4 sm:pb-4 pb-0 lg:grid lg:grid-flow-col items-center'}
-                        >
-                            <div className={`${contentContainerClasses} grid-cols-1`}>
-                                <Breadcrumb />
-                            </div>
-
-                            {!hideSidebar && (
-                                <div className="ml-auto px-6 lg:mt-0 mt-4 lg:block hidden">
-                                    <ShareLinks />
-                                </div>
-                            )}
-                        </section>
-                    )}
-
-                    <div
-                        className="lg:grid lg:grid-flow-col items-start flex-grow"
-                        style={{
-                            gridAutoColumns: menu
-                                ? `1fr ${menuWidth?.right ?? defaultMenuWidth?.right}px`
-                                : `minmax(auto, ${
-                                      typeof contentWidth === 'number' ? contentWidth + 'px' : contentWidth
-                                  }) minmax(max-content, ${menuWidth?.right}px)`,
-                        }}
-                    >
-                        <article
-                            key={`${title}-article`}
-                            id="content-menu-wrapper"
-                            className="lg:py-6 py-4 ml-auto w-full h-full box-border"
-                        >
-                            <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
-                                <div>{children}</div>
-                                {questions}
-                            </div>
-                            {!hideSurvey && <Survey />}
-                            {nextPost && <NextPost />}
-                            {menu && mobileMenu && <MobileNav />}
-                        </article>
-                        {!hideSidebar && sidebar && (
-                            <aside
-                                key={`${title}-sidebar`}
-                                className="flex-shrink-0 w-full justify-self-end my-10 lg:my-0 mr-auto h-full lg:px-0 px-4 box-border lg:flex hidden flex-col"
-                            >
-                                <div className={`${stickySidebar ? 'sticky top-[108px]' : ''} z-10`}>{sidebar}</div>
-                                <div className="flex flex-grow items-end">
-                                    <div className="sticky bottom-0 w-full">
-                                        {tableOfContents && tableOfContents?.length > 0 && (
-                                            <div className="px-4 lg:px-8 lg:pb-4 lg:block hidden">
-                                                <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
-                                                    Jump to:
-                                                </h4>
-                                                <Scrollspy
-                                                    offset={-50}
-                                                    className="list-none m-0 p-0 flex flex-col"
-                                                    items={tableOfContents?.map((navItem) => navItem.url)}
-                                                    currentClassName="active-product"
-                                                >
-                                                    {tableOfContents.map((navItem, index) => (
-                                                        <li className="relative leading-none m-0" key={navItem.url}>
-                                                            <InternalSidebarLink
-                                                                url={navItem.url}
-                                                                name={navItem.value}
-                                                                depth={navItem.depth}
-                                                                className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
-                                                            />
-                                                        </li>
-                                                    ))}
-                                                </Scrollspy>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </aside>
-                        )}
+                <article
+                    key={`${title}-article`}
+                    id="content-menu-wrapper"
+                    className={`lg:py-6 py-4 box-border w-full flex-shrink mx-auto transition-all ${
+                        !fullWidthContent && sidebar && !hideSidebar ? ' max-w-3xl' : 'max-w-screen-2xl'
+                    }`}
+                >
+                    <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
+                        <div>{children}</div>
+                        {questions}
                     </div>
-                </div>
+                    {!hideSurvey && <Survey />}
+                    {nextPost && <NextPost />}
+                    {menu && mobileMenu && <MobileNav />}
+                </article>
+                {!hideSidebar && sidebar && (
+                    <aside
+                        key={`${title}-sidebar`}
+                        style={{ maxWidth: menuWidth?.right ?? defaultMenuWidth.right }}
+                        className="flex-shrink-0 pt-4 w-full justify-self-end my-10 lg:my-0 h-full lg:px-0 px-4 box-border lg:flex hidden flex-col sticky top-[108px]"
+                    >
+                        <div className={`${stickySidebar ? 'sticky top-[108px]' : ''} z-10`}>{sidebar}</div>
+                        <div className="flex flex-grow items-end">
+                            <div className="sticky bottom-0 w-full">
+                                {tableOfContents && tableOfContents?.length > 0 && (
+                                    <div className="px-4 lg:px-8 lg:pb-4 lg:block hidden">
+                                        <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
+                                            Jump to:
+                                        </h4>
+                                        <Scrollspy
+                                            offset={-50}
+                                            className="list-none m-0 p-0 flex flex-col"
+                                            items={tableOfContents?.map((navItem) => navItem.url)}
+                                            currentClassName="active-product"
+                                        >
+                                            {tableOfContents.map((navItem, index) => (
+                                                <li className="relative leading-none m-0" key={navItem.url}>
+                                                    <InternalSidebarLink
+                                                        url={navItem.url}
+                                                        name={navItem.value}
+                                                        depth={navItem.depth}
+                                                        className="hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+                                                    />
+                                                </li>
+                                            ))}
+                                        </Scrollspy>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </aside>
+                )}
             </div>
         </div>
     )

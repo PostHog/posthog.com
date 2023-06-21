@@ -26,6 +26,7 @@ import blog from 'sidebars/blog.json'
 import slugify from 'slugify'
 import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
+import { companyMenu } from '../navs'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -143,7 +144,7 @@ export default function BlogPost({ data, pageContext, location }) {
     const { tableOfContents } = pageContext
 
     return (
-        <Layout>
+        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[1]}>
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}

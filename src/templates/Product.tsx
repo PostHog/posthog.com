@@ -268,6 +268,7 @@ export default function Product({ data, location, pageContext }) {
             />
 
             <PostLayout
+                fullWidthContent
                 menu={menu}
                 menuWidth={{ left: 180 }}
                 title={title}

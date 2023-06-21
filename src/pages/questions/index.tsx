@@ -58,8 +58,8 @@ export default function Questions() {
 
     return (
         <CommunityLayout title="Questions">
-            <div className="max-w-6xl mx-auto space-y-8 pb-12">
-                <section className="max-w-6xl mx-auto">
+            <div className="space-y-8 pb-12">
+                <section>
                     <div className="w-full sm:flex items-center mb-8">
                         <h1 className="text-4xl m-0">Community questions</h1>
                         <div className="ml-auto sm:mt-0 mt-4">

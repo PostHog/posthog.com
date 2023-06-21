@@ -235,6 +235,7 @@ export default function Edition() {
                         contentContainerClassName="w-full"
                         hideSurvey
                         stickySidebar
+                        fullWidthContent
                     >
                         <div className="lg:-mt-8">
                             <ContentViewer scrollToTop={false} content={content} />

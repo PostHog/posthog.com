@@ -134,6 +134,7 @@ export default function Roadmap() {
                     menu={nav}
                     darkMode={false}
                     contentContainerClassName="lg:-mb-12 -mb-8"
+                    fullWidthContent
                 >
                     <div className="relative">
                         <h1 className="font-bold text-5xl mx-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
