@@ -122,6 +122,8 @@ module.exports = {
                 ],
             },
             fontSize: {
+                '4xl': '1.875rem',
+                '3xl': '1.5rem',
                 '6xl': '3.5rem',
             },
             colors: {

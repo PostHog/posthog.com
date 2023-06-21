@@ -170,8 +170,8 @@ export const CodeBlock = ({
     }
 
     return (
-        <div className="relative mt-2 mb-4">
-            <div className="bg-black/90 text-gray px-3 py-1.5 text-sm flex items-center w-full rounded-t">
+        <div className="relative mt-2 mb-4 border border-light dark:border-dark rounded">
+            <div className="bg-accent dark:bg-accent-dark text-primary/50 dark:text-primary-dark/50 px-3 py-1.5 text-sm flex items-center w-full rounded-t">
                 {selector === 'tabs' && languages.length > 1 ? (
                     <Tab.Group onChange={(index) => onChange?.(languages[index])}>
                         <Tab.List className="flex items-center space-x-5">
@@ -294,7 +294,7 @@ export const CodeBlock = ({
                 theme={theme}
             >
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <pre className="w-full m-0 p-0 rounded-t-none rounded-b" style={{ ...style }}>
+                    <pre className="w-full m-0 p-0 rounded-t-none rounded-b bg-accent dark:bg-accent-dark border-t border-light dark:border-dark">
                         <div className="flex" id={codeBlockId}>
                             {showLineNumbers && (
                                 <pre className="m-0 py-4 pl-4 pr-2 inline-block">

@@ -8,9 +8,6 @@ const handbookSidebar = [
         url: '',
         children: [
             {
-                name: 'Gewtting started',
-            },
-            {
                 name: 'Start here',
                 url: '/handbook/getting-started/start-here',
             },
@@ -151,7 +148,7 @@ const handbookSidebar = [
                 url: '/handbook/small-teams/marketing',
             },
             {
-                name: 'People & Ops',
+                name: 'People & ops',
                 url: '/handbook/small-teams/people',
             },
             {
@@ -173,7 +170,7 @@ const handbookSidebar = [
         ],
     },
     {
-        name: 'People & Ops',
+        name: 'People & ops',
         url: '',
         children: [
             {
@@ -545,7 +542,7 @@ const handbookSidebar = [
         ],
     },
     {
-        name: 'Marketing & Content',
+        name: 'Marketing & content',
         url: '',
         children: [
             {
@@ -780,21 +777,16 @@ export const companyMenu = {
 
 export const docsMenu = {
     name: 'Docs',
-    url: '/docs',
+    url: '/docs/getting-started/install',
     children: [
         {
             name: 'Getting started',
             icon: 'Flag',
             color: 'teal',
-            url: '/docs/getting-started/start-here',
+            url: '/docs/getting-started/install',
             children: [
                 {
-                    name: 'Overview',
-                    url: '/docs',
-                },
-                {
-                    name: 'Start here',
-                    url: '/docs/getting-started/start-here',
+                    name: 'Getting started',
                 },
                 {
                     name: 'Install PostHog',
@@ -907,7 +899,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Integrations',
+                    name: 'Framework guides',
                     url: '',
                     children: [
                         {
@@ -1743,7 +1735,7 @@ export const docsMenu = {
                     name: 'Customer data platform',
                 },
                 {
-                    name: 'CDP overview',
+                    name: 'CDP',
                     url: '/docs/cdp',
                     badge: {
                         title: 'Preview',

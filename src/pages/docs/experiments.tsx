@@ -12,6 +12,12 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 export const quickLinks = [
     {
+        icon: 'GraduationCap',
+        name: 'Start here',
+        to: '/docs/experiments/hey',
+        color: 'red',
+    },
+    {
         name: 'Product manual',
         to: '/docs/experiments/manual',
         description: 'How to run A/B tests with PostHog.',

@@ -101,7 +101,10 @@ const Integrations: React.FC<IntegrationsProps> = () => {
                 <hr />
 
                 <p>
-                    Interested in building an integration? <Link to="/docs/apps/build">Learn more</Link>
+                    Interested in writing a framework guide?{' '}
+                    <Link to="https://github.com/posthog/posthog.com" external>
+                        Submit a PR to our website repo on GitHub.
+                    </Link>
                 </p>
             </PostLayout>
         </Layout>

@@ -12,6 +12,12 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 export const quickLinks = [
     {
+        icon: 'GraduationCap',
+        name: 'Start here',
+        to: '/docs/session-replay/hey',
+        color: 'red',
+    },
+    {
         name: 'Product manual',
         to: '/docs/session-replay/manual',
         description: 'How to use session replay.',

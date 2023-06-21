@@ -71,7 +71,7 @@ h6 {
 }
 
 h1 {
-    @apply text-5xl font-bold !leading-none;
+    @apply text-4xl font-bold !leading-none;
     letter-spacing: -0.03em;
 }
 
@@ -93,7 +93,7 @@ h3 {
 }
 
 h4 {
-    @apply text-xl leading-normal mb-3;
+    @apply text-base leading-normal mb-3;
 
     code {
         @apply !font-bold !text-xl;
@@ -169,7 +169,7 @@ h4 {
         & + h2,
         & + h3,
         & + h4 {
-            @apply mt-4;
+            @apply mt-8;
         }
     }
 
@@ -181,9 +181,19 @@ h4 {
         ol {
             @apply mb-2;
         }
+
+        & + h2,
+        & + h3,
+        & + h4 {
+            @apply mt-8;
+        }
     }
     blockquote:not(.quote) {
-        @apply p-6 rounded bg-gray-accent-light dark:bg-gray-accent-dark mb-4;
+        @apply px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-4;
+
+        p {
+            @apply !text-[15px];
+        }
     }
 
     iframe {
@@ -191,12 +201,27 @@ h4 {
     }
 
     thead {
+        @apply rounded-sm bg-accent dark:bg-accent-dark;
         text-align: left;
+
+        th {
+            @apply opacity-75 text-sm;
+        }
+    }
+    tr:not(:first-child) {
+        td,
+        th {
+            @apply border-t border-light dark:border-dark;
+        }
     }
     td,
     th {
-        @apply pt-2;
+        @apply pt-2 text-[15px];
         padding-bottom: calc(0.5rem - 1px);
+
+        &:first-child {
+            @apply pl-2;
+        }
 
         &:not(:first-child) {
             @apply px-4;
@@ -1082,18 +1107,18 @@ iframe[src*='youtube-nocookie.com'] {
             @apply hidden;
         }
     }
-    h2 {
+    h1 {
         @apply text-2xl;
     }
-    h3 {
+    h2 {
         @apply text-xl;
+    }
+    h3 {
+        @apply text-lg;
     }
     h4,
     h5 {
-        @apply text-lg;
-    }
-    h1 {
-        @apply text-4xl;
+        @apply text-base;
     }
     p {
         @apply !min-h-0 mb-4;

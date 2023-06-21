@@ -12,6 +12,12 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 export const quickLinks = [
     {
+        icon: 'GraduationCap',
+        name: 'Start here',
+        to: '/docs/product-analytics/hey',
+        color: 'red',
+    },
+    {
         icon: 'Trends',
         name: 'Graphs & trends',
         to: '/docs/product-analytics/trends',
@@ -144,7 +150,7 @@ export default ProductAnalytics
 export const query = graphql`
     query ProductAnalytics {
         tutorials: allMdx(
-            limit: 6
+            limit: 20
             sort: { order: DESC, fields: [frontmatter___date] }
             filter: {
                 frontmatter: {

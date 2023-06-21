@@ -12,6 +12,12 @@ import { GettingStarted } from 'components/Docs/GettingStarted'
 
 export const quickLinks = [
     {
+        icon: 'GraduationCap',
+        name: 'Start here',
+        to: '/docs/feature-flags/hey',
+        color: 'red',
+    },
+    {
         name: 'Product manual',
         to: '/docs/feature-flags/manual',
         description: 'Learn how to use feature flags.',
