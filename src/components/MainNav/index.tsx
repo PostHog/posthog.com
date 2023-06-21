@@ -15,9 +15,11 @@ import { useLocation } from '@reach/router'
 import Toggle from 'components/Toggle'
 import usePostHog from 'hooks/usePostHog'
 import * as icons from 'components/NewIcons'
+
 import { Menu } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { motion } from 'framer-motion'
+import HoverTooltip from 'components/Tooltip'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -202,6 +204,9 @@ const InternalMenuMobile = () => {
     )
 }
 
+const keyboardShortcut =
+    'box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs'
+
 export const Main = () => {
     const { open } = useSearch()
     const { menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
@@ -259,13 +264,21 @@ export const Main = () => {
                         <CallToAction size="sm" type="outline" className="mr-2 " childClassName="">
                             Get started
                         </CallToAction>
-
-                        <button
-                            className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded"
-                            onClick={() => open('header')}
+                        <HoverTooltip
+                            content={() => (
+                                <div className="text-xs">
+                                    Open with <kbd className={`${keyboardShortcut} py-0`}>/</kbd>
+                                </div>
+                            )}
                         >
-                            <Search className="opacity-50 inline-block w-6 group-hover:opacity-75" />
-                        </button>
+                            <button
+                                className="group my-1mr-[1px] p-2 hover:bg-border dark:hover:bg-border-dark rounded"
+                                onClick={() => open('header')}
+                            >
+                                <Search className="opacity-50 inline-block w-6 group-hover:opacity-75" />
+                            </button>
+                        </HoverTooltip>
+
                         <Tooltip
                             placement="bottom-end"
                             className="group/parent relative text-primary dark:text-primary-dark"
