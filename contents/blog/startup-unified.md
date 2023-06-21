@@ -43,7 +43,7 @@ I'm also an API nerd — and this industry is all about APIs. The engineers that
 
 What I _do_ worry about is funding. We're going through a really weird and unique cycle in tech funding right now, of the type not seen since the dot com crash in the 2000s. Smart investors are putting money elsewhere, thanks to high interest rates, so that's causing a ripple effect throughout the entire market.
 
-How long are we going to stay in this weird funding cycle? I'm hoping it is over by the end of this year. I don't think it's going to go back to the way it used to be, but I hope it improves.”
+How long are we going to stay in this weird funding cycle? I'm hoping it is over by the end of this year. I don't think it's going to go back to the way it used to be during the low-interest days of Covid stimulus funds, but I hope it improves.”
 
 ### Finally, as a serial entrepreneur, what advice would you give to other startups now?
 “I think a lot of tech entrepreneurs, like me, are very technical and one issue there is that we overbuild before we launch. You can launch anytime you want, but it doesn't matter if a tree falls in the forest if nobody's there. 
