@@ -19,7 +19,7 @@ As an all-in-one platform, PostHog replaces _a lot_ of legacy tools. PostHog is 
 2. Want to use feature flags for rolling out new features, kill switches, and feature gating
 3. Desire one, integrated tool over a complex stack of discrete solutions
 
-This guide is an overview of some popular alternatives to PostHog, and how they compare. Read our [in-depth comparisons](https://posthog.com/blog/tags/comparisons) for more.
+This guide is an overview of some popular alternatives to PostHog, how they compare, and [why people choose PostHog](#why-people-choose-posthog).
 
 > Note: _User reviews and comments are hand curated from G2.com_
 
@@ -690,3 +690,49 @@ Users consistently praise LogRocket's session replay tools, but other features a
 - "The metrics feature is promising, but not a substitute for traditional product analytics tools."
 
 **Read more:** [In-depth PostHog vs LogRocket comparison](/blog/posthog-vs-logrocket)
+
+## Why people choose PostHog
+
+Assembly AI [switched from Mixpanel to PostHog](https://posthog.com/customers/assemblyai) because Mixpanel's pricing caused them to throttle events. Using PostHog also meant they could combine analytics and A/B testing within a single plaform: 
+
+> "At the time I was doing A/B experimentation on a different platform, then analyzing the results in Mixpanel. When Mixpanel’s pricing ramped up we looked at other platforms, including things like Segment — but PostHog, which can do both experiments and analytics in one, was clearly the winner."
+
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/alberto.jpg"
+        size="md"
+        name="Alberto Santos"
+        title="Web & Brand Lead, AssemblyAI"
+        quote={`“PostHog helps us debug support issues, because we push errors to PostHog as events. It may not be exactly what PostHog was intended for, but it is really useful and shows how adaptable PostHog is.”`}
+    />
+</BorderWrapper>
+
+Contra chose PostHog to [replace a complex stack of separate tools](https://posthog.com/customers/contra), and eliminate data inconsistencies between them: 
+
+> “Originally we were using multiple platforms. That meant Mixpanel for analytics, LaunchDarkly for feature flags, Segment for front-end tracking and FullStory for replays. In isolation they could work well, but they were costly and complex.”
+
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/allison.jpg"
+        size="md"
+        name="Allison Nulty"
+        title="Head of Product, Contra "
+        quote={`“A huge competitive advantage has been the ability to talk directly with PostHog engineers over Slack. We share feedback, ask questions, and make requests and always see a quick response time and thoughtful suggestions. At Contra, we apply these same principles of collaborating with our community to build our product.”`}
+    />
+</BorderWrapper>
+
+Netdata chose PostHog because they [wanted a developer-centric tool](/customers/netdata)built for startups. It also allowed them to replace Smartlook, their previous session replay too:
+
+> "“It’s so much better than Smartlook, which we used to use, because you can tie it to every individual event and user. If someone in our community has a problem we can get their user ID, look at their events and see how they’re using the product."
+
+<BorderWrapper>
+    <Quote
+        imageSource="/images/customers/andrewmaguire.jpeg"
+        size="md"
+        name="Andy Maguire"
+        title="Analytics & Machine Learning Lead, Netdata"
+        quote={`“I just trust that, when PostHog does something, it will do it the right way because it's not just open source code, it's all developed in the open too. You'd never get that modern thinking with the likes of Mixpanel, or other more 'Old School' platforms.”`}
+    />
+</BorderWrapper>
+
+Still not sure? [Request a call from our customer success team](/book-a-demo).
