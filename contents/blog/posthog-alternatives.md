@@ -6,12 +6,20 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["andy-vandervell"]
-featuredImage: ../images/blog/prodhog.png
+featuredImage: .../images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
 category: General
 tags:
   - Comparisons
 ---
+
+As an all-in-one platform, PostHog replaces _a lot_ of legacy tools. PostHog is great if you:
+
+1. Need quantitative _and_ qualitative insights into user behavior
+2. Want to use feature flags for rolling out new features, kill switches, and feature gating
+3. Desire one, integrated tool over a complex stack of discrete solutions
+
+This guide is an overview of some popular alternatives to PostHog, and how they compare. Read our [in-depth comparisons](https://posthog.com/blog/tags/comparisons) for more.
 
 ## Amplitude
 
@@ -679,4 +687,4 @@ Users consistently praise LogRocket's session replay tools, but other features a
 
 - "The metrics feature is promising, but not a substitute for traditional product analytics tools."
 
-**Read more:** [In-depth PostHog vs LogRocket comparison](/blog/posthog-vs-logrocket)  
+**Read more:** [In-depth PostHog vs LogRocket comparison](/blog/posthog-vs-logrocket)
