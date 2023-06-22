@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["andy-vandervell"]
-featuredImage: .../images/blog/posthog-alternatives/posthog-alternatives.jpeg
+featuredImage: ../images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
 category: General
 tags:
