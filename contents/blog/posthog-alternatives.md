@@ -17,7 +17,7 @@ As an all-in-one platform, PostHog replaces _a lot_ of legacy tools. PostHog is 
 
 1. Need quantitative _and_ qualitative insights into user behavior
 2. Want to use feature flags for rolling out new features, kill switches, and feature gating
-3. Desire one, integrated tool over a complex stack of discrete solutions
+3. Desire one integrated tool over a complex stack of discrete solutions
 
 This guide is an overview of some popular alternatives to PostHog, how they compare, and [why people choose PostHog](#why-people-choose-posthog).
 
@@ -35,7 +35,6 @@ This guide is an overview of some popular alternatives to PostHog, how they comp
 > "We are a digital analytics platform. We help every business optimize the business value of digital product innovation. We’re the competitive edge to not only survive—but thrive—in the new era."
 
 ### Amplitude vs PostHog at a glance
-
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -130,12 +129,11 @@ This guide is an overview of some popular alternatives to PostHog, how they comp
 
 Users consistently praise Amplitude's range of visualizations:
 
-
 - "One of the features that I appreciate the most is the wide range of graphs and visualizations available. I can create insightful visualizations with just a few clicks."
 
 - "Amplitude is built in such a way it eases you into doing data analysis and making sense of the data. It allows for simple analysis to really advanced stuff."
 
-Users also praise its accessibility for non-technical users, such as marketing, and UX designers:
+Users also praise its accessibility for non-technical users, such as marketing and UX designers:
 
 - "Its user-friendly interface makes it an ideal tool for Marketing teams to navigate effortlessly."
 
@@ -219,7 +217,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
     	</tr>
     	<tr>
         	<td>SQL access</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>  
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>  
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center">Write your own queries and filters</td>
     	</tr>
@@ -391,10 +389,9 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 
 1. **Value and transparency:** FullStory offers no free plan and is notoriously pricey. PostHog offers a generous free plan (1 million events and 15k recordings per month), and all pricing is transparent. 
 
-2. **Heat maps and scroll maps:** PostHog supports click maps via the [PostHog Toolbar](/docs/product-analytics/toolbar), but FullStory goes further in offering cursor heatmaps, and scroll tracking, making it more useful for UX researchers.
+2. **Heat maps and scroll maps:** PostHog supports click maps via the [PostHog Toolbar](/docs/product-analytics/toolbar), but FullStory goes further to offer cursor heatmaps and scroll tracking, making it more useful for UX researchers.
 
 3. **Use cases:** FullStory is a session replay tool first – it's ideal for UX researchers and customer support. PostHog is useful for UX researchers and customer support too, but it's primarily designed for technical users (e.g. engineering and product teams) rather than support.
-
 
 ### What people like
 
@@ -476,7 +473,7 @@ While users like FullStory's session replay features, some find it falls short f
         	<td>A/B testing</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td> 
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center">CRO and test in production</td>
+        	<td className="text-center">Optimize and test in production</td>
     	</tr>
     	<tr>
         	<td>Group analytics</td>
@@ -576,7 +573,7 @@ Some users also complain about performance:
 	<thead>
     	<tr>
         	<td className="w-3/12"></td>
-        	<td className="w-3/12 text-center"><strong>Amplitude</strong></td>
+        	<td className="w-3/12 text-center"><strong>LogRocket</strong></td>
         	<td className="w-3/12 text-center"><strong>PostHog</strong></td>
         	<td className="w-3/12 text-center"></td>
     	</tr>
@@ -660,7 +657,6 @@ Some users also complain about performance:
 
 3. **Pricing & free tier:** LogRocket's free tier is limited to just 1,000 sessions per month and excludes numerous features, such as product analytics. In contrast, all PostHog users get 1 million events and 15k session recordings for free every month.
 
-
 ### What people like
 
 Users find LogRocket invaluable for debugging user problems:
@@ -721,7 +717,7 @@ Contra chose PostHog to [replace a complex stack of separate tools](https://post
     />
 </BorderWrapper>
 
-Netdata chose PostHog because they [wanted a developer-centric tool](/customers/netdata)built for startups. It also allowed them to replace Smartlook, their previous session replay too:
+Netdata chose PostHog because they [wanted a developer-centric tool](/customers/netdata) built for startups. It also enabled them to replace Smartlook, their previous session replay too:
 
 > "“It’s so much better than Smartlook, which we used to use, because you can tie it to every individual event and user. If someone in our community has a problem we can get their user ID, look at their events and see how they’re using the product."
 
