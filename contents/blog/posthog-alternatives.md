@@ -687,7 +687,7 @@ Users consistently praise LogRocket's session replay tools, but other features a
 
 ## Why people choose PostHog
 
-Assembly AI [switched from Mixpanel to PostHog](https://posthog.com/customers/assemblyai) because Mixpanel's pricing caused them to throttle events. Using PostHog also meant they could combine analytics and A/B testing within a single platform.
+**AssemblyAI** [switched from Mixpanel to PostHog](https://posthog.com/customers/assemblyai) because Mixpanel's pricing caused them to throttle events. Using PostHog also meant they could combine analytics and A/B testing within a single platform.
 
 <BorderWrapper>
     <Quote
@@ -699,7 +699,7 @@ Assembly AI [switched from Mixpanel to PostHog](https://posthog.com/customers/as
     />
 </BorderWrapper>
 
-Contra chose PostHog to [replace a complex stack of separate tools](https://posthog.com/customers/contra), including "Mixpanel for analytics, LaunchDarkly for feature flags, Segment for front-end tracking and FullStory for replays". Adopting PostHog eliminated numerous data inconsistencies.
+**Contra** chose PostHog to [replace a complex stack of separate tools](https://posthog.com/customers/contra), including "Mixpanel for analytics, LaunchDarkly for feature flags, Segment for front-end tracking and FullStory for replays". Adopting PostHog eliminated numerous data inconsistencies.
 
 <BorderWrapper>
     <Quote
@@ -711,7 +711,7 @@ Contra chose PostHog to [replace a complex stack of separate tools](https://post
     />
 </BorderWrapper>
 
-Netdata chose PostHog because they [wanted a developer-centric tool](/customers/netdata) built for startups. It also enabled them to replace Smartlook, their previous session replay too:
+**Netdata** chose PostHog because they [wanted a developer-centric tool](/customers/netdata) built for startups. It also enabled them to replace Smartlook, their previous session replay too:
 
 <BorderWrapper>
     <Quote
