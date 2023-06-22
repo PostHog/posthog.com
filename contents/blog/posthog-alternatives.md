@@ -553,8 +553,6 @@ Some users also complain about performance:
 
 - "Running large queries, especially exporting data for further anlaysis/customization can be very slow, even not load at times."
 
-<ArrayCTA />
-
 ## LogRocket
 
 - **Founded:** 2016
