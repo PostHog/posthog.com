@@ -650,7 +650,6 @@ Some users also complain about performance:
 
 3. **Pricing & free tier:** LogRocket's free tier is limited to just 1,000 sessions per month and excludes numerous features, such as product analytics. In contrast, all PostHog users get 1 million events and 15k session recordings for free every month.
 
-**Read more:** [In-depth PostHog vs LogRocket comparison](/blog/posthog-vs-logrocket)  
 
 ### What people like
 
@@ -680,4 +679,4 @@ Users consistently praise LogRocket's session replay tools, but other features a
 
 - "The metrics feature is promising, but not a substitute for traditional product analytics tools."
 
-<ArrayCTA /> 
+**Read more:** [In-depth PostHog vs LogRocket comparison](/blog/posthog-vs-logrocket)  
