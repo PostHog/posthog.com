@@ -1,6 +1,6 @@
 ---
 title: "The most popular PostHog alternatives, compared"
-date: 2023-05-25
+date: 2023-06-22
 rootPage: /blog
 sidebar: Blog
 showTitle: true
