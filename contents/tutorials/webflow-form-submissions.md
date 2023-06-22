@@ -27,7 +27,7 @@ Once the basic site is set up, go to the site settings, upgrade to at least the 
 </script>
 ```
 
-Paste this code into the head code section in Webflow and press save. Once you publish the  site, PostHog begins to autocapture events and is ready to capture form submissions.
+Paste this code into the head code section in Webflow and press save. Once you publish the site, PostHog begins to autocapture events and is ready to capture form submissions.
 
 ## Setting up our form submit capture
 
