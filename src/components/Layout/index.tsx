@@ -4,8 +4,6 @@ import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
 import usePostHog from '../../hooks/usePostHog'
 import { SearchProvider } from 'components/Search/SearchContext'
-import { UserProvider } from 'hooks/useUser'
-import { SWRConfig } from 'swr'
 
 import './Fonts.scss'
 import './Layout.scss'
@@ -17,7 +15,7 @@ const Layout = ({ children, className = '' }: { children: React.ReactNode; class
 
     useEffect(() => {
         if (window && posthog) {
-            posthog.people.set({ preferred_theme: (window as any).__theme })
+            posthog.setPersonProperties({ preferred_theme: (window as any).__theme })
         }
     }, [])
 

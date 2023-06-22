@@ -60,11 +60,12 @@ const submitDataToPostHog = () => {
     )
     // Capture an event with the rating
     posthog.capture('my_feature_reviewed', {
-        rating: surveyRating
-    })
-    // Set a property on the respondent based on the rating
-    posthog.people.set({
-        survey_rating: surveyRating
+        rating: surveyRating,
+
+        // (Optional) Set a property on the respondent based on the rating
+        $set: {
+            survey_rating: surveyRating
+        }
     })
 }
 ```
