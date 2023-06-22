@@ -247,7 +247,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 2. **Single tool vs all-in-one:** While it offers integrations with third-party A/B testing, feature flag, and session replay tools, Mixpanel doesn't offer much outside typical product analytics features like event tracking and visualization. PostHog integrates all these features into one platform.
 
-3. **Avoiding surprise bills:** PostHog allows you to set billing limits, so you can avoid surprise bills. Mixpanel charges you for any overage above your pre-paid events volume.
+3. **Dev tool integrations:** As a platform built to engineers, PostHog offer numerous integrations with popular dev tools, such as Sentry, GitHub, GitLab, and PagerDuty.
 
 ### What people like
 
