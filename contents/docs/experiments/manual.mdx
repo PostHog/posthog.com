@@ -1,5 +1,5 @@
 ---
-title: Experimentation
+title: A/B testing
 sidebar: Docs
 showTitle: true
 availability:
@@ -8,136 +8,314 @@ availability:
     enterprise: full
 ---
 
-Experimentation helps you test changes to your product. You can test hypotheses about which changes will lead to optimal results. You may have also heard it called A/B testing, or split testing. Examples:
+A/B testing enables you to test the impact of product changes and understand how they affect your users' behaviour. For example:
 
--   You want to test which copy or visual design has the highest conversion.
--   You want to test which flow leads to the highest number of purchases.
--   You want to test if certain deals & promotions do better with users in a specific country.
--   You want to test if showing your website copy in German does better than English in Austria.
--   You want to test if certain copy does better within a cohort of new users.
+- How changes to your onboarding flow affect your signup rate.
+- If different designs of your app's dashboard increase user engagement and retention.
+- The impact a free trial period versus money-back guarantee to determine which results in more customers.
 
-## Creating an experiment
+A/B tests are also referred to as "experiments", and this is how we refer to them in the PostHog app.
 
-Creating an experiment starts with a hypothesis you want to test. Let's use an example of whether a visual update to the sign up button will increase clicks for that button.
+## How to create an experiment in PostHog
 
-After clicking on "new experiment" in the Experiments page, we should see a form like this:
+To create a new experiment, go to the [experiments tab](https://app.posthog.com/experiments) in the PostHog app, and click on the "New experiment" button in the top right.
 
-![Create experiment](../../images/features/experiments/create-experiment.png)
+This presents you with a form where you can complete the details of your new experiment:
 
-#### 1. Experiment name, feature flag, and testing variants
+![How to create an experiment in PostHog](../../images/features/experiments/create-experiment.png)
 
-Let's start in the upper left corner by filling out a name, description, and feature flag for our experiment. Fill in a name for your feature flag - it will be created here by default, linked to the experiment rather than existing as its own entity.
+Here's a breakdown of each field in the form:
 
-![Name, feature flag, and variants](../../images/features/experiments/create-experiment-name-variants.png)
+### Feature flag key
 
-We can also include multivariants for our testing changes. For example, instead of running our experiment with just "control" and "test", we can test for the green visual button change or the orange one or our original control.
+Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In your code, you use this feature flag key to check which experiment variant the user has been assigned to. 
 
-#### 2. Participant selection and experiment goal/metric
+> **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you you're a different library for feature flags). For more info, read our docs on [implementing experiments without feature flags](// TODO add link here) 
 
-Next, we want to select our experiment's universe. Here, we've decided that for our sign up button experiment we want to test our hypothesis on users from Asia.
+### Experiment variants
 
-We also want to set our experiment's "goal" now for which metric we want to track. Since we're testing whether the number of sign up button clicks increase or not, we'll use the "Trend" goal to measure aggregate values
+By default, all experiments have a 'control' and 'test' variant. If you have more variants that you'd like to test, you can use this field to add more variants and run multivariant tests. Participants are automatically split equally between variants.
 
-![Participants and goal metric](../../images/features/experiments/create-experiment-participants-goals.png)
+### Participant type
 
-If we want to test a hypothesis for a conversion rate metric, we'll use the "Funnel" goal instead.
+The default is users, but if you've created [groups](/docs/product-analytics/group-analytics), you can run [group-targeted experiments](/blog/running-group-targeted-ab-tests). This will test how a change affects your product at a group-level by providing the same variant to every member of a group.
 
-#### 3. Experiment preview and minimal acceptable improvement threshold
+### Participant targeting
 
-Finally, in our experiment creation form, look to the upper right corner for our experiment's preview!
-We can see recommendations for run times and other experiment factors.
+By default, your experiment will target 100% of participants. If you'd like to target a more specific set of participants, or change the rollout percentage, you'll need to do this by changing the [release conditions](/docs/feature-flags/rollout-strategies) for the feature flag used by your experiment.
 
-![Experiment preview](../../images/features/experiments/create-experiment-preview.png)
+Below is a video showing how to navigate there:
 
-We can also increase or decrease our minimal acceptable improvement depending on how much we care for our test's significance relevant to our other experiment factors.
+![How to set experiment feature flag release conditions](../../images/features/experiments/set-experiment-rollout.mp4)
 
-Perhaps we don't want to wait 278 days for our experiment to run and we'd prefer less precise results in favor of a shorter run time. We can simply bump the threshold to a higher percentage.
+### Experiment goal
 
-![Experiment preview significance change](../../images/features/experiments/create-experiment-preview-significance.png)
+Setting your goal metric enables PostHog to calculate the impact of your experiment and if your results are [statistically significant](/docs/experiments/significance). You can select between a "trend" or "conversion funnel" goal.
 
-Whenever we're ready, hit save on the bottom right corner of the form to create an experiment. Creating an experiment saves it into a draft mode so we'll still have flexibility on making adjustments to it until we're ready to launch it!
+You set the minimum acceptable improvement below. This combines historical data from your goal metric with your desired improvement rate to show a prediction for how long you need to run your experiment to see statistical significant results.
 
-## Running an experiment
+![Minimum acceptable improvement calculator](../../images/features/experiments/improvement-calculator.mp4)
 
-Before you can launch an experiment, you need to implement the code for each feature flag variant. On the draft experiment screen, you'll see a snippet telling you how to query for the variant. It looks something like:
+> **Note:** If you select a server-side event, you may see a warning that no feature flag information can be detected with the event. To resolve this issue, see [step 2 of adding your experiment code and how to submit feature flag information with your events](#step-2-server-side-only-upload-the-feature-flag-property-with-your-events).
+> 
+> ![Experiment goal warning](../../images/features/experiments/experiment-goal-warning.png)
 
-```js
-if (posthog.getFeatureFlag('your-chosen-feature-flag-key') === 'control') {
-    // where 'control' is the variant, run your code here
+## Adding your experiment code
+
+### Step 1: Fetch the feature flag
+
+To check which variant of your experiment to show to your participants, use the following code to fetch the feature flag:
+
+<MultiLanguage>
+
+```javascript
+// Ensure flags are loaded before usage.
+// You'll only need to call this on the code the first time a user visits.
+// See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
+posthog.onFeatureFlags(function() {
+    // feature flags should be available at this point
+    if (posthog.getFeatureFlag('experiment_feature_flag_name')  == 'variant_name') {
+        // do something
+    }
+})
+
+// Otherwise, you can just do:
+if (posthog.getFeatureFlag('experiment_feature_flag_name')  == 'variant_name') {
+    // do something
+}
+
+// You can also test your code by overriding the feature flag:
+// e.g., posthog.feature_flags.override({'experiment_feature_flag_name': 'test'})
+```
+
+```react
+import { useFeatureFlagVariantKey } from 'posthog-js/react'
+
+function App() {
+    const variant = useFeatureFlagVariantKey('experiment_feature_flag_name')
+    if (variant == 'variant_name') {
+        // do something
+    }
+}
+
+// You can also test your code by overriding the feature flag:
+// e.g., posthog.feature_flags.override({'experiment_feature_flag_name': 'test'})
+```
+
+```react-Native
+// With a hook
+import { useFeatureFlag } from 'posthog-react-native'
+
+const MyComponent = () => {
+    const variant = useFeatureFlag('experiment_feature_flag_name')
+
+    if (variant === undefined) {
+        // the response is undefined if the flags are being loaded
+        return null
+    }
+
+    if (variant == 'variant_name') {
+        // do something
+    }
+}           
+```
+
+```android
+if (PostHog.with(this).getFeatureFlag('experiment_feature_flag_name')  == 'variant_name') {
+    // do something
 }
 ```
 
-One important gotcha to keep in mind is that feature flag values are loaded asynchronously, so you should use [the onFeatureFlag directive](https://posthog.com/docs/user-guides/feature-flags#onfeatureflags) to check when feature flags are loaded. That is, call the snippet above inside the `onFeatureFlag` callback.
+```iOS
+// In Swift
+if (posthog.getFeatureFlag('experiment_feature_flag_name')  == 'variant_name') {
+    // do something
+}
+```
+
+```node
+const variant = await client.getFeatureFlag('experiment_feature_flag_name', 'user_distinct_id')
+
+if (variant === 'variant_name') {
+    // do something
+}
+```
+
+```python
+variant = posthog.get_feature_flag('experiment_feature_flag_name', 'user_distinct_id')
+
+if variant == 'variant_name':
+    # Do something
+```
+
+```php
+$variant = PostHog::getFeatureFlag('experiment_feature_flag_name', 'user_distinct_id')
+
+if ($variant === 'variant_name') {
+    // Do something differently for this user
+}
+```
+
+```ruby
+variant = posthog.get_feature_flag('experiment_feature_flag_name', 'user_distinct_id')
+
+if variant == 'variant_name'
+    # Do something 
+end
+```
+
+```go
+variant, err := client.GetFeatureFlag(
+            FeatureFlagPayload{
+                Key:        'experiment_feature_flag_name',
+                DistinctId: "user_distinct_id",
+            })
+
+if variant == 'variant_name' {
+    // Do something
+}
+```
+
+```java
+// Feature flags are not supported in our Java SDK.
+// To run an experiment using our Java SDK, 
+// see our docs on running an experiment without feature flags
+// TODO add link
+```
+
+```rust
+// Feature flags are not supported in our Rust SDK.
+// To run an experiment using our Java SDK, 
+// see our docs on running an experiment without feature flags
+// TODO add link
+```
+
+```elixir
+// Feature flags are not supported in our Elixir SDK.
+// To run an experiment using our Java SDK, 
+// see our docs on running an experiment without feature flags
+// TODO add link
+```
+
+```API
+// See our docs on running an experiment without feature flags
+// TODO add link
+```
+</MultiLanguage>
+
+### Step 2 (server-side only): Add the feature flag property to your events 
+
+For any server-side events that are also goal metrics for your experiment, you need to include a property `$feature/experiment_feature_flag_name: variant_name` when capturing those events. This ensures that the event is attributed to the correct experiment variant (e.g., test or control).
+
+This step is not required for events that are submitted via our client-side SDKs (e.g., JavaScript, iOS, Android, React, React Native).
+
+<MultiLanguage>
+
+```node
+client.capture({
+    distinctId: 'distinct_id',
+    event: 'event_name_of_your_goal_metric',
+    properties: {
+        '$feature/experiment_feature_flag_name': 'variant_name'
+    },
+})
+```
+
+```python
+posthog.capture(
+    'distinct_id',
+    'event_name_of_your_goal_metric',
+    {
+        '$feature/experiment_feature_flag_name': 'variant_name'
+    }
+)
+```
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'distinct_id',
+  'event' => 'event_name_of_your_goal_metric',
+  'properties' => array(
+    '$feature/experiment_feature_flag_name'  = 'variant_name'
+  )
+));
+```
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id',
+    event: 'event_name_of_your_goal_metric',
+    properties: {
+        '$feature/experiment_feature_flag_name': 'variant_name',
+    }
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "distinct_id",
+  Event:      "event_name_of_your_goal_metric",
+  Properties: posthog.NewProperties().
+    Set("$feature/experiment_feature_flag_name", "variant_name"),
+})
+```
+
+```java
+posthog.capture(
+  "distinct_id",
+  "event_name_of_your_goal_metric",
+  new HashMap<String, Object>() {
+    {
+      put("$feature/experiment_feature_flag_name", "variant_name");
+    }
+  }
+);
+```
+
+</MultiLanguage>
+
+## Testing and launching your experiment
 
 Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. If you find out your implementation had a bug after you've launched the experiment, you lose days of effort as the experiment results can no longer be trusted.
 
-To test your experiment, **use the web developer console**. The experiment draft screen has a snippet for testing your code. Once you've pushed your experiment code, open the console on your browser, and paste the snippet in. This will override the feature flag for you, and you should be able to see the changes you've made on screen.
+The best way to do this is adding an optional override to your release conditions. For example, you can create an override to assign a user to the 'test' variant if their email is your own (or someone in your engineering team). You can do this by:
+
+1. Go to your experiment feature flag.
+2. Ensure the feature flag is enabled by checking the "Enable feature flag" box.
+3. Add a new condition set with the condition to `email = your_email@domain.com`. Set the rollout percentage for this set to 100%.
+4. Set the optional override for the variant you'd like to assign these users to.
+5. Click "Save".
+
+![How to test your experiment](../../images/features/experiments/testing-your-experiment.mp4)
 
 Once you're satisfied, you're ready to launch your experiment.
 
-**Note:** The feature flag is activated only when you launch the experiment.
+> **Note:** The feature flag is activated only when you launch the experiment, or if you've manually checked the "Enable feature flag" box.
 
-**Note:** While the toolbar allows you to toggle feature flags on and off, this only works for active feature flags. Thus, it's not always possible to use the toolbar to test experiment feature flag changes.
+> **Note:** While the [PostHog toolbar](/docs/product-analytics/toolbar) enables you to toggle feature flags on and off, this only works for active feature flags and won't work for your experiment feature flag while it is still in draft mode.
 
-While the experiment is running, you can see results on the page. Sometimes, in the beginning of an experiment, results can be skewed to one side. For example, if you launched at midnight then people on the other side of the world are active first, and the first few hours of data you collect is all from them. This can artificially skew results to one variant. While possible, it's important that you don't end your experiments at this stage: the results are probably insignificant. This is known as the peeking problem.
+## Viewing experiment results
 
-While peeking at the results in itself is not a problem, making quick decisions based on preliminary results is problematic. For this reason, we display a banner that informs you whether it's safe to end an experiment or not.
+While the experiment is running, you can see results on the page:
 
-Note that this recommendation doesn't cover all edge cases. It is still possible, when new data comes in, that results flip completely. This is true for any experiments and any significance test in existence today. But, the probability of this happening is very low, which is why most people are comfortable taking this risk. For a 0 risk experiment, you'd have to run it for an infinite amount of time: every new person is new data to be accommodated.
+![Viewing experiment results](../../images/features/experiments/experiment-results.png)
 
-## Terminating an experiment
+Sometimes, in the beginning of an experiment, results can be skewed to one side while enough data is being still gathered. While peeking at preliminary results is not a problem, making quick decisions based on them is [problematic](/blog/ab-testing-mistakes#3-conducting-an-experiment-without-a-predetermined-duration). We advise you to wait until your experiment has had a chance to gather enough data.
 
-You decide when to terminate an experiment. A banner in your experiment results page will let you know if it's safe to do so, regardless of the original estimated running time. Terminating before significance implies conclusions could be completely wrong. (see [Advanced section below](#advanced-whats-under-the-hood) to understand how we compute significance)
+## Ending an experiment
 
-Once you have decided to terminate an experiment there are a few things to do:
-
--   [ ] Click on "Terminate the experiment" on the experiment page. This will ensure final results are kept.
--   [ ] We recommend you roll-out the winning variant to all your users.
--   [ ] Share results with relevant members of your team.
--   [ ] After the winning variant is rolled-out, it's good practice to remove the other variants from your code, and make the winning variant part of your core code (i.e. stop checking for the respective feature flag).
--   [ ] Document conclusions and findings in your PostHog experiment. This will help preserve context for team members who in the future need to understand what happened.
--   [ ] Archive the experiment. This will disable the feature flag and ensure your code no longer depends on the flag.
-
-## How does it work?
-
-With Experimentation, you start with a hypothesis on how to improve your product (e.g. changing the flow, changing copy, changing visual styles, etc.) and a goal (e.g. improve conversion, improve sign ups, etc.). Once you have those you can:
-
-1. Create an Experiment which will have a control group and some test variants (at least one, at most three).
-
-2. Select which users will participate in the Experiment (e.g. paid users, users in a given country, a cohort, or all users).
-
-Based on your user selection and your goal, we will estimate the number of users exposed and the number of days required for your experiment to reach significant results.
-
-We distribute all selected users equally between the control and test groups. So, for example, if there are 3 test variants and 1 control variant, each variant gets 25% of the total users selected.
-
-You can tweak settings on the creation screen to speed up the experiment or adjust user exposure (e.g. you may not want certain users exposed to your experiment).
-
-The actual experiment and what your user sees is controlled in your own code (see below on [Creating an experiment](#creating-an-experiment)). Your code asks PostHog which group does this user belong to and then accordingly show any relevant changes in your app or website. Because this is done in your code you can test any number of things, from changing copy in a button, to taking the user to a different page, or showing them a completely different experience.
-
-Once your experiment is running, we'll automatically let you know which variant leads to the best results. While the experiment is running, we'll also tell you the probability that any given variant is the winning variant.
-
-To ensure your experiment does not introduce any regressions, you can also track secondary metrics. This is particularly useful if you're optimizing a metric that has a natural trade-off with another metric (e.g. you can maximize conversion by reducing your price but then your total revenue may be reduced).
-
-Once your experiment is terminated, you can easily archive and share your results with other team members.
-
-### How do we handle statistical significance?
-
-For your results and conclusions to be valid, any experiment must have a significant exposure. For instance, if you test a product change and only one user sees the change, you can't extrapolate from that single user that the change will be beneficial/detrimental for your entire user base. This is true for any experiment that is a simple randomized controlled experiment (e.g. this is also done when testing new drugs or vaccines).
-
-Furthermore, even a large sample size (e.g. approx. 10,000 participants) can result in ambiguous results. If, for example, the difference in conversion rate between the variants is less than 1%, it's hard to say whether one variant is truly better than the other. To be significant, there must be enough difference between the conversion rates, given the exposure size.
-
-PostHog computes this significance for you automatically - we will let you know if your experiment has reached significant results or not. Once your experiment reaches significant results, it's safe to use those results to reach a conclusion and terminate the experiment. You can read more about how we do this in our 'Advanced' section below.
-
-### Experimentation vs. Feature Flags
-
-Experimentation and Feature Flags are different features because they serve different purposes. **Experimentation** is used to test changes to your product where you want to maximize a specific metric (eg. testing a new flow to maximize conversion rate). **Feature Flags** are used for phased roll-outs (e.g. a new experimental feature you want to make sure works correctly) or as a way to control feature access. Read our [Feature Flags user guide](/docs/user-guides/feature-flags) for more information on this.
-
-Experimentation uses multivariate Feature Flags under the hood to handle user allocation to an experiment. You'll notice this when checking if a user is assigned to an experiment.
-
-While Feature Flags can be boolean or multivariate, Experimentation always uses a multivariate approach.
+Here is checklist of things to do when ready to end your experiment:
+-   [ ] Click on "Stop" button on the experiment page. This will ensure final results are stored.
+-   [ ] Roll out the winning variant of your experiment by setting the feature flag conditions accordingly. This ensures that your users see the winning variant without needing to make any code changes.
+-   [ ] Remove the experiment and losing variant's code to launch the winning variant to all your users.
+-   [ ] Share results with your team.
+-   [ ] Document conclusions and findings in the "description" field your PostHog experiment. This will help preserve historical context for future team members.
+-   [ ] Archive the experiment.
 
 ### Further reading
 
-Want to know more about what's possible with Experiments in PostHog? Try these tutorials:
+Want to learn more about how to run successful experiments in PostHog? Try these tutorials:
 
--   [How to run Experiments without feature flags](/tutorials/experiments)
+-   [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
+-   [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
+
