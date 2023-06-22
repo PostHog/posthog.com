@@ -14,72 +14,47 @@ Any company that is <2 years old and has raised $5m in funding or less is eligib
 
 1. Company applies by signing up to PostHog and then emailing us at startups@.
 2. CS verify they meet the criteria and apply a $50k Stripe _coupon_ to their account that expires in 12 months.
-3. Charles replies and sends a link to the [PostHog for Startups Giveaway](https://app.printfection.com/account/campaign/overview.php?storeid=309416) from Printfection. Hit 'Get new link', copy the link and then mark it as 'sent'. The user redeems the link and enters their own shipping details.
-4. Charles adds them to the `PostHog for Startups` Google Sheet in the Marketing shared Google drive for future event invites.
-5. Once a month, we schedule office hours with James/Luke (business & product) and Charles/Simon (ops & commercial) - Charles will send out an email to gauge interest then we can just send a Zoom invite if enough people are interested. If too many people start showing up, we can do this differently at a later date. 
-6. Once a month, Charles will go through the list of startups who have signed up and pick one to spotlight. He'll interview them following a standard format and post it to our blog. 
-7. If a startup lets us know they have a launch coming up, we'll support them ad hoc on Twitter, Slack etc. 
+3. The user receives an automated email, via Zapier, which provides them with a link to claim their merch via Printfection, and informs them of the rest of the program. 
 
-> The PostHog for Startups deal is also posted on our profile at [F6S here](https://www.f6s.com/company-deals/posthog/50k-in-credits-extras-13984). They still follow the same process as above. 
+> The PostHog for Startups deal is also posted on our profile at [F6S here](https://www.f6s.com/company-deals/posthog/50k-in-credits-extras-13984). They still follow the same process as above.
+
+### Welcome merch
+
+### Amplifying announcements
+
+We encourage members of the PostHog for Startups program to inform us when they have an upcoming launch, or other announcement. We will then share that announcement with other members of the program (via the newsletter), as well as sharing it more widely on our socials and other channels. 
+
+We don't make guarantees about how we'll or if we'll share announcements, and do so only at our own discretion. 
 
 ### Monthly office hours
 
-We host private monthly office hours with one of Luke (product), James (product, company building), Charles (ops, marketing), or Simon (sales, CS). Charles organizes these and sends out an email to the mailing list - template below. 
+We host private monthly office hours with one of Tim (engineering), James (product, company building), Charles (ops, marketing), or Simon (sales, CS). Joe organizes these and sends out information in the monthly newsletter.  
 
-Create the calendar event with a Meet link in advance and then just manually add people to it if they reply to the email. **Obviously you should BCC everyone.** We'll probably automate this more in the future. Use Meet so you don't have any issues with hosts not attending. 
+Create the calendar event with a Google Meet link in advance and then just manually add people to it if they reply to the email or newsletter. We use Meet so we don't have any issues with hosts not attending. 
 
-Product example:
-``` 
-Hi everyone,
+Office hours are typically very informal. Hosts can prepare demos, decks or other assets if they choose to, but are generally encouraged to be opportunities for users to ask questions and share feedback. 
 
-Really excited to invite you to the next PostHog for Startups office hours on [DATE, TIME]! Luke, our Head of Product, will be on hand to answer any questions you have about product - specific problems or general questions welcome. 
+### Monthly newsletter
 
-If you're interested in joining, please reply to the email and I'll add you to the calendar invite. 
+Once a month, we send a short newsletter to all users in the program. We send the email as a Customer.io broadcast and there is a template setup in Customer.io. 
 
-Some topics you might have questions around:
-- How to get great user feedback
-- How to decide which customer personas to focus on
-- Setting a product strategy
-- When to go multi-product
-- Creating a good working relationships between product & engineering
-- How to decide what to build next
-- How to figure out if you’re getting product-market fit
+Before the email is sent each month it is important to manually update the PostHog for Startups segment in Customer.io by importing all new email addresses from the [mailing list](https://docs.google.com/spreadsheets/d/1ryDGzXcG0OSH-GoX-zlI2CKwNu-6Zivi7EM32WLdids/edit?usp=sharing).
 
-(Please note - we can't cover product support questions in this session.)
+The email is still evolving, but typically includes the following sections:
 
-Hope to see you there!
-
-Charles
+```
+- A short intro and invitation for users to share important announcements with us
+- Information on the next office hours event
+- A link to the most recent startup spotlight
+- 'Our thoughts on:' a topic which is relevant to founders, e.g. pricing strategies
+- Information on new features or launches
 ```
 
-Sales & CS example:
-``` 
-Hi everyone,
+### Startup spotlight
 
-Really excited to invite you to the next PostHog for Startups office hours on [DATE, TIME]! Simon, our Customer Success Lead, will be on hand to answer any questions you have about sales and customer success - specific problems or general questions welcome. 
+Each month, we'll pick a startup to highlight. Joe will go through the list, find a candidate to approach, interview them and then write up the responses as a blog post which we'll also publish on Twitter, LinkedIn and user Slack.
 
-If you're interested in joining, please reply to the email and I'll add you to the calendar invite. 
-
-Some topics you might have questions around:
-- How to manage your sales pipeline
-- How to prioritize different types of customers
-- How to set up great customer support
-- How to make sure inbound enterprises don't crush you
-- How to negotiate commercial agreements
-- How to build your sales and/or CS team
-
-(Please note - we can't cover product support questions in this session.)
-
-Hope to see you there!
-
-Charles
-```
-
-### Startup of the month
-
-Each month, we'll pick a startup to highlight. Charles will interview them and then write up the responses as a blog post which we'll also publish on Twitter, LinkedIn and user Slack.
-
-The questions follow a standard format:
+The questions generally follow a standard format, but can evolve. 
 
 ```
 What is your product, and why is it cool?
@@ -89,3 +64,14 @@ What are you most excited about?
 What are you most worried about?
 What is something you know today that you wish you'd known at the beginning?
 ```
+
+### Referral program
+
+Users who are accepted into Posthog for Startups can refer in other customers in order to unlock extra credit for both parties. This referral program is currently _only_ open to users who have been accepted into PostHog for Startups. 
+
+Referred customers should apply for the PostHog for Startups program as normal, but specify in the sign-up form the team which referred them into the program. The Customer Service team will issue an additional $5,000 of PostHog credit to both the referred customer and the referrer if the customer is accepted into the program.
+
+There are currently no limits on how many startups can be referred into the program successfully. 
+
+Customer can also refer an investor, or startup accelerator. If an investor or accelerator signs up as a PostHog for Startups partner, we will double the credits of the referring customer to a total of $100,000. 
+
