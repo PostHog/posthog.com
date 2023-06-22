@@ -50,12 +50,12 @@ select (
 from raw_session_replay_events
 ```
 
-We can add more critera to our `multiIf` statement as well. For example, if we wanted to count bounce rate as the percentage of sessions with fewer than 3 clicks and 2 keypresses, we can use `click_count < 3 and keypress_count < 2` like this
+We can add more critera to our `multiIf` statement as well. For example, if we wanted to count bounce rate as the percentage of sessions with fewer than 3 clicks and 2 keypresses or less than 10 seconds, we can use `click_count < 3 and keypress_count < 2 or active_milliseconds < 10000` like this
 
 ```sql
 select (
 	count(
-		multiIf(click_count < 3 and keypress_count < 2, session_id, NULL)
+		multiIf(click_count < 3 and keypress_count < 2 or active_milliseconds < 10000, session_id, NULL)
 	) / count(session_id)
 ) * 100 as bounce_rate
 from raw_session_replay_events
