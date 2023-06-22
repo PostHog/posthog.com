@@ -371,7 +371,7 @@ Hotjar includes feedback widgets, surveys, and an integrated user research tool 
 
 > Note that because PostHog is entirely open source, it's possible for users to build their own user surveys if needed. Our guide on [building your own apps](https://posthog.com/docs/apps/build) dives into more detail.
 
-PostHog also offers additional ways to communicate with your users, such as a [notification bar](/apps/notification-bar) and interactive [pop-ups](tutorials/react-popups) through the use of [feature flag payloads](/docs/feature-flags/payloads), and [site apps](/tutorials/build-site-app). Also, since PostHog provides product analytics, you can easily define your target users who should see your widgets.
+PostHog also offers additional ways to communicate with your users, such as a [notification bar](/apps/notification-bar) and interactive [pop-ups](/tutorials/react-popups) through the use of [feature flag payloads](/docs/feature-flags/payloads), and [site apps](/tutorials/build-site-app). Also, since PostHog provides product analytics, you can easily define your target users who should see your widgets.
 
 The main difference is, because Hotjar is designed for less technical users, it offers an interface that is simpler, but less powerful. You can easily create surveys and feedback widgets in Hotjar, but not other types of prompt such as a Calendly integration.
 

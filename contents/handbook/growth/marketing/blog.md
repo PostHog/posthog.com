@@ -7,8 +7,8 @@ showTitle: true
 Content is the main pillar of our marketing strategy. As our products are quite technical in nature, we believe that frequent and regular content output helps improve acquisition and ongoing product engagement. The [blog](/blog) is where we publish interesting product content, share feature updates, and tell PostHog stories.
 
 **Other useful links:**
-- [PostHog style guide](../handbook/growth/marketing/posthog-style-guide)
-- [Exporting a blog post image](../handbook/growth/marketing/exporting-blog-post-image)
+- [PostHog style guide](/handbook/growth/marketing/posthog-style-guide)
+- [Exporting a blog post image](/handbook/growth/marketing/exporting-blog-post-image)
 
 ## Content strategy
 
