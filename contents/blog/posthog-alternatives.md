@@ -21,7 +21,7 @@ As an all-in-one platform, PostHog replaces _a lot_ of legacy tools. PostHog is 
 
 This guide is an overview of some popular alternatives to PostHog, how they compare, and [why people choose PostHog](#why-people-choose-posthog).
 
-> Note: _User reviews and comments are hand curated from G2.com_
+> **Note:** _User reviews and comments are hand curated from G2.com_
 
 ## Amplitude
 
