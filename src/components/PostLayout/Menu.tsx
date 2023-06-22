@@ -7,6 +7,7 @@ import { Link as ScrollLink } from 'react-scroll'
 import { AnimatePresence, motion } from 'framer-motion'
 import * as ProductIcons from '../ProductIcons'
 import * as NotProductIcons from '../NotProductIcons'
+import * as NewIcons from '../NewIcons'
 import { usePost } from './hooks'
 
 const Chevron = ({ open, className = '' }: { open: boolean; className?: string }) => {
@@ -33,8 +34,8 @@ const Chevron = ({ open, className = '' }: { open: boolean; className?: string }
 }
 
 const getIcon = (name: string) => {
-    return ProductIcons[name]
-        ? ProductIcons[name]({ className: 'w-5' })
+    return NewIcons[name]
+        ? NewIcons[name]({ className: 'w-5' })
         : NotProductIcons[name]
         ? NotProductIcons[name]({ className: 'w-5' })
         : null

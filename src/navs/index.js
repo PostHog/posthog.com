@@ -785,49 +785,58 @@ export const companyMenu = {
 
 export const docsMenu = {
     name: 'Docs',
-    url: '/docs/getting-started/install',
+    url: '/docs/product-os/getting-started/install',
     icon: 'Book',
     children: [
         {
-            name: 'Getting started',
-            icon: 'Flag',
-            color: 'teal',
-            url: '/docs/getting-started/install',
+            name: 'Product OS',
+            icon: 'Stack',
+            color: 'salmon',
+            url: '/docs/product-os',
             children: [
                 {
-                    name: 'Getting started',
+                    name: 'New to PostHog?',
                 },
                 {
-                    name: 'Install PostHog',
-                    url: '/docs/getting-started/install?tab=snippet',
-                },
-                {
-                    name: 'Send events',
-                    url: '/docs/getting-started/send-events',
-                },
-                {
-                    name: 'Identify users',
-                    url: '/docs/getting-started/identify-users',
-                },
-                {
-                    name: 'User properties',
-                    url: '/docs/getting-started/user-properties',
-                },
-                {
-                    name: 'Actions & insights',
-                    url: '/docs/getting-started/actions-and-insights',
-                },
-                {
-                    name: 'Group analytics',
-                    url: '/docs/getting-started/group-analytics',
-                },
-                {
-                    name: 'Next steps',
-                    url: '/docs/getting-started/next-steps',
+                    name: 'Start here',
+                    url: '/docs/getting-started/install',
+                    color: 'teal',
+                    icon: 'Flag',
+                    children: [
+                        {
+                            name: 'Install PostHog',
+                            url: '/docs/getting-started/install?tab=snippet',
+                        },
+                        {
+                            name: 'Send events',
+                            url: '/docs/getting-started/send-events',
+                        },
+                        {
+                            name: 'Identify users',
+                            url: '/docs/getting-started/identify-users',
+                        },
+                        {
+                            name: 'User properties',
+                            url: '/docs/getting-started/user-properties',
+                        },
+                        {
+                            name: 'Actions & insights',
+                            url: '/docs/getting-started/actions-and-insights',
+                        },
+                        {
+                            name: 'Group analytics',
+                            url: '/docs/getting-started/group-analytics',
+                        },
+                        {
+                            name: 'Next steps',
+                            url: '/docs/getting-started/next-steps',
+                        },
+                    ],
                 },
                 {
                     name: 'SDKs',
-                    url: '',
+                    url: '/docs/libraries/js',
+                    icon: 'Box',
                     children: [
                         {
                             name: 'JavaScript',
@@ -909,7 +918,8 @@ export const docsMenu = {
                 },
                 {
                     name: 'Framework guides',
-                    url: '',
+                    url: '/docs/frameworks',
+                    icon: 'Book',
                     children: [
                         {
                             name: 'Overview',
@@ -974,6 +984,255 @@ export const docsMenu = {
                             url: '/docs/libraries/wordpress',
                         },
                     ],
+                },
+                {
+                    name: 'Product OS',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/product-os',
+                },
+                {
+                    name: 'Data',
+                    url: '/docs/data',
+                    icon: 'HardDrive',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data',
+                        },
+                        {
+                            name: 'Actions',
+                            url: '/docs/data/actions',
+                        },
+                        {
+                            name: 'Annotations',
+                            url: '/docs/data/annotations',
+                        },
+                        {
+                            name: 'Autocapture',
+                            url: '/docs/data/autocapture',
+                        },
+                        {
+                            name: 'Cohorts',
+                            url: '/docs/data/cohorts',
+                        },
+                        {
+                            name: 'Data management',
+                            url: '/docs/data/data-management',
+                        },
+                        {
+                            name: 'Events',
+                            url: '/docs/data/events',
+                        },
+                        {
+                            name: 'Organizations & projects',
+                            url: '/docs/data/organizations-and-projects',
+                        },
+                        {
+                            name: 'Persons',
+                            url: '/docs/data/persons',
+                        },
+                        {
+                            name: 'Role-based access',
+                            url: '/docs/data/role-based-access',
+                        },
+                        {
+                            name: 'Sessions',
+                            url: '/docs/data/sessions',
+                        },
+                        {
+                            name: 'Settings',
+                            url: '/docs/data/application-settings',
+                        },
+                        {
+                            name: 'SSO & SAML',
+                            url: '/docs/data/sso',
+                        },
+                        {
+                            name: 'Team collaboration',
+                            url: '/docs/data/team-collaboration',
+                        },
+                        {
+                            name: 'UTM segmentation',
+                            url: '/docs/data/utm-segmentation',
+                        },
+                    ],
+                },
+                {
+                    name: 'Apps',
+                    url: '/docs/apps',
+                    icon: 'Apps',
+                    children: [
+                        {
+                            url: '/docs/apps/feedback-widget',
+                            name: 'Feedback Widget',
+                        },
+                        {
+                            url: '/docs/apps/notification-bar',
+                            name: 'Notification Bar',
+                        },
+                        {
+                            url: '/docs/apps/nps-survey-app',
+                            name: 'NPS Survey',
+                        },
+                        {
+                            url: '/docs/apps/pineapple-mode',
+                            name: 'Pineapple Mode',
+                        },
+                        {
+                            url: '/docs/apps/user-interviewer',
+                            name: 'User Interviewer',
+                        },
+                        {
+                            name: 'Build an app',
+                            url: '',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/apps/build',
+                                },
+                                {
+                                    name: 'Tutorial',
+                                    url: '/docs/apps/build/tutorial',
+                                },
+                                {
+                                    name: 'Troubleshooting',
+                                    url: '/docs/apps/enabling',
+                                },
+                                {
+                                    name: 'Developer reference',
+                                    url: '/docs/apps/build/reference',
+                                },
+                                {
+                                    name: 'Using the PostHog API',
+                                    url: '/docs/apps/build/api',
+                                },
+                                {
+                                    name: 'Jobs',
+                                    url: '/docs/apps/build/jobs',
+                                },
+                                {
+                                    name: 'Testing',
+                                    url: '/docs/apps/build/testing',
+                                },
+                                {
+                                    name: 'TypeScript types',
+                                    url: '/docs/apps/build/types',
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    name: 'API',
+                    url: '/docs/api',
+                    icon: 'Brackets',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/api',
+                        },
+                        {
+                            name: 'POST-only public endpoints',
+                            url: '/docs/api/post-only-endpoints',
+                        },
+                        {
+                            name: 'Actions',
+                            url: '/docs/api/actions',
+                        },
+                        {
+                            name: 'Annotations',
+                            url: '/docs/api/annotations',
+                        },
+                        {
+                            name: 'Cohorts',
+                            url: '/docs/api/cohorts',
+                        },
+                        {
+                            name: 'Dashboards',
+                            url: '/docs/api/dashboards',
+                        },
+                        {
+                            name: 'Event definitions',
+                            url: '/docs/api/event-definitions',
+                        },
+                        {
+                            name: 'Events',
+                            url: '/docs/api/events',
+                        },
+                        {
+                            name: 'Experiments',
+                            url: '/docs/api/experiments',
+                        },
+                        {
+                            name: 'Feature flags',
+                            url: '/docs/api/feature-flags',
+                        },
+                        {
+                            name: 'Funnels',
+                            url: '/docs/api/funnel',
+                        },
+                        {
+                            name: 'Group analytics',
+                            url: '/docs/api/groups',
+                        },
+                        {
+                            name: 'Groups types',
+                            url: '/docs/api/groups-types',
+                        },
+                        {
+                            name: 'Insights',
+                            url: '/docs/api/insights',
+                        },
+                        {
+                            name: 'Invites',
+                            url: '/docs/api/invites',
+                        },
+                        {
+                            name: 'Members',
+                            url: '/docs/api/members',
+                        },
+                        {
+                            name: 'Persons',
+                            url: '/docs/api/persons',
+                        },
+                        {
+                            name: 'Plugin configs',
+                            url: '/docs/api/plugin-configs',
+                        },
+                        {
+                            name: 'Plugins',
+                            url: '/docs/api/plugins',
+                        },
+                        {
+                            name: 'Projects',
+                            url: '/docs/api/projects',
+                        },
+                        {
+                            name: 'Property definitions',
+                            url: '/docs/api/property-definitions',
+                        },
+                        {
+                            name: 'Session recordings',
+                            url: '/docs/api/session-recordings',
+                        },
+                        {
+                            name: 'Trends',
+                            url: '/docs/api/trend',
+                        },
+                        {
+                            name: 'Users',
+                            url: '/docs/api/user',
+                        },
+                        {
+                            name: 'Data model',
+                            url: '/docs/data-model',
+                        },
+                    ],
+                },
+                {
+                    name: 'Resources',
                 },
                 {
                     name: 'Self-host',
@@ -1222,259 +1481,6 @@ export const docsMenu = {
                         {
                             name: 'Export your events',
                             url: '/docs/migrate/export-events',
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            name: 'Product OS',
-            icon: 'Stack',
-            color: 'salmon',
-            url: '/docs/product-os',
-            children: [
-                {
-                    name: 'Product OS',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/product-os',
-                },
-                {
-                    name: 'Data',
-                    url: '/docs/data',
-                    icon: 'DataManagement',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/data',
-                        },
-                        {
-                            name: 'Actions',
-                            url: '/docs/data/actions',
-                        },
-                        {
-                            name: 'Annotations',
-                            url: '/docs/data/annotations',
-                        },
-                        {
-                            name: 'Autocapture',
-                            url: '/docs/data/autocapture',
-                        },
-                        {
-                            name: 'Cohorts',
-                            url: '/docs/data/cohorts',
-                        },
-                        {
-                            name: 'Data management',
-                            url: '/docs/data/data-management',
-                        },
-                        {
-                            name: 'Events',
-                            url: '/docs/data/events',
-                        },
-                        {
-                            name: 'Organizations & projects',
-                            url: '/docs/data/organizations-and-projects',
-                        },
-                        {
-                            name: 'Persons',
-                            url: '/docs/data/persons',
-                        },
-                        {
-                            name: 'Role-based access',
-                            url: '/docs/data/role-based-access',
-                        },
-                        {
-                            name: 'Sessions',
-                            url: '/docs/data/sessions',
-                        },
-                        {
-                            name: 'Settings',
-                            url: '/docs/data/application-settings',
-                        },
-                        {
-                            name: 'SSO & SAML',
-                            url: '/docs/data/sso',
-                        },
-                        {
-                            name: 'Team collaboration',
-                            url: '/docs/data/team-collaboration',
-                        },
-                        {
-                            name: 'UTM segmentation',
-                            url: '/docs/data/utm-segmentation',
-                        },
-                    ],
-                },
-                {
-                    name: 'Apps',
-                    url: '/docs/apps',
-                    icon: 'AppLibrary',
-                    children: [
-                        {
-                            url: '/docs/apps/feedback-widget',
-                            name: 'Feedback Widget',
-                        },
-                        {
-                            url: '/docs/apps/notification-bar',
-                            name: 'Notification Bar',
-                        },
-                        {
-                            url: '/docs/apps/nps-survey-app',
-                            name: 'NPS Survey',
-                        },
-                        {
-                            url: '/docs/apps/pineapple-mode',
-                            name: 'Pineapple Mode',
-                        },
-                        {
-                            url: '/docs/apps/user-interviewer',
-                            name: 'User Interviewer',
-                        },
-                        {
-                            name: 'Build an app',
-                            url: '',
-                            children: [
-                                {
-                                    name: 'Overview',
-                                    url: '/docs/apps/build',
-                                },
-                                {
-                                    name: 'Tutorial',
-                                    url: '/docs/apps/build/tutorial',
-                                },
-                                {
-                                    name: 'Troubleshooting',
-                                    url: '/docs/apps/enabling',
-                                },
-                                {
-                                    name: 'Developer reference',
-                                    url: '/docs/apps/build/reference',
-                                },
-                                {
-                                    name: 'Using the PostHog API',
-                                    url: '/docs/apps/build/api',
-                                },
-                                {
-                                    name: 'Jobs',
-                                    url: '/docs/apps/build/jobs',
-                                },
-                                {
-                                    name: 'Testing',
-                                    url: '/docs/apps/build/testing',
-                                },
-                                {
-                                    name: 'TypeScript types',
-                                    url: '/docs/apps/build/types',
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    name: 'API',
-                    url: '',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/api',
-                        },
-                        {
-                            name: 'POST-only public endpoints',
-                            url: '/docs/api/post-only-endpoints',
-                        },
-                        {
-                            name: 'Actions',
-                            url: '/docs/api/actions',
-                        },
-                        {
-                            name: 'Annotations',
-                            url: '/docs/api/annotations',
-                        },
-                        {
-                            name: 'Cohorts',
-                            url: '/docs/api/cohorts',
-                        },
-                        {
-                            name: 'Dashboards',
-                            url: '/docs/api/dashboards',
-                        },
-                        {
-                            name: 'Event definitions',
-                            url: '/docs/api/event-definitions',
-                        },
-                        {
-                            name: 'Events',
-                            url: '/docs/api/events',
-                        },
-                        {
-                            name: 'Experiments',
-                            url: '/docs/api/experiments',
-                        },
-                        {
-                            name: 'Feature flags',
-                            url: '/docs/api/feature-flags',
-                        },
-                        {
-                            name: 'Funnels',
-                            url: '/docs/api/funnel',
-                        },
-                        {
-                            name: 'Group analytics',
-                            url: '/docs/api/groups',
-                        },
-                        {
-                            name: 'Groups types',
-                            url: '/docs/api/groups-types',
-                        },
-                        {
-                            name: 'Insights',
-                            url: '/docs/api/insights',
-                        },
-                        {
-                            name: 'Invites',
-                            url: '/docs/api/invites',
-                        },
-                        {
-                            name: 'Members',
-                            url: '/docs/api/members',
-                        },
-                        {
-                            name: 'Persons',
-                            url: '/docs/api/persons',
-                        },
-                        {
-                            name: 'Plugin configs',
-                            url: '/docs/api/plugin-configs',
-                        },
-                        {
-                            name: 'Plugins',
-                            url: '/docs/api/plugins',
-                        },
-                        {
-                            name: 'Projects',
-                            url: '/docs/api/projects',
-                        },
-                        {
-                            name: 'Property definitions',
-                            url: '/docs/api/property-definitions',
-                        },
-                        {
-                            name: 'Session recordings',
-                            url: '/docs/api/session-recordings',
-                        },
-                        {
-                            name: 'Trends',
-                            url: '/docs/api/trend',
-                        },
-                        {
-                            name: 'Users',
-                            url: '/docs/api/user',
-                        },
-                        {
-                            name: 'Data model',
-                            url: '/docs/data-model',
                         },
                     ],
                 },
