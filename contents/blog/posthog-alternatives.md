@@ -687,9 +687,7 @@ Users consistently praise LogRocket's session replay tools, but other features a
 
 ## Why people choose PostHog
 
-Assembly AI [switched from Mixpanel to PostHog](https://posthog.com/customers/assemblyai) because Mixpanel's pricing caused them to throttle events. Using PostHog also meant they could combine analytics and A/B testing within a single plaform: 
-
-> "At the time I was doing A/B experimentation on a different platform, then analyzing the results in Mixpanel. When Mixpanel’s pricing ramped up we looked at other platforms, including things like Segment — but PostHog, which can do both experiments and analytics in one, was clearly the winner."
+Assembly AI [switched from Mixpanel to PostHog](https://posthog.com/customers/assemblyai) because Mixpanel's pricing caused them to throttle events. Using PostHog also meant they could combine analytics and A/B testing within a single platform.
 
 <BorderWrapper>
     <Quote
@@ -701,9 +699,7 @@ Assembly AI [switched from Mixpanel to PostHog](https://posthog.com/customers/as
     />
 </BorderWrapper>
 
-Contra chose PostHog to [replace a complex stack of separate tools](https://posthog.com/customers/contra), and eliminate data inconsistencies between them: 
-
-> “Originally we were using multiple platforms. That meant Mixpanel for analytics, LaunchDarkly for feature flags, Segment for front-end tracking and FullStory for replays. In isolation they could work well, but they were costly and complex.”
+Contra chose PostHog to [replace a complex stack of separate tools](https://posthog.com/customers/contra), including "Mixpanel for analytics, LaunchDarkly for feature flags, Segment for front-end tracking and FullStory for replays". Adopting PostHog eliminated numerous data inconsistencies.
 
 <BorderWrapper>
     <Quote
@@ -717,8 +713,6 @@ Contra chose PostHog to [replace a complex stack of separate tools](https://post
 
 Netdata chose PostHog because they [wanted a developer-centric tool](/customers/netdata) built for startups. It also enabled them to replace Smartlook, their previous session replay too:
 
-> "“It’s so much better than Smartlook, which we used to use, because you can tie it to every individual event and user. If someone in our community has a problem we can get their user ID, look at their events and see how they’re using the product."
-
 <BorderWrapper>
     <Quote
         imageSource="/images/customers/andrewmaguire.jpeg"
@@ -729,4 +723,4 @@ Netdata chose PostHog because they [wanted a developer-centric tool](/customers/
     />
 </BorderWrapper>
 
-Still not sure? [Request a call from our customer success team](/book-a-demo).
+Still not sure? [Request a call](/book-a-demo) from our customer success team.
