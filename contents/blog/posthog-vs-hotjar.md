@@ -132,7 +132,7 @@ Because we build for engineers first, we're also open source. You can check out 
 </table>
 </div>
 
-- **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product. They also enable you to debug problems using built-in [console logs](/docs/session-replay/configure#console-logs-recording-beta), [performance monitoring](/tutorials/performance-metrics) and the [DOM explorer](/blog/posthog-changelog#experimental-dom-explorer-mode).
+- **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product. They also enable you to debug problems using built-in [console logs](/docs/session-replay/manual#console-logs-recording), [performance monitoring](/tutorials/performance-metrics) and the [DOM explorer](/blog/posthog-changelog#experimental-dom-explorer-mode).
 
 - **Feature flags:** PostHog includes [multivariate feature flags](/feature-flags) that support JSON payloads. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
 
@@ -367,7 +367,7 @@ Although product analytics is not a core focus for Hotjar, they do offer basic f
 
 ### In-app messages and user research
 
-Hotjar includes feedback widgets, surveys, and an integrated user research tool for gathering feedback from users. PostHog also supports [feedback widgets](/apps/feedback-widget) and [user research scheduling](/apps/user-interviews), although not surveys. 
+Hotjar includes feedback widgets, surveys, and an integrated user research tool for gathering feedback from users. PostHog also supports [feedback widgets](/apps/feedback-widget) and [user research scheduling](/apps/user-interview), although not surveys. 
 
 > Note that because PostHog is entirely open source, it's possible for users to build their own user surveys if needed. Our guide on [building your own apps](https://posthog.com/docs/apps/build) dives into more detail.
 

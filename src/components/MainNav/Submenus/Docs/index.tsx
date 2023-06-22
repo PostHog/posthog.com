@@ -56,7 +56,7 @@ const products: IFeature[] = [
     { title: 'Feature flags', icon: <FeatureFlags />, url: '/docs/feature-flags' },
     { title: 'A/B testing', icon: <AbTesting />, url: '/docs/experiments' },
     { title: 'Data', icon: <Projects />, url: '/docs/data' },
-    { title: 'Apps', icon: <AppLibrary />, url: '/docs/apps' },
+    { title: 'Data connections', icon: <EventPipelines />, url: '/docs/cdp' },
     { title: 'API', icon: <API />, url: '/docs/api' },
 ]
 

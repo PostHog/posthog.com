@@ -1,5 +1,5 @@
 ---
-title: Product Manual
+title: Session Replay
 related:
     - ../../tutorials/funnels.md
     - ../../tutorials/nextjs-supabase-signup-funnel.mdx
@@ -9,11 +9,16 @@ availability:
     enterprise: full
 ---
 
-Session Replay allows you to record users navigating through your website and play back the individual sessions to watch how real users use your product.
+Session replay enables you to record users navigating through your website and play back the individual sessions to watch how real users use your product.
 
-## Enabling session replay
+<iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://app.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
 
-Replay can only be used with our [JavaScript library](/docs/integrate/client/js) and requires the feature to be enabled in PostHog's Project Settings (`/project/settings`).
+> Above is a recording of posthog.com… on posthog.com – very meta.
+
+## How to enable session replay
+
+Session replay can only be used with our [JavaScript library](/docs/integrate/client/js) and requires the feature to be enabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
 Once enabled, the JS library will start recording sessions by default.
 
 <blockquote class="warning-note">
@@ -21,16 +26,84 @@ Once enabled, the JS library will start recording sessions by default.
     Segment, you may want to add the PostHog library too (make sure to only send regular event data from one source).
 </blockquote>
 
-Replay can be toggled on and off in the JS library by appropriately setting the [config](/docs/integrate/client/js/#config). Users who opt out of event capturing will not have their sessions recorded.
+It can be toggled on and off in the JS library by appropriately setting the `disable_session_recording` flag in the [config](/docs/integrate/client/js/#config). 
 
-To watch recordings, you can either visit the 'Replay' page or click on any data point in an insight and from the list of persons related to that data point. This is specially useful in funnels, where you can drill down and watch recordings of users who converted or dropped off.
+Users who [opt out](/docs/libraries/js#opt-users-out) of event capturing will not have their sessions recorded.
 
-When watching replays, you can change the speed as well as select the option 'skip inactive' - this will skip chunks of the recording where the user was inactive on the page.
+## How to watch recordings
 
-## Ignoring sensitive elements
+To watch recordings, you can visit the '[Replay](https://app.posthog.com/replay)' page. When watching replays, you can change the playback speed, as well as select the option 'skip inactivity' - this will skip parts of the recording where the user was inactive on the page.
 
-To avoid recording passwords or other sensitive information, the default PostHog settings do not capture any user input fields when recording (the text is replaced by '\*'s). This setting can be adjusted by using the [recording configurations](/docs/session-replay/configure).
+You can also watch recordings by clicking on any data point in an insight. This will open the list of persons and display a "watch recording" button if it is available. This is specially useful in [funnels](/docs/product-analytics/funnels), where you can drill down and watch recordings of users who converted or dropped off. 
 
-If your application displays sensitive user information outside of input fields, you need to update your codebase to prevent PostHog from capturing this information during session recordings.
+You can also click into the person to view all their recordings.
 
-To do so, you should add the CSS class name `[ph-no-capture](https://posthog.com/tutorials/fewer-unwanted-events#adding-the-no-capture-class)` to elements which should not be recorded. This will lead to the element being replaced with a block of the same size when you play back the recordings. Make sure everyone who watches recordings in your team is aware of this, so that they don't think your product is broken when something doesn't show up!
+![How to watch recordings via insights](../../images/docs/session-replay/how-to-watch-recordings.mp4)
+
+## How to ignore sensitive elements
+
+You may want to hide sensitive text or elements in your replays. See our [privacy controls](/docs/session-replay/privacy) docs for how to do this.
+
+## Console logs recording
+
+PostHog can also capture console logs from your application. This is useful for debugging and providing extra context on what is happening in your users' browser environment. 
+
+As console logs can contain sensitive information, we do not capture these logs automatically. You can enable this feature globally from your [project settings](https://app.posthog.com/project/settings) or client-side by setting `enable_recording_console_log: true` in our [JavaScript library config](/docs/integrate/client/js/#config).
+
+Console logs will be recorded if _either_ the project setting **or** the client-side config is set to `true`. Console logs will not be recording if session replay is not enabled.
+
+```javascript
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    // This is only needed if you aren't configuring session replay using the project settings toggle.
+    enable_recording_console_log: true,
+    // ... other options
+})
+```
+
+## Network recording
+
+PostHog can capture network requests that occur during the browser session so you can see the effect of slow network requests or errors on the user experience.
+
+To remove sensitive information from the URL, these network requests can be modified before being captured like so:
+
+```javascript
+posthog.init('<ph_project_api_key>', {
+    session_recording: {
+        maskNetworkRequestFn: (request) => {
+            // For example: ignoring a request entirely
+            if (request.url.includes('example.com')) {
+                return null
+            }
+
+            // ... or remove the query string from the URL
+            request.url = request.url.split('?')[0]
+            return request
+        }
+    }
+})
+```
+
+## How to control which sessions you record
+
+If you want more granular controls on selecting which sessions to record, first set `disable_session_recording: true` in your [config](/docs/integrate/client/js/#config) and then manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
+
+You can then achieve even finer control by combining the above methods with [feature flags](/docs/feature-flags). This enables you to control session recordings based on users with certain user properties, actions, or events. You can also use feature flags to capture a percentage of all sessions.
+
+For example:
+
+```javascript
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    disable_session_recording: true,
+    // ... other options
+})
+window.posthog.onFeatureFlags(function () {
+    if (window.posthog.isFeatureEnabled('your-feature-flag')) {
+        window.posthog.startSessionRecording()
+    }
+})
+```
+
+For even more configuration options on which sessions you record, see our tutorial on [how to only record the sessions you want](/tutorials/limit-session-recordings).
+
