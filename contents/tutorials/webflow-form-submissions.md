@@ -37,7 +37,7 @@ To start, go back to the site designer and add IDs to the text field(s) and subm
 
 ![Adding ID video](../images/tutorials/webflow-form-submissions/id.mp4)
 
-Next, we’ll add our code to capture events. To add code to the page, click "Pages" on the left side panel, hover over the "Home" page, click the gear that appears, then scroll down to custom code. In "Before </body> tag," set up a click event listener for the submit input with the ID of `form-submit` that captures a PostHog `form submitted` event with the values from both the `form-name` and `form-email` as properties.
+Next, we’ll add our code to capture events. To add code to the page, click "Pages" on the left side panel, hover over the "Home" page, click the gear that appears, then scroll down to custom code. In "Before body tag," set up a click event listener for the submit input with the ID of `form-submit` that captures a PostHog `form submitted` event with the values from both the `form-name` and `form-email` as properties.
 
 ```html
 <script>
