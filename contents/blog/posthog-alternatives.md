@@ -653,7 +653,7 @@ Some users also complain about performance:
 
 2. **Heat maps and scroll maps:** PostHog supports click maps, but LogRocket offers more in-depth heat maps and scroll depth visualizations, which are ideal for UX research and click-through optimization.
 
-3. **Pricing & free tier:** LogRocket's free tier is limited to just 1,000 sessions per month and excludes numerous features, such as product analytics. In contrast, all PostHog users get 1 million events and 15k session recordings for free every month.
+3. **Pricing & free tier:** LogRocket's free tier is limited to just 1,000 sessions per month and excludes numerous features, such as product analytics. In contrast, all PostHog users get 1 million events and 15k session recordings for free every month, and all the core features.
 
 ### What people like
 
