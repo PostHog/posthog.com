@@ -1,5 +1,5 @@
 ---
-title: "In-depth: PostHog alternatives, compared"
+title: "The most popular PostHog alternatives, compared"
 date: 2023-05-25
 rootPage: /blog
 sidebar: Blog
@@ -20,7 +20,7 @@ tags:
 - **Best known for:** Product analytics
 - **Useful for:** Product managers, growth and marketing teams
 
-### In their own words
+#### In their own words
 
 > "We are a digital analytics platform. We help every business optimize the business value of digital product innovation. We’re the competitive edge to not only survive—but thrive—in the new era."
 
@@ -108,15 +108,13 @@ tags:
 </table>
 </div>
 
-### Key differences
+#### Key differences
 
 1. **Breadth of features:** PostHog combines product analytics, session replay, feature management, and A/B testing into one integrated platform. Amplitude is primarily a product analytics tool, and doesn't include any session replay capability.
 
 2. **Marketing use cases:** Amplitude offers more useful features for marketing teams, such as predictive forecasting, and multi-touch attribution. PostHog is primarily designed for technical users, and product teams.
 
 3. **Free tier:** PostHog offers a generous 1 million events and 15k session recordings for free. Amplitude's free plan is limited to 100k monthly tracks users and doesn't include important features, such as cohorts or data tables.
-
-**Read more:** [In-depth PostHog vs Amplitude comparison](blog/posthog-vs-amplitude) 
 
 ### What people like
 
@@ -133,9 +131,9 @@ Users also praise its accessibility for non-technical users, such as marketing, 
 
 - "As a senior product designer... for the first time, I feel comfortable exploring data.
 
-### What people dislike about Amplitude
+### What people dislike
 
-High prices and limited free features are frequent complaints:
+High prices are a frequent complaint:
 
 - "The high price tag poses a challenge for small businesses, early-stage, and even medium-sized startups.
 
@@ -147,7 +145,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 - "I do feel amplitude makes it difficult to parse out nuanced information on data. For more technical people, like myself, SQL is better for really digging into data."
 
-<ArrayCTA />
+**Read more:** [In-depth PostHog vs Amplitude comparison](blog/posthog-vs-amplitude) 
 
 ## Mixpanel
 
@@ -156,7 +154,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 - **Best known for:** Product analytics
 - **Useful for:** Product managers and growth teams
 
-### In their own words
+#### In their own words
 
 > "Mixpanel lets you explore data freely, without SQL. Set up your metrics to measure growth and retention. Slice and dice data to uncover trends and see live updates on how people are using your app."
 
@@ -243,7 +241,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 </table>
 </div>
 
-### Key differences
+#### Key differences
 
 1. **Autocapture:** PostHog automatically captures events, which means you don't have to manually decide what events to track, unless you want to. It saves time for engineers and product managers, and ensures you'll always have usable data even if you forgot to create a custom event. 
 
@@ -251,9 +249,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 3. **Avoiding surprise bills:** PostHog allows you to set billing limits, so you can avoid surprise bills. Mixpanel charges you for any overage above your pre-paid events volume.
 
-**Read more:** [In-depth PostHog vs Mixpanel comparison](/blog/posthog-vs-mixpanel) 
-
-### What people like about Mixpanel
+### What people like
 
 Users frequently praise Mixpanel's customer support:
 
@@ -267,7 +263,7 @@ Most also think it's easy to use:
 
 - "I appreciate Mixpanel for its uncomplicated and intuitive design, which makes it a pleasure to use."
 
-### What people dislike about Mixpanel
+### What people dislike
 
 Users frequently complain about Flows, Mixpanel's user path feature:
 
@@ -285,7 +281,7 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 
 - "I also would like to be able to get data using SQL; nowadays, Mixpanel has JQL, which is excellent but has a difficult learning curve for those familiar with SQL."
 
-<ArrayCTA />
+**Read more:** [In-depth PostHog vs Mixpanel comparison](/blog/posthog-vs-mixpanel) 
 
 ## FullStory
 
@@ -294,7 +290,7 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 - **Best known for:** Session replay
 - **Useful for:** Product managers, UX researchers, customer support
 
-### In their own words
+#### In their own words
 
 > "FullStory is equipping organizations with the information needed to perfect digital experiences—so that it’s ultimately easier for everyone to get things done online."
 
@@ -381,7 +377,7 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 </table>
 </div>
 
-### Key differences
+#### Key differences
 
 1. **Value and transparency:** FullStory offers no free plan and is notoriously pricey. PostHog offers a generous free plan (1 million events and 15k recordings per month), and all pricing is transparent. 
 
@@ -389,9 +385,8 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 
 3. **Use cases:** FullStory is a session replay tool first – it's ideal for UX researchers and customer support. PostHog is useful for UX researchers and customer support too, but it's primarily designed for technical users (e.g. engineering and product teams) rather than support.
 
-**Read more:** [In-depth PostHog vs FullStory comparison](/blog/posthog-vs-fullstory) 
 
-### What people like about FullStory
+### What people like
 
 Customer experience and UX researchers like FullStory for troubleshooting:
 
@@ -403,7 +398,7 @@ Autocapture is also popular:
 
 - "A huge benefit is not requiring development work to set up new events or track site behavior as fullstory does this automatically."
 
-### What people dislike about FullStory
+### What people dislike
 
 High costs and paywalled features are frequently complaints:
 
@@ -417,7 +412,7 @@ While users like FullStory's session replay features, some find it falls short f
 
 - "Wish the dashboards had a bit more flexibility in layout, setup and management--they can be pretty basic."
 
-<ArrayCTA />
+**Read more:** [In-depth PostHog vs FullStory comparison](/blog/posthog-vs-fullstory) 
 
 ## Heap
 
@@ -426,7 +421,7 @@ While users like FullStory's session replay features, some find it falls short f
 - **Best known for:** Product analytics
 - **Useful for:** Product managers, marketing teams
 
-### In their own words
+#### In their own words
 
 > "Heap is the only solution that shows you every action by every user on your product or site, then provides direction on the improvements that will most impact your business."
 
@@ -513,7 +508,7 @@ While users like FullStory's session replay features, some find it falls short f
 </table>
 </div>
 
-### Key differences
+#### Key differences
 
 1. **Technical features:** PostHog offers more features for technical users, such as console logs and network activity on session replays, built-in feature flags, and a SQL query builder.
 
@@ -523,7 +518,7 @@ While users like FullStory's session replay features, some find it falls short f
 
 **Read more:** [In-depth PostHog vs Heap comparison](/blog/posthog-vs-heap) 
 
-### What people like about Heap
+### What people like
 
 Heap's visual labeling tool, which allows non-technical user to define events, is very popular:
 
@@ -537,7 +532,7 @@ As autocapture, a feature it shares with PostHog:
 
 - "Most importantly, data is collected from Day 1 - even if the event hasn't been defined, unlike other platforms. This is really useful as requests for analysis often ask for things you haven't been actively tracking."
 
-### What people dislike about Heap
+### What people dislike
 
 Users frequently find it unintuitive:
 
@@ -560,7 +555,7 @@ Some users also complain about performance:
 - **Best known for:** Session replay and front-end monitoring
 - **Useful for:** Customer support, engineering teams
 
-### In their own words
+#### In their own words
 
 > "LogRocket combines session replay, error tracking, and product analytics – empowering software teams to create the ideal web and mobile product experience."
 
@@ -647,7 +642,7 @@ Some users also complain about performance:
 </table>
 </div>
 
-### Key differences
+#### Key differences
 
 1. **Analytics features:** While LogRocket includes some product analytics features, it lacks important data analysis features like support for custom formulas, group analytics, and a SQL query builder that are built into PostHog.
 
