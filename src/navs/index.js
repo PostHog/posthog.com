@@ -671,9 +671,15 @@ const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: '/questions',
+    url: '/edition',
     icon: 'Chat',
     children: [
+        {
+            name: 'Edition',
+            icon: 'Newspaper',
+            color: 'purple',
+            url: '/edition',
+        },
         {
             name: 'Questions',
             icon: 'Message',
@@ -695,12 +701,6 @@ export const communityMenu = {
             ],
         },
         {
-            name: 'Edition',
-            icon: 'Newspaper',
-            color: 'purple',
-            url: '/edition',
-        },
-        {
             name: 'Roadmap',
             icon: 'Map',
             color: 'orange',
@@ -709,7 +709,7 @@ export const communityMenu = {
         {
             name: 'Changelog',
             icon: 'Calendar',
-            color: 'seagreen',
+            color: 'red',
             url: '/changelog/2023',
             children: [
                 { name: '2023', url: '/changelog/2023' },
@@ -717,6 +717,12 @@ export const communityMenu = {
                 { name: '2021', url: '/changelog/2021' },
                 { name: '2020', url: '/changelog/2020' },
             ],
+        },
+        {
+            name: 'Merch',
+            icon: 'Store',
+            color: 'seagreen',
+            url: 'https://merch.posthog.com',
         },
     ],
 }
