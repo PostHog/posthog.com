@@ -1,6 +1,6 @@
 ---
 title: How to capture Webflow form submissions
-date: 2023-06-21
+date: 2023-06-22
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -27,17 +27,17 @@ Once the basic site is set up, go to the site settings, upgrade to at least the 
 </script>
 ```
 
-Paste this code into the head code section in Webflow and press save. Once you publish the site, PostHog begins to autocapture events and is ready to capture form submissions.
+Paste this into the custom code "head code" section in Webflow and press save. Once you publish the site, this enables PostHog to autocapture events and makes it ready to capture form submissions.
 
 ## Setting up our form submit capture
 
-We must write some JavaScript to handle the submission of the form. This enables us to capture the details as a PostHog event.
+To handle the submission of the form, we need to add some JavaScript to our page. This enables us to capture the details as a PostHog event.
 
-To start, go back to the site designer and add IDs to the text field(s) and submit button. You do this by clicking on the element, then going to the element settings (gear icon on right side panel), and adding a value to the ID field.
+To start, go back to the site designer and add IDs to the text field(s) and submit button. You do this by clicking on the element, then going to the element settings (gear icon on right side panel), and adding a value to the ID field. I used `form-name`, `form-email`, and `form-submit` for the name, email, and submit button respectively.
 
 ![Adding ID video](../images/tutorials/webflow-form-submissions/id.mp4)
 
-Next, we’ll add our code to capture events. To add code to the page, click "Pages" on the left side panel, hover over the "Home" page, click the gear that appears, then scroll down to custom code. In "Before body tag," set up a click event listener for the submit input with the ID of `form-submit` that captures a PostHog `form submitted` event with the values from both the `form-name` and `form-email` as properties.
+Next, we’ll add our code to capture events. To add code to the page, click "Pages" on the left side panel, hover over the "Home" page, click the gear that appears, then scroll down to custom code. In "Before body tag" section, set up a click event listener for the submit input with the ID of `form-submit` that captures a PostHog `form submitted` event with the values from both the `form-name` and `form-email` as properties.
 
 ```html
 <script>
@@ -67,7 +67,7 @@ submitButton.addEventListener('click', function(event) {
 
 > **Note:** make sure to include the `<script>` and `</script>` tags.
 
-Once done, press save and publish the site.
+Once done, press save on the page settings and publish the site.
 
 ![Adding code video](../images/tutorials/webflow-form-submissions/code.mp4)
 
