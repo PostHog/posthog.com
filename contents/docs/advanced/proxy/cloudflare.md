@@ -6,7 +6,7 @@ showTitle: true
 
 To use Cloudflare for reverse proxying, make sure that you're logged into your Cloudflare account, and that you've added your domain ("website" in Cloudflare parlance) to the account.
 
-## Proxy via DNS for domains on the Cloudflare Enterprise plan
+## A. Proxy using DNS and Page Rules with Cloudflare Enterprise
 
 Proxying traffic from your domain to PostHog using DNS is the simplest way. However, it requires correcting the Host headers for proxied requests, which is only available on the Cloudflare Enterprise plan. If your domain is on this plan, follow these steps (otherwise use the Cloudflare Workers way down this page):
 
@@ -22,7 +22,7 @@ The proxy won't work if the Host headers of requests aren't rewritten from your 
 
 You can now use your CNAME record's domain as `api_host` in PostHog SDKs!
 
-## Proxy via Cloudflare Workers for all domains
+## B. Proxy using Cloudflare Workers for free
 
 It's also always possible to proxy analytics traffic by leveraging Cloudflare Workers. Workers allow up to 100,000 requests per day on the free plan ([see Cloudflare pricing](https://developers.cloudflare.com/workers/platform/pricing/)). Just follow these simple steps:
 
@@ -69,11 +69,11 @@ addEventListener("fetch", (event) => {
 
 When done, click "Save and deploy".
 
-### (optional) 2a. Use a custom domain for the worker
+### 3. Use a custom domain for the worker
 
-In production, it's likely better to use your own domain than the default `*.workers.dev` one.
+It's optional, but highly recommended, to use your own domain instead of the basic `*.workers.dev` one.
 To do this, go to the worker page (by exiting the code editor, if you're still in it) and there click "View" under "Custom Domains". Just click "Add Custom Domain", type in a subdomain, and save with "Add Custom Domain". The subdomain can be anything, even `pineapple.yourdomain.com` – just remember to avoid terms like "tracking" or "analytics", as they may be blanket-blocked.
 
-### 3. Use the new host in SDKs
+### 4. Use the new host in SDKs
 
 You can now use your worker's domain (shown under "Preview" on the worker page) as `api_host` in PostHog SDKs! If you've added a custom domain in step 2a, use that instead.
