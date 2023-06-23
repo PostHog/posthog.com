@@ -546,6 +546,10 @@
                 "url": "/docs/experiments/manual"
             },
             {
+                "name": "Advanced: Running experiments without feature flags",
+                "url": "/docs/experiments/running-experiments-without-feature-flags"
+            },
+            {
                 "name": "Statistical significance",
                 "url": "/docs/experiments/significance"
             },

@@ -77,7 +77,7 @@ A `capture` call requires:
 Optionally, you can also submit:
 
 -   `properties`, which is an object with any information you'd like to add
--   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/tutorials/experiments#step-2-sending-the-right-events) so that we can avoid making the request.
+-   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) so that we can avoid making the request.
 
 For example:
 

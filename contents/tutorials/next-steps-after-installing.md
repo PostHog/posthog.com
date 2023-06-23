@@ -161,7 +161,7 @@ Experiments in PostHog help you test if changes improve your product in the ways
 
 ![Experiments](../images/tutorials/next-steps-after-installing/experiment.png)
 
-Once created, PostHog creates feature flags for each variant (or you can run [experiments without them](/tutorials/experiments)). Once implemented and launched, PostHog will continuously analyze related event data to tell you if the changes are making a difference. At the end of the test, PostHog helps you decide if the experiment was successful and you can use feature flags to it roll out.
+Once created, PostHog creates feature flags for each variant (or you can run [experiments without them](/docs/experiments/running-experiments-without-feature-flags)). Once implemented and launched, PostHog will continuously analyze related event data to tell you if the changes are making a difference. At the end of the test, PostHog helps you decide if the experiment was successful and you can use feature flags to it roll out.
 
 Read more about setting up and using experiments in [our product manual](/manual/experimentation).
 
