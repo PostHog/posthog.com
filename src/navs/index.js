@@ -701,22 +701,16 @@ export const communityMenu = {
             ],
         },
         {
-            name: 'Roadmap',
+            name: 'Guides',
             icon: 'Map',
-            color: 'orange',
-            url: '/roadmap',
+            color: 'red',
+            url: '/tutorials',
         },
         {
-            name: 'Changelog',
-            icon: 'Calendar',
-            color: 'red',
-            url: '/changelog/2023',
-            children: [
-                { name: '2023', url: '/changelog/2023' },
-                { name: '2022', url: '/changelog/2022' },
-                { name: '2021', url: '/changelog/2021' },
-                { name: '2020', url: '/changelog/2020' },
-            ],
+            name: 'Templates',
+            icon: 'Magic',
+            color: 'orange',
+            url: '/templates',
         },
         {
             name: 'Merch',
@@ -734,50 +728,24 @@ export const companyMenu = {
     children: [
         { name: 'About', icon: 'Logomark', url: '/about' },
         {
-            name: 'Blog',
-            icon: 'Newspaper',
-            color: 'teal',
-            url: '/blog',
+            name: 'Roadmap',
+            icon: 'Map',
+            color: 'orange',
+            url: '/roadmap',
+        },
+        {
+            name: 'Changelog',
+            icon: 'Calendar',
+            color: 'red',
+            url: '/changelog/2023',
             children: [
-                {
-                    name: 'Blog',
-                    url: '/blog',
-                },
-                {
-                    name: 'CEO diaries',
-                    url: '/blog/categories/ceo-diaries',
-                },
-                {
-                    name: 'Engineering',
-                    url: '/blog/categories/engineering',
-                },
-                {
-                    name: 'Inside PostHog',
-                    url: '/blog/categories/inside-posthog',
-                },
-                {
-                    name: 'Newsletter',
-                    url: '/blog/categories/newsletter',
-                },
-                {
-                    name: 'PostHog news',
-                    url: '/blog/categories/posthog-news',
-                },
-                {
-                    name: 'Product growth',
-                    url: '/blog/categories/product-growth',
-                },
-                {
-                    name: 'Startups',
-                    url: '/blog/categories/startups',
-                },
-                {
-                    name: 'Using PostHog',
-                    url: '/blog/categories/using-posthog',
-                },
+                { name: '2023', url: '/changelog/2023' },
+                { name: '2022', url: '/changelog/2022' },
+                { name: '2021', url: '/changelog/2021' },
+                { name: '2020', url: '/changelog/2020' },
             ],
         },
-        { name: 'Team', icon: 'Profile', color: 'yellow', url: '/handbook/company/team', children: handbookSidebar },
+        { name: 'Team', icon: 'Profile', color: 'blue', url: '/handbook/company/team', children: handbookSidebar },
         { name: 'Handbook', icon: 'Book', color: 'seagreen', url: '/handbook', children: handbookSidebar },
         { name: 'Careers', icon: 'Laptop', color: 'purple', url: '/careers' },
     ],
