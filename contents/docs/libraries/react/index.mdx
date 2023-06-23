@@ -310,3 +310,13 @@ function App() {
 ```
 
 If you wish to customise logic around when the component is considered visible, you can pass in `visibilityObserverOptions` to the feature. These take the same options as the [IntersectionObserver API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). By default, we use a threshold of 0.1. 
+
+#### Customising analytics
+
+By default, this component tracks views and interactions. However, you can disable these by setting `trackInteraction` and `trackView` on the component like so:
+
+```react
+<PostHogFeature flag={'show-hello'} match={true} trackInteraction={false} trackView={false}>
+    <div data-testid="helloDiv">Hello</div>
+</PostHogFeature>
+```
