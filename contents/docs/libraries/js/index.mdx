@@ -339,6 +339,19 @@ posthog.getEarlyAccessFeatures((previewItemData) => {
 posthog.updateEarlyAccessFeatureEnrollment(flagKey, 'true')
 ```
 
+#### Enriched analytics
+
+You can now send enriched analytics data for feature flags, which helps find recordings where people interact with a flag quickly, target people who've interacted with a feature seamlessly, or, easily build cohorts of people who've viewed a feature.
+
+To enable this, you can either use our `<PosthogFeature>` [React component](/docs/libraries/react#feature-flags-react-component), or if you're not using React, build your own.
+
+We want the component to do 3 things:
+
+1. Whenever a feature is viewed, send the `$feature_view` event with the property `feature_flag` set to the name of the flag.
+2. Whenever someone interacts with a feature, send the `$feature_interaction` event with the property `feature_flag` set to the name of the flag.
+    2.b. At the same time, set the person property `$feature_interaction/<flag-key>` to true. [Here's a code example](https://github.com/PostHog/posthog-js/blob/master/react/src/components/PostHogFeature.tsx#L48C10-L48C35)
+
+[Here's a code example for the entire React component](https://github.com/PostHog/posthog-js/blob/master/react/src/components/PostHogFeature.tsx)
 
 ### Group analytics
 
