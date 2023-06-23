@@ -959,6 +959,7 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/product-os',
+                    icon: 'Flag',
                 },
                 {
                     name: 'Data',
@@ -1024,6 +1025,42 @@ export const docsMenu = {
                         {
                             name: 'UTM segmentation',
                             url: '/docs/data/utm-segmentation',
+                        },
+                    ],
+                },
+                {
+                    name: 'HogQL',
+                    url: '/docs/product-analytics/hogql',
+                    icon: 'HogQL',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/integrations',
+                        },
+                        {
+                            name: 'Placeholder',
+                            url: '/docs/libraries/docusaurus',
+                            badge: {
+                                title: '3rd party',
+                            },
+                        },
+                    ],
+                },
+                {
+                    name: 'Toolbar',
+                    url: '/docs/product-analytics/toolbar',
+                    icon: 'Toolbar',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/integrations',
+                        },
+                        {
+                            name: 'Placeholder',
+                            url: '/docs/libraries/docusaurus',
+                            badge: {
+                                title: '3rd party',
+                            },
                         },
                     ],
                 },

@@ -58,7 +58,7 @@ export default function Menu({
     const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-start items-center relative text-[15px] pl-3 py-1 rounded border border-b-3 border-transparent cursor-pointer ${
+    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-start items-center relative text-[15px] pl-3 py-0.5 rounded border border-b-3 border-transparent cursor-pointer ${
         children || topLevel
             ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
             : ''
