@@ -9,6 +9,7 @@ import PostLayout from 'components/PostLayout'
 import { graphql, PageProps } from 'gatsby'
 import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
+import { LightBulb } from 'components/NewIcons'
 
 const quickLinks = [
     {
@@ -197,7 +198,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
             <SEO title="Documentation - PostHog" />
 
             <PostLayout article={false} title={'Docs'} menu={docs} hideSidebar hideSurvey>
-                <section className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded mb-4 flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
+                <section className="mb-4 flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
                     <div className="flex-1 text-center sm:text-left">
                         <h2>New to PostHog?</h2>
                         <p className="text-[15px]">
@@ -228,8 +229,23 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                     </aside>
                 </section>
 
-                <section className="grid md:grid-cols-3 gap-4 mb-4">
-                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded">
+                <div className="flex gap-1 items-center mb-8">
+                    <LightBulb className="w-6 h-6 text-primary dark:text-primary-dark opacity-50" />
+                    <p className="text-sm m-0">
+                        <strong>Tip:</strong> Open search with{' '}
+                        <kbd className="text-sm border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans">
+                            /
+                        </kbd>{' '}
+                        , then{' '}
+                        <kbd className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-1 text-black/40 dark:text-white/40 font-sans">
+                            Tab
+                        </kbd>{' '}
+                        to search docs
+                    </p>
+                </div>
+
+                <section className="grid md:grid-cols-3 gap-4 mb-8">
+                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
                         <h3 className="text-xl mb-2">Data</h3>
                         <p className="text-[15px]">
                             Learn how to manage events and customer data for use with all PostHog products.
@@ -238,28 +254,33 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                             Get started
                         </CallToAction>
                     </div>
-                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded">
+                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
                         <h3 className="text-xl mb-2">Apps</h3>
                         <p className="text-[15px]">
                             Extend functionality with third-party apps that integrate into the PostHog ecosystem.
                         </p>
-                        <CallToAction to="/docs/apps" type="outline" size="md" className="!w-full sm:!w-auto">
-                            Get started
-                        </CallToAction>
+                        <div className="flex items-center gap-4">
+                            <CallToAction to="/docs/apps" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Get started
+                            </CallToAction>
+                            <Link to="/apps" className="text-sm">
+                                Browse apps
+                            </Link>
+                        </div>
                     </div>
-                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded">
+                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
                         <h3 className="text-xl mb-2">API</h3>
                         <p className="text-[15px]">
                             Push or pull data to build custom functionality or create bespoke views for your business
                             needs.
                         </p>
                         <CallToAction to="/docs/api" type="outline" size="md" className="!w-full sm:!w-auto">
-                            Get started
+                            Explore
                         </CallToAction>
                     </div>
                 </section>
 
-                <section className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded mb-4 lg:flex-row gap-4 lg:gap-8">
+                <section className="mb-4 lg:flex-row gap-4 lg:gap-8">
                     <h2>Products</h2>
                     <List
                         className="grid md:grid-cols-2 gap-1"
