@@ -10,6 +10,7 @@ import { graphql, PageProps } from 'gatsby'
 import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
 import { LightBulb } from 'components/NewIcons'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const quickLinks = [
     {
@@ -129,7 +130,7 @@ const ImportantLink: React.FC<ImportantLinkProps> = ({ to, icon, title, badge, c
 
     return (
         <Link
-            className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark font-semibold p-2 hover:bg-gray-accent/40 active:hover:bg-gray-accent/60 dark:hover:bg-gray-accent/10 dark:active:bg-gray-accent/5 rounded flex items-center space-x-2 text-[14px]"
+            className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark font-semibold p-2 hover:bg-gray-accent/40 active:hover:bg-gray-accent/50 dark:hover:bg-gray-accent/10 dark:active:bg-gray-accent/5 rounded flex items-center space-x-2 text-[14px]"
             to={to}
         >
             {icon ? <img src={icon} className="w-5 h-5" /> : children || null}
@@ -232,15 +233,8 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                 <div className="flex gap-1 items-center mb-8">
                     <LightBulb className="w-6 h-6 text-primary dark:text-primary-dark opacity-50" />
                     <p className="text-sm m-0">
-                        <strong>Tip:</strong> Open search with{' '}
-                        <kbd className="text-sm border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans">
-                            /
-                        </kbd>{' '}
-                        , then{' '}
-                        <kbd className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-1 text-black/40 dark:text-white/40 font-sans">
-                            Tab
-                        </kbd>{' '}
-                        to search docs
+                        <strong>Tip:</strong> Open search with <KeyboardShortcut text="/" /> , then{' '}
+                        <KeyboardShortcut text="Tab" size="sm" /> to search docs
                     </p>
                 </div>
 

@@ -10,6 +10,7 @@ import { FeatureAvailability } from './components/FeatureAvailability'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
+import { KeyboardShortcut } from './components/KeyboardShortcut'
 import { LPCTA } from './components/LPCTA'
 import { Label } from './components/Label'
 import { List } from './components/List'
@@ -36,6 +37,7 @@ export const shortcodes = {
     GDPRForm,
     HiddenSection,
     HubSpotForm,
+    KeyboardShortcut,
     LPCTA,
     Label,
     List,
