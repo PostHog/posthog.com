@@ -785,7 +785,7 @@ export const companyMenu = {
 
 export const docsMenu = {
     name: 'Docs',
-    url: '/docs/product-os/getting-started/install',
+    url: '/docs/getting-started/install',
     icon: 'Book',
     children: [
         {
