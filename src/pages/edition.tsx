@@ -222,7 +222,7 @@ export default function Edition() {
                         <h1 className="m-0">The PostHog Edition</h1>
                     </div>
                     <div className="py-2 border-b dark:border-light border-dark text-center flex justify-between items-center">
-                        <p className="m-0">The latest from the PostHog community</p>
+                        <p className="m-0">News and highlights from PostHog &amp; the product engineering community</p>
                         <p className="m-0">{dayjs().format('MMM D, YYYY')}</p>
                     </div>
                 </section>
