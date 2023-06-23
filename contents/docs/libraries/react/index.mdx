@@ -316,7 +316,7 @@ If you wish to customise logic around when the component is considered visible, 
 By default, this component tracks views and interactions. However, you can disable these if you don't want them like so:
 
 ```react
-<PostHogFeature flag={given.featureFlag} match={given.matchValue} trackInteraction={false} trackView={false}>
+<PostHogFeature flag={'show-hello'} match={true} trackInteraction={false} trackView={false}>
     <div data-testid="helloDiv">Hello</div>
 </PostHogFeature>
 ```
