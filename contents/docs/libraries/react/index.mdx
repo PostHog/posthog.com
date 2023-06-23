@@ -313,7 +313,7 @@ If you wish to customise logic around when the component is considered visible, 
 
 #### Customising analytics
 
-By default, this component tracks views and interactions. However, you can disable these if you don't want them like so:
+By default, this component tracks views and interactions. However, you can disable these by setting `trackInteraction` and `trackView` on the component like so:
 
 ```react
 <PostHogFeature flag={'show-hello'} match={true} trackInteraction={false} trackView={false}>
