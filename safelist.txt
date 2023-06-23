@@ -62,6 +62,7 @@ lg:grid-rows-1
 lg:grid-rows-2
 lg:grid-rows-3
 lg:grid-rows-4
+lg:justify-center
 lg:mb-8
 lg:ml-6
 lg:my-0
