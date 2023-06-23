@@ -763,6 +763,11 @@ export const docsMenu = {
             url: '/docs/product-os',
             children: [
                 {
+                    name: 'Overview',
+                    url: '/docs',
+                    icon: 'Info',
+                },
+                {
                     name: 'New to PostHog?',
                 },
                 {
@@ -957,9 +962,9 @@ export const docsMenu = {
                     name: 'Product OS',
                 },
                 {
-                    name: 'Overview',
+                    name: 'What is Product OS?',
                     url: '/docs/product-os',
-                    icon: 'Flag',
+                    icon: 'Info',
                 },
                 {
                     name: 'Data',
