@@ -16,7 +16,7 @@ tags:
 As an all-in-one platform, PostHog replaces _a lot_ of legacy tools. PostHog is great if you:
 
 1. Need quantitative _and_ qualitative insights into user behavior
-2. Want granular control over rolling out new features, feature kill switches, and feature gating
+2. Want easy control over new features roll outs, kill switches, and feature gating
 3. Desire one integrated tool over a complex stack of discrete solutions
 
 This guide is an overview of some popular alternatives to PostHog, how they compare, and [why people choose PostHog](#why-people-choose-posthog).
@@ -155,7 +155,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 - "I do feel amplitude makes it difficult to parse out nuanced information on data. For more technical people, like myself, SQL is better for really digging into data."
 
-**Read more:** [In-depth PostHog vs Amplitude comparison](blog/posthog-vs-amplitude) 
+**Read more:** [In-depth PostHog vs Amplitude comparison](/blog/posthog-vs-amplitude) 
 
 ## Mixpanel
 
