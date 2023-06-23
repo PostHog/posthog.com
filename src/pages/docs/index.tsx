@@ -16,36 +16,42 @@ const quickLinks = [
         name: 'Product analytics',
         to: '/docs/product-analytics',
         description: 'Better understand your users and build better products',
+        color: 'blue',
     },
     {
         icon: 'RewindPlay',
         name: 'Session recording',
         to: '/docs/session-replay',
         description: 'Play back sessions to diagnose UI issues and get inspired',
+        color: 'yellow',
     },
     {
         icon: 'Toggle',
         name: 'Feature flags',
         to: '/docs/feature-flags',
         description: 'Toggle features to test the impact before rolling out',
+        color: 'seagreen',
     },
     {
         icon: 'Flask',
         name: 'A/B testing',
         to: '/docs/experiments',
         description: 'A/B test UI changes and new features',
+        color: 'purple',
     },
     {
         icon: 'Person',
         name: 'CDP',
         to: '/docs/cdp',
         description: 'Get a complete picture of all your data',
+        color: 'yellow',
     },
     {
         icon: 'Server',
         name: 'Data warehouse',
         to: '/docs/data-warehouse',
         description: 'Extend PostHog by adding your own functionality',
+        color: 'teal',
     },
 ]
 
@@ -191,7 +197,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
             <SEO title="Documentation - PostHog" />
 
             <PostLayout article={false} title={'Docs'} menu={docs} hideSidebar hideSurvey>
-                <section className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded mb-4 md:mb-8 flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
+                <section className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded mb-4 flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
                     <div className="flex-1 text-center sm:text-left">
                         <h2>New to PostHog?</h2>
                         <p className="text-[15px]">
@@ -201,7 +207,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                         </p>
                         <CallToAction
                             to="/docs/getting-started/install"
-                            type="outline"
+                            type="primary"
                             size="md"
                             className="!w-full sm:!w-auto"
                         >
@@ -222,9 +228,9 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                     </aside>
                 </section>
 
-                <section className="grid md:grid-cols-3 gap-4 mb-4 md:mb-8">
+                <section className="grid md:grid-cols-3 gap-4 mb-4">
                     <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded">
-                        <h3 className="text-lg">Data</h3>
+                        <h3 className="text-xl mb-2">Data</h3>
                         <p className="text-[15px]">
                             Learn how to manage events and customer data for use with all PostHog products.
                         </p>
@@ -233,7 +239,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                         </CallToAction>
                     </div>
                     <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded">
-                        <h3 className="text-lg">Apps</h3>
+                        <h3 className="text-xl mb-2">Apps</h3>
                         <p className="text-[15px]">
                             Extend functionality with third-party apps that integrate into the PostHog ecosystem.
                         </p>
@@ -242,7 +248,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                         </CallToAction>
                     </div>
                     <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded">
-                        <h3 className="text-lg">API</h3>
+                        <h3 className="text-xl mb-2">API</h3>
                         <p className="text-[15px]">
                             Push or pull data to build custom functionality or create bespoke views for your business
                             needs.
@@ -253,15 +259,16 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                     </div>
                 </section>
 
-                <section className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded mb-4 md:mb-8 lg:flex-row gap-4 lg:gap-8">
+                <section className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-8 rounded mb-4 lg:flex-row gap-4 lg:gap-8">
                     <h2>Products</h2>
                     <List
                         className="grid md:grid-cols-2 gap-1"
-                        items={quickLinks.map(({ icon, name, to, description }) => ({
+                        items={quickLinks.map(({ icon, name, to, description, color }) => ({
                             label: name,
                             url: to,
                             icon,
                             description,
+                            iconColor: color,
                         }))}
                     />
                 </section>

@@ -753,7 +753,7 @@ export const companyMenu = {
 
 export const docsMenu = {
     name: 'Docs',
-    url: '/docs/getting-started/install',
+    url: '/docs',
     icon: 'Book',
     children: [
         {
@@ -762,6 +762,9 @@ export const docsMenu = {
             color: 'salmon',
             url: '/docs/product-os',
             children: [
+                {
+                    name: 'Docs',
+                },
                 {
                     name: 'Overview',
                     url: '/docs',

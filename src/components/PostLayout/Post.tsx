@@ -59,11 +59,13 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                 hideSearch ? 'pt-5' : ''
                             }`}
                         >
+                            {/*
                             {!hideSearch && (
                                 <div className="lg:sticky top-0 z-20 pt-4 -mx-2 px-1 relative">
                                     <SidebarSearchBox filter={searchFilter} />
                                 </div>
                             )}
+                            */}
                             <TableOfContents />
                         </aside>
                     </div>
@@ -71,7 +73,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                 <article
                     key={`${title}-article`}
                     id="content-menu-wrapper"
-                    className={`lg:py-6 py-4 box-border w-full flex-shrink mx-auto transition-all ${
+                    className={`py-4 box-border w-full flex-shrink mx-auto transition-all ${
                         !fullWidthContent && sidebar && !hideSidebar ? ' max-w-3xl' : 'max-w-screen-2xl'
                     }`}
                 >
