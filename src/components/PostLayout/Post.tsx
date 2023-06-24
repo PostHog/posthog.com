@@ -55,7 +55,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         className="w-full flex-shrink-0 lg:block hidden relative z-20"
                     >
                         <aside
-                            className={`lg:sticky top-[108px] flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10 ${
+                            className={`lg:sticky reasonable:sticky reasonable:top-[108px] flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto lg:h-screen pb-10 ${
                                 hideSearch ? 'pt-5' : ''
                             }`}
                         >
@@ -89,9 +89,11 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     <aside
                         key={`${title}-sidebar`}
                         style={{ maxWidth: menuWidth?.right ?? defaultMenuWidth.right }}
-                        className="flex-shrink-0 pt-4 w-full justify-self-end my-10 lg:my-0 h-full lg:px-0 px-4 box-border lg:flex hidden flex-col sticky top-[108px]"
+                        className="flex-shrink-0 pt-4 w-full justify-self-end my-10 lg:my-0 h-full lg:px-0 px-4 box-border lg:flex hidden flex-col reasonable:sticky reasonable:top-[108px]"
                     >
-                        <div className={`${stickySidebar ? 'sticky top-[108px]' : ''} z-10`}>{sidebar}</div>
+                        <div className={`${stickySidebar ? 'reasonable:sticky reasonable:top-[108px]' : ''} z-10`}>
+                            {sidebar}
+                        </div>
                         <div className="flex flex-grow items-end">
                             <div className="sticky bottom-0 w-full">
                                 {tableOfContents && tableOfContents?.length > 0 && (
