@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Structure } from '../../Structure'
 import { mergeClassList } from '../../../lib/utils'
-import compensationImg from './images/compensation.svg'
+import { Compensation } from 'components/Careers/Images'
 import boardMeetingsImg from './images/board-meetings.svg'
 import financesImg from './images/finances.svg'
 import feedbackImg from './images/feedback.svg'
@@ -39,6 +39,8 @@ const TransparencyFeature = ({ image, title, children, className = '' }: Transpa
     return (
         <div className={classList}>
             <div className="flex-shrink-0 flex justify-center items-start w-auto">
+                <Compensation className="w-18 h-18" />
+
                 <img src={image} alt={title} className="max-w-full block h-24 w-24 p-2 pl-0 mb-2" />
             </div>
             <div className="flex-grow text-left">
@@ -65,7 +67,9 @@ export const Transparency = () => {
 
             <div className="w-full my-16 text-left grid sm:grid-cols-2 ">
                 <div className="px-4 py-8 md:py-12">
-                    <TransparencyFeature title="Compensation" image={compensationImg} className="max-w-md mx-auto">
+                    <Compensation className="w-18 h-18" />
+
+                    <TransparencyFeature title="Compensation" image={Compensation} className="max-w-md mx-auto">
                         <p className="mb-0 text-lg font-lightish">
                             We pay generously and built a{' '}
                             <a href="/handbook/people/compensation">compensation calculator</a> to keep salary

@@ -1573,20 +1573,68 @@ export const docsMenu = {
                     url: '/docs/product-analytics',
                 },
                 {
-                    name: 'Correlation analysis',
-                    url: '/docs/product-analytics/correlation',
-                },
-                {
-                    name: 'Dashboards',
-                    url: '/docs/product-analytics/dashboards',
+                    name: 'Trends',
+                    url: '/docs/product-analytics/trends',
+                    icon: 'Graph',
                 },
                 {
                     name: 'Funnels',
                     url: '/docs/product-analytics/funnels',
+                    icon: 'Funnels',
+                },
+                {
+                    name: 'Dashboards',
+                    url: '/docs/product-analytics/dashboards',
+                    icon: 'Dashboard',
+                },
+                {
+                    name: 'User paths',
+                    url: '/docs/product-analytics/paths',
+                    icon: 'UserPaths',
+                },
+                {
+                    name: 'Stickiness',
+                    url: '/docs/product-analytics/stickiness',
+                    icon: 'Stickiness',
+                },
+                {
+                    name: 'Correlation analysis',
+                    url: '/docs/product-analytics/correlation',
+                    color: 'red',
+                    icon: 'Graph',
+                },
+                {
+                    name: 'Retention',
+                    url: '/docs/product-analytics/retention',
+                    icon: 'Retention',
+                },
+                {
+                    name: 'Lifecycle',
+                    url: '/docs/product-analytics/lifecycle',
+                    icon: 'Lifecycle',
+                },
+                {
+                    name: 'Notifications',
+                    url: '/docs/product-analytics/subscriptions',
+                    icon: 'Bell',
+                },
+                {
+                    name: 'Insights',
+                    url: '/docs/product-analytics/insights',
                 },
                 {
                     name: 'Group analytics',
                     url: '/docs/product-analytics/group-analytics',
+                    icon: 'People',
+                },
+                {
+                    name: 'Sampling',
+                    url: '/docs/product-analytics/sampling',
+                    icon: 'Sampling',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'HogQL',
@@ -1597,44 +1645,8 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Insights',
-                    url: '/docs/product-analytics/insights',
-                },
-                {
-                    name: 'Lifecycle',
-                    url: '/docs/product-analytics/lifecycle',
-                },
-                {
-                    name: 'Retention',
-                    url: '/docs/product-analytics/retention',
-                },
-                {
-                    name: 'Sampling',
-                    url: '/docs/product-analytics/sampling',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Stickiness',
-                    url: '/docs/product-analytics/stickiness',
-                },
-                {
-                    name: 'Subscriptions',
-                    url: '/docs/product-analytics/subscriptions',
-                },
-                {
                     name: 'Toolbar',
                     url: '/docs/product-analytics/toolbar',
-                },
-                {
-                    name: 'Trends',
-                    url: '/docs/product-analytics/trends',
-                },
-                {
-                    name: 'User paths',
-                    url: '/docs/product-analytics/paths',
                 },
             ],
         },

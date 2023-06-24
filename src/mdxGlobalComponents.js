@@ -4,6 +4,7 @@ import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
+import { Images } from './components/Careers/Images'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
 import { FeatureAvailability } from './components/FeatureAvailability'
@@ -32,6 +33,7 @@ export const shortcodes = {
     BasicHedgehogImage,
     CallToAction,
     Caption,
+    Images,
     CompensationCalculator,
     ContentViewer,
     FeatureAvailability,
