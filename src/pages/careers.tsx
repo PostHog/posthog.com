@@ -64,7 +64,7 @@ const IndexPage = () => {
             <CareersHero />
             <div className="careers-anchor-navbar">
                 <WhyWereHere />
-                <div className="bg-accent dark:bg-accent-dark sticky top-[108px] py-2 z-10 careers-nav">
+                <div className="md:hidden bg-accent dark:bg-accent-dark sticky top-[108px] py-2 z-10 careers-nav">
                     <AnchorScrollNavbar autoScroll={breakpoints.md} menu={menu} />
                 </div>
                 <Transparency />
