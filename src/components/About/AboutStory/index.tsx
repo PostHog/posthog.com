@@ -3,7 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import GitHubButton from 'react-github-btn'
 import { YCBadge } from './yc-badge'
 import { CallToAction } from 'components/CallToAction'
-import { James, Tim } from './images/signatures'
+import { James, Tim } from 'components/signatures'
 
 export const AboutStory = () => {
     return (

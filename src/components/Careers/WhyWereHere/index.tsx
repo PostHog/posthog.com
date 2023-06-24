@@ -2,6 +2,7 @@ import React from 'react'
 import { Structure } from '../../Structure'
 import { StaticImage } from 'gatsby-plugin-image'
 import { AnchorScrollNavbarTop } from './AnchorScrollNavbarTop'
+import { James, Plus, Tim } from 'components/signatures'
 
 const P = ({ children }) => {
     return <p className="text-justify text-[17px] leading-relaxed">{children}</p>
@@ -14,8 +15,8 @@ export const WhyWereHere = () => {
                 <Structure.Section width="5xl" className="text-lg">
                     <div className="lg:grid grid-cols-4 gap-8">
                         <div className="relative text-opacity-80 text-gray-100 bg-white/90 dark:bg-accent-dark/90 backdrop-blur shadow-xl pt-6 pb-12 px-12 md:px-20 rounded col-span-3">
-                            <div className="before:bg-[url('/images/letterhead.svg')] before:left-0 before:w-[6px] before:top-0 before:h-full before:absolute">
-                                <div className="flex items-center space-between w-full pb-4 mb-8">
+                            <div className="before:bg-accent dark:before:bg-accent-dark before:left-0 before:w-[6px] before:top-0 before:h-full before:absolute">
+                                <div className="flex items-center space-between w-full pb-4 mb-8 border-b border-light dark:border-dark">
                                     <div className="flex-1">
                                         <p className="opacity-50 text-[17px] font-semibold mb-0 leading-tight">
                                             A note from our co-founders...
@@ -84,39 +85,9 @@ export const WhyWereHere = () => {
                                     </P>
 
                                     <div className="flex items-center space-x-3">
-                                        <StaticImage
-                                            src="../../../images/signature-hyphen.png"
-                                            alt="-"
-                                            width={11.5}
-                                            height={3}
-                                            quality={100}
-                                            placeholder="none"
-                                        />
-                                        <StaticImage
-                                            src="../../../images/signature-initials-james.png"
-                                            alt="-"
-                                            width={48.5}
-                                            height={57}
-                                            quality={100}
-                                            placeholder="none"
-                                        />
-                                        <StaticImage
-                                            src="../../../images/signature-plus.png"
-                                            alt="-"
-                                            width={17}
-                                            height={20}
-                                            quality={100}
-                                            placeholder="none"
-                                        />
-                                        <StaticImage
-                                            src="../../../images/signature-initials-tim.png"
-                                            alt="-"
-                                            width={58.5}
-                                            height={55}
-                                            quality={100}
-                                            placeholder="none"
-                                            className="!-ml-0"
-                                        />
+                                        <James />
+                                        <Plus />
+                                        <Tim />
                                     </div>
                                 </div>
                             </div>
