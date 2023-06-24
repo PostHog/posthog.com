@@ -97,7 +97,7 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                                     <div className="grid grid-cols-12 items-center w-full">
                                         <div className="col-span-8 md:col-span-10 flex items-center space-x-3">
                                             {Icon && <Icon className="w-5 opacity-60 text-black dark:text-white" />}
-                                            <span className="text-red line-clamp-1">{label}</span>
+                                            <span className="text-red dark:text-yellow line-clamp-1">{label}</span>
                                         </div>
                                         <div className="col-span-4 md:col-span-2 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                             {latestQuestion?.attributes?.activeAt &&
