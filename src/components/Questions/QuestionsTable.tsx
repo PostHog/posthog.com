@@ -64,7 +64,7 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
                         </div>
 
                         <div className="w-full">
-                            <span className="text-red line-clamp-1">{subject}</span>
+                            <span className="text-red dark:text-yellow line-clamp-1">{subject}</span>
                             {showTopic && (
                                 <div className="flex justify-between items-center">
                                     <div className="flex items-center text-sm space-x-1 text-primary group">
