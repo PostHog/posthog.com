@@ -1040,10 +1040,14 @@ export const docsMenu = {
                     name: 'HogQL',
                     url: '/docs/product-analytics/hogql',
                     icon: 'HogQL',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/integrations',
+                            url: '/docs/product-analytics/hogql',
                         },
                         {
                             name: 'Placeholder',
@@ -1061,7 +1065,7 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/integrations',
+                            url: '/docs/product-analytics/toolbar',
                         },
                         {
                             name: 'Placeholder',
@@ -1573,7 +1577,19 @@ export const docsMenu = {
                     url: '/docs/product-analytics',
                 },
                 {
-                    name: 'Trends',
+                    name: 'Getting started',
+                    url: '/docs/product-analytics/welcome',
+                    icon: 'GraduationCap',
+                },
+                {
+                    name: 'Saved insights',
+                    url: '/docs/product-analytics/insights',
+                },
+                {
+                    name: 'Analysis views',
+                },
+                {
+                    name: 'Graphs & trends',
                     url: '/docs/product-analytics/trends',
                     icon: 'Graph',
                 },
@@ -1619,8 +1635,7 @@ export const docsMenu = {
                     icon: 'Bell',
                 },
                 {
-                    name: 'Insights',
-                    url: '/docs/product-analytics/insights',
+                    name: 'Tools',
                 },
                 {
                     name: 'Group analytics',
@@ -1635,18 +1650,6 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
-                },
-                {
-                    name: 'HogQL',
-                    url: '/docs/product-analytics/hogql',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Toolbar',
-                    url: '/docs/product-analytics/toolbar',
                 },
             ],
         },
