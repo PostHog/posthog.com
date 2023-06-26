@@ -147,4 +147,4 @@ Consider the following resources if you want to learn more about the differences
 
 - [ClickHouse guide to migrating data from Redshift to ClickHouse](https://clickhouse.com/docs/en/integrations/redshift)
 - [Optimizing Analytical Workloads: Comparing Redshift vs ClickHouse](https://clickhouse.com/blog/redshift-vs-clickhouse-comparison)
-- [https://altinity.com/blog/2017/6/20/clickhouse-vs-redshift](https://altinity.com/blog/2017/6/20/clickhouse-vs-redshift)
+- [Altinity's ClickHouse vs Redshift benchmarking](https://altinity.com/blog/2017/6/20/clickhouse-vs-redshift)
