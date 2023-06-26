@@ -458,7 +458,7 @@
                 "url": "/docs/session-replay/manual"
             },
             {
-                "name": "Privacy Controls",
+                "name": "Privacy controls",
                 "url": "/docs/session-replay/privacy"
             },
             {
@@ -510,7 +510,7 @@
             },
 
             {
-                "name": "Early Access Feature Management",
+                "name": "Early access feature management",
                 "url": "/docs/feature-flags/early-access-feature-management"
             },
 
@@ -592,7 +592,7 @@
                 "url": "/docs/data/data-management"
             },
             {
-                "name": "Data Warehouse",
+                "name": "Data warehouse",
                 "url": "/docs/data/data-warehouse",
                 "badge": {
                     "title": "Beta",
