@@ -56,7 +56,7 @@ const ContentContainer = ({ children, className = '' }) => {
 }
 
 const Content = ({ children }) => {
-    return <div className="max-w-[450px] md:py-0 pl-5 md:px-0 pb-5">{children}</div>
+    return <div className="max-w-[450px] md:pt-0 pl-5 md:px-0 pb-5">{children}</div>
 }
 
 const ImageContainer = ({ children, className = '' }) => {

@@ -108,6 +108,7 @@ w-64
 w-72
 w-full
 w-[(100%_+_4rem)]
+w-[calc(100%_+_3px)]
 text-blue
 text-teal
 text-seagreen
