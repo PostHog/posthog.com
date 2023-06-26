@@ -28,7 +28,7 @@ export const quickLinks = [
     },
     {
         name: 'Data warehouse',
-        to: '/docs/data/data-warehouse',
+        to: '/docs/data-warehouse',
         description: 'Send your data to your data warehouse for analysis.',
     },
     {
