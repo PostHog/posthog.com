@@ -5,14 +5,11 @@ import builderHog from './builder-hog.png'
 const Listing = ({ name, image, url, badge, price }) => {
     return (
         <li className="">
-            <Link
-                to={url}
-                className="flex flex-col relative items-center text-center px-2 py-8 justify-center hover:bg-gray-accent-light"
-            >
+            <Link to={url} className="flex flex-col relative items-center text-center px-2 py-8 justify-center">
                 <img className="icon w-20 h-20 p-2 mb-2 rounded-sm" src={image} />
 
-                <span className="text-primary">{name}</span>
-                <div className="absolute top-4 right-4 inline-flex space-x-2 items-center text-[12px] uppercase text-primary text-opacity-50">
+                <span className="text-primary dark:text-primary-dark">{name}</span>
+                <div className="absolute top-4 right-4 inline-flex space-x-2 items-center text-[12px] uppercase text-primary dark:text-primary-dark text-opacity-50">
                     {badge && <span className="bg-gray-accent-light rounded-[2px] px-2 py-1">{badge}</span>}
                     {badge?.toLowerCase() !== 'built-in' && <span>{price || 'Free'}</span>}
                 </div>
@@ -41,7 +38,7 @@ export default function TemplatesList({ templates }) {
                     />
                 )
             })}
-            <li className="border-dashed border-gray-accent-light inline-flex items-center justify-center relative overflow-hidden bg-red min-h-[160px]">
+            <li className="inline-flex items-center justify-center relative overflow-hidden min-h-[160px]">
                 <Link
                     className="flex justify-center space-x-4 items-center w-full h-full"
                     to="https://app.posthog.com/dashboard"
@@ -51,7 +48,9 @@ export default function TemplatesList({ templates }) {
                         src={builderHog}
                         alt=""
                     />
-                    <h3 className="m-0 text-[1.2rem] md:text-[1.5rem] text-white relative">Build your own</h3>
+                    <h3 className="m-0 text-[1.2rem] md:text-[1.5rem] text-primary dark:text-primary-dark relative">
+                        Build your own
+                    </h3>
                 </Link>
             </li>
         </ul>

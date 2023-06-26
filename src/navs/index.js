@@ -1671,7 +1671,7 @@ export const docsMenu = {
                     url: '/docs/session-replay/manual',
                 },
                 {
-                    name: 'Privacy Controls',
+                    name: 'Privacy controls',
                     url: '/docs/session-replay/privacy',
                 },
                 {
