@@ -37,7 +37,7 @@ export const quickLinks = [
         description: 'Add configuration data to your feature flags with JSON payloads',
     },
     {
-        name: 'Early Access Feature management',
+        name: 'Early access feature management',
         to: '/docs/feature-flags/early-access-feature-management',
         description: 'Give your users the ability to opt-in to early access features',
     },

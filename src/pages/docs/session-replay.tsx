@@ -17,7 +17,7 @@ export const quickLinks = [
         description: 'How to use session replay.',
     },
     {
-        name: 'Privacy Controls',
+        name: 'Privacy controls',
         to: '/docs/session-replay/privacy',
         description: 'Settings for customizing session replay privacy.',
     },
@@ -32,7 +32,7 @@ export const quickLinks = [
         description: 'Adjust how long session replays are stored when self-hosting.',
     },
     {
-        name: 'Troublehsooting & FAQs',
+        name: 'Troubleshooting & FAQs',
         to: '/docs/session-replay/troubleshooting',
         description: 'Common issues and how to resolve them.',
     },
