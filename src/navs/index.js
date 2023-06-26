@@ -2090,6 +2090,10 @@ export const docsMenu = {
                     name: 'Overview',
                     url: '/docs/data-warehouse',
                 },
+                {
+                    name: 'Setup',
+                    url: '/docs/data-warehouse/setup',
+                },
             ],
         },
     ],
