@@ -745,7 +745,7 @@ export const companyMenu = {
                 { name: '2020', url: '/changelog/2020' },
             ],
         },
-        { name: 'Team', icon: 'Profile', color: 'blue', url: '/handbook/company/team', children: handbookSidebar },
+        { name: 'Team', icon: 'Profile', color: 'blue', url: '/team' },
         { name: 'Handbook', icon: 'Book', color: 'seagreen', url: '/handbook', children: handbookSidebar },
         { name: 'Careers', icon: 'Laptop', color: 'purple', url: '/careers' },
     ],
