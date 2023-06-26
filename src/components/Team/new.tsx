@@ -15,7 +15,7 @@ export default function TeamNew() {
     } = useStaticQuery(query)
     return (
         <Layout>
-            <ul className="list-none py-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-10 max-w-screen-2xl mx-auto px-8 2xl:px-4 3xl:p-0">
+            <ul className="list-none py-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-8 2xl:px-4 3xl:p-0">
                 {teamMembers.map((teamMember) => {
                     const {
                         avatar: { url: avatar },
@@ -31,13 +31,13 @@ export default function TeamNew() {
                     return (
                         <li
                             key={name}
-                            className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded"
+                            className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded h-40 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px]"
                         >
                             <Link
                                 to="#"
-                                className="flex justify-between h-full text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
+                                className="flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
                             >
-                                <div className="flex flex-col justify-between px-6 py-4">
+                                <div className="flex flex-col justify-between px-6 py-4 w-full mr-40">
                                     <div>
                                         <div className="flex">
                                             <h3
@@ -54,11 +54,15 @@ export default function TeamNew() {
 
                                     <span className="flex items-center gap-2">
                                         {country === 'world' ? '🌎' : <ReactCountryFlag svg countryCode={country} />}
-                                        {country === 'world' ? 'Planet earth' : <span>{country}</span>}
+                                        {country === 'world' ? (
+                                            'Planet earth'
+                                        ) : (
+                                            <span className="opacity-75">{country}</span>
+                                        )}
                                     </span>
                                 </div>
 
-                                <figure className="m-0 -mt-8 p-0">
+                                <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0">
                                     <img src={avatar} className="w-[200px]" />
                                 </figure>
                             </Link>
