@@ -348,8 +348,16 @@ To enable this, you can either use our `<PosthogFeature>` [React component](/doc
 To implement it on your own, there are 3 things you need to do:
 
 1. Whenever a feature is viewed, send the `$feature_view` event with the property `feature_flag` set to the name of the flag.
+
+```javascript
+posthog.capture('$feature_view', { feature_flag: flag })
+```
 2. Whenever someone interacts with a feature, send the `$feature_interaction` event with the property `feature_flag` set to the name of the flag.
 3. At the same time, set the person property `$feature_interaction/<flag-key>` to true. [Here's a code example](https://github.com/PostHog/posthog-js/blob/master/react/src/components/PostHogFeature.tsx#L48C10-L48C35).
+
+```javascript
+posthog.capture('$feature_interaction', { feature_flag: flag, $set: { [`$feature_interaction/${flag}`]: true } })
+```
 
 [Here's a code example for the entire React component](https://github.com/PostHog/posthog-js/blob/master/react/src/components/PostHogFeature.tsx).
 
