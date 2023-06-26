@@ -88,7 +88,7 @@ What the toolbar is doing here is displaying the number of clicks on each of tho
 
 You can change the date range of the heatmap by clicking on the number next to the (🔥) icon on the toolbar. 
 
-![The toolbar with the hteamp showing and a little number next to it](../images/tutorials/toolbar/toolbar-heatmap-icon.png)
+![The toolbar with the heatmap showing and a little number next to it](../images/tutorials/toolbar/toolbar-heatmap-icon.png)
 
 This displays a new menu where you can select the date range to query over, load more data, change how links are matched, and view a list of the most clicked on elements in descending order.
 
@@ -100,7 +100,7 @@ If you have a lot of events, you may need to load more data to see everything yo
 
 ### Matching links within the page
 
-The toolbar does not match links in the page by their `href` attribute. This means if you have a button on your page with a unique link in it, the toolbar will count every click on that button as a click on the same element. This is useful for links that include IDs or other unique values, but can be confusing if you want to distinguish between links that vary for different users. 
+By default, the toolbar does not match links in the page by their `href` attribute. This means if you have a button on your page with a unique link in it, the toolbar will count every click on that button as a click on the same element. This is useful for links that include IDs or other unique values, but can be confusing if you want to distinguish between links that vary for different users. 
 
 For example, if you have a list of links that changes based on the logged in user. The toolbar shows all the clicks on the element's by position in the list, rather than by the link they point to.
 

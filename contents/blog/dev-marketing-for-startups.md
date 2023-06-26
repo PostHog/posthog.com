@@ -9,6 +9,7 @@ author:
   - charles-cook
 featuredImage: ../images/blog/transparency.jpeg
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/zIH1mcS57so
 category: Startups
 tags:
   - Guides

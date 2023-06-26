@@ -347,7 +347,7 @@ module.exports = {
 
                             let allMdxs = allMdx.edges.map((edge) => {
                                 let { node } = edge
-                                let { frontmatter, excerpt, slug, id, body } = node
+                                let { frontmatter, excerpt, slug, id, html } = node
                                 let { date, title, authors, featuredImage } = frontmatter
                                 return {
                                     description: excerpt,
@@ -356,7 +356,13 @@ module.exports = {
                                     url: `${siteUrl}/${slug}`,
                                     guid: id,
                                     author: authors && authors[0].name,
-                                    custom_elements: [{ 'content:encoded': body }],
+                                    custom_elements: [
+                                        {
+                                            'content:encoded': {
+                                                _cdata: html,
+                                            },
+                                        },
+                                    ],
                                     enclosure: {
                                         url: featuredImage ? `${siteUrl}${featuredImage.publicURL}` : null,
                                     },
@@ -375,7 +381,7 @@ module.exports = {
                                 node {
                                   id
                                   slug
-                                  body
+                                  html
                                   excerpt(pruneLength: 150)
                                   frontmatter {
                                     date(formatString: "MMMM DD, YYYY")
@@ -402,9 +408,6 @@ module.exports = {
                         // if `string` is used, it will be used to create RegExp and then test if pathname of
                         // current page satisfied this regular expression;
                         // if not provided or `undefined`, all pages will have feed reference inserted
-                        match: '^/blog/',
-                        // optional configuration to specify external rss feed, such as feedburner
-                        link: 'https://posthog.com/blog',
                     },
                 ],
             },

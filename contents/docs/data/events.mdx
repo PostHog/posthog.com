@@ -25,6 +25,20 @@ You can view the properties of each event by clicking on the items in the ‘Eve
 
 You can also click each user to view a their entire event history.
 
+## Default events and properties
+
+You may notice that some events or properties are prefixed with `$` e.g., `$pageview`, `$feature_flag_called`, `$current_url`, or `$os_version`. This indicates that these are default PostHog events or properties.
+
+### Pageview events
+
+`$pageview` events are automatically sent when using the [JavaScript snippet or SDK](/docs/libraries/js). You can disable this by setting `capture_pageview: false` in the initialization [config](/docs/libraries/js#config).
+
+You can manually send pageview events by calling `posthog.capture('$pageview')`. This is necessary for single-page applications like [React](/docs/libraries/react), [Next.js](/docs/libraries/next-js#pages-router) or [Vue](/docs/libraries/vue-js#capturing-page-views), since otherwise a pageview event is only sent for the first page.
+
+### Pageleave events
+
+Similar to pageview, `$pageleave` events are automatically sent. You can disable them by setting `capture_pageleave: false` in the [config](/docs/libraries/js#config). For single-page applications, you'll also need to manually send these events using `posthog.capture('$pageleave')`.
+
 ## Event filtering
 
 You can filter events by [properties](/docs/integrate/client/js#sending-user-information) and [cohorts](/docs/user-guides/cohorts) to focus on specific events that are occurring in your project.

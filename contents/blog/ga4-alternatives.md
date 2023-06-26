@@ -9,6 +9,7 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/ImcNUnqDoUQ
 category: General
 tags:
   - Guides

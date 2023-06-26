@@ -231,6 +231,10 @@
                 ]
             },
             {
+                "name": "Grievance process",
+                "url": "/handbook/people/grievances"
+            },
+            {
                 "name": "Finance",
                 "url": "/handbook/people/finance"
             },
@@ -537,6 +541,10 @@
             {
                 "name": "Product design process",
                 "url": "/handbook/design/process"
+            },
+            {
+                "name": "Art and brand requests",
+                "url": "/handbook/design/art-requests"
             },
             {
                 "name": "Designing posthog.com",
