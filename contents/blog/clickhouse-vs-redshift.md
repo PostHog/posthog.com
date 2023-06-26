@@ -62,7 +62,7 @@ Compute nodes, through some complexity discussed below, transact with storage th
 
 ![Redshift Simplfiied.png](../images/blog/clickhouse-vs-redshift/Redshift_Simplfiied.png)
 
-Redshift becomes a bit more complex once we dive into its multiple layers of computation optimizations, whihch are both organizational and bare-metal hardware. 
+Redshift becomes a bit more complex once we dive into its multiple layers of computation optimizations, which are both organizational and bare-metal hardware. 
 
 The first is Redshift Spectrum, which refers to an army of EC2 machines that compute nodes can recruit to split a single query into parallel computations. More accurately, Redshift Spectrum is a layer between compute nodes and storage – while compute nodes divvy up queries via the leader node, Spectrum splits a single query’s computation between many machines. 
 
