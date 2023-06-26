@@ -962,6 +962,51 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Advanced',
+                    url: '/docs/advanced/cdp',
+                    icon: 'Advanced',
+                    children: [
+                        {
+                            name: 'Using a CDP',
+                            url: '/docs/advanced/cdp',
+                        },
+                        {
+                            name: 'Deploying a reverse proxy',
+                            url: '/docs/advanced/proxy',
+                            children: [
+                                {
+                                    name: 'Caddy',
+                                    url: '/docs/advanced/proxy/caddy',
+                                },
+                                {
+                                    name: 'Cloudflare',
+                                    url: '/docs/advanced/proxy/cloudflare',
+                                },
+                                {
+                                    name: 'AWS CloudFront',
+                                    url: '/docs/advanced/proxy/cloudfront',
+                                },
+                                {
+                                    name: 'Next.js',
+                                    url: '/docs/advanced/proxy/nextjs',
+                                },
+                                {
+                                    name: 'Netlify',
+                                    url: '/docs/advanced/proxy/netlify',
+                                },
+                                {
+                                    name: 'Vercel',
+                                    url: '/docs/advanced/proxy/vercel',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Browser extensions',
+                            url: '/docs/advanced/browser-extension',
+                        },
+                    ],
+                },
+                {
                     name: 'Product OS',
                 },
                 {
@@ -1245,6 +1290,29 @@ export const docsMenu = {
                         {
                             name: 'Data model',
                             url: '/docs/data-model',
+                        },
+                    ],
+                },
+                {
+                    name: 'Webhooks',
+                    url: '/docs/webhooks',
+                    icon: 'Webhooks',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/webhooks',
+                        },
+                        {
+                            name: 'Microsoft Teams',
+                            url: '/docs/webhooks/microsoft-teams',
+                        },
+                        {
+                            name: 'Slack',
+                            url: '/docs/webhooks/slack',
+                        },
+                        {
+                            name: 'Discord',
+                            url: '/docs/webhooks/discord',
                         },
                     ],
                 },
