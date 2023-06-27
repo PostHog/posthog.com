@@ -90,11 +90,11 @@ export const ProductAnalytics = () => {
         { title: 'Retention', Icon: Retention },
     ]
     return (
-        <div className="max-h-[425px] bg-[#1371FF] rounded-md text-white relative grid grid-cols-16 md:gap-8">
+        <div className="bg-[#1371FF] rounded-md text-white relative grid grid-cols-16 md:gap-8">
             <ImageContainer className="pl-8 col-span-10">
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="mdlg:-mt-8 lg:-mt-6 xl:-mt-6 -mb-2"
+                    className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 -mb-2"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -154,7 +154,7 @@ export const SessionReplay = () => {
             <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="mdlg:-mt-2 lg:-mt-6 xl:-mt-6 mdlg:-mb-4 lg:-mb-2"
+                    className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 -mb-2"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -214,43 +214,43 @@ export const FeatureFlags = () => {
         { title: 'Instant rollbacks', Icon: Rewind },
     ]
     return (
-        <div className="bg-[#29DBBB] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded-md">
-            <ImageContainer className="h-[40vw] md:h-[300px] xl:h-[400px] md:ml-4">
-                <motion.div
-                    transition={{ delay: 0.2 }}
-                    className="absolute left-0 bottom-2 w-3/4"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        placeholder="none"
-                        quality={100}
-                        className="w-[150%] md:w-full rotate-1 shadow-xl"
-                        src="./images/feature-flags-2.png"
-                        alt="A filter for rolling out a feature flag to 50% of organizations in a cohort"
-                    />
-                </motion.div>
+        <div className="min-h-[300px] lg:min-h-[400px] bg-[#29DBBB] rounded-md text-primary relative grid grid-cols-16 gap-2 lg:gap-4">
+            <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                 <motion.div
                     transition={{ delay: 0.3 }}
-                    className="absolute right-0 top-0 w-3/4"
+                    className="absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
                         placeholder="none"
                         quality={100}
-                        className="w-[150%] md:w-full -rotate-1 shadow-xl"
+                        className="w-[150%] md:w-full -rotate-1 shadow-2xl"
                         src="./images/feature-flags-1.png"
                         alt="A code snippet to check if the feature flag 'nav' is enabled"
                     />
                 </motion.div>
+                <motion.div
+                    transition={{ delay: 0.2 }}
+                    className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5"
+                    initial={{ translateY: '100%' }}
+                    animate={{ translateY: 0 }}
+                >
+                    <StaticImage
+                        placeholder="none"
+                        quality={100}
+                        className="w-[150%] md:w-full rotate-1 shadow-2xl"
+                        src="./images/feature-flags-2.png"
+                        alt="A filter for rolling out a feature flag to 50% of organizations in a cohort"
+                    />
+                </motion.div>
             </ImageContainer>
-            <ContentContainer>
+            <ContentContainer className="md:col-span-7 lg:col-span-6">
                 <Content>
                     <Title title={'Feature flags'} />
                     <Subtitle className="text-[14px] md:text-[18px]" />
                     <Description description="Safely roll out features to select users or cohorts." />
-                    <FeatureList features={features} />
+                    <FeatureList features={features} className="" />
 
                     <CallToAction
                         href="/feature-flags"
@@ -263,24 +263,20 @@ export const FeatureFlags = () => {
                         Explore
                     </CallToAction>
                 </Content>
-                <div className="flex items-end mt-auto w-full">
-                    <div className="md:relative w-3/4 ml-auto">
-                        <div className="absolute bottom-0 right-0">
-                            <motion.div
-                                transition={{ delay: 0.5 }}
-                                initial={{ translateX: '100%' }}
-                                animate={{ translateX: 0 }}
-                            >
-                                <StaticImage
-                                    alt=""
-                                    placeholder="none"
-                                    quality={100}
-                                    className="w-full max-w-[250px] xl:max-w-[480px]"
-                                    src="./images/feature-flags-hog.png"
-                                />
-                            </motion.div>
-                        </div>
-                    </div>
+                <div className="absolute bottom-0 right-0">
+                    <motion.div
+                        transition={{ delay: 0.5 }}
+                        initial={{ translateX: '100%' }}
+                        animate={{ translateX: 0 }}
+                    >
+                        <StaticImage
+                            alt=""
+                            placeholder="none"
+                            quality={100}
+                            className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
+                            src="./images/feature-flags-hog.png"
+                        />
+                    </motion.div>
                 </div>
             </ContentContainer>
         </div>
@@ -295,11 +291,11 @@ export const ABTesting = () => {
     ]
 
     return (
-        <div className="bg-[#9C19BD] text-primary-dark relative grid grid-cols-2 gap-7 pt-5 rounded-md">
-            <ImageContainer className="md:ml-4">
+        <div className="min-h-[300px] lg:min-h-[400px] bg-[#9C19BD] rounded-md text-white relative grid grid-cols-16 gap-2 lg:gap-4">
+            <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="absolute left-0 top-5 w-[150%] md:w-11/12"
+                    className="absolute left-2 top-5 w-[150%] md:w-3/4"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -308,13 +304,13 @@ export const ABTesting = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full rotate-1 shadow-xl"
+                        className="w-full rotate-1 shadow-2xl"
                         src="./images/ab-testing-2.png"
                     />
                 </motion.div>
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="absolute right-5 top-0 w-[100%] md:w-3/4"
+                    className="absolute right-0 -top-2 w-[100%] md:w-3/4"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -323,12 +319,12 @@ export const ABTesting = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full -rotate-1 shadow-xl"
+                        className="w-full -rotate-1 shadow-2xl"
                         src="./images/ab-testing-1.png"
                     />
                 </motion.div>
             </ImageContainer>
-            <ContentContainer>
+            <ContentContainer className="md:col-span-7 lg:col-span-6">
                 <Content>
                     <Title title={'A/B testing'} />
                     <Description description={'Run tests with statistical significance.'} />
@@ -345,24 +341,20 @@ export const ABTesting = () => {
                         Explore
                     </CallToAction>
                 </Content>
-                <div className="flex items-end mt-auto w-full">
-                    <div className="md:relative w-1/2 ml-auto">
-                        <div className="absolute bottom-0 right-0">
-                            <motion.div
-                                transition={{ delay: 0.5 }}
-                                initial={{ translateX: '100%' }}
-                                animate={{ translateX: 0 }}
-                            >
-                                <StaticImage
-                                    alt=""
-                                    placeholder="none"
-                                    quality={100}
-                                    className="w-full max-w-[200px] lg:max-w-[250px] xl:max-w-[480px]"
-                                    src="./images/ab-testing-hog.png"
-                                />
-                            </motion.div>
-                        </div>
-                    </div>
+                <div className="absolute bottom-0 right-0">
+                    <motion.div
+                        transition={{ delay: 0.5 }}
+                        initial={{ translateX: '100%' }}
+                        animate={{ translateX: 0 }}
+                    >
+                        <StaticImage
+                            alt=""
+                            placeholder="none"
+                            quality={100}
+                            className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
+                            src="./images/experiment-hog.png"
+                        />
+                    </motion.div>
                 </div>
             </ContentContainer>
         </div>
@@ -376,8 +368,8 @@ export const Cdp = () => {
         { title: 'Transformations', Icon: Gear },
     ]
     return (
-        <div className="bg-[#FCC779] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded-md">
-            <ImageContainer>
+        <div className="min-h-[300px] lg:min-h-[400px] bg-[#FCC779] rounded-md text-primary relative grid grid-cols-16 gap-2 lg:gap-4">
+            <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -385,16 +377,16 @@ export const Cdp = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
-                        alt="A grid of several logos for apps that are available in PostHog. Includes services such as Salesforce, Intercom, Rudderstack, Segment, Hubspot, and Slack"
+                        alt="A hedgehog standing in front of a leaky pipe of data"
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
                         className="w-[170%] md:w-full h-full"
-                        src="./images/event-pipelines.png"
+                        src="../../../../contents/images/products/cdp/pipeline-hog.png"
                     />
                 </motion.div>
             </ImageContainer>
-            <ContentContainer>
+            <ContentContainer className="md:col-span-7 lg:col-span-6">
                 <Content>
                     <Title title={'Customer data platform'} />
                     <Description description="60+ data connections available now. Full CDP coming soon." />
@@ -411,25 +403,23 @@ export const Cdp = () => {
                         Browse connections
                     </CallToAction>
                 </Content>
-                <div className="flex items-end mt-auto w-full">
-                    <div className="md:relative w-3/4 ml-auto">
-                        <div className="absolute bottom-0 right-0">
-                            <motion.div
-                                transition={{ delay: 0.5 }}
-                                initial={{ translateX: '100%' }}
-                                animate={{ translateX: 0 }}
-                            >
-                                <StaticImage
-                                    alt=""
-                                    placeholder="none"
-                                    quality={100}
-                                    className="w-full max-w-[250px] xl:max-w-[480px]"
-                                    src="./images/event-pipelines-hog.png"
-                                />
-                            </motion.div>
-                        </div>
-                    </div>
+                {/*
+                <div className="absolute bottom-0 right-0">
+                    <motion.div
+                        transition={{ delay: 0.5 }}
+                        initial={{ translateX: '100%' }}
+                        animate={{ translateX: 0 }}
+                    >
+                        <StaticImage
+                            alt=""
+                            placeholder="none"
+                            quality={100}
+                            className="w-full max-w-[250px] xl:max-w-[480px]"
+                            src="./images/event-pipelines-hog.png"
+                        />
+                    </motion.div>
                 </div>
+                */}
             </ContentContainer>
         </div>
     )
@@ -437,8 +427,8 @@ export const Cdp = () => {
 
 export const DataWarehouse = () => {
     return (
-        <div className="bg-[#29DBBB] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded-md">
-            <ImageContainer>
+        <div className="bg-[#29DBBB] rounded-md text-primary relative grid grid-cols-16 gap-2 lg:gap-4">
+            <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -446,26 +436,26 @@ export const DataWarehouse = () => {
                     animate={{ translateY: 0 }}
                 >
                     <StaticImage
-                        alt="A network of different logos, showing lines coming from PostHog and going to S3, BigQuery, ClickHouse (PostHog's database), and Redshift."
+                        alt="An artist's depiction of a data warehouse"
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full h-full"
-                        src="./images/data-warehouse.png"
+                        className="w-full h-full py-10"
+                        src="../../../../contents/images/products/data-warehouse/data-warehouse.png"
                     />
                 </motion.div>
             </ImageContainer>
-            <ContentContainer>
+            <ContentContainer className="md:col-span-7 lg:col-span-6">
                 <Content>
                     <Title title={'Data warehouse'} />
-                    <Subtitle
-                        className="text-[14px] md:text-[18px]"
-                        subtitle="Full data warehouse product coming soon."
+                    <Subtitle subtitle="Full data warehouse product coming soon" />
+                    <Description
+                        description="Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API."
+                        className="!text-sm pb-4"
                     />
-                    <Description description="Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API." />
 
                     <CallToAction
-                        href="/docs/cdp"
+                        href="/docs/data-warehouse"
                         type="custom"
                         size="md"
                         className="group !border-black/25 !bg-black/10"
@@ -475,22 +465,20 @@ export const DataWarehouse = () => {
                         Learn more
                     </CallToAction>
                 </Content>
-                <div className="mt-auto w-full">
-                    <div className="w-1/2 md:w-full md:relative absolute bottom-0 right-0">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full"
-                                src="./images/data-warehouse-hog.png"
-                            />
-                        </motion.div>
-                    </div>
+                <div className="absolute bottom-0 right-4">
+                    <motion.div
+                        transition={{ delay: 0.5 }}
+                        initial={{ translateX: '100%' }}
+                        animate={{ translateX: 0 }}
+                    >
+                        <StaticImage
+                            alt=""
+                            placeholder="none"
+                            quality={100}
+                            className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
+                            src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                        />
+                    </motion.div>
                 </div>
             </ContentContainer>
         </div>
@@ -505,8 +493,8 @@ export const Sql = () => {
     ]
 
     return (
-        <div className="bg-[#D42F18] text-primary-dark relative grid grid-cols-2 gap-7 pt-5 rounded-md">
-            <ImageContainer>
+        <div className="min-h-[300px] lg:min-h-[400px] bg-[#D42F18] rounded-md text-white relative grid grid-cols-16 gap-2 lg:gap-4">
+            <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -518,18 +506,15 @@ export const Sql = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full h-full"
-                        src="./images/open-source.png"
+                        className="w-full h-full py-10"
+                        src="../../../../contents/images/products/sql/sql-hog.png"
                     />
                 </motion.div>
             </ImageContainer>
-            <ContentContainer>
+            <ContentContainer className="md:col-span-7 lg:col-span-6">
                 <Content>
                     <Title title={'SQL'} />
-                    <Subtitle
-                        className="text-[14px] md:text-[18px]"
-                        subtitle="Directly query data stored in PostHog via SQL."
-                    />
+                    <Subtitle subtitle="Directly query data stored in PostHog via SQL." />
                     <FeatureList features={features} />
 
                     <CallToAction
@@ -543,15 +528,6 @@ export const Sql = () => {
                         Explore
                     </CallToAction>
                 </Content>
-                <div className="flex items-end mt-auto w-full">
-                    <div className="md:relative w-3/4">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateY: '100%' }}
-                            animate={{ translateY: 0 }}
-                        ></motion.div>
-                    </div>
-                </div>
             </ContentContainer>
         </div>
     )
@@ -559,8 +535,8 @@ export const Sql = () => {
 
 export const Api = () => {
     return (
-        <div className="bg-[#EB9D2A] text-primary relative grid grid-cols-2 gap-7 pt-5 rounded-md">
-            <ImageContainer>
+        <div className="min-h-[300px] lg:min-h-[400px] bg-[#EB9D2A] rounded-md relative grid grid-cols-16 gap-2 lg:gap-4">
+            <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -572,18 +548,15 @@ export const Api = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full h-full"
-                        src="./images/open-source.png"
+                        className="w-full h-full py-10"
+                        src="../../../../contents/images/products/api/coder-hog.png"
                     />
                 </motion.div>
             </ImageContainer>
-            <ContentContainer>
+            <ContentContainer className="md:col-span-7 lg:col-span-6">
                 <Content>
                     <Title title={'API'} />
-                    <Subtitle
-                        className="text-[14px] md:text-[18px]"
-                        subtitle="Build custom functionality or create bespoke views specific to your business needs."
-                    />
+                    <Subtitle subtitle="Build custom functionality or create bespoke views specific to your business needs." />
 
                     <CallToAction
                         href="/docs/api"
@@ -596,15 +569,6 @@ export const Api = () => {
                         Explore the API
                     </CallToAction>
                 </Content>
-                <div className="flex items-end mt-auto w-full">
-                    <div className="md:relative w-3/4">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateY: '100%' }}
-                            animate={{ translateY: 0 }}
-                        ></motion.div>
-                    </div>
-                </div>
             </ContentContainer>
         </div>
     )

@@ -525,13 +525,7 @@ ul {
 }
 
 .slick-list {
-    position: relative;
-
-    display: block;
-    overflow: hidden;
-
-    margin: 0;
-    padding: 0;
+    @apply relative block overflow-hidden m-0 p-0;
 
     button.active {
         span {
@@ -589,7 +583,7 @@ ul {
 }
 
 .slick-slide {
-    @apply pt-10 hidden float-left h-full min-h-[1px];
+    @apply pt-4 mdlg:pt-6 lg:pt-8 xl:pt-10 hidden float-left h-full min-h-[1px];
 
     > div {
         @apply h-full;
