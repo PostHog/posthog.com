@@ -52,6 +52,20 @@ export default function Hero() {
                         The single platform to analyze, test, observe, and deploy new features
                     </h2>
 
+                    <div className="border border-dashed border-red rounded p-8 max-w-sm mx-auto">
+                        <strong>Debug</strong>
+                        <br />
+                        Breakpoint:
+                        <strong className="sm:hidden">xs?</strong>
+                        <strong className="hidden sm:inline md:hidden">sm</strong>
+                        <strong className="hidden md:inline lg:hidden">md</strong>
+                        <strong className="hidden lg:inline xl:hidden">lg</strong>
+                        <strong className="hidden xl:inline 2xl:hidden">xl</strong>
+                        <strong className="hidden 2xl:inline 3xl:hidden">2xl</strong>
+                        <strong className="hidden 3xl:inline 4xl:hidden">3xl</strong>
+                        <strong className="hidden 4xl:inline 5xl:hidden">3xl</strong>
+                    </div>
+
                     <div className="flex flex-col md:flex-row justify-center items-center gap-2">
                         <SignupCTA className="" />
 

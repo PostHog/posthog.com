@@ -55,7 +55,7 @@ export default function Slider() {
                         arrows={false}
                         slidesToShow={8}
                         focusOnSelect
-                        className="home-slider-buttons list-none max-w-full lg:max-w-7xl mx-auto m-0 p-0 pb-4"
+                        className="home-slider-buttons list-none max-w-full lg:max-w-7xl mx-auto m-0 p-0"
                     >
                         {slideButtons.map((slide, index) => {
                             return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
@@ -93,8 +93,8 @@ export default function Slider() {
                         </svg>
                     </div>
                 </div>
-                <div className="flex items-center">
-                    <div className="flex-grow hidden md:flex justify-center items-center md:absolute md:left-2 xl:static">
+                <div className="flex items-center max-w-screen-2xl mx-auto">
+                    <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center md:absolute md:left-2 xl:static">
                         <button
                             onClick={() => slideRef.slickPrev()}
                             className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30"
@@ -111,7 +111,7 @@ export default function Slider() {
                         arrows={false}
                         slidesToShow={1}
                         infinite
-                        className="home-slider flex-shrink-0 list-none max-w-full lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex items-center justify-center overflow-auto"
+                        className="home-slider flex-1 list-none max-w-full lg:max-w-7xl xl:max-w-7xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex items-center justify-center overflow-x-auto"
                     >
                         <ProductAnalytics />
                         <SessionReplay />
@@ -122,7 +122,7 @@ export default function Slider() {
                         <Sql />
                         <Api />
                     </SliderComponent>
-                    <div className="flex-grow hidden md:flex justify-center items-center md:absolute md:right-2 xl:static">
+                    <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center md:absolute md:right-2 xl:static">
                         <button
                             onClick={() => slideRef.slickNext()}
                             className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30"

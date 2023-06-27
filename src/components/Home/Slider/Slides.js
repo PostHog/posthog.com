@@ -60,7 +60,7 @@ const Content = ({ children }) => {
 }
 
 const ImageContainer = ({ children, className = '' }) => {
-    return <div className={`relative h-[300px] xl:h-[400px] order-2 md:order-1 ${className}`}>{children}</div>
+    return <div className={`relative h-[300px] xl:h-[390px] order-2 md:order-1 ${className}`}>{children}</div>
 }
 
 const FeatureList = ({ features }) => {
@@ -155,11 +155,11 @@ export const SessionReplay = () => {
         { title: 'Network requests', Icon: Pulse },
     ]
     return (
-        <div className="bg-[#F2AD46] rounded-md text-primary relative grid grid-cols-2 md:gap-7 pt-5">
-            <ImageContainer className="md:px-8 pt-4 pb-3">
+        <div className="bg-[#F2AD46] rounded-md text-primary relative grid grid-cols-12 md:gap-4">
+            <ImageContainer className="pl-8 col-span-8">
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="h-full md:flex md:items-end"
+                    className="md:flex md:items-end md:-mt-10"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -168,13 +168,13 @@ export const SessionReplay = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-[170%] md:w-full rotate-2 md:max-w-[754.5px] shadow-xl"
-                        src="./images/session-recording.png"
+                        className="w-[170%] md:w-full rotate-1 md:max-w-[686px] shadow-xl relative top-4"
+                        src="../../../../contents/images/products/session-replay/session-replay.png"
                         alt="A session recording of a fake application called Hogflix"
                     />
                 </motion.div>
             </ImageContainer>
-            <ContentContainer>
+            <ContentContainer className="col-span-4">
                 <Content>
                     <Title title={'Session replay'} />
                     <Description description="Watch users interacting with your app or website. Available for web and iOS.*" />

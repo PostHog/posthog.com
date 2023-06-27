@@ -589,11 +589,7 @@ ul {
 }
 
 .slick-slide {
-    display: none;
-    float: left;
-
-    height: 100%;
-    min-height: 1px;
+    @apply pt-10 hidden float-left h-full min-h-[1px];
 }
 [dir='rtl'] .slick-slide {
     float: right;
