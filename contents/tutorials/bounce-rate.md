@@ -12,13 +12,13 @@ Bounce rate is the percentage of users who leave your page immediately after vis
 
 This tutorial shows you how to calculate bounce rate in PostHog. To get started, you need to install the [snippet](/docs/getting-started/install?tab=snippet) or [JavaScript SDK](/docs/libraries/js) and enable "record user sessions"  in [project settings](https://app.posthog.com/project/settings).
 
-> **How does Google Analytics 4 [calculate the bounce rate](https://support.google.com/analytics/answer/12195621?hl=en)?** It is the percentage of sessions that **do not** last longer than 10 seconds, have a conversion event, or at least 2 pageviews or screenviews.
+> **How does Google Analytics 4 [calculate the bounce rate](https://support.google.com/analytics/answer/12195621?hl=en)?** It is the percentage of sessions that **do not** last longer than 10 seconds, have a conversion event, or have at least 2 pageviews or screenviews.
 
 ## Calculating bounce rate with SQL insights
 
 To calculate bounce rate, we need data from `raw_session_replay_events`, which we can access with [SQL insights](/docs/product-analytics/hogql#sql-insights). To create a new SQL insight, go to the insight tab, click [new insight](https://app.posthog.com/insights/new), then go to the SQL tab. This is where we write our SQL statement.
 
-We count a bounce as a session where the user is active for less than 10 seconds. To do this in SQL, we get a count of sessions (using `session_id`) where `active_milliseconds` is less than `10000` and divide by the total session count, then multiply by `100`. Together, this looks like this:
+We count a bounce as a session where the user is active for less than 10 seconds. To do this in SQL, we use a count of sessions (using `session_id`) where `active_milliseconds` is less than `10000` and divide by the total session count, then multiply by `100`. Together, this looks like this:
 
 ```sql
 select (
