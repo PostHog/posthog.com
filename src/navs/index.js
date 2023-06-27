@@ -1648,6 +1648,7 @@ export const docsMenu = {
                     name: 'Getting started',
                     url: '/docs/product-analytics/welcome',
                     icon: 'GraduationCap',
+                    color: 'red',
                 },
                 {
                     name: 'Saved insights',
@@ -1659,48 +1660,56 @@ export const docsMenu = {
                 {
                     name: 'Graphs & trends',
                     url: '/docs/product-analytics/trends',
-                    icon: 'Graph',
+                    icon: 'Trends',
+                    color: 'blue',
                 },
                 {
                     name: 'Funnels',
                     url: '/docs/product-analytics/funnels',
                     icon: 'Funnels',
+                    color: 'yellow',
                 },
                 {
                     name: 'Dashboards',
                     url: '/docs/product-analytics/dashboards',
                     icon: 'Dashboard',
+                    color: 'purple',
                 },
                 {
                     name: 'User paths',
                     url: '/docs/product-analytics/paths',
                     icon: 'UserPaths',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Stickiness',
                     url: '/docs/product-analytics/stickiness',
                     icon: 'Stickiness',
+                    color: 'red',
                 },
                 {
                     name: 'Correlation analysis',
                     url: '/docs/product-analytics/correlation',
-                    color: 'red',
-                    icon: 'Graph',
+                    color: 'blue',
+                    icon: 'ArrowUpRight',
                 },
                 {
                     name: 'Retention',
                     url: '/docs/product-analytics/retention',
                     icon: 'Retention',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Lifecycle',
                     url: '/docs/product-analytics/lifecycle',
                     icon: 'Lifecycle',
+                    color: 'yellow',
                 },
                 {
                     name: 'Notifications',
                     url: '/docs/product-analytics/subscriptions',
                     icon: 'Bell',
+                    color: 'red',
                 },
                 {
                     name: 'Tools',
@@ -1709,11 +1718,13 @@ export const docsMenu = {
                     name: 'Group analytics',
                     url: '/docs/product-analytics/group-analytics',
                     icon: 'People',
+                    color: 'orange',
                 },
                 {
                     name: 'Sampling',
                     url: '/docs/product-analytics/sampling',
                     icon: 'Sampling',
+                    color: 'purple',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
