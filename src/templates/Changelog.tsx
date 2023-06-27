@@ -11,6 +11,7 @@ import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { Heading } from 'components/Heading'
 import { ZoomImage } from 'components/ZoomImage'
+import { companyMenu } from '../navs'
 
 const months = [
     'January',
@@ -95,7 +96,12 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
     }, [filters])
 
     return (
-        <CommunityLayout title="Changelog" tableOfContents={tableOfContents}>
+        <CommunityLayout
+            parent={companyMenu}
+            activeInternalMenu={companyMenu.children[2]}
+            title="Changelog"
+            tableOfContents={tableOfContents}
+        >
             <section className="mb-12 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
                 <div>
                     <h1 className="m-0 text-3xl">Changelog</h1>
