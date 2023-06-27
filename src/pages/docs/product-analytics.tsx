@@ -35,7 +35,7 @@ export const quickLinks = [
         icon: 'UserPaths',
         name: 'User paths',
         to: '/docs/product-analytics/paths',
-        color: 'teal',
+        color: 'seagreen',
     },
     {
         icon: 'Dashboard',

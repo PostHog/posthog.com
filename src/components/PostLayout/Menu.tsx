@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import { Link as ScrollLink } from 'react-scroll'
 import { AnimatePresence, motion } from 'framer-motion'
-import * as ProductIcons from '../ProductIcons'
 import * as NotProductIcons from '../NotProductIcons'
 import * as NewIcons from '../NewIcons'
 import { usePost } from './hooks'
@@ -50,6 +49,7 @@ export default function Menu({
     topLevel,
     icon,
     badge,
+    color,
     ...other
 }: IMenu): JSX.Element | null {
     const { isMenuItemActive } = usePost()
@@ -142,7 +142,13 @@ export default function Menu({
                         </AnimatePresence>
                         {icon ? (
                             <span className="cursor-pointer w-full flex items-center space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark">
-                                <span className="w-[25px] opacity-70">
+                                <span
+                                    className={`opacity-70 ${
+                                        color
+                                            ? `text-${color} bg-${color} bg-opacity-20 flex items-center justify-center rounded-sm w-[30px] h-[30px]`
+                                            : 'w-[25px] h-[25px]'
+                                    }`}
+                                >
                                     {typeof icon === 'string' ? getIcon(icon) : icon}
                                 </span>
                                 <span className={`opacity-50 group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}>
