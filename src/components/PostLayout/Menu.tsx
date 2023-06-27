@@ -130,7 +130,7 @@ export default function Menu({
                         {...menuLinkProps}
                     >
                         <AnimatePresence>
-                            {isActive && (
+                            {isActive && !isWithChild && (
                                 <motion.span
                                     variants={variants}
                                     className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
