@@ -249,6 +249,19 @@ Sometimes, performance might matter to you so much that you never want an HTTP r
 
 <CohortExpansionSnippet />
 
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```python
+variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
+
+if variant == 'variant-name':
+    # Do something
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
+
 ### Group analytics
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
