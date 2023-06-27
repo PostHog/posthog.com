@@ -1,7 +1,4 @@
 import React from 'react'
-
-import Link from 'components/Link'
-import { Posts } from 'components/Blog'
 import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
 

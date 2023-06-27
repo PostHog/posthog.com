@@ -80,7 +80,10 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
                         })}
                     </div>
 
-                    <button className="text-red text-base font-semibold" onClick={() => setExpanded(true)}>
+                    <button
+                        className="text-red dark:text-yellow text-base font-semibold"
+                        onClick={() => setExpanded(true)}
+                    >
                         View {replyCount - 1} other {replyCount === 1 ? 'reply' : 'replies'}
                     </button>
                 </div>

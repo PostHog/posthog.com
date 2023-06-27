@@ -173,15 +173,7 @@ function QuestionFormMain({
                                 </div>
                             </div>
                             <span className="ml-[50px]">
-                                <Button
-                                    disabled={loading || !isValid}
-                                    type="submit"
-                                    className={`w-[calc(100%_-_50px)] font-bold relative ${
-                                        loading || !isValid
-                                            ? ' opacity-50 cursor-not-allowed'
-                                            : 'bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px]'
-                                    } active:top-[0px] active:scale-[1]`}
-                                >
+                                <Button disabled={loading || !isValid} type="submit" className="w-[calc(100%_-_50px)]">
                                     {user ? 'Post' : 'Login & post'}
                                 </Button>
                             </span>
@@ -383,13 +375,7 @@ export const QuestionForm = ({
                     <Button
                         disabled={archived}
                         onClick={() => setView('question-form')}
-                        className={
-                            formType !== 'reply'
-                                ? 'text-red border-red'
-                                : `w-full text-left border-black/30 dark:border-white/30 ${
-                                      archived ? '' : 'hover:border-black/50 dark:hover:border-white/50'
-                                  }`
-                        }
+                        buttonType={formType === 'reply' ? 'outline' : 'primary'}
                     >
                         {buttonText}
                     </Button>
@@ -402,7 +388,7 @@ export const QuestionForm = ({
                                     setView('auth')
                                 }
                             }}
-                            className="!ml-auto text-red opacity-80 hover:opacity-100 font-bold"
+                            className="!ml-auto text-red dark:text-yellow opacity-80 hover:opacity-100 font-bold"
                         >
                             {user ? 'Logout' : 'Login'}
                         </button>

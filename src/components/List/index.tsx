@@ -10,9 +10,19 @@ interface IItem {
     badge?: string
     iconColor?: string
     description?: string
+    lineClamp?: number
 }
 
-export const ListItem = ({ label, image, url, badge, icon, iconColor, description }: IItem): JSX.Element => {
+export const ListItem = ({
+    label,
+    image,
+    url,
+    badge,
+    icon,
+    iconColor,
+    description,
+    lineClamp = 1,
+}: IItem): JSX.Element => {
     const Icon = icon && NewIcons[icon]
     return (
         <li>
@@ -35,7 +45,7 @@ export const ListItem = ({ label, image, url, badge, icon, iconColor, descriptio
                     <span className="grid">
                         <span className="overflow-hidden text-ellipsis whitespace-nowrap">{label}</span>
                         {description && (
-                            <span className="text-sm font-normal opacity-60 overflow-hidden text-ellipsis whitespace-nowrap">
+                            <span className={`text-sm font-normal opacity-60 line-clamp-${lineClamp}`}>
                                 {description}
                             </span>
                         )}

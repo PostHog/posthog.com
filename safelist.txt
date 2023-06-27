@@ -133,3 +133,6 @@ after:bg-seagreen
 after:bg-purple
 after:bg-salmon
 after:bg-orange
+line-clamp-1
+line-clamp-2
+line-clamp-3
