@@ -12,21 +12,7 @@ import { Chevron } from 'components/Icons'
 import { Heading } from 'components/Heading'
 import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
-
-const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-]
+import dayjs from 'dayjs'
 
 const Select = ({ onChange, values }) => {
     const defaultValue = values[0]
@@ -65,11 +51,14 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
     const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
 
-    const changesByMonth = groupBy(changes, (node) => {
+    const changesByDate = groupBy(changes, (node) => {
         const month = new Date(node.date).getMonth()
-        return months[month]
+        return dayjs().month(month)
     })
-    const tableOfContents = Object.keys(changesByMonth).map((month) => ({ url: month, value: month, depth: 0 }))
+    const tableOfContents = Object.keys(changesByDate).map((date) => {
+        const month = dayjs(date).format('MMMM')
+        return { url: month, value: month, depth: 0 }
+    })
 
     const handleChange = (key, { value }, field) => {
         const newFilters = { ...filters }
@@ -124,13 +113,13 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                 </div>
             </section>
             <section className="grid">
-                {Object.keys(changesByMonth).map((month) => {
-                    const nodes = changesByMonth[month]
+                {Object.keys(changesByDate).map((date) => {
+                    const nodes = changesByDate[date]
                     return (
-                        <div key={month} id={slugify(month)} className="flex gap-4">
+                        <div key={date} id={slugify(dayjs(date).format('MMMM'))} className="flex gap-4">
                             <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
                                 <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
-                                    <h2 className="text-sm font-bold uppercase m-0">{month}</h2>
+                                    <h2 className="text-sm font-bold uppercase m-0">{dayjs(date).format('MMM')}</h2>
                                     <div className="text-xs font-semibold">2023</div>
                                 </div>
                             </div>

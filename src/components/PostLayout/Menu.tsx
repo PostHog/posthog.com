@@ -143,15 +143,19 @@ export default function Menu({
                         {icon ? (
                             <span className="cursor-pointer w-full flex items-center space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark">
                                 <span
-                                    className={`opacity-70 ${
+                                    className={`${
                                         color
                                             ? `text-${color} bg-${color} bg-opacity-20 flex items-center justify-center rounded-sm w-[30px] h-[30px]`
-                                            : 'w-[25px] h-[25px]'
+                                            : 'w-[25px] h-[25px] opacity-70'
                                     }`}
                                 >
                                     {typeof icon === 'string' ? getIcon(icon) : icon}
                                 </span>
-                                <span className={`opacity-50 group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}>
+                                <span
+                                    className={`${color ? '' : 'opacity-50'} group-hover:opacity-100 ${
+                                        badge?.title ? 'mr-1.5' : ''
+                                    }`}
+                                >
                                     {name}
                                 </span>
                                 {badge?.title && (
@@ -162,7 +166,9 @@ export default function Menu({
                             <>
                                 <span>
                                     <span
-                                        className={`opacity-50 group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}
+                                        className={`${color ? '' : 'opacity-50'} group-hover:opacity-100 ${
+                                            badge?.title ? 'mr-1.5' : ''
+                                        }`}
                                     >
                                         {name}
                                     </span>
