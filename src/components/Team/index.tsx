@@ -24,6 +24,7 @@ export default function TeamNew() {
                         companyRole,
                         country,
                         squeakId,
+                        location,
                     } = teamMember
                     const name = [firstName, lastName].filter(Boolean).join(' ')
                     return (
@@ -53,9 +54,9 @@ export default function TeamNew() {
                                     <span className="flex items-center gap-2">
                                         {country === 'world' ? '🌎' : <ReactCountryFlag svg countryCode={country} />}
                                         {country === 'world' ? (
-                                            'Planet earth'
+                                            <span className="opacity-75">Planet earth</span>
                                         ) : (
-                                            <span className="opacity-75">{country}</span>
+                                            <span className="opacity-75">{location || country}</span>
                                         )}
                                     </span>
                                 </div>
@@ -87,6 +88,7 @@ const query = graphql`
                 firstName
                 companyRole
                 country
+                location
                 pronouns
             }
         }
