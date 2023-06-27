@@ -590,6 +590,10 @@ ul {
 
 .slick-slide {
     @apply pt-10 hidden float-left h-full min-h-[1px];
+
+    > div {
+        @apply h-full;
+    }
 }
 [dir='rtl'] .slick-slide {
     float: right;
