@@ -65,7 +65,7 @@ const ImageContainer = ({ children, className = '' }) => {
 
 const FeatureList = ({ features, className = '' }) => {
     return (
-        <ul className={`list-none m-0 p-0 flex flex-col gap-1 xl:gap-2 lg:mt-2 pt-2 pb-4 ${className}`}>
+        <ul className={`list-none m-0 p-0 flex flex-col gap-1 lg:gap-2 lg:mt-2 pt-2 pb-4 ${className}`}>
             {features.map(({ title, Icon }) => {
                 return (
                     <li key={title} className="flex gap-2 items-center text-sm xl:text-[15px]">
