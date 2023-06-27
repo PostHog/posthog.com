@@ -54,7 +54,10 @@ export const Authentication = ({
                         {formValues?.body}
                     </div>
                     <div className="ml-1 whitespace-nowrap">
-                        <button className="font-bold text-red text-sm" onClick={() => setParentView?.('question-form')}>
+                        <button
+                            className="font-bold text-red dark:text-yellow text-sm"
+                            onClick={() => setParentView?.('question-form')}
+                        >
                             Edit post
                         </button>
                     </div>
@@ -75,7 +78,7 @@ export const Authentication = ({
                     <div className="border-y grid grid-cols-2 relative border-black/[.2] dark:border-white/[.2]">
                         <button
                             className={`${
-                                view === 'sign-in' ? 'text-red' : 'text-black/50 dark:text-white/50'
+                                view === 'sign-in' ? 'text-red dark:text-yellow' : 'text-black/50 dark:text-white/50'
                             } text-sm font-bold py-3 px-1`}
                             onClick={() => setView('sign-in')}
                         >
@@ -83,7 +86,7 @@ export const Authentication = ({
                         </button>
                         <button
                             className={`${
-                                view === 'sign-up' ? 'text-red' : 'text-black/50 dark:text-white/50'
+                                view === 'sign-up' ? 'text-red dark:text-yellow' : 'text-black/50 dark:text-white/50'
                             } text-sm font-bold py-3 px-1`}
                             onClick={() => setView('sign-up')}
                         >
@@ -93,7 +96,7 @@ export const Authentication = ({
                             style={{
                                 opacity: view === 'forgot-password' || view === 'reset-password' ? 0 : 1,
                             }}
-                            className={`bottom-[-1px] w-1/2 left-0 bg-red h-[2px] transition-all absolute rounded-md ${
+                            className={`bottom-[-1px] w-1/2 left-0 bg-red dark:bg-yellow h-[2px] transition-all absolute rounded-md ${
                                 view === 'sign-up' ? 'translate-x-full' : ''
                             }`}
                         />
@@ -147,7 +150,9 @@ export const Authentication = ({
                             }
                             {view !== 'forgot-password' && view !== 'reset-password' && (
                                 <Button
-                                    className="border-none bg-white dark:bg-transparent w-full my-2 opacity-75 font-semibold"
+                                    width="full"
+                                    buttonType="outline"
+                                    className="mt-2 mb-4"
                                     onClick={handleForgotPassword}
                                 >
                                     Forgot password

@@ -24,7 +24,7 @@ export const TopicSelector = (props: TopicSelectorProps) => {
 
     return (
         <Popover className="block relative">
-            <Popover.Button className="text-red text-sm font-bold flex items-center justify-center text-gray-400 hover:text-gray-500 whitespace-nowrap">
+            <Popover.Button className="text-red dark:text-yellow text-sm font-bold flex items-center justify-center text-gray-400 hover:text-gray-500 whitespace-nowrap">
                 Add topics
             </Popover.Button>
 
@@ -40,7 +40,7 @@ export const TopicSelector = (props: TopicSelectorProps) => {
                                     onClick={isSelected ? () => removeTopic(topic) : () => addTopic(topic)}
                                 >
                                     {isSelected ? (
-                                        <CheckIcon className="flex-shrink-0 h-5 w-5 text-red" />
+                                        <CheckIcon className="flex-shrink-0 h-5 w-5 text-red dark:text-yellow" />
                                     ) : (
                                         <div className="flex-shrink-0 h-5 w-5" />
                                     )}

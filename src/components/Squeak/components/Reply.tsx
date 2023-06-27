@@ -81,7 +81,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                         {(isAuthor || isModerator) && (
                             <button
                                 onClick={() => handleResolve(false, null)}
-                                className="text-sm font-semibold text-red"
+                                className="text-sm font-semibold text-red dark:text-yellow"
                             >
                                 Undo
                             </button>
@@ -95,14 +95,17 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
 
                 <div className="flex space-x-2 mb-4 relative -top-2 empty:hidden">
                     {!resolved && (isAuthor || isModerator) && (
-                        <button onClick={() => handleResolve(true, id)} className="text-red font-semibold text-sm">
+                        <button
+                            onClick={() => handleResolve(true, id)}
+                            className="text-red dark:text-yellow font-semibold text-sm"
+                        >
                             Mark as solution
                         </button>
                     )}
                     {isModerator && (
                         <button
                             onClick={() => handlePublishReply(!!publishedAt, id)}
-                            className="text-red font-semibold text-sm"
+                            className="text-red dark:text-yellow font-semibold text-sm"
                         >
                             {publishedAt ? 'Unpublish' : 'Publish'}
                         </button>

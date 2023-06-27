@@ -15,6 +15,7 @@ const sizes = {
     active:translate-y-[-1px]
     border-[1.5px]
     mx-[-1.5px]
+    group-disabled:hover:!translate-y-[-2px]
     `,
     md: cntl`
     rounded-[6px]
@@ -27,6 +28,7 @@ const sizes = {
     active:translate-y-[-1px]
     border-[1.5px]
     mx-[-1.5px]
+    group-disabled:hover:!translate-y-[-2px]
     `,
     lg: cntl`
     rounded-[8px]
@@ -39,6 +41,7 @@ const sizes = {
     hover:-translate-y-1.5
     active:-translate-y-0.5
     mx-[-1.5px]
+    group-disabled:hover:!-translate-y-1
     `,
 }
 
@@ -108,7 +111,7 @@ const containerSizes = {
     lg: cntl`border-[1.5px] relative top-[2px] rounded-[8px]`,
 }
 
-const container = (type, size, width) => cntl`
+export const container = (type = 'primary', size = 'lg', width = 'auto') => cntl`
     ${containerTypes[type]}
     ${containerSizes[size]}
     w-${width}
@@ -116,7 +119,18 @@ const container = (type, size, width) => cntl`
     inline-block
     border-button
     text-center
+    group
+    disabled:opacity-50
+    disabled:cursor-not-allowed
 `
+
+export const child = (
+    type: keyof typeof buttonTypes = 'primary',
+    width = 'auto',
+    className = '',
+    size: keyof typeof sizes = 'lg',
+    color = true
+) => button(type, width, `block active:transition-all active:duration-100 select-none ${className}`, size, color)
 
 const buttonTypes = {
     primary,
@@ -139,6 +153,7 @@ export const button = (
     w-${width}
     ${buttonTypes[type] || ''}    
     ${sizes[size]}
+    group-disabled:hover:!translate-y-0
     ${className}
 `
 
