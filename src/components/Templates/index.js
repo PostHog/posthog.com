@@ -2,10 +2,10 @@ import Chip from 'components/Chip'
 import FooterCTA from 'components/FooterCTA'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useEffect, useState } from 'react'
-import TemplatesList from '../TemplatesList'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
 import { navigate } from 'gatsby'
+import List from 'components/List'
 
 const filters = [
     {
@@ -15,14 +15,6 @@ const filters = [
     {
         type: 'type',
         name: 'Marketing',
-    },
-    {
-        type: 'maintainer',
-        name: 'Official',
-    },
-    {
-        type: 'maintainer',
-        name: 'Community',
     },
 ]
 
@@ -92,7 +84,24 @@ function TemplatesPage({ location }) {
                     />
                 ))}
             </div>
-            <TemplatesList templates={filteredTemplates || templates} />
+            <List
+                className="max-w-2xl mx-auto"
+                items={[
+                    ...(filteredTemplates || templates)?.map(
+                        ({ fields: { slug }, frontmatter: { thumbnail, title, badge, price } }) => ({
+                            label: title,
+                            url: slug,
+                            badge: badge?.toLowerCase() !== 'built-in' && (price || 'Free'),
+                            image: thumbnail?.publicURL,
+                        })
+                    ),
+                    {
+                        label: <>Build your own &rarr;</>,
+                        url: 'https://app.posthog.com/dashboard',
+                        image: '/images/builder-hog.png',
+                    },
+                ]}
+            />
         </Layout>
     )
 }
