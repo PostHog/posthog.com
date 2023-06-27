@@ -58,7 +58,8 @@ export default function Hero() {
                         Breakpoint:
                         <strong className="sm:hidden">xs?</strong>
                         <strong className="hidden sm:inline md:hidden">sm</strong>
-                        <strong className="hidden md:inline lg:hidden">md</strong>
+                        <strong className="hidden md:inline mdlg:hidden">md</strong>
+                        <strong className="hidden mdlg:inline lg:hidden">mdlg</strong>
                         <strong className="hidden lg:inline xl:hidden">lg</strong>
                         <strong className="hidden xl:inline 2xl:hidden">xl</strong>
                         <strong className="hidden 2xl:inline 3xl:hidden">2xl</strong>

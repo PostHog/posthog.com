@@ -53,6 +53,7 @@ export default function Slider() {
                     asNavFor={slideRef}
                     arrows={false}
                     slidesToShow={8}
+                    adaptiveHeight={true}
                     focusOnSelect
                     className="home-slider-buttons list-none max-w-full lg:max-w-7xl mx-[50px] xl:mx-auto p-0"
                 >
