@@ -65,8 +65,8 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
 
                 <div>
                     <h5 className="flex items-center space-x-1.5 text-base !my-0">
-                        <span>Self-serve</span>
-                        <Tooltip content="PostHog Cloud or Self-hosted (with credit card entered)">
+                        <span>Paid</span>
+                        <Tooltip content="Paid plans on PostHog Cloud (even if you're within the free tier for the month!)">
                             <span>
                                 <InfoIcon className="w-4 h-4" />
                             </span>
@@ -77,7 +77,7 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                 <div>
                     <h5 className="flex items-center space-x-1.5 text-base !my-0">
                         <span>Enterprise</span>
-                        <Tooltip content="PostHog Cloud or Self-hosted (with enterprise license)">
+                        <Tooltip content="Available on PostHog Cloud">
                             <span>
                                 <InfoIcon className="w-4 h-4" />
                             </span>
