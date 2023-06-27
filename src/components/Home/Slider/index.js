@@ -46,7 +46,7 @@ export default function Slider() {
 
     return (
         <div className="-mt-8 md:mt-0">
-            <div className="hidden md:block">
+            <div className="hidden md:block px-[50px]">
                 <SliderComponent
                     beforeChange={handleButtonChange}
                     ref={(buttonRef) => setButtonRef(buttonRef)}
@@ -55,7 +55,7 @@ export default function Slider() {
                     slidesToShow={8}
                     adaptiveHeight={true}
                     focusOnSelect
-                    className="home-slider-buttons list-none max-w-full lg:max-w-7xl mx-[50px] xl:mx-auto p-0"
+                    className="home-slider-buttons list-none max-w-full lg:max-w-7xl xl:mx-auto p-0"
                 >
                     {slideButtons.map((slide, index) => {
                         return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
