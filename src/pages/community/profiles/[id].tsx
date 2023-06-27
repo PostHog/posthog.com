@@ -291,7 +291,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                                 setEditModalOpen(true)
                             }
                         }}
-                        className="text-base text-red font-semibold"
+                        className="text-base text-red dark:text-yellow font-semibold"
                     >
                         Edit profile
                     </button>
