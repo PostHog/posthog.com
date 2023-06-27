@@ -145,7 +145,12 @@ export default function Menu({
                                 <span className="w-[25px] opacity-70">
                                     {typeof icon === 'string' ? getIcon(icon) : icon}
                                 </span>
-                                <span>{name}</span>
+                                <span className={`opacity-50 group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}>
+                                    {name}
+                                </span>
+                                {badge?.title && (
+                                    <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>
+                                )}
                             </span>
                         ) : (
                             <>
