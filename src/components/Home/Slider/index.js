@@ -52,7 +52,7 @@ export default function Slider() {
                     ref={(buttonRef) => setButtonRef(buttonRef)}
                     asNavFor={slideRef}
                     arrows={false}
-                    slidesToShow={8}
+                    slidesToShow={7}
                     focusOnSelect
                     className="home-slider-buttons list-none max-w-full lg:max-w-7xl xl:mx-auto p-0"
                 >

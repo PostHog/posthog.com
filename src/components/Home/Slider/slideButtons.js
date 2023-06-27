@@ -36,9 +36,11 @@ export const slideButtons = [
         Icon: Database,
         color: 'salmon',
     },
+    /*
     {
         title: 'API',
         Icon: Terminal,
         color: 'blue',
     },
+    */
 ]
