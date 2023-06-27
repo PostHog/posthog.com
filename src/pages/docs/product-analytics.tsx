@@ -24,7 +24,7 @@ type ProductAnalyticsProps = {
 
 export const Intro = () => (
     <header className="pb-8">
-        <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
+        <h1 className="text-4xl mt-0 mb-2">Product analytics</h1>
         <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
             Learn how to use product analytics to understand your users.
         </h3>

@@ -75,7 +75,7 @@ export const Intro = ({ image = true }) => (
                 src="../../components/Home/Slider/images/feature-flags-hog.png"
             />
         )}
-        <h1 className="text-4xl mb-2 mt-6">Feature flags</h1>
+        <h1 className="text-4xl mt-0 mb-2">Feature flags</h1>
         <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
             Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
         </h3>

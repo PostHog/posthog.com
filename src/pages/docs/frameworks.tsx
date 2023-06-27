@@ -87,7 +87,7 @@ const Integrations: React.FC<IntegrationsProps> = () => {
                     className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                 />
-                <h1 className="text-4xl mb-2 mt-6">Framework guides</h1>
+                <h1 className="text-4xl mt-0 mb-2">Framework guides</h1>
                 <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                     PostHog works with most popular web frameworks and services.
                 </h3>
