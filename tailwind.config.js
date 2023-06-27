@@ -126,6 +126,9 @@ module.exports = {
                 '3xl': '1.5rem',
                 '6xl': '3.5rem',
             },
+            gridTemplateColumns: {
+                16: 'repeat(16, minmax(0, 1fr))',
+            },
             colors: {
                 primary: '#151515',
                 'primary-dark': '#EEEFE9',

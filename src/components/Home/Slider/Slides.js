@@ -40,35 +40,35 @@ import { feature } from 'components/Pricing/PricingTable/classes'
 import { CallToAction } from 'components/CallToAction'
 
 const Title = ({ title }) => {
-    return <h3 className="text-lg lg:text-3xl lg:mt-5 mb-0">{title}</h3>
+    return <h3 className="text-lg lg:text-3xl mb-1">{title}</h3>
 }
 
 const Subtitle = ({ subtitle, className = '' }) => {
-    return <h4 className={`text-[18px] opacity-70 mb-3 font-semibold leading-tight ${className}`}>{subtitle}</h4>
+    return <h4 className={`text-lg opacity-70 mb-3 font-semibold leading-tight ${className}`}>{subtitle}</h4>
 }
 
 const Description = ({ description, className = '' }) => {
-    return <p className={`text-[16px] opacity-70 leading-tight ${className}`}>{description}</p>
+    return <p className={`text-sm lg:text-base opacity-70 !leading-5 mb-1 ${className}`}>{description}</p>
 }
 
 const ContentContainer = ({ children, className = '' }) => {
     return <div className={`flex flex-col order-1 md:order-2 ${className}`}>{children}</div>
 }
 
-const Content = ({ children }) => {
-    return <div className="max-w-[450px] md:pt-0 pl-5 md:px-0 pb-5">{children}</div>
+const Content = ({ children, className = '' }) => {
+    return <div className={`max-w-[450px] relative z-10 p-2 pr-4 py-5 lg:pt-8 ${className}`}>{children}</div>
 }
 
 const ImageContainer = ({ children, className = '' }) => {
-    return <div className={`relative h-[300px] xl:h-[400px] order-2 md:order-1 ${className}`}>{children}</div>
+    return <div className={`relative order-2 md:order-1 ${className}`}>{children}</div>
 }
 
-const FeatureList = ({ features }) => {
+const FeatureList = ({ features, className = '' }) => {
     return (
-        <ul className="list-none m-0 p-0 space-y-2 lg:mt-2 pt-2 pb-4">
+        <ul className={`list-none m-0 p-0 space-y-2 lg:mt-2 pt-2 pb-4 ${className}`}>
             {features.map(({ title, Icon }) => {
                 return (
-                    <li key={title} className="flex gap-2 items-center text-[15px]">
+                    <li key={title} className="flex gap-2 items-center text-sm xl:text-[15px]">
                         <span className="inline-flex p-1 rounded-sm bg-dark/10">
                             <Icon className="w-6" />
                         </span>
@@ -90,11 +90,11 @@ export const ProductAnalytics = () => {
         { title: 'Retention', Icon: Retention },
     ]
     return (
-        <div className="bg-[#1371FF] rounded-md text-white relative grid grid-cols-4 lg:grid-cols-5 lg:gap-5 pt-5">
-            <ImageContainer className="col-span-2 lg:col-span-3 px-8 pt-4 -ml-8 md:-ml-0">
+        <div className="max-h-[425px] bg-[#1371FF] rounded-md text-white relative grid grid-cols-16 md:gap-8">
+            <ImageContainer className="pl-8 col-span-10">
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="h-full"
+                    className="mdlg:-mt-8 lg:-mt-6 xl:-mt-6 -mb-2"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -102,17 +102,16 @@ export const ProductAnalytics = () => {
                         alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
                         placeholder="none"
                         quality={100}
-                        objectFit="cover"
-                        objectPosition="top left"
-                        className="w-[200%] md:w-full h-full shadow-xl max-w-[907.5px] rotate-2"
+                        objectFit="contain"
+                        className="w-[200%] md:w-full shadow-xl max-w-[907.5px] rotate-1"
                         src="./images/product-analytics.png"
                     />
                 </motion.div>
             </ImageContainer>
-            <ContentContainer className="col-span-2">
+            <ContentContainer className="col-span-6">
                 <Content>
                     <Title title={'Product analytics'} />
-                    <FeatureList features={features} />
+                    <FeatureList features={features} className="grid grid-cols-2 lg:block" />
                     <CallToAction
                         href="/product-analytics"
                         type="custom"
@@ -124,24 +123,20 @@ export const ProductAnalytics = () => {
                         Explore
                     </CallToAction>
                 </Content>
-                <div className="flex items-end mt-auto w-full">
-                    <div className="md:relative w-3/4 ml-auto">
-                        <div className="absolute -bottom-2 right-0">
-                            <motion.div
-                                transition={{ delay: 0.5 }}
-                                initial={{ translateX: '100%' }}
-                                animate={{ translateX: 0 }}
-                            >
-                                <StaticImage
-                                    placeholder="none"
-                                    quality={100}
-                                    className="w-full max-w-[215px] xl:max-w-[360px]"
-                                    src="./images/product-analytics-hog.png"
-                                    alt=""
-                                />
-                            </motion.div>
-                        </div>
-                    </div>
+                <div className="absolute -bottom-2 right-0">
+                    <motion.div
+                        transition={{ delay: 0.5 }}
+                        initial={{ translateX: '100%' }}
+                        animate={{ translateX: 0 }}
+                    >
+                        <StaticImage
+                            placeholder="none"
+                            quality={100}
+                            className="w-full max-w-[250px] mdlg:max-w-[275px] xl:max-w-[300px]"
+                            src="./images/product-analytics-hog.png"
+                            alt=""
+                        />
+                    </motion.div>
                 </div>
             </ContentContainer>
         </div>
@@ -155,11 +150,11 @@ export const SessionReplay = () => {
         { title: 'Network requests', Icon: Pulse },
     ]
     return (
-        <div className="bg-[#F2AD46] rounded-md text-primary relative grid grid-cols-2 md:gap-7 pt-5">
-            <ImageContainer className="md:px-8 pt-4 pb-3">
+        <div className="bg-[#F2AD46] rounded-md text-primary relative grid grid-cols-16 md:gap-8">
+            <ImageContainer className="pl-8 col-span-10">
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="h-full md:flex md:items-end"
+                    className="mdlg:-mt-8 lg:-mt-6 xl:-mt-6 -mb-2"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -168,18 +163,18 @@ export const SessionReplay = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-[170%] md:w-full rotate-2 md:max-w-[754.5px] shadow-xl"
-                        src="./images/session-recording.png"
+                        className="w-[170%] md:w-full md:max-w-[1029px] shadow-xl rotate-1"
+                        src="../../../../contents/images/products/session-replay/session-replay.png"
                         alt="A session recording of a fake application called Hogflix"
                     />
                 </motion.div>
             </ImageContainer>
-            <ContentContainer>
-                <Content>
+            <ContentContainer className="col-span-6">
+                <Content className="lg:pt-4 xl:pt-8">
                     <Title title={'Session replay'} />
-                    <Description description="Watch users interacting with your app or website. Available for web and iOS.*" />
+                    <Description description="Watch users interacting with your app or website. Available for web and iOS." />
+                    <p className="text-sm hidden xl:block opacity-60 pt-2 mb-1">(Android support coming soon.)</p>
                     <FeatureList features={features} />
-                    <p className="text-sm">*Android coming soon</p>
 
                     <CallToAction
                         href="/session-replay"
@@ -195,7 +190,7 @@ export const SessionReplay = () => {
                 <div className="flex items-end mt-auto w-full">
                     <div></div>
                     <div className="md:relative w-1/2 md:w-3/4 ml-auto">
-                        <div className="absolute bottom-0 right-0">
+                        <div className="absolute bottom-0 right-1">
                             <motion.div
                                 transition={{ delay: 0.5 }}
                                 initial={{ translateX: '100%' }}
@@ -204,7 +199,7 @@ export const SessionReplay = () => {
                                 <StaticImage
                                     placeholder="none"
                                     quality={100}
-                                    className="w-full max-w-[250px] md:max-w-full"
+                                    className="w-full max-w-[250px] md:max-w-full lg:max-w-[230px] xl:max-w-[300px]"
                                     src="./images/session-recording-hog.png"
                                     alt=""
                                 />
