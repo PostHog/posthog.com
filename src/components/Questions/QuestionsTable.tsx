@@ -8,6 +8,7 @@ import Markdown from 'components/Squeak/components/Markdown'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Pin } from 'components/NotProductIcons'
+import { CallToAction, child, container } from 'components/CallToAction'
 dayjs.extend(relativeTime)
 
 type QuestionsTableProps = {
@@ -176,12 +177,8 @@ export const QuestionsTable = ({
 
             {!hideLoadMore && hasMore && (
                 <li className="py-2 list-none">
-                    <button
-                        className="p-3 block w-full hover:bg-gray-accent-light text-primary/75 dark:text-primary-dark/75 hover:text-red rounded text-[15px] font-bold bg-gray-accent-light dark:bg-gray-accent-dark relative active:top-[0.5px] active:scale-[.99]"
-                        onClick={fetchMore}
-                        disabled={isLoading}
-                    >
-                        Load more
+                    <button className={`${container()} !w-full`} onClick={fetchMore} disabled={isLoading}>
+                        <span className={child()}>Load more</span>
                     </button>
                 </li>
             )}

@@ -1,4 +1,4 @@
-import { button, CallToAction, TrackedCTA } from 'components/CallToAction'
+import { button, CallToAction, child, container, TrackedCTA } from 'components/CallToAction'
 import { Check2 } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import Modal from 'components/Modal'
@@ -87,9 +87,9 @@ const components = {
                             <button
                                 onClick={() => inputRef?.current.click()}
                                 type="button"
-                                className={button('primary', undefined, 'cursor-pointer', 'sm')}
+                                className={container('primary', 'sm')}
                             >
-                                Upload file
+                                <span className={child('primary', undefined, undefined, 'sm')}>Upload file</span>
                             </button>
                             <span className="text-sm">or drag and drop here</span>
                         </p>
@@ -186,7 +186,9 @@ const Form = ({ setSubmitted, info, id }) => {
                     })}
                 </div>
                 {error && <p className="font-bold text-red m-0 mt-4">{error}</p>}
-                <button className={`${button()} mt-6 shadow-none !w-full box-border`}>Submit</button>
+                <button className={`${container()} mt-6 shadow-none !w-full box-border`}>
+                    <span className={child()}>Submit</span>
+                </button>
             </form>
         </div>
     )

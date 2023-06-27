@@ -33,9 +33,9 @@ const Community = ({ children, title, tableOfContents }: IProps) => {
     )
 }
 
-export default function CommunityLayout({ children, title, tableOfContents }: IProps) {
+export default function CommunityLayout({ children, title, tableOfContents, parent, activeInternalMenu }: IProps) {
     return (
-        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[1]}>
+        <Layout parent={parent || communityMenu} activeInternalMenu={activeInternalMenu || communityMenu.children[1]}>
             <SEO title={`${title} - PostHog`} />
             <Community title={title} tableOfContents={tableOfContents}>
                 {children}
