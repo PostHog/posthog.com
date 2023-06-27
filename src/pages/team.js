@@ -1,3 +1,3 @@
-import TeamNew from 'components/Team/new'
+import TeamNew from 'components/Team'
 
 export default TeamNew
