@@ -52,11 +52,11 @@ const Description = ({ description, className = '' }) => {
 }
 
 const ContentContainer = ({ children, className = '' }) => {
-    return <div className={`flex flex-col order-1 md:order-2 ${className}`}>{children}</div>
+    return <div className={`flex items-center order-1 md:order-2 ${className}`}>{children}</div>
 }
 
 const Content = ({ children, className = '' }) => {
-    return <div className={`max-w-[450px] relative z-10 p-2 pr-4 py-5 lg:pt-8 ${className}`}>{children}</div>
+    return <div className={`relative z-10 px-4 xl:px-8 py-4 ${className}`}>{children}</div>
 }
 
 const ImageContainer = ({ children, className = '' }) => {
@@ -65,12 +65,12 @@ const ImageContainer = ({ children, className = '' }) => {
 
 const FeatureList = ({ features, className = '' }) => {
     return (
-        <ul className={`list-none m-0 p-0 space-y-2 lg:mt-2 pt-2 pb-4 ${className}`}>
+        <ul className={`list-none m-0 p-0 flex flex-col gap-1 xl:gap-2 lg:mt-2 pt-2 pb-4 ${className}`}>
             {features.map(({ title, Icon }) => {
                 return (
                     <li key={title} className="flex gap-2 items-center text-sm xl:text-[15px]">
                         <span className="inline-flex p-1 rounded-sm bg-dark/10">
-                            <Icon className="w-6" />
+                            <Icon className="w-4 mdlg:w-6" />
                         </span>
                         <span className="opacity-70 font-semibold">{title}</span>
                     </li>
@@ -103,15 +103,15 @@ export const ProductAnalytics = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-[200%] md:w-full shadow-xl max-w-[907.5px] rotate-1"
-                        src="./images/product-analytics.png"
+                        className="w-[170%] md:w-full md:max-w-[1029px] shadow-2xl -rotate-1"
+                        src="../../../../contents/images/products/product-analytics/product-analytics.png"
                     />
                 </motion.div>
             </ImageContainer>
             <ContentContainer className="col-span-6">
                 <Content>
                     <Title title={'Product analytics'} />
-                    <FeatureList features={features} className="grid grid-cols-2 lg:block" />
+                    <FeatureList features={features} className="grid grid-cols-2 2xl:flex" />
                     <CallToAction
                         href="/product-analytics"
                         type="custom"
@@ -132,7 +132,7 @@ export const ProductAnalytics = () => {
                         <StaticImage
                             placeholder="none"
                             quality={100}
-                            className="w-full max-w-[250px] mdlg:max-w-[275px] xl:max-w-[300px]"
+                            className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
                             src="./images/product-analytics-hog.png"
                             alt=""
                         />
@@ -150,11 +150,11 @@ export const SessionReplay = () => {
         { title: 'Network requests', Icon: Pulse },
     ]
     return (
-        <div className="bg-[#F2AD46] rounded-md text-primary relative grid grid-cols-16 md:gap-8">
-            <ImageContainer className="pl-8 col-span-10">
+        <div className="bg-[#F2AD46] rounded-md text-primary relative grid grid-cols-16 gap-2 lg:gap-4">
+            <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                 <motion.div
                     transition={{ delay: 0.4 }}
-                    className="mdlg:-mt-8 lg:-mt-6 xl:-mt-6 -mb-2"
+                    className="mdlg:-mt-2 lg:-mt-6 xl:-mt-6 mdlg:-mb-4 lg:-mb-2"
                     initial={{ translateY: '100%' }}
                     animate={{ translateY: 0 }}
                 >
@@ -163,18 +163,18 @@ export const SessionReplay = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-[170%] md:w-full md:max-w-[1029px] shadow-xl rotate-1"
+                        className="w-[170%] md:w-full md:max-w-[1029px] shadow-2xl rotate-1"
                         src="../../../../contents/images/products/session-replay/session-replay.png"
                         alt="A session recording of a fake application called Hogflix"
                     />
                 </motion.div>
             </ImageContainer>
-            <ContentContainer className="col-span-6">
-                <Content className="lg:pt-4 xl:pt-8">
+            <ContentContainer className="md:col-span-7 lg:col-span-6">
+                <Content className="">
                     <Title title={'Session replay'} />
                     <Description description="Watch users interacting with your app or website. Available for web and iOS." />
                     <p className="text-sm hidden xl:block opacity-60 pt-2 mb-1">(Android support coming soon.)</p>
-                    <FeatureList features={features} />
+                    <FeatureList features={features} className="grid grid-cols-2 lg:flex" />
 
                     <CallToAction
                         href="/session-replay"
@@ -187,25 +187,20 @@ export const SessionReplay = () => {
                         Explore
                     </CallToAction>
                 </Content>
-                <div className="flex items-end mt-auto w-full">
-                    <div></div>
-                    <div className="md:relative w-1/2 md:w-3/4 ml-auto">
-                        <div className="absolute bottom-0 right-1">
-                            <motion.div
-                                transition={{ delay: 0.5 }}
-                                initial={{ translateX: '100%' }}
-                                animate={{ translateX: 0 }}
-                            >
-                                <StaticImage
-                                    placeholder="none"
-                                    quality={100}
-                                    className="w-full max-w-[250px] md:max-w-full lg:max-w-[230px] xl:max-w-[300px]"
-                                    src="./images/session-recording-hog.png"
-                                    alt=""
-                                />
-                            </motion.div>
-                        </div>
-                    </div>
+                <div className="absolute bottom-0 right-1">
+                    <motion.div
+                        transition={{ delay: 0.5 }}
+                        initial={{ translateX: '100%' }}
+                        animate={{ translateX: 0 }}
+                    >
+                        <StaticImage
+                            placeholder="none"
+                            quality={100}
+                            className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
+                            src="./images/session-recording-hog.png"
+                            alt=""
+                        />
+                    </motion.div>
                 </div>
             </ContentContainer>
         </div>
