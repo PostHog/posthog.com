@@ -123,7 +123,7 @@ export default function Menu({
                                 setOpen(!open)
                             }
                         }}
-                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${
+                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${color ? '!py-1' : ''} ${
                             isActive || isWithChild ? 'active' : ''
                         }`}
                         to={menuType === 'scroll' ? url.replace(pathname + '#', '') : url}
@@ -145,7 +145,7 @@ export default function Menu({
                                 <span
                                     className={`${
                                         color
-                                            ? `text-${color} bg-${color} bg-opacity-20 flex items-center justify-center rounded-sm w-[30px] h-[30px]`
+                                            ? `text-${color} bg-${color} bg-opacity-10 flex items-center justify-center rounded-sm w-[30px] h-[30px]`
                                             : 'w-[25px] h-[25px] opacity-70'
                                     }`}
                                 >
