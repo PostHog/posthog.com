@@ -23,18 +23,16 @@ export default function TeamNew() {
                         firstName,
                         companyRole,
                         country,
-                        pronouns,
+                        squeakId,
                     } = teamMember
                     const name = [firstName, lastName].filter(Boolean).join(' ')
-                    const nameAndPronouns = pronouns ? `${name} (${pronouns})` : name
-                    const title = `${nameAndPronouns}, ${companyRole}`
                     return (
                         <li
                             key={name}
                             className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded h-40 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px]"
                         >
                             <Link
-                                to="#"
+                                to={`/community/profiles/${squeakId}`}
                                 className="flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
                             >
                                 <div className="flex flex-col justify-between px-6 py-4 w-full mr-40">
@@ -81,6 +79,7 @@ const query = graphql`
             sort: { fields: startDate, order: ASC }
         ) {
             teamMembers: nodes {
+                squeakId
                 avatar {
                     url
                 }
