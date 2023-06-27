@@ -232,7 +232,7 @@ export const Main = () => {
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
                     className={`flex mx-auto px-5 justify-between transition-all ${
-                        fullWidthContent ? 'max-w-screen-3xl' : 'max-w-screen-2xl box-content'
+                        fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl box-content'
                     }`}
                 >
                     <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
