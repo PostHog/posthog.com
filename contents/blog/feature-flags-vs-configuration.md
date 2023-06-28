@@ -77,25 +77,25 @@ Like many tech choices, you should think about what is the simplest solution for
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
-	<thead>
+  <thead>
     <tr>
       <td className="w-3/12"><strong>Need</strong></td>
       <td className="w-3/12 text-center"><strong>Feature flags</strong></td>
       <td className="w-3/12 text-center"><strong>Configuration</strong></td>
     </tr>
-	</thead>
-	<tbody>
-		<tr>
+  </thead>
+  <tbody>
+    <tr>
       <td>Longevity</td>
       <td className="text-center">Temporary</td>
       <td className="text-center">Permanent</td>
     </tr>
-		<tr>
+    <tr>
       <td>Changes</td>
       <td className="text-center">Frequent</td>
       <td className="text-center">Infrequent</td>
     </tr>
-		<tr>
+    <tr>
       <td>Integrations</td>
       <td className="text-center"><span className="text-green text-lg">✔</span></td>
       <td className="text-center"><span className="text-red text-lg">✖</span></td>
@@ -120,7 +120,7 @@ Like many tech choices, you should think about what is the simplest solution for
       <td className="text-center">A/B tests, releases</td>
       <td className="text-center">Secrets, settings</td>
     </tr>
-	</tbody>
+  </tbody>
 </table>
 </div>
 
