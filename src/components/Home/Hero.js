@@ -5,6 +5,7 @@ import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
 import { SignupCTA } from 'components/SignupCTA'
+import Accordion from './Accordion'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -66,6 +67,7 @@ export default function Hero() {
                     </div>
                 </div>
                 <Slider />
+                <Accordion />
             </div>
         </section>
     )

@@ -45,7 +45,7 @@ export default function Slider() {
     }
 
     return (
-        <div className="-mt-8 md:mt-0">
+        <div className="-mt-8 md:mt-0 hidden md:block">
             <div className="hidden md:block px-[50px]">
                 <SliderComponent
                     beforeChange={handleButtonChange}
@@ -119,7 +119,6 @@ export default function Slider() {
                     <Cdp />
                     <DataWarehouse />
                     <Sql />
-                    <Api />
                 </SliderComponent>
                 <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center  lg:static">
                     <button

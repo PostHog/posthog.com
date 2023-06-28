@@ -53,7 +53,7 @@ const Customer = ({ image, imageDark, width, height, className = '' }) => {
 export default function Customers() {
     const { ref, inView, entry } = useInView({ triggerOnce: true })
     return (
-        <section className="mb-16 -mt-[1px]">
+        <section className="mb-16 md:-mt-[1px]">
             <div className="bg-black dark:bg-dark py-8 md:py-12 xl:py-16 px-4 relative z-20">
                 <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-6xl text-primary-dark max-w-screen-2xl mx-auto">
                     These folks <span className="text-yellow">build products users want</span> with
