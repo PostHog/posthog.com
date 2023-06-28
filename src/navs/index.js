@@ -776,7 +776,6 @@ export const docsMenu = {
                 {
                     name: 'Start here',
                     url: '/docs/getting-started/install',
-                    color: 'teal',
                     icon: 'Flag',
                     children: [
                         {
