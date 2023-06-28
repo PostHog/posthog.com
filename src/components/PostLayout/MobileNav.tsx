@@ -6,7 +6,6 @@ import { usePost } from './hooks'
 import { IMenu } from './types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
-import { Crumbs } from './Breadcrumb'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import slugify from 'slugify'
 
