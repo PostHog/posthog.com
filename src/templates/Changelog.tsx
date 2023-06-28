@@ -52,8 +52,8 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
     const [filters, setFilters] = useState({})
 
     const changesByDate = groupBy(changes, (node) => {
-        const month = new Date(node.date).getMonth()
-        return dayjs().month(month)
+        const date = new Date(node.date)
+        return dayjs().month(date.getMonth()).year(date.getFullYear())
     })
     const tableOfContents = Object.keys(changesByDate).map((date) => {
         const month = dayjs(date).format('MMMM')
@@ -120,7 +120,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                             <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
                                 <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
                                     <h2 className="text-sm font-bold uppercase m-0">{dayjs(date).format('MMM')}</h2>
-                                    <div className="text-xs font-semibold">2023</div>
+                                    <div className="text-xs font-semibold">{dayjs(date).format('YYYY')}</div>
                                 </div>
                             </div>
                             <ul className="list-none m-0 p-0 grid gap-y-12 flex-1 pb-12">
