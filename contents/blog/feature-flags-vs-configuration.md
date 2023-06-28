@@ -15,11 +15,9 @@ tags:
  - Explainers
 ---
 
-Sometimes you want to change the behavior of your app without changing the code. Both feature flags and configurations are options for doing this. 
+Sometimes you want to change the behavior of your app without changing the code. Both feature flags and configurations are options for doing this, but it may not be clear which is the right option to use.
 
-In their most basic form, they are a key you add to your code that returns a value you can control. You can use this value to change the behavior or experience of your app or product.
-
-This post goes over what configuration and feature flags do, and which one you should choose.
+This post compares configurations and feature flags, and how to choose the right one for your use case.
 
 ## What is a configuration?
 
@@ -31,7 +29,7 @@ An example of a configuration is a secret key for an external service like Strip
 
 At a technical level, configurations are often set at compile or load time and don’t change. This means the app needs to be re-complied or restarted to make a change to the configuration. Because of this, developers expect they won’t change often; for example, they aren’t used to provide multiple different values during the same session.
 
-When an app deploys, configurations (and environment variables) are often handled by the service hosting. For example, Vercel, Netlify, and Render let you easily set and access environment variables, while Firebase, Azure, and AWS all have configuration management services for large, elaborate enterprise products.
+When an app deploys, configurations (and environment variables) are often handled by the service hosting the app. For example, Vercel, Netlify, and Render let you easily set and access environment variables, while Firebase, Azure, and AWS all have configuration management services for large, elaborate enterprise products.
 
 Developers assume configurations will be permanent. Values might change, but they plan for that key and its associated value to always be important. This means versioning is critical for some configurations. Versioning helps debug potential issues related to code controlled by configs.
 
@@ -41,7 +39,7 @@ Developers assume configurations will be permanent. Values might change, but the
 
 A remote configuration, or remote config, is a configuration that can be set and changed remotely. This means a developer can change the value for users without needing to change any code. [Firebase](https://firebase.google.com/docs/remote-config) popularized this, but it also exists for [Unity](https://unity.com/products/remote-config) and many other services.
 
-Remote config is especially relied on for mobile apps. This is because mobile apps must go through an especially long review process, which can take 24-48 hours. If an issue pops up, this review process delays shipping a fix. If an app uses remote configs, it can mitigate (turn off) the problem feature immediately.
+Remote config is especially relied on for mobile apps. This is because mobile apps must go through an especially long review process, which can take at least 24-48 hours. If an issue pops up, this review process delays shipping a fix. If an app uses remote configs, it can mitigate (turn off) the problem feature immediately.
 
 ## What is a feature flag?
 
@@ -63,9 +61,13 @@ An example use case of a feature flag is rolling a new feature into beta. A cond
 
 ![Feature flag video](../images/blog/feature-flags-vs-configuration/feature-flag.mp4)
 
-As showcased by this use case, feature flags are often meant to be temporary. Once you test and fully release a feature, you can remove the flag from the code. The failure to remove it creates technical debt.
+As showcased by this use case, feature flags are often meant to be temporary. Once you test and fully release a feature, you can remove the flag from the code. The failure to remove it can create technical debt.
 
-> **Testing feature flags and configurations:** another problem both face is testing. Feature flags need to be mocked to test all potential paths, while configs are often forgotten in testing altogether. Both can cause [massive issues](https://github.com/danluu/post-mortems#config-errors). For a tutorial, see "[Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)."
+> ## Testing feature flags and configurations
+
+A problem both face is testing. Feature flags need to be mocked to test all potential paths, while configs are often forgotten in testing altogether. Both can cause [massive issues](https://github.com/danluu/post-mortems#config-errors). 
+
+For a tutorial on how to best test feature feature flags, see "[Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)."
 
 ## Which should you choose?
 
