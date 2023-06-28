@@ -21,7 +21,7 @@ posthog.identify(
 );
 ```
 
-The example above, using the PostHog JS SDK, appends extra properties to the identify event. These extra properties are also sent to Engage.
+The example above, using the PostHog browser JS SDK, appends extra properties to the identify event. These extra properties are also sent to Engage.
 
 ## Requirements
 

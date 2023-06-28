@@ -55,7 +55,7 @@ client.alias({
 })
 ```
 
-```javascript
+```js-web
 posthog.alias('alias_id', 'distinct_id');
 ```
 
@@ -119,7 +119,7 @@ client.alias({
 })
 ```
 
-```javascript
+```js-web
 // Assume we previously identified a user with 'distinct_id_one' using posthog.identify('distinct_id_one')
 // ❌ The following is not possible:
 // You cannot use distinct_id_one as an alias for any_other_id
@@ -218,7 +218,7 @@ PostHog also has built-in protections to stop the most common distinct ID mistak
 
 <MultiLanguage selector="tabs">
 
-```javascript
+```js-web
 posthog.identify(
     'distinct_id_one',
     {} 
@@ -276,7 +276,7 @@ client.capture({
 })
 ```
 
-```javascript
+```js-web
 // This will merge distinct_id_of_user_to_be_merged into the user sending this event
 posthog.capture({
     '$merge_dangerously',
@@ -374,7 +374,7 @@ client.capture({
 
 When an anonymous user is identified as `User A`, all the properties of the anonymous user are added to `User A`. If there is a conflict, the properties of `User A` are prioritized over the anonymous user. For example:
 
-```javascript
+```js-web
 /* Assume existing User A has the properties:
 { 
         name: 'User A',

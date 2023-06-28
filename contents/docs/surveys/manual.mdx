@@ -16,7 +16,7 @@ Setting up surveys is easy, and there are two ways to do it. The first option wi
 
 2. You must have the `opt_in_site_apps` option enabled in your PostHog initialization code.
 
-```js
+```js-web
 posthog.init("<ph_project_api_key>", { 
     "api_host": "<ph_instance_address>",
     "opt_in_site_apps": true 
@@ -27,11 +27,11 @@ posthog.init("<ph_project_api_key>", {
 
 ### Option 2 (custom UI component)
 
-1. Make sure you're up to date on PostHog's [JavaScript library](/docs/libraries/js). Surveys requires version 1.67.1, or later.
+1. Make sure you're up to date on PostHog's [JavaScript web library](/docs/libraries/js). Surveys requires version 1.67.1, or later.
 
 2. Call `posthog.getSurveys()` and get a list of all surveys back, and `posthog.getActiveMatchingSurveys()` to get a list of active matching surveys that should display for the current user client.
 
-```js
+```js-web
 posthog.getActiveMatchingSurveys((surveys) => {
     // do something with surveys
 })
@@ -41,10 +41,13 @@ Note: You'll need to handle whether a user has seen a survey already or not manu
 
 3. In order for survey responses to be recorded, you'll need to send in a "survey sent" capture call event with the survey's name, id, and any properties you'd want.
 
-```js
-posthog.capture("survey sent", {
+For example, if the survey's name is "New feature beta interest", you'd send in a capture call like this:
+
+```js-web
+posthog.capture("New feature beta interest survey sent", {
     $survey_id: {survey.id} // required
     $survey_response: {survey_response} // required
     $survey_name: {survey.name} // optional
 })
+
 ```

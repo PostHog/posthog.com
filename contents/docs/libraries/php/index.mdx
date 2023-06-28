@@ -171,7 +171,7 @@ PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized"
 
 This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
 
-```js
+```php
 PostHog::getAllFlags('distinct id', ["organisation" => "some-company"], [], ["organisation" => ["is_authorized" => true]])
 ```
 

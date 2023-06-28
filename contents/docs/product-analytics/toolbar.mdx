@@ -150,7 +150,7 @@ The toolbar won't load if you have a frontend that overrides the injected API to
 
 To solve this, retrieve the `__posthog` JSON from the URL before it is overridden and call `posthog.loadToolbar(JSON)` in your code:
 
-```js
+```js-web
 const toolbarJSON = new URLSearchParams(window.location.hash.substring(1)).get('__posthog')
 if (toolbarJSON) {
     posthog.loadToolbar(JSON.parse(toolbarJSON))

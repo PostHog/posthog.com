@@ -6,7 +6,7 @@ In the example below, we create a group type `company`. Then, for each company, 
 
 <MultiLanguage>
 
-```js
+```js-web
 // All events for that session will be associated with company `company_id_on_your_db`
 posthog.group('company', 'company_id_in_your_db');
 
@@ -72,7 +72,7 @@ A single event can only belong to a single group per group type. To elaborate wh
 
 <MultiLanguage>
 
-```js
+```js-web
 // ❌ Not possible
 posthog.group('company', 'company_id_in_your_db');
 posthog.group('company', 'another_company_id_in_your_db');

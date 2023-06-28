@@ -877,7 +877,7 @@ export const docsMenu = {
                             url: '/docs/libraries',
                         },
                         {
-                            name: 'JavaScript',
+                            name: 'JavaScript Web',
                             url: '/docs/libraries/js',
                             badge: {
                                 title: 'Popular',
