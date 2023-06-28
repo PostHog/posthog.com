@@ -15,7 +15,7 @@ export default function TeamNew() {
     } = useStaticQuery(query)
     return (
         <Layout>
-            <ul className="list-none py-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-8 2xl:px-4 3xl:p-0">
+            <ul className="list-none pt-16 pb-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-8 2xl:px-4 3xl:p-0">
                 {teamMembers.map((teamMember) => {
                     const {
                         avatar: { url: avatar },

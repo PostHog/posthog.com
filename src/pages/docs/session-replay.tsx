@@ -66,7 +66,7 @@ export const Intro = ({ image = true }) => {
                     src="../../components/Home/Slider/images/session-recording-hog.png"
                 />
             )}
-            <h1 className="text-4xl mb-2 mt-6">Session replay</h1>
+            <h1 className="text-4xl mt-0 mb-2">Session replay</h1>
             <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                 Play back sessions to diagnose UI issues, improve support, and get context for nuanced user behavior.
             </h3>

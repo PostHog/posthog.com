@@ -65,7 +65,7 @@ export const Intro = ({ image = true }) => (
                 src="../../components/Home/Slider/images/ab-testing-hog.png"
             />
         )}
-        <h1 className="text-4xl mb-2 mt-6">Experiments</h1>
+        <h1 className="text-4xl mt-0 mb-2">Experiments</h1>
         <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tighttext-lg text-gray">
             Test changes in production with an experimentation suite that makes it easy to get the results you want.
         </h3>

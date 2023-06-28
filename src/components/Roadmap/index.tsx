@@ -138,7 +138,7 @@ export default function Roadmap() {
                 >
                     <div className="relative">
                         <h1 className="font-bold text-5xl mx-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
-                        <figure className="-mt-8 sm:-mt-20 xl:-mt-32 mb-0">
+                        <figure className="sm:-mt-12 xl:-mt-24 mb-0">
                             <StaticImage
                                 className="w-full"
                                 imgClassName="w-full aspect-auto"

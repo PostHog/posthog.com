@@ -12,94 +12,6 @@ import List from 'components/List'
 import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 
-export const quickLinks = [
-    {
-        icon: 'GraduationCap',
-        name: 'Start here',
-        to: '/docs/product-analytics/hey',
-        color: 'red',
-    },
-    {
-        icon: 'Trends',
-        name: 'Graphs & trends',
-        to: '/docs/product-analytics/trends',
-        color: 'blue',
-    },
-    {
-        icon: 'Funnels',
-        name: 'Funnels',
-        to: '/docs/product-analytics/funnels',
-        color: 'orange',
-    },
-    {
-        icon: 'UserPaths',
-        name: 'User paths',
-        to: '/docs/product-analytics/paths',
-        color: 'seagreen',
-    },
-    {
-        icon: 'Dashboard',
-        name: 'Dashboards',
-        to: '/docs/product-analytics/dashboards',
-        color: 'purple',
-    },
-    {
-        icon: 'Retention',
-        name: 'Retention',
-        to: '/docs/product-analytics/retention',
-        color: 'seagreen',
-    },
-    {
-        icon: 'Stickiness',
-        name: 'Stickiness',
-        to: '/docs/product-analytics/stickiness',
-        color: 'salmon',
-    },
-    {
-        icon: 'Lifecycle',
-        name: 'Lifecycle',
-        to: '/docs/product-analytics/lifecycle',
-        color: 'yellow',
-    },
-    {
-        icon: 'ArrowUpRight',
-        name: 'Correlation analysis',
-        to: '/docs/product-analytics/correlation',
-        color: 'blue',
-    },
-    {
-        icon: 'People',
-        name: 'Groups',
-        to: '/docs/product-analytics/group-analytics',
-        color: 'orange',
-    },
-    {
-        icon: 'Toolbar',
-        name: 'Toolbar',
-        to: '/docs/product-analytics/toolbar',
-        color: 'teal',
-    },
-    {
-        icon: 'Sampling',
-        name: 'Sampling',
-        to: '/docs/product-analytics/sampling',
-        color: 'purple',
-    },
-    {
-        icon: 'Database',
-        name: 'HogQL',
-        to: '/docs/product-analytics/hogql',
-        color: 'seagreen',
-    },
-    {
-        icon: 'Bell',
-        name: 'Subscriptions & notifications',
-        to: '/docs/product-analytics/subscriptions',
-        description: 'Set up notifications for when specific actions occur',
-        color: 'salmon',
-    },
-]
-
 type ProductAnalyticsProps = {
     data: {
         tutorials: {
@@ -111,27 +23,12 @@ type ProductAnalyticsProps = {
 }
 
 export const Intro = () => (
-    <>
-        <h1 className="text-4xl mb-2 mt-6">Product analytics</h1>
+    <header className="pb-8">
+        <h1 className="text-4xl mt-0 mb-2">Product analytics</h1>
         <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
             Learn how to use product analytics to understand your users.
         </h3>
-        {/* Quick links */}
-        <section className="my-12 clear-both">
-            <h3 className="mb-6 mt-0">Topics</h3>
-            <em>Note: This section will come out, but I want to use these colors in the left nav</em>
-            <List
-                className="grid md:grid-cols-2 gap-1"
-                items={quickLinks.map(({ color, icon, name, to, description }) => ({
-                    label: name,
-                    url: to,
-                    icon,
-                    iconColor: color,
-                    description,
-                }))}
-            />
-        </section>
-    </>
+    </header>
 )
 
 export const GuideItem = ({ title, description, image, url }) => (

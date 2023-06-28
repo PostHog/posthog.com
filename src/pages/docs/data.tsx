@@ -88,7 +88,7 @@ const Data: React.FC<DataProps> = ({ data }) => {
                     className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
                     src="../../components/Product/images/hogs/data-warehouse.png"
                 />
-                <h1 className="text-4xl mb-2 mt-6">Data management</h1>
+                <h1 className="text-4xl mt-0 mb-2">Data management</h1>
                 <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75">
                     Manage event and customer data used throughout the PostHog suite.
                 </h3>

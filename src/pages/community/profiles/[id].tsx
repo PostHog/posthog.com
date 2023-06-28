@@ -25,9 +25,11 @@ import { communityMenu } from '../../../navs'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
-        <div className={`overflow-hidden rounded-full ${props.className}`}>
+        <div
+            className={`overflow-hidden rounded-full p-[1px] bg-white border border-light dark:border-dark ${props.className}`}
+        >
             {props.src ? (
-                <img className="w-full h-full" alt="" src={props.src} />
+                <img className="w-full h-full rounded-full bg-white border-white border-[2px]" alt="" src={props.src} />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -137,21 +139,21 @@ export default function ProfilePage({ params }: PageProps) {
                         <>
                             <div className="space-y-8 my-8">
                                 <section className="">
-                                    <div className="relative w-24 h-24 float-right">
+                                    <div className="relative w-48 h-48 float-right -mt-12">
                                         <Avatar
                                             className=" bg-gray-accent dark:gray-accent-dark"
                                             src={getAvatarURL(profile)}
                                         />
                                         {isTeamMember && (
-                                            <span className="absolute -right-1 -bottom-1 h-[32px] w-[32px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
-                                                <Logomark className="w-[24px]" />
+                                            <span className="absolute right-1 bottom-1 h-12 w-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark border border-light dark:border-dark">
+                                                <Logomark className="w-8" />
                                             </span>
                                         )}
                                     </div>
 
                                     <div className="space-y-3 mb-8">
                                         <div className="flex gap-x-4 items-center">
-                                            <h1 className="m-0">{name || 'Anonymous'}</h1>
+                                            <h1 className="m-0 text-5xl">{name || 'Anonymous'}</h1>
                                             {profile.pronouns && (
                                                 <div>
                                                     <Label text={profile.pronouns} size="large" />
@@ -258,7 +260,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                               </SidebarSection>
 
                               {profiles?.data?.length > 0 ? (
-                                  <SidebarSection title="Co-workers">
+                                  <SidebarSection title="Teammates">
                                       <ul className="p-0 grid gap-y-2">
                                           {profiles.data
                                               .filter(({ id }) => id !== profile.id)

@@ -27,11 +27,6 @@ export default function Template({ data }) {
                 title={`${title} template - PostHog`}
                 description={description || excerpt}
             />
-            <Breadcrumbs
-                crumbs={[{ title: 'Templates', url: '/templates' }, { title }]}
-                darkModeToggle
-                className="px-4 mt-4 sticky top-0 z-10 bg-tan dark:bg-primary"
-            />
             <div
                 style={{ gridAutoColumns: 'minmax(max-content, 1fr) minmax(auto, 880px) 1fr' }}
                 className="mt-10 w-full relative lg:grid lg:grid-flow-col lg:gap-12 items-start"

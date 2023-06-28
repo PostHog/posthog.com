@@ -339,7 +339,7 @@ export const Main = () => {
             </div>
             {internalMenu?.length > 0 && (
                 <>
-                    <ul className="hidden lg:flex justify-center space-x-4 list-none m-0 pt-1 px-4 mb-8 border-b border-light dark:border-dark relative">
+                    <ul className="hidden lg:flex justify-center space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative">
                         {internalMenu.map(({ name, url, icon, color }) => {
                             const Icon = icons[icon]
                             const active = activeInternalMenu?.name === name
