@@ -299,7 +299,7 @@ export const CodeBlock = ({
             >
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
                     <pre className="w-full m-0 p-0 rounded-t-none rounded-b bg-accent dark:bg-accent-dark border-t border-light dark:border-dark">
-                        <div className="flex" id={codeBlockId}>
+                        <div className="flex whitespace-pre-wrap" id={codeBlockId}>
                             {showLineNumbers && (
                                 <pre className="m-0 py-4 pl-4 pr-2 inline-block">
                                     <span
