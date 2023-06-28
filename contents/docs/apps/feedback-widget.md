@@ -2,12 +2,10 @@
 title: Feedback Widget
 github: https://github.com/PostHog/feedback-app
 installUrl: https://app.posthog.com/project/apps?name=Feedback%20Widget
-thumbnail: ../../apps/thumbnails/feedback-widget.png
+thumbnail: ../../cdp/thumbnails/feedback-widget.png
 tags:
     - feedback-widget
 ---
-
-### What does the Feedback Widget app do?
 
 This app enables you to gather feedback from your users and ingest it as an event into PostHog. The app accomplishes this by injecting code into your website, such that a small widget appears to prompt users to share feedback.
 
@@ -23,7 +21,7 @@ You can also use Zapier to send feedback to other tools like Slack, Zendesk, and
 
 ![Feedback widget](../../images/docs/apps/feedback-widget/feedback-slack.png)
 
-### What are the requirements for this app?
+## Requirements
 
 First, you need to opt in to the site apps beta. You'll need to be on PostHog cloud or if self-hosting using PostHog 1.41.0 or later.
 
@@ -31,7 +29,7 @@ You can opt in to the beta by configuring your `posthog-js` initialization to in
 
 Self-hosted and not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
 
-### How do I install the Feedback Widget?
+## Install
 
 1. Opt into the site apps beta by setting your `posthog-js` initialization to include `opt_in_site_apps: true`.  
 2. Visit the 'Apps' page in your instance of PostHog.
@@ -51,7 +49,9 @@ Self-hosted and not running 1.41.0? Find out [how to update your self-hosted Pos
 5. [Copy the Webhook URL into the PostHog Setup page](https://posthog.com/docs/integrate/webhooks/slack)
 
 
-## Can I make my own site apps?
+## FAQ
+
+### Can I make my own apps?
 
 You certainly can. Check our tutorial about [how to build a site app in PostHog](/tutorials/build-site-app) to get started.
 
@@ -65,16 +65,14 @@ We'd like to thank PostHog team members [Luke Harries](https://github.com/lharri
 
 ### Who maintains this app?
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [raise a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&template=bug_report.md) to let us know!
+This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
 
 ### What if I have feedback on this app?
 
-We love feature requests and feedback! Please [create an issue](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&template=feature_request.md) to tell us what you think.
+We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 
 Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 
-We love answering questions. Ask us anything via [our Support page](/questions).
-
-You can also [join the PostHog Community Slack group](/slack) to collaborate with others and get advice on developing your own PostHog apps.
+We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 

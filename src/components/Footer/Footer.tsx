@@ -33,6 +33,10 @@ const linklist: IProps[] = [
                 url: '/product-os',
             },
             {
+                title: 'Data connections',
+                url: '/cdp',
+            },
+            {
                 title: 'Apps',
                 url: '/apps',
             },
@@ -80,7 +84,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Webhooks',
-                url: '/docs/integrate/webhooks/message-formatting',
+                url: '/docs/webhooks',
             },
         ],
     },

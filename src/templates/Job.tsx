@@ -121,7 +121,7 @@ export default function Job({
                             teamSlug={teamInfo?.fields?.slug}
                             teamName={teamName}
                             team={team?.nodes}
-                            teamLead={teamLead}
+                            teamLead={teamLead?.nodes[0]}
                         />
                     }
                     title="careers"
@@ -172,7 +172,7 @@ export default function Job({
                                             return (
                                                 <li
                                                     key={title}
-                                                    className="flex space-x-4 items-center font-medium leading-tight text-[15px]"
+                                                    className="flex space-x-3 items-center font-medium leading-tight text-[15px]"
                                                 >
                                                     <img className="max-w-[30px]" alt={title} src={image} />
                                                     <span>{title}</span>
@@ -260,34 +260,33 @@ export default function Job({
 
 export const query = graphql`
     query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!, $objectives: String!, $mission: String!) {
-        teamLead: mdx(frontmatter: { team: { in: [$teamName] }, teamLead: { in: [$teamName] } }) {
-            id
-            frontmatter {
-                name
+        teamLead: allSqueakProfile(
+            filter: {
+                teams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } }
+                leadTeams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } }
+            }
+        ) {
+            nodes {
+                firstName
+                lastName
                 country
-                jobTitle
-                headshot {
-                    id
-                    childImageSharp {
-                        gatsbyImageData
-                    }
+                companyRole
+                avatar {
+                    url
                 }
             }
         }
-        team: allMdx(filter: { frontmatter: { team: { in: [$teamName] } } }) {
+        team: allSqueakProfile(
+            filter: { teams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } } }
+        ) {
             nodes {
-                id
-                frontmatter {
-                    name
-                    country
-                    jobTitle
-                    pineappleOnPizza
-                    headshot {
-                        id
-                        childImageSharp {
-                            gatsbyImageData
-                        }
-                    }
+                firstName
+                lastName
+                country
+                companyRole
+                pineappleOnPizza
+                avatar {
+                    url
                 }
             }
         }

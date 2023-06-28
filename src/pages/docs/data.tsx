@@ -17,14 +17,29 @@ export const quickLinks = [
         description: 'Combine and filter events to create custom actions.',
     },
     {
+        name: 'Autocapture',
+        to: '/docs/data/autocapture',
+        description: 'Automatically capture events from your website or app.',
+    },
+    {
         name: 'Cohorts',
         to: '/docs/data/cohorts',
         description: 'Create groups of users based on their behavior or properties.',
     },
     {
+        name: 'Data warehouse',
+        to: '/docs/data-warehouse',
+        description: 'Send your data to your data warehouse for analysis.',
+    },
+    {
         name: 'Events',
         to: '/docs/data/events',
         description: 'Core information on events and event properties.',
+    },
+    {
+        name: 'Identify',
+        to: '/docs/data/identify',
+        description: 'Identify your users and their properties.',
     },
     {
         name: 'Persons',
@@ -37,9 +52,14 @@ export const quickLinks = [
         description: 'Organize your data into projects and manage access to them.',
     },
     {
-        name: 'Notifications & alerts',
-        to: '/docs/data/notifications-and-alerts',
-        description: 'Set up notifications for when specific actions occur',
+        name: 'User properties',
+        to: '/docs/data/user-properties',
+        description: 'Learn about user properties and how to use them.',
+    },
+    {
+        name: 'UTM segmentation',
+        to: '/docs/data/utm-segmentation',
+        description: 'Segment your users based on UTM parameters.',
     },
 ]
 

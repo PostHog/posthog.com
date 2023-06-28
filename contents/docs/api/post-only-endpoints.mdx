@@ -99,6 +99,40 @@ curl -v -L --header "Content-Type: application/json" -d '{
 }' https://app.posthog.com/capture/
 ```
 
+### Group
+
+> **Note:** `company` is a [group type](/docs/product-analytics/group-analytics#groups-vs-group-types). You can set it to the value you want such as `organization`, `project`, or `channel`.
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "$event",
+    "distinct_id": "1234",
+    "properties": {
+        "$groups": {"company": "<company_name>"}
+    }
+}' https://app.posthog.com/capture/
+```
+
+### Group identify
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "event": "$groupidentify",
+    "properties": {
+        "distinct_id": "groups_setup_id",
+        "$group_type": "<group_type>",
+        "$group_key": "<company_name>",
+        "$group_set": {
+            "name": "<company_name>",
+            "subscription": "premium"
+            "date_joined": "2020-01-23T00:00:00.000Z"
+        }
+    }
+}' https://app.posthog.com/capture/
+```
+
 ### Identify
 
 ```bash
@@ -242,7 +276,7 @@ Body:
 ```
 
 ### Example request & response: /decide v3
-`/decide` version 3 introduces support for [feature flag payloads](docs/feature-flags/payloads) and a change in response structure: flags that were evaluated as false are also passed in. Further, this endpoint returns a parameter `errorComputingFlags`, which is true when we didn't manage to compute some flags, because of, say the database being down or some other reason. This allows for making partial updates to currently active flags in your clients.
+`/decide` version 3 introduces support for [feature flag payloads](/docs/feature-flags/payloads) and a change in response structure: flags that were evaluated as false are also passed in. Further, this endpoint returns a parameter `errorComputingFlags`, which is true when we didn't manage to compute some flags, because of, say the database being down or some other reason. This allows for making partial updates to currently active flags in your clients.
 
 You can optionally pass in an object containing person or group properties to override server values. This is how posthog-js handles [overriding server properties](/docs/libraries/js#overriding-server-properties), which can be useful if you want to make feature flag decisions without waiting for these changes to be ingested and available on PostHog's servers.
 

@@ -1,0 +1,222 @@
+[
+    {
+        "name": "CDP",
+        "url": "/cdp"
+    },
+    {
+        "name": "Variance Connector",
+        "url": "/cdp/variance-connector"
+    },
+    {
+        "name": "Engage Connector",
+        "url": "/cdp/engage-connector"
+    },
+    {
+        "name": "Airbyte Export",
+        "url": "/cdp/airbyte-export"
+    },
+    {
+        "name": "Amazon Kinesis Import",
+        "url": "/cdp/amazon-kinesis"
+    },
+    {
+        "name": "Automatic Cohort Creator",
+        "url": "/cdp/automatic-cohort-creator"
+    },
+    {
+        "name": "BigQuery Export",
+        "url": "/cdp/bigquery-export"
+    },
+    {
+        "name": "BitBucket Release Tracker",
+        "url": "/cdp/bitbucket-release-tracker"
+    },
+    {
+        "name": "Currency Normalizer",
+        "url": "/cdp/currency-normalization"
+    },
+    {
+        "name": "Customer.io Connector",
+        "url": "/cdp/customer-io"
+    },
+    {
+        "name": "Databricks Export",
+        "url": "/cdp/databricks"
+    },
+    {
+        "name": "Downsampler",
+        "url": "/cdp/downsampling"
+    },
+    {
+        "name": "Email Scoring",
+        "url": "/cdp/email-scoring"
+    },
+    {
+        "name": "Event Sequence Timer",
+        "url": "/cdp/event-sequence-timer"
+    },
+    {
+        "name": "User Paths",
+        "url": "/product/user-paths"
+    },
+    {
+        "name": "Correlation Analysis",
+        "url": "/product/correlation-analysis"
+    },
+    {
+        "name": "Session Recording",
+        "url": "/product/session-recording"
+    },
+    {
+        "name": "Feature Flags",
+        "url": "/product/feature-flags"
+    },
+    {
+        "name": "First Time Event Tracker",
+        "url": "/cdp/first-time-event-tracker"
+    },
+    {
+        "name": "GeoIP Enricher",
+        "url": "/cdp/geoip-enrichment"
+    },
+    {
+        "name": "Experimentation",
+        "url": "/product/experimentation-suite"
+    },
+    {
+        "name": "GitHub Release Tracker",
+        "url": "/cdp/github-release-tracker"
+    },
+    {
+        "name": "GitHub Star Sync",
+        "url": "/cdp/github-star-sync"
+    },
+    {
+        "name": "GitLab Release Tracker",
+        "url": "/cdp/gitlab-release-tracker"
+    },
+    {
+        "name": "Google Cloud Export",
+        "url": "/cdp/google-cloud-export"
+    },
+    {
+        "name": "Google Pub/Sub Connector",
+        "url": "/cdp/google-pub-sub-connector"
+    },
+    {
+        "name": "Heartbeat",
+        "url": "/cdp/heartbeat"
+    },
+    {
+        "name": "Hubspot Connector",
+        "url": "/cdp/hubspot-connector"
+    },
+    {
+        "name": "Intercom Connector",
+        "url": "/cdp/intercom"
+    },
+    {
+        "name": "Ingestion Alerts",
+        "url": "/cdp/ingestion-alert"
+    },
+    {
+        "name": "n8n Connector",
+        "url": "/cdp/n8n"
+    },
+    {
+        "name": "Orbit Connector",
+        "url": "/cdp/orbit"
+    },
+    {
+        "name": "Pagerduty Connector",
+        "url": "/cdp/pagerduty-connector"
+    },
+    {
+        "name": "Postgres Export",
+        "url": "/cdp/postgres-export"
+    },
+    {
+        "name": "Property Filter",
+        "url": "/cdp/property-filter"
+    },
+    {
+        "name": "Property Flattener",
+        "url": "/cdp/property-flattener"
+    },
+    {
+        "name": "Redshift Export",
+        "url": "/cdp/redshift-export"
+    },
+    {
+        "name": "Redshift Import",
+        "url": "/cdp/redshift-import"
+    },
+    {
+        "name": "Replicator",
+        "url": "/cdp/replicator"
+    },
+    {
+        "name": "RudderStack Export",
+        "url": "/cdp/rudderstack-export"
+    },
+    {
+        "name": "S3 Export",
+        "url": "/cdp/s3-export"
+    },
+    {
+        "name": "Salesforce Connector",
+        "url": "/cdp/salesforce-connector"
+    },
+    {
+        "name": "Schema Enforcer",
+        "url": "/cdp/schema-enforcer"
+    },
+    {
+        "name": "Segment Connector",
+        "url": "/cdp/segment"
+    },
+    {
+        "name": "Sendgrid Connector",
+        "url": "/cdp/sendgrid-connector"
+    },
+    {
+        "name": "Sentry Connector",
+        "url": "/cdp/sentry-connector"
+    },
+    {
+        "name": "Shopify Connector",
+        "url": "/cdp/shopify"
+    },
+    {
+        "name": "Snowflake Export",
+        "url": "/cdp/snowflake-export"
+    },
+    {
+        "name": "Taxonomy Standardizer",
+        "url": "/cdp/taxonomy-standardizer"
+    },
+    {
+        "name": "Timestamp Parser",
+        "url": "/cdp/timestamp-parser"
+    },
+    {
+        "name": "Twilio Connector",
+        "url": "/cdp/twilio"
+    },
+    {
+        "name": "Twitter Followers Tracker",
+        "url": "/cdp/twitter-followers"
+    },
+    {
+        "name": "User Agent Populator",
+        "url": "/cdp/user-agent-populator"
+    },
+    {
+        "name": "Zapier Connector",
+        "url": "/cdp/zapier-connector"
+    },
+    {
+        "name": "Zendesk Connector",
+        "url": "/cdp/zendesk-connector"
+    }
+]

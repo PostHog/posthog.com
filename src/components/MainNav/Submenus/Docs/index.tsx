@@ -56,7 +56,7 @@ const products: IFeature[] = [
     { title: 'Feature flags', icon: <FeatureFlags />, url: '/docs/feature-flags' },
     { title: 'A/B testing', icon: <AbTesting />, url: '/docs/experiments' },
     { title: 'Data', icon: <Projects />, url: '/docs/data' },
-    { title: 'Apps', icon: <AppLibrary />, url: '/docs/apps' },
+    { title: 'Data connections', icon: <EventPipelines />, url: '/docs/cdp' },
     { title: 'API', icon: <API />, url: '/docs/api' },
 ]
 
@@ -64,7 +64,7 @@ const resources: IFeature[] = [
     { title: 'Tutorials', icon: <Tutorials />, url: '/tutorials' },
     { title: 'Integrations', icon: <Integrations />, url: '/docs/integrations' },
     { title: 'Templates', icon: <Notifications />, url: '/templates' },
-    { title: 'Webhooks', icon: <Webhooks />, url: '/docs/integrate/webhooks/message-formatting' },
+    { title: 'Webhooks', icon: <Webhooks />, url: '/docs/webhooks' },
     { title: 'How PostHog works', icon: <HowPostHogWorks />, url: '/docs/how-posthog-works' },
     { title: 'Migrate to PostHog', icon: <Migrate />, url: '/docs/migrate/ingest-historic-data' },
     { title: 'Privacy', icon: <Privacy />, url: '/docs/privacy' },

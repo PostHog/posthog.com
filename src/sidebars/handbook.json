@@ -231,6 +231,10 @@
                 ]
             },
             {
+                "name": "Grievance process",
+                "url": "/handbook/people/grievances"
+            },
+            {
                 "name": "Finance",
                 "url": "/handbook/people/finance"
             },
@@ -539,13 +543,17 @@
                 "url": "/handbook/design/process"
             },
             {
+                "name": "Art and brand requests",
+                "url": "/handbook/design/art-requests"
+            },
+            {
                 "name": "Designing posthog.com",
                 "url": "/handbook/design/designing-posthog-website"
             }
         ]
     },
     {
-        "name": "Marketing",
+        "name": "Marketing & Content",
         "url": "",
         "children": [
             {
@@ -599,6 +607,10 @@
                     {
                         "name": "YouTube",
                         "url": "/handbook/growth/marketing/youtube"
+                    },
+                    {
+                        "name": "Dashboard templates",
+                        "url": "/handbook/growth/marketing/templates"
                     }
                 ]
             }
@@ -663,6 +675,10 @@
             {
                 "name": "Pricing principles",
                 "url": "/handbook/engineering/feature-pricing"
+            },
+            {
+                "name": "Usage reports",
+                "url": "/handbook/engineering/usage_reports"
             }
         ]
     }

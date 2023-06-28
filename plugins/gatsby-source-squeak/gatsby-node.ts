@@ -18,7 +18,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     page,
                     pageSize: 100,
                 },
-                populate: ['avatar'],
+                populate: ['avatar', 'teams', 'leadTeams'],
             },
             {
                 encodeValuesOnly: true, // prettify URL
@@ -284,7 +284,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             node.thumbnail___NODE = fileNode?.id
         }*/
 
-        if (githubUrls.length > 0 && process.env.GITHUB_API_KEY) {
+        if (githubUrls?.length > 0 && process.env.GITHUB_API_KEY) {
             node.githubPages = await Promise.all(
                 githubUrls
                     .filter((url) => url.includes('github.com'))

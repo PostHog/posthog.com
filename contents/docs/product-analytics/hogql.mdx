@@ -6,42 +6,71 @@ availability:
     free: full
     selfServe: full
     enterprise: full
-
 ---
 
-### What is HogQL?
+HogQL is our take on SQL (Structured Query Language), a language used to manage and access data. HogQL is effectively a wrapper around ClickHouse SQL, with a few tweaks, such as simplified event and person property access.
 
-HogQL is our take on SQL. It's effectively a wrapper around ClickHouse SQL, with a few tweaks, such as simplified event and person property access.
+> **Is HogQL real SQL?** Yes, it's a translation layer over ClickHouse SQL. You can use most ClickHouse features in HogQL, including JOINs and subqueries. To learn more about ClickHouse, and how it differs from traditional SQL databases, read [PostHog's ClickHouse Manual](https://posthog.com/handbook/engineering/clickhouse).
 
-### Is HogQL real SQL?
 
-Yes, HogQL is real SQL. It's a translation layer over ClickHouse SQL. You can use most ClickHouse features in HogQL, including JOINs and subqueries.
+HogQL is currently in **public beta**. This means it's not yet a perfect experience, and the language itself may still change. Follow along with the development [here](https://github.com/PostHog/meta/issues/81).
 
-To learn more about ClickHouse, and how it differs from traditional SQL databases, read [PostHog's ClickHouse Manual](https://posthog.com/handbook/engineering/clickhouse).
+## HogQL expressions
 
-## HogQL Expressions (Public BETA)
-
-We've launched "HogQL Expressions" as a public beta. These expressions can be used inside insights as filters and/or breakdown values. Check them out today!
+HogQL expressions can be used inside insights and dashboards as filters and/or breakdown values. When filtering or breaking down, select the "HogQL" tab, and add your expression.
 
 ![HogQL trends breakdown filter](../../images/features/hogql/trends-breakdown.png)
 
-## SQL insights & Event explorer (Private BETA)
+## SQL insights
 
-We're also running a **private beta** of full SQL query support.
+SQL insights enables you to create and edit insights using full SQL queries instead of the UI. Clicking the `{}` button in the top right corner of an insight shows you the SQL schema used to generate the insight which you can edit.
 
 ![HogQL SQL insight](../../images/features/hogql/insights-sql.png)
 
-Together with a new "Event Explorer".
+## Event explorer
+
+The event explorer replaces the "Live Events" tab in PostHog. It provides more functionality including date filtering, event counts, HogQL queries, [aggregations](#supported-aggregations) and column configuration.
 
 ![Event Explorer](../../images/features/hogql/event-explorer.png)
 
-We're working hard on making this public for all. Follow along in the [relevant Github issue](https://github.com/PostHog/meta/issues/81), or [send us a support ticket](https://app.posthog.com/home#supportModal) if you want to get access. 
+## Database
 
-## Database (Private BETA)
-
-To learn about all the tables you can query, check out the new "[Database](https://app.posthog.com/data-management/database)" tab under "Data Management". Currently also in **private beta**.
+To display all the tables you can query, check out the new "[Database](https://app.posthog.com/data-management/database)" tab under "Data Management".
 
 ![Database](../../images/features/hogql/database.png)
+
+We're working hard on making all these public. Follow along in the [relevant Github issue](https://github.com/PostHog/meta/issues/81), or [send us a support ticket](https://app.posthog.com/home#supportModal) if you want to get access.
+
+## API access 
+
+> **Will there be API pricing?** The HogQL API is free to use while it's in the public beta, and we work out the details. After we launch for real, we plan to charge a competitive rate for heavy usage. Stay tuned.
+
+To access HogQL via the [PostHog API](/docs/api), make a POST request to `/api/project/:id/query` with the following JSON payload:
+
+```json
+{"query": {"kind": "HogQLQuery", "query": "select * from events limit 100"}}
+```
+
+The response is in the format:
+
+```ts
+export interface HogQLQueryResponse {
+    /** The input query */
+    query?: string
+    /** An array of result arrays */
+    results?: any[][]
+    /** Returned column types */
+    types?: string[]
+    /** Returned column names/aliases */
+    columns?: string[]
+    /** Generated HogQL query with expressions inlined */
+    hogql?: string
+    /** Generated ClickHouse query for debugging */
+    clickhouse?: string
+}
+```
+
+While in the public beta, the response format may still change. 
 
 ## HogQL guide
 
@@ -49,7 +78,7 @@ To learn about all the tables you can query, check out the new "[Database](https
 
 Quotation symbols work the same way they would work with ClickHouse, which inherits from ANSI SQL:
 
-- **S**ingle quotes (`'`) for **S**trings litereals.
+- **S**ingle quotes (`'`) for **S**trings literals.
 - **D**ouble quotes (`"`) and **B**ackticks (\`) for **D**ata**B**ase identifiers.
 
 For example:
@@ -58,15 +87,17 @@ For example:
 SELECT * FROM events WHERE properties.`$browser` = 'Chrome'
 ```
 
-#### Property access
+### Property access
 
-To access a property stored on an event or person, just use dot notation. For example: `properties.$browser` or `person.properties.$initial_browser`.
+To access a property stored on an event or person, just use dot notation. For example `properties.$browser` or `person.properties.$initial_browser`.  
 
-Nested JSON access works as well: `properties.$some.nested.property`.
+Nested property or JSON access, such as `properties.$some.nested.property`, works as well.
+
+> PostHog's properties include always include `$` as a prefix, while custom properties do not (unless you add it).
 
 Property identifiers must be known at query time. For dynamic access, use the JSON manipulation functions from below on the `properties` field directly.
 
-#### Property types
+### Property types
 
 If you have specified a type for an event or person property under "Data Management", it will be returned in this type. All other properties are returned as strings.
 
@@ -76,16 +107,17 @@ For example:
 SELECT round(properties.$screen_width * properties.$screen_height / 1000000, 2) as `Screen MegaPixels` FROM events LIMIT 100
 ```
 
-... works because `$screen_width` and `$screen_height` are both defined as numeric properties. Thus you can multiply them.
+This works because `$screen_width` and `$screen_height` are both defined as numeric properties. Thus you can multiply them.
 
 To cast a string property into a different type, use type conversion functions, such as `toFloat()`.
 
+> You can find a full list of properties and their types in your [data management tab](https://app.posthog.com/data-management/properties).
 
-### Supported ClickHouse functions
+## Supported ClickHouse functions
 
-The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-reference/functions/) have been enabled. This list is [ever expanding](https://github.com/posthog/posthog/blob/master/posthog/hogql/constants.py). Please submit a Pull Request if we're missing something obvious.
+The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-reference/functions/) are enabled. This list is [ever expanding](https://github.com/posthog/posthog/blob/master/posthog/hogql/constants.py). Please submit a pull request if we're missing something obvious.
 
-#### Type conversion
+### Type conversion
 
 - `toInt`
 - `toFloat`
@@ -98,7 +130,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `parseDateTime`
 - `parseDateTimeBestEffort`
 
-#### Arithmetic
+### Arithmetic
 
 - `plus`
 - `minus`
@@ -118,7 +150,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `multiplyDecimal`
 - `divideDecimal`
 
-#### Arrays and strings common
+### Arrays and strings in common
 
 - `empty`
 - `notEmpty`
@@ -127,7 +159,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `in`
 - `notIn`
 
-#### Arrays
+### Arrays
 
 - `array`
 - `range`
@@ -181,7 +213,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `arrayCumSumNonNegative`
 - `arrayProduct`
 
-#### Comparison
+### Comparison
 
 - `equals`
 - `notEquals`
@@ -190,14 +222,14 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `lessOrEquals`
 - `greaterOrEquals`
 
-#### Logical
+### Logical
 
 - `and`
 - `or`
 - `xor`
 - `not`
 
-#### Type conversions
+### Type conversions
 
 - `toInt`
 - `toFloat`
@@ -210,7 +242,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `parseDateTime`
 - `parseDateTimeBestEffort`
 
-#### Dates and times
+### Dates and times
 
 - `toTimeZone`
 - `timeZoneOf`
@@ -292,7 +324,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `toIntervalQuarter`
 - `toIntervalYear`
 
-#### Strings
+### Strings
 
 - `lengthUTF8`
 - `leftPad`
@@ -330,7 +362,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `ascii`
 - `concatWithSeparator`
 
-#### Searching in strings
+### Searching in strings
 
 - `position`
 - `positionCaseInsensitive`
@@ -364,7 +396,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `countMatches`
 - `regexpExtract`
 
-#### Replacing in strings
+### Replacing in strings
 
 - `replace`
 - `replaceAll`
@@ -375,12 +407,12 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `translate`
 - `translateUTF8`
 
-#### Conditional
+### Conditional
 
 - `if`
 - `multiIf`
 
-#### Mathematical
+### Mathematical
 
 - `e`
 - `pi`
@@ -421,7 +453,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `factorial`
 - `width_bucket`
 
-#### Rounding
+### Rounding
 
 - `floor`
 - `ceil`
@@ -433,7 +465,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `roundAge`
 - `roundDown`
 
-#### Maps
+### Maps
 
 - `map`
 - `mapFromArrays`
@@ -449,7 +481,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `mapFilter`
 - `mapUpdate`
 
-#### Splitting strings
+### Splitting strings
 
 - `splitByChar`
 - `splitByString`
@@ -462,7 +494,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `ngrams`
 - `tokens`
 
-#### Bit
+### Bit
 
 - `bitAnd`
 - `bitOr`
@@ -502,7 +534,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `bitmapXorCardinality`
 - `bitmapAndnotCardinality`
 
-#### URLs
+### URLs
 
 - `protocol`
 - `domain`
@@ -533,7 +565,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `cutQueryStringAndFragment`
 - `cutURLParameter`
 
-#### JSON
+### JSON
 
 - `isValidJSON`
 - `JSONHas`
@@ -551,8 +583,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `JSONExtractArrayRaw`
 - `JSONExtractKeysAndValuesRaw`
 
-
-#### Geo
+### Geo
 
 - `greatCircleDistance`
 - `geoDistance`
@@ -560,7 +591,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `pointInEllipses`
 - `pointInPolygon`
 
-#### Nullable
+### Nullable
 
 - `isNull`
 - `isNotNull`
@@ -570,7 +601,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `assumeNotNull`
 - `toNullable`
 
-#### Tuples
+### Tuples
 
 - `tuple`
 - `tupleElement`
@@ -586,7 +617,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `tupleDivideByNumber`
 - `dotProduct`
 
-#### Time window
+### Time window
 
 - `tumble`
 - `hop`
@@ -595,7 +626,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `hopStart`
 - `hopEnd`
 
-#### Distance window
+### Distance window
 
 - `L1Norm`
 - `L2Norm`
@@ -611,7 +642,7 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `LpNormalize`
 - `cosineDistance`
 
-#### Other
+### Other
 
 - `isFinite`
 - `isInfinite`
@@ -623,3 +654,111 @@ The following [ClickHouse functions](https://clickhouse.com/docs/en/sql-referenc
 - `formatReadableSize`
 - `formatReadableQuantity`
 - `formatReadableTimeDelta`
+
+## Supported aggregations
+
+The following [aggregations](https://clickhouse.com/docs/en/sql-reference/functions/) are enabled. This list is [ever expanding](https://github.com/PostHog/posthog/blob/dfce91d924fe038568c626416fa23e67d0f0906f/posthog/hogql/constants.py#L489). Please submit a pull request if we're missing something obvious.
+
+### Standard aggregate functions
+
+- `count`
+- `countIf`
+- `min`
+- `minIf`
+- `max`
+- `maxIf`
+- `sum`
+- `sumIf`
+- `avg`
+- `avgIf`
+- `any`
+- `anyIf`
+- `stddevPop`
+- `stddevPopIf`
+- `stddevSamp`
+- `stddevSampIf`
+- `varPop`
+- `varPopIf`
+- `varSamp`
+- `varSampIf`
+- `covarPop`
+- `covarPopIf`
+- `covarSamp`
+- `covarSampIf`
+
+### ClickHouse-specific aggregate functions
+
+- `anyHeavy`
+- `anyHeavyIf`
+- `anyLast`
+- `anyLastIf`
+- `argMin`
+- `argMinIf`
+- `argMax`
+- `argMaxIf`
+- `avgWeighted`
+- `avgWeightedIf`
+- `groupArray`
+- `groupUniqArray`
+- `groupArrayInsertAt`
+- `groupArrayInsertAtIf`
+- `groupArrayMovingAvg`
+- `groupArrayMovingAvgIf`
+- `groupArrayMovingSum`
+- `groupArrayMovingSumIf`
+- `groupBitAnd`
+- `groupBitAndIf`
+- `groupBitOr`
+- `groupBitOrIf`
+- `groupBitXor`
+- `groupBitXorIf`
+- `groupBitmap`
+- `groupBitmapIf`
+- `groupBitmapAnd`
+- `groupBitmapAndIf`
+- `groupBitmapOr`
+- `groupBitmapOrIf`
+- `groupBitmapXor`
+- `groupBitmapXorIf`
+- `sumWithOverflow`
+- `sumWithOverflowIf`
+- `deltaSum`
+- `deltaSumIf`
+- `deltaSumTimestamp`
+- `deltaSumTimestampIf`
+- `sumMap`
+- `sumMapIf`
+- `minMap`
+- `minMapIf`
+- `maxMap`
+- `maxMapIf`
+- `skewSamp`
+- `skewSampIf`
+- `skewPop`
+- `skewPopIf`
+- `kurtSamp`
+- `kurtSampIf`
+- `kurtPop`
+- `kurtPopIf`
+- `uniq`
+- `uniqIf`
+- `uniqExact`
+- `uniqExactIf`
+- `uniqHLL12`
+- `uniqHLL12If`
+- `uniqTheta`
+- `uniqThetaIf`
+- `simpleLinearRegression`
+- `simpleLinearRegressionIf`
+- `contingency`
+- `contingencyIf`
+- `cramersV`
+- `cramersVIf`
+- `cramersVBiasCorrected`
+- `cramersVBiasCorrectedIf`
+- `theilsU`
+- `theilsUIf`
+- `maxIntersections`
+- `maxIntersectionsIf`
+- `maxIntersectionsPosition`
+- `maxIntersectionsPositionIf`

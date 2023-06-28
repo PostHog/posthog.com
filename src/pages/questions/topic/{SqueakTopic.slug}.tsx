@@ -33,12 +33,24 @@ interface IProps {
 }
 
 export default function Questions({ data, pageContext }: IProps) {
-    const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('newest')
+    const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('activity')
 
     const { questions, isLoading, refresh, fetchMore, hasMore } = useQuestions({
         limit: 20,
         sortBy,
         topicId: data?.squeakTopic?.squeakId,
+    })
+
+    const { questions: pinnedQuestions } = useQuestions({
+        limit: 5,
+        sortBy,
+        filters: {
+            pinnedTopics: {
+                id: {
+                    $eq: data?.squeakTopic?.squeakId,
+                },
+            },
+        },
     })
 
     return (
@@ -111,6 +123,7 @@ export default function Questions({ data, pageContext }: IProps) {
                                 title: `${data?.squeakTopic?.label} questions`,
                                 url: `/questions/topic/${pageContext.slug}`,
                             }}
+                            pinnedQuestions={pinnedQuestions}
                         />
                     </div>
                 </section>

@@ -6,7 +6,7 @@ showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/transparency.jpeg
+featuredImage: ../images/blog/spotlight_tigris.png
 featuredImageType: full
 category: Startups
 ---

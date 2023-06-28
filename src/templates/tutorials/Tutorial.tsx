@@ -26,15 +26,15 @@ import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
 import TutorialsSlider from 'components/TutorialsSlider'
 
-const ViewButton = ({ title, view, setView }) => {
+export const ViewButton = ({ title, view, setView }) => {
     return (
         <button
             onClick={() => setView(title)}
-            style={{
-                background: view === title ? '#F54E00' : '#E5E7E0',
-                color: view === title ? 'white' : 'black',
-            }}
-            className="py-2 px-4 rounded-md w-1/2 transition-colors"
+            className={`py-2 px-4 text-sm transition-colors border-b-2 font-medium relative after:absolute after:top-[100%] after:left-0 after:right-0 after:rounded-full after:h-[2px] ${
+                view === title
+                    ? 'font-bold after:bg-red'
+                    : 'font-semibold border-transparent opacity-50 hover:opacity-75 hover:after:bg-gray-accent'
+            }`}
         >
             {title}
         </button>

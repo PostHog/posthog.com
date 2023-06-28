@@ -135,7 +135,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
     if (!user) return null
 
     // TODO: Need to grab these from `attributes`
-    const { firstName, lastName, website, github, linkedin, twitter, biography, id } = user?.profile || {}
+    const { firstName, lastName, website, github, linkedin, twitter, biography, id, pronouns } = user?.profile || {}
 
     const avatar = getAvatarURL(user?.profile)
 
@@ -210,7 +210,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
 
     return (
         <Formik
-            initialValues={{ avatar, firstName, lastName, website, github, linkedin, twitter, biography }}
+            initialValues={{ avatar, firstName, lastName, website, github, linkedin, twitter, pronouns, biography }}
             validationSchema={ValidationSchema}
             onSubmit={handleSubmit}
         >

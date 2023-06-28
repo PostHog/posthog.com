@@ -112,7 +112,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         <article
                             key={`${title}-article`}
                             id="content-menu-wrapper"
-                            className="lg:py-12 py-4 ml-auto w-full h-full box-border lg:overflow-auto"
+                            className="lg:py-12 py-4 ml-auto w-full h-full box-border"
                         >
                             <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
                                 <div>{children}</div>
@@ -132,7 +132,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                                 </div>
                                 <div className="flex flex-grow items-end">
                                     <div className="!border-t-0 sticky bottom-0 w-full">
-                                        {tableOfContents && tableOfContents?.length > 1 && (
+                                        {tableOfContents && tableOfContents?.length > 0 && (
                                             <div className="px-4 lg:px-8 lg:pb-4 lg:block hidden">
                                                 <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
                                                     Jump to:
