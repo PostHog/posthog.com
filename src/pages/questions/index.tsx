@@ -4,6 +4,7 @@ import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import QuestionForm from 'components/Questions/QuestionForm'
 import TopicsTable from 'components/Questions/TopicsTable'
 import CommunityLayout from 'components/Community/Layout'
+import useTopicsNav from '../../navs/useTopicsNav'
 
 export const fetchTopicGroups = async () => {
     // FIXME: This is has to fetch _every_ (or probably at most 25) quesiton that's part of a topic even though we only need the most recent one
@@ -56,8 +57,10 @@ export default function Questions() {
         fetchTopicGroups().then((topicGroups) => setTopicGroups(topicGroups))
     }, [])
 
+    const topicsNav = useTopicsNav()
+
     return (
-        <CommunityLayout title="Questions">
+        <CommunityLayout menu={topicsNav} title="Questions">
             <div className="space-y-8 pb-12">
                 <section>
                     <div className="w-full sm:flex items-center mb-8">

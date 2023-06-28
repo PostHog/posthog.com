@@ -11,6 +11,7 @@ import Link from 'components/Link'
 import { RightArrow } from 'components/Icons'
 import SubscribeButton from 'components/Squeak/components/SubscribeButton'
 import CommunityLayout from 'components/Community/Layout'
+import useTopicsNav from '../../../navs/useTopicsNav'
 
 interface ITopic {
     label: string
@@ -53,8 +54,10 @@ export default function Questions({ data, pageContext }: IProps) {
         },
     })
 
+    const topicsNav = useTopicsNav()
+
     return (
-        <CommunityLayout title={data.squeakTopic.label}>
+        <CommunityLayout menu={topicsNav} title={data.squeakTopic.label}>
             <section className="max-w-screen-4xl space-y-8 pb-12 -mx-3 lg:-mx-4 xl:-mx-10">
                 <div className="w-full flex items-center mb-8">
                     <Link

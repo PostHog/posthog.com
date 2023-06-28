@@ -8,10 +8,9 @@ import QuestionSidebar from 'components/Questions/QuestionSidebar'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
-import { useNav } from 'components/Community/useNav'
-
 import { XIcon } from '@heroicons/react/outline'
 import { communityMenu } from '../../navs'
+import useTopicsNav from '../../navs/useTopicsNav'
 
 type QuestionPageProps = {
     params: {
@@ -39,7 +38,7 @@ export default function QuestionPage(props: QuestionPageProps) {
 
     const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
 
-    const nav = useNav()
+    const nav = useTopicsNav()
     return (
         <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[1]}>
             <SEO
@@ -53,7 +52,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                 hideSurvey
                 menuWidth={user?.role?.type === 'moderator' ? { right: 400 } : undefined}
             >
-                <section className="max-w-5xl mx-auto pb-12">
+                <section className="pb-12">
                     <div className="mb-4">
                         <Link
                             to="/questions"
