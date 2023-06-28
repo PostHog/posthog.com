@@ -181,7 +181,7 @@ The [rest is history](../handbook/company/story).
 
 ## What you can learn from this
 
-###Local versus global maxima
+### Local versus global maxima
 
 The hardest pivot to make was when we had the most traction. For us, that was dropping our technical debt tool.
 
@@ -191,7 +191,7 @@ It was obvious our existing product wasn't working because our users told us as 
 
 Ultimately, Tim and I realized we weren't the right people to be solving this problem.
 
-###Thinking we wanted to change course, but not thinking about it enough
+### Thinking we wanted to change course, but not thinking about it enough
 
 We pivoted so much we developed a knack for building an MVP and a new website in a single, glorious, all nighter and getting meetings by the first day to show it to people. That felt like progress, but in reality was just a bit dangerous. Similarly to how a child could operate a car.
 
@@ -205,7 +205,7 @@ This is normally [the other way around](https://www.inc.com/scott-mautz/jeff-imm
 
 I'm now glad we were so decisive.
 
-##Experts are just that
+## Experts are just that
 
 A meeting with the right person when you're at a literally pivotal moment can help you avoid a mistake that could cost you weeks, months or years of your life and your team's lives.
 
