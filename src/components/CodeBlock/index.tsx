@@ -5,8 +5,10 @@ import { generateRandomHtmlId, getCookie } from '../../lib/utils'
 import { Listbox, Tab } from '@headlessui/react'
 import { SelectorIcon } from '@heroicons/react/outline'
 
-import theme from './theme'
+import { darkTheme, lightTheme } from './theme'
 import languageMap from './languages'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 type LanguageOption = {
     label?: string
@@ -143,6 +145,8 @@ export const CodeBlock = ({
     const [projectToken, setProjectToken] = React.useState<string | null>(null)
 
     const displayName = label || languageMap[currentLanguage.language]?.label || currentLanguage.language
+
+    const { websiteTheme } = useValues(layoutLogic)
 
     React.useEffect(() => {
         // Browser check - no cookies on the server
@@ -291,7 +295,7 @@ export const CodeBlock = ({
                 {...defaultProps}
                 code={currentLanguage.code.trim()}
                 language={(languageMap[currentLanguage.language]?.language || currentLanguage.language) as Language}
-                theme={theme}
+                theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
             >
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
                     <pre className="w-full m-0 p-0 rounded-t-none rounded-b bg-accent dark:bg-accent-dark border-t border-light dark:border-dark">

@@ -45,8 +45,8 @@ export default function Post({ children }: { children: React.ReactNode }) {
     return (
         <div className="">
             <div
-                className={`w-full relative lg:flex justify-between mx-auto ${
-                    fullWidthContent ? '' : 'max-w-screen-2xl'
+                className={`w-full relative lg:flex justify-between mx-auto transition-all ${
+                    fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
                 }`}
             >
                 {menu && (
