@@ -1,6 +1,6 @@
 ---
 title: "Feature flags vs configuration: what should you choose?"
-date: 2023-06-27
+date: 2023-06-28
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -21,7 +21,7 @@ This post compares configurations and feature flags, and how to choose the right
 
 ## What is a configuration?
 
-A configuration, or config, is literally the definition above. A key when called with a service returns a value. You set both the key and value, then add the key and service to your code. You can then modify the key’s value. Configurations are often separated into a dedicated file or even handled by an external service. 
+A configuration, or config, is a key that returns a specific value when called with function, service, or library dedicated to handling configs. You set both the key and value, and then add the key and service to your code. You can then modify the key’s value. Configurations are often separated into a dedicated file or even handled by an external service. 
 
 An example of a configuration is a secret key for an external service like Stripe or AWS set in an environment variable. It is set in a `.env` file or by using the `export` keyword in bash and accessed with a module like `dotenv` or `os`.
 
@@ -63,11 +63,13 @@ An example use case of a feature flag is rolling a new feature into beta. A cond
 
 As showcased by this use case, feature flags are often meant to be temporary. Once you test and fully release a feature, you can remove the flag from the code. The failure to remove it can create technical debt.
 
-> ## Testing feature flags and configurations
+## Testing feature flags and configurations
 
-A problem both face is testing. Feature flags need to be mocked to test all potential paths, while configs are often forgotten in testing altogether. Both can cause [massive issues](https://github.com/danluu/post-mortems#config-errors). 
+A problem both face is testing, as both require different testing strategies than standard unit tests.
 
-For a tutorial on how to best test feature feature flags, see "[Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)."
+- Feature flags need to be mocked to test all potential paths. Variants can be forgotten about and not tested, leading to issues. For a tutorial on how to test feature flags, see "[Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)."
+
+- Configs are often forgotten in testing altogether. To test well, they require integration tests, shadowing, and/or [canary releases](https://posthog.com/tutorials/canary-release), which require a lot of work. Bad configs have caused major outages at companies like [Cloudflare](https://web.archive.org/web/20211006135542/https://blog.cloudflare.com/todays-outage-post-mortem-82515/), [Facebook](https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/s), and [Google](https://blog.google/inside-google/company-announcements/todays-outage-for-several-google/).
 
 ## Which should you choose?
 
@@ -125,7 +127,9 @@ Like many tech choices, you should think about what is the simplest solution for
 Another key part of the decision is figuring out what works well with the stack you have now:
 
 - If you are relying on many Google-related products, [Firebase Remote Config](https://firebase.google.com/docs/remote-config) might be best.
+
 - If you implemented the modern data stack with a data warehouse, you might use a feature flag tool like [LaunchDarkly](/feature-flags/comparisons).
+
 - If you’re just starting up and want an all-in-one platform with analytics, A/B tests, and session replays, [PostHog](https://app.posthog.com/signup) is your choice.
 
 You can find more comparisons on [our feature flag comparisons page](/feature-flags/comparisons).
