@@ -39,7 +39,7 @@ If you want a more accurate estimate, give it a week - this way weekdays and wee
 
 ### 2. Estimate based on your product category
 
-Sometimes you can estimate your volumes based on another number that you know, like your montly active user (MAU) number for Product Analytics.
+Sometimes you can estimate your volumes based on another number that you know, like your monthly active user (MAU) number for Product Analytics.
 
 Because products in different categories have different types of usage, we've done a bit of diving into our own data to come up with these averages per category:
 
