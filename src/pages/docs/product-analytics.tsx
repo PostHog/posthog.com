@@ -31,7 +31,7 @@ export const Intro = () => (
     </header>
 )
 
-export const GuideItem = ({ title, description, image, url }) => (
+export const GuideItem = ({ title, description, Image, url }) => (
     <li className="list-none bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded relative hover:top-[-2px] active:top-[1px] hover:transition-all">
         <Link to={url} className="block">
             <div className="px-4 py-3 pb-0">
@@ -39,9 +39,7 @@ export const GuideItem = ({ title, description, image, url }) => (
                 <p className="text-primary/60 dark:text-primary-dark/60 text-sm m-0">{description}</p>
             </div>
             <div className="flex justify-end w-full h-24">
-                <div className="w-48 h-24">
-                    <StaticImage alt="" placeholder="none" objectFit="contain" quality={100} src={image} />
-                </div>
+                <div className="w-48 h-24 md:absolute bottom-0">{Image}</div>
             </div>
         </Link>
     </li>
@@ -64,37 +62,85 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                         <GuideItem
                             title="Conversion funnels"
                             description="Build, analyze, and optimize funnels"
-                            image="../../components/Home/Slider/images/product-analytics-hog.png"
+                            Image={
+                                <StaticImage
+                                    alt=""
+                                    placeholder="none"
+                                    objectFit="contain"
+                                    quality={100}
+                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                />
+                            }
                             url="#"
                         />
                         <GuideItem
                             title="Track performance marketing"
                             description="Optimize ads and marketing channels"
-                            image="../../components/Home/Slider/images/product-analytics-hog.png"
+                            Image={
+                                <StaticImage
+                                    alt=""
+                                    placeholder="none"
+                                    objectFit="contain"
+                                    quality={100}
+                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                />
+                            }
                             url="#"
                         />
                         <GuideItem
                             title="Reduce churn"
                             description="The bread and butter of long-term growth"
-                            image="../../components/Home/Slider/images/product-analytics-hog.png"
+                            Image={
+                                <StaticImage
+                                    alt=""
+                                    placeholder="none"
+                                    objectFit="contain"
+                                    quality={100}
+                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                />
+                            }
                             url="#"
                         />
                         <GuideItem
                             title="Building a cohort"
                             description="Group users by behavior for deeper analysis"
-                            image="../../components/Home/Slider/images/product-analytics-hog.png"
+                            Image={
+                                <StaticImage
+                                    alt=""
+                                    placeholder="none"
+                                    objectFit="contain"
+                                    quality={100}
+                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                />
+                            }
                             url="#"
                         />
                         <GuideItem
                             title="Sales & revenue tracking"
                             description="Determine KPIs, who’s paying, revenue sources, and retention"
-                            image="../../components/Home/Slider/images/product-analytics-hog.png"
+                            Image={
+                                <StaticImage
+                                    alt=""
+                                    placeholder="none"
+                                    objectFit="contain"
+                                    quality={100}
+                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                />
+                            }
                             url="#"
                         />
                         <GuideItem
                             title="Calculate DAU/MAU ratio"
                             description="Popular engagement metrics that measure stickiness"
-                            image="../../components/Home/Slider/images/product-analytics-hog.png"
+                            Image={
+                                <StaticImage
+                                    alt=""
+                                    placeholder="none"
+                                    objectFit="contain"
+                                    quality={100}
+                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                />
+                            }
                             url="#"
                         />
                     </ul>
@@ -120,19 +166,43 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                         <GuideItem
                             title="Product analytics"
                             description="Active users, feature flags frowth accounting, traffic sources"
-                            image="../../components/Home/Slider/images/product-analytics-hog.png"
+                            Image={
+                                <StaticImage
+                                    alt=""
+                                    placeholder="none"
+                                    objectFit="contain"
+                                    quality={100}
+                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                />
+                            }
                             url="#"
                         />
                         <GuideItem
                             title="Website traffic"
                             description="User, sessions, content performance"
-                            image="../../components/Home/Slider/images/product-analytics-hog.png"
+                            Image={
+                                <StaticImage
+                                    alt=""
+                                    placeholder="none"
+                                    objectFit="contain"
+                                    quality={100}
+                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                />
+                            }
                             url="#"
                         />
                         <GuideItem
                             title="Realtime analytics"
                             description="Live users, sessions, traffic, sources"
-                            image="../../components/Home/Slider/images/product-analytics-hog.png"
+                            Image={
+                                <StaticImage
+                                    alt=""
+                                    placeholder="none"
+                                    objectFit="contain"
+                                    quality={100}
+                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                />
+                            }
                             url="#"
                         />
                     </ul>
