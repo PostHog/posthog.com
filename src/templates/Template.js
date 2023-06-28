@@ -10,6 +10,7 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import CreateDashboardImage from '../../contents/images/templates/create-dashboard.png'
+import { communityMenu } from '../navs'
 
 export default function Template({ data }) {
     const { pageData } = data
@@ -21,7 +22,7 @@ export default function Template({ data }) {
     const { title, subtitle, featuredImage, description } = pageData?.frontmatter
 
     return (
-        <Layout>
+        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[3]}>
             <SEO
                 image={`/images/templates/${slug.split('/')[2]}.png`}
                 title={`${title} template - PostHog`}
