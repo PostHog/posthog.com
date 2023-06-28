@@ -1,0 +1,136 @@
+---
+title: Estimating Usage
+sidebar: Docs
+showTitle: true
+---
+
+When talking through our editions and pricing options with potential customers we're often asked "How can I estimate how much usage I'll have?"
+
+Like any usage-based tool, it can be a bit daunting to figure out how much adopting a usage-based platform like PostHog is going to cost you. Fortunately, we've made it fairly simple - and free - to get a good idea of how much volume you'll have for any of our products.
+
+This guide explains why we price based on usage and offers some tips for estimating your volumes.
+
+## Why we price based on usage
+
+Really it comes down to this:
+
+Our costs are linked to usage. The value you get is linked to your usage. Thus, we should charge for usage.
+
+### But what about monthly active users or something? Isn't that also usage?
+
+Kind of, yes, but actually no. Some users have tons of value. They use your product a ton, they respond to your feedback surveys, they store a lot of data in your platform. Other users hit your landing page and bounce immediately. From a value perspective, you shouldn't need to pay the same amount for both of these users. It makes more sense to pay only for the value you receive, which is directly tied to user activity, whether that be events or session replays or data.
+
+
+## Ok, that makes sense, but how do I estimate my usage?
+
+If you're already using another tool and are looking to move to PostHog (welcome!), then the other tool may be able to give you the exact numbers you are looking for. You might need to ask their support directly for this info if it's not easy to find right away.
+
+If you're just getting started with this type of product, you have two options to estimate your usage.
+
+### 1. Sign up for free and get an accurate projected volume in a few days
+
+Each of our products has a very generous free tier. They're also very easy to get set up. 
+
+Simply sign up and start to use whichever product you are interested in. After a few days you'll get a good estimate of your projected volume on your Organization Billing page (even on free plans, this is where you'd find it).
+
+If you want a more accurate estimate, give it a week - this way weekdays and weekends will all be taken into account.
+
+> Did you know? If your volumes are higher than you'd like, we offer ways to "tune" your implementation to only capture or use what's valuable to you.
+
+### 2. Estimate based on your product category
+
+Sometimes you can estimate your volumes based on another number that you know, like your montly active user (MAU) number for Product Analytics.
+
+Because products in different categories have different types of usage, we've done a bit of diving into our own data to come up with these averages per category:
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+	<thead>
+    	<tr>
+			<td className="w-3/12"><strong>Product</strong></td>
+        	<td className="w-3/12 text-center"><strong>B2B / B2C</strong></td>
+        	<td className="w-3/12 text-center"><strong>Monthly events per MAU</strong></td>
+        	<td className="w-3/12 text-center"><strong>Autocapture</strong></td>
+        	<td className="w-3/12 text-center"><strong>Platforms</strong></td>
+    	</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>PostHog</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">87</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center">Web</td>
+      	</tr>
+		<tr>
+			<td>Financial reporting</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">44</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">Web</td>
+    	</tr>
+		<tr>
+			<td>Cloud monitoring</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">22</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>	
+          	<td className="text-center">Web</td>
+      	</tr>
+		<tr>
+			<td>Document management</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">54</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>     	<td className="text-center">Web</td>
+      	</tr>
+		<tr>
+			<td>Speech to text API</td>
+        	<td className="text-center">B2B</td>
+        	<td className="text-center">583</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">API</td>
+     	</tr>
+		<tr>
+			<td>Crypto wallet</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">162</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">Browser extension</td>
+      	</tr>
+		<tr>
+			<td>Meditation app</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">118</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">Android, iOS</td>
+      	</tr>
+		<tr>
+			<td>Fashion retail</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">31</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>         <td className="text-center">Web</td>
+      	</tr>
+		<tr>
+			<td>Event booking</td>
+        	<td className="text-center">B2C</td>
+        	<td className="text-center">8</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>        <td className="text-center">React Native</td>
+    	</tr>
+		<tr>
+			<td>Restaurant booking</td>
+        	<td className="text-center">B2B2C</td>
+        	<td className="text-center">54</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>        <td className="text-center">Web, Mobile</td>
+    	</tr>	
+	</tbody>
+</table>
+</div>
+
+As you can see, event counts vary wildly across different types of products, but this should help you get closer to an estimated event count based on your product and MAU count.
+
+> Event counts also vary based upon whether you are using [autocapture](/docs/integrate/ingest-live-data#use-autocapture), [custom capture](/docs/integrate/ingest-live-data#capture-user-events) or a combination of both.  
+
+### What about other products like Session replay, Feature flags, etc?
+
+We don't have data on those yet, unfortunately. In that case, we'd recommend going with option 1 above - signing up for a free account and getting an accurate projection in just a few days.
+
+### Estimating costs
+
+Once you've got your figures you can visit the [pricing](/pricing) page and calculate your estimated costs for adopting PostHog. 
+
+And don't forget, we have generous free volumes for every one of our products - even if you're on a paid plan.
