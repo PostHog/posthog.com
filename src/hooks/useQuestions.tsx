@@ -129,7 +129,9 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
 export const useQuestions = (options?: UseQuestionsOptions) => {
     const posthog = usePostHog()
 
-    const { data, size, setSize, isLoading, error, mutate } = useSWRInfinite<StrapiResult<QuestionData[]>>(
+    const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite<
+        StrapiResult<QuestionData[]>
+    >(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, options)}`,
         (url: string) => fetch(url).then((r) => r.json())
     )
@@ -155,7 +157,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         hasMore,
         questions,
         fetchMore: () => setSize(size + 1),
-        isLoading,
+        isLoading: isLoading || isValidating,
         refresh: () => mutate(),
     }
 }
