@@ -1657,16 +1657,14 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/product-analytics',
+                    icon: 'Home',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Getting started',
                     url: '/docs/product-analytics/welcome',
                     icon: 'GraduationCap',
                     color: 'red',
-                },
-                {
-                    name: 'Saved insights',
-                    url: '/docs/product-analytics/insights',
                 },
                 {
                     name: 'Analysis views',
