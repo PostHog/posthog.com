@@ -8,6 +8,8 @@ Like any usage-based tool, it can be a bit daunting to figure out how much adopt
 
 This guide explains why we price based on usage, how to estimate your usage, and tips on how to reduce your costs.
 
+## Why we price based on usage
+
 Really it comes down to this: The more you use PostHog, the more value you get, and the more it costs us to process and store your data. Thus, we charge based on usage.
 
 ### But what about charging per monthly active user? Isn't that also usage?
