@@ -48,34 +48,42 @@ const linklist: IProps[] = [
                 url: '/blog/tags/comparisons',
             },
             {
+                title: 'For startups',
+                url: '/startups',
+            },
+            {
                 title: 'Pricing',
                 url: '/pricing',
             },
         ],
     },
     {
-        title: 'Docs',
+        title: 'Product OS',
         url: '/docs',
         items: [
             {
-                title: 'Start here',
-                url: '/docs/getting-started/start-here',
-            },
-            {
-                title: 'Install PostHog',
+                title: 'New? Start here.',
                 url: '/docs/getting-started/install',
             },
             {
-                title: 'Send events',
-                url: '/docs/getting-started/send-events',
+                title: 'SDKs',
+                url: '/docs/libraries/js',
             },
             {
-                title: 'Integrations',
-                url: '/docs/integrations',
+                title: 'Framework guides',
+                url: '/docs/frameworks',
             },
             {
-                title: 'Build an app',
-                url: '/docs/apps/build',
+                title: 'Data management',
+                url: '/docs/data',
+            },
+            {
+                title: 'HogQL',
+                url: '/docs/hogql',
+            },
+            {
+                title: 'Toolbar',
+                url: '/docs/toolbar',
             },
             {
                 title: 'API',
@@ -88,8 +96,8 @@ const linklist: IProps[] = [
         ],
     },
     {
-        title: 'Using PostHog',
-        url: '/using-posthog',
+        title: 'Docs',
+        url: '/docs',
         items: [
             {
                 title: 'Product analytics',
@@ -108,20 +116,16 @@ const linklist: IProps[] = [
                 url: '/docs/experiments',
             },
             {
-                title: 'Data',
-                url: '/docs/data',
+                title: 'CDP',
+                url: '/docs/cdp',
+            },
+            {
+                title: 'Data warehouse',
+                url: '/docs/data-warehouse',
             },
             {
                 title: 'Apps',
                 url: '/docs/apps',
-            },
-            {
-                title: 'Tutorials',
-                url: '/tutorials',
-            },
-            {
-                title: 'Tracks',
-                url: '/tracks',
             },
         ],
     },
@@ -134,8 +138,20 @@ const linklist: IProps[] = [
                 url: '/questions',
             },
             {
-                title: 'Product roadmap',
-                url: '/roadmap',
+                title: 'Guides',
+                url: '/tutorials',
+            },
+            {
+                title: 'Dashboard templates',
+                url: '/templates',
+            },
+            {
+                title: 'Tracks',
+                url: '/tracks',
+            },
+            {
+                title: 'Merch',
+                url: 'https://merch.posthog.com',
             },
             {
                 title: 'Contributors',
@@ -146,20 +162,12 @@ const linklist: IProps[] = [
                 url: 'https://newsletter.posthog.com',
             },
             {
-                title: 'Merch',
-                url: 'https://merch.posthog.com',
-            },
-            {
                 title: 'PostHog FM',
                 url: 'https://open.spotify.com/playlist/7A2H2J3WhpJmMEwAhKahWH?si=47418915a8d0447b',
             },
             {
                 title: 'PostHog on GitHub',
                 url: 'https://github.com/PostHog/posthog',
-            },
-            {
-                title: 'Startups',
-                url: '/startups',
             },
         ],
     },
@@ -222,8 +230,20 @@ const linklist: IProps[] = [
                 url: '/about',
             },
             {
+                title: 'Roadmap',
+                url: '/roadmap',
+            },
+            {
+                title: 'Changelog',
+                url: '/changelog',
+            },
+            {
                 title: 'Team',
                 url: '/handbook/company/team',
+            },
+            {
+                title: 'Blog',
+                url: '/blog',
             },
             {
                 title: 'Investors',
@@ -232,10 +252,6 @@ const linklist: IProps[] = [
             {
                 title: 'Press',
                 url: '/media',
-            },
-            {
-                title: 'Blog',
-                url: '/blog',
             },
             {
                 title: 'FAQ',

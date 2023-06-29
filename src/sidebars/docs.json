@@ -1,8 +1,5 @@
 [
     {
-        "name": "Docs....."
-    },
-    {
         "name": "Tutorials",
         "url": "",
         "children": [
@@ -79,39 +76,5 @@
                 "url": "/tutorials/categories/trends"
             }
         ]
-    },
-    {
-        "name": "Contribute",
-        "url": "",
-        "children": [
-            {
-                "name": "Overview",
-                "url": "/docs/contribute"
-            },
-            {
-                "name": "Code of conduct",
-                "url": "/docs/contribute/code-of-conduct"
-            },
-            {
-                "name": "Recognizing contributions",
-                "url": "/docs/contribute/recognizing-contributions"
-            },
-            {
-                "name": "Badge",
-                "url": "/docs/contribute/badge"
-            }
-        ]
-    },
-    {
-        "name": "Support options",
-        "url": "/docs/support-options"
-    },
-    {
-        "name": "Library comparison",
-        "url": "/docs/libraries"
-    },
-    {
-        "name": "Glossary",
-        "url": "/docs/glossary"
     }
 ]

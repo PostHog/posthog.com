@@ -62,7 +62,7 @@ export default function Menu({
         children || topLevel
             ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
             : ''
-    } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold border-light dark:border-dark' : ''}`
+    } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''}`
     const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
 
     useEffect(() => {
@@ -143,9 +143,9 @@ export default function Menu({
                         {icon ? (
                             <span className="cursor-pointer w-full flex items-center space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark">
                                 <span
-                                    className={`${
+                                    className={`flex items-center justify-center ${
                                         color
-                                            ? `text-${color} bg-${color} bg-opacity-10 flex items-center justify-center rounded-sm w-[30px] h-[30px]`
+                                            ? `text-${color} bg-${color} bg-opacity-10 rounded-sm w-[30px] h-[30px]`
                                             : 'w-[25px] h-[25px] opacity-70'
                                     }`}
                                 >

@@ -41,7 +41,7 @@ export default function CommunityLayout({
     menu,
 }: IProps) {
     return (
-        <Layout parent={parent || communityMenu} activeInternalMenu={activeInternalMenu || communityMenu.children[1]}>
+        <Layout parent={parent || communityMenu} activeInternalMenu={activeInternalMenu || communityMenu.children[0]}>
             <SEO title={`${title} - PostHog`} />
             <Community menu={menu} title={title} tableOfContents={tableOfContents}>
                 {children}

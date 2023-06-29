@@ -671,15 +671,9 @@ const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: '/edition',
+    url: '/questions',
     icon: 'Chat',
     children: [
-        {
-            name: 'Edition',
-            icon: 'Newspaper',
-            color: 'purple',
-            url: '/edition',
-        },
         {
             name: 'Questions',
             icon: 'Message',
@@ -797,9 +791,13 @@ export const docsMenu = {
                 },
                 {
                     name: 'SDKs',
-                    url: '/docs/libraries/js',
+                    url: '/docs/libraries',
                     icon: 'Box',
                     children: [
+                        {
+                            name: 'Library comparison',
+                            url: '/docs/libraries',
+                        },
                         {
                             name: 'JavaScript',
                             url: '/docs/libraries/js',
@@ -885,7 +883,7 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/integrations',
+                            url: '/docs/frameworks',
                         },
                         {
                             name: 'Docusaurus v2',
@@ -1614,6 +1612,36 @@ export const docsMenu = {
                             url: '/docs/privacy/data-deletion',
                         },
                     ],
+                },
+                {
+                    name: 'Contribute',
+                    url: '/docs/contribute',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/contribute',
+                        },
+                        {
+                            name: 'Code of conduct',
+                            url: '/docs/contribute/code-of-conduct',
+                        },
+                        {
+                            name: 'Recognizing contributions',
+                            url: '/docs/contribute/recognizing-contributions',
+                        },
+                        {
+                            name: 'Badge',
+                            url: '/docs/contribute/badge',
+                        },
+                    ],
+                },
+                {
+                    name: 'Support options',
+                    url: '/docs/support-options',
+                },
+                {
+                    name: 'Glossary',
+                    url: '/docs/glossary',
                 },
             ],
         },
