@@ -54,7 +54,7 @@ const Description = ({ description, className = '' }) => {
 const ContentContainer = ({ children, className = '' }) => {
     return (
         <div
-            className={`md:flex items-center order-1 md:order-2 md:p-0 p-3 md:bg-transparent bg-accent dark:bg-accent-dark z-10 relative text-black dark:text-white ${className}`}
+            className={`md:flex items-center order-1 md:order-2 md:p-0 p-3 md:bg-transparent bg-accent dark:bg-accent-dark z-10 relative text-black dark:text-white md:text-inherit dark:md:text-inherit ${className}`}
         >
             {children}
         </div>
@@ -503,7 +503,7 @@ export const DataWarehouse = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full h-full py-10"
+                        className="w-full h-full py-10 max-h-96"
                         src="../../../../contents/images/products/data-warehouse/data-warehouse.png"
                     />
                 </motion.div>
@@ -584,7 +584,7 @@ export const Sql = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-full h-full py-10"
+                        className="w-full h-full py-10 max-h-96"
                         src="../../../../contents/images/products/sql/sql-hog.png"
                     />
                 </motion.div>
