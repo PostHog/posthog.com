@@ -1,5 +1,5 @@
 ---
-title: Estimating Usage
+title: Estimating Usage & Costs
 sidebar: Docs
 showTitle: true
 ---
