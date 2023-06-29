@@ -347,8 +347,16 @@
                         "url": "/docs/advanced/proxy/cloudfront"
                     },
                     {
-                        "name": "Next.js",
+                        "name": "Kubernetes Ingress Controller",
+                        "url": "/docs/advanced/proxy/kubernetes-ingress-controller"
+                    },
+                    {
+                        "name": "Next.js rewrites",
                         "url": "/docs/advanced/proxy/nextjs"
+                    },
+                    {
+                        "name": "Next.js middleware",
+                        "url": "/docs/advanced/proxy/nextjs-middleware"
                     },
                     {
                         "name": "Netlify",

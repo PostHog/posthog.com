@@ -21,13 +21,16 @@ const nextConfig = {
 module.exports = nextConfig
 ```
 
-Then configure the PostHog client to send requests via your redirection.
+Then configure the PostHog client to send requests via your rewrite.
 
 ```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
  api_host: "https://your-host.com/ingest"
 })
 ```
+
+> If this isn't working for you (returning `503` errors), it may be an issue with how your hosting service (such as Heroku) handles rewrites. You can write [Next.js middleware to proxy requests](/docs/advanced/proxy/nextjs-middleware) instead.
+
 ## Setup video
 
 <iframe
