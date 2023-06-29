@@ -258,12 +258,28 @@ h4 {
             }
         }
 
+        h2 {
+            @apply mt-2 px-8;
+        }
+
+        h3,
+        h4,
+        h5,
+        h6 {
+            @apply px-8;
+        }
+
         p {
             @apply pb-4 px-8 m-0;
         }
 
         > div {
             @apply ml-4 mt-2 rounded;
+        }
+
+        ul,
+        ol {
+            @apply pl-16 pr-8;
         }
     }
 
