@@ -31,7 +31,8 @@ export const PostProvider: React.FC<ProviderProps> = ({
 
     const tableOfContents = other.tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
     const contentContainerClasses =
-        contentContainerClassName || `px-5 lg:px-6 xl:px-12 pt-6 transition-all ${menu ? 'mx-auto' : 'lg:ml-auto'}`
+        contentContainerClassName ||
+        `px-5 lg:px-6 xl:px-12 pt-6 pb-12 transition-all ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
         <Context.Provider

@@ -71,7 +71,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                                 />
                             }
-                            url="#"
+                            url="/tutorials/funnels"
                         />
                         <GuideItem
                             title="Track performance marketing"
@@ -85,7 +85,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                                 />
                             }
-                            url="#"
+                            url="/tutorials/performance-marketing"
                         />
                         <GuideItem
                             title="Reduce churn"
@@ -99,7 +99,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                                 />
                             }
-                            url="#"
+                            url="/tutorials/churn-rate"
                         />
                         <GuideItem
                             title="Building a cohort"
@@ -113,7 +113,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                                 />
                             }
-                            url="#"
+                            url="/tutorials/how-to-segment-users"
                         />
                         <GuideItem
                             title="Sales & revenue tracking"
@@ -127,7 +127,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                                 />
                             }
-                            url="#"
+                            url="/tutorials/revenue"
                         />
                         <GuideItem
                             title="Calculate DAU/MAU ratio"
@@ -141,7 +141,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                                 />
                             }
-                            url="#"
+                            url="/tutorials/dau-mau-ratio"
                         />
                     </ul>
                     <CallToAction
@@ -175,7 +175,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                                 />
                             }
-                            url="#"
+                            url="/templates/product-analytics"
                         />
                         <GuideItem
                             title="Website traffic"
@@ -189,7 +189,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                                 />
                             }
-                            url="#"
+                            url="/templates/website-dashboard"
                         />
                         <GuideItem
                             title="Realtime analytics"
@@ -203,7 +203,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     src="../../components/Home/Slider/images/product-analytics-hog.png"
                                 />
                             }
-                            url="#"
+                            url="/templates/real-time-dashboard"
                         />
                     </ul>
                     <CallToAction
@@ -217,8 +217,6 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                         Browse templates
                     </CallToAction>
                 </section>
-
-                <Tutorials tutorials={tutorials} />
             </PostLayout>
         </Layout>
     )
