@@ -25,7 +25,7 @@ export default function BookADemo() {
                         </CallToAction> */}
                     </aside>
                 </header>
-                <div className="border border-gray-accent-light border-dashed rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
+                <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
                     <span className="bg-blue rounded-full leading-none flex h-12 w-12 overflow-hidden shrink-0 basis-12">
                         <StaticImage
                             src="../images/simon.png"

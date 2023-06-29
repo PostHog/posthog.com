@@ -85,7 +85,7 @@ function TemplatesPage({ location }) {
                 ))}
             </div>
             <List
-                className="max-w-2xl mx-auto"
+                className="max-w-2xl mx-auto pb-12"
                 items={[
                     ...(filteredTemplates || templates)?.map(
                         ({ fields: { slug }, frontmatter: { thumbnail, title, badge, price } }) => ({
