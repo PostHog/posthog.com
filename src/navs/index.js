@@ -733,6 +733,7 @@ export const companyMenu = {
         },
         { name: 'Team', icon: 'Profile', color: 'blue', url: '/team' },
         { name: 'Handbook', icon: 'Book', color: 'seagreen', url: '/handbook', children: handbookSidebar },
+        { name: 'Blog', icon: 'Newspaper', color: 'yellow', url: '/blog' },
         { name: 'Careers', icon: 'Laptop', color: 'purple', url: '/careers' },
     ],
 }

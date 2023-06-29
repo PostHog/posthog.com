@@ -384,22 +384,6 @@ article .article-content {
     }
 }
 
-/* Careers page */
-
-.benefits-grid {
-    @apply border-gray-accent-light border-t border-dashed;
-    > div {
-        @apply border-gray-accent-light border-r border-b border-dashed;
-
-        &:nth-child(2n) {
-            @apply sm:border-r-0 lg:border-r-1;
-        }
-        &:nth-child(4n) {
-            @apply md:border-r-0;
-        }
-    }
-}
-
 /* this overrides Tailwind's built-in font-weight classes to work with our variable font */
 @layer utilities {
     .font-thin {
@@ -1126,7 +1110,7 @@ iframe[src*='youtube-nocookie.com'] {
         }
     }
     summary {
-        @apply relative mb-4 cursor-pointer flex items-center justify-between pb-4 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark outline-none;
+        @apply relative mb-4 cursor-pointer flex items-center justify-between pb-4 border-b border-light dark:border-dark outline-none;
         h2 {
             @apply m-0;
         }

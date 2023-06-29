@@ -34,13 +34,9 @@ export const Post = ({ featuredImage, slug, title, category, date, authors, imgC
         <div className="relative rounded-md overflow-hidden z-10 h-full w-full">
             <Link className="!text-white !hover:text-white cta" to={slug}>
                 {image ? (
-                    <GatsbyImage alt={title} className={imgClassName ?? 'md:w-auto w-full'} image={image} />
+                    <GatsbyImage alt={title} className={imgClassName ?? 'w-full'} image={image} />
                 ) : (
-                    <StaticImage
-                        className={imgClassName ?? 'md:w-auto w-full'}
-                        alt={title}
-                        src="./images/default.jpg"
-                    />
+                    <StaticImage className={imgClassName ?? 'w-full'} alt={title} src="./images/default.jpg" />
                 )}
                 <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 px-4 py-3 md:p-5 flex flex-col h-full w-full">
                     {category && <p className="m-0 text-sm opacity-80">{category}</p>}
