@@ -4,40 +4,36 @@ sidebar: Docs
 showTitle: true
 ---
 
-When talking through our editions and pricing options with potential customers we're often asked "How can I estimate how much usage I'll have?"
+Like any usage-based tool, it can be a bit daunting to figure out how much adopting a usage-based platform like PostHog is going to cost you. Fortunately, we've made it fairly simple to get a good idea of how much volume you'll have for any of our products.
 
-Like any usage-based tool, it can be a bit daunting to figure out how much adopting a usage-based platform like PostHog is going to cost you. Fortunately, we've made it fairly simple - and free - to get a good idea of how much volume you'll have for any of our products.
-
-This guide explains why we price based on usage and offers some tips for estimating your volumes.
+This guide explains why we price based on usage, how to estimate your usage, and tips on how to reduce your costs.
 
 ## Why we price based on usage
 
-Really it comes down to this:
+Really it comes down to this: The more you use PostHog, the more value you get, and the more it costs us to process and store your data. Thus, we charge based on usage.
 
-Our costs are linked to usage. The value you get is linked to your usage. Thus, we should charge for usage.
+### But what about charging per monthly active user? Isn't that also usage?
 
-### But what about monthly active users or something? Isn't that also usage?
-
-Kind of, yes, but actually no. Some users have tons of value. They use your product a ton, they respond to your feedback surveys, they store a lot of data in your platform. Other users hit your landing page and bounce immediately. From a value perspective, you shouldn't need to pay the same amount for both of these users. It makes more sense to pay only for the value you receive, which is directly tied to user activity, whether that be events or session replays or data.
+Kind of, yes, but actually no. Some users have tons of value. They use your product a ton, they respond to your feedback surveys, and they store a lot of data in your platform. Other users hit your landing page and bounce immediately. From a value perspective, you shouldn't need to pay the same amount for both of these users. It makes more sense to pay only for the value you receive, which is directly tied to user activity such as events, session replays or data.
 
 
-## Ok, that makes sense, but how do I estimate my usage?
+## How do I estimate my PostHog usage?
 
-If you're already using another tool and are looking to move to PostHog (welcome!), then the other tool may be able to give you the exact numbers you are looking for. You might need to ask their support directly for this info if it's not easy to find right away.
+If you're already using another tool and are looking to move to PostHog (welcome!), then the other tool may be able to give you the exact numbers you are looking for. You might need to ask their support directly for this data if it's not easy to find right away.
 
 If you're just getting started with this type of product, you have two options to estimate your usage.
 
-### 1. Sign up for free and get an accurate projected volume in a few days
+### Option one: Sign up for free and get an accurate projected volume in a few days
 
 Each of our products has a very generous free tier. They're also very easy to get set up. 
 
-Simply sign up and start to use whichever product you are interested in. After a few days you'll get a good estimate of your projected volume on your Organization Billing page (even on free plans, this is where you'd find it).
+Simply sign up and start to use whichever product you are interested in. After a few days, you'll get a good estimate of your projected volume on your [Organization Billing page](https://app.posthog.com/organization/billing) (even on free plans, this is where you'd find it).
 
-If you want a more accurate estimate, give it a week - this way weekdays and weekends will all be taken into account.
+If you want a more accurate estimate, give it a week - this way weekdays and weekends will also be taken into account.
 
-> Did you know? If your volumes are higher than you'd like, we offer ways to "tune" your implementation to only capture or use what's valuable to you.
+> Did you know? If your volumes are higher than you'd like, we offer ways to "tune" your implementation to only capture or use what's valuable to you. See the section below on "How to reduce your PostHog usage".
 
-### 2. Estimate based on your product category
+### Option two: Estimate based on your product category
 
 Sometimes you can estimate your volumes based on another number that you know, like your monthly active user (MAU) number for Product Analytics.
 
@@ -129,8 +125,15 @@ As you can see, event counts vary wildly across different types of products, but
 
 We don't have data on those yet, unfortunately. In that case, we'd recommend going with option 1 above - signing up for a free account and getting an accurate projection in just a few days.
 
-### Estimating costs
+### Pricing calculator
 
-Once you've got your figures you can visit the [pricing](/pricing) page and calculate your estimated costs for adopting PostHog. 
+Once you've got your figures you can visit the [pricing](/pricing) page and calculate your estimated costs for adopting PostHog. Or, if you're getting your estimated figures from your free PostHog account, you can see your projected volumes and costs right there in your [billing dashboard](https://app.posthog.com/organization/billing).
 
-And don't forget, we have generous free volumes for every one of our products - even if you're on a paid plan.
+And don't forget, we have generous free volumes for every one of our products - even if you're on a paid plan!
+
+## How to reduce your PostHog costs
+
+We've written tutorials to help you best control your usage and only capture the data you need:
+
+- [How to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
+- [How to only record the sessions you want](/tutorials/limit-session-recordings)
