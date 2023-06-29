@@ -19,7 +19,7 @@ const Select = ({ onChange, values }) => {
     return (
         <div className="relative">
             <Listbox onChange={onChange} defaultValue={defaultValue}>
-                <Listbox.Button className="py-2 px-4 bg-white dark:bg-gray-accent-dark rounded-md text-left shadow-md flex justify-between items-center font-semibold text-sm">
+                <Listbox.Button className="py-2 px-4 bg-accent dark:bg-accent-dark rounded text-left border border-light dark:border-dark flex justify-between items-center font-semibold text-sm">
                     {({ value }) => (
                         <>
                             <span>{value.label}</span>
@@ -27,13 +27,13 @@ const Select = ({ onChange, values }) => {
                         </>
                     )}
                 </Listbox.Button>
-                <Listbox.Options className="absolute right-0 min-w-full shadow-md bg-white dark:bg-gray-accent-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-gray-accent-light/50">
+                <Listbox.Options className="absolute right-0 min-w-full shadow-md bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-light dark:divide-dark">
                     {values.map((value) => (
                         <Listbox.Option key={value.label} value={value} as={React.Fragment}>
                             {({ selected }) => (
                                 <li
-                                    className={`py-2 px-4 text-sm cursor-pointer hover:bg-gray-accent-light/40 dark:hover:bg-gray-accent-light/20 transition-colors whitespace-nowrap ${
-                                        selected ? 'bg-gray-accent-light/80 dark:bg-gray-accent-light/40' : ''
+                                    className={`!m-0 py-2 px-4 !text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark transition-colors whitespace-nowrap ${
+                                        selected ? 'font-bold' : ''
                                     }`}
                                 >
                                     {value.label}

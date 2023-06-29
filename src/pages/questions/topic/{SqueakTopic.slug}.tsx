@@ -83,19 +83,19 @@ export default function Questions({ data, pageContext }: IProps) {
                     <div className="ml-auto sm:mt-0 mt-4 sm:w-32 z-50 relative">
                         <Listbox as="div" className="relative" value={sortBy} onChange={setSortBy}>
                             <Listbox.Label className="sr-only">Sort by</Listbox.Label>
-                            <Listbox.Button className="relative w-full flex items-center py-2 px-3 text-left bg-white/50 rounded shadow-lg cursor-pointer text-sm text-gray border border-gray/30 dark:bg-gray-accent-dark">
+                            <Listbox.Button className="relative w-full flex items-center py-2 px-3 text-left bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded cursor-pointer text-sm">
                                 <span className="block truncate">
                                     {sortBy === 'newest' ? 'Newest' : sortBy === 'activity' ? 'Activity' : 'Popular'}
                                 </span>
 
-                                <ChevronDownIcon className="ml-auto w-4 h-4 pointer-events-none text-gray-accent-light" />
+                                <ChevronDownIcon className="ml-auto w-4 h-4 pointer-events-none text-primary/50 dark:text-primary-dark/50" />
                             </Listbox.Button>
 
-                            <Listbox.Options className="absolute z-10 w-full text-gray mt-1 py-1 text-sm border border-gray/30 overflow-auto text-base bg-white dark:bg-gray-accent-dark dark:text-white rounded shadow-lg max-h-60 focus:outline-none sm:text-sm list-none p-0">
+                            <Listbox.Options className="absolute z-10 mt-1 w-full text-primary dark:text-primary-dark py-1 border border-light dark:border-dark overflow-auto bg-white dark:bg-gray-accent-dark rounded max-h-60 focus:outline-none sm:text-sm list-none p-0">
                                 {['Newest', 'Activity', 'Popular'].map((option) => (
                                     <Listbox.Option
                                         key={option}
-                                        className="px-2 py-1 text-sm hover:bg-red hover:text-white cursor-pointer"
+                                        className="px-2 py-1 !text-sm hover:bg-red hover:text-white cursor-pointer"
                                         value={option.toLowerCase()}
                                     >
                                         {option}
@@ -104,9 +104,6 @@ export default function Questions({ data, pageContext }: IProps) {
                             </Listbox.Options>
                         </Listbox>
                     </div>
-                </div>
-                <div className="full">
-                    <SidebarSearchBox filter="question" />
                 </div>
 
                 <div className="mt-8 flex flex-col">

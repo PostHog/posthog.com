@@ -136,6 +136,13 @@ export default function Sidebar() {
                 </div>
                 {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> : <Login />}
             </SidebarSection>
+
+            <SidebarSection title="My discussions">
+                <Link to="/community/dashboard" className="text-sm">
+                    Visit my discussions
+                </Link>
+            </SidebarSection>
+
             {topicSubscriptions && topicSubscriptions?.length > 0 && (
                 <SidebarSection title="Jump to subscribed topics">
                     <>

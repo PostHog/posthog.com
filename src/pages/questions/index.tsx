@@ -70,10 +70,6 @@ export default function Questions() {
                         </div>
                     </div>
 
-                    <div className="full">
-                        <SidebarSearchBox filter="question" />
-                    </div>
-
                     <div className="mt-8 flex flex-col">
                         <QuestionsTable
                             questions={questions}
