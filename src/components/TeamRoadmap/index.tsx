@@ -21,7 +21,7 @@ export default function TeamRoadmap({ team }: { team?: string }) {
                 return (
                     <InProgress
                         more
-                        className="bg-opacity-0 shadow-none  dark:border-gray-accent-dark rounded-md !border-t !mb-4"
+                        className="border border-light dark:border-dark rounded-md !border-t !mb-4"
                         key={node.title}
                         {...node}
                     />

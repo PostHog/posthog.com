@@ -84,14 +84,14 @@ export const Section = ({
 export const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
     return (
         <>
-            {team !== 'undefined' && <h4 className="oh5acity-50 text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
+            {team !== 'undefined' && <h4 className="text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
             <li className="m-0 mb-3">{children}</li>
         </>
     )
 }
 
 export const CardContainer = ({ children }: { children: React.ReactNode }) => {
-    return <ul className="list-none m-0 p-0 grid">{children}</ul>
+    return <ul className="list-none m-0 p-0 grid space-y-2">{children}</ul>
 }
 
 export default function Roadmap() {
@@ -148,7 +148,7 @@ export default function Roadmap() {
                             />
                         </figure>
                     </div>
-                    <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed">
+                    <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-light dark:divide-dark">
                         <Section
                             title="Under consideration"
                             description="The top features we might build next. Your feedback is requested."

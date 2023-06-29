@@ -8,7 +8,7 @@ export default function CTA({ title, subtitle, image, mainCTA, pricingCTA }: ICT
     const gatsbyImage = image && getImage(image)
     return (
         <SectionWrapper>
-            <div className="flex mt-8 md:space-y-0 space-y-4 md:flex-row flex-col md:space-x-4 justify-between py-4 px-6 bg-border/75 dark:bg-border-dark/75 rounded-lg md:items-center">
+            <div className="flex mt-8 md:space-y-0 space-y-4 md:flex-row flex-col md:space-x-4 justify-between py-4 px-6 bg-accent dark:bg-accent-dark rounded md:items-center">
                 <div>
                     <h2 className="m-0 text-2xl">{title}</h2>
                     <p className="m-0 mb-3 text-[15px] opacity-75">{subtitle}</p>

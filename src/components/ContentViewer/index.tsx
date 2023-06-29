@@ -85,9 +85,9 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
                                     >
                                         {image && <img className="max-h-[30px] mb-2" src={image} />}
 
-                                        <p className="m-0 font-semibold leading-tight text-[15px]">{title}</p>
+                                        <p className="!m-0 font-semibold !leading-tight !text-[15px]">{title}</p>
                                         {(author || type) && (
-                                            <p className="text-[13px] font-semibold m-0 opacity-60 mt-0.5">
+                                            <p className="!text-[13px] font-semibold !m-0 opacity-60 !mt-0.5">
                                                 {type} {author && `by ${author}`}
                                             </p>
                                         )}
@@ -99,7 +99,7 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
                                                         {tags.map((tag) => {
                                                             return (
                                                                 <li
-                                                                    className="rounded-full px-2 py-1 mr-1 bg-red/10 text-red text-xs whitespace-nowrap mb-1"
+                                                                    className="rounded-full px-2 py-1 mr-1 bg-red/10 text-red !text-xs whitespace-nowrap mb-1"
                                                                     key={tag}
                                                                 >
                                                                     {tag}

@@ -206,7 +206,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
 
     return (
         <li
-            className={` first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-accent dark:bg-accent-dark rounded-sm shadow-xl ${
+            className={`px-4 py-4 sm:py-2 xl:pb-4 border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm ${
                 props?.className ?? ''
             }`}
         >
@@ -289,7 +289,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                         <button
                             disabled={loading}
                             onClick={() => (subscribed ? unsubscribe() : subscribe())}
-                            className="text-[15px] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-border dark:bg-border-dark text-black hover:text-black dark:text-white dark:hover:text-white font-bold active:top-[0.5px] active:scale-[.98] w-auto"
+                            className="flex border border-b-3 border-light dark:border-dark rounded gap-2 p-2 font-bold bg-white dark:bg-accent-dark text-red dark:text-yellow"
                             data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
                         >
                             <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
