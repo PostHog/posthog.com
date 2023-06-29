@@ -96,7 +96,7 @@ Although PostHog is event-based, it still gathers details about users. To do an 
 - You can use the [identify](/docs/data/identify) function to connect a person with a distinct ID like email or username.
 - You can use the [group](/docs/product-analytics/group-analytics) function to connect a person with a group like an organization or company.
 
-![Event struture](../images/blog/google-analytics-to-posthog/event.png)
+![Event structure](../images/blog/google-analytics-to-posthog/event.png)
 
 You can then use all of this data in your insights. For example, you can aggregate an event series by unique users, unique groups, monthly active groups, and more. 
 
