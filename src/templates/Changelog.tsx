@@ -91,7 +91,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
             title="Changelog"
             tableOfContents={tableOfContents}
         >
-            <section className="mb-12 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
+            <section className="mb-4 flex justify-between xl:items-center xl:flex-row flex-col xl:space-y-0 space-y-4">
                 <div>
                     <h1 className="m-0 text-3xl">Changelog</h1>
                     <p className="m-0 mt-2">
@@ -119,7 +119,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                         <div key={date} id={slugify(dayjs(date).format('MMMM'))} className="flex gap-4">
                             <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
                                 <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
-                                    <h2 className="text-sm font-bold uppercase m-0">{dayjs(date).format('MMM')}</h2>
+                                    <h2 className="text-sm font-bold uppercase !m-0">{dayjs(date).format('MMM')}</h2>
                                     <div className="text-xs font-semibold">{dayjs(date).format('YYYY')}</div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                                     return (
                                         <li key={title}>
                                             {topicName && (
-                                                <p className="font-bold flex my-3 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
+                                                <p className="font-bold flex mt-3 !-mb-4 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
                                                     <span className="inline-flex space-x-2 bg-light dark:bg-dark px-2 z-20">
                                                         {Icon && <Icon className="w-5" />}
                                                         <span>{topicName}</span>

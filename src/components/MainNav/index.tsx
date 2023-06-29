@@ -265,7 +265,7 @@ export const Main = () => {
                         })}
                     </ul>
                     <div className="flex items-center justify-end">
-                        <CallToAction size="sm" type="outline" className="mr-2 " childClassName="">
+                        <CallToAction size="sm" type="outline" className="hidden md:flex mr-2 " childClassName="">
                             Get started
                         </CallToAction>
                         <HoverTooltip

@@ -73,7 +73,7 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
             <Link
                 state={currentPage && { previous: currentPage }}
                 to={`/questions/${permalink}`}
-                className={`${className} group flex items-center relative px-2 py-2.5 -mt-2.5 mx-[-2px] -mb-3 rounded active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0`}
+                className={`${className} group flex items-center relative px-2 py-1.5 -mt-1.5 mx-[-2px] -mb-3 rounded active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0`}
             >
                 <div className="grid grid-cols-12 items-center w-full">
                     <div className="col-span-12 md:col-span-7 2xl:col-span-8 flex items-center space-x-4">
