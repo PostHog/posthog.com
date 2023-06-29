@@ -146,6 +146,7 @@
         "redoc": "^2.0.0-rc.62",
         "redux": "^4.0.5",
         "rehype-sanitize": "^5.0.1",
+        "remark-gfm": "^3.0.1",
         "request": "^2.88.2",
         "reselect": "^4.0.0",
         "sass": "^1.43.2",
