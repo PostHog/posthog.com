@@ -183,7 +183,9 @@ export const CodeBlock = ({
                                 <Tab
                                     key={option.language}
                                     className={({ selected }) =>
-                                        `cursor-pointer text-sm py-0.5 ${selected ? 'font-semibold text-white/70' : ''}`
+                                        `cursor-pointer text-sm py-0.5 ${
+                                            selected ? 'font-semibold text-black/70 dark:text-white/70' : ''
+                                        }`
                                     }
                                 >
                                     {option.file ||
@@ -254,7 +256,7 @@ export const CodeBlock = ({
                         <div className="relative flex items-center justify-center pl-2">
                             <button
                                 onClick={copyToClipboard}
-                                className="text-primary-dark/50 hover:text-primary-dark/75 p-1 -m-1 hover:bg-black/40 rounded relative hover:scale-[1.07] active:top-[.5px] active:scale-[.99]"
+                                className="text-black/50 hover:text-black/75 hover:bg-border dark:text-white/50 dark:hover:text-white/75 dark:hover:bg-border-dark p-1 -m-1 rounded relative hover:scale-[1.07] active:top-[.5px] active:scale-[.99]"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
