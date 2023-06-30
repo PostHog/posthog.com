@@ -79,7 +79,7 @@ export default function Menu({
             )
         }
         setOpen(isMenuItemActive?.({ name, url }) || url === pathname || (children && isOpen(children)))
-        setIsActive(isMenuItemActive?.({ name, url }) || url === pathname)
+        setIsActive(isMenuItemActive?.({ name, url }) || url?.split('?')[0] === pathname)
     }, [pathname])
 
     const variants = {

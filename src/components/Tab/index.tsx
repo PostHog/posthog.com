@@ -46,7 +46,8 @@ const TabGroup: typeof HeadlessTab.Group = ({ children, tabs }) => {
     useEffect(() => {
         if (hasTabs && typeof window !== 'undefined') {
             const params = new URLSearchParams(window.location.search)
-            setSelectedIndex(tabs.indexOf(params.get('tab')))
+            const tabIndex = tabs.indexOf(params.get('tab'))
+            if (tabIndex >= 0) setSelectedIndex(tabIndex)
         }
     }, [])
 
