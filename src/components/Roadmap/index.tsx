@@ -148,7 +148,7 @@ export default function Roadmap() {
                             />
                         </figure>
                     </div>
-                    <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-light dark:divide-dark">
+                    <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-light dark:divide-dark pb-8">
                         <Section
                             title="Under consideration"
                             description="The top features we might build next. Your feedback is requested."
