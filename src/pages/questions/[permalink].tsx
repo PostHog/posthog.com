@@ -40,7 +40,7 @@ export default function QuestionPage(props: QuestionPageProps) {
 
     const nav = useTopicsNav()
     return (
-        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[1]}>
+        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
             <SEO
                 title={isLoading ? 'Squeak question - PostHog' : `${question?.attributes?.subject} - PostHog`}
                 noindex={question?.attributes.archived}

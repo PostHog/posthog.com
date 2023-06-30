@@ -18,10 +18,10 @@ import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { RightArrow } from '../../../components/Icons/Icons'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
-import { useNav } from 'components/Community/useNav'
 import Logomark from 'components/Home/images/Logomark'
 import Label from 'components/Label'
 import { communityMenu } from '../../../navs'
+import useTopicsNav from '../../../navs/useTopicsNav'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -47,11 +47,11 @@ const Avatar = (props: { className?: string; src?: string }) => {
 }
 
 export default function ProfilePage({ params }: PageProps) {
-    const nav = useNav()
     const id = parseInt(params.id || params['*'])
 
     const [editModalOpen, setEditModalOpen] = React.useState(false)
     const posthog = usePostHog()
+    const nav = useTopicsNav()
 
     const profileQuery = qs.stringify(
         {
