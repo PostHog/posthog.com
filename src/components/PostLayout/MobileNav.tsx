@@ -106,14 +106,14 @@ export const MenuContainer = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed w-full h-full bg-accent/70 dark:bg-accent-dark/70 top-0 left-0"
+            className="fixed w-full h-full bg-accent/70 dark:bg-accent-dark/70 top-0 left-0 z-[999999]"
         >
             <motion.div
                 onClick={(e) => e.stopPropagation()}
                 initial={{ translateY: '100%', opacity: 0 }}
                 animate={{ translateY: 0, opacity: 1 }}
                 exit={{ translateY: '100%', opacity: 0 }}
-                className="fixed bottom-[75px] w-full left-0 z-[999999]"
+                className="fixed bottom-[75px] w-full left-0"
             >
                 <motion.div
                     dragConstraints={{ top: 0 }}
