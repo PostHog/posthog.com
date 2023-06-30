@@ -15,7 +15,9 @@ Insights enable you to visualize your Events and Actions. There are several diff
 -   [Funnels](/docs/user-guides/funnels)
 -   [Retention](/docs/user-guides/retention)
 -   [Paths](/docs/user-guides/paths)
+-   [Stickiness](/docs/product-analytics/stickiness)
 -   [Lifecycle](/docs/user-guides/lifecycle)
+-   [SQL](/docs/product-analytics/hogql#sql-insights)
 
 ## How to create an insight
 
