@@ -1836,30 +1836,37 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/session-replay',
+                    icon: 'Home',
                 },
                 {
                     name: 'Product manual',
                     url: '/docs/session-replay/manual',
+                    icon: 'Book',
                 },
                 {
                     name: 'Privacy controls',
                     url: '/docs/session-replay/privacy',
+                    icon: 'Shield',
                 },
                 {
                     name: 'Sharing and emedding',
                     url: '/docs/session-replay/sharing',
+                    icon: 'Share',
                 },
                 {
                     name: 'Data retention',
                     url: '/docs/session-replay/data-retention',
+                    icon: 'Calendar',
                 },
                 {
                     name: 'Iframe recording',
                     url: '/docs/session-replay/iframes',
+                    icon: 'Code',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/session-replay/troubleshooting',
+                    icon: 'Question',
                 },
             ],
         },
