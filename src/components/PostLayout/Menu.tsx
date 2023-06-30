@@ -143,7 +143,7 @@ export default function Menu({
                         {icon ? (
                             <span
                                 className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
-                                    color ? 'items-center' : 'items-start'
+                                    color ? 'items-center' : 'items-center'
                                 }`}
                             >
                                 <span

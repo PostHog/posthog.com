@@ -11,6 +11,7 @@ import Modal from 'components/Modal'
 import { capitalizeFirstLetter } from '../../../utils'
 import Label from 'components/Label'
 import { graphql, useStaticQuery } from 'gatsby'
+import { ExternalLink } from 'components/Icons'
 
 const convertLargeNumberToWords = (
     // The number to convert
@@ -122,7 +123,16 @@ const ProductTiersModal = ({
                         </p>
                     )}
                     <div>
-                        <p className="text-black/50 dark:text-white/50">Volume discounts</p>
+                        <p className="font-bold text-gray mb-1">Volume discounts</p>
+                        <p className="text-sm text-red">
+                            <Link
+                                to="/docs/getting-started/estimating-usage-costs"
+                                external={true}
+                                className="flex items-center gap-x-1"
+                            >
+                                How do I estimate my usage? <ExternalLink className="!h-4 !w-4" />
+                            </Link>
+                        </p>
                         <div className="grid grid-cols-2">
                             {tiers.map((tier, i) => {
                                 return (

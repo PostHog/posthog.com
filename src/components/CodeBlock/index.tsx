@@ -175,16 +175,18 @@ export const CodeBlock = ({
 
     return (
         <div className="relative mt-2 mb-4 border border-light dark:border-dark rounded">
-            <div className="bg-accent dark:bg-accent-dark text-primary/50 dark:text-primary-dark/50 px-3 py-1.5 text-sm flex items-center w-full rounded-t">
+            <div className="bg-accent dark:bg-accent-dark text-sm flex items-center w-full rounded-t">
                 {selector === 'tabs' && languages.length > 1 ? (
                     <Tab.Group onChange={(index) => onChange?.(languages[index])}>
-                        <Tab.List className="flex items-center space-x-5">
+                        <Tab.List className="flex items-center gap-[1px]">
                             {languages.map((option) => (
                                 <Tab
                                     key={option.language}
                                     className={({ selected }) =>
-                                        `cursor-pointer text-sm py-0.5 ${
-                                            selected ? 'font-semibold text-black/70 dark:text-white/70' : ''
+                                        `cursor-pointer text-sm px-3 py-2 rounded-full relative after:h-[2px] after:-bottom-[1px] after:left-0 after:right-0 after:absolute after:content-['']  ${
+                                            selected
+                                                ? 'font-bold text-red hover:text-red dark:text-yellow hover:dark:text-yellow after:bg-red dark:after:bg-yellow'
+                                                : 'text-primary/50 dark:text-primary-dark/50 hover:after:bg-black/50 dark:hover:after:bg-white/50 hover:text-primary/75 hover:dark:text-primary-dark/75'
                                         }`
                                     }
                                 >
@@ -253,10 +255,10 @@ export const CodeBlock = ({
                     ) : null}
 
                     {showCopy && (
-                        <div className="relative flex items-center justify-center pl-2">
+                        <div className="relative flex items-center justify-center pr-1">
                             <button
                                 onClick={copyToClipboard}
-                                className="text-black/50 hover:text-black/75 hover:bg-border dark:text-white/50 dark:hover:text-white/75 dark:hover:bg-border-dark p-1 -m-1 rounded relative hover:scale-[1.07] active:top-[.5px] active:scale-[.99]"
+                                className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
