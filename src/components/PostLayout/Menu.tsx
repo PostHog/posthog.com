@@ -142,15 +142,15 @@ export default function Menu({
                         </AnimatePresence>
                         {icon ? (
                             <span
-                                className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark ${
+                                className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
                                     color ? 'items-center' : 'items-start'
                                 }`}
                             >
                                 <span
-                                    className={`flex items-center justify-center ${
+                                    className={`flex items-center justify-center shrink-0 ${
                                         color
-                                            ? `text-${color} bg-${color} bg-opacity-10 rounded-sm w-[30px] h-[30px]`
-                                            : 'w-[25px] h-[25px] basis-[25px] shrink-0 opacity-70'
+                                            ? `text-${color} bg-${color} bg-opacity-10 rounded-sm w-[30px] h-[30px] basis-[30px]`
+                                            : 'w-[25px] h-[25px] basis-[25px] opacity-70'
                                     }`}
                                 >
                                     {typeof icon === 'string' ? getIcon(icon) : icon}
