@@ -1,5 +1,5 @@
 ---
-date: 2023-06-26
+date: 2023-06-30
 title: "In-depth: ClickHouse vs Redshift"
 rootPage: /blog
 sidebar: Blog
