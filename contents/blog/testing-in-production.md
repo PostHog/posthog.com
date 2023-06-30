@@ -22,7 +22,7 @@ At PostHog, we test in production. There are many misconceptions about doing thi
 
 Testing in production *successfully* is a multi-step process, and this post goes over what it is, why we do it, and how to do it well.
 
-## What is testing in production
+## What is testing in production?
 
 Testing in production checks that new code works in the production environment, rather than the development or staging one. It uses real infrastructure and data, rather than local machines or a staging environment filled with synthetic data.
 
