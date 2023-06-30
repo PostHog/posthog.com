@@ -22,7 +22,7 @@ export default function Template({ data }) {
     const { title, subtitle, featuredImage, description } = pageData?.frontmatter
 
     return (
-        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[3]}>
+        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[2]}>
             <SEO
                 image={`/images/templates/${slug.split('/')[2]}.png`}
                 title={`${title} template - PostHog`}
