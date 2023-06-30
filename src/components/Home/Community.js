@@ -16,12 +16,12 @@ const CommunityStat = ({ title, description }) => {
 export default function Community() {
     return (
         <section className={section('text-center')}>
-            <div className="bg-primary w-full rounded-lg px-4 py-16 dark">
+            <div className="bg-accent-dark w-full rounded-md border border-light dark:border-dark px-4 py-16 dark">
                 <h2 className={heading('md', 'white')}>
                     Join our <span className="text-red">huuuuge*</span> open source community
                 </h2>
                 <h3 className={heading('sm', 'tan')}>*12K+ stars on GitHub across our repos</h3>
-                <ul className="grid sm:grid-cols-3 text-white m-0 p-0 list-none my-8 sm:my-20 divide-gray-accent-light divide-y-1 sm:divide-y-0 sm:divide-x-1 divide-dashed">
+                <ul className="grid sm:grid-cols-3 text-white m-0 p-0 list-none my-8 sm:my-20 divide-light dark:divide-dark divide-y-1 sm:divide-y-0 sm:divide-x-1 divide">
                     <CommunityStat title="81k+" description="Developer community" />
                     <CommunityStat title="411+" description="Contributors" />
                     <CommunityStat title="50b+" description="Events tracked" />
