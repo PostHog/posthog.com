@@ -1,6 +1,6 @@
 ---
-title: "Feature flags vs configuration: what should you choose?"
-date: 2023-06-28
+title: "Feature flags vs configuration: Which should you choose?"
+date: 2023-06-30
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
