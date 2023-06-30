@@ -13,8 +13,9 @@ import { Heading } from 'components/Heading'
 import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
+import { navigate } from 'gatsby'
 
-const Select = ({ onChange, values }) => {
+const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
     return (
         <div className="relative">
@@ -22,7 +23,7 @@ const Select = ({ onChange, values }) => {
                 <Listbox.Button className="py-2 px-4 bg-accent dark:bg-accent-dark rounded text-left border border-light dark:border-dark flex justify-between items-center font-semibold text-sm">
                     {({ value }) => (
                         <>
-                            <span>{value.label}</span>
+                            <span>{other.value || value.label}</span>
                             <Chevron className="w-2.5 ml-2 opacity-50" />
                         </>
                     )}
@@ -30,15 +31,18 @@ const Select = ({ onChange, values }) => {
                 <Listbox.Options className="absolute right-0 min-w-full shadow-md bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0 rounded-md mt-1 z-20 grid divide-y divide-light dark:divide-dark">
                     {values.map((value) => (
                         <Listbox.Option key={value.label} value={value} as={React.Fragment}>
-                            {({ selected }) => (
-                                <li
-                                    className={`!m-0 py-2 px-4 !text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark transition-colors whitespace-nowrap ${
-                                        selected ? 'font-bold' : ''
-                                    }`}
-                                >
-                                    {value.label}
-                                </li>
-                            )}
+                            {({ selected }) => {
+                                console.log(other.value, value.label)
+                                return (
+                                    <li
+                                        className={`!m-0 py-2 px-4 !text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark transition-colors whitespace-nowrap ${
+                                            (other.value ? value.label === other.value : selected) ? 'font-bold' : ''
+                                        }`}
+                                    >
+                                        {value.label}
+                                    </li>
+                                )
+                            }}
                         </Listbox.Option>
                     ))}
                 </Listbox.Options>
@@ -47,7 +51,7 @@ const Select = ({ onChange, values }) => {
     )
 }
 
-export default function Changelog({ data: { allRoadmap, filterOptions } }) {
+export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
     const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
 
@@ -99,6 +103,16 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                     </p>
                 </div>
                 <div className="flex space-x-2 items-center">
+                    <Select
+                        value={pageContext.year}
+                        onChange={({ value }) => navigate(value)}
+                        values={[
+                            { label: 2023, value: '/changelog/2023' },
+                            { label: 2022, value: '/changelog/2022' },
+                            { label: 2021, value: '/changelog/2021' },
+                            { label: 2020, value: '/changelog/2020' },
+                        ]}
+                    />
                     {Object.keys(filterOptions).map((filter) => {
                         const { field } = filterOptions[filter][0] ?? {}
                         if (!field) return null
