@@ -67,12 +67,12 @@ type FeatureFlagsProps = {
 
 export const Intro = ({ image = true }) => (
     <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row gap-8 pt-2 mb-8">
-        <div className="p-8">
+        <div className="p-4 md:p-8">
             <h1 className="text-4xl mt-0 mb-2">Feature flags</h1>
             <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                 Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
             </h3>
-            <CallToAction to="docs/feature-flags/manual#creating-feature-flags">
+            <CallToAction to="/docs/feature-flags/manual#creating-feature-flags">
                 Create your first feature flag
             </CallToAction>
         </div>
@@ -94,7 +94,6 @@ export const Intro = ({ image = true }) => (
 export const Content = () => {
     return (
         <>
-            <Intro />
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
@@ -198,7 +197,7 @@ export const Content = () => {
                     />
                 </ul>
                 <CallToAction
-                    to="/tutorials"
+                    to="/tutorials/categories/feature-flags"
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
@@ -271,17 +270,14 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
             <SEO title="Feature flags - Docs - PostHog" />
 
             <PostLayout title={'Feature flags'} menu={docs} hideSurvey hideSidebar>
+                <Intro />
                 <Content />
 
-                {/* Get started section */}
-                <section className="py-6 sm:py-12">
-                    <GettingStarted
-                        product="Feature flags"
-                        title="Create your first feature flag"
-                        description="Learn how to create a feature flag and toggle it on and off for different users."
-                        link="/docs/feature-flags/manual#creating-feature-flags"
-                    ></GettingStarted>
-                </section>
+                <div className="pt-8">
+                    <CallToAction to="docs/feature-flags/manual" width="full">
+                        Visit the manual
+                    </CallToAction>
+                </div>
             </PostLayout>
         </Layout>
     )
