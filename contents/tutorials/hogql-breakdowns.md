@@ -131,6 +131,22 @@ There are endless ways to analyze dates and times, and HogQL enables more of the
 
 You can also replace `week` in all of these with `second`, `minute`, `hour`, `day`, `month`, `quarter`, and `year`.
 
+## JSON arrays
+
+HogQL can provides access to JSON properties, which can then be used to breakdown by arrays within that JSON. We can use the [JSONExtractArrayRaw](https://clickhouse.com/docs/en/sql-reference/functions/json-functions#jsonextractarrayrawjson-indices_or_keys) function to extract an array from JSON. For example, we can break down by active feature flags with the following expression:
+
+```
+arrayJoin(
+	JSONExtractArrayRaw(
+		ifNull(properties.$active_feature_flags, '[]')
+	)
+)
+```
+
+With the total value bar chart, this breakdown looks like this:
+
+![Array](../images/tutorials/hogql-breakdowns/array.png)
+
 ## Further reading
 
 - [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)
