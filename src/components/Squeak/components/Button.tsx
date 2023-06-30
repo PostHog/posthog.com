@@ -6,16 +6,18 @@ export default function Button({
     children,
     width,
     buttonType,
+    size,
     ...other
 }: {
     className?: string
     children: React.ReactNode
     buttonType?: string
     width?: string
+    size?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>) {
     return (
-        <button className={`${container(buttonType, undefined, width)} ${className}`} {...other}>
-            <span className={`${child(buttonType, width)}`}>{children}</span>
+        <button className={`${container(buttonType, size, width)} ${className}`} {...other}>
+            <span className={`${child(buttonType, width, undefined, size)}`}>{children}</span>
         </button>
     )
 }

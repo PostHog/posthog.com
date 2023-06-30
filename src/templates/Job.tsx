@@ -94,7 +94,7 @@ export default function Job({
     ]
 
     return (
-        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[4]}>
+        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[6]}>
             <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
             <div className="">
                 <PostLayout
@@ -267,6 +267,7 @@ export const query = graphql`
             }
         ) {
             nodes {
+                squeakId
                 firstName
                 lastName
                 country
@@ -280,6 +281,7 @@ export const query = graphql`
             filter: { teams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } } }
         ) {
             nodes {
+                squeakId
                 firstName
                 lastName
                 country
