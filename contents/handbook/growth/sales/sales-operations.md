@@ -28,15 +28,14 @@ If you are looking for guidance on how to manage customers in HubSpot specifical
 
 ## Self-serve Process
 
-1. Customer will either:
-   1. Sign up for a cloud account at app.posthog.com
-   1. Sign up for a self-hosted license at license.posthog.com
+For customers that sign up themselves, and begin using the product, we provide a number of self-serve resources, including:
 
-   (Both of these options require a credit card to be entered so will set up a billing plan in Stripe).
-1. At the earliest opportunity we should invite them to our [User Slack](https://posthogusers.slack.com).  When they join say hi and have a chat about what they are doing.
-1. Monitor volumes using revenue.posthog.net and the [CS Customer Lookup](https://app.posthog.com/dashboard/47319) dashboard.  If it looks like they are ramping up their usage get in touch to make sure they aren't blocked:
-   1. Offer up a Zoom to discuss what they are trying to do.
-   1. Create a Slack Connect channel for support if they are sufficiently large.
+1. [Docs](/docs)
+1. [Tutorials](/tutorials)
+1. [Pre-recorded demo](/book-a-demo)
+1. [Slack community](/slack)
+
+Additionally, all users can us for support/bugs/feedback using the `?` icon in the top right of the PostHog app. This is routed to the appropriate team in Zendesk.
 
 
 ## Ensuring customers see value quickly
@@ -55,18 +54,14 @@ getting live **production** data through our pipeline and available for analysis
 
 ## Free trials?
 
-Generally speaking we don't need to do anything around free trials as both our self-serve and cloud plans have generous 1m free tiers.  If a customer is 
-going to go over this limit pretty quickly then we can agree to give them 1 month free usage - the easiest way to do this is to get them to subscribe to either plan and then apply a 100% discount coupon for a month on Stripe.  See the [billing](/handbook/growth/sales/billing) page for more info.
+Generally speaking we don't need to do anything around free trials as our free tier has a generous 1m events, 1m feature flag calls, and 15K sessions.  If a customer is going to go over this limit pretty quickly then we can agree to give them 1 month free usage - the easiest way to do this is to get them to subscribe to either plan and enter free trial days in stripe or in the billing service.  See the [billing](/handbook/growth/sales/billing) page for more info (and the latest on this).
 
 
 ### Figuring out the best solution for a customer
 
-Assuming PostHog is the best solution for a customer, you should look at their level of scale and if they have any specific privacy or security needs to determine the most appropriate plan for them.  
+Assuming PostHog is the best solution for a customer, you should look at their level of scale and if they have any specific security needs to determine the most appropriate plan for them.  
 
-- _Low volume, less technical_ - start with Cloud, which is free up to 1m monthly events and very fast to get going with. 
-- _Low volume, more technical_ - Cloud still probably makes sense, unless they have privacy needs in which case Self-host has a 1m monthly event free tier. 
-- _High volume, less technical_ - Cloud will be the best bet - pricing does increase at scale as we take on hosting costs, but the setup process and ongoing maintenance is very straightforward. 
-- _High volume, more technical_ - Still Cloud, although with strict privacy constraints Self-host + Enterprise pack although we can't yet support this at super high volumes (>1bn events/month).
+In general, PostHog Cloud is the best option for customers. It is much more scalable than self-hosted instances, doesn't require devops time to configure, monitor, and run, and is also the only way to use all of PostHog's paid features. In certain cases, the open source / free product may be the best choice, if customers are very technical, and also have a strong data control requirement.  
 
 ### What about Open Source?
 
@@ -85,15 +80,10 @@ Read about how we do this in the dedicated handbook section, [Ensuring Customer 
 
 We typically use two top-level metrics when looking at revenue: MRR (monthly recurring revenue) and NRR (net revenue retention).
 
-The easiest way to see these is on the [revenue site](https://revenue.posthog.net)
+The easiest way to see these is on the [go/revenue](go/revenue) dashboard. These queries were built by Tim 
 
-The revenue site is based on a [script](https://github.com/PostHog/growth-accounting#calculating-revenue) located in the [growth accounting repo](https://github.com/PostHog/growth-accounting) which we originally used to make these calculations easy.
 
 ## FAQs
-
-_Can I give a Self-host customer a free trial?_
-
-No, because we don't need to - they can get up and running with up to 1 million monthly free events on either Scale or Cloud first if they want to try out PostHog for free. You'll find a lot of inbound customers will do this anyway before talking to us about Scale. 
 
 _Can I give a customer a discount?_
 
@@ -103,25 +93,20 @@ _How do I work with a customer who wants to sign an MSA?_
 
 This occasionally happens when we are dealing with very large companies, who may prefer to sign an MSA due to their internal procurement processes or to have the security of a locked-in contract from a pricing perspective. We have a contract version of our standard terms and conditions that we can use for this - ask Charles. 
 
-We'd only really look to do this with people spending $10k+ per month - we don't do it below this value because of the legal effort required.
+We'd only really look to do this with people spending $20k+ per month or on the Enterprise plan - we don't do it below this value because of the legal effort required.
 
 _How do I find out a customer's usage?_
 
-[Go to this link](https://app.posthog.com/dashboard/47319) and replace the email filter at the top of the dashboard with the customer's email domain.  You can also filter by organization_id or license_keys if you have them. 
+The tool we use for this currently is [Pocus](app.pocus.com), which combines revenue, PostHog, HubSpot data all in one place. You can search for the org/user/domain using cmd + k and the popover should give a deep dive into usage across products, revenue, engagement, etc.
 
 _Can a customer transfer from self-hosted (e.g. Open Source) to Cloud?_
 
-Yes! See [the Replicator app](/docs/apps/replicator).
+Yes! See [migration tools repo](https://github.com/PostHog/posthog-migration-tools) for events and the [migrate meta](https://github.com/PostHog/posthog-migrate-meta) repo for everything else.
 
 _Can a customer transfer from Cloud to Self-hosted?_
 
-Yes! See [the Replicator app](/docs/apps/replicator).
+Yes! See [the Replicator app](/docs/apps/replicator) for events and the [migrate meta](https://github.com/PostHog/posthog-migrate-meta) repo for everything else.
 
-They will _lose_ their dashboard and configuration - this will just retain their events, but usually that's the principal concern.
-
-_A Self-host customer has experienced downtime while we're getting set up - have they lost their data?_
-
-Downtime means that queries won't load, but event ingestion will still continue to work fine. 
 
 _What if the customer knows their user volumes but has no idea about number of events?_
 
@@ -129,13 +114,6 @@ A good approach is to point them to our [Downsampler app](/plugins/downsampling)
 
 We also did a study on PostHog Cloud and most companies were within the range of 50-100 per user per month.
 
-_Can we air gap an installation for customers with especially stringent compliance requirements, for example?_
-
-We _can_ do this, but it is really important to stress that this drastically limits our ability to provide proactive support, and expectations need to be really carefully managed. In addition, we then need them to make an annual, up-front commitment (not month to month), as we won't be able to monitor usage ourselves. 
-
-_Do we provide customers with estimated hosting costs if they are self-hosting?_
-
-We are able to provide rough estimates if they give us their anticipated event volumes, but again this needs to be carefully managed. This can vary a lot - depends on things like how complex their queries are - and we'd expect some instability to start with as we get the scaling to be appropriate.
 
 _What privacy features does PostHog offer?_
 
