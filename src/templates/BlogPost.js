@@ -144,7 +144,7 @@ export default function BlogPost({ data, pageContext, location }) {
     const { tableOfContents } = pageContext
 
     return (
-        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[1]}>
+        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[5]}>
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
