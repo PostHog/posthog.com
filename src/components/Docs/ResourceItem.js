@@ -1,9 +1,10 @@
 import React from 'react'
 import Link from 'components/Link'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-export default function ResourceItem({ title, description, Image, url, type }) {
+export default function ResourceItem({ title, description, Image, gatsbyImage, url, type }) {
     return (
-        <li className="list-none bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded relative hover:top-[-2px] active:top-[1px] hover:transition-all">
+        <li className="list-none bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded relative hover:top-[-2px] active:top-[1px] hover:transition-all overflow-hidden">
             <Link to={url} className="block">
                 <div className="px-4 py-3 pb-0">
                     {type && (
@@ -15,7 +16,9 @@ export default function ResourceItem({ title, description, Image, url, type }) {
                     <p className="text-primary/60 dark:text-primary-dark/60 text-sm m-0">{description}</p>
                 </div>
                 <div className="flex justify-end w-full h-24">
-                    <div className="w-48 h-24 md:absolute bottom-0">{Image}</div>
+                    <div className="w-48 h-24 md:absolute bottom-0">
+                        {gatsbyImage ? <GatsbyImage image={getImage(gatsbyImage)} /> : Image}
+                    </div>
                 </div>
             </Link>
         </li>
