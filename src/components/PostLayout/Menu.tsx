@@ -156,7 +156,7 @@ export default function Menu({
                                     {typeof icon === 'string' ? getIcon(icon) : icon}
                                 </span>
                                 <span
-                                    className={`${color ? '' : 'opacity-50'} group-hover:opacity-100 ${
+                                    className={`${color ? '' : 'opacity-100'} group-hover:opacity-100 ${
                                         badge?.title ? 'mr-1.5' : ''
                                     }`}
                                 >

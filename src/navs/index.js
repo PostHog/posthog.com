@@ -1156,32 +1156,12 @@ export const docsMenu = {
                             name: 'Overview',
                             url: '/docs/product-analytics/hogql',
                         },
-                        {
-                            name: 'Placeholder',
-                            url: '/docs/libraries/docusaurus',
-                            badge: {
-                                title: '3rd party',
-                            },
-                        },
                     ],
                 },
                 {
                     name: 'Toolbar',
                     url: '/docs/product-analytics/toolbar',
                     icon: 'Toolbar',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/product-analytics/toolbar',
-                        },
-                        {
-                            name: 'Placeholder',
-                            url: '/docs/libraries/docusaurus',
-                            badge: {
-                                title: '3rd party',
-                            },
-                        },
-                    ],
                 },
                 {
                     name: 'Apps',
