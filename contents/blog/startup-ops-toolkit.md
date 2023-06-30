@@ -22,13 +22,13 @@ More importantly, what is the ops stack you can use to streamline and automate t
 
 This guide assumes you work at a US company, but most of it applies to any country, and it's split into three core sections: [hiring people](/blog/startup-ops-toolkit#1-hiring-people), [managing your money](/blog/startup-ops-toolkit#2-managing-your-money) and [keeping yourself organized](/blog/startup-ops-toolkit#3-keeping-yourself-organized).
 
-I won't offer multiple options here – it's not that kind of guide. Just know that these are the tools we use at PostHog after two years or so of trial and error, and more than a few tedious customer demos.
+I won't offer multiple options here – it's not that kind of guide. Just know that these are the tools we use at PostHog after two years or so of trial and error, and more than a few tedious customer demos.
 
 So, read on if you want to learn how to put together contracts, pay people on time, manage your money and comply with laws you are only just finding out exist.
 
 I recommend you do. Obviously.
 
-> [Charles Cook](/handbook/company/team#charles-cook-operations-&-marketing) is VP, Operations & Marketing at PostHog, leading operations, marketing, people, finance, and legal. All the fun stuff, basically. He also runs our monthly book club, BookHogs.
+> [Charles Cook](/community/profiles/254) is VP, Operations & Marketing at PostHog, leading operations, marketing, people, finance, and legal. All the fun stuff, basically. He also runs our monthly book club, BookHogs.
 
 ## 1. Hiring people
 
