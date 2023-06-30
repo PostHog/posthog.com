@@ -1,4 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
+import { BorderWrapper } from 'components/BorderWrapper'
 import { Caption } from 'components/Caption'
 import { FloatedImage } from 'components/FloatedImage'
 import { ImageBlock } from 'components/ImageBlock'
@@ -44,6 +45,7 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
     const ContentContainer = breakpoints.sm ? MenuContainer : React.Fragment
     const components = {
         ...shortcodes,
+        BorderWrapper,
         Caption,
         ImageBlock,
         FloatedImage,

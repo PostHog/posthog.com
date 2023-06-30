@@ -55,7 +55,7 @@ Product analytics tools are _not_ used solely by Product teams, but can be used 
 
 Individuals will often employ product analytics on a particular area, depending on their role. Product Engineers, for example, may investigate the adoption rate for new features so that they can make decisions about the product roadmap. Meanwhile, UX Designers may use product analytics tools to understand where users are rage-clicking, so they can optimize the interface. 
 
-
+<BorderWrapper>
     <Quote
         imageSource="/images/customers/joe.png"
         size="md"
@@ -63,6 +63,7 @@ Individuals will often employ product analytics on a particular area, depending 
         title="Software Engineer, Mention Me"
         quote={`“We use feature flags to issue changes to 50% of users and then compare the effect. Experiment, find results, decide where to focus and then iterate.”`}
     />
+</BorderWrapper>
 
 
 ## What product metrics should I track?

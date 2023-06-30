@@ -21,12 +21,12 @@ Until this point, Google Analytics had always been my go-to analytics platform. 
 
 In my opinion though, Google Analytics is a mess. It’s good for quantitative metrics, but not qualitative metrics. There are two different UIs for the same data (Firebase Analytics and Google Analytics), two different versions of tracking tag to pick from (v3 and v4; some JS libraries only support v3) and the Goals feature doesn’t easily lend itself to building up a clear picture of what users are actually doing.
 
-
+<BorderWrapper>
     <Quote
         size="md"
         quote={`“I’ve found PostHog to be miles ahead of the other tools I’ve tried and I’m a little miffed that I didn’t find it straight away and wasted time with Mixpanel.”`}
     />
-
+</BorderWrapper>
 
 I was getting so little value from Google Analytics that I started to look for a new tool that would provide more qualitative data. I picked Mixpanel because the UI looked good and it had funnel reports that allowed me to see conversions easily.
 
@@ -57,12 +57,12 @@ After this, [building funnels in PostHog](/docs/user-guides/funnels) was really 
 
 There are also tools that make it easier to track which iteration of the product events are being captured against, such as [feature flags](/docs/user-guides/feature-flags) and [apps that integrate with release management tools](/integrations). Overall, I’ve found PostHog to be miles ahead of the other tools I’ve tried and I’m a little miffed that I wasted time with Mixpanel.
 
-
+<BorderWrapper>
     <Quote
         size="md"
         quote={`“PostHog better enables us to grow our product and, with self-hosting, we're more in control of our analytics usage overall.”`}
     />
-
+</BorderWrapper>
 
 ### How switching to PostHog worked for us
 As an early stage start-up our priority is to get the most out of our tools for the lowest price possible. Mixpanel gave us a qualitative dataset of how users were using our app, but the limitations and cost meant there was very little value in the tool. It wasn’t something we could use to grow the product.
