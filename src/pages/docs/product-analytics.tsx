@@ -7,6 +7,7 @@ import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
+import ResourceItem from 'components/Docs/ResourceItem'
 
 type ProductAnalyticsProps = {
     data: {
@@ -27,35 +28,23 @@ export const Intro = () => (
     </header>
 )
 
-export const GuideItem = ({ title, description, Image, url }) => (
-    <li className="list-none bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded relative hover:top-[-2px] active:top-[1px] hover:transition-all">
-        <Link to={url} className="block">
-            <div className="px-4 py-3 pb-0">
-                <h4 className="m-0 text-lg text-primary dark:text-primary-dark">{title}</h4>
-                <p className="text-primary/60 dark:text-primary-dark/60 text-sm m-0">{description}</p>
-            </div>
-            <div className="flex justify-end w-full h-24">
-                <div className="w-48 h-24 md:absolute bottom-0">{Image}</div>
-            </div>
-        </Link>
-    </li>
-)
-
 export const Content = () => {
     return (
         <>
             <Intro />
             <section className="mb-12">
-                <h3 className="mb-1 text-xl">Guides</h3>
-                <p className="text-[15px]">Set up PostHog to work the way you want it to.</p>
+                <h3 className="mb-1 text-xl">Resources</h3>
+                <p className="text-[15px]">Real-world use cases to get you started</p>
 
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
-                    <GuideItem
+                    <ResourceItem
+                        type="Guide"
                         title="Conversion funnels"
                         description="Build, analyze, and optimize funnels"
                         Image={
                             <StaticImage
                                 alt=""
+                                className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
@@ -64,12 +53,14 @@ export const Content = () => {
                         }
                         url="/tutorials/funnels"
                     />
-                    <GuideItem
+                    <ResourceItem
+                        type="Guide"
                         title="Track performance marketing"
                         description="Optimize ads and marketing channels"
                         Image={
                             <StaticImage
                                 alt=""
+                                className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
@@ -78,12 +69,14 @@ export const Content = () => {
                         }
                         url="/tutorials/performance-marketing"
                     />
-                    <GuideItem
+                    <ResourceItem
+                        type="Guide"
                         title="Reduce churn"
                         description="The bread and butter of long-term growth"
                         Image={
                             <StaticImage
                                 alt=""
+                                className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
@@ -92,12 +85,14 @@ export const Content = () => {
                         }
                         url="/tutorials/churn-rate"
                     />
-                    <GuideItem
+                    <ResourceItem
+                        type="Guide"
                         title="Building a cohort"
                         description="Group users by behavior for deeper analysis"
                         Image={
                             <StaticImage
                                 alt=""
+                                className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
@@ -106,12 +101,14 @@ export const Content = () => {
                         }
                         url="/tutorials/how-to-segment-users"
                     />
-                    <GuideItem
+                    <ResourceItem
+                        type="Guide"
                         title="Sales & revenue tracking"
                         description="Determine KPIs, who’s paying, revenue sources, and retention"
                         Image={
                             <StaticImage
                                 alt=""
+                                className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
@@ -120,12 +117,14 @@ export const Content = () => {
                         }
                         url="/tutorials/revenue"
                     />
-                    <GuideItem
+                    <ResourceItem
+                        type="Guide"
                         title="Calculate DAU/MAU ratio"
                         description="Popular engagement metrics that measure stickiness"
                         Image={
                             <StaticImage
                                 alt=""
+                                className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
@@ -152,12 +151,13 @@ export const Content = () => {
                 <p className="text-[15px]">Choose from a variety of pre-built templates for your stage of growth.</p>
 
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
-                    <GuideItem
+                    <ResourceItem
                         title="Product analytics"
                         description="Active users, feature flags frowth accounting, traffic sources"
                         Image={
                             <StaticImage
                                 alt=""
+                                className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
@@ -166,12 +166,13 @@ export const Content = () => {
                         }
                         url="/templates/product-analytics"
                     />
-                    <GuideItem
+                    <ResourceItem
                         title="Website traffic"
                         description="User, sessions, content performance"
                         Image={
                             <StaticImage
                                 alt=""
+                                className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
@@ -180,12 +181,13 @@ export const Content = () => {
                         }
                         url="/templates/website-dashboard"
                     />
-                    <GuideItem
+                    <ResourceItem
                         title="Realtime analytics"
                         description="Live users, sessions, traffic, sources"
                         Image={
                             <StaticImage
                                 alt=""
+                                className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
