@@ -50,7 +50,66 @@ This works wherever code you can add code to your `<head>` tag, for example, sit
 
 When you set up the snippet or JS library, it autocaptures events (similar to GA4’s [enhanced measurement](https://support.google.com/analytics/answer/9216061)) and they start showing up in your PostHog instance. Pageviews, clicks, inputs, and sessions are all captured without needing to create "properties," "streams," or instrument events yourself.
 
-## Reports and views (aka insights and dashboards)
+## Comparing PostHog and Google Analytics
+
+PostHog has much of the same functionality as Google Analytics, but much of it is tweaked and named differently. Here’s a quick comparison of the two:
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+  <thead>
+    <tr>
+      <td><strong>GA name</strong></td>
+      <td><strong>PostHog equivalent</strong></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Report</td>
+      <td>Insight</td>
+      <td>Query and filter analytics data and visualize results. Types include trends, funnels, retention, and more.</td>
+    </tr>
+    <tr>
+      <td>View</td>
+      <td>Dashboard</td>
+      <td>A collection of insights displayed together.</td>
+    </tr>
+    <tr>
+      <td>Audience</td>
+      <td>Persons</td>
+      <td>Represents a user or set of users who create events, potentially filtered by properties or behaviors.</td>
+    </tr>
+    <tr>
+      <td>Segment</td>
+      <td>Filter</td>
+      <td>A way to create a subset of your data.</td>
+    </tr>
+    <tr>
+      <td>Dimensions</td>
+      <td>Properties</td>
+      <td>Additional details added to events, persons, and groups such as location, browser, and status.</td>
+    </tr>
+    <tr>
+      <td>Goals and conversions</td>
+      <td>Actions</td>
+      <td>An event or collection of events representing a target behavior.</td>
+    </tr>
+    <tr>
+      <td>Client ID</td>
+      <td>Distinct ID</td>
+      <td>A unique identifier for a user.</td>
+    </tr>
+    <tr>
+      <td>Measurement ID</td>
+      <td>Project API key</td>
+      <td>The unique identifier for your project, used to send data to your PostHog instance.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+## Creating your first dashboard
 
 PostHog has the same functionality as Google Analytics reports and views. For us, they are [insights](/docs/product-analytics/insights) and [dashboards](/docs/product-analytics/dashboards). 
 
@@ -87,7 +146,7 @@ To create one, you:
 
 Each type has unique functionality such as direct SQL aggregations in trends, attribution type in funnels, return windows in retention, wild card groups in paths, and more.
 
-## Audience and segments (aka persons, groups, and cohorts)
+## Working with persons, groups, and cohorts
 
 Although PostHog is event-based, it still gathers details about users. To do an analysis similar to Google Analytics’ audiences or segments, we rely on [person](/docs/data/persons) and [group](/docs/product-analytics/group-analytics) data. 
 
@@ -100,7 +159,7 @@ Although PostHog is event-based, it still gathers details about users. To do an 
 
 You can then use all of this data in your insights. For example, you can aggregate an event series by unique users, unique groups, monthly active groups, and more. 
 
-## Filtering with dimensions (aka properties)
+## Filtering with properties
 
 Like Google Analytics, each of the event series, insights, and dashboards is filterable. Filters are largely created with our version of "dimensions," named [properties](/docs/data/events#event-properties). 
 
@@ -112,7 +171,7 @@ posthog.capture('signed up', {email: 'ian@posthog.com', paid: true});
 
 You can also use properties to create [cohorts](/docs/data/cohorts). These are lists of users meeting behavior or property criteria, such as completing an event for the first time or being a paid user. You can then use cohorts as filters throughout PostHog. 
 
-## Goals and conversions (aka actions)
+## Measuring target user behavior with actions
 
 The PostHog equivalent to goals and conversions are [actions](/docs/data/actions). An action is one or more events with filters matching a user’s behavior. For example, a "shown interest" action could include a visit to the pricing page, clicking a book demo button, or signing up.
 
