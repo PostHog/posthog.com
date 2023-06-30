@@ -48,7 +48,7 @@ const AppSidebar = ({ filters: { type, maintainer } }) => {
 }
 
 export default function App({ data }) {
-    const { pageData, documentation } = data
+    const { pageData, documentation, apps } = data
     const {
         body,
         excerpt,
@@ -94,10 +94,7 @@ export default function App({ data }) {
                     {
                         name: 'Apps',
                     },
-                    {
-                        name: '← Back',
-                        url: '/apps',
-                    },
+                    ...apps.nodes.map(({ frontmatter: { title }, fields: { slug } }) => ({ name: title, url: slug })),
                 ]}
                 breadcrumb={[{ name: 'Apps', url: '/apps' }, { name: title }]}
             >
@@ -147,6 +144,17 @@ export const query = graphql`
             headings {
                 depth
                 value
+            }
+        }
+        apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
+            nodes {
+                id
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                }
             }
         }
     }
