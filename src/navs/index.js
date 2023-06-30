@@ -687,6 +687,12 @@ export const communityMenu = {
             url: '/tutorials',
             children: [
                 {
+                    name: 'All guides',
+                    icon: 'Home',
+                    color: 'seagreen',
+                    url: '/tutorials',
+                },
+                {
                     name: 'Product OS',
                     icon: 'Stack',
                     color: 'salmon',

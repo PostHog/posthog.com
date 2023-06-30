@@ -60,7 +60,7 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
                 Your PostHog.com community profile lets you ask questions and get early access to beta features.
             </p>
             <p className="text-[13px] my-2 dark:text-white p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
-                <strong>Tip:</strong> If you've ever asked a question on PostHog.com, you already have an account!
+                <strong>Tip:</strong> PostHog.com accounts are separate from signing into the PostHog app.
             </p>
             <CallToAction onClick={() => setState('login')} width="full" size="md">
                 Login to posthog.com
@@ -137,11 +137,13 @@ export default function Sidebar() {
                 {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> : <Login />}
             </SidebarSection>
 
-            <SidebarSection title="My discussions">
-                <Link to="/community/dashboard" className="text-sm">
-                    Visit my discussions
-                </Link>
-            </SidebarSection>
+            {user?.profile && (
+                <SidebarSection title="My discussions">
+                    <Link to="/community/dashboard" className="text-sm">
+                        Visit my discussions
+                    </Link>
+                </SidebarSection>
+            )}
 
             {topicSubscriptions && topicSubscriptions?.length > 0 && (
                 <SidebarSection title="Jump to subscribed topics">

@@ -113,12 +113,12 @@ const ProductTiersModal = ({
                             ).toFixed(numberOfSigFigs)}
                         </span>
                         {/* the product types we have are plural, so we need to singularlize them and this works for now */}
-                        <span className="text-black/50 dark:text-white/50">
+                        <span className="text-primary/50 dark:text-primary-dark/50">
                             /{plan.unit ? plan.unit.replace(/s$/, '') : 'unit'}
                         </span>
                     </p>
                     {isFirstTierFree && (
-                        <p className="text-black/50 dark:text-white/50">
+                        <p className="text-primary/50 dark:text-primary-dark/50">
                             First {convertLargeNumberToWords(tiers[0].up_to)} {plan.unit}s/mo free
                         </p>
                     )}
@@ -215,7 +215,7 @@ export const getPlanLimit = (plan?: BillingV2PlanType): JSX.Element => {
     return (
         <span className="font-bold">
             {convertLargeNumberToWords(plan.free_allocation)} {plan.unit}s
-            <span className="font-normal text-black/50 dark:text-white/50">/mo</span>
+            <span className="font-normal text-primary/50 dark:text-primary-dark/50">/mo</span>
         </span>
     )
 }
@@ -242,12 +242,12 @@ const AddonTooltipContent = ({
                 {addon.name} <AddonTag />
             </p>
             <p className="text-sm mb-3">{addon.description}</p>
-            <p className="text-sm text-black/50">
+            <p className="text-sm text-primary/50 dark:text-primary-dark/75">
                 {isFirstTierFree &&
                     `First ${convertLargeNumberToWords(tiers?.[0].up_to || null)} ${
                         referencePlan.unit
                     }s/mo free, then `}
-                <span className="font-bold text-base text-black">
+                <span className="font-bold text-base text-primary dark:text-primary-dark/75">
                     ${parseFloat((isFirstTierFree ? tiers?.[1]?.unit_amount_usd : tiers?.[0]?.unit_amount_usd) || '')}
                 </span>
                 {/* the product types we have are plural, so we need to singularlize them and this works for now */}
@@ -370,7 +370,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                     className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium border-b border-border dark:border-dark pb-4 pl-4 md:pl-0`}
                 >
                     <p className="font-bold mb-0">PostHog OS ships with all products</p>
-                    <p className="text-black/50 dark:text-white/50 text-sm mb-0">
+                    <p className="text-primary/50 dark:text-primary-dark/50 text-sm mb-0">
                         Start with our generous free tiers and subcribe when you need more volume. Set billing limits so
                         you never receive an unexpected bill.
                     </p>
@@ -392,7 +392,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                             <p className="font-bold mb-0 text-center md:text-left">
                                                 {plan.free_allocation ? 'Free' : 'Paid'}
                                             </p>
-                                            <p className="hidden md:block text-black/50 dark:text-white/50 text-sm mb-3">
+                                            <p className="hidden md:block text-primary/50 dark:text-primary-dark/50 text-sm mb-3">
                                                 {plan.free_allocation
                                                     ? 'Generous free usage on every product. Best for early-stage startups and hobbyists.'
                                                     : 'The whole hog. Pay per use with billing limits to control spend. Priority support.'}
@@ -407,7 +407,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                     {plan.free_allocation ? 'Free' : 'Included'}
                                                 </p>
                                                 {!plan.free_allocation && (
-                                                    <p className="hidden md:block text-black/50 dark:text-white/50 text-sm mb-3">
+                                                    <p className="hidden md:block text-primary/50 dark:text-primary-dark/50 text-sm mb-3">
                                                         With any paid product plan
                                                     </p>
                                                 )}
@@ -478,7 +478,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                 </div>
                             </div>
                             {/* PRODUCT FEATURES & ADDONS */}
-                            <div className="bg-accent dark:bg-accent-dark p-1 rounded md:ml-6">
+                            <div className="bg-accent dark:bg-accent-dark p-1 border border-light dark:border-dark rounded md:ml-6">
                                 {product.plans?.[product.plans.length - 1]?.features
                                     // don't include features that are in the excluded features list
                                     ?.filter((f) => !excludedFeatures.includes(f.key))
@@ -648,7 +648,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                                     {plan.free_allocation ? 'Free' : 'Included'}
                                                 </p>
                                                 {!plan.free_allocation && (
-                                                    <p className="text-sm text-black/50 dark:text-white/50">
+                                                    <p className="text-sm text-primary/50 dark:text-primary-dark/50">
                                                         With any paid product plan
                                                     </p>
                                                 )}
