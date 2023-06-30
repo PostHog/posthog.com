@@ -18,7 +18,7 @@ We've written extensively comparing ClickHouse to other analytical databases, in
 
 ClickHouse with Amazon Redshift are the most comparable databases we've explored to date. While ClickHouse is still faster, Redshift's infrastructure optimizations makes the comparison closer than usual. While query speed on most databases are orders of magnitude slower than ClickHouse, Redshift is only 2-5x slower on a majority of queries.
  
-There are now ample configurations for ClickHouse given the advent of ClickHouse Cloud AWS and ClickHouse Cloud GCP, and the same goes for Redshift with the recent AQUA and AutoMV update. This comparison will speak more broadly on each product, but there are certain optimizations that could inch either tool in any direction. 
+Both have multiple configurations such as ClickHouse Cloud AWS, ClickHouse Cloud GCP, and Redshift's recent AQUA and AutoMV update. Certain optimizations from these could make query speeds even closer, but this comparison will speak more broadly on each product.
 
 ## Overview
 
