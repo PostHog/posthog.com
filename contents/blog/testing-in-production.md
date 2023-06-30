@@ -1,6 +1,6 @@
 ---
-title: "Testing in production: what it is, why we do it, and how"
-date: 2023-06-26
+title: "Why we test in production (and you should to)"
+date: 2023-06-30
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
