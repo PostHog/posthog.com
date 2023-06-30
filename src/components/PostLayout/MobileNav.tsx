@@ -9,8 +9,7 @@ import { navigate } from 'gatsby'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import slugify from 'slugify'
 
-const menuButtonClasses = `bg-border/20 dark:bg-border-dark/20 bg-accent dark:bg-accent-dark border border-border dark:border-dark flex space-x-2 items-center font-semibold active:top-[0.5px]
-active:scale-[.98] transition-transform text-black dark:text-white shadow-md rounded-md`
+const menuButtonClasses = `bg-accent dark:bg-accent-dark border border-light dark:border-dark inline-flex space-x-2 items-center font-semibold active:top-[0.5px] text-[15px] py-3 px-5 active:scale-[.98] transition-transform text-black dark:text-white shadow-md rounded-md`
 
 const container = {
     hidden: { opacity: 0 },
@@ -324,27 +323,24 @@ export default function MobileNav() {
     const [open, setOpen] = useState<null | string>(null)
     const { tableOfContents, filePath, title, sidebar, darkMode } = usePost()
     return (
-        <div className="sticky bottom-[57px] px-5 pb-4 z-[99999999] block lg:hidden">
-            <div className="flex">
-                <span className="bg-accent dark:bg-accent-dark">
-                    <button onClick={() => setOpen('menu')} className={`py-2 px-4 ${menuButtonClasses}`}>
-                        Chapters
-                    </button>
-                </span>
-
-                {tableOfContents && tableOfContents?.length > 0 && (
-                    <span className="bg-accent dark:bg-accent-dark ml-auto">
-                        <button onClick={() => setOpen('toc')} className={`py-2 px-4 ${menuButtonClasses}`}>
-                            On this page...
-                        </button>
-                    </span>
-                )}
+        <>
+            <div className="sticky bottom-[85px] left-2 z-[99999999] inline-block lg:hidden">
+                <button onClick={() => setOpen('menu')} className={`${menuButtonClasses}`}>
+                    Menu
+                </button>
             </div>
+            {tableOfContents && tableOfContents?.length > 0 && (
+                <div className="sticky bottom-[85px] left-[calc(100%_-_1rem)] z-[99999999] inline-block lg:hidden">
+                    <button onClick={() => setOpen('toc')} className={`${menuButtonClasses}`}>
+                        On this page...
+                    </button>
+                </div>
+            )}
             <AnimatePresence>
                 {open === 'menu' && <MobileMenu setOpen={setOpen} />}
                 {open === 'toc' && <MobileTOC setOpen={setOpen} />}
                 {open === 'sidebar' && <MobileSidebar setOpen={setOpen} />}
             </AnimatePresence>
-        </div>
+        </>
     )
 }

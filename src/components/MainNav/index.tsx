@@ -323,7 +323,7 @@ export const Main = () => {
                                         <li className="px-1">
                                             <DarkModeToggle />
                                         </li>
-                                        <li className="px-1">
+                                        <li className="hidden md:block px-1">
                                             <button
                                                 onClick={toggleWideMode}
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
@@ -393,7 +393,7 @@ export const Mobile = () => {
     const { menu, parent } = useLayoutData()
 
     return (
-        <ul className="flex justify-between fixed bottom-0 w-full lg:hidden list-none m-0 p-0 border-t border-border dark:border-dark bg-accent dark:bg-accent-dark z-[9999] px-4">
+        <ul className="grid grid-cols-5 gap-[2px] fixed bottom-0 w-full lg:hidden list-none m-0 p-0 px-2 border-t border-border dark:border-dark bg-accent dark:bg-accent-dark z-[9999]">
             {menu.map((menuItem) => {
                 const active = menuItem.name === parent?.name
                 const { name, url, icon } = menuItem
@@ -402,7 +402,7 @@ export const Mobile = () => {
                     <li className="h-full" key={name}>
                         <Link
                             to={url}
-                            className={`text-xs font-medium relative p-2 flex flex-col space-y-1 items-center ${
+                            className={`text-[13px] font-medium relative p-4 flex flex-col space-y-1 items-center ${
                                 active ? '' : 'opacity-70 hover:opacity-100'
                             }`}
                         >
