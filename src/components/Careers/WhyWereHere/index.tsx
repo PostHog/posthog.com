@@ -14,7 +14,7 @@ export const WhyWereHere = () => {
             <div className="text-left">
                 <Structure.Section width="5xl" className="text-lg">
                     <div className="lg:grid grid-cols-4 gap-8">
-                        <div className="relative text-opacity-80 text-gray-100 bg-white/90 dark:bg-accent-dark/90 backdrop-blur shadow-xl pt-6 pb-12 px-12 md:px-20 rounded col-span-3">
+                        <div className="relative text-opacity-80 text-gray-100 bg-accent dark:bg-accent-dark border border-light dark:border-dark backdrop-blur pt-6 pb-12 px-12 md:px-20 rounded col-span-3">
                             <div className="before:bg-accent dark:before:bg-accent-dark before:left-0 before:w-[6px] before:top-0 before:h-full before:absolute">
                                 <div className="flex items-center space-between w-full pb-4 mb-8 border-b border-light dark:border-dark">
                                     <div className="flex-1">
