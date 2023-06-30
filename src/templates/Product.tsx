@@ -281,7 +281,7 @@ export default function Product({ data, location, pageContext }) {
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>
-                <Footer location={location} />
+                {/* <Footer location={location} /> */}
             </PostLayout>
         </Layout>
     )
