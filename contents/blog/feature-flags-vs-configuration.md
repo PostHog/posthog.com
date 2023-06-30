@@ -15,9 +15,7 @@ tags:
  - Explainers
 ---
 
-Sometimes you want to change the behavior of your app without changing the code. Both feature flags and configurations are options for doing this, but it may not be clear which is the right option to use.
-
-This post compares configurations and feature flags, and how to choose the right one for your use case.
+Sometimes you want to change the behavior of your app without changing the code. Both feature flags and configurations are options for doing this. This guide explains each method, and how to choose the right one for your use case.
 
 ## What is a configuration?
 
