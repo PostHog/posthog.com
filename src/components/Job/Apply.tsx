@@ -78,7 +78,7 @@ const components = {
         }
 
         return (
-            <div className="relative h-24 w-full border border-gray-accent-light dark:border-gray-accent-dark border-dashed rounded-md flex justify-center items-center text-black/50 dark:text-white/50">
+            <div className="relative h-24 w-full border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-md flex justify-center items-center text-black/50 dark:text-white/50">
                 <div className="absolute">
                     {fileName ? (
                         <p className="!m-0">{fileName}</p>

@@ -33,7 +33,7 @@ export default function CommunityPage() {
             <SectionTitle>My discussions</SectionTitle>
 
             {topicSubscriptions && topicSubscriptions?.length > 0 && (
-                <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark px-4 mb-4 rounded">
+                <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 mb-4 rounded">
                     <h4 className="text-sm font-semibold opacity-60 mb-0">Jump to subscribed topics:</h4>
                     <ul className="list-none m-0 p-0 flex flex-wrap">
                         {topicSubscriptions.map(({ label, slug }) => {
