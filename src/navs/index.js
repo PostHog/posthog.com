@@ -1662,7 +1662,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Getting started',
-                    url: '/docs/product-analytics/welcome',
+                    url: '/docs/product-analytics/start',
                     icon: 'GraduationCap',
                     color: 'red',
                 },
@@ -1725,6 +1725,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Tools',
+                },
+                {
+                    name: 'Autocapture',
+                    url: '/docs/product-analytics/autocapture',
+                    icon: 'Bolt',
+                    color: 'red',
                 },
                 {
                     name: 'Group analytics',

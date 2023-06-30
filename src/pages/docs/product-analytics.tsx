@@ -172,7 +172,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     placeholder="none"
                                     objectFit="contain"
                                     quality={100}
-                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                    src="./images/template-product-analytics.png"
                                 />
                             }
                             url="/templates/product-analytics"
@@ -186,7 +186,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     placeholder="none"
                                     objectFit="contain"
                                     quality={100}
-                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                    src="./images/template-website-traffic.png"
                                 />
                             }
                             url="/templates/website-dashboard"
@@ -200,7 +200,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
                                     placeholder="none"
                                     objectFit="contain"
                                     quality={100}
-                                    src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                    src="./images/template-realtime-analytics.png"
                                 />
                             }
                             url="/templates/real-time-dashboard"

@@ -138,6 +138,23 @@ export const Bell = ({ className = '', ...other }: { className?: string }): JSX.
     </svg>
 )
 
+export const Bolt = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        className={`fill-current ${className}`}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        {...other}
+    >
+        <path
+            fillRule="evenodd"
+            d="M12.5 3.159 4.678 14.5h5.572c.69 0 1.25.56 1.25 1.25v5.091L19.322 9.5H13.75c-.69 0-1.25-.56-1.25-1.25V3.159Zm-.779-1.513C12.417.636 14 1.129 14 2.356V8h5.798a1.25 1.25 0 0 1 1.029 1.96l-8.548 12.394c-.696 1.01-2.279.517-2.279-.71V16H4.202a1.25 1.25 0 0 1-1.029-1.96l8.548-12.394Z"
+            clipRule="evenodd"
+        />
+    </svg>
+)
+
 export const Book = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"
