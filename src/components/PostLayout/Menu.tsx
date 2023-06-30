@@ -150,7 +150,7 @@ export default function Menu({
                                     className={`flex items-center justify-center ${
                                         color
                                             ? `text-${color} bg-${color} bg-opacity-10 rounded-sm w-[30px] h-[30px]`
-                                            : 'w-[25px] h-[25px] opacity-70'
+                                            : 'w-[25px] h-[25px] basis-[25px] shrink-0 opacity-70'
                                     }`}
                                 >
                                     {typeof icon === 'string' ? getIcon(icon) : icon}
