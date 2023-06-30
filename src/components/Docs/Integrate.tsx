@@ -89,7 +89,28 @@ export const Frameworks = () => {
 const query = graphql`
     {
         sdks: allMdx(
-            filter: { slug: { glob: "docs/libraries/*" } }
+            filter: {
+                fields: {
+                    slug: {
+                        in: [
+                            "/docs/libraries/js"
+                            "/docs/libraries/android"
+                            "/docs/libraries/elixir"
+                            "/docs/libraries/flutter"
+                            "/docs/libraries/go"
+                            "/docs/libraries/ios"
+                            "/docs/libraries/java"
+                            "/docs/libraries/node"
+                            "/docs/libraries/php"
+                            "/docs/libraries/python"
+                            "/docs/libraries/react"
+                            "/docs/libraries/react-native"
+                            "/docs/libraries/ruby"
+                            "/docs/libraries/rust"
+                        ]
+                    }
+                }
+            }
             sort: { fields: fields___pageViews, order: DESC }
         ) {
             nodes {
@@ -97,7 +118,27 @@ const query = graphql`
             }
         }
         frameworks: allMdx(
-            filter: { slug: { glob: "docs/libraries/*" } }
+            filter: {
+                fields: {
+                    slug: {
+                        in: [
+                            "/docs/libraries/docusaurus"
+                            "/docs/libraries/gatsby"
+                            "/docs/libraries/google-tag-manager"
+                            "/docs/libraries/next-js"
+                            "/docs/libraries/nuxt-js"
+                            "/docs/libraries/retool"
+                            "/docs/libraries/rudderstack"
+                            "/docs/libraries/segment"
+                            "/docs/libraries/sentry"
+                            "/docs/libraries/slack"
+                            "/docs/libraries/shopify"
+                            "/docs/libraries/vue-js"
+                            "/docs/libraries/wordpress"
+                        ]
+                    }
+                }
+            }
             sort: { fields: fields___pageViews, order: DESC }
         ) {
             nodes {
