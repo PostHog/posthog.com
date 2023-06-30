@@ -792,12 +792,6 @@ export const companyMenu = {
             icon: 'Calendar',
             color: 'red',
             url: '/changelog/2023',
-            children: [
-                { name: '2023', url: '/changelog/2023' },
-                { name: '2022', url: '/changelog/2022' },
-                { name: '2021', url: '/changelog/2021' },
-                { name: '2020', url: '/changelog/2020' },
-            ],
         },
         { name: 'Team', icon: 'Profile', color: 'blue', url: '/team' },
         { name: 'Handbook', icon: 'Book', color: 'seagreen', url: '/handbook', children: handbookSidebar },
