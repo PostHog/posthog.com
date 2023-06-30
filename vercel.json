@@ -243,7 +243,6 @@
             "destination": "/handbook/people/hiring-process/marketing-hiring"
         },
         { "source": "/docs/plugins/maxmind", "destination": "/apps" },
-        { "source": "/team", "destination": "/handbook/company/team" },
         { "source": "/contact", "destination": "/contact-sales" },
         { "source": "/docs/integrate/third-party", "destination": "/docs/integrate" },
         {

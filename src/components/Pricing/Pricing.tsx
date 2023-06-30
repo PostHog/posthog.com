@@ -108,13 +108,13 @@ const Pricing = (): JSX.Element => {
             <PricingCalculator />
 
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
+                <h2 className="text-2xl m-0 flex items-center border-b border-light dark:border-dark pb-4">
                     <span>More options</span>
                 </h2>
                 <OtherOptions />
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
+                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Questions</h2>
                 <FAQs />
             </section>
             <section className="bg-primary my-12 md:px-4">

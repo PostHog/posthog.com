@@ -1193,3 +1193,21 @@ li.squeak-left-border {
         @apply inline m-0;
     }
 }
+
+/* slider overrides */
+.rc-slider {
+    /* entire bar */
+    .rc-slider-rail {
+        @apply h-[8px] rounded-full bg-black/10 dark:bg-white/10;
+    }
+
+    /* filled in portion of bar */
+    .rc-slider-track {
+        @apply h-[8px];
+    }
+
+    /* legend plots */
+    .rc-slider-dot {
+        @apply hidden;
+    }
+}

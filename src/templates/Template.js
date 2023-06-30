@@ -34,8 +34,8 @@ export default function Template({ data }) {
             >
                 <section>
                     <div className="lg:max-w-[880px] lg:pr-5 px-5 lg:px-0 mx-auto">
-                        <h1 className="text-center mt-0 mb-12 hidden lg:block">{title}</h1>
-                        <h2 className="text-center mt-0 mb-6">{subtitle}</h2>
+                        <h1 className="text-center mt-0 mb-2 hidden lg:block">{title}</h1>
+                        <h3 className="text-center mt-0 mb-6 font-semibold text-xl opacity-50">{subtitle}</h3>
                         <GatsbyImage image={getImage(featuredImage)} alt="" />
                         <article>
                             <MDXProvider components={{ ...shortcodes, Section }}>
