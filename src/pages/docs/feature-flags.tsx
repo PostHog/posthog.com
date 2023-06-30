@@ -1,15 +1,13 @@
 import React from 'react'
-import { graphql } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
-import { Tutorials } from 'components/Docs/Tutorials'
-import { GettingStarted } from 'components/Docs/GettingStarted'
 import List from 'components/List'
 import ResourceItem from 'components/Docs/ResourceItem'
 import { CallToAction } from 'components/CallToAction'
+import { docsMenu } from '../../navs'
 
 export const quickLinks = [
     {
@@ -91,9 +89,20 @@ export const Intro = ({ image = true }) => (
     </div>
 )
 
-export const Content = () => {
+export const Content = ({ quickLinks = false }) => {
     return (
         <>
+            {quickLinks && (
+                <section>
+                    <h3 className="mt-0 text-xl">Quick links</h3>
+                    <List
+                        className="grid grid-cols-3 gap-2 mb-6"
+                        items={docsMenu.children[3].children
+                            .filter(({ url }) => url)
+                            .map(({ url, name, icon, color }) => ({ label: name, url, icon, iconColor: color }))}
+                    />
+                </section>
+            )}
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
