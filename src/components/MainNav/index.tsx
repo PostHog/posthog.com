@@ -20,6 +20,7 @@ import { Menu } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { motion } from 'framer-motion'
 import HoverTooltip from 'components/Tooltip'
+import { SignupCTA } from 'components/SignupCTA'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -227,6 +228,14 @@ export const Main = () => {
         }
     }, [])
 
+    const toggleWideMode = () => {
+        const wideMode = !fullWidthContent
+        setFullWidthContent(wideMode)
+        if (posthog) {
+            posthog.people.set({ preferred_viewing_mode: wideMode ? 'wide' : 'standard' })
+        }
+    }
+
     return (
         <div>
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
@@ -265,9 +274,7 @@ export const Main = () => {
                         })}
                     </ul>
                     <div className="flex items-center justify-end">
-                        <CallToAction size="sm" type="outline" className="hidden sm:flex mr-2 " childClassName="">
-                            Get started
-                        </CallToAction>
+                        <SignupCTA size="sm" type="outline" className="hidden sm:flex mr-2" text="Get started" />
                         <HoverTooltip
                             content={() => (
                                 <div className="text-xs">
@@ -318,7 +325,7 @@ export const Main = () => {
                                         </li>
                                         <li className="px-1">
                                             <button
-                                                onClick={() => setFullWidthContent(!fullWidthContent)}
+                                                onClick={toggleWideMode}
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
                                             >
                                                 <div>

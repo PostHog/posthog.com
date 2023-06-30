@@ -1,7 +1,7 @@
 import React from 'react'
 import { IDocumentation } from './types'
 import { Intro as SessionReplayIntro } from '../../pages/docs/session-replay'
-import { Intro as ProductAnalyticsIntro } from '../../pages/docs/product-analytics'
+import { Content as ProductAnalyticsIntro } from '../../pages/docs/product-analytics'
 import { Intro as FeatureFlagIntro } from '../../pages/docs/feature-flags'
 import { Intro as ExperimentsIntro } from '../../pages/docs/experiments'
 

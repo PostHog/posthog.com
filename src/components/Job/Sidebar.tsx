@@ -62,7 +62,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                     </Link>
                 </h3>
                 <ul className="list-none m-0 p-0 flex flex-wrap">
-                    {team.map(({ avatar: { url: avatar }, firstName, lastName, country, companyRole }) => {
+                    {team.map(({ avatar: { url: avatar }, firstName, lastName, country, companyRole, squeakId }) => {
                         const name = [firstName, lastName].filter(Boolean).join(' ')
                         return (
                             <li
@@ -74,7 +74,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                 [&:nth-child(4n+4)]:bg-yellow 
                                 "
                             >
-                                <Link to={`/handbook/company/team#${kebabCase(name) + '-' + kebabCase(companyRole)}`}>
+                                <Link to={`/community/profiles/${squeakId}`}>
                                     <Tooltip
                                         placement="top-end"
                                         className="whitespace-nowrap"
@@ -106,9 +106,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
             {teamLead && (
                 <SidebarSection title="Team lead" className="-mt-2">
                     <Link
-                        to={`/handbook/company/team#${
-                            kebabCase(teamLeadName) + '-' + kebabCase(teamLead?.companyRole)
-                        }`}
+                        to={`/community/profiles/${teamLead?.squeakId}`}
                         className="flex space-x-2 items-center rounded p-1 -mx-1 -mt-1 hover:bg-gray-accent/50 
                     relative
                     active:top-[0.5px]
