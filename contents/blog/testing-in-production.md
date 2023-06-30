@@ -16,9 +16,9 @@ tags:
 
 At PostHog, we test in production. There are many misconceptions about doing this. It **does not** mean:
 
-- we commit to master every time we make a change
-- we randomly click around once code releases to make sure it works
-- we ship code into production without testing it
+- we commit to master every time we make a change.
+- we randomly click around once code releases to make sure it works.
+- we ship code into production without testing it.
 
 Testing in production *successfully* is a multi-step process, and this post goes over what it is, why we do it, and how to do it well.
 
@@ -32,21 +32,27 @@ Testing in production brings to light problems with code not surfaced by local t
 
 Testing in production includes techniques like:
 
-- **Usage tracking:** understanding how users are using a product with analytics, session replays, A/B testing.
-- **Feedback and [surveys](/docs/surveys/manual):** understanding how users are experiencing a product through qualitative feedback.
-- **Monitoring:** tracking app, query and site performance, error rate, and logs.
-- **Load, spike, soak testing:** checking code for issues and performance when under a high volume or stressful load.
-- **Shadowing, mirroring, dark launch:** evaluating new code with mock production data, rather than synthetic data.
-- **Integration testing:** checking services, features, and infrastructure work together.
-- **Alerts:** notifying relevant team members when issues and errors occur.
+- **Usage tracking:** Understanding how users are using a product with analytics, session replays, A/B testing.
 
-### When should you not test in production?
+- **Feedback and [surveys](/docs/surveys/manual):** Understanding how users are experiencing a product through qualitative feedback.
+
+- **Monitoring:** Tracking app, query and site performance, error rate, and logs.
+
+- **Load, spike, soak testing:** Checking code for issues and performance when under a high volume or stressful load.
+
+- **Shadowing, mirroring, dark launch:** Evaluating new code with mock production data, rather than synthetic data.
+
+- **Integration testing:** Checking services, features, and infrastructure work together.
+
+- **Alerts:** Notifying relevant team members when issues and errors occur.
+
+### When should you _not_ test in production?
 
 Testing in production comes with risks. Tests fail and failures in production can cause issues for real users if you aren’t careful. Because of this, testing in production’s practicality depends on:
 
-- the size of the business
-- the potential negative impact of the change
-- the speed to identify and resolve issues
+- the size of the business.
+- the potential negative impact of the change.
+- the speed to identify and resolve issues.
 
 For example, testing a UI change to a small web consumer web app with feature flags is likely safe to do in production. The impact is small and any issues get mitigated quickly. Testing an algorithm update on a massive, automated financial trading product with slow deployments is better to do away from production.
 
@@ -82,7 +88,7 @@ At best, testing in a staging environment is a bit like confirmation bias. It wo
 
 ## How we test in production
 
-The key to testing in production is doing it safely. Testing in production is detrimental if it led to more issues than it solved. To do testing in production safely, you need ways to rollout, monitor, and rollback tests effectively. For us at PostHog, once code is beyond the local environment, this happens largely in two stages: deployment and release.
+The key to testing in production is doing it safely. Testing in production is detrimental if it leads to more issues than it solves. To test in production safely, you need ways to rollout, monitor, and rollback tests effectively. For us at PostHog, once code is beyond the local environment, this happens largely in two stages: deployment and release.
 
 > **The importance of local tests:** Good local tests makes testing in production much safer. We run frontend unit tests, visual regression tests, backend tests, and end-to-end tests. All of these run locally and on new pull requests. They ensure merged code isn’t breaking in ways we expect it to break. This lowers the risk of testing in production.
 
