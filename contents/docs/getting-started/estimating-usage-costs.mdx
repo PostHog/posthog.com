@@ -4,24 +4,25 @@ nextPage: ./next-steps.mdx
 featuredImage: ./images/docs-groups.png
 ---
 
-Like any usage-based tool, it can be a bit daunting to figure out how much adopting a usage-based platform like PostHog is going to cost you. Fortunately, we've made it fairly simple to get a good idea of how much volume you'll have for any of our products.
+It can be daunting to figure out how much a usage-based platform like PostHog will cost, but there are simple ways to estimate your usage and costs.
 
 This guide explains why we price based on usage, how to estimate your usage, and tips on how to reduce your costs.
 
-## Why we price based on usage
+## Why do we price based on usage?
 
 Really it comes down to this: The more you use PostHog, the more value you get, and the more it costs us to process and store your data. Thus, we charge based on usage.
 
-### But what about charging per monthly active user? Isn't that also usage?
+### What about charging by monthly active users? Isn't that also usage?
 
-Kind of, yes, but actually no. Some users have tons of value. They use your product a ton, they respond to your feedback surveys, and they store a lot of data in your platform. Other users hit your landing page and bounce immediately. From a value perspective, you shouldn't need to pay the same amount for both of these users. It makes more sense to pay only for the value you receive, which is directly tied to user activity such as events, session replays or data.
+Kind of, yes, but actually no. Some users are very valuable. They use your product a ton, they respond to your feedback surveys, and they store a lot of data in your platform. Other users hit your landing page and bounce immediately. 
 
+From a value perspective, you shouldn't need to pay the same amount for both of these users. It makes more sense to pay _only for the value you receive_, which is _directly tied to user activity_ such as events, session replays, or data.
 
-## How do I estimate my PostHog usage?
+## How do I estimate my event usage?
 
-If you're already using another tool and are looking to move to PostHog (welcome!), then the other tool may be able to give you the exact numbers you are looking for. You might need to ask their support directly for this data if it's not easy to find right away.
+If you're already using another tool and want to switch to PostHog (welcome!), your existing tool may have the exact numbers you need. You might need to ask their support for this data directly if it's not easy to find.
 
-If you're just getting started with this type of product, you have two options to estimate your usage.
+Alternatively, you can use one of these two methods.
 
 ### Option 1: Sign up for free and get an accurate projected volume in a few days
 
@@ -119,21 +120,23 @@ Because products in different categories have different types of usage, we've do
 
 As you can see, event counts vary wildly across different types of products, but this should help you get closer to an estimated event count based on your product and MAU count.
 
-> Event counts also vary based upon whether you are using [autocapture](/docs/integrate/ingest-live-data#use-autocapture), [custom capture](/docs/integrate/ingest-live-data#capture-user-events) or a combination of both.  
+Event counts also vary based upon whether you are using [autocapture](/docs/integrate/ingest-live-data#use-autocapture), [custom capture](/docs/integrate/ingest-live-data#capture-user-events) or a combination of both. Custom capture may be better if you have lots of users.
 
-### What about other products like Session replay, Feature flags, etc?
+### Estimating your monthly bill
+
+Once you've figured your projected event usages, you can either:
+
+1. Use the pricing calculator on our [pricing](/pricing) page and calculate your estimated costs for adopting PostHog. 
+2. If you're getting your estimated figures from your free PostHog account, you can see your projected volumes and costs right there in your [billing dashboard](https://app.posthog.com/organization/billing).
+
+And don't forget, we have generous free volumes for every one of our products – even if you're on a paid plan!
+## What about other products like Session replay, Feature flags, etc?
 
 We don't have data on those yet, unfortunately. In that case, we'd recommend going with option 1 above – signing up for a free account and getting an accurate projection in just a few days.
 
-### Pricing calculator
-
-Once you've got your figures you can visit the [pricing](/pricing) page and calculate your estimated costs for adopting PostHog. Or, if you're getting your estimated figures from your free PostHog account, you can see your projected volumes and costs right there in your [billing dashboard](https://app.posthog.com/organization/billing).
-
-And don't forget, we have generous free volumes for every one of our products - even if you're on a paid plan!
-
 ## How to reduce your PostHog costs
 
-We've written tutorials to help you best control your usage and only capture the data you need:
+You have two options:
 
-- [How to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
-- [How to only record the sessions you want](/tutorials/limit-session-recordings)
+- Want to reduce events? Read [How to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
+- Want to reduce recordings? Read [How to only record the sessions you want](/tutorials/limit-session-recordings)
