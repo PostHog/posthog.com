@@ -73,7 +73,7 @@ concat(ifNull(toString(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.prop
 
 Second, we added [nullish coalescing](https://github.com/PostHog/posthog/pull/16276) to change the cumbersome `ifNull(x, y)` function to `x ?? y`. Not having to use `ifNull()` makes dealing with nulls simpler.
 
-Third, we ran into an issue where the expression `"something that could be null" != "anything"` returned nothing instead of everything. Our first solution for this broke Clickhouse's part/granule optimization and had to be rolled back. Instead, we changed the compare operation and added a `nullable` [property](https://github.com/PostHog/posthog/pull/16259) on all fields which defaults to `False`. This opts fields into special null handling contraint that doesn't break ClickHouse.
+Third, we ran into an issue where the expression `"something that could be null" != "anything"` returned nothing instead of everything. Our first solution for this broke Clickhouse's part/granule optimization and had to be rolled back. Instead, we changed the compare operation and added a `nullable` [property](https://github.com/PostHog/posthog/pull/16259) on all fields which defaults to `False`. This opts fields into special null handling constraint that doesn't break ClickHouse.
 
 Finally, handling numbers remained the same because returning `0` for null number properties meaningfully affects calculations; they get added as non-null to counts. To prevent this, PostHog continues to return null and lets ClickHouse skip these in aggregations.
 
