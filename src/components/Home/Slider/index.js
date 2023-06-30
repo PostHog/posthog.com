@@ -96,7 +96,7 @@ export default function Slider() {
                 <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center  lg:static">
                     <button
                         onClick={() => slideRef.slickPrev()}
-                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30"
+                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
                     >
                         <ArrowLeft className="w-10" />
                     </button>
@@ -123,7 +123,7 @@ export default function Slider() {
                 <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center  lg:static">
                     <button
                         onClick={() => slideRef.slickNext()}
-                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30"
+                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
                     >
                         <ArrowRight className="w-10" />
                     </button>
