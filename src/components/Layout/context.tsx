@@ -29,7 +29,7 @@ export const LayoutProvider = ({ children, ...other }: { children: React.ReactNo
     const parent =
         other.parent ??
         menu.find(({ children, url }) => {
-            const currentURL = window?.location?.pathname
+            const currentURL = typeof window !== 'undefined' && window?.location?.pathname
             return currentURL === url.split('?')[0] || recursiveSearch(children, currentURL)
         })
 
@@ -38,7 +38,7 @@ export const LayoutProvider = ({ children, ...other }: { children: React.ReactNo
     const activeInternalMenu =
         other.activeInternalMenu ??
         internalMenu?.find((menuItem) => {
-            const currentURL = window?.location?.pathname
+            const currentURL = typeof window !== 'undefined' && window?.location?.pathname
             return currentURL === menuItem.url.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
         })
 
