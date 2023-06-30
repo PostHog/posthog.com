@@ -83,7 +83,7 @@ export default function CustomerData() {
                             </div>
                         </div>
                     </div>
-                    <StaticImage src="./images/host-hogs.png" className="-mx-8 md:mx-0" />
+                    <StaticImage src="./images/host-hogs.png" className="w-full" imgClassName="w-full" />
                 </div>
             </div>
         </section>
