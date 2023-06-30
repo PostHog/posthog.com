@@ -58,7 +58,6 @@ h5,
 h6 {
     color: inherit;
     font-variation-settings: 'wght' 800;
-    letter-spacing: -0.02em;
     margin-bottom: 1rem;
 
     a {
@@ -86,6 +85,7 @@ h2 {
 
 h3 {
     @apply text-2xl leading-tight;
+    letter-spacing: -0.01em;
 
     code {
         @apply !font-bold !text-2xl;
