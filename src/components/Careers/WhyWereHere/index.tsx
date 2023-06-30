@@ -2,7 +2,7 @@ import React from 'react'
 import { Structure } from '../../Structure'
 import { StaticImage } from 'gatsby-plugin-image'
 import { AnchorScrollNavbarTop } from './AnchorScrollNavbarTop'
-import { James, Plus, Tim } from 'components/signatures'
+import { James, Plus, Tim } from 'components/Signatures'
 
 const P = ({ children }) => {
     return <p className="text-justify text-[17px] leading-relaxed">{children}</p>
