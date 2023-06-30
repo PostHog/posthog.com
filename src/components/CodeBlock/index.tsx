@@ -199,7 +199,7 @@ export const CodeBlock = ({
                         </Tab.List>
                     </Tab.Group>
                 ) : showLabel ? (
-                    <div className="min-w-0 mr-8">
+                    <div className="min-w-0 mr-8 px-3 py-2">
                         {currentLanguage.file ? (
                             <div className="flex items-center space-x-1.5">
                                 <svg
