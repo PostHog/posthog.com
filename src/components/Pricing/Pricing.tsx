@@ -12,6 +12,7 @@ import { PlanComparison } from './PlanComparison'
 import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
 import { useLocation } from '@reach/router'
+import { pricingMenu } from '../../navs'
 
 export const section = cntl`
     max-w-6xl
@@ -67,8 +68,15 @@ const Pricing = (): JSX.Element => {
         setGropsToShow((product && [internalProductNames[product]]) || undefined)
     }, [search])
 
+    const currentGroup = groupsToShow?.[0]
+
     return (
-        <Layout>
+        <Layout
+            parent={pricingMenu}
+            activeInternalMenu={
+                pricingMenu.children[Object.values(internalProductNames).findIndex((name) => name === currentGroup) + 1]
+            }
+        >
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>

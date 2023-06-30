@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import menu from '../../navs'
+import { IMenu } from 'components/PostLayout/types'
 
 export const Context = createContext<any>(undefined)
 
@@ -22,7 +23,13 @@ function recursiveSearch(array, value) {
     return false
 }
 
-export const LayoutProvider = ({ children, ...other }: { children: React.ReactNode }) => {
+export interface IProps {
+    children: React.ReactNode
+    parent?: IMenu
+    activeInternalMenu?: IMenu
+}
+
+export const LayoutProvider = ({ children, ...other }: IProps) => {
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true'
     )
@@ -39,7 +46,7 @@ export const LayoutProvider = ({ children, ...other }: { children: React.ReactNo
         other.activeInternalMenu ??
         internalMenu?.find((menuItem) => {
             const currentURL = typeof window !== 'undefined' && window?.location?.pathname
-            return currentURL === menuItem.url.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
+            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
         })
 
     useEffect(() => {

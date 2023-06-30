@@ -9,7 +9,7 @@ import './Fonts.scss'
 import './Layout.scss'
 import './SkeletonLoading.css'
 import './DarkMode.scss'
-import { LayoutProvider } from './context'
+import { IProps, LayoutProvider } from './context'
 import { Mobile as MobileNav } from 'components/MainNav'
 
 const Layout = ({
@@ -17,10 +17,7 @@ const Layout = ({
     parent,
     activeInternalMenu,
     className = '',
-}: {
-    children: React.ReactNode
-    className?: string
-}): JSX.Element => {
+}: IProps & { className?: string }): JSX.Element => {
     const posthog = usePostHog()
 
     useEffect(() => {

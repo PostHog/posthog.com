@@ -2306,6 +2306,44 @@ export const docsMenu = {
     ],
 }
 
+export const pricingMenu = {
+    name: 'Pricing',
+    url: '/pricing',
+    icon: 'Receipt',
+    children: [
+        {
+            name: 'All products',
+            icon: 'Receipt',
+            color: 'red',
+            url: '/pricing',
+        },
+        {
+            name: 'Product analytics',
+            icon: 'Graph',
+            color: 'blue',
+            url: '/pricing?product=product-analytics',
+        },
+        {
+            name: 'Session replay',
+            url: '/pricing?product=session-replay',
+            color: 'yellow',
+            icon: 'RewindPlay',
+        },
+        {
+            name: 'Feature flags',
+            icon: 'Toggle',
+            color: 'seagreen',
+            url: '/pricing?product=feature-flags',
+        },
+        {
+            name: 'A/B testing',
+            icon: 'Flask',
+            color: 'purple',
+            url: '/pricing?product=experiments',
+        },
+    ],
+}
+
 const menu = [
     {
         name: 'Products',
@@ -2378,43 +2416,7 @@ const menu = [
             },
         ],
     },
-    {
-        name: 'Pricing',
-        url: '/pricing',
-        icon: 'Receipt',
-        children: [
-            {
-                name: 'All products',
-                icon: 'Receipt',
-                color: 'red',
-                url: '/pricing',
-            },
-            {
-                name: 'Product analytics',
-                icon: 'Graph',
-                color: 'blue',
-                url: '/pricing?product=product-analytics',
-            },
-            {
-                name: 'Session replay',
-                url: '/pricing?product=session-replay',
-                color: 'yellow',
-                icon: 'RewindPlay',
-            },
-            {
-                name: 'Feature flags',
-                icon: 'Toggle',
-                color: 'seagreen',
-                url: '/pricing?product=feature-flags',
-            },
-            {
-                name: 'A/B testing',
-                icon: 'Flask',
-                color: 'purple',
-                url: '/pricing?product=experiments',
-            },
-        ],
-    },
+    pricingMenu,
     docsMenu,
     communityMenu,
     companyMenu,
