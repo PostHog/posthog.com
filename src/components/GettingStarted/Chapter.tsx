@@ -225,3 +225,21 @@ export const GroupAnalyticsChapter: React.FC = () => {
         </Chapter>
     )
 }
+export const EstimatingUsageChapter: React.FC = () => {
+    const data = useStaticQuery(query)
+    const node = data.allMdx.nodes.find(
+        (node: any) => node.fields.slug === '/docs/getting-started/estimating-usage-costs'
+    )
+    const {
+        frontmatter: { title, description, featuredImage },
+        headings,
+    } = node
+
+    const filteredHeadings = filterHeadings(node.fields.slug, headings)
+
+    return (
+        <Chapter image={featuredImage} num={7} title={title} url={node.fields.slug} headings={filteredHeadings}>
+            <p>Estimate your PostHog usage & costs</p>
+        </Chapter>
+    )
+}

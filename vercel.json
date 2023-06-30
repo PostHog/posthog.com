@@ -986,6 +986,7 @@
             "source": "/questions/what-does-pageview-means-scattered-across-the-site",
             "destination": "/docs/data/events#pageview-events"
         },
+        { "source": "/docs/data/data-warehouse", "destination": "/docs/data-warehouse" },
         { "source": "/docs/apps/zendesk-connector", "destination": "/docs/cdp/zendesk-connector" }
     ],
     "rewrites": [

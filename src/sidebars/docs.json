@@ -39,6 +39,10 @@
                 "url": "/docs/getting-started/group-analytics"
             },
             {
+                "name": "Estimating usage & costs",
+                "url": "/docs/getting-started/estimating-usage-costs"
+            },
+            {
                 "name": "Next steps",
                 "url": "/docs/getting-started/next-steps"
             }
@@ -347,8 +351,16 @@
                         "url": "/docs/advanced/proxy/cloudfront"
                     },
                     {
-                        "name": "Next.js",
+                        "name": "Kubernetes Ingress Controller",
+                        "url": "/docs/advanced/proxy/kubernetes-ingress-controller"
+                    },
+                    {
+                        "name": "Next.js rewrites",
                         "url": "/docs/advanced/proxy/nextjs"
+                    },
+                    {
+                        "name": "Next.js middleware",
+                        "url": "/docs/advanced/proxy/nextjs-middleware"
                     },
                     {
                         "name": "Netlify",
@@ -593,7 +605,7 @@
             },
             {
                 "name": "Data warehouse",
-                "url": "/docs/data/data-warehouse",
+                "url": "/docs/data-warehouse",
                 "badge": {
                     "title": "Beta",
                     "className": "uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50"
