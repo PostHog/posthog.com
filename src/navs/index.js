@@ -1882,36 +1882,43 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/feature-flags',
+                    icon: 'Home',
                 },
                 {
                     name: 'Product manual',
                     url: '/docs/feature-flags/manual',
+                    icon: 'Book',
                 },
                 {
                     name: 'Bootstrapping & local evaluation',
                     url: '/docs/feature-flags/bootstrapping-and-local-evaluation',
+                    icon: 'Bolt',
                 },
                 {
                     name: 'Rollout strategies',
                     url: '/docs/feature-flags/rollout-strategies',
+                    icon: 'Percentage',
                 },
                 {
                     name: 'Multivariate feature flags',
                     url: '/docs/feature-flags/multivariate-flags',
+                    icon: 'Flag',
                 },
                 {
                     name: 'Payloads',
                     url: '/docs/feature-flags/payloads',
+                    icon: 'Brackets',
                 },
-
                 {
-                    name: 'Early Access Feature Management',
+                    name: 'Early access feature management',
                     url: '/docs/feature-flags/early-access-feature-management',
+                    icon: 'Features',
                 },
 
                 {
                     name: 'Common questions about feature flags',
                     url: '/docs/feature-flags/common-questions',
+                    icon: 'Question',
                 },
             ],
         },
@@ -1927,22 +1934,27 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/experiments',
+                    icon: 'Home',
                 },
                 {
                     name: 'Product manual',
                     url: '/docs/experiments/manual',
+                    icon: 'Book',
                 },
                 {
                     name: 'Statistical significance',
                     url: '/docs/experiments/significance',
+                    icon: 'TestTube',
                 },
                 {
                     name: 'Under the hood',
                     url: '/docs/experiments/under-the-hood',
+                    icon: 'Calculator',
                 },
                 {
                     name: 'Common questions about experiments',
                     url: '/docs/experiments/common-questions',
+                    icon: 'Question',
                 },
             ],
         },

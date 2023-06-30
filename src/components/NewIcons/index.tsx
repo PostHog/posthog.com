@@ -222,6 +222,29 @@ export const Brightness = ({ className = '', ...other }: { className?: string })
     </svg>
 )
 
+export const Calculator = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        className={`fill-current ${className}`}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        {...other}
+    >
+        <path
+            fillRule="evenodd"
+            d="M4 3.75C4 2.784 4.784 2 5.75 2h12.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0 1 18.25 22H5.75A1.75 1.75 0 0 1 4 20.25V3.75Zm1.75-.25a.25.25 0 0 0-.25.25V7h13V3.75a.25.25 0 0 0-.25-.25H5.75Zm12.75 5h-13v11.75c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V8.5Z"
+            clipRule="evenodd"
+        />
+        <path d="M10 12.25a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM10 16.75a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM15 12.25a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM15 16.75a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z" />
+        <path
+            fillRule="evenodd"
+            d="M10.5 12.25a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm0 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5-4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm0 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-6-4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Zm0 4.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Zm5.5-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm-.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z"
+            clipRule="evenodd"
+        />
+    </svg>
+)
+
 export const Calendar = ({ className = '', ...other }: { className?: string }): JSX.Element => (
     <svg
         width="100%"
@@ -857,6 +880,35 @@ export const People = ({ className = '', ...other }: { className?: string }): JS
             fillRule="evenodd"
             clipRule="evenodd"
             d="M7.5 4.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3.5 7a4 4 0 1 1 8 0 4 4 0 0 1-8 0Zm13-2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm-4 2.5a4 4 0 1 1 8 0 4 4 0 0 1-8 0Zm6.692 7.268c-1.381-.87-3.024-1-4.48-.395a.75.75 0 0 1-.575-1.385 6.342 6.342 0 0 1 5.855.511c1.796 1.133 3.171 3.188 3.628 6.067.17 1.073-.698 1.934-1.693 1.934H16.75a.75.75 0 0 1 0-1.5h5.177a.23.23 0 0 0 .172-.072.145.145 0 0 0 .04-.127c-.4-2.52-1.571-4.165-2.947-5.033ZM7.429 13.5c-2.384 0-4.934 1.811-5.567 5.798a.149.149 0 0 0 .04.13.228.228 0 0 0 .171.072h10.711c.073 0 .133-.03.17-.073a.149.149 0 0 0 .041-.129c-.633-3.987-3.183-5.798-5.566-5.798Zm0-1.5c3.243 0 6.319 2.476 7.047 7.063.17 1.07-.694 1.937-1.692 1.937H2.073c-.998 0-1.862-.867-1.692-1.937C1.109 14.476 4.185 12 7.429 12Z"
+        />
+    </svg>
+)
+
+export const Percentage = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="100%"
+        className={`fill-current ${className}`}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        {...other}
+    >
+        <path
+            fillRule="evenodd"
+            d="M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm14.53-4.53a.75.75 0 0 1 0 1.06l-8 8a.75.75 0 0 1-1.06-1.06l8-8a.75.75 0 0 1 1.06 0Z"
+            clipRule="evenodd"
+        />
+        <path d="M9 9.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1Z" />
+        <path
+            fillRule="evenodd"
+            d="M9 10a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-.5-1a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0Z"
+            clipRule="evenodd"
+        />
+        <path d="M15 15.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1Z" />
+        <path
+            fillRule="evenodd"
+            d="M15 16a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-.5-1a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0Z"
+            clipRule="evenodd"
         />
     </svg>
 )

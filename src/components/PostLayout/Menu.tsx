@@ -141,7 +141,11 @@ export default function Menu({
                             )}
                         </AnimatePresence>
                         {icon ? (
-                            <span className="cursor-pointer w-full flex items-center space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark">
+                            <span
+                                className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark ${
+                                    color ? 'items-center' : 'items-start'
+                                }`}
+                            >
                                 <span
                                     className={`flex items-center justify-center ${
                                         color
