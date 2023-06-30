@@ -56,7 +56,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                     active:scale-[.98]"
                     >
                         <span>Team {teamName}</span>
-                        <span className="opacity-0 group-hover:opacity-100 text-black/30 text-lg leading-none">
+                        <span className="opacity-0 group-hover:opacity-100 text-black/30 dark:text-white text-lg leading-none">
                             &rarr;
                         </span>
                     </Link>

@@ -1,9 +1,9 @@
 import React from 'react'
 import { IDocumentation } from './types'
-import { Intro as SessionReplayIntro } from '../../pages/docs/session-replay'
+import { Content as SessionReplayIntro } from '../../pages/docs/session-replay'
 import { Content as ProductAnalyticsIntro } from '../../pages/docs/product-analytics'
-import { Intro as FeatureFlagIntro } from '../../pages/docs/feature-flags'
-import { Intro as ExperimentsIntro } from '../../pages/docs/experiments'
+import { Content as FeatureFlagIntro } from '../../pages/docs/feature-flags'
+import { Content as ExperimentsIntro } from '../../pages/docs/experiments'
 
 const quickLinks = {
     'session replay': SessionReplayIntro,

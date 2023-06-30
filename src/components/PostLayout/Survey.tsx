@@ -5,10 +5,8 @@ import { usePost } from './hooks'
 export default function Survey(): JSX.Element | null {
     const { contentContainerClasses } = usePost()
     return (
-        <div className="py-8">
-            <div className={contentContainerClasses}>
-                <DocsPageSurvey />
-            </div>
+        <div className={contentContainerClasses}>
+            <DocsPageSurvey />
         </div>
     )
 }
