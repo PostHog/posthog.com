@@ -163,7 +163,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
         <div className="relative" {...getRootProps()}>
             <input className="hidden" {...getInputProps()} />
             {showPreview ? (
-                <div className="bg-white dark:bg-gray-accent-dark-hover dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0 overflow-auto">
+                <div className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0 overflow-auto">
                     <Markdown
                         transformImageUri={(fakeImagePath) => {
                             const objectURL = values.images.find(
@@ -181,7 +181,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                         onPaste={handlePaste}
                         disabled={imageLoading}
                         autoFocus={autoFocus}
-                        className="bg-white dark:bg-gray-accent-dark-hover dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
+                        className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
                         onBlur={(e) => e.preventDefault()}
                         name="body"
                         value={value}
@@ -193,7 +193,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                         maxLength={2000}
                     />
                     {isDragActive && (
-                        <div className="bg-white dark:bg-gray-accent-dark-hover z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-gray-accent-light after:dark:border-gray-accent-dark after:rounded-md">
+                        <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-gray-accent-light after:dark:border-gray-accent-dark after:rounded-md">
                             <p className="m-0 font-semibold">Drop image here</p>
                         </div>
                     )}
@@ -218,7 +218,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                     <li>
                         <Tooltip content="Image">
                             <button
-                                className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
+                                className="flex items-center bg-none border-none rounded-sm text-primary/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] relative hover:border hover:border-light dark:hover:border-dark hover:bg-light dark:hover:bg-dark hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15]"
                                 onClick={(e) => {
                                     e.preventDefault()
                                     open()
@@ -242,10 +242,8 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                             <button
                                 onClick={() => setShowPreview(false)}
                                 type="button"
-                                className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
-                                    showPreview
-                                        ? ''
-                                        : 'bg-black/[.15] text-black/75 dark:bg-primary-dark/[.15] dark:text-primary-dark/75'
+                                className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
+                                    showPreview ? '' : '!border border-light dark:border-dark bg-light dark:bg-dark'
                                 }`}
                             >
                                 <Edit />
@@ -258,9 +256,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                                 onClick={() => setShowPreview(true)}
                                 type="button"
                                 className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
-                                    showPreview
-                                        ? 'bg-black/[.15] text-black/75 dark:bg-primary-dark/[.15] dark:text-primary-dark/75'
-                                        : ''
+                                    showPreview ? 'border border-light dark:border-dark bg-light dark:bg-dark' : ''
                                 }`}
                             >
                                 <svg
