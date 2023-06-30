@@ -112,7 +112,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions } }) {
                     })}
                 </div>
             </section>
-            <section className="grid">
+            <section className="grid article-content">
                 {Object.keys(changesByDate).map((date) => {
                     const nodes = changesByDate[date]
                     return (
