@@ -54,7 +54,7 @@ const Description = ({ description, className = '' }) => {
 const ContentContainer = ({ children, className = '' }) => {
     return (
         <div
-            className={`md:flex items-center order-1 md:order-2 md:p-0 p-3 md:bg-transparent bg-accent dark:bg-accent-dark z-10 relative text-black dark:text-white md:text-inherit dark:md:text-inherit ${className}`}
+            className={`md:flex items-center order-1 md:order-2 md:p-0 p-3 bg-accent md:bg-transparent dark:bg-accent-dark md:dark:bg-transparent z-10 relative text-black dark:text-white md:text-inherit dark:md:text-inherit ${className}`}
         >
             {children}
         </div>
@@ -62,7 +62,7 @@ const ContentContainer = ({ children, className = '' }) => {
 }
 
 const Content = ({ children, className = '' }) => {
-    return <div className={`relative z-10 px-4 xl:px-8 py-4 ${className}`}>{children}</div>
+    return <div className={`relative z-10 mx-2 md:px-4 xl:px-8 py-4 ${className}`}>{children}</div>
 }
 
 const ImageContainer = ({ children, className = '' }) => {
@@ -71,10 +71,13 @@ const ImageContainer = ({ children, className = '' }) => {
 
 const FeatureList = ({ features, className = '' }) => {
     return (
-        <ul className={`list-none m-0 p-0 flex flex-col gap-1 lg:gap-2 lg:mt-2 pt-2 pb-4 ${className}`}>
+        <ul className={`list-none m-0 p-0 flex flex-col gap-4 md:gap-1 lg:gap-2 lg:mt-2 pt-2 pb-4 ${className}`}>
             {features.map(({ title, Icon }) => {
                 return (
-                    <li key={title} className="flex gap-2 items-center text-sm xl:text-[15px]">
+                    <li
+                        key={title}
+                        className="flex gap-2 items-start md:items-center text-base md:text-sm xl:text-[15px]"
+                    >
                         <span className="inline-flex p-1 rounded-sm bg-dark/10 dark:bg-white/10">
                             <Icon className="w-4 mdlg:w-6" />
                         </span>
@@ -209,7 +212,7 @@ export const SessionReplay = () => {
                     <Title title={'Session replay'} />
                     <Description description="Watch users interacting with your app or website. Available for web and iOS." />
                     <p className="text-sm hidden xl:block opacity-60 pt-2 mb-1">(Android support coming soon.)</p>
-                    <FeatureList features={features} className="grid grid-cols-2 lg:flex" />
+                    <FeatureList features={features} className="grid md:grid-cols-2 lg:flex" />
 
                     <CallToAction
                         href="/session-replay"
@@ -432,7 +435,7 @@ export const Cdp = () => {
     ]
     return (
         <div className="md:bg-[#FCC779] rounded-md text-primary relative md:grid grid-cols-16 gap-2 lg:gap-4">
-            <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
+            <ImageContainer className="flex items-center pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
                 <motion.div
                     transition={{ delay: 0.4 }}
                     className="h-full"
@@ -444,7 +447,7 @@ export const Cdp = () => {
                         placeholder="none"
                         quality={100}
                         objectFit="contain"
-                        className="w-[170%] md:w-full h-full"
+                        className="w-full h-full"
                         src="../../../../contents/images/products/cdp/pipeline-hog.png"
                     />
                 </motion.div>
