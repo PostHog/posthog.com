@@ -138,7 +138,7 @@ HogQL can provides access to JSON properties, which can then be used to breakdow
 ```
 arrayJoin(
 	JSONExtractArrayRaw(
-		ifNull(properties.$active_feature_flags, '[]')
+		properties.$active_feature_flags ?? '[]'
 	)
 )
 ```
