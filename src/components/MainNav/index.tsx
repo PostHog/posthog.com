@@ -274,7 +274,7 @@ export const Main = () => {
                         })}
                     </ul>
                     <div className="flex items-center justify-end">
-                        <SignupCTA size="sm" type="outline" className="hidden md:flex mr-2" text="Get started" />
+                        <SignupCTA size="sm" type="outline" className="hidden sm:flex mr-2" text="Get started" />
                         <HoverTooltip
                             content={() => (
                                 <div className="text-xs">
