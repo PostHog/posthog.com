@@ -240,7 +240,7 @@ export const Main = () => {
         <div>
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
-                    className={`flex mx-auto px-5 justify-between transition-all ${
+                    className={`flex mx-auto px-2 md:px-5 justify-between transition-all ${
                         fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl box-content'
                     }`}
                 >

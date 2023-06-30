@@ -113,7 +113,7 @@ export const MenuContainer = ({
                 initial={{ translateY: '100%', opacity: 0 }}
                 animate={{ translateY: 0, opacity: 1 }}
                 exit={{ translateY: '100%', opacity: 0 }}
-                className="px-4 fixed bottom-0 w-full left-0"
+                className="fixed bottom-[75px] w-full left-0 z-[999999]"
             >
                 <motion.div
                     dragConstraints={{ top: 0 }}
@@ -122,7 +122,7 @@ export const MenuContainer = ({
                     dragControls={dragControls}
                     drag="y"
                     dragListener={false}
-                    className={`bg-white dark:bg-gray-accent-dark pb-4 pt-2 px-6 rounded-tr-md rounded-tl-md border border-border dark:border-dark shadow ${className}`}
+                    className={`bg-white dark:bg-accent-dark pb-4 pt-2 px-4 border-t border-border dark:border-dark shadow ${className}`}
                 >
                     <div
                         onPointerDown={startDrag}
@@ -324,13 +324,13 @@ export default function MobileNav() {
     const { tableOfContents, filePath, title, sidebar, darkMode } = usePost()
     return (
         <>
-            <div className="sticky bottom-[85px] left-2 z-[99999999] inline-block lg:hidden">
+            <div className="sticky bottom-[85px] left-2 z-[999998] inline-block lg:hidden">
                 <button onClick={() => setOpen('menu')} className={`${menuButtonClasses}`}>
                     Menu
                 </button>
             </div>
             {tableOfContents && tableOfContents?.length > 0 && (
-                <div className="sticky bottom-[85px] left-[calc(100%_-_1rem)] z-[99999999] inline-block lg:hidden">
+                <div className="sticky bottom-[85px] left-[calc(100%_-_1rem)] z-[999997] inline-block lg:hidden">
                     <button onClick={() => setOpen('toc')} className={`${menuButtonClasses}`}>
                         On this page...
                     </button>

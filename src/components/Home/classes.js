@@ -23,7 +23,8 @@ export const section = (className = '') => cntl`
     max-w-screen-2xl
     mx-auto
     mt-4
-    mb-16
+    mb-8
+    md:mb-16
     md:my-16
     px-4
     ${className}
