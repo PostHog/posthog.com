@@ -364,7 +364,7 @@ export const Mobile = () => {
     const { menu, parent } = useLayoutData()
 
     return (
-        <ul className="grid grid-cols-5 gap-[2px] fixed bottom-0 w-full lg:hidden list-none m-0 p-0 px-2 border-t border-border dark:border-dark bg-accent dark:bg-accent-dark z-[9999]">
+        <ul className="grid grid-cols-5 gap-[2px] fixed bottom-0 w-full lg:hidden list-none m-0 py-1 px-2 border-t border-border dark:border-dark bg-accent dark:bg-accent-dark z-[9999]">
             {menu.map((menuItem) => {
                 const active = menuItem.name === parent?.name
                 const { name, url, icon } = menuItem
@@ -373,8 +373,10 @@ export const Mobile = () => {
                     <li className="h-full" key={name}>
                         <Link
                             to={url}
-                            className={`text-[13px] font-medium relative p-4 flex flex-col space-y-1 items-center ${
-                                active ? '' : 'opacity-70 hover:opacity-100'
+                            className={`text-[12.5px] font-medium relative px-4 py-3 flex flex-col space-y-1 items-center ${
+                                active
+                                    ? 'bg-accent-dark/10 dark:bg-accent/10 rounded font-bold'
+                                    : 'opacity-70 hover:opacity-100'
                             }`}
                         >
                             <span className={`w-5 h-5 inline-block`}>
