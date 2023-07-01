@@ -137,7 +137,7 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing }) => {
             <Link
                 onClick={() => ref?.current?.scrollIntoView({ block: 'center', inline: 'center' })}
                 to={url}
-                className={`group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded ${
+                className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded ${
                     active
                         ? ''
                         : 'border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
