@@ -1137,10 +1137,15 @@ iframe[src*='youtube-nocookie.com'] {
     @apply md:!flex md:!justify-center md:!w-auto md:!transform-none;
 }
 
-.internal-nav-slider .slick-slide {
-    @apply p-0;
-    > div {
-        @apply flex;
+.internal-nav-slider {
+    .slick-slide {
+        @apply p-0;
+        > div {
+            @apply flex;
+        }
+    }
+    .slick-track {
+        @apply !flex;
     }
 }
 
