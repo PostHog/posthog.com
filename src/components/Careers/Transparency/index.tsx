@@ -114,12 +114,12 @@ export const Transparency = () => {
                     />
                 </Structure.Section>
                 <div className="pb-16 px-4 md:px-0">
-                    <p className="text-base font-semibold max-w-2xl mx-auto mb-12">
+                    <p className="text-base font-semibold max-w-2xl mx-auto mb-12 px-4 text-left md:text-center">
                         In 2026 we aim to go public with $100M revenue. To achieve this, PostHog will need to be the
                         standard devtool for building better products.
                     </p>
 
-                    <h3 className="mb-4">We look for people who are:</h3>
+                    <h3 className="mb-4 px-4 text-left md:text-center">We look for people who are:</h3>
 
                     <div className="grid sm:grid-cols-3 sm:gap-8 lg:gap-24 max-w-6xl mx-auto px-4">
                         <TransparencyMattersItem
