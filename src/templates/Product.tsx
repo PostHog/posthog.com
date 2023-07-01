@@ -25,6 +25,7 @@ import Questions from 'components/ProductLayout/Questions'
 import Customers from 'components/ProductLayout/Customers'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
+import { productMenu } from '../navs'
 
 const Check = (props: any) => <CheckIcon {...props} className="w-5 mx-auto" />
 const Close = (props: any) => <CloseIcon {...props} className="w-5 mx-auto" />
@@ -260,7 +261,7 @@ export default function Product({ data, location, pageContext }) {
     }
 
     return (
-        <Layout>
+        <Layout parent={productMenu}>
             <SEO
                 image={`/images/product/${slug.split('/')[1]}.png`}
                 title={`${title} ${parent.name} - PostHog`}
@@ -269,7 +270,6 @@ export default function Product({ data, location, pageContext }) {
 
             <PostLayout
                 fullWidthContent
-                menu={menu}
                 menuWidth={{ left: 180 }}
                 title={title}
                 hideSidebar

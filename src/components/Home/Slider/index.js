@@ -34,7 +34,6 @@ export default function Slider() {
     const [buttonRef, setButtonRef] = useState()
     const [slideRef, setSlideRef] = useState()
     const [activeSlide, setActiveSlide] = useState(0)
-    const [lazyLoad, setLazyLoad] = useState()
 
     const handleButtonChange = (_oldIndex, newIndex) => {
         setActiveSlide(newIndex)
@@ -103,8 +102,7 @@ export default function Slider() {
                 </div>
                 <SliderComponent
                     adaptiveHeight
-                    onInit={() => setLazyLoad('ondemand')}
-                    lazyLoad={lazyLoad}
+                    lazyLoad={'ondemand'}
                     ref={(slideRef) => setSlideRef(slideRef)}
                     asNavFor={buttonRef}
                     arrows={false}
