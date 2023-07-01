@@ -45,9 +45,9 @@ const Investor = ({ logo, logoDark, width, height, photo, large, name, role }: I
                     <p className="text-sm opacity-60 mb-0">{role}</p>
                 </div>
             ) : (
-                <div className="px-12 py-8">
+                <div className="px-6 sm:px-12 py-8">
                     {/* if there's no image at all... */}
-                    <h5 className="uppercase font-semibold mb-0 leading-tight">{name}</h5>
+                    <h5 className="uppercase font-semibold mb-0 leading-tight sm:text-base text-sm">{name}</h5>
                 </div>
             )}
         </div>

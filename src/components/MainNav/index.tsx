@@ -2,7 +2,6 @@ import Logo from 'components/Logo'
 import { useActions, useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import Link from 'components/Link'
-import { CallToAction } from 'components/CallToAction'
 import { useSearch } from 'components/Search/SearchContext'
 
 import { App, Brightness, Chat, Search, TextWidth, User } from 'components/NewIcons'
@@ -15,12 +14,9 @@ import { useLocation } from '@reach/router'
 import Toggle from 'components/Toggle'
 import usePostHog from 'hooks/usePostHog'
 import * as icons from 'components/NewIcons'
-
-import { Menu } from '@headlessui/react'
-import { Chevron } from 'components/Icons'
-import { motion } from 'framer-motion'
 import HoverTooltip from 'components/Tooltip'
 import { SignupCTA } from 'components/SignupCTA'
+import Slider from 'react-slick'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -127,80 +123,55 @@ const ActiveBackground = () => {
     )
 }
 
+const sliderSettings = {
+    dots: false,
+    infinite: false,
+    arrows: false,
+    speed: 0,
+    slidesToScroll: 1,
+    autoplay: false,
+    variableWidth: true,
+}
+
 const InternalMenuMobile = () => {
+    const sliderRef = useRef()
     const { internalMenu, activeInternalMenu } = useLayoutData()
-    const ActiveInternalMenuIcon = activeInternalMenu?.icon && icons[activeInternalMenu.icon]
-
-    const container = {
-        hidden: { opacity: 0, height: 0 },
-        shown: { opacity: 1, height: 'auto', transition: { duration: 0.2, staggerChildren: 0.025 } },
-    }
-
-    const child = {
-        hidden: { opacity: -1, translateX: '-100%' },
-        shown: { opacity: 1, translateX: 0, transition: { type: 'spring', duration: 0.5 } },
-    }
-
+    const activeIndex = internalMenu.findIndex((menu) => menu === activeInternalMenu)
     return (
-        <div className="lg:hidden relative">
-            <Menu>
-                {({ open }) => (
-                    <>
-                        <Menu.Button className="font-bold px-5 py-2 flex w-full items-center justify-between border-b border-border dark:border-border-dark group">
-                            <span className="flex items-center space-x-2 group-active:top-[0.5px] group-active:scale-[.98] transition-all">
-                                {ActiveInternalMenuIcon && (
-                                    <ActiveInternalMenuIcon
-                                        className={`w-6 h-6 ${
-                                            activeInternalMenu?.color ? `text-${activeInternalMenu?.color}` : ''
-                                        }`}
-                                    />
-                                )}
-                                <span>{activeInternalMenu?.name}</span>
-                            </span>
-                            <Chevron
-                                className={`w-4 h-4 origin-[center_40%] transition-all group-active:top-[0.5px] group-active:scale-[.98] ${
-                                    open ? 'rotate-180' : 'opacity-60'
-                                }`}
-                            />
-                        </Menu.Button>
-                        <Menu.Items
-                            className="w-full list-none m-0 shadow-lg rounded-md px-5 py-4 dark:bg-accent-dark bg-accent absolute grid space-y-4"
-                            as={motion.ul}
-                            variants={container}
-                            initial="hidden"
-                            animate="shown"
-                        >
-                            {internalMenu.map(({ name, url, icon, color }) => (
-                                <Menu.Item variants={child} as={motion.li} key={url}>
-                                    {() => {
-                                        const Icon = icons[icon]
-                                        const active = activeInternalMenu?.name === name
-                                        return (
-                                            <Link
-                                                className="flex items-center active:top-[0.5px] active:scale-[.98] transition-all"
-                                                to={url}
-                                            >
-                                                <span className={`w-6 h-6 mr-2 text-${color} inline-block`}>
-                                                    <Icon />
-                                                </span>
-                                                <span
-                                                    className={`text-sm whitespace-nowrap ${
-                                                        active
-                                                            ? 'font-bold opacity-100'
-                                                            : 'font-semibold opacity-60 group-hover:opacity-100'
-                                                    }`}
-                                                >
-                                                    {name}
-                                                </span>
-                                            </Link>
-                                        )
-                                    }}
-                                </Menu.Item>
-                            ))}
-                        </Menu.Items>
-                    </>
-                )}
-            </Menu>
+        <div className="lg:hidden relative border-b border-border dark:border-dark internal-nav-slider">
+            <Slider ref={sliderRef} centerMode initialSlide={activeIndex} {...sliderSettings}>
+                {internalMenu.map(({ name, url, icon, color }, index) => {
+                    const Icon = icons[icon]
+                    const active = activeInternalMenu?.name === name
+                    return (
+                        <div key={name} className="flex">
+                            <Link
+                                onClick={() => sliderRef?.current?.slickGoTo(index)}
+                                className="flex items-center active:top-[0.5px] active:scale-[.98] transition-all px-4 relative py-3"
+                                to={url}
+                            >
+                                <span className={`w-6 h-6 mr-2 text-${color} inline-block`}>
+                                    <Icon />
+                                </span>
+                                <span
+                                    className={`text-sm whitespace-nowrap ${
+                                        active
+                                            ? 'font-bold opacity-100'
+                                            : 'font-semibold opacity-60 group-hover:opacity-100'
+                                    }`}
+                                >
+                                    {name}
+                                </span>
+                                <span
+                                    className={`absolute bottom-0 left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
+                                        active ? `border-${color}` : `border-transparent`
+                                    }`}
+                                />
+                            </Link>
+                        </div>
+                    )
+                })}
+            </Slider>
         </div>
     )
 }
