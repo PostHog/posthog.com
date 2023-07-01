@@ -63,10 +63,10 @@ export const Transparency = () => {
                 />
             </Structure.Section>
 
-            <div className="w-full my-16 text-left grid sm:grid-cols-2 ">
-                <div className="px-4 py-8 md:py-12">
+            <div className="w-full my-16 text-left grid sm:grid-cols-2 gap-4">
+                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded">
                     <TransparencyFeature title="Compensation" Image={Compensation} className="max-w-md mx-auto">
-                        <p className="mb-0 text-lg font-lightish">
+                        <p className="mb-0 text-base">
                             We pay generously and built a{' '}
                             <a href="/handbook/people/compensation">compensation calculator</a> to keep salary
                             discussions simple and fair. You’ll know your approximate starting salary before you even
@@ -75,18 +75,18 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="px-4 py-8 md:py-12">
+                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded">
                     <TransparencyFeature title="Board meetings" Image={BoardMeetings} className="max-w-md mx-auto">
-                        <p className="mb-0 text-lg font-lightish">
+                        <p className="mb-0 text-base">
                             We share slides from each board meeting internally. When everyone knows the direction we're
                             headed and the obstacles we face, they can decide where their time is best spent.
                         </p>
                     </TransparencyFeature>
                 </div>
 
-                <div className="px-4 py-8 md:py-12">
+                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded">
                     <TransparencyFeature title="Fundraising & finances" Image={Finances} className="max-w-md mx-auto">
-                        <p className="mb-0 text-lg font-lightish">
+                        <p className="mb-0 text-base">
                             We keep our team informed about fundraising during the process and share a monthly report
                             covering revenue, runway, and more. It's nice when you can see your hard work paying off
                             (literally).
@@ -94,9 +94,9 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="px-4 py-8 md:py-12">
+                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded">
                     <TransparencyFeature title="Constructive feedback" Image={Feedback} className="max-w-md mx-auto">
-                        <p className="mb-0 text-lg font-lightish">
+                        <p className="mb-0 text-base">
                             Transparency is a two-way street. We encourage individual feedback and run regular
                             360-degree group sessions with the whole company, so everyone can improve.
                         </p>
@@ -114,12 +114,12 @@ export const Transparency = () => {
                     />
                 </Structure.Section>
                 <div className="pb-16 px-4 md:px-0">
-                    <p className="text-base font-semibold max-w-2xl mx-auto mb-12">
+                    <p className="text-base font-semibold max-w-2xl mx-auto mb-12 px-4 text-left md:text-center">
                         In 2026 we aim to go public with $100M revenue. To achieve this, PostHog will need to be the
                         standard devtool for building better products.
                     </p>
 
-                    <h3 className="mb-4">We look for people who are:</h3>
+                    <h3 className="mb-4 px-4 text-left md:text-center">We look for people who are:</h3>
 
                     <div className="grid sm:grid-cols-3 sm:gap-8 lg:gap-24 max-w-6xl mx-auto px-4">
                         <TransparencyMattersItem

@@ -70,7 +70,7 @@ h6 {
 }
 
 h1 {
-    @apply text-4xl font-bold !leading-none;
+    @apply text-4xl font-bold leading-none;
     letter-spacing: -0.03em;
 }
 
