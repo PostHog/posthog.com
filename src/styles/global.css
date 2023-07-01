@@ -1223,3 +1223,11 @@ li.squeak-left-border {
         @apply hidden;
     }
 }
+
+.snap-x {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

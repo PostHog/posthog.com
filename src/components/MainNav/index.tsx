@@ -16,7 +16,6 @@ import usePostHog from 'hooks/usePostHog'
 import * as icons from 'components/NewIcons'
 import HoverTooltip from 'components/Tooltip'
 import { SignupCTA } from 'components/SignupCTA'
-import Slider from 'react-slick'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -123,56 +122,82 @@ const ActiveBackground = () => {
     )
 }
 
-const sliderSettings = {
-    dots: false,
-    infinite: false,
-    arrows: false,
-    speed: 0,
-    slidesToScroll: 1,
-    autoplay: false,
-    variableWidth: true,
+const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing }) => {
+    const ref = useRef<HTMLLIElement>(null)
+    const { activeInternalMenu } = useLayoutData()
+    const active = activeInternalMenu?.name === name
+    const Icon = icons[icon]
+
+    useEffect(() => {
+        if (initialScrollTo) ref?.current?.scrollIntoView({ block: 'center', inline: 'center' })
+    }, [overflowing])
+
+    return (
+        <li ref={ref}>
+            <Link
+                onClick={() => ref?.current?.scrollIntoView({ block: 'center', inline: 'center' })}
+                to={url}
+                className={`group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded ${
+                    active
+                        ? ''
+                        : 'border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                }`}
+            >
+                <span className={`w-6 h-6 mr-2 text-${color}`}>
+                    <Icon />
+                </span>
+                <span
+                    className={`text-sm whitespace-nowrap ${
+                        active ? 'font-bold opacity-100' : 'font-semibold opacity-60 group-hover:opacity-100'
+                    }`}
+                >
+                    {name}
+                </span>
+                <span
+                    className={`absolute bottom-[calc(-.5rem_-_1px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
+                        active ? `border-${color}` : `border-transparent`
+                    }`}
+                />
+            </Link>
+        </li>
+    )
 }
 
-const InternalMenuMobile = () => {
-    const sliderRef = useRef()
+const InternalMenu = () => {
+    const ref = useRef<HTMLUListElement>(null)
     const { internalMenu, activeInternalMenu } = useLayoutData()
+    const [overflowing, setOverflowing] = useState(false)
     const activeIndex = internalMenu.findIndex((menu) => menu === activeInternalMenu)
+
+    function handleResize() {
+        setOverflowing((ref?.current && ref?.current.scrollWidth > ref?.current.clientWidth) || false)
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+        handleResize()
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+
     return (
-        <div className="lg:hidden relative border-b border-border dark:border-dark internal-nav-slider">
-            <Slider ref={sliderRef} centerMode initialSlide={activeIndex} {...sliderSettings}>
-                {internalMenu.map(({ name, url, icon, color }, index) => {
-                    const Icon = icons[icon]
-                    const active = activeInternalMenu?.name === name
-                    return (
-                        <div key={name} className="flex">
-                            <Link
-                                onClick={() => sliderRef?.current?.slickGoTo(index)}
-                                className="flex items-center active:top-[0.5px] active:scale-[.98] transition-all px-4 relative py-3"
-                                to={url}
-                            >
-                                <span className={`w-6 h-6 mr-2 text-${color} inline-block`}>
-                                    <Icon />
-                                </span>
-                                <span
-                                    className={`text-sm whitespace-nowrap ${
-                                        active
-                                            ? 'font-bold opacity-100'
-                                            : 'font-semibold opacity-60 group-hover:opacity-100'
-                                    }`}
-                                >
-                                    {name}
-                                </span>
-                                <span
-                                    className={`absolute bottom-0 left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
-                                        active ? `border-${color}` : `border-transparent`
-                                    }`}
-                                />
-                            </Link>
-                        </div>
-                    )
-                })}
-            </Slider>
-        </div>
+        <ul
+            style={{ justifyContent: overflowing ? 'start' : 'center' }}
+            ref={ref}
+            className="flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x overflow-x-auto overflow-y-hidden"
+        >
+            {internalMenu.map((menuItem, index) => {
+                return (
+                    <MenuItem
+                        key={menuItem.name}
+                        {...menuItem}
+                        initialScrollTo={activeIndex === index}
+                        overflowing={overflowing}
+                    />
+                )
+            })}
+        </ul>
     )
 }
 
@@ -181,7 +206,7 @@ const keyboardShortcut =
 
 export const Main = () => {
     const { open } = useSearch()
-    const { menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
+    const { menu, parent, internalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
     const { setWebsiteTheme } = useActions(layoutLogic)
@@ -315,47 +340,7 @@ export const Main = () => {
                     </div>
                 </div>
             </div>
-            {internalMenu?.length > 0 && (
-                <>
-                    <ul className="hidden lg:flex justify-center space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative">
-                        {internalMenu.map(({ name, url, icon, color }) => {
-                            const Icon = icons[icon]
-                            const active = activeInternalMenu?.name === name
-                            return (
-                                <li key={name}>
-                                    <Link
-                                        to={url}
-                                        className={`group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded ${
-                                            active
-                                                ? ''
-                                                : 'border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
-                                        }`}
-                                    >
-                                        <span className={`w-6 h-6 mr-2 text-${color}`}>
-                                            <Icon />
-                                        </span>
-                                        <span
-                                            className={`text-sm whitespace-nowrap ${
-                                                active
-                                                    ? 'font-bold opacity-100'
-                                                    : 'font-semibold opacity-60 group-hover:opacity-100'
-                                            }`}
-                                        >
-                                            {name}
-                                        </span>
-                                        <span
-                                            className={`absolute bottom-[calc(-.5rem_-_1px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
-                                                active ? `border-${color}` : `border-transparent`
-                                            }`}
-                                        />
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    <InternalMenuMobile />
-                </>
-            )}
+            {internalMenu?.length > 0 && <InternalMenu />}
         </div>
     )
 }
