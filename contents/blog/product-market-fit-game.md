@@ -37,7 +37,7 @@ Remember to keep detailed notes on all the conversations you have with potential
 
 Let's press start...
 
-### Level 1 - Find a significant problem work on
+### Level 1 - Find a significant problem to work on
 
 ![pmf-guide](../images/blog/pmf-game-guide/pmf-level-1.png)
 
