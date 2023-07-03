@@ -30,7 +30,7 @@ Here's a breakdown of each field in the form:
 
 Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In your code, you use this feature flag key to check which experiment variant the user has been assigned to. 
 
-> **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you you're a different library for feature flags). For more info, read our docs on [implementing experiments without feature flags](// TODO add link here) 
+> **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you you're a different library for feature flags). For more info, read our docs on [implementing experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags) 
 
 ### Experiment variants
 
@@ -175,33 +175,9 @@ if variant == 'variant_name' {
     // Do something
 }
 ```
-
-```java
-// Feature flags are not supported in our Java SDK.
-// To run an experiment using our Java SDK, 
-// see our docs on running an experiment without feature flags
-// TODO add link
-```
-
-```rust
-// Feature flags are not supported in our Rust SDK.
-// To run an experiment using our Java SDK, 
-// see our docs on running an experiment without feature flags
-// TODO add link
-```
-
-```elixir
-// Feature flags are not supported in our Elixir SDK.
-// To run an experiment using our Java SDK, 
-// see our docs on running an experiment without feature flags
-// TODO add link
-```
-
-```API
-// See our docs on running an experiment without feature flags
-// TODO add link
-```
 </MultiLanguage>
+
+> Since feature flags are not supported yet in our Java, Rust, and Elixir SDKs, see our docs on [how to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags). This also applies to running experiments using our API.
 
 ### Step 2 (server-side only): Add the feature flag property to your events 
 

@@ -998,6 +998,10 @@
         { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
         { "source": "/careers/(.*)", "destination": "/careers" },
         { "source": "/api", "destination": "/docs/api" },
+        {
+            "source": "/tutorials/experiments",
+            "destination": "/docs/experiments/running-experiments-without-feature-flags"
+        },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" }
     ]
 }
