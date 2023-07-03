@@ -1,6 +1,6 @@
 ---
 title: "Why we test in production (and you should to)"
-date: 2023-06-30
+date: 2023-07-03
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
