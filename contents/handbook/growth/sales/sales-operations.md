@@ -14,14 +14,13 @@ If you are looking for guidance on how to manage customers in HubSpot specifical
 ## Hands-on Process 
 
 1. Customer will either:
-   1. Book a demo directly on our calendar via our [pricing](/pricing) page
    1. Fill in the contact form on the [signup](/get-in-touch#contact) page, which captures which plan they are interested in as well as metrics such as MAUs, event count etc.
    1. Email us directly at hey@ or sales@
-1. (If it's a direct demo booking, skip to 3)  We'll email them introducing ourselves and answering any questions they've shared as well as offering up a call/demo to discuss their needs further.
+1. We'll do some ICP scoring and either route them to self-serve or email them introducing ourselves and answering any questions they've shared as well as offering up a call/demo to discuss their needs further.
 1. On the initial call we'll spend some time understanding what they want and then optionally give a [demo](/handbook/growth/sales/demos) if that's what they are there for.
 1. Ensure call notes go into HubSpot against the contact/company/deal so that they are shared amongst the wider team
-1. If they are ready to get started with PostHog, we should get them into Slack:
-   1. For lower volume customers we should direct them to User Slack.  Send them an invitation from the workspace and don't forget to say hi when they join, directing them to #community-support for help.
+1. If they are ready to get started with PostHog, we should either:
+   1. For lower volume customers we should send them a getting started templated email which providers pointers on how to get set up as well as where to get help if they get stuck.
    2. For higher volume customers we can create a Slack Connect channel in our Company Slack, this allows us to provide more focused support to ensure that they are successful.
 1. As a priority we should get them sending data in from production (even just a small part of thair app) so that they can see the value of PostHog quickly (decreasing time to revenue) see how we do this in the Onboarding section below.
 
@@ -35,7 +34,7 @@ For customers that sign up themselves, and begin using the product, we provide a
 1. [Pre-recorded demo](/book-a-demo)
 1. [Slack community](/slack)
 
-Additionally, all users can us for support/bugs/feedback using the `?` icon in the top right of the PostHog app. This is routed to the appropriate team in Zendesk.
+Additionally, all users can contact us for support/bugs/feedback using the `?` icon in the top right of the PostHog app. This is routed to the appropriate team in Zendesk.
 
 
 ## Ensuring customers see value quickly
@@ -43,8 +42,8 @@ Additionally, all users can us for support/bugs/feedback using the `?` icon in t
 Most potential customers will show up because they want to replace an existing analytics product, or start doing product 
 analytics from scratch.  In either case, we should show them the power of PostHog as quickly as possible.  To that end, 
 getting live **production** data through our pipeline and available for analysis should be our top priority.
-1. Help them get set up with tracking their production site/app one of our client or server [libraries](https://posthog.com/docs/integrate/libraries).
-   1. JavaScript / Autocapture is the easiest - also make sure to turn on Session Recording.
+1. Help them get set up with tracking their production site/app one of our client or server [libraries](/docs/getting-started/install).
+   1. JavaScript / Autocapture is the easiest - also make sure to turn on Session Replay.
 1. If people aren't sure what they want to track, AARRR is a great framework to use and will give people a good taster on the types on insight they can see.  We have a number of supporting resources:
    1. A [blog post](/blog/aarrr-pirate-funnel) on getting started with the framework.
    2. A sample AARRR [tracking plan](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) which we can give to customers to fill in.  It shows how we do things at PostHog and may help inspire people who don't know how to get started.
@@ -54,7 +53,7 @@ getting live **production** data through our pipeline and available for analysis
 
 ## Free trials?
 
-Generally speaking we don't need to do anything around free trials as our free tier has a generous 1m events, 1m feature flag calls, and 15K sessions.  If a customer is going to go over this limit pretty quickly then we can agree to give them 1 month free usage - the easiest way to do this is to get them to subscribe to either plan and enter free trial days in stripe or in the billing service.  See the [billing](/handbook/growth/sales/billing) page for more info (and the latest on this).
+Generally speaking we don't need to do anything around free trials as our free tier has a generous 1m events, 1m feature flag calls, and 15K sessions.  If a customer is going to go over this limit pretty quickly then we can agree to give them 2 weeks of free usage - this can be done in the billing service.  See the [billing](/handbook/growth/sales/billing) page for more info (and the latest on this).
 
 
 ### Figuring out the best solution for a customer
@@ -93,7 +92,7 @@ _How do I work with a customer who wants to sign an MSA?_
 
 This occasionally happens when we are dealing with very large companies, who may prefer to sign an MSA due to their internal procurement processes or to have the security of a locked-in contract from a pricing perspective. We have a contract version of our standard terms and conditions that we can use for this - ask Charles. 
 
-We'd only really look to do this with people spending $20k+ per month or on the Enterprise plan - we don't do it below this value because of the legal effort required.
+We'd only really look to do this with people spending $20k+ per year - we don't do it below this value because of the legal effort required.
 
 _How do I find out a customer's usage?_
 
