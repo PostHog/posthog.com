@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["james-hawkins"]
-featuredImage: ../images/blog/pmf-game-guide/pmf-guide-hero.png
+featuredImage: ../images/blog/pmf-game-guide/pmf-guide.png
 featuredImageType: full
 category: Startups
 tags:
