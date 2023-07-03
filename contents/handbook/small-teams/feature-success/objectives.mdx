@@ -1,8 +1,16 @@
+As always, reliability is the #1 unwritten goal: Making sure feature flags are reliable trumps every other objective.
+
+
 ### Objective: Make it easier for engineers to analyze the success of a feature
 
-PostHog’s customers are growth stage startups who don’t really care about specific feature release rules and schedules, but they do care about launching successful features. We want to give them the tools and recommendations to learn faster whether a feature is successful or not.
+Last quarter, we built the foundation for feature success: All sorts of different tools that people can use to help determine success.
 
-We aren't yet sure how this looks like, and have opted not to write down concrete features here yet. We'll run experiments, iterate, figure out what sticks, and re-orient if we realise this isn't something people want.
+This quarter is about bringing it all together and making it seamless to connect these features together.
+
+This will involve a few things:
+  - Validate every component is useful on its own (flag autocapture, surveys, dashboard templates on flags, and early access management).
+  - Integrate every pair of components together: i.e. validate every pair of the above components can multiply usefulness over a single component
+  - Integrate all components together in one place: A notebook template that brings feature success together.
 
 We would have achieved this objective when
 - People start their analysing journey with ‘feature success’, rather than an insight/dashboard
@@ -10,15 +18,15 @@ We would have achieved this objective when
 - This feature itself helps us answer if it's successful
 
 
-### Objective: Launch experiments and feature flags with pricing
+### Objective: Build out an excellent user feedback product
 
-The next stage of our feature flags and experiments products is turning them into stand-alone verticals. We are going to launch pricing, which raises the bar for what's acceptable and drives us towards creating a more polished product. This also helps us learn more about what users are really missing, since they'll be more vocal about things they need.
+One of the components from last quarter - Surveys - has a lot more potential to stand on its own than other components. Thus, our second objective is to build out surveys into a great user feedback product.
 
-To make this happen, we have four things to focus on:
-- Make pricing proposal and support growth team where required with implementation
-- Support marketing and website team to make sure our content is world-class
-- Make Experiments UI feature complete
-- Figure out how a flags-first onboarding flow looks like
+This involves:
+  - Having more options for survey types: NPS surveys, setting up user interviews, multiple choice questions
+  - Building out an API version for the same, so users can freely integrate it into their product
+  - Ensuring survey prompts don't destroy the end user experience, by say, showing a 100 prompts a day.
+  - More flexibility and control over who to target for surveys
 
-We would have achieved this objective when we can create a PostHog account and pay only for flags/experiments.
+
 
