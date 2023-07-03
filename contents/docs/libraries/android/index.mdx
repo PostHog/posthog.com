@@ -181,13 +181,13 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```java
-PostHog.with(this).group("organization", "42dlsfj23f") // organization is the group type, 42dlsfj23f is the group ID
+PostHog.with(this).group("company", "company_id_in_your_db") // organization is the group type, company_id_in_your_db is the group ID
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```java
-PostHog.with(this).group("organization", "42dlsfj23f", new Properties().putValue("name", "Awesome Inc."));
+PostHog.with(this).group("company", "company_id_in_your_db", new Properties().putValue("name", "Awesome Inc."));
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.

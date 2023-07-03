@@ -133,21 +133,21 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```objectivec
-[[PHGPostHog sharedPostHog] group:@"organization" groupKey:@"42dlsfj23f"];
+[[PHGPostHog sharedPostHog] group:@"company" groupKey:@"company_id_in_your_db"];
 ```
 
 ```swift
-posthog.group( "some-type", groupKey: "42dlsfj23f")
+posthog.group( "company", groupKey: "company_id_in_your_db")
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```objectivec
-[[PHGPostHog sharedPostHog] group:@"organization" groupKey:@"42dlsfj23f" properties:@{ @"name": @"Awesome Inc." }];
+[[PHGPostHog sharedPostHog] group:@"company" groupKey:@"company_id_in_your_db" properties:@{ @"name": @"Awesome Inc." }];
 ```
 
 ```swift
-posthog.group( "organization", groupKey: "42dlsfj23f", properties: [
+posthog.group( "company", groupKey: "company_id_in_your_db", properties: [
     "name": "ACME Corp"
 ])
 ```

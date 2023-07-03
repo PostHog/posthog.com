@@ -261,7 +261,7 @@ client.Enqueue(posthog.Capture{
 posthog.capture({
     event: "some event",
     distinctId: '[distinct id]',
-    groups: { company: 'id:5' }
+    groups: { company: 'company_id_in_your_db' }
 })
 ```
 

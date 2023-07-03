@@ -54,4 +54,4 @@ For the full list of functions see the relevant SDK docs e.g. the [Javascript SD
 
 ### Using group analytics
 
-If you want to use group analytics, each event should include the property `$groups` as an key-value object of group type and ID like `{ "company": "42dlsfj23f" }` where `42dlsfj23f` is the id of the group.
+If you want to use group analytics, each event should include the property `$groups` as an key-value object of group type and ID like `{ "company": "company_id_in_your_db" }`

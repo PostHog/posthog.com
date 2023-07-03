@@ -271,13 +271,13 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 -   Capture an event and associate it with a group
 
 ```python
-posthog.capture('[distinct id]', 'some event', groups={'company': '42dlsfj23f'})
+posthog.capture('[user distinct id]', 'some event', groups={'company': 'company_id_in_your_db'})
 ```
 
 -   Update properties on a group
 
 ```python
-posthog.group_identify('company', '42dlsfj23f', {
+posthog.group_identify('company', 'company_id_in_your_db', {
     'name': 'Awesome Inc.',
     'employees': 11
 })
