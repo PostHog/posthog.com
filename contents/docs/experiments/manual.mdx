@@ -36,6 +36,8 @@ Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In yo
 
 By default, all experiments have a 'control' and 'test' variant. If you have more variants that you'd like to test, you can use this field to add more variants and run multivariant tests. Participants are automatically split equally between variants.
 
+Participants are automatically split equally between variants. If you want assign specific users to a specific variant, you can set up [manual overrides](/docs/experiments/common-questions#how-do-i-assign-a-specific-person-to-the-controltest-variant-in-an-experiment).
+
 ### Participant type
 
 The default is users, but if you've created [groups](/docs/product-analytics/group-analytics), you can run [group-targeted experiments](/blog/running-group-targeted-ab-tests). This will test how a change affects your product at a group-level by providing the same variant to every member of a group.
@@ -74,92 +76,111 @@ To check which variant of your experiment to show to your participants, use the 
 // See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
 posthog.onFeatureFlags(function() {
     // feature flags should be available at this point
-    if (posthog.getFeatureFlag('experiment_feature_flag_name')  == 'variant_name') {
+    if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
         // do something
     }
 })
 
 // Otherwise, you can just do:
-if (posthog.getFeatureFlag('experiment_feature_flag_name')  == 'variant_name') {
+if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
     // do something
 }
 
 // You can also test your code by overriding the feature flag:
-// e.g., posthog.feature_flags.override({'experiment_feature_flag_name': 'test'})
+// e.g., posthog.feature_flags.override({'experiment-feature-flag-key': 'test'})
 ```
 
 ```react
+// You can either use the `useFeatureFlagVariantKey` hook,
+// or you can use the feature flags component - https://posthog.com/docs/libraries/react#feature-flags-react-component
+
+// Method one: using the useFeatureFlagVariantKey hook
 import { useFeatureFlagVariantKey } from 'posthog-js/react'
 
 function App() {
-    const variant = useFeatureFlagVariantKey('experiment_feature_flag_name')
-    if (variant == 'variant_name') {
+    const variant = useFeatureFlagVariantKey('experiment-feature-flag-key')
+    if (variant == 'variant-name') {
         // do something
     }
 }
 
+// Method two: using the feature flags component
+import { PostHogFeature } from 'posthog-js/react'
+
+function App() {
+
+    return (
+        <PostHogFeature flag='experiment-feature-flag-key' match={'variant-name'}>
+            <div>
+                <!-- the component to show -->
+            </div>
+        </PostHogFeature>
+    )
+}
+
+
 // You can also test your code by overriding the feature flag:
-// e.g., posthog.feature_flags.override({'experiment_feature_flag_name': 'test'})
+// e.g., posthog.feature_flags.override({'experiment-feature-flag-key': 'test'})
 ```
 
 ```react-Native
-// With a hook
+// With the useFeatureFlag hook
 import { useFeatureFlag } from 'posthog-react-native'
 
 const MyComponent = () => {
-    const variant = useFeatureFlag('experiment_feature_flag_name')
+    const variant = useFeatureFlag('experiment-feature-flag-key')
 
     if (variant === undefined) {
         // the response is undefined if the flags are being loaded
         return null
     }
 
-    if (variant == 'variant_name') {
+    if (variant == 'variant-name') {
         // do something
     }
 }           
 ```
 
 ```android
-if (PostHog.with(this).getFeatureFlag('experiment_feature_flag_name')  == 'variant_name') {
+if (PostHog.with(this).getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
     // do something
 }
 ```
 
 ```iOS
 // In Swift
-if (posthog.getFeatureFlag('experiment_feature_flag_name')  == 'variant_name') {
+if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
     // do something
 }
 ```
 
 ```node
-const variant = await client.getFeatureFlag('experiment_feature_flag_name', 'user_distinct_id')
+const variant = await client.getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
 
-if (variant === 'variant_name') {
+if (variant === 'variant-name') {
     // do something
 }
 ```
 
 ```python
-variant = posthog.get_feature_flag('experiment_feature_flag_name', 'user_distinct_id')
+variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
 
-if variant == 'variant_name':
+if variant == 'variant-name':
     # Do something
 ```
 
 ```php
-$variant = PostHog::getFeatureFlag('experiment_feature_flag_name', 'user_distinct_id')
+$variant = PostHog::getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
 
-if ($variant === 'variant_name') {
+if ($variant === 'variant-name') {
     // Do something differently for this user
 }
 ```
 
 ```ruby
-variant = posthog.get_feature_flag('experiment_feature_flag_name', 'user_distinct_id')
+variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
 
-if variant == 'variant_name'
+if variant == 'variant-name'
     # Do something 
 end
 ```
@@ -167,11 +188,11 @@ end
 ```go
 variant, err := client.GetFeatureFlag(
             FeatureFlagPayload{
-                Key:        'experiment_feature_flag_name',
+                Key:        "experiment-feature-flag-key",
                 DistinctId: "user_distinct_id",
             })
 
-if variant == 'variant_name' {
+if variant == "variant-name" {
     // Do something
 }
 ```
@@ -192,7 +213,7 @@ client.capture({
     distinctId: 'distinct_id',
     event: 'event_name_of_your_goal_metric',
     properties: {
-        '$feature/experiment_feature_flag_name': 'variant_name'
+        '$feature/experiment-feature-flag-key': 'variant-name'
     },
 })
 ```
@@ -202,7 +223,7 @@ posthog.capture(
     'distinct_id',
     'event_name_of_your_goal_metric',
     {
-        '$feature/experiment_feature_flag_name': 'variant_name'
+        '$feature/experiment-feature-flag-key': 'variant-name'
     }
 )
 ```
@@ -212,7 +233,7 @@ PostHog::capture(array(
   'distinctId' => 'distinct_id',
   'event' => 'event_name_of_your_goal_metric',
   'properties' => array(
-    '$feature/experiment_feature_flag_name'  = 'variant_name'
+    '$feature/experiment-feature-flag-key'  = 'variant-name'
   )
 ));
 ```
@@ -222,7 +243,7 @@ posthog.capture({
     distinct_id: 'distinct_id',
     event: 'event_name_of_your_goal_metric',
     properties: {
-        '$feature/experiment_feature_flag_name': 'variant_name',
+        '$feature/experiment-feature-flag-key': 'variant-name',
     }
 })
 ```
@@ -232,7 +253,7 @@ client.Enqueue(posthog.Capture{
   DistinctId: "distinct_id",
   Event:      "event_name_of_your_goal_metric",
   Properties: posthog.NewProperties().
-    Set("$feature/experiment_feature_flag_name", "variant_name"),
+    Set("$feature/experiment-feature-flag-key", "variant-name"),
 })
 ```
 
@@ -242,7 +263,7 @@ posthog.capture(
   "event_name_of_your_goal_metric",
   new HashMap<String, Object>() {
     {
-      put("$feature/experiment_feature_flag_name", "variant_name");
+      put("$feature/experiment-feature-flag-key", "variant-name");
     }
   }
 );

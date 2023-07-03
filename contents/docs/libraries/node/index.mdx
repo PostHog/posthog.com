@@ -310,6 +310,20 @@ await client.reloadFeatureFlags()
 // Do something with feature flags here
 ```
 
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```node
+const variant = await client.getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
+
+if (variant === 'variant-name') {
+    // do something
+}
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
 ### Group analytics
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
