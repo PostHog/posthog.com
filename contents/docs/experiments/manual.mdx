@@ -36,6 +36,8 @@ Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In yo
 
 By default, all experiments have a 'control' and 'test' variant. If you have more variants that you'd like to test, you can use this field to add more variants and run multivariant tests. Participants are automatically split equally between variants.
 
+Participants are automatically split equally between variants. If you want assign specific users to a specific variant, you can set up [manual overrides](/docs/experiments/common-questions#how-do-i-assign-a-specific-person-to-the-controltest-variant-in-an-experiment).
+
 ### Participant type
 
 The default is users, but if you've created [groups](/docs/product-analytics/group-analytics), you can run [group-targeted experiments](/blog/running-group-targeted-ab-tests). This will test how a change affects your product at a group-level by providing the same variant to every member of a group.
