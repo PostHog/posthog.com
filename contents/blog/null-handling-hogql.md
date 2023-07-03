@@ -1,6 +1,6 @@
 ---
 title: "Adventures in null handling: Null money, null problems"
-date: 2023-06-30
+date: 2023-07-03
 author: ["marius-andra"]
 showTitle: true
 rootpage: /blog
