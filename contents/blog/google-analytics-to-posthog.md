@@ -1,7 +1,7 @@
 ---
-title: "Switching from Google Analytics to PostHog: what you must know"
-date: 2023-06-29
-author: ["ian-vanagas"]
+title: "An intro to PostHog for Google Analytics users"
+date: 2023-07-04
+author: ["ian-vanagas", "andy-vandervell"]
 showTitle: true
 rootpage: /blog
 sidebar: Blog
@@ -13,7 +13,7 @@ tags:
  - Guides
 ---
 
-With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are looking for alternatives. 
+With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/blog/ga4-alternatives). 
 
 We’re biased, but PostHog is a great one. When compared with Google Analytics, it is:
 
@@ -108,7 +108,6 @@ PostHog has much of the same functionality as Google Analytics, but much of it i
 </table>
 </div>
 
-
 ## Creating your first dashboard
 
 PostHog has the same functionality as Google Analytics reports and views. For us, they are [insights](/docs/product-analytics/insights) and [dashboards](/docs/product-analytics/dashboards). 
@@ -178,6 +177,40 @@ The PostHog equivalent to goals and conversions are [actions](/docs/data/actions
 You create actions in the [data management tab](https://app.posthog.com/data-management/actions). Once created, you can use them in insights. For example, if you want to track conversion, they are especially useful in the funnel-type insight. Actions can also trigger [webhooks](/docs/webhooks) and send messages in [Slack](/docs/webhooks/slack) or [Teams](/docs/webhooks/microsoft-teams).
 
 Beyond actions, PostHog also can run A/B tests, which compare "test" and "control" variants to calculate whether a change impacts a goal metric. This is our version of Google Optimize. For an example, see "[How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)."
+
+## Useful tips for first-time PostHog users
+
+### 1. Try using filters on dashboards
+
+Filters work the same way on insights and dashboards. Want to see the same metrics for your whole website and a specific URL? Just create one dashboard, and then filter the dashboard by `Current URL` to view those same metrics for a single URL, or a collection of similar pages. Want to see those metrics for a specific cohort, you can do that too.
+
+### 2. You can use formulas to create custom insights
+
+Trends insights support simple mathematical formulas, which makes it easy to create custom insights to track specific conversion events, and percentage trends. Simply setup two or more variables (e.g. unique users and unique user from Germany) then input a formula the same way you would in Google Sheets or Excel. This is useful for tracking metrics like sessions per user, or pages per user.
+
+### 3. Enabling session replay will change your life
+
+Session replay is incredibly powerful. Knowing how many people reach your pricing, and where they came from, is useful. Seeing what they _do_ when they get there is truly actionable. Session replay is tightly integrated in PostHog, so you can quickly go from viewing a funnel insight to watching users who went through it. You get 15,000 recordings for free each month, and there are numerous ways to [limit how many you capture](https://posthog.com/tutorials/limit-session-recordings) if you want to be selective.
+
+### 4. Use the `Pageview` event to track unique users
+
+Unique users isn't a default metric in PostHog because it's event-based, but it's still easy track. To do so, use the select the `pageview` event when building insights, then select `unique users` from the adjacent dropdown. This will show you the number of unique users who triggered the `pageview` event – i.e. the number of unique users you visited your website. You can also track `unique sessions` this way.
+
+### 5. Use breakdowns to view your top pages
+
+Just want to see the top pages on your website? Create a Trends insight, click on `Add breakdown` and add the event property `Current URL`. To view these in a bar chart or table, go to `Chart type` and select either from the `Total value` options. Alternatively, you can use our [Landing pages dashboard template](/templates/landing-dashboard).
+
+### 6. Use the Lifecycle insight to track new and returning users
+
+The Lifecycle insight breaks down unique users who complete your desired event by:
+
+**New** – Users who did the action during the interval and were also created during that period.
+
+**Returning** – This is someone who was active in the previous interval, and is also active in the current interval.
+
+**Resurrecting** - This is someone who was not active in the previous interval, and became active once again.
+
+**Dormant** - Users who are not active in the current interval, but they were active in the previous interval.
 
 ## Added benefits of PostHog
 
