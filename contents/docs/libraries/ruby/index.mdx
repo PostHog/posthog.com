@@ -61,7 +61,7 @@ Optionally you can submit:
 
 -   `properties`, which is a dictionary with any information you'd like to add
 -   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
--   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/tutorials/experiments#step-2-sending-the-right-events) so that we can avoid making the request.
+-   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) so that we can avoid making the request.
 
 For example:
 
@@ -245,6 +245,20 @@ posthog.reload_feature_flags()
 
 // Do something with feature flags here
 ```
+
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```ruby
+variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
+
+if variant == 'variant-name'
+    # Do something 
+end
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
 ### Group analytics
 

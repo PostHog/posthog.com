@@ -216,6 +216,32 @@ posthog.reloadFeatureFlags()
 Note that `reloadFeatureFlags()` does not send `$feature_flag_called` events. These events are only sent when you query for a feature flag
 using the `getFeatureFlag()` or `isFeatureEnabled()` functions.
 
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```javascript
+// Ensure flags are loaded before usage.
+// You'll only need to call this on the code the first time a user visits.
+// See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
+posthog.onFeatureFlags(function() {
+    // feature flags should be available at this point
+    if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+        // do something
+    }
+})
+
+// Otherwise, you can just do:
+if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+    // do something
+}
+
+// You can also test your code by overriding the feature flag:
+// e.g., posthog.feature_flags.override({'experiment-feature-flag-key': 'test'})
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
 
 #### Overriding server properties
 
