@@ -156,7 +156,7 @@ Although PostHog is event-based, it still gathers details about users. To do an 
 
 ![Event structure](../images/blog/google-analytics-to-posthog/event.png)
 
-You can then use all of this data in your insights. For example, you can aggregate an event series by unique users, unique groups, monthly active groups, and more. 
+You can then use all of this data in your insights. For example, you can aggregate an event series by unique users, monthly active users, unique groups, and more. 
 
 ## Filtering with properties
 
@@ -190,7 +190,7 @@ Filters work the same way on insights and dashboards. Want to see the same metri
 
 ![formulas](../images/blog/formula-mode.mp4)
 
-Trends support simple mathematical formulas, which makes it easy to create custom insights to track specific conversion events, and percentage trends. Simply setup two or more variables (e.g. unique users and unique user from Germany) then input a formula the same way you would in Google Sheets or Excel. This is useful for tracking metrics like sessions per user, or pages per user.
+Trends support simple mathematical formulas, which makes it easy to create custom insights to track specific conversion events and percentage trends. Simply setup two or more variables (e.g. unique users and unique users from Germany) then input a formula the same way you would in Google Sheets or Excel like `B/A`. This is useful for tracking metrics like sessions per user or pages per user.
 
 ### 3. Enabling session replay will change your life
 
@@ -202,27 +202,27 @@ Session replay is incredibly powerful. Knowing how many people reach your pricin
 
 ![unique users](../images/blog/unique-users.mp4)
 
-Unique users isn't a default metric in PostHog because it's event-based, but it's still easy track. To do so, use the select the `pageview` event when building insights, then select `unique users` from the adjacent dropdown. This will show you the number of unique users who triggered the `pageview` event – i.e. the number of unique users you visited your website. You can also track `unique sessions` this way.
+Unique users isn't a default metric in PostHog because it's event-based, but it's still easy to track. To do so, select the `pageview` event when building insights, then select `unique users` from the adjacent dropdown. This will show you the number of unique users who triggered the `pageview` event – i.e. the number of unique users you visited your website. You can also track `unique sessions` this way.
 
 ### 5. Use breakdowns to view your top pages
 
 ![breakdowns](../images/blog/breakdown.mp4)
 
-Just want to see the top pages on your website? Create a Trends insight, click on `Add breakdown` and add the event property `Current URL`. To view these in a bar chart or table, go to `Chart type` and select either from the `Total value` options. Alternatively, you can use our [Landing pages dashboard template](/templates/landing-dashboard).
+Just want to see the top pages on your website? Create a Trends insight, click `Add breakdown`, and add the event property `Current URL`. To view these in a bar chart or table, go to `Chart type` and select either from the `Total value` options. Alternatively, you can use our [Landing pages dashboard template](/templates/landing-dashboard).
 
-### 6. Use the Lifecycle insight to track new and returning users
+### 6. Use the lifecycle insight to track new and returning users
 
 ![lifecycle](../images/blog/lifecycle.mp4)
 
 The Lifecycle insight breaks down unique users who complete your desired event by:
 
-**New** – Users who did the action during the interval and were also created during that period.
+- **New** – Users who did the event or action during the interval and were also created during that period.
 
-**Returning** – This is someone who was active in the previous interval, and is also active in the current interval.
+- **Returning** – Someone who was active in the previous interval, and is also active in the current interval.
 
-**Resurrecting** - This is someone who was not active in the previous interval, and became active once again.
+- **Resurrecting** - Someone who was not active in the previous interval, and became active once again.
 
-**Dormant** - Users who are not active in the current interval, but they were active in the previous interval.
+- **Dormant** - Users who are not active in the current interval, but were active in the previous interval.
 
 This makes it an easy way to track new and returning visitors to your website, and you can toggle each user cohort on and off as you please.
 
