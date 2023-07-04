@@ -8,9 +8,9 @@ featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ["configuration", "feature flags"]
 ---
 
-Next.js has middleware enabling you to run functions between requests and responses. We can use this to bootstrap feature flags on page load and make them available immediately. This is useful for redirecting, showing components without flickering, avoiding layout changes, and more.
+[Next.js middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) enables you to run functions between requests and responses. We can use this to [bootstrap feature flags](/docs/feature-flags/bootstrapping-and-local-evaluation) on page load and make them available immediately without making an additional requests. This is useful for redirecting, showing components without flickering, avoiding layout changes, and more.
 
-In this tutorial, we create a basic Next.js app, set up feature flags with PostHog, write middleware to get those feature flags, and bootstrap them in the client 
+In this tutorial, we create a basic Next.js app, set up [feature flags](/docs/feature-flags) with PostHog, write middleware to get those feature flags, and bootstrap them in the client. 
 
 ## Create Next.js app and add PostHog
 
@@ -66,7 +66,7 @@ export default function RootLayout({ children }) {
 
 ## Create and set up a feature flag
 
-After setting up PostHog, we need a [feature flag](/docs/feature-flags). To create one, go to the feature flag tab in your PostHog instance, and click "New feature flag." Add a key (like `bootstrap-test`), set rollout to 100% of users, and press save.
+After setting up PostHog, we need a [feature flag](/docs/feature-flags). To create one, go to the [feature flag tab](https://app.posthog.com/feature_flags) in your PostHog instance, and click "New feature flag." Add a key (like `bootstrap-test`), set rollout to 100% of users, and press save.
 
 ![Flag creation video](../images/tutorials/nextjs-bootstrap-flags/flag.mp4)
 
@@ -159,7 +159,7 @@ const data = await ph_request.json();
 //...
 ```
 
-With the flag data, we can create an object to use the client-side bootstrapping and then pass this value as a cookie. Altogether this looks like this:
+With the flag data, we can create an object to use the client-side bootstrapping and then pass this value as a cookie. Altogether, this looks like this:
 
 ```js
 // middleware.js
@@ -211,7 +211,7 @@ export const config = {
 };
 ```
 
-Next, we will handle this data in the client and use it to bootstrap flags 
+Next, we will handle this data in the client and use it to bootstrap flags. 
 
 ## Bootstrapping feature flags
 
