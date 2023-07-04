@@ -12,7 +12,7 @@ Next.js has middleware enabling you to run functions between requests and respon
 
 In this tutorial, we create a basic Next.js app, set up feature flags with PostHog, write middleware to get those feature flags, and bootstrap them in the client 
 
-## Create Next app and add PostHog
+## Create Next.js app and add PostHog
 
 First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
