@@ -18,7 +18,7 @@ Setting up surveys is easy, and there are two ways to do it. The first option wi
 
 ### Option 1 (recommended)
 
-1. Make sure you've installed and enabled the surveys app in your project's apps.
+1. Make sure you've enabled and are up to date with the surveys app in your project's apps.
 
 2. You must have the `opt_in_site_apps` option enabled in your PostHog initialization code.
 
@@ -55,5 +55,30 @@ posthog.capture("New feature beta interest survey sent", {
     $survey_response: {survey_response} // required
     $survey_name: {survey.name} // optional
 })
-
 ```
+
+## Creating a survey
+
+To create a new survey, go to the surveys page in PostHog and click "New survey". You'll be prompted to enter a name for your survey, optional description, and what type of survey you'd like to create.
+On the right side of the page, you'll see a preview of what your survey will look like along with appearance customization options.
+
+![Create a survey](/docs/img/surveys/surveys-new-survey.png)
+
+### Survey targeting
+
+When you create a survey, it'll automatically save as a draft until you're ready to launch it. You can target your survey to specific users based on:
+
+1. Page url contains. You can target a survey to a specific page url, or a page url that contains a specific string. For example, you can target a survey to `https://posthog.com/docs` or `https://posthog.com/docs/*` with the string "/docs".
+2. Selector. You can target a survey based on whether a specific element appears on your page with either class name or ID. For example, you can target a survey with `#my-button` or `.my-button`.
+3. Linked feature flag. You can target a survey to users who have a specific feature flag enabled. For example, you're rolling out a new feature flag "new-landing-page" and you want to gather feedback from users who have that flag enabled.
+4. User/group properties. You can target a survey to users who have a specific user or group property. For example, you can target a survey to users who have a property `is_paying` set to `true`.
+
+All of the above properties behave in a "AND" manner, meaning that a survey will only be shown to a user if all of the above conditions are met.
+
+![Survey targeting](/docs/img/surveys/surveys-targeting-options.png)
+
+## Survey events
+
+When survey responses are collected, they're simply stored as PostHog events. We provide an easy way for you to view the responses on the survey page, but you can also view them in any manner you'd like with the PostHog UI.
+
+We have "survey shown", "survey dismissed", and "survey sent" events. All three events will contain the `$survey_id` and `$survey_name` properties, and "survey sent" will also contain the `$survey_response` property.
