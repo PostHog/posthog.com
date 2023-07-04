@@ -4,7 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-If you want to announce a new feature, invite a customer to a slack channel or drive engagement of a particular feature in the product you might want to use our in-app prompts.
+> These are instructions to set up in-app prompts using an internal tool for the PostHog team only. To set up your own, check out this tutorial on "[How to add popups to your React app with feature flags](/tutorials/react-popups)"
+
+If you want to announce a new feature, invite a customer to a Slack channel, or drive engagement of a particular feature in the product, you might want to use our internal in-app prompts tool.
 
 ## How to create a new prompt
 
