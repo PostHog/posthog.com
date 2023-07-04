@@ -224,6 +224,8 @@ The Lifecycle insight breaks down unique users who complete your desired event b
 
 **Dormant** - Users who are not active in the current interval, but they were active in the previous interval.
 
+This makes it an easy way to track new and returning visitors to your website, and you can toggle each user cohort on and off as you please.
+
 ## Added benefits of PostHog
 
 - Easy [custom event capture](/docs/libraries/js#send-custom-events-with-posthogcapture) with nearly limitless custom properties.
