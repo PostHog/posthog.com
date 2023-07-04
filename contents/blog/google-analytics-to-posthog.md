@@ -182,25 +182,37 @@ Beyond actions, PostHog also can run A/B tests, which compare "test" and "contro
 
 ### 1. Try using filters on dashboards
 
-Filters work the same way on insights and dashboards. Want to see the same metrics for your whole website and a specific URL? Just create one dashboard, and then filter the dashboard by `Current URL` to view those same metrics for a single URL, or a collection of similar pages. Want to see those metrics for a specific cohort, you can do that too.
+![dashboard filters](../images/blog/ga-guide/dashboard-templates.mp4)
+
+Filters work the same way on insights and dashboards. Want to see the same metrics for your whole website and a specific URL? Just create one dashboard, and then filter the dashboard by `Current URL` to view those same metrics for a single URL, or a collection of similar pages. Want to see those metrics for a specific cohort? You can do that too, among many other things.
 
 ### 2. You can use formulas to create custom insights
 
-Trends insights support simple mathematical formulas, which makes it easy to create custom insights to track specific conversion events, and percentage trends. Simply setup two or more variables (e.g. unique users and unique user from Germany) then input a formula the same way you would in Google Sheets or Excel. This is useful for tracking metrics like sessions per user, or pages per user.
+![formulas](../images/blog/ga-guide/formula-mode.mp4)
+
+Trends support simple mathematical formulas, which makes it easy to create custom insights to track specific conversion events, and percentage trends. Simply setup two or more variables (e.g. unique users and unique user from Germany) then input a formula the same way you would in Google Sheets or Excel. This is useful for tracking metrics like sessions per user, or pages per user.
 
 ### 3. Enabling session replay will change your life
+
+<iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://app.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
 
 Session replay is incredibly powerful. Knowing how many people reach your pricing, and where they came from, is useful. Seeing what they _do_ when they get there is truly actionable. Session replay is tightly integrated in PostHog, so you can quickly go from viewing a funnel insight to watching users who went through it. You get 15,000 recordings for free each month, and there are numerous ways to [limit how many you capture](https://posthog.com/tutorials/limit-session-recordings) if you want to be selective.
 
 ### 4. Use the `Pageview` event to track unique users
 
+![unique users](../images/blog/ga-guide/unique-users.mp4)
+
 Unique users isn't a default metric in PostHog because it's event-based, but it's still easy track. To do so, use the select the `pageview` event when building insights, then select `unique users` from the adjacent dropdown. This will show you the number of unique users who triggered the `pageview` event – i.e. the number of unique users you visited your website. You can also track `unique sessions` this way.
 
 ### 5. Use breakdowns to view your top pages
 
+![breakdowns](../images/blog/ga-guide/breakdown.mp4)
+
 Just want to see the top pages on your website? Create a Trends insight, click on `Add breakdown` and add the event property `Current URL`. To view these in a bar chart or table, go to `Chart type` and select either from the `Total value` options. Alternatively, you can use our [Landing pages dashboard template](/templates/landing-dashboard).
 
 ### 6. Use the Lifecycle insight to track new and returning users
+
+![lifecycle](../images/blog/ga-guide/lifecycle.mp4)
 
 The Lifecycle insight breaks down unique users who complete your desired event by:
 
@@ -215,9 +227,13 @@ The Lifecycle insight breaks down unique users who complete your desired event b
 ## Added benefits of PostHog
 
 - Easy [custom event capture](/docs/libraries/js#send-custom-events-with-posthogcapture) with nearly limitless custom properties.
+
 - [Session replays](/docs/session-replay) with visuals of actual user behavior on your site and performance stats.
+
 - [Data connections](/docs/cdp) to import events from sources like [Stripe](/cdp/stripe-connector) and [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
+
 - Direct SQL querying and customization with [HogQL](/docs/product-analytics/hogql).
+
 - Free for 1 million events and 15,000 session recordings per month, see [pricing for more](/pricing).
 
 ## Further reading
