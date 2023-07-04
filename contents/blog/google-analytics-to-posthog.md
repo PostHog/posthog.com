@@ -182,13 +182,13 @@ Beyond actions, PostHog also can run A/B tests, which compare "test" and "contro
 
 ### 1. Try using filters on dashboards
 
-![dashboard filters](../images/blog/ga-guide/dashboard-templates.mp4)
+![dashboard filters](../images/blog/dashboard-templates.mp4)
 
 Filters work the same way on insights and dashboards. Want to see the same metrics for your whole website and a specific URL? Just create one dashboard, and then filter the dashboard by `Current URL` to view those same metrics for a single URL, or a collection of similar pages. Want to see those metrics for a specific cohort? You can do that too, among many other things.
 
 ### 2. You can use formulas to create custom insights
 
-![formulas](../images/blog/ga-guide/formula-mode.mp4)
+![formulas](../images/blog/formula-mode.mp4)
 
 Trends support simple mathematical formulas, which makes it easy to create custom insights to track specific conversion events, and percentage trends. Simply setup two or more variables (e.g. unique users and unique user from Germany) then input a formula the same way you would in Google Sheets or Excel. This is useful for tracking metrics like sessions per user, or pages per user.
 
@@ -200,19 +200,19 @@ Session replay is incredibly powerful. Knowing how many people reach your pricin
 
 ### 4. Use the `Pageview` event to track unique users
 
-![unique users](../images/blog/ga-guide/unique-users.mp4)
+![unique users](../images/blog/unique-users.mp4)
 
 Unique users isn't a default metric in PostHog because it's event-based, but it's still easy track. To do so, use the select the `pageview` event when building insights, then select `unique users` from the adjacent dropdown. This will show you the number of unique users who triggered the `pageview` event – i.e. the number of unique users you visited your website. You can also track `unique sessions` this way.
 
 ### 5. Use breakdowns to view your top pages
 
-![breakdowns](../images/blog/ga-guide/breakdown.mp4)
+![breakdowns](../images/blog/breakdown.mp4)
 
 Just want to see the top pages on your website? Create a Trends insight, click on `Add breakdown` and add the event property `Current URL`. To view these in a bar chart or table, go to `Chart type` and select either from the `Total value` options. Alternatively, you can use our [Landing pages dashboard template](/templates/landing-dashboard).
 
 ### 6. Use the Lifecycle insight to track new and returning users
 
-![lifecycle](../images/blog/ga-guide/lifecycle.mp4)
+![lifecycle](../images/blog/lifecycle.mp4)
 
 The Lifecycle insight breaks down unique users who complete your desired event by:
 
