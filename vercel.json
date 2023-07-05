@@ -243,7 +243,6 @@
             "destination": "/handbook/people/hiring-process/marketing-hiring"
         },
         { "source": "/docs/plugins/maxmind", "destination": "/apps" },
-        { "source": "/team", "destination": "/handbook/company/team" },
         { "source": "/contact", "destination": "/contact-sales" },
         { "source": "/docs/integrate/third-party", "destination": "/docs/integrate" },
         {
@@ -837,11 +836,12 @@
         { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" },
         { "source": "/blog/customer-churn-analysis-guide", "destination": "/blog/churn-rate-vs-retention-rate" },
         { "source": "/questions/autocapture", "destination": "/docs/data/autocapture" },
-        { "source": "/product-analytics", "destination": "/product-analytics/features" },
-        { "source": "/session-replay", "destination": "/session-replay/features" },
-        { "source": "/feature-flags", "destination": "/feature-flags/features" },
-        { "source": "/ab-testing", "destination": "/ab-testing/features" },
-        { "source": "/product-os", "destination": "/product-os/features" },
+        { "source": "/product-analytics/features", "destination": "/product-analytics" },
+        { "source": "/session-replay/features", "destination": "/session-replay" },
+        { "source": "/feature-flags/features", "destination": "/feature-flags" },
+        { "source": "/ab-testing/features", "destination": "/ab-testing" },
+        { "source": "/product-os/features", "destination": "/product-os" },
+        { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
         { "source": "/community", "destination": "/questions", "statusCode": 302 },
         { "source": "/roadmap/changelog", "destination": "/changelog/2023" },
         { "source": "/blog/posthog-changelog", "destination": "/changelog/2023" },
@@ -987,7 +987,9 @@
             "destination": "/docs/data/events#pageview-events"
         },
         { "source": "/docs/data/data-warehouse", "destination": "/docs/data-warehouse" },
-        { "source": "/docs/apps/zendesk-connector", "destination": "/docs/cdp/zendesk-connector" }
+        { "source": "/docs/apps/zendesk-connector", "destination": "/docs/cdp/zendesk-connector" },
+        { "source": "/docs/data/autocapture", "destination": "/docs/product-analytics/autocapture" },
+        { "source": "/docs/apps/enabling", "destination": "/docs/apps#enabling-apps" }
     ],
     "rewrites": [
         {

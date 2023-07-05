@@ -1,5 +1,4 @@
 import { MDXProvider } from '@mdx-js/react'
-import { GithubIcon } from 'components/GithubIcon'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -7,56 +6,68 @@ import { kebabCase } from 'lib/utils'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
-import Markdown from 'components/Squeak/components/Markdown'
-import { GitHub } from 'components/Icons'
 import Link from 'components/Link'
+import Layout from 'components/Layout'
 
-export default function Team() {
+export default function TeamNew() {
     const {
         team: { teamMembers },
     } = useStaticQuery(query)
     return (
-        <ul className="list-none p-0 m-0">
-            {teamMembers.map((teamMember) => {
-                const {
-                    avatar: { url: avatar },
-                    biography,
-                    lastName,
-                    firstName,
-                    companyRole,
-                    country,
-                    pronouns,
-                    github,
-                } = teamMember
-                const name = [firstName, lastName].filter(Boolean).join(' ')
-                const nameAndPronouns = pronouns ? `${name} (${pronouns})` : name
-                const title = `${nameAndPronouns}, ${companyRole}`
-                return (
-                    <li key={name}>
-                        <div className="team-row">
-                            <div className="team-left-text">
-                                <h3 id={kebabCase(name) + '-' + kebabCase(companyRole)}>{title}</h3>
-                                <Link className="!text-black dark:!text-white opacity-70 hover:opacity-90" to={github}>
-                                    <GitHub />
-                                </Link>
-                                <div className="team-left-bio">
-                                    <Markdown>{biography}</Markdown>
+        <Layout>
+            <ul className="list-none pt-16 pb-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-8 2xl:px-4 3xl:p-0">
+                {teamMembers.map((teamMember) => {
+                    const {
+                        avatar: { url: avatar },
+                        lastName,
+                        firstName,
+                        companyRole,
+                        country,
+                        squeakId,
+                        location,
+                    } = teamMember
+                    const name = [firstName, lastName].filter(Boolean).join(' ')
+                    return (
+                        <li
+                            key={name}
+                            className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded h-40 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px]"
+                        >
+                            <Link
+                                to={`/community/profiles/${squeakId}`}
+                                className="flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
+                            >
+                                <div className="flex flex-col justify-between px-6 py-4 w-full mr-32 xl:mr-40">
+                                    <div>
+                                        <h3
+                                            className="mb-0 text-lg leading-tight"
+                                            id={kebabCase(name) + '-' + kebabCase(companyRole)}
+                                        >
+                                            {name}
+                                        </h3>
+                                        <p className="text-primary/50 text-sm dark:text-primary-dark/50">
+                                            {companyRole}
+                                        </p>
+                                    </div>
+
+                                    <span className="flex items-center gap-2">
+                                        {country === 'world' ? '🌎' : <ReactCountryFlag svg countryCode={country} />}
+                                        {country === 'world' ? (
+                                            <span className="opacity-75 text-sm opacity-75">Planet earth</span>
+                                        ) : (
+                                            <span className="opacity-75 text-sm opacity-75">{location || country}</span>
+                                        )}
+                                    </span>
                                 </div>
-                            </div>
 
-                            <div className="team-center-space"></div>
-
-                            <div className="team-right-image relative">
-                                <img src={avatar} />
-                                <span className="absolute mt-8 top-2 right-2 text-4xl sm:text-4xl">
-                                    {country === 'world' ? '🌎' : <ReactCountryFlag svg countryCode={country} />}
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                )
-            })}
-        </ul>
+                                <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0">
+                                    <img src={avatar} className="w-[200px]" />
+                                </figure>
+                            </Link>
+                        </li>
+                    )
+                })}
+            </ul>
+        </Layout>
     )
 }
 
@@ -67,16 +78,16 @@ const query = graphql`
             sort: { fields: startDate, order: ASC }
         ) {
             teamMembers: nodes {
+                squeakId
                 avatar {
                     url
                 }
-                biography
                 lastName
                 firstName
                 companyRole
                 country
+                location
                 pronouns
-                github
             }
         }
     }

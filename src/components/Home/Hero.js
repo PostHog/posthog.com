@@ -4,9 +4,8 @@ import { Link } from 'gatsby'
 import { heading, section } from './classes'
 import Icon from './Icon'
 import Slider from './Slider'
-import { PricingCTA } from 'components/PricingCTA'
 import { SignupCTA } from 'components/SignupCTA'
-import { Demo } from 'components/NotProductIcons'
+import Accordion from './Accordion'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -47,32 +46,28 @@ export default function Hero() {
             <div className="relative w-full z-10">
                 <div className={section('z-10 relative md:!mb-8')}>
                     <h1 className={heading()}>
-                        The <span className="text-red inline-block">open source</span>{' '}
-                        <span className="inline-block">Product OS</span>
+                        How engineers{' '}
+                        <span className="text-red dark:text-yellow inline-block">build better products</span>
                     </h1>
-                    <h2 className={heading('subtitle', 'primary', 'my-6 !text-black/50')}>
-                        A suite of product and data tools. Built on the modern data stack.
+                    <h2 className={heading('subtitle', 'primary', 'my-6')}>
+                        The single platform to analyze, test, observe, and deploy new features
                     </h2>
 
-                    <div className="flex flex-col md:flex-row justify-center items-center gap-2">
-                        <SignupCTA className="!w-full md:!w-44 shadow-xl !px-4" />
-                        <PricingCTA />
-                    </div>
-                    <div className="justify-center mt-6 flex">
+                    <div className="flex justify-center items-center gap-2">
+                        <SignupCTA className="" />
+
                         <TrackedCTA
                             event={{ name: `clicked Get a demo` }}
-                            type="custom"
-                            className={`shadow-none !text-sm !font-bold flex items-center text-blue hover:text-blue space-x-1 !px-3 !py-2 hover:bg-gray-accent-light rounded`}
                             href="/book-a-demo"
+                            type="secondary"
+                            size="lg"
                         >
-                            <span className="inline-block w-6 h-6 opacity-30 group-hover:opacity-50">
-                                <Demo />
-                            </span>
-                            <span>Get a demo</span>
+                            Get a demo
                         </TrackedCTA>
                     </div>
                 </div>
                 <Slider />
+                <Accordion />
             </div>
         </section>
     )

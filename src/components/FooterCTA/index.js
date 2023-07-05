@@ -7,7 +7,7 @@ import blurb from './images/blurb.svg'
 
 export default function FooterCTA() {
     return (
-        <div className="flex flex-col lg:flex-row justify-between py-12 px-6 sm:px-12 bg-primary dark:bg-gray-accent-dark items-center dark rounded-[10px] mt-12">
+        <div className="flex flex-col lg:flex-row justify-between py-12 px-6 sm:px-12 bg-accent dark:bg-accent-dark border border-light dark:border-dark items-center dark rounded-[10px] mt-12">
             <div>
                 <h2 className="text-white text-5xl">Try it free.</h2>
                 <p className="text-white w-">It takes less than 5 minutes.</p>

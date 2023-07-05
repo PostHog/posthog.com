@@ -40,8 +40,8 @@ const Home = () => {
                 <Quote />
                 <Community />
                 <Tutorials
-                    title="Tutorials"
-                    subtitle="See PostHog in action"
+                    title="Latest tutorials"
+                    subtitle="Fresh from our keyboards"
                     cta={{ url: '/tutorials', title: 'Explore all tutorials' }}
                 />
                 <CTA />

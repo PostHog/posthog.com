@@ -17,12 +17,12 @@ function MenuItem({ item, slug, topLevel }) {
     const [open, setOpen] = useState(isActive(children))
     const handleClick = () => setOpen(!open)
     const height = open ? 'auto' : 0
-    const linkClasses = `outline-none flex-grow text-left transition-opacity text-gray-accent-dark hover:text-almost-black dark:text-white dark:hover:text-white opacity-${opacity} group-hover:opacity-75 ${
+    const linkClasses = `outline-none flex-grow text-left transition-opacity text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 opacity-${opacity} group-hover:opacity-75 ${
         topLevel || (children && !url) || currentPage ? 'font-bold' : 'text-[15px]'
     }`
     return (
         <li>
-            <div className="flex items-center justify-between text-gray-accent-dark dark:text-white group">
+            <div className="flex items-center justify-between text-primary/75 dark:text-primary-dark group">
                 {url ? (
                     <Link className={linkClasses} to={url}>
                         {name}

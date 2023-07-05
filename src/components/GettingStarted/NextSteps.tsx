@@ -31,7 +31,7 @@ export const NextStep: React.FC<NextStepProps> = ({ title, url, links, children 
                 <div className="w-72">{children}</div>
             </div>
 
-            <ul className="grid grid-cols-1 sm:grid-cols-2 list-none p-0 m-0 py-4 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 list-none p-0 m-0 py-4 ">
                 {links.map((link) => (
                     <li key={link.name} className="relative w-full py-2 flex items-center">
                         <Link className="leading-none" to={link.to}>

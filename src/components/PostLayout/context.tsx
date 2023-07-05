@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { IProps } from './types'
+import { useLayoutData } from 'components/Layout/hooks'
 
 export const Context = createContext<IProps | undefined>(undefined)
 
@@ -20,32 +21,18 @@ export const PostProvider: React.FC<ProviderProps> = ({
         darkMode = true,
         hideSidebar,
         sidebar,
-        menu,
         ...other
     },
     children,
 }) => {
-    const [fullWidthContent, setFullWidthContent] = useState<boolean>(
-        other.fullWidthContent ||
-            hideSidebar ||
-            !sidebar ||
-            (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
-    )
+    const { activeInternalMenu, fullWidthContent } = useLayoutData()
+
+    const menu = activeInternalMenu?.children || other.menu
+
     const tableOfContents = other.tableOfContents?.filter((item) => item.depth > -1 && item.depth < 2)
     const contentContainerClasses =
         contentContainerClassName ||
-        `px-5 lg:px-6 xl:px-12 w-full transition-all ${
-            hideSidebar ? 'lg:max-w-5xl' : !fullWidthContent ? 'lg:max-w-3xl' : 'lg:max-w-screen-2xl'
-        } ${menu ? 'mx-auto' : 'lg:ml-auto'}`
-
-    useEffect(() => {
-        if (typeof window !== 'undefined' && !other.fullWidthContent) {
-            const lsFullWidthContent = localStorage.getItem('full-width-content') === 'true'
-            if (lsFullWidthContent !== fullWidthContent) {
-                setFullWidthContent(lsFullWidthContent)
-            }
-        }
-    }, [])
+        `px-5 lg:px-6 xl:px-12 pt-6 pb-12 transition-all ${menu ? 'mx-auto' : 'lg:ml-auto'}`
 
     return (
         <Context.Provider
@@ -57,8 +44,7 @@ export const PostProvider: React.FC<ProviderProps> = ({
                 menuType,
                 mobileMenu,
                 darkMode,
-                fullWidthContent,
-                setFullWidthContent,
+                fullWidthContent: other.fullWidthContent ?? fullWidthContent,
                 hideSidebar,
                 sidebar,
                 menu,

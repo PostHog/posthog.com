@@ -4,7 +4,7 @@ import { TableOfContents } from 'components/PostLayout/types'
 import SEO from 'components/seo'
 import React from 'react'
 import Sidebar from './Sidebar'
-import { useNav } from './useNav'
+import { communityMenu } from '../../navs'
 
 interface IProps {
     children: React.ReactNode
@@ -16,29 +16,34 @@ export const SectionTitle = ({ children }: { children: React.ReactNode }) => {
     return <h2 className="m-0 mb-6">{children}</h2>
 }
 
-const Community = ({ children, title, tableOfContents }: IProps) => {
-    const nav = useNav()
+const Community = ({ children, title, tableOfContents, menu }: IProps) => {
     return (
         <PostLayout
-            fullWidthContent
             hideWidthToggle
             hideSurvey
-            menu={nav}
             sidebar={<Sidebar />}
             tableOfContents={tableOfContents}
             title={title}
             menuWidth={{ right: 320 }}
+            menu={menu}
         >
             {children}
         </PostLayout>
     )
 }
 
-export default function CommunityLayout({ children, title, tableOfContents }: IProps) {
+export default function CommunityLayout({
+    children,
+    title,
+    tableOfContents,
+    parent,
+    activeInternalMenu,
+    menu,
+}: IProps) {
     return (
-        <Layout>
+        <Layout parent={parent || communityMenu} activeInternalMenu={activeInternalMenu || communityMenu.children[0]}>
             <SEO title={`${title} - PostHog`} />
-            <Community title={title} tableOfContents={tableOfContents}>
+            <Community menu={menu} title={title} tableOfContents={tableOfContents}>
                 {children}
             </Community>
         </Layout>

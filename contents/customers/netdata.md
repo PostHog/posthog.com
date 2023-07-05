@@ -1,7 +1,8 @@
 ---
 title: How Netdata uses PostHog and BigQuery to build modern devtools
 customer: Netdata
-logo: ../images/customers/netdata/netdata_logo.png
+logo: ../images/customers/netdata/netdata_logo.svg
+logoDark: ../images/customers/netdata/netdata_logo_dark.svg
 featuredImage: ../images/customers/netdata/netdata_featured.png
 industries:
     - SaaS
@@ -29,13 +30,13 @@ Netdata is an open source monitoring and troubleshooting platform used by engine
 “Whenever we launch a feature, we create a dashboard in PostHog,” said Andrew. “I have one for our anomaly detection feature, for example, which shows the funnel of how many people use it, how many get good results... this is our flagship machine-learning feature, and PostHog helps us make it better and understand how to achieve product market fit.”
 
 <BorderWrapper>
-    <Quote
-        imageSource="/images/customers/andrewmaguire.jpeg"
-        size="md"
-        name="Andy Maguire"
-        title="Analytics & Machine Learning Lead, Netdata"
-        quote={`“I just trust that, when PostHog does something, it will do it the right way because it's not just open source code, it's all developed in the open too. You'd never get that modern thinking with the likes of Mixpanel, or other more 'Old School' platforms.”`}
-    />
+<Quote
+    imageSource="/images/customers/andrewmaguire.jpeg"
+    size="md"
+    name="Andy Maguire"
+    title="Analytics & Machine Learning Lead, Netdata"
+    quote={`“I just trust that, when PostHog does something, it will do it the right way because it's not just open source code, it's all developed in the open too. You'd never get that modern thinking with the likes of Mixpanel, or other more 'Old School' platforms.”`}
+/>
 </BorderWrapper>
 
 Netdata knows there’s more to getting product market fit than just the data, however. Teams also need to have empathy with their users and understand how they actually use the platform. [Session replay](/product/session-recording) is therefore an essential tool for Netdata.

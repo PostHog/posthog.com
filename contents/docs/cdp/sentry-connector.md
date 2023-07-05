@@ -1,5 +1,7 @@
 ---
 title: Sentry Connector
+installUrl: https://app.posthog.com/project/apps?name=Sentry
+thumbnail: ../../cdp/thumbnails/sentry.svg
 tags:
     - sentry-connector
 ---

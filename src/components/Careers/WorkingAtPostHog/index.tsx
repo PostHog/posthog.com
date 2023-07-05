@@ -5,10 +5,7 @@ import { mergeClassList } from '../../../lib/utils'
 export const WorkingAtPostHog = () => {
     return (
         <div id="working-at-posthog">
-            <Structure.Section
-                width="4xl"
-                className="py-12 border-gray-accent-light border-dashed border-l-0 border-r-0 border-t border-b md:flex items-center"
-            >
+            <Structure.Section width="4xl" className="py-12 md:flex items-center">
                 <div className="flex-0 text-center mb-12 md:mb-0 md:text-left md:max-w-xs md:mr-4">
                     <h3 className="text-4xl">
                         Find out what it's like working at PostHog according to{' '}

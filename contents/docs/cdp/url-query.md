@@ -2,7 +2,7 @@
 title: URL query parameter converter
 github: https://github.com/PostHog/integrations-repository/pull/31
 installUrl: https://app.posthog.com/project/apps?name=url-query-parameter-converter
-thumbnail: ../../cdp/thumbnails/url-query
+thumbnail: ../../cdp/thumbnails/url-query.png
 tags:
     - url-query
 ---

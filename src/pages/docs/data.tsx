@@ -7,8 +7,8 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import { Tutorials } from 'components/Docs/Tutorials'
-import { LinkGrid } from 'components/Docs/LinkGrid'
 import { GettingStarted } from 'components/Docs/GettingStarted'
+import List from 'components/List'
 
 export const quickLinks = [
     {
@@ -88,7 +88,7 @@ const Data: React.FC<DataProps> = ({ data }) => {
                     className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 sm:mb-8"
                     src="../../components/Product/images/hogs/data-warehouse.png"
                 />
-                <h1 className="text-4xl mb-2 mt-6">Data management</h1>
+                <h1 className="text-4xl mt-0 mb-2">Data management</h1>
                 <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75">
                     Manage event and customer data used throughout the PostHog suite.
                 </h3>
@@ -96,7 +96,14 @@ const Data: React.FC<DataProps> = ({ data }) => {
                 {/* Quick links */}
                 <section className="mt-12 mb-4">
                     <h3 className="mb-6 mt-0">Quick links</h3>
-                    <LinkGrid links={quickLinks} />
+                    <List
+                        className="grid md:grid-cols-2 gap-1"
+                        items={quickLinks.map(({ name, to, description }) => ({
+                            label: name,
+                            url: to,
+                            description,
+                        }))}
+                    />
                 </section>
 
                 {/* Get started section */}

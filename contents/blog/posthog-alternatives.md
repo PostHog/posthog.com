@@ -702,7 +702,7 @@ Users consistently praise LogRocket's session replay tools, but other features a
 <BorderWrapper>
     <Quote
         imageSource="/images/customers/alberto.jpg"
-        size="md"
+        size="sm"
         name="Alberto Santos"
         title="Web & Brand Lead, AssemblyAI"
         quote={`“PostHog helps us debug support issues, because we push errors to PostHog as events. It may not be exactly what PostHog was intended for, but it is really useful and shows how adaptable PostHog is.”`}
@@ -714,7 +714,7 @@ Users consistently praise LogRocket's session replay tools, but other features a
 <BorderWrapper>
     <Quote
         imageSource="/images/customers/allison.jpg"
-        size="md"
+        size="sm"
         name="Allison Nulty"
         title="Head of Product, Contra "
         quote={`“A huge competitive advantage has been the ability to talk directly with PostHog engineers over Slack. We share feedback, ask questions, and make requests and always see a quick response time and thoughtful suggestions. At Contra, we apply these same principles of collaborating with our community to build our product.”`}
@@ -726,7 +726,7 @@ Users consistently praise LogRocket's session replay tools, but other features a
 <BorderWrapper>
     <Quote
         imageSource="/images/customers/andrewmaguire.jpeg"
-        size="md"
+        size="sm"
         name="Andy Maguire"
         title="Analytics & Machine Learning Lead, Netdata"
         quote={`“I just trust that, when PostHog does something, it will do it the right way because it's not just open source code, it's all developed in the open too. You'd never get that modern thinking with the likes of Mixpanel, or other more 'Old School' platforms.”`}

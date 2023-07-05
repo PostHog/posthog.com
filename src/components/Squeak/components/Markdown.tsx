@@ -46,6 +46,9 @@ export const Markdown = ({
                         </>
                     )
                 },
+                code: ({ node, ...props }) => {
+                    return <code {...props} className="break-all" />
+                },
                 a: ({ node, ...props }) => {
                     return <a rel="nofollow" {...props} />
                 },

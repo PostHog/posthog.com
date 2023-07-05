@@ -36,7 +36,7 @@ export default function EnterpriseModal({ setOpen, open, hideActions, hideBadge 
                         <Plan
                             title="Calculate your price"
                             subtitle="Pay based on the events you capture each month."
-                            className="border border-dashed border-gray-accent-light rounded-sm lg:flex-shrink-0 w-full md:w-auto"
+                            className=" rounded-sm lg:flex-shrink-0 w-full md:w-auto"
                         >
                             <div className="mb-4">
                                 <div className="flex justify-between items-center mt-7">
@@ -56,7 +56,9 @@ export default function EnterpriseModal({ setOpen, open, hideActions, hideBadge 
 
                             <div className="mb-4 border border-white/10 rounded">
                                 <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
-                                    <div className="mb-0 text-sm text-almost-black text-opacity-75">Event volume</div>
+                                    <div className="mb-0 text-sm text-primary/75 dark:text-primary-dark/75">
+                                        Event volume
+                                    </div>
                                     <div className="opacity-50 text-2xs text-right">Monthly price per event</div>
                                 </div>
                                 <dl className="flex justify-between mb-0 p-2">
@@ -78,7 +80,7 @@ export default function EnterpriseModal({ setOpen, open, hideActions, hideBadge 
                             </div>
 
                             <div className="flex justify-between items-baseline">
-                                <div className="mb-0 text-sm font-bold text-almost-black text-opacity-75">
+                                <div className="mb-0 text-sm font-bold text-primary/75 dark:text-primary-dark/75">
                                     Monthly minimum price
                                 </div>
                                 <div className="mb-0 flex items-baseline">

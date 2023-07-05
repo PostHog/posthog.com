@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import qs from 'qs'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import QuestionForm from 'components/Questions/QuestionForm'
-import TopicsTable from 'components/Questions/TopicsTable'
 import CommunityLayout from 'components/Community/Layout'
+import useTopicsNav from '../../navs/useTopicsNav'
+import QuestionsTable from 'components/Questions/QuestionsTable'
+import { useQuestions } from 'hooks/useQuestions'
 
 export const fetchTopicGroups = async () => {
     // FIXME: This is has to fetch _every_ (or probably at most 25) quesiton that's part of a topic even though we only need the most recent one
@@ -50,16 +52,17 @@ export const fetchTopicGroups = async () => {
 export const topicGroupsSorted = ['Products', 'Platform', 'Data', 'Self-hosting', 'Other']
 
 export default function Questions() {
-    const [topicGroups, setTopicGroups] = useState([])
+    const { questions, isLoading, fetchMore, hasMore } = useQuestions({
+        limit: 20,
+        sortBy: 'activity',
+    })
 
-    useEffect(() => {
-        fetchTopicGroups().then((topicGroups) => setTopicGroups(topicGroups))
-    }, [])
+    const topicsNav = useTopicsNav()
 
     return (
-        <CommunityLayout title="Questions">
-            <div className="max-w-6xl mx-auto space-y-8 pb-12">
-                <section className="max-w-6xl mx-auto">
+        <CommunityLayout menu={topicsNav} title="Questions">
+            <div className="space-y-8 pb-12">
+                <section>
                     <div className="w-full sm:flex items-center mb-8">
                         <h1 className="text-4xl m-0">Community questions</h1>
                         <div className="ml-auto sm:mt-0 mt-4">
@@ -67,23 +70,15 @@ export default function Questions() {
                         </div>
                     </div>
 
-                    <div className="full">
-                        <SidebarSearchBox filter="question" />
+                    <div className="mt-8 flex flex-col">
+                        <QuestionsTable
+                            questions={questions}
+                            showTopic
+                            fetchMore={fetchMore}
+                            isLoading={isLoading}
+                            hasMore={hasMore}
+                        />
                     </div>
-
-                    {topicGroups?.length > 0 && (
-                        <div className="mt-8 flex flex-col space-y-8">
-                            {topicGroups
-                                .sort(
-                                    (a, b) =>
-                                        topicGroupsSorted.indexOf(a?.attributes?.label) -
-                                        topicGroupsSorted.indexOf(b?.attributes?.label)
-                                )
-                                .map(({ attributes: { label, topics } }) => {
-                                    return <TopicsTable key={label} topicGroup={label} topics={topics} />
-                                })}
-                        </div>
-                    )}
                 </section>
             </div>
         </CommunityLayout>

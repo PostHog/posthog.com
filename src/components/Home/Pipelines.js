@@ -19,18 +19,18 @@ const PipelineGraphic = () => {
         <div className="hidden sm:grid grid-cols-1 lg:grid-cols-3 mt-16 col-span-3 w-1/4 lg:w-auto">
             <div className="flex justify-center items-center lg:flex-col">
                 <Icon className="h-5 w-5" name="bullet" />
-                <div className="lg:w-[1px] w-full lg:h-28 h-[1px] relative border-t-2 lg:border-l-2 border-gray-accent-light border-dashed" />
-                <div className="h-1/2 lg:w-1/2  w-[1px] lg:h-[1px] border-l-2 lg:border-t-2 self-end border-gray-accent-light border-dashed" />
+                <div className="lg:w-[1px] w-full lg:h-28 h-[1px] relative" />
+                <div className="h-1/2 lg:w-1/2  w-[1px] lg:h-[1px] self-end " />
             </div>
             <div className="flex justify-center items-center lg:flex-col">
                 <Icon className="h-5 w-5" name="bullet" />
-                <div className="lg:w-[1px] w-full lg:h-28 h-[1px] relative border-t-2 lg:border-l-2 border-gray-accent-light border-dashed" />
-                <div className="lg:w-full w-[1px] lg:h-[1px] h-full lg:border-t-2 border-l-2 self-end lg:self-start border-gray-accent-light border-dashed" />
+                <div className="lg:w-[1px] w-full lg:h-28 h-[1px] relative" />
+                <div className="lg:w-full w-[1px] lg:h-[1px] h-full self-end" />
             </div>
             <div className="flex justify-center items-center lg:flex-col">
                 <Icon className="h-5 w-5" name="bullet" />
-                <div className="w-full lg:w-[1px] h-1[px] lg:h-28 relative border-t-2 lg:border-l-2 border-gray-accent-light border-dashed" />
-                <div className="w-[1px] lg:w-1/2 h-full lg:h-[1px] border-l-2 lg:border-t-2 self-start border-gray-accent-light border-dashed" />
+                <div className="w-full lg:w-[1px] h-1[px] lg:h-28 relative" />
+                <div className="w-[1px] lg:w-1/2 h-full lg:h-[1px] self-start" />
             </div>
             <div className="flex justify-center items-center lg:flex-col relative lg:col-span-3">
                 <div className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 w-full -top-8 z-10">
@@ -40,8 +40,8 @@ const PipelineGraphic = () => {
                     </h5>
                 </div>
 
-                <div className="w-full lg:w-[1px] h-[1px] lg:h-28 relative border-t-2 lg:border-l-2 border-gray-accent-light border-dashed" />
-                <div className="block lg:hidden w-[1px] lg:w-1/2 h-1/2 lg:h-[1px] border-l-2 lg:border-t-2 self-start border-gray-accent-light border-dashed" />
+                <div className="w-full lg:w-[1px] h-[1px] lg:h-28 relative" />
+                <div className="block lg:hidden w-[1px] lg:w-1/2 h-1/2 lg:h-[1px] self-start" />
                 <Icon className="h-5 w-5 order-first lg:order-last" name="bullet" />
             </div>
         </div>

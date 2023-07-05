@@ -17,6 +17,7 @@ import { InlineCode } from 'components/InlineCode'
 import { Blockquote } from 'components/BlockQuote'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { ZoomImage } from 'components/ZoomImage'
+import Markdown from 'components/Squeak/components/Markdown'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -28,12 +29,15 @@ interface IProps {
         author?: string
         tags?: string[]
         video?: string
+        type?: string
+        bodyType?: 'markdown' | 'mdx'
     }[]
     title?: string
     initialIndex?: number
+    scrollToTop?: boolean
 }
 
-export default function ContentViewer({ content, title, initialIndex }: IProps) {
+export default function ContentViewer({ content, title, initialIndex, scrollToTop = true }: IProps) {
     const [currentIndex, setCurrentIndex] = useState<number | null>(initialIndex ?? null)
     const [contentView, setContentView] = useState('Article')
     const currentContent = currentIndex !== null && content[currentIndex]
@@ -62,10 +66,10 @@ export default function ContentViewer({ content, title, initialIndex }: IProps) 
     return (
         <div className="flex gap-x-6 lg:gap-x-12 relative">
             <motion.div className="md:flex-[0_0_350px]">
-                <div className="sticky top-4">
+                <div className="reasonable:sticky reasonable:top-[108px]">
                     {title && <h3 className="text-lg mb-2">{title}</h3>}
                     <ul className="list-none m-0 p-0 grid gap-y-1">
-                        {content.map(({ title, author, image, tags, video }, index) => {
+                        {content.map(({ title, author, image, tags, video, type }, index) => {
                             const active = currentIndex === index
                             const hasTags = tags && tags.length
                             return (
@@ -73,21 +77,31 @@ export default function ContentViewer({ content, title, initialIndex }: IProps) 
                                     <button
                                         onClick={() => {
                                             setCurrentIndex(index)
-                                            scroll.scrollToTop()
+                                            scrollToTop && scroll.scrollToTop()
                                         }}
-                                        className={`p-4 rounded-md w-full text-left relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px] hover:bg-gray-accent-light ${
-                                            active ? 'bg-gray-accent-light hover:top-[0px] hover:scale-[1]' : ''
+                                        className={`w-full text-left group items-center relative px-4 pt-2.5 pb-2 rounded border border-b-3 hover:border-light dark:hover:border-dark ${
+                                            active
+                                                ? 'bg-accent dark:bg-accent-dark border-light dark:border-dark hover:top-[0px] hover:scale-[1]'
+                                                : 'border-transparent hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                                         }`}
                                     >
                                         {image && <img className="max-h-[30px] mb-2" src={image} />}
+
+                                        <p className="!m-0 font-semibold !leading-tight !text-[15px]">{title}</p>
+                                        {(author || type) && (
+                                            <p className="!text-[13px] font-semibold !m-0 opacity-60 !mt-0.5">
+                                                {type} {author && `by ${author}`}
+                                            </p>
+                                        )}
+
                                         {(hasTags || video) && (
-                                            <div className="flex justify-between lg:space-x-2 lg:space-y-0 space-y-2 space-y-reverse lg:flex-row flex-col-reverse items-start">
+                                            <div className="flex justify-between space-y-2 lg:space-x-2 lg:space-y-0 space-y-reverse lg:flex-row flex-col-reverse items-start mt-1">
                                                 {hasTags && (
                                                     <ul className="list-none m-0 mb-1 p-0 flex items-center flex-wrap">
                                                         {tags.map((tag) => {
                                                             return (
                                                                 <li
-                                                                    className="rounded-full px-2 py-1 mr-1 bg-red/10 text-red text-xs whitespace-nowrap mb-1"
+                                                                    className="rounded-full px-2 py-1 mr-1 bg-red/10 text-red !text-xs whitespace-nowrap mb-1"
                                                                     key={tag}
                                                                 >
                                                                     {tag}
@@ -100,11 +114,6 @@ export default function ContentViewer({ content, title, initialIndex }: IProps) 
                                                     <Video className="w-6 opacity-50 flex-shrink-0 right-4 top-3 absolute lg:relative" />
                                                 )}
                                             </div>
-                                        )}
-
-                                        <p className="m-0 font-semibold leading-tight text-[15px]">{title}</p>
-                                        {author && (
-                                            <p className="text-sm font-semibold m-0 opacity-60 mt-1">by {author}</p>
                                         )}
                                     </button>
                                 </li>
@@ -126,6 +135,8 @@ export default function ContentViewer({ content, title, initialIndex }: IProps) 
                             )}
                             {currentContent.video && contentView === 'Video' ? (
                                 <iframe src={currentContent.video} />
+                            ) : currentContent.bodyType === 'markdown' ? (
+                                <Markdown>{currentContent.body}</Markdown>
                             ) : (
                                 <MDXProvider components={components}>
                                     <MDXRenderer>{currentContent.body}</MDXRenderer>
