@@ -163,11 +163,11 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing }) => {
     )
 }
 
-const InternalMenu = () => {
+export const InternalMenu = ({ className = '' }) => {
     const ref = useRef<HTMLUListElement>(null)
     const { internalMenu, activeInternalMenu } = useLayoutData()
     const [overflowing, setOverflowing] = useState(false)
-    const activeIndex = internalMenu.findIndex((menu) => menu === activeInternalMenu)
+    const activeIndex = internalMenu?.findIndex((menu) => menu === activeInternalMenu)
 
     function handleResize() {
         setOverflowing((ref?.current && ref?.current.scrollWidth > ref?.current.clientWidth) || false)
@@ -181,11 +181,11 @@ const InternalMenu = () => {
         }
     }, [])
 
-    return (
+    return internalMenu?.length > 0 ? (
         <ul
             style={{ justifyContent: overflowing ? 'start' : 'center' }}
             ref={ref}
-            className="flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x overflow-x-auto overflow-y-hidden"
+            className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x overflow-x-auto overflow-y-hidden ${className}`}
         >
             {internalMenu.map((menuItem, index) => {
                 return (
@@ -198,7 +198,7 @@ const InternalMenu = () => {
                 )
             })}
         </ul>
-    )
+    ) : null
 }
 
 const keyboardShortcut =
@@ -340,7 +340,7 @@ export const Main = () => {
                     </div>
                 </div>
             </div>
-            {internalMenu?.length > 0 && <InternalMenu />}
+            <InternalMenu className="lg:flex hidden" />
         </div>
     )
 }
@@ -349,29 +349,32 @@ export const Mobile = () => {
     const { menu, parent } = useLayoutData()
 
     return (
-        <ul className="grid grid-cols-5 gap-[2px] fixed bottom-0 w-full lg:hidden list-none m-0 py-1 px-2 border-t border-border dark:border-dark bg-accent dark:bg-accent-dark z-[9999]">
-            {menu.map((menuItem) => {
-                const active = menuItem.name === parent?.name
-                const { name, url, icon } = menuItem
-                const Icon = icons[icon]
-                return (
-                    <li className="h-full" key={name}>
-                        <Link
-                            to={url}
-                            className={`text-[12.5px] font-medium relative px-4 py-3 flex flex-col space-y-1 items-center ${
-                                active
-                                    ? 'bg-accent-dark/10 dark:bg-accent/10 rounded font-bold'
-                                    : 'opacity-70 hover:opacity-100'
-                            }`}
-                        >
-                            <span className={`w-5 h-5 inline-block`}>
-                                <Icon />
-                            </span>
-                            <span>{name}</span>
-                        </Link>
-                    </li>
-                )
-            })}
-        </ul>
+        <div className="fixed bottom-0 w-full lg:hidden z-[9999]">
+            <InternalMenu className="bg-accent dark:bg-accent-dark border-t" />
+            <ul className="grid grid-cols-5 gap-[2px] list-none m-0 py-1 px-2 bg-accent dark:bg-accent-dark">
+                {menu.map((menuItem) => {
+                    const active = menuItem.name === parent?.name
+                    const { name, url, icon } = menuItem
+                    const Icon = icons[icon]
+                    return (
+                        <li className="h-full" key={name}>
+                            <Link
+                                to={url}
+                                className={`text-[12.5px] font-medium relative px-4 py-3 flex flex-col space-y-1 items-center ${
+                                    active
+                                        ? 'bg-accent-dark/10 dark:bg-accent/10 rounded font-bold'
+                                        : 'opacity-70 hover:opacity-100'
+                                }`}
+                            >
+                                <span className={`w-5 h-5 inline-block`}>
+                                    <Icon />
+                                </span>
+                                <span>{name}</span>
+                            </Link>
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
     )
 }

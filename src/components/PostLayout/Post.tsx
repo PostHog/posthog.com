@@ -44,6 +44,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
 
     return (
         <div className="">
+            {menu && mobileMenu && <MobileNav />}
             <div
                 className={`w-full relative lg:flex justify-between mx-auto transition-all ${
                     fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
@@ -83,7 +84,6 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     </div>
                     {!hideSurvey && <Survey />}
                     {nextPost && <NextPost />}
-                    {menu && mobileMenu && <MobileNav />}
                 </article>
                 {!hideSidebar && sidebar && (
                     <aside

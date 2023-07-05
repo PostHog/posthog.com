@@ -1,15 +1,11 @@
-import { DarkModeToggle } from 'components/DarkModeToggle'
-import { Bookmark, InfoOutlined, Chevron, RightArrow, TableOfContents } from 'components/Icons'
+import { Chevron, RightArrow } from 'components/Icons'
 import { AnimatePresence, useDragControls, useMotionValue, useTransform, motion } from 'framer-motion'
 import React, { useEffect, useRef, useState } from 'react'
 import { usePost } from './hooks'
 import { IMenu } from './types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
-import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import slugify from 'slugify'
-
-const menuButtonClasses = `bg-accent dark:bg-accent-dark border border-light dark:border-dark inline-flex space-x-2 items-center font-semibold active:top-[0.5px] text-[15px] py-3 px-5 active:scale-[.98] transition-transform text-black dark:text-white shadow-md rounded-md`
 
 const container = {
     hidden: { opacity: 0 },
@@ -113,7 +109,7 @@ export const MenuContainer = ({
                 initial={{ translateY: '100%', opacity: 0 }}
                 animate={{ translateY: 0, opacity: 1 }}
                 exit={{ translateY: '100%', opacity: 0 }}
-                className="fixed bottom-[75px] w-full left-0"
+                className="fixed bottom-0 w-full left-0"
             >
                 <motion.div
                     dragConstraints={{ top: 0 }}
@@ -139,9 +135,10 @@ export const MenuContainer = ({
     )
 }
 
-const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => {
-    const { menu: postMenu } = usePost()
+export default function MobileNav() {
+    const { menu: postMenu, title } = usePost()
     if (!postMenu) return null
+    const [open, setOpen] = useState<null | string>(null)
     const { pathname } = useLocation()
     const [animationDirection, setAnimationDirection] = useState<'forward' | 'backward'>('forward')
     const previousMenu = useRef<IGetActiveMenu>()
@@ -160,6 +157,7 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
             }
         } else if (url) {
             navigate(url)
+            setOpen(null)
         }
     }
 
@@ -188,158 +186,86 @@ const MobileMenu = ({ setOpen }: { setOpen: (open: null | string) => void }) => 
     }
 
     return (
-        <MenuContainer setOpen={setOpen}>
-            <motion.ul
-                key={menu?.parent?.name}
-                {...motionListContainer}
-                className="list-none m-0 p-0 h-[40vh] overflow-auto"
+        <>
+            <button
+                onClick={() => setOpen('menu')}
+                className="font-bold px-5 py-2 lg:hidden flex w-full items-center justify-between border-b border-border dark:border-border-dark group -mt-1"
             >
-                {menu?.parent?.menu && (
-                    <motion.li
-                        initial={{ translateX: '100%', opacity: 0 }}
-                        animate={{ translateX: 0, opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="pb-1 mb-2 flex flex-start items-center relative"
-                    >
-                        <button
-                            className="inline-block font-bold bg-gray-accent-light dark:bg-gray-accent-dark mr-2 rounded-sm p-1"
-                            onClick={() => {
-                                setAnimationDirection('backward')
-                                handleClick({ menu: menu?.parent?.menu })
-                            }}
+                <span className="flex items-center space-x-2 group-active:top-[0.5px] group-active:scale-[.98] transition-all">
+                    {menu?.parent?.name && <span>{menu?.parent?.name}</span>}
+                    {menu?.parent?.name && <span className="opacity-60">→</span>}
+                    <span>{title}</span>
+                </span>
+                <Chevron
+                    className={`w-4 h-4 origin-[center_40%] transition-all group-active:top-[0.5px] group-active:scale-[.98] ${
+                        open ? 'rotate-180' : 'opacity-60'
+                    }`}
+                />
+            </button>
+            <AnimatePresence>
+                {open === 'menu' && (
+                    <MenuContainer setOpen={setOpen}>
+                        <motion.ul
+                            key={menu?.parent?.name}
+                            {...motionListContainer}
+                            className="list-none m-0 p-0 h-[40vh] overflow-auto"
                         >
-                            <RightArrow className="w-6 rotate-180" />
-                        </button>
-                        <h5 className="m-0 text-base font-bold">{menu?.parent?.name}</h5>
-                    </motion.li>
-                )}
-                {menu?.menu?.map(({ name, url, children }, index) => {
-                    return (
-                        <motion.li
-                            variants={item}
-                            exit={{ opacity: 0 }}
-                            className={`${url === undefined ? 'mt-5' : ''} relative`}
-                            key={name + index + url}
-                        >
-                            <div className={`text-base`}>
-                                {url === undefined ? (
-                                    <h5
-                                        id={`mobile-nav-${slugify(name, { lower: true })}`}
-                                        className="m-0 text-lg pb-2"
-                                    >
-                                        {name}
-                                    </h5>
-                                ) : (
+                            {menu?.parent?.menu && (
+                                <motion.li
+                                    initial={{ translateX: '100%', opacity: 0 }}
+                                    animate={{ translateX: 0, opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="pb-1 mb-2 flex flex-start items-center relative"
+                                >
                                     <button
-                                        className={`${
-                                            url === pathname ? 'active-product opacity-90' : 'opacity-50'
-                                        } hover:opacity-100 border-b border-gray-accent-light/50 dark:border-gray-accent-dark border-solid font-semibold flex w-full justify-between space-x-1 items-center py-2`}
+                                        className="inline-block font-bold bg-gray-accent-light dark:bg-gray-accent-dark mr-2 rounded-sm p-1"
                                         onClick={() => {
-                                            setAnimationDirection('forward')
-                                            handleClick({ url, menu: children })
+                                            setAnimationDirection('backward')
+                                            handleClick({ menu: menu?.parent?.menu })
                                         }}
                                     >
-                                        <span className="text-left">{name}</span>
-                                        {children && <Chevron className="w-3 opacity-75 -rotate-90" />}
+                                        <RightArrow className="w-6 rotate-180" />
                                     </button>
-                                )}
-                            </div>
-                        </motion.li>
-                    )
-                })}
-            </motion.ul>
-        </MenuContainer>
-    )
-}
-
-const MobileTOC = ({ setOpen }: { setOpen: (open: null | string) => void }) => {
-    const { tableOfContents } = usePost()
-    if (!tableOfContents) return null
-    const item = {
-        hidden: {
-            translateX: '50%',
-            opacity: 0,
-        },
-        show: { translateX: 0, opacity: 1 },
-    }
-    return (
-        <MenuContainer setOpen={setOpen}>
-            <motion.ul
-                {...motionListContainer}
-                className="list-none m-0 p-0 flex flex-col space-y-2 px-6 h-[40vh] overflow-auto"
-            >
-                {tableOfContents?.map((navItem, index) => {
-                    return (
-                        <motion.li variants={item} exit={{ opacity: 0 }} key={index}>
-                            <InternalSidebarLink
-                                onClick={() => setOpen(null)}
-                                url={navItem.url}
-                                name={navItem.value}
-                                depth={navItem.depth}
-                            />
-                        </motion.li>
-                    )
-                })}
-            </motion.ul>
-        </MenuContainer>
-    )
-}
-
-const MobileSidebar = ({ setOpen }: { setOpen: (open: null | string) => void }) => {
-    const { sidebar, filePath, title, darkMode } = usePost()
-    return (
-        <MenuContainer className="py-0" setOpen={setOpen}>
-            <div className={`flex flex-col`}>
-                {sidebar && <div className="mobile-sidebar-container max-h-[40vh] overflow-auto">{sidebar}</div>}
-                <div className={`mt-auto flex text-sm ${sidebar ? '' : ''}`}>
-                    {filePath && (
-                        <a
-                            className="p-3"
-                            href={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                        >
-                            Edit this page
-                        </a>
-                    )}
-                    {filePath && title && (
-                        <a
-                            className="p-3 "
-                            href={`https://github.com/PostHog/posthog.com/issues/new?title=Feedback on: ${title}&body=**Issue with: /${filePath}**\n\n`}
-                        >
-                            Raise an issue
-                        </a>
-                    )}
-                    {darkMode && (
-                        <div className="ml-auto p-3">
-                            <DarkModeToggle />
-                        </div>
-                    )}
-                </div>
-            </div>
-        </MenuContainer>
-    )
-}
-
-export default function MobileNav() {
-    const [open, setOpen] = useState<null | string>(null)
-    const { tableOfContents, filePath, title, sidebar, darkMode } = usePost()
-    return (
-        <>
-            <div className="sticky bottom-[85px] left-2 z-[999998] inline-block lg:hidden">
-                <button onClick={() => setOpen('menu')} className={`${menuButtonClasses}`}>
-                    Menu
-                </button>
-            </div>
-            {tableOfContents && tableOfContents?.length > 0 && (
-                <div className="sticky bottom-[85px] left-[calc(100%_-_1rem)] z-[999997] inline-block lg:hidden">
-                    <button onClick={() => setOpen('toc')} className={`${menuButtonClasses}`}>
-                        On this page...
-                    </button>
-                </div>
-            )}
-            <AnimatePresence>
-                {open === 'menu' && <MobileMenu setOpen={setOpen} />}
-                {open === 'toc' && <MobileTOC setOpen={setOpen} />}
-                {open === 'sidebar' && <MobileSidebar setOpen={setOpen} />}
+                                    <h5 className="m-0 text-base font-bold">{menu?.parent?.name}</h5>
+                                </motion.li>
+                            )}
+                            {menu?.menu?.map(({ name, url, children }, index) => {
+                                return (
+                                    <motion.li
+                                        variants={item}
+                                        exit={{ opacity: 0 }}
+                                        className={`${url === undefined ? 'mt-5' : ''} relative`}
+                                        key={name + index + url}
+                                    >
+                                        <div className={`text-base`}>
+                                            {url === undefined ? (
+                                                <h5
+                                                    id={`mobile-nav-${slugify(name, { lower: true })}`}
+                                                    className="m-0 text-lg pb-2"
+                                                >
+                                                    {name}
+                                                </h5>
+                                            ) : (
+                                                <button
+                                                    className={`${
+                                                        url === pathname ? 'active-product opacity-90' : 'opacity-50'
+                                                    } hover:opacity-100 border-b border-gray-accent-light/50 dark:border-gray-accent-dark border-solid font-semibold flex w-full justify-between space-x-1 items-center py-2`}
+                                                    onClick={() => {
+                                                        setAnimationDirection('forward')
+                                                        handleClick({ url, menu: children })
+                                                    }}
+                                                >
+                                                    <span className="text-left">{name}</span>
+                                                    {children && <Chevron className="w-3 opacity-75 -rotate-90" />}
+                                                </button>
+                                            )}
+                                        </div>
+                                    </motion.li>
+                                )
+                            })}
+                        </motion.ul>
+                    </MenuContainer>
+                )}
             </AnimatePresence>
         </>
     )
