@@ -114,12 +114,18 @@ const ActiveBackground = ({ mobile = false }) => {
     return (
         <span
             className={`bg-light dark:bg-dark absolute w-full h-[calc(100%+1px)] left-0 inset-0
-                before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:rounded-br-lg before:border-b before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
-                after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:rounded-bl-lg after:border-b after:right-0 after:bg-accent dark:after:bg-accent-dark ${
-                    mobile ? 'rotate-180 top-[-1px]' : ''
+                before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
+                after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:right-0 after:bg-accent dark:after:bg-accent-dark ${
+                    mobile
+                        ? 'before:rounded-tr-lg after:rounded-tl-lg top-[-1px] before:border-t after:border-t'
+                        : 'before:rounded-br-lg after:rounded-bl-lg before:border-b after:border-b'
                 }`}
         >
-            <span className="absolute bottom-0 left-0 border-b border-bg-light dark:border-bg-dark w-full" />
+            <span
+                className={`absolute ${
+                    mobile ? 'top-0' : 'bottom-0'
+                } left-0 border-b border-bg-light dark:border-bg-dark w-full`}
+            />
         </span>
     )
 }
