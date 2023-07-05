@@ -122,7 +122,7 @@ const ActiveBackground = () => {
     )
 }
 
-const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing }) => {
+const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile }) => {
     const ref = useRef<HTMLLIElement>(null)
     const { activeInternalMenu } = useLayoutData()
     const active = activeInternalMenu?.name === name
@@ -154,7 +154,9 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing }) => {
                     {name}
                 </span>
                 <span
-                    className={`absolute bottom-[calc(-.5rem_-_1px)] left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
+                    className={`absolute ${
+                        mobile ? 'top-[-4px]' : 'bottom-[calc(-.5rem_-_1px)]'
+                    } left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
                         active ? `border-${color}` : `border-transparent`
                     }`}
                 />
@@ -163,7 +165,7 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing }) => {
     )
 }
 
-export const InternalMenu = ({ className = '' }) => {
+export const InternalMenu = ({ className = '', mobile = false }) => {
     const ref = useRef<HTMLUListElement>(null)
     const { internalMenu, activeInternalMenu } = useLayoutData()
     const [overflowing, setOverflowing] = useState(false)
@@ -194,6 +196,7 @@ export const InternalMenu = ({ className = '' }) => {
                         {...menuItem}
                         initialScrollTo={activeIndex === index}
                         overflowing={overflowing}
+                        mobile={mobile}
                     />
                 )
             })}
@@ -350,7 +353,7 @@ export const Mobile = () => {
 
     return (
         <div className="fixed bottom-0 w-full lg:hidden z-[9999]">
-            <InternalMenu className="bg-accent dark:bg-accent-dark border-t" />
+            <InternalMenu mobile className="bg-accent dark:bg-accent-dark border-t" />
             <ul className="grid grid-cols-5 gap-[2px] list-none m-0 py-1 px-2 bg-accent dark:bg-accent-dark">
                 {menu.map((menuItem) => {
                     const active = menuItem.name === parent?.name
