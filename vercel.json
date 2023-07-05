@@ -989,7 +989,8 @@
         { "source": "/docs/data/data-warehouse", "destination": "/docs/data-warehouse" },
         { "source": "/docs/apps/zendesk-connector", "destination": "/docs/cdp/zendesk-connector" },
         { "source": "/docs/data/autocapture", "destination": "/docs/product-analytics/autocapture" },
-        { "source": "/docs/apps/enabling", "destination": "/docs/apps#enabling-apps" }
+        { "source": "/docs/apps/enabling", "destination": "/docs/apps#enabling-apps" },
+        { "source": "/docs/integrations", "destination": "/docs/frameworks" }
     ],
     "rewrites": [
         {
