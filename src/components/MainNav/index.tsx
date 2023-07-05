@@ -372,7 +372,7 @@ export const Mobile = () => {
                                 }`}
                             >
                                 {active && <ActiveBackground mobile />}
-                                <span className={`w-5 h-5 inline-block relative`}>
+                                <span className={`w-5 h-5 inline-block relative !m-0`}>
                                     <Icon />
                                 </span>
                                 <span className="relative">{name}</span>

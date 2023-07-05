@@ -21,7 +21,7 @@ export default function CookieBanner() {
     }, [])
 
     return showBanner ? (
-        <div className="fixed z-50 left-0 lg:bottom-0 bottom-[75px]">
+        <div className="fixed z-50 left-0 lg:bottom-0 bottom-[126.75px]">
             <div className="bg-primary/80 backdrop-blur dark:bg-gray-accent-dark rounded-[15px] shadow-[0px_4px_10px_rgba(0,0,0,.4)] px-6 py-5 sm:pb-3 w-[calc(100%_-_2rem)] sm:max-w-[300px] translate-x-4 sm:translate-x-[80px] border border-white/20 mb-2">
                 <p className="text-[14px] m-0 pb-2 text-white">
                     <strong>PostHog.com doesn't use third party cookies</strong>{' '}
