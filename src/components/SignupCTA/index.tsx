@@ -11,8 +11,8 @@ export const SignupCTA = ({
     text = 'Get started - free',
     type = 'primary',
     width,
-    event,
     size = 'lg',
+    ...other
 }: {
     text?: string
     className?: string
@@ -22,6 +22,11 @@ export const SignupCTA = ({
     size?: 'lg' | 'sm' | 'md'
 }): JSX.Element => {
     const posthog = usePostHog()
+
+    const event = other.event ?? {
+        name: `clicked ${text}`,
+        type: 'cloud',
+    }
 
     return (
         <RenderInClient
