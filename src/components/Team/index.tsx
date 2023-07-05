@@ -36,16 +36,14 @@ export default function TeamNew() {
                                 to={`/community/profiles/${squeakId}`}
                                 className="flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
                             >
-                                <div className="flex flex-col justify-between px-6 py-4 w-full mr-40">
+                                <div className="flex flex-col justify-between px-6 py-4 w-full mr-32 xl:mr-40">
                                     <div>
-                                        <div className="flex">
-                                            <h3
-                                                className="mb-0 text-lg"
-                                                id={kebabCase(name) + '-' + kebabCase(companyRole)}
-                                            >
-                                                {name}
-                                            </h3>
-                                        </div>
+                                        <h3
+                                            className="mb-0 text-lg leading-tight"
+                                            id={kebabCase(name) + '-' + kebabCase(companyRole)}
+                                        >
+                                            {name}
+                                        </h3>
                                         <p className="text-primary/50 text-sm dark:text-primary-dark/50">
                                             {companyRole}
                                         </p>
@@ -54,9 +52,9 @@ export default function TeamNew() {
                                     <span className="flex items-center gap-2">
                                         {country === 'world' ? '🌎' : <ReactCountryFlag svg countryCode={country} />}
                                         {country === 'world' ? (
-                                            <span className="opacity-75">Planet earth</span>
+                                            <span className="opacity-75 text-sm opacity-75">Planet earth</span>
                                         ) : (
-                                            <span className="opacity-75">{location || country}</span>
+                                            <span className="opacity-75 text-sm opacity-75">{location || country}</span>
                                         )}
                                     </span>
                                 </div>
