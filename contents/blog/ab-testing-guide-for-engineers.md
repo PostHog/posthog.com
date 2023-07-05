@@ -19,6 +19,8 @@ A/B testing enables you to be confident that your product changes are having the
 
 Companies like [Netflix](https://uxdesign.cc/how-netflix-does-a-b-testing-87df9f9bf57c), [Uber](https://www.uber.com/en-GB/blog/supercharging-a-b-testing-at-uber/) and [Booking.com](https://booking.ai/tagged/ab-testing) use A/B testing to ship hundreds of changes a day. In this blog, we'll teach you basic concepts to get you started in A/B testing and supercharge your product growth!
 
+> **Note:** A/B tests are commonly referred to as "experiments".
+
 ## How A/B testing works
 
 In A/B testing, you first decide on a goal metric and what change you'd like to see. For example, you may to increase conversion rate, or you may want to decrease customer churn rate. Then, once you've made your code changes and are ready to test, you **randomly** split your users into two (or more) groups:
@@ -28,9 +30,9 @@ In A/B testing, you first decide on a goal metric and what change you'd like to 
 
 You then run your A/B test for some time, usually a few days or weeks, to gather data and compare the differences in the goal metric between the different groups.
 
-> These groups are also sometimes referred to as "variants", and A/B tests can be referred to as "experiments".
+![How A/B testing works](../images/blog/ab-testing-guide-for-engineers/ab-test-illustration.png)
 
-![How A/B testing works](../images/blog/ab-test-illustration.png)
+> **Note:** These groups are also referred to as "variants".
 
 ## What makes a good A/B test?
 
@@ -66,22 +68,22 @@ To know whether your change is large enough, you'll need to know:
 2. Your "minimum detectable effect" i.e., the smallest change in the conversion rate that you want to detect. The smaller the change, the larger the sample size you'll need.
 3. Your desired level of confidence (the industry standard is 95%).
 
-You then use a [formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself (We also include this calculator when creating a new [A/B test in PostHog](/ab-testing/features).
+You then use a [formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself (We also include this calculator when creating a new [A/B test in PostHog](/ab-testing/features)).
 
 ### 5. Has a long enough test duration
 
 Building on the notion of ensuring statistical significant results, once you've calculated your required sample size, you'll be able to calculate how long your experiment should run for. You do this by dividing your sample size by your daily number of eligible users.
 
-For example, if you're making changes to your signup flow and your required sample size is 1,000 new signups. If your daily number of signups is 100, then you'll need to run your experiment for `1,000 / 100` = 10 days.
+For example, if you're making changes to your signup flow and your required sample size is 1,000 new signups. If your daily number of signups is 100, then you'll need to run your experiment for `1,000 / 100 = 10 days`.
 
 Once again, there are many calculators online to help you determine your duration, and PostHog also includes this calculator when creating a new experiment.
 
-A good rule of thumb is that your experiment duration should be between one week and one month:
-
+**A good rule of thumb is that your experiment duration should be between one week and one month:
+**
 - One week is a good minimum since users may behave differently on weekends or weekdays.
 - One month is a good maximum since otherwise you may delay shipping important product changes.
 
-### When not to A/B test
+## When not to A/B test
 
 There's are costs and trade-offs to running A/B tests, and so it may not be a good idea to always run them. Here a few scenarios in which you may not want to run an A/B test:
 
@@ -95,33 +97,58 @@ There's are costs and trade-offs to running A/B tests, and so it may not be a go
 
 In the above scenarios, it may be better to rely on qualitative feedback or user research for decision making.
 
-## Designing your first experiment
+## How to implement a good A/B test
 
-Goal, 
-Counter metrics
+Once you're satisfied that your experiment meets the [critera of a good A/B test](#what-makes-a-good-ab-test), it's time to implement it in your code. This is typically done by using [feature flags](/feature-flags/features) to randomly assign users to an experiment variant, and then logging when users are exposed to the variant i.e., trigger the code path that checks for the feature flag. This enables you to compare metrics in aggregate between the users in your variants.
 
-Example: Removing onboarding step 
+It's absolutely **essential** to only log the users in your experiment who are actually impacted by the changes you're testing. Users who aren't affected by your test should be excluded. If you include unaffected users, their unchanged behavior will mix in with your results, thereby watering down the impact and the clarity of your findings.
 
-* 		Implementing an A/B Test: Discuss the technical aspects of setting up an A/B test, including tools and techniques. This could also cover the role of feature flags, cookies, and session management.
+To do so, ensure that checking your feature flag and logging their exposure is the *absolute* last condition you check in your code: 
 
-Exposure logging
+```
+// ❌ Incorrect. Will include unaffected users
+function showNewChanges(user) {
+  if (posthog.getFeatureFlag('experiment-key') === 'control') {
+    return false;
+  }
 
-> Avoid overexposures
+  if (user.hasCompletedAction) {
+    return false
+  }
 
+  // other checks
 
-* Check up on your experiment a day or two after launch, ensure logging is what you expect etc. no crashes, Worse is that you see you’ve made a mistake with your event logging
-    * Check also your exposure logging is the volume you expect, and more or less in the ratios you expect too 
+  return true
+}
+```
 
+```
+// ✅ Correct. Will exclude unaffected users
+function showNewChanges(user) {
 
-How long your experiment should run for
-Avoiding peeking problem
+  if (user.hasCompletedAction) {
+    return false
+  }
 
-avoiding making too many changes at once
+  // other checks
 
-### Running multiple experiments?
+  if (posthog.getFeatureFlag('experiment-key') === 'control') {
+    return false;
+  }
 
+  return true
+}
+```
 
-### How to forumlate a hypothesis 
+## Monitoring your A/B test
+
+Once you've started your A/B test, it's a good idea to check in on it 24-48 hours after launch to ensure that everything is running correctly. Here's a list of things to check:
+
+* Check your exposure logging. For example, that the volume of users assigned to the control and test variant is what you'd expect it to be.
+* Check your event logging e.g., ensure that you're receiving all the events you expect to receive, and in the right ratios.
+* Monitor crashes or error rates to ensure that your experiment is not causing any issues. 
+
+Once you're sure that everything is running smoothly, try to avoid frequently looking at the results until the experiment is finished. Checking too often can lead to reactive decisions based on incomplete data. It's usually best to wait until the experiment ends to make any decisions, as you'll have the best data at that point.
 
 ## Concluding an experiment
 
@@ -134,9 +161,19 @@ how to interpret the results - a few examples
  - what happens if statsical signifcant 
 determining your next steps
 
+## FAQ
+
+### Running multiple experiments?
+
+
 ### Q: My A/B test showed no significant difference. Is it a failure?
 
 ### Are A/B tests only for product changes?
+
+### How often should I check the results during an A/B test?
+
+### Should I always choose the variant with the highest conversion rate?
+
 
 
 ## Best practices ?
@@ -149,3 +186,5 @@ determining your next steps
 
 Group vs User level experiments
 link to blog 
+
+Add link to this blog in the docs
