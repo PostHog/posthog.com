@@ -178,15 +178,6 @@ This does not mean your experiment was a failure! It suggests that the results o
 
 - **Accept the results:** Sometimes, an insignificant result is the correct result. It tells you that the change you made didn't have the impact you thought it would. This is still a valuable insight, and helps you shipping unnecessary changes.
 
-
-Calculate Effect Size
-Review Secondary Metrics
-
-how to interpret the results - a few examples 
- - what happens if not statistical signfiance?
- - what happens if statsical significant 
-determining your next steps
-
 ## Frequently asked questions
 
 ### Can I run multiple A/B tests at the same time?
