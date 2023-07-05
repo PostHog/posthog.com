@@ -993,6 +993,7 @@
         { "source": "/docs/data/autocapture", "destination": "/docs/product-analytics/autocapture" },
         { "source": "/docs/apps/enabling", "destination": "/docs/apps#enabling-apps" },
         { "source": "/docs/integrations", "destination": "/docs/frameworks" }
+        { "source": "/blog/how-to-product-market-fit", "destination": "/blog/product-market-fit-game" }
     ],
     "rewrites": [
         {

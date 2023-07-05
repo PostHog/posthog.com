@@ -15,7 +15,6 @@ category: General
 tags:
   - Open source
   - Guides
-  - Comparisons
   - Session recording
 ---
 

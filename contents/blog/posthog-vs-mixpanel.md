@@ -21,14 +21,6 @@ Want to know how PostHog and Mixpanel are different? If you remember nothing els
 
 2. PostHog is an all-in-one Product OS that _includes_ product analytics **and** a whole bunch more.
 
-In this guide, we will compare:
-
-- PostHog and Mixpanel's [core features](#feature-comparison)
-- [How they track user behavior](#tracking--sdks) and [library support](#client-libraries)
-- Available [integrations](#integrations) with [data platforms](#data-export), [marketing](#marketing--sales), [dev tools](#dev-tools--support), and more 
-- [Privacy compliance](#privacy-compliance) and [admin options](#admin--security) 
-- [Frequently asked questions](#frequently-asked-questions) about PostHog and Mixpanel
-
 ## How is PostHog different to Mixpanel?
 
 ### 1. PostHog does more than product analytics
@@ -111,6 +103,8 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 - **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality. PostHog Cloud includes unlimited flags for free. Visit [our feature flag page](/product/feature-flags) for more information.
 
 - **Session recording:** PostHog offers 15,000 session recordings (with console logs) per month for free. Visit our [session recording page](/product/session-recording) for more information.
+
+> **Further reading:** [How Mixpanel compares to other PostHog alternatives](/blog/posthog-alternatives)
 
 ### Product analytics
 

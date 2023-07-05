@@ -12,7 +12,6 @@ featuredImageType: full
 category: General
 tags:
   - Privacy
-  - Comparisons
   - Guides
 ---
 
