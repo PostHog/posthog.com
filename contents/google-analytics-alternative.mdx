@@ -1,5 +1,5 @@
 ---
-title: PostHog vs Google Analytics
+title: "PostHog: An all-in-one alternative to Google Analytics"
 showTitle: false
 showSidebar: true
 width: lg
@@ -17,37 +17,40 @@ images:
 
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
+import { StaticImage } from 'gatsby-plugin-image'
 
 <Hero
-    title="PostHog vs Google Analytics"
-    subtitle="Need to migrate from Universal Analytics? Find out if PostHog is a suitable alternative."
+    title="The all-in-one, <span style='color: #f64e00;'>open source</span> alternative to Google Analytics"
+    subtitle="Get beyond mere analytics with session replays, feature flags, A/B experiments and more."
     ctas={[
-        <CallToAction href="/pricing">Get started - free</CallToAction>
+        <CallToAction width="56" to="https://app.posthog.com/">
+            Get started for free
+        </CallToAction>
     ]}
 />
 
 <div>
 <br>
 </br>
-<p className="m-0 font-semibold mt-2 md:mt-3 opacity-75 text-primary text-center pb-5 pt-10">
-Here's some blurb about how GA4 is coming. And how it's coming. It's coming. Btw. Also, I'm sick of the MCU. But that's not relevant. It's just filler. Here's some blurb about how GA4 is coming. And how it's coming. It's coming. Btw. Also, I'm sick of the MCU. But that's not relevant. It's just filler. Here's some blurb about how GA4 is coming. And how it's coming. It's coming. Btw. Also, I'm sick of the MCU. But that's not relevant. It's just filler.
+<p className="m-200 font-semibold mt-2 md:mt-3 opacity-75 text-primary text-center pb-5 pt-5 ">
+On July 1st 2023, Google sunset Universal Analytics and began migrating users to Google Analytics 4 (GA4), a new version of its analytics suite which tracks events rather than sessions. Yet, while GA4 offers a more modern approach to tracking user activity, it still lags behind other tools - especially in terms of enabling teams to act on the data the discover.
 </p>
 </div>
 
 <Section>
-<h2 className="text-3xl lg:text-5xl text-center">"Is PostHog a suitable alternative to GA4?"</h2>
-<h3 className="m-0 font-semibold mt-2 md:mt-3 opacity-75 text-primary text-center pb-5">PostHog was build to do more than just web analytics. Much more.  </h3>
+<h2 className="text-3xl lg:text-5xl text-center">Why is PostHog better than Google Analytics?</h2>
+<h3 className="m-0 font-semibold mt-2 md:mt-3 opacity-75 text-primary text-center pb-5">Do more than collect basic web metrics with an all-in-one tool for building better products.</h3>
 <FeatureSnapshot
         image={refer}
         features={[
             <>
-                <strong>Product analytics, not web analytics.</strong>. Analyze events, create funnels, build dashboards and more. All in one platform.
+                <strong>Product, not web analytics.</strong> Track any user event and analyze them with six different insight types - or use SQL to create custom reports.
             </>,
             <>
-                <strong>Session replays, feature flags and more.</strong>. Watch user sessions, with console logs and network performance tracking. No extra code needed.
+                <strong>Session replays and surveys.</strong> Watch user sessions and gather feedback directly, so you get the full picture in one place.
             </>,
             <>
-                <strong>Generous free tier to get you started. </strong>. Got a question? Ask our engineers for help directly in a private Slack channel.
+                <strong>Feature flags and A/B experiments.</strong> Act on your data by creating experiments, observing results and deploying improvements all in one platform.
             </>,
         ]}
     />
@@ -55,7 +58,8 @@ Here's some blurb about how GA4 is coming. And how it's coming. It's coming. Btw
 
 <section class="my-24 px-5">
   <div class="max-w-screen-2xl mx-auto">
-    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Templates to get you started</h3>
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Get started in less than 5 minutes</h3>
+    <h3 className="m-0 font-semibold mt-2 md:mt-3 opacity-75 text-primary text-center pb-5">Templates to get you started</h3>
     <div class="flex justify-center">
       <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative after:border-t lg:after:border-t-0 after:border-dashed after:border-gray-accent-light after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 before:border-l lg:before:border-0 before:border-dashed before:border-gray-accent-light sm:after:block after:hidden sm:before:block lg:before:hidden lg:after:hidden before:hidden">
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
@@ -83,6 +87,36 @@ Here's some blurb about how GA4 is coming. And how it's coming. It's coming. Btw
   </div>
 </section>
 
+<Section cols={3}>
+    <div>
+        <h5>
+            <span className="text-yellow block text-2xl">Reduce</span> security risks
+        </h5>
+        <p>
+            Running analytics on your infrastructure dramatically reduces the risk of data breaches, improves security
+            and makes compliance easier.
+        </p>
+    </div>
+    <div>
+        <h5>
+            <span className="text-yellow block text-2xl">Freedom to optimize</span> and tweak as you please
+        </h5>
+        <p>
+            With total control over your instance and a full view of PostHog’s open source codebase, you can make any
+            changes or adjustments necessary without having to wait for support to pick up your ticket.{' '}
+        </p>
+    </div>
+    <div>
+        <h5>
+            <span className="text-yellow block text-2xl">Gain</span> a better understanding of your customers
+        </h5>
+        <p>
+            By tracking and monitoring the metrics important to you in-house, you can keep a closer eye on your
+            customers behavior and respond accordingly.
+        </p>
+    </div>
+</Section>
+
 <section class="my-24 px-5">
 
   <div class="max-w-screen-lg mx-auto font-bold">
@@ -100,33 +134,20 @@ Here's some blurb about how GA4 is coming. And how it's coming. It's coming. Btw
   </div>
 </section>
 
-<div className="px-4 mb-20 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-12">
-            <figure className="w-64 mx-auto md:w-auto">
-                <StaticImage
-                    width={367}
-                    height={348}
-                    imgClassName=""
-                    placeholder="blurred"
-                    alt={`Here's what's cookin', good lookin'`}
-                    src="./images/experiment-hog.png"
-                />
-            </figure>
-</div>
-
-<div className="col-span-2">
-                <h2 className="m-0 text-5xl md:text-7xl text-primary text-center md:text-left">
-                    Is Google Analytics <span className="text-red">illegal</span> in your country?
-                </h2>
-                <h3 className="m-0 text-lg md:text-[20px] leading-tight md:text-xl text-center md:text-left font-semibold mt-2 md:mt-3 opacity-75 text-primary">
-                    It could be. Google Analytics transmits personal data outside of the EU, so if your country is bound by the GDPR, continuing to use Google Analytics may be illegal. If it is, you're best switching to a different tool. 
-                </h3>
-</div>
-
-<div className="mt-4 mb-12 text-center md:text-left">
-                    <CallToAction type="outline" to="https://www.isgoogleanalyticsillegal.com/">
-                        Check local rulings
-                    </CallToAction>
-</div>
+<Section cols={2}>
+    <div>
+        <GatsbyImage image={getImage(props?.images[8])} alt="Startup credit" objectFit="contain" style={{ maxWidth: 200 }} align="center"/>
+    </div>
+    <div>
+        <h5>
+            <span className="text-yellow block text-2xl">Freedom to optimize</span> and tweak as you please
+        </h5>
+        <p>
+            With total control over your instance and a full view of PostHog’s open source codebase, you can make any
+            changes or adjustments necessary without having to wait for support to pick up your ticket.{' '}
+        </p>
+    </div>
+</Section>
 
 <Section>
 <h2 className="text-3xl lg:text-5xl text-center">Is PostHog a suitable alternative to Google Analytics 4?</h2>
