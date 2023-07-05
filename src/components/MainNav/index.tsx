@@ -366,7 +366,9 @@ export const Mobile = () => {
                             <Link
                                 to={url}
                                 className={`text-[12.5px] font-medium relative px-4 py-4 flex flex-col space-y-1 items-center ${
-                                    active ? 'bg-light dark:bg-dark font-bold' : 'opacity-70 hover:opacity-100'
+                                    active
+                                        ? 'bg-light dark:bg-dark font-bold px-[calc(1rem_+_10px)] mx-[-10px]'
+                                        : 'opacity-70 hover:opacity-100'
                                 }`}
                             >
                                 {active && <ActiveBackground mobile />}
