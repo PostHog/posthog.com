@@ -361,8 +361,8 @@ export const Mobile = () => {
 
     return (
         <div className="fixed bottom-0 w-full lg:hidden z-[9999]">
-            <InternalMenu mobile className="bg-light dark:bg-dark border-t" />
-            <ul className="grid grid-cols-5 gap-[2px] list-none m-0 px-2 bg-accent dark:bg-accent-dark">
+            <InternalMenu mobile className="bg-light dark:bg-dark border-t mb-[-1px]" />
+            <ul className="grid grid-cols-5 gap-[2px] list-none m-0 px-2 bg-accent dark:bg-accent-dark border-t border-border dark:border-dark">
                 {menu.map((menuItem) => {
                     const active = menuItem.name === parent?.name
                     const { name, url, icon } = menuItem
