@@ -184,7 +184,7 @@ Review Secondary Metrics
 
 how to interpret the results - a few examples 
  - what happens if not statistical signfiance?
- - what happens if statsical signifcant 
+ - what happens if statsical significant 
 determining your next steps
 
 ## Frequently asked questions
