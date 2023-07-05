@@ -84,7 +84,7 @@ export const NewsletterForm = ({
                         Delivered <span className="text-red">twice</span> a month.
                     </p>
                 </div>
-                <div className="flex-grow">
+                <div className="flex-grow w-full md:w-auto">
                     <SubstackForm />
                 </div>
             </div>
