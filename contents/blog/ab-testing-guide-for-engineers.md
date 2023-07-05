@@ -179,8 +179,6 @@ This does not mean your experiment was a failure! It suggests that the results o
 - **Accept the results:** Sometimes, an insignificant result is the correct result. It tells you that the change you made didn't have the impact you thought it would. This is still a valuable insight, and helps you shipping unnecessary changes.
 
 
-
-
 Calculate Effect Size
 Review Secondary Metrics
 
@@ -189,30 +187,30 @@ how to interpret the results - a few examples
  - what happens if statsical signifcant 
 determining your next steps
 
-## FAQ
+## Frequently asked questions
 
-### Running multiple experiments?
+### Can I run multiple A/B tests at the same time?
 
+Yes, you can run multiple A/B tests at the same time, but doing so can complicate things and should be approached with caution. It can be tricky since if tests are not completely independent, the changes being tested can affect each other.
 
-### Q: My A/B test showed no significant difference. Is it a failure?
+To counteract this, you'll need a larger sample size of users. This is what enables apps like Facebook or Uber to run *thousands* of tests at the same time, since they have millions (or billions!) of users.
 
 ### Are A/B tests only for product changes?
 
-### How often should I check the results during an A/B test?
+No, you can also use A/B tests for infrastructure changes! For example, if you're considering a new caching strategy or database system, you could split your traffic between the old and new systems to see which performs better. Or perhaps you're implementing a refactor to your codebase, in this you can use an A/B test to ensure your refactor does not perform worse.
 
-### Should I always choose the variant with the highest conversion rate?
+### Can I stop an A/B test as soon as the results are significant?
+
+While it can be tempting to stop a test as soon as the results appear significant, doing so can lead to false positives. This is known as "[peeking problem](/blog/ab-testing-mistakes#3-conducting-an-experiment-without-a-predetermined-duration)": basically, the more often you check the results, the greater the chance you'll observe a false positive – a result that appears to be significant, but is actually due to random chance. 
+
+To counteract this, predetermine your experiment duration (based on the [sample size required](#4-has-a-sufficiently-large-sample-size-of-users)) and to only make decisions based on the data collected during the entire duration.
+
+
+## Further reading
+
+- [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
+- [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
+- [How to measure product engagement](/blog/how-to-measure-product-engagement)
 
 
 
-## Best practices ?
-
-
-
-## Different types of A/B test
-
-## Advanced: Group level tests
-
-Group vs User level experiments
-link to blog 
-
-Add link to this blog in the docs
