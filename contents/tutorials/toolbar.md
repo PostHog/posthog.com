@@ -212,7 +212,7 @@ Or in the same modal, click "Edit the selector" to use our element picker to bui
 
 ## Further reading
 
-- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [How to build, analyze and optimize conversion funnels](/tutorials/funnels)
 - [B2B product metrics 101](/blog/b2b-saas-product-metrics)
 

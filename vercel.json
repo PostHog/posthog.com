@@ -986,6 +986,7 @@
             "source": "/questions/what-does-pageview-means-scattered-across-the-site",
             "destination": "/docs/data/events#pageview-events"
         },
+        { "source": "/docs/data/data-warehouse", "destination": "/docs/data-warehouse" },
         { "source": "/docs/apps/zendesk-connector", "destination": "/docs/cdp/zendesk-connector" }
     ],
     "rewrites": [
@@ -997,6 +998,10 @@
         { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
         { "source": "/careers/(.*)", "destination": "/careers" },
         { "source": "/api", "destination": "/docs/api" },
+        {
+            "source": "/tutorials/experiments",
+            "destination": "/docs/experiments/running-experiments-without-feature-flags"
+        },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" }
     ]
 }

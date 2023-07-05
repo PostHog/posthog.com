@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Hopefully the below will never be relevant to your time at PostHog! However, it’s important to have a clear process around how we do this stuff in order to ensure everyone is treated fairly and transparently. 
+Hopefully the below will never be relevant to your time at PostHog. However, it’s important to have a clear process around how we do this stuff in order to ensure everyone is treated fairly and transparently. 
 
 
 A couple of notes before we get started:
@@ -40,18 +40,16 @@ Finally, we may omit any of the stages of procedure listed above as circumstance
 
 > All proceedings are confidential, and you will never be punished for bringing a grievance (unless it’s obviously malicious), even if no action is taken. 
 
-If, for whatever reason, you have a grievance regarding another team member, you should, in the first instance, try to resolve the matter informally, directly with the other person. We recommend the [OFNR framework](https://trainingindustry.com/articles/strategy-alignment-and-planning/sharpen-your-communication-style-to-achieve-your-goals/) for this to help de-escalate.
+Victims of harassment or bullying should disengage from the situation immediately and seek support - you can speak to James, Tim or Charles about your grievance and they can help you.
 
-If this doesn’t work, or you aren’t comfortable doing so, you can speak to James or Tim about your grievance and they can help you to resolve it informally. If the matter regards one of them please speak to Charles.  
-
-If the matter cannot be resolved informally, you should put the details of your grievance in writing and send it to James, Tim, and Charles. There is no particular format to follow, and you can start at this step if needed. To make sure we can investigate your grievance properly:
+If the matter cannot be resolved informally, you should put the details of your grievance in writing and send it to James, Tim, and Charles (or if the matter concerns one of them, please send it to the others). There is no particular format to follow, and you can start at this step if needed. To make sure we can investigate your grievance properly:
 * Try and raise your grievance as soon as possible - it's easier to figure out what happened that way. 
 * Give specific examples of the behavior that you felt was misconduct. Try to avoid sweeping statements.
 * Avoid including heresay or other people’s comments in your grievance. On a sidenote, if you wish to whistleblow on an illegal or dangerous behavior, please email James/Tim and Charles.
 * While this process is confidential, our default assumption is that grievances are not made anonymously as this makes it harder for us to investigate or to report back to those raising the complaint. 
 * Please be understanding with those dealing with your grievance. We take these issues very, very seriously, and likely any action we take is difficult in one way or another.
 
-James, Tim and/or Charles will hold a meeting(s) to discuss further. If you are in the UK (or other certain jurisdictions where the right to bring other people with you is a legal requirement - in which case we require you to confirm the other attendees in advance of the meeting), you are entitled to bring a colleague or trade union representative to these meetings, and we will send round written notes afterwards, which will be kept confidential to those in the meeting and those the complaint is being made about. The number/type of meetings held is flexible depending on the nature of the grievance. You are not obliged to attend a meeting with the person you have a grievance against if you don’t want to. 
+James, Tim and/or Charles as appropriate will hold a meeting(s) to discuss further. If you are in the UK (or other certain jurisdictions where the right to bring other people with you is a legal requirement - in which case we require you to confirm the other attendees in advance of the meeting), you are entitled to bring a colleague or trade union representative to these meetings, and we will send round written notes afterwards, which will be kept confidential to those in the meeting and those the complaint is being made about. The number/type of meetings held is flexible depending on the nature of the grievance. You are not obliged to attend a meeting with the person you have a grievance against if you don’t want to. 
 
 If, following investigation, your grievance is not upheld, then we will support everyone in rebuilding their working relationship to the extent it is possible. We may consider making arrangements to avoid the affected parties working together closely.
 
