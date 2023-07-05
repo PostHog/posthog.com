@@ -26,6 +26,7 @@ import Customers from 'components/ProductLayout/Customers'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import { productMenu } from '../navs'
+import { capitalize } from 'instantsearch.js/es/lib/utils'
 
 const Check = (props: any) => <CheckIcon {...props} className="w-5 mx-auto" />
 const Close = (props: any) => <CloseIcon {...props} className="w-5 mx-auto" />
@@ -271,7 +272,7 @@ export default function Product({ data, location, pageContext }) {
             <PostLayout
                 fullWidthContent
                 menuWidth={{ left: 180 }}
-                title={title}
+                title={parent.name === 'index' ? 'Features' : capitalize(parent.name)}
                 hideSidebar
                 hideSearch
                 hideSurvey
