@@ -350,7 +350,7 @@ export function Footer(): JSX.Element {
     ]
 
     return (
-        <footer className="bg-accent dark:bg-accent-dark">
+        <footer className="bg-accent dark:bg-accent-dark border-t border-light dark:border-dark">
             <div className="relative -top-6">
                 <Link
                     to="/"
@@ -362,7 +362,7 @@ export function Footer(): JSX.Element {
                 </Link>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto border-t border-light dark:border-dark">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto">
                 {linklist.map((item) => (
                     <LinkListItem {...item} key={item.url} />
                 ))}
