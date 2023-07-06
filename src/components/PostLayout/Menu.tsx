@@ -50,8 +50,10 @@ export default function Menu({
     icon,
     badge,
     color,
+    hidden,
     ...other
 }: IMenu): JSX.Element | null {
+    if (hidden) return null
     const { isMenuItemActive } = usePost()
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
