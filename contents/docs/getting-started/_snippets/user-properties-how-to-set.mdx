@@ -114,21 +114,20 @@ You can also set user properties when you call the [`identify`](/docs/data/ident
 
 ```js-web
 posthog.identify(
-    'distinct_id',
+    'distinct_id', // Replace 'distinct_id' with your user's unique identifier
     { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } 
-    {}, 
 );
 ```
 
 ```Android
 PostHog.with(this)
-       .identify(distinctID, new Properties()
+       .identify(distinctID, new Properties() // Replace 'distinctID' with your user's unique identifier
                                 .putValue("name", "My Name")
                                 .putValue("email", "user@posthog.com"));
 ```
 
 ```iOS
-posthog.identify("distinct_id", 
+posthog.identify("distinct_id", // Replace 'distinct_id' with your user's unique identifier
           properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"])
 ```
 
