@@ -973,6 +973,9 @@ body.dark {
 }
 
 .home-slider-buttons {
+    .slick-list {
+        @apply overflow-visible;
+    }
     .slick-track {
         @apply flex;
         & > div {
