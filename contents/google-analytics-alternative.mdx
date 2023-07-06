@@ -16,6 +16,7 @@ images:
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
 import { StaticImage } from 'gatsby-plugin-image'
+import funnel from './images/funnels.png'
 
 <Hero
     title="The all-in-one, <span style='color: #f64e00;'>open source</span> alternative to Google Analytics"
@@ -30,14 +31,14 @@ import { StaticImage } from 'gatsby-plugin-image'
 <div>
 <br>
 </br>
-<p className="m-200 font-semibold mt-2 md:mt-3 opacity-75 text-primary text-center pb-5 pt-5 ">
+<p className="font-semibold mt-2 md:mt-3 text-center pb-5 pt-5 ">
 On July 1st 2023, Google sunset Universal Analytics and forced users to beging using Google Analytics 4 (GA4), without offering a way to migrate existing data. The new version of Google Analytics tracks events rather than sessions and offers an improved interface. Yet, while GA4 offers a more modern approach to tracking user activity, it still lags behind other tools - especially in terms of enabling teams to act on the data the discover.
 </p>
 </div>
 
 <Section>
 <h2 className="text-3xl lg:text-5xl text-center">Why is PostHog better than Google Analytics?</h2>
-<h3 className="m-0 font-semibold mt-2 md:mt-3 opacity-75 text-primary text-center pb-5">PostHog does more than collect basic web metrics. It's an all-in-one tool for building better products.</h3>
+<h3 className="m-0 font-semibold mt-2 md:mt-3 text-center pb-5">PostHog does more than collect basic web metrics. It's an all-in-one tool for building better products.</h3>
 <FeatureSnapshot
         image={funnel}
         features={[
@@ -55,40 +56,40 @@ On July 1st 2023, Google sunset Universal Analytics and forced users to beging u
 <h5 className="text-center pt-5">New to product analytics? <a href="/blog/google-analytics-to-posthog">Check our guide for Google Analytics users</a></h5>
 </Section>
 
-<section class="my-24 px-5">
-  <div class="max-w-screen-2xl mx-auto">
+<section className="my-24 px-5">
+  <div className="max-w-screen-2xl mx-auto">
     <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Get started in less than 5 minutes</h3>
-    <p className="m-0 font-semibold mt-2 md:mt-3 opacity-75 text-primary text-center pb-5">Install the PostHog snippet to start capturing data, then leverage the following dashboard templates to discover insights immediately.</p>
+    <p className="m-0 font-semibold mt-2 md:mt-3 text-center pb-5">Install the PostHog snippet to start capturing data, then leverage the following dashboard templates to discover insights immediately.</p>
     <div class="flex justify-center">
-      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative after:border-t lg:after:border-t-0 after:border-dashed after:border-gray-accent-light after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 before:border-l lg:before:border-0 before:border-dashed before:border-gray-accent-light sm:after:block after:hidden sm:before:block lg:before:hidden lg:after:hidden before:hidden">
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative after:absolute after:w-full after:left-0 after:top-1/2 after:-translateY-1/2 before:absolute before:h-full before:top-0 before:left-1/2 after:-translateX-1/2 sm:after:block after:hidden sm:before:block lg:before:hidden lg:after:hidden before:hidden">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[1])} alt="landing page template" objectFit="contain" style={{ maxWidth: 150 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4"><a href="/templates/landing-dashboard">Landing page report</a></h5>
           <p class="m-0 text-[15px]">Like a GA report, this template tracks how landing pages perform.</p>
         </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[2])} alt="UTM tracking" objectFit="contain" style={{ maxWidth: 150 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4"><a href="/templates/advertising-dashboard">Advertising report</a></h5>
           <p class="m-0 text-[15px]">Track UTMs and channel attribution in a streamlined dashboard template.</p>
         </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[3])} alt="Website traffic report" objectFit="contain" style={{ maxWidth: 150 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4"><a href="/templates/website-dashboard">Traffic report</a></h5>
           <p class="m-0 text-[15px]">Help content marketers understand which articles perform best.</p>
         </li>
-        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 sm:border-b-0 border-b lg:border-b-0 border-dashed border-gray-accent-light last:border-b-0">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[4])} alt="growth analytics" objectFit="contain" style={{ maxWidth: 150 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4"><a href="/templates/growth-dashboard">Growth report</a></h5>
-          <p class="m-0 text-[15px]">From DAU to conversion, this template has everything a growth team needs.</p>
+          <p class="m-0 text-[15px]">From DAU to ARR, this template has everything a growth team needs.</p>
         </li>
       </ul>
     </div>
   </div>
 </section>
 
-<section class="my-24 px-5">
+<section className="my-24 px-5">
 
-  <div class="max-w-screen-lg mx-auto font-bold">
+  <div class="max-w-screen-lg mx-auto font-bold border-dashed">
     
     <blockquote class="text-xl text-primary dark:text-primary-dark m-0 quote md:text-[32px] md:leading-tight">
       <span class="leading-tight">
@@ -232,7 +233,7 @@ On July 1st 2023, Google sunset Universal Analytics and forced users to beging u
 <div className="text-center">
 
 <h2 className="text-3xl lg:text-5xl pb-1">Ready to get started?</h2>
-<h3 className="m-0 font-semibold mt-2 md:mt-3 opacity-75 text-primary text-center pb-5">Get your first million events for free, every month.</h3>
+<h3 className="m-0 font-semibold mt-2 md:mt-3 text-center pb-5">Get your first million events for free, every month.</h3>
 <CallToAction href="app.posthog.com/signup">Get started for free</CallToAction>
 
 </div>
