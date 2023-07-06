@@ -8,13 +8,15 @@ featuredImage: ../images/tutorials/banners/tutorial-12.png
 tags: []
 ---    
 
-Holdout testing is a type of [A/B testing](/docs/experiments) that keeps a "holdout" group for the long term after the completion of the main part of the experiment. This ensures the experiment doesn’t have negative long term effects or interaction with other experiments. This is particularly important in high-risk products or features like finance or your signup page.
+Holdout testing is a type of [A/B testing](/docs/experiments) that measures the long term effects of product changes. In holdout testing, a small group of users is not shown your changes for a long period of time, typically weeks or months after your experiment ends.
+
+Holdout testing enables you to ensure that the experiment doesn’t have negative long term effects or interaction with other experiments.
 
 In this tutorial, we show you how to set up a holdout test in PostHog.
 
 ## Creating an experiment
 
-To create a holdout test, first, create an experiment. 
+To create a holdout test, first, [create an experiment](/docs/experiments/manual#how-to-create-an-experiment-in-posthog):
 
 1. Go to the [experiments tab](https://app.posthog.com/experiments) in PostHog and click "New experiment." 
 2. Name your experiment, set a key, and add a description. Your name and description should make it clear this is a holdout test for future reference. 
@@ -28,7 +30,7 @@ Once saved, go to [your feature flags](https://app.posthog.com/feature_flags) an
 
 ## Implement the experiment
 
-With the experiment and flag all setup, you can implement it in your app. Add the flag evaluation logic so that only the "test" variant shows the changed component or code. "Control" and "holdout" continues to show the unchanged bit.
+With the experiment and flag setup, you can implement it in your app. Add the flag evaluation logic so that only the "test" variant shows the changed component or code. "Control" and "holdout" continues to show the unchanged bit.
 
 ```js
 'use client'
@@ -51,7 +53,7 @@ Once done and tested to make sure it works, go back to your [experiment](https:/
 
 ## Reaching significance
 
-The real holdout test begins, once your experiment reaches significance.
+The real holdout test begins once your experiment reaches significance.
 
 - If the "control" variant wins, you can edit the feature flag to roll out that variant to 100% because the test "failed" and the holdout is the same as the control. You can stop the experiment, remove the testing code, and archive the experiment.
 - If the "test" variant wins, you can edit the feature flag to rollout that variant to 90% of users and keep "holdout" at 10%. Let the experiment continue to run to collect data.
