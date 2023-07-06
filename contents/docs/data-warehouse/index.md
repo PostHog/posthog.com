@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-The PostHog data warehouse gives you a place to put all of your most important data, query across these datasets, and combined with the product analytics data already in PostHog. Powered by Clickhouse, the data warehouse enables you to query across big datasets quickly. 
+The PostHog data warehouse gives you a place to put all of your most important data, query across these datasets, and combine it with the product analytics data already in PostHog. Powered by Clickhouse, the data warehouse enables you to query across big datasets quickly. 
 
 Data warehouse is currently in **private beta**. This means we're inviting a select number of people to try this product out. If you want to give this a go, click the "Get support" button in the top right, select "Data Warehouse" as the area, and ask to be added to the beta.
 
