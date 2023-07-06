@@ -137,7 +137,7 @@ If you see the error `TypeError: Cannot read properties of undefined (reading '.
 
 To fix this error, add a check that posthog has been initialized such as:
 
-```js
+```react
 useEffect(() => {
   posthog?.capture('Test') // using optional chaining (recommended)
 

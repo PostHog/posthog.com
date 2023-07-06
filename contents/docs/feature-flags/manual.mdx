@@ -34,7 +34,7 @@ When you create a feature flag, we'll show you an example snippet. It will look 
 
 <MultiLanguage>
 
-```js
+```js-web
 if (posthog.isFeatureEnabled('new-beta-feature')) {
     // run your activation code here
 }
@@ -100,7 +100,7 @@ This means that for most page views the feature flags will be available immediat
 
 To combat that, there's a JavaScript callback you can use to wait for the flags to come in:
 
-```js
+```js-web
 posthog.onFeatureFlags(function () {
     // feature flags are guaranteed to be available at this point
     if (posthog.isFeatureEnabled('new-beta-feature')) {

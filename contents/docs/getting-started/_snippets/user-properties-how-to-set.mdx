@@ -2,7 +2,7 @@ The recommended way to set user properties is to include them when capturing an 
 
 <MultiLanguage selector="tabs">
 
-```javascript
+```js-web
 posthog.capture(
     'event_name', 
     { 
@@ -112,7 +112,7 @@ You can also set user properties when you call the [`identify`](/docs/data/ident
 
 <MultiLanguage selector="tabs">
 
-```javascript
+```js-web
 posthog.identify(
     'distinct_id',
     { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } 

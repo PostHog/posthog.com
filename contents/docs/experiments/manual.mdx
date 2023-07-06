@@ -70,7 +70,7 @@ To check which variant of your experiment to show to your participants, use the 
 
 <MultiLanguage>
 
-```javascript
+```js-web
 // Ensure flags are loaded before usage.
 // You'll only need to call this on the code the first time a user visits.
 // See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
@@ -123,7 +123,7 @@ function App() {
 // e.g., posthog.feature_flags.override({'experiment-feature-flag-key': 'test'})
 ```
 
-```react-Native
+```react-native
 // With the useFeatureFlag hook
 import { useFeatureFlag } from 'posthog-react-native'
 
