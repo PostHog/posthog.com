@@ -13,7 +13,6 @@ featuredImageType: full
 featuredVideo: https://www.youtube-nocookie.com/embed/o_1AmP_-HPs
 category: General
 tags:
-  - Guides
   - Privacy
 ---
 

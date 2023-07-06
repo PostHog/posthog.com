@@ -12,7 +12,6 @@ featuredImageType: full
 featuredVideo: https://www.youtube-nocookie.com/embed/ImcNUnqDoUQ
 category: General
 tags:
-  - Guides
 ---
 
 In July 2023, Google will sunset Universal Analytics (UA), forcing users to switch to Google Analytics 4 (GA4) or another provider.

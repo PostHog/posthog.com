@@ -14,7 +14,6 @@ author:
 category: General
 tags:
   - Open source
-  - Guides
   - Session recording
 ---
 

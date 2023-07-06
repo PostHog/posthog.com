@@ -12,7 +12,6 @@ featuredImageType: full
 category: General
 tags:
   - Privacy
-  - Guides
 ---
 
 What do Google Optimize, Optimizely, Convert, Webtrends Optimize and Splitbee have in common?
