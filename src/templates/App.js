@@ -17,6 +17,7 @@ import PostLayout from 'components/PostLayout'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Topics from 'components/PostLayout/Topics'
 import { capitalizeFirstLetter } from '../../src/utils'
+import { communityMenu } from '../navs'
 
 const AppSidebar = ({ filters: { type, maintainer } }) => {
     return (
@@ -81,7 +82,7 @@ export default function App({ data }) {
     }
 
     return (
-        <Layout>
+        <Layout parent={communityMenu}>
             <SEO
                 image={`/images/apps/${slug.split('/')[2]}.png`}
                 title={`${title} - PostHog`}

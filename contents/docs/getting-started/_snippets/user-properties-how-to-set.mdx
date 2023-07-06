@@ -133,7 +133,7 @@ posthog.identify("distinct_id", // Replace 'distinct_id' with your user's unique
 
 </MultiLanguage>
 
-User property values can be strings, booleans, numbers, objects, or arrays.  For objects and arrays, you can use [HogQL](/docs/product-analytics/hogql) to access nested properties in the PostHog app.
+User property values can be strings, booleans, numbers, objects, or arrays.  For objects and arrays, you can use [HogQL](/docs/hogql) to access nested properties in the PostHog app.
 
 > Note that user properties are set in the order the events are ingested, and not according to event timestamps. Since we typically ingest events as soon as we receive them, you only need to take this into consideration when you're [importing historical data](/docs/migrate/ingest-historic-data).
 

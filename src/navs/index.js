@@ -767,6 +767,12 @@ export const communityMenu = {
             ],
         },
         {
+            name: 'Apps',
+            icon: 'Apps',
+            color: 'purple',
+            url: '/apps',
+        },
+        {
             name: 'Templates',
             icon: 'Magic',
             color: 'orange',
@@ -1145,7 +1151,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'HogQL',
-                    url: '/docs/product-analytics/hogql',
+                    url: '/docs/hogql',
                     icon: 'HogQL',
                     badge: {
                         title: 'Beta',
@@ -1154,14 +1160,44 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/product-analytics/hogql',
+                            url: '/docs/hogql',
+                        },
+                        {
+                            name: 'Guide',
+                            url: '/docs/hogql/guide',
+                        },
+                        {
+                            name: 'Supported ClickHouse functions',
+                            url: '/docs/hogql/clickhouse-functions',
+                        },
+                        {
+                            name: 'Supported aggregations',
+                            url: '/docs/hogql/aggregations',
                         },
                     ],
                 },
                 {
                     name: 'Toolbar',
-                    url: '/docs/product-analytics/toolbar',
+                    url: '/docs/toolbar',
                     icon: 'Toolbar',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/toolbar',
+                        },
+                        {
+                            name: 'Heatmaps',
+                            url: '/docs/toolbar/heatmaps',
+                        },
+                        {
+                            name: 'Creating actions',
+                            url: '/docs/toolbar/create-toolbar-actions',
+                        },
+                        {
+                            name: 'Overriding feature flags',
+                            url: '/docs/toolbar/override-feature-flags',
+                        },
+                    ],
                 },
                 {
                     name: 'Apps',
@@ -1808,6 +1844,7 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
+                { name: 'Insights', url: '/docs/product-analytics/insights', hidden: true },
             ],
         },
         {

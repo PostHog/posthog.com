@@ -29,6 +29,7 @@ export interface IMenu {
         className?: string
     }
     color?: string
+    hidden?: boolean
 }
 
 export interface ICrumb {

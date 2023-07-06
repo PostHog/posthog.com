@@ -36,10 +36,6 @@ const linklist: IProps[] = [
                 url: '/cdp',
             },
             {
-                title: 'Apps',
-                url: '/apps',
-            },
-            {
                 title: 'Customer stories',
                 url: '/customers',
             },
@@ -79,11 +75,11 @@ const linklist: IProps[] = [
             },
             {
                 title: 'HogQL',
-                url: '/docs/product-analytics/hogql',
+                url: '/docs/hogql',
             },
             {
                 title: 'Toolbar',
-                url: '/docs/product-analytics/toolbar',
+                url: '/docs/toolbar',
             },
             {
                 title: 'API',
@@ -124,8 +120,8 @@ const linklist: IProps[] = [
                 url: '/docs/data-warehouse',
             },
             {
-                title: 'Apps',
-                url: '/docs/apps',
+                title: 'Build an app',
+                url: '/docs/apps/build',
             },
         ],
     },
@@ -140,6 +136,10 @@ const linklist: IProps[] = [
             {
                 title: 'Guides',
                 url: '/tutorials',
+            },
+            {
+                title: 'Apps',
+                url: '/apps',
             },
             {
                 title: 'Dashboard templates',
@@ -350,7 +350,7 @@ export function Footer(): JSX.Element {
     ]
 
     return (
-        <footer className="bg-accent dark:bg-accent-dark">
+        <footer className="bg-accent dark:bg-accent-dark border-t border-light dark:border-dark">
             <div className="relative -top-6">
                 <Link
                     to="/"
@@ -362,7 +362,7 @@ export function Footer(): JSX.Element {
                 </Link>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto border-t border-light dark:border-dark">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto">
                 {linklist.map((item) => (
                     <LinkListItem {...item} key={item.url} />
                 ))}
