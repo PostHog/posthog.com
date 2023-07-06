@@ -1844,6 +1844,7 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
+                { name: 'Insights', url: '/docs/product-analytics/insights', hidden: true },
             ],
         },
         {
