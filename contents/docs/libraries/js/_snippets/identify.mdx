@@ -2,8 +2,8 @@ Using `identify`, you can associate events with specific users. This enables you
 
 ```javascript
 posthog.identify(
-    'distinct_id', // required
-    { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' }  // $set, optional
+    'distinct_id', // Required. Replace 'distinct_id' with your user's unique identifier
+    { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' },  // $set, optional
     { first_visited_url: '/blog' } // $set_once, optional
 );
 ```

@@ -6,22 +6,21 @@ This is straight forward to do when [capturing backend events](/docs/getting-sta
 
 ```javascript
 posthog.identify(
-  'distinct_id',
+  'distinct_id',  // Replace 'distinct_id' with your user's unique identifier
   { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } 
-  {}, 
 );
 ```
 
 ```Android
 PostHog.with(this)
-     .identify(distinctID, new Properties()
+     .identify(distinctID, new Properties() // Replace 'distinctID' with your user's unique identifier
         .putValue("name", "Max Hedgehog")
         .putValue("email", "max@hedgehogmail.com));
 ```
 
 
 ```iOS
-posthog.identify("distinct_id", 
+posthog.identify("distinct_id", // Replace "distinct_id" with your user's unique identifier
   properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"])
 ```
 
