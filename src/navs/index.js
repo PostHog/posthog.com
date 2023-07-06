@@ -1151,7 +1151,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'HogQL',
-                    url: '/docs/product-analytics/hogql',
+                    url: '/docs/hogql',
                     icon: 'HogQL',
                     badge: {
                         title: 'Beta',
@@ -1160,14 +1160,44 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/product-analytics/hogql',
+                            url: '/docs/hogql',
+                        },
+                        {
+                            name: 'Guide',
+                            url: '/docs/hogql/guide',
+                        },
+                        {
+                            name: 'Supported ClickHouse functions',
+                            url: '/docs/hogql/clickhouse-functions',
+                        },
+                        {
+                            name: 'Supported aggregations',
+                            url: '/docs/hogql/aggregations',
                         },
                     ],
                 },
                 {
                     name: 'Toolbar',
-                    url: '/docs/product-analytics/toolbar',
+                    url: '/docs/toolbar',
                     icon: 'Toolbar',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/toolbar',
+                        },
+                        {
+                            name: 'Heatmaps',
+                            url: '/docs/toolbar/heatmaps',
+                        },
+                        {
+                            name: 'Creating actions',
+                            url: '/docs/toolbar/create-toolbar-actions',
+                        },
+                        {
+                            name: 'Overriding feature flags',
+                            url: '/docs/toolbar/override-feature-flags',
+                        },
+                    ],
                 },
                 {
                     name: 'Apps',

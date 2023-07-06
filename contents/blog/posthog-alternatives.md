@@ -395,7 +395,7 @@ FullStory is primarily a session replay tool, though it also includes some produ
 
 1. **Value and transparency:** FullStory offers no free plan and is notoriously pricey. PostHog offers a generous free plan (1 million events and 15k recordings per month), and all pricing is transparent. 
 
-2. **Heat maps and scroll maps:** PostHog supports click maps via the [PostHog Toolbar](/docs/product-analytics/toolbar), but FullStory goes further to offer cursor heatmaps and scroll tracking, making it more useful for UX researchers.
+2. **Heat maps and scroll maps:** PostHog supports click maps via the [PostHog Toolbar](/docs/toolbar), but FullStory goes further to offer cursor heatmaps and scroll tracking, making it more useful for UX researchers.
 
 3. **Use cases:** FullStory is a session replay tool first – it's ideal for UX researchers and customer support. PostHog is useful for UX researchers and customer support too, but it's primarily designed for technical users (e.g. engineering and product teams) rather than support.
 

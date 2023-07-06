@@ -23,7 +23,7 @@ Oftentimes, these questions don't have a straight-forward answer, and, more ofte
 
 However, there are some questions that have straightforward answers - the difficulty comes in getting that answer across. 
 
-Enter the [PostHog Toolbar](/docs/product-analytics/toolbar). 
+Enter the [PostHog Toolbar](/docs/toolbar). 
 
 Consider the question: _"Where are my users clicking?"_
 

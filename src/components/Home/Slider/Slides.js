@@ -612,7 +612,7 @@ export const Sql = () => {
                         <FeatureList features={features} />
 
                         <CallToAction
-                            href="/docs/product-analytics/hogql"
+                            href="/docs/hogql"
                             type="custom"
                             size="md"
                             className="md:!w-auto !w-full"

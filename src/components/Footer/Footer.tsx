@@ -75,11 +75,11 @@ const linklist: IProps[] = [
             },
             {
                 title: 'HogQL',
-                url: '/docs/product-analytics/hogql',
+                url: '/docs/hogql',
             },
             {
                 title: 'Toolbar',
-                url: '/docs/product-analytics/toolbar',
+                url: '/docs/toolbar',
             },
             {
                 title: 'API',
