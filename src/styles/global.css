@@ -988,6 +988,12 @@ body.dark {
     .slick-slide {
         @apply overflow-hidden;
     }
+    .slick-track {
+        @apply flex;
+        & > div {
+            @apply h-[inherit];
+        }
+    }
 }
 
 .docsearch-no-label {
