@@ -36,10 +36,6 @@ const linklist: IProps[] = [
                 url: '/cdp',
             },
             {
-                title: 'Apps',
-                url: '/apps',
-            },
-            {
                 title: 'Customer stories',
                 url: '/customers',
             },
@@ -124,8 +120,8 @@ const linklist: IProps[] = [
                 url: '/docs/data-warehouse',
             },
             {
-                title: 'Apps',
-                url: '/docs/apps',
+                title: 'Build an app',
+                url: '/docs/apps/build',
             },
         ],
     },
@@ -140,6 +136,10 @@ const linklist: IProps[] = [
             {
                 title: 'Guides',
                 url: '/tutorials',
+            },
+            {
+                title: 'Apps',
+                url: '/apps',
             },
             {
                 title: 'Dashboard templates',

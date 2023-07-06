@@ -767,6 +767,12 @@ export const communityMenu = {
             ],
         },
         {
+            name: 'Apps',
+            icon: 'Apps',
+            color: 'purple',
+            url: '/apps',
+        },
+        {
             name: 'Templates',
             icon: 'Magic',
             color: 'orange',
