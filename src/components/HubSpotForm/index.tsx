@@ -188,7 +188,10 @@ function Radio({
                 id={`${name}-${value}`}
                 {...(reference ? { ref: reference } : {})}
             />
-            <span className="block py-2 w-full rounded-md border-[2px] border-black/10  peer-focus:border-black/40 peer-checked:!border-black/80 text-sm">
+            <span
+                className="block py-2 w-full rounded-md border-[2px] border-black/10  peer-focus:border-black/40 peer-checked:!border-black/80 dark:border-white/10  dark:peer-focus:border-white/40 dark:peer-checked:!border-white/80
+            text-sm"
+            >
                 {label}
             </span>
         </label>
@@ -235,13 +238,13 @@ function RadioGroup({
                 <p className="m-0 mt-1 mb-4 text-xs">
                     <strong>Tip:</strong> Use{' '}
                     <kbd
-                        className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
+                        className="text-xs border border-b-2 border-border dark:border-dark rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
                         style={{ fontSize: '10px' }}
                     >
                         ←
                     </kbd>
                     <kbd
-                        className="text-xs border border-b-2 border-gray-accent-light/50 dark:border-gray-accent-dark/50 rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
+                        className="text-xs border border-b-2 border-border dark:border-dark rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
                         style={{ fontSize: '10px' }}
                     >
                         →
@@ -269,12 +272,12 @@ function RadioGroup({
                     })}
                 </div>
             </motion.div>
-            {error && <p className="text-red font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
+            {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
         </div>
     )
 }
 
-const inputContainerClasses = `p-4 bg-tan group active:bg-white focus-within:bg-white relative text-left`
+const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark group active:bg-light focus-within:bg-light dark:active:bg-dark dark:focus-within:bg-dark relative text-left`
 
 const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     const { name, placeholder } = props
@@ -300,7 +303,7 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
             <span className="relative -top-3 peer-placeholder-shown:top-0 text-xs peer-placeholder-shown:text-base peer-placeholder-shown:opacity-50 transition-all">
                 {placeholder}
             </span>
-            {error && <p className="text-red font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
+            {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
         </label>
     )
 }
@@ -371,7 +374,7 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
                         <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
                     </div>
                 )}
-                <div className="bg-gray-accent-light px-6 py-8 rounded-md mt-4">
+                <div className="bg-accent dark:bg-accent-dark border border-border dark:border-dark px-6 py-8 rounded-md mt-4">
                     {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message }} />}
                 </div>
             </>
@@ -384,7 +387,7 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
                     onSubmit={handleSubmit}
                 >
                     <Form>
-                        <div className="grid divide-y divide-dashed divide-gray-accent-light border border-gray-accent-light border-dashed">
+                        <div className="grid divide-y divide-border border border-border dark:divide-border-dark dark:border-dark">
                             {form.fields.map(({ name, label, type, required, options }, index) => {
                                 if (customFields && customFields[name])
                                     return {
