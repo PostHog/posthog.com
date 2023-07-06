@@ -8,7 +8,6 @@ hideAnchor: true
 author: ['lior-neu-ner']
 featuredImage: ../images/blog/experiment-hog.jpg
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/C2ICJbICfsg
 category: Product growth
 tags: 
   - Guides
