@@ -99,69 +99,71 @@ export const ProductAnalytics = () => {
         { title: 'Retention', Icon: Retention },
     ]
     return (
-        <div className="md:bg-[#1371FF] rounded-md md:text-white relative md:grid grid-cols-16 md:gap-8">
-            <ImageContainer className="md:pl-8 col-span-10">
-                <motion.div
-                    transition={{ delay: 0.4 }}
-                    className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 md:-mb-2"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
-                        placeholder="none"
-                        quality={100}
-                        objectFit="contain"
-                        className=":w-full md:max-w-[1029px] md:shadow-2xl md:-rotate-1"
-                        src="../../../../contents/images/products/product-analytics/product-analytics.png"
-                    />
-                </motion.div>
-                <div className="absolute -bottom-2 right-0 md:hidden">
+        <div className="md:bg-[#1371FF] rounded-md md:text-white flex items-end h-full">
+            <div className="relative md:grid grid-cols-16 md:gap-8 w-full">
+                <ImageContainer className="md:pl-8 col-span-10">
                     <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 md:-mb-2"
+                        initial={{ translateY: '100%' }}
+                        animate={{ translateY: 0 }}
                     >
                         <StaticImage
+                            alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
                             placeholder="none"
                             quality={100}
-                            className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
-                            src="./images/product-analytics-hog.png"
-                            alt=""
+                            objectFit="contain"
+                            className=":w-full md:max-w-[1029px] md:shadow-2xl md:-rotate-1"
+                            src="../../../../contents/images/products/product-analytics/product-analytics.png"
                         />
                     </motion.div>
-                </div>
-            </ImageContainer>
-            <ContentContainer className="col-span-6">
-                <Content>
-                    <Title title={'Product analytics'} />
-                    <FeatureList features={features} className="grid grid-cols-2 2xl:flex" />
-                    <CallToAction
-                        href="/product-analytics"
-                        type="custom"
-                        size="md"
-                        className="md:!w-auto !w-full"
-                        childClassName="!bg-[#1371FF]"
-                    >
-                        Explore
-                    </CallToAction>
-                </Content>
-                <div className="absolute -bottom-2 right-0 hidden md:block">
-                    <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
-                    >
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
-                            src="./images/product-analytics-hog.png"
-                            alt=""
-                        />
-                    </motion.div>
-                </div>
-            </ContentContainer>
+                    <div className="absolute -bottom-2 right-0 md:hidden">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
+                                src="./images/product-analytics-hog.png"
+                                alt=""
+                            />
+                        </motion.div>
+                    </div>
+                </ImageContainer>
+                <ContentContainer className="col-span-6">
+                    <Content>
+                        <Title title={'Product analytics'} />
+                        <FeatureList features={features} className="grid grid-cols-2 2xl:flex" />
+                        <CallToAction
+                            href="/product-analytics"
+                            type="custom"
+                            size="md"
+                            className="md:!w-auto !w-full"
+                            childClassName="!bg-[#1371FF]"
+                        >
+                            Explore
+                        </CallToAction>
+                    </Content>
+                    <div className="absolute -bottom-2 right-0 hidden md:block">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
+                                src="./images/product-analytics-hog.png"
+                                alt=""
+                            />
+                        </motion.div>
+                    </div>
+                </ContentContainer>
+            </div>
         </div>
     )
 }
@@ -173,73 +175,75 @@ export const SessionReplay = () => {
         { title: 'Network requests', Icon: Pulse },
     ]
     return (
-        <div className="md:bg-[#F2AD46] rounded-md text-primary relative md:grid grid-cols-16 gap-2 lg:gap-4">
-            <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                <motion.div
-                    transition={{ delay: 0.4 }}
-                    className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 -mb-2"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        objectPosition="bottom"
-                        placeholder="none"
-                        quality={100}
-                        objectFit="contain"
-                        className="w-full md:max-w-[1029px] md:shadow-2xl md:rotate-1"
-                        src="../../../../contents/images/products/session-replay/session-replay.png"
-                        alt="A session recording of a fake application called Hogflix"
-                    />
-                </motion.div>
-                <div className="absolute bottom-0 right-1 md:hidden">
+        <div className="md:bg-[#F2AD46] rounded-md text-primary flex items-end h-full">
+            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
+                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
                     <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 -mb-2"
+                        initial={{ translateY: '100%' }}
+                        animate={{ translateY: 0 }}
                     >
                         <StaticImage
+                            objectPosition="bottom"
                             placeholder="none"
                             quality={100}
-                            className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                            src="./images/session-recording-hog.png"
-                            alt=""
+                            objectFit="contain"
+                            className="w-full md:max-w-[1029px] md:shadow-2xl md:rotate-1"
+                            src="../../../../contents/images/products/session-replay/session-replay.png"
+                            alt="A session recording of a fake application called Hogflix"
                         />
                     </motion.div>
-                </div>
-            </ImageContainer>
-            <ContentContainer className="md:col-span-7 lg:col-span-6">
-                <Content className="">
-                    <Title title={'Session replay'} />
-                    <Description description="Watch users interacting with your app or website. Available for web and iOS." />
-                    <p className="text-sm hidden xl:block opacity-60 pt-2 mb-1">(Android support coming soon.)</p>
-                    <FeatureList features={features} className="grid md:grid-cols-2 lg:flex" />
+                    <div className="absolute bottom-0 right-1 md:hidden">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
+                                src="./images/session-recording-hog.png"
+                                alt=""
+                            />
+                        </motion.div>
+                    </div>
+                </ImageContainer>
+                <ContentContainer className="md:col-span-7 lg:col-span-6">
+                    <Content className="">
+                        <Title title={'Session replay'} />
+                        <Description description="Watch users interacting with your app or website. Available for web and iOS." />
+                        <p className="text-sm hidden xl:block opacity-60 pt-2 mb-1">(Android support coming soon.)</p>
+                        <FeatureList features={features} className="grid md:grid-cols-2 lg:flex" />
 
-                    <CallToAction
-                        href="/session-replay"
-                        type="custom"
-                        size="md"
-                        className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                        childClassName="!bg-[#F2AD46] border-black !text-black group-hover:text-black"
-                    >
-                        Explore
-                    </CallToAction>
-                </Content>
-                <div className="absolute bottom-0 right-1 hidden md:block">
-                    <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
-                    >
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                            src="./images/session-recording-hog.png"
-                            alt=""
-                        />
-                    </motion.div>
-                </div>
-            </ContentContainer>
+                        <CallToAction
+                            href="/session-replay"
+                            type="custom"
+                            size="md"
+                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+                            childClassName="!bg-[#F2AD46] border-black !text-black group-hover:text-black"
+                        >
+                            Explore
+                        </CallToAction>
+                    </Content>
+                    <div className="absolute bottom-0 right-1 hidden md:block">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
+                                src="./images/session-recording-hog.png"
+                                alt=""
+                            />
+                        </motion.div>
+                    </div>
+                </ContentContainer>
+            </div>
         </div>
     )
 }
@@ -251,85 +255,87 @@ export const FeatureFlags = () => {
         { title: 'Instant rollbacks', Icon: Rewind },
     ]
     return (
-        <div className=" md:bg-[#29DBBB] rounded-md text-primary relative md:grid grid-cols-16 gap-2 lg:gap-4">
-            <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
-                <motion.div
-                    transition={{ delay: 0.3 }}
-                    className="absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        placeholder="none"
-                        quality={100}
-                        className="w-full -rotate-1 shadow-2xl"
-                        src="./images/feature-flags-1.png"
-                        alt="A code snippet to check if the feature flag 'nav' is enabled"
-                    />
-                </motion.div>
-                <motion.div
-                    transition={{ delay: 0.2 }}
-                    className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        placeholder="none"
-                        quality={100}
-                        className="w-full rotate-1 shadow-2xl"
-                        src="./images/feature-flags-2.png"
-                        alt="A filter for rolling out a feature flag to 50% of organizations in a cohort"
-                    />
-                </motion.div>
-                <div className="absolute bottom-0 right-0 md:hidden z-10">
+        <div className=" md:bg-[#29DBBB] rounded-md text-primary flex items-end h-full">
+            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
+                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
                     <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10"
+                        initial={{ translateY: '100%' }}
+                        animate={{ translateY: 0 }}
                     >
                         <StaticImage
-                            alt=""
                             placeholder="none"
                             quality={100}
-                            className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                            src="./images/feature-flags-hog.png"
+                            className="w-full -rotate-1 shadow-2xl"
+                            src="./images/feature-flags-1.png"
+                            alt="A code snippet to check if the feature flag 'nav' is enabled"
                         />
                     </motion.div>
-                </div>
-            </ImageContainer>
-            <ContentContainer className="md:col-span-7 lg:col-span-6">
-                <Content>
-                    <Title title={'Feature flags'} />
-                    <Subtitle className="text-[14px] md:text-[18px]" />
-                    <Description description="Safely roll out features to select users or cohorts." />
-                    <FeatureList features={features} className="" />
+                    <motion.div
+                        transition={{ delay: 0.2 }}
+                        className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5"
+                        initial={{ translateY: '100%' }}
+                        animate={{ translateY: 0 }}
+                    >
+                        <StaticImage
+                            placeholder="none"
+                            quality={100}
+                            className="w-full rotate-1 shadow-2xl"
+                            src="./images/feature-flags-2.png"
+                            alt="A filter for rolling out a feature flag to 50% of organizations in a cohort"
+                        />
+                    </motion.div>
+                    <div className="absolute bottom-0 right-0 md:hidden z-10">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
+                                src="./images/feature-flags-hog.png"
+                            />
+                        </motion.div>
+                    </div>
+                </ImageContainer>
+                <ContentContainer className="md:col-span-7 lg:col-span-6">
+                    <Content>
+                        <Title title={'Feature flags'} />
+                        <Subtitle className="text-[14px] md:text-[18px]" />
+                        <Description description="Safely roll out features to select users or cohorts." />
+                        <FeatureList features={features} className="" />
 
-                    <CallToAction
-                        href="/feature-flags"
-                        type="custom"
-                        size="md"
-                        className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                        childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black"
-                    >
-                        Explore
-                    </CallToAction>
-                </Content>
-                <div className="absolute bottom-0 right-0 md:block hidden">
-                    <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
-                    >
-                        <StaticImage
-                            alt=""
-                            placeholder="none"
-                            quality={100}
-                            className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                            src="./images/feature-flags-hog.png"
-                        />
-                    </motion.div>
-                </div>
-            </ContentContainer>
+                        <CallToAction
+                            href="/feature-flags"
+                            type="custom"
+                            size="md"
+                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+                            childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black"
+                        >
+                            Explore
+                        </CallToAction>
+                    </Content>
+                    <div className="absolute bottom-0 right-0 md:block hidden">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
+                                src="./images/feature-flags-hog.png"
+                            />
+                        </motion.div>
+                    </div>
+                </ContentContainer>
+            </div>
         </div>
     )
 }
@@ -342,87 +348,89 @@ export const ABTesting = () => {
     ]
 
     return (
-        <div className="md:bg-[#9C19BD] rounded-md text-white relative md:grid grid-cols-16 gap-2 lg:gap-4">
-            <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px] ">
-                <motion.div
-                    transition={{ delay: 0.4 }}
-                    className="absolute left-2 top-5 w-[150%] md:w-3/4"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        alt="A graph depicting an increasing trend line showing improvement in an experiment over time"
-                        placeholder="none"
-                        quality={100}
-                        objectFit="contain"
-                        className="w-full rotate-1 shadow-2xl"
-                        src="./images/ab-testing-2.png"
-                    />
-                </motion.div>
-                <motion.div
-                    transition={{ delay: 0.4 }}
-                    className="absolute right-0 -top-2 w-[100%] md:w-3/4"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        alt="A slider set at 20% showing how long an experiment will need to be run in order to get the specified improvement"
-                        placeholder="none"
-                        quality={100}
-                        objectFit="contain"
-                        className="w-full -rotate-1 shadow-2xl"
-                        src="./images/ab-testing-1.png"
-                    />
-                </motion.div>
-                <div className="absolute bottom-0 right-0 md:hidden">
+        <div className="md:bg-[#9C19BD] rounded-md text-white flex items-end h-full">
+            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
+                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px] ">
                     <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="absolute left-2 top-5 w-[150%] md:w-3/4"
+                        initial={{ translateY: '100%' }}
+                        animate={{ translateY: 0 }}
                     >
                         <StaticImage
-                            alt=""
+                            alt="A graph depicting an increasing trend line showing improvement in an experiment over time"
                             placeholder="none"
                             quality={100}
-                            className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
-                            src="./images/experiment-hog.png"
+                            objectFit="contain"
+                            className="w-full rotate-1 shadow-2xl"
+                            src="./images/ab-testing-2.png"
                         />
                     </motion.div>
-                </div>
-            </ImageContainer>
-            <ContentContainer className="md:col-span-7 lg:col-span-6">
-                <Content>
-                    <Title title={'A/B testing'} />
-                    <Description description={'Run tests with statistical significance.'} />
-                    <FeatureList features={features} />
+                    <motion.div
+                        transition={{ delay: 0.4 }}
+                        className="absolute right-0 -top-2 w-[100%] md:w-3/4"
+                        initial={{ translateY: '100%' }}
+                        animate={{ translateY: 0 }}
+                    >
+                        <StaticImage
+                            alt="A slider set at 20% showing how long an experiment will need to be run in order to get the specified improvement"
+                            placeholder="none"
+                            quality={100}
+                            objectFit="contain"
+                            className="w-full -rotate-1 shadow-2xl"
+                            src="./images/ab-testing-1.png"
+                        />
+                    </motion.div>
+                    <div className="absolute bottom-0 right-0 md:hidden">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
+                                src="./images/experiment-hog.png"
+                            />
+                        </motion.div>
+                    </div>
+                </ImageContainer>
+                <ContentContainer className="md:col-span-7 lg:col-span-6">
+                    <Content>
+                        <Title title={'A/B testing'} />
+                        <Description description={'Run tests with statistical significance.'} />
+                        <FeatureList features={features} />
 
-                    <CallToAction
-                        href="/ab-testing"
-                        type="custom"
-                        size="md"
-                        className="md:!w-auto !w-full"
-                        childClassName="!bg-[#9C19BD]
+                        <CallToAction
+                            href="/ab-testing"
+                            type="custom"
+                            size="md"
+                            className="md:!w-auto !w-full"
+                            childClassName="!bg-[#9C19BD]
                     "
-                    >
-                        Explore
-                    </CallToAction>
-                </Content>
-                <div className="absolute bottom-0 right-0 hidden md:block">
-                    <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
-                    >
-                        <StaticImage
-                            alt=""
-                            placeholder="none"
-                            quality={100}
-                            className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
-                            src="./images/experiment-hog.png"
-                        />
-                    </motion.div>
-                </div>
-            </ContentContainer>
+                        >
+                            Explore
+                        </CallToAction>
+                    </Content>
+                    <div className="absolute bottom-0 right-0 hidden md:block">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
+                                src="./images/experiment-hog.png"
+                            />
+                        </motion.div>
+                    </div>
+                </ContentContainer>
+            </div>
         </div>
     )
 }
@@ -434,42 +442,43 @@ export const Cdp = () => {
         { title: 'Transformations', Icon: Gear },
     ]
     return (
-        <div className="md:bg-[#FCC779] rounded-md text-primary relative md:grid grid-cols-16 gap-2 lg:gap-4">
-            <ImageContainer className="flex items-center pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
-                <motion.div
-                    transition={{ delay: 0.4 }}
-                    className="h-full"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        alt="A hedgehog standing in front of a leaky pipe of data"
-                        placeholder="none"
-                        quality={100}
-                        objectFit="contain"
-                        className="w-full h-full"
-                        src="../../../../contents/images/products/cdp/pipeline-hog.png"
-                    />
-                </motion.div>
-            </ImageContainer>
-            <ContentContainer className="md:col-span-7 lg:col-span-6">
-                <Content>
-                    <Title title={'Customer data platform'} />
-                    <Description description="60+ data connections available now. Full CDP coming soon." />
-                    <FeatureList features={features} />
-
-                    <CallToAction
-                        href="/cdp"
-                        type="custom"
-                        size="md"
-                        className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                        childClassName="!bg-[#FCC779] border-black !text-black group-hover:text-black
-                    "
+        <div className="md:bg-[#FCC779] rounded-md text-primary flex items-end h-full">
+            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
+                <ImageContainer className="flex items-center pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
+                    <motion.div
+                        transition={{ delay: 0.4 }}
+                        className="h-full"
+                        initial={{ translateY: '100%' }}
+                        animate={{ translateY: 0 }}
                     >
-                        Browse connections
-                    </CallToAction>
-                </Content>
-                {/*
+                        <StaticImage
+                            alt="A hedgehog standing in front of a leaky pipe of data"
+                            placeholder="none"
+                            quality={100}
+                            objectFit="contain"
+                            className="w-full h-full"
+                            src="../../../../contents/images/products/cdp/pipeline-hog.png"
+                        />
+                    </motion.div>
+                </ImageContainer>
+                <ContentContainer className="md:col-span-7 lg:col-span-6">
+                    <Content>
+                        <Title title={'Customer data platform'} />
+                        <Description description="60+ data connections available now. Full CDP coming soon." />
+                        <FeatureList features={features} />
+
+                        <CallToAction
+                            href="/cdp"
+                            type="custom"
+                            size="md"
+                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+                            childClassName="!bg-[#FCC779] border-black !text-black group-hover:text-black
+                    "
+                        >
+                            Browse connections
+                        </CallToAction>
+                    </Content>
+                    {/*
                 <div className="absolute bottom-0 right-0">
                     <motion.div
                         transition={{ delay: 0.5 }}
@@ -486,82 +495,85 @@ export const Cdp = () => {
                     </motion.div>
                 </div>
                 */}
-            </ContentContainer>
+                </ContentContainer>
+            </div>
         </div>
     )
 }
 
 export const DataWarehouse = () => {
     return (
-        <div className="md:bg-[#29DBBB] rounded-md text-primary relative md:grid grid-cols-16 gap-2 lg:gap-4">
-            <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                <motion.div
-                    transition={{ delay: 0.4 }}
-                    className="h-full"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        alt="An artist's depiction of a data warehouse"
-                        placeholder="none"
-                        quality={100}
-                        objectFit="contain"
-                        className="w-full h-full py-10 max-h-96"
-                        src="../../../../contents/images/products/data-warehouse/data-warehouse.png"
-                    />
-                </motion.div>
-                <div className="absolute bottom-0 right-4 md:hidden">
+        <div className="md:bg-[#29DBBB] rounded-md text-primary flex items-end h-full">
+            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
+                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
                     <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="h-full"
+                        initial={{ translateY: '100%' }}
+                        animate={{ translateY: 0 }}
                     >
                         <StaticImage
-                            alt=""
+                            alt="An artist's depiction of a data warehouse"
                             placeholder="none"
                             quality={100}
-                            className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
-                            src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                            objectFit="contain"
+                            className="w-full h-full py-10 max-h-96"
+                            src="../../../../contents/images/products/data-warehouse/data-warehouse.png"
                         />
                     </motion.div>
-                </div>
-            </ImageContainer>
-            <ContentContainer className="md:col-span-7 lg:col-span-6">
-                <Content>
-                    <Title title={'Data warehouse'} />
-                    <Subtitle subtitle="Full data warehouse product coming soon" />
-                    <Description
-                        description="Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API."
-                        className="!text-sm pb-4"
-                    />
+                    <div className="absolute bottom-0 right-4 md:hidden">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
+                                src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                            />
+                        </motion.div>
+                    </div>
+                </ImageContainer>
+                <ContentContainer className="md:col-span-7 lg:col-span-6">
+                    <Content>
+                        <Title title={'Data warehouse'} />
+                        <Subtitle subtitle="Full data warehouse product coming soon" />
+                        <Description
+                            description="Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API."
+                            className="!text-sm pb-4"
+                        />
 
-                    <CallToAction
-                        href="/docs/data-warehouse"
-                        type="custom"
-                        size="md"
-                        className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                        childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black
+                        <CallToAction
+                            href="/docs/data-warehouse"
+                            type="custom"
+                            size="md"
+                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+                            childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black
                     "
-                    >
-                        Learn more
-                    </CallToAction>
-                </Content>
-                <div className="absolute bottom-0 right-4 md:block hidden">
-                    <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
-                    >
-                        <StaticImage
-                            alt=""
-                            placeholder="none"
-                            quality={100}
-                            className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
-                            src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
-                        />
-                    </motion.div>
-                </div>
-            </ContentContainer>
+                        >
+                            Learn more
+                        </CallToAction>
+                    </Content>
+                    <div className="absolute bottom-0 right-4 md:block hidden">
+                        <motion.div
+                            transition={{ delay: 0.5 }}
+                            initial={{ translateX: '100%' }}
+                            animate={{ translateX: 0 }}
+                        >
+                            <StaticImage
+                                alt=""
+                                placeholder="none"
+                                quality={100}
+                                className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
+                                src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                            />
+                        </motion.div>
+                    </div>
+                </ContentContainer>
+            </div>
         </div>
     )
 }
@@ -574,82 +586,86 @@ export const Sql = () => {
     ]
 
     return (
-        <div className="md:bg-[#D42F18] rounded-md text-white relative md:grid grid-cols-16 gap-2 lg:gap-4">
-            <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
-                <motion.div
-                    transition={{ delay: 0.4 }}
-                    className="h-full"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
-                        placeholder="none"
-                        quality={100}
-                        objectFit="contain"
-                        className="w-full h-full py-10 max-h-96"
-                        src="../../../../contents/images/products/sql/sql-hog.png"
-                    />
-                </motion.div>
-            </ImageContainer>
-            <ContentContainer className="md:col-span-7 lg:col-span-6">
-                <Content>
-                    <Title title={'SQL'} />
-                    <Subtitle subtitle="Directly query data stored in PostHog via SQL." />
-                    <FeatureList features={features} />
-
-                    <CallToAction
-                        href="/docs/product-analytics/hogql"
-                        type="custom"
-                        size="md"
-                        className="md:!w-auto !w-full"
-                        childClassName="!bg-[#D42F18]"
+        <div className="md:bg-[#D42F18] rounded-md text-white flex items-end h-full">
+            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
+                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
+                    <motion.div
+                        transition={{ delay: 0.4 }}
+                        className="h-full"
+                        initial={{ translateY: '100%' }}
+                        animate={{ translateY: 0 }}
                     >
-                        Explore
-                    </CallToAction>
-                </Content>
-            </ContentContainer>
+                        <StaticImage
+                            alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
+                            placeholder="none"
+                            quality={100}
+                            objectFit="contain"
+                            className="w-full h-full py-10 max-h-96"
+                            src="../../../../contents/images/products/sql/sql-hog.png"
+                        />
+                    </motion.div>
+                </ImageContainer>
+                <ContentContainer className="md:col-span-7 lg:col-span-6">
+                    <Content>
+                        <Title title={'SQL'} />
+                        <Subtitle subtitle="Directly query data stored in PostHog via SQL." />
+                        <FeatureList features={features} />
+
+                        <CallToAction
+                            href="/docs/product-analytics/hogql"
+                            type="custom"
+                            size="md"
+                            className="md:!w-auto !w-full"
+                            childClassName="!bg-[#D42F18]"
+                        >
+                            Explore
+                        </CallToAction>
+                    </Content>
+                </ContentContainer>
+            </div>
         </div>
     )
 }
 
 export const Api = () => {
     return (
-        <div className="min-h-[300px] lg:min-h-[400px] bg-[#EB9D2A] rounded-md relative grid grid-cols-16 gap-2 lg:gap-4">
-            <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
-                <motion.div
-                    transition={{ delay: 0.4 }}
-                    className="h-full"
-                    initial={{ translateY: '100%' }}
-                    animate={{ translateY: 0 }}
-                >
-                    <StaticImage
-                        alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
-                        placeholder="none"
-                        quality={100}
-                        objectFit="contain"
-                        className="w-full h-full py-10"
-                        src="../../../../contents/images/products/api/coder-hog.png"
-                    />
-                </motion.div>
-            </ImageContainer>
-            <ContentContainer className="md:col-span-7 lg:col-span-6">
-                <Content>
-                    <Title title={'API'} />
-                    <Subtitle subtitle="Build custom functionality or create bespoke views specific to your business needs." />
-
-                    <CallToAction
-                        href="/docs/api"
-                        type="custom"
-                        size="md"
-                        className="group !border-black/25 !bg-black/10"
-                        childClassName="!bg-[#EB9D2A] border-black !text-black group-hover:text-black
-                    "
+        <div className="bg-[#EB9D2A] rounded-md flex items-end h-full">
+            <div className="relative grid grid-cols-16 gap-2 lg:gap-4 min-h-[300px] lg:min-h-[400px] w-full">
+                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
+                    <motion.div
+                        transition={{ delay: 0.4 }}
+                        className="h-full"
+                        initial={{ translateY: '100%' }}
+                        animate={{ translateY: 0 }}
                     >
-                        Explore the API
-                    </CallToAction>
-                </Content>
-            </ContentContainer>
+                        <StaticImage
+                            alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
+                            placeholder="none"
+                            quality={100}
+                            objectFit="contain"
+                            className="w-full h-full py-10"
+                            src="../../../../contents/images/products/api/coder-hog.png"
+                        />
+                    </motion.div>
+                </ImageContainer>
+                <ContentContainer className="md:col-span-7 lg:col-span-6">
+                    <Content>
+                        <Title title={'API'} />
+                        <Subtitle subtitle="Build custom functionality or create bespoke views specific to your business needs." />
+
+                        <CallToAction
+                            href="/docs/api"
+                            type="custom"
+                            size="md"
+                            className="group !border-black/25 !bg-black/10"
+                            childClassName="!bg-[#EB9D2A] border-black !text-black group-hover:text-black
+                    "
+                        >
+                            Explore the API
+                        </CallToAction>
+                    </Content>
+                </ContentContainer>
+            </div>
         </div>
     )
 }

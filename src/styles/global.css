@@ -973,6 +973,9 @@ body.dark {
 }
 
 .home-slider-buttons {
+    .slick-list {
+        @apply overflow-visible;
+    }
     .slick-track {
         @apply flex;
         & > div {
@@ -984,6 +987,12 @@ body.dark {
 .home-slider {
     .slick-slide {
         @apply overflow-hidden;
+    }
+    .slick-track {
+        @apply flex;
+        & > div {
+            @apply h-[inherit];
+        }
     }
 }
 
