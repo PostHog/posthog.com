@@ -1178,8 +1178,26 @@ export const docsMenu = {
                 },
                 {
                     name: 'Toolbar',
-                    url: '/docs/product-analytics/toolbar',
+                    url: '/docs/toolbar',
                     icon: 'Toolbar',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/toolbar',
+                        },
+                        {
+                            name: 'Heatmaps',
+                            url: '/docs/toolbar/heatmaps',
+                        },
+                        {
+                            name: 'Creating actions',
+                            url: '/docs/toolbar/create-toolbar-actions',
+                        },
+                        {
+                            name: 'Overriding feature flags',
+                            url: '/docs/toolbar/override-feature-flags',
+                        },
+                    ],
                 },
                 {
                     name: 'Apps',

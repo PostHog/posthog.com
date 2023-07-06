@@ -79,7 +79,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Toolbar',
-                url: '/docs/product-analytics/toolbar',
+                url: '/docs/toolbar',
             },
             {
                 title: 'API',

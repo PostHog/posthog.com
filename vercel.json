@@ -773,7 +773,8 @@
         { "source": "/manual/retention", "destination": "/docs/product-analytics/retention" },
         { "source": "/manual/sampling", "destination": "/docs/product-analytics/sampling" },
         { "source": "/manual/stickiness", "destination": "/docs/product-analytics/stickiness" },
-        { "source": "/manual/toolbar", "destination": "/docs/product-analytics/toolbar" },
+        { "source": "/manual/toolbar", "destination": "/docs/toolbar" },
+        { "source": "/docs/product-analytics/toolbar", "destination": "/docs/toolbar" },
         { "source": "/manual/trends", "destination": "/docs/product-analytics/trends" },
 
         { "source": "/manual/actions", "destination": "/docs/data/actions" },
