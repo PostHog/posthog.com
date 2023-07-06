@@ -1,11 +1,11 @@
 ---
 title: How to do holdout testing
-date: 2023-07-05
+date: 2023-07-06
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: []
+tags: ['experimentation', 'feature flags']
 ---    
 
 Holdout testing is a type of [A/B testing](/docs/experiments) that measures the long term effects of product changes. In holdout testing, a small group of users is not shown your changes for a long period of time, typically weeks or months after your experiment ends.
