@@ -53,6 +53,8 @@ Access to font at 'https://yourwebsite.com/fonts/MyriadPro-Bold.woff2' from orig
 @ GET https://yourwebsite.com/fonts/MyriadPro-Bold.woff2 net: :ERR_FAILED 200
 ```
 
+If you see errors like this, please add `app.posthog.com` to the list of permitted domains in your webservers CORS configuration.
+
 ## Filtering can't find my custom events
 
 The most common reason for this is that you're trying to filter by events that weren't sent by the Browser SDK. For example from another tool like Segment or from one of our back-end SDKs.
@@ -60,8 +62,6 @@ The most common reason for this is that you're trying to filter by events that w
 Session replay relies on the `$session_id` property added to events by the browser SDK to link events to sessions.
 
 To workaround this you can use the `posthog.onSessionId` method in the Browser SDK to register a callback that will be called each time the session id changes. You can send this to your back-end and add the `$session_id` property to your back-end events. 
-
-If you see errors like this, please add `app.posthog.com` to the list of permitted domains in your webservers CORS configuration.
 
 #### Update posthog-js
 
