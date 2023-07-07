@@ -206,6 +206,7 @@ export default function Handbook({
         installUrl,
         thumbnail,
         related,
+        ogImageURL,
     } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
@@ -257,7 +258,7 @@ export default function Handbook({
                 title={`${title} - ${breadcrumbBase.name} - PostHog`}
                 description={description || excerpt}
                 article
-                image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
+                image={ogImageURL || `/og-images/${slug.replace(/\//g, '')}.jpeg`}
             />
             <Layout>
                 <PostLayout
@@ -383,6 +384,7 @@ export const query = graphql`
                 }
             }
             frontmatter {
+                ogImageURL
                 title
                 hideAnchor
                 description

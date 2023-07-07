@@ -78,7 +78,7 @@ function PipelinesPage({ location }) {
             <SEO
                 title="CDP data connections"
                 description="Get all your data into PostHog with 60+ sources & destinations"
-                image={`/og-images/apps.jpeg`}
+                image={`/images/product/cdp.png`}
             />
             <header className="py-12">
                 <h2 className="m-0 text-center text-[2.75rem] leading-none  md:text-6xl text-primary dark:text-primary-dark">
