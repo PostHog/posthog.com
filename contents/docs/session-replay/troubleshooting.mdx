@@ -69,7 +69,7 @@ If you see errors like this, please add `app.posthog.com` to the list of permitt
 
 ## Filtering can't find my custom events
 
-The most common reason for this is that you're trying to filter by events that weren't sent by the Browser SDK. For example from another tool like Segment or from one of our back-end SDKs.
+The most common reason for this is that you're trying to filter by events that weren't sent by the web SDK. For example, from another tool like Segment or one of our backend SDKs.
 
 Session replay relies on the `$session_id` property added to events by the Browser SDK to link events to sessions.
 
