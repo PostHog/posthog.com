@@ -2118,6 +2118,10 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/stripe-connector',
                             name: 'Stripe Connector',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/twitter-followers',
@@ -2140,18 +2144,30 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/s3-export',
                             name: 'Amazon S3 Export',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
-                            url: '/docs/cdp/s3-export',
+                            url: '/docs/cdp/avo-inspector',
                             name: 'Avo Inspector',
                         },
                         {
                             url: '/docs/cdp/bigquery-export',
                             name: 'BigQuery Export',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/customer-io',
                             name: 'Customer.io Connector',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/databricks',
@@ -2172,6 +2188,10 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/hubspot-connector',
                             name: 'Hubspot Connector',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/intercom',
@@ -2184,6 +2204,10 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/postgres-export',
                             name: 'PostgreSQL Export',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/redshift-export',
@@ -2208,6 +2232,10 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/snowflake-export',
                             name: 'Snowflake Export',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/twilio',

@@ -1,11 +1,12 @@
 ---
 title: Customer.io Connector
 github: https://github.com/PostHog/customerio-plugin
-installUrl: https://app.posthog.com/project/apps?name=Customer.io
 thumbnail: ../../cdp/thumbnails/customerio-connector.png
 tags:
     - customer.io-connector
 ---
+
+> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
 
 The Customer.io Connector sends event data from PostHog into Customer.io. User emails will also be sent if available and customers will be created in Customer.io.
 
