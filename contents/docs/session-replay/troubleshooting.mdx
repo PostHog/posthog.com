@@ -4,6 +4,18 @@ title: Troubleshooting and FAQs
 
 Having trouble with recordings? Below are some tips for getting past some common issues
 
+The most common solution is...
+
+#### Update posthog-js
+
+We're always making improvements to the recordings feature, so you'll want to make sure that you're running the latest version of posthog-js on your website.
+
+To check the version that you're using, you can run the following in your console:
+
+```js
+window.posthog.LIB_VERSION
+```
+
 ## Recordings are not being captured
 
 There are a few common reasons that you may not see recordings appear in your project.
@@ -62,16 +74,6 @@ The most common reason for this is that you're trying to filter by events that w
 Session replay relies on the `$session_id` property added to events by the browser SDK to link events to sessions.
 
 To workaround this you can use the `posthog.onSessionId` method in the Browser SDK to register a callback that will be called each time the session id changes. You can send this to your back-end and add the `$session_id` property to your back-end events. 
-
-#### Update posthog-js
-
-We're always making improvements to the recordings feature, so you'll want to make sure that you're running the latest version of posthog-js on your website.
-
-To check the version that you're using, you can run the following in your console:
-
-```js
-window.posthog.LIB_VERSION
-```
 
 ## Browser freezes or crashes when recordings are enabled
 
