@@ -1,11 +1,12 @@
 ---
 title: Stripe Connector
 github: https://github.com/posthog/stripe-plugin
-installUrl: https://app.posthog.com/project/apps?name=stripe
 thumbnail: ../../cdp/thumbnails/stripe-connector.png
 tags:
     - stripe-connector
 ---
+
+> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
 
 Stripe is a payments platform used by millions of companies. The Stripe Connector enables you to get information about revenue and payments from Stripe, into PostHog. 
 
