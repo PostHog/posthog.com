@@ -8,9 +8,9 @@ featuredImage: ../images/tutorials/banners/tutorial-4.png
 tags: ['experimentation', 'feature flags']
 ---
 
-An A/A test is the same as an [A/B test](/docs/experiments) except both groups getting the same code or component. Because both groups get functionally identical variants, you want to see no statistical difference between the variants by the end of the experiment. If there is a significant difference, that is cause to investigate.
+An A/A test is the same as an [A/B test](/docs/experiments) except both groups receive the same code or components. Since both groups get identical functionality, the goal is to **not** see a statistical difference between the variants by the end of the experiment. 
 
-Teams run A/A tests to ensure their A/B test service, functionality, and implementation process results in accurate and relevant results. A/A tests are a way to discover broken parts of this process, and this tutorial shows you how to run one in PostHog.
+Teams run A/A tests to ensure their A/B test service, functionality, and implementation work as expected and provides accurate results. A/A tests are a way to discover broken parts of this process, and this tutorial shows you how to run one in PostHog.
 
 > Unlike other A/B testing tools, A/A tests aren’t needed to calculate baseline conversion and sample metrics in PostHog. You can calculate those using your product data, and they are automatically when you create an experiment.
 
@@ -20,11 +20,11 @@ The first step in running an A/A test is creating an experiment. You do this goi
 
 ![Create an experiment](../images/tutorials/aa-testing/experiment.png)
 
-If you use an absolute goal, like total pageviews, make sure to use an equal variant split (which is default). If you use a relative goal like conversion, you can test non-equal variant splits like 25-75. To do this, edit the feature flag with the same key as your experiment, change the variant rollout, and press save.
+If you use an absolute goal, like total pageviews, make sure to use an equal variant split (which is the default). If you use a relative goal like conversion, you can test non-equal variant splits like 25-75. To do this, edit the feature flag with the same key as your experiment, change the variant rollout, and press save.
 
 ## Implementing your A/A test
 
-Critical to A/A testing is treating it like a standard A/B test. This means implementing it like any A/B test. You must call the related feature flag, set up code dependent on it, and capture the relevant goal event(s).
+It is critical to A/A testing that you treat it like a standard A/B test. This means implementing it like any A/B test. You must call the related feature flag, set up code dependent on it, and capture the relevant goal event(s).
 
 <MultiLanguage>
 
@@ -69,7 +69,7 @@ After implementing, go back to your [experiment](https://app.posthog.com/experim
 
 ## Handling A/A test results
 
-After running your tests, you should see the same results for all the variants, or if not the same, the results should not be statistically significant. The probability a variant is the best should be about 50% for both.
+After running your tests, you should see the similar results for all the variants. The results should not be statistically significant, since all variants received the same treatment.
 
 If the results are statistically significant, something is wrong. Here are some areas to check:
 
