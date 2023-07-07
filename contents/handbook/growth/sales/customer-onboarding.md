@@ -123,6 +123,8 @@ While we don't follow a traditional model of sales and customer success being fu
 In practice, everyone on the team should have context on high-touch customers from standups, but a formal introduction will be made when a Slack channel is set up. We don't currently have a great process for this for email only customers, but working this out is a to do (as is keeping better tabs on non-Slack high revenue customers more generally). Given the size of our team, we will still mostly need everyone to have context on all customers, so we have redundancy to cover absences.
 
 
+## Meeting cadence and owners
+
 |Action|Cadence|CSM owner|
 |------|-------|----------|
 |Onboarding / post-sales handoff|Once|Simon|
