@@ -73,7 +73,7 @@ The most common reason for this is that you're trying to filter by events that w
 
 Session replay relies on the `$session_id` property added to events by the web SDK to link events to sessions.
 
-To workaround this you can use the `posthog.onSessionId` method in the Browser SDK to register a callback that will be called each time the session id changes. You can send this to your back-end and add the `$session_id` property to your back-end events. 
+To workaround this, you can use the `posthog.onSessionId` method in the web SDK to register a callback that will be called each time the session ID changes. You can send this to your backend and add the `$session_id` property to your backend events. 
 
 ## Browser freezes or crashes when recordings are enabled
 
