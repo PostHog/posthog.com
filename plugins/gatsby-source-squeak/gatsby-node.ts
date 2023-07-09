@@ -130,7 +130,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                         contentDigest: createContentDigest(replyData.body),
                         type: `SqueakReply`,
                         content: replyData.body,
-                        mediaType: 'text/markdown',
                     },
                     ...(profile.data && { profile: { id: createNodeId(`squeak-profile-${profile.data.id}`) } }),
                     ...replyData,
