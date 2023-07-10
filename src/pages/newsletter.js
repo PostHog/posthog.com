@@ -25,7 +25,7 @@ export const NewsletterPage = () => {
                     Our newsletter about making better products
                 </p>
 
-                <div className="md:grid md:grid-cols-5 md:gap-12 px-4 lg:px-12 max-w-6xl mx-auto items-center">
+                <div className="md:grid md:grid-cols-5 md:gap-12 px-4 lg:px-12 pb-8 max-w-6xl mx-auto items-center">
                     <div className="col-span-2 text-right">
                         <StaticImage
                             src="../images/newsletter-signup.png"
@@ -45,16 +45,20 @@ export const NewsletterPage = () => {
                         </ul>
 
                         <h4 className="relative text-lg">
-                            <strong>Subscribe through Substack</strong>
+                            <strong>Subscribe on Substack</strong>
                         </h4>
 
-                        <div className="max-w-lg -mt-6 -ml-4">
+                        <div className="max-w-lg -mt-6 dark:mt-0 -ml-4 dark:ml-0">
                             <iframe
                                 src="https://newsletter.posthog.com/embed"
                                 frameBorder="0"
                                 scrolling="no"
-                                className=" h-24"
+                                className="h-24 dark:rounded dark:bg-dark"
                             />
+                            <div className="hidden dark:block text-sm dark:text-primary-dark max-w-sm opacity-50 -mt-2">
+                                (Just imagine how much nicer this form would look in dark mode if Substack had better
+                                embedding options!)
+                            </div>
                         </div>
                     </div>
                 </div>
