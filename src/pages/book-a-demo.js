@@ -10,7 +10,7 @@ export default function BookADemo() {
     return (
         <Layout>
             <SEO title="Book a demo – PostHog" />
-            <section className="px-4 lg:pb-12 py-4 max-w-6xl mx-auto flex flex-col">
+            <section className="px-4 lg:pb-8 py-4 max-w-6xl mx-auto flex flex-col">
                 <header className="flex flex-col md:flex-row justify-between md:items-center pb-4 order-1">
                     <div>
                         <h1 className="text-4xl mt-0 mb-2">Watch a demo</h1>
@@ -52,13 +52,20 @@ export default function BookADemo() {
                     className="rounded shadow-xl order-2 md:order-3"
                 />
             </section>
-            <section>
-                <div className="text-center">
-                    <h2 className="text-3xl lg:text-5xl pb-1">PostHog for Startups?</h2>
-                    <h3 className="m-0 font-semibold mt-2 md:mt-3 text-center pb-5">
-                        Get $50,000 in credits, plus other great benefits.
-                    </h3>
-                    <CallToAction href="/startups">Apply now</CallToAction>
+
+            <section className="px-4 lg:pb-12 py-4 max-w-6xl mx-auto flex flex-col">
+                <div className="lg:border border-light dark:border-dark lg:bg-accent dark:lg:bg-accent-dark rounded lg:py-6 lg:px-8 flex items-center mb-12 lg:mb-8">
+                    <div className="w-full md:flex items-center md:space-x-4">
+                        <div className="flex-1">
+                            <h4 className="text-2xl mb-0">PostHog for startups</h4>
+                            <p className="p-0 mb-3 lg:mb-0 text-sm lg:text-base">
+                                Our startup program offers $50,000 in credits, plus other great benefits.
+                            </p>
+                        </div>
+                        <CallToAction type="secondary" to="/startups" className="whitespace-nowrap">
+                            Learn more
+                        </CallToAction>
+                    </div>
                 </div>
             </section>
         </Layout>
