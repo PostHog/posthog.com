@@ -2194,10 +2194,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/hubspot-connector',
                             name: 'Hubspot Connector',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
                         },
                         {
                             url: '/docs/cdp/intercom',
