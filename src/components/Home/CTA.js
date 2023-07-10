@@ -9,19 +9,16 @@ export default function CTA() {
                 <h2 className={heading('lg', 'white')}>Give it a try</h2>
                 <h3 className={heading('sm', 'white')}>Join 31,000 companies already using PostHog.</h3>
                 <div className="mt-12 flex flex-col space-y-2 md:space-y-3 items-center justify-center">
-                    <CallToAction
-                        type="custom"
-                        width="56"
-                        className="bg-white text-blue hover:text-blue border-2 border-white"
-                        to="https://app.posthog.com/signup"
-                    >
+                    <CallToAction type="primary" width="56" className="" to="https://app.posthog.com/signup">
                         Get started
                     </CallToAction>
                     <CallToAction
+                        href="/book-a-demo"
                         type="custom"
                         width="56"
-                        className="bg-blue text-white border-2 rounded-full border-white"
-                        to="/book-a-demo"
+                        size="lg"
+                        className="md:!w-auto !w-full"
+                        childClassName="!bg-blue"
                     >
                         Schedule a demo
                     </CallToAction>

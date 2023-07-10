@@ -97,12 +97,7 @@ export const AboutTransparency = () => {
                             url="/handbook/strategy/business-model"
                         />
                     </ul>
-                    <CallToAction
-                        to="/handbook/getting-started/start-here"
-                        type="outline"
-                        color={false}
-                        className="!w-full"
-                    >
+                    <CallToAction to="/handbook/getting-started/start-here" type="outline" className="!w-full">
                         Browse the handbook
                     </CallToAction>
                 </div>

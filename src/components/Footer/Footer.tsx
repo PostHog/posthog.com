@@ -239,7 +239,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Team',
-                url: '/handbook/company/team',
+                url: '/team',
             },
             {
                 title: 'Blog',
@@ -316,10 +316,6 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 export function Footer(): JSX.Element {
     const social: Social[] = [
         {
-            Icon: <SlackMonochrome className="w-6 h-6 box-border fill-current" />,
-            url: '/slack',
-        },
-        {
             Icon: <Twitter className="w-6 h-6 box-border fill-current" />,
             url: 'https://twitter.com/posthog',
         },
@@ -350,7 +346,7 @@ export function Footer(): JSX.Element {
     ]
 
     return (
-        <footer className="bg-accent dark:bg-accent-dark border-t border-light dark:border-dark">
+        <footer className="bg-accent dark:bg-accent-dark border-y border-light dark:border-dark">
             <div className="relative -top-6">
                 <Link
                     to="/"

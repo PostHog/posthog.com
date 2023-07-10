@@ -122,12 +122,14 @@ bg-seagreen
 bg-purple
 bg-salmon
 bg-orange
+bg-green
 border-blue
 border-teal
 border-seagreen
 border-purple
 border-salmon
 border-orange
+border-green
 after:bg-blue
 after:bg-teal
 after:bg-seagreen
