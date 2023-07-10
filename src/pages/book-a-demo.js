@@ -52,6 +52,15 @@ export default function BookADemo() {
                     className="rounded shadow-xl order-2 md:order-3"
                 />
             </section>
+            <section>
+                <div className="text-center">
+                    <h2 className="text-3xl lg:text-5xl pb-1">PostHog for Startups?</h2>
+                    <h3 className="m-0 font-semibold mt-2 md:mt-3 text-center pb-5">
+                        Get $50,000 in credits, plus other great benefits.
+                    </h3>
+                    <CallToAction href="/startups">Apply now</CallToAction>
+                </div>
+            </section>
         </Layout>
     )
 }
