@@ -90,7 +90,9 @@ export default function App({ Component, pageProps }) {
 
 ### App router
 
-If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/getting-started/react-essentials#client-components). 
+If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/getting-started/react-essentials#client-components).
+
+We need to export the `PostHogPageview` component containing [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) as [deopts](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering if not wrapped in a `<Suspense>`.
 
 <MultiLanguage>
 
@@ -108,8 +110,7 @@ if (typeof window !== 'undefined') {
   })
 }
 
-export default function PHProvider({ children }) {
-
+export function PostHogPageview() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   // Track pageviews
@@ -127,7 +128,9 @@ export default function PHProvider({ children }) {
       )
     }
   }, [pathname, searchParams])
+}
 
+export function PHProvider({ children }) {
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -146,51 +149,55 @@ if (typeof window !== 'undefined') {
   })
 }
 
-export default function PHProvider({
+export function PostHogPageview(): JSX.Element {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (pathname) {
+      let url = window.origin + pathname;
+      if (searchParams && searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`;
+      }
+      posthog.capture("$pageview", {
+        $current_url: url,
+      });
+    }
+  }, [pathname, searchParams]);
+
+  return <></>;
+}
+
+export function PHProvider({
   children,
 }: {
   children: React.ReactNode
 }) {
-
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  // Track pageviews
-  useEffect(() => {
-    if (pathname) {
-      let url = window.origin + pathname
-      if (searchParams.toString()) {
-        url = url + `?${searchParams.toString()}`
-      }
-      posthog.capture(
-        '$pageview',
-        {
-          '$current_url': url,
-        }
-      )
-    }
-  }, [pathname, searchParams])
-
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
 
 </MultiLanguage>
 
-Once created, you can import the `providers` file into your `app/layout` file, then wrap your app in the provider component.
+Once created, you can import the `PostHogPageview` and `PHProvider` components into your `app/layout` file, then wrap your app in the provider component and your pageview in a suspense.
 
 <MultiLanguage>
 
 ```js
 // app/layout.js
 import './globals.css'
-import Providers from './providers'
+import { PHProvider, PostHogPageview } from './providers'
+import { Suspense } from 'react'
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Providers>
+      <Suspense>
+        <PostHogPageview />
+      </Suspense>
+      <PHProvider>
         <body>{children}</body>
-      </Providers>
+      </PHProvider>
     </html>
   )
 }
@@ -199,18 +206,22 @@ export default function RootLayout({ children }) {
 ```ts
 // app/layout.tsx
 import './globals.css'
-import Providers from './providers'
+import { ReactNode, Suspense } from 'react';
+import { PHProvider, PostHogPageview } from './providers';
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <html lang="en">
-      <Providers>
+      <Suspense>
+        <PostHogPageview />
+      </Suspense>
+      <PHProvider>
         <body>{children}</body>
-      </Providers>
+      </PHProvider>
     </html>
   )
 }
