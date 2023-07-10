@@ -4,9 +4,15 @@ title: Surveys (beta)
 
 Surveys are a great way to collect qualitative feedback from your users. Qualitative feedback enables you to gain more insight into your users' and how they view their experience with your product.
 
-With PostHog you can target surveys based on page url, selectors, feature flag, and user properties. Then, you can analyze the results right in PostHog too!
+With PostHog, you can target surveys based on page URL, selectors, feature flag, and user properties. Then, you can analyze the results right in PostHog too!
 
-## Getting started
+## Enable the survey beta
+
+To access the survey beta, click your profile icon in the top right of your PostHog instance, select "Enable beta features," then activate "Surveys."
+
+![Survey beta access](../../images/docs/surveys/surveys.mp4)
+
+## Setting up surveys
 
 Setting up surveys is easy, and there are two ways to do it. The first option will enable you to get started quickly with a pre-built survey, while the second option involves creating your own UI components.
 
@@ -23,7 +29,7 @@ posthog.init("<ph_project_api_key>", {
 })
 ```
 
-3. That's it! Now you can create surveys in the PostHog UI.
+3. That's it! Now you can go [create a survey in PostHog](https://app.posthog.com/surveys).
 
 ### Option 2 (custom UI component)
 
@@ -37,9 +43,9 @@ posthog.getActiveMatchingSurveys((surveys) => {
 })
 ```
 
-Note: You'll need to handle whether a user has seen a survey already or not manually if you're using this option. The [survey app](https://github.com/PostHog/feature-surveys/blob/main/site.ts) uses localStorage to keep track of this, which you can implement similarly in your code.
+> **Note:** You'll need to handle whether a user has seen a survey already or not manually if you're using this option. The [survey app](https://github.com/PostHog/feature-surveys/blob/main/site.ts) uses `localStorage` to keep track of this, which you can implement similarly in your code.
 
-3. In order for survey responses to be recorded, you'll need to send in a "survey sent" capture call event with the survey's name, id, and any properties you'd want.
+3. In order for survey responses to be recorded, you'll need to send in a "survey sent" capture call event with the survey's name, ID, and any properties you'd want.
 
 For example, if the survey's name is "New feature beta interest", you'd send in a capture call like this:
 
