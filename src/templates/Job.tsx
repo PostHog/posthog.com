@@ -192,10 +192,7 @@ export default function Job({
                                             <ul className="list-none !m-0 p-0 grid gap-y-4">
                                                 {gitHubIssues.map(({ url, number, title, labels }) => {
                                                     return (
-                                                        <li
-                                                            key={title}
-                                                            className="flex flex-col md:flex-row md:items-center"
-                                                        >
+                                                        <li key={title} className="flex flex-col ">
                                                             <div className="flex space-x-2">
                                                                 <Link to={url} className="block w-[60px] md:w-auto">
                                                                     <span className="font-semibold text-sm text-black/50 hover:text-black/75 dark:text-white/50 dark:hover:text-white/75 font-code">
@@ -205,7 +202,7 @@ export default function Job({
                                                                 <Link to={url}>{title}</Link>
                                                             </div>
                                                             {labels && labels.length > 0 && (
-                                                                <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-2 !mt-0 !mb-0 p-0 flex items-center space-x-1">
+                                                                <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-14 !mt-0 !mb-0 p-0 flex items-center space-x-1">
                                                                     {labels.map(({ name, url }, index) => {
                                                                         return (
                                                                             <li key={name + index}>
