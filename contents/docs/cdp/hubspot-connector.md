@@ -1,12 +1,11 @@
 ---
 title: Hubspot Connector
 github: https://github.com/PostHog/hubspot-plugin
+installUrl: https://app.posthog.com/project/apps?name=Hubspot
 thumbnail: ../../cdp/thumbnails/hubspot.svg
 tags:
     - hubspot
 ---
-
-> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
 
 Hubspot is a full-featured marketing and CRM platform which includes tools for everything from managing inbound leads to building landing pages. As one of the world’s most popular CRM platforms, Hubspot is an essential PostHog integration for many organizations — and is especially popular with marketing teams.
 
