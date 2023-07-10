@@ -2027,6 +2027,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Experiments without flags',
+                    url: '/docs/experiments/running-experiments-without-feature-flags',
+                    icon: 'Code',
+                    color: 'salmon',
+                },
+                {
                     name: 'Common questions about experiments',
                     url: '/docs/experiments/common-questions',
                     icon: 'Question',
@@ -2383,10 +2389,18 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/data-warehouse',
+                    icon: 'Home',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Setup',
                     url: '/docs/data-warehouse/setup',
+                    icon: 'Book',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
             ],
         },
