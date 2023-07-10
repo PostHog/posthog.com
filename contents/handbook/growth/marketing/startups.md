@@ -52,18 +52,13 @@ The email is still evolving, but typically includes the following sections:
 
 ### Startup spotlight
 
-Each month, we'll pick a startup to highlight. Joe will go through the list, find a candidate to approach, interview them and then write up the responses as a blog post which we'll also publish on Twitter, LinkedIn and user Slack.
+Each month, we'll pick a startup to highlight. 
 
-The questions generally follow a standard format, but can evolve. 
+The way this works is that Joe chooses a candidate and approaches them to discuss a topic in a Zoom call. Ideally this topic is chosen in parallel to the Product for Engineers newsletter so that we can explore using the content/comments there too - but if the timing doesn't pan out then this isn't a blocking issue. 
 
-```
-What is your product, and why is it cool?
-Why did you decide this was a problem worth solving?
-Who are you building for?
-What are you most excited about?
-What are you most worried about?
-What is something you know today that you wish you'd known at the beginning?
-```
+Previously Spotlights were done with a set of prescribed questions. Now we have a 20 minute discussion about the topic, which we then write up into a piece on behalf of the startups' CEO. 
+
+We are very selective about the startups and topics we choose, to ensure that we're talking to people who can be authorative sources on a topic and who can generate high-quality opinions that are worth sharing with our users. 
 
 ### Referral program
 
