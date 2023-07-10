@@ -779,6 +779,12 @@ export const communityMenu = {
             url: '/templates',
         },
         {
+            name: 'Newsletter',
+            icon: 'Newspaper',
+            color: 'green',
+            url: '/newsletter',
+        },
+        {
             name: 'Merch',
             icon: 'Store',
             color: 'seagreen',
