@@ -58,7 +58,7 @@ The way this works is that Joe chooses a candidate and approaches them to discus
 
 Previously Spotlights were done with a set of prescribed questions. Now we have a 20 minute discussion about the topic, which we then write up into a piece on behalf of the startups' CEO. 
 
-We are very selective about the startups and topics we choose, to ensure that we're talking to people who can be authorative sources on a topic and who can generate high-quality opinions that are worth sharing with our users. 
+We are very selective about the startups and topics we choose, to ensure that we're talking to people who can be authoritative sources on a topic and who can generate high-quality opinions that are worth sharing with our users. 
 
 ### Referral program
 
