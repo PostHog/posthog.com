@@ -239,7 +239,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Team',
-                url: '/handbook/company/team',
+                url: '/team',
             },
             {
                 title: 'Blog',
