@@ -163,7 +163,7 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile
                 </span>
                 <span
                     className={`absolute ${
-                        mobile ? 'top-[-4px]' : 'bottom-[calc(-.5rem_-_1px)]'
+                        mobile ? 'top-[-4px]' : 'bottom-[calc(-.5rem_-_2px)]'
                     } left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
                         active ? `border-${color}` : `border-transparent`
                     }`}
