@@ -1,5 +1,5 @@
 ---
-date: 2023-07-04
+date: 2023-10-04
 title: "A software engineer's guide to A/B testing"
 rootPage: /blog
 sidebar: Blog
@@ -33,8 +33,9 @@ In A/B testing, you first decide on a goal metric and what change you'd like to 
 
 With your goal in mind and your code changes ready, you **randomly** split your users into two (or more) groups:
 
-- The control group: these users will experience your product as is – without any of your new changes.
-- The test group: these users will experience your product with your new changes.
+- **The control group** – These users will experience your product as is – without any of your new changes.
+
+- **The test group** – These users will experience your product with your new changes.
 
 You then run your A/B test to gather data (usually a few days or weeks) and compare the differences in the goal metric between the different groups.
 
@@ -48,13 +49,13 @@ There are five parts to a good A/B test:
 
 Like "increase paid conversion rate", or "decrease churn rate". This should be a *single* metric that you're aiming to improve.
 
-Without a clear goal, it's unclear what is a successful outcome of test. For example, a bad goal is "increase user engagement", since it's unclear which metric will define success – is it daily active visitors? Total number of page views? Time spent in the app?
+Without a clear goal, it's unclear what is a successful outcome of test. For example, a bad goal is "increase user engagement", since it's unclear which metric will define success – is it daily active visitors, total number of page views, or time spent in the app?
 
-Your test results may show improvements in some of metrics but declinations in others, and without a precise goal, you will struggle to interpret if your test is a success or not.
+Your test results may show improvements in some of metrics but declines in others, and without a precise goal, you will struggle to interpret if your test is a success or not.
 
-### 2. A clear hypothesis why your your changes will achieve your goal
+### 2. A clear hypothesis about why your your changes will achieve your goal
 
-A well defined hypothesis focuses your testing and guides your decision-making by providing a framework for evaluating your results. It should include your goal metric, how you think your change will improve it, and any other important context. For example:
+A well-defined hypothesis focuses your testing and guides your decision making by providing a framework for evaluating your results. It should include your goal metric, how you think your change will improve it, and any other important context. For example:
 
 > User research showed that new users are not sure how to use our products. By adding a short tutorial video during onboarding, users will be understand how to use our product. As a result, we expect to see more successful interactions with our app features, a decrease in customer support queries, and a decrease in churn rate (our primary goal).
 
@@ -68,11 +69,11 @@ This is a good hypothesis because it enables you to break down which metrics you
 
 Then, once you've collected data with your test, you can use these metrics to analyze if your test was a success or not.
 
-### 3. Tests as small of a change as *reasonably* possible 
+### 3. Testing as small of a change as *reasonably* possible 
 
 Ideally, an A/B test should change one thing at a time. This ensures that any change in user behavior can be attributed to what was changed. If there are multiple changes, it's difficult to determine which one caused the change in behavior.
 
-The caveat here is that too small of change can slow your team down. Since running A/B tests take time, if you're constantly testing small changes, it may take long to ship large, meaningful changes.
+The caveat here is that too small of change can slow your team down. Since running A/B tests take time, if you're constantly testing small changes, it will take longer to ship large, meaningful changes.
 
 A good rule of thumb to know if your change is too small is if it's unlikely to impact user behavior significantly. To help inform this decision, you can use qualitative data from user research or quantitative data from existing logging or previous A/B tests.
 
@@ -83,7 +84,9 @@ A large sample size for your test ensures the *statistical significance* of your
 To know whether your change is large enough, you'll need to know:
 
 1. **The current conversion rate for your metric.** This is the percentage of users who performed the desired action (e.g., make a purchase, sign up) out of the total number of eligible users.
+
 2. **Your "minimum detectable effect"** i.e., the smallest change in the conversion rate that you want to detect. The smaller the change, the larger the sample size you'll need.
+
 3. **Your desired level of confidence.** The industry standard is 95%.
 
 You then use a [formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself (We also include this calculator when creating a new [A/B test in PostHog](/ab-testing/features)).
@@ -92,7 +95,7 @@ You then use a [formula](https://en.wikipedia.org/wiki/Sample_size_determination
 
 Building on the notion of ensuring statistical significant results, once you've calculated your required sample size, you'll be able to calculate how long your test should run for. You do this by dividing your sample size by your daily number of eligible users.
 
-For example, if you're making changes to your signup flow and your required sample size is 1,000 new sign-ups. If your daily number of sign-ups is 100, then you'll need to run your test for `1,000 / 100 = 10 days`.
+For example, if you're making changes to your signup flow and your required sample size is 1,000 new sign-ups, and your daily number of sign-ups is 100, then you'll need to run your test for `1,000 / 100 = 10 days`.
 
 Once again, there are many calculators online to help you determine your duration, and PostHog also includes this calculator when creating a new test.
 
@@ -102,7 +105,7 @@ Once again, there are many calculators online to help you determine your duratio
 
 ## How to implement a good A/B test
 
-Once you're satisfied that your test meets the [criteria of a good A/B test](#what-makes-a-good-ab-test), it's time to implement it in your code. This is typically done by using [feature flags](/feature-flags/features) to randomly assign users to the control or test group, and then logging when users are exposed to their variant i.e., trigger the code path that checks the feature flag. This enables you to compare metrics in aggregate between the users in your variants.
+Once you're satisfied your test meets the criteria of a good A/B test, it's time to implement it in your code. This is typically done by using [feature flags](/blog/feature-flag-benefits-use-cases) to randomly assign users to the control or test group, and then logging when users are exposed to their variant – i.e., trigger the code path that checks the feature flag. This enables you to compare metrics in aggregate between the users in your variants.
 
 It's absolutely **essential** to only log the users in your test who would actually be impacted by your changes. Users who aren't affected by your test should be excluded. If you include unaffected users, their unchanged behavior will mix in with your results, thereby watering down the impact and the clarity of your findings.
 
@@ -148,7 +151,9 @@ function showNewChanges(user) {
 Once you've started your A/B test, it's a good idea to check in on it 24-48 hours after launch to ensure that everything is running correctly. Here's a list of things to check:
 
 * Check your exposure logging. For example, that the volume of users assigned to the control and test variant is what you'd expect it to be.
+
 * Check your event logging e.g., ensure that you're receiving all the events you expect to receive, and in the right ratios.
+
 * Monitor crashes or error rates to ensure that your test is not causing any issues. 
 
 Once you're sure that everything is running smoothly, try to avoid frequently checking the results until the test is finished. Checking too often can lead to reactive decisions based on incomplete data. It's usually best to wait until the test ends to make any decisions, as you'll have the best data at that point.
@@ -171,7 +176,7 @@ To calculate if your results are statistically significant (without going into t
 
 This does not mean your test was a failure! It suggests that the results observed between the variants could be due to random chance rather than the change you implemented. Here are few next steps you can consider:
 
-- **Check you gathered enough data:**  If your sample size was too small or your testing period was too short, you might need to extend the duration of your test to gather more data.
+- **Check you gathered enough data:**  If your sample size was too small, or your testing period was too short, you might need to extend the duration of your test to gather more data.
 
 - **Consider smaller changes:** If you made a large change, it could be that smaller aspects of the change had different impacts – some positive, some negative, leading to an overall insignificant result. Consider breaking down the change into smaller parts and testing these individually.
 
@@ -211,9 +216,9 @@ No, you can also use A/B tests for infrastructure changes! For example, if you'r
 
 While it can be tempting to stop a test as soon as the results appear significant, doing so can lead to false positives. This is known as "[peeking problem](/blog/ab-testing-mistakes#3-conducting-an-experiment-without-a-predetermined-duration)": basically, the more often you check the results, the greater the chance you'll observe a false positive – a result that appears to be significant, but is actually due to random chance. 
 
-To counteract this, predetermine your test duration (based on the [sample size required](#4-has-a-sufficiently-large-sample-size-of-users)) and to only make decisions based on the data collected during the entire duration.
+To counteract this, predetermine your test duration (based on the [sample size required](#4-has-a-sufficiently-large-sample-size-of-users)) and only make decisions based on the data collected during the entire duration.
 
-## Launch checklist
+## A/B test launch checklist
 
 Launching an A/B test requires careful planning to ensure accurate results and meaningful insights. To help you navigate this, we've put together this launch checklist:
 
@@ -245,6 +250,3 @@ Launching an A/B test requires careful planning to ensure accurate results and m
 - [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
 - [How to measure product engagement](/blog/how-to-measure-product-engagement)
-
-
-
