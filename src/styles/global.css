@@ -297,6 +297,31 @@ h4 {
     }
 }
 
+/* applies to question and reply content */
+.question-content {
+    h3 {
+        @apply text-xl;
+
+        a {
+            @apply font-bold;
+        }
+    }
+
+    h4 {
+        @apply text-base;
+    }
+
+    p,
+    ol,
+    ul {
+        & + h2,
+        & + h3,
+        & + h4 {
+            @apply mt-4;
+        }
+    }
+}
+
 #recent-questions {
     container-type: inline-size;
 }

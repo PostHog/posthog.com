@@ -213,7 +213,7 @@ export const Question = (props: QuestionProps) => {
                     </div>
 
                     <div className={archived ? 'opacity-50' : ''}>
-                        <div className="ml-5 pl-[30px] border-l border-light dark:border-dark">
+                        <div className="question-content ml-5 pl-[30px] border-l border-light dark:border-dark">
                             <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
                                 <Link
                                     to={`/questions/${questionData.attributes.permalink}`}
