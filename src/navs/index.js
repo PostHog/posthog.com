@@ -877,6 +877,10 @@ export const docsMenu = {
                             name: 'Next steps',
                             url: '/docs/getting-started/next-steps',
                         },
+                        {
+                            name: 'Enabling beta features',
+                            url: '/docs/getting-started/enable-betas',
+                        },
                     ],
                 },
                 {
