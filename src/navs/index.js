@@ -2128,14 +2128,6 @@ export const docsMenu = {
                             name: 'Shopify Connector',
                         },
                         {
-                            url: '/docs/cdp/stripe-connector',
-                            name: 'Stripe Connector',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
                             url: '/docs/cdp/twitter-followers',
                             name: 'Twitter Followers Tracker',
                         },
