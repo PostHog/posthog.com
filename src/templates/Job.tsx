@@ -14,6 +14,7 @@ import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { companyMenu } from '../navs'
+import groupBy from 'lodash.groupby'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -65,6 +66,23 @@ export default function Job({
     const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
     const missionAndObjectives = parent?.customFields?.find(({ title }) => title === 'Mission & objectives')?.value
     const showObjectives = missionAndObjectives !== 'false'
+    const availableTeams = groupBy(allJobPostings.nodes, ({ parent }) => {
+        const team = parent?.customFields?.find(({ title }) => title === 'Team')?.value
+        return !team ? 'TBD' : team
+    })
+
+    const openRolesMenu = []
+    Object.keys(availableTeams)
+        .sort()
+        .forEach((team) => {
+            openRolesMenu.push({ name: team })
+            availableTeams[team]?.forEach(({ fields: { title, slug } }) => {
+                openRolesMenu.push({
+                    name: title.split(' - ')[0],
+                    url: slug,
+                })
+            })
+        })
     const menu = [
         {
             name: 'Work at PostHog',
@@ -84,14 +102,11 @@ export default function Job({
         {
             name: 'Open roles',
             url: '',
-            children: allJobPostings.nodes.map(({ fields: { title, slug } }) => {
-                return {
-                    name: title,
-                    url: slug,
-                }
-            }),
+            children: openRolesMenu,
         },
     ]
+
+    const [jobTitle] = title.split(' - ')
 
     return (
         <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[6]}>
@@ -130,7 +145,8 @@ export default function Job({
                 >
                     <div className="relative">
                         <div>
-                            <h1 className="m-0 text-5xl">{title}</h1>
+                            <h1 className="m-0 text-5xl">{jobTitle}</h1>
+                            {teamName && <p className="m-0 text-xl opacity-70">{teamName}</p>}
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                                 <Detail title="Department" value={departmentName} icon={<Department />} />
                                 <Detail title="Location" value={locationName} icon={<Location />} />
@@ -338,6 +354,14 @@ export const query = graphql`
                 fields {
                     title
                     slug
+                }
+                parent {
+                    ... on AshbyJob {
+                        customFields {
+                            value
+                            title
+                        }
+                    }
                 }
             }
         }
