@@ -33,7 +33,7 @@ In this guide, we'll:
 
 It can be useful to track additional events on your Shopify store, such as when a user adds an item to their cart or completes a purchase.
 
-To do this, you can use [autocapture](/docs/product-analytics/autocapture) to send metadata with events. This information can be used in further analysis in aggregate or even when understanding behavior for an individual user.
+To do this, you can use [autocapture](/docs/product-analytics/autocapture) to send metadata with events. This information can be used in further analysis in aggregate or when understanding behavior of an individual user.
 
 > The following requires some knowledge of HTML and Shopify's [Liquid templating engine](https://shopify.dev/docs/api/liquid).
 
