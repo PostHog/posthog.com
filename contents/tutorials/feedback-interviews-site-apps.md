@@ -30,6 +30,8 @@ To add PostHog’s site apps, you need to have setup either [the snippet or the 
 </script>
 ```
 
+### Use surveys
+
 Once done, PostHog automatically loads site apps into your app through the snippet or library. You don’t need any additional code.
 
 ## Setting up the feedback app
