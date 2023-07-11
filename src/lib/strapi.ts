@@ -38,6 +38,7 @@ export type QuestionData = {
     archived: boolean
     activeAt: string
     pinnedTopics: StrapiData<TopicData[]>
+    locked: boolean
 }
 
 export type AvatarData = {

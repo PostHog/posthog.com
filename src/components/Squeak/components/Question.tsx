@@ -15,6 +15,7 @@ import Tooltip from 'components/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
 import { Check2 } from 'components/Icons'
+import { LockClosedIcon, LockOpenIcon } from '@heroicons/react/outline'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -137,6 +138,7 @@ export const Question = (props: QuestionProps) => {
         handleReplyDelete,
         archive,
         pinTopics,
+        lock,
     } = useQuestion(id, { data: question })
 
     if (isLoading) {
@@ -152,6 +154,7 @@ export const Question = (props: QuestionProps) => {
     }
 
     const archived = questionData?.attributes.archived
+    const locked = questionData?.attributes.locked
 
     return (
         <CurrentQuestionContext.Provider
@@ -171,6 +174,11 @@ export const Question = (props: QuestionProps) => {
                             It's likely out of date, no longer relevant, or the answer has been added to our{' '}
                             <Link to="/docs">documentation</Link>.
                         </p>
+                    </div>
+                )}
+                {locked && (
+                    <div className="font-medium text-sm m-0 mb-6 bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 rounded text-center">
+                        <p className="font-bold !m-0 !p-0">The following thread has been locked.</p>
                     </div>
                 )}
                 <div className={`flex flex-col w-full`}>
@@ -206,6 +214,24 @@ export const Question = (props: QuestionProps) => {
                                             </Tooltip>
                                         )}
                                     </button>
+                                    <button
+                                        onClick={() => lock(!locked)}
+                                        className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
+                                    >
+                                        {!locked ? (
+                                            <Tooltip content={() => <div style={{ maxWidth: 320 }}>Lock thread</div>}>
+                                                <span className="flex w-6 h-6">
+                                                    <LockClosedIcon />
+                                                </span>
+                                            </Tooltip>
+                                        ) : (
+                                            <Tooltip content={() => <div style={{ maxWidth: 320 }}>Unlock thread</div>}>
+                                                <span className="flex w-6 h-6">
+                                                    <LockOpenIcon />
+                                                </span>
+                                            </Tooltip>
+                                        )}
+                                    </button>
                                 </>
                             )}
                             {!archived && <SubscribeButton contentType="question" id={questionData?.id} />}
@@ -233,7 +259,12 @@ export const Question = (props: QuestionProps) => {
                             archived ? 'opacity-25' : ''
                         }`}
                     >
-                        <QuestionForm archived={archived} questionId={questionData.id} formType="reply" reply={reply} />
+                        <QuestionForm
+                            archived={archived || locked}
+                            questionId={questionData.id}
+                            formType="reply"
+                            reply={reply}
+                        />
                     </div>
                 </div>
             </div>
