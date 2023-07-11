@@ -14,18 +14,18 @@ tags:
   - Product metrics
 ---
 
-A/B testing enables you to be confident that your product changes are having their intended effects. Rather than making decisions based on gut feeling or intuition, A/B testing provides empirical data to help you remove bias from decision making.
+As a software engineer, you have two options:
 
-This post is for software engineers who are just getting started with A/B testing. We'll teach you the basic concepts on how to run a successful test and supercharge your product growth!
+1. YOLO every change and hope they have the desired impact.
+2. Track user metrics and run A/B tests to verify your changes have the desired effect.
 
-We'll cover:
-- [How A/B testing works](#how-ab-testing-works)
-- [What makes a good A/B test?](#what-makes-a-good-ab-test)
-- [How to implement a good A/B test](#how-to-implement-a-good-ab-test)
-- [Monitoring your A/B test](#monitoring-your-ab-test)
-- [Analyzing your results](#analyzing-your-results)
-- [Frequently asked questions](#frequently-asked-questions)
-- [Launch checklist](#launch-checklist)
+One is easier than other, but the easy way rarely works in the long term. This guide is for software engineers who are just getting started with A/B testing. In it, you'll learn
+
+- How to devise good A/B tests
+- How to implement and monitor your tests
+- How to analyze your results (statistically significant, or not)
+
+We'll also cover some frequently answered questions, such as when you _shouldn't_ run A/B tests, and there's a simple [A/B test launch checklist]((#launch-checklist)) you can use when you run your own tests.
 
 ## How A/B testing works
 
@@ -49,7 +49,7 @@ There are five parts to a good A/B test:
 
 Like "increase paid conversion rate", or "decrease churn rate". This should be a *single* metric that you're aiming to improve.
 
-Without a clear goal, it's unclear what is a successful outcome of test. For example, a bad goal is "increase user engagement", since it's unclear which metric will define success – is it daily active visitors, total number of page views, or time spent in the app?
+Without a clear goal, it's unclear what a successful outcome is. For example, a bad goal is "increase user engagement", since it's unclear which metric will define success – is it daily active visitors, total number of page views, or time spent in the app?
 
 Your test results may show improvements in some of metrics but declines in others, and without a precise goal, you will struggle to interpret if your test is a success or not.
 
@@ -57,7 +57,7 @@ Your test results may show improvements in some of metrics but declines in other
 
 A well-defined hypothesis focuses your testing and guides your decision making by providing a framework for evaluating your results. It should include your goal metric, how you think your change will improve it, and any other important context. For example:
 
-> User research showed that new users are not sure how to use our products. By adding a short tutorial video during onboarding, users will be understand how to use our product. As a result, we expect to see more successful interactions with our app features, a decrease in customer support queries, and a decrease in churn rate (our primary goal).
+> Showing a short tutorial video during onboarding will help users understand how to use our product. As a result, we expect to see more successful interactions with the app, fewer customer support queries, and reduced churn (our primary goal) among tested users.
 
 This is a good hypothesis because it enables you to break down which metrics you'll focus on in your test:
 
@@ -89,7 +89,7 @@ To know whether your change is large enough, you'll need to know:
 
 3. **Your desired level of confidence.** The industry standard is 95%.
 
-You then use a [formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself (We also include this calculator when creating a new [A/B test in PostHog](/ab-testing/features)).
+You then use a [formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself – [A/B tests in PostHog](/ab-testing/features) calculate this for you automatically.
 
 ### 5. A long enough test duration
 
@@ -99,9 +99,11 @@ For example, if you're making changes to your signup flow and your required samp
 
 Once again, there are many calculators online to help you determine your duration, and PostHog also includes this calculator when creating a new test.
 
-**A good rule of thumb is that your test duration should be between one week and one month:**
-- One week is a good minimum since users may behave differently on weekends or weekdays.
-- One month is a good maximum since otherwise you may delay shipping important product changes.
+A good rule of thumb is that your test duration should be between one week and one month:
+
+- **One week** is a good minimum since users may behave differently on weekends or weekdays.
+
+- **One month** is a good maximum since otherwise you may delay shipping important product changes.
 
 ## How to implement a good A/B test
 
@@ -166,15 +168,13 @@ Once your test has run its duration and you've collected enough data, you're rea
 
 2. **Any secondary metrics.** These are usually metrics that are closely related to your goal metric. For example, if your goal metric is to increase paid conversions, a secondary metric may be to increase sign-ups.
 
-3. **Any counter metrics.** These are metrics that ensure your user experience isn't degrading. For example, if your goal is to increase sign-ups, you should also verify your churn rate is not increasing.
+3. **Any counter metrics.** These are metrics that ensure your user experience isn't deteriorating. For example, if your goal is to increase sign-ups, you should also verify your churn rate is not increasing.
 
-To calculate if your results are statistically significant (without going into too much detail of the exact formula), you'll need the number of users in each variant as well as the conversion rate for each metric. You can then put these values into an [online calculator](https://abtestguide.com/calc/) to determine if they are significant.
+Most A/B testing tools, including [PostHog](/ab-testing/features), will calculate statistical significance for you. To do so manually, you'll need to input the number of users in each variant, and the conversion rate for each metric, into an [online calculator](https://abtestguide.com/calc/).
 
-> When you run [A/B tests](/ab-testing/features) in PostHog, we'll automatically calculate if your results are statistically significant or not.
+### What if my results are _not_ statistically significant?
 
-### What if my results are not statistically significant?
-
-This does not mean your test was a failure! It suggests that the results observed between the variants could be due to random chance rather than the change you implemented. Here are few next steps you can consider:
+This _doesn't_ mean your test was a failure! It suggests that the results observed between the variants could be due to random chance, rather than the change you implemented. Here are few next steps you can consider:
 
 - **Check you gathered enough data:**  If your sample size was too small, or your testing period was too short, you might need to extend the duration of your test to gather more data.
 
@@ -190,7 +190,7 @@ This does not mean your test was a failure! It suggests that the results observe
 
 ### When should you avoid running an A/B test?
 
-There's are costs and trade-offs to running A/B tests so it may not always be a good idea to run them. Here a few scenarios in which you may not want to run an A/B test:
+There are costs and trade-offs to running A/B tests. Here are a few scenarios in which you may not want to run an A/B test:
 
 - **When you lack of sufficient traffic or users, or have time constraints:** It won't be possible to gather enough data to obtain the statistically significant results required to make good decisions.
 
@@ -210,11 +210,15 @@ To counteract this, you'll need a larger sample size of users. This is what enab
 
 ### Are A/B tests only for product changes?
 
-No, you can also use A/B tests for infrastructure changes! For example, if you're considering a new caching strategy or database system, you could split your traffic between the old and new systems to see which performs better. Or perhaps you're implementing a refactor to your codebase, in this you can use an A/B test to ensure your refactor does not perform worse.
+No, you can also use A/B tests for infrastructure changes, such as:
+
+- If you're considering a new caching strategy or database system, you could split your traffic between the old and new systems to see which performs better. 
+
+- When you're implementing a refactor to your codebase, you can use an A/B test to ensure your refactor does not perform worse.
 
 ### Can I stop an A/B test as soon as the results are significant?
 
-While it can be tempting to stop a test as soon as the results appear significant, doing so can lead to false positives. This is known as "[peeking problem](/blog/ab-testing-mistakes#3-conducting-an-experiment-without-a-predetermined-duration)": basically, the more often you check the results, the greater the chance you'll observe a false positive – a result that appears to be significant, but is actually due to random chance. 
+While it can be tempting to stop a test as soon as the results appear significant, doing so can lead to false positives. This is known as the [peeking problem](/blog/ab-testing-mistakes#3-conducting-an-experiment-without-a-predetermined-duration) – i.e. the more often you check the results, the greater the chance you'll observe a false positive, a result that appears to be significant, but is actually due to random chance. 
 
 To counteract this, predetermine your test duration (based on the [sample size required](#4-has-a-sufficiently-large-sample-size-of-users)) and only make decisions based on the data collected during the entire duration.
 
