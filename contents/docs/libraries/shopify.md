@@ -40,7 +40,7 @@ To do this, you can use [autocapture](/docs/product-analytics/autocapture) to se
 ### 2. Add to cart (with data attributes)
 
 To track _which_ product a user adds to their cart, we can use a `data-ph-capture-attribute` on the 'Add to cart' button (generally in `product.liquid` in Shopify). While this still requires adding code, it's less involved than creating a custom event.
-
+For example, capturing the product title and price (divided by 100) looks like this:
 
 ```html
 <input type="submit" class="add-to-cart-button" value="{{ 'products.product.add_to_cart' | t }}" 
