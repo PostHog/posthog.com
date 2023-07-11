@@ -57,7 +57,9 @@ Once set up, the _Add to cart_ button autocapture event in PostHog will include 
 
 > This requires a Shopify Plus account because you'll need to modify your store's checkout settings. This option is available in the Shopify admin by navigating to _Settings_ → _Checkout_ → _Order status page_ → _Additional scripts_.
 
-You can send any info you want to PostHog by [attaching properties to a custom event](/docs/getting-started/send-events#sending-custom-properties-on-an-event). In this example, we'll send information about the order that was just placed.
+If you want to capture orders more accurately, you can do so using a custom event. These enable you to [add properties](/docs/getting-started/send-events#sending-custom-properties-on-an-event) for any of the fields in your order including price, order number, size, and currency. 
+
+To add a custom event to your Shopify checkout page, add a script like this to your checkout settings:
 
 > This code should be used as a guide and may need to be modified depending on the setup of your store.
 
