@@ -1211,10 +1211,6 @@ export const docsMenu = {
                     icon: 'Apps',
                     children: [
                         {
-                            url: '/docs/apps/feedback-widget',
-                            name: 'Feedback Widget',
-                        },
-                        {
                             url: '/docs/apps/notification-bar',
                             name: 'Notification Bar',
                         },
@@ -1225,10 +1221,6 @@ export const docsMenu = {
                         {
                             url: '/docs/apps/pineapple-mode',
                             name: 'Pineapple Mode',
-                        },
-                        {
-                            url: '/docs/apps/user-interviewer',
-                            name: 'User Interviewer',
                         },
                         {
                             name: 'Build an app',
