@@ -265,10 +265,10 @@ The same holds for [group](/manual/group-analytics) properties:
 
 ```js-web
 // set properties for a group
-posthog.setGroupPropertiesForFlags({'organization': {'property1': 'value', property2: 'value2'}})
+posthog.setGroupPropertiesForFlags({'company': {'property1': 'value', property2: 'value2'}})
 
 // reset properties for a given group:
-posthog.resetGroupPropertiesForFlags('organization')
+posthog.resetGroupPropertiesForFlags('company')
 
 // reset properties for all groups:
 posthog.resetGroupPropertiesForFlags()
@@ -392,15 +392,15 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```js-web
-posthog.group('company', '42dlsfj23f')
+posthog.group('company', 'company_id_in_your_db')
 
-posthog.capture('upgraded plan') // this event is associated with company ID `42dlsfj23f`
+posthog.capture('upgraded plan') // this event is associated with company ID `company_id_in_your_db`
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```js-web
-posthog.group('company', '42dlsfj23f', {
+posthog.group('company', 'company_id_in_your_db', {
     name: 'Awesome Inc.',
     employees: 11,
 })

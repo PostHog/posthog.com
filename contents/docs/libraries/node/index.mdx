@@ -335,8 +335,8 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 ```node
 client.capture({
     event: 'some event',
-    distinctId: '[distinct id]',
-    groups: { company: '42dlsfj23f' },
+    distinctId: '[user distinct id]',
+    groups: { company: 'company_id_in_your_db' },
 })
 ```
 
@@ -345,7 +345,7 @@ client.capture({
 ```node
 client.groupIdentify({
     groupType: 'company',
-    groupKey: '42dlsfj23f',
+    groupKey: 'company_id_in_your_db',
     properties: {
         name: 'Awesome Inc',
         employees: 11,
