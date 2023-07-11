@@ -39,7 +39,7 @@ With your goal in mind and your code changes ready, you **randomly** split your 
 
 You then run your A/B test to gather data (usually a few days or weeks) and compare the differences in the goal metric between the different groups.
 
-![How A/B testing works](../images/blog/ab-testing-guide-for-engineers/ab-test-illustration.png)
+![How A/B testing works](../images/blog/ab-testing-guide-for-engineers/ab-test-illustration.jpg)
 
 ## What makes a good A/B test?
 
