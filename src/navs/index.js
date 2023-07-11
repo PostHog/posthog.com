@@ -1215,10 +1215,6 @@ export const docsMenu = {
                             name: 'Notification Bar',
                         },
                         {
-                            url: '/docs/apps/nps-survey-app',
-                            name: 'NPS Survey',
-                        },
-                        {
                             url: '/docs/apps/pineapple-mode',
                             name: 'Pineapple Mode',
                         },

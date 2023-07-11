@@ -232,9 +232,7 @@ The main difference is, because Pendo is designed for less technical users, it o
 
 PostHog has ready-made apps for displaying pop-ups and tooltips, but the true power is in the ability to [build custom solutions](/tutorials/build-site-app).
 
-Below are some of the most popular ready-made apps which facilitate in-app messages in PostHog:
-
-- [NPS Survey App](/apps/nps-survey-app): Asks users how likely they are to recommend your product, on a scale of 0-10. Using this information, you can compute your Net Promoter Score. 
+Below are some of the most popular ready-made apps which facilitate in-app messages in PostHog: 
 
 - [Notification Bar](/apps/notification-bar): Displays a customizable banner in your product, suitable for alerting users to important messages — like discounts, outages, or announcements.
 
