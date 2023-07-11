@@ -232,7 +232,7 @@ This makes it an easy way to track new and returning visitors to your website, a
 
 - [Session replays](/docs/session-replay) with visuals of actual user behavior on your site and performance stats.
 
-- [Data connections](/docs/cdp) to import events from sources like [Stripe](/cdp/stripe-connector) and [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
+- [Data connections](/docs/cdp) to import events from sources [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
 
 - Direct SQL querying and customization with [HogQL](/docs/product-analytics/hogql).
 
