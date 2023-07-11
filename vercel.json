@@ -1007,6 +1007,8 @@
             "source": "/tutorials/experiments",
             "destination": "/docs/experiments/running-experiments-without-feature-flags"
         },
-        { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" }
+        { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
+        { "source": "/docs/apps/feedback-widget", "destination": "/docs/surveys/manual" },
+        { "source": "/apps/user-interviewer", "destination": "/docs/surveys/manual" }
     ]
 }

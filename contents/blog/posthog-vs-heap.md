@@ -542,12 +542,6 @@ As an open source platform designed for technical teams, PostHog integrates with
             <td>Build internal tools using your usage data</td>
         </tr>
         <tr>
-            <td><strong>Feedback Widget</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Collect ad hoc feedback in your app</td>
-        </tr>
-        <tr>
             <td><strong>User Inteview Scheduler</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -568,14 +562,6 @@ As an open source platform designed for technical teams, PostHog integrates with
     </tbody>
 </table>
 </div>
-
-> ### Making it easy to talk to users
->
-> You can't build a great product without talking to users, which is why we built the [User Interview Scheduler](/apps/user-interview) app for PostHog. You can use it to automatically invite users to an interview based user properties or actions they've completed.
->
-> We also built a simple [Feedback Widget app](/apps/feedback-widget) for collecting ad hoc feedback from users. You can analyse this data in PostHog, or use Zapier to send this feedback to other tools like Slack, Zendesk, and more.
->
-> **See:** [How to gather feedback and book user interviews with site apps](/tutorials/feedback-interviews-site-apps)
 
 ### Marketing & sales
 
