@@ -2,6 +2,7 @@
 title: Data warehouse (beta)
 sidebar: Docs
 showTitle: true
+ogImageURL: /images/product/data-warehouse.png
 availability:
     free: full
     selfServe: full
