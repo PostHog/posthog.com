@@ -40,6 +40,13 @@ export default function Questions({ data, pageContext }: IProps) {
         limit: 20,
         sortBy,
         topicId: data?.squeakTopic?.squeakId,
+        filters: {
+            pinnedTopics: {
+                id: {
+                    $null: true,
+                },
+            },
+        },
     })
 
     const { questions: pinnedQuestions } = useQuestions({
