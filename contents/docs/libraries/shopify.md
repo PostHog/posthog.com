@@ -49,9 +49,7 @@ For example, capturing the product title and price (divided by 100) looks like t
 />
 ```
 
-In the above example, anything prefixed with `data-ph-capture-attribute` will be sent to PostHog as a property using the value that appears in the DOM on the page.
-
-Now when viewing an event, you'll see this information attached to the autocapture event where the _Add to cart_ button is clicked.
+Once set up, the _Add to cart_ button autocapture event in PostHog will include the properties for each of the attributes prefixed with `data-ph-capture-attribute-` and their values.
 
 ![Data attributes in an autocaptured event](../../images/tutorials/shopify/autocapture-data-attributes.png)
 
