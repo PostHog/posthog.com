@@ -39,7 +39,7 @@ To do this, you can use [autocapture](/docs/product-analytics/autocapture) to se
 
 ### 2. Add to cart (with data attributes)
 
-In this example, we'll track _which_ product a user adds to their cart. To do this, we'll use `data-ph-capture-attribute` on the 'Add to cart' button (generally in `product.liquid`) to capture data that exists on the page and send it to PostHog. While this still requires adding code, it's less involved than creating a custom event.
+To track _which_ product a user adds to their cart, we can use a `data-ph-capture-attribute` on the 'Add to cart' button (generally in `product.liquid` in Shopify). While this still requires adding code, it's less involved than creating a custom event.
 
 
 ```html
