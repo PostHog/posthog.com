@@ -1,5 +1,5 @@
 ---
-title: Databricks Export
+title: Databricks
 github: https://github.com/posthog/posthog-databricks-plugin
 installUrl: https://app.posthog.com/project/apps?name=posthog+databricks+plugin
 thumbnail: ../../cdp/thumbnails/databricks.png
@@ -7,7 +7,7 @@ tags:
     - databricks
 ---
 
-The Databricks Export app for PostHog will push data from PostHog to Databricks, once every minute. The app creates a table and migrates data from DBFS to a database.
+Push data from PostHog to Databricks, once every minute. The app creates a table and migrates data from DBFS to a database.
 
 ## Requirements
 
@@ -35,7 +35,7 @@ You will also need to give a temporary filename path for saving raw data, and a 
 
 ### Limitations
 
-The Databricks Export app cannot currently sync historic data, or change the frequency with which it pushes data to PostHog.
+We cannot currently sync historic data, or change the frequency with which it pushes data to PostHog.
 
 Interesting in contributing to the app to remove these limitations? Check [the GitHub repo](https://github.com/posthog/posthog-databricks-plugin)!
 
@@ -43,7 +43,7 @@ Interesting in contributing to the app to remove these limitations? Check [the G
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Databricks Export app](https://github.com/samcaspus/posthog-databricks-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/samcaspus/posthog-databricks-plugin) is available on GitHub.
 
 ### Who created this app?
 

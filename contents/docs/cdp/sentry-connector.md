@@ -1,12 +1,12 @@
 ---
-title: Sentry Connector
+title: Sentry
 installUrl: https://app.posthog.com/project/apps?name=Sentry
 thumbnail: ../../cdp/thumbnails/sentry.svg
 tags:
     - sentry-connector
 ---
 
-Our Sentry Connector integration is a two-way integration which works on Javascript & Python.
+A two-way integration which works on Javascript & Python.
 
 Once installed, it will:
 
@@ -17,7 +17,7 @@ This way, debugging issues becomes a lot easier, and you can also correlate erro
 
 ## Requirements
 
-The Sentry Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+this requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -42,7 +42,7 @@ Sentry.init({
 })
 ```
 
-## How do I install the Sentry Connector with Python?
+## How do I install this with Python?
 
 ```bash
 pip install posthog
@@ -82,7 +82,7 @@ if settings.TEST:
     posthog.disabled = True
 ```
 
-## Using the Sentry Connector
+## Usage
 
 Once installed you'll now have `$exception` events in PostHog, which have a "Sentry URL" link to take you to the exception:
 

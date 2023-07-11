@@ -1,5 +1,5 @@
 ---
-title: GCP Pub/Sub Connector
+title: Google Pub/Sub
 github: https://github.com/vendasta/pubsub-plugin
 installUrl: https://app.posthog.com/project/apps?name=Pub%2FSub%20Export
 thumbnail: ../../cdp/thumbnails/pub-sub-export.png
@@ -11,7 +11,7 @@ This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.goo
 
 ## Requirements
 
-The Pub/Sub Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -37,11 +37,11 @@ You'll need this file to configure the Pub/Sub app for PostHog. You can find out
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Google Cloud Pub/Sub Connector](https://github.com/PostHog/pubsub-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/pubsub-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog community member Jesse Redl from [Vendasta](https://posthog.com/customers/vendasta) for creating the Pub/Sub Connector. Thanks, Jesse!
+We'd like to thank PostHog community member Jesse Redl from [Vendasta](https://posthog.com/customers/vendasta) for creating this. Thanks, Jesse!
 
 ### Who maintains this app?
 

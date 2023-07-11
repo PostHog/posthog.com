@@ -1,5 +1,5 @@
 ---
-title: GitHub Release Tracker
+title: GitHub Releases
 github: https://github.com/PostHog/github-release-tracking-plugin
 installUrl: https://app.posthog.com/project/apps?name=Github+Release+Tracker
 thumbnail: ../../cdp/thumbnails/github.png
@@ -11,7 +11,7 @@ This app enables you to tracker releases in GitHub as events in PostHog. This is
 
 ## Requirements
 
-The GitHub Release Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -32,11 +32,11 @@ If you want to track releases from a private GitHub repo, you'll also need acces
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the GitHub Release Tracker](https://github.com/PostHog/github-release-tracking-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/github-release-tracking-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Marius Andra](https://github.com/mariusandra) and [Michael Matloka](https://github.com/Twixes) and community member [Mack Etherington](https://github.com/mether) for creating the GitHub Release Tracker.
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Marius Andra](https://github.com/mariusandra) and [Michael Matloka](https://github.com/Twixes) and community member [Mack Etherington](https://github.com/mether) for creating this.
 
 ### Who maintains this app?
 

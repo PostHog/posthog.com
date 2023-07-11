@@ -1,5 +1,5 @@
 ---
-title: Patterns Connector
+title: Patterns
 layout: app
 github: https://github.com/PostHog/posthog-patterns-app
 installUrl: https://app.posthog.com/project/apps?name=Patterns
@@ -8,17 +8,15 @@ tags:
     - patterns
 ---
 
+Send event data from PostHog, to Patterns. This is useful for a number of reasons, including centralizing data into a CDP, or using it to generate customer models.
+
 Patterns is a data science platform for building and deploying data pipelines, machine learning models, and complex automations. It’s built for data engineers, scientists, and analysts and abstracts away the overhead associated with setting up data infrastructure and having to configure many different tools. At the core is the Patterns protocol, a functional reactive declarative data pipelining framework that makes it easy to chain together Python and SQL scripts.
 
 Use Patterns with PostHog to calculate metrics such as cohort churn, retention and customer LTV. Or, integrate your PostHog data with other sources such as your marketing data, email marketing tools, payment and billing systems.
 
-## What does the Patterns Connector do?
-
-The Patterns Connector enables you to send event data from PostHog, to Patterns. This is useful for a number of reasons, including centralizing data into a CDP, or using it to generate customer models.
-
 ## Requirements
 
-Using the Patterns Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/self-host/configure/upgrading-posthog)!
 
@@ -49,7 +47,7 @@ Yes. You can also use the PostHog data extractor within Patterns to extract a fu
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Patterns Connector](https://github.com/PostHog/posthog-patterns-appn) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-patterns-appn) is available on GitHub.
 
 ### Who created this app?
 

@@ -1,5 +1,5 @@
 ---
-title: Redshift Export
+title: Redshift (Export)
 github: https://github.com/PostHog/redshift-plugin
 installUrl: https://app.posthog.com/project/apps?name=Redshift+Export
 thumbnail: ../../cdp/thumbnails/redshift.svg
@@ -7,7 +7,7 @@ tags:
     - redshift-export
 ---
 
-Using the Redshift Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -42,11 +42,11 @@ GRANT CREATE ON DATABASE your_database TO posthog;
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Redshift Export app](https://github.com/PostHog/redshift-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/redshift-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), as well as community member [Jean Roman](https://github.com/romj) for creating the Redshift Export app.
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), as well as community member [Jean Roman](https://github.com/romj) for creating this
 
 ### Who maintains this app?
 

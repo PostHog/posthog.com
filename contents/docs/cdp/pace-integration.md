@@ -1,5 +1,5 @@
 ---
-title: Pace Integration
+title: Pace
 github: https://github.com/PostHog/pace-posthog-integration
 installUrl: https://app.posthog.com/project/apps?name=Pace
 thumbnail: ../../cdp/thumbnails/pace-integration.png
@@ -9,11 +9,11 @@ tags:
 
 [Pace](https://www.paceapp.com/) is a tool that equips sellers with relevant insights at the right time so they can spend time growing revenue. It allows them to convert, retain, and grow customers by prioritizing time and effort on the users who need it most.
 
-PostHog's Pace integration simply forwards any events that PostHog receives to Pace's internal ingestion endpoint
+This simply forwards any events that PostHog receives to Pace's internal ingestion endpoint
 
 ## Requirements
 
-The Pace Integrations requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -29,7 +29,7 @@ You'll also need access to the relevant Pace account.
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Pace Integration](https://github.com/PostHog/pace-posthog-integration) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/pace-posthog-integration) is available on GitHub.
 
 ### Who created this app?
 

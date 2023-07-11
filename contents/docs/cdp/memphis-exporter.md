@@ -1,10 +1,10 @@
 ---
-title: Memphis Exporter
+title: Memphis
 github: https://github.com/PostHog/posthog-memphisdev-app
 installUrl: https://app.posthog.com/project/apps?name=memphis
 thumbnail: ../../cdp/thumbnails/memphis_logo.jpg
 tags:
-    - memphis-exporter
+    - memphis
 ---
 
 This app enables you to publish events to Memphis as they are ingested into PostHog. [Memphis](https://memphis.dev) is an alternative to traditional message brokers and a real-time data processing platform.    
@@ -20,7 +20,7 @@ You'll also need to have a Memphis account.
 ## Install
 
 1. Access PostHog's Apps page from the sidebar.
-2. Search for Memphis Exporter to find the app, and press install. Alternatively, you can install directly from the repo via the Advanced tab by fetching the following URL: https://github.com/PostHog/posthog-memphisdev-app.
+2. Search for Memphis to find the app, and press install. Alternatively, you can install directly from the repo via the Advanced tab by fetching the following URL: https://github.com/PostHog/posthog-memphisdev-app.
 3. Configure the plugin by entering your Memphis credentials and station details.
 4. Watch events roll into your station!
 

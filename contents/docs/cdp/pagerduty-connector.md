@@ -1,10 +1,10 @@
 ---
-title: PagerDuty Connector
+title: PagerDuty
 github: https://github.com/PostHog/posthog-pagerduty-plugin
 installUrl: https://app.posthog.com/project/apps?name=PagerDuty
 thumbnail: ../../cdp/thumbnails/pagerduty.svg
 tags:
-    - pagerduty connector
+    - pagerduty
 ---
 
 This app alerts PagerDuty when a PostHog insights/trends graph goes below or above a threshold.
@@ -16,7 +16,7 @@ Example use cases:
 
 ## Requirements
 
-The PagerDuty Connector app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.26.0](https://posthog.com/blog/the-posthog-array-1-26-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.26.0](https://posthog.com/blog/the-posthog-array-1-26-0) or later.
 
 Not running 1.26.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -46,7 +46,7 @@ This app requires PostHog 1.26.0 or above, or PostHog Cloud.
 
 ## Limitations
 
-This PagerDuty Connector only works when reading from single-line trend graphs.
+This only works when reading from single-line trend graphs.
 
 It also requires PostHog 1.26.0 or above, or PostHog Cloud.
 
@@ -54,7 +54,7 @@ It also requires PostHog 1.26.0 or above, or PostHog Cloud.
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the PagerDuty connector](https://github.com/PostHog/posthog-pagerduty-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-pagerduty-plugin) is available on GitHub.
 
 ### Who created this app?
 
