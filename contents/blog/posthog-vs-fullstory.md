@@ -107,6 +107,8 @@ This comparison will compare all available features, regardless of pricing tier.
 
 - **Build your own apps:** PostHog makes it easy to build your own apps and integrations, including site apps that inject surveys, messages and prompts into your product.
 
+> **Further reading:** [How FullStory compares to other PostHog alternatives](/blog/posthog-alternatives)
+
 ### Product Analytics
 
 FullStory is aimed at UI designers and general product managers, while PostHog is suited to product engineers, front-end developers and more technical users. As a result, PostHog offers a wider range of analytics tools, including [its own SQL dialect for detailed analysis](/docs/product-analytics/hogql).
