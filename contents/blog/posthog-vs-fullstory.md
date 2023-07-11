@@ -343,8 +343,6 @@ Different types of heatmaps enable you to see where users are focusing their att
 ### Apps, integrations and plugins
 Apps are a major point of difference between FullStory and PosthHog because PostHog offers the ability to inject code into your site. We call these [site apps](/tutorials/build-site-app) – here are some examples:
 
-- **[NPS surveys](/apps/nps-survey-app)** for tracking your word of mouth growth. 
-- **[Interview scheduler](/apps/user-interview)** for scaling product feedback.
 - **[In-app prompts](/apps/notification-bar)** for building tutorials and content flows.
 - **[Notification banners](/apps/notification-bar)** to tell users about important messages.
 - **[Raining pineapples](/apps/pineapple-mode)**, just in case.
