@@ -1973,6 +1973,13 @@ export const docsMenu = {
                 },
 
                 {
+                    name: 'Surveys',
+                    url: '/docs/surveys/manual',
+                    icon: 'Message',
+                    color: 'purple',
+                },
+
+                {
                     name: 'Common questions about feature flags',
                     url: '/docs/feature-flags/common-questions',
                     icon: 'Question',
