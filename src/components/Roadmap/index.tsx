@@ -173,7 +173,7 @@ export default function Roadmap() {
                             description={
                                 <>
                                     Here’s what we're building <strong>right now</strong>. Find out{' '}
-                                    <Link to="/blog/categories/product-updates">how to join an available beta</Link>!
+                                    <Link to="/docs/getting-started/enable-betas">how to join an available beta</Link>!
                                 </>
                             }
                         >
