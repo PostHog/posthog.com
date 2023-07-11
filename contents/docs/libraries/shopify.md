@@ -88,7 +88,7 @@ To add a custom event to your Shopify checkout page, add a script like this to y
 
 > **Tip:** Be sure to wrap the code in `{% if first_time_accessed %}` to ensure the event is only sent once.
 
-Below you'll see the order's total price including taxes (`value`) and the array of products that were ordered with some specific info about the variants:
+Once setup, you can see the order's total price including taxes (`value`) and the array of products that were ordered with specific info about the variants in PostHog:
 
 ![Order details sent from Shopify as properties on a custom event](../../images/tutorials/shopify/shopify-order-details.png)
 
