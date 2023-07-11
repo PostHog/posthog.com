@@ -55,7 +55,6 @@ Now when viewing an event, you'll see this information attached to the autocaptu
 
 ![Data attributes in an autocaptured event](../../images/tutorials/shopify/autocapture-data-attributes.png)
 
-
 ### 3. Order details (using properties on a custom event)
 
 > This requires a Shopify Plus account because you'll need to modify your store's checkout settings. This option is available in the Shopify admin by navigating to _Settings_ → _Checkout_ → _Order status page_ → _Additional scripts_.
