@@ -52,7 +52,7 @@ export const fetchTopicGroups = async () => {
 export const topicGroupsSorted = ['Products', 'Platform', 'Data', 'Self-hosting', 'Other']
 
 export default function Questions() {
-    const { questions, isLoading, fetchMore, hasMore } = useQuestions({
+    const { questions, isLoading, fetchMore, hasMore, refresh } = useQuestions({
         limit: 20,
         sortBy: 'activity',
     })
@@ -66,7 +66,7 @@ export default function Questions() {
                     <div className="w-full sm:flex items-center mb-8">
                         <h1 className="text-4xl m-0">Community questions</h1>
                         <div className="ml-auto sm:mt-0 mt-4">
-                            <QuestionForm showTopicSelector onSubmit={() => null} />
+                            <QuestionForm showTopicSelector onSubmit={() => refresh()} />
                         </div>
                     </div>
 
