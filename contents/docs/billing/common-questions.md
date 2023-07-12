@@ -10,7 +10,7 @@ If you have special circumstances where this doesn't work for you, contact our [
 
 ### How do I estimate how much PostHog will cost?
 
-See our doc on [estimating usage and costs](/docs/billing/estimating-usage-costs).
+You can check our doc on [estimating usage and costs](/docs/billing/estimating-usage-costs), or use the [pricing calculator](/pricing) to estimate costs. However, often the best way to estimate costs is to signup for free and go from there.
 
 ### How do I update billing information or see previous months' invoices or usage?
 
@@ -18,7 +18,7 @@ Go to your organization's [billing settings](https://app.posthog.com/organizatio
 
 ### Are events or replays dropped when I reach billing limits?
 
-Yes, PostHog drops events and replays after you go over your billing limit. To capture more during the current billing period, you need to raise your billing limits. For future billing periods, you can tune your PostHog implementation to limit the amount of [events](/tutorials/fewer-unwanted-events) or [session replays](/tutorials/limit-session-recordings) you capture.
+Yes, PostHog drops data after you go over your billing limit. To capture more during the current billing period, you need to raise your billing limits. For future billing periods, you can tune your PostHog implementation to limit the number of [events](/tutorials/fewer-unwanted-events) or [session replays](/tutorials/limit-session-recordings) you capture.
 
 ### I'm an early-stage startup or non-profit, can I get a discount?
 

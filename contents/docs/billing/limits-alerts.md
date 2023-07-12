@@ -2,7 +2,7 @@
 title: Billing limits and alerts
 ---
 
-To help you avoid surprise bills, PostHog lets you set billing limits for each of our products. To do so:
+To help you avoid surprise bills, PostHog enables you to set billing limits for each of our products. To do so:
 
 1. Go to your organization's [billing settings](https://app.posthog.com/organization/billing)
 2. Click on the three dots in the top right of a product, then "Set billing limit."
