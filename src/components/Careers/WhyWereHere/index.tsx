@@ -2,9 +2,10 @@ import React from 'react'
 import { Structure } from '../../Structure'
 import { StaticImage } from 'gatsby-plugin-image'
 import { AnchorScrollNavbarTop } from './AnchorScrollNavbarTop'
+import { James, Plus, Tim } from 'components/Signatures'
 
 const P = ({ children }) => {
-    return <p className="text-justify text-[17px] leading-relaxed">{children}</p>
+    return <p className="text-justify text-[15px] md:text-[17px] leading-relaxed">{children}</p>
 }
 
 export const WhyWereHere = () => {
@@ -13,9 +14,9 @@ export const WhyWereHere = () => {
             <div className="text-left">
                 <Structure.Section width="5xl" className="text-lg">
                     <div className="lg:grid grid-cols-4 gap-8">
-                        <div className="relative text-opacity-80 text-gray-100 bg-white/90 backdrop-blur shadow-xl pt-6 pb-12 px-12 md:px-20 rounded col-span-3">
-                            <div className="before:bg-[url('/images/letterhead.svg')] before:left-0 before:w-[6px] before:top-0 before:h-full before:absolute">
-                                <div className="flex items-center space-between w-full pb-4 mb-8 border-b border-dashed border-gray-accent-light">
+                        <div className="relative text-opacity-80 text-gray-100 bg-accent dark:bg-accent-dark border border-light dark:border-dark backdrop-blur pt-6 pb-12 px-6 sm:px-12 md:px-20 rounded col-span-3">
+                            <div className="before:bg-accent dark:before:bg-accent-dark before:left-0 before:w-[6px] before:top-0 before:h-full before:absolute">
+                                <div className="flex items-center space-between w-full pb-4 mb-8 border-b border-light dark:border-dark">
                                     <div className="flex-1">
                                         <p className="opacity-50 text-[17px] font-semibold mb-0 leading-tight">
                                             A note from our co-founders...
@@ -84,39 +85,9 @@ export const WhyWereHere = () => {
                                     </P>
 
                                     <div className="flex items-center space-x-3">
-                                        <StaticImage
-                                            src="../../../images/signature-hyphen.png"
-                                            alt="-"
-                                            width={11.5}
-                                            height={3}
-                                            quality={100}
-                                            placeholder="none"
-                                        />
-                                        <StaticImage
-                                            src="../../../images/signature-initials-james.png"
-                                            alt="-"
-                                            width={48.5}
-                                            height={57}
-                                            quality={100}
-                                            placeholder="none"
-                                        />
-                                        <StaticImage
-                                            src="../../../images/signature-plus.png"
-                                            alt="-"
-                                            width={17}
-                                            height={20}
-                                            quality={100}
-                                            placeholder="none"
-                                        />
-                                        <StaticImage
-                                            src="../../../images/signature-initials-tim.png"
-                                            alt="-"
-                                            width={58.5}
-                                            height={55}
-                                            quality={100}
-                                            placeholder="none"
-                                            className="!-ml-0"
-                                        />
+                                        <James />
+                                        <Plus />
+                                        <Tim />
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +100,7 @@ export const WhyWereHere = () => {
                             <ul className="list-none m-0 p-0 flex flex-col">
                                 <li className="relative leading-none m-0 active-product">
                                     <span className="block">
-                                        <a className="text-almost-black leading-tight font-medium hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]">
+                                        <a className="text-primary dark:text-primary-dark leading-tight font-medium hover:text-red dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]">
                                             Introduction
                                         </a>
                                     </span>

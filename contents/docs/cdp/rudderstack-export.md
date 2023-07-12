@@ -49,8 +49,6 @@ This app is maintained by Rudderstack. If you have issues with the app not funct
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
 
-Or, if you see the feedback widget enabled, use that!
-
 ### What if my question isn't answered above?
 
 We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 

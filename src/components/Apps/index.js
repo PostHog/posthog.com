@@ -2,11 +2,11 @@ import Chip from 'components/Chip'
 import FooterCTA from 'components/FooterCTA'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useEffect, useState } from 'react'
-import AppsList from '../AppsList'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
 import { navigate } from 'gatsby'
 import Link from 'components/Link'
+import List from 'components/List'
 
 const filters = [
     {
@@ -82,11 +82,11 @@ function AppsPage({ location }) {
                 image={`/og-images/apps.jpeg`}
             />
             <header className="py-12">
-                <h2 className="m-0 text-center text-[2.75rem] leading-none  md:text-6xl text-primary">
+                <h2 className="m-0 text-center text-[2.75rem] leading-none  md:text-6xl dark:text-primary-dark">
                     Do even more cool stuff <br className="hidden lg:block" />
                     <span className="text-blue">PostHog Apps</span>
                 </h2>
-                <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
+                <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary/75 dark:text-primary-dark/75 max-w-2xl">
                     Apps are built on the <Link to="/docs/api">PostHog API</Link>. They appear right inside PostHog, and
                     if using PostHog.js, apps can also inject code directly into your website or product.
                 </p>
@@ -102,7 +102,20 @@ function AppsPage({ location }) {
                     />
                 ))}
             </div>
-            <AppsList apps={filteredApps || apps} />
+            <List
+                className="max-w-2xl mx-auto"
+                items={[
+                    ...(filteredApps || apps)?.map(
+                        ({ fields: { slug }, frontmatter: { thumbnail, title, badge, price } }) => ({
+                            label: title,
+                            url: slug,
+                            badge: badge?.toLowerCase() !== 'built-in' && (price || 'Free'),
+                            image: thumbnail?.publicURL,
+                        })
+                    ),
+                    { label: <>Build your own &rarr;</>, url: '/docs/cdp/build', image: '/images/builder-hog.png' },
+                ]}
+            />
 
             <div className="my-12 md:my-24 px-5 max-w-[960px] mx-auto">
                 <FooterCTA />

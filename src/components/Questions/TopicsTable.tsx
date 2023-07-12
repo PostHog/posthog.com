@@ -2,61 +2,69 @@ import React from 'react'
 
 import Link from 'components/Link'
 import {
-    API,
-    AbTesting,
-    Analytics,
-    AppLibrary,
-    Cohorts,
-    Dashboards,
-    DataManagement,
-    DataWarehouse,
-    Events,
-    EventPipelines,
-    FeatureFlags,
-    Funnels,
-    GroupAnalytics,
-    PathAnalysis,
-    Persons,
-    Retention,
-    SessionRecording,
-    Settings,
-    Trends,
+    Apps,
+    Brackets,
+    Cursor,
+    Dashboard,
+    Ellipsis,
+    Flask,
+    Gear,
+    Graph,
+    HogQL,
+    People,
+    Privacy,
+    Pulse,
+    RewindPlay,
+    Receipt,
+    Rocket,
+    Toggle,
+    Terminal,
     Toolbar,
-} from 'components/ProductIcons'
+    Upload,
+    User,
+    Funnels,
+    Trends,
+} from 'components/NewIcons'
 
-import { Billing, Deploy, Migrate, Megaphone, More, SparksJoy } from 'components/NotProductIcons'
+import { Megaphone, SparksJoy } from 'components/NotProductIcons'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { Cohorts, PathAnalysis } from 'components/Icons'
+import { API, DataManagement, DataWarehouse } from 'components/ProductIcons'
 dayjs.extend(relativeTime)
 
 export const topicIcons = {
-    'a/b testing': AbTesting,
-    api: API,
-    apps: AppLibrary,
+    'a/b testing': Flask,
+    api: Terminal,
+    apps: Apps,
     cohorts: Cohorts,
-    configuration: Settings,
-    dashboards: Dashboards,
-    deployment: Deploy,
-    'events & actions': Events,
-    'event pipelines': EventPipelines,
-    'feature flags': FeatureFlags,
+    configuration: Gear,
+    dashboards: Dashboard,
+    deployment: Rocket,
+    'events & actions': Cursor,
+    'event pipelines': User,
+    'feature flags': Toggle,
     funnels: Funnels,
     gcp: DataWarehouse,
-    groups: GroupAnalytics,
+    groups: People,
     'helm chart': DataWarehouse,
+    hogql: HogQL,
     'identify users': DataManagement,
     kubernetes: DataWarehouse,
     'migrating to posthog': DataManagement,
-    migration: Migrate,
+    migration: Upload,
+    more: Ellipsis,
     paths: PathAnalysis,
-    'people & properties': Persons,
-    'pricing & billing': Billing,
-    'product analytics': Analytics,
-    'session replay': SessionRecording,
+    'people & properties': Brackets,
+    'pricing & billing': Receipt,
+    monitoring: Pulse,
+    'product analytics': Graph,
+    security: Privacy,
+    'session replay': RewindPlay,
     'sparks joy': SparksJoy,
     trends: Trends,
     toolbar: Toolbar,
-    uncategorized: More,
+    uncategorized: Ellipsis,
     sdks: API,
     'community spotlight': Megaphone,
 }
@@ -68,7 +76,7 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                 <div className="col-span-8 md:col-span-10">{topicGroup}</div>
                 <div className="col-span-4 md:col-span-2">Last active</div>
             </li>
-            <li className="divide-y divide-gray-accent-light divide-dashed dark:divide-gray-accent-dark list-none">
+            <li className="list-none px-[2px] divide-y divide-light dark:divide-dark">
                 {topics?.data?.length > 0 &&
                     topics.data.filter(Boolean).map((topic) => {
                         const {
@@ -81,15 +89,15 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                         const [latestQuestion] = questions?.data || []
 
                         return (
-                            <div key={id}>
+                            <div key={id} className="py-2.5">
                                 <Link
                                     to={`/questions/topic/${slug}`}
-                                    className={`${className} block py-2 -ml-4 -mr-4 pl-4 pr-4 mt-[1px] rounded-md hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative hover:scale-[1.005] active:scale-[1] hover:top-[-.5px] active:top-[0px]`}
+                                    className={`${className} group flex items-center relative px-2 py-2.5 -mt-2.5 mx-[-2px] -mb-3 rounded active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0`}
                                 >
-                                    <div className="grid grid-cols-12 items-center">
+                                    <div className="grid grid-cols-12 items-center w-full">
                                         <div className="col-span-8 md:col-span-10 flex items-center space-x-3">
                                             {Icon && <Icon className="w-5 opacity-60 text-black dark:text-white" />}
-                                            <span className="text-red line-clamp-1">{label}</span>
+                                            <span className="text-red dark:text-yellow line-clamp-1">{label}</span>
                                         </div>
                                         <div className="col-span-4 md:col-span-2 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
                                             {latestQuestion?.attributes?.activeAt &&

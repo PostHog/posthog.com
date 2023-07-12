@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Marketing & Content exists to drive organic, word-of-mouth growth by:
+Marketing & content exists to drive organic, word-of-mouth growth by:
 
 1. Producing world-class top-of-funnel content for our ICP
 2. Ensuring the information users need is easy to find and maintained to a high standard
@@ -21,9 +21,9 @@ Marketing is the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. 
 
 The latest goals for marketing can be found on the [Marketing Small Team page](https://posthog.com/handbook/small-teams/marketing).
 
-## Marketing & Content vision 
+## Marketing & content vision 
 
-PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think Marketing & Content at PostHog will look like at that point. 
+PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing & content at PostHog will look like at that point. 
 
 ### Things we want to be brilliant at
 

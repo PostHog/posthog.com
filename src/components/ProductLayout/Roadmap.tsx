@@ -96,7 +96,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
                                         </figure>
                                         <div>
                                             <span className="flex items-center md:flex-row space-x-2">
-                                                <p className="text-base font-bold m-0 leading-none">{name}</p>
+                                                <p className="text-base font-bold !m-0 leading-none">{name}</p>
                                                 {country && (
                                                     <span className="!leading-none">
                                                         {country === 'world' ? (
@@ -114,9 +114,7 @@ export default function Roadmap({ subtitle, team }: IRoadmap) {
                                                     </span>
                                                 )}
                                             </span>
-                                            <p className="!text-sm !mb-0 opacity-50 !leading-none !mt-1">
-                                                {companyRole}
-                                            </p>
+                                            <p className="!text-sm !mb-0 opacity-50 !leading-none">{companyRole}</p>
                                         </div>
                                     </li>
                                 )

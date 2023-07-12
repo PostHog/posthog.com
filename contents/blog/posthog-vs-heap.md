@@ -542,12 +542,6 @@ As an open source platform designed for technical teams, PostHog integrates with
             <td>Build internal tools using your usage data</td>
         </tr>
         <tr>
-            <td><strong>Feedback Widget</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Collect ad hoc feedback in your app</td>
-        </tr>
-        <tr>
             <td><strong>User Inteview Scheduler</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -568,14 +562,6 @@ As an open source platform designed for technical teams, PostHog integrates with
     </tbody>
 </table>
 </div>
-
-> ### Making it easy to talk to users
->
-> You can't build a great product without talking to users, which is why we built the [User Interview Scheduler](/apps/user-interview) app for PostHog. You can use it to automatically invite users to an interview based user properties or actions they've completed.
->
-> We also built a simple [Feedback Widget app](/apps/feedback-widget) for collecting ad hoc feedback from users. You can analyse this data in PostHog, or use Zapier to send this feedback to other tools like Slack, Zendesk, and more.
->
-> **See:** [How to gather feedback and book user interviews with site apps](/tutorials/feedback-interviews-site-apps)
 
 ### Marketing & sales
 
@@ -817,7 +803,7 @@ If you user privacy is a primary concern for you, consider our [open source Dock
 
 ### Can you use PostHog on e-commerce websites?
 
-Absolutely. PostHog is [easy to integrate with Shopify](/docs/libraries/shopify), and we have [Shopify](/apps/shopify) and [Stripe Connector](/apps/stripe-connector) apps for importing order and revenue data into PostHog for analysis. You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/libraries/wordpress). 
+Absolutely. PostHog is [easy to integrate with Shopify](/docs/libraries/shopify), and we have a[Shopify](/apps/shopify) integration for importing order and revenue data into PostHog for analysis. You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/libraries/wordpress). 
 
 ### Can PostHog replace Google Analytics?
 

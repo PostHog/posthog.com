@@ -93,12 +93,6 @@ Because we build for engineers first, we're also open source. You can check out 
             <td>Test changes and analyze impact.</td>
         </tr>
         <tr>
-            <td><strong>Feedback widgets</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Suggestion box on your site where users can express frustration or delight.</td>
-        </tr>
-        <tr>
             <td><strong>In-app prompts and messages</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -367,7 +361,7 @@ Although product analytics is not a core focus for Hotjar, they do offer basic f
 
 ### In-app messages and user research
 
-Hotjar includes feedback widgets, surveys, and an integrated user research tool for gathering feedback from users. PostHog also supports [feedback widgets](/apps/feedback-widget) and [user research scheduling](/apps/user-interview), although not surveys. 
+Hotjar includes feedback widgets, surveys, and an integrated user research tool for gathering feedback from users. 
 
 > Note that because PostHog is entirely open source, it's possible for users to build their own user surveys if needed. Our guide on [building your own apps](https://posthog.com/docs/apps/build) dives into more detail.
 

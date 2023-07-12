@@ -200,6 +200,8 @@ While LogRocket contains some product analytics features, it isn’t primarily i
 
 -   **Query editor:** LogRocket doesn’t currently support any way for users to interrogate data directly, either through SQL or other, abstracted query language. PostHog also doesn’t offer SQL queries... but [we’re actively working on it](/manual/hogql).
 
+> **Further reading:** [How LogRocket compares to other PostHog alternatives](/blog/posthog-alternatives)
+
 ### Session recording
 
 LogRocket and PostHog both offer robust, full-featured session recording tools that outperform even dedicated tools, such as [Hotjar](/blog/best-open-source-session-replay-tools). LogRocket’s session recording offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.

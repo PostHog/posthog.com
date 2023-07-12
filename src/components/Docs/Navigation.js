@@ -18,7 +18,7 @@ const CommunityLink = ({ icon, text, url }) => {
     return (
         <li className="py-2 px-3">
             <a
-                className={`text-sm text-gray hover:text-gray-2 dark:hover:text-white flex items-center font-normal space-x-1`}
+                className={`text-sm text-primary/50 hover:text-primary/75 dark:text-primary/50 dark:hover:text-primary-dark/75 flex items-center font-normal space-x-1`}
                 href={url}
             >
                 {icon}
@@ -31,9 +31,7 @@ const CommunityLink = ({ icon, text, url }) => {
 const Crumb = ({ url, text, className }) => {
     // If crumbs get more complex, create a conditional wrapper component to keep code DRY
     return (
-        <li
-            className={`border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed text-primary dark:text-primary-dark ${className}`}
-        >
+        <li className={`text-primary dark:text-primary-dark ${className}`}>
             {url ? (
                 <Link className={crumbText(`text-red hover:text-red`)} to={url}>
                     {text}
@@ -64,7 +62,7 @@ export default function Navigation({
             }}
             className="max-w-screen-3xl mx-auto sticky top-[-1px]"
         >
-            <div className="bg-tan dark:bg-almost-black flex items-center mt-4 border border-gray-accent-light dark:border-gray-accent-dark border-dashed border-l-0 border-r-0 ">
+            <div className="bg-tan dark:bg-primary flex items-center mt-4">
                 <button onClick={handleMobileMenuClick} className="py-2 px-3 block md:hidden">
                     <MobileMenu style={{ transform: `rotate(${menuOpen ? '180deg' : '0deg'})` }} />
                 </button>
@@ -74,7 +72,7 @@ export default function Navigation({
                         breadcrumb.map((crumb, index) => {
                             return <Crumb key={index} url={crumb.url} text={crumb.name} />
                         })}
-                    <Crumb text={title} className="border-r-0" />
+                    <Crumb text={title} className="" />
                 </ul>
                 <div className="flex-grow">
                     <div className="w-full flex space-x-2 md:space-x-0 text-gray dark:text-gray-accent-light">
@@ -82,7 +80,7 @@ export default function Navigation({
                     </div>
                 </div>
                 {filePath && (
-                    <ul className="list-none p-0 m-0 hidden lg:flex ml-auto border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed">
+                    <ul className="list-none p-0 m-0 hidden lg:flex ml-auto">
                         <CommunityLink
                             icon={<Edit />}
                             text={'Edit this page'}

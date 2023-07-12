@@ -1,11 +1,12 @@
 ---
 title: PostgreSQL Export
 github: https://github.com/PostHog/postgres-plugin
-installUrl: https://app.posthog.com/project/apps?name=PostgreSQL
 thumbnail: ../../cdp/thumbnails/postgresql-export.png
 tags:
     - postgres-export
 ---
+
+> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
 
 The PostgreSQL Export app enables you to export events from PostHog to a PostgreSQL instance on ingestion.
 
@@ -55,8 +56,6 @@ This app is maintained by PostHog. If you have issues with the app not functioni
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 

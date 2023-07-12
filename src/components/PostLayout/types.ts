@@ -28,6 +28,8 @@ export interface IMenu {
         title: string
         className?: string
     }
+    color?: string
+    hidden?: boolean
 }
 
 export interface ICrumb {

@@ -22,7 +22,7 @@ export const CareersHero = () => {
                 </div>
 
                 <div className="text-center md:text-left max-w-7xl mx-auto relative z-10 px-4 md:pr-0 lg:pl-8">
-                    <h1 className="mb-0 pb-0 text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl md:w-2/3 lg:w-[55%] xl:[w-2/3]">
+                    <h1 className="mb-0 pt-4 md:pt-0 pb-0 text-4xl leading-none lg:text-5xl 2xl:text-6xl md:w-2/3 lg:w-[55%] xl:[w-2/3]">
                         We're working to increase the number of successful products{' '}
                         <br className="hidden md:block mdlg:hidden" />
                         in the world.

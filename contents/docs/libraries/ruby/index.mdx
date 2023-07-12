@@ -277,7 +277,7 @@ posthog.capture({
         category: 'romcom'
     }
     groups: {
-        'company': '42dlsfj23f'
+        'company': 'company_id_in_your_db'
     }
 })
 ```
@@ -287,8 +287,8 @@ posthog.capture({
 ```ruby
 posthog.group_identify(
   {
-    group_type: "organization",
-    group_key: "42dlsfj23f",
+    group_type: "company",
+    group_key: "company_id_in_your_db",
     properties: {
       name: "Awesome Inc."
     }

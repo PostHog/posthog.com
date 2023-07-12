@@ -70,7 +70,7 @@ To check which variant of your experiment to show to your participants, use the 
 
 <MultiLanguage>
 
-```javascript
+```js-web
 // Ensure flags are loaded before usage.
 // You'll only need to call this on the code the first time a user visits.
 // See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
@@ -123,7 +123,7 @@ function App() {
 // e.g., posthog.feature_flags.override({'experiment-feature-flag-key': 'test'})
 ```
 
-```react-Native
+```react-native
 // With the useFeatureFlag hook
 import { useFeatureFlag } from 'posthog-react-native'
 
@@ -289,7 +289,7 @@ Once you're satisfied, you're ready to launch your experiment.
 
 > **Note:** The feature flag is activated only when you launch the experiment, or if you've manually checked the "Enable feature flag" box.
 
-> **Note:** While the [PostHog toolbar](/docs/product-analytics/toolbar) enables you to toggle feature flags on and off, this only works for active feature flags and won't work for your experiment feature flag while it is still in draft mode.
+> **Note:** While the [PostHog toolbar](/docs/toolbar) enables you to toggle feature flags on and off, this only works for active feature flags and won't work for your experiment feature flag while it is still in draft mode.
 
 ## Viewing experiment results
 

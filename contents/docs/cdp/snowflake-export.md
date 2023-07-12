@@ -1,12 +1,13 @@
 ---
 title: Snowflake Export
 github: https://github.com/PostHog/snowflake-export-plugin
-installUrl: https://app.posthog.com/project/apps?name=Snowflake
 thumbnail: ../../cdp/thumbnails/snowflake.svg
 official: true
 tags:
     - snowflake-export
 ---
+
+> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
 
 This app allows you to export both live and historical events from PostHog into Snowflake.
 This is useful when you want to run custom SQL queries on your data in PostHog using Snowflake's high-performance infrastructure.
@@ -207,8 +208,6 @@ This app is maintained by PostHog. If you have issues with the app not functioni
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 

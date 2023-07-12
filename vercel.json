@@ -243,7 +243,6 @@
             "destination": "/handbook/people/hiring-process/marketing-hiring"
         },
         { "source": "/docs/plugins/maxmind", "destination": "/apps" },
-        { "source": "/team", "destination": "/handbook/company/team" },
         { "source": "/contact", "destination": "/contact-sales" },
         { "source": "/docs/integrate/third-party", "destination": "/docs/integrate" },
         {
@@ -766,14 +765,16 @@
         { "source": "/manual/dashboards", "destination": "/docs/product-analytics/dashboards" },
         { "source": "/manual/funnels", "destination": "/docs/product-analytics/funnels" },
         { "source": "/manual/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
-        { "source": "/manual/hogql", "destination": "/docs/product-analytics/hogql" },
+        { "source": "/manual/hogql", "destination": "/docs/hogql" },
+        { "source": "/docs/product-analytics/hogql", "destination": "/docs/hogql" },
         { "source": "/manual/insights", "destination": "/docs/product-analytics/insights" },
         { "source": "/manual/lifecycle", "destination": "/docs/product-analytics/lifecycle" },
         { "source": "/manual/paths", "destination": "/docs/product-analytics/paths" },
         { "source": "/manual/retention", "destination": "/docs/product-analytics/retention" },
         { "source": "/manual/sampling", "destination": "/docs/product-analytics/sampling" },
         { "source": "/manual/stickiness", "destination": "/docs/product-analytics/stickiness" },
-        { "source": "/manual/toolbar", "destination": "/docs/product-analytics/toolbar" },
+        { "source": "/manual/toolbar", "destination": "/docs/toolbar" },
+        { "source": "/docs/product-analytics/toolbar", "destination": "/docs/toolbar" },
         { "source": "/manual/trends", "destination": "/docs/product-analytics/trends" },
 
         { "source": "/manual/actions", "destination": "/docs/data/actions" },
@@ -837,11 +838,12 @@
         { "source": "/questions/topic/session-recording", "destination": "/questions/topic/session-replay" },
         { "source": "/blog/customer-churn-analysis-guide", "destination": "/blog/churn-rate-vs-retention-rate" },
         { "source": "/questions/autocapture", "destination": "/docs/data/autocapture" },
-        { "source": "/product-analytics", "destination": "/product-analytics/features" },
-        { "source": "/session-replay", "destination": "/session-replay/features" },
-        { "source": "/feature-flags", "destination": "/feature-flags/features" },
-        { "source": "/ab-testing", "destination": "/ab-testing/features" },
-        { "source": "/product-os", "destination": "/product-os/features" },
+        { "source": "/product-analytics/features", "destination": "/product-analytics" },
+        { "source": "/session-replay/features", "destination": "/session-replay" },
+        { "source": "/feature-flags/features", "destination": "/feature-flags" },
+        { "source": "/ab-testing/features", "destination": "/ab-testing" },
+        { "source": "/product-os/features", "destination": "/product-os" },
+        { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
         { "source": "/community", "destination": "/questions", "statusCode": 302 },
         { "source": "/roadmap/changelog", "destination": "/changelog/2023" },
         { "source": "/blog/posthog-changelog", "destination": "/changelog/2023" },
@@ -987,7 +989,11 @@
             "destination": "/docs/data/events#pageview-events"
         },
         { "source": "/docs/data/data-warehouse", "destination": "/docs/data-warehouse" },
-        { "source": "/docs/apps/zendesk-connector", "destination": "/docs/cdp/zendesk-connector" }
+        { "source": "/docs/apps/zendesk-connector", "destination": "/docs/cdp/zendesk-connector" },
+        { "source": "/docs/data/autocapture", "destination": "/docs/product-analytics/autocapture" },
+        { "source": "/docs/apps/enabling", "destination": "/docs/apps#enabling-apps" },
+        { "source": "/docs/integrations", "destination": "/docs/frameworks" },
+        { "source": "/blog/how-to-product-market-fit", "destination": "/blog/product-market-fit-game" }
     ],
     "rewrites": [
         {
@@ -1002,6 +1008,8 @@
             "source": "/tutorials/experiments",
             "destination": "/docs/experiments/running-experiments-without-feature-flags"
         },
-        { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" }
+        { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
+        { "source": "/docs/apps/feedback-widget", "destination": "/docs/surveys/manual" },
+        { "source": "/apps/user-interviewer", "destination": "/docs/surveys/manual" }
     ]
 }

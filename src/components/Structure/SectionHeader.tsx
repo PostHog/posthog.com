@@ -17,7 +17,7 @@ export const SectionHeader = ({
     leadTextClassName = '',
 }: SectionHeaderProps) => {
     const Header = titleTag as keyof JSX.IntrinsicElements
-    const leadTextClassList = mergeClassList('opacity-60 max-w-2xl mx-auto', leadTextClassName)
+    const leadTextClassList = mergeClassList('opacity-60 font-medium max-w-2xl mx-auto', leadTextClassName)
 
     return (
         <>

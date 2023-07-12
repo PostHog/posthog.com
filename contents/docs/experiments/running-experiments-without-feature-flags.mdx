@@ -29,7 +29,7 @@ This is similar to the [same step](/docs/experiments/manual#step-2-server-side-o
 
 <MultiLanguage>
 
-```javascript
+```js-web
 posthog.capture('event_name_of_your_goal_metric', {
     "$feature/experiment-feature-flag-key": "variant-name"
 })
@@ -41,7 +41,7 @@ posthog.capture('event_name_of_your_goal_metric', {
 })
 ```
 
-```react-Native
+```react-native
 posthog.capture('event_name_of_your_goal_metric', {
     "$feature/experiment-feature-flag-key": "variant-name"
 })
@@ -135,7 +135,7 @@ You need to include two properties with this event:
 
 <MultiLanguage>
 
-```javascript
+```js-web
 posthog.capture('$feature_flag_called', {
     "$feature_flag_response": "variant-name",
     "$feature_flag": "feature-flag-key"
@@ -149,7 +149,7 @@ posthog.capture('$feature_flag_called', {
 })
 ```
 
-```react-Native
+```react-native
 posthog.capture('$feature_flag_called', {
     "$feature_flag_response": "variant-name",
     "$feature_flag": "feature-flag-key"

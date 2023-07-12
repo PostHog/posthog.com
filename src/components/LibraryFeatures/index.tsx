@@ -27,7 +27,7 @@ export type LibraryFeaturesProps = {
 
 export const LibraryFeatures = ({ availability }: LibraryFeaturesProps) => {
     return availability ? (
-        <div className="lg:border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark lg:pt-3 pb-4 space-y-2 -mt-4 lg:mt-4 mb-4">
+        <div className="lg:border-t border-b border-light dark:border-dark lg:pt-2 pb-4 space-y-2 -mt-4 lg:mt-4 mb-4">
             <h5 className="text-primary/50 dark:text-primary-dark/50 pt-2 pb-1 !m-0 font-semibold text-base">
                 Which features are available in this library?
             </h5>

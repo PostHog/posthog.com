@@ -171,7 +171,7 @@ PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized"
 
 This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
 
-```js
+```php
 PostHog::getAllFlags('distinct id', ["organisation" => "some-company"], [], ["organisation" => ["is_authorized" => true]])
 ```
 
@@ -204,9 +204,9 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 ```php
 PostHog::capture(array(
-    'distinctId' => '[distinct id]',
+    'distinctId' => '[user distinct id]',
     'event' => 'some event',
-    '$groups' => array("company" => "42dlsfj23f")
+    '$groups' => array("company" => "company_id_in_your_db")
 ));
 ```
 
@@ -215,7 +215,7 @@ PostHog::capture(array(
 ```php
 PostHog::groupIdentify(array(
     'groupType' => 'company',
-    'groupKey' => '42dlsfj23f',
+    'groupKey' => 'company_id_in_your_db',
     'properties' => array("name" => "Awesome Inc.", "employees" => 11)
 ));
 ```

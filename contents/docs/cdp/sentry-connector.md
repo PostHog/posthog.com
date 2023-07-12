@@ -1,5 +1,7 @@
 ---
 title: Sentry Connector
+installUrl: https://app.posthog.com/project/apps?name=Sentry
+thumbnail: ../../cdp/thumbnails/sentry.svg
 tags:
     - sentry-connector
 ---
@@ -28,7 +30,7 @@ Make sure you're using both PostHog and Sentry as JS modules. You'll need to rep
 -   `'your organization'` will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
 -   `project-id` will be the last few digits in your Sentry DSN, such as `https://adf90sdc09asfd3@9ads0fue.ingest.sentry.io/project-id`
 
-```js
+```js-web
 import posthog from 'posthog-js'
 import * as Sentry from '@sentry/browser'
 
@@ -95,8 +97,6 @@ This app is maintained by PostHog. If you have issues with the app not functioni
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 

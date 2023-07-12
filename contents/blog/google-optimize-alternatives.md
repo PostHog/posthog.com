@@ -12,8 +12,6 @@ featuredImageType: full
 featuredVideo: https://www.youtube-nocookie.com/embed/rooOi7rxi8Y
 category: General
 tags:
-  - Guides
-  - Comparisons
 ---
 
 Google recently confirmed the sunsetting Google Optimize, its A/B testing platform. In a [statement](https://support.google.com/optimize/answer/12979939) on its website, Google said:

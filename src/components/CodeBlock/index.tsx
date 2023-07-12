@@ -5,8 +5,10 @@ import { generateRandomHtmlId, getCookie } from '../../lib/utils'
 import { Listbox, Tab } from '@headlessui/react'
 import { SelectorIcon } from '@heroicons/react/outline'
 
-import theme from './theme'
+import { darkTheme, lightTheme } from './theme'
 import languageMap from './languages'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 type LanguageOption = {
     label?: string
@@ -144,6 +146,8 @@ export const CodeBlock = ({
 
     const displayName = label || languageMap[currentLanguage.language]?.label || currentLanguage.language
 
+    const { websiteTheme } = useValues(layoutLogic)
+
     React.useEffect(() => {
         // Browser check - no cookies on the server
         if (document) {
@@ -170,16 +174,20 @@ export const CodeBlock = ({
     }
 
     return (
-        <div className="relative mt-2 mb-4">
-            <div className="bg-black/90 text-gray px-3 py-1.5 text-sm flex items-center w-full rounded-t">
+        <div className="relative mt-2 mb-4 border border-light dark:border-dark rounded">
+            <div className="bg-accent dark:bg-accent-dark text-sm flex items-center w-full rounded-t">
                 {selector === 'tabs' && languages.length > 1 ? (
                     <Tab.Group onChange={(index) => onChange?.(languages[index])}>
-                        <Tab.List className="flex items-center space-x-5">
+                        <Tab.List className="flex items-center gap-[1px]">
                             {languages.map((option) => (
                                 <Tab
                                     key={option.language}
                                     className={({ selected }) =>
-                                        `cursor-pointer text-sm py-0.5 ${selected ? 'font-semibold text-white/70' : ''}`
+                                        `cursor-pointer text-sm px-3 py-2 rounded-full relative after:h-[2px] after:-bottom-[1px] after:left-0 after:right-0 after:absolute after:content-['']  ${
+                                            selected
+                                                ? 'font-bold text-red hover:text-red dark:text-yellow hover:dark:text-yellow after:bg-red dark:after:bg-yellow'
+                                                : 'text-primary/50 dark:text-primary-dark/50 hover:after:bg-black/50 dark:hover:after:bg-white/50 hover:text-primary/75 hover:dark:text-primary-dark/75'
+                                        }`
                                     }
                                 >
                                     {option.file ||
@@ -191,7 +199,7 @@ export const CodeBlock = ({
                         </Tab.List>
                     </Tab.Group>
                 ) : showLabel ? (
-                    <div className="min-w-0 mr-8">
+                    <div className="min-w-0 mr-8 px-3 py-2 font-bold opacity-50">
                         {currentLanguage.file ? (
                             <div className="flex items-center space-x-1.5">
                                 <svg
@@ -247,15 +255,13 @@ export const CodeBlock = ({
                     ) : null}
 
                     {showCopy && (
-                        <div className="relative flex items-center justify-center pl-2">
+                        <div className="relative flex items-center justify-center pr-1">
                             <button
                                 onClick={copyToClipboard}
-                                className="text-primary-dark/50 hover:text-primary-dark/75 p-1 -m-1 hover:bg-black/40 rounded relative hover:scale-[1.07] active:top-[.5px] active:scale-[.99]"
+                                className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
                                     viewBox="0 0 18 18"
                                     className="w-4 h-4 fill-current"
                                 >
@@ -291,11 +297,11 @@ export const CodeBlock = ({
                 {...defaultProps}
                 code={currentLanguage.code.trim()}
                 language={(languageMap[currentLanguage.language]?.language || currentLanguage.language) as Language}
-                theme={theme}
+                theme={websiteTheme === 'dark' ? darkTheme : lightTheme}
             >
                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <pre className="w-full m-0 p-0 rounded-t-none rounded-b" style={{ ...style }}>
-                        <div className="flex" id={codeBlockId}>
+                    <pre className="w-full m-0 p-0 rounded-t-none rounded-b bg-accent dark:bg-accent-dark border-t border-light dark:border-dark">
+                        <div className="flex whitespace-pre-wrap" id={codeBlockId}>
                             {showLineNumbers && (
                                 <pre className="m-0 py-4 pl-4 pr-2 inline-block">
                                     <span

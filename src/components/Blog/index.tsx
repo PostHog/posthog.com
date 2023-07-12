@@ -34,13 +34,9 @@ export const Post = ({ featuredImage, slug, title, category, date, authors, imgC
         <div className="relative rounded-md overflow-hidden z-10 h-full w-full">
             <Link className="!text-white !hover:text-white cta" to={slug}>
                 {image ? (
-                    <GatsbyImage alt={title} className={imgClassName ?? 'md:w-auto w-full'} image={image} />
+                    <GatsbyImage alt={title} className={imgClassName ?? 'w-full'} image={image} />
                 ) : (
-                    <StaticImage
-                        className={imgClassName ?? 'md:w-auto w-full'}
-                        alt={title}
-                        src="./images/default.jpg"
-                    />
+                    <StaticImage className={imgClassName ?? 'w-full'} alt={title} src="./images/default.jpg" />
                 )}
                 <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 px-4 py-3 md:p-5 flex flex-col h-full w-full">
                     {category && <p className="m-0 text-sm opacity-80">{category}</p>}
@@ -71,7 +67,7 @@ export const Posts = ({ posts, title, action, titleBorder }) => {
                 <div
                     className={
                         titleBorder
-                            ? 'pb-2 mb-5 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center'
+                            ? 'pb-2 mb-5 flex justify-between items-center'
                             : 'pb-2 mb-2 flex justify-between items-center'
                     }
                 >
@@ -91,7 +87,7 @@ export const Posts = ({ posts, title, action, titleBorder }) => {
 
                     return (
                         <li
-                            className="relative active:top-[1px] active:scale-[.99] shadow-lg after:border-0 hover:after:border-1 after:border-black/25 after:rounded-md after:-inset-1.5 after:absolute"
+                            className="relative active:top-[1px] active:scale-[.99] shadow-lg after:rounded-md after:-inset-1.5 after:absolute"
                             key={id}
                         >
                             <Post
@@ -173,7 +169,7 @@ const Blog = ({
                 />
                 <NewsletterForm />
 
-                <div className="pb-2 mb-5 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center">
+                <div className="pb-2 mb-5 flex justify-between items-center">
                     <h4 className="opacity-50 text-base m-0">Browse by topic</h4>
                 </div>
 

@@ -1,15 +1,16 @@
 ---
 title: BigQuery Export
 github: https://github.com/PostHog/bigquery-plugin
-installUrl: https://app.posthog.com/project/apps?name=BigQuery+Export
 thumbnail: ../../cdp/thumbnails/bigquery.svg
 tags:
     - bigquery-export
 ---
 
+> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
+
 This app streams events from PostHog into BigQuery as they are ingested.
 
-## Installation
+## Requirements
 
 The BigQuery Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
