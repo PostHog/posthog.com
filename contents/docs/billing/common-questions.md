@@ -4,7 +4,7 @@ title: Common questions about billing
 
 ### Can I have a trial?
 
-PostHog is usage-based and you can use it for free for as long as you want (up to 1M events and 15k session replays per month), with no trial needed.
+PostHog is usage-based and you can use it for free for as long as you want, no trial needed. See [our pricing page](/pricing) for free usage allowances.
 
 If you have special circumstances where this doesn't work for you, contact our [sales team](/contact-sales). 
 
