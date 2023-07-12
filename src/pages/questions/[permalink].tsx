@@ -37,6 +37,7 @@ export default function QuestionPage(props: QuestionPageProps) {
     }
 
     const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
+    const slug = question?.attributes?.slugs[0]?.slug
 
     const nav = useTopicsNav()
     return (
@@ -64,6 +65,11 @@ export default function QuestionPage(props: QuestionPageProps) {
                     </div>
 
                     <Question id={permalink} expanded={true} />
+                    {slug && slug !== '/questions' && (
+                        <p className="my-6 text-xs opacity-75">
+                            <span>Asked on:</span> <Link to={slug}>https://posthog.com{slug}</Link>
+                        </p>
+                    )}
                 </section>
 
                 {isModerator && question && (
