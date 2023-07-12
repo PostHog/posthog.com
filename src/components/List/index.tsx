@@ -1,6 +1,6 @@
 import Link from 'components/Link'
 import React from 'react'
-import * as NewIcons from '../NewIcons'
+import * as NewIcons from '@posthog/icons'
 
 interface IItem {
     label: string | React.ReactNode

@@ -7,7 +7,7 @@ import { sfBenchmark } from './compensation_data/sf_benchmark'
 import { levelModifier } from './compensation_data/level_modifier'
 import { stepModifier } from './compensation_data/step_modifier'
 import { currencyData } from './compensation_data/currency'
-import { Multiply } from 'components/NewIcons'
+import { Multiply } from '@posthog/icons'
 
 const formatCur = (val: number, currency = 'USD') => {
     currency = currencyData[currency] ? currency : 'USD'

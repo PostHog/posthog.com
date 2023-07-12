@@ -24,7 +24,7 @@ import {
     User,
     Funnels,
     Trends,
-} from 'components/NewIcons'
+} from '@posthog/icons'
 
 import { Megaphone, SparksJoy } from 'components/NotProductIcons'
 import dayjs from 'dayjs'

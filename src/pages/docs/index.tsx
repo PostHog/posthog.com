@@ -9,7 +9,7 @@ import PostLayout from 'components/PostLayout'
 import { graphql, PageProps } from 'gatsby'
 import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
-import { LightBulb } from 'components/NewIcons'
+import { LightBulb } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const quickLinks = [
