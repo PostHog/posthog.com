@@ -304,11 +304,25 @@ export default function Handbook({
                                     )}
                                 </div>
                             </div>
-
-                            {!hideLastUpdated && (
-                                <p className="mt-0 mb-4 md:mt-1 md:mb-0 !opacity-30 text-black dark:text-white font-semibold">
-                                    Last updated: <time>{lastUpdated}</time>
-                                </p>
+                            {(!hideLastUpdated || filePath) && (
+                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
+                                    {!hideLastUpdated && (
+                                        <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
+                                            Last updated: <time>{lastUpdated}</time>
+                                        </p>
+                                    )}
+                                    {!hideLastUpdated && filePath && (
+                                        <span className="text-primary/30 dark:text-primary-dark/30">|</span>
+                                    )}
+                                    {filePath && (
+                                        <Link
+                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow"
+                                            to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                        >
+                                            Edit this page
+                                        </Link>
+                                    )}
+                                </div>
                             )}
                         </div>
                         {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
