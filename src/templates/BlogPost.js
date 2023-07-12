@@ -162,7 +162,6 @@ export default function BlogPost({ data, pageContext, location }) {
             <PostLayout
                 stickySidebar
                 title={title}
-                contentWidth={790}
                 filePath={filePath}
                 tableOfContents={tableOfContents}
                 breadcrumb={[

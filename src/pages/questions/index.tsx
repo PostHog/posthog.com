@@ -60,7 +60,7 @@ export default function Questions() {
     const topicsNav = useTopicsNav()
 
     return (
-        <CommunityLayout menu={topicsNav} title="Questions">
+        <CommunityLayout menu={topicsNav} title="Questions" contentWidth="100%">
             <div className="space-y-8 pb-12">
                 <section>
                     <div className="w-full sm:flex items-center mb-8">

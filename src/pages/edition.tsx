@@ -230,7 +230,6 @@ export default function Edition() {
                     <PostLayout
                         sidebar={<Sidebar />}
                         title="The PostHog Edition"
-                        contentWidth="1fr"
                         menuWidth={{ right: 350 }}
                         contentContainerClassName="w-full"
                         hideSurvey
