@@ -228,9 +228,14 @@ export const Question = (props: QuestionProps) => {
                             <Markdown className="question-content">{questionData.attributes.body}</Markdown>
 
                             {showSlug && slugs?.length > 0 && slugs[0]?.slug !== '/questions' && (
-                                <p className="text-xs opacity-75 pb-4 mb-0 mt-1">
+                                <p className="text-xs text-primary/60 dark:text-primary-dark/60 pb-4 mb-0 mt-1">
                                     <span>Originally posted on</span>{' '}
-                                    <Link to={slugs[0]?.slug}>https://posthog.com{slugs[0]?.slug}</Link>
+                                    <Link
+                                        to={slugs[0]?.slug}
+                                        className="text-primary/60 dark:text-primary-dark/60 font-medium"
+                                    >
+                                        https://posthog.com{slugs[0]?.slug}
+                                    </Link>
                                 </p>
                             )}
                         </div>
