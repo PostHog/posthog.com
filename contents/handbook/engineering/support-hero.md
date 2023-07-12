@@ -109,7 +109,7 @@ From time to time, customers will request to get their apps added to PostHog Clo
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
-Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email. We also use [Help](https://www.atlassian.com/software/halp).
+Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email. We also use [Halp](https://www.atlassian.com/software/halp).
 
 Zendesk will get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, and also community questions. These tickets will come with links to the issue or the question posted in the community so you can answer them in the appropriate platform, rather than on Zendesk itself.
 
