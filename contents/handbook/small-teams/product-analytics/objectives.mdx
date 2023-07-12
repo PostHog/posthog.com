@@ -1,25 +1,16 @@
 ## Q2 2023 Goals
 
-### Objective 1: PostHog 3000 Hacker News launch is a wild success
+1. Port all our insights over to HogQL.
+- make it possible to graph/chart/funnel _other_ data than just events (see: data warehouse)
+- adds a "to sql" button above every insight, giving users tools to investigate data integrity issues without involving support
+- makes it much easier to connect pieces of data in the app (persons modal -> show events not persons)
+- makes partially implemented features available across all insights (e.g. there's STILL no group name breakdowns in trends...)
+- makes it possible for insights on notebooks to be interlinked jupiter style (e.g. `select from {previous_chart_results} join {other_chart_results}`)
 
-- Why? Subjectively, we believe there are many UI/UX improvements to make it a tool that product engineers love.
-- Key results:
-  - We have shipped a reimagined IDE-inspired interface
+2. Sleeker insight editor UI
+- make insight filters compatible with PostHog 3000
+- make insight filters compatible with notebooks
+- consider a HogQL-powered "GUI" for multi-breakdowns
+- involve other app teams early
 
-### Objective 2: Make PostHog performance frustration free for our 10 largest customers
-
-- Key results:
-  - For top 10 US&EU clients p95 of dashboard load time <10s
-  - For top 10 US&EU clients p95 of insight load time <10s
-  - US ClickHouse setup is less bespoke
-  
-### Objective 3: HogQL
-
-- Why? We have built our query language called HogQL. The experience using it is still lacking.
-- Key results:
-  - HogQL is launched and used by 10% of users
-  - HogQL parsing errors are insightful and timely.
-  - HogQL supports all of ClickHouse SQL, including arrays and window functions.
-  - You can do pivot tables via HogQL, or in the interface we built to make this easier.
-  - The trends and funnels insights are powered by HogQL.
 
