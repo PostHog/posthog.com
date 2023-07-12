@@ -1,7 +1,5 @@
 ---
 title: Common questions about billing
-sidebar: Docs
-showTitle: true
 ---
 
 ### Can I have a trial?
