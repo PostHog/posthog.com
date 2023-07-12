@@ -7,7 +7,7 @@ tags:
     - s3 export
 ---
 
-> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
+> This app is currently unavailable while we do [some maintenance](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 This app enables you to export events to Amazon S3 on ingestion. Archive your data, or simply free it up for other kinds of analysis, by integrating export right into your event processing pipeline.
 

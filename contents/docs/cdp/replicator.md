@@ -1,11 +1,12 @@
 ---
 title: Event Replicator
 github: https://github.com/posthog/posthog-plugin-replicator
-installUrl: https://app.posthog.com/project/apps?name=Replicator
 thumbnail: ../../cdp/thumbnails/replicator.png
 tags:
     - replicator
 ---
+
+> This app is currently unavailable while we do [some maintenance](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 import MigratingEvents from "../migrate/snippets/migrating-events.mdx"
 

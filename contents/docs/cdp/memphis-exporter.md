@@ -1,11 +1,12 @@
 ---
 title: Memphis
 github: https://github.com/PostHog/posthog-memphisdev-app
-installUrl: https://app.posthog.com/project/apps?name=memphis
 thumbnail: ../../cdp/thumbnails/memphis_logo.jpg
 tags:
     - memphis
 ---
+
+> This app is currently unavailable while we do [some maintenance](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 This app enables you to publish events to Memphis as they are ingested into PostHog. [Memphis](https://memphis.dev) is an alternative to traditional message brokers and a real-time data processing platform.    
 

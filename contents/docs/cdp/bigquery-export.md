@@ -6,7 +6,7 @@ tags:
     - bigquery-export
 ---
 
-> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
+> This app is currently unavailable while we do [some maintenance](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 This app streams events from PostHog into BigQuery as they are ingested.
 
