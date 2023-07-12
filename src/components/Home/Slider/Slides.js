@@ -1,15 +1,4 @@
 import {
-    Android,
-    DiagonalArrow,
-    Experimentation,
-    Ios,
-    JS,
-    NodeJS,
-    ReactIcon,
-    RightArrow,
-    Ruby,
-} from 'components/Icons/Icons'
-import {
     Badge,
     Brackets,
     Clock,
@@ -31,7 +20,7 @@ import {
     Terminal,
     TestTube,
     UserPaths,
-} from 'components/NewIcons'
+} from '@posthog/icons'
 import Link from 'components/Link'
 import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'

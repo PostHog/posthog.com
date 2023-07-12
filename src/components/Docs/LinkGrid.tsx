@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import * as ProductIcons from '../ProductIcons'
-import * as NewIcons from '../NewIcons'
+import * as NewIcons from '@posthog/icons'
 
 type LinkGridProps = {
     links: { name: string; to: string; description: string; icon?: string; color?: string }[]
