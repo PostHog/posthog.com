@@ -77,6 +77,7 @@ export default function Questions() {
                             fetchMore={fetchMore}
                             isLoading={isLoading}
                             hasMore={hasMore}
+                            sortBy="activity"
                         />
                     </div>
                 </section>
