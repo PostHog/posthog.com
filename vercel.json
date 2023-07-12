@@ -781,7 +781,7 @@
         { "source": "/manual/annotations", "destination": "/docs/data/annotations" },
         { "source": "/manual/application-settings", "destination": "/docs/data/application-settings" },
         { "source": "/manual/cohorts", "destination": "/docs/data/cohorts" },
-        { "source": "/manual/data-management", "destination": "/docs/data/data-management" },
+        { "source": "/manual/data-management", "destination": "/docs/data" },
         { "source": "/manual/events", "destination": "/docs/data/events" },
         { "source": "/manual/notifications-and-alerts", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/manual/organizations-and-projects", "destination": "/docs/data/organizations-and-projects" },
@@ -1010,6 +1010,7 @@
         },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/docs/apps/feedback-widget", "destination": "/docs/surveys/manual" },
-        { "source": "/apps/user-interviewer", "destination": "/docs/surveys/manual" }
+        { "source": "/apps/user-interviewer", "destination": "/docs/surveys/manual" },
+        { "source": "/docs/data/data-management", "destination": "/docs/data" }
     ]
 }

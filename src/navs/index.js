@@ -1118,10 +1118,6 @@ export const docsMenu = {
                             url: '/docs/data/cohorts',
                         },
                         {
-                            name: 'Data management',
-                            url: '/docs/data/data-management',
-                        },
-                        {
                             name: 'Events',
                             url: '/docs/data/events',
                         },
