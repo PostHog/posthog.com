@@ -39,7 +39,7 @@ export const PricingCalculator = () => {
                     <h4 className="mb-1">Pricing calculator</h4>
                     <p className="text-sm">
                         <Link
-                            to="/docs/getting-started/estimating-usage-costs"
+                            to="/docs/billing/estimating-usage-costs"
                             external={true}
                             className="flex items-center gap-x-1"
                         >

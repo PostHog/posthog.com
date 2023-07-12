@@ -227,9 +227,7 @@ export const GroupAnalyticsChapter: React.FC = () => {
 }
 export const EstimatingUsageChapter: React.FC = () => {
     const data = useStaticQuery(query)
-    const node = data.allMdx.nodes.find(
-        (node: any) => node.fields.slug === '/docs/getting-started/estimating-usage-costs'
-    )
+    const node = data.allMdx.nodes.find((node: any) => node.fields.slug === '/docs/billing/estimating-usage-costs')
     const {
         frontmatter: { title, description, featuredImage },
         headings,
