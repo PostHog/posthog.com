@@ -35,11 +35,14 @@ posthog.init("<ph_project_api_key>", {
 
 1. Make sure you're up to date on PostHog's [JavaScript web library](/docs/libraries/js). Surveys requires version 1.67.1, or later.
 
-2. Call `posthog.getSurveys()` and get a list of all surveys back, and `posthog.getActiveMatchingSurveys()` to get a list of active matching surveys that should display for the current user client.
+2. After creating your survey on PostHog app, call `posthog.getSurveys()` and get a list of all surveys back if you wish to do your own matching, or `posthog.getActiveMatchingSurveys()` to get a list of active matching surveys that should display for the current user client.
+
+2.5. Make sure you filter for surveys that are of the type "api".
 
 ```js-web
 posthog.getActiveMatchingSurveys((surveys) => {
     // do something with surveys
+    // handleSurveys(surveys.filter(survey => survey.type === 'api'))
 })
 ```
 
@@ -47,15 +50,17 @@ posthog.getActiveMatchingSurveys((surveys) => {
 
 3. In order for survey responses to be recorded, you'll need to send in a "survey sent" capture call event with the survey's name, ID, and any properties you'd want.
 
-For example, if the survey's name is "New feature beta interest", you'd send in a capture call like this:
-
 ```js-web
-posthog.capture("New feature beta interest survey sent", {
+posthog.capture("survey sent", {
     $survey_id: {survey.id} // required
     $survey_response: {survey_response} // required
     $survey_name: {survey.name} // optional
 })
 ```
+
+Surveys that are shown should be captured with a "survey shown" event and those that are dismissed, with a "survey dismissed" event similar to the above.
+
+Right now we only support one page open feedback and external link type surveys, so be sure to follow the syntax above to use our built in results functionality for API surveys. We'll be adding more types soon!
 
 ## Creating a survey
 
