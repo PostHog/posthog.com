@@ -63,7 +63,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                         </Link>
                     </div>
 
-                    <Question id={permalink} expanded={true} />
+                    <Question showSlug id={permalink} expanded={true} />
                 </section>
 
                 {isModerator && question && (
