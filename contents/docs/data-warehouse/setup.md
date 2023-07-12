@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-> Data warehouse is free to use while in private beta. After that, you'll be charged for each GB of data read while querying.
+> Data warehouse is currently in beta. Want to give it a go? Here's [how to join an opt-in beta for PostHog](/docs/getting-started/enable-betas)! This feature is free to use while in beta.
 
 ## Creating a table
 
