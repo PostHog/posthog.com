@@ -8,7 +8,17 @@ availability:
     enterprise: full
 ---
 
-> Data warehouse is currently in beta. Want to give it a go? Here's [how to join an opt-in beta for PostHog](/docs/getting-started/enable-betas)! This feature is free to use while in beta.
+The PostHog data warehouse gives you a place to put all of your most important data, query across these datasets, and combined with the product analytics data already in PostHog. Powered by Clickhouse, the data warehouse enables you to query across big datasets quickly. 
+
+## How to access the data warehouse beta
+
+Data warehouse is currently in **beta**. This means we're inviting a select number of people to try this product out. If you want to give this a go, click the "Get support" button in the top right, select "Data Warehouse" as the area, and ask to be added to the beta.
+
+## How does it work?
+
+Each table in the warehouse is backed by one or more files in your object storage system (i.e. S3, GCS). We never "ingest" your data into our systems. Instead, on every query, we'll read directly from your object storage system. This means you can query as much data as you want. We'll only charge you for the data we actually query.
+
+> Data warehouse is free to use while in private beta. After that, you'll be charged for each GB of data read while querying.
 
 ## Creating a table
 
