@@ -173,7 +173,7 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                 <Content />
 
                 <div className="">
-                    <CallToAction to="docs/experimentation/manual" width="full">
+                    <CallToAction to="/docs/experimentation/manual" width="full">
                         Visit the manual
                     </CallToAction>
                 </div>

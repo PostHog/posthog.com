@@ -224,7 +224,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                 <Content />
 
                 <div className="">
-                    <CallToAction to="docs/session-replay/manual" width="full">
+                    <CallToAction to="/docs/session-replay/manual" width="full">
                         Visit the manual
                     </CallToAction>
                 </div>
