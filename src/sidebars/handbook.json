@@ -237,7 +237,7 @@
             {
                 "name": "Finance",
                 "url": "/handbook/people/finance",
-                "children":[
+                "children": [
                     {
                         "name": "Fundraising",
                         "url": "/handbook/people/finance/fundraising"
