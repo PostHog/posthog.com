@@ -29,6 +29,8 @@ export default function CommunityPage() {
         }
     }, [user])
 
+    const recentPermalink = recentQuestions?.data[0]?.attributes?.permalink
+
     return (
         <CommunityLayout title="Inbox">
             <SectionTitle>My discussions</SectionTitle>
@@ -65,10 +67,11 @@ export default function CommunityPage() {
                 <>
                     <div className="font-medium text-sm m-0 mb-6 bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 rounded text-center">
                         <p className="font-bold !m-0 !p-0">You're not subscribed to any threads yet!</p>
-                        <p className="!text-sm !m-0">
-                            <Link to={`/questions/${recentQuestions?.data[0].attributes.permalink}`}>This</Link> one
-                            looks enticing...
-                        </p>
+                        {recentPermalink && (
+                            <p className="!text-sm !m-0">
+                                <Link to={`/questions/${recentPermalink}`}>This</Link> one looks enticing...
+                            </p>
+                        )}
                     </div>
                 </>
             )}
