@@ -4,8 +4,9 @@ date: 2023-07-11
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
+featuredTutorial: true
 featuredImage: ../images/tutorials/banners/growth.png
-tags: ["apps", "site-apps", "surveys"]
+tags: ["surveys"]
 ---
 
 Getting feedback is critical to building a successful product. Metrics and analytics are key pieces of feedback, but at an early stage, written feedback and interviews are even better. To maximize the amount of feedback you get, you need processes, but these are often time-consuming.
