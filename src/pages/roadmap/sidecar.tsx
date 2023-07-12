@@ -23,7 +23,6 @@ export default function RoadmapPage() {
             <div className="">
                 <PostLayout
                     darkMode={false}
-                    contentWidth={'100%'}
                     article={false}
                     title={'Roadmap'}
                     hideSearch

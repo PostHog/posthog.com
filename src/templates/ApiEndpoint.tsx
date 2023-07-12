@@ -500,7 +500,6 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                 tableOfContents={tableOfContents}
                 fullWidthContent={true}
                 hideSidebar
-                contentWidth="100%"
                 breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
             >
                 <h2 className="!mt-0">{name}</h2>
