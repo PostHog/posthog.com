@@ -320,6 +320,14 @@ h4 {
             @apply mt-4;
         }
     }
+
+    code {
+        @apply px-1 py-0.5 rounded-sm text-sm bg-accent dark:bg-accent-dark border border-light dark:border-dark;
+
+        a {
+            @apply font-medium;
+        }
+    }
 }
 
 #recent-questions {
