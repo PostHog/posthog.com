@@ -16,7 +16,7 @@ See our doc on [estimating usage and costs](/docs/billing/estimating-usage-costs
 
 ### How do I update billing information or see previous months' invoices or usage?
 
-Go to your organization’s [billing settings](/organization/billing) and click “Manage card details” to be brought to Stripe where you can update your credit card, billing information, and see your invoice history.
+Go to your organization’s [billing settings](https://app.posthog.com/organization/billing) and click “Manage card details” to be brought to Stripe where you can update your credit card, billing information, and see your invoice history.
 
 ### Are events or replays dropped when I reach billing limits?
 
