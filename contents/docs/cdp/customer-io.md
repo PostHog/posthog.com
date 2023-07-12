@@ -1,5 +1,5 @@
 ---
-title: Customer.io Connector
+title: Customer.io
 github: https://github.com/PostHog/customerio-plugin
 thumbnail: ../../cdp/thumbnails/customerio-connector.png
 tags:
@@ -8,11 +8,11 @@ tags:
 
 > This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
 
-The Customer.io Connector sends event data from PostHog into Customer.io. User emails will also be sent if available and customers will be created in Customer.io.
+Send event data from PostHog into Customer.io. User emails will also be sent if available and customers will be created in Customer.io.
 
 ## Requirements
 
-The Customer.io Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -54,11 +54,11 @@ posthog.capture(
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Customer.io Connector](https://github.com/PostHog/customerio-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/customerio-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), [Michael Matloka](https://github.com/Twixes) and community members [Angela Purcell](https://github.com/purcell3a), [Conrad Kurth](https://github.com/ConradKurth) and [Alberto S](https://github.com/albtsantos) for creating the Customer.io Connector.
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), [Michael Matloka](https://github.com/Twixes) and community members [Angela Purcell](https://github.com/purcell3a), [Conrad Kurth](https://github.com/ConradKurth) and [Alberto S](https://github.com/albtsantos) for creating this.
 
 ### Who maintains this app?
 

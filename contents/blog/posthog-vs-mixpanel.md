@@ -703,7 +703,7 @@ It's easy to track marketing conversions in PostHog, but you can't currently con
             <td>Automate email workflows</td>
         </tr>
         <tr>
-            <td><strong>Twitter Follower Tracker</strong></td>
+            <td><strong>Twitter</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Track Twitter follower growth</td>

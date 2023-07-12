@@ -1,5 +1,5 @@
 ---
-title: Engage Connector
+title: Engage 
 github: https://github.com/PostHog/posthog-engage-so-plugin
 installUrl: https://app.posthog.com/project/apps?name=Engage
 thumbnail: ../../cdp/thumbnails/engage_logo.png
@@ -7,7 +7,7 @@ tags:
     - engage
 ---
 
-This app connects PostHog to [Engage](https://engage.so/), a marketing automation platform, and sends data to Engage for use in segmentation, targeting and automation.
+Connect PostHog to [Engage](https://engage.so/), a marketing automation platform, and sends data to Engage for use in segmentation, targeting and automation.
 
 Specifically, this app only exports your `Custom` and `$identify` events to Engage.
 
@@ -25,7 +25,7 @@ The example above, using the PostHog browser JS SDK, appends extra properties to
 
 ## Requirements
 
-The Engage Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -52,11 +52,11 @@ Now, as soon as the app is enabled, PostHog will start sending your events to En
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Engage Connector](https://github.com/PostHog/posthog-engage-so-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-engage-so-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog community members [Francis Onyishi](https://github.com/proalgor) and [Opeyemi Obembe](https://github.com/kehers) for creating the Engage Connector. Thank you!
+We'd like to thank PostHog community members [Francis Onyishi](https://github.com/proalgor) and [Opeyemi Obembe](https://github.com/kehers) for creating this. Thank you!
 
 ### Who maintains this app?
 

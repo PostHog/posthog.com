@@ -1,5 +1,5 @@
 ---
-title: BigQuery Export
+title: BigQuery
 github: https://github.com/PostHog/bigquery-plugin
 thumbnail: ../../cdp/thumbnails/bigquery.svg
 tags:
@@ -12,7 +12,7 @@ This app streams events from PostHog into BigQuery as they are ingested.
 
 ## Requirements
 
-The BigQuery Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -122,7 +122,7 @@ FROM   raw_data_deduplicated ;
 
 ### Who created this app?
 
-We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Marius Andra](https://github.com/mariusandra), [Neil Kakkar](https://github.com/neilkakkar), [Michael Matloka](https://github.com/Twixes) and community member [Edward Hartwell Goose](https://github.com/edhgoose) for creating this BigQuery Export app.
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Marius Andra](https://github.com/mariusandra), [Neil Kakkar](https://github.com/neilkakkar), [Michael Matloka](https://github.com/Twixes) and community member [Edward Hartwell Goose](https://github.com/edhgoose) for creating this.
 
 ### Who maintains this app?
 

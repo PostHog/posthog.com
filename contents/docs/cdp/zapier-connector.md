@@ -1,5 +1,5 @@
 ---
-title: Zapier Connector
+title: Zapier
 github: https://github.com/PostHog/posthog-zapier/
 installUrl: https://zapier.com/apps/posthog/integrations
 thumbnail: ../../cdp/thumbnails/zapier.svg
@@ -65,7 +65,7 @@ Create a private Zapier app for PostHog easily with a few simple steps:
 
 ## Where can I find out more?
 
-Further information about the Zapier Connector is available in [Zapier's integration documentation](https://zapier.com/help/doc/how-to-get-started-with-posthog-on-zapier).
+Further information is available in [Zapier's integration documentation](https://zapier.com/help/doc/how-to-get-started-with-posthog-on-zapier).
 
 ## FAQ
 

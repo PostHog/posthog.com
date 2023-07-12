@@ -1,5 +1,5 @@
 ---
-title: Salesforce Connector
+title: Salesforce
 github: https://github.com/Vinovest/posthog-salesforce
 installUrl: https://app.posthog.com/project/apps?name=Salesforce
 thumbnail: ../../cdp/thumbnails/salesforce.svg
@@ -11,7 +11,7 @@ This app connects to your Salesforce instance, sending events from PostHog to Sa
 
 ## Requirements
 
-The Salesforce Connector app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -32,11 +32,11 @@ You'll also need a Salesforce account to connect to, as well as the relevant lev
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Salesforce Connector](https://github.com/Vinovest/posthog-salesforce) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/Vinovest/posthog-salesforce) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) and community members [Angela Purcell](https://github.com/purcell3a) and [Conrad Kurth](https://github.com/ConradKurth) for creating the Salesforce Connector. Thank you, all!
+We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) and community members [Angela Purcell](https://github.com/purcell3a) and [Conrad Kurth](https://github.com/ConradKurth) for creating this. Thank you, all!
 
 ### Who maintains this app?
 

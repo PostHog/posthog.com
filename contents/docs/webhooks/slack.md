@@ -6,7 +6,7 @@ showTitle: true
 
 You can receive messages in Slack whenever your [actions](/docs/user-guides/actions) trigger. 
 
-> **Note:** Currently it's only possible to receive messages in a single Slack channel. If you'd like to receive messages in more than one channel, you can use the [Zapier Connector](/apps/zapier-connector).
+> **Note:** Currently it's only possible to receive messages in a single Slack channel. If you'd like to receive messages in more than one channel, you can use the [Zapier integration](/apps/zapier-connector).
 
 ## 1. Create an app in Slack
 Go to the [Slack developer dashboard](https://api.slack.com/apps?new_app=1) and create a new app. Call it "PostHog" and connect it to the workspace of your choice.
