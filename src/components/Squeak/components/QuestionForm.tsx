@@ -13,6 +13,7 @@ import uploadImage from '../util/uploadImage'
 import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
+import Spinner from 'components/Spinner'
 
 type QuestionFormValues = {
     subject: string
@@ -141,7 +142,7 @@ function QuestionFormMain({
                 }}
                 onSubmit={(values) => onSubmit(values, user)}
             >
-                {({ setFieldValue, isValid, values }) => {
+                {({ setFieldValue, isValid, values, submitForm }) => {
                     return (
                         <Form className="mb-0">
                             <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
@@ -165,6 +166,7 @@ function QuestionFormMain({
                                 )}
                                 <div className="leading-[0]">
                                     <RichText
+                                        onSubmit={submitForm}
                                         autoFocus={!subject}
                                         setFieldValue={setFieldValue}
                                         initialValue={initialValues?.body}
@@ -174,7 +176,13 @@ function QuestionFormMain({
                             </div>
                             <span className="ml-[50px]">
                                 <Button disabled={loading || !isValid} type="submit" className="w-[calc(100%_-_50px)]">
-                                    {user ? 'Post' : 'Login & post'}
+                                    {loading ? (
+                                        <Spinner className="!text-white mx-auto" />
+                                    ) : user ? (
+                                        'Post'
+                                    ) : (
+                                        'Login & post'
+                                    )}
                                 </Button>
                             </span>
 
