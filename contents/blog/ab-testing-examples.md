@@ -72,13 +72,14 @@ Running an A/B test of the new and old algorithms split by zone and day showed a
 
 The simple regression left out potentially important variables like zone, day of the week, and week number (growth). To include these, they used multivariate regressions. This showed a similar improvement in efficiency but with a much lower p-value of **0.0003**.
 
-With this, Instacart was confident their new algorithm led to improvements in delivery efficiency and rolled it out further.
+With this, Instacart was confident the new algorithm led to improvements in delivery efficiency and rolled it out further.
 
 _Read more at "[It All Depends](https://tech.instacart.com/it-all-depends-4bb7b22e854b)."_
 
 ### Takeaways
 
-- You might not be able to create an A/B test sample directly using users, but there is always some way to do it (like geography).
+- Sometimes randomly splitting users into test and control samples won't work, but there is always some way to do it, such as by geography.
+
 - A simple regression doesn’t account for multiple variables, which leads to higher, insignificant p-values. A multivariate regression could provide a more accurate answer.
 
 ## 3. Coinbase: Universes
@@ -90,15 +91,19 @@ Running many tests simultaneously also required complex reasoning, documentation
 To support a higher volume of tests and simplify the process, Coinbase developed "universes." This is a system to split users into groups, assign A/B tests to those groups, then build versions of the app containing the tested components. It consisted of three main pieces:
 
 1. **Components:** parts of a service you may want to experiment on.
+
 2. **Composer:** builds a service using component constructors, testing one of them. Experiments consist of comparing composers, so they tracked analytics at this level.
-3. **Composer manager:** routes requests to the correct composer based on the user. They split users into groups, named "slots" which get a single experiment. Those a part of this experiment get the service the composer put together.
+
+3. **Composer manager:** routes requests to the correct composer based on the user. They split users into groups, named "slots" which get a single experiment. Those who are part of this experiment get the service the composer put together.
 
 A single configuration file defines all three of these, abstracting the code relevant to the experiment from the actual app. A service they built uses the configuration file to create a universe for the A/B test.
 
 The outcome of building the "universes" system included:
 
 - **Increased A/B test throughput** from 3 experiments in ~6 months before launch to 44 experiments in ~8 months after.
+
 - **Centralized and cleaner code** by splitting experiment and app code as well as using a single configuration file for the experiment. This makes it easier to manage tests.
+
 - **Greater flexibility and faster feedback** through the ability to modify experiments at any time, requiring smaller user samples, and shorter implementation and feedback cycles.
 
 _Read more at "[Scaling Experimentation for Machine Learning at Coinbase](https://www.coinbase.com/blog/scaling-experimentation-for-machine-learning-at-coinbase)."_
