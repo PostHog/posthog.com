@@ -870,10 +870,6 @@ export const docsMenu = {
                             url: '/docs/getting-started/group-analytics',
                         },
                         {
-                            name: 'Estimating usage & costs',
-                            url: '/docs/getting-started/estimating-usage-costs',
-                        },
-                        {
                             name: 'Next steps',
                             url: '/docs/getting-started/next-steps',
                         },
@@ -1638,6 +1634,24 @@ export const docsMenu = {
                         {
                             name: 'Export your events',
                             url: '/docs/migrate/export-events',
+                        },
+                    ],
+                },
+                {
+                    name: 'Billing',
+                    url: '',
+                    children: [
+                        {
+                            name: 'Billing limits and alerts',
+                            url: '/docs/billing/limits-alerts',
+                        },
+                        {
+                            name: 'Estimating usage and costs',
+                            url: '/docs/billing/estimating-usage-costs',
+                        },
+                        {
+                            name: 'Common questions about billing',
+                            url: '/docs/billing/common-questions',
                         },
                     ],
                 },
