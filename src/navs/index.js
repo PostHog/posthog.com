@@ -2087,6 +2087,10 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/replicator',
                             name: 'Event Replicator',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/github-release-tracker',
@@ -2193,6 +2197,10 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/databricks',
                             name: 'Databricks',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/engage-connector',
@@ -2233,6 +2241,10 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/redshift-export',
                             name: 'Redshift',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/rudderstack-export',

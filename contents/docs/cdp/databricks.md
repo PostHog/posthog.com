@@ -1,7 +1,6 @@
 ---
 title: Databricks
 github: https://github.com/posthog/posthog-databricks-plugin
-installUrl: https://app.posthog.com/project/apps?name=posthog+databricks+plugin
 thumbnail: ../../cdp/thumbnails/databricks.png
 tags:
     - databricks

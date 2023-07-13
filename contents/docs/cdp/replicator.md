@@ -1,7 +1,6 @@
 ---
 title: Event Replicator
 github: https://github.com/posthog/posthog-plugin-replicator
-installUrl: https://app.posthog.com/project/apps?name=Replicator
 thumbnail: ../../cdp/thumbnails/replicator.png
 tags:
     - replicator

@@ -1,13 +1,14 @@
 ---
 title: Redshift (Export)
 github: https://github.com/PostHog/redshift-plugin
-installUrl: https://app.posthog.com/project/apps?name=Redshift+Export
 thumbnail: ../../cdp/thumbnails/redshift.svg
 tags:
     - redshift-export
 ---
 
-This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+
+Using the Redshift Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
