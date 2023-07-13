@@ -106,3 +106,41 @@ Autocapture is enabled by default. You can disable autocapture completely by set
 
 Disabling autocapture **will not disable session recording**. You can disable session recording using `disable_session_recording` or by turning it off in your project's settings.
 
+
+## Autocaptured properties
+
+Autocaptured events (and client-side custom events) have a number of properties that are automatically added to them. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the event explorer, and the verified event logo in the [data management tab](https://app.posthog.com/data-management/properties). These properties can be hidden in the event explore by checking the "Hide PostHog properties" box.
+
+Autocaptured properties include:
+
+- Timestamp (`$timestamp`)
+- OS (`$os`)
+- Browser (`$browser`)
+- Browser Version (`$browser_version`)
+- Device Type (`$device_type`)
+- Current URL (`$current_url`)
+- Host (`$host`)
+- Path Name (`$pathname`)
+- Screen Height (`$screen_height`)
+- Screen Width (`$screen_width`)
+- Viewport Height (`$viewport_height`)
+- Viewport Width (`$viewport_width`)
+- Library (`$lib`)
+- Library Version (`$lib_version`)
+- Search Engine (`$search_engine`)
+- Referrer URL (`$referrer`)
+- Referring Domain (`$referring_domain`)
+- UTM Source (`$utm_source`)
+- UTM Medium (`$utm_medium`)
+- UTM Campaign (`$utm_campaign`)
+- UTM term (`$utm_term`)
+- Google Click ID (`$gclid`)
+- Facebook Click ID (`$fbclid`)
+- Microsoft Click ID (`$msclkid`)
+- Active Feature Flags (`$active_feature_flags`)
+- Plugins Succeeded (`$plugins_succeeded`)
+- Plugins Failed (`$plugins_failed`)
+- Plugins Deferred (`$plugins_deferred`)
+- IP Address (`$ip`)
+
+If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties. 
