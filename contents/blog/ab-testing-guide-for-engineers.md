@@ -57,7 +57,7 @@ Like "increase paid conversion rate", or "decrease churn rate". This should be a
 No clear, measurable goal = ambiguous results you can't action.
 
 ### 2. A clear hypothesis about why your changes will achieve your goal
-Not having a well-defined hypothesis is one of the most [common A/B testing mistakes](/blog/ab-testing-mistakes) people make.
+Not creating a well-defined hypothesis is one of the most [common A/B testing mistakes](/blog/ab-testing-mistakes).
 
 A good hypothesis focuses your testing and guides your decision-making by providing a framework for evaluating your results. It should include your goal metric, how you think your change will improve it, and any other important context. For example:
 
