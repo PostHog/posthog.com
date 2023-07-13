@@ -195,5 +195,10 @@ module.exports = {
             },
         },
     },
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/line-clamp'), require('@headlessui/tailwindcss')],
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/line-clamp'),
+        require('@headlessui/tailwindcss'),
+        require('@tailwindcss/container-queries'),
+    ],
 }
