@@ -75,7 +75,7 @@ export default function Job({
     Object.keys(availableTeams)
         .sort()
         .forEach((team) => {
-            openRolesMenu.push({ name: team })
+            openRolesMenu.push({ name: `Team ${team}` })
             availableTeams[team]?.forEach(({ fields: { title, slug } }) => {
                 openRolesMenu.push({
                     name: title.split(' - ')[0],
@@ -145,10 +145,10 @@ export default function Job({
                 >
                     <div className="relative">
                         <div>
-                            {teamName && <p className="m-0 opacity-60 pb-2">{teamName} Team</p>}
+                            {teamName && <p className="m-0 opacity-60 pb-2">Team {teamName}</p>}
                             <h1 className="m-0 text-5xl">{jobTitle}</h1>
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
-                                <Detail title="Team" value={departmentName} icon={<Department />} />
+                                <Detail title="Department" value={departmentName} icon={<Department />} />
                                 <Detail title="Location" value={locationName} icon={<Location />} />
                                 {timezone && <Detail title="Timezone(s)" value={timezone} icon={<Timezone />} />}
                             </ul>
