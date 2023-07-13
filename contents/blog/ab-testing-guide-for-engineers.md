@@ -165,7 +165,7 @@ Once you've started your A/B test, it's a good idea to check in on it 24-48 hour
 
 * Monitor crashes or error rates to ensure that your test is not causing any issues. 
 
-Once you're sure that everything is running smoothly, try to avoid frequently checking the results until the test is finished. Checking too often can lead to reactive decisions based on incomplete data. It's usually best to wait until the test ends to make any decisions, as you'll have the best data at that point.
+Once you're sure that everything is running smoothly, try to avoid frequently checking the results until the test is finished. Checking too often can lead to reactive decisions based on incomplete data. It's usually best to wait until the test ends to make any decisions, as you'll have more accurate data at that point.
 
 ## Analyzing your results
 
