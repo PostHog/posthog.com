@@ -8,9 +8,11 @@ featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ['configuration']
 ---
 
-To ensure compliance with privacy regulations like GDPR, you might need to ask for content from users do tracking and use cookies. PostHog has tools to help you opt users in and out of this. 
+To ensure compliance with privacy regulations like GDPR, you may need to ask for content from users to track them using cookies. PostHog has tools to help you give users the ability to opt-in or out. 
 
 In this tutorial, we build a basic Next.js app, set up PostHog, build a cookie consent banner, and connect it to PostHog’s tracking and cookie management.
+
+> Don't want cookies? Here's [how to use PostHog without cookie banners](/tutorials/cookieless-tracking).
 
 ## Create a Next.js app and add PostHog
 
@@ -37,7 +39,7 @@ export function PHProvider({ children }) {
 }
 ```
 
-Once created, we can then import the `PHProvider` component from the`provider.js` file in our `app/layout.js` file, and wrap our app in it.
+We can then import the `PHProvider` component from the`provider.js` file in our `app/layout.js` file, and wrap our app in it.
 
 ```js
 // app/layout.js
@@ -54,11 +56,11 @@ export default function RootLayout({ children }) {
 }
 ```
 
-After setting this up and running `npm run dev`, PostHog starts autocapturing events, but a PostHog-related cookie is set for the user without their consent. To help privacy compliance, we will set up a cookie consent banner.
+After setting this up and running `npm run dev`, PostHog starts autocapturing events, but a PostHog-related cookie is set for the user without their consent. So, let's set up a cookie consent banner!
 
 ![Cookie set](../images/tutorials/nextjs-cookie-banner/cookie.png)
 
-## Creating our cookie banner
+## Creating a cookie banner
 
 Create another file in the `app` folder named `banner.js`for the banner component with a bit of text explaining cookies and buttons to accept or decline.
 
