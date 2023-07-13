@@ -24,7 +24,7 @@ One is easier than the other, but the easy way rarely works in the long term. Th
 - How to implement and monitor your tests
 - How to analyze your results (statistically significant, or not)
 
-We'll also cover some frequently answered questions, such as when you _shouldn't_ run A/B tests, and we've added a simple [A/B test launch checklist](#a-b-test-launch-checklist) you can use when you run your own tests.
+We'll also cover some frequently asked questions, such as when you _shouldn't_ run A/B tests, and we've added a simple [A/B test launch checklist](#ab-test-launch-checklist) to use when you run your own tests.
 
 ## How A/B testing works
 
@@ -38,7 +38,7 @@ With your goal in mind and your code changes ready, you **randomly** split your 
 
 - **The test group** – These users will experience your product with your new changes.
 
-You then run your A/B test to gather data (usually a few days or weeks) and compare the differences in the goal metric between the different groups.
+You then run your A/B test to gather data (usually over a few days or weeks) and compare the differences in the goal metric between the different groups.
 
 ![How A/B testing works](../images/blog/ab-testing-guide-for-engineers/ab-test-illustration.jpg)
 
@@ -57,6 +57,7 @@ Like "increase paid conversion rate", or "decrease churn rate". This should be a
 No clear, measurable goal = ambiguous results you can't action.
 
 ### 2. A clear hypothesis about why your changes will achieve your goal
+
 Not creating a well-defined hypothesis is one of the most [common A/B testing mistakes](/blog/ab-testing-mistakes).
 
 A good hypothesis focuses your testing and guides your decision-making by providing a framework for evaluating your results. It should include your goal metric, how you think your change will improve it, and any other important context. For example:
@@ -79,7 +80,7 @@ Ideally, an A/B test should change one thing at a time. This ensures that any ch
 
 The caveat here is that too small of change can slow your team down. Since running A/B tests take time, if you're constantly testing small changes, it will take longer to ship large, meaningful changes.
 
-A good rule of thumb to know if your change is too small is if it's unlikely to impact user behavior significantly. You can use qualitative data from user research or quantitative data from existing logging, or previous A/B tests, to inform this decision
+A good rule of thumb to know if your change is too small is if it's unlikely to impact user behavior significantly. You can use qualitative data from user research, quantitative data from existing logging, or previous A/B tests to inform this decision
 
 ### 4. A sufficiently large sample size of users
 
@@ -87,13 +88,13 @@ A large sample size for your test ensures the *statistical significance* of your
 
 To know whether your sample size is large enough, you'll need to know:
 
-1. **The current conversion rate for your metric.** This is the percentage of users who performed the desired action (e.g., make a purchase, sign up) out of the total number of eligible users.
+1. **The current count or conversion rate for your metric.** This is the count or percentage of users who performed the desired action (e.g., click a button, make a purchase, sign up) out of the total number of eligible users.
 
-2. **Your "minimum detectable effect".** The smallest change in the conversion rate that you want to detect. The smaller the change, the larger the sample size you'll need.
+2. **Your "minimum detectable effect".** The smallest change in the count or conversion rate that you want to detect. The smaller the change, the larger the sample size you'll need.
 
 3. **Your desired level of confidence.** The industry standard is 95%.
 
-You then use a [sample size determination formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself – [A/B tests in PostHog](/ab-testing/features) calculate this for you automatically.
+You then use a [sample size determination formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself – [A/B tests in PostHog](/ab-testing) calculate this for you automatically.
 
 ### 5. A long enough test duration
 
@@ -168,7 +169,7 @@ Once you're sure that everything is running smoothly, try to avoid frequently ch
 
 ## Analyzing your results
 
-Once your test has run its duration, and you've collected enough data, you're ready to look at the results. What you're looking for is statistical significant change in any of the following metrics:
+Once your test has run its duration and you've collected enough data, you're ready to look at the results. What you're looking for is a statistically significant change in any of the following metrics:
 
 1. **Your goal metric.**
 
@@ -220,7 +221,7 @@ No, you can also use A/B tests for infrastructure changes, such as:
 
 - If you're considering a new caching strategy or database system, you could split your traffic between the old and new systems to see which performs better. 
 
-- When you're implementing a refactor to your codebase, you can use an A/B test to ensure your refactor does not perform worse.
+- When you're refactoring your codebase, you can use an A/B test to ensure your refactor does not perform worse.
 
 ### Can I stop an A/B test as soon as the results are significant?
 
