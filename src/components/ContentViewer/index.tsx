@@ -25,12 +25,12 @@ interface IProps {
     content: {
         title: string
         image?: string
-        body: string
+        body: string | (() => React.ReactNode)
         author?: string
         tags?: string[]
         video?: string
         type?: string
-        bodyType?: 'markdown' | 'mdx'
+        bodyType?: 'markdown' | 'mdx' | 'component'
     }[]
     title?: string
     initialIndex?: number
@@ -135,6 +135,8 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
                             )}
                             {currentContent.video && contentView === 'Video' ? (
                                 <iframe src={currentContent.video} />
+                            ) : currentContent.bodyType === 'component' ? (
+                                currentContent.body()
                             ) : currentContent.bodyType === 'markdown' ? (
                                 <Markdown>{currentContent.body}</Markdown>
                             ) : (

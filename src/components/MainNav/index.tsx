@@ -16,6 +16,7 @@ import usePostHog from 'hooks/usePostHog'
 import * as icons from '@posthog/icons'
 import HoverTooltip from 'components/Tooltip'
 import { SignupCTA } from 'components/SignupCTA'
+import { container } from 'components/CallToAction'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -130,20 +131,23 @@ const ActiveBackground = ({ mobile = false }) => {
     )
 }
 
-const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile }) => {
+const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile, active, onClick }) => {
     const ref = useRef<HTMLLIElement>(null)
-    const { activeInternalMenu } = useLayoutData()
-    const active = activeInternalMenu?.name === name
     const Icon = icons[icon]
 
     useEffect(() => {
         if (initialScrollTo) ref?.current?.scrollIntoView({ block: 'center', inline: 'center' })
     }, [overflowing])
 
+    const handleClick = () => {
+        onClick?.()
+        ref?.current?.scrollIntoView({ block: 'center', inline: 'center' })
+    }
+
     return (
         <li ref={ref}>
             <Link
-                onClick={() => ref?.current?.scrollIntoView({ block: 'center', inline: 'center' })}
+                onClick={handleClick}
                 to={url}
                 className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded ${
                     active
@@ -173,12 +177,9 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile
     )
 }
 
-export const InternalMenu = ({ className = '', mobile = false }) => {
+export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex }) => {
     const ref = useRef<HTMLUListElement>(null)
-    const { internalMenu, activeInternalMenu } = useLayoutData()
     const [overflowing, setOverflowing] = useState(false)
-    const activeIndex = internalMenu?.findIndex((menu) => menu === activeInternalMenu)
-
     function handleResize() {
         setOverflowing((ref?.current && ref?.current.scrollWidth > ref?.current.clientWidth) || false)
     }
@@ -191,13 +192,13 @@ export const InternalMenu = ({ className = '', mobile = false }) => {
         }
     }, [])
 
-    return internalMenu?.length > 0 ? (
+    return menu?.length > 0 ? (
         <ul
             style={{ justifyContent: overflowing ? 'start' : 'center' }}
             ref={ref}
             className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x overflow-x-auto overflow-y-hidden ${className}`}
         >
-            {internalMenu.map((menuItem, index) => {
+            {menu.map((menuItem, index) => {
                 return (
                     <MenuItem
                         key={menuItem.name}
@@ -205,6 +206,7 @@ export const InternalMenu = ({ className = '', mobile = false }) => {
                         initialScrollTo={activeIndex === index}
                         overflowing={overflowing}
                         mobile={mobile}
+                        active={menu[activeIndex]?.name === menuItem.name}
                     />
                 )
             })}
@@ -217,7 +219,7 @@ const keyboardShortcut =
 
 export const Main = () => {
     const { open } = useSearch()
-    const { menu, parent, internalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
+    const { menu, parent, internalMenu, activeInternalMenu, fullWidthContent, setFullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
     const { setWebsiteTheme } = useActions(layoutLogic)
@@ -351,17 +353,26 @@ export const Main = () => {
                     </div>
                 </div>
             </div>
-            <InternalMenu className="lg:flex hidden" />
+            <InternalMenu
+                menu={internalMenu}
+                activeIndex={internalMenu?.findIndex((menu) => menu === activeInternalMenu)}
+                className="lg:flex hidden"
+            />
         </div>
     )
 }
 
 export const Mobile = () => {
-    const { menu, parent } = useLayoutData()
+    const { menu, parent, internalMenu, activeInternalMenu } = useLayoutData()
 
     return (
         <div className="fixed bottom-0 w-full lg:hidden z-[9999]">
-            <InternalMenu mobile className="bg-light dark:bg-dark border-t mb-[-1px]" />
+            <InternalMenu
+                mobile
+                className="bg-light dark:bg-dark border-t mb-[-1px]"
+                menu={internalMenu}
+                activeIndex={internalMenu?.findIndex((menu) => menu === activeInternalMenu)}
+            />
             <ul className="grid grid-cols-5 gap-[2px] list-none m-0 px-2 bg-accent dark:bg-accent-dark border-t border-border dark:border-dark">
                 {menu.map((menuItem) => {
                     const active = menuItem.name === parent?.name

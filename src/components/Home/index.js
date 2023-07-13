@@ -16,6 +16,7 @@ import AllInOne from './AllInOne'
 import Builders from './Builders'
 import Pricing from './Pricing'
 import CustomerData from './CustomerData'
+import CodeBlocks from './CodeBlocks'
 
 const Home = () => {
     usePostHog()
@@ -31,6 +32,7 @@ const Home = () => {
                 />
                 <Hero />
                 <Customers />
+                <CodeBlocks />
                 <AllInOne />
                 <Builders />
                 <Pricing />
