@@ -240,7 +240,7 @@ Launching an A/B test requires careful planning to ensure accurate results and m
 - [ ] Secondary metrics.
 - [ ] Counter metrics.
 - [ ] Predefined test duration, based on sample size.
-- [ ] Test code only includes eligible users that will be affected by change.
+- [ ] Code only includes eligible users that will be affected by change.
 - [ ] QA checks on both control and test variants.
 
 **24-48 hours after launch:**
@@ -253,7 +253,7 @@ Launching an A/B test requires careful planning to ensure accurate results and m
 
 - [ ] Validate or invalidate your hypothesis based on experiment data.
 - [ ] Document your results and share with your team for feedback.
-- [ ] Ship code for the winning variant. Delete code for the losing variant.
+- [ ] Ship winning variant code. Delete code for losing variant.
 ```
 
 ## Further reading
