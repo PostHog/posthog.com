@@ -6,7 +6,7 @@ tags:
     - customer.io-connector
 ---
 
-> This app is currently unavailable while we do [some maintenance](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 Send event data from PostHog into Customer.io. User emails will also be sent if available and customers will be created in Customer.io.
 

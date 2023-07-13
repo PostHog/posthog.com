@@ -6,7 +6,7 @@ tags:
     - memphis
 ---
 
-> This app is currently unavailable while we do [some maintenance](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 This app enables you to publish events to Memphis as they are ingested into PostHog. [Memphis](https://memphis.dev) is an alternative to traditional message brokers and a real-time data processing platform.    
 

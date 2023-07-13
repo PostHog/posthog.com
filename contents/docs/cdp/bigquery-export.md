@@ -6,7 +6,7 @@ tags:
     - bigquery-export
 ---
 
-> This app is currently unavailable while we do [some maintenance](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 This app streams events from PostHog into BigQuery as they are ingested.
 
