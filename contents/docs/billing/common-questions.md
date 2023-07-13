@@ -16,6 +16,10 @@ You can check our doc on [estimating usage and costs](/docs/billing/estimating-u
 
 Go to your organization's [billing settings](https://app.posthog.com/organization/billing) and click "Manage card details" to be brought to Stripe where you can update your credit card, billing information, and see your invoice history.
 
+### Can I set a billing limit?
+
+Yes, you can set a billing limit for each of PostHog's products in your organization's [billing settings]((https://app.posthog.com/organization/billing)). Check out our doc on [billing limits and alerts](/docs/billing/estimating-usage-costs) for more information.
+
 ### Are events or replays dropped when I reach billing limits?
 
 Yes, PostHog drops data after you go over your billing limit. To capture more during the current billing period, you need to raise your billing limits. For future billing periods, you can tune your PostHog implementation to limit the number of [events](/tutorials/fewer-unwanted-events) or [session replays](/tutorials/limit-session-recordings) you capture.
