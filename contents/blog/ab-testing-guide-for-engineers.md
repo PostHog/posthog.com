@@ -18,7 +18,7 @@ As a software engineer, you have two options:
 1. YOLO every change and hope they have the desired impact.
 2. Track user metrics and run A/B tests to verify your changes have the desired effect.
 
-One is easier than other, but the easy way rarely works in the long term. This guide is for software engineers who are just getting started with A/B testing. In it, you'll learn:
+One is easier than the other, but the easy way rarely works in the long term. This guide is for software engineers who are just getting started with A/B testing. In it, you'll learn:
 
 - How to devise good A/B tests
 - How to implement and monitor your tests
