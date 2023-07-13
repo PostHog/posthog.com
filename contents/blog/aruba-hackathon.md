@@ -111,7 +111,7 @@ Enter team Arubug, who decided there had to be a better way.
 
 ![bug report](../images/blog/aruba/bug-report.gif)
 
-The team started by [building a site app](/tutorials/build-site-app) for bug reports based on our existing [Feedback Widget](/apps/feedback-widget), which sends a `$bug_report` event to PostHog.
+The team started by [building a site app](/tutorials/build-site-app) for bug reports which sends a `$bug_report` event to PostHog.
 
 These reports feed into a dashboard that tracks bug reports, helping us to identity trends. Bugs can be broken down as tables with relevant properties, and session replays, attached.
 

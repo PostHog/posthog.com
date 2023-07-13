@@ -345,7 +345,7 @@ const posthog = await Posthog.initAsync('<ph_project_api_key>', {
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
-```react-Native
+```react-native
 // With the useFeatureFlag hook
 import { useFeatureFlag } from 'posthog-react-native'
 
@@ -374,15 +374,15 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```js
-posthog.group('company', '42dlsfj23f')
+posthog.group('company', 'company_id_in_your_db')
 
-posthog.capture('upgraded plan') // this event is associated with company ID `42dlsfj23f`
+posthog.capture('upgraded plan') // this event is associated with company ID `company_id_in_your_db`
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```js
-posthog.group('company', '42dlsfj23f', {
+posthog.group('company', 'company_id_in_your_db', {
     name: 'Awesome Inc.',
     employees: 11,
 })

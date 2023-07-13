@@ -42,7 +42,7 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <p className="text-sm my-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <Authentication showBanner={false} showProfile={false} />
+            <Authentication onAuth={onSubmit} showBanner={false} showProfile={false} />
         </>
     ) : state === 'signup' ? (
         <>
@@ -52,7 +52,7 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <p className="text-sm my-2 dark:text-white">
                 We suggest signing up with your personal email. Soon you'll be able to link your PostHog app account.
             </p>
-            <Authentication initialView="sign-up" showBanner={false} showProfile={false} />
+            <Authentication onAuth={onSubmit} initialView="sign-up" showBanner={false} showProfile={false} />
         </>
     ) : (
         <>
@@ -60,12 +60,12 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
                 Your PostHog.com community profile lets you ask questions and get early access to beta features.
             </p>
             <p className="text-[13px] my-2 dark:text-white p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
-                <strong>Tip:</strong> If you've ever asked a question on PostHog.com, you already have an account!
+                <strong>Tip:</strong> PostHog.com accounts are separate from signing into the PostHog app.
             </p>
-            <CallToAction onClick={() => setState('login')} width="full" size="sm">
+            <CallToAction onClick={() => setState('login')} width="full" size="md">
                 Login to posthog.com
             </CallToAction>
-            <CallToAction onClick={() => setState('signup')} width="full" type="secondary" size="sm" className="mt-2">
+            <CallToAction onClick={() => setState('signup')} width="full" type="secondary" size="md" className="mt-2">
                 Create an account
             </CallToAction>
         </>
@@ -95,7 +95,7 @@ export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOp
             <CallToAction
                 onClick={() => setEditModalOpen(true)}
                 width="full"
-                size="xs"
+                size="sm"
                 type="secondary"
                 className="mt-2"
             >
@@ -136,19 +136,25 @@ export default function Sidebar() {
                 </div>
                 {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> : <Login />}
             </SidebarSection>
+
+            {user?.profile && (
+                <SidebarSection title="My discussions">
+                    <Link to="/community/dashboard" className="text-sm">
+                        Visit my discussions
+                    </Link>
+                </SidebarSection>
+            )}
+
             {topicSubscriptions && topicSubscriptions?.length > 0 && (
                 <SidebarSection title="Jump to subscribed topics">
                     <>
                         <ul className="list-none m-0 p-0">
                             {topicSubscriptions.map(({ label, slug }) => {
                                 return (
-                                    <li
-                                        key={label}
-                                        className="mt-1 pt-1 first:mt-0 border-t first:border-none border-dashed border-gray-accent-light dark:border-gray-accent-dark"
-                                    >
+                                    <li key={label} className="mt-1 pt-1 first:mt-0">
                                         <Link
                                             to={`/questions/topic/${slug}`}
-                                            className="block text-sm p-1  rounded-sm hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] top-[.5px] "
+                                            className="block text-sm p-1  rounded-sm hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] top-[.5px] "
                                         >
                                             {label}
                                         </Link>

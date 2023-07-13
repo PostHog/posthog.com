@@ -12,8 +12,6 @@ featuredImageType: full
 category: General
 tags:
   - Privacy
-  - Comparisons
-  - Guides
 ---
 
 What do Google Optimize, Optimizely, Convert, Webtrends Optimize and Splitbee have in common?
@@ -56,7 +54,7 @@ PostHog is open source, which means you can inspect the code yourself and extend
 - **Self-Hosting:** Yes
 - **BAA Available**: No
 
-PostHog doesn't currently offer a BAA for PostHog Cloud, so using it in compliance with HIPAA means [self-hosting it](/docs/self-host) on your own infrastructure. The [PostHog Marketplace](/marketplace) includes several third-party providers who can support self-hosted deployment, or manage your instance entirely, if you need help.
+PostHog doesn't currently offer a BAA for PostHog Cloud, so using it in compliance with HIPAA means [self-hosting it](/docs/self-host) on your own infrastructure.
 
 What [PostHog says](/docs/privacy/hipaa-compliance):
 

@@ -108,7 +108,7 @@ We view this figure as more important than the number of active users. If the nu
 
 ### Net Promoter Score (NPS)
 
-**What is it?**  NPS is a well-known customer satisfaction metric, and a good indicator for future customer retention and product market fit. 
+**What is it?**  NPS is a well-known customer satisfaction metric, and a good indicator for future customer retention and [product-market fit](/blog/product-market-fit-game). 
 
 On a scale of 1 to 10, users who select 9 or 10 when asked "how likely are you to recommend us to a friend of colleague" are promoters. Those who vote 0 to 6 are detractors.
 
@@ -117,8 +117,6 @@ You NPS score is the `% of promoters - % of detractors` and scores range between
 Any score above zero is technically good, but most sources put the industry average for B2B SaaS products somewhere [around +30](https://www.getbeamer.com/blog/good-nps-for-saas) to [+40](https://www.retently.com/blog/good-net-promoter-score/). 
 
 **Is it useful?** There's a reason NPS is an industry standard. Measuring NPS over time is a powerful way to understand the evolution of your product, and improving it is a clear sign your customers are happy with the changes you're making. Definitely worth tracking, but you need other metrics or follow-up questions to understand changes in your NPS score.
-
-> **Want to collect your NPS score in PostHog?** Try [the NPS survey app](/apps/nps-survey-app)!
 
 ### New user activation
 
@@ -224,7 +222,7 @@ For more inspiration around measuring product success, we recommend reading our 
 
 You may also find the following guides useful:
 
-- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): There's no universal standard for achieving market fit, but this guide introduces heuristics to help you find it
+- [How to achieve B2B product market fit](/blog/product-market-fit-game): There's no universal standard for achieving market fit, but this guide introduces heuristics to help you find it
 
 - [Finding your north star metric](/blog/north-star-metrics): All SaaS products can benefit from a north star metric and this guide will help you find one
 

@@ -144,11 +144,11 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: 'gatsby-starter-markdown',
+                name: 'PostHog - The open source Product OS',
                 short_name: 'starter',
                 start_url: '/',
-                background_color: '#f96132',
-                theme_color: '#f96132',
+                background_color: '#E5E7E0',
+                theme_color: '#E5E7E0',
                 display: 'minimal-ui',
                 icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
             },

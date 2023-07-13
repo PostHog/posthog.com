@@ -206,7 +206,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
 
     return (
         <li
-            className={`border-t border-dashed border-gray-accent-light first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-white rounded-sm shadow-xl ${
+            className={`px-4 py-4 sm:py-2 xl:pb-4 border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm ${
                 props?.className ?? ''
             }`}
         >
@@ -233,7 +233,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
             {githubPages && (
                 <div className="mt-4 mb-4">
                     <h5 className="text-sm mb-2 font-semibold opacity-60 !mt-0">Progress</h5>
-                    <div className="h-2 flex-grow bg-gray-accent-light rounded-md relative overflow-hidden">
+                    <div className="h-2 flex-grow bg-border dark:bg-border-dark rounded-md relative overflow-hidden">
                         <div
                             style={{ width: `${percentageComplete}%` }}
                             className={`bg-[#3FB950] absolute inset-0 h-full`}
@@ -267,7 +267,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     {showAuth ? (
                         <>
                             <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
-                            <div className="bg-tan p-4 mb-2">
+                            <div className="bg-border dark:bg-border-dark p-4 mb-2">
                                 <p className="text-sm mb-2">
                                     <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
                                 </p>
@@ -289,7 +289,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                         <button
                             disabled={loading}
                             onClick={() => (subscribed ? unsubscribe() : subscribe())}
-                            className="text-[15px] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold active:top-[0.5px] active:scale-[.98] w-auto"
+                            className="flex border border-b-3 border-light dark:border-dark rounded gap-2 p-2 font-bold bg-white dark:bg-accent-dark text-red dark:text-yellow"
                             data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
                         >
                             <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">

@@ -32,6 +32,12 @@ const fields = {
     linkedin: {
         label: 'LinkedIn',
     },
+    location: {
+        modOnly: true,
+    },
+    country: {
+        modOnly: true,
+    },
     biography: {
         component: () => (
             <Field
@@ -60,6 +66,8 @@ const ValidationSchema = Yup.object().shape({
     linkedin: Yup.string().url('Invalid URL').nullable(),
     twitter: Yup.string().url('Invalid URL').nullable(),
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
+    country: Yup.string().nullable(),
+    location: Yup.string().nullable(),
 })
 
 type EditProfileProps = {
@@ -135,7 +143,8 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
     if (!user) return null
 
     // TODO: Need to grab these from `attributes`
-    const { firstName, lastName, website, github, linkedin, twitter, biography, id, pronouns } = user?.profile || {}
+    const { firstName, lastName, website, github, linkedin, twitter, biography, id, location, country, pronouns } =
+        user?.profile || {}
 
     const avatar = getAvatarURL(user?.profile)
 
@@ -210,7 +219,19 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
 
     return (
         <Formik
-            initialValues={{ avatar, firstName, lastName, website, github, linkedin, twitter, pronouns, biography }}
+            initialValues={{
+                avatar,
+                firstName,
+                lastName,
+                website,
+                github,
+                linkedin,
+                twitter,
+                location,
+                country,
+                pronouns,
+                biography,
+            }}
             validationSchema={ValidationSchema}
             onSubmit={handleSubmit}
         >
@@ -218,7 +239,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                 return (
                     <Form className="m-0">
                         <h2>Update profile</h2>
-                        <p className="border border-dashed border-gray-accent-light dark:border-gray-accent-dark p-4 rounded-md mb-4">
+                        <p className=" dark:border-gray-accent-dark p-4 rounded-md mb-4">
                             <strong>Tip:</strong> Be sure to use full URLs when adding links to your website, GitHub,
                             LinkedIn and Twitter (start with https)
                         </p>
@@ -227,7 +248,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                                 const error = errors[key]
                                 const field = fields[key]
                                 const label = field?.label || capitalizeFirstLetter(key.replaceAll('_', ' '))
-
+                                if (field?.modOnly && user?.role?.type !== 'moderator') return null
                                 return (
                                     <div className={`${field?.className ?? 'w-1/2'} p-2`} key={key}>
                                         {!field?.hideLabel && <label htmlFor={key}>{label}</label>}

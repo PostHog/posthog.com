@@ -45,9 +45,7 @@ export function Crumb({ url, title, className = '', truncate, onClick, linkColor
         ...((url || onClick) && linkColor ? { color: linkColor } : {}),
     }
     return (
-        <li
-            className={`border-r border-gray-accent-light dark:border-gray-accent-dark border-dashed text-primary dark:text-primary-dark ${className}`}
-        >
+        <li className={`text-primary dark:text-primary-dark ${className}`}>
             {url ? (
                 <Link style={style} className={crumbText(`text-red hover:text-red`)} to={url} state={state}>
                     {title}
@@ -74,9 +72,7 @@ export default function Breadcrumbs({
     logo,
 }: BreadcrumbsProps): JSX.Element {
     return (
-        <ul
-            className={`list-none p-0 m-0 flex border-gray-accent-light dark:border-gray-accent-dark border-dashed border-t border-b ${className}`}
-        >
+        <ul className={`list-none p-0 m-0 flex ${className}`}>
             {logo && <Crumb url="/" title={<Logo className="w-5 h-4" color={linkColor} noText />} />}
             {children ||
                 (crumbs &&
@@ -84,7 +80,7 @@ export default function Breadcrumbs({
                         return <Crumb linkColor={linkColor} key={index} {...crumb} />
                     }))}
             {darkModeToggle && (
-                <li className="flex ml-auto border-l border-gray-accent-light dark:border-gray-accent-dark border-dashed">
+                <li className="flex ml-auto">
                     <DarkModeToggle />
                 </li>
             )}

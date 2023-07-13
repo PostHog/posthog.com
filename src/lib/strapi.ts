@@ -38,6 +38,7 @@ export type QuestionData = {
     archived: boolean
     activeAt: string
     pinnedTopics: StrapiData<TopicData[]>
+    slugs: { is: number; slug: string }[]
 }
 
 export type AvatarData = {
@@ -64,6 +65,7 @@ export type ProfileData = {
     user?: StrapiData<UserData>
     topicSubscriptions: StrapiData<TopicData[]>
     pronouns?: string | null
+    country: string | null
 }
 
 export type UserData = {

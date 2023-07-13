@@ -232,22 +232,15 @@ The main difference is, because Pendo is designed for less technical users, it o
 
 PostHog has ready-made apps for displaying pop-ups and tooltips, but the true power is in the ability to [build custom solutions](/tutorials/build-site-app).
 
-Below are some of the most popular ready-made apps which facilitate in-app messages in PostHog:
-
-- [NPS Survey App](/apps/nps-survey-app): Asks users how likely they are to recommend your product, on a scale of 0-10. Using this information, you can compute your Net Promoter Score. 
-
-- [Feedback Widget](/apps/feedback-widget): Displays a prompt with a text input, enabling users to write feedback messages that you can optionally sync to Slack, Zendesk or other tools using Zapier. 
+Below are some of the most popular ready-made apps which facilitate in-app messages in PostHog: 
 
 - [Notification Bar](/apps/notification-bar): Displays a customizable banner in your product, suitable for alerting users to important messages — like discounts, outages, or announcements.
-
-- [User Interviewer](/apps/user-interview): Displays a prompt to users that match a filter or cohort, inviting them to schedule an online interview. Syncs with Calendly to make scheduling easy. 
 
 - [Pineapple Mode](/apps/pineapple-mode): Rains pineapples all over your product, advancing the sense of chaos and entropy in the world. 🍍
 
 <h4 className="mb-4">Discover what's possible with <span className="text-blue">PostHog apps</span></h4>
 <TutorialsSlider slugs={[
   "/tutorials/build-site-app",
-  "/tutorials/feedback-interviews-site-apps",
   "/tutorials/build-your-own-posthog-app",
   "/tutorials/how-to-connect-discord-to-posthog-with-zapier",
   "/tutorials/react-popups"

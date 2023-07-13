@@ -2,7 +2,7 @@ The recommended way to set user properties is to include them when capturing an 
 
 <MultiLanguage selector="tabs">
 
-```javascript
+```js-web
 posthog.capture(
     'event_name', 
     { 
@@ -112,29 +112,28 @@ You can also set user properties when you call the [`identify`](/docs/data/ident
 
 <MultiLanguage selector="tabs">
 
-```javascript
+```js-web
 posthog.identify(
-    'distinct_id',
+    'distinct_id', // Replace 'distinct_id' with your user's unique identifier
     { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } 
-    {}, 
 );
 ```
 
 ```Android
 PostHog.with(this)
-       .identify(distinctID, new Properties()
+       .identify(distinctID, new Properties() // Replace 'distinctID' with your user's unique identifier
                                 .putValue("name", "My Name")
                                 .putValue("email", "user@posthog.com"));
 ```
 
 ```iOS
-posthog.identify("distinct_id", 
+posthog.identify("distinct_id", // Replace 'distinct_id' with your user's unique identifier
           properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"])
 ```
 
 </MultiLanguage>
 
-User property values can be strings, booleans, numbers, objects, or arrays.  For objects and arrays, you can use [HogQL](/docs/product-analytics/hogql) to access nested properties in the PostHog app.
+User property values can be strings, booleans, numbers, objects, or arrays.  For objects and arrays, you can use [HogQL](/docs/hogql) to access nested properties in the PostHog app.
 
 > Note that user properties are set in the order the events are ingested, and not according to event timestamps. Since we typically ingest events as soon as we receive them, you only need to take this into consideration when you're [importing historical data](/docs/migrate/ingest-historic-data).
 

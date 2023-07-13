@@ -17,7 +17,7 @@ tags:
 
 Since starting PostHog in 2020, we’ve learned a bunch about what does and doesn’t work when it comes to marketing to engineers. There are plenty of articles about ‘developer marketing’ out there, but most of them are either generic or focused on later stage companies. 
 
-In this intro article, my intention is to share specific, actionable advice for early stage startups building dev tools. I’ve bucketed advice into pre- and post-product-market fit.
+In this intro article, my intention is to share specific, actionable advice for early-stage startups building dev tools. I’ve bucketed advice into pre- and post-[product-market fit](/blog/product-market-fit-game).
 
 I’ve also included a couple of channels that we haven’t nailed but know other successful dev tool companies consider important. We’re still learning, and definitely haven’t figured everything out!
 

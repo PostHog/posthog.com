@@ -57,7 +57,7 @@ export const Combobox = (props: ComboboxProps) => {
                             onChange={(event) => setQuery(event.target.value)}
                             displayValue={props.display}
                             placeholder={currentValue || props.placeholder || 'Select a value'}
-                            className={`relative block w-full text-left bg-white dark:bg-gray-accent-dark px-2.5 py-1.5 rounded border border-black/10 text-sm select-none focus-visible:outline-none focus:ring-1 focus:ring-orange focus:border-orange placeholder:text-gray-600 ${
+                            className={`relative block w-full text-left bg-white dark:bg-accent-dark px-2.5 py-1.5 rounded border border-black/10 dark:border-dark text-sm select-none focus-visible:outline-none focus:ring-1 focus:ring-orange focus:border-orange placeholder:text-primary/50 dark:placeholder:text-primary-dark/50 ${
                                 focused ? '' : 'cursor-pointer'
                             }`}
                         />

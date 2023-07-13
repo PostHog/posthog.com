@@ -6,45 +6,54 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import { LinkGrid } from 'components/Docs/LinkGrid'
 import { graphql, PageProps } from 'gatsby'
+import List from 'components/List'
+import { CallToAction } from 'components/CallToAction'
+import { LightBulb } from '@posthog/icons'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const quickLinks = [
     {
-        icon: 'Analytics',
+        icon: 'Graph',
         name: 'Product analytics',
         to: '/docs/product-analytics',
         description: 'Better understand your users and build better products',
+        color: 'blue',
     },
     {
-        icon: 'SessionRecording',
+        icon: 'RewindPlay',
         name: 'Session recording',
         to: '/docs/session-replay',
         description: 'Play back sessions to diagnose UI issues and get inspired',
+        color: 'yellow',
     },
     {
-        icon: 'FeatureFlags',
+        icon: 'Toggle',
         name: 'Feature flags',
         to: '/docs/feature-flags',
         description: 'Toggle features to test the impact before rolling out',
+        color: 'seagreen',
     },
     {
-        icon: 'AbTesting',
+        icon: 'Flask',
         name: 'A/B testing',
         to: '/docs/experiments',
         description: 'A/B test UI changes and new features',
+        color: 'purple',
     },
     {
-        icon: 'DataManagement',
-        name: 'Data',
-        to: '/docs/data',
+        icon: 'Person',
+        name: 'CDP',
+        to: '/docs/cdp',
         description: 'Get a complete picture of all your data',
+        color: 'yellow',
     },
     {
-        icon: 'AppLibrary',
-        name: 'Apps',
-        to: '/docs/apps',
+        icon: 'Server',
+        name: 'Data warehouse',
+        to: '/docs/data-warehouse',
         description: 'Extend PostHog by adding your own functionality',
+        color: 'teal',
     },
 ]
 
@@ -121,7 +130,7 @@ const ImportantLink: React.FC<ImportantLinkProps> = ({ to, icon, title, badge, c
 
     return (
         <Link
-            className="text-almost-black hover:text-almost-black dark:text-white dark:hover:text-white font-semibold p-2 hover:bg-gray-accent/40 active:hover:bg-gray-accent/60 dark:hover:bg-gray-accent/10 dark:active:bg-gray-accent/5 rounded flex items-center space-x-2 text-[14px]"
+            className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark font-semibold p-2 hover:bg-gray-accent/40 active:hover:bg-gray-accent/50 dark:hover:bg-gray-accent/10 dark:active:bg-gray-accent/5 rounded flex items-center space-x-2 text-[14px]"
             to={to}
         >
             {icon ? <img src={icon} className="w-5 h-5" /> : children || null}
@@ -190,131 +199,94 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
             <SEO title="Documentation - PostHog" />
 
             <PostLayout article={false} title={'Docs'} menu={docs} hideSidebar hideSurvey>
-                <div className="space-y-16 lg:space-y-20 lg:mt-0 mt-8 mb-8">
-                    <section className="border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark pb-8">
-                        <div className="w-full z-20">
+                <section className="mb-4 flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
+                    <div className="flex-1 text-center sm:text-left">
+                        <h2>New to PostHog?</h2>
+                        <p className="text-[15px]">
+                            The getting started guide covers adding PostHog to your app or site, sending events,
+                            identifying users, creating actions and insights, and assigning properties to users and
+                            users to groups.
+                        </p>
+                        <CallToAction
+                            to="/docs/getting-started/install"
+                            type="primary"
+                            size="md"
+                            className="!w-full sm:!w-auto"
+                        >
+                            Get started
+                        </CallToAction>
+                    </div>
+                    <aside>
+                        <figure className="m-0">
                             <StaticImage
                                 objectFit="contain"
-                                src="../../../contents/images/search-hog-3.png"
-                                alt="This hog has an answer"
-                                width={400}
+                                src="../../../contents/images/adventure-hog.png"
+                                alt="This hog knows where he's headed"
+                                width={342}
                                 placeholder="blurred"
-                                className="w-full sm:w-[400px] sm:float-right sm:ml-8 sm:-mt-8 mb-8"
+                                className="w-full sm:w-[345px]"
                             />
-                            <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl mb-2 whitespace-nowrap">
-                                Documentation
-                            </h1>
-                            <h5 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tighttext-lg text-gray pb-8">
-                                New to PostHog? Visit the{' '}
-                                <Link to="/docs/getting-started/start-here" className="font-semibold">
-                                    getting started guide
-                                </Link>
-                                .
-                            </h5>
-                        </div>
+                        </figure>
+                    </aside>
+                </section>
 
-                        <LinkGrid links={quickLinks} />
-                    </section>
-
-                    <section className="space-y-8">
-                        <div className="text-center">
-                            <h2 className="font-bold mb-1 inline-block w-full">Quick links</h2>
-                        </div>
-
-                        <div className="grid grid-cols-1 xl:grid-cols-3 gap-x-4 rounded xl:rounded-none overflow-hidden">
-                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark lg:rounded px-6 py-4">
-                                <div className="mb-3">
-                                    <h4 className="font-bold mb-0">Getting started</h4>
-                                    <p className="text-sm text-gray">Complete guide to getting set-up</p>
-                                </div>
-
-                                <ul className="grid sm:grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {gettingStartedLinks.map((step, index) => {
-                                        return (
-                                            <li className="flex-grow" key={step.fields.slug}>
-                                                <ImportantLink to={step.fields.slug} title={step.frontmatter.title}>
-                                                    <div className="bg-red text-white w-5 h-5 flex items-center justify-center rounded opacity-60 text-xs">
-                                                        <span>{index + 1}</span>
-                                                    </div>
-                                                </ImportantLink>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-
-                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
-                                <div className="mb-3">
-                                    <h4 className="font-bold mb-0">Popular SDKs</h4>
-                                    <p className="text-sm text-gray">Integrate with your favoriate language</p>
-                                </div>
-                                <ul className="grid grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {sdks.nodes.map((sdk) => {
-                                        return (
-                                            <li className="flex-grow" key={sdk.fields.slug}>
-                                                <ImportantLink
-                                                    to={sdk.fields.slug}
-                                                    title={sdk.frontmatter.title}
-                                                    icon={sdk.frontmatter.icon?.publicURL}
-                                                    badge={undefined}
-                                                />
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-
-                            <div className="bg-gray-accent-light dark:bg-gray-accent-dark xl:rounded px-6 py-4">
-                                <div className="mb-3">
-                                    <h4 className="font-bold mb-0">Popular data connections</h4>
-                                    <p className="text-sm text-gray">Import, transform, and export data</p>
-                                </div>
-                                <ul className="grid sm:grid-cols-2 xl:grid-cols-1 w-full list-none m-0 p-0 space-y-1">
-                                    {pipelines.nodes.map((pipeline) => {
-                                        return (
-                                            <li className="flex-grow" key={pipeline.fields.slug}>
-                                                <ImportantLink
-                                                    to={pipeline.fields.slug}
-                                                    title={pipeline.frontmatter.title}
-                                                    icon={pipeline.frontmatter.thumbnail?.publicURL}
-                                                    badge={undefined}
-                                                />
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section className="space-y-8">
-                        <div className="text-center">
-                            <h2 className="font-bold mb-1">More handy links</h2>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark">
-                            {otherLinks.map((category) => {
-                                return (
-                                    <div
-                                        key={category.name}
-                                        className="space-y-2 py-4 md:py-6 px-4 md:px-8 border-dashed border-b border-r border-gray-accent-light dark:border-gray-accent-dark"
-                                    >
-                                        <h4 className="mb-0">{category.name}</h4>
-                                        <ul className="p-0 space-y-1">
-                                            {category.links.map((link) => {
-                                                return (
-                                                    <li key={link.to} className="list-none">
-                                                        <Link to={link.to}>{link.name}</Link>
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </section>
+                <div className="flex gap-1 items-center mb-8">
+                    <LightBulb className="w-6 h-6 text-primary dark:text-primary-dark opacity-50" />
+                    <p className="text-sm m-0">
+                        <strong>Tip:</strong> Open search with <KeyboardShortcut text="/" /> , then{' '}
+                        <KeyboardShortcut text="Tab" size="sm" /> to search docs
+                    </p>
                 </div>
+
+                <section className="grid md:grid-cols-3 gap-4 mb-8">
+                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                        <h3 className="text-xl mb-2">Data</h3>
+                        <p className="text-[15px]">
+                            Learn how to manage events and customer data for use with all PostHog products.
+                        </p>
+                        <CallToAction to="/docs/data" type="outline" size="md" className="!w-full sm:!w-auto">
+                            Get started
+                        </CallToAction>
+                    </div>
+                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                        <h3 className="text-xl mb-2">Apps</h3>
+                        <p className="text-[15px]">
+                            Extend functionality with third-party apps that integrate into the PostHog ecosystem.
+                        </p>
+                        <div className="flex items-center gap-4">
+                            <CallToAction to="/docs/apps" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Get started
+                            </CallToAction>
+                            <Link to="/apps" className="text-sm">
+                                Browse apps
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                        <h3 className="text-xl mb-2">API</h3>
+                        <p className="text-[15px]">
+                            Push or pull data to build custom functionality or create bespoke views for your business
+                            needs.
+                        </p>
+                        <CallToAction to="/docs/api" type="outline" size="md" className="!w-full sm:!w-auto">
+                            Explore
+                        </CallToAction>
+                    </div>
+                </section>
+
+                <section className="mb-4 lg:flex-row gap-4 lg:gap-8">
+                    <h2>Products</h2>
+                    <List
+                        className="grid md:grid-cols-2 gap-1"
+                        items={quickLinks.map(({ icon, name, to, description, color }) => ({
+                            label: name,
+                            url: to,
+                            icon,
+                            description,
+                            iconColor: color,
+                        }))}
+                    />
+                </section>
             </PostLayout>
         </Layout>
     )

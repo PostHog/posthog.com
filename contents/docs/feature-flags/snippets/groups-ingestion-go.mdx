@@ -8,7 +8,7 @@ go get -u github.com/posthog/posthog-go
 ```go
 // Capturing an event with groups
 client.Enqueue(posthog.Capture{
-    DistinctId: "[distinct id]",
+    DistinctId: "[user distinct id]",
     Event:      "some event",
     Groups: posthog.NewGroups().
         Set("company", "id:5").

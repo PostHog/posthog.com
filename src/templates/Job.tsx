@@ -13,6 +13,7 @@ import { benefits } from 'components/Careers/Benefits'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { companyMenu } from '../navs'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -93,9 +94,9 @@ export default function Job({
     ]
 
     return (
-        <Layout>
+        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[6]}>
             <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
-            <div className="border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+            <div className="">
                 <PostLayout
                     tableOfContents={[
                         ...tableOfContents,
@@ -159,7 +160,6 @@ export default function Job({
                                                     location: `The benchmark for each role we are hiring for is based on the market rate in San Francisco.`,
                                                     level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
                                                 }}
-                                                hideFormula
                                                 hideRole
                                                 initialJob={salaryRole}
                                             />
@@ -192,10 +192,7 @@ export default function Job({
                                             <ul className="list-none !m-0 p-0 grid gap-y-4">
                                                 {gitHubIssues.map(({ url, number, title, labels }) => {
                                                     return (
-                                                        <li
-                                                            key={title}
-                                                            className="flex flex-col md:flex-row md:items-center"
-                                                        >
+                                                        <li key={title} className="flex flex-col ">
                                                             <div className="flex space-x-2">
                                                                 <Link to={url} className="block w-[60px] md:w-auto">
                                                                     <span className="font-semibold text-sm text-black/50 hover:text-black/75 dark:text-white/50 dark:hover:text-white/75 font-code">
@@ -205,7 +202,7 @@ export default function Job({
                                                                 <Link to={url}>{title}</Link>
                                                             </div>
                                                             {labels && labels.length > 0 && (
-                                                                <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-2 !mt-0 !mb-0 p-0 flex items-center space-x-1">
+                                                                <ul className="list-none !ml-[calc(60px+.25rem)] md:!ml-14 !mt-0 !mb-0 p-0 flex items-center space-x-1">
                                                                     {labels.map(({ name, url }, index) => {
                                                                         return (
                                                                             <li key={name + index}>
@@ -267,6 +264,7 @@ export const query = graphql`
             }
         ) {
             nodes {
+                squeakId
                 firstName
                 lastName
                 country
@@ -280,6 +278,7 @@ export const query = graphql`
             filter: { teams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } } }
         ) {
             nodes {
+                squeakId
                 firstName
                 lastName
                 country

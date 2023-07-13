@@ -236,7 +236,13 @@
             },
             {
                 "name": "Finance",
-                "url": "/handbook/people/finance"
+                "url": "/handbook/people/finance",
+                "children": [
+                    {
+                        "name": "Fundraising",
+                        "url": "/handbook/people/finance/fundraising"
+                    }
+                ]
             },
             {
                 "name": "Merch store",
@@ -553,7 +559,7 @@
         ]
     },
     {
-        "name": "Marketing & Content",
+        "name": "Marketing & content",
         "url": "",
         "children": [
             {

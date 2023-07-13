@@ -78,14 +78,7 @@ export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, 
                             type="password"
                             placeholder="Password..."
                         />
-                        <Button
-                            className={`font-bold w-full relative ${
-                                isLoading || !isValid
-                                    ? 'opacity-50 cursor-not-allowed'
-                                    : 'bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px]'
-                            }`}
-                            type="submit"
-                        >
+                        <Button disabled={isLoading || !isValid} type="submit" width="full">
                             {buttonText}
                         </Button>
                     </Form>

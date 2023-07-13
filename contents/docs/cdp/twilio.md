@@ -1,5 +1,5 @@
 ---
-title: Twilio Connector
+title: Twilio
 github: https://github.com/PostHog/posthog-twilio-plugin
 installUrl: https://app.posthog.com/project/apps?name=posthog-twilio-plugin
 thumbnail: ../../cdp/thumbnails/twilio.png
@@ -37,7 +37,7 @@ Additionally, you will need to know your Twilio Phone Number. Follow [Twilio's d
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Twilio Connector app](https://github.com/PostHog/posthog-twilio-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-twilio-plugin) is available on GitHub.
 
 ### Who created this app?
 
@@ -54,8 +54,6 @@ This app is maintained by the community. If you have issues with the app not fun
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 

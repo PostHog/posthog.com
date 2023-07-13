@@ -29,8 +29,8 @@ Body:
 {
     "api_key": "<ph_project_api_key>",
     "event": "[event name]",
+    "distinct_id": "[your users' distinct id]",
     "properties": {
-        "distinct_id": "[your users' distinct id]",
         "key1": "value1",
         "key2": "value2"
     },
@@ -78,8 +78,8 @@ Additionally, if you're self-hosting, you'll have to substitute `https://app.pos
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
+    "distinct_id": "123",
     "properties": {
-        "distinct_id": "123",
         "alias": "456"
     },
     "timestamp": "2020-08-16 09:03:11.913767",
@@ -120,8 +120,8 @@ curl -v -L --header "Content-Type: application/json" -d '{
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "event": "$groupidentify",
+    "distinct_id": "groups_setup_id",
     "properties": {
-        "distinct_id": "groups_setup_id",
         "$group_type": "<group_type>",
         "$group_key": "<company_name>",
         "$group_set": {
@@ -261,7 +261,7 @@ As such, to create feature flags, you will need to use another endpoint, which w
 
 #### /decide
 
-`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not. This endpoint is used by our [JavaScript Library's](/docs/integrate/client/js) methods for feature flags.
+`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not. This endpoint is used by our [JavaScript web library's](/docs/integrate/client/js) methods for feature flags.
 
 To get the feature flags that are enabled for a given user, you will need to perform the following request:
 

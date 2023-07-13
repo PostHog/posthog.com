@@ -271,10 +271,10 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 ```go
 client.Enqueue(posthog.Capture{
-    DistinctId: "[distinct id]",
+    DistinctId: "[user distinct id]",
     Event:      "some event",
     Groups: posthog.NewGroups().
-        Set("company", "42dlsfj23f").
+        Set("company", "company_id_in_your_db").
 })
 ```
 
@@ -283,7 +283,7 @@ client.Enqueue(posthog.Capture{
 ```go
 client.Enqueue(posthog.GroupIdentify{
     Type: "company",
-    Key:  "42dlsfj23f",
+    Key:  "company_id_in_your_db",
     Properties: posthog.NewProperties().
         Set("name", "Awesome Inc.").
         Set("employees", 11),

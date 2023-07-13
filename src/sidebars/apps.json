@@ -2,9 +2,5 @@
     {
         "name": "App Store",
         "url": "/apps"
-    },
-    {
-        "name": "User Interviewer",
-        "url": "/apps/user-interview"
     }
 ]

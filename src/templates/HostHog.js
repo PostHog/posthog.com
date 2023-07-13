@@ -38,7 +38,7 @@ export default function HostHog({ data }) {
 
     const WhereWhen = () => {
         return (
-            <div className="flex space-x-8 border-t border-dashed border-gray-accent-light pt-4 sm:mb-0 mb-4">
+            <div className="flex space-x-8  pt-4 sm:mb-0 mb-4">
                 <div>
                     <h4 style={{ margin: '0px 0px 4px 0px', fontSize: 14 }} className="text-black opacity-50">
                         Where

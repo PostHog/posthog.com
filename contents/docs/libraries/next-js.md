@@ -90,12 +90,15 @@ export default function App({ Component, pageProps }) {
 
 ### App router
 
-If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers.js` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/getting-started/react-essentials#client-components). 
+If your Next.js app to uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/getting-started/react-essentials#client-components).
+
+We need to export the `PostHogPageview` component containing [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) as [deopts](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering if not wrapped in a `<Suspense>`.
+
+<MultiLanguage>
 
 ```js
 // app/providers.js
 'use client'
-
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import { usePathname, useSearchParams } from "next/navigation";
@@ -107,8 +110,7 @@ if (typeof window !== 'undefined') {
   })
 }
 
-export default function PHProvider({ children }) {
-
+export function PostHogPageview() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   // Track pageviews
@@ -126,28 +128,106 @@ export default function PHProvider({ children }) {
       )
     }
   }, [pathname, searchParams])
+}
 
+export function PHProvider({ children }) {
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
 
-Once created, you can import the `providers.js` file into your `app/layout.js` file, then wrap your app in the provider component.
+```ts
+// app/providers.tsx
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST
+  })
+}
+
+export function PostHogPageview(): JSX.Element {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (pathname) {
+      let url = window.origin + pathname;
+      if (searchParams && searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`;
+      }
+      posthog.capture("$pageview", {
+        $current_url: url,
+      });
+    }
+  }, [pathname, searchParams]);
+
+  return <></>;
+}
+
+export function PHProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+</MultiLanguage>
+
+Once created, you can import the `PostHogPageview` and `PHProvider` components into your `app/layout` file, then wrap your app in the provider component and your pageview in a suspense.
+
+<MultiLanguage>
 
 ```js
 // app/layout.js
 import './globals.css'
-import Providers from './providers'
+import { PHProvider, PostHogPageview } from './providers'
+import { Suspense } from 'react'
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Providers>
+      <Suspense>
+        <PostHogPageview />
+      </Suspense>
+      <PHProvider>
         <body>{children}</body>
-      </Providers>
+      </PHProvider>
     </html>
   )
 }
 ```
+
+```ts
+// app/layout.tsx
+import './globals.css'
+import { ReactNode, Suspense } from 'react';
+import { PHProvider, PostHogPageview } from './providers';
+
+export default function RootLayout({
+  children,
+}: {
+  children: ReactNode
+}) {
+  return (
+    <html lang="en">
+      <Suspense>
+        <PostHogPageview />
+      </Suspense>
+      <PHProvider>
+        <body>{children}</body>
+      </PHProvider>
+    </html>
+  )
+}
+```
+
+</MultiLanguage>
 
 Files and components accessing PostHog on the client-side need the `'use client'` directive.
 

@@ -1,7 +1,8 @@
 ---
 title: How Contra used session replays to increase registrations by 30%
 customer: Contra
-logo: ../images/customers/contra/contra_logo.png
+logo: ../images/customers/contra/contra_logo.svg
+logoDark: ../images/customers/contra/contra_logo_dark.svg
 featuredImage: ../images/customers/contra/contra_featured.png
 industries:
     - Saas
@@ -25,13 +26,13 @@ As a result of spreading functionality across multiple tools, Contra also faced 
 Switching to PostHog enabled Contra to consolidate feature flags, session replays, product analytics and more into a single tool — but it also enabled the company to come together around a single platform as well. Instead of each team in the company relying on a different software, everyone was able to look at a single source of truth.
 
 <BorderWrapper>
-    <Quote
-        imageSource="/images/customers/allison.jpg"
-        size="md"
-        name="Allison Nulty"
-        title="Head of Product, Contra "
-        quote={`“A huge competitive advantage has been the ability to talk directly with PostHog engineers over Slack. We share feedback, ask questions, and make requests and always see a quick response time and thoughtful suggestions. At Contra, we apply these same principles of collaborating with our community to build our product.”`}
-    />
+<Quote
+    imageSource="/images/customers/allison.jpg"
+    size="sm"
+    name="Allison Nulty"
+    title="Head of Product, Contra "
+    quote={`“A huge competitive advantage has been the ability to talk directly with PostHog engineers over Slack. We share feedback, ask questions, and make requests and always see a quick response time and thoughtful suggestions. At Contra, we apply these same principles of collaborating with our community to build our product.”`}
+/>
 </BorderWrapper>
 
 “Previously the teams all used different tools,” said Allison. “That led to a lot of confusion, because our feature flag platform didn't integrate with our analytics platform, or our session replay tool. That made it difficult to use feature flag data to build better user journeys or understand drop-offs.”

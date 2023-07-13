@@ -17,6 +17,7 @@ import PostLayout from 'components/PostLayout'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Topics from 'components/PostLayout/Topics'
 import { capitalizeFirstLetter } from '../../src/utils'
+import { communityMenu } from '../navs'
 
 const AppSidebar = ({ filters: { type, maintainer } }) => {
     return (
@@ -47,8 +48,8 @@ const AppSidebar = ({ filters: { type, maintainer } }) => {
     )
 }
 
-export default function App({ data, pageContext: { next, previous } }) {
-    const { pageData, documentation } = data
+export default function App({ data }) {
+    const { pageData, documentation, apps } = data
     const {
         body,
         excerpt,
@@ -81,7 +82,7 @@ export default function App({ data, pageContext: { next, previous } }) {
     }
 
     return (
-        <Layout>
+        <Layout parent={communityMenu}>
             <SEO
                 image={`/images/apps/${slug.split('/')[2]}.png`}
                 title={`${title} - PostHog`}
@@ -94,10 +95,7 @@ export default function App({ data, pageContext: { next, previous } }) {
                     {
                         name: 'Apps',
                     },
-                    {
-                        name: '← Back',
-                        url: '/apps',
-                    },
+                    ...apps.nodes.map(({ frontmatter: { title }, fields: { slug } }) => ({ name: title, url: slug })),
                 ]}
                 breadcrumb={[{ name: 'Apps', url: '/apps' }, { name: title }]}
             >
@@ -112,9 +110,6 @@ export default function App({ data, pageContext: { next, previous } }) {
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
                 </article>
-                <div className="mt-12">
-                    <SectionLinks next={next} previous={previous} />
-                </div>
                 <div className="mb-12">
                     <FooterCTA />
                 </div>
@@ -150,6 +145,17 @@ export const query = graphql`
             headings {
                 depth
                 value
+            }
+        }
+        apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
+            nodes {
+                id
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                }
             }
         }
     }

@@ -138,7 +138,7 @@ export default function({ app: { router } }, inject) {
 
 Finally, we need to activate it on the client side in our `nuxt.config.js`
 
-```javascript
+```js
 plugins: [
     ...
     { src: './plugins/posthog', mode: 'client' }
@@ -152,7 +152,7 @@ Compare with the [Nuxt.js docs](https://nuxtjs.org/docs/2.x/directory-structure/
 
 Let's say for example the user makes a purchase you could track an event like that:
 
-```javascript
+```js-web
 <template>
   <button @click="purchase">Buy</button>
 </template>
