@@ -1,10 +1,10 @@
 ---
-title: BitBucket Release Tracker
+title: BitBucket
 github: https://github.com/PostHog/bitbucket-release-tracker
 installUrl: https://app.posthog.com/project/apps?name=Bitbucket+Release+Tracker
 thumbnail: ../../cdp/thumbnails/bitbucket-release-tracker.png
 tags:
-    - bitbucket-release-tracker
+    - bitbucket
 ---
 
 ## Installation
@@ -14,13 +14,13 @@ To install this app, follow these simple steps...
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
 3. Search for 'BitBucket'
-4. Select the BitBucket Release Tracker app, press 'Install'
+4. Select the BitBucket app, press 'Install'
 
 And follow the on-screen instructions to complete configuration.
 
 ## Requirements
 
-The BitBucket Release Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -32,11 +32,11 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Bitbucket Release Tracker](https://github.com/PostHog/bitbucket-release-tracker) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/bitbucket-release-tracker) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Michael Matloka](https://github.com/Twixes) for creating the Bitbucket Release Tracker.
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Michael Matloka](https://github.com/Twixes) for creating this.
 
 ### Who maintains this app?
 

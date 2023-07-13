@@ -4,7 +4,7 @@ import { layoutLogic } from '../../logic/layoutLogic'
 import Link from 'components/Link'
 import { useSearch } from 'components/Search/SearchContext'
 
-import { App, Brightness, Chat, Search, TextWidth, User } from 'components/NewIcons'
+import { App, Brightness, Chat, Search, TextWidth, User } from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
 import React, { useEffect, useRef, useState } from 'react'
@@ -13,7 +13,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import { useLocation } from '@reach/router'
 import Toggle from 'components/Toggle'
 import usePostHog from 'hooks/usePostHog'
-import * as icons from 'components/NewIcons'
+import * as icons from '@posthog/icons'
 import HoverTooltip from 'components/Tooltip'
 import { SignupCTA } from 'components/SignupCTA'
 

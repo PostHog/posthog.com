@@ -1,5 +1,5 @@
 ---
-title: Amazon S3 Export
+title: Amazon S3
 github: https://github.com/PostHog/s3-export-plugin
 thumbnail: ../../cdp/thumbnails/s3.svg
 official: true
@@ -24,7 +24,7 @@ Once the app has been configured, you can enable it by flipping the toggle and i
 
 ### PostHog Self-hosted
 
-> The S3 Export Plugin requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
+> This requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
 > Not running 1.24.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 1. Log in to your PostHog instance

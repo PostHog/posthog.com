@@ -1,4 +1,4 @@
-import { Graph, RewindPlay, Toggle, Flask, Person, Server, Database, Terminal } from './../../NewIcons'
+import { Graph, RewindPlay, Toggle, Flask, Person, Server, Database, Terminal } from '@posthog/icons'
 
 export const slideButtons = [
     {

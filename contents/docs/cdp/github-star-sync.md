@@ -1,5 +1,5 @@
 ---
-title: GitHub Star Sync
+title: GitHub Stars
 github: https://github.com/PostHog/github-star-sync-plugin
 installUrl: https://app.posthog.com/project/apps?name=Github+Star+Sync
 thumbnail: ../../cdp/thumbnails/github.png
@@ -7,11 +7,11 @@ tags:
     - star-sync
 ---
 
-The GitHub Star Sync app enables you to track your GitHub stars as an event in PostHog. Because Stars are important!
+Track your GitHub stars as an event in PostHog. Because Stars are important!
 
 ## Requirements
 
-The GitHub Star Sync app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -31,11 +31,11 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the GitHub Star Sync app](https://github.com/PostHog/github-star-sync-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/github-star-sync-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), and [Marius Andra](https://github.com/mariusandra) and [Tim Glaser](https://github.com/timgl) for creating the GitHub Star Sync app.
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), and [Marius Andra](https://github.com/mariusandra) and [Tim Glaser](https://github.com/timgl) for creating this.
 
 ### Who maintains this app?
 

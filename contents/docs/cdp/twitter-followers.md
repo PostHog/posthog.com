@@ -1,5 +1,5 @@
 ---
-title: Twitter Followers Tracker
+title: Twitter
 github: https://github.com/PostHog/twitter-followers-plugin
 installUrl: https://app.posthog.com/project/apps?name=Twitter+Followers
 thumbnail: ../../cdp/thumbnails/twitter-followers.png
@@ -7,7 +7,7 @@ tags:
     - twitter-followers
 ---
 
-The Twitter Followers Tracker requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+Requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -37,11 +37,11 @@ To view your follower count as a PostHog Insight, do the following:
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Twitter Followers Tracker](https://github.com/PostHog/twitter-followers-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/twitter-followers-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra) for creating the Twitter Followers Tracker. Thank you, both!
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra) for creating this. Thank you, both!
 
 ### Who maintains this app?
 

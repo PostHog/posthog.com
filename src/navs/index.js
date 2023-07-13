@@ -1114,10 +1114,6 @@ export const docsMenu = {
                             url: '/docs/data/cohorts',
                         },
                         {
-                            name: 'Data management',
-                            url: '/docs/data/data-management',
-                        },
-                        {
                             name: 'Events',
                             url: '/docs/data/events',
                         },
@@ -2082,11 +2078,11 @@ export const docsMenu = {
                     children: [
                         {
                             url: '/docs/cdp/amazon-kinesis',
-                            name: 'Amazon Kinesis Import',
+                            name: 'Amazon Kinesis',
                         },
                         {
                             url: '/docs/cdp/bitbucket-release-tracker',
-                            name: 'BitBucket Release Tracker',
+                            name: 'BitBucket',
                         },
                         {
                             url: '/docs/cdp/replicator',
@@ -2094,15 +2090,15 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/github-release-tracker',
-                            name: 'GitHub Release Tracker',
+                            name: 'GitHub Releases',
                         },
                         {
                             url: '/docs/cdp/github-star-sync',
-                            name: 'GitHub Star Sync',
+                            name: 'GitHub Stars',
                         },
                         {
                             url: '/docs/cdp/gitlab-release-tracker',
-                            name: 'GitLab Release Tracker',
+                            name: 'GitLab',
                         },
                         {
                             url: '/docs/cdp/heartbeat',
@@ -2118,35 +2114,43 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/n8n',
-                            name: 'n8n Connector',
+                            name: 'n8n',
                         },
                         {
                             url: '/docs/cdp/orbit',
-                            name: 'Orbit Connector',
+                            name: 'Orbit',
                         },
                         {
                             url: '/docs/cdp/redshift-import',
-                            name: 'Redshift Import',
+                            name: 'Redshift',
                         },
                         {
                             url: '/docs/cdp/rudderstack-import',
-                            name: 'Rudderstack Import',
+                            name: 'Rudderstack',
                         },
                         {
                             url: '/docs/cdp/segment',
-                            name: 'Segment Connector',
+                            name: 'Segment',
+                        },
+                        {
+                            url: '/docs/cdp/sentry-connector',
+                            name: 'Sentry',
                         },
                         {
                             url: '/docs/cdp/shopify',
-                            name: 'Shopify Connector',
+                            name: 'Shopify',
                         },
                         {
                             url: '/docs/cdp/twitter-followers',
-                            name: 'Twitter Followers Tracker',
+                            name: 'Twitter',
+                        },
+                        {
+                            url: '/docs/cdp/zapier-connector',
+                            name: 'Zapier',
                         },
                         {
                             url: '/docs/cdp/zendesk-connector',
-                            name: 'Zendesk Connector',
+                            name: 'Zendesk',
                         },
                     ],
                 },
@@ -2156,11 +2160,11 @@ export const docsMenu = {
                     children: [
                         {
                             url: '/docs/cdp/airbyte-export',
-                            name: 'Airbyte Exporter',
+                            name: 'Airbyte',
                         },
                         {
                             url: '/docs/cdp/s3-export',
-                            name: 'Amazon S3 Export',
+                            name: 'Amazon S3',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2168,11 +2172,11 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/avo-inspector',
-                            name: 'Avo Inspector',
+                            name: 'Avo',
                         },
                         {
                             url: '/docs/cdp/bigquery-export',
-                            name: 'BigQuery Export',
+                            name: 'BigQuery',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2180,7 +2184,7 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/customer-io',
-                            name: 'Customer.io Connector',
+                            name: 'Customer.io',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2188,35 +2192,39 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/databricks',
-                            name: 'Databricks Export',
+                            name: 'Databricks',
                         },
                         {
                             url: '/docs/cdp/engage-connector',
-                            name: 'Engage Connector',
+                            name: 'Engage.so',
+                        },
+                        {
+                            url: '/docs/cdp/replicator',
+                            name: 'Event Replicator',
                         },
                         {
                             url: '/docs/cdp/google-pub-sub-connector',
-                            name: 'GCP Pub/Sub Connector',
+                            name: 'GCP Pub/Sub',
                         },
                         {
                             url: '/docs/cdp/google-cloud-export',
-                            name: 'Google Cloud Storage Export',
+                            name: 'Google Cloud Storage',
                         },
                         {
                             url: '/docs/cdp/hubspot-connector',
-                            name: 'Hubspot Connector',
+                            name: 'Hubspot',
                         },
                         {
                             url: '/docs/cdp/intercom',
-                            name: 'Intercom Connector',
+                            name: 'Intercom',
                         },
                         {
                             url: '/docs/cdp/pagerduty-connector',
-                            name: 'PagerDuty Connector',
+                            name: 'PagerDuty',
                         },
                         {
                             url: '/docs/cdp/postgres-export',
-                            name: 'PostgreSQL Export',
+                            name: 'PostgreSQL',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2224,27 +2232,27 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/redshift-export',
-                            name: 'Redshift Export',
+                            name: 'Redshift',
                         },
                         {
                             url: '/docs/cdp/rudderstack-export',
-                            name: 'RudderStack Export',
+                            name: 'RudderStack',
                         },
                         {
                             url: '/docs/cdp/salesforce-connector',
-                            name: 'Salesforce Connector',
+                            name: 'Salesforce',
                         },
                         {
                             url: '/docs/cdp/sendgrid-connector',
-                            name: 'Sendgrid Connector',
+                            name: 'Sendgrid',
                         },
                         {
                             url: '/docs/cdp/sentry-connector',
-                            name: 'Sentry Connector',
+                            name: 'Sentry',
                         },
                         {
                             url: '/docs/cdp/snowflake-export',
-                            name: 'Snowflake Export',
+                            name: 'Snowflake',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2252,19 +2260,19 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/twilio',
-                            name: 'Twilio Connector',
+                            name: 'Twilio',
                         },
                         {
                             url: '/docs/cdp/variance-connector',
-                            name: 'Variance Connector',
+                            name: 'Variance',
                         },
                         {
                             url: '/docs/cdp/pace-integration',
-                            name: 'Pace Integration',
+                            name: 'Pace',
                         },
                         {
                             url: '/docs/cdp/zapier-connector',
-                            name: 'Zapier Connector',
+                            name: 'Zapier',
                         },
                     ],
                 },

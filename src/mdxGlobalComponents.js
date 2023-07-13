@@ -16,7 +16,6 @@ import { KeyboardShortcut } from './components/KeyboardShortcut'
 import { LPCTA } from './components/LPCTA'
 import { Label } from './components/Label'
 import { List } from './components/List'
-import { NewIcons } from './components/NewIcons'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
@@ -46,7 +45,6 @@ export const shortcodes = {
     LPCTA,
     Label,
     List,
-    NewIcons,
     NewsletterTutorial,
     OverflowXSection,
     Quote,

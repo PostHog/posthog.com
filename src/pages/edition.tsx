@@ -3,7 +3,7 @@ import ContentViewer from 'components/ContentViewer'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import Modal from 'components/Modal'
-import { Chat } from 'components/NewIcons'
+import { Chat } from '@posthog/icons'
 import PostLayout from 'components/PostLayout'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Tooltip from 'components/Tooltip'
@@ -230,7 +230,6 @@ export default function Edition() {
                     <PostLayout
                         sidebar={<Sidebar />}
                         title="The PostHog Edition"
-                        contentWidth="1fr"
                         menuWidth={{ right: 350 }}
                         contentContainerClassName="w-full"
                         hideSurvey
