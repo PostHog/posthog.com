@@ -993,7 +993,14 @@
         { "source": "/docs/data/autocapture", "destination": "/docs/product-analytics/autocapture" },
         { "source": "/docs/apps/enabling", "destination": "/docs/apps#enabling-apps" },
         { "source": "/docs/integrations", "destination": "/docs/frameworks" },
-        { "source": "/blog/how-to-product-market-fit", "destination": "/blog/product-market-fit-game" }
+        { "source": "/blog/how-to-product-market-fit", "destination": "/blog/product-market-fit-game" },
+        { "source": "/docs/cdp/zapier-connector", "destination": "/docs/cdp" },
+        { "source": "/docs/cdp/amazon-kinesis", "destination": "/docs/cdp" },
+        { "source": "/docs/cdp/github-release-tracker", "destination": "/docs/cdp" },
+        { "source": "/docs/cdp/github-star-sync", "destination": "/docs/cdp" },
+        { "source": "/docs/cdp/twitter-followers", "destination": "/docs/cdp" },
+        { "source": "/docs/cdp/gitlab-release-tracker", "destination": "/docs/cdp" },
+        { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" }
     ],
     "rewrites": [
         {
