@@ -1,5 +1,5 @@
 ---
-date: 2023-11-04
+date: 2023-07-13
 title: "A software engineer's guide to A/B testing"
 rootPage: /blog
 sidebar: Blog
