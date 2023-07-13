@@ -24,11 +24,11 @@ One is easier than other, but the easy way rarely works in the long term. This g
 - How to implement and monitor your tests
 - How to analyze your results (statistically significant, or not)
 
-We'll also cover some frequently answered questions, such as when you _shouldn't_ run A/B tests, and we've added a simple [A/B test launch checklist]((#launch-checklist)) you can use when you run your own tests.
+We'll also cover some frequently answered questions, such as when you _shouldn't_ run A/B tests, and we've added a simple [A/B test launch checklist](#a-b-test-launch-checklist) you can use when you run your own tests.
 
 ## How A/B testing works
 
-Feel free to skip this if you already understand the basics, but here's a quick ELI5 for newcomers.
+Here's a quick ELI5 for newcomers – please skip if you're already familiar with the basics.
 
 In A/B testing, you first decide on a goal metric and what change you'd like to see. For example, you may to increase conversion rate or decrease customer churn rate. 
 
@@ -57,18 +57,19 @@ Like "increase paid conversion rate", or "decrease churn rate". This should be a
 No clear, measurable goal = ambiguous results you can't action.
 
 ### 2. A clear hypothesis about why your changes will achieve your goal
+Not having a well-defined hypothesis is one of the most [common A/B testing mistakes](/blog/ab-testing-mistakes) people make.
 
-A well-defined hypothesis focuses your testing and guides your decision-making by providing a framework for evaluating your results. It should include your goal metric, how you think your change will improve it, and any other important context. For example:
+A good hypothesis focuses your testing and guides your decision-making by providing a framework for evaluating your results. It should include your goal metric, how you think your change will improve it, and any other important context. For example:
 
 > Showing a short tutorial video during onboarding will help users understand how to use our product. As a result, we expect to see more successful interactions with the app, fewer customer support queries, and reduced churn (our primary goal) among tested users.
 
 This is a good hypothesis because it enables you to break down which metrics you'll focus on in your test:
 
-- How many users watch the video.
-- What portion of the video did they view.
-- Successful interactions with the app features.
-- The number of customer support queries.
-- Churn rate.
+- How many users watch the video
+- What portion of the video did they view
+- Successful interactions with the app features
+- The number of customer support queries
+- Churn rate
 
 Then, once you've collected data with your test, you can use these metrics to analyze if your test was a success or not.
 
@@ -92,7 +93,7 @@ To know whether your sample size is large enough, you'll need to know:
 
 3. **Your desired level of confidence.** The industry standard is 95%.
 
-You then use a [formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself – [A/B tests in PostHog](/ab-testing/features) calculate this for you automatically.
+You then use a [sample size determination formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself – [A/B tests in PostHog](/ab-testing/features) calculate this for you automatically.
 
 ### 5. A long enough test duration
 
@@ -175,7 +176,7 @@ Once your test has run its duration, and you've collected enough data, you're re
 
 3. **Any counter metrics.** These are metrics that ensure your user experience isn't deteriorating. For example, if your goal is to increase sign-ups, you should also verify your churn rate is not increasing.
 
-Most A/B testing tools, including [PostHog](/ab-testing/features), will calculate statistical significance for you. To do so manually, you'll need to input the number of users in each variant, and the conversion rate for each metric, into an [online calculator](https://abtestguide.com/calc/).
+Most A/B testing tools, including [PostHog](/ab-testing/features), will calculate statistical significance for you. To do so manually, you'll need to input the number of users in each variant, and the conversion rate for each metric, into an online calculator.
 
 ### What if my results are _not_ statistically significant?
 
@@ -239,7 +240,7 @@ Launching an A/B test requires careful planning to ensure accurate results and m
 - [ ] Secondary metrics.
 - [ ] Counter metrics.
 - [ ] Predefined test duration, based on sample size.
-- [ ] A/B test code only includes eligible users that will be affected by the change.
+- [ ] Test code only includes eligible users that will be affected by change.
 - [ ] QA checks on both control and test variants.
 
 **24-48 hours after launch:**
@@ -252,7 +253,7 @@ Launching an A/B test requires careful planning to ensure accurate results and m
 
 - [ ] Validate or invalidate your hypothesis based on experiment data.
 - [ ] Document your results and share with your team for feedback.
-- [ ] Ship the code for the winning variant. Delete the code for the losing variant.
+- [ ] Ship code for the winning variant. Delete code for the losing variant.
 ```
 
 ## Further reading
