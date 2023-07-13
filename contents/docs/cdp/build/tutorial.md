@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> We are temporarily not reviewing new apps while we build a new export system. We'll be accepting new app contributions again soon!
+> We are currently not reviewing new apps while we build a new export system. We will update these docs with more information as that work is completed. 
 
 This tutorial explains the development workflow and best practices, using an example 'Hello World' app. We go from zero to publishing your app in the official PostHog repository.
 
