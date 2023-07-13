@@ -21,6 +21,7 @@ type QuestionProps = {
     id: number | string
     question?: StrapiRecord<QuestionData>
     expanded?: boolean
+    showSlug?: boolean
 }
 
 export const CurrentQuestionContext = createContext<any>({})
@@ -121,7 +122,7 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
 }
 
 export const Question = (props: QuestionProps) => {
-    const { id, question } = props
+    const { id, question, showSlug } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const { user } = useUser()
 
@@ -152,6 +153,7 @@ export const Question = (props: QuestionProps) => {
     }
 
     const archived = questionData?.attributes.archived
+    const slugs = questionData?.attributes?.slugs
 
     return (
         <CurrentQuestionContext.Provider
@@ -213,7 +215,7 @@ export const Question = (props: QuestionProps) => {
                     </div>
 
                     <div className={archived ? 'opacity-50' : ''}>
-                        <div className="question-content ml-5 pl-[30px] border-l border-light dark:border-dark">
+                        <div className="ml-5 pl-[30px] border-l border-light dark:border-dark">
                             <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
                                 <Link
                                     to={`/questions/${questionData.attributes.permalink}`}
@@ -223,7 +225,19 @@ export const Question = (props: QuestionProps) => {
                                 </Link>
                             </h3>
 
-                            <Markdown>{questionData.attributes.body}</Markdown>
+                            <Markdown className="question-content">{questionData.attributes.body}</Markdown>
+
+                            {showSlug && slugs?.length > 0 && slugs[0]?.slug !== '/questions' && (
+                                <p className="text-xs text-primary/60 dark:text-primary-dark/60 pb-4 mb-0 mt-1">
+                                    <span>Originally posted on</span>{' '}
+                                    <Link
+                                        to={slugs[0]?.slug}
+                                        className="text-primary/60 dark:text-primary-dark/60 font-medium"
+                                    >
+                                        https://posthog.com{slugs[0]?.slug}
+                                    </Link>
+                                </p>
+                            )}
                         </div>
 
                         <Replies expanded={expanded} setExpanded={setExpanded} />

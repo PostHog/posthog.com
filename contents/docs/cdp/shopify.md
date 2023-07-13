@@ -1,5 +1,5 @@
 ---
-title: Shopify Connector
+title: Shopify
 github: https://github.com/posthog/posthog-shopify-sync-plugin
 installUrl: https://app.posthog.com/project/apps?name=Posthog+Shopify
 thumbnail: ../../cdp/thumbnails/shopify.png
@@ -7,7 +7,7 @@ tags:
     - shopify
 ---
 
-The Shopify Connector for PostHog enables you to sync customer and order data from Shopify, into PostHog.
+Sync customer and order data from Shopify, into PostHog.
 
 This app will:
 
@@ -31,9 +31,9 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## Configuration
 
-To configure the Shopify Connector you will need to set the store name from your Shopify account.
+You will need to set the store name from your Shopify account.
 
-Additionally, you will need to create a Shopify Access Token, which the Shopify Connector app will call to fetch orders into PostHog.
+Additionally, you will need to create a Shopify Access Token, which we will call to fetch orders into PostHog.
 
 To create a Shopify Access Token, create an app on the admin page of your Shopify Account and generate `Admin API access token` in the API Credentials tab or your newly created Shopify app.
 
@@ -45,7 +45,7 @@ To create a Shopify Access Token, create an app on the admin page of your Shopif
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Shopify Connector app](https://github.com/posthog/posthog-shopify-sync-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source codep](https://github.com/posthog/posthog-shopify-sync-plugin) is available on GitHub.
 
 ### Who created this app?
 

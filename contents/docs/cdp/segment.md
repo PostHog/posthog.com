@@ -1,18 +1,18 @@
 ---
-title: Segment Connector
+title: Segment 
 github: https://github.com/PostHog/posthog-segment
 thumbnail: ../../cdp/thumbnails/segment.png
 tags:
     - segment
 ---
 
-The Segment Connector app enables you to send events to PostHog, via Segment.
+Send events to PostHog, via Segment.
 
 Segment allows you to easily manage data and integrations with services across your Growth, Product, and Marketing stack. By tracking events and users via Segment’s API and libraries, you can send your product’s data to all of your analytics/marketing platforms, with minimal instrumentation code. They offer support for most platforms, including iOS, Android, JavaScript, Node.js, PHP, and more.
 
 ## Requirements
 
-Using the Segment Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -37,7 +37,7 @@ To get around these limitations, you can install the PostHog snippet or posthog-
 
 ### Where can I find out more?
 
-Further information about PostHog's Segment Connector is available in [Segment's integration catalog](https://segment.com/catalog/integrations/posthog/).
+Further information is available in [Segment's integration catalog](https://segment.com/catalog/integrations/posthog/).
 
 ### Who maintains this app?
 

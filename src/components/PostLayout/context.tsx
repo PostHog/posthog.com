@@ -13,7 +13,6 @@ export const defaultMenuWidth = { left: 265, right: 265 }
 
 export const PostProvider: React.FC<ProviderProps> = ({
     value: {
-        contentWidth = 650,
         menuWidth = defaultMenuWidth,
         contentContainerClassName = '',
         menuType = 'standard',
@@ -38,7 +37,6 @@ export const PostProvider: React.FC<ProviderProps> = ({
         <Context.Provider
             value={{
                 ...other,
-                contentWidth,
                 menuWidth,
                 contentContainerClassName,
                 menuType,

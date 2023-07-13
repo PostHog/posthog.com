@@ -1,18 +1,18 @@
 ---
-title: PostgreSQL Export
+title: PostgreSQL
 github: https://github.com/PostHog/postgres-plugin
 thumbnail: ../../cdp/thumbnails/postgresql-export.png
 tags:
     - postgres-export
 ---
 
-> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
-The PostgreSQL Export app enables you to export events from PostHog to a PostgreSQL instance on ingestion.
+Export events from PostHog to a PostgreSQL instance on ingestion.
 
 ## Requirements
 
-Using the PostgreSQL Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 

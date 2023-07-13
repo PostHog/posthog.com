@@ -1,5 +1,5 @@
 ---
-title: Hubspot Connector
+title: Hubspot
 github: https://github.com/PostHog/hubspot-plugin
 installUrl: https://app.posthog.com/project/apps?name=Hubspot
 thumbnail: ../../cdp/thumbnails/hubspot.svg
@@ -7,15 +7,11 @@ tags:
     - hubspot
 ---
 
-Hubspot is a full-featured marketing and CRM platform which includes tools for everything from managing inbound leads to building landing pages. As one of the world’s most popular CRM platforms, Hubspot is an essential PostHog integration for many organizations — and is especially popular with marketing teams.
-
-## What does the Hubspot Connector do?
-
-The Hubspot Connector for PostHog sends data from PostHog to Hubspot whenever an `$identify` event occurs. That is, whenever PostHog successfully identifies a user. This is useful for syncing customer information between both PostHog and Hubspot.
+Send data from PostHog to Hubspot whenever an `$identify` event occurs. That is, whenever PostHog successfully identifies a user. This is useful for syncing customer information between both PostHog and Hubspot.
 
 ## Requirements
 
-The Hubspot Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -51,7 +47,7 @@ No other information can currently be sent to PostHog using this app. If this ap
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Hubspot Connector](https://github.com/PostHog/hubspot-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/hubspot-plugin) is available on GitHub.
 
 ### Who created this app?
 
@@ -65,7 +61,7 @@ A lot of people contributed to this app! We'd like to thank...
 -   [Paul D'Ambra](https://github.com/pauldambra) and
 -   [OneshotEngineering](https://github.com/oneshot-engineering)
 
-For creating the Hubspot Connector for PostHog. Thanks, all!
+For creating this. Thanks, all!
 
 ### Who maintains this app?
 

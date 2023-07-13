@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight } from 'components/NewIcons'
+import { ArrowLeft, ArrowRight } from '@posthog/icons'
 import React, { useState } from 'react'
 import SliderComponent from 'react-slick'
 import { slideButtons } from './slideButtons'

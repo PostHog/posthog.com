@@ -42,7 +42,7 @@ export default function QuestionPage(props: QuestionPageProps) {
     return (
         <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
             <SEO
-                title={isLoading ? 'Squeak question - PostHog' : `${question?.attributes?.subject} - PostHog`}
+                title={isLoading ? 'Community question - PostHog' : `${question?.attributes?.subject} - PostHog`}
                 noindex={question?.attributes.archived}
             />
             <PostLayout
@@ -63,7 +63,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                         </Link>
                     </div>
 
-                    <Question id={permalink} expanded={true} />
+                    <Question showSlug id={permalink} expanded={true} />
                 </section>
 
                 {isModerator && question && (

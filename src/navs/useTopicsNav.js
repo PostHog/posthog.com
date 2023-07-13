@@ -20,7 +20,7 @@ export default function useTopicsNav() {
         }
     `)
 
-    const nav = []
+    const nav = [{ name: 'Latest', url: '/questions', icon: 'Clock' }]
     topicGroups.nodes
         .sort((a, b) => navSorted.indexOf(a.label) - navSorted.indexOf(b.label))
         .forEach(({ label, topics }) => {

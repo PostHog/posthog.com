@@ -32,7 +32,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 The following properties can be added to the event if its IP address can be matched to a GeoLite2 City location:
 
-```TypeScript
+```ts
 $geoip_city_name?: string
 $geoip_country_name?: string
 $geoip_country_code?: string

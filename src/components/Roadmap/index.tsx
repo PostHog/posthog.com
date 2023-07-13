@@ -127,7 +127,6 @@ export default function Roadmap() {
             <SEO title="PostHog Roadmap" />
             <div className="">
                 <PostLayout
-                    contentWidth={'100%'}
                     article={false}
                     title={'Roadmap'}
                     hideSurvey

@@ -52,7 +52,7 @@ export const fetchTopicGroups = async () => {
 export const topicGroupsSorted = ['Products', 'Platform', 'Data', 'Self-hosting', 'Other']
 
 export default function Questions() {
-    const { questions, isLoading, fetchMore, hasMore } = useQuestions({
+    const { questions, isLoading, fetchMore, hasMore, refresh } = useQuestions({
         limit: 20,
         sortBy: 'activity',
     })
@@ -60,13 +60,13 @@ export default function Questions() {
     const topicsNav = useTopicsNav()
 
     return (
-        <CommunityLayout menu={topicsNav} title="Questions">
+        <CommunityLayout menu={topicsNav} title="Questions" contentWidth="100%">
             <div className="space-y-8 pb-12">
                 <section>
                     <div className="w-full sm:flex items-center mb-8">
                         <h1 className="text-4xl m-0">Community questions</h1>
                         <div className="ml-auto sm:mt-0 mt-4">
-                            <QuestionForm showTopicSelector onSubmit={() => null} />
+                            <QuestionForm showTopicSelector onSubmit={() => refresh()} />
                         </div>
                     </div>
 
@@ -77,6 +77,7 @@ export default function Questions() {
                             fetchMore={fetchMore}
                             isLoading={isLoading}
                             hasMore={hasMore}
+                            sortBy="activity"
                         />
                     </div>
                 </section>

@@ -62,6 +62,7 @@ const query = (id: string | number, isModerator: boolean) =>
                 },
                 topics: true,
                 pinnedTopics: true,
+                slugs: true,
             },
         },
         {

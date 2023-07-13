@@ -52,35 +52,33 @@ export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit
             {({ isValid, isSubmitting }) => {
                 return (
                     <Form className="m-0">
-                        <div className="grid grid-cols-2 gap-x-2">
-                            <span>
-                                <label className={labelClasses} htmlFor="firstName">
-                                    First name
-                                </label>
-                                <Field
-                                    className={inputClasses}
-                                    onBlur={(e) => e.preventDefault()}
-                                    required
-                                    id="firstName"
-                                    name="firstName"
-                                    type="text"
-                                    placeholder="First name..."
-                                />
-                            </span>
-                            <span>
-                                <label className={labelClasses} htmlFor="lastName">
-                                    Last name
-                                </label>
-                                <Field
-                                    className={inputClasses}
-                                    onBlur={(e) => e.preventDefault()}
-                                    id="lastName"
-                                    name="lastName"
-                                    type="text"
-                                    placeholder="Last name..."
-                                />
-                            </span>
-                        </div>
+                        <span>
+                            <label className={labelClasses} htmlFor="firstName">
+                                First name
+                            </label>
+                            <Field
+                                className={inputClasses}
+                                onBlur={(e) => e.preventDefault()}
+                                required
+                                id="firstName"
+                                name="firstName"
+                                type="text"
+                                placeholder="First name..."
+                            />
+                        </span>
+                        <span>
+                            <label className={labelClasses} htmlFor="lastName">
+                                Last name
+                            </label>
+                            <Field
+                                className={inputClasses}
+                                onBlur={(e) => e.preventDefault()}
+                                id="lastName"
+                                name="lastName"
+                                type="text"
+                                placeholder="Last name..."
+                            />
+                        </span>
                         <label className={labelClasses} htmlFor="email">
                             Email address
                         </label>

@@ -1,12 +1,12 @@
 ---
-title: Outfunnel Exporter
+title: Outfunnel
 github: https://github.com/PostHog/outfunnel-export-plugin
 thumbnail: ../../cdp/thumbnails/outfunnel-logo.png
 tags:
-    - outfunnel-export
+    - outfunnel
 ---
 
-The Outfunnel Exporter sends events from PostHog to Outfunnel as they are ingested. Outfunnel is a platform for connecting sales and marketing tools with the data you need to prioritize leads. 
+Send events from PostHog to Outfunnel as they are ingested. Outfunnel is a platform for connecting sales and marketing tools with the data you need to prioritize leads. 
 
 ## Installation
 
@@ -20,13 +20,13 @@ The Outfunnel Exporter sends events from PostHog to Outfunnel as they are ingest
 
 ## Requirements
 
-The Outfunnel Exporter requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 ## FAQ
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Outfunnel Exporter](https://github.com/PostHog/outfunnel-export-pluginn) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/outfunnel-export-pluginn) is available on GitHub.
 
 ### Who created this app?
 

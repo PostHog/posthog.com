@@ -1,5 +1,5 @@
 ---
-title: RudderStack Export
+title: RudderStack (Export)
 github: https://github.com/rudderlabs/rudderstack-posthog-plugin
 installUrl: https://app.posthog.com/project/apps?name=RudderStack
 thumbnail: ../../cdp/thumbnails/rudderstack-export.png
@@ -7,11 +7,11 @@ tags:
     - rudderstack
 ---
 
-The Rudderstack Export app enables you to send events from PostHog, to RudderStack. RudderStack will recognize PostHog as a data source, so you can use RudderStack's data pipeline features to send PostHog event data to other platforms.
+Send events from PostHog, to RudderStack. RudderStack will recognize PostHog as a data source, so you can use RudderStack's data pipeline features to send PostHog event data to other platforms.
 
 ## Requirements
 
-The Rudderstack Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -35,11 +35,11 @@ Once you've added PostHog as a source, make a note of the `write-key` field and 
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the RudderStack Export app](https://github.com/rudderlabs/rudderstack-posthog-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/rudderlabs/rudderstack-posthog-plugin) is available on GitHub.
 
 ### Who created this app?
 
-The Rudderstack Export app was created by community members and the team at RudderStack. We'd like to thank [Sayan-Mitra](https://github.com/sayan-mitra), [Gavin](https://github.com/thtmnisamnstr), [Amey Varangaonkar](https://github.com/ameypv-rudder), [Utsab Chowdhury](https://github.com/utsabc) and [Arnab Pal](https://github.com/arnab-p) for creating it. Thank you, all!
+This was created by community members and the team at RudderStack. We'd like to thank [Sayan-Mitra](https://github.com/sayan-mitra), [Gavin](https://github.com/thtmnisamnstr), [Amey Varangaonkar](https://github.com/ameypv-rudder), [Utsab Chowdhury](https://github.com/utsabc) and [Arnab Pal](https://github.com/arnab-p) for creating it. Thank you, all!
 
 ### Who maintains this app?
 

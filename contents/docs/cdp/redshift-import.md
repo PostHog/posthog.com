@@ -1,5 +1,5 @@
 ---
-title: Redshift Import
+title: Redshift (Import)
 github: https://github.com/PostHog/posthog-redshift-import-plugin
 installUrl: https://app.posthog.com/project/apps?name=Redshift+Import
 thumbnail: ../../cdp/thumbnails/redshift.svg
@@ -7,11 +7,11 @@ tags:
     - redshift-import
 ---
 
-The Redshift Import app for PostHog enables you, predictably, to import data from a Redshift table into PostHog. Data appears in PostHog as a stream of events.
+Import data from a Redshift table into PostHog. Data appears in PostHog as a stream of events.
 
 ## Requirements
 
-Using the Redshift Import app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -130,11 +130,11 @@ Your GitHub username is important so that we only allow changes to transformatio
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Redshift Import app](https://github.com/PostHog/posthog-redshift-import-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-redshift-import-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) and community member [Utsavkumar Lal](https://github.com/utsavll0) for creating the Redshift Import app. Thank you, both!
+We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) and community member [Utsavkumar Lal](https://github.com/utsavll0) for creating this.
 
 ### Who maintains this app?
 

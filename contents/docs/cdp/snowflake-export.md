@@ -1,5 +1,5 @@
 ---
-title: Snowflake Export
+title: Snowflake
 github: https://github.com/PostHog/snowflake-export-plugin
 thumbnail: ../../cdp/thumbnails/snowflake.svg
 official: true
@@ -7,7 +7,7 @@ tags:
     - snowflake-export
 ---
 
-> This app is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 This app allows you to export both live and historical events from PostHog into Snowflake.
 This is useful when you want to run custom SQL queries on your data in PostHog using Snowflake's high-performance infrastructure.
@@ -26,7 +26,7 @@ Once the app has been configured, you can enable it by flipping the toggle and i
 
 ### PostHog Self-hosted
 
-> The Snowflake Export app requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
+> This requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
 > Not running 1.24.0? Find out [how to update](/docs/runbook/upgrading-posthog)!
 
 1. Log in to your PostHog instance
@@ -184,7 +184,7 @@ Now that the app is configured, all you'll need to do is "Enable" it and PostHog
 
 ## Troubleshooting
 
-### Why am I seeing connection issues with the Snowflake Export app?
+### Why am I seeing connection issues?
 
 If you're running into connection issues please verify your login credentials, make sure **all** the permissions listed above have been granted to your user.
 
@@ -194,7 +194,7 @@ If you're exporting from PostHog Cloud, do **NOT set any IP whitelist/blacklist*
 
 ### Who created this app?
 
-A lot of people worked on this app! We'd like to thank the following contributors for creating the Snowflake Export app. Thank you, all!
+A lot of people worked on this app! We'd like to thank the following contributors for creating this. Thank you, all!
 
 -   [Yakko Majuri](https://github.com/yakkomajuri)
 -   [Marius Andra](https://github.com/mariusandra)

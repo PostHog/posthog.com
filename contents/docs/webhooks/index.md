@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Webhooks enable you to receive messages whenever any of your [actions](/docs/user-guides/actions) trigger. You can receive messages in [Slack](/docs/webhooks/slack), [Teams](/docs/webhooks/teams), [Discord](/docs/webhooks/discord), or your own custom webhook endpoint.
+Webhooks enable you to receive messages whenever any of your [actions](/docs/user-guides/actions) trigger. You can receive messages in [Slack](/docs/webhooks/slack), [Teams](/docs/webhooks/microsoft-teams), [Discord](/docs/webhooks/discord), or your own custom webhook endpoint.
 
 ## Message formatting
 

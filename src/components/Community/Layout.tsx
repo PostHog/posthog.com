@@ -16,7 +16,7 @@ export const SectionTitle = ({ children }: { children: React.ReactNode }) => {
     return <h2 className="m-0 mb-6">{children}</h2>
 }
 
-const Community = ({ children, title, tableOfContents, menu }: IProps) => {
+const Community = ({ children, title, tableOfContents, menu, contentWidth }: IProps) => {
     return (
         <PostLayout
             hideWidthToggle
@@ -26,6 +26,7 @@ const Community = ({ children, title, tableOfContents, menu }: IProps) => {
             title={title}
             menuWidth={{ right: 320 }}
             menu={menu}
+            contentWidth={contentWidth}
         >
             {children}
         </PostLayout>
@@ -39,11 +40,12 @@ export default function CommunityLayout({
     parent,
     activeInternalMenu,
     menu,
+    contentWidth,
 }: IProps) {
     return (
         <Layout parent={parent || communityMenu} activeInternalMenu={activeInternalMenu || communityMenu.children[0]}>
             <SEO title={`${title} - PostHog`} />
-            <Community menu={menu} title={title} tableOfContents={tableOfContents}>
+            <Community menu={menu} title={title} tableOfContents={tableOfContents} contentWidth={contentWidth}>
                 {children}
             </Community>
         </Layout>

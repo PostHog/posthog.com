@@ -72,6 +72,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     </div>
                 )}
                 <article
+                    style={contentWidth && !fullWidthContent ? { width: '100%', maxWidth: contentWidth } : {}}
                     key={`${title}-article`}
                     id="content-menu-wrapper"
                     className={`py-4 box-border w-full flex-shrink mx-auto transition-all ${

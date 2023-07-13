@@ -1,5 +1,5 @@
 ---
-title: Laudspeaker Connector
+title: Laudspeaker
 github: https://github.com/PostHog/posthog-laudspeaker-app
 installUrl: https://app.posthog.com/project/apps?name=Laudspeaker
 thumbnail: ../../cdp/thumbnails/laudspeaker-connector.png
@@ -7,13 +7,13 @@ tags:
     - laudspeaker-connector
 ---
 
-The Laudspeaker Connector sends event data from PostHog to Laudspeaker, so it can be used to trigger immediate or time-delayed customer communications across multiple channels, including Slack and email. 
+Send event data from PostHog to Laudspeaker, so it can be used to trigger immediate or time-delayed customer communications across multiple channels, including Slack and email. 
 
 [Laudspeaker](https://laudspeaker.com/) is an open source customer messaging service and an alternative to tools such as Braze or [Customer.io](/apps/customer-io). 
 
 ## Requirements
 
-The Laudspeaker Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -28,7 +28,7 @@ After configuring PostHog within Laudspeaker, you can install the Laudspeaker Co
 3. Search for 'Laudspeaker'
 4. Select the app, press 'Install'
 
-To configure the app, you must provide the app with your API for `write-key`. This can be found in the 'Settings' section of Laudspeaker and should be copied into the Laudspeaker Connector configuration in PostHog. 
+To configure the app, you must provide the app with your API for `write-key`. This can be found in the 'Settings' section of Laudspeaker and should be copied into the Laudspeaker configuration in PostHog. 
 
 Finally, you must provide (in PostHog) `[your_server's_url]/events/posthog` for `Lauspeaker URL` (or, if using a Laudspeaker hosted plan, `app.laudspeaker.com/events/posthog`). When this is entered, enable the app in PostHog. 
 
@@ -38,7 +38,7 @@ Other fields (email, phone number, custom) are optional and can be specified if 
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Laudspeaker Connector](https://github.com/PostHog/posthog-laudspeaker-app) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-laudspeaker-app) is available on GitHub.
 
 ### Who maintains this app?
 

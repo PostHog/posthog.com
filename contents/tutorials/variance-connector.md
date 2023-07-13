@@ -10,7 +10,7 @@ date: 2022-07-01
 
 _Estimated reading time: 6 minutes_ ☕☕
 
-Variance lets revenue teams get more out of their analytics data. Using the [Variance Connector](/apps/variance-connector) to integrate Variance with PostHog makes it easy to send your event data on to Variance for processing. 
+Variance lets revenue teams get more out of their analytics data. Using the [Variance integration](/apps/variance-connector) to integrate Variance with PostHog makes it easy to send your event data on to Variance for processing. 
 
 To get the most out of [Variance](https://www.variance.com/), there are a few key use cases:
 
