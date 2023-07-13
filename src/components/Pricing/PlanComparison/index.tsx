@@ -422,7 +422,7 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
                                             type: 'cloud',
                                         }}
                                         type="primary"
-                                        size="sm"
+                                        size="md"
                                         className="shadow-md !w-auto"
                                         to={`https://${
                                             posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')

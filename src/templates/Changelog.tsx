@@ -133,7 +133,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                         <div key={date} id={slugify(dayjs(date).format('MMMM'))} className="flex gap-4">
                             <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
                                 <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
-                                    <h2 className="text-sm font-bold uppercase !m-0">{dayjs(date).format('MMM')}</h2>
+                                    <h2 className="!text-sm font-bold uppercase !m-0">{dayjs(date).format('MMM')}</h2>
                                     <div className="text-xs font-semibold">{dayjs(date).format('YYYY')}</div>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                     </span>
                                                 </p>
                                             )}
-                                            <Heading as="h3" id={slugify(title, { lower: true })} className="mt-0 mb-1">
+                                            <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
                                                 {title}
                                             </Heading>
                                             {teamName && (
@@ -184,7 +184,7 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
                                                 <Markdown>{description}</Markdown>
                                             </div>
                                             {cta && (
-                                                <CallToAction type="secondary" size="sm" to={cta.url}>
+                                                <CallToAction type="secondary" size="md" to={cta.url}>
                                                     {cta.label}
                                                 </CallToAction>
                                             )}
