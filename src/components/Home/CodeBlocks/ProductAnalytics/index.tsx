@@ -92,7 +92,7 @@ function DataAttributes() {
 >
   Subscribe
 </button>`}
-                            language="js"
+                            language="html"
                         />
                     </div>
                 </div>
