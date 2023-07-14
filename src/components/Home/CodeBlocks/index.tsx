@@ -7,18 +7,8 @@ import productAnalyticsContent from './ProductAnalytics'
 import sessionReplayContent from './SessionReplay'
 import featureFlagsContent from './FeatureFlags'
 import abTestingContent from './ABTesting'
-import cdpContent from './CDP'
-import dataWarehouseContent from './DataWarehouse'
 
-const content = [
-    productOSContent,
-    productAnalyticsContent,
-    sessionReplayContent,
-    featureFlagsContent,
-    abTestingContent,
-    cdpContent,
-    dataWarehouseContent,
-]
+const content = [productOSContent, productAnalyticsContent, sessionReplayContent, featureFlagsContent, abTestingContent]
 
 export default function CodeBlocks() {
     const [activeIndex, setActiveIndex] = useState(0)
@@ -30,7 +20,7 @@ export default function CodeBlocks() {
             </p>
             <InternalMenu
                 activeIndex={activeIndex}
-                menu={docsMenu?.children.map((child, index) => ({
+                menu={docsMenu?.children.slice(0, 5).map((child, index) => ({
                     ...child,
                     url: null,
                     onClick: () => setActiveIndex(index),
