@@ -36,7 +36,7 @@ export default function CodeBlocks() {
                     onClick: () => setActiveIndex(index),
                 }))}
             />
-            <div className="my-12 px-5">
+            <div className="my-6 -mb-4 lg:mb-12 lg:my-12 pl-5">
                 <ContentViewer scrollToTop={false} content={content[activeIndex]} />
             </div>
         </div>
