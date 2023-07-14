@@ -9,6 +9,7 @@ import { darkTheme, lightTheme } from './theme'
 import languageMap from './languages'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import Tooltip from 'components/Tooltip'
 
 type LanguageOption = {
     label?: string
@@ -133,6 +134,7 @@ export const CodeBlock = ({
     currentLanguage,
     onChange,
     lineNumberStart = 1,
+    tooltips,
 }: CodeBlockProps) => {
     if (languages.length < 0 || !currentLanguage) {
         return null
@@ -310,16 +312,39 @@ export const CodeBlock = ({
                     >
                         <div className="flex whitespace-pre-wrap" id={codeBlockId}>
                             {showLineNumbers && (
-                                <pre className="m-0 py-4 px-3 inline-block font-code font-medium text-sm bg-accent dark:bg-accent-dark">
+                                <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent dark:bg-accent-dark">
                                     <span
                                         className="select-none flex flex-col dark:text-white/60 text-black/60 shrink-0"
                                         aria-hidden="true"
                                     >
-                                        {tokens.map((_, i) => (
-                                            <span className="inline-block w-4 text-right align-middle" key={i}>
-                                                {i + lineNumberStart}
-                                            </span>
-                                        ))}
+                                        {tokens.map((_, i) => {
+                                            const currentTooltip = tooltips?.find(
+                                                (tooltip) => tooltip.lineNumber === i + lineNumberStart
+                                            )
+
+                                            return (
+                                                <span className="inline-block text-right align-middle relative" key={i}>
+                                                    {currentTooltip && (
+                                                        <Tooltip
+                                                            content={() => (
+                                                                <div
+                                                                    style={{ maxWidth: currentTooltip.maxWidth ?? 200 }}
+                                                                    className="text-center"
+                                                                >
+                                                                    {currentTooltip.content}
+                                                                </div>
+                                                            )}
+                                                        >
+                                                            <span className="absolute right-0 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
+                                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
+                                                                <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
+                                                            </span>
+                                                        </Tooltip>
+                                                    )}
+                                                    <span>{i + lineNumberStart}</span>
+                                                </span>
+                                            )
+                                        })}
                                     </span>
                                 </pre>
                             )}
@@ -330,10 +355,9 @@ export const CodeBlock = ({
                                 {tokens.map((line, i) => {
                                     const { className, ...props } = getLineProps({ line, key: i })
                                     return (
-                                        <div key={i} className={className} {...props}>
+                                        <div key={i} className={`${className} relative`} {...props}>
                                             {line.map((token, key) => {
                                                 const { className, children, ...props } = getTokenProps({ token, key })
-
                                                 return (
                                                     <span
                                                         key={key}

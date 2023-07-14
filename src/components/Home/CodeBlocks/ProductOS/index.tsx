@@ -15,6 +15,7 @@ function TrackEvent() {
                 <div>
                     <h4 className="text-xl">Your code</h4>
                     <CodeBlock
+                        tooltips={[{ lineNumber: 5, content: 'Attach properties to any event' }]}
                         code={`posthog.capture('Plan purchased', {
   price: 12.99,
   planId: 'XYZ12345',
@@ -31,6 +32,13 @@ function TrackEvent() {
                 <div>
                     <h4 className="text-xl">Available in PostHog</h4>
                     <CodeBlock
+                        tooltips={[
+                            {
+                                lineNumber: 6,
+                                content:
+                                    'Expand to browse default properties sent with each event (like device info, session data, and geo IP) and custom properties',
+                            },
+                        ]}
                         code={`"event": { 8 items
   "created_at": "2023-06-28T10:12:38.789-07:00"
   "distinct_id": "1193056043057"
@@ -71,6 +79,7 @@ function IdentifyUser() {
                 <div className="order-2 lg:order-none">
                     <code className="inline-block mb-2">identify</code>
                     <CodeBlock
+                        tooltips={[{ lineNumber: 2, content: 'Attach properties to a user' }]}
                         code={`posthog.identify('distinct_id', {
   email: 'max@hedgehogmail.com',
   name: 'Max Hedgehog',
@@ -96,6 +105,12 @@ function IdentifyUser() {
                 <div className="order-3 lg:order-none">
                     <code className="inline-block my-2">group</code>
                     <CodeBlock
+                        tooltips={[
+                            {
+                                lineNumber: 1,
+                                content: 'Associate a user with an organzation',
+                            },
+                        ]}
                         code={`posthog.group('company', 'company_id', {
   name: 'Hedgehog Corp',
   plan: 'Enterprise (Annual)',
