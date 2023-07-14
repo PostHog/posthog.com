@@ -23,7 +23,7 @@ const content = [
 export default function CodeBlocks() {
     const [activeIndex, setActiveIndex] = useState(0)
     return (
-        <div>
+        <div className="max-w-7xl mx-auto">
             <InternalMenu
                 activeIndex={activeIndex}
                 menu={docsMenu?.children.map((child, index) => ({
