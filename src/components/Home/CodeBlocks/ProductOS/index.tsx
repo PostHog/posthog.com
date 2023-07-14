@@ -54,7 +54,7 @@ function TrackEvent() {
                 </div>
             </div>
             <div className="flex gap-1 pt-4">
-                <span className="h-6 w-6">
+                <span className="w-12 h-12 md:h-6 md:w-6">
                     <LightBulb />
                 </span>
                 <p className="opacity-75">

@@ -200,7 +200,7 @@ export default function NoHatingAllowed() {
     return (
         <div className="relative pt-8">
             <h2 className="text-4xl lg:text-6xl text-center mb-5">
-                <span className="text-red uppercase">Warning:</span> You'll hate PostHog if...
+                <span className="text-red uppercase block md:inline">Warning:</span> You'll hate PostHog if...
             </h2>
             <div className="absolute top-1/2 left-0 -translate-y-1/2 z-10">
                 <button
