@@ -1,4 +1,4 @@
-import { ArrowRight } from '@posthog/icons'
+import { ArrowLeft, ArrowRight } from '@posthog/icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useRef } from 'react'
 import Link from 'components/Link'
@@ -183,7 +183,7 @@ const Card = ({ top, bottom, Image, ImageSize, color }) => {
     return (
         <li
             style={{ backgroundColor: color || 'white' }}
-            className="h-[400px] w-[300px] flex flex-col justify-between p-5 rounded-md overflow-hidden relative even:rotate-3 odd:-rotate-3 flex-shrink-0 md:first:ml-12"
+            className="h-[400px] w-[300px] flex flex-col justify-between p-5 rounded-md relative even:rotate-3 odd:-rotate-3 flex-shrink-0 snap-center overflow-hidden md:first:ml-12"
         >
             <div className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full px-8 ${ImageSize}`}>
                 {Image}
@@ -197,15 +197,19 @@ const Card = ({ top, bottom, Image, ImageSize, color }) => {
 export default function NoHatingAllowed() {
     const listRef = useRef<HTMLUListElement>(null)
 
-    const handleNext = () => {
-        return null
-    }
-
     return (
         <div className="relative pt-8">
             <h2 className="text-4xl lg:text-6xl text-center mb-5">
                 <span className="text-red uppercase">Warning:</span> You'll hate PostHog if...
             </h2>
+            <div className="absolute top-1/2 left-0 -translate-y-1/2 z-10">
+                <button
+                    onClick={() => listRef?.current?.scrollBy({ left: -20, behavior: 'smooth' })}
+                    className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
+                >
+                    <ArrowLeft className="w-10" />
+                </button>
+            </div>
             <ul
                 ref={listRef}
                 className="list-none m-0 p-0 flex space-x-12 w-full px-5 snap-x overflow-x-auto overflow-y-hidden py-12"
@@ -216,7 +220,7 @@ export default function NoHatingAllowed() {
             </ul>
             <div className="absolute top-1/2 right-0 -translate-y-1/2">
                 <button
-                    onClick={handleNext}
+                    onClick={() => listRef?.current?.scrollBy({ left: 20, behavior: 'smooth' })}
                     className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
                 >
                     <ArrowRight className="w-10" />
