@@ -1,29 +1,194 @@
 import { ArrowRight } from '@posthog/icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useRef } from 'react'
+import Link from 'components/Link'
 
 const cards = [
     {
-        top: 'You enjoy “jumping on a quick call” with sales',
+        top: 'You enjoy "jumping on a quick call" with sales',
         bottom: (
             <>
-                Sorry, we don’t have a sales team. But you can <span className="text-blue">watch a recorded demo</span>{' '}
-                (at your own page) or <span className="text-blue">request a personalized demo</span> if you like.
+                Sorry, we don't have a sales team. But you can{' '}
+                <Link to="/book-a-demo" className="!text-red">
+                    watch a recorded demo
+                </Link>{' '}
+                (at your own pace) or{' '}
+                <Link to="/contact-sales" className="!text-red">
+                    request a personalized demo
+                </Link>{' '}
+                if you like.
             </>
         ),
         color: '#FFD89E',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/1.png" />,
+        Image: <StaticImage quality={100} placeholder="none" src="./images/i-love-telemarketing.png" />,
+        ImageSize: 'w-[calc(100%_+_5rem)] -mt-4',
+    },
+    {
+        top: 'You love needlessly wasting company money',
+        bottom: (
+            <>
+                We only have usage-based pricing that{' '}
+                <Link to="/pricing" className="!text-red">
+                    decreases exponentially
+                </Link>{' '}
+                with scale.
+            </>
+        ),
+        color: '#DCE7D0',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/wasting-money.png" />,
+        ImageSize: 'mt-8',
+    },
+    {
+        top: (
+            <>
+                You'd rather <span className="text-red">buy</span> before you <span className="text-red">try</span>
+            </>
+        ),
+        bottom: (
+            <>
+                We offer a free tier so large that only a fraction of our customers pay us anything. Even worse, we
+                continually try to{' '}
+                <Link to="/blog/multi-product-pricing" className="!text-red">
+                    reduce our pricing
+                </Link>
+                .
+            </>
+        ),
+        color: '#D9E1FC',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/try-buy.png" />,
+        ImageSize: 'w-[250px] -mt-4',
+    },
+    {
+        top: 'You think your email is a good trade for that free whitepaper',
+        bottom: <>Please press Ctrl + W now, or ask your network administrator to close your window.</>,
+        color: '#FDBAF2',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/bad-trade.png" />,
+        ImageSize: 'mt-4',
+    },
+    {
+        top: 'You give out your credit card details to strangers',
+        bottom: <>You'd rather buy a product you've never used instead of a generous free trial?</>,
+        color: '#FFD89E',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/stranger-danger.png" />,
+        ImageSize: 'w-[230px] mt-6',
+    },
+    {
+        top: "You're desperate for commitment",
+        bottom: (
+            <>
+                Sadly, we don't offer annual contracts (unless you{' '}
+                <Link to="/contact-sales" className="!text-red">
+                    ask for one
+                </Link>
+                ).
+            </>
+        ),
+        color: '#DCE7D0',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/commitment-issues.png" />,
+        ImageSize: 'mt-4',
+    },
+    {
+        top: 'You loathe new features, and bug fixes',
+        bottom: (
+            <>
+                Unfortunately we release{' '}
+                <Link to="/changelog" className="!text-red">
+                    new updates weekly
+                </Link>
+                .
+            </>
+        ),
+        color: '#D9E1FC',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/i-hate-change.png" />,
+    },
+    {
+        top: "You'd rather buy disparate tools and mangle them together",
+        bottom: <>Apologies. Our focus is for you to engineer your product, not your data.</>,
+        color: '#FDBAF2',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/mangle.png" />,
+        ImageSize: 'w-[230px] mt-6',
+    },
+    {
+        top: 'You like buying a whole product suite to get access to one tool',
+        bottom: <>Alas we don't force people to buy stuff they don't use. We suit people who want to pay by product.</>,
+        color: '#FFD89E',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/creative-suite-sucks.png" />,
+        ImageSize: 'w-[230px] mt-4',
+    },
+    {
+        top: 'You think CSMs are your friends',
+        bottom: <>Honey, those emails are automated.</>,
+        color: '#D9E1FC',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/csms.png" />,
+        ImageSize: 'w-[230px] mt-8',
+    },
+    {
+        top: 'You enjoy sitting through hours of training more than using the product',
+        bottom: (
+            <>
+                No training is required to use PostHog, though we have plenty of{' '}
+                <Link to="/docs" className="!text-red">
+                    docs
+                </Link>{' '}
+                and{' '}
+                <Link to="/guides" className="!text-red">
+                    guides
+                </Link>{' '}
+                if you need some guidance.
+            </>
+        ),
+        color: '#FFD89E',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/training.png" />,
+        ImageSize: 'w-[250px] mt-8',
+    },
+    {
+        top: "Data privacy isn't a big deal to you. (GDP-what now?)",
+        bottom: <>Get cookie-less tracking, regional hosting, and raw database access.</>,
+        color: '#FDBAF2',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/gdpwut.png" />,
+        ImageSize: 'w-[250px] mt-8',
+    },
+    {
+        top: 'Networking events are your things',
+        bottom: <>We put on an event once. It was a disaster. Never again.</>,
+        color: '#FFD89E',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/ru-bizdev.png" />,
+        ImageSize: 'w-[250px]',
+    },
+    {
+        top: 'You love being out of the loop',
+        bottom: (
+            <>
+                We publish our{' '}
+                <Link to="/roadmap" className="!text-red">
+                    roadmap
+                </Link>
+                ,{' '}
+                <Link to="/handbook/company/strategy" className="!text-red">
+                    strategy
+                </Link>
+                , and{' '}
+                <Link to="/handbook" className="!text-red">
+                    company handbook
+                </Link>
+                .
+            </>
+        ),
+        color: '#DCE7D0',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/loop-hole.png" />,
     },
 ]
 
-const Card = ({ top, bottom, Image, color }) => {
+const Card = ({ top, bottom, Image, ImageSize, color }) => {
     return (
         <li
             style={{ backgroundColor: color || 'white' }}
-            className="h-[400px] w-[300px] flex flex-col justify-between p-5 rounded-md relative even:rotate-3 odd:-rotate-3 flex-shrink-0 md:first:ml-[20vw]"
+            className="h-[400px] w-[300px] flex flex-col justify-between p-5 rounded-md overflow-hidden relative even:rotate-3 odd:-rotate-3 flex-shrink-0 md:first:ml-12"
         >
-            <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full">{Image}</div>
-            <h5 className="m-0 text-2xl text-black relative">{top}</h5>
+            <div className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full px-8 ${ImageSize}`}>
+                {Image}
+            </div>
+            <h5 className="m-0 text-2xl text-black relative leading-7">{top}</h5>
             <p className="text-sm text-black m-0 relative">{bottom}</p>
         </li>
     )
@@ -37,12 +202,15 @@ export default function NoHatingAllowed() {
     }
 
     return (
-        <div className="relative">
+        <div className="relative pt-8">
+            <h2 className="text-4xl lg:text-6xl text-center mb-5">
+                <span className="text-red uppercase">Warning:</span> You'll hate PostHog if...
+            </h2>
             <ul
                 ref={listRef}
                 className="list-none m-0 p-0 flex space-x-12 w-full px-5 snap-x overflow-x-auto overflow-y-hidden py-12"
             >
-                {new Array(20).fill(cards[0]).map((card, index) => {
+                {cards.map((card, index) => {
                     return <Card {...card} key={index} />
                 })}
             </ul>
