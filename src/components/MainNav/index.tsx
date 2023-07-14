@@ -136,12 +136,12 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile
     const Icon = icons[icon]
 
     useEffect(() => {
-        if (initialScrollTo) ref?.current?.scrollIntoView({ block: 'center', inline: 'center' })
+        if (initialScrollTo && overflowing) ref?.current?.scrollIntoView({ block: 'center', inline: 'center' })
     }, [overflowing])
 
     const handleClick = () => {
         onClick?.()
-        ref?.current?.scrollIntoView({ block: 'center', inline: 'center' })
+        ref?.current?.scrollIntoView({ block: 'nearest', inline: 'center' })
     }
 
     return (
