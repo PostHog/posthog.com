@@ -204,7 +204,7 @@ export default function NoHatingAllowed() {
             </h2>
             <div className="absolute top-1/2 left-0 -translate-y-1/2 z-10">
                 <button
-                    onClick={() => listRef?.current?.scrollBy({ left: -20, behavior: 'smooth' })}
+                    onClick={() => listRef?.current?.scrollBy({ left: -300, behavior: 'smooth' })}
                     className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
                 >
                     <ArrowLeft className="w-10" />
@@ -220,7 +220,7 @@ export default function NoHatingAllowed() {
             </ul>
             <div className="absolute top-1/2 right-0 -translate-y-1/2">
                 <button
-                    onClick={() => listRef?.current?.scrollBy({ left: 20, behavior: 'smooth' })}
+                    onClick={() => listRef?.current?.scrollBy({ left: 300, behavior: 'smooth' })}
                     className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
                 >
                     <ArrowRight className="w-10" />
