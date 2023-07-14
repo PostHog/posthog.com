@@ -10,7 +10,7 @@ function Payloads() {
                 </strong>{' '}
                 Test changes on your site without hard-coding the changes with <code>getFeatureFlagPayload()</code>.
             </p>
-            <div className="flex gap-x-6">
+            <div className="flex flex-col lg:flex-row gap-x-6">
                 <div className="flex-1">
                     <h4 className="text-lg">Feature flag payload</h4>
                     <p className="text-sm">
