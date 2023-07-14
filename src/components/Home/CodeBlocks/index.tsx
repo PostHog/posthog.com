@@ -24,6 +24,10 @@ export default function CodeBlocks() {
     const [activeIndex, setActiveIndex] = useState(0)
     return (
         <div className="max-w-screen-2xl mx-auto relative">
+            <h2 className="text-4xl lg:text-6xl text-center mb-1">Code-based</h2>
+            <p className="text-center text-lg font-medium opacity-75 pb-4">
+                The PostHog code snippet offers granular control over features and data privacy.
+            </p>
             <InternalMenu
                 activeIndex={activeIndex}
                 menu={docsMenu?.children.map((child, index) => ({
