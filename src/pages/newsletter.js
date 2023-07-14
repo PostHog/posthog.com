@@ -28,7 +28,7 @@ export const NewsletterPage = () => {
                 <div className="md:grid md:grid-cols-5 md:gap-12 px-4 lg:px-12 pb-8 max-w-6xl mx-auto items-center">
                     <div className="col-span-2 text-right">
                         <StaticImage
-                            src="../images/newsletter-signup.jpeg"
+                            src="../images/newsletter-signup.png"
                             objectFit="contain"
                             className="w-full h-full"
                         />
