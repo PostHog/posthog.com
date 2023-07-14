@@ -37,9 +37,10 @@ interface IProps {
     title?: string
     initialIndex?: number
     scrollToTop?: boolean
+    menuWidth?: number
 }
 
-export default function ContentViewer({ content, title, initialIndex, scrollToTop = true }: IProps) {
+export default function ContentViewer({ content, title, initialIndex, scrollToTop = true, menuWidth = 350 }: IProps) {
     const [currentIndex, setCurrentIndex] = useState<number | null>(initialIndex ?? null)
     const [contentView, setContentView] = useState('Article')
     const currentContent = currentIndex !== null && content[currentIndex]
@@ -65,9 +66,13 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
         }
     }, [breakpoints])
 
+    useEffect(() => {
+        setCurrentIndex(0)
+    }, [content])
+
     return (
         <div className="flex gap-x-6 lg:gap-x-12 relative">
-            <motion.div className="md:flex-[0_0_350px]">
+            <motion.div style={{ maxWidth: menuWidth }} className="flex-shrink-0 w-auto">
                 <div className="reasonable:sticky reasonable:top-[108px]">
                     {title && <h3 className="text-lg mb-2">{title}</h3>}
                     <ul className="list-none m-0 p-0 grid gap-y-1">

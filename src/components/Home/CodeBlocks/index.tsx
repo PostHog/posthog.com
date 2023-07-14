@@ -32,7 +32,7 @@ export default function CodeBlocks() {
                     onClick: () => setActiveIndex(index),
                 }))}
             />
-            <div className="my-12">
+            <div className="my-12 px-5">
                 <ContentViewer scrollToTop={false} content={content[activeIndex]} />
             </div>
         </div>
