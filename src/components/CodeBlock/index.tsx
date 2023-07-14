@@ -177,7 +177,7 @@ export const CodeBlock = ({
     }
 
     return (
-        <div className="relative mt-2 mb-4 border border-light dark:border-dark rounded">
+        <div className="code-block relative mt-2 mb-4 border border-light dark:border-dark rounded">
             {showLabel && (
                 <div className="bg-accent dark:bg-accent-dark text-sm flex items-center w-full rounded-t">
                     {selector === 'tabs' && languages.length > 1 ? (
