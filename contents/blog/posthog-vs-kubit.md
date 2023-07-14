@@ -399,7 +399,7 @@ For PostHog, we have [a guide for estimating your usage](/docs/billing/estimatin
 
 ### Is there a free trial?
 
-With PostHog, you don’t need a free trial — it’s free to get started, with a generous monthly allowance of events, replays, and API calls. If you’re withing this allowance, PostHog is free to use forever. 
+With PostHog, you don’t need a free trial — it’s free to get started, with a generous monthly allowance of events, replays, and API calls. If you’re within this allowance, PostHog is free to use forever. 
 
 Kubit does offer a free trial, but you’ll need to submit your company information and wait for Kubit to respond with an invite to do so. We tried this ourselves, and have been waiting a week for an invite or someone to reach out. 
 
