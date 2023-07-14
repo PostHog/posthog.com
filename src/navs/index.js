@@ -1987,6 +1987,10 @@ export const docsMenu = {
                     url: '/docs/surveys/manual',
                     icon: 'Message',
                     color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
 
                 {
