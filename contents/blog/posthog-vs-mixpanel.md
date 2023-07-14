@@ -59,7 +59,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
             <td>Track events and conversion; analyze user behavior</td>
         </tr>
         <tr>
-            <td><strong>Session recording</strong></td>
+            <td><strong>Session replays</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Watch real users use your product; diagnose bugs</td>
@@ -75,6 +75,12 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
             <td className="text-center">Enterprise</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Test changes and analyze their impact</td>
+        </tr>
+        <tr>
+            <td><strong>User surveys</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ask users for qualitative feedback and gather responses</td>
         </tr>
         <tr>
             <td><strong>Heatmaps</strong></td>
@@ -102,7 +108,7 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 - **Feature flagging:** Mixpanel doesn't have any built-in feature flag functionality. PostHog Cloud includes unlimited flags for free. Visit [our feature flag page](/product/feature-flags) for more information.
 
-- **Session recording:** PostHog offers 15,000 session recordings (with console logs) per month for free. Visit our [session recording page](/product/session-recording) for more information.
+- **Session replays:** PostHog offers 15,000 session replays (with console logs) per month for free. Visit our [session replays page](/product/session-recording) for more information.
 
 > **Further reading:** [How Mixpanel compares to other PostHog alternatives](/blog/posthog-alternatives)
 
@@ -301,13 +307,13 @@ PostHog and Mixpanel both support a broad range of tracking options and librarie
             <td><strong>iOS (Swift)</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Autocapture and session recording not available</td>
+            <td>Autocapture and session replays not available</td>
         </tr>
         <tr>
             <td><strong>iOS (Objective-C)</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Autocapture and session recording not available</td>
+            <td>Autocapture and session replays not available</td>
         </tr>
         <tr>
             <td><strong>Android</strong></td>
@@ -327,13 +333,13 @@ PostHog and Mixpanel both support a broad range of tracking options and librarie
 
 - **JavaScript snippet:** All client libraries support event tracking and user identification for product analytics, but we recommend using PostHog's JavaScript snippet to enjoy all our features. See our [client library documentation](/docs/getting-started/install?tab=snippet) for more information.
 
-- **Mobile app session recordings:** We don't currently support session recording in mobile apps, but it's currently under consideration as a project for our session recording team. See our [public roadmap](/roadmap) for more info.
+- **Mobile app session replays:** We don't currently support session recording in mobile apps, but it's currently under consideration as a project for our team. See our [public roadmap](/roadmap) for more info.
 
 - **Unity:** We don't have a Unity SDK yet but, as we're open-source, anyone can create one. See our [contribution guidelines](/docs/contribute) for more info.
 
 ### Server libraries
 
-Some PostHog features, such as session recording and autocapture, are only available via our client-side libraries.
+Some PostHog features, such as session replays and autocapture, are only available via our client-side libraries.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -940,7 +946,7 @@ Both Mixpanel and PostHog also support anonymizing data, while the PostHog [Prop
 
 We believe in transparent pricing, which is why [our pricing page](/pricing) includes an easy-to-understand pricing calculator.
 
-PostHog Cloud includes a generous 1 million events and 15,000 session recordings per month for **free, every month** with **no feature limitations**.
+PostHog Cloud includes a generous 1 million events and 15,000 session replays per month for **free, every month** with **no feature limitations**.
 
 A typical, medium-size B2B product with 10,000 monthly active users, who generate: 
 
@@ -950,7 +956,7 @@ A typical, medium-size B2B product with 10,000 monthly active users, who generat
 Would use:
 
 - 1 million events per month
-- 50,000 session recordings
+- 50,000 session replays
 
 Discounts for annual contracts are available on application.
 
@@ -962,6 +968,6 @@ Mixpanel also offers a free tier with a 100k MTU limit, however it applies numer
 
 ### How do PostHog and Mixpanel compare to Amplitude?
 
-Amplitude is closer to Mixpanel than PostHog – it doesn't support features session recordings or feature flagging, and doesn't offer autocapture. Read our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison for information.
+Amplitude is closer to Mixpanel than PostHog – it doesn't support features session replays or feature flagging, and doesn't offer autocapture. Read our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison for information.
 
 <ArrayCTA />

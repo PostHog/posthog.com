@@ -59,7 +59,7 @@ This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our 
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
-       	<td>Self-serve</td>
+       		<td>Self-serve</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
        	    <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
@@ -133,6 +133,11 @@ This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our 
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
     	</tr>
+		<tr>
+            <td><strong>User surveys</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
     	<tr>
         	<td>Hedgehogs</td>
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
@@ -172,7 +177,7 @@ Both Amplitude and PostHog integrate with a large number of data sources. The ta
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
     	<tr>
-       	<td>Snowflake</td>
+       		<td>Snowflake</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
        	    <td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
