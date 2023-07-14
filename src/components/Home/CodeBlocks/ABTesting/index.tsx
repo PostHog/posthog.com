@@ -1,47 +1,29 @@
 import CodeBlock from 'components/Home/CodeBlock'
 import React from 'react'
 
-function IdentifyUser() {
+function BuildTest() {
     return (
-        <div className="grid grid-cols-2 gap-x-6">
-            <div>
-                <h4>Your code</h4>
-                <CodeBlock code={`console.log('test')`} language="js" />
-            </div>
-            <div>
-                <h4>Available in PostHog</h4>
-                <CodeBlock code={`console.log('test')`} language="js" />
-            </div>
-        </div>
-    )
-}
-
-function TrackEvent() {
-    return (
-        <div className="grid grid-cols-2 gap-x-6">
-            <div>
-                <h4>Your code</h4>
-                <CodeBlock code={`console.log('test')`} language="js" />
-            </div>
-            <div>
-                <h4>Available in PostHog</h4>
-                <CodeBlock code={`console.log('test')`} language="js" />
-            </div>
+        <div className="-mt-5">
+            <p className="leading-tight">
+                A/B testing is built on feature flags. Define the variants and use <code>getFeatureFlag</code> to serve
+                content for each variant.
+            </p>
+            <CodeBlock
+                code={`posthog.getFeatureFlag('my-flag') === "test" ? <TestComponent /> : <ControlComponent />`}
+                language="js"
+            />
+            <p className="leading-tight">
+                Set up rules for variants (like audience, distribution) inside the PostHog app.
+            </p>
         </div>
     )
 }
 
 export default [
     {
-        title: 'Track an event',
-        body: TrackEvent,
+        title: 'Building an A/B test',
+        body: BuildTest,
         bodyType: 'component',
-        tags: ['capture'],
-    },
-    {
-        title: 'Identify a user',
-        body: IdentifyUser,
-        bodyType: 'component',
-        tags: ['identify', 'group'],
+        code: ['getFeatureFlag'],
     },
 ]
