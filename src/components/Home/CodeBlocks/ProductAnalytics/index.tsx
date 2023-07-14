@@ -82,6 +82,7 @@ function DataAttributes() {
                     <h4 className="text-xl">Your code</h4>
                     <div className="border-[1.5px] border-blue p-2 rounded">
                         <CodeBlock
+                            lineNumberStart={301}
                             code={`<button
   data-ph-capture-attribute-plan-price="12.99"
   data-ph-capture-attribute-plan-id="XYZ12345"

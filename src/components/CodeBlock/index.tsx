@@ -27,6 +27,7 @@ type CodeBlockProps = {
     onChange?: (language: LanguageOption) => void
     currentLanguage: LanguageOption
     children: LanguageOption[]
+    lineNumberStart?: number
 }
 
 type SingleCodeBlockProps = {
@@ -128,10 +129,10 @@ export const CodeBlock = ({
     showLabel = true,
     showCopy = true,
     showLineNumbers = false,
-
     children: languages,
     currentLanguage,
     onChange,
+    lineNumberStart = 1,
 }: CodeBlockProps) => {
     if (languages.length < 0 || !currentLanguage) {
         return null
@@ -309,14 +310,14 @@ export const CodeBlock = ({
                     >
                         <div className="flex whitespace-pre-wrap" id={codeBlockId}>
                             {showLineNumbers && (
-                                <pre className="m-0 py-4 px-2 inline-block font-code font-medium text-sm bg-accent dark:bg-accent-dark">
+                                <pre className="m-0 py-4 px-3 inline-block font-code font-medium text-sm bg-accent dark:bg-accent-dark">
                                     <span
                                         className="select-none flex flex-col dark:text-white/60 text-black/60 shrink-0"
                                         aria-hidden="true"
                                     >
                                         {tokens.map((_, i) => (
                                             <span className="inline-block w-4 text-right align-middle" key={i}>
-                                                {i + 1}
+                                                {i + lineNumberStart}
                                             </span>
                                         ))}
                                     </span>
