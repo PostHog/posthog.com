@@ -23,7 +23,7 @@ const content = [
 export default function CodeBlocks() {
     const [activeIndex, setActiveIndex] = useState(0)
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-screen-2xl mx-auto">
             <InternalMenu
                 activeIndex={activeIndex}
                 menu={docsMenu?.children.map((child, index) => ({
@@ -32,7 +32,7 @@ export default function CodeBlocks() {
                     onClick: () => setActiveIndex(index),
                 }))}
             />
-            <div className="max-w-screen-2xl mx-auto my-12">
+            <div className="my-12">
                 <ContentViewer scrollToTop={false} content={content[activeIndex]} />
             </div>
         </div>
