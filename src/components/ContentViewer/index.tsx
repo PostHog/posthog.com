@@ -18,6 +18,7 @@ import { Blockquote } from 'components/BlockQuote'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { ZoomImage } from 'components/ZoomImage'
 import Markdown from 'components/Squeak/components/Markdown'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -28,6 +29,7 @@ interface IProps {
         body: string | (() => React.ReactNode)
         author?: string
         tags?: string[]
+        code?: string[]
         video?: string
         type?: string
         bodyType?: 'markdown' | 'mdx' | 'component'
@@ -69,9 +71,10 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
                 <div className="reasonable:sticky reasonable:top-[108px]">
                     {title && <h3 className="text-lg mb-2">{title}</h3>}
                     <ul className="list-none m-0 p-0 grid gap-y-1">
-                        {content.map(({ title, author, image, tags, video, type }, index) => {
+                        {content.map(({ title, author, image, tags, code, video, type }, index) => {
                             const active = currentIndex === index
                             const hasTags = tags && tags.length
+                            const hasCode = code && code.length
                             return (
                                 <li key={title + index}>
                                     <button
@@ -94,7 +97,7 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
                                             </p>
                                         )}
 
-                                        {(hasTags || video) && (
+                                        {(hasTags || hasCode || video) && (
                                             <div className="flex justify-between space-y-2 lg:space-x-2 lg:space-y-0 space-y-reverse lg:flex-row flex-col-reverse items-start mt-1">
                                                 {hasTags && (
                                                     <ul className="list-none m-0 mb-1 p-0 flex items-center flex-wrap">
@@ -107,6 +110,13 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
                                                                     {tag}
                                                                 </li>
                                                             )
+                                                        })}
+                                                    </ul>
+                                                )}
+                                                {hasCode && (
+                                                    <ul className="list-none m-0 mb-1 p-0 gap-2 flex items-center flex-wrap">
+                                                        {code.map((code) => {
+                                                            return <KeyboardShortcut key={code} text={code} size="xs" />
                                                         })}
                                                     </ul>
                                                 )}
