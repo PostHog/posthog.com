@@ -19,6 +19,7 @@ export default function CodeBlocks() {
                 The PostHog code snippet offers granular control over features and data privacy.
             </p>
             <InternalMenu
+                scrollOnRender={false}
                 activeIndex={activeIndex}
                 menu={docsMenu?.children.slice(0, 5).map((child, index) => ({
                     ...child,

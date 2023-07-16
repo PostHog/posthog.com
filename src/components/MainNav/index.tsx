@@ -136,7 +136,7 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile
     const Icon = icons[icon]
 
     useEffect(() => {
-        if (initialScrollTo) ref?.current?.scrollIntoView({ block: 'center', inline: 'center' })
+        if (initialScrollTo) ref?.current?.scrollIntoView({ block: 'nearest', inline: 'center' })
     }, [overflowing])
 
     const handleClick = () => {
@@ -167,7 +167,7 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile
                 </span>
                 <span
                     className={`absolute ${
-                        mobile ? 'top-[-4px]' : 'bottom-[calc(-.5rem_-_2px)]'
+                        mobile ? 'top-[-4px]' : '-bottom-2'
                     } left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
                         active ? `border-${color}` : `border-transparent`
                     }`}
@@ -177,7 +177,7 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile
     )
 }
 
-export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex }) => {
+export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex, scrollOnRender = true }) => {
     const ref = useRef<HTMLUListElement>(null)
     const [overflowing, setOverflowing] = useState(false)
     function handleResize() {
@@ -203,7 +203,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                     <MenuItem
                         key={menuItem.name}
                         {...menuItem}
-                        initialScrollTo={activeIndex === index}
+                        initialScrollTo={scrollOnRender && activeIndex === index}
                         overflowing={overflowing}
                         mobile={mobile}
                         active={menu[activeIndex]?.name === menuItem.name}
