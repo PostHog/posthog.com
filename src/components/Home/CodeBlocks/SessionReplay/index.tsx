@@ -9,7 +9,7 @@ function ConsoleLogs() {
                 Console logs are useful for debugging and can be enabled by passing{' '}
                 <code>enable_recording_console_logs: true</code> or in your project's settings.
             </p>
-            <div className="flex gap-x-6">
+            <div className="flex lg:flex-row lg:gap-x-6 flex-col">
                 <div className="shrink">
                     <h4 className="text-lg">Your code</h4>
                     <CodeBlock
