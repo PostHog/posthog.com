@@ -124,6 +124,8 @@ export const SingleCodeBlock = ({ label, language, children, ...props }: SingleC
     )
 }
 
+const tooltipKey = '// TIP:'
+
 export const CodeBlock = ({
     label,
     selector = 'tabs',
@@ -168,7 +170,7 @@ export const CodeBlock = ({
     }
 
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(replaceProjectInfo(currentLanguage.code))
+        navigator.clipboard.writeText(replaceProjectInfo(currentLanguage.code.replace(tooltipKey, '//').trim()))
 
         setTooltipVisible(true)
         setTimeout(() => {
@@ -310,7 +312,7 @@ export const CodeBlock = ({
                             showLabel ? 'border-t' : ''
                         }`}
                     >
-                        <div className="flex whitespace-pre-wrap" id={codeBlockId}>
+                        <div className="flex whitespace-pre-wrap relative" id={codeBlockId}>
                             {showLineNumbers && (
                                 <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent dark:bg-accent-dark">
                                     <span
@@ -318,29 +320,8 @@ export const CodeBlock = ({
                                         aria-hidden="true"
                                     >
                                         {tokens.map((_, i) => {
-                                            const currentTooltip = tooltips?.find(
-                                                (tooltip) => tooltip.lineNumber === i + lineNumberStart
-                                            )
-
                                             return (
-                                                <span className="inline-block text-right align-middle relative" key={i}>
-                                                    {currentTooltip && (
-                                                        <Tooltip
-                                                            content={() => (
-                                                                <div
-                                                                    style={{ maxWidth: currentTooltip.maxWidth ?? 200 }}
-                                                                    className="text-center"
-                                                                >
-                                                                    {currentTooltip.content}
-                                                                </div>
-                                                            )}
-                                                        >
-                                                            <span className="absolute right-0 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
-                                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
-                                                                <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
-                                                            </span>
-                                                        </Tooltip>
-                                                    )}
+                                                <span className="inline-block text-right align-middle" key={i}>
                                                     <span>{i + lineNumberStart}</span>
                                                 </span>
                                             )
@@ -354,24 +335,52 @@ export const CodeBlock = ({
                             >
                                 {tokens.map((line, i) => {
                                     const { className, ...props } = getLineProps({ line, key: i })
+                                    const tooltipContent =
+                                        tooltips?.find((tooltip) => tooltip.lineNumber === i + lineNumberStart)
+                                            ?.content ||
+                                        line
+                                            .find((token) => token.content.startsWith(tooltipKey))
+                                            ?.content.replace(tooltipKey, '')
+                                    const firstContentIndex = line.findIndex((token) => !!token.content.trim())
                                     return (
                                         <div key={i} className={`${className} relative`} {...props}>
-                                            {line.map((token, key) => {
-                                                const { className, children, ...props } = getTokenProps({ token, key })
-                                                return (
-                                                    <span
-                                                        key={key}
-                                                        className={`${className} text-shadow-none`}
-                                                        {...props}
-                                                    >
-                                                        {children === "'<ph_project_api_key>'" && projectToken
-                                                            ? `'${projectToken}'`
-                                                            : children === "'<ph_instance_address>'" && projectToken
-                                                            ? `'https://app.posthog.com'`
-                                                            : children}
-                                                    </span>
-                                                )
-                                            })}
+                                            {line
+                                                .filter((token) => !token.content.startsWith(tooltipKey))
+                                                .map((token, key) => {
+                                                    const { className, children, ...props } = getTokenProps({
+                                                        token,
+                                                        key,
+                                                    })
+                                                    return (
+                                                        <span className="relative" key={key}>
+                                                            {firstContentIndex === key && tooltipContent && (
+                                                                <Tooltip
+                                                                    content={() => (
+                                                                        <div className="text-center max-w-[200px]">
+                                                                            {tooltipContent.trim()}
+                                                                        </div>
+                                                                    )}
+                                                                >
+                                                                    <span className="absolute -left-1 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
+                                                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
+                                                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
+                                                                    </span>
+                                                                </Tooltip>
+                                                            )}
+                                                            <span
+                                                                className={`${className} text-shadow-none`}
+                                                                {...props}
+                                                            >
+                                                                {children === "'<ph_project_api_key>'" && projectToken
+                                                                    ? `'${projectToken}'`
+                                                                    : children === "'<ph_instance_address>'" &&
+                                                                      projectToken
+                                                                    ? `'https://app.posthog.com'`
+                                                                    : children}
+                                                            </span>
+                                                        </span>
+                                                    )
+                                                })}
                                         </div>
                                     )
                                 })}
