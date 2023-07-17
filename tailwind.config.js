@@ -121,6 +121,18 @@ module.exports = {
                     'Arial',
                     'sans-serif',
                 ],
+                os: [
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    'Segoe UI',
+                    'Roboto',
+                    'Helvetica',
+                    'Arial',
+                    'sans-serif',
+                    'Apple Color Emoji',
+                    'Segoe UI Emoji',
+                    'Segoe UI Symbol',
+                ],
             },
             fontSize: {
                 '4xl': '1.875rem',

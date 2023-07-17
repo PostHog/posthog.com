@@ -6,6 +6,21 @@ p {
     margin-bottom: 1.45rem;
 }
 
+code {
+    @apply font-code font-medium text-sm border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm px-1 py-0.5;
+}
+
+.code-block {
+    /* target line numbers */
+    pre pre {
+        @apply bg-accent dark:bg-accent-dark border-r border-light dark:border-dark;
+    }
+
+    code {
+        @apply border-none bg-transparent;
+    }
+}
+
 @layer utilities {
     .text-shadow-none {
         text-shadow: none;
@@ -150,8 +165,8 @@ h4 {
         @apply mt-4;
     }
 
-    code {
-        @apply font-medium text-sm;
+    code:not('.article-content-ignore') {
+        @apply font-code font-medium text-sm border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm px-1 py-0.5;
     }
 
     blockquote {
