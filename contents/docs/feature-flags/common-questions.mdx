@@ -17,6 +17,13 @@ Here's a list of suggestions to troubleshoot your flag:
 
 ---
 
+## Why are local evaluation flags priced differently?
+
+[Local evaluation](/docs/feature-flags/bootstrapping-and-local-evaluation) enables you to pull flag definitions from the PostHog API, rather than making an individual `decide` call per flag. Using these definitions, you can resolve the flags of hundreds or thousands of users with a single API call. We therefore bill a single local evaluation call as being equivalent to 10 `decide`requests.
+
+Local evaluation payloads are typically used for much, _much_ more than 10 users, so local evaluation is often still more cost-effective tha making individual `decide`requests.ß We also give all users their first 1M API calls (or 100k local evaluation calls) free each month, in addition to offering discounts for non-profit organizations and [startups](/startups).
+
+---
 
 ## On my website, why does the feature flag sometimes flicker?
 
