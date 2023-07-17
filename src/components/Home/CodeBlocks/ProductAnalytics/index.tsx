@@ -81,9 +81,10 @@ function DataAttributes() {
                 <div className="flex-1">
                     <h4 className="text-xl">Your code</h4>
                     <div className="border-[1.5px] border-blue p-2 rounded">
-                        <CodeBlock
-                            lineNumberStart={301}
-                            code={`<button
+                        <div className="-mt-2 -mb-4">
+                            <CodeBlock
+                                lineNumberStart={301}
+                                code={`<button
   data-ph-capture-attribute-plan-price="12.99"
   data-ph-capture-attribute-plan-id="XYZ12345"
   data-ph-capture-attribute-plan-term="monthly"
@@ -93,8 +94,9 @@ function DataAttributes() {
 >
   Subscribe
 </button>`}
-                            language="html"
-                        />
+                                language="html"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
