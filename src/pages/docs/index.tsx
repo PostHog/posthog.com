@@ -253,7 +253,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                         <p className="text-[15px]">
                             Extend functionality with third-party apps that integrate into the PostHog ecosystem.
                         </p>
-                        <div className="flex flex-col @xs:flex-row items-center gap-4">
+                        <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
                             <CallToAction to="/docs/apps" type="outline" size="md" className="!w-full sm:!w-auto">
                                 Get started
                             </CallToAction>
