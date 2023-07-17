@@ -96,6 +96,12 @@ PostHog integrates several normally separate tools, such as product analytics, s
             <td>Visualize where users click in your app or website</td>
         </tr>
         <tr>
+            <td><strong>User surveys</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ask users for qualitative feedback and gather responses</td>
+        </tr>
+        <tr>
             <td><strong>Autocapture</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -111,7 +117,7 @@ PostHog integrates several normally separate tools, such as product analytics, s
 </table>
 </div>
 
-- **Session recording:** Heap offers basic session recording in addition to its core product analytics product, but it's a bolt-on option on all plans. Session recording is built-in to PostHog and you get 15,000 free recordings every month. **Jump to:** [Session recording comparison](#session-recording)
+- **Session replays:** Heap offers basic session replays in addition to its core product analytics product, but it's a bolt-on option on all plans. Session replays are built-in to PostHog and you get 15,000 free recordings every month. **Jump to:** [Session recording comparison](#session-recording)
 
 - **Sync to data warehouse:** The ability to sync with your data warehouse is part of Heap Connect, a paid add-on on to Heap's Pro plan – it's included on Heap's Premier plan. Data warehouse sync is available in PostHog at no additional cost because we believe companies should own their data.
 
@@ -214,9 +220,9 @@ Neither currently offers an SQL editor for writing custom queries, but it's in p
 </table>
 </div>
 
-### Session recording
+### Session replays
 
-Session recording is an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Heap and PostHog offer session recording, though Heap's version is quite limited at present.
+Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Heap and PostHog offer session recording, though Heap's version is quite limited at present.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
