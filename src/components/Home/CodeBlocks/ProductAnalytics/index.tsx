@@ -44,24 +44,23 @@ function DataAttributes() {
                             <div className="border-[1.5px] border-blue p-2 rounded cursor-not-allowed">
                                 <div className="bg-red text-white p-4 rounded text-center font-bold relative">
                                     Start trial
-                                    <svg
-                                        className="absolute right-8 -bottom-4"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="44"
-                                        height="44"
-                                        fill="none"
-                                    >
-                                        <path
-                                            fill="#fff"
-                                            d="M14.431 12.02c-1.505-.561-2.974.907-2.412 2.413l8.393 22.492a1.875 1.875 0 0 0 3.082.67l6.255-6.254 9.33 9.33a1.125 1.125 0 1 0 1.59-1.591l-9.33-9.33 6.255-6.254a1.875 1.875 0 0 0-.67-3.083L14.43 12.02ZM13.5 0c.621 0 1.125.504 1.125 1.125V3.75a1.125 1.125 0 0 1-2.25 0V1.125C12.375.504 12.879 0 13.5 0ZM23.155 3.844c.44.44.44 1.151 0 1.59l-1.966 1.967a1.125 1.125 0 0 1-1.591-1.591l1.966-1.966c.44-.44 1.151-.44 1.59 0ZM7.402 21.19a1.125 1.125 0 0 0-1.591-1.592l-1.966 1.966a1.125 1.125 0 0 0 1.59 1.591l1.967-1.966ZM4.875 13.5c0 .621-.504 1.125-1.125 1.125H1.125a1.125 1.125 0 0 1 0-2.25H3.75c.621 0 1.125.504 1.125 1.125ZM5.81 7.402A1.125 1.125 0 1 0 7.403 5.81L5.436 3.845a1.125 1.125 0 1 0-1.591 1.59L5.81 7.403Z"
-                                        />
-                                    </svg>
+                                    <span className="text-black dark:text-white">
+                                        <svg
+                                            className="absolute right-8 -bottom-4 fill-current"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="44"
+                                            height="44"
+                                            fill="none"
+                                        >
+                                            <path d="M14.431 12.02c-1.505-.561-2.974.907-2.412 2.413l8.393 22.492a1.875 1.875 0 0 0 3.082.67l6.255-6.254 9.33 9.33a1.125 1.125 0 1 0 1.59-1.591l-9.33-9.33 6.255-6.254a1.875 1.875 0 0 0-.67-3.083L14.43 12.02ZM13.5 0c.621 0 1.125.504 1.125 1.125V3.75a1.125 1.125 0 0 1-2.25 0V1.125C12.375.504 12.879 0 13.5 0ZM23.155 3.844c.44.44.44 1.151 0 1.59l-1.966 1.967a1.125 1.125 0 0 1-1.591-1.591l1.966-1.966c.44-.44 1.151-.44 1.59 0ZM7.402 21.19a1.125 1.125 0 0 0-1.591-1.592l-1.966 1.966a1.125 1.125 0 0 0 1.59 1.591l1.967-1.966ZM4.875 13.5c0 .621-.504 1.125-1.125 1.125H1.125a1.125 1.125 0 0 1 0-2.25H3.75c.621 0 1.125.504 1.125 1.125ZM5.81 7.402A1.125 1.125 0 1 0 7.403 5.81L5.436 3.845a1.125 1.125 0 1 0-1.591 1.59L5.81 7.403Z" />
+                                        </svg>
+                                    </span>
                                 </div>
                             </div>
                         </HoverTooltip>
                     </div>
                 </div>
-                <div className="flex justify-center lg:items-end lg:mb-20 lg:ml-[calc(-1rem_-_1px)]">
+                <div className="flex justify-center lg:items-end lg:mb-12 lg:ml-[calc(-1rem_-_1px)]">
                     <svg
                         className="hidden lg:block"
                         xmlns="http://www.w3.org/2000/svg"

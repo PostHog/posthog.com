@@ -36,7 +36,7 @@ function TrackEvent() {
   "distinct_id": "1193056043057"
   "elements_chain": ""
   "event": "Plan purchased"
-    "properties": {...} 57 items // TIP: Expand to browse default properties sent with each event (like device info, session data, and geo IP) and custom properties
+    "properties": {...} 57 items // TIP: Standard properties are sent with each event (like device info, session data, and geo IP) along with any custom properties you attach
   "team_id": 1234
   "timestamp": "2023-06-28T08:57:37.083-07:00"
   "uuid": "018902b9-797d-78df-a85e-73422079fcb5"
