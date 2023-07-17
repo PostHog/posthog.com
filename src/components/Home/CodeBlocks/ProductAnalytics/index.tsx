@@ -42,8 +42,8 @@ function DataAttributes() {
                             content={() => <div className="">Silly goose, this button is just for show!</div>}
                         >
                             <div className="border-[1.5px] border-blue p-2 rounded cursor-not-allowed">
-                                <div className="bg-red p-4 rounded text-center font-bold relative">
-                                    Subscribe
+                                <div className="bg-red text-white p-4 rounded text-center font-bold relative">
+                                    Start trial
                                     <svg
                                         className="absolute right-8 -bottom-4"
                                         xmlns="http://www.w3.org/2000/svg"
