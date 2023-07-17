@@ -106,7 +106,17 @@
             },
             {
                 "name": "Offsites",
-                "url": "/handbook/company/offsites"
+                "url": "",
+                "children": [
+                    {
+                        "name": "How we run offsites",
+                        "url": "/handbook/company/offsites"
+                    },
+                    {
+                        "name": "2023: Aruba",
+                        "url": "/handbook/company/offsites/2023-aruba"
+                    }
+                ]
             },
             {
                 "name": "Security",

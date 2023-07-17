@@ -17,6 +17,14 @@ import { LPCTA } from './components/LPCTA'
 import { Label } from './components/Label'
 import { List } from './components/List'
 import { NewsletterTutorial } from './components/NewsletterTutorial'
+import { OffsiteAttendees } from './components/OffsiteAttendees'
+import { OffsiteDescription } from './components/OffsiteDescription'
+import { OffsiteHackathons } from './components/OffsiteHackathons'
+import { OffsiteHackathonsItem } from './components/OffsiteHackathonsItem'
+import { OffsiteHeader } from './components/OffsiteHeader'
+import { OffsiteMerch } from './components/OffsiteMerch'
+import { OffsiteMerchItem } from './components/OffsiteMerchItem'
+import { OffsitePhotos } from './components/OffsitePhotos'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
 import { ProductLayout } from './components/ProductLayout'
@@ -46,6 +54,14 @@ export const shortcodes = {
     Label,
     List,
     NewsletterTutorial,
+    OffsiteAttendees,
+    OffsiteDescription,
+    OffsiteHackathons,
+    OffsiteHackathonsItem,
+    OffsiteHeader,
+    OffsiteMerch,
+    OffsiteMerchItem,
+    OffsitePhotos,
     OverflowXSection,
     Quote,
     ProductLayout,
