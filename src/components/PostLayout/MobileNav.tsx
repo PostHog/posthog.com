@@ -6,6 +6,7 @@ import { IMenu } from './types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
 import slugify from 'slugify'
+import { capitalizeFirstLetter } from '../../utils'
 
 const container = {
     hidden: { opacity: 0 },
@@ -194,7 +195,7 @@ export default function MobileNav() {
                 <span className="flex items-center space-x-2 group-active:top-[0.5px] group-active:scale-[.98] transition-all">
                     {menu?.parent?.name && <span>{menu?.parent?.name}</span>}
                     {menu?.parent?.name && <span className="opacity-60">→</span>}
-                    <span>{title}</span>
+                    <span>{capitalizeFirstLetter(title)}</span>
                 </span>
                 <Chevron
                     className={`w-4 h-4 origin-[center_40%] transition-all group-active:top-[0.5px] group-active:scale-[.98] ${
