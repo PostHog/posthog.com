@@ -93,6 +93,9 @@ module.exports = {
             red: '#F54E00',
         }),
         extend: {
+            backgroundImage: {
+                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            },
             fontFamily: {
                 serif: ['MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
