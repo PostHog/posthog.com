@@ -202,7 +202,7 @@ export default function NoHatingAllowed() {
             <h2 className="text-4xl lg:text-6xl text-center mb-5">
                 <span className="text-red uppercase block md:inline">Warning:</span> You'll hate PostHog if...
             </h2>
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 z-10">
+            <div className="absolute top-1/2 left-0 -translate-y-1/2 mt-16 z-10">
                 <button
                     onClick={() => listRef?.current?.scrollBy({ left: -300, behavior: 'smooth' })}
                     className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
@@ -212,13 +212,13 @@ export default function NoHatingAllowed() {
             </div>
             <ul
                 ref={listRef}
-                className="list-none m-0 p-0 flex space-x-12 w-full px-5 snap-x overflow-x-auto overflow-y-hidden py-12"
+                className="list-none m-0 p-0 flex space-x-12 w-full px-5 snap-x overflow-x-auto overflow-y-hidden py-6 lg:py-12"
             >
                 {cards.map((card, index) => {
                     return <Card {...card} key={index} />
                 })}
             </ul>
-            <div className="absolute top-1/2 right-0 -translate-y-1/2">
+            <div className="absolute top-1/2 right-0 -translate-y-1/2 mt-16">
                 <button
                     onClick={() => listRef?.current?.scrollBy({ left: 300, behavior: 'smooth' })}
                     className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
