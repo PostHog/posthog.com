@@ -36,7 +36,7 @@ const cards = [
         ),
         color: '#DCE7D0',
         Image: <StaticImage quality={100} placeholder="none" src="./images/wasting-money.png" />,
-        ImageSize: 'mt-8',
+        ImageSize: 'w-full mt-8',
     },
     {
         top: (
@@ -56,14 +56,14 @@ const cards = [
         ),
         color: '#D9E1FC',
         Image: <StaticImage quality={100} placeholder="none" src="./images/try-buy.png" />,
-        ImageSize: 'w-[250px] -mt-4',
+        ImageSize: 'w-[240px] -mt-4',
     },
     {
         top: 'You think your email is a good trade for that free whitepaper',
         bottom: <>Please press Ctrl + W now, or ask your network administrator to close your window.</>,
         color: '#FDBAF2',
         Image: <StaticImage quality={100} placeholder="none" src="./images/bad-trade.png" />,
-        ImageSize: 'mt-4',
+        ImageSize: 'w-full mt-4',
     },
     {
         top: 'You give out your credit card details to strangers',
@@ -85,7 +85,7 @@ const cards = [
         ),
         color: '#DCE7D0',
         Image: <StaticImage quality={100} placeholder="none" src="./images/commitment-issues.png" />,
-        ImageSize: 'mt-4',
+        ImageSize: 'w-full mt-4',
     },
     {
         top: 'You loathe new features, and bug fixes',
@@ -100,6 +100,7 @@ const cards = [
         ),
         color: '#D9E1FC',
         Image: <StaticImage quality={100} placeholder="none" src="./images/i-hate-change.png" />,
+        ImageSize: 'w-full',
     },
     {
         top: "You'd rather buy disparate tools and mangle them together",
@@ -176,6 +177,7 @@ const cards = [
         ),
         color: '#DCE7D0',
         Image: <StaticImage quality={100} placeholder="none" src="./images/loop-hole.png" />,
+        ImageSize: 'w-full',
     },
 ]
 
@@ -185,7 +187,7 @@ const Card = ({ top, bottom, Image, ImageSize, color }) => {
             style={{ backgroundColor: color || 'white' }}
             className="h-[400px] w-[300px] flex flex-col justify-between p-5 rounded-md relative even:rotate-3 odd:-rotate-3 flex-shrink-0 snap-center overflow-hidden md:first:ml-12"
         >
-            <div className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-full px-8 ${ImageSize}`}>
+            <div className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 px-8 ${ImageSize}`}>
                 {Image}
             </div>
             <h5 className="m-0 text-2xl text-black relative leading-7">{top}</h5>
@@ -202,7 +204,8 @@ export default function NoHatingAllowed() {
             <h2 className="text-4xl lg:text-6xl text-center mb-5">
                 <span className="text-red uppercase block md:inline">Warning:</span> You'll hate PostHog if...
             </h2>
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 mt-16 z-10">
+            <div className="absolute z-10 -left-10 top-64 bottom-32 w-48 bg-gradient-radial from-light/30 via-light/0 to-light/0 dark:from-dark/30 dark:via-dark/0 dark:to-dark/0" />
+            <div className="absolute z-20 top-1/2 left-0 -translate-y-1/2 mt-16">
                 <button
                     onClick={() => listRef?.current?.scrollBy({ left: -300, behavior: 'smooth' })}
                     className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
@@ -218,6 +221,7 @@ export default function NoHatingAllowed() {
                     return <Card {...card} key={index} />
                 })}
             </ul>
+            <div className="absolute -right-10 top-64 bottom-32 w-48 bg-gradient-radial from-light/30 via-light/0 to-light/0 dark:from-dark/30 dark:via-dark/0 dark:to-dark/0" />
             <div className="absolute top-1/2 right-0 -translate-y-1/2 mt-16">
                 <button
                     onClick={() => listRef?.current?.scrollBy({ left: 300, behavior: 'smooth' })}

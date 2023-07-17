@@ -33,7 +33,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 
 const Customer = ({ image, imageDark, width, height, className = '' }) => {
     const { websiteTheme } = useValues(layoutLogic)
-    const logo = websiteTheme === 'dark' ? imageDark || image : image
+    const logo = websiteTheme === 'dark' ? imageDark || image : imageDark
     return (
         <li
             className="flex items-center justify-center 
@@ -43,6 +43,8 @@ const Customer = ({ image, imageDark, width, height, className = '' }) => {
 
             lg:px-2
             lg:h-40
+            bg-accent-dark
+            rounded
         "
         >
             <img className={`icon px-4 md:px-6 lg:px-4 ${className}`} width={width} height={height} src={logo} />
@@ -53,8 +55,8 @@ const Customer = ({ image, imageDark, width, height, className = '' }) => {
 export default function Customers() {
     const { ref, inView, entry } = useInView({ triggerOnce: true })
     return (
-        <section className="mb-16 md:-mt-[1px]">
-            <div className="bg-black dark:bg-dark py-8 md:py-12 xl:py-16 px-4 relative z-20">
+        <section className="mb-16 md:-mt-[1px] bg-dark">
+            <div className="py-8 md:pt-12 xl:pt-16 px-4 relative z-20">
                 <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-6xl text-primary-dark max-w-screen-2xl mx-auto">
                     These folks <span className="text-yellow">build products users want</span> with
                     <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14 fill-current" />
@@ -62,10 +64,10 @@ export default function Customers() {
             </div>
             <div
                 ref={ref}
-                className="mt-8 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row"
+                className="md:my-4 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row"
             >
                 {inView && (
-                    <ul className="list-none m-0 p-0 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark">
+                    <ul className="list-none m-0 p-0 pb-4 md:pb-12 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark gap-4">
                         <Customer className="max-h-[44px]" image={yCombinator} imageDark={yCombinatorDark} />
                         <Customer className="max-h-[36px]" image={staples} imageDark={staplesDark} />
                         <Customer className="max-h-[36px]" image={airbus} imageDark={airbusDark} />
