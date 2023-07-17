@@ -140,7 +140,7 @@ export default function Job({
                             teamLead={teamLead?.nodes[0]}
                         />
                     }
-                    title="careers"
+                    title="Careers"
                     menu={menu}
                 >
                     <div className="relative">
