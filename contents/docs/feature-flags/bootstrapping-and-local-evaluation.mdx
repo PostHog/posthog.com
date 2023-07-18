@@ -5,6 +5,12 @@ availability:
     selfServe: full
     enterprise: full
 ---
+
+PostHog offers two main ways to use feature flags. 
+
+- You can send a request to the PostHog `/decide` API endpoint to resolve a flag, or 
+- You can use server-side local evaluation to pull flag definitions, and resolve flags using the definition data
+
 ## Client-side bootstrapping
 
 There is a delay between loading the library and feature flags becoming available to use. This can be detrimental if you want to do something like redirecting to a different page based on a feature flag.
@@ -58,10 +64,18 @@ Calling this function forces PostHog to hit the endpoint for the updated informa
 
 ## Server-side local evaluation
 
-If you're using our server-side libraries, you can use local evaluation to improve performance instead of making additional API requests. This requires:
+If you're using our server-side libraries, you can use local evaluation to improve performance instead of making additional API requests. 
 
-1. knowing and passing in all the person or group properties the flag relies on
-2. initializing the library with your personal API key (created in your account settings)
+We consider it best practice to use local evaluation flags where possible because this method enables you to resolve flags faster. This is especially true if you need to evaluate flags for multiple users — instead of sending a `decide` request per user and waiting for each call to resolve, you simply serve the correct flags all at once based on the definition data. 
+
+Local evaluation calls are also more efficient. Instead of calling the API for each user, you can re-use the definitions for multiple users. 
+
+> For billing purposes we count a local evaluation API request as being equivalent to 10 `decide` requests. One local evaluation request can compute feature flags for hundreds or thousands of users, so this ensures local evaluation is priced fairly but normally remains the most cost-effective option by far. 
+
+Server-side local evaluation requires:
+
+1. Knowing and passing in all the person or group properties the flag relies on.
+2. Initializing the library with your personal API key (created in your account settings).
 
 Local evaluation, in practice, looks like this:
 
