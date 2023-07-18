@@ -70,7 +70,7 @@ We consider it best practice to use local evaluation flags where possible becaus
 
 Local evaluation calls are also more efficient. Instead of calling the API for each user, you can re-use the definitions for multiple users. 
 
-> For billing purposes we count a local evaluation as being equivalent to 10 `decide`requests. Users generally retrieve the payloads of hundreds or thousands of users at once, so this ensures local evaluation is priced fairly but normally remains the most cost-effective option by far. 
+> For billing purposes we count a local evaluation API request as being equivalent to 10 `decide` requests. One local evaluation request can compute feature flags for hundreds or thousands of users, so this ensures local evaluation is priced fairly but normally remains the most cost-effective option by far. 
 
 Server-side local evaluation requires:
 
