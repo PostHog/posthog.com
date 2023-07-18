@@ -1,6 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import React from 'react'
 import { heading, section } from './classes'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const CommunityStat = ({ title, description }) => {
     return (
@@ -15,8 +16,27 @@ const CommunityStat = ({ title, description }) => {
 
 export default function Community() {
     return (
-        <section className={section('text-center')}>
-            <div className="bg-accent-dark w-full rounded-md border border-light dark:border-dark px-4 py-16 dark">
+        <>
+            <section className="relative">
+                <StaticImage src="./images/community-light.png" className="w-full dark:hidden" />
+                <StaticImage src="./images/community-dark.png" className="w-full light:hidden" />
+                <div className="absolute border border-white left-[20vw] bottom-[29vw] text-center -rotate-[4deg]">
+                    <h4 className="text-2xl mb-0">81k+</h4>
+                    <p className="m-0">
+                        Developer <br className="xl:hidden" />
+                        community
+                    </p>
+                </div>
+                <div className="absolute border border-white left-[44vw] bottom-[19vw] text-center -rotate-1">
+                    <h4 className="text-2xl mb-0">411</h4>
+                    <p className="m-0">Contributors</p>
+                </div>
+                <div className="absolute border border-white left-[65vw] bottom-[9vw] text-center -rotate-1">
+                    <h4 className="text-2xl mb-0">50b+</h4>
+                    <p className="m-0">Events tracked</p>
+                </div>
+            </section>
+            <section className={section('text-center')}>
                 <h2 className={heading('md', 'white')}>
                     Join our <span className="text-red">huuuuge*</span> open source community
                 </h2>
@@ -29,7 +49,7 @@ export default function Community() {
                 <CallToAction type="outline" width="56" href="https://github.com/PostHog/posthog">
                     Browse on GitHub
                 </CallToAction>
-            </div>
-        </section>
+            </section>
+        </>
     )
 }
