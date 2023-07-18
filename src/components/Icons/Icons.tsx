@@ -657,7 +657,7 @@ export const ThumbsDown = ({ className = '' }: { className: string }): JSX.Eleme
     )
 }
 
-export const Android = (props): JSX.Element => {
+export const Android = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="14" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 14">
             <path
@@ -668,7 +668,7 @@ export const Android = (props): JSX.Element => {
     )
 }
 
-export const AWS = (props): JSX.Element => {
+export const AWS = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="15" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 15">
             <path
@@ -691,7 +691,7 @@ export const AWS = (props): JSX.Element => {
     )
 }
 
-export const Azure = (props): JSX.Element => {
+export const Azure = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="19" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 19">
             <path
@@ -702,7 +702,7 @@ export const Azure = (props): JSX.Element => {
     )
 }
 
-export const DigitalOcean = (props): JSX.Element => {
+export const DigitalOcean = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path
@@ -720,7 +720,7 @@ export const DigitalOcean = (props): JSX.Element => {
     )
 }
 
-export const Docker = (props): JSX.Element => {
+export const Docker = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="18" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 18">
             <path
@@ -733,7 +733,7 @@ export const Docker = (props): JSX.Element => {
     )
 }
 
-export const GCS = (props): JSX.Element => {
+export const GCS = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="21" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 21">
             <path
@@ -756,7 +756,7 @@ export const GCS = (props): JSX.Element => {
     )
 }
 
-export const HelmChart = (props): JSX.Element => {
+export const HelmChart = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path
@@ -767,7 +767,7 @@ export const HelmChart = (props): JSX.Element => {
     )
 }
 
-export const Heroku = (props): JSX.Element => {
+export const Heroku = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="22" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 24">
             <path
@@ -778,7 +778,7 @@ export const Heroku = (props): JSX.Element => {
     )
 }
 
-export const Ios = (props): JSX.Element => {
+export const Ios = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="21" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 24">
             <path
@@ -789,7 +789,7 @@ export const Ios = (props): JSX.Element => {
     )
 }
 
-export const JS = (props): JSX.Element => {
+export const JS = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M24 0H0v24h24V0z" fill="#F7DF1E"></path>
@@ -801,7 +801,7 @@ export const JS = (props): JSX.Element => {
     )
 }
 
-export const NodeJS = (props): JSX.Element => {
+export const NodeJS = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="22" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 24">
             <path
@@ -816,7 +816,7 @@ export const NodeJS = (props): JSX.Element => {
     )
 }
 
-export const ReactIcon = (props): JSX.Element => {
+export const ReactIcon = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="23" height="21" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 21">
             <g clipPath="url(#clip0)">
@@ -843,7 +843,7 @@ export const ReactIcon = (props): JSX.Element => {
     )
 }
 
-export const Ruby = (props): JSX.Element => {
+export const Ruby = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <g clipPath="url(#clip0)" fillRule="evenodd" clipRule="evenodd">
@@ -1115,7 +1115,7 @@ export const Ruby = (props): JSX.Element => {
     )
 }
 
-export const Shopify = (props): JSX.Element => {
+export const Shopify = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="22" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 24">
             <g clipPath="url(#clip0)">
@@ -1143,7 +1143,7 @@ export const Shopify = (props): JSX.Element => {
     )
 }
 
-export const Segment = (props): JSX.Element => {
+export const Segment = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="23" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 23">
             <mask id="a" maskUnits="userSpaceOnUse" x="0" y="12" width="23" height="11">
@@ -1181,7 +1181,7 @@ export const Segment = (props): JSX.Element => {
     )
 }
 
-export const Sentry = (props): JSX.Element => {
+export const Sentry = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 22">
             <g clipPath="url(#clip0)">
@@ -1199,7 +1199,7 @@ export const Sentry = (props): JSX.Element => {
     )
 }
 
-export const WordPress = (props): JSX.Element => {
+export const WordPress = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path
@@ -1214,7 +1214,7 @@ export const WordPress = (props): JSX.Element => {
     )
 }
 
-export const Zapier = (props): JSX.Element => {
+export const Zapier = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="23" height="23" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23">
             <path
@@ -1225,7 +1225,7 @@ export const Zapier = (props): JSX.Element => {
     )
 }
 
-export const More = (props): JSX.Element => {
+export const More = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="19" height="4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 19 4">
             <path
@@ -1238,7 +1238,7 @@ export const More = (props): JSX.Element => {
     )
 }
 
-export const Check = (props): JSX.Element => {
+export const Check = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path
@@ -1250,7 +1250,7 @@ export const Check = (props): JSX.Element => {
     )
 }
 
-export const Check2 = (props): JSX.Element => {
+export const Check2 = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path
@@ -1262,7 +1262,7 @@ export const Check2 = (props): JSX.Element => {
     )
 }
 
-export const Puzzle = (props): JSX.Element => {
+export const Puzzle = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-.5a1.5 1.5 0 000 3h.5a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-.5a1.5 1.5 0 00-3 0v.5a1 1 0 01-1 1H6a1 1 0 01-1-1v-3a1 1 0 00-1-1h-.5a1.5 1.5 0 010-3H4a1 1 0 001-1V6a1 1 0 011-1h3a1 1 0 001-1v-.5z" />
@@ -1270,7 +1270,7 @@ export const Puzzle = (props): JSX.Element => {
     )
 }
 
-export const Calendar = (props): JSX.Element => {
+export const Calendar = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1283,7 +1283,7 @@ export const Calendar = (props): JSX.Element => {
     )
 }
 
-export const Pipelines = (props): JSX.Element => {
+export const Pipelines = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1299,7 +1299,7 @@ export const Pipelines = (props): JSX.Element => {
     )
 }
 
-export const Warehouse = (props): JSX.Element => {
+export const Warehouse = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1348,7 +1348,7 @@ export const Warehouse = (props): JSX.Element => {
     )
 }
 
-export const OpenSource = (props): JSX.Element => {
+export const OpenSource = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_2389_44050)">
@@ -1370,7 +1370,7 @@ export const OpenSource = (props): JSX.Element => {
     )
 }
 
-export const SelfHost = (props): JSX.Element => {
+export const SelfHost = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="25" height="22" viewBox="0 0 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1381,7 +1381,7 @@ export const SelfHost = (props): JSX.Element => {
     )
 }
 
-export const Autocapture = (props): JSX.Element => {
+export const Autocapture = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1400,7 +1400,7 @@ export const Autocapture = (props): JSX.Element => {
     )
 }
 
-export const Compliance = (props): JSX.Element => {
+export const Compliance = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1411,7 +1411,7 @@ export const Compliance = (props): JSX.Element => {
     )
 }
 
-export const Heatmaps = (props): JSX.Element => {
+export const Heatmaps = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1451,7 +1451,7 @@ export const Heatmaps = (props): JSX.Element => {
     )
 }
 
-export const Platform = (props): JSX.Element => {
+export const Platform = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_2577_42189)">
@@ -1469,7 +1469,7 @@ export const Platform = (props): JSX.Element => {
     )
 }
 
-export const Dashboards = (props): JSX.Element => {
+export const Dashboards = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="36" height="20" viewBox="0 0 36 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.75">
@@ -1498,7 +1498,7 @@ export const Dashboards = (props): JSX.Element => {
     )
 }
 
-export const Annotations = (props): JSX.Element => {
+export const Annotations = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="36" height="37" viewBox="0 0 36 37" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1510,7 +1510,7 @@ export const Annotations = (props): JSX.Element => {
     )
 }
 
-export const Extensibility = (props): JSX.Element => {
+export const Extensibility = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="36" height="37" viewBox="0 0 36 37" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.5">
@@ -1535,7 +1535,7 @@ export const Extensibility = (props): JSX.Element => {
     )
 }
 
-export const Cards = (props): JSX.Element => {
+export const Cards = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="15" height="22" viewBox="0 0 15 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1550,7 +1550,7 @@ export const Cards = (props): JSX.Element => {
     )
 }
 
-export const List = (props): JSX.Element => {
+export const List = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1581,7 +1581,7 @@ export const List = (props): JSX.Element => {
     )
 }
 
-export const LargePlus = (props): JSX.Element => {
+export const LargePlus = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1594,7 +1594,7 @@ export const LargePlus = (props): JSX.Element => {
     )
 }
 
-export const Facebook = (props): JSX.Element => {
+export const Facebook = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g>
@@ -1609,7 +1609,7 @@ export const Facebook = (props): JSX.Element => {
     )
 }
 
-export const Mail = (props): JSX.Element => {
+export const Mail = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1620,7 +1620,7 @@ export const Mail = (props): JSX.Element => {
     )
 }
 
-export const Lifecycle = (props): JSX.Element => {
+export const Lifecycle = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_4732_120930)">
@@ -1661,7 +1661,7 @@ export const Lifecycle = (props): JSX.Element => {
     )
 }
 
-export const Trends = (props): JSX.Element => {
+export const Trends = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_4732_120812)">
@@ -1686,7 +1686,7 @@ export const Trends = (props): JSX.Element => {
     )
 }
 
-export const Stickiness = (props): JSX.Element => {
+export const Stickiness = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1712,7 +1712,7 @@ export const Stickiness = (props): JSX.Element => {
     )
 }
 
-export const Retention = (props): JSX.Element => {
+export const Retention = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_4732_121042)">
@@ -1744,7 +1744,7 @@ export const Retention = (props): JSX.Element => {
     )
 }
 
-export const Search = (props): JSX.Element => {
+export const Search = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -1764,7 +1764,7 @@ export const Search = (props): JSX.Element => {
     )
 }
 
-export const Experimentation = (props): JSX.Element => {
+export const Experimentation = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -1798,7 +1798,7 @@ export const Experimentation = (props): JSX.Element => {
     )
 }
 
-export const DiagonalArrow = (props): JSX.Element => {
+export const DiagonalArrow = (props: React.SVGProps<SVGSVGElement>): JSX.Element => {
     return (
         <svg {...props} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_4684_133779)">

@@ -83,7 +83,7 @@ export default function Link({
         )
     ) : (
         <a
-            target={external || externalNoIcon ? '_blank' : ''}
+            target={!internal || external || externalNoIcon ? '_blank' : ''}
             rel="noopener noreferrer"
             onClick={handleClick}
             {...other}
@@ -91,10 +91,10 @@ export default function Link({
             className={`${className} group`}
         >
             {external ? (
-                <span className="inline-flex justify-center items-center space-x-1 group">
-                    <span className="font-bold">{children}</span>
+                <span className="inline-flex justify-center items-center">
+                    {children}
                     <ExternalLink
-                        className={`text-primary dark:text-primary-dark opacity-30 group-hover:opacity-50 ${iconClasses}`}
+                        className={`text-primary ml-1 dark:text-primary-dark opacity-50 group-hover:opacity-75 ${iconClasses}`}
                     />
                 </span>
             ) : (
