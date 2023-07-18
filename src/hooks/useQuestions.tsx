@@ -4,10 +4,12 @@ import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 import { QuestionData, StrapiResult, StrapiRecord } from 'lib/strapi'
 import usePostHog from './usePostHog'
+import { useUser } from './useUser'
 
 type UseQuestionsOptions = {
     slug?: string
     profileId?: number
+    userId?: number
     topicId?: number
     limit?: number
     sortBy?: 'newest' | 'popular' | 'activity'
@@ -15,8 +17,8 @@ type UseQuestionsOptions = {
 }
 
 const query = (offset: number, options?: UseQuestionsOptions) => {
-    const { slug, topicId, profileId, limit = 20, sortBy = 'newest', filters } = options || {}
-    const params = {
+    const { slug, topicId, profileId, userId, limit = 20, sortBy = 'newest', filters } = options || {}
+    const params: QueryParamsType = {
         pagination: {
             start: offset * limit,
             limit,
@@ -93,25 +95,32 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
     if (profileId) {
         params.filters = {
             ...params.filters,
-            $or: [
+            $and: [
+                profileId !== userId && params.filters['$or'] ? { $or: [...params.filters['$or']] } : {},
                 {
-                    profile: {
-                        id: {
-                            $eq: profileId,
-                        },
-                    },
-                },
-                {
-                    replies: {
-                        profile: {
-                            id: {
-                                $eq: profileId,
+                    $or: [
+                        {
+                            profile: {
+                                id: {
+                                    $eq: profileId,
+                                },
                             },
                         },
-                    },
+                        {
+                            replies: {
+                                profile: {
+                                    id: {
+                                        $eq: profileId,
+                                    },
+                                },
+                            },
+                        },
+                    ],
                 },
             ],
         }
+
+        delete params.filters['$or']
     }
 
     if (filters) {
@@ -128,11 +137,13 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
 
 export const useQuestions = (options?: UseQuestionsOptions) => {
     const posthog = usePostHog()
+    const { user } = useUser()
 
     const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite<
         StrapiResult<QuestionData[]>
     >(
-        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, options)}`,
+        (offset) =>
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, { ...options, userId: user?.id })}`,
         (url: string) => fetch(url).then((r) => r.json())
     )
 
@@ -159,5 +170,74 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         fetchMore: () => setSize(size + 1),
         isLoading: isLoading || isValidating,
         refresh: () => mutate(),
+    }
+}
+
+interface QueryParamsType {
+    pagination: {
+        start: number
+        limit: number
+    }
+    sort: string
+    filters: {
+        $or?: {
+            archived: {
+                $null?: true
+                $eq?: boolean
+            }
+        }[]
+        slugs?: {
+            slug: string
+        }
+        topics?: {
+            id: {
+                $eq: number
+            }
+        }
+        $and?: (
+            | {
+                  $or: Array<
+                      | {
+                            profile: {
+                                id: {
+                                    $eq: string
+                                }
+                            }
+                        }
+                      | {
+                            replies: {
+                                profile: {
+                                    id: {
+                                        $eq: string
+                                    }
+                                }
+                            }
+                        }
+                  >
+              }
+            | {
+                  [key: string]: any // Allow other filters
+              }
+        )[]
+    }
+    populate: {
+        pinnedTopics: boolean
+        topics: boolean
+        profile: {
+            fields: string[]
+            populate: {
+                avatar: {
+                    fields: string[]
+                }
+            }
+        }
+        replies: {
+            populate: {
+                profile: {
+                    fields: string[]
+                }
+            }
+            fields: string[]
+        }
     }
 }
