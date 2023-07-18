@@ -66,7 +66,7 @@ Calling this function forces PostHog to hit the endpoint for the updated informa
 
 If you're using our server-side libraries, you can use local evaluation to improve performance instead of making additional API requests. 
 
-We consider it best practice to use local evaluation flags where possible because this method enables you to resolve flags faster. This is especially true if you’re using multiple flags at once — instead of sending a `decide` request per flag and waiting for each call to resolve, you simply serve the correct flags all at once based on the definition data. 
+We consider it best practice to use local evaluation flags where possible because this method enables you to resolve flags faster. This is especially true if you need to evaluate flags for multiple users — instead of sending a `decide` request per user and waiting for each call to resolve, you simply serve the correct flags all at once based on the definition data. 
 
 Local evaluation calls are also more efficient. Instead of calling the API for each user, you can re-use the definitions for multiple users. 
 
