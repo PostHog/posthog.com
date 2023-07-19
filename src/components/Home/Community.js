@@ -17,8 +17,8 @@ export default function Community() {
     return (
         <>
             <div className="w-full overflow-x-hidden">
-                <div className="relative top-28 sm:top-44 md:top-12 lg:top-12 xl:top-24 px-12 md:px-0 z-40">
-                    <h2 className="m-0 pb-2 text-4xl md:text-6xl text-center leading-0 md:leading-none">
+                <div className="relative -mt-28 md:mt-0 top-28 sm:top-44 md:top-12 lg:top-12 lg:mt-12 xl:top-16 px-4 md:px-0 z-40">
+                    <h2 className="m-0 pb-2 px-4 text-4xl md:text-6xl text-center leading-0 md:leading-none">
                         Join our open source community
                     </h2>
                     <p className="text-center md:text-lg max-w-lg leading-tight mx-auto my-0 p-0">
@@ -48,17 +48,17 @@ export default function Community() {
                                 community
                             </>
                         }
-                        className="left-[20.75vw] sm:left-[20.75vw] md:left-[21vw] lg:left-[21.5vw] xl:left-[20vw] 2xl:left-[19.75vw] top-[29.5vw] sm:top-[29.5vw] md:top-[30vw] lg:top-[30vw] xl:top-[31vw] -rotate-[4deg]"
+                        className="left-[20.75vw] sm:left-[20.75vw] md:left-[21vw] mdlg:left-[20.75vw] lg:left-[21.5vw] xl:left-[20vw] 2xl:left-[19.75vw] top-[29.5vw] sm:top-[30vw] md:top-[30vw] lg:top-[30vw] xl:top-[31vw] -rotate-[4deg]"
                     />
                     <CommunityStat
                         count="411"
                         label="Contributors"
-                        className="left-[41.75vw] sm:left-[41.5vw] md:left-[42vw] lg:left-[42.75vw] xl:left-[43.5vw] 2xl:left-[43.5vw] top-[40vw] sm:top-[40vw] md:top-[40vw] mdlg:top-[40.5vw] lg:top-[40.5vw] xl:top-[41vw] -rotate-[1.5deg]"
+                        className="left-[42.5vw] sm:left-[42.5vw] md:left-[42vw] lg:left-[42.75vw] xl:left-[43.5vw] 2xl:left-[43.5vw] top-[40.5vw] sm:top-[41vw] md:top-[40vw] mdlg:top-[40.5vw] lg:top-[40.5vw] xl:top-[41vw] -rotate-[1.5deg]"
                     />
                     <CommunityStat
                         count="50b+"
                         label="Events tracked"
-                        className="left-[61.5vw] sm:left-[61.5vw] md:left-[62vw] lg:left-[63vw] xl:left-[63.75vw] 2xl:left-[63.75vw] top-[50vw] sm:top-[50vw] md:top-[50.5vw] lg:top-[51vw] 2xl:top-[51vw] -rotate-1"
+                        className="left-[62.75vw] sm:left-[62.75vw] md:left-[62vw] lg:left-[63vw] xl:left-[63.75vw] 2xl:left-[63.75vw] top-[51vw] sm:top-[51vw] md:top-[50.5vw] lg:top-[51vw] 2xl:top-[51vw] -rotate-1"
                     />
                 </section>
             </div>
