@@ -147,6 +147,7 @@ const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile
     return (
         <li ref={ref}>
             <Link
+                external={true}
                 onClick={handleClick}
                 to={url}
                 className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded ${
