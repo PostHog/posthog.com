@@ -1,8 +1,13 @@
-import { CallToAction } from 'components/CallToAction'
-import React from 'react'
-import { heading, section } from './classes'
+import React, { useCallback } from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
+import Particles from 'react-tsparticles'
+import { loadStarsPreset } from 'tsparticles-preset-stars'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
+import { useInView } from 'react-intersection-observer'
+import { motion } from 'framer-motion'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
 const CommunityStat = ({ count, label, className }) => {
     return (
@@ -13,10 +18,40 @@ const CommunityStat = ({ count, label, className }) => {
     )
 }
 
-export default function Community() {
+const Stars = () => {
+    const breakpoints = useBreakpoint()
+    const particlesInit = useCallback(async (engine) => {
+        await loadStarsPreset(engine)
+    }, [])
+
     return (
-        <>
-            <StaticImage src="./images/stars.png" className="w-full relative top-96 -mt-96" />
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <Particles
+                init={particlesInit}
+                className="w-full h-full absolute inset-0"
+                options={{
+                    preset: 'stars',
+                    fullScreen: false,
+                    background: {
+                        color: 'transparent',
+                    },
+                    particles: {
+                        number: {
+                            value: breakpoints.sm ? 100 : 400,
+                        },
+                    },
+                }}
+            />
+        </motion.div>
+    )
+}
+
+export default function Community() {
+    const { websiteTheme } = useValues(layoutLogic)
+    const [ref, inView] = useInView({ threshold: 0 })
+    return (
+        <div ref={ref} className="relative">
+            {inView && (websiteTheme === 'dark' ? <Stars /> : null)}
             <div className="w-full overflow-x-hidden">
                 <div className="relative -mt-28 md:mt-0 top-28 sm:top-44 md:top-12 lg:top-12 lg:mt-12 xl:top-16 px-4 md:px-0 z-40">
                     <h2 className="m-0 pb-2 px-4 text-4xl md:text-6xl text-center leading-0 md:leading-none">
@@ -69,6 +104,6 @@ export default function Community() {
                     />
                 </section>
             </div>
-        </>
+        </div>
     )
 }
