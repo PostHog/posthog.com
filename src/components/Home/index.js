@@ -32,15 +32,15 @@ const Home = () => {
                 />
                 <Hero />
                 <Customers />
+                <AllInOne />
                 <CodeBlocks />
                 <NoHatingAllowed />
-                <AllInOne />
                 <Builders />
+                <Community />
                 <CustomerData />
                 <Timeline />
                 <Roadmap />
                 <Quote />
-                <Community />
                 <Tutorials
                     title="Latest tutorials"
                     subtitle="Fresh from our keyboards"
