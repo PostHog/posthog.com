@@ -16,6 +16,7 @@ const CommunityStat = ({ count, label, className }) => {
 export default function Community() {
     return (
         <>
+            <StaticImage src="./images/stars.png" className="w-full relative top-96 -mt-96" />
             <div className="w-full overflow-x-hidden">
                 <div className="relative -mt-28 md:mt-0 top-28 sm:top-44 md:top-12 lg:top-12 lg:mt-12 xl:top-16 px-4 md:px-0 z-40">
                     <h2 className="m-0 pb-2 px-4 text-4xl md:text-6xl text-center leading-0 md:leading-none">
