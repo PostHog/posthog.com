@@ -4,7 +4,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 export default function AllInOne() {
     return (
         <section className="relative mb-12">
-            <div className="md:absolute left-8 top-48">
+            <div className="md:absolute top-0 left-0 lg:top-40 xl:top-48 lg:left-0 xl:left-8 max-w-md lg:max-w-2xl">
                 <h2 className="m-0 text-4xl px-4 md:text-6xl text-center md:text-left leading-tight md:leading-none">
                     Product engineering <br className="hidden md:block" />
                     has never been so lit
