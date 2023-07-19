@@ -22,11 +22,17 @@ export default function Community() {
                     <h2 className="m-0 pb-2 px-4 text-4xl md:text-6xl text-center leading-0 md:leading-none">
                         Join our open source community
                     </h2>
-                    <p className="text-center md:text-lg max-w-lg leading-tight mx-auto my-0 p-0">
+                    <p className="text-center md:text-lg max-w-lg lg:max-w-xl leading-tight mx-auto my-0 p-0">
                         We work in the open. Check out our{' '}
-                        <Link to="/handbook/strategy/overview">company strategy</Link>,{' '}
-                        <Link to="/handbook/strategy/business-model">business model</Link>, or even our{' '}
-                        <Link to="http://github.com/posthog/posthog" external>
+                        <Link to="/handbook/strategy/overview" className="inline-block">
+                            company strategy
+                        </Link>
+                        ,{' '}
+                        <Link to="/handbook/strategy/business-model" className="inline-block">
+                            business model
+                        </Link>
+                        , or even our{' '}
+                        <Link to="http://github.com/posthog/posthog" className="inline-block" external>
                             source code
                         </Link>
                         .
