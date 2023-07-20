@@ -20,6 +20,7 @@ const createOrUpdateStrapiPages = async (pages) => {
     const apiHost = process.env.GATSBY_SQUEAK_API_HOST
 
     let allExistingStrapiPages = []
+    let allStrapiPageCategories = []
 
     const getAllStrapiPages = async (page = 1) => {
         const query = qs.stringify({
@@ -35,7 +36,25 @@ const createOrUpdateStrapiPages = async (pages) => {
             allExistingStrapiPages = [...allExistingStrapiPages, ...pages.data]
         }
         if (pages?.meta?.pagination.page < pages?.meta?.pagination.pageCount) {
-            await getStrapiPages(page + 1)
+            await getAllStrapiPages(page + 1)
+        }
+    }
+
+    const getAllStrapiPageCategories = async (page = 1) => {
+        const query = qs.stringify({
+            pagination: {
+                page,
+                pageSize: 100,
+            },
+            fields: ['id', 'folder'],
+        })
+
+        const categories = await fetch(`${apiHost}/api/page-categories?${query}`).then((res) => res.json())
+        if (categories.data) {
+            allStrapiPageCategories = [...allStrapiPageCategories, ...categories.data]
+        }
+        if (categories?.meta?.pagination.page < categories?.meta?.pagination.pageCount) {
+            await getAllStrapiPageCategories(page + 1)
         }
     }
 
@@ -54,10 +73,15 @@ const createOrUpdateStrapiPages = async (pages) => {
     }
 
     await getAllStrapiPages()
+    await getAllStrapiPageCategories()
 
     await Promise.all(
         pages.map(({ frontmatter: { title, date, featuredImage }, parent, rawBody }) => {
             const path = parent.relativePath
+            const existingPage = allExistingStrapiPages.find((page) => page?.attributes?.path === path)
+            const category = allStrapiPageCategories.find(
+                (category) => category?.attributes?.folder === path.split('/')[0]
+            )
             const data = {
                 path,
                 title,
@@ -66,8 +90,15 @@ const createOrUpdateStrapiPages = async (pages) => {
                     url: featuredImage?.publicURL,
                 },
                 body: rawBody,
+                ...(category
+                    ? {
+                          page_category: {
+                              connect: [category.id],
+                          },
+                      }
+                    : null),
             }
-            const existingPage = allExistingStrapiPages.find((page) => page?.attributes?.path === path)
+
             return limit(() => createOrUpdateStrapiPage(data, existingPage?.id))
         })
     )
