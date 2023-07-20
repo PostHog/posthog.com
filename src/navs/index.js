@@ -1140,6 +1140,10 @@ export const docsMenu = {
                             url: '/docs/data/team-collaboration',
                         },
                         {
+                            name: 'User properties',
+                            url: '/docs/data/user-properties',
+                        },
+                        {
                             name: 'UTM segmentation',
                             url: '/docs/data/utm-segmentation',
                         },
