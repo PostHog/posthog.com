@@ -85,7 +85,7 @@ export default function Timeline() {
                         return Math.floor(new Date(date).getUTCMonth() / 3 + 1)
                     })
                     return (
-                        <div key={year} className="w-[80vw] md:w-[90vw] shrink-0 mb-4">
+                        <div key={year} className="w-[80vw] md:w-[90vw] max-w-5xl shrink-0 mb-4">
                             <h4 className="text-2xl py-1 font-bold text-center">{year}</h4>
                             <div className="p-4 bg-white dark:bg-dark border border-light dark:border-dark">
                                 <ul role="list" className="py-1 px-0 grid grid-cols-2 md:grid-cols-4 gap-4">
