@@ -6,11 +6,11 @@ export default function AllInOne() {
         <section className="relative mb-12">
             <div className="md:absolute top-0 left-0 lg:top-40 xl:top-48 lg:left-0 xl:left-8 max-w-md mx-auto lg:mx-0 mt-12 lg:mt-0 lg:max-w-2xl">
                 <h2 className="m-0 text-4xl px-4 md:text-6xl text-center md:text-left leading-tight md:leading-none">
-                    Product engineering <br className="hidden md:block" />
-                    has never been so lit
+                    PostHog is 7+ tools <br className="xl:hidden" />
+                    in one
                 </h2>
                 <p className="text-center md:text-left px-4 m-0 mt-1 font-semibold text-primary/75 dark:text-primary-dark/75 text-base sm:text-lg">
-                    With PostHog's all-in-one suite, everyone else is feeling the burn.
+                    Product engineering has never been so lit.
                 </p>
             </div>
             <div className="md:hidden w-full">

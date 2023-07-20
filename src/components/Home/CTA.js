@@ -21,8 +21,12 @@ const ProductDetails = () => (
 export default function CTA() {
     return (
         <section className="pt-8 md:pt-0 px-5 lg:px-0">
-            <h2 className={heading('lg')}>This is your call to action.</h2>
-            <h3 className={heading('sm')}>If nothing else has sold you on PostHog, hopefully these incentives will.</h3>
+            <h2 className={heading('lg')}>
+                This is your <span className="text-red">call to action.</span>
+            </h2>
+            <h3 className={heading('sm')}>
+                If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+            </h3>
 
             <div className="md:hidden py-12">
                 <ProductDetails />
@@ -72,7 +76,7 @@ export default function CTA() {
 
                     <ul className="p-0 m-0 space-y-5">
                         <li className="list-none">
-                            <strong className="text-xl block pb-1">Cloud</strong>
+                            <strong className="text-lg block pb-1">Select your cloud</strong>
                             <ul className="flex gap-2 p-0">
                                 <li className="list-none">
                                     <div className="py-2 px-3 font-bold border border-black dark:border-white">
@@ -85,17 +89,7 @@ export default function CTA() {
                             </ul>
                         </li>
                         <li className="list-none">
-                            <strong className="text-xl block pb-1">Size</strong>
-                            <ul className="flex gap-2 p-0">
-                                <li className="list-none">
-                                    <div className="py-2 px-3 font-bold border border-black dark:border-white">
-                                        One size
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="list-none">
-                            <strong className="text-xl block pb-1">Starts at</strong>
+                            <strong className="text-lg block">Starts at:</strong>
                             <div className="flex items-baseline gap-1">
                                 <strike className="font-bold text-xl">$0</strike>
                                 <span className="font-bold text-red text-xl uppercase">Free</span>
@@ -107,7 +101,13 @@ export default function CTA() {
                     </ul>
 
                     <div className="py-6">
-                        <CallToAction type="primary" width="56" className="" to="https://app.posthog.com/signup">
+                        <CallToAction
+                            type="primary"
+                            size="lg"
+                            width="64"
+                            className="!text-2xl"
+                            to="https://app.posthog.com/signup"
+                        >
                             Get started
                         </CallToAction>
                     </div>
