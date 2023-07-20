@@ -1997,6 +1997,15 @@ export const docsMenu = {
                     icon: 'Question',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Library comparison',
+                    url: '/docs/feature-flags/libraries',
+                    icon: 'Book',
+                    color: 'blue',
+                },
             ],
         },
         {
