@@ -4,6 +4,29 @@ const Icon = ({ children }: { children: React.ReactNode }): JSX.Element => (
     <span className="inline-block">{children}</span>
 )
 
+export const Bang = ({ className = '' }: { className?: string }): JSX.Element => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 189 139">
+        <path
+            d="M162.525 126.754L121.278 111.361L111.429 138.448L92.9646 113.213L72.0271 135.989L68.9485 110.748L30.1657 135.369L44.9387 95.9742L19.0835 102.744L36.3224 82.4267L-0.00151825 68.8865L44.937 62.7293L14.1584 25.7854L62.7956 40.5658V0.55072L88.6508 33.7958L97.2666 7.3207L105.27 40.5658L148.983 6.70078L134.823 42.4123L164.989 33.7966L147.138 62.7306L188.998 79.9695L138.514 89.198L162.525 126.754Z"
+            fill="#F1A82C"
+        />
+    </svg>
+)
+
+export const Eco = ({ className = '' }: { className?: string }): JSX.Element => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 17 16">
+        <path
+            fill="#fff"
+            d="M10.495 14.222c-.172.057-.401.057-.573.115.172-.058.4-.115.573-.115ZM15.258 9.749c-.057.229-.115.401-.172.573.057-.172.115-.4.172-.573ZM15.024 10.38l-.344.688a3.91 3.91 0 0 0 .344-.688ZM15.42 9.004c0 .172-.057.344-.115.516.058-.172.058-.344.115-.516ZM15.315 9.52c0 .057-.057.115-.057.172 0-.059 0-.115.057-.172ZM15.424 8.774c0 .057 0 .115-.057.23.057-.115.057-.172.057-.23Z"
+        />
+        <path fill="#fff" d="M15.026 10.322c0 .057 0 .057-.057.115.057-.057.057-.115.057-.115Z" />
+        <path
+            fill="#fff"
+            d="M13.993 12.1c-1.836-2.18-4.416-4.588-6.25-6.25a.52.52 0 0 1-.173-.4c0-.345.23-.574.574-.574.115 0 .287.057.4.115h.058c2.58 2.352 4.644 4.358 6.136 6.078l.344-.688s0-.057.057-.115c.057-.172.115-.401.172-.573 0-.057.057-.115.057-.172.057-.172.057-.344.115-.516 0-.057 0-.115.057-.23-.057-.23-.057-.518-.057-.747 0-4.472-4.702-6.824-9.175-6.88C2.236 1.09 0 0 0 0s.573 5.85 1.777 9.118c1.378 3.727 3.9 5.219 7.399 5.219.229 0 .459 0 .688-.057h.057c.172 0 .4-.057.573-.115h.057c.4-.115.803-.23 1.204-.401a9.33 9.33 0 0 0 1.032-.573C13.934 14.51 14.68 15.541 14.68 16h1.72c-.057-.861-1.031-2.351-2.407-3.9Z"
+        />
+    </svg>
+)
+
 export const RightArrow = ({ className }: { className: string }): JSX.Element => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -171,6 +194,16 @@ export const LinkedIn = ({ className }: { className: string }): JSX.Element => {
         </svg>
     )
 }
+
+export const TrendUp = ({ className }: { className: string }): JSX.Element => (
+    <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="currentColor">
+        <path
+            fillRule="evenodd"
+            d="m16.771 8.519-3.936 3.935L8.252 7.87l-7.065 7.065 1.296 1.296 5.77-5.768 4.582 4.583 5.232-5.231 2.102 2.102v-5.5h-5.5l2.102 2.102Z"
+            clipRule="evenodd"
+        />
+    </svg>
+)
 
 export const Twitter = ({ className }: { className: string }): JSX.Element => {
     return (

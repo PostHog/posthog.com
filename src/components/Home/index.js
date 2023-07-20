@@ -41,11 +41,11 @@ const Home = () => {
                 <Timeline />
                 <Roadmap />
                 <Quote />
-                <Tutorials
+                {/*<Tutorials
                     title="Latest tutorials"
                     subtitle="Fresh from our keyboards"
                     cta={{ url: '/tutorials', title: 'Explore all tutorials' }}
-                />
+                />*/}
                 <CTA />
             </Layout>
         </>
