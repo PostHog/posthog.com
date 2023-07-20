@@ -74,7 +74,7 @@ export default function Timeline() {
                 </div>
             </div>
 
-            <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-3 border border-light dark:border-dark divide-x divide-light dark:divide-dark">
+            <div className="-mx-4 px-4 overflow-x-auto flex flex-nowrap gap-4">
                 {Object.keys(pastEvents).map((year) => {
                     const pastMonths = groupBy(pastEvents[year], (node) => {
                         const date = new Date(node.dateCompleted || node.projectedCompletion)
@@ -85,30 +85,25 @@ export default function Timeline() {
                         return Math.floor(new Date(date).getUTCMonth() / 3 + 1)
                     })
                     return (
-                        <div
-                            key={year}
-                            className="bg-accent dark:bg-accent-dark w-full mb-4 lg:mb-0 last:border-r border-light dark:border-dark"
-                        >
-                            <h4 className="text-base py-1 font-bold text-center bg-light dark:bg-dark border-y border-light dark:border-dark">
-                                {year}
-                            </h4>
-                            <div className="px-8">
-                                <ul role="list" className="py-1 px-0">
+                        <div key={year} className="w-[90vw] shrink-0 mb-4">
+                            <h4 className="text-2xl py-1 font-bold text-center">{year}</h4>
+                            <div className="p-4 bg-white dark:bg-dark border border-light dark:border-dark">
+                                <ul role="list" className="py-1 px-0 grid grid-cols-4 gap-4">
                                     {Object.keys(pastMonths).map((month) => {
                                         return (
                                             <li
                                                 key={month}
-                                                className="timeline-entry list-none border-light dark:border-dark border-b last:border-none flex py-2 gap-3 items-start"
+                                                className="timeline-entry bg-accent dark:bg-accent-dark list-none px-4 pb-4 text-center min-h-[10rem]"
                                             >
-                                                <p className="text-[14px] text-gray capitalize w-[30px] flex-shrink-0 m-0">
+                                                <p className="text-lg font-bold border-b border-light dark:border-dark capitalize py-2 mb-2">
                                                     {month}
                                                 </p>
-                                                <ul className="list-none m-0 p-0">
+                                                <ul className="m-0 p-0">
                                                     {pastMonths[month].map(({ title, category }) => {
                                                         return (
                                                             <li
                                                                 key={title}
-                                                                className="flex-auto relative text-[14px] text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
+                                                                className="relative list-none text-sm text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
                                                                 data-type={categories[category]}
                                                             >
                                                                 {title}
@@ -123,9 +118,9 @@ export default function Timeline() {
                                         return (
                                             <li
                                                 key={quarter}
-                                                className="timeline-entry list-none  flex py-2 gap-3 items-start"
+                                                className="timeline-entry list-none bg-accent dark:bg-accent-dark px-4 pb-4"
                                             >
-                                                <p className="text-[14px] text-gray capitalize w-[30px] flex-shrink-0 m-0">
+                                                <p className="text-2xl font-bold border-b border-light dark:border-dark capitalize py-2 mb-2">
                                                     Q{quarter}
                                                 </p>
                                                 <ul className="list-none m-0 p-0">
@@ -133,7 +128,7 @@ export default function Timeline() {
                                                         return (
                                                             <li
                                                                 key={title}
-                                                                className="flex-auto relative text-[14px] text-left pl-4 text-gray content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
+                                                                className="flex-auto relative text-[14px] text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
                                                                 data-type={categories[category]}
                                                             >
                                                                 {title}
