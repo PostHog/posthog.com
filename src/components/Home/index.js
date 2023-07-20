@@ -16,6 +16,7 @@ import AllInOne from './AllInOne'
 import Builders from './Builders'
 import CustomerData from './CustomerData'
 import CodeBlocks from './CodeBlocks'
+import OnePlatform from './OnePlatform'
 import NoHatingAllowed from './NoHatingAllowed'
 
 const Home = () => {
@@ -34,6 +35,7 @@ const Home = () => {
                 <Customers />
                 <AllInOne />
                 <CodeBlocks />
+                <OnePlatform />
                 <NoHatingAllowed />
                 <Builders />
                 <Community />
