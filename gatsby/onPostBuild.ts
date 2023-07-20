@@ -16,13 +16,13 @@ import qs from 'qs'
 
 const limit = pLimit(10)
 
-const createOrUpdateStrapiPages = async (pages) => {
+const createOrUpdateStrapiPosts = async (posts) => {
     const apiHost = process.env.GATSBY_SQUEAK_API_HOST
 
-    let allExistingStrapiPages = []
-    let allStrapiPageCategories = []
+    let allExistingStrapiPosts = []
+    let allStrapiPostCategories = []
 
-    const getAllStrapiPages = async (page = 1) => {
+    const getAllStrapiPosts = async (page = 1) => {
         const query = qs.stringify({
             pagination: {
                 page,
@@ -31,16 +31,16 @@ const createOrUpdateStrapiPages = async (pages) => {
             fields: ['id', 'path'],
         })
 
-        const pages = await fetch(`${apiHost}/api/pages?${query}`).then((res) => res.json())
-        if (pages.data) {
-            allExistingStrapiPages = [...allExistingStrapiPages, ...pages.data]
+        const posts = await fetch(`${apiHost}/api/posts?${query}`).then((res) => res.json())
+        if (posts.data) {
+            allExistingStrapiPosts = [...allExistingStrapiPosts, ...posts.data]
         }
-        if (pages?.meta?.pagination.page < pages?.meta?.pagination.pageCount) {
-            await getAllStrapiPages(page + 1)
+        if (posts?.meta?.pagination.page < posts?.meta?.pagination.pageCount) {
+            await getAllStrapiPosts(page + 1)
         }
     }
 
-    const getAllStrapiPageCategories = async (page = 1) => {
+    const getAllStrapiPostCategories = async (page = 1) => {
         const query = qs.stringify({
             pagination: {
                 page,
@@ -49,37 +49,35 @@ const createOrUpdateStrapiPages = async (pages) => {
             fields: ['id', 'folder'],
         })
 
-        const categories = await fetch(`${apiHost}/api/page-categories?${query}`).then((res) => res.json())
+        const categories = await fetch(`${apiHost}/api/post-categories?${query}`).then((res) => res.json())
         if (categories.data) {
-            allStrapiPageCategories = [...allStrapiPageCategories, ...categories.data]
+            allStrapiPostCategories = [...allStrapiPostCategories, ...categories.data]
         }
         if (categories?.meta?.pagination.page < categories?.meta?.pagination.pageCount) {
-            await getAllStrapiPageCategories(page + 1)
+            await getAllStrapiPostCategories(page + 1)
         }
     }
 
-    const createOrUpdateStrapiPage = async (data, id) => {
+    const createOrUpdateStrapiPost = async (data, id) => {
         const body = JSON.stringify({ data })
-        return fetch(`${apiHost}/api/pages${id ? `/${id}` : ''}`, {
+        return fetch(`${apiHost}/api/posts${id ? `/${id}` : ''}`, {
             method: id ? 'PUT' : 'POST',
             body,
             headers: {
                 Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
                 'content-type': 'application/json',
             },
-        })
-            .then((res) => res.json())
-            .catch((err) => console.error(err))
+        }).catch((err) => console.error(err))
     }
 
-    await getAllStrapiPages()
-    await getAllStrapiPageCategories()
+    await getAllStrapiPosts()
+    await getAllStrapiPostCategories()
 
     await Promise.all(
-        pages.map(({ frontmatter: { title, date, featuredImage }, parent, rawBody }) => {
+        posts.map(({ frontmatter: { title, date, featuredImage }, parent, rawBody }) => {
             const path = parent.relativePath
-            const existingPage = allExistingStrapiPages.find((page) => page?.attributes?.path === path)
-            const category = allStrapiPageCategories.find(
+            const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
+            const category = allStrapiPostCategories.find(
                 (category) => category?.attributes?.folder === path.split('/')[0]
             )
             const data = {
@@ -92,14 +90,14 @@ const createOrUpdateStrapiPages = async (pages) => {
                 body: rawBody,
                 ...(category
                     ? {
-                          page_category: {
+                          post_category: {
                               connect: [category.id],
                           },
                       }
                     : null),
             }
 
-            return limit(() => createOrUpdateStrapiPage(data, existingPage?.id))
+            return limit(() => createOrUpdateStrapiPost(data, existingPost?.id))
         })
     )
 }
@@ -222,7 +220,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         }
     `)
 
-    await createOrUpdateStrapiPages(data.all.nodes)
+    await createOrUpdateStrapiPosts(data.all.nodes)
 
     const dir = path.resolve(__dirname, '../public/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
