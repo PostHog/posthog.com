@@ -85,15 +85,15 @@ export default function Timeline() {
                         return Math.floor(new Date(date).getUTCMonth() / 3 + 1)
                     })
                     return (
-                        <div key={year} className="w-[90vw] shrink-0 mb-4">
+                        <div key={year} className="w-[80vw] md:w-[90vw] shrink-0 mb-4">
                             <h4 className="text-2xl py-1 font-bold text-center">{year}</h4>
                             <div className="p-4 bg-white dark:bg-dark border border-light dark:border-dark">
-                                <ul role="list" className="py-1 px-0 grid grid-cols-4 gap-4">
+                                <ul role="list" className="py-1 px-0 grid grid-cols-2 md:grid-cols-4 gap-4">
                                     {Object.keys(pastMonths).map((month) => {
                                         return (
                                             <li
                                                 key={month}
-                                                className="timeline-entry bg-accent dark:bg-accent-dark list-none px-4 pb-4 text-center min-h-[10rem]"
+                                                className="timeline-entry bg-accent dark:bg-accent-dark list-none px-4 pb-4 text-center min-h-[6rem] md:min-h-[8rem] lg:min-h-[10rem]"
                                             >
                                                 <p className="text-lg font-bold border-b border-light dark:border-dark capitalize py-2 mb-2">
                                                     {month}
@@ -120,7 +120,7 @@ export default function Timeline() {
                                                 key={quarter}
                                                 className="timeline-entry list-none bg-accent dark:bg-accent-dark px-4 pb-4"
                                             >
-                                                <p className="text-2xl font-bold border-b border-light dark:border-dark capitalize py-2 mb-2">
+                                                <p className="text-lg font-bold border-b border-light dark:border-dark capitalize py-2 mb-2 text-center">
                                                     Q{quarter}
                                                 </p>
                                                 <ul className="list-none m-0 p-0">
