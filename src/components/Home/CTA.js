@@ -30,12 +30,16 @@ export default function CTA() {
 
             <div className="md:grid grid-cols-2 gap-16 md:pt-24 pb-16 max-w-5xl mx-auto">
                 <div className="relative text-right">
-                    <StaticImage src="./images/cloud-cd.jpg" alt="PostHog Cloud" className="max-w-[443px] mb-2" />
-                    <StaticImage
-                        src="./images/g2-badge.png"
-                        alt="People on G2 think we're great"
-                        className="w-[90px] absolute -left-4 bottom-12 md:left-[-8px] md:bottom-24"
-                    />
+                    <div className="mb-2">
+                        <StaticImage src="./images/cloud-cd.jpg" alt="PostHog Cloud" className="max-w-[443px]" />
+                    </div>
+                    <div className="absolute -left-4 bottom-12 md:left-[-8px] md:bottom-24">
+                        <StaticImage
+                            src="./images/g2-badge.png"
+                            alt="People on G2 think we're great"
+                            className="w-[90px]"
+                        />
+                    </div>
 
                     <div className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 md:-top-8 left-4 right-4 lg:-left-16 md:right-auto rounded md:rounded-none">
                         <span className="text-sm font-bold text-white">
