@@ -11,10 +11,91 @@ import { flattenMenu } from './utils'
 import fetch from 'node-fetch'
 import { GatsbyNode } from 'gatsby'
 import sidebars from '../src/sidebars/index'
+import pLimit from 'p-limit'
+import qs from 'qs'
+
+const limit = pLimit(10)
+
+const createOrUpdateStrapiPages = async (pages) => {
+    const apiHost = process.env.GATSBY_SQUEAK_API_HOST
+
+    let allExistingStrapiPages = []
+
+    const getAllStrapiPages = async (page = 1) => {
+        const query = qs.stringify({
+            pagination: {
+                page,
+                pageSize: 100,
+            },
+            fields: ['id', 'path'],
+        })
+
+        const pages = await fetch(`${apiHost}/api/pages?${query}`).then((res) => res.json())
+        if (pages.data) {
+            allExistingStrapiPages = [...allExistingStrapiPages, ...pages.data]
+        }
+        if (pages?.meta?.pagination.page < pages?.meta?.pagination.pageCount) {
+            await getStrapiPages(page + 1)
+        }
+    }
+
+    const createOrUpdateStrapiPage = async (data, id) => {
+        const body = JSON.stringify({ data })
+        return fetch(`${apiHost}/api/pages${id ? `/${id}` : ''}`, {
+            method: id ? 'PUT' : 'POST',
+            body,
+            headers: {
+                Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+                'content-type': 'application/json',
+            },
+        })
+            .then((res) => res.json())
+            .catch((err) => console.error(err))
+    }
+
+    await getAllStrapiPages()
+
+    await Promise.all(
+        pages.map(({ frontmatter: { title, date, featuredImage }, parent, rawBody }) => {
+            const path = parent.relativePath
+            const data = {
+                path,
+                title,
+                date,
+                featuredImage: {
+                    url: featuredImage?.publicURL,
+                },
+                body: rawBody,
+            }
+            const existingPage = allExistingStrapiPages.find((page) => page?.attributes?.path === path)
+            return limit(() => createOrUpdateStrapiPage(data, existingPage?.id))
+        })
+    )
+}
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const { data } = await graphql(`
         query {
+            all: allMdx(filter: { frontmatter: { title: { ne: null }, date: { ne: null } } }) {
+                nodes {
+                    parent {
+                        ... on File {
+                            relativePath
+                        }
+                    }
+                    frontmatter {
+                        title
+                        date
+                        authorData {
+                            name
+                        }
+                        featuredImage {
+                            publicURL
+                        }
+                    }
+                    rawBody
+                }
+            }
             blog: allMdx(
                 filter: { fields: { slug: { regex: "/^/blog/" } }, frontmatter: { featuredImageType: { eq: "full" } } }
             ) {
@@ -109,6 +190,8 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
             }
         }
     `)
+
+    await createOrUpdateStrapiPages(data.all.nodes)
 
     const dir = path.resolve(__dirname, '../public/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
