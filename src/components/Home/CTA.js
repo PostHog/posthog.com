@@ -22,7 +22,7 @@ export default function CTA() {
     return (
         <section className="pt-8 md:pt-0 px-5 lg:px-0">
             <h2 className={heading('lg')}>
-                This is your <span className="text-red">call to action.</span>
+                This is the <span className="text-red">call to action.</span>
             </h2>
             <h3 className={heading('sm')}>
                 If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.

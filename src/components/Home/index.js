@@ -9,7 +9,7 @@ import Hero from './Hero'
 import Pipelines from './Pipelines'
 import Timeline from './Timeline'
 import Roadmap from './Roadmap'
-import Quote from './Quote'
+import Startups from './Startups'
 import Tutorials from './Tutorials'
 import usePostHog from '../../hooks/usePostHog'
 import AllInOne from './AllInOne'
@@ -42,7 +42,7 @@ const Home = () => {
                 <CustomerData />
                 <Timeline />
                 <Roadmap />
-                <Quote />
+                <Startups />
                 {/*<Tutorials
                     title="Latest tutorials"
                     subtitle="Fresh from our keyboards"
