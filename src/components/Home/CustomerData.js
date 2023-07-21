@@ -31,7 +31,7 @@ export default function CustomerData() {
     return (
         <section className="my-24 px-5">
             <div className="max-w-screen-2xl mx-auto">
-                <h2 className="text-4xl sm:text-5xl lg:text-7xl 2xl:text-8xl m-0 text-center mb-6 sm:mb-16">
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl  m-0 text-center mb-6 sm:mb-16">
                     <span className="text-red">Full control</span> of your customer data
                 </h2>
                 <div className="flex justify-center">

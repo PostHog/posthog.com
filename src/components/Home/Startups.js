@@ -9,8 +9,8 @@ const Benefit = ({ title, description }) => {
     return (
         <li className="list-none relative pl-10 p-0">
             <Check3 className="w-5 h-5 inline-block absolute left-2 top-1" />
-            <strong className="">{title}</strong>
-            <p className="mb-0">{description}</p>
+            <strong className="text-[15px]">{title}</strong>
+            <p className="mb-0 text-sm">{description}</p>
         </li>
     )
 }
@@ -36,7 +36,7 @@ export default function Startups() {
                     startups
                 </h3>
 
-                <ul className="p-0 mb-8 flex flex-col gap-3">
+                <ul className="p-0 mb-8 grid md:grid-cols-2 lg:flex flex-col gap-3">
                     <Benefit
                         title="Huuuuge free tier"
                         description="30M events tracked + 50K recordings free, per month"
@@ -55,7 +55,7 @@ export default function Startups() {
                     />
                     <li className="list-none relative pl-10 flex flex-col md:flex-row md:justify-start gap-2">
                         <Check3 className="w-4 h-4 inline-block absolute left-2 top-0" />
-                        <strong>Used and recommended by</strong>
+                        <strong className="text-[15px]">Used and recommended by</strong>
                         <YC className="w-[115px]" />
                     </li>
                 </ul>
