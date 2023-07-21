@@ -7,6 +7,8 @@ import Link from 'components/Link'
 import { Check, Heart } from 'components/Icons'
 import { Menu } from '@headlessui/react'
 import { ChevronDown } from '@posthog/icons'
+import { useInView } from 'react-intersection-observer'
+import { Skeleton } from 'components/Questions/QuestionsTable'
 dayjs.extend(relativeTime)
 
 const query = (params, offset) => {
@@ -14,6 +16,10 @@ const query = (params, offset) => {
         {
             populate: '*',
             sort: 'date:desc',
+            pagination: {
+                start: offset * 20,
+                limit: 20,
+            },
             ...params,
         },
         {
@@ -22,10 +28,21 @@ const query = (params, offset) => {
     )
 }
 
-const Post = ({ title, featuredImage, date, publishedAt, post_category, authors }) => {
+const Post = ({ title, featuredImage, date, publishedAt, post_category, authors, fetchMore, isLoading }) => {
     const [liked, setLiked] = useState(false)
     const [likeCount, setLikeCount] = useState(0)
     const category = post_category?.data?.attributes?.label
+
+    const { ref, inView } = useInView({
+        threshold: 0,
+        triggerOnce: true,
+    })
+
+    useEffect(() => {
+        if (inView) {
+            fetchMore()
+        }
+    }, [inView])
 
     const handleLike = () => {
         setLiked(!liked)
@@ -33,7 +50,7 @@ const Post = ({ title, featuredImage, date, publishedAt, post_category, authors 
     }
 
     return (
-        <li className="flex space-x-6 items-center">
+        <li ref={fetchMore ? ref : null} className="flex space-x-6 items-center">
             <button className={liked ? 'text-red' : 'text-inherit'} onClick={handleLike}>
                 <Heart active={liked} />
             </button>
@@ -175,8 +192,7 @@ export default function Posts() {
         })
     }, [selectedCategories])
 
-    const total = data && data[0]?.meta?.pagination?.total
-    const hasMore = total ? posts?.length < total : false
+    const fetchMore = () => setSize(size + 1)
 
     return (
         <div className="my-8">
@@ -185,9 +201,14 @@ export default function Posts() {
                 <Categories setSelectedCategories={setSelectedCategories} selectedCategories={selectedCategories} />
             </div>
             <ul className="list-none p-0 m-0 grid gap-y-4">
-                {posts.map(({ id, attributes }) => {
-                    return <Post key={id} {...attributes} />
+                {posts.map(({ id, attributes }, index) => {
+                    return <Post key={id} {...attributes} fetchMore={posts.length === index + 1 && fetchMore} />
                 })}
+                {(isLoading || isValidating) && (
+                    <li>
+                        <Skeleton />
+                    </li>
+                )}
             </ul>
         </div>
     )
