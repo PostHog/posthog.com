@@ -39,7 +39,7 @@ export default function ContactSales({ location }) {
                             placeholder="none"
                             width={750}
                             alt="Sales hedgehogs"
-                            src="./images/sales-hogs.png"
+                            src="./images/builder-hog.png"
                         />
                         <h1 className="text-3xl md:text-5xl mt-4 mb-2">Let's chat</h1>
                         <p className="m-0">
