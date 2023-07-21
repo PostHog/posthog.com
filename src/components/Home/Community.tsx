@@ -74,14 +74,12 @@ export default function Community() {
                     </p>
                 </div>
                 <section className="relative [zoom:1.5] left-[-20%] md:left-0 md:mt-0 md:[zoom:1]">
-                    <StaticImage
-                        src="./images/community-light.png"
-                        className="w-[150%] md:w-full transition-opacity opacity-100 dark:hidden dark:opacity-0"
-                    />
-                    <StaticImage
-                        src="./images/community-dark.png"
-                        className="w-[150%] md:w-full transition-opacity hidden opacity-0 dark:block dark:opacity-100"
-                    />
+                    <div className="transition-opacity opacity-100 dark:hidden dark:opacity-0">
+                        <StaticImage src="./images/community-light.png" className="w-[150%] md:w-full" />
+                    </div>
+                    <div className="transition-opacity hidden opacity-0 dark:block dark:opacity-100">
+                        <StaticImage src="./images/community-dark.png" className="w-[150%] md:w-full" />
+                    </div>
                     <CommunityStat
                         count="81k+"
                         label={
