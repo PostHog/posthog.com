@@ -52,8 +52,8 @@ const examples = [
 
 export default function ApiExamples() {
     return (
-        <section className="px-5 mb-20">
-            <h2 className="text-4xl lg:text-5xl mb-1">API</h2>
+        <section className="px-5 mb-20 max-w-6xl mx-auto">
+            <h2 className="text-4xl lg:text-5xl mb-4">API</h2>
             <p className="text-lg md:font-semibold opacity-75 leading-tight">
                 We built PostHog on our API. This means you get full access to anything you want with your event and
                 customer data that's ingested by PostHog. Here are some examples<span className="md:hidden">.</span>

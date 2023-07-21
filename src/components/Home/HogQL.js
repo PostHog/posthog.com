@@ -34,7 +34,7 @@ const examples = [
 
 export default function HogQL() {
     return (
-        <section className="px-5 mb-20">
+        <section className="px-5 mb-20 md:mb-0 max-w-6xl mx-auto">
             <h2 className="text-4xl lg:text-5xl mb-4">HogQL</h2>
             <p className="text-lg md:font-semibold opacity-75">
                 HogQL is our translation layer over ClickHouse SQL. Use HogQL expressions to use JOINs and subqueries,
@@ -54,7 +54,7 @@ export default function HogQL() {
                     <p className="mb-4">
                         <strong>For example...</strong>
                     </p>
-                    <ul className="p-0 mb-4 flex flex-col gap-2">
+                    <ul className="p-0 mb-8 flex flex-col gap-2">
                         {examples.map(({ title, example }) => {
                             return (
                                 <li className="list-none relative pl-8" key={title}>
