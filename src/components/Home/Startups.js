@@ -60,6 +60,7 @@ export default function Startups() {
                             src="./images/billboard.png"
                             alt="A billboard with Dalton Caldwell extolling how great PostHog is"
                             className="max-w-[660px]"
+                            quality={100}
                         />
                     </div>
                 </div>
