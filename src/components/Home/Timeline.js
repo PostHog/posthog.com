@@ -74,7 +74,7 @@ export default function Timeline() {
                 </div>
             </div>
 
-            <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-3 border border-light dark:border-dark divide-x divide-light dark:divide-dark">
+            <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-2 xl:grid-cols-4 border border-light dark:border-dark divide-x divide-light dark:divide-dark">
                 {Object.keys(pastEvents).map((year) => {
                     const pastMonths = groupBy(pastEvents[year], (node) => {
                         const date = new Date(node.dateCompleted || node.projectedCompletion)
@@ -89,7 +89,7 @@ export default function Timeline() {
                             key={year}
                             className="bg-accent dark:bg-accent-dark w-full mb-4 lg:mb-0 last:border-r border-light dark:border-dark"
                         >
-                            <h4 className="text-base py-1 font-bold text-center bg-light dark:bg-dark border-y border-light dark:border-dark">
+                            <h4 className="text-base py-1 font-bold text-center bg-light dark:bg-dark border-y xl:border-t-0 border-light dark:border-dark">
                                 {year}
                             </h4>
                             <div className="px-8">

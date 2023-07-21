@@ -204,15 +204,19 @@ module.exports = {
                     '0%, 100%': { transform: 'rotate(6deg)' },
                     '50%': { transform: 'rotate(-6deg)' },
                 },
+                grow: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.2)' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
+                grow: 'grow 3s linear infinite',
             },
         },
     },
     plugins: [
         require('@tailwindcss/forms'),
-        require('@tailwindcss/line-clamp'),
         require('@headlessui/tailwindcss'),
         require('@tailwindcss/container-queries'),
     ],

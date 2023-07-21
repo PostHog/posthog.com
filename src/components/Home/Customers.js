@@ -55,7 +55,7 @@ const Customer = ({ image, imageDark, width, height, className = '' }) => {
 export default function Customers() {
     const { ref, inView, entry } = useInView({ triggerOnce: true })
     return (
-        <section className="mb-16 md:-mt-[1px] bg-dark">
+        <section className="md:-mt-[1px] bg-dark pb-8 md:pb-0">
             <div className="py-8 md:pt-12 xl:pt-16 px-4 relative z-20">
                 <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-6xl text-primary-dark max-w-screen-2xl mx-auto">
                     These folks <span className="text-yellow">build products users want</span> with
@@ -67,7 +67,7 @@ export default function Customers() {
                 className="md:my-4 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row"
             >
                 {inView && (
-                    <ul className="list-none m-0 p-0 pb-4 md:pb-12 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark gap-4">
+                    <ul className="list-none m-0 p-0 pb-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark gap-4">
                         <Customer className="max-h-[44px]" image={yCombinator} imageDark={yCombinatorDark} />
                         <Customer className="max-h-[36px]" image={staples} imageDark={staplesDark} />
                         <Customer className="max-h-[36px]" image={airbus} imageDark={airbusDark} />

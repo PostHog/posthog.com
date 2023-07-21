@@ -15,8 +15,8 @@ export default function CodeBlocks() {
     const [activeIndex, setActiveIndex] = useState(0)
     return (
         <div className="max-w-screen-2xl mx-auto relative pb-12">
-            <h2 className="text-4xl lg:text-6xl text-center mb-1">Mmmm, code examples</h2>
-            <p className="text-center text-lg font-medium opacity-75 mb-2">
+            <h2 className="text-4xl px-4 md:px-0 lg:text-6xl text-center mb-1">Mmmm, code examples</h2>
+            <p className="text-center leading-tight px-4 md:px-0 text-lg font-medium opacity-75 mb-2">
                 Here's what you can do with the PostHog JS code snippet and your product.
             </p>
             <p className="text-center text-sm pb-4">
