@@ -66,7 +66,7 @@ export default function ApiExamples() {
                         {examples.map(({ title, endpoint, description }) => {
                             return (
                                 <li
-                                    className="list-none flex flex-col md:flex-row p-4 odd:bg-accent dark:odd:bg-accent-dark"
+                                    className="list-none flex flex-col md:flex-row p-4 rounded odd:bg-accent dark:odd:bg-accent-dark"
                                     key={title}
                                 >
                                     <div className="shrink md:basis-[200px] mb-2">
@@ -76,7 +76,9 @@ export default function ApiExamples() {
                                     </div>
                                     <div className="flex-1">
                                         <h4 className="m-0 text-base font-bold">{title}</h4>
-                                        <p className="opacity-75 text-sm m-0">{description}</p>
+                                        <p className="text-primary/75 dark:text-primary-dark/75 text-sm m-0">
+                                            {description}
+                                        </p>
                                     </div>
                                 </li>
                             )
