@@ -15,6 +15,7 @@ import { useQuestions } from 'hooks/useQuestions'
 import { useUser } from 'hooks/useUser'
 import { QuestionData, StrapiResult } from 'lib/strapi'
 import React, { useState } from 'react'
+import Posts from 'components/Edition/Posts'
 
 const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>, 'meta'> }) => {
     return (
@@ -194,53 +195,38 @@ export default function Edition() {
                     <Login onSubmit={() => setLoginModalOpen(false)} />
                 </div>
             </Modal>
-            <div className="px-5">
+            <div className="px-5 mt-8 mb-12 max-w-screen-2xl mx-auto">
                 <section>
-                    <div className="flex justify-end border-t dark:border-light border-dark py-2">
-                        {user ? (
-                            <span className="flex">
-                                <p className="m-0 pr-2 mr-2 border-r">
-                                    Signed in as{' '}
-                                    <Link
-                                        className="text-yellow hover:text-yellow"
-                                        to={`/community/profiles/${user?.profile.id}`}
-                                    >
-                                        {name}
-                                    </Link>
-                                </p>
-                                <button className="text-yellow font-semibold" onClick={() => logout()}>
-                                    Logout
+                    <div className="py-2 border-y border-border dark:border-dark text-center flex justify-between items-center">
+                        <p className="m-0">The latest from the PostHog community</p>
+                        <div className="flex space-x-6 items-center">
+                            <p className="m-0">{dayjs().format('MMM D, YYYY')}</p>
+                            {user ? (
+                                <span className="flex">
+                                    <p className="m-0 pr-2 mr-2 border-r border-border dark:border-dark">
+                                        Signed in as{' '}
+                                        <Link
+                                            className="text-yellow hover:text-yellow"
+                                            to={`/community/profiles/${user?.profile.id}`}
+                                        >
+                                            {name}
+                                        </Link>
+                                    </p>
+                                    <button className="text-yellow font-semibold" onClick={() => logout()}>
+                                        Logout
+                                    </button>
+                                </span>
+                            ) : (
+                                <button onClick={() => setLoginModalOpen(true)} className="text-yellow font-semibold">
+                                    Sign in
                                 </button>
-                            </span>
-                        ) : (
-                            <button onClick={() => setLoginModalOpen(true)} className="text-yellow font-semibold">
-                                Sign in
-                            </button>
-                        )}
-                    </div>
-                    <div className="py-12 border-y dark:border-light border-dark text-center">
-                        <h1 className="m-0">The PostHog Edition</h1>
-                    </div>
-                    <div className="py-2 border-b dark:border-light border-dark text-center flex justify-between items-center">
-                        <p className="m-0">News and highlights from PostHog &amp; the product engineering community</p>
-                        <p className="m-0">{dayjs().format('MMM D, YYYY')}</p>
+                            )}
+                        </div>
                     </div>
                 </section>
-                <div className="lg:mt-12">
-                    <PostLayout
-                        sidebar={<Sidebar />}
-                        title="The PostHog Edition"
-                        menuWidth={{ right: 350 }}
-                        contentContainerClassName="w-full"
-                        hideSurvey
-                        stickySidebar
-                        fullWidthContent
-                    >
-                        <div className="lg:-mt-8">
-                            <ContentViewer scrollToTop={false} content={content} />
-                        </div>
-                    </PostLayout>
-                </div>
+                <section>
+                    <Posts />
+                </section>
             </div>
         </Layout>
     )

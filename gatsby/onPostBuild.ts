@@ -88,6 +88,9 @@ const createOrUpdateStrapiPosts = async (posts) => {
                     url: featuredImage?.publicURL,
                 },
                 body: rawBody,
+                authors: {
+                    connect: [2],
+                },
                 ...(category
                     ? {
                           post_category: {

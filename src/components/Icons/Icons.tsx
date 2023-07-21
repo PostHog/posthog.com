@@ -2257,3 +2257,24 @@ export const TableOfContents = (props: any) => {
         </svg>
     )
 }
+
+export const Heart = (props: any) => {
+    return (
+        <svg
+            {...props}
+            width="24"
+            height="25"
+            viewBox="0 0 24 25"
+            fill={props?.active ? 'currentColor' : 'none'}
+            xmlns="http://www.w3.org/2000/svg"
+            className={`transition-colors ${props?.className ?? ''}`}
+        >
+            <path
+                d="M12 5.85916C18.3331 -0.580419 29.1898 11.3788 12 21.0372C-5.18982 11.3789 5.66687 -0.58042 12 5.85916Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+            />
+        </svg>
+    )
+}
