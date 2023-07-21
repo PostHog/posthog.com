@@ -13,7 +13,8 @@ import Startups from './Startups'
 import Tutorials from './Tutorials'
 import usePostHog from '../../hooks/usePostHog'
 import AllInOne from './AllInOne'
-import Builders from './Builders'
+import ApiExamples from './ApiExamples'
+import HogQL from './HogQL'
 import CustomerData from './CustomerData'
 import CodeBlocks from './CodeBlocks'
 import OnePlatform from './OnePlatform'
@@ -37,7 +38,8 @@ const Home = () => {
                 <CodeBlocks />
                 <OnePlatform />
                 <NoHatingAllowed />
-                <Builders />
+                <ApiExamples />
+                <HogQL />
                 <Community />
                 <CustomerData />
                 <Timeline />
