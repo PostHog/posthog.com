@@ -43,6 +43,19 @@ const sizes = {
     mx-[-1.5px]
     group-disabled:hover:!-translate-y-1
     `,
+    absurd: cntl`
+    rounded-[8px]
+    text-2xl
+    font-bold
+    border-[1.5px]
+    px-5
+    py-2
+    -translate-y-1
+    hover:-translate-y-1.5
+    active:-translate-y-0.5
+    mx-[-1.5px]
+    group-disabled:hover:!-translate-y-1
+    `,
 }
 
 const primary = cntl`
@@ -109,6 +122,7 @@ const containerSizes = {
     sm: cntl`border-[1.5px] relative top-[1px] rounded-[6px]`,
     md: cntl`border-[1.5px] relative top-[2px] rounded-[6px]`,
     lg: cntl`border-[1.5px] relative top-[2px] rounded-[8px]`,
+    absurd: cntl`border-[1.5px] relative top-[2px] rounded-[8px]`,
 }
 
 export const container = (type = 'primary', size = 'lg', width = 'auto') => cntl`

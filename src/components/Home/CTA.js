@@ -53,7 +53,17 @@ export default function CTA() {
                     </div>
                 </div>
             </Modal>
-            <section ref={ref} className="pt-8 md:pt-0 px-5 lg:px-0">
+            <section ref={ref} className="pt-8 md:pt-0 px-5 lg:px-0 overflow-hidden relative">
+                {inView && (
+                    <motion.div
+                        transition={{ delay: 1, duration: 0.5 }}
+                        initial={{ translateX: '100%' }}
+                        animate={{ translateX: '-2rem' }}
+                        className="absolute bottom-0 right-0 xl:block hidden"
+                    >
+                        <StaticImage loading="eager" placeholder="none" width={300} src="./images/conversion-hog.png" />
+                    </motion.div>
+                )}
                 <h2 className={heading('lg')}>
                     This is the <span className="text-red">call to action.</span>
                 </h2>
@@ -93,7 +103,7 @@ export default function CTA() {
                                 <span className="text-xs text-white">*if this were a real cart</span>
                             </motion.div>
                         )}
-                        <div className="hidden lg:block absolute top-4 md:-top-16 -right-12">
+                        <div className="absolute top-4 md:-top-16 -right-12">
                             <div className="relative">
                                 <Bang className="w-[189px] animate-grow" />
                                 <p className="px-8 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-lg rotate-6">
@@ -159,10 +169,10 @@ export default function CTA() {
                         <div className="py-6">
                             <CallToAction
                                 type="primary"
-                                size="lg"
+                                size="absurd"
                                 width="64"
-                                className="!text-2xl"
                                 to={`https://${version === 'us' ? 'app' : 'eu'}.posthog.com/signup`}
+                                className="animate-grow-sm"
                             >
                                 Get started
                             </CallToAction>
