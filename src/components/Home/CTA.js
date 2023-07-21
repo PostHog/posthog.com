@@ -27,7 +27,7 @@ export default function CTA() {
     const [version, setVersion] = useState('us')
     const [signupCountToday, setSignupCountToday] = useState(0)
     const [modalOpen, setModalOpen] = useState(false)
-    const [ref, inView] = useInView({ threshold: 0.8 })
+    const [ref, inView] = useInView({ threshold: 0.8, triggerOnce: true })
 
     useEffect(() => {
         if (posthog?.isFeatureEnabled('direct-to-eu-cloud')) {
