@@ -74,13 +74,14 @@ const createOrUpdateStrapiPosts = async (posts) => {
     await getAllStrapiPostCategories()
 
     await Promise.all(
-        posts.map(({ frontmatter: { title, date, featuredImage }, parent, rawBody }) => {
+        posts.map(({ frontmatter: { title, date, featuredImage }, fields: { slug }, parent, rawBody }) => {
             const path = parent.relativePath
             const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
             const category = allStrapiPostCategories.find(
                 (category) => category?.attributes?.folder === path.split('/')[0]
             )
             const data = {
+                slug,
                 path,
                 title,
                 date,
@@ -114,6 +115,9 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         ... on File {
                             relativePath
                         }
+                    }
+                    fields {
+                        slug
                     }
                     frontmatter {
                         title

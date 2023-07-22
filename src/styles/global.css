@@ -1285,7 +1285,8 @@ li.squeak-left-border {
     }
 }
 
-.snap-x {
+.snap-x,
+.snap-y {
     -ms-overflow-style: none;
     scrollbar-width: none;
     &::-webkit-scrollbar {

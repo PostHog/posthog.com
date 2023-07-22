@@ -12,6 +12,7 @@ import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
 import Job from './src/templates/Job'
 import { UserProvider } from './src/hooks/useUser'
+import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/toast'
 
 export const wrapPageElement = ({ element, props }) => {
@@ -39,6 +40,8 @@ export const wrapPageElement = ({ element, props }) => {
                         <Product {...props} />
                     ) : /^careers\//.test(slug) ? (
                         <Job {...props} />
+                    ) : /^blog|^tutorials/.test(slug) ? (
+                        <Posts {...props}>{element}</Posts>
                     ) : (
                         element
                     ),
