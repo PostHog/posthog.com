@@ -206,7 +206,7 @@ module.exports = {
                 },
                 grow: {
                     '0%, 100%': { transform: 'scale(1)' },
-                    '50%': { transform: 'scale(1.1)' },
+                    '50%': { transform: 'scale(1.2)' },
                 },
                 'grow-sm': {
                     '0%, 100%': { transform: 'scale(1)' },
@@ -215,7 +215,7 @@ module.exports = {
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
-                grow: 'grow 3s linear infinite',
+                grow: 'grow 2s linear infinite',
                 'grow-sm': 'grow-sm 3s linear infinite',
             },
         },
