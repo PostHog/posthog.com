@@ -74,46 +74,58 @@ const createOrUpdateStrapiPosts = async (posts) => {
     await getAllStrapiPostCategories()
 
     await Promise.all(
-        posts.map(({ frontmatter: { title, date, featuredImage }, fields: { slug }, parent, rawBody }) => {
-            const path = parent.relativePath
-            const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
-            const category = allStrapiPostCategories.find(
-                (category) => category?.attributes?.folder === path.split('/')[0]
-            )
-            const data = {
-                slug,
-                path,
-                title,
-                date,
-                featuredImage: {
-                    url: featuredImage?.publicURL,
+        posts.map(
+            ({
+                frontmatter: { title, date, featuredImage },
+                fields: { slug },
+                parent: {
+                    relativePath: path,
+                    fields: { gitLogLatestDate },
                 },
-                body: rawBody,
-                authors: {
-                    connect: [2],
-                },
-                ...(category
-                    ? {
-                          post_category: {
-                              connect: [category.id],
-                          },
-                      }
-                    : null),
-            }
+                rawBody,
+            }) => {
+                const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
+                const category = allStrapiPostCategories.find(
+                    (category) => category?.attributes?.folder === path.split('/')[0]
+                )
+                const data = {
+                    slug,
+                    path,
+                    title,
+                    date: date || gitLogLatestDate || new Date(),
+                    featuredImage: {
+                        url: featuredImage?.publicURL,
+                    },
+                    body: rawBody,
+                    authors: {
+                        connect: [2],
+                    },
+                    ...(category
+                        ? {
+                              post_category: {
+                                  connect: [category.id],
+                              },
+                          }
+                        : null),
+                }
 
-            return limit(() => createOrUpdateStrapiPost(data, existingPost?.id))
-        })
+                return limit(() => createOrUpdateStrapiPost(data, existingPost?.id))
+            }
+        )
     )
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const { data } = await graphql(`
         query {
-            all: allMdx(filter: { frontmatter: { title: { ne: null }, date: { ne: null } } }) {
+            all: allMdx(filter: { fields: { slug: { regex: "/^/blog|^/tutorials|^/customers|^/spotlight/" } } }) {
                 nodes {
                     parent {
                         ... on File {
                             relativePath
+                            fields {
+                                gitLogLatestDate
+                            }
                         }
                     }
                     fields {

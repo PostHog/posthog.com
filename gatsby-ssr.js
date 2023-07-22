@@ -40,7 +40,7 @@ export const wrapPageElement = ({ element, props }) => {
                         <Product {...props} />
                     ) : /^careers\//.test(slug) ? (
                         <Job {...props} />
-                    ) : /^blog|^tutorials/.test(slug) ? (
+                    ) : /^blog|^tutorials|^customers/.test(slug) ? (
                         <Posts {...props}>{element}</Posts>
                     ) : (
                         element
