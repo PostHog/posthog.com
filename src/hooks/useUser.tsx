@@ -282,6 +282,12 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                             topicSubscriptions: {
                                 fields: ['slug', 'label'],
                             },
+                            postLikes: {
+                                fields: ['id'],
+                            },
+                            roadmapLikes: {
+                                fields: ['id'],
+                            },
                         },
                     },
                     role: {
@@ -406,6 +412,34 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         await fetchUser()
     }
 
+    const likePost = async (id: number, unlike = false) => {
+        const profileID = user?.profile?.id
+        if (!profileID || !id) return
+        const body = {
+            data: {
+                postLikes: unlike
+                    ? { disconnect: [id] }
+                    : {
+                          connect: [id],
+                      },
+            },
+        }
+        const likeRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        if (!likeRes.ok) {
+            throw new Error(`Failed to like post`)
+        }
+
+        await fetchUser()
+    }
+
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
@@ -422,6 +456,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         fetchUser,
         isSubscribed,
         setSubscription,
+        likePost,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

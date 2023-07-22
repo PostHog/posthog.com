@@ -9,28 +9,37 @@ import { Menu } from '@headlessui/react'
 import { ChevronDown } from '@posthog/icons'
 import { useInView } from 'react-intersection-observer'
 import { Skeleton } from 'components/Questions/QuestionsTable'
+import { usePosts } from './hooks/usePosts'
+import { useUser } from 'hooks/useUser'
+import Tooltip from 'components/Tooltip'
 dayjs.extend(relativeTime)
 
-const query = (params, offset) => {
-    return qs.stringify(
-        {
-            populate: '*',
-            sort: 'date:desc',
-            pagination: {
-                start: offset * 20,
-                limit: 20,
-            },
-            ...params,
-        },
-        {
-            encodeValuesOnly: true,
-        }
+const LikeButton = ({ liked, handleClick, className = '' }) => {
+    const { user } = useUser()
+    return (
+        <button
+            disabled={!user}
+            className={`${liked ? 'text-red' : 'text-inherit disabled:opacity-60'} ${className}`}
+            onClick={handleClick}
+        >
+            {user ? (
+                <Heart className="w-full h-auto" active={liked} />
+            ) : (
+                <Tooltip content="Sign in to like this post">
+                    <span className="relative">
+                        <Heart className="w-full h-auto" active={liked} />
+                    </span>
+                </Tooltip>
+            )}
+        </button>
     )
 }
 
-const Post = ({ title, featuredImage, date, publishedAt, post_category, authors, fetchMore, isLoading }) => {
-    const [liked, setLiked] = useState(false)
-    const [likeCount, setLikeCount] = useState(0)
+const Post = ({ id, title, featuredImage, date, publishedAt, post_category, authors, likes, fetchMore }) => {
+    const { likePost, user } = useUser()
+    const userLiked = user?.profile?.postLikes?.some((post) => post.id === id)
+    const [liked, setLiked] = useState(userLiked)
+    const [likeCount, setLikeCount] = useState(likes?.data?.length || 0)
     const category = post_category?.data?.attributes?.label
 
     const { ref, inView } = useInView({
@@ -47,13 +56,16 @@ const Post = ({ title, featuredImage, date, publishedAt, post_category, authors,
     const handleLike = () => {
         setLiked(!liked)
         setLikeCount(likeCount + (!liked ? 1 : -1))
+        likePost(id, liked)
     }
+
+    useEffect(() => {
+        setLiked(userLiked)
+    }, [user])
 
     return (
         <li ref={fetchMore ? ref : null} className="flex space-x-6 items-center">
-            <button className={liked ? 'text-red' : 'text-inherit'} onClick={handleLike}>
-                <Heart active={liked} />
-            </button>
+            <LikeButton handleClick={handleLike} liked={liked} />
             <div className="w-[150px] h-[85px] bg-accent dark:bg-accent-dark rounded-sm overflow-hidden">
                 <img className="object-cover w-full h-full" src={featuredImage?.url} />
             </div>
@@ -64,10 +76,7 @@ const Post = ({ title, featuredImage, date, publishedAt, post_category, authors,
                 </span>
                 <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
                     <li className="text-sm font-medium leading-none flex space-x-1 items-center">
-                        <button className={liked ? 'text-red' : 'text-inherit'} onClick={handleLike}>
-                            <Heart active={likeCount > 0} className="w-4 h-4" />
-                        </button>
-
+                        <LikeButton className="w-4 h-4" handleClick={handleLike} liked={liked} />
                         <span className="opacity-60">{likeCount}</span>
                     </li>
                     {authors?.data?.length > 0 && (
@@ -168,13 +177,7 @@ const Categories = ({ setSelectedCategories, selectedCategories }) => {
 export default function Posts() {
     const [params, setParams] = useState({})
     const [selectedCategories, setSelectedCategories] = useState([])
-    const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite(
-        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query(params, offset)}`,
-        (url: string) => fetch(url).then((r) => r.json())
-    )
-    const posts = React.useMemo(() => {
-        return data?.reduce((acc, cur) => [...acc, ...cur.data], []) ?? []
-    }, [size, data])
+    const { posts, isLoading, fetchMore } = usePosts({ params })
 
     useEffect(() => {
         if (!selectedCategories) {
@@ -192,8 +195,6 @@ export default function Posts() {
         })
     }, [selectedCategories])
 
-    const fetchMore = () => setSize(size + 1)
-
     return (
         <div className="my-8">
             <div className="my-4 flex justify-between">
@@ -202,9 +203,9 @@ export default function Posts() {
             </div>
             <ul className="list-none p-0 m-0 grid gap-y-4">
                 {posts.map(({ id, attributes }, index) => {
-                    return <Post key={id} {...attributes} fetchMore={posts.length === index + 1 && fetchMore} />
+                    return <Post key={id} {...attributes} id={id} fetchMore={posts.length === index + 1 && fetchMore} />
                 })}
-                {(isLoading || isValidating) && (
+                {isLoading && (
                     <li>
                         <Skeleton />
                     </li>

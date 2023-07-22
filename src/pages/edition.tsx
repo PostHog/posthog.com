@@ -191,13 +191,13 @@ export default function Edition() {
     return (
         <Layout>
             <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
-                <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-4">
+                <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-12">
                     <Login onSubmit={() => setLoginModalOpen(false)} />
                 </div>
             </Modal>
             <div className="px-5 mt-8 mb-12 max-w-screen-2xl mx-auto">
                 <section>
-                    <div className="py-2 border-y border-border dark:border-dark text-center flex justify-between items-center">
+                    <div className="py-2 border-y border-border dark:border-dark text-center flex justify-between items-center sticky top-[-1px]">
                         <p className="m-0">The latest from the PostHog community</p>
                         <div className="flex space-x-6 items-center">
                             <p className="m-0">{dayjs().format('MMM D, YYYY')}</p>
