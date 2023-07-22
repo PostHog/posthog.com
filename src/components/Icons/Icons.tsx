@@ -2267,7 +2267,7 @@ export const Heart = (props: any) => {
             viewBox="0 0 24 25"
             fill={props?.active ? 'currentColor' : 'none'}
             xmlns="http://www.w3.org/2000/svg"
-            className={`transition-colors ${props?.className ?? ''}`}
+            className={props.className ?? ''}
         >
             <path
                 d="M12 5.85916C18.3331 -0.580419 29.1898 11.3788 12 21.0372C-5.18982 11.3789 5.66687 -0.58042 12 5.85916Z"

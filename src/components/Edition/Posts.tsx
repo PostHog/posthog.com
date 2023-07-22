@@ -57,8 +57,7 @@ const Post = ({
 }) => {
     const { pathname } = useLocation()
     const { likePost, user } = useUser()
-    const userLiked = user?.profile?.postLikes?.some((post) => post.id === id)
-    const [liked, setLiked] = useState(userLiked)
+    const liked = user?.profile?.postLikes?.some((post) => post.id === id)
     const [likeCount, setLikeCount] = useState(likes?.data?.length || 0)
     const category = post_category?.data?.attributes?.label
     const active = pathname === slug
@@ -76,14 +75,9 @@ const Post = ({
 
     const handleLike = (e) => {
         e.preventDefault()
-        setLiked(!liked)
         setLikeCount(likeCount + (!liked ? 1 : -1))
         likePost(id, liked)
     }
-
-    useEffect(() => {
-        setLiked(userLiked)
-    }, [user])
 
     return (
         <li ref={fetchMore ? ref : null} className="snap-start">
@@ -129,7 +123,7 @@ const Post = ({
     )
 }
 
-const Categories = ({ setSelectedCategories, selectedCategories }) => {
+const Categories = ({ setSelectedCategories, selectedCategories, setParams, root }) => {
     const containerEl = useRef(null)
     const [categories, setCategories] = useState([])
     const [open, setOpen] = useState(false)
@@ -137,14 +131,30 @@ const Categories = ({ setSelectedCategories, selectedCategories }) => {
     useEffect(() => {
         fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories`)
             .then((res) => res.json())
-            .then((data) => setCategories(data?.data))
+            .then((data) => {
+                const categories = data?.data
+                const selectedCategory = categories.find((category) => category.attributes?.folder === root)
+                if (selectedCategory) {
+                    setSelectedCategories([...selectedCategories, selectedCategory])
+                }
+                setCategories(categories)
+            })
     }, [])
 
     const handleClick = (newCategory) => {
         const newCategories = selectedCategories.some((selectedCategory) => selectedCategory.id === newCategory.id)
             ? selectedCategories.filter((selectedCategory) => selectedCategory.id !== newCategory.id)
             : [...selectedCategories, newCategory]
-        return setSelectedCategories(newCategories)
+        setSelectedCategories(newCategories)
+        setParams({
+            filters: {
+                post_category: {
+                    id: {
+                        $in: newCategories.map((category) => category.id),
+                    },
+                },
+            },
+        })
     }
 
     useEffect(() => {
@@ -204,31 +214,23 @@ const Categories = ({ setSelectedCategories, selectedCategories }) => {
 }
 
 function PostsListing({ articleView }) {
-    const [params, setParams] = useState({})
+    const { pathname } = useLocation()
+    const root = pathname.split('/')[1]
+    const initialParams = root ? { filters: { post_category: { folder: { $eq: root } } } } : {}
+    const [params, setParams] = useState(initialParams)
     const [selectedCategories, setSelectedCategories] = useState([])
     const { posts, isLoading, fetchMore } = usePosts({ params })
-
-    useEffect(() => {
-        if (!selectedCategories) {
-            return setParams({})
-        }
-        const categoryIDs = selectedCategories.map((category) => category.id)
-        setParams({
-            filters: {
-                post_category: {
-                    id: {
-                        $in: categoryIDs,
-                    },
-                },
-            },
-        })
-    }, [selectedCategories])
 
     return (
         <div>
             <div className="my-4 flex justify-between">
                 <h5 className="m-0">Posts</h5>
-                <Categories setSelectedCategories={setSelectedCategories} selectedCategories={selectedCategories} />
+                <Categories
+                    setParams={setParams}
+                    setSelectedCategories={setSelectedCategories}
+                    selectedCategories={selectedCategories}
+                    root={root}
+                />
             </div>
             <div className="after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10  relative">
                 <ul
