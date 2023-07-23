@@ -39,7 +39,11 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
 }
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
-    return props.custom404 || !props.data ? (
+    return /^blog\/|^tutorials\/|^customers\/|^posts/.test(slug) ? (
+        <Posts {...props} articleView={!/^posts/.test(slug)}>
+            {element}
+        </Posts>
+    ) : props.custom404 || !props.data ? (
         element
     ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
       ![
@@ -57,8 +61,6 @@ export const wrapPageElement = ({ element, props }) => {
         <Product {...props} />
     ) : /^careers\//.test(slug) ? (
         <Job {...props} />
-    ) : /^blog|^tutorials|^customers/.test(slug) ? (
-        <Posts {...props}>{element}</Posts>
     ) : (
         element
     )

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'components/Link'
@@ -19,6 +19,8 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import { useQuestions } from 'hooks/useQuestions'
 import { QuestionData, StrapiResult } from 'lib/strapi'
 import { useLocation } from '@reach/router'
+import { communityMenu } from '../../navs'
+import { AnimatePresence, motion } from 'framer-motion'
 dayjs.extend(relativeTime)
 
 const LikeButton = ({ liked, handleClick, className = '' }) => {
@@ -82,41 +84,64 @@ const Post = ({
     return (
         <li ref={fetchMore ? ref : null} className="snap-start">
             <Link
-                className={`flex space-x-6 items-center text-inherit hover:text-inherit p-2 border rounded-md ${
-                    active ? 'border-border dark:border-dark ' : 'border-transparent dark:border-transparent'
-                }`}
+                className={`flex items-center text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit`}
                 to={slug}
             >
-                {!articleView && <LikeButton handleClick={handleLike} liked={liked} />}
-                <div className="w-[150px] h-[85px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden">
-                    <img className="object-cover w-full h-full" src={featuredImage?.url} />
-                </div>
-                <div>
-                    <span className={articleView ? 'flex flex-col-reverse' : 'flex items-baseline space-x-1'}>
-                        <p className="m-0 text-lg font-bold">{title}</p>
-                        {category && <p className="m-0 text-sm font-medium opacity-60">{category}</p>}
-                    </span>
-                    <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
-                        <li className="text-sm font-medium leading-none flex space-x-1 items-center">
-                            <LikeButton className="w-4 h-4" handleClick={handleLike} liked={liked} />
-                            <span className="opacity-60">{likeCount}</span>
-                        </li>
-                        {authors?.data?.length > 0 && (
-                            <li className="text-sm font-medium leading-none pl-2 border-l border-light dark:border-dark">
-                                {authors?.data.map(({ id, attributes: { firstName, lastName } }) => {
-                                    const name = [firstName, lastName].filter(Boolean).join(' ')
-                                    return (
-                                        <Link key={id} to={`/community/profiles/${id}`}>
-                                            {name}
-                                        </Link>
-                                    )
-                                })}
+                <AnimatePresence>
+                    {!articleView && (
+                        <motion.div
+                            initial={{ opacity: 0, position: 'absolute', width: 0 }}
+                            animate={{
+                                opacity: 1,
+                                position: 'relative',
+                                width: 'auto',
+                            }}
+                            exit={{
+                                opacity: 0,
+                                width: 0,
+                            }}
+                        >
+                            <LikeButton handleClick={handleLike} liked={liked} className="mr-6" />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+                <div
+                    className={`flex space-x-6 border rounded-md p-2 transition-all flex-grow ${
+                        active
+                            ? 'border-border dark:border-dark bg-accent dark:bg-accent-dark'
+                            : 'border-transparent dark:border-transparent hover:border-border dark:hover:border-dark'
+                    }`}
+                >
+                    <div className="w-[150px] h-[85px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden self-start relative z-10">
+                        <img className="object-cover w-full h-full" src={featuredImage?.url} />
+                    </div>
+                    <div>
+                        <span className={articleView ? 'flex flex-col-reverse' : 'flex items-baseline space-x-1'}>
+                            <p className="m-0 text-lg font-bold leading-tight line-clamp-1">{title}</p>
+                            {category && <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>}
+                        </span>
+                        <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
+                            <li className="text-sm font-medium leading-none flex space-x-1 items-center">
+                                <LikeButton className="w-4 h-4" handleClick={handleLike} liked={liked} />
+                                <span className="opacity-60">{likeCount}</span>
                             </li>
-                        )}
-                        <li className="text-sm font-medium pl-2 leading-none border-l border-light dark:border-dark">
-                            <span className="opacity-60">{dayjs(date || publishedAt).fromNow()}</span>
-                        </li>
-                    </ul>
+                            {authors?.data?.length > 0 && (
+                                <li className="text-sm font-medium leading-none pl-2 border-l border-light dark:border-dark">
+                                    {authors?.data.map(({ id, attributes: { firstName, lastName } }) => {
+                                        const name = [firstName, lastName].filter(Boolean).join(' ')
+                                        return (
+                                            <Link key={id} to={`/community/profiles/${id}`}>
+                                                {name}
+                                            </Link>
+                                        )
+                                    })}
+                                </li>
+                            )}
+                            <li className="text-sm font-medium pl-2 leading-none border-l border-light dark:border-dark">
+                                <span className="opacity-60">{dayjs(date || publishedAt).fromNow()}</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </Link>
         </li>
@@ -135,7 +160,7 @@ const Categories = ({ setSelectedCategories, selectedCategories, setParams, root
                 const categories = data?.data
                 const selectedCategory = categories.find((category) => category.attributes?.folder === root)
                 if (selectedCategory) {
-                    setSelectedCategories([...selectedCategories, selectedCategory])
+                    setSelectedCategories([selectedCategory])
                 }
                 setCategories(categories)
             })
@@ -213,11 +238,12 @@ const Categories = ({ setSelectedCategories, selectedCategories, setParams, root
     ) : null
 }
 
+const getCategoryParams = (root) => (root !== 'posts' ? { filters: { post_category: { folder: { $eq: root } } } } : {})
+
 function PostsListing({ articleView }) {
     const { pathname } = useLocation()
     const root = pathname.split('/')[1]
-    const initialParams = root ? { filters: { post_category: { folder: { $eq: root } } } } : {}
-    const [params, setParams] = useState(initialParams)
+    const [params, setParams] = useState(getCategoryParams(root))
     const [selectedCategories, setSelectedCategories] = useState([])
     const { posts, isLoading, fetchMore } = usePosts({ params })
 
@@ -232,10 +258,10 @@ function PostsListing({ articleView }) {
                     root={root}
                 />
             </div>
-            <div className="after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10  relative">
+            <div className="after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative">
                 <ul
                     className={` list-none p-0 m-0 grid gap-y-4 snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
-                        articleView ? 'h-[90vh] overflow-auto' : ''
+                        articleView ? 'h-[80vh] overflow-auto' : ''
                     }`}
                 >
                     {posts.map(({ id, attributes }, index) => {
@@ -298,7 +324,7 @@ const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>
     )
 }
 
-const Sidebar = () => {
+export const Sidebar = () => {
     const { user } = useUser()
     const { questions: subscribedQuestions } = useQuestions({
         limit: 5,
@@ -321,7 +347,7 @@ const Sidebar = () => {
     })
 
     return (
-        <div className="ml-6 max-w-[350px] sticky top-12">
+        <div>
             {user && (
                 <SidebarSection title="Subscribed threads">
                     <Questions questions={subscribedQuestions} />
@@ -334,14 +360,13 @@ const Sidebar = () => {
     )
 }
 
-export default function Posts({ children }) {
+export default function Posts({ children, articleView }) {
     const { user, logout } = useUser()
     const name = [user?.profile.firstName, user?.profile.lastName].filter(Boolean).join(' ')
     const [loginModalOpen, setLoginModalOpen] = useState(false)
-    const articleView = !!children
 
     return (
-        <Layout>
+        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
             <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
                 <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-12">
                     <Login onSubmit={() => setLoginModalOpen(false)} />
@@ -377,10 +402,44 @@ export default function Posts({ children }) {
                     </div>
                 </section>
                 <section className="flex space-x-12 my-8 items-start">
-                    <div className={`${articleView ? 'sticky top-12' : ''} flex-grow`}>
+                    <motion.div
+                        transition={{ type: 'tween', duration: 0.1 }}
+                        className={`${articleView ? 'sticky top-[108px]' : ''} transition-all flex-grow`}
+                    >
                         <PostsListing articleView={articleView} />
-                    </div>
-                    {children ? <div className="max-w-5xl">{children}</div> : <Sidebar />}
+                    </motion.div>
+                    <motion.div
+                        transition={{ type: 'tween', duration: 0.1 }}
+                        animate={{ width: articleView ? '100%' : '30rem' }}
+                        className={`${
+                            articleView ? '' : 'sticky top-[108px]'
+                        } flex-shrink-0 flex justify-end max-w-[64rem]`}
+                    >
+                        <AnimatePresence>
+                            {articleView ? (
+                                <motion.div
+                                    key="posts"
+                                    initial={{ translateX: '100%', opacity: 0, position: 'absolute', width: '64rem' }}
+                                    animate={{ translateX: 0, opacity: 1, position: 'relative', width: '100%' }}
+                                    exit={{ translateX: '100%', opacity: 0, position: 'absolute', width: '64rem' }}
+                                    transition={{ duration: 0.1, type: 'tween' }}
+                                >
+                                    {children}
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="children"
+                                    className="w-[30rem] flex-shrink-0"
+                                    initial={{ opacity: 0, position: 'absolute' }}
+                                    animate={{ opacity: 1, position: 'relative' }}
+                                    exit={{ opacity: 0, position: 'absolute' }}
+                                    transition={{ duration: 0.1, type: 'tween' }}
+                                >
+                                    {children}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
                 </section>
             </div>
         </Layout>

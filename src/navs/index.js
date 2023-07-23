@@ -675,6 +675,12 @@ export const communityMenu = {
     icon: 'Chat',
     children: [
         {
+            name: 'Posts',
+            icon: 'Newspaper',
+            color: 'red',
+            url: '/posts',
+        },
+        {
             name: 'Questions',
             icon: 'Message',
             color: 'blue',
