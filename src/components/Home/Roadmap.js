@@ -19,7 +19,7 @@ const RoadmapItem = ({ children }) => {
 
 const Roadmap = () => {
     return (
-        <div className="px-4 mb-20 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-12">
+        <div className="px-4 mb-12 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-12">
             <figure className="w-64 mx-auto md:w-auto">
                 <StaticImage
                     width={367}
@@ -31,10 +31,10 @@ const Roadmap = () => {
                 />
             </figure>
             <div className="col-span-2">
-                <h2 className="m-0 text-5xl md:text-7xl text-primary dark:text-primary-dark text-center md:text-left">
-                    The future of PostHog <span className="text-red">depends on you</span>
+                <h2 className="m-0 text-5xl md:text-6xl text-primary dark:text-primary-dark text-center md:text-left">
+                    The future of PostHog <span className="text-red inline-block">depends on you</span>
                 </h2>
-                <h3 className="m-0 text-lg md:text-[20px] leading-tight md:text-xl text-center md:text-left font-semibold mt-2 md:mt-3 opacity-75 text-primary dark:text-primary-dark">
+                <h3 className="m-0 text-lg leading-tight md:text-xl text-center md:text-left font-semibold mt-2 md:mt-3 opacity-75 text-primary dark:text-primary-dark">
                     We publish our product roadmap. Tell us what we should build next – and get early access.
                 </h3>
 

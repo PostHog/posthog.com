@@ -203,6 +203,8 @@ featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
 
 > **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
 
+> **Note:** A single local evaluation call is billed as equivalent to 10 `decide`requests. [More info](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation).
+
 All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. You must know all person or group properties the flag depends on.
 
 The method call looks just like above
