@@ -57,6 +57,7 @@ const Post = ({
     fetchMore,
     articleView,
 }) => {
+    const containerRef = useRef()
     const { pathname } = useLocation()
     const { likePost, user } = useUser()
     const liked = user?.profile?.postLikes?.some((post) => post.id === id)
@@ -81,69 +82,80 @@ const Post = ({
         likePost(id, liked)
     }
 
+    useEffect(() => {
+        if (active && typeof window !== 'undefined') {
+            containerRef?.current?.scrollIntoView({ block: 'start', inline: 'nearest' })
+            window.scrollTo({ top: 0 })
+        }
+    }, [pathname])
+
     return (
-        <li ref={fetchMore ? ref : null} className="snap-start">
-            <Link
-                className={`flex items-center text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit`}
-                to={slug}
-            >
-                <AnimatePresence>
-                    {!articleView && (
-                        <motion.div
-                            initial={{ opacity: 0, position: 'absolute', width: 0 }}
-                            animate={{
-                                opacity: 1,
-                                position: 'relative',
-                                width: 'auto',
-                            }}
-                            exit={{
-                                opacity: 0,
-                                width: 0,
-                            }}
-                        >
-                            <LikeButton handleClick={handleLike} liked={liked} className="mr-6" />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-                <div
-                    className={`flex space-x-6 border rounded-md p-2 transition-all flex-grow ${
-                        active
-                            ? 'border-border dark:border-dark bg-accent dark:bg-accent-dark'
-                            : 'border-transparent dark:border-transparent hover:border-border dark:hover:border-dark'
-                    }`}
+        <li ref={containerRef} className="snap-start">
+            <span ref={fetchMore ? ref : null}>
+                <Link
+                    className={`flex items-center text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit`}
+                    to={slug}
                 >
-                    <div className="w-[150px] h-[85px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden self-start relative z-10">
-                        <img className="object-cover w-full h-full" src={featuredImage?.url} />
-                    </div>
-                    <div>
-                        <span className={articleView ? 'flex flex-col-reverse' : 'flex items-baseline space-x-1'}>
-                            <p className="m-0 text-lg font-bold leading-tight line-clamp-1">{title}</p>
-                            {category && <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>}
-                        </span>
-                        <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
-                            <li className="text-sm font-medium leading-none flex space-x-1 items-center">
-                                <LikeButton className="w-4 h-4" handleClick={handleLike} liked={liked} />
-                                <span className="opacity-60">{likeCount}</span>
-                            </li>
-                            {authors?.data?.length > 0 && (
-                                <li className="text-sm font-medium leading-none pl-2 border-l border-light dark:border-dark">
-                                    {authors?.data.map(({ id, attributes: { firstName, lastName } }) => {
-                                        const name = [firstName, lastName].filter(Boolean).join(' ')
-                                        return (
-                                            <Link key={id} to={`/community/profiles/${id}`}>
-                                                {name}
-                                            </Link>
-                                        )
-                                    })}
+                    <AnimatePresence>
+                        {!articleView && (
+                            <motion.div
+                                initial={{ opacity: 0, position: 'absolute', width: 0 }}
+                                animate={{
+                                    opacity: 1,
+                                    position: 'relative',
+                                    width: 'auto',
+                                }}
+                                exit={{
+                                    opacity: 0,
+                                    width: 0,
+                                }}
+                            >
+                                <LikeButton handleClick={handleLike} liked={liked} className="mr-6" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    <div
+                        className={`flex space-x-6 border rounded-md p-2 transition-all flex-grow ${
+                            active
+                                ? 'border-border dark:border-dark bg-accent dark:bg-accent-dark'
+                                : 'border-transparent dark:border-transparent hover:border-border dark:hover:border-dark'
+                        }`}
+                    >
+                        <div className="w-[150px] h-[85px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden self-start relative z-10">
+                            <img className="object-cover w-full h-full" src={featuredImage?.url} />
+                        </div>
+                        <div>
+                            <span className={articleView ? 'flex flex-col-reverse' : 'flex items-baseline space-x-1'}>
+                                <p className="m-0 text-lg font-bold leading-tight line-clamp-1">{title}</p>
+                                {category && (
+                                    <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>
+                                )}
+                            </span>
+                            <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
+                                <li className="text-sm font-medium leading-none flex space-x-1 items-center">
+                                    <LikeButton className="w-4 h-4" handleClick={handleLike} liked={liked} />
+                                    <span className="opacity-60">{likeCount}</span>
                                 </li>
-                            )}
-                            <li className="text-sm font-medium pl-2 leading-none border-l border-light dark:border-dark">
-                                <span className="opacity-60">{dayjs(date || publishedAt).fromNow()}</span>
-                            </li>
-                        </ul>
+                                {authors?.data?.length > 0 && (
+                                    <li className="text-sm font-medium leading-none pl-2 border-l border-light dark:border-dark">
+                                        {authors?.data.map(({ id, attributes: { firstName, lastName } }) => {
+                                            const name = [firstName, lastName].filter(Boolean).join(' ')
+                                            return (
+                                                <Link key={id} to={`/community/profiles/${id}`}>
+                                                    {name}
+                                                </Link>
+                                            )
+                                        })}
+                                    </li>
+                                )}
+                                <li className="text-sm font-medium pl-2 leading-none border-l border-light dark:border-dark">
+                                    <span className="opacity-60">{dayjs(date || publishedAt).fromNow()}</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </Link>
+                </Link>
+            </span>
         </li>
     )
 }
