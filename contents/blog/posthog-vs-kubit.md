@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
+featuredImage: ../images/blog/posthog-vs-kubit/posthog-vs-kubit.jpg
 featuredImageType: full
 author:
     - joe-martin
