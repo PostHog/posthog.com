@@ -29,10 +29,9 @@ Golioth is an incredibly customer-driven team, and invests a lot of time and eff
 
 “We obviously have a long-term vision, but customer feedback always has the highest priority over everything else,” says Dylan. “We even use PostHog to help with this by using feature flags and session replays to test new updates with users who ask, or to debug issues they face.”
 
-One of the ways this customer focus manifests is in Golioth’s reference designs for hardware projects, which the team creates in order to help hardware engineers. 
+One of the ways this customer focus manifests is in Golioth’s [reference designs](https://projects.golioth.io/) for hardware projects, which the team creates in order to help hardware engineers. 
 
 “We don’t make hardware ourselves,” says Jonathan, “but we know these references help users to prove out ideas more quickly. That, in turn, means they’re going to be more successful.”
-
 
 > **Recommended reading:** Dylan is currently reading [David and Goliath: Underdogs, Misfits, and the Art of Battling Giants](https://en.wikipedia.org/wiki/David_and_Goliath_(book)) by Malcolm Gladwell, and recommends it for inspiration about early-stage startups can succeed.  
 
@@ -52,7 +51,7 @@ Contributing to open source communities is ingrained in Golioth’s culture from
 
 By adopting open source as the basis for much of its work, Golioth (like PostHog) unlocks a lot of advantages that aren’t available to closed source projects. One of these is an opportunity to incorporate features from other, dependent open source projects. 
 
-> **Community spotlight:** Jonathan credits the [Zephy](https://www.zephyrproject.org/) as the most crucial open source project to Golioth’s own creation, and the team continues to regularly contribute upstream to it as a result. 
+> **Community spotlight:** Jonathan credits the [Zephyr](https://www.zephyrproject.org/) as the most crucial open source project to Golioth’s own creation, and the team continues to regularly contribute upstream to it as a result. 
 
 ## 4. It’s never too early to think about sales
 
