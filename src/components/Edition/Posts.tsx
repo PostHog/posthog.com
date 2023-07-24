@@ -96,24 +96,7 @@ const Post = ({
                     className={`flex items-center text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit`}
                     to={slug}
                 >
-                    <AnimatePresence>
-                        {!articleView && (
-                            <motion.div
-                                initial={{ opacity: 0, position: 'absolute', width: 0 }}
-                                animate={{
-                                    opacity: 1,
-                                    position: 'relative',
-                                    width: 'auto',
-                                }}
-                                exit={{
-                                    opacity: 0,
-                                    width: 0,
-                                }}
-                            >
-                                <LikeButton handleClick={handleLike} liked={liked} className="mr-6" />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    {!articleView && <LikeButton handleClick={handleLike} liked={liked} className="mr-6" />}
                     <div
                         className={`flex space-x-6 border rounded-md p-2 transition-all flex-grow ${
                             active
@@ -414,44 +397,12 @@ export default function Posts({ children, articleView }) {
                     </div>
                 </section>
                 <section className="flex space-x-12 my-8 items-start">
-                    <motion.div
-                        transition={{ type: 'tween', duration: 0.1 }}
-                        className={`${articleView ? 'sticky top-[108px]' : ''} transition-all flex-grow`}
-                    >
+                    <div className={`${articleView ? 'sticky top-[108px] w-[30rem] flex-shrink-0 ' : 'w-[64rem'} `}>
                         <PostsListing articleView={articleView} />
-                    </motion.div>
-                    <motion.div
-                        transition={{ type: 'tween', duration: 0.1 }}
-                        animate={{ width: articleView ? '100%' : '30rem' }}
-                        className={`${
-                            articleView ? '' : 'sticky top-[108px]'
-                        } flex-shrink-0 flex justify-end max-w-[64rem]`}
-                    >
-                        <AnimatePresence>
-                            {articleView ? (
-                                <motion.div
-                                    key="posts"
-                                    initial={{ translateX: '100%', opacity: 0, position: 'absolute', width: '64rem' }}
-                                    animate={{ translateX: 0, opacity: 1, position: 'relative', width: '100%' }}
-                                    exit={{ translateX: '100%', opacity: 0, position: 'absolute', width: '64rem' }}
-                                    transition={{ duration: 0.1, type: 'tween' }}
-                                >
-                                    {children}
-                                </motion.div>
-                            ) : (
-                                <motion.div
-                                    key="children"
-                                    className="w-[30rem] flex-shrink-0"
-                                    initial={{ opacity: 0, position: 'absolute' }}
-                                    animate={{ opacity: 1, position: 'relative' }}
-                                    exit={{ opacity: 0, position: 'absolute' }}
-                                    transition={{ duration: 0.1, type: 'tween' }}
-                                >
-                                    {children}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </motion.div>
+                    </div>
+                    <div className={`${articleView ? '' : 'sticky top-[108px] min-w-[300px]'} flex-grow`}>
+                        {children}
+                    </div>
                 </section>
             </div>
         </Layout>
