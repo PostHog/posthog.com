@@ -14,11 +14,13 @@ tags:
  - Y Combinator
 ---
 
-[A/B testing](/docs/experiments/manual) is a powerful tool when used correctly. The key word here is "**correctly**." Only comparing a new feature, copy change, or query with the old version does not create success.
+[A/B testing](/ab-testing) is powerful when used correctly, but it's easily misused. Only comparing a new feature, copy change, or query with the old version does not create success.
 
-In the wise words of Picasso, "Good artists copy, Great artists steal." To help you become a great A/B test "artist," we’ve researched how some of Y Combinator’s top all-time companies do A/B tests, and we’re giving you the summary here.
+In the wise words of Picasso: "Good artists copy, great artists steal." So, to help you become a great A/B test "artist," we’ve researched how some of Y Combinator’s most successful companies do A/B tests.
 
-## 1. Monzo: Pellets
+> If you're new to A/B testing, we recommend reading our [software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) as a primer.
+
+## 1. Monzo – Low-risk "pellets" > slow-moving "cannonballs"
 
 Monzo provide a standard example of how to run A/B tests. They focused on top-of-funnel (because those impact the most users) and ran about 4 per month. Most were simple page comparisons, but some were [holdout tests](/tutorials/holdout-testing) where 10% of participants continued to see the control variant weeks after the test to ensure no long-term negative effects. 
 
