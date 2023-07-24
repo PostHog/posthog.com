@@ -13,7 +13,7 @@ category: Startups
 
 > Each month, we speak to a team enrolled in [PostHog for Startups](/startups) about the way they work and the challenges they face.
 
-[Golioth](https://golioth.io/) is a seed stage developer platform which enables hardware companies to build IoT products more easily and quickly. Goliath accomplishes this with a cloud platform which can receive sensor data, issue OTA firmware updates and integrate with connected devices — but faces the unique challenge of creating software for new, rapidly evolving hardware projects. 
+[Golioth](https://golioth.io/) is a seed stage developer platform which enables hardware companies to build IoT products more easily and quickly. Golioth accomplishes this with a cloud platform which can receive sensor data, issue OTA firmware updates and integrate with connected devices — but faces the unique challenge of creating software for new, rapidly evolving hardware projects. 
 
 “Hardware and software development are very different worlds,” says Golioth Founder and CEO Jonathan Beri. “Hardware? It’s slow. It’s hard. It’s incredibly complicated. And software too has its own unique challenges, even before you add IoT into the mix.”
 
