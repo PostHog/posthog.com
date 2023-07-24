@@ -78,10 +78,7 @@ const createOrUpdateStrapiPosts = async (posts) => {
             ({
                 frontmatter: { title, date, featuredImage },
                 fields: { slug },
-                parent: {
-                    relativePath: path,
-                    fields: { gitLogLatestDate },
-                },
+                parent: { relativePath: path },
                 rawBody,
             }) => {
                 const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
@@ -92,7 +89,7 @@ const createOrUpdateStrapiPosts = async (posts) => {
                     slug,
                     path,
                     title,
-                    date: date || gitLogLatestDate || new Date(),
+                    date,
                     featuredImage: {
                         url: featuredImage?.publicURL,
                     },
@@ -118,14 +115,16 @@ const createOrUpdateStrapiPosts = async (posts) => {
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const { data } = await graphql(`
         query {
-            all: allMdx(filter: { fields: { slug: { regex: "/^/blog|^/tutorials|^/customers|^/spotlight/" } } }) {
+            all: allMdx(
+                filter: {
+                    fields: { slug: { regex: "/^/blog|^/tutorials|^/customers|^/spotlight/" } }
+                    frontmatter: { date: { ne: null } }
+                }
+            ) {
                 nodes {
                     parent {
                         ... on File {
                             relativePath
-                            fields {
-                                gitLogLatestDate
-                            }
                         }
                     }
                     fields {

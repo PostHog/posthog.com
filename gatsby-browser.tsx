@@ -39,7 +39,7 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
 }
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
-    return /^blog\/|^tutorials\/|^customers\/|^posts/.test(slug) ? (
+    return /^blog\/|^tutorials\/|^customers\/|^spotlight\/|^posts/.test(slug) ? (
         <Posts {...props} articleView={!/^posts/.test(slug)}>
             {element}
         </Posts>

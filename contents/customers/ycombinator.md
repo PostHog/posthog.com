@@ -16,6 +16,7 @@ toolsUsed:
     - Autocapture
     - PostHog Cloud
     - Insights
+date: 2022-10-05
 ---
 
 Y Combinator is the world’s top startup accelerator, helping to fund, train and nurture the next generation of innovative businesses. Since 2005, thousands of successful companies have emerged from Y Combinator, including Dropbox, Airbnb, PagerDuty, Reddit, Amplitude... and PostHog. 

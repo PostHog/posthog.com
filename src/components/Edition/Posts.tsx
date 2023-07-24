@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'components/Link'
@@ -20,7 +20,6 @@ import { useQuestions } from 'hooks/useQuestions'
 import { QuestionData, StrapiResult } from 'lib/strapi'
 import { useLocation } from '@reach/router'
 import { communityMenu } from '../../navs'
-import { AnimatePresence, motion } from 'framer-motion'
 dayjs.extend(relativeTime)
 
 const LikeButton = ({ liked, handleClick, className = '' }) => {
@@ -90,13 +89,15 @@ const Post = ({
     }, [pathname])
 
     return (
-        <li ref={containerRef} className="snap-start">
+        <li ref={containerRef} className="snap-start last:pb-24">
             <span ref={fetchMore ? ref : null}>
                 <Link
                     className={`flex items-center text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit`}
                     to={slug}
                 >
-                    {!articleView && <LikeButton handleClick={handleLike} liked={liked} className="mr-6" />}
+                    {!articleView && (
+                        <LikeButton handleClick={handleLike} liked={liked} className="mr-6 flex-shrink-0" />
+                    )}
                     <div
                         className={`flex space-x-6 border rounded-md p-2 transition-all flex-grow ${
                             active
@@ -109,7 +110,7 @@ const Post = ({
                         </div>
                         <div>
                             <span className={articleView ? 'flex flex-col-reverse' : 'flex items-baseline space-x-1'}>
-                                <p className="m-0 text-lg font-bold leading-tight line-clamp-1">{title}</p>
+                                <p className="m-0 text-lg font-bold leading-tight line-clamp-2">{title}</p>
                                 {category && (
                                     <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>
                                 )}
@@ -255,7 +256,7 @@ function PostsListing({ articleView }) {
             </div>
             <div className="after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative">
                 <ul
-                    className={` list-none p-0 m-0 grid gap-y-4 snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
+                    className={` list-none p-0 m-0 flex flex-col space-y-4 snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
                         articleView ? 'h-[80vh] overflow-auto' : ''
                     }`}
                 >
@@ -343,6 +344,7 @@ export const Sidebar = () => {
 
     return (
         <div>
+            <h5 className="my-4">Discussions</h5>
             {user && (
                 <SidebarSection title="Subscribed threads">
                     <Questions questions={subscribedQuestions} />
@@ -397,10 +399,10 @@ export default function Posts({ children, articleView }) {
                     </div>
                 </section>
                 <section className="flex space-x-12 my-8 items-start">
-                    <div className={`${articleView ? 'sticky top-[108px] w-[30rem] flex-shrink-0 ' : 'w-[64rem'} `}>
+                    <div className={`${articleView ? 'sticky top-[108px] w-[30rem] flex-shrink-0' : 'flex-grow'}`}>
                         <PostsListing articleView={articleView} />
                     </div>
-                    <div className={`${articleView ? '' : 'sticky top-[108px] min-w-[300px]'} flex-grow`}>
+                    <div className={`${articleView ? 'flex-grow' : 'sticky top-[108px] w-[30rem] flex-shrink-0'}`}>
                         {children}
                     </div>
                 </section>
