@@ -14,7 +14,7 @@ tags:
  - Y Combinator
 ---
 
-[A/B testing](/ab-testing) is powerful when used correctly, but it's easily misused. Only comparing a new feature, copy change, or query with the old version does not create success.
+[A/B testing](/ab-testing) is powerful when used correctly, but it's easily misused. Only comparing the old version with a new feature, copy change, or query does not create success.
 
 In the wise words of Picasso: "Good artists copy, great artists steal." So, to help you become a great A/B test "artist," we’ve researched how some of Y Combinator’s most successful companies do A/B tests.
 
@@ -31,9 +31,9 @@ An A/B test at Monzo starts with a proposal anyone can submit. It asks four ques
 3. How should we solve it? (optional)
 4. What if this problem didn’t exist? (optional)
 
-These proposals also include data on impact and scale. Data also informs success metrics and guardrail metrics to ensure impact and avoid unintended consequences. The goal of the proposal is to create a clear hypothesis containing a solution to a problem or an outcome for an experiment. This needs to be specific, measurable, and testable.
+These proposals also include data on impact and scale. Data informs success metrics and guardrail metrics to ensure impact and avoid unintended consequences. The goal of the proposal is to **create a clear hypothesis** containing a solution to a problem or an outcome for an experiment. This needs to be specific, measurable, and testable.
 
-After completing the proposal, experiments launch as small, quick-to-build, low-risk "pellets," rather than large, slow "cannonballs." "Pellet" experiments wrap faster, enabling Monzo to trigger new experiments and retain momentum.
+After completing the proposal, experiments launch as small, quick-to-build, low-risk "pellets" rather than large, slow "cannonballs." "Pellet" experiments wrap faster, enabling Monzo to trigger new experiments and retain momentum.
 
 ![Monzo A/B test](../images/blog/ab-testing-examples/monzo.png)
 
@@ -44,9 +44,10 @@ After completing the proposal, experiments launch as small, quick-to-build, low-
 - Ship low-risk "pellets," rather than slow-moving "cannonballs."
 
 📖 **Further reading:** [Pellets not cannonballs: How we experiment at Monzo](https://monzo.com/blog/2022/05/24/pellets-not-cannonballs-how-we-experiment-at-monzo) and [How we experiment at Monzo](https://monzo.com/blog/2019/07/31/how-we-experiment-at-monzo).
+
 ## 2. Instacart – Solving a complex sampling problem
 
-Instacart, a grocery delivery service, is a more complicated example of A/B testing. Instacart's goal was to increase the efficiency of delivery routing, which followed one of two strategies:
+Instacart, a grocery delivery service, shows a more complicated example of A/B testing. In this example, Instacart's goal was to increase the efficiency of delivery routing, which followed one of two strategies:
 
 1. **Handoff:** One person preps, while another collects and delivers.
 2. **Full service:** One person does everything: prep, collection, and delivery.
@@ -55,11 +56,13 @@ For each order, Instacart's routing algorithm tries to create a handoff trip, an
 
 ![Instacart optimizer](../images/blog/ab-testing-examples/optimizer.png)
 
-When planning the test, they realized they couldn’t just split by customer or shopper because those were interdependent. For example, deliveries from both algorithms might dispatch to the same shopper. Instead, they tested the new algorithm with:
+When planning the test, they realized they couldn’t just split by customer or shopper because those were interdependent. For example, deliveries from both algorithms might dispatch to the same shopper. Instead, they experimented and analyzed the new algorithm in three ways:
 
-- **Simulations** to replay the history of customer and shopper behavior using the new algorithm. This showed a 2.1% increase in efficiency.
-- After the simulations were positive, they temporarily launched the new algorithm in San Francisco. Doing **before and after analysis** showed an estimated efficiency increase of 2.9%.
-- Along with this, they checked **differences in differences** to compare SF (where the change launched) and Oakland (where it didn’t) which were geographically similar and showed correlated efficiency before and after the change.
+1. With **Simulations** to replay the history of customer and shopper behavior using the new algorithm. This showed a 2.1% increase in efficiency.
+
+2. After the simulations were positive, they temporarily launched the new algorithm to everyone in San Francisco. Doing **before and after analysis** showed an estimated efficiency increase of 2.9%.
+
+3. Along with this, they checked **differences in differences** to compare SF (where the change launched) and Oakland (where it didn’t) which were geographically similar and showed correlated efficiency before and after the change.
 
 None of these options proved the change **caused** an improvement, only that changes **correlated** to improvement. Each analysis also missed potentially impactful variables like geography and time.
 
@@ -82,13 +85,14 @@ With this, Instacart was confident the new algorithm led to improvements in deli
 - A simple regression doesn’t account for multiple variables, which leads to higher, insignificant p-values. A multivariate regression could provide a more accurate answer.
 
 📖 **Further reading:** [It All Depends](https://tech.instacart.com/it-all-depends-4bb7b22e854b) on the Tech at Instacart blog.
-## 3. Coinbase – Separating experiment code and functional code
 
-Coinbase had a different challenge from Monzo and Instacart. To A/B test their machine learning algorithms, Coinbase's team needed to run a high volume of tests. Because tests impact each other, they needed separation. This created a bottleneck: there weren’t enough separate user samples to run all the tests they wanted.
+## 3. Coinbase – Scaling tests by separating experiment and functional code
 
-Running many tests simultaneously also required complex reasoning, documentation, and alignment, which is a lot of work. It also introduces invisible and scattered complexity, which is arguably the worst kind.
+Coinbase had a different challenge from Monzo and Instacart. To improve their machine learning algorithms, Coinbase needed to run a high volume of tests. Because tests impact each other, they needed separation. This created a bottleneck: **there weren’t enough separate user samples to run all the tests they wanted.**
 
-To support a higher volume of tests and simplify the process, Coinbase developed "universes." This is a system to split users into groups, assign A/B tests to those groups, then build versions of the app containing the tested components. It consisted of three main pieces:
+A potential solution was running many tests simultaneously, but this requires complex reasoning, documentation, and alignment, which is a lot of work. It also introduces invisible and scattered complexity, which is arguably the worst kind.
+
+To support a higher volume of tests, Coinbase developed "universes." This is a system to split users into groups, assign A/B tests to those groups, then build versions of the app containing the tested components. It consisted of three main pieces:
 
 1. **Components:** parts of a service you may want to experiment on.
 
@@ -96,7 +100,7 @@ To support a higher volume of tests and simplify the process, Coinbase developed
 
 3. **Composer manager:** routes requests to the correct composer based on the user. They split users into groups, named "slots" which get a single experiment. Those who are part of this experiment get the service the composer put together.
 
-A single configuration file defines all three, abstracting the code relevant to the experiment from the actual app. A service they built uses the configuration file to create a universe for the A/B test.
+A single configuration file defines all three, abstracting the code relevant to the experiment from the actual app. The composer and manager use the configuration file to create a universe for the A/B test, enabling more tests to run simultaneously.
 
 The outcome of building the "universes" system included:
 
@@ -110,16 +114,16 @@ The outcome of building the "universes" system included:
 
 - Running A/B tests at scale requires you to automate, simplify, and standardize the process as much as possible.
 
-- You can run more experiments faster by separating experiment code from functional code
+- You can run more experiments faster by separating experiment code from functional code.
 
 📖 **Further reading:** [Scaling Experimentation for Machine Learning at Coinbase](https://www.coinbase.com/blog/scaling-experimentation-for-machine-learning-at-coinbase)
 ## 4. Airbnb: Interleaving, dynamic p-values
 
-Although Airbnb has many examples of standard A/B testing, we’re going to cover two unorthodox examples: (i) testing search results with interleaving and (ii) Improving accuracy with dynamic p-values.
+Although Airbnb has many examples of standard A/B testing, we’re going to cover two unorthodox examples: (i) testing search results with interleaving and (ii) improving accuracy with dynamic p-values.
 
 ### Testing search results with interleaving
 
-The first is how they A/B test their search ranking algorithms. Instead of a user getting either a test or control variant of an algorithm test, they get both through with a framework called interleaving. 
+The first is how they A/B test their search ranking algorithms. Instead of a user getting all their results from a test or control variant algorithm, they get **both** through with a framework called interleaving. 
 
 Interleaving is a framework for blending results from both variants to get a direct comparison. It works by:
 
@@ -136,9 +140,11 @@ Airbnb’s interleaving framework requires 6% of the traffic of a regular A/B te
 
 ### Improving accuracy with dynamic p-values
 
-Like many companies, Airbnb had confusion about how long to run A/B tests. Using only a p-value to decide requires you to design an experiment with a desired sample and effect size. Another issue with it is potentially hitting your p-value early and ending the test prematurely. 
+Like many companies, Airbnb had questions about how long to run A/B tests. Relying on a p-value requires you to design an experiment with a desired sample and effect size. Another issue with an arbitrary p-value goal is potentially hitting your it early and ending the test prematurely.
 
-In Airbnb’s case, they found a pattern of hitting "significance," and then converging back to neutral in their experiments. For example, they ran an experiment changing the max price filter value to $1,000. In it, the test variant had a positive effect and p-value below 0.05 on days 7 and 13; however, as the experiment went on, the p-value increased to 0.4 and the effect became neutral. If they concluded the experiment on day 13, they would ship a change with no long-term positive impact.
+In Airbnb’s case, they found a pattern of hitting "significance," and then converging back to neutral in their experiments. This is because users often take a long time to convert, so early conversions have a disproportionate impact in the beginning of an experiment.
+
+For example, they tested changing the max price filter value to $1,000. In it, the test variant had a positive effect and p-value below 0.05 on days 7 and 13; however, as the experiment went on, the p-value increased to 0.4 and the effect became neutral. If they concluded the experiment on day 13, they would ship a change with no long-term positive impact.
 
 ![Static p-value problem](../images/blog/ab-testing-examples/static.png)
 
@@ -172,10 +178,10 @@ This requires some statistical math too complicated to do here, but Convoy follo
 
 The Bayesian approach focuses more on the average magnitude of wrong decisions over many experiments. This limits making the product worse while maintaining a bias for action. When they stop an experiment, they can be confident they are making a decision that won’t decrease a metric more than a known value, while seeing improvements to the product. By doing this, A/B tests at Convoy can have the highest impact over the long run.
 
-
 ### Takeaways
 
 - Standard, "frequentist" A/B test can unhelpfully favor the null hypothesis.
+
 - A Bayesian approach encourages shipping more changes, even if a larger portion of them don’t have a significant impact.
 
 📖 **Further reading:** [The Power of Bayesian A/B Testing](https://medium.com/convoy-tech/the-power-of-bayesian-a-b-testing-f859d2219d5).
