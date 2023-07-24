@@ -22,7 +22,7 @@ In the wise words of Picasso: "Good artists copy, great artists steal." So, to h
 
 ## 1. Monzo – Low-risk "pellets" > slow-moving "cannonballs"
 
-Monzo provide a standard example of how to run A/B tests. They focused on top-of-funnel (because those impact the most users) and ran about 4 per month. Most were simple page comparisons, but some were [holdout tests](/tutorials/holdout-testing) where 10% of participants continued to see the control variant weeks after the test to ensure no long-term negative effects. 
+Monzo, an online banking app, provides a classic example for how to run A/B tests. Monzo's team focus on top-of-funnel tests (because those impact the most users) and run about 4 per month. Most tests are simple page comparisons, but some are [holdout tests](/tutorials/holdout-testing) where 10% of participants continue to see the control variant weeks after the test to ensure no long-term negative effects. 
 
 An A/B test at Monzo starts with a proposal anyone can submit. It asks four questions:
 
@@ -33,18 +33,17 @@ An A/B test at Monzo starts with a proposal anyone can submit. It asks four ques
 
 These proposals also include data on impact and scale. Data also informs success metrics and guardrail metrics to ensure impact and avoid unintended consequences. The goal of the proposal is to create a clear hypothesis containing a solution to a problem or an outcome for an experiment. This needs to be specific, measurable, and testable.
 
-After completing the proposal, experiments launch as small, quick-to-build, low-risk "pellets," rather than large, slow "cannonballs." "Pellet" experiments wrap faster, enabling them to trigger new experiments and keep their momentum.
+After completing the proposal, experiments launch as small, quick-to-build, low-risk "pellets," rather than large, slow "cannonballs." "Pellet" experiments wrap faster, enabling Monzo to trigger new experiments and retain momentum.
 
 ![Monzo A/B test](../images/blog/ab-testing-examples/monzo.png)
-
-_Read more at "[Pellets not cannonballs: How we experiment at Monzo](https://monzo.com/blog/2022/05/24/pellets-not-cannonballs-how-we-experiment-at-monzo)" and "[How we experiment at Monzo](https://monzo.com/blog/2019/07/31/how-we-experiment-at-monzo)"_
 
 ### Takeaways
 
 - Focus on the top-of-funnel for the highest impact.
-- Crafting a hypothesis is critical, a longer proposal process helps with this.
-- Ship "pellets," not "cannonballs."
+- Create a consistent process for A/B tests and hypotheses.
+- Ship low-risk "pellets," rather than slow-moving "cannonballs."
 
+📖 **Further reading:** [Pellets not cannonballs: How we experiment at Monzo](https://monzo.com/blog/2022/05/24/pellets-not-cannonballs-how-we-experiment-at-monzo) and [How we experiment at Monzo](https://monzo.com/blog/2019/07/31/how-we-experiment-at-monzo).
 ## 2. Instacart: Geography, multivariate regressions
 
 Instacart provides a more complicated example of A/B testing. Their goal was to increase the efficiency of their delivery routing which followed one of two strategies:
