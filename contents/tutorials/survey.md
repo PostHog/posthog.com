@@ -159,6 +159,7 @@ return (
 To capture responses, we need another state for value of our `<textarea>` and a function to set the state when it changes.
 
 ```js-web
+// app/page.js
 //...
 
 const [textAreaValue, setTextAreaValue] = useState('')
@@ -186,6 +187,7 @@ return (
 Finally, set up a `survey sent` event capture when the user clicks the submit button. This needs to include the survey ID, name, and response, and should also reset the `textarea`.
 
 ```js-web
+// app/page.js
 //...
 	const submit = () => {
     posthog.capture("survey sent", {
@@ -220,22 +222,28 @@ When you submit the survey with a response, it shows up in your results in PostH
 
 ![Results](../images/tutorials/survey/results.png)
 
-### Dismiss and handle shown survey
+### Dismiss and hide survey
 
 The last thing you might want to do is let users  dismiss the survey and prevent it from being shown repeatedly. The PostHog survey app handles this with `localStorage` storing a value that is `seenSurvey_ + survey.id`, so we will use that as well.
 
 First, create a function to close the survey which sets the value in `localStorage` and the state of the survey to `null`.
 
 ```js-web
+// app/page.js
+//...
 const closeSurvey = () => {
   localStorage.setItem('seenSurvey_' + survey.id, true)
   setSurvey(null)
 }
+//...
 ```
 
 Next, add the `closeSurvey` function to the `submit` function and a new `dismiss` function that captures a `survey dismissed` event. We also need a dismiss button on our page under our submit button.
 
 ```js-web
+// app/page.js
+//...
+
 const submit = () => {
   posthog.capture("survey sent", {
     $survey_id: survey.id,
@@ -264,6 +272,9 @@ const dismiss = () => {
 This hides the survey when either are clicked, but it shows again when the page is refreshed. To fix this, wecheck for the `seenSurvey_` value in local storage and don’t show the survey if it’s `true`. We can do this in the `useEffect` like this:
 
 ```js-web
+// app/page.js
+//...
+
 useEffect(() => {
   posthog.getActiveMatchingSurveys((surveys) => {
     const firstSurvey = surveys.filter(survey => survey.type === 'api')[0]
@@ -278,6 +289,7 @@ useEffect(() => {
     }
   })
 }, [])
+//...
 ```
 
 This completes an introduction to our custom survey functionality, which you can customize further to your needs.

@@ -23,9 +23,9 @@ const Layout = ({
     const posthog = usePostHog()
 
     useEffect(() => {
-        if (window && posthog) {
-            posthog.setPersonProperties({ preferred_theme: (window as any).__theme })
-        }
+        // if (window && posthog) {
+        //     posthog.setPersonProperties({ preferred_theme: (window as any).__theme })
+        // }
         if (hash) scroll.scrollMore(-108)
     }, [])
 
