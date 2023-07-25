@@ -12,7 +12,7 @@ PostHog's main value proposition, outlined below, is structured like a story:
 - The **solution** PostHog offers (e.g. _Our arcade game has a two-player mode_) 
 - The **result** of the solution (e.g. _You'll have twice as much fun_)
 
-## 1. An all-in-one platform
+## An all-in-one platform for product engineers
 
 PostHog offers a suite of product tools for engineers, including analytics, session replay, feature flags, experimentation, data warehouse, and more, all in one easy-to-use platform. This enables engineers on product and data teams to get information faster, while less technical teams are also able to self-serve and get answers without needing support.
 
