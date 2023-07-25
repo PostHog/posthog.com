@@ -73,7 +73,7 @@ Occasionally, we have to conduct scheduled maintenance. When this happens, it's 
 
 > If you're aware of any upcoming maintenance which would cause disruption, please inform the Marketing and Customer Success teams as soon as possible. Marketing will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time. 
 
-Typically, Marketing takes responsiblity for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels. 
+Typically, Marketing takes responsibility for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels. 
 
 When informing users about maintenance, it is important to answer all of the following points:
 
