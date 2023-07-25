@@ -1,87 +1,291 @@
 ---
-title: Running surveys with no backend
-sidebar: Docs
+title: How to create custom surveys
+date: 2023-07-25
+author: ["ian-vanagas"]
 showTitle: true
-author: ['yakko-majuri']
-date: 2022-07-15
-featuredImage: ../images/tutorials/banners/surveys.png
-tags: ["configuration", "events"]
+sidebar: Docs
+featuredImage: ../images/tutorials/banners/tutorial-8.png
+tags: ['surveys']
 ---
 
-- **Level:** Easy 🦔
-- **Estimated reading time:** 3 minutes ☕️
+[Surveys](/docs/surveys/manual) make it easy to collect qualitative feedback fast. PostHog provides everything you need to do this, but you can also customize the implementation of the survey in your app. In this tutorial, we show you how to do this by creating a Next.js app, adding PostHog, setting up a basic survey, and then creating a completely custom survey.
 
-Getting user feedback is very important for improving your product, and you can use PostHog to run surveys and pair the survey data with all other metrics about your product.
+> Already have an app and PostHog set up? Skip to survey creation.
 
-This is especially helpful for static websites, or those using static site generators like Gatsby or Node.js.
+## Creating a Next.js app and installing PostHog
 
-## 1. Decide what you want to know
-   
-PostHog is best suited for visualizing data that is categorical, binary, interval-based, or on a scale. 
+First, once **[Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/)**, create a Next.js app. Run the command below, select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
-In other words, there should be a limited set of possibilities from which an answer is chosen, rather than accepting arbitrary data.
-
-While you can visualize arbitrary data from surveys in PostHog,  we believe other services may be better suited for this.
-
-For this example, we're going to ask users to rate their experience using four options: 'Poor', 'OK', 'Good', and 'Great'.
-
-On the PostHog website, we collect feedback on docs pages and tutorials using this method.
-
-## 2. Implement your survey frontend
-
-For most this will mean implementing some simple HTML, like this:
-
-```html
-<p>How would you rate your experience with this feature?</p>
-<form>
-	<div>
-  		<select id="survey-select">
-          <option value="3">Great</option>
-          <option value="2">Good</option>
-          <option value="1">OK</option>
-          <option value="0">Poor</option>
-        </select>
-  </div>
-  <button onclick="submitDataToPostHog()">Submit</button>
-</form> 
+```bash
+npx create-next-app@latest surveys
 ```
 
-## 3. Send the data as a PostHog event
-
-Next, you need to determine an event name for the specific survey you are running and capture a PostHog event with that name when the user submits the survey (e.g. via a button click).
-
-Following the example from above, we could do:
+Once created, go into the folder and install `posthog-js`.
 
 ```js
-const submitDataToPostHog = () => {
-    // Get survey response and convert to number for better analytics
-    const surveyRating = Number(
-        document.getElementById('survey-select').value
-    )
-    // Capture an event with the rating
-    posthog.capture('my_feature_reviewed', {
-        rating: surveyRating,
+cd surveys
+npm i posthog-js
+```
 
-        // (Optional) Set a property on the respondent based on the rating
-        $set: {
-            survey_rating: surveyRating
-        }
-    })
+Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project API key and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive, a check for the window, and `opt_in_site_apps` set to `true` (which we use for surveys later). Altogether, this looks like this:
+
+```js
+// app/providers.js
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+		opt_in_site_apps: true
+  })
+}
+
+export function PHProvider({ children }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
 
-## 4. Analyze the data in PostHog
+We can then import the `PHProvider` component from the `provider.js` file in our `app/layout.js` file, and wrap our app in it.
 
-There's a lot you can do with survey data in PostHog, such as:
+```js
+// app/layout.js
+import { PHProvider } from './providers'
 
-- Plotting aggregate survey data to distill feedback into insights
-- Creating cohorts based on survey responses 
-- Rolling out feature flags based on user preferences
-- Tracking retention and conversion by user preferences 
-- Getting the average, sum, maximum, and minimum values of numerical data
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <PHProvider>
+        <body>{children}</body>
+      </PHProvider>
+    </html>
+  )
+}
+```
 
-And that's it!
+After setting this up and running `npm run dev`, your app is ready for surveys.
 
-You've created a mechanism for getting user feedback with just a few lines of code, no backend, and that integrates seamlessly with the rest of your product data. 
+## Creating a basic survey
 
-<NewsletterTutorial compact/>
+With our app and PostHog set up, we can go to the [surveys tab](https://app.posthog.com/surveys) in PostHog and click "Create survey." Enter a name, question, and any of the other details you want (like targeting). Once done, click "Save as draft."
+
+![Feedback survey video](../images/tutorials/survey/feedback.mp4)
+
+Before launching our survey, we need to enable the [survey site app](https://app.posthog.com/project/apps/611). Either click the link on your draft survey page or go to the [apps tab](https://app.posthog.com/project/apps) and search for "Surveys app," enable it, and press save. 
+
+Once done, go back to your draft survey and click "Launch" Back in your app you will see your survey in the bottom right of the page. PostHog automatically tracks surveys shown, dismissed, and submitted along with the responses and user details for each.
+
+![Survey in-app](../images/tutorials/survey/survey.png)
+
+## Creating a custom survey
+
+If you want to customize how and when you show your survey, we can can that too. To start, create another survey, but this time set the "Display mode" as `API` instead of `popover`. Customize the details as much as you want, save it as a draft, then launch. It won’t show in your app until we write some code to implement it.
+
+![API display mode](../images/tutorials/survey/api.png)
+
+Once done, head back to the app and remove the boilerplate from `page.js` . We’ll make this the page with our survey. To start, this requires the `use client` directive, `usePostHog` context, and a `useState` hook for the survey data.
+
+```js
+// app/page.js
+'use client'
+import { usePostHog } from 'posthog-js/react'
+import { useState } from 'react'
+
+export default function Home() {
+  
+  const posthog = usePostHog()
+  const [survey, setSurvey] = useState(null)
+
+  return (
+    <div>
+      <h1>Take our survey!</h1>
+    </div>
+  )
+}
+```
+
+We can then get the surveys for a user with PostHog’s `getActiveMatchingSurveys` method in a `useEffect`. In the callback, filter for API type surveys, set the first one in our state, and capture a `survey shown` event.
+
+```js
+//app/page.js
+'use client'
+import { usePostHog } from 'posthog-js/react'
+import { useState, useEffect } from 'react'
+
+export default function Home() {
+  
+  const posthog = usePostHog()
+  const [survey, setSurvey] = useState(null)
+
+	useEffect(() => {
+    posthog.getActiveMatchingSurveys((surveys) => {
+      const firstSurvey = surveys.filter(survey => survey.type === 'api')[0]
+      if (firstSurvey) {
+        setSurvey(firstSurvey)
+        posthog.capture("survey shown", {
+          $survey_id: firstSurvey.id,
+          $survey_name: firstSurvey.name
+        })
+      }
+    })
+  }, [])
+//...
+```
+
+Next, add our survey data to our page with a `<textarea>` and submit button.
+
+```js
+// app/page.js
+//...
+
+return (
+    <div>
+      <h1>Take our survey!</h1>
+      {survey && (
+        <div>
+          <h2>{survey.name}</h2>
+          <h4>{survey.questions[0].question}</h4>
+          <textarea></textarea>
+          <br/>
+          <button>Submit</button>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+To capture responses, we need another state for value of our `<textarea>` and a function to set the state when it changes.
+
+```js
+//...
+
+const [textAreaValue, setTextAreaValue] = useState('')
+
+//...
+
+const handleTextAreaChange = (event) => {
+  setTextAreaValue(event.target.value);
+};
+
+return (
+  <div>
+    <h1>Take our survey!</h1>
+    {survey && (
+      <div>
+        <h2>{survey.name}</h2>
+        <h4>{survey.questions[0].question}</h4>
+        <textarea
+          value={textAreaValue}
+          onChange={handleTextAreaChange}
+        ></textarea>
+//...
+```
+
+Finally, set up a `survey sent` event capture when the user clicks the submit button. This needs to include the survey ID, name, and response, and should also reset the `textarea`.
+
+```js
+//...
+	const submit = () => {
+    posthog.capture("survey sent", {
+      $survey_id: survey.id,
+      $survey_name: survey.name,
+      $survey_response: textAreaValue
+    })
+    setTextAreaValue('')
+  }
+
+  return (
+    <div>
+      <h1>Take our survey!</h1>
+      {survey && (
+        <div>
+          <h2>{survey.name}</h2>
+          <h4>{survey.questions[0].question}</h4>
+          <textarea
+            value={textAreaValue}
+            onChange={handleTextAreaChange}
+          ></textarea>
+          <br/>
+          <button onClick={submit}>Submit</button>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+When you submit the survey with a response, it shows up in your results in PostHog.
+
+![Results](../images/tutorials/survey/results.png)
+
+### Dismiss and handle shown survey
+
+The last thing you might want to do is let users  dismiss the survey and prevent it from being shown repeatedly. The PostHog survey app handles this with `localStorage` storing a value that is `seenSurvey_ + survey.id`, so we will use that as well.
+
+First, create a function to close the survey which sets the value in `localStorage` and the state of the survey to `null`.
+
+```js
+const closeSurvey = () => {
+  localStorage.setItem('seenSurvey_' + survey.id, true)
+  setSurvey(null)
+}
+```
+
+Next, add the `closeSurvey` function to the `submit` function and a new `dismiss` function that captures a `survey dismissed` event. We also need a dismiss button on our page under our submit button.
+
+```js
+const submit = () => {
+  posthog.capture("survey sent", {
+    $survey_id: survey.id,
+    $survey_name: survey.name,
+    $survey_response: textAreaValue
+  })
+  setTextAreaValue('')
+  closeSurvey()
+}
+
+const dismiss = () => {
+  posthog.capture("survey dismissed", {
+    $survey_id: survey.id,
+    $survey_name: survey.name,
+  })
+  closeSurvey()
+}
+
+//...
+<button onClick={submit}>Submit</button>
+<br/>
+<button onClick={dismiss}>Dismiss</button>
+//...
+```
+
+This hides the survey when either are clicked, but it shows again when the page is refreshed. To fix this, wecheck for the `seenSurvey_` value in local storage and don’t show the survey if it’s `true`. We can do this in the `useEffect` like this:
+
+```js
+useEffect(() => {
+  posthog.getActiveMatchingSurveys((surveys) => {
+    const firstSurvey = surveys.filter(survey => survey.type === 'api')[0]
+    const seenSurvey = localStorage.getItem('seenSurvey_' + firstSurvey.id)
+
+    if (firstSurvey && !seenSurvey) {
+      setSurvey(firstSurvey)
+      posthog.capture("survey shown", {
+        $survey_id: firstSurvey.id,
+        $survey_name: firstSurvey.name
+      })
+    }
+  })
+}, [])
+```
+
+This completes an introduction to our custom survey functionality, which you can customize further to your needs.
+
+![Submit survey video](../images/tutorials/survey/submit.mp4)
+
+## Further reading
+
+- [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
+- [The Product-Market Fit Game](/blog/product-market-fit-game)
+- [How we made something people want](/blog/making-something-people-want)
