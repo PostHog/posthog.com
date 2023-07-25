@@ -38,7 +38,7 @@ const Iframe = (props: React.IframeHTMLAttributes<HTMLIFrameElement>) => {
 const SectionLinksBottom = ({ previous, next }: SectionLinksProps) => {
     return (
         <>
-            <hr className="w-[calc(100vw-2rem)] m-0 bg-transparent border-t border-r-0 border-l-0 border-b-0 border-dashed border-gray-accent-light dark:border-gray-accent-dark" />
+            <hr className="w-[calc(100vw-2rem)] m-0 bg-transparent" />
             <SectionLinks
                 className="mb-16 2xl:max-w-[800px] xl:max-w-[650px] max-w-full mx-auto mt-9"
                 previous={previous}

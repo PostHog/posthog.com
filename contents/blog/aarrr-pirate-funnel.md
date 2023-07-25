@@ -94,7 +94,7 @@ For an e-commerce website, overall unique users is an important metric, but user
 
 It may also be prudent to add a quality metric here, too. Tracking signups based on an ideal customer profile (ICP) can be important to avoid over optimizing for the wrong kind of new users.
 
-> 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate what you should optimize first. Most B2B SaaS products should prioritize retention – it's a great indicator of [product-market fit](/blog/how-to-product-market-fit).
+> 💡 **PostHog Tip:** People call it the pirate funnel, but the framework doesn't dictate what you should optimize first. Most B2B SaaS products should prioritize retention – it's a great indicator of [product-market fit](/blog/product-market-fit-game).
  
 ### 2. Activation
 
@@ -152,7 +152,7 @@ Referral metrics are especially important for products or services that have a [
 
 Referrals can also be both internal (more users from the same organization) or external.
 
-> 💡 **PostHog Tip:** At PostHog, we automatically invite active paying users to review PostHog using official the [Customer.io Connector](/apps/customer-io). There are also marketing automation apps for Engage, Sendgrid, Intercom, and Zapier. Visit the [PostHog App Store](/apps) for more.      
+> 💡 **PostHog Tip:** At PostHog, we automatically invite active paying users to review PostHog using official the [Customer.io integration](/apps/customer-io). There are also marketing automation apps for Engage, Sendgrid, Intercom, and Zapier.
 
 ## How to use pirate metrics in your product
 
@@ -204,7 +204,7 @@ Dave McClure's original framework suggests you spend 80% of your effort on refin
 
 Here's some recommended further reading around product growth and user engagement:
 
-- **[How to achieve B2B product-market fit](/blog/how-to-product-market-fit)**: There's no universal standard for achieving market fit, but this guide introduces problem-solving techniques to help you find it for a B2B product.
+- **[How to achieve B2B product-market fit](/blog/product-market-fit-game)**: There's no universal standard for achieving market fit, but this guide introduces problem-solving techniques to help you find it for a B2B product.
 
 - **[The most useful B2B product metrics for SaaS companies](/blog/b2b-saas-product-metrics):** Need help choosing the right metrics for your product? This guide looks specifically at product metrics and which ones are worth measuring.
 

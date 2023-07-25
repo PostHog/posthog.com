@@ -16,7 +16,7 @@ export default function InternalSidebarLink({ url, name, depth, onClick, classNa
                 duration={300}
                 to={url}
                 hashSpy
-                className={`text-almost-black leading-tight font-medium hover:text-red dark:text-white dark:hover:text-red cursor-pointer ${className}`}
+                className={`text-primary dark:text-primary-dark leading-tight font-medium hover:text-red dark:hover:text-red cursor-pointer ${className}`}
                 spy
                 onClick={(e) => onClick && onClick(e)}
                 onSetActive={() => {

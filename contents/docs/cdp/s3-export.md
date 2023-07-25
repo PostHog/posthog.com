@@ -1,12 +1,13 @@
 ---
-title: Amazon S3 Export
+title: Amazon S3
 github: https://github.com/PostHog/s3-export-plugin
-installUrl: https://app.posthog.com/project/apps?name=S3+Export+Plugin
 thumbnail: ../../cdp/thumbnails/s3.svg
 official: true
 tags:
     - s3 export
 ---
+
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 This app enables you to export events to Amazon S3 on ingestion. Archive your data, or simply free it up for other kinds of analysis, by integrating export right into your event processing pipeline.
 
@@ -23,7 +24,7 @@ Once the app has been configured, you can enable it by flipping the toggle and i
 
 ### PostHog Self-hosted
 
-> The S3 Export Plugin requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
+> This requires a PostHog instance running [version 1.24.0](https://posthog.com/blog/the-posthog-array-1-24-0) or later.
 > Not running 1.24.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
 1. Log in to your PostHog instance
@@ -165,8 +166,6 @@ This app is maintained by PostHog. If you have issues with the app not functioni
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 

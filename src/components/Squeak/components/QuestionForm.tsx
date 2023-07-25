@@ -13,6 +13,7 @@ import uploadImage from '../util/uploadImage'
 import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
+import Spinner from 'components/Spinner'
 
 type QuestionFormValues = {
     subject: string
@@ -141,18 +142,18 @@ function QuestionFormMain({
                 }}
                 onSubmit={(values) => onSubmit(values, user)}
             >
-                {({ setFieldValue, isValid, values }) => {
+                {({ setFieldValue, isValid, values, submitForm }) => {
                     return (
                         <Form className="mb-0">
                             <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
 
-                            <div className="bg-white border border-black/30 dark:bg-gray-accent-dark-hover dark:border-white/30 rounded-md overflow-hidden mb-4">
+                            <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
                                 {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
                                 {subject && (
                                     <>
                                         <Field
                                             autoFocus
-                                            className="font-semibold text-black dark:text-primary-dark dark:bg-gray-accent-dark-hover border-b border-black/30 dark:border-primary-dark/30 text-base w-full py-3 px-4 outline-none rounded-none"
+                                            className="font-semibold text-black dark:text-primary-dark dark:bg-accent-dark border-b border-light dark:border-dark text-base w-full py-3 px-4 outline-none rounded-none"
                                             onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"
@@ -165,6 +166,7 @@ function QuestionFormMain({
                                 )}
                                 <div className="leading-[0]">
                                     <RichText
+                                        onSubmit={submitForm}
                                         autoFocus={!subject}
                                         setFieldValue={setFieldValue}
                                         initialValue={initialValues?.body}
@@ -173,16 +175,14 @@ function QuestionFormMain({
                                 </div>
                             </div>
                             <span className="ml-[50px]">
-                                <Button
-                                    disabled={loading || !isValid}
-                                    type="submit"
-                                    className={`w-[calc(100%_-_50px)] font-bold relative ${
-                                        loading || !isValid
-                                            ? ' opacity-50 cursor-not-allowed'
-                                            : 'bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px]'
-                                    } active:top-[0px] active:scale-[1]`}
-                                >
-                                    {user ? 'Post' : 'Login & post'}
+                                <Button disabled={loading || !isValid} type="submit" className="w-[calc(100%_-_50px)]">
+                                    {loading ? (
+                                        <Spinner className="!text-white mx-auto" />
+                                    ) : user ? (
+                                        'Post'
+                                    ) : (
+                                        'Login & post'
+                                    )}
                                 </Button>
                             </span>
 
@@ -383,13 +383,8 @@ export const QuestionForm = ({
                     <Button
                         disabled={archived}
                         onClick={() => setView('question-form')}
-                        className={
-                            formType !== 'reply'
-                                ? 'text-red border-red'
-                                : `w-full text-left border-black/30 dark:border-white/30 ${
-                                      archived ? '' : 'hover:border-black/50 dark:hover:border-white/50'
-                                  }`
-                        }
+                        buttonType={formType === 'reply' ? 'outline' : 'primary'}
+                        size="md"
                     >
                         {buttonText}
                     </Button>
@@ -402,7 +397,7 @@ export const QuestionForm = ({
                                     setView('auth')
                                 }
                             }}
-                            className="!ml-auto text-red opacity-80 hover:opacity-100 font-bold"
+                            className="!ml-auto text-red dark:text-yellow opacity-80 hover:opacity-100 font-bold"
                         >
                             {user ? 'Logout' : 'Login'}
                         </button>

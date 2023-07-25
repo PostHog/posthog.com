@@ -21,8 +21,8 @@ Learn more about how we decide this in our [guide to working with product design
 
 | Name         | Role             | Team(s) |
 |--------------|------------------|-----------------|
-| [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) | Graphic Designer | Website & Docs, Marketing  |
-| [Cory Watilo](/handbook/company/team/#cory-watilo-lead-designer) (Team lead)  | Design Lead      | App teams, Website & Docs  |
+| [Lottie Coxon](/community/profiles/227) | Graphic Designer | Website & Docs, Marketing  |
+| [Cory Watilo](/community/profiles/2) (Team lead)  | Design Lead      | App teams, Website & Docs  |
 
 Design at PostHog:
 

@@ -21,12 +21,12 @@ const Tutorials = ({
 
     return (
         <Layout>
-            <SEO title="Tutorials - PostHog" />
+            <SEO title="Guides - PostHog" />
 
-            <PostLayout article={false} title="Tutorials" menu={docs} hideSidebar hideSurvey>
-                <h1 className="mb-6 mt-0">Tutorials</h1>
+            <PostLayout article={false} title="Guides" menu={docs} hideSidebar hideSurvey>
+                <h1 className="mb-6 mt-0">Guides</h1>
                 <Posts
-                    title={`Most ${allPostsFilter} tutorials`}
+                    title={`Most ${allPostsFilter} guides`}
                     posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
                     action={<Link to="/tutorials/all">View all</Link>}
                 />

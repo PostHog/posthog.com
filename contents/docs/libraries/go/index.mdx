@@ -102,7 +102,7 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-We strongly recommend reading our docs on [alias](/data/integrate/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ### Sending page views
 
@@ -203,6 +203,8 @@ featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
 
 > **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
 
+> **Note:** A single local evaluation call is billed as equivalent to 10 `decide`requests. [More info](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation).
+
 All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. You must know all person or group properties the flag depends on.
 
 The method call looks just like above
@@ -242,6 +244,25 @@ client.ReloadFeatureFlags()
 // Do something with feature flags here
 ```
 
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+
+```go
+variant, err := client.GetFeatureFlag(
+            FeatureFlagPayload{
+                Key:        "experimentfeature-flag-name",
+                DistinctId: "user_distinct_id",
+            })
+
+if variant == "variant-name" {
+    // Do something
+}
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
 ### Group analytics
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
@@ -252,10 +273,10 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 ```go
 client.Enqueue(posthog.Capture{
-    DistinctId: "[distinct id]",
+    DistinctId: "[user distinct id]",
     Event:      "some event",
     Groups: posthog.NewGroups().
-        Set("company", "42dlsfj23f").
+        Set("company", "company_id_in_your_db").
 })
 ```
 
@@ -264,7 +285,7 @@ client.Enqueue(posthog.Capture{
 ```go
 client.Enqueue(posthog.GroupIdentify{
     Type: "company",
-    Key:  "42dlsfj23f",
+    Key:  "company_id_in_your_db",
     Properties: posthog.NewProperties().
         Set("name", "Awesome Inc.").
         Set("employees", 11),

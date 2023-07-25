@@ -61,7 +61,7 @@ Optionally you can submit:
 
 -   `properties`, which is a dictionary with any information you'd like to add
 -   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
--   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/tutorials/experiments#step-2-sending-the-right-events) so that we can avoid making the request.
+-   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) so that we can avoid making the request.
 
 For example:
 
@@ -97,7 +97,7 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-We strongly recommend reading our docs on [alias](/data/integrate/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ### Sending page views
 
@@ -194,6 +194,8 @@ posthog.get_feature_flag_payload('feature-flag-key', 'distinct id')
 
 > **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
 
+> **Note:** A single local evaluation call is billed as equivalent to 10 `decide`requests. [More info](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation).
+
 All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
 
 1. The library must be initialised with a personal API key
@@ -246,6 +248,20 @@ posthog.reload_feature_flags()
 // Do something with feature flags here
 ```
 
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```ruby
+variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
+
+if variant == 'variant-name'
+    # Do something 
+end
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
 ### Group analytics
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
@@ -263,7 +279,7 @@ posthog.capture({
         category: 'romcom'
     }
     groups: {
-        'company': '42dlsfj23f'
+        'company': 'company_id_in_your_db'
     }
 })
 ```
@@ -273,8 +289,8 @@ posthog.capture({
 ```ruby
 posthog.group_identify(
   {
-    group_type: "organization",
-    group_key: "42dlsfj23f",
+    group_type: "company",
+    group_key: "company_id_in_your_db",
     properties: {
       name: "Awesome Inc."
     }

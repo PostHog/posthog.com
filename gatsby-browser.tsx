@@ -19,12 +19,8 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     // This is checked and set on initial load in the body script set in gatsby-ssr.js
     // Checking for prevLocation prevents this from happening twice
     if (typeof window !== 'undefined' && prevLocation) {
-        var slug = location.pathname.substring(1)
-        var theme = /^handbook|^docs|^blog|^integrations|^tutorials|^questions|^manual|^using-posthog|^community/.test(
-            slug
-        )
-            ? (window as any).__theme
-            : 'light'
+        var theme = (window as any).__theme
+
         document.body.className = theme
     }
 

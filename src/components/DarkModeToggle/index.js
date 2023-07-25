@@ -25,7 +25,6 @@ export const DarkModeToggle = () => {
 
     return (
         <Toggle
-            iconLeft={<DarkMode />}
             checked={websiteTheme === 'dark'}
             onChange={(checked) => window.__setPreferredTheme(checked ? 'dark' : 'light')}
         />

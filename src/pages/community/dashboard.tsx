@@ -20,6 +20,7 @@ export default function CommunityPage() {
             },
         },
     })
+    const { questions: recentQuestions } = useQuestions({ limit: 1 })
     const topicSubscriptions = user?.profile?.topicSubscriptions
 
     useEffect(() => {
@@ -28,12 +29,14 @@ export default function CommunityPage() {
         }
     }, [user])
 
+    const recentPermalink = recentQuestions?.data[0]?.attributes?.permalink
+
     return (
         <CommunityLayout title="Inbox">
             <SectionTitle>My discussions</SectionTitle>
 
             {topicSubscriptions && topicSubscriptions?.length > 0 && (
-                <div className="bg-gray-accent-light dark:bg-gray-accent-dark p-4 mb-4 rounded">
+                <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 mb-4 rounded">
                     <h4 className="text-sm font-semibold opacity-60 mb-0">Jump to subscribed topics:</h4>
                     <ul className="list-none m-0 p-0 flex flex-wrap">
                         {topicSubscriptions.map(({ label, slug }) => {
@@ -52,13 +55,26 @@ export default function CommunityPage() {
                 </div>
             )}
 
-            <QuestionsTable
-                showTopic
-                showAuthor={false}
-                fetchMore={fetchMore}
-                isLoading={isLoading}
-                questions={questions}
-            />
+            {questions?.data?.length > 0 ? (
+                <QuestionsTable
+                    showTopic
+                    showAuthor={false}
+                    fetchMore={fetchMore}
+                    isLoading={isLoading}
+                    questions={questions}
+                />
+            ) : (
+                <>
+                    <div className="font-medium text-sm m-0 mb-6 bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 rounded text-center">
+                        <p className="font-bold !m-0 !p-0">You're not subscribed to any threads yet!</p>
+                        {recentPermalink && (
+                            <p className="!text-sm !m-0">
+                                <Link to={`/questions/${recentPermalink}`}>This</Link> one looks enticing...
+                            </p>
+                        )}
+                    </div>
+                </>
+            )}
         </CommunityLayout>
     )
 }

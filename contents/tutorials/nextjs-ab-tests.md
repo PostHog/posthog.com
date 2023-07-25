@@ -267,4 +267,4 @@ Now, when you refresh the page, the call to action loads faster.
 
 - [How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
-- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)

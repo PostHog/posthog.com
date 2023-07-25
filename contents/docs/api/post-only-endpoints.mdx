@@ -29,8 +29,8 @@ Body:
 {
     "api_key": "<ph_project_api_key>",
     "event": "[event name]",
+    "distinct_id": "[your users' distinct id]",
     "properties": {
-        "distinct_id": "[your users' distinct id]",
         "key1": "value1",
         "key2": "value2"
     },
@@ -78,8 +78,8 @@ Additionally, if you're self-hosting, you'll have to substitute `https://app.pos
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
+    "distinct_id": "123",
     "properties": {
-        "distinct_id": "123",
         "alias": "456"
     },
     "timestamp": "2020-08-16 09:03:11.913767",
@@ -120,8 +120,8 @@ curl -v -L --header "Content-Type: application/json" -d '{
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "event": "$groupidentify",
+    "distinct_id": "groups_setup_id",
     "properties": {
-        "distinct_id": "groups_setup_id",
         "$group_type": "<group_type>",
         "$group_key": "<company_name>",
         "$group_set": {
@@ -261,7 +261,7 @@ As such, to create feature flags, you will need to use another endpoint, which w
 
 #### /decide
 
-`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not. This endpoint is used by our [JavaScript Library's](/docs/integrate/client/js) methods for feature flags.
+`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not. This endpoint is used by our [JavaScript web library's](/docs/integrate/client/js) methods for feature flags.
 
 To get the feature flags that are enabled for a given user, you will need to perform the following request:
 
@@ -276,7 +276,7 @@ Body:
 ```
 
 ### Example request & response: /decide v3
-`/decide` version 3 introduces support for [feature flag payloads](docs/feature-flags/payloads) and a change in response structure: flags that were evaluated as false are also passed in. Further, this endpoint returns a parameter `errorComputingFlags`, which is true when we didn't manage to compute some flags, because of, say the database being down or some other reason. This allows for making partial updates to currently active flags in your clients.
+`/decide` version 3 introduces support for [feature flag payloads](/docs/feature-flags/payloads) and a change in response structure: flags that were evaluated as false are also passed in. Further, this endpoint returns a parameter `errorComputingFlags`, which is true when we didn't manage to compute some flags, because of, say the database being down or some other reason. This allows for making partial updates to currently active flags in your clients.
 
 You can optionally pass in an object containing person or group properties to override server values. This is how posthog-js handles [overriding server properties](/docs/libraries/js#overriding-server-properties), which can be useful if you want to make feature flag decisions without waiting for these changes to be ingested and available on PostHog's servers.
 

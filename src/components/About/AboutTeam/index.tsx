@@ -44,7 +44,7 @@ export const AboutTeam = () => {
             </h4>
 
             <div className="text-center mb-4">
-                <CallToAction to="/handbook/company/team" type="secondary">
+                <CallToAction to="/team" type="secondary">
                     Meet the team
                 </CallToAction>
             </div>

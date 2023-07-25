@@ -1,5 +1,5 @@
 ---
-title: Airbyte Exporter
+title: Airbyte
 installUrl: https://docs.airbyte.com/integrations/sources/posthog/
 thumbnail: ../../cdp/thumbnails/airbyte.png
 tags:

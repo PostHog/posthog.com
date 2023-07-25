@@ -1,5 +1,5 @@
 ---
-title: Zendesk Connector
+title: Zendesk
 github: https://github.com/PostHog/posthog-zendesk-plugin
 installUrl: https://app.posthog.com/project/apps?name=posthog-zendesk-plugin
 thumbnail: ../../cdp/thumbnails/zendesk.svg
@@ -7,11 +7,11 @@ tags:
     - zendesk-connector
 ---
 
-The Zendesk Connector app can import new and historic ticket events to PostHog. However, only the Date Type User Field is currently supported.
+Import new and historic ticket events to PostHog. However, only the Date Type User Field is currently supported.
 
 ## Requirements
 
-The Zendesk Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -50,11 +50,11 @@ Next, Head to the Admin section -> Manage -> User Fields. Click Add Fields and f
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Zendesk Connector](https://github.com/PostHog/posthog-zendesk-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-zendesk-plugin) is available on GitHub.
 
 ### Who created this app?
 
-This app was created by the community. We'd like to thank [Sandeep Guptan](https://github.com/samcaspus) and [Himanshu Garg](https://github.com/merrcury) for creating the Zendesk connector, as well as for all the other support and feedback. Thank you, both!
+This app was created by the community. We'd like to thank [Sandeep Guptan](https://github.com/samcaspus) and [Himanshu Garg](https://github.com/merrcury) for creating this, as well as for all the other support and feedback. Thank you, both!
 
 ### Who maintains this app?
 
@@ -63,8 +63,6 @@ This app is maintained by the community. If you have issues with the app not fun
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 

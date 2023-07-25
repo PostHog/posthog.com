@@ -36,7 +36,7 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
         <div
             style={{ opacity: navStyle ? 1 : 0, transition: 'opacity .3s' }}
             ref={navRef}
-            className="self-stretch flex-1 relative border-l border-dashed border-gray-accent-light dark:border-gray-accent-dark hidden xl:block"
+            className="self-stretch flex-1 relative hidden xl:block"
         >
             <aside style={navStyle} className="sticky flex flex-col pb-14 overflow-y-auto ml-[-5px] pl-[5px]">
                 <div ref={contentRef} className="pl-7 mt-auto">
@@ -46,9 +46,11 @@ export default function StickySidebar({ tableOfContents, className = '', top = 0
                             left: 0,
                             opacity: navBallLocation ? 1 : 0,
                         }}
-                        className="bg-almost-black dark:bg-white rounded-full w-2 h-2 z-10 absolute transition-all"
+                        className="bg-primary-dark dark:bg-primary rounded-full w-2 h-2 z-10 absolute transition-all"
                     />
-                    <p className="text-gray opacity-100 dark:text-white text-lg mt-0 mb-4 font-bold">On this page</p>
+                    <p className="text-primary/75 opacity-100 dark:text-primary-dark/75 text-lg mt-0 mb-4 font-bold">
+                        On this page
+                    </p>
                     <Scrollspy
                         offset={-50}
                         onUpdate={handleInternalNavUpdate}

@@ -19,7 +19,7 @@ As of writing, a third of our staff is based in the US, another third in the UK,
 
 ## How we hire
 
-[Charles](https://posthog.com/handbook/company/team#charles-cook-business-operations), our Business Head, is famously enthusiastic about admin, and has done a fantastic job of managing our systems so far. These include our payroll, leave system, share grants, IT onboarding, and other critical tasks that ensure a smooth onboarding experience for each new candidate. [Eltje](https://posthog.com/handbook/company/team#eltje-lange-people-and-talent) took over the HR function and now sets up meetings with candidates, guides them through the interview process, and sets up their benefits and perks.
+[Charles](/community/profiles/254), our Business Head, is famously enthusiastic about admin, and has done a fantastic job of managing our systems so far. These include our payroll, leave system, share grants, IT onboarding, and other critical tasks that ensure a smooth onboarding experience for each new candidate. Eltje took over the HR function and now sets up meetings with candidates, guides them through the interview process, and sets up their benefits and perks.
 
 It takes about 2 weeks to go from receiving a candidate’s application to sending them an offer letter. This timeline may vary based on the time zone they’re in, how many people on our team they need to meet, whether or not we already have salary benchmarks in place for their country, and other factors.
 

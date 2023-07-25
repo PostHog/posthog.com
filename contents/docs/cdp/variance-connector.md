@@ -1,5 +1,5 @@
 ---
-title: Variance Connector
+title: Variance
 github: https://github.com/PostHog/posthog-variance-plugin
 installUrl: https://app.posthog.com/project/apps?name=Variance
 thumbnail: ../../cdp/thumbnails/variance.png
@@ -11,7 +11,7 @@ This app exports PostHog data to Variance in real-time and formats it for use by
 
 ## Requirements
 
-The Variance Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.31.0](https://posthog.com/blog/the-posthog-array-1-31-0) or later. The app supports `capture`, `page`, `identify`, and `alias` calls.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.31.0](https://posthog.com/blog/the-posthog-array-1-31-0) or later. The app supports `capture`, `page`, `identify`, and `alias` calls.
 
 Not running 1.31.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -27,11 +27,11 @@ To install the Variance app you'll need a Variance account. In your Variance acc
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Variance Connector](https://github.com/PostHog/posthog-variance-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/posthog-variance-plugin) is available on GitHub.
 
 ### Who created this app?
 
-This app was created by Variance. We'd like to thank everyone at Variance for creating the Variance connector. Thanks!
+This app was created by Variance. We'd like to thank everyone at Variance for creating this. Thanks!
 
 ### Who maintains this app?
 
@@ -40,8 +40,6 @@ This app is maintained by Variance. If you have issues with the app not function
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 

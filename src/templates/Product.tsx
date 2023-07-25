@@ -25,6 +25,8 @@ import Questions from 'components/ProductLayout/Questions'
 import Customers from 'components/ProductLayout/Customers'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
+import { productMenu } from '../navs'
+import { capitalize } from 'instantsearch.js/es/lib/utils'
 
 const Check = (props: any) => <CheckIcon {...props} className="w-5 mx-auto" />
 const Close = (props: any) => <CloseIcon {...props} className="w-5 mx-auto" />
@@ -33,9 +35,9 @@ const menu = [
     {
         icon: <Analytics className="w-5" />,
         name: 'Product analytics',
-        url: '/product-analytics/features',
+        url: '/product-analytics',
         children: [
-            { name: 'Features', url: '/product-analytics/features' },
+            { name: 'Features', url: '/product-analytics' },
             { name: 'Pricing', url: '/product-analytics/pricing' },
             { name: 'Customers', url: '/product-analytics/customers' },
             { name: 'Comparisons', url: '/product-analytics/comparisons' },
@@ -49,9 +51,9 @@ const menu = [
     {
         icon: <SessionRecording className="w-5" />,
         name: 'Session replay',
-        url: '/session-replay/features',
+        url: '/session-replay',
         children: [
-            { name: 'Features', url: '/session-replay/features' },
+            { name: 'Features', url: '/session-replay' },
             { name: 'Pricing', url: '/session-replay/pricing' },
             { name: 'Customers', url: '/session-replay/customers' },
             { name: 'Comparisons', url: '/session-replay/comparisons' },
@@ -65,9 +67,9 @@ const menu = [
     {
         icon: <FeatureFlags className="w-5" />,
         name: 'Feature flags',
-        url: '/feature-flags/features',
+        url: '/feature-flags',
         children: [
-            { name: 'Features', url: '/feature-flags/features' },
+            { name: 'Features', url: '/feature-flags' },
             { name: 'Pricing', url: '/feature-flags/pricing' },
             { name: 'Customers', url: '/feature-flags/customers' },
             { name: 'Comparisons', url: '/feature-flags/comparisons' },
@@ -81,9 +83,9 @@ const menu = [
     {
         icon: <AbTesting className="w-5" />,
         name: 'A/B testing',
-        url: '/ab-testing/features',
+        url: '/ab-testing',
         children: [
-            { name: 'Features', url: '/ab-testing/features' },
+            { name: 'Features', url: '/ab-testing' },
             { name: 'Pricing', url: '/ab-testing/pricing' },
             { name: 'Customers', url: '/ab-testing/customers' },
             { name: 'Comparisons', url: '/ab-testing/comparisons' },
@@ -97,9 +99,9 @@ const menu = [
     {
         icon: <Platform className="w-5" />,
         name: 'Product OS',
-        url: '/product-os/features',
+        url: '/product-os',
         children: [
-            { name: 'Features', url: '/product-os/features' },
+            { name: 'Features', url: '/product-os' },
             { name: 'Pricing', url: '/product-os/pricing' },
             { name: 'Comparisons', url: '/product-os/comparisons' },
             { name: 'Roadmap', url: '/product-os/roadmap' },
@@ -117,9 +119,9 @@ const Footer = ({ location }) => {
             <>
                 <section className="mt-8 -mx-5 px-5 md:mx-0 md:px-0">
                     <h4>More about {currentMenu.name.toLowerCase()}</h4>
-                    <ul className="flex m-0 px-0 pb-2.5 md:pb-0 relative after:w-full after:md:border-t after:border-gray-accent-light after:border-dashed after:absolute after:top-0  w-full overflow-x-auto">
+                    <ul className="flex m-0 px-0 pb-2.5 md:pb-0 relative after:w-full after:md:border-t after:border-gray-accent-light after:border-solid after:absolute after:top-0  w-full overflow-x-auto">
                         {currentMenu?.children?.map(({ name, url }) => {
-                            const active = location.pathname.startsWith(url)
+                            const active = location.pathname === url.split('?')[0]
                             return (
                                 <li
                                     className="flex items-center !text-primary/75 hover:border-gray-accent-light mb-1.5 pt-0.5 text-sm [font-variation-settings:_'wght'_700] whitespace-nowrap rounded relative z-20 hover:scale-[1.01] active:scale-[.99] tracking-[-.1px] group"
@@ -147,7 +149,7 @@ const Footer = ({ location }) => {
 }
 
 export default function Product({ data, location, pageContext }) {
-    const { pageData, blogPosts, documentation, tutorials, customers } = data
+    const { pageData, blogPosts, tutorials, customers } = data
     const {
         body,
         excerpt,
@@ -236,13 +238,7 @@ export default function Product({ data, location, pageContext }) {
         PairsWith: (props: any) => <PairsWith {...props} products={productPairsWith} />,
         Documentation: (props: any) => (
             <SectionWrapper {...props}>
-                <Documentation
-                    documentation={{
-                        indexURL: pageContext?.documentationNav?.url,
-                        pages: documentation?.nodes,
-                    }}
-                    title={title}
-                />
+                <Documentation title={title} />
             </SectionWrapper>
         ),
         Tutorials: (props: any) => <Tutorials tutorials={tutorials?.nodes} />,
@@ -266,7 +262,7 @@ export default function Product({ data, location, pageContext }) {
     }
 
     return (
-        <Layout>
+        <Layout parent={productMenu}>
             <SEO
                 image={`/images/product/${slug.split('/')[1]}.png`}
                 title={`${title} ${parent.name} - PostHog`}
@@ -274,8 +270,9 @@ export default function Product({ data, location, pageContext }) {
             />
 
             <PostLayout
-                menu={menu}
-                title={title}
+                fullWidthContent
+                menuWidth={{ left: 180 }}
+                title={parent.name === 'index' ? 'Features' : capitalize(parent.name)}
                 hideSidebar
                 hideSearch
                 hideSurvey
@@ -285,20 +282,14 @@ export default function Product({ data, location, pageContext }) {
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>
-                <Footer location={location} />
+                {/* <Footer location={location} /> */}
             </PostLayout>
         </Layout>
     )
 }
 
 export const query = graphql`
-    query Product(
-        $id: String!
-        $blogTags: [String!]!
-        $tutorialTags: [String!]!
-        $documentationURLs: [String!]!
-        $customerURLs: [String!]!
-    ) {
+    query Product($id: String!, $blogTags: [String!]!, $tutorialTags: [String!]!, $customerURLs: [String!]!) {
         pageData: mdx(id: { eq: $id }) {
             parent {
                 ... on File {
@@ -355,6 +346,7 @@ export const query = graphql`
                         company {
                             name
                             image
+                            imageDark
                         }
                     }
                     quote
@@ -427,20 +419,6 @@ export const query = graphql`
                 body
             }
         }
-        documentation: allMdx(filter: { fields: { slug: { in: $documentationURLs } } }) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                }
-                headings {
-                    depth
-                    value
-                }
-            }
-        }
         customers: allMdx(filter: { fields: { slug: { in: $customerURLs } } }) {
             nodes {
                 fields {
@@ -450,6 +428,9 @@ export const query = graphql`
                     customer
                     title
                     logo {
+                        publicURL
+                    }
+                    logoDark {
                         publicURL
                     }
                 }

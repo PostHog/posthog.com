@@ -57,7 +57,7 @@ export const ContributorCard = ({
                     </ContributorCardTooltip>
                 </div>
             ) : null}
-            <div className="bg-white rounded shadow-lg flex flex-col items-center pt-6 pb-12 px-6 space-y-6">
+            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary dark:text-primary-dark rounded flex flex-col items-center pt-6 pb-12 px-6 space-y-6">
                 <div className="space-y-1">
                     <img
                         src={imageSrc}
@@ -65,11 +65,11 @@ export const ContributorCard = ({
                         alt="contributor image"
                     />
 
-                    <h4 className="text-black/80">{name}</h4>
+                    <h4 className="text-opacity-80">{name}</h4>
                 </div>
 
                 <div className="w-full space-y-1.5">
-                    <div className="text-black/80">
+                    <div className="text-opacity-80">
                         Level {contributorLevel}
                         <ContributorCardTooltip title="Number of PRs merged" pageKey="level">
                             <img
@@ -80,7 +80,7 @@ export const ContributorCard = ({
                         </ContributorCardTooltip>
                     </div>
 
-                    <div className="relative w-full rounded-full overflow-hidden bg-gray-accent-light h-1.5">
+                    <div className="relative w-full rounded-full overflow-hidden bg-white dark:bg-accent/25 h-1.5">
                         <div
                             style={{ width: `${contributorLevel >= 50 ? 50 : (100 * contributorLevel) / 50}%` }}
                             className="absolute left-0 inset-y-0 h-full bg-gradient-to-r from-[#F1A82C] to-orange"
@@ -89,7 +89,7 @@ export const ContributorCard = ({
                 </div>
 
                 <div className="space-y-1.5">
-                    <div className="text-black/80">
+                    <div className="text-opacity-80">
                         Powers
                         <ContributorCardTooltip title="Types of contributions made" pageKey="powers">
                             <img

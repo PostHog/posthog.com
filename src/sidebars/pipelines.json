@@ -4,19 +4,19 @@
         "url": "/cdp"
     },
     {
-        "name": "Variance Connector",
+        "name": "Variance",
         "url": "/cdp/variance-connector"
     },
     {
-        "name": "Engage Connector",
+        "name": "Engage",
         "url": "/cdp/engage-connector"
     },
     {
-        "name": "Airbyte Export",
+        "name": "Airbyte",
         "url": "/cdp/airbyte-export"
     },
     {
-        "name": "Amazon Kinesis Import",
+        "name": "Amazon Kinesis",
         "url": "/cdp/amazon-kinesis"
     },
     {
@@ -24,11 +24,11 @@
         "url": "/cdp/automatic-cohort-creator"
     },
     {
-        "name": "BigQuery Export",
+        "name": "BigQuery",
         "url": "/cdp/bigquery-export"
     },
     {
-        "name": "BitBucket Release Tracker",
+        "name": "BitBucket",
         "url": "/cdp/bitbucket-release-tracker"
     },
     {
@@ -36,11 +36,11 @@
         "url": "/cdp/currency-normalization"
     },
     {
-        "name": "Customer.io Connector",
+        "name": "Customer.io",
         "url": "/cdp/customer-io"
     },
     {
-        "name": "Databricks Export",
+        "name": "Databricks",
         "url": "/cdp/databricks"
     },
     {
@@ -84,23 +84,23 @@
         "url": "/product/experimentation-suite"
     },
     {
-        "name": "GitHub Release Tracker",
+        "name": "GitHub Releases",
         "url": "/cdp/github-release-tracker"
     },
     {
-        "name": "GitHub Star Sync",
+        "name": "GitHub Stars",
         "url": "/cdp/github-star-sync"
     },
     {
-        "name": "GitLab Release Tracker",
+        "name": "GitLab ",
         "url": "/cdp/gitlab-release-tracker"
     },
     {
-        "name": "Google Cloud Export",
+        "name": "Google Cloud",
         "url": "/cdp/google-cloud-export"
     },
     {
-        "name": "Google Pub/Sub Connector",
+        "name": "Google Pub/Sub",
         "url": "/cdp/google-pub-sub-connector"
     },
     {
@@ -108,11 +108,11 @@
         "url": "/cdp/heartbeat"
     },
     {
-        "name": "Hubspot Connector",
+        "name": "Hubspot",
         "url": "/cdp/hubspot-connector"
     },
     {
-        "name": "Intercom Connector",
+        "name": "Intercom",
         "url": "/cdp/intercom"
     },
     {
@@ -120,19 +120,19 @@
         "url": "/cdp/ingestion-alert"
     },
     {
-        "name": "n8n Connector",
+        "name": "n8n",
         "url": "/cdp/n8n"
     },
     {
-        "name": "Orbit Connector",
+        "name": "Orbit",
         "url": "/cdp/orbit"
     },
     {
-        "name": "Pagerduty Connector",
+        "name": "Pagerduty",
         "url": "/cdp/pagerduty-connector"
     },
     {
-        "name": "Postgres Export",
+        "name": "Postgres",
         "url": "/cdp/postgres-export"
     },
     {
@@ -144,11 +144,11 @@
         "url": "/cdp/property-flattener"
     },
     {
-        "name": "Redshift Export",
+        "name": "Redshift (Export)",
         "url": "/cdp/redshift-export"
     },
     {
-        "name": "Redshift Import",
+        "name": "Redshift (Import)",
         "url": "/cdp/redshift-import"
     },
     {
@@ -156,15 +156,15 @@
         "url": "/cdp/replicator"
     },
     {
-        "name": "RudderStack Export",
+        "name": "RudderStack",
         "url": "/cdp/rudderstack-export"
     },
     {
-        "name": "S3 Export",
+        "name": "S3",
         "url": "/cdp/s3-export"
     },
     {
-        "name": "Salesforce Connector",
+        "name": "Salesforce",
         "url": "/cdp/salesforce-connector"
     },
     {
@@ -172,23 +172,23 @@
         "url": "/cdp/schema-enforcer"
     },
     {
-        "name": "Segment Connector",
+        "name": "Segment",
         "url": "/cdp/segment"
     },
     {
-        "name": "Sendgrid Connector",
+        "name": "Sendgrid",
         "url": "/cdp/sendgrid-connector"
     },
     {
-        "name": "Sentry Connector",
+        "name": "Sentry",
         "url": "/cdp/sentry-connector"
     },
     {
-        "name": "Shopify Connector",
+        "name": "Shopify",
         "url": "/cdp/shopify"
     },
     {
-        "name": "Snowflake Export",
+        "name": "Snowflake",
         "url": "/cdp/snowflake-export"
     },
     {
@@ -200,11 +200,11 @@
         "url": "/cdp/timestamp-parser"
     },
     {
-        "name": "Twilio Connector",
+        "name": "Twilio",
         "url": "/cdp/twilio"
     },
     {
-        "name": "Twitter Followers Tracker",
+        "name": "Twitter",
         "url": "/cdp/twitter-followers"
     },
     {
@@ -212,11 +212,11 @@
         "url": "/cdp/user-agent-populator"
     },
     {
-        "name": "Zapier Connector",
+        "name": "Zapier",
         "url": "/cdp/zapier-connector"
     },
     {
-        "name": "Zendesk Connector",
+        "name": "Zendesk",
         "url": "/cdp/zendesk-connector"
     }
 ]

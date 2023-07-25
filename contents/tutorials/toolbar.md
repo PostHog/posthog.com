@@ -23,7 +23,7 @@ Oftentimes, these questions don't have a straight-forward answer, and, more ofte
 
 However, there are some questions that have straightforward answers - the difficulty comes in getting that answer across. 
 
-Enter the [PostHog Toolbar](/docs/product-analytics/toolbar). 
+Enter the [PostHog Toolbar](/docs/toolbar). 
 
 Consider the question: _"Where are my users clicking?"_
 
@@ -212,7 +212,7 @@ Or in the same modal, click "Edit the selector" to use our element picker to bui
 
 ## Further reading
 
-- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [How to build, analyze and optimize conversion funnels](/tutorials/funnels)
 - [B2B product metrics 101](/blog/b2b-saas-product-metrics)
 

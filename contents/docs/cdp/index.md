@@ -1,5 +1,5 @@
 ---
-title: Data connections
+title: Customer data platform
 sidebarTitle: Overview
 sidebar: Docs
 showTitle: true

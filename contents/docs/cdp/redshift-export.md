@@ -1,11 +1,12 @@
 ---
-title: Redshift Export
+title: Redshift (Export)
 github: https://github.com/PostHog/redshift-plugin
-installUrl: https://app.posthog.com/project/apps?name=Redshift+Export
 thumbnail: ../../cdp/thumbnails/redshift.svg
 tags:
     - redshift-export
 ---
+
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 Using the Redshift Export app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
@@ -42,11 +43,11 @@ GRANT CREATE ON DATABASE your_database TO posthog;
 
 ### Is the source code for this app available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Redshift Export app](https://github.com/PostHog/redshift-plugin) is available on GitHub.
+PostHog is open-source and so are all apps on the platform. The [source code](https://github.com/PostHog/redshift-plugin) is available on GitHub.
 
 ### Who created this app?
 
-We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), as well as community member [Jean Roman](https://github.com/romj) for creating the Redshift Export app.
+We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri) and [Marius Andra](https://github.com/mariusandra), as well as community member [Jean Roman](https://github.com/romj) for creating this
 
 ### Who maintains this app?
 
@@ -55,8 +56,6 @@ This app is maintained by PostHog. If you have issues with the app not functioni
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 

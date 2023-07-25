@@ -44,7 +44,7 @@ export default function Questions(props: QuestionFormProps): JSX.Element {
                     </Dialog.Panel>
                 </div>
             </Dialog>
-            <CallToAction size="sm" onClick={() => setShowModal(true)}>
+            <CallToAction size="md" onClick={() => setShowModal(true)}>
                 Ask a question
             </CallToAction>
         </>

@@ -28,7 +28,7 @@ export const SectionHeading = ({ title, subtitle }: ISectionHeading) => {
 
 const Marquee = ({ slides }: { slides: IMarquee[] }) => {
     return (
-        <div className="w-full absolute left-0 bg-gray-accent-light py-4">
+        <div className="w-full absolute left-0 bg-border/75 dark:bg-border-dark/75 border-y border-light dark:border-dark py-4">
             <MarqueeContainer autoFill pauseOnHover>
                 {slides.map(({ text, url }, index) => {
                     const Container = url ? GatsbyLink : 'div'
@@ -116,7 +116,7 @@ export default function Section({
                     <Section {...sections[0]} />
                 ))}
             {callout && (
-                <div className="p-5 border border-dashed border-gray-accent-light rounded-md mt-4 inline-block">
+                <div className="p-5  rounded-md mt-4 inline-block">
                     <div className="flex space-x-2 items-start">
                         <LightBulbIcon className="w-6 flex-shrink-0" />
                         <div>

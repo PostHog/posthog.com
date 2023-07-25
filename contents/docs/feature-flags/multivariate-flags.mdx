@@ -22,7 +22,7 @@ Note that the rollout percentage of feature flag variants must add up to 100%. I
 
 With the latest version of our JS library, you can call:
 
-```js
+```js-web
 if (posthog.getFeatureFlag('checkout-button-color') === 'black') {
     // do something
 }
@@ -30,7 +30,7 @@ if (posthog.getFeatureFlag('checkout-button-color') === 'black') {
 
 `getFeatureFlag` also returns true or false for standard (Boolean) feature flags, meaning that the following statements are equivalent:
 
-```js
+```js-web
 posthog.isFeatureEnabled('new-beta-feature')
 posthog.getFeatureFlag('new-beta-feature') === true
 ```
@@ -39,7 +39,7 @@ posthog.getFeatureFlag('new-beta-feature') === true
 
 Just as you can call `getFlags()` to return an array of feature flags that are currently active, you can call:
 
-```js
+```js-web
 posthog.feature_flags.getFlagVariants()
 ```
 
@@ -56,7 +56,7 @@ posthog.feature_flags.getFlagVariants()
 
 `onFeatureFlags(callback)` now passes the feature flag variants object as the second argument to `callback`, which looks like this:
 
-```js
+```js-web
 posthog.onFeatureFlags(function (flags, flagVariants) {
     // do something useful
     console.log(flags) // ["new-beta-feature", "checkout-button-color"]

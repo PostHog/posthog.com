@@ -4,6 +4,18 @@ title: Troubleshooting and FAQs
 
 Having trouble with recordings? Below are some tips for getting past some common issues
 
+The most common solution is...
+
+#### Update posthog-js
+
+We're always making improvements to the recordings feature, so you'll want to make sure that you're running the latest version of `posthog-js` on your website.
+
+To check the version that you're using, you can run the following in your browser console:
+
+```js
+window.posthog.LIB_VERSION
+```
+
 ## Recordings are not being captured
 
 There are a few common reasons that you may not see recordings appear in your project.
@@ -55,15 +67,13 @@ Access to font at 'https://yourwebsite.com/fonts/MyriadPro-Bold.woff2' from orig
 
 If you see errors like this, please add `app.posthog.com` to the list of permitted domains in your webservers CORS configuration.
 
-#### Update posthog-js
+## Filtering can't find my custom events
 
-We're always making improvements to the recordings feature, so you'll want to make sure that you're running the latest version of posthog-js on your website.
+The most common reason for this is that you're trying to filter by events that weren't sent by the web SDK. For example, from another tool like Segment or one of our backend SDKs.
 
-To check the version that you're using, you can run the following in your console:
+Session replay relies on the `$session_id` property added to events by the web SDK to link events to sessions.
 
-```js
-window.posthog.LIB_VERSION
-```
+To workaround this, you can use the `posthog.onSessionId` method in the web SDK to register a callback that will be called each time the session ID changes. You can send this to your backend and add the `$session_id` property to your backend events. 
 
 ## Browser freezes or crashes when recordings are enabled
 

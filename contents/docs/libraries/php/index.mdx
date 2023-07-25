@@ -94,7 +94,7 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-We strongly recommend reading our docs on [alias](/data/integrate/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 ### Sending page views
 
 If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
@@ -158,6 +158,7 @@ PostHog::getAllFlags('distinct id')
 #### Local Evaluation
 > **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
 > **Note:** This feature requires version 3.0 of the library, which in turn requires a minimum PostHog version of 1.38
+> **Note:** A single local evaluation call is billed as equivalent to 10 `decide`requests. [More info](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation).
 
 All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
 1. The library must be initialised with a personal API key
@@ -171,7 +172,7 @@ PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized"
 
 This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
 
-```js
+```php
 PostHog::getAllFlags('distinct id', ["organisation" => "some-company"], [], ["organisation" => ["is_authorized" => true]])
 ```
 
@@ -179,6 +180,20 @@ PostHog::getAllFlags('distinct id', ["organisation" => "some-company"], [], ["or
 Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `onlyEvaluateLocally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
 
 <CohortExpansionSnippet />
+
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```php
+$variant = PostHog::getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
+
+if ($variant === 'variant-name') {
+    // Do something differently for this user
+}
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
 ### Group analytics
 
@@ -190,9 +205,9 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 ```php
 PostHog::capture(array(
-    'distinctId' => '[distinct id]',
+    'distinctId' => '[user distinct id]',
     'event' => 'some event',
-    '$groups' => array("company" => "42dlsfj23f")
+    '$groups' => array("company" => "company_id_in_your_db")
 ));
 ```
 
@@ -201,7 +216,7 @@ PostHog::capture(array(
 ```php
 PostHog::groupIdentify(array(
     'groupType' => 'company',
-    'groupKey' => '42dlsfj23f',
+    'groupKey' => 'company_id_in_your_db',
     'properties' => array("name" => "Awesome Inc.", "employees" => 11)
 ));
 ```

@@ -77,7 +77,7 @@ A `capture` call requires:
 Optionally, you can also submit:
 
 -   `properties`, which is an object with any information you'd like to add
--   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/tutorials/experiments#step-2-sending-the-right-events) so that we can avoid making the request.
+-   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) so that we can avoid making the request.
 
 For example:
 
@@ -113,7 +113,7 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-We strongly recommend reading our docs on [alias](/data/integrate/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ### Sending page views
 
@@ -273,6 +273,8 @@ const flagPayload = await client.getFeatureFlagPayload('flag-key', 'user distinc
 
 > **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
 
+> **Note:** A single local evaluation call is billed as equivalent to 10 `decide`requests. [More info](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation).
+
 All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
 
 1. The library must be initialised with a personal API key
@@ -310,6 +312,20 @@ await client.reloadFeatureFlags()
 // Do something with feature flags here
 ```
 
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```node
+const variant = await client.getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
+
+if (variant === 'variant-name') {
+    // do something
+}
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
 ### Group analytics
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
@@ -321,8 +337,8 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 ```node
 client.capture({
     event: 'some event',
-    distinctId: '[distinct id]',
-    groups: { company: '42dlsfj23f' },
+    distinctId: '[user distinct id]',
+    groups: { company: 'company_id_in_your_db' },
 })
 ```
 
@@ -331,7 +347,7 @@ client.capture({
 ```node
 client.groupIdentify({
     groupType: 'company',
-    groupKey: '42dlsfj23f',
+    groupKey: 'company_id_in_your_db',
     properties: {
         name: 'Awesome Inc',
         employees: 11,
