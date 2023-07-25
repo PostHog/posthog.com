@@ -43,7 +43,7 @@ Once product managers complete their analysis and plans, they manage a team of "
 
 > **Sidenote:** If you hear the word "stakeholders," you are likely talking to a product manager. They deal with many, internally and externally.
 
-Product engineers, on the other hand, ship on their own. They figure out requirements, designs, infrastructure needs, and implementation details. They rely on their broad set of technical skills for this. They may need help in design, DevOps, or infrastructure, but mostly act like a pack of wolves in search of [product-market fit](/blog/how-to-product-market-fit).
+Product engineers, on the other hand, ship on their own. They figure out requirements, designs, infrastructure needs, and implementation details. They rely on their broad set of technical skills for this. They may need help in design, DevOps, or infrastructure, but mostly act like a pack of wolves in search of [product-market fit](/blog/product-market-fit-game).
 
 ### Step 3: Launching and beyond
 

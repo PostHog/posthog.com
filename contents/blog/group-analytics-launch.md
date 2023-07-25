@@ -19,14 +19,15 @@ Today, we’re excited to announce that PostHog has launched Group Analytics for
 Group Analytics are used for tracking and analyzing multiples of any event type within PostHog. Unlike cohorts, which essentially create lists of users, groups can track a far wider range of information because they apply at the event level. 
 
 <BorderWrapper>
-    <Quote
-        imageSource="/images/customers/weyert-tapico.png"
-        size="md"
-        name="Weyert de Boer"
-        title="Senior Software Engineer, Tapico"
-        quote={`“The Groups functionality in PostHog gives us the flexibility and power to target users at a higher level. Group Analytics also give us more detailed insight into user behaviour between instances. We love it!”`}
-    />
+<Quote
+    imageSource="/images/customers/weyert-tapico.png"
+    size="md"
+    name="Weyert de Boer"
+    title="Senior Software Engineer, Tapico"
+    quote={`“The Groups functionality in PostHog gives us the flexibility and power to target users at a higher level. Group Analytics also give us more detailed insight into user behaviour between instances. We love it!”`}
+/>
 </BorderWrapper>
+
 
 As a result, Group Analytics is especially useful for certain types of product, such as:
 

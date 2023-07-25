@@ -69,6 +69,6 @@ Now that you set up an A/B test in Webflow with PostHog, you can use this same p
 
 ## Further reading
 
-- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)

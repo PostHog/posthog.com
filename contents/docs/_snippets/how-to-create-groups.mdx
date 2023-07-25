@@ -1,0 +1,16 @@
+Groups are created and defined in your code when capturing events. 
+
+import JSGroupEventCodeSnippet from "../\_snippets/capture-group-event-code.mdx"
+
+<JSGroupEventCodeSnippet />
+
+In the above example, we create a group type `company`. Then, for each company, we set the `group key` as the unique identifier for that specific company. This can be anything that helps you identify it, such as ID or domain.
+
+We now have one `company`-type group with a key `company_id_in_your_db`. When we send the event `user_signed_up`, it will be attached to this newly created group.
+
+> **Tip:** When specifying the group type, use the singular version for clarity (`company` instead of `companies`).
+
+> **Tip:** We advise against using the _name_ of the company (or any other group) as the key, because that's rarely guaranteed to be unique, and thus can affect the quality of analytics data. Use a unique string, like an ID.
+
+> **Group type limit:** There's a hard limit of 5 group types within PostHog, although within each group type you can have an unlimited number of groups.
+

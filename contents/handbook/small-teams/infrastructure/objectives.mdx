@@ -1,19 +1,19 @@
-## Q1 2023 Goals
+## Q3 2023 Goals
 
-- Objective: Reduce TOIL
-  - KR: Migrate PostgreSQL out of Heroku and into the correct AWS account
-    - Why? Reduce cost and reduce risk of us maxing out the instance
-  - KR: Consolidate infrastructure into the correct AWS accounts (specifically US)
-    - Why? This will reduce the toil and AWS expenses
-- Objective: Support other teams and enable other teams to self-serve
-  - KR: Most of the pipeline team has written/contributed to their own alerting system
-    - Once the system is set up well, would be good to get the other teams doing this too
-    - Why? Enable the pipeline team to self-serve their issues
-  - Metric to track: % of non-infra hero time supporting other teams  
-- Objective: Keep infra spend flat at $120k/month
-  - Such as [Guido’s list](https://github.com/PostHog/posthog/issues/13153)
-  - *Will likely decrease cost first then increase with usage*
-  - Why? Improving our gross profit margin
+1. Make CI/CD spark joy
+- Deploying components separately
+- Better controls, allow people to roll back. UI to manage deploy.
+- Make CI faster/have more capacity
+
+2. Empower teams to own their stack
+- Help teams self-serve observability/alerting/paging
+- Give teams insight and control over their costs
+- Help teams figure out how to provision infrastructure
+
+3. Ongoing maintenance
+- Upgrade Postgres
+- Terraform state/controls
+- Any other interruptions that come up
 
 ## Roadmap
 

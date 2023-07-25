@@ -114,3 +114,25 @@ Tracking should be set up in line with what was shared after the previous call.
 Every trial should have an end date by which time we expect the customer to make a decision on whether PostHog is right for them.  If they need more time we first need to understand what they've not seen so we can proactively help them see everything they need to do make a decision (within reason).
 
 If they do become a customer (yay!) then we should agree a regular check in call cadence with them from the start (it's much harder to do after they are in the steady state).
+
+
+## Sales to CSM "handoff"
+
+While we don't follow a traditional model of sales and customer success being fully separate roles with a formal "handoff", we are experimenting with spezialization within the CSM role. Simon is leading new acquisition, commercial conversations, evaluations (especially for larger enterprise-y customers), and Cameron is managing existing accounts, holding regular (at least quarterly) meetings with larger accounts, where review technical issues, product feedback/requests, and gauge overall account health in a more qualitative way to supplement product usage data in pocus and help retention.
+
+In practice, everyone on the team should have context on high-touch customers from standups, but a formal introduction will be made when a Slack channel is set up. We don't currently have a great process for this for email only customers, but working this out is a to do (as is keeping better tabs on non-Slack high revenue customers more generally). Given the size of our team, we will still mostly need everyone to have context on all customers, so we have redundancy to cover absences.
+
+
+## Meeting cadence and owners
+
+|Action|Cadence|CSM owner|
+|------|-------|----------|
+|Onboarding / post-sales handoff|Once|Simon|
+|Sync meeting|Quarterly|Cameron|
+|Technical troubleshooting/implementation calls|Ad-hoc|Cameron|
+|Contract re-negotiation|Annually (per contract)| Simon| 
+
+
+
+
+ 

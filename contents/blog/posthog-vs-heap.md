@@ -1,6 +1,6 @@
 ---
 date: 2023-03-10
-title: PostHog vs Heap
+title: "In-depth: PostHog vs Heap"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -96,6 +96,12 @@ PostHog integrates several normally separate tools, such as product analytics, s
             <td>Visualize where users click in your app or website</td>
         </tr>
         <tr>
+            <td><strong>User surveys</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ask users for qualitative feedback and gather responses</td>
+        </tr>
+        <tr>
             <td><strong>Autocapture</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -111,7 +117,7 @@ PostHog integrates several normally separate tools, such as product analytics, s
 </table>
 </div>
 
-- **Session recording:** Heap offers basic session recording in addition to its core product analytics product, but it's a bolt-on option on all plans. Session recording is built-in to PostHog and you get 15,000 free recordings every month. **Jump to:** [Session recording comparison](#session-recording)
+- **Session replays:** Heap offers basic session replays in addition to its core product analytics product, but it's a bolt-on option on all plans. Session replays are built-in to PostHog and you get 15,000 free recordings every month. **Jump to:** [Session recording comparison](#session-recording)
 
 - **Sync to data warehouse:** The ability to sync with your data warehouse is part of Heap Connect, a paid add-on on to Heap's Pro plan – it's included on Heap's Premier plan. Data warehouse sync is available in PostHog at no additional cost because we believe companies should own their data.
 
@@ -214,9 +220,9 @@ Neither currently offers an SQL editor for writing custom queries, but it's in p
 </table>
 </div>
 
-### Session recording
+### Session replays
 
-Session recording is an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Heap and PostHog offer session recording, though Heap's version is quite limited at present.
+Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Heap and PostHog offer session recording, though Heap's version is quite limited at present.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -542,12 +548,6 @@ As an open source platform designed for technical teams, PostHog integrates with
             <td>Build internal tools using your usage data</td>
         </tr>
         <tr>
-            <td><strong>Feedback Widget</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Collect ad hoc feedback in your app</td>
-        </tr>
-        <tr>
             <td><strong>User Inteview Scheduler</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -568,14 +568,6 @@ As an open source platform designed for technical teams, PostHog integrates with
     </tbody>
 </table>
 </div>
-
-> ### Making it easy to talk to users
->
-> You can't build a great product without talking to users, which is why we built the [User Interview Scheduler](/apps/user-interviews) app for PostHog. You can use it to automatically invite users to an interview based user properties or actions they've completed.
->
-> We also built a simple [Feedback Widget app](/apps/feedback-widget) for collecting ad hoc feedback from users. You can analyse this data in PostHog, or use Zapier to send this feedback to other tools like Slack, Zendesk, and more.
->
-> **See:** [How to gather feedback and book user interviews with site apps](/tutorials/feedback-interviews-site-apps)
 
 ### Marketing & sales
 
@@ -817,7 +809,7 @@ If you user privacy is a primary concern for you, consider our [open source Dock
 
 ### Can you use PostHog on e-commerce websites?
 
-Absolutely. PostHog is [easy to integrate with Shopify](/docs/libraries/shopify), and we have [Shopify](/apps/shopify) and [Stripe Connector](/apps/stripe-connector) apps for importing order and revenue data into PostHog for analysis. You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/libraries/wordpress). 
+Absolutely. PostHog is [easy to integrate with Shopify](/docs/libraries/shopify), and we have a[Shopify](/apps/shopify) integration for importing order and revenue data into PostHog for analysis. You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/libraries/wordpress). 
 
 ### Can PostHog replace Google Analytics?
 

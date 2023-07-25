@@ -6,7 +6,7 @@ showTitle: true
 
 We offer our team unlimited time off, but with an expectation that you take _at least 25 days off a year_, including national holidays. This is to make sure that people can take time off flexibly while not feeling guilty about being on vacation.
 
-The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People & Ops team will look holiday usage occasionally to encourage people who haven't taken the minimum time off to do so. The 25 days is a minimum, not a guide.
+The reason for this policy is that it's critical for PostHog that we hire people we can trust to be responsible with their time off - enough that they can recharge, but not so much that it means we don't get any work done. The People & Ops team will look into holiday usage occasionally to encourage people who haven't taken the minimum time off to do so. The 25 days is a minimum, not a guide.
 
 As general guidance, we don't care about a few days here and there. If you are taking significantly more vacation time than most - for example, 40 days, we would be very surprised if you aren't causing a strain on the rest of your team as a result.
 
@@ -31,7 +31,7 @@ To book a day off:
 
 > Please manually book in public holidays you plan to take off as well. We have team members working in countries all over the world, so it is not practical for us to book these all in on your behalf. Some people also prefer to work on certain days even if they're considered a public holiday in the country they are living in or visiting. 
 
-The same rules as above apply regardless of the holiday length and type. Sick leave and any any other types of time off should also be booked in the same way. 
+The same rules as above apply regardless of the holiday length and type. Sick leave and any other types of time off should also be booked in the same way. 
 
 ## Flexible working
 

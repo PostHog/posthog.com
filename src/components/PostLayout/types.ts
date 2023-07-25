@@ -28,6 +28,8 @@ export interface IMenu {
         title: string
         className?: string
     }
+    color?: string
+    hidden?: boolean
 }
 
 export interface ICrumb {
@@ -55,12 +57,14 @@ export interface INextPost {
     }
 }
 
+export interface TableOfContents {
+    url: string
+    value: string
+    depth: number
+}
+
 export interface IProps {
-    tableOfContents?: {
-        url: string
-        value: string
-        depth: number
-    }[]
+    tableOfContents?: TableOfContents[]
     sidebar?: React.ReactNode
     contentWidth?: number | string
     questions?: React.ReactNode
@@ -85,4 +89,6 @@ export interface IProps {
     setFullWidthContent?: (fullWidth: boolean) => void
     contentContainerClasses?: string
     stickySidebar?: boolean
+    hideWidthToggle?: boolean
+    isMenuItemActive?: ({ name, url }: { name: string; url?: string }) => boolean
 }

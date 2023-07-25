@@ -90,6 +90,6 @@ We got the interview email.
 
 We just followed the instructions, and got in. They take people at any stage if they like the application.
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
 
 

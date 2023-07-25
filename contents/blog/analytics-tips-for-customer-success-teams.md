@@ -22,7 +22,7 @@ You can find out more about [how our customer success team works](/handbook/peop
 ## 1. Use funnels to find out where customers get stuck
 ![Top to bottom funnels in PostHog](../images/blog/activation-checklist-images/top-down-funnel.png)
 
-Using a combination of [autocapture](/manual/events#autocapture-event-tracking) and [custom or calculated events](/tutorials/event-tracking-guide#using-custom-events-to-track-advanced-behaviors), PostHog makes it possible to track every part of your product experience. This makes it trivial to track where users are getting stuck by using [funnel insights](/manual/funnels) to visualize the user journey.
+Using a combination of [autocapture](/docs/data/autocapture) and [custom or calculated events](/tutorials/event-tracking-guide#using-custom-events-to-track-advanced-behaviors), PostHog makes it possible to track every part of your product experience. This makes it trivial to track where users are getting stuck by using [funnel insights](/manual/funnels) to visualize the user journey.
 
 At PostHog, for example, new users have to go through several common steps to be successful — they must create an account, login, ingest events and then make a discovery through an insight. Using funnels, we’re able to identify which stage users get stuck on and then monitor how successful we are in our attempts to fix the problem.
 

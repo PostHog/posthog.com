@@ -208,6 +208,13 @@ Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all r
 
 We'll run the plugin server in a later step.
 
+> Note: If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
+```bash
+export CPPFLAGS=-I/opt/homebrew/opt/openssl/include
+export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
+pnpm i --dir plugin-server
+```
+
 ### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
@@ -266,6 +273,8 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     brew install openssl
     CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.10-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
+
+    > **Friendly tip:** If you see `ERROR: Could not build wheels for xmlsec`, refer to this [issue](https://github.com/xmlsec/python-xmlsec/issues/254).
 
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
 

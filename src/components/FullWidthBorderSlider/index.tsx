@@ -60,7 +60,7 @@ export default function FullWidthBorderSlider({
         setActiveSlide(newIndex)
     }
     const breakpoints = useBreakpoint()
-    const slidesToShow = breakpoints.lg ? 1 : breakpoints['2xl'] ? 2 : 2
+    const slidesToShow = breakpoints.lg || breakpoints['2xl'] ? 1 : 2
     return (
         slides.length > 1 && (
             <div>

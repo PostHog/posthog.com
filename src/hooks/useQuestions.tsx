@@ -11,19 +11,34 @@ type UseQuestionsOptions = {
     topicId?: number
     limit?: number
     sortBy?: 'newest' | 'popular' | 'activity'
+    filters?: any
 }
 
 const query = (offset: number, options?: UseQuestionsOptions) => {
-    const { slug, topicId, profileId, limit = 20, sortBy = 'newest' } = options || {}
-
+    const { slug, topicId, profileId, limit = 20, sortBy = 'newest', filters } = options || {}
     const params = {
         pagination: {
             start: offset * limit,
             limit,
         },
         sort: 'createdAt:desc',
-        filters: {},
+        filters: {
+            $or: [
+                {
+                    archived: {
+                        $null: true,
+                    },
+                },
+                {
+                    archived: {
+                        $eq: false,
+                    },
+                },
+            ],
+        },
         populate: {
+            pinnedTopics: true,
+            topics: true,
             profile: {
                 fields: ['firstName', 'lastName', 'gravatarURL'],
                 populate: {
@@ -33,6 +48,11 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
                 },
             },
             replies: {
+                populate: {
+                    profile: {
+                        fields: ['firstName', 'lastName'],
+                    },
+                },
                 fields: ['id', 'createdAt', 'updatedAt'],
             },
         },
@@ -46,7 +66,7 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
             params.sort = 'numReplies:desc'
             break
         case 'activity':
-            params.sort = 'updatedAt:desc'
+            params.sort = 'activeAt:desc'
             break
     }
 
@@ -94,6 +114,13 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
         }
     }
 
+    if (filters) {
+        params.filters = {
+            ...params.filters,
+            ...filters,
+        }
+    }
+
     return qs.stringify(params, {
         encodeValuesOnly: true, // prettify URL
     })
@@ -102,7 +129,9 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
 export const useQuestions = (options?: UseQuestionsOptions) => {
     const posthog = usePostHog()
 
-    const { data, size, setSize, isLoading, error, mutate } = useSWRInfinite<StrapiResult<QuestionData[]>>(
+    const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite<
+        StrapiResult<QuestionData[]>
+    >(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, options)}`,
         (url: string) => fetch(url).then((r) => r.json())
     )
@@ -128,7 +157,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         hasMore,
         questions,
         fetchMore: () => setSize(size + 1),
-        isLoading,
+        isLoading: isLoading || isValidating,
         refresh: () => mutate(),
     }
 }

@@ -6,10 +6,11 @@ showTitle: true
 ---
 
 import Disclaimer from './\_snippets/disclaimer.mdx'
+import Sunset from '../self-host/\_snippets/sunset-disclaimer.mdx'
 
-If you are an engineer looking to use the open-source version as a hobbyist (ie. not in production), or a company trying out PostHog as a proof of concept, then you're in the right place! Our Docker compose deployment let's you spin up a fresh PostHog instance in minutes.
+> **This page covers our open-source Docker compose deployment**, which is available under a MIT license, [without guarantee](/docs/self-host/open-source/disclaimer). We are currently in the process of [sunsetting our paid Kubernetes deployment](/blog/sunsetting-helm-support-posthog).
 
-<Disclaimer />
+Our MIT-licensed Docker compose deployment is best suited to internal tools, or evaluating features without vendor approval. It's also great for hobby projects which don't need advanced tools. For all other use cases, we recommend you use [PostHog Cloud](https://app.posthog.com/signup), which comes with a generous free tier.
 
 ## Requirements
 

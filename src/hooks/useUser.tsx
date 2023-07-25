@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData } from 'lib/strapi'
 import usePostHog from './usePostHog'
+import decode from 'jwt-decode'
 
 export type User = {
     id: number
@@ -63,6 +64,15 @@ type UserProviderProps = {
     children: React.ReactNode
 }
 
+const jwtValid = (jwt: string) => {
+    try {
+        const jwtDecoded = decode(jwt)
+        return Date.now() <= jwtDecoded?.exp * 1000
+    } catch (err) {
+        return false
+    }
+}
+
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState<User | null>(null)
@@ -74,7 +84,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const jwt = localStorage.getItem('jwt')
         const user = localStorage.getItem('user')
 
-        if (jwt && user) {
+        if (jwt && user && jwtValid(jwt)) {
             setJwt(jwt)
             setUser(JSON.parse(user))
         } else {
@@ -251,7 +261,28 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             {
                 populate: {
                     profile: {
-                        populate: ['avatar', 'questionSubscriptions'],
+                        populate: {
+                            avatar: true,
+                            questionSubscriptions: {
+                                filters: {
+                                    $or: [
+                                        {
+                                            archived: {
+                                                $null: true,
+                                            },
+                                        },
+                                        {
+                                            archived: {
+                                                $eq: false,
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                            topicSubscriptions: {
+                                fields: ['slug', 'label'],
+                            },
+                        },
                     },
                     role: {
                         fields: ['type'],

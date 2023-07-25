@@ -26,11 +26,16 @@ import blog from 'sidebars/blog.json'
 import slugify from 'slugify'
 import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
+import { companyMenu } from '../navs'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const Title = ({ children, className = '' }) => {
-    return <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 ${className}`}>{children}</h1>
+    return (
+        <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 dark:text-primary-dark ${className}`}>
+            {children}
+        </h1>
+    )
 }
 
 export const Intro = ({
@@ -131,6 +136,11 @@ export default function BlogPost({ data, pageContext, location }) {
         inlineCode: InlineCode,
         blockquote: Blockquote,
         img: ZoomImage,
+        video: (props) => (
+            <ZoomImage>
+                <video {...props} />
+            </ZoomImage>
+        ),
         a: A,
         TutorialsSlider,
         ...shortcodes,
@@ -138,7 +148,7 @@ export default function BlogPost({ data, pageContext, location }) {
     const { tableOfContents } = pageContext
 
     return (
-        <Layout>
+        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[5]}>
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
@@ -152,7 +162,6 @@ export default function BlogPost({ data, pageContext, location }) {
             <PostLayout
                 stickySidebar
                 title={title}
-                contentWidth={790}
                 filePath={filePath}
                 tableOfContents={tableOfContents}
                 breadcrumb={[

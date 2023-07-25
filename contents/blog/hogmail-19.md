@@ -11,7 +11,7 @@ featuredImageType: full
 category: Newsletter
 ---
 
-> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](/newsletter) so you don't miss it.
+> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
 
 One week later than originally promised... welcome to the first HogMail of 2023. In this issue:
 
@@ -47,7 +47,7 @@ But the real game changer is defaulting to asynchronous communication and writin
  
 ### Product-market fit is a moving target 🎯
 
-We often get asked how to achieve the fabled product-market fit (PMF), mainly because [there is no universal standard](https://posthog.com/blog/how-to-product-market-fit) and, as Run the Business points out in [Product Market Flex](https://runthebusiness.substack.com/p/product-market-flex), it's not a stationary target:
+We often get asked how to achieve the fabled product-market fit (PMF), mainly because [there is no universal standard](/blog/product-market-fit-game) and, as Run the Business points out in [Product Market Flex](https://runthebusiness.substack.com/p/product-market-flex), it's not a stationary target:
 
 >"At any given moment in time, even if you have PMF, you still need to be working towards a future state where the market has evolved, and your product has kept up."
 
@@ -69,4 +69,4 @@ John Cutler explores this idea further in [Product GTM Fitness](https://cutlefis
  
 - [How employees can think like shareholders](https://www.mostlymetrics.com/p/questions-to-ask-before-taking-a) – Or, to use the post's original title, "the REAL questions you should ask before taking a job", though the questions here are still relevant outside of that context. CEO James has written about this in the past, too.
 
-> We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
+> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.

@@ -3,7 +3,9 @@ import { loaders } from 'kea-loaders'
 import { Contributor } from 'types'
 import { ignoreContributors, mvpWinners } from '../pages-content/community-constants'
 
-export const contributorsLogic = kea([
+import type { contributorsLogicType } from './contributorsLogicType'
+
+export const contributorsLogic = kea<contributorsLogicType>([
     actions({
         processSearchInput: (query: string) => ({ query }),
         setSearchQuery: (query: string) => ({ query }),

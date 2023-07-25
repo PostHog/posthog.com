@@ -65,6 +65,7 @@ module.exports = {
             retrievePages('blog', '/^blog/'),
             retrievePages('customers', '/^customers/'),
             retrievePages('apps', '/^apps/'),
+            retrievePages('cdp', '/^cdp/'),
             {
                 query: `
                             {
@@ -97,7 +98,7 @@ module.exports = {
             {
                 query: `
                             {
-                              questions: allSqueakQuestion(filter: {permalink: {ne: null}}) {
+                              questions: allSqueakQuestion(filter: {permalink: {ne: null}, archived: {ne: true}}) {
                                 nodes {
                                   id
                                   title: subject

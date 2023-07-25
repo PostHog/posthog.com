@@ -6,20 +6,21 @@ import Product from './src/templates/Product'
 import Job from './src/templates/Job'
 import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
+import { UserProvider } from './src/hooks/useUser'
 
 initKea(false)
 
-export const wrapRootElement = ({ element }) => <ToastProvider>{wrapElement({ element })}</ToastProvider>
+export const wrapRootElement = ({ element }) => (
+    <UserProvider>
+        <ToastProvider>{wrapElement({ element })}</ToastProvider>
+    </UserProvider>
+)
 export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     // This is checked and set on initial load in the body script set in gatsby-ssr.js
     // Checking for prevLocation prevents this from happening twice
     if (typeof window !== 'undefined' && prevLocation) {
-        var slug = location.pathname.substring(1)
-        var theme = /^handbook|^docs|^blog|^integrations|^tutorials|^questions|^manual|^using-posthog|^community/.test(
-            slug
-        )
-            ? (window as any).__theme
-            : 'light'
+        var theme = (window as any).__theme
+
         document.body.className = theme
     }
 

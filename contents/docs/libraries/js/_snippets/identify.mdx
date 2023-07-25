@@ -1,32 +1,9 @@
-To make sure you understand which user is performing actions within your app, you can identify users at any point. From the moment you make this call, all events will be identified with that distinct id.
+Using `identify`, you can associate events with specific users. This enables you to gain full insights as to how they're using your product across different sessions, devices, and platforms.
 
-The ID can by anything, but is usually the unique ID that you identify users by in the database.
-Normally, you would put this below `posthog.init` if you have the information there.
-
-If a user was previously anonymous (because they hadn't signed up or logged in yet), we'll automatically alias their anonymous ID with their new unique ID. That means all their events from before and after they signed up will be shown under the same user.
-
-```js
+```js-web
 posthog.identify(
-    '[user unique id]', // distinct_id, required
-    { userProperty: 'value1' }, // $set, optional
-    { anotherUserProperty: 'value2' } // $set_once, optional
+    'distinct_id', // Required. Replace 'distinct_id' with your user's unique identifier
+    { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' },  // $set, optional
+    { first_visited_url: '/blog' } // $set_once, optional
 );
-```
-
-You can also pass two more arguments to `posthog.identify`. Both take objects consisting of as many properties as you want to be set on that user's profile. The difference is that the second argument will use the `$set` mechanism, whereas the third argument will use `$set_once`. 
-
-You can read more about the difference between this [in the setting properties section](/docs/integrate/client/js#setting-user-properties-via-an-event).
-
-<blockquote class="warning-note">
-    Warning! You can't call identify straight after an `.init` (as `.init` sends a pageview event, probably with the user's
-    anonymous ID).
-</blockquote>
-
-To address the issue described above, you can call `.init` passing a `loaded` callback function, inside which you can then call identify, like so:
-
-```js
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    loaded: function(posthog) { posthog.identify('[user unique id]'); }
-});
 ```

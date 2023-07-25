@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { PageProps } from 'gatsby'
-
-import community from 'sidebars/community.json'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
@@ -20,12 +18,18 @@ import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { RightArrow } from '../../../components/Icons/Icons'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
+import Logomark from 'components/Home/images/Logomark'
+import Label from 'components/Label'
+import { communityMenu } from '../../../navs'
+import useTopicsNav from '../../../navs/useTopicsNav'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
-        <div className={`overflow-hidden rounded-full ${props.className}`}>
+        <div
+            className={`overflow-hidden rounded-full p-[1px] bg-white border border-light dark:border-dark ${props.className}`}
+        >
             {props.src ? (
-                <img className="w-full h-full" alt="" src={props.src} />
+                <img className="w-full h-full rounded-full bg-white border-white border-[2px]" alt="" src={props.src} />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -47,6 +51,7 @@ export default function ProfilePage({ params }: PageProps) {
 
     const [editModalOpen, setEditModalOpen] = React.useState(false)
     const posthog = usePostHog()
+    const nav = useTopicsNav()
 
     const profileQuery = qs.stringify(
         {
@@ -58,7 +63,7 @@ export default function ProfilePage({ params }: PageProps) {
                 teams: {
                     populate: {
                         profiles: {
-                            populate: ['avatar'],
+                            populate: ['avatar', 'teams', 'pronouns'],
                         },
                     },
                 },
@@ -89,6 +94,7 @@ export default function ProfilePage({ params }: PageProps) {
     const { firstName, lastName } = profile || {}
 
     const name = [firstName, lastName].filter(Boolean).join(' ')
+    const isTeamMember = profile?.teams?.data?.length > 0
 
     const handleEditProfile = () => {
         mutate()
@@ -102,7 +108,7 @@ export default function ProfilePage({ params }: PageProps) {
     return (
         <>
             <SEO title={`Community Profile - PostHog`} />
-            <Layout>
+            <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
                 <Modal setOpen={setEditModalOpen} open={editModalOpen}>
                     <div
                         onClick={() => setEditModalOpen(false)}
@@ -119,7 +125,7 @@ export default function ProfilePage({ params }: PageProps) {
                 <PostLayout
                     title="Profile"
                     breadcrumb={[{ name: 'Community', url: '/questions' }]}
-                    menu={community}
+                    menu={nav}
                     sidebar={
                         <ProfileSidebar
                             handleEditProfile={handleEditProfile}
@@ -133,14 +139,30 @@ export default function ProfilePage({ params }: PageProps) {
                         <>
                             <div className="space-y-8 my-8">
                                 <section className="">
-                                    <Avatar
-                                        className="w-24 h-24 float-right bg-gray-accent dark:gray-accent-dark"
-                                        src={getAvatarURL(profile)}
-                                    />
+                                    <div className="relative w-48 h-48 float-right -mt-12">
+                                        <Avatar
+                                            className=" bg-gray-accent dark:gray-accent-dark"
+                                            src={getAvatarURL(profile)}
+                                        />
+                                        {isTeamMember && (
+                                            <span className="absolute right-1 bottom-1 h-12 w-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark border border-light dark:border-dark">
+                                                <Logomark className="w-8" />
+                                            </span>
+                                        )}
+                                    </div>
 
-                                    <div className="space-y-3">
-                                        <h1 className="m-0 mb-8">{name || 'Anonymous'}</h1>
-                                        {profile.companyRole && <p className="text-gray">{profile?.companyRole}</p>}
+                                    <div className="space-y-1 mb-8">
+                                        <div className="flex gap-x-2 items-baseline">
+                                            <h1 className="m-0 text-5xl">{name || 'Anonymous'}</h1>
+                                            {profile.pronouns && (
+                                                <div className="opacity-50 text-sm">{profile.pronouns}</div>
+                                            )}
+                                        </div>
+                                        {isTeamMember && profile.companyRole && (
+                                            <p className="text-primary/50 dark:text-primary-dark/50">
+                                                {profile?.companyRole}, PostHog
+                                            </p>
+                                        )}
                                     </div>
 
                                     {profile?.biography && (
@@ -238,7 +260,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                               </SidebarSection>
 
                               {profiles?.data?.length > 0 ? (
-                                  <SidebarSection title="Co-workers">
+                                  <SidebarSection title="Teammates">
                                       <ul className="p-0 grid gap-y-2">
                                           {profiles.data
                                               .filter(({ id }) => id !== profile.id)
@@ -271,7 +293,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                                 setEditModalOpen(true)
                             }
                         }}
-                        className="text-base text-red font-semibold"
+                        className="text-base text-red dark:text-yellow font-semibold"
                     >
                         Edit profile
                     </button>
