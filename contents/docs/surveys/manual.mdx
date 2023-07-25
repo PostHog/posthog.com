@@ -10,7 +10,7 @@ With PostHog, you can target surveys based on page URL, selectors, feature flag,
 
 Setting up surveys is easy, and there are two ways to do it. The first option will enable you to get started quickly with a pre-built survey, while the second option involves creating your own UI components.
 
-### Option 1 (recommended)
+### Option 1: Site app (recommended)
 
 1. Make sure you've enabled the surveys app in your project's apps.
 
@@ -25,7 +25,7 @@ posthog.init("<ph_project_api_key>", {
 
 3. That's it! Now you can go [create a survey in PostHog](https://app.posthog.com/surveys).
 
-### Option 2 (custom UI component)
+### Option 2: Custom UI component
 
 1. Make sure you're up to date on PostHog's [JavaScript web library](/docs/libraries/js). Surveys requires version 1.67.1, or later.
 
@@ -47,15 +47,71 @@ posthog.getActiveMatchingSurveys((surveys) => {
 
 ```js-web
 posthog.capture("survey sent", {
-    $survey_id: {survey.id} // required
-    $survey_response: {survey_response} // required
-    $survey_name: {survey.name} // optional
+  $survey_id: survey.id // required
+  $survey_response: 'survey_response' // required
+  $survey_name: survey.name  // optional
 })
 ```
 
 Surveys that are shown should be captured with a "survey shown" event and those that are dismissed, with a "survey dismissed" event similar to the above.
 
 > PostHog currently supports surveys with either a single text input, or a link to another page (such as a form, or scheduling platform), so be sure to use the syntax above in order to track results. We'll be adding more survey types soon!
+
+### Option 3: Backend or API event capture
+
+If you're using a backend SDK or the API, you can still capture responses capturing a `survey sent` event the survey's ID, names, and any properties.
+
+<MultiLanguage>
+
+```python
+from posthog import Posthog
+
+posthog = Posthog(
+  '<ph_project_api_key>', 
+  host='<ph_instance_address>'
+)
+
+posthog.capture(
+  user_distinct_id,
+  'survey sent',
+  {
+    '$survey_id': 'survey_id',
+    '$survey_response': 'This app is great!'
+  }
+)
+```
+
+```node
+import { PostHog } from 'posthog-node'
+
+const client = new PostHog(
+  '<ph_project_api_key>',
+  { host: '<ph_instance_address>' } // TIP: You can omit this line if using PostHog Cloud
+)
+
+client.capture({
+  distinctId: 'user_distinct_id',
+  event: 'survey sent',
+  properties: {
+    $survey_id: 'survey_id',
+    $survey_response: 'This app is great!',
+  },
+})
+```
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "survey sent",
+  "properties": {
+    "$survey_id": "survey_id",
+    "$survey_response": "This app is great!"
+  },
+  "distinct_id": "user_distinct_id"
+}' <ph_instance_address>/capture/ 
+```
+
+</MultiLanguage>
 
 ## Creating a survey
 
