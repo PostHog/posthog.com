@@ -47,8 +47,8 @@ posthog.getActiveMatchingSurveys((surveys) => {
 
 ```js-web
 posthog.capture("survey sent", {
-  $survey_id: survey.id // required
-  $survey_response: 'survey_response' // required
+  $survey_id: survey.id, // required
+  $survey_response: 'survey_response', // required
   $survey_name: survey.name  // optional
 })
 ```
