@@ -1,6 +1,6 @@
 ---
 title: "Startup Spotlight: How Golioth builds IoT software"
-date: 2023-07-26
+date: 2023-07-25
 author: ["joe-martin"]
 showTitle: true
 rootpage: /blog
