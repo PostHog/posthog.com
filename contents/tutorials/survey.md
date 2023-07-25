@@ -22,14 +22,14 @@ npx create-next-app@latest surveys
 
 Once created, go into the folder and install `posthog-js`.
 
-```js
+```bash
 cd surveys
 npm i posthog-js
 ```
 
 Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project API key and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive, a check for the window, and `opt_in_site_apps` set to `true` (which we use for surveys later). Altogether, this looks like this:
 
-```js
+```js-web
 // app/providers.js
 'use client'
 import posthog from 'posthog-js'
@@ -49,7 +49,7 @@ export function PHProvider({ children }) {
 
 We can then import the `PHProvider` component from the `provider.js` file in our `app/layout.js` file, and wrap our app in it.
 
-```js
+```js-web
 // app/layout.js
 import { PHProvider } from './providers'
 
@@ -86,7 +86,7 @@ If you want to customize how and when you show your survey, we can can that too.
 
 Once done, head back to the app and remove the boilerplate from `page.js` . We’ll make this the page with our survey. To start, this requires the `use client` directive, `usePostHog` context, and a `useState` hook for the survey data.
 
-```js
+```js-web
 // app/page.js
 'use client'
 import { usePostHog } from 'posthog-js/react'
@@ -107,7 +107,7 @@ export default function Home() {
 
 We can then get the surveys for a user with PostHog’s `getActiveMatchingSurveys` method in a `useEffect`. In the callback, filter for API type surveys, set the first one in our state, and capture a `survey shown` event.
 
-```js
+```js-web
 //app/page.js
 'use client'
 import { usePostHog } from 'posthog-js/react'
@@ -135,7 +135,7 @@ export default function Home() {
 
 Next, add our survey data to our page with a `<textarea>` and submit button.
 
-```js
+```js-web
 // app/page.js
 //...
 
@@ -158,7 +158,7 @@ return (
 
 To capture responses, we need another state for value of our `<textarea>` and a function to set the state when it changes.
 
-```js
+```js-web
 //...
 
 const [textAreaValue, setTextAreaValue] = useState('')
@@ -185,7 +185,7 @@ return (
 
 Finally, set up a `survey sent` event capture when the user clicks the submit button. This needs to include the survey ID, name, and response, and should also reset the `textarea`.
 
-```js
+```js-web
 //...
 	const submit = () => {
     posthog.capture("survey sent", {
@@ -226,7 +226,7 @@ The last thing you might want to do is let users  dismiss the survey and prevent
 
 First, create a function to close the survey which sets the value in `localStorage` and the state of the survey to `null`.
 
-```js
+```js-web
 const closeSurvey = () => {
   localStorage.setItem('seenSurvey_' + survey.id, true)
   setSurvey(null)
@@ -235,7 +235,7 @@ const closeSurvey = () => {
 
 Next, add the `closeSurvey` function to the `submit` function and a new `dismiss` function that captures a `survey dismissed` event. We also need a dismiss button on our page under our submit button.
 
-```js
+```js-web
 const submit = () => {
   posthog.capture("survey sent", {
     $survey_id: survey.id,
@@ -263,7 +263,7 @@ const dismiss = () => {
 
 This hides the survey when either are clicked, but it shows again when the page is refreshed. To fix this, wecheck for the `seenSurvey_` value in local storage and don’t show the survey if it’s `true`. We can do this in the `useEffect` like this:
 
-```js
+```js-web
 useEffect(() => {
   posthog.getActiveMatchingSurveys((surveys) => {
     const firstSurvey = surveys.filter(survey => survey.type === 'api')[0]
