@@ -13,15 +13,13 @@ category: Startups
 
 > Each month, we speak to a team enrolled in [PostHog for Startups](/startups) about the way they work and the challenges they face.
 
-[Golioth](https://golioth.io/) is an IoT developer platform that enables engineers to build IoT products and infrastructure quickly and easily. Golioth ensures that developers can securely capture and route sensor data, issue OTA firmware updates, and manage fleets of connected devices — but faces the unique challenge of creating cloud software for new, rapidly evolving hardware projects.
+[Golioth](https://golioth.io/) is an IoT developer platform that enables engineers to securely capture IoT sensor data, issue OTA firmware updates, and manage fleets of connected devices — but therein lies a challenge: how do you create cloud software for hardware that's always new and rapidly evolving?
 
-“Hardware and software development are very different worlds,” says Golioth Founder and CEO Jonathan Beri. “Hardware? It’s slow. It’s hard. It’s incredibly complicated. And software too has its own unique challenges, even before you add IoT into the mix.”
+“Hardware and software development are very different worlds,” says Golioth Founder and CEO Jonathan Beri. “Hardware? It’s slow. It’s hard. It’s incredibly complicated. And software too has its own unique challenges, even before you add IoT into the mix!”
 
-Golioth has adopted a nuanced approach to product development in order to combine these disciplines effectively — essentially dividing the way teams work based on whether it’s on the firmware & SDK side of the business, or in the cloud product.
+Golioth's solution has been to divide and conquer.
 
-“On the firmware side and for our SDKs we have a longer release cycle because those updates get baked into our users’ operating systems,” says Golioth Product Manager Dylan Swartz. “If we ship features every every single day, our customers couldn’t keep up. But on the cloud side we’re much more agile. We run traditional two-week sprints, regularly adjust priorities and release regularly.”
-
-Regardless of the product however, there are four essential principles which Golioth applies universally, across all aspects of product and feature development…
+“On the firmware side we have longer release cycles,” says Golioth Product Manager Dylan Swartz. “If we shipped every every single day, customers couldn’t keep up. But on cloud we’re much more agile - and there are four essential principles we apply universally."
 
 ## 1. Put customers at the heart of product development
 
