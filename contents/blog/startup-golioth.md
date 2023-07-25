@@ -43,11 +43,11 @@ Jonathan points to Dylan as a clear example of this in practice. Prior to joinin
 
 ## 3. Use open-source to bootstrap new products
 
-Contributing to open source communities is ingrained in Golioth’s culture from an engineering standpoint — but it’s also a competitive advantage which they’ve seized from the start. 
+Contributing to open-source communities is ingrained in Golioth’s culture from an engineering standpoint, but it’s also a competitive advantage which they’ve seized from the start. 
 
-“Software on hardware has historically been closed source,” explains Jonathan. “Over the last decade, that’s started to change however and it’s been very exciting. Golioth as a company probably couldn’t have gotten started if it wasn’t for open source projects we could build on.”
+“Software on hardware has historically been closed source,” explains Jonathan. “Over the last decade, that’s started to change however and it’s been very exciting. Golioth as a company probably couldn’t have gotten started if it wasn’t for open-source projects we could build on.”
 
-By adopting open source as the basis for much of its work, Golioth (like PostHog) unlocks a lot of advantages that aren’t available to closed source projects. One of these is an opportunity to incorporate features from other, dependent open source projects. 
+By adopting open source as the basis for much of its work, Golioth (like PostHog) unlocks a lot of advantages that aren’t available to closed-source projects. One of these is an opportunity to incorporate features from other, dependent open source projects. 
 
 > **Community spotlight:** Jonathan credits the [Zephyr](https://www.zephyrproject.org/) as the most crucial open source project to Golioth’s own creation, and the team continues to regularly contribute upstream to it as a result. 
 
