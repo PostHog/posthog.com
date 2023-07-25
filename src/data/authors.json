@@ -311,5 +311,13 @@
         "image": "../../contents/images/team/annika.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/annikaze_"
+    },
+    {
+        "handle": "lior-neu-ner",
+        "name": "Lior Neu-ner",
+        "role": "Technical Content Marketer",
+        "image": "../../contents/images/team/lior.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/liornn"
     }
 ]

@@ -1,26 +1,25 @@
-import { Form } from './components/main/Form'
-import { Question } from './components/main/Question'
-import { FullQuestion } from './components/FullQuestion'
-import { Authentication } from './components/main/Authentication'
-import { Squeak } from './components/main/Squeak'
-import { Days } from './components/Days'
+import { QuestionForm } from './components/QuestionForm'
+import { Question } from './components/Question'
+import { Authentication } from './components/Authentication'
+import { SignIn } from './components/auth/SignIn'
+import { SignUp } from './components/auth/SignUp'
+import { Squeak } from './components/Squeak'
 import { Avatar } from './components/Avatar'
-import { Login } from './components/main/Login'
-import { Questions } from './components/main/Questions'
-import { useOrg, Provider as OrgProvider } from './hooks/useOrg'
+import { Questions } from './components/Questions'
+import { EditProfile } from './components/EditProfile'
+import { TopicSelector } from './components/TopicSelector'
 import { useQuestion } from './hooks/useQuestion'
 
 export {
     Authentication,
     Squeak,
-    FullQuestion,
     Questions,
     Question,
-    Form,
-    Login,
+    QuestionForm,
     Avatar,
-    Days,
-    OrgProvider,
-    useOrg,
     useQuestion,
+    SignIn,
+    SignUp,
+    EditProfile,
+    TopicSelector,
 }

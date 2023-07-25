@@ -1,29 +1,34 @@
 import React from 'react'
 import { Field, Form, Formik } from 'formik'
-import { useUser } from 'hooks/useUser'
+import { User, useUser } from 'hooks/useUser'
+import { inputClasses, labelClasses } from '../Authentication'
+import Button from '../Button'
 
 type SignInProps = {
-    setMessage: any
-    handleMessageSubmit: (message: any) => Promise<void> | void
-    formValues: any
-    apiHost: string
-    buttonText: string
-    organizationId: string
+    buttonText?: string
+    onSubmit?: (user: User | null) => void
+    setMessage?: React.Dispatch<React.SetStateAction<string | null>>
 }
 
-const SignIn: React.FC<SignInProps> = ({ setMessage, handleMessageSubmit, formValues, buttonText }) => {
+const errorMessages: Record<string, string> = {
+    'Invalid identifier or password': 'Invalid email or password',
+}
+
+export const SignIn: React.FC<SignInProps> = ({ buttonText = 'Login', onSubmit, setMessage }) => {
     const { isLoading, login } = useUser()
 
     const handleSubmit = async (values: any) => {
-        let user = await login({
+        const user = await login({
             email: values.email,
             password: values.password,
         })
 
         if (!user) {
-            setMessage('Incorrect email/password. Please try again.')
+            setMessage && setMessage('There was an error signing in. Please try again.')
+        } else if ('error' in user) {
+            setMessage?.(errorMessages[user?.error] || user?.error)
         } else {
-            await handleMessageSubmit(formValues || { email: values.email })
+            onSubmit?.(user)
         }
     }
 
@@ -48,14 +53,34 @@ const SignIn: React.FC<SignInProps> = ({ setMessage, handleMessageSubmit, formVa
         >
             {({ isValid }) => {
                 return (
-                    <Form>
-                        <label htmlFor="email">Email address</label>
-                        <Field required id="email" name="email" type="email" placeholder="Email address..." />
-                        <label htmlFor="password">Password</label>
-                        <Field required id="password" name="password" type="password" placeholder="Password..." />
-                        <button style={isLoading || !isValid ? { opacity: '.5' } : {}} type="submit">
+                    <Form className="m-0">
+                        <label className={labelClasses} htmlFor="email">
+                            Email address
+                        </label>
+                        <Field
+                            className={inputClasses}
+                            onBlur={(e) => e.preventDefault()}
+                            required
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="Email address..."
+                        />
+                        <label className={labelClasses} htmlFor="password">
+                            Password
+                        </label>
+                        <Field
+                            className={inputClasses}
+                            onBlur={(e) => e.preventDefault()}
+                            required
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Password..."
+                        />
+                        <Button disabled={isLoading || !isValid} type="submit" width="full">
                             {buttonText}
-                        </button>
+                        </Button>
                     </Form>
                 )
             }}

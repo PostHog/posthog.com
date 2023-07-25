@@ -22,10 +22,7 @@ export function FeatureSnapshot({
                 <ul className="m-0 p-0 list-none">
                     {features.map((feature, index) => {
                         return (
-                            <li
-                                className="py-4 border-b border-dashed border-gray-accent-light last:border-b-0"
-                                key={index}
-                            >
+                            <li className="py-4" key={index}>
                                 {feature}
                             </li>
                         )

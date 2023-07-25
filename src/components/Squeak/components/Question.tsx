@@ -1,201 +1,256 @@
-import React, { useState } from 'react'
+import React, { useState, createContext, useEffect, useContext } from 'react'
+import { Replies } from './Replies'
+import { Profile } from './Profile'
+import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
+import Days from './Days'
+import Markdown from './Markdown'
+import { QuestionForm } from './QuestionForm'
+import { useQuestion } from '../hooks/useQuestion'
+import QuestionSkeleton from './QuestionSkeleton'
+import SubscribeButton from './SubscribeButton'
+import Link from 'components/Link'
+import { useUser } from 'hooks/useUser'
+import { Archive, Pin, Undo } from 'components/NotProductIcons'
+import Tooltip from 'components/Tooltip'
+import { Listbox } from '@headlessui/react'
+import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
+import { Check2 } from 'components/Icons'
 
-import { useOrg } from '../hooks/useOrg'
-import { useQuestion, Provider as QuestionProvider } from '../hooks/useQuestion'
-import Avatar from './Avatar'
-import QuestionForm from './QuestionForm'
-import Reply from './Reply'
-
-const getBadge = (questionAuthorId: string, replyAuthorId: string, replyAuthorRole: string) => {
-    if (replyAuthorRole === 'admin' || replyAuthorRole === 'moderator') {
-        return 'Moderator'
-    }
-
-    if (!questionAuthorId || !replyAuthorId) {
-        return null
-    }
-
-    return questionAuthorId === replyAuthorId ? 'Author' : null
+type QuestionProps = {
+    // TODO: Deal with id possibly being undefined at first
+    id: number | string
+    question?: StrapiRecord<QuestionData>
+    expanded?: boolean
+    showSlug?: boolean
 }
 
-const Collapsed = ({ setExpanded }: { setExpanded: (expanded: boolean) => void }) => {
-    const { replies, resolvedBy, questionAuthorId } = useQuestion()
-    const reply = replies[replies.findIndex((reply: any) => reply?.id === resolvedBy)] || replies[replies.length - 1]
-    const replyCount = replies.length - 2
-    const maxAvatars = Math.min(replyCount, 3)
-    const replyAuthorMetadata = reply?.profile?.profiles_readonly?.[0] || reply?.profile?.metadata?.[0]
+export const CurrentQuestionContext = createContext<any>({})
 
-    const badgeText = getBadge(questionAuthorId, reply?.profile?.id, replyAuthorMetadata?.role)
+const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
+    const { pinTopics } = useContext(CurrentQuestionContext)
+    const [topicGroups, setTopicGroups] = useState([])
+    const [selectedTopics, setSelectedTopics] = useState<StrapiRecord<TopicData>[]>([])
 
-    const avatars: any[] = []
-
-    for (let reply of replies.slice(1)) {
-        if (avatars.length >= maxAvatars) break
-        const avatar = reply?.profile?.avatar
-        if (avatar && !avatars.includes(avatar)) {
-            avatars.push(avatar)
-        }
+    const handleChange = async (topics: StrapiRecord<TopicData>[]) => {
+        setSelectedTopics(topics)
+        await pinTopics(topics.map((topic) => topic.id))
     }
 
-    if (avatars.length < maxAvatars) {
-        avatars.push(...Array(maxAvatars - avatars.length))
-    }
+    useEffect(() => {
+        fetchTopicGroups().then((topicGroups) => {
+            setTopicGroups(topicGroups)
+            const selectedTopics: StrapiRecord<TopicData>[] = []
+            topicGroups.forEach(({ attributes: { topics } }) => {
+                topics.data.forEach((topic) => {
+                    if (props.selectedTopics.data.some((selectedTopic) => selectedTopic.id === topic.id)) {
+                        selectedTopics.push(topic)
+                    }
+                })
+            })
+            setSelectedTopics(selectedTopics)
+        })
+    }, [])
 
     return (
-        <>
-            <li>
-                <div className="squeak-other-replies-container">
-                    {avatars.map((avatar) => {
-                        return (
-                            <Avatar
-                                key={`${reply?.message_id}-${reply?.id}-${reply?.profile?.id}-${avatar}`}
-                                image={avatar}
-                            />
-                        )
-                    })}
+        <div className="relative">
+            <Listbox value={selectedTopics} onChange={handleChange} multiple>
+                <Listbox.Button className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold">
+                    <Tooltip content={() => <div style={{ maxWidth: 320 }}>Pin thread</div>}>
+                        <span className="flex items-center h-6 justify-center">
+                            <Pin className="w-5 h-5" />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                                />
+                            </svg>
+                        </span>
+                    </Tooltip>
+                </Listbox.Button>
+                {topicGroups?.length > 0 && (
+                    <Listbox.Options
+                        className={`list-none p-0 m-0 absolute z-20 bg-white dark:bg-gray-accent-dark-hover max-h-[500px] overflow-auto shadow-md rounded-md divide-y divide-light dark:divide-dark mt-2`}
+                    >
+                        {topicGroups
+                            .sort(
+                                (a, b) =>
+                                    topicGroupsSorted.indexOf(a?.attributes?.label) -
+                                    topicGroupsSorted.indexOf(b?.attributes?.label)
+                            )
+                            .map(({ attributes: { label, topics } }) => {
+                                return (
+                                    <div key={label}>
+                                        <h5 className="!m-0 py-2 px-4 text-sm sticky top-0 bg-white dark:bg-gray-accent-dark-hover whitespace-nowrap">
+                                            {label}
+                                        </h5>
+                                        {topics?.data.map((topic) => {
+                                            const active = selectedTopics.some(
+                                                (selectedTopic) => selectedTopic.id === topic.id
+                                            )
+                                            return (
+                                                <Listbox.Option key={topic.id} value={topic}>
+                                                    <div
+                                                        className={`${
+                                                            active ? 'font-semibold' : ''
+                                                        } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
+                                                    >
+                                                        <span className="flex-shrink-0 w-3">
+                                                            {active && <Check2 />}
+                                                        </span>
 
-                    <button className="squeak-other-replies" onClick={() => setExpanded(true)}>
-                        View {replyCount} other {replyCount === 1 ? 'reply' : 'replies'}
-                    </button>
-                </div>
-            </li>
-
-            <li
-                key={reply?.id}
-                className={`${resolvedBy === reply?.id ? 'squeak-solution' : ''} ${
-                    !reply?.published ? 'squeak-reply-unpublished' : ''
-                }`}
-            >
-                <Reply className="squeak-post-reply" {...reply} badgeText={badgeText} />
-            </li>
-        </>
+                                                        <span>{topic.attributes.label}</span>
+                                                    </div>
+                                                </Listbox.Option>
+                                            )
+                                        })}
+                                    </div>
+                                )
+                            })}
+                    </Listbox.Options>
+                )}
+            </Listbox>
+        </div>
     )
 }
 
-const Expanded = () => {
-    const question = useQuestion()
-    const replies = question.replies?.slice(1)
-    const { resolvedBy, questionAuthorId } = question
+export const Question = (props: QuestionProps) => {
+    const { id, question, showSlug } = props
+    const [expanded, setExpanded] = useState(props.expanded || false)
+    const { user } = useUser()
+
+    // TODO: Default to question data if passed in
+    const {
+        question: questionData,
+        isLoading,
+        isError,
+        error,
+        reply,
+        handlePublishReply,
+        handleResolve,
+        handleReplyDelete,
+        archive,
+        pinTopics,
+    } = useQuestion(id, { data: question })
+
+    if (isLoading) {
+        return <QuestionSkeleton />
+    }
+
+    if (isError) {
+        return <div>Error: {JSON.stringify(error)}</div>
+    }
+
+    if (!questionData) {
+        return <div>Question not found</div>
+    }
+
+    const archived = questionData?.attributes.archived
+    const slugs = questionData?.attributes?.slugs
 
     return (
-        <>
-            {replies.map((reply: any) => {
-                const replyAuthorMetadata = reply?.profile?.profiles_readonly?.[0] || reply?.profile?.metadata?.[0]
+        <CurrentQuestionContext.Provider
+            value={{
+                question: { id, ...(questionData?.attributes ?? {}) },
+                handlePublishReply,
+                handleResolve,
+                handleReplyDelete,
+                pinTopics,
+            }}
+        >
+            <div>
+                {archived && (
+                    <div className="font-medium text-sm m-0 mb-6 bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 rounded text-center">
+                        <p className="font-bold !m-0 !p-0">The following thread has been archived.</p>
+                        <p className="!text-sm !m-0">
+                            It's likely out of date, no longer relevant, or the answer has been added to our{' '}
+                            <Link to="/docs">documentation</Link>.
+                        </p>
+                    </div>
+                )}
+                <div className={`flex flex-col w-full`}>
+                    <div className="flex items-center space-x-2 w-full">
+                        <Profile
+                            profile={questionData.attributes.profile?.data}
+                            className={archived ? 'opacity-50' : ''}
+                        />
+                        <Days created={questionData.attributes.createdAt} />
+                        <div className="!ml-auto flex space-x-2">
+                            {user?.role?.type === 'moderator' && (
+                                <>
+                                    {!archived && <TopicSelect selectedTopics={questionData.attributes.pinnedTopics} />}
+                                    <button
+                                        onClick={() => archive(!archived)}
+                                        className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
+                                    >
+                                        {!archived ? (
+                                            <Tooltip
+                                                content={() => <div style={{ maxWidth: 320 }}>Archive thread</div>}
+                                            >
+                                                <span className="flex w-6 h-6">
+                                                    <Archive />
+                                                </span>
+                                            </Tooltip>
+                                        ) : (
+                                            <Tooltip
+                                                content={() => <div style={{ maxWidth: 320 }}>Restore thread</div>}
+                                            >
+                                                <span className="flex w-6 h-6">
+                                                    <Undo />
+                                                </span>
+                                            </Tooltip>
+                                        )}
+                                    </button>
+                                </>
+                            )}
+                            {!archived && <SubscribeButton contentType="question" id={questionData?.id} />}
+                        </div>
+                    </div>
 
-                const badgeText = getBadge(questionAuthorId, reply?.profile?.id, replyAuthorMetadata?.role)
+                    <div className={archived ? 'opacity-50' : ''}>
+                        <div className="ml-5 pl-[30px] border-l border-light dark:border-dark">
+                            <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
+                                <Link
+                                    to={`/questions/${questionData.attributes.permalink}`}
+                                    className="no-underline font-semibold text-black dark:text-white hover:text-black dark:hover:text-white"
+                                >
+                                    {questionData.attributes.subject}
+                                </Link>
+                            </h3>
 
-                return (
-                    <li
-                        key={reply.id}
-                        className={`${resolvedBy === reply.id ? 'squeak-solution' : ''} ${
-                            !reply.published ? 'squeak-reply-unpublished' : ''
+                            <Markdown className="question-content">{questionData.attributes.body}</Markdown>
+
+                            {showSlug && slugs?.length > 0 && slugs[0]?.slug !== '/questions' && (
+                                <p className="text-xs text-primary/60 dark:text-primary-dark/60 pb-4 mb-0 mt-1">
+                                    <span>Originally posted on</span>{' '}
+                                    <Link
+                                        to={slugs[0]?.slug}
+                                        className="text-primary/60 dark:text-primary-dark/60 font-medium"
+                                    >
+                                        https://posthog.com{slugs[0]?.slug}
+                                    </Link>
+                                </p>
+                            )}
+                        </div>
+
+                        <Replies expanded={expanded} setExpanded={setExpanded} />
+                    </div>
+                    <div
+                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${
+                            archived ? 'opacity-25' : ''
                         }`}
                     >
-                        <Reply className="squeak-post-reply" {...reply} badgeText={badgeText} />
-                    </li>
-                )
-            })}
-        </>
-    )
-}
-
-const Replies = ({ expanded, setExpanded }: { expanded: boolean; setExpanded: (expanded: boolean) => void }) => {
-    const { resolved, replies, onSubmit, question } = useQuestion()
-
-    return (
-        <>
-            {replies && replies.length - 1 > 0 && (
-                <ul className={`squeak-replies ${resolved ? 'squeak-thread-resolved' : ''}`}>
-                    {expanded || replies.length <= 2 ? <Expanded /> : <Collapsed setExpanded={setExpanded} />}
-                </ul>
-            )}
-            {resolved ? (
-                <div className="squeak-locked-message">
-                    <p>This thread has been closed</p>
+                        <QuestionForm archived={archived} questionId={questionData.id} formType="reply" reply={reply} />
+                    </div>
                 </div>
-            ) : (
-                <div className="squeak-reply-form-container">
-                    {/* @ts-ignore */}
-                    <QuestionForm onSubmit={onSubmit} messageID={question.id} formType="reply" />
-                </div>
-            )}
-        </>
+            </div>
+        </CurrentQuestionContext.Provider>
     )
-}
-
-type Reply = {
-    id: string
-    profile: Record<string, any>
-    created_at: string
-    body: string
-    badgeText: string
-    published: boolean
-}
-
-type Question = {
-    id: string
-    subject: string
-    permalink: string | null
-    published: boolean
-    replies: Reply[]
-}
-
-export type QuestionProps = {
-    onSubmit: (question: any) => void
-    onResolve: (resolved: boolean, replyId: string | null) => void
-    apiHost: string
-    question?: Question
-}
-
-export default function Question({ onSubmit, onResolve, apiHost, ...other }: QuestionProps) {
-    const [expanded, setExpanded] = useState(false)
-    const [question, setQuestion] = useState(other?.question)
-    const [replies, setReplies] = useState(other?.question?.replies || [])
-    const [firstReply] = replies
-
-    const {
-        organizationId,
-        config: { permalink_base, permalinks_enabled },
-    } = useOrg()
-
-    /*const getQuestion = async () => {
-    const permalink = window.location.pathname
-    // @ts-ignore
-    const { response, data: question } =
-      (await get(apiHost, '/api/question', {
-        organizationId,
-        permalink
-      })) || {}
-
-    if (response?.status !== 200) return null
-
-    return question
-  }
-
-  useEffect(() => {
-    if (!question && permalink_base) {
-      getQuestion().then((question) => {
-        setQuestion(question?.question)
-        setReplies(question?.replies || [])
-      })
-    }
-  }, [organizationId, question, permalink_base])
-
-  useEffect(() => {
-    setQuestion(other?.question)
-  }, [other?.question])*/
-
-    return question ? (
-        <div className="squeak-question-container">
-            <Reply
-                permalink={permalinks_enabled && question?.permalink && `/${permalink_base}/${question?.permalink}`}
-                className="squeak-post"
-                subject={question.subject}
-                {...firstReply}
-            />
-            <QuestionProvider onSubmit={onSubmit} question={question} replies={replies} onResolve={onResolve}>
-                <Replies expanded={expanded} setExpanded={setExpanded} />
-            </QuestionProvider>
-        </div>
-    ) : null
 }

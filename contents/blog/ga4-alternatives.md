@@ -1,5 +1,5 @@
 ---
-date: 2022-10-19
+date: 2023-04-17
 title: The best GA4 alternatives for apps and websites
 rootPage: /blog
 sidebar: Blog
@@ -9,10 +9,9 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/ImcNUnqDoUQ
 category: General
 tags:
-  - Guides
-  - Comparisons
 ---
 
 In July 2023, Google will sunset Universal Analytics (UA), forcing users to switch to Google Analytics 4 (GA4) or another provider.
@@ -57,7 +56,7 @@ The following GA4 alternatives all solve one or more of these issues. Some provi
 
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-- **Best for:** Mobile and desktop apps
+- **Best for:** Mobile and web apps
 - **Tracking method:** Event-based
 - **GDPR compliance:** <span className="text-green text-lg">✔</span> (via self-hosting or EU Cloud)
 - **GA data import:** <span className="text-red text-lg">✖</span>
@@ -578,3 +577,91 @@ Unsurprisingly, Piwik PRO's roots in Matomo make it a popular choice for users w
 #### Verdict
 
 There isn't much to choose between Fathom and the other privacy-first option on this list, Plausible. Again, if you want lightweight website analytics without the feature bloat of Google, you can't go wrong with Fathom.
+
+### Counter
+
+![counter](../images/blog/ga4-alternatives/counter.png)
+
+- **Best for:** Content and personal websites
+- **Tracking method:** Session-based
+- **GDPR compliance:** <span className="text-green text-lg">✔</span>
+- **GA data import:** <span className="text-red text-lg">✖</span>
+
+[Counter](https://counter.dev/) is a free and open source analytics tool that operates a "pay what you want" model. It's by no means a feature-complete alternative to GA4, but it's ideal if you just want to track basic website activity like visits, referral data, and user properties (device, platform, browser etc.).
+
+Counter's creators can offer it for free because it only collects aggregated data, reducing the complexity and load on the server, while also improving data privacy. To count unique users, Counter uses a combination of techniques including the browser's cache, `sessionStorage`, and referrer inspection. As a result, less data is saved to the database, and it's impossible to connect single page views to a user identity.
+
+#### Counter vs Google Analytics 4
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+	<thead>
+    	<tr>
+        	<td className="w-3/12"></td>
+        	<td className="w-3/12 text-center"><strong>Google Analytics 4</strong></td>
+        	<td className="w-3/12 text-center"><strong>Counter</strong></td>
+    	</tr>
+	</thead>
+	<tbody>
+		<tr>
+        	<td>Website analytics</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+		<tr>
+        	<td>Funnels</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>User Paths</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+          <td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>Retention</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+       	<td>Revenue tracking</td>
+      		<td className="text-center"><span className="text-green text-lg">✔</span></td>
+       	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>User profiles</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+   		</tr>
+    	<tr>
+        	<td>Cohort analysis</td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>A/B testing</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>Session recording</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+    	<tr>
+        	<td>Feature flags</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+    	</tr>
+		<tr>
+        	<td>Self-hosting</td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
+        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+    	</tr>
+	</tbody>
+</table>
+</div>
+
+#### Verdict
+
+Counter is a great choice if you have basic needs. It does most of the things the popular privacy-first analytics tools offer, but does so for free. The simple interface is easy to understand, though it doesn't allow you to drill down deeply into individual page performance like Fathom or Plausible.

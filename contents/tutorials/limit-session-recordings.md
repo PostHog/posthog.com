@@ -5,14 +5,14 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-17.png
-tags: ["session recording", "configuration"]
+tags: ["session replay", "configuration"]
 ---
 
-Session recordings help you get a deep understanding of how users are using your product. We strongly recommend them for [early-stage startups](/blog/early-stage-analytics), but as you scale the number of recordings can go beyond what you need.
+Session replays help you get a deep understanding of how users are using your product. We strongly recommend them for [early-stage startups](/blog/early-stage-analytics), but as you scale the number of recordings can go beyond what you need.
 
-Instead of turning session recordings off entirely, you can use PostHog’s configuration options to only record the sessions you want. This tutorial shows you three ways to do this. 
+Instead of turning session replays off entirely, you can use PostHog’s configuration options to only record the sessions you want. This tutorial shows you three ways to do this. 
 
-## Configuration and basic session recording controls
+## Configuration and basic session replay controls
 
 In order to follow this tutorial, you need to set `disable_session_recording` to `true` in PostHog's initialization. For example, in a Next.js app, this looks like this:
 
@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }) {
 }
 ```
 
-You can then use PostHog’s `startSessionRecording()` method to trigger a session recording at the right moment. As a basic example, we can use the initialization `loaded` method to start a session recording when the environment isn’t set to `development`.
+You can then use PostHog’s `startSessionRecording()` method to trigger a session replay at the right moment. As a basic example, we can use the initialization `loaded` method to start a session replay when the environment isn’t set to `development`.
 
 ```js
 //...
@@ -88,11 +88,33 @@ export default function Home() {
 }
 ```
 
+### Evaluating the flag on load
+
+If you want to evaluate flags as soon as PostHog loads, you can use the `loaded` method in the initialization options. Make sure to use the `onFeatureFlags` method to ensure flags are loaded before evaluating it.
+
+```js
+// pages/_app.js
+if (typeof window !== 'undefined') {
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    disable_session_recording: true,
+    loaded: (posthog) => {
+      posthog.onFeatureFlags((flags) => {
+        if (posthog.isFeatureEnabled('record-na')) posthog.startSessionRecording()
+      })
+    }
+  })
+}
+//...
+```
+
+> **Note:** When evaluating flags for a new user, person properties won't be available until ingestion. This means flags depending on person properties won't evaluate correctly if done in the `loaded` method. GeoIP properties (like continent code, country, and city name) will work because they don't depend on ingestion. To make flags with person properties work here, use bootstrapping.
+
 ## Record on specific pages
 
 You can start recordings on specific pages by calling `startSessionRecording()` when those pages first load.
 
-Using the router, you can check which page users are going to and set session recordings to start once they route to the page you want.
+Using the router, you can check which page users are going to and set session replays to start once they route to the page you want.
 
 ```js
 import { useEffect } from "react"
@@ -144,5 +166,5 @@ This is useful if you want to record specific parts or paths on a page such as:
 ## Further reading
 
 - [How to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
-- [How to use session recordings to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
-- [How to use session recordings to improve your support experience](/tutorials/session-recordings-for-support)
+- [How to use session replays to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
+- [How to use session replays to improve your support experience](/tutorials/session-recordings-for-support)

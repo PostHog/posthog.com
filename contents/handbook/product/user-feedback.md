@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> 😍 Want to share feedback? [File a GitHub issue](https://github.com/PostHog) or reach out on [Slack](/slack). **We're always happy to hear from you!**
+> 😍 Want to share feedback? [File a GitHub issue](https://github.com/PostHog) or [reach out directly](https://app.posthog.com/home#supportModal). **We're always happy to hear from you!**
 
 We actively seek (outbound) input in everything we work on. In addition to having multiple channels to continuously receive inbound feedback, we generally do active outbound feedback requests for:
 - General product and experience feedback. Continuous effort to gather general feedback on the product and their holistic experience with PostHog are led by the PMs supporting the team.

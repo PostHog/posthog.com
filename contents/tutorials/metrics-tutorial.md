@@ -66,7 +66,7 @@ With our [JavaScript Library](/docs/integrate/client/js), this might look someth
 ```js
 const login = (userEmail, userPassword, userCompanyName) => {
     /* Your authentication logic here */
-    posthog.people.set({
+    posthog.setPersonProperties({
         email: userEmail
         company: userCompanyName
     })
@@ -239,7 +239,7 @@ Depending on your type of product, you may also want to provide usage metrics fo
 
 If you serve a few large enterprise clients, you can do this via setting up personalized dashboards for each client, which you can share with them as a customized report of their performance. This can be a premium service you provide to top clients, giving them valuable insights as to how your product has impacted their metrics.
 
-However, to do this dynamically, you can also use our [API](/docs/api/overview) to pull relevant data that you then display to your clients as you wish. This is yet to be documented as an established use-case, but our team will be happy to help you set this up if it is something you think would be particularly valuable to you. You can contact us on [Slack](/slack) for more information.
+However, to do this dynamically, you can also use our [API](/docs/api/overview) to pull relevant data that you then display to your clients as you wish. This is yet to be documented as an established use-case, but our team will be happy to help you set this up if it is something you think would be particularly valuable to you. You can [contact us](https://app.posthog.com/home#supportModal) for more information.
 
 ### Conversion and retention
 

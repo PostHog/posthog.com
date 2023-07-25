@@ -44,22 +44,23 @@ export const AboutTeam = () => {
             </h4>
 
             <div className="text-center mb-4">
-                <CallToAction to="/handbook/company/team" type="secondary">
+                <CallToAction to="/team" type="secondary">
                     Meet the team
                 </CallToAction>
             </div>
 
             <div className="relative text-center py-14 md:py-28">
                 <div className="absolute inset-1/2 scale-[.4] sm:scale-[.6] md:scale-100">
-                    {teamMembers.nodes.map(({ frontmatter: { name, country, headshot } }, index) => {
+                    {teamMembers.nodes.map(({ firstName, lastName, country, avatar }, index) => {
                         const styles = avatarStyles[index]
+                        const name = [firstName, lastName].filter(Boolean).join(' ')
                         return (
                             <Avatar
                                 key={name}
                                 size={styles.size}
                                 className={styles.className}
                                 color={styles.color}
-                                image={headshot}
+                                image={avatar?.url}
                                 name={name}
                                 country={country}
                             />
@@ -76,36 +77,21 @@ export const AboutTeam = () => {
 
 const query = graphql`
     {
-        teamMembers: allMdx(
+        teamMembers: allSqueakProfile(
             filter: {
-                fields: { slug: { regex: "/^/team/" } }
-                frontmatter: {
-                    name: {
-                        in: [
-                            "Li Yi Yu"
-                            "Neil Kakkar"
-                            "Yakko Majuri"
-                            "Eric Duong"
-                            "Marius Andra"
-                            "Lottie Coxon"
-                            "Coua Phang"
-                            "Guido Iaquinti"
-                            "Cameron DeLeone"
-                        ]
-                    }
+                lastName: {
+                    in: ["Yi Yu", "Kakkar", "Majuri", "Duong", "Andra", "Coxon", "Phang", "Obermüller", "DeLeone"]
                 }
+                teams: { data: { elemMatch: { attributes: { name: { ne: null } } } } }
             }
-            sort: { fields: frontmatter___startDate }
+            sort: { fields: startDate }
         ) {
             nodes {
-                frontmatter {
-                    country
-                    name
-                    headshot {
-                        childImageSharp {
-                            gatsbyImageData(placeholder: NONE)
-                        }
-                    }
+                country
+                firstName
+                lastName
+                avatar {
+                    url
                 }
             }
         }

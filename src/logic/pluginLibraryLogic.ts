@@ -4,9 +4,11 @@ import { actionToUrl, urlToAction } from 'kea-router'
 import { pluginInstallationMd } from '../pages-content/plugin-installation'
 import { getPluginImageSrc } from '../lib/utils'
 
+import type { pluginLibraryLogicType } from './pluginLibraryLogicType'
+
 export const toPathName = (pluginName: string) => pluginName.toLowerCase().replace(/ /g, '-')
 
-export const pluginLibraryLogic = kea([
+export const pluginLibraryLogic = kea<pluginLibraryLogicType>([
     actions({
         setFilter: (filter) => ({ filter }),
         setActivePlugin: (activePlugin) => ({ activePlugin }),

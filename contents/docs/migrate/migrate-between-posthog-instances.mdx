@@ -6,7 +6,7 @@ showTitle: true
 
 import MigratingEvents from "./snippets/migrating-events.mdx"
 
-> If you're attempting this migration, feel free to ask questions and provide feedback via the [PostHog Communty Slack workspace](/slack) or [a GitHub issue](https://github.com/PostHog/posthog.com/issues).
+> If you're attempting this migration and having trouble, feel free to [ask a question in our community](/questions/topic/migration) or [raise a support ticket in the app](https://app.posthog.com/home#supportModal). 
 
 ## Requirements
 
@@ -23,6 +23,13 @@ This migration has two parts:
      2. "created by" information. Every object will appear as if it was created by you.
      3. "created at" information. Every object will appear as if it was created on the time you ran this script.
 
+## Step-by-step migration video tutorial
+
+<iframe
+  src="https://www.youtube-nocookie.com/embed/INFtGMraiBg"
+  className="rounded shadow-xl"
+/>
+
 ## Migrate your events
 
 <MigratingEvents/>
@@ -38,7 +45,7 @@ Follow the instructions on the [PostHog migrate metadata repo](https://github.co
 2. Install the dependencies by running `yarn`
 3. Run the script
     ```bash
-    ts-node --source [posthog instance you want to migrate from] --sourcekey [personal api key for that instance] --destination [posthog instance you want to migrate to.] --destinationkey [personal api key for destination instance]
+    ts-node index.ts --source [posthog instance you want to migrate from] --sourcekey [personal api key for that instance] --destination [posthog instance you want to migrate to.] --destinationkey [personal api key for destination instance]
     ```
 
 For more information on the options see the [repo's readme](https://github.com/PostHog/posthog-migrate-meta)

@@ -96,4 +96,5 @@ It worked for us:
 
 ![PostHog's revenue going sharply up and to the right](../images/blog/pricing-lesson/revenue-pricing.png)
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+

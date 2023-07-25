@@ -3,7 +3,7 @@ title: A primer on using GitHub at PostHog
 showTitle: true
 ---
 
-<blockquote><p>If you’re new to GitHub, it can be a little confusing. (Heck, I’ve been using GitHub for years and it’s <em>still</em> confusing.) It doesn’t have the best search and notifications can get out of hand — and in general, it can be really intimidating to join a company that uses a tool you’ve never used before as its primary means of communication.</p><p>I wrote this guide to help explain how we work, and how to stay on top of the volume of information that flows through our team's organization on GitHub.</p><p><em>- <a href="/handbook/company/team#cory-watilo-lead-designer">Cory Watilo</a>, Lead Designer</em></p><p>P.S. Have questions? Feel free to file an issue on GitHub - I explain how to do this <a href="/handbook/company/new-to-github#filing-an-issue">later in the article</a>!</p></blockquote>
+<blockquote><p>If you’re new to GitHub, it can be a little confusing. (Heck, I’ve been using GitHub for years and it’s <em>still</em> confusing.) It doesn’t have the best search and notifications can get out of hand — and in general, it can be really intimidating to join a company that uses a tool you’ve never used before as its primary means of communication.</p><p>I wrote this guide to help explain how we work, and how to stay on top of the volume of information that flows through our team's organization on GitHub.</p><p><em>- <a href="/community/profiles/2">Cory Watilo</a>, Lead Designer</em></p><p>P.S. Have questions? Feel free to file an issue on GitHub - I explain how to do this <a href="/handbook/company/new-to-github#filing-an-issue">later in the article</a>!</p></blockquote>
 
 ## Key concepts
 

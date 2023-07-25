@@ -41,6 +41,7 @@ To prevent us going down the wrong path with deals like these, we follow 4 simpl
 We'd typically define a deal as a large deal if it has most of the following:
 
 - The customer puts us through a lengthy procurement process (3+ months)
+
 - The customer wants us to build new features
 - There are multiple stakeholders on the customer side, some or all of whom are not engineers
 - The deal is larger than $250k/year

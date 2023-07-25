@@ -1,0 +1,43 @@
+---
+title: Using Next.js middleware as a reverse proxy
+sidebar: Docs
+showTitle: true
+---
+
+If you are using Next.js and [rewrites aren't working for you](/docs/advanced/proxy/nextjs), you can write custom middleware to proxy requests to PostHog. 
+
+To do this using the app directory, create a file named `middleware.js` in your base directory (same level as the `app` folder). In this file, set up code to match requests to a custom route, set a new `host` header, change the URL to point to PostHog, and rewrite the response.
+
+```js
+import { NextResponse } from 'next/server'
+ 
+export function middleware(request) {
+
+  const hostname = 'app.posthog.com' // or 'eu.posthog.com'
+
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('host', hostname)
+
+  let url = request.nextUrl.clone()
+  url.protocol = 'https'
+  url.hostname = hostname
+  url.port = 443
+  url.pathname = url.pathname.replace(/^\/ingest/, '');
+
+  return NextResponse.rewrite(url, {
+    headers: requestHeaders,
+  })
+}
+ 
+export const config = {
+  matcher: '/ingest/:path*',
+}
+```
+
+Once done, configure the PostHog client to send requests via your rewrite.
+
+```js
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+ api_host: "https://your-host.com/ingest"
+})
+```

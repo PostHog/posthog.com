@@ -26,8 +26,6 @@ devolves into this...
 
 ...and what we're building at PostHog to make this mess less painful for growing startups.
 
-TL;DR: The so-called "modern data stack" sucks, especially for startups. We want to fix that.
-
 ## The MVP data stack
 
 When a product is forming, data needs and collection is straightforward. A typical pre-product-market fit startup doesn't need many tools. We call this the MVP data stack.
@@ -47,11 +45,11 @@ To do this, they use:
 
 ![MVP](../images/blog/modern-data-stack-sucks/mvp.png)
 
-At this stage, startups usually go with the "popular" tools because they are [boring technologies](https://mcfunley.com/choose-boring-technology) that work for others. Complicated solutions aren’t needed, and teams can spend their time building.
+At this stage, startups usually go with the most popular tools because they are [boring technologies](https://mcfunley.com/choose-boring-technology) that work for others. Complicated solutions aren’t needed, and teams can spend their time building.
 
 ## The Seed stage data stack
 
-Your data needs start to spiral once you reach the Seed stage – as does the complexity and number of tools you need. Why? Because it's less obvious how to spend your time and resources. Typical questions at this stage include:
+Your data needs start to spiral once you reach Seed stage – as does the complexity and number of tools you need. Why? Because it's less obvious how to spend your time and resources. Typical questions at this stage include:
 
 - What features should we prioritize developing?
 - How do we best serve our [ideal customer](/blog/creating-ideal-customer-profile)?
@@ -60,7 +58,7 @@ Your data needs start to spiral once you reach the Seed stage – as does the co
 
 To answer these questions, you need to pull data from a growing number of sources - product analytics, CRM, help desk, ad platform, payment processors, and more. You also begin to utilize more of the features of these sources, such as customer engagement and session recordings, generating even more data.
 
-This is where [customer data platforms](/docs/integrate/cdp) (CDPs) like Segment or RudderStack come in. CDPs make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and revenue data from Stripe, and send it back to those same tools, a warehouse, or a business intelligence tool like Hex.
+This is where customer data platforms (CDPs) like Segment or RudderStack come in. CDPs make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and revenue data from Stripe, and send it back to those same tools or a warehouse for use with a business intelligence tool like Hex.
 
 ![Seed](../images/blog/modern-data-stack-sucks/seed.png)
 
@@ -76,10 +74,10 @@ Moving from individual sources to a CDP makes gathering and distributing data fa
 
 Series A is where data begins to get serious. By serious, I mean:
 
-1. you need someone responsible for the data stack – normally a head of data, data engineer, or a backend engineer
-2. accuracy becomes a key objective
+1. You need someone responsible for the data stack – normally a head of data, data engineer, or a backend engineer
+2. Accuracy becomes a key objective
 
-Whoever gets the thankless responsibility of the data stack see their goal as empowering engineers with data to evaluate the success of what they build. To do this, they implement the so-called "modern data stack" which contains:
+Whoever gets the thankless responsibility of maintaining the data stack sees their goal as empowering engineers with data to evaluate the success of what they build. To do this, they implement the so-called "modern data stack" which contains:
 
 1. A data warehouse to store all the data and act as a single source of truth. Options include Snowflake, BigQuery, and RedShift.
 
@@ -95,7 +93,7 @@ Whoever gets the thankless responsibility of the data stack see their goal as em
 
 Startups need this stack because managing and accessing individual sources of data becomes unsustainable. Tools like analytics and the CDP don't give complete insight into performance. Teams need a reliable, single source of truth they trust. They hope the modern data stack gives them that.
 
-The problem with the modern data stack is that it often fails the people it was originally meant to serve. It creates a gap between engineers and the data that is valuable to them. They are unable to "self-serve" and must learn the modern data stack tools, or rely on the data team for insights. There are many reasons for this:
+The problem with the modern data stack is that it often fails the people it was originally meant to serve. **It creates a gap between engineers and the data that is valuable to them.** They are unable to self-serve and must learn the modern data stack tools, or rely on the data team for insights. There are many reasons for this:
 
 - The complexity of data and tools requires specialization.
 - Data security, safety, and privacy requirements.
@@ -103,9 +101,9 @@ The problem with the modern data stack is that it often fails the people it was 
 
 For example, engineers might need to write optimized SQL queries to understand customer feature usage. This requires an understanding of SQL, data availability, data structure, as well as access. All this does is slow down their work, blocking them from shipping new features and improvements efficiently.
 
-## How we are fixing the "modern data stack"
+## How we are fixing the modern data stack
 
-If you haven't figured it out already, we're not fans of this situation. To us, the "modern data stack" creates barriers to building successful products. We want to streamline how startups gather and analyze data at the earliest stages, consolidate more of the stack as they scale, and keep data close to the people who need and use it.
+If you haven't figured it out already, we're not fans of this situation. To us, the modern data stack creates barriers to building successful products. We want to streamline how startups gather and analyze data at the earliest stages, consolidate more of the stack as they scale, and keep data close to the people who need and use it.
 
 We want to make it easy to evaluate whether products are working or not. Key to this is the ability for engineers to find and analyze the data they want, along with tools like experiments and session recordings. The modern data stack creates complexity and silos that make figuring out what to work on and what’s working unnecessarily difficult.
 
@@ -114,7 +112,7 @@ We want to make it easy to evaluate whether products are working or not. Key to 
 To change this, we are improving PostHog as a [customer data platform (CDP)](https://github.com/PostHog/posthog/issues/13126). We built the key functionality, such as the ability to:
 
 - Receive data from your app(s) and site(s) with our [SDKs](/docs/integrate?tab=sdks)
-- Receive data from sources like [Stripe](/apps/stripe-connector), [Hubspot](/apps/hubspot-connector), [Intercom](/apps/intercom)
+- Receive data from sources like [Hubspot](/apps/hubspot-connector), [Intercom](/apps/intercom)
 - Export to destinations such as [Snowflake](/apps/snowflake-export), [BigQuery](/apps/bigquery-export), or [RedShift](/apps/redshift-export)
 
 Improving reliability, integrations, and UX is critical for success here. Being a CDP gives startups access to their data and tools in one place with PostHog. More data also improves the depth of insights engineers can get from PostHog without having to use other tools such as BI or visualization.
@@ -123,7 +121,7 @@ Improving reliability, integrations, and UX is critical for success here. Being 
 
 ### Building a data warehouse
 
-To do one better, we are also working on making PostHog a data warehouse. This means storing and using arbitrary data from many different sources, scaling this up to users needs, and integrating with traditional data warehousing tools. Our team [built this](https://github.com/PostHog/posthog/pull/14915) at our Aruba hackathon.
+To go one better, we are also working on making PostHog a data warehouse. This means storing and using arbitrary data from many different sources, scaling this up to users needs, and integrating with traditional data warehousing tools. Our team [built this](https://github.com/PostHog/posthog/pull/14915) at our last Hackathon.
 
 It consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like Stripe, Hubspot, Intercom, and more along with data from PostHog. 
 

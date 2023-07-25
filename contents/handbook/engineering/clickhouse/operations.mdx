@@ -183,10 +183,10 @@ To restart ingestion, recreate the dropped table(s).
 
 ### Changing table engines
 
-When changing table engines, you can leverage [`ALTER PARTITION`](https://clickhouse.com/docs/en/sql-reference/statements/alter/partition/)
+When changing table engines, you can leverage [`ATTACH PARTITION`](https://clickhouse.com/docs/en/sql-reference/statements/alter/partition/)
 commands to move data between tables.
 
-**Note:** ALTER PARTITION commands only work if the two tables have identical structure: same columns and ORDER BY/PARTITION BY. It works by
+**Note:** ATTACH PARTITION commands only work if the two tables have identical structure: same columns and ORDER BY/PARTITION BY. It works by
 creating hard links between partitions, so the operation does not require any extra disk space until merges happen.
 
 Thus it's important to stop ingesting new data and merges during this operation.
@@ -238,6 +238,109 @@ would have required expensive deduplication, a lot of extra space and even more 
 Learn more on this:
 - [0007_persons_and_groups_on_events_backfill.py](https://github.com/PostHog/posthog/blob/7aaa6ef710daadc7e8324ffe62ea1f89ee96d199/posthog/async_migrations/migrations/0007_persons_and_groups_on_events_backfill.py)
 - [Altinity knowledge base: Column backfilling with alter/update using a dictionary](https://kb.altinity.com/altinity-kb-schema-design/backfill_column/)
+
+
+## Useful information for cluster admins
+
+### Detached materialized views
+
+If you ever `DETACH` a materialized view, it's important to keep in mind that the view now exists in a "limbo" state that can be confusing and cause issues.
+
+Detached views don't show up on `system.tables`, but you can assert that a view exists by running `SHOW CREATE TABLE <detached_mv>`. 
+
+In addition, detached views (except if `DETACH` was executed with `PERMANENTLY`) will be reattached on server restarts! 
+
+As an example of how this has been problematic for us in the past, we once detached views to handle ingestion problems, and then on rebooting the nodes we got confused as to why ingestion hadn't stopped!
+
+
+### Orphan Zookeeper records
+
+Prior to ClickHouse 22.3, bugs in ClickHouse meant that reasonably often Zookeeper would end up with "orphan records". These are references to things like parts in ClickHouse that no longer exist, but remain referenced. While orphan records were common prior to 22.3, it's still possible that such records come to exist on newer ClickHouse versions as well, as an expected consequence of distributed systems.
+
+Orphan records pose a problem because they may cause ClickHouse to use resources and try to perform operations on e.g. non-existent parts. For instance, we've seen mutations hang for months due to ClickHouse expecting it still needs to modify a part but the part no longer existing.
+
+As a result, it's important to clean these up.
+
+#### Orphan parts
+
+Orphaned parts are perhaps the most common type of orphan record, so much so that Altinity has [written a guide](https://kb.altinity.com/altinity-kb-useful-queries/parts-consistency/#compare-the-list-of-parts-in-zookeeper-with-the-list-of-parts-on-disk) to help identify and delete them, as well as they recommended everyone do so when upgrading past 22.3.
+
+To do this cleanup properly, you should:
+
+1. Check if you have any orphan parts (this should be run per node in your cluster, or you could modify the query to use `clusterAllReplicas`):
+
+```sql
+select zoo.p_path as part_zoo, zoo.ctime, zoo.mtime, disk.p_path as part_disk
+from
+(
+  select concat(path,'/',name) as p_path, ctime, mtime
+  from system.zookeeper where path in (select concat(replica_path,'/parts') from system.replicas)
+) zoo
+left join 
+(
+  select concat(replica_path,'/parts/',name) as p_path
+  from system.parts inner join system.replicas using (database, table)
+) disk on zoo.p_path = disk.p_path
+where part_disk=''
+order by part_zoo
+```
+
+2. Generate delete statements for each record that needs to be removed from Zookeeper:
+
+
+```bash
+clickhouse-client --password <password> --query "select 'delete '||part_zoo
+from (
+select zoo.p_path as part_zoo, zoo.ctime, zoo.mtime, disk.p_path as part_disk
+from
+(
+ select concat(path,'/',name) as p_path, ctime, mtime
+ from system.zookeeper where path in (select concat(replica_path,'/parts') from system.replicas)
+) zoo
+left join
+(
+ select concat(replica_path,'/parts/',name) as p_path
+ from system.parts inner join system.replicas using (database, table)
+) disk on zoo.p_path = disk.p_path
+where part_disk='' and zoo.mtime <= now() - interval 30 day
+order by part_zoo) format TSVRaw" > tmp_zk_orphans
+```
+
+3. SSH into _one_ of your Zookeeper nodes
+4. Start up the ZK CLI (`zkCli.sh`) and paste the delete statements
+5. Check that the query from step 1 no longer returns anything
+
+#### Orphan replication queue records
+
+A more confusing issue can also happen when the replication queue contains operations that reference inexistent parts. 
+
+This is harder to notice proactively but may manifest itself in a migration that hangs indefinitely because it still has parts it needs to operate on but those parts don't exist.
+
+If you spot a migration that doesn't seem to be progressing after a long time, it's worth checking if the parts in the `parts_to_do` column of the `system.mutations` table contains any parts that don't exist.
+
+You can also spot this by looking at the replication queue for long-running operations. You could run the following query, for example:
+
+```sql
+select * from clusterAllReplicas('<cluster_name>', system.replication_queue) order by create_time
+```
+
+And check if any operations were created a long time ago, particularly simple ones like `GET_PART`.
+
+Finally, another symptom you can look out for are recurrent logs that look like the following:
+
+```
+Checking part 137_0_27780_19674
+Checking if anyone has a part 137_0_27780_19674 or covering part.
+```
+
+If the server has been looking for a part for days and hasn't found it anywhere, there's probably something wrong.
+
+Having established this problem, the way to fix it is as follows:
+
+1. Get the `node_name` of the hanging queue record
+2. SSH into a Zookeeper node and using ZK CLI, delete the record. Note that for this you will need the full Zookeeper path of the record. You can use `ls` within the Zookeeper CLI to understand the storage structure if necessary. The path should look something like this: `/clickhouse/tables/<shard_number>/<database_name>.<table_name>/replicas/<replica_name>/queue/<node_name>` but will also vary for replicated and non-replicated tables.
+3. Having deleted the record, you should run `SYSTEM RESTART REPLICA <table_name>` on the ClickHouse node with the orphan queue item. This command will fetch the updated metadata from Zookeeper. It's also worth running it across your cluster for good measure.
+
 
 ## Learn more
 

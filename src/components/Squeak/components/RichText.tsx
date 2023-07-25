@@ -1,5 +1,11 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState, useCallback } from 'react'
 import MarkdownLogo from './MarkdownLogo'
+import { useDropzone } from 'react-dropzone'
+import Spinner from 'components/Spinner'
+import Markdown from './Markdown'
+import slugify from 'slugify'
+import { Edit } from 'components/Icons'
+import Tooltip from 'components/Tooltip'
 
 const buttons = [
     {
@@ -13,6 +19,7 @@ const buttons = [
                 />
             </svg>
         ),
+        tooltipContent: 'Bold',
     },
     {
         cursor: -1,
@@ -25,6 +32,7 @@ const buttons = [
                 />
             </svg>
         ),
+        tooltipContent: 'Italic',
     },
     {
         cursor: -4,
@@ -41,6 +49,7 @@ const buttons = [
                 />
             </svg>
         ),
+        tooltipContent: 'Code',
     },
     {
         cursor: -1,
@@ -64,13 +73,41 @@ const buttons = [
                 </defs>
             </svg>
         ),
+        tooltipContent: 'Link',
     },
 ]
 
-export default function RichText({ initialValue = '', setFieldValue }: any) {
+export default function RichText({ initialValue = '', setFieldValue, autoFocus, values, onSubmit }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
     const [cursor, setCursor] = useState<number | null>(null)
+    const [imageLoading, setImageLoading] = useState(false)
+    const [showPreview, setShowPreview] = useState(false)
+
+    const onDrop = useCallback(
+        async (acceptedFiles) => {
+            const file = acceptedFiles[0]
+            const fakeImagePath = `/${Date.now()}/${slugify(file.name)}`
+            setFieldValue('images', [
+                ...values.images,
+                {
+                    fakeImagePath,
+                    file,
+                    objectURL: URL.createObjectURL(file),
+                },
+            ])
+            setValue(value + `![${file.name}](${fakeImagePath})`)
+        },
+        [value]
+    )
+
+    const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
+        onDrop,
+        noClick: true,
+        noKeyboard: true,
+        multiple: false,
+        accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'] },
+    })
 
     const replaceSelection = (selectionStart: number, selectionEnd: number, text: string) => {
         return value.substring(0, selectionStart) + text + value.substring(selectionEnd, value.length)
@@ -97,6 +134,16 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
         setValue(e.target.value)
     }
 
+    const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+        const images = Array.from(e.clipboardData.items).filter((item) =>
+            ['image/jpeg', 'image/png'].includes(item.type)
+        )
+        if (images.length > 0) {
+            const image = images[0].getAsFile()
+            await onDrop([image])
+        }
+    }
+
     useEffect(() => {
         if (cursor && textarea.current) {
             textarea.current.focus()
@@ -109,44 +156,158 @@ export default function RichText({ initialValue = '', setFieldValue }: any) {
     }, [cursor])
 
     useEffect(() => {
-        setFieldValue('question', value)
+        setFieldValue('body', value)
     }, [value])
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && onSubmit) {
+            onSubmit()
+        }
+    }
+
     return (
-        <>
-            <textarea
-                name="question"
-                value={value}
-                onChange={handleChange}
-                ref={textarea}
-                required
-                id="question"
-                placeholder="Type more details..."
-                maxLength={2000}
-            />
-            <div className="squeak-form-richtext-buttons-container">
-                <ul className="squeak-form-richtext-buttons">
+        <div className="relative" {...getRootProps()}>
+            <input className="hidden" {...getInputProps()} />
+            {showPreview ? (
+                <div className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0 overflow-auto">
+                    <Markdown
+                        transformImageUri={(fakeImagePath) => {
+                            const objectURL = values.images.find(
+                                (image) => image.fakeImagePath === fakeImagePath
+                            )?.objectURL
+                            return objectURL || fakeImagePath
+                        }}
+                    >
+                        {value}
+                    </Markdown>
+                </div>
+            ) : (
+                <div className="relative">
+                    <textarea
+                        onPaste={handlePaste}
+                        disabled={imageLoading}
+                        autoFocus={autoFocus}
+                        className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0"
+                        onBlur={(e) => e.preventDefault()}
+                        name="body"
+                        value={value}
+                        onChange={handleChange}
+                        ref={textarea}
+                        required
+                        id="body"
+                        placeholder={'Type more details...'}
+                        maxLength={2000}
+                        onKeyDown={handleKeyDown}
+                    />
+                    {isDragActive && (
+                        <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-gray-accent-light after:dark:border-gray-accent-dark after:rounded-md">
+                            <p className="m-0 font-semibold">Drop image here</p>
+                        </div>
+                    )}
+                </div>
+            )}
+            <div className="flex items-center justify-between py-1">
+                <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full">
                     {buttons.map((button, index) => {
                         return (
                             <li key={index}>
-                                <button onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}>
-                                    {button.icon}
-                                </button>
+                                <Tooltip content={button.tooltipContent}>
+                                    <button
+                                        className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
+                                        onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
+                                    >
+                                        {button.icon}
+                                    </button>
+                                </Tooltip>
                             </li>
                         )
                     })}
+                    <li>
+                        <Tooltip content="Image">
+                            <button
+                                className="flex items-center bg-none border-none rounded-sm text-primary/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] relative hover:border hover:border-light dark:hover:border-dark hover:bg-light dark:hover:bg-dark hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15]"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    open()
+                                }}
+                            >
+                                <svg className="w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 14">
+                                    <path
+                                        d="M12 5.714a1.715 1.715 0 1 0 0-3.43 1.715 1.715 0 0 0 0 3.43Z"
+                                        fill="currentColor"
+                                    />
+                                    <path
+                                        d="M15 0H1C.443 0 0 .454 0 1.01v11.694c0 .557.443 1.01 1 1.01h14c.557 0 1-.453 1-1.01V1.01C16 .454 15.557 0 15 0Zm-3.682 7.06a.614.614 0 0 0-.457-.22c-.183 0-.311.085-.458.203l-.667.564c-.14.1-.25.168-.411.168a.59.59 0 0 1-.393-.146 4.668 4.668 0 0 1-.154-.147L6.857 5.404a.788.788 0 0 0-.596-.268c-.24 0-.461.118-.6.278l-4.518 5.45V1.561a.47.47 0 0 1 .468-.418h12.775c.246 0 .446.182.46.428l.011 9.3-3.54-3.81Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                            </button>
+                        </Tooltip>
+                    </li>
+                    <li className="!ml-auto">
+                        <Tooltip content="Edit">
+                            <button
+                                onClick={() => setShowPreview(false)}
+                                type="button"
+                                className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
+                                    showPreview ? '' : '!border border-light dark:border-dark bg-light dark:bg-dark'
+                                }`}
+                            >
+                                <Edit />
+                            </button>
+                        </Tooltip>
+                    </li>
+                    <li>
+                        <Tooltip content="Preview">
+                            <button
+                                onClick={() => setShowPreview(true)}
+                                type="button"
+                                className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
+                                    showPreview ? 'border border-light dark:border-dark bg-light dark:bg-dark' : ''
+                                }`}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-5 h-5"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                                    />
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                </svg>
+                            </button>
+                        </Tooltip>
+                    </li>
                 </ul>
-                <div className="squeak-markdown-logo">
+            </div>
+            {imageLoading && (
+                <div className="w-full h-full inset-0 bg-white/50 dark:bg-black/50 absolute flex justify-center items-center">
+                    <Spinner className="w-10 h-10" />
+                </div>
+            )}
+            {!value && (
+                <div className="absolute top-4 right-4">
                     <a
+                        className="text-primary/30 hover:text-primary/50 dark:text-primary-dark/30 dark:hover:text-primary-dark/50"
                         href="https://www.markdownguide.org/cheat-sheet/"
                         target="_blank"
-                        rel="noopener"
+                        rel="noreferrer"
                         title="Supports Markdown syntax"
                     >
                         <MarkdownLogo />
                     </a>
                 </div>
-            </div>
-        </>
+            )}
+        </div>
     )
 }

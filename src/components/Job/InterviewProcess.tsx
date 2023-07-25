@@ -59,7 +59,7 @@ export default function InterviewProcess({ role }: { role?: string }) {
                     ({ title, description, badge }, index) => {
                         return (
                             <li
-                                className="flex items-start space-x-4 first:border first:border-dashed first:border-gray-accent-light dark:first:border-gray-accent-dark first:pt-3 first:pb-2 first:px-3 first:-mx-3 first:rounded-md first:bg-white dark:first:bg-gray-accent-dark-hover"
+                                className="flex items-start space-x-4 first:border first:border-b-3 first:border-light dark:first:border-dark first:pt-3 first:pb-2 first:px-3 first:-mx-3 first:rounded-md "
                                 key={title}
                             >
                                 <div className="w-12 h-12 bg-gray-accent-light dark:bg-gray-accent-dark rounded-full flex items-center justify-center flex-shrink-0 font-semibold">

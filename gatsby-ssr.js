@@ -11,34 +11,40 @@ import { initKea, wrapElement } from './kea'
 import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
 import Job from './src/templates/Job'
+import { UserProvider } from './src/hooks/useUser'
+import { Provider as ToastProvider } from './src/context/toast'
 
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
     initKea(true, props.location)
-    return wrapElement({
-        element:
-            props.custom404 || !props.data ? (
-                element
-            ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
-              ![
-                  'docs/api/post-only-endpoints',
-                  'docs/api/user',
-                  'docs/integrations',
-                  'docs/product-analytics',
-                  'docs/session-replay',
-                  'docs/feature-flags',
-                  'docs/experiments',
-                  'docs/data',
-              ].includes(slug) ? (
-                <HandbookLayout {...props} />
-            ) : /^session-replay|^product-analytics|^feature-flags|^ab-testing|^product-os/.test(slug) ? (
-                <Product {...props} />
-            ) : /^careers\//.test(slug) ? (
-                <Job {...props} />
-            ) : (
-                element
-            ),
-    })
+    return (
+        <UserProvider>
+            {wrapElement({
+                element:
+                    props.custom404 || !props.data ? (
+                        element
+                    ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
+                      ![
+                          'docs/api/post-only-endpoints',
+                          'docs/api/user',
+                          'docs/integrations',
+                          'docs/product-analytics',
+                          'docs/session-replay',
+                          'docs/feature-flags',
+                          'docs/experiments',
+                          'docs/data',
+                      ].includes(slug) ? (
+                        <HandbookLayout {...props} />
+                    ) : /^session-replay|^product-analytics|^feature-flags|^ab-testing|^product-os/.test(slug) ? (
+                        <Product {...props} />
+                    ) : /^careers\//.test(slug) ? (
+                        <Job {...props} />
+                    ) : (
+                        element
+                    ),
+            })}
+        </UserProvider>
+    )
 }
 
 export const onRenderBody = function ({ setPreBodyComponents }) {
@@ -63,8 +69,7 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     })
     try {
         preferredTheme =
-            (/^handbook|^docs|^blog|^integrations|^tutorials|^questions|^using-posthog|^manual|^community/.test(slug) &&
-                (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light'))) ||
+            (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light')) ||
             'light'
     } catch (err) {}
     window.__setPreferredTheme = function (newTheme) {

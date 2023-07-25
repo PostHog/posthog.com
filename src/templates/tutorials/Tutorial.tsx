@@ -25,16 +25,17 @@ import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
 import TutorialsSlider from 'components/TutorialsSlider'
+import { communityMenu, docsMenu } from '../../navs'
 
-const ViewButton = ({ title, view, setView }) => {
+export const ViewButton = ({ title, view, setView }) => {
     return (
         <button
             onClick={() => setView(title)}
-            style={{
-                background: view === title ? '#F54E00' : '#E5E7E0',
-                color: view === title ? 'white' : 'black',
-            }}
-            className="py-2 px-4 rounded-md w-1/2 transition-colors"
+            className={`py-2 px-4 text-sm transition-colors border-b-2 font-medium relative after:absolute after:top-[100%] after:left-0 after:right-0 after:rounded-full after:h-[2px] ${
+                view === title
+                    ? 'font-bold after:bg-red'
+                    : 'font-semibold border-transparent opacity-50 hover:opacity-75 hover:after:bg-gray-accent'
+            }`}
         >
             {title}
         </button>
@@ -76,6 +77,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
     const { pageData } = data
     const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
+    const filePath = pageData?.parent?.relativePath
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
@@ -96,7 +98,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
     const [view, setView] = useState('Article')
 
     return (
-        <Layout>
+        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[1]}>
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
@@ -104,10 +106,18 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
             <PostLayout
-                questions={<CommunityQuestions />}
+                isMenuItemActive={({ url }) =>
+                    url === `/tutorials/categories/${slugify(categories[0], { lower: true })}`
+                }
+                questions={
+                    <div id="squeak-questions" className="pb-8">
+                        <CommunityQuestions />
+                    </div>
+                }
                 body={body}
                 featuredImage={featuredImage}
                 featuredVideo={featuredVideo}
+                filePath={filePath}
                 tableOfContents={tableOfContents}
                 title={title}
                 menu={menu}
@@ -178,6 +188,11 @@ export const query = graphql`
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE)
                     }
+                }
+            }
+            parent {
+                ... on File {
+                    relativePath
                 }
             }
         }

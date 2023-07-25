@@ -1,6 +1,6 @@
 ---
 date: 2023-01-18
-title: Feature flag benefits, types and use cases, explained
+title: Why use feature flags? Benefits, types and use cases, explained
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -33,7 +33,7 @@ In this post, we explore four benefits to using these feature flag types, such a
 3. [Testing changes](#3-test-changes-in-production)
 4. [Managing access](#4-manage-access)
 
-## Feature flag benefits and use cases
+##  Why use feature flags? Benefits and use cases
 
 ### 1. Ship faster and maintain momentum
 
@@ -80,7 +80,7 @@ If there are problems with a feature, feature flags can act as kill switches. Th
 
 Feature flags enable better testing of changes by testing them closer to reality. When a change ships into production behind a feature flag and people who need access can get access. Instead of needing specific testing environments, you can test in production.
 
-Testing in production means the usage, data, infrastructure, integration, and environment are closer to what users actually use. The gap between development and production closes. Other team members can test your code and features in production as well. All of this provides validation to engineers that their code works.
+[Testing in production](/blog/testing-in-production) means the usage, data, infrastructure, integration, and environment are closer to what users actually use. The gap between development and production closes. Other team members can test your code and features in production as well. All of this provides validation to engineers that their code works.
 
 Testing changes in production also means you can run experiments. You can test variations against each other to see which provides better results. Product and marketing teams can be involved in the experimentation process. They can design experiments and analyze real results, rather than guessing what the outcomes are.
 
@@ -232,8 +232,6 @@ Each has different features, here's a comparison of them:
 Except for PostHog, each of these tools focuses specifically on feature flags. In doing so, they miss out on the benefits of having all of your data in one place. For example, to get data on the usage of a feature flag, you would need to integrate a third-party analytics platform. 
 
 PostHog has all the tools you need to build a great product, and they are integrated together. Feature flags are connected to analytics and visualizations which are connected to session recordings. [Our starter plan](/pricing) includes unlimited events, 1M events and 15k recordings for free
-
-<ArrayCTA />
 
 ## Further reading
 

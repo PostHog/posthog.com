@@ -1,15 +1,13 @@
 import Layout from 'components/Layout'
-import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import groupBy from 'lodash.groupby'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import { UnderConsideration } from './UnderConsideration'
 import { InProgress } from './InProgress'
-import { OrgProvider } from 'components/Squeak'
-import { ImageDataLike, StaticImage } from 'gatsby-plugin-image'
-import community from 'sidebars/community.json'
+import { StaticImage } from 'gatsby-plugin-image'
+import { useRoadmap } from 'hooks/useRoadmap'
+import { useNav } from 'components/Community/useNav'
 
 interface IGitHubPage {
     title: string
@@ -26,24 +24,27 @@ interface IGitHubPage {
 
 interface ITeam {
     name: string
+    roadmaps: IRoadmap[]
 }
 
 export interface IRoadmap {
-    beta_available: boolean
-    complete: boolean
-    date_completed: string
+    squeakId: number
     title: string
     description: string
-    team: ITeam
+    betaAvailable: boolean
+    complete: boolean
+    dateCompleted: string
+    image?: {
+        url: string
+    }
+    projectedCompletion: string
     githubPages: IGitHubPage[]
-    projected_completion_date: string
-    roadmapId: BigInt
-    thumbnail: ImageDataLike
 }
 
-const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks: string[] }) => {
-    const { title, githubPages, otherLinks } = props
-    const url = (githubPages?.length > 0 && githubPages[0]?.html_url) || (otherLinks?.length > 0 && otherLinks[0])
+/*const Complete = (props: { title: string; githubPages: IGitHubPage[] }) => {
+    const { title, githubPages } = props
+    const url = githubPages?.length > 0 && githubPages[0]?.html_url
+
     return (
         <li className="text-base font-semibold">
             {url ? (
@@ -58,7 +59,7 @@ const Complete = (props: { title: string; githubPages: IGitHubPage[]; otherLinks
             )}
         </li>
     )
-}
+}*/
 
 export const Section = ({
     title,
@@ -66,15 +67,15 @@ export const Section = ({
     children,
     className,
 }: {
-    title: string | React.ReactNode
-    description: string | React.ReactNode
+    title: React.ReactNode
+    description?: React.ReactNode
     children: React.ReactNode
     className?: string
 }) => {
     return (
         <div className={`xl:px-7 2xl:px-8 px-5 py-8 ${className ?? ''}`}>
             <h3 className="text-xl m-0">{title}</h3>
-            <p className="text-[15px] m-0 text-black/60 mb-4">{description}</p>
+            {description && <p className="text-[15px] m-0 text-black/60 dark:text-white/60 mb-4">{description}</p>}
             {children}
         </div>
     )
@@ -83,199 +84,152 @@ export const Section = ({
 export const Card = ({ team, children }: { team: string; children: React.ReactNode }) => {
     return (
         <>
-            {team !== 'undefined' && <h4 className="oh5acity-50 text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
+            {team !== 'undefined' && <h4 className="text-base font-bold mt-0 mb-2 pt-4">{team}</h4>}
             <li className="m-0 mb-3">{children}</li>
         </>
     )
 }
 
 export const CardContainer = ({ children }: { children: React.ReactNode }) => {
-    return <ul className="list-none m-0 p-0 grid">{children}</ul>
+    return <ul className="list-none m-0 p-0 grid space-y-2">{children}</ul>
 }
 
 export default function Roadmap() {
-    const {
-        allSqueakRoadmap: { nodes },
-    } = useStaticQuery(query)
+    const nav = useNav()
+    const teams = useRoadmap()
 
-    const underConsideration = groupBy(
-        nodes.filter(
-            (node: IRoadmap) =>
-                !node.date_completed &&
-                !node.projected_completion_date &&
-                node.githubPages &&
-                node.githubPages.length > 0
-        ),
-        ({ team }: { team: ITeam }) => team?.name
-    )
-    const inProgress = groupBy(
-        nodes.filter((node: IRoadmap) => !node.date_completed && node.projected_completion_date),
-        ({ team }: { team: ITeam }) => team?.name
-    )
-    const complete = groupBy(
-        nodes.filter((node: IRoadmap) => {
-            const goalDate = node.date_completed && new Date(node.date_completed)
-            const currentDate = new Date()
-            const currentQuarter = Math.floor(currentDate.getMonth() / 3 + 1)
-            const goalQuarter = goalDate && Math.floor(goalDate.getMonth() / 3 + 1)
-            return (
-                goalDate && goalDate.getUTCFullYear() === currentDate.getUTCFullYear() && goalQuarter === currentQuarter
-            )
-        }),
-        ({ team }: { team: ITeam }) => team?.name
-    )
+    const underConsideration: ITeam[] = teams
+        .map((team) => {
+            return {
+                ...team,
+                roadmaps: team.roadmaps.filter(
+                    (roadmap) =>
+                        !roadmap.dateCompleted &&
+                        !roadmap.projectedCompletion &&
+                        roadmap.githubPages &&
+                        roadmap.githubPages.length > 0
+                ),
+            }
+        })
+        .filter((team) => team.roadmaps.length > 0)
+
+    const inProgress: ITeam[] = teams
+        .map((team) => {
+            return {
+                ...team,
+                roadmaps: team.roadmaps.filter((roadmap) => !roadmap.complete && roadmap.projectedCompletion),
+            }
+        })
+        .filter((team) => team.roadmaps.length > 0)
+
     return (
         <Layout>
             <SEO title="PostHog Roadmap" />
-            <OrgProvider
-                value={{
-                    organizationId: process.env.GATSBY_SQUEAK_ORG_ID as string,
-                    apiHost: process.env.GATSBY_SQUEAK_API_HOST as string,
-                }}
-            >
-                <div className="border-t border-dashed border-gray-accent-light">
-                    <PostLayout
-                        contentWidth={'100%'}
-                        article={false}
-                        title={'Roadmap'}
-                        hideSurvey
-                        menu={community}
-                        darkMode={false}
-                        contentContainerClassName="lg:-mb-12 -mb-8"
-                    >
-                        <div className="relative">
-                            <h1 className="font-bold text-5xl mx-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
-                            <figure className="-mt-8 sm:-mt-20 xl:-mt-32 mb-0">
-                                <StaticImage
-                                    className="w-full"
-                                    imgClassName="w-full aspect-auto"
-                                    placeholder="blurred"
-                                    alt={`Look at those views!'`}
-                                    src="./images/hike-hog.png"
-                                />
-                            </figure>
-                        </div>
-                        <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-gray-accent-light divide-dashed">
-                            <Section
-                                title="Under consideration"
-                                description="The top features we might build next. Your feedback is requested."
-                            >
-                                <CardContainer>
-                                    {Object.keys(underConsideration)
-                                        .sort()
-                                        .map((key) => {
-                                            return (
-                                                <Card key={key} team={key}>
-                                                    <CardContainer>
-                                                        {underConsideration[key]?.map((node: IRoadmap) => {
-                                                            return <UnderConsideration key={node.title} {...node} />
-                                                        })}
-                                                    </CardContainer>
-                                                </Card>
-                                            )
-                                        })}
-                                </CardContainer>
-                            </Section>
-                            <Section
-                                title="In progress"
-                                description={
-                                    <>
-                                        Here’s what we're building <strong>right now</strong>. (We choose milestones
-                                        using community feedback.)
-                                    </>
-                                }
-                            >
-                                <CardContainer>
-                                    {Object.keys(inProgress)
-                                        .sort((a, b) =>
-                                            inProgress[a].some((goal) => goal.beta_available)
-                                                ? -1
-                                                : inProgress[b].some((goal) => goal.beta_available)
-                                                ? 1
-                                                : 0
+            <div className="">
+                <PostLayout
+                    article={false}
+                    title={'Roadmap'}
+                    hideSurvey
+                    menu={nav}
+                    darkMode={false}
+                    contentContainerClassName="lg:-mb-12 -mb-8"
+                    fullWidthContent
+                >
+                    <div className="relative">
+                        <h1 className="font-bold text-5xl mx-8 lg:-mt-8 xl:-mt-0">Roadmap</h1>
+                        <figure className="sm:-mt-12 xl:-mt-24 mb-0">
+                            <StaticImage
+                                className="w-full"
+                                imgClassName="w-full aspect-auto"
+                                placeholder="blurred"
+                                alt={`Look at those views!'`}
+                                src="./images/hike-hog.png"
+                            />
+                        </figure>
+                    </div>
+                    <div className="grid grid-cols-1 xl:grid-cols-3 xl:divide-x xl:gap-y-0 gap-y-6 divide-light dark:divide-dark pb-8">
+                        <Section
+                            title="Under consideration"
+                            description="The top features we might build next. Your feedback is requested."
+                        >
+                            <CardContainer>
+                                {underConsideration.sort().map((team) => {
+                                    return (
+                                        <Card key={team.name} team={team.name}>
+                                            <CardContainer>
+                                                {team.roadmaps.map((node) => {
+                                                    return <UnderConsideration key={node.title} {...node} />
+                                                })}
+                                            </CardContainer>
+                                        </Card>
+                                    )
+                                })}
+                            </CardContainer>
+                        </Section>
+
+                        <Section
+                            title="In progress"
+                            description={
+                                <>
+                                    Here’s what we're building <strong>right now</strong>. (We choose milestones using
+                                    community feedback.)
+                                </>
+                            }
+                        >
+                            <CardContainer>
+                                {inProgress
+                                    .sort((a, b) =>
+                                        a.roadmaps.some((goal) => goal.betaAvailable)
+                                            ? -1
+                                            : b.roadmaps.some((goal) => goal.betaAvailable)
+                                            ? 1
+                                            : 0
+                                    )
+                                    .map((team) => {
+                                        return (
+                                            <Card key={team.name} team={team.name}>
+                                                <CardContainer>
+                                                    {team.roadmaps.map((node) => {
+                                                        return <InProgress stacked key={node.title} {...node} />
+                                                    })}
+                                                </CardContainer>
+                                            </Card>
                                         )
-                                        .map((key) => {
-                                            return (
-                                                <Card key={key} team={key}>
-                                                    <CardContainer>
-                                                        {inProgress[key]?.map((node: IRoadmap) => {
-                                                            return <InProgress stacked key={node.title} {...node} />
-                                                        })}
-                                                    </CardContainer>
-                                                </Card>
-                                            )
-                                        })}
-                                </CardContainer>
-                            </Section>
-                            <Section
-                                title="Recently shipped"
-                                // description="Here's what was included in our last array."
-                                className=""
-                            >
-                                <p className="p-4 border border-dashed border-gray-accent-light rounded-sm text-[15px]">
-                                    Check out <Link to="/blog/categories/product-updates">product updates</Link> on our
-                                    blog to see what we've shipped recently.
-                                </p>
-                                {/*
-                                        hidden until we have more historical content loaded
-                                        <CardContainer>
-                                        {Object.keys(complete)
-                                            .sort()
-                                            .map((key) => {
-                                                return (
-                                                    <Card key={key} team={key}>
-                                                        <CardContainer>
-                                                            {complete[key]?.map((node: IRoadmap) => {
-                                                                return <Complete key={node.title} {...node} />
-                                                            })}
-                                                        </CardContainer>
-                                                    </Card>
-                                                )
-                                            })}
-                                        </CardContainer>
-                                    */}
-                            </Section>
-                        </div>
-                    </PostLayout>
-                </div>
-            </OrgProvider>
+                                    })}
+                            </CardContainer>
+                        </Section>
+
+                        <Section
+                            title="Recently shipped"
+                            // description="Here's what was included in our last array."
+                            className=""
+                        >
+                            <p className="p-4  rounded-sm text-[15px]">
+                                Check out <Link to="/changelog">our changelog</Link> on our blog to see what we've
+                                shipped recently.
+                            </p>
+                            {/*
+                            hidden until we have more historical content loaded
+                            <CardContainer>
+                            {Object.keys(complete)
+                                .sort()
+                                .map((key) => {
+                                    return (
+                                        <Card key={key} team={key}>
+                                            <CardContainer>
+                                                {complete[key]?.map((node: IRoadmap) => {
+                                                    return <Complete key={node.title} {...node} />
+                                                })}
+                                            </CardContainer>
+                                        </Card>
+                                    )
+                                })}
+                            </CardContainer>
+                        */}
+                        </Section>
+                    </div>
+                </PostLayout>
+            </div>
         </Layout>
     )
 }
-
-const query = graphql`
-    {
-        allSqueakRoadmap {
-            nodes {
-                roadmapId
-                beta_available
-                complete
-                date_completed
-                title
-                description
-                team {
-                    name
-                }
-                thumbnail {
-                    childImageSharp {
-                        gatsbyImageData(width: 75, placeholder: NONE, quality: 100)
-                    }
-                }
-                otherLinks
-                githubPages {
-                    title
-                    html_url
-                    number
-                    closed_at
-                    reactions {
-                        hooray
-                        heart
-                        eyes
-                        plus1
-                    }
-                }
-                projected_completion_date
-            }
-        }
-    }
-`

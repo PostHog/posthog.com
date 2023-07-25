@@ -1,5 +1,4 @@
 import { MDXProvider } from '@mdx-js/react'
-import { BorderWrapper } from 'components/BorderWrapper'
 import Breadcrumbs from 'components/Breadcrumbs'
 import { Caption } from 'components/Caption'
 import { FloatedImage } from 'components/FloatedImage'
@@ -15,12 +14,13 @@ import FooterCTA from 'components/FooterCTA'
 import PostLayout from 'components/PostLayout'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Topics from 'components/PostLayout/Topics'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
 const components = {
     ...shortcodes,
-    BorderWrapper,
     Caption,
     ImageBlock,
     FloatedImage,
@@ -29,7 +29,7 @@ const components = {
 
 const Tags = ({ tags }) => {
     return (
-        <li className="border-b border-dashed border-gray-accent-light">
+        <li className="">
             <ul className="list-none m-0 p-0 text-lg flex flex-wrap">
                 {tags.map((tag, index) => {
                     return (
@@ -61,15 +61,19 @@ const CustomerSidebar = ({ industries, users, toolsUsed, logo }) => {
 }
 
 export default function Customer({ data, pageContext: { tableOfContents } }) {
+    const { websiteTheme } = useValues(layoutLogic)
+
     const {
         allCustomers,
         customerData: {
             body,
             excerpt,
             fields,
-            frontmatter: { title, customer, logo, description, industries, users, toolsUsed, featuredImage },
+            frontmatter: { title, customer, logo, logoDark, description, industries, users, toolsUsed, featuredImage },
         },
     } = data
+
+    const logoToShow = websiteTheme === 'dark' ? logoDark || logo : logo
 
     return (
         <>
@@ -93,7 +97,12 @@ export default function Customer({ data, pageContext: { tableOfContents } }) {
                     title={title}
                     hideSurvey
                     sidebar={
-                        <CustomerSidebar logo={logo} industries={industries} toolsUsed={toolsUsed} users={users} />
+                        <CustomerSidebar
+                            logo={logoToShow}
+                            industries={industries}
+                            toolsUsed={toolsUsed}
+                            users={users}
+                        />
                     }
                     breadcrumb={[
                         {
@@ -143,6 +152,9 @@ export const query = graphql`
                 title
                 customer
                 logo {
+                    publicURL
+                }
+                logoDark {
                     publicURL
                 }
                 description

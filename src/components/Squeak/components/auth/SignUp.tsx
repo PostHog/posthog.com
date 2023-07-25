@@ -1,29 +1,28 @@
-import { Field, Form, Formik } from 'formik'
-import { useUser } from 'hooks/useUser'
 import React from 'react'
+import { Field, Form, Formik } from 'formik'
+import { User, useUser } from 'hooks/useUser'
+import { inputClasses, labelClasses } from '../Authentication'
+import Button from '../Button'
 
 type SignUpProps = {
-    setMessage: (message: any) => void
-    handleMessageSubmit: (message: any) => Promise<void> | void
-    formValues: any
-    organizationId: string
-    apiHost: string
-    buttonText: string
-    onSignUp?: (values: any) => void
+    buttonText?: string
+    onSubmit?: (user: User | null) => void
+    setMessage?: React.Dispatch<React.SetStateAction<string | null>>
 }
 
-const SignUp: React.FC<SignUpProps> = ({ handleMessageSubmit, formValues, buttonText, onSignUp }) => {
+export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit, setMessage }) => {
     const { signUp } = useUser()
-    const handleSubmit = async (values: any) => {
-        await signUp(values)
-        await handleMessageSubmit(formValues || { email: values.email })
 
-        onSignUp &&
-            onSignUp({
-                email: values.email,
-                firstName: values.firstName,
-                lastName: values.lastName,
-            })
+    const handleSubmit = async (values: any) => {
+        const user = await signUp(values)
+
+        if (!user) {
+            setMessage?.('There was an error signing up. Please try again.')
+        } else if ('error' in user) {
+            setMessage?.(user.error)
+        } else {
+            onSubmit?.(user)
+        }
     }
 
     return (
@@ -52,30 +51,61 @@ const SignUp: React.FC<SignUpProps> = ({ handleMessageSubmit, formValues, button
         >
             {({ isValid, isSubmitting }) => {
                 return (
-                    <Form>
-                        <div className="squeak-authentication-form-name">
-                            <span>
-                                <label htmlFor="firstName">First name</label>
-                                <Field
-                                    required
-                                    id="firstName"
-                                    name="firstName"
-                                    type="text"
-                                    placeholder="First name..."
-                                />
-                            </span>
-                            <span>
-                                <label htmlFor="lastName">Last name</label>
-                                <Field id="lastName" name="lastName" type="text" placeholder="Last name..." />
-                            </span>
-                        </div>
-                        <label htmlFor="email">Email address</label>
-                        <Field required id="email" name="email" type="email" placeholder="Email address..." />
-                        <label htmlFor="password">Password</label>
-                        <Field required id="password" name="password" type="password" placeholder="Password..." />
-                        <button style={isSubmitting || !isValid ? { opacity: '.5' } : {}} type="submit">
+                    <Form className="m-0">
+                        <span>
+                            <label className={labelClasses} htmlFor="firstName">
+                                First name
+                            </label>
+                            <Field
+                                className={inputClasses}
+                                onBlur={(e) => e.preventDefault()}
+                                required
+                                id="firstName"
+                                name="firstName"
+                                type="text"
+                                placeholder="First name..."
+                            />
+                        </span>
+                        <span>
+                            <label className={labelClasses} htmlFor="lastName">
+                                Last name
+                            </label>
+                            <Field
+                                className={inputClasses}
+                                onBlur={(e) => e.preventDefault()}
+                                id="lastName"
+                                name="lastName"
+                                type="text"
+                                placeholder="Last name..."
+                            />
+                        </span>
+                        <label className={labelClasses} htmlFor="email">
+                            Email address
+                        </label>
+                        <Field
+                            className={inputClasses}
+                            required
+                            onBlur={(e) => e.preventDefault()}
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="Email address..."
+                        />
+                        <label className={labelClasses} htmlFor="password">
+                            Password
+                        </label>
+                        <Field
+                            className={inputClasses}
+                            required
+                            onBlur={(e) => e.preventDefault()}
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Password..."
+                        />
+                        <Button width="full" disabled={isSubmitting || !isValid} type="submit">
                             {buttonText}
-                        </button>
+                        </Button>
                     </Form>
                 )
             }}

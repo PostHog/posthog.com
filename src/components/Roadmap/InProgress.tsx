@@ -1,85 +1,212 @@
 import { Check, ClosedIssue, OpenIssue, Plus } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { IRoadmap } from '.'
-import { Login } from 'components/Squeak'
+import { Authentication } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Spinner from 'components/Spinner'
 import { useToast } from '../../hooks/toast'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import useSWR from 'swr'
+import qs from 'qs'
+import usePostHog from 'hooks/usePostHog'
+
+type RoadmapSubscriptions = {
+    data: {
+        id: number
+        attributes: {
+            roadmapSubscriptions: {
+                data: {
+                    id: number
+                }[]
+            }
+        }
+    }
+}
 
 export function InProgress(props: IRoadmap & { className?: string; more?: boolean; stacked?: boolean }) {
     const { addToast } = useToast()
-    const { user } = useUser()
+    const { user, getJwt } = useUser()
+    const posthog = usePostHog()
+
     const [more, setMore] = useState(props.more ?? false)
     const [showAuth, setShowAuth] = useState(false)
-    const [subscribed, setSubscribed] = useState(false)
     const [loading, setLoading] = useState(false)
-    const { title, githubPages, description, beta_available, thumbnail, roadmapId } = props
+
+    const { title, githubPages, description, betaAvailable, image, squeakId } = props
     const completedIssues = githubPages && githubPages?.filter((page) => page.closed_at)
     const percentageComplete = githubPages && Math.round((completedIssues.length / githubPages?.length) * 100)
 
-    async function subscribe(email: string) {
+    const query = qs.stringify(
+        {
+            fields: ['id'],
+            populate: {
+                roadmapSubscriptions: {
+                    fields: ['id'],
+                },
+            },
+        },
+        {
+            encodeValuesOnly: true, // prettify URL
+        }
+    )
+
+    const { data, error, mutate } = useSWR<RoadmapSubscriptions>(
+        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user?.profile?.id}?${query}`,
+        async (url: string) => {
+            if (!user) return { data: { attributes: { roadmapSubscriptions: [] } } }
+            return fetch(url).then((r) => r.json())
+        }
+    )
+
+    if (error) {
+        console.error(error)
+
+        posthog?.capture('squeak error', {
+            source: 'InProgress',
+            error: JSON.stringify(error),
+        })
+    }
+
+    const { data: roadmapData } = data || {}
+
+    const subscribed = roadmapData?.attributes?.roadmapSubscriptions?.data?.some(({ id }) => id === squeakId)
+
+    async function subscribe() {
+        if (!roadmapData) {
+            return
+        }
+
         setLoading(true)
-        if (email) {
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/subscribe`, {
+
+        try {
+            posthog?.capture('roadmap subscribe start', {
+                roadmapId: squeakId,
+            })
+
+            const token = await getJwt()
+
+            if (!token) {
+                setShowAuth(true)
+                return
+            }
+
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/subscribe`, {
                 method: 'POST',
-                body: JSON.stringify({ id: roadmapId, organizationId: process.env.GATSBY_SQUEAK_ORG_ID }),
                 credentials: 'include',
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
             })
 
             if (res.ok) {
-                setSubscribed(true)
                 setShowAuth(false)
                 addToast({ message: `Subscribed to ${title}. We’ll email you with updates!` })
+                mutate({
+                    data: {
+                        id: roadmapData?.id,
+                        attributes: {
+                            roadmapSubscriptions: {
+                                data: [
+                                    ...roadmapData?.attributes?.roadmapSubscriptions?.data,
+                                    {
+                                        id: props.squeakId,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                })
+
+                posthog?.capture('roadmap subscribe', {
+                    roadmapId: squeakId,
+                })
             } else {
                 addToast({ error: true, message: 'Whoops! Something went wrong.' })
+                throw new Error('Failed to subscribe to roadmap')
             }
-        } else {
-            setShowAuth(true)
+        } catch (error) {
+            console.error(error)
+
+            posthog?.capture('squeak error', {
+                source: 'InProgress.subscribe',
+                roadmapId: squeakId,
+                error: JSON.stringify(error),
+            })
+        } finally {
+            setLoading(false)
         }
-        setLoading(false)
     }
 
-    async function unsubscribe(email: string) {
+    async function unsubscribe() {
+        if (!roadmapData) {
+            return
+        }
+
         setLoading(true)
-        if (email) {
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/unsubscribe`, {
+
+        try {
+            posthog?.capture('roadmap unsubscribe start', {
+                roadmapId: squeakId,
+            })
+
+            const token = await getJwt()
+
+            if (!token) {
+                setShowAuth(true)
+                return
+            }
+
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/unsubscribe`, {
                 method: 'POST',
-                body: JSON.stringify({ id: roadmapId, organizationId: process.env.GATSBY_SQUEAK_ORG_ID }),
                 credentials: 'include',
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
             })
 
             if (res.ok) {
-                setSubscribed(false)
                 setShowAuth(false)
                 addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
+                mutate({
+                    data: {
+                        id: roadmapData?.id,
+                        attributes: {
+                            roadmapSubscriptions: {
+                                data: roadmapData?.attributes?.roadmapSubscriptions?.data.filter(
+                                    ({ id }) => id !== props.squeakId
+                                ),
+                            },
+                        },
+                    },
+                })
+
+                posthog?.capture('roadmap unsubscribe', {
+                    roadmapId: squeakId,
+                })
             } else {
                 addToast({ error: true, message: 'Whoops! Something went wrong.' })
+                throw new Error('Failed to unsubscribe from roadmap')
             }
-        } else {
-            setShowAuth(true)
-        }
-        setLoading(false)
-    }
+        } catch (error) {
+            console.error(error)
 
-    useEffect(() => {
-        if (user) {
-            setSubscribed(user?.profile?.subscriptions?.some((sub) => sub?.id === roadmapId))
+            posthog?.capture('squeak error', {
+                source: 'InProgress.subscribe',
+                roadmapId: squeakId,
+                error: JSON.stringify(error),
+            })
+        } finally {
+            setLoading(false)
         }
-    }, [user])
+    }
 
     return (
         <li
-            className={`border-t border-dashed border-gray-accent-light first:border-t-0 px-4 py-4 sm:py-2 xl:pb-4 bg-white rounded-sm shadow-xl ${
+            className={`px-4 py-4 sm:py-2 xl:pb-4 border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-sm ${
                 props?.className ?? ''
             }`}
         >
@@ -95,16 +222,18 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                         </button>
                     )}
                 </div>
-                {thumbnail && (
+                {image && (
                     <div className="sm:flex-shrink-0">
-                        <GatsbyImage className="shadow-md" image={getImage(thumbnail)} alt="" />
+                        <img src={image.url} className="shadow-md" alt="" />
+                        {/*<GatsbyImage className="shadow-md" image={getImage(thumbnail)} alt="" />*/}
                     </div>
                 )}
             </div>
+
             {githubPages && (
                 <div className="mt-4 mb-4">
                     <h5 className="text-sm mb-2 font-semibold opacity-60 !mt-0">Progress</h5>
-                    <div className="h-2 flex-grow bg-gray-accent-light rounded-md relative overflow-hidden">
+                    <div className="h-2 flex-grow bg-border dark:bg-border-dark rounded-md relative overflow-hidden">
                         <div
                             style={{ width: `${percentageComplete}%` }}
                             className={`bg-[#3FB950] absolute inset-0 h-full`}
@@ -112,6 +241,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     </div>
                 </div>
             )}
+
             {githubPages && more && (
                 <ul className="list-none m-0 p-0 pb-4 grid gap-y-2 mt-4">
                     {githubPages.map((page) => {
@@ -131,12 +261,13 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                     })}
                 </ul>
             )}
+
             <div className="sm:flex-[0_0_250px] xl:flex-1 flex sm:justify-end xl:justify-start">
                 <div className="mt-2 w-full">
                     {showAuth ? (
                         <>
                             <h4 className="mb-1 text-red">Sign into PostHog.com</h4>
-                            <div className="bg-tan p-4 mb-2">
+                            <div className="bg-border dark:bg-border-dark p-4 mb-2">
                                 <p className="text-sm mb-2">
                                     <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
                                 </p>
@@ -147,17 +278,19 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                                 </p>
                             </div>
 
-                            <Login
-                                onSubmit={(data: { email: string }) => subscribe(data?.email)}
-                                apiHost={process.env.GATSBY_SQUEAK_API_HOST}
-                                organizationId={process.env.GATSBY_SQUEAK_ORG_ID}
+                            <Authentication
+                                initialView="sign-in"
+                                onAuth={() => subscribe()}
+                                showBanner={false}
+                                showProfile={false}
                             />
                         </>
                     ) : (
                         <button
                             disabled={loading}
-                            onClick={() => (subscribed ? unsubscribe(user?.email) : subscribe(user?.email))}
-                            className="text-[15px] inline-flex items-center space-x-2 py-2 px-4 rounded-sm bg-gray-accent-light text-black hover:text-black font-bold active:top-[0.5px] active:scale-[.98] w-auto"
+                            onClick={() => (subscribed ? unsubscribe() : subscribe())}
+                            className="flex border border-b-3 border-light dark:border-dark rounded gap-2 p-2 font-bold bg-white dark:bg-accent-dark text-red dark:text-yellow"
+                            data-attr={subscribed ? `roadmap-unsubscribe:${title}` : `roadmap-subscribe:${title}`}
                         >
                             <span className="w-[24px] h-[24px] flex items-center justify-center bg-blue/10 text-blue rounded-full">
                                 {loading ? (
@@ -171,7 +304,7 @@ export function InProgress(props: IRoadmap & { className?: string; more?: boolea
                             <span>
                                 {subscribed
                                     ? 'Unsubscribe'
-                                    : beta_available
+                                    : betaAvailable
                                     ? 'Get early access'
                                     : 'Subscribe for updates'}
                             </span>

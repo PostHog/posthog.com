@@ -1,6 +1,6 @@
 ---
 date: 2022-06-01
-title: PostHog vs Matomo
+title: "In-depth: PostHog vs Matomo"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -78,7 +78,7 @@ PostHog Cloud adds [experimentation](/product/experimentation-suite), [group ana
         	<td>Host yourself</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
     	</tr>
     	<tr>
         	<td>1st-party cookies</td>
@@ -195,11 +195,17 @@ PostHog Cloud adds [experimentation](/product/experimentation-suite), [group ana
         	<td className="text-center"><span className="text-red text-lg">✖</span></td>
     	</tr>
     	<tr>
-        	<td>Session Recording & Heatmaps</td>
+        	<td>Session replays & heatmaps</td>
         	<td className="text-center">199 to 599 EUR pa</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
+		<tr>
+            <td><strong>User surveys</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+			<td className="text-center"><span className="text-green text-lg">✔</span></td>
+        </tr>
     	<tr>
         	<td>Experimentation</td>
         	<td className="text-center">199 to 599 EUR pa</td>

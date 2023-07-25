@@ -60,12 +60,12 @@ module.exports = {
         indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
         queries: [
             retrievePages('docs', '/^docs/'),
-            retrievePages('manual', '/^manual/'),
             retrievePages('handbook', '/^handbook/'),
             retrievePages('tutorial', '/^tutorials/'),
             retrievePages('blog', '/^blog/'),
             retrievePages('customers', '/^customers/'),
             retrievePages('apps', '/^apps/'),
+            retrievePages('cdp', '/^cdp/'),
             {
                 query: `
                             {
@@ -98,7 +98,7 @@ module.exports = {
             {
                 query: `
                             {
-                              questions: allQuestion(filter: {permalink: {ne: null}}) {
+                              questions: allSqueakQuestion(filter: {permalink: {ne: null}, archived: {ne: true}}) {
                                 nodes {
                                   id
                                   title: subject
@@ -178,7 +178,7 @@ module.exports = {
                         {
                             id: createContentDigest('pricing'),
                             title: 'Pricing',
-                            type: 'manual',
+                            type: 'docs',
                             slug: 'pricing',
                             headings: [
                                 { value: 'Products', depth: 2 },
@@ -190,22 +190,6 @@ module.exports = {
                             ],
                             internal: {
                                 contentDigest: createContentDigest('pricing'),
-                            },
-                        },
-                        {
-                            id: createContentDigest('using-posthog'),
-                            title: 'Product manual',
-                            type: 'manual',
-                            slug: 'using-posthog',
-                            headings: [
-                                { value: '1. Product analytics', depth: 2 },
-                                { value: '2. Visualize', depth: 2 },
-                                { value: '3. Optimize', depth: 2 },
-                                { value: '4. Data', depth: 2 },
-                                { value: '5. Project settings', depth: 2 },
-                            ],
-                            internal: {
-                                contentDigest: createContentDigest('using-posthog'),
                             },
                         },
                         {

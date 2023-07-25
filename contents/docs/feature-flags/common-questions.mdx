@@ -6,16 +6,24 @@ title: Common questions about feature flags
 
 Here's a list of suggestions to troubleshoot your flag:
 
-1. [ ] Check the feature flags tab on [the persons page](https://app.posthog.com/persons) for your specific person.
+1. Check the feature flags tab on [the persons page](https://app.posthog.com/persons) for your specific person.
     1. If the flag is showing up as disabled here, check the "match evaluation" column to know the reason why.
     2. If the flag is showing up as enabled here, the problem lies somewhere in the implementation (your code).
-2. [ ] Check if you're calling `identify()` before the flag is called to get to the right person on your website.
-3. [ ] Check if an ad-blocker is blocking calls. If yes, you can fix this by [deploying a reverse proxy](/docs/advanced/proxy).
-4. [ ] If none of the above, ask us in [the User Slack](/slack), we'll help debug.
+2. Check if you're calling `identify()` before the flag is called to get to the right person on your website.
+3. Check if an ad-blocker is blocking calls. If yes, you can fix this by [deploying a reverse proxy](/docs/advanced/proxy).
+4. If your flag depends on person properties, and doesn't work for initially anonymous users, you might be hitting the case where flags are being queried before those properties can be ingested. In this case, manually pass in properties to `getFeatureFlag` from your client.
+5. [Raise a support ticket](https://app.posthog.com/home#supportModal) to see if we can help debug.
 
 
 ---
 
+## Why are local evaluation flags priced differently?
+
+[Local evaluation](/docs/feature-flags/bootstrapping-and-local-evaluation) enables you to pull flag definitions from the PostHog API, rather than making an individual `decide` call per flag. Using these definitions, you can resolve the flags of hundreds or thousands of users with a single API call. We therefore bill a single local evaluation call as being equivalent to 10 `decide`requests.
+
+Local evaluation payloads are typically used for much, _much_ more than 10 users, so local evaluation is often still more cost-effective than making individual `decide` requests. We also give all users their first 1M API calls (or 100k local evaluation calls) free each month, in addition to offering discounts for non-profit organizations and [startups](/startups).
+
+---
 
 ## On my website, why does the feature flag sometimes flicker?
 
@@ -41,3 +49,18 @@ However, note that this has a few consequences:
 2. Experiments that depend on trend goals won't work since we use this event to calculate relative exposure. Convert your trend experiments to funnel experiments instead to make this work.
 
 ---
+
+## Is the rollout percentage for a flag deterministic? How about multiple flags?
+
+For any given feature flag, a user who is within the rollout bound will always remain within the rollout bound as the rollout percentage increases. Thus, the rollout percentage is deterministic.
+With multiple feature flags, users can fall under different points of rollout percentages per flag, so for a "50% rollout" for feature flag A and feature flag B, you won't always have the same users that see both features at once.
+
+---
+
+## Why can't I use a cohort with behavioral filters in my feature flag?
+
+Feature flags require fast evaluation and behavioral or lifecycle queries are relatively slow. This slowness isn't a big deal for cohorts, but is for feature flags. Enabling these queries would significantly impact the entire feature flag service. 
+
+Feature flags can quickly access person properties cohorts or a static list of user IDs, which is why cohorts based on those can be used.
+
+To get around this, you can create a dynamic behavioral cohort and then duplicate it as a static cohort (using the button on the cohort's detail page).
