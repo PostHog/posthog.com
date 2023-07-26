@@ -83,7 +83,7 @@ const Post = ({
 
     useEffect(() => {
         if (active && typeof window !== 'undefined') {
-            containerRef?.current?.scrollIntoView({ block: 'start', inline: 'nearest' })
+            containerRef?.current?.scrollIntoView({ block: 'center', inline: 'nearest' })
             window.scrollTo({ top: 0 })
         }
     }, [pathname])
@@ -116,19 +116,15 @@ const Post = ({
                                 )}
                             </span>
                             <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
-                                <li className="text-sm font-medium leading-none flex space-x-1 items-center">
-                                    <LikeButton className="w-4 h-4" handleClick={handleLike} liked={liked} />
-                                    <span className="opacity-60">{likeCount}</span>
+                                <li className="text-sm font-medium leading-none flex space-x-1 items-center opacity-60">
+                                    <Heart className="w-4 h-4" />
+                                    <span>{likeCount}</span>
                                 </li>
                                 {authors?.data?.length > 0 && (
-                                    <li className="text-sm font-medium leading-none pl-2 border-l border-light dark:border-dark">
+                                    <li className="text-sm font-medium leading-none pl-2 border-l border-light dark:border-dark opacity-60">
                                         {authors?.data.map(({ id, attributes: { firstName, lastName } }) => {
                                             const name = [firstName, lastName].filter(Boolean).join(' ')
-                                            return (
-                                                <Link key={id} to={`/community/profiles/${id}`}>
-                                                    {name}
-                                                </Link>
-                                            )
+                                            return name
                                         })}
                                     </li>
                                 )}
