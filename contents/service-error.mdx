@@ -21,11 +21,6 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
 <p className='-mt-4 flex flex-col items-center justify-center text-center sm:block'>
     <a href="https://status.posthog.com/">Check PostHog Status</a>
-    <span className="mx-2 hidden sm:inline-flex">•</span>
-    <a href={
-        'mailto:support@posthog.com?subject=Encountered server error'
-        + ((typeof window !== 'undefined' && location.hash) ? ` (ID ${location.hash.slice(1)})` : '')
-    }>Contact PostHog</a>
 </p>
 
 <>{typeof window !== 'undefined' && location.hash && (
