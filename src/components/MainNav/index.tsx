@@ -283,6 +283,12 @@ export const Main = () => {
                         })}
                     </ul>
                     <div className="flex items-center justify-end">
+                        <Link
+                            to={'https://app.posthog.com/login'}
+                            className={`text-[13.5px] font-medium flex h-full items-center relative p-4 opacity-70 hover:opacity-100`}
+                        >
+                            <span className="relative">Login</span>
+                        </Link>
                         <SignupCTA size="sm" type="outline" className="hidden sm:flex mr-2" text="Get started" />
                         <HoverTooltip
                             content={() => (
