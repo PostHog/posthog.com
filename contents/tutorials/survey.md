@@ -10,7 +10,7 @@ tags: ['surveys']
 
 [Surveys](/docs/surveys/manual) make it easy to collect qualitative feedback fast. PostHog provides everything you need to do this, but you can also customize the implementation of the survey in your app. In this tutorial, we show you how to do this by creating a Next.js app, adding PostHog, setting up a basic survey, and then creating a completely custom survey.
 
-> Already have an app and PostHog set up? Skip to survey creation.
+> Already have an app and PostHog set up? [Skip to survey creation](#creating-a-basic-survey).
 
 ## Creating a Next.js app and installing PostHog
 
