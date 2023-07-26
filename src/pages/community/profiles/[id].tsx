@@ -125,6 +125,7 @@ export default function ProfilePage({ params }: PageProps) {
                 <PostLayout
                     title="Profile"
                     breadcrumb={[{ name: 'Community', url: '/questions' }]}
+                    menu={nav}
                     sidebar={
                         <ProfileSidebar
                             handleEditProfile={handleEditProfile}

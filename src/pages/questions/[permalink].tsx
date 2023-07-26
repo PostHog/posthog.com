@@ -47,6 +47,7 @@ export default function QuestionPage(props: QuestionPageProps) {
             />
             <PostLayout
                 title={question?.attributes?.subject || ''}
+                menu={nav}
                 sidebar={<QuestionSidebar permalink={permalink} />}
                 hideSurvey
                 menuWidth={user?.role?.type === 'moderator' ? { right: 400 } : undefined}
