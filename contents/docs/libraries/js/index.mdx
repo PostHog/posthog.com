@@ -61,6 +61,17 @@ posthog.capture(
 )
 ```
 
+Typically user properties are set when an event occurs like `user updated email` but there may be occasions where you simply want to set user properties as its own event. 
+
+```javascript
+posthog.setPersonProperties(
+    { name: "Max Hedgehog" } // Thes properties are like the `$set` from above 
+    { initial_url: "/blog" } // Thes properties are like the `$set` from above 
+)
+```
+
+This creates a special `$set` event that is sent to PostHog.
+
 For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
 ### Identifying users
@@ -70,6 +81,7 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 import JSIdentify from './\_snippets/identify.mdx'
 
 <JSIdentify />
+
 
 ### Alias
 
@@ -124,7 +136,7 @@ posthog.register({
 
 The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified Super Property.
 
-However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.people.set`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.setPersonProperties`. More information on this can be found on the [Sending User Information section](#sending-user-information).
 
 Furthermore, if you register the same property multiple times, the next event will use the new value of that property. If you want to register a property only once (e.g. for ad campaign properties) you can use `register_once`, like so:
 
@@ -175,6 +187,7 @@ posthog.opt_in_capturing()
 ```
 
 ### Feature Flags
+
 
 PostHog v1.10.0 introduced [Feature Flags](/docs/user-guides/feature-flags), which allow you to safely deploy and roll back new features.
 
@@ -500,6 +513,8 @@ In this section we describe some additional details on advanced configuration av
 | Attribute                                                                     | Description                                                                                                    |
 | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `advanced_disable_decide`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.     |
+| `advanced_disable_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Will keep `/decide` running, but without any feature flag requests     |
+| `advanced_disable_feature_flags_on_first_load`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Stops from firing feature flag requests on first page load. Only requests feature flags when user identity or properties are updated, or you manually request for flags to be loaded.  |
 | `secure_cookie` <br/><br/>**Type:** Boolean<br/>**Default:** `false`          | If this is `true`, PostHog cookies will be marked as secure, meaning they will only be transmitted over HTTPS. |
 | `custom_campaign_params` <br/><br/>**Type:** Array<br/>**Default:** `[]`      | List of query params to be automatically captured (see [UTM Segmentation](/docs/data/utm-segmentation) ) |
 

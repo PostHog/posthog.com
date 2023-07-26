@@ -773,12 +773,6 @@ export const communityMenu = {
             ],
         },
         {
-            name: 'Apps',
-            icon: 'Apps',
-            color: 'purple',
-            url: '/apps',
-        },
-        {
             name: 'Templates',
             icon: 'Magic',
             color: 'orange',
@@ -1150,6 +1144,10 @@ export const docsMenu = {
                         {
                             name: 'Team collaboration',
                             url: '/docs/data/team-collaboration',
+                        },
+                        {
+                            name: 'User properties',
+                            url: '/docs/data/user-properties',
                         },
                         {
                             name: 'UTM segmentation',
@@ -2004,6 +2002,15 @@ export const docsMenu = {
                     url: '/docs/feature-flags/common-questions',
                     icon: 'Question',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Library comparison',
+                    url: '/docs/feature-flags/libraries',
+                    icon: 'Book',
+                    color: 'blue',
                 },
             ],
         },

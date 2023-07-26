@@ -200,7 +200,7 @@ export default function NoHatingAllowed() {
     const listRef = useRef<HTMLUListElement>(null)
 
     return (
-        <div className="relative pt-8">
+        <div className="relative pt-8 mb-12 overflow-hidden">
             <h2 className="text-4xl lg:text-6xl text-center mb-5">
                 <span className="text-red uppercase block md:inline">Warning:</span> You'll hate PostHog if...
             </h2>

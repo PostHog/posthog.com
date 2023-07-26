@@ -1,74 +1,24 @@
 import React, { useState } from 'react'
-import SplitFlap, { ISplitFlap } from 'components/SplitFlap'
-const featureClasses = `m-0 font-semibold`
-import { motion } from 'framer-motion'
-
-const features = [
-    {
-        from: 0,
-        to: 4,
-        stagger: 0.4,
-        content: (
-            <>
-                <p className={featureClasses}>SaaS products in one</p>
-                <p className="m-0 text-sm">(All designed to work natively together)</p>
-            </>
-        ),
-    },
-    {
-        to: 1,
-        from: 20,
-        stagger: 0.08,
-        randomize: true,
-        length: 15,
-        content: <p className={featureClasses}>Place to send user data</p>,
-    },
-    {
-        to: 1,
-        from: 10,
-        stagger: 0.08,
-        randomize: true,
-        length: 10,
-        content: <p className={featureClasses}> Account to provision</p>,
-    },
-    {
-        to: 0,
-        from: 10,
-        stagger: 0.08,
-        randomize: true,
-        length: 10,
-        content: <p className={featureClasses}>Sales people to deal with</p>,
-    },
-]
-
-const Feature = ({ index, content, ...feature }: ISplitFlap & { index: number; content: JSX.Element }) => {
-    return (
-        <li className="text-center flex flex-col items-center justify-center space-y-2">
-            <SplitFlap perspective="20rem" startDelay={index * 500} {...feature} />
-            <div>{content}</div>
-        </li>
-    )
-}
+import { StaticImage } from 'gatsby-plugin-image'
 
 export default function AllInOne() {
     return (
-        <section className="my-16 md:my-24 mx-auto max-w-4xl px-4">
-            <h2 className="m-0 text-4xl md:text-6xl text-center leading-tight md:leading-none">
-                <span className="text-red">Still</span> paying 4+ analytics vendors...{' '}
-                <br className="hidden md:block" />
-                <span className="text-red inline-block">and</span> tools to connect them all?
-            </h2>
-            <p className="text-center m-0 mt-4 font-semibold opacity-70 text-base sm:text-lg">
-                (They’ll never play together as nicely as this.)
-            </p>
-            <ul
-                className="grid grid-cols-2 sm:grid-cols-4
-             list-none p-0 m-0 items-start mt-8 md:mt-12 gap-y-8 md:gap-y-0 gap-x-4"
-            >
-                {features.map((feature, index) => {
-                    return <Feature key={index} index={index} {...feature} />
-                })}
-            </ul>
+        <section className="relative mb-12">
+            <div className="md:absolute top-0 left-0 lg:top-40 xl:top-48 lg:left-0 xl:left-8 max-w-md mx-auto lg:mx-0 mt-12 lg:mt-0 lg:max-w-2xl">
+                <h2 className="m-0 text-4xl px-4 md:text-6xl text-center md:text-left leading-tight md:leading-none">
+                    PostHog is 7+ tools <br className="xl:hidden" />
+                    in one
+                </h2>
+                <p className="text-center md:text-left px-4 m-0 mt-1 font-semibold text-primary/75 dark:text-primary-dark/75 text-base sm:text-lg">
+                    Product engineering has never been so lit.
+                </p>
+            </div>
+            <div className="md:hidden w-full">
+                <StaticImage src="./images/godzilla-mobile.png" />
+            </div>
+            <div className="hidden md:block w-full">
+                <StaticImage src="./images/godzilla.png" />
+            </div>
         </section>
     )
 }
