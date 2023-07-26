@@ -74,13 +74,13 @@ With our app and PostHog set up, we can go to the [surveys tab](https://app.post
 
 Before launching our survey, we need to enable the [survey site app](https://app.posthog.com/project/apps/611). Either click the link on your draft survey page or go to the [apps tab](https://app.posthog.com/project/apps) and search for "Surveys app," enable it, and press save. 
 
-Once done, go back to your draft survey and click "Launch" Back in your app you will see your survey in the bottom right of the page. PostHog automatically tracks surveys shown, dismissed, and submitted along with the responses and user details for each.
+Once done, go back to your draft survey and click "Launch". In your app, you will now see your survey in the bottom right of the page. PostHog automatically tracks surveys shown, dismissed, and submitted along with the responses and user details for each.
 
 ![Survey in-app](../images/tutorials/survey/survey.png)
 
 ## Creating a custom survey
 
-If you want to customize how and when you show your survey, we can can that too. To start, create another survey, but this time set the "Display mode" as `API` instead of `popover`. Customize the details as much as you want, save it as a draft, then launch. It won’t show in your app until we write some code to implement it.
+You can customize how and when you show your survey. To start, create another survey, but this time set the "Display mode" as `API` instead of `popover`. Customize the details as much as you want, save it as a draft, then launch. It won’t show in your app until we write some code to implement it.
 
 ![API display mode](../images/tutorials/survey/api.png)
 
@@ -105,7 +105,7 @@ export default function Home() {
 }
 ```
 
-We can then get the surveys for a user with PostHog’s `getActiveMatchingSurveys` method in a `useEffect`. In the callback, filter for API type surveys, set the first one in our state, and capture a `survey shown` event.
+We can then get the surveys for a user with PostHog’s `getActiveMatchingSurveys` method in a `useEffect`. In the callback, filter for API type surveys, set the first one in our state, and capture a `survey shown` event:
 
 ```js-web
 //app/page.js
@@ -224,7 +224,7 @@ When you submit the survey with a response, it shows up in your results in PostH
 
 ### Dismiss and hide survey
 
-The last thing you might want to do is let users  dismiss the survey and prevent it from being shown repeatedly. The PostHog survey app handles this with `localStorage` storing a value that is `seenSurvey_ + survey.id`, so we will use that as well.
+The last thing you might want to do is enable users to dismiss the survey and prevent it from being shown repeatedly. The PostHog survey app handles this with `localStorage` storing a value that is `'seenSurvey_' + survey.id`, so we will use that as well.
 
 First, create a function to close the survey which sets the value in `localStorage` and the state of the survey to `null`.
 
@@ -269,7 +269,7 @@ const dismiss = () => {
 //...
 ```
 
-This hides the survey when either are clicked, but it shows again when the page is refreshed. To fix this, wecheck for the `seenSurvey_` value in local storage and don’t show the survey if it’s `true`. We can do this in the `useEffect` like this:
+This hides the survey when either are clicked, but it shows again when the page is refreshed. To fix this, we check for the `seenSurvey_` value in local storage and don’t show the survey if it’s `true`. We can do this in the `useEffect` like this:
 
 ```js-web
 // app/page.js
