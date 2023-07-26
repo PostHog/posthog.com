@@ -285,7 +285,7 @@ export const Main = () => {
                     <div className="flex items-center justify-end">
                         <Link
                             to={'https://app.posthog.com/login'}
-                            className={`text-[13.5px] font-medium flex h-full items-center relative p-4 opacity-70 hover:opacity-100`}
+                            className={`text-[13.5px] font-medium h-full items-center relative p-4 opacity-70 hover:opacity-100 hidden sm:flex `}
                         >
                             <span className="relative">Login</span>
                         </Link>
