@@ -13,7 +13,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
   <GatsbyImage image={getImage(props.images[0])} alt="Worker hog" />
 </div>
 
-<h1 className="text-center px-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative">
+<h1 className="text-center px-2 md:px-8 text-4xl sm:text-5xl relative">
   <span className='text-red'>Oops!</span> Things went south
 </h1>
 
@@ -21,11 +21,6 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
 <p className='-mt-4 flex flex-col items-center justify-center text-center sm:block'>
     <a href="https://status.posthog.com/">Check PostHog Status</a>
-    <span className="mx-2 hidden sm:inline-flex">•</span>
-    <a href={
-        'mailto:support@posthog.com?subject=Encountered server error'
-        + ((typeof window !== 'undefined' && location.hash) ? ` (ID ${location.hash.slice(1)})` : '')
-    }>Contact PostHog</a>
 </p>
 
 <>{typeof window !== 'undefined' && location.hash && (
