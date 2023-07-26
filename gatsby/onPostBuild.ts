@@ -76,7 +76,7 @@ const createOrUpdateStrapiPosts = async (posts) => {
     await Promise.all(
         posts.map(
             ({
-                frontmatter: { title, date, featuredImage },
+                frontmatter: { title, date, featuredImage, authorData },
                 fields: { slug },
                 parent: { relativePath: path },
                 rawBody,
@@ -85,6 +85,7 @@ const createOrUpdateStrapiPosts = async (posts) => {
                 const category = allStrapiPostCategories.find(
                     (category) => category?.attributes?.folder === path.split('/')[0]
                 )
+                const authorIDs = authorData?.map(({ profile_id }) => profile_id) || []
                 const data = {
                     slug,
                     path,
@@ -95,7 +96,7 @@ const createOrUpdateStrapiPosts = async (posts) => {
                     },
                     body: rawBody,
                     authors: {
-                        connect: [2],
+                        connect: authorIDs,
                     },
                     ...(category
                         ? {
@@ -138,6 +139,9 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         }
                         featuredImage {
                             publicURL
+                        }
+                        authorData {
+                            profile_id
                         }
                     }
                     rawBody
