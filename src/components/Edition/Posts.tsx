@@ -59,7 +59,7 @@ const Post = ({
     const containerRef = useRef()
     const { pathname } = useLocation()
     const { likePost, user } = useUser()
-    const liked = user?.profile?.postLikes?.some((post) => post.id === id)
+    const [liked, setLiked] = useState(false)
     const [likeCount, setLikeCount] = useState(likes?.data?.length || 0)
     const category = post_category?.data?.attributes?.label
     const active = pathname === slug
@@ -77,6 +77,7 @@ const Post = ({
 
     const handleLike = (e) => {
         e.preventDefault()
+        setLiked(!liked)
         setLikeCount(likeCount + (!liked ? 1 : -1))
         likePost(id, liked)
     }
@@ -87,6 +88,10 @@ const Post = ({
             window.scrollTo({ top: 0 })
         }
     }, [pathname])
+
+    useEffect(() => {
+        setLiked(user?.profile?.postLikes?.some((post) => post.id === id))
+    }, [user])
 
     return (
         <li ref={containerRef} className="snap-start last:pb-24">
@@ -116,9 +121,9 @@ const Post = ({
                                 )}
                             </span>
                             <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
-                                <li className="text-sm font-medium leading-none flex space-x-1 items-center opacity-60">
-                                    <Heart className="w-4 h-4" />
-                                    <span>{likeCount}</span>
+                                <li className="text-sm font-medium leading-none flex space-x-1 items-center">
+                                    <Heart active={liked} className={`w-4 h-4 ${liked ? 'text-red' : 'opacity-60'}`} />
+                                    <span className="opacity-60">{likeCount}</span>
                                 </li>
                                 {authors?.data?.length > 0 && (
                                     <li className="text-sm font-medium leading-none pl-2 border-l border-light dark:border-dark opacity-60">
@@ -367,9 +372,9 @@ export default function Posts({ children, articleView }) {
             </Modal>
             <div className="px-5 mt-8 mb-12 max-w-screen-2xl mx-auto">
                 <section>
-                    <div className="py-2 border-y border-border dark:border-dark text-center flex justify-between items-center sticky top-[-1px]">
+                    <div className="py-2 border-y border-border dark:border-dark text-center md:flex justify-between items-center sticky top-[-1px]">
                         <p className="m-0">The latest from the PostHog community</p>
-                        <div className="flex space-x-6 items-center">
+                        <div className="flex space-x-6 items-center md:mt-0 mt-2 justify-center">
                             <p className="m-0">{dayjs().format('MMM D, YYYY')}</p>
                             {user ? (
                                 <span className="flex">
@@ -398,7 +403,11 @@ export default function Posts({ children, articleView }) {
                     <div className={`${articleView ? 'sticky top-[108px] w-[30rem] flex-shrink-0' : 'flex-grow'}`}>
                         <PostsListing articleView={articleView} />
                     </div>
-                    <div className={`${articleView ? 'flex-grow' : 'sticky top-[108px] w-[30rem] flex-shrink-0'}`}>
+                    <div
+                        className={`${
+                            articleView ? 'flex-grow' : 'sticky top-[108px] w-[30rem] flex-shrink-0 lg:block hidden'
+                        }`}
+                    >
                         {children}
                     </div>
                 </section>
