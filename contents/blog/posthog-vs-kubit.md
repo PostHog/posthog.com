@@ -15,12 +15,15 @@ tags:
     - Guides
 ---
 
-Kubit is a product analytics platform built for product teams. PostHog, on the other hand, is built primarily for engineers. In this article we’ll explore the differences between Kubit and PostHog in detail, but it can helpful to first discuss the different needs of engineers and product teams:  
+Kubit is a product analytics platform built for product teams. PostHog, on the other hand, is built primarily for engineers. 
 
-- Product managers need tools which help them simply collect and analyze product data, so they can unearth user patterns. They also need to collaborate closely with other roles. 
+In this article we’ll explore the differences between Kubit and PostHog in detail, but it can helpful to first discuss the different needs of engineers and product teams:  
+
+- Product managers need tools which help them simply collect and analyze product data, so they can unearth user patterns. They also need to collaborate closely with other roles.
+ 
 - Engineers and developers also need to collect and analyze data, but often want to run much more detailed analysis and crucially want to directly implement or test changes as a result of their discoveries.
 
-These differences explain why PostHog and Kubit have such different features even though they both include product analytics tooling. Kubit focuses on providing a simplified, no-code experience, while PostHog has a much broader suite of tools — feature flags, user surveys, A/B experimentation, and much more. 
+These differences explain why PostHog and Kubit have such different features, even though they both include product analytics tooling. Kubit focuses on providing a simplified, no-code experience, while PostHog has a much broader suite of tools — feature flags, user surveys, A/B experimentation, and much more. 
 
 > ### What about product-minded engineers?
 >
@@ -33,7 +36,7 @@ In this article we’ll explore these differences in more detail, and take a dee
 ### PostHog does more than product analytics
 Kubit is intended for product and data teams at large organizations. It therefore focuses solely on providing product analytics tools (and has an opaque pricing model that’s squarely aimed at enterprises), and that’s it.
 
-PostHog, on the other hand, offers far more than just product analytics and empowers engineers to collect feedback (with surveys), deploy changes (with feature flags), test ideas (with A/B testing) and gather more information (with session replays). In short, it’s just ridiculously more powerful. 
+PostHog, on the other hand, offers far more than just product analytics and empowers engineers to collect feedback (with surveys), deploy changes (with feature flags), test ideas (with A/B testing), and gather more information (with session replays). In short, it’s just ridiculously more powerful. 
 
 ### PostHog can gather multiple types of data
 Both Kubit and PostHog are built around the concept of _events_, which users define, track and analyze. An event can be performed, or not, and can have properties, or not. That’s about it. 
@@ -41,12 +44,12 @@ Both Kubit and PostHog are built around the concept of _events_, which users def
 However, what if you want to analyze something which isn’t an event, like a feedback comment, or how long a user spent reading a page? With Kubit that’s not possible, but with PostHog it is. You can watch replays of actual user interactions with your product, issue surveys to collect feedback — or even use PostHog as a data warehouse to track other data. 
 
 ### PostHog is open source 
-At PostHog we aren’t just open source; we’re transparent by default. Everything from our [roadmap](/roadmap) to our [team profiles](/team) are available to the public. This means we’re constantly taking feedback on how to improve, as well as code contributions from our community that directly impact the product. Need an integration that doesn’t exist yet? You can build it yourself. 
+At PostHog, we aren’t just open source – we’re transparent by default. Everything from our [roadmap](/roadmap) to our [team profiles](/team) are available to the public. This means we’re constantly taking feedback on how to improve, as well as code contributions from our community that directly impact the product. Need an integration that doesn’t exist yet? You can build it yourself. 
 
-Kubit, on the other hand, is _incredibly_ closed source — so the point that pricing information is publicly available, free trials require personal information, and the roadmap is non-existent. That’s not the way we like to work.  
+Kubit, on the other hand, is _incredibly_ closed source. There's no public pricing information, free trials require personal information, and the roadmap is non-existent. That’s not the way we like to work.  
 
 ## PostHog and Kubit feature comparison
-As explained above, PostHog offers a far greater suite of features than Kubit, which focuses solely on product analytics. In fact, PostHog’s suite of features is continually growing — check [the roadmap](/roadmap) to see what we’re working on next!
+As explained above, PostHog offers a wider selection of feature than Kubit, which focuses solely on product analytics.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
