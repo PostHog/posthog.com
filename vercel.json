@@ -1000,6 +1000,7 @@
         { "source": "/docs/cdp/github-star-sync", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/twitter-followers", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/gitlab-release-tracker", "destination": "/docs/cdp" },
+        { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/growth/marketing" },
         { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" },
         { "source": "/james", "destination": "/community/profiles/71" }
     ],

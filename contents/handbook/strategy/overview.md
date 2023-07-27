@@ -42,7 +42,9 @@ We could go public with $100M ARR from the following:
 2) 500 companies building successful products with us, paying $50K each
 3) 50 companies building successful products with us, paying $1M each
 
-We did this by first focusing on high-growth self-serve startups to nail (1) and (2). This gave us the strong brand, product, and financial position to win (3).
+We are fully focused on high-growth self-serve startups to nail (1) and (2), as we believe this will enable the most successful products in the world _and_ reduces our reliance on a handful of very large customers.  
+
+This will give us the strong brand, product, and financial position to move into (3) if we want to in the future. However this won't be something we start looking at until 2024 at least. 
 
 ## 2023 vision
 
