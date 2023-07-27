@@ -117,7 +117,7 @@ const faqs = [
     },
     {
         q: 'Is there a free trial on paid plans?',
-        a: 'We have a generous free tier on every paid plan so you can try out the features before paying any money (though you will need to enter your credit card info). If you have additional needs, for example enterprise features, get in touch for a free trial.',
+        a: 'We have a generous free tier on every paid plan so you can try out the features before paying any money (though you will need to enter your credit card info). If you have additional needs, such as enterprise features, please get in touch.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-8.png" />,
