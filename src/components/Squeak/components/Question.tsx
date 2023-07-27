@@ -138,6 +138,7 @@ export const Question = (props: QuestionProps) => {
         handleReplyDelete,
         archive,
         pinTopics,
+        escalate,
     } = useQuestion(id, { data: question })
 
     if (isLoading) {
@@ -154,6 +155,7 @@ export const Question = (props: QuestionProps) => {
 
     const archived = questionData?.attributes.archived
     const slugs = questionData?.attributes?.slugs
+    const escalated = questionData?.attributes.escalated
 
     return (
         <CurrentQuestionContext.Provider
@@ -186,6 +188,25 @@ export const Question = (props: QuestionProps) => {
                             {user?.role?.type === 'moderator' && (
                                 <>
                                     {!archived && <TopicSelect selectedTopics={questionData.attributes.pinnedTopics} />}
+                                    {!archived && (
+                                        <Tooltip
+                                            content={() => (
+                                                <div style={{ maxWidth: 320 }}>
+                                                    {escalated
+                                                        ? 'Question has been sent to Zendesk'
+                                                        : 'Send to Zendesk and archive thread'}
+                                                </div>
+                                            )}
+                                        >
+                                            <button
+                                                disabled={escalated}
+                                                onClick={escalate}
+                                                className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold disabled:scale-[1] disabled:top-auto disabled:text-primary/50 disabled:cursor-not-allowed disabled:dark:text-primary-dark/50 disabled:opacity-50"
+                                            >
+                                                <span className="w-6 h-6 flex items-center justify-center">Z</span>
+                                            </button>
+                                        </Tooltip>
+                                    )}
                                     <button
                                         onClick={() => archive(!archived)}
                                         className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
