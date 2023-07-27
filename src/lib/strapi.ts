@@ -66,6 +66,7 @@ export type ProfileData = {
     topicSubscriptions: StrapiData<TopicData[]>
     pronouns?: string | null
     country: string | null
+    amaEnabled: boolean | null
 }
 
 export type UserData = {
