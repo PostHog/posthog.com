@@ -99,7 +99,7 @@ export default function ContactSales({ location }) {
                         </div>
                     </div>
                     <div className="order-1 md:order-2">
-                        <h3 className="mb-1">Contact sales</h3>
+                        <h3 className="mb-1">Contact us</h3>
                         <Contact
                             initialValues={{
                                 product: params.has('edition')
