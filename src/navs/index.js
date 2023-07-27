@@ -1885,14 +1885,14 @@ export const docsMenu = {
                 {
                     name: 'How to watch recordings',
                     url: '/docs/session-replay/how-to-watch-recordings',
-                    icon: 'Book',
-                    color: 'blue',
+                    icon: 'App',
+                    color: 'orange',
                 },
                 {
                     name: 'How to control which sessions you record',
                     url: '/docs/session-replay/how-to-control-which-sessions-you-record',
-                    icon: 'Book',
-                    color: 'blue',
+                    icon: 'Toggle',
+                    color: 'red',
                 },
                 {
                     name: 'Features',
@@ -1900,14 +1900,14 @@ export const docsMenu = {
                 {
                     name: 'Console log recording',
                     url: '/docs/session-replay/console-log-recording',
-                    icon: 'Book',
+                    icon: 'Code',
                     color: 'blue',
                 },
                 {
                     name: 'Network recording',
                     url: '/docs/session-replay/network-recording',
-                    icon: 'Book',
-                    color: 'blue',
+                    icon: 'Dashboard',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Privacy controls',
