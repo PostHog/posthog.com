@@ -253,14 +253,15 @@ export const Main = () => {
                         fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl box-content'
                     }`}
                 >
-                    <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
-                        {pathname === '/' && <ActiveBackground />}
-                        <Logo
-                            color={websiteTheme === 'dark' && 'white'}
-                            className="h-[24px] fill-current relative px-2 box-content"
-                        />
-                    </Link>
-
+                    <div className="flex-1 flex">
+                        <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
+                            {pathname === '/' && <ActiveBackground />}
+                            <Logo
+                                color={websiteTheme === 'dark' && 'white'}
+                                className="h-[24px] fill-current relative px-2 box-content"
+                            />
+                        </Link>
+                    </div>
                     <ul className="lg:flex hidden list-none m-0 p-0">
                         {menu.map((menuItem) => {
                             const active = menuItem.name === parent?.name
@@ -282,7 +283,7 @@ export const Main = () => {
                             )
                         })}
                     </ul>
-                    <div className="flex items-center justify-end">
+                    <div className="flex items-center justify-end flex-1">
                         <Link
                             to={'https://app.posthog.com/login'}
                             className={`text-[13.5px] font-medium h-full items-center relative p-4 opacity-70 hover:opacity-100 hidden sm:flex `}
