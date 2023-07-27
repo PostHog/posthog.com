@@ -1877,13 +1877,37 @@ export const docsMenu = {
                 },
                 */
                 {
-                    name: 'Product manual',
+                    name: 'Installation',
                     url: '/docs/session-replay/manual',
                     icon: 'Book',
                     color: 'blue',
                 },
                 {
+                    name: 'How to watch recordings',
+                    url: '/docs/session-replay/how-to-watch-recordings',
+                    icon: 'Book',
+                    color: 'blue',
+                },
+                {
+                    name: 'How to control which sessions you record',
+                    url: '/docs/session-replay/how-to-control-which-sessions-you-record',
+                    icon: 'Book',
+                    color: 'blue',
+                },
+                {
                     name: 'Features',
+                },
+                {
+                    name: 'Console log recording',
+                    url: '/docs/session-replay/console-log-recording',
+                    icon: 'Book',
+                    color: 'blue',
+                },
+                {
+                    name: 'Network recording',
+                    url: '/docs/session-replay/network-recording',
+                    icon: 'Book',
+                    color: 'blue',
                 },
                 {
                     name: 'Privacy controls',
