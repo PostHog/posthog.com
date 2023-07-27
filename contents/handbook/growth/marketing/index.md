@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Marketing & content exists to drive organic, word-of-mouth growth by:
+The Marketing & Content team exist to drive organic, word-of-mouth growth by:
 
 1. Producing world-class top-of-funnel content for our ICP
 2. Ensuring the information users need is easy to find and maintained to a high standard
@@ -158,7 +158,7 @@ We periodically run sponsorship campaigns:
 
 ### Twitter
 
-We're investing more effort in Twitter in Q1 2023 to figure out if this is a channel we want to consistently invest a lot of time in. If the answer is yes, we'll add more to the Handbook about how we use Twitter effectively. Our hypothesis is that it is the best social media platform for us to reach our target user with frequently shared pieces of engaging, transparent content about PostHog. 
+We're investing more effort in Twitter in 2023 to figure out if this is a channel we want to consistently invest a lot of time in. If the answer is yes, we'll add more to the Handbook about how we use Twitter effectively. Our hypothesis is that it is the best social media platform for us to reach our target user with frequently shared pieces of engaging, transparent content about PostHog. 
  
 ### Press
 
@@ -182,18 +182,4 @@ The Marketing Small Team page is maintained [here](/handbook/small-teams/marketi
 - People who like to choose their own objectives 
 - T-shaped people (wide breadth with a spike), rather than specialists
 - Hands-on people not motivated by managing a team
-- We're agnostic as to experience
-
-## Small team support
-
-In order to effectively support other small teams across the business, we assign someone from the marketing team to each of the other small teams, except for Joe who coordinates across all teams. Once a week we have a thread in Slack for sharing news from across the small teams with the rest of Marketing. The product team is also invited to join this thread, which is started by Joe. 
-
-Here is the current small team assignment: 
-
-- Product analytics: Andy Vandervell
-- Session recording: Charles Cook
-- Monitoring: Lior Neu-ner
-- Experimentation & Feature Success: Ian Vanagas
-- Overall view and growth: Joe Martin
-
-Support members for each small team are encouraged to work directly with their team, joining sprint meetings and relevant Slack channels. 
+- We're agnostic as to experience 

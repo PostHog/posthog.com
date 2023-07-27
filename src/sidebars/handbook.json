@@ -97,6 +97,10 @@
                 "url": "/handbook/company/communication"
             },
             {
+                "name": "Kudos",
+                "url": "/handbook/company/kudos"
+            },
+            {
                 "name": "Management",
                 "url": "/handbook/company/management"
             },
@@ -567,8 +571,8 @@
                 "url": "/handbook/growth/marketing"
             },
             {
-                "name": "Personas",
-                "url": "/handbook/growth/marketing/customer-personas"
+                "name": "Announcements",
+                "url": "/handbook/growth/marketing/product-announcements"
             },
             {
                 "name": "Testimonials",
