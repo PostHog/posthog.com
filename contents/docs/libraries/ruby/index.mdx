@@ -22,23 +22,9 @@ It uses an internal queue to make calls fast and non-blocking. It also batches r
 
 ## Installation
 
-Add this to your `Gemfile`:
+import RubyInstall from '../../integrate/_snippets/install-ruby.mdx'
 
-```bash
-gem "posthog-ruby"
-```
-
-In your app, set your API key **before** making any calls. If setting a custom `host`, make sure to include the protocol (e.g. `https://`).
-
-```ruby
-posthog = PostHog::Client.new({
-  api_key: "<ph_project_api_key>",
-  host: "<ph_instance_address>", # You can remove this line if you're using https://app.posthog.com
-  on_error: Proc.new { |status, msg| print msg }
-})
-```
-
-You can find your key in the 'Project Settings' page in PostHog.
+<RubyInstall />
 
 ### Debug logging
 
