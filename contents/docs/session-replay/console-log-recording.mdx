@@ -6,11 +6,11 @@ availability:
     enterprise: full
 ---
 
-PostHog can capture console logs from your application. This is useful for debugging and providing extra context on what is happening in your users' browser environment. 
+PostHog can capture console logs from your application. This is useful for debugging and providing extra context on what is happening in your user's browser environment. 
 
 As console logs can contain sensitive information, we do not capture these logs automatically. You can enable this feature globally from your [project settings](https://app.posthog.com/project/settings) or client-side by setting `enable_recording_console_log: true` in our [JavaScript web library config](/docs/integrate/client/js/#config).
 
-> Console logs will be recorded if _either_ the project setting **or** the client-side config is set to `true`. Console logs will not be recording if session replay is not enabled.
+> **Important:** Console logs will be recorded if _either_ the project setting **or** the client-side config is set to `true`. Console logs will not be recording if session replay is not enabled.
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
