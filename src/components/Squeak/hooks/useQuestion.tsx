@@ -71,7 +71,7 @@ const query = (id: string | number, isModerator: boolean) =>
     )
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
-    const { getJwt, fetchUser, isModerator } = useUser()
+    const { getJwt, fetchUser, user, isModerator } = useUser()
     const posthog = usePostHog()
 
     const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
@@ -84,7 +84,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
         const res = await fetch(
             url,
-            isModerator
+            user
                 ? {
                       headers: {
                           Authorization: `Bearer ${await getJwt()}`,
