@@ -1,5 +1,5 @@
 ---
-title: "5 A/B testing examples from YC’s top companies"
+title: "In-depth A/B testing examples from Airbnb and YC's top companies"
 date: 2023-07-28
 author: ["ian-vanagas"]
 showTitle: true
