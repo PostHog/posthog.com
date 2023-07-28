@@ -1,6 +1,6 @@
 ---
 title: "5 A/B testing examples from YC’s top companies"
-date: 2023-07-11
+date: 2023-07-28
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
