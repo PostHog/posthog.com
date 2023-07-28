@@ -93,6 +93,9 @@ module.exports = {
             red: '#F54E00',
         }),
         extend: {
+            backgroundImage: {
+                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            },
             fontFamily: {
                 serif: ['MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
@@ -120,6 +123,18 @@ module.exports = {
                     'Helvetica Rounded',
                     'Arial',
                     'sans-serif',
+                ],
+                os: [
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    'Segoe UI',
+                    'Roboto',
+                    'Helvetica',
+                    'Arial',
+                    'sans-serif',
+                    'Apple Color Emoji',
+                    'Segoe UI Emoji',
+                    'Segoe UI Symbol',
                 ],
             },
             fontSize: {
@@ -189,11 +204,25 @@ module.exports = {
                     '0%, 100%': { transform: 'rotate(6deg)' },
                     '50%': { transform: 'rotate(-6deg)' },
                 },
+                grow: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.2)' },
+                },
+                'grow-sm': {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.05)' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
+                grow: 'grow 2s linear infinite',
+                'grow-sm': 'grow-sm 3s linear infinite',
             },
         },
     },
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/line-clamp'), require('@headlessui/tailwindcss')],
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@headlessui/tailwindcss'),
+        require('@tailwindcss/container-queries'),
+    ],
 }

@@ -76,6 +76,12 @@ This comparison will compare all available features, regardless of pricing tier.
             <td>Roll out features safely; toggle features for cohorts or individuals</td>
         </tr>
         <tr>
+            <td><strong>User surveys</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ask users for qualitative feedback and gather responses</td>
+        </tr>
+        <tr>
             <td><strong>A/B testing</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -106,6 +112,8 @@ This comparison will compare all available features, regardless of pricing tier.
 - **Product analytics:** Both FullStory and PostHog offer product analytics, but _what_ they offer is drastically different. We explore this comparison in greater detail below. 
 
 - **Build your own apps:** PostHog makes it easy to build your own apps and integrations, including site apps that inject surveys, messages and prompts into your product.
+
+> **Further reading:** [How FullStory compares to other PostHog alternatives](/blog/posthog-alternatives)
 
 ### Product Analytics
 
@@ -341,13 +349,7 @@ Different types of heatmaps enable you to see where users are focusing their att
 <ArrayCTA />
 
 ### Apps, integrations and plugins
-Apps are a major point of difference between FullStory and PosthHog because PostHog offers the ability to inject code into your site. We call these [site apps](/tutorials/build-site-app) – here are some examples:
-
-- **[NPS surveys](/apps/nps-survey-app)** for tracking your word of mouth growth. 
-- **[Interview scheduler](/apps/user-interview)** for scaling product feedback.
-- **[In-app prompts](/apps/notification-bar)** for building tutorials and content flows.
-- **[Notification banners](/apps/notification-bar)** to tell users about important messages.
-- **[Raining pineapples](/apps/pineapple-mode)**, just in case.
+Apps are a major point of difference between FullStory and PosthHog because PostHog offers the ability to inject code into your site. We use this functionality for our [surveys](/docs/surveys/manual) feature, which enables you to ask users for qualitative feedback, to schedule face to face interviews, and more.
 
 PostHog is also open source, meaning [you can easily create your own apps](/tutorials/build-your-own-posthog-app). In fact, it’s so easy to create apps in PostHog that some of the apps we already offer have been developed by non-engineers! 
 

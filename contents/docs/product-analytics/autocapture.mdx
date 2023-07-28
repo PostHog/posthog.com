@@ -12,9 +12,11 @@ PostHog can capture frontend events automatically using autocapture. This means 
 
 Autocapture is available for our [JavaScript snippet](/docs/getting-started/install?tab=snippet#javascript-snippet-badgerecommendedbadge), [JavaScript SDK](/docs/libraries/js), [React SDK](/docs/libraries/react), and [React Native SDK](/docs/libraries/react-native).
 
-### Capturing additional properties in autocapture events
+## Capturing additional properties in autocapture events
 
 If you add a data attribute onto an element in the format `data-ph-capture-attribute-some-key={someValue}`, then any autocapture event from that element or one of its children will have the property `some-key: 'someValue'` added to it. This can be useful when you want to add additional information to autocapture events. 
+
+## Example 1: Get the value of an element on the page
 
 For example, with a notification bell:
 
@@ -31,6 +33,33 @@ You can include the unread count in the autocapture event by adding the `data-ph
 ```
 
 The autocapture event for clicks on the bell will include the unread count.
+
+### Example 2: Tracking ecommerce metadata
+
+You can also track metadata when a customer performs a transaction (like adding an item to a cart or completing a purchase). Going beyond just knowing _User clicked 'Add to cart'_ is valuable in understanding _what_ users are interested in, even if they don't complete a transaction. It can also shed light onto which products users are interested in, when correlated with other information like marketing campaigns, regionality, or device type.
+
+You can attach metadata to autocapture events by adding data attributes to the element that triggers the event. Below we'll record some metadata when a user adds an item to their cart, based on content available in the DOM.
+
+```HTML
+<button
+    data-ph-capture-attribute-product-id={productId}
+    data-ph-capture-attribute-product-name={productName}
+    data-ph-capture-attribute-product-price={productPrice}
+    data-ph-capture-attribute-product-quantity={productQuantity}
+>
+    Add to cart
+</button>
+```
+Replace the `{productXx}` values with the relevant information available on the webpage. Now when the _Add to cart_ button is clicked, the autocapture event will include the product information in the event's properties, like:
+
+```json
+properties: {
+    "product-id": "12345678"
+    "product-name": "Red t-shirt"
+    "product-price": "30"
+    "product-quantity": "1"
+}
+```
 
 ## Limitations of autocapture
 
@@ -77,3 +106,41 @@ Autocapture is enabled by default. You can disable autocapture completely by set
 
 Disabling autocapture **will not disable session recording**. You can disable session recording using `disable_session_recording` or by turning it off in your project's settings.
 
+
+## Autocaptured properties
+
+Autocaptured events (and client-side custom events) have a number of default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the event explorer, and the verified event logo in the [data management tab](https://app.posthog.com/data-management/properties). These properties can be hidden in the event explorer by checking the "Hide PostHog properties" box.
+
+Autocaptured properties include:
+
+- Timestamp (`$timestamp`)
+- OS (`$os`)
+- Browser (`$browser`)
+- Browser Version (`$browser_version`)
+- Device Type (`$device_type`)
+- Current URL (`$current_url`)
+- Host (`$host`)
+- Path Name (`$pathname`)
+- Screen Height (`$screen_height`)
+- Screen Width (`$screen_width`)
+- Viewport Height (`$viewport_height`)
+- Viewport Width (`$viewport_width`)
+- Library (`$lib`)
+- Library Version (`$lib_version`)
+- Search Engine (`$search_engine`)
+- Referrer URL (`$referrer`)
+- Referring Domain (`$referring_domain`)
+- UTM Source (`$utm_source`)
+- UTM Medium (`$utm_medium`)
+- UTM Campaign (`$utm_campaign`)
+- UTM term (`$utm_term`)
+- Google Click ID (`$gclid`)
+- Facebook Click ID (`$fbclid`)
+- Microsoft Click ID (`$msclkid`)
+- Active Feature Flags (`$active_feature_flags`)
+- Plugins Succeeded (`$plugins_succeeded`)
+- Plugins Failed (`$plugins_failed`)
+- Plugins Deferred (`$plugins_deferred`)
+- IP Address (`$ip`)
+
+If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties. 

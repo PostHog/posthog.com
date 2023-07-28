@@ -73,7 +73,7 @@ export const Authentication = ({
                     </div>
                 )}
                 <div
-                    className={`border border-black/20 dark:border-white/20 border-t-0 rounded-md overflow-hidden relative ${
+                    className={`border border-light dark:border-dark border-t-0 rounded-md overflow-hidden relative ${
                         showBanner ? 'rounded-tr-none rounded-tl-none' : ''
                     }`}
                 >
@@ -109,7 +109,7 @@ export const Authentication = ({
                                 {message}
                             </p>
                         )}
-                        <div className="mt-4 px-6">
+                        <div className="pt-4 px-6 bg-accent dark:bg-accent-dark">
                             {
                                 {
                                     'sign-in': (

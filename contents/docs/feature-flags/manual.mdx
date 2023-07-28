@@ -28,6 +28,14 @@ Think of a descriptive name and select how you want to roll out your feature.
 
 ![Create feature flags](../../images/features/feature-flags/feature-flag-page.png)
 
+### Local evaluation 
+
+If you're using our server-side libraries, you can use [local evaluation](/docs/feature-flags/bootstrapping-and-local-evaluation) to improve performance instead of making additional API requests. 
+
+We consider it best practice to use local evaluation flags where possible because this method enables you to resolve flags faster and they are more efficient as they generally require fewer API calls and can reuse definitions for multiple users. 
+
+> For billing purposes we count a local evaluation API request as being equivalent to 10 `decide` requests. One local evaluation request can compute feature flags for hundreds or thousands of users, so this ensures local evaluation is priced fairly while remaining the most cost-effective option by far. 
+
 ## Implementing the feature flag
 
 When you create a feature flag, we'll show you an example snippet. It will look something like this:

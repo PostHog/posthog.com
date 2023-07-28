@@ -99,8 +99,6 @@ Finally, chose the time series bar, and set the Y-axis to "Percent (0-1)."
 
 A similar use case for `sumIf()` is calculating your [NPS score](/blog/b2b-saas-product-metrics#net-promoter-score-nps). NPS asks how likely would you recommend a product to a friend or colleague on a scale of 1-10. 9s and 10s are promoters, 7s and 8s are passives, and 6s and below are detractors. To calculate your NPS score, subtract your detractors percentage from your promoters percentage.
 
-> **Want to add an NPS survey to your product?** Check out our [NPS survey app](/docs/apps/nps-survey-app). 
-
 To do this in a HogQL expression, use `sumIf` to check your score, add 1 for promoters, 0 for passives, and -1 for detractors. Divide each by the total number of responses (`properties.score is not null`) to get your score.
 
 ```

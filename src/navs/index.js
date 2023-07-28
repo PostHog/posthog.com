@@ -767,12 +767,6 @@ export const communityMenu = {
             ],
         },
         {
-            name: 'Apps',
-            icon: 'Apps',
-            color: 'purple',
-            url: '/apps',
-        },
-        {
             name: 'Templates',
             icon: 'Magic',
             color: 'orange',
@@ -870,12 +864,12 @@ export const docsMenu = {
                             url: '/docs/getting-started/group-analytics',
                         },
                         {
-                            name: 'Estimating usage & costs',
-                            url: '/docs/getting-started/estimating-usage-costs',
-                        },
-                        {
                             name: 'Next steps',
                             url: '/docs/getting-started/next-steps',
+                        },
+                        {
+                            name: 'Enabling beta features',
+                            url: '/docs/getting-started/enable-betas',
                         },
                     ],
                 },
@@ -1114,10 +1108,6 @@ export const docsMenu = {
                             url: '/docs/data/cohorts',
                         },
                         {
-                            name: 'Data management',
-                            url: '/docs/data/data-management',
-                        },
-                        {
                             name: 'Events',
                             url: '/docs/data/events',
                         },
@@ -1148,6 +1138,10 @@ export const docsMenu = {
                         {
                             name: 'Team collaboration',
                             url: '/docs/data/team-collaboration',
+                        },
+                        {
+                            name: 'User properties',
+                            url: '/docs/data/user-properties',
                         },
                         {
                             name: 'UTM segmentation',
@@ -1211,24 +1205,12 @@ export const docsMenu = {
                     icon: 'Apps',
                     children: [
                         {
-                            url: '/docs/apps/feedback-widget',
-                            name: 'Feedback Widget',
-                        },
-                        {
                             url: '/docs/apps/notification-bar',
                             name: 'Notification Bar',
                         },
                         {
-                            url: '/docs/apps/nps-survey-app',
-                            name: 'NPS Survey',
-                        },
-                        {
                             url: '/docs/apps/pineapple-mode',
                             name: 'Pineapple Mode',
-                        },
-                        {
-                            url: '/docs/apps/user-interviewer',
-                            name: 'User Interviewer',
                         },
                         {
                             name: 'Build an app',
@@ -1654,6 +1636,24 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Billing',
+                    url: '',
+                    children: [
+                        {
+                            name: 'Billing limits and alerts',
+                            url: '/docs/billing/limits-alerts',
+                        },
+                        {
+                            name: 'Estimating usage and costs',
+                            url: '/docs/billing/estimating-usage-costs',
+                        },
+                        {
+                            name: 'Common questions about billing',
+                            url: '/docs/billing/common-questions',
+                        },
+                    ],
+                },
+                {
                     name: 'How PostHog works',
                     url: '',
                     children: [
@@ -1981,10 +1981,30 @@ export const docsMenu = {
                 },
 
                 {
+                    name: 'Surveys',
+                    url: '/docs/surveys/manual',
+                    icon: 'Message',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+
+                {
                     name: 'Common questions about feature flags',
                     url: '/docs/feature-flags/common-questions',
                     icon: 'Question',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Library comparison',
+                    url: '/docs/feature-flags/libraries',
+                    icon: 'Book',
+                    color: 'blue',
                 },
             ],
         },
@@ -2069,27 +2089,31 @@ export const docsMenu = {
                     children: [
                         {
                             url: '/docs/cdp/amazon-kinesis',
-                            name: 'Amazon Kinesis Import',
+                            name: 'Amazon Kinesis',
                         },
                         {
                             url: '/docs/cdp/bitbucket-release-tracker',
-                            name: 'BitBucket Release Tracker',
+                            name: 'BitBucket',
                         },
                         {
                             url: '/docs/cdp/replicator',
                             name: 'Event Replicator',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/github-release-tracker',
-                            name: 'GitHub Release Tracker',
+                            name: 'GitHub Releases',
                         },
                         {
                             url: '/docs/cdp/github-star-sync',
-                            name: 'GitHub Star Sync',
+                            name: 'GitHub Stars',
                         },
                         {
                             url: '/docs/cdp/gitlab-release-tracker',
-                            name: 'GitLab Release Tracker',
+                            name: 'GitLab',
                         },
                         {
                             url: '/docs/cdp/heartbeat',
@@ -2105,43 +2129,43 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/n8n',
-                            name: 'n8n Connector',
+                            name: 'n8n',
                         },
                         {
                             url: '/docs/cdp/orbit',
-                            name: 'Orbit Connector',
+                            name: 'Orbit',
                         },
                         {
                             url: '/docs/cdp/redshift-import',
-                            name: 'Redshift Import',
+                            name: 'Redshift',
                         },
                         {
                             url: '/docs/cdp/rudderstack-import',
-                            name: 'Rudderstack Import',
+                            name: 'Rudderstack',
                         },
                         {
                             url: '/docs/cdp/segment',
-                            name: 'Segment Connector',
+                            name: 'Segment',
+                        },
+                        {
+                            url: '/docs/cdp/sentry-connector',
+                            name: 'Sentry',
                         },
                         {
                             url: '/docs/cdp/shopify',
-                            name: 'Shopify Connector',
-                        },
-                        {
-                            url: '/docs/cdp/stripe-connector',
-                            name: 'Stripe Connector',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
+                            name: 'Shopify',
                         },
                         {
                             url: '/docs/cdp/twitter-followers',
-                            name: 'Twitter Followers Tracker',
+                            name: 'Twitter',
+                        },
+                        {
+                            url: '/docs/cdp/zapier-connector',
+                            name: 'Zapier',
                         },
                         {
                             url: '/docs/cdp/zendesk-connector',
-                            name: 'Zendesk Connector',
+                            name: 'Zendesk',
                         },
                     ],
                 },
@@ -2151,11 +2175,11 @@ export const docsMenu = {
                     children: [
                         {
                             url: '/docs/cdp/airbyte-export',
-                            name: 'Airbyte Exporter',
+                            name: 'Airbyte',
                         },
                         {
                             url: '/docs/cdp/s3-export',
-                            name: 'Amazon S3 Export',
+                            name: 'Amazon S3',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2163,11 +2187,11 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/avo-inspector',
-                            name: 'Avo Inspector',
+                            name: 'Avo',
                         },
                         {
                             url: '/docs/cdp/bigquery-export',
-                            name: 'BigQuery Export',
+                            name: 'BigQuery',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2175,43 +2199,47 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/customer-io',
-                            name: 'Customer.io Connector',
+                            name: 'Customer.io',
+                        },
+                        {
+                            url: '/docs/cdp/databricks',
+                            name: 'Databricks',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
                         },
                         {
-                            url: '/docs/cdp/databricks',
-                            name: 'Databricks Export',
+                            url: '/docs/cdp/engage-connector',
+                            name: 'Engage.so',
                         },
                         {
-                            url: '/docs/cdp/engage-connector',
-                            name: 'Engage Connector',
+                            url: '/docs/cdp/replicator',
+                            name: 'Event Replicator',
                         },
                         {
                             url: '/docs/cdp/google-pub-sub-connector',
-                            name: 'GCP Pub/Sub Connector',
+                            name: 'GCP Pub/Sub',
                         },
                         {
                             url: '/docs/cdp/google-cloud-export',
-                            name: 'Google Cloud Storage Export',
+                            name: 'Google Cloud Storage',
                         },
                         {
                             url: '/docs/cdp/hubspot-connector',
-                            name: 'Hubspot Connector',
+                            name: 'Hubspot',
                         },
                         {
                             url: '/docs/cdp/intercom',
-                            name: 'Intercom Connector',
+                            name: 'Intercom',
                         },
                         {
                             url: '/docs/cdp/pagerduty-connector',
-                            name: 'PagerDuty Connector',
+                            name: 'PagerDuty',
                         },
                         {
                             url: '/docs/cdp/postgres-export',
-                            name: 'PostgreSQL Export',
+                            name: 'PostgreSQL',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2219,27 +2247,31 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/redshift-export',
-                            name: 'Redshift Export',
+                            name: 'Redshift',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             url: '/docs/cdp/rudderstack-export',
-                            name: 'RudderStack Export',
+                            name: 'RudderStack',
                         },
                         {
                             url: '/docs/cdp/salesforce-connector',
-                            name: 'Salesforce Connector',
+                            name: 'Salesforce',
                         },
                         {
                             url: '/docs/cdp/sendgrid-connector',
-                            name: 'Sendgrid Connector',
+                            name: 'Sendgrid',
                         },
                         {
                             url: '/docs/cdp/sentry-connector',
-                            name: 'Sentry Connector',
+                            name: 'Sentry',
                         },
                         {
                             url: '/docs/cdp/snowflake-export',
-                            name: 'Snowflake Export',
+                            name: 'Snowflake',
                             badge: {
                                 title: 'Beta',
                                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -2247,19 +2279,19 @@ export const docsMenu = {
                         },
                         {
                             url: '/docs/cdp/twilio',
-                            name: 'Twilio Connector',
+                            name: 'Twilio',
                         },
                         {
                             url: '/docs/cdp/variance-connector',
-                            name: 'Variance Connector',
+                            name: 'Variance',
                         },
                         {
                             url: '/docs/cdp/pace-integration',
-                            name: 'Pace Integration',
+                            name: 'Pace',
                         },
                         {
                             url: '/docs/cdp/zapier-connector',
-                            name: 'Zapier Connector',
+                            name: 'Zapier',
                         },
                     ],
                 },

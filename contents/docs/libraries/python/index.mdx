@@ -105,7 +105,7 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-We strongly recommend reading our docs on [alias](/data/integrate/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/data/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ### Feature flags
 
@@ -222,6 +222,8 @@ posthog.get_feature_flag_payload('feature-flag-key', 'distinct id')
 
 > **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
 
+> **Note:** A single local evaluation call is billed as equivalent to 10 `decide`requests. [More info](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation).
+
 All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
 
 1. The library must be initialised with a personal API key
@@ -271,13 +273,13 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 -   Capture an event and associate it with a group
 
 ```python
-posthog.capture('[distinct id]', 'some event', groups={'company': '42dlsfj23f'})
+posthog.capture('[user distinct id]', 'some event', groups={'company': 'company_id_in_your_db'})
 ```
 
 -   Update properties on a group
 
 ```python
-posthog.group_identify('company', '42dlsfj23f', {
+posthog.group_identify('company', 'company_id_in_your_db', {
     'name': 'Awesome Inc.',
     'employees': 11
 })

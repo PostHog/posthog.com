@@ -77,7 +77,7 @@ const buttons = [
     },
 ]
 
-export default function RichText({ initialValue = '', setFieldValue, autoFocus, values }: any) {
+export default function RichText({ initialValue = '', setFieldValue, autoFocus, values, onSubmit }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
     const [cursor, setCursor] = useState<number | null>(null)
@@ -159,6 +159,12 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
         setFieldValue('body', value)
     }, [value])
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && onSubmit) {
+            onSubmit()
+        }
+    }
+
     return (
         <div className="relative" {...getRootProps()}>
             <input className="hidden" {...getInputProps()} />
@@ -191,6 +197,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                         id="body"
                         placeholder={'Type more details...'}
                         maxLength={2000}
+                        onKeyDown={handleKeyDown}
                     />
                     {isDragActive && (
                         <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-gray-accent-light after:dark:border-gray-accent-dark after:rounded-md">

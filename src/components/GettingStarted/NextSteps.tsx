@@ -5,7 +5,6 @@ import { quickLinks as productAnalyticsLinks } from '../../pages/docs/product-an
 import { quickLinks as featureFlagsLinks } from '../../pages/docs/feature-flags'
 import { quickLinks as experimentsLinks } from '../../pages/docs/experiments'
 import { quickLinks as sessionRecordingLinks } from '../../pages/docs/session-replay'
-import { quickLinks as dataLinks } from '../../pages/docs/data'
 import { CallToAction } from 'components/CallToAction'
 
 type NextStepProps = {
@@ -95,20 +94,6 @@ export const Experiments = () => {
                 quality={100}
                 className="w-full"
                 src="../Home/Slider/images/ab-testing-hog.png"
-            />
-        </NextStep>
-    )
-}
-
-export const Data = () => {
-    return (
-        <NextStep title="Data" url="/docs/data" links={dataLinks}>
-            <StaticImage
-                alt=""
-                placeholder="none"
-                quality={100}
-                className="w-full"
-                src="../Product/images/hogs/data-warehouse.png"
             />
         </NextStep>
     )

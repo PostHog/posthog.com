@@ -6,7 +6,7 @@ showTitle: true
 
 You can receive messages in Slack whenever your [actions](/docs/user-guides/actions) trigger. 
 
-> **Note:** Currently it's only possible to receive messages in a single Slack channel. If you'd like to receive messages in more than one channel, you can use the [Zapier Connector](/apps/zapier-connector).
+> **Note:** Currently it's only possible to receive messages in a single Slack channel. If you'd like to receive messages in more than one channel, you can use the [Zapier integration](/apps/zapier-connector).
 
 ## 1. Create an app in Slack
 Go to the [Slack developer dashboard](https://api.slack.com/apps?new_app=1) and create a new app. Call it "PostHog" and connect it to the workspace of your choice.
@@ -33,7 +33,7 @@ Click "Test & Save" and you should receive a message on Slack.
 
 ## 4. Post actions to the webhook
 
-For each action that should be posted to Slack, select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
+In PostHog, navigate to the [action](https://app.posthog.com/data-management/actions) that you'd like to receive webhooks for. Then select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
 
 ![PostHog Edit Action](../../images/post-action-slack.png)
 

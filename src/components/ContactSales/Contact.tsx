@@ -381,7 +381,7 @@ export default function Contact({
                     information.&nbsp;
                 </p>
                 <p className="mb-0">
-                    In the meantime, why not join <Link to="/slack">our Slack community</Link>?
+                    If you have any questions in the meantime, <Link to="/questions">let us know</Link>!
                 </p>
             </div>
         </>

@@ -97,6 +97,10 @@
                 "url": "/handbook/company/communication"
             },
             {
+                "name": "Kudos",
+                "url": "/handbook/company/kudos"
+            },
+            {
                 "name": "Management",
                 "url": "/handbook/company/management"
             },
@@ -236,7 +240,13 @@
             },
             {
                 "name": "Finance",
-                "url": "/handbook/people/finance"
+                "url": "/handbook/people/finance",
+                "children": [
+                    {
+                        "name": "Fundraising",
+                        "url": "/handbook/people/finance/fundraising"
+                    }
+                ]
             },
             {
                 "name": "Merch store",
@@ -561,8 +571,8 @@
                 "url": "/handbook/growth/marketing"
             },
             {
-                "name": "Personas",
-                "url": "/handbook/growth/marketing/customer-personas"
+                "name": "Announcements",
+                "url": "/handbook/growth/marketing/product-announcements"
             },
             {
                 "name": "Testimonials",

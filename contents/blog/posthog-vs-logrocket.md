@@ -76,6 +76,12 @@ PostHog offers a much wider selection of tools than LogRocket, including several
             <td>Roll out features safely; toggle features for cohorts or individuals</td>
         </tr>
         <tr>
+            <td><strong>User surveys</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ask users for qualitative feedback and gather responses</td>
+        </tr>
+        <tr>
             <td><strong>Experiments</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -200,9 +206,11 @@ While LogRocket contains some product analytics features, it isn’t primarily i
 
 -   **Query editor:** LogRocket doesn’t currently support any way for users to interrogate data directly, either through SQL or other, abstracted query language. PostHog also doesn’t offer SQL queries... but [we’re actively working on it](/manual/hogql).
 
-### Session recording
+> **Further reading:** [How LogRocket compares to other PostHog alternatives](/blog/posthog-alternatives)
 
-LogRocket and PostHog both offer robust, full-featured session recording tools that outperform even dedicated tools, such as [Hotjar](/blog/best-open-source-session-replay-tools). LogRocket’s session recording offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
+### Session replays
+
+LogRocket and PostHog both offer robust, full-featured session replay tools that outperform even dedicated tools, such as [Hotjar](/blog/best-open-source-session-replay-tools). LogRocket’s session replay tool offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">

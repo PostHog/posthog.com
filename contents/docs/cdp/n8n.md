@@ -1,5 +1,5 @@
 ---
-title: n8n Connector
+title: n8n
 thumbnail: ../../cdp/thumbnails/n8n.png
 tags:
     - n8n
@@ -15,7 +15,7 @@ For more information, please check [n8n's integration documentation](https://doc
 
 ## Requirements
 
-Using the n8n Connector requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -32,8 +32,6 @@ This app is maintained by n8n. If you have issues with the app not functioning a
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 

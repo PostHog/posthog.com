@@ -4,8 +4,8 @@ Update [posthog-node](https://posthog.com/docs/integrate/server/node) to version
 // Capturing an event with groups
 posthog.capture({
     event: "some event",
-    distinctId: '[distinct id]',
-    groups: { company: 'id:5' }
+    distinctId: '[user distinct id]',
+    groups: { company: 'company_id_in_your_db' }
 })
 
 // Updating a groups properties

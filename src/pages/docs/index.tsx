@@ -9,7 +9,7 @@ import PostLayout from 'components/PostLayout'
 import { graphql, PageProps } from 'gatsby'
 import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
-import { LightBulb } from 'components/NewIcons'
+import { LightBulb } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const quickLinks = [
@@ -248,12 +248,12 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                             Get started
                         </CallToAction>
                     </div>
-                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                    <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
                         <h3 className="text-xl mb-2">Apps</h3>
                         <p className="text-[15px]">
                             Extend functionality with third-party apps that integrate into the PostHog ecosystem.
                         </p>
-                        <div className="flex items-center gap-4">
+                        <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
                             <CallToAction to="/docs/apps" type="outline" size="md" className="!w-full sm:!w-auto">
                                 Get started
                             </CallToAction>

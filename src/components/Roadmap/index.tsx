@@ -127,7 +127,6 @@ export default function Roadmap() {
             <SEO title="PostHog Roadmap" />
             <div className="">
                 <PostLayout
-                    contentWidth={'100%'}
                     article={false}
                     title={'Roadmap'}
                     hideSurvey
@@ -206,8 +205,8 @@ export default function Roadmap() {
                             className=""
                         >
                             <p className="p-4  rounded-sm text-[15px]">
-                                Check out <Link to="/blog/categories/product-updates">product updates</Link> on our blog
-                                to see what we've shipped recently.
+                                Check out <Link to="/changelog">our changelog</Link> on our blog to see what we've
+                                shipped recently.
                             </p>
                             {/*
                             hidden until we have more historical content loaded

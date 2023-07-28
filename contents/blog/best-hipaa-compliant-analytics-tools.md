@@ -12,8 +12,6 @@ featuredImageType: full
 category: General
 tags:
   - Privacy
-  - Comparisons
-  - Guides
 ---
 
 Passed in 1996, HIPAA (aka Health Insurance Portability and Accountability Act) defines the legal requirements for securing and handling health information, and the severe penalties for failing to do so.

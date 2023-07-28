@@ -6,7 +6,7 @@ import Link from 'components/Link'
 import { Link as ScrollLink } from 'react-scroll'
 import { AnimatePresence, motion } from 'framer-motion'
 import * as NotProductIcons from '../NotProductIcons'
-import * as NewIcons from '../NewIcons'
+import * as NewIcons from '@posthog/icons'
 import { usePost } from './hooks'
 
 const Chevron = ({ open, className = '' }: { open: boolean; className?: string }) => {

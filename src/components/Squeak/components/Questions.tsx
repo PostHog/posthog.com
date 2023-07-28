@@ -10,9 +10,20 @@ type QuestionsProps = {
     topicId?: number
     showForm?: boolean
     title?: string
+    initialView?: string
+    disclaimer?: boolean
 }
 
-export const Questions = ({ slug, limit, topicId, profileId, showForm = true, title }: QuestionsProps) => {
+export const Questions = ({
+    slug,
+    limit,
+    topicId,
+    profileId,
+    showForm = true,
+    title,
+    initialView,
+    disclaimer,
+}: QuestionsProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
 
     const { questions, fetchMore, refresh } = useQuestions({ slug, limit, topicId, profileId })
@@ -39,7 +50,15 @@ export const Questions = ({ slug, limit, topicId, profileId, showForm = true, ti
                 )*/}
 
             {/* TODO: Pass refresh for now questions */}
-            {showForm && <QuestionForm onSubmit={refresh} formType="question" slug={slug} />}
+            {showForm && (
+                <QuestionForm
+                    initialView={initialView}
+                    onSubmit={refresh}
+                    formType="question"
+                    slug={slug}
+                    disclaimer={disclaimer}
+                />
+            )}
         </div>
     )
 }

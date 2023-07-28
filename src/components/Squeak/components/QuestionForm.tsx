@@ -13,6 +13,7 @@ import uploadImage from '../util/uploadImage'
 import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
+import Spinner from 'components/Spinner'
 
 type QuestionFormValues = {
     subject: string
@@ -36,6 +37,7 @@ type QuestionFormMainProps = {
     initialValues?: Partial<QuestionFormValues> | null
     formType?: 'question' | 'reply'
     showTopicSelector?: boolean
+    disclaimer?: boolean
 }
 
 const Select = ({
@@ -112,6 +114,7 @@ function QuestionFormMain({
     loading,
     initialValues,
     showTopicSelector,
+    disclaimer = true,
 }: QuestionFormMainProps) {
     const { user, logout } = useUser()
 
@@ -141,7 +144,7 @@ function QuestionFormMain({
                 }}
                 onSubmit={(values) => onSubmit(values, user)}
             >
-                {({ setFieldValue, isValid, values }) => {
+                {({ setFieldValue, isValid, values, submitForm }) => {
                     return (
                         <Form className="mb-0">
                             <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
@@ -165,6 +168,7 @@ function QuestionFormMain({
                                 )}
                                 <div className="leading-[0]">
                                     <RichText
+                                        onSubmit={submitForm}
                                         autoFocus={!subject}
                                         setFieldValue={setFieldValue}
                                         initialValue={initialValues?.body}
@@ -174,14 +178,22 @@ function QuestionFormMain({
                             </div>
                             <span className="ml-[50px]">
                                 <Button disabled={loading || !isValid} type="submit" className="w-[calc(100%_-_50px)]">
-                                    {user ? 'Post' : 'Login & post'}
+                                    {loading ? (
+                                        <Spinner className="!text-white mx-auto" />
+                                    ) : user ? (
+                                        'Post'
+                                    ) : (
+                                        'Login & post'
+                                    )}
                                 </Button>
                             </span>
 
-                            <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0">
-                                If you need to share personal info relating to a bug or issue with your account, we
-                                suggest filing a support ticket in the app.
-                            </p>
+                            {disclaimer && (
+                                <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0">
+                                    If you need to share personal info relating to a bug or issue with your account, we
+                                    suggest filing a support ticket in the app.
+                                </p>
+                            )}
                         </Form>
                     )
                 }}
@@ -200,6 +212,7 @@ type QuestionFormProps = {
     topicID?: number
     archived?: boolean
     showTopicSelector?: boolean
+    disclaimer?: boolean
 }
 
 export const QuestionForm = ({
@@ -211,6 +224,7 @@ export const QuestionForm = ({
     onSubmit,
     archived,
     showTopicSelector,
+    disclaimer,
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
@@ -352,6 +366,7 @@ export const QuestionForm = ({
                 {
                     'question-form': (
                         <QuestionFormMain
+                            disclaimer={disclaimer}
                             subject={formType === 'question'}
                             initialValues={formValues}
                             loading={loading}

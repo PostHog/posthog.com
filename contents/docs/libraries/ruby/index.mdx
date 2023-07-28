@@ -194,6 +194,8 @@ posthog.get_feature_flag_payload('feature-flag-key', 'distinct id')
 
 > **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
 
+> **Note:** A single local evaluation call is billed as equivalent to 10 `decide`requests. [More info](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation).
+
 All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
 
 1. The library must be initialised with a personal API key
@@ -277,7 +279,7 @@ posthog.capture({
         category: 'romcom'
     }
     groups: {
-        'company': '42dlsfj23f'
+        'company': 'company_id_in_your_db'
     }
 })
 ```
@@ -287,8 +289,8 @@ posthog.capture({
 ```ruby
 posthog.group_identify(
   {
-    group_type: "organization",
-    group_key: "42dlsfj23f",
+    group_type: "company",
+    group_key: "company_id_in_your_db",
     properties: {
       name: "Awesome Inc."
     }

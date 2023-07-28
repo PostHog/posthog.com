@@ -66,7 +66,7 @@ With our [JavaScript Library](/docs/integrate/client/js), this might look someth
 ```js
 const login = (userEmail, userPassword, userCompanyName) => {
     /* Your authentication logic here */
-    posthog.people.set({
+    posthog.setPersonProperties({
         email: userEmail
         company: userCompanyName
     })

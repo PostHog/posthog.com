@@ -1,17 +1,17 @@
 ---
-title: RudderStack Import
+title: RudderStack (Import)
 thumbnail: ../../cdp/thumbnails/rudderstack-export.png
 topics:
     - rudderstack
 ---
 
-The Ruddestack Importer app enables you to send events to PostHog, via RudderStack.
+This source enables you to send events to PostHog, via RudderStack.
 
 RudderStack is an open-source, customer data platform for developers. It allows you to collect and deliver customer event data to a variety of destinations across your growth, product, and marketing stack.
 
 ## Requirements
 
-Using the RudderStack Import requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 

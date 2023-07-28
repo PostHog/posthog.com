@@ -32,7 +32,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 The following properties can be added to the event if its IP address can be matched to a GeoLite2 City location:
 
-```TypeScript
+```ts
 $geoip_city_name?: string
 $geoip_country_name?: string
 $geoip_country_code?: string
@@ -75,8 +75,6 @@ This app is maintained by PostHog. If you have issues with the app not functioni
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 

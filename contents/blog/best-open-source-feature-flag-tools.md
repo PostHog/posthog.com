@@ -13,8 +13,6 @@ author:
 category: General
 tags: 
   - Open source
-  - Guides
-  - Comparisons
   - Feature flags
 ---
 

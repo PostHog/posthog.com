@@ -49,9 +49,9 @@ Because we build for engineers first, we're also open source. You can check out 
 
 **PostHog** has three pricing plans — Free, Scale, and Enterprise:
 
-- The Free plan includes everything early-stage companies need with a generous usage limit – 1 million events and 15k recordings per month.
+- The Free plan includes everything early-stage companies need with a generous usage limit – 1 million events and 15k replays per month.
 
-- The Scale plan unlocks advanced features, like group analytics and A/B testing. Your first 1 million events and 15k recordings each month are still free – you pay for what you use thereafter. 
+- The Scale plan unlocks advanced features, like group analytics and A/B testing. Your first 1 million events and 15k replays each month are still free – you pay for what you use thereafter. 
 
 - The Enterprise plan unlocks extra security, compliance, and permissioning features to meet the needs of large businesses. 
 
@@ -82,6 +82,12 @@ To make a clean comparison between PostHog and Pendo, we’ll focus on comparing
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Watch real users use your product; diagnose bugs</td>
+        </tr>
+        <tr>
+            <td><strong>User surveys</strong></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ask users for qualitative feedback and gather responses</td>
         </tr>
         <tr>
             <td><strong>Feature flags</strong></td>
@@ -226,28 +232,15 @@ This difference is reflected in all levels of the product, but especially in pro
 ]} />
 
 ### In-app messages and prompts
-Pendo is all about creating in-app messages, prompts, tooltips, measuring their impact on adoption and retention, and collecting feedback. But these aren't unique features – PostHog also supports in-app messages and interactive pop-ups through the use of [feature flag payloads](/docs/feature-flags/payloads) and [site apps](/tutorials/build-site-app).
+Pendo is all about creating in-app messages, prompts, tooltips, measuring their impact on adoption and retention, and collecting feedback. But these aren't unique features – PostHog also supports in-app messages and interactive pop-ups through the use of [feature flag payloads](/docs/feature-flags/payloads) and [site apps](/tutorials/build-site-app), as well as [customizable surveys](/docs/surveys/manual).
 
 The main difference is, because Pendo is designed for less technical users, it offers an interface that is simpler, but less powerful. You can easily create tooltips, announcement pop-ups and polls in Pendo, but not other types of prompt such as a Calendly integration. 
 
-PostHog has ready-made apps for displaying pop-ups and tooltips, but the true power is in the ability to [build custom solutions](/tutorials/build-site-app).
-
-Below are some of the most popular ready-made apps which facilitate in-app messages in PostHog:
-
-- [NPS Survey App](/apps/nps-survey-app): Asks users how likely they are to recommend your product, on a scale of 0-10. Using this information, you can compute your Net Promoter Score. 
-
-- [Feedback Widget](/apps/feedback-widget): Displays a prompt with a text input, enabling users to write feedback messages that you can optionally sync to Slack, Zendesk or other tools using Zapier. 
-
-- [Notification Bar](/apps/notification-bar): Displays a customizable banner in your product, suitable for alerting users to important messages — like discounts, outages, or announcements.
-
-- [User Interviewer](/apps/user-interview): Displays a prompt to users that match a filter or cohort, inviting them to schedule an online interview. Syncs with Calendly to make scheduling easy. 
-
-- [Pineapple Mode](/apps/pineapple-mode): Rains pineapples all over your product, advancing the sense of chaos and entropy in the world. 🍍
+PostHog has ready-made apps for displaying pop-ups and tooltips, including banners and site notifications, but can also create customizable surveys with which you can collect qualitative feedback to analyze alongside the quantitative data. Surveys can even be used to send links to users for scheduling face-to-face interviews. 
 
 <h4 className="mb-4">Discover what's possible with <span className="text-blue">PostHog apps</span></h4>
 <TutorialsSlider slugs={[
   "/tutorials/build-site-app",
-  "/tutorials/feedback-interviews-site-apps",
   "/tutorials/build-your-own-posthog-app",
   "/tutorials/how-to-connect-discord-to-posthog-with-zapier",
   "/tutorials/react-popups"
@@ -621,7 +614,7 @@ Got another question? You can [ask the PostHog team anything you want](/question
 Pendo is designed primarily for marketers and UX specialists. Its key features are the ability to create in-app prompts and messages, such as tooltips, without technical know-how. Pendo enables these users to follow the performance of such messages and to monitor broad feature adoption and usage. 
 
 ### Who is PostHog useful for?
-PostHog is built primarily with engineers, product managers and other technical users in mind. It also offers the ability to create in-app prompts and messages, but also offers a number of other tools that are useful for these types of teams, such as feature flags and session recording. 
+PostHog is built primarily with engineers, product managers and other technical users in mind. It also offers the ability to create in-app prompts and messages, but also offers a number of other tools that are useful for these types of teams, such as feature flags and session replays. 
 
 This difference is ultimately reflected in many of the features both platforms offer, and how they are designed. PostHog's focus on breadth and supporting engineers in creating better products, for example, is reflected in its core features. 
 
@@ -637,7 +630,7 @@ Two additional tiers are available for larger teams — Growth and Portfolio —
 
 PostHog has transparent pricing based on the usage. It’s free to get started and completely free for the first 1 million events and 15,000 sessions captured every month.
 
-After this free monthly allowance you'll pay $0.00045/event and $0.005/recording, and PostHog charges progressively less the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
+After this free monthly allowance you'll pay $0.00045/event and $0.005/replay, and PostHog charges progressively less the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
 
 ### Do Pendo and PostHog offer free trials?
 

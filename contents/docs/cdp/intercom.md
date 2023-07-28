@@ -1,5 +1,5 @@
 ---
-title: Intercom Connector
+title: Intercom
 github: https://github.com/posthog/posthog-intercom-plugin
 installUrl: https://app.posthog.com/project/apps?name=Intercom
 thumbnail: ../../cdp/thumbnails/intercom.png
@@ -7,11 +7,11 @@ tags:
     - intercom
 ---
 
-With the Intercom Connector, you can send event data from PostHog to Intercom whenever an event matches a user who has been identified by their email address.
+Send event data from PostHog to Intercom whenever an event matches a user who has been identified by their email address.
 
 ## Requirements
 
-Using this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+Using this requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
@@ -67,8 +67,6 @@ This app is maintained by the community. If you have issues with the app not fun
 ### What if I have feedback on this app?
 
 We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-Or, if you see the feedback widget enabled, use that!
 
 ### What if my question isn't answered above?
 
