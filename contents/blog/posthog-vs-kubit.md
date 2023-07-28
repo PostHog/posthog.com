@@ -285,7 +285,7 @@ As explained above, PostHog offers a wider selection of feature than Kubit, whic
 ## Library support
 PostHog supports a wide range of client and server libraries, but not all features are equally available across all of them. We recommend using PostHog's JavaScript snippet to enjoy all our features. See our [client library documentation](/docs/getting-started/install?tab=snippet) for more information.
 
-Kubit, on the other hand, claims to be a no-code product without any SDKs or libraries. The platform is closed source, so it’s impossible to verify how this works as [the documentation gives](https://docs.kubit.ai/docs) no information. Instead, Kubit says it only ‘talks directly to your data warehouse’.
+Kubit, on the other hand, is a closed-source, no-code product. Because it's designed to work on top of a data warehouse, it doesn't use SDKs or libraries in the traditional sense. You can only use it if you have your event data in a data warehouse already.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
