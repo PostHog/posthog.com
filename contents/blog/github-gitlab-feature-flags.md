@@ -16,7 +16,7 @@ tags:
 
 Feature flags are a simple way to control and rollout features or parts of code. In their simplest form, they enable you to turn on or off features or code paths for certain users. The secret of feature flags is that they have more depth than this, and getting the most out of them at scale requires knowledge and process.
 
-Although we covered feature flag [use cases](/blog/feature-flag-benefits-use-cases) and [best practices](/blog/feature-flag-best-practices), it is always useful to learn how large companies work with feature flags. Two leading examples are GitHub and GitLab. This post details why, when, and how they use feature flags.
+Although we've covered feature flag [use cases](/blog/feature-flag-benefits-use-cases) and [best practices](/blog/feature-flag-best-practices) in previous posts, it is useful to learn how large companies work with feature flags. Two leading examples are GitHub and GitLab. This post details why, when, and how they use feature flags.
 
 ## Why do GitHub and GitLab use feature flags?
 
@@ -24,7 +24,7 @@ Both GitHub and GitLab are massive software companies. They are both at the fore
 
 In GitHub’s case, they frame this as "**lowering deployment risk**." They want deployments to be risk-free. Putting new changes behind a flag lowers the risk of failing deployments. If there is an issue with a feature, you disable the flag rather than needing to roll back the entire deployment.
 
-In GitLab’s case, they have a "**progressive delivery mindset**." They find feature flags are a great tool for incremental, continuous delivery, allowing them to separate deployment and rollout. This is especially valuable to them because deployment is inconsistent due to their self-hostability. Feature flags increase the throughput of changes shipped as well as psychological safety for developers.
+In GitLab’s case, they have a "**progressive delivery mindset**." They find feature flags are a great tool for incremental, continuous delivery, allowing them to separate deployment and rollout. This is especially valuable to them because deployment is inconsistent due to their self-hostability. Feature flags increase the speed of shipping changes as well as provide psychological safety for developers.
 
 ## When do they use feature flags?
 
@@ -38,7 +38,7 @@ This means areas **that might not use flags** include brand-new features or APIs
 
 ## What does their process for implementing feature flags look like?
 
-Both GitHub and GitLab have fairly standard use cases and implementations of the feature flags themselves. They call a service with a feature flag value and "actor," returns another value stating whether the flag is active or not. They use these as gates for code and features. 
+Both GitHub and GitLab have fairly standard use cases and implementations of the feature flags themselves. They call a service with a feature flag value and an "actor," which then returns a value stating whether the flag is active or not.
 
 > **What is an "actor"?** Both GitLab and GitHub don’t exclusively target users with feature flags. They target "actors." These are users, organizations, teams, enterprises, repositories, projects, or apps. They use actors to create consistent experiences for a related group of users. For example, an organization should have a consistent experience for all its members.
 
@@ -48,7 +48,7 @@ A specific example of how GitHub uses feature flags is in the rollout of their [
 
 Although GitHub only details parts of its feature flag usage, GitLab details its entire process from idea to rollout to removal. 
 
-The process starts before writing any code. An engineer creates a rollout plan for the feature and flag. They [detail this in an issue](https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/issue_templates/Feature%20Flag%20Roll%20Out.md). This issue contains owners, stakeholders, expectations, rollout steps for different environments (non-production, production, global), and rollback steps. They  refine the rollout plan with engineering and product managers.
+The process starts before writing any code. An engineer creates a rollout plan for the feature and flag. They [detail this in an issue](https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/issue_templates/Feature%20Flag%20Roll%20Out.md). This issue contains owners, stakeholders, expectations, rollout steps for different environments (non-production, production, global), and rollback steps. They refine the rollout plan with engineers and product managers.
 
 After the plan is created, developers write code and wrapped with GitLab’s feature flag service. Once done, it rolls out following the steps detailed in the issue. 
 
