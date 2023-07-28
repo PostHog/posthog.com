@@ -14,9 +14,7 @@ PostHog Batch Exports gives you a platform to schedule data exports to supported
 
 ## Destinations
 
-Every Batch Export exports data to a destination using the configuration parameters provided when creating a Batch Export. Examples of destinations include an S3 bucket, or a table in a Snowflake database.
-
-Supported destinatinations are:
+Every Batch Export exports data to a destination using the configuration parameters provided when creating a Batch Export. The following destinations are currently supported:
 * [S3](/docs/batch-exports/s3).
 * [Snowflake](/docs/batch-exports/snowflake).
 
