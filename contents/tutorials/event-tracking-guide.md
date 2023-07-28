@@ -299,4 +299,4 @@ If you are looking for more options to where to send your events from that arenâ
 
 If you are looking to get started with analysis of all the event tracking data you now have, you can look into creating a new [trend](https://posthog.com/manual/trends), [funnel](https://posthog.com/manual/funnels), or [dashboard](https://posthog.com/manual/dashboards).
 
-<NewsletterTutorial compact/>
+<NewsletterForm compact/>

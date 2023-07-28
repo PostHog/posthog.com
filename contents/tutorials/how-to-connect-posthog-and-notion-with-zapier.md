@@ -56,4 +56,4 @@ If the action is specific to a page or on-page selector, this information is als
 
 As an output, we want the workflow to populate the information to a Notion page — so we’ll use Notion’s ‘Write to database’ output. With these options created you can tailor how the information contained in the event is written to your Notion database. Instituting best practices, such as requiring action creators to include descriptions for their actions, will enable you to track all tracked actions within a simple Notion table. 
 
-<NewsletterTutorial compact/>
+<NewsletterForm compact/>

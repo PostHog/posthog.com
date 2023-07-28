@@ -86,5 +86,5 @@ Nothing comes for free and limiting what `posthog` can track between page loads 
 
 - [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
 
-<NewsletterTutorial compact/>
+<NewsletterForm compact/>
 

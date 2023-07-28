@@ -128,4 +128,4 @@ We can see the different browsers that are used. Some for iOS and Android repres
 
 Nearly all usage is coming from people on desktop devices so in our example it doesn’t seem worthwhile investing in a mobile optimized site for this segment right now.
 
-<NewsletterTutorial compact/>
+<NewsletterForm compact/>

@@ -78,5 +78,5 @@ From there how you use that data is really up to you. Some users use it in CRM v
 
 Ready to get started? [Sign-up to Variance for free](https://www.variance.com/) and install the connector app in just a few minutes. 
 
-<NewsletterTutorial compact/>
+<NewsletterForm compact/>
 

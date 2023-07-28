@@ -193,4 +193,4 @@ If you’re looking to learn more about feature flags, check out our [product ma
 
 You can also learn about how to run Experiments without feature flags in [this tutorial](/docs/experiments/running-experiments-without-feature-flags).
 
-<NewsletterTutorial compact/>
+<NewsletterForm compact/>

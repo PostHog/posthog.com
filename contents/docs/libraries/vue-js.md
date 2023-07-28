@@ -277,5 +277,3 @@ See the [JavaScript SDK docs](/docs/libraries/js) for all usable functions, such
 - [Feature flags including variants and payloads.](/docs/libraries/js#feature-flags)
 
 You can the access the project used in this tutorial [on GitHub](https://github.com/mathexl/posthog-vue-demo).
-
-<NewsletterTutorial compact/>

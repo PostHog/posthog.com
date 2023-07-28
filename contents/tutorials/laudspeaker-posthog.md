@@ -81,4 +81,4 @@ Add an email template to the `signed up` step and Laudspeaker sends that email w
 
 PostHog can track many more events, including custom-defined actions. Laudspeaker supports these too, enabling you to create a wide range of customer journeys. Check [the official Laudspeaker website](https://laudspeaker.com/) for more information about what's possible, or [ask a question via the PostHog community](/questions). 
 
-<NewsletterTutorial compact/>
+<NewsletterForm compact/>

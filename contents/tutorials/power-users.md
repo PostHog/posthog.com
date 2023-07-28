@@ -75,4 +75,4 @@ With all that, you’ve set up a power user cohort and begun to do analysis. Fro
 
 - [How we made something people want](/blog/making-something-people-want): Learn how we make something people want (and create power users by doing it) in this blog post by our CEO James.
 
-<NewsletterTutorial compact/>
+<NewsletterForm compact/>

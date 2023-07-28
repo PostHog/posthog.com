@@ -161,5 +161,5 @@ As mentioned in the introductory section of this tutorial, different businesses 
 - PostHog allows you to view retention on any event or action
 - Filtering retention by event properties or cohorts is a great way to improve product/market fit
 
-<NewsletterTutorial compact/>
+<NewsletterForm compact/>
 
