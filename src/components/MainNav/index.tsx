@@ -16,7 +16,7 @@ import usePostHog from 'hooks/usePostHog'
 import * as icons from '@posthog/icons'
 import HoverTooltip from 'components/Tooltip'
 import { SignupCTA } from 'components/SignupCTA'
-import { container } from 'components/CallToAction'
+import { CallToAction } from 'components/CallToAction'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -223,6 +223,7 @@ export const Main = () => {
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
     const { setWebsiteTheme } = useActions(layoutLogic)
+    const [posthogInstance, setPosthogInstance] = useState<string>()
     const posthog = usePostHog()
 
     useEffect(() => {
@@ -233,6 +234,13 @@ export const Main = () => {
                 if (posthog) {
                     posthog.people.set({ preferred_theme: window.__theme })
                 }
+            }
+            const instanceCookie = document.cookie
+                .split('; ')
+                ?.filter((row) => row.startsWith('ph_current_instance='))
+                ?.map((c) => c.split('=')?.[1])?.[0]
+            if (instanceCookie) {
+                setPosthogInstance(instanceCookie)
             }
         }
     }, [])
@@ -284,13 +292,19 @@ export const Main = () => {
                         })}
                     </ul>
                     <div className="flex items-center justify-end flex-1">
-                        <Link
-                            to={'https://app.posthog.com/login'}
-                            className={`text-[13.5px] font-medium h-full items-center relative p-4 opacity-70 hover:opacity-100 hidden sm:flex `}
-                        >
-                            <span className="relative">Login</span>
-                        </Link>
-                        <SignupCTA size="sm" type="outline" className="hidden sm:flex mr-2" text="Get started" />
+                        {posthogInstance ? (
+                            <CallToAction
+                                type={'outline'}
+                                className={'hidden sm:flex mr-2'}
+                                to={posthogInstance.replace(/"/g, '')}
+                                size={'sm'}
+                                event={'clicked Dashboard in main nav'}
+                            >
+                                Dashboard
+                            </CallToAction>
+                        ) : (
+                            <SignupCTA size="sm" type="outline" className="hidden sm:flex mr-2" text="Get started" />
+                        )}
                         <HoverTooltip
                             content={() => (
                                 <div className="text-xs">
