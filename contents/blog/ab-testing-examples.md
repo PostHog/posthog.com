@@ -1,5 +1,5 @@
 ---
-title: "5 A/B testing examples from YC’s top companies"
+title: "A/B testing examples from YC’s top companies"
 date: 2023-07-28
 author: ["ian-vanagas"]
 showTitle: true
@@ -37,17 +37,17 @@ After completing the proposal, experiments launch as small, quick-to-build, low-
 
 ![Monzo A/B test](../images/blog/ab-testing-examples/monzo.png)
 
-#### Takeaways
-
+> **Takeaways:**
+>
 > 1. Focus on the top-of-funnel for the highest impact.
 > 2. Create a consistent process for A/B tests and hypotheses.
 > 3. Ship low-risk "pellets," rather than slow-moving "cannonballs."
+>
+> 📖 **Further reading:** 
+> - [Pellets not cannonballs: How we experiment at Monzo](https://monzo.com/blog/2022/05/24/pellets-not-cannonballs-how-we-experiment-at-monzo)
+> - [How we experiment at Monzo](https://monzo.com/blog/2019/07/31/how-we-experiment-at-monzo)
 
-📖 **Further reading:** 
-- [Pellets not cannonballs: How we experiment at Monzo](https://monzo.com/blog/2022/05/24/pellets-not-cannonballs-how-we-experiment-at-monzo)
-- [How we experiment at Monzo](https://monzo.com/blog/2019/07/31/how-we-experiment-at-monzo)
-
-### 2. Instacart – Solving a complex sampling problem
+## 2. Instacart – Solving a complex sampling problem
 
 Instacart, a grocery delivery service, shows a more complicated example of A/B testing. In this example, Instacart's goal was to increase the efficiency of delivery routing, which followed one of two strategies:
 
@@ -80,14 +80,12 @@ The simple regression left out potentially important variables like zone, day of
 
 With this, Instacart was confident the new algorithm led to improvements in delivery efficiency and rolled it out further.
 
-#### Takeaways
-
-> - Sometimes randomly splitting users into test and control samples won't work, but there is always some way to do it, such as by geography.
+> **Takeaways**
+> 1. Sometimes randomly splitting users into test and control samples won't work, but there is always some way to do it, such as by geography.
+> 2. A simple regression doesn’t account for multiple variables, which leads to higher, insignificant p-values. A multivariate regression could provide a more accurate answer.
 >
-> - A simple regression doesn’t account for multiple variables, which leads to higher, insignificant p-values. A multivariate regression could provide a more accurate answer.
-
-📖 **Further reading:**
-- [It All Depends](https://tech.instacart.com/it-all-depends-4bb7b22e854b) on the Tech at Instacart blog.
+> 📖 **Further reading:**
+> - [It All Depends](https://tech.instacart.com/it-all-depends-4bb7b22e854b) on the Tech at Instacart blog.
 
 ## 3. Coinbase – Scaling tests by separating experiment and functional code
 
@@ -113,15 +111,14 @@ The outcome of building the "universes" system included:
 
 - **Greater flexibility and faster feedback** through the ability to modify experiments at any time, requiring smaller user samples, and shorter implementation and feedback cycles.
 
-#### Takeaways
-
-> 1. Running A/B tests at scale requires you to automate, simplify, and standardize the process as much as possible.
+> **Takeaways**
 >
+> 1. Running A/B tests at scale requires you to automate, simplify, and standardize the process as much as possible.
 > 2.You can run more experiments faster by separating experiment code from functional code.
-
-📖 **Further reading:** 
-- [Scaling Experimentation for Machine Learning at Coinbase](https://www.coinbase.com/blog/scaling-experimentation-for-machine-learning-at-coinbase)
-- 
+>
+> 📖 **Further reading:** 
+> - [Scaling Experimentation for Machine Learning at Coinbase](https://www.coinbase.com/blog/scaling-experimentation-for-machine-learning-at-coinbase)
+  
 ## 4. Airbnb: Interleaving, dynamic p-values
 
 Although Airbnb has many examples of standard A/B testing, we’re going to cover two unorthodox examples: (i) testing search results with interleaving and (ii) improving accuracy with dynamic p-values.
@@ -153,14 +150,13 @@ For example, they tested changing the max price filter value to $1,000. In it, t
 
 To solve this, Airbnb calculated a dynamic p-value curve starting at 0 and then curving up towards 0.05 on day 30 to determine whether an early result is worth investigating. This creates enforced skepticism about early experiment results and helps reduce false positives.
 
-#### Takeaways
+> **Takeaways**
 > 1. A/B tests can be set up to compare variants together rather than split using interleaving.
->
 > 2. A static p-value goal may cause you to prematurely end experiments. A custom, dynamic p-value can provide a more accurate threshold.
-  
-📖 **Further reading:** 
-- - [Beyond A/B Test: Speeding up Airbnb Search Ranking Experimentation through Interleaving](https://medium.com/airbnb-engineering/beyond-a-b-test-speeding-up-airbnb-search-ranking-experimentation-through-interleaving-7087afa09c8e).
-- [Experiments at Airbnb](https://medium.com/airbnb-engineering/experiments-at-airbnb-e2db3abf39e7).
+>  
+> 📖 **Further reading:**
+> - [Beyond A/B Test: Speeding up Airbnb Search Ranking Experimentation through Interleaving](https://medium.com/airbnb-engineering/beyond-a-b-test-speeding-up-airbnb-search-ranking-experimentation-through-interleaving-7087afa09c8e).
+> - [Experiments at Airbnb](https://medium.com/airbnb-engineering/experiments-at-airbnb-e2db3abf39e7).
 
 ## 5. Convoy – The benefits of bayesian over frequentist testing
 
@@ -182,11 +178,15 @@ This requires some statistical math too complicated to do here, but Convoy follo
 
 The Bayesian approach focuses more on the average magnitude of wrong decisions over many experiments. This limits making the product worse while maintaining a bias for action. When they stop an experiment, they can be confident they are making a decision that won’t decrease a metric more than a known value, while seeing improvements to the product. By doing this, A/B tests at Convoy can have the highest impact over the long run.
 
-#### Takeaways
-
-> - Standard, "frequentist" A/B test can unhelpfully favor the null hypothesis.
+> **Takeaways&&
+> 1. Standard, "frequentist" A/B test can unhelpfully favor the null hypothesis.
+> 2. A Bayesian approach encourages shipping more changes, even if a larger portion of them don’t have a significant impact.
 >
-> - A Bayesian approach encourages shipping more changes, even if a larger portion of them don’t have a significant impact.
+> 📖 **Further reading:** 
+> - [The Power of Bayesian A/B Testing](https://medium.com/convoy-tech/the-power-of-bayesian-a-b-testing-f859d2219d5)
 
-📖 **Further reading:** 
-- [The Power of Bayesian A/B Testing](https://medium.com/convoy-tech/the-power-of-bayesian-a-b-testing-f859d2219d5).
+## More on A/B testing
+
+- [Annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
+- [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
+- [Guides to running A/B tests in PostHog](/tutorials/categories/experimentation)
