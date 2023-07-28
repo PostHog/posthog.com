@@ -20,7 +20,7 @@ With PostHog Batch Exports, data can be exported to a Snowflake database table.
 
 ## Snowflake configuration
 
-Configuring a Batch Export targetting Snowflake requires the following Snowflake-specific configuration values:
+Configuring a Batch Export targeting Snowflake requires the following Snowflake-specific configuration values:
 * User: A Snowflake user name with permissions to insert data into the provided table and, if the table is meant to be created, permissions to create the table.
 * Password: The password of the Snowflake user provided.
 * Role (optional): A role to assume for the required permissions.
