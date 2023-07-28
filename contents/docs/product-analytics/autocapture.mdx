@@ -104,6 +104,19 @@ PostHog tries to not capture any sensitive data from your website. If there are 
 
 Autocapture is enabled by default. You can disable autocapture completely by setting `autocapture: false` in the config. You can also disable autocapture in your [project settings](https://app.posthog.com/project/settings).
 
+The two settings to enable or disable autocapture interacting can make it tricky to be sure what combination of settings you want.
+
+When client side is opted out, autocapture is always off.
+
+When client side is opted in, autocapture is only on, if the project settings do not opt out.
+
+| SDK Enabled | Project Settings opted out | Autocapture is enabled? |
+| :---: | :----: | :----: |
+| true   |   true    |     false |
+| true   |   false    |     true |
+| false   |   true    |     false |
+| false   |   false    |     false |
+
 Disabling autocapture **will not disable session recording**. You can disable session recording using `disable_session_recording` or by turning it off in your project's settings.
 
 
