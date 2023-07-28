@@ -14,7 +14,7 @@ tags:
  - Feature flags
 ---
 
-Feature flags are a simple way to control and rollout features or parts of code. In their simplest form, they enable you to turn on or off features or code paths for certain users. The secret of feature flags is that they have more depth than this, and getting the most out of them at scale requires knowledge and process.
+Feature flags are a simple way to control and rollout features or parts of code. In their simplest form, they enable you to turn on or off features or code paths for certain users. The secret of feature flags is that they have more depth than this, and getting the most out of them at scale requires careful planning and implementation.
 
 Although we've covered feature flag [use cases](/blog/feature-flag-benefits-use-cases) and [best practices](/blog/feature-flag-best-practices) in previous posts, it is useful to learn how large companies work with feature flags. Two leading examples are GitHub and GitLab. This post details why, when, and how they use feature flags.
 
@@ -22,9 +22,9 @@ Although we've covered feature flag [use cases](/blog/feature-flag-benefits-use-
 
 Both GitHub and GitLab are massive software companies. They are both at the forefront of software development and DevOps, so maintaining best practices is important. Broadly, this means making the deployment of code safer and more consistent.
 
-In GitHub’s case, they frame this as "**lowering deployment risk**." They want deployments to be risk-free. Putting new changes behind a flag lowers the risk of failing deployments. If there is an issue with a feature, you disable the flag rather than needing to roll back the entire deployment.
+In GitHub’s case, they frame this as "[lowering deployment risk](https://github.blog/2021-04-27-ship-code-faster-safer-feature-flags/#reducing-deployment-risk)." They want deployments to be risk-free. Putting new changes behind a flag lowers the risk of failing deployments. If there is an issue with a feature, you disable the flag rather than needing to roll back the entire deployment.
 
-In GitLab’s case, they have a "**progressive delivery mindset**." They find feature flags are a great tool for incremental, continuous delivery, allowing them to separate deployment and rollout. This is especially valuable to them because deployment is inconsistent due to their self-hostability. Feature flags increase the speed of shipping changes as well as provide psychological safety for developers.
+In GitLab’s case, they have a "[progressive delivery mindset](https://about.gitlab.com/blog/2019/08/06/feature-flags-continuous-delivery/)." They find feature flags are a great tool for incremental, continuous delivery, allowing them to separate deployment and rollout. This is especially valuable to them because deployment is inconsistent due to their self-hostability. Feature flags increase the speed of shipping changes as well as provide psychological safety for developers.
 
 ## When do they use feature flags?
 
