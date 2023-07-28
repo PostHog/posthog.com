@@ -65,3 +65,5 @@ export const wrapPageElement = ({ element, props }) => {
         element
     )
 }
+export const shouldUpdateScroll = ({ pathname }) =>
+    !/^blog\/|^tutorials\/|^customers\/|^spotlight\/|^posts/.test(pathname.substring(1)) && window.innerWidth <= 1023
