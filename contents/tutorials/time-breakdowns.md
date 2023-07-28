@@ -12,7 +12,7 @@ By default, PostHog provides an easy way to group events by week, day, and even 
 
 ## Time of day breakdown
 
-We start with an easy scenario, you want to know what part of the day events take place in. To do this, [create an insight](https://app.posthog.com/insights/new), then break down by checking if the event timestamp is in the morning, afternoon, evening, or night. We create a HogQL `multiIf()` expression using the hours of the day to check against `toHour(timestamp)` like this:
+We start with an easy scenario: breaking down what part of the day events take place in. To do this, we [create an insight](https://app.posthog.com/insights/new) and then break it down by checking if the event timestamp is in the morning, afternoon, evening, or night. We use a HogQL `multiIf()` expression using the hours of the day to check against `toHour(timestamp)` like so:
 
 ```sql
 multiIf(
@@ -31,7 +31,7 @@ You can visualize this with a total value bar chart to the sums for the date ran
 
 ## Hourly breakdown
 
-PostHog enables you to group data by hour for single-day date ranges. If you want to sum these values across ranges longer than one day, you can breakdown by `toHour(timestamp)` and, again, use a total value or time series bar chart to visualize.
+PostHog enables you to group data by hour for single-day date ranges. If you want to sum these values across ranges longer than one day, you can break it down by `toHour(timestamp)` and, once again, use a total value or time series bar chart to visualize.
 
 ![Hourly breakdowns](../images/tutorials/time-breakdowns/hour.png)
 
