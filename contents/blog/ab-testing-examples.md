@@ -1,5 +1,5 @@
 ---
-title: "A/B testing examples from YC’s top companies"
+title: "5 A/B testing examples from YC’s top companies"
 date: 2023-07-28
 author: ["ian-vanagas"]
 showTitle: true
@@ -178,7 +178,7 @@ This requires some statistical math too complicated to do here, but Convoy follo
 
 The Bayesian approach focuses more on the average magnitude of wrong decisions over many experiments. This limits making the product worse while maintaining a bias for action. When they stop an experiment, they can be confident they are making a decision that won’t decrease a metric more than a known value, while seeing improvements to the product. By doing this, A/B tests at Convoy can have the highest impact over the long run.
 
-> **Takeaways&&
+> **Takeaways**
 > 1. Standard, "frequentist" A/B test can unhelpfully favor the null hypothesis.
 > 2. A Bayesian approach encourages shipping more changes, even if a larger portion of them don’t have a significant impact.
 >
