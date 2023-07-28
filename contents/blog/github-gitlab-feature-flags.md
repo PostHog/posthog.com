@@ -1,5 +1,5 @@
 ---
-title: How GitHub and GitLab use feature flags
+title: Lessons from how GitHub and GitLab use feature flags
 date: 2023-07-26
 author: ["ian-vanagas"]
 showTitle: true
@@ -42,7 +42,7 @@ Both GitHub and GitLab have fairly standard use cases and implementations of the
 
 > **What is an "actor"?** Both GitLab and GitHub don’t exclusively target users with feature flags. They target "actors." These are users, organizations, teams, enterprises, repositories, projects, or apps. They use actors to create consistent experiences for a related group of users. For example, an organization should have a consistent experience for all its members.
 
-A specific example of how GitHub uses feature flags is in the rollout of their [new GitHub API rate limiter](https://github.blog/2021-04-05-how-we-scaled-github-api-sharded-replicated-rate-limiter-redis/). This involved writing a completely new backend with Redis. They gated their new backend with a feature flag and rolled out slowly and smoothly. Once done, they removed the flag and old backend and integrated the new Redis backend further. Ironically, once they removed the flag, bug reports started rolling in causing them to have to rapidly fix a bunch of bugs (which is preventable with a feature flag). 
+A specific example of how GitHub uses feature flags is in the rollout of their [new GitHub API rate limiter](https://github.blog/2021-04-05-how-we-scaled-github-api-sharded-replicated-rate-limiter-redis/). This involved writing a completely new backend with Redis. They gated their new backend with a feature flag and rolled it out slowly. Once done, they removed the flag and old backend and integrated the new Redis backend further. Ironically, once they removed the flag, bug reports started rolling in causing them to have to rapidly fix a bunch of bugs (which is preventable with a feature flag). 
 
 ### GitLab’s feature flag rollout process
 
@@ -86,6 +86,22 @@ Technical debt is the cost both focus the most on, and they built processes for 
 [GitLab](https://about.gitlab.com/handbook/product-development-flow/feature-flag-lifecycle/#the-cost-of-feature-flags) specifically finds the cost of not having feature flags is higher than having them. When an issue happens with non-feature flagged code, they must revert the release, clean up the related code, and ship a fix to unblock future releases. Feature flags are a larger upfront cost, but are "cheaper" to rollback, saving time and energy. 
 
 ![Costs](../images/blog/github-gitlab-feature-flags/cost.png)
+
+## Takeaways from GitHub and GitLab's usage of feature flags
+
+- Ensuring safe deployment and delivery of code is critical at scale.
+
+- Feature flags support this goal by limiting the downside of issues in deployed code. This is done by disconnecting deployment from rollout and enabling simple rollbacks. 
+
+- Feature flags have costs, but for changes that are high risk, in high traffic areas, introduce external services, or add new usage restrictions, those costs are worth the benefits. 
+
+- In large organizations, feature flags work better for collaboration than branches.
+
+- Users aren't the only possible "target" for feature flags. Organizations, teams, repositories, projects, and apps can all be targets too. This ensures a consistent experience.
+
+- Rolling out a new feature with flags requires coordination and planning. Creating a process to help each stage of rollout lowers the risk of issues. This process might include documentation, change management, and notifying stakeholders.
+
+- Having commands and scripts for adding, enabling, disabling, and removing feature flags creates consistency and limits technical debt.
 
 ## Further reading
 
