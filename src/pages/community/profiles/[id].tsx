@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PageProps } from 'gatsby'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
@@ -19,7 +19,6 @@ import { RightArrow } from '../../../components/Icons/Icons'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
 import Logomark from 'components/Home/images/Logomark'
-import Label from 'components/Label'
 import { communityMenu } from '../../../navs'
 import useTopicsNav from '../../../navs/useTopicsNav'
 
@@ -48,7 +47,7 @@ const Avatar = (props: { className?: string; src?: string }) => {
 
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
-
+    const [view, setView] = useState('discussions')
     const [editModalOpen, setEditModalOpen] = React.useState(false)
     const posthog = usePostHog()
     const nav = useTopicsNav()
@@ -100,6 +99,10 @@ export default function ProfilePage({ params }: PageProps) {
         mutate()
         setEditModalOpen(false)
     }
+
+    useEffect(() => {
+        if (!profile?.amaEnabled) setView('discussions')
+    }, [profile])
 
     if (!profile) {
         return null
@@ -176,7 +179,40 @@ export default function ProfilePage({ params }: PageProps) {
                             </div>
 
                             <div className="mt-12">
-                                <Questions title="Discussions" profileId={id} showForm={false} />
+                                {profile?.amaEnabled ? (
+                                    <div className="grid grid-cols-2 relative max-w-xs mb-6 font-semibold border-b border-border dark:border-dark text-base">
+                                        <button
+                                            className={`${
+                                                view !== 'discussions' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('discussions')}
+                                        >
+                                            Discussions
+                                        </button>
+                                        <button
+                                            className={`${
+                                                view !== 'ama' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            } p-4 transition-opacity`}
+                                            onClick={() => setView('ama')}
+                                        >
+                                            Ask me anything
+                                        </button>
+                                        <span
+                                            className={`transition-all absolute bottom-0 translate-y-1/2 border-b-2 border-red dark:border-yellow w-1/2 left-0 rounded ${
+                                                view === 'discussions' ? '' : 'translate-x-full'
+                                            }`}
+                                        />
+                                    </div>
+                                ) : (
+                                    <h3>Discussions</h3>
+                                )}
+                                <Questions
+                                    initialView={view === 'ama' ? 'question-form' : undefined}
+                                    slug={view === 'ama' ? window?.location?.pathname : undefined}
+                                    profileId={view === 'discussions' ? id : undefined}
+                                    showForm={view === 'ama'}
+                                    disclaimer={false}
+                                />
                             </div>
                         </>
                     ) : null}

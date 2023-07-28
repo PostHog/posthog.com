@@ -25,7 +25,7 @@ export function Hero({
                 </Heading>
             )}
             {subtitle && (
-                <h2 className="text-[18px] md:text-[20px] leading-[1.4] font-semibold mb-8 !mt-5">{subtitle}</h2>
+                <h2 className="!text-[18px] md:!text-[20px] leading-[1.4] font-semibold mb-8 !mt-5">{subtitle}</h2>
             )}
             {ctas && (
                 <div className="flex flex-col space-y-3 items-center">
