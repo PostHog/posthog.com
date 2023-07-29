@@ -96,7 +96,7 @@ We'd only really look to do this with people spending $20k+ per year - we don't 
 
 _How do I find out a customer's usage?_
 
-The tool we use for this currently is [Pocus](app.pocus.com), which combines revenue, PostHog, HubSpot data all in one place. You can search for the org/user/domain using cmd + k and the popover should give a deep dive into usage across products, revenue, engagement, etc.
+The tool we use for this currently is [Pocus](https://app.pocus.com), which combines revenue, PostHog, HubSpot data all in one place. You can search for the org/user/domain using cmd + k and the popover should give a deep dive into usage across products, revenue, engagement, etc.
 
 _Can a customer transfer from self-hosted (e.g. Open Source) to Cloud?_
 
