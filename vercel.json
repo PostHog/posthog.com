@@ -1032,6 +1032,7 @@
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
         },
-        { "source": "/docs/data/data-management", "destination": "/docs/data" }
+        { "source": "/docs/data/data-management", "destination": "/docs/data" },
+        { "source": "/pricing?product=experiments", "destination": "/pricing?product=ab-testing" }
     ]
 }
