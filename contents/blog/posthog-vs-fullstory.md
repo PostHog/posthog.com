@@ -200,7 +200,7 @@ This means you can use a Trends insight to examine the performance of a particul
 
 You can also do this in reverse by filtering for session replays where particular events occur, and creating dynamic playlists. We cover these session replay features in greater depth below. 
 
-> **PostHog ships weirdly fast.** We never stop shipping. Visit the [the weekly changelog](/blog/changelog) to keep up to date, or take a look at what we’re planning in [our public roadmap](/roadmap)!
+> **PostHog ships weirdly fast.** We never stop shipping. Visit the [the weekly changelog](/changelog/2023) to keep up to date, or take a look at what we’re planning in [our public roadmap](/roadmap)!
 
 ### Session replay
 

@@ -283,7 +283,7 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
                 <Content />
 
                 <div className="pt-8">
-                    <CallToAction to="docs/feature-flags/manual" width="full">
+                    <CallToAction to="/docs/feature-flags/manual" width="full">
                         Visit the manual
                     </CallToAction>
                 </div>

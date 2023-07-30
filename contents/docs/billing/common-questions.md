@@ -18,7 +18,7 @@ Go to your organization's [billing settings](https://app.posthog.com/organizatio
 
 ### Can I set a billing limit?
 
-Yes, you can set a billing limit for each of PostHog's products in your organization's [billing settings]((https://app.posthog.com/organization/billing)). Check out our doc on [billing limits and alerts](/docs/billing/estimating-usage-costs) for more information.
+Yes, you can set a billing limit for each of PostHog's products in your organization's [billing settings](https://app.posthog.com/organization/billing). Check out our doc on [billing limits and alerts](/docs/billing/estimating-usage-costs) for more information.
 
 ### Are events or replays dropped when I reach billing limits?
 
