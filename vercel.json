@@ -1018,8 +1018,7 @@
                     "key": "product",
                     "value": "experiments"
                 }
-            ],
-            "method": "GET"
+            ]
         }
     ],
     "rewrites": [
