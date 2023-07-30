@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'components/Link'
-import { Check, Heart } from 'components/Icons'
+import { Check, Heart, RightArrow } from 'components/Icons'
 import { Menu } from '@headlessui/react'
 import { ChevronDown } from '@posthog/icons'
 import { useInView } from 'react-intersection-observer'
@@ -262,8 +262,8 @@ function PostsListing({ articleView }) {
     const { posts, isLoading, fetchMore } = usePosts({ params })
     const breakpoints = useBreakpoint()
 
-    return (
-        <div>
+    return articleView && breakpoints.md ? null : (
+        <div className={`${articleView ? 'sticky top-[108px] w-full lg:w-[30rem] flex-shrink-0' : 'flex-grow'}`}>
             <div className="my-4 flex justify-between">
                 <h5 className="m-0">Posts</h5>
                 <Categories
@@ -378,18 +378,18 @@ export const Sidebar = () => {
 
 export default function Posts({ children, articleView }) {
     const { user, logout } = useUser()
+    const didMount = useRef(false)
     const name = [user?.profile.firstName, user?.profile.lastName].filter(Boolean).join(' ')
     const [loginModalOpen, setLoginModalOpen] = useState(false)
-    const [postOpen, setPostOpen] = useState(articleView)
-    const breakpoints = useBreakpoint()
     const { pathname } = useLocation()
-
-    const onClose = () => {
-        navigate('/posts')
-    }
+    const [prev, setPrev] = useState<string | null>(null)
 
     useEffect(() => {
-        setPostOpen(articleView)
+        if (didMount.current) {
+            setPrev(pathname)
+        } else {
+            didMount.current = true
+        }
     }, [pathname])
 
     return (
@@ -430,33 +430,26 @@ export default function Posts({ children, articleView }) {
                         </div>
                     </div>
                 </section>
-                <section className="lg:flex lg:space-x-12 my-8 items-start">
-                    <div
-                        className={`${
-                            articleView ? 'sticky top-[108px] w-full lg:w-[30rem] flex-shrink-0' : 'flex-grow'
-                        }`}
-                    >
-                        <PostsListing articleView={articleView} />
-                    </div>
-                    <AnimatePresence>
-                        {postOpen && breakpoints.md ? (
-                            <MenuContainer
-                                className="mx-2 rounded-tr-md rounded-tl-md border-l border-r border-border dark:border-dark pb-[122.75px]"
-                                onClose={onClose}
-                                setOpen={setPostOpen}
+                <section className="lg:flex lg:space-x-12 my-4 md:my-8 items-start">
+                    <PostsListing articleView={articleView} />
+                    {articleView && (
+                        <div
+                            className={`${
+                                articleView ? 'flex-grow' : 'sticky top-[108px] w-[30rem] flex-shrink-0 block'
+                            }`}
+                        >
+                            <button
+                                onClick={() => navigate(prev ? -1 : '/posts')}
+                                className="inline-flex lg:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                             >
-                                <div className="h-[60vh] overflow-auto">{children}</div>
-                            </MenuContainer>
-                        ) : (
-                            <div
-                                className={`${
-                                    articleView ? 'flex-grow' : 'sticky top-[108px] w-[30rem] flex-shrink-0 block'
-                                }`}
-                            >
-                                {children}
-                            </div>
-                        )}
-                    </AnimatePresence>
+                                <RightArrow className="-scale-x-100 w-6" />
+                                <span className="text-red dark:text-yellow text-[15px] font-semibold">
+                                    Back to posts
+                                </span>
+                            </button>
+                            <div>{children}</div>
+                        </div>
+                    )}
                 </section>
             </div>
         </Layout>
