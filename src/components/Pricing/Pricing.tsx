@@ -51,30 +51,46 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
-const internalProductNames = {
+const internalProductNames: {
+    [key: string]: string
+} = {
     'product-analytics': 'product_analytics',
     'session-replay': 'session_replay',
     'feature-flags': 'feature_flags',
-    experiments: 'experimentation',
+    'ab-testing': 'ab_testing',
+}
+
+const pricingGroupsToShowOverride: {
+    [key: keyof typeof internalProductNames]: string[]
+} = {
+    'ab-testing': ['feature_flags'],
 }
 
 const Pricing = (): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const { search } = useLocation()
     const [groupsToShow, setGropsToShow] = useState<undefined | string[]>()
+    const [currentProduct, setCurrentProduct] = useState<string | null>()
+
+    const getGroupsToShow = (): string[] | undefined => {
+        const product = new URLSearchParams(search).get('product')
+        setCurrentProduct(product ? internalProductNames[product] : null)
+        const defaultGroupsToShow = product ? [internalProductNames[product]] : undefined
+        const groupsToShowOverride = product ? pricingGroupsToShowOverride[product] : undefined
+        return groupsToShowOverride || defaultGroupsToShow
+    }
 
     useEffect(() => {
-        const product = new URLSearchParams(search).get('product')
-        setGropsToShow((product && [internalProductNames[product]]) || undefined)
+        setGropsToShow(getGroupsToShow())
     }, [search])
-
-    const currentGroup = groupsToShow?.[0]
 
     return (
         <Layout
             parent={pricingMenu}
             activeInternalMenu={
-                pricingMenu.children[Object.values(internalProductNames).findIndex((name) => name === currentGroup) + 1]
+                pricingMenu.children[
+                    Object.values(internalProductNames).findIndex((name) => name === currentProduct) + 1
+                ]
             }
         >
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />

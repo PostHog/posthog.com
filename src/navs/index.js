@@ -2474,7 +2474,7 @@ export const pricingMenu = {
             name: 'A/B testing',
             icon: 'Flask',
             color: 'purple',
-            url: '/pricing?product=experiments',
+            url: '/pricing?product=ab-testing',
         },
     ],
 }

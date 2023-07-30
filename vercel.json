@@ -1008,6 +1008,17 @@
         {
             "source": "/handbook/growth/marketing/customer-personas",
             "destination": "/handbook/strategy/ideal-customer-persona"
+        },
+        {
+            "source": "/pricing",
+            "destination": "/pricing?product=ab-testing",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "product",
+                    "value": "experiments"
+                }
+            ]
         }
     ],
     "rewrites": [
