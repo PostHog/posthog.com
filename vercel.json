@@ -1008,7 +1008,8 @@
         {
             "source": "/handbook/growth/marketing/customer-personas",
             "destination": "/handbook/strategy/ideal-customer-persona"
-        }
+        },
+        { "source": "/pricing?product=experiments", "destination": "/pricing?product=ab-testing" }
     ],
     "rewrites": [
         {
@@ -1032,7 +1033,6 @@
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
         },
-        { "source": "/docs/data/data-management", "destination": "/docs/data" },
-        { "source": "/pricing?product=experiments", "destination": "/pricing?product=ab-testing" }
+        { "source": "/docs/data/data-management", "destination": "/docs/data" }
     ]
 }
