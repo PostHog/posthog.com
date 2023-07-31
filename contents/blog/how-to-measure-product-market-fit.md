@@ -255,7 +255,7 @@ It's also a good idea to track different cohorts, such as retention for users wh
 
 - <td className="text-center"><span className="text-red text-lg">✖</span></td> Not predictive of revenue – will retained users actually pay for your product?
 
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> You need several months of data to get a realiable signal.
+- <td className="text-center"><span className="text-red text-lg">✖</span></td> You need several months of data to get a reliable signal.
 
 ## Indicator #5: The burn multiple 🔥💸
 
