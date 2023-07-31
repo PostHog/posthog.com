@@ -1,6 +1,6 @@
 ---
-title: Lessons from how GitHub and GitLab use feature flags
-date: 2023-07-26
+title: What you can learn from how GitHub and GitLab use features flags
+date: 2023-07-31
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -89,8 +89,6 @@ Technical debt is the cost both focus the most on, and they built processes for 
 - GitLab scans to find old flags (6 months or older) and initiate processes for making them permanent or removing them.
 
 [GitLab](https://about.gitlab.com/handbook/product-development-flow/feature-flag-lifecycle/#the-cost-of-feature-flags) specifically finds the cost of not having feature flags is higher than having them. When an issue happens with non-feature flagged code, they must revert the release, clean up the related code, and ship a fix to unblock future releases. Feature flags are a larger upfront cost, but are "cheaper" to rollback, saving time and energy. 
-
-![Costs](../images/blog/github-gitlab-feature-flags/cost.png)
 
 ## Takeaways from GitHub and GitLab's usage of feature flags
 
