@@ -8,13 +8,15 @@ featuredImage: ../images/tutorials/banners/tutorial-10.png
 tags: ['feature flags']
 ---
 
-Testing your new features helps make them successful. Public betas are a way to get new features into the hands of users and get valuable feedback and analytics. In this tutorial, we show you how to add a basic public beta program to your (Next.js) app with PostHog’s early access management feature.
+Public betas are a way to get new features into the hands of users and get valuable feedback and analytics. In this tutorial, we show you how to add a basic public beta program to your app with PostHog’s early access management feature.
+
+Our example uses Next.js, but this also works for other frameworks and languages.
 
 > Already have an app and PostHog set up? [Skip creating the beta feature](#creating-our-beta-feature-in-posthog).
 
 ## Creating a Next.js app and adding PostHog
 
-First, we need an app and we use Next.js to create one. After installing Node, run the command below, select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
+First, create a Next.js app. To do so, install Node and run the command below. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
 ```bash
 npx create-next-app@latest beta-program
@@ -173,7 +175,7 @@ export default function Beta() {
 }
 ```
 
-Next, we set up a `useEffect` for our key logic. It filters the early access features (from `getEarlyAccessFeatures`) into active and inactive betas depending on if the flag key exists and then sets those two filtered lists in their states. We also just set all betas to inactive if they don’t have any active flags.
+Next, we set up a `useEffect` hook for our key logic. It filters the early access features (from `getEarlyAccessFeatures`) into active and inactive betas depending on if the flag key exists and then sets those two filtered lists in their states. We also just set all betas to inactive if they don’t have any active flags.
 
 ```js
 // ...
