@@ -82,4 +82,4 @@ These metrics should give you a better understanding of how users are spending t
 
 To dive deeper into these insights, you can use [session recordings](/product/session-recording) to watch exactly how users are interacting with your product or the toolbar to use [heatmaps](/product/heatmaps) to understand popular areas on pages.
 
-<NewsletterTutorial compact/>
+<SubstackForm />
