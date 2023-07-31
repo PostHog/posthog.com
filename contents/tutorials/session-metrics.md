@@ -38,7 +38,7 @@ This might be useful for getting a rough idea of the usage of our whole product 
 
 ## Average session duration
 
-Now that you visualized time on site, we can visualize some session-based metrics based on averages. Averages provide better insight into how individual users spend their time compared to the sum of time spent metrics calculated and visualized in the last section.
+Now that you visualized time on site, we can visualize session-based metrics based on averages. Averages provide better insight into how individual users spend their time, compared to the sum of time spent metrics shown in the previous section.
 
 We’ll start with the average session duration. It can be calculated by again choosing pageview, but now aggregating by average session duration. Ensuring Y-axis is set to `Duration (s)` creates a graph of average session duration. 
 
