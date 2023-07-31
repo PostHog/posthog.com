@@ -9,10 +9,12 @@ const descriptionItemClassName = `text-sm opacity-80`
 const OpenSourceDescription = () => {
     return (
         <ul className={descriptionClassName}>
-            <li className={descriptionItemClassName}>Deploy with Docker on your own server. </li>
-            <li className={descriptionItemClassName}>Made for hobby projects with {'<100k'} events/month. </li>
+            <li className={descriptionItemClassName}>Deploy with Docker on your own server.</li>
             <li className={descriptionItemClassName}>
-                <strong>MIT licensed without guarantee.</strong>
+                Great for internal tools or evaluating without vendor approvals.
+            </li>
+            <li className={descriptionItemClassName}>
+                <strong>MIT licensed, BYOEngineers!</strong>
             </li>
         </ul>
     )

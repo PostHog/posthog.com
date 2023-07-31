@@ -1,0 +1,68 @@
+---
+title: Shopify
+github: https://github.com/posthog/posthog-shopify-sync-plugin
+installUrl: https://app.posthog.com/project/apps?name=Posthog+Shopify
+thumbnail: ../../cdp/thumbnails/shopify.png
+tags:
+    - shopify
+---
+
+Sync customer and order data from Shopify, into PostHog.
+
+This app will:
+
+-   Associate your Shopify customers with PostHog users
+-   Create a PostHog user from a Shopify customer if it doesn't exist
+-   Create events for every new order
+
+If there is an error while fetching orders, the next run of `runEveryMinute()` will try to re-read information from where it was previously interrupted.
+
+## Requirements
+
+Using this app requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+
+Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+
+## Installation
+
+1. Visit the 'Apps' page in your instance of PostHog.
+2. Search for 'Shopify' and select the app, press 'Install'.
+3. Follow the steps below to configure the app.
+
+## Configuration
+
+You will need to set the store name from your Shopify account.
+
+Additionally, you will need to create a Shopify Access Token, which we will call to fetch orders into PostHog.
+
+To create a Shopify Access Token, create an app on the admin page of your Shopify Account and generate `Admin API access token` in the API Credentials tab or your newly created Shopify app.
+
+### Additional configuration
+
+<AppParameters />
+
+## FAQ
+
+### Is the source code for this app available?
+
+PostHog is open-source and so are all apps on the platform. The [source codep](https://github.com/posthog/posthog-shopify-sync-plugin) is available on GitHub.
+
+### Who created this app?
+
+We'd like to thank community member [Sreeraj Rajan](https://github.com/sreeo) for his work creating this app. Thank you, Sreeraj!
+
+### Who maintains this app?
+
+This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
+
+### What if I have feedback on this app?
+
+We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
+
+### What if my question isn't answered above?
+
+We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+
+### Where can I find out more?
+
+Check the [Shopify API reference docs](https://shopify.dev/api) for more information about connecting services to Shopify.

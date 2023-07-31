@@ -1,0 +1,39 @@
+If a user logs out on your frontend, you should call `reset` to unlink any future events made on that device with that user. 
+
+This is important if your users are sharing a computer, as otherwise all of those users are grouped together into a single user due to shared cookies between sessions. **We strongly recommend you call `reset` on logout even if you don't expect users to share a computer.**
+
+You can do that like so:
+
+<MultiLanguage selector="tabs">
+
+```js-web
+posthog.reset()
+```
+
+```iOS
+posthog.reset()
+```
+```Android
+PostHog.with(this)
+       .reset();
+```
+
+</MultiLanguage>
+
+If you _also_ want to reset the `device_id` so that the device will be considered a new device in future events, you can pass `true` as an argument:
+
+<MultiLanguage selector="tabs">
+
+```js-web
+posthog.reset(true)
+```
+
+```iOS
+posthog.reset(true)
+```
+
+```Android
+PostHog.with(this)
+       .reset(true);
+```
+</MultiLanguage>

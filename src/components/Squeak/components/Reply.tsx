@@ -7,6 +7,7 @@ import Avatar from './Avatar'
 import getAvatarURL from '../util/getAvatar'
 import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
+import Logomark from 'components/Home/images/Logomark'
 
 type ReplyProps = {
     reply: StrapiRecord<ReplyData>
@@ -31,6 +32,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
+    const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
@@ -45,6 +47,8 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
         setConfirmDelete(false)
     }
 
+    const pronouns = profile?.data?.attributes?.pronouns
+
     return profile?.data ? (
         <div onClick={handleContainerClick}>
             <div className="pb-1 flex items-center space-x-2">
@@ -52,10 +56,16 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     className="flex items-center !text-black dark:!text-white"
                     to={`/community/profiles/${profile.data.id}`}
                 >
-                    <div className="mr-2">
+                    <div className="mr-2 relative">
                         <Avatar className="w-[25px] h-[25px]" image={getAvatarURL(profile?.data?.attributes)} />
+                        {isTeamMember && (
+                            <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
+                                <Logomark className="w-[16px]" />
+                            </span>
+                        )}
                     </div>
                     <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
+                    {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
                 </Link>
                 {badgeText && (
                     <span className="border border-gray-accent-light dark:border-gray-accent-dark text-xs py-0.5 px-1 rounded-sm">
@@ -71,7 +81,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                         {(isAuthor || isModerator) && (
                             <button
                                 onClick={() => handleResolve(false, null)}
-                                className="text-sm font-semibold text-red"
+                                className="text-sm font-semibold text-red dark:text-yellow"
                             >
                                 Undo
                             </button>
@@ -85,14 +95,17 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
 
                 <div className="flex space-x-2 mb-4 relative -top-2 empty:hidden">
                     {!resolved && (isAuthor || isModerator) && (
-                        <button onClick={() => handleResolve(true, id)} className="text-red font-semibold text-sm">
+                        <button
+                            onClick={() => handleResolve(true, id)}
+                            className="text-red dark:text-yellow font-semibold text-sm"
+                        >
                             Mark as solution
                         </button>
                     )}
                     {isModerator && (
                         <button
                             onClick={() => handlePublishReply(!!publishedAt, id)}
-                            className="text-red font-semibold text-sm"
+                            className="text-red dark:text-yellow font-semibold text-sm"
                         >
                             {publishedAt ? 'Unpublish' : 'Publish'}
                         </button>

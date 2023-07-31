@@ -32,7 +32,7 @@ posthog.init('<ph_project_api_key>', {
 
 You can also disable `pageview` and `pageleave` with the `capture_pageview` option and session recordings with `disable_session_recording`. You can find all the [configuration options for our JavaScript library](/docs/integrate/client/js#config) in our docs.
 
-Disabling these options still allows you to use other PostHog features such as `posthog.capture()` calls or feature flags. If limiting unwanted events is what is important for you, using disabling autocapture and using capture calls gives you more control over the events you are capturing. 
+Disabling these options still allows you to use other PostHog features such as `posthog.capture()` calls or feature flags. If limiting unwanted events is what is important for you, disabling autocapture and using capture calls gives you more control over the events you are capturing. 
 
 ## Using feature flags
 
@@ -139,5 +139,3 @@ Hopefully, these options helped you get your event data ingestion and costs in c
 - Not getting enough events? Check out our [event tracking guide](/tutorials/event-tracking-guide).
 - Trouble with pageview captures on your single page app? Check out our [tutorial on how to set it up](/tutorials/spa).
 - Want to avoid using cookies in your tracking? Follow our [cookieless tracking tutorial](/tutorials/cookieless-tracking).
-
-<NewsletterTutorial compact/>

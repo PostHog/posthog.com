@@ -10,7 +10,9 @@ export const ContributorImage = ({ image, name, className = '', imgClassName = '
         <div
             className={`w-[32px] h-[32px] relative rounded-full overflow-hidden border-2 border-tan dark:border-primary transition-all ${className}`}
         >
-            {gatsbyImage ? (
+            {typeof image === 'string' ? (
+                <img className={`rounded-full bg-gray-accent dark:bg-gray-accent-dark ${imgClassName}`} src={image} />
+            ) : gatsbyImage ? (
                 <GatsbyImage
                     imgClassName={`rounded-full ${imgClassName}`}
                     image={gatsbyImage}

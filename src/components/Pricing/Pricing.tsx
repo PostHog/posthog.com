@@ -1,6 +1,6 @@
 import Layout from 'components/Layout'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -8,12 +8,11 @@ import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
-import EnterpriseOverlay from 'components/Pricing/Overlays/Enterprise'
-import WhyCloud from 'components/Pricing/Overlays/WhyCloud'
-import Enterprise from 'components/Pricing/Modals/Enterprise'
 import { PlanComparison } from './PlanComparison'
 import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
+import { useLocation } from '@reach/router'
+import { pricingMenu } from '../../navs'
 
 export const section = cntl`
     max-w-6xl
@@ -52,17 +51,49 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
+const internalProductNames: {
+    [key: string]: string
+} = {
+    'product-analytics': 'product_analytics',
+    'session-replay': 'session_replay',
+    'feature-flags': 'feature_flags',
+    'ab-testing': 'ab_testing',
+}
+
+const pricingGroupsToShowOverride: {
+    [key: keyof typeof internalProductNames]: string[]
+} = {
+    'ab-testing': ['feature_flags'],
+}
+
 const Pricing = (): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const [enterpriseModalOpen, setEnterpriseModalOpen] = useState(false)
-    const [whyCloudOpen, setWhyCloudOpen] = useState(false)
+    const { search } = useLocation()
+    const [groupsToShow, setGropsToShow] = useState<undefined | string[]>()
+    const [currentProduct, setCurrentProduct] = useState<string | null>()
+
+    const getGroupsToShow = (): string[] | undefined => {
+        const product = new URLSearchParams(search).get('product')
+        setCurrentProduct(product ? internalProductNames[product] : null)
+        const defaultGroupsToShow = product ? [internalProductNames[product]] : undefined
+        const groupsToShowOverride = product ? pricingGroupsToShowOverride[product] : undefined
+        return groupsToShowOverride || defaultGroupsToShow
+    }
+
+    useEffect(() => {
+        setGropsToShow(getGroupsToShow())
+    }, [search])
 
     return (
-        <Layout>
+        <Layout
+            parent={pricingMenu}
+            activeInternalMenu={
+                pricingMenu.children[
+                    Object.values(internalProductNames).findIndex((name) => name === currentProduct) + 1
+                ]
+            }
+        >
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
-            <EnterpriseOverlay open={currentModal === 'enterprise'} setOpen={setCurrentModal} />
-            <WhyCloud open={whyCloudOpen} setOpen={setWhyCloudOpen} />
-            <Enterprise open={enterpriseModalOpen} setOpen={setEnterpriseModalOpen} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
                 <div
@@ -87,19 +118,19 @@ const Pricing = (): JSX.Element => {
                 </div>
             </section>
             <section className={`${section} mb-12 mt-12 md:px-4`}>
-                <PlanComparison />
+                <PlanComparison groupsToShow={groupsToShow} />
             </section>
 
             <PricingCalculator />
 
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-2xl m-0 flex items-center border-b border-dashed border-gray-accent-light pb-4">
+                <h2 className="text-2xl m-0 flex items-center border-b border-light dark:border-dark pb-4">
                     <span>More options</span>
                 </h2>
                 <OtherOptions />
             </section>
             <section className={`${section} mb-12 mt-12 md:mt-24 md:px-4`}>
-                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-gray-accent-light border-dashed">Questions</h2>
+                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Questions</h2>
                 <FAQs />
             </section>
             <section className="bg-primary my-12 md:px-4">

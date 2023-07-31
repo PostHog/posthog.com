@@ -8,6 +8,7 @@ sidebar: Blog
 hideAnchor: true
 featuredImage: ../images/blog/posthog-blog-image.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y
 category: Inside PostHog
 tags:
  - Marketing

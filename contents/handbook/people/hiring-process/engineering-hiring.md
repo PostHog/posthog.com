@@ -30,14 +30,14 @@ This is the usual first round interview with the People & Ops team.
 
 #### Technical Interview
 
-The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) round is split into two parts:
+The [technical interview](/handbook/people/hiring-process#interview-2) round is split into two parts:
 
 - The first part is an hour-long technical interview with one of our engineers. This might be architecture design or diving more into past technical experiences in more of a workshop style. No whiteboarding or brainteasers. 
-- If they pass this stage, we will then schedule a follow up 30-minute interview with [Tim](https://posthog.com/handbook/people/team#tim-glaser-co-founder-&-cto) about your previous experiences and what motivates you. 
+- If they pass this stage, we will then schedule a follow up 30-minute interview with [Tim](/community/profiles/108) about your previous experiences and what motivates you. 
 
 #### Engineering SuperDay
 
-The final stage of our interview process is the PostHog [SuperDay](https://posthog.com/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
+The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
 
 For the Full Stack role, the task involves building a small web service (both backend and frontend) over a full day. The task is designed to be _too much_ work for one person to complete in a day, in order to get a sense of your ability to prioritize. 
 

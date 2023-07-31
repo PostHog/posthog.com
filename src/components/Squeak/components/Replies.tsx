@@ -23,7 +23,7 @@ export const Replies = ({ expanded, setExpanded }: RepliesProps) => {
         question: { replies, resolved, resolvedBy },
     } = useContext(CurrentQuestionContext)
     return replies && replies.data.length > 0 ? (
-        <ul className="ml-5 p-0 list-none">
+        <ul className="ml-5 !mb-0 p-0 list-none">
             {expanded || replies.data.length < 3 ? (
                 <Expanded replies={replies} resolvedBy={resolvedBy?.data?.id} />
             ) : (
@@ -68,7 +68,7 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
 
     return (
         <>
-            <li className="pr-[5px] pl-[30px] border-l border-gray-accent-light dark:border-opacity-50 border-dashed squeak-left-border relative before:border-l-0">
+            <li className="pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0">
                 <div className="pb-8 flex items-center space-x-4">
                     <div className="flex items-center">
                         {avatars.map((avatar, index) => {
@@ -80,7 +80,10 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
                         })}
                     </div>
 
-                    <button className="text-red text-base font-semibold" onClick={() => setExpanded(true)}>
+                    <button
+                        className="text-red dark:text-yellow text-base font-semibold"
+                        onClick={() => setExpanded(true)}
+                    >
                         View {replyCount - 1} other {replyCount === 1 ? 'reply' : 'replies'}
                     </button>
                 </div>
@@ -88,7 +91,7 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
 
             <li
                 key={reply?.id}
-                className={`pr-[5px] pl-[30px] border-l border-gray-accent-light dark:border-opacity-50 border-dashed squeak-left-border relative before:border-l-0`}
+                className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
             >
                 <div className={`${!reply?.attributes?.publishedAt ? 'opacity-50' : ''}`}>
                     <Reply reply={reply} badgeText={badgeText} />
@@ -120,7 +123,7 @@ const Expanded = ({ replies, resolvedBy }: ExpandedProps) => {
                 return (
                     <li
                         key={reply.id}
-                        className={`pr-[5px] pl-[30px] border-l border-gray-accent-light dark:border-opacity-50 border-dashed squeak-left-border relative before:border-l-0`}
+                        className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
                     >
                         <div className={`${!reply?.attributes?.publishedAt ? 'opacity-50' : ''}`}>
                             <Reply reply={reply} badgeText={badgeText} />

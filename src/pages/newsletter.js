@@ -8,8 +8,8 @@ import { SEO } from 'components/seo'
 const Benefit = ({ text }) => {
     return (
         <li className="flex items-center w-full gap-2">
-            <Check2 className="w-6 h-6 shrink-0 grow-0 opacity-60" />
-            <p className="text-lg font-semibold text-gray-600 mb-0 flex-1">{text}</p>
+            <Check2 className="w-6 h-6 shrink-0 grow-0 text-green" />
+            <p className="text-primary dark:text-primary-dark mb-0 flex-1">{text}</p>
         </li>
     )
 }
@@ -18,25 +18,49 @@ export const NewsletterPage = () => {
     return (
         <Layout>
             <SEO title="PostHog Newsletter" image="/images/open-graph-newsletter.png" />
-            <div className="md:grid md:grid-cols-5 md:gap-12 px-4 lg:px-12 max-w-6xl mx-auto md:pt-8">
-                <div className="col-span-2 text-right">
-                    <StaticImage src="../images/newsletter-signup.png" objectFit="contain" className="w-full h-full" />
-                </div>
-                <div className="col-span-3">
-                    <h1 className="text-6xl mb-2 text-center md:text-left">Subscribe to HogMail</h1>
-                    <h4 className="font-semibold opacity-60 text-center md:text-left">
-                        A newsletter about making better products
-                    </h4>
+            <div className="max-w-6xl mx-auto px-4 py-8 lg:px-0">
+                <div className="font-semibold pb-2 text-lg opacity-60 text-center">Subscribe to...</div>
+                <h1 className="text-5xl lg:text-6xl mb-3 text-center">Product for Engineers</h1>
+                <p className="font-semibold text-lg opacity-60 text-center leading-tight">
+                    Our newsletter about making better products
+                </p>
 
-                    <div className="max-w-lg -my-4">
-                        <NewsletterForm compact />
+                <div className="md:grid md:grid-cols-5 md:gap-12 px-4 lg:px-12 pb-8 max-w-6xl mx-auto items-center">
+                    <div className="col-span-2 text-right">
+                        <StaticImage
+                            src="../images/newsletter-signup.png"
+                            objectFit="contain"
+                            className="w-full h-full"
+                        />
                     </div>
+                    <div className="col-span-3 pt-6">
+                        <p className="mb-3 text-lg">
+                            <strong>Here's what you'll find inside:</strong>
+                        </p>
 
-                    <ul className="space-y-4 m-0 p-0">
-                        <Benefit text="Never miss a PostHog blog post" />
-                        <Benefit text="The latest PostHog tutorials and tips" />
-                        <Benefit text="Curated advice on building great products" />
-                    </ul>
+                        <ul className="space-y-2 m-0 mb-8 p-0">
+                            <Benefit text="Info to help engineers build better products" />
+                            <Benefit text="The latest tutorials and tips from fast-growing startups" />
+                            <Benefit text="Curated advice on building great products" />
+                        </ul>
+
+                        <h4 className="relative text-lg">
+                            <strong>Subscribe on Substack</strong>
+                        </h4>
+
+                        <div className="max-w-lg -mt-6 dark:mt-0 -ml-4 dark:ml-0">
+                            <iframe
+                                src="https://newsletter.posthog.com/embed"
+                                frameBorder="0"
+                                scrolling="no"
+                                className="h-24 dark:rounded dark:bg-dark"
+                            />
+                            <div className="hidden dark:block text-sm dark:text-primary-dark max-w-sm opacity-50 -mt-2">
+                                (Just imagine how much nicer this form would look in dark mode if Substack had better
+                                embedding options!)
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Layout>

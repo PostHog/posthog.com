@@ -74,7 +74,7 @@ export default function Timeline() {
                 </div>
             </div>
 
-            <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-3 shadow-xl">
+            <div className="max-w-screen-2xl mx-auto mdlg:grid grid-cols-2 xl:grid-cols-4 border border-light dark:border-dark divide-x divide-light dark:divide-dark">
                 {Object.keys(pastEvents).map((year) => {
                     const pastMonths = groupBy(pastEvents[year], (node) => {
                         const date = new Date(node.dateCompleted || node.projectedCompletion)
@@ -87,16 +87,18 @@ export default function Timeline() {
                     return (
                         <div
                             key={year}
-                            className="bg-white rounded w-full mb-4 lg:mb-0 border-gray-accent-light border-dashed border-r last:border-r-0"
+                            className="bg-accent dark:bg-accent-dark w-full mb-4 lg:mb-0 last:border-r border-light dark:border-dark"
                         >
-                            <h4 className="text-base py-1 font-bold text-center bg-gray-accent-light ">{year}</h4>
+                            <h4 className="text-base py-1 font-bold text-center bg-light dark:bg-dark border-y xl:border-t-0 border-light dark:border-dark">
+                                {year}
+                            </h4>
                             <div className="px-8">
                                 <ul role="list" className="py-1 px-0">
                                     {Object.keys(pastMonths).map((month) => {
                                         return (
                                             <li
                                                 key={month}
-                                                className="timeline-entry list-none border-gray-accent-light/50 border-solid border-b last:border-none flex py-2 gap-3 items-start"
+                                                className="timeline-entry list-none border-light dark:border-dark border-b last:border-none flex py-2 gap-3 items-start"
                                             >
                                                 <p className="text-[14px] text-gray capitalize w-[30px] flex-shrink-0 m-0">
                                                     {month}

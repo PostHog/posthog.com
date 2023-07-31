@@ -12,7 +12,7 @@ export default function CommunityCTA() {
     }, [])
 
     return (
-        <div className="flex md:flex-row flex-col items-center md:space-x-4 md:space-y-0 space-y-4 px-2 justify-center rounded-md mb-6 pb-12 md:pt-12 border-t border-b border-gray-accent-light dark:border-gray-accent-dark border-dashed md:max-h-[250px] overflow-hidden">
+        <div className="flex md:flex-row flex-col items-center md:space-x-4 md:space-y-0 space-y-4 px-2 justify-center rounded-md mb-6 pb-12 md:pt-12 md:max-h-[250px] overflow-hidden">
             <div className="flex-shrink-0">
                 {hog1Data ? (
                     <Lottie

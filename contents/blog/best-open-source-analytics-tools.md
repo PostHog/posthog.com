@@ -15,7 +15,6 @@ category: General
 tags:
   - Open source
   - Guides
-  - Comparisons
 ---
 
 There's no shortage of high-quality open-source analytics tools. In this guide we've split them into two categories:

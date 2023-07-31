@@ -43,7 +43,7 @@ import IOSCapture from './\_snippets/capture.mdx'
 
 #### Setting user properties via an event
 
-To set properties on your users via an event, you can leverage the event properties `$set` and `$set_once`.
+To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `$set` and `$set_once`.
 
 ##### $set
 
@@ -124,12 +124,6 @@ If you want to manually send a new screen capture event, use the `screen` functi
 posthog.screen("Dashboard", properties: ["fromIcon": "bottom"])
 ```
 
-## A note about IDFA (identifier for advertisers) collection in iOS 14
-
-Starting with iOS 14, Apple will further restrict apps that track users. Any references to Apple's AdSupport framework, even in strings, [will trip](https://github.com/PostHog/posthog-ios/issues/6) the App Store's static analysis.
-
-Hence **starting with posthog-ios version 1.2.0** we have removed all references to Apple's AdSupport framework.
-
 ### Group analytics
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
@@ -139,21 +133,21 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```objectivec
-[[PHGPostHog sharedPostHog] group:@"organization" groupKey:@"42dlsfj23f"];
+[[PHGPostHog sharedPostHog] group:@"company" groupKey:@"company_id_in_your_db"];
 ```
 
 ```swift
-posthog.group( "some-type", groupKey: "42dlsfj23f")
+posthog.group( "company", groupKey: "company_id_in_your_db")
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```objectivec
-[[PHGPostHog sharedPostHog] group:@"organization" groupKey:@"42dlsfj23f" properties:@{ @"name": @"Awesome Inc." }];
+[[PHGPostHog sharedPostHog] group:@"company" groupKey:@"company_id_in_your_db" properties:@{ @"name": @"Awesome Inc." }];
 ```
 
 ```swift
-posthog.group( "organization", groupKey: "42dlsfj23f", properties: [
+posthog.group( "company", groupKey: "company_id_in_your_db", properties: [
     "name": "ACME Corp"
 ])
 ```
@@ -202,6 +196,30 @@ If you're using multivariate feature flags, you can also get the value of the fl
 ```swift
 posthog.getFeatureFlag("some-flag")
 ```
+
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```objectivec
+if ([[PHGPosthog sharedPostHog] getFeatureFlag:@"experiment-feature-flag-key"] == @"variant-name") {
+    // do something
+}
+```
+
+```swift
+if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+    // do something
+}
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
+## A note about IDFA (identifier for advertisers) collection in iOS 14
+
+Starting with iOS 14, Apple will further restrict apps that track users. Any references to Apple's AdSupport framework, even in strings, [will trip](https://github.com/PostHog/posthog-ios/issues/6) the App Store's static analysis.
+
+Hence **starting with posthog-ios version 1.2.0** we have removed all references to Apple's AdSupport framework.
 
 ## All configuration options
 

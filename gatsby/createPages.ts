@@ -3,7 +3,7 @@ import { GatsbyNode } from 'gatsby'
 import path from 'path'
 import slugify from 'slugify'
 import fetch from 'node-fetch'
-import sidebars from '../src/sidebars/index'
+import menu from '../src/navs/index'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -16,10 +16,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
+    const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
+    const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -123,6 +125,17 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            cdp: allMdx(filter: { fields: { slug: { regex: "/^/cdp/" } } }) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        documentation
+                    }
+                }
+            }
             templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
                 nodes {
                     id
@@ -151,6 +164,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             tags
                         }
                         productTutorialTags
+                        customerURLs
                     }
                     fields {
                         slug
@@ -226,6 +240,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            roadmapYears: allRoadmap {
+                group(field: year) {
+                    fieldValue
+                }
+            }
         }
     `)
 
@@ -233,9 +252,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         return Promise.reject(result.errors)
     }
 
-    function createPosts(data, menu, template, breadcrumbBase, context) {
-        const menuFlattened = flattenMenu(sidebars[menu])
+    const menuFlattened = flattenMenu(menu)
 
+    function createPosts(data, menu, template, breadcrumbBase, context) {
         data.forEach((node) => {
             const links =
                 node?.rawBody &&
@@ -264,7 +283,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     nextURL,
                     next,
                     previous,
-                    menu: sidebars[menu],
                     breadcrumb,
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
@@ -370,7 +388,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 id: node.id,
                 tableOfContents,
-                menu: sidebars.docs,
                 slug,
             },
         })
@@ -424,27 +441,29 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.apps.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
-        let next = null
-        let previous = null
-        const sidebar = sidebars.apps
-        sidebar.some((item, index) => {
-            if (item.url === slug) {
-                next = sidebar[index + 1]
-                previous = sidebar[index - 1]
-                return true
-            }
-        })
         createPage({
             path: slug,
             component: AppTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',
-                next,
-                previous,
             },
         })
     })
+
+    result.data.cdp.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const { documentation } = node.frontmatter
+        createPage({
+            path: slug,
+            component: PipelineTemplate,
+            context: {
+                id: node.id,
+                documentation: documentation || '',
+            },
+        })
+    })
+
     result.data.templates.nodes.forEach((node) => {
         const { slug } = node.fields
         createPage({
@@ -523,36 +542,32 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         }
     }
 
-    const productDocumentationMenuNames = {
-        '/session-replay': 'Session recording',
-        '/product-analytics': 'Product analytics',
-        '/feature-flags': 'Feature flags',
-        '/ab-testing': 'A/B testing',
-        '/product-os': 'Data',
-    }
-
-    const docsMenu = sidebars.docs
-
     await Promise.all(
         result.data.product.nodes.map((node) => {
             return new Promise<void>((res) => {
                 const { slug } = node.fields
-                const documentationNav = docsMenu.find(
-                    (menuItem) => menuItem.name === productDocumentationMenuNames[slug]
-                )
                 createPage({
                     path: slug,
                     component: ProductTemplate,
                     context: {
                         id: node.id,
-                        blogTags: node?.frontmatter?.productBlog?.tags,
-                        tutorialTags: node?.frontmatter?.productTutorialTags,
-                        documentationNav,
-                        documentationURLs: documentationNav?.children?.map((child) => child.url),
+                        blogTags: node?.frontmatter?.productBlog?.tags ?? [''],
+                        tutorialTags: node?.frontmatter?.productTutorialTags ?? [''],
+                        customerURLs: node?.frontmatter?.customerURLs ?? [''],
                     },
                 })
                 res()
             })
         })
     )
+
+    result.data.roadmapYears.group.forEach(({ fieldValue: year }) => {
+        createPage({
+            path: `/changelog/${year}`,
+            component: ChangelogTemplate,
+            context: {
+                year: Number(year),
+            },
+        })
+    })
 }

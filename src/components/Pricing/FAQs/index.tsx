@@ -20,7 +20,7 @@ export const FAQs = ({ className = '' }) => {
             <input
                 onChange={handleChange}
                 placeholder="Search questions asked on this page"
-                className="bg-gray-accent-light py-3 px-4 rounded-sm text-[15px] font-semibold w-full"
+                className="bg-accent dark:bg-accent-dark border border-light dark:border-dark py-3 px-4 rounded-sm text-[15px] font-semibold w-full"
             />
             <ul className="list-none m-0 p-0 grid gap-y-6 mt-4">
                 {questions &&

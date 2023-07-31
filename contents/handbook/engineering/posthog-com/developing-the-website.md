@@ -101,9 +101,13 @@ Any time you want to preview changes you are making to the local version of the 
 
 Our website uses various APIs to pull in data from sites like GitHub (for contributors) and Ashby (our applicant tracking system). Without setting these environment variables, you may see various errors when building the site. Most of these errors are dismissible, and you can continue to edit the website.
 
-If you're a core team member working on a portion of the site where having this data is useful, you can access some of the main environment variables [here](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md).
+If you're a core team member and need this data locally, you can:
 
-Note: If you have a Gatsby account (you'd know if you do), rather than running the site with `yarn start`, you should instead use `gatsby start` which will automatically load in all environment variables directly from Gatsby. (You'll need to set up the Gatsby CLI and authenticate first.)
+1. Ask the [Website & Docs team](https://posthog.slack.com/archives/C01V9AT7DK4) for access to our Vercel account
+1. Install the Vercel CLI
+1. Run `vercel pull`
+1. Open `.vercel/.env.development.local`
+1. Copy a value and run in your terminal like: `export VARIABLE_NAME=VALUE`
 
 ### Finding the content to edit
 
@@ -362,7 +366,7 @@ noindex: true
 - `noindex`: `true` | `false` - determines whether to index the page or not
 
 
-You can often refer to the source of existing pages for more examples, but if in doubt, you can always ask for help in the [PostHog Community Slack](/slack). 
+You can often refer to the source of existing pages for more examples, but if in doubt, you can always [ask for help](https://app.posthog.com/home#supportModal).
 
 #### Images/GIFs
 

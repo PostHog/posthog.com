@@ -11,7 +11,7 @@ featuredImageType: full
 category: Newsletter
 ---
 
-> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](/newsletter) so you don't miss it.
+> Welcome to HogMail, our newsletter featuring the best of the PostHog blog, tutorials, product guides, and curated articles on building great products and companies. We send it every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
 
 In [HogMail #20](https://posthog.com/blog/hogmail-20), we looked at a failed startup with product-market fit and 500k active users. So, what comes after product-market fit? More on that soon, but first...  
   
@@ -29,7 +29,7 @@ Words by Andy Vandervell, whose retention is rapidly declining with age. 😢
 
 ## Avoiding the "Product Death Cycle"
   
-If product-market fit isn't enough to succeed, what do you need? In a 2017 article, [Brian Balfour](https://www.linkedin.com/in/bbalfour/) says:
+If [product-market fit](/blog/product-market-fit-game) isn't enough to succeed, what do you need? In a 2017 article, [Brian Balfour](https://www.linkedin.com/in/bbalfour/) says:
 
  > _"The “go-to” answer for almost every question in startups, is “build a great product.” Every time I hear that answer it feels completely unsatisfied. Building a great product is a piece of the puzzle, but it’s far from the full picture."_
 
@@ -71,4 +71,4 @@ Balfour makes three final points:
 
 * [How to Measure “Hard-to-Measure” Marketing Channels](https://sparktoro.com/blog/how-to-measure-hard-to-measure-marketing-channels/) – Rand Fishkin on how to stop avoiding hard-to-measure marketing channels (e.g. native social, PR, events etc.) by learning how to measure them.
 
-> We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
+> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.

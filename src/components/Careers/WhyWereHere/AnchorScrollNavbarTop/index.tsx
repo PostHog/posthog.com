@@ -21,7 +21,7 @@ const ButtonLink = ({
         <button
             aria-selected={section == currentSection}
             onClick={clickHandler}
-            className="block text-almost-black leading-tight font-medium hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
+            className="block text-primary dark:text-primary-dark leading-tight font-medium hover:text-red dark:text-white dark:hover:text-red cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]"
         >
             {children}
         </button>

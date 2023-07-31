@@ -5,9 +5,14 @@ import SEO from 'components/seo'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import airbus from '../Home/images/airbus.svg'
+import airbusDark from '../Home/images/airbus_dark.svg'
 import phantom from '../Home/images/phantom.svg'
+import phantomDark from '../Home/images/phantom_dark.svg'
 import landmark from '../Home/images/landmark.svg'
+import landmarkDark from '../Home/images/landmark_dark.svg'
 import Contact from './Contact'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 const features = [
     'SSO SAML',
@@ -21,6 +26,8 @@ const features = [
 export default function ContactSales({ location }) {
     const search = location?.search
     const params = new URLSearchParams(search)
+    const { websiteTheme } = useValues(layoutLogic)
+    const darkMode = websiteTheme === 'dark'
     return (
         <Layout>
             <SEO title="Contact Sales - PostHog" />
@@ -85,14 +92,14 @@ export default function ContactSales({ location }) {
                                 />
                             </div>
                             <div className="flex flex-wrap md:flex-col gap-4 md:gap-0  md:space-y-12 justify-center md:justify-start sm:order-last order-first">
-                                <img src={airbus} className="max-w-[150px] md:max-w-auto" />
-                                <img src={phantom} className="max-w-[150px] md:max-w-auto" />
-                                <img src={landmark} className="max-w-[150px] md:max-w-auto" />
+                                <img src={darkMode ? airbusDark : airbus} className="max-w-[150px] md:max-w-auto" />
+                                <img src={darkMode ? phantomDark : phantom} className="max-w-[150px] md:max-w-auto" />
+                                <img src={darkMode ? landmarkDark : landmark} className="max-w-[150px] md:max-w-auto" />
                             </div>
                         </div>
                     </div>
                     <div className="order-1 md:order-2">
-                        <h3 className="mb-1">Contact sales</h3>
+                        <h3 className="mb-1">Contact us</h3>
                         <Contact
                             initialValues={{
                                 product: params.has('edition')

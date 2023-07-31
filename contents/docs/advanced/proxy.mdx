@@ -6,89 +6,27 @@ showTitle: true
 
 A reverse proxy allows you to send events to PostHog Cloud using your own domain.
 
-This means that events are sent from your own domain and are less likely to be intercepted by tracking blockers. You be able to capture more usage data without having to self-host PostHog.
+This means that events are sent from your own domain and are less likely to be intercepted by tracking blockers. You'll be able to capture more usage data without having to self-host PostHog.
 
 Setting up a reverse proxy means setting up a service to redirect requests from a subdomain you choose (like `e.yourdomain.com`) to PostHog. It is best practice to use a subdomain that does not include `posthog`, `analytics`, `tracking`, or other similar words. 
 
+> **Note:** PostHog Cloud requires that the proxy sets the `Host` header to `eu.posthog.com` for requests sent to `https://eu.posthog.com`
+> and `app.posthog.com` for requests sent to `https://app.posthog.com`. Check the guides below on how to do that for several proxies.
+
 You then use this subdomain as your instance host in the initialization of PostHog instead of `app.posthog.com` or `eu.posthog.com`.
 
-> **Note:** PostHog Cloud requires that the proxy sets the `Host` header to `eu.posthog.com` for requests sent to `https://eu.posthog.com`
-> and `app.posthog.com` for requests sent to `https://app.posthog.com`.
+> Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js#config) when initializing our browser integration,
+> so that links to the PostHog interface point to the correct host.
 
 ## Deploying a reverse proxy
 
-### Using Caddy
+Options for deploying a reverse proxy include:
 
-We like [using Caddy because it makes setting up the reverse proxy](https://caddyserver.com/docs/quick-starts/reverse-proxy) and TLS a breeze.
-
-```bash
-docker run -p 80:80 -p 443:443 caddy caddy reverse-proxy --to app.posthog.com:443 --from <YOUR_TRACKING_DOMAIN> --change-host-header
-```
-
-You'll want to sub out `YOUR_TRACKING_DOMAIN` for whatever domain you use for proxying to PostHog. We'd suggest something like `e.yourdomain.com` or the like.
-
-Make sure your DNS records point to your machine and that ports 80 and 443 are open to the public and directed toward Caddy.
-
-### Using AWS CloudFront
-
-CloudFront can be used as a reverse proxy. Although [there are multiple other options if you're using AWS](https://aws.amazon.com/blogs/architecture/serving-content-using-fully-managed-reverse-proxy-architecture/)
-
-CloudFront doesn't forward headers, cookies, or query parameters received from the origin that PostHog uses by default. To set these up, you need an "origin request policy" as in the instructions below.
-
-#### Create a distribution
-
-1. Create a CloudFront distribution
-2. Set the origin domain to your PostHog instance (`app.posthog.com` or `eu.posthog.com` for PostHog Cloud).
-3. Allow all HTTP methods
-4. Create and attach to the distribution, [an "origin request policy"](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) that forwards all query parameters
-    * In "Cache key settings" for the "Cache policy" set "Query strings" to "All".
-    * You also need to include the `Authorization`, and `Origin` headers.
-
-import diagram from '../../images/docs/cloud/cloudfront-proxy/cache-policy.png'
-
-<img src={diagram} alt="a screenshot of the cloudfront cache policy settings" />
-
-5. Set the `Origin request policy` to `CORS-CustomOrigin`
-6. Set the `Response headers policy` to `CORS-with-preflight-and-SecurityHeadersPolicy`
-7. Once the distribution is deployed set its URL as the API host in your JS snippet or SDK config
-
-You can find out about [CloudFront pricing on the AWS website](https://aws.amazon.com/cloudfront/pricing/)
-
-#### CloudFront distribution setup video
-
-<iframe src="https://www.loom.com/embed/cf7a06b7b93d4492a1f9f9fc8d8473e0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: relative; top: 0; left: 0; height:315px "></iframe>   
-
-### Using Cloudflare
-
-In Cloudflare, create a new CNAME record for your domain. It should point to `app.posthog.com` or `eu.posthog.com` depending on your region, and have proxy enabled (e.g. `CNAME, e, app.posthog.com, proxy enabled`). Finally, [use Page Rules to change the Host header](https://support.cloudflare.com/hc/en-us/articles/206652947-Using-Page-Rules-to-rewrite-Host-Headers) to `app.posthog.com` or `eu.posthog.com` depending on which PostHog region you are using.
-
-> Cloudflare does require your domain to be hosted with them, and using them does more than just proxying requests, such as blocking traffic from bots.
-> Additionally, you must be on the Enterprise CloudFlare plan to customize the Host header.
-
-
-### Using Next.js
-
-If you are using Next.js, you can take advantage of [rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) to behave like a reverse proxy.
-
-```js
-// next.config.js
-const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: "/ingest/:path*",
-        destination: "https://app.posthog.com/:path*", // or "https://eu.posthog.com/:path*"
-      },
-    ];
-  },
-}
-module.exports = nextConfig
-```
-
-Then configure the PostHog client to send requests via your redirection.
-
-```js
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
- api_host: "https://your-host.com/ingest"
-})
-```
+- [AWS CloudFront](/docs/advanced/proxy/cloudfront)
+- [Caddy](/docs/advanced/proxy/caddy)
+- [Cloudflare](/docs/advanced/proxy/cloudflare)
+- [Kubernetes Ingress Controller](/docs/advanced/proxy/kubernetes-ingress-controller)
+- [Netlify](/docs/advanced/proxy/netlify)
+- [Next.js rewrites](/docs/advanced/proxy/nextjs)
+- [Next.js middleware](/docs/advanced/proxy/nextjs-middleware)
+- [Vercel](/docs/advanced/proxy/vercel)

@@ -1,0 +1,39 @@
+---
+title: Using Next.js rewrites as a reverse proxy
+sidebar: Docs
+showTitle: true
+---
+
+If you are using Next.js, you can take advantage of [rewrites](https://nextjs.org/docs/api-reference/next.config.js/rewrites) to behave like a reverse proxy. To do so, add a `rewrites()` function to your `next.config.js` file: 
+
+```js
+// next.config.js
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/:path*",
+        destination: "https://app.posthog.com/:path*",
+      },
+    ];
+  },
+}
+module.exports = nextConfig
+```
+
+Then configure the PostHog client to send requests via your rewrite.
+
+```js
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+ api_host: "https://your-host.com/ingest"
+})
+```
+
+> If this isn't working for you (returning `503` errors), it may be an issue with how your hosting service (such as Heroku) handles rewrites. You can write [Next.js middleware to proxy requests](/docs/advanced/proxy/nextjs-middleware) instead.
+
+## Setup video
+
+<iframe
+  src="https://www.youtube-nocookie.com/embed/MD-jI2moPV0"
+  className="rounded shadow-xl"
+/>

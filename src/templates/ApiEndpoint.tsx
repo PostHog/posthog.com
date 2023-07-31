@@ -40,7 +40,7 @@ function Endpoints({ paths }) {
                             {Object.keys(value).map((verb) => (
                                 <tr
                                     key={verb}
-                                    className="border-gray-accent-light dark:border-gray-accent-dark border-dashed border-b first:border-t-0 last:border-b-0"
+                                    className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0"
                                 >
                                     <td>
                                         <code className={`method text-${mapVerbsColor[verb]}`}>
@@ -115,10 +115,7 @@ function Params({ params, objects, object, depth = 0 }) {
         <>
             <ul className="list-none pl-0">
                 {params.map((param, index) => (
-                    <li
-                        key={index}
-                        className="py-1 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark first:border-0"
-                    >
+                    <li key={index} className="py-1  first:border-0">
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex flex-col">
                                 <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
@@ -309,7 +306,7 @@ function ResponseBody({ item, objects }) {
     )
 }
 
-function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) {
+function RequestExample({ name, item, objects, exampleLanguage, setExampleLanguage }) {
     let params = []
 
     if (item.requestBody) {
@@ -334,6 +331,11 @@ function RequestExample({ item, objects, exampleLanguage, setExampleLanguage }) 
     }
 
     const path: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
+    const object: string = name.toLowerCase().slice(0, -1)
+    const additionalPathParams =
+        item.parameters
+            ?.filter((param) => param.in === 'path')
+            .filter((param) => !['project_id', 'id'].includes(param.name)) || []
 
     const languages = [
         {
@@ -355,8 +357,14 @@ curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '
 api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
-    "https://app.posthog.com${path}".format(
-        project_id=project_id${path.includes('{id}') ? ',\n\t\tid=response["id"]' : ''}
+    "https://app.posthog.com${item.pathName.replace('{id}', `{${object}_id}`)}".format(
+        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="the ${object} id"` : ''}${
+                additionalPathParams.length > 0
+                    ? additionalPathParams.map(
+                          (param) => `,\n\t\t${param.name}="[the ${param.name.replaceAll('_', ' ')}]"`
+                      )
+                    : ''
+            }
     ),
     headers={"Authorization": "Bearer {}".format(api_key)},${
         params.length > 0
@@ -492,7 +500,6 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                 tableOfContents={tableOfContents}
                 fullWidthContent={true}
                 hideSidebar
-                contentWidth="100%"
                 breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
             >
                 <h2 className="!mt-0">{name}</h2>
@@ -534,6 +541,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                 <div className="lg:sticky top-0">
                                     <h4>Request</h4>
                                     <RequestExample
+                                        name={name}
                                         item={item}
                                         objects={objects}
                                         exampleLanguage={exampleLanguage}

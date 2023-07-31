@@ -12,8 +12,6 @@ featuredImageType: full
 category: General
 tags:
   - Privacy
-  - Comparisons
-  - Guides
 ---
 
 What do Google Optimize, Optimizely, Convert, Webtrends Optimize and Splitbee have in common?
@@ -23,9 +21,9 @@ What do Google Optimize, Optimizely, Convert, Webtrends Optimize and Splitbee ha
 
 Anyone who develops a healthcare product or app will be painfully familiar with this problem. Most of the mainstream tools either won't support you, or will charge you a fortune to agree to signing a BAA (Business Associate Agreement).
 
-While it's tempting to make do without experimentation capability in your stack, that's a mistake. It's nearly impossible to eliminate second- and third-order effects without a robust testing system, and a good testing product will allow you to target specific user properties so you get actionable results.
+While it's tempting to make do without experimentation capability in your stack, that's a mistake. It's nearly impossible to eliminate second- and third-order effects without a robust testing system, and a good testing product will allow you to target specific user properties, so you get actionable results.
 
-In this guide we'll outline your best options for HIPAA-compliant A/B testing, and some of the requirements for remaining HIPAA-compliant while using these and other analytics tools. 
+In this guide we'll outline your best options for HIPAA-compliant A/B testing, and the requirements for remaining HIPAA-compliant while using these and other analytics tools. 
 
 ## HIPAA compliance in A/B testing
 
@@ -42,29 +40,6 @@ Within the Privacy Rule framework, there are three different ways to comply with
 These are the broad principles, but **please consult an expert** before making any final decision on how to implement tools in compliance with HIPAA. 
 
 ## The best HIPAA-compliant A/B testing tools
-
-### PostHog
-
-![posthog experimentation](../images/blog/hipaa-compliant-ab-testing/posthog.png)
-
-PostHog is an all-in-one platform that includes a [fully-featured experimentation](https://posthog.com/product/experimentation-suite) suite in addition to product analytics, session recording, and a feature flag system that also powers its testing features. It supports both A/B/n and multivariate experiments, which you can target by geography, cohorts, and user properties.
-
-PostHog is open source, which means you can inspect the code yourself and extend the product via custom integrations or apps to satisfy specific edge-case requirements. As an [all-in-one platform](https://posthog.com/product), PostHog makes it easy to create cohorts of users based on user properties, then run targeted experiments on those users alone using feature flags.
-
-#### PostHog and HIPAA compliance
-
-- **Self-Hosting:** Yes
-- **BAA Available**: No
-
-PostHog doesn't currently offer a BAA for PostHog Cloud, so using it in compliance with HIPAA means [self-hosting it](/docs/self-host) on your own infrastructure. The [PostHog Marketplace](/marketplace) includes several third-party providers who can support self-hosted deployment, or manage your instance entirely, if you need help.
-
-What [PostHog says](/docs/privacy/hipaa-compliance):
-
-> "PostHog enables you to self-host on your own infrastructure and maintain full control of the data. This means you don't need to anonymize the data, nor do you need to set up a Business Associate Agreement with PostHog because you never need to send any Protected Health Information (PHI) to us in the first place. The data stays on your systems, in its original form. You may need to sign a BAA with your hosting provider, but major providers such as Google and AWS offer these for free."
-
-#### How much does PostHog cost?
-
-PostHog is priced on events and your [first 1 million events each month are free](/pricing). You can calculate the cost of using PostHog using the [pricing calculator](/pricing), where 2 million events is $450 and ~5 million events is $1,102 per month. 
 
 ### Kameleoon
 
@@ -114,7 +89,7 @@ VWO doesn't publish its pricing publicly, but it does offer a 14-day free trial.
 
 ![adobe target](../images/blog/hipaa-compliant-ab-testing/adobe.png)
 
-Adobe Target is part of Adobe's Experience Cloud, though it can be bought and used on its own. It supports A/B and multivariate tests, though unlike Kameleoon and PostHog it doesn't offer feature flagging as it's primarily aimed at marketing teams rather than product developers. To this end, it includes a visual editor so marketing teams can easily make changes to pages and run tests on conversion independently.
+Adobe Target is part of Adobe's Experience Cloud, though it can be bought and used on its own. It supports A/B and multivariate tests, though unlike Kameleoon it doesn't offer feature flagging as it's primarily aimed at marketing teams rather than product developers. To this end, it includes a visual editor, so marketing teams can easily make changes to pages and run tests on conversion independently.
 
 #### Adobe Target and HIPAA compliance
 

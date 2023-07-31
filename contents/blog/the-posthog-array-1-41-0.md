@@ -13,7 +13,7 @@ tags:
   - Release notes
 ---
 
-Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send every two weeks!
+Want to know more about what we're up to? [Subscribe to our new newsletter](https://newsletter.posthog.com/subscribe), which we send once every two weeks!
 
 ## 1.41.0 update guide for self-hosted users
 Due to changes in this update, it is important check `alias` usage before [upgrading PostHog](/docs/runbook/upgrading-posthog) to 1.41.0 on a self-hosted instance. Further [information is available in the docs](/docs/integrate/identifying-users#considerations), but for example, assuming `email` is used as the identified user id, then: 
@@ -67,7 +67,7 @@ Questions like these used to be hard to answer with PostHog, but no more! Use th
 
 We've heard feedback recently that session recording was incredibly useful, but didn't spark much joy for those who used it. So, we've overhauled the entire interface for session recordings to make it easier to use and to help you find relevant recordings faster. 
 
-We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log too](/manual/recordings#console-logs-recording-beta)!
+We think session recording feels like an entirely new experience now, so check it out. Now's the perfect time to explore [the console log too](/manual/recordings#console-logs-recording)!
 
 ### New: Text cards on dashboards
 

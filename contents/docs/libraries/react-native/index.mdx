@@ -341,6 +341,30 @@ const posthog = await Posthog.initAsync('<ph_project_api_key>', {
 
 > **Note:** Passing in a distinctID to bootstrap replaces any existing IDs, which means you may fail to connect any old anonymous user events with the logged in person, if your logic calls identify in the frontend immediately on login. In this case, you can omit passing in the distinctID.
 
+### Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```react-native
+// With the useFeatureFlag hook
+import { useFeatureFlag } from 'posthog-react-native'
+
+const MyComponent = () => {
+    const variant = useFeatureFlag('experiment-feature-flag-key')
+
+    if (variant === undefined) {
+        // the response is undefined if the flags are being loaded
+        return null
+    }
+
+    if (variant == 'variant-name') {
+        // do something
+    }
+}           
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
 ### Group analytics
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
@@ -350,15 +374,15 @@ Group analytics allows you to associate the events for that person's session wit
 -   Associate the events for this session with a group
 
 ```js
-posthog.group('company', '42dlsfj23f')
+posthog.group('company', 'company_id_in_your_db')
 
-posthog.capture('upgraded plan') // this event is associated with company ID `42dlsfj23f`
+posthog.capture('upgraded plan') // this event is associated with company ID `company_id_in_your_db`
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group
 
 ```js
-posthog.group('company', '42dlsfj23f', {
+posthog.group('company', 'company_id_in_your_db', {
     name: 'Awesome Inc.',
     employees: 11,
 })

@@ -130,7 +130,7 @@ We've had a wonderful two weeks.
 
 The PostHog team is growing - we're now 6 people, both our ability to ship and our product plans are bigger and better than ever.
 
-The seed round we raised is just the start of us making sure we create a full product experimentation platform with you, the community. Now is a great time if you have any ideas for ambitious feature requests to put them into the repo as issues. If you'd like to build something cool *with* us, we're open to some pair programming - get in touch in the [PostHog Users Slack](/slack) :)
+The seed round we raised is just the start of us making sure we create a full product experimentation platform with you, the community. Now is a great time if you have any ideas for ambitious feature requests to put them into the repo as issues. If you'd like to build something cool *with* us, we're open to some pair programming - [get in touch](https://app.posthog.com/home#supportModal)! :)
 
 ### Open roles
 

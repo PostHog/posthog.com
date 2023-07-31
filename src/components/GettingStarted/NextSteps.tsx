@@ -5,7 +5,6 @@ import { quickLinks as productAnalyticsLinks } from '../../pages/docs/product-an
 import { quickLinks as featureFlagsLinks } from '../../pages/docs/feature-flags'
 import { quickLinks as experimentsLinks } from '../../pages/docs/experiments'
 import { quickLinks as sessionRecordingLinks } from '../../pages/docs/session-replay'
-import { quickLinks as dataLinks } from '../../pages/docs/data'
 import { CallToAction } from 'components/CallToAction'
 
 type NextStepProps = {
@@ -31,7 +30,7 @@ export const NextStep: React.FC<NextStepProps> = ({ title, url, links, children 
                 <div className="w-72">{children}</div>
             </div>
 
-            <ul className="grid grid-cols-1 sm:grid-cols-2 list-none p-0 m-0 py-4 border-t border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 list-none p-0 m-0 py-4 ">
                 {links.map((link) => (
                     <li key={link.name} className="relative w-full py-2 flex items-center">
                         <Link className="leading-none" to={link.to}>
@@ -95,20 +94,6 @@ export const Experiments = () => {
                 quality={100}
                 className="w-full"
                 src="../Home/Slider/images/ab-testing-hog.png"
-            />
-        </NextStep>
-    )
-}
-
-export const Data = () => {
-    return (
-        <NextStep title="Data" url="/docs/data" links={dataLinks}>
-            <StaticImage
-                alt=""
-                placeholder="none"
-                quality={100}
-                className="w-full"
-                src="../Product/images/hogs/data-warehouse.png"
             />
         </NextStep>
     )

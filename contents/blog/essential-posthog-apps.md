@@ -40,9 +40,9 @@ The ingestion alert app works by triggering a customizable webhook whenever ther
 
 > 💡**PostHog Tip:** Normally have quiet periods and worried about false alarms? The ingestion alert app works brilliantly with [the heartbeat app](/apps/heartbeat) which ensures a steady drip of events to test ingestion!
 
-## 3. [Zapier connector](/apps/zapier-connector)
+## 3. [Zapier](/apps/zapier-connector)
 
-One of the advantages of PostHog’s open source approach is that, if you can’t find an app that does what you want, you can always build your own. One of the downsides though is that not everybody wants to jump in and start coding — and that’s why we built the Zapier connector.
+One of the advantages of PostHog’s open source approach is that, if you can’t find an app that does what you want, you can always build your own. One of the downsides though is that not everybody wants to jump in and start coding — and that’s why we built the Zapier integration.
 
 Zapier enables you to easily and codelessly connect PostHog to over 4,000 other tools, including popular tools such as Google Sheets, Hubspot or Slack.
 
@@ -57,7 +57,7 @@ Another reason to love the URL normalizer is that it wasn’t built by the PostH
 
 > 💡**PostHog Tip:** Interested in seeing how this app was made? Check [the source code](https://github.com/PostHog/posthog-url-normalizer-plugin) to get ideas about building your own apps!
 
-## 5. [BigQuery export](/apps/bigquery-export)
+## 5. [BigQuery](/apps/bigquery-export)
 ![PostHog bigquery export](../images/blog/activation-checklist-images/bigquery-export.png)
 
 Exporting information from PostHog into your data warehouse (or data lake) is a common use-case for apps, which is why we have a small library of data-out apps for such platforms. Of these, BigQuery is the most popular. 
