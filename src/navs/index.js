@@ -1883,13 +1883,13 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'How to watch recordings',
+                    name: 'Watching recordings',
                     url: '/docs/session-replay/how-to-watch-recordings',
                     icon: 'App',
                     color: 'orange',
                 },
                 {
-                    name: 'How to control which sessions you record',
+                    name: 'Controlling which sessions you record',
                     url: '/docs/session-replay/how-to-control-which-sessions-you-record',
                     icon: 'Toggle',
                     color: 'red',
@@ -1904,7 +1904,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Network recording',
+                    name: 'Network performance',
                     url: '/docs/session-replay/network-recording',
                     icon: 'Dashboard',
                     color: 'seagreen',

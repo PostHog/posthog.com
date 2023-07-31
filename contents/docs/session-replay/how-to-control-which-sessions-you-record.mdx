@@ -6,9 +6,13 @@ availability:
     enterprise: full
 ---
 
-If you want more granular controls on selecting which sessions to record, first set `disable_session_recording: true` in your [config](/docs/integrate/client/js/#config) and then manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
+If you want control over which sessions to record:
 
-You can then achieve even finer control by combining the above methods with [feature flags](/docs/feature-flags). This enables you to control session recordings based on users with certain user properties, actions, or events. You can also use feature flags to capture a percentage of all sessions.
+1. Set `disable_session_recording: true` in your [config](/docs/integrate/client/js/#config).
+
+2. Manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
+
+You can then achieve even finer control by combining the above methods with [feature flags](/docs/feature-flags). This enables you to control session recordings based on user or group properties. You can also use feature flags to capture a percentage of all sessions.
 
 For example:
 
@@ -18,12 +22,12 @@ posthog.init('<ph_project_api_key>', {
     disable_session_recording: true,
     // ... other options
 })
-window.posthog.onFeatureFlags(function () {
-    if (window.posthog.isFeatureEnabled('your-feature-flag')) {
-        window.posthog.startSessionRecording()
+posthog.onFeatureFlags(function () {
+    if (posthog.isFeatureEnabled('your-feature-flag')) {
+        posthog.startSessionRecording()
     }
 })
 ```
 
-For even more configuration options on which sessions you record, see our tutorial on [how to only record the sessions you want](/tutorials/limit-session-recordings).
+For more examples of controlling  which sessions you record, see our tutorial on [how to only record the sessions you want](/tutorials/limit-session-recordings).
 
