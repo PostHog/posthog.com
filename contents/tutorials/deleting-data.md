@@ -77,5 +77,3 @@ if __name__ == "__main__":
     delete_items_batched(ElementGroup, get_non_referenced_event_groups())
     logging.info("Cleanup finished, total duration: %s", datetime.now() - start_time)
 ```
-
-<NewsletterForm compact/>
