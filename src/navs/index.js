@@ -1916,7 +1916,7 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Sharing and emedding',
+                    name: 'Sharing and embedding',
                     url: '/docs/session-replay/sharing',
                     icon: 'Share',
                     color: 'purple',
