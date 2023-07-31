@@ -37,13 +37,13 @@ Lagging indicators:
 5. Burn multiple
 6. CLV/CAC ratio
 
-**Leading indicators** are predictive of future growth revenue. A surge in positive word-of-mouth and meaningful user engagement suggest product-market fit, but can't confirm it.
+**Leading indicators** are predictive of future growth revenue. A surge in organic growth and positive word-of-mouth suggests product-market fit, but can't confirm it.
 
-**Lagging indicators** confirm whether you have product-market fit. They're more reliable measures, particularly burn multiple and CLV/CAC ratio because they're directly linked to financial health.
+**Lagging indicators** confirm whether you have product-market fit. They're more reliable measures, particularly if they're linked to financial performance.
 
 We recommend a minimum of three to start with – likely two leading indicators and one lagging indicator – and adding more when you need. For example:
 
-- **Pre-revenue** Word-of-mouth, user engagement, and retention are good indicators of product-market fit. They'll tell you how people feel about your product, whether they're using it, and if they stick around after the honeymoon glow has dissipated.
+- **Pre-revenue** Word-of-mouth, user engagement, and retention are good indicators of product-market fit. They'll tell you how people feel about your product, whether they're using it, and if they stick around.
 
 - **Post-revenue:** You'll want to want another lagging indicator, like burn multiple or CLV/CAC ratio, that provide a more concrete link to revenue and the financial viability of your product.
 
@@ -61,15 +61,15 @@ To be clear... you _can't_ validate product-market fit _using word-of-mouth alon
 
 The key word here being _organic_. Paid ads and marketing are an important tool for any company, but most products that rely on them for growth are unlikely to succeed long term.
 
-Hopefully, you'll already have a strong grasp of your organic user growth, be it via user signups, transactions, app downloads, or whatever metric makes the most sense for yourproduct.
+Hopefully, you already have a strong grasp of your organic user growth via user signup, or whatever metric makes sense for your product.
 
-But you can, with a little work, also track word of mouth awareness and sentiment of your product Here are a few options.
+But you can, with a little work, also track word of mouth awareness and sentiment of your product. Here are a few options.
 
 ### 1. Brand mention alerts
 
 Use a tool like [Syften](https://syften.com/) to monitor social media, communities, newsletters, etc., for mentions of any keyword you choose, such as your brand name. We use Syften at PostHog to send alerts to a `#brand-alerts` channel on our Slack. 
 
-You can go one step further by setting up a Zapier integration with Google Sheets, where you can collect your mentions, and track trends over time. Needless to say, up and to the right is your goal.
+You can go one step further by setting up a Zapier integration with Google Sheets, where you can collect your mentions, and track trends over time.
 
 Brand alerts are also a great way to drive acquisition by talking to people considering your product. 
 
@@ -81,11 +81,11 @@ Brand alerts are also a great way to drive acquisition by talking to people cons
 
 ![google trend for posthog](../images/blog/how-to-measure-product-market-fit/posthog-trends.png)
 
-It's also useful for comparing yourself to other companies, such as those you _know_ have product-market fit, companies of a similar size / age to yours, or competitors in your space.
+It's also useful for comparing yourself to other companies, such as those you _know_ have product-market fit, or competitors.
 
 ![google trend comparison](../images/blog/how-to-measure-product-market-fit/posthog-with-logrocket.png)
 
-At PostHog, we also use [Glimpse](https://meetglimpse.com/) – a handy browser extension that augments Google Trends by adding trend lines, forecasts, real search volumes, and the ability track search trends (and get alerts) over time.
+At PostHog, we also use [Glimpse](https://meetglimpse.com/) – a handy extension that augments Trends by adding trend lines, forecasts, and real search volumes. 
 
 ![trends with Glimpse](../images/blog/how-to-measure-product-market-fit/glimpse.png)
 
@@ -93,7 +93,7 @@ It'll also suggest similar companies you can compare yourself against.
 
 ![related companies](../images/blog/how-to-measure-product-market-fit/related-companies.png)
 
-**Google Search Console** is an alternative if you don't have a unique brand name, but the data is sampled and not 100% reliable, so you're better off using the next method.
+**Google Search Console** is an alternative if you don't have a unique brand name, but the data isn't 100% reliable, so you're better off using the next method.
 
 ### 3. Organic traffic to your homepage
 
@@ -102,11 +102,11 @@ One final way to track word-of-mouth is organic users who visit your website hom
 - Unique users who visited the homepage via Google search
 - Unique users how visited the homepage directly
 
-This will capture people who search for your brand, and those who navigate there directly, visit via Slack, WhatsApp and other "dark social" sources.
-
-If you're using PostHog, remember to add `UTM Source` = `Is not set` to filter out any paid ad campaigns you're running.
+This captures people who search for your brand, and those who navigate there directly, or visit via Slack, WhatsApp, etc. 
 
 This method will capture some existing users as well, but we've found it correlates well with surges in word-of-mouth awareness.
+
+> 💡 **PostHog Tip:** If you're using PostHog, remember to add `UTM Source` = `Is not set` to filter out any paid ad campaigns you're running.
 
 ### Word-of-mouth pros and cons
 
@@ -158,17 +158,15 @@ It's no coincidence Slack has since added video conferencing.
 
 When email app Superhuman started using the survey in 2017, 22% of users answered "very disappointed" and 52% answered "somewhat disappointed".[^4]
 
-After the initial survey, Superhuman created a four-step process to convert the 52% into strong supporters, and double-down on the 22% who already loved the app.
+After the initial survey, Superhuman created a four-step process to convert the 52%, and double-down on what the 22% loved.
 
-1. **Segmenting users:** They assigned personas to each person who responded to survey – e.g. founder, engineer, customer success, etc. – and created a cohort based on the personas who appeared in the 22%. In this cohort, 32% of people responded "very disappointed", and they created a more detailed Ideal Customer Profile based on these users.
+1. **Segmenting users:** They assigned personas to each person who responded (e.g. founder, engineer, customer success) and created a cohort of those who appeared in the 22%. In this cohort, 32% of people responded "very disappointed", and they created a more detailed Ideal Customer Profile based on these users.
 
-2. **Gathering feedback:** They analyzed feedback from "on-the-fence" users, asking them "how can we improve Superhuman for you?" They ignored users who answered "not disappointed". The most common thing the on-the-fence users wanted? A mobile app. They did the same for their strong supporters.
+2. **Gathering feedback:** They analyzed feedback from "on-the-fence" users, and asked "how can we improve Superhuman for you?" They ignored users who answered "not disappointed". The most common thing the on-the-fence users wanted? A mobile app. They did the same for their strong supporters.
 
 3. **Building a roadmap:** Armed with this feedback, Superhuman built a roadmap of new features. Half dedicated to improvements for their "very disappointed" cohort, the other for the users they wanted to convert.
 
-4. **Rinse and repeat:** Superhuman continued to survey users, tracking progress towards the 40% mark: "It was our most highly visible metric, and we tracked it on a weekly, monthly and quarterly basis." The score became the primary OKR for the product team and, after three quarters, Superhuman had doubled the score to 58%.
-
-You shouldn't rely on the survey alone to collect user feedback and don't have to use it all, but Superhuman proves it is an effective way to create an effective feedback loop. 
+4. **Rinse and repeat:** Superhuman continued to survey users, tracking progress towards the 40% mark. The score became the primary OKR for the product team and, after three quarters, Superhuman had doubled the score to 58%.
 
 ### User feedback & PMF Survey pros and cons
 
@@ -239,13 +237,13 @@ The retention curve is a lagging indicator of product-market fit. If it fattens 
 
 To create your retention curve, you'll want to track active users over a long(ish) period of time – weeks or months, rather than days.
 
-How you define an active user is up to you, but it's best to track events or actions where a user is experiencing the _real value_ of your product – again, logging in does not count!
+How you define an active user is up to you, but it's best to track events or actions where a user is experiencing the _real value_ of your product. Again, logging in does not count!
 
 For our product PostHog, an all-in-one analytics platform, this might look like:
 
 > Show `unique users` who performed a `discovery` for the first time in the last `12 months` and then came back to perform a `discovery` on any of the next months.
 
-It's also a good idea to track different cohorts, such as retention for users who match your ideal customer profile, or split by job title – whatever makes sense for you product. This will help you understand how strong your product-market fit is for different groups, and plan your roadmap accordingly.
+It's also a good idea to track different cohorts, such as retention for users who match your ideal customer profile, or split by job title. This will help you understand how strong your fit is for different groups, and plan your roadmap accordingly.
 
 ### Retention curve pros and cons
 
@@ -281,7 +279,7 @@ Why is burn multiple a useful measure of product-market fit? Here's Sacks again 
 
 > "The startup that generates $1M million in ARR by burning $2M is more impressive than one that does it by burning $5M. In the former case, it appears that **the market is pulling product out of the startup**, whereas in the latter case, the **startup is pushing its product onto the market**. VCs will make inferences about product-market fit accordingly."
 
-Sacks goes on to explain that burn multiple is useful because it's a catch-all metric. Multiple factors, such as costs, churn rate, growth, etc., will ultimately impact your burn multiple positively or negatively.
+Sacks goes on to explain that burn multiple is useful because it's a catch-all metric. Factors such as costs, churn rate, and growth, all impact your burn multiple positively or negatively.
 
 ### Burn multiple pros and cons
 
@@ -309,7 +307,9 @@ Sacks goes on to explain that burn multiple is useful because it's a catch-all m
 >
 > - **CAC** = customer acquisition cost - i.e. how much you're spending to > acquire new customers.
 
-CLV/CAC ratio is a robust but complex measure of product-market fit. Robust because it speaks directly to the long-term financial health of your company; complex because calculating CLV and CAC accurately isn't a trivial task.
+CLV/CAC ratio is a robust but complex measure of product-market fit. 
+
+Robust because it speaks directly to the long-term financial health of your company; complex because calculating CLV and CAC accurately isn't a trivial task.
 
 Nikhyl Singhal, who has sold startups to IBM and Google and is currently VP of Product at Meta, favors this measure because:
 
@@ -325,9 +325,9 @@ A CLV/CAC ratio of 1x means your CLV and CAC are the same – i.e. you're only e
 | 0.5 to 1x         | Low            |
 | Under 0.5x        | Very low       |
 
-By its nature, the ratio is most useful for later-stage companies who have other strong signs of product-market fit. Their CLV/CAC ratio will either confirm or deny this belief, or indicate a need to cut costs / increase margins to make the business healthy in the long term.
+By its nature, the ratio is most useful for later-stage companies who have other strong signs of product-market fit. It will either confirm or deny this belief, or indicate a need to cut costs / increase margins to make the business healthy in the long term.
 
-Relying on product-led growth is one way to gain an upper hand here – not relying on large and expensive outbound sales teams is a great way to keep costs down!
+Being on product-led is one way to gain an upper hand here – not having a large and expensive outbound sales team is a great way to keep costs down!
 
 ### CLV/CAC ratio pros and cons
 
@@ -366,4 +366,3 @@ TODO: Some words here:
 [^5]: [The Burn Multiple](https://sacks.substack.com/p/the-burn-multiple-51a7e43cb200) – David Sacks – Apr 23, 2020
 
 [^6]: [How to Craft Your Product Team at Every Stage, From Pre-Product/Market Fit to Hypergrowth](https://review.firstround.com/how-to-craft-your-product-team-at-every-stage-from-pre-product-market-fit-to-hypergrowth) – Nikhyl Singhal – Dec 10, 2019
-
