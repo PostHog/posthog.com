@@ -1,6 +1,6 @@
 ---
 date: 2023-07-28
-title: In-depth: PostHog vs Kubit
+title: "In-depth: PostHog vs Kubit"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
