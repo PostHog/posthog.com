@@ -14,24 +14,26 @@ tags:
  - Feature flags
 ---
 
-Feature flags are a simple way to control and rollout features or parts of code. In their simplest form, they enable you to turn on or off features or code paths for certain users. The secret of feature flags is that they have more depth than this, and getting the most out of them at scale requires careful planning and implementation.
+In their simplest form, feature flags enable you to turn on or off features or code paths for certain users. But you can do so much more if you apply some careful planning and implementation.
 
-Although we've covered feature flag [use cases](/blog/feature-flag-benefits-use-cases) and [best practices](/blog/feature-flag-best-practices) in previous posts, it is useful to learn how large companies work with feature flags. Two leading examples are GitHub and GitLab. This post details why, when, and how they use feature flags.
+This guide covers how two huge engineering-led companies, GitHub and GitLab, use feature flags at scale, and the lessons you can apply to your own projects.
 
 ## Why do GitHub and GitLab use feature flags?
 
-Both GitHub and GitLab are massive software companies. They are both at the forefront of software development and DevOps, so maintaining best practices is important. Broadly, this means making the deployment of code safer and more consistent.
+Both GitHub and GitLab are massive software companies. They are both at the forefront of software development and DevOps, so maintaining [feature flag best practices](/blog/feature-flag-best-practices) is important. Broadly, this means making the deployment of code safer and more consistent.
 
-In GitHub’s case, they frame this as "[lowering deployment risk](https://github.blog/2021-04-27-ship-code-faster-safer-feature-flags/#reducing-deployment-risk)." They want deployments to be risk-free. Putting new changes behind a flag lowers the risk of failing deployments. If there is an issue with a feature, you disable the flag rather than needing to roll back the entire deployment.
+**GitHub** frames this as "[lowering deployment risk](https://github.blog/2021-04-27-ship-code-faster-safer-feature-flags/#reducing-deployment-risk)." They want deployments to be risk-free. Putting new changes behind a flag lowers the risk of failing deployments. If there is an issue with a feature, you disable the flag rather than needing to roll back the entire deployment.
 
-In GitLab’s case, they have a "[progressive delivery mindset](https://about.gitlab.com/blog/2019/08/06/feature-flags-continuous-delivery/)." They find feature flags are a great tool for incremental, continuous delivery, allowing them to separate deployment and rollout. This is especially valuable to them because deployment is inconsistent due to their self-hostability. Feature flags increase the speed of shipping changes as well as provide psychological safety for developers.
+**GitLab** has a "[progressive delivery mindset](https://about.gitlab.com/blog/2019/08/06/feature-flags-continuous-delivery/)." They find feature flags are a great tool for incremental, continuous delivery, allowing them to separate deployment and rollout. This is especially valuable to them because GitLab is self-hostable, leading to inconsistent deployments. Feature flags increase the speed of shipping changes and provide psychological safety for developers.
 
 ## When do they use feature flags?
 
 Because GitHub and GitLab share similar reasons for using feature flags, they also share similar scenarios when they use feature flags.
 
 - **High risk:** High traffic areas or queries and significant UI, database, or storage changes.
+
 - **Restrictions and externalities:** Security, permission restrictions, and third-party dependencies.
+
 - **Working incrementally on new features:** Developers collaborate with flags instead of branches. This keeps changes small, makes reviewers easier, and prevents merge conflicts.
 
 This means areas **that might not use flags** include brand-new features or APIs, low-traffic areas, and non-invasive frontend changes.
@@ -75,12 +77,15 @@ This might seem like a lot, but for a massive, large-enterprise-focused company 
 Because both of these companies are so large, they must take into account the cost of feature flags. Feature flags have two main costs:
 
 1. **Runtime costs**: Apps must load, store, and evaluate flag data. Doing this at GitLab and GitHub’s scale has a legitimate, but manageable impact on performance. Caching is critical.
+
 2. **Technical debt:** Flags can often leave behind dead code they need to remove before it gets forgotten and stale.
 
 Technical debt is the cost both focus the most on, and they built processes for limiting this including:
 
 - Adding tests for the enabled and disabled state of flags. GitHub has two builds in CI one with all flags enabled, and another with all disabled. GitLab writes tests for individual features and the states of each flag.
+
 - Scripts to check for and remove flags. [GitLab](https://docs.gitlab.com/ee/development/feature_flags/controls.html/#cleanup-chatops) has a "chatops" removal command (`/chatops run feature delete some_feature`). [GitHub](https://github.blog/2021-04-27-ship-code-faster-safer-feature-flags/#the-cost-of-a-feature-flag) has a script that uses regular expressions and `git grep` to find flags and modify the code using `rubocop-ast`.
+
 - GitLab scans to find old flags (6 months or older) and initiate processes for making them permanent or removing them.
 
 [GitLab](https://about.gitlab.com/handbook/product-development-flow/feature-flag-lifecycle/#the-cost-of-feature-flags) specifically finds the cost of not having feature flags is higher than having them. When an issue happens with non-feature flagged code, they must revert the release, clean up the related code, and ship a fix to unblock future releases. Feature flags are a larger upfront cost, but are "cheaper" to rollback, saving time and energy. 
@@ -89,19 +94,17 @@ Technical debt is the cost both focus the most on, and they built processes for 
 
 ## Takeaways from GitHub and GitLab's usage of feature flags
 
-- Ensuring safe deployment and delivery of code is critical at scale.
+1. Ensuring safe deployment and delivery of code is critical at scale. Feature flags support this by limiting the downside of issues in deployed code. This is done by disconnecting deployment from rollout and enabling simple rollbacks. 
 
-- Feature flags support this goal by limiting the downside of issues in deployed code. This is done by disconnecting deployment from rollout and enabling simple rollbacks. 
+2. Feature flags have costs, but those costs are worth it when changes are high risk, in high traffic areas, introduce external services, or add new usage restrictions.
 
-- Feature flags have costs, but for changes that are high risk, in high traffic areas, introduce external services, or add new usage restrictions, those costs are worth the benefits. 
+3. Feature flags work better for collaboration than branches in large organizations. They enable smaller changes which are less likely to break in deployment, have merge conflicts, and are easier to review.
 
-- In large organizations, feature flags work better for collaboration than branches.
+4. Users aren't the only possible "target" for feature flags. Organizations, teams, repositories, projects, and apps can all be targets too. Consider the different ways you could target feature flags for your product.
 
-- Users aren't the only possible "target" for feature flags. Organizations, teams, repositories, projects, and apps can all be targets too. This ensures a consistent experience.
+5. Rolling out a new feature with flags requires coordination and planning. Creating a process to help each stage of rollout lowers the risk of issues. This process might include documentation, change management, and notifying stakeholders.
 
-- Rolling out a new feature with flags requires coordination and planning. Creating a process to help each stage of rollout lowers the risk of issues. This process might include documentation, change management, and notifying stakeholders.
-
-- Having commands and scripts for adding, enabling, disabling, and removing feature flags creates consistency and limits technical debt.
+6. Having commands and scripts for adding, enabling, disabling, and removing feature flags creates consistency and limits technical debt.
 
 ## Further reading
 
