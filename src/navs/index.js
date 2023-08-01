@@ -1877,13 +1877,37 @@ export const docsMenu = {
                 },
                 */
                 {
-                    name: 'Product manual',
+                    name: 'Installation',
                     url: '/docs/session-replay/manual',
                     icon: 'Book',
                     color: 'blue',
                 },
                 {
+                    name: 'Watching recordings',
+                    url: '/docs/session-replay/how-to-watch-recordings',
+                    icon: 'App',
+                    color: 'orange',
+                },
+                {
+                    name: 'Controlling which sessions you record',
+                    url: '/docs/session-replay/how-to-control-which-sessions-you-record',
+                    icon: 'Toggle',
+                    color: 'red',
+                },
+                {
                     name: 'Features',
+                },
+                {
+                    name: 'Console log recording',
+                    url: '/docs/session-replay/console-log-recording',
+                    icon: 'Code',
+                    color: 'blue',
+                },
+                {
+                    name: 'Network performance',
+                    url: '/docs/session-replay/network-recording',
+                    icon: 'Dashboard',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Privacy controls',
@@ -1892,7 +1916,7 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Sharing and emedding',
+                    name: 'Sharing and embedding',
                     url: '/docs/session-replay/sharing',
                     icon: 'Share',
                     color: 'purple',

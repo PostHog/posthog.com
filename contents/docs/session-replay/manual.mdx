@@ -1,8 +1,5 @@
 ---
-title: Session Replay
-related:
-    - ../../tutorials/funnels.md
-    - ../../tutorials/nextjs-supabase-signup-funnel.mdx
+title: Session replay installation
 availability:
     free: full
     selfServe: full
@@ -17,95 +14,36 @@ Session replay enables you to record users navigating through your website and p
 Above is a recording of posthog.com… on posthog.com – very meta.
 </Caption>
 
-## How to enable session replay
+## Step 1: Install our JavaScript web library
 
-Session replay can only be used with our [JavaScript web library](/docs/integrate/client/js) and requires the feature to be enabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+First, you need to install our JavaScript library. You can do so by either:
+
+import Snippet from "../../../integrate/\_snippets/install-js-snippet.mdx"
+import Badge from "../../../getting-started/\_snippets/badge.mdx"
+import InstallJSViaNPM from "../../../integrate/\_snippets/install-js-via-npm.mdx"
+
+### Option one: Add JavaScript snippet to your HTML <Badge>Recommended</Badge>
+
+<Snippet />
+
+### Option two: Install via package manager
+
+<InstallJSViaNPM />
+
+## Step 2: Enable recordings in your project settings
+
+Enable session recordings in your PostHog [project settings](https://app.posthog.com/project/settings).
+
+![Enable session recordings in your PostHog](../../images/docs/session-replay/enable-session-replay-in-project-settings.png)
 
 Once enabled, the library will start recording sessions by default.
 
-<blockquote class="warning-note">
-    Session Replay does not work if you send data using Segment's SDK as this data is not collected. If you use
-    Segment, you may want to add the PostHog library too (make sure to only send regular event data from one source).
-</blockquote>
-
-It can be toggled on and off in the JS library by appropriately setting the `disable_session_recording` flag in the [config](/docs/integrate/client/js/#config). 
+They can be toggled off in the by setting the `disable_session_recording: true` flag in the [config](/docs/integrate/client/js/#config). 
 
 Users who [opt out](/docs/libraries/js#opt-users-out) of event capturing will not have their sessions recorded.
 
-## How to watch recordings
-
-To watch recordings, you can visit the '[Replay](https://app.posthog.com/replay)' page. When watching replays, you can change the playback speed, as well as select the option 'skip inactivity' - this will skip parts of the recording where the user was inactive on the page.
-
-You can also watch recordings by clicking on any data point in an insight. This will open the list of persons and display a "watch recording" button if it is available. This is specially useful in [funnels](/docs/product-analytics/funnels), where you can drill down and watch recordings of users who converted or dropped off. 
-
-You can also click into the person to view all their recordings.
-
-![How to watch recordings via insights](../../images/docs/session-replay/how-to-watch-recordings.mp4)
+> **Note on using Segment's SDK**: Session Replay does not work if you send data using [Segment's SDK](/docs/libraries/segment) as this data is not collected. If you use Segment, you may want to add the PostHog library as well – (make sure to only send regular event data from one source).
 
 ## How to ignore sensitive elements
 
 You may want to hide sensitive text or elements in your replays. See our [privacy controls](/docs/session-replay/privacy) docs for how to do this.
-
-## Console logs recording
-
-PostHog can also capture console logs from your application. This is useful for debugging and providing extra context on what is happening in your users' browser environment. 
-
-As console logs can contain sensitive information, we do not capture these logs automatically. You can enable this feature globally from your [project settings](https://app.posthog.com/project/settings) or client-side by setting `enable_recording_console_log: true` in our [JavaScript web library config](/docs/integrate/client/js/#config).
-
-Console logs will be recorded if _either_ the project setting **or** the client-side config is set to `true`. Console logs will not be recording if session replay is not enabled.
-
-```js-web
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    // This is only needed if you aren't configuring session replay using the project settings toggle.
-    enable_recording_console_log: true,
-    // ... other options
-})
-```
-
-## Network recording
-
-PostHog can capture network requests that occur during the browser session so you can see the effect of slow network requests or errors on the user experience.
-
-To remove sensitive information from the URL, these network requests can be modified before being captured like so:
-
-```js-web
-posthog.init('<ph_project_api_key>', {
-    session_recording: {
-        maskNetworkRequestFn: (request) => {
-            // For example: ignoring a request entirely
-            if (request.url.includes('example.com')) {
-                return null
-            }
-
-            // ... or remove the query string from the URL
-            request.url = request.url.split('?')[0]
-            return request
-        }
-    }
-})
-```
-
-## How to control which sessions you record
-
-If you want more granular controls on selecting which sessions to record, first set `disable_session_recording: true` in your [config](/docs/integrate/client/js/#config) and then manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
-
-You can then achieve even finer control by combining the above methods with [feature flags](/docs/feature-flags). This enables you to control session recordings based on users with certain user properties, actions, or events. You can also use feature flags to capture a percentage of all sessions.
-
-For example:
-
-```js-web
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    disable_session_recording: true,
-    // ... other options
-})
-window.posthog.onFeatureFlags(function () {
-    if (window.posthog.isFeatureEnabled('your-feature-flag')) {
-        window.posthog.startSessionRecording()
-    }
-})
-```
-
-For even more configuration options on which sessions you record, see our tutorial on [how to only record the sessions you want](/tutorials/limit-session-recordings).
-

@@ -932,7 +932,7 @@ See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud)
 
 ### How long does it take to deploy Mixpanel?
 
-Integrating Mixpanel is simple enough – you can embed its snippet within `<head>` or install via NPM – but the lack of autocapture means you need to invest time and resources to instrument events manually before you can start creating insights.
+Integrating Mixpanel is simple enough – you can embed its snippet within `<head>` or install via package manager – but the lack of autocapture means you need to invest time and resources to instrument events manually before you can start creating insights.
 
 ### Does PostHog use cookies?
 
