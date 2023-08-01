@@ -2056,10 +2056,28 @@ export const docsMenu = {
                 },
                 */
                 {
-                    name: 'Product manual',
+                    name: 'Installation',
                     url: '/docs/experiments/manual',
                     icon: 'Book',
                     color: 'blue',
+                },
+                {
+                    name: 'Creating an experiment',
+                    url: '/docs/experiments/creating-an-experiment',
+                    icon: 'Target',
+                    color: 'orange',
+                },
+                {
+                    name: 'Adding your code',
+                    url: '/docs/experiments/adding-experiment-code',
+                    icon: 'Code',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Testing and launching',
+                    url: '/docs/experiments/testing-and-launching',
+                    icon: 'Rocket',
+                    color: 'purple',
                 },
                 {
                     name: 'Features',
@@ -2079,8 +2097,8 @@ export const docsMenu = {
                 {
                     name: 'Experiments without flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
-                    icon: 'Code',
-                    color: 'salmon',
+                    icon: 'Flag',
+                    color: 'yellow',
                 },
                 {
                     name: 'Common questions about experiments',
