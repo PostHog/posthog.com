@@ -13,10 +13,12 @@ import { GatsbyNode } from 'gatsby'
 import sidebars from '../src/sidebars/index'
 import pLimit from 'p-limit'
 import qs from 'qs'
+import dayjs from 'dayjs'
+import slugify from 'slugify'
 
 const limit = pLimit(10)
 
-const createOrUpdateStrapiPosts = async (posts) => {
+const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
     const apiHost = process.env.GATSBY_SQUEAK_API_HOST
 
     let allExistingStrapiPosts = []
@@ -111,12 +113,55 @@ const createOrUpdateStrapiPosts = async (posts) => {
             }
         )
     )
+    await Promise.all(
+        roadmaps.map(({ title, date: roadmapDate, media, description }) => {
+            const slug = slugify(title, { lower: true })
+            const date = dayjs(roadmapDate)
+            const year = date.format('YYYY')
+            const path = `changelog/${year}/${slug}.mdx`
+            const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
+            const category = allStrapiPostCategories.find((category) => category?.attributes?.folder === 'changelog')
+            const data = {
+                slug: `/changelog/${year}/${slug}`,
+                path,
+                title,
+                date: date.toISOString(),
+                featuredImage: {
+                    url: media?.data?.attributes?.url,
+                },
+                body: description,
+                ...(category
+                    ? {
+                          post_category: {
+                              connect: [category.id],
+                          },
+                      }
+                    : null),
+            }
+
+            return limit(() => createOrUpdateStrapiPost(data, existingPost?.id))
+        })
+    )
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const { data } = await graphql(`
         query {
-            all: allMdx(
+            allRoadmap(filter: { complete: { ne: false } }) {
+                nodes {
+                    title
+                    description
+                    date
+                    media {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
+                }
+            }
+            allMDXPosts: allMdx(
                 filter: {
                     fields: { slug: { regex: "/^/blog|^/tutorials|^/customers|^/spotlight/" } }
                     frontmatter: { date: { ne: null } }
@@ -242,7 +287,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         }
     `)
 
-    await createOrUpdateStrapiPosts(data.all.nodes)
+    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
 
     const dir = path.resolve(__dirname, '../public/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })

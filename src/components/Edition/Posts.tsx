@@ -120,7 +120,11 @@ const Post = ({
                         }`}
                     >
                         <div className="sm:w-[150px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden md:self-start self-center relative z-10">
-                            <img className="object-cover w-full h-full" src={featuredImage?.url} />
+                            {featuredImage?.url?.endsWith('.mp4') ? (
+                                <video className="object-cover w-full h-full" src={featuredImage?.url} />
+                            ) : (
+                                <img className="object-cover w-full h-full" src={featuredImage?.url || '/banner.png'} />
+                            )}
                         </div>
                         <div>
                             <span
@@ -432,12 +436,10 @@ export default function Posts({ children, articleView }) {
                 </section>
                 <section className="lg:flex lg:space-x-12 my-4 md:my-8 items-start">
                     <PostsListing articleView={articleView} />
-                    {articleView && (
-                        <div
-                            className={`${
-                                articleView ? 'flex-grow' : 'sticky top-[108px] w-[30rem] flex-shrink-0 block'
-                            }`}
-                        >
+                    <div
+                        className={`${articleView ? 'flex-grow' : 'sticky top-[108px] w-[30rem] flex-shrink-0 block'}`}
+                    >
+                        {articleView && (
                             <button
                                 onClick={() => navigate(prev ? -1 : '/posts')}
                                 className="inline-flex lg:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
@@ -447,9 +449,9 @@ export default function Posts({ children, articleView }) {
                                     Back to posts
                                 </span>
                             </button>
-                            <div>{children}</div>
-                        </div>
-                    )}
+                        )}
+                        <div>{children}</div>
+                    </div>
                 </section>
             </div>
         </Layout>
