@@ -1769,6 +1769,12 @@ export const docsMenu = {
                 },
                 */
                 {
+                    name: 'Installation',
+                    url: '/docs/product-analytics/installation',
+                    icon: 'Book',
+                    color: 'blue',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
