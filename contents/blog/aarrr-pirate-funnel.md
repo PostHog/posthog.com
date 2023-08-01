@@ -15,6 +15,8 @@ tags:
   - Product analytics
 ---
 
+> **Want to build an AARRR funnel in PostHog?** Use our [AARRR dashboard template](/templates/aarrr-dashboard) to set one up quickly and easily.
+
 ## What is the AARRR framework?
 
 The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a classic framework for understanding customer behavior. It was originally devised by startup guru Dave McClure in 2007.[^1] 
@@ -31,6 +33,8 @@ In this guide, you'll learn:
 > **Article changelog:**
 > - **Aug 3, 2022:** Original article publish date 
 > - **May 9, 2023:** Improved intro, new graphics, pirate metrics template
+> - **Aug 1, 2023:** Added notes about PostHog's AARRR dashboard template
+
 
 ## How does the AARRR funnel work?
 
@@ -211,3 +215,5 @@ Here's some recommended further reading around product growth and user engagemen
 - **[How to work out what your users really need](/blog/how-to-work-out-what-users-need):** How to use 1:1 customer interviews, surveys, metrics and session recordings to work out what your users really need.
 
 [^1]: _[Startup Metrics for Pirates deck](https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-nov-2010) – Dave McClure refined his original deck from its inception in 2007. This version is from 2010._ 
+
+> **Want to build an AARRR funnel in PostHog?** Use our [AARRR dashboard template](/templates/aarrr-dashboard) to set one up quickly and easily.
