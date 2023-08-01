@@ -20,27 +20,9 @@ This is an optional library you can install if you're working with PHP. It uses 
 
 ## Installation
 
-Add the following to composer.json:
-```json
-{
-    "require": {
-        "posthog/posthog-php": "3.0.*"
-    }
-}
-```
-And then install the dependencies with the command: `php composer.phar install`
+import PHPInstall from '../../integrate/_snippets/install-php.mdx'
 
-In your app, set your API key before making any calls.
-
-```php
-PostHog::init("<ph_project_api_key>",
-  array('host' => '<ph_instance_address>') // You can remove this line if you're using app.posthog.com
-);
-```
-
-> **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
-
-You can find your key in the 'Project Settings' page in PostHog.
+<PHPInstall />
 
 ## Making calls
 
