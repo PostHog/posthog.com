@@ -34,7 +34,7 @@ Once you modify the graph to your liking, by choosing a date range and setting t
 
 This might be useful for getting a rough idea of the usage of our whole product over time but becomes more useful as you break it down. You can do this by filtering the data. For example, you can filter for sessions by section of your product or site such as pricing or signup.
 
-> **Calculating time on page**: PostHog doesn't keep track of how long users spend on individual pages, only entire sessions. To calculate time on page, you can implement a custom pageleave event (like we do in [how to capture scroll depth](/tutorials/scroll-depth)) that contains the time a user spent on a page.
+> **Calculating time on page**: PostHog doesn't keep track of how long users spend on individual pages, only entire sessions. To calculate time on page, you can either implement a custom pageleave event (like we do in [how to capture scroll depth](/tutorials/scroll-depth)) that contains the time a user spent on a page, or calculate the time between a pageview and a subsequent pageview or pageleave event, like we do in our [how to calculate time on page](/tutorials/time-on-page) tutorial.
 
 ## Average session duration
 
@@ -63,5 +63,3 @@ Again, you can filter these series to better identify the types of users you wan
 These metrics should give you a better understanding of how users are spending their time in your product and site. Time on site, average session time, and pages per session all provide insight into the experience of your product or the quality of your content. Making improvements to product or content quality helps improves these metrics.
 
 To dive deeper into these insights, you can use [session recordings](/product/session-recording) to watch exactly how users are interacting with your product or the toolbar to use [heatmaps](/product/heatmaps) to understand popular areas on pages.
-
-<SubstackForm />
