@@ -16,13 +16,13 @@ tags:
 
 Fast-growing startups are like rocket ships, and as co-founder of Google, Eric Schmidt, once said: "If you're offered a seat on a rocket ship, don't ask what seat. Just get on.". In these rocket ships, it's the job of the growth team to provide the fuel for the journey by igniting user acquisition and retention. 
 
-In this post, we speak to [Thomas Owers](https://www.linkedin.com/in/thomasowers/) on how he started the growth team at [Let's Do This](https://www.letsdothis.com/) (a Y Combinator backed startup with $80M in funding) and grew it to three teams – despite having no prior experience in working on a growth team!
+In this post, we speak to [Thomas Owers](https://www.linkedin.com/in/thomasowers/), former lead software engineer at [Let's Do This](https://www.letsdothis.com/) (a Y Combinator backed startup with $80M in funding), on how he started the company's first growth team and, upon their initial success, grew the growth org into 4 teams – despite having no prior experience in working on a growth team in the first place!
 
 ## Background
 
 Let's Do This is a marketplace for discovering and signing up for endurance events such as marathons or triathlons. 
 
-In 2020, a new VP of product joined the team. One of their new initiatives was to create a growth team focusing on user acquisition and retention. Thomas, who was working as a software engineer, was intrigued by this. He previously had some experience working in SEO and marketing but not in *growth* per se. Nonetheless, he jumped at the opportunity, and after a chat with the VP of product, Thomas became the first member of the growth team.
+In 2020, a new VP of product joined the team. One of their new initiatives was to create a growth team focusing on user acquisition and retention. Thomas was intrigued by this. He previously had some experience working in SEO and marketing but not in *growth* per se. Nonetheless, he jumped at the opportunity, and after a chat with the VP of product, Thomas became the first member of the growth team.
 
 The team consisted of a few engineers, a product designer, and a data scientist, but no one really had any growth experience either. Their first job was to hire a growth PM to lead the team, which they soon did. However, two months after hiring this person, it was clear they weren't a good fit and were let go. Noticing a gap in the team, Thomas stepped up to become the de facto "half PM - half tech lead" of the team.
 
