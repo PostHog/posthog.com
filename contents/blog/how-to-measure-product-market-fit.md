@@ -41,13 +41,9 @@ We recommend a minimum of three to start with – likely two leading indicators 
 
 **Post-revenue** you'll want to want another lagging indicator, like burn multiple or CLV/CAC ratio, that provide a more concrete link to revenue and the financial viability of your product.
 
-Why a minimum of three? Because of what Brian Balfour, a serial co-founder and a former VP of Growth at Hubspot calls The Trifecta:[^1]
+Why a minimum of three? Because of what Brian Balfour, a serial co-founder and a former VP of Growth at Hubspot, calls The Trifecta:[^1]
 
-1. Non-trivial growth
-2. Meaningful usage
-3. User retention
-
-[TURN ABOVE INTO GRAPHIC]
+![pmf trifecta](../images/blog/how-to-measure-product-market-fit/pmf-trifecta.png)
 
 If you can nail these three at the same time, it's a strong sign you have product-market fit.
 
@@ -173,11 +169,11 @@ Are users experiencing the _real value_ of your product? Spoiler: logging in ≠
 
 You want to see user engagement growing in line with, or faster than, new users. If engagement is growing much faster than signups, it's a strong sign you have product-market fit.
 
-[IMAGINE A GRAPH HERE SHOWING GOOD FIT]
+![good pmf](../images/blog/how-to-measure-product-market-fit/good-pmf.png)
 
 If signups are growing, but user engagement isn't, it's likely you _don't_ have product-market fit.
 
-[IMAGINE A GRAPH HERE SHOWING BAD FIT]
+![bad pmf](../images/blog/how-to-measure-product-market-fit/bad-pmf.png)
 
 At PostHog, we created a user engagement metric we call Discoveries. We define a discovery as:
 
@@ -212,7 +208,7 @@ It's basically impossible to measure product-market fit without tracking user en
 
 The retention curve is a lagging indicator of product-market fit. If it fattens _at any point_, it's a strong sign you have product-market fit.
 
-[GRAPHIC SHOWING FLAT RETENTION CURVE HERE]
+![retention curve](../images/blog/how-to-measure-product-market-fit/retention-curve.png)
 
 To create your retention curve, you'll want to track active users over a long(ish) period of time – weeks or months, rather than days.
 
