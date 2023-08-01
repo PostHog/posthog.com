@@ -55,8 +55,6 @@ If you can nail these three at the same time, it's a strong sign you have produc
 
 To be clear... you _can't_ validate product-market fit _using word-of-mouth alone_. That way lies madness. But it is a useful leading indicator _when confirmed using other metrics_, such as user engagement, and retention.
 
-The key word here being _organic_. Paid ads and marketing are an important tool for any company, but most products that rely on them for growth are unlikely to succeed long term.
-
 Hopefully, you already have a strong grasp of your organic user growth via user signup, or whatever metric makes sense for your product.
 
 But you can, with a little work, also track word of mouth awareness and sentiment of your product. Here are a few options.
@@ -279,11 +277,16 @@ Burn multiple is a good metric to add once you believe you have The Trifecta: co
 >
 > **CAC** = customer acquisition cost - i.e. total sales and marketing spend divided by how many customers you acquired.
 
-CLV/CAC ratio is a robust but complex measure of product-market fit. 
+CLV/CAC ratio is a robust but complex measure of product-market fit. Robust because it speaks directly to the long-term financial health of your company; complex because calculating CLV accurately isn't a trivial task.
 
-Robust because it speaks directly to the long-term financial health of your company; complex because calculating CLV accurately isn't a trivial task.
+Customer lifetime value attempts to quantify how much a customer is worth over their entire lifetime. This means you need to understand:
 
-Customer lifetime value attempts to quantify how much a customer is worth over their entire lifetime. This means you need to understand your average deal size, how long customers stay until they churn, your gross margin (i.e. how much it costs to support and retain customers), and how long it'll take for a customer to pay back the cost of acquiring them. Consequently, the ratio is best used by companies selling to enterprises, where sales costs are higher and play a larger role in a product's success.  
+- Your average deal size.
+- How long customers stay until they churn.
+- Your gross margin – i.e. how much it costs to support and retain customers.
+- How long it'll take for a customer to pay back the cost of acquiring them. 
+
+Consequently, the ratio is best used by companies selling to enterprises, where sales costs are higher and play a larger role in a product's success.  
 
 A ratio of 1x means your CLV and CAC are the same – i.e. you're only earning enough to cover your acquisition costs. A ratio of 2x means you're earning twice as much as you're spending to acquire new customers. Karen Rhorer, currently a senior director at Twilio, considers CLV/CAC of 3x and a CAC payback of less than 18 months ideal[^6] for sales-lead products.
 
