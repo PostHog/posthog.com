@@ -31,3 +31,38 @@ and then as a dependency for the Package target utilizing PostHog:
     name: "myApp",
     dependencies: [.product(name: "PostHog", package: "posthog-ios")]),
 ```
+
+### Configuration
+
+#### With Objective-C
+
+```objectivec
+#import <PostHog/PHGPostHog.h>
+#import <PostHog/PHGPostHogConfiguration.h>
+
+// cloud-hosted
+PHGPostHogConfiguration *configuration = [PHGPostHogConfiguration configurationWithApiKey:@"<ph_project_api_key>"];
+
+// self-hosted
+PHGPostHogConfiguration *configuration = [PHGPostHogConfiguration configurationWithApiKey:@"<ph_project_api_key>" 
+                                                                          host:@"https://your-posthog-domain.com"];
+
+configuration.captureApplicationLifecycleEvents = YES; // Record certain application events automatically!
+configuration.recordScreenViews = YES; // Record screen views automatically!
+
+[PHGPostHog setupWithConfiguration:configuration];
+```
+
+#### With Swift
+
+```swift
+import PostHog
+
+let configuration = PHGPostHogConfiguration(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>") // TIP: `host` is optional if you use app.posthog.com
+
+configuration.captureApplicationLifecycleEvents = true; // Record certain application events automatically!
+configuration.recordScreenViews = true; // Record screen views automatically!
+
+PHGPostHog.setup(with: configuration)
+let posthog = PHGPostHog.shared()
+```
