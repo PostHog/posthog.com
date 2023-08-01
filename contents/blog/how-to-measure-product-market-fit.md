@@ -23,25 +23,25 @@ This guide is about finding ways to measure product-market fit, your progress to
 
 ## Leading and lagging indicators
 
-You can measure product-market fit using a _combination_ of these indicators:
+Measuring product-market fit requires a _combination_ of leading and lagging indicators.
 
-| **Leading indicators**       | **Efficiency**  |
-|------------------------------|-----------------|
-| Organic word-of-mouth growth | Retention curve |
-| Meaningful user engagement   | Burn multiple   |
-| User feedback & PMF Survey   | CLV/CAC ratio   |
+**Leading indicators**, are predictive. A surge in organic growth and positive word-of-mouth suggests product-market fit, but can't confirm it. They include:
+- **Organic word-of-mouth growth** – Not directly linked to paid promotions
+- **Meaningful user engagement** – Users experiencing real value    
+- **User feedback & PMF Survey** – Direct feedback from users
 
-**Leading indicators** are predictive of future growth revenue. A surge in organic growth and positive word-of-mouth suggests product-market fit, but can't confirm it.
+**Lagging indicators** confirm whether you have product-market fit. They're more reliable, particularly if they're linked to financial performance. They include:
+- **Retention curve** – Evidence users are coming back
+- **Burn multiple** – Evidence you're growing sustainably
+- **CLV/CAC ratio** – Can you acquire customers for less than they cost to support? 
 
-**Lagging indicators** confirm whether you have product-market fit. They're more reliable measures, particularly if they're linked to financial performance.
+We recommend a minimum of three to start with – likely two leading indicators and one lagging indicator – and adding more when you need.
 
-We recommend a minimum of three to start with – likely two leading indicators and one lagging indicator – and adding more when you need. For example:
+**Pre-revenue**, word-of-mouth, user engagement, and retention are good indicators of product-market fit. They'll tell you how people feel about your product, whether they're using it, and if they stick around.
 
-- **Pre-revenue** Word-of-mouth, user engagement, and retention are good indicators of product-market fit. They'll tell you how people feel about your product, whether they're using it, and if they stick around.
+**Post-revenue** you'll want to want another lagging indicator, like burn multiple or CLV/CAC ratio, that provide a more concrete link to revenue and the financial viability of your product.
 
-- **Post-revenue:** You'll want to want another lagging indicator, like burn multiple or CLV/CAC ratio, that provide a more concrete link to revenue and the financial viability of your product.
-
-Why a minimum of three? Because of what Brian Balfour, a serial co-founder and a former VP of Growth at Hubspot calls The Trifecta[^1]:
+Why a minimum of three? Because of what Brian Balfour, a serial co-founder and a former VP of Growth at Hubspot calls The Trifecta:[^1]
 
 1. Non-trivial growth
 2. Meaningful usage
@@ -69,7 +69,7 @@ You can go one step further by setting up a Zapier integration with Google Sheet
 
 Brand alerts are also a great way to drive acquisition by talking to people considering your product. 
 
-> **❗️Important:** It's _much easier_ to track brand mentions if your company has a unique name. If your company name is also a common noun (e.g. Amplitude, Apple, etc.), you're bang out of luck.
+> **❗️Important:** It's _much easier_ to track mentions if your company has a unique name. You're bang out of luck if it's a common noun – e.g. Apple, Amplitude. 
 
 ### 2. Searches for your brand
 
@@ -104,17 +104,16 @@ This method will capture some existing users as well, but we've found it correla
 
 > 💡 **PostHog Tip:** If you're using PostHog, remember to add `UTM Source` = `Is not set` to filter out any paid ad campaigns you're running.
 
-### Word-of-mouth pros and cons
+### When to use word-of-mouth
 
-- <span className="text-green text-lg">✔</span> Easy to track.
-- <span className="text-green text-lg">✔</span> Useful when you're pre-revenue.
-- <span className="text-green text-lg">✔</span> Easy to compare with other companies.
-- <span className="text-green text-lg">✔</span> Positive feedback and growth is highly motivating.
+Word-of-mouth growth is a good option for any product-led company – i.e. a product that's self-serve and doesn't do outbound sales. It's a weak leading indicator, but useful so long as you don't buy into your own PR and verify with other metrics.
 
-- <span className="text-red text-lg">✖</span> Not a reliable sign of product-market fit on its own.
-- <span className="text-red text-lg">✖</span> Spikes in awareness and user growth can be misleading.
-- <span className="text-red text-lg">✖</span> Not useful for companies with low-profile brands – e.g. enterprise products.
-- <span className="text-red text-lg">✖</span> It's tempting (and easy) to rationalize negative word-of-mouth.
+| **Pros**                                                                                                                 | **Cons**                                                                                                                 |
+|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
+| <span className="text-green text-lg">✔</span> Easy to track                                                              | <span className="text-red text-lg">✖</span> Not a reliable sign of product-market fit on its own                         |
+| <span className="text-green text-lg">✔</span> Useful when you're pre-revenue                                             | <span className="text-red text-lg">✖</span> Spikes in awareness and user growth can be misleading                        |
+| <span className="text-green text-lg">✔</span> Easy to compare with other companies                                       | <span className="text-red text-lg">✖</span> Not useful for companies with low-profile brands – e.g. enterprise products  |
+| <span className="text-green text-lg">✔</span> Positive feedback and growth is highly motivating                          | <span className="text-red text-lg">✖</span> It's tempting (and easy) to rationalize negative word-of-mouth               |
 
 ## Indicator #2: User feedback & PMF Survey
 
@@ -122,7 +121,7 @@ Like word-of-mouth, _consistently_ positive user feedback is an indicator of pro
 
 To this end, the PMF Survey is a twist on the classic Net Promoter Score, but it's designed _specifically_ for finding product-market fit, and creating a feedback loop for user feedback.
 
-Created by entrepreneur Sean Ellis[^2], the core question (among others) it asks is:
+Created by entrepreneur Sean Ellis, the core question (among others) it asks is:
 
 “How would you feel if you could no longer use [ProductName]?”
 
@@ -134,7 +133,7 @@ You want to learn everything you possibly can about people who answer "very disa
 
 Based on his research of 100+ startups, Ellis believes 40% answering "very disappointed" is a strong signal of product-market fit. The more responses you get, the more reliable the signal. Ellis recommends a minimum of 30:
 
-> "In my experience, a minimum of 30 responses is needed before the survey becomes directionally useful. At 100+ responses I am much more confident in the results."
+> "In my experience, a minimum of 30 responses is needed before the survey becomes directionally useful. At 100+ responses I am much more confident in the results." – Sean Ellis[^2]
 
 An open research project run by Hiten Shah[^3], co-founder of KISSmetrics, used the PMF Survey on 731 Slack users, the results showed:
 
@@ -158,23 +157,17 @@ After the initial survey, Superhuman created a four-step process to convert the 
 
 4. **Rinse and repeat:** Superhuman continued to survey users, tracking progress towards the 40% mark. The score became the primary OKR for the product team and, after three quarters, Superhuman had doubled the score to 58%.
 
-### Pros and cons
+### When to use feedback and the PMF Survey
 
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Can help guide product development in the right direction.
+Feedback is essential to any startup, so it's more a question of how you collect it. You don't need to use the PMF Survey to find product-market fit, but it's a useful way to systematize your efforts and lets you track how your product-market fit changes over time.
 
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Easy to break down into multiple cohorts to understand your ICP.
-
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Can be systematised to improve product-market fit over time.
-
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Useful for tracking how your product-market fit changes over time.
-
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Will help you understand why you do or don't have product-market fit.
-
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> It can provide a false positive – e.g. you can have good fit for people who won't pay.
-
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> Somewhat labor intensive – requires setting up surveys and collating results for analysis.
-
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> Not driven by real usage – always validate with engagement, or retention, data.
+| **Pros**                                                                                                                 | **Cons**                                                                                                                 |
+|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
+| <span className="text-green text-lg">✔</span> Can help guide product development in the right direction                  | <span className="text-red text-lg">✖</span> PMF Survey is somewhat labor-intensive                                       |
+| <span className="text-green text-lg">✔</span> Easy to break down into multiple cohorts to understand your ICP            | <span className="text-red text-lg">✖</span> Needs to be backed-up with 121 interviews                                    |
+| <span className="text-green text-lg">✔</span> Can be systematized to improve product-market fit over time                | <span className="text-red text-lg">✖</span> Not driven by real usage – always validate with engagement or retention data |
+| <span className="text-green text-lg">✔</span> Useful for tracking how your product-market fit changes over time          | <span className="text-red text-lg">✖</span> Requires a minimum number of responses to be directionally useful            |
+| <span className="text-green text-lg">✔</span> Will help you understand _why_ you do or don't have product-market fit     |               |
 
 ## Indicator #3: Meaningful user engagement
 
@@ -192,7 +185,7 @@ At PostHog, we created a user engagement metric we call Discoveries. We define a
 
 - **Analyzing any insight** – Analyzing means viewing for 10 seconds or more. Insights include trends, funnels, paths, lifecycle, and stickiness.
 
-– **Analyzing a recording** – Watching a recording for 10 seconds or more.
+- **Analyzing a recording** – Watching a recording for 10 seconds or more.
 
 - **Analyzing a correlation** – Analyzing means viewing for 10 seconds or more.
 
@@ -205,19 +198,17 @@ If you find your chosen engagement metric doesn't correlate to retention you eit
 1. Don't have product-market fit.
 2. Are tracking the wrong metrics.
 
-### Pros and cons
+### When to use user engagement
 
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Tracks the real value users gain from your product.
+It's basically impossible to measure product-market fit without tracking user engagement. The real challenge is tracking the right things – i.e. avoiding vanity metrics. See our guide to the [most useful B2B product metrics](/blog/b2b-saas-product-metrics) for help here. 
 
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Passive to maintain – set it up once and track forever.
-
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Easy to understand for all teams.
-
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Can be broken down by user cohorts for comparison.
-
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> High user engagement isn't predictive of revenue – will they pay if asked, and how much?
-
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> Can provide a false positive if you're tracking the wrong things.
+| **Pros**                                                                                                                 | **Cons**                                                                                                                 |
+|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
+| <span className="text-green text-lg">✔</span> Tracks the real value users gain from your product                         | <span className="text-red text-lg">✖</span> High engagement isn't necessarily predictive of revenue                      |
+| <span className="text-green text-lg">✔</span> Passive to maintain – set it up once and track forever                     | <span className="text-red text-lg">✖</span> Can provide a false positive if you're tracking the wrong things             |
+| <span className="text-green text-lg">✔</span> Easy to understand for all teams                                           | <span className="text-red text-lg">✖</span> Requires user feedback or session replays to understand behavior             |
+| <span className="text-green text-lg">✔</span> Can be broken down by user cohorts for comparison                          |           |
+| <span className="text-green text-lg">✔</span> You can A/B test ways to improve user engagement                           |           |
 
 ## Indicator #4: Retention curve
 
@@ -229,27 +220,25 @@ To create your retention curve, you'll want to track active users over a long(is
 
 How you define an active user is up to you, but it's best to track events or actions where a user is experiencing the _real value_ of your product. Again, logging in does not count!
 
-For our product PostHog, an all-in-one analytics platform, this might look like:
+For our product PostHog, an [all-in-one analytics platform](http://posthog.com/), this might look like:
 
 > Show `unique users` who performed a `discovery` for the first time in the last `12 months` and then came back to perform a `discovery` on any of the next months.
 
 It's also a good idea to track different cohorts, such as retention for users who match your ideal customer profile, or split by job title. This will help you understand how strong your fit is for different groups, and plan your roadmap accordingly.
 
-### Pros and cons
+### When to use retention
 
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Reliable lagging indicator of product-market fit.
+Retention is another non-negotiable way to measure product-market fit. It's simplest lagging indicator of product-market fit, so there's really no reason not to use it.
 
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Can be broken down by cohort for comparison.
-
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Easy to understand – flat is good, not flat is bad!
-
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> Not predictive of revenue – will retained users actually pay for your product?
-
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> You need several months of data to get a reliable signal.
+| **Pros**                                                                                                                 | **Cons**                                                                                                                 |
+|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
+| <span className="text-green text-lg">✔</span> Reliable lagging indicator of product-market fit                           | <span className="text-red text-lg">✖</span> Not predictive of revenue – will users actually pay for your product?        |
+| <span className="text-green text-lg">✔</span> Can be broken down by cohort for comparison                                | <span className="text-red text-lg">✖</span> You need several weeks or months of data to get a reliable signal            |
+| <span className="text-green text-lg">✔</span> Easy to understand – flat is good, not flat is bad!                        | <span className="text-red text-lg">✖</span> Won't help you understand why you do or don't have product-market fit        |
 
 ## Indicator #5: The burn multiple
 
-Created by former PayPal COO David Sacks[^5], burn multiple measures how much you're spending to grow revenue. The less you spend, the more efficient your growth. More efficient growth = stronger product-market fit.
+Created by former PayPal COO David Sacks, burn multiple measures how much you're spending to grow revenue. The less you spend, the more efficient your growth. More efficient growth = stronger product-market fit.
 
 To calculate your burn multiple, divide your net burn during a period (e.g. a quarter) with net new annual revenue for the same period:
 
@@ -265,79 +254,62 @@ A company that burns $2 million to generate $1.5 million in new ARR would have a
 | 2 to 3x           | Suspect        |
 | Over 3x           | Bad            |
 
-Why is burn multiple a useful measure of product-market fit? Here's Sacks again (emphasis added):
+Why is burn multiple useful? Here's Sacks (emphasis added):
 
-> "The startup that generates $1M million in ARR by burning $2M is more impressive than one that does it by burning $5M. In the former case, it appears that **the market is pulling product out of the startup**, whereas in the latter case, the **startup is pushing its product onto the market**. VCs will make inferences about product-market fit accordingly."
+> "The startup that generates $1M million in ARR by burning $2M is more impressive than one that does it by burning $5M. In the former case, it appears that **the market is pulling product out of the startup**, whereas in the latter case, the **startup is pushing its product onto the market**. VCs will make inferences about product-market fit accordingly." – David Sacks[^5] 
 
-Sacks goes on to explain that burn multiple is useful because it's a catch-all metric. Factors such as costs, churn rate, and growth, all impact your burn multiple positively or negatively.
+Sacks goes on to explain how burn multiple works because it's a catch-all metric. Factors such as costs, churn rate, and growth, all impact your burn multiple positively or negatively, giving you a complete picture of your company's health in one number.
 
-### Pros and cons
+### When to use burn multiple
 
-<td className="text-center"><span className="text-green text-lg">✔</span></td> It's a cumulative metric that's influenced by all parts of your startup.
+Burn multiple is a good metric to add once you believe you have The Trifecta: consistent growth, real user engagement, and strong retention. It'll help you connect your product-market fit to revenue and costs, and understand how investors will evaluate your product-market fit.
 
-<td className="text-center"><span className="text-green text-lg">✔</span></td> It's easy to calculate – it's just two numbers any founder should have to hand.
+| **Pros**                                                                                                                 | **Cons**                                                                                                                 |
+|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
+| <span className="text-green text-lg">✔</span> It's a cumulative metric that's influenced by all parts of your startup    | <span className="text-red text-lg">✖</span> It's a significantly lagging indicator                                       |
+| <span className="text-green text-lg">✔</span> It's easy to calculate – it's just two numbers any founder should have     | <span className="text-red text-lg">✖</span> It's not useful if you're pre-revenue                                        |
+| <span className="text-green text-lg">✔</span> A steady decline is a strong indicator of product-market fit               | <span className="text-red text-lg">✖</span> It won't help you understand why you do or don't have product-market fit     |
+| <span className="text-green text-lg">✔</span> It's useful for investors                                                  | <span className="text-red text-lg">✖</span> Skewed by non-product factors – e.g. poor cost control                       |
+| <span className="text-green text-lg">✔</span> It's easy to understand                                                    |        |
+| <span className="text-green text-lg">✔</span> Useful for mid to late-stage startups                                      |        |
 
-<td className="text-center"><span className="text-green text-lg">✔</span></td> A steady decline is a strong indicator of product-market fit.
+## Indicator #6 CLV/CAC ratio
 
-<td className="text-center"><span className="text-green text-lg">✔</span></td> It's useful for investors.
-
-<td className="text-center"><span className="text-green text-lg">✔</span></td> It's easy to understand.
-
-<td className="text-center"><span className="text-green text-lg">✔</span></td> Revenue growth is a significant factor – useful for mid/later-stage startups.
-
-<td className="text-center"><span className="text-red text-lg">✖</span></td> It's a significantly lagging indicator.
-
-<td className="text-center"><span className="text-red text-lg">✖</span></td> It's not useful if you're pre-revenue.
-
-<td className="text-center"><span className="text-red text-lg">✖</span></td> It won't help you understand why you do or don't have product-market fit.
-
-## Indicator #6 CLV/CAC ratio 📆💰
-
-> - **CLV** = customer lifetime value – i.e. the total value of a customer after churn and the cost of supporting / retaining them.
+> **CLV** = customer lifetime value – i.e. the total value of a customer after churn and the cost of supporting / retaining them.
 >
-> - **CAC** = customer acquisition cost - i.e. how much you're spending to > acquire new customers.
+> **CAC** = customer acquisition cost - i.e. total sales and marketing spend divided by how many customers you acquired.
 
 CLV/CAC ratio is a robust but complex measure of product-market fit. 
 
-Robust because it speaks directly to the long-term financial health of your company; complex because calculating CLV and CAC accurately isn't a trivial task.
+Robust because it speaks directly to the long-term financial health of your company; complex because calculating CLV accurately isn't a trivial task.
 
-Nikhyl Singhal, who has sold startups to IBM and Google and is currently VP of Product at Meta, favors this measure because:
+Customer lifetime value attempts to quantify how much a customer is worth over their entire lifetime. This means you need to understand your average deal size, how long customers stay until they churn, your gross margin (i.e. how much it costs to support and retain customers), and how long it'll take for a customer to pay back the cost of acquiring them. Consequently, the ratio is best used by companies selling to enterprises, where sales costs are higher and play a larger role in a product's success.  
 
-> "There are a lot of product/market fit definitions out there that focus on how many users love you. But that misses a key ingredient: the profitability and sustainability of what it takes to acquire that love."
+A ratio of 1x means your CLV and CAC are the same – i.e. you're only earning enough to cover your acquisition costs. A ratio of 2x means you're earning twice as much as you're spending to acquire new customers. Karen Rhorer, currently a senior director at Twilio, considers CLV/CAC of 3x and a CAC payback of less than 18 months ideal[^6] for sales-lead products.
 
-A CLV/CAC ratio of 1x means your CLV and CAC are the same – i.e. you're only earning enough to cover your acquisition costs. A ratio of 2x means you're earning twice as much as you're spending to acquire new customers.
-
-| **CLV/CAC ratio** | **PMF likelihood** |
+| **CLV/CAC ratio** | **Product-market fit** |
 |-------------------|----------------|
 | Over 3x           | Guaranteed     |
-| 2x to 3x          | High           |
-| 1x to 2x          | Good           |
-| 0.5 to 1x         | Low            |
-| Under 0.5x        | Very low       |
+| 2x to 3x          | Strong         |
+| 1.5x to 2x        | Good           |
+| 1x to 1.5x        | Weak           |
+| Under 1x          | None           |
 
-By its nature, the ratio is most useful for later-stage companies who have other strong signs of product-market fit. It will either confirm or deny this belief, or indicate a need to cut costs / increase margins to make the business healthy in the long term.
+> **CLV/CAC ratio vs burn multiple:** The ratio measures the cost of acquiring and retaining customers, but it _doesn't_ include product development costs. Burn multiple includes all costs, including support, acquisition, sales, and product development.
 
-Being on product-led is one way to gain an upper hand here – not having a large and expensive outbound sales team is a great way to keep costs down!
+### When to use CLV/CAC ratio
 
-### Pros and cons
+This is the metric to use if your product is sales-led – i.e. you're doing lots of outbound sales, probably to enterprise customers. Unlike your burn multiple, it'll help you isolate your acquisition costs from other parts of the business. You're on the right track once you can acquire customers for less than their lifetime value.
 
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Very reliable indicator of product-market fit and long-term financial health.
+| **Pros**                                                                                                                 | **Cons**                                                                                                                 |
+|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
+| <span className="text-green text-lg">✔</span> Reliable indicator of product-market fit and long-term financial health    | <span className="text-red text-lg">✖</span> Complicated to calculate and understand                                      |
+| <span className="text-green text-lg">✔</span> Can't be gamed or rationalized                                             | <span className="text-red text-lg">✖</span> Not useful for engineering or product teams                                  |
+| <span className="text-green text-lg">✔</span> Useful for enterprise products where acquisition costs are higher          | <span className="text-red text-lg">✖</span> Not useful for early-stage startups                                          |
+| <span className="text-green text-lg">✔</span> Investors will love a high ratio                                           | <span className="text-red text-lg">✖</span> Not useful for product-led growth companies                                  |
+| <span className="text-green text-lg">✔</span> Useful for sales-led companies                                             |                              |
 
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Investors will love a high ratio.
-
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Useful for confirming other signs of product-market fit.
-
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Can't be gamed or rationalized.
-
-- <td className="text-center"><span className="text-green text-lg">✔</span></td> Useful for enterprise products where acquisition costs are higher.
-
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> Complicated to calculate and understand.
-
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> Not useful for engineering or product teams.
-
-- <td className="text-center"><span className="text-red text-lg">✖</span></td> Not useful for early-stage startups.
-
-## Choosing your product-market fit metrics
+## Final thoughts
 
 TODO: Some words here:
 
@@ -345,14 +317,17 @@ TODO: Some words here:
 - When you can, add PMF survey to help you fine-tune, improve PMF and track over time
 - Add burn multiple once you're making decent revenue. Use CLV/CAC ratio if you're an enterprise product / have data scientists.
 
-> [^1]: [The Never Ending Road To Product Market Fit](https://brianbalfour.com/essays/product-market-fit) – by Brian Balfour – Dec 11, 2013
-> 
-> [^2]: [Using Product/Market Fit to Drive Sustainable Growth](https://blog.growthhackers.com/using-product-market-fit-to-drive-sustainable-growth-58e9124ee8db) – Sean Ellis – Apr 5, 2019
->
-> [^3]: [731 Slack Users Reveal Why It’s So Addictive](https://hitenism.com/slack-product-market-fit-survey/) – Hiten Shah – May, 18, 2015
->
-> [^4]: [How Superhuman Built an Engine to Find Product Market Fit](https://review.firstround.com/how-superhuman-built-an-engine-to-find-product-market-fit) – Rahul Vohra – Nov 13, 2018
->
-> [^5]: [The Burn Multiple](https://sacks.substack.com/p/the-burn-multiple-51a7e43cb200) – David Sacks – Apr 23, 2020
->
-> [^6]: [How to Craft Your Product Team at Every Stage, From Pre-Product/Market Fit to Hypergrowth](https://review.firstround.com/how-to-craft-your-product-team-at-every-stage-from-pre-product-market-fit-to-hypergrowth) – Nikhyl Singhal – Dec 10, 2019
+
+#### Footnotes
+
+[^1]: [The Never Ending Road To Product Market Fit](https://brianbalfour.com/essays/product-market-fit) – Brian Balfour – Dec 11, 2013
+
+[^2]: [Using Product/Market Fit to Drive Sustainable Growth](https://blog.growthhackers.com/using-product-market-fit-to-drive-sustainable-growth-58e9124ee8db) – Sean Ellis – Apr 5, 2019
+
+[^3]: [731 Slack Users Reveal Why It’s So Addictive](https://hitenism.com/slack-product-market-fit-survey/) – Hiten Shah – May, 18, 2015
+
+[^4]: [How Superhuman Built an Engine to Find PMF](https://review.firstround.com/how-superhuman-built-an-engine-to-find-product-market-fit) – Rahul Vohra – Nov 13, 2018
+
+[^5]: [The Burn Multiple](https://sacks.substack.com/p/the-burn-multiple-51a7e43cb200) – David Sacks – Apr 23, 2020
+
+[^6]: [Growth at All Costs is Perilous](https://review.firstround.com/growth-at-all-costs-is-perilous-this-is-how-to-scale-sales-sustainably) – Karen Rhorer – Sep 25, 2018
