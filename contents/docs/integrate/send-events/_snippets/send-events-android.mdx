@@ -1,0 +1,18 @@
+import NamingTip from "./naming-tip.mdx" 
+import SettingProperties from "./setting-properties-text.mdx" 
+
+```java
+PostHog.with(this)
+       .capture("User signed up");
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```java
+PostHog.with(this)
+       .capture("User signed up", new Properties()
+              .putValue("login_type", "email")
+              .putValue("is_free_trial", true));
+```

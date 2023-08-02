@@ -1,0 +1,17 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+
+```react-native
+posthog.capture('User signed up')
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```react-native
+posthog.capture('User signed up', {
+    login_type: "email",
+    is_free_trial: true
+})
+```

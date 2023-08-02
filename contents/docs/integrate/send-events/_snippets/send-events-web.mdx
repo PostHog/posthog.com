@@ -1,0 +1,19 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+
+```js-web
+posthog.capture('User signed up');
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```js-web
+posthog.capture('User signed up', {
+    login_type: "email",
+    is_free_trial: true
+})
+```
+
+## Autocapture ??? (maybe put this in another snippet)

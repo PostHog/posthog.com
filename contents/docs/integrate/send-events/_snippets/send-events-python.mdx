@@ -1,0 +1,20 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+
+```python
+posthog.capture('distinct_id_of_the_user', 
+    'User signed up')
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```
+posthog.capture(
+    "distinct_id_of_the_user", 
+    "User signed up", 
+    {"login_type": "email", 
+    "is_free_trial": "true"}
+)
+```

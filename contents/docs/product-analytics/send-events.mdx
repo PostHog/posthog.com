@@ -1,0 +1,193 @@
+---
+title: Sending events
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: full
+    enterprise: full
+---
+
+import Tab from "components/Tab"
+import APISendEvent from '../integrate/send-events/_snippets/send-events-api.mdx'
+import WebSendEvent from '../integrate/send-events/_snippets/send-events-web.mdx'
+import ReactSendEvent from '../integrate/send-events/_snippets/send-events-react.mdx'
+import NodeSendEvent from '../integrate/send-events/_snippets/send-events-node.mdx'
+import PythonSendEvent from '../integrate/send-events/_snippets/send-events-python.mdx'
+import PHPSendEvent from '../integrate/send-events/_snippets/send-events-php.mdx'
+import RubySendEvent from '../integrate/send-events/_snippets/send-events-ruby.mdx'
+import GoSendEvent from '../integrate/send-events/_snippets/send-events-go.mdx'
+import ReactNativeSendEvent from '../integrate/send-events/_snippets/send-events-react-native.mdx'
+import AndroidSendEvent from '../integrate/send-events/_snippets/send-events-android.mdx'
+import IOSSendEvent from '../integrate/send-events/_snippets/send-events-ios.mdx'
+import JavaSendEvent from '../integrate/send-events/_snippets/send-events-java.mdx'
+import RustSendEvent from '../integrate/send-events/_snippets/send-events-rust.mdx'
+import FlutterSendEvent from '../integrate/send-events/_snippets/send-events-flutter.mdx'
+import ElixirSendEvent from '../integrate/send-events/_snippets/send-events-elixir.mdx'
+
+Once your PostHog instance is up and running, the next step is to start sending events. You can do this by using `capture`:
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={[
+    'Web', 
+    'Node.js', 
+    'Python', 
+    'PHP', 
+    'Ruby', 
+    'Go', 
+    'React', 
+    'React Native', 
+    'Android', 
+    'iOS', 
+    'Java', 
+    'Rust', 
+    'Elixir', 
+    'Flutter', 
+    'api']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>Node.js</Tab>
+        <Tab>Python</Tab>
+        <Tab>PHP</Tab>
+        <Tab>Ruby</Tab>
+        <Tab>Go</Tab>
+        <Tab>React</Tab>
+        <Tab>React Native</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+        <Tab>Java</Tab>
+        <Tab>Rust</Tab>
+        <Tab>Elixir</Tab>
+        <Tab>Flutter</Tab>
+        <Tab>API</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <WebSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <NodeSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PHPSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <RubySendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GoSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactNativeSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AndroidSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <IOSSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <JavaSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+           <RustSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ElixirSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+           <FlutterSendEvent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <APISendEvent />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We recommend starting with autocapture for your web app as it's the quickest way to get set up, gives you full coverage, and avoids manually adding custom events. On top you can add custom events to track the most important events.
+
+> **Tip**: Autocapture sends lots of events. We provide a generous free tier but as you scale you might switch to mainly using [custom events](#2-capture-custom-events-client) on the areas of the product that are more stable and [tune autocapture](/docs/libraries/js#tuning-autocapture) to your needs.
+
+## 1. Setup autocapture
+
+When you call `posthog.init`, the PostHog browser JS library begins automatically capturing user events:
+
+- **Page views**, including the URL
+- **Autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
+
+### Hiding certain elements
+
+PostHog puts significant effort into ensuring it doesn't capture sensitive data from your website.
+However, if there are specific elements you want to ensure aren't captured, you can add the `ph-no-capture` class name.
+
+```html
+<input class='ph-no-capture'><!-- Input with sensitive user info --></input>
+```
+
+> **Tip**: Including the `ph-no-capture` class will also exclude elements from being shown in session recordings.
+
+## 2. Capture custom events
+
+Setting up autocapture is a great way to get started, but typically when integrating tracking into your product, you'll want to send additional events for when specific things occur.
+
+On the client-side, we can use the `capture` method, with the first argument being the name of the event you want to track.
+
+<MultiLanguage selector="tabs">
+
+```js-web
+posthog.capture('User signed up')
+```
+
+</MultiLanguage>
+
+### Setting custom properties on an event
+
+Suppose you're building a SaaS app and want to track when a user purchases a plan. With autocapture, you'll already see `Clicked button with text 'Purchase'` events, but these won't have any information on which plan the user purchased!
+
+We include extra information on events by adding a second parameter in our capture call, which contains a map of custom property names and values.
+
+<MultiLanguage selector="tabs">
+
+```js-web
+posthog.capture('Plan purchased', {
+    price: 1599,
+    planId: 'XYZ12345',
+    frequency: 'monthly',
+    features: {
+        'SSO': true,
+        'Custom branding': true,
+        'Custom domains': false,
+    }
+})
+```
+
+</MultiLanguage>
+
+Later, we can use these properties to filter events based on a particular planId, or to calculate the aggregate values of a property over time.
+
+> **Tip**: Always include more properties than you might need at first!
+> There's no limit to the number of properties an event can have, and your future self will thank you once again when you need to access a property that you may not have thought you needed.
+
+
+## Event ingestion
+
+It's a priority for us that events are fully processed and saved as soon as possible. Typically, events will be usable in queries within a few minutes.

@@ -1,0 +1,24 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'distinct_id_of_the_user',
+  'event' => 'User signed up'
+));
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'distinct_id_of_the_user',
+  'event' => 'User signed up',
+  'properties' => array(
+    'login_type' => 'email',
+    'is_free_trial' => 'true'
+  )
+));
+```

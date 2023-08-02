@@ -1,0 +1,28 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+
+```objectivec
+[[PHGPostHog sharedPostHog] capture:@"User signed up"];
+```
+
+```swift
+posthog.capture("User signed up")
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```objectivec
+[[PHGPostHog sharedPostHog] capture:@"User signed up" 
+    properties:@{ @"login_type": @"email", 
+                  @"$is_free_trial": @YES }
+];
+```
+
+```swift
+posthog.capture(
+    "User signed up", 
+    properties: ["login_type": "email", "$set": ["is_free_trial": true] 
+])
+```

@@ -1,0 +1,26 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "distinct_id_of_the_user",
+    "event": "User signed up"
+}' https://app.posthog.com/capture/
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "properties": {
+        "login_type": "email",
+        "is_free_trial": "true"
+    },,
+    "distinct_id": "distinct_id_of_the_user",
+    "event": "User signed up"
+}' https://app.posthog.com/capture/
+```

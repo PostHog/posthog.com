@@ -1,0 +1,30 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+
+```elixir
+Posthog.capture("User signed up", %{
+  distinct_id: distinct_id_of_the_user
+})
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```elixir
+Posthog.capture("User signed up", %{
+  distinct_id: distinct_id_of_the_user,
+  properties: %{
+    login_type: "email",
+    is_free_trial: true
+  }
+})
+```
+
+### Batching events
+
+To capture multiple events at once, use `batch()`:
+
+```elixir
+Posthog.batch([{"User signed up", [distinct_id: distinct_id_of_the_user], nil}])
+```

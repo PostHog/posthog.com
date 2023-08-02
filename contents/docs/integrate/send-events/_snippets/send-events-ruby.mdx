@@ -1,0 +1,24 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id_of_the_user',
+    event: 'User signed up'
+})
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id_of_the_user',
+    event: 'User signed up',
+    properties: {
+        login_type: 'email',
+        is_free_trial: true
+    }
+})
+```

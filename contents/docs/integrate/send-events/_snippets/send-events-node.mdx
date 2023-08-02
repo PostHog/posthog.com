@@ -1,0 +1,24 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+
+```node
+posthog.capture({
+    distinctId: 'distinct_id_of_the_user',
+    event: 'User signed up"',
+})    
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_the_user',
+    event: 'User signed up"',
+    properties: {
+        login_type: 'email',
+        is_free_trial: true,
+    },
+})
+```

@@ -1775,6 +1775,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Sending events',
+                    url: '/docs/product-analytics/send-events',
+                    icon: 'Send',
+                    color: 'orange',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
