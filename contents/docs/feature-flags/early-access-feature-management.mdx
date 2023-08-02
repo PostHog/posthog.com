@@ -2,7 +2,7 @@
 title: Early access feature management
 ---
 
-Early access feature management enables your users to opt-in (and out) of betas and other in-progress features. 
+Early access feature management enables your users to opt in (and out) of betas and other in-progress features. 
 
 This is useful if you want to:
 - Run a beta program without building a custom solution
@@ -17,9 +17,9 @@ Features are powered by feature flags. Flags are automatically created when a fe
 
 ![Create feature flags](../../images/features/feature-flags/create-feature-release.png)
 
-Once create, you can opt users in or out manually on the feature detail screen by searching for them in PostHog. You can also implement a public opt-in flow which we detail below.
+Once created, you can opt users in or out manually on the feature detail screen by searching for them in PostHog. You can also implement a public opt-in flow which we detail below.
 
-> **Important:** Early access feature opt-in is an *overriding condition*. This means that a user opt-in or opt-out overrides any existing release condition on the feature flag. Only when a user has not explicitly selected to opt-in or opt-out will the release conditions on the feature flag be used to determine feature flag availability.
+> **Important:** Early access feature opt-in is an *overriding condition*. This means that a user opt-in or opt-out overrides any existing release condition on the feature flag. Only when a user has not explicitly selected to opt in or out will the release conditions on the feature flag be used to determine feature flag availability.
 
 ## Creating a public opt-in
 
@@ -27,7 +27,7 @@ Once create, you can opt users in or out manually on the feature detail screen b
 
 ### Option 1: Site app
 
-We've prebuilt a site app that adds an user early access feature modal to your site. To use it:
+We've prebuilt a site app that adds a user early access feature modal to your site. To use it:
 
 1. Ensure you set `opt_in_site_apps: true` in your PostHog initialization configuration.
 
@@ -35,19 +35,19 @@ We've prebuilt a site app that adds an user early access feature modal to your s
 
 3. Enable it by clicking the blue gear, setting a `data-attr` selector (or enabling "Show features button on the page"), enabling the toggle and pressing save.
 
-4. If you did set a `data-attr` selector, adding a component with that selector into your app. For example, if you set your selector to `#beta-button`, you need to add an element like `<button id="beta-button">Public Betas</button>`.
+4. If you did set a `data-attr` selector, add a component with that selector into your app. For example, if you set your selector to `#beta-button`, you need to add an element like `<button id="beta-button">Public Betas</button>`.
 
-Once set up, early access features appear on this panel for users to opt-in or opt-out of.
+Once set up, early access features appear on this panel for users to opt in or out of.
 
 ![Create feature flags](../../images/features/feature-flags/early-access-feature-demo.png)
 
 ### Option 2: Custom implementation
 
-You can fully customize you early access management experience using `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` from PostHog's [JavaScript Web library](/docs/libraries/js#early-access-feature-management).
+You can fully customize your early access management experience using `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` from PostHog's [JavaScript Web library](/docs/libraries/js#early-access-feature-management).
 
-- `getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, and documentation link. You can use this to build your own UI for users to opt-in or opt-out of features.
+- `getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, and documentation link. You can use this to build a UI for users to opt in or out of features.
 
-- `updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt-in or opt-out of the feature. This updates the user's opt-in status for the feature.
+- `updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature. This updates the user's opt-in status for the feature.
 
 Other useful functions for custom implementations are `isFeatureEnabled()` and `useActiveFeatureFlags()` (React only). These help you separate early access features users have opted into from those they have not.
 
