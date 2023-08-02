@@ -8,6 +8,7 @@ import { Caption } from './components/Caption'
 import { Images } from './components/Careers/Images'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
+import { lib } from './components/Edition/lib'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
@@ -37,6 +38,7 @@ export const shortcodes = {
     Images,
     CompensationCalculator,
     ContentViewer,
+    lib,
     FeatureAvailability,
     GDPRForm,
     HiddenSection,

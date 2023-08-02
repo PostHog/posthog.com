@@ -1,12 +1,12 @@
+import ClientPost from 'components/Edition/ClientPost'
+import { Skeleton } from 'components/Questions/QuestionsTable'
 import qs from 'qs'
 import React, { useEffect, useState } from 'react'
-import { Skeleton } from 'components/Questions/QuestionsTable'
-import ClientPost from 'components/Edition/ClientPost'
 
-export default function RoadmapItem({ params }) {
+export default function Post({ params }) {
     const [post, setPost] = useState(null)
     useEffect(() => {
-        const slug = `/changelog/${params.year}/${params.slug}`
+        const slug = `/posts/${params.slug}`
         const query = qs.stringify(
             {
                 filters: {

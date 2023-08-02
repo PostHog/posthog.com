@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import isToday from 'dayjs/plugin/isToday'
 import Link from 'components/Link'
-import { Check, Heart, RightArrow } from 'components/Icons'
-import { Menu } from '@headlessui/react'
-import { ChevronDown } from '@posthog/icons'
+import { Heart, RightArrow } from 'components/Icons'
 import { useInView } from 'react-intersection-observer'
 import { Skeleton } from 'components/Questions/QuestionsTable'
 import { usePosts } from './hooks/usePosts'
@@ -21,10 +20,11 @@ import { QuestionData, StrapiResult } from 'lib/strapi'
 import { useLocation } from '@reach/router'
 import { communityMenu } from '../../navs'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { MenuContainer } from 'components/PostLayout/MobileNav'
-import { AnimatePresence } from 'framer-motion'
 import { navigate } from 'gatsby'
+import NewPost from './NewPost'
+import Categories from './Categories'
 dayjs.extend(relativeTime)
+dayjs.extend(isToday)
 
 const LikeButton = ({ liked, handleClick, className = '' }) => {
     const { user } = useUser()
@@ -68,6 +68,7 @@ const Post = ({
     const category = post_category?.data?.attributes?.label
     const active = pathname === slug
     const breakpoints = useBreakpoint()
+    const day = dayjs(date || publishedAt)
 
     const { ref, inView } = useInView({
         threshold: 0,
@@ -155,7 +156,7 @@ const Post = ({
                                     </li>
                                 )}
                                 <li className="text-sm font-medium pl-2 leading-none border-l border-light dark:border-dark flex-shrink-0">
-                                    <span className="opacity-60">{dayjs(date || publishedAt).fromNow()}</span>
+                                    <span className="opacity-60">{day.isToday() ? 'Today' : day.fromNow()}</span>
                                 </li>
                             </ul>
                         </div>
@@ -166,104 +167,10 @@ const Post = ({
     )
 }
 
-const Categories = ({ setSelectedCategories, selectedCategories, setParams, root }) => {
-    const containerEl = useRef(null)
-    const [categories, setCategories] = useState([])
-    const [open, setOpen] = useState(false)
-
-    useEffect(() => {
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories`)
-            .then((res) => res.json())
-            .then((data) => {
-                const categories = data?.data
-                const selectedCategory = categories.find((category) => category.attributes?.folder === root)
-                if (selectedCategory) {
-                    setSelectedCategories([selectedCategory])
-                }
-                setCategories(categories)
-            })
-    }, [])
-
-    const handleClick = (newCategory) => {
-        const newCategories = selectedCategories.some((selectedCategory) => selectedCategory.id === newCategory.id)
-            ? selectedCategories.filter((selectedCategory) => selectedCategory.id !== newCategory.id)
-            : [...selectedCategories, newCategory]
-        setSelectedCategories(newCategories)
-        setParams({
-            filters: {
-                post_category: {
-                    id: {
-                        $in: newCategories.map((category) => category.id),
-                    },
-                },
-            },
-        })
-    }
-
-    useEffect(() => {
-        function handleClick(e) {
-            if (containerEl?.current && !containerEl?.current.contains(e.target)) {
-                setOpen(false)
-            }
-        }
-        document.addEventListener('mousedown', handleClick)
-        return () => {
-            document.removeEventListener('mousedown', handleClick)
-        }
-    }, [containerEl])
-
-    return categories?.length > 0 ? (
-        <div ref={containerEl} className="relative z-10">
-            <Menu>
-                <Menu.Button
-                    onClick={() => setOpen(!open)}
-                    className={`text-left text-sm flex space-x-2 justify-between items-end relative px-4 py-1 rounded border border-b-3 hover:border-light dark:hover:border-dark bg-accent dark:bg-accent-dark border-light dark:border-dark hover:top-[0px] hover:scale-[1]`}
-                >
-                    <span>Filters</span>
-                    <ChevronDown className="w-5 mb-[-1px]" />
-                </Menu.Button>
-                {open && (
-                    <Menu.Items
-                        static
-                        className="absolute grid gap-y-2 right-0 bg-accent dark:bg-accent-dark p-2 border border-border dark:border-dark rounded mt-1"
-                    >
-                        {categories.map((category) => {
-                            const active = selectedCategories.some(
-                                (selectedCategory) => selectedCategory.id === category.id
-                            )
-                            return (
-                                <Menu.Item key={category.id}>
-                                    <button
-                                        onClick={() => handleClick(category)}
-                                        className="text-left whitespace-nowrap flex items-center space-x-2"
-                                    >
-                                        <span
-                                            className={`w-4 h-4 rounded-sm border text-white ${
-                                                active ? 'bg-red border-red' : 'border-border dark:border-dark'
-                                            }`}
-                                        >
-                                            {active && <Check />}
-                                        </span>
-                                        <span className="text-sm">{category?.attributes?.label}</span>
-                                    </button>
-                                </Menu.Item>
-                            )
-                        })}
-                    </Menu.Items>
-                )}
-            </Menu>
-        </div>
-    ) : null
-}
-
 const getCategoryParams = (root) => (root !== 'posts' ? { filters: { post_category: { folder: { $eq: root } } } } : {})
 
-function PostsListing({ articleView }) {
-    const { pathname } = useLocation()
-    const root = pathname.split('/')[1]
-    const [params, setParams] = useState(getCategoryParams(root))
+function PostsListing({ articleView, posts, isLoading, fetchMore, setParams, root }) {
     const [selectedCategories, setSelectedCategories] = useState([])
-    const { posts, isLoading, fetchMore } = usePosts({ params })
     const breakpoints = useBreakpoint()
 
     return articleView && breakpoints.md ? null : (
@@ -381,12 +288,21 @@ export const Sidebar = () => {
 }
 
 export default function Posts({ children, articleView }) {
-    const { user, logout } = useUser()
+    const { user, logout, isModerator } = useUser()
     const didMount = useRef(false)
     const name = [user?.profile.firstName, user?.profile.lastName].filter(Boolean).join(' ')
     const [loginModalOpen, setLoginModalOpen] = useState(false)
     const { pathname } = useLocation()
     const [prev, setPrev] = useState<string | null>(null)
+    const [newPostModalOpen, setNewPostModalOpen] = useState(false)
+    const root = pathname.split('/')[1]
+    const [params, setParams] = useState(getCategoryParams(root))
+    const { posts, isLoading, fetchMore, mutate } = usePosts({ params })
+
+    const handleNewPostSubmit = () => {
+        setNewPostModalOpen(false)
+        mutate()
+    }
 
     useEffect(() => {
         if (didMount.current) {
@@ -405,6 +321,9 @@ export default function Posts({ children, articleView }) {
                     </div>
                 </div>
             </Modal>
+            <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
+                <NewPost onSubmit={handleNewPostSubmit} />
+            </Modal>
             <div className="px-4 md:px-5 md:mt-8 mb-12 max-w-screen-2xl mx-auto">
                 <section>
                     <div className="py-4 md:py-2 border-b md:border-t border-border dark:border-dark text-center md:flex justify-between items-center sticky top-[-1px]">
@@ -422,6 +341,14 @@ export default function Posts({ children, articleView }) {
                                             {name}
                                         </Link>
                                     </p>
+                                    {isModerator && (
+                                        <button
+                                            className="pr-2 mr-2 border-r border-border dark:border-dark text-yellow font-semibold"
+                                            onClick={() => setNewPostModalOpen(!newPostModalOpen)}
+                                        >
+                                            New post
+                                        </button>
+                                    )}
                                     <button className="text-yellow font-semibold" onClick={() => logout()}>
                                         Logout
                                     </button>
@@ -435,7 +362,14 @@ export default function Posts({ children, articleView }) {
                     </div>
                 </section>
                 <section className="lg:flex lg:space-x-12 my-4 md:my-8 items-start">
-                    <PostsListing articleView={articleView} />
+                    <PostsListing
+                        root={root}
+                        setParams={setParams}
+                        fetchMore={fetchMore}
+                        posts={posts}
+                        isLoading={isLoading}
+                        articleView={articleView}
+                    />
                     <div
                         className={`${articleView ? 'flex-grow' : 'sticky top-[108px] w-[30rem] flex-shrink-0 block'}`}
                     >

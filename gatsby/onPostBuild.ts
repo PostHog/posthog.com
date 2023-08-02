@@ -114,7 +114,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
         )
     )
     await Promise.all(
-        roadmaps.map(({ title, date: roadmapDate, media, description }) => {
+        roadmaps.map(({ title, date: roadmapDate, media, description, cta }) => {
             const slug = slugify(title, { lower: true })
             const date = dayjs(roadmapDate)
             const year = date.format('YYYY')
@@ -130,6 +130,10 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                     url: media?.data?.attributes?.url,
                 },
                 body: description,
+                CTA: {
+                    label: cta?.label,
+                    url: cta?.url,
+                },
                 ...(category
                     ? {
                           post_category: {
@@ -152,6 +156,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     title
                     description
                     date
+                    cta {
+                        url
+                        label
+                    }
                     media {
                         data {
                             attributes {

@@ -22,7 +22,7 @@ export const wrapPageElement = ({ element, props }) => {
         <UserProvider>
             {wrapElement({
                 element: /^blog\/|^tutorials\/|^customers\/|^spotlight\/|^posts|^changelog\/(.*?)\//.test(slug) ? (
-                    <Posts {...props} articleView={!/^posts/.test(slug)}>
+                    <Posts {...props} articleView={!/^posts$/.test(slug)}>
                         {element}
                     </Posts>
                 ) : props.custom404 || !props.data ? (

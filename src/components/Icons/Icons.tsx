@@ -62,9 +62,15 @@ export const Plus = (props: any): JSX.Element => {
     )
 }
 
-export const Minus = (): JSX.Element => {
+export const Minus = ({ className = '', ...other }): JSX.Element => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={`h-5 w-5 ${className}`}
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            {...other}
+        >
             <path fillRule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clipRule="evenodd" />
         </svg>
     )
