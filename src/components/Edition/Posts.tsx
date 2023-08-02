@@ -99,6 +99,8 @@ const Post = ({
         setLiked(user?.profile?.postLikes?.some((post) => post.id === id))
     }, [user])
 
+    const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
+
     return (
         <li ref={containerRef} className="snap-start last:pb-24">
             <span className="flex items-center" ref={fetchMore ? ref : null}>
@@ -121,10 +123,10 @@ const Post = ({
                         }`}
                     >
                         <div className="sm:w-[150px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden md:self-start self-center relative z-10">
-                            {featuredImage?.url?.endsWith('.mp4') ? (
-                                <video className="object-cover w-full h-full" src={featuredImage?.url} />
+                            {imageURL?.endsWith('.mp4') ? (
+                                <video className="object-cover w-full h-full" src={imageURL} />
                             ) : (
-                                <img className="object-cover w-full h-full" src={featuredImage?.url || '/banner.png'} />
+                                <img className="object-cover w-full h-full" src={imageURL || '/banner.png'} />
                             )}
                         </div>
                         <div>

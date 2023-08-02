@@ -5,7 +5,7 @@ import qs from 'qs'
 const query = (params: any, offset: number) => {
     return qs.stringify(
         {
-            populate: '*',
+            populate: ['featuredImage.image', 'post_category', 'authors', 'likes'],
             sort: 'date:desc',
             pagination: {
                 start: offset * 20,

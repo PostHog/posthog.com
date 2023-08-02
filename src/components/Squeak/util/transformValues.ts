@@ -1,14 +1,14 @@
-import { useUser } from 'hooks/useUser'
 import uploadImage from './uploadImage'
 
-export default async function transformValues(values: {
-    images: { fakeImagePath: string; file: File; objectURL: string }[]
-    body: string
-}) {
+export default async function transformValues(
+    values: {
+        images: { fakeImagePath: string; file: File; objectURL: string }[]
+        body: string
+    },
+    profileID: number,
+    jwt: string | null
+) {
     if (values.images.length <= 0) return values
-    const { user, getJwt } = useUser()
-    const jwt = await getJwt()
-    const profileID = user?.profile?.id
     if (!jwt || !profileID) return values
     let transformedBody = values.body
     for (const image of values.images) {

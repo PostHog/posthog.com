@@ -20,16 +20,17 @@ export default function ClientPost({
     CTA?: { url: string; label: string }
     publishedAt: string
 }) {
+    const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
     return (
         <>
             <SEO title={title + ' - PostHog'} />
-            {featuredImage?.url && (
+            {imageURL && (
                 <div className="max-w-lg">
                     <ZoomImage>
-                        {featuredImage?.url?.endsWith('.mp4') ? (
-                            <video className="w-full rounded-md" autoPlay src={featuredImage?.url} />
+                        {imageURL?.endsWith('.mp4') ? (
+                            <video className="w-full rounded-md" autoPlay src={imageURL} />
                         ) : (
-                            <img className="w-full rounded-md" src={featuredImage?.url} />
+                            <img className="w-full rounded-md" src={imageURL} />
                         )}
                     </ZoomImage>
                 </div>
