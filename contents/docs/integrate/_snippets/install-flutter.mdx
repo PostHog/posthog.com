@@ -1,10 +1,14 @@
-Setup your Android, iOS, and/or web sources as described at PostHog.com and generate your API keys.
+> **Warning:** This is a <b>community maintained</b> library. It is not officially supported by PostHog.
+
+PostHog is available for install via [Pub](https://pub.dev/packages/posthog_flutter).
+
+### Configuration
 
 Set your PostHog API key and change the automatic event tracking (only for Android and iOS) on if you wish the library to take care of it for you.
 
 Remember that the application lifecycle events won't have any special context set for you by the time it is initialized. If you are using a self-hosted instance of PostHog you will need to have the public hostname or IP for your instance as well.
 
-### Android
+#### Android
 
 ```xml file=AndroidManifest.xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.posthog.posthog_flutter_example">
@@ -20,7 +24,7 @@ Remember that the application lifecycle events won't have any special context se
 </manifest>
 ```
 
-### iOS
+#### iOS
 
 ```xml file=Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -40,7 +44,7 @@ Remember that the application lifecycle events won't have any special context se
 </plist>
 ```
 
-### Web
+#### Web
 
 ```html
 <!DOCTYPE html>

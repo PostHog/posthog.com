@@ -16,31 +16,13 @@ features:
     groupAnalytics: true
 ---
 
-> This library was built by the community and is not maintained by the PostHog core team.
-
 This library provides an Elixir HTTP client for PostHog. [See the repository](https://github.com/whitepaperclip/posthog) for more information.
 
 ## Installation
 
-The package can be installed by adding `posthog` to your list of dependencies in `mix.exs`:
+import ElixirInstall from '../../integrate/_snippets/install-elixir.mdx'
 
-```elixir
-def deps do
-  [
-    {:posthog, "~> 0.1"}
-  ]
-end
-```
-
-## Configuration
-
-```elixir
-config :posthog,
-  api_url: "<ph_instance_address>",
-  api_key: "<ph_project_api_key>"
-```
-
-Optionally, you can pass in a `:json_library` key. The default JSON parser is Jason.
+<ElixirInstall />
 
 ## Usage
 

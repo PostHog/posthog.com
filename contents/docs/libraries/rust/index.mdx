@@ -11,26 +11,11 @@ features:
     groupAnalytics: true
 ---
 
-> **Warning:** This is a community maintained crate, and is still under development. It is not officially supported by PostHog.
-
 ## Installation
 
-Install the `posthog-rs` crate by adding it to your `Cargo.toml`.
+import RustInstall from '../../integrate/_snippets/install-rust.mdx'
 
-```toml file=Cargo.toml
-[dependencies]
-posthog-rs = "0.2.0"
-```
-
-## Usage
-
-To setup the client, all you need to do is pass your PostHog project key.
-
-```rust
-let client = posthog_rs::client(env!("POSTHOG_API_KEY"));
-```
-
-> **Note:** Currently, there is no way to customize the host that events are sent to, and we default to `app.posthog.com`
+<RustInstall />
 
 ### Capturing events
 
