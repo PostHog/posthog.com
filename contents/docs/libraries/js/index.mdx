@@ -1,6 +1,6 @@
 ---
-title: JavaScript (Web)
-sidebarTitle: JavaScript (Web)
+title: JavaScript Web
+sidebarTitle: JavaScript Web
 sidebar: Docs
 showTitle: true
 github: https://github.com/PostHog/posthog-js
@@ -22,17 +22,6 @@ import JSInstall from '../../integrate/_snippets/install-web.mdx'
 
 <JSInstall />
 
-## Usage
-
-### Autocapture
-
-When you call `posthog.init` the PostHog JS library begins automatically capturing user events:
-
-- **pageviews**, including the URL
-- **autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
-
-Autocapture tracks a significant amount of user behavior without needing to instrument event capture. You can learn more about autocapture and how to configure it in our [autocapture docs](/docs/data/autocapture).
-
 ### Track across marketing website &amp; app
 
 We recommend putting PostHog both on your homepage and your application if applicable. That means you'll be able to follow a user from the moment they come onto your website, all the way through signup and actually using your product.
@@ -41,13 +30,15 @@ We recommend putting PostHog both on your homepage and your application if appli
 
 ### Permitted domains
 
-You can also configure "permitted domains" in your 'Project Settings'. These are domains where you'll be able to record user sessions and use the PostHog toolbar.
+You can also configure "permitted domains" in your [Project Settings](https://app.posthog.com/project/settings). These are domains where you'll be able to record user sessions and use the PostHog toolbar.
 
-### Send custom events with `posthog.capture`
+## Usage
 
-import JSCapture from './\_snippets/capture.mdx'
+### Sending events
 
-<JSCapture />
+import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web.mdx'
+
+<WebSendEvents />
 
 ### Setting user properties
 
@@ -108,18 +99,6 @@ If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
 ```js-web
 posthog.reset(true)
 ```
-
-### One-page apps and page views
-
-This JS snippet automatically sends `pageview` events whenever it gets loaded. If you have a one-page app, that means it'll only send a pageview once, when your app loads.
-
-To make sure any navigating a user does within your app gets captured, you can make a pageview call manually.
-
-```js-web
-posthog.capture('$pageview')
-```
-
-This will automatically send the current URL.
 
 ### Super Properties
 

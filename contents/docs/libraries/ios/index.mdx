@@ -16,7 +16,7 @@ features:
 
 import IOSInstall from '../../integrate/_snippets/install-ios.mdx'
 import IOSIdentify from './\_snippets/identify.mdx'
-import IOSCapture from './\_snippets/capture.mdx'
+import IOSSendEvents from '../../integrate/send-events/_snippets/send-events-ios.mdx'
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
@@ -24,17 +24,15 @@ This library uses an internal queue to make calls fast and non-blocking. It also
 
 <IOSInstall />
 
-## Making calls
+## Sending events
+
+<IOSSendEvents />
 
 ### Identify
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
 <IOSIdentify />
-
-### Capture
-
-<IOSCapture />
 
 #### Setting user properties via an event
 
@@ -103,20 +101,6 @@ To reset the user's ID and anonymous ID, call `reset`. Usually you would do this
 
 ```swift
 posthog.reset()
-```
-
-### Sending screen views
-
-With `configuration.recordScreenViews` set as `YES`, PostHog will try to record all screen changes automatically.
-
-If you want to manually send a new screen capture event, use the `screen` function.
-
-```objectivec
-[[PHGPostHog sharedPostHog] screen:@"Dashboard" properties:@{ @"fromIcon": @"bottom" }];
-```
-
-```swift
-posthog.screen("Dashboard", properties: ["fromIcon": "bottom"])
 ```
 
 ### Group analytics

@@ -17,24 +17,22 @@ features:
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
 import AndroidInstall from '../../integrate/_snippets/install-android.mdx'
+import AndroidSendEvents from '../../integrate/send-events/_snippets/send-events-ios.mdx'
 import AndroidIdentify from './\_snippets/identify.mdx'
-import AndroidCapture from './\_snippets/capture.mdx'
 
 ## Installation
 
 <AndroidInstall />
 
-## Making calls
+## Sending events
+
+<AndroidSendEvents />
 
 ### Identify
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
 <AndroidIdentify />
-
-### Capture
-
-<AndroidCapture />
 
 #### Setting user properties via an event
 
@@ -110,21 +108,6 @@ To reset the user's ID and anonymous ID, call `reset`. Usually you would do this
 ```java
 PostHog.with(this)
        .reset();
-```
-
-### Sending screen views
-
-With `recordScreenViews()`, PostHog will try to record all screen changes automatically.
-
-If you want to manually send a new screen capture event, use the `screen` function.
-
-This function requires a `name`. You may also pass in an optional `properties` object.
-
-```java
-PostHog.with(this)
-       .screen("Dashboard", new Properties()
-                                  .putValue("background", "blue")
-                                  .putValue("hero", "superhog"));
 ```
 
 ### Feature Flags

@@ -26,30 +26,11 @@ import PHPInstall from '../../integrate/_snippets/install-php.mdx'
 
 ## Making calls
 
-### Capture
+### Sending events
 
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
+import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php.mdx'
 
-A `capture` call requires:
- - `distinct id` which uniquely identifies your user
- - `event name` to specify the event
-  * We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
-
-Optionally you can submit:
-- `properties`, which is an array with any information you'd like to add
-
-For example:
-
-```php
-PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
-  'properties' => array(
-    'movieId' => '123',
-    'category' => 'romcom'
-  )
-));
-```
+<PHPSendEvents />
 
 ### Setting user properties
 
@@ -77,19 +58,6 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
-### Sending page views
-
-If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
-
-```php
-PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => '$pageview',
-  'properties' => array(
-    '$current_url' => 'https://example.com'
-  )
-));
-```
 
 ### Feature flags
 

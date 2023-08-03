@@ -17,22 +17,9 @@ import RustInstall from '../../integrate/_snippets/install-rust.mdx'
 
 <RustInstall />
 
-### Capturing events
+### Sending events
 
-Currently, the only functionality this library supports is sending events, which can be done using the `capture` and `capture_batch` methods. User properties and groups can both be set as props on events.
+import RustSendEvents from '../../integrate/send-events/_snippets/send-events-rust.mdx'
 
-```rust
-let mut event = Event::new("<event_name>", "<distinct_id>");
+<RustSendEvents />
 
-event.insert_prop("key1", "value1").unwrap();
-event.insert_prop("key2", vec!["a", "b"]).unwrap();
-
-client.capture(event).unwrap();
-```
-
-```rust
-let event1 = posthog_rs::Event::new("event 1", "1234");
-let event2 = posthog_rs::Event::new("event 2", "1234");
-
-client.capture_batch(vec![event1, event2]).unwrap();
-```
