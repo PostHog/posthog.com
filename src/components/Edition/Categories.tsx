@@ -2,6 +2,23 @@ import { Menu } from '@headlessui/react'
 import { Check, ChevronDown } from '@posthog/icons'
 import React, { useEffect, useRef, useState } from 'react'
 import { fetchCategories } from './lib'
+import qs from 'qs'
+
+const query = qs.stringify(
+    {
+        filters: {
+            posts: {
+                id: {
+                    $notNull: true,
+                },
+            },
+        },
+        populate: '*',
+    },
+    {
+        encodeValuesOnly: true,
+    }
+)
 
 export default function Categories({ setSelectedCategories, selectedCategories, setParams, root }) {
     const containerEl = useRef(null)
@@ -9,7 +26,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
-        fetchCategories().then((categories) => {
+        fetchCategories(query).then((categories) => {
             const selectedCategory = categories.find((category) => category.attributes?.folder === root)
             if (selectedCategory) {
                 setSelectedCategories([selectedCategory])
