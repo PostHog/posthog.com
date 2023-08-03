@@ -44,7 +44,11 @@ export default function ClientPost({
             <div className="my-2 article-content">
                 <Markdown>{body}</Markdown>
             </div>
-            {CTA?.label && CTA?.url && <CallToAction to={CTA.url}>{CTA.label}</CallToAction>}
+            {CTA?.label && CTA?.url && (
+                <CallToAction size="md" type="outline" to={CTA.url}>
+                    {CTA.label}
+                </CallToAction>
+            )}
         </>
     )
 }

@@ -208,6 +208,9 @@ type QuestionFormProps = {
     topicID?: number
     archived?: boolean
     showTopicSelector?: boolean
+    parentName?: string
+    buttonText?: React.ReactNode | string
+    subject?: boolean
 }
 
 export const QuestionForm = ({
@@ -219,6 +222,8 @@ export const QuestionForm = ({
     onSubmit,
     archived,
     showTopicSelector,
+    parentName,
+    subject,
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
@@ -226,17 +231,16 @@ export const QuestionForm = ({
     const [view, setView] = useState<string | null>(initialView || null)
     const [loading, setLoading] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const { breadcrumb } = usePost()
-    const parentName = breadcrumb && breadcrumb?.length > 0 && breadcrumb[1]?.name
 
     const buttonText =
-        formType === 'question' ? (
+        other.buttonText ??
+        (formType === 'question' ? (
             <span className="font-bold">Ask a question</span>
         ) : (
-            <span className="squeak-reply-label ">
+            <span className="squeak-reply-label">
                 <strong className="underline">Reply</strong> to question
             </span>
-        )
+        ))
 
     const createQuestion = async ({ subject, body, topic }: QuestionFormValues) => {
         const token = await getJwt()
@@ -354,13 +358,17 @@ export const QuestionForm = ({
         }
     }, [archived])
 
+    useEffect(() => {
+        setView(null)
+    }, [slug])
+
     return (
         <div>
             {view ? (
                 {
                     'question-form': (
                         <QuestionFormMain
-                            subject={formType === 'question'}
+                            subject={subject ?? formType === 'question'}
                             initialValues={formValues}
                             loading={loading}
                             onSubmit={handleMessageSubmit}

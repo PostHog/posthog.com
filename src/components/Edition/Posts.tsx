@@ -23,6 +23,7 @@ import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { navigate } from 'gatsby'
 import NewPost from './NewPost'
 import Categories from './Categories'
+import { Questions as QuestionForm } from 'components/Squeak'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -387,6 +388,9 @@ export default function Posts({ children, articleView }) {
                             </button>
                         )}
                         <div>{children}</div>
+                        <div className="mt-12 max-w-lg">
+                            <QuestionForm subject={false} buttonText="Leave a comment" slug={pathname} />
+                        </div>
                     </div>
                 </section>
             </div>
