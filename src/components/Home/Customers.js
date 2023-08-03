@@ -1,7 +1,5 @@
-import { StaticImage } from 'gatsby-plugin-image'
-import React, { useRef } from 'react'
+import React from 'react'
 import { useInView } from 'react-intersection-observer'
-import { heading, section } from './classes'
 import airbus from './images/airbus.svg'
 import airbusDark from './images/airbus_dark.svg'
 import clickhouse from './images/clickhouse.svg'
@@ -19,19 +17,19 @@ import outbrain from './images/outbrain.svg'
 import outbrainDark from './images/outbrain_dark.svg'
 import phantom from './images/phantom.svg'
 import phantomDark from './images/phantom_dark.svg'
-import linear from './images/linear.svg'
-import linearDark from './images/linear_dark.svg'
 import staples from './images/staples.svg'
 import staplesDark from './images/staples_dark.svg'
 import dhl from './images/dhl.svg'
 import dhlDark from './images/dhl_dark.svg'
 import yCombinator from './images/y-combinator.svg'
 import yCombinatorDark from './images/y-combinator_dark.svg'
-import { motion } from 'framer-motion'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import Tooltip from 'components/Tooltip'
 
-const Customer = ({ image, imageDark, width, height, className = '' }) => {
+const Logo = ({ src, className = '' }) => <img className={`icon px-4 md:px-6 lg:px-4 ${className}`} src={src} />
+
+const Customer = ({ image, imageDark, className = '', tooltipContent }) => {
     const { websiteTheme } = useValues(layoutLogic)
     const logo = websiteTheme === 'dark' ? imageDark || image : imageDark
     return (
@@ -40,14 +38,21 @@ const Customer = ({ image, imageDark, width, height, className = '' }) => {
             w-full 
             h-24
             py-6 
-
             lg:px-2
             lg:h-40
             bg-accent-dark
             rounded
         "
         >
-            <img className={`icon px-4 md:px-6 lg:px-4 ${className}`} width={width} height={height} src={logo} />
+            {tooltipContent ? (
+                <Tooltip content={tooltipContent}>
+                    <span className="relative">
+                        <Logo className={className} src={logo} />
+                    </span>
+                </Tooltip>
+            ) : (
+                <Logo className={className} src={logo} />
+            )}
         </li>
     )
 }
@@ -72,16 +77,14 @@ export default function Customers() {
                         <Customer className="max-h-[36px]" image={staples} imageDark={staplesDark} />
                         <Customer className="max-h-[36px]" image={airbus} imageDark={airbusDark} />
                         <Customer className="max-h-[35px]" image={dhl} imageDark={dhlDark} />
-
                         <Customer className="max-h-[50px]" image={landmark} imageDark={landmarkDark} />
                         <Customer className="max-h-[40px]" image={outbrain} imageDark={outbrainDark} />
                         <Customer className="max-h-[35px]" image={clickhouse} imageDark={clickhouseDark} />
                         <Customer className="max-h-[51px]" image={hasura} imageDark={hasuraDark} />
-
                         <Customer className="max-h-[46px]" image={phantom} imageDark={phantomDark} />
-                        <Customer className="max-h-[45px]" image={linear} imageDark={linearDark} />
                         <Customer className="max-h-[50px]" image={joybird} imageDark={joybirdDark} />
                         <Customer className="max-h-[50px]" image={assemblyai} imageDark={assemblyaiDark} />
+                        <Customer tooltipContent="We use us too" imageDark={'/brand/posthog-logo-white.svg'} />
                     </ul>
                 )}
             </div>
