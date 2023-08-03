@@ -52,7 +52,7 @@ const plans = {
 const faqs = [
     {
         q: 'How do I know what my volume is?',
-        a: 'The easiest way is to sign up for the Free plan. If you go over your usage limit but have not set up billing, it will lock you out but it will count the event volumes. This allows you to get a sense of what your volume is.',
+        a: "The easiest way is to sign up for the Free plan. You'll get an accurate volume projection after just a few days.",
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog.png" />,
@@ -73,19 +73,6 @@ const faqs = [
             a: {
                 image: <StaticImage alt="" width={25} src="./images/team-3.png" />,
                 name: 'Simon Fisher',
-            },
-        },
-    },
-    {
-        q: 'Do feature flags and experiments impact costs?',
-        a: 'While you do need to be on a paid plan to get access, Feature flags and Experiments do not currently incur any extra costs. This may change in the future.',
-        author: {
-            q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-4.png" />,
-            },
-            a: {
-                image: <StaticImage alt="" width={25} src="./images/team-4.png" />,
-                name: 'Rick Marron',
             },
         },
     },
@@ -130,7 +117,7 @@ const faqs = [
     },
     {
         q: 'Is there a free trial on paid plans?',
-        a: 'No - instead we offer a contract with no minimum length. In PostHog Scale and PostHog Cloud, the first 1 million events are free, every month.',
+        a: 'We have a generous free tier on every paid plan so you can try out the features before paying any money (though you will need to enter your credit card info). If you have additional needs, such as enterprise features, please get in touch.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-8.png" />,
@@ -169,7 +156,7 @@ const faqs = [
     },
     {
         q: 'Are there any minimums or annual commitments?',
-        a: 'Nope. We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of PostHog Enterprise.',
+        a: 'Nope. We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of an enterprise agreement.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-11.png" />,

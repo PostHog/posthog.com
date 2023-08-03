@@ -37,6 +37,7 @@ type QuestionFormMainProps = {
     initialValues?: Partial<QuestionFormValues> | null
     formType?: 'question' | 'reply'
     showTopicSelector?: boolean
+    disclaimer?: boolean
 }
 
 const Select = ({
@@ -113,6 +114,7 @@ function QuestionFormMain({
     loading,
     initialValues,
     showTopicSelector,
+    disclaimer = true,
 }: QuestionFormMainProps) {
     const { user, logout } = useUser()
 
@@ -186,10 +188,12 @@ function QuestionFormMain({
                                 </Button>
                             </span>
 
-                            <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0">
-                                If you need to share personal info relating to a bug or issue with your account, we
-                                suggest filing a support ticket in the app.
-                            </p>
+                            {disclaimer && (
+                                <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0">
+                                    If you need to share personal info relating to a bug or issue with your account, we
+                                    suggest filing a support ticket in the app.
+                                </p>
+                            )}
                         </Form>
                     )
                 }}
@@ -208,6 +212,7 @@ type QuestionFormProps = {
     topicID?: number
     archived?: boolean
     showTopicSelector?: boolean
+    disclaimer?: boolean
 }
 
 export const QuestionForm = ({
@@ -219,6 +224,7 @@ export const QuestionForm = ({
     onSubmit,
     archived,
     showTopicSelector,
+    disclaimer,
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
@@ -360,6 +366,7 @@ export const QuestionForm = ({
                 {
                     'question-form': (
                         <QuestionFormMain
+                            disclaimer={disclaimer}
                             subject={formType === 'question'}
                             initialValues={formValues}
                             loading={loading}

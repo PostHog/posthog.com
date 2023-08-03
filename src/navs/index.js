@@ -1769,6 +1769,12 @@ export const docsMenu = {
                 },
                 */
                 {
+                    name: 'Installation',
+                    url: '/docs/product-analytics/installation',
+                    icon: 'Book',
+                    color: 'blue',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
@@ -1877,13 +1883,37 @@ export const docsMenu = {
                 },
                 */
                 {
-                    name: 'Product manual',
+                    name: 'Installation',
                     url: '/docs/session-replay/manual',
                     icon: 'Book',
                     color: 'blue',
                 },
                 {
+                    name: 'Watching recordings',
+                    url: '/docs/session-replay/how-to-watch-recordings',
+                    icon: 'App',
+                    color: 'orange',
+                },
+                {
+                    name: 'Controlling which sessions you record',
+                    url: '/docs/session-replay/how-to-control-which-sessions-you-record',
+                    icon: 'Toggle',
+                    color: 'red',
+                },
+                {
                     name: 'Features',
+                },
+                {
+                    name: 'Console log recording',
+                    url: '/docs/session-replay/console-log-recording',
+                    icon: 'Code',
+                    color: 'blue',
+                },
+                {
+                    name: 'Network performance',
+                    url: '/docs/session-replay/network-recording',
+                    icon: 'Dashboard',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Privacy controls',
@@ -1892,7 +1922,7 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Sharing and emedding',
+                    name: 'Sharing and embedding',
                     url: '/docs/session-replay/sharing',
                     icon: 'Share',
                     color: 'purple',
@@ -1997,6 +2027,15 @@ export const docsMenu = {
                     icon: 'Question',
                     color: 'seagreen',
                 },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Library comparison',
+                    url: '/docs/feature-flags/libraries',
+                    icon: 'Book',
+                    color: 'blue',
+                },
             ],
         },
         {
@@ -2023,10 +2062,28 @@ export const docsMenu = {
                 },
                 */
                 {
-                    name: 'Product manual',
+                    name: 'Installation',
                     url: '/docs/experiments/manual',
                     icon: 'Book',
                     color: 'blue',
+                },
+                {
+                    name: 'Creating an experiment',
+                    url: '/docs/experiments/creating-an-experiment',
+                    icon: 'Target',
+                    color: 'orange',
+                },
+                {
+                    name: 'Adding your code',
+                    url: '/docs/experiments/adding-experiment-code',
+                    icon: 'Code',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Testing and launching',
+                    url: '/docs/experiments/testing-and-launching',
+                    icon: 'Rocket',
+                    color: 'purple',
                 },
                 {
                     name: 'Features',
@@ -2046,8 +2103,8 @@ export const docsMenu = {
                 {
                     name: 'Experiments without flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
-                    icon: 'Code',
-                    color: 'salmon',
+                    icon: 'Flag',
+                    color: 'yellow',
                 },
                 {
                     name: 'Common questions about experiments',
@@ -2465,7 +2522,7 @@ export const pricingMenu = {
             name: 'A/B testing',
             icon: 'Flask',
             color: 'purple',
-            url: '/pricing?product=experiments',
+            url: '/pricing?product=ab-testing',
         },
     ],
 }

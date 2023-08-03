@@ -40,7 +40,7 @@ export default function Tooltip({
             {open &&
                 createPortal(
                     <div
-                        className="z-[10000]"
+                        className="z-[9999999999]"
                         role="tooltip"
                         ref={setPopperElement}
                         style={{ ...styles.popper, paddingTop: offset[1], paddingBottom: offset[1] }}

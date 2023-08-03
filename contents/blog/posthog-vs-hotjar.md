@@ -42,7 +42,7 @@ Hotjar focuses mainly on session replays, heatmaps, and user research. That mean
 
 PostHog integrates powerful features that aren’t available in Hotjar and which are designed for technical users, such as feature flags with JSON payloads, which enable you to trigger in-app messages, or other notifications. 
 
-We built PostHog to support technically-savvy product managers and engineers – especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). Anyone can use PostHog ([just ask our marketing team](blog/posthog-marketing)), but our primary goal is to give engineers the tools they need to ship impactful features at speed.
+We built PostHog to support technically-savvy product managers and engineers – especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). Anyone can use PostHog ([just ask our marketing team](/blog/posthog-marketing)), but our primary goal is to give engineers the tools they need to ship impactful features at speed.
 
 ### 3. PostHog is open source
 

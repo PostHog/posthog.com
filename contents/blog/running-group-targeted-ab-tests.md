@@ -83,7 +83,7 @@ This can also help you identify randomization risks. For example, let's say a B2
 
 ## How to set up group-targeted experiments in PostHog
 
-First, ensure you have [set up a group](docs/product-analytics/group-analytics#getting-started) in PostHog. Next, go to your PostHog dashboard and create a [new experiment](docs/experiments/manual#creating-an-experiment).
+First, ensure you have [set up a group](/docs/product-analytics/group-analytics#getting-started) in PostHog. Next, go to your PostHog dashboard and create a [new experiment](/docs/experiments/manual#creating-an-experiment).
 
 In the New Experiment screen, select the Participant type. By default, it will show `Persons` (i.e. a user-targeted experiment). Click on the drop-down and select your new group.
 

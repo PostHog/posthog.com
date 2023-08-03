@@ -8,6 +8,9 @@ import { useUser } from 'hooks/useUser'
 import getAvatarURL from '../util/getAvatar'
 import usePostHog from 'hooks/usePostHog'
 import { Avatar as DefaultAvatar } from 'components/Community/Sidebar'
+import Toggle from 'components/Toggle'
+import { Info } from '@posthog/icons'
+import Tooltip from 'components/Tooltip'
 
 const fields = {
     avatar: {
@@ -51,6 +54,30 @@ const fields = {
             />
         ),
         className: 'w-full',
+    },
+    amaEnabled: {
+        hideLabel: true,
+        component: ({ values, setFieldValue }) => {
+            return (
+                <div className="flex space-x-2 mb-6">
+                    <label className="flex space-x-1 items-center">
+                        <Tooltip
+                            tooltipClassName="max-w-[200px]"
+                            content="Allows community members to ask you questions directly on your profile page"
+                        >
+                            <span className="relative">
+                                <Info className="w-4 h-4" />
+                            </span>
+                        </Tooltip>
+                        <span>Ask me anything</span>
+                    </label>
+                    <Toggle
+                        checked={values.amaEnabled}
+                        onChange={() => setFieldValue('amaEnabled', !values.amaEnabled)}
+                    />
+                </div>
+            )
+        },
     },
 }
 
@@ -143,8 +170,20 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
     if (!user) return null
 
     // TODO: Need to grab these from `attributes`
-    const { firstName, lastName, website, github, linkedin, twitter, biography, id, location, country, pronouns } =
-        user?.profile || {}
+    const {
+        firstName,
+        lastName,
+        website,
+        github,
+        linkedin,
+        twitter,
+        biography,
+        id,
+        location,
+        country,
+        pronouns,
+        amaEnabled,
+    } = user?.profile || {}
 
     const avatar = getAvatarURL(user?.profile)
 
@@ -231,6 +270,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                 country,
                 pronouns,
                 biography,
+                amaEnabled,
             }}
             validationSchema={ValidationSchema}
             onSubmit={handleSubmit}
