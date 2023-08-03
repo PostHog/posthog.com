@@ -1,5 +1,8 @@
 import SettingProperties from "./setting-properties-text.mdx" 
 import NamingTip from "./naming-tip.mdx" 
+import Intro from "./intro.mdx" 
+
+<Intro />
 
 ```php
 PostHog::capture(array(
@@ -19,6 +22,20 @@ PostHog::capture(array(
   'properties' => array(
     'login_type' => 'email',
     'is_free_trial' => 'true'
+  )
+));
+```
+
+### Sending page views
+
+If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'user:123',
+  'event' => '$pageview',
+  'properties' => array(
+    '$current_url' => 'https://example.com'
   )
 ));
 ```

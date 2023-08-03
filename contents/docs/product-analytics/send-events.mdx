@@ -25,7 +25,7 @@ import RustSendEvent from '../integrate/send-events/_snippets/send-events-rust.m
 import FlutterSendEvent from '../integrate/send-events/_snippets/send-events-flutter.mdx'
 import ElixirSendEvent from '../integrate/send-events/_snippets/send-events-elixir.mdx'
 
-Once your PostHog instance is up and running, the next step is to start sending events. You can do this by using `capture`:
+Once your PostHog instance is up and running, the next step is to start sending events.
 
 <!-- prettier-ignore -->
 <Tab.Group tabs={[
@@ -109,84 +109,6 @@ Once your PostHog instance is up and running, the next step is to start sending 
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-We recommend starting with autocapture for your web app as it's the quickest way to get set up, gives you full coverage, and avoids manually adding custom events. On top you can add custom events to track the most important events.
-
-> **Tip**: Autocapture sends lots of events. We provide a generous free tier but as you scale you might switch to mainly using [custom events](#2-capture-custom-events-client) on the areas of the product that are more stable and [tune autocapture](/docs/libraries/js#tuning-autocapture) to your needs.
-
-## 1. Setup autocapture
-
-When you call `posthog.init`, the PostHog browser JS library begins automatically capturing user events:
-
-- **Page views**, including the URL
-- **Autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
-
-### Hiding certain elements
-
-PostHog puts significant effort into ensuring it doesn't capture sensitive data from your website.
-However, if there are specific elements you want to ensure aren't captured, you can add the `ph-no-capture` class name.
-
-```html
-<input class='ph-no-capture'><!-- Input with sensitive user info --></input>
-```
-
-> **Tip**: Including the `ph-no-capture` class will also exclude elements from being shown in session recordings.
-
-## 2. Capture custom events
-
-Setting up autocapture is a great way to get started, but typically when integrating tracking into your product, you'll want to send additional events for when specific things occur.
-
-On the client-side, we can use the `capture` method, with the first argument being the name of the event you want to track.
-
-<MultiLanguage selector="tabs">
-
-```js-web
-posthog.capture('User signed up')
-```
-
-</MultiLanguage>
-
-### Setting custom properties on an event
-
-Suppose you're building a SaaS app and want to track when a user purchases a plan. With autocapture, you'll already see `Clicked button with text 'Purchase'` events, but these won't have any information on which plan the user purchased!
-
-We include extra information on events by adding a second parameter in our capture call, which contains a map of custom property names and values.
-
-<MultiLanguage selector="tabs">
-
-```js-web
-posthog.capture('Plan purchased', {
-    price: 1599,
-    planId: 'XYZ12345',
-    frequency: 'monthly',
-    features: {
-        'SSO': true,
-        'Custom branding': true,
-        'Custom domains': false,
-    }
-})
-```
-
-</MultiLanguage>
-
-Later, we can use these properties to filter events based on a particular planId, or to calculate the aggregate values of a property over time.
-
-> **Tip**: Always include more properties than you might need at first!
-> There's no limit to the number of properties an event can have, and your future self will thank you once again when you need to access a property that you may not have thought you needed.
-
 
 ## Event ingestion
 
