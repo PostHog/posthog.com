@@ -27,7 +27,11 @@ Once created, you can opt users in or out manually on the feature detail screen 
 
 ### Option 1: Site app
 
-We've prebuilt a site app that adds a user early access feature modal to your site. To use it:
+We've prebuilt a site app that adds a user early access feature modal to your site. 
+
+![Create feature flags](../../images/features/feature-flags/early-access-feature-demo.png)
+
+To use it:
 
 1. Ensure you set `opt_in_site_apps: true` in your PostHog initialization configuration.
 
@@ -39,15 +43,69 @@ We've prebuilt a site app that adds a user early access feature modal to your si
 
 Once set up, early access features appear on this panel for users to opt in or out of.
 
-![Create feature flags](../../images/features/feature-flags/early-access-feature-demo.png)
-
 ### Option 2: Custom implementation
 
 You can fully customize your early access management experience using `getEarlyAccessFeatures` and `updateEarlyAccessFeatureEnrollment` from PostHog's [JavaScript Web library](/docs/libraries/js#early-access-feature-management).
 
 - `getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, and documentation link. You can use this to build a UI for users to opt in or out of features.
 
+```js-web
+const posthog = usePostHog()
+const activeFlags = useActiveFeatureFlags()
+
+const [activeBetas, setActiveBetas] = useState([])
+const [inactiveBetas, setInactiveBetas] = useState([])
+
+useEffect(() => {
+  posthog.getEarlyAccessFeatures((features) => {
+
+    if (!activeFlags || activeFlags.length === 0) {
+      setInactiveBetas(features)
+      return
+    }
+
+    const activeBetas = features.filter(
+			beta => activeFlags.includes(beta.flagKey)
+		);
+    const inactiveBetas = features.filter(
+			beta => !activeFlags.includes(beta.flagKey)
+		);
+    setActiveBetas(activeBetas)
+    setInactiveBetas(inactiveBetas)
+  }, true)
+}, [activeFlags])
+```
+
 - `updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature. This updates the user's opt-in status for the feature.
+
+```js-web
+const toggleBeta = (betaKey) => {
+  if (activeBetas.some(
+    beta => beta.flagKey === betaKey
+  )) {
+    posthog.updateEarlyAccessFeatureEnrollment(
+      betaKey, 
+      false
+    )
+    setActiveBetas(
+      prevActiveBetas => prevActiveBetas.filter(
+        item => item.flagKey !== betaKey
+      )
+    );
+    return
+  }
+
+  posthog.updateEarlyAccessFeatureEnrollment(
+    betaKey,
+    true
+  )
+  setInactiveBetas(
+    prevInactiveBetas => prevInactiveBetas.filter(
+      item => item.flagKey !== betaKey
+    )
+  );
+}
+```
 
 Other useful functions for custom implementations are `isFeatureEnabled()` and `useActiveFeatureFlags()` (React only). These help you separate early access features users have opted into from those they have not.
 
