@@ -24,7 +24,7 @@ Let's Do This is a marketplace for discovering and signing up for endurance even
 
 In 2021, Let's Do This decided to create a growth team focusing on user acquisition and retention. Thomas was intrigued by this, although he did not have any growth experience. Nonetheless, he jumped at the opportunity, and after a chat with the VP of product, Thomas became the first member of the growth team.
 
-The team consisted of a few engineers, a product designer, and a data scientist, but no one had any growth experience either. Their first job was to hire a growth PM to lead the team, which they soon did. However, two months after hiring this person, it was clear they weren't a good fit and were let go. Noticing a gap in the team, Thomas stepped up to become the de facto "half PM - half tech lead" of the team.
+The team consisted of a few engineers, a product designer, and a data scientist – but no one had any growth experience either. Their first job was to hire a growth PM to lead the team, which they soon did. However, two months after hiring this person, it was clear they weren't a good fit and were let go. Noticing a gap in the team, Thomas stepped up to become the de facto "half PM - half tech lead" of the team.
 
 His first step was figuring out what to do. To do this, he tapped into his network and had calls with growth experts at other startups. The advice from them was consistent:
 
