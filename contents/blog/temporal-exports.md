@@ -61,7 +61,7 @@ In Q2, Tomas’ goal was "rock solid-batch processing" and [we chose Temporal](h
 
 Instead of building all this functionality ourselves, Temporal takes care of it for us. After some debate, we felt building a workflow engine would not be a competitive advantage for us. Nothing about what we build on Temporal is novel enough to justify an investment into a competing runtime (as satisfying as it would be to write).
 
-## How we implemented Temporal
+## How we built our new export system with Temporal
 
 We didn’t completely rebuild our export system; many of the pieces still worked, we just needed to modify them to work with Temporal’s scheduling and execution capabilities. This meant building a batch export abstraction layer on top of Temporal. Specifically, the abstraction layer is four models:
 
