@@ -319,5 +319,11 @@
         "image": "../../contents/images/team/lior.png",
         "link_type": "twitter",
         "link_url": "https://twitter.com/liornn"
+    },
+    {
+        "handle": "tomas-farias",
+        "name": "Tomás Farías Santana",
+        "role": "Software Engineer",
+        "image": "../../static/images/authors/contributor-posthog.png"
     }
 ]
