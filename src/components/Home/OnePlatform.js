@@ -5,7 +5,7 @@ export default function OnePlatform() {
     return (
         <section className="max-w-7xl mx-auto px-5 pb-8 md:pb-16">
             <h2 className="text-center text-5xl lg:text-6xl xl:text-6xl">
-                One platform, <span className="text-blue dark:text-yellow">thousands of use cases.</span>
+                One platform, <span className="text-blue dark:text-yellow">thousands of use cases</span>
             </h2>
             <p className="text-center text-xl opacity-70 font-semibold mb-12">
                 PostHog grows with you – from startups to growth stage and beyond.
