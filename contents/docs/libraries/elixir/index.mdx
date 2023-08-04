@@ -24,33 +24,11 @@ import ElixirInstall from '../../integrate/_snippets/install-elixir.mdx'
 
 <ElixirInstall />
 
-## Usage
+## Capturing events
 
-Call `Posthog.capture()` with an event name and `distinct_id` as a property to capture an event. You can also pass in any other properties, including person and group properties, as a map.
+import ElixirSendEvents from '../../integrate/send-events/_snippets/send-events-elixir.mdx'
 
-```elixir
-Posthog.capture("login", %{
-  distinct_id: user.id,
-  email: user.email,
-  plan: user.plan,
-  "$set": %{
-    email: user.email,
-    proUser: false,
-    "$groups": %{
-      organization: "twitter"
-    }
-  },
-  "$set_once": %{
-    user_first_location: "colorado"
-  }
-})
-```
-
-To capture multiple events at once, use `Posthog.batch()`.
-
-```elixir
-Posthog.batch([{"login", [distinct_id: user.id], nil}])
-```
+<ElixirSendEvents />
 
 ## Thanks
 
