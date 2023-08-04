@@ -1,6 +1,5 @@
 // AUTO GENERATED FILE
 
-import { ABTestCalculator } from './components/ABTestCalculator'
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
@@ -29,7 +28,6 @@ import { Startups } from './components/Startups'
 import { TracksCTA } from './components/TracksCTA'
 
 export const shortcodes = {
-    ABTestCalculator,
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
