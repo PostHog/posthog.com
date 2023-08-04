@@ -18,11 +18,11 @@ Autocapture is **enabled by default**.
 
  ## Disabling autocapture
 
-You can disable autocapture completely by setting `autocapture: false` in the [config](/docs/libraries/js#config). You can also disable autocapture in your [project settings](https://app.posthog.com/project/settings).
+You can disable autocapture completely by setting `autocapture: false` in the [config](/docs/libraries/js#config). You can also disable autocapture in your [project settings](https://app.posthog.com/project/settings). 
 
-Conversely, this means that autocapture is only enabled if neither of these options are disabled.
+Please note, autocapture is only enabled if _neither_ of these options are disabled.
 
-> Disabling autocapture **will not disable [session recording](/docs/session-replay/manual)**. You can disable session recording using `disable_session_recording` or by turning it off in your project's settings.
+> Disabling autocapture **will not disable [session recording](/docs/session-replay/manual)**. You can disable session recording using `disable_session_recording` or by turning it off in your [project settings](https://app.posthog.com/project/settings).
 
 ## Configuring autocapture
 
@@ -38,7 +38,7 @@ For example, to only capture clicks on buttons on the docs section of the websit
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_instance_address>',
     autocapture: {
-        event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
+        dom_event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
         url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
         element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
         css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
@@ -49,7 +49,7 @@ Allowlists only filter autocapture events – they won't affect the data collect
 
 ### Preventing sensitive data capture
 
-PostHog tries to not capture any sensitive data from your website. If there are elements, you don't want to be captured, you can add the `ph-no-capture` class name to prevent them from being autocaptured.
+PostHog tries to not capture any sensitive data from your website. If there are elements you don't want captured, add the `ph-no-capture` class name.
 
 ```html
 <button class='ph-no-capture'>Sensitive information here</button>
