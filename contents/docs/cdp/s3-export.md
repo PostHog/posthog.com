@@ -7,7 +7,7 @@ tags:
     - s3 export
 ---
 
-> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+> **Important:** This app has been replaced by [a new export system](/docs/cdp/batch-exports), which is currently in public beta. This app is no longer available.
 
 This app enables you to export events to Amazon S3 on ingestion. Archive your data, or simply free it up for other kinds of analysis, by integrating export right into your event processing pipeline.
 

@@ -1043,6 +1043,9 @@
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
         },
-        { "source": "/docs/data/data-management", "destination": "/docs/data" }
+        { "source": "/docs/data/data-management", "destination": "/docs/data" },
+        { "source": "/docs/batch-exports", "destination": "/docs/cdp/batch-exports" },
+        { "source": "/docs/batch-exports/s3", "destination": "/docs/cdp/batch-exports/s3" },
+        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" }
     ]
 }

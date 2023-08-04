@@ -2138,6 +2138,28 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Batch exports',
+                    url: '',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/cdp/batch-exports',
+                        },
+                        {
+                            name: 'Amazon S3',
+                            url: '/docs/cdp/batch-exports/s3',
+                        },
+                        {
+                            name: 'Snowflake',
+                            url: '/docs/cdp/batch-exports/snowflake',
+                        },
+                    ],
+                },
+                {
                     name: 'Sources',
                     url: '',
                     children: [
