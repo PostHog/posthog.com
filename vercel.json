@@ -1024,7 +1024,9 @@
         { "source": "/tutorials/retention", "destination": "/tutorials/feature-retention" },
         { "source": "/tutorials/metrics-tutorial", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/tutorials/taxonomy-acquisition", "destination": "/blog/posthog-marketing" },
-        { "source": "/tutorials/tracking-teams", "destination": "/docs/product-analytics/group-analytics" }
+        { "source": "/tutorials/tracking-teams", "destination": "/docs/product-analytics/group-analytics" },
+        { "source": "/tutorials/revenue", "destination": "/tutorials" },
+        { "source": "/tutorials/how-to-segment-users", "destination": "/tutorials/power-users" }
     ],
     "rewrites": [
         {
