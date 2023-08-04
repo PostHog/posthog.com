@@ -8,13 +8,61 @@ import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
 import Layout from 'components/Layout'
+import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
 
 export default function TeamNew() {
     const {
         team: { teamMembers },
     } = useStaticQuery(query)
+
+    // Some Stats were used as fallback until the actual data is added to the GraphlQL Server
+    const teamStats = [
+        {
+            data: pineappleOnPizzaStat(teamMembers) ? pineappleOnPizzaStat(teamMembers) : [60, 40],
+            caption: '(Correctly) think pineapple belongs on pizza',
+            icon: '🍍 + 🍕',
+        },
+        {
+            data: [45, 55],
+            caption: 'Are a former founder',
+            icon: '💻',
+        },
+        {
+            data: [100, 0],
+            caption: 'Write code',
+            icon: '☕️',
+        },
+        {
+            data: [80, 20],
+            caption: 'See themselves working at PostHog in 2 years',
+            icon: '',
+        },
+    ]
+
     return (
         <Layout>
+            <div className="flex flex-col text-center pt-10 pb-3 px-8 2xl:px-4 3xl:p-0">
+                <h3 className="mb-[5px] text-lg leading-tight">Team members who... </h3>
+                <div className="flex justify-start md:justify-center gap-x-[53px] overflow-x-auto">
+                    {teamStats.map((teamStat, index) => {
+                        return (
+                            <TeamStat
+                                key={index}
+                                teamStatData={teamStat.data}
+                                caption={teamStat.caption}
+                                icon={teamStat.icon}
+                            />
+                        )
+                    })}
+                </div>
+                <p className="mt-10 text-primary/75 text-sm dark:text-primary-dark/75">
+                    (Want to help budge these numbers?{' '}
+                    <Link to={`/careers`} className="">
+                        We're hiring
+                    </Link>
+                    )
+                </p>
+            </div>
             <ul className="list-none pt-16 pb-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-8 2xl:px-4 3xl:p-0">
                 {teamMembers.map((teamMember) => {
                     const {
@@ -88,6 +136,7 @@ const query = graphql`
                 country
                 location
                 pronouns
+                pineappleOnPizza
             }
         }
     }
