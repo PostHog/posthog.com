@@ -25,11 +25,11 @@ import yCombinator from './images/y-combinator.svg'
 import yCombinatorDark from './images/y-combinator_dark.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
-import Tooltip from 'components/Tooltip'
+import Link from 'components/Link'
 
 const Logo = ({ src, className = '' }) => <img className={`icon px-4 md:px-6 lg:px-4 ${className}`} src={src} />
 
-const Customer = ({ image, imageDark, className = '', tooltipContent }) => {
+const Customer = ({ image, imageDark, className = '', url }) => {
     const { websiteTheme } = useValues(layoutLogic)
     const logo = websiteTheme === 'dark' ? imageDark || image : imageDark
     return (
@@ -44,12 +44,10 @@ const Customer = ({ image, imageDark, className = '', tooltipContent }) => {
             rounded
         "
         >
-            {tooltipContent ? (
-                <Tooltip content={tooltipContent}>
-                    <span className="relative">
-                        <Logo className={className} src={logo} />
-                    </span>
-                </Tooltip>
+            {url ? (
+                <Link to={url}>
+                    <Logo className={className} src={logo} />
+                </Link>
             ) : (
                 <Logo className={className} src={logo} />
             )}
@@ -84,7 +82,7 @@ export default function Customers() {
                         <Customer className="max-h-[46px]" image={phantom} imageDark={phantomDark} />
                         <Customer className="max-h-[50px]" image={joybird} imageDark={joybirdDark} />
                         <Customer className="max-h-[50px]" image={assemblyai} imageDark={assemblyaiDark} />
-                        <Customer tooltipContent="We use us too" imageDark={'/brand/posthog-logo-white.svg'} />
+                        <Customer url="/blog/posthog-marketing" imageDark="/brand/posthog-logo-white.svg" />
                     </ul>
                 )}
             </div>
