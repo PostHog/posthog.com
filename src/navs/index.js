@@ -1781,6 +1781,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Creating insights',
+                    url: '/docs/product-analytics/insights',
+                    icon: 'Graph',
+                    color: 'red',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
@@ -1862,7 +1868,6 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
-                { name: 'Insights', url: '/docs/product-analytics/insights', hidden: true },
             ],
         },
         {
