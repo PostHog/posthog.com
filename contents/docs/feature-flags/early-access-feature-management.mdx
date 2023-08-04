@@ -11,7 +11,7 @@ This is useful if you want to:
 
 ## How it works
 
-Early access features can be created and edited from the "[Early Access Management](https://app.posthog.com/early_access_features)" tab in PostHog.
+Early access features can be created and edited from the [Early Access Management](https://app.posthog.com/early_access_features) tab in PostHog.
 
 Features are powered by feature flags. Flags are automatically created when a feature is created (based on the name of the feature), or you can link an existing feature flag to a feature. Each feature can also contain a description and documentation link to help users understand what the feature is for.
 
@@ -23,19 +23,19 @@ Once created, you can opt users in or out manually on the feature detail screen 
 
 ## Creating a public opt-in
 
-> You can find a full walkthrough of building an app with early access feature management in our "[How to set up a public beta program using early access management](/tutorials/public-beta-program)" tutorial.
+> You can find a full walkthrough of building an app with early access feature management in our [How to set up a public beta program using early access management](/tutorials/public-beta-program) tutorial.
 
 ### Option 1: Site app
 
-We've prebuilt a site app that adds a user early access feature modal to your site. 
+We've prebuilt a site app that adds an early access feature modal to your site. 
 
 ![Create feature flags](../../images/features/feature-flags/early-access-feature-demo.png)
 
 To use it:
 
-1. Ensure you set `opt_in_site_apps: true` in your PostHog initialization configuration.
+1. Ensure you set `opt_in_site_apps: true` in your PostHog [initialization configuration](/docs/libraries/js#config).
 
-2. Search for "[Early Access Features App](https://app.posthog.com/project/apps?name=Early%20Access)" in the "Browse Apps" tab.
+2. Search for [Early Access Features App](https://app.posthog.com/project/apps?name=Early%20Access) in the [Browse Apps](https://app.posthog.com/project/apps) tab.
 
 3. Enable it by clicking the blue gear, setting a `data-attr` selector (or enabling "Show features button on the page"), enabling the toggle and pressing save.
 
@@ -49,7 +49,7 @@ You can fully customize your early access management experience using `getEarlyA
 
 - `getEarlyAccessFeatures` is called with a callback function that receives a list of early access features with their flag key, name, description, and documentation link. You can use this to build a UI for users to opt in or out of features.
 
-```js-web
+```react
 const posthog = usePostHog()
 const activeFlags = useActiveFeatureFlags()
 
@@ -78,7 +78,7 @@ useEffect(() => {
 
 - `updateEarlyAccessFeatureEnrollment` is called with a feature flag key and a boolean value to opt in or out of the feature. This updates the user's opt-in status for the feature.
 
-```js-web
+```react
 const toggleBeta = (betaKey) => {
   if (activeBetas.some(
     beta => beta.flagKey === betaKey
@@ -107,6 +107,6 @@ const toggleBeta = (betaKey) => {
 }
 ```
 
-Other useful functions for custom implementations are `isFeatureEnabled()` and `useActiveFeatureFlags()` (React only). These help you separate early access features users have opted into from those they have not.
+Other useful functions for custom implementations are `isFeatureEnabled()` and `useActiveFeatureFlags()` (React only). These help you differentiate users who have opted into early access features from those who have not.
 
 For a sample implementation, see the [public beta tutorial here](/tutorials/public-beta-program#creating-a-beta-opt-in-page) or [the site app code here](https://github.com/PostHog/early-access-features-app/blob/main/site.ts).
