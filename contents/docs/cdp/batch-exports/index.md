@@ -11,10 +11,11 @@ availability:
 Batch exports give you a platform to schedule data exports to supported destinations. Batch exports are built on [Temporal](https://www.temporal.io/) to enable reliable data exports, ensuring your data reaches your destination.
 
 The key features offered by this platform are:
-* Resiliency: Retry capabilities (both automated and manual) when the destination is temporarily unavailable.
-* Efficient data transfers: Processing data in batches reduces the number of data transfers required (less `INSERT` queries or file uploads).
+* **Resiliency:** Retry capabilities (both automated and manual) when the destination is temporarily unavailable.
 
-> Batch exports are currently in **public beta**. This means that we offer data exports to a subset of all the planned destinations, some features will be missing, and you will encounter UI elements still in development. You can follow and comment on the progress [here](https://github.com/PostHog/posthog/issues/15997).
+* **Efficient data transfers:** Processing data in batches reduces the number of data transfers required (less `INSERT` queries or file uploads).
+
+> Batch exports are currently in **public beta**. This means that we offer data exports to a subset of all the planned destinations, some features will be missing, and you will encounter UI elements still in development. You can follow and comment on the progress [in this GitHub issue](https://github.com/PostHog/posthog/issues/15997).
 
 ## Destinations
 
