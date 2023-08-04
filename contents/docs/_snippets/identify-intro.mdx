@@ -1,27 +1,34 @@
-Linking events to specific users enables you to gain full insights as to how they're using your product across different sessions, devices, and platforms. 
+Linking events to specific users enables you to build a full picture as to how they're using your product across different sessions, devices, and platforms. 
 
-This is straight forward to do when [capturing backend events](/docs/getting-started/send-events#3-capture-backend-events), as you associate events to a specific user using `distinct_id`, which is a required argument. However, on the [frontend](/docs/getting-started/send-events#sending-custom-properties-on-an-event), a `distinct_id` is not a required argument and thus events can be submitted anonymously. To link events from anonymous to specific users, you need to use `identify`:
+This is straight forward to do when [capturing backend events](/docs/product-analytics/capture-events?tab=Node.js), as you associate events to a specific user using `distinct_id`, which is a required argument. However, on the [frontend](/docs/getting-started/send-events#sending-custom-properties-on-an-event), a `distinct_id` is not a required argument and thus events can be submitted anonymously. To link events from anonymous to specific users, you need to use `identify`:
 
 <MultiLanguage selector="tabs">
 
 ```js-web
 posthog.identify(
   'distinct_id',  // Replace 'distinct_id' with your user's unique identifier
-  { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } 
+  { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' } // optional: set additional user properties
 );
 ```
 
 ```Android
 PostHog.with(this)
      .identify(distinctID, new Properties() // Replace 'distinctID' with your user's unique identifier
-        .putValue("name", "Max Hedgehog")
+        .putValue("name", "Max Hedgehog") // optional: set additional user properties
         .putValue("email", "max@hedgehogmail.com));
 ```
 
 
 ```iOS
 posthog.identify("distinct_id", // Replace "distinct_id" with your user's unique identifier
-  properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"])
+  properties: ["name": "Max Hedgehog", "email": "max@hedgehogmail.com"]) // optional: set additional user properties
+```
+
+```react-native
+posthog.identify('distinct_id', { // Replace "distinct_id" with your user's unique identifier
+    email: 'max@hedgehogmail.com', // optional: set additional user properties
+    name: 'Max Hedgehog'
+})
 ```
 
 </MultiLanguage>

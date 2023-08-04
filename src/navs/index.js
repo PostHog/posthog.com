@@ -1787,6 +1787,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Identifying users',
+                    url: '/docs/product-analytics/identify',
+                    icon: 'Person',
+                    color: 'purple',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
