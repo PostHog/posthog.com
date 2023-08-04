@@ -883,7 +883,7 @@ export const docsMenu = {
                             url: '/docs/libraries',
                         },
                         {
-                            name: 'JavaScript (Web)',
+                            name: 'JavaScript Web',
                             url: '/docs/libraries/js',
                             badge: {
                                 title: 'Popular',
@@ -1773,6 +1773,12 @@ export const docsMenu = {
                     url: '/docs/product-analytics/installation',
                     icon: 'Book',
                     color: 'blue',
+                },
+                {
+                    name: 'Capturing events',
+                    url: '/docs/product-analytics/capture-events',
+                    icon: 'Send',
+                    color: 'orange',
                 },
                 {
                     name: 'Analysis views',

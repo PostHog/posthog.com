@@ -28,29 +28,11 @@ import JavaInstall from '../../integrate/_snippets/install-java.mdx'
 
 ## Making calls
 
-### Capture
+### Capturing events
 
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
+import JavaSendEvents from '../../integrate/send-events/_snippets/send-events-java.mdx'
 
-A `capture` call requires:
-
-- `distinct id` which uniquely identifies your user
-- `event name` to specify the event
-
-> We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
-
-Optionally you can submit:
-
-- `properties` which is a dictionary with any information you'd like to add
-
-```java
-posthog.capture("distinct id", "movie played", new HashMap<String, Object>() {
-  {
-    put("movie_id", 123);
-    put("category", "romcom");
-  }
-});
-```
+<JavaSendEvents />
 
 ### Setting user properties
 
