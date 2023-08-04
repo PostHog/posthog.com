@@ -1,14 +1,48 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import { heading } from './classes'
 import groupBy from 'lodash.groupby'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ArrowLeft, ArrowRight } from '@posthog/icons'
+import dayjs from 'dayjs'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const categories = {
     'Major new feature': 'feature',
     'Company news': 'news',
     'Something cool happened': 'milestone',
+}
+
+export const Items = ({ items }) => {
+    const ref = useRef(null)
+    const [isOverflowing, setIsOverflowing] = useState(false)
+
+    useEffect(() => {
+        setIsOverflowing(ref?.current?.scrollHeight > ref?.current?.getBoundingClientRect()?.height)
+    }, [])
+
+    return (
+        <div
+            className={`relative ${
+                isOverflowing
+                    ? 'after:absolute after:h-[30px] after:w-full after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-accent dark:after:from-accent-dark after:to-transparent'
+                    : ''
+            }`}
+        >
+            <ul ref={ref} className={`m-0 p-0 h-[110px] overflow-auto ${isOverflowing ? 'pb-[30px]' : ''}`}>
+                {items?.map(({ title, category }) => {
+                    return (
+                        <li
+                            key={title}
+                            className="relative list-none text-sm text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
+                            data-type={categories[category]}
+                        >
+                            {title}
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
+    )
 }
 
 export default function Timeline() {
@@ -100,28 +134,19 @@ export default function Timeline() {
                                 <h4 className="text-2xl py-1 font-bold text-center">{year}</h4>
                                 <div className="p-4 bg-white dark:bg-dark border border-light dark:border-dark">
                                     <ul role="list" className="py-1 px-0 grid grid-cols-2 md:grid-cols-4 gap-4">
-                                        {Object.keys(pastMonths).map((month) => {
+                                        {months.map((month) => {
+                                            const items = pastMonths[month]
                                             return (
                                                 <li
                                                     key={month}
                                                     className="timeline-entry bg-accent dark:bg-accent-dark list-none px-4 pb-4 text-center min-h-[6rem] md:min-h-[8rem] lg:min-h-[10rem]"
                                                 >
-                                                    <p className="text-lg font-bold border-b border-light dark:border-dark capitalize py-2 mb-2">
+                                                    <p
+                                                        className={`text-lg font-bold border-b border-light dark:border-dark capitalize py-2 mb-2`}
+                                                    >
                                                         {month}
                                                     </p>
-                                                    <ul className="m-0 p-0">
-                                                        {pastMonths[month].map(({ title, category }) => {
-                                                            return (
-                                                                <li
-                                                                    key={title}
-                                                                    className="relative list-none text-sm text-left pl-4 content-none before:inline-block before:absolute before:w-[10px] before:h-[10px] before:left-0 before:top-[5px] before:rounded-full before:mr-2 mt-1 first:mt-0"
-                                                                    data-type={categories[category]}
-                                                                >
-                                                                    {title}
-                                                                </li>
-                                                            )
-                                                        })}
-                                                    </ul>
+                                                    <Items items={items} />
                                                 </li>
                                             )
                                         })}
