@@ -138,11 +138,9 @@ You can tweak how autocapture works by passing custom options.
 </PostHogProvider>
 ```
 
-### Sending screen views
+### Capturing screen views
 
 With the `PostHogProvider`, screen tracking is automatically captured if the `autocapture` property is used. Currently only [@react-navigation/native](https://reactnavigation.org/docs/getting-started/) is supported by autocapture and it is important that the `PostHogProvider` is configured as a child of the `NavigationContainer`.
-
-See [autocapture](#autocapture) for configuration.
 
 If you want to manually send a new screen capture event, use the `screen` function. This function requires a `name`. You may also pass in an optional `properties` object.
 

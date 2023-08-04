@@ -1775,8 +1775,8 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Sending events',
-                    url: '/docs/product-analytics/send-events',
+                    name: 'Capturing events',
+                    url: '/docs/product-analytics/capture-events',
                     icon: 'Send',
                     color: 'orange',
                 },
