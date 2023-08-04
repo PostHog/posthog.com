@@ -159,7 +159,7 @@ For SAML to work your IdP and PostHog (SP) need to exchange information. To do t
 2. If you are on self-hosted, you will need to be running your PostHog instance over TLS.
 3. Register a new SAML 2.0 application with your IdP. If you need to pass PostHog's information to your provider first, set the following values below (alternatively if your IdP supports it, you can obtain our XML metadata from `<yourdomain>/api/saml/metadata/`)
     - **Single Sign On URL** (also called ACS Consumer URL): `<yourdomain>/complete/saml/` or `https://app.posthog.com/complete/saml/` for PostHog Cloud US or `https://eu.posthog.com/complete/saml/` for PostHog Cloud EU.
-    - **Audience or Entity ID**: _Your Site URL_ value (verbatim), on PostHog Cloud this is `app.posthog.com` or `eu.posthog.com`
+    - **Audience or Entity ID**: _Your Site URL_ value (verbatim), on PostHog Cloud this is `https://app.posthog.com` or `https://eu.posthog.com`
     - **RelayState**: On PostHog cloud, get your RelayState value from the SAML configuration modal in your PostHog Organization settings. For self hosted, _empty or default_ (will be set on every request).
 4. For SAML to work properly with PostHog, we need to receive at least the following information from your IdP in the SAML assertion payload: ID, email and first name. Optionally, you can also pass the last name. By default, PostHog expects these attributes with a certain name.
 
@@ -257,10 +257,10 @@ Use this option if you want to add additional configurations to your app that ar
 2. Select the "SAML 2.0" option. In the next step, set "PostHog" as the name.
 3. Fill in the following attributes in the SAML settings. Do not click next yet.
     - In "Single sign on URL" enter `https://app.posthog.com/complete/saml/`.
-      - If you are using our EU deployment, use `https://app.posthog.com/complete/saml/`.
+      - If you are using our EU deployment, use `https://eu.posthog.com/complete/saml/`.
       - If you are self-hosting, use `<yourdomain>/complete/saml/`.
-    - In "Audience URI (SP Entity ID)" enter `app.posthog.com`.
-      - If you are using our EU deployment, use `eu.posthog.com`.
+    - In "Audience URI (SP Entity ID)" enter `https://app.posthog.com`.
+      - If you are using our EU deployment, use `https://eu.posthog.com`.
       - If you are self-hosting, enter the exact same value as your `SITE_URL` environment variable.
 4. In the Default Relay State field, enter the RelayState value you obtain from your [PostHog Organization Settings page](https://app.posthog.com/organization/settings) in the SAML configuration modal.
 5. In the "Attribute Statements" section, add the following attributes:
