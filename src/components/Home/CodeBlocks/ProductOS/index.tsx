@@ -50,8 +50,8 @@ function TrackEvent() {
                     <LightBulb />
                 </span>
                 <p className="opacity-75">
-                    You can also use <Link to="/docs/product-analytics/autocapture">Autocapture</Link> to retroactively
-                    define events from the DOM structure with <Link to="/docs/toolbar">Toolbar</Link>.
+                    You can also use <Link to="/docs/product-analytics/autocapture">autocapture</Link> to retroactively
+                    define events from the DOM structure with <Link to="/docs/toolbar">the toolbar</Link>.
                 </p>
             </div>
         </div>
