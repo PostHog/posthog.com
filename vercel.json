@@ -295,7 +295,6 @@
             "destination": "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
         },
         { "source": "/docs/tutorials/b2b", "destination": "/tutorials/b2b" },
-        { "source": "/docs/tutorials/cohorts", "destination": "/tutorials/cohorts" },
         { "source": "/docs/tutorials/deleting-data", "destination": "/tutorials/deleting-data" },
         { "source": "/docs/tutorials/event-tracking-guide", "destination": "/tutorials/event-tracking-guide" },
         { "source": "/docs/tutorials/feature-flags", "destination": "/manual/feature-flags" },
@@ -308,18 +307,13 @@
             "source": "/docs/tutorials/nextjs-supabase-signup-funnel",
             "destination": "/tutorials/nextjs-supabase-signup-funnel"
         },
-        { "source": "/docs/tutorials/retention", "destination": "/tutorials/retention" },
-        { "source": "/docs/tutorials/revenue", "destination": "/tutorials/revenue" },
         { "source": "/docs/tutorials/spa", "destination": "/tutorials/spa" },
         { "source": "/docs/tutorials/survey", "destination": "/tutorials/survey" },
-        { "source": "/docs/tutorials/taxonomy-acquisition", "destination": "/tutorials/taxonomy-acquisition" },
         { "source": "/docs/tutorials/toolbar", "destination": "/tutorials/toolbar" },
-        { "source": "/docs/tutorials/tracking-teams", "destination": "/tutorials/tracking-teams" },
         { "source": "/handbook/company/branding", "destination": "/handbook/company/brand-assets" },
         { "source": "/docs/tutorials/:path*", "destination": "/tutorials/:path*" },
         { "source": "/docs/self-host/hobby-deployment", "destination": "/docs/self-host/deploy/hobby" },
         { "source": "/handbook/engineering/ee-setup", "destination": "/docs/contribute/developing-locally" },
-        { "source": "/docs/tutorials/how-to-segment-users", "destination": "/tutorials/how-to-segment-users" },
         {
             "source": "/docs/self-host/runbook/clickhouse/vertical_scaling",
             "destination": "/docs/self-host/runbook/clickhouse/vertical-scaling"

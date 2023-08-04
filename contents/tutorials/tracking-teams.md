@@ -258,4 +258,3 @@ But, most importantly, we learned that while PostHog is built with certain frame
 ## Further reading
 
 - [The guide to frontend vs backend group analytics implementations](/tutorials/frontend-vs-backend-group-analytics)
-- [Analyzing user behavior with cohorts](/tutorials/cohorts)
