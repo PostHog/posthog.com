@@ -14,7 +14,7 @@ tags:
   - Product metrics
 ---
 
-Fast-growing startups are like rocket ships, and as co-founder of Google, Eric Schmidt, once said: "If you're offered a seat on a rocket ship, don't ask what seat. Just get on.". In these rocket ships, it's the job of the growth team to provide the fuel for the journey by igniting user acquisition and retention. 
+Fast-growing startups are like rocket ships. In these rocket ships, it's the job of the growth team to provide the fuel for the journey by igniting user acquisition and retention. 
 
 In this post, we speak to [Thomas Owers](https://www.linkedin.com/in/thomasowers/), former lead software engineer at [Let's Do This](https://www.letsdothis.com/) (a Y Combinator backed startup with $80M in funding), on how he started the company's first growth team and, upon their initial success, grew the growth org into 4 teams – despite having no prior experience in working on a growth team in the first place!
 
@@ -24,11 +24,9 @@ Let's Do This is a marketplace for discovering and signing up for endurance even
 
 In 2020, a new VP of product joined the team. One of their new initiatives was to create a growth team focusing on user acquisition and retention. Thomas was intrigued by this. He previously had some experience working in SEO and marketing but not in *growth* per se. Nonetheless, he jumped at the opportunity, and after a chat with the VP of product, Thomas became the first member of the growth team.
 
-The team consisted of a few engineers, a product designer, and a data scientist, but no one really had any growth experience either. Their first job was to hire a growth PM to lead the team, which they soon did. However, two months after hiring this person, it was clear they weren't a good fit and were let go. Noticing a gap in the team, Thomas stepped up to become the de facto "half PM - half tech lead" of the team.
+The team consisted of a few engineers, a product designer, and a data scientist, but no one really had any growth experience. Their first job was to hire a growth PM to lead the team, which they soon did. However, two months after hiring this person, it was clear they weren't a good fit and were let go. Noticing a gap in the team, Thomas stepped up to become the de facto "half PM - half tech lead" of the team.
 
-Since Thomas had no prior growth experience, his first step was figuring out what to do. To do this, he tapped into his network and had calls with growth experts at other startups.
-
-The advice from them was consistent:
+His first step was figuring out what to do. To do this, he tapped into his network and had calls with growth experts at other startups. The advice from them was consistent:
 
 ## 1. The answer is in your data
 
@@ -47,31 +45,33 @@ Once the growth team knew where the drop-offs were, the next step was figuring o
 
 In the case of Let's Do This, their target metric was *number of bookings*. They noticed a large drop-off in the signup page during the booking flow and decided to investigate. They sent emails to the customers who dropped off and offered them Amazon gift cards in exchange for a 30-minute call.
 
-They learned from these calls that booking events like marathons is a **big deal** for their customers as they need to train for months before an event. They needed to be confident that the event would be right for them. Thus people would often hesitate when booking events. 
+They learned from these calls that booking events like marathons is a **big deal** for their customers – they train for months for it! So they need to be confident that the event would be right for them, and this is why people would often hesitate when booking events. 
 
 Thomas and his team brainstormed solutions to this. They came up with features to improve trust signals on the event page, as well as adding an "event save" flow that let users save an event and receive reminders about it (without having to register).
 
 ## 3. Experiment everything
 
-Knowing what changes to make is one thing, but understanding how those changes affect your growth metrics is another. This led Thomas to the third piece of advice he received: Experiment *everything*. By doing so, Thomas and his team were able to build up knowledge on which strategies and features had the most impact.
+Knowing what changes to make is one thing, but understanding how those changes affect your metrics is another. This led Thomas to the third piece of advice he received: Experiment *everything*. By doing so, Thomas and his team were able to build up knowledge on which strategies and features had the most impact.
 
-During any given week, his team ran 10 or more A/B tests. Thomas created this culture of experimentation by encouraging his team to embrace a mindset of curiosity. He emphasized that failure should not be feared but rather seen as an opportunity to learn and improve. Thomas understood that not every experiment yields positive results (and, in fact, 80% of their experiments failed!), but each one can provide valuable insights.
+During any given week, his team ran 10 or more A/B tests. Thomas created this culture of experimentation by encouraging his team to embrace a mindset of curiosity. He emphasized that **failure should not be feared but rather seen as an opportunity to learn and improve** – in fact, 80% of their experiments failed! But each one provided valuable insights.
 
-To ensure experiments followed best practices and [avoided common mistakes](/blog/ab-testing-mistakes), their data scientist reviewed experiments before launch – often pushing back on ones they thought would be too small or would not yield significant results or insights. They also monitored their experiment quality by measuring "experiment metrics", such as how many experiments have run, their average success rate, and average run time.
+To ensure experiments followed best practices and [avoided common mistakes](/blog/ab-testing-mistakes), their data scientist reviewed each experiment before launch – often pushing back on ones they thought would be too small or not yield significant insights.
 
 > **New to experiments and A/B tests?** Check out our [software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers).
 
 ## Why it's essential to define your team values
 
-Nine months after the formation of their growth team, Let's Do This was finally able to hire a PM to lead the team. In Thomas's opinion, the most impactful thing this new PM did was to create a set of team values. These values were the team's compass: guiding decisions, behaviors, and the overall culture. They helped settle debates and disagreements and enabled the team to move faster. They were especially helpful for newer coworkers who were unfamiliar with how to operate in a growth team.
+Nine months after the start of the growth team, Let's Do This was finally able to hire a PM. In Thomas's opinion, the most impactful thing they did was to create a set of team values.
 
-Thomas shares what their values were:
+These values were the team's compass: guiding decisions, behaviors, and the overall culture. They helped settle debates and disagreements and enabled the team to move faster.
+
+Their values were:
 
 ### 1. Data over debate
 
 By focusing on hard numbers and concrete evidence, the team could set aside biases and disagreements, leading to more effective strategies and solutions.
 
-In the scenarios where data was not available or where there were deadlocks in discussions, Thomas and his team would often ship a small experiment to gather data and keep the team moving forward quickly. They realized that building and learning from a bare-bones MVP is much quicker and cheaper than having complex debates over what to build.
+When data was not available, Thomas and his team would often ship a small experiment to gather data and keep the team moving forward quickly. They realized that building and learning from a bare-bones MVP is much quicker and cheaper than having frustrating debates over what to build.
 
 ### 2. Everything should be an experiment
 
@@ -93,13 +93,13 @@ Finally, putting the user first is at the heart of how they build.
 
 It's possible that a feature can increase your target metrics but still have a detrimental effect on your user experience. The most famous example of this is how Booking.com applied dark patterns to increase sales by using text such as "*32 customers are looking at the same hotel as you*" or "*another person is considering booking a room at this accommodation*". They were later [fined $7.5M](https://www.gvh.hu/en/press_room/press_releases/press-releases-2020/gigantic-fine-imposed-on-booking.com-by-the-gvh) for doing this!
 
-By maintaining deep empathy for their customers, their team avoids such pitfalls. It empowers them to consider the customer's experience and satisfaction above all else, even when it might be easier or more profitable in the short term to do otherwise.
+By putting their customer experience first, Let's Do This avoids such pitfalls – even if it means sacrificing sacrificing short term gains in their key metrics.
 
 ## Thomas's parting advice to growth engineers: Make your code changes as small as possible
 
-The biggest difference between how software engineers operate on growth teams versus other teams is the size of their changes and the speed at which they move. Growth engineering is all about learning quickly and iterating based on those insights. 
+Growth engineering is all about learning quickly and iterating based on your findings. It's this mindset that Thomas feels is the most important for growth engineers to have. 
 
-It's this mindset change that Thomas feels is the most important for growth engineers to have. He often repeated the following advice to his engineers:
+He often repeated the following advice to his engineers:
 
 > "80% of your tests will fail, so you need to get comfortable knowing your code will be deleted. Applying this in practice means reducing the scope of your changes while still maximizing insights.
 >
