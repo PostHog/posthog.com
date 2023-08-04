@@ -3,7 +3,6 @@ import { heading } from './classes'
 import groupBy from 'lodash.groupby'
 import React, { useEffect, useRef, useState } from 'react'
 import { ArrowLeft, ArrowRight } from '@posthog/icons'
-import dayjs from 'dayjs'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const categories = {
@@ -83,6 +82,10 @@ export default function Timeline() {
         }
     )
 
+    useEffect(() => {
+        listRef?.current?.scrollBy({ left: listRef?.current?.scrollWidth })
+    }, [])
+
     return (
         <section className="px-4 mb-12 md:mb-20 overflow-hidden">
             <h2 className={heading()}>
@@ -108,7 +111,7 @@ export default function Timeline() {
                 </div>
             </div>
             <div className="relative -mx-4 pr-4">
-                <div className="absolute z-20 top-1/2 left-0 -translate-y-1/2">
+                <div className="md:block hidden absolute z-20 top-1/2 left-0 -translate-y-1/2">
                     <button
                         onClick={() => listRef?.current?.scrollBy({ left: -50, behavior: 'smooth' })}
                         className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 px-2 py-8"
@@ -118,7 +121,7 @@ export default function Timeline() {
                 </div>
                 <div
                     ref={listRef}
-                    className="-mr-4 px-4 snap-x snap-mandatory flex flex-nowrap gap-4 overflow-auto relative"
+                    className="-mr-4 px-4 md:px-16 snap-x snap-mandatory flex flex-nowrap gap-4 overflow-auto relative"
                 >
                     {Object.keys(pastEvents).map((year, index) => {
                         const pastMonths = groupBy(pastEvents[year], (node) => {
@@ -184,7 +187,7 @@ export default function Timeline() {
                 <div className="absolute top-1/2 right-0 -translate-y-1/2">
                     <button
                         onClick={() => listRef?.current?.scrollBy({ left: 50, behavior: 'smooth' })}
-                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 px-2 py-8"
+                        className="md:block hidden relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 px-2 py-8"
                     >
                         <ArrowRight className="w-10" />
                     </button>
