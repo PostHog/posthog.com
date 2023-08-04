@@ -1019,7 +1019,12 @@
                     "value": "experiments"
                 }
             ]
-        }
+        },
+        { "source": "/tutorials/cohorts", "destination": "/docs/data/cohorts" },
+        { "source": "/tutorials/retention", "destination": "/tutorials/feature-retention" },
+        { "source": "/tutorials/metrics-tutorial", "destination": "/blog/b2b-saas-product-metrics" },
+        { "source": "/tutorials/taxonomy-acquisition", "destination": "/blog/posthog-marketing" },
+        { "source": "/tutorials/tracking-teams", "destination": "/docs/product-analytics/group-analytics" }
     ],
     "rewrites": [
         {
