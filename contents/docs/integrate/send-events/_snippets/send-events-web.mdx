@@ -5,7 +5,7 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```js-web
-posthog.capture('User signed up');
+posthog.capture('user signed up');
 ```
 
 <NamingTip />
@@ -13,7 +13,7 @@ posthog.capture('User signed up');
 <SettingProperties />
 
 ```js-web
-posthog.capture('User signed up', {
+posthog.capture('user signed up', {
     login_type: "email",
     is_free_trial: true
 })
@@ -23,14 +23,14 @@ posthog.capture('User signed up', {
 
 By default, PostHog automatically captures the following frontend events:
 
-- **Page views**, including the URL.
+- **Pageviews**, including the URL.
 - [**Autocaptured events**](/docs/product-analytics/autocapture), such as any `click`, `change of input`, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags.
 
 If you prefer to disable these, set the appropriate values in your [configuration options](/docs/libraries/js#config).
 
-### One-page apps and page views
+### Single-page apps and pageviews
 
-PostHog automatically sends `pageview` events whenever it gets loaded. If you have a one-page app, that means it'll only send a pageview once (when your app loads).
+PostHog automatically sends `pageview` events whenever it gets loaded. If you have a single-page app, that means it only sends a pageview once (when your app loads).
 
 To make sure any navigating a user does within your app gets captured, you can make a pageview call manually.
 
@@ -38,4 +38,4 @@ To make sure any navigating a user does within your app gets captured, you can m
 posthog.capture('$pageview')
 ```
 
-This will automatically send the current URL.
+This automatically sends the current URL along with other relevant properties.

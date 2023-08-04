@@ -5,7 +5,7 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```elixir
-Posthog.capture("User signed up", %{
+Posthog.capture("user signed up", %{
   distinct_id: distinct_id_of_the_user
 })
 ```
@@ -29,5 +29,5 @@ Posthog.capture("User signed up", %{
 To capture multiple events at once, use `batch()`:
 
 ```elixir
-Posthog.batch([{"User signed up", [distinct_id: distinct_id_of_the_user], nil}])
+Posthog.batch([{"user signed up", [distinct_id: distinct_id_of_the_user], nil}])
 ```

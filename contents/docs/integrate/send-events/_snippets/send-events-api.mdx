@@ -8,7 +8,7 @@ import Intro from "./intro.mdx"
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "distinct_id": "distinct_id_of_the_user",
-    "event": "User signed up"
+    "event": "user signed up"
 }' https://app.posthog.com/capture/
 ```
 
@@ -24,6 +24,6 @@ curl -v -L --header "Content-Type: application/json" -d '{
         "is_free_trial": "true"
     },,
     "distinct_id": "distinct_id_of_the_user",
-    "event": "User signed up"
+    "event": "user signed up"
 }' https://app.posthog.com/capture/
 ```

@@ -5,11 +5,11 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```objectivec
-[[PHGPostHog sharedPostHog] capture:@"User signed up"];
+[[PHGPostHog sharedPostHog] capture:@"user signed up"];
 ```
 
 ```swift
-posthog.capture("User signed up")
+posthog.capture("user signed up")
 ```
 
 <NamingTip />
@@ -17,7 +17,7 @@ posthog.capture("User signed up")
 <SettingProperties />
 
 ```objectivec
-[[PHGPostHog sharedPostHog] capture:@"User signed up" 
+[[PHGPostHog sharedPostHog] capture:@"user signed up" 
     properties:@{ @"login_type": @"email", 
                   @"$is_free_trial": @YES }
 ];
@@ -25,7 +25,7 @@ posthog.capture("User signed up")
 
 ```swift
 posthog.capture(
-    "User signed up", 
+    "user signed up", 
     properties: ["login_type": "email", "$set": ["is_free_trial": true] 
 ])
 ```

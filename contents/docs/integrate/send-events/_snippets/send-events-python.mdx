@@ -6,7 +6,7 @@ import Intro from "./intro.mdx"
 
 ```python
 posthog.capture('distinct_id_of_the_user', 
-    'User signed up')
+    'user signed up')
 ```
 
 <NamingTip />
@@ -16,9 +16,11 @@ posthog.capture('distinct_id_of_the_user',
 ```
 posthog.capture(
     "distinct_id_of_the_user", 
-    "User signed up", 
-    {"login_type": "email", 
-    "is_free_trial": "true"}
+    "user signed up", 
+    {
+        "login_type": "email", 
+        "is_free_trial": "true"
+    }
 )
 ```
 

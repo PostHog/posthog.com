@@ -7,7 +7,7 @@ import Intro from "./intro.mdx"
 ```node
 posthog.capture({
     distinctId: 'distinct_id_of_the_user',
-    event: 'User signed up"',
+    event: 'user signed up"',
 })    
 ```
 
@@ -18,7 +18,7 @@ posthog.capture({
 ```node
 client.capture({
     distinctId: 'distinct_id_of_the_user',
-    event: 'User signed up"',
+    event: 'user signed up"',
     properties: {
         login_type: 'email',
         is_free_trial: true,
@@ -26,7 +26,7 @@ client.capture({
 })
 ```
 
-### Sending page views
+### Capturing pageviews
 
 If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
 
