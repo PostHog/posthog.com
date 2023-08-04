@@ -237,10 +237,13 @@ Use this option if you want to add additional configurations to your app that ar
 1. In OneLogin admin, go to Applications and click on "Add App".
 2. Search for "SAML" and select "SAML Custom Connector (Advanced)". Set name to "PostHog".
 3. Go to the "Configuration" tab and edit the following attributes (leave everything else as default)
-    - Audience (EntityID): Set to the exact
-      same value as your `SITE_URL` [environment variable][env-vars].
-    - ACS (Consumer) URL Validator: Set to a regex that only matches `<yourdomain>/complete/saml/`. For instance: `^https:\/\/app.posthog.com\/complete\/saml\/$`
-    - ACS (Consumer) URL: Set to `<yourdomain>/complete/saml/`.
+    - Audience (EntityID): enter `https://app.posthog.com`.
+      - If you are using our EU deployment, use `https://eu.posthog.com`.
+      - If you are self-hosting, enter the exact same value as your `SITE_URL` [environment variable][env-vars].
+    - ACS (Consumer) URL Validator: Set to a regex that only matches `<yourdomain>/complete/saml/`. For instance: `^https:\/\/app.posthog.com\/complete\/saml\/$` (or use `eu` for an EU instance)
+    - ACS (Consumer) URL: Set to `https://app.posthog.com/complete/saml/`.
+      - If you are using our EU deployment, use `https://eu.posthog.com/complete/saml/`.
+      - If you are self-hosting, use `<yourdomain>/complete/saml/`.
 4. Go to the "Parameters" tab. You will add the following parameters. **Be sure to check "Include in SAML assertion"**.
     - `email` to match the user's email ("Email")
     - `first_name` to match the user's first name ("First Name")
