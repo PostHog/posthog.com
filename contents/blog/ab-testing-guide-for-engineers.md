@@ -28,7 +28,7 @@ We'll also cover some frequently asked questions, such as when you _shouldn't_ r
 
 ## How A/B testing works
 
-Here's a quick ELI5 for newcomers – please skip if you're already familiar with the basics.
+Here's a quick breakdown for newcomers – please skip if you're already familiar with the basics.
 
 In A/B testing, you first decide on a goal metric and what change you'd like to see. For example, you may to increase conversion rate or decrease customer churn rate. 
 

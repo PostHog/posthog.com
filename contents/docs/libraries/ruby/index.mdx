@@ -22,23 +22,9 @@ It uses an internal queue to make calls fast and non-blocking. It also batches r
 
 ## Installation
 
-Add this to your `Gemfile`:
+import RubyInstall from '../../integrate/_snippets/install-ruby.mdx'
 
-```bash
-gem "posthog-ruby"
-```
-
-In your app, set your API key **before** making any calls. If setting a custom `host`, make sure to include the protocol (e.g. `https://`).
-
-```ruby
-posthog = PostHog::Client.new({
-  api_key: "<ph_project_api_key>",
-  host: "<ph_instance_address>", # You can remove this line if you're using https://app.posthog.com
-  on_error: Proc.new { |status, msg| print msg }
-})
-```
-
-You can find your key in the 'Project Settings' page in PostHog.
+<RubyInstall />
 
 ### Debug logging
 
@@ -46,35 +32,11 @@ The log level by default is set to WARN. You can change it to DEBUG if you want 
 
 ## Making calls
 
-### Capture
+### Capturing events
 
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
+import RubySendEvents from '../../integrate/send-events/_snippets/send-events-ruby.mdx'
 
-A `capture` call requires:
-
--   `distinct id` which uniquely identifies your user
--   `event name` to specify the event
-
-*   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
-
-Optionally you can submit:
-
--   `properties`, which is a dictionary with any information you'd like to add
--   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
--   `send_feature_flags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) so that we can avoid making the request.
-
-For example:
-
-```ruby
-posthog.capture({
-    distinct_id: 'distinct id',
-    event: 'movie played',
-    properties: {
-        movie_id: '123',
-        category: 'romcom'
-    }
-})
-```
+<RubySendEvents />
 
 ### Setting user properties
 
@@ -98,20 +60,6 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
-
-### Sending page views
-
-If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
-
-```ruby
-posthog.capture({
-    distinct_id: 'distinct id',
-    event: '$pageview',
-    properties: {
-        '$current_url': 'https://example.com'
-    }
-})
-```
 
 ### Feature flags
 

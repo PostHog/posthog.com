@@ -302,5 +302,3 @@ Now that we are capturing pageviews, we can figure out how users move around our
 We can also track more events than just pageviews. The [event tracking guide](https://posthog.com/tutorials/event-tracking-guide) will provide you with all the details on how.
 
 For more advanced PostHog users, you can use all of your new pageview data to help you build [an AARRR dashboard](https://posthog.com/blog/aarrr-pirate-funnel).
-
-<NewsletterTutorial compact/>

@@ -88,5 +88,3 @@ Now we’ve targeted churn on multiple fronts, both by understanding what users 
 - [The most useful B2B SaaS product metrics](/blog/b2b-saas-product-metrics)
 - [Finding your North Star metric and why it matters](/blog/north-star-metrics)
 - [How to get Stripe payment and revenue data](/tutorials/stripe-payment-data)
-
-<NewsletterTutorial compact/>

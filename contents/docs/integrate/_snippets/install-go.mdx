@@ -1,0 +1,24 @@
+```bash
+go get github.com/posthog/posthog-go
+```
+
+```go
+package main
+
+import (
+    "os"
+    "github.com/posthog/posthog-go"
+)
+
+func main() {
+	client, _ := posthog.NewWithConfig(
+		os.Getenv("POSTHOG_API_KEY"),
+		posthog.Config{
+			Endpoint:       "<ph_instance_address>",
+			PersonalApiKey: "your personal API key", // needed for feature flags
+		},
+	)
+	defer client.Close()
+	// run commands
+}
+```

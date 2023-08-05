@@ -8,22 +8,64 @@ availability:
     enterprise: full
 ---
 
-PostHog can capture frontend events automatically using autocapture. This means you do not need to manually instrument tracking for individual components, links, buttons or other parts of your product to get started at analyzing user behavior.
+> **Note:** Autocapture is available for our [JavaScript Web](/docs/libraries/js), [React](/docs/libraries/react), and [React Native](/docs/libraries/react-native) SDKs.
 
-Autocapture is available for our [JavaScript snippet](/docs/getting-started/install?tab=snippet#javascript-snippet-badgerecommendedbadge), [JavaScript SDK](/docs/libraries/js), [React SDK](/docs/libraries/react), and [React Native SDK](/docs/libraries/react-native).
+PostHog can capture frontend events automatically using autocapture, such as any `click`, `change of input`, or submission associated with a `button`, `form`, `input`, `select`, or `textarea`.
+
+This means you do not need to manually instrument tracking for individual components, links, buttons, or other parts of your product.
+
+Autocapture is **enabled by default**. 
+
+ ## Disabling autocapture
+
+You can disable autocapture completely by setting `autocapture: false` in the [config](/docs/libraries/js#config). You can also disable autocapture in your [project settings](https://app.posthog.com/project/settings). 
+
+Please note, autocapture is only enabled if _neither_ of these options are disabled.
+
+> Disabling autocapture **will not disable [session recording](/docs/session-replay/manual)**. You can disable session recording using `disable_session_recording` or by turning it off in your [project settings](https://app.posthog.com/project/settings).
+
+## Configuring autocapture
+
+> This section covers configuring autocapture in the JavaScript and React SDKs. For the React Native SDK, see our [React Native docs](/docs/libraries/react-native#autocapture).
+
+### Reducing events
+
+Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using allowlists. Allowlists are an array of allowed events – any events for elements not matching an item in the array are dropped.
+
+For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture`, you can do the following:
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_instance_address>',
+    autocapture: {
+        dom_event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
+        url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
+        element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
+        css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
+    },
+})
+```
+Allowlists only filter autocapture events – they won't affect the data collected by session recordings or custom events.
+
+### Preventing sensitive data capture
+
+PostHog tries to not capture any sensitive data from your website. If there are elements you don't want captured, add the `ph-no-capture` class name.
+
+```html
+<button class='ph-no-capture'>Sensitive information here</button>
+```
 
 ## Capturing additional properties in autocapture events
 
 If you add a data attribute onto an element in the format `data-ph-capture-attribute-some-key={someValue}`, then any autocapture event from that element or one of its children will have the property `some-key: 'someValue'` added to it. This can be useful when you want to add additional information to autocapture events. 
 
-## Example 1: Get the value of an element on the page
+### Example 1: Get the value of an element on the page
 
 For example, with a notification bell:
 
 ![a notification bell showing 1 unread notification](../../images/docs/data/autocapture/notification-bell.png)
 
 You can include the unread count in the autocapture event by adding the `data-ph-capture-attribute` class like this: 
-
 
 ```HTML
 <div
@@ -68,44 +110,6 @@ While autocapture tracks the majority of general events on your site, it is impo
 Specifically, PostHog autocapture only grabs the `name`, `id`, and `class` attributes from `input` tags.
 
 If you need to collect more data from inputs, you should use [custom events](/tutorials/event-tracking-guide).
-
-## Configuring autocapture
-
-> This section covers configuring autocapture in the JavaScript and React SDKs. For the React Native SDK, see our [React Native docs](/docs/libraries/react-native#autocapture).
-
-### Reducing events
-
-Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using allowlists. Allowlists are an array of allowed events – any events for elements not matching an item in the array are dropped.
-
-For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture`, you can do the following:
-
-```js-web
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    autocapture: {
-        event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
-        url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
-        element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
-        css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
-    },
-})
-```
-Allowlists only filter autocapture events – they won't affect the data collected by session recordings or custom events.
-
-### Preventing sensitive data capture
-
-PostHog tries to not capture any sensitive data from your website. If there are elements, you don't want to be captured, you can add the `ph-no-capture` class name to prevent them from being autocaptured.
-
-```html
-<button class='ph-no-capture'>Sensitive information here</button>
-```
-
-### Disabling autocapture
-
-Autocapture is enabled by default. You can disable autocapture completely by setting `autocapture: false` in the config. You can also disable autocapture in your [project settings](https://app.posthog.com/project/settings).
-
-Disabling autocapture **will not disable session recording**. You can disable session recording using `disable_session_recording` or by turning it off in your project's settings.
-
 
 ## Autocaptured properties
 

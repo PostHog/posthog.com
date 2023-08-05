@@ -130,7 +130,7 @@ export default function Home() {
 
 Once this is set up, we use the `usePathname` and `useSearchParams` client-side hooks from `next/navigation` to check when the URL changes and then capture a custom `$pageview` event. We use the data from the pathname and search params to accurately create string for the `$current_url` property too.
 
-Because [`useSearchParams`]((https://nextjs.org/docs/app/api-reference/functions/use-search-params)) will [deopt](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering, we need to export this as its own `PostHogPageview` component and wrap it in a `<Suspense>` later.
+Because [`useSearchParams`](https://nextjs.org/docs/app/api-reference/functions/use-search-params) will [deopt](https://nextjs.org/docs/messages/deopted-into-client-rendering) the entire app into client-side rendering, we need to export this as its own `PostHogPageview` component and wrap it in a `<Suspense>` later.
 
 This looks like this:
 

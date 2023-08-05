@@ -8,9 +8,7 @@ const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
     const active = activeSlide === index
 
     const handleClick = () => {
-        document
-            .getElementById(`home-slide-${index}`)
-            ?.scrollIntoView({ block: 'nearest', inline: 'start', behavior: 'smooth' })
+        document.getElementById(`home-slide-${index}`)?.scrollIntoView({ block: 'nearest', inline: 'start' })
     }
 
     return (
@@ -58,15 +56,13 @@ const SlideContainer = ({ children, index, setActiveSlide }) => {
 export default function Slider() {
     const [activeSlide, setActiveSlide] = useState(0)
 
-    const scrollIntoView = (index, smooth) =>
-        document
-            .getElementById(`home-slide-${index}`)
-            ?.scrollIntoView({ block: 'nearest', inline: 'start', behavior: smooth ? 'smooth' : 'auto' })
+    const scrollIntoView = (index) =>
+        document.getElementById(`home-slide-${index}`)?.scrollIntoView({ block: 'nearest', inline: 'start' })
 
     const handleArrow = (index, defaultIndex) => {
         const newActiveSlide = slides[index] ? index : defaultIndex
         setActiveSlide(newActiveSlide)
-        scrollIntoView(newActiveSlide, newActiveSlide !== defaultIndex)
+        scrollIntoView(newActiveSlide)
     }
 
     return (

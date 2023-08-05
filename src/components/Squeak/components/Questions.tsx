@@ -13,6 +13,8 @@ type QuestionsProps = {
     parentName?: string
     buttonText?: React.ReactNode | string
     subject?: boolean
+    initialView?: string
+    disclaimer?: boolean
 }
 
 export const Questions = ({
@@ -25,6 +27,8 @@ export const Questions = ({
     parentName,
     buttonText,
     subject,
+    initialView,
+    disclaimer,
 }: QuestionsProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
 
@@ -56,10 +60,12 @@ export const Questions = ({
                 <QuestionForm
                     buttonText={buttonText}
                     parentName={parentName}
+                    initialView={initialView}
                     onSubmit={refresh}
                     formType="question"
                     slug={slug}
                     subject={subject}
+                    disclaimer={disclaimer}
                 />
             )}
         </div>

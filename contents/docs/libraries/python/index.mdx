@@ -20,69 +20,17 @@ This is an optional library you can install if you're working with Python. It us
 
 ## Installation
 
-```bash
-pip install posthog
-```
+import PythonInstall from '../../integrate/_snippets/install-python.mdx'
 
-In your app, import the `posthog` library and set your api key and host **before** making any calls.
-
-```python
-from posthog import Posthog
-
-# The personal API key is necessary only if you want to use local evaluation of feature flags.
-posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>', personal_api_key='<ph_personal_api_key>')
-```
-
-You can read more about the differences between the project and personal API keys in the dedicated [API authentication section](/docs/api/overview#authentication) of the Docs.
-
-> **Note:** As a general rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable would be best.
-
-You can find your keys in the 'Project Settings' page in PostHog.
-
-To debug, you can toggle debug mode on:
-
-```python
-posthog.debug = True
-```
-
-And to make sure no calls happen during your tests, you can disable them, like so:
-
-```python
-if settings.TEST:
-    posthog.disabled = True
-```
+<PythonInstall />
 
 ## Making Calls
 
-### Capture
+### Capturing events
 
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
+import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-python.mdx'
 
-A `capture` call requires:
-
--   `distinct id` which uniquely identifies your user
--   `event name` to specify the event
-
-*   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
-
-Optionally you can submit:
-
--   `properties`, which is a dictionary with any information you'd like to add
--   `timestamp`, a datetime object for when the event happened. If this isn't submitted, it'll be set to the current time
--   `uuid`, a unique `uuid` for the event, leave blank to autogenerate
--   `send_feature_flags`,  a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) so that we can avoid making the request.
-
-For example:
-
-```python
-posthog.capture('distinct id', 'movie played', {'movie_id': '123', 'category': 'romcom'})
-```
-
-or
-
-```python
-posthog.capture('distinct id', event='movie played', properties={'movie_id': '123', 'category': 'romcom'}, timestamp=datetime.utcnow().replace(tzinfo=tzutc()))
-```
+<PythonSendEvents />
 
 ### Setting user properties
 
@@ -105,7 +53,7 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
-We strongly recommend reading our docs on [alias](/docs/data/identifying-users#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/getting-started/identify-users) to best understand how to correctly use this method.
 
 ### Feature flags
 
@@ -286,14 +234,6 @@ posthog.group_identify('company', 'company_id_in_your_db', {
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
-
-### Sending page views
-
-If you're aiming for a full back-end implementation of PostHog, you can send `pageviews` from your backend
-
-```python
-posthog.capture('distinct id', '$pageview', {'$current_url': 'https://example.com'})
-```
 
 ## Serverless environments (Render/Lambda/...)
 

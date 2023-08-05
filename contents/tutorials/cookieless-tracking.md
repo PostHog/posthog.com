@@ -49,7 +49,7 @@ yarn add posthog-js
 
 To finish installation, include it in your files:
 
-```
+```js
 import posthog from 'posthog-js'
 posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
 ```
@@ -58,7 +58,7 @@ With installation complete, it’s time to configure how you want data to persis
 
 Here’s how to do that if you want to store data in page memory:
 
-```
+```js
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_instance_address>',
     persistence: 'memory',
@@ -85,6 +85,3 @@ Nothing comes for free and limiting what `posthog` can track between page loads 
 ## Further reading
 
 - [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
-
-<NewsletterTutorial compact/>
-

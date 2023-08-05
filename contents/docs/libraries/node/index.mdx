@@ -20,31 +20,9 @@ If you're working with Node.js, the official `posthog-node` library is the simpl
 
 ## Installation
 
-Run either `npm` or `yarn` in terminal to add it to your project:
+import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 
-```bash
-npm install posthog-node --save
-# or
-yarn add posthog-node
-```
-
-In your app, set your API key **before** making any calls.
-
-```node
-import { PostHog } from 'posthog-node'
-
-const client = new PostHog(
-    '<ph_project_api_key>',
-    { host: '<ph_instance_address>' } // You can omit this line if using PostHog Cloud
-)
-
-// On program exit, call shutdown to stop pending pollers and flush any remaining events
-await client.shutdownAsync()
-```
-
-You can find your key in the 'Project Settings' page in PostHog.
-
-> **Note:** As a rule of thumb, we do not recommend hardcoding API keys. Setting it as an environment variable would be best.
+<NodeInstall />
 
 ### Options
 
@@ -63,34 +41,11 @@ You can find your key in the 'Project Settings' page in PostHog.
 
 ## Making calls
 
-### Capture
+### Capturing events
 
-Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.
+import NodeSendEvents from '../../integrate/send-events/_snippets/send-events-node.mdx'
 
-A `capture` call requires:
-
--   `distinct id` which uniquely identifies your user
--   `event name` to identify the event
-
-*   We recommend naming events with "[noun] [verb]", such as `movie played` or `movie updated`, in order to easily identify what your events mean later on (we know this from experience).
-
-Optionally, you can also submit:
-
--   `properties`, which is an object with any information you'd like to add
--   `sendFeatureFlags`, a boolean that determines whether to send current known feature flags with this event. This is useful when running experiments which depends on this event. However, when this is set to `true`, we will make an additional request to fetch the current feature flags and thus slow things down. A workaround is to [manually compute feature flag information](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) so that we can avoid making the request.
-
-For example:
-
-```node
-client.capture({
-    distinctId: 'distinct id',
-    event: 'movie played',
-    properties: {
-        movieId: '123',
-        category: 'romcom',
-    },
-})
-```
+<NodeSendEvents />
 
 ### Setting user properties
 
@@ -114,20 +69,6 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
-
-### Sending page views
-
-If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
-
-```node
-client.capture({
-    distinctId: 'distinct id',
-    event: '$pageview',
-    properties: {
-        $current_url: 'https://example.com',
-    },
-})
-```
 
 ### Feature flags
 

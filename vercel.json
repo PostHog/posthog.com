@@ -1001,7 +1001,25 @@
         { "source": "/docs/cdp/twitter-followers", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/gitlab-release-tracker", "destination": "/docs/cdp" },
         { "source": "/handbook/growth/marketing/Customer-personas", "destination": "/handbook/growth/marketing" },
-        { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" }
+        { "source": "/docs/cdp/bitbucket-release-tracker", "destination": "/docs/cdp" },
+        { "source": "/james", "destination": "/community/profiles/71" },
+        { "source": "/handbook/company/strategy", "destination": "/handbook/strategy/overview" },
+        { "source": "/guides", "destination": "/tutorials" },
+        {
+            "source": "/handbook/growth/marketing/customer-personas",
+            "destination": "/handbook/strategy/ideal-customer-persona"
+        },
+        {
+            "source": "/pricing",
+            "destination": "/pricing?product=ab-testing",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "product",
+                    "value": "experiments"
+                }
+            ]
+        }
     ],
     "rewrites": [
         {
@@ -1025,6 +1043,9 @@
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
         },
-        { "source": "/docs/data/data-management", "destination": "/docs/data" }
+        { "source": "/docs/data/data-management", "destination": "/docs/data" },
+        { "source": "/docs/batch-exports", "destination": "/docs/cdp/batch-exports" },
+        { "source": "/docs/batch-exports/s3", "destination": "/docs/cdp/batch-exports/s3" },
+        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" }
     ]
 }

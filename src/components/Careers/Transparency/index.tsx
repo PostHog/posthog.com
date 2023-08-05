@@ -63,7 +63,7 @@ export const Transparency = () => {
                 />
             </Structure.Section>
 
-            <div className="w-full max-w-screen-xl mx-8 md:mx-auto my-16 text-left grid sm:grid-cols-2 gap-4">
+            <div className="w-full max-w-screen-xl md:px-4 md:mx-auto my-16 text-left grid sm:grid-cols-2 gap-4">
                 <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
                     <TransparencyFeature title="Compensation" Image={Compensation} className="max-w-md mx-auto">
                         <p className="mb-0 text-base">

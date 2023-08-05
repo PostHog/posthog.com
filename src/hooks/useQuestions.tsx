@@ -4,6 +4,7 @@ import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 import { QuestionData, StrapiResult, StrapiRecord } from 'lib/strapi'
 import usePostHog from './usePostHog'
+import { useUser } from './useUser'
 
 type UseQuestionsOptions = {
     slug?: string
@@ -127,13 +128,17 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
 }
 
 export const useQuestions = (options?: UseQuestionsOptions) => {
+    const { getJwt, user } = useUser()
     const posthog = usePostHog()
 
     const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite<
         StrapiResult<QuestionData[]>
     >(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, options)}`,
-        (url: string) => fetch(url).then((r) => r.json())
+        async (url: string) =>
+            fetch(url, user ? { headers: { Authorization: `Bearer ${await getJwt()}` } } : undefined).then((r) =>
+                r.json()
+            )
     )
 
     if (error) {

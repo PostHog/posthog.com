@@ -245,7 +245,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                             Learn how to manage events and customer data for use with all PostHog products.
                         </p>
                         <CallToAction to="/docs/data" type="outline" size="md" className="!w-full sm:!w-auto">
-                            Get started
+                            Explore
                         </CallToAction>
                     </div>
                     <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
@@ -255,7 +255,7 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
                         </p>
                         <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
                             <CallToAction to="/docs/apps" type="outline" size="md" className="!w-full sm:!w-auto">
-                                Get started
+                                Explore
                             </CallToAction>
                             <Link to="/apps" className="text-sm">
                                 Browse apps

@@ -1,0 +1,74 @@
+> **Warning:** This is a <b>community maintained</b> library. It is not officially supported by PostHog.
+
+PostHog is available for install via [Pub](https://pub.dev/packages/posthog_flutter).
+
+### Configuration
+
+Set your PostHog API key and change the automatic event tracking (only for Android and iOS) on if you wish the library to take care of it for you.
+
+Remember that the application lifecycle events won't have any special context set for you by the time it is initialized. If you are using a self-hosted instance of PostHog you will need to have the public hostname or IP for your instance as well.
+
+#### Android
+
+```xml file=AndroidManifest.xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.posthog.posthog_flutter_example">
+    <application>
+        <activity>
+            [...]
+        </activity>
+        <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_api_key>" />
+        <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_instance_address>" />
+        <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="false" />
+        <meta-data android:name="com.posthog.posthog.DEBUG" android:value="false" />
+    </application>
+</manifest>
+```
+
+#### iOS
+
+```xml file=Info.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	[...]
+	<key>com.posthog.posthog.API_KEY</key>
+	<string><ph_project_api_key></string>
+	<key>com.posthog.posthog.POSTHOG_HOST</key>
+	<string><ph_instance_address></string>
+	<key>com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS</key>
+	<false/>
+	<false/>
+	[...]
+</dict>
+</plist>
+```
+
+#### Web
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>example</title>
+</head>
+
+<body>
+  <script>
+    !function () {
+      var analytics = window.analytics = window.analytics || []; if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("PostHog snippet included twice."); else {
+        analytics.invoked = !0; analytics.methods = ["captureSubmit", "captureClick", "captureLink", "captureForm", "pageview", "identify", "reset", "group", "capture", "ready", "alias", "debug", "page", "once", "off", "on"]; analytics.factory = function (t) { return function () { var e = Array.prototype.slice.call(arguments); e.unshift(t); analytics.push(e); return analytics } }; for (var t = 0; t < analytics.methods.length; t++) { var e = analytics.methods[t]; analytics[e] = analytics.factory(e) } analytics.load = function (t, e) { var n = document.createElement("script"); n.type = "text/javascript"; n.async = !0; n.src = "https://cdn.posthog.com/analytics.js/v1/" + t + "/analytics.min.js"; var a = document.getElementsByTagName("script")[0]; a.parentNode.insertBefore(n, a); analytics._loadOptions = e }; analytics.SNIPPET_VERSION = "4.1.0";
+        analytics.load("YOUR_API_KEY_GOES_HERE");
+        analytics.page();
+      }
+    }();
+  </script>
+  <script src="main.dart.js" type="application/javascript"></script>
+</body>
+
+</html>
+```
+
+For more information please check: https://posthog.com/docs/integrate/client/js
