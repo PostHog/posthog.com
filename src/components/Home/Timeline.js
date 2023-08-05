@@ -3,6 +3,7 @@ import { heading } from './classes'
 import groupBy from 'lodash.groupby'
 import React, { useEffect, useRef, useState } from 'react'
 import { ArrowLeft, ArrowRight } from '@posthog/icons'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const categories = {
@@ -45,6 +46,7 @@ export const Items = ({ items }) => {
 }
 
 export default function Timeline() {
+    const breakpoints = useBreakpoint()
     const listRef = useRef(null)
     const {
         allSqueakRoadmap: { nodes },
@@ -135,10 +137,11 @@ export default function Timeline() {
                         return (
                             <div key={year} className="w-[80vw] md:w-[90vw] max-w-5xl shrink-0 mb-4 snap-center">
                                 <h4 className="text-2xl py-1 font-bold text-center">{year}</h4>
-                                <div className="p-4 bg-white dark:bg-dark border border-light dark:border-dark">
-                                    <ul role="list" className="py-1 px-0 grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div className="p-4 bg-white dark:bg-dark border border-light dark:border-dark sm:h-auto h-96 overflow-auto snap-x">
+                                    <ul role="list" className="py-1 px-0 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
                                         {months.map((month) => {
                                             const items = pastMonths[month]
+                                            if (breakpoints.sm && !items) return null
                                             return (
                                                 <li
                                                     key={month}
