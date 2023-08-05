@@ -112,7 +112,7 @@ export default function Questions({ data, pageContext }: IProps) {
                         </Listbox>
                     </div>
                 </div>
-
+                <SidebarSearchBox filter="question" />
                 <div className="mt-8 flex flex-col">
                     <QuestionsTable
                         hasMore={hasMore}
