@@ -70,7 +70,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                     onClick={() => setOpen(!open)}
                     className={`text-left text-sm flex space-x-2 justify-between items-end relative px-4 py-1 rounded border border-b-3 hover:border-light dark:hover:border-dark bg-accent dark:bg-accent-dark border-light dark:border-dark hover:top-[0px] hover:scale-[1]`}
                 >
-                    <span>Filters</span>
+                    <span>Categories</span>
                     <ChevronDown className="w-5 mb-[-1px]" />
                 </Menu.Button>
                 {open && (

@@ -131,17 +131,11 @@ const Post = ({
                             )}
                         </div>
                         <div>
-                            <span
-                                className={
-                                    articleView || breakpoints.md
-                                        ? 'flex flex-col-reverse'
-                                        : 'flex items-baseline space-x-1'
-                                }
-                            >
-                                <p className="m-0 text-base md:text-lg font-bold leading-tight line-clamp-2">{title}</p>
+                            <span>
                                 {category && (
                                     <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>
                                 )}
+                                <p className="m-0 text-base md:text-lg font-bold leading-tight line-clamp-2">{title}</p>
                             </span>
                             <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
                                 <li className="text-sm font-medium leading-none flex space-x-1 items-center">
@@ -172,14 +166,27 @@ const Post = ({
 
 const getCategoryParams = (root) => (root !== 'posts' ? { filters: { post_category: { folder: { $eq: root } } } } : {})
 
-function PostsListing({ articleView, posts, isLoading, fetchMore, setParams, root }) {
-    const [selectedCategories, setSelectedCategories] = useState([])
+const getCategoryLabels = (selectedCategories) =>
+    selectedCategories?.length <= 0
+        ? 'All posts'
+        : selectedCategories.map(({ attributes: { label } }) => label).join(', ')
+
+function PostsListing({
+    articleView,
+    posts,
+    isLoading,
+    fetchMore,
+    setParams,
+    root,
+    setSelectedCategories,
+    selectedCategories,
+}) {
     const breakpoints = useBreakpoint()
 
     return articleView && breakpoints.md ? null : (
         <div className={`${articleView ? 'sticky top-[108px] w-full lg:w-[30rem] flex-shrink-0' : 'flex-grow'}`}>
-            <div className="my-4 flex justify-between">
-                <h5 className="m-0">Posts</h5>
+            <div className="my-4 flex justify-between space-x-2">
+                <h5 className="m-0 line-clamp-1 leading-[2]">{getCategoryLabels(selectedCategories)}</h5>
                 <Categories
                     setParams={setParams}
                     setSelectedCategories={setSelectedCategories}
@@ -301,6 +308,7 @@ export default function Posts({ children, articleView }) {
     const root = pathname.split('/')[1]
     const [params, setParams] = useState(getCategoryParams(root))
     const { posts, isLoading, fetchMore, mutate } = usePosts({ params })
+    const [selectedCategories, setSelectedCategories] = useState([])
 
     const handleNewPostSubmit = () => {
         setNewPostModalOpen(false)
@@ -366,6 +374,8 @@ export default function Posts({ children, articleView }) {
                 </section>
                 <section className="lg:flex lg:space-x-12 my-4 md:my-8 items-start">
                     <PostsListing
+                        selectedCategories={selectedCategories}
+                        setSelectedCategories={setSelectedCategories}
                         root={root}
                         setParams={setParams}
                         fetchMore={fetchMore}
@@ -382,8 +392,8 @@ export default function Posts({ children, articleView }) {
                                 className="inline-flex lg:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                             >
                                 <RightArrow className="-scale-x-100 w-6" />
-                                <span className="text-red dark:text-yellow text-[15px] font-semibold">
-                                    Back to posts
+                                <span className="text-red dark:text-yellow text-[15px] font-semibold line-clamp-1 text-left">
+                                    Back to {getCategoryLabels(selectedCategories)}
                                 </span>
                             </button>
                         )}
