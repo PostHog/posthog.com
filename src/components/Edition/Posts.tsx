@@ -390,7 +390,12 @@ export default function Posts({ children, articleView }) {
                         <div>{children}</div>
                         {articleView && (
                             <div className="mt-12 max-w-lg">
-                                <QuestionForm subject={false} buttonText="Leave a comment" slug={pathname} />
+                                <QuestionForm
+                                    disclaimer={false}
+                                    subject={false}
+                                    buttonText="Leave a comment"
+                                    slug={pathname}
+                                />
                             </div>
                         )}
                     </div>
