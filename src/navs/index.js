@@ -671,7 +671,7 @@ const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: '/questions',
+    url: '/posts',
     icon: 'Chat',
     children: [
         {

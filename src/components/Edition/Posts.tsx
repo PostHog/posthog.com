@@ -9,7 +9,7 @@ import { Skeleton } from 'components/Questions/QuestionsTable'
 import { usePosts } from './hooks/usePosts'
 import { useUser } from 'hooks/useUser'
 import Tooltip from 'components/Tooltip'
-
+import pluralize from 'pluralize'
 import { Login } from 'components/Community/Sidebar'
 import Layout from 'components/Layout'
 import Modal from 'components/Modal'
@@ -169,7 +169,7 @@ const getCategoryParams = (root) => (root !== 'posts' ? { filters: { post_catego
 const getCategoryLabels = (selectedCategories) =>
     selectedCategories?.length <= 0
         ? 'All posts'
-        : selectedCategories.map(({ attributes: { label } }) => label).join(', ')
+        : selectedCategories.map(({ attributes: { label } }) => pluralize(label)).join(', ')
 
 function PostsListing({
     articleView,
