@@ -171,11 +171,11 @@ Feedback is essential to any startup, so it's more a question of how you collect
 
 Are users experiencing the _real value_ of your product? Spoiler: logging in ≠ engagement.
 
-You want to see user engagement growing in line with, or faster than, new users. If engagement is growing much faster than signups, it's a strong sign you have product-market fit.
+You want to see user engagement growing faster, or in line with, new users. If engagement is growing much faster than signups, it's a strong sign you have product-market fit.
 
 ![good pmf](../images/blog/how-to-measure-product-market-fit/good-pmf.png)
 
-If signups are growing, but user engagement is flat, it's likely you _don't_ have product-market fit.
+If signups are growing, but user engagement is flat, it's likely you _don't_ have product-market fit – most likely people are trying your product, but not coming back.
 
 ![bad pmf](../images/blog/how-to-measure-product-market-fit/bad-pmf.png)
 
