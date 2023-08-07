@@ -26,14 +26,6 @@ We encourage members of the PostHog for Startups program to inform us when they 
 
 We don't make guarantees about how we'll or if we'll share announcements, and do so only at our own discretion. 
 
-### Monthly office hours
-
-We host private monthly office hours with one of Tim (engineering), James (product, company building), Charles (ops, marketing), or Simon (sales, CS). Joe organizes these and sends out information in the monthly newsletter.  
-
-Create the calendar event with a Google Meet link in advance and then just manually add people to it if they reply to the email or newsletter. We use Meet so we don't have any issues with hosts not attending. 
-
-Office hours are typically very informal. Hosts can prepare demos, decks or other assets if they choose to, but are generally encouraged to be opportunities for users to ask questions and share feedback. 
-
 ### Monthly newsletter
 
 Once a month, we send a short newsletter to all users in the program. We send the email as a Customer.io broadcast and there is a template setup in Customer.io. 
@@ -44,7 +36,6 @@ The email is still evolving, but typically includes the following sections:
 
 ```
 - A short intro and invitation for users to share important announcements with us
-- Information on the next office hours event
 - A link to the most recent startup spotlight
 - 'Our thoughts on:' a topic which is relevant to founders, e.g. pricing strategies
 - Information on new features or launches
