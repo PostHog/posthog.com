@@ -105,13 +105,6 @@ const Post = ({
     return (
         <li ref={containerRef} className="snap-start last:pb-24">
             <span className="flex items-center" ref={fetchMore ? ref : null}>
-                {(!articleView || breakpoints.md) && (
-                    <LikeButton
-                        handleClick={handleLike}
-                        liked={liked}
-                        className="md:mr-6 mr-4 w-6 h-6 md:w-7 md:h-7 flex-shrink-0"
-                    />
-                )}
                 <Link
                     className={`text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit flex-grow`}
                     to={slug}
@@ -140,12 +133,8 @@ const Post = ({
                                 </p>
                             </span>
                             <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
-                                <li className="text-sm font-medium leading-none flex space-x-1 items-center">
-                                    <Heart active={liked} className={`w-4 h-4 ${liked ? 'text-red' : 'opacity-60'}`} />
-                                    <span className="opacity-60">{likeCount}</span>
-                                </li>
                                 {authors?.data?.length > 0 && (
-                                    <li className="text-sm font-medium leading-none pl-2 border-l border-light dark:border-dark opacity-60 sm:block hidden overflow-hidden text-ellipsis whitespace-nowrap">
+                                    <li className="text-sm font-medium leading-none pr-2 border-r border-light dark:border-dark opacity-60 sm:block hidden overflow-hidden text-ellipsis whitespace-nowrap">
                                         {authors?.data
                                             .map(({ id, attributes: { firstName, lastName } }) => {
                                                 const name = [firstName, lastName].filter(Boolean).join(' ')
@@ -154,7 +143,7 @@ const Post = ({
                                             .join(', ')}
                                     </li>
                                 )}
-                                <li className="text-sm font-medium pl-2 leading-none border-l border-light dark:border-dark flex-shrink-0">
+                                <li className="text-sm font-medium leading-none flex-shrink-0">
                                     <span className="opacity-60">{day.isToday() ? 'Today' : day.fromNow()}</span>
                                 </li>
                             </ul>
