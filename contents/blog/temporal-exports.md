@@ -41,7 +41,7 @@ We didn’t have logs or reports. For example, we didn’t know how much data wa
 
 ### Expensive
 
-The final nail was that exports were expensive. This wasn’t because we were charging a lot for exports, we weren’t charging anything. It was because they were expensive on the destination side. 
+The final nail was that exports were expensive. This wasn’t because we were charging a lot for exports – in fact, we weren’t charging anything. It was because they were expensive on the destination side. 
 
 The unreliability led to larger amounts of data processing on the destination side, all of which come with costs. For example, if your export failed 75% through and you needed to reset, you end up paying ingestion fees of 175%. We were also paying for more processing than needed because exports were failing repeatedly.
 
@@ -51,9 +51,9 @@ Simply, we outgrew the export system we put in place, and needed a more reliable
 
 ## Temporal to the rescue
 
-Early in 2023, James opened an [RFC recommending using Temporal at PostHog](https://github.com/PostHog/meta/pull/99). Temporal is a workflow engine abstracting away the details of failure modes, retry logic, and timeouts. This enables developers to build and deploy rock-solid business logic. It is used by big companies with large amounts of data flows like Uber, Coinbase, Doordash, and Hashicorp.
+Early in 2023, one of our engineers, [James](/community/profiles/90), opened an [RFC recommending using Temporal at PostHog](https://github.com/PostHog/meta/pull/99). Temporal is a workflow engine abstracting away the details of failure modes, retry logic, and timeouts. This enables developers to build and deploy rock-solid business logic. It is used by big companies with large amounts of data flows – like Uber, Coinbase, Doordash, and Hashicorp.
 
-In Q2, Tomas’ goal was "rock solid-batch processing" and [we chose Temporal](https://github.com/PostHog/meta/pull/99) to build it because it helped solve issues like:
+In Q2, we set a goal of "rock solid-batch processing" and [chose Temporal](https://github.com/PostHog/meta/pull/99) to build it because it helped solve issues like:
 
 - Retry, resume, cancel, and timeout logic per activity and workflow
 - Provides assurances about running exactly-once
