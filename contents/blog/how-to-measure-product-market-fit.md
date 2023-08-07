@@ -27,8 +27,8 @@ Measuring product-market fit requires a _combination_ of leading and lagging ind
 
 **Leading indicators**, are predictive. A surge in organic growth and positive word-of-mouth suggests product-market fit, but can't confirm it. They include:
 - **Organic word-of-mouth growth** – Not directly linked to paid promotions
-- **Meaningful user engagement** – Users experiencing real value    
 - **User feedback & PMF Survey** – Direct feedback from users
+- **Meaningful user engagement** – Users experiencing real value    
 
 **Lagging indicators** confirm whether you have product-market fit. They're more reliable, particularly if they're linked to financial performance. They include:
 - **Retention curve** – Evidence users are coming back
