@@ -25,24 +25,27 @@ Local evaluation payloads are typically used for much, _much_ more than 10 users
 
 ---
 
-## My feature flags are too expensive, what can I do about this?
+## How can I reduce the amount I pay for feature flags?
 
-Feature flags can get expensive if your code ends up sending multiple requests to get feature flags for each person.
+Feature flags can get expensive if your code sends feature flag requests for each person.
 
-If this is happening on the client side, i.e. while using the posthog-js SDK, you have two options:
+If this is happening on the client side, i.e. while using the `posthog-js` SDK, you have two options:
 
-1. As per the [advanced configuration](/docs/libraries/js#advanced-configuration), set the `advanced_disable_feature_flags_on_first_load` setting. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
-2. As per the [advanced configuration](/docs/libraries/js#advanced-configuration), set the `advanced_disable_feature_flags` setting. This stops automatically requesting feature flags. Instead, use the [bootstrap option](/docs/libraries/js#bootstrapping-flags) to load flags only once, via local evaluation, which makes no requests for flags from the client side.
+1. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set the `advanced_disable_feature_flags_on_first_load` setting to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
 
-Instead, if your bill is high because of too many local evaluation requests, here's how to fix it:
+2. As per the [advanced configuration](/docs/libraries/js#advanced-configuration), set the `advanced_disable_feature_flags` setting to `true`. This stops automatically requesting feature flags. Instead, use the [bootstrap option](/docs/libraries/js#bootstrapping-flags) to load flags only once, via (server-side evaluation)[/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation], which makes no requests for flags from the client side.
 
-When you use local evaluation, you aren't charged for evaluating flags per user (as long as you only evaluate locally), but for requests for flag definitions. Every PostHog instance you initialise creates a poller that sends requests to us every 30 seconds by default.
+### Local evaluation
+
+If your bill is high because of too many local evaluation requests, here's how to fix it:
+
+When you use local evaluation, you aren't charged for evaluating flags per user (as long as you only evaluate locally), but for requests for flag definitions. Every PostHog instance you initialize creates a poller that sends requests to us every 30 seconds by default.
 
 So, for example, if you have 25 backend servers, and each of those has a `pollInterval` of 30 seconds, the total number of requests per minute you're charged for is 25*2 = 50 requests / minute. In other words, that is 50*60*24*30 =~ 2 million requests / month.
 
-To fix this, you can set the `pollInterval`, or the equivalent parameter in your SDK of choice to 300 seconds instead of 30 seconds. The ramifications here are that whenever you make an update to a feature flag using the posthog UI, it will take 300 seconds, instead of 30 seconds for that change to roll to all your servers.
+To fix this, you can set the `pollInterval`, or the equivalent parameter in your SDK of choice to 300 seconds instead of 30 seconds. The ramifications here are that whenever you make an update to a feature flag using the PostHog UI, it takes 300 seconds, instead of 30, for that change to roll to all your servers.
 
-> **Note:** Do not use local evaluation in an edge / lambda environment, because this initialises a posthog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation here.
+> **Note:** Do not use local evaluation in an edge / lambda environment, because this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation here.
 
 ---
 
