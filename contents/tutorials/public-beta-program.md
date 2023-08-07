@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-10.png
 tags: ['feature flags']
 ---
 
-Public betas are a way to get new features into the hands of users and get valuable feedback and analytics. In this tutorial, we show you how to add a basic public beta program to your app with PostHog’s early access management feature.
+Public betas are a way to get new features into the hands of users and get valuable feedback and analytics. In this tutorial, we show you how to add a basic public beta program to your app with PostHog’s [early access management feature](/docs/feature-flags/early-access-feature-management).
 
 Our example uses Next.js, but this also works for other frameworks and languages.
 
