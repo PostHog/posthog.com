@@ -225,17 +225,7 @@
                 "url": "/handbook/people/offboarding"
             },
             {
-                "name": "Ramp up plans",
-                "url": "",
-                "children": [
-                    {
-                        "name": "Product Manager ramp up",
-                        "url": "/handbook/people/ramp-up/product-manager"
-                    }
-                ]
-            },
-            {
-                "name": "Grievance process",
+                "name": "HR processes",
                 "url": "/handbook/people/grievances"
             },
             {
