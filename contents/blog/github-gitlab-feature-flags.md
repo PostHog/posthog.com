@@ -1,6 +1,6 @@
 ---
 title: What you can learn from how GitHub and GitLab use feature flags
-date: 2023-07-31
+date: 2023-08-07
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
