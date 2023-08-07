@@ -37,7 +37,7 @@ const Categories = ({ value, setFieldValue }) => {
                     <Chevron className="w-2.5 mr-[.3rem]" />
                 </Listbox.Button>
                 {categories?.length > 0 && (
-                    <Listbox.Options className="list-none p-0 m-0 absolute left-[-1px] bottom-0 translate-y-full z-20 bg-white dark:bg-gray-accent-dark-hover w-full max-h-[247px] overflow-auto shadow-md rounded-br-md rounded-bl-md border divide-y border-border divide-border">
+                    <Listbox.Options className="list-none p-0 m-0 absolute left-[-1px] bottom-0 translate-y-full z-20 bg-white dark:bg-gray-accent-dark-hover w-full max-h-[247px] overflow-auto shadow-md rounded-br-md rounded-bl-md border divide-y border-border dark:border-dark divide-border dark:divide-border-dark">
                         {categories.map((category) => {
                             return (
                                 <Listbox.Option key={category.id} value={category}>
@@ -72,7 +72,7 @@ const Accordion = ({ children, label, active, initialOpen = false, className = '
                     {open ? <Minus /> : <Plus />}
                 </div>
             </button>
-            <div className={`border-t border-border ${open ? '' : 'hidden'}`}>{children}</div>
+            <div className={`border-t border-border dark:border-dark ${open ? '' : 'hidden'}`}>{children}</div>
         </>
     )
 }
@@ -176,15 +176,15 @@ export default function NewPost({ onSubmit }) {
     })
 
     return (
-        <div className="max-w-[450px] h-full ml-auto relative bg-white overflow-auto border-l border-border">
+        <div className="max-w-[450px] h-full ml-auto relative bg-white dark:bg-accent-dark overflow-auto border-l border-border dark:border-dark">
             <form className="m-0 flex flex-col h-full" onSubmit={handleSubmit}>
-                <div className="border-b border-border overflow-hidden">
-                    <div className="grid grid-cols-1 divide-y divide-border border-border w-full items-center">
+                <div className="border-b border-border dark:border-dark overflow-hidden">
+                    <div className="grid grid-cols-1 divide-y divide-border dark:divide-border-dark border-border dark:border-dark w-full items-center">
                         <input
                             required
                             onChange={(e) => setFieldValue('title', e.target.value)}
                             placeholder="Title"
-                            className="px-4 py-3"
+                            className="px-4 py-3 dark:bg-accent-dark"
                             name="title"
                             value={values.title}
                         />
@@ -193,18 +193,18 @@ export default function NewPost({ onSubmit }) {
                         </Accordion>
                         <Categories setFieldValue={setFieldValue} value={values.category} />
                         <Accordion active={values.ctaURL && values.ctaLabel} label="Call to action">
-                            <div className="grid grid-cols-2 divide-x divide-border border-border">
+                            <div className="grid grid-cols-2 divide-x divide-border dark:divide-border-dark border-border dark:border-dark">
                                 <input
                                     onChange={(e) => setFieldValue('ctaLabel', e.target.value)}
                                     placeholder="Label"
-                                    className="px-4 py-2 border-border w-full"
+                                    className="px-4 py-2 border-border dark:border-dark w-full dark:bg-accent-dark"
                                     name="cta-label"
                                     value={values.ctaLabel}
                                 />
                                 <input
                                     onChange={(e) => setFieldValue('ctaURL', e.target.value)}
                                     placeholder="URL"
-                                    className="px-4 py-2 border-border w-full"
+                                    className="px-4 py-2 border-border dark:border-dark w-full dark:bg-accent-dark"
                                     name="cta-url"
                                     value={values.ctaURL}
                                 />

@@ -21,31 +21,34 @@ export const wrapPageElement = ({ element, props }) => {
     return (
         <UserProvider>
             {wrapElement({
-                element: /^blog\/|^tutorials\/|^customers\/|^spotlight\/|^posts|^changelog\/(.*?)\//.test(slug) ? (
-                    <Posts {...props} articleView={!/^posts$/.test(slug)}>
-                        {element}
-                    </Posts>
-                ) : props.custom404 || !props.data ? (
-                    element
-                ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
-                  ![
-                      'docs/api/post-only-endpoints',
-                      'docs/api/user',
-                      'docs/integrations',
-                      'docs/product-analytics',
-                      'docs/session-replay',
-                      'docs/feature-flags',
-                      'docs/experiments',
-                      'docs/data',
-                  ].includes(slug) ? (
-                    <HandbookLayout {...props} />
-                ) : /^session-replay|^product-analytics|^feature-flags|^ab-testing|^product-os/.test(slug) ? (
-                    <Product {...props} />
-                ) : /^careers\//.test(slug) ? (
-                    <Job {...props} />
-                ) : (
-                    element
-                ),
+                element:
+                    /^blog\/(?!categories)|^tutorials\/(?!categories)|^customers\/|^spotlight\/|^posts|^changelog\/(.*?)\//.test(
+                        slug
+                    ) ? (
+                        <Posts {...props} articleView={!/^posts$/.test(slug)}>
+                            {element}
+                        </Posts>
+                    ) : props.custom404 || !props.data ? (
+                        element
+                    ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
+                      ![
+                          'docs/api/post-only-endpoints',
+                          'docs/api/user',
+                          'docs/integrations',
+                          'docs/product-analytics',
+                          'docs/session-replay',
+                          'docs/feature-flags',
+                          'docs/experiments',
+                          'docs/data',
+                      ].includes(slug) ? (
+                        <HandbookLayout {...props} />
+                    ) : /^session-replay|^product-analytics|^feature-flags|^ab-testing|^product-os/.test(slug) ? (
+                        <Product {...props} />
+                    ) : /^careers\//.test(slug) ? (
+                        <Job {...props} />
+                    ) : (
+                        element
+                    ),
             })}
         </UserProvider>
     )

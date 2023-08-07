@@ -135,7 +135,9 @@ const Post = ({
                                 {category && (
                                     <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>
                                 )}
-                                <p className="m-0 text-base md:text-lg font-bold leading-tight line-clamp-2">{title}</p>
+                                <p className="m-0 text-base md:text-lg font-bold !leading-tight line-clamp-2">
+                                    {title}
+                                </p>
                             </span>
                             <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
                                 <li className="text-sm font-medium leading-none flex space-x-1 items-center">
@@ -232,7 +234,10 @@ const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>
                 } = question
                 return (
                     <li className="text-yellow mt-4 first:mt-0" key={id}>
-                        <Link to={`/questions/${permalink}`} className="text-yellow hover:text-yellow">
+                        <Link
+                            to={`/questions/${permalink}`}
+                            className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
+                        >
                             <span className="flex justify-between items-center">
                                 <span className="text-base overflow-hidden text-ellipsis whitespace-nowrap">
                                     {subject}
@@ -346,7 +351,7 @@ export default function Posts({ children, articleView }) {
                                     <p className="m-0 pr-2 mr-2 border-r border-border dark:border-dark">
                                         Signed in as{' '}
                                         <Link
-                                            className="text-yellow hover:text-yellow"
+                                            className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
                                             to={`/community/profiles/${user?.profile.id}`}
                                         >
                                             {name}
@@ -354,13 +359,16 @@ export default function Posts({ children, articleView }) {
                                     </p>
                                     {isModerator && (
                                         <button
-                                            className="pr-2 mr-2 border-r border-border dark:border-dark text-yellow font-semibold"
+                                            className="pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
                                             onClick={() => setNewPostModalOpen(!newPostModalOpen)}
                                         >
                                             New post
                                         </button>
                                     )}
-                                    <button className="text-yellow font-semibold" onClick={() => logout()}>
+                                    <button
+                                        className="dark:text-yellow text-red font-semibold"
+                                        onClick={() => logout()}
+                                    >
                                         Logout
                                     </button>
                                 </span>
