@@ -295,7 +295,9 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         }
     `)
 
-    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
+    if (process.env.VERCEL_GIT_COMMIT_REF === 'master') {
+        await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
+    }
 
     const dir = path.resolve(__dirname, '../public/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
