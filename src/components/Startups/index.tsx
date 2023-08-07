@@ -12,7 +12,6 @@ const benefits = [
     'A year of PostHog',
     'Free PostHog merch',
     '$50,000 in PostHog credit',
-    'Private office hours',
     'Startup spotlight',
     'Opportunities for extra credits',
 ]
