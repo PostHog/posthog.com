@@ -63,7 +63,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
         }
     }, [containerEl])
 
-    return categories?.length > 0 ? (
+    return (
         <div ref={containerEl} className="relative z-10">
             <Menu>
                 <Menu.Button
@@ -73,7 +73,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                     <span>Categories</span>
                     <ChevronDown className="w-5 mb-[-1px]" />
                 </Menu.Button>
-                {open && (
+                {open && categories?.length > 0 && (
                     <Menu.Items
                         static
                         className="absolute grid gap-y-2 right-0 bg-accent dark:bg-accent-dark p-2 border border-border dark:border-dark rounded mt-1"
@@ -104,5 +104,5 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                 )}
             </Menu>
         </div>
-    ) : null
+    )
 }
