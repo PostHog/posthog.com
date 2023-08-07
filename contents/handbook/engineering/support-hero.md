@@ -55,23 +55,7 @@ As a business we need to ensure we are focusing support on our paying customers,
 
 ### Support for self-hosted users
 
-Supporting self-hosted users can be particularly tricky/time-consuming!
-
-If the messages are from a dedicated slack, a tag from the CS team or 'high' priority zendesk then these are high-priority and **do prioritize** them accordingly. You'll likely find [these docs useful](https://posthog.com/docs/self-host/deploy/troubleshooting).
-
-However, if it's in the community slack then these are low priority. If you don't have the time to solve it then it's fine to politely point them to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a github issue if they believe something is broken in the docs or deployment setup.
-
-#### Debugging deployments
-
-See the handbook page [Deployments support](/handbook/engineering/deployments-support) and user-facing [Deployments troubleshooting](/docs/self-host/deploy/troubleshooting) page.
-
-#### Ingestion issues
-
-If a user is sending events to PostHog and these are not getting ingested, despite them receiving a success response, try the following:
-
-1. Check if the app/plugin server is alive and healthy (suggest a restart if not - this is safe)
-2. Ask if they have Sentry set up and see any errors
-3. If Sentry is not available, tell them to [connect to ClickHouse](/docs/self-host/deploy/troubleshooting#how-do-i-connect-to-clickhouse) and query for the columns `error_location` and `error` on the table `events_dead_letter_queue`
+It's fine to politely users them to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a GitHub issue if they believe something is broken in the docs or deployment setup. We do not otherwise provide support for self-hosted PostHog.
 
 ### How to help customers
 
