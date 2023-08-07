@@ -730,11 +730,15 @@
         { "source": "/docs/integrate/rust", "destination": "/docs/libraries/rust" },
         {
             "source": "/docs/integrate/identifying-users",
-            "destination": "/docs/data/identify"
+            "destination": "/docs/product-analytics/identify"
         },
         {
             "source": "/docs/integrate/user-properties",
-            "destination": "/docs/data/user-properties"
+            "destination": "/docs/product-analytics/user-properties"
+        },
+        {
+            "source": "/docs/data/user-properties",
+            "destination": "/docs/product-analytics/user-properties"
         },
         {
             "source": "/docs/integrate",
@@ -981,7 +985,11 @@
         { "source": "/docs/apps/zapier-connector", "destination": "/docs/cdp/zapier-connector" },
         {
             "source": "/questions/aliasing-device-i-ds-to-user-i-ds",
-            "destination": "/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user"
+            "destination": "/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user"
+        },
+        {
+            "source": "/docs/data/identify",
+            "destination": "/docs/product-analytics/identifyr"
         },
         { "source": "/questions/how-do-i-trigger-custom-pageview", "destination": "/docs/data/events#pageview-events" },
         {
