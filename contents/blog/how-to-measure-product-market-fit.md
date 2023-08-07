@@ -26,7 +26,7 @@ This guide is about finding ways to measure product-market fit, your progress to
 Measuring product-market fit requires a _combination_ of leading and lagging indicators.
 
 **Leading indicators**, are predictive. A surge in organic growth and positive word-of-mouth suggests product-market fit, but can't confirm it. They include:
-- **Organic word-of-mouth growth** – Not directly linked to paid promotions
+- **Organic word-of-mouth growth** – Growth not linked to paid promotions
 - **User feedback & PMF Survey** – Direct feedback from users
 - **Meaningful user engagement** – Users experiencing real value    
 
@@ -37,9 +37,6 @@ Measuring product-market fit requires a _combination_ of leading and lagging ind
 
 We recommend a minimum of three to start with – likely two leading indicators and one lagging indicator – and adding more when you need.
 
-**Pre-revenue**, word-of-mouth, user engagement, and retention are good indicators of product-market fit. They'll tell you how people feel about your product, whether they're using it, and if they stick around.
-
-**Post-revenue** you'll want to want another lagging indicator, like burn multiple or CLV/CAC ratio, that provide a more concrete link to revenue and the financial viability of your product.
 
 Why a minimum of three? Because of what Brian Balfour, a serial co-founder and a former VP of Growth at Hubspot, calls The Trifecta:[^1]
 
@@ -47,7 +44,12 @@ Why a minimum of three? Because of what Brian Balfour, a serial co-founder and a
 
 If you can nail these three at the same time, it's a strong sign you have product-market fit.
 
+In the rest of this guide, we'll cover all the different ways to measure product-market fit, and when to use them.
+
 ## Indicator #1: Organic word-of-mouth growth
+
+- **Type:** Leading indicator
+- **Good for:** Product-led companies
 
 To be clear... you _can't_ validate product-market fit _using word-of-mouth alone_. That way lies madness. But it is a useful leading indicator _when confirmed using other metrics_, such as user engagement, and retention.
 
@@ -59,7 +61,7 @@ But you can, with a little work, also track word of mouth awareness and sentimen
 
 Use a tool like [Syften](https://syften.com/) to monitor social media, communities, newsletters, etc., for mentions of any keyword you choose, such as your brand name. We use Syften at PostHog to send alerts to a `#brand-alerts` channel on our Slack. 
 
-You can go one step further by setting up a Zapier integration with Google Sheets, where you can collect your mentions, and track trends over time.
+Tracking brand mentions is more about understanding what people are saying about you, rather than tracking a trend. If people are spontaneously sharing their love for your product, it's a good sign you might have product-market fit. Identify who these people are and why your product is such a good fit for them.
 
 Brand alerts are also a great way to drive acquisition by talking to people considering your product. 
 
@@ -79,7 +81,9 @@ At PostHog, we also use [Glimpse](https://meetglimpse.com/) – a handy extensio
 
 ![trends with Glimpse](../images/blog/how-to-measure-product-market-fit/glimpse.png)
 
-It'll also suggest similar companies you can compare yourself against.
+The above example shows how PostHog's product-market fit started to appear in later 2021 / early 2022, and was strongly confirmed by mid-2022. While exponential growth is obviously desirable, consistent linear growth is also a good sign of product-market fit.
+
+Glimpse will also suggest related companies, which is a useful way to compare your word-of-mouth growth with other companies, particularly those you know have product-market fit,.
 
 ![related companies](../images/blog/how-to-measure-product-market-fit/related-companies.png)
 
@@ -87,20 +91,25 @@ It'll also suggest similar companies you can compare yourself against.
 
 ### 3. Organic traffic to your homepage
 
-One final way to track word-of-mouth is organic users who visit your website homepage as a proxy for word-of-mouth. We track this in PostHog as an insight that combines:
+One final way to track word-of-mouth is organic users who visit your website homepage as a proxy for word-of-mouth. We track this in PostHog as an insight tracking:
 
-- Unique users who visited the homepage via Google search
-- Unique users how visited the homepage directly
+- Unique users who visited the homepage via a search engine
+- Unique users who visited the homepage direct
+- Excluding users with an identified email address
 
-This captures people who search for your brand, and those who navigate there directly, or visit via Slack, WhatsApp, etc. 
+This captures people who visit our homepage by searching for us, typing in our website address, or via "dark social" sources like Slack and WhatsApp, while excluding existing users who have an identified email address.
 
 This method will capture some existing users as well, but we've found it correlates well with surges in word-of-mouth awareness.
+
+![posthog proxy](../images/blog/how-to-measure-product-market-fit/word-of-mouth-proxy.png)
+
+Above you can see the trend for our homepage since the beginning of 2021. Unsurprisingly, it's similar to that of  Google Trends. 
 
 > 💡 **PostHog Tip:** If you're using PostHog, remember to add `UTM Source` = `Is not set` to filter out any paid ad campaigns you're running.
 
 ### When to use word-of-mouth
 
-Word-of-mouth growth is a good option for any product-led company – i.e. a product that's self-serve and doesn't do outbound sales. It's a weak leading indicator, but useful so long as you don't buy into your own PR and verify with other metrics.
+Word-of-mouth growth is a good option for any product-led company – i.e. a product that's self-serve and doesn't do outbound sales. It's a weak leading indicator, but useful so long as you don't buy into your own PR and verify it with other metrics, such as user signups or engagement.
 
 | **Pros**                                                                                                                 | **Cons**                                                                                                                 |
 |--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
@@ -110,6 +119,9 @@ Word-of-mouth growth is a good option for any product-led company – i.e. a pro
 | <span className="text-green text-lg">✔</span> Positive feedback and growth is highly motivating                          | <span className="text-red text-lg">✖</span> It's tempting (and easy) to rationalize negative word-of-mouth               |
 
 ## Indicator #2: User feedback & PMF Survey
+
+- **Type:** Leading
+- ** Good for:** Most B2B products
 
 Like word-of-mouth, _consistently_ positive user feedback is an indicator of product-market fit. There's a decent chance you're onto a winner when people tell you they can't live without your product.
 
@@ -165,6 +177,9 @@ Feedback is essential to any startup, so it's more a question of how you collect
 
 ## Indicator #3: Meaningful user engagement
 
+**Type:** Leading indicator
+**Good for:** Any software product
+
 Are users experiencing the _real value_ of your product? Spoiler: logging in ≠ engagement.
 
 You want to see user engagement growing in line with, or faster than, new users. If engagement is growing much faster than signups, it's a strong sign you have product-market fit.
@@ -206,6 +221,9 @@ It's basically impossible to measure product-market fit without tracking user en
 
 ## Indicator #4: Retention curve
 
+**Type:** Lagging indicator
+**Good for:** Any software product
+
 The retention curve is a lagging indicator of product-market fit. If it fattens _at any point_, it's a strong sign you have product-market fit.
 
 ![retention curve](../images/blog/how-to-measure-product-market-fit/retention-curve.png)
@@ -231,6 +249,9 @@ Retention is another non-negotiable way to measure product-market fit. It's simp
 | <span className="text-green text-lg">✔</span> Easy to understand – flat is good, not flat is bad!                        | <span className="text-red text-lg">✖</span> Won't help you understand why you do or don't have product-market fit        |
 
 ## Indicator #5: The burn multiple
+
+- **Type:** Lagging indicator
+- **Good for:** Late-stage companies seeking investment
 
 Created by former PayPal COO David Sacks, burn multiple measures how much you're spending to grow revenue. The less you spend, the more efficient your growth. More efficient growth = stronger product-market fit.
 
@@ -268,6 +289,9 @@ Burn multiple is a good metric to add once you believe you have The Trifecta: co
 | <span className="text-green text-lg">✔</span> Useful for mid to late-stage startups                                      |        |
 
 ## Indicator #6 CLV/CAC ratio
+
+- **Type:** Lagging indicator
+- **Good for:** Late-stage sales-led companies
 
 > **CLV** = customer lifetime value – i.e. the total value of a customer after churn and the cost of supporting / retaining them.
 >
