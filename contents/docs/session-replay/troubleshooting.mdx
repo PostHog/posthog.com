@@ -52,11 +52,7 @@ Some ad/tracking blockers will block PostHog from fetching `posthog-js`. If you'
 
 If you're having issues with recordings not looking correct, there are a few things you can:
 
-### 1. Enable the V2 Recorder
-
-From the [recordings tab](https://app.posthog.com/recordings) in PostHog, open the `Configuration` and enable the "V2" recorder. We are slowly rolling this out to everyone as it fixes a lot of issues regarding things like ShadowDOM elements and more. For some web frameworks the results are immediately much better.
-
-### 2. Ensure your website permits PostHog CORS
+### Ensure your website permits PostHog CORS
 
 Most assets rendered on your website or app are captured **inline** – meaning we keep a copy of the icon, css etc. to use when replaying. For some assets however, this is either too difficult or too costly to do, so instead we load them directly from the original webserver (just like your website does). This can lead to CORS issues where the webserver does not permit **app.posthog.com** (or **eu.posthog.com**) to load the required asset. Unfortunately we cannot easily detect when this happens, but the browsers's developer tools `(Option + ⌘ + J, or Shift + CTRL + J)` will log when these errors occur saying something like:
 
