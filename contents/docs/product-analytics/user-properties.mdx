@@ -7,8 +7,8 @@ sidebar: Docs
 showTitle: true
 ---
 
-import UserPropertiesHowToSet from "./\_snippets/user-properties-how-to-set.mdx"
-import UserPropertiesSetVsSetOnce from "./\_snippets/user-properties-set-vs-set-once.mdx"
+import UserPropertiesHowToSet from "../getting-started/\_snippets/user-properties-how-to-set.mdx"
+import UserPropertiesSetVsSetOnce from "../getting-started/\_snippets/user-properties-set-vs-set-once.mdx"
 
 User properties enable you to capture, manage, and analyze specific data about a user. You can use them to create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts), which can then be used in [insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more. 
 
@@ -97,14 +97,9 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 
 </MultiLanguage>
 
-
-## How to set group properties
-
-In the same way that every user can have properties associated with them, every [group](/docs/product-analytics/group-analytics) can have properties associated with it. You can find details on [how to set group properties](/docs/product-analytics/group-analytics#setting-and-updating-group-properties) in the groups docs.
-
 ## How to view user properties
 
-To view properties for a particular user, go to "[Persons & Groups](https://app.posthog.com/persons)" in the PostHog app. Then, click on any person in the list to view their properties. 
+To view properties for a particular user, go to [Persons & Groups](https://app.posthog.com/persons) in the PostHog app. Then, click on any person in the list to view their properties. 
 
 On a user's property list, you can add properties to them by clicking the "New property" button, then adding a key, type, and value. You can also delete a custom property for a user by clicking the red garbage bin icon on the right side of property listing.
 

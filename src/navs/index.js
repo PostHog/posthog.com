@@ -1793,6 +1793,18 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Setting user properties',
+                    url: '/docs/product-analytics/user-properties',
+                    icon: 'Profile',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Group analytics',
+                    url: '/docs/product-analytics/group-analytics',
+                    icon: 'People',
+                    color: 'orange',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
@@ -1857,12 +1869,6 @@ export const docsMenu = {
                     url: '/docs/product-analytics/autocapture',
                     icon: 'Bolt',
                     color: 'red',
-                },
-                {
-                    name: 'Group analytics',
-                    url: '/docs/product-analytics/group-analytics',
-                    icon: 'People',
-                    color: 'orange',
                 },
                 {
                     name: 'Sampling',
