@@ -334,7 +334,6 @@ export default function Posts({ children, articleView }) {
                     <div className="py-4 md:py-2 border-b md:border-t border-border dark:border-dark text-center md:flex justify-between items-center sticky top-[-1px]">
                         <p className="m-0 opacity-80">The latest from the PostHog community</p>
                         <div className="flex space-x-6 items-center md:mt-0 mt-2 justify-between">
-                            <p className="m-0 opacity-80 font-semibold">{dayjs().format('MMM D, YYYY')}</p>
                             {user ? (
                                 <span className="flex">
                                     <p className="m-0 pr-2 mr-2 border-r border-border dark:border-dark">
