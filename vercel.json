@@ -989,7 +989,7 @@
         },
         {
             "source": "/docs/data/identify",
-            "destination": "/docs/product-analytics/identifyr"
+            "destination": "/docs/product-analytics/identify"
         },
         { "source": "/questions/how-do-i-trigger-custom-pageview", "destination": "/docs/data/events#pageview-events" },
         {
