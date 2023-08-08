@@ -101,6 +101,7 @@ const Post = ({
     }, [user])
 
     const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
+    const defaultImage = post_category?.data?.attributes?.defaultImage?.data?.attributes?.url
 
     return (
         <li ref={containerRef} className="snap-start last:pb-24">
@@ -120,7 +121,12 @@ const Post = ({
                             {imageURL?.endsWith('.mp4') ? (
                                 <video className="object-cover w-full h-full" src={imageURL} />
                             ) : (
-                                <img className="object-cover w-full h-full" src={imageURL || '/banner.png'} />
+                                <img
+                                    className={`w-full h-full ${
+                                        !imageURL && defaultImage ? 'object-contain' : 'object-cover'
+                                    }`}
+                                    src={imageURL || defaultImage || '/banner.png'}
+                                />
                             )}
                         </div>
                         <div>
