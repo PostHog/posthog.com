@@ -27,11 +27,6 @@ export const quickLinks = [
         description: 'Bootstrap and evaluate flags locally when you need an immediate response.',
     },
     {
-        name: 'Rollout strategies',
-        to: '/docs/feature-flags/rollout-strategies',
-        description: 'Control how your feature flags are rolled out to your users.',
-    },
-    {
         name: 'Multivariate flags',
         to: '/docs/feature-flags/multivariate-flags',
         description: 'Test features with multiple variants.',

@@ -2016,6 +2016,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Creating feature flags',
+                    url: '/docs/feature-flags/creating-feature-flags',
+                    icon: 'Flag',
+                    color: 'orange',
+                },
+                {
                     name: 'Features',
                 },
                 {

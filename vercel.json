@@ -741,6 +741,10 @@
             "destination": "/docs/product-analytics/user-properties"
         },
         {
+            "source": "/docs/feature-flags/rollout-strategies",
+            "destination": "/docs/feature-flags/creating-feature-flags#release-conditions"
+        },
+        {
             "source": "/docs/integrate",
             "destination": "/docs/getting-started/install"
         },
