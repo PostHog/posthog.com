@@ -44,7 +44,7 @@ const Spotlight = ({ frontmatter: { title, featuredImage }, excerpt, fields: { s
 export default function Startups() {
     const { spotlight } = useStaticQuery(graphql`
         {
-            spotlight: mdx(fields: { slug: { eq: "/blog/startup-inlang" } }) {
+            spotlight: mdx(fields: { slug: { eq: "/spotlight/startup-inlang" } }) {
                 frontmatter {
                     title
                     featuredImage {

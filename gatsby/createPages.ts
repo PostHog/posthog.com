@@ -194,6 +194,29 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            spotlights: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/spotlight/" } }
+                }
+            ) {
+                totalCount
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        category
+                        tags
+                    }
+                }
+            }
             categories: allMdx(
                 sort: { order: DESC, fields: [frontmatter___date] }
                 filter: {
@@ -412,6 +435,20 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     })
 
     result.data.blogPosts.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const tableOfContents = node.headings && formatToc(node.headings)
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+            },
+        })
+    })
+
+    result.data.spotlights.nodes.forEach((node) => {
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
         createPage({

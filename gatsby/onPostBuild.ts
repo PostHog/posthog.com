@@ -11,10 +11,195 @@ import { flattenMenu } from './utils'
 import fetch from 'node-fetch'
 import { GatsbyNode } from 'gatsby'
 import sidebars from '../src/sidebars/index'
+import pLimit from 'p-limit'
+import qs from 'qs'
+import dayjs from 'dayjs'
+import slugify from 'slugify'
+
+const limit = pLimit(10)
+
+const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
+    const apiHost = process.env.GATSBY_SQUEAK_API_HOST
+
+    let allExistingStrapiPosts = []
+    let allStrapiPostCategories = []
+
+    const getAllStrapiPosts = async (page = 1) => {
+        const query = qs.stringify({
+            pagination: {
+                page,
+                pageSize: 100,
+            },
+            fields: ['id', 'path'],
+        })
+
+        const posts = await fetch(`${apiHost}/api/posts?${query}`).then((res) => res.json())
+        if (posts.data) {
+            allExistingStrapiPosts = [...allExistingStrapiPosts, ...posts.data]
+        }
+        if (posts?.meta?.pagination.page < posts?.meta?.pagination.pageCount) {
+            await getAllStrapiPosts(page + 1)
+        }
+    }
+
+    const getAllStrapiPostCategories = async (page = 1) => {
+        const query = qs.stringify({
+            pagination: {
+                page,
+                pageSize: 100,
+            },
+            fields: ['id', 'folder'],
+        })
+
+        const categories = await fetch(`${apiHost}/api/post-categories?${query}`).then((res) => res.json())
+        if (categories.data) {
+            allStrapiPostCategories = [...allStrapiPostCategories, ...categories.data]
+        }
+        if (categories?.meta?.pagination.page < categories?.meta?.pagination.pageCount) {
+            await getAllStrapiPostCategories(page + 1)
+        }
+    }
+
+    const createOrUpdateStrapiPost = async (data, id) => {
+        const body = JSON.stringify({ data })
+        return fetch(`${apiHost}/api/posts${id ? `/${id}` : ''}`, {
+            method: id ? 'PUT' : 'POST',
+            body,
+            headers: {
+                Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+                'content-type': 'application/json',
+            },
+        }).catch((err) => console.error(err))
+    }
+
+    await getAllStrapiPosts()
+    await getAllStrapiPostCategories()
+
+    await Promise.all(
+        posts.map(
+            ({
+                frontmatter: { title, date, featuredImage, authorData },
+                fields: { slug },
+                parent: { relativePath: path },
+                rawBody,
+            }) => {
+                const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
+                const category = allStrapiPostCategories.find(
+                    (category) => category?.attributes?.folder === path.split('/')[0]
+                )
+                const authorIDs = authorData?.map(({ profile_id }) => profile_id) || []
+                const data = {
+                    slug,
+                    path,
+                    title,
+                    date,
+                    featuredImage: {
+                        url: featuredImage?.publicURL,
+                    },
+                    body: rawBody,
+                    authors: {
+                        connect: authorIDs,
+                    },
+                    ...(category
+                        ? {
+                              post_category: {
+                                  connect: [category.id],
+                              },
+                          }
+                        : null),
+                }
+
+                return limit(() => createOrUpdateStrapiPost(data, existingPost?.id))
+            }
+        )
+    )
+    await Promise.all(
+        roadmaps.map(({ title, date: roadmapDate, media, description, cta }) => {
+            const slug = slugify(title, { lower: true })
+            const date = dayjs(roadmapDate)
+            const year = date.format('YYYY')
+            const path = `changelog/${year}/${slug}.mdx`
+            const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
+            const category = allStrapiPostCategories.find((category) => category?.attributes?.folder === 'changelog')
+            const data = {
+                slug: `/changelog/${year}/${slug}`,
+                path,
+                title,
+                date: date.toISOString(),
+                featuredImage: {
+                    url: media?.data?.attributes?.url,
+                },
+                body: description,
+                CTA: {
+                    label: cta?.label,
+                    url: cta?.url,
+                },
+                ...(category
+                    ? {
+                          post_category: {
+                              connect: [category.id],
+                          },
+                      }
+                    : null),
+            }
+
+            return limit(() => createOrUpdateStrapiPost(data, existingPost?.id))
+        })
+    )
+}
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const { data } = await graphql(`
         query {
+            allRoadmap(filter: { complete: { ne: false } }) {
+                nodes {
+                    title
+                    description
+                    date
+                    cta {
+                        url
+                        label
+                    }
+                    media {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
+                }
+            }
+            allMDXPosts: allMdx(
+                filter: {
+                    fields: { slug: { regex: "/^/blog|^/tutorials|^/customers|^/spotlight/" } }
+                    frontmatter: { date: { ne: null } }
+                }
+            ) {
+                nodes {
+                    parent {
+                        ... on File {
+                            relativePath
+                        }
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                        date
+                        authorData {
+                            name
+                        }
+                        featuredImage {
+                            publicURL
+                        }
+                        authorData {
+                            profile_id
+                        }
+                    }
+                    rawBody
+                }
+            }
             blog: allMdx(
                 filter: { fields: { slug: { regex: "/^/blog/" } }, frontmatter: { featuredImageType: { eq: "full" } } }
             ) {
@@ -109,6 +294,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
             }
         }
     `)
+
+    if (process.env.VERCEL_GIT_COMMIT_REF === 'master') {
+        await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
+    }
 
     const dir = path.resolve(__dirname, '../public/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })

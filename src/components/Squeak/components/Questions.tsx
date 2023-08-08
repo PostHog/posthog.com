@@ -10,6 +10,9 @@ type QuestionsProps = {
     topicId?: number
     showForm?: boolean
     title?: string
+    parentName?: string
+    buttonText?: React.ReactNode | string
+    subject?: boolean
     initialView?: string
     disclaimer?: boolean
 }
@@ -21,6 +24,9 @@ export const Questions = ({
     profileId,
     showForm = true,
     title,
+    parentName,
+    buttonText,
+    subject,
     initialView,
     disclaimer,
 }: QuestionsProps) => {
@@ -52,10 +58,13 @@ export const Questions = ({
             {/* TODO: Pass refresh for now questions */}
             {showForm && (
                 <QuestionForm
+                    buttonText={buttonText}
+                    parentName={parentName}
                     initialView={initialView}
                     onSubmit={refresh}
                     formType="question"
                     slug={slug}
+                    subject={subject}
                     disclaimer={disclaimer}
                 />
             )}

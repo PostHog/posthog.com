@@ -135,10 +135,12 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         StrapiResult<QuestionData[]>
     >(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, options)}`,
-        async (url: string) =>
-            fetch(url, user ? { headers: { Authorization: `Bearer ${await getJwt()}` } } : undefined).then((r) =>
+        async (url: string) => {
+            const jwt = await getJwt()
+            return fetch(url, user && jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : undefined).then((r) =>
                 r.json()
             )
+        }
     )
 
     if (error) {

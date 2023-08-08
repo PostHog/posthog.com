@@ -218,6 +218,10 @@ const handbookSidebar = [
                 url: '/handbook/people/offboarding',
             },
             {
+                name: 'HR processes',
+                url: '/handbook/people/grievances',
+            },
+            {
                 name: 'Ramp up plans',
                 url: '',
                 children: [
@@ -671,9 +675,15 @@ const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: '/questions',
+    url: '/posts',
     icon: 'Chat',
     children: [
+        {
+            name: 'Posts',
+            icon: 'Newspaper',
+            color: 'red',
+            url: '/posts',
+        },
         {
             name: 'Questions',
             icon: 'Message',

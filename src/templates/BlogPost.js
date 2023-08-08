@@ -91,33 +91,6 @@ export const Intro = ({
     )
 }
 
-const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, pageViews }) => {
-    return (
-        <>
-            {contributors && (
-                <SidebarSection>
-                    <Contributors contributors={contributors} />
-                </SidebarSection>
-            )}
-            {pageViews?.length > 0 && (
-                <SidebarSection>
-                    <PageViews pageViews={pageViews.toLocaleString()} />
-                </SidebarSection>
-            )}
-            {tags?.length > 0 && (
-                <SidebarSection title={`Tag${tags?.length === 1 ? '' : 's'}`}>
-                    <Topics
-                        topics={tags.map((tag) => ({ name: tag, url: `/blog/tags/${slugify(tag, { lower: true })}` }))}
-                    />
-                </SidebarSection>
-            )}
-            <SidebarSection>
-                <NewsletterForm sidebar />
-            </SidebarSection>
-        </>
-    )
-}
-
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
@@ -148,7 +121,7 @@ export default function BlogPost({ data, pageContext, location }) {
     const { tableOfContents } = pageContext
 
     return (
-        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[5]}>
+        <>
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
@@ -159,47 +132,21 @@ export default function BlogPost({ data, pageContext, location }) {
                         : featuredImage?.publicURL
                 }
             />
-            <PostLayout
-                stickySidebar
+            <Intro
                 title={title}
-                filePath={filePath}
-                tableOfContents={tableOfContents}
-                breadcrumb={[
-                    { name: 'Blog', url: '/blog' },
-                    ...(category
-                        ? [{ name: category, url: `/blog/categories/${slugify(category, { lower: true })}` }]
-                        : [{}]),
-                ]}
-                menu={blog}
-                hideSurvey
-                sidebar={
-                    <BlogPostSidebar
-                        tags={tags}
-                        contributors={contributors}
-                        date={date}
-                        filePath={filePath}
-                        title={title}
-                        location={location}
-                        pageViews={fields?.pageViews}
-                    />
-                }
-            >
-                <Intro
-                    title={title}
-                    featuredImage={featuredImage}
-                    featuredVideo={featuredVideo}
-                    featuredImageType={featuredImageType}
-                    contributors={contributors}
-                    date={date}
-                    tags={tags}
-                />
-                <div className="article-content">
-                    <MDXProvider components={components}>
-                        <MDXRenderer>{body}</MDXRenderer>
-                    </MDXProvider>
-                </div>
-            </PostLayout>
-        </Layout>
+                featuredImage={featuredImage}
+                featuredVideo={featuredVideo}
+                featuredImageType={featuredImageType}
+                contributors={contributors}
+                date={date}
+                tags={tags}
+            />
+            <div className="article-content">
+                <MDXProvider components={components}>
+                    <MDXRenderer>{body}</MDXRenderer>
+                </MDXProvider>
+            </div>
+        </>
     )
 }
 

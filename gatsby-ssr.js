@@ -12,6 +12,7 @@ import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
 import Job from './src/templates/Job'
 import { UserProvider } from './src/hooks/useUser'
+import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/toast'
 
 export const wrapPageElement = ({ element, props }) => {
@@ -21,7 +22,13 @@ export const wrapPageElement = ({ element, props }) => {
         <UserProvider>
             {wrapElement({
                 element:
-                    props.custom404 || !props.data ? (
+                    /^blog\/(?!categories)|^tutorials\/(?!categories)|^customers\/|^spotlight\/|^posts|^changelog\/(.*?)\//.test(
+                        slug
+                    ) ? (
+                        <Posts {...props} articleView={!/^posts$/.test(slug)}>
+                            {element}
+                        </Posts>
+                    ) : props.custom404 || !props.data ? (
                         element
                     ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
                       ![

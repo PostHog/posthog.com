@@ -387,7 +387,7 @@ export const Mobile = () => {
     const { menu, parent, internalMenu, activeInternalMenu } = useLayoutData()
 
     return (
-        <div className="fixed bottom-0 w-full lg:hidden z-[9999]">
+        <div className="fixed bottom-0 w-full lg:hidden z-[9999999]">
             <InternalMenu
                 mobile
                 className="bg-light dark:bg-dark border-t mb-[-1px]"

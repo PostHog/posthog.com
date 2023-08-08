@@ -30,7 +30,7 @@ type QuestionsTableProps = {
     sortBy?: 'newest' | 'activity' | 'popular'
 }
 
-const Skeleton = () => {
+export const Skeleton = () => {
     return (
         <div className="">
             <div className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 space-y-2">
