@@ -218,6 +218,10 @@ const handbookSidebar = [
                 url: '/handbook/people/offboarding',
             },
             {
+                name: 'HR processes',
+                url: '/handbook/people/grievances',
+            },
+            {
                 name: 'Ramp up plans',
                 url: '',
                 children: [
