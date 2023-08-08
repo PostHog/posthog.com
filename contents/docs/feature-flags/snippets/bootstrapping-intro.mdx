@@ -1,0 +1,3 @@
+Since there is a delay between initializing PostHog and fetching feature flags, feature flags are not always available immediately. This is detrimental if you want to do something like redirecting to a different page based on a feature flag.
+
+To have your feature flags available immediately, you can initialize PostHog with precomputed values until PostHog has had a chance to fetch them. This is called bootstrapping.

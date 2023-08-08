@@ -735,6 +735,26 @@
             "destination": "/docs/product-analytics/user-properties"
         },
         {
+            "source": "/docs/feature-flags/multivariate-flags",
+            "destination": "/docs/feature-flags/creating-feature-flag"
+        },
+        {
+            "source": "/docs/feature-flags/libraries",
+            "destination": "/docs/feature-flags/"
+        },
+        {
+            "source": "/docs/feature-flags/manual",
+            "destination": "/docs/feature-flags/installation"
+        },
+        {
+            "source": "/docs/feature-flags/rollout-strategies",
+            "destination": "/docs/feature-flags/creating-feature-flags#release-conditions"
+        },
+        {
+            "source": "/docs/feature-flags/payloads",
+            "destination": "/docs/feature-flags/creating-feature-flags#payloads"
+        },
+        {
             "source": "/docs/integrate",
             "destination": "/docs/getting-started/install"
         },
@@ -756,6 +776,8 @@
 
         { "source": "/manual/feature-flags", "destination": "/docs/feature-flags/manual" },
         { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" },
+        { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
+        { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags/manual" },
 
         { "source": "/manual/", "destination": "/docs/product-analytics/" },
@@ -818,12 +840,8 @@
         { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" },
         { "source": "/signup/cloud/enterprise", "destination": "/contact-sales?edition=enterprise" },
         {
-            "source": "/docs/feature-flags/local-evaluation",
-            "destination": "/docs/feature-flags/bootstrapping-and-local-evaluation"
-        },
-        {
-            "source": "/docs/feature-flags/local-evaluation",
-            "destination": "/docs/feature-flags/bootstrapping-and-local-evaluation"
+            "source": "/docs/feature-flags/bootstrapping-and-local-evaluation",
+            "destination": "/docs/feature-flags/bootstrapping"
         },
         { "source": "/products/product-analytics", "destination": "/product-analytics" },
         { "source": "/session-recording", "destination": "/session-replay" },
