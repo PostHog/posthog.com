@@ -13,9 +13,12 @@ Having trouble with events? There are a few common reasons that you may not see 
 
 ### 2. There is a bug within the library being used.
 
+#### Front-end libraries
 1. Open the devtools and switch to the network tab.
 2. Look for the request that appears to be incorrect.
-3. [Send a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion) (or contact the  [EU-Cloud support](https://eu.posthog.com/home#supportModal=bug%3Aingestion)) including the network request.
+3. See how to [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) to get further support.
+
+For backend libarries see the respective debugging guide [Node.js debugging](https://posthog.com/docs/libraries/node#debugging-and-exceptions)
 
 ### 3. Events are not ingested after being received by PostHog.
 
@@ -57,3 +60,5 @@ Body:
     "timestamp": "[optional timestamp in ISO 8601 format]"
 }
 ```
+
+5. [Send a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion) (or contact the [EU-Cloud support](https://eu.posthog.com/home#supportModal=bug%3Aingestion)). Make sure to include the request from the previous step.
