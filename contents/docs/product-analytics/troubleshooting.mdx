@@ -17,7 +17,7 @@ Having trouble with events? There are a few common reasons that you may not see 
 
 #### Front-end libraries
 1. Open the devtools and switch to the network tab.
-2. Look for the request that appears to be incorrect.
+2. Look for the request to app.posthog.com/e (or eu.posthog.com/e if using the EU Cloud) that appears to be incorrect.
 
 ![network request being sent to posthog](../../images/docs/product-analytics/network-request-to-posthog.png)
 
@@ -30,7 +30,7 @@ See the respective debugging guides, e.g. [Node.js debugging](https://posthog.co
 
 #### Front-end libraries
 1. Open the devtools and switch to the network tab.
-2. Right click one of the network requests to posthog.com (or eu.posthog.com if using the EU Cloud) and select Copy -> Copy as cURL.
+2. Right click one of the network requests to posthog.com/e (or eu.posthog.com/e if using the EU Cloud) and select Copy -> Copy as cURL.
 3. Format the request as specified in [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue)
 4. Try to send the cURL directly.
 5. Wait 1 hour and check if the event is still not visible in PostHog. Also make sure PostHog cloud is not experiencing an [active incident](https://status.posthog.com) as that could cause an ingestion lag.
