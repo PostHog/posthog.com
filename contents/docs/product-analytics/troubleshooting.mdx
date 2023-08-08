@@ -25,8 +25,9 @@ For backend libraries see the respective debugging guides, e.g. [Node.js debuggi
 #### Front-end libraries
 1. Open the devtools and switch to the network tab.
 2. Right click one of the network requests to posthog.com (or eu.posthog.com if using the EU Cloud) and select Copy -> Copy as cURL.
-3. Try to send the cURL directly.
-4. Wait 1 hour and check if the event is still not visible in PostHog. Also make sure your cloud is not experiencing an [active incident](https://status.posthog.com) as that could cause an ingestion lag.
+3. Format the request as specified in [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue)
+4. Try to send the cURL directly.
+5. Wait 1 hour and check if the event is still not visible in PostHog. Also make sure your cloud is not experiencing an [active incident](https://status.posthog.com) as that could cause an ingestion lag.
 6. See how to [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) to get further support.
 
 For backend libraries track your outgoing network requests using something like [Wireshark](https://www.wireshark.org/)
