@@ -31,7 +31,10 @@ Missing events can be a pain to troubleshoot. This guide aims to help you diagno
 
 1. Open the devtools and switch to the network tab.
 2. Right click one of the network requests to posthog.com (or eu.posthog.com if using the EU Cloud) and select Copy -> Copy as cURL.
-3. [Send a support ticket via the app](https://app.posthog.com/home#supportModal) and include the copied cURL command.
+3. Try to send the cURL directly.
+4. Wait 1 hour and check if the event is still not visible in PostHog.
+5. Also make sure your cloud is not experiencing an [active incident](https://status.posthog.com) as that could cause an ingestion lag.
+6. [Send a support ticket via the app](https://app.posthog.com/home#supportModal) and include the copied cURL command.
 
 ##  Still encountering issues?
 If those steps did not fix the issue, feel free to [get in touch with the support](https://app.posthog.com/home#supportModal). We try to respond to as many of these as we can.
