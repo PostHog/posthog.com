@@ -14,7 +14,11 @@ import { Archive, Pin, Undo } from 'components/NotProductIcons'
 import Tooltip from 'components/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
-import { Check2 } from 'components/Icons'
+import { Check2, Close } from 'components/Icons'
+import Modal from 'components/Modal'
+import Checkbox from 'components/Checkbox'
+import { CallToAction } from 'components/CallToAction'
+import { StaticImage } from 'gatsby-plugin-image'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -121,6 +125,97 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
     )
 }
 
+const EscalateButton = ({ escalate, escalated }) => {
+    const [modalOpen, setModalOpen] = useState(false)
+    const [showResponse, setShowResponse] = useState(false)
+    const [response, setResponse] = useState(
+        "Howdy! We've escalated your question to our support desk. An engineer will be in touch soon."
+    )
+
+    const handleConfirm = () => {
+        escalate(showResponse && response)
+        setModalOpen(false)
+    }
+
+    return (
+        <>
+            <Modal open={modalOpen} setOpen={setModalOpen}>
+                <div className="border-border dark:border-dark border absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent dark:bg-accent-dark max-w-lg w-full rounded-md">
+                    <button onClick={() => setModalOpen(false)} className="absolute top-3 right-3">
+                        <Close className="w-4 h-4" />
+                    </button>
+
+                    <div className="p-4 pb-0">
+                        <h3 className="mb-2 mt-0">Escalate thread</h3>
+                        <p className="text-base mt-2 mb-4">
+                            Please confirm that you'd like to escalate this thread to Zendesk
+                        </p>
+                        <Checkbox
+                            className="!text-base"
+                            value="Notify subscribers"
+                            checked={showResponse}
+                            onChange={(e) => setShowResponse(e.target.checked)}
+                        />
+                        {showResponse && (
+                            <>
+                                <p className="text-sm p-2 mt-4 mb-3 border border-border dark:border-border text-center rounded-md bg-light dark:bg-dark font-semibold">
+                                    Response will come from Max, the support hog
+                                </p>
+                                <div className="flex space-x-2 items-start mb-6">
+                                    <StaticImage
+                                        src="../images/max.png"
+                                        width={40}
+                                        height={40}
+                                        className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-border dark:border-dark"
+                                    />
+                                    <textarea
+                                        rows={5}
+                                        placeholder="Message from Max"
+                                        className="w-full p-2 rounded-md border border-border dark:border-dark text-black bg-white"
+                                        value={response}
+                                        onChange={(e) => setResponse(e.target.value)}
+                                    />
+                                </div>
+                            </>
+                        )}
+                    </div>
+                    <div className="p-4 mt-4 border-t border-border dark:border-dark flex justify-end">
+                        <CallToAction onClick={handleConfirm} size="sm" type="outline">
+                            {showResponse ? 'Escalate and notify' : 'Escalate'}
+                        </CallToAction>
+                    </div>
+                </div>
+            </Modal>
+            <Tooltip
+                content={() => (
+                    <div style={{ maxWidth: 320 }}>{escalated ? 'Thread has been escalated' : 'Escalate thread'}</div>
+                )}
+            >
+                <button
+                    disabled={escalated}
+                    onClick={() => setModalOpen(!modalOpen)}
+                    className="flex leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold disabled:hover:scale-[1] disabled:hover:text-primary/50  dark:disabled:hover:text-primary-dark/50 disabled:hover:top-0"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16.712 4.33a9.027 9.027 0 011.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9.014 9.014 0 00-9.424 0M19.67 7.288l-4.138 3.448m4.138-3.448a9.014 9.014 0 010 9.424m-4.138-5.976a3.736 3.736 0 00-.88-1.388 3.737 3.737 0 00-1.388-.88m2.268 2.268a3.765 3.765 0 010 2.528m-2.268-4.796a3.765 3.765 0 00-2.528 0m4.796 4.796c-.181.506-.475.982-.88 1.388a3.736 3.736 0 01-1.388.88m2.268-2.268l4.138 3.448m0 0a9.027 9.027 0 01-1.306 1.652c-.51.51-1.064.944-1.652 1.306m0 0l-3.448-4.138m3.448 4.138a9.014 9.014 0 01-9.424 0m5.976-4.138a3.765 3.765 0 01-2.528 0m0 0a3.736 3.736 0 01-1.388-.88 3.737 3.737 0 01-.88-1.388m2.268 2.268L7.288 19.67m0 0a9.024 9.024 0 01-1.652-1.306 9.027 9.027 0 01-1.306-1.652m0 0l4.138-3.448M4.33 16.712a9.014 9.014 0 010-9.424m4.138 5.976a3.765 3.765 0 010-2.528m0 0c.181-.506.475-.982.88-1.388a3.736 3.736 0 011.388-.88m-2.268 2.268L4.33 7.288m6.406 1.18L7.288 4.33m0 0a9.024 9.024 0 00-1.652 1.306A9.025 9.025 0 004.33 7.288"
+                        />
+                    </svg>
+                </button>
+            </Tooltip>
+        </>
+    )
+}
+
 export const Question = (props: QuestionProps) => {
     const { id, question, showSlug } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
@@ -188,25 +283,7 @@ export const Question = (props: QuestionProps) => {
                             {user?.role?.type === 'moderator' && (
                                 <>
                                     {!archived && <TopicSelect selectedTopics={questionData.attributes.pinnedTopics} />}
-                                    {!archived && (
-                                        <Tooltip
-                                            content={() => (
-                                                <div style={{ maxWidth: 320 }}>
-                                                    {escalated
-                                                        ? 'Question has been sent to Zendesk'
-                                                        : 'Send to Zendesk and archive thread'}
-                                                </div>
-                                            )}
-                                        >
-                                            <button
-                                                disabled={escalated}
-                                                onClick={escalate}
-                                                className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold disabled:scale-[1] disabled:top-auto disabled:text-primary/50 disabled:cursor-not-allowed disabled:dark:text-primary-dark/50 disabled:opacity-50"
-                                            >
-                                                <span className="w-6 h-6 flex items-center justify-center">Z</span>
-                                            </button>
-                                        </Tooltip>
-                                    )}
+                                    <EscalateButton escalate={escalate} escalated={escalated} />
                                     <button
                                         onClick={() => archive(!archived)}
                                         className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"

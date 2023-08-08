@@ -347,11 +347,12 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         mutate()
     }
 
-    const escalate = async () => {
+    const escalate = async (message?: string) => {
         const body = JSON.stringify({
             id: questionData?.id,
+            message,
         })
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/zendesk`, {
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/escalate`, {
             method: 'POST',
             body,
             headers: {
