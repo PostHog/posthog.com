@@ -105,9 +105,9 @@ posthog.capture(
 
 Next, create a feature flag and roll it out to match the properties of your desired servers. In this case, `server_id` equals `canada-cloud-1`.
 
-Finally, add your feature flag call using your server ID
+Finally, add your feature flag call using your server ID:
 
-```js
+```python
 from posthog import Posthog
 
 posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
