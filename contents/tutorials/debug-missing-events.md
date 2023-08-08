@@ -25,7 +25,7 @@ Missing events can be a pain to troubleshoot. This guide aims to help you diagno
 
 1. Open the devtools and switch to the network tab.
 2. Look for the request that appears to be incorrect.
-3. [Send a support ticket via the app](https://app.posthog.com/home#supportModal) including the network request.
+3. [Send a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion) (or contact the  [EU-Cloud support](https://eu.posthog.com/home#supportModal=bug%3Aingestion)) including the network request.
 
 ## Events are not ingested after being received by PostHog.
 
@@ -34,7 +34,7 @@ Missing events can be a pain to troubleshoot. This guide aims to help you diagno
 3. Try to send the cURL directly.
 4. Wait 1 hour and check if the event is still not visible in PostHog.
 5. Also make sure your cloud is not experiencing an [active incident](https://status.posthog.com) as that could cause an ingestion lag.
-6. [Send a support ticket via the app](https://app.posthog.com/home#supportModal) and include the copied cURL command.
+6. [Send a support ticket via the app](https://app.posthog.com/home#supportModal=support%3Aingestion) (or contact the [EU-Cloud support](https://eu.posthog.com/home#supportModal=support%3Aingestion)) and include the copied cURL command.
 
 ##  Still encountering issues?
-If those steps did not fix the issue, feel free to [get in touch with the support](https://app.posthog.com/home#supportModal). We try to respond to as many of these as we can.
+If those steps did not fix the issue, feel free to [get in touch with the support](https://app.posthog.com/home#supportModal=support%3Aingestion) (or contact the [EU-Cloud support](https://eu.posthog.com/home#supportModal=support%3Aingestion)). We try to respond to as many of these as we can.
