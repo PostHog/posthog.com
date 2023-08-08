@@ -34,7 +34,7 @@ Missing events can be a pain to troubleshoot. This guide aims to help you diagno
 3. [Send a support ticket via the app](https://app.posthog.com/home#supportModal) and include the copied cURL command.
 
 ##  Still encountering issues?
-If those steps did not fix the issue, feel free to [get in touch with the support](https://posthog.com/docs/support-options). We try to respond to as many of these as we can.
+If those steps did not fix the issue, feel free to [get in touch with the support](https://app.posthog.com/home#supportModal). We try to respond to as many of these as we can.
 
 ## Further reading
 
