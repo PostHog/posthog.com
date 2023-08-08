@@ -1,12 +1,12 @@
 ---
-date: 2023-07-26
+date: 2023-08-08
 title: "How to start a growth team (as an engineer)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ['lior-neu-ner']
-featuredImage: ../images/blog/experiment-hog.jpg
+featuredImage: ../images/blog/posthog-blog-at-desk.png
 featuredImageType: full
 category: Product growth
 tags: 
@@ -44,11 +44,11 @@ Once they had this data, their next focus was on finding the significant drop-of
 
 Once the growth team knew where the drop-offs were, the next step was figuring out why they happened and what to do about it. 
 
-In the case of Let's Do This, their target metric was *number of bookings*. They noticed a large drop-off during the booking flow and decided to investigate. They sent emails to the customers who dropped off and offered them Amazon gift cards in exchange for a 30-minute call.
+In the case of Let's Do This, their target metric was *number of bookings*. They noticed a large drop-off during the booking flow and decided to investigate. They sent emails to the customers who dropped off, offering Amazon gift cards in exchange for a 30-minute call.
 
 They learned that when booking events like marathons, their customers need to be confident that it's right for them (after all, they spend months training for it!). This would lead to hesitation. 
 
-Thomas and his team brainstormed solutions. Eventually, they built features to improve trust signals and this significantly increased their bookings!
+Thomas and his team brainstormed solutions. Eventually, they built features to improve trust signals, and this significantly increased their bookings.
 
 ## 3. Experiment everything
 
@@ -74,23 +74,21 @@ To ensure their experiments [avoided common mistakes](/blog/ab-testing-mistakes)
 
 ## Define your team values
 
-In Thomas's opinion, one of the most effective things they did was to create a set of core team values. They were the team's compass: guiding decisions, settling debates, and driving overall culture.
+In Thomas's opinion, one of the most effective things they did was to create a set of core team values. They were the team's compass, guiding decisions, settling debates, and driving overall culture. They were:
 
-Thomas shares their values:
-
-### Data over debate
+### i) Data over debate
 
 By focusing on hard numbers and concrete evidence, you can set aside biases and focus on effective solutions.
 
 If data was not available, Thomas and his team would often ship a small experiment to gather data and keep the team moving forward. They realized that building and learning from a bare-bones MVP is much quicker than having frustrating debates over what to build.
 
-### Everything should be an experiment
+### ii) Everything should be an experiment
 
 We already mentioned the benefits of experimenting everything, and Thomas and his team anchored this into their values. Thomas stresses that this did not mean everything needed to be an A/B test, but rather that every feature or change should have a plan:
 
 - What is the hypothesis of the change?
 - Who is the change targeting?
-- What metrics you will you look at?
+- What metrics will you look at?
 - How is the experiment going to be set up?
 - How long will it run for?
 - What do you plan to learn from it?
@@ -98,11 +96,11 @@ We already mentioned the benefits of experimenting everything, and Thomas and hi
 
 This way, every decision was backed by a thoughtful strategy – not just a shot in the dark. 
 
-### Deep empathy for customers
+### iii) Deep empathy for customers
 
 It's possible to achieve your goal yet harm your user experience. The most famous example of this is from **Booking.com**. They increased sales by showing *anxiety-inducing* messages – such as "*32 customers are looking at the same hotel as you*" and "*another person is considering booking a room at this accommodation*". Thankfully, they stopped after they were [fined $7.5M](https://www.gvh.hu/en/press_room/press_releases/press-releases-2020/gigantic-fine-imposed-on-booking.com-by-the-gvh)!
 
-Let's Do This avoid such pitfalls by putting their users at the heart of how they build – even if it means sacrificing short-term gains.
+Let's Do This chose to avoid such pitfalls by putting their users at the heart of how they build – even if it meant sacrificing short-term gains.
 
 ## Thomas's parting advice to growth engineers: Make your code changes as small as possible
 
@@ -119,5 +117,5 @@ He often repeated the following advice to his engineers:
 ## Further reading
 
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
-- [How to measure product engagement](/blog/how-to-measure-product-engagement)
+- [What is a growth engineer? (And why they're awesome)](/blog/what-is-a-growth-engineer)
 - [The most useful product health metrics](/blog/product-health-metrics)
