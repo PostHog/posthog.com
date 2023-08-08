@@ -61,4 +61,31 @@ Body:
 }
 ```
 
-5. [Send a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion) (or contact the [EU-Cloud support](https://eu.posthog.com/home#supportModal=bug%3Aingestion)). Make sure to include the request from the previous step.
+5. [Send a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion) (or contact the [EU-Cloud support](https://eu.posthog.com/home#supportModal=bug%3Aingestion)). Make sure to include the request from the previous step in the following format:
+```
+# Library: 
+posthog-python https://posthog.com/docs/libraries/python
+
+# Library initialization:
+from posthog import Posthog
+posthog = Posthog(phc_yourAPIKey, host='app_or_eu.posthog.com')
+
+# What was called:
+posthog.capture(
+    "Bob", 
+    "user signed up", 
+    {
+        "login_type": "email", 
+        "is_free_trial": "true"
+    }
+)
+
+# Network request
+[include request from previous step here]
+
+# What was expected to happen:
+To see the network call include the login_type property.
+
+# What actually happened:
+The "login_type" property was missing.
+```
