@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-10.png
-tags: ['']
+tags: ['guides']
 ---
 
 Missing events can be a pain to troubleshoot. This guide aims to help you diagnose and address the issue efficiently. There are three potential areas where the problem might originate:
@@ -16,7 +16,7 @@ Missing events can be a pain to troubleshoot. This guide aims to help you diagno
 
 ## The library is being used incorrectly. (this is usually the issue)
 
-1. Visit https://webhook.site/ and copy “Your unique URL”.
+1. Visit [webhook.site](https://webhook.site/) and copy “Your unique URL”.
 2. Replace [posthog.com](https://app.posthog.com) (or [eu.posthog.com](https://eu.posthog.com) if using the EU Cloud) with “Your unique URL”.
 3. Make sure that the SDK sends a couple of events.
 4. See if the incoming events arrive as expected.
