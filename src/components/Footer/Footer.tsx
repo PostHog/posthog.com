@@ -146,7 +146,7 @@ const linklist: IProps[] = [
                 url: '/templates',
             },
             {
-                title: 'Tracks',
+                title: 'How to build a startup',
                 url: '/tracks',
             },
             {

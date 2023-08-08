@@ -28,8 +28,6 @@ In this article we’ll take a look at why strong customer engagement metrics ar
 - [What tools are good for tracking product engagement?](#what-tools-are-good-for-tracking-product-engagement)
 - [Further reading](#further-reading)
 
-> This article is part of our [PostHog Academy series](/tracks) where we explain the fundamentals of product analytics.
-
 ## What is product engagement?
 The golden rule for any product manager: [listen to your users](https://posthog.com/handbook/product/user-feedback).
 

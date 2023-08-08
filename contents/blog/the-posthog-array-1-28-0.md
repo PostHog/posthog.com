@@ -138,4 +138,3 @@ Don't see a role for you? We're always looking for exceptional people, so reach 
 
 _Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
 
-<AcademyCTA />

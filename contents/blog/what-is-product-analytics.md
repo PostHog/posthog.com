@@ -34,8 +34,6 @@ There are two types of data which you can gather for product analytics:
 
 There are also frameworks which can be used to translate information between the two. [NPS scores](/apps/nps-survey-app), for example, are often used to translate a user sentiment into a measurable data point.
 
-> This article is part of our [PostHog Academy series](/tracks) where we explain the fundamentals of product analytics.
-
 ## Why are product analytics tools important?
 
 Product analytics tools are important because they enable you to make thoughtful and well-informed decisions about changes to a product. Product analytics tools also enable you to measure success (or failure!) when needed, so you know if you need to rollback or double-down on a change. 

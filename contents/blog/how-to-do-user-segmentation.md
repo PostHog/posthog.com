@@ -38,8 +38,6 @@ For example, a global ecommerce company such as Amazon might have user segments 
 
 By understanding how these segments differ, Amazon would then be able to build products which better meet their individual needs.
 
-> This article is part of our [PostHog Academy series](/tracks) where we explain the fundamentals of product analytics. Marcus Hyett is VP of Product at PostHog. Prior to PostHog, he was a Senior Product Manager at Meta working on ecommerce experiences across Instagram and its family of apps. 
-
 ## Why is user segmentation important?
 
 In order to serve your users, you need to understand them in as much detail as possible. If you don't segment users then you're only able to understand them as individuals (which becomes impossible once you userbase start to grow) or as a whole. 
