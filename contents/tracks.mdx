@@ -10,19 +10,22 @@ images:
 import { StaticImage } from 'gatsby-plugin-image'
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import CommunityCTA from 'components/CommunityCTA'
-import { FeatureSnapshot } from 'components/FeatureSnapshot'
-import refer from './images/startup-refer.png'
 
 <Hero
     title="PostHog Tracks"
     subtitle="Building a startup like PostHog isn't easy. Unless you know how!"
 />
-<h3 className="text-xl m-0 font-semibold opacity-75 text-center !pb-8">
-Tracks is a curated reading list for founders building product-led companies like PostHog. We build in the open, so we're happy to share all the details of how we've got this far, and the lessons we learned on the way.</h3>
 
-<h3 className="mb-0">How to <span style='color: #f64e00;'>build a team</span></h3>
+PostHog Tracks is a curated set of resources for entrepreneurs and founders who are building new companies. We build in the open, so we're happy to share all the details of how we've structured PostHog, and the lessons we've learned on the way. If there's something that isn't covered here, you can even [ask us directly](/questions) for more info (or subscribe to our newsletter).
+
+<p class="mt-4 pb-12 flex space-x-2 items-center justify-center">
+<CallToAction href="https://newsletter.posthog.com/">Subscribe to our newsletter</CallToAction> 
+</p>
+
+<h3 className="mb-0">How to build <span style='color: #f64e00;'>a team</span></h3>
 
 It all starts with getting the right people on your project. You can check the handbook for more information about our [small team structure](/handbook/company/small-teams) and [minimal approach to management](/handbook/company/management), or head to [our staff profiles](/team) to understand what our team looks like now.
+
 
 <TutorialsSlider slugs={[
   "/blog/posthog-first-five",
@@ -34,64 +37,67 @@ It all starts with getting the right people on your project. You can check the h
 
 <br />
 
-<h3 className="mb-0">How to <span className="text-red">create good processes</span></h3>
+<h3 className="mb-0">PostHog for <span className="text-red">product engineers</span></h3>
 
-We bias heavily for tools which enable us to work collaboratively, and transparently. Some of the tools we use, like GitHub as a CMS, may sound intimidating to non-engineers, but [our experience](/blog/a-non-coders-thoughts-on-everybody-codes-culture) is that if you give teams the right support then it isn’t an issue. It helps to have [a really good employee handbook](/handbook). 
+Are you part-engineer, part-product person? This is the lesson track for you!
 
 <TutorialsSlider slugs={[
-  "/blog/startup-ops-toolkit",
-  "/blog/github-cms",
-  "/blog/registering-trademarks",
-  "/blog/automating-a-software-company-with-github-actions",
-  "/blog/startup-finance-without-finance"
+  "/tutorials/multiple-environments",
+  "/tutorials/canary-release",
+  "/tutorials/build-your-own-posthog-app",
+  "/tutorials/new-user-experiments",
+  "/tutorials/feature-retention",
+  "/tutorials/explore-insights-session-recordings",
+  "/tutorials/sentry-plugin-tutorial"
 ]} />
 
 <br />
+<br />
 
-<h3 className="mb-0">How to <span className="text-red">build new products</span></h3>
+<h3 className="mb-0">PostHog for <span className="text-red">front-end developers</span></h3>
 
-At PostHog, we build weirdly fast. Some of that is because we’ve assembled an amazing team — but it’s _also_ because we talk to our users and treat every new feature like its own product. It took us [a few pivots](/blog/story-about-pivots), but we got to product market fit eventually!
+Want to build site apps and design products users love? We can help. 
 
 <TutorialsSlider slugs={[
-  "/blog/how-to-work-out-what-users-need",
-  "/blog/creating-ideal-customer-profile",
-  "/blog/product-market-fit-game",
-  "/blog/making-something-people-want",
-  "/blog/interview-snapshot-guide"
+  "/tutorials/test-frontend-feature-flags",
+  "/tutorials/react-popups",
+  "/tutorials/vue-cookie-banner",
+  "/tutorials/build-site-app",
+  "/tutorials/cookieless-tracking"
 ]} />
 
 <br />
+<br />
 
-<h3 className="mb-0">How to <span className="text-red">sell your product</span></h3>
+<h3 className="mb-0">PostHog for <span className="text-red">product managers</span></h3>
 
-PostHog doesn’t have a sales team, but we’ve still learned a lot about how to sell a product and the importance of pricing. And while we don’t have a sales team, we _do_ have both a customer success and a marketing team who play a vital role in bringing in new users!
+Find the right users to talk to, organize interviews and gather intelligence.
 
 <TutorialsSlider slugs={[
-  "/blog/first-10-paying-customers",
-  "/blog/pricing-lessons",
-  "/blog/dev-marketing-for-startups",
-  "/blog/multi-product-pricing",
-  "/blog/how-to-treat-your-pricing-like-a-product"
+  "/tutorials/churn-rate",
+  "/tutorials/feature-retention",
+  "/tutorials/feedback-interviews-site-apps",
+  "/tutorials/stripe-payment-data",
+  "/tutorials/explore-insights-session-recordings"
 ]} />
 
-<Section>
-<h2 className="text-3xl lg:text-4xl text-center mb-0">"Will this program really get me to product-market fit?"</h2>
-<h3 className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 opacity-75 text-primary text-center text-lg pb-8">We think so. Here's what $50,000 of free credits gets you.</h3>
-<FeatureSnapshot
-        image={refer}
-        features={[
-            <>
-                <strong>30 million events</strong>. Analyze events, create funnels, build dashboards and more. All in one platform.
-            </>,
-            <>
-                <strong>50k session replays</strong>. Watch user sessions, with console logs and network performance tracking. No extra code needed.
-            </>,
-            <>
-                <strong>Over 4 billion API calls</strong>. Run multivariate experiments and complete safe, staggered rollouts with feature flags. 
-            </>,
-        ]}
-    />
-</Section>
+<br />
+<br />
 
 <CommunityCTA />
 
+<section class="my-12 px-5">
+  <div class="max-w-screen-md mx-auto">
+    <h3 class="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl m-0 text-center mb-0">The PostHog Way</h3>
+    <p class="text-center p-4">We're open source, fully remote and we believe in transparency. Part of what's helped PostHog ship so fast is that we share as much information as we can, including about the way we work.</p> 
+    <ul class="p-0">
+      <li class="list-none px-4 py-2"><a href="/blog/interview-snapshot-guide">How to turn user interviews into actionable snapshots</a></li>
+      <li class="list-none px-4 py-2"><a href="/blog/transparent-enterprise-pricing">Why we ditched 'talk to sales' for transparent pricing</a></li>
+      <li class="list-none px-4 py-2"><a href="/blog/posthog-first-five">What we learned about hiring from our first five employees</a></li>
+      <li class="list-none px-4 py-2"><a href="/blog/how-to-run-a-transparent-company">How to run a transparent startup</a></li>
+      <li class="list-none px-4 py-2"><a href="/blog/making-something-people-want">How we made something people want</a></li>
+      <li class="list-none px-4 py-2"><a href="/blog/startup-ops-toolkit">The ops toolkit for early-stage startups</a></li>
+      <li class="list-none px-4 py-2"><a href="/blog/startup-finance-without-finance">How to run finance at your startup without hiring a finance person</a></li>
+    </ul>
+  </div>
+</section>
