@@ -1934,6 +1934,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/session-replay/troubleshooting',
+                    icon: 'Question',
+                    color: 'blue',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -1972,12 +1978,6 @@ export const docsMenu = {
                     icon: 'Code',
                     color: 'salmon',
                 },
-                {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/session-replay/troubleshooting',
-                    icon: 'Question',
-                    color: 'blue',
-                },
             ],
         },
         {
@@ -2006,6 +2006,12 @@ export const docsMenu = {
                 {
                     name: 'Product manual',
                     url: '/docs/feature-flags/manual',
+                    icon: 'Book',
+                    color: 'blue',
+                },
+                {
+                    name: 'Installation',
+                    url: '/docs/feature-flags/installation',
                     icon: 'Book',
                     color: 'blue',
                 },
@@ -2119,6 +2125,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/experiments/common-questions',
+                    icon: 'Question',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -2134,16 +2146,10 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Experiments without flags',
+                    name: 'Experiments without feature flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'Flag',
                     color: 'yellow',
-                },
-                {
-                    name: 'Common questions about experiments',
-                    url: '/docs/experiments/common-questions',
-                    icon: 'Question',
-                    color: 'seagreen',
                 },
             ],
         },

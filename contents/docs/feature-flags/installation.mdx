@@ -1,5 +1,5 @@
 ---
-title: Product analytics installation
+title: Feature flag installation
 sidebar: Docs
 showTitle: true
 availability:
@@ -7,6 +7,13 @@ availability:
     selfServe: full
     enterprise: full
 ---
+
+Feature Flags enable you to safely deploy and roll back new features. This means you can ship code for new features and roll it out to your users in a managed way. If something goes wrong, you can roll back without having to re-deploy your application.
+
+Feature Flags also help you control access to certain parts of your product, such as only showing paid features to users with an active subscription.
+
+To start using feature flags, install PostHog in the library you want to run tests in:
+
 import Tab from "components/Tab"
 import Frameworks from "../integrate/\_snippets/frameworks.mdx"
 import APIInstall from '../integrate/_snippets/install-api.mdx'
@@ -25,14 +32,8 @@ import RustInstall from '../integrate/_snippets/install-react-native.mdx'
 import FlutterInstall from '../integrate/_snippets/install-flutter.mdx'
 import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
 
-Product analytics enable you to gather and analyze data about how users interact with your product. 
-
-To start, install PostHog in the app you want to collect data in.
-
-> **Tip**: Even if you have multiple customer-facing products (e.g., a marketing website + iOS app + web app), it's best to have them share the same project. This enables you to track the user across their journey across different platforms. See [organizations & projects docs](/manual/organizations-and-projects) for more.
-
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Elixir', 'Flutter', 'guides', 'api']}>
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Elixir', 'Flutter', 'api']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>React</Tab>
@@ -48,11 +49,10 @@ To start, install PostHog in the app you want to collect data in.
         <Tab>Rust</Tab>
         <Tab>Elixir</Tab>
         <Tab>Flutter</Tab>
-        <Tab count="11">Framework guides</Tab>
         <Tab>API</Tab>
     </Tab.List>
     <Tab.Panels>
-            <Tab.Panel>
+        <Tab.Panel>
             <WebInstall />
         </Tab.Panel>
         <Tab.Panel>
@@ -83,19 +83,22 @@ To start, install PostHog in the app you want to collect data in.
             <IOSInstall />
         </Tab.Panel>
         <Tab.Panel>
-            <JavaInstall />
+            <blockquote class='warning-note'>
+                Feature flags are not supported yet in our <a href="/docs/libraries/java">Java SDK</a>. However, you can integrate them into your project by using the <a href="/docs/feature-flags/installation?tab=api">PostHog API</a>.
+            </blockquote>
         </Tab.Panel>
         <Tab.Panel>
-           <RustInstall />
+            <blockquote class='warning-note'>
+                Feature flags are not supported yet in our community-maintained <a href="/docs/libraries/rust">Rust SDK</a>. However, you can integrate them into your project by using the <a href="/docs/feature-flags/installation?tab=api">PostHog API</a>.
+            </blockquote>
         </Tab.Panel>
         <Tab.Panel>
-            <ElixirInstall />
+            <blockquote class='warning-note'>
+                Feature flags are not supported yet in our <a href="/docs/libraries/elixir">Elixir SDK</a>. However, you can integrate them into your project by using the <a href="/docs/feature-flags/installation?tab=api">PostHog API</a>.
+            </blockquote>
         </Tab.Panel>
         <Tab.Panel>
            <FlutterInstall />
-        </Tab.Panel>
-        <Tab.Panel>
-            <Frameworks />
         </Tab.Panel>
         <Tab.Panel>
             <APIInstall />
