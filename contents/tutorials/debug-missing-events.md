@@ -35,7 +35,3 @@ Missing events can be a pain to troubleshoot. This guide aims to help you diagno
 
 ##  Still encountering issues?
 If those steps did not fix the issue, feel free to [get in touch with the support](https://app.posthog.com/home#supportModal). We try to respond to as many of these as we can.
-
-## Further reading
-
-- [Deploying a reverse proxy to PostHog Cloud](/docs/advanced/proxy)
