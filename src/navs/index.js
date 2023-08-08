@@ -1890,6 +1890,12 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/product-analytics/troubleshooting',
+                    icon: 'Question',
+                    color: 'blue',
+                },
             ],
         },
         {
