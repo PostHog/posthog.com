@@ -1815,6 +1815,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/product-analytics/troubleshooting',
+                    icon: 'Question',
+                    color: 'blue',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
