@@ -1,5 +1,5 @@
 ---
-title: How to track first and last touch attribution
+title: How to analyze first and last touch attribution
 date: 2023-08-09
 author: ["ian-vanagas"]
 showTitle: true
@@ -21,7 +21,7 @@ In this tutorial, we show you how to track first and last touch attribution in P
 
 We can analyze first touch attribution by looking at event source properties and initial pageview events.
 
-### Source properties
+### Initial source properties
 
 PostHog automatically captures multiple properties related to the source of a user. These include values like referring domain and UTM source. PostHog also sets the initial value (the first value it sees) as a property on users.
 
@@ -56,7 +56,7 @@ We can change `properties.$current_url` to whatever property we care about such 
 
 We can analyze last touch attribution in three ways. For each of these, we use a signup event as the conversion, but you can use any event you want. 
 
-### Source
+### Last source properties
 
 Like first touch attribution, we can look at the properties the user had when signing up. Look at the signup event’s properties. 
 
