@@ -99,8 +99,8 @@ export const Content = ({ quickLinks = false }) => {
                     />
                     <ResourceItem
                         type="Guide"
-                        title="Building a cohort"
-                        description="Group users by behavior for deeper analysis"
+                        title="Track new and returning users"
+                        description="Build cohorts and compare users"
                         Image={
                             <StaticImage
                                 alt=""
@@ -111,12 +111,12 @@ export const Content = ({ quickLinks = false }) => {
                                 src="../../components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
-                        url="/tutorials/how-to-segment-users"
+                        url="/tutorials/track-new-returning-users"
                     />
                     <ResourceItem
                         type="Guide"
-                        title="Sales & revenue tracking"
-                        description="Determine KPIs, who’s paying, revenue sources, and retention"
+                        title="Identify and analyze power users"
+                        description="Find and understand your most engaged users"
                         Image={
                             <StaticImage
                                 alt=""
@@ -127,7 +127,7 @@ export const Content = ({ quickLinks = false }) => {
                                 src="../../components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
-                        url="/tutorials/revenue"
+                        url="/tutorials/power-users"
                     />
                     <ResourceItem
                         type="Guide"
