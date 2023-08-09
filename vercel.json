@@ -983,6 +983,8 @@
         { "source": "/docs/apps/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" },
         { "source": "/docs/apps/variance-connector", "destination": "/docs/cdp/variance-connector" },
         { "source": "/docs/apps/zapier-connector", "destination": "/docs/cdp/zapier-connector" },
+        { "source": "/docs/product-os", "destination": "/docs" },
+
         {
             "source": "/questions/aliasing-device-i-ds-to-user-i-ds",
             "destination": "/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user"
