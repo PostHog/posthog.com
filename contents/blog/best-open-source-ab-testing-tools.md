@@ -51,6 +51,8 @@ PostHog is ideal for product teams, particularly those who don't want to assembl
 
 Experimentation is free-to-use on PostHog's Scale plan, which is also [free up to 1 million events](/pricing) and 15,000 recordings per month – you can set billing limits to ensure you don't get surprise bills. While PostHog is open source, its A/B testing features aren't included in the open source release.
 
+> **Further reading:** New to A/B testing? Read [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes).
+
 ## 2. GrowthBook
 
 ![GrowthBook - best open source ab testing tools](../images/blog/open-source-testing-tools/growthbook.png)

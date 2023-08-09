@@ -22,9 +22,9 @@ Out of five posts that I hoped would get there, four did. Look mom, lots of traf
 
 I don't claim to be a well-established writer. Amongst other things, I'm inconsistent with publishing and being British means I wrestle with US English. On the flipside, I've spent an embarrassingly large amount of time reading content that engineers find engaging.
 
-This is what I have learned thus far. I've created a framework for those also working at developer-focused companies, writing for the same audience as me.
+This is what I have learned thus far. I've created a framework for those also working at developer-focused companies, writing for the same audience as me. You may also [what we've learned about dev tool marketing](/blog/dev-marketing-for-startups) interesting, too.
 
-Disclaimer: my company doesn't care about appealing (directly) to CTOs. If you work at Top Down Enterprise Technology Corp, just do the opposite of what I say.
+> Disclaimer: my company doesn't care about appealing (directly) to CTOs. If you work at Top Down Enterprise Technology Corp, just do the opposite of what I say.
 
 ## Be human
 

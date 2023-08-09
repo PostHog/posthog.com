@@ -261,4 +261,4 @@ Launching an A/B test requires careful planning to ensure accurate results and m
 
 - [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
-- [How to measure product engagement](/blog/how-to-measure-product-engagement)
+- [How to do holdout testing](/tutorials/holdout-testing)

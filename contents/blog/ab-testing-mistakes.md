@@ -121,6 +121,8 @@ Counter metrics measure unintended negative side-effects in your experiments. If
 
 For example, say you're testing a change to your sign-up page. While the number of sign-ups may increase, you notice that time spent in your app decreases. In this case, it may indicate that your new sign-up page is misleading users about what your app does, resulting in more sign-ups but also more churn.
 
+Another option here is to [run a holdout test](tutorials/holdout-testing), where a small group of users is not shown your changes for a long period of time – e.g. weeks or months after your experiment ends. This helps you to verify that the experiment doesn’t have negative long term effects.
+
 ## 6. Not accounting for seasonality
 
 Seasonal periods can cause significant changes in user behavior. People might be taking time off, or focusing on different tasks. In a B2B context, seasonality can also affect the decision-making processes of businesses. For example, companies often have specific times of the year when they allocate budgets, review contracts, or make purchasing decisions. Conducting A/B tests during these periods can result in biased outcomes that may not represent typical user behavior.
