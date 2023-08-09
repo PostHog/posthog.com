@@ -8,7 +8,9 @@ featuredImage: ../images/tutorials/banners/tutorial-16.png
 tags: ['feature flags']
 ---
 
-Most feature flags target users. To decide what value to return, PostHog’s feature flag service takes a flag key and user. What counts as a "user" or how you filter that user is up to you. Doing this enables you to target other entities like organizations, pages, machines, and more. This tutorial shows you how to target these non-user entities.
+To decide what value to return, PostHog’s feature flag service uses a flag key and an entity. Which entity to use it up to you, and these don't necessarily need to be _users_ – you can also target organizations, pages, machines, and more. 
+
+This tutorial shows you how to target these non-user entities in your use of feature flags.
 
 ## Targeting groups, teams, or organizations
 
@@ -16,7 +18,6 @@ If you enabled [group analytics](/docs/product-analytics/group-analytics), targe
 
 ![Match by organization](../images/tutorials/group-page-machine-flags/org.png)
 
-For this to work, you need group analytics enabled and group identification set up. Once done, you can target your flags to specific groups.
 
 ### Property or cohort filter
 
@@ -26,11 +27,11 @@ Another way to target an organization or team is to use the email or similar rep
 
 ## Targeting pages
 
-Another target you might want is pages. For example, to ensure certain docs pages are consistent, beta test a new pricing page, or change a page users visited many times.
+Another target you might want is pages. For example, to ensure components are consistent across a set of pages, test a new pricing page, or customize a page's experience based on how many times it has been viewed.
 
 ### Payloads
 
-You can use [feature flag payloads](/docs/feature-flags/payloads) to customize the experience depending on the page. For example, you want a button to change colors depending on the page URL for a group of users. Payloads lets you set multiple values on one feature flag which you can evaluate and use in your app.
+You can use [feature flag payloads](/docs/feature-flags/payloads) to customize the experience depending on the page. For example, if you want a button to change colors depending on the page URL. Payloads lets you set multiple values on one feature flag which you can evaluate and use in your app.
 
 To do this, create your flag with a payload such as:
 
@@ -44,7 +45,7 @@ To do this, create your flag with a payload such as:
 
 In your app, get feature flag payloads, write logic to check the page URL, and use a combination of the page URL and flag payload to adjust your button. For a Next.js component, this would look like this:
 
-```js
+```js-web
 'use client'
 import { useFeatureFlagPayload } from 'posthog-js/react'
 import { usePathname } from 'next/navigation'
@@ -69,7 +70,7 @@ export default function Button() {
 
 ### Cohort
 
-If instead, you want to target users who visited a page repeatedly, you can create and use a static cohort. For example, if I wanted to target a flag to show a new pricing page for people who have visited the pricing page repeatedly.
+If instead, you want to target users who visited a page repeatedly, you can create and use a static cohort. For example, if you wanted to target a flag to show a new pricing page for people who have visited the pricing page repeatedly.
 
 1. Create a cohort for people who had multiple pageview events
 2. Duplicate as a static cohort.
