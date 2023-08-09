@@ -11,6 +11,19 @@ There are a few common reasons that you may not see events appear in your projec
 
 1. Visit [webhook.site](https://webhook.site/) and copy “Your unique URL”.
 2. Inside your code replace [posthog.com](https://app.posthog.com) (or [eu.posthog.com](https://eu.posthog.com) if using the EU Cloud) with “Your unique URL”.
+
+<MultiLanguage>
+
+```node
+const client = new PostHog(
+    '_6SG-F7I1vCuZ-HdJL3VZQqjBlaSb1_20hDPwqMNnGI',
+    
+{ host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' } 
+)
+```
+
+</MultiLanguage>
+
 3. Make sure that the SDK sends a couple of events.
 4. See if the incoming events arrive as expected.
 
