@@ -7,6 +7,8 @@ There are a few common reasons that you may not see events appear in your projec
 
 ### 1. The library is being configured incorrectly. (this is usually the issue)
 
+The main reason that certain evets are missing is usually a misconfiguration.
+
 > Warning: Make sure to not use sensitive data while debugging using third-party tools.
 
 1. Visit [webhook.site](https://webhook.site/) and copy “Your unique URL”.
@@ -31,6 +33,8 @@ const client = new PostHog(
 
 ### 2. There is a bug within the library being used.
 
+Certain events could fail to reach PostHog if there is a bug in the used library. (this is quite uncommon)
+
 #### Front-end libraries
 1. Open the devtools and switch to the network tab.
 2. Look for the request to app.posthog.com/e (or eu.posthog.com/e if using the EU Cloud) that appears to be incorrect.
@@ -43,6 +47,8 @@ const client = new PostHog(
 See the respective debugging guides, e.g. [Node.js debugging](https://posthog.com/docs/libraries/node#debugging-and-exceptions).
 
 ### 3. Events are not ingested after being received by PostHog.
+
+If the library is configured correctly and successfully sending events to PostHog. Events could get lost in the ingestion pipeline e.g. when there is an [active incident](https://status.posthog.com).
 
 #### Front-end libraries
 1. Open the devtools and switch to the network tab.
