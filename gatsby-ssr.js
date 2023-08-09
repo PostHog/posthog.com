@@ -22,7 +22,7 @@ export const wrapPageElement = ({ element, props }) => {
         <UserProvider>
             {wrapElement({
                 element:
-                    /^blog\/(?!categories)|^tutorials\/(?!categories)|^customers\/|^spotlight\/|^posts|^changelog\/(.*?)\//.test(
+                    /^blog\/(?!categories)(?!all)|^tutorials\/(?!categories)|^customers\/|^spotlight\/|^posts|^changelog\/(.*?)\//.test(
                         slug
                     ) ? (
                         <Posts {...props} articleView={!/^posts$/.test(slug)}>
