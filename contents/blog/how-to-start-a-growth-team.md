@@ -1,33 +1,21 @@
 ---
-date: 2023-08-08
+date: 2023-08-09
 title: "How to start a growth team (as an engineer)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ['lior-neu-ner']
-featuredImage: ../images/blog/posthog-blog-at-desk.png
+featuredImage: ../images/blog/athlete-hog.png
 featuredImageType: full
 category: Product growth
 tags: 
   - Guides
   - Product metrics
 ---
-In this post, we speak to [Thomas Owers](https://www.linkedin.com/in/thomasowers/), former lead software engineer at [Let's Do This](https://www.letsdothis.com/) – a Y Combinator backed startup with $80M in funding. 
+[Thomas Owers](https://www.linkedin.com/in/thomasowers/) knew nothing about [growth engineering](/blog/what-is-a-growth-engineer) when he started the first growth team at [Let's Do This](https://www.letsdothis.com/) – a Y Combinator startup with $80M in funding.
 
-He shares how he started the company's first growth team, despite having no previous experience in working on growth! His team became so successful that they later grew the growth org into 4 different teams.
-
-We'll dive into Thomas's story on how he navigated this unfamiliar territory, and his advice for engineers who are new to growth.
-
-## Background
-
-Let's Do This is a marketplace for discovering and signing up for endurance events such as marathons or triathlons. 
-
-In 2021, Let's Do This decided to create a growth team focusing on user acquisition and retention. Although he did not have any growth experience, this intrigued Thomas and he jumped at the opportunity to join the team!
-
-The team did not have a PM either, so Thomas stepped up to become the de facto "half PM - half tech lead" of the team.
-
-His first step was figuring out what to do, and so he had calls with growth experts at other startups. The advice from them was consistent:
+But, 2 years later, his team was so successful, the growth org had grown into four individual teams following their lead. We spoke to Thomas about navigating his journey from software engineer to growth team leader, and what it takes to build a successful growth team. Here’s what we learned.
 
 ## 1. The answer is in your data
 
