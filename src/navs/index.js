@@ -653,6 +653,10 @@ const handbookSidebar = [
                         name: 'Who we do business with',
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
+                    {
+                        name: 'Historical import',
+                        url: '/handbook/growth/sales/historical-import',
+                    },
                 ],
             },
         ],
