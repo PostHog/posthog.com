@@ -6,7 +6,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ['lior-neu-ner']
-featuredImage: ../images/blog/athlete-hog.png
+featuredImage: ../images/blog/athlete-hog.jpeg
 featuredImageType: full
 category: Product growth
 tags: 
