@@ -12,7 +12,7 @@ The main reason that certain evets are missing is usually a misconfiguration.
 > Warning: Make sure to not use sensitive data while debugging using third-party tools.
 
 1. Visit [webhook.site](https://webhook.site/) and copy “Your unique URL”.
-2. Inside your code replace [posthog.com](https://app.posthog.com) (or [eu.posthog.com](https://eu.posthog.com) if using the EU Cloud) with “Your unique URL”.
+2. In your PostHog [initialization code](https://posthog.com/docs/product-analytics/installation), replace "https://app.posthog.com" or "https://eu.posthog.com" if using the EU Cloud) with the URL you copied from webhook.site. For example:
 
 <MultiLanguage>
 
