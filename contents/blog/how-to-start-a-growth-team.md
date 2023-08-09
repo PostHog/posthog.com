@@ -31,22 +31,26 @@ His first step was figuring out what to do, and so he had calls with growth expe
 
 ## 1. The answer is in your data
 
-"It's all about finding the right data," Thomas was told. Taking this to heart, they built dashboards to monitor essential metrics, funnels, and user flows. They used these to answer questions such as:
+Thomas' first move was to talk to growth engineers at other startups and they all said the same thing: "It's all about finding the right data." 
+
+Taking this to heart, his team built dashboards to monitor essential metrics, funnels, and user flows impacting acquisition and retention. 
+
+Let's Do This is a marketplace for discovering and signing up for endurance events, such as marathons or triathlons, so they used the dashboards to answer questions like:
 
 - Where are bookings coming from? 
 - What are the most common user journeys? 
 - Where do users drop off in the journey? 
 - What features are the most engaging for our users? 
 
-Once they had this data, their next focus was on finding the significant drop-offs and improving them. This led Thomas to the next piece of advice:
+Once they had this data, their next focus was on finding the significant drop-offs and improving them. This led Thomas to the next piece of advice...
 
-## 2. Talk to your customers and build what they need
+## 2. Talk to your customers. Build what they need
 
 Once the growth team knew where the drop-offs were, the next step was figuring out why they happened and what to do about it. 
 
 In the case of Let's Do This, their target metric was *number of bookings*. They noticed a large drop-off during the booking flow and decided to investigate. They sent emails to the customers who dropped off, offering Amazon gift cards in exchange for a 30-minute call.
 
-They learned that when booking events like marathons, their customers need to be confident that it's right for them (after all, they spend months training for it!). This would lead to hesitation. 
+They learned that when booking events like marathons, their customers need to be confident that it's right for them – they spend months training for them, after all. This lead to hesitation – "is this event _really_ the right one for me?"
 
 Thomas and his team brainstormed solutions. Eventually, they built features to improve trust signals, and this significantly increased their bookings.
 
@@ -60,7 +64,10 @@ For this reason, Thomas and his team ran 10 or more A/B tests each week!
 
 The ability to *experiment everything* is only possible if each engineer is empowered to make mistakes. 
 
-Thomas embedded this into their team culture by emphasizing that **an experiment is not a failure if it doesn't produce the results you were hoping for.**. Instead, an experiment is only a failure if the team didn't learn anything from it.
+Thomas embedded this into the team culture by emphasizing two key points:
+
+1. An experiment _isn't a failure_ if it doesn't produce the results you wanted or expected.
+2. An experiment _is only a failure_ when the team doesn't learn anything from it. 
 
 This created a safe space for engineers to explore, and ultimately resulted in a more innovative team.
 
@@ -72,7 +79,7 @@ To ensure their experiments [avoided common mistakes](/blog/ab-testing-mistakes)
 
 > **New to experiments and A/B tests?** Check out our [software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers).
 
-## Define your team values
+## 6. Successful growth teams define their values
 
 In Thomas's opinion, one of the most effective things they did was to create a set of core team values. They were the team's compass, guiding decisions, settling debates, and driving overall culture. They were:
 
@@ -98,21 +105,21 @@ This way, every decision was backed by a thoughtful strategy – not just a shot
 
 ### iii) Deep empathy for customers
 
-It's possible to achieve your goal yet harm your user experience. The most famous example of this is from **Booking.com**. They increased sales by showing *anxiety-inducing* messages – such as "*32 customers are looking at the same hotel as you*" and "*another person is considering booking a room at this accommodation*". Thankfully, they stopped after they were [fined $7.5M](https://www.gvh.hu/en/press_room/press_releases/press-releases-2020/gigantic-fine-imposed-on-booking.com-by-the-gvh)!
+It's possible to achieve your goal yet harm your user experience. The most famous example of this is from **Booking.com**. They increased sales by showing anxiety-inducing messages, such as "*32 customers are looking at the same hotel as you*" and "*another person is considering booking a room at this accommodation*". Thankfully, they stopped this, but it took a [$7.5M fine](https://www.gvh.hu/en/press_room/press_releases/press-releases-2020/gigantic-fine-imposed-on-booking.com-by-the-gvh) to do so!
 
 Let's Do This chose to avoid such pitfalls by putting their users at the heart of how they build – even if it meant sacrificing short-term gains.
 
-## Thomas's parting advice to growth engineers: Make your code changes as small as possible
+## Thomas's Golden Rule: Make your code changes as small as possible
 
-Growth engineering is all about learning quickly and iterating based on your findings. It's this mindset that Thomas feels is the most important for growth engineers to have. 
+Growth engineering is all about learning quickly and iterating based on your findings. 
 
-He often repeated the following advice to his engineers:
+In Thomas' view, good growth engineers "need to get comfortable knowing their code will be deleted" because "80% of your tests will fail."
 
-> "**80% of your tests will fail, so you need to get comfortable knowing your code will be deleted**. 
-> 
-> Applying this in practice means reducing the scope of your changes *while still* maximizing insights:
->
-> For example, an engineer may scope a project and say it will take 2 weeks. It's important to challenge that and frame the question differently: Instead of asking 'How long will it take?', ask 'What can you do in only 1 week? 3 days? Half a day?". Often you'll find that you can reduce the scope of the change while still being able to validate your hypothesis".
+Applying this in practice means reducing the scope of your changes *while still* maximizing insights:
+
+"An engineer may scope a project and say it will take 2 weeks. It's important to challenge that and frame the question differently.
+
+"Instead of asking 'How long will it take?', ask 'What can you do in only 1 week? 3 days? Half a day?'. Often you'll find that you can reduce the scope of the change while still being able to validate your hypothesis".
 
 ## Further reading
 
