@@ -37,7 +37,8 @@ Certain events could fail to reach PostHog if there is a bug in the used library
 
 #### Web libraries
 1. Open the devtools and switch to the network tab.
-2. Look for the request to app.posthog.com/e (or eu.posthog.com/e if using the EU Cloud) that appears to be incorrect.
+2. Look for the failed requests to app.posthog.com/e (or eu.posthog.com/e if using the EU Cloud).
+3. Right click one of those request and click Copy -> Copy as cURL.
 
 ![network request being sent to posthog](../../images/docs/product-analytics/network-request-to-posthog.png)
 
