@@ -18,15 +18,15 @@ Here's a breakdown of each field in the form:
 
 ### Key
 
-This is the name of the key that you'll use in your code to fetch the feature flag.
+This is the name of the key you use in your code to evaluate the feature flag.
 
 ### Description and tags 
 
-Metadata to describe your feature flag in the PostHog app.
+Metadata to describe and share information about your feature flag in the PostHog app.
 
 ### Enable feature flag
 
-As the name suggests, this determines whether your flag is enabled. Note that disabled flags return `undefined` or `null`.
+This determines whether your flag is enabled. Disabled flags return `undefined` or `null`.
 
 ### Persisting feature flags across authentication steps
 
@@ -36,7 +36,7 @@ Feature flag values are calculated based on a user's properties. Since it's poss
 
 By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same. 
 
-Note that there are trade-offs to enabling this:
+There are trade-offs to enabling this:
 
 1. It slows down the feature flag response.
 2. It disables local evaluation of the feature flag.
@@ -48,13 +48,13 @@ There are two types of feature flags:
 
 #### 1. Boolean flags. 
 
-These return `true` or `false`. Optionally, you can also include a payload to be returned when the served value is true.
+These return `true` or `false`. Optionally, you can also include a [JSON payload](/docs/feature-flags/payloads) to be returned when the served value is true.
 
 #### 2. Multiple variant flags (multivariate flags). 
 
 Instead of returning true or false, multivariate flags return a key – for example, `control` or `test`. 
 
-You can also choose the rollout percentage for each variant key, where each variant key can be given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages.
+You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages.
 
 ### Release conditions
 
