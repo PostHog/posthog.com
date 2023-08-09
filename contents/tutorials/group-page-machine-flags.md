@@ -1,6 +1,6 @@
 ---
 title: Targeting feature flags on groups, pages, machines, and more
-date: 2023-08-08
+date: 2023-08-09
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -14,10 +14,9 @@ This tutorial shows you how to target these non-user entities in your use of fea
 
 ## Targeting groups, teams, or organizations
 
-If you enabled [group analytics](/docs/product-analytics/group-analytics), targeting by groups, teams, or organizations is easy. When creating your feature flag, change the "Match by" value under "Release conditions" your group type name, add any conditions you want, and roll out the flag. 
+If you enabled [group analytics](/docs/product-analytics/group-analytics) and set up group idenitifcation, targeting by groups, teams, or organizations is easy. When creating your feature flag, change the "Match by" value under "Release conditions" your group type name, add any conditions you want, and roll out the flag.
 
 ![Match by organization](../images/tutorials/group-page-machine-flags/org.png)
-
 
 ### Property or cohort filter
 
@@ -86,7 +85,7 @@ Another entity you might want to target is services, machines, or devices. For e
 
 ### Custom user value
 
-PostHog does not enforce what it means to be a "user." A user can be a service, machine, device, or application and we can use feature flags to work with them this way. You do this entirely on the backend.
+A user for PostHog is just a distinct ID string connected to events. Although on the frontend, it is generated and connected to a real user's sessions, on the backend, it could mean anything. This includes service, machine, device, or application and we can use feature flags to work with them this way.
 
 To do this, start by capturing an event with the entity ID (like server ID).
 
