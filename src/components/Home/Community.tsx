@@ -96,7 +96,7 @@ export default function Community() {
                         className="left-[42.5vw] sm:left-[42.5vw] md:left-[42vw] lg:left-[42.75vw] xl:left-[43.5vw] 2xl:left-[43.5vw] top-[40.5vw] sm:top-[41vw] md:top-[40vw] mdlg:top-[40.5vw] lg:top-[40.5vw] xl:top-[41vw] -rotate-[1.5deg]"
                     />
                     <CommunityStat
-                        count="50b+"
+                        count="100b+"
                         label="Events tracked"
                         className="left-[62.75vw] sm:left-[62.75vw] md:left-[62vw] lg:left-[63vw] xl:left-[63.75vw] 2xl:left-[63.75vw] top-[51vw] sm:top-[51vw] md:top-[50.5vw] lg:top-[51vw] 2xl:top-[51vw] -rotate-1"
                     />
