@@ -1085,12 +1085,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Product OS',
-                },
-                {
-                    name: 'What is Product OS?',
-                    url: '/docs/product-os',
-                    icon: 'Info',
+                    name: 'How PostHog works',
                 },
                 {
                     name: 'Data',
