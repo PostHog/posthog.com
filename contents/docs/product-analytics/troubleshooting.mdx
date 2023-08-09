@@ -16,12 +16,49 @@ The main reason that certain evets are missing is usually a misconfiguration.
 
 <MultiLanguage>
 
+```Web
+posthog.init('<ph_project_api_key>', { api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' }) // Replace with the URL you copied from webhook.site
+```
+
 ```node
 const client = new PostHog(
     '_6SG-F7I1vCuZ-HdJL3VZQqjBlaSb1_20hDPwqMNnGI',
     
-{ host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' } 
+{ host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' } // Replace with the URL you copied from webhook.site
 )
+```
+
+```react
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+import { PostHogProvider} from 'posthog-js/react'
+
+const options = {
+  api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' } // Replace with the URL you copied from webhook.site
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <PostHogProvider 
+      apiKey={process.env.REACT_APP_PUBLIC_POSTHOG_KEY}
+      options={options}
+    >
+      <App />
+    </PostHogProvider>
+  </React.StrictMode>
+);
+```
+
+```ruby
+posthog = PostHog::Client.new({
+  api_key: "<ph_project_api_key>",
+  host: "<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>", # Replace with the URL you copied from webhook.site
+  on_error: Proc.new { |status, msg| print msg }
+})
 ```
 
 </MultiLanguage>
