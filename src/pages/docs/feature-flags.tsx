@@ -174,8 +174,8 @@ export const Content = ({ quickLinks = false }) => {
                     />
                     <ResourceItem
                         type="Guide"
-                        title="Targeting a cohort"
-                        description="Segmentation and targeting with feature flags"
+                        title="How to set up one-time feature flags"
+                        description="Show a component or content just once"
                         Image={
                             <StaticImage
                                 alt=""
@@ -186,7 +186,7 @@ export const Content = ({ quickLinks = false }) => {
                                 src="../../components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
-                        url="/tutorials/cohorts"
+                        url="/tutorials/one-time-feature-flags"
                     />
                     <ResourceItem
                         type="Guide"
