@@ -35,7 +35,7 @@ const client = new PostHog(
 
 Certain events could fail to reach PostHog if there is a bug in the used library. (this is quite uncommon)
 
-#### Front-end libraries
+#### Web libraries
 1. Open the devtools and switch to the network tab.
 2. Look for the request to app.posthog.com/e (or eu.posthog.com/e if using the EU Cloud) that appears to be incorrect.
 
@@ -43,14 +43,14 @@ Certain events could fail to reach PostHog if there is a bug in the used library
 
 3. See how to [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) to get further support.
 
-#### Backend libraries
+#### Other libraries
 See the respective debugging guides, e.g. [Node.js debugging](https://posthog.com/docs/libraries/node#debugging-and-exceptions).
 
 ### 3. Events are not ingested after being received by PostHog.
 
 If the library is configured correctly and successfully sending events to PostHog. Events could get lost in the ingestion pipeline e.g. when there is an [active incident](https://status.posthog.com).
 
-#### Front-end libraries
+#### Web libraries
 1. Open the devtools and switch to the network tab.
 2. Right click one of the network requests to posthog.com/e (or eu.posthog.com/e if using the EU Cloud) and select Copy -> Copy as cURL.
 3. Format the request as specified in [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue)
@@ -58,7 +58,7 @@ If the library is configured correctly and successfully sending events to PostHo
 5. Wait 1 hour and check if the event is still not visible in PostHog. Also make sure PostHog cloud is not experiencing an [active incident](https://status.posthog.com) as that could cause an ingestion lag.
 6. See how to [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) to get further support.
 
-#### Backend libraries
+#### Other libraries
 1. Track your outgoing network requests using something like [Wireshark](https://www.wireshark.org/).
 2. Format the request as specified in [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue)
 3. Try to send the cURL directly.
