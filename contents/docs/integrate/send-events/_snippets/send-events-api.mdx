@@ -30,8 +30,6 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 ### Batching events
 
-# Sending events
-
 Events can be sent together in a batch. There is no limit on the number of events you can send in a batch, but the entire request body must be less than `20MB` by default.
 
 ```shell label=Batch
