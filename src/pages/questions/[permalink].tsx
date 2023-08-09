@@ -8,7 +8,7 @@ import QuestionSidebar from 'components/Questions/QuestionSidebar'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
-import { XIcon } from '@heroicons/react/outline'
+import { ExclamationIcon, XIcon } from '@heroicons/react/outline'
 import { communityMenu } from '../../navs'
 import useTopicsNav from '../../navs/useTopicsNav'
 
@@ -37,7 +37,7 @@ export default function QuestionPage(props: QuestionPageProps) {
     }
 
     const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
-
+    const escalated = question?.attributes.escalated
     const nav = useTopicsNav()
     return (
         <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
@@ -94,17 +94,21 @@ export default function QuestionPage(props: QuestionPageProps) {
                             </Link>
                         </div>
 
-                        <div className="pb-4 mb-4 border-b border-light dark:border-dark">
-                            <input
-                                className="w-full m-0 font-normal text-sm text-primary dark:text-primary-dark border-none p-0 bg-transparent focus:ring-0"
-                                type="text"
-                                value={question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}
-                                readOnly
-                                onFocus={(e) => e.target.select()}
-                            />
-                        </div>
+                        <input
+                            className="w-full m-0 font-normal text-sm text-primary dark:text-primary-dark border-none p-0 bg-transparent focus:ring-0"
+                            type="text"
+                            value={question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}
+                            readOnly
+                            onFocus={(e) => e.target.select()}
+                        />
+                        {escalated && (
+                            <div className="flex space-x-1 items-center mt-4">
+                                <ExclamationIcon className="w-5 h-5" />
+                                <p className="font-semibold m-0">Thread has been escalated</p>
+                            </div>
+                        )}
 
-                        <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center justify-between mb-2 pt-4 mt-4 border-t border-light dark:border-dark">
                             <h4 className="text-xs text-primary dark:text-primary-dark opacity-70 p-0 m-0 font-semibold uppercase">
                                 Forum topics
                             </h4>

@@ -347,6 +347,23 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         mutate()
     }
 
+    const escalate = async (message?: string) => {
+        const body = JSON.stringify({
+            id: questionData?.id,
+            message,
+        })
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/escalate`, {
+            method: 'POST',
+            body,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        mutate()
+    }
+
     const pinTopics = async (topicIDs: number[]) => {
         if (!topicIDs) return
         const body = JSON.stringify({
@@ -380,5 +397,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         removeTopic,
         archive,
         pinTopics,
+        escalate,
     }
 }
