@@ -149,7 +149,7 @@ export default function NewPost({ onSubmit }) {
                     data: {
                         title,
                         body: transformedBody?.body,
-                        slug: `/posts/${slugify(title, { lower: true })}`,
+                        slug: `/posts/${slugify(title, { lower: true, strict: true })}`,
                         CTA: {
                             label: ctaLabel,
                             url: ctaURL,
