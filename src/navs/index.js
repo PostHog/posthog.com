@@ -1026,6 +1026,10 @@ export const docsMenu = {
                             url: '/docs/libraries/slack',
                         },
                         {
+                            name: 'Shopify',
+                            url: '/docs/libraries/shopify',
+                        },
+                        {
                             name: 'Vue.js',
                             url: '/docs/libraries/vue-js',
                         },
@@ -2255,6 +2259,10 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/sentry-connector',
                             name: 'Sentry',
+                        },
+                        {
+                            url: '/docs/cdp/shopify',
+                            name: 'Shopify',
                         },
                         {
                             url: '/docs/cdp/twitter-followers',
