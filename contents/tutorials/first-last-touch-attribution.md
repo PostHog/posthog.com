@@ -8,12 +8,12 @@ featuredImage: ../images/tutorials/banners/tutorial-18.png
 tags: ['insights', 'hogql', 'user paths']
 ---
 
-Understanding where users are coming from helps prioritize future development and marketing efforts. To analyze this, companies do "attribution" which is the process of figuring out what caused a conversion. 
+Understanding where users are coming from helps prioritize future development and marketing efforts. To analyze this, companies do "attribution", which is the process of figuring out what caused a conversion. 
 
 Two common ways of doing attribution are:
 
-- **First touch attribution:** ascribing a conversion to the source or first action a user took on the site.
-- **Last touch attribution:** ascribing a conversion to the last source or action a user took on the site before signing up
+- **First touch attribution:** attributes a conversion to the source or first action a user took on the site.
+- **Last touch attribution:** attributes a conversion to the last source or action a user took on the site before signing up
 
 In this tutorial, we show you how to track first and last touch attribution in PostHog.
 
@@ -31,7 +31,7 @@ Analyzing these values is relatively easy. Create a [new insight](https://app.po
 
 ### First pageview
 
-We can also calculate the first touch as the first page a user lands on. To do this, we can [create an insight](https://app.posthog.com/insights/new), go to the SQL tab, and use HogQL. Here we query for the first $pageview event for a user, then get the `$current_url` of this event. This looks like this:
+We can also calculate the first touch as the first page a user lands on. To do this, we can [create an insight](https://app.posthog.com/insights/new), go to the SQL tab, and use HogQL. Here we query for the first `$pageview` event for a user, then get the `$current_url` of this event. This looks like this:
 
 ```sql
 SELECT 
@@ -60,13 +60,15 @@ We can analyze last touch attribution in three ways. For each of these, we use a
 
 Like first touch attribution, we can look at the properties the user had when signing up. Look at the signup event’s properties. 
 
-To do this, we can [create an insight](https://app.posthog.com/insights/new), chose our signup event for our series, breakdown by the person properties "UTM Source" or "Referrer Domain" (**not initial**), and. Again, you can filter out none by filtering for events where your property `is set`.
+To do this, we can [create an insight](https://app.posthog.com/insights/new), chose our signup event for our series, breakdown by the person properties `UTM Source` or `Referrer Domain` (**not initial**). 
 
-![Refferer property](../images/tutorials/first-last-touch-attribution/referrer.png)
+Again, you can filter out `none` by filtering for events where your property `is set`.
+
+![Referrer property](../images/tutorials/first-last-touch-attribution/referrer.png)
 
 ### Last pageview event
 
-We can look at the last pageview event before signing up. Like first touch attribution, we can do this by [creating an insight](https://app.posthog.com/insights/new), going to the SQL tab, and using HogQL. 
+We can look at the last pageview event before signing up. Like first touch attribution, we can do this by [creating an insight](https://app.posthog.com/insights/new), going to the SQL tab, and using [HogQL](/docs/hogql). 
 
 This SQL statement uses a window function to select events `$pageview` events coming directly before a "user signed up" events. We then get a count of the different `current_url` values. This statement looks like this:
 
