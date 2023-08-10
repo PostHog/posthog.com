@@ -248,7 +248,7 @@ Retention is another non-negotiable way to measure product-market fit. It's simp
 
 Created by former PayPal COO David Sacks, burn multiple measures how much you're spending to grow revenue. The less you spend, the more efficient your growth. More efficient growth = stronger product-market fit.
 
-Because it measures efficiency rather than product-market fit directly, it's best used as a way to prove how _strong_ your product-market fit is. For this reason, it's especially useful for later-stage startups seeking further investment.
+Because it measures efficiency rather than product-market fit directly, it's best used as a way to prove how _strong_ your product-market fit is. It's especially useful for later-stage startups seeking further investment, but it's a board-level metric – i.e. product teams won't find it useful.
 
 To calculate your burn multiple, divide your net burn during a period (e.g. a quarter) with net new annual revenue for the same period:
 
