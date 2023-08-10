@@ -1,6 +1,6 @@
 ---
 date: 2023-08-10
-title: "In-depth: 7 ways to measure product-market fit"
+title: "In-depth: How to measure product-market fit"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -15,50 +15,44 @@ tags:
   - Product metrics
 ---
 
-Startups can't succeed without [achieving product-market fit](/blog/product-market-fit-game). 
+Startups can't succeed without [achieving product-market fit] – it's one of the few things startup gurus agree on. It's often desribed as a feeling – a palpable excitement from users, or a sense you can't keep up with demand. You either have _it_, or you don't.
 
-Most guides tell you how it _feels_ to have it, but product-market fit isn't just an ephemeral gut feeling. You can _measure_ it, and _it moves_ as your customer's needs change, or new solutions appear.
+But product-market fit isn't just an ephemeral gut feeling. You can _measure_ it, and _it moves_ as your customer's needs change, or new solutions appear. And it's a spectrum. Some products have rock solid product-market fit, others the green shoots of _potential_ fit. This guide will help you figure out where you are on that spectrum.
 
-This guide explains 7 different ways to measure product-market fit, and how to choose the right ones for you.
+## First principles
 
-## In search of "The Trifecta"
+Measuring product-market fit requires a combination of leading and lagging indicators:
 
-You need a _combination_ of leading and lagging indicators to measure product-market fit reliably.
+**Leading indicators**, such as a surge in new users, suggest product-market fit.
 
-**Leading indicators** suggest product-market fit – e.g. a surge in growth suggests product-market fit, but can't confirm it.
+**Lagging indicators**, such as those users returning repeatedly, confirm product-market fit.
 
-**Lagging indicators** confirm product-market fit – e.g. when those new users return to use your product repeatedly.
-
-We recommend choosing three metrics (two leading indicators and one lagging indicator) and adding more when you need.
+Three metrics (two leading indicators and one lagging indicator) is a good starting point. You can add more if and when you need.
 
 Why three? Because of what Brian Balfour, a serial co-founder and a former VP of Growth at Hubspot, calls The Trifecta:[^1]
 
 ![pmf trifecta](../images/blog/how-to-measure-product-market-fit/pmf-trifecta.png)
 
-If you can nail these three at the same time, it's a strong sign you have product-market fit.
+In the rest of this guide, I'll explain:
 
-In the rest of this guide, I'll cover:
-
-- All the different ways to measure product-market fit
-- The Pros and cons of each method
-- How to choose the right ones for you
+- The different ways to measure product-market fit
+- The pros and cons of each method
+- How to choose the right metrics for you
 
 ## Indicator #1: Word-of-mouth growth
 
 - **Type:** Leading indicator
 - **Good for:** Product-led companies
 
-You _can't_ validate product-market fit _using word of mouth alone_. That way lies madness. But it is a useful leading indicator _when confirmed using other metrics_, such as user engagement, and retention.
+You _can't_ validate product-market fit _using word of mouth alone_. That way lies madness. But it is a useful indicator _when confirmed using other metrics_, such as user engagement.
 
 Hopefully, you already have a strong grasp of your organic user growth via user signups, or whatever metric makes sense for your product. But you can, with a little work, also track word-of-mouth awareness and sentiment of your product. Here are a few options.
 
 ### 1. Brand mention alerts
 
-Use a tool like [Syften](https://syften.com/) to monitor social media, communities, newsletters, etc., for mentions of any keyword you choose, such as your brand name. We use Syften at PostHog to send alerts to a `#brand-alerts` channel on our Slack. 
+Use a tool like [Syften](https://syften.com/) to monitor social media, communities, and newsletters for people talking about you. We use it at PostHog to send alerts to a `#brand-alerts` channel on our Slack. 
 
-Tracking brand mentions is more about understanding what people are saying about you, rather than tracking a trend. If people are spontaneously sharing their love for your product, it's a good sign you might have product-market fit. Identify who these people are and why your product is such a good fit for them.
-
-Brand alerts are also a great way to drive acquisition by talking to people considering your product. 
+Tracking brand mentions is more about understanding what people are saying about you, rather than tracking a trend. People spontaneously sharing their love for your product is a good sign. Identify who these people are and why your product is such a good fit for them.
 
 > **❗️Important:** It's _much easier_ to track mentions if your company has a unique name. You're bang out of luck if it's a common noun – e.g. Apple, Amplitude. 
 
@@ -72,37 +66,35 @@ It's also useful for comparing yourself to other companies, such as those you _k
 
 ![google trend comparison](../images/blog/how-to-measure-product-market-fit/posthog-with-logrocket.png)
 
-At PostHog, we also use [Glimpse](https://meetglimpse.com/) – a handy extension that augments Trends by adding trend lines, forecasts, and real search volumes. 
+At PostHog, we also use [Glimpse](https://meetglimpse.com/) – an extension that augments Trends by adding trend lines, forecasts, and real search volumes. 
 
 ![trends with Glimpse](../images/blog/how-to-measure-product-market-fit/glimpse.png)
 
-The above example shows how PostHog's product-market fit started to appear in later 2021 / early 2022, and was strongly confirmed by mid-2022. While exponential growth is obviously desirable, consistent linear growth is also a good sign of product-market fit.
+The above shows how PostHog showed signs of product-market fit in late 2021 / early 2022, which grew stronger from mid-2022 onwards. While exponential growth is desirable, linear growth is still a good sign.
 
-Glimpse will also suggest related companies, which is a useful way to compare your word-of-mouth growth with other companies, particularly those you know have product-market fit.
+Glimpse also suggests similar companies – useful for comparing your growth with those you know have product-market fit.
 
 ![related companies](../images/blog/how-to-measure-product-market-fit/related-companies.png)
 
-**Google Search Console** is an alternative if you don't have a unique brand name, but the data isn't 100% reliable, so you're better off using the next method.
-
 ### 3. Organic traffic to your homepage
 
-One final way to track word of mouth is using organic users who visit your website homepage as a proxy for word-of-mouth growth. We track this in PostHog as an insight configured to show:
+You can verify the above using organic visitors your website homepage as a proxy for word of mouth. We track this in PostHog as an insight configured to show:
 
 1. Unique users who visited the homepage via a search engine.
 2. Unique users who visited the homepage directly.
 3. While excluding users with an identified email address.
 
-This captures people who visit our homepage by searching for us, typing in our website address, or via "dark social" sources like Slack and WhatsApp, while excluding existing users who have an identified email address.
+This captures new users who visit our homepage by searching for us, typing in our website address, or via "dark social" sources like Slack, and WhatsApp.
 
 ![posthog proxy](../images/blog/how-to-measure-product-market-fit/word-of-mouth-proxy.png)
 
-Above you can see the trend for our homepage since the beginning of 2021. Unsurprisingly, it's similar to that of Google Trends. Again, consistent linear growth over a significant period is enough to suggest you have product-market fit – exponential growth is a nice to have, not a must have.
+Above shows our word-of-mouth trend since the beginning of 2021. It's similar to Google Trends. Again, exponential growth is a nice to have, not a must-have.
 
 > 💡 **PostHog Tip:** If you're using PostHog, remember to add `UTM Source` = `Is not set` to filter out any paid ad campaigns you're running.
 
 ### Who should track word-of-mouth growth?
 
-Word-of-mouth growth is a good option for any product-led company – i.e. a product that's self-serve and doesn't do outbound sales. It's a weak leading indicator, but useful so long as you don't buy into your own PR and verify it with other metrics, such as user signups or engagement.
+Word-of-mouth growth is good for any product-led company – i.e. a product that's self-serve and doesn't do outbound sales. It's a weak leading indicator, but useful so long as you verify it with other metrics, such as user engagement.
 
 | **Pros**                                                                                                                 | **Cons**                                                                                                                 |
 |--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
@@ -118,7 +110,7 @@ Word-of-mouth growth is a good option for any product-led company – i.e. a pro
 
 Like word of mouth, _consistently_ positive user feedback is an indicator of product-market fit. There's a decent chance you're onto a winner when people tell you they can't live without your product.
 
-To this end, the [PMF Survey](https://pmfsurvey.com/) is a twist on the classic Net Promoter Score (NPS), but it's designed _specifically_ for finding product-market fit, and creating a feedback loop for user feedback.
+The [PMF Survey](https://pmfsurvey.com/) is a twist on the classic Net Promoter Score (NPS), but it's designed _specifically_ for finding product-market fit.
 
 Created by entrepreneur Sean Ellis, the core question (among others) it asks is:
 
@@ -128,7 +120,7 @@ Created by entrepreneur Sean Ellis, the core question (among others) it asks is:
 - b) Somewhat disappointed
 - c) Not disappointed
 
-Learn everything you possibly can about people who answer "very disappointed". Organize a call with them. Ask open-ended, probing questions to understand why they love your product. Do the same for users in the "somewhat disappointed" cohort.
+Learn everything you can about people who answer "very disappointed". Organize a call with them. Ask open-ended, probing questions to understand why they love your product. Do the same for users in the "somewhat disappointed" cohort.
 
 Based on his research of 100+ startups, Ellis believes 40% answering "very disappointed" is a strong signal of product-market fit. The more responses you get, the more reliable the signal. Ellis recommends a minimum of 30:
 
@@ -144,7 +136,7 @@ It's no coincidence Slack has since added video conferencing.
 
 ### A PMF Survey case study
 
-When email app Superhuman started using the survey in 2017, 22% of users answered "very disappointed" and 52% answered "somewhat disappointed".[^4]
+When email app Superhuman started using the survey in 2017, 22% of users answered "very disappointed". 52% answered "somewhat disappointed".[^4]
 
 After the initial survey, Superhuman created a four-step process to convert the 52%, and double-down on what the 22% loved.
 
@@ -158,9 +150,9 @@ After the initial survey, Superhuman created a four-step process to convert the 
 
 ### Who should use the PMF Survey?
 
-Feedback is essential to any startup, so it's more a question of how you collect it. Some teams may an ad hoc approach suits their style. That's fine – we haven't used the PMF Survey at PostHog, for example, and we have strong product-market fit.
+Feedback is essential to any startup, so it's more a question of how you collect it. Some teams may find an ad hoc approach suits their style. That's fine – we haven't used the PMF Survey at PostHog, for example, and we have strong product-market fit.
 
-But, as Superhuman proves, the survey is a powerful way to systematize finding product-market fit, especially if you're struggling to find it. It's also useful for tracking whether it's improving as you ship new features.
+But, as Superhuman proves, the survey is a powerful way to systematize finding product-market fit. It's also useful for tracking whether it's improving as you ship new features, making it useful both before _and_ after you have it.
 
 | **Pros**                                                                                                                 | **Cons**                                                                                                                 |
 |--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
@@ -170,43 +162,40 @@ But, as Superhuman proves, the survey is a powerful way to systematize finding p
 | <span className="text-green text-lg">✔</span> Useful for tracking how your product-market fit changes over time          | <span className="text-red text-lg">✖</span> Requires a minimum number of responses to be directionally useful            |
 | <span className="text-green text-lg">✔</span> Will help you understand _why_ you do or don't have product-market fit     |               |
 
-## Indicator #3: Meaningful user engagement
+## Indicator #3: User engagement
 
 - **Type:** Leading indicator
 - **Good for:** Any software product
 
 Are users experiencing the _real value_ of your product? Spoiler: logging in ≠ engagement.
 
-You want to see user engagement growing faster, or in line with, new users. If engagement is growing much faster than signups, it's a strong sign you have product-market fit.
+You want to see user engagement growing faster than, or in line with, new users. Engagement growing faster than signups is a strong predictor of product-market fit.
 
 ![good pmf](../images/blog/how-to-measure-product-market-fit/good-pmf.png)
 
-If signups are growing, but user engagement is flat, it's likely you _don't_ have product-market fit – most likely people are trying your product, but not coming back.
+Growing signups with flat user engagement is flat suggests you _don't_ have product-market fit – most likely people are trying your product, but not coming back.
 
 ![bad pmf](../images/blog/how-to-measure-product-market-fit/bad-pmf.png)
 
 At PostHog, we created a user engagement metric we call Discoveries. We define a discovery as:
 
-- **Analyzing any insight** – Analyzing means viewing for 10 seconds or more. Insights include trends, funnels, paths, lifecycle, and stickiness.
-
+- **Analyzing any insight** – Viewing an insight for 10 seconds or more.
 - **Analyzing a recording** – Watching a recording for 10 seconds or more.
+- **Analyzing a correlation** – Viewing a correlation for 10 seconds or more.
+- **Analyzing a dashboard** – Viewing a dashboard for 10 seconds or more.
 
-- **Analyzing a correlation** – Analyzing means viewing for 10 seconds or more.
-
-- **Analyzing a dashboard** – Analyzing means viewing a dashboard for 10 seconds or more.
-
-We also track things like people inviting new team members, which we've found correlate strongly to retention. 
+We also track things like people inviting new team members, which we found correlates strongly with retention. 
 
 If you find your chosen engagement metric doesn't correlate to retention you either:
 
 1. Don't have product-market fit.
-2. Are tracking the wrong metrics.
+2. Are tracking the wrong metric(s).
 
-> 💡 **PostHog Tip:** You can create your own user engagement metric in PostHog by creating an [Action](/docs/data/actions). Actions enable you to combine multiple individual events (e.g. editing a page, sending a message, etc.) and track them as one metric – our Discoveries metric above is an example of an Action. You can use Actions in numerous insight types, including trends, funnels, and retention insights.
+> 💡 **PostHog Tip:** You can create your own user engagement metric in PostHog by creating an [Action](/docs/data/actions). Actions enable you to combine individual events (e.g. editing a page, sending a message, etc.) and track them as one metric. You can use Actions in numerous insight types, including trends, funnels, and retention insights.
 
 ### Who should track user engagement?
 
-Everyone. It's basically impossible to measure product-market fit without tracking user engagement. The real challenge is tracking the right things – i.e. avoiding vanity metrics. See our guide to the [most useful B2B product metrics](/blog/b2b-saas-product-metrics) for help here. 
+Everyone. It's basically impossible to measure product-market fit without it. The real challenge is tracking the right things – i.e. avoiding vanity metrics. See our guide to the [most useful B2B product metrics](/blog/b2b-saas-product-metrics) for help here. 
 
 | **Pros**                                                                                                                 | **Cons**                                                                                                                 |
 |--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
@@ -221,19 +210,19 @@ Everyone. It's basically impossible to measure product-market fit without tracki
 - **Type:** Leading indicator
 - **Good for:** B2B SaaS products and subscription services
 
-It's tempting to treat revenue as a measure of product-market fit, but it's imperfect. It's easily skewed by one or two big contracts, or by "design partners" who have guided your product to solve their very specific needs.
+It's tempting to treat revenue as a measure of product-market fit, but it's imperfect. It's easily skewed by one or two big contracts, or "design partners" who guide your product to solve their very specific needs.
 
-Instead, create an [Ideal Customer Profile](/blog/creating-ideal-customer-profile) (ICP) and track the growth of paying customers who fit your ICP. Your ICP should be specific, and include needs, haves, and common attributes. 
+Instead, create an [Ideal Customer Profile](/blog/creating-ideal-customer-profile) (ICP) and track growth among paying customers who fit your ICP. Your ICP should be specific, and include needs, haves, and common attributes. 
 
 Here's PostHog's first ICP:
 
 ![posthog icp](../images/blog/pmf-game-guide/posthog-icp.png)
 
-What your ICP customers are paying is _less important_ than _how many_ ICP customers you have, and whether they're growing. 
+How much your ICP customers are paying is _less important_ than _how many_ ICP customers you have, and if they're growing in number.
 
 Consistent growth in ICP customers who pay is a strong sign of product-market fit. It means you have a product they want, and you can acquire similar customers with ease.
 
-GRAPHIC HERE
+[I WILL ADD A GRAPHIC HERE WITH SOME LINES ON IT, PROBABLY]
 
 Flat growth suggests you don't have strong product-market fit for your ICP. Lots of growth from customers not in your ICP suggests you either:
 
@@ -246,15 +235,12 @@ If (1) then recalibrate your ICP and check for consistent growth. If (2), you do
 
 It's essential for any B2B SaaS product – it doesn't matter if they're self-serve, or sales-led. It can also be useful for B2C subscription products and marketplaces.
 
-FINISH TABLE AT HOME
-
 | **Pros**                                                                                                                 | **Cons**                                                                                                                 |
 |--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
-| <span className="text-green text-lg">✔</span> Reliable lagging indicator of product-market fit                           | <span className="text-red text-lg">✖</span> Not predictive of revenue – will users actually pay for your product?        |
-| <span className="text-green text-lg">✔</span> Can be broken down by cohort for comparison                                | <span className="text-red text-lg">✖</span> You need several weeks or months of data to get a reliable signal            |
-| <span className="text-green text-lg">✔</span> Easy to understand – flat is good, not flat is bad!                        | <span className="text-red text-lg">✖</span> Won't help you understand why you do or don't have product-market fit        |
-
-
+| <span className="text-green text-lg">✔</span> Defining an ICP is an essential step toward product-market fit             | <span className="text-red text-lg">✖</span> Not useful for ad-supported products (e.g. social networks)                  |
+| <span className="text-green text-lg">✔</span> Focuses on your most valuable users                                        | <span className="text-red text-lg">✖</span> Not useful when you're pre-revenue                                           |
+| <span className="text-green text-lg">✔</span> Easy to understand – growth good, no growth bad!                           | <span className="text-red text-lg">✖</span> Hard to track ICP automatically                                  |
+| <span className="text-green text-lg">✔</span> Won't tell you why you do or don't have product-market fit                 |                                 |
 
 ## Indicator #5: Retention curve
 
@@ -265,17 +251,15 @@ Retention is _the main_lagging indicator of product-market fit for any type of p
 
 ![retention curve](../images/blog/how-to-measure-product-market-fit/retention-curve.png)
 
-To create your retention curve, you'll want to track active users over a long(ish) period of time – weeks or months, rather than days.
-
-How you define an active user is up to you, but it's best to track events or actions where a user is experiencing the _real value_ of your product. Again, logging in does not count!
+You'll want to track active users over a long(ish) period of time – weeks or months, rather than days. It's best to track events or actions where a user is experiencing the _real value_ of your product. Again, logging in does not count!
 
 For our product PostHog, an [all-in-one analytics platform](http://posthog.com/), this might look like:
 
 > Show `unique users` who performed a `discovery` for the first time in the last `12 months` and then came back to perform a `discovery` on any of the next months.
 
-It's also a good idea to track different cohorts, such as retention for users who match your ideal customer profile, or split by job title. This will help you understand how strong your fit is for different groups, and plan your roadmap accordingly.
+It's also a good idea to track different cohorts, such as retention for users who match your ideal customer profile. This will reveal how strong your fit is for different users, and plan your roadmap accordingly.
 
-> 💡 **PostHog Tip:** It's easy to track retention in PostHog using the [retention insight type](/docs/product-analytics/retention), which generates both a retention curve and a cohort retention table. You can apply different cohorts (e.g. users by job title, age, etc.) to segment your retention for specific groups, which is a useful way to compare the strength of your product-market fit for different types of users. See also: [How to discover features that drive user retention](/tutorials/feature-retention).
+> 💡 **PostHog Tip:** It's easy to track retention in PostHog using the [retention insight type](/docs/product-analytics/retention), which you can segment by cohorts (e.g. users by job title, age, etc.). See also: [How to discover features that drive user retention](/tutorials/feature-retention).
 
 ### Who should use retention?
 
@@ -294,9 +278,9 @@ Everyone. It's easy to understand and a reliable way to confirm product-market f
 
 Created by former PayPal COO David Sacks, burn multiple measures how much you're spending to grow revenue. The less you spend, the more efficient your growth. More efficient growth = stronger product-market fit.
 
-Because it measures efficiency rather than product-market fit directly, burn multiple is really a way to measure how _strong_ your product-market fit is. It's especially useful for later-stage startups seeking further investment, but it's a board-level metric – i.e. product teams won't find it useful.
+Because it measures efficiency rather than product-market fit directly, burn multiple is really a way to measure how _strong_ your product-market fit is. It's useful for late-stage startups seeking further investment, but it's a board-level metric – i.e. product teams won't find it useful.
 
-To calculate your burn multiple, divide your net burn during a period (e.g. a quarter) with net new annual revenue for the same period:
+To calculate it, divide your net burn during a period (e.g. a quarter) with net new annual revenue for the same period:
 
 > Burn Multiple = Net Burn / Net New ARR
 
@@ -318,7 +302,7 @@ Sacks goes on to explain how burn multiple works because it's a catch-all metric
 
 ### Who should use burn multiple?
 
-Burn multiple is a good metric to add once you believe you have The Trifecta: consistent growth, real user engagement, and strong retention. It'll help you connect your product-market fit to revenue and costs, and understand how investors will evaluate your product-market fit.
+It's a good metric to add once you believe you have the trifecta: consistent growth, real user engagement, and strong retention. It'll help you understand how investors will evaluate your product-market fit.
 
 | **Pros**                                                                                                                 | **Cons**                                                                                                                 |
 |--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
@@ -329,7 +313,7 @@ Burn multiple is a good metric to add once you believe you have The Trifecta: co
 | <span className="text-green text-lg">✔</span> It's easy to understand                                                    |        |
 | <span className="text-green text-lg">✔</span> Useful for mid to late-stage startups                                      |        |
 
-## Indicator #7: CLV/CAC ratio
+## Indicator #7: CLV/CAC
 
 - **Type:** Lagging indicator
 - **Good for:** Late-stage, sales-led startups
@@ -338,9 +322,9 @@ Burn multiple is a good metric to add once you believe you have The Trifecta: co
 >
 > **CAC** = customer acquisition cost - i.e. total sales and marketing spend divided by how many customers you acquired.
 
-The CLV/CAC ratio is a more targeted way to track "efficiency" than burn multiple. It's calculated by dividing your customer lifetime value[^6] (CLV) by your customer acquisition cost (CAC). 
+CLV/CAC is a more targeted way to track "efficiency" than burn multiple. It's a ratio calculated by dividing your customer lifetime value[^6] (CLV) by your customer acquisition cost (CAC). 
 
-Doing so reveals how efficiently you're acquiring customers. A ratio of 1x means your CLV and CAC are the same – i.e. you're only earning enough to cover your acquisition costs. A ratio of 2x means you're earning twice as much as you're spending to acquire new customers. 
+The ratio reveals how efficiently you're acquiring customers. A ratio of 1x means your CLV and CAC are the same – i.e. you're only earning enough to cover your acquisition costs. A ratio of 2x means you're earning twice as much as you're spending to acquire new customers. 
 
 A CLV/CAC of 3x and a CAC payback of less than 18 months ideal[^7] for sales-lead products.
 
@@ -352,7 +336,7 @@ A CLV/CAC of 3x and a CAC payback of less than 18 months ideal[^7] for sales-lea
 | 1x to 1.5x        | Promising      |
 | Under 1x          | Weak           |
 
-Unlike burn multiple, the ratio only considers the cost of supporting and acquiring customers, not all your other costs. Consequently, it's useful for sales-led startups selling to enterprises, where some argue you don't have product-market fit until you can acquire customers for less than it costs to retain them.
+Unlike burn multiple, the ratio only considers the cost of supporting and acquiring customers, not all your other costs. It's useful for sales-led startups, which some argue can't have product-market fit until they can acquire customers for less than it costs to retain them.
 
 ### Who should use CLV/CAC ratio?
 
@@ -366,21 +350,34 @@ This is the metric to use if your product is sales-led. Unlike burn multiple, it
 | <span className="text-green text-lg">✔</span> Investors will love a high ratio                                           | <span className="text-red text-lg">✖</span> Not useful for product-led growth companies                                  |
 | <span className="text-green text-lg">✔</span> Useful for sales-led companies                                             |                              |
 
-## Choosing how to measure product-market fit
+## Summing up
 
+How you measure product-market fit depends on a few factors, such as:
 
+1. The stage of your company – are you pre- or post-revenue?
+2. The type of product you're building – SaaS, marketplace etc.
+3. Your ideal customers – are they consumers, SMBs, or enterprises?
+4. How you generate / plan to generate revenue – are you self-serve, or sales-led?
 
+For most early-stage startups, word-of-mouth growth, user engagement, and retention is the place to start. That's the traditional trifecta.
 
+For any B2B product, it's important to add paying ICP customers as soon as you're ready to generate revenue. Breakdown retention by user cohorts to verify your ICP customers retain better than non-ICP customers. If they do, and your ICP customers are growing, it's a good sign you're on the right path.
 
-TODO: Some words here:
+The PMF Survey is best used to:
 
-- Starting metrics: Organic word-of-mouth growth, meaningful user engagement, and retention. 
-- When you can, add PMF survey to help you fine-tune, improve PMF and track over time
-- Add burn multiple once you're making decent revenue. Use CLV/CAC ratio if you're an enterprise product / have data scientists.
+1. Figure out why you do or don't have product-market fit
+2. To improve the strength of your product-market fit 
+3. To track how strong your product-market fit is over time
 
+But remember: talking to users and gathering feedback remains essential whether you use the survey, or not.
+
+So, what about burn multiple and CLV/CAC? 
+
+They're outliers in that they aren't traditional measures of product-market fit. But they do prove how _strong_ your product-market fit is. They're useful when seeking investment, or if your model dictates heavy expenditure on acquisition.
+
+And, if you find yourself unable to find product-market fit, we share how we found it for PostHog (and a step-by-step process achieving it) in [The Product-Market Fit Game](/blog/product-market-fit-game). The golden rule? If in doubt, pivot. 😅
 
 #### Footnotes
-
 
 [^1]: [The Never Ending Road To Product Market Fit](https://brianbalfour.com/essays/product-market-fit) – Brian Balfour – Dec 11, 2013
 
@@ -392,6 +389,6 @@ TODO: Some words here:
 
 [^5]: [The Burn Multiple](https://sacks.substack.com/p/the-burn-multiple-51a7e43cb200) – David Sacks – Apr 23, 2020
 
-[^6]: CLV attempts to quantify how much customers are worth over their entire lifetime. This means you need to understand your average deal size, average deal length, gross margin, and you CAC payback period – i.e. how long it takes a customer to pay back the cost of acquiring them.
+[^6]: CLV attempts to quantify how much customers are worth over their entire lifetime. This means you need to understand your average deal size, average deal length, gross margin, and you CAC payback period – i.e. how long it takes a customer to pay back the cost of acquiring them. TL;DR: it's a lot of work.
 
 [^7]: [Growth at All Costs is Perilous](https://review.firstround.com/growth-at-all-costs-is-perilous-this-is-how-to-scale-sales-sustainably) – Karen Rhorer – Sep 25, 2018
