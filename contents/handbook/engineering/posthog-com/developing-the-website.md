@@ -398,7 +398,7 @@ For most images, this plugin will automatically generate a range of sizes to opt
 
 Once you've made a new markdown file, you should link to it from the sidebar where appropriate.
 
-The sidebar is generated from each of the files in `/src/sidebars`.
+The sidebar is generated from `src/navs/index.js`.
 
 #### Redirects
 

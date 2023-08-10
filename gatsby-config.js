@@ -99,13 +99,6 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
-                name: `sidebars`,
-                path: `${__dirname}/src/sidebars`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
                 name: `navs`,
                 path: `${__dirname}/src/navs`,
             },
