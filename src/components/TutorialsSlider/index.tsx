@@ -23,7 +23,7 @@ export default function TutorialsSlider({ topic, slugs }: { topic?: string; slug
 
 export const query = graphql`
     query TutorialsSliderQuery {
-        allMdx(filter: { fields: { slug: { regex: "/^/tutorials|^/blog/" } } }, limit: 1000) {
+        allMdx(filter: { fields: { slug: { regex: "/^/tutorials|^/blog|^/handbook/" } } }, limit: 1000) {
             nodes {
                 id
                 fields {
