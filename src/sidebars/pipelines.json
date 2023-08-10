@@ -184,10 +184,6 @@
         "url": "/cdp/sentry-connector"
     },
     {
-        "name": "Shopify",
-        "url": "/cdp/shopify"
-    },
-    {
         "name": "Snowflake",
         "url": "/cdp/snowflake-export"
     },
