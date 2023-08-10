@@ -30,11 +30,14 @@ You should default to using your company card in all cases - it has no transacti
 
 ### Brex
 
-- Buy something on your Brex card.
-- If it's a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it's a physical receipt, take a picture and upload it with a note: you can use the Brex app, email or reply to the SMS notification.
-- You only need to submit receipts for purchases of _$75 or more_. You don't need to keep receipts below this amount. 
+We now use Brex Empower. This allows the People and Ops team to effectively track overall spending habits of the company without waiting for end of month reports, with very little changes to how you use your Brex account.
 
-By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enabled forwarding from your personal email address if needed.
+- Before spending money on your Brex card, you’ll need to log into your account either through the app or desktop, and assign a ‘spending budget’ to your card. The budget you pick from should relate to the transaction you are about to complete. For example, if you are buying a book for BookHog, this should come out of your ‘Books stipend’ budget. When you then complete your purchase, the money will be taken from that specific budget and you will easily be able to see how much of your budget you have remaining.
+- If you forget to assign a budget before completing the purchase, you can retroactively go into your Brex account and assign the transaction to the related budget. 
+- For the vast majority of transactions, you now will not need to upload a receipt as Brex Empower does this automatically. The exception to this is if they have requirements to provide the IRS with itemized receipts. If this is the case and it’s a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it’s a physical receipt, take a picture and upload it with a note: you can use the Brex app, email or reply to the SMS notification.
+- You only need to submit receipts for purchases of $75 or more. You don’t need to keep receipts below this amount.
+
+By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enable forwarding from your personal email address if needed.
 
 ### Revolut
 
@@ -153,13 +156,28 @@ We have a company WeWork All Access account that allows you to book desks in any
 
 ## Travel
 
-If you need to travel on PostHog's behalf (e.g. in person onboarding, meeting customers, working on a specific project), again please spend money in the best interests of the company. We do not pre-approve your travel expenses, and trust team members to make the right decisions here. Some guidance:
+If you need to travel on PostHog’s behalf (e.g. in person onboarding, meeting customers, working on a specific project), again please spend money in the best interests of the company. 
 
-- We all travel economy by default - we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you'd like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
-- Be sensible when considering the value of your time, and avoid _over-optimizing_ for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn't make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport. 
-- Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it - these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here. 
+We now use Brex Travel to help with planning and booking travel. If you are booking an individual trip, you can use the ‘Travel’ function to search and book flights directly through Brex.
+- First things first, click the trips icon and go to ‘Manage Profile’. Here you can enter all of your travel details, including loyalty program and known traveler numbers, so you never have to enter them manually with an airline, hotel, or car hire service ever again
+- Go back to the trips section and hit ‘Book a new trip’
+  - Here you can book flights (indexed from Google Flights), hotels, and rental cars
+  - You can even book for a guest, if someone is coming with you pre- or post-offsite
+- Name your trip and assign it to a budget
+  - To your meeting up stipend!
+  - To your offsite budget!
+  - To your in-person onboarding budget!
+  - To your generic budget for other travel!
+- Search for flights, accommodation, rental cars, or train tickets
+  - Your receipts and memos are automatically added to the expense, and you will receive emails with all of the confirmations (as well as be able to access them via the Brex app)
+  - You can also manage your trips if you need to change something or cancel
 
-If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Charles. 
+We do not pre-approve your travel expenses, and trust team members to make the right decisions here. Some guidance:
+- We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
+- Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
+- Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
+
+If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Grace or Charles.
 
 ### Budget for socializing
 
