@@ -4,7 +4,6 @@ import { SEO } from 'components/seo'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import handbook from 'sidebars/handbook.json'
 
 const otherLinks = [
     {
@@ -68,7 +67,7 @@ export const Handbook: React.FC = () => {
         <Layout>
             <SEO image="/images/handbook.png" title="Handbook - PostHog" />
 
-            <PostLayout article={false} title={'Handbook'} menu={handbook} hideSidebar hideSurvey>
+            <PostLayout article={false} title={'Handbook'} hideSidebar hideSurvey>
                 <div className="space-y-16 lg:space-y-20 lg:-mt-12 mb-8">
                     <section>
                         <div className="flex justify-start relative items-center -mx-px h-80">

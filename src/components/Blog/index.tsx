@@ -9,7 +9,6 @@ import Layout from '../Layout'
 import { SEO } from '../seo'
 import slugify from 'slugify'
 import { NewsletterForm } from 'components/NewsletterForm'
-import blog from 'sidebars/blog.json'
 import { homeCategories } from './constants/categories'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
 import CommunityCTA from 'components/CommunityCTA'
@@ -152,7 +151,7 @@ const Blog = ({
         <Layout>
             <SEO title="Blog - PostHog" />
 
-            <PostLayout article={false} title="Blog" menu={blog} hideSidebar hideSurvey>
+            <PostLayout article={false} title="Blog" hideSidebar hideSurvey>
                 <h1 className="mb-6 mt-0">Blog</h1>
                 <Posts
                     titleBorder

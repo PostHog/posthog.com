@@ -1,7 +1,6 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -168,7 +167,7 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
         <Layout>
             <SEO title="A/B testing - Docs - PostHog" />
 
-            <PostLayout title={'Experiments'} menu={docs} hideSurvey hideSidebar>
+            <PostLayout title={'Experiments'} hideSurvey hideSidebar>
                 <Intro />
                 <Content />
 

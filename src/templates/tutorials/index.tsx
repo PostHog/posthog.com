@@ -6,7 +6,7 @@ import Layout from 'components/Layout'
 import { Posts } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
-import docs from 'sidebars/docs.json'
+import { communityMenu } from '../../navs'
 
 const Tutorials = ({
     data: {
@@ -15,14 +15,13 @@ const Tutorials = ({
     pageContext: { numPages, currentPage, base },
 }) => {
     return (
-        <Layout>
+        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[2]}>
             <SEO title={`All tutorials - PostHog`} />
 
             <PostLayout
                 breadcrumb={[{ name: 'Tutorials', url: '/tutorials' }, { name: 'All' }]}
                 article={false}
                 title="Tutorials"
-                menu={docs}
                 hideSidebar
                 hideSurvey
             >

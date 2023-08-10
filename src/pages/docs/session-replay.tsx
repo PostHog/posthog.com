@@ -1,7 +1,6 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -219,7 +218,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
         <Layout>
             <SEO title="Session replay - Docs - PostHog" />
 
-            <PostLayout title={'Session replay'} menu={docs} hideSurvey hideSidebar>
+            <PostLayout title={'Session replay'} hideSurvey hideSidebar>
                 <Intro />
                 <Content />
 

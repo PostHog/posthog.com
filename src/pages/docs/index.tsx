@@ -1,12 +1,10 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import docs from 'sidebars/docs.json'
 
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import { graphql, PageProps } from 'gatsby'
 import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
 import { LightBulb } from '@posthog/icons'
@@ -57,148 +55,12 @@ const quickLinks = [
     },
 ]
 
-const otherLinks = [
-    {
-        name: 'Integrate PostHog',
-        links: [
-            { name: 'Send events', to: '/docs/getting-started/send-events' },
-            { name: 'Historical events', to: '/docs/integrate/ingest-historic-data' },
-            { name: 'Identifying users', to: '/docs/integrate/identifying-users' },
-            { name: 'Libraries', to: '/docs/integrate/libraries' },
-            { name: 'Proxying events', to: '/docs/integrate/proxy' },
-        ],
-    },
-    {
-        name: 'Self-host',
-        links: [
-            { name: 'Deployment', to: '/docs/self-host' },
-            { name: 'Runbook', to: '/docs/runbook' },
-            { name: 'Environment variables', to: '/docs/self-host/configure/environment-variables' },
-            { name: 'Monitoring', to: '/docs/self-host/configure/monitoring-with-grafana' },
-            { name: 'Upgrading', to: '/docs/runbook/upgrading-posthog' },
-            { name: 'Troubleshooting', to: '/docs/self-host/deploy/troubleshooting' },
-        ],
-    },
-    {
-        name: 'Apps',
-        links: [
-            { name: 'Explore app library', to: '/apps' },
-            { name: 'Use cases', to: '/docs/apps' },
-            { name: 'Building an app', to: '/docs/apps/build' },
-            { name: 'Developer reference', to: '/docs/apps/build/reference' },
-        ],
-    },
-    {
-        name: 'Data management',
-        links: [
-            { name: 'Organizations & projects', to: '/manual/organizations-and-projects' },
-            { name: 'UTM parameters', to: '/manual/utm-segmentation' },
-            { name: 'Events', to: '/manual/events' },
-            { name: 'Annotations', to: '/manual/annotations' },
-        ],
-    },
-    {
-        name: 'Developers',
-        links: [
-            { name: 'REST API', to: '/docs/api' },
-            { name: 'Developing locally', to: '/handbook/engineering/developing-locally' },
-            { name: 'Contributing', to: '/docs/contribute' },
-            { name: 'How PostHog works', to: '/docs/how-posthog-works' },
-        ],
-    },
-    {
-        name: 'Privacy & compliance',
-        links: [
-            { name: 'GDPR', to: '/docs/privacy/gdpr-compliance' },
-            { name: 'HIPAA', to: '/docs/privacy/hipaa-compliance' },
-            { name: 'CCPA', to: '/docs/privacy/ccpa-compliance' },
-            { name: 'Data deletion', to: '/docs/privacy/data-deletion' },
-        ],
-    },
-]
-
-type ImportantLinkProps = {
-    to: string
-    icon?: string
-    title: string
-    badge?: 'new' | 'beta' | undefined
-    children?: React.ReactNode
-}
-
-const ImportantLink: React.FC<ImportantLinkProps> = ({ to, icon, title, badge, children }) => {
-    const badgeClass = badge === 'new' ? 'success' : badge === 'beta' ? 'warning' : null
-
-    return (
-        <Link
-            className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark font-semibold p-2 hover:bg-gray-accent/40 active:hover:bg-gray-accent/50 dark:hover:bg-gray-accent/10 dark:active:bg-gray-accent/5 rounded flex items-center space-x-2 text-[14px]"
-            to={to}
-        >
-            {icon ? <img src={icon} className="w-5 h-5" /> : children || null}
-            <span>{title}</span>
-            {badge && <span className={`lemon-tag ${badgeClass}`}>{badge}</span>}
-        </Link>
-    )
-}
-
-type DocsData = {
-    gettingStarted: {
-        nodes: {
-            fields: {
-                slug: string
-            }
-            frontmatter: {
-                title: string
-                icon?: {
-                    publicURL: string
-                }
-            }
-        }[]
-    }
-    sdks: {
-        nodes: {
-            fields: {
-                slug: string
-            }
-            frontmatter: {
-                title: string
-                icon?: {
-                    publicURL: string
-                }
-            }
-        }[]
-    }
-    pipelines: {
-        nodes: {
-            fields: {
-                slug: string
-            }
-            frontmatter: {
-                title: string
-                thumbnail?: {
-                    publicURL: string
-                }
-            }
-        }[]
-    }
-}
-
-export const DocsIndex = ({ data }: PageProps<DocsData>) => {
-    const { gettingStarted, sdks, pipelines } = data
-
-    const gettingStartedLinks = React.useMemo(() => {
-        const gettingStartedSection = docs.find((section) => section.name === 'Getting started')?.children || []
-        return gettingStarted.nodes.sort(
-            (a, b) =>
-                gettingStartedSection?.findIndex((link) => link.url === a.fields.slug) -
-                gettingStartedSection?.findIndex((link) => link.url === b.fields.slug)
-        )
-    }, [])
-
+export const DocsIndex = () => {
     return (
         <Layout>
             <SEO title="Documentation - PostHog" />
 
-            <PostLayout article={false} title={'Docs'} menu={docs} hideSidebar hideSurvey>
+            <PostLayout article={false} title={'Docs'} hideSidebar hideSurvey>
                 <section className="mb-4 flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
                     <div className="flex-1 text-center sm:text-left">
                         <h2>New to PostHog?</h2>
@@ -291,58 +153,5 @@ export const DocsIndex = ({ data }: PageProps<DocsData>) => {
         </Layout>
     )
 }
-
-export const query = graphql`
-    query PopularLinks {
-        gettingStarted: allMdx(
-            filter: { slug: { regex: "/^docs/getting-started/(?!start-here)[\\w\\-]+$/" } }
-        ) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    icon {
-                        publicURL
-                    }
-                }
-            }
-        }
-        sdks: allMdx(
-            filter: { slug: { regex: "/^docs/libraries/(js|node|python|react|ios|android)/$/" } }
-            sort: { fields: fields___pageViews, order: DESC }
-        ) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    icon {
-                        publicURL
-                    }
-                }
-            }
-        }
-        pipelines: allMdx(
-            filter: { slug: { regex: "/^docs/cdp/(?!build)\\w+/" } }
-            sort: { fields: fields___pageViews, order: DESC }
-            limit: 6
-        ) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    thumbnail {
-                        publicURL
-                    }
-                }
-            }
-        }
-    }
-`
 
 export default DocsIndex

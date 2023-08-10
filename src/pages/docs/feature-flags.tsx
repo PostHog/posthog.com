@@ -1,6 +1,5 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -278,7 +277,7 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
         <Layout>
             <SEO title="Feature flags - Docs - PostHog" />
 
-            <PostLayout title={'Feature flags'} menu={docs} hideSurvey hideSidebar>
+            <PostLayout title={'Feature flags'} hideSurvey hideSidebar>
                 <Intro />
                 <Content />
 

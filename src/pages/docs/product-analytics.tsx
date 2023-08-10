@@ -1,7 +1,6 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -229,7 +228,7 @@ const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
         <Layout>
             <SEO title="Product analytics - Documentation - PostHog" />
 
-            <PostLayout title={'Product Analytics'} menu={docs} hideSurvey hideSidebar>
+            <PostLayout title={'Product Analytics'} hideSurvey hideSidebar>
                 <Content />
             </PostLayout>
         </Layout>

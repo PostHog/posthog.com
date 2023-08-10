@@ -1,4 +1,4 @@
-const handbookSidebar = [
+export const handbookSidebar = [
     {
         name: 'Handbook',
         url: '/handbook',
@@ -817,7 +817,50 @@ export const companyMenu = {
         },
         { name: 'Team', icon: 'Profile', color: 'blue', url: '/team' },
         { name: 'Handbook', icon: 'Book', color: 'seagreen', url: '/handbook', children: handbookSidebar },
-        { name: 'Blog', icon: 'Newspaper', color: 'yellow', url: '/blog' },
+        {
+            name: 'Blog',
+            icon: 'Newspaper',
+            color: 'yellow',
+            url: '/blog',
+            children: [
+                {
+                    name: 'Blog',
+                    url: '/blog',
+                },
+                {
+                    name: 'CEO diaries',
+                    url: '/blog/categories/ceo-diaries',
+                },
+                {
+                    name: 'Engineering',
+                    url: '/blog/categories/engineering',
+                },
+                {
+                    name: 'Inside PostHog',
+                    url: '/blog/categories/inside-posthog',
+                },
+                {
+                    name: 'Newsletter',
+                    url: '/blog/categories/newsletter',
+                },
+                {
+                    name: 'PostHog news',
+                    url: '/blog/categories/posthog-news',
+                },
+                {
+                    name: 'Product growth',
+                    url: '/blog/categories/product-growth',
+                },
+                {
+                    name: 'Startups',
+                    url: '/blog/categories/startups',
+                },
+                {
+                    name: 'Using PostHog',
+                    url: '/blog/categories/using-posthog',
+                },
+            ],
+        },
         { name: 'Careers', icon: 'Laptop', color: 'purple', url: '/careers' },
     ],
 }
