@@ -85,7 +85,7 @@ Another entity you might want to target is services, machines, or devices. For e
 
 ### Custom user value
 
-A user for PostHog is just a distinct ID string connected to events. Although on the frontend, it is generated and connected to a real user's sessions, on the backend, it could mean anything. This includes service, machine, device, or application and we can use feature flags to work with them this way.
+A user in PostHog is just a distinct ID string connected to events. Although on the frontend, it is generated and connected to a real user's sessions, on the backend it could represent anything. This means you can use service, machine, device, or application IDs as the distinct ID and feature flags will still work with them this way.
 
 To do this, start by capturing an event with the entity ID (like server ID).
 
