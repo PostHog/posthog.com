@@ -159,15 +159,15 @@ We have a company WeWork All Access account that allows you to book desks in any
 If you need to travel on PostHog’s behalf (e.g. in person onboarding, meeting customers, working on a specific project), again please spend money in the best interests of the company. 
 
 We now use Brex Travel to help with planning and booking travel. If you are booking an individual trip, you can use the ‘Travel’ function to search and book flights directly through Brex.
-- First things first, click the trips icon and go to ‘Manage Profile’. Here you can enter all of your travel details, including loyalty program and known traveler numbers, so you never have to enter them manually with an airline, hotel, or car hire service ever again
-- Go back to the trips section and hit ‘Book a new trip’
+- First, click the trips icon and go to ‘Manage Profile’. Here you can enter all of your travel details, including loyalty program and known traveler numbers, so you won't have to enter them manually with an airline, hotel, or car hire service in the future.
+- Go back to the trips section and go into ‘Book a new trip’
   - Here you can book flights (indexed from Google Flights), hotels, and rental cars
-  - You can even book for a guest, if someone is coming with you pre- or post-offsite
-- Name your trip and assign it to a budget
-  - To your meeting up stipend!
-  - To your offsite budget!
-  - To your in-person onboarding budget!
-  - To your generic budget for other travel!
+  - You can also book for a guest, if someone is coming with you pre- or post-offsite
+- Name your trip and assign it to a budget. For example:
+  - To your meeting up stipend
+  - To your offsite budget
+  - To your in-person onboarding budget
+  - To your generic budget for other travel
 - Search for flights, accommodation, rental cars, or train tickets
   - Your receipts and memos are automatically added to the expense, and you will receive emails with all of the confirmations (as well as be able to access them via the Brex app)
   - You can also manage your trips if you need to change something or cancel
