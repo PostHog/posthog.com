@@ -105,7 +105,7 @@ Once we capture that data in PostHog, we can set up an [action](/docs/data/actio
 
 This tracks the number of button clicks, enabling you to track the success of your fake door test and interest in your feature.
 
-> **Bonus idea:** You can use [feature flags](/docs/feature-flags/manual) to show your fake door test to a targetted subset of users. This lowers reputation risk and enables you to get more targeted feedback.
+> **Bonus idea:** You can use [feature flags](/docs/feature-flags/manual) to show your fake door test to a targeted subset of users. This lowers reputation risk and enables you to get more targeted feedback.
 
 ## Adding a survey to our fake door test
 
