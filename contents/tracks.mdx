@@ -4,14 +4,23 @@ showTitle: false
 showSidebar: true
 width: md
 images:
-    - './images/startup-hogs.png'
+    - './images/tracks/ask-iwata.jpg'
+    - './images/tracks/sand-hill-road.jpg'
+    - './images/tracks/messy-middle.jpg'
+    - './images/tracks/high-output.jpg'
+    - './images/tracks/no-rules-rules.jpg'
+    - './images/tracks/getting-real.png'
+    - './images/tracks/continuous-discovery.jpg'
+    - './images/tracks/mom-test.jpg'
+    - './images/tracks/founding-sales.jpg'
+    - './images/tracks/saas-playbook.jpg'
 ---
 
 import { StaticImage } from 'gatsby-plugin-image'
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import CommunityCTA from 'components/CommunityCTA'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
-import refer from './images/startup-refer.png'
+import writer from './images/blog/search-hog-4.png'
 
 <Hero
     title="PostHog Tracks"
@@ -34,7 +43,28 @@ It all starts with getting the right people on your project. You can check the h
 
 <br />
 
-<h3 className="mb-0">How to <span className="text-red">create good processes that won't drive you crazy</span></h3>
+<Section title="Books that our team recommend to each other" titleSize="sm" cols={3}>
+    <div>      
+        <GatsbyImage image={getImage(props?.images[0])} alt="Ask Iwata" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="/community/profiles/59">Joe Martin</a>
+        </p>
+    </div>
+    <div>
+        <GatsbyImage image={getImage(props?.images[0])} alt="Ask Iwata" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="/community/profiles/227">Lottie Coxon</a>
+        </p>
+    </div>
+    <div>
+        <GatsbyImage image={getImage(props?.images[1])} alt="Secrets of Sand Hill Road" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="/community/profiles/71">James Hawkins</a>
+        </p>
+    </div>
+</Section>
+
+<h3 className="mb-0">How to <span className="text-red">create processes that won't drive you crazy</span></h3>
 
 We bias heavily for tools which enable us to work collaboratively, and transparently. Some of the tools we use, like GitHub as a CMS, may sound intimidating to non-engineers, but [our experience](/blog/a-non-coders-thoughts-on-everybody-codes-culture) is that if you give teams the right support then it isn’t an issue. It helps to have [a really good employee handbook](/handbook). 
 
@@ -48,7 +78,28 @@ We bias heavily for tools which enable us to work collaboratively, and transpare
 
 <br />
 
-<h3 className="mb-0">How to <span className="text-red">build products that people actually love</span></h3>
+<Section title="Our most organized people recommend" titleSize="sm" cols={3}>
+    <div>      
+        <GatsbyImage image={getImage(props?.images[2])} alt="Ask Iwata" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="//community/profiles/254">Charles Cook</a>
+        </p>
+    </div>
+    <div>
+        <GatsbyImage image={getImage(props?.images[3])} alt="Ask Iwata" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="/community/profiles/718">Grace McKenzie</a>
+        </p>
+    </div>
+    <div>
+        <GatsbyImage image={getImage(props?.images[4])} alt="Secrets of Sand Hill Road" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="/community/profiles/71">James Hawkins</a>
+        </p>
+    </div>
+</Section>
+
+<h3 className="mb-0">How to <span className="text-red">build things people actually love</span></h3>
 
 At PostHog, we build weirdly fast. Some of that is because we’ve assembled an amazing team — but it’s _also_ because we talk to our users and treat every new feature like its own product. It took us [a few pivots](/blog/story-about-pivots), but we got to product market fit eventually!
 
@@ -62,6 +113,27 @@ At PostHog, we build weirdly fast. Some of that is because we’ve assembled an 
 
 <br />
 
+<Section title="Builders at PostHog read books like these" titleSize="sm" cols={3}>
+    <div>      
+        <GatsbyImage image={getImage(props?.images[5])} alt="Ask Iwata" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="//community/profiles/860">David Newell</a>
+        </p>
+    </div>
+    <div>
+        <GatsbyImage image={getImage(props?.images[6])} alt="Ask Iwata" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="/community/profiles/221">Annika Schmid</a>
+        </p>
+    </div>
+    <div>
+        <GatsbyImage image={getImage(props?.images[7])} alt="Secrets of Sand Hill Road" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="/team">Basically Everyone</a>
+        </p>
+    </div>
+</Section>
+
 <h3 className="mb-0">How to <span className="text-red">sell your product without selling out</span></h3>
 
 PostHog doesn’t have a sales team, but we’ve still learned a lot about how to sell a product and the importance of pricing. And while we don’t have a sales team, we _do_ have both a customer success and a marketing team who play a vital role in bringing in new users!
@@ -74,26 +146,35 @@ PostHog doesn’t have a sales team, but we’ve still learned a lot about how t
   "/blog/how-to-treat-your-pricing-like-a-product"
 ]} />
 
+<Section title="If we had a sales team, they'd probably read these books" titleSize="sm" cols={2}>
+    <div>      
+        <GatsbyImage image={getImage(props?.images[8])} alt="Ask Iwata" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="//community/profiles/49">Simon Fisher</a>
+        </p>
+    </div>
+    <div>
+        <GatsbyImage image={getImage(props?.images[9])} alt="Ask Iwata" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+        <p class="text-center">
+          Recommended by <a href="/community/profiles/684">Lior Neu-ner</a>
+        </p>
+    </div>
+</Section>
+
 <Section>
 <h2 className="text-3xl lg:text-4xl text-center mb-0">"What about Y Combinator?"</h2>
-<h3 className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 opacity-75 text-primary text-center text-lg pb-8">PostHog launched out of Y Combinators W20 batch. We loved YC and it taught us a lot!</h3>
+<h3 className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 opacity-75 text-primary text-center text-lg pb-8">PostHog launched out of Y Combinators W20 batch. Curious what the experience was like? Here's the short version.</h3>
 <FeatureSnapshot
-        image={refer}
+        image={writer}
         features={[
             <>
-                <strong>30 million events</strong>.
+                First, we <a href="/blog/before-yc">applied to Y Combinator</a> with a (different) idea. <a href="/blog/the-yc-interview">We interviewed</a>, met Dalton, and got in!
             </>,
             <>
-                <strong>50k session replays</strong>.
+                Next, it was time to <a href="/blog/moving-to-sf">move to San Francisco for a bit</a>. We ate lots of fast food, and pivoted the business (<a href="/blog/pivot-to-posthog">five times</a>) before deciding to build PostHog. 
             </>,
             <>
-                <strong>Over 4 billion API calls</strong>.
-            </>,
-            <>
-                <strong>Over 4 billion API calls</strong>.
-            </>,
-            <>
-                <strong>Over 4 billion API calls</strong>.
+                Once we'd settled on an idea we built our new MVP and <a href="/blog/after-the-hn-launch">launched on Hacker News four weeks later</a>. We've been growing (<a href="/blog/yc-2-years-on">and learning</a>) ever since!
             </>
         ]}
     />
