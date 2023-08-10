@@ -63,7 +63,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-With this done, PostHog starts autocapturing events and our app is ready for a fake door test.
+With this done, PostHog starts [autocapturing](/docs/product-analytics/autocapture) events and our app is ready for a fake door test.
 
 ## Creating our fake door test
 
@@ -86,23 +86,25 @@ export default function Home() {
 
 Once this is set up, we can run `npm run dev` to run the development server, go to our app, and click the button a few times. This captures events in PostHog.
 
-Once we capture that data in PostHog, we can set up an action for our fake door test. To do this: 
+Once we capture that data in PostHog, we can set up an [action](/docs/data/actions) for our fake door test. To do this: 
 
 1. Go to the data management, click the action tab, and then click "[New action](https://app.posthog.com/data-management/actions/new)." 
-2. Either use the toolbar to select your element or select from an event (which we choose).
+2. Select option to create "From event or pageview."
 3. Name your action "shown new feature interest." 
 4. Select "Autocapture" as our "Match Group #1," and then match the element text "Try our new feature" exactly. 
 5. Press save.
 
 ![Action](../images/tutorials/fake-door-test/action.png)
 
-With this, you can keep track of validation on your fake door test and even send [webhook notifications](/docs/webhooks) when someone clicks the button. 
+This tracks the number of button clicks, enabling you to track the success of your fake door test and interest in your feature.
 
 ## Adding a survey to our fake door test
 
-Since the goal of a fake door test is to validate interest, we can improve this a lot. Specifically, we can take users to another page and ask them a survey question.
+Since the goal of a fake door test is to validate interest, we can get even more feedback by adding a survey.
 
-In our `app` folder, we can create another folder named `new` and create a file named `page.js` within it. In this file, we can create a basic page that says coming soon. 
+We'll implement this in our example by navigating the user to a new page when they click the button and asking them a survey question.
+
+To do this, create another folder named `new` in our `app` folder and a file named `page.js` in this folder. In this file, we'll create a basic page with our survey question. 
 
 ```js-web
 // app/new/page.js
