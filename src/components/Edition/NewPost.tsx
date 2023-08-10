@@ -21,7 +21,14 @@ const Categories = ({ value, setFieldValue }) => {
 
     useEffect(() => {
         fetchCategories().then((categories) =>
-            setCategories(categories.filter((category) => ['Repost'].includes(category?.attributes?.label)))
+            setCategories(
+                categories.filter(
+                    (category) =>
+                        !['Changelog entry', 'Customer story', 'Guide', 'PostHog news', 'Spotlight'].includes(
+                            category?.attributes?.label
+                        )
+                )
+            )
         )
     }, [])
 
