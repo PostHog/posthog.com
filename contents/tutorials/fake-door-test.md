@@ -8,7 +8,11 @@ featuredImage: ../images/tutorials/banners/tutorial-15.png
 tags: ['surveys', 'actions']
 ---
 
-A fake door test is creating a real UI for a non-existent product or feature to gauge interested in it. Doing one can help you validate what you plan on building. In this tutorial, we build an app, set up a fake door test, then implement surveys to get more feedback.
+A fake door test is when you create a "fake" UI or experience for a product or feature you are thinking of building. When users interact with it, you tell them it isn't available (yet). This show of interest helps you validate what you plan on building.
+
+This tutorial shows you how to set up a fake door test with PostHog. We build a basic app, set up a fake door test, and then implement surveys to get more feedback.
+
+> **Warning:** Fake door tests come with risks. Showing users something that doesn't exist yet could disappoint them and hurt your reputation. Make sure to be honest and transparent with users about what you are doing.
 
 ## Creating an app and adding PostHog
 
@@ -67,10 +71,11 @@ With this done, PostHog starts [autocapturing](/docs/product-analytics/autocaptu
 
 ## Creating our fake door test
 
-Creating a fake door test is intentionally simple. There are many ways to do it, but we start with a basic one. Add a button to our app that says "Try our new feature."
+Our fake door test is simple. We add a button to our app that says "Try our new feature" and it takes you to a page that says "This feature is coming soon" which we will create later.
 
 ```js-web
 // app/page.js
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -78,13 +83,15 @@ export default function Home() {
       <h1>Welcome to our app!</h1>
       <button>Sign in</button>
       <span> - </span>
-      <button>Try our new feature</button>
+      <Link href="/new">
+        <button>Try our the new feature</button>
+      </Link>
     </div>
   )
 }
 ```
 
-Once this is set up, we can run `npm run dev` to run the development server, go to our app, and click the button a few times. This captures events in PostHog.
+With just this set up, we can run the development server with the command `npm run dev`, go to our app, and click the button a few times. This captures events in PostHog.
 
 Once we capture that data in PostHog, we can set up an [action](/docs/data/actions) for our fake door test. To do this: 
 
@@ -97,6 +104,8 @@ Once we capture that data in PostHog, we can set up an [action](/docs/data/actio
 ![Action](../images/tutorials/fake-door-test/action.png)
 
 This tracks the number of button clicks, enabling you to track the success of your fake door test and interest in your feature.
+
+> **Bonus idea:** You can use [feature flags](/docs/feature-flags/manual) to show your fake door test to a targetted subset of users. This lowers reputation risk and enables you to get more targeted feedback.
 
 ## Adding a survey to our fake door test
 
