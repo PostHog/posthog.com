@@ -2022,6 +2022,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Adding your code',
+                    url: '/docs/feature-flags/adding-feature-flag-code',
+                    icon: 'Code',
+                    color: 'salmon',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -2029,12 +2035,6 @@ export const docsMenu = {
                     url: '/docs/feature-flags/bootstrapping-and-local-evaluation',
                     icon: 'Bolt',
                     color: 'salmon',
-                },
-                {
-                    name: 'Rollout strategies',
-                    url: '/docs/feature-flags/rollout-strategies',
-                    icon: 'Percentage',
-                    color: 'orange',
                 },
                 {
                     name: 'Multivariate feature flags',
@@ -2071,15 +2071,6 @@ export const docsMenu = {
                     url: '/docs/feature-flags/common-questions',
                     icon: 'Question',
                     color: 'seagreen',
-                },
-                {
-                    name: 'Resources',
-                },
-                {
-                    name: 'Library comparison',
-                    url: '/docs/feature-flags/libraries',
-                    icon: 'Book',
-                    color: 'blue',
                 },
             ],
         },

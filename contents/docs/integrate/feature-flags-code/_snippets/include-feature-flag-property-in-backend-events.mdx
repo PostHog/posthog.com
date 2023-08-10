@@ -1,0 +1,7 @@
+## Step 2: Add the feature flag property to your events 
+
+If you want use your feature flag to breakdown or filter events in your [insights](/docs/product-analytics/insights), you need to include a property `$feature/experiment_feature_flag_name: variant_name` for those events. 
+
+This ensures that the feature flag value is attributed to the event.
+
+> **Note:** this step is only required in our server-side SDKs or [API](/docs/api).

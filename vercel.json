@@ -745,6 +745,10 @@
             "destination": "/docs/feature-flags/creating-feature-flags#release-conditions"
         },
         {
+            "source": "/docs/feature-flags/payloads",
+            "destination": "/docs/feature-flags/creating-feature-flags#payloads"
+        },
+        {
             "source": "/docs/integrate",
             "destination": "/docs/getting-started/install"
         },

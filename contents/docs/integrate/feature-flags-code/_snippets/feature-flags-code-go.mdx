@@ -1,0 +1,42 @@
+## Step 1: Evaluate the feature flag value
+
+### Boolean feature flags
+
+```go
+isMyFlagEnabled, err := client.IsFeatureEnabled(
+            FeatureFlagPayload{
+                Key:        "flag-key",
+                DistinctId: "distinct_id_of_your_user",
+            })
+
+if isMyFlagEnabled {
+    // Do something differently for this user
+}
+```
+
+### Multivariate feature flags
+
+```go
+enabledVariant, err := client.GetFeatureFlag(
+            FeatureFlagPayload{
+                Key:        "flag-key",
+                DistinctId: "distinct_id_of_your_user",
+            })
+
+if enabledVariant == "variant-key" { // replace 'variant-key' with the key of your variant
+    // Do something differently for this user
+}
+```
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+
+<IncludePropertyInEvents />
+
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "distinct_id_of_your_user",
+  Event:      "event_name",
+  Properties: posthog.NewProperties().
+    Set("$feature/experiment-feature-flag-key", "variant-key"), // replace 'variant-key' with the key of your variant
+})
+```

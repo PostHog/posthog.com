@@ -1,0 +1,35 @@
+## Step 1: Evaluate the feature flag value
+
+### Boolean feature flags
+
+```php
+$isMyFlagEnabledForUser = PostHog::isFeatureEnabled('flag-key', 'distinct_id_of_your_user')
+
+if ($isMyFlagEnabledForUser) {
+    // Do something differently for this user
+}
+```
+
+### Multivariate feature flags
+
+```php
+$enabledVariant = PostHog::getFeatureFlag('flag-key', 'distinct_id_of_your_user')
+
+if ($enabledVariant === 'variant-key') { # replace 'variant-key' with the key of your variant
+    # Do something differently for this user
+}
+```
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+
+<IncludePropertyInEvents />
+
+```php
+PostHog::capture(array(
+  'distinctId' => 'distinct_id_of_your_user',
+  'event' => 'event_name',
+  'properties' => array(
+    '$feature/experiment-feature-flag-key'  = 'variant-key' # replace 'variant-key' with the key of your variant
+  )
+));
+```

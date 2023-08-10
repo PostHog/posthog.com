@@ -1,0 +1,40 @@
+## Step 1: Evaluate the feature flag value
+
+### Boolean feature flags
+
+```node
+const isFeatureFlagEnabled = await client.isFeatureEnabled('flag-key', 'distinct_id_of_your_user')
+if (isFeatureFlagEnabled) {
+    // Your code if the flag is enabled
+
+    // Optional: fetch the payload
+    const matchedFlagPayload = await client.getFeatureFlagPayload('flag-key', 'distinct_id_of_your_user')
+}
+```
+
+### Multivariate feature flags
+
+```node
+const enabledVariant = await client.getFeatureFlag('flag-key', 'distinct_id_of_your_user')
+
+if (enabledVariant === 'variant-key') {  // replace 'variant-key' with the key of your variant
+    // Do something differently for this user
+
+    // Optional: fetch the payload
+    const matchedFlagPayload = await client.getFeatureFlagPayload('flag-key', 'distinct_id_of_your_user')
+}
+```
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+
+<IncludePropertyInEvents />
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_your_user',
+    event: 'event_name',
+    properties: {
+        '$feature/experiment-feature-flag-key': 'variant-key' // replace with matched variant key
+    },
+})
+```

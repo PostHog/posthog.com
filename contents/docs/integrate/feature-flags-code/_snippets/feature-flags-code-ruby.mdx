@@ -1,0 +1,39 @@
+## Step 1: Evaluate the feature flag value
+
+### Boolean feature flags
+
+```ruby
+is_my_flag_enabled = posthog.is_feature_enabled('flag-key', 'distinct_id_of_your_user')
+
+if is_my_flag_enabled
+    # Do something differently for this user
+    # Optional: fetch the payload
+    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')
+end
+```
+
+### Multivariate feature flags
+
+```ruby
+enabled_variant = posthog.get_feature_flag('flag-key', 'distinct_id_of_your_user')
+
+if enabled_variant == 'variant-key' # replace 'variant-key' with the key of your variant
+    # Do something differently for this user
+    # Optional: fetch the payload
+    matched_flag_payload = posthog.get_feature_flag_payload('variant-key', 'distinct_id_of_your_user')
+end
+```
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+
+<IncludePropertyInEvents />
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id_of_your_user',
+    event: 'event_name',
+    properties: {
+        '$feature/experiment-feature-flag-key': 'variant-key', # replace 'variant-key' with the key of your variant
+    }
+})
+```

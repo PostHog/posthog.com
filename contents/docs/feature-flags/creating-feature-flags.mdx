@@ -48,13 +48,21 @@ There are two types of feature flags:
 
 #### 1. Boolean flags. 
 
-These return `true` or `false`. Optionally, you can also include a [JSON payload](/docs/feature-flags/payloads) to be returned when the served value is true.
+These return `true` or `false`.
 
 #### 2. Multiple variant flags (multivariate flags). 
 
 Instead of returning true or false, multivariate flags return a key – for example, `control` or `test`. 
 
 You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages.
+
+### Payloads
+
+A payload is an additional piece of information sent to your app when a flag is matched for a user. The returned value can be any valid JSON type (object, array, number, string, boolean, or null).
+
+They enable you to configure functionality related to your flag inside PostHog, instead of having to make code changes or redeploy your app.
+
+> **Note**: Payloads are only available in our JavaScript web, Node, Python, Ruby, and React libraries.
 
 ### Release conditions
 
