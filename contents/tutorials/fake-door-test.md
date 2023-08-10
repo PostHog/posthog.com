@@ -111,7 +111,7 @@ export default function New() {
   return (
     <div>
       <h1>This feature is coming soon</h1>
-			<p>Let us know what you think by answering the survey below.</p>
+      <p>Let us know what you think by answering the survey below.</p>
     </div>
   )
 }
