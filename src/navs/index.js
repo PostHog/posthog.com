@@ -2261,10 +2261,6 @@ export const docsMenu = {
                             name: 'Sentry',
                         },
                         {
-                            url: '/docs/cdp/shopify',
-                            name: 'Shopify',
-                        },
-                        {
                             url: '/docs/cdp/twitter-followers',
                             name: 'Twitter',
                         },
