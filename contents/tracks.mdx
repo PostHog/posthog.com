@@ -14,6 +14,7 @@ images:
     - './images/tracks/mom-test.jpg'
     - './images/tracks/founding-sales.jpg'
     - './images/tracks/saas-playbook.jpg'
+    - './images/tracks/everyday-design.jpg'
 ---
 
 import { StaticImage } from 'gatsby-plugin-image'
@@ -24,12 +25,12 @@ import writer from './images/blog/search-hog-4.png'
 
 <Hero
     title="PostHog Tracks"
-    subtitle="Building a startup like PostHog isn't easy. Unless you know how!"
+    subtitle="Building a startup isn't easy. But we can put you on the right track!"
 />
 <h3 className="text-xl m-0 font-semibold opacity-75 text-center !pb-8">
 Tracks is a curated reading list for founders building product-led companies like PostHog. We build in the open, so we're happy to share all the details of how we've got this far, and the lessons we learned on the way.</h3>
 
-<h3 className="mb-0">How to <span style='color: #f64e00;'>build a world-class team</span></h3>
+<h3 className="mb-0">How to <span style='color: #f64e00;'>hire a team</span> of world-class talent</h3>
 
 It all starts with getting the right people on your project. You can check the handbook for more information about our [small team structure](/handbook/company/small-teams) and [minimal approach to management](/handbook/company/management), or head to [our staff profiles](/team) to understand what our team looks like now.
 
@@ -43,7 +44,8 @@ It all starts with getting the right people on your project. You can check the h
 
 <br />
 
-<Section title="Books that our team recommend to each other" titleSize="sm" cols={3}>
+<h4 class="text-center">Some of the books we recommend to each other (and you)</h4>
+<Section cols={3}>
     <div>      
     <a href="https://www.goodreads.com/book/show/54736620-ask-iwata">
         <GatsbyImage image={getImage(props?.images[0])} alt="Ask Iwata" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
@@ -68,7 +70,7 @@ It all starts with getting the right people on your project. You can check the h
     </div>
 </Section>
 
-<h3 className="mb-0">How to <span className="text-red">create processes that won't drive you crazy</span></h3>
+<h3 className="mb-0">How to <span className="text-red">create processes</span> that won't drive you crazy</h3>
 
 We bias heavily for tools which enable us to work collaboratively, and transparently. Some of the tools we use, like GitHub as a CMS, may sound intimidating to non-engineers, but [our experience](/blog/a-non-coders-thoughts-on-everybody-codes-culture) is that if you give teams the right support then it isn’t an issue. It helps to have [a really good employee handbook](/handbook). 
 
@@ -82,7 +84,8 @@ We bias heavily for tools which enable us to work collaboratively, and transpare
 
 <br />
 
-<Section title="Our most organized minds recommend" titleSize="sm" cols={3}>
+<h4 class="text-center">Our most organized minds read these books</h4>
+<Section cols={3}>
     <div>
     <a href="https://www.goodreads.com/book/show/40179007-the-messy-middle">      
         <GatsbyImage image={getImage(props?.images[2])} alt="The Messy Middle by Scott Belsky" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
@@ -109,7 +112,7 @@ We bias heavily for tools which enable us to work collaboratively, and transpare
     </div>
 </Section>
 
-<h3 className="mb-0">How to <span className="text-red">build things people actually love</span></h3>
+<h3 className="mb-0">How to <span className="text-red">build things</span> people actually love</h3>
 
 At PostHog, we build weirdly fast. Some of that is because we’ve assembled an amazing team — but it’s _also_ because we talk to our users and treat every new feature like its own product. It took us [a few pivots](/blog/story-about-pivots), but we got to product market fit eventually!
 
@@ -123,7 +126,8 @@ At PostHog, we build weirdly fast. Some of that is because we’ve assembled an 
 
 <br />
 
-<Section title="Builders at PostHog read books like these" titleSize="sm" cols={3}>
+<h4 class="text-center">When we're not busy building, we read books like these</h4>
+<Section cols={4}>
     <div>      
     <a href="https://basecamp.com/gettingreal">
         <GatsbyImage image={getImage(props?.images[5])} alt="Getting Real by Basecamp" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
@@ -145,12 +149,20 @@ At PostHog, we build weirdly fast. Some of that is because we’ve assembled an 
         <GatsbyImage image={getImage(props?.images[7])} alt="The Mom Test by Rob Fitzpatrick" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
     </a>
         <p class="text-center">
-          Recommended by <a href="/team">Basically Everyone</a>
+          Recommended by <a href="/team">basically everyone</a>
+        </p>
+    </div>
+    <div>
+    <a href="https://www.goodreads.com/book/show/58046715-continuous-discovery-habits">
+        <GatsbyImage image={getImage(props?.images[10])} alt="The Design of Everyday Things by Dan Norman" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
+    </a>
+        <p class="text-center">
+          Recommended by <a href="/community/profiles/71">James Hawkins</a>
         </p>
     </div>
 </Section>
 
-<h3 className="mb-0">How to <span className="text-red">sell your product without selling out</span></h3>
+<h3 className="mb-0">How to <span className="text-red">sell something</span> without selling out</h3>
 
 PostHog doesn’t have a sales team, but we’ve still learned a lot about how to sell a product and the importance of pricing. And while we don’t have a sales team, we _do_ have both a customer success and a marketing team who play a vital role in bringing in new users!
 
@@ -162,7 +174,8 @@ PostHog doesn’t have a sales team, but we’ve still learned a lot about how t
   "/blog/how-to-treat-your-pricing-like-a-product"
 ]} />
 
-<Section title="If we had a sales team, they'd probably read these books" titleSize="sm" cols={2}>
+<h4 class="text-center">If we had a sales team, they'd probably read these books</h4>
+<Section cols={2}>
     <div>
     <a href="https://www.goodreads.com/book/show/46019973-founding-sales---the-startup-sales-handbook">      
         <GatsbyImage image={getImage(props?.images[8])} alt="Founding Sales by Daniel Kazanjy" objectFit="contain" style={{ maxHeight: 200 }} class="center" />
@@ -183,7 +196,7 @@ PostHog doesn’t have a sales team, but we’ve still learned a lot about how t
 
 <Section>
 <h2 className="text-3xl lg:text-4xl text-center mb-0">"What about Y Combinator?"</h2>
-<h3 className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 opacity-75 text-primary text-center text-lg pb-8">PostHog launched out of Y Combinators W20 batch. Curious what the experience was like? Here's the short version.</h3>
+<h3 className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 opacity-75 text-primary text-center text-lg pb-8">PostHog graduated from the Y Combinator W20 batch. Curious what the experience was like? Here's the short version.</h3>
 <FeatureSnapshot
         image={writer}
         features={[
