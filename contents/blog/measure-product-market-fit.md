@@ -33,6 +33,9 @@ Why three? Because of what Brian Balfour, a serial co-founder and a former VP of
 
 ![pmf trifecta](../images/blog/how-to-measure-product-market-fit/pmf-trifecta.png)
 
+Achieving all three is a reliable sign of product-market fit, but it rarely comes easily.
+
+
 In the rest of this guide, I'll explain:
 
 - The different ways to measure product-market fit
