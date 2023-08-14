@@ -222,7 +222,6 @@ How much your ICP customers are paying is _less important_ than _how many_ ICP c
 
 Consistent growth in ICP customers who pay is a strong sign of product-market fit. It means you have a product they want, and you can acquire similar customers with ease.
 
-
 Flat growth suggests you don't have strong product-market fit for your ICP. Lots of growth from customers not in your ICP suggests you either:
 
 1. Have product-market fit for a different type of customer
