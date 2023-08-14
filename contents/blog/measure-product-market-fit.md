@@ -1,12 +1,12 @@
 ---
-date: 2023-08-10
+date: 2023-08-14
 title: "In-depth: How to measure product-market fit"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author: ["andy-vandervell"]
-featuredImage: ../images/blog/pmf-game-guide/pmf-guide.png
+featuredImage: ../images/blog/how-to-measure-product-market-fit/pmf-guide.png
 featuredImageType: full
 category: Startups
 tags:
