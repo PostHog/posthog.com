@@ -1,6 +1,6 @@
 ---
 title: How to analyze first and last touch attribution
-date: 2023-08-09
+date: 2023-08-11
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
