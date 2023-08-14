@@ -7,7 +7,7 @@ tags:
     - event-timer
 ---
 
-> 🚧 **Note:** We are currently in the process of reworking our app server and we **disabled new installs of the event sequence timer.** You can still analyze the timing of event sequences using [HogQL](/docs/hogql).
+> 🚧 **Note:** We are currently in the process of reworking our app server and have therefore **disabled new installs of the event sequence timer.** You can still analyze the timing of event sequences using [HogQL](/docs/hogql).
 
 For example, to get the average time between a `$pageview` and `$pageleave` events this year, [create an SQL insight](https://app.posthog.com/insights/new) and use the following SQL statement:
 

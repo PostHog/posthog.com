@@ -7,7 +7,7 @@ tags:
     - first-time
 ---
 
-> 🚧 **Note:** We are currently in the process of reworking our app server and we **disabled new installs of the first time event tracker.** You can still analyze first time events using [HogQL](/docs/hogql).
+> 🚧 **Note:** We are currently in the process of reworking our app server and have therefore **disabled new installs of the first time event tracker.** You can still analyze first time events using [HogQL](/docs/hogql).
 
 For example, to get a list of users who completed the `$pageview` event for the first time today, [create an SQL insight](https://app.posthog.com/insights/new) and use the following SQL statement:
 
