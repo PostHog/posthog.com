@@ -221,7 +221,7 @@ Here's PostHog's first ICP:
 
 ![posthog icp](../images/blog/pmf-game-guide/posthog-icp.png)
 
-How much your ICP customers are paying is _less important_ than _how many_ ICP customers you have, and if they're growing in number.
+_How much_ your ICP customers are paying is less important than _how many_ ICP customers you have, and if they're growing in number. Can you onboard 5 paying ICP customers, then 10, 20, 50, and so on?
 
 Consistent growth in ICP customers who pay is a strong sign of product-market fit. It means you have a product they want, and you can acquire similar customers with ease.
 
@@ -264,7 +264,14 @@ It's also a good idea to track different cohorts, such as retention for users wh
 
 ### Who should use retention?
 
-Everyone. It's easy to understand and a reliable way to confirm product-market fit.
+Nearly everyone. It's easy to understand and a reliable way to confirm product-market fit. Just remember to consider what "retention" means for your product. 
+
+As a B2B SaaS product, we care about retaining organizations and individual users. Why? Because if individual users keep coming back, we're confident their respective orgs will retain well, too. A marketplace like Airbnb, meanwhile, will want to track retention for both:
+
+1. Owners – do owners keep their properties listed on Airbnb?
+2. End users – do customers return to book more stays?
+
+As ever, track retention actions of real value both to you and your users.
 
 | **Pros**                                                                                                                 | **Cons**                                                                                                                 |
 |--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
@@ -323,7 +330,7 @@ It's a good metric to add once you believe you have the trifecta: consistent gro
 >
 > **CAC** = customer acquisition cost - i.e. total sales and marketing spend divided by how many customers you acquired.
 
-CLV/CAC is a more targeted way to track "efficiency" than burn multiple. It's a ratio calculated by dividing your customer lifetime value[^6] (CLV) by your customer acquisition cost (CAC). 
+CLV/CAC is a more targeted way to track efficiency than burn multiple. It's a ratio calculated by dividing your customer lifetime value[^6] (CLV) by your customer acquisition cost (CAC). 
 
 The ratio reveals how efficiently you're acquiring customers. A ratio of 1x means your CLV and CAC are the same – i.e. you're only earning enough to cover your acquisition costs. A ratio of 2x means you're earning twice as much as you're spending to acquire new customers. 
 
