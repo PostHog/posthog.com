@@ -2244,10 +2244,6 @@ export const docsMenu = {
                     url: '',
                     children: [
                         {
-                            url: '/docs/cdp/amazon-kinesis',
-                            name: 'Amazon Kinesis',
-                        },
-                        {
                             url: '/docs/cdp/bitbucket-release-tracker',
                             name: 'BitBucket',
                         },
@@ -2260,36 +2256,8 @@ export const docsMenu = {
                             },
                         },
                         {
-                            url: '/docs/cdp/github-release-tracker',
-                            name: 'GitHub Releases',
-                        },
-                        {
-                            url: '/docs/cdp/github-star-sync',
-                            name: 'GitHub Stars',
-                        },
-                        {
-                            url: '/docs/cdp/gitlab-release-tracker',
-                            name: 'GitLab',
-                        },
-                        {
-                            url: '/docs/cdp/heartbeat',
-                            name: 'Heartbeat',
-                        },
-                        {
-                            url: '/docs/cdp/ingestion-alert',
-                            name: 'Ingestion Alert',
-                        },
-                        {
-                            url: '/docs/cdp/email-scoring',
-                            name: 'Email Scoring',
-                        },
-                        {
                             url: '/docs/cdp/n8n',
                             name: 'n8n',
-                        },
-                        {
-                            url: '/docs/cdp/orbit',
-                            name: 'Orbit',
                         },
                         {
                             url: '/docs/cdp/redshift-import',
@@ -2306,14 +2274,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/sentry-connector',
                             name: 'Sentry',
-                        },
-                        {
-                            url: '/docs/cdp/twitter-followers',
-                            name: 'Twitter',
-                        },
-                        {
-                            url: '/docs/cdp/zapier-connector',
-                            name: 'Zapier',
                         },
                         {
                             url: '/docs/cdp/zendesk-connector',
@@ -2354,14 +2314,6 @@ export const docsMenu = {
                             name: 'Customer.io',
                         },
                         {
-                            url: '/docs/cdp/databricks',
-                            name: 'Databricks',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
                             url: '/docs/cdp/engage-connector',
                             name: 'Engage.so',
                         },
@@ -2384,10 +2336,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/intercom',
                             name: 'Intercom',
-                        },
-                        {
-                            url: '/docs/cdp/pagerduty-connector',
-                            name: 'PagerDuty',
                         },
                         {
                             url: '/docs/cdp/postgres-export',
@@ -2441,10 +2389,6 @@ export const docsMenu = {
                             url: '/docs/cdp/pace-integration',
                             name: 'Pace',
                         },
-                        {
-                            url: '/docs/cdp/zapier-connector',
-                            name: 'Zapier',
-                        },
                     ],
                 },
                 {
@@ -2496,10 +2440,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/automatic-cohort-creator',
                             name: 'Automatic Cohort Creator',
-                        },
-                        {
-                            url: '/docs/cdp/currency-normalization',
-                            name: 'Currency Normalizer',
                         },
                         {
                             url: '/docs/cdp/geoip-enrichment',

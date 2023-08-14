@@ -1,11 +1,12 @@
 ---
 title: Google Cloud Storage
 github: https://github.com/PostHog/posthog-gcs-plugin
-installUrl: https://app.posthog.com/project/apps?name=GCS+Export
 thumbnail: ../../cdp/thumbnails/gcs-export.png
 tags:
     - gcs-export
 ---
+
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 Send events from PostHog to a Google Cloud Storage bucket upon ingestion.
 
