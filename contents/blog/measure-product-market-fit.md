@@ -159,11 +159,11 @@ But, as Superhuman proves, the survey is a powerful way to systematize finding p
 
 | **Pros**                                                                                                                 | **Cons**                                                                                                                 |
 |--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------| 
-| <span className="text-green text-lg">✔</span> Can help guide product development in the right direction                  | <span className="text-red text-lg">✖</span> PMF Survey is somewhat labor-intensive                                       |
-| <span className="text-green text-lg">✔</span> Easy to break down into multiple cohorts to understand your ICP            | <span className="text-red text-lg">✖</span> Needs to be backed-up with 121 interviews                                    |
-| <span className="text-green text-lg">✔</span> Can be systematized to improve product-market fit over time                | <span className="text-red text-lg">✖</span> Not driven by real usage – always validate with engagement or retention data |
-| <span className="text-green text-lg">✔</span> Useful for tracking how your product-market fit changes over time          | <span className="text-red text-lg">✖</span> Requires a minimum number of responses to be directionally useful            |
-| <span className="text-green text-lg">✔</span> Will help you understand _why_ you do or don't have product-market fit     |               |
+| <span className="text-green text-lg">✔</span> Can help guide product development in the right direction                  | <span className="text-red text-lg">✖</span> Needs to be backed-up with 121 interviews                                    |
+| <span className="text-green text-lg">✔</span> Easy to break down into multiple cohorts to understand your ICP            | <span className="text-red text-lg">✖</span> Not driven by real usage – always validate with engagement or retention data |
+| <span className="text-green text-lg">✔</span> Can be systematized to improve product-market fit over time                | <span className="text-red text-lg">✖</span> Requires a minimum number of responses to be directionally useful            |
+| <span className="text-green text-lg">✔</span> Useful for tracking how your product-market fit changes over time          |            |
+| <span className="text-green text-lg">✔</span> Will help you understand _why_ you do or don't have product-market fit     |            |
 
 ## Indicator #3: User engagement
 
