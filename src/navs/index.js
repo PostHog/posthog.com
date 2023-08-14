@@ -2429,10 +2429,6 @@ export const docsMenu = {
                             name: 'Property Filter',
                         },
                         {
-                            url: '/docs/cdp/property-flattener',
-                            name: 'Property Flattener',
-                        },
-                        {
                             url: '/docs/cdp/schema-enforcer',
                             name: 'Schema Enforcer',
                         },
