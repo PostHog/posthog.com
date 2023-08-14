@@ -107,7 +107,7 @@ Ashby also had a partnership with YC's job board so all roles to YC's [Work at a
 
 #### Referrals
 
-Every time we open a new role, we will share the details and ideal profile with the team during All Hands.
+Every time we open a new role, we will share the details and ideal profile with the team during All Hands. 
 
 **Personal referral** 
 
@@ -118,6 +118,8 @@ Please make sure the candidate has given their consent before putting them forwa
 We occasionally open up short term contracts, and you'll receive a $1,000 referral bonus if you recommend someone here too! The contract just needs to be on a full time basis and at least 3 months long.
 
 Unfortunately people who actively work on recruitment in the People & Ops team at PostHog are not eligible for referral bonuses, to mitigate the risk that they influence the process unfairly. If you would like to refer someone and are not sure if this applies to you, speak to Charles. 
+
+We aim to get back to all referrals within 48 hours.
 
 **What's the process?**
 
