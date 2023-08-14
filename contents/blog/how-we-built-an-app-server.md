@@ -49,7 +49,7 @@ class ExamplePlugin(PluginBaseClass):
         pass
 ```
 
-Other features added included a plugin repository, an interface to configure the apps, and a CLI to preconfigure apps for custom installations. I built two sample apps with it: the [currency normalizer](/apps/currency-normalization) (convert event properties to a single currency), and the coveted GeoIP app.
+Other features added included a plugin repository, an interface to configure the apps, and a CLI to preconfigure apps for custom installations. I built two sample apps with it, including the coveted GeoIP app.
 
 This was a promising start, but it didn’t take long for cracks to appear. 
 

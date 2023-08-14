@@ -32,24 +32,12 @@
         "url": "/cdp/bitbucket-release-tracker"
     },
     {
-        "name": "Currency Normalizer",
-        "url": "/cdp/currency-normalization"
-    },
-    {
         "name": "Customer.io",
         "url": "/cdp/customer-io"
     },
     {
-        "name": "Databricks",
-        "url": "/cdp/databricks"
-    },
-    {
         "name": "Downsampler",
         "url": "/cdp/downsampling"
-    },
-    {
-        "name": "Email Scoring",
-        "url": "/cdp/email-scoring"
     },
     {
         "name": "Event Sequence Timer",
@@ -104,10 +92,6 @@
         "url": "/cdp/google-pub-sub-connector"
     },
     {
-        "name": "Heartbeat",
-        "url": "/cdp/heartbeat"
-    },
-    {
         "name": "Hubspot",
         "url": "/cdp/hubspot-connector"
     },
@@ -116,20 +100,8 @@
         "url": "/cdp/intercom"
     },
     {
-        "name": "Ingestion Alerts",
-        "url": "/cdp/ingestion-alert"
-    },
-    {
         "name": "n8n",
         "url": "/cdp/n8n"
-    },
-    {
-        "name": "Orbit",
-        "url": "/cdp/orbit"
-    },
-    {
-        "name": "Pagerduty",
-        "url": "/cdp/pagerduty-connector"
     },
     {
         "name": "Postgres",
