@@ -172,16 +172,8 @@
         "url": "/cdp/twilio"
     },
     {
-        "name": "Twitter",
-        "url": "/cdp/twitter-followers"
-    },
-    {
         "name": "User Agent Populator",
         "url": "/cdp/user-agent-populator"
-    },
-    {
-        "name": "Zapier",
-        "url": "/cdp/zapier-connector"
     },
     {
         "name": "Zendesk",
