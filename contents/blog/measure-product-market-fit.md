@@ -87,7 +87,7 @@ You can verify the above using organic visitors to your website homepage as a pr
 2. Unique users who visited the homepage directly.
 3. While excluding users with an identified email address.
 
-This captures new users who visit our homepage by searching for us, typing in our website address, or via "dark social" sources like Slack and WhatsApp.
+This captures new users who visit our homepage by searching for us, typing in our website address, or via dark social sources like Slack and WhatsApp.
 
 ![posthog proxy](../images/blog/how-to-measure-product-market-fit/word-of-mouth-proxy.png)
 
