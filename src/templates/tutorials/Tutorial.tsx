@@ -90,7 +90,11 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                     <ViewButton view={view} title="Video" setView={setView} />
                 </div>
             )}
-            {view === 'Article' && <MobileSidebar tableOfContents={tableOfContents} mobile={false} />}
+            {view === 'Article' && (
+                <div className="xl:float-right xl:max-w-[350px] xl:ml-4 xl:mb-4">
+                    <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
+                </div>
+            )}
             {view === 'Article' ? (
                 <div className="article-content">
                     <MDXProvider components={components}>
