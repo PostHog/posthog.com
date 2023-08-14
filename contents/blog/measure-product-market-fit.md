@@ -248,7 +248,7 @@ It's essential for any B2B SaaS product – it doesn't matter if they're self-s
 - **Type:** Lagging indicator
 - **Good for:** Any software product
 
-Retention is _the main_lagging indicator of product-market fit for any type of product. If your retention curve flattens _at any point_, it's a strong sign you have product-market fit.
+Retention is _the main_ lagging indicator of product-market fit for any type of product. If your retention curve flattens _at any point_, it's a strong sign you have product-market fit.
 
 ![retention curve](../images/blog/how-to-measure-product-market-fit/retention-curve.png)
 
