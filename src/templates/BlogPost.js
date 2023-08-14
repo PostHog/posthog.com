@@ -27,6 +27,7 @@ import slugify from 'slugify'
 import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
 import { companyMenu } from '../navs'
+import MobileSidebar from 'components/Docs/MobileSidebar'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -141,6 +142,7 @@ export default function BlogPost({ data, pageContext, location }) {
                 date={date}
                 tags={tags}
             />
+            <MobileSidebar mobile={false} tableOfContents={tableOfContents} />
             <div className="article-content">
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>

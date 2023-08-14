@@ -84,14 +84,13 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                 titlePosition="top"
                 date={date}
             />
-
             {featuredVideo && (
                 <div className="mb-6 flex space-x-2">
                     <ViewButton view={view} title="Article" setView={setView} />
                     <ViewButton view={view} title="Video" setView={setView} />
                 </div>
             )}
-            {view === 'Article' && breakpoints.md && <MobileSidebar tableOfContents={tableOfContents} />}
+            {view === 'Article' && <MobileSidebar tableOfContents={tableOfContents} mobile={false} />}
             {view === 'Article' ? (
                 <div className="article-content">
                     <MDXProvider components={components}>
