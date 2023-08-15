@@ -119,7 +119,7 @@ We occasionally open up short term contracts, and you'll receive a $1,000 referr
 
 Unfortunately people who actively work on recruitment in the People & Ops team at PostHog are not eligible for referral bonuses, to mitigate the risk that they influence the process unfairly. If you would like to refer someone and are not sure if this applies to you, speak to Charles. 
 
-We aim to get back to all referrals within 48 hours.
+We aim to get back to all referrals within 48 hours. Please do follow the referral workflow within Ashby (submit via referral form) to submit your respective referral so that recruitment team gets notified correctly and respond within the timeframe.
 
 **What's the process?**
 
