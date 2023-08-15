@@ -257,18 +257,20 @@ const handbookSidebar = [
             },
         ],
     },
-            name: 'Ops & finance',
+    {
+        name: 'Ops & finance',
         url: '',
         children: [
-                {
+            {
                 name: 'Finance',
                 url: '/handbook/people/finance',
             },
             {
                 name: 'Merch store',
                 url: '/handbook/company/merch-store',
-            },    
+            },
         ],
+    },
     {
         name: 'Engineering',
         url: '',
