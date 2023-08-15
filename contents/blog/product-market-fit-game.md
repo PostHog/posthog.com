@@ -15,7 +15,7 @@ tags:
 
 In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. 
 
-Knowing when you've found it is easy – there's no shortage of descriptions of how it _feels_ to have product-market fit. _How_ you find it is much harder, hence this guide.
+Knowing when you've found it is easy – there's no shortage of descriptions of how it _feels_ to have product-market fit, or [how to measure product-market fit](/blog/measure-product-market-fit). _How_ you find it is much harder, hence this guide.
 
 To me, finding product-market fit is a bit like playing [snakes and ladders](https://en.wikipedia.org/wiki/Snakes_and_ladders). There are numerous traps, winning takes a little luck, and the only certainty is it's never a straight line to the finish.  
 
