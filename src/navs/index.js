@@ -174,7 +174,7 @@ const handbookSidebar = [
         ],
     },
     {
-        name: 'People & ops',
+        name: 'People',
         url: '',
         children: [
             {
@@ -226,24 +226,6 @@ const handbookSidebar = [
                 url: '/handbook/people/grievances',
             },
             {
-                name: 'Ramp up plans',
-                url: '',
-                children: [
-                    {
-                        name: 'Product Manager ramp up',
-                        url: '/handbook/people/ramp-up/product-manager',
-                    },
-                ],
-            },
-            {
-                name: 'Finance',
-                url: '/handbook/people/finance',
-            },
-            {
-                name: 'Merch store',
-                url: '/handbook/company/merch-store',
-            },
-            {
                 name: 'Hiring process',
                 url: '',
                 children: [
@@ -276,6 +258,20 @@ const handbookSidebar = [
                         url: '/handbook/people/hiring-process/exec-hiring',
                     },
                 ],
+            },
+        ],
+    },
+    {
+        name: 'Ops & finance',
+        url: '',
+        children: [
+            {
+                name: 'Finance',
+                url: '/handbook/people/finance',
+            },
+            {
+                name: 'Merch store',
+                url: '/handbook/company/merch-store',
             },
         ],
     },
