@@ -28,7 +28,7 @@ As an individual contributor (40%), in order of priority right now:
   - I attend board meetings and am responsible for presenting the numbers and getting grilled on them
 - Marketing
   - Figuring out how to grow our word of mouth
-  - Runnning weekly sprint planning meetings
+  - Running weekly sprint planning meetings
 
 ## Quirks
 
