@@ -6,7 +6,6 @@ import Layout from 'components/Layout'
 import { Posts } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
-import docs from 'sidebars/docs.json'
 import { communityMenu } from '../../navs'
 
 const Tutorials = ({
@@ -23,7 +22,6 @@ const Tutorials = ({
                 breadcrumb={[{ name: 'Tutorials', url: '/tutorials' }, { name: 'All' }]}
                 article={false}
                 title="Tutorials"
-                menu={docs}
                 hideSidebar
                 hideSurvey
             >

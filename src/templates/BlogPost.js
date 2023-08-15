@@ -1,17 +1,8 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Blockquote } from 'components/BlockQuote'
-import Breadcrumbs, { Crumb } from 'components/Breadcrumbs'
-import { Calendar, Edit, Issue } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
-import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout from 'components/PostLayout'
-import Text from 'components/PostLayout/Text'
-import Topics from 'components/PostLayout/Topics'
-import ShareLinks from 'components/PostLayout/ShareLinks'
-import SidebarSection from 'components/PostLayout/SidebarSection'
-import PageViews from 'components/PostLayout/PageViews'
-import Contributors, { Contributor } from 'components/PostLayout/Contributors'
+import { Contributor } from 'components/PostLayout/Contributors'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
@@ -20,13 +11,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import { NewsletterForm } from 'components/NewsletterForm'
-import blogMenu from 'components/Blog/blogMenu'
-import blog from 'sidebars/blog.json'
-import slugify from 'slugify'
 import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
-import { companyMenu } from '../navs'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
@@ -48,6 +34,7 @@ export const Intro = ({
     titlePosition = 'bottom',
     date,
     tags,
+    imageURL,
 }) => {
     return (
         <div className="lg:mb-7 mb-4 overflow-hidden">

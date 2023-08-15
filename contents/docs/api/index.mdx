@@ -129,7 +129,7 @@ If want to use the PostHog API beyond these limits (for example by using PostHog
 
 API docs are generated using [drf-spectacular](https://drf-spectacular.readthedocs.io/en/latest/readme.html). It looks at the Django models and djangorestframework serializers.
 
-Note: We don't automatically add new API endpoints to the sidebar, so you'll need to add those to [sidebar.json](https://github.com/PostHog/posthog.com/blob/master/src%2Fsidebars%2Fsidebars.json#L1036)
+Note: We don't automatically add new API endpoints to the sidebar, so you'll need to add those to [src/navs/index.js](https://github.com/PostHog/posthog.com/blob/master/src/navs/index.js)
 
 You can add a `help_text="Field that does x"` attribute to any Model or Serializer field to help users understand what a specific field is used for:
 

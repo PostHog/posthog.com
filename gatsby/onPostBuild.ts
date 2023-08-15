@@ -10,11 +10,11 @@ import jobTemplate from '../src/templates/OG/job.js'
 import { flattenMenu } from './utils'
 import fetch from 'node-fetch'
 import { GatsbyNode } from 'gatsby'
-import sidebars from '../src/sidebars/index'
 import pLimit from 'p-limit'
 import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
+import { docsMenu, handbookSidebar } from '../src/navs/index.js'
 
 const limit = pLimit(10)
 
@@ -374,9 +374,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         })
     }
 
-    const handbookMenu = sidebars.handbook
-    const docsMenu = sidebars.docs
-    const docsHandbookMenus = flattenMenu([...handbookMenu, ...docsMenu])
+    const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
 
     // Docs and Handbook OG
     for (const post of data.docsHandbook.nodes) {

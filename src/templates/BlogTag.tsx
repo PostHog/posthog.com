@@ -6,9 +6,8 @@ import Layout from 'components/Layout'
 import { Posts, PostToggle } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
-import blog from 'sidebars/blog.json'
 import CommunityCTA from 'components/CommunityCTA'
-import { capitalize } from 'instantsearch.js/es/lib/utils'
+import { companyMenu } from '../navs'
 
 const BlogTag = ({
     data: {
@@ -31,10 +30,10 @@ const BlogTag = ({
     const posts = allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent
 
     return (
-        <Layout>
+        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[5]}>
             <SEO title={`${tag} - PostHog`} />
 
-            <PostLayout article={false} title="Blog" menu={blog} hideSidebar hideSurvey>
+            <PostLayout article={false} title="Blog" hideSidebar hideSurvey>
                 <Posts
                     titleBorder
                     title={tag}
