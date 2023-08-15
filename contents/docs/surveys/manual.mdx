@@ -14,7 +14,7 @@ Setting up surveys is easy, and there are two ways to do it. The first option wi
 
 1. Make sure you've enabled the surveys app in your project's apps.
 
-2. You must have the `opt_in_site_apps` option enabled in your PostHog initialization code and be on posthog-js version 1.67.1+ or the latest JavaScript HTML snippet.
+2. You must have the `opt_in_site_apps` option enabled in your PostHog initialization code and `posthog-js` version 1.67.1+ or the [JavaScript snippet](/docs/getting-started/install#add-to-your-website--app) that includes `getActiveMatchingSurveys` and `getSurveys`.
 
 ```js-web
 posthog.init("<ph_project_api_key>", { 
