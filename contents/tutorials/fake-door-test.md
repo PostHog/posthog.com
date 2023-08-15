@@ -8,15 +8,15 @@ featuredImage: ../images/tutorials/banners/tutorial-15.png
 tags: ['surveys', 'actions']
 ---
 
-A fake door test is when you create a "fake" UI or experience for a product or feature you are thinking of building. When users interact with it, you tell them it isn't available (yet). This show of interest helps you validate what you plan on building.
+A fake door test is when you create a "fake" UI or experience for a product or feature you are thinking of building. When users interact with it, you tell them it isn't available (yet). This enables you determine if your users would actually be interested in your new feature.
 
-This tutorial shows you how to set up a fake door test with PostHog. We build a basic app, set up a fake door test, and then implement surveys to get more feedback.
+This tutorial shows you how to set up a fake door test with PostHog. We'll build a basic app, set up a fake door test, and then implement surveys to get more feedback.
 
 > **Warning:** Fake door tests come with risks. Showing users something that doesn't exist yet could disappoint them and hurt your reputation. Make sure to be honest and transparent with users about what you are doing.
 
 ## Creating an app and adding PostHog
 
-We are going to build a basic app to run our fake door test on. We do this with Next.js, which requires installing Node. After doing so, run the command below, select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
+We are going to build a basic app to run our fake door test on. We do this with Next.js, which requires installing Node. After doing so, run the command below, select **No for TypeScript**, **Yes for `use app router`**, and the defaults for every other option.
 
 ```bash
 npx create-next-app@latest fake-door
@@ -71,7 +71,7 @@ With this done, PostHog starts [autocapturing](/docs/product-analytics/autocaptu
 
 ## Creating our fake door test
 
-Our fake door test is simple. We add a button to our app that says "Try our new feature" and it takes you to a page that says "This feature is coming soon" which we will create later.
+Our fake door test is simple. We'll add a button to our app that says "Try our new feature" and it takes you to a page that says "This feature is coming soon" which we will create later.
 
 ```js-web
 // app/page.js
