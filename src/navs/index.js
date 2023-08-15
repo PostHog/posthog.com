@@ -167,6 +167,10 @@ export const handbookSidebar = [
                 name: 'Website & Docs',
                 url: '/handbook/small-teams/website-docs',
             },
+            {
+                name: 'Data Warehouse',
+                url: '/handbook/small-teams/dw',
+            },
         ],
     },
     {
@@ -652,6 +656,10 @@ export const handbookSidebar = [
                     {
                         name: 'Who we do business with',
                         url: '/handbook/growth/sales/who-we-do-business-with',
+                    },
+                    {
+                        name: 'Historical import',
+                        url: '/handbook/growth/sales/historical-import',
                     },
                 ],
             },
@@ -2304,10 +2312,6 @@ export const docsMenu = {
                             name: 'Sentry',
                         },
                         {
-                            url: '/docs/cdp/shopify',
-                            name: 'Shopify',
-                        },
-                        {
                             url: '/docs/cdp/twitter-followers',
                             name: 'Twitter',
                         },
@@ -2470,10 +2474,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/property-filter',
                             name: 'Property Filter',
-                        },
-                        {
-                            url: '/docs/cdp/property-flattener',
-                            name: 'Property Flattener',
                         },
                         {
                             url: '/docs/cdp/schema-enforcer',

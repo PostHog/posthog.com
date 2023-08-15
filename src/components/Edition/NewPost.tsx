@@ -21,7 +21,14 @@ const Categories = ({ value, setFieldValue }) => {
 
     useEffect(() => {
         fetchCategories().then((categories) =>
-            setCategories(categories.filter((category) => ['Repost'].includes(category?.attributes?.label)))
+            setCategories(
+                categories.filter(
+                    (category) =>
+                        !['Changelog entry', 'Customer story', 'Guide', 'PostHog news', 'Spotlight'].includes(
+                            category?.attributes?.label
+                        )
+                )
+            )
         )
     }, [])
 
@@ -142,7 +149,7 @@ export default function NewPost({ onSubmit }) {
                     data: {
                         title,
                         body: transformedBody?.body,
-                        slug: `/posts/${slugify(title, { lower: true })}`,
+                        slug: `/posts/${slugify(title, { lower: true, strict: true })}`,
                         CTA: {
                             label: ctaLabel,
                             url: ctaURL,
