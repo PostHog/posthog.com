@@ -8,6 +8,7 @@ import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
 import Layout from 'components/Layout'
+import { SEO } from '../seo'
 import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
 
 export default function TeamNew() {
@@ -41,6 +42,8 @@ export default function TeamNew() {
 
     return (
         <Layout>
+            <SEO title="Team - PostHog" />
+
             <div className="flex flex-col text-center pt-10 pb-3 px-8 2xl:px-4 3xl:p-0">
                 <h3 className="mb-[5px] text-lg leading-tight">Team members who... </h3>
                 <div className="flex justify-start md:justify-center gap-x-[53px] overflow-x-auto">
