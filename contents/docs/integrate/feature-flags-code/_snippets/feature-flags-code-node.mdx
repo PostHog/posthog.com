@@ -34,7 +34,10 @@ client.capture({
     distinctId: 'distinct_id_of_your_user',
     event: 'event_name',
     properties: {
-        '$feature/experiment-feature-flag-key': 'variant-key' // replace with matched variant key
+        '$feature/feature-flag-key': 'variant-key' // replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
     },
 })
 ```
+
+### Step 4 (optional): Send the $feature_flag_called event
+???? Check js docs if rthis is really needed 

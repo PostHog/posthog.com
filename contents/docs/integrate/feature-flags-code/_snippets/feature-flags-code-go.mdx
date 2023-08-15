@@ -37,6 +37,6 @@ client.Enqueue(posthog.Capture{
   DistinctId: "distinct_id_of_your_user",
   Event:      "event_name",
   Properties: posthog.NewProperties().
-    Set("$feature/experiment-feature-flag-key", "variant-key"), // replace 'variant-key' with the key of your variant
+    Set("$feature/feature-flag-key", "variant-key"), // replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
 })
 ```
