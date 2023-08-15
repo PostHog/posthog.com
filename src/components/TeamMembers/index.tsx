@@ -6,7 +6,6 @@ import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 import { Close, Plus } from 'components/Icons'
 import { Combobox } from '@headlessui/react'
-import { ChevronDown } from '@posthog/icons'
 import { Skeleton } from 'components/Questions/QuestionsTable'
 
 const teamQuery = (name: string) =>
@@ -133,9 +132,10 @@ const AddTeamMember = ({ handleChange }) => {
 export default function TeamMembers({ team: teamName }: { team: string }) {
     const { isModerator, getJwt } = useUser()
     const [team, setTeam] = useState()
+    const [loading, setLoading] = useState(true)
 
     const fetchTeamMembers = () => {
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${teamQuery(teamName)}`)
+        return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${teamQuery(teamName)}`)
             .then((res) => res.json())
             .then(({ data }) => {
                 setTeam(data?.[0] ?? [])
@@ -201,7 +201,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
     }
 
     useEffect(() => {
-        fetchTeamMembers()
+        fetchTeamMembers().then(() => setLoading(false))
     }, [])
 
     const teamMembers = team?.attributes?.profiles?.data?.sort(
@@ -210,74 +210,80 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
             a?.attributes?.leadTeams?.data?.filter(({ attributes: { name } }) => name === teamName).length
     )
 
-    if (!teamMembers || teamMembers.length <= 0) return <Skeleton />
-
     return (
         <>
             <h4>Team members</h4>
             <ul className="list-none m-0 p-0 grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                {teamMembers.map((member) => {
-                    const { firstName, lastName, avatar, companyRole, leadTeams, country } = member?.attributes ?? {}
-                    const name = [firstName, lastName].filter(Boolean).join(' ')
-                    return (
-                        <li className="!m-0 group relative" key={name}>
-                            <Link
-                                className="!text-inherit flex space-x-4 items-center py-3 relative active:top-[1px] active:scale-[.99] transition-all px-4 hover:bg-accent dark:hover:bg-accent-dark rounded h-full"
-                                to={`/community/profiles/${member.id}`}
-                            >
-                                <figure className="mb-0">
-                                    <ContributorImage image={avatar?.data?.attributes?.url} />
-                                </figure>
-                                <div>
-                                    <span className="flex items-center md:flex-row space-x-2">
-                                        <p className="!text-lg !font-bold !m-0 !leading-none">{name}</p>
-                                        {country && (
-                                            <span className="!leading-none">
-                                                {country === 'world' ? (
-                                                    '🌎'
-                                                ) : (
-                                                    <ReactCountryFlag svg countryCode={country} />
-                                                )}
-                                            </span>
-                                        )}
-                                        {leadTeams?.data?.some(({ attributes: { name } }) => name === teamName) ? (
-                                            <button
-                                                onClick={(e) => {
-                                                    e.preventDefault()
-                                                    handleTeamLead(member.id, true)
-                                                }}
-                                                className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white"
-                                            >
-                                                Team lead
-                                            </button>
-                                        ) : (
-                                            isModerator && (
+                {loading ? (
+                    <li>
+                        <Skeleton />
+                    </li>
+                ) : (
+                    teamMembers?.length > 0 &&
+                    teamMembers.map((member) => {
+                        const { firstName, lastName, avatar, companyRole, leadTeams, country } =
+                            member?.attributes ?? {}
+                        const name = [firstName, lastName].filter(Boolean).join(' ')
+                        return (
+                            <li className="!m-0 group relative" key={name}>
+                                <Link
+                                    className="!text-inherit flex space-x-4 items-center py-3 relative active:top-[1px] active:scale-[.99] transition-all px-4 hover:bg-accent dark:hover:bg-accent-dark rounded h-full"
+                                    to={`/community/profiles/${member.id}`}
+                                >
+                                    <figure className="mb-0">
+                                        <ContributorImage image={avatar?.data?.attributes?.url} />
+                                    </figure>
+                                    <div>
+                                        <span className="flex items-center md:flex-row space-x-2">
+                                            <p className="!text-lg !font-bold !m-0 !leading-none">{name}</p>
+                                            {country && (
+                                                <span className="!leading-none">
+                                                    {country === 'world' ? (
+                                                        '🌎'
+                                                    ) : (
+                                                        <ReactCountryFlag svg countryCode={country} />
+                                                    )}
+                                                </span>
+                                            )}
+                                            {leadTeams?.data?.some(({ attributes: { name } }) => name === teamName) ? (
                                                 <button
                                                     onClick={(e) => {
                                                         e.preventDefault()
-                                                        handleTeamLead(member.id, false)
+                                                        handleTeamLead(member.id, true)
                                                     }}
-                                                    className="group-hover:visible inline-block border-2 border-white/40 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-white/40 invisible"
+                                                    className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white"
                                                 >
                                                     Team lead
                                                 </button>
-                                            )
-                                        )}
-                                    </span>
-                                    <p className="!text-sm !mb-0 opacity-50 !leading-none !mt-1">{companyRole}</p>
-                                </div>
-                            </Link>
-                            {isModerator && (
-                                <button
-                                    className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent dark:bg-accent-dark border border-border dark:border-dark absolute -top-1 -right-1"
-                                    onClick={(e) => removeTeamMember(member)}
-                                >
-                                    <Close className="w-2 h-2" />
-                                </button>
-                            )}
-                        </li>
-                    )
-                })}
+                                            ) : (
+                                                isModerator && (
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.preventDefault()
+                                                            handleTeamLead(member.id, false)
+                                                        }}
+                                                        className="group-hover:visible inline-block border-2 border-white/40 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-white/40 invisible"
+                                                    >
+                                                        Team lead
+                                                    </button>
+                                                )
+                                            )}
+                                        </span>
+                                        <p className="!text-sm !mb-0 opacity-50 !leading-none !mt-1">{companyRole}</p>
+                                    </div>
+                                </Link>
+                                {isModerator && (
+                                    <button
+                                        className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent dark:bg-accent-dark border border-border dark:border-dark absolute -top-1 -right-1"
+                                        onClick={(e) => removeTeamMember(member)}
+                                    >
+                                        <Close className="w-2 h-2" />
+                                    </button>
+                                )}
+                            </li>
+                        )
+                    })
+                )}
                 {isModerator && <AddTeamMember handleChange={addTeamMember} />}
             </ul>
         </>

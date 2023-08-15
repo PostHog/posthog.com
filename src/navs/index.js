@@ -167,6 +167,10 @@ const handbookSidebar = [
                 name: 'Website & Docs',
                 url: '/handbook/small-teams/website-docs',
             },
+            {
+                name: 'Data Warehouse',
+                url: '/handbook/small-teams/dw',
+            },
         ],
     },
     {
