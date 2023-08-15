@@ -12,7 +12,7 @@ A fake door test is when you create a "fake" UI or experience for a product or f
 
 This tutorial shows you how to set up a fake door test with PostHog. We'll build a basic app, set up a fake door test, and then implement surveys to get more feedback.
 
-> **Warning:** Fake door tests come with risks. Showing users something that doesn't exist yet could disappoint them and hurt your reputation. Make sure to be honest and transparent with users about what you are doing.
+> **Note:** Fake door tests have risks. Showing users something non-existent could disappoint them and hurt your reputation. Make sure to be honest and transparent with users about what you are doing.
 
 ## Creating an app and adding PostHog
 
