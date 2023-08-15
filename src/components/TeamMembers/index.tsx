@@ -248,8 +248,10 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                             {leadTeams?.data?.some(({ attributes: { name } }) => name === teamName) ? (
                                                 <button
                                                     onClick={(e) => {
-                                                        e.preventDefault()
-                                                        handleTeamLead(member.id, true)
+                                                        if (isModerator) {
+                                                            e.preventDefault()
+                                                            handleTeamLead(member.id, true)
+                                                        }
                                                     }}
                                                     className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white"
                                                 >
