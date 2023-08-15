@@ -3,10 +3,10 @@ import React from 'react'
 import { usePost } from './hooks'
 
 export default function Survey(): JSX.Element | null {
-    const { contentContainerClasses } = usePost()
+    const { contentContainerClasses, filePath } = usePost()
     return (
         <div className={contentContainerClasses}>
-            <DocsPageSurvey />
+            <DocsPageSurvey filePath={filePath} />
         </div>
     )
 }
