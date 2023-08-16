@@ -41,7 +41,6 @@ We want to make sure that users understand what each number means, so set the Lo
 ![Create an NPS survey](../images/tutorials/nps-survey/nps_survey_1.png)
 
 ### Targeting your NPS survey
-
 The default behaviour for surveys is to target all users. You can choose to override this and target users based on the URL they are on, user properties, or use a particular feature flag. 
 
 To collect a valid result, you need at least 100 responses, so it’s important not to target too narrowly. However, you _also_ want to target users who are familiar with your product to get a meaningful result. Good options for striking a balance include…
