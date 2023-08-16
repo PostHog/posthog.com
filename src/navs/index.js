@@ -1797,6 +1797,10 @@ export const docsMenu = {
                     url: '/docs/support-options',
                 },
                 {
+                    name: 'Tutorials',
+                    url: '/tutorials',
+                },
+                {
                     name: 'Glossary',
                     url: '/docs/glossary',
                 },
