@@ -95,9 +95,11 @@ Select 'Enable Formula Mode' to get started, and enter the following formula:
 Save your insight. The resulting figure is your NPS score! 
 
 ### What is a good NPS score?
-NPS scores can range from -100 to +100. Anything above 0 is good and means you have more promoters than passives or detractors. Anything below 0 indicates users are unhappy with your product and your growth may be in decline. Market-leading companies generally score +70 upwards.
+NPS scores can range from -100 to +100. Anything above 0 is good and means you have more promoters than passives or detractors. Anything below 0 indicates users are unhappy with your product and your growth may be in decline. 
 
-Benchmark NPS scores can vary by industry, but typically you want to aim for a _minimum_ NPS score of +50. If you have a score that's below +50 then we'd recommend running further surveys and speaking to your users directly in order to understand their concerns, so you can make product improvements. 
+Benchmark NPS scores can vary by industry. When comparing your NPS score to a benchmark, it's important to compare yourself to direct competitors, rather than different industries or leading brands that compete at a different level. B2B software products typically have an NPS of +40, for example, while telecom providers have an average NPS of +30, and healthcare providers have an average of +50. Market-leading companies within an industry will generally score +60 to +70.
+
+Typically you want to aim for a _minimum_ NPS score of +50. If you have a score that's below +50 then we'd recommend running further surveys and speaking to your users directly in order to understand their concerns, so you can make product improvements. 
 
 ## Further reading
 - [How to create custom surveys](/tutorials/survey)
