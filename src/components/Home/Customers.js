@@ -71,17 +71,37 @@ export default function Customers() {
             >
                 {inView && (
                     <ul className="list-none m-0 p-0 pb-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark gap-4">
-                        <Customer className="max-h-[44px]" image={yCombinator} imageDark={yCombinatorDark} />
+                        <Customer
+                            url="/customers/ycombinator"
+                            className="max-h-[44px]"
+                            image={yCombinator}
+                            imageDark={yCombinatorDark}
+                        />
                         <Customer className="max-h-[36px]" image={staples} imageDark={staplesDark} />
                         <Customer className="max-h-[36px]" image={airbus} imageDark={airbusDark} />
                         <Customer className="max-h-[35px]" image={dhl} imageDark={dhlDark} />
                         <Customer className="max-h-[50px]" image={landmark} imageDark={landmarkDark} />
                         <Customer className="max-h-[40px]" image={outbrain} imageDark={outbrainDark} />
                         <Customer className="max-h-[35px]" image={clickhouse} imageDark={clickhouseDark} />
-                        <Customer className="max-h-[51px]" image={hasura} imageDark={hasuraDark} />
-                        <Customer className="max-h-[46px]" image={phantom} imageDark={phantomDark} />
+                        <Customer
+                            url="/customers/hasura"
+                            className="max-h-[51px]"
+                            image={hasura}
+                            imageDark={hasuraDark}
+                        />
+                        <Customer
+                            url="/customers/phantom"
+                            className="max-h-[46px]"
+                            image={phantom}
+                            imageDark={phantomDark}
+                        />
                         <Customer className="max-h-[50px]" image={joybird} imageDark={joybirdDark} />
-                        <Customer className="max-h-[50px]" image={assemblyai} imageDark={assemblyaiDark} />
+                        <Customer
+                            url="/customers/assemblyai"
+                            className="max-h-[50px]"
+                            image={assemblyai}
+                            imageDark={assemblyaiDark}
+                        />
                         <Customer url="/blog/posthog-marketing" imageDark="/brand/posthog-logo-white.svg" />
                     </ul>
                 )}
