@@ -520,7 +520,7 @@
         { "source": "/docs/cloud/proxy", "destination": "/docs/integrate/proxy" },
         {
             "source": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/self-host/migrate/migrate-from-amplitude",
@@ -528,19 +528,19 @@
         },
         {
             "source": "/docs/self-host/migrate-from-postgres-to-clickhouse",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/migrate/migrate-to-another-self-hosted-instance",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/migrate/migrate-between-cloud-and-self-hosted",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         { "source": "/handbook/product/pm-rampup", "destination": "/handbook/people/ramp-up/product-manager" },
         {

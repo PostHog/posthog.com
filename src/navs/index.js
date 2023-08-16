@@ -1671,10 +1671,6 @@ export const docsMenu = {
                             url: '/docs/migrate/migrate-to-cloud',
                         },
                         {
-                            name: 'Migrate between PostHog instances',
-                            url: '/docs/migrate/migrate-between-posthog-instances',
-                        },
-                        {
                             name: 'Migrate from Amplitude',
                             url: '/docs/migrate/migrate-from-amplitude',
                         },
