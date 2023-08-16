@@ -91,12 +91,7 @@ export const ProductAnalytics = () => {
         <div className="md:bg-[#1371FF] rounded-md md:text-white flex items-end h-full">
             <div className="relative md:grid grid-cols-16 md:gap-8 w-full">
                 <ImageContainer className="md:pl-8 col-span-10">
-                    <motion.div
-                        transition={{ delay: 0.4 }}
-                        className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 md:-mb-2"
-                        initial={{ translateY: '100%' }}
-                        animate={{ translateY: 0 }}
-                    >
+                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 md:-mb-2">
                         <StaticImage
                             alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
                             placeholder="none"
@@ -105,13 +100,9 @@ export const ProductAnalytics = () => {
                             className=":w-full md:max-w-[1029px] md:shadow-2xl md:-rotate-1"
                             src="../../../../contents/images/products/product-analytics/product-analytics.png"
                         />
-                    </motion.div>
+                    </div>
                     <div className="absolute -bottom-2 right-0 md:hidden">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
+                        <div>
                             <StaticImage
                                 placeholder="none"
                                 quality={100}
@@ -119,7 +110,7 @@ export const ProductAnalytics = () => {
                                 src="./images/product-analytics-hog.png"
                                 alt=""
                             />
-                        </motion.div>
+                        </div>
                     </div>
                 </ImageContainer>
                 <ContentContainer className="col-span-6">
@@ -137,11 +128,7 @@ export const ProductAnalytics = () => {
                         </CallToAction>
                     </Content>
                     <div className="absolute -bottom-2 right-0 hidden md:block">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
+                        <div>
                             <StaticImage
                                 placeholder="none"
                                 quality={100}
@@ -149,7 +136,7 @@ export const ProductAnalytics = () => {
                                 src="./images/product-analytics-hog.png"
                                 alt=""
                             />
-                        </motion.div>
+                        </div>
                     </div>
                 </ContentContainer>
             </div>
@@ -167,12 +154,7 @@ export const SessionReplay = () => {
         <div className="md:bg-[#F2AD46] rounded-md text-primary flex items-end h-full">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                    <motion.div
-                        transition={{ delay: 0.4 }}
-                        className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 -mb-2"
-                        initial={{ translateY: '100%' }}
-                        animate={{ translateY: 0 }}
-                    >
+                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 -mb-2">
                         <StaticImage
                             objectPosition="bottom"
                             placeholder="none"
@@ -182,13 +164,9 @@ export const SessionReplay = () => {
                             src="../../../../contents/images/products/session-replay/session-replay.png"
                             alt="A session recording of a fake application called Hogflix"
                         />
-                    </motion.div>
+                    </div>
                     <div className="absolute bottom-0 right-1 md:hidden">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
+                        <div>
                             <StaticImage
                                 placeholder="none"
                                 quality={100}
@@ -196,7 +174,7 @@ export const SessionReplay = () => {
                                 src="./images/session-recording-hog.png"
                                 alt=""
                             />
-                        </motion.div>
+                        </div>
                     </div>
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
@@ -217,11 +195,7 @@ export const SessionReplay = () => {
                         </CallToAction>
                     </Content>
                     <div className="absolute bottom-0 right-1 hidden md:block">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
+                        <div>
                             <StaticImage
                                 placeholder="none"
                                 quality={100}
@@ -229,7 +203,7 @@ export const SessionReplay = () => {
                                 src="./images/session-recording-hog.png"
                                 alt=""
                             />
-                        </motion.div>
+                        </div>
                     </div>
                 </ContentContainer>
             </div>
@@ -247,12 +221,7 @@ export const FeatureFlags = () => {
         <div className=" md:bg-[#29DBBB] rounded-md text-primary flex items-end h-full">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
-                    <motion.div
-                        transition={{ delay: 0.3 }}
-                        className="absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10"
-                        initial={{ translateY: '100%' }}
-                        animate={{ translateY: 0 }}
-                    >
+                    <div className="absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10">
                         <StaticImage
                             placeholder="none"
                             quality={100}
@@ -260,13 +229,8 @@ export const FeatureFlags = () => {
                             src="./images/feature-flags-1.png"
                             alt="A code snippet to check if the feature flag 'nav' is enabled"
                         />
-                    </motion.div>
-                    <motion.div
-                        transition={{ delay: 0.2 }}
-                        className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5"
-                        initial={{ translateY: '100%' }}
-                        animate={{ translateY: 0 }}
-                    >
+                    </div>
+                    <div className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5">
                         <StaticImage
                             placeholder="none"
                             quality={100}
@@ -274,13 +238,9 @@ export const FeatureFlags = () => {
                             src="./images/feature-flags-2.png"
                             alt="A filter for rolling out a feature flag to 50% of organizations in a cohort"
                         />
-                    </motion.div>
+                    </div>
                     <div className="absolute bottom-0 right-0 md:hidden z-10">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
+                        <div>
                             <StaticImage
                                 alt=""
                                 placeholder="none"
@@ -288,7 +248,7 @@ export const FeatureFlags = () => {
                                 className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
                                 src="./images/feature-flags-hog.png"
                             />
-                        </motion.div>
+                        </div>
                     </div>
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
@@ -309,11 +269,7 @@ export const FeatureFlags = () => {
                         </CallToAction>
                     </Content>
                     <div className="absolute bottom-0 right-0 md:block hidden">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
+                        <div>
                             <StaticImage
                                 alt=""
                                 placeholder="none"
@@ -321,7 +277,7 @@ export const FeatureFlags = () => {
                                 className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
                                 src="./images/feature-flags-hog.png"
                             />
-                        </motion.div>
+                        </div>
                     </div>
                 </ContentContainer>
             </div>
@@ -340,12 +296,7 @@ export const ABTesting = () => {
         <div className="md:bg-[#9C19BD] rounded-md text-white flex items-end h-full">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px] ">
-                    <motion.div
-                        transition={{ delay: 0.4 }}
-                        className="absolute left-2 top-5 w-[150%] md:w-3/4"
-                        initial={{ translateY: '100%' }}
-                        animate={{ translateY: 0 }}
-                    >
+                    <div className="absolute left-2 top-5 w-[150%] md:w-3/4">
                         <StaticImage
                             alt="A graph depicting an increasing trend line showing improvement in an experiment over time"
                             placeholder="none"
@@ -354,13 +305,8 @@ export const ABTesting = () => {
                             className="w-full rotate-1 shadow-2xl"
                             src="./images/ab-testing-2.png"
                         />
-                    </motion.div>
-                    <motion.div
-                        transition={{ delay: 0.4 }}
-                        className="absolute right-0 -top-2 w-[100%] md:w-3/4"
-                        initial={{ translateY: '100%' }}
-                        animate={{ translateY: 0 }}
-                    >
+                    </div>
+                    <div className="absolute right-0 -top-2 w-[100%] md:w-3/4">
                         <StaticImage
                             alt="A slider set at 20% showing how long an experiment will need to be run in order to get the specified improvement"
                             placeholder="none"
@@ -369,13 +315,9 @@ export const ABTesting = () => {
                             className="w-full -rotate-1 shadow-2xl"
                             src="./images/ab-testing-1.png"
                         />
-                    </motion.div>
+                    </div>
                     <div className="absolute bottom-0 right-0 md:hidden">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
+                        <div>
                             <StaticImage
                                 alt=""
                                 placeholder="none"
@@ -383,7 +325,7 @@ export const ABTesting = () => {
                                 className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
                                 src="./images/experiment-hog.png"
                             />
-                        </motion.div>
+                        </div>
                     </div>
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
@@ -404,11 +346,7 @@ export const ABTesting = () => {
                         </CallToAction>
                     </Content>
                     <div className="absolute bottom-0 right-0 hidden md:block">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
+                        <div>
                             <StaticImage
                                 alt=""
                                 placeholder="none"
@@ -416,7 +354,7 @@ export const ABTesting = () => {
                                 className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
                                 src="./images/experiment-hog.png"
                             />
-                        </motion.div>
+                        </div>
                     </div>
                 </ContentContainer>
             </div>
@@ -434,12 +372,7 @@ export const Cdp = () => {
         <div className="md:bg-[#FCC779] rounded-md text-primary flex items-end h-full">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="flex items-center pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
-                    <motion.div
-                        transition={{ delay: 0.4 }}
-                        className="h-full"
-                        initial={{ translateY: '100%' }}
-                        animate={{ translateY: 0 }}
-                    >
+                    <div className="h-full">
                         <StaticImage
                             alt="A hedgehog standing in front of a leaky pipe of data"
                             placeholder="none"
@@ -448,7 +381,7 @@ export const Cdp = () => {
                             className="w-full h-full"
                             src="../../../../contents/images/products/cdp/pipeline-hog.png"
                         />
-                    </motion.div>
+                    </div>
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
@@ -467,23 +400,6 @@ export const Cdp = () => {
                             Browse connections
                         </CallToAction>
                     </Content>
-                    {/*
-                <div className="absolute bottom-0 right-0">
-                    <motion.div
-                        transition={{ delay: 0.5 }}
-                        initial={{ translateX: '100%' }}
-                        animate={{ translateX: 0 }}
-                    >
-                        <StaticImage
-                            alt=""
-                            placeholder="none"
-                            quality={100}
-                            className="w-full max-w-[250px] xl:max-w-[480px]"
-                            src="./images/event-pipelines-hog.png"
-                        />
-                    </motion.div>
-                </div>
-                */}
                 </ContentContainer>
             </div>
         </div>
@@ -495,12 +411,7 @@ export const DataWarehouse = () => {
         <div className="md:bg-[#29DBBB] rounded-md text-primary flex items-end h-full">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                    <motion.div
-                        transition={{ delay: 0.4 }}
-                        className="h-full"
-                        initial={{ translateY: '100%' }}
-                        animate={{ translateY: 0 }}
-                    >
+                    <div className="h-full">
                         <StaticImage
                             alt="An artist's depiction of a data warehouse"
                             placeholder="none"
@@ -509,13 +420,9 @@ export const DataWarehouse = () => {
                             className="w-full h-full py-10 max-h-96"
                             src="../../../../contents/images/products/data-warehouse/data-warehouse.png"
                         />
-                    </motion.div>
+                    </div>
                     <div className="absolute bottom-0 right-4 md:hidden">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
+                        <div>
                             <StaticImage
                                 alt=""
                                 placeholder="none"
@@ -523,7 +430,7 @@ export const DataWarehouse = () => {
                                 className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
                                 src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
                             />
-                        </motion.div>
+                        </div>
                     </div>
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
@@ -547,11 +454,7 @@ export const DataWarehouse = () => {
                         </CallToAction>
                     </Content>
                     <div className="absolute bottom-0 right-4 md:block hidden">
-                        <motion.div
-                            transition={{ delay: 0.5 }}
-                            initial={{ translateX: '100%' }}
-                            animate={{ translateX: 0 }}
-                        >
+                        <div>
                             <StaticImage
                                 alt=""
                                 placeholder="none"
@@ -559,7 +462,7 @@ export const DataWarehouse = () => {
                                 className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
                                 src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
                             />
-                        </motion.div>
+                        </div>
                     </div>
                 </ContentContainer>
             </div>
@@ -578,12 +481,7 @@ export const Sql = () => {
         <div className="md:bg-[#D42F18] rounded-md text-white flex items-end h-full">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
-                    <motion.div
-                        transition={{ delay: 0.4 }}
-                        className="h-full"
-                        initial={{ translateY: '100%' }}
-                        animate={{ translateY: 0 }}
-                    >
+                    <div className="h-full">
                         <StaticImage
                             alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
                             placeholder="none"
@@ -592,7 +490,7 @@ export const Sql = () => {
                             className="w-full h-full py-10 max-h-96"
                             src="../../../../contents/images/products/sql/sql-hog.png"
                         />
-                    </motion.div>
+                    </div>
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
@@ -621,12 +519,7 @@ export const Api = () => {
         <div className="bg-[#EB9D2A] rounded-md flex items-end h-full">
             <div className="relative grid grid-cols-16 gap-2 lg:gap-4 min-h-[300px] lg:min-h-[400px] w-full">
                 <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
-                    <motion.div
-                        transition={{ delay: 0.4 }}
-                        className="h-full"
-                        initial={{ translateY: '100%' }}
-                        animate={{ translateY: 0 }}
-                    >
+                    <div className="h-full">
                         <StaticImage
                             alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
                             placeholder="none"
@@ -635,7 +528,7 @@ export const Api = () => {
                             className="w-full h-full py-10"
                             src="../../../../contents/images/products/api/coder-hog.png"
                         />
-                    </motion.div>
+                    </div>
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
