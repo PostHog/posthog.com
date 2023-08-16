@@ -1,6 +1,6 @@
 ---
 name: Bug/404 report for PostHog.com 
-about: Found a bug on the site? Let us know
+about: For site bugs only. Please post app bugs in the correct repo. 
 title: "Bug Report: "
 labels: 
 assignees: 
