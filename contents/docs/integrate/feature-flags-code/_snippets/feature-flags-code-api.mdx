@@ -55,6 +55,8 @@ import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-
 
 <IncludePropertyInEvents />
 
+To do this, include the `$feature/feature_flag_name` property in your event:
+
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
     "api_key": "<ph_project_api_key>",
