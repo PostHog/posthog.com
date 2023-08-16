@@ -24,7 +24,7 @@ if (posthog.getFeatureFlag('flag-key')  == 'variant-key') { // replace 'variant-
 
 Every time a user loads a page, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in a cookie.
 
-This means that for most pages, the feature flags will be available immediately – **except for the first time a user visits**.
+This means that for most pages, the feature flags are available immediately – **except for the first time a user visits**.
 
 To handle this, you can use the `onFeatureFlags` callback to wait for the feature flag request to finish:
 
@@ -39,6 +39,6 @@ posthog.onFeatureFlags(function () {
 
 ### Reloading feature flags
 
-Feature flag values are cached. If something has change with your user and you'd like to refetch their flag values, call `posthog.reloadFeatureFlags()`.
+Feature flag values are cached. If something changed with your user and you want to refetch their flag values, call `posthog.reloadFeatureFlags()`.
 
 

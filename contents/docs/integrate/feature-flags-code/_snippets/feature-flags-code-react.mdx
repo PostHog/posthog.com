@@ -3,7 +3,7 @@ There are two ways to implement feature flags in React:
 1. Using hooks.
 2. Using the `<PostHogFeature>` component.
 
-### Method 1: Using hooks
+## Method 1: Using hooks
 
 PostHog provides several hooks to make it easy to use feature flags in your React app.
 
@@ -14,7 +14,7 @@ PostHog provides several hooks to make it easy to use feature flags in your Reac
 | `useFeatureFlagVariantKey` | Returns the variant key of the feature flag. |
 | `useActiveFeatureFlags` | Returns an array of active feature flags. |
 
-#### Example 1: Using a boolean feature flag
+### Example 1: Using a boolean feature flag
 
 ```react
 import { useFeatureFlagEnabled } from 'posthog-js/react'
@@ -44,7 +44,7 @@ function App() {
 export default App;
 ```
 
-#### Example 2: Using a multivariate feature flag
+### Example 2: Using a multivariate feature flag
 
 ```react
 import { useFeatureFlagVariantKey } from 'posthog-js/react'
@@ -84,7 +84,7 @@ function App() {
 export default App;
 ```
 
-#### Example 3: Using a flag payload
+### Example 3: Using a flag payload
 
 ```react
 import { useFeatureFlagPayload } from 'posthog-js/react'
@@ -110,11 +110,11 @@ function App() {
 }
 ```
 
-### Method 2: Using the PostHogFeature component
+## Method 2: Using the PostHogFeature component
 
-The PostHogFeature simplifies code by handling feature flag related logic. 
+The `PostHogFeature` component simplifies code by handling feature flag related logic. 
 
-It also has the added benefit of capturing metrics, like how many times a user interacts with this feature automatically.
+It also automatically captures metrics, like how many times a user interacts with this feature.
 
 > **Note:** You still need the [`PostHogProvider`](/docs/libraries/react#installation) at the top level for this to work.
 
@@ -142,7 +142,7 @@ function App() {
 
 If you wish to customise logic around when the component is considered visible, you can pass in `visibilityObserverOptions` to the feature. These take the same options as the [IntersectionObserver API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). By default, we use a threshold of 0.1. 
 
-#### Payloads
+### Payloads
 
 If your flag has a payload, you can pass a function to children whose first argument is the payload. For example:
 
