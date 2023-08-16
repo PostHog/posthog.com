@@ -28,7 +28,6 @@ After running the survey, apply the following calculation: `NPS = % OF PROMOTERS
 This calculation returns a result ranging from -100 to +100. The higher the score, the better. 
 
 ### Creating an NPS survey in PostHog
-
 The first step is to [create a new survey in PostHog](https://app.posthog.com/surveys/new), using the Surveys tool. If it isn’t already selected, set the Display Mode to ‘Popover’.
 
 You can name the survey whatever you want, but it’s important that the customer-facing element asks the question in the same way as any other NPS survey.
