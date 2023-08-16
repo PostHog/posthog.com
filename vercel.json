@@ -368,7 +368,7 @@
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         {
             "source": "/docs/self-host/migrate-to-cloud",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/trial", "destination": "/pricing" },
