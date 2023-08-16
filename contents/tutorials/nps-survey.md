@@ -37,7 +37,7 @@ To do this, enter **‘How likely are you to recommend this product to a friend?
 
 NPS surveys collect responses on a scale of 1-10, so set the Question Type to ‘Rating’. Change the Display Type to ‘Number’, and the Scale to ‘1 - 10’. 
 
-We want to make sure that users definitely understand what each number means, so set the Lower Bound Label to ‘Unlikely’ and the Upper Bound Label to ‘Likely’. You should now see a complete NPS survey in the live preview, and can tailor the appearance to match your brand. 
+We want to make sure that users understand what each number means, so set the Lower Bound Label to ‘Unlikely’ and the Upper Bound Label to ‘Likely’. You should now see a complete NPS survey in the live preview, and can tailor the appearance to match your brand. 
 
 ![Create an NPS survey](../images/tutorials/nps-survey/nps_survey_1.png)
 
