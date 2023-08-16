@@ -26,6 +26,6 @@ Regardless, the person paged is responsible for administration of the page/incid
 
 If you're in a product team, it's tempting to think that being on-call doesn't apply to you, or that when you're on-call you can just hand everything off to the infrastructure team.
 
-*Event though*, as we grow, we can't all have deep expertise in every part of the system, understanding the impacts of alerts and incidents helps us improve the work we do, and how we prioritise reliability and observability. Getting better at avoiding incidents is much more effective than getting better at handling them.
+*Even though*, as we grow, we can't all have deep expertise in every part of the system, understanding the impacts of alerts and incidents helps us improve the work we do, and how we prioritise reliability and observability. Getting better at avoiding incidents is much more effective than getting better at handling them.
 
 It's important that when you're in a product team you at least have a basic understanding of how our software is deployed, where the weak points in our systems are, and what the various failure modes are. This way you'll be less likely to ship code that accidentally takes down PostHog, and more likely to understand the tradeoffs involved.
