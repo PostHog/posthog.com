@@ -25,7 +25,7 @@ Obviously, the more promoters you have, the better!
 
 After running the survey, apply the following calculation: `NPS = % OF PROMOTERS - % DETRACTORS`.
 
-This calculation returns a result ranging from -100 to +100. The higher the score, the better. 
+This calculation returns a result ranging from -100 to +100. The higher the score, the better - and anything above +70 is indicative of a market-leading product.
 
 ### Creating an NPS survey in PostHog
 The first step is to [create a new survey in PostHog](https://app.posthog.com/surveys/new), using the Surveys tool. If it isn’t already selected, set the Display Mode to ‘Popover’.
@@ -58,44 +58,46 @@ Next, you can save your survey and press Launch to start collecting responses.
 ### Calculating your NPS score in PostHog
 Once you’ve launched your survey, the next step is to wait for some responses. After that, it’s time to analyze the results!
 
-Start by taking note of the survey ID for your NPS survey, which you can find in the URL of the results page.
+Head to the Insights section and [create a new Trends insight](https://app.posthog.com/insights/new). Create a global filter using the 'Survey name' property to match your NPS survey, so that we're only judging results from the NPS survey specifically.
 
-![PostHog survey ID](../images/tutorials/nps-survey/nps_survey_2.png)
+![PostHog net promoter score](../images/tutorials/nps-survey/nps_survey_6.png)
 
-> **Can't I use `Survey Name` instead?** Technically, yes. However because it's possible to create surveys with similar names or to rename your survey, the survey ID is a more stable option.
+Next, set the first series event as ‘Survey sent’. Duplicate this series three times and rename each series for clarity by clicking the pencil icon. We'll label series A, B, and C as Detractors, Passives, and Promoters respectively.
 
-Next, head to the Insights section and [create a new Trends insight](https://app.posthog.com/insights/new). Set the first series event as ‘Survey sent’ and create a filter to specify the Survey ID. Duplicate this series three times.
+> **💡 Tip: Specifying surveys using Survey ID**
+>
+> If you have multiple surveys with a similar name, you may not want to use the 'Survey Name' property. In such a case, you can use 'Survey ID' to specify a survey instead. IDs are listed in the URL for each survey. 
+>
+> ![PostHog survey ID](../images/tutorials/nps-survey/nps_survey_2.png)
 
-![PostHog NPS filters](../images/tutorials/nps-survey/nps_survey_3.png)
+Now it's time to start grouping results. For the first series, add a filter which uses the 'Survey Response' event and filters so that that event is equal to 1, 2, 3, 4, 5, or 6. This is your Detractor cohort. 
 
-Next, we start grouping results into Detractors, Passives and Promoters. For the first series, add an additional filter which uses the 'Survey Response' event and filters so that that event is equal to 1, 2, 3, 4, 5, and 6. This is your Detractor cohort. 
+![PostHog NPS filters](../images/tutorials/nps-survey/nps_survey_7.png)
 
 Repeat this step for the subsequent series, using the values 7, and 8. These are your Passives. 
 
 Repeat it once more for the final series, using the values 9, and 10. These are your Promoters. 
 
-You can rename series for clarity using the pencil icon. 
-
-![PostHog NPS insight](../images/tutorials/nps-survey/nps_survey_4.png)
+![PostHog NPS insight](../images/tutorials/nps-survey/nps_survey_8.png)
 
 Define your time period (typically you’d want to cover at least a few weeks), and the table below will tell you how many users are in each segment. 
 
-Next, it’s time to apply the NPS calculation. You could do this manually outside of PostHog, but it’s better to do it in PostHog using the Formula mode. This way, you can return to the insight whenever you want to get an accurate, rolling read of your NPS. 
+Next, it’s time to apply the NPS calculation. You could do this manually outside of PostHog, but it’s better to do it in PostHog using the Formula mode. This way, you can return to the insight whenever you want to get an accurate read of your NPS over any time period.
 
-Select 'Enable Formula Mode' about the event series to get started, and enter the following formula:
+Select 'Enable Formula Mode' to get started, and enter the following formula:
 
 `(C / (A+B+C) * 100) - (A / (A+B+C)* 100)`
 
-> This formula assumes that A is your Detractors series, B is your Passives series, and C is your Promoters series. If they are not, you'll need to tailor the formula to match.
+> **⚠️ Important**
+> 
+> This formula assumes that A is your Detractors series, B is your Passives series, and C is your Promoters series. If they are not, you'll need to tailor the formula to match, or reconfigure your insight.
 
-Save your insight and the resulting figure is your NPS score. 
+Save your insight. The resulting figure is your NPS score! 
 
 ### What is a good NPS score?
-NPS scores range from -100 to +100. 
+NPS scores can range from -100 to +100. Anything above 0 is good and means you have more promoters than passives or detractors. Anything below 0 indicates users are unhappy with your product and your growth may be in decline. Market-leading companies generally score +70 upwards.
 
-Anything above 0 is good and means you have more promoters than passives or detractors. 
-
-Anything below 0 indicates users are unhappy with your product and your growth may be in decline. Market-leading companies generally score +70 upwards. 
+Benchmark NPS scores can vary by industry, but typically you want to aim for a _minimum_ NPS score of +50. If you have a score that's below +50 then we'd recommend running further surveys and speaking to your users directly in order to understand their concerns, so you can make product improvements. 
 
 ## Further reading
 - [How to create custom surveys](/tutorials/survey)
