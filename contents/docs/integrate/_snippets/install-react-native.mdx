@@ -20,7 +20,7 @@ npm i -s posthog-react-native @react-native-async-storage/async-storage react-na
 
 The recommended way to set up PostHog for React Native is to use the `PostHogProvider` which utilizes the Context API to pass the PostHog client around, enable autocapture, and ensure that the queue is flushed at the right time:
 
-```js
+```react-native
 // App.(js|ts)
 import { usePostHog, PostHogProvider } from 'posthog-react-native'
 ...
@@ -52,7 +52,7 @@ const MyComponent = () => {
 
 Due to the async nature of React Native, PostHog needs to be initialized asynchronously for the persisted state to load properly. The `PosthogProvider` takes care of this under-the-hood but you can alternatively create the instance yourself like so:
 
-```tsx
+```react-native
 // posthog.ts
 import PostHog from 'posthog-react-native'
 
