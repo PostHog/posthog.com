@@ -12,7 +12,7 @@ Make sure you've downloaded the PagerDuty app for your phone, and that you've se
 
 ## What to do when you get paged
 
-A chunk of our high-frequency alerts have runbooks attached, most of which live [in the public runbooks section](https://posthog.com/docs/runbook) of our docs or in [our private runbooks](http://go/runbooks). The runbook should tell you what to look at and easy fixes if there are any. Every alert also has a link to the grafana graph that triggered the alert.
+All of our alerts should have runbooks attached, most of these are in [our private runbooks](http://go/runbooks). The runbook should tell you what to look at and easy fixes if there are any. Every alert also has a link to the grafana graph that triggered the alert.
 
 If this looks like the page [should be raised as an incident](https://posthog.com/handbook/engineering/incidents#when-to-raise-an-incident), [go raise an incident](https://posthog.com/handbook/engineering/incidents).
 
