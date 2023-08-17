@@ -163,21 +163,12 @@ const Post = ({
 
 const getCategoryParams = (root) => (root !== 'posts' ? { filters: { post_category: { folder: { $eq: root } } } } : {})
 
-const getCategoryLabels = (selectedCategories) =>
-    selectedCategories?.length <= 0
-        ? 'All posts'
-        : selectedCategories.map(({ attributes: { label } }) => pluralize(label)).join(', ')
+const getCategoryLabels = (selectedCategories) => {
+    const categories = Object.keys(selectedCategories)
+    categories?.length <= 0 ? 'All posts' : categories.map((label) => pluralize(label)).join(', ')
+}
 
-function PostsListing({
-    articleView,
-    posts,
-    isLoading,
-    fetchMore,
-    setParams,
-    root,
-    setSelectedCategories,
-    selectedCategories,
-}) {
+function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelectedCategories, selectedCategories }) {
     const breakpoints = useBreakpoint()
 
     return articleView && breakpoints.md ? null : (
@@ -185,7 +176,6 @@ function PostsListing({
             <div className="my-4 flex justify-between space-x-2">
                 <h5 className="m-0 line-clamp-1 leading-[2]">{getCategoryLabels(selectedCategories)}</h5>
                 <Categories
-                    setParams={setParams}
                     setSelectedCategories={setSelectedCategories}
                     selectedCategories={selectedCategories}
                     root={root}
@@ -323,6 +313,38 @@ export default function Posts({ children, articleView }) {
         }
     }, [pathname])
 
+    useEffect(() => {
+        const tags = []
+        const categories = []
+        Object.keys(selectedCategories).forEach((category) => {
+            if (selectedCategories[category].length <= 0) {
+                categories.push(category)
+            } else {
+                selectedCategories[category].forEach((tag) => tags.push(tag))
+            }
+        })
+        setParams({
+            filters: {
+                $or: [
+                    {
+                        post_category: {
+                            label: {
+                                $in: categories,
+                            },
+                        },
+                    },
+                    {
+                        post_tag: {
+                            label: {
+                                $in: tags,
+                            },
+                        },
+                    },
+                ],
+            },
+        })
+    }, [selectedCategories])
+
     return (
         <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
             <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
@@ -379,7 +401,6 @@ export default function Posts({ children, articleView }) {
                         selectedCategories={selectedCategories}
                         setSelectedCategories={setSelectedCategories}
                         root={root}
-                        setParams={setParams}
                         fetchMore={fetchMore}
                         posts={posts}
                         isLoading={isLoading}
