@@ -8,13 +8,13 @@ availability:
     enterprise: full
 ---
 
-> **Note: Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](https://posthog.com/docs/libraries/ruby), [Go](https://posthog.com/docs/libraries/go), and [Python](https://posthog.com/docs/libraries/python) SDKs**
+> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](https://posthog.com/docs/libraries/ruby), [Go](https://posthog.com/docs/libraries/go), and [Python](https://posthog.com/docs/libraries/python) SDKs
 
 Evaluating feature flags requires making a request to PostHog. However, you can improve performance by evaluating a flag locally instead – without having to make a request to PostHog.
 
 We consider it best practice to use local evaluation flags where possible because this method enables you to resolve flags faster and require fewer API calls.
 
-There are x steps to enable local evaluation:
+There are 3 steps to enable local evaluation:
 
 ## Step 1: Obtain a personal API key
 
@@ -28,7 +28,7 @@ When you initialize PostHog with your personal API key, PostHog will use your th
 
 By default, PostHog fetches these definitions every 30 seconds (or 5 minutes in the Go SDK). However, you can change this frequency by specifying a different value in the polling interval argument.
 
-> **Note:** For billing purposes, we count the request to fetch the feature flag definitions as being equivalent to 10 `decide` requests. 
+> **Note:** For billing purposes, we count the request to fetch the feature flag definitions as being equivalent to `10 decide` requests. 
 > 
 > This is because one of these requests can compute feature flags for hundreds or thousands of users. So this ensures local evaluation is priced fairly while remaining the most cost-effective option (by far!). 
 
