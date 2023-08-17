@@ -20,7 +20,7 @@ If you are unsure how to proceed, escalate to the [secondary for the relevant te
 
 They will either resolve the issue or shadow you while you figure out how to resolve it. The ideal is for them _not_ to take over at this point, as otherwise you won't be able to learn from this page. But, as we grow, we can't all have deep expertise in every part of the system, and sometimes it makes sense to split the work needed to resolve the alert.
 
-Regardless, the person paged is responsible for administration of the page/incident. Tasks like keeping our external status page updated, organising and writing the post incident review, and updating the runbook.
+Regardless, you as the original person paged are responsible for administration of the page/incident. Tasks like keeping our external status page updated, organising and writing the post incident review, and updating the runbook.
 
 ## Why is everyone responsible for pages?
 
