@@ -1,133 +1,148 @@
 ---
-date: 2023-03-06
-title: "10x engineers talk to users"
+date: 2023-09-20
+title: "Recommended reading from the PostHog team"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
-  - luke-harries
+  - joe-martin
 featuredImage: ../images/blog/super-hog-pink.png
 featuredImageType: full
-category: Engineering
+category: Inside PostHog
 tags:
   - Guides
-  - Product engineers
 ---
 
-I believe the best way to become a 10x engineer is to zoom out and solve for user impact. Engineers and founders need to deeply understand and care about their users. In doing so, you generate true leverage by choosing the right problem, building the right solution, and solving their "hair-on-fire" problems.
+There are thousands of books which will tell you how to build a product and launch a new startup, but it can be hard to know which are actually worth reading and which are full of generic advice (or written by AI). If you’re looking for inspiration, where should you turn?
 
-The best way to do this? Speak directly to them.
+The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend. 
 
-## Solving the information bottleneck
+![ask iwata](../images/tracks/ask-iwata.jpg)
 
-In traditional tech companies, information flows from the user to the product manager (PM) by an interview, and then from the PM to the engineer through a bunch of tickets:
+## [Ask Iwata: Words of Wisdom from Nintendo’s Legendary CEO by Hobonichi](https://www.goodreads.com/book/show/54736620-ask-iwata)
+**Recommended by [Joe Martin, Product Marketing](/community/profiles/59)**
 
-![PM to engineer](../images/blog/10x-engineers-do-user-interviews/pm-to-engineer.png)
+Former games journalist Joe has repeatedly recommended this collection of essays by Satoro Iwata in our team's Slack group. It’s one of the only books about management that he’s ever been able to finish. 
 
-At each stage, important context is lost. Information flows one way, so you can’t go deeper on the important areas, and engineers lose agency in what they're building and why.
+“What I love is that it’s so humble in its approach,” says Joe. “Iwata doesn’t gussy things up into a rigid framework for the sake of seeming like an expert, he just lays out his personal philosophy plainly and with plenty of examples. Iwata wasn’t a forceful idealogue; he wasn’t like Steve Jobs or Elon Musk. He believed in empathetic leadership, kindness and providing space for others. I really respect and respond well to that.”
 
-Here's what it looks like when engineers talk directly to users:
+“I don’t agree about the importance of a dress code, though.”
 
-![Direct user-Engineer Interaction](../images/blog/10x-engineers-do-user-interviews/direct-interaction.png)
+> **Putting it into practice:** We encourage everyone at PostHog to [write a personal README](/team) about their style of work and how they like to collaborate and be communicated with. 
 
-Information moves quickly and in both directions, boosting the signal. By increasing the signal you can quickly cut scope, realize you’re tackling the wrong problem, or come up with a more elegant solution – something engineers can do most effectively because they have the background on the existing architecture and components. 
+![from switzerland](../images/tracks/from-switzerland.jpg)
 
-Companies still need product managers, but it's easier to ship faster and better work when engineers behave like [product engineers](/blog/what-is-a-product-engineer) and talk to users. And in doing so, product managers are freed from writing tickets to spend more time exploring bigger opportunities.
+## [From Switzerland by Counterprint](https://www.goodreads.com/book/show/60695040-from-switzerland)
+**Recommended by [Lottie Coxon, Graphic Designer](/community/profiles/227)**
 
-> 💬 **Sidenote:** PostHog's session recording feature came about because one of our engineers took the time to talk to a user and realized the best solution was integrating recordings with our existing product analytics tool. One hackathon later, we had a prototype. Session recording is now a core part of our product and was a key driver in our strategy shift from a pure, self-hosted product analytics tool to an all-in-one product OS.
+Lottie claims she doesn’t read very much, but when pressed for recommendations offered up From Switzerland as a representative of the entire Counterprint collection. Each book in the series collects work from some of the best agencies, designers and artists in each country — Switzerland, in this case.
 
-## How to talk to users (as an engineer)
+“This whole series is a good reset button for any designer stuck for inspiration,” says our artist-in-residence and the maestro behind [our mascot](/community/profiles/720). “It has a heavy focus on typographical print case studies, with experimental use of layout, negative space and color.”
 
-Automation is crucial here. Too much friction and you’ll ride an initial burst of motivation followed by regression to the old way of heads-down coding.
+“Honestly, I'm just a sucker for Swiss design.”
 
-Step one is to find users to talk to. You can define your segment using company traits, user traits, and behavioral information. A data warehouse or analytics platform like PostHog can be helpful here.
+> **Putting it into practice:** Our approach to design has evolved a lot over time, [as has our brand](/blog/postmortem-rebrand). Iteration is part of how we keep things fresh!
 
-Next, it's time to bulk email your segment. The simplest way is to email out a Calendly link in batches via bcc’ed using a message like this:
+![sand hill road](./images/tracks/sand-hill-road.jpg)
 
-```jsx
-Hi! I’m {YOUR NAME}, a software engineer at {YOUR COMPANY}. I’m currently working on {FEATURE / PROBLEM} and would love your input on it. Free for a quick call at any of these times? {INSERT CALENDLY LINK} 
-```
+## [Secrets of Sand Hill Road by Scott Kapur](https://www.goodreads.com/book/show/42348376-secrets-of-sand-hill-road)
+**Recommended by [James Hawkins, CEO & Co-founder](/community/profiles/71)**
 
-This is a good start, but you should move to an in-app prompt as soon as you can to save time and increase conversion – we built PostHog's [user interview app](https://posthog.com/tutorials/feedback-interviews-site-apps#setting-up-the-user-interview-app) (pictured below) just for this.  
+James reads a lot and could likely recommend enough books to fill an article all on his own — but when we asked for recommendations for first-time founders, this was one of the first books which came to mind. It focuses on explaining how startups operate from a VC’s perspective.
 
-![User interview app](../images/blog/10x-engineers-do-user-interviews/user-interview-app.png)
+“Sand Hill Road was helpful for me when we started PostHog because we didn’t have any Silicon Valley insiders in our network,” he explained. “It taught me that all the returns in venture are based on just a tiny handful of companies — they simply can’t make their model work from companies that don’t totally smash it.” 
 
-We’ve seen an increase in conversion from outreach to booking by ~5x (from 3% to 16%) since we started using in-app prompts, a reduction in email spam, and better organization by doing so. A reward like a $30 merch voucher helps.
+“If you’re thinking about how to finance a business, it helps to be naturally aligned with this — which we are, it turns out!”
 
-## The two basic types of user interview
+> **Putting it into practice:** Understanding how VCs think about startup has helped us raise funding, even when [we’ve decided to do it ahead of schedule](/blog/why-we-raised-a-15m-series-b-ahead-of-schedule)!
 
-Effective user interviews need a goal and you have two basic options:
+![messy middle](..images/tracks/messy-middle.jpg)
 
-### 1. Problem exploration
+## [The Messy Middle by Scott Belsky](https://www.goodreads.com/book/show/40179007-the-messy-middle)
+**Recommended by [Charles Cook, Operations & Marketing](/community/profiles/254)**
 
-Find the biggest hair-on-fire problem and then deeply understand the parameters. Focus on the concrete times they’ve experienced the problem.
+If there’s one person whose book recommendations are really worth listening to, then it’s Charles. Not only is he the leader of both our Operations and Marketing teams — he’s _also_ the founder of our internal book club.
 
-Example questions:
-- How have they tried to solve it before?
-- What do they think of the other solutions on the market?
-- Would they pay for it?
-- Can you talk me through the last time you experienced this problem?
-- Is this actually a problem for you?
+“I like The Messy Middle because, as the title suggests, it covers the really important interim period for startups that are starting to scale,” says Charles. “Most startup type books cover either the very beginning when you’re validating your idea, or the later stages when you are 50+ people. This book is full of specific, actionable advice for the time in between those stages.”
 
-### 2. Solution validation
+> **Putting it into practice:** When it comes to ops, there’s no silver bullet. Instead, [you need a whole toolkit](/blog/startup-ops-toolkit) to help you solve messy problems!
 
-You’ve identified the hair-on-fire problem and understand it well. Now you’re validating whether your solution actually solves it. Focus on presenting the user with quick prototypes.
+![high output management](../images/tracks/high-output.jpg)
 
-Example activities:
+## [High Output Management by Andrew Grove](https://www.goodreads.com/book/show/324750.High_Output_Management)
+**Recommended by [Grace McKenzie, Finance & Operations Lead](/community/profiles/718)**
 
- - Have the user click through a Figma prototype and think out-loud. Ask them to complete the high-level goal and see where they get stuck. Ask what they think the text means.
+Andrew Grove was Intel’s third employee, third CEO, and the man who led the company to the world’s largest producer of semiconductors. He also somehow found time to write this book about organizational theory which is beloved by our chief organizer, Grace.
 
-- Send a few mockups of the solutions over Slack to the user from the problem exploration interview and ask if it solves the problem.
+“High Output Management is filled with light-touch and thoughtful management advice which can lead to increases in productivity,” says Grace. “In particular it advocates for the importance of gathering relevant information, making decisive decisions, and nudging teams towards a goal rather than setting a specific direction.”
 
-- Create a mock-up and have a call with the user to see if they will commit to paying some amount if you build it.
+> **Putting it into practice:** We’ve templated [our approach to goal-setting](/handbook/company/goal-setting) so that we can make fast decisions, and not waste time discussing formats. 
 
-## Building async feedback loops
+![no rules rules](../images/tracks/no-rules-rules.jpg)
 
-User interviews are powerful but slow. You can quickly narrow down the most important problem and gather all the parameters, but it normally takes a few days to get on the call.
+## [No Rules Rules by Reed Hastings](https://www.goodreads.com/book/show/49099937-no-rules-rules) 
+**Recommended by [James Hawkins, CEO & Co-founder](/community/profiles/71)**
 
-After the initial discussion, get your user on Slack for B2B or iMessage for B2C – or whatever messaging tool works best for them. This will enable you to quickly follow up with mockups or further questions during the solution validation phase.
+When it came to envisioning the sort of culture he wanted to build at PostHog, no other book was as influential for James as this exploration of Netflix’s company culture. PostHog doesn’t copy Netflix’s approach completely, but we definitely share some of the underlying philosophies. 
 
-Here's an example from Li on our [Feature Success Team](/handbook/small-teams/feature-success) seeking feedback on our feature flag permissioning. She received a response 3 minutes (!!) later.
+“No Rules Rules clarified how we should totally trust each person here,” says James. “It also helped us realize just how much a smaller, stronger, and better paid group of people can accomplish…It’s just so counter to the way that other companies operate, where they focus on the whole function.”
 
-![Slack feedback on feature flags](../images/blog/10x-engineers-do-user-interviews/feature-flags-feedback.png)
+> **Putting it into practice:** We validated a lot of Netflix’s rules when [hiring our first five employees](/blog/posthog-first-five) — and we’ve rolled them into [our overall culture](/about).
 
-The more important the problem for the user, the quicker they'll respond.
+![getting real](../images/tracks/getting-real.png)
 
-## Beware solution ideas from users, reframe them as problems
+## [Getting Real by Basecamp](https://basecamp.com/gettingreal)
+**Recommended by [David Newell, Software Engineer](/community/profiles/860)**
 
-During interviews, users will often suggest an idea for the solution of what they want. It’s crucial to not accept this at face value and instead ask “Why?” until you can reframe it as a problem with the appropriate context. 
+Basecamp’s online manifesto about how they build products echoes a lot of the same principles we believe in, from the importance of iterative development to the focus on user feedback. David, who built several successful products before joining PostHog, thinks it’s a resource everyone can benefit from — not just engineers. 
 
-Often the solution they propose doesn’t actually solve the problem they experienced, or there’s a much better solution that you can build instead. But most times it's not even a problem they are facing at all! Treat the solution idea as an ember and get curious about it.
+“It very simply talks about avoiding ‘work work’,” says David. “The focus on getting your product in front of customers as early as possible so that you avoid a bunch of implicit assumptions and sunk costs is particularly resonant.” 
 
-*There's an entire [wikipedia page](https://en.wikipedia.org/wiki/XY_problem) dedicated to this.*
+> **Putting it into practice:** User feedback is _really_ important to us. So important that [we encourage everyone to get it!](/handbook/product/user-feedback)
 
-That said, be careful not to go too far the other way and generalize every problem. The art of product is using your judgment.
+![continuous discovery habits](../images/tracks/continuous-discovery.jpg)
 
-![XKCD: The general problem](../images/blog/10x-engineers-do-user-interviews/the-general-problem.png)
+## [Continuous Discovery Habits by Terra Torres](https://www.goodreads.com/book/show/58046715-continuous-discovery-habits) 
+**Recommended by [Annika Schmid, Product Manager](/community/profiles/221)**
 
-For example, quickly shipping small usability improvements based on feedback is a great way to delight users, generate goodwill, and encourage more relevant feedback. 
+In addition to the The Mom Test, Annika recommends this book for its practical advice on gathering information from users and turning that information into actionable change. 
 
-## My challenge to you: Book a user interview this week
+“It explains a method around continuously talking to users as opposed to doing interviews in big batches around specific topics, like larger organizations do,” says Annika. “I think it’s particularly useful for startups and it’s something we definitely do at PostHog.”
 
-We see the benefits of engineers speaking directly to users every day at PostHog – important problems being solved, and better products being shipped. But you probably won't believe me until you’ve done a few interviews yourself and realized what someone wrote on a ticket is completely different from reality.
+> **Putting it into practice:** Talking to users is great, but only if you invest the time in turning it into [actionable snapshots](/blog/interview-snapshot-guide).
 
-So here’s the challenge: **book your first user interview this week**. *Add a reminder on your phone now*
+![the mom test](../images/tracks/mom-test.jpg)
 
-It will take less than 15 minutes to set up. How? Create a Calendly link and connect it to your Google Meet and Google Calendar. Grab a list of 30-50 customer emails and send out the following message via bcc:
+## [The Mom Test by Rob Fitzpatrick](https://www.goodreads.com/book/show/52283963-the-mom-test)
+**Recommended by [basically everyone](/team)**
 
-```jsx
-Hi! I’m {YOUR NAME}, a software engineer at {YOUR COMPANY}. I’m currently working on {FEATURE / PROBLEM} and would love your input on it. Free for a quick call at any of these times? {INSERT CALENDLY LINK} 
-```
+One of the most universally popular books among the team (shortly followed by The Design of Everyday Things by Dan Norman), The Mom Test has helped shape the way we think about product design and user feedback at a fundamental level. 
 
-Alternatively, if there’s already a sales call or customer interview organized, then ask to join, and add your own questions at the end.
+“The Mom Test is an essential read on how to talk to potential customers and users,” says CEO & Co-founder James Hawkins in [his own guide on the topic](/blog/product-market-fit-game).
 
-Have any questions, feel free to email me at {firstName}@posthog.com or DM me on [Twitter](https://twitter.com/lukeharries_).
+“The Mom Test is just a classic,” agrees Product Manager Annika Schmid. “Honestly, I recommend it for anyone who ever has to talk to users.” 
 
-## Further reading:
+> **Putting it into practice:** Getting to product-market fit is a vital step for every startup — [including us!](/blog/product-market-fit-game)
 
-I have a couple of book recommendations if you want to go even deeper into this topic:
+![founding sales](../images/tracks/founding-sales.jpg)
 
-- **"The Mom Test" by Rob Fitzpatrick:** Generally considered the bible of "talking to users". It's a fantastic primer on problem exploration.
+## [Founding Sales: The Startup Sales Handbook by Daniel Kazanjy](https://www.goodreads.com/book/show/46019973-founding-sales---the-startup-sales-handbook)
+**Recommended by [Simon Fisher, Customer Success](/community/profiles/49)**
 
-- **[Don’t Make Me Think](https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/0321344758) by Steven Krug:** A foundational text on usability testing.
+PostHog doesn’t have a sales team, but if we did then this book by Daniel Kazanjy would likely be an important resource for them. It covers a lot of ground and much of it isn’t directly relevant to a team like ours, but it remains worth reading for the practical discussion of how to scale customer-facing functions. 
+
+“Founding Sales is written primarily for Founders and CEOs, and covers all of the bases when it comes to sales,” says Simon Fisher. “I personally skipped some of the founder-centric stuff and focused on the advice for scaling Customer Success teams, which I found really useful.”
+
+> **Putting it into practice:** We don’t have a Sales team, but [our Customer Success team](/handbook/small-teams/customer-success#mission) is very successful!
+
+![saas playbook](../images/tracks/saas-playbook.jpg)
+
+## [The SaaS Playbook by Rob Walling](https://www.goodreads.com/book/show/178816351-the-saas-playbook)
+**Recommended by [Lior Neu-ner, Technical Content Marketer](/community/profiles/684)**
+
+The SaaS Playbook isn’t your normal startup how-to guide, according to Lior. It doesn’t offer the usual hype around massive valuations and the importance of venture capital. Instead, it offers down-to-earth, practical advice for launching a new SaaS product in a repeatable way. 
+
+“It’s a very alternative guide to building a startup,” says Lior. “While most books center around hyper growth and fundraising, the SaaS Playbook teaches you how to achieve financial independence to build a sustainable and bootstrapped business.”
+
+> **Putting it into practice:** Product launches are a perpetual activity at PostHog, so our marketing team is always working in bootstrap mode — with help from [their favourite tool](/blog/posthog-marketing)
