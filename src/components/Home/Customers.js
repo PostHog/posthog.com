@@ -27,7 +27,7 @@ import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Link from 'components/Link'
 
-const Logo = ({ src, className = '' }) => <img className={`icon px-4 md:px-6 lg:px-4 ${className}`} src={src} />
+const Logo = ({ src, className = '' }) => <img className={`icon px-4 md:px-6 lg:px-4 w-full ${className}`} src={src} />
 
 const Customer = ({ image, imageDark, className = '', url }) => {
     const { websiteTheme } = useValues(layoutLogic)
