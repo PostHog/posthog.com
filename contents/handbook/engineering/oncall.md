@@ -28,4 +28,6 @@ If you're in a product team, it's tempting to think that being on-call doesn't a
 
 *Even though*, as we grow, we can't all have deep expertise in every part of the system, understanding the impacts of alerts and incidents helps us improve the work we do, and how we prioritise reliability and observability. Getting better at avoiding incidents is much more effective than getting better at handling them.
 
+Additionally, by spreading the responsibility as widely as possible. We share the load so that you're on call less. And we share knowledge more widely and more quickly. As an on-call you'll take the first steps for every product's problems and everyone else does the same for yours.
+
 It's important that when you're in a product team you at least have a basic understanding of how our software is deployed, where the weak points in our systems are, and what the various failure modes are. This way you'll be less likely to ship code that accidentally takes down PostHog, and more likely to understand the tradeoffs involved.
