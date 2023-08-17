@@ -27,7 +27,7 @@ First, [sign up to PostHog](https://app.posthog.com/signup) and copy your JavaSc
 
 With the JavaScript snippet copied, go to your Framer project and click the gear in the top right to go to your site settings. If you haven’t already, sign up for the "Mini" site plan. This enables you to add custom code.
 
-Once on a paid plan, go to the "General" tab in site settings and scroll down to the "Custom Code" section. Under `End of <head> tag`, paste your PostHog JavaScript snippet here. Make sure to press "Save" next to the "Custom Code" heading. 
+Once on a paid plan, go to the "General" tab in site settings and scroll down to the "Custom Code" section. Under "End of `<head>` tag", paste your PostHog JavaScript snippet here. Make sure to press "Save" next to the "Custom Code" heading. 
 
 ![Script](../images/tutorials/framer-analytics/script.png)
 
@@ -41,7 +41,7 @@ To enable session replays, go to [your project settings](https://app.posthog.com
 
 ## Adding a custom event
 
-You can add [custom code components](https://www.framer.com/developers/#code-components) to Framer and because of that, we can set up custom event capture. We will create a basic button that captures a `clicked homepage button`  and sets a `clicked_homepage_button` person property to `true`.
+You can add [custom code components](https://www.framer.com/developers/#code-components) to Framer and because of that, we can set up [custom event capture](/docs/libraries/js#capturing-events). We will create a basic button that captures a `clicked homepage button`  and sets a `clicked_homepage_button` person property to `true`.
 
 To do this, go to the "Assets" tab in the top left of your project. Next to the "Code" tab, click the plus icon to create a code file. Name the file `CaptureButton`, set it as a "New component" and press "Create."
 
@@ -69,7 +69,7 @@ Once updated, you can head to your site and click the button to see events captu
 
 ## Customizing components with feature flags
 
-Similarly, we can use feature flags in our custom code components. To do this, first, go to the [feature flag tab](https://app.posthog.com/feature_flags) in PostHog. Click "New feature flag," enter a key (I choose `framer-example`), fill out the details, set release conditions to roll out to 100% of users, and click "Save."
+Similarly, we can use [feature flags](/docs/feature-flags) in our custom code components. To do this, first, go to the [feature flag tab](https://app.posthog.com/feature_flags) in PostHog. Click "New feature flag," enter a key (I choose `framer-example`), fill out the details, set release conditions to roll out to 100% of users, and click "Save."
 
 Back in Framer, we can edit our button component to check the feature flag and disappear if `false`. In the code for `CaptureButton`, import `useEffect` and `useState`, set up a state for `isButtonEnabled` then set that state based on what `window.posthog.isFeatureEnabled("framer-example")` returns. Add a check for `isButtonEnabled` to show the button.
 
