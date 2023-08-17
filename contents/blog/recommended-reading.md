@@ -18,7 +18,8 @@ There are thousands of books which will tell you how to build a product and laun
 
 The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend. 
 
-![ask iwata](../images/tracks/ask-iwata.jpg)
+
+<img src="../images/tracks/ask-iwata.jpg" alt="ask iwata" height="200"/>
 
 ## [Ask Iwata: Words of Wisdom from Nintendo’s Legendary CEO by Hobonichi](https://www.goodreads.com/book/show/54736620-ask-iwata)
 **Recommended by [Joe Martin, Product Marketing](/community/profiles/59)**
@@ -44,7 +45,7 @@ Lottie claims she doesn’t read very much, but when pressed for recommendations
 
 > **Putting it into practice:** Our approach to design has evolved a lot over time, [as has our brand](/blog/postmortem-rebrand). Iteration is part of how we keep things fresh!
 
-![sand hill road](./images/tracks/sand-hill-road.jpg)
+![sand hill road](../images/tracks/sand-hill-road.jpg)
 
 ## [Secrets of Sand Hill Road by Scott Kapur](https://www.goodreads.com/book/show/42348376-secrets-of-sand-hill-road)
 **Recommended by [James Hawkins, CEO & Co-founder](/community/profiles/71)**
@@ -57,7 +58,7 @@ James reads a lot and could likely recommend enough books to fill an article all
 
 > **Putting it into practice:** Understanding how VCs think about startup has helped us raise funding, even when [we’ve decided to do it ahead of schedule](/blog/why-we-raised-a-15m-series-b-ahead-of-schedule)!
 
-![messy middle](..images/tracks/messy-middle.jpg)
+![messy middle](../images/tracks/messy-middle.jpg)
 
 ## [The Messy Middle by Scott Belsky](https://www.goodreads.com/book/show/40179007-the-messy-middle)
 **Recommended by [Charles Cook, Operations & Marketing](/community/profiles/254)**
