@@ -165,7 +165,7 @@ const getCategoryParams = (root) => (root !== 'posts' ? { filters: { post_catego
 
 const getCategoryLabels = (selectedCategories) => {
     const categories = Object.keys(selectedCategories)
-    categories?.length <= 0 ? 'All posts' : categories.map((label) => pluralize(label)).join(', ')
+    return categories?.length <= 0 ? 'All posts' : categories.map((label) => pluralize(label)).join(', ')
 }
 
 function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelectedCategories, selectedCategories }) {
@@ -298,7 +298,7 @@ export default function Posts({ children, articleView }) {
     const root = pathname.split('/')[1]
     const [params, setParams] = useState(getCategoryParams(root))
     const { posts, isLoading, fetchMore, mutate } = usePosts({ params })
-    const [selectedCategories, setSelectedCategories] = useState([])
+    const [selectedCategories, setSelectedCategories] = useState({})
 
     const handleNewPostSubmit = () => {
         setNewPostModalOpen(false)
