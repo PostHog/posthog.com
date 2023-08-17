@@ -1,5 +1,5 @@
 ---
-date: 2023-09-20
+date: 2023-08-16
 title: "Recommended reading from the PostHog team"
 rootPage: /blog
 sidebar: Blog
