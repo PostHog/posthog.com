@@ -1,6 +1,6 @@
 ---
 title: How to run a fake door test
-date: 2023-08-09
+date: 2023-08-17
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
