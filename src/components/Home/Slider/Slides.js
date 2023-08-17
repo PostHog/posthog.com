@@ -93,6 +93,7 @@ export const ProductAnalytics = () => {
                 <ImageContainer className="md:pl-8 col-span-10">
                     <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 md:-mb-2">
                         <StaticImage
+                            loading="eager"
                             alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
                             placeholder="none"
                             quality={100}
@@ -104,6 +105,7 @@ export const ProductAnalytics = () => {
                     <div className="absolute -bottom-2 right-0 md:hidden">
                         <div>
                             <StaticImage
+                                loading="eager"
                                 placeholder="none"
                                 quality={100}
                                 className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
@@ -130,6 +132,7 @@ export const ProductAnalytics = () => {
                     <div className="absolute -bottom-2 right-0 hidden md:block">
                         <div>
                             <StaticImage
+                                loading="eager"
                                 placeholder="none"
                                 quality={100}
                                 className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
