@@ -74,7 +74,7 @@ With those principles in mind, here are examples of product survey questions as 
 - What’s frustrating about X feature?
 - What do you like/dislike about X feature?
 - How would you feel if you could no longer use the product?
-- How likely is it that you would recommend the product to a friend or colleague?
+- [How likely is it that you would recommend the product to a friend or colleague?](/tutorials/nps-survey)
 - How easy/difficult is the product to use?
 
 ### 3. Roadmap
