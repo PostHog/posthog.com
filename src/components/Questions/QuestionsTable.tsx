@@ -7,9 +7,10 @@ import Tooltip from 'components/Tooltip'
 import Markdown from 'components/Squeak/components/Markdown'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { Pin } from 'components/NotProductIcons'
-import { CallToAction, child, container } from 'components/CallToAction'
+import { Close, Pin } from 'components/NotProductIcons'
 import { useInView } from 'react-intersection-observer'
+import { Clock } from '@posthog/icons'
+import { useUser } from 'hooks/useUser'
 dayjs.extend(relativeTime)
 
 type QuestionsTableProps = {
@@ -50,11 +51,12 @@ export const Skeleton = () => {
 }
 
 const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor, sortBy, pinned, fetchMore }) => {
+    const { isModerator } = useUser()
     const {
         attributes: { profile, subject, permalink, replies, createdAt, resolved, topics, activeAt, body },
     } = question
 
-    const latestAuthor = replies?.data?.[0]?.attributes?.profile || profile
+    const latestAuthor = replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
     const numReplies = replies?.data?.length || 0
 
     const { ref, inView } = useInView({
@@ -84,15 +86,28 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
                                         <Pin className="w-4 h-4" />
                                     </span>
                                 </Tooltip>
-                            ) : (
-                                resolved && (
-                                    <Tooltip content="Resolved">
-                                        <span className="relative text-green">
-                                            <Check2 />
+                            ) : resolved ? (
+                                <Tooltip content="Resolved">
+                                    <span className="relative text-green">
+                                        <Check2 />
+                                    </span>
+                                </Tooltip>
+                            ) : isModerator ? (
+                                latestAuthor?.data?.attributes?.user?.data?.attributes?.role?.data?.attributes?.type ===
+                                'moderator' ? (
+                                    <Tooltip content="Pending response">
+                                        <span className="relative text-yellow">
+                                            <Clock />
+                                        </span>
+                                    </Tooltip>
+                                ) : (
+                                    <Tooltip content="Needs response">
+                                        <span className="relative text-red">
+                                            <Close />
                                         </span>
                                     </Tooltip>
                                 )
-                            )}
+                            ) : null}
                         </div>
 
                         <div className="w-full">
