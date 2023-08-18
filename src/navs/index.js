@@ -2037,16 +2037,10 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
-                    name: 'Multivariate feature flags',
-                    url: '/docs/feature-flags/multivariate-flags',
-                    icon: 'Flag',
-                    color: 'purple',
-                },
-                {
-                    name: 'Payloads',
-                    url: '/docs/feature-flags/payloads',
-                    icon: 'Brackets',
-                    color: 'blue',
+                    name: 'Client-side bootstrapping',
+                    url: '/docs/feature-flags/local-evaluation',
+                    icon: 'Bolt',
+                    color: 'salmon',
                 },
                 {
                     name: 'Early access feature management',
@@ -2054,7 +2048,6 @@ export const docsMenu = {
                     icon: 'Features',
                     color: 'red',
                 },
-
                 {
                     name: 'Surveys',
                     url: '/docs/surveys/manual',
