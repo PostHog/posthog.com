@@ -13,7 +13,7 @@ const query = qs.stringify(
                 },
             },
         },
-        populate: ['post_tags'],
+        populate: ['post_tags.posts'],
     },
     {
         encodeValuesOnly: true,
@@ -119,6 +119,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                                     {tags?.length > 0 && (
                                         <div className="ml-2 mt-2 grid gap-y-2">
                                             {tags?.map((tag) => {
+                                                if (tag.attributes?.posts?.data?.length <= 0) return null
                                                 const active = selectedCategories[category.attributes.label]?.some(
                                                     (selectedTag) => selectedTag === tag.attributes.label
                                                 )

@@ -181,7 +181,13 @@ function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelec
                     root={root}
                 />
             </div>
-            <div className="after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative">
+            <div
+                className={
+                    articleView
+                        ? 'after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative'
+                        : ''
+                }
+            >
                 <ul
                     className={` list-none p-0 m-0 flex flex-col space-y-4 snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
                         articleView && !breakpoints.md ? 'h-[80vh] overflow-auto' : ''
