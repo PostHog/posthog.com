@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
@@ -51,6 +51,12 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
             replies: {
                 populate: {
                     profile: {
+                        populate: {
+                            user: {
+                                populate: ['role'],
+                                fields: ['role'],
+                            },
+                        },
                         fields: ['firstName', 'lastName'],
                     },
                 },
@@ -159,6 +165,10 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
 
     const total = data && data[0]?.meta?.pagination?.total
     const hasMore = total ? questions?.data.length < total : false
+
+    useEffect(() => {
+        mutate()
+    }, [user])
 
     return {
         hasMore,
