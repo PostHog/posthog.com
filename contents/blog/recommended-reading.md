@@ -89,7 +89,7 @@ When it came to envisioning the sort of culture he wanted to build at PostHog, n
 > **Putting it into practice:** We validated a lot of Netflix’s rules when [hiring our first five employees](/blog/posthog-first-five) — and we’ve rolled them into [our overall culture](/about).
 
 
-![getting real](../images/tracks/getting-real.png)
+![getting real](../images/tracks/getting-real.jpg)
 ## [Getting Real by Basecamp](https://basecamp.com/gettingreal)
 **Recommended by [David Newell, Software Engineer](/community/profiles/860)**
 
