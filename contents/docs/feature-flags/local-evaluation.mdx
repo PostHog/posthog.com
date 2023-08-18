@@ -3,7 +3,7 @@ title: Server-side local evaluation
 sidebar: Docs
 showTitle: true
 availability:
-    free: none
+    free: full
     selfServe: full
     enterprise: full
 ---
@@ -67,7 +67,7 @@ func main() {
 		os.Getenv("POSTHOG_API_KEY"),
 		posthog.Config{
 			Endpoint:       "<ph_instance_address>",
-			PersonalApiKey: "your personal API key", // needed for feature flags
+			PersonalApiKey: "your personal API key", // Required for feature flags
             DefaultFeatureFlagsPollingInterval: 300 // Optional. Measured in seconds. Defaults to 300 (5 minutes).
 		},
 	)
@@ -103,8 +103,14 @@ await client.getFeatureFlag(
     {
         // include any person or group properties required to evaluate the flag
         personProperties: {'property_name': 'value'} 
-        groupProperties: {'group_property_name': 'value'} 
-
+        groupProperties: {
+            'your_group_type': {
+                'group_property_name': 'value'
+            }
+            'another_group_type': {
+                'group_property_name': 'value'
+            } 
+        },
         onlyEvaluateLocally: false, // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
     }
 )
@@ -116,7 +122,14 @@ posthog.get_feature_flag(
     'distinct_id_of_the_user',
     # Include any person or group properties required to evaluate the flag
     person_properties: {'property_name': 'value'} ,
-    group_properties: {'group_property_name': 'value'},
+    group_properties: {
+        'your_group_type': {
+            'group_property_name': 'value'
+        }
+        'another_group_type': {
+            'group_property_name': 'value'
+        } 
+    },
     only_evaluate_locally: False # Optional. Defaults to False. Set to True if you don't want PostHog to make a server request if it can't evaluate locally
 )
 ```
@@ -129,8 +142,14 @@ enabledVariant, err := client.GetFeatureFlag(
             // Include any person or group properties required to evaluate the flag
             PersonProperties: posthog.NewProperties().
                 Set("property_name", "value"),
-            GroupProperties: posthog.NewProperties().
-                Set("property_name", "value"),
+            GroupProperties: map[string]interface{}{
+                "your_group_type": map[string]interface{}{
+                    "group_property_name": "value",
+                },
+                "another_group_type": map[string]interface{}{
+                    "group_property_name": "value",
+                },
+            },            
             OnlyEvaluateLocally: false // Optional. Defaults to false. Set to true if you don't want PostHog to make a server request if it can't evaluate locally
         },
 )
@@ -142,7 +161,10 @@ posthog.get_feature_flag(
     'distinct_id_of_the_user',
     # Include any person or group properties required to evaluate the flag
     person_properties={'property_name': 'value'},
-    group_properties={'property_name': 'value'},
+    group_properties={
+        'your_group_type': {'group_property_name': 'value'},
+        'another_group_type': {'group_property_name': 'value'}
+    },
     only_evaluate_locally=False # Optional. Defaults to False. Set to True if you don't want PostHog to make a server request if it can't evaluate locally
 )
 ```
