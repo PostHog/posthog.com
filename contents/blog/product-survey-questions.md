@@ -14,49 +14,52 @@ tags:
  - Explainers
 ---
 
-Product surveys help you understand what users are thinking and feeling. Getting to these thoughts and feeling require you to ask great questions.
+Product surveys help you understand what users are thinking and feeling, but they're useless if you don't ask the right questions. In this guide, we'll cover:
 
-To help you do this, this post goes over the importance of goals for product survey questions, the principles of great questions, question examples, the question real companies ask, and how to use responses. 
+1. How to set product survey goals
+2. How to write good product survey questions
+3. Example product questions you can use
+4. How Amazon, Stripe, and Uber use surveys 
+5. Using surveys to find product-market fit
 
 > **Want to run surveys?** See our tutorial on [how to create custom surveys](/tutorials/survey) with options like open text, multiple choice, or custom components.
 
-## Start with a goal for your product survey
+## Why are you running a product survey?
 
-Like an [A/B test](/blog/ab-testing-guide-for-engineers), you should start your product survey process with a goal in mind. A product survey, by definition, has a goal related to the product. This could include improving a feature, prioritizing feature futures, or optimizing critical flows.
+It's tempting just to ask "What do you think of our product?" and go from there, but you won't get useful responses that way. Like [successful A/B tests](/blog/ab-testing-guide-for-engineers), product surveys need a goal, such as improving a feature, optimizing critical flows, or guiding your product roadmap.
 
-Because surveys provide open, qualitative feedback from users, goals don’t need to be specific. For example, they don’t need to be a single metric you aim to improve. The goal of an individual survey should align with broader goals for a product and ultimately work towards improving it.
+Unlike A/B tests, however, survey goals don’t need to be specific – i.e. improving a single metric. Surveys provide open, qualitative feedback from users, so it's more important to align your survey goal with your broader product or company goals.
 
-Having a goal enables you to decide how the survey runs and who it targets. For example, if the goal is to improve the onboarding flow, it should run soon after users complete the flow. It shouldn’t run for long-time users who completely forget about the onboarding process or went through an entirely different process.
+Setting a goal also helps you to decide how the survey runs and who it targets. If your goal is to improve an onboarding flow, for example, your survey should:
+
+1. Run soon after users complete the flow
+2. Exclude long-time users who won't remember it
+
+This ensures you only ask people who've recently completed the flow, who will have it fresh in their minds.
 
 ![Onboarding](../images/blog/product-survey-questions/onboarding.png)
 
-### Targeting users
+Targeting users using PostHog's [surveys feature](/docs/surveys/manual) is easy because it connects to any user identification you've already set up for product analytics. This means you can target users based on their properties, connect survey responses to real usage data, and session replays of those same users using your product.
 
-To accurately target users for your goal, you need a way to send the survey to specific users directly. Sending a link to every user is not an accurate way of running a product survey.
+## How to write good product survey questions
 
-The nice part about PostHog's [surveys feature](/docs/surveys/manual) is that connects to the user identification you've already set up. This means you can target users based on their properties and connect survey responses to usage data.
+Once you have your goal, it's time to write your question(s). These are the five principles of good survey questions:
 
-## Principles of great product survey questions
+1. **Don’t ask questions you know the answer to.** You can tell how often someone uses your product or feature by looking at usage metrics, so don't ask them. Get insights from analytics if you can. 
 
-Once you have your goal, the next step is crafting your question. A good question helps you get the responses required to progress toward the goal. Asking a bad question prevents you from doing this and might hurt you by hiding the truth.
+2. **Be specific.** Specific questions create specific answers. "How was onboarding?" or "Any feedback?" leads to general responses or non-answers.  "What about the onboarding process was confusing?" leads to specific feedback.
 
-To help you craft a good question, here are some principles to remember:
+3. **Avoid leading questions.** Your opinion can corrupt the true feelings of your users, and make results inaccurate. "What do you love about our product?" will likely generate positive responses. Use subjective language instead, such as "How do you use our product?"
 
-- **Don’t ask questions you know the answer to.** Get insights from analytics if you can. For example, you can tell how often someone uses your product or feature by looking at usage metrics.
+4. **Respect your users.** Ask questions at the right time, keep surveys short, and make it easy to respond. A top complaint about surveys is their length. Ask users for permission to follow up.
 
-- **Be specific.** When you ask specific questions, you get specific answers. For example, "How was onboarding?" or "Any feedback?" leads to general responses or non-answers.  "What about the onboarding process was confusing?" leads to specific feedback.
-
-- **Avoid leading users.** Your opinion can corrupt the true feelings of your users, and make results inaccurate. For example, "What do you love about our product?" likely gets positive responses. Use subjective language instead, such as "How do you use our product?"
-
-- **Respect your users.** Ask questions at the right time, keep surveys short, and make it easy to respond. A top complaint about surveys is their length. Ask users for permission to follow up.
-
-- **Use an appropriate format for your survey question.** Make it easy for the user to answer. For example, don’t use an open text box for a question you expect to be a yes or no. Avoid asking repeated multiple open text questions in a row.
+5. **Use an appropriate format** Make it easy for the user to answer. Dn’t use an open text box for a question you expect to be a yes or no. Avoid asking repeated multiple open text questions in a row.
 
 ## Product survey question examples
-
-With those principles in mind, here are examples of product survey questions as inspiration. We broke them down into four categories based on the type of goals they help achieve.
-
 ![Surveys](../images/blog/product-survey-questions/surveys.png)
+
+With those principles in mind, here are some example product survey questions as inspiration. We've broken them down into four categories based on the type of goals they help achieve.
+
 
 ### 1. Usage
 
@@ -65,7 +68,7 @@ With those principles in mind, here are examples of product survey questions as 
 - How do you use X feature?
 - What is your use case for X feature?
 - What problem are you trying to solve?
-- Why did you choose our product?
+- Why did you choose [product name]?
 
 ### 2. Opinion
 
@@ -73,32 +76,32 @@ With those principles in mind, here are examples of product survey questions as 
 
 - What’s frustrating about X feature?
 - What do you like/dislike about X feature?
-- How would you feel if you could no longer use the product?
-- [How likely is it that you would recommend the product to a friend or colleague?](/tutorials/nps-survey)
-- How easy/difficult is the product to use?
+- How would you feel if you could no longer use [product]?
+- How likely are you to recommend [product] to a friend or colleague?
+- How easy/difficult is [product name] to use?
 
 ### 3. Roadmap
 
 **Goal:** Understand what to prioritize in your feature roadmap.
 
-- What is missing from our product?
+- What is missing from [product name]?
 - How can we improve feature X?
-- What prevents you from achieving your goal with our product?
+- What prevents you from achieving your goal?
 - How useful would X feature be to you?
 - What new features do you want to see the most?
 
-### 4. Competitors
+### 4. Comparative
 
 **Goal:** Gather qualitative data about your competitors to position your product better.
 
-- Have you used a similar product to us?
-- What factors are most important when you evaluate us with competitors?
-- Why did you choose our product over the competitor’s?
-- How happy are you with our product compared to the competitor’s?
+- What similar products have you used?
+- How does [product] compare to similar products you've used?
+- Why did you choose [product] over alternatives?
+- What features do you wish [product] has that others do?
 
 > **Note:** Getting users to think about competitors could create negative comparisons.
 
-## What product survey questions do real companies ask?
+## How do other companies use product surveys? 
 
 - [Amazon](https://www.eugenewei.com/blog/2018/5/21/invisible-asymptotes#:~:text=We%20had%20two,shop%20from%20Amazon) asked customers "Why didn’t you purchase more often from Amazon?" in a pop-up right after users placed their orders. They found that people hated shipping fees which led to the creation of Amazon Prime.
 
@@ -114,17 +117,17 @@ This shows the diversity of questions, companies, and use cases for product surv
 
 ## Using surveys to find product-market fit
 
-The real companies listed above are big tech companies with product-market fit, but what about companies still searching for it? Product surveys are a critical part of the process.
+The companies above are tech giants with product-market fit, but surveys are also a critical tool for startups still searching for it.
 
-In the search for product-market fit, surveys are often more helpful than stats:
+In fact, when searching for product-market fit, surveys are often more helpful than analytics. Why? Because:
 
-- Stats show you what is happening, but surveys help you understand why it is happening. 
+1. Analytics show you what is happening, while surveys help you understand why it is happening. 
 
-- Stats are often lagging indicators of product-market fit, they begin improve after you have it. Surveys are leading indicators, feedback will hint that you have it.
+2. Analytics are often lagging indicators of product-market fit, they improve after you have it. Surveys are leading indicators, feedback will hint that you have it.
 
-- Surveys help you identify and prioritize the next steps to improving your product. They are more actionable than stats at the early stage.
+3. Surveys help you identify and prioritize the next steps to improving your product. They are more actionable than stats at the early stage.
 
-Using the middle three levels of [the product-market fit game](/blog/product-market-fit-game), we can identify example questions you would use to advance to the next level:
+Using levels two, three, and four of [the product-market fit game](/blog/product-market-fit-game), we can identify example questions you would use to advance to the next level:
 
 **Validate the problem by talking to users**
 
@@ -143,18 +146,21 @@ Using the middle three levels of [the product-market fit game](/blog/product-mar
 - What is painful/frustrating about our product?
 - Why did you choose our product?
 - How can we improve feature X?
-- [How would you feel if you could no longer use the product?](/blog/measure-product-market-fit#indicator-2-pmf-survey)
+- How would you feel if you could no longer use the product?
 
-## Utilizing your product survey results
+There's even a dedicated survey for finding product-market fit: the PMF Survey. Read more about the PMF Survey in our [guide to measuring product-market fit](/blog/measure-product-market-fit).
 
-Once you [implement your product survey](/tutorials/survey) and get all the data from it, you need to put it to work. Asking questions and collecting responses is useless if you don’t do anything with them.
+## Using your survey results
 
-First, you can use product survey data as a jumping-off point for more research. In PostHog, you can easily connect respondents to their usage data or look into usage trends based on responses. You can also use the responses to identify [users for interviews](/tutorials/feedback-interviews-site-apps) and dig into details further.
+Once you [implement your product survey](/tutorials/survey) and get all the data from it, you need to put it to work. You can: 
 
-Second, you can monitor satisfaction with your product and features. Running repeated surveys asking the same questions can give you an idea of user perceptions over time. You can use this to track the impact of changes and identify areas requiring change.
+1. **Do more research** In PostHog, it's easy to connect respondents to their usage data, or look into usage trends based on responses. You can also use the responses to identify [users for interviews](/tutorials/feedback-interviews-site-apps) and dig into details further.
 
-Third and finally, you can prioritize future development and make data-driven decisions. Ultimately, the goal of product tools (and PostHog) is to help you build better products. Knowing what users think about your product and what they want to see next is a great way to do that.
+2. **Start monitoring customer satisfaction** – Run repeated surveys asking the same questions to give you an idea of user perceptions over time. You can use this to track the impact of changes and identify areas requiring change.
 
+3. **Update your product roadmap** – Finally, you can prioritize future development and make data-driven decisions. Ultimately, the goal of product tools (and PostHog) is to help you build better products. Knowing what users think about your product and what they want to see next is a great way to do that.
+
+As an all-in-one platform, PostHog is uniquely placed to do all the above. In addition to surveys, we also do product analytics, session replay, feature flags, and A/B testing. If this sounds useful to you, [check us out](https://app.posthog.com/signup).
 ## Further reading
 
 - [In-depth: How to measure product-market fit](/blog/measure-product-market-fit)
