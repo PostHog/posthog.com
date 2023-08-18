@@ -94,7 +94,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                     title,
                     date,
                     featuredImage: {
-                        url: featuredImage?.publicURL,
+                        url: featuredImage?.childImageSharp?.gatsbyImageData?.images?.fallback?.src,
                     },
                     body: rawBody,
                     authors: {
@@ -191,7 +191,9 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                             name
                         }
                         featuredImage {
-                            publicURL
+                            childImageSharp {
+                                gatsbyImageData(width: 150, quality: 100)
+                            }
                         }
                         authorData {
                             profile_id
