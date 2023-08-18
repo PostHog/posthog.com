@@ -8,11 +8,11 @@ availability:
     enterprise: full
 ---
 
-> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](https://posthog.com/docs/libraries/ruby), [Go](https://posthog.com/docs/libraries/go), and [Python](https://posthog.com/docs/libraries/python) SDKs
+> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](https://posthog.com/docs/libraries/ruby), [Go](https://posthog.com/docs/libraries/go), and [Python](https://posthog.com/docs/libraries/python) SDKs.
 
-Evaluating feature flags requires making a request to PostHog. However, you can improve performance by evaluating a flag locally instead – without having to make a request to PostHog.
+Evaluating feature flags requires making a request to PostHog for each flag. However, you can improve performance by evaluating flags locally.  Instead of making a request for each flag, PostHog will periodically request and store feature flag definitions locally, enabling you to evaluate flags without making additional requests.
 
-We consider it best practice to use local evaluation flags where possible because this method enables you to resolve flags faster and require fewer API calls.
+It is best practice to use local evaluation flags when possible, since this enables you to resolve flags faster and with fewer API calls.
 
 There are 3 steps to enable local evaluation:
 
@@ -30,7 +30,7 @@ By default, PostHog fetches these definitions every 30 seconds (or 5 minutes in 
 
 > **Note:** For billing purposes, we count the request to fetch the feature flag definitions as being equivalent to `10 decide` requests. 
 > 
-> This is because one of these requests can compute feature flags for hundreds or thousands of users. So this ensures local evaluation is priced fairly while remaining the most cost-effective option (by far!). 
+> This is because one of these requests can compute feature flags for hundreds or thousands of users. It ensures local evaluation is priced fairly while remaining the most cost-effective option (by far!). 
 
 <MultiLanguage>
 
