@@ -1,6 +1,6 @@
 ---
 date: 2023-08-16
-title: "Recommended reading from the PostHog team"
+title: "PostHog's recommended reading for startup teams"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
