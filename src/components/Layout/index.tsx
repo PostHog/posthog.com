@@ -34,7 +34,7 @@ const Layout = ({
             <LayoutProvider parent={parent} activeInternalMenu={activeInternalMenu}>
                 <div className={className}>
                     <Header />
-                    <main>{children}</main>
+                    <main className="bg-accent">{children}</main>
                     <Footer />
                     <CookieBanner />
                     <MobileNav />
