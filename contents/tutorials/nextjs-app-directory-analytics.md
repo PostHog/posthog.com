@@ -253,7 +253,7 @@ export default function About() {
 
 ### Setting up feature flags
 
-We can use the `getData()` function [Next.js provides](https://beta.nextjs.org/docs/data-fetching/fetching) along with the PostHog Node client to get data about a user’s feature flags, then use that data to conditionally render a part of the component.
+We can create a server-side function (named `getData()`) along with the PostHog Node client to get data about a user’s feature flags, then use that data to conditionally render a part of the component.
 
 To do this, create a feature flag in PostHog with the key `main-cta` , roll it out to 100% of users, and then add the code to check it in `getData()`. Because you are awaiting the posthog request now, make sure to add `async` to the main `About()` function as well.
 
