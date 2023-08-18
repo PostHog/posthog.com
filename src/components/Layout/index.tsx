@@ -32,9 +32,9 @@ const Layout = ({
     return (
         <SearchProvider>
             <LayoutProvider parent={parent} activeInternalMenu={activeInternalMenu}>
-                <div className={className}>
+                <div className={`${className} bg-accent`}>
                     <Header />
-                    <main className="bg-accent">{children}</main>
+                    <main>{children}</main>
                     <Footer />
                     <CookieBanner />
                     <MobileNav />
