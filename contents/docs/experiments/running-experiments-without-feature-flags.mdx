@@ -122,7 +122,7 @@ posthog.capture(
 
 ## Step 4 (optional): Send the `$feature_flag_called` event
 
-**This step is only required if your [experiment goal metric](/docs/experiments/manual#experiment-goal) is set to "trend"**. This is not required for funnel goals:
+> **This step is only required if your [experiment goal metric](/docs/experiments/manual#experiment-goal) is set to "trend"**. This is not required for funnel goals:
 
 You need to capture the `$feature_flag_called` event. This ensures that we record which experiment variant each user was assigned to. This is also referred to as "exposure logging", and without it you would not be able to analyze your results. 
 

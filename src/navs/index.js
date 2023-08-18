@@ -2003,6 +2003,12 @@ export const docsMenu = {
                     icon: 'TestTube',
                     color: 'purple',
                 },
+                {                    
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/feature-flags/common-questions',
+                    icon: 'Question',
+                    color: 'seagreen',
+                },
                 {
                     name: 'Features',
                 },
@@ -2010,13 +2016,13 @@ export const docsMenu = {
                     name: 'Server-side local evaluation',
                     url: '/docs/feature-flags/local-evaluation',
                     icon: 'Bolt',
-                    color: 'salmon',
+                    color: 'orange',
                 },
                 {
                     name: 'Client-side bootstrapping',
-                    url: '/docs/feature-flags/local-evaluation',
+                    url: '/docs/feature-flags/bootstrapping',
                     icon: 'Laptop',
-                    color: 'orange',
+                    color: 'salmon',
                 },
                 {
                     name: 'Early access feature management',
@@ -2033,13 +2039,6 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
-                },
-
-                {
-                    name: 'Common questions about feature flags',
-                    url: '/docs/feature-flags/common-questions',
-                    icon: 'Question',
-                    color: 'seagreen',
                 },
             ],
         },
