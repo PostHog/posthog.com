@@ -1,6 +1,6 @@
 ---
 title: How to set up Framer analytics, session replay, and more
-date: 2023-08-17
+date: 2023-08-18
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -29,7 +29,7 @@ With the JavaScript snippet copied, go to your Framer project and click the gear
 
 Once on a paid plan, go to the "General" tab in site settings and scroll down to the "Custom Code" section. Under "End of `<head>` tag", paste your PostHog JavaScript snippet here. Make sure to press "Save" next to the "Custom Code" heading. 
 
-![Script](../images/tutorials/framer-analytics/script.png)
+![Script](../images/tutorials/framer-analytics/script.mp4)
 
 Once you publish and go to your site, PostHog begins automatically capturing events like pageviews, button clicks, and form inputs on your site.
 
@@ -69,7 +69,9 @@ Once updated, you can head to your site and click the button to see events captu
 
 ## Customizing components with feature flags
 
-Similarly, we can use [feature flags](/docs/feature-flags) in our custom code components. To do this, first, go to the [feature flag tab](https://app.posthog.com/feature_flags) in PostHog. Click "New feature flag," enter a key (I choose `framer-example`), fill out the details, set release conditions to roll out to 100% of users, and click "Save."
+Similarly, we can use [feature flags](/docs/feature-flags) in our custom code components. Feature flags are useful for conditionally showing (or hiding) components based on a rollout percentage and properties. For example, we can use a flag to show or hide our custom event button on the homepage
+
+To do this, first, go to the [feature flag tab](https://app.posthog.com/feature_flags) in PostHog. Click "New feature flag," enter a key (I choose `framer-example`), fill out the details, set release conditions to roll out to 100% of users, and click "Save."
 
 Back in Framer, we can edit our button component to check the feature flag and disappear if `false`. In the code for `CaptureButton`, import `useEffect` and `useState`, set up a state for `isButtonEnabled` then set that state based on what `window.posthog.isFeatureEnabled("framer-example")` returns. Add a check for `isButtonEnabled` to show the button.
 
