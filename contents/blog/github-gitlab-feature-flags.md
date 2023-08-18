@@ -1,12 +1,12 @@
 ---
 title: What you can learn from how GitHub and GitLab use feature flags
-date: 2023-08-07
+date: 2023-08-18
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/green-blog-image.jpg
+featuredImage: ../images/blog/gitlab-github-flags.jpeg
 featuredImageType: full
 category: Engineering
 tags:
