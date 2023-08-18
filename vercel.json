@@ -833,7 +833,7 @@
         { "source": "/signup/cloud/enterprise", "destination": "/contact-sales?edition=enterprise" },
         {
             "source": "/docs/feature-flags/bootstrapping-and-local-evaluation",
-            "destination": "/docs/feature-flags/local-evaluation"
+            "destination": "/docs/feature-flags/bootstrapping"
         },
         { "source": "/products/product-analytics", "destination": "/product-analytics" },
         { "source": "/session-recording", "destination": "/session-replay" },
