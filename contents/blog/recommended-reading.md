@@ -19,8 +19,7 @@ There are thousands of books which will tell you how to build a product and laun
 The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend. 
 
 
-<img src="../images/tracks/ask-iwata.jpg" alt="ask iwata" height="200"/>
-
+![Ask Iwata](../images/tracks/ask-iwata.jpg)
 ## [Ask Iwata: Words of Wisdom from Nintendo’s Legendary CEO by Hobonichi](https://www.goodreads.com/book/show/54736620-ask-iwata)
 **Recommended by [Joe Martin, Product Marketing](/community/profiles/59)**
 
@@ -32,8 +31,8 @@ Former games journalist Joe has repeatedly recommended this collection of essays
 
 > **Putting it into practice:** We encourage everyone at PostHog to [write a personal README](/team) about their style of work and how they like to collaborate and be communicated with. 
 
-![from switzerland](../images/tracks/from-switzerland.jpg)
 
+![From Switzerland](../images/tracks/from-switzerland.jpg)
 ## [From Switzerland by Counterprint](https://www.goodreads.com/book/show/60695040-from-switzerland)
 **Recommended by [Lottie Coxon, Graphic Designer](/community/profiles/227)**
 
@@ -45,9 +44,9 @@ Lottie claims she doesn’t read very much, but when pressed for recommendations
 
 > **Putting it into practice:** Our approach to design has evolved a lot over time, [as has our brand](/blog/postmortem-rebrand). Iteration is part of how we keep things fresh!
 
-![sand hill road](../images/tracks/sand-hill-road.jpg)
 
-## [Secrets of Sand Hill Road by Scott Kapur](https://www.goodreads.com/book/show/42348376-secrets-of-sand-hill-road)
+![Secrets of Sand Hill Road](../images/tracks/sand-hill-road.jpg)
+## [Secrets of Sand Hill Road by Scott Kupor](https://www.goodreads.com/book/show/42348376-secrets-of-sand-hill-road)
 **Recommended by [James Hawkins, CEO & Co-founder](/community/profiles/71)**
 
 James reads a lot and could likely recommend enough books to fill an article all on his own — but when we asked for recommendations for first-time founders, this was one of the first books which came to mind. It focuses on explaining how startups operate from a VC’s perspective.
@@ -69,8 +68,8 @@ If there’s one person whose book recommendations are really worth listening to
 
 > **Putting it into practice:** When it comes to ops, there’s no silver bullet. Instead, [you need a whole toolkit](/blog/startup-ops-toolkit) to help you solve messy problems!
 
-![high output management](../images/tracks/high-output.jpg)
 
+![high output management](../images/tracks/high-output.jpg)
 ## [High Output Management by Andrew Grove](https://www.goodreads.com/book/show/324750.High_Output_Management)
 **Recommended by [Grace McKenzie, Finance & Operations Lead](/community/profiles/718)**
 
@@ -80,8 +79,8 @@ Andrew Grove was Intel’s third employee, third CEO, and the man who led the co
 
 > **Putting it into practice:** We’ve templated [our approach to goal-setting](/handbook/company/goal-setting) so that we can make fast decisions, and not waste time discussing formats. 
 
-![no rules rules](../images/tracks/no-rules-rules.jpg)
 
+![no rules rules](../images/tracks/no-rules-rules.jpg)
 ## [No Rules Rules by Reed Hastings](https://www.goodreads.com/book/show/49099937-no-rules-rules) 
 **Recommended by [James Hawkins, CEO & Co-founder](/community/profiles/71)**
 
@@ -91,8 +90,8 @@ When it came to envisioning the sort of culture he wanted to build at PostHog, n
 
 > **Putting it into practice:** We validated a lot of Netflix’s rules when [hiring our first five employees](/blog/posthog-first-five) — and we’ve rolled them into [our overall culture](/about).
 
-![getting real](../images/tracks/getting-real.png)
 
+![getting real](../images/tracks/getting-real.png)
 ## [Getting Real by Basecamp](https://basecamp.com/gettingreal)
 **Recommended by [David Newell, Software Engineer](/community/profiles/860)**
 
@@ -102,8 +101,8 @@ Basecamp’s online manifesto about how they build products echoes a lot of the 
 
 > **Putting it into practice:** User feedback is _really_ important to us. So important that [we encourage everyone to get it!](/handbook/product/user-feedback)
 
-![continuous discovery habits](../images/tracks/continuous-discovery.jpg)
 
+![continuous discovery habits](../images/tracks/continuous-discovery.jpg)
 ## [Continuous Discovery Habits by Terra Torres](https://www.goodreads.com/book/show/58046715-continuous-discovery-habits) 
 **Recommended by [Annika Schmid, Product Manager](/community/profiles/221)**
 
@@ -113,8 +112,8 @@ In addition to the The Mom Test, Annika recommends this book for its practical a
 
 > **Putting it into practice:** Talking to users is great, but only if you invest the time in turning it into [actionable snapshots](/blog/interview-snapshot-guide).
 
-![the mom test](../images/tracks/mom-test.jpg)
 
+![the mom test](../images/tracks/mom-test.jpg)
 ## [The Mom Test by Rob Fitzpatrick](https://www.goodreads.com/book/show/52283963-the-mom-test)
 **Recommended by [basically everyone](/team)**
 
@@ -137,8 +136,8 @@ PostHog doesn’t have a sales team, but if we did then this book by Daniel Kaza
 
 > **Putting it into practice:** We don’t have a Sales team, but [our Customer Success team](/handbook/small-teams/customer-success#mission) is very successful!
 
-![saas playbook](../images/tracks/saas-playbook.jpg)
 
+![saas playbook](../images/tracks/saas-playbook.jpg)
 ## [The SaaS Playbook by Rob Walling](https://www.goodreads.com/book/show/178816351-the-saas-playbook)
 **Recommended by [Lior Neu-ner, Technical Content Marketer](/community/profiles/684)**
 
