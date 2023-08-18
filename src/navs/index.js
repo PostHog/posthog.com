@@ -2031,8 +2031,8 @@ export const docsMenu = {
                     name: 'Features',
                 },
                 {
-                    name: 'Bootstrapping & local evaluation',
-                    url: '/docs/feature-flags/bootstrapping-and-local-evaluation',
+                    name: 'Server-side local evaluation',
+                    url: '/docs/feature-flags/local-evaluation',
                     icon: 'Bolt',
                     color: 'salmon',
                 },
