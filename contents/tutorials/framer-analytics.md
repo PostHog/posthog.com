@@ -10,9 +10,9 @@ tags: []
 
 [Framer](https://www.framer.com/) is a popular no-code site builder that makes it easy to design a high-quality site. 
 
-To maximize the effectiveness of your Framer site, you need analytics about how users are using it. Data like pageviews, button clicks, and session replays are critical to doing to improvement. 
+To maximize the effectiveness of your Framer site, you need analytics to see how users are using it. Data like pageviews, button clicks, and session replays are critical to improving your site. 
 
-This tutorial shows you how to set up PostHog on your Framer site for event autocapture, session replays, custom event capture, and feature flags.
+This tutorial shows you how to set up PostHog on your Framer site for capturing events, session replays, and implementing feature flags.
 
 ## Adding PostHog to your Framer site
 
@@ -31,7 +31,7 @@ Once on a paid plan, go to the "General" tab in site settings and scroll down to
 
 ![Script](../images/tutorials/framer-analytics/script.png)
 
-Once you publish and go to your site, PostHog starts to autocapture events like pageviews, button clicks, and inputs for your site.
+Once you publish and go to your site, PostHog begins automatically capturing events like pageviews, button clicks, and form inputs on your site.
 
 ![Autocapture](../images/tutorials/framer-analytics/autocapture.png)
 
@@ -41,11 +41,11 @@ To enable session replays, go to [your project settings](https://app.posthog.com
 
 ## Adding a custom event
 
-You can add [custom code components](https://www.framer.com/developers/#code-components) to Framer and because of that, we can set up [custom event capture](/docs/libraries/js#capturing-events). We will create a basic button that captures a `clicked homepage button`  and sets a `clicked_homepage_button` person property to `true`.
+We'll use [custom code components](https://www.framer.com/developers/#code-components) in Framer to set up [custom event capture](/docs/libraries/js#capturing-events). We will create a basic button that captures a `clicked homepage button`  and sets a `clicked_homepage_button` person property to `true`.
 
 To do this, go to the "Assets" tab in the top left of your project. Next to the "Code" tab, click the plus icon to create a code file. Name the file `CaptureButton`, set it as a "New component" and press "Create."
 
-Once done, delete the boilerplate code and add a button that captures an event with `window.posthog()` like this:
+Once done, delete the existing code and add a button that captures an event with `window.posthog()` like this:
 
 ```js
 export default function CaptureButton() {
