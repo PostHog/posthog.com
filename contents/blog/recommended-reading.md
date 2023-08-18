@@ -66,7 +66,7 @@ If there’s one person whose book recommendations are really worth listening to
 > **Putting it into practice:** When it comes to ops, there’s no silver bullet. Instead, [you need a whole toolkit](/blog/startup-ops-toolkit) to help you solve messy problems!
 
 
-![high output management](../images/tracks/high-output.jpg)
+![high output management](../images/tracks/high-growth.jpg)
 ## [High Output Management by Andrew Grove](https://www.goodreads.com/book/show/324750.High_Output_Management)
 **Recommended by [Grace McKenzie, Finance & Operations Lead](/community/profiles/718)**
 
