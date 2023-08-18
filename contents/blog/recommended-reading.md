@@ -16,7 +16,6 @@ tags:
 
 The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend. 
 
-
 ![Ask Iwata](../images/tracks/ask-iwata.jpg)
 ## [Ask Iwata: Words of Wisdom from Nintendo’s Legendary CEO by Hobonichi](https://www.goodreads.com/book/show/54736620-ask-iwata)
 **Recommended by [Joe Martin, Product Marketing](/community/profiles/59)**
