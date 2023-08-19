@@ -4,15 +4,83 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Welcome to the PostHog Handbook! If you are a new starter, this page will help you navigate the Handbook and highlight some of the most important things you should know about working here. 
+Welcome. This handbook simply explains how we work. It has been one of the most important things we've ever made.
 
-## Big picture
+_Chapter 1_
+# [What is PostHog?](what-is-posthog)
 
-We encourage everyone to start at the beginning first before diving in. We have a strong bias for action, but it is still worth taking a step back and looking at the 'why' first. This helps ensure you have the right context and are working on the right things. 
+_Chapter 2_
+# [A wide company with small teams](wide-company)
 
-You should start with the '[Company](/handbook/company/story)' section and work your way through everything there. It is not a lot to read. In particular, the sections on our [Strategy](/handbook/strategy/overview) and [Roadmap](/handbook/strategy/roadmap) are a must-read for everyone. 
+_Chapter 3_
+# [Provinding a world class engineering environment](world-class-engineering)
 
-Next, familiarise yourself with our approach to [Culture](/handbook/company/culture) and our [Values](/handbook/company/values). You might take a bit of time to adjust to PostHog's way of working, and that's ok! In addition to bias for action, you may find that you have a lot more autonomy than you are used to here - you'll realise very quickly that you _shouldn't_ be asking for permission for most things. 
+- Wide company with small teams
+ 
+  - Deciding which products to build
+  - Everyone codes
+- How we get users
+  - Why we invest so much in our website
+  - We want to grow through word of mouth
+- Low prices
+- How we make users happy
+  - MVP -> PMF -> Innovate
+  - Engineers talk to users
+  - Engineers do support
+- How we make money
+  - Let users try it for free first, self serve
+  - Pay for wjat you use - usage and product-based
+  - How we do enterprise sales
+  - Make each product cheap
+  - High ACV
+- How we’re building a strong team
+  - What do people that do well have in common
+  - Who loves working here
+  - Smaller group of stronger people
+  - Compensation
+  - Firing
+- How we don’t run out of money
+  - Default alive
+  - Grow by shipping, not hiring salespeople
+
+_Chapter 3_
+# “How we got here”
+
+Updated version of https://posthog.com/handbook/company/story
+How we designed the company (company is a product)
+List of books (No Rules Rules)
+Other companies
+GitLab
+Amazon
+
+_Chapter 4_
+# Where are we now
+
+Maybe put revenue charts in
+
+_Chapter 5_
+# Where are we going?
+Are we going to sell?
+Secondaries over selling
+$100M by 2026, working backwards
+
+_Chapter 6_
+# How can you help?
+
+- Values
+Open source - write stuff down & where to find what others are up to (TODO  - move the how we work section below to this) / be direct
+Haven’t built defining feature yet / yes and culture, be iterative
+Trust and feedback
+etc 
+
+
+
+
+
+
+
+
+
 
 ## How we work
 
@@ -40,17 +108,3 @@ We use GitHub Projects to track the status of Issues in an easily viewable way. 
 You can also assign an Issue to a specific person, and tag it with a relevant label - use these to help people filter more easily.
 
 Each Small Team has its own Project for tracking their Issues - [full list here](https://github.com/orgs/PostHog/projects). Most teams run two week sprints - as part of onboarding, you will be invited to the relevant planning meetings. 
-
-## Onboarding 
-
-Our [onboarding checklist](/handbook/people/onboarding) will take you through all the main admin bits you need to get set up, such as accounts access and payroll. The list will vary slightly depending on where you are based and which Small Team you are in. The People team will create an Issue in the Internal repo to track your personal checklist. 
-
-### Other useful resources
-
-It is worth trying to at least read the entire Handbook once, even if you skim over the other sections. If you are engineer, the [Engineering](/handbook/engineering/development-process) section will obviously be useful, but you might want to know how we're approaching our [Marketing](/handbook/growth/marketing) strategy.
-
-A few additional pages that may occasionally come in handy:
-
-- [Media](/media) - official PostHog logos and backgrounds
-- [Customer Support](/handbook/growth/customer-support) - we don't have a dedicated support team. Learn why!
-- [Benefits](/handbook/people/benefits) - we are adding more all the time!
