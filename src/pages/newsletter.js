@@ -39,9 +39,9 @@ export const NewsletterPage = () => {
                         </p>
 
                         <ul className="space-y-2 m-0 mb-8 p-0">
-                            <Benefit text="6 mistakes we've made at PostHog (and what we learned)" />
+                            <Benefit text="How to talk to users (as an engineer)" />
                             <Benefit text="What we've learned about product-market fit" />
-                            <Benefit text="How to build new features users love" />
+                            <Benefit text="When, why, and how GitHub uses feature flags" />
                         </ul>
 
                         <h4 className="relative text-lg">
