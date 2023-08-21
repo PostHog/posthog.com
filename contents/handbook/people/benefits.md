@@ -26,15 +26,15 @@ We offer private health insurance in countries where the health system struggles
 
 In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Gusto](https://app.gusto.com/). We also offer dental and vision insurance via Guardian. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
 
-In the UK, we use [Bupa](https://www.bupa.co.uk/) for private healthcare (£100 excess per policy year) and [Medicash](https://www.medicash.org/) as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits which will affect your Personal Allowance each tax year, and you can opt out at any time with 1 month notice. 
+In the UK, we use [Aviva]([https://www.bupa.co.uk/](https://www.aviva.co.uk/health/health-products/health-insurance/)) for private healthcare and [Medicash](https://www.medicash.org/) as our cash plan for dental and vision. Children are included for free. Both of these are taxable benefits that will affect your Personal Allowance each tax year, and you can opt-out at any time with 1 month's notice. 
 
 ### Mental health support
 
-For people in the US, we offer the option to opt in to a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,050 per year to be used on out-of-pocket medical expenses. If you choose to contribute, PostHog will match up to $50 per month to help cover mental health care costs. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
+For people in the US, we offer the option to opt into a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,050 per year to be used on out-of-pocket medical expenses. If you choose to contribute, PostHog will match up to $50 per month to help cover mental health care costs. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
 
-There is also the option to choose a lower tier, high deductible health plan (HDHP), which will qualify you for a [Health Savings Account (HSA)](https://www.healthcare.gov/glossary/health-savings-account-hsa/) that has further tax benefits beyond what the FSA provides. We will also contribute $50 per month to this account if you opt in. At the end of the year, any unused money rolls over and the contribution limit resets.
+There is also the option to choose a lower tier, high deductible health plan (HDHP), which will qualify you for a [Health Savings Account (HSA)](https://www.healthcare.gov/glossary/health-savings-account-hsa/) that has further tax benefits beyond what the FSA provides. We will also contribute $50 per month to this account if you opt-in. At the end of the year, any unused money rolls over, and the contribution limit resets.
 
-For people in the UK, [Bupa](https://www.bupa.co.uk/health-information/mental-health/talking-therapies-for-mental-health) offers coverage for therapists that are inaccessible through the NHS alone.
+For people in the UK, Aviva offers coverage for therapists that are inaccessible through the NHS alone.
 
 ### Time off
 
