@@ -8,7 +8,7 @@ Ok, so we've got to be quick to build all the tools in one. We better have a wor
 
 How do we do that?
 
-## No product by default
+## No product management by default
 
 Engineers decide what to build. If you need help, our product manages (we have 1 today) will give you coaching 
 
