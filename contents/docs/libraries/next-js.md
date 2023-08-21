@@ -337,7 +337,7 @@ export default function PostHogClient() {
 }
 ```
 
-With this component, we can both send events in the body of a component, and get data from PostHog (such as feature flag evaluations) using the Next.js `getData()` function.
+With this component, we can both send events in the body of a component, and get data from PostHog (such as feature flag evaluations) using a server-side function (named `getData()` here).
 
 ```js
 import Link from 'next/link'
