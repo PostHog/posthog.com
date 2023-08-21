@@ -55,8 +55,12 @@ export default function Home() {
   const copyVariant = useFeatureFlagVariantKey('homepage-abn')
   
   useEffect(() => {
-    if (copyVariant && copyVariant !== 'control') {
-      setMainCopy(`Welcome to our ${copyVariant} app`);
+    if (copyVariant === 'cool') {
+      setMainCopy('Welcome to our cool app');
+    } else if (copyVariant === 'epic') {
+      setMainCopy('Welcome to our epic app');
+    } else if (copyVariant === 'awesome') {
+      setMainCopy('Welcome to our awesome app');
     }
   }, [copyVariant])
 
