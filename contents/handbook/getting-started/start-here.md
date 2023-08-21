@@ -29,7 +29,7 @@ _Chapter 3_
   - Engineers do support
 - How we make money
   - Let users try it for free first, self serve
-  - Pay for wjat you use - usage and product-based
+  - Pay for what you use - usage and product-based
   - How we do enterprise sales
   - Make each product cheap
   - High ACV
