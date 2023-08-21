@@ -102,11 +102,9 @@ export default function TeamNew() {
 
                                     <span className="flex items-center gap-2">
                                         {country === 'world' ? '🌎' : <ReactCountryFlag svg countryCode={country} />}
-                                        {country === 'world' ? (
-                                            <span className="opacity-50 text-sm">Planet earth</span>
-                                        ) : (
-                                            <span className="opacity-50 text-sm">{location || country}</span>
-                                        )}
+                                        <span className="opacity-50 text-sm">
+                                            {country === 'world' ? 'Planet Earth' : location || country}
+                                        </span>
                                     </span>
                                 </div>
 
