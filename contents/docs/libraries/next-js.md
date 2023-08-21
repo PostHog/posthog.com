@@ -323,7 +323,7 @@ export async function getServerSideProps(ctx) {
 
 ### App router
 
-For the app router, we can initialize the `posthog-node` SDK in every component we need it, or we can create a `PostHogClient` component to import into files like this:
+For the app router, we can initialize the `posthog-node` SDK once with a `PostHogClient` component to import into files like this:
 
 ```js
 // app/posthog.js
