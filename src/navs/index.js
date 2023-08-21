@@ -1998,6 +1998,12 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
+                    name: 'Testing your flag',
+                    url: '/docs/feature-flags/testing',
+                    icon: 'TestTube',
+                    color: 'purple',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -2009,20 +2015,20 @@ export const docsMenu = {
                 {
                     name: 'Client-side bootstrapping',
                     url: '/docs/feature-flags/local-evaluation',
-                    icon: 'Bolt',
-                    color: 'salmon',
+                    icon: 'Laptop',
+                    color: 'orange',
                 },
                 {
                     name: 'Early access feature management',
                     url: '/docs/feature-flags/early-access-feature-management',
                     icon: 'Features',
-                    color: 'red',
+                    color: 'purple',
                 },
                 {
                     name: 'Surveys',
                     url: '/docs/surveys/manual',
                     icon: 'Message',
-                    color: 'purple',
+                    color: 'blue',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
