@@ -29,10 +29,11 @@ async function handleRequest(event) {
     const url = new URL(event.request.url)
     const pathname = url.pathname
     const search = url.search
+    const pathWithParams = pathname + search
     if (pathname.startsWith("/static/")) {
-        return retrieveStatic(event, pathname)
+        return retrieveStatic(event, pathWithParams)
     } else {
-        return forwardRequest(event, pathname + search)
+        return forwardRequest(event, pathWithParams)
     }
 }
 
