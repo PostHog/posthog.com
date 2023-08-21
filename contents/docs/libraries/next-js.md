@@ -63,7 +63,8 @@ if (typeof window !== 'undefined') {
     // Enable debug mode in development
     loaded: (posthog) => {
       if (process.env.NODE_ENV === 'development') posthog.debug()
-    }
+    },
+    capture_pageview: false // We capture manually
   })
 }
 
@@ -106,7 +107,8 @@ import { useEffect } from "react";
 
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false // We capture manually
   })
 }
 
