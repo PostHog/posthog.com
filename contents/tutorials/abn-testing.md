@@ -14,17 +14,25 @@ This tutorial will show you how to create and implement an A/B/n test in PostHog
 
 ## Creating an A/B/n test
 
-To create an A/B/n, go [experiments tab in PostHog](https://app.posthog.com/experiments) and click "New experiment." Add a name, feature flag key (I choose `homepage-abn`), and description if you want. Under "Experiment variants," click "Add test variant" twice to add two new variants. Rename the three variants if you want. 
+To create an A/B/n, go [experiments tab in PostHog](https://app.posthog.com/experiments):
+1. Click "New experiment." 
+2. Add a name and description.
+3. Add feature flag key. In your code, you use this feature flag key to check which experiment variant the user has been assigned to.
+4. Under "Experiment variants," click "Add test variant" twice to add two new variants. Rename the three variants if you want. 
 
 ![A/B/n experiment](../images/tutorials/abn-testing//experiment.png)
 
-Fill out the rest of your details like participants, goal type, secondary metrics, and minimum acceptable improvement. Once done, click "Save as draft" and we will go implement the A/B/n test in our app.
+Fill out the rest of your details like participants, goal type, secondary metrics, and minimum acceptable improvement. Once done, click "Save as draft".
+
+Next, we'll implement the A/B/n test in our app.
 
 ## Implementing our A/B/n test
 
-Implementing the A/B/n requires checking the feature flag variant and handling each of our cases. We will use a [Next.js](/docs/libraries/next-js) app where we already set up the `[PostHogProvider](/docs/libraries/next-js#app-router)` for this.
+Implementing our test requires checking the feature flag to see which experiment variant our user has been assigned to. We then add code to handle each variant. 
 
-> Need a full guide for creating a Next.js app? Read our [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests) tutorial.
+We will use a [Next.js](/docs/libraries/next-js) app where we already set up the `[PostHogProvider](/docs/libraries/next-js#app-router)` for this.
+
+> Using a different library or framework? See our [experiment docs](/docs/experiments/adding-experiment-code) on how to add your code using our different SDKs.
 
 In our a `page.js` file, we: 
 
@@ -65,7 +73,7 @@ When we reload our page, we get a title based on the flag key variant.
 
 ![Epic webpage](../images/tutorials/abn-testing/epic.png)
 
-### Checking the other variants
+### Testing the other variants
 
 We can check the other variants by going to the [feature flag page](https://app.posthog.com/feature_flags), searching for the key related to our experiment, and clicking on it to edit it. Scroll down to release conditions and set the **optional override** to any of the flag values. If you want the optional override to apply to only you, you can create another condition set. Finally, press save and when you go back to your app, you see the overridden flag value.
 
@@ -75,7 +83,7 @@ We can check the other variants by going to the [feature flag page](https://app.
 
 ### Rolling out the winning variant
 
-Once your experiment reaches significance, you can stop it and roll out the winning variant. 
+Once your experiment has concluded, you can stop it and roll out the winning variant. 
 
 To do this, click the "stop" button on your experiment details page, go to your [feature flag page](https://app.posthog.com/feature_flags), search for the key related to your experiment, and click to edit it. Under variant keys, edit the rollout value to 100 for the winning variant and 0 for the losing ones, and press save. When you’re ready, you can remove the experiment-related code from your app too.
 
