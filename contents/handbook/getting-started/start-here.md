@@ -30,14 +30,9 @@ _Chapter 7_
 _Chapter 8_
 # [How we make money](how-we-make-money)
 
+_Chapter 9_
+# [How we're building a world class team](strong-team)
 
-
-- How we’re building a strong team
-  - What do people that do well have in common
-  - Who loves working here
-  - Smaller group of stronger people
-  - Compensation
-  - Firing
 - How we don’t run out of money
   - Default alive
   - Grow by shipping, not hiring salespeople
