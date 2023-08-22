@@ -13,6 +13,10 @@ images:
     - './images/startup-merch.png'
     - './images/startup-launch.png'
     - './images/startup-credit.png'
+    - './images/startup-heart.png'
+    - './images/yc.png'
+    - './images/assemblyai.png'
+    - './images/goliath.png'
 ---
 
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
@@ -48,7 +52,7 @@ import refer from './images/startup-refer.png'
   <div class="max-w-screen-2xl mx-auto">
     <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Here's what you get when you join</h3>
     <div class="flex justify-center">
-      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-3 justify-evenly relative text-center sm:text-left">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-4 justify-evenly relative text-center sm:text-left">
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[8])} alt="Startup credit" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">$50,000 in credit</h5>
@@ -63,6 +67,11 @@ import refer from './images/startup-refer.png'
           <GatsbyImage image={getImage(props?.images[6])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Free PostHog merch</h5>
           <p class="m-0 text-[15px]">You can never have too many mugs, stickers, backpacks or origami hedgehogs, right?</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[9])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Referral perks</h5>
+          <p class="m-0 text-[15px]">Refer your accelerator to double your credits, or split an extra $10,000 when you refer a friend.</p>
         </li>
       </ul>
     </div>
@@ -88,21 +97,6 @@ import refer from './images/startup-refer.png'
     />
 </Section>
 
-<Section title="Need even more benefits?" titleSize="sm" cols={2}>
-    <div>
-        <h3>Double your credits to $100,000</h3>
-        <p>
-          Introduce us to your investors, or accelerator program. If they sign up as a PostHog partner then we'll double your credits to a total of $100,000. 
-        </p>
-    </div>
-    <div>
-        <h3>Share $10,000 with a friend</h3>
-        <p>
-          Know someone else who needs PostHog? Tell them to mention your name and, if they sign up, we'll give you both an extra $5,000 of PostHog credits.
-        </p>
-    </div>
-</Section>
-
 <section class="my-24 px-5">
 
   <div class="max-w-screen-lg mx-auto font-bold">
@@ -117,6 +111,31 @@ import refer from './images/startup-refer.png'
         <span class="flex flex-col"><cite class="not-italic text-lg md:text-xl">Cat Li</cite><cite class="not-italic font-medium text-lg opacity-50 md:text-lg">Product &amp; Engineering Lead, <span class="inline-block">Y Combinator</span></cite></span>
       </footer>
     </blockquote>
+  </div>
+</section>
+
+<section class="my-24 px-5">
+  <div class="max-w-screen-2xl mx-auto">
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Get advice from other teams using PostHog</h3>
+    <div class="flex justify-center">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-3 lg:grid-cols-3 justify-evenly relative text-center sm:text-left">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[10])} alt="YC logo" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Y Combinator</h5>
+          <p class="m-0 text-[15px]">The world's leading startup accelerator uses PostHog to power multiple products, improve engagement by +40%, and gather +30% more data than other tools. <a href="/customers/ycombinator">Read more.</a></p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[11])} alt="AssemblyAI" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">AssemblyAI</h5>
+          <p class="m-0 text-[15px]">AssemblyAI used to use Mixpanel, but had to limit ingestion to avoid exorbitant bills. They switched to PostHog and now track much more data, without any throttling. <a href="/customers/assemblyai">Read more.</a></p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[12])} alt="Goliath" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Goliath/h5>
+          <p class="m-0 text-[15px]">Goliath has put PostHog at the heart of it's product development cycle since joining the startup program. The data they gather helps them build better products. <a href="blog/startup-goliath">Read more.</a></p>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
 
