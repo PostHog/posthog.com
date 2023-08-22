@@ -1,5 +1,5 @@
 ---
-title: 18 product survey questions to help build a great product
+title: "How to write great product survey questions (with examples)"
 date: 2023-08-18
 author: ["ian-vanagas"]
 showTitle: true
