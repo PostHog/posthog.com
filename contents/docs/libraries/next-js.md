@@ -342,7 +342,7 @@ export default function PostHogClient() {
 }
 ```
 
-> **Note:** Because our server-side `posthog-node` initializations are short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. This ensures that events are sent immediately and not batched. We also need to call `await posthog.shutdownAsync()` after sending events to flush them.
+> **Note:** Because our server-side `posthog-node` initializations are short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. `flushAt` sets how many how many capture calls we should flush the queue (in one batch). `flushInterval` sets how many milliseconds we should wait before flushing the queue. Setting them to the lowest number ensures events are sent immediately and not batched. We also need to call `await posthog.shutdownAsync()` after sending events to flush them.
 
 With this `PostHogClient` component, we can both send events and fetch data from PostHog (such as feature flag evaluations) without client-side requests.
 
@@ -357,7 +357,6 @@ export default async function About() {
     'user_distinct_id' // replace with a user's distinct ID
   );
   await posthog.shutdownAsync()
-  return flags
 
   return (
     <main>
