@@ -1770,14 +1770,6 @@ export const docsMenu = {
                     icon: 'Home',
                     color: 'seagreen',
                 },
-                /*
-                {
-                    name: 'Getting started',
-                    url: '/docs/product-analytics/start',
-                    icon: 'GraduationCap',
-                    color: 'red',
-                },
-                */
                 {
                     name: 'Installation',
                     url: '/docs/product-analytics/installation',
@@ -1907,14 +1899,6 @@ export const docsMenu = {
                     icon: 'Home',
                     color: 'seagreen',
                 },
-                /*
-                {
-                    name: 'Getting started',
-                    url: '/docs/session-replay/start',
-                    icon: 'GraduationCap',
-                    color: 'red',
-                },
-                */
                 {
                     name: 'Installation',
                     url: '/docs/session-replay/manual',
@@ -1994,20 +1978,6 @@ export const docsMenu = {
                     url: '/docs/feature-flags',
                     icon: 'Home',
                     color: 'seagreen',
-                },
-                /*
-                {
-                    name: 'Getting started',
-                    url: '/docs/feature-flags/start',
-                    icon: 'GraduationCap',
-                    color: 'red',
-                },
-                */
-                {
-                    name: 'Product manual',
-                    url: '/docs/feature-flags/manual',
-                    icon: 'Book',
-                    color: 'blue',
                 },
                 {
                     name: 'Installation',

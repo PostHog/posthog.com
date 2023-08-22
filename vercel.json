@@ -741,6 +741,18 @@
             "destination": "/docs/product-analytics/user-properties"
         },
         {
+            "source": "/docs/feature-flags/multivariate-flags",
+            "destination": "/docs/feature-flags/creating-feature-flag"
+        },
+        {
+            "source": "/docs/feature-flags/libraries",
+            "destination": "/docs/feature-flags/"
+        },
+        {
+            "source": "/docs/feature-flags/manual",
+            "destination": "/docs/feature-flags/installation"
+        },
+        {
             "source": "/docs/feature-flags/rollout-strategies",
             "destination": "/docs/feature-flags/creating-feature-flags#release-conditions"
         },
