@@ -121,7 +121,7 @@ In addition to the The Mom Test, Annika recommends this book for its practical a
 
 One of the most universally popular books among the team (shortly followed by The Design of Everyday Things by Dan Norman), The Mom Test has helped shape the way we think about product design and user feedback at a fundamental level. 
 
-James recommends it in his guide to [finding product-market fit]((/blog/product-market-fit-game), and Product Manager Annika Schmid is a big fan:
+James recommends it in his guide to [finding product-market fit](/blog/product-market-fit-game), and Product Manager Annika Schmid is a big fan:
 
 “The Mom Test is just a classic. Honestly, I recommend it for anyone who ever has to talk to users.” 
 
