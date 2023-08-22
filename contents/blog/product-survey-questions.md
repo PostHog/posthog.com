@@ -17,7 +17,7 @@ tags:
 Product surveys help you understand what users are thinking and feeling, but they're useless if you don't ask the right questions. In this guide, we'll cover:
 
 1. How to set product survey goals
-2. How to write good product survey questions
+2. The 5 principles of good product survey questions
 3. Example product survey questions you can use
 4. How Amazon, Stripe, and Uber use surveys 
 5. Using surveys to find product-market fit
@@ -39,7 +39,7 @@ This ensures you only ask people who've recently completed the flow and have it 
 
 Targeting users using PostHog's [surveys feature](/docs/surveys/manual) is easy because it connects to user identification you set up for product analytics. This means you can target users based on their properties, connect survey responses to real usage data, and get session replays of those same users using your product.
 
-## How to write good product survey questions
+## The 5 principles of good product survey questions
 
 Once you have your goal, it's time to write your question(s). These are the five principles of good survey questions:
 
