@@ -15,24 +15,23 @@ _Chapter 2_
 _Chapter 3_
 # [Provinding a world class engineering environment](world-class-engineering)
 
-- Wide company with small teams
- 
-  - Deciding which products to build
-  - Everyone codes
-- How we get users
-  - Why we invest so much in our website
-  - We want to grow through word of mouth
-- Low prices
-- How we make users happy
-  - MVP -> PMF -> Innovate
-  - Engineers talk to users
-  - Engineers do support
-- How we make money
-  - Let users try it for free first, self serve
-  - Pay for what you use - usage and product-based
-  - How we do enterprise sales
-  - Make each product cheap
-  - High ACV
+_Chapter 4_
+# [Deciding which products to build](which-products)
+
+_Chapter 5_
+# [How we get users](how-we-get-users)
+
+_Chapter 6_
+# [Enduringly low prices](low-prices)
+
+_Chapter 7_
+# [How we make users happy](making-users-happy)
+
+_Chapter 8_
+# [How we make money](how-we-make-money)
+
+
+
 - How we’re building a strong team
   - What do people that do well have in common
   - Who loves working here

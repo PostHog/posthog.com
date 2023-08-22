@@ -10,7 +10,7 @@ How do we do that?
 
 ## No product management by default
 
-Engineers decide what to build. If you need help, our product manages (we have 1 today) will give you coaching 
+Engineers decide what to build. If you need help, our product manager (we have 1 today) will give you coaching 
 
 If an engineer at PostHog believes they should work on X, they can build X. We'd much prefer you ship 10 things quickly and make a couple of mistakes, then we plan too much - you will tend to gather more information by doing rather than planning (there are _some_ exceptions - for example, where we need to work on architecture, but we leave it down to you to decide when you should plan more or just get started).
 
@@ -18,7 +18,7 @@ If an engineer at PostHog believes they should work on X, they can build X. We'd
 
 In nearly any company, having each engineer decide what to work on would fail. Why? They simply would lack enough context over what the company is aiming for, or what everyone else is up to.
 
-PostHog is exceptionally transparent. You're reading our public handbook after all. 
+PostHog is exceptionally transparent. You're reading our public handbook after all.
 
 ## It starts with hiring
 
@@ -30,17 +30,12 @@ One of the things we've learned is the very strongest engineers are usually thos
 
 If we want to ship a lot, we need to figure out how we can have most of capital go into engineering.
 
-We have zero outbound sales, and a hyper efficient go to market, largely driven by self serve. Since we focus on engineers, we have less customer support and set up handholding than all our competitors.=
+We have zero outbound sales, and a hyper efficient go to market, largely driven by self serve. Since we focus on engineers, we have less customer support and set up handholding than all our competitors.
+
+80% of the company are shipping product.
  
 ## Deep work
 
 When you're doing engineering, you're in the business of building up large abstracted models in your head of how the code works. That takes time and requires focus. Doing a ton of meetings is a great way to screw this up.
 
 For those not doing customer success or recruitment (ie mainly engineering and marketing), we therefore have meeting free days every Tuesday and Thursday. We encourage you to call it out if things are going into your calendar on these days. Since we also are all remote, these usually give you lengths of uninterrupted time to get your work done.
-
-  
-  
-  
-  - Transparency (you can't have autonomy without it)
-  - We should have a high percentage of developers
-  - how we hire
