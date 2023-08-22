@@ -64,7 +64,7 @@ if (typeof window !== 'undefined') {
     loaded: (posthog) => {
       if (process.env.NODE_ENV === 'development') posthog.debug()
     },
-    capture_pageview: false // We capture manually
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
 }
 
@@ -108,7 +108,7 @@ import { useEffect } from "react";
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    capture_pageview: false // We capture manually
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
 }
 
@@ -148,7 +148,7 @@ import { useEffect } from "react";
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    capture_pageview: false // We capture manually
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
 }
 
@@ -326,7 +326,7 @@ export async function getServerSideProps(ctx) {
 
 ### App router
 
-For the app router, we can initialize the `posthog-node` SDK once with a `PostHogClient` component to import into files like this:
+For the app router, we can initialize the `posthog-node` SDK once with a `PostHogClient` function to import into files like this:
 
 ```js
 // app/posthog.js
