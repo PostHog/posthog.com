@@ -70,7 +70,35 @@ In order to trigger these workflows according to intervals chosen by our users, 
 
 After creation, the Schedule will wait until the end of the current batch period as defined by the batch export frequency: For example, until the end of the current hour for hourly exports. At this point, the Schedule will trigger a Workflow to export the data for the batch period that has just concluded. The process of scheduling a Workflow for execution works by placing the Activities defined in the Workflow on a task queue. Temporal Workers running in PostHog infrastructure will then pick up these tasks as they become available and execute them.
 
-> **Note:** Temporal Workers run in PostHog infrastructure and are maintained by PostHog, not by Temporal. This means no data leaves PostHog infrastructure until it is exported to the destination of your choosing. We encrypt all parameters sent to Temporal Cloud.
+> **Note:** Temporal Workers run in PostHog infrastructure and are maintained by PostHog, not by Temporal. This means no data leaves PostHog infrastructure unless it is being exported to the destination of your choosing. Any configuration parameters are encrypted before being sent to Temporal Cloud.
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant PostHog
+    participant Temporal
+    participant Worker
+    participant Destination
+
+    User->>PostHog: Batch export configuration
+    PostHog->>Temporal: Create Schedule
+    Temporal->>Temporal: Wait until end of current batch period
+    Temporal->>Worker: Trigger Workflow Execution
+
+    Worker->>Destination: Export data
+    critical
+        Destination->>Worker: Data export result
+    option Destination responds with a retryable error
+        Destination->>Worker: Retryable error (e.g. network timeout)
+        Worker->>Destination: Retry export data
+    option Destination responds with a non-retryable error
+        Destination->>Worker: Non-retryable error (e.g. authentication failure)
+        Worker->>Worker: Log error
+    end
+
+    Worker->>PostHog: Workflow Execution result
+    PostHog->>User: Inform batch export status
+```
 
 ## How does this differ from the old export apps?
 
