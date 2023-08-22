@@ -10,9 +10,9 @@ availability:
 
 Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. There are 3 ways you can do this:
 
-## Method 1: Assign an optional override
+## Method 1: Assign a user a specific flag value
 
-You can assign a user a specific flag value by **adding an optional override** to your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions). For example, you can create an override to assign a user a specific flag value if their email is your own (or someone in your team). 
+For boolean flags, you can roll out the flag to a specific user. For multivariate flags, you can assign a user to a specific variant by **adding an optional override** to your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions). 
 
 To do this:
 
@@ -23,7 +23,7 @@ To do this:
    - in cases where `email` is not available (such as when your users are logged out), you can use a parameter like `utm_source` and append `?utm_source=your_variant_name` to your URL.
 
 
-4. Set the optional override for the variant you'd like to assign these users to.
+4. If it is a multivariant flag, set the optional override to the variant you want to assign these users to.
 5. Click "Save".
 
 ![How to test your feature flag](../../images/features/feature-flags/override-feature-flag.mp4)
