@@ -152,7 +152,7 @@ There's even a dedicated survey for finding product-market fit: the PMF Survey. 
 
 Once you [implement your product survey](/tutorials/survey) and get all the data from it, you must put it to work. You can: 
 
-1. **Do more research** In PostHog, it's easy to connect respondents to their usage data, or look into usage trends based on responses. You can also use the responses to identify [users for interviews](/tutorials/feedback-interviews-site-apps) and dig into details further.
+1. **Do more research** – In PostHog, it's easy to connect respondents to their usage data, or look into usage trends based on responses. You can also use the responses to [identify users for interviews](/tutorials/feedback-interviews-site-apps) and dig into details further.
 
 2. **Start monitoring customer satisfaction** – Run repeated surveys asking the same questions to give you an idea of user perceptions over time. You can use this to track the impact of changes and identify areas requiring change.
 
