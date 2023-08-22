@@ -76,7 +76,7 @@ After creation, the Schedule will wait until the end of the current batch period
 
 - The data is exported on batches at a fixed frequency, like hourly or daily.
   - This allows us to optimize uploads and insertions which generally perform better with larger sizes.
-  - Export apps would process events as part of the ingestion pipeline, thus getting closer to real time exporting.
+  - If you need real time delivery, then you will want check out [webhooks](https://posthog.com/docs/webhooks).
 
 - Some features of the old export apps are still being ported over.
   - This includes logs and error reporting.
