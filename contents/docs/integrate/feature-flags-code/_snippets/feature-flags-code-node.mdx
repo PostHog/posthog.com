@@ -1,6 +1,8 @@
-## Step 1: Evaluate the feature flag value
+There are 2 steps to implement feature flags in Node:
 
-### Boolean feature flags
+### Step 1: Evaluate the feature flag value
+
+#### Boolean feature flags
 
 ```node
 const isFeatureFlagEnabled = await client.isFeatureEnabled('flag-key', 'distinct_id_of_your_user')
@@ -12,7 +14,7 @@ if (isFeatureFlagEnabled) {
 }
 ```
 
-### Multivariate feature flags
+#### Multivariate feature flags
 
 ```node
 const enabledVariant = await client.getFeatureFlag('flag-key', 'distinct_id_of_your_user')
@@ -31,7 +33,7 @@ import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-
 
 There are two methods you can use to include feature flag information in your events:
 
-### Method 1: Include the `$feature/feature_flag_name` property
+#### Method 1: Include the `$feature/feature_flag_name` property
 
  In the event properties, include `$feature/feature_flag_name: variant_key`:
 
@@ -45,7 +47,7 @@ client.capture({
 })
 ```
 
-### Method 2: Set `sendFeatureFlags` to `true`
+#### Method 2: Set `sendFeatureFlags` to `true`
 
 The `capture()` method has an optional argument `sendFeatureFlags`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
 
@@ -58,3 +60,18 @@ client.capture({
     sendFeatureFlags: true,
 })
 ```
+
+### Fetching all flags for a user
+
+You can fetch all flag values for a single user by calling `getAllFlags()` or `getAllFlagsAndPayloads()`.
+
+This is useful when you know you'll need to fetch multiple flag values, and don't want to make multiple requests.
+
+```node
+await client.getAllFlags('distinct_id_of_your_user') 
+await client.getAllFlagsAndPayloads('distinct_id_of_your_user')
+```
+
+import NodeOverrideServerProperties from './override-server-properties/node.mdx'
+
+<NodeOverrideServerProperties />

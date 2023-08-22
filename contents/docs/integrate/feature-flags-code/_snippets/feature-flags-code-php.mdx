@@ -1,6 +1,8 @@
-## Step 1: Evaluate the feature flag value
+There are 2 steps to implement feature flags in PHP:
 
-### Boolean feature flags
+### Step 1: Evaluate the feature flag value
+
+#### Boolean feature flags
 
 ```php
 $isMyFlagEnabledForUser = PostHog::isFeatureEnabled('flag-key', 'distinct_id_of_your_user')
@@ -10,7 +12,7 @@ if ($isMyFlagEnabledForUser) {
 }
 ```
 
-### Multivariate feature flags
+#### Multivariate feature flags
 
 ```php
 $enabledVariant = PostHog::getFeatureFlag('flag-key', 'distinct_id_of_your_user')
@@ -26,7 +28,7 @@ import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-
 
 There are two methods you can use to include feature flag information in your events:
 
-### Method 1: Include the `$feature/feature_flag_name` property
+#### Method 1: Include the `$feature/feature_flag_name` property
 
  In the event properties, include `$feature/feature_flag_name: variant_key`:
 
@@ -40,7 +42,7 @@ PostHog::capture(array(
 ));
 ```
 
-### Method 2: Set `sendFeatureFlagEvents` to `true`
+#### Method 2: Set `sendFeatureFlagEvents` to `true`
 
 The `capture()` method has an optional argument `sendFeatureFlagEvents`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
 
@@ -53,3 +55,17 @@ PostHog::capture(array(
   'sendFeatureFlagEvents' => true
 ));
 ```
+
+### Fetching all flags for a user
+
+You can fetch all flag values for a single user by calling `getAllFlags()`.
+
+This is useful when you know you'll need to fetch multiple flag values, and don't want to make multiple requests.
+
+```php  
+PostHog::getAllFlags('distinct_id_of_your_user')
+```
+
+import PHPOverrideServerProperties from './override-server-properties/php.mdx'
+
+<PHPOverrideServerProperties />
