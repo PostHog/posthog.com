@@ -65,7 +65,7 @@ posthog = PostHog::Client.new({
 
 3. Send a few events from your app.
 
-If no events are *not* visible in webhook.site, that means you have misconfigured your PostHog library. Consult our [installation guide](/docs/product-analytics/installation) for how to initialize PostHog.
+If events are *not* visible in webhook.site, that means you have misconfigured your PostHog library, or incorrectly formatted your events. Consult our [installation guide](/docs/product-analytics/installation) for how to initialize PostHog.
 
 If events are indeed visible in webhook.site, these means that you have configured your PostHog correctly.
 
@@ -94,7 +94,9 @@ To confirm if this is the issue, use the following steps:
 
 1. Ensure that PostHog is not [experiencing an incident](https://status.posthog.com), as this may cause ingestion lags.
 
-2. Send your event as a cURL request directly
+2. Check your PostHog app for any [ingestion warnings](https://app.posthog.com/data-management/ingestion-warnings).
+
+3. Send your event as a cURL request directly
     - i) Copy your cURL request.
          - If you're using the JavaScript web library, you can copy the cURL request from the network tab in your browser devtools.
          - If you're using any other library, you can track your outgoing network requests using something like [Wireshark](https://www.wireshark.org/) and format them as a cURL request.
