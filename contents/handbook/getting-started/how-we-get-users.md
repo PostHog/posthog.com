@@ -14,7 +14,7 @@ So when it comes to marketing and sales, we are optimizing for developer experie
 
 We've met multiple successful founders in our space, with companies well over $100M in annual revenue, filled with regret! The regret they _all_ had in common was letting go of their growth engine (people recommending their product to each other) and getting focused on sales. They all wound up exiting. That's why they told us this stuff.
 
-The way this pans out? They gradually shifted as they got bigger from building for users, to building for buyers to optimize for revenue growth. Over time, that killed their word of mouth growth, which cuased them to have to work harder for each sale. So they got salesier still, and so on. They became companies that focused on making a bunch of money _by_ building a product, instead of being companies focused on building a great product.
+The way this pans out? They gradually shifted as they got bigger from building for users, to building for buyers to optimize for revenue growth. Over time, that killed their word of mouth growth, which caused them to have to work harder for each sale. So they got salesier still, and so on. They became companies that focused on making a bunch of money _by_ building a product, instead of being companies focused on building a great product.
 
 We simply won't make this mistake.
 
