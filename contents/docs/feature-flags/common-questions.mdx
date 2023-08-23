@@ -15,11 +15,11 @@ Check the **feature flags tab** on [the persons page](https://app.posthog.com/pe
 - If the flag is shown as disabled here, check the "match evaluation" column to know the understand why.
 - If the flag is shown as enabled here, there may be a problem in your code. Double-check the steps to [add feature flag code](/docs/feature-flags/adding-feature-flag-code).
 
-### 2. Check you're calling `identify()` before fetching the flag
+### 2. Check you're calling `identify()` before evaluating the flag
 
 If you're [identifying]((/docs/product-analytics/identify)) users, they may see a different value for a feature flag before and after you call `identify()`. 
 
-Thus to ensure they experience consistent behavior, ensure you call `identify()` before fetching the feature flag.
+To ensure they experience consistent behavior, check that you call `identify()` before evaluating the feature flag.
 
 ### 3. An ad-blocker may be blocking calls
 
@@ -27,13 +27,13 @@ Check if an ad-blocker is interfering with PostHog calls. If this is the case, y
 
 ### 4. User or group properties may not have been ingested yet
 
-If your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) depend on user or group properties, and you immediately fetch the feature flag after updating any of these properties, the properties may not be ingested in time to calculate the correct flag value.
+If your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) depend on user or group properties, and you immediately evaluate the feature flag after updating them, the properties may not be ingested in time to calculate the correct flag value.
 
 In this case, when making your `getFeatureFlag()` call, you can manually include in these properties in the method arguments.
 
 ### 5. Raise a support ticket
 
-If none of the above steps resolve your issue, you can [raise a support ticket](https://app.posthog.com/home#supportModal) to see if we can help debug.
+If none of the above resolve your issue, you can [raise a support ticket](https://app.posthog.com/home#supportModal) to see if we can help debug.
 
 import FAQFalseOrNoneEvents from "./snippets/faq-false-or-none-events.mdx"
 
@@ -41,7 +41,7 @@ import FAQFalseOrNoneEvents from "./snippets/faq-false-or-none-events.mdx"
 
 ## How can I reduce the latency of feature flag requests on my server?
 
-Evaluating feature flags requires making a request to PostHog. However, you can [evaluating feature flags locally](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) instead – without having to make a request to PostHog.
+Evaluating feature flags requires making a request to PostHog. However, you can [evaluate feature flags locally](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) instead – without having to make a request to PostHog.
 
 ## How can I reduce the cost of feature flags?
 
@@ -63,7 +63,7 @@ Each request charges 10 credits, so assuming your server is constantly running a
 
 You can reduce this by increasing the [feature flag polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-personal-api-key) when initializing PostHog. For example, every 5 minutes instead of every 30 seconds.
 
-The drawback of this approach is that whenever you make an update to a feature flag using the PostHog UI, it takes 5 minutes (instead of 30) for that change to roll to your server.
+The drawback of this approach is that whenever you make an update to a feature flag using the PostHog UI, it takes 5 minutes (instead of 30 seconds) for that change to roll to your server.
 
 > **Note:** Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
 
