@@ -56,7 +56,7 @@ A "Create historic export" button can be found in the UI:
 
 ![batch exports ui](../../../images/docs/batch-exports/batch-exports-ui.png)
 
-Which will let users input the start and end date of the historical export:
+Which will let you input the start and end date of the historical export:
 
 ![create historic export](../../../images/docs/batch-exports/create-historic-export.png)
 
