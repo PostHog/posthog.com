@@ -1,4 +1,6 @@
-## Step 1: Evaluate the feature flag value using the `/decide`
+There are 3 steps to implement feature flags using the PostHog API:
+
+### Step 1: Evaluate the feature flag value using the `/decide`
 
 `/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not.
 
@@ -88,3 +90,7 @@ curl -v -L --header "Content-Type: application/json" -d '  {
    "event": "$feature_flag_called"
 }' https://app.posthog.com/capture/ # or https://eu.posthog.com/capture/
 ```
+
+import APIOverrideServerProperties from './override-server-properties/api.mdx'
+
+<APIOverrideServerProperties />

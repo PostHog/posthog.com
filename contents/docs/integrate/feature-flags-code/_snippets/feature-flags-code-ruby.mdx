@@ -1,6 +1,8 @@
-## Step 1: Evaluate the feature flag value
+There are 2 steps to implement feature flags in Ruby:
 
-### Boolean feature flags
+### Step 1: Evaluate the feature flag value
+
+#### Boolean feature flags
 
 ```ruby
 is_my_flag_enabled = posthog.is_feature_enabled('flag-key', 'distinct_id_of_your_user')
@@ -12,7 +14,7 @@ if is_my_flag_enabled
 end
 ```
 
-### Multivariate feature flags
+#### Multivariate feature flags
 
 ```ruby
 enabled_variant = posthog.get_feature_flag('flag-key', 'distinct_id_of_your_user')
@@ -30,7 +32,7 @@ import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-
 
 There are two methods you can use to include feature flag information in your events:
 
-### Method 1: Include the `$feature/feature_flag_name` property
+#### Method 1: Include the `$feature/feature_flag_name` property
 
  In the event properties, include `$feature/feature_flag_name: variant_key`:
 
@@ -44,7 +46,7 @@ posthog.capture({
 })
 ```
 
-### Method 2: Set `send_feature_flags` to `true`
+#### Method 2: Set `send_feature_flags` to `true`
 
 The `capture()` method has an optional argument `send_feature_flags`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
 
@@ -57,3 +59,18 @@ posthog.capture({
     send_feature_flags: true,
 })
 ```
+
+### Fetching all flags for a user
+
+You can fetch all flag values for a single user by calling `get_all_flags()` or `get_all_flags_and_payloads()`.
+
+This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
+
+```ruby  
+posthog.get_all_flags('distinct_id_of_your_user')
+posthog.get_all_flags_and_payloads('distinct_id_of_your_user') 
+```
+
+import RubyOverrideServerProperties from './override-server-properties/ruby.mdx'
+
+<RubyOverrideServerProperties />
