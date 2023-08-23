@@ -110,16 +110,6 @@ Finally, click save and toggle the app to activate it. You'll be able to track h
 
 > Be sure to test your filters drop the events you expect, because miswritten schema can filter large amounts of events. For example, our sample `email` filter filters all events without an email key and autocaptured properties must start with `$`.
 
-## Drop events based on property app
-
-The second app is the “[Drop events based on property](https://github.com/PostHog/drop-events-on-property-plugin)” app. It is similar to the Filter Out app. You can use it to drop events that match a specified property. This is useful for [privacy-focused](/tutorials/property-filter) teams or teams who want to keep fewer events. 
-
-To set up this app, search for “Drop Events Based On Property” in Apps, click the blue gear, add the key and value (optional) of the event you want to drop, click save, and activate the toggle. As an example, if I want to drop events related to a specific page, I can set the property key to `$pathname` and the property value to `/about`
-
-![Drop events based on property app](../images/tutorials/fewer-unwanted-events/drop-events.png)
-
-Doing this drops any events where the property `$pathname` is `/about`. This is useful if certain pages on your site create a lot of events, but aren’t useful to you. Other uses include dropping events from a specific OS, browser, device type, location, user (distinct ID), and more.
-
 ## Downsampling app (not recommended)
 
 The third app you can use to keep fewer events is the [Downsampler](/docs/apps/downsampling) app. It reduces the number of events your instance will ingest by a percentage.
