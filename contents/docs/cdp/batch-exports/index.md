@@ -37,7 +37,7 @@ As an example, creating a batch export of events with daily frequency today will
 
 ### Tracking progress
 
-On each batch export view we will be presented with a list of the latest runs executed:
+On each batch export view, you are presented with a list of the latest executed runs:
 
 ![batch export runs](../../../images/docs/batch-exports/batch-exports-runs.png)
 
