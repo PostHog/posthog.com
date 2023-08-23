@@ -19,7 +19,7 @@ tags:
 
 ## What is the AARRR framework?
 
-The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a classic framework for understanding customer behavior. It was originally devised by startup guru Dave McClure in 2007.[^1] 
+The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a classic framework for understanding customer behavior. It was originally [devised](https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-nov-2010) by startup guru Dave McClure in 2007. 
 
 It's useful for marketers, product managers, and growth hackers at startups, and applicable to any kind of online business, such as a B2B SaaS product, e-commerce website, or direct-to-consumer product.
 
@@ -204,7 +204,7 @@ Dave McClure's original framework suggests you spend 80% of your effort on refin
 
 3. Less is more when it comes to metrics, too. It might be tempting to have three or four measures for retention, for example, but try to stick to one or two for each category.  
 
-Here's some recommended further reading around product growth and user engagement:
+### Further reading
 
 - **[How to achieve B2B product-market fit](/blog/product-market-fit-game)**: There's no universal standard for achieving market fit, but this guide introduces problem-solving techniques to help you find it for a B2B product.
 
