@@ -67,9 +67,9 @@ client.Enqueue(posthog.Capture{
 
 You can fetch all flag values for a single user by calling `GetAllFlags()`.
 
-This is useful when you know you'll need to fetch multiple flag values, and don't want to make multiple requests.
+This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
 
-```python  
+```go  
 featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
         DistinctId: "distinct_id_of_your_user",
 })
