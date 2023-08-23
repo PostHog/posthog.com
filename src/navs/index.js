@@ -1901,7 +1901,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Installation',
-                    url: '/docs/session-replay/manual',
+                    url: '/docs/session-replay/installation',
                     icon: 'Book',
                     color: 'blue',
                 },
@@ -2003,7 +2003,7 @@ export const docsMenu = {
                     icon: 'TestTube',
                     color: 'purple',
                 },
-                {                    
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/feature-flags/common-questions',
                     icon: 'Question',
@@ -2067,7 +2067,7 @@ export const docsMenu = {
                 */
                 {
                     name: 'Installation',
-                    url: '/docs/experiments/manual',
+                    url: '/docs/experiments/installation',
                     icon: 'Book',
                     color: 'blue',
                 },
