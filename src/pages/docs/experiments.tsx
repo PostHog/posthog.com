@@ -60,7 +60,7 @@ export const Intro = ({ image = true }) => (
             <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                 Test changes in production with an experimentation suite that makes it easy to get the results you want.
             </h3>
-            <CallToAction to="/docs/experiments/manual#creating-an-experiment" className="mr-2">
+            <CallToAction to="/docs/experiments/installation" className="mr-2">
                 Roll out your first experiment
             </CallToAction>
             <CallToAction type="secondary" to="/book-a-demo">

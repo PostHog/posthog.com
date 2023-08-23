@@ -1,0 +1,77 @@
+There are 2 steps to implement feature flags in Node:
+
+### Step 1: Evaluate the feature flag value
+
+#### Boolean feature flags
+
+```node
+const isFeatureFlagEnabled = await client.isFeatureEnabled('flag-key', 'distinct_id_of_your_user')
+if (isFeatureFlagEnabled) {
+    // Your code if the flag is enabled
+
+    // Optional: fetch the payload
+    const matchedFlagPayload = await client.getFeatureFlagPayload('flag-key', 'distinct_id_of_your_user')
+}
+```
+
+#### Multivariate feature flags
+
+```node
+const enabledVariant = await client.getFeatureFlag('flag-key', 'distinct_id_of_your_user')
+
+if (enabledVariant === 'variant-key') {  // replace 'variant-key' with the key of your variant
+    // Do something differently for this user
+
+    // Optional: fetch the payload
+    const matchedFlagPayload = await client.getFeatureFlagPayload('flag-key', 'distinct_id_of_your_user')
+}
+```
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+
+<IncludePropertyInEvents />
+
+There are two methods you can use to include feature flag information in your events:
+
+#### Method 1: Include the `$feature/feature_flag_name` property
+
+ In the event properties, include `$feature/feature_flag_name: variant_key`:
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_your_user',
+    event: 'event_name',
+    properties: {
+        '$feature/feature-flag-key': 'variant-key' // replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
+    },
+})
+```
+
+#### Method 2: Set `sendFeatureFlags` to `true`
+
+The `capture()` method has an optional argument `sendFeatureFlags`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
+
+Note that by doing this, PostHog will make an additional request to fetch feature flag information before capturing the event. So this method is only recommended if you don't mind the extra API call and delay.
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_your_user',
+    event: 'event_name',
+    sendFeatureFlags: true,
+})
+```
+
+### Fetching all flags for a user
+
+You can fetch all flag values for a single user by calling `getAllFlags()` or `getAllFlagsAndPayloads()`.
+
+This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
+
+```node
+await client.getAllFlags('distinct_id_of_your_user') 
+await client.getAllFlagsAndPayloads('distinct_id_of_your_user')
+```
+
+import NodeOverrideServerProperties from './override-server-properties/node.mdx'
+
+<NodeOverrideServerProperties />

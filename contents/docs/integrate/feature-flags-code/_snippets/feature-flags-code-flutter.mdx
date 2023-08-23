@@ -1,0 +1,15 @@
+### Boolean feature flags
+
+```dart
+Posthog.isFeatureEnabled(
+  key: 'flag-key',
+);
+```
+
+### Multivariate feature flags
+
+Multivariate feature flags are not yet available in our Flutter SDK.
+
+### Reloading feature flags
+
+Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call `PostHog.reloadFeatureFlags()`.

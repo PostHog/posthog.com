@@ -1,0 +1,46 @@
+---
+title: Testing your feature flag
+sidebar: Docs
+showTitle: true
+---
+
+Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. There are 3 ways you can do this:
+
+## Method 1: Assign a user a specific flag value
+
+For boolean flags, you can roll out the flag to a specific user. For multivariate flags, you can assign a user to a specific variant by **adding an optional override** to your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions). 
+
+To do this:
+
+1. Go to your feature flag.
+2. Ensure the feature flag is enabled by checking the "Enable feature flag" box.
+3. Add a new condition set with the condition to `email = your_email@domain.com`. Set the rollout percentage for this set to 100%.
+   
+   - in cases where `email` is not available (such as when your users are logged out), you can use a parameter like `utm_source` and append `?utm_source=your_variant_name` to your URL.
+
+
+4. If it is a multivariant flag, set the optional override to the variant you want to assign these users to.
+5. Click "Save".
+
+![How to test your feature flag](../../images/features/feature-flags/override-feature-flag.mp4)
+
+## Method 2: Use `posthog.featureFlags.override()`
+
+> **Note:** The `posthog.featureFlags.override()` method is only available in the [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs.
+
+You can add a manual override directly in your code by calling `posthog.featureFlags.override()`:
+
+```javascript
+posthog.featureFlags.override({
+    'your_boolean_feature_flag_key': true // for boolean feature flags
+    'your_multivariate_feature_flag_key': 'your_variant_name', // for multivariate feature flags
+})
+```
+
+## Method 3: Use the PostHog toolbar
+
+> **Note:** The [PostHog toolbar](/docs/toolbar) is only available for the [JavaScript web SDK](/docs/libraries/js).
+
+import OverrideFeatureFlags from "../toolbar/_snippets/override-feature-flags.mdx"
+
+<OverrideFeatureFlags />

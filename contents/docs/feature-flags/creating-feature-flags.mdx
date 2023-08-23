@@ -1,0 +1,73 @@
+---
+title: Creating feature flags
+sidebar: Docs
+showTitle: true
+availability:
+    free: partial
+    selfServe: full
+    enterprise: full
+---
+
+To create a new feature flag, go to the [feature flags tab](https://app.posthog.com/feature_flags) in the PostHog app, and click on the "New feature flag" button in the top right.
+
+This presents you with a form where you can complete the details of your new flag:
+
+![How to create a feature flag in PostHog](../../images/features/feature-flags/create-new-feature-flag.png)
+
+Here's a breakdown of each field in the form:
+
+### Key
+
+This is the name of the key you use in your code to evaluate the feature flag.
+
+### Description and tags 
+
+Metadata to describe and share information about your feature flag in the PostHog app.
+
+### Enable feature flag
+
+This determines whether your flag is enabled. Disabled flags return `undefined` or `null`.
+
+### Persisting feature flags across authentication steps
+
+> This is only relevant if your feature flag is shown to both logged out AND logged in users.
+
+Feature flag values are calculated based on a user's properties. Since it's possible for a user to have different properties before and after login, they may receive different feature flag values before and after logging in.
+
+By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same. 
+
+There are trade-offs to enabling this:
+
+1. It slows down the feature flag response.
+2. It disables [local evaluation](/docs/feature-flags/local-evaluation) of the feature flag.
+3. It disables [bootstrapping](/docs/feature-flags/bootstrapping) the feature flag.
+
+### Served value
+
+There are two types of feature flags:
+
+#### 1. Boolean flags. 
+
+These return `true` or `false`.
+
+#### 2. Multiple variant flags (multivariate flags). 
+
+Instead of returning true or false, multivariate flags return a key – for example, `control` or `test`. 
+
+You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages.
+
+### Payloads
+
+A payload is an additional piece of information sent to your app when a flag is matched for a user. The returned value can be any valid JSON type (object, array, number, string, boolean, or null).
+
+They enable you to configure functionality related to your flag inside PostHog, instead of having to make code changes or redeploy your app.
+
+> **Note**: Payloads are only available in our JavaScript web, Node, Python, Ruby, and React libraries.
+
+### Release conditions
+
+This specifies the conditions a user must meet to access the feature flag and receive a value.
+
+You can create conditions based on [user properties](/docs/product-analytics/user-properties), [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties), or [cohorts](/docs/data/cohorts).
+
+![Feature flags release conditions](../../images/features/feature-flags/release-conditions.png)

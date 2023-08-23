@@ -15,9 +15,11 @@ tags:
   - Product analytics
 ---
 
+> **Want to build an AARRR funnel in PostHog?** Use our [AARRR dashboard template](/templates/aarrr-dashboard) to set one up quickly and easily.
+
 ## What is the AARRR framework?
 
-The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a classic framework for understanding customer behavior. It was originally devised by startup guru Dave McClure in 2007.[^1] 
+The AARRR framework, also known as "pirate metrics" or the AARRR funnel, is a classic framework for understanding customer behavior. It was originally [devised](https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-nov-2010) by startup guru Dave McClure in 2007. 
 
 It's useful for marketers, product managers, and growth hackers at startups, and applicable to any kind of online business, such as a B2B SaaS product, e-commerce website, or direct-to-consumer product.
 
@@ -202,7 +204,7 @@ Dave McClure's original framework suggests you spend 80% of your effort on refin
 
 3. Less is more when it comes to metrics, too. It might be tempting to have three or four measures for retention, for example, but try to stick to one or two for each category.  
 
-Here's some recommended further reading around product growth and user engagement:
+### Further reading
 
 - **[In-depth guide to measuring product-market fit](/blog/measure-product-market-fit):** The 7 ways to measure product-market fit, explained. 
 
@@ -211,3 +213,5 @@ Here's some recommended further reading around product growth and user engagemen
 - **[How to work out what your users really need](/blog/how-to-work-out-what-users-need):** How to use 1:1 customer interviews, surveys, metrics and session recordings to work out what your users really need.
 
 [^1]: _[Startup Metrics for Pirates deck](https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-nov-2010) – Dave McClure refined his original deck from its inception in 2007. This version is from 2010._ 
+
+> **Want to build an AARRR funnel in PostHog?** Use our [AARRR dashboard template](/templates/aarrr-dashboard) to set one up quickly and easily.

@@ -1,0 +1,44 @@
+### Boolean feature flags
+
+```js-web
+if (posthog.isFeatureEnabled('flag-key') ) {
+    // Do something differently for this user
+
+    // Optional: fetch the payload
+    const matchedFlagPayload = posthog.getFeatureFlagPayload('flag-key')
+}
+```
+
+### Multivariate feature flags
+
+```js-web
+if (posthog.getFeatureFlag('flag-key')  == 'variant-key') { // replace 'variant-key' with the key of your variant
+    // Do something differently for this user
+    
+    // Optional: fetch the payload
+    const matchedFlagPayload = posthog.getFeatureFlagPayload('flag-key')
+}
+```
+
+### Ensuring flags are loaded before usage
+
+Every time a user loads a page, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in a cookie.
+
+This means that for most pages, the feature flags are available immediately – **except for the first time a user visits**.
+
+To handle this, you can use the `onFeatureFlags` callback to wait for the feature flag request to finish:
+
+```js-web
+posthog.onFeatureFlags(function () {
+    // feature flags are guaranteed to be available at this point
+    if (posthog.isFeatureEnabled('flag-key')) {
+        // do something
+    }
+})
+```
+
+### Reloading feature flags
+
+Feature flag values are cached. If something changed with your user and you want to refetch their flag values, call `posthog.reloadFeatureFlags()`.
+
+

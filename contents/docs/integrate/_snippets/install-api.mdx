@@ -1,0 +1,26 @@
+import ObtainPersonalAPIKey from "./obtain-personal-api-key.mdx"
+
+<ObtainPersonalAPIKey />
+
+#### How to authenticate using the personal API key
+
+There are three options:
+
+1. Use the `Authorization` header and `Bearer` authentication, like so:
+    ```js
+    const headers = {
+        Authorization: `Bearer ${POSTHOG_PERSONAL_API_KEY}`
+    }
+    ```
+2. Put the key in request body, like so:
+    ```js
+    const body = {
+        personal_api_key: POSTHOG_PERSONAL_API_KEY
+    }
+    ```
+3. Put the key in query string, like so:
+    ```js
+    const url = `https://app.posthog.com/api/event/?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`
+    ```
+
+Any one of these methods works, but only the value encountered first (in the order above) will be used for authentication.
