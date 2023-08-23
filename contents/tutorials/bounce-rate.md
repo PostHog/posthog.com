@@ -61,6 +61,35 @@ select (
 from raw_session_replay_events
 ```
 
+## Calculating bounce rate for a specific page
+
+We use a more complicated SQL query to get the bounce rate for a specific page. 
+
+1. We get a count of distinct `session_id` values where the `click_count` is 0 and the `active_milliseconds` is 60000. 
+2. We divide this the total number of distinct `session_id` values for the page.
+3. Use an `INNER JOIN` to add the `events` table to get the `created_at` date and `$properties.current_url` value.
+4. Filter for `created_at` dates in the last week with the `$current_url` of a specific URL (in this case, `https://posthog.com/`).
+
+Altogether this looks like this:
+
+```sql
+SELECT 
+    (COUNT(DISTINCT CASE 
+        WHEN (raw_session_replay_events.click_count = 0 AND raw_session_replay_events.active_milliseconds < 60000) 
+        THEN raw_session_replay_events.session_id 
+        ELSE NULL 
+    END) * 100.0) / COUNT(DISTINCT properties.$session_id) AS bounce_rate
+FROM 
+    events
+INNER JOIN 
+    raw_session_replay_events ON events.properties.$session_id = raw_session_replay_events.session_id
+WHERE 
+    created_at >= now() - INTERVAL 7 DAY 
+    AND properties.$current_url = 'https://posthog.com/'
+```
+
+This gives a bounce rate percentage for our homepage, and you can edit it for any specific page you want.
+
 ## Further reading
 
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
