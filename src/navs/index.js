@@ -1911,6 +1911,16 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'SQL',
+                    url: '/docs/product-analytics/sql',
+                    icon: 'HogQL',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Notifications',
                     url: '/docs/product-analytics/subscriptions',
                     icon: 'Bell',
