@@ -2703,6 +2703,17 @@ const menu = [
                     { name: 'Questions', url: '/ab-testing/questions' },
                 ],
             },
+            {
+                name: 'Surveys',
+                icon: 'Message',
+                color: 'salmon',
+                url: '/surveys',
+                children: [
+                    { name: 'Features', url: '/surveys' },
+                    { name: 'Tutorials', url: '/surveys/tutorials' },
+                    { name: 'Roadmap', url: '/surveys/roadmap' },
+                ],
+            },
         ],
     },
     pricingMenu,

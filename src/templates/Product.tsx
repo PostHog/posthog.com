@@ -181,6 +181,7 @@ export default function Product({ data, location, pageContext }) {
                 subtitle={subtitle}
                 image={productHero}
                 customers={customers}
+                video={productHero?.video?.publicURL}
             />
         ),
         HeroCondensed: (props: any) => (
@@ -265,7 +266,7 @@ export default function Product({ data, location, pageContext }) {
         <Layout parent={productMenu}>
             <SEO
                 image={`/images/product/${slug.split('/')[1]}.png`}
-                title={`${title} ${parent.name} - PostHog`}
+                title={`${title} ${parent.name === 'index' ? '' : parent.name} - PostHog`}
                 description={description || excerpt}
             />
 
@@ -314,6 +315,9 @@ export const query = graphql`
                         childImageSharp {
                             gatsbyImageData
                         }
+                    }
+                    video {
+                        publicURL
                     }
                     width
                     height

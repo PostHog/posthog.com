@@ -2,6 +2,7 @@ import React from 'react'
 import { IFeature, IFeatureGridProps } from './types'
 import * as ProductIcons from 'components/ProductIcons'
 import * as NotProductIcons from 'components/NotProductIcons'
+import * as PostHogIcons from '@posthog/icons'
 import { SectionWrapper } from './Section'
 import { getTailwindGridCol } from './util'
 
@@ -54,7 +55,7 @@ export const FeatureDescription = ({ children, className = '' }: { children: Rea
 )
 
 export const Feature = ({ title, description, className = '', icon }: IFeature) => {
-    const Icon = ProductIcons[icon] || NotProductIcons[icon]
+    const Icon = ProductIcons[icon] || NotProductIcons[icon] || PostHogIcons[icon]
     return (
         <li className={`sm:p-6 sm:pb-8  ${className}`}>
             {Icon && <Icon className="w-10 h-10 mb-4 opacity-50" />}

@@ -13,6 +13,7 @@ export default function Hero({
     mainCTA,
     pricingCTA,
     customers,
+    video,
 }: {
     title: string
     subtitle: string
@@ -21,6 +22,7 @@ export default function Hero({
         width: number | string
         height: number | string
     }
+    video: string
     mainCTA: {
         title: string
         url: string
@@ -81,17 +83,23 @@ export default function Hero({
                     )}
                 </div>
 
-                {gatsbyImage && (
-                    <div
-                        style={imageStyles}
-                        className="
+                {video ? (
+                    <div className="md:-mr-5 lg:-mr-6 xl:-mr-12">
+                        <video autoPlay loop muted playsInline src={video} />
+                    </div>
+                ) : (
+                    gatsbyImage && (
+                        <div
+                            style={imageStyles}
+                            className="
                             leading-0
                             relative !max-w-xl xl:!max-w-none after:absolute after:bottom-0 after:left-0 after:w-full after:content-[''] after:h-36 after:bg-gradient-to-b after:from-tan/0 after:via-tan/60 after:to-tan/100
                             md:after:hidden
                             md:-mr-16 xl:-mr-32"
-                    >
-                        <GatsbyImage alt={title} image={gatsbyImage} objectFit="contain" className="w-full" />
-                    </div>
+                        >
+                            <GatsbyImage alt={title} image={gatsbyImage} objectFit="contain" className="w-full" />
+                        </div>
+                    )
                 )}
             </div>
         </div>
