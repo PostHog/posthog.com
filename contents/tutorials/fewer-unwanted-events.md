@@ -82,7 +82,7 @@ PostHog has apps that enable you to modify the events flowing into your instance
 
 The first app is the "Filter Out" app. It is used to filter out (or in) events matching certain conditions. This includes filters like number comparison, string regex, and boolean checks.
 
-To set it up, go to Browse Apps, search for "Filter Out Plugin," and upload JSON matching the schema detailed in the [README](https://github.com/plibither8/posthog-filter-out-plugin). This will look something like:
+To set it up, go to Browse Apps, search for "Filter Out Plugin," and upload JSON matching the schema detailed in the [README](https://github.com/posthog/posthog-filter-out-plugin). This will look something like:
 
 ```js
 [
