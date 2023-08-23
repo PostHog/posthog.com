@@ -1,0 +1,110 @@
+---
+title: Feature flag installation
+sidebar: Docs
+showTitle: true
+availability:
+    free: partial
+    selfServe: full
+    enterprise: full
+---
+
+Feature flags enable safer deployment and roll back of new features and code. This helps roll out new features to your users in a managed way. If something goes wrong, flags enable roll backs without having to re-deploy your application.
+
+Feature flags also help you control access to certain parts of your product, such as only showing paid features to users with an active subscription or [early access features](/docs/feature-flags/early-access-feature-management) to users enrolled in a beta. 
+
+To start using feature flags, install PostHog:
+
+import Tab from "components/Tab"
+import Frameworks from "../integrate/\_snippets/frameworks.mdx"
+import APIInstall from '../integrate/_snippets/install-api.mdx'
+import WebInstall from '../integrate/_snippets/install-web.mdx'
+import ReactInstall from '../integrate/_snippets/install-react.mdx'
+import NodeInstall from '../integrate/_snippets/install-node.mdx'
+import PythonInstall from '../integrate/_snippets/install-python.mdx'
+import PHPInstall from '../integrate/_snippets/install-php.mdx'
+import RubyInstall from '../integrate/_snippets/install-ruby.mdx'
+import GoInstall from '../integrate/_snippets/install-go.mdx'
+import ReactNativeInstall from '../integrate/_snippets/install-react-native.mdx'
+import AndroidInstall from '../integrate/_snippets/install-android.mdx'
+import IOSInstall from '../integrate/_snippets/install-ios.mdx'
+import JavaInstall from '../integrate/_snippets/install-java.mdx'
+import RustInstall from '../integrate/_snippets/install-rust.mdx'
+import FlutterInstall from '../integrate/_snippets/install-flutter.mdx'
+import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Elixir', 'Flutter', 'api']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>React</Tab>
+        <Tab>Node.js</Tab>
+        <Tab>Python</Tab>
+        <Tab>PHP</Tab>
+        <Tab>Ruby</Tab>
+        <Tab>Go</Tab>
+        <Tab>React Native</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+        <Tab>Java</Tab>
+        <Tab>Rust</Tab>
+        <Tab>Elixir</Tab>
+        <Tab>Flutter</Tab>
+        <Tab>API</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <WebInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <NodeInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PHPInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <RubyInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GoInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactNativeInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AndroidInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <IOSInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <blockquote class='warning-note'>
+                Feature flags are not supported yet in our <a href="/docs/libraries/java">Java SDK</a>. However, you can integrate them into your project by using the <a href="/docs/feature-flags/installation?tab=api">PostHog API</a>.
+            </blockquote>
+        </Tab.Panel>
+        <Tab.Panel>
+            <blockquote class='warning-note'>
+                Feature flags are not supported yet in our community-maintained <a href="/docs/libraries/rust">Rust SDK</a>. However, you can integrate them into your project by using the <a href="/docs/feature-flags/installation?tab=api">PostHog API</a>.
+            </blockquote>
+        </Tab.Panel>
+        <Tab.Panel>
+            <blockquote class='warning-note'>
+                Feature flags are not supported yet in our <a href="/docs/libraries/elixir">Elixir SDK</a>. However, you can integrate them into your project by using the <a href="/docs/feature-flags/installation?tab=api">PostHog API</a>.
+            </blockquote>
+        </Tab.Panel>
+        <Tab.Panel>
+           <FlutterInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <APIInstall />
+            <blockquote>
+            For more details, see our <a href="/docs/api">API docs</a>
+            </blockquote>
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

@@ -66,7 +66,7 @@ However, beyond this the experience of migrating to ClickHouse was incredibly po
 
 ## Making the switch
 
-Normally, the process of switching to a new database model could be quite tricky. Luckily, however, we’d just created [feature flags](/docs/user-guides/feature-flags) within PostHog and were able to leverage this when switching.
+Normally, the process of switching to a new database model could be quite tricky. Luckily, however, we’d just created [feature flags](/docs/feature-flags) within PostHog and were able to leverage this when switching.
 
 First, we deployed ClickHouse in parallel to Postgres and began ingesting data simultaneously into both. We then put all of our features and internal tools behind a feature flag in PostHog, reimplemented our analytic queries one by one and then used the feature flags to switch over.
 

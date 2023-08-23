@@ -1,0 +1,25 @@
+import OverrideServerPropertiesIntro from './override-server-properties-intro.mdx'
+
+<OverrideServerPropertiesIntro />
+
+```go
+enabledVariant, err := client.GetFeatureFlag(
+    FeatureFlagPayload{
+        Key:        "flag-key",
+        DistinctId: "distinct_id_of_the_user",
+        Groups: posthog.NewGroups().
+            Set("your_group_type", "your_group_id").
+            Set("another_group_type", "your_group_id"),
+        PersonProperties: posthog.NewProperties().
+            Set("property_name", "value"),
+        GroupProperties: map[string]map[string]interface{}{
+            "your_group_type": {
+                "group_property_name": "value",
+            },
+            "another_group_type": {
+                "group_property_name": "value",
+            },
+        },
+    },
+)
+```

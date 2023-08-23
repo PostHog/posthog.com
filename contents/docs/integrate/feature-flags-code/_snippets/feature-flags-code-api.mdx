@@ -1,0 +1,96 @@
+There are 3 steps to implement feature flags using the PostHog API:
+
+### Step 1: Evaluate the feature flag value using the `/decide`
+
+`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not.
+
+#### Request
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "distinct_id_of_your_user",
+    "groups" : { # Required only for group-based feature flags
+        "group_type": "group_id" # Replace "group_type" with the name of your group type. Replace "group_id" with the id of your group.
+    },
+    "person_properties": {"<personProp1>": "<personVal1>"}, # Optional. Include any properties used to calculate the value of the feature flag.
+    "group_properties": {"group type": {"<groupProp1>":"<groupVal1>"}} # Optional. Include any properties used to calculate the value of the feature flag.
+}' https://app.posthog.com/decide?v=3 # or https://eu.posthog.com/decide?v=3
+```
+
+> **Note:** `person_properties` and `group_properties` are optional. 
+> 
+> By default, flag evaluation uses the user and group properties stored in PostHog. You only need to provide `person_properties` and `group_properties` if you wish to use different values than the ones in PostHog.
+
+#### Response
+
+```shell
+{
+  "config": {
+    "enable_collect_everything": true
+  },
+  "editorParams": {},
+  "errorComputingFlags": false,
+  "isAuthenticated": false,
+  "supportedCompression": [
+    "gzip",
+    "lz64"
+  ],
+  "featureFlags": {
+    "my-awesome-flag": true,
+    "my-awesome-flag-2": true,
+    "my-multivariate-flag": "some-string-value",
+    "flag-thats-not-on": false,
+  },
+  "featureFlagPayloads": {
+    "my-awesome-flag": "example-payload-string",
+    "my-awesome-flag-2": {"color": "blue", "animal": "hedgehog"}
+  }
+}
+```
+
+> **Note:** `errorComputingFlags` will return `true` if we didn't manage to compute some flags (for example, if there's an [ongoing incident involving flag evaluation](https://status.posthog.com/)). 
+> 
+> This enables partial updates to currently active flags in your clients.
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+
+<IncludePropertyInEvents />
+
+To do this, include the `$feature/feature_flag_name` property in your event:
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "distinct_id_of_your_user",
+    "properties": {
+        "$feature/feature-flag-key": "variant-key", # replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
+    },
+    "event": "your_event_name"
+}' https://app.posthog.com/capture/ # or https://eu.posthog.com/capture/
+```
+
+### Step 3: Send a `$feature_flag_called` event
+
+To track usage of your feature flag and view related analytics in PostHog, submit the `$feature_flag_called` event whenever you check a feature flag value in your code.
+
+You need to include two properties with this event:
+
+1. `$feature_flag_response`: This is the name of the variant the user has been assigned to e.g., "control" or "test"
+2. `$feature_flag`: This is the key of the feature flag in your experiment.
+
+```shell
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "distinct_id_of_your_user",
+    "properties": {
+        "$feature_flag": "feature-flag-key",
+        "$feature_flag_response": "variant-name"
+    },
+   "event": "$feature_flag_called"
+}' https://app.posthog.com/capture/ # or https://eu.posthog.com/capture/
+```
+
+import APIOverrideServerProperties from './override-server-properties/api.mdx'
+
+<APIOverrideServerProperties />

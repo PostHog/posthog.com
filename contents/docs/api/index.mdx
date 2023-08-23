@@ -17,72 +17,9 @@ These API Docs refer mostly to the **private API**, performing authentication as
 
 ## Authentication
 
-### Personal API keys (Recommended)
+import InstallAPI from '../integrate/_snippets/install-api.mdx'
 
-Personal API keys allow full access to your account, just like e-mail address and password, but you can create any number of them and each one can invalidated individually at any moment. This makes for greater control for you and improved security of stored data.
-
-#### How to obtain a personal API key
-
-1. Click on your name/avatar on the top right.
-1. Click the gear next to your name to access 'Account settings'.
-1. Navigate to the 'Personal API Keys' section.
-1. Click "+ Create a Personal API Key".
-1. Give your new key a label – it's just for you, usually to describe the key's purpose.
-1. Click 'Create Key'.
-1. There you go! At the top of the list you should now be seeing your brand new key. **Immediately** copy its value, as you'll **never** see it again after refreshing the page. But don't worry if you forget to copy it – you can delete and create keys as much as you want.
-
-#### How to use a personal API key
-
-There are three options:
-
-1. Use the `Authorization` header and `Bearer` authentication, like so:
-    ```js
-    const headers = {
-        Authorization: `Bearer ${POSTHOG_PERSONAL_API_KEY}`
-    }
-    ```
-2. Put the key in request body, like so:
-    ```js
-    const body = {
-        personal_api_key: POSTHOG_PERSONAL_API_KEY
-    }
-    ```
-3. Put the key in query string, like so:
-    ```js
-    const url = `https://posthog.example.com/api/event/?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`
-    ```
-
-Any one of these methods works, but only the value encountered first (in the order above) will be used for authentication!
-
-For PostHog Cloud US, use `app.posthog.com` as the host (replacing `posthog.example.com`). For PostHog Cloud EU, use `eu.posthog.com`.
-
-##### Specifying a project when using the API
-
-By default, if you're accessing the API, PostHog will return results from the last project you visited in the UI. To override this behavior, you can pass in your Project API Key (public token) as a query parameter in the request. This ensures you will get data from the project associated with that token.
-
-**Example**
-
-```
-api/event/?token=my_project_api_key
-```
-
-#### cURL example for self-hosted PostHog
-
-```bash
-POSTHOG_PERSONAL_API_KEY=qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0
-curl \
---header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-https://posthog.example.com/api/person/
-```
-
-#### cURL example for PostHog Cloud
-
-```bash
-POSTHOG_PERSONAL_API_KEY=qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0
-curl \
---header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-https://app.posthog.com/api/person/
-```
+<InstallAPI />
 
 ## Tips
 
@@ -124,6 +61,33 @@ For large or regular exports of events we would recommend [using export apps](ht
 
 If want to use the PostHog API beyond these limits (for example by using PostHog to power your user-facing dashboards) then please email us at [customers@posthog.com](to:customers@posthog.com).
 
+## Specifying a project when using the API
+
+By default, if you're accessing the API, PostHog will return results from the last project you visited in the UI. To override this behavior, you can pass in your Project API Key (public token) as a query parameter in the request. This ensures you will get data from the project associated with that token.
+
+**Example**
+
+```
+api/event/?token=my_project_api_key
+```
+
+#### cURL example for self-hosted PostHog
+
+```bash
+POSTHOG_PERSONAL_API_KEY=phx_qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0
+curl \
+--header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+https://posthog.example.com/api/person/
+```
+
+#### cURL example for PostHog Cloud
+
+```bash
+POSTHOG_PERSONAL_API_KEY=phx_qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0
+curl \
+--header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+https://app.posthog.com/api/person/
+```
  
 ## Contributing to API docs
 
