@@ -1,6 +1,6 @@
 ---
 title: "How to write great product survey questions (with examples)"
-date: 2023-08-18
+date: 2023-08-23
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
