@@ -3,9 +3,9 @@ There are two ways to implement feature flags in React Native:
 1. Using hooks.
 2. Loading the flag directly.
 
-## Method 1: Using hooks
+### Method 1: Using hooks
 
-### Example 1: Boolean feature flags
+#### Example 1: Boolean feature flags
 ```react-native
 import { useFeatureFlag } from 'posthog-react-native'
 
@@ -21,7 +21,7 @@ const MyComponent = () => {
 }
 ```
 
-### Example 2: Multivariate feature flags
+#### Example 2: Multivariate feature flags
 
 ```react-native
 import { useFeatureFlag } from 'posthog-react-native'
@@ -40,7 +40,7 @@ const MyComponent = () => {
 }
 ```
 
-## Method 2: Loading the flag directly
+### Method 2: Loading the flag directly
 
 ```react-native
 // Defaults to undefined if not loaded yet or if there was a problem loading
@@ -50,7 +50,7 @@ posthog.getFeatureFlag('key-for-your-boolean-flag')
 posthog.getFeatureFlag('key-for-your-multivariate-flag')
 ```
 
-## Reloading flags
+### Reloading flags
 
 PostHog loads feature flags when instantiated and refreshes whenever methods are called that affect the flag. 
 
