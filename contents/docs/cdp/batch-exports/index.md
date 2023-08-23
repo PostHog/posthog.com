@@ -41,7 +41,11 @@ On each batch export view, you are presented with a list of the latest executed 
 
 ![batch export runs](../../../images/docs/batch-exports/batch-exports-runs.png)
 
-Each run has an indicator of the state (which can be either "Starting", "Running", "Failed", or "Completed"), the boundaries for the data exported (data interval start and data interval end), when the run actually started, and the option of retrying a specific run.
+Each run has:
+1. A state indicator which can be either "Starting", "Running", "Failed", or "Completed."
+2. The exported data start and end intervals.
+3. When the run actually started.
+4. The option of retrying a specific run.
 
 
 ## Historical exports
