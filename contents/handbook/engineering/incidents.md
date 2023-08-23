@@ -87,7 +87,7 @@ If in doubt, a generic message can suffice:
 
 `We're investigating an on-going incident. [Check our status page for updates.](https://status.posthog.com/)`
 
-Occasionally it may be desireable to do addditional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Marketing will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact. 
+Occasionally it may be desirable to do addditional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Marketing will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact. 
 
 ## When does an incident end?
 
