@@ -72,7 +72,7 @@ As previously mentioned, batch exports are implemented on [Temporal](https://www
 
 For example, the Workflow of `s3-export` type contains the code to export data from PostHog to AWS S3. This way, PostHog maintains a map of destinations to Workflow Types, so whenever a user selects a destination, like Snowflake, we can check the map to arrive at the Workflow Type `snowflake-export`.
 
-In order to trigger these workflows according to intervals chosen by our users, we leverage [Schedules](https://docs.temporal.io/workflows#schedule): Whenever a PostHog user creates a batch export, under the hood PostHog creates a Temporal Schedule configured to execute the Workflow associated with the export destination, at the chosen interval.
+To trigger these workflows according to intervals chosen by our users, we leverage [Schedules](https://docs.temporal.io/workflows#schedule). Whenever a PostHog user creates a batch export, under the hood PostHog creates a Temporal Schedule configured to execute the Workflow associated with the export destination, at the chosen interval.
 
 After creation, the Schedule will wait until the end of the current batch period as defined by the batch export frequency: For example, until the end of the current hour for hourly exports. At this point, the Schedule will trigger a Workflow to export the data for the batch period that has just concluded. The process of scheduling a Workflow for execution works by placing the Activities defined in the Workflow on a task queue. Temporal Workers running in PostHog infrastructure will then pick up these tasks as they become available and execute them.
 
