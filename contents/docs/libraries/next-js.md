@@ -326,7 +326,9 @@ export async function getServerSideProps(ctx) {
 
 ### App router
 
-For the app router, we can initialize the `posthog-node` SDK once with a `PostHogClient` function to import into files like this:
+For the app router, we can initialize the `posthog-node` SDK once with a `PostHogClient` function, and import it into files.
+
+This enables us to send events and fetch data from PostHog on the server – without making client-side requests.
 
 ```js
 // app/posthog.js
@@ -344,7 +346,6 @@ export default function PostHogClient() {
 
 > **Note:** Because our server-side `posthog-node` initializations are short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. `flushAt` sets how many how many capture calls we should flush the queue (in one batch). `flushInterval` sets how many milliseconds we should wait before flushing the queue. Setting them to the lowest number ensures events are sent immediately and not batched. We also need to call `await posthog.shutdownAsync()` after sending events to flush them.
 
-With this `PostHogClient` component, we can both send events and fetch data from PostHog (such as feature flag evaluations) without client-side requests.
 
 ```js
 import Link from 'next/link'
