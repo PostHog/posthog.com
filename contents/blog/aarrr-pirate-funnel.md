@@ -33,8 +33,6 @@ In this guide, you'll learn:
 > **Article changelog:**
 > - **Aug 3, 2022:** Original article publish date 
 > - **May 9, 2023:** Improved intro, new graphics, pirate metrics template
-> - **Aug 1, 2023:** Added notes about PostHog's AARRR dashboard template
-
 
 ## How does the AARRR funnel work?
 
