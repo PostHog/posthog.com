@@ -9,13 +9,21 @@ productMainCTA: {
   url: https://app.posthog.com/signup
 }
 productPricingCTA: {
-    title: View pricing,
-    url: /pricing
+    title: Book a demo,
+    url: /book-a-demo
 }
 ---
 
+import ComparisonTable from '../_includes/surveys/comparison-table.mdx'
+
+
 <HeroCondensed />
 
-<Questions topicId={20} />
+
+<Comparison>
+
+  <ComparisonTable />
+
+</Comparison>
 
 <CTA />

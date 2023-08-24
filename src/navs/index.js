@@ -2682,6 +2682,7 @@ const menu = [
                 children: [
                     { name: 'Features', url: '/surveys' },
                     { name: 'Docs', url: '/docs/surveys/manual' },
+                    { name: 'Comparisons', url: '/surveys/comparisons' },
                     { name: 'Tutorials', url: '/surveys/tutorials' },
                     { name: 'Roadmap', url: '/surveys/roadmap' },
                     { name: 'Questions', url: '/surveys/questions' },
