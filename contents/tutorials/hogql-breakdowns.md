@@ -151,4 +151,3 @@ With the total value bar chart, this breakdown looks like this:
 
 - [The power of HogQL’s sum() aggregation](/tutorials/hogql-sum-aggregation)
 - [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
-- [How to segment users](/tutorials/how-to-segment-users)

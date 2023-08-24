@@ -80,8 +80,6 @@ There are a variety tools available to help you segment users or use the segment
 
 PostHog is a powerful tool for user segmentation because you can explore segmented users using tools such as [funnels](/product/funnels), [trends](/product/trends), [paths](/product/user-paths) and more. 
 
-Read our tutorial about [how to segment users in PostHog](/docs/tutorials/how-to-segment-users) to learn more about using PostHog.
-
 ## Further reading
 
 - [How to achieve B2B product market fit](/blog/product-market-fit-game): How to approach finding market fit for a B2B product

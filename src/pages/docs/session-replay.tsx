@@ -1,7 +1,6 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -63,9 +62,7 @@ export const Intro = ({ image = true }) => {
                     Play back sessions to diagnose UI issues, improve support, and get context for nuanced user
                     behavior.
                 </h3>
-                <CallToAction to="/docs/session-replay/manual#enabling-session-recording">
-                    Record your first session
-                </CallToAction>
+                <CallToAction to="/docs/session-replay/installation">Record your first session</CallToAction>
             </div>
 
             {image && (
@@ -219,7 +216,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
         <Layout>
             <SEO title="Session replay - Docs - PostHog" />
 
-            <PostLayout title={'Session replay'} menu={docs} hideSurvey hideSidebar>
+            <PostLayout title={'Session replay'} hideSurvey hideSidebar>
                 <Intro />
                 <Content />
 

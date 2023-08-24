@@ -52,9 +52,9 @@ const Roadmap = () => {
                         <ul className="m-0 px-4 pt-1 bg-accent dark:bg-accent-dark">
                             <RoadmapItem>Feature flags for iOS, Android, Flutter</RoadmapItem>
                             <RoadmapItem>Interlinking session recording & analytics</RoadmapItem>
-                            <RoadmapItem>Session recording playlists</RoadmapItem>
-                            <RoadmapItem>Mobile session recordings</RoadmapItem>
-                            <RoadmapItem>Nail tutorials</RoadmapItem>
+                            <RoadmapItem>SQL insights</RoadmapItem>
+                            <RoadmapItem>SOC 2 compliance</RoadmapItem>
+                            <RoadmapItem>Dashboard templates</RoadmapItem>
                         </ul>
                     </RoadmapColumn>
                     <RoadmapColumn>
@@ -62,11 +62,11 @@ const Roadmap = () => {
                             In progress
                         </div>
                         <ul className="m-0 px-4 pt-1 bg-accent dark:bg-accent-dark">
-                            <RoadmapItem>SQL insights</RoadmapItem>
-                            <RoadmapItem>Users &amp; recordings linked to feature flags</RoadmapItem>
-                            <RoadmapItem>SOC 2 compliance</RoadmapItem>
-                            <RoadmapItem>Universal search</RoadmapItem>
-                            <RoadmapItem>PostHog customer data platform</RoadmapItem>
+                            <RoadmapItem>Mobile session recordings</RoadmapItem>
+                            <RoadmapItem>PostHog CDP</RoadmapItem>
+                            <RoadmapItem>Data warehouse</RoadmapItem>
+                            <RoadmapItem>Scratchpad and notebooks</RoadmapItem>
+                            <RoadmapItem>Shuffle button for insights</RoadmapItem>
                         </ul>
                     </RoadmapColumn>
                 </div>

@@ -2,7 +2,6 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -79,7 +78,7 @@ const Integrations: React.FC<IntegrationsProps> = () => {
         <Layout>
             <SEO title="Frameworks - Documentation - PostHog" />
 
-            <PostLayout title={'Integrations'} menu={docs} hideSurvey hideSidebar>
+            <PostLayout title={'Integrations'} hideSurvey hideSidebar>
                 <StaticImage
                     alt=""
                     placeholder="none"

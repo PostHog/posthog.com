@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
@@ -51,6 +51,12 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
             replies: {
                 populate: {
                     profile: {
+                        populate: {
+                            user: {
+                                populate: ['role'],
+                                fields: ['role'],
+                            },
+                        },
                         fields: ['firstName', 'lastName'],
                     },
                 },
@@ -135,10 +141,12 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         StrapiResult<QuestionData[]>
     >(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, options)}`,
-        async (url: string) =>
-            fetch(url, user ? { headers: { Authorization: `Bearer ${await getJwt()}` } } : undefined).then((r) =>
+        async (url: string) => {
+            const jwt = await getJwt()
+            return fetch(url, user && jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : undefined).then((r) =>
                 r.json()
             )
+        }
     )
 
     if (error) {
@@ -157,6 +165,10 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
 
     const total = data && data[0]?.meta?.pagination?.total
     const hasMore = total ? questions?.data.length < total : false
+
+    useEffect(() => {
+        mutate()
+    }, [user])
 
     return {
         hasMore,

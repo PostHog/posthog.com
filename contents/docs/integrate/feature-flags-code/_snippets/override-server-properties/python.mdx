@@ -1,0 +1,18 @@
+import OverrideServerPropertiesIntro from './override-server-properties-intro.mdx'
+
+<OverrideServerPropertiesIntro />
+
+```python
+posthog.get_feature_flag(
+    'flag-key',
+    'distinct_id_of_the_user',
+    person_properties={'property_name': 'value'},
+    groups={
+        'your_group_type': 'your_group_id',
+        'another_group_type': 'your_group_id'},
+    group_properties={
+        'your_group_type': {'group_property_name': 'value'},
+        'another_group_type': {'group_property_name': 'value'}
+    },
+)
+```

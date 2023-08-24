@@ -12,7 +12,6 @@ const benefits = [
     'A year of PostHog',
     'Free PostHog merch',
     '$50,000 in PostHog credit',
-    'Private office hours',
     'Startup spotlight',
     'Opportunities for extra credits',
 ]
@@ -45,7 +44,7 @@ const Spotlight = ({ frontmatter: { title, featuredImage }, excerpt, fields: { s
 export default function Startups() {
     const { spotlight } = useStaticQuery(graphql`
         {
-            spotlight: mdx(fields: { slug: { eq: "/blog/startup-inlang" } }) {
+            spotlight: mdx(fields: { slug: { eq: "/spotlight/startup-inlang" } }) {
                 frontmatter {
                     title
                     featuredImage {

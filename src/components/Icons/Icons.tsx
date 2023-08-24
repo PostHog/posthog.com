@@ -62,9 +62,15 @@ export const Plus = (props: any): JSX.Element => {
     )
 }
 
-export const Minus = (): JSX.Element => {
+export const Minus = ({ className = '', ...other }): JSX.Element => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={`h-5 w-5 ${className}`}
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            {...other}
+        >
             <path fillRule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clipRule="evenodd" />
         </svg>
     )
@@ -2304,6 +2310,27 @@ export const TableOfContents = (props: any) => {
                 fill="currentColor"
             />
             <path d="M4.26562 12.7996H15.9984V14.9325H4.26562V12.7996Z" fill="currentColor" />
+        </svg>
+    )
+}
+
+export const Heart = (props: any) => {
+    return (
+        <svg
+            {...props}
+            width="24"
+            height="25"
+            viewBox="0 0 24 25"
+            fill={props?.active ? 'currentColor' : 'none'}
+            xmlns="http://www.w3.org/2000/svg"
+            className={props.className ?? ''}
+        >
+            <path
+                d="M12 5.85916C18.3331 -0.580419 29.1898 11.3788 12 21.0372C-5.18982 11.3789 5.66687 -0.58042 12 5.85916Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+            />
         </svg>
     )
 }

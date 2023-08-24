@@ -7,11 +7,11 @@ showTitle: true
 
 ## What data does PostHog collect from self-hosted instances?
 
-In order to understand usage, build better products, and bill customers accurately, PostHog instances routinely send usage reports to our servers. In addition, this data helps us troubleshoot when we provide support. These reports do not contain any raw person, event, or group data — ie no identifiable or unique information from your users, only anonymized, aggregated data. 
+In order to understand usage and build better products, PostHog instances routinely send usage reports to our servers. In addition, this data helps us troubleshoot when we provide support. These reports do not contain any raw person, event, or group data — ie no identifiable or unique information from your users, only anonymized, aggregated data. 
 
 ## What if I cannot allow data egress or need to run in an air gapped environment?
 
-We are committed to supporting businesses whose user data is subject to privacy regulations, or whose compliance postures dictate that internally generated data be isolated from the internet. For customers that need our paid features, we offer the ability to run PostHog in air gapped environments, or without sending this status ping, on the [Enterprise](/pricing) plan. 
+You can run the open-source version of PostHog in an air-gapped environment, though it does require internet access to use the installation script.
 
 ## What data is sent in the usage report?
 

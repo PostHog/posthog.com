@@ -62,10 +62,12 @@ export const MenuContainer = ({
     children,
     setOpen,
     className = '',
+    onClose,
 }: {
     children: React.ReactNode
     setOpen: (open: null | string) => void
     className?: string
+    onClose: () => void
 }) => {
     const dragControls = useDragControls()
     const y = useMotionValue(0)
@@ -75,6 +77,7 @@ export const MenuContainer = ({
     const [yState, setYState] = useState(y.get())
 
     const handleClose = () => {
+        onClose?.()
         setOpen(null)
     }
 
@@ -83,7 +86,7 @@ export const MenuContainer = ({
             y.stop()
             y.set(0)
         } else {
-            setOpen(null)
+            handleClose()
         }
     }
 
@@ -102,7 +105,7 @@ export const MenuContainer = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed w-full h-full bg-accent/70 dark:bg-accent-dark/70 top-0 left-0 z-[999999]"
+            className="fixed w-full h-full bg-accent/60 dark:bg-accent-dark/60 top-0 left-0 z-[999999]"
         >
             <motion.div
                 onClick={(e) => e.stopPropagation()}

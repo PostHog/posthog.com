@@ -30,7 +30,7 @@ Product health metrics are usually steady. Dramatic changes are a bad sign. Just
 
 Companies aim to improve product health metrics over the long term. Like how consistently exercising improves your pulse and respiration rates, adding enhancements and fixing bugs improve your product health metrics. Because of this, these metrics update in real-time with changes measured over days, weeks, or months. For example, a metric might be down for the week, which triggers a minor adjustment in focus for next week. It can at the same time be up for the month, which means your product is improving. 
 
-Mature products generally care more about health metrics. [Early-stage companies](/blog/early-stage-analytics) are searching for product fit, which often necessitates big changes or pivots that require radically different product health metrics. It doesn’t mean the product is "sick," it means they haven’t figured out what "healthy" means yet.
+Mature products generally care more about health metrics. [Early-stage companies](/blog/early-stage-analytics) are searching for product fit, which often necessitates big changes or pivots that require radically different product health metrics. It doesn’t mean the product is "sick," it means they haven’t figured out what "healthy" means yet, and are looking for ways to particularly those trying to [measure product-market fit](/blog/measure-product-market-fit).
 
 ## Common product health metrics
 
@@ -106,7 +106,7 @@ Picking the right product health metric goes back to what makes a good one. It m
 
 As examples, let's go over some types of products and look at what a good health metric might be for them:
 
-- **Subscription B2C:** Need high growth in new user growth and always be aware of churn rate and cohort retention because both are likely to be high. If you see good signs in extreme session duration and daily and weekly active users, you're on your way to product market fit.
+- **Subscription B2C:** Need high growth in new user growth and always be aware of churn rate and cohort retention because both are likely to be high. If you see good signs in extreme session duration and daily and weekly active users, you're on your way to [product-market fit](/blog/product-market-fit-game).
 
 - **Ad-based B2C:** The more time users spend in the app the better. It means more content created and ads shown. Average session duration, DAU/MAU intensity, and daily and weekly active users are all ways of monitoring this.
 

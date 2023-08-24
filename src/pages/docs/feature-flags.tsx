@@ -1,6 +1,5 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -25,11 +24,6 @@ export const quickLinks = [
         name: 'Bootstrapping & local evaluation',
         to: '/docs/feature-flags/bootstrapping-and-local-evaluation',
         description: 'Bootstrap and evaluate flags locally when you need an immediate response.',
-    },
-    {
-        name: 'Rollout strategies',
-        to: '/docs/feature-flags/rollout-strategies',
-        description: 'Control how your feature flags are rolled out to your users.',
     },
     {
         name: 'Multivariate flags',
@@ -70,9 +64,7 @@ export const Intro = ({ image = true }) => (
             <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                 Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
             </h3>
-            <CallToAction to="/docs/feature-flags/manual#creating-feature-flags">
-                Create your first feature flag
-            </CallToAction>
+            <CallToAction to="/docs/feature-flags/installation">Create your first feature flag</CallToAction>
         </div>
 
         {image && (
@@ -174,8 +166,8 @@ export const Content = ({ quickLinks = false }) => {
                     />
                     <ResourceItem
                         type="Guide"
-                        title="Targeting a cohort"
-                        description="Segmentation and targeting with feature flags"
+                        title="How to set up one-time feature flags"
+                        description="Show a component or content just once"
                         Image={
                             <StaticImage
                                 alt=""
@@ -186,7 +178,7 @@ export const Content = ({ quickLinks = false }) => {
                                 src="../../components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
-                        url="/tutorials/cohorts"
+                        url="/tutorials/one-time-feature-flags"
                     />
                     <ResourceItem
                         type="Guide"
@@ -278,7 +270,7 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = ({ data }) => {
         <Layout>
             <SEO title="Feature flags - Docs - PostHog" />
 
-            <PostLayout title={'Feature flags'} menu={docs} hideSurvey hideSidebar>
+            <PostLayout title={'Feature flags'} hideSurvey hideSidebar>
                 <Intro />
                 <Content />
 

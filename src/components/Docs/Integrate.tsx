@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
-import docs from 'sidebars/docs.json'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
 import List from 'components/List'
@@ -49,15 +48,8 @@ type LibraryData = {
     }
 }
 
-const sdkSidebar = docs.find((item) => item.name === 'SDKs')?.children || []
-
 export const SDKs = () => {
     const { sdks } = useStaticQuery<LibraryData>(query)
-
-    sdks.nodes.sort(
-        (a, b) =>
-            sdkSidebar.findIndex((c) => c.url === a.fields.slug) - sdkSidebar.findIndex((c) => c.url === b.fields.slug)
-    )
 
     return (
         <List

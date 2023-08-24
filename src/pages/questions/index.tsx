@@ -69,7 +69,7 @@ export default function Questions() {
                             <QuestionForm showTopicSelector onSubmit={() => refresh()} />
                         </div>
                     </div>
-
+                    <SidebarSearchBox filter="question" />
                     <div className="mt-8 flex flex-col">
                         <QuestionsTable
                             questions={questions}

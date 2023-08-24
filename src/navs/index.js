@@ -1,4 +1,4 @@
-const handbookSidebar = [
+export const handbookSidebar = [
     {
         name: 'Handbook',
         url: '/handbook',
@@ -167,10 +167,14 @@ const handbookSidebar = [
                 name: 'Website & Docs',
                 url: '/handbook/small-teams/website-docs',
             },
+            {
+                name: 'Data Warehouse',
+                url: '/handbook/small-teams/dw',
+            },
         ],
     },
     {
-        name: 'People & ops',
+        name: 'People',
         url: '',
         children: [
             {
@@ -218,22 +222,8 @@ const handbookSidebar = [
                 url: '/handbook/people/offboarding',
             },
             {
-                name: 'Ramp up plans',
-                url: '',
-                children: [
-                    {
-                        name: 'Product Manager ramp up',
-                        url: '/handbook/people/ramp-up/product-manager',
-                    },
-                ],
-            },
-            {
-                name: 'Finance',
-                url: '/handbook/people/finance',
-            },
-            {
-                name: 'Merch store',
-                url: '/handbook/company/merch-store',
+                name: 'HR processes',
+                url: '/handbook/people/grievances',
             },
             {
                 name: 'Hiring process',
@@ -268,6 +258,20 @@ const handbookSidebar = [
                         url: '/handbook/people/hiring-process/exec-hiring',
                     },
                 ],
+            },
+        ],
+    },
+    {
+        name: 'Ops & finance',
+        url: '',
+        children: [
+            {
+                name: 'Finance',
+                url: '/handbook/people/finance',
+            },
+            {
+                name: 'Merch store',
+                url: '/handbook/company/merch-store',
             },
         ],
     },
@@ -649,6 +653,10 @@ const handbookSidebar = [
                         name: 'Who we do business with',
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
+                    {
+                        name: 'Historical import',
+                        url: '/handbook/growth/sales/historical-import',
+                    },
                 ],
             },
         ],
@@ -671,9 +679,15 @@ const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: '/questions',
+    url: '/posts',
     icon: 'Chat',
     children: [
+        {
+            name: 'Posts',
+            icon: 'Newspaper',
+            color: 'red',
+            url: '/posts',
+        },
         {
             name: 'Questions',
             icon: 'Message',
@@ -807,7 +821,50 @@ export const companyMenu = {
         },
         { name: 'Team', icon: 'Profile', color: 'blue', url: '/team' },
         { name: 'Handbook', icon: 'Book', color: 'seagreen', url: '/handbook', children: handbookSidebar },
-        { name: 'Blog', icon: 'Newspaper', color: 'yellow', url: '/blog' },
+        {
+            name: 'Blog',
+            icon: 'Newspaper',
+            color: 'yellow',
+            url: '/blog',
+            children: [
+                {
+                    name: 'Blog',
+                    url: '/blog',
+                },
+                {
+                    name: 'CEO diaries',
+                    url: '/blog/categories/ceo-diaries',
+                },
+                {
+                    name: 'Engineering',
+                    url: '/blog/categories/engineering',
+                },
+                {
+                    name: 'Inside PostHog',
+                    url: '/blog/categories/inside-posthog',
+                },
+                {
+                    name: 'Newsletter',
+                    url: '/blog/categories/newsletter',
+                },
+                {
+                    name: 'PostHog news',
+                    url: '/blog/categories/posthog-news',
+                },
+                {
+                    name: 'Product growth',
+                    url: '/blog/categories/product-growth',
+                },
+                {
+                    name: 'Startups',
+                    url: '/blog/categories/startups',
+                },
+                {
+                    name: 'Using PostHog',
+                    url: '/blog/categories/using-posthog',
+                },
+            ],
+        },
         { name: 'Careers', icon: 'Laptop', color: 'purple', url: '/careers' },
     ],
 }
@@ -1760,14 +1817,6 @@ export const docsMenu = {
                     icon: 'Home',
                     color: 'seagreen',
                 },
-                /*
-                {
-                    name: 'Getting started',
-                    url: '/docs/product-analytics/start',
-                    icon: 'GraduationCap',
-                    color: 'red',
-                },
-                */
                 {
                     name: 'Installation',
                     url: '/docs/product-analytics/installation',
@@ -1779,6 +1828,36 @@ export const docsMenu = {
                     url: '/docs/product-analytics/capture-events',
                     icon: 'Send',
                     color: 'orange',
+                },
+                {
+                    name: 'Creating insights',
+                    url: '/docs/product-analytics/insights',
+                    icon: 'Graph',
+                    color: 'red',
+                },
+                {
+                    name: 'Identifying users',
+                    url: '/docs/product-analytics/identify',
+                    icon: 'Person',
+                    color: 'purple',
+                },
+                {
+                    name: 'Setting user properties',
+                    url: '/docs/product-analytics/user-properties',
+                    icon: 'Profile',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Group analytics',
+                    url: '/docs/product-analytics/group-analytics',
+                    icon: 'People',
+                    color: 'orange',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/product-analytics/troubleshooting',
+                    icon: 'Question',
+                    color: 'blue',
                 },
                 {
                     name: 'Analysis views',
@@ -1847,10 +1926,10 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Group analytics',
-                    url: '/docs/product-analytics/group-analytics',
-                    icon: 'People',
-                    color: 'orange',
+                    name: 'Data management',
+                    url: '/docs/data',
+                    icon: 'Database',
+                    color: 'blue',
                 },
                 {
                     name: 'Sampling',
@@ -1862,7 +1941,6 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                 },
-                { name: 'Insights', url: '/docs/product-analytics/insights', hidden: true },
             ],
         },
         {
@@ -1880,17 +1958,9 @@ export const docsMenu = {
                     icon: 'Home',
                     color: 'seagreen',
                 },
-                /*
-                {
-                    name: 'Getting started',
-                    url: '/docs/session-replay/start',
-                    icon: 'GraduationCap',
-                    color: 'red',
-                },
-                */
                 {
                     name: 'Installation',
-                    url: '/docs/session-replay/manual',
+                    url: '/docs/session-replay/installation',
                     icon: 'Book',
                     color: 'blue',
                 },
@@ -1905,6 +1975,12 @@ export const docsMenu = {
                     url: '/docs/session-replay/how-to-control-which-sessions-you-record',
                     icon: 'Toggle',
                     color: 'red',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/session-replay/troubleshooting',
+                    icon: 'Question',
+                    color: 'blue',
                 },
                 {
                     name: 'Features',
@@ -1945,12 +2021,6 @@ export const docsMenu = {
                     icon: 'Code',
                     color: 'salmon',
                 },
-                {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/session-replay/troubleshooting',
-                    icon: 'Question',
-                    color: 'blue',
-                },
             ],
         },
         {
@@ -1968,79 +2038,66 @@ export const docsMenu = {
                     icon: 'Home',
                     color: 'seagreen',
                 },
-                /*
                 {
-                    name: 'Getting started',
-                    url: '/docs/feature-flags/start',
-                    icon: 'GraduationCap',
-                    color: 'red',
-                },
-                */
-                {
-                    name: 'Product manual',
-                    url: '/docs/feature-flags/manual',
+                    name: 'Installation',
+                    url: '/docs/feature-flags/installation',
                     icon: 'Book',
                     color: 'blue',
                 },
                 {
-                    name: 'Features',
-                },
-                {
-                    name: 'Bootstrapping & local evaluation',
-                    url: '/docs/feature-flags/bootstrapping-and-local-evaluation',
-                    icon: 'Bolt',
-                    color: 'salmon',
-                },
-                {
-                    name: 'Rollout strategies',
-                    url: '/docs/feature-flags/rollout-strategies',
-                    icon: 'Percentage',
+                    name: 'Creating feature flags',
+                    url: '/docs/feature-flags/creating-feature-flags',
+                    icon: 'Flag',
                     color: 'orange',
                 },
                 {
-                    name: 'Multivariate feature flags',
-                    url: '/docs/feature-flags/multivariate-flags',
-                    icon: 'Flag',
+                    name: 'Adding your code',
+                    url: '/docs/feature-flags/adding-feature-flag-code',
+                    icon: 'Code',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Testing your flag',
+                    url: '/docs/feature-flags/testing',
+                    icon: 'TestTube',
                     color: 'purple',
                 },
                 {
-                    name: 'Payloads',
-                    url: '/docs/feature-flags/payloads',
-                    icon: 'Brackets',
-                    color: 'blue',
-                },
-                {
-                    name: 'Early access feature management',
-                    url: '/docs/feature-flags/early-access-feature-management',
-                    icon: 'Features',
-                    color: 'red',
-                },
-
-                {
-                    name: 'Surveys',
-                    url: '/docs/surveys/manual',
-                    icon: 'Message',
-                    color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-
-                {
-                    name: 'Common questions about feature flags',
+                    name: 'Troubleshooting and FAQs',
                     url: '/docs/feature-flags/common-questions',
                     icon: 'Question',
                     color: 'seagreen',
                 },
                 {
-                    name: 'Resources',
+                    name: 'Features',
                 },
                 {
-                    name: 'Library comparison',
-                    url: '/docs/feature-flags/libraries',
-                    icon: 'Book',
+                    name: 'Server-side local evaluation',
+                    url: '/docs/feature-flags/local-evaluation',
+                    icon: 'Bolt',
+                    color: 'orange',
+                },
+                {
+                    name: 'Client-side bootstrapping',
+                    url: '/docs/feature-flags/bootstrapping',
+                    icon: 'Laptop',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Early access feature management',
+                    url: '/docs/feature-flags/early-access-feature-management',
+                    icon: 'Features',
+                    color: 'purple',
+                },
+                {
+                    name: 'Surveys',
+                    url: '/docs/surveys/manual',
+                    icon: 'Message',
                     color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
             ],
         },
@@ -2069,7 +2126,7 @@ export const docsMenu = {
                 */
                 {
                     name: 'Installation',
-                    url: '/docs/experiments/manual',
+                    url: '/docs/experiments/installation',
                     icon: 'Book',
                     color: 'blue',
                 },
@@ -2092,6 +2149,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/experiments/common-questions',
+                    icon: 'Question',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -2107,16 +2170,10 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Experiments without flags',
+                    name: 'Experiments without feature flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'Flag',
                     color: 'yellow',
-                },
-                {
-                    name: 'Common questions about experiments',
-                    url: '/docs/experiments/common-questions',
-                    icon: 'Question',
-                    color: 'seagreen',
                 },
             ],
         },
@@ -2226,10 +2283,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/sentry-connector',
                             name: 'Sentry',
-                        },
-                        {
-                            url: '/docs/cdp/shopify',
-                            name: 'Shopify',
                         },
                         {
                             url: '/docs/cdp/twitter-followers',
@@ -2394,10 +2447,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/property-filter',
                             name: 'Property Filter',
-                        },
-                        {
-                            url: '/docs/cdp/property-flattener',
-                            name: 'Property Flattener',
                         },
                         {
                             url: '/docs/cdp/schema-enforcer',

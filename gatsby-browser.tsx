@@ -4,6 +4,7 @@ import './src/styles/global.css'
 import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
 import Job from './src/templates/Job'
+import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
@@ -38,7 +39,13 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
 }
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
-    return props.custom404 || !props.data ? (
+    return /^library|^blog\/(?!categories)(?!all)(?!tags)|^tutorials\/(?!categories)(?!all)|^customers\/|^spotlight\/|^posts|^changelog\/(.*?)\//.test(
+        slug
+    ) ? (
+        <Posts {...props} articleView={!/^posts$/.test(slug)}>
+            {element}
+        </Posts>
+    ) : props.custom404 || !props.data ? (
         element
     ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
       ![

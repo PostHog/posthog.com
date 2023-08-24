@@ -7,6 +7,43 @@ tags:
     - first-time
 ---
 
+> 🚧 **Note:** We are currently in the process of reworking our app server and have therefore **disabled new installs of the first time event tracker.** You can still analyze first time events using [HogQL](/docs/hogql).
+
+For example, to get a list of users who completed the `$pageview` event for the first time today, [create an SQL insight](https://app.posthog.com/insights/new) and use the following SQL statement:
+
+```sql
+SELECT distinct_id
+FROM events
+WHERE event = '$pageview'
+    AND (distinct_id, timestamp) IN (
+        SELECT distinct_id, min(timestamp)
+        FROM events
+        WHERE event = '$pageview'
+        GROUP BY distinct_id
+    )
+    AND toDate(timestamp) = today()
+GROUP BY distinct_id
+```
+
+As another example, to get the first ever occurrence of the “user signed up” custom event, use the following SQL statement:
+
+```sql
+SELECT 
+   distinct_id, 
+   min(timestamp) as first_occurrence
+FROM events
+WHERE event = 'user signed up'
+GROUP BY distinct_id
+ORDER BY first_occurrence
+LIMIT 1
+```
+
+Either of these can be customized to get different events or properties, such as replacing `distinct_id` with `properties.$current_url` or `count()`. See an example use case in our “[How to analyze first and last touch attribution](/tutorials/first-last-touch-attribution)” tutorial.
+
+If there is functionality around first time event tracking you want but don’t see a way to do, let us know by asking a question in [our community](/questions).
+
+## What does this app do?
+
 This app adds two new properties to events which you specify:
 
 -   `is_event_first_ever`

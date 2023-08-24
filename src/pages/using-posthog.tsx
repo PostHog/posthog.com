@@ -3,7 +3,6 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import docs from 'sidebars/docs.json'
 import { graphql } from 'gatsby'
 import {
     Analytics,
@@ -41,6 +40,7 @@ import { Close } from 'components/Icons/Icons'
 import { CallToAction } from 'components/CallToAction'
 import Modal from 'components/Modal'
 import { Post } from 'components/Blog'
+import { docsMenu } from '../navs'
 
 const categories: {
     name: string
@@ -301,10 +301,10 @@ export const UsingPostHog: React.FC<{ data: any }> = ({ data }) => {
     const [currentModal, setCurrentModal] = React.useState<string | undefined>(undefined)
 
     return (
-        <Layout>
+        <Layout parent={docsMenu}>
             <SEO title="Using PostHog - PostHog" />
 
-            <PostLayout article={false} survey={false} title={'Docs'} menu={docs} hideSidebar>
+            <PostLayout article={false} survey={false} title={'Docs'} hideSidebar>
                 <div className="space-y-12">
                     <section className="px-1">
                         <h1 className="text-5xl mt-0 mb-4">Using PostHog</h1>

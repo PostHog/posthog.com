@@ -1,5 +1,5 @@
 ---
-title: "Why we test in production (and you should to)"
+title: "Why we test in production (and you should too)"
 date: 2023-07-03
 author: ["ian-vanagas"]
 showTitle: true

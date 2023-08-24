@@ -1,17 +1,8 @@
 import { MDXProvider } from '@mdx-js/react'
 import { Blockquote } from 'components/BlockQuote'
-import Breadcrumbs, { Crumb } from 'components/Breadcrumbs'
-import { Calendar, Edit, Issue } from 'components/Icons/Icons'
 import { InlineCode } from 'components/InlineCode'
-import Layout from 'components/Layout'
 import Link from 'components/Link'
-import PostLayout from 'components/PostLayout'
-import Text from 'components/PostLayout/Text'
-import Topics from 'components/PostLayout/Topics'
-import ShareLinks from 'components/PostLayout/ShareLinks'
-import SidebarSection from 'components/PostLayout/SidebarSection'
-import PageViews from 'components/PostLayout/PageViews'
-import Contributors, { Contributor } from 'components/PostLayout/Contributors'
+import { Contributor } from 'components/PostLayout/Contributors'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
@@ -20,13 +11,9 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
-import { NewsletterForm } from 'components/NewsletterForm'
-import blogMenu from 'components/Blog/blogMenu'
-import blog from 'sidebars/blog.json'
-import slugify from 'slugify'
 import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
-import { companyMenu } from '../navs'
+import MobileSidebar from 'components/Docs/MobileSidebar'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -47,6 +34,7 @@ export const Intro = ({
     titlePosition = 'bottom',
     date,
     tags,
+    imageURL,
 }) => {
     return (
         <div className="lg:mb-7 mb-4 overflow-hidden">
@@ -91,33 +79,6 @@ export const Intro = ({
     )
 }
 
-const BlogPostSidebar = ({ contributors, date, filePath, title, tags, location, pageViews }) => {
-    return (
-        <>
-            {contributors && (
-                <SidebarSection>
-                    <Contributors contributors={contributors} />
-                </SidebarSection>
-            )}
-            {pageViews?.length > 0 && (
-                <SidebarSection>
-                    <PageViews pageViews={pageViews.toLocaleString()} />
-                </SidebarSection>
-            )}
-            {tags?.length > 0 && (
-                <SidebarSection title={`Tag${tags?.length === 1 ? '' : 's'}`}>
-                    <Topics
-                        topics={tags.map((tag) => ({ name: tag, url: `/blog/tags/${slugify(tag, { lower: true })}` }))}
-                    />
-                </SidebarSection>
-            )}
-            <SidebarSection>
-                <NewsletterForm sidebar />
-            </SidebarSection>
-        </>
-    )
-}
-
 export default function BlogPost({ data, pageContext, location }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
@@ -148,7 +109,7 @@ export default function BlogPost({ data, pageContext, location }) {
     const { tableOfContents } = pageContext
 
     return (
-        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[5]}>
+        <>
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
@@ -159,47 +120,24 @@ export default function BlogPost({ data, pageContext, location }) {
                         : featuredImage?.publicURL
                 }
             />
-            <PostLayout
-                stickySidebar
+            <Intro
                 title={title}
-                filePath={filePath}
-                tableOfContents={tableOfContents}
-                breadcrumb={[
-                    { name: 'Blog', url: '/blog' },
-                    ...(category
-                        ? [{ name: category, url: `/blog/categories/${slugify(category, { lower: true })}` }]
-                        : [{}]),
-                ]}
-                menu={blog}
-                hideSurvey
-                sidebar={
-                    <BlogPostSidebar
-                        tags={tags}
-                        contributors={contributors}
-                        date={date}
-                        filePath={filePath}
-                        title={title}
-                        location={location}
-                        pageViews={fields?.pageViews}
-                    />
-                }
-            >
-                <Intro
-                    title={title}
-                    featuredImage={featuredImage}
-                    featuredVideo={featuredVideo}
-                    featuredImageType={featuredImageType}
-                    contributors={contributors}
-                    date={date}
-                    tags={tags}
-                />
-                <div className="article-content">
-                    <MDXProvider components={components}>
-                        <MDXRenderer>{body}</MDXRenderer>
-                    </MDXProvider>
-                </div>
-            </PostLayout>
-        </Layout>
+                featuredImage={featuredImage}
+                featuredVideo={featuredVideo}
+                featuredImageType={featuredImageType}
+                contributors={contributors}
+                date={date}
+                tags={tags}
+            />
+            <div className="xl:float-right xl:max-w-[350px] xl:ml-4 xl:mb-4">
+                <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
+            </div>
+            <div className="article-content">
+                <MDXProvider components={components}>
+                    <MDXRenderer>{body}</MDXRenderer>
+                </MDXProvider>
+            </div>
+        </>
     )
 }
 

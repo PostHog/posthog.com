@@ -27,53 +27,17 @@ const components = {
     a: A,
 }
 
-const Tags = ({ tags }) => {
-    return (
-        <li className="">
-            <ul className="list-none m-0 p-0 text-lg flex flex-wrap">
-                {tags.map((tag, index) => {
-                    return (
-                        <li key={index} className="font-bold after:content-['\002C\00A0'] last:after:content-['']">
-                            {tag}
-                        </li>
-                    )
-                })}
-            </ul>
-        </li>
-    )
-}
-
-const CustomerSidebar = ({ industries, users, toolsUsed, logo }) => {
-    return (
-        <>
-            <SidebarSection>{logo && <img className="w-full max-w-[200px]" src={logo.publicURL} />}</SidebarSection>
-            <SidebarSection title="Industry">
-                <Topics topics={industries.map((industry) => ({ name: industry }))} />
-            </SidebarSection>
-            <SidebarSection title="Users">
-                <Topics topics={users.map((user) => ({ name: user }))} />
-            </SidebarSection>
-            <SidebarSection title="Tools used">
-                <Topics topics={toolsUsed.map((toolUsed) => ({ name: toolUsed }))} />
-            </SidebarSection>
-        </>
-    )
-}
-
 export default function Customer({ data, pageContext: { tableOfContents } }) {
     const { websiteTheme } = useValues(layoutLogic)
 
     const {
-        allCustomers,
         customerData: {
             body,
             excerpt,
             fields,
-            frontmatter: { title, customer, logo, logoDark, description, industries, users, toolsUsed, featuredImage },
+            frontmatter: { title, description },
         },
     } = data
-
-    const logoToShow = websiteTheme === 'dark' ? logoDark || logo : logo
 
     return (
         <>
@@ -83,46 +47,13 @@ export default function Customer({ data, pageContext: { tableOfContents } }) {
                 article
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
-            <Layout>
-                <PostLayout
-                    tableOfContents={tableOfContents}
-                    hideSearch
-                    menu={[
-                        { name: 'Customers' },
-                        ...allCustomers?.nodes?.map(({ fields: { slug }, frontmatter: { customer } }) => ({
-                            name: customer,
-                            url: slug,
-                        })),
-                    ]}
-                    title={title}
-                    hideSurvey
-                    sidebar={
-                        <CustomerSidebar
-                            logo={logoToShow}
-                            industries={industries}
-                            toolsUsed={toolsUsed}
-                            users={users}
-                        />
-                    }
-                    breadcrumb={[
-                        {
-                            name: 'Customers',
-                            url: '/customers',
-                        },
-                        {
-                            name: customer,
-                        },
-                    ]}
-                >
-                    <section className="article-content customer-content">
-                        <h1 className="text-5xl leading-none mt-0">{title}</h1>
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
-                    </section>
-                    <FooterCTA />
-                </PostLayout>
-            </Layout>
+            <section className="article-content customer-content">
+                <h1 className="text-5xl leading-none mt-0">{title}</h1>
+                <MDXProvider components={components}>
+                    <MDXRenderer>{body}</MDXRenderer>
+                </MDXProvider>
+            </section>
+            <FooterCTA />
         </>
     )
 }

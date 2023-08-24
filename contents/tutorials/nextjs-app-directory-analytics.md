@@ -253,9 +253,9 @@ export default function About() {
 
 ### Setting up feature flags
 
-We can use the `getData()` function [Next.js provides](https://beta.nextjs.org/docs/data-fetching/fetching) along with the PostHog Node client to get data about a user’s feature flags, then use that data to conditionally render a part of the component.
+We can create a server-side function along with the PostHog Node client to get data about a user’s feature flags, then use that data to conditionally render a part of the component.
 
-To do this, create a feature flag in PostHog with the key `main-cta` , roll it out to 100% of users, and then add the code to check it in `getData()`. Because you are awaiting the posthog request now, make sure to add `async` to the main `About()` function as well.
+To do this, create a feature flag in PostHog with the key `main-cta` , roll it out to 100% of users, and then add the code to check it in a function (in the example below, we name it `getData()`). Because you are awaiting the posthog request now, make sure to add `async` to the main `About()` function as well.
 
 > The feature flag does require a distinct user ID, which we hardcoded for now, but you could also set up [authentication as we’ve shown in the Next.js analytics tutoria](/tutorials/nextjs-analytics#adding-authentication)l or cookies (using the [Cookies function](https://beta.nextjs.org/docs/api-reference/cookies)) as we showed in the [Next.js A/B test tutorial](/tutorials/nextjs-ab-tests).
 

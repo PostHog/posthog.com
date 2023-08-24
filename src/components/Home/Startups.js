@@ -42,10 +42,6 @@ export default function Startups() {
                         description="30M events tracked + 50K recordings free, per month"
                     />
                     <Benefit
-                        title="Office hours with the team"
-                        description="Every week we explain how to run a company - from marketing to accountancy."
-                    />
-                    <Benefit
                         title="Y Combinator application review"
                         description="Get direct feedback from a team that got in"
                     />

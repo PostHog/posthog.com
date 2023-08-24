@@ -39,6 +39,7 @@ export type QuestionData = {
     activeAt: string
     pinnedTopics: StrapiData<TopicData[]>
     slugs: { is: number; slug: string }[]
+    escalated: boolean
 }
 
 export type AvatarData = {

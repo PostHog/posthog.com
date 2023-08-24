@@ -12,7 +12,7 @@ The PostHog data warehouse gives you a place to put all of your most important d
 
 ## How to access the data warehouse beta
 
-Data warehouse is currently in **beta**. This means we're inviting a select number of people to try this product out. If you want to give this a go, click the "Get support" button in the top right, select "Data Warehouse" as the area, and ask to be added to the beta.
+Data warehouse is currently in **feature preview**. To get access, log in to PostHog, click on the top right menu, click on "Feature previews" and enable data warehouse. There should now be a "Data Warehouse" menu item on the left.
 
 ## How does it work?
 

@@ -58,8 +58,8 @@
         { "source": "/docs/updating-documentation", "destination": "/docs/contributing/updating-documentation" },
         { "source": "/docs/configuring-posthog/scaling-posthog", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/overview", "destination": "/docs/self-host" },
-        { "source": "/docs/deployment", "destination": "/docs/self-host#deploy" },
-        { "source": "/docs/self-host/configure", "destination": "/docs/self-host#configure" },
+        { "source": "/docs/deployment", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/configure", "destination": "/docs/self-host" },
         { "source": "/docs/configuring-posthog", "destination": "/docs/self-host/configure" },
         { "source": "/docs/features/log-in-with-github-gitlab", "destination": "/docs/user-guides/sso" },
         { "source": "/docs/contributing", "destination": "/docs/contribute" },
@@ -160,7 +160,7 @@
         { "source": "/docs/integrations", "destination": "/docs/integrate" },
         { "source": "/docs/libraries", "destination": "/docs/integrate" },
         { "source": "/signup", "destination": "/pricing" },
-        { "source": "/docs/self-host/deploy/render", "destination": "/docs/self-host/deploy/other#render" },
+        { "source": "/docs/self-host/deploy/render", "destination": "/docs/self-host/deploy/other" },
         { "source": "/docs/self-host/deploy/qovery", "destination": "/docs/self-host/deploy/other" },
         { "source": "/docs/tutorials/actions", "destination": "/docs/tutorials/event-tracking-guide" },
         { "source": "/docs/plugins/overview", "destination": "/docs/apps" },
@@ -250,7 +250,7 @@
             "destination": "/docs/self-host/configure/running-behind-proxy"
         },
         { "source": "/docs/integrated", "destination": "/docs/integrate" },
-        { "source": "/docs/scaling-posthog", "destination": "/docs/self-host/deploy/configuration#scaling-up" },
+        { "source": "/docs/scaling-posthog", "destination": "/docs/self-host/deploy/configuration" },
         { "source": "/handbook/growth/sales/", "destination": "/handbook/growth/sales/overview" },
         { "source": "/docs/api/api", "destination": "/docs/api" },
         { "source": "/docs/code-of-conduct", "destination": "/docs/contribute/code-of-conduct" },
@@ -279,10 +279,10 @@
         { "source": "/product-features", "destination": "/product-analytics" },
 
         { "source": "/product", "destination": "/product-analytics", "statusCode": 301 },
-        { "source": "/product/funnels", "destination": "/product-analytics#funnels" },
-        { "source": "/product/trends", "destination": "/product-analytics#trends" },
-        { "source": "/product/user-paths", "destination": "/product-analytics#user-paths" },
-        { "source": "/product/collaboration", "destination": "/product-analytics#dashboards" },
+        { "source": "/product/funnels", "destination": "/product-analytics" },
+        { "source": "/product/trends", "destination": "/product-analytics" },
+        { "source": "/product/user-paths", "destination": "/product-analytics" },
+        { "source": "/product/collaboration", "destination": "/product-analytics" },
         { "source": "/product/session-recording", "destination": "/session-replay" },
         { "source": "/product/feature-flags", "destination": "/feature-flags" },
         { "source": "/product/experimentation-suite", "destination": "/ab-testing" },
@@ -295,7 +295,6 @@
             "destination": "/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog"
         },
         { "source": "/docs/tutorials/b2b", "destination": "/tutorials/b2b" },
-        { "source": "/docs/tutorials/cohorts", "destination": "/tutorials/cohorts" },
         { "source": "/docs/tutorials/deleting-data", "destination": "/tutorials/deleting-data" },
         { "source": "/docs/tutorials/event-tracking-guide", "destination": "/tutorials/event-tracking-guide" },
         { "source": "/docs/tutorials/feature-flags", "destination": "/manual/feature-flags" },
@@ -308,18 +307,13 @@
             "source": "/docs/tutorials/nextjs-supabase-signup-funnel",
             "destination": "/tutorials/nextjs-supabase-signup-funnel"
         },
-        { "source": "/docs/tutorials/retention", "destination": "/tutorials/retention" },
-        { "source": "/docs/tutorials/revenue", "destination": "/tutorials/revenue" },
         { "source": "/docs/tutorials/spa", "destination": "/tutorials/spa" },
         { "source": "/docs/tutorials/survey", "destination": "/tutorials/survey" },
-        { "source": "/docs/tutorials/taxonomy-acquisition", "destination": "/tutorials/taxonomy-acquisition" },
         { "source": "/docs/tutorials/toolbar", "destination": "/tutorials/toolbar" },
-        { "source": "/docs/tutorials/tracking-teams", "destination": "/tutorials/tracking-teams" },
         { "source": "/handbook/company/branding", "destination": "/handbook/company/brand-assets" },
         { "source": "/docs/tutorials/:path*", "destination": "/tutorials/:path*" },
         { "source": "/docs/self-host/hobby-deployment", "destination": "/docs/self-host/deploy/hobby" },
         { "source": "/handbook/engineering/ee-setup", "destination": "/docs/contribute/developing-locally" },
-        { "source": "/docs/tutorials/how-to-segment-users", "destination": "/tutorials/how-to-segment-users" },
         {
             "source": "/docs/self-host/runbook/clickhouse/vertical_scaling",
             "destination": "/docs/self-host/runbook/clickhouse/vertical-scaling"
@@ -409,7 +403,7 @@
         { "source": "/apps/pagerduty-connector/docs", "destination": "/docs/apps/pagerduty-connector" },
         { "source": "/apps/postgres-export/docs", "destination": "/docs/apps/postgres-export" },
         { "source": "/apps/property-filter/docs", "destination": "/docs/apps/property-filter" },
-        { "source": "/apps/property-flattener/docs", "destination": "/docs/apps/property-flattener" },
+        { "source": "/apps/property-flattener/docs", "destination": "/docs/apps/" },
         { "source": "/apps/redshift-export/docs", "destination": "/docs/apps/redshift-export" },
         { "source": "/apps/redshift-import/docs", "destination": "/docs/apps/redshift-import" },
         { "source": "/apps/replicator/docs", "destination": "/docs/apps/replicator" },
@@ -420,7 +414,7 @@
         { "source": "/apps/segment/docs", "destination": "/docs/apps/segment" },
         { "source": "/apps/sendgrid-connector/docs", "destination": "/docs/apps/sendgrid-connector" },
         { "source": "/apps/sentry-connector/docs", "destination": "/docs/apps/sentry-connector" },
-        { "source": "/apps/shopify/docs", "destination": "/docs/apps/shopify" },
+        { "source": "/apps/shopify/docs", "destination": "/docs/apps" },
         { "source": "/apps/snowflake-export/docs", "destination": "/docs/apps/snowflake-export" },
         { "source": "/apps/taxonomy-standardizer/docs", "destination": "/docs/apps/taxonomy-standardizer" },
         { "source": "/apps/timestamp-parser/docs", "destination": "/docs/apps/timestamp-parser" },
@@ -730,11 +724,35 @@
         { "source": "/docs/integrate/rust", "destination": "/docs/libraries/rust" },
         {
             "source": "/docs/integrate/identifying-users",
-            "destination": "/docs/data/identify"
+            "destination": "/docs/product-analytics/identify"
         },
         {
             "source": "/docs/integrate/user-properties",
-            "destination": "/docs/data/user-properties"
+            "destination": "/docs/product-analytics/user-properties"
+        },
+        {
+            "source": "/docs/data/user-properties",
+            "destination": "/docs/product-analytics/user-properties"
+        },
+        {
+            "source": "/docs/feature-flags/multivariate-flags",
+            "destination": "/docs/feature-flags/creating-feature-flag"
+        },
+        {
+            "source": "/docs/feature-flags/libraries",
+            "destination": "/docs/feature-flags/"
+        },
+        {
+            "source": "/docs/feature-flags/manual",
+            "destination": "/docs/feature-flags/installation"
+        },
+        {
+            "source": "/docs/feature-flags/rollout-strategies",
+            "destination": "/docs/feature-flags/creating-feature-flags"
+        },
+        {
+            "source": "/docs/feature-flags/payloads",
+            "destination": "/docs/feature-flags/creating-feature-flags"
         },
         {
             "source": "/docs/integrate",
@@ -758,6 +776,8 @@
 
         { "source": "/manual/feature-flags", "destination": "/docs/feature-flags/manual" },
         { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" },
+        { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
+        { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags/manual" },
 
         { "source": "/manual/", "destination": "/docs/product-analytics/" },
@@ -820,12 +840,8 @@
         { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" },
         { "source": "/signup/cloud/enterprise", "destination": "/contact-sales?edition=enterprise" },
         {
-            "source": "/docs/feature-flags/local-evaluation",
-            "destination": "/docs/feature-flags/bootstrapping-and-local-evaluation"
-        },
-        {
-            "source": "/docs/feature-flags/local-evaluation",
-            "destination": "/docs/feature-flags/bootstrapping-and-local-evaluation"
+            "source": "/docs/feature-flags/bootstrapping-and-local-evaluation",
+            "destination": "/docs/feature-flags/bootstrapping"
         },
         { "source": "/products/product-analytics", "destination": "/product-analytics" },
         { "source": "/session-recording", "destination": "/session-replay" },
@@ -886,7 +902,7 @@
         { "source": "/apps/patterns-connector", "destination": "/cdp/patterns-connector" },
         { "source": "/apps/postgres-export", "destination": "/cdp/postgres-export" },
         { "source": "/apps/property-filter", "destination": "/cdp/property-filter" },
-        { "source": "/apps/property-flattener", "destination": "/cdp/property-flattener" },
+        { "source": "/apps/property-flattener", "destination": "/cdp/" },
         { "source": "/apps/redshift-export", "destination": "/cdp/redshift-export" },
         { "source": "/apps/redshift-import", "destination": "/cdp/redshift-import" },
         { "source": "/apps/replicator", "destination": "/cdp/replicator" },
@@ -900,7 +916,7 @@
         { "source": "/apps/semver-flattener", "destination": "/cdp/semver-flattener" },
         { "source": "/apps/sendgrid-connector", "destination": "/cdp/sendgrid-connector" },
         { "source": "/apps/sentry-connector", "destination": "/cdp/sentry-connector" },
-        { "source": "/apps/shopify", "destination": "/cdp/shopify" },
+        { "source": "/apps/shopify", "destination": "/cdp/" },
         { "source": "/apps/snowflake-export", "destination": "/cdp/snowflake-export" },
         { "source": "/apps/stripe-connector", "destination": "/cdp" },
         { "source": "/apps/taxonomy-standardizer", "destination": "/cdp/taxonomy-standardizer" },
@@ -952,7 +968,7 @@
         { "source": "/docs/apps/patterns-connector", "destination": "/docs/cdp/patterns-connector" },
         { "source": "/docs/apps/postgres-export", "destination": "/docs/cdp/postgres-export" },
         { "source": "/docs/apps/property-filter", "destination": "/docs/cdp/property-filter" },
-        { "source": "/docs/apps/property-flattener", "destination": "/docs/cdp/property-flattener" },
+        { "source": "/docs/apps/property-flattener", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/redshift-export", "destination": "/docs/cdp/redshift-export" },
         { "source": "/docs/apps/redshift-import", "destination": "/docs/cdp/redshift-import" },
         { "source": "/docs/apps/replicator", "destination": "/docs/cdp/replicator" },
@@ -981,17 +997,21 @@
         { "source": "/docs/apps/zapier-connector", "destination": "/docs/cdp/zapier-connector" },
         {
             "source": "/questions/aliasing-device-i-ds-to-user-i-ds",
-            "destination": "/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user"
+            "destination": "/docs/product-analytics/identify"
         },
-        { "source": "/questions/how-do-i-trigger-custom-pageview", "destination": "/docs/data/events#pageview-events" },
+        {
+            "source": "/docs/data/identify",
+            "destination": "/docs/product-analytics/identify"
+        },
+        { "source": "/questions/how-do-i-trigger-custom-pageview", "destination": "/docs/data/events" },
         {
             "source": "/questions/what-does-pageview-means-scattered-across-the-site",
-            "destination": "/docs/data/events#pageview-events"
+            "destination": "/docs/data/events"
         },
         { "source": "/docs/data/data-warehouse", "destination": "/docs/data-warehouse" },
         { "source": "/docs/apps/zendesk-connector", "destination": "/docs/cdp/zendesk-connector" },
         { "source": "/docs/data/autocapture", "destination": "/docs/product-analytics/autocapture" },
-        { "source": "/docs/apps/enabling", "destination": "/docs/apps#enabling-apps" },
+        { "source": "/docs/apps/enabling", "destination": "/docs/apps" },
         { "source": "/docs/integrations", "destination": "/docs/frameworks" },
         { "source": "/blog/how-to-product-market-fit", "destination": "/blog/product-market-fit-game" },
         { "source": "/docs/cdp/zapier-connector", "destination": "/docs/cdp" },
@@ -1019,7 +1039,15 @@
                     "value": "experiments"
                 }
             ]
-        }
+        },
+        { "source": "/tutorials/cohorts", "destination": "/docs/data/cohorts" },
+        { "source": "/tutorials/retention", "destination": "/tutorials/feature-retention" },
+        { "source": "/tutorials/metrics-tutorial", "destination": "/blog/b2b-saas-product-metrics" },
+        { "source": "/tutorials/taxonomy-acquisition", "destination": "/blog/posthog-marketing" },
+        { "source": "/tutorials/tracking-teams", "destination": "/docs/product-analytics/group-analytics" },
+        { "source": "/tutorials/revenue", "destination": "/tutorials" },
+        { "source": "/tutorials/how-to-segment-users", "destination": "/tutorials/power-users" },
+        { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" }
     ],
     "rewrites": [
         {

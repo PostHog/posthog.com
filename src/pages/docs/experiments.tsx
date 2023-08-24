@@ -1,7 +1,6 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import docs from 'sidebars/docs.json'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -61,9 +60,7 @@ export const Intro = ({ image = true }) => (
             <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                 Test changes in production with an experimentation suite that makes it easy to get the results you want.
             </h3>
-            <CallToAction to="/docs/experiments/manual#creating-an-experiment">
-                Roll out your first experiment
-            </CallToAction>
+            <CallToAction to="/docs/experiments/installation">Roll out your first experiment</CallToAction>
         </div>
 
         {image && (
@@ -168,7 +165,7 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
         <Layout>
             <SEO title="A/B testing - Docs - PostHog" />
 
-            <PostLayout title={'Experiments'} menu={docs} hideSurvey hideSidebar>
+            <PostLayout title={'Experiments'} hideSurvey hideSidebar>
                 <Intro />
                 <Content />
 

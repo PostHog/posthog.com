@@ -27,3 +27,27 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "event": "user signed up"
 }' https://app.posthog.com/capture/
 ```
+
+### Batching events
+
+Events can be sent together in a batch. There is no limit on the number of events you can send in a batch, but the entire request body must be less than `20MB` by default.
+
+```shell label=Batch
+POST https://[your-instance].com/batch/
+Content-Type: application/json
+Body:
+{
+    "api_key": "<ph_project_api_key>",
+    "batch": [
+        {
+            "event": "[event name]",
+            "properties": {
+                "distinct_id": "distinct_id_of_the_user",
+                "key1": "value1",
+                "key2": "value2"
+            },
+        },
+        ...
+    ]
+}
+```
