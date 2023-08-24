@@ -2,33 +2,43 @@
 title: Surveys
 subtitle: <span class="text-red font-semibold bg-yellow/10">Gauge product market fit</span>, measure Net Promoter Score (NPS), schedule user interviews and more
 productHero: {
-  video: ../images/tutorials/survey/feedback.mp4
+  video: ../images/tutorials/survey/surveys_hero_small.mp4
 }
 template: product
 productFeatures: [
     {
         icon: 'Graph',
         title: 'Data visualization for results',
-        description: ''
+        description: 'Qualitative data? Quantative data? Just get the best of both.'
     },
     {
 
         icon: 'Bell',
-        title: 'Slack notifications for new responses',
-        description: ''
+        title: 'Slack notifications',
+        description: 'Because having to paste new responses in one-by-one is a PITA.'
 
     },
     {
         icon: 'Clock',
-        title: 'Define how regularly a user can see a survey',
-        description: ''
+        title: 'Customizable wait periods',
+        description: 'Users hate too many pop-ups, and you do too. So do we.'
 
     },
 ]
 productSections: [
   [
     {
-        image: ../images/products/surveys/question-types.png
+        marquee: [
+        {text: "How likely are you to recommend this product to a friend?", url: "/tutorials/nps-survey"},
+        {text: "How do I understand my users' behavior in funnels?", url: "/tutorials/explore-insights-session-recordings#watching-users-through-funnels"},
+        {text: "How do I understand my user journeys?", url: "/tutorials/explore-insights-session-recordings#watching-journeys-from-user-paths"},
+        {text: "How can I understand what my power users are doing?", url: "/tutorials/explore-insights-session-recordings#find-and-analyze-outliers-in-trend-graphs"},
+      ]
+    },
+  ],
+  [
+    {
+      image: ../images/products/surveys/question-types.png,
     },
     {
       align: 'center',
@@ -111,15 +121,38 @@ productSections: [
 
 ]
 productMainCTA: {
-  title: Get started,
+  title: Get started - free,
   url: https://app.posthog.com/signup,
-  subtitle: "Start using surveys today!",
-  image: ../images/products/hogs/product-analytics.png
+  subtitle: "Create your first surveys now, for free.",
+  image: ../images/products/hogs/surveys.png
 }
 productPricingCTA: {
     title: Book a demo,
     url: /book-a-demo
 }
+
+productPairsWith: [
+    {
+        icon: 'Analytics',
+        title: 'Product analytics',
+        description:
+            'Use insights to breakdown average scores, analyze results over time, or find trends.',
+            url: '/product-analytics'
+    },
+    {
+        icon: 'FeatureFlags',
+        title: 'Feature flags',
+        description: 'Connect surveys to feature flags to gather feedback on your latest ideas and tests.',
+        url: '/feature-flags'
+    },
+    {
+        icon: 'SessionRecording',
+        title: 'Session replay',
+        description:
+            'Jump to replays of users completing surveys, so you have full context on responses.',
+      url: '/session-replay'
+    },
+]
 ---
 
 <Hero />
@@ -127,5 +160,7 @@ productPricingCTA: {
 <Sections />
 
 <MainFeatures />
+
+<PairsWith />
 
 <CTA />
