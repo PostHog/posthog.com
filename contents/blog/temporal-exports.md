@@ -15,7 +15,7 @@ Letting users maintain ownership of their data is a key value of PostHog. Althou
 
 Export apps provided the ability to maintain ownership of all of your data in PostHog and move it where you like. Unfortunately, it didn’t scale as well as we wanted. Luckily for you, we recently launched our [newly upgraded exports system](/docs/cdp/batch-exports), built using Temporal. This post covers why and how we made the change to Temporal.
 
-## The trouble with exports
+## The trouble with export apps
 
 Although exports worked well most of the time, they were causing trouble for some customers. They were failing, erroring, duplicating, and dropping data. Fixing these issues was taking up a significant amount of the pipeline team’s time. 
 
@@ -37,7 +37,7 @@ On top of unreliability, we didn’t have a clear picture of what was happening 
 
 We didn’t have logs or reports for export apps. For example, we didn’t know how much data was being exported or when duplicate runs were happening. When issues happened, we relied on users to tell us. This led to a lot of firefighting and often manual restarts of exports.
 
-### 3, Expensive
+### 3. Expensive
 
 The final nail was that export apps were expensive. This wasn’t because we were charging a lot for exports – in fact, we weren’t charging anything. It was because they were expensive on the destination side. 
 
