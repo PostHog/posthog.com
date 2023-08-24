@@ -33,19 +33,12 @@ _Chapter 8_
 _Chapter 9_
 # [How we're building a world class team](strong-team)
 
-- How we don’t run out of money
-  - Default alive
-  - Grow by shipping, not hiring salespeople
+_Chapter 10_
+# [Not running out of money](finance)
 
-_Chapter 3_
-# “How we got here”
+_Chapter 11_
+# [How we got here](story)
 
-Updated version of https://posthog.com/handbook/company/story
-How we designed the company (company is a product)
-List of books (No Rules Rules)
-Other companies
-GitLab
-Amazon
 
 _Chapter 4_
 # Where are we now
