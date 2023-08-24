@@ -60,7 +60,7 @@ Which will let you input the start and end date of the historical export:
 
 ![create historic export](../../../images/docs/batch-exports/create-historic-export.png)
 
-Immediately afterwards, the historical export runs that fall within the bounds selected will be scheduled.
+Immediately afterwards, the historical export runs that fall within the bounds selected are scheduled.
 
 > **Note:** A historical export does not check if the data already exists in the destination. Doing so would negatively impact the performance of the batch export, and potentially require more permissions on the user's database or storage. Moreover, we can never be sure if the data was moved somewhere else. Instead, we assume that users who request a historic export want all their historic data, which means that multiple historical exports over the same time period will produce duplicates.
 
