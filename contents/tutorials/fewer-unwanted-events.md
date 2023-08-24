@@ -112,7 +112,7 @@ Finally, click save and toggle the app to activate it. You'll be able to track h
 
 ## Downsampling app (not recommended)
 
-The third app you can use to keep fewer events is the [Downsampler](/docs/apps/downsampling) app. It reduces the number of events your instance will ingest by a percentage.
+The second app you can use to keep fewer events is the [Downsampler](/docs/apps/downsampling) app. It reduces the number of events your instance will ingest by a percentage.
 
 To configure it, search for the “Downsampling Plugin” in Apps, click the blue gear, pick a percentage of events you want to keep, and click the toggle to activate.
 
