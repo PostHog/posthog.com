@@ -105,14 +105,22 @@ PgBouncer manages connections to our Postgres database, and things can go wrong 
 
 The most popular way PgBouncer fails is when there are too many clients waiting for a connection. In this case, you're connected to PgBouncer, but waiting for a database connection to free up so you can make your query.
 
-The default wait for this setting is two minutes, which is way too long for us. PostHog times out at 10 seconds, so we want flags to have a much smaller timeout here. Currently, this is globally set at three seconds for all our systems.
+The default wait for this setting is two minutes, which is way too long for us. PostHog times out at 10 seconds, so we want flags to have a much smaller timeout here. Currently, this is globally set at one second for all our systems.
 
 
 ### Separating out deployment for feature flags
 
-One other way to defend against the database being too slow is to have a dedicated read-replica for flag evaluation. We've setup a separate deployment for feature flags (so it doesn't go down with the app), and are now in the middle of creating a separate read-replica so it doesn't hit statement timeouts because something else is hammering the database.
+One other way to defend against the database being too slow is to have a dedicated read-replica for flag evaluation. We've setup a separate deployment for feature flags (so it doesn't go down with the app), and have created a separate read-replica so it doesn't hit statement timeouts because something else is hammering the database.
 
-After this final improvement, we should be in a place where flags are a lot more reliable.
+This has made flags a lot more reliable.
+
+## When things don't go as expected
+
+One frustrating issue we found towards the end is that when the database is slow, even setting a statement timeout during a session can take too long, which means by the time we figure out the database is slow, it's too late.
+
+Currently, we're thinking of introducing a separate PgBouncer pool for feature flags, which has these timeouts set on the connection itself.
+
+More long term, having this sync python service which can't handle app level timeouts well has been troublesome. We're considering rewriting this with an async paradigm that's much more efficient and allows for easily setting timeouts in the app, so we don't have to rely on the database level settings, and can once again share the connection pool with the rest of the app, rather than creating separate sub-pools.
 
 ---
 
