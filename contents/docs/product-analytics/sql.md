@@ -218,8 +218,8 @@ ORDER BY count() desc
 
 - `now()`, `today()`, `yesterday()`: Returns the current time, date, or yesterday’s date respectively.
 - `interval`: A length of time for use in arithmetic operations with other dates and times.
-- `toDayOfWeek`****,**** `toHour`, `toMinute`: Converts date number of day of week (1-7), hour in 24-hour time (0-23), and minute in hour (0-59).
-- `toStartOfYear`, `toStartOfMonth`****,**** `toMonday`****,**** `toStartOfDay`****,**** `toStartOfMinute`: rounds date down to the nearest year, month, Monday, day, hour, or minute respectively
+- `toDayOfWeek`, `toHour`, `toMinute`: Converts date number of day of week (1-7), hour in 24-hour time (0-23), and minute in hour (0-59).
+- `toStartOfYear`, `toStartOfMonth`, `toMonday`, `toStartOfDay`, `toStartOfMinute`: rounds date down to the nearest year, month, Monday, day, hour, or minute respectively
 - `dateDiff('unit', startdate, enddate)`: Returns the count in `unit` between `startdate` and `enddate`.
 - `formatDateTime`: Formats a time according to a [MySQL datetime format string](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format).
 
