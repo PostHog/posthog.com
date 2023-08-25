@@ -17,35 +17,35 @@ That's why we built export apps, which enabled users to own their PostHog data a
 
 ## The trouble with export apps
 
-Although exports worked well for smaller customers, larger ones often ran into problems. Exports would frequently fail, error out, or duplicate and drop data. It was frustrating for customers and created outsized burden on our pipeline team.
+Although exports worked well for smaller customers, larger ones often ran into problems. Exports would frequently fail, error out, or duplicate and drop data. It was frustrating for customers and created an outsized burden on our pipeline team.
 
-Our [plugin service structure](/blog/how-we-built-an-app-server) was the source of our problem. It worked well for stateless plugins, like GeoIP, but our export apps were **stateful**. They relied on external services that could degrade or fail, requiring timeout and retry logic that was difficult to build into the existing structure.
+Our [plugin service structure](/blog/how-we-built-an-app-server) was the source of our problem. It worked well for stateless plugins, like GeoIP, but our export apps were **stateful**. They relied on external services that could degrade or fail, requiring timeout and retry logic the existing structure didn't support.
 
 This limitation manifested in three problematic traits:
 
 ### 1. Unreliability
 
-The export manager had no way of reliably detecting whether an export had failed or was simply taking too long, and it would eagerly retry after a timeout. This weakness created a cascade of problems.
+The export manager had no way of reliably detecting whether an export had failed or was simply taking too long, and it eagerly retried after a timeout. This weakness created a cascade of problems.
 
-First, it generated multiple copies of the same export job with the same state, running at the same time. This created a race condition where, whenever a new copy started, it would reset the progress to zero, and other copies would resume from the beginning again. The resulted in duplication in the exported user data, high infrastructure load, and database locks and conflicts.
+First, it generated multiple copies of the same export job with the same state, running at the same time. This created a race condition where, whenever a new copy started, it reset the progress to zero, and other copies resumed from the beginning again. This resulted in duplication in the exported user data, high infrastructure load, and database locks and conflicts.
 
-Batches also couldn't be restarted from where they left of, they had be run from the start. Our team would often need to manually trigger resets, and exports couldn’t pause or run simultaneously either. 
+Batches also couldn't restart from where they left off, they had to run from the start. Our team often manually trigger resets, and exports couldn’t pause or run simultaneously either. 
 
 ### 2. Visibility
 
-We didn’t have a clear picture of what was happening in the export apps, either. Throughout our codebase, we had multiple work queues, such as Celery, Kafka, and Graphile, each running separately in different contexts without full visibility into those contexts.
+We didn’t have a clear picture of what was happening in the export apps, either. Our codebase had multiple work queues, such as Celery, Kafka, and Graphile, each running separately in different contexts without full visibility into those contexts.
 
-We didn’t have logs or reports for export apps. For example, we didn’t know how much data was being exported or when duplicate runs were happening. When issues happened, we relied on users to tell us. This led to a lot of firefighting and often manual restarts of exports.
+We didn’t have logs or reports for export apps. For example, we didn’t know how much data was exported or when duplicate runs were happening. When issues happened, we relied on users to tell us. This led to a lot of firefighting and often manual restarts of exports.
 
 ### 3. Expense
 
 Export apps were also expensive. Not because we were charging a lot for exports – we weren’t charging anything – but because they were expensive on the destination side. 
 
-If your export failed 75% through and needed to reset, you ended up paying ingestion fees of 175%. We were also paying for more processing than needed because exports were failing repeatedly.
+If your export failed 75% through and needed to reset, you ended up paying ingestion fees of 175%. We were also paying for more processing because exports were failing repeatedly.
 
 Finally, export apps were an expensive drain on the pipeline team's time. Our team was spending too much time firefighting and "babysitting" exports. They had to reactively deal with reliability problems, rather than proactively working on performance.
 
-It was obvious we'd outgrown the export apps and needed a more reliable, transparent, and cost-effective system if we wanted to scale further.
+It was obvious we'd outgrown the export apps and needed a reliable, transparent, and cost-effective system if we wanted to scale further.
 
 ## Temporal to the rescue
 
@@ -76,14 +76,14 @@ With this structure in place, we began working on improving reliability, transpa
 
 ### Improving reliability and adding retries
 
-We prioritized improving reliability. As mentioned, Temporal has support for retry and timeout logic per activity and workflow, which made a big difference. All we needed was to tune this for our system and destinations. This is done in four main areas:
+We prioritized improving reliability. As mentioned, Temporal supports retry and timeout logic per activity and workflow, which made a big difference. All we needed was to tune this for our system and destinations. This was done in four main areas:
 
 **ClickHouse** 
 
 - [Spaced out retries](https://github.com/PostHog/posthog/pull/15558) when reconnecting to prevent failures if in use by another query.
 - Retry [connection errors](https://github.com/PostHog/posthog/pull/16574) which are likely network failures rather than outages.
 - Use [offline ClickHouse cluster](https://github.com/PostHog/posthog/pull/16470) to improve performance and allowable query length.
-- Sacrificed some performance to [de-duplicate batches](https://github.com/PostHog/posthog/pull/16354) by adding `DISTINCT ON` clause because ClickHouse handles de-duplication asynchronously so it isn’t guaranteed at query time.
+- Sacrificed some performance to [de-duplicate batches](https://github.com/PostHog/posthog/pull/16354) by adding the `DISTINCT ON` clause because ClickHouse handles de-duplication asynchronously so it isn’t guaranteed at query time.
 
 **Postgres** 
 
@@ -148,13 +148,13 @@ As mentioned, we already built the structure for `BatchExports`, added a UI, and
 
 - More destinations like [Postgres](https://github.com/PostHog/posthog/pull/17045), [BigQuery](https://github.com/PostHog/posthog/pull/17170), and Redshift.
 - Improve our [webhook system](https://github.com/PostHog/posthog/issues/16976) to enable multiple inputs, workflows, and destinations. 
-- Improve performance by through parallelizing and file compression.
+- Improve performance through parallelizing and file compression.
 - Enable users to define their own schema.
 - Support more output formats such as blob storage.
 - Filter events from exports.
-- Roles based access control for exports.
+- Roles-based access control for exports.
 
-You can keep up with our progress and **provide feedback on our roadmap** in the issues linked or the [exports mega issue](https://github.com/PostHog/posthog/issues/15997). 
+You can keep up with our progress and **provide feedback on our roadmap** in the issues linked or the [exports mega issue](https://github.com/PostHog/posthog/issues/15997).
 
 ## Further reading
 
