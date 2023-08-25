@@ -66,6 +66,8 @@ PostHog is an [all-in-one Product OS](/product) that includes product analytics,
 
 As an open-source product, you can see exactly what the team is working on via the [PostHog's public roadmap](/roadmap). Small projects can self-host PostHog to keep complete control of their data, while PostHog Cloud (with US and EU hosting options) is available for those who want a managed SaaS experience.
 
+See [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) for more.
+
 #### PostHog vs Google Analytics 4
 
 <div className="overflow-x-auto -mx-5 px-5">
@@ -142,9 +144,9 @@ As an open-source product, you can see exactly what the team is working on via t
 </table>
 </div>
 
-#### Verdict
-
-[PostHog](https://posthog.com/) is an all-in-one platform for tracking user behavior in apps and websites. While it's a [powerful tool for marketing](/blog/posthog-marketing) in the right hands, it's best deployed by product and engineering teams seeking deep insights into how users use their product. Integrated session recording, A/B testing, survey, and feature flag tools mean it can also replace several other products in your tech stack.
+> #### Verdict
+>
+> [PostHog](https://posthog.com/) is an all-in-one platform for tracking user behavior in apps and websites. While it's a [powerful tool for marketing](/blog/posthog-marketing) in the right hands, it's best deployed by product and engineering teams seeking deep insights into how users use their product. Integrated session recording, A/B testing, survey, and feature flag tools mean it can also replace several other products in your tech stack.
 
 ### Matomo
 
@@ -230,9 +232,9 @@ It also shares some weaknesses inherent in Universal Analytics. While Matomo has
 </table>
 </div>
 
-#### Verdict
-
-Matomo is closest you'll get to a Universal Analytics-style experience. It's session-based and was explicitly conceived as European alternative to Google Analytics. It has plenty of features, too, though some may find the interface a little dated.
+> #### Verdict
+> 
+> Matomo is closest you'll get to a Universal Analytics-style experience. It's session-based and was explicitly conceived as European alternative to Google Analytics. It has plenty of features, too, though some may find the interface a little dated.
 
 ### Kissmetrics
 
@@ -323,9 +325,9 @@ One of its key features is the Populations report, which groups users into key c
 </table>
 </div>
 
-#### Verdict
-
-Kissmetrics is a great platform for sophisticated marketing teams who want to track the impact of their work on revenue. It's overkill for basic website analytics use cases, but a good option for mature businesses looking for a robust alternative to Google Analytics.
+> #### Verdict
+> 
+> Kissmetrics is a great platform for sophisticated marketing teams who want to track the impact of their work on revenue. It's overkill for basic website analytics use cases, but a good option for mature businesses looking for a robust alternative to Google Analytics.
 
 ### TelemetryDeck
 
@@ -411,9 +413,9 @@ TelemetryDeck makes it easy for app developers to track things like active users
 </table>
 </div>
 
-#### Verdict
-
-TelemetryDECK is a good option for those who want basic app analytics, but it falls someway short of feature parity with GA4.
+> #### Verdict
+> 
+> TelemetryDECK is a good option for those who want basic app analytics, but it falls someway short of feature parity with GA4.
 
 ### Plausible
 
@@ -501,9 +503,9 @@ But, if you just want basic website analytics, it gets the job done, and won't a
 </table>
 </div>
 
-#### Verdict
-
-While it lacks many of the advanced features of GA4, Plausible is a good option for content and marketing teams who just want easy to use, basic website analytics.
+> #### Verdict
+>
+> While it lacks many of the advanced features of GA4, Plausible is a good option for content and marketing teams who just want easy to use, basic website analytics.
 
 ### Vercel Web Analytics
 
@@ -591,9 +593,9 @@ Vercel acquired another popular analytics tool, Splitbee, in 2022. Splitbee's te
 </table>
 </div>
 
-#### Verdict
-
-Vercel Web Analytics is a nice value-add for any front-end dev using Vercel's frontend-as-a-service. There's certainly no need to deploy another privacy-first analytics tool (e.g. Plausible, Fathom) if you're already using Vercel, though it falls a long way short of a genuine Google Analytics alternative. If you need more than what it offers, consider deploying PostHog or Matomo.
+> #### Verdict
+>
+> Vercel Web Analytics is a nice value-add for any front-end dev using Vercel's frontend-as-a-service. There's certainly no need to deploy another privacy-first analytics tool (e.g. Plausible, Fathom) if you're already using Vercel, though it falls a long way short of a genuine Google Analytics alternative. If you need more than what it offers, consider deploying PostHog or Matomo.
 
 ### Piwik PRO
 
@@ -679,9 +681,9 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 </table>
 </div>
 
-#### Verdict
-
-Unsurprisingly, Piwik PRO's roots in Matomo make it a popular choice for users who are familiar with Universal Analytics. It's less feature-rich than Matomo in some respects, but may be a better choice for larger organizations who require more support and scale.
+> #### Verdict
+>
+> Unsurprisingly, Piwik PRO's roots in Matomo make it a popular choice for users who are familiar with Universal Analytics. It's less feature-rich than Matomo in some respects, but may be a better choice for larger organizations who require more support and scale.
 
 ### Fathom
 
@@ -765,9 +767,9 @@ Unsurprisingly, Piwik PRO's roots in Matomo make it a popular choice for users w
 </table>
 </div>
 
-#### Verdict
-
-There isn't much to choose between Fathom and Plausible. Again, if you want lightweight website analytics without the feature bloat of Google, you can't go wrong with Fathom.
+> #### Verdict
+>
+> There isn't much to choose between Fathom and Plausible. Again, if you want lightweight website analytics without the feature bloat of Google, you can't go wrong with Fathom.
 
 ### Counter
 
@@ -853,6 +855,6 @@ Counter's creators can offer it for free because it only collects aggregated dat
 </table>
 </div>
 
-#### Verdict
-
-Counter is a great choice if you have basic needs. It does most of the things the popular privacy-first analytics tools offer, but does so for free. The simple interface is easy to understand, though it doesn't allow you to drill down deeply into individual page performance like Fathom or Plausible.
+> #### Verdict
+>
+> Counter is a great choice if you have basic needs. It does most of the things the popular privacy-first analytics tools offer, but does so for free. The simple interface is easy to understand, though it doesn't allow you to drill down deeply into individual page performance like Fathom or Plausible.
