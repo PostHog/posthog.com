@@ -41,7 +41,7 @@ We didn’t have logs or reports for export apps. For example, we didn’t know 
 
 Export apps were also expensive. Not because we were charging a lot for exports – we weren’t charging anything – but because they were expensive on the destination side. 
 
-The unreliability led to larger amounts of data processing on the destination side, all of which come with costs. For example, if your export failed 75% through and you needed to reset, you end up paying ingestion fees of 175%. We were also paying for more processing than needed because exports were failing repeatedly.
+If your export failed 75% through and needed to reset, you ended up paying ingestion fees of 175%. We were also paying for more processing than needed because exports were failing repeatedly.
 
 Finally, export apps were an expensive drain on the pipeline team's time. Our team was spending too much time firefighting and "babysitting" exports. They had to reactively deal with reliability problems, rather than proactively working on performance.
 
