@@ -11,45 +11,45 @@ featuredImageType: full
 category: Engineering
 ---
 
-Letting users maintain ownership of their data is a key value of PostHog. Although we aspire to become the single source of truth for all your data needs, we realize we don’t fulfill everything everyone wants to do (yet). Also, we know that even if we were the single source of truth, users still want to use their data on other platforms.
+We aspire to be the single source of truth for our users, but we also believe they should own their data. We don't (yet) fulfill every need and, even if we did, users still want to use their data on other platforms. It's non-negotiable.
 
-Export apps provided the ability to maintain ownership of all of your data in PostHog and move it where you like. Unfortunately, it didn’t scale as well as we wanted. Luckily for you, we recently launched our [newly upgraded exports system](/docs/cdp/batch-exports), built using Temporal. This post covers why and how we made the change to Temporal.
+That's why we built export apps, which enabled users to own their PostHog data and move it where they liked. They supported users for some time, but haven't scaled well as PostHog and our customers have grown. Our solution is the [newly upgraded exports system](/docs/cdp/batch-exports), now in public beta. Built using Temporal, this post covers why and how we made the change, and our future plans.
 
 ## The trouble with export apps
 
-Although exports worked well most of the time, they were causing trouble for some customers. They were failing, erroring, duplicating, and dropping data. Fixing these issues was taking up a significant amount of the pipeline team’s time. 
+Although exports worked well for smaller customers, larger ones often ran into problems. Exports would frequently fail, error out, or duplicate and drop data. It was frustrating for customers and created outsized burden on our pipeline team.
 
-Although stateless plugins (like GeoIP) worked well with our [plugin service structure](/blog/how-we-built-an-app-server), **stateful** plugins (like export apps) didn’t. This is because they depended on external resources that can degrade or fail. Dealing with this required timeout and retry logic that was difficult to build into the existing structure.
+Our [plugin service structure](/blog/how-we-built-an-app-server) was the source of our problem. It worked well for stateless plugins, like GeoIP, but our export apps were **stateful**. They relied on external services that could degrade or fail, requiring timeout and retry logic that was difficult to build into the existing structure.
 
-Export apps scaled as far as possible. They worked well for smaller users, but as the export requirements grew, it started to show issues. Chiefly among them was that they were:
+This limitation manifested in three problematic traits:
 
-### 1. Unreliable
+### 1. Unreliability
 
-The export manager had no way of reliably detecting whether an export had failed or was simply taking too long, and it would eagerly retry after a timeout.
+The export manager had no way of reliably detecting whether an export had failed or was simply taking too long, and it would eagerly retry after a timeout. This weakness created a cascade of problems.
 
-This caused multiple copies of the same export job with the same state to run at the same time. This created a race condition where whenever a new copy started, it would reset the progress to zero, and other copies would resume from the beginning again. This caused duplication in the exported user data, high infrastructure load, and database locks and conflicts.
+First, it generated multiple copies of the same export job with the same state, running at the same time. This created a race condition where, whenever a new copy started, it would reset the progress to zero, and other copies would resume from the beginning again. The resulted in duplication in the exported user data, high infrastructure load, and database locks and conflicts.
 
-Another big issue was needing to run entire batches again if they failed. It wasn’t possible to restart from where we left off. Our team would often need to manually trigger resets. Exports couldn’t pause or run simultaneously either. 
+Batches also couldn't be restarted from where they left of, they had be run from the start. Our team would often need to manually trigger resets, and exports couldn’t pause or run simultaneously either. 
 
-### 2. Opaque
+### 2. Visibility
 
-On top of unreliability, we didn’t have a clear picture of what was happening in the export apps. Throughout our codebase, we had multiple different work queues like Celery, Kafka, and Graphile each running separately in different contexts without full visibility into those contexts.
+We didn’t have a clear picture of what was happening in the export apps, either. Throughout our codebase, we had multiple work queues, such as Celery, Kafka, and Graphile, each running separately in different contexts without full visibility into those contexts.
 
 We didn’t have logs or reports for export apps. For example, we didn’t know how much data was being exported or when duplicate runs were happening. When issues happened, we relied on users to tell us. This led to a lot of firefighting and often manual restarts of exports.
 
-### 3. Expensive
+### 3. Expense
 
-The final nail was that export apps were expensive. This wasn’t because we were charging a lot for exports – in fact, we weren’t charging anything. It was because they were expensive on the destination side. 
+Export apps were also expensive. Not because we were charging a lot for exports – we weren’t charging anything – but because they were expensive on the destination side. 
 
 The unreliability led to larger amounts of data processing on the destination side, all of which come with costs. For example, if your export failed 75% through and you needed to reset, you end up paying ingestion fees of 175%. We were also paying for more processing than needed because exports were failing repeatedly.
 
-On top of extra processing time, export apps were taking up large amounts of our team’s time. Reliability needed fixing before we worked on performance, and firefighting always focused on reliability. More importantly, our team was spending large amounts of time firefighting and "babysitting" exports. They had to be reactive, rather than proactive.
+Finally, export apps were an expensive drain on the pipeline team's time. Our team was spending too much time firefighting and "babysitting" exports. They had to reactively deal with reliability problems, rather than proactively working on performance.
 
-Simply, we outgrew the export apps and needed a more reliable, transparent, and cost-effective system if we wanted to scale further.
+It was obvious we'd outgrown the export apps and needed a more reliable, transparent, and cost-effective system if we wanted to scale further.
 
 ## Temporal to the rescue
 
-Early in 2023, one of our engineers, [James](/community/profiles/90), opened an [RFC recommending using Temporal at PostHog](https://github.com/PostHog/meta/pull/99). Temporal is a workflow engine abstracting away the details of failure modes, retry logic, and timeouts. This enables developers to build and deploy rock-solid business logic. It is used by big companies with large amounts of data flows – like Uber, Coinbase, Doordash, and Hashicorp.
+Early in 2023, one of our engineers, [James Greenhill](/community/profiles/90), opened an [RFC recommending using Temporal at PostHog](https://github.com/PostHog/meta/pull/99). Temporal is a workflow engine abstracting away the details of failure modes, retry logic, and timeouts. This enables developers to build and deploy rock-solid business logic. It's used by companies like Uber, Coinbase, Doordash, and Hashicorp, who have large data flows.
 
 In Q2, we set a goal of "rock solid-batch processing" and [chose Temporal](https://github.com/PostHog/meta/pull/99) to build it because it helped solve issues like:
 
@@ -58,14 +58,16 @@ In Q2, we set a goal of "rock solid-batch processing" and [chose Temporal](https
 - Visibility into the status of workflows, including errors and logging.
 - Scheduling. 
 
-Instead of building all this functionality ourselves, Temporal takes care of it for us. After some debate, we felt building a workflow engine would not be a competitive advantage for us. Nothing about what we build on Temporal is novel enough to justify an investment into a competing runtime (as satisfying as it would be to write).
+Instead of building all this functionality ourselves, Temporal takes care of it for us. After some debate, we felt building a workflow engine would not be a competitive advantage for us. As satisfying as it would be to write, nothing about what we build on Temporal is novel enough to justify an investment into a competing runtime.
 
 ## How we built our new export system with Temporal
 
 We didn’t completely rebuild our export system; many of the pieces still worked, we just needed to modify them to work with Temporal’s scheduling and execution capabilities. This meant building a batch export abstraction layer on top of Temporal. Specifically, the abstraction layer has three models:
 
 - `BatchExportDestination`: How users configure where to export data and the configuration for that destination.
+
 - `BatchExport`: Defines the configuration to export data to a destination, either on a schedule or manually by a backfill. Maps to a [Temporal Schedule](https://keithtenzer.com/temporal/temporal_schedules/) and contains a `BatchExportDestination`.
+
 - `BatchExportRun`: An instance of `BatchExport` for each triggered workflow. Users aren’t meant to create these, only Temporal. They mostly report on the progress and status of individual workflow executions.
 
 Users create a `BatchExport` that includes a schedule and a destination (stored as a `BatchExportDestination`). Temporal then triggers the workflow execution to read data from PostHog, export data to the destination, and return results to the user. You can read a full description of [how batch exports work in our docs](/docs/cdp/batch-exports#how-do-batch-exports-work).
@@ -74,7 +76,7 @@ With this structure in place, we began working on improving reliability, transpa
 
 ### Improving reliability and adding retries
 
-We prioritized improving reliability. As mentioned, Temporal has support for retry and timeout logic per activity and workflow which made a big difference. What we needed to do was tune this to our system and destinations. We needed to tune four main pieces:
+We prioritized improving reliability. As mentioned, Temporal has support for retry and timeout logic per activity and workflow, which made a big difference. All we needed was to tune this for our system and destinations. This is done in four main areas:
 
 1. **ClickHouse** - [spaced out retries](https://github.com/PostHog/posthog/pull/15558) when reconnecting to prevent failures if in use by another query, retry [connection errors](https://github.com/PostHog/posthog/pull/16574) which are likely network failures rather than outages, use [offline ClickHouse cluster](https://github.com/PostHog/posthog/pull/16470) to improve performance and allowable query length, and sacrificed some performance to [de-duplicate batches](https://github.com/PostHog/posthog/pull/16354) by adding `DISTINCT ON` clause (because ClickHouse handles de-duplication asynchronously so it isn’t guaranteed at query time).
 
@@ -102,7 +104,7 @@ For users, the old system hides runs. Exports now [have their own page](app.post
 
 ![Exports UI](../images/blog/temporal-exports/exports.png)
 
-The work to make exports transparent required us to improve encryption too. This included adding an [encryption codec](https://github.com/PostHog/posthog/pull/15566) because Temporal imports aren’t encrypted by default and our inputs can contain credentials. We also changed `BatchExportDestinations` to an `EncryptedJSONField` to ensure no encrypted credentials in the database and no credentials (neither encrypted nor unencrypted) in the logs.
+The work to make exports transparent required us to improve encryption, too. This included adding an [encryption codec](https://github.com/PostHog/posthog/pull/15566) because Temporal imports aren’t encrypted by default and our inputs can contain credentials. We also changed `BatchExportDestinations` to an `EncryptedJSONField` to ensure no encrypted credentials in the database and no credentials (neither encrypted nor unencrypted) in the logs.
 
 ### Improving performance
 
@@ -114,15 +116,13 @@ Other improvements also include running `BatchExportRuns` [simultaneously](https
 
 ## Our new export system
 
-We needed this work for exports to be a "first-class" feature in PostHog. With this structure in place:
+We needed this work for exports to be a first-class feature in PostHog. With this structure in place, we:
 
-1. More work can go into improving the performance of exports. 
+1. Spend less time spent on firefighting. 
+2. Can focus more on export performance
+3. Have better visibility into how workflows are failing or lagging and can target solutions to these problems. 
 
-2. Less time spent on firefighting. 
-
-3. We have better visibility into how workflows are failing or lagging and can target solutions to these problems. 
-
-Having a reliable, transparent, and performant export system enables us to further improve our customer data platform and warehouse functionality which is key for us to succeed in the long term.
+Having a reliable, transparent, and performant export system enables us to further improve our customer data platform and [warehouse functionality](/docs/data-warehouse) (currently in private beta), which is key for us to succeed in the long term.
 
 ## Further reading
 
