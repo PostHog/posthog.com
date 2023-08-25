@@ -18,7 +18,7 @@ export const Intro = ({ image = true }) => (
                 </span>
             </h1>
             <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                Keep all of your important data in one place
+                A single source for all your important data
             </h3>
             <CallToAction to="/docs/data-warehouse/setup">Get started</CallToAction>
         </div>
