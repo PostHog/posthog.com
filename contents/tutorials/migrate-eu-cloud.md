@@ -45,4 +45,4 @@ Once all these are completed, you’ll be fully migrated to EU Cloud.
 
 ## Further reading
 
-For more information about migration, check out our [docs](/docs/migrate/migrate-between-posthog-instances).
+For more information about migration, check out our migration [docs](/docs/migrate/migrate-between-posthog-instances).

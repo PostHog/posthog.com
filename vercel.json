@@ -368,7 +368,7 @@
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         {
             "source": "/docs/self-host/migrate-to-cloud",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/trial", "destination": "/pricing" },
@@ -379,11 +379,11 @@
         { "source": "/apps/bigquery-export/docs", "destination": "/docs/apps/bigquery-export" },
         { "source": "/apps/bitbucket-release-tracker/docs", "destination": "/docs/apps/bitbucket-release-tracker" },
         { "source": "/apps/braze/docs", "destination": "/docs/apps/braze" },
-        { "source": "/apps/currency-normalization/docs", "destination": "/docs/apps/currency-normalization" },
+        { "source": "/apps/currency-normalization/docs", "destination": "/docs/apps" },
         { "source": "/apps/customer-io/docs", "destination": "/docs/apps/customer-io" },
-        { "source": "/apps/databricks/docs", "destination": "/docs/apps/databricks" },
+        { "source": "/apps/databricks/docs", "destination": "/docs/apps/" },
         { "source": "/apps/downsampling/docs", "destination": "/docs/apps/downsampling" },
-        { "source": "/apps/email-scoring/docs", "destination": "/docs/apps/email-scoring" },
+        { "source": "/apps/email-scoring/docs", "destination": "/docs/apps/" },
         { "source": "/apps/engage-connector/docs", "destination": "/docs/apps/engage-connector" },
         { "source": "/apps/event-sequence-timer/docs", "destination": "/docs/apps/event-sequence-timer" },
         { "source": "/apps/first-time-event-tracker/docs", "destination": "/docs/apps/first-time-event-tracker" },
@@ -393,14 +393,14 @@
         { "source": "/apps/gitlab-release-tracker/docs", "destination": "/docs/apps/gitlab-release-tracker" },
         { "source": "/apps/google-cloud-export/docs", "destination": "/docs/apps/google-cloud-export" },
         { "source": "/apps/google-pub-sub-connector/docs", "destination": "/docs/apps/google-pub-sub-connector" },
-        { "source": "/apps/heartbeat/docs", "destination": "/docs/apps/heartbeat" },
+        { "source": "/apps/heartbeat/docs", "destination": "/docs/apps/" },
         { "source": "/apps/hubspot-connector/docs", "destination": "/docs/apps/hubspot-connector" },
-        { "source": "/apps/ingestion-alert/docs", "destination": "/docs/apps/ingestion-alert" },
+        { "source": "/apps/ingestion-alert/docs", "destination": "/docs/apps" },
         { "source": "/apps/intercom/docs", "destination": "/docs/apps/intercom" },
         { "source": "/apps/migrator-3000/docs", "destination": "/docs/apps/migrator-3000" },
         { "source": "/apps/n8n/docs", "destination": "/docs/apps/n8n" },
-        { "source": "/apps/orbit/docs", "destination": "/docs/apps/orbit" },
-        { "source": "/apps/pagerduty-connector/docs", "destination": "/docs/apps/pagerduty-connector" },
+        { "source": "/apps/orbit/docs", "destination": "/docs/apps/" },
+        { "source": "/apps/pagerduty-connector/docs", "destination": "/docs/apps" },
         { "source": "/apps/postgres-export/docs", "destination": "/docs/apps/postgres-export" },
         { "source": "/apps/property-filter/docs", "destination": "/docs/apps/property-filter" },
         { "source": "/apps/property-flattener/docs", "destination": "/docs/apps/" },
@@ -424,7 +424,7 @@
         { "source": "/apps/url-normalizer/docs", "destination": "/docs/apps/url-normalizer" },
         { "source": "/apps/user-agent-populator/docs", "destination": "/docs/apps/user-agent-populator" },
         { "source": "/apps/variance-connector/docs", "destination": "/docs/apps/variance-connector" },
-        { "source": "/apps/zapier-connector/docs", "destination": "/docs/apps/zapier-connector" },
+        { "source": "/apps/zapier-connector/docs", "destination": "/docs/apps" },
         { "source": "/apps/zendesk-connector/docs", "destination": "/docs/apps/zendesk-connector" },
         { "source": "/blog/the-posthog-array-1-37-1", "destination": "/blog/the-posthog-array-1-37-0" },
         { "source": "/handbook/engineering/app-west", "destination": "/handbook/small-teams/experimentation" },
@@ -520,7 +520,7 @@
         { "source": "/docs/cloud/proxy", "destination": "/docs/integrate/proxy" },
         {
             "source": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/self-host/migrate/migrate-from-amplitude",
@@ -528,19 +528,19 @@
         },
         {
             "source": "/docs/self-host/migrate-from-postgres-to-clickhouse",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/migrate/migrate-to-another-self-hosted-instance",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/migrate/migrate-between-cloud-and-self-hosted",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         { "source": "/handbook/product/pm-rampup", "destination": "/handbook/people/ramp-up/product-manager" },
         {
@@ -873,11 +873,11 @@
         { "source": "/apps/avo-inspector", "destination": "/cdp/avo-inspector" },
         { "source": "/apps/bigquery-export", "destination": "/cdp/bigquery-export" },
         { "source": "/apps/bitbucket-release-tracker", "destination": "/cdp/" },
-        { "source": "/apps/currency-normalization", "destination": "/cdp/currency-normalization" },
+        { "source": "/apps/currency-normalization", "destination": "/cdp/" },
         { "source": "/apps/customer-io", "destination": "/cdp/customer-io" },
-        { "source": "/apps/databricks", "destination": "/cdp/databricks" },
+        { "source": "/apps/databricks", "destination": "/cdp/" },
         { "source": "/apps/downsampling", "destination": "/cdp/downsampling" },
-        { "source": "/apps/email-scoring", "destination": "/cdp/email-scoring" },
+        { "source": "/apps/email-scoring", "destination": "/cdp/" },
         { "source": "/apps/engage-connector", "destination": "/cdp/engage-connector" },
         { "source": "/apps/event-sequence-timer", "destination": "/cdp/event-sequence-timer" },
         { "source": "/apps/filter-out", "destination": "/cdp/filter-out" },
@@ -888,17 +888,17 @@
         { "source": "/apps/gitlab-release-tracker", "destination": "/cdp/gitlab-release-tracker" },
         { "source": "/apps/google-cloud-export", "destination": "/cdp/google-cloud-export" },
         { "source": "/apps/google-pub-sub-connector", "destination": "/cdp/google-pub-sub-connector" },
-        { "source": "/apps/heartbeat", "destination": "/cdp/heartbeat" },
+        { "source": "/apps/heartbeat", "destination": "/cdp/" },
         { "source": "/apps/hubspot-connector", "destination": "/cdp/hubspot-connector" },
-        { "source": "/apps/ingestion-alert", "destination": "/cdp/ingestion-alert" },
+        { "source": "/apps/ingestion-alert", "destination": "/cdp/" },
         { "source": "/apps/intercom", "destination": "/cdp/intercom" },
         { "source": "/apps/laudspeaker-connector", "destination": "/cdp/laudspeaker-connector" },
         { "source": "/apps/memphis-exporter", "destination": "/cdp/memphis-exporter" },
         { "source": "/apps/n8n", "destination": "/cdp/n8n" },
-        { "source": "/apps/orbit", "destination": "/cdp/orbit" },
+        { "source": "/apps/orbit", "destination": "/cdp/" },
         { "source": "/apps/outfunnel-exporter", "destination": "/cdp/outfunnel-exporter" },
         { "source": "/apps/pace-integration", "destination": "/cdp/pace-integration" },
-        { "source": "/apps/pagerduty-connector", "destination": "/cdp/pagerduty-connector" },
+        { "source": "/apps/pagerduty-connector", "destination": "/cdp/" },
         { "source": "/apps/patterns-connector", "destination": "/cdp/patterns-connector" },
         { "source": "/apps/postgres-export", "destination": "/cdp/postgres-export" },
         { "source": "/apps/property-filter", "destination": "/cdp/property-filter" },
@@ -939,11 +939,11 @@
         { "source": "/docs/apps/avo-inspector", "destination": "/docs/cdp/avo-inspector" },
         { "source": "/docs/apps/bigquery-export", "destination": "/docs/cdp/bigquery-export" },
         { "source": "/docs/apps/bitbucket-release-tracker", "destination": "/docs/cdp/bitbucket-release-tracker" },
-        { "source": "/docs/apps/currency-normalization", "destination": "/docs/cdp/currency-normalization" },
+        { "source": "/docs/apps/currency-normalization", "destination": "/docs/cdp" },
         { "source": "/docs/apps/customer-io", "destination": "/docs/cdp/customer-io" },
-        { "source": "/docs/apps/databricks", "destination": "/docs/cdp/databricks" },
+        { "source": "/docs/apps/databricks", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/downsampling", "destination": "/docs/cdp/downsampling" },
-        { "source": "/docs/apps/email-scoring", "destination": "/docs/cdp/email-scoring" },
+        { "source": "/docs/apps/email-scoring", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/engage-connector", "destination": "/docs/cdp/engage-connector" },
         { "source": "/docs/apps/event-sequence-timer", "destination": "/docs/cdp/event-sequence-timer" },
         { "source": "/docs/apps/filter-out", "destination": "/docs/cdp/filter-out" },
@@ -954,17 +954,17 @@
         { "source": "/docs/apps/gitlab-release-tracker", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/google-cloud-export", "destination": "/docs/cdp/google-cloud-export" },
         { "source": "/docs/apps/google-pub-sub-connector", "destination": "/docs/cdp/google-pub-sub-connector" },
-        { "source": "/docs/apps/heartbeat", "destination": "/docs/cdp/heartbeat" },
+        { "source": "/docs/apps/heartbeat", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/hubspot-connector", "destination": "/docs/cdp/hubspot-connector" },
-        { "source": "/docs/apps/ingestion-alert", "destination": "/docs/cdp/ingestion-alert" },
+        { "source": "/docs/apps/ingestion-alert", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/intercom", "destination": "/docs/cdp/intercom" },
         { "source": "/docs/apps/laudspeaker-connector", "destination": "/docs/cdp/laudspeaker-connector" },
         { "source": "/docs/apps/memphis-exporter", "destination": "/docs/cdp/memphis-exporter" },
         { "source": "/docs/apps/n8n", "destination": "/docs/cdp/n8n" },
-        { "source": "/docs/apps/orbit", "destination": "/docs/cdp/orbit" },
+        { "source": "/docs/apps/orbit", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/outfunnel-exporter", "destination": "/docs/cdp/outfunnel-exporter" },
         { "source": "/docs/apps/pace-integration", "destination": "/docs/cdp/pace-integration" },
-        { "source": "/docs/apps/pagerduty-connector", "destination": "/docs/cdp/pagerduty-connector" },
+        { "source": "/docs/apps/pagerduty-connector", "destination": "/docs/cdp" },
         { "source": "/docs/apps/patterns-connector", "destination": "/docs/cdp/patterns-connector" },
         { "source": "/docs/apps/postgres-export", "destination": "/docs/cdp/postgres-export" },
         { "source": "/docs/apps/property-filter", "destination": "/docs/cdp/property-filter" },
@@ -994,7 +994,7 @@
         { "source": "/docs/apps/url-query", "destination": "/docs/cdp/url-query" },
         { "source": "/docs/apps/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" },
         { "source": "/docs/apps/variance-connector", "destination": "/docs/cdp/variance-connector" },
-        { "source": "/docs/apps/zapier-connector", "destination": "/docs/cdp/zapier-connector" },
+        { "source": "/docs/apps/zapier-connector", "destination": "/docs/cdp/" },
         {
             "source": "/questions/aliasing-device-i-ds-to-user-i-ds",
             "destination": "/docs/product-analytics/identify"

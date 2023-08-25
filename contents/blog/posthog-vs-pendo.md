@@ -396,12 +396,6 @@ Below, we've listed a few of the most popular integrations used across PostHog a
             <td>Receive notifications about new data</td>
         </tr>
         <tr>
-            <td><strong>PagerDuty</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive customized alerts from insights</td>
-        </tr>
-        <tr>
             <td><strong>Intercom</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
