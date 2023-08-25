@@ -16,7 +16,7 @@ Open the HTML file used in your `default_popup` and add the PostHog `array.js` s
 
 All you need to do now is initialize PostHog, add the following code to a new js file and import it into your `default_popup` html file to initiate PostHog.
 
-```javascript
+```js-web
 posthog.init('your_project_token',{api_host:'https://app.posthog.com',persistence:'localStorage'})
 ```
 
@@ -30,8 +30,8 @@ One of the best things about using PostHog is, all the interactions like clicks 
 
 If you'd like to instrument your own custom events, all you need to do is:
 
-```javascript
+```js-web
 posthog.capture('custom_event_name', {})
 ```
 
-[See our JS library guide for](https://posthog.com/docs/integrate/client/js) more details
+[See our browser JS library guide for](https://posthog.com/docs/integrate/client/js) more details

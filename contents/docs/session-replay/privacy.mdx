@@ -1,0 +1,97 @@
+---
+title: Privacy Controls
+---
+
+PostHog offers a range of controls to limit what data is captured by session recordings. 
+
+
+## Input elements
+
+As any input element is highly likely to contain sensitive text such as email or password, **we mask these by default**. You can explicitly set this to false to disable the masking.
+
+```ts
+posthog.init('<ph_project_api_key>', {
+    session_recording: {
+        maskAllInputs: false
+    }
+})
+```
+
+### Mask or un-mask specific inputs
+
+You can control the masking more granularly by using `maskInputFn` to customize how the masking behaves. For example, you may want to only redact text that looks like an email address, or comes from inputs that aren't search boxes.
+
+```ts
+posthog.init('<ph_project_api_key>', {
+    session_recording: {
+        maskAllInputs: true, // Important - this needs to be true for the below function to be called
+        maskInputFn: (text, element) => {
+            if (element?.attributes['type']?.value === 'search') {
+                // If this is a search input, don't mask it
+                return text
+            }
+            // Otherwise, mask it with asterisks
+            return '*'.repeat(text.length)
+        },
+    }
+})
+```
+
+## Text elements
+
+General text is not masked by default, but we provide multiple options for masking text:
+
+### Mask all text
+
+```ts
+posthog.init('<ph_project_api_key>', {
+    session_recording: {
+        maskTextSelector: "*" // Masks all text elements
+    }
+})
+```
+
+### Mask or un-mask specific text
+
+You can use a CSS selector to mask specific elements. For example, you may want to mask all elements with the class `password` or the ID `sensitive`.
+
+```ts
+posthog.init('<ph_project_api_key>', {
+    session_recording: {
+        maskTextSelector: ".password, #sensitive" // masks all elements with the class "password" or the ID "sensitive"
+    }
+})
+```
+
+You can further control the text that gets masked. For example, by only masking text that looks like an email
+
+```ts
+posthog.init('<ph_project_api_key>', {
+    session_recording: {
+        maskTextSelector: "*", // The below function only applies to selected elements, so make sure to set to "*" if you want this to work globally
+        maskTextFn: (text) => {
+            // A simple email regex - you may want to use something more advanced
+            const emailRegex = /(\S+)@(\S+\.\S+)/g
+
+            return text.replace(emailRegex, (match, g1, g2) => {
+                // Replace each email with asterisks - ben@posthog.com becomes ***@***********
+                return '*'.repeat(g1.length) + '@' + '*'.repeat(g2.length)
+            })
+        },
+    }
+})
+```
+
+
+
+## Other Elements
+
+If your application displays sensitive user information outside of input or text fields, or if there are areas of your application that you simply don't want to capture, you need to update your codebase to prevent PostHog from capturing this information during session recordings.
+
+To do so, you should add the CSS class name `ph-no-capture` to elements which should not be recorded. This will lead to the element being replaced with a block of the same size when you play back the recordings. Make sure everyone who watches recordings in your team is aware of this, so that they don't think your product is broken when something doesn't show up!
+
+```html
+<div class="ph-no-capture">I won't be captured at all!</div>
+```
+
+Note that adding `ph-no-capture` will also prevent any [autocapture](/docs/data/autocapture) events from being captured from that element.

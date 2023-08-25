@@ -4,18 +4,26 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We treat Marketing as the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. What this means in practice:
-- A small, talented team of in-house content creators with strong editorial capability - our default is to keep writing in-house, not farm it out to a network of freelancers.
+The Marketing & Content team exist to drive organic, word-of-mouth growth by:
+
+1. Producing world-class top-of-funnel content for our ICP
+2. Ensuring the information users need is easy to find and maintained to a high standard
+
+Marketing is the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. This means:
+
+- A small, talented team of in-house content creators with strong editorial capability – our default is to keep writing in-house, not farm it out to a network of freelancers.
  
-- Building a reputation for high quality, trustworthy content that is a go-to resource for our users and wider reading audience. 
+- Building a reputation for high-quality, trustworthy content that is a go-to resource for our users and wider reading audience. 
 
 - Extreme responsiveness to opportunities, both internal and external (e.g. cool Hackathon projects, GDPR rulings).
  
-- Proactively reporting and amplifying company and product news, rather than [artificially creating news](https://en.wikipedia.org/wiki/Tomorrow_Never_Dies) or buzz by telling people what to build. 
+- Proactively reporting and amplifying company and product news, rather than [artificially creating news](https://en.wikipedia.org/wiki/Tomorrow_Never_Dies) or buzz by telling people what to build.
 
-## Marketing vision 
+The latest goals for marketing can be found on the [Marketing Small Team page](https://posthog.com/handbook/small-teams/marketing).
 
-PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing at PostHog will look like at that point. 
+## Marketing & content vision 
+
+PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing & content at PostHog will look like at that point. 
 
 ### Things we want to be brilliant at
 
@@ -26,6 +34,8 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 - **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
 
 - **Content for our ideal customer:** We deliver genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’. Ahrefs and HubSpot are examples of companies who do this brilliantly for their audience.
+
+- **Documentation** We work with Website & Docs, and product teams, to maintain docs to a high standard, and ensure users can easily find answers to their questions
  
 ### Things we want to be good at
 
@@ -33,13 +43,13 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
  
 - **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasionally be useful.
 
-- - **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out Twitter. 
+- **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out Twitter. 
 
 ### Things we might want to be good at but haven't tested yet
 
 - **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
  
-- **Being really cool and interesting people in online communities:** We could do a lot more of this in relevant communities in Slack/Discord/StackOverflow etc, and it's more engaging than one-way social media. We also increase awareness in relevant communities by sponsoring them. Overall we want to be a net contributor to those communities.
+- **Being cool and interesting people in online communities:** We could do a lot more of this in relevant communities in Slack/Discord/Stack Overflow etc., and it's more engaging than one-way social media. We also increase awareness in relevant communities by sponsoring them. Overall, we want to be a net contributor to those communities.
 
 ### Things we don't want to spend time on
 
@@ -53,15 +63,15 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 These are our main values:
 
-- Be opinionated
-- Pull, don’t push
-- No sneaky shit
+1. Be opinionated
+2. Pull, don’t push
+3. No sneaky shit
 
-### Be opinionated
+### 1. Be opinionated
 
-PostHog was created because we believed that product analytics was broken and we had a vision of how it could be much better. 
+PostHog was created because we believed that product analytics was broken, and we had a vision of how it could be much better. 
  
-We need to reflect this vision in our marketing, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us, than 80% mildly agree with us. 
+We need to reflect this vision in our marketing and content, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us. 
  
 We communicate clearly, directly, and honestly.
  
@@ -69,25 +79,27 @@ It's ok to have a sense of humor. We are more likely to die because we are forge
  
 (Sometimes we use terminology like 'value propositions' because that is the standard marketing term for a well-understood concept. That's allowed.)
 
-### Pull, don't push
+### 2. Pull, don't push
 
 _We focus on word of mouth by default._ We believe customers will judge us first and foremost on our product (ie. our app, our website, and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
  
 If a customer doesn't choose PostHog, that means either:
  
-a) The product isn't good enough
-b) The product isn't the right solution for them
-c) We didn't communicate the benefits of the product well enough
+1. The product isn't good enough
+2. The product isn't the right solution for them
+3. We didn't communicate the benefits of the product well enough
  
-We don't believe companies will be long term customers of a competitor because they did a better job of spamming them with generic content. We know this because we frequently have customers switching from a competitor to us - they are not afraid to do this.
+We don't believe companies will be long-term customers of a competitor because they did a better job of spamming them with generic content. We know this because we frequently have customers switching from a competitor to us – they are not afraid to do this.
  
-Tackling a) is the responsibility of everyone at PostHog. The marketing team's specific job is to avoid spending time advertising to people in group b), and making sure we do a great job avoiding c). This means:
+Tackling (1) is the responsibility of everyone at PostHog. The marketing team's specific job is to avoid spending time advertising to people in group (2), and making sure we do a great job avoiding (3). 
+
+This means:
  
 - Making sure our comms are extremely high quality
 - Sharing our messages in the right places, where relevant users can see them
 - Spending enough time and/or money in those places so that our messages get through
 
-### No sneaky shit
+### 3. No sneaky shit
 
 Our [target users](/handbook/growth/marketing/customer-personas) are technical and acutely aware of the tedious clickbaity marketing tactics that software companies use to try and entice them. Stop. It's patronizing to them and the marketing people creating the content. 
  
@@ -103,25 +115,31 @@ For these reasons, we:
  
 - Don't bombard customers with 'deals', pop-ups, and other dark patterns. These devalue our product in the long term.
  
-- Don't pretend our customers are different from us - more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. If you wouldn't like it, assume our customers wouldn't either. 
+- Don't pretend our customers are different from us – i.e. more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. If you wouldn't like it, assume our customers wouldn't either. 
 
 ## Marketing channels and tactics today
 
-The Marketing team's main focus is acquisition of [high quality signups](https://posthog.com/handbook/strategy/overview#what-should-we-be-working-on-today). We have established that _word of mouth_ is the most effective way to do this - virtually all of our high quality signups have come organically. Here are the channels we use, in _rough_ order of priority:
- 
-#### [Content](/handbook/growth/marketing/blog)
+The Marketing team's main focus is acquisition of customers in our [ideal customer profile](/handbook/strategy/ideal-customer-persona) (ICP). 
 
-- **SEO content** is high value and genuinely useful content that targets the keywords we think are most relevant to our customers. We do 'clean' SEO, ie. no buying backlinks or writing clickbait. 'No clickbait' doesn't mean content has to be boring! Our aim is to increase our organic reach on Google, basically. We put a small percentage of our monthly paid ads budget behind this type of content on LinkedIn and Twitter to increase awareness.
+We have established that _word of mouth_ is the most effective way to do this – virtually all of our high quality signups have come organically. 
+
+Here are the channels we use, in _rough_ order of priority:
  
-- **Shareable content** is stuff we think users and audiences outside PostHog will just find interesting. These may be technical deep dives or articles that give an insight into how PostHog works. We don't expect these to turn directly into signups, but they help us to build our unique and distinctive brand in the open source community. We may post this content on sites like Hacker News and Reddit, but only when we think it will be of genuine interest to those communities (and sometimes people outside PostHog beat us to it, which is great).
+### Content
+
+- **SEO content** is high value and genuinely useful content that targets the keywords we think are most relevant to our customers. We do 'clean' SEO – i.e. no buying backlinks or writing clickbait. 'No clickbait' doesn't mean content has to be boring! Our aim is to increase our organic reach on Google, basically. We put a small percentage of our monthly paid ads budget behind this type of content on LinkedIn and Twitter to increase awareness.
+
+- **Shareable content** is content we think users and audiences outside PostHog will just find interesting. These may be technical deep dives, or articles that give an insight into how PostHog works. We don't expect these to turn directly into signups, but they help us to build our unique and distinctive brand in the open source community. We may post this content on sites like Hacker News and Reddit, but only when we think it will be of genuine interest to those communities (and sometimes people outside PostHog beat us to it, which is great).
+
+- **Email content:** We send out [Product for Engineers](/handbook/growth/marketing/newsletter) every 2-3 weeks. We run this on Substack.
+
+- **YouTube content** is tutorials or informative videos (usually based on blogs) targeting our ICP on [YouTube](https://www.youtube.com/@PostHog) to expand awareness of PostHog and provide an alternative to written content.
  
-- **Email content:** We send out [Product for Engineers](/handbook/growth/marketing/newsletter) every 2-3 weeks. We run this on Substack. 
- 
-#### [Paid ads](/handbook/growth/marketing/paid)
+### Paid ads
 
 We advertise on Google Search for _conversion_, and Twitter, LinkedIn, Reddit, and Quora for _awareness_. We use paid ads as a cheat code to accelerate learning, e.g. which SEO keywords work, testing out product positioning, as well as to ensure we are easily discoverable when people search for PostHog specifically ('branded keywords'). However, paids ads are expensive so our focus is always on organic growth first unless we find a paid channel that's wildly profitable. Generally, we split our spend 2/3 awareness vs. 1/3 conversion.
 
-#### Startups
+### Startups
 
 We run two startup plans:
 
@@ -130,25 +148,21 @@ We run two startup plans:
 
 We create the ad copy and run the office hours, while the CS team handle billing and onboarding. 
  
-#### [Sponsorships](/handbook/growth/marketing/open-source-sponsorship)
+### Sponsorships
 
 We periodically run sponsorship campaigns:
 
 - **Commercial sponsorship:** Sponsoring newsletters, podcasts, and events that are likely to reach our target audience. We try to keep a relatively narrow focus here. Newsletters have worked best for us so far.
- 
+
 - **Open source sponsorship:** Sponsoring open source projects and developers that have helped us build PostHog. Sometimes we do cross-promotion with them, but it's not necessary – this is more about giving back to the community.
 
-#### Twitter
+### Twitter
 
-We're investing more effort in Twitter in Q1 2023 to figure out if this is a channel we want to consistently invest a lot of time in. If the answer is yes, we'll add more to the Handbook about how we use Twitter effectively. Our hypothesis is that it is the best social media platform for us to reach our target user with frequently shared pieces of engaging, transparent content about PostHog. 
+We're investing more effort in Twitter in 2023 to figure out if this is a channel we want to consistently invest a lot of time in. If the answer is yes, we'll add more to the Handbook about how we use Twitter effectively. Our hypothesis is that it is the best social media platform for us to reach our target user with frequently shared pieces of engaging, transparent content about PostHog. 
  
-#### [Press](/handbook/growth/marketing/press)
+### Press
 
 While we don't actively do PR, we occasionally put out press releases ourselves for funding announcements. 
-
-### Marketing quarterly goals
-
-The latest goals for marketing can be found on the [Marketing Small Team page](https://posthog.com/handbook/small-teams/marketing).
 
 ## Target customer and messaging
 
@@ -168,4 +182,4 @@ The Marketing Small Team page is maintained [here](/handbook/small-teams/marketi
 - People who like to choose their own objectives 
 - T-shaped people (wide breadth with a spike), rather than specialists
 - Hands-on people not motivated by managing a team
-- We're agnostic as to experience
+- We're agnostic as to experience 

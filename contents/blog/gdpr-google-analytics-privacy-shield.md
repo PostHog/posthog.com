@@ -74,7 +74,7 @@ Once you break down the chain of events, one thing becomes abundantly clear: a n
 
 The only reliable solution is for the US to enact adequate legal protections for EU citizens, but this would be politically difficult. An executive order could smooth the path to a quicker resolution, but it would be subject to the whims of any incoming president who didn't like it. Hello, Donald Trump. 
 
-This legal instability makes controlling your own data, in our view, critically important. [Self-hosting your analytics](/blog/why-companies-self-host) obviates the worry about where data is captured and then exported, and simplifies the processes for ensuring your business is GDPR or HIPAA compliant. 
+This legal instability makes controlling your own data, in our view, critically important. Self-hosting your analytics obviates the worry about where data is captured and then exported, and simplifies the processes for ensuring your business is GDPR or HIPAA compliant. 
 
 The larger the business, the greater risk. Fines are punitive and expensive to litigate and the sunk cost risk of choosing the wrong solution is a waste of time and money.
 

@@ -1,3 +1,30 @@
+## Objectives: Q3 2023
+
+- Define and enforce limits on what users can send us - Owner @xaviervelo
+- Deprecate and improve apps
+  - Finish batch exports so we can deprecate export apps - Owner @tomasfarias
+  - Remove all processing apps - Owner @tiina303
+- Figure out the pipeline architecture for the next 2 years - Owner @timgl
+
+## Objectives: Q2 2023
+
+- Objective: CDP - Owner @fuziontech
+    - Key Result: Rock solid webhooks - Owner @hazzadous
+        - Edit: deprioritized as it is not a burning bridge, and instead:
+        - Improve quality of existing offering by removing questionable Apps: mark apps that store lots of data in postgres, or are generally lower quality as non-global or disable altogether.
+        - Separate export and CPD Apps within the interface to enable separating the two products. Bill these two products separately.
+        - Make batch processing exports rock solid as below.
+    - Key Result: Rock solid batch processing (exports) - Owner @tomasfarias
+- Objective: Pipeline unblocks query performance and ensures data quality - Owner @tiina303
+    - Key Result: Persons on Events write path and squash shipped with monitoring and alerting
+    - Key Result: Backfills are complete for all teams
+    - Key Result: Guaranteed deduplication of UUIDs in events table within 7 days (with docs explaining it)
+    - Key Result: Query time deduplication of events to cover until ClickHouse deduplication is complete
+- Objective: Pipeline Robustness and Reliability - Owner @xvello
+    - Key Result: Errors cause kafka lag instead of DLQ production e.g. person creation failures cause kafka lag not go to DLQ
+    - Key Result: Plugin server scales elastically and deploys do not create more than 2 minutes of lag
+
+
 ## Objectives: Q1 2023
 
 - Objective: Performance

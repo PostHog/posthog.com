@@ -20,8 +20,7 @@ import SessionAnalysis from '../images/blog/array/1-38-0-session-analysis.png'
 import BreakdownBins from '../images/blog/array/1-38-0-breakdown.png'
 import SearchImprove from '../images/blog/array/1-38-0-search.png'
 
-Want to know more about what we're up to? [Subscribe to HogMail, our newsletter](/newsletter), which we send out every two weeks!
-
+Want to know more about what we're up to? [Subscribe to HogMail, our new newsletter](https://newsletter.posthog.com/subscribe), which we send once every two weeks!
 > Running a self-hosted instance? Check out our [Upgrading PostHog guide](/docs/runbook/upgrading-posthog).
 
 ## PostHog 1.38.0 release notes
@@ -69,7 +68,7 @@ There is a new async migration available which changes the persons table in Clic
 Curious about async migrations? Find out more in [the self-host docs](https://posthog.com/docs/self-host/configure/async-migrations/overview), or examine this [new migration specficially on GitHub](https://github.com/PostHog/posthog/blob/master/posthog/async_migrations/migrations/0005_person_replacing_by_version.py).
 
 ### New: Feature flag persistence across authentication steps
-Want to ensure users get a consistent experience across login steps? 1.38.0 improves feature flag persistence for such cases, which is great for experiments where you want the same user to be shown the same variant, no matter how their userID changes. Find out more in the [feature flag persistence docs](https://posthog.com/docs/user-guides/feature-flags#persisting-feature-flags-across-authentication-steps).
+Want to ensure users get a consistent experience across login steps? 1.38.0 improves feature flag persistence for such cases, which is great for experiments where you want the same user to be shown the same variant, no matter how their userID changes. Find out more in the [feature flag persistence docs](/docs/feature-flags/manual#persisting-feature-flags-across-authentication-steps).
 
 **Note:** This is currently only supported in `posthog-js`.
 
@@ -93,15 +92,15 @@ Universal search wasn't the only search-based update this time, either. We also 
 You can now choose which specific funnel step a breakdown property should come from, and whether the same value should be copied over to other funnel steps for analysis. This is very handy for getting even more value from funnels, and further information is included in the [funnel documentation](https://posthog.com/docs/user-guides/funnels#choosing-breakdown-property-behaviour).
 
 ### Improved: Library support for multivariate feature flags and experiments
-Our Node, Ruby, Go, and PHP libraries have been updated to support experiments! We are also trialling support for feature flags, groups, and session analytics in our mobile libraries. Interested in giving it a go? Let us know in [the Slack community](/slack)!
+Our Node, Ruby, Go, and PHP libraries have been updated to support experiments! We are also trialling support for feature flags, groups, and session analytics in our mobile libraries. Interested in giving it a go? [Let us know](https://app.posthog.com/home#supportModal!) 
 
 ### New: Four new apps released
 The community has been busy building many new apps for the [PostHog App Store](/apps) and we're excited to announce the following apps have been released for users on PostHog Cloud...
 
 - [Unduplicator](/apps/unduplicator), for cleaning duplicate events during data imports
 - [URL Normalizer](/apps/url-normalizer), for introducing consistent casing across PostHog 
-- [Engage Connector](/apps/engage-connector), for sending data to [Engage](https://engage.so/) for marketing automation
-- [Variance Connector](/apps/variance-connector), for sending data to [Variance](https://www.variance.com/) so you can define PQLs
+- [Engage](/apps/engage-connector), for sending data to [Engage](https://engage.so/) for marketing automation
+- [Variance](/apps/variance-connector), for sending data to [Variance](https://www.variance.com/) so you can define PQLs
 
 Interested in building your own app? [Here's how to get started](/docs/apps)!
 

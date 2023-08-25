@@ -49,7 +49,7 @@ yarn add posthog-js
 
 To finish installation, include it in your files:
 
-```
+```js
 import posthog from 'posthog-js'
 posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
 ```
@@ -58,13 +58,13 @@ With installation complete, it’s time to configure how you want data to persis
 
 Here’s how to do that if you want to store data in page memory:
 
-```
+```js
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_instance_address>',
-    loaded: function (posthog) {
-        posthog.identify('[user unique id]')
-    },
     persistence: 'memory',
+    bootstrap: {
+        distinctID: '[user unique id]', // (If you have it)
+    },
     // ... more options
 })
 ```
@@ -73,9 +73,15 @@ posthog.init('<ph_project_api_key>', {
 
 Now that your PostHog deployment isn’t using cookies you can, optionally and if you’re not using cookies for any other services, completely remove your GDPR-required cookies acceptance banner. Good for you — they only annoy most users anyway. 
 
+## Limitations
+
+Nothing comes for free and limiting what `posthog` can track between page loads does of course affect how the product works. Below are some of the likely consequences of cookie-less tracking:
+
+* **Higher anonymous user count** - each pageload that is not ["bootstrapped"](/docs/libraries/js#bootstrapping-flags) with a known `distinctId` will count as a new user, and not a returning one
+* **Session Recording count** - as we can't track a "session" (multiple pageloads over time), Session Recordings will only be as long as the in-memory session and will reset (i.e. start a new recording) whenever the browser reloads. In addition, multiple window tracking is not possible.
+* **Cache optimizations** - we store some information in browser storage in order to load faster, for example using the last loaded values for Feature Flags. Without this optimization there will be an increased average delay between the page loading and things like Feature Flags being available to query. 
+
+
 ## Further reading
 
 - [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
-
-<NewsletterTutorial compact/>
-

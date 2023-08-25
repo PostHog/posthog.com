@@ -101,9 +101,13 @@ Any time you want to preview changes you are making to the local version of the 
 
 Our website uses various APIs to pull in data from sites like GitHub (for contributors) and Ashby (our applicant tracking system). Without setting these environment variables, you may see various errors when building the site. Most of these errors are dismissible, and you can continue to edit the website.
 
-If you're a core team member working on a portion of the site where having this data is useful, you can access some of the main environment variables [here](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md).
+If you're a core team member and need this data locally, you can:
 
-Note: If you have a Gatsby account (you'd know if you do), rather than running the site with `yarn start`, you should instead use `gatsby start` which will automatically load in all environment variables directly from Gatsby. (You'll need to set up the Gatsby CLI and authenticate first.)
+1. Ask the [Website & Docs team](https://posthog.slack.com/archives/C01V9AT7DK4) for access to our Vercel account
+1. Install the Vercel CLI
+1. Run `vercel pull`
+1. Open `.vercel/.env.development.local`
+1. Copy a value and run in your terminal like: `export VARIABLE_NAME=VALUE`
 
 ### Finding the content to edit
 
@@ -182,6 +186,31 @@ tags: ["Using PostHog", "Privacy"]
   - <CategoryData />
 - `tags`: the more specific tag(s) the post belongs to. an array containing any number of the following:
   - <CategoryData type="tags" />
+
+##### Tutorials
+
+Markdown files located in /contents/tutorials
+
+```markdown
+---
+date: 2022-02-14
+title: How to filter out internal users
+author: ["joe-martin"]
+featuredTutorial: false
+featuredVideo: https://www.youtube-nocookie.com/embed/2bptTniYPGc
+featuredImage: ../images/tutorials/banners/tutorial-17.png
+tags: ['filters', 'settings']
+---
+```
+
+- `date`: the date the tutorial was posted
+- `title`: the title that appears at the top of the tutorial and on the tutorial listing page
+- `author`: the author(s) of the tutorial. correlates to your handle located in /src/data/authors.json
+- `featuredTutorial`: determines if tutorial should be featured on the homepage
+- `featuredVideo`: the iframe src of the video that appears at the top of the tutorial
+- `featuredImage`: the URL of the image that appears at the top of the tutorial and on the tutorial listing page
+- `tags`: the tag(s) the tutorial belongs to. an array containing any number of the following:
+  - <TutorialTags />
 
 
 
@@ -337,7 +366,7 @@ noindex: true
 - `noindex`: `true` | `false` - determines whether to index the page or not
 
 
-You can often refer to the source of existing pages for more examples, but if in doubt, you can always ask for help in the [PostHog Community Slack](/slack). 
+You can often refer to the source of existing pages for more examples, but if in doubt, you can always [ask for help](https://app.posthog.com/home#supportModal).
 
 #### Images/GIFs
 
@@ -369,7 +398,7 @@ For most images, this plugin will automatically generate a range of sizes to opt
 
 Once you've made a new markdown file, you should link to it from the sidebar where appropriate.
 
-The sidebar is generated from each of the files in `/src/sidebars`.
+The sidebar is generated from `src/navs/index.js`.
 
 #### Redirects
 

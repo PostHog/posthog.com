@@ -173,7 +173,7 @@ When did we know this idea was right?
 
 When we saw real life actual people on the internet start using our thing, without us having to manually get them to do so.
 
-Even better was seeing a community starting to appear. We got [our first ever issue from someone else](https://github.com/PostHog/posthog/issues/100) on February 15th, and our first community discussion [on the 23rd](https://github.com/PostHog/posthog/issues/149). This started to spiral. We now get a stream of issues every day in our [PostHog Users Slack](https://posthog.com/slack) or the [repo](https://github.com/posthog/posthog).
+Even better was seeing a community starting to appear. We got [our first ever issue from someone else](https://github.com/PostHog/posthog/issues/100) on February 15th, and our first community discussion [on the 23rd](https://github.com/PostHog/posthog/issues/149). This started to spiral. We now get a stream of issues every day in our [PostHog Users Slack](/slack) or the [repo](https://github.com/posthog/posthog).
 
 Growth suddenly went from being the hardest part of what we were doing, to being quite easy - we started getting swamped with product work. The problem was keeping up rather than getting something to happen.
 
@@ -181,7 +181,7 @@ The [rest is history](../handbook/company/story).
 
 ## What you can learn from this
 
-###Local versus global maxima
+### Local versus global maxima
 
 The hardest pivot to make was when we had the most traction. For us, that was dropping our technical debt tool.
 
@@ -191,7 +191,7 @@ It was obvious our existing product wasn't working because our users told us as 
 
 Ultimately, Tim and I realized we weren't the right people to be solving this problem.
 
-###Thinking we wanted to change course, but not thinking about it enough
+### Thinking we wanted to change course, but not thinking about it enough
 
 We pivoted so much we developed a knack for building an MVP and a new website in a single, glorious, all nighter and getting meetings by the first day to show it to people. That felt like progress, but in reality was just a bit dangerous. Similarly to how a child could operate a car.
 
@@ -205,7 +205,7 @@ This is normally [the other way around](https://www.inc.com/scott-mautz/jeff-imm
 
 I'm now glad we were so decisive.
 
-##Experts are just that
+## Experts are just that
 
 A meeting with the right person when you're at a literally pivotal moment can help you avoid a mistake that could cost you weeks, months or years of your life and your team's lives.
 
@@ -248,4 +248,5 @@ Those very early decisions are the most leveraged you will ever take for your st
 
 It turns out that PostHog has been about building something people want, that we also wanted to work on. If you're reading this article and having a tough time working out if you should pivot, drop us [an email](mailto:blog@posthog.com).
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+

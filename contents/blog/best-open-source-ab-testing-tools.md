@@ -1,162 +1,154 @@
 ---
-date: 2022-05-25
-title: The 5 best free and open-source A/B testing tools
+date: 2023-03-16
+title: The 6 best free and open-source A/B testing tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/experiments.jpeg
+featuredImage: ../images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
 author:
   - hanna-crombie
+  - andy-vandervell
 category: General
 tags:
-  - Guides
   - Open source
-  - Comparisons
 ---
 
 Also known as split testing or multivariate testing, A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.
 
-Here, we’re sharing our guide to the best free and [open-source tools](/blog/best-open-source-analytics-tools) for experimenting with A/B tests, which will be especially useful if you're looking for an [alternative to Google Optimize](/blog/google-optimize-alternatives) after Google confirmed it is sunsetting the product.
+Product review website G2 lists 120 products in the A/B testing category, but what they offer varies widely. Many products on G2, for example, lean toward marketing uses cases (i.e. testing website landing pages) and aren't useful for product feature testing, or focus on a narrow subset of companies.
 
-## 1. [PostHog](https://posthog.com)
+In this guide, we're looking at the best free and open-source A/B testing tools. Open-source tools are mainly built for developers, so we recommend marketers read our guide to the best [alternatives to Google Optimize](/blog/google-optimize-alternatives).
+
+> **Changelog:**
+>
+> - **Mar 16, 2023:** Added VWO, updated images. Various copy updates and improvements.
+
+## 1. PostHog
 
 ![PostHog - best open source ab testing tools](../images/blog/open-source-testing-tools/img1_PostHog.png)
 
-PostHog is an [all-in-one analytics suite](/product) that integrates all the essential features you need to understand your users. It collects and visualizes data on how people are using your products, provides insights into trends and retention, and helps to remove bottlenecks and reduce churn.
+[PostHog](https://posthog.com) is an all-in-one platform that integrates a comprehensive A/B testing suite with numerous other tools, such as product analytics, feature flags, and session recording. It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
-Our A/B testing features, which we call our experimentation suite, are complemented by other tools like [feature flags](/product/feature-flags), [session recording](/product/session-recording), [heatmaps](/product/heatmaps), [user paths](/product/user-paths) and more, making it one of the most comprehensive analytics platforms around – open source, or otherwise.
-
-[PostHog’s experimentation suite](https://posthog.com/docs/user-guides/experimentation) allows you to flexibly test your hypotheses. PostHog will automatically estimate the number of users exposed, and we use Bayesian analysis to calculate the results and ensure they're significant.
+[PostHog’s experimentation suite](/product/experimentation-suite) supports multivariate experiments, and targeting by geography, user cohorts, and user properties – all of which is built atop PostHog's multivariate feature flags. PostHog uses a Bayesian approach to calculate the probability of each variant being the best, and whether the results are statistically significant or not.
 
 ### Who is PostHog for?
 
-PostHog is a great choice for any team that wants a complete view of how people use their product. Not only is the testing functionality comprehensive, it’s tightly integrated with a complete product analytics suite – you don’t need any external tools.
+PostHog is ideal for product teams, particularly those who don't want to assemble a complicated stack of analytics tools. As an all-in-one platform, PostHog includes everything a team needs to measure user behavior, test new features, and roll them out. It's also one of the [best open-source session replay tools](/blog/best-open-source-session-replay-tools) available.
 
-### Strengths
+### Features and benefits
 
+- A/B and multivariate testing
+- Unlimited experiments
+- Multivariate feature flags
 - Full product analytics suite
-- Easy to get set up – no SQL necessary
 - Ability to select segments for experiments
-- Feature flags for incremental roll outs
 - Event pipelines for integration with data warehouses
 - Traffic visualization with user path analysis
-- Self-hosted and cloud-hosted options available
 
-### How much does it cost?
+### How much does PostHog cost?
 
-While Experimentation isn't currently part of the open source release, it's [free to use up to 1 million events per month](/pricing) on PostHog Cloud when you enter a card. You can set billing limits to prevent surprise bills.
+Experimentation is free-to-use on PostHog's Scale plan, which is also [free up to 1 million events](/pricing) and 15,000 recordings per month – you can set billing limits to ensure you don't get surprise bills. While PostHog is open source, its A/B testing features aren't included in the open source release.
 
-### Open source license
+> **Further reading:** New to A/B testing? Read [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes).
 
-PostHog Open Source is available under an [MIT license](https://github.com/PostHog/posthog). Read our docs for more on [how to self-host PostHog](https://posthog.com/docs/self-host).
-
-<ArrayCTA />
-
-**Further reading:**
-- [The best open source Hotjar and FullStory alternatives](/blog/best-open-source-session-replay-tools)
-- [What we've learned about running effective A/B tests](/blog/experiments)
-- [The differences between PostHog and Amplitude](/blog/posthog-vs-amplitude)
-
-## 2. [GrowthBook](https://www.growthbook.io/)
+## 2. GrowthBook
 
 ![GrowthBook - best open source ab testing tools](../images/blog/open-source-testing-tools/growthbook.png)
 
-GrowthBook is an [open-source platform for feature flags](/blog/best-open-source-feature-flag-tools) and A/B tests which helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process and can be used as a full-stack platform, a plugin feature flagging tool or an analysis engine.
+[GrowthBook](https://www.growthbook.io/) is an [open-source platform for feature flags](/blog/best-open-source-feature-flag-tools) and A/B tests that helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process and can be used as a full-stack platform, a plugin feature flagging tool, or an analysis engine.
 
 ### Who is GrowthBook for?
 
 GrowthBook is built for data, engineering and product teams who need the power of a customizable platform without having to build it in house.
 
-### Strengths
+### Features and benefits
 
 - Modular platform to adapt to your needs
 - Lightweight SDKs for speed
 - Easy to implement – no need for data or engineering resources
 - Self-hosted and managed options available
 
-### How much does it cost?
+### How much does GrowthBook cost?
 
-GrowthBook open source is free and includes unlimited experiments. A hosted version includes a visual A/B test editor and is free up to 5 users, with pricing at $20 per user per month thereafter.
+GrowthBook open source (MIT license) is free and includes unlimited experiments. A hosted version includes a visual A/B test editor and is free up to five users, with pricing at $20 per user per month thereafter.
 
-### Open sources license
-
-GrowthBook is available under an MIT license. Visit the [Growthbook GitHub repo](https://github.com/growthbook/growthbook/) for more info. 
-
-## 3. [Unleash](https://www.getunleash.io/)
+## 3. Unleash
 
 ![Unleash - best open source ab testing tools](../images/blog/open-source-testing-tools/img2_Unleash.png)
 
-Unleash is a feature management platform which provides an overview of all features across your applications and services. The platform empowers engineering teams to implement A/B tests via feature toggles and offers accurate user targeting.
+[Unleash](https://www.getunleash.io/) is a feature management platform that provides an overview of all features across your applications and services. The platform empowers engineering teams to implement A/B tests via feature toggles and offers accurate user targeting.
 
 You can use Unleash to define the rules of your experiments, but the platform doesn’t provide all the tools you need to manage A/B tests end-to-end. Instead, you'll need to connect your experiment with an analytics platform like Google Analytics or Mixpanel in order to visualize results.
 
 ### Who is Unleash for?
 
-Unleash is for autonomous development teams who want a lightweight way to test, validate and rollout new features safely. They build with key developer concerns in mind: integration, privacy, resilience and performance.
+Unleash is for autonomous development teams who want a lightweight way to test, validate and rollout new features safely.
 
-### Strengths
+### Features and benefits
 
 - Accurate user targeting
-- Fast toggle evaluation so performance issues are spotted fast
+- Fast toggle evaluation, so performance issues are spotted fast
 - Extensive APIs
 - Self-hosted and managed service available
 
-### How much does it cost?
+### How much does Unleash cost?
 
-Unleash’s basic open source self-hosted plan includes A/B experimentation and is free for two environments. A managed version is also available starting from $80 a month.
+Unleash’s basic open source self-hosted plan includes A/B experimentation and is free for two environments. A managed version is also available starting from $80 a month. The open source version is available under an Apache license.
 
-### Open source license
-
-The open source version is available under an Apache license. Visit the [Unleash GitHub repo](https://github.com/Unleash/unleash) for more info.
-
-## 4. [Mojito](https://mojito.mx/)
+## 4. Mojito
 
 ![Unleash - best open source ab testing tools](../images/blog/open-source-testing-tools/img3_Mojito.png)
 
-Mojito is an open split testing stack that lets you build, launch and analyze experiments via Git/CI. The stripped-down tool consists of three modular components – a front-end library for bucketing users and tracking them, data models and events for fast reporting, and reporting templates and functions so you can build your own visualizations for experiment analysis.
+[Mojito](https://mojito.mx/) is an open split testing stack that lets you build, launch and analyze experiments via Git/CI. The stripped-down tool consists of three modular components – a front-end library for bucketing users and tracking them, data models and events for fast reporting, and reporting templates and functions, so you can build your own visualizations for experiment analysis.
 
 ### Who is Mojito for?
 
-Mojito is a fully source-controlled stack for developers and technical product teams who want a simple solution with unlimited customisation.
+Mojito is a fully source-controlled stack for developers and technical product teams who want a simple solution with unlimited customization.
 
 ### Strengths
 
-- Simple APIs and unlimited customisation
+- Simple APIs and unlimited customization
 - No need for 3rd party analytics
 - Error tracking and handling
 - Lightweight solution for optimized page load speed
 
-### How much does it cost?
+### How much does Mojtio cost?
 
-Mojito is fully free and open source, and you don’t need an account to get started.
+Mojito is completely free and open source, and you don’t need an account to get started. It's distributed under a BSD 3-clause license.
 
-### Open source license
-
-Mojito is available under a BSD 3-clause license so you can build upon it as you wish. Take a look at [Mojito on GitHub](https://github.com/mint-metrics/mojito) to learn more.
-
-## 5. [Flagsmith](https://flagsmith.com)
+## 5. Flagsmith
 
 ![Flagsmith - best open source ab testing tools](../images/blog/open-source-testing-tools/img4_Flagsmith.png)
 
-Flagsmith is an open-source feature flag and remote configuration service which lets you manage features across mobile, web and server-side applications. You can use Flagsmith’s Multivariate Flags feature as a bucketing engine to place users into testing buckets and control the specific user experience that is being tested. Flagsmith doesn’t provide analytics for multivariate tests, however. You’ll need to use a 3rd-party provider to receive the stream of event data derived from the behavior of the user.
+[Flagsmith](https://flagsmith.com) is an open-source feature flag and remote configuration service that lets you manage features across mobile, web and server-side applications. You can use Flagsmith’s multivariate flags as a bucketing engine to place users into testing buckets and control the specific user experience that is being tested. Flagsmith doesn’t provide analytics for multivariate tests, however, so you’ll need to use a third-party provider to receive the stream of event data derived from the behavior of the user.
 
 ### Who is Flagsmith for?
 
 Flagsmith is targeted at data-driven front end and user experience teams who want to increase efficiency in their feature development.
 
-### Strengths
+### Features and benefits
 
 - Manage flags across multiple platforms
 - Powerful segmenting rules
 - Integrations with a number of popular analytics platforms
 - Remote configuration allows you to toggle features without changing code
 
-### How much does it cost?
+### How much does Flagsmith cost?
 
-Flagsmith offers a cloud solution for free up to 50,000 requests per month. For teams looking to manage their infrastructure, Flagsmith can be hosted entirely on-premises with pricing available on request.
+Flagsmith is open source and available on a BSD 3-clause license. For teams looking to manage their infrastructure, Flagsmith can be hosted entirely on-premises with pricing available on request. They also offer a cloud solution for free up to 50,000 requests per month. 
 
-### Open source license
+## 6. VWO
 
-Flagsmith is open source and available on a BSD 3-clause license. Explore [Flagsmith on GitHub](https://github.com/Flagsmith/flagsmith) for more info.
+![google optimize alternatives](../images/blog/google-optimize-alternatives/vwo-testing.png)
+
+[VWO](https://vwo.com/)'s testing platform caters mainly to large enterprises, but it recently introduced a free tier to entice companies leaving the [soon-to-be-closed Google Optimize](/blog/google-optimize-alternatives). Its experimentation platform offers A/B and multivariate tests, as well as a visual editor. However, many useful features are only available in its paid tiers – the free tier only supports A/B tests using split URLs and doesn't support multiple variations or geo-targeting.
+
+### Who is VWO for?
+
+VWO's free tier is useful for non-technical users who need an easy-to-use (and free) way to test landing pages.
+
+### How much does VWO cost?
+
+VWO's Starter plan is free up to 50k visitors per month, and $199 per month up to 100k visitors per month.

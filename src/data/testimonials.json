@@ -86,7 +86,12 @@
     },
     {
         "featuresUsed": ["session recording"],
-        "author": { "name": "Anubhuti Mishra", "role": "UI/UX Designer", "company": { "name": "Hasura" } },
+        "author": {
+            "name": "Anubhuti Mishra",
+            "role": "UI/UX Designer",
+            "image": "/images/customers/mishra.jpeg",
+            "company": { "name": "Hasura", "image": "/images/customers/hasura.svg" }
+        },
         "quote": "One time, I was watching session recordings for our sign-up page. I realised a lot of people were trying to click something that wasn’t actually a button. We wouldn’t have noticed that needed fixing without PostHog’s session recordings."
     },
     {
@@ -174,7 +179,12 @@
     },
     {
         "featuresUsed": ["funnels"],
-        "author": { "name": "Tiffany Wong", "role": "Co-founder", "company": { "name": "Pry" } },
+        "author": {
+            "name": "Tiffany Wong",
+            "role": "Co-founder",
+            "company": { "name": "Pry", "image": "/images/customers/pry.svg" },
+            "image": "/images/customers/tiffany.png"
+        },
         "quote": "We’re tracking how users engage with our platform, where they fall out of our funnels and what the overall trends in behavior are. The data we’ve gathered has helped us make several important decisions about where to improve our platform."
     },
     {
@@ -247,8 +257,13 @@
     },
     {
         "featuresUsed": ["feature flags", "competitor"],
-        "author": { "name": "Francesco Agosti", "role": "CTO & Co-founder", "company": { "name": "Phantom" } },
-        "quote": "Feature flags are really, really critical for us and you don’t see them as a feature in other analytics tools. They very valuable though, because you can often use feature flag data to make other product decisions."
+        "author": {
+            "name": "Francesco Agosti",
+            "role": "CTO & Co-founder",
+            "image": "/images/customers/francesco.jpg",
+            "company": { "name": "Phantom", "image": "/images/customers/phantom.svg" }
+        },
+        "quote": "Feature flags are really, really critical for us and you don’t see them as a feature in other analytics tools. They are very valuable though, because you can often use feature flag data to make other product decisions."
     },
     {
         "featuresUsed": ["deployment", "open-source", "self-hosting"],
@@ -289,5 +304,15 @@
         "featuresUsed": ["collaboration"],
         "author": { "name": "Taric Santos de Andrade", "role": "Product Manager", "company": { "name": "Vendasta" } },
         "quote": "“I use PostHog on a daily basis. My team has four engineers, as well as designers, and we need to collaborate closely across areas of the product we own, such as our onboarding flow.”"
+    },
+    {
+        "featuresUsed": ["a/b testing"],
+        "author": {
+            "name": "Taric Santos de Andrade",
+            "image": "/images/customers/taric.jpg",
+            "role": "Product Manager",
+            "company": { "name": "Vendasta", "image": "/images/customers/vendasta.svg" }
+        },
+        "quote": "I'm always trying to find the next experiment to run with PostHog. Every day, I'm checking reports and trying to push the boundaries by testing new hypotheses."
     }
 ]

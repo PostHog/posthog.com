@@ -1,0 +1,25 @@
+Add the following to `composer.json`:
+```json
+{
+    "require": {
+        "posthog/posthog-php": "3.0.*"
+    }
+}
+```
+And then install the dependencies with the command:
+
+```bash
+php composer.phar install
+```
+
+In your app, set your project API key before making any calls.
+
+```php
+PostHog::init("<ph_project_api_key>",
+  array('host' => '<ph_instance_address>') // TIP: You can remove this line if you're using app.posthog.com
+);
+```
+
+> **Note:** As a rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable is best.
+
+You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.

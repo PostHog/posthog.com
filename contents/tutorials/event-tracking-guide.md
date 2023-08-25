@@ -261,7 +261,7 @@ client.Enqueue(posthog.Capture{
 posthog.capture({
     event: "some event",
     distinctId: '[distinct id]',
-    groups: { company: 'id:5' }
+    groups: { company: 'company_id_in_your_db' }
 })
 ```
 
@@ -287,11 +287,9 @@ This allows these groups to be used for analyzing, filtering, and visualizing ev
 
 ## Combining events into actions
 
-Often a single event does not make up an entire behavior that you want to track. For example, a signup can include not only pressing the signup button, but entering the correct information, and making it past the basic information input stage. To truly track all the events and behaviors, events can be combined into actions. 
+Often a single event does not make up an entire behavior that you want to track. For example, a signup can include not only pressing the signup button, but entering the correct information, and making it past the basic information input stage. 
 
-Actions can be created by using the PostHog [toolbar to tag relevant elements](https://posthog.com/tutorials/toolbar#how-to-create-and-action) or from an event or pageview within the actions tab under Data Management. Autocapture events, custom events, and page views can then be combined to better track behavior you want to track and care about. You can find more about [actions here](https://posthog.com/manual/actions). 
-
-> **Note:** Actions also work retroactively, meaning they also tag events that happened in the past, not only events that happened after the action was created.
+[Actions](/docs/data/actions) enable you to combine events that you want to be tracked together. You can then visualize actions in [insights](/docs/product-analytics/insights) and [dashboards](/docs/product-analytics/dashboards). For more detail, see our [action docs](/docs/data/actions).
 
 ## What’s next?
 
@@ -300,5 +298,3 @@ Now that you have set up autocapture, high-quality custom events, and actions, w
 If you are looking for more options to where to send your events from that aren’t covered by our client- and server-side libraries (or autocapture), you can check out our [API](https://posthog.com/docs/api).
 
 If you are looking to get started with analysis of all the event tracking data you now have, you can look into creating a new [trend](https://posthog.com/manual/trends), [funnel](https://posthog.com/manual/funnels), or [dashboard](https://posthog.com/manual/dashboards).
-
-<NewsletterTutorial compact/>

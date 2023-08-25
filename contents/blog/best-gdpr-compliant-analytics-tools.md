@@ -1,6 +1,6 @@
 ---
-date: 2022-10-25
-title: The 7 best GDPR-compliant analytics tools
+date: 2023-03-15
+title: The 8 best GDPR-compliant analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -10,10 +10,9 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/o_1AmP_-HPs
 category: General
 tags:
-  - Guides
-  - Comparisons
   - Privacy
 ---
 
@@ -26,6 +25,10 @@ And, while there is **no universal legal definition** of what constitutes "GDPR-
 2. **Data must be handled securely:** GDPR punishes breaches of privacy and security severely. Data must be held securely and staff trained in how to handle data. You must also delete any personal data you hold if a user requests it.
 
 3. **Don't transfer EU personal data to the US:** Non-anonymized identifiable information on EU citizens can't be transferred to the US. This is a hot button issue due to [recent rulings against websites](https://isgoogleanalyticsillegal.com/) that transferred the personal data of EU citizens (e.g. IP addresses) to Google's US-based servers.
+
+> **Changelog:**
+>
+> - **Mar 15, 2023:** Added Umami
 
 ## The best GDPR-compliant analytics tools
 
@@ -41,19 +44,17 @@ All the tools in this list offer one or more of these methods. We've also chosen
 
 ![PostHog - best gdpr compliant analytics tools](../images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
-[PostHog](https://posthog.com) is an all-in-one, [open source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session recording, feature flags, and experimentation into a [single platform](/product). Think Amplitude + Hotjar + LaunchDarkly in one and you're pretty close.
+[PostHog](https://posthog.com) is an all-in-one, [open-source analytics platform](/blog/best-open-source-analytics-tools) that combines product analytics, session recording, feature flags, and experimentation into a [single platform](/product). Think Amplitude + Hotjar + LaunchDarkly in one and you're pretty close.
 
-Unlike alternatives [like Amplitude](/blog/posthog-vs-amplitude) and Mixpanel, PostHog can be self-hosted on your own infrastructure, which means you can control exactly where user information is stored and how it is processed – ideal for GDPR and HIPAA compliance. It also supports event autocapture, so you can start collecting useful data immediately without instrumenting events by hand.
+PostHog offers EU data hosting, so you can keep all your user data within the EU to comply with the GDPR. Hobbyists can also self-host PostHog Open Source via Docker Compose, though this is only recommended for smaller event volumes in the ~100k per month range. PostHog also supports event autocapture, so you can start collecting useful data immediately without instrumenting events by hand.
 
 #### Who is PostHog for?
-PostHog is especially helpful for product teams that want to understand how users use their product. As it's open source, it's great for early-stage startups, but the powerful toolset and [range of integrations](/apps) means it scales to suit any business size. It's also [useful for marketing teams](/blog/posthog-marketing).
+PostHog is especially helpful for product teams that want to understand how users use their product. It's great for early-stage startups, but the powerful tool set and [range of integrations](/apps) means it scales to suit any business size.
 
 #### Features & benefits
 - An all-in-one analytics suite
-- Easy to use, no SQL required
-- Self-hosting and cloud-hosting available
-- Complete control of your data and PostHog instance
-- Feature Flags, Heatmaps, Session Recording and more
+- EU data hosting available
+- Feature flags, A/B testing, heatmaps, session recording and more
 - Apps to integrate with data warehouses
 - Unlimited ability to scale
 - Open source, via MIT license
@@ -71,7 +72,7 @@ While PostHog uses cookies by default, it can be [configured not to use cookies]
 
 #### How much does PostHog cost?
 
-All paid editions of PostHog are [free to use up to 1 million events per month](/pricing). Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/manual/experimentation), [correlation analysis](/manual/correlation), [cohorts](/manual/cohorts) and [group analytics](/manual/group-analytics). The open source edition is free to self-host and includes the core product analytics features, session recording, and support for one project only.
+PostHog Cloud is [free to use up to 1 million events per month](/pricing) and 15,000 recordings. Paid plans include support for multiple projects, and advanced features like [A/B and multivariate testing](/manual/experimentation), [correlation analysis](/manual/correlation), [cohorts](/manual/cohorts) and [group analytics](/manual/group-analytics). The open source edition is free to self-host and includes the core product analytics features, session recording, and support for one project only.
 
 <GDPRForm />
 
@@ -107,7 +108,34 @@ Plausible is made and hosted in the EU. It collects no personally identifiable i
 
 Plausible charges by pageview with 1 million pageviews costing €69 per month – approx. $71. Paying annually grants you two free months per year – i.e. €69 per month becomes €690 per year. The open source version is free to self-host via Docker Compose.
 
-### 3. Fathom
+### 3. Umami
+
+![umami analytics](../images/blog/open-source-analytics-tools/umami.png)
+
+[Umami](https://umami.is/) is an increasingly popular open-source analytics tool designed for privacy. Like Plausible, it's easy to self-host and collects no personal information (such as IP addresses) making GDPR compliance easy. The downside, as usual with privacy-first analytics tools, is it only collects basic analytics data, so it's best used for website analytics where you're less concerned with understanding user behavior.
+
+#### Who is Umami for?
+
+Privacy-conscious website owners who want a no frills solution that doesn't impact website performance.
+
+#### Features and benefits
+
+- Self-hosting cookieless tracking
+- Lightweight script with no performance impact
+- Basic event tracking for buttons and other UI elements
+
+#### Umami and GDPR compliance
+
+- **Open Source:** <span className="text-green text-lg">✔</span>
+- **Self Hosting:** <span className="text-green text-lg">✔</span>
+- **EU Cloud Hosting:** <span className="text-red text-lg">✖</span>
+- **Cookieless Tracking:** <span className="text-green text-lg">✔</span>
+
+#### How much does Umami cost?
+
+Umami has no paid tier at present, so it's totally free provided you can self-host it. A managed cloud service is currently in private beta, however.
+
+### 4. Fathom
 
 ![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
 
@@ -140,7 +168,7 @@ As a privacy-first solution, Fathom is GDPR compliant out-of-the-box with no com
 
 Like Plausible, Fathom charges by pageview, though it's a bit cheaper than Plausible. A website generating 1 million pageviews per month would pay $54 per month, compared to around $71 with Plausible. Fathom also offers two months free use for paying annually, but there is no free-to-use open sourcre version.
 
-### 4. Countly
+### 5. Countly
 
 ![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
 
@@ -172,7 +200,7 @@ Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud 
 
 Countly doesn't publish pricing on its website. You have to contact sales. Its open source Community Edition is free to self-host, but it excludes most of its user behavior features. 
 
-### 5. Matomo
+### 6. Matomo
 
 ![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
@@ -207,7 +235,7 @@ Matomo's core open source analytics is free to self-host. More advanced features
 
 **Related:** [PostHog and Matomo compared](/blog/posthog-vs-matomo)
 
-### 6. TelemetryDeck
+### 7. TelemetryDeck
 
 ![telemetrydeck](../images/blog/ga4-alternatives/telemetrydeck.png)
 
@@ -239,7 +267,7 @@ TelemetryDeck makes GDPR compliance very easy. It doesn't collect enough persona
 
 TelemetryDeck's free plan gives you up to 100,000 signals per month – signals are TelemetryDeck's name for events. It has three other plans (Indie, Business and Enterprise) which unlock more signals, support, and user accounts.
 
-### 7. GoAccess
+### 8. GoAccess
 
 ![GoAccess - open source analytics tools](../images/blog/gdpr-compliant-analytics/goaccess-gdpr-compliant.png)
 

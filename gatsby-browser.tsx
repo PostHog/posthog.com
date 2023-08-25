@@ -4,22 +4,24 @@ import './src/styles/global.css'
 import HandbookLayout from './src/templates/Handbook'
 import Product from './src/templates/Product'
 import Job from './src/templates/Job'
+import Posts from './src/components/Edition/Posts'
 import { Provider as ToastProvider } from './src/context/toast'
 import { RouteUpdateArgs } from 'gatsby'
+import { UserProvider } from './src/hooks/useUser'
 
 initKea(false)
 
-export const wrapRootElement = ({ element }) => <ToastProvider>{wrapElement({ element })}</ToastProvider>
+export const wrapRootElement = ({ element }) => (
+    <UserProvider>
+        <ToastProvider>{wrapElement({ element })}</ToastProvider>
+    </UserProvider>
+)
 export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     // This is checked and set on initial load in the body script set in gatsby-ssr.js
     // Checking for prevLocation prevents this from happening twice
     if (typeof window !== 'undefined' && prevLocation) {
-        var slug = location.pathname.substring(1)
-        var theme = /^handbook|^docs|^blog|^integrations|^tutorials|^questions|^manual|^using-posthog|^community/.test(
-            slug
-        )
-            ? (window as any).__theme
-            : 'light'
+        var theme = (window as any).__theme
+
         document.body.className = theme
     }
 
@@ -37,7 +39,13 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
 }
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
-    return props.custom404 || !props.data ? (
+    return /^library|^blog\/(?!categories)(?!all)(?!tags)|^tutorials\/(?!categories)(?!all)|^customers\/|^spotlight\/|^posts|^changelog\/(.*?)\//.test(
+        slug
+    ) ? (
+        <Posts {...props} articleView={!/^posts$/.test(slug)}>
+            {element}
+        </Posts>
+    ) : props.custom404 || !props.data ? (
         element
     ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
       ![
@@ -45,13 +53,13 @@ export const wrapPageElement = ({ element, props }) => {
           'docs/api/user',
           'docs/integrations',
           'docs/product-analytics',
-          'docs/session-recording',
+          'docs/session-replay',
           'docs/feature-flags',
           'docs/experiments',
           'docs/data',
       ].includes(slug) ? (
         <HandbookLayout {...props} />
-    ) : /^product\//.test(slug) ? (
+    ) : /^session-replay|^product-analytics|^feature-flags|^ab-testing|^product-os/.test(slug) ? (
         <Product {...props} />
     ) : /^careers\//.test(slug) ? (
         <Job {...props} />

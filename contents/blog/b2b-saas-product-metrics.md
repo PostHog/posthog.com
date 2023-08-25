@@ -108,7 +108,7 @@ We view this figure as more important than the number of active users. If the nu
 
 ### Net Promoter Score (NPS)
 
-**What is it?**  NPS is a well-known customer satisfaction metric, and a good indicator for future customer retention and product market fit. 
+**What is it?**  NPS is a well-known customer satisfaction metric, and a good indicator for future customer retention and [product-market fit](/blog/product-market-fit-game). 
 
 On a scale of 1 to 10, users who select 9 or 10 when asked "how likely are you to recommend us to a friend of colleague" are promoters. Those who vote 0 to 6 are detractors.
 
@@ -178,7 +178,7 @@ In PostHog, users can:
 
 - Create and analyze insights that track trends over time such as how well users convert, what paths they take, and how well they retain.
 
-- Use dashboards to combine insights into cohesive reports on any element of the product experience.
+- Use dashboards to combine insights into cohesive reports on any element of the product experience. We've built a [B2B SaaS product metrics dashboard template](/templates/b2b-dashboard) you can use.
 
 - View session recordings of real customers to understand where they get stuck or how they use the product.
 
@@ -222,8 +222,8 @@ For more inspiration around measuring product success, we recommend reading our 
 
 You may also find the following guides useful:
 
-- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): There's no universal standard for achieving market fit, but this guide introduces heuristics to help you find it
+- [How to achieve B2B product market fit](/blog/product-market-fit-game): There's no universal standard for achieving market fit, but this guide introduces heuristics to help you find it
 
 - [Finding your north star metric](/blog/north-star-metrics): All SaaS products can benefit from a north star metric and this guide will help you find one
 
-- [How to get Stripe payment and revenue data](/tutorials/stripe-payment-data): This tutorial helps you get the data about your customers (and revenue) from Stripe you need to calculate some of these metrics
+- [How to measure product-market fit](/blog/measure-product-market-fit): Product-market fit isn't just an ephemeral gut feeling. You can measure it, and it moves as your customer's needs change. 

@@ -14,7 +14,7 @@ import usePostHog from '../../hooks/usePostHog'
 
 type Result = Hit<{
     id: string
-    type: 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
+    type: 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'apps'
     title: string
     slug: string
     schema?: {
@@ -41,8 +41,12 @@ const categories = [
         name: 'Docs',
     },
     {
-        type: 'manual',
-        name: 'Manual',
+        type: 'apps',
+        name: 'Apps',
+    },
+    {
+        type: 'pipelines',
+        name: 'Pipelines',
     },
     {
         type: 'blog',
@@ -318,7 +322,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
         <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-gray-accent-light dark:border-gray-accent-dark">
             <section className="overscroll-none bg-white dark:bg-gray-accent-dark text-left overflow-y-auto border-r border-gray-accent-light/50 dark:border-gray-accent-dark/50">
                 {!initialLoad || status === 'stalled' ? (
-                    <ol className="list-none m-0 dark:bg-black">
+                    <ol className="list-none m-0 p-0 dark:bg-black">
                         {new Array(5).fill({}).map((_, index) => (
                             <li
                                 key={index}
@@ -331,7 +335,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                         ))}
                     </ol>
                 ) : hits.length > 0 ? (
-                    <Combobox.Options as="ol" className="list-none m-0 dark:bg-black" static hold>
+                    <Combobox.Options as="ol" className="list-none m-0 p-0 dark:bg-black" static hold>
                         {hits.map((hit) => {
                             return (
                                 <Combobox.Option
@@ -387,7 +391,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                 />
                             </div>
 
-                            <div className="border border-gray-accent-light dark:border-gray-accent-dark p-4 rounded bg-tan/50 dark:bg-almost-black/100">
+                            <div className="border border-gray-accent-light dark:border-gray-accent-dark p-4 rounded bg-tan/50 dark:bg-primary">
                                 <h5 className="text-base opacity-75 mb-0">Tip: Ask the community</h5>
                                 <p className="text-sm mb-4 opacity-80">
                                     Our team monitor the Questions page. Somone's bound to know the answer!
@@ -401,7 +405,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                     </>
                 )}
             </section>
-            <section className="hidden md:block overflow-y-auto bg-tan/50 dark:bg-almost-black p-2 h-full">
+            <section className="hidden md:block overflow-y-auto bg-tan/50 dark:bg-primary p-2 h-full">
                 {activeOption ? (
                     <div className="p-6 bg-white dark:bg-gray-accent-dark rounded border border-gray-accent-light/40 dark:border-gray-accent-dark">
                         <div className="text-left">
@@ -414,7 +418,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                             </span>
                             <h4 className="text-2xl mb-3 leading-[1.125]">{activeOption.title}</h4>
                             <p className="text-black/70 dark:text-white/80 text-[15px] mb-0">{activeOption.excerpt}</p>
-                            {activeOption.type !== 'question' ? (
+                            {activeOption.type !== 'question' && activeOption.type !== 'apps' ? (
                                 <span className="block text-xs text-black/60 dark:text-white/60 font-semibold mt-5 mb-3">
                                     On this page
                                 </span>
@@ -438,7 +442,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                                     })}
                                 </ol>
                             ) : (
-                                <ol className="list-none m-0 font-semibold space-y-2">
+                                <ol className="list-none m-0 p-0 font-semibold space-y-2">
                                     {activeOption?.headings
                                         ?.filter(({ depth }) => depth <= 2)
                                         .map((heading, index) => {

@@ -45,6 +45,19 @@ Windows isn't supported natively. But, Windows users can run a Linux virtual mac
 
 In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/blob/master/contents/handbook/engineering/developing-locally.md)!
 
+## Developing with CodeSpaces
+
+This is a faster alternative to get up and running. If you don't want to or can't use Codespaces continue from the next section.
+
+
+1. Create your codespace
+![](https://user-images.githubusercontent.com/890921/231489405-cb2010b4-d9e3-4837-bfdf-b2d4ef5c5d0b.png)
+2. Update it to 8-core machine type (the smallest is probably too small to get PostHog running properly). Consider also changing "Open in ..." to be your favorite editor.
+![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
+3. Open a terminal window and run `docker compose -f docker-compose.dev.yml up`
+4. Open a terminal window and run `./bin/migrate` and then `./bin/start`
+5. Open browser to http://localhost:8000/
+
 ## macOS prerequisites
 
 1. Install Xcode Command Line Tools if you haven't already: `xcode-select --install`.
@@ -65,8 +78,8 @@ In case some steps here have fallen out of date, please tell us about it – fee
 2. Install the `build-essential` package:
 
     ```bash
-    sudo apt install -y build-essential
-    ````
+    sudo apt install -y build-essential optipng
+    ```
 
 ## Common prerequisites for both macOS & Linux
 
@@ -113,13 +126,18 @@ Second, verify via `docker ps` and `docker logs` (or via the Docker Desktop dash
 
 ```shell
 # docker ps                                                                                     NAMES
-CONTAINER ID   IMAGE                               COMMAND                  CREATED         STATUS          PORTS                                                                                            NAMES
-567a4bb735be   clickhouse/clickhouse-server:22.3   "/entrypoint.sh"         3 minutes ago   Up 24 seconds   0.0.0.0:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:9009->9009/tcp, 0.0.0.0:9440->9440/tcp   posthog-clickhouse-1
-9dc22c70865d   bitnami/kafka:2.8.1-debian-10-r99   "/opt/bitnami/script…"   3 minutes ago   Up 24 seconds   0.0.0.0:9092->9092/tcp                                                                           posthog-kafka-1
-add6475ae0db   postgres:12-alpine                  "docker-entrypoint.s…"   3 minutes ago   Up 24 seconds   0.0.0.0:5432->5432/tcp                                                                           posthog-db-1
-6037fb28659b   minio/minio                         "sh -c 'mkdir -p /da…"   3 minutes ago   Up 24 seconds   9000/tcp, 0.0.0.0:19000-19001->19000-19001/tcp                                                   posthog-object_storage-1
-d80a9304f4a7   zookeeper:3.7.0                     "/docker-entrypoint.…"   3 minutes ago   Up 24 seconds   2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           posthog-zookeeper-1
-d2d00eae3fc0   redis:6.2.7-alpine                  "docker-entrypoint.s…"   3 minutes ago   Up 24 seconds   0.0.0.0:6379->6379/tcp                                                                           posthog-redis-1                                                                       posthog-redis-1
+CONTAINER ID   IMAGE                                      COMMAND                  CREATED          STATUS                    PORTS                                                                                            NAMES
+5a38d4e55447   temporalio/ui:2.10.3                       "./start-ui-server.sh"   51 seconds ago   Up 44 seconds             0.0.0.0:8081->8080/tcp                                                                           posthog-temporal-ui-1
+89b969801426   temporalio/admin-tools:1.20.0              "tail -f /dev/null"      51 seconds ago   Up 44 seconds                                                                                                              posthog-temporal-admin-tools-1
+81fd1b6d7b1b   clickhouse/clickhouse-server:23.6.1.1524   "/entrypoint.sh"         51 seconds ago   Up 50 seconds             0.0.0.0:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, 0.0.0.0:9009->9009/tcp, 0.0.0.0:9440->9440/tcp   posthog-clickhouse-1
+f876f8bff35f   bitnami/kafka:2.8.1-debian-10-r99          "/opt/bitnami/script…"   51 seconds ago   Up 50 seconds             0.0.0.0:9092->9092/tcp                                                                           posthog-kafka-1
+d22559261575   temporalio/auto-setup:1.20.0               "/etc/temporal/entry…"   51 seconds ago   Up 45 seconds             6933-6935/tcp, 6939/tcp, 7234-7235/tcp, 7239/tcp, 0.0.0.0:7233->7233/tcp                         posthog-temporal-1
+5313fc278a70   postgres:12-alpine                         "docker-entrypoint.s…"   51 seconds ago   Up 50 seconds (healthy)   0.0.0.0:5432->5432/tcp                                                                           posthog-db-1
+c04358d8309f   zookeeper:3.7.0                            "/docker-entrypoint.…"   51 seconds ago   Up 50 seconds             2181/tcp, 2888/tcp, 3888/tcp, 8080/tcp                                                           posthog-zookeeper-1
+09add699866e   maildev/maildev:2.0.5                      "bin/maildev"            51 seconds ago   Up 50 seconds (healthy)   0.0.0.0:1025->1025/tcp, 0.0.0.0:1080->1080/tcp                                                   posthog-maildev-1
+61a44c094753   elasticsearch:7.16.2                       "/bin/tini -- /usr/l…"   51 seconds ago   Up 50 seconds             9200/tcp, 9300/tcp                                                                               posthog-elasticsearch-1
+a478cadf6911   minio/minio:RELEASE.2022-06-25T15-50-16Z   "sh -c 'mkdir -p /da…"   51 seconds ago   Up 50 seconds             9000/tcp, 0.0.0.0:19000-19001->19000-19001/tcp                                                   posthog-object_storage-1
+91f838afe40e   redis:6.2.7-alpine                         "docker-entrypoint.s…"   51 seconds ago   Up 50 seconds             0.0.0.0:6379->6379/tcp                                                                           posthog-redis-1
 
 # docker logs posthog-db-1 -n 1
 2021-12-06 13:47:08.325 UTC [1] LOG:  database system is ready to accept connections
@@ -195,6 +213,13 @@ Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all r
 
 We'll run the plugin server in a later step.
 
+> Note: If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
+```bash
+export CPPFLAGS=-I/opt/homebrew/opt/openssl/include
+export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
+pnpm i --dir plugin-server
+```
+
 ### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
@@ -254,6 +279,8 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.10-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
+    > **Friendly tip:** If you see `ERROR: Could not build wheels for xmlsec`, refer to this [issue](https://github.com/xmlsec/python-xmlsec/issues/254).
+
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
 
     ```bash
@@ -310,6 +337,12 @@ For frontend unit tests, run:
 
 ```bash
 pnpm test:unit
+```
+
+You can narrow the run down to only files under matching paths:
+
+```bash
+pnpm jest --testPathPattern=frontend/src/lib/components/IntervalFilter/intervalFilterLogic.test.ts
 ```
 
 To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab), and then run:

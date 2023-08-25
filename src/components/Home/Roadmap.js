@@ -6,12 +6,12 @@ import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
 const RoadmapColumn = ({ children }) => {
-    return <div className="md:border-r last:border-r-0 border-dashed border-gray-accent-light">{children}</div>
+    return <div className="md:border-r last:border-r-0 border-light dark:border-dark">{children}</div>
 }
 
 const RoadmapItem = ({ children }) => {
     return (
-        <li className="list-none m-0 pt-2 px-1 pb-3 text-[15px] text-black/70 w-full font-semibold border-gray-accent-light/50 border-solid border-b last:border-b-0">
+        <li className="list-none m-0 pt-2 px-1 pb-3 text-[15px] text-primary/75 dark:text-primary-dark/75 w-full font-semibold border-light dark:border-dark border-b last:border-b-0">
             {children}
         </li>
     )
@@ -19,7 +19,7 @@ const RoadmapItem = ({ children }) => {
 
 const Roadmap = () => {
     return (
-        <div className="px-4 mb-20 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-12">
+        <div className="px-4 mb-12 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-12">
             <figure className="w-64 mx-auto md:w-auto">
                 <StaticImage
                     width={367}
@@ -31,10 +31,10 @@ const Roadmap = () => {
                 />
             </figure>
             <div className="col-span-2">
-                <h2 className="m-0 text-5xl md:text-7xl text-primary text-center md:text-left">
-                    The future of PostHog <span className="text-red">depends on you</span>
+                <h2 className="m-0 text-5xl md:text-6xl text-primary dark:text-primary-dark text-center md:text-left">
+                    The future of PostHog <span className="text-red inline-block">depends on you</span>
                 </h2>
-                <h3 className="m-0 text-lg md:text-[20px] leading-tight md:text-xl text-center md:text-left font-semibold mt-2 md:mt-3 opacity-75 text-primary">
+                <h3 className="m-0 text-lg leading-tight md:text-xl text-center md:text-left font-semibold mt-2 md:mt-3 opacity-75 text-primary dark:text-primary-dark">
                     We publish our product roadmap. Tell us what we should build next – and get early access.
                 </h3>
 
@@ -44,27 +44,29 @@ const Roadmap = () => {
                     </CallToAction>
                 </div>
 
-                <div className="grid md:grid-cols-2 relative after:bg-gradient-to-b after:from-tan/0 after:to-white/70 md:after:to-white/90  after:bottom-0 after:left-0 after:w-full after:h-36 after:absolute">
+                <div className="grid border border-light dark:border-dark text-primary dark:text-primary-dark md:grid-cols-2 relative after:bg-gradient-to-b after:from-light/0 after:to-light/70 md:after:to-light/90 dark:after:from-dark/0 dark:after:to-dark/70 dark:md:after:to-dark/90 after:bottom-0 after:left-0 after:w-full after:h-36 after:absolute">
                     <RoadmapColumn>
-                        <div className="text-base py-1 font-bold text-center bg-gray-accent-light">
+                        <div className="text-base py-1 font-bold text-center bg-accent dark:bg-accent-dark border-b border-light dark:border-dark">
                             Under consideration
                         </div>
-                        <ul className="m-0 px-4 pt-1 bg-white">
+                        <ul className="m-0 px-4 pt-1 bg-accent dark:bg-accent-dark">
                             <RoadmapItem>Feature flags for iOS, Android, Flutter</RoadmapItem>
                             <RoadmapItem>Interlinking session recording & analytics</RoadmapItem>
-                            <RoadmapItem>Session recording playlists</RoadmapItem>
-                            <RoadmapItem>Mobile session recordings</RoadmapItem>
-                            <RoadmapItem>Nail tutorials</RoadmapItem>
+                            <RoadmapItem>SQL insights</RoadmapItem>
+                            <RoadmapItem>SOC 2 compliance</RoadmapItem>
+                            <RoadmapItem>Dashboard templates</RoadmapItem>
                         </ul>
                     </RoadmapColumn>
                     <RoadmapColumn>
-                        <div className="text-base py-1 font-bold text-center bg-gray-accent-light">In progress</div>
-                        <ul className="m-0 px-4 pt-1 bg-white">
-                            <RoadmapItem>SQL insights</RoadmapItem>
-                            <RoadmapItem>Users &amp; recordings linked to feature flags</RoadmapItem>
-                            <RoadmapItem>SOC 2 compliance</RoadmapItem>
-                            <RoadmapItem>Universal search</RoadmapItem>
-                            <RoadmapItem>PostHog customer data platform</RoadmapItem>
+                        <div className="text-base py-1 font-bold text-center bg-accent dark:bg-accent-dark border-b border-light dark:border-dark">
+                            In progress
+                        </div>
+                        <ul className="m-0 px-4 pt-1 bg-accent dark:bg-accent-dark">
+                            <RoadmapItem>Mobile session recordings</RoadmapItem>
+                            <RoadmapItem>PostHog CDP</RoadmapItem>
+                            <RoadmapItem>Data warehouse</RoadmapItem>
+                            <RoadmapItem>Scratchpad and notebooks</RoadmapItem>
+                            <RoadmapItem>Shuffle button for insights</RoadmapItem>
                         </ul>
                     </RoadmapColumn>
                 </div>

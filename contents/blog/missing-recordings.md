@@ -27,7 +27,7 @@ But there was one fix that stood out in this quality push. Customers would often
 
 This is the story of how we decreased the number of missing recordings from 15% to <1%, and in doing so, moved the feature out of beta.
 
->[Rick Marron](/handbook/company/team#rick-marron-software-engineer) is a software engineer at PostHog. In previous lives Rick was a Program Manager at Microsoft, and he spent over a year in Nairobi, Kenya where he developed the first publicly available real-time source for traffic data in the city using computer vision and street cameras. He's a native of Rochester, New York but lives in Los Angeles now because... sunshine. Follow him [on Twitter](https://twitter.com/rick_marron) and [Github](https://github.com/rcmarron). 
+>Rick Marron is a software engineer at PostHog. In previous lives Rick was a Program Manager at Microsoft, and he spent over a year in Nairobi, Kenya where he developed the first publicly available real-time source for traffic data in the city using computer vision and street cameras. He's a native of Rochester, New York but lives in Los Angeles now because... sunshine. Follow him [on Twitter](https://twitter.com/rick_marron) and [Github](https://github.com/rcmarron). 
 
 ## Measuring the issue
 
@@ -102,5 +102,6 @@ As for the remaining <1% of recordings that are missing, we're still working on 
 
 Read our [Sessions Recordings documentation](/docs/user-guides/recordings) for more detailed information about the feature, or you can [make an account for free](https://posthog.com/pricing) to try it out yourself!
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+
 

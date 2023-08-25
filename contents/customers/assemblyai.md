@@ -1,7 +1,8 @@
 ---
 title: Why AssemblyAI switched from Mixpanel to PostHog
 customer: AssemblyAI
-logo: ../images/customers/assemblyai/logo.png
+logo: ../images/customers/assemblyai/logo.svg
+logoDark: ../images/customers/assemblyai/logo_dark.svg
 featuredImage: ../images/customers/assemblyai/featured.png
 industries:
     - API Platform
@@ -13,6 +14,7 @@ toolsUsed:
     - Experimentation
     - Cloud-hosted
     - Insights
+date: 2022-03-23
 ---
 
 [AssemblyAI](https://www.assemblyai.com/?utm_source=posthog&utm_campaign=case_study) is an API platform which provides powerful AI models to transcribe and understand speech. As a young company in the cutting-edge field of AI modeling, AssemblyAI requires teams to wear many hats and move fast, making immediate access to reliable data for decision-making a must.
@@ -25,14 +27,15 @@ To enable this, AssemblyAI had previously used Mixpanel, but as the company grew
 
 When AssemblyAI switched to PostHog, they were able to start tracking a much greater volume of events - millions per day - without the need to throttle ingestion. As a result, analysis in PostHog was much more reliable and the team was able to make decisions and test ideas faster.```
 
+
 <BorderWrapper>
-    <Quote
-        imageSource="/images/customers/alberto.jpg"
-        size="md"
-        name="Alberto Santos"
-        title="Web & Brand Lead, AssemblyAI"
-        quote={`“PostHog helps us debug support issues, because we push errors to PostHog as events. It may not be exactly what PostHog was intended for, but it is really useful and shows how adaptable PostHog is.”`}
-    />
+<Quote
+    imageSource="/images/customers/alberto.jpg"
+    size="md"
+    name="Alberto Santos"
+    title="Web & Brand Lead, AssemblyAI"
+    quote={`“PostHog helps us debug support issues, because we push errors to PostHog as events. It may not be exactly what PostHog was intended for, but it is really useful and shows how adaptable PostHog is.”`}
+/>
 </BorderWrapper>
 
 “Throttling meant we only had a very rough idea how much people were using us,” said Alberto. “So, when we actually needed to do proper analysis, we couldn’t rely on Mixpanel — we had to look at the logs and waste engineering resources on that.”
@@ -42,13 +45,13 @@ As a result of switching to PostHog, AssemblyAI was able to unthrottle event ing
 “Everyone here uses PostHog,” said Alberto. “Literally every single person, from customer support to content writers; engineers to marketers. We do everything from debugging support issues to measuring site traffic in PostHog.”
 
 <BorderWrapper>
-    <Quote
-        imageSource="/images/customers/alberto.jpg"
-        size="md"
-        name="Alberto Santos"
-        title="Web & Brand Lead, AssemblyAI"
-        quote={`“Finally having a full view of what users do has helped us so much. It’s helped us improve conversion, improve our support, and optimize the user journey through the platform.”`}
-    />
+<Quote
+    imageSource="/images/customers/alberto.jpg"
+    size="md"
+    name="Alberto Santos"
+    title="Web & Brand Lead, AssemblyAI"
+    quote={`“Finally having a full view of what users do has helped us so much. It’s helped us improve conversion, improve our support, and optimize the user journey through the platform.”`}
+/>
 </BorderWrapper>
 
 ### Fuelling a culture of constant iteration and growth

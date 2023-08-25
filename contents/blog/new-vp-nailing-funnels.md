@@ -79,6 +79,7 @@ To get buy-in, it was crucial for me to share the draft with the entire company 
 
 But you can't just assume everyone will buy into the strategy because you posted it somewhere and they gave it a thumbs up. You have to talk people through it 1:1 and communicate the message via different channels. We discussed the new strategy in all our small team standups, company all-hands, and uploaded it to our website.
 
-Read more about our strategy [here](https://posthog.com/handbook/company/team/marcus-hyett).
+Read more about our strategy [here](/handbook/strategy/overview).
 
-_Enjoyed this? Subscribe to our [newsletter](/newsletter) to hear more from us twice a month!_
+_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+

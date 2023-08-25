@@ -6,39 +6,32 @@ showTitle: true
 
 Content is the main pillar of our marketing strategy. As our products are quite technical in nature, we believe that frequent and regular content output helps improve acquisition and ongoing product engagement. The [blog](/blog) is where we publish interesting product content, share feature updates, and tell PostHog stories.
 
-## Content & SEO strategy
+**Other useful links:**
+- [PostHog style guide](/handbook/growth/marketing/posthog-style-guide)
+- [Exporting a blog post image](/handbook/growth/marketing/exporting-blog-post-image)
 
-Content & SEO is a long-term strategy. We are focused on generating a sustained output of high quality content that is genuinely valuable to users. Rather than scale up content output for the sake of it, our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets. 
+## Content strategy
 
-> We win on depth, not breadth, of content. We believe a small number of high quality pieces > a larger number of medium quality pieces. 
+Content is a long-term strategy and we'e focused on high-quality content that's genuinely valuable to users. Our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets.
 
-We use Ahrefs to track and optimize our ranking for the keywords that we think are target customers are using to search for solutions like PostHog online. If you need access, please ask Andy. 
+We **win on depth**, not breadth – a few high-quality pieces > a larger number of medium quality pieces. We have four content buckets:
 
-The top keywords are then used as the basis of our content strategy. We bucket our content into three buckets:
+1. **Top-of-funnel SEO content:** Our goals with this content is to improve our topical authority, generate inbound demand, and create brand awareness. This content includes list articles like the [best GA4 alternatives for apps and websites](/blog/ga4-alternatives), comparisons like [PostHog vs LogRocket](/blog/posthog-vs-logrocket), in-depth technical deep dives like [ClickHouse vs Snowflake](/blog/clickhouse-vs-snowflake), and explainers like [What is a product engineer (and why they're awesome)](/blog/what-is-a-product-engineer). It's mostly written by the marketing team and posted on the blog.
 
-- **SEO-optimized content**, written by the Marketing team. The purpose of these is to improve our topical authority and visibility in areas relevant to our target audience, and generate organic inbound demand and word of mouth awareness.
+2. **Tutorials:** The purpose of tutorials is to encourage new signups (because we show potential users how to solve their problems using PostHog), and help customers expand usage. Some tutorials are also SEO-optimized, especially when they cover general topics, such as [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics). It's mostly written by the marketing team and published in the tutorials section.
 
-- **Tutorials**, written mostly by the Marketing team. The purpose of these is to encourage new signups (because we show potential users how to solve their problems using PostHog), as well as helping existing customers. Some tutorials are also SEO-optimized, especially when they cover general product analytics topics (e.g. 'how to calculate and reduce churn.')
+3. **Brand building:** Can be written by anyone on the team, with the marketing team acting as editors. The purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit, share our culture / vision / philosophy. Examples include [10x engineers talk to users](/blog/10x-engineers-do-user-interviews), [What we've learned about dev tool marketing](/blog/dev-marketing-for-startups), and [Raising money is less stressful than bootstrapping](/blog/vc-or-bootstrap). This content is posted on the blog.
 
-- **Brand building and community engagement**, written by anyone on the team, with the Marketing team acting as editors. These can be about anything, and their purpose is to drive one-off spikes in awareness through virality on sites like Hacker News and Reddit.
+4. **Behind-the-scenes:** Content about what we're doing at PostHog. This can also be brand building content, but is more directly relevant to our existing customers. Examples include [All the cool things we built at our Rome hackathon](/blog/rome-hackathon) and the [weekly changelog blog post](/blog/posthog-changelog). This content is posted on the blog.
 
-Andy and Ian are currently the main people responsible for our regular content output. James H, Joe, and Charles are also frequent contributors. 
+### Good to knows
 
-You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter.
+- The marketing team is responsible for all the above – mostly Andy and Ian, but James Hawkins, Joe and Charles also contribute. The Website & Docs team owns our [reference documentation](/docs). 
 
-All planned content will have an issue created for it. We also maintain a long list of possible content ideas [in this GitHub issue](https://github.com/PostHog/posthog.com/issues/3607).
 
-Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y), raise an [issue](https://github.com/PostHog/posthog.com/issues/new/choose), or comment on the [ideas long list issue](https://github.com/PostHog/posthog.com/issues/3607) to suggest a content idea. Community members can suggest them to Andy directly or via [the User slack channel](/slack)!
+- You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter. All planned content should have an issue.
 
-## Content categories
-
-As we have a few different places where content lives on our site, follow these guidelines to figure out where your content fits best. Sometimes you will find that the content you've created fits better in Docs rather than on the Blog. 
-
-1. [Blog post](/blog) = Virtually all SEO-specific content (e.g. 7 best open source analytics solutions); brand building content (e.g. CEO diaries, news).
-2. [Tutorials](/tutorials) = Anything that basically explains 'how to do X'. This includes content created for SEO purposes that explains how do something in PostHog (e.g. how to build an AARRR funnel).
-3. [Docs](/docs) = Reference documentation for PostHog. 
-
-The Marketing team is responsible for 1. and 2., while 3. sits with the Website & Docs team. Feel free to step on toes though if you see something that could be improved in our Docs - just don't merge it without approval from that team. 
+- Join our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y) to share ad-hoc ideas. If people like it, we'll turn it into an issue.
 
 ## Production workflow
 
@@ -104,6 +97,7 @@ The following are our pre-approved categories and tags. Please **don't create ne
 > - **Explainers:** Blogs explaining a concept or idea (non-actionable)
 > - **Product analytics:** Blogs about about product analytics
 > - **Product metrics:** Blogs about metrics and what to track
+> - **Product engineers:** Blog posts about product engineers
 > - **Session recording:** Blogs about using session recording
 > - **Feature flags:** Blogs about using feature flags
 > - **Marketing**: Blogs about marketing
@@ -111,7 +105,7 @@ The following are our pre-approved categories and tags. Please **don't create ne
 > - **Open source:** Blogs about open source products and projects
 > - **Release notes:** PostHog release notes
 > - **Product updates:** General product updates
-> - **Comparisons:** PostHog vs other things
+> - **Comparisons:** Comparisons with PostHog and similar
 > - **ClickHouse**: Blogs about ClickHouse
 > - **Y Combinator:** Blogs about YC
 
@@ -133,8 +127,13 @@ showTitle: true
 hideAnchor: true
 featuredImage: ../images/blog/series-b/series-b-baby.png
 featuredImageType: full
-author: ["joe-martin"]
-categories: ["Product analytics", "Guides"]
+author:
+  - joe-martin
+  - andy-vandervell
+category: PostHog news
+tags:
+  - Product updates
+  - Release notes
 ---
  ```
 

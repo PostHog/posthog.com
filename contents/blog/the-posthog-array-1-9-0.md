@@ -61,10 +61,6 @@ You can now install PostHog in just a click or two via AWS' marketplace.
 
 This is just as easy as Heroku and fractionally less expensive!
 
-### [Develop PostHog with Porter](/docs/contribute/developing-locally#using-porter)
-
-This was an amazing PR to receive - you can now develop PostHog in the cloud, using Porter. Thank you to [Porter's team](https://getporter.dev/) for doing the work here. 
-
 ### [Management command for millions of events](https://github.com/PostHog/posthog/pull/475)
 
 It's a delight to see another community PR. Thank you [Bhavish](https://github.com/bhavish-agarwal)!
@@ -134,7 +130,7 @@ We've had a wonderful two weeks.
 
 The PostHog team is growing - we're now 6 people, both our ability to ship and our product plans are bigger and better than ever.
 
-The seed round we raised is just the start of us making sure we create a full product experimentation platform with you, the community. Now is a great time if you have any ideas for ambitious feature requests to put them into the repo as issues. If you'd like to build something cool *with* us, we're open to some pair programming - get in touch in the [PostHog Users Slack](https://join.slack.com/t/posthogusers/shared_invite/zt-1ou84aphe-R3H5OE9Uu6i8Fq4EHCWzbg) :)
+The seed round we raised is just the start of us making sure we create a full product experimentation platform with you, the community. Now is a great time if you have any ideas for ambitious feature requests to put them into the repo as issues. If you'd like to build something cool *with* us, we're open to some pair programming - [get in touch](https://app.posthog.com/home#supportModal)! :)
 
 ### Open roles
 

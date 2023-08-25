@@ -35,7 +35,7 @@ This article explores the different types of North Star metrics using examples f
 ## What is a North Star metric?
 In its simplest form, a North Star is a metric which provides a singular focus for a company or product's growth and success. Every department should understand it and how they influence it – either directly or indirectly. It's something you should monitor regularly - perhaps by [adding it to a PostHog dashboard](https://posthog.com/docs/user-guides/dashboards), for example. 
 
-North Star metrics can and should change over time. What makes sense for an early-stage start-up won't be the same for an established business, so it's a metric that should be interrogated frequently to ensure it's still the right one for you.
+North Star metrics can and should change over time. What makes sense for an early-stage start-up won't be the same for an established business, so it's a metric that should be interrogated frequently to ensure it's still the right one for you. North Star metrics are also a way to [measure product-market fit](/blog/measure-product-market-fit).
 
 ### Examples of good North Star metrics
 
@@ -119,7 +119,7 @@ Needless to say, a product analytics platform like PostHog is essential for trac
 
 ## Further reading
 
-- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
+- [How to achieve B2B product market fit](/blog/product-market-fit-game): How to approach finding market fit for a B2B product
 
 - [Introduction to SaaS product metrics](/blog/b2b-saas-product-metrics): A guide to common B2B product metrics and how to measure them
 

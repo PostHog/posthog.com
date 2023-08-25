@@ -41,7 +41,7 @@ export const NewsletterForm = ({
         </div>
     ) : compact ? (
         <div className="w-full mx-auto my-12 text-center">
-            <div className="flex justify-center w-full h-full p-1 border-t border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark">
+            <div className="flex justify-center w-full h-full p-1">
                 <div className={classList}>
                     <div className="flex flex-col md:flex-row md:space-x-4 items-center">
                         <figure className="shrink-0 grow-0 basis-12 m-0 text-black dark:text-white">
@@ -84,7 +84,7 @@ export const NewsletterForm = ({
                         Delivered <span className="text-red">twice</span> a month.
                     </p>
                 </div>
-                <div className="flex-grow">
+                <div className="flex-grow w-full md:w-auto">
                     <SubstackForm />
                 </div>
             </div>

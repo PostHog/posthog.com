@@ -5,7 +5,8 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-2.png
-topics: ['experimentation', 'feature flags']
+featuredVideo: https://www.youtube-nocookie.com/embed/rwP2leifdNk
+tags: ['experimentation', 'feature flags']
 ---
 
 Optimizing your marketing site often requires testing small changes against each other, also known as A/B tests. Getting the best site possible requires tweaking, experimenting, and tracking results.
@@ -68,6 +69,6 @@ Now that you set up an A/B test in Webflow with PostHog, you can use this same p
 
 ## Further reading
 
-- [How to run Experiments without feature flags](/tutorials/experiments)
+- [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 - [How to set up Webflow analytics and session recordings with PostHog](/tutorials/webflow)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)

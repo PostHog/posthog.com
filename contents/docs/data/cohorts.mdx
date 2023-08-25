@@ -22,104 +22,84 @@ availability:
             enterprise: true
 ---
 
-Cohorts are PostHog's way of letting you easily create a list of users who have something in common.
+Cohorts enable you to easily create a list of users who have something in common, such as completing an action or having the same property.
 
-You can use the cohorts to:
+Here are a few examples of the cohorts you can create:
 
--   View a list of users who all did the same action or have the same property. A few examples of how you might use this are:
-    -   "Which users used the app today?"
-    -   "Which users work at the same company?"
-    -   "Who used the app once but never came back?"
--   Segment other statistics. For example, to view user paths or action trends. This let's you understand things like:
-    -   "Are people at company X using the app much?"
-    -   "Is the number of Daily Active Users going up or down over time?"
+- Users who work at the same company.
+- Users who used your app in the last week.
+- Users who have churned from your product.
+- Users who signed up recently.
+- Users who viewed the signup page, but didn't convert.
 
-## Creating a new cohort
+You can also use cohorts in [trends](/docs/product-analytics/trends), [insights](/docs/product-analytics/insights), and [dashboards](/docs/product-analytics/dashboards). This enables you to understand:
 
-There are two ways to create a new cohort:
+- "Are people at company X using our app frequently?"
+- "What percentage of the users who signed up last week are still using our app?"
+- "Which features are our power users using?"
 
-#### Creating a new cohort from the cohorts page
+## Cohorts vs. groups
 
-**Step 1:** Navigate to the 'Cohorts' page in the sidebar:
+Cohorts are often confused with [groups](/docs/product-analytics/group-analytics), but they each serve different purposes:
 
-![left hand navigation for cohorts](../../images/features/cohorts/cohorts-page.png)
+- Cohorts represent a specific set of users – e.g., a list of users that all belong to the same company.
+- Groups aggregate events based on entities, such as organizations or companies, and do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level, as opposed to a user-level.
+ 
+Groups require additional code in your app to set up, while cohorts are created in PostHog and don't require additional code. This makes cohorts easier to use and quicker to get started. If your only goal is to create a **list of users** with something in common, we recommend cohorts instead of groups.
 
-**Step 2:** Click '+ New Cohort' on the top right.
+## How to create a cohort
 
-#### Creating a new cohort directly from an insight
+There are two methods to create a new cohort:
 
-It is also possible to create a cohort using data from a trend. Currently, this feature is only available from within trends, but [funnels](/docs/user-guides/funnels) and other insights will soon offer this as well.
+### Method 1: Create a new cohort directly from an insight
 
-**Step 1:** Go to insights, create a new trend, and click any data point on the graph to view persons represented in the underlying data.
+You can create cohorts using data from insights such as trends, [funnels](/docs/product-analytics/funnels), [user paths](/docs/product-analytics/paths) and [lifecycles](/docs/product-analytics/lifecycle).
 
-![click data point on trend to show persons](../../images/docs/user-guides/funnels/trend-click-on-data-point.png)
+**Step 1:** Go to [insights](https://app.posthog.com/insights) and open any insight. Click a data point on the visualization to view the [persons](/docs/data/persons) represented in the underlying data.
 
 **Step 2:** In the modal popup, click 'Save as cohort' in the bottom right.
 
-![create cohort from trend modal](../../images/features/cohorts/create-cohort-from-trend.png)
+The video below shows how to create a new cohort from a trend, although you can similarly create a cohort from a funnel, user path, or any other insight.
 
-## Cohort types
+![How to create a cohort from a trend](../../images/features/cohorts/create-cohort-from-trend.mp4)
 
-When creating a cohort from scratch, you'll first choose between two type of cohorts, static and dynamic:
+### Method 2: Create a new cohort from the cohorts page
+
+**Step 1:** Navigate to the [Cohorts](https://app.posthog.com/cohorts) page in the sidebar:
+
+**Step 2:** Click '+ New Cohort' on the top right.
+
+![left hand navigation for cohorts](../../images/features/cohorts/cohorts-page.png)
+
+## Static vs. dynamic cohorts
+
+When creating a cohort, you'll choose between a static or dynamic cohort:
 
 ![two types of cohorts: static and dynamic](../../images/features/cohorts/static-and-dynamic-cohorts.png)
 
 ### Static cohorts
+Static cohorts are lists of users that do not change over time. For example, all users who signed up for your app in January 2023. 
 
-You might want to batch users together based on the value of some mutable property at a certain point in time. So, for example, if you wanted to save a cohort of users you experimented on, and selected them based on usage at a given point in time, you might want to 'freeze' that list and have it accessible to track them at a later point in time. To do so, you can upload a csv of users. Unlike a dynamic cohort, a static cohort will not change as user properties/events change.
+Static cohorts are created from insights, or by uploading a csv of users. The CSV file only requires a single column with the user’s distinct ID. The very first row (the header) will be skipped during import.
+
+To update the list, you can either upload another CSV to add more users, or use the interface to remove users.
 
 ### Dynamic cohorts
+Dynamic cohorts are defined by a continuously evaluated condition. This means that the members of the cohort can change over time. For example, a dynamic cohort could be all users who have have used a certain feature in your app.
 
-##### Match users who performed action or event
+Dynamic cohorts are created by matching users who meet a certain criteria. You can define this criteria by combining any number of the following conditions:
 
-Sometimes, you'll want to group users that have performed a certain event or [actions](/docs/user-guides/actions) within a given time. For example, you might want to track 'daily active' or 'weekly active' users, based on the frequency of them performing a given action. For this, you'll want a list that dynamically updates, moving users in or out as they meet criteria or not.
+- Users who have performed a specific event or [action](/docs/user-guides/actions) within a certain time frame.
+- Users who have certain properties.
+- Users based on their lifecycle event. For example, users who have recently stopped performing an event.
+- Users matching other cohorts.
 
-##### Match users who have properties
-
-Or, you might select a user property to filter on, and then update that property, and with a dynamic cohort, the user could be filtered in or out. Commonly, this used to combine users at a certain team, from a certain marketing campaign (via their UTM tags), email, etc.
-
-![Three key cohort settings](../../images/features/cohorts/cohort-options.png)
-
-**'Add matching criteria'** adds another group of filters that a user must match to be a part of the cohort, as an `OR` operation. This means that if a user matches _any_ of the groups you add, they will be added to the cohort.
-
-##### Match users based on their lifcycle
-
-<FeatureAvailability availability={_frontmatter.availability.features.lifecycle} />
-
-Cohorts can also be created based on certain 'Lifecycle' criteria. With these, users can be grouped based on their long term behavior, such as whether they frequently performed an event, or have recently stopped performing an event.
-
-![Matching based on lifecycle properties](../../images/features/cohorts/lifecycle.png)
-
-## Adjusting time frames
-
-You may only want users who have performed a certain action within a certain timeframe.
-
-On setting the cohort to match users who '_performed action or event_', you will be presented with the following:
-
-![cohort - user action date range selection](../../images/features/cohorts/cohort-time-frame.png)
-
-You can match users on actions/events performed within the last day, week, 2 weeks, or month.
-
-## Viewing users in a cohort
-
-Go to 'Cohorts' in the left-hand navigation (as shown [here](/docs/user-guides/cohorts#creating-a-new-cohort-from-the-cohorts-page) and select the cohort you want to view by clicking it, and you'll be presented with a list.
-
-## Differentiating team vs. users traffic
-
-From the initial setup, [PostHog is tracking various events](/docs/integrate/client/js#autocapture) from all users. However, you may want to differentiate between traffic from your team and traffic from your users.
-
-To do so, you can identify your team members in PostHog either through a [`posthog.identify`](/docs/integrate/client/js#identifying-users) (e.g. by setting an email as the ID) call or by [associating properties](/docs/integrate/client/js#sending-user-information) with your team member users (e.g. `is_team = true`).
-
-With that done, you can then create a cohort of your team and/or a cohort that does not include any of your team members, so that you can continue to gather data on all users, but can differentiate between them when performing your analytics processes.
-
-This is the recommended method for differentiating between team and user traffic if you want to keep receiving events. However, if you wish to stop receiving events on your team altogether, you should consider using [`posthog.opt_out_capturing`](/docs/integrate/client/js#opt-users-out).
+![Different criteria options for creating a dynamic cohort](../../images/features/cohorts/creating-dynamic-cohorts.png)
 
 ### Further reading
 
 Want to know more about what's possible with Cohorts in PostHog? Try these tutorials:
 
--   [Analyzing user behavior with cohorts](/tutorials/cohorts)
 -   [How to filter our internal users](/tutorials/filter-internal-users)
--   [How to segment users](/tutorials/how-to-segment-users)
 
 Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials).

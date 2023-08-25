@@ -4,8 +4,10 @@ date: 2023-02-20
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/nextjs-analytics.png
-topics: ["configuration", "feature flags", "persons", "events"]
+featuredTutorial: true
+featuredImage: ../images/tutorials/banners/flags.png
+featuredVideo: https://www.youtube-nocookie.com/embed/nSBjr1Sz18o
+tags: ["configuration", "feature flags", "persons", "events"]
 ---
 
 Next.js is a popular web framework built on React. It provides optimizations and abstractions to help developers build fast and performant apps and sites.
@@ -26,7 +28,11 @@ First, [install Node](https://nodejs.dev/en/learn/how-to-install-nodejs/) (14.6.
 npx create-next-app@latest
 ```
 
-Press "y" to install `create-next-app` if needed, name your app (I chose `tutorial`), select "No" for using TypeScript using the arrow keys, then press enter to select the defaults for the rest. Once installed and created, use the terminal go into the new folder with the app name you chose (mine is `tutorial`) and start the server:
+Press "y" to install `create-next-app` if needed, name your app (I chose `tutorial`), select "No" for using TypeScript using the arrow keys, select "No" for using the app router, and then press enter to select the defaults for the rest. 
+
+> If you want to use the latest version of Next.js with the app router, check out "[How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)."
+
+Once installed and created, use the terminal go into the new folder with the app name you chose (mine is `tutorial`) and start the server:
 
 ```bash
 cd tutorial
@@ -287,9 +293,9 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
-    // Disable in development
+    // Enable debug mode in development
     loaded: (posthog) => {
-      if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
+      if (process.env.NODE_ENV === 'development') posthog.debug()
     }
   })
 }
@@ -633,6 +639,6 @@ You now have a basic Next.js app with user authentication and many of the featur
 
 ## Further reading
 
-- [Building and measuring a sign up funnel with Next.js, Supabase, and PostHog](/tutorials/nextjs-supabase-signup-funnel)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
+- [How to set up Next.js 13 app directory analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)

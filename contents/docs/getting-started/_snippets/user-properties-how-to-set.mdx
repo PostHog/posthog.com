@@ -1,0 +1,120 @@
+The recommended way to set user properties is to include them when capturing an event:
+
+<MultiLanguage selector="tabs">
+
+```js-web
+posthog.capture(
+    'event_name', 
+    { 
+        $set: { name: 'Max Hedgehog'  },
+        $set_once: { initial_url: '/blog' },
+    }
+)
+```
+
+```node
+client.capture({
+    distinctId: 'distinct_id',
+    event: 'event_name',
+    properties: {
+        $set: { name: 'Max Hedgehog'  },
+        $set_once: { initial_url: '/blog' },
+    },
+})
+```
+
+```python
+posthog.capture(
+    'distinct_id',
+    event='event_name',
+    properties={
+        '$set': {'name': 'Max Hedgehog'},
+        '$set_once': {'initial_url': '/blog'}
+    }
+)
+```
+
+```php
+PostHog::capture(array(
+    'distinctId' => 'distinct_id',
+    'event' => 'event_name',
+    'properties' => array(
+        '$set' => array(
+            'name' => 'Max Hedgehog'
+        ),
+        '$set_once' => array(
+            'initial_url' => '/blog'
+        )
+    )
+));
+```
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id',
+    event: 'event_name',
+    properties: {
+        '$set': { name: 'Max Hedgehog' },
+        '$set_once': { initial_url: '/blog' }
+    }
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "distinct_id",
+    Event:      "event_name",
+    Properties: map[string]interface{}{
+        "$set": map[string]interface{}{
+            "name": "Max Hedgehog",
+        },
+        "$set_once": map[string]interface{}{
+            "initial_url": "/blog",
+        },
+    },
+})
+```
+
+```java
+posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
+  {
+    put("$set",  new HashMap<String, Object>() {       
+      {
+        put("name", "Max Hedgehog");
+      }
+    });
+    put("$set_once",  new HashMap<String, Object>() {
+      {
+        put("initial_url", "/blog");
+      }
+    });
+  }
+});
+```
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_api_key>",
+    "properties": {
+      "$set": {"name": "Max Hedgehog" },
+      "$set_once": {"initial_url": "/blog"}
+    }
+    "timestamp": "2020-08-16 09:03:11.913767",
+    "distinct_id": "1234",
+    "event": "$event"
+}' https://app.posthog.com/capture/
+
+```
+
+</MultiLanguage>
+
+You can also set user properties when you call the [`identify`](/docs/data/identify) method:
+
+import IdentifyFrontendCode from "../../_snippets/identify-frontend-code.mdx"
+
+<IdentifyFrontendCode />
+
+User property values can be strings, booleans, numbers, objects, or arrays.  For objects and arrays, you can use [HogQL](/docs/hogql) to access nested properties in the PostHog app.
+
+> Note that user properties are set in the order the events are ingested, and not according to event timestamps. Since we typically ingest events as soon as we receive them, you only need to take this into consideration when you're [importing historical data](/docs/migrate/ingest-historic-data).
+

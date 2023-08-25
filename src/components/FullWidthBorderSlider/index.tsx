@@ -23,8 +23,10 @@ const SlideTemplate = ({ date, url, authors, title, image }: ISliderItem) => {
 
 const Slide = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="p-3 sm:p-6 border-t border-b border-r border-dashed max-w-[80vw] sm:max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light dark:border-gray-accent-dark text-black dark:text-white">
-            {children}
+        <div className="py-4 px-4 bg-gray-accent-light dark:bg-gray-accent-dark max-w-[80vw] sm:max-w-lg md:max-w-2xl lg:max-w-4xl w-full border-gray-accent-light dark:border-gray-accent-dark text-black dark:text-white">
+            <div className="relative p-1 hover:top-[-.5px] hover:scale-[1.01] active:top-[0px] active:scale-[1] after:border-0 hover:after:border-1 after:border-black/25 after:rounded-md after:-inset-1.5 after:absolute">
+                {children}
+            </div>
         </div>
     )
 }
@@ -58,11 +60,11 @@ export default function FullWidthBorderSlider({
         setActiveSlide(newIndex)
     }
     const breakpoints = useBreakpoint()
-    const slidesToShow = breakpoints.lg ? 1 : breakpoints['2xl'] ? 2 : 2
+    const slidesToShow = breakpoints.lg || breakpoints['2xl'] ? 1 : 2
     return (
         slides.length > 1 && (
             <div>
-                <div className="flex justify-between items-end mb-6">
+                <div className="flex justify-between items-end mb-3">
                     {title && <h4 className="m-0">{title}</h4>}
                     {slides.length > 1 && slides.length > slidesToShow && (
                         <SliderNav

@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-16.png
-topics: ['feature flags']
+tags: ['feature flags']
 ---
 
 Like [capturing events](/tutorials/api-capture-events), feature flags get a special POST-only public endpoint in the PostHog API, `/decide/`.  There are also endpoints to get data from, update this data, and more. This tutorial shows you how to use these endpoints to evaluate your feature flags (both boolean and multivariate), get data about them, update them, and finally, shows how you can combine these requests together.

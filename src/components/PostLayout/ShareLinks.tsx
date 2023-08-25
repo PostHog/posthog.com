@@ -55,7 +55,7 @@ export default function ShareLinks(): JSX.Element | null {
             <button className="relative" onClick={handleCopyClick}>
                 <Tooltip
                     placement="top-end"
-                    content={<p className="m-0 font-semibold text-sm">{copied ? 'Copied!' : 'Copy page URL'}</p>}
+                    content={() => <p className="m-0 font-semibold text-sm">{copied ? 'Copied!' : 'Copy page URL'}</p>}
                 >
                     <span className="relative">
                         <LinkIcon className="w-[20px] h-[20px] relative hover:scale-[1.1] active:top-[.5px] active:scale-[.99]" />

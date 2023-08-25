@@ -1,0 +1,30 @@
+---
+title: Something went wrong
+noindex: true
+images:
+    - './images/service-message/worker-hog.png'
+isInFrame: true
+---
+
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+
+
+<div className="block mb-8 -mt-8 mx-auto" style={{ maxWidth: '370px' }}>
+  <GatsbyImage image={getImage(props.images[0])} alt="Worker hog" />
+</div>
+
+<h1 className="text-center px-2 md:px-8 text-4xl sm:text-5xl relative">
+  <span className='text-red'>Oops!</span> Things went south
+</h1>
+
+<Hero subtitle="Our hedgehog wasn't able to handle this request. We're on it." />
+
+<p className='-mt-4 flex flex-col items-center justify-center text-center sm:block'>
+    <a href="https://status.posthog.com/">Check PostHog Status</a>
+</p>
+
+<>{typeof window !== 'undefined' && location.hash && (
+    <span className="absolute bottom-4 left-1/2 -translate-x-1/2 font-semibold text-sm text-center opacity-50">
+        Error ID: {location.hash.slice(1)}
+    </span>
+)}</>

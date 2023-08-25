@@ -21,7 +21,7 @@ export type SearchLocation =
     | 'questions'
     | 'mobile-header'
     | '404'
-export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'manual'
+export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'apps'
 
 const searchClient = algoliasearch(
     process.env.GATSBY_ALGOLIA_APP_ID as string,
@@ -99,7 +99,7 @@ export const SearchProvider: React.FC = ({ children }) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-tan/75 dark:bg-almost-black/75 transition-opacity z-[999999]" />
+                        <div className="fixed inset-0 bg-tan/75 dark:bg-primary/75 transition-opacity z-[999999]" />
                     </Transition.Child>
 
                     <div className="fixed inset-0 overflow-y-auto z-[999999]">

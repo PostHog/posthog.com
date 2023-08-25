@@ -60,14 +60,17 @@ export default function Link({
     ) : internal ? (
         preview ? (
             <Tooltip
-                content={
+                offset={[0, 0]}
+                placement="left-start"
+                content={(setOpen) => (
                     <TooltipContent
+                        setOpen={setOpen}
                         title={preview.title}
                         slug={url}
                         description={preview.description}
                         video={preview.video}
                     />
-                }
+                )}
             >
                 <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
                     {children}
@@ -89,7 +92,7 @@ export default function Link({
         >
             {external ? (
                 <span className="inline-flex justify-center items-center space-x-1 group">
-                    <span className="font-bold">{children}</span>
+                    <span className="font-semibold">{children}</span>
                     <ExternalLink
                         className={`text-primary dark:text-primary-dark opacity-30 group-hover:opacity-50 ${iconClasses}`}
                     />

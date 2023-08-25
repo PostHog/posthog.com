@@ -1,5 +1,5 @@
 ---
-title: Ideal Customer Persona
+title: Ideal customer persona
 sidebar: Handbook
 showTitle: true
 ---

@@ -1,0 +1,49 @@
+The best way to install the PostHog Java SDK is with a build system like Gradle or Maven. This ensures you can easily upgrade to the latest versions.
+
+Look up the latest version in [com.posthog.java](https://search.maven.org/artifact/com.posthog.java/posthog).
+
+#### Gradle
+
+All you need to do is add the `posthog` module to your `build.gradle`:
+
+```
+dependencies {
+  implementation 'com.posthog.java:posthog:+'
+}
+```
+
+#### Maven
+
+All you need to do is add the `posthog` module to your `pom.xml`:
+
+```xml file=pom.xml
+<dependency>
+  <groupId>com.posthog.java</groupId>
+  <artifactId>posthog</artifactId>
+  <version>LATEST</version>
+</dependency>
+```
+
+#### Other
+
+See the [com.posthog.java](https://search.maven.org/artifact/com.posthog.java/posthog) in the Maven Central Repository. Clicking on the latest version shows you options for adding dependencies for other build systems.
+
+### Setup
+
+```java
+import com.posthog.java.PostHog;
+
+class Sample {
+  private static final String POSTHOG_API_KEY = "<ph_project_api_key>";
+  private static final String POSTHOG_HOST = "<ph_instance_address>";
+
+  public static void main(String args[]) {
+    PostHog posthog = new PostHog.Builder(POSTHOG_API_KEY).host(POSTHOG_HOST).build();
+
+    // run commands
+
+    posthog.shutdown();  // send the last events in queue
+  }
+}
+```
+

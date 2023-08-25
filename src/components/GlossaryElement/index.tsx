@@ -4,12 +4,14 @@ import React, { useState } from 'react'
 import pluralizeWord from 'pluralize'
 import Tooltip from '../Tooltip'
 import { CallToAction } from 'components/CallToAction'
+import { Close } from 'components/Icons'
 
 export interface TooltipContentProps {
     title: string
     slug: string
     description: string
     video?: string
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface MdxNode {
@@ -30,13 +32,16 @@ export const formatNode = (node: MdxNode) => ({
     video: node?.frontmatter?.featuredVideo,
 })
 
-export const TooltipContent = ({ slug, description, title, video }: TooltipContentProps) => {
+export const TooltipContent = ({ slug, description, title, video, setOpen }: TooltipContentProps) => {
     const [view, setView] = useState('article')
     return (
         title &&
         slug &&
         description && (
-            <div className={'w-[320px] p-4'}>
+            <div className="w-[320px] p-4 relative">
+                <button onClick={() => setOpen(false)} className="absolute top-2 right-1">
+                    <Close opacity="100" className="w-3 h-3 opacity-40 hover:opacity-60 transition-opacity" />
+                </button>
                 {video && (
                     <div className="grid grid-cols-2 mb-4 pb-4 relative">
                         <button onClick={() => setView('article')} className="font-semibold">
@@ -98,9 +103,9 @@ export default function GlossaryElement({ as = 'p', ...other }) {
             )
             return (
                 <Tooltip
-                    className="border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark"
+                    className=""
                     key={match + i}
-                    content={
+                    content={() => (
                         <TooltipContent
                             title={
                                 glossaryItem?.page?.frontmatter?.title ||
@@ -109,7 +114,7 @@ export default function GlossaryElement({ as = 'p', ...other }) {
                             description={glossaryItem?.description || glossaryItem?.page?.excerpt}
                             slug={glossaryItem?.slug}
                         />
-                    }
+                    )}
                 >
                     <span className="cursor-default">{match}</span>
                 </Tooltip>

@@ -3,7 +3,7 @@ import { GatsbyNode } from 'gatsby'
 import path from 'path'
 import slugify from 'slugify'
 import fetch from 'node-fetch'
-import sidebars from '../src/sidebars/index'
+import menu from '../src/navs/index'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -16,9 +16,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const CustomerTemplate = path.resolve(`src/templates/Customer.js`)
     const PluginTemplate = path.resolve(`src/templates/Plugin.js`)
     const AppTemplate = path.resolve(`src/templates/App.js`)
-    const ProductTemplate = path.resolve(`src/templates/Product.js`)
+    const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
+    const DashboardTemplate = path.resolve(`src/templates/Template.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
+    const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
+    const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -122,7 +125,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            product: allMdx(filter: { fields: { slug: { regex: "/^/product/" } } }) {
+            cdp: allMdx(filter: { fields: { slug: { regex: "/^/cdp/" } } }) {
                 nodes {
                     id
                     fields {
@@ -130,6 +133,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                     frontmatter {
                         documentation
+                    }
+                }
+            }
+            templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
+                nodes {
+                    id
+                    fields {
+                        slug
                     }
                 }
             }
@@ -145,11 +156,72 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            product: allMdx(filter: { frontmatter: { template: { eq: "product" } } }) {
+                nodes {
+                    id
+                    frontmatter {
+                        productBlog {
+                            tags
+                        }
+                        productTutorialTags
+                        customerURLs
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
             blogPosts: allMdx(
                 filter: {
                     isFuture: { eq: false }
                     frontmatter: { date: { ne: null } }
                     fields: { slug: { regex: "/^/blog/" } }
+                }
+            ) {
+                totalCount
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        category
+                        tags
+                    }
+                }
+            }
+            libraryArticles: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/library/" } }
+                }
+            ) {
+                totalCount
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        category
+                        tags
+                    }
+                }
+            }
+            spotlights: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/spotlight/" } }
                 }
             ) {
                 totalCount
@@ -214,6 +286,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            roadmapYears: allRoadmap {
+                group(field: year) {
+                    fieldValue
+                }
+            }
         }
     `)
 
@@ -221,9 +298,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         return Promise.reject(result.errors)
     }
 
-    function createPosts(data, menu, template, breadcrumbBase, context) {
-        const menuFlattened = flattenMenu(sidebars[menu])
+    const menuFlattened = flattenMenu(menu)
 
+    function createPosts(data, menu, template, breadcrumbBase, context) {
         data.forEach((node) => {
             const links =
                 node?.rawBody &&
@@ -252,7 +329,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     nextURL,
                     next,
                     previous,
-                    menu: sidebars[menu],
                     breadcrumb,
                     breadcrumbBase: breadcrumbBase || menuFlattened[0],
                     tableOfContents,
@@ -358,7 +434,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 id: node.id,
                 tableOfContents,
-                menu: sidebars.docs,
                 slug,
             },
         })
@@ -396,6 +471,34 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
+    result.data.libraryArticles.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const tableOfContents = node.headings && formatToc(node.headings)
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+            },
+        })
+    })
+
+    result.data.spotlights.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const tableOfContents = node.headings && formatToc(node.headings)
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+            },
+        })
+    })
+
     result.data.customers.nodes.forEach((node) => {
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
@@ -412,48 +515,36 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.apps.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
-        let next = null
-        let previous = null
-        const sidebar = sidebars.apps
-        sidebar.some((item, index) => {
-            if (item.url === slug) {
-                next = sidebar[index + 1]
-                previous = sidebar[index - 1]
-                return true
-            }
-        })
         createPage({
             path: slug,
             component: AppTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',
-                next,
-                previous,
             },
         })
     })
-    result.data.product.nodes.forEach((node) => {
+
+    result.data.cdp.nodes.forEach((node) => {
         const { slug } = node.fields
         const { documentation } = node.frontmatter
-        let next = null
-        let previous = null
-        const sidebar = sidebars.product
-        sidebar.some((item, index) => {
-            if (item.url === slug) {
-                next = sidebar[index + 1]
-                previous = sidebar[index - 1]
-                return true
-            }
-        })
         createPage({
             path: slug,
-            component: ProductTemplate,
+            component: PipelineTemplate,
             context: {
                 id: node.id,
                 documentation: documentation || '',
-                next,
-                previous,
+            },
+        })
+    })
+
+    result.data.templates.nodes.forEach((node) => {
+        const { slug } = node.fields
+        createPage({
+            path: slug,
+            component: DashboardTemplate,
+            context: {
+                id: node.id,
             },
         })
     })
@@ -524,4 +615,33 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             })
         }
     }
+
+    await Promise.all(
+        result.data.product.nodes.map((node) => {
+            return new Promise<void>((res) => {
+                const { slug } = node.fields
+                createPage({
+                    path: slug,
+                    component: ProductTemplate,
+                    context: {
+                        id: node.id,
+                        blogTags: node?.frontmatter?.productBlog?.tags ?? [''],
+                        tutorialTags: node?.frontmatter?.productTutorialTags ?? [''],
+                        customerURLs: node?.frontmatter?.customerURLs ?? [''],
+                    },
+                })
+                res()
+            })
+        })
+    )
+
+    result.data.roadmapYears.group.forEach(({ fieldValue: year }) => {
+        createPage({
+            path: `/changelog/${year}`,
+            component: ChangelogTemplate,
+            context: {
+                year: Number(year),
+            },
+        })
+    })
 }

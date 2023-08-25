@@ -36,7 +36,7 @@ PostHog goes beyond frontend monitoring by augmenting product analytics and sess
 
 ### 2. PostHog is open source and transparent
 
-PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/how-we-built-an-app-server), open their own PRs, or give feedback on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like LogRocket can't offer.
+PostHog is built with transparency at its core. Not only do we work in the open and give full access to [our source code](https://github.com/PostHog/posthog), we also enable others to [build integrations](/docs/apps/build) or [other services on top of PostHog](/blog/how-we-built-an-app-server), open their own PRs, or give feedback on [our roadmap](/roadmap). PostHog's open app framework makes it easy to integrate internal tools, an advantage closed-source products like LogRocket can't offer.
 
 ### 3. PostHog constantly ships new features
 
@@ -74,6 +74,12 @@ PostHog offers a much wider selection of tools than LogRocket, including several
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Roll out features safely; toggle features for cohorts or individuals</td>
+        </tr>
+        <tr>
+            <td><strong>User surveys</strong></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td>Ask users for qualitative feedback and gather responses</td>
         </tr>
         <tr>
             <td><strong>Experiments</strong></td>
@@ -200,9 +206,11 @@ While LogRocket contains some product analytics features, it isn’t primarily i
 
 -   **Query editor:** LogRocket doesn’t currently support any way for users to interrogate data directly, either through SQL or other, abstracted query language. PostHog also doesn’t offer SQL queries... but [we’re actively working on it](/manual/hogql).
 
-### Session recording
+> **Further reading:** [How LogRocket compares to other PostHog alternatives](/blog/posthog-alternatives)
 
-LogRocket and PostHog both offer robust, full-featured session recording tools that outperform even dedicated tools, such as [Hotjar](/blog/best-open-source-session-replay-tools). LogRocket’s session recording offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
+### Session replays
+
+LogRocket and PostHog both offer robust, full-featured session replay tools that outperform even dedicated tools, such as [Hotjar](/blog/best-open-source-session-replay-tools). LogRocket’s session replay tool offers a handful of extra features, such as mobile recording, though PostHog is actively working on developing these.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -563,22 +571,10 @@ Below, we've listed a few of the most popular integrations used across PostHog a
             <td>Export events for use in Zaps</td>
         </tr>
         <tr>
-            <td><strong>Shopify</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync customer and order data </td>
-        </tr>
-        <tr>
             <td><strong>Stripe</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Sync customer and invoice data</td>
-        </tr>
-        <tr>
-            <td><strong>PagerDuty</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive customized alerts from insights</td>
         </tr>
         <tr>
             <td><strong>Intercom</strong></td>
@@ -618,7 +614,7 @@ Some examples of PostHog’s site apps include:
 
 -   **[User Notifications](/apps/notification-bar):** Display a site banner to alert users about important information.
 
--   **[Schedule interviews](/apps/user-interviews):** Target different types of users to receive Calendly notification, so you can arrange feedback calls.
+-   **[Schedule interviews](/apps/user-interview):** Target different types of users to receive Calendly notification, so you can arrange feedback calls.
 
 -   **[In-app prompts](/apps/feedback-widget):** Display in-app prompts which ask for written feedback, or bug reports.
 
@@ -719,7 +715,7 @@ Regulatory compliance can be make-or-break for many teams, especially those oper
         <tr>
             <td><strong>SOC 2 certified</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
         </tr>
         <tr>
             <td><strong>SAML/SSO available</strong></td>
@@ -734,8 +730,6 @@ Regulatory compliance can be make-or-break for many teams, especially those oper
     </tbody>
 </table>
 </div>
-
-> PostHog is not currently SOC 2 certified, but is currently being audited in order to complete this certification.
 
 ## Frequently asked questions
 

@@ -44,7 +44,7 @@ We got a lot of feedback to build the products next door to ours.
 
 I thought [this fateful request](https://github.com/PostHog/posthog/issues/149) for session recordings was a bad idea, and I pushed users too quickly to something else I had in mind.
 
-Then [Karl](/handbook/company/team/karl-aksel-puulmann) appeared.
+Then Karl appeared.
 
 Karl is, amongst other things, one of our engineers. What users were asking for made sense to him. So, during a hackathon, he shipped this (huge) feature in a week or two.
 

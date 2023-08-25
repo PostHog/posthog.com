@@ -51,8 +51,6 @@ Ideas for the agenda:
 
 The budget for these trips is up to $1,500 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. 
 
-The budget for the offsite replaces that month's [meeting each other budget](/handbook/people/spending-money#meeting-each-other). The accommodation for the offsite should have space to work. If this isn't possible (or to give space for smaller meetings during off-sites) your [workspace budget](/handbook/people/spending-money#work-space) can be used.
-
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
 ## Hedge House
@@ -174,6 +172,31 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 **1 week after**
 - [ ] Collect post-mortem feedback from the team
   - We generally do this as an open GitHub issue, but you can also create a Google form to facilitate this
+
+
+## All company offsite hackathon
+
+The hackathon is always a highlight of the offsite. We tend to run them like this:
+
+**Session 1: ideation dinner**
+The day before the start of the hackathon we do a casual 'ideation' dinner where we encourage people to chat about ideas
+
+**Session 2: hackathon kick-off**
+The hackathon kick off is 1.5 hours at the end of the day. Ideally we do this in a conference room with beers and wine.
+
+- Everyone writes down their ideas on multiple post-it notes in about 10 minutes.
+- People come up to the front one-by-one, and they get 30 seconds to pitch all their ideas.
+- Everyone gets three votes to put on whichever ideas they like most. Just do this as a tally. You can't vote on your own idea
+- We dismiss all ideas with zero votes, and sort all the other ideas from top to bottom based on the number of votes.
+- Everyone writes their name on the other side of the sticky bit of a small piece of post-it note, then add their name to the idea they want to work on. Every group should have at least two people in it, and ideally 3.
+- Once groups are formed, everyone can go off and ideate or hack.
+
+**Session 3: presentations**
+
+This should be the last work related session of the offsite. Again ideally in a conference center with beer and wine provided.
+
+Each group gets 5 minutes to demo and present their idea.
+
 
 **2 weeks after**
 - [ ] Compile post-mortem feedback and share with team

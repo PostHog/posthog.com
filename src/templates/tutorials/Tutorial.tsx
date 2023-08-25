@@ -24,16 +24,18 @@ import slugify from 'slugify'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { Intro } from '../../templates/BlogPost'
+import TutorialsSlider from 'components/TutorialsSlider'
+import { communityMenu, docsMenu } from '../../navs'
 
-const ViewButton = ({ title, view, setView }) => {
+export const ViewButton = ({ title, view, setView }) => {
     return (
         <button
             onClick={() => setView(title)}
-            style={{
-                background: view === title ? '#F54E00' : '#E5E7E0',
-                color: view === title ? 'white' : 'black',
-            }}
-            className="py-2 px-4 rounded-md w-1/2 transition-colors"
+            className={`py-2 px-4 text-sm transition-colors border-b-2 font-medium relative after:absolute after:top-[100%] after:left-0 after:right-0 after:rounded-full after:h-[2px] ${
+                view === title
+                    ? 'font-bold after:bg-red'
+                    : 'font-semibold border-transparent opacity-50 hover:opacity-75 hover:after:bg-gray-accent'
+            }`}
         >
             {title}
         </button>
@@ -42,39 +44,11 @@ const ViewButton = ({ title, view, setView }) => {
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
-const TutorialSidebar = ({ contributors, location, title, categories }) => {
-    return (
-        <>
-            {contributors?.length > 0 && (
-                <SidebarSection>
-                    <Contributors
-                        contributors={contributors.map((contributor) => ({
-                            ...contributor,
-                        }))}
-                    />
-                </SidebarSection>
-            )}
-            <SidebarSection title="Share">
-                <ShareLinks title={title} href={location.href} />
-            </SidebarSection>
-            {categories?.length > 0 && (
-                <SidebarSection title="Filed under...">
-                    <Topics
-                        topics={categories?.map((category) => ({
-                            name: category,
-                            url: `/tutorials/categories/${slugify(category, { lower: true })}`,
-                        }))}
-                    />
-                </SidebarSection>
-            )}
-        </>
-    )
-}
-
 export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data
     const { body, excerpt, fields } = pageData
     const { title, featuredImage, description, contributors, categories, featuredVideo, date } = pageData?.frontmatter
+    const filePath = pageData?.parent?.relativePath
     const components = {
         inlineCode: InlineCode,
         blockquote: Blockquote,
@@ -88,70 +62,49 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
         a: A,
+        TutorialsSlider,
         ...shortcodes,
     }
-    const { hash } = useLocation()
     const breakpoints = useBreakpoint()
     const [view, setView] = useState('Article')
 
-    useEffect(() => {
-        if (hash) {
-            scroll.scrollMore(-50)
-        }
-    }, [])
-
     return (
-        <Layout>
+        <>
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
-            <PostLayout
-                questions={<CommunityQuestions />}
-                body={body}
+            <Intro
+                contributors={contributors}
                 featuredImage={featuredImage}
-                featuredVideo={featuredVideo}
-                tableOfContents={tableOfContents}
                 title={title}
-                menu={menu}
-                sidebar={
-                    <TutorialSidebar
-                        contributors={contributors}
-                        location={location}
-                        title={title}
-                        categories={categories}
-                    />
-                }
-            >
-                <Intro
-                    contributors={contributors}
-                    featuredImage={featuredImage}
-                    title={title}
-                    featuredImageType="full"
-                    titlePosition="top"
-                    date={date}
-                />
-
-                {featuredVideo && (
-                    <div className="mb-6 flex space-x-2">
-                        <ViewButton view={view} title="Article" setView={setView} />
-                        <ViewButton view={view} title="Video" setView={setView} />
-                    </div>
-                )}
-                {view === 'Article' && breakpoints.md && <MobileSidebar tableOfContents={tableOfContents} />}
-                {view === 'Article' ? (
-                    <div className="article-content">
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{body}</MDXRenderer>
-                        </MDXProvider>
-                    </div>
-                ) : (
-                    <iframe src={featuredVideo} />
-                )}
-            </PostLayout>
-        </Layout>
+                featuredImageType="full"
+                titlePosition="top"
+                date={date}
+            />
+            {featuredVideo && (
+                <div className="mb-6 flex space-x-2">
+                    <ViewButton view={view} title="Article" setView={setView} />
+                    <ViewButton view={view} title="Video" setView={setView} />
+                </div>
+            )}
+            {view === 'Article' && (
+                <div className="xl:float-right xl:max-w-[350px] xl:ml-4 xl:mb-4">
+                    <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
+                </div>
+            )}
+            {view === 'Article' ? (
+                <div className="article-content">
+                    <MDXProvider components={components}>
+                        <MDXRenderer>{body}</MDXRenderer>
+                    </MDXProvider>
+                </div>
+            ) : (
+                <iframe src={featuredVideo} />
+            )}
+        </>
     )
 }
 
@@ -183,6 +136,11 @@ export const query = graphql`
                     childImageSharp {
                         gatsbyImageData(placeholder: NONE)
                     }
+                }
+            }
+            parent {
+                ... on File {
+                    relativePath
                 }
             }
         }

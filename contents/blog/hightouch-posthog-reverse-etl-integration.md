@@ -52,7 +52,7 @@ You can read more about Hightouch's PostHog integration [in its documentation](h
 
 Let's say your marketing team uses a CRM. It's syncing customer data into your data warehouse, such as names, email addresses, how they found your product, job title, pricing information and organization data. This is all contextual data you can use in PostHog.
 
-Once this data is synced into 'Persons' in PostHog, you can [create Cohorts](/tutorials/cohorts) of users with this additional data. You could, for example, create Cohorts based on:
+Once this data is synced into 'Persons' in PostHog, you can create Cohorts of users with this additional data. You could, for example, create Cohorts based on:
 
 - Users who are on a particular payment plan or product tier
 - Users from the same company
@@ -78,7 +78,7 @@ PostHog is open source and we love it when people contribute to making the produ
 
 We also recently ran a [PostHog App Bounty](https://github.com/PostHog/posthog/issues/8437) for a few specific apps we'd like have on PostHog. All current bounties have been assigned, but we're always open to suggestions.
 
-Whether you have an idea for an app or just need some help, please [join our community Slack channel](/slack) to get involved.
+Whether you have an idea for an app or just need some help, please [let us know](https://app.posthog.com/home#supportModal) if you'd like to get involved.
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 

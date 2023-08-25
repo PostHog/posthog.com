@@ -7,7 +7,7 @@ hideAnchor: false
 
 ## "No design by default"
 
-We encourage engineers to act like feature owners, carrying a project from ideation to completion. We maintain a design system in [Storybook](https://storybook.posthog.net/) so engineers can build high-quality features independently, as much as possible.
+We encourage engineers to act like feature owners, carrying a project from ideation to completion. We maintain a design system in [Storybook](https://storybook.posthog.net/), so engineers can build high-quality features independently, as much as possible.
 
 Because engineers choose their sprint tasks near the beginning of a sprint (and product doesn't plan tasks _for_ engineers in advance), our process doesn't allow for us to have a product manager and a designer to work closely together _before_ a task gets selected by an engineer.
 
@@ -21,8 +21,8 @@ Learn more about how we decide this in our [guide to working with product design
 
 | Name         | Role             | Team(s) |
 |--------------|------------------|-----------------|
-| [Lottie Coxon](/handbook/company/team#lottie-coxon-graphic-designer) | Graphic Designer | Website & Docs, Marketing  |
-| [Cory Watilo](/handbook/company/team/#cory-watilo-lead-designer) (Team lead)  | Design Lead      | App teams, Website & Docs  |
+| [Lottie Coxon](/community/profiles/227) | Graphic Designer | Website & Docs, Marketing  |
+| [Cory Watilo](/community/profiles/2) (Team lead)  | Design Lead      | App teams, Website & Docs  |
 
 Design at PostHog:
 
@@ -31,15 +31,11 @@ Design at PostHog:
 - Make it easy for third party developers to build apps on top of our Product OS
 - Exists to make the best damn SaaS website and docs in the world
 
-
-
-## Blog artwork and marketing assets
-
-Because of the volume of content we publish, all requested artwork has its own dedicated [Artwork](https://github.com/orgs/PostHog/projects/65/views/2?layout=board) project board managed by Lottie. Please add a small description/brief, level of importance and a hard deadline: this will allow Lottie to priortise which projects get done first around her own sprint tasks. 
-
-When [authoring a blog post](/handbook/growth/marketing/blog), add the `Artwork` project board so we can create visuals and make sure the post is listed on our [content calendar](https://docs.google.com/spreadsheets/d/1-6QYxi46d5y88BQ8vdGWmgrFZBbCMs1CAIc5JGLuf4Y/edit) with a publish date. [Learn more about our process.](/handbook/growth/marketing/exporting-blog-post-image)
-
 **Important:** We prioritize feedback based on alignment with business goals. _Everyone has feedback about design._ (If feedback is more of a personal opinion than a business-related perspective, we’ll note it, but don't be offended if your feedback isn't specifically addressed!)
+
+## Requesting artwork and brand materials.
+
+Need some custom artwork? Read the [art and branding request guidelines](/handbook/design/art-requests). 
 
 ## Portfolio
 

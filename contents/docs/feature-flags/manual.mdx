@@ -1,10 +1,7 @@
 ---
 title: Feature Flags
 related:
-    - ../../tutorials/experiments.md
-    - ../../tutorials/metrics-tutorial.md
     - ../../tutorials/canary-release.md
-    - ../../tutorials/cohorts.md
 availability:
     free: partial
     selfServe: full
@@ -29,13 +26,21 @@ Think of a descriptive name and select how you want to roll out your feature.
 
 ![Create feature flags](../../images/features/feature-flags/feature-flag-page.png)
 
+### Local evaluation 
+
+If you're using our server-side libraries, you can use [local evaluation](/docs/feature-flags/bootstrapping-and-local-evaluation) to improve performance instead of making additional API requests. 
+
+We consider it best practice to use local evaluation flags where possible because this method enables you to resolve flags faster and they are more efficient as they generally require fewer API calls and can reuse definitions for multiple users. 
+
+> For billing purposes we count a local evaluation API request as being equivalent to 10 `decide` requests. One local evaluation request can compute feature flags for hundreds or thousands of users, so this ensures local evaluation is priced fairly while remaining the most cost-effective option by far. 
+
 ## Implementing the feature flag
 
 When you create a feature flag, we'll show you an example snippet. It will look something like this:
 
 <MultiLanguage>
 
-```js
+```js-web
 if (posthog.isFeatureEnabled('new-beta-feature')) {
     // run your activation code here
 }
@@ -101,7 +106,7 @@ This means that for most page views the feature flags will be available immediat
 
 To combat that, there's a JavaScript callback you can use to wait for the flags to come in:
 
-```js
+```js-web
 posthog.onFeatureFlags(function () {
     // feature flags are guaranteed to be available at this point
     if (posthog.isFeatureEnabled('new-beta-feature')) {
@@ -130,13 +135,21 @@ Note that there are some performance trade-offs here. Specifically,
 2. It disables local evaluation of the feature flag.
 3. It disables bootstrapping this feature flag.
 
+## Feature flags versus experiments
+
+Experiments are powered by feature flags, but they are a specific format with test and control variants. This means a feature flag cannot be converted into an experiment. We disallow this to avoid implementation changes, targeting errors, and confusion that would come from the conversion.
+
+For example, a boolean flag isn't able to turn into an experiment.
+
+If you want to reuse the same key, you can delete your flag and use the same key when creating the experiment.
+
 ## Further reading
 
 Want to know more about what's possible with Feature Flags in PostHog? Try these tutorials:
 
 -   [How to do a canary release with feature flags](/tutorials/canary-release)
 -   [Running experiments on new users](/tutorials/new-user-experiments)
--   [How to run Experiments without feature flags](/tutorials/experiments)
+-   [How to run Experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags)
 -   Tips for [feature flag best practices with examples](/blog/feature-flag-best-practices)
 
 Using a library other than JavaScript for your feature flag implementation? Check out [these other libraries](/docs/integrate/libraries) for more details.

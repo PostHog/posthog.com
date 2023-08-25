@@ -7,13 +7,13 @@ RudderStack is an open-source, customer data platform for developers. It allows 
 
 > Before integrating with RudderStack, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating with PostHog.
 
-## Setting up the RudderStack Import
+## Setting up
 
 Make sure you have a RudderStack account **and** a PostHog account, using [PostHog Cloud](https://app.posthog.com/signup) or self-hosting.
 
 1. From your RudderStack dashboard, add each source and select PostHog from the list of destinations.
 2. Assign a name to your destination (e.g. PostHog production) and click Continue.
-3. Add your PostHog 'Project API Key' as the Team API key (**Do not use a Personal API key**) and your host url as `Your-Instance` (`https://app.posthog.com` if you're on PostHog Cloud):
+3. Add your PostHog 'Project API Key' as the Team API key (**Do not use a Personal API key**) and your host url as `Your-Instance` ('<ph_instance_address>' if you're on PostHog Cloud):
     ![RudderStack Dashboard](../../images/rs-posthog-config.png)
     - If it's a website or web app:
       1. In the rudderstack console set `Use device-mode to send events` to `true` so that the events originate from the client side. Additionally, this will enable the toolbar and heatmaps.

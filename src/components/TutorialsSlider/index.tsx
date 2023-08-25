@@ -1,40 +1,23 @@
-import FullWidthBorderSlider from 'components/FullWidthBorderSlider'
+import ResourceItem from 'components/Docs/ResourceItem'
 import { graphql, useStaticQuery } from 'gatsby'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import React, { useRef, useState } from 'react'
+import React from 'react'
 
-export default function TutorialsSlider({ topic }: { topic: string }): any {
+export default function TutorialsSlider({ topic, slugs }: { topic?: string; slugs?: string[] }): any {
     const {
         allMdx: { nodes },
     } = useStaticQuery(query)
-    const tutorials = nodes.filter((tutorial) =>
-        tutorial?.frontmatter?.tags?.some((tutorialTag) => tutorialTag === topic)
-    )
-    const [activeSlide, setActiveSlide] = useState(0)
+    const tutorials = nodes.filter((tutorial) => {
+        return slugs
+            ? slugs.includes(tutorial.fields.slug)
+            : tutorial?.frontmatter?.tags?.some((tutorialTag) => tutorialTag === topic)
+    })
 
     return (
-        <FullWidthBorderSlider
-            setActiveSlide={setActiveSlide}
-            activeSlide={activeSlide}
-            slides={tutorials?.map((tutorial) => {
-                const {
-                    frontmatter: { featuredImage, authors, title },
-                    parent: {
-                        fields: { date },
-                    },
-                    id,
-                    fields: { slug },
-                } = tutorial
-                return {
-                    image: featuredImage,
-                    authors,
-                    title,
-                    date,
-                    url: slug,
-                    id,
-                }
+        <ul className="list-none m-0 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+            {tutorials.map(({ id, frontmatter: { title, featuredImage }, fields: { slug } }) => {
+                return <ResourceItem key={id} title={title} url={slug} gatsbyImage={featuredImage} />
             })}
-        />
+        </ul>
     )
 }
 

@@ -67,7 +67,7 @@ root.render(
 );
 ```
 
-Once done, we can visit our site running locally, and we’ll start to see events in our PostHog instance. For now, the captured events are only the [autocaptured](/docs/integrate/client/js#autocapture) ones. You can use the `posthog-js` library to capture many more as well as more information. Check out our [event tracking guide](/tutorials/event-tracking-guide) to learn more.
+Once done, we can visit our site running locally, and we’ll start to see events in our PostHog instance. For now, the captured events are only the [autocaptured](/docs/data/autocapture) ones. You can use the `posthog-js` library to capture many more as well as more information. Check out our [event tracking guide](/tutorials/event-tracking-guide) to learn more.
 
 ![Live events](../images/tutorials/react-cookie-banner/live-events.png)
 

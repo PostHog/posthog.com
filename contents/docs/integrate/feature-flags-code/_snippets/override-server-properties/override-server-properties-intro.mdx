@@ -1,0 +1,7 @@
+### Advanced: Overriding server properties
+
+Sometimes, you may want to evaluate feature flags using [person properties](/docs/product-analytics/user-properties), [groups](/docs/product-analytics/group-analytics), or group properties that haven't been ingested yet, or were set incorrectly earlier. 
+
+You can provide properties to evaluate the flag with by using the `person properties`, `groups`, and `group properties` arguments. PostHog will then use these values to evaluate the flag, instead of any properties currently stored on your PostHog server.
+
+For example: 

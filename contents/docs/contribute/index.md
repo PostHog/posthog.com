@@ -18,7 +18,7 @@ Bug reports help us make PostHog better for everyone. When you [report a bug](ht
 Before raising a new issue, please [search within existing ones](https://github.com/PostHog/posthog/issues) to make sure you're not creating a duplicate.
 
 <blockquote class='warning-note'>
-    <b>Important:</b> If your issue is related to security, please email us directly at <a href="mailto:hey@posthog.com">hey@posthog.com</a> instead of creating a GitHub issue.
+    <b>Important:</b> If your issue is related to security, please email us directly at <a href="mailto:security@posthog.com">security@posthog.com</a> instead of creating a GitHub issue.
 </blockquote>
 
 ## Deciding what to work on
