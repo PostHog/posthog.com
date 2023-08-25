@@ -79,7 +79,7 @@ Finally, we set the function to run every day by clicking the three dots next to
 
 <iframe src="https://www.val.town/embed/ianvph.gitHubReleaseTracker" height="705" frameBorder="0" allowFullScreen></iframe>
 
-## Capturing new blogs published
+## Capturing newly published blogs
 
 Another type of RSS feed you might want to keep track of is blog posts. This can be useful for tracking when sites you care, like your own blog or app changelogs, publish updates.
 
