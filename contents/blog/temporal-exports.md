@@ -1,6 +1,6 @@
 ---
 title: Why and how we moved exports to Temporal
-date: 2023-08-24
+date: 2023-08-25
 author: ["tomas-farias", "ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -78,13 +78,31 @@ With this structure in place, we began working on improving reliability, transpa
 
 We prioritized improving reliability. As mentioned, Temporal has support for retry and timeout logic per activity and workflow, which made a big difference. All we needed was to tune this for our system and destinations. This is done in four main areas:
 
-1. **ClickHouse** - [spaced out retries](https://github.com/PostHog/posthog/pull/15558) when reconnecting to prevent failures if in use by another query, retry [connection errors](https://github.com/PostHog/posthog/pull/16574) which are likely network failures rather than outages, use [offline ClickHouse cluster](https://github.com/PostHog/posthog/pull/16470) to improve performance and allowable query length, and sacrificed some performance to [de-duplicate batches](https://github.com/PostHog/posthog/pull/16354) by adding `DISTINCT ON` clause (because ClickHouse handles de-duplication asynchronously so it isn’t guaranteed at query time).
+**ClickHouse** 
 
-2. **Postgres** - [health checks](https://github.com/PostHog/posthog/pull/16079) to ensure it is healthy before running workflows and [retry forever](https://github.com/PostHog/posthog/pull/16703) because we control everything related to those activities so failures are transient (other than bugs).
+- [Spaced out retries](https://github.com/PostHog/posthog/pull/15558) when reconnecting to prevent failures if in use by another query.
+- Retry [connection errors](https://github.com/PostHog/posthog/pull/16574) which are likely network failures rather than outages.
+- Use [offline ClickHouse cluster](https://github.com/PostHog/posthog/pull/16470) to improve performance and allowable query length.
+- Sacrificed some performance to [de-duplicate batches](https://github.com/PostHog/posthog/pull/16354) by adding `DISTINCT ON` clause because ClickHouse handles de-duplication asynchronously so it isn’t guaranteed at query time.
 
-3. **Destinations** - define which destination errors are [retriable and which aren’t](https://github.com/PostHog/posthog/pull/16814) (rule of thumb: user errors aren't, service errors are), [reset the iterator when a `JSONDecodeError` happens](https://github.com/PostHog/posthog/pull/16473) to keep the workflow going, and handle [query output](https://github.com/PostHog/posthog/pull/16247) errors from Snowflake.
+**Postgres** 
 
-4. **Temporal** -  add [max retries and errors](https://github.com/PostHog/posthog/pull/15399) so it doesn’t retry forever, add [heartbeat API to track activity](https://github.com/PostHog/posthog/pull/16494) because we lose state on deployment causing exports to reset, and create an [endpoint](https://github.com/PostHog/posthog/pull/16181) for resetting a `BatchExportRun`.
+- [Health checks](https://github.com/PostHog/posthog/pull/16079) to ensure it is healthy before running workflows.
+- [Retry forever](https://github.com/PostHog/posthog/pull/16703) because we control everything related to those activities so failures are transient (other than bugs).
+
+**Destinations** 
+
+- Define which destination errors are [retriable and which aren’t](https://github.com/PostHog/posthog/pull/16814). As a rule of thumb: user errors aren't, service errors are.
+- [Enable migration](https://github.com/PostHog/posthog/pull/16927) of old export app `PluginConfig` to `BatchExport`. Handle [old Snowflake export app schema](https://github.com/PostHog/posthog/pull/16928) too.
+- [Reset the iterator when a `JSONDecodeError` happens](https://github.com/PostHog/posthog/pull/16473) to keep the workflow going.
+- For Snowflake, handle [query output error](https://github.com/PostHog/posthog/pull/16247) and [`ForbiddenError`](https://github.com/PostHog/posthog/pull/16959). [Add](https://github.com/PostHog/posthog/pull/16734) and [pass](https://github.com/PostHog/posthog/pull/16733) role.
+- [Make our S3 key generation](https://github.com/PostHog/posthog/pull/16900) aware of directory separators.
+
+**Temporal** 
+
+- Add [max retries and errors](https://github.com/PostHog/posthog/pull/15399) so it doesn’t retry forever.
+- Add [heartbeat API to track activity](https://github.com/PostHog/posthog/pull/16494) because we lose state on deployment causing exports to reset.
+- Create an [endpoint](https://github.com/PostHog/posthog/pull/16181) for resetting a `BatchExportRun`.
 
 All of this and future improvements are possible because of the framework and services Temporal provides.
 
@@ -123,6 +141,20 @@ We needed this work for exports to be a first-class feature in PostHog. With thi
 3. Have better visibility into how workflows are failing or lagging and can target solutions to these problems. 
 
 Having a reliable, transparent, and performant export system enables us to further improve our customer data platform and [warehouse functionality](/docs/data-warehouse) (currently in private beta), which is key for us to succeed in the long term.
+
+## What’s next?
+
+As mentioned, we already built the structure for `BatchExports`, added a UI, and added [Snowflake](/docs/cdp/batch-exports/snowflake) and [S3](/docs/cdp/batch-exports/s3) as destinations, but there’s still a lot to do including:
+
+- More destinations like [Postgres](https://github.com/PostHog/posthog/pull/17045), [BigQuery](https://github.com/PostHog/posthog/pull/17170), and Redshift.
+- Improve our [webhook system](https://github.com/PostHog/posthog/issues/16976) to enable multiple inputs, workflows, and destinations. 
+- Improve performance by through parallelizing and file compression.
+- Enable users to define their own schema.
+- Support more output formats such as blob storage.
+- Filter events from exports.
+- Roles based access control for exports.
+
+You can keep up with our progress and **provide feedback on our roadmap** in the issues linked or the [exports mega issue](https://github.com/PostHog/posthog/issues/15997). 
 
 ## Further reading
 
