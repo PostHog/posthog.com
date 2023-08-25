@@ -1,0 +1,120 @@
+---
+title: How to capture new RSS items in PostHog (releases, blogs, status)
+date: 2023-08-25
+author: ["ian-vanagas"]
+showTitle: true
+sidebar: Docs
+featuredImage: ../images/tutorials/banners/tutorial-6.png
+tags: ['events']
+---
+
+RSS is a popular format for providing feeds of content. In this tutorial, we show you how to use [val.town](http://val.town) to poll RSS feeds, process the feed, and capture new items from GitHub releases, status pages, and blogs as events in PostHog.
+
+## Creating our capture function in Val Town
+
+After signing up for [Val Town](val.town), you can go to your workspace and write JavaScript functions. We  start by writing a function to capture an event in PostHog using the API.
+
+To make this function reusable, we need a `key`, `event`, `properties`, and `distinct_id`. It uses these to create the body of the request and then send a fetch request to `https://app.posthog.com/capture/`. Altogether, this looks like this:
+
+<iframe src="https://www.val.town/embed/ianvph.postHogAPICapture" height="630" frameBorder="0" allowFullScreen></iframe>
+
+> **Note:** you can [read and fork the code on Val Town](https://www.val.town/v/ianvph.postHogAPICapture). You can also call the code from your own val by using `@ianvph.postHogAPICapture();` with an object containing your event data.
+
+## Creating a GitHub release tracker
+
+Next, we show how to capture data from RSS feeds by polling a GitHub repo’s feed for new releases. When there is a new release, we capture a new event in PostHog.
+
+To do this, we fetch the release feed URL that looks like this `https://github.com/posthog/posthog/releases.atom`. We can then parse the XML using a function someone else has created on Val Town and get the first entry from the feed.
+
+```js
+export async function gitHubReleaseTracker() {
+  // gets newest release from github
+  const githubProject = "https://github.com/posthog/posthog";
+  const response = await fetch(`${githubProject}/releases.atom`);
+  const newestEntry =
+    (await @stevekrouse.parseXML(await response.text())).feed
+      .entry[0];
+}
+```
+
+Next, we use another val that is simply a constant to store the latest release ID. We update this every time we successfully capture a new release.
+
+```js
+let newestReleaseId = "tag:github.com,2008:Repository/235901813/1.43.1";
+```
+
+We then check that ID against the new entry ID we get from the feed and return the function if they are the same.
+
+```js
+export async function gitHubReleaseTracker() {
+  //...
+	if (newestEntry.id == @me.newestReleaseId) {
+    return "old release";
+  }
+}
+```
+
+Finally, if the entry is new, we create properties for the event and then the event request object. We then use the `postHogAPICapture()` function we created earlier to capture the event and set the `newestReleaseId` to the current one.
+
+```js
+export async function gitHubReleaseTracker() {
+	const properties = {
+    title: newestEntry.title,
+    release_date: newestEntry.updated,
+    author: newestEntry.author.name,
+  };
+  const captureData = {
+    key: @me.phProjectAPIKey,
+    event: "new release",
+    properties: properties,
+    distinct_id: @me.email,
+  };
+  @ianvph.postHogAPICapture(captureData);
+	@me.newestReleaseId = newestEntry.id;
+  return "new release captured";
+}
+```
+
+Finally, we set the function to run every day by clicking the three dots next to "Save" and clicking "Schedule this val."
+
+<iframe src="https://www.val.town/embed/ianvph.gitHubReleaseTracker" height="705" frameBorder="0" allowFullScreen></iframe>
+
+## Capturing new blogs published
+
+Another type of RSS feed you might want to keep track of is blog posts. This can be useful for tracking when sites you care, like your own blog or app changelogs, publish updates.
+
+The code for this is similar to the GitHub release tracker. We poll an RSS feed and capture an event when there is a new item. Different RSS feeds do require some tweaks because of differences in data structure.
+
+1. We use a different link. For us, it is the PostHog blog at [`/rss.xml`](/rss.xml).
+2. The newest entry depends on the format of your RSS feed. For us, it is `rss.channel.item[0]`.
+3. Instead of a release ID, we use a link to check if the blog post is new.
+4. The properties and event details are different.
+
+Once we make all of these changes, we have a function that looks like this:
+
+<iframe src="https://www.val.town/embed/ianvph.blogRSSTracker" height="720" frameBorder="0" allowFullScreen></iframe>
+
+When we set it up and schedule it to run every day, it captures new blogs published in PostHog.
+
+![Event captured](../images/tutorials/rss-item-capture/event.png)
+
+## Capturing app status changes
+
+The final feed to track is the status of the apps we rely on. Many status pages contain an RSS feed, including PostHog’s (which we use here). The process for tracking this is the same:
+
+1. Get the status RSS feed.
+2. Get the latest entry.
+3. Check if it is new.
+4. Capture an event if it is new.
+
+For [`https://status.posthog.com/history.rss`](https://status.posthog.com/history.rss), this looks like this: 
+
+<iframe src="https://www.val.town/embed/ianvph.posthogStatusTracker" height="715" frameBorder="0" allowFullScreen></iframe>
+
+Because status updates can have important real-time consequences for your app, we can schedule this one to run every hour (or less).
+
+## Further reading
+
+- [Using the PostHog API to capture events](/tutorials/api-capture-events)
+- [How to use the PostHog API to get insights and persons](/tutorials/api-get-insights-persons)
+- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
