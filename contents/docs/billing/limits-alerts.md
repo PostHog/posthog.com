@@ -2,7 +2,7 @@
 title: Billing limits and alerts
 ---
 
-To help you avoid surprise bills, PostHog enables you to set billing limits for each of our products. Setting a billing limit means that we will stop ingesting/processing your data so that you will not be charged over the set limit. In other words, if you exceed the billing limit you set, your data will be lost forever.
+To help you avoid surprise bills, PostHog enables you to set billing limits for each of our products. Setting a billing limit means we will stop ingesting and processing your data so you are not charged over the set limit. In other words, if you exceed the billing limit you set, your additional data is lost forever.
 
 To set a billing limit:
 
