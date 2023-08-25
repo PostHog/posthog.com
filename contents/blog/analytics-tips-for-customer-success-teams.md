@@ -53,8 +53,6 @@ We like to think PostHog works brilliantly on its own, but to get the most out o
 
 Best of all, because PostHog is entirely open source, you can build your own apps to enhance your data even further — all you need is a little Javascript or Typescript knowledge and you’re good to go!
 
-> 💡**PostHog Tip:** Don’t fancy learning to code? [Connect PostHog to Zapier](/apps/zapier-connector) and use that to connect to additional services instead!
-
 ## 5. Build and share a customer success dashboard
 ![subscriptions in posthog](../images/blog/activation-checklist-images/subscribe-in-posthog.png)
 

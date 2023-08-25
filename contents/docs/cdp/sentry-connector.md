@@ -1,6 +1,5 @@
 ---
 title: Sentry
-installUrl: https://app.posthog.com/project/apps?name=Sentry
 thumbnail: ../../cdp/thumbnails/sentry.svg
 tags:
     - sentry-connector
@@ -17,7 +16,7 @@ This way, debugging issues becomes a lot easier, and you can also correlate erro
 
 ## Requirements
 
-this requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
+This requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 
 Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
 
