@@ -240,7 +240,7 @@ WHERE timestamp > now() - interval 1 day
 - `concat`: Concatenates strings listed without separator.
 - `splitByChar`, `splitByString`, `splitByRegexp`, `splitByWhitespace`: splits a string into substring separated by a specified character, string, regular expression, or whitespace character respectively.
 - `match`: Return whether the string matches a regular expression pattern.
-- `replaceOne`, `replaceRegexpOne`: Replace the first occurrence of matching a substring or regular expression pattern respectively  with a replacement string. [/tutorials/hogql-breakdowns](/tutorials/hogql-breakdowns)
+- `replaceOne`, `replaceRegexpOne`: Replace the first occurrence of matching a substring or regular expression pattern respectively with a replacement string.
 - `trim`: Remove specified characters (or whitespace) from the start or end of a string.
 
 ```sql
