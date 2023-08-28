@@ -14,7 +14,7 @@ tags: ['hogql', 'trends']
 
 Every autocapture event contains data on the "location" of that event in your code. It does this by creating an element chain from the specific element a user interacted with like `<a>`, `<input>`, or `<button>` to highest-level components like a `<body>` or `<div>` tag.
 
-We can access the element chain by using the autocapture series, then using `elements_chain`  in our HogQL expression.
+We can access the element chain by using the autocapture series, then using `elements_chain`  in our [HogQL expression](/docs/hogql/expressions).
 
 ![Element chain](../images/tutorials/hogql-autocapture/element-chain.mp4)
 

@@ -10,7 +10,7 @@ tags: ['hogql', 'trends']
 
 HogQL opens limitless possibilities for how you can breakdown your trends, funnels, and more. This tutorial showcases some of the advanced breakdowns you can create using HogQL.
 
-To create a breakdown using [HogQL](/docs/product-analytics/hogql), create an insight then under "Breakdown by," click "Add breakdown," select HogQL from the options, and add your expression.
+To create a breakdown using [HogQL](/docs/product-analytics/hogql), create an insight then under "Breakdown by," click "Add breakdown," select HogQL from the options, and add your [expression](/docs/hogql/expressions).
 
 > To understand the full possibilities of HogQL, check out the [available functions in our docs](/docs/product-analytics/hogql#supported-clickhouse-functions) as well as the [events](https://app.posthog.com/data-management/events) and [properties](https://app.posthog.com/data-management/properties) lists from your PostHog instance.
 

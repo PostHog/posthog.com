@@ -1224,6 +1224,10 @@ export const docsMenu = {
                             url: '/docs/hogql/guide',
                         },
                         {
+                            name: 'Expressions',
+                            url: '/docs/hogql/expressions',
+                        },
+                        {
                             name: 'Supported ClickHouse functions',
                             url: '/docs/hogql/clickhouse-functions',
                         },
