@@ -1078,8 +1078,8 @@
 
         { "source": "/community/profiles/108", "destination": "/tim" },
         { "source": "/community/profiles/71", "destination": "/james" },
-        { "source": "/community/profiles/108", "destination": "/marius" },
-        { "source": "/community/profiles/1", "destination": "/raquel" },
+        { "source": "/community/profiles/1", "destination": "/marius" },
+        { "source": "/community/profiles/491", "destination": "/raquel" },
         { "source": "/community/profiles/90", "destination": "/jamesg" }
     ]
 }
