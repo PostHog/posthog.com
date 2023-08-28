@@ -1074,6 +1074,12 @@
         { "source": "/docs/data/data-management", "destination": "/docs/data" },
         { "source": "/docs/batch-exports", "destination": "/docs/cdp/batch-exports" },
         { "source": "/docs/batch-exports/s3", "destination": "/docs/cdp/batch-exports/s3" },
-        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" }
+        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" },
+
+        { "source": "/community/profiles/108", "destination": "/tim" },
+        { "source": "/community/profiles/71", "destination": "/james" },
+        { "source": "/community/profiles/108", "destination": "/marius" },
+        { "source": "/community/profiles/1", "destination": "/raquel" },
+        { "source": "/community/profiles/90", "destination": "/jamesg" }
     ]
 }
