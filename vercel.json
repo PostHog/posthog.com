@@ -1047,7 +1047,12 @@
         { "source": "/tutorials/tracking-teams", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/tutorials/revenue", "destination": "/tutorials" },
         { "source": "/tutorials/how-to-segment-users", "destination": "/tutorials/power-users" },
-        { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" }
+        { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" },
+        { "source": "/tim", "destination": "/community/profiles/108" },
+        { "source": "/marius", "destination": "/community/profiles/1" },
+        { "source": "/raquel", "destination": "/community/profiles/491" },
+        { "source": "/jamesg", "destination": "/community/profiles/90" },
+        { "source": "/jams", "destination": "/community/profiles/90" }
     ],
     "rewrites": [
         {
@@ -1074,13 +1079,6 @@
         { "source": "/docs/data/data-management", "destination": "/docs/data" },
         { "source": "/docs/batch-exports", "destination": "/docs/cdp/batch-exports" },
         { "source": "/docs/batch-exports/s3", "destination": "/docs/cdp/batch-exports/s3" },
-        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" },
-
-        { "source": "/tim", "destination": "/community/profiles/108" },
-        { "source": "/james", "destination": "/community/profiles/71" },
-        { "source": "/marius", "destination": "/community/profiles/1" },
-        { "source": "/raquel", "destination": "/community/profiles/491" },
-        { "source": "/jamesg", "destination": "/community/profiles/90" },
-        { "source": "/jams", "destination": "/community/profiles/90" }
+        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" }
     ]
 }
