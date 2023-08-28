@@ -30,6 +30,8 @@ HogQL expressions can access data like:
 
 They then use SQL functions to access, filter, modify, or aggregate the data. A full list of SQL functions are found in [supported ClickHouse functions](/docs/hogql/clickhouse-functions) and [supported aggregations](/docs/hogql/aggregations).
 
+> **Tip:** If you're having trouble getting results from you expression, try testing with a different visualization (trends table often works best) or break down your expression into pieces and test each one.
+
 ## Useful functions
 
 To help you get the most out of HogQL expressions, here are some of the most popular functions.
