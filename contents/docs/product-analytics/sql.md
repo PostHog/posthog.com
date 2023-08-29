@@ -23,7 +23,14 @@ SELECT *
 FROM events
 ```
 
-Common values to select are `*` (representing all), `event`, `timestamp`, `properties`, and functions. Add the `DISTINCT` clause to `SELECT` commands to keep only unique rows in query results.
+Common values to select are `*` (representing all), `event`, `timestamp`, `properties`, and functions. These values can be found in the data management [properties tab](https://app.posthog.com/data-management/properties) or inside tables in the [database tab](https://app.posthog.com/data-management/database). 
+
+Add the `DISTINCT` clause to `SELECT` commands to keep only unique rows in query results.
+
+```sql
+SELECT DISTINCT person_id
+FROM events
+```
 
 ### FROM
 
@@ -46,7 +53,7 @@ LEFT JOIN persons ON events.person_id = persons.id
 
 Use `WHERE` to filter rows based on specified conditions. These conditions can be:
 
-1. Comparison operators like `=`, `<`, or `≤`
+1. Comparison operators like `=`, `<`, or `>=`
 2. Logical operators like `AND`, `OR`, or `NOT`. These are often used to combine multiple conditions. 
 3. Functions like `toDate`, `today()`
 4. Clauses like `LIKE`, `IN`, `IS NULL`, `BETWEEN`
@@ -129,7 +136,7 @@ HAVING count() > 100
 
 ### WITH
 
-Use `WITH` to define a temporary result set that you can reference within a larger query. It helps break down complex queries into smaller parts. You can think of it as a temporary table and is similar to using a subquery in a `FROM` command.
+Use `WITH` to define a temporary result set that you can reference within a larger query. It helps break down complex queries into smaller parts. You can think of it as a function that returns a temporary table similar to using a subquery in a `FROM` command. The difference is that we query `WITH` subqueries each time they are used, potentially leading to slower queries.
 
 ```sql
 with first_query as (
