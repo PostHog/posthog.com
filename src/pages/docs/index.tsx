@@ -64,19 +64,9 @@ export const DocsIndex = () => {
                 <section className="mb-4 flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
                     <div className="flex-1 text-center sm:text-left">
                         <h2>New to PostHog?</h2>
-                        <p className="text-[15px]">
-                            The getting started guide covers adding PostHog to your app or site, sending events,
-                            identifying users, creating actions and insights, and assigning properties to users and
-                            users to groups.
+                        <p className="text-[17px]">
+                            Select a product from the list below to learn how to install PostHog and get started!
                         </p>
-                        <CallToAction
-                            to="/docs/getting-started/install"
-                            type="primary"
-                            size="md"
-                            className="!w-full sm:!w-auto"
-                        >
-                            Get started
-                        </CallToAction>
                     </div>
                     <aside>
                         <figure className="m-0">
@@ -92,13 +82,19 @@ export const DocsIndex = () => {
                     </aside>
                 </section>
 
-                <div className="flex gap-1 items-center mb-8">
-                    <LightBulb className="w-6 h-6 text-primary dark:text-primary-dark opacity-50" />
-                    <p className="text-sm m-0">
-                        <strong>Tip:</strong> Open search with <KeyboardShortcut text="/" /> , then{' '}
-                        <KeyboardShortcut text="Tab" size="sm" /> to search docs
-                    </p>
-                </div>
+                <section className="mb-4 lg:flex-row gap-4 lg:gap-8">
+                    <h2>Products</h2>
+                    <List
+                        className="grid md:grid-cols-2 gap-1"
+                        items={quickLinks.map(({ icon, name, to, description, color }) => ({
+                            label: name,
+                            url: to,
+                            icon,
+                            description,
+                            iconColor: color,
+                        }))}
+                    />
+                </section>
 
                 <section className="grid md:grid-cols-3 gap-4 mb-8">
                     <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
@@ -134,20 +130,6 @@ export const DocsIndex = () => {
                             Explore
                         </CallToAction>
                     </div>
-                </section>
-
-                <section className="mb-4 lg:flex-row gap-4 lg:gap-8">
-                    <h2>Products</h2>
-                    <List
-                        className="grid md:grid-cols-2 gap-1"
-                        items={quickLinks.map(({ icon, name, to, description, color }) => ({
-                            label: name,
-                            url: to,
-                            icon,
-                            description,
-                            iconColor: color,
-                        }))}
-                    />
                 </section>
             </PostLayout>
         </Layout>

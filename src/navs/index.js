@@ -889,46 +889,7 @@ export const docsMenu = {
                     icon: 'Info',
                 },
                 {
-                    name: 'New to PostHog?',
-                },
-                {
-                    name: 'Start here',
-                    url: '/docs/getting-started/install',
-                    icon: 'Flag',
-                    children: [
-                        {
-                            name: 'Install PostHog',
-                            url: '/docs/getting-started/install?tab=snippet',
-                        },
-                        {
-                            name: 'Send events',
-                            url: '/docs/getting-started/send-events',
-                        },
-                        {
-                            name: 'Identify users',
-                            url: '/docs/getting-started/identify-users',
-                        },
-                        {
-                            name: 'User properties',
-                            url: '/docs/getting-started/user-properties',
-                        },
-                        {
-                            name: 'Actions & insights',
-                            url: '/docs/getting-started/actions-and-insights',
-                        },
-                        {
-                            name: 'Group analytics',
-                            url: '/docs/getting-started/group-analytics',
-                        },
-                        {
-                            name: 'Next steps',
-                            url: '/docs/getting-started/next-steps',
-                        },
-                        {
-                            name: 'Enabling beta features',
-                            url: '/docs/getting-started/enable-betas',
-                        },
-                    ],
+                    name: 'SDKs and guides',
                 },
                 {
                     name: 'SDKs',
@@ -1128,6 +1089,10 @@ export const docsMenu = {
                         {
                             name: 'Browser extensions',
                             url: '/docs/advanced/browser-extension',
+                        },
+                        {
+                            name: 'Enabling beta features',
+                            url: '/docs/advanced/enable-betas',
                         },
                     ],
                 },

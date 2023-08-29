@@ -699,6 +699,38 @@
             "destination": "/docs/getting-started/send-events"
         },
         {
+            "source": "/docs/getting-started/start-here",
+            "destination": "/docs/getting-started/install"
+        },
+        {
+            "source": "/docs/getting-started/send-events",
+            "destination": "/docs/product-analytics/capture-events"
+        },
+        {
+            "source": "/docs/getting-started/actions-and-insights",
+            "destination": "/docs/product-analytics/insights"
+        },
+        {
+            "source": "/docs/getting-started/group-analytics",
+            "destination": "/docs/product-analytics/group-analytics"
+        },
+        {
+            "source": "/docs/getting-started/identify-users",
+            "destination": "/docs/product-analytics/identify"
+        },
+        {
+            "source": "/docs/getting-started/user-properties",
+            "destination": "/docs/product-analytics/user-properties"
+        },
+        {
+            "source": "/docs/getting-started/next-steps",
+            "destination": "/docs/product-analytics/installation"
+        },
+        {
+            "source": "/docs/getting-started/install",
+            "destination": "/docs"
+        },
+        {
             "source": "/enterprise",
             "destination": "/contact-sales?edition=enterprise"
         },

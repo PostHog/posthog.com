@@ -5,10 +5,13 @@ sidebar: Docs
 showTitle: true
 ---
 
-Product OS is the foundation that all PostHog products are built on. It powers:
+Product OS is the core foundation that powers all PostHog [products](/products) and enables to naviate your PostHog experience effectively. It includes:
 
-- Our core products
-- CDP data connections (sources & destinations)
-- Data warehouse and warehouse connections
-- API
-- 3rd party apps
+- [Data management](/docs/data)
+- [HogQL](/docs/hogql)
+- [The PostHog toolbar](/docs/toolbar)
+- [3rd party apps](/docs/apps)
+- [Our API](/docs/api)
+- [Webhooks](/docs/webhooks)
+
+> **Tip:** If you're new to PostHog, the best way to get started is to read the docs for the product you are most interested in.
