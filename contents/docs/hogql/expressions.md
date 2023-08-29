@@ -20,15 +20,15 @@ HogQL expressions enable you to directly access, modify, and aggregate data in P
 
 HogQL expressions can access data like:
 
-- event `properties`
-- person `properties`
+- event properties
+- [person properties](/docs/product-analytics/user-properties)
 - `event`
 - `elements_chain`
 - `timestamp`
 - `distinct_id`
 - `person_id`
 
-They then use SQL functions to access, filter, modify, or aggregate the data. A full list of SQL functions are found in [supported ClickHouse functions](/docs/hogql/clickhouse-functions) and [supported aggregations](/docs/hogql/aggregations).
+They then use SQL functions to access, filter, modify, or aggregate the data. A full list of SQL functions are found in our [supported ClickHouse functions](/docs/hogql/clickhouse-functions) and [supported aggregations](/docs/hogql/aggregations) docs.
 
 > **Tip:** If you're having trouble getting results from you expression, try testing with a different visualization (trends table often works best) or break down your expression into pieces and test each one.
 
