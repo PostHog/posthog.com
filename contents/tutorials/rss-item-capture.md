@@ -12,19 +12,19 @@ RSS is a popular format for providing feeds of content. In this tutorial, we sho
 
 ## Creating our capture function in Val Town
 
-After signing up for [Val Town](val.town), you can go to your workspace and write JavaScript functions. We  start by writing a function to capture an event in PostHog using the API.
+After signing up for [Val Town](val.town), you can go to your workspace and start creating JavaScript functions. We start by writing a function to capture an event using the [PostHog API](/docs/api).
 
 To make this function reusable, we need a `key`, `event`, `properties`, and `distinct_id`. It uses these to create the body of the request and then send a fetch request to `https://app.posthog.com/capture/`. Altogether, this looks like this:
 
 <iframe src="https://www.val.town/embed/ianvph.postHogAPICapture" height="630" frameBorder="0" allowFullScreen></iframe>
 
-> **Note:** you can [read and fork the code on Val Town](https://www.val.town/v/ianvph.postHogAPICapture). You can also call the code from your own val by using `@ianvph.postHogAPICapture();` with an object containing your event data.
+> **Note:** you can [read and fork the code from this tutorial on Val Town](https://www.val.town/v/ianvph.postHogAPICapture). You can also call the code from your own val by using `@ianvph.postHogAPICapture();` with an object containing your event data.
 
-## Creating a GitHub release tracker
+## How to create a GitHub release tracker
 
 Next, we show how to capture data from RSS feeds by polling a GitHub repo’s feed for new releases. When there is a new release, we capture a new event in PostHog.
 
-To do this, we fetch the release feed URL that looks like this `https://github.com/posthog/posthog/releases.atom`. We can then parse the XML using a function someone else has created on Val Town and get the first entry from the feed.
+To do this, we fetch the release feed URL that looks like `https://github.com/posthog/posthog/releases.atom`. To get the first entry from the feed, we can parse the XML using a function created by Steve Krouse on Val Town.
 
 ```js
 export async function gitHubReleaseTracker() {
@@ -54,7 +54,7 @@ export async function gitHubReleaseTracker() {
 }
 ```
 
-Finally, if the entry is new, we create properties for the event and then the event request object. We then use the `postHogAPICapture()` function we created earlier to capture the event and set the `newestReleaseId` to the current one.
+If the entry is new, we create properties for the event and then the event request object. We then use the `postHogAPICapture()` function we created earlier to capture the event and set the `newestReleaseId` to the current one.
 
 ```js
 export async function gitHubReleaseTracker() {
