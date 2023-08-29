@@ -1,6 +1,6 @@
 ---
 title: How to capture new RSS items in PostHog (releases, blogs, status)
-date: 2023-08-25
+date: 2023-08-29
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -8,21 +8,23 @@ featuredImage: ../images/tutorials/banners/tutorial-6.png
 tags: ['events']
 ---
 
-RSS is a popular format for providing feeds of content. In this tutorial, we show you how to use [val.town](http://val.town) to poll RSS feeds, process the feed, and capture new items from GitHub releases, status pages, and blogs as events in PostHog.
+RSS is a popular format for providing feeds of content. For example, GitHub uses it to provide feeds of releases, blogs provide feeds of new posts, and status pages provide feeds of incidents
+
+We can capture events from these feeds by polling them, checking for new entries, and then capturing them into PostHog. This is exactly what we do in this tutorial, with the help of [Val Town](https://www.val.town/), a platform for writing, running, and scheduling JavaScript functions in your browser. 
 
 ## Creating our capture function in Val Town
 
 After signing up for [Val Town](val.town), you can go to your workspace and start creating JavaScript functions. We start by writing a function to capture an event using the [PostHog API](/docs/api).
 
-To make this function reusable, we need a `key`, `event`, `properties`, and `distinct_id`. It uses these to create the body of the request and then send a fetch request to `https://app.posthog.com/capture/`. Altogether, this looks like this:
+Since we will use this function to capture events from multiple feeds, we make it generic. We write it as a function that takes an object ccontaining a `key`, `event`, `properties`, and `distinct_id`. It uses these to create the body of the request and then send a fetch request to `https://app.posthog.com/capture/` (or `https://eu.posthog.com/capture/`). Altogether, this looks like this:
 
 <iframe src="https://www.val.town/embed/ianvph.postHogAPICapture" height="630" frameBorder="0" allowFullScreen></iframe>
 
-> **Note:** you can [read and fork the code from this tutorial on Val Town](https://www.val.town/v/ianvph.postHogAPICapture). You can also call the code from your own val by using `@ianvph.postHogAPICapture();` with an object containing your event data.
+> **Note:** you can [read and fork the code from this tutorial on Val Town](https://www.val.town/v/ianvph.postHogAPICapture). You can also call the code from your own val by using `@ianvph.postHogAPICapture();` with the object containing your event data.
 
 ## How to create a GitHub release tracker
 
-Next, we show how to capture data from RSS feeds by polling a GitHub repo’s feed for new releases. When there is a new release, we capture a new event in PostHog.
+Next, we create our function to capture data from a GitHub repo’s RSS feed for new releases. We poll the RSS feed on a schedule (which Val Town makes easy), and when there is a new release, we capture a new event in PostHog using the capture function we created.
 
 To do this, we fetch the release feed URL that looks like `https://github.com/posthog/posthog/releases.atom`. To get the first entry from the feed, we can parse the XML using a function created by Steve Krouse on Val Town.
 
@@ -75,7 +77,7 @@ export async function gitHubReleaseTracker() {
 }
 ```
 
-Finally, we set the function to run every day by clicking the three dots next to "Save" and clicking "Schedule this val."
+Finally, we schedule the function to run every day by clicking the three dots next to "Save" and clicking "Schedule this val."
 
 <iframe src="https://www.val.town/embed/ianvph.gitHubReleaseTracker" height="705" frameBorder="0" allowFullScreen></iframe>
 
@@ -107,7 +109,7 @@ The final feed to track is the status of the apps we rely on. Many status pages 
 3. Check if it is new.
 4. Capture an event if it is new.
 
-For [`https://status.posthog.com/history.rss`](https://status.posthog.com/history.rss), this looks like this: 
+For `https://status.posthog.com/history.rss`, this looks like this: 
 
 <iframe src="https://www.val.town/embed/ianvph.posthogStatusTracker" height="715" frameBorder="0" allowFullScreen></iframe>
 
