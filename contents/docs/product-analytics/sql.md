@@ -6,14 +6,14 @@ availability:
     enterprise: full
 ---
 
-SQL insights enable you to directly access data in PostHog using SQL queries.
+SQL insights enable you to directly access data in PostHog using SQL queries. They're powered by [HogQL](/docs/hogql).
 
-> SQL queries in PostHog don’t require the trailing semi-colon (`;`) of traditional SQL queries.
 
 ## SQL commands
 
 You create SQL queries out of a list of commands that shape what data, filters, aggregations, and ordering we want to see. 
 
+> SQL queries in PostHog don’t require the trailing semi-colon (`;`) of traditional SQL queries.
 ### SELECT
 
 Use `SELECT` to select data (usually columns, transformations, or aggregations) from one or more tables in the database.
@@ -27,7 +27,7 @@ Common values to select are `*` (representing all), `event`, `timestamp`, `prope
 
 ### FROM
 
-Use `FROM` to select the database table to run the queries on. In PostHog, examples include `events`, `groups`, `raw_session_replay_events`, and more listed in the [data management database tab](https://app.posthog.com/data-management/database) in your PostHog instance.
+Use `FROM` to select the database table to run the queries on. In PostHog, examples include `events`, `groups`, `raw_session_replay_events`, and more listed in the [data management database tab](https://app.posthog.com/data-management/database) in PostHog.
 
 ```sql
 SELECT session_id, min_first_timestamp, click_count 
@@ -200,7 +200,7 @@ Specialized `JSONExtract` functions exist for different data types including:
 
 ### Array
 
-- `arrayElement(arr, n)`: Gets the element with the index of n from the array `arr`.
+- `arrayElement(arr, n)`: Retrieves the element with the index of n from the array `arr`.
 - `arrayJoin(arr)`: Takes a row and generates multiple rows for the number of elements in the array. It copies all the column values, except the column where this function is applied. It replaces the applied column with the corresponding array value.
 
 ```sql
