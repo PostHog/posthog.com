@@ -5,7 +5,7 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```node
-posthog.capture({
+client.capture({
     distinctId: 'distinct_id_of_the_user',
     event: 'user signed up"',
 })    
