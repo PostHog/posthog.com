@@ -570,6 +570,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Product announcements',
+                        url: '/handbook/growth/marketing/product-announcements',
+                    },
+                    {
                         name: 'Content & SEO',
                         url: '/handbook/growth/marketing/blog',
                     },
