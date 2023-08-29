@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
@@ -7,35 +7,94 @@ import List from 'components/List'
 import ResourceItem from 'components/Docs/ResourceItem'
 import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
+import Modal from 'components/Modal'
+import HubSpotForm from 'components/HubSpotForm'
+import { Close2 } from 'components/Icons'
+import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { MenuContainer } from 'components/PostLayout/MobileNav'
 
-export const Intro = ({ image = true }) => (
-    <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row gap-8 pt-2 mb-8">
-        <div className="p-4 md:p-8">
-            <h1 className="text-4xl mt-0 mb-2 flex items-center space-x-2">
-                <span>Data warehouse</span>
-                <span className="text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-medium rounded-sm px-1 py-0.5 inline-block uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50">
-                    Beta
-                </span>
-            </h1>
-            <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-                Keep all of your important data in one place
-            </h3>
-            <CallToAction to="/docs/data-warehouse/setup">Get started</CallToAction>
-        </div>
+const AccessForm = () => {
+    return (
+        <HubSpotForm
+            buttonOptions={{ size: 'lg' }}
+            formID="58118087-6363-4889-b2ca-18e5e10cea1f"
+            customFields={{
+                maus: {
+                    type: 'radioGroup',
+                    options: [
+                        { label: 'Under 10k/mo', value: 10_000 },
+                        { label: '10k-50k/mo', value: 50_000 },
+                        { label: '50k-100k/mo', value: 100_000 },
+                        { label: '100k-500k/mo', value: 500_000 },
+                        { label: '500k-1m/mo', value: 100_000_000 },
+                        { label: 'More than 1m/mo', value: 100_000_000_000 },
+                    ],
+                },
+            }}
+        />
+    )
+}
 
-        {image && (
-            <figure className="m-0 p-0">
-                <StaticImage
-                    alt=""
-                    placeholder="none"
-                    quality={100}
-                    className=""
-                    src="../../../contents/images/products/data-warehouse/data-warehouse.png"
-                />
-            </figure>
-        )}
-    </div>
-)
+export const Intro = ({ image = true }) => {
+    const breakpoints = useBreakpoint()
+    const [modalOpen, setModalOpen] = useState(false)
+    return (
+        <>
+            {breakpoints.md ? (
+                modalOpen && (
+                    <MenuContainer setOpen={(open) => setModalOpen(!!open)}>
+                        <AccessForm />
+                    </MenuContainer>
+                )
+            ) : (
+                <Modal open={modalOpen} setOpen={setModalOpen}>
+                    <div onClick={() => setModalOpen(false)} className="absolute w-full h-full">
+                        <div
+                            className="max-w-2xl bg-accent dark:bg-accent-dark relative w-full p-5 pt-12 ml-auto h-full border-l border-border dark:border-dark"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="absolute right-5 top-3">
+                                <button onClick={() => setModalOpen(false)}>
+                                    <Close2
+                                        className="w-6 h-6 opacity-60 hover:opacity-100 transition-opacity"
+                                        fill="currentColor"
+                                    />
+                                </button>
+                            </div>
+                            <AccessForm />
+                        </div>
+                    </div>
+                </Modal>
+            )}
+            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row gap-8 pt-2 mb-8">
+                <div className="p-4 md:p-8">
+                    <h1 className="text-4xl mt-0 mb-2 flex items-center space-x-2">
+                        <span>Data warehouse</span>
+                        <span className="text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-medium rounded-sm px-1 py-0.5 inline-block uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50">
+                            Beta
+                        </span>
+                    </h1>
+                    <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+                        Keep all of your important data in one place
+                    </h3>
+                    <CallToAction onClick={() => setModalOpen(true)}>Join the waitlist</CallToAction>
+                </div>
+
+                {image && (
+                    <figure className="m-0 p-0">
+                        <StaticImage
+                            alt=""
+                            placeholder="none"
+                            quality={100}
+                            className=""
+                            src="../../../contents/images/products/data-warehouse/data-warehouse.png"
+                        />
+                    </figure>
+                )}
+            </div>
+        </>
+    )
+}
 
 export const Content = ({ quickLinks = false }) => {
     return (
