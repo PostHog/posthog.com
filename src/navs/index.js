@@ -148,9 +148,15 @@ export const handbookSidebar = [
                 url: '/handbook/small-teams/marketing',
             },
             {
-                name: 'People & Ops',
+                name: 'People',
                 url: '/handbook/small-teams/people',
             },
+
+            {
+                name: 'Ops',
+                url: '/handbook/small-teams/ops',
+            },
+
             {
                 name: 'Pipeline',
                 url: '/handbook/small-teams/pipeline',
@@ -267,7 +273,7 @@ export const handbookSidebar = [
         children: [
             {
                 name: 'Finance',
-                url: '/handbook/people/finance',
+                url: '/handbook/ops/finance',
             },
             {
                 name: 'Merch store',
