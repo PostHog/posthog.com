@@ -2099,16 +2099,6 @@ export const docsMenu = {
                     icon: 'Features',
                     color: 'purple',
                 },
-                {
-                    name: 'Surveys',
-                    url: '/docs/surveys/manual',
-                    icon: 'Message',
-                    color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
             ],
         },
         {
@@ -2184,6 +2174,51 @@ export const docsMenu = {
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'Flag',
                     color: 'yellow',
+                },
+            ],
+        },
+        {
+            name: 'Surveys',
+            url: '/docs/surveys',
+            icon: 'Message',
+            color: 'blue',
+            children: [
+                {
+                    name: 'Surveys',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/surveys',
+                    icon: 'Home',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Setup',
+                    url: '/docs/surveys/setup',
+                    icon: 'Toggle',
+                    color: 'red',
+                },
+                {
+                    name: 'Creating a survey',
+                    url: '/docs/surveys/new',
+                    icon: 'Features',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Targeting',
+                    url: '/docs/surveys/targeting',
+                    icon: 'Target',
+                    color: 'green',
+                },
+                {
+                    name: 'Survey events',
+                    url: '/docs/surveys/events',
+                    icon: 'Send',
+                    color: 'purple',
                 },
             ],
         },

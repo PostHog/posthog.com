@@ -1052,7 +1052,9 @@
         { "source": "/marius", "destination": "/community/profiles/1" },
         { "source": "/raquel", "destination": "/community/profiles/491" },
         { "source": "/jamesg", "destination": "/community/profiles/90" },
-        { "source": "/jams", "destination": "/community/profiles/90" }
+        { "source": "/jams", "destination": "/community/profiles/90" },
+
+        { "source": "/docs/surveys/manual", "destination": "/docs/surveys" }
     ],
     "rewrites": [
         {
