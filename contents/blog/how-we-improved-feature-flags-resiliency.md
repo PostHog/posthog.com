@@ -122,13 +122,5 @@ Currently, we're thinking of introducing a separate PgBouncer pool for feature f
 
 More long term, having this sync python service which can't handle app level timeouts well has been troublesome. We're considering rewriting this with an async paradigm that's much more efficient and allows for easily setting timeouts in the app, so we don't have to rely on the database level settings, and can once again share the connection pool with the rest of the app, rather than creating separate sub-pools.
 
----
-
-
 The next step is to make sure flags continue to remain reliable with all the exciting features we have in the works. Our main goal is to ensure none of these new features detract from reliability, since when it comes to flag, reliability is a lot more important than that shiny new feature.
-
-
-
-
-
 
