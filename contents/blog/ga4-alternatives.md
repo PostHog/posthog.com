@@ -512,7 +512,7 @@ But, if you just want basic website analytics, it gets the job done, and won't a
 ![vercel analytics](../images/blog/ga4-alternatives/vercel.png)
 
 - **Best for:** Content and marketing websites
-- **Tracking method:** Session-based (with custom events)
+- **Tracking method:** Event-based
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-red text-lg">✖</span>
 
