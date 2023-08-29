@@ -1,0 +1,100 @@
+---
+title: Adding feature flag code
+sidebar: Docs
+showTitle: true
+availability:
+    free: partial
+    selfServe: full
+    enterprise: full
+---
+
+Once you've created your feature flag in PostHog, the next step is to add your code:
+
+import Tab from "components/Tab"
+import Frameworks from "../integrate/\_snippets/frameworks.mdx"
+import APIFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-api.mdx'
+import WebFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-web.mdx'
+import ReactFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-react.mdx'
+import NodeFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-node.mdx'
+import PythonFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-python.mdx'
+import PHPFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-php.mdx'
+import RubyFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-ruby.mdx'
+import GoFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-go.mdx'
+import ReactNativeFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-react-native.mdx'
+import AndroidFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-android.mdx'
+import IOSFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-ios.mdx'
+import FlutterFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-flutter.mdx'
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Elixir', 'Flutter', 'api']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>React</Tab>
+        <Tab>Node.js</Tab>
+        <Tab>Python</Tab>
+        <Tab>PHP</Tab>
+        <Tab>Ruby</Tab>
+        <Tab>Go</Tab>
+        <Tab>React Native</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+        <Tab>Flutter</Tab>
+        <Tab>Java</Tab>
+        <Tab>Rust</Tab>
+        <Tab>Elixir</Tab>
+        <Tab>API</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <WebFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <NodeFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PHPFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <RubyFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GoFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactNativeFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AndroidFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <IOSFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+           <FlutterFeatureFlagsCode />
+        </Tab.Panel>
+        <Tab.Panel>
+            <blockquote class='warning-note'>
+                Feature flags are not supported yet in our <a href="/docs/libraries/java">Java SDK</a>. However, you can integrate them into your project by using the <a href="/docs/feature-flags/adding-feature-flag-code?tab=api">PostHog API</a>.
+            </blockquote>
+        </Tab.Panel>
+        <Tab.Panel>
+            <blockquote class='warning-note'>
+                Feature flags are not supported yet in our community-maintained <a href="/docs/libraries/rust">Rust SDK</a>. However, you can integrate them into your project by using the <a href="/docs/feature-flags/adding-feature-flag-code?tab=api">PostHog API</a>.
+            </blockquote>
+        </Tab.Panel>
+        <Tab.Panel>
+            <blockquote class='warning-note'>
+                Feature flags are not supported yet in our <a href="/docs/libraries/elixir">Elixir SDK</a>. However, you can integrate them into your project by using the <a href="/docs/feature-flags/adding-feature-flag-code?tab=api">PostHog API</a>.
+            </blockquote>
+        </Tab.Panel>
+        <Tab.Panel>
+            <APIFeatureFlagsCode />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

@@ -49,7 +49,7 @@ Phantom’s failure rate fell by 90% as a result of this switch and the team now
     size="md"
     name="Francesco Agosti"
     title="CTO & Co-founder, Phantom"
-    quote={`“Feature flags are really, really critical for us and you don’t see them as a feature in other analytics tools. They very valuable though, because you can often use feature flag data to make other product decisions.”`}
+    quote={`“Feature flags are really, really critical for us and you don’t see them as a feature in other analytics tools. They are very valuable though, because you can often use feature flag data to make other product decisions.”`}
 />
 </BorderWrapper>
 

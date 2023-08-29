@@ -63,7 +63,8 @@ if (typeof window !== 'undefined') {
     // Enable debug mode in development
     loaded: (posthog) => {
       if (process.env.NODE_ENV === 'development') posthog.debug()
-    }
+    },
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
 }
 
@@ -106,7 +107,8 @@ import { useEffect } from "react";
 
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
 }
 
@@ -145,7 +147,8 @@ import { useEffect } from "react";
 
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false // Disable automatic pageview capture, as we capture manually
   })
 }
 
@@ -242,9 +245,9 @@ You can also read [the full posthog-js documentation](/docs/libraries/js) for al
 
 ## Server-side analytics
 
-Server-side rendering  enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
+Server-side rendering enables you to render pages on the server instead of the client. This can be useful for SEO, performance, and user experience.
 
-To integrate PostHog into your Next.js app on the server-side you should use the [Node SDK](/docs/libraries/node).
+To integrate PostHog into your Next.js app on the server-side, you can use the [Node SDK](/docs/libraries/node).
 
 First, install the `posthog-node` library:
 
@@ -323,7 +326,9 @@ export async function getServerSideProps(ctx) {
 
 ### App router
 
-For the app router, we can initialize the `posthog-node` SDK in every component we need it, or we can create a `PostHogClient` component to import into files like this:
+For the app router, we can initialize the `posthog-node` SDK once with a `PostHogClient` function, and import it into files.
+
+This enables us to send events and fetch data from PostHog on the server – without making client-side requests.
 
 ```js
 // app/posthog.js
@@ -332,12 +337,15 @@ import { PostHog } from 'posthog-node'
 export default function PostHogClient() {
   const posthogClient = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    flushAt: 1,
+    flushInterval: 0
   })
   return posthogClient
 }
 ```
 
-With this component, we can both send events in the body of a component, and get data from PostHog (such as feature flag evaluations) using the Next.js `getData()` function.
+> **Note:** Because our server-side `posthog-node` initializations are short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. `flushAt` sets how many how many capture calls we should flush the queue (in one batch). `flushInterval` sets how many milliseconds we should wait before flushing the queue. Setting them to the lowest number ensures events are sent immediately and not batched. We also need to call `await posthog.shutdownAsync()` once done.
+
 
 ```js
 import Link from 'next/link'
@@ -345,12 +353,11 @@ import PostHogClient from '../posthog'
 
 export default async function About() {
 
-  const flags = await getData();
-
-  posthog.capture({
-    distinctId: 'user_distinct_id', // replace with a user's distinct ID
-    event: 'server-side event'
-  })
+  const posthog = PostHogClient()
+  const flags = await posthog.getAllFlags(
+    'user_distinct_id' // replace with a user's distinct ID
+  );
+  await posthog.shutdownAsync()
 
   return (
     <main>
@@ -362,19 +369,11 @@ export default async function About() {
     </main>
   )
 }
-
-async function getData() {
-  const posthog = PostHogClient()
-  const flags = await posthog.getAllFlags(
-    'user_distinct_id' // replace with a user's distinct ID
-  );
-  return flags
-}
 ```
 
 ## Configuring a reverse proxy to PostHog
 
-To improve the reliability of client-side tracking and make it less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. See [deploying a reverse proxy using Next.js rewrites](/docs/advanced/proxy/nextjs) or [using Vercel writes](/docs/advanced/proxy/vercel).
+To improve the reliability of client-side tracking and make requests less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. Read more about deploying a reverse proxy using [Next.js rewrites](/docs/advanced/proxy/nextjs), [Next.js middleware](/docs/advanced/proxy/nextjs-middleware), and [Vercel rewrites](/docs/advanced/proxy/vercel).
 
 ## Further reading
 

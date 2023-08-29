@@ -1,0 +1,74 @@
+There are 2 steps to implement feature flags in Python:
+
+### Step 1: Evaluate the feature flag value
+
+#### Boolean feature flags
+
+```python
+is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user')
+
+if is_my_flag_enabled:
+    # Do something differently for this user
+    # Optional: fetch the payload
+    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')
+```
+
+#### Multivariate feature flags
+
+```python
+enabled_variant = posthog.get_feature_flag('flag-key', 'distinct_id_of_your_user')
+
+if enabled_variant == 'variant-key': # replace 'variant-key' with the key of your variant
+    # Do something differently for this user
+    # Optional: fetch the payload
+    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')
+```
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+
+<IncludePropertyInEvents />
+
+There are two methods you can use to include feature flag information in your events:
+
+#### Method 1: Include the `$feature/feature_flag_name` property
+
+ In the event properties, include `$feature/feature_flag_name: variant_key`:
+
+```python
+posthog.capture(
+    'distinct_id_of_your_user',
+    'event_name',
+    {
+        '$feature/feature-flag-key': 'variant-key' # replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
+    }
+)
+```
+
+#### Method 2: Set `send_feature_flags` to `true`
+
+The `capture()` method has an optional argument `send_feature_flags`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
+
+Note that by doing this, PostHog will make an additional request to fetch feature flag information before capturing the event. So this method is only recommended if you don't mind the extra API call and delay.
+
+```python
+posthog.capture(
+    'distinct_id_of_your_user',
+    'event_name',
+    send_feature_flags=True
+)
+```
+
+### Fetching all flags for a user
+
+You can fetch all flag values for a single user by calling `get_all_flags()` or `get_all_flags_and_payloads()`.
+
+This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
+
+```python  
+posthog.get_all_flags('distinct_id_of_your_user')
+posthog.get_all_flags_and_payloads('distinct_id_of_your_user') 
+```
+
+import PythonOverrideServerProperties from './override-server-properties/python.mdx'
+
+<PythonOverrideServerProperties />

@@ -163,21 +163,12 @@ const Post = ({
 
 const getCategoryParams = (root) => (root !== 'posts' ? { filters: { post_category: { folder: { $eq: root } } } } : {})
 
-const getCategoryLabels = (selectedCategories) =>
-    selectedCategories?.length <= 0
-        ? 'All posts'
-        : selectedCategories.map(({ attributes: { label } }) => pluralize(label)).join(', ')
+const getCategoryLabels = (selectedCategories) => {
+    const categories = Object.keys(selectedCategories)
+    return categories?.length <= 0 ? 'All posts' : categories.map((label) => pluralize(label)).join(', ')
+}
 
-function PostsListing({
-    articleView,
-    posts,
-    isLoading,
-    fetchMore,
-    setParams,
-    root,
-    setSelectedCategories,
-    selectedCategories,
-}) {
+function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelectedCategories, selectedCategories }) {
     const breakpoints = useBreakpoint()
 
     return articleView && breakpoints.md ? null : (
@@ -185,13 +176,18 @@ function PostsListing({
             <div className="my-4 flex justify-between space-x-2">
                 <h5 className="m-0 line-clamp-1 leading-[2]">{getCategoryLabels(selectedCategories)}</h5>
                 <Categories
-                    setParams={setParams}
                     setSelectedCategories={setSelectedCategories}
                     selectedCategories={selectedCategories}
                     root={root}
                 />
             </div>
-            <div className="after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative">
+            <div
+                className={
+                    articleView
+                        ? 'after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative'
+                        : ''
+                }
+            >
                 <ul
                     className={` list-none p-0 m-0 flex flex-col space-y-4 snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
                         articleView && !breakpoints.md ? 'h-[80vh] overflow-auto' : ''
@@ -310,7 +306,7 @@ export default function Posts({ children, articleView }) {
     const root = pathname.split('/')[1]
     const [params, setParams] = useState(getCategoryParams(root))
     const { posts, isLoading, fetchMore, mutate } = usePosts({ params })
-    const [selectedCategories, setSelectedCategories] = useState([])
+    const [selectedCategories, setSelectedCategories] = useState({})
 
     const handleNewPostSubmit = () => {
         setNewPostModalOpen(false)
@@ -323,6 +319,38 @@ export default function Posts({ children, articleView }) {
             didMount.current = true
         }
     }, [pathname])
+
+    useEffect(() => {
+        const tags = []
+        const categories = []
+        Object.keys(selectedCategories).forEach((category) => {
+            if (selectedCategories[category].length <= 0) {
+                categories.push(category)
+            } else {
+                selectedCategories[category].forEach((tag) => tags.push(tag))
+            }
+        })
+        setParams({
+            filters: {
+                $or: [
+                    {
+                        post_category: {
+                            label: {
+                                $in: categories,
+                            },
+                        },
+                    },
+                    {
+                        post_tag: {
+                            label: {
+                                $in: tags,
+                            },
+                        },
+                    },
+                ],
+            },
+        })
+    }, [selectedCategories])
 
     return (
         <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
@@ -384,7 +412,6 @@ export default function Posts({ children, articleView }) {
                             selectedCategories={selectedCategories}
                             setSelectedCategories={setSelectedCategories}
                             root={root}
-                            setParams={setParams}
                             fetchMore={fetchMore}
                             posts={posts}
                             isLoading={isLoading}

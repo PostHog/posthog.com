@@ -259,7 +259,7 @@ Mixpanel is purely focused on product analytics, going so far as to shut down ot
 
 2. **Single tool vs all-in-one:** While it offers integrations with third-party A/B testing, feature flag, and session replay tools, Mixpanel doesn't offer much outside typical product analytics features like event tracking and visualization. PostHog integrates all these features into one platform.
 
-3. **Dev tool integrations:** As a platform built to engineers, PostHog offer numerous integrations with popular dev tools, such as Sentry, GitHub, GitLab, and PagerDuty.
+3. **Dev tool integrations:** As a platform built to engineers, PostHog offer numerous integrations with popular dev tools, such as Sentry, GitHub, and GitLab.
 
 ### What people like about Mixpanel
 

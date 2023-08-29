@@ -24,6 +24,7 @@ import {
     User,
     Funnels,
     Trends,
+    Message,
 } from '@posthog/icons'
 
 import { Megaphone, SparksJoy } from 'components/NotProductIcons'
@@ -67,6 +68,8 @@ export const topicIcons = {
     uncategorized: Ellipsis,
     sdks: API,
     'community spotlight': Megaphone,
+    surveys: Message,
+    survey: Message,
 }
 
 export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
