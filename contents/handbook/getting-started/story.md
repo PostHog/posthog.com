@@ -13,13 +13,14 @@ showTitle: true
 
 ### Other companies
 
-* Atlassian - multi product, inbound, dev centric company, totally dominant in their categories
+* Atlassian - multi product, inbound, dev centric company, totally dominant in their categories, scaled way beyond $1bn
 * AWS - multi product, pricing model, ux (!)
 * Pager Duty - pricing model, product led growth
 * Hubspot - built a $25bn company despite competing with Salesforce
-* GitLab - whilst we run _very_ differently and have a different business model, we were inspired by their transparency.
-* Sentry - branding and bottom up approach.
+* GitLab - whilst we run _very_ differently and have a different business model, we were inspired by their transparency
+* Sentry - branding and bottom up approach
 * Algolia - developers doing marketing
+* GitHub - enterprise go to market is 200 developers forcing their company to buy us
 
 ## Timeline
 

@@ -39,16 +39,15 @@ _Chapter 10_
 _Chapter 11_
 # [How we got here](story)
 
-
-_Chapter 4_
+_Chapter 12_
 # Where are we now
 
-Maybe put revenue charts in
+- list the products
+- revenue growth chart
+- current priorities
 
-_Chapter 5_
-# Where are we going?
-Are we going to sell?
-Secondaries over selling
+_Chapter 13_
+# [Where are we going?](future)
 $100M by 2026, working backwards
 
 _Chapter 6_
