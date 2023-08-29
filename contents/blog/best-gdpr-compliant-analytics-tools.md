@@ -223,7 +223,7 @@ While it's only available to Vercel customers, Vercel Web Analytics is ideal if 
 - Supports custom events
 - No cookie banners needed
 
-### Countly and GDPR compliance
+#### Vercel Web Analytics and GDPR compliance
 
 - **Open Source:** <span className="text-red text-lg">✖</span>
 - **Self Hosting:** <span className="text-red text-lg">✖</span>
