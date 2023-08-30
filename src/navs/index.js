@@ -570,6 +570,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Product announcements',
+                        url: '/handbook/growth/marketing/product-announcements',
+                    },
+                    {
                         name: 'Content & SEO',
                         url: '/handbook/growth/marketing/blog',
                     },
@@ -1909,6 +1913,16 @@ export const docsMenu = {
                     url: '/docs/product-analytics/lifecycle',
                     icon: 'Lifecycle',
                     color: 'yellow',
+                },
+                {
+                    name: 'SQL',
+                    url: '/docs/product-analytics/sql',
+                    icon: 'HogQL',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Notifications',

@@ -66,7 +66,7 @@ _And_ you can use HogQL to aggregate results in a funnel, too. Is there anything
 
 ### Custom SQL insights
 
-Of course, the most powerful way to leverage HogQL within PostHog is via the new SQL insight type. This gives you direct SQL access to your data in PostHog, so you can create custom table insights that answer complex questions.
+Of course, the most powerful way to leverage HogQL within PostHog is via the new [SQL insight type](/docs/product-analytics/sql). This gives you direct SQL access to your data in PostHog, so you can create custom table insights that answer complex questions.
 
 For example, while you can use a retention insight to discover which **features** keep users coming back for more, you could build an SQL insight to find which **users** keep coming back, and identify outliers. 
 

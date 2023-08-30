@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-HogQL is our take on SQL (Structured Query Language), a language used to manage and access data. HogQL is effectively a wrapper around ClickHouse SQL, with a few tweaks, such as simplified event and person property access.
+HogQL is our take on SQL (Structured Query Language), a language used to manage and access data. HogQL is effectively a wrapper around [ClickHouse SQL](https://clickhouse.com/docs/en/sql-reference), with a few tweaks, such as simplified event and person property access.
 
 **Is HogQL _real_ SQL?** Yes, it's a translation layer over ClickHouse SQL. You can use most ClickHouse features in HogQL, including JOINs and subqueries. To learn more about ClickHouse, and how it differs from traditional SQL databases, read [PostHog's ClickHouse Manual](https://posthog.com/handbook/engineering/clickhouse).
 
@@ -24,7 +24,7 @@ To use them, select the "HogQL" tab when filtering or breaking down and add your
 
 ## SQL insights
 
-SQL insights enables you to create and edit insights using full SQL queries instead of the UI. Clicking the `{}` button in the top right corner of an insight shows you the SQL schema used to generate the insight which you can edit.
+[SQL insights](/docs/product-analytics/sql) enable you to create and edit insights using full SQL queries instead of the UI. Clicking the `{}` button in the top right corner of an insight shows you the SQL schema used to generate the insight which you can edit.
 
 ![HogQL SQL insight](../../images/features/hogql/insights-sql.png)
 

@@ -37,7 +37,7 @@ PostHog enables you to group data by hour for single-day date ranges. If you wan
 
 ## Minute-by-minute breakdown
 
-If hourly isn’t enough for you, we can move down to by the minute. We use an SQL insight for this. To make one, select the "SQL" tab when [creating an insight](https://app.posthog.com/insights/new). In this insight, we select a formatted count of `toStartOfMinute(timestamp)` where the timestamp is in the past day and order by the time (`minute`). In HogQL, this looks like this:
+If hourly isn’t enough for you, we can move down to by the minute. We use an [SQL insight](/docs/product-analytics/sql) for this. To make one, select the "SQL" tab when [creating an insight](https://app.posthog.com/insights/new). In this insight, we select a formatted count of `toStartOfMinute(timestamp)` where the timestamp is in the past day and order by the time (`minute`). In HogQL, this looks like this:
 
 ```sql
 select 

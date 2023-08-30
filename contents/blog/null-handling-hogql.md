@@ -13,7 +13,7 @@ category: Engineering
 
 The value (or non-value) null can be the bane of a programmer’s existence. Null can work as expected in one language and context, then act in completely unexpected ways in another language or context.
 
-We had challenges working with null during the [release of HogQL](/blog/introducing-hogql), which added direct SQL access to your data. Michael and I realized null values for properties were leading to inaccurate results and customer confusion. This post covers our efforts to figure out and implement a solution for this.
+We had challenges working with null during the [release of HogQL](/blog/introducing-hogql), which added [direct SQL access](/docs/product-analytics/sql) to your data. Michael and I realized null values for properties were leading to inaccurate results and customer confusion. This post covers our efforts to figure out and implement a solution for this.
 
 ## The problem with null in HogQL
 

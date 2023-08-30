@@ -14,7 +14,7 @@ features:
     groupAnalytics: true
 ---
 
-If you're working with Node.js, the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](https://posthog.com/docs/feature-flags) are supported as well.
+If you're working with Node.js, the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
 
 ## Installation
 
@@ -80,7 +80,7 @@ const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {
 ```
 
 ```node
-posthog.capture({
+client.capture({
   distinctId: distinctId,
   event: 'test-event',
   properties: { foo: 'bar' },
@@ -227,12 +227,12 @@ For example:
 
 ```node
 export const handler() {
-  posthog.capture({
+  client.capture({
     distinctId: 'distinct id',
     event: 'thing happened'
   })
 
-  posthog.capture({
+  client.capture({
     distinctId: 'distinct id',
     event: 'other thing happened'
   })
