@@ -7,7 +7,7 @@ showTitle: true
 We regularly send three emails. 
 
 1. Changelog, a product announcement email sent every month. Sent via Customer.io. 
-2. Product for Engineers, a marketing and content email published every two weeks. Sent via Substack.
+2. [Product for Engineers](https://newsletter.posthog.com/), a marketing and content email published every two weeks. Sent via Substack.
 3. PostHog for Startups, an email to users of our startup program. Sent monthly, via Customer.io.
 
 In addition, marketing also owns the onboarding email flow, which is controlled by Customer.io. 
