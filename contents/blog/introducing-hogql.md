@@ -18,7 +18,7 @@ featuredImageType: full
 
 Today, we're releasing a major new feature as a public beta: the ability to directly query your PostHog data using SQL. We call this [HogQL](/docs/product-analytics/hogql) because... hedgehogs love SQL, probably?
 
-You can use [HogQL expressions](/docs/hogql/expressions) to, among other things, enhance insights, filter event lists, and (most importantly) write full queries to analyze data in any way you want. 
+You can use [HogQL expressions](/docs/hogql/expressions) to enhance insights, filter event lists, and write full queries to analyze data in any way you want. 
 
 PostHog's existing insights are already incredibly powerful. HogQL turns insights Super Saiyan.
 
