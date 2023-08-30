@@ -23,7 +23,7 @@ The changelog email always ends by directing users to subscribe to Product for E
 
 We tag these emails as `Product updates` in Customer.io, so users can manage their subscriptions. 
 
-### Product for Engineers
+### [Product for Engineers](https://newsletter.posthog.com/)
 **Owner:** Andy
 
 Controlled via Substack, we put together an issue planning content for each installment of the newsletter. The newsletter is long-form copy, usually with a specific point of focus which is of interest to product engineers. 
@@ -75,4 +75,4 @@ We are currently testing email as a channel for other activities, such as produc
 
 Whenever we plan a new email activity we open an issue in [the Meta repo using the Messaging issue template](https://github.com/PostHog/meta/). This enables us to summarize information and seek approval from teams while also keeping our work open source, and without requiring everyone log in to Customer.io. Issues are closed when an email is completed. 
 
-If you'd like to work with marketing on an email activity, please begin by opening an issue in the meta repo. 
+If you'd like to work with marketing on an email activity, please begin by opening an issue in the `meta` [repo](https://github.com/PostHog/meta/issues)https://github.com/PostHog/meta/issues. 
