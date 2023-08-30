@@ -176,7 +176,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
             {overflowing && (
                 <button
                     onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
-                    className={`absolute top-[1px] left-0 h-[calc(100%-2px)] flex items-center z-10 pl-4 pr-3 bg-gradient-to-l from-transparent to-light dark:to-dark ${
+                    className={`absolute top-[1px] left-0 h-[calc(100%-2px)] flex items-center pl-4 pr-3 bg-gradient-to-l from-transparent to-light dark:to-dark ${
                         firstInView ? '-z-10' : 'z-10'
                     }`}
                 >
