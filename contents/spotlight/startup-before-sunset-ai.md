@@ -1,5 +1,5 @@
 ---
-title: "Startup Spotlight: How BeforeSunset AI mastered Product Hunt launches"
+title: "How BeforeSunset AI achieved 'Product of the Month' on Product Hunt"
 date: 2023-08-30
 author: ["joe-martin"]
 showTitle: true
