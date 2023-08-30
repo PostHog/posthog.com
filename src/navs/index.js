@@ -226,6 +226,10 @@ export const handbookSidebar = [
                 url: '/handbook/people/grievances',
             },
             {
+                name: 'Tools',
+                url: '/handbook/people/tools',
+            },          
+            {
                 name: 'Hiring process',
                 url: '',
                 children: [
@@ -262,7 +266,7 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Ops & finance',
+        name: 'Ops & Finance',
         url: '',
         children: [
             {
@@ -272,6 +276,10 @@ export const handbookSidebar = [
             {
                 name: 'Merch store',
                 url: '/handbook/company/merch-store',
+            },
+            {
+                name: 'Tools',
+                url: '/handbook/people/tools',
             },
         ],
     },
