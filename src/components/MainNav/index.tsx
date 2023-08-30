@@ -298,7 +298,7 @@ export const Main = () => {
         <div>
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
-                    className={`flex mx-auto px-2 md:px-5 justify-between transition-all ${
+                    className={`flex mx-auto px-2 md:px-2 mdlg:px-5 justify-between transition-all ${
                         fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl box-content'
                     }`}
                 >
@@ -311,7 +311,7 @@ export const Main = () => {
                             />
                         </Link>
                     </div>
-                    <ul className="lg:flex hidden list-none m-0 p-0">
+                    <ul className="md:flex hidden list-none m-0 p-0">
                         {menu.map((menuItem) => {
                             const active = menuItem.name === parent?.name
                             const { name, url } = menuItem
@@ -319,7 +319,7 @@ export const Main = () => {
                                 <li className="h-full" key={name}>
                                     <Link
                                         to={url}
-                                        className={`text-[13.5px] font-medium flex h-full items-center relative p-4 ${
+                                        className={`text-[13.5px] font-medium flex h-full items-center relative px-3 py-4 mdlg:p-4 ${
                                             active
                                                 ? 'px-[calc(1rem_+_10px)] mx-[-10px]'
                                                 : 'opacity-70 hover:opacity-100'
@@ -418,7 +418,7 @@ export const Main = () => {
             <InternalMenu
                 menu={internalMenu}
                 activeIndex={internalMenu?.findIndex((menu) => menu === activeInternalMenu)}
-                className="lg:flex hidden"
+                className="md:flex hidden"
             />
         </div>
     )
@@ -428,7 +428,7 @@ export const Mobile = () => {
     const { menu, parent, internalMenu, activeInternalMenu } = useLayoutData()
 
     return (
-        <div className="fixed bottom-0 w-full lg:hidden z-[9999999]">
+        <div className="fixed bottom-0 w-full md:hidden z-[9999999]">
             <InternalMenu
                 mobile
                 className="bg-light dark:bg-dark border-t mb-[-1px]"
