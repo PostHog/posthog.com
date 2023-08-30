@@ -27,7 +27,7 @@ Unsurprisingly for a productivity startup, it all began with a plan.
 
 “We had a clear plan in our minds for the product,” says Elif. “We wanted to complete the core features, such as to-do listing and time blocking, and we also wanted to build in AI features. In total it took about three months before we were ready to launch to users.”
 
-This development time afforded the growth team time to plan, while also giving them the benefit of knowing how the product would come together. Work was hard — to the point that Elif worked several 40-hour sprints without sleeping — but came together smoothly. 
+This development time afforded the growth team time to plan, while also giving them the benefit of knowing how the product would come together. Work was hard and required some long nights, but came together smoothly. 
 
 “On the marketing side our efforts started six months before the launch,” says Growth Lead Zekiye Nur Kesici. “In addition to on-going activities we began a waitlist for the new version and began growing it. We tried many different channels, including Reddit, Indie Hackers, Hacker News — and we spent a month on competitor analysis to find new channels too.”
 
