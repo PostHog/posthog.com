@@ -23,7 +23,7 @@ The changelog email always ends by directing users to subscribe to Product for E
 
 We tag these emails as `Product updates` in Customer.io, so users can manage their subscriptions. 
 
-### [Product for Engineers](https://newsletter.posthog.com/)
+### Product for Engineers
 **Owner:** Andy
 
 Controlled via Substack, we put together an issue planning content for each installment of the newsletter. The newsletter is long-form copy, usually with a specific point of focus which is of interest to product engineers. 
