@@ -51,8 +51,8 @@ The onboarding flow is composed of several workflows, with dedicated flows for:
 - All cloud sign-ups
 - All self-hosted sign-ups
 - All open-source deploys
-- Users who have not subscribed to replays
-- Users who have not subscribed to feature flags
+- Cloud users who have not subscribed to replays
+- Cloud users who have not subscribed to feature flags
 
 We aim for all content in these flows to be relevant and helpful to users, without being salesy. We use a mix of personal and 'designed' email styles, with personal emails coming directly from the inbox of relevant people (namely, Andy and Joe). When we get replies or feedback to these emails, we share it on Slack. 
 
