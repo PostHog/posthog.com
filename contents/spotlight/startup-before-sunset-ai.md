@@ -47,7 +47,7 @@ Finding the right community or launch channel can be a significant challenge all
 
 One example of this came from BeforeSunset's 'Plan my day' tool, where users are intended to add tasks and let the AI schedule time for them. [Session replays](/session-replay) showed users were instead adding their own timeblocks in the description, which helped the team understand how busy their users were and what tasks they spent their time on.
 
-> **Putting it into action:** Document your target audiences and personas somewhere that everyone can access, then use this to identify the communities where these users may congregate. Use the persona as a benchmark for the quality of your marketing assets, and be sure to engage with communities well in advance of a launch to build goodwill. 
+> **Putting it into action:** Document your target audiences and personas somewhere that everyone can access, then use this to identify the communities where these users may congregate. Use the persona as a benchmark for the quality of your marketing assets, and be sure to engage with communities well in advance of a launch to build goodwill. See how [PostHog does this with ICPs](/blog/creating-ideal-customer-profile) for more info. 
 
 ### 3. Move fast. Ask for support personally.
 
