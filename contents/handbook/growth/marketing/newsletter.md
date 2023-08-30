@@ -35,7 +35,7 @@ We are currently testing new advertising channels to drive subscriptions for thi
 
 Each month, we send an email to users in our PostHog for Startup program. This email goes to all users in any org which is registered in the program, and the list of users (and their org_ids) are tracked in [the mailing list sheet](https://docs.google.com/spreadsheets/d/1ryDGzXcG0OSH-GoX-zlI2CKwNu-6Zivi7EM32WLdids/edit?usp=sharing).
 
-Each month, Joe combines new Orgs into [the Startups cohort](https://app.posthog.com/cohorts/44794) and exports this to Customer.io for this email. 
+Each month, Joe combines new orgs into [the startups cohort](https://app.posthog.com/cohorts/44794) and exports this to Customer.io for this email. 
 
 The email is usually comprised of three sections, which inform users of new guides which are relevant to startup use-cases, new betas which are available for them to try, and a spotlight written of a new org in the program. We end by asking for feedback.
 
