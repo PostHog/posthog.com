@@ -21,7 +21,7 @@ After rebuilding the product around this AI-powered vision, the team wanted to r
 
 ![BeforeSunset AI Launch on Product Hunt](../images/blog/before-sunset-ai.png)
 
-### 1. Create a product launch plan in advance
+### 1. Don't leave launch planning to the last minute
 
 Unsurprisingly for a productivity startup, it all began with a plan.
 
@@ -33,7 +33,7 @@ This development time afforded the growth team time to plan, while also giving t
 
 > **Putting it into action:** For new product launches take steps to align your product and marketing team as early as possible, and make sure they stay in sync as development continues. Product managers should keep marketing teams informed of key features and delays, so marketing can plan how to position the launch and manage deliverables. Product marketers, unsurprisingly, can help bridge the gap. 
 
-### 2. Prioritize community and creativity
+### 2. Define your audience. Engage with their communities.
 
 Focusing on community engagement is an important part of any launch plan, according to Zekiye — and the earlier you start, the more successful you’ll be. 
 
@@ -49,7 +49,7 @@ One example of this came from BeforeSunset's 'Plan my day' tool, where users are
 
 > **Putting it into action:** Document your target audiences and personas somewhere that everyone can access, then use this to identify the communities where these users may congregate. Use the persona as a benchmark for the quality of your marketing assets, and be sure to engage with communities well in advance of a launch to build goodwill. 
 
-### 3. Create an outreach strategy
+### 3. Move fast. Ask for support personally.
 
 With Product Hunt, you only have a short amount of time in order to get traction and galvanize the community. Take too long and you’ll fall off the daily page, and into the archives. So, you need a strategy to continue currying favor and votes throughout the day.
 
@@ -59,7 +59,7 @@ With Product Hunt, you only have a short amount of time in order to get traction
 
 ### 4. If at first you don’t succeed, try again
 
-BeforeSunset AI's latest Product Hunt launch wasn't it's first attempt to succeed on the platform. An earlier Product Hunt launch for the AI-less version of the tool had failed to breakthrough because it hadn't yet reached product-market fit and was missing a key feature. 
+BeforeSunset AI's latest Product Hunt launch wasn't it's first attempt to succeed on the platform. An earlier Product Hunt launch for the AI-less version of the tool had failed to breakthrough because it hadn't yet reached [product-market fit](/blog/product-market-fit-game) and was missing a key feature. 
 
 "That initial launch was still a milestone for us," says Elif. "It enabled us to get product feedback and led us to discover the real need in the market, which nobody was serving...It’s always important to bear in mind that success is rarely straightforward and that setbacks are a normal part of being an entrepreneur."
 
