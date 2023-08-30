@@ -39,6 +39,8 @@ Focusing on community engagement is an important part of any launch plan, accord
 
 “We chose to focus on the Product Hunt community and we knew that would require us to be active on the platform,” she explains. “That means finding ways to add value; ways you can support them whenever you’re in touch so that, in turn, you can benefit from the community.”
 
+For BeforeSunset, this included engaging with the community regularly and offering expertise where possible. 
+
 Creative assets were also a major focus for BeforeSunset AI. The team created new product screenshots and videos ahead of the launch, and carefully considered how to make the launch page look as on-brand as possible even as the product continued to change and improve internally.
 
 Finding the right community or launch channel can be a significant challenge all by itself and requires a keen understanding of your target audience. Knowing who users are, what their pain points are, and where they look for solutions is just as important to selecting a launch channel as experimentation.
