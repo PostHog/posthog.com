@@ -175,6 +175,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
         <div className="relative">
             {overflowing && (
                 <button
+                    onDoubleClick={(e) => e.preventDefault()}
                     onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
                     className={`absolute top-[1px] left-0 h-[calc(100%-2px)] flex items-center pl-4 pr-3 bg-gradient-to-l from-transparent to-light dark:to-dark ${
                         firstInView ? '-z-10' : 'z-10'
@@ -241,6 +242,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
             </ul>
             {overflowing && (
                 <button
+                    onDoubleClick={(e) => e.preventDefault()}
                     onClick={() => ref.current?.scrollBy({ left: 75, behavior: 'smooth' })}
                     className={`absolute top-[1px] right-0 h-[calc(100%-2px)] flex items-center pr-4 pl-3 bg-gradient-to-r from-transparent to-light dark:to-dark ${
                         lastInView ? '-z-10' : 'z-10'
