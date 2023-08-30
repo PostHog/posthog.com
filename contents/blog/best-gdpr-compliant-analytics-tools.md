@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - joe-martin
   - andy-vandervell
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: ../images/blog/posthog-blog-at-desk.png
 featuredImageType: full
 featuredVideo: https://www.youtube-nocookie.com/embed/o_1AmP_-HPs
 category: General
