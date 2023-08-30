@@ -6,18 +6,18 @@ showTitle: true
 
 We regularly send three emails. 
 
-1. Changelog, a product announcement email sent every month. Sent via Customer.io. (Owner: Joe)
-2. [Product for Engineers](https://newsletter.posthog.com/), a marketing and content email published every two weeks. Sent via Substack. (Owner: Andy)
-3. PostHog for Startups, an email to users of our startup program. Sent monthly, via Customer.io. (Owner: Joe)
+1. Changelog, a product announcement email sent every month. Sent via Customer.io. 
+2. Product for Engineers, a marketing and content email published every two weeks. Sent via Substack.
+3. PostHog for Startups, an email to users of our startup program. Sent monthly, via Customer.io.
 
-In addition, marketing also owns the onboarding email flow, which is controlled by Customer.io (Owner: Joe). 
+In addition, marketing also owns the onboarding email flow, which is controlled by Customer.io. 
 
 ### Changelog
 **Owner:** Joe
 
 The changelog email is part of [the new release process](/handbook/engineering/release-new-version) and is used for [product announcements](/handbook/growth/marketing/product-announcements).
 
-Every month, we use Customer.io to share a broadcast which summarizes the highlights from [the weekly changelog](/changelog) over the last month. We use our discretion to choose which updates to highlight, usually showcasing three or four of the most impactful changes. We usually reserve the top spot for pushing users towards adopting beta features. A test is shared
+Every month, we use Customer.io to share a broadcast which summarizes the highlights from [the weekly changelog](/changelog) over the last month. We use our discretion to choose which updates to highlight, usually showcasing three or four of the most impactful changes. We usually reserve the top spot for making users aware of new beta features. A test is shared with the team ahead before we send to users. 
 
 The changelog email always ends by directing users to subscribe to Product for Engineers. 
 
@@ -33,7 +33,7 @@ We are currently testing new advertising channels to drive subscriptions for thi
 ### PostHog for Startups
 **Owner:** Joe
 
-Each month, we send an email to users in our PostHog for Startup program. This email goes to all users in any org which is registered in the program, and the list of users (and their org_ids) are tracked in [the mailing list sheet](https://docs.google.com/spreadsheets/d/1ryDGzXcG0OSH-GoX-zlI2CKwNu-6Zivi7EM32WLdids/edit?usp=sharing).
+Each month, we send an email to users in our PostHog for Startup program. This email goes to all users in any org which is registered in the program, and the list of users (and their org_ids) are tracked in [the mailing list sheet](https://docs.google.com/spreadsheets/d/1ryDGzXcG0OSH-GoX-zlI2CKwNu-6Zivi7EM32WLdids/edit?usp=sharing). A test is shared with the team ahead before we send to users. 
 
 Each month, Joe combines new orgs into [the startups cohort](https://app.posthog.com/cohorts/44794) and exports this to Customer.io for this email. 
 
