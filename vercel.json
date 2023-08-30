@@ -41,6 +41,7 @@
         { "source": "/handbook/people/team", "destination": "/handbook/company/team" },
         { "source": "/handbook/growth/customer-success", "destination": "/handbook/growth/customer-support" },
         { "source": "/handbook/getting-started", "destination": "/handbook/getting-started/start-here" },
+        { "source": "/handbook/ops/finance", "destination": "/handbook/people/finance" },
         {
             "source": "/handbook/people/team-structure/user-experience",
             "destination": "/handbook/people/team-structure/core-experience"
