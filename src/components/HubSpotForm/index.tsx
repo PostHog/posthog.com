@@ -23,6 +23,14 @@ interface IProps {
             cols?: 1 | 2
         }
     }
+    buttonOptions?: {
+        className?: string
+        size?: 'sm' | 'md' | 'lg' | 'absurd'
+        type?: 'primary' | 'secondary' | 'outline'
+    }
+    formOptions?: {
+        className?: string
+    }
 }
 
 export interface Form {
@@ -308,7 +316,15 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     )
 }
 
-export default function HubSpotForm({ formID, customFields, customMessage, validationSchema, onSubmit }: IProps) {
+export default function HubSpotForm({
+    formID,
+    customFields,
+    customMessage,
+    validationSchema,
+    onSubmit,
+    buttonOptions,
+    formOptions,
+}: IProps) {
     const { href } = useLocation()
     const [openOptions, setOpenOptions] = useState<string[]>([])
     const [form, setForm] = useState<{ fields: Field[]; buttonText: string; message: string }>({
@@ -386,7 +402,7 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
                     initialValues={Object.fromEntries(form.fields.map(({ name }) => [name, '']))}
                     onSubmit={handleSubmit}
                 >
-                    <Form>
+                    <Form className={formOptions?.className}>
                         <div className="grid divide-y divide-border border border-border dark:divide-border-dark dark:border-dark">
                             {form.fields.map(({ name, label, type, required, options }, index) => {
                                 if (customFields && customFields[name])
@@ -415,7 +431,15 @@ export default function HubSpotForm({ formID, customFields, customMessage, valid
                                 )
                             })}
                         </div>
-                        <button className={button(undefined, 'full', 'mt-4', 'sm')} type="submit">
+                        <button
+                            className={button(
+                                buttonOptions?.type,
+                                'full',
+                                buttonOptions?.className ?? 'mt-4',
+                                buttonOptions?.size ?? 'sm'
+                            )}
+                            type="submit"
+                        >
                             {form.buttonText}
                         </button>
                     </Form>

@@ -105,7 +105,7 @@ export const MenuContainer = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed w-full h-full bg-accent/60 dark:bg-accent-dark/60 top-0 left-0 z-[999999]"
+            className="fixed w-full h-full bg-accent/60 dark:bg-accent-dark/60 top-0 left-0 z-[99999999]"
         >
             <motion.div
                 onClick={(e) => e.stopPropagation()}
