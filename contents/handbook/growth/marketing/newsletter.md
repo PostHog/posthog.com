@@ -69,7 +69,7 @@ These emails are usually tagged as `Service updates` in Customer.io when they in
 
 Important service updates are the _only_ type of email we may send to unsubscribed users, and only if we feel it is warranted to do so.
 
-> `Service updates` emails are usually part of an [engineering incident](/handbook/engineering/incidents.md). If an incident is declared, please ensure the marketing team (or specifically Joe) is aware as soon as possible. 
+> `Service updates` emails are usually part of an [engineering incident](/handbook/engineering/incidents.md). If an incident is declared, please ensure the marketing team (or specifically Joe) is aware as soon as possible by posting in the team-marketing Slack.
 
 We are currently testing email as a channel for other activities, such as product upsells. We tag these emails as `Actually useful marketing emails` in Customer.io and have found the a personal, non-designed approach works best. 
 
