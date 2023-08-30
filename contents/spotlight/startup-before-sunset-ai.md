@@ -71,3 +71,5 @@ In BeforeSunset's case, the team responded to the first launch by speaking to us
 
 > **Putting it into action:** Failure is the best teacher, so if a product announcement doesn't go as planned then make sure to run a post-mortem process and think of how it can be improved. It can also help to use [surveys](/docs/surveys/manuals) to reach out to existing users and ask them for their advice directly!
 
+**More success stories from PostHog for Startups**
+- [How Golioth designs new IoT software and drives product development](/spotlights/startup-golioth)
