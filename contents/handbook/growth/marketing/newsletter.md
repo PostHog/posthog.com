@@ -26,7 +26,7 @@ We tag these emails as `Product updates` in Customer.io, so users can manage the
 ### Product for Engineers
 **Owner:** Andy
 
-Controlled via Substack, we put together an issue planning content for each installment of the newsletter. The newsletter is long-form copy, usually with a specific point of focus which is of interested to product engineers. 
+Controlled via Substack, we put together an issue planning content for each installment of the newsletter. The newsletter is long-form copy, usually with a specific point of focus which is of interest to product engineers. 
 
 We are currently testing new advertising channels to drive subscriptions for this newsletter. 
 
