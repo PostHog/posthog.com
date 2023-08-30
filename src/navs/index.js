@@ -540,6 +540,10 @@ export const handbookSidebar = [
                 url: '/handbook/design/process',
             },
             {
+                name: 'Art requests',
+                url: '/handbook/design/art-requests',
+            },
+            {
                 name: 'Designing posthog.com',
                 url: '/handbook/design/designing-posthog-website',
             },
