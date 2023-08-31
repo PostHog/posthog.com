@@ -82,6 +82,16 @@ export default function QuestionPage(props: QuestionPageProps) {
                                 >
                                     View in Strapi
                                 </Link>
+                                {console.log(question)}
+                                <Link
+                                    to={`https://posthoghelp.zendesk.com/agent/search/1?copy&type=ticket&q=${encodeURIComponent(
+                                        question?.attributes?.subject
+                                    )}`}
+                                    externalNoIcon
+                                    className="font-bold"
+                                >
+                                    View in ZenDesk
+                                </Link>
                             </p>
 
                             <Link
