@@ -1,5 +1,5 @@
 ---
-date: 2023-03-28
+date: 2023-09-03
 title: How we made feature flags faster and more reliable
 rootPage: /blog
 sidebar: Blog
