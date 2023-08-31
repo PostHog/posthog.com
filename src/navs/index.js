@@ -1235,6 +1235,10 @@ export const docsMenu = {
                             name: 'Supported aggregations',
                             url: '/docs/hogql/aggregations',
                         },
+                        {
+                            name: 'Tutorials',
+                            url: '/docs/hogql/tutorials',
+                        },
                     ],
                 },
                 {
@@ -1860,6 +1864,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Tutorials and guides',
+                    url: '/docs/product-analytics/tutorials',
+                    icon: 'GraduationCap',
+                    color: 'red',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
@@ -1990,6 +2000,12 @@ export const docsMenu = {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/session-replay/troubleshooting',
                     icon: 'Question',
+                    color: 'purple',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/session-replay/tutorials',
+                    icon: 'GraduationCap',
                     color: 'blue',
                 },
                 {
@@ -1999,7 +2015,7 @@ export const docsMenu = {
                     name: 'Console log recording',
                     url: '/docs/session-replay/console-log-recording',
                     icon: 'Code',
-                    color: 'blue',
+                    color: 'red',
                 },
                 {
                     name: 'Network performance',
@@ -2077,6 +2093,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/common-questions',
                     icon: 'Question',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/feature-flags/tutorials',
+                    icon: 'GraduationCap',
+                    color: 'blue',
                 },
                 {
                     name: 'Features',
@@ -2163,6 +2185,12 @@ export const docsMenu = {
                     url: '/docs/experiments/common-questions',
                     icon: 'Question',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/experiments/tutorials',
+                    icon: 'GraduationCap',
+                    color: 'blue',
                 },
                 {
                     name: 'Features',
