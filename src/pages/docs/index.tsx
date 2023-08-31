@@ -1,5 +1,4 @@
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
@@ -7,8 +6,6 @@ import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
-import { LightBulb } from '@posthog/icons'
-import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const quickLinks = [
     {
@@ -63,23 +60,9 @@ export const DocsIndex = () => {
             <PostLayout article={false} title={'Docs'} hideSidebar hideSurvey>
                 <section className="mb-4 flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
                     <div className="flex-1 text-center sm:text-left">
-                        <h2>New to PostHog?</h2>
-                        <p className="text-[17px]">
-                            Select a product from the list below to learn how to install PostHog and get started!
-                        </p>
+                        <h1>Product OS is your all-in-one toolbox for building better products</h1>
+                        <p className="text-[17px]">To get started, select a product from the list below.</p>
                     </div>
-                    <aside>
-                        <figure className="m-0">
-                            <StaticImage
-                                objectFit="contain"
-                                src="../../../contents/images/adventure-hog.png"
-                                alt="This hog knows where he's headed"
-                                width={342}
-                                placeholder="blurred"
-                                className="w-full sm:w-[345px]"
-                            />
-                        </figure>
-                    </aside>
                 </section>
 
                 <section className="mb-4 lg:flex-row gap-4 lg:gap-8">

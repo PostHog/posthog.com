@@ -881,12 +881,17 @@ export const docsMenu = {
             url: '/docs/product-os',
             children: [
                 {
-                    name: 'Docs',
+                    name: 'Product OS',
                 },
                 {
                     name: 'Overview',
                     url: '/docs',
                     icon: 'Info',
+                },
+                {
+                    name: 'Installation',
+                    url: '/docs/product-os/installation',
+                    icon: 'Book',
                 },
                 {
                     name: 'SDKs and guides',
@@ -1097,12 +1102,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Product OS',
-                },
-                {
-                    name: 'What is Product OS?',
-                    url: '/docs/product-os',
-                    icon: 'Info',
+                    name: 'Core foundation',
                 },
                 {
                     name: 'Data',

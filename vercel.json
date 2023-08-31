@@ -700,7 +700,11 @@
         },
         {
             "source": "/docs/getting-started/start-here",
-            "destination": "/docs/getting-started/install"
+            "destination": "/docs/product-os/installation"
+        },
+        {
+            "source": "/docs/product-os",
+            "destination": "/docs"
         },
         {
             "source": "/docs/getting-started/send-events",
