@@ -53,14 +53,12 @@ As much as I'd love to always be on the happy path, the laws of thermodynamics d
 
 Thankfully, asteroids don't hit us every week. PgBouncer issues, on the other hand, are a weekly annoyance – PgBouncer is a connection pooler for Postgres.
 
-[^1]: PgBouncer is a connection pooler for Postgres.
-
 So, when thinking about reliability, we want to prioritize defending against things that happen frequently, or have a high chance of occurring over time. This includes things like Redis, Postgres, or PgBouncer going down. Then, if we have the resources and nothing better to prioritize, we can focus on defending against asteroids.
 
 
 ### Client-side handling: Partial flag evaluation
 
-Since flags are evaluated multiple times in a session, sending a partial response when we can't access the database is much more preferable to retrying and not sending a response at all. Further, if a client is waiting for flag evaluation before loading their content, we do not want to slow this down. We want to return results as soon as possible.
+Since flags are evaluated multiple times in a session, sending a partial response when we can't access the database is preferable to retrying and not sending a response at all. Further, if a client is waiting for flag evaluation before loading their content, we do not want to slow this down. We want to return results as soon as possible.
 
 So, we enable partial updates on our client side SDKs. Whenever there's an error computing all flags, we do a partial update: keep the old values for flags we failed to compute, and use the new value for flags we didn't fail to compute.
 
@@ -71,12 +69,13 @@ This solution is special because flags that affect the most people will almost n
 Since the server-side SDKs are stateless, this partial evaluation model doesn't really work. Local evaluation is the best way to maintain reliability, or sending known properties alongside requests to make evaluation of property based flags reliable.
 
 
-### Server side handling: Flag evaluation when databases are down
+### Server-side handling: Flag evaluation when databases are down
 
 Now we can dig deeper into how exactly evaluation works when the database is down. One thing I've overlooked so far is that we need the database for multiple parts of flag evaluation:
-	1. to get person properties
-	2. to get the flag definitions.
-	3. figuring out the right project for which to get feature flags (auth token-matching)
+
+1. To get person properties
+2. To get the flag definitions.
+3. Figuring out the right project for which to get feature flags (auth token-matching)
 
 The database going down means all three functionalities go down. Without flag definitions, we can't know what flags to evaluate. Without the project auth, we don't know which project to get to.
 
@@ -95,9 +94,9 @@ Is that all we need to do? Not quite. As we found the painful way, just because 
 When you can't connect to the database, it's a quick operation: you tried connecting, you failed, you raise an error, and any system depending on you can quickly make a decision.
 
 However, what if the database isn't down, but just painfully slow? For example:
-	- you're deadlocked in a transaction.
-	- you have several transactions running at the same time, slowing the overall system down.
-	- when a potentially infinite loop is hammering the database hundreds of time a second.
+- You're deadlocked in a transaction.
+- You have several transactions running at the same time, slowing the overall system down.
+- When a potentially infinite loop is hammering the database hundreds of time a second.
   
 To us, a database that can't quickly respond is equivalent to a database that is down. To defend against this, we introduced statement timeouts of one second for flag evaluations. This helps us quickly catch if things are slow, and defends against timing out.
 
@@ -122,7 +121,8 @@ One frustrating issue we found towards the end is that when the database is slow
 
 Currently, we're thinking of introducing a separate PgBouncer pool for feature flags, which has these timeouts set on the connection itself.
 
-More long term, having this sync python service which can't handle app level timeouts well has been troublesome. We're considering rewriting this with an async paradigm that's much more efficient and allows for easily setting timeouts in the app, so we don't have to rely on the database level settings, and can once again share the connection pool with the rest of the app, rather than creating separate sub-pools.
+In the long term, having this sync python service that can't handle app level timeouts well has been troublesome. We're considering rewriting this with an async paradigm that's more efficient and allows for easily setting timeouts in the app, so we don't have to rely on the database level settings, and can once again share the connection pool with the rest of the app, rather than creating separate sub-pools.
 
 The next step is to make sure flags continue to remain reliable with all the exciting features we have in the works. Our main goal is to ensure none of these new features detract from reliability, since when it comes to flag, reliability is a lot more important than that shiny new feature.
 
+And if you are interested in shiny new features, you can see what we're working on via our [public roadmap](/roadmap) or [repo](https://github.com/PostHog/posthog/).
