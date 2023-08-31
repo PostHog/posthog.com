@@ -26,6 +26,9 @@ Internally, the team relies on PostHog for both product development and marketin
 
 "The reason for the switch was that I wanted to use some features unavailable on the self-hosted version," Sullivan continues. "Transitioning to PostHog Cloud to access new features has been fantastic, especially for tracking marketing metrics."
 
+![PostHog dashboard templates](../images/customers/speakeasy/landing-page-report.png)
+<Caption>PostHog's dashboard templates helped Speakeasy replicate Google Analytics with ease</Caption>
+
 ### Replicating Google Analytics with PostHog Dashboard Templates
 By moving to the cloud and deploying PostHog on both their core product and marketing site, Speakeasy can track website traffic and marketing metrics as well as product interactions. This combined approach offers a transparent view of conversion rates and user paths, without requiring extra setup time.
 
@@ -34,6 +37,16 @@ By moving to the cloud and deploying PostHog on both their core product and mark
 PostHog's dashboard templates, created during our [Aruba hackathon](/blog/aruba-hackathon), cover more than just website metrics. They also offer [templates for tracking AARRR funnels](/templates), retention, and more.
 
 "I'd recommend the dashboard templates to anyone starting with PostHog," Nolan advises. "If you make setting up the initial event capture a team activity and carefully consider the custom events you track, the dashboards will provide a strong foundation for success."
+
+<BorderWrapper>
+<Quote
+    imageSource="/images/customers/speakeasy-nolan.jpg"
+    size="md"
+    name="Nolan Sullivan"
+    title="Founding Developer Relations Lead, Speakeasy"
+    quote={`“I love that PostHog is an all-in-one tool, with all the features of LaunchDarkly and all those other enterprise platforms. It is just so nice not having to go into multiple UIs to make changes and manage things.”`}
+/>
+</BorderWrapper>
 
 ### Improving onboarding and feature roll-out with flags
 Speakeasy also employs PostHog within its product. At the time of our conversation, Nolan and his team were actively refining their product's onboarding process, using insights directly from PostHog.
