@@ -53,8 +53,8 @@ One example of this came from BeforeSunset's 'Plan my day' AI feature, where use
 
 ### 3. Move fast. Ask for support personally.
 
-MESSAGE HERE
-Caption
+![BeforeSunset AI outreach](../images/blog/before-sunset-outreach.png)
+<Caption>An example of a community outreach email sent by BeforeSunset's team.</Caption>
 
 With Product Hunt, you only have a short amount of time in order to get traction and galvanize the community. Take too long and you’ll fall off the daily page, and into the archives. So, you need a strategy to continue currying favor and votes throughout the day.
 
