@@ -190,7 +190,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                 className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${className}`}
             >
                 {menu.map((menuItem, index) => {
-                    const { url, color, icon, name } = menuItem
+                    const { url, color, icon, name, onClick } = menuItem
                     const Icon = icons[icon]
                     const active = menu[activeIndex]?.name === menuItem.name
                     return (
@@ -207,7 +207,10 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                         >
                             <div ref={index === 0 ? firstRef : index === menu.length - 1 ? lastRef : null}>
                                 <Link
-                                    onClick={() => scrollToIndex(index)}
+                                    onClick={() => {
+                                        scrollToIndex(index)
+                                        onClick?.()
+                                    }}
                                     to={url}
                                     className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded bg-light dark:bg-dark ${
                                         active
