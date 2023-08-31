@@ -1,5 +1,5 @@
 ---
-title: How Speakeasy manages features and developer relations with PostHog
+title: How Speakeasy manages features and developer relations using PostHog
 customer: Speakeasy
 logo: ../images/customers/speakeasy/speakeasy-logo.png
 logoDark: ../images/customers/speakeasy/speakeasy-logo-original.svg
