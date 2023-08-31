@@ -2201,6 +2201,12 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Installation',
+                    url: '/docs/surveys/installation',
+                    icon: 'Book',
+                    color: 'blue',
+                },
+                {
                     name: 'Setup',
                     url: '/docs/surveys/setup',
                     icon: 'Toggle',
