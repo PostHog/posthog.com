@@ -124,6 +124,33 @@ import NodeFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/f
 
 import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
+
+### GeoIP Property evaluation
+
+If your feature flag depends on geoIP properties, like the country or city, you can ask us to automatically override these properties based on the current IP address.
+
+> *Note:* This would be the IP address of your server machine, unless you pass in the appropriate `HTTP_X_FORWARDED_FOR` (first priority) or `REMOTE_ADDR` (second priority) headers.
+
+
+The list of properties that this overrides:
+
+1. $geoip_city_name
+2. $geoip_country_name
+3. $geoip_country_code
+4. $geoip_continent_name
+5. $geoip_continent_code
+6. $geoip_postal_code
+7. $geoip_time_zone
+
+To request this IP property resolution, either initialise your SDK with `disableGeoip=False` to make this the default for all requests, or for a single specific request you can do:
+
+```node
+const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {
+    personProperties: { is_authorized: true },
+    disableGeoip: `false`
+})
+```
+
 ### Local Evaluation
 
 <LocalEvaluationIntro />
