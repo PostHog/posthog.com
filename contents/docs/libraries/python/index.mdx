@@ -105,7 +105,7 @@ posthog.group_identify('company', 'company_id_in_your_db', {
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
 
-## Default overridden properties
+## GeoIP properties
 
 Before posthog-python v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
 
@@ -114,9 +114,7 @@ As of posthog-python v3.0, the default now is to disregard the server IP, not ad
 You can go back to previous behaviour by doing setting the `disable_geoip` argument in your initialization to `False`:
 
 ```python
-
 posthog = Posthog('api_key', disable_geoip=False)
-
 ```
 
 The list of properties that this overrides:
@@ -129,14 +127,10 @@ The list of properties that this overrides:
 6. $geoip_postal_code
 7. $geoip_time_zone
 
-You can also explicitly chose to override / not override properties for a single capture or feature flag request like so:
+You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
 
 ```python
 posthog.capture('test id', 'test event', disable_geoip=True|False)
-```
-
-```python
-posthog.get_feature_flag("beta-feature", "distinct_id", disable_geoip=True|False)
 ```
 
 ## Serverless environments (Render/Lambda/...)
