@@ -558,15 +558,7 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing',
             },
             {
-                name: 'Personas',
-                url: '/handbook/growth/marketing/customer-personas',
-            },
-            {
-                name: 'Testimonials',
-                url: '/handbook/growth/marketing/testimonials',
-            },
-            {
-                name: 'Value propositions',
+                name: 'Value proposition',
                 url: '/handbook/growth/marketing/value-propositions',
             },
             {
@@ -574,31 +566,27 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Product announcements',
-                        url: '/handbook/growth/marketing/product-announcements',
-                    },
-                    {
                         name: 'Content & SEO',
                         url: '/handbook/growth/marketing/blog',
                     },
                     {
-                        name: 'Sponsorship',
-                        url: '/handbook/growth/marketing/open-source-sponsorship',
+                        name: 'Email & newsletter',
+                        url: '/handbook/growth/marketing/newsletter',
                     },
                     {
                         name: 'Paid ads',
                         url: '/handbook/growth/marketing/paid',
                     },
                     {
-                        name: 'Email',
-                        url: '/handbook/growth/marketing/newsletter',
+                        name: 'Sponsorships',
+                        url: '/handbook/growth/marketing/open-source-sponsorship',
                     },
                     {
                         name: 'In-app',
                         url: '/handbook/growth/marketing/in-app',
                     },
                     {
-                        name: 'Startups',
+                        name: 'PostHog for Startups',
                         url: '/handbook/growth/marketing/startups',
                     },
                     {
@@ -609,11 +597,19 @@ export const handbookSidebar = [
                         name: 'YouTube',
                         url: '/handbook/growth/marketing/youtube',
                     },
-                    {
-                        name: 'Dashboard templates',
-                        url: '/handbook/growth/marketing/templates',
-                    },
                 ],
+            },
+            {
+                name: 'Product announcements',
+                url: '/handbook/growth/marketing/product-announcements',
+            },
+            {
+                name: 'Testimonials',
+                url: '/handbook/growth/marketing/testimonials',
+            },
+            {
+                name: 'Dashboard templates',
+                url: '/handbook/growth/marketing/templates',
             },
         ],
     },
