@@ -6,40 +6,42 @@ sidebar: Blog
 showTitle: true
 ---
 
-Feature flags as a service is an interesting space to be working in. If your service stops working, not only does it affect your customers, but also your customer's customers, since they rely on you to make sure their app works fine.
+Feature-flags-as-a-service is an interesting space. If your service stops working, not only does it affect your customers, but also your customer's customers, since they rely on you to make sure their app works fine.
 
 Contrast it with the PostHog interface not loading, where the problem is constrained to our customers. It's not great, for sure, but it's better than event ingestion and feature flags going down.
 
-Further, flags are very sensitive to latency: if it takes 5 seconds for your flags to evaluate, that holds up your customers application for 5 seconds. No, you can't wait to load them asynchronously as you need this result to determine what to show. Your business logic depends on the flag.
+Further, flags are very sensitive to latency. If it takes 5 seconds for your flags to evaluate, that holds up your customers application for 5 seconds. You can't wait to load them asynchronously, either, as you need this result to determine what to show. Your business logic depends on the flag.
 
-So, over the past quarter, one of our key goals has been to make feature flags fast and resilient. Even if the PostHog interface goes down, none of the SDKs that query flags should go down, nor the pure API interface. Further, for the latency-sensitive flags, we need a way to resolve them in 50ms or less.
+So, over the past quarter, one of the [Feature Success team's](/handbook/small-teams/feature-success) key goals has been to make feature flags fast and resilient. Even if the PostHog interface goes down, none of the SDKs that query flags should go down, nor the pure API interface. Further, for the latency-sensitive flags, we need a way to resolve them in 50ms or less.
 
 This post is about how we did it, and what we learned along the way.
 
-Before we jump into how we improved things, it's worth listing out constraints that we can use to create solutions that otherwise wouldn't be possible.
-
 ## Special problem constraints
 
-1. Flags are deterministic: If I roll out a flag to 30% of people, the person who's inside this window remains inside this window even if the rollout percentage goes up to 40, 80, or 100%. This is because we compute a hash of the user id and the flag key and use it evaluate.
-2. We don't always need a server: As a result of (1), we need a server to determine whether a flag is enabled only if the flag depends on person properties so we need to check against known properties.
-3. Flags are evaluated multiple times in a session: For example, whenever properties change our flag might change, and same for when the user identity changes. We can leverage this behaviour in our solution.
-4. The caching problem: It's not reasonable for us to cache the _results_ of flag evaluation for users because this:
-    1. Blows up the size of the cache
-    2. Doesn't work for new people we are seeing for the first time
-    3. Isn't flexible enough to leverage properties changing over time for users.
+Before we jump into how we improved things, it's worth listing out constraints that we can use to create solutions that otherwise wouldn't be possible.
+1. **Flags are deterministic:** If I roll out a flag to 30% of people, the person who's inside this window remains inside this window even if the rollout percentage goes up to 40, 80, or 100%. This is because we compute a hash of the user id and the flag key and use it evaluate.
+
+2. **We don't always need a server:** As a result of (1), we need a server to determine whether a flag is enabled only if the flag depends on person properties so we need to check against known properties.
+
+3. **Flags are evaluated multiple times in a session:** For example, whenever properties change our flag might change, and same for when the user identity changes. We can leverage this behaviour in our solution.
+
+4. **The caching problem:** It's not reasonable for us to cache the _results_ of flag evaluation for users because this:
+    - Blows up the size of the cache.
+    - Doesn't work for new people we are seeing for the first time.
+    - Isn't flexible enough to leverage properties changing over time for users.
 
 
 ## Making feature flags fast
 
-Since flags are deterministic, we technically don't need a server to evaluate them. This insight led to creating local evaluation of feature flags, where our SDKs download flag definitions, evaluate them locally, and only fallback to our servers when this is not possible.
+Since flags are deterministic, we technically don't need a server to evaluate them. This insight led to creating [local evaluation of feature flags](/docs/feature-flags/local-evaluation), where our SDKs download flag definitions, evaluate them locally, and only fallback to our servers when this is not possible.
 
 As we saw in our problem constraint, local evaluation can fail when we don't know properties the flag depends on. To combat this, the SDK interface allows passing in properties that you already know of. We then use these passed in properties to figure out if flag computation is possible.
 
-This optimisation is great because it cuts out all network I/O and makes evaluation CPU-bound, which reduces latency from 500ms to 10-20ms.
+This optimisation is great because it cuts out all network I/O _and_ makes evaluation CPU-bound, which reduces latency from 500ms to 10-20ms.
 
-One thing to note though is that this only works on server-side libraries. Flag definitions can have personal identifiable information, like user email IDs, and require auth to download them, which means we can't expose these on the client-side libraries.
+This only works on server-side libraries, however. Flag definitions can have personal identifiable information, like user email IDs, and require auth to download them, which means we can't expose these on the client-side libraries.
 
-As a result, our client still has not-great latency. To combat this issue, we introduced bootstrapped feature flags. You can initialize a client-side PostHog SDK by passing in a client ID and flags. This ensures flags are instantly available, and unlocks creating cool features like redirecting on pageload based on feature flags.
+As a result, our client still has not-great latency. To combat this issue, we introduced [bootstrapped feature flags](/docs/feature-flags/bootstrapping). You can initialize a client-side PostHog SDK by passing in a client ID and flags. This ensures flags are instantly available, and unlocks creating cool features like redirecting on pageload based on feature flags.
 
 How do you get the flags to pass in to the client SDK? If you must call PostHog's servers manually to do this, it defeats the purpose. This is where _synergy_ between local evaluation and bootstrapping comes in: you use your server-side SDK to evaluate flags locally, then pass these along to your frontend to bootstrap flags.
 
@@ -47,9 +49,9 @@ Overall, this has been working well. There's growing pains of replicating every 
 
 ## Making feature flags reliable
 
-As much as I'd love to always be on the happy path, the laws of thermodynamics disagree and things tend to derail. We want feature flags to be reliable, so that even when our database goes down, feature flags still work fine. But there's no such thing as reliable-no-matter-what-happens. An asteroid wiping out datacenters across the world or an AGI taking over are very unlikely, but if they do occur, there's not much we can do.
+As much as I'd love to always be on the happy path, the laws of thermodynamics disagree and things tend to derail. We want feature flags to work reliably, even when our server is down, but there's no such thing as reliable-no-matter-what-happens. An asteroid wiping out data centers worldwide, or an AGI taking over are very unlikely, but if they do occur, there's not much we can do.
 
-Thankfully, asteroids don't hit us every week. PgBouncer[^1] issues though are indeed a weekly annoyance.
+Thankfully, asteroids don't hit us every week. PgBouncer issues, on the other hand, are a weekly annoyance – PgBouncer is a connection pooler for Postgres.
 
 [^1]: PgBouncer is a connection pooler for Postgres.
 
