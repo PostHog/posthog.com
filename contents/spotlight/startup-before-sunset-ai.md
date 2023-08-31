@@ -1,6 +1,6 @@
 ---
 title: "How BeforeSunset AI achieved 'Product of the Month' on Product Hunt"
-date: 2023-08-30
+date: 2023-08-31
 author: ["joe-martin"]
 showTitle: true
 rootpage: /blog
