@@ -32,7 +32,11 @@ const LikeButton = ({ liked, handleClick, className = '' }) => {
     return (
         <button
             disabled={!user}
-            className={`${liked ? 'text-red' : 'text-inherit disabled:opacity-60'} ${className}`}
+            className={`rounded-full flex justify-center items-center p-1.5 w-8 h-8 mt-6 relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] active:text-red active:bg-red/20 dark:active:text-red dark:active:bg-red/20 ${
+                liked
+                    ? 'text-red bg-red/20'
+                    : 'bg-border/50 hover:bg-border/75 dark:bg-border-dark/50 dark:hover:bg-border-dark/75 text-primary/50 dark:text-primary-dark/50 hover:text-primary/75 dark:hover:text-primary-dark/75 disabled:opacity-60'
+            } ${className}`}
             onClick={handleClick}
         >
             {user ? (
@@ -105,9 +109,7 @@ const Post = ({
 
     return (
         <li ref={containerRef} className="snap-start last:pb-24 grid grid-cols-[32px_1fr] gap-2">
-            <span className="bg-accent rounded-full flex justify-center items-center p-1 w-9 h-9 mt-2">
-                <LikeButton liked={liked} handleClick={handleLike} />
-            </span>
+            <LikeButton liked={liked} handleClick={handleLike} />
             <span className={`flex items-center ${articleView ? 'py-1' : ''}`} ref={fetchMore ? ref : null}>
                 <div
                     className={`rounded-md p-2 transition-all flex-grow ${
@@ -451,7 +453,7 @@ export default function Posts({ children, articleView }) {
                             )}
                             <div>{children}</div>
                             {articleView && (
-                                <div className="mt-12 max-w-lg">
+                                <div className="mt-12 max-w-2xl">
                                     <QuestionForm
                                         disclaimer={false}
                                         subject={false}
