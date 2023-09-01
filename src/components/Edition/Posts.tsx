@@ -118,13 +118,13 @@ const Post = ({
                 >
                     {category && <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>}
                     <div
-                        className={` items-baseline flex ${active ? 'flex-col gap-1' : ''} ${
-                            articleView ? 'flex-col gap-1' : 'gap-1.5'
+                        className={` items-baseline ${active ? 'flex flex-col gap-1' : ''} ${
+                            articleView ? 'flex flex-col gap-1' : 'inline'
                         }`}
                     >
                         <Link
                             className={`inline m-0 font-semibold !leading-tight line-clamp-2 text-inherit hover:text-red dark:hover:text-yellow hover:text-inherit dark:text-inherit dark:hover:text-inherit ${
-                                articleView ? 'text-[.933rem]' : 'text-base'
+                                articleView ? 'text-[.933rem]' : 'text-base mr-1.5'
                             }`}
                             to={slug}
                         >
@@ -385,12 +385,12 @@ export default function Posts({ children, articleView }) {
                 </Modal>
                 <div className="px-4 md:px-5 md:mt-8 mb-12 max-w-screen-2xl mx-auto">
                     <section>
-                        <div className="py-4 md:py-2 border-b md:border-t border-border dark:border-dark text-center md:flex justify-between items-center sticky top-[-1px]">
-                            <p className="m-0 opacity-80">The latest from the PostHog community</p>
+                        <div className="py-4 px-2 md:py-2 bg-accent rounded text-center flex flex-col md:flex-row justify-between items-center sticky top-[-1px]">
+                            <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
                             <div className="flex space-x-6 items-center md:mt-0 mt-2 justify-between">
                                 {user ? (
                                     <span className="flex">
-                                        <p className="m-0 pr-2 mr-2 border-r border-border dark:border-dark">
+                                        <p className="text-sm m-0 pr-2 mr-2 border-r border-border dark:border-dark">
                                             Signed in as{' '}
                                             <Link
                                                 className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
@@ -401,14 +401,14 @@ export default function Posts({ children, articleView }) {
                                         </p>
                                         {isModerator && (
                                             <button
-                                                className="pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
+                                                className="text-sm pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
                                                 onClick={() => setNewPostModalOpen(!newPostModalOpen)}
                                             >
                                                 New post
                                             </button>
                                         )}
                                         <button
-                                            className="dark:text-yellow text-red font-semibold"
+                                            className="text-sm dark:text-yellow text-red font-semibold"
                                             onClick={() => logout()}
                                         >
                                             Logout
@@ -417,7 +417,7 @@ export default function Posts({ children, articleView }) {
                                 ) : (
                                     <button
                                         onClick={() => setLoginModalOpen(true)}
-                                        className="text-yellow font-semibold"
+                                        className="text-sm text-red dark:text-yellow font-semibold"
                                     >
                                         Sign in
                                     </button>
