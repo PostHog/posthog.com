@@ -73,12 +73,12 @@ export default function ClientPost({
             </Modal>
             <SEO title={title + ' - PostHog'} />
             {imageURL && (
-                <div className="rounded bg-accent dark:bg-accent-dark leading-none">
+                <div className="rounded bg-accent dark:bg-accent-dark leading-none max-h-96 text-center">
                     <ZoomImage>
                         {imageURL?.endsWith('.mp4') ? (
-                            <video className="w-full rounded-md" autoPlay src={imageURL} />
+                            <video className="max-w-full max-h-96 rounded-md" autoPlay src={imageURL} />
                         ) : (
-                            <img className="w-full rounded-md " src={imageURL} />
+                            <img className="max-w-full max-h-96 rounded-md" src={imageURL} />
                         )}
                     </ZoomImage>
                 </div>
