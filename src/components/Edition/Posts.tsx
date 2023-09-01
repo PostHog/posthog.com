@@ -186,7 +186,11 @@ function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelec
     const breakpoints = useBreakpoint()
 
     return articleView && breakpoints.md ? null : (
-        <div className={`${articleView ? 'sticky top-[108px] w-full lg:w-[20rem] flex-shrink-0' : 'flex-grow'}`}>
+        <div
+            className={`${
+                articleView ? 'reasonable:sticky top-[108px] w-full lg:w-[20rem] flex-shrink-0' : 'flex-grow'
+            }`}
+        >
             <div className="my-4 flex justify-between space-x-2">
                 <h5 className="m-0 line-clamp-1 leading-[2]">{getCategoryLabels(selectedCategories)}</h5>
                 <Categories
