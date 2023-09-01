@@ -212,7 +212,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                                         onClick?.()
                                     }}
                                     to={url}
-                                    className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded bg-light dark:bg-dark ${
+                                    className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 ${
                                         active
                                             ? ''
                                             : 'border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'

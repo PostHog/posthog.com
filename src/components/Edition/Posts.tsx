@@ -121,14 +121,20 @@ const Post = ({
                         }`}
                     >
                         <Link
-                            className={`inline m-0 text-base font-semibold !leading-tight line-clamp-2 text-inherit hover:text-red dark:hover:text-yellow hover:text-inherit dark:text-inherit dark:hover:text-inherit`}
+                            className={`inline m-0 font-semibold !leading-tight line-clamp-2 text-inherit hover:text-red dark:hover:text-yellow hover:text-inherit dark:text-inherit dark:hover:text-inherit ${
+                                articleView ? 'text-[.933rem]' : 'text-base'
+                            }`}
                             to={slug}
                         >
                             {title}
                         </Link>
                         <span className={`${articleView ? 'inline-flex gap-1' : 'inline-flex gap-1'}`}>
                             {authors?.data?.length > 0 && (
-                                <span className="text-sm font-medium leading-none opacity-60 hidden sm:inline overflow-hidden text-ellipsis whitespace-nowrap">
+                                <span
+                                    className={`font-medium leading-none opacity-60 hidden sm:inline overflow-hidden text-ellipsis whitespace-nowrap ${
+                                        articleView ? 'text-sm' : 'text-[.933rem]'
+                                    }`}
+                                >
                                     {authors?.data
                                         .map(({ id, attributes: { firstName, lastName } }) => {
                                             const name = [firstName, lastName].filter(Boolean).join(' ')
@@ -137,7 +143,11 @@ const Post = ({
                                         .join(', ')}
                                 </span>
                             )}
-                            <span className="text-sm font-medium leading-none opacity-60">
+                            <span
+                                className={`font-medium leading-none opacity-60 ${
+                                    articleView ? 'text-sm' : 'text-[.933rem]'
+                                }`}
+                            >
                                 {day.isToday() ? 'Today' : day.fromNow()}
                             </span>
                         </span>
@@ -176,7 +186,7 @@ function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelec
     const breakpoints = useBreakpoint()
 
     return articleView && breakpoints.md ? null : (
-        <div className={`${articleView ? 'sticky top-[108px] w-full lg:w-[30rem] flex-shrink-0' : 'flex-grow'}`}>
+        <div className={`${articleView ? 'sticky top-[108px] w-full lg:w-[20rem] flex-shrink-0' : 'flex-grow'}`}>
             <div className="my-4 flex justify-between space-x-2">
                 <h5 className="m-0 line-clamp-1 leading-[2]">{getCategoryLabels(selectedCategories)}</h5>
                 <Categories
@@ -409,7 +419,7 @@ export default function Posts({ children, articleView }) {
                             </div>
                         </div>
                     </section>
-                    <section className="lg:flex lg:space-x-12 my-4 md:my-8 items-start">
+                    <section className="lg:flex lg:space-x-8 my-4 md:my-8 items-start">
                         <PostsListing
                             selectedCategories={selectedCategories}
                             setSelectedCategories={setSelectedCategories}
