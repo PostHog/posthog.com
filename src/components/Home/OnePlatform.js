@@ -8,15 +8,16 @@ export default function OnePlatform() {
                 One platform, <span className="text-blue dark:text-yellow">thousands of use cases</span>
             </h2>
             <p className="text-center text-xl opacity-70 font-semibold mb-12">
-                PostHog grows with you – from startups to growth stage and beyond.
+                With 7+ products on one platform, you'll spend less time engineering your data and more time building
+                your product
             </p>
             <ul className="p-0 grid md:grid-cols-3 gap-6 md:gap-12">
                 <li className="list-none">
                     <StaticImage src="./images/mds.png" alt="Drake Hog" className="max-w-[179px] h-[200px]" />
-                    <h3 className="text-xl pt-4 mb-2 text-red">Replaces the modern data stack</h3>
+                    <h3 className="text-xl pt-4 mb-2 text-red">Create your ideal customer persona</h3>
                     <p>
-                        With 7+ products on one platform, you'll spend less time engineering your data integrations and
-                        more time building your product.
+                        Identify power users with analytics, research them with session replays, then sort it all into
+                        cohorts. Voila. You just found your ICP.
                     </p>
                 </li>
                 <li className="list-none">
@@ -25,10 +26,12 @@ export default function OnePlatform() {
                         alt="Balmer Hog"
                         className="max-w-[213px] h-[200px]"
                     />
-                    <h3 className="text-xl pt-4 mb-2 text-seagreen dark:text-teal">Tutorials, tutorials, tutorials!</h3>
+                    <h3 className="text-xl pt-4 mb-2 text-seagreen dark:text-teal">
+                        Manage betas and feature rollouts
+                    </h3>
                     <p>
-                        Our community members use PostHog in ways we never imagined. (Some have even built entire
-                        products on our API.) Maybe we’ll write about yours next?
+                        Use feature flags and early access management to customize who has access to what, when. Collect
+                        feedback with user surveys as you go!
                     </p>
                 </li>
                 <li className="list-none">
@@ -37,8 +40,11 @@ export default function OnePlatform() {
                         alt="Graduate Hog"
                         className="max-w-[170px] h-[200px]"
                     />
-                    <h3 className="text-xl pt-4 mb-2 text-yellow">Guides for hockey-stick growth</h3>
-                    <p>We cover how products like ours went from pre-revenue to $100 million ARR - all in the open.</p>
+                    <h3 className="text-xl pt-4 mb-2 text-yellow">Scale from MVP to monopoly</h3>
+                    <p>
+                        At the early stage you can pipe data wherever you'd like and rely on basic analytics. As you
+                        mature you'll grow into HogQL insights and our data warehouse.
+                    </p>
                 </li>
             </ul>
         </section>
