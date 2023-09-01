@@ -8,7 +8,9 @@ export default function InternalSidebar({ tableOfContents, mobile = true }) {
                 mobile ? 'lg:hidden' : ''
             } bg-accent dark:bg-accent-dark border border-border dark:border-dark rounded-md`}
         >
-            <p className="text-gray opacity-100 dark:text-white text-lg mt-0 mb-4 font-bold">On this page</p>
+            <p className="text-primary/50 dark:text-primary-dark/50 text-[.933rem] mt-0 mb-4 font-semibold">
+                On this page
+            </p>
             <ul className="list-none m-0 p-0 flex flex-col space-y-1">
                 {tableOfContents?.map((navItem, index) => {
                     return (
