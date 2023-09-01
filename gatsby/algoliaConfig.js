@@ -91,6 +91,7 @@ module.exports = {
                             ...endpoint,
                             slug: url.slice(1),
                             type: 'api',
+                            path_ranking: 0,
                         }
                     })
                 },
@@ -120,6 +121,7 @@ module.exports = {
                             excerpt: replies?.[0]?.body,
                             slug: `questions/${permalink || ''}`,
                             type: 'question',
+                            path_ranking: 5,
                         }
                     })
                 },
@@ -133,6 +135,7 @@ module.exports = {
                             title: 'Docs',
                             type: 'docs',
                             slug: 'docs',
+                            path_ranking: 1,
                             headings: [
                                 { value: 'Get started', depth: 2 },
                                 { value: 'Important links', depth: 2 },
@@ -146,6 +149,7 @@ module.exports = {
                             title: 'Handbook',
                             type: 'handbook',
                             slug: 'handbook',
+                            path_ranking: 2,
                             headings: [
                                 { value: 'Company', depth: 2 },
                                 { value: 'How we work', depth: 2 },
@@ -163,6 +167,7 @@ module.exports = {
                             title: 'Blog',
                             type: 'blog',
                             slug: 'blog',
+                            path_ranking: 2,
                             headings: [
                                 { value: 'Inside PostHog', depth: 2 },
                                 { value: 'Product updates', depth: 2 },
@@ -180,6 +185,7 @@ module.exports = {
                             title: 'Pricing',
                             type: 'docs',
                             slug: 'pricing',
+                            path_ranking: 1,
                             headings: [
                                 { value: 'Products', depth: 2 },
                                 { value: 'Pricing calculator', depth: 2 },
@@ -197,6 +203,7 @@ module.exports = {
                             title: 'Questions',
                             type: 'community',
                             slug: 'questions',
+                            path_ranking: 5,
                             headings: [
                                 { value: 'Features', depth: 2 },
                                 { value: 'Deployment', depth: 2 },
@@ -211,6 +218,7 @@ module.exports = {
                             title: 'Roadmap',
                             type: 'community',
                             slug: 'roadmap',
+                            path_ranking: 1,
                             headings: [
                                 { value: 'Under consideration', depth: 2 },
                                 { value: 'In progress', depth: 2 },
