@@ -90,7 +90,7 @@ const Post = ({
     }
 
     useEffect(() => {
-        if (active && typeof window !== 'undefined' && !breakpoints.md) {
+        if (active && typeof window !== 'undefined' && !breakpoints.sm) {
             containerRef?.current?.scrollIntoView({ block: 'center', inline: 'nearest' })
             window.scrollTo({ top: 0 })
         }
@@ -185,10 +185,10 @@ const getCategoryLabels = (selectedCategories) => {
 function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelectedCategories, selectedCategories }) {
     const breakpoints = useBreakpoint()
 
-    return articleView && breakpoints.md ? null : (
+    return articleView && breakpoints.sm ? null : (
         <div
             className={`${
-                articleView ? 'reasonable:sticky top-[108px] w-full lg:w-[20rem] flex-shrink-0' : 'flex-grow'
+                articleView ? 'reasonable:sticky top-[108px] w-full md:w-[20rem] flex-shrink-0' : 'flex-grow'
             }`}
         >
             <div className="my-4 flex justify-between space-x-2">
@@ -208,7 +208,7 @@ function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelec
             >
                 <ul
                     className={`divide-y divide-border dark:divide-border-dark list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
-                        articleView && !breakpoints.md ? 'h-[80vh] overflow-auto' : ''
+                        articleView && !breakpoints.sm ? 'h-[80vh] overflow-auto' : ''
                     }`}
                 >
                     {posts.map(({ id, attributes }, index) => {
@@ -423,7 +423,7 @@ export default function Posts({ children, articleView }) {
                             </div>
                         </div>
                     </section>
-                    <section className="lg:flex lg:space-x-8 my-4 md:my-8 items-start">
+                    <section className="md:flex md:space-x-8 my-4 md:my-8 items-start">
                         <PostsListing
                             selectedCategories={selectedCategories}
                             setSelectedCategories={setSelectedCategories}
@@ -441,7 +441,7 @@ export default function Posts({ children, articleView }) {
                             {articleView && (
                                 <button
                                     onClick={() => navigate(prev ? -1 : '/posts')}
-                                    className="inline-flex lg:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                                    className="inline-flex md:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                                 >
                                     <RightArrow className="-scale-x-100 w-6" />
                                     <span className="text-red dark:text-yellow text-[15px] font-semibold line-clamp-1 text-left">

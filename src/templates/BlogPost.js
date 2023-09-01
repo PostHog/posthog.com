@@ -131,14 +131,18 @@ export default function BlogPost({ data, pageContext, location }) {
                 date={date}
                 tags={tags}
             />
-            <div className="flex flex-col-reverse md:flex-row gap-8 2xl:gap-12">
-                <div className={`article-content flex-1 transition-all ${fullWidthContent ? 'w-full' : 'max-w-2xl'}`}>
-                    <MDXProvider components={components}>
-                        <MDXRenderer>{body}</MDXRenderer>
-                    </MDXProvider>
-                </div>
-                <div className={`shrink basis-72 md:reasonable:sticky top-[128px] ${fullWidthContent ? '' : ''}`}>
-                    <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
+            <div className="@container">
+                <div className="flex flex-col-reverse items-start @2xl:flex-row gap-8 2xl:gap-12">
+                    <div
+                        className={`article-content flex-1 transition-all ${fullWidthContent ? 'w-full' : 'max-w-2xl'}`}
+                    >
+                        <MDXProvider components={components}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
+                    <div className={`shrink basis-72 @2xl:reasonable:sticky top-[128px] ${fullWidthContent ? '' : ''}`}>
+                        <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
+                    </div>
                 </div>
             </div>
         </>
