@@ -104,20 +104,49 @@ const Post = ({
     const defaultImage = post_category?.data?.attributes?.defaultImage?.data?.attributes?.url
 
     return (
-        <li ref={containerRef} className="snap-start last:pb-24">
-            <span className="flex items-center" ref={fetchMore ? ref : null}>
-                <Link
-                    className={`text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit flex-grow`}
-                    to={slug}
+        <li ref={containerRef} className="snap-start last:pb-24 grid grid-cols-[32px_1fr] gap-2">
+            <span className="bg-accent rounded-full flex justify-center items-center p-1 w-9 h-9 mt-2">
+                <LikeButton />
+            </span>
+            <span className={`flex items-center ${articleView ? 'py-1' : ''}`} ref={fetchMore ? ref : null}>
+                <div
+                    className={`rounded-md p-2 transition-all flex-grow ${
+                        active ? 'bg-accent dark:bg-accent-dark' : ''
+                    }`}
                 >
+                    {category && <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>}
                     <div
-                        className={`flex space-x-6 border rounded-md p-2 transition-all flex-grow ${
-                            active
-                                ? 'border-border dark:border-dark bg-accent dark:bg-accent-dark'
-                                : 'border-transparent dark:border-transparent hover:border-border dark:hover:border-dark'
+                        className={` items-baseline flex ${active ? 'flex-col gap-1' : ''} ${
+                            articleView ? 'flex-col gap-1' : 'gap-1.5'
                         }`}
                     >
-                        <div className="sm:w-[150px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden md:self-start self-center relative z-10">
+                        <Link
+                            className={`inline m-0 text-base font-semibold !leading-tight line-clamp-2 text-inherit hover:text-red dark:hover:text-yellow hover:text-inherit dark:text-inherit dark:hover:text-inherit`}
+                            to={slug}
+                        >
+                            {title}
+                        </Link>
+                        <span className={`${articleView ? 'inline-flex gap-1' : 'inline-flex gap-1'}`}>
+                            {authors?.data?.length > 0 && (
+                                <span className="text-sm font-medium leading-none opacity-60 hidden sm:inline overflow-hidden text-ellipsis whitespace-nowrap">
+                                    {authors?.data
+                                        .map(({ id, attributes: { firstName, lastName } }) => {
+                                            const name = [firstName, lastName].filter(Boolean).join(' ')
+                                            return name
+                                        })
+                                        .join(', ')}
+                                </span>
+                            )}
+                            <span className="text-sm font-medium leading-none opacity-60">
+                                {day.isToday() ? 'Today' : day.fromNow()}
+                            </span>
+                        </span>
+                    </div>
+                    <div className="hidden sm:w-[100px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden md:self-start self-center relative z-10">
+                        <Link
+                            className={`text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit flex-grow`}
+                            to={slug}
+                        >
                             {imageURL?.endsWith('.mp4') ? (
                                 <video className="object-cover w-full h-full" src={imageURL} />
                             ) : (
@@ -128,34 +157,9 @@ const Post = ({
                                     src={imageURL || defaultImage || '/banner.png'}
                                 />
                             )}
-                        </div>
-                        <div>
-                            <span>
-                                {category && (
-                                    <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>
-                                )}
-                                <p className="m-0 text-base md:text-lg font-bold !leading-tight line-clamp-2">
-                                    {title}
-                                </p>
-                            </span>
-                            <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
-                                {authors?.data?.length > 0 && (
-                                    <li className="text-sm font-medium leading-none pr-2 border-r border-light dark:border-dark opacity-60 sm:block hidden overflow-hidden text-ellipsis whitespace-nowrap">
-                                        {authors?.data
-                                            .map(({ id, attributes: { firstName, lastName } }) => {
-                                                const name = [firstName, lastName].filter(Boolean).join(' ')
-                                                return name
-                                            })
-                                            .join(', ')}
-                                    </li>
-                                )}
-                                <li className="text-sm font-medium leading-none flex-shrink-0">
-                                    <span className="opacity-60">{day.isToday() ? 'Today' : day.fromNow()}</span>
-                                </li>
-                            </ul>
-                        </div>
+                        </Link>
                     </div>
-                </Link>
+                </div>
             </span>
         </li>
     )
@@ -189,7 +193,7 @@ function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelec
                 }
             >
                 <ul
-                    className={` list-none p-0 m-0 flex flex-col space-y-4 snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
+                    className={`divide-y divide-border dark:divide-border-dark list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
                         articleView && !breakpoints.md ? 'h-[80vh] overflow-auto' : ''
                     }`}
                 >
@@ -230,9 +234,7 @@ const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>
                             className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
                         >
                             <span className="flex justify-between items-center">
-                                <span className="text-base overflow-hidden text-ellipsis whitespace-nowrap">
-                                    {subject}
-                                </span>
+                                <span className="text-base line-clamp-2 text-ellipsis ">{subject}</span>
                                 <span className="flex-shrink-0 text-black dark:text-white text-xs flex space-x-1 items-center opacity-70">
                                     <span className="w-4">
                                         <Chat />
@@ -419,7 +421,7 @@ export default function Posts({ children, articleView }) {
                         />
                         <div
                             className={`${
-                                articleView ? 'flex-grow' : 'sticky top-[108px] w-[30rem] flex-shrink-0 block'
+                                articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'
                             }`}
                         >
                             {articleView && (
