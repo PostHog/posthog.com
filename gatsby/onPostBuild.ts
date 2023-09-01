@@ -214,7 +214,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                 }
             }
             blog: allMdx(
-                filter: { fields: { slug: { regex: "/^/blog/" } }, frontmatter: { featuredImageType: { eq: "full" } } }
+                filter: {
+                    fields: { slug: { regex: "/^/blog|^/spotlight/" } }
+                    frontmatter: { featuredImageType: { eq: "full" } }
+                }
             ) {
                 nodes {
                     fields {
