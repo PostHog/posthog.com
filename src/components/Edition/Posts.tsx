@@ -385,7 +385,7 @@ export default function Posts({ children, articleView }) {
                 </Modal>
                 <div className="px-4 md:px-5 md:mt-8 mb-12 max-w-screen-2xl mx-auto">
                     <section>
-                        <div className="py-4 px-2 md:py-2 bg-accent rounded text-center flex flex-col md:flex-row justify-between items-center sticky top-[-1px]">
+                        <div className="py-4 px-2 md:py-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col md:flex-row justify-between items-center sticky top-[-1px]">
                             <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
                             <div className="flex space-x-6 items-center md:mt-0 mt-2 justify-between">
                                 {user ? (
