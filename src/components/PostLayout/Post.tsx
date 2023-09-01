@@ -46,17 +46,17 @@ export default function Post({ children }: { children: React.ReactNode }) {
         <div className="">
             {menu && mobileMenu && <MobileNav />}
             <div
-                className={`w-full relative lg:flex justify-between mx-auto transition-all ${
+                className={`w-full relative md:flex justify-between mx-auto transition-all ${
                     fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
                 }`}
             >
                 {menu && (
                     <div
                         style={{ maxWidth: menuWidth?.left ?? defaultMenuWidth.left }}
-                        className="w-full flex-shrink-0 lg:block hidden relative z-20"
+                        className="w-full flex-shrink-0 md:block hidden relative z-20"
                     >
                         <aside
-                            className={`lg:sticky md:sticky md:top-0 reasonable:top-[108px] max-h-screen reasonable:max-h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end px-4 lg:box-border my-10 lg:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark ${
+                            className={`md:sticky md:sticky md:top-0 reasonable:top-[108px] max-h-screen reasonable:max-h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end px-4 md:box-border my-10 md:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark ${
                                 hideSearch ? 'pt-5' : ''
                             }`}
                         >
@@ -75,7 +75,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     style={contentWidth && !fullWidthContent ? { width: '100%', maxWidth: contentWidth } : {}}
                     key={`${title}-article`}
                     id="content-menu-wrapper"
-                    className={`py-4 box-border w-full flex-shrink mx-auto transition-all ${
+                    className={`py-4 box-border w-full flex-shrink mx-auto transition-all overflow-auto ${
                         !fullWidthContent && sidebar && !hideSidebar ? ' max-w-3xl' : 'max-w-screen-2xl'
                     }`}
                 >
