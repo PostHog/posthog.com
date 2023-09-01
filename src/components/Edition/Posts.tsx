@@ -106,7 +106,7 @@ const Post = ({
     return (
         <li ref={containerRef} className="snap-start last:pb-24 grid grid-cols-[32px_1fr] gap-2">
             <span className="bg-accent rounded-full flex justify-center items-center p-1 w-9 h-9 mt-2">
-                <LikeButton handleClick={handleLike} />
+                <LikeButton liked={liked} handleClick={handleLike} />
             </span>
             <span className={`flex items-center ${articleView ? 'py-1' : ''}`} ref={fetchMore ? ref : null}>
                 <div
