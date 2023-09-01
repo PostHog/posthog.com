@@ -29,7 +29,7 @@ Because it tracks real user behavior, it is a closer representation of reality. 
 
 ![Types](../images/blog/real-user-monitoring/classes.png)
 
-The ideal real user monitoring system identifies these problems, provides details, supports planning of fixes, and ultimately, supports creating a better user experience.
+The ideal real user monitoring system captures data about these issues, provides details, supports planning of fixes, and ultimately, supports creating a better user experience.
 
 ## Benefits of real user monitoring
 
@@ -47,7 +47,7 @@ There are always endless potential improvements to your product. To get the larg
 
 - A user complains a feature "sucks." This feedback by itself is unclear. It could mean slow page speed, poor design, a bug, or a lack of knowledge.
 
-Real user monitoring helps you get the information to understand and prioritize the issues. It also provides details on how to solve those issues; for example, session replays being bug recreation steps or query metrics showing which ones are slow.
+Real user monitoring helps you get the information to understand and prioritize the issues. It also provides details on how to solve those issues; for example, session replays are bug recreation steps and query metrics show which ones are slow.
 
 ### 2. Manage risk
 
@@ -67,11 +67,13 @@ Setup happens over three stages: capture, analyze, and action. PostHog, as an al
 
 To capture data for real user monitoring in PostHog, we rely on [session replays](/docs/session-replay) and [custom event capture](/docs/getting-started/send-events#2-capture-custom-events). 
 
-Session replays capture exactly how users are interacting with your product. They also include errors, console logs, and performance measurements. To enable session replays, initialize a `posthog-js` client or add the [snippet](/docs/getting-started/install?tab=snippet) to your site and make sure to enable the options related to "Recordings" in your [project settings](https://app.posthog.com/project/settings#recordings).
+Session replays capture a visual of exactly how users are interacting with your product. To enable session replays, install and initialize the [JavaScript Web SDK](/docs/libraries/js) or add the [snippet](/docs/getting-started/install?tab=snippet) to your site. After, make sure to enable the options related to "Recordings" in your [project settings](https://app.posthog.com/project/settings#recordings).
 
 ![Recordings](../images/blog/real-user-monitoring/recordings.png)
 
-To capture errors, query speed, aggregate performance metrics, and any other events, you can capture custom events using one of our [SDKs](/docs/libraries/js) or with our [API](/docs/api/post-only-endpoints). Alternatively, for error capture, you can use our [Sentry integration](/docs/libraries/sentry). See a more detailed capture setup in our "[How to set up Next.js monitoring](/tutorials/nextjs-monitoring)" tutorial.
+To capture errors, query speed, and other events relevant to the real usage of your product, you need a way to know when those events happen in your code. This could be an error boundary, web vital report, or a server profiler. Many frameworks, like React and [Next.js](/tutorials/nextjs-monitoring), have functions for these built-in, others you must build them yourself. Once set up, when an event happens, capture it with one of our [SDKs](/docs/libraries/js) or with our [API](/docs/api/post-only-endpoints).
+
+Alternatively, for error capture, you can use our [Sentry integration](/docs/libraries/sentry). 
 
 ### 2. Analyze
 
@@ -83,11 +85,13 @@ Once you’ve begun to capture data, you can start to analyze it. This helps you
 - Rageclicks broken down by page.
 - User path to errors.
 
-![Dashboard](../images/blog/real-user-monitoring//dashboard.png)
+![Dashboard](../images/blog/real-user-monitoring/dashboard.png)
 
 For each of these insights, you can use session replays to dive deeper into exactly what is happening in the related sessions. Click the visualization to get a list of users and their replays. In those replays, you can see where events like errors or queries happen, console logs, and performance details for that specific session. 
 
 ![Dive](../images/blog/real-user-monitoring/dive.mp4)
+
+Enabling session replay also captures performance metrics which you can aggregate and analyze using [SQL insights](/docs/product-analytics/sql) and the `raw_session_replay_events` table.
 
 The combination of these insights enables you to understand your current user experience and what areas need improvement.
 
