@@ -42,6 +42,7 @@ const retrievePages = (type, regex) => {
                         id,
                         title: frontmatter.title,
                         type,
+                        path_ranking: 1,
                     }
                 }),
     }
@@ -91,7 +92,7 @@ module.exports = {
                             ...endpoint,
                             slug: url.slice(1),
                             type: 'api',
-                            path_ranking: 0,
+                            path_ranking: 1,
                         }
                     })
                 },
@@ -167,7 +168,7 @@ module.exports = {
                             title: 'Blog',
                             type: 'blog',
                             slug: 'blog',
-                            path_ranking: 2,
+                            path_ranking: 1,
                             headings: [
                                 { value: 'Inside PostHog', depth: 2 },
                                 { value: 'Product updates', depth: 2 },
