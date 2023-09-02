@@ -73,21 +73,36 @@ export default function ClientPost({
             </Modal>
             <SEO title={title + ' - PostHog'} />
             {imageURL && (
-                <div className="max-w-lg">
+                <div className="rounded bg-accent dark:bg-accent-dark leading-none max-h-96 text-center">
                     <ZoomImage>
                         {imageURL?.endsWith('.mp4') ? (
-                            <video className="w-full rounded-md" autoPlay src={imageURL} />
+                            <video className="max-w-full max-h-96 rounded-md" autoPlay src={imageURL} />
                         ) : (
-                            <img className="w-full rounded-md" src={imageURL} />
+                            <img className="max-w-full max-h-96 rounded-md" src={imageURL} />
                         )}
                     </ZoomImage>
                 </div>
             )}
             <div className={`flex flex-col py-4`}>
-                <p className="m-0 opacity-70 order-last lg:order-first">
-                    {dayjs(date || publishedAt).format('MMM DD, YYYY')}
-                </p>
                 <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1`}>{title}</h1>
+                <p className="m-0">
+                    <span className="opacity-70">{dayjs(date || publishedAt).format('MMM DD, YYYY')}</span>
+
+                    {isModerator && (
+                        <div className="ml-3 text-sm inline-flex space-x-2 text-primary/50 dark:text-primary-dark/50">
+                            <button
+                                onClick={() => setEditPostModalOpen(true)}
+                                className="text-red dark:text-yellow font-semibold"
+                            >
+                                Edit post
+                            </button>
+                            <span>|</span>
+                            <button onClick={handleDeletePost} className="text-red font-semibold">
+                                {confirmDelete ? 'Click again to confirm' : 'Delete post'}
+                            </button>
+                        </div>
+                    )}
+                </p>
             </div>
             <div className="my-2 article-content">
                 <Markdown>{body}</Markdown>
@@ -96,16 +111,6 @@ export default function ClientPost({
                 <CallToAction size="md" type="outline" to={CTA.url}>
                     {CTA.label}
                 </CallToAction>
-            )}
-            {isModerator && (
-                <div className="mt-6 flex space-x-2">
-                    <button onClick={() => setEditPostModalOpen(true)} className="text-red dark:text-yellow font-bold">
-                        Edit post
-                    </button>
-                    <button onClick={handleDeletePost} className="text-red font-bold">
-                        {confirmDelete ? 'Click again to confirm' : 'Delete post'}
-                    </button>
-                </div>
             )}
         </>
     )
