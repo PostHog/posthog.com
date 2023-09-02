@@ -8,9 +8,10 @@ import QuestionSidebar from 'components/Questions/QuestionSidebar'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
-import { ExclamationIcon, XIcon } from '@heroicons/react/outline'
+import { XIcon } from '@heroicons/react/outline'
 import { communityMenu } from '../../navs'
 import useTopicsNav from '../../navs/useTopicsNav'
+import ZendeskTicket from 'components/ZendeskTicket'
 
 type QuestionPageProps = {
     params: {
@@ -69,79 +70,75 @@ export default function QuestionPage(props: QuestionPageProps) {
                 {isModerator && question && (
                     <div className="bg-accent dark:bg-accent-dark rounded-md p-6 mb-6 text-primary dark:text-primary-dark">
                         <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">Moderator tools</h4>
-
-                        <div className="w-full relative">
-                            <p className="!text-sm pt-0.5 pb-0  mb-0 flex flex-col items-end space-y-1.5 absolute top-0 right-0">
-                                <Link className="font-bold" to={link} externalNoIcon>
-                                    View in PostHog
-                                </Link>
+                        <div className="grid grid-cols-2">
+                            <div>
                                 <Link
-                                    to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question?.question/${question?.id}`}
-                                    externalNoIcon
-                                    className="font-bold"
+                                    to={`/community/profiles/${question?.attributes?.profile?.data?.id}`}
+                                    className="text-yellow font-bold"
                                 >
-                                    View in Strapi
+                                    {question?.attributes?.profile?.data?.attributes?.firstName
+                                        ? `${question?.attributes?.profile?.data?.attributes?.firstName} ${question?.attributes?.profile?.data?.attributes?.lastName}`
+                                        : 'Anonymous'}
                                 </Link>
-                                <Link
-                                    to={`https://posthoghelp.zendesk.com/agent/search/1?copy&type=ticket&q=${encodeURIComponent(
-                                        question?.attributes?.subject
-                                    )}`}
-                                    externalNoIcon
-                                    className="font-bold"
-                                >
-                                    View in ZenDesk
-                                </Link>
-                            </p>
-
-                            <Link
-                                to={`/community/profiles/${question?.attributes?.profile?.data?.id}`}
-                                className="text-yellow font-bold"
-                            >
-                                {question?.attributes?.profile?.data?.attributes?.firstName
-                                    ? `${question?.attributes?.profile?.data?.attributes?.firstName} ${question?.attributes?.profile?.data?.attributes?.lastName}`
-                                    : 'Anonymous'}
-                            </Link>
-                        </div>
-
-                        <input
-                            className="w-full m-0 font-normal text-sm text-primary dark:text-primary-dark border-none p-0 bg-transparent focus:ring-0"
-                            type="text"
-                            value={question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}
-                            readOnly
-                            onFocus={(e) => e.target.select()}
-                        />
-                        {escalated && (
-                            <div className="flex space-x-1 items-center mt-4">
-                                <ExclamationIcon className="w-5 h-5" />
-                                <p className="font-semibold m-0">Thread has been escalated</p>
+                                <input
+                                    className="w-full m-0 font-normal text-sm text-primary dark:text-primary-dark border-none p-0 bg-transparent focus:ring-0"
+                                    type="text"
+                                    value={
+                                        question?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email
+                                    }
+                                    readOnly
+                                    onFocus={(e) => e.target.select()}
+                                />
                             </div>
-                        )}
-
-                        <div className="flex items-center justify-between mb-2 pt-4 mt-4 border-t border-light dark:border-dark">
-                            <h4 className="text-xs text-primary dark:text-primary-dark opacity-70 p-0 m-0 font-semibold uppercase">
-                                Forum topics
-                            </h4>
-                            <TopicSelector questionId={question?.id} permalink={permalink} />
-                        </div>
-                        <ul className="flex items-center list-none p-0 flex-wrap">
-                            {question?.attributes?.topics?.data.map((topic) => (
-                                <li
-                                    key={topic.id}
-                                    className="bg-white dark:bg-white/10 py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
-                                >
-                                    <Link
-                                        to={`/questions/topic/${topic.attributes.slug}`}
-                                        className="text-yellow text-sm"
-                                    >
-                                        {topic.attributes.label}
+                            <div className="w-full relative">
+                                <p className="!text-sm pt-0.5 pb-0  mb-0 flex flex-col items-end space-y-1.5">
+                                    <Link className="font-bold" to={link} externalNoIcon>
+                                        View in PostHog
                                     </Link>
+                                    <Link
+                                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question.question/${question?.id}`}
+                                        externalNoIcon
+                                        className="font-bold"
+                                    >
+                                        View in Strapi
+                                    </Link>
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            className={`grid gap-x-4 mt-4 border-t divide-x divide-border dark:divide-border-dark border-light dark:border-dark ${
+                                question.attributes.zendeskTicketID ? 'grid-cols-2' : ''
+                            }`}
+                        >
+                            <ZendeskTicket question={question} questionID={question.id} />
+                            <div className={`pt-4 ${question.attributes.zendeskTicketID ? 'pl-4' : ''}`}>
+                                <div className="flex items-center justify-between mb-2">
+                                    <h4 className="text-xs text-primary dark:text-primary-dark opacity-70 p-0 m-0 font-semibold uppercase">
+                                        Forum topics
+                                    </h4>
+                                    <TopicSelector questionId={question?.id} permalink={permalink} />
+                                </div>
+                                <ul className="flex items-center list-none p-0 flex-wrap">
+                                    {question?.attributes?.topics?.data.map((topic) => (
+                                        <li
+                                            key={topic.id}
+                                            className="bg-white dark:bg-white/10 py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
+                                        >
+                                            <Link
+                                                to={`/questions/topic/${topic.attributes.slug}`}
+                                                className="text-yellow text-sm"
+                                            >
+                                                {topic.attributes.label}
+                                            </Link>
 
-                                    <button onClick={() => removeTopic(topic)}>
-                                        <XIcon className="h-4 w-4 text-primary dark:text-primary-dark " />
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
+                                            <button onClick={() => removeTopic(topic)}>
+                                                <XIcon className="h-4 w-4 text-primary dark:text-primary-dark " />
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 )}
             </PostLayout>
