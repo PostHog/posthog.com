@@ -1,5 +1,5 @@
 ---
-title: Why use feature flags as a service?
+title: Feature flags as a service: should you build or buy?
 date: 2023-09-01
 author: ["ian-vanagas"]
 showTitle: true
