@@ -14,7 +14,7 @@ The challenge with time on page is measuring activity. Because of the event-driv
 
 ## Calculating average time on page
 
-To calculate the average time on page, we must create a [SQL insight](/docs/product-analytics/sql). To do this, [create a new insight](https://app.posthog.com/insights/new) and select the SQL tab. Here we write a HogQL expression to: 
+To calculate the average time on page, we must create a [SQL insight](/docs/product-analytics/sql). To do this, [create a new insight](https://app.posthog.com/insights/new) and select the SQL tab. Here we write a query to: 
 
 1. Get `$pageview` and `$pageleave` events from 2023
 2. Use a `WINDOW` function to get the next `$pageview` or `$pageleave` event after the initial `$pageview` event.
