@@ -1,6 +1,6 @@
 ---
-title: Feature flags as a service: should you build or buy?
-date: 2023-09-01
+title: "Feature flags as a service: Should you build or buy?"
+date: 2023-09-04
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
