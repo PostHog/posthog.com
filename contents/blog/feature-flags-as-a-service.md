@@ -20,9 +20,9 @@ The basic functionality of feature flags is simple enough to build yourself. The
 
 ## What does a feature flag service do?
 
-At their most simple, a feature flag service is:
+In its simplest form, a feature flag service is:
 
-- A store of feature flags with keys with associated values.
+- A store of flags with keys and their associated values.
 - A function that takes a key, checks the store, and returns a value.
 
 In Python, this might look like:
@@ -52,11 +52,11 @@ The big problem with this simple service is that the values are hard coded and r
 
 The path to solving this is an increasingly complicated one, each step with its downsides:
 
-1. Use a config to store the flag values. This still requires a redeploy to change. Read more in [Feature flags vs configuration: Which should you choose?](/blog/feature-flags-vs-configuration)
+1. Use a config to store the flag values. This still requires a redeploy to update flag values. Read more in [Feature flags vs configuration: Which should you choose?](/blog/feature-flags-vs-configuration)
 2. Store flag values in your database. This requires an admin panel or root access to modify the values and puts stress on your infrastructure. Database issues also impact the resiliency of flags.
 3. Write an external service or use a library to manage and evaluate feature flags. New dependencies creates a bunch of maintenance and optimization work to ensure they remain fast and bug-free. 
 
-As is apparent, rolling your own in-house feature flag service becomes increasingly complicated. We haven’t even touched on adding logic for targeting, caching for speed, or resiliency for parts of the service going down. All of these make you more likely to introduce bugs and create tech debt. 
+We haven’t even touched on adding logic for targeting, caching for speed, or resiliency for parts of the service going down. All of these make you more likely to introduce bugs and create tech debt. 
 
 > **What does "roll your own" mean?** The phrase "rolling your own X" refers to developing, implementing, and using your own version of a common service such as authentication, bootloader, or in this case, feature flags.
 
@@ -70,17 +70,6 @@ Using feature flags as a service integrates with your app like other external se
 
 <MultiLanguage>
 
-```js
-import posthog from 'posthog-js'
-
-posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
-
-posthog.onFeatureFlags(function () {
-    if (posthog.isFeatureEnabled('flag-key')) {
-        // do something
-    }
-})
-```
 
 ```python
 from posthog import Posthog
@@ -98,6 +87,7 @@ Feature flag services also contain features for complicated use cases including:
 - Multi-variant flags that enable A/B testing.
 - Integrations with other external services like product analytics, CDPs, and automations.
 - Speed and resiliency optimizations like local evaluation and caching.
+- Logging and analytics.
 
 ## Why use a feature flags as a service provider?
 
@@ -105,7 +95,7 @@ The benefit of using a feature flag service is similar to the benefit of using o
 
 > **Aren’t feature flags as a service expensive?** Although you aren’t paying anything to roll your own or use an open source version, you are still paying for the hosting, implementing, and maintaining of it. This time and energy can cost much more than the dollar amount you pay a service provider.
 
-With a feature flags as a service, you worry less about:
+With a feature flags as a service, you gain more confidence in:
 
 - **Usability.** The service provides a centralized location and UI to manage flags.
 - **Reliability.** The service takes care of the infrastructure, redundancy, speed, and reliability.
@@ -115,7 +105,7 @@ In fewer words, you pass your potential problems off to them.
 
 ![Problems](../images/blog/feature-flags-as-a-service/problems.png)
 
-Using feature flags as a service doesn’t mean everything is perfect. There are often issues with the worry areas. Design can be poor, services can go down, and integrations can disappoint. 
+Using feature flags as a service doesn’t mean everything is perfect and there are other issues that may arise. Design can be poor, services can go down, and integrations can disappoint. 
 
 What using feature flags as a service means is that these issues are largely off your plate. You can focus on building a great product, and that is what a [feature flag as a service provider like PostHog](/feature-flags) is all about supporting.
 
