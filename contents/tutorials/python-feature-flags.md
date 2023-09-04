@@ -76,14 +76,14 @@ def hello_world():
   return "<p>Hello, World!</p>"
 
 @app.route("/user/<string:user>")
-def show_user(user):
-  posthog.capture(
-		user, 
-		"visited user page", 
-		{
-			'$set_once': {'initial_name': user}
-		}
-	)
+  def show_user(user):
+    posthog.capture(
+      user, 
+      "visited user page", 
+      {
+        '$set_once': {'initial_name': user} 
+      }
+    )
   return f"<p>Hello, {user}!</p>"
 ```
 
@@ -114,18 +114,18 @@ def show_user(user):
     'new-cool-feature', 
     user
   )
-  
+
   posthog.capture(
-		user, 
-		"visited user page", 
-		{
-			'$set_once': {'initial_name': user}
-		}
-	)
+    user, 
+    "visited user page", 
+    {
+      '$set_once': {'initial_name': user}
+    }
+  )
 
   if flag_enabled:
     return f"<p>Welcome, {user}! You are on the new cool page</p>"
-  
+
   return f"<p>Hello, {user}!</p>"
 ```
 
