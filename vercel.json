@@ -732,7 +732,7 @@
         },
         {
             "source": "/docs/getting-started/install",
-            "destination": "/docs"
+            "destination": "/docs/product-os/installation"
         },
         {
             "source": "/enterprise",

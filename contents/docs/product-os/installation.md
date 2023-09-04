@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: Install PostHog
 sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
