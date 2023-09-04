@@ -2272,8 +2272,8 @@ export const docsMenu = {
                     url: '',
                     children: [
                         {
-                            url: '/docs/cdp/bitbucket-release-tracker',
-                            name: 'BitBucket',
+                            url: '/docs/cdp/segment',
+                            name: 'Segment',
                         },
                         {
                             url: '/docs/cdp/replicator',
@@ -2294,10 +2294,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/rudderstack-import',
                             name: 'Rudderstack',
-                        },
-                        {
-                            url: '/docs/cdp/segment',
-                            name: 'Segment',
                         },
                         {
                             url: '/docs/cdp/sentry-connector',
