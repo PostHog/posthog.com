@@ -17,6 +17,7 @@ import * as icons from '@posthog/icons'
 import HoverTooltip from 'components/Tooltip'
 import { SignupCTA } from 'components/SignupCTA'
 import { CallToAction } from 'components/CallToAction'
+import { useInView } from 'react-intersection-observer'
 
 const DarkModeToggle = () => {
     const { websiteTheme } = useValues(layoutLogic)
@@ -131,55 +132,29 @@ const ActiveBackground = ({ mobile = false }) => {
     )
 }
 
-const MenuItem = ({ url, color, icon, name, initialScrollTo, overflowing, mobile, active, onClick }) => {
-    const ref = useRef<HTMLLIElement>(null)
-    const Icon = icons[icon]
-
-    useEffect(() => {
-        if (initialScrollTo && overflowing) ref?.current?.scrollIntoView({ block: 'nearest', inline: 'center' })
-    }, [overflowing])
-
-    const handleClick = () => {
-        onClick?.()
-        ref?.current?.scrollIntoView({ block: 'nearest', inline: 'center' })
-    }
-
-    return (
-        <li ref={ref}>
-            <Link
-                onClick={handleClick}
-                to={url}
-                className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded ${
-                    active
-                        ? ''
-                        : 'border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
-                }`}
-            >
-                <span className={`w-6 h-6 mr-2 text-${color}`}>
-                    <Icon />
-                </span>
-                <span
-                    className={`text-sm whitespace-nowrap ${
-                        active ? 'font-bold opacity-100' : 'font-semibold opacity-60 group-hover:opacity-100'
-                    }`}
-                >
-                    {name}
-                </span>
-                <span
-                    className={`absolute ${
-                        mobile ? 'top-[-4px]' : '-bottom-2'
-                    } left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
-                        active ? `border-${color}` : `border-transparent`
-                    }`}
-                />
-            </Link>
-        </li>
-    )
-}
-
 export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex, scrollOnRender = true }) => {
     const ref = useRef<HTMLUListElement>(null)
+    const [firstRef, firstInView] = useInView({ threshold: 1 })
+    const [lastRef, lastInView] = useInView({ threshold: 1 })
     const [overflowing, setOverflowing] = useState(false)
+    const menuItemsRef = useRef(null)
+
+    const scrollToIndex = (index) => {
+        const map = getMap()
+        const node = map.get(index)
+        node?.scrollIntoView({
+            block: 'nearest',
+            inline: 'center',
+        })
+    }
+
+    const getMap = () => {
+        if (!menuItemsRef.current) {
+            menuItemsRef.current = new Map()
+        }
+        return menuItemsRef.current
+    }
+
     function handleResize() {
         setOverflowing((ref?.current && ref?.current.scrollWidth > ref?.current.clientWidth) || false)
     }
@@ -192,25 +167,94 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
         }
     }, [])
 
+    useEffect(() => {
+        if (scrollOnRender && overflowing) scrollToIndex(activeIndex)
+    }, [overflowing])
+
     return menu?.length > 0 ? (
-        <ul
-            style={{ justifyContent: overflowing ? 'start' : 'center' }}
-            ref={ref}
-            className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x overflow-x-auto overflow-y-hidden ${className}`}
-        >
-            {menu.map((menuItem, index) => {
-                return (
-                    <MenuItem
-                        key={menuItem.name}
-                        {...menuItem}
-                        initialScrollTo={scrollOnRender && activeIndex === index}
-                        overflowing={overflowing}
-                        mobile={mobile}
-                        active={menu[activeIndex]?.name === menuItem.name}
-                    />
-                )
-            })}
-        </ul>
+        <div className="relative">
+            {overflowing && (
+                <button
+                    onDoubleClick={(e) => e.preventDefault()}
+                    onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
+                    className={`absolute top-0 left-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pl-2 bg-gradient-to-l from-transparent to-light via-light dark:via-dark dark:to-dark ${
+                        firstInView ? '-z-10' : 'z-10'
+                    }`}
+                >
+                    <icons.ChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
+                </button>
+            )}
+            <ul
+                style={{ justifyContent: overflowing ? 'start' : 'center' }}
+                ref={ref}
+                className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${className}`}
+            >
+                {menu.map((menuItem, index) => {
+                    const { url, color, icon, name, onClick } = menuItem
+                    const Icon = icons[icon]
+                    const active = menu[activeIndex]?.name === menuItem.name
+                    return (
+                        <li
+                            key={menuItem.name}
+                            ref={(node) => {
+                                const map = getMap()
+                                if (node) {
+                                    map.set(index, node)
+                                } else {
+                                    map.delete(index)
+                                }
+                            }}
+                        >
+                            <div ref={index === 0 ? firstRef : index === menu.length - 1 ? lastRef : null}>
+                                <Link
+                                    onClick={() => {
+                                        scrollToIndex(index)
+                                        onClick?.()
+                                    }}
+                                    to={url}
+                                    className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 ${
+                                        active
+                                            ? ''
+                                            : 'border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                    }`}
+                                >
+                                    <span className={`w-6 h-6 mr-2 text-${color}`}>
+                                        <Icon />
+                                    </span>
+                                    <span
+                                        className={`text-sm whitespace-nowrap ${
+                                            active
+                                                ? 'font-bold opacity-100'
+                                                : 'font-semibold opacity-60 group-hover:opacity-100'
+                                        }`}
+                                    >
+                                        {name}
+                                    </span>
+                                    <span
+                                        className={`absolute ${
+                                            mobile ? 'top-[-4px]' : '-bottom-2'
+                                        } left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
+                                            active ? `border-${color}` : `border-transparent`
+                                        }`}
+                                    />
+                                </Link>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
+            {overflowing && (
+                <button
+                    onDoubleClick={(e) => e.preventDefault()}
+                    onClick={() => ref.current?.scrollBy({ left: 75, behavior: 'smooth' })}
+                    className={`absolute top-0 right-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pr-2 bg-gradient-to-r from-transparent to-light via-light dark:via-dark dark:to-dark ${
+                        lastInView ? '-z-10' : 'z-10'
+                    }`}
+                >
+                    <icons.ChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
+                </button>
+            )}
+        </div>
     ) : null
 }
 
@@ -257,7 +301,7 @@ export const Main = () => {
         <div>
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
-                    className={`flex mx-auto px-2 md:px-5 justify-between transition-all ${
+                    className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${
                         fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl box-content'
                     }`}
                 >
@@ -270,7 +314,7 @@ export const Main = () => {
                             />
                         </Link>
                     </div>
-                    <ul className="lg:flex hidden list-none m-0 p-0">
+                    <ul className="md:flex hidden list-none m-0 p-0">
                         {menu.map((menuItem) => {
                             const active = menuItem.name === parent?.name
                             const { name, url } = menuItem
@@ -278,9 +322,9 @@ export const Main = () => {
                                 <li className="h-full" key={name}>
                                     <Link
                                         to={url}
-                                        className={`text-[13.5px] font-medium flex h-full items-center relative p-4 ${
+                                        className={`text-[13.5px] font-medium flex h-full items-center relative px-3 py-4 mdlg:p-4 ${
                                             active
-                                                ? 'px-[calc(1rem_+_10px)] mx-[-10px]'
+                                                ? 'px-[calc(.75rem_+_10px)] mdlg:px-[calc(1rem_+_10px)] mx-[-10px]'
                                                 : 'opacity-70 hover:opacity-100'
                                         }`}
                                     >
@@ -377,7 +421,7 @@ export const Main = () => {
             <InternalMenu
                 menu={internalMenu}
                 activeIndex={internalMenu?.findIndex((menu) => menu === activeInternalMenu)}
-                className="lg:flex hidden"
+                className="md:flex hidden"
             />
         </div>
     )
@@ -387,7 +431,7 @@ export const Mobile = () => {
     const { menu, parent, internalMenu, activeInternalMenu } = useLayoutData()
 
     return (
-        <div className="fixed bottom-0 w-full lg:hidden z-[9999999]">
+        <div className="fixed bottom-0 w-full md:hidden z-[9999999]">
             <InternalMenu
                 mobile
                 className="bg-light dark:bg-dark border-t mb-[-1px]"

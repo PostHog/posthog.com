@@ -540,6 +540,10 @@ export const handbookSidebar = [
                 url: '/handbook/design/process',
             },
             {
+                name: 'Art requests',
+                url: '/handbook/design/art-requests',
+            },
+            {
                 name: 'Designing posthog.com',
                 url: '/handbook/design/designing-posthog-website',
             },
@@ -554,15 +558,7 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing',
             },
             {
-                name: 'Personas',
-                url: '/handbook/growth/marketing/customer-personas',
-            },
-            {
-                name: 'Testimonials',
-                url: '/handbook/growth/marketing/testimonials',
-            },
-            {
-                name: 'Value propositions',
+                name: 'Value proposition',
                 url: '/handbook/growth/marketing/value-propositions',
             },
             {
@@ -570,31 +566,27 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Product announcements',
-                        url: '/handbook/growth/marketing/product-announcements',
-                    },
-                    {
                         name: 'Content & SEO',
                         url: '/handbook/growth/marketing/blog',
                     },
                     {
-                        name: 'Sponsorship',
-                        url: '/handbook/growth/marketing/open-source-sponsorship',
+                        name: 'Email & newsletter',
+                        url: '/handbook/growth/marketing/newsletter',
                     },
                     {
                         name: 'Paid ads',
                         url: '/handbook/growth/marketing/paid',
                     },
                     {
-                        name: 'Email',
-                        url: '/handbook/growth/marketing/newsletter',
+                        name: 'Sponsorships',
+                        url: '/handbook/growth/marketing/open-source-sponsorship',
                     },
                     {
                         name: 'In-app',
                         url: '/handbook/growth/marketing/in-app',
                     },
                     {
-                        name: 'Startups',
+                        name: 'PostHog for Startups',
                         url: '/handbook/growth/marketing/startups',
                     },
                     {
@@ -605,11 +597,19 @@ export const handbookSidebar = [
                         name: 'YouTube',
                         url: '/handbook/growth/marketing/youtube',
                     },
-                    {
-                        name: 'Dashboard templates',
-                        url: '/handbook/growth/marketing/templates',
-                    },
                 ],
+            },
+            {
+                name: 'Product announcements',
+                url: '/handbook/growth/marketing/product-announcements',
+            },
+            {
+                name: 'Testimonials',
+                url: '/handbook/growth/marketing/testimonials',
+            },
+            {
+                name: 'Dashboard templates',
+                url: '/handbook/growth/marketing/templates',
             },
         ],
     },
@@ -2103,16 +2103,6 @@ export const docsMenu = {
                     icon: 'Features',
                     color: 'purple',
                 },
-                {
-                    name: 'Surveys',
-                    url: '/docs/surveys/manual',
-                    icon: 'Message',
-                    color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
             ],
         },
         {
@@ -2192,6 +2182,57 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Surveys',
+            url: '/docs/surveys',
+            icon: 'Message',
+            color: 'blue',
+            children: [
+                {
+                    name: 'Surveys',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/surveys',
+                    icon: 'Home',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Installation',
+                    url: '/docs/surveys/installation',
+                    icon: 'Book',
+                    color: 'blue',
+                },
+                {
+                    name: 'Setup',
+                    url: '/docs/surveys/setup',
+                    icon: 'Toggle',
+                    color: 'red',
+                },
+                {
+                    name: 'Creating a survey',
+                    url: '/docs/surveys/new',
+                    icon: 'Features',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Targeting',
+                    url: '/docs/surveys/targeting',
+                    icon: 'Target',
+                    color: 'green',
+                },
+                {
+                    name: 'Survey events',
+                    url: '/docs/surveys/events',
+                    icon: 'Send',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
             name: 'CDP',
             url: '/docs/cdp',
             color: 'yellow',
@@ -2235,8 +2276,8 @@ export const docsMenu = {
                     url: '',
                     children: [
                         {
-                            url: '/docs/cdp/bitbucket-release-tracker',
-                            name: 'BitBucket',
+                            url: '/docs/cdp/segment',
+                            name: 'Segment',
                         },
                         {
                             url: '/docs/cdp/replicator',
@@ -2257,10 +2298,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/rudderstack-import',
                             name: 'Rudderstack',
-                        },
-                        {
-                            url: '/docs/cdp/segment',
-                            name: 'Segment',
                         },
                         {
                             url: '/docs/cdp/sentry-connector',

@@ -1,5 +1,5 @@
 ---
-title: Paid & SEO
+title: Paid ads
 sidebar: Handbook
 showTitle: true
 ---
@@ -37,8 +37,10 @@ We currently run ads on:
 
 We may consider other paid platforms such as Facebook and Stack Overflow in the future as we learn more, though they are not currently a priority. We have previous tried and no longer use Bing, Product Hunt, Carbon Ads, and Google Display, as they did not drive high quality user signups. 
 
-We usually focus campaigns on users in the US, Canada, UK, Germany and France, as these tend to lead to the most high quality signups. For our GDPR-specific campaigns, we target all EU countries. 
+We usually focus campaigns on users in the US, Canada, UK, Germany and France, as these tend to lead to the most high quality signups. For any GDPR-specific campaigns, we target all EU countries. 
 
 ## Tracking conversion
 
-We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. We have [an app](https://github.com/PostHog/plugin-write-google-ads-to-zapier) which syncs PostHog signups to Zapier, which connects to a Google Sheet that is than synced automatically to our Google Ads account once a day.
+We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. 
+
+For Google Ads specifically, we have [an app](https://github.com/PostHog/plugin-write-google-ads-to-zapier) which syncs PostHog signups to Zapier, which connects to a Google Sheet that is than synced automatically to our Google Ads account once a day.

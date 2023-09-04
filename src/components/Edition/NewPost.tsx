@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import RichText from 'components/Squeak/components/RichText'
 import { child, container } from 'components/CallToAction'
-import { Chevron, Minus, Plus } from 'components/Icons'
+import { Chevron, Close, Close2, Minus, Plus } from 'components/Icons'
 import { Listbox } from '@headlessui/react'
 import { fetchCategories } from './lib'
 import { useUser } from 'hooks/useUser'
@@ -12,6 +12,7 @@ import { Upload } from '@posthog/icons'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import transformValues from 'components/Squeak/util/transformValues'
 import Spinner from 'components/Spinner'
+import { PostsContext } from './Posts'
 
 const Categories = ({ value, setFieldValue }) => {
     const [categories, setCategories] = useState([])
@@ -34,20 +35,20 @@ const Categories = ({ value, setFieldValue }) => {
 
     return (
         <div className="relative h-full">
-            <Listbox value={value || {}} onChange={handleChange}>
+            <Listbox value={value} onChange={handleChange}>
                 <Listbox.Button
                     className={`text-sm font-bold w-full py-3 px-4 h-full outline-none rounded-none text-left flex items-center justify-between ${
-                        !value?.attributes?.label ? 'opacity-60' : ''
+                        !value ? 'opacity-60' : ''
                     }`}
                 >
-                    <span>{value?.attributes?.label || 'Category'}</span>
+                    <span>{value ? categories.find(({ id }) => id === value)?.attributes.label : 'Category'}</span>
                     <Chevron className="w-2.5 mr-[.3rem]" />
                 </Listbox.Button>
                 {categories?.length > 0 && (
                     <Listbox.Options className="list-none p-0 m-0 absolute left-[-1px] bottom-0 translate-y-full z-20 bg-white dark:bg-gray-accent-dark-hover w-full max-h-[247px] overflow-auto shadow-md rounded-br-md rounded-bl-md border divide-y border-border dark:border-dark divide-border dark:divide-border-dark">
                         {categories.map((category) => {
                             return (
-                                <Listbox.Option key={category.id} value={category}>
+                                <Listbox.Option key={category.id} value={category.id}>
                                     {({ selected }) => (
                                         <div
                                             className={`${
@@ -85,7 +86,7 @@ const Accordion = ({ children, label, active, initialOpen = false, className = '
 }
 
 const Image = ({ setFieldValue, featuredImage }) => {
-    const [image, setImage] = useState<null | string>(null)
+    const [image, setImage] = useState<null | string>(featuredImage)
     const onDrop = async (acceptedFiles) => {
         const file = acceptedFiles[0]
         const objectURL = URL.createObjectURL(file)
@@ -96,7 +97,7 @@ const Image = ({ setFieldValue, featuredImage }) => {
         })
     }
 
-    const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
+    const { getRootProps, getInputProps, open } = useDropzone({
         onDrop,
         noClick: true,
         noKeyboard: true,
@@ -105,8 +106,17 @@ const Image = ({ setFieldValue, featuredImage }) => {
     })
 
     return image ? (
-        <div className="h-[250px] flex bg-accent/20">
+        <div className="h-[250px] flex bg-accent/20 relative justify-center">
             <img className="object-contain object-center" src={image} />
+            <button
+                onClick={() => {
+                    setImage(null)
+                    setFieldValue('featuredImage', null)
+                }}
+                className="absolute top-2 right-2 bg-white rounded-full shadow-md w-6 h-6 flex items-center justify-center"
+            >
+                <Close2 className="w-4 h-4 !text-black" fill="black" />
+            </button>
         </div>
     ) : (
         <div className="relative flex justify-center items-center p-4 h-[250px]" {...getRootProps()}>
@@ -119,11 +129,12 @@ const Image = ({ setFieldValue, featuredImage }) => {
     )
 }
 
-export default function NewPost({ onSubmit }) {
+export default function NewPost({ onSubmit, initialValues, postID }) {
+    const { mutate } = useContext(PostsContext)
     const { getJwt, user } = useUser()
 
     const { handleSubmit, values, handleChange, setFieldValue, errors, validateField, isSubmitting } = useFormik({
-        initialValues: {
+        initialValues: initialValues || {
             title: '',
             body: '',
             images: [],
@@ -138,43 +149,44 @@ export default function NewPost({ onSubmit }) {
                 const profileID = user?.profile?.id
                 if (!profileID || !jwt) return
                 const uploadedFeaturedImage =
-                    featuredImage &&
+                    featuredImage?.file &&
                     (await uploadImage(featuredImage.file, jwt, {
                         field: 'images',
                         id: profileID,
                         type: 'api::profile.profile',
                     }))
-                const transformedBody = await transformValues({ body, images }, profileID, jwt)
+                const transformedBody = await transformValues({ body, images: images ?? [] }, profileID, jwt)
+
                 const data = JSON.stringify({
                     data: {
                         title,
                         body: transformedBody?.body,
-                        slug: `/posts/${slugify(title, { lower: true, strict: true })}`,
+                        ...(postID ? null : { slug: `/posts/${slugify(title, { lower: true, strict: true })}` }),
                         CTA: {
                             label: ctaLabel,
                             url: ctaURL,
                         },
                         post_category: {
-                            connect: [category.id],
+                            connect: [category],
                         },
-                        ...(uploadedFeaturedImage
+                        ...(uploadedFeaturedImage || featuredImage === null
                             ? {
                                   featuredImage: {
-                                      image: uploadedFeaturedImage.id,
+                                      image: uploadedFeaturedImage?.id,
                                   },
                               }
                             : null),
                     },
                 })
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts`, {
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts/${postID || ''}`, {
                     body: data,
-                    method: 'POST',
+                    method: postID ? 'PUT' : 'POST',
                     headers: {
                         'content-type': 'application/json',
                         Authorization: `Bearer ${await getJwt()}`,
                     },
                 })
-
+                mutate?.()
                 onSubmit?.()
             } catch (err) {
                 console.error(err)
@@ -196,7 +208,11 @@ export default function NewPost({ onSubmit }) {
                             value={values.title}
                         />
                         <Accordion initialOpen label="Body" active={!!values.body}>
-                            <RichText setFieldValue={setFieldValue} values={values} />
+                            <RichText
+                                initialValue={initialValues?.body}
+                                setFieldValue={setFieldValue}
+                                values={values}
+                            />
                         </Accordion>
                         <Categories setFieldValue={setFieldValue} value={values.category} />
                         <Accordion active={values.ctaURL && values.ctaLabel} label="Call to action">
@@ -225,7 +241,13 @@ export default function NewPost({ onSubmit }) {
                 <div className="px-4 mb-4 mt-auto">
                     <button disabled={isSubmitting} className={`${container()} ml-auto w-full`}>
                         <span className={`${child()}`}>
-                            {isSubmitting ? <Spinner className="!w-6 !h-6 mx-auto text-white" /> : 'Post'}
+                            {isSubmitting ? (
+                                <Spinner className="!w-6 !h-6 mx-auto text-white" />
+                            ) : postID ? (
+                                'Update'
+                            ) : (
+                                'Post'
+                            )}
                         </span>
                     </button>
                 </div>

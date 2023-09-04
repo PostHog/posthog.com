@@ -1,5 +1,5 @@
 ---
-title: "Startup Spotlight: How Golioth builds IoT software"
+title: "How Golioth designs new IoT software and drives product development"
 date: 2023-07-25
 author: ["joe-martin"]
 showTitle: true
@@ -59,4 +59,6 @@ At Golioth, this focus on sales doesn’t mean that everyone spends their time c
 
 “You need to constantly be working towards sales,” says Jonathan, “Because that first sale is the most important — and so are is the second, the third, the fifth, the eleventh. They’re all important and so you need to be learning about it. As someone who came from a technical product management background I really wish I’d spent more time learning about sales!”
 
-> Golioth is a member of [PostHog for Startups](/startups), where it benefits from over $50,000 in credit and the opportunity to connect with other early-stage teams.
+**More success stories from PostHog for Startups**
+- [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](startup-before-sunset-ai)
+

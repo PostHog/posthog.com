@@ -1,0 +1,9 @@
+---
+title: Survey events
+---
+
+## Survey events
+
+Survey responses are stored as PostHog events. We provide an easy way for you to view the responses on the survey page, but you can also view them in any manner you'd like with the PostHog UI.
+
+We have "survey shown", "survey dismissed", and "survey sent" events. All three events will contain the `$survey_id` and `$survey_name` properties, and "survey sent" will also contain the `$survey_response` property.
