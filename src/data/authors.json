@@ -17,6 +17,14 @@
         "link_url": "https://linkedin.com/in/shehuphd"
     },
     {
+        "handle": "phil-mcparlane",
+        "name": "Phil McParlane",
+        "role": "Founder, 4DayWeek",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/philostar"
+    },
+    {
         "handle": "yakko-majuri",
         "name": "Yakko Majuri",
         "role": "Software Engineer",
