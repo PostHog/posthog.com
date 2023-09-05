@@ -1,6 +1,6 @@
 ---
 title: How to set up Python feature flags in Flask
-date: 2023-09-04
+date: 2023-09-05
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -45,7 +45,7 @@ def show_user(user):
     return f"<p>Hello, {user}!</p>"
 ```
 
-Finally run `flask --app hello run` and go to `[http://127.0.0.1:5000](http://127.0.0.1:5000/)` to see your basic app running.
+Finally run `flask --app hello run` and go to `http://127.0.0.1:5000` to see your basic app running.
 
 ![Hello, World!](../images/tutorials/python-feature-flags/hello.png)
 
@@ -87,7 +87,7 @@ def show_user(user):
   return f"<p>Hello, {user}!</p>"
 ```
 
-When we rerun `flask --app hello run` and go to the user route such as `[http://127.0.0.1:5000/user/ian](http://127.0.0.1:5000/user/ian)`, it captures an event in PostHog.
+When we rerun `flask --app hello run` and go to the user route such as `http://127.0.0.1:5000/user/ian`, it captures an event in PostHog.
 
 ![Event](../images/tutorials/python-feature-flags/event.png)
 
