@@ -96,7 +96,7 @@ _Everyone_ must work like this. This is what the exec team at PostHog does:
 * We write out strategy changes into a pull request. Anyone can comment / read / suggest changes.
 * We share our board meetings publicly in the company. Anyone can comment / read.
 * We share realtime updates around fundraising. Not after the fact.
-* We have a public [handbook](../handbook) - which is world editable
+* We have a public [handbook](/handbook) - which is world editable
 
 ### 6. Product and engineering are peers
 

@@ -20,7 +20,7 @@ I've worked at a bunch of startups before. I learned and did some cool things at
 
 It is _a lot_ of fun getting things right, and this motivated me early in the company. These specifically stand out:
 
-* Writing stuff down in a [handbook](../handbook) rather than handling everything 1:1 in meetings. So much win.
+* Writing stuff down in a [handbook](/handbook) rather than handling everything 1:1 in meetings. So much win.
 
 * [Sharing everything](how-to-run-a-transparent-company) internally and most of it externally too. And seeing how this helps people work autonomously.
 
