@@ -17,7 +17,7 @@ Check the **feature flags tab** on [the persons page](https://app.posthog.com/pe
 
 ### 2. Check you're calling `identify()` before evaluating the flag
 
-If you're [identifying]((/docs/product-analytics/identify)) users, they may see a different value for a feature flag before and after you call `identify()`. 
+If you're [identifying](/docs/product-analytics/identify) users, they may see a different value for a feature flag before and after you call `identify()`. 
 
 To ensure they experience consistent behavior, check that you call `identify()` before evaluating the feature flag.
 
