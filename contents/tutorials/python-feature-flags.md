@@ -8,11 +8,11 @@ featuredImage: ../images/tutorials/banners/tutorial-18.png
 tags: ["feature-flags"]
 ---
 
-Feature flags make it easy to conditionally run code and show content based on users or conditions. In this tutorial, we show how to create a basic Python Flask app, add PostHog, and set up feature flags to conditionally show content in the app.
+Feature flags make it easy to conditionally run code and show content based on users or conditions. In this tutorial, we show how to create a basic Python Flask app, add PostHog, and set up [feature flags](/feature-flags) to conditionally show content in the app.
 
 ## Creating a Flask app and adding PostHog
 
-To showcase [feature flags](/docs/feature-flags), we use Flask, a Python web framework, to create an app. To start, we create a folder for our app named `flag-demo` and create a file named `hello.py` in that folder.
+To showcase feature flags, we use [Flask](https://flask.palletsprojects.com/), a Python web framework, to create an app. To start, we create a folder for our app named `flag-demo` and create a file named `hello.py` in that folder.
 
 ```bash
 mkdir flag-demo
@@ -28,7 +28,7 @@ python3 -m venv venv
 pip install Flask
 ```
 
-In `hello.py`, create a home route that returns a basic "Hello, World!" and a `/user/<string:user>` route that returns the user string like this:
+In `hello.py`, create a home route that returns a basic "Hello, World!" and a `/user/<string:user>` route that returns the user string:
 
 ```python
 # flag-demo/hello.py
@@ -45,7 +45,7 @@ def show_user(user):
     return f"<p>Hello, {user}!</p>"
 ```
 
-Finally run `flask --app hello run` and go to [`http://127.0.0.1:5000`](http://127.0.0.1:5000/) to see your basic app running.
+Finally run `flask --app hello run` and go to `[http://127.0.0.1:5000](http://127.0.0.1:5000/)` to see your basic app running.
 
 ![Hello, World!](../images/tutorials/python-feature-flags/hello.png)
 
