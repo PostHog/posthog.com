@@ -62,7 +62,7 @@ Beyond these are features like adding logic for targeting, caching for speed, or
 
 Feature flag services become a classic build vs. buy decision. Building a feature flag service works well if you have a clear, simple use case. As you scale, the benefits of "outsourcing" the work to a provider of feature flags as a service become clearer.
 
-## What are feature flags as a service?
+## How does feature flags _as a service_ work?
 
 A "feature flags as a service" provider is an external application that provides all the functionality for implementing and using feature flags (like [PostHog](/feature-flags)). It is a centralized location to create, manage, evaluate, and monitor your feature flags. This enables remote configuration and decoupling deployment from release.
 
