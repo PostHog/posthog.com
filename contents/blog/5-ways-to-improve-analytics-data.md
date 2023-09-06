@@ -7,7 +7,7 @@ showTitle: true
 hideAnchor: true
 author:
   - anna-debenham
-featuredImage: ../images/blog/posthog-blog-at-desk.png
+featuredImage: ../images/blog/super-hog-pink.png
 featuredImageType: full
 category: General
 tags:
