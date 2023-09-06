@@ -1,6 +1,6 @@
 ---
 title: The basics of SQL for analytics
-date: 2023-09-04
+date: 2023-09-06
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -17,10 +17,6 @@ tags:
 One of SQL’s most important use cases is analytics. There are many ways to slice, modify, and interpret analytics data. SQL provides the depth and customizability to get insights from it, answer questions, and make data-driven decisions.
 
 This post goes over how to analyze your analytics data with SQL and recommendations for your analysis process.
-
-## What is SQL?
-
-Using SQL for analytics provides full access to your data and complete customization over what data you retrieve and how it’s formatted. SQL has many commands and functions to help you filter, aggregate, and modify your data for your needs.
 
 ## The building blocks of SQL
 
