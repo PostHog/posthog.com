@@ -1,5 +1,5 @@
 ---
-date: 2023-09-0
+date: 2023-09-06
 title: 5 ways to improve your analytics data
 rootPage: /blog
 sidebar: Blog
