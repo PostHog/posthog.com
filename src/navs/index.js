@@ -1,6 +1,77 @@
 export const handbookSidebar = [
     {
         name: 'Handbook',
+    },
+    {
+        name: 'Table of contents',
+        url: '/handbook',
+        icon: 'Info',
+    },
+    {
+        name: 'Chapters',
+        url: '/handbook/chapters/what-is-posthog',
+        icon: 'Book',
+        children: [
+            {
+                name: '1. What is PostHog?',
+                url: '/handbook/what-is-posthog',
+            },
+            {
+                name: '2. A wide company with small teams',
+                url: '/handbook/',
+            },
+            {
+                name: '3. Providing a world-class engineering environment',
+                url: '/handbook/',
+            },
+            {
+                name: '4. Deciding which products to build',
+                url: '/handbook/',
+            },
+            {
+                name: '5. How we get users',
+                url: '/handbook/',
+            },
+            {
+                name: '6. Enduringly low prices',
+                url: '/handbook/',
+            },
+            {
+                name: '7. How we make users happy',
+                url: '/handbook/',
+            },
+            {
+                name: '8. How we make money',
+                url: '/handbook/',
+            },
+            {
+                name: "9. How we're building a world-class team",
+                url: '/handbook/',
+            },
+            {
+                name: '10. Not running out of money',
+                url: '/handbook/',
+            },
+            {
+                name: '11. How we got here',
+                url: '/handbook/',
+            },
+            {
+                name: '12. Where we are now',
+                url: '/handbook/',
+            },
+            {
+                name: '13. Where are we going?',
+                url: '/handbook/',
+            },
+            {
+                name: '14. How you can help',
+                url: '/handbook/',
+            },
+        ],
+    },
+    {
+        name: 'Handbook',
         url: '/handbook',
     },
     {
@@ -174,104 +245,75 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'People',
+        name: 'Departments',
+    },
+    {
+        name: 'Customer success',
         url: '',
         children: [
             {
-                name: 'Compensation',
-                url: '/handbook/people/compensation',
+                name: 'Customer support',
+                url: '/handbook/growth/customer-support',
             },
             {
-                name: 'Share options',
-                url: '/handbook/people/share-options',
+                name: 'Sales overview',
+                url: '/handbook/growth/sales/overview',
             },
             {
-                name: 'Benefits',
-                url: '/handbook/people/benefits',
-            },
-            {
-                name: 'Time off',
-                url: '/handbook/people/time-off',
-            },
-            {
-                name: 'Spending money',
-                url: '/handbook/people/spending-money',
-            },
-            {
-                name: 'Progression',
-                url: '/handbook/people/career-progression',
-            },
-            {
-                name: 'Training',
-                url: '/handbook/people/training',
-            },
-            {
-                name: 'Side gigs',
-                url: '/handbook/people/side-gigs',
-            },
-            {
-                name: 'Feedback',
-                url: '/handbook/people/feedback',
-            },
-            {
-                name: 'Onboarding',
-                url: '/handbook/people/onboarding',
-            },
-            {
-                name: 'Offboarding',
-                url: '/handbook/people/offboarding',
-            },
-            {
-                name: 'HR processes',
-                url: '/handbook/people/grievances',
-            },
-            {
-                name: 'Hiring process',
-                url: '',
+                name: 'Sales operations',
+                url: '/handbook/growth/sales/sales-operations',
                 children: [
                     {
-                        name: 'Overview',
-                        url: '/handbook/people/hiring-process',
+                        name: 'Managing our CRM',
+                        url: '/handbook/growth/sales/crm',
                     },
                     {
-                        name: 'How to interview',
-                        url: '/handbook/people/hiring-process/how-to-interview',
+                        name: 'New customer onboarding',
+                        url: '/handbook/growth/sales/customer-onboarding',
                     },
                     {
-                        name: 'Engineering hiring',
-                        url: '/handbook/people/hiring-process/engineering-hiring',
+                        name: 'YC onboarding',
+                        url: '/handbook/growth/sales/yc-onboarding',
                     },
                     {
-                        name: 'Marketing hiring',
-                        url: '/handbook/people/hiring-process/marketing-hiring',
+                        name: 'Demos',
+                        url: '/handbook/growth/sales/demos',
                     },
                     {
-                        name: 'Operations hiring',
-                        url: '/handbook/people/hiring-process/operations-hiring',
+                        name: 'Contracts',
+                        url: '/handbook/growth/sales/contracts',
                     },
                     {
-                        name: 'Design hiring',
-                        url: '/handbook/people/hiring-process/design-hiring',
+                        name: 'Billing',
+                        url: '/handbook/growth/sales/billing',
                     },
                     {
-                        name: 'Exec hiring',
-                        url: '/handbook/people/hiring-process/exec-hiring',
+                        name: 'Who we do business with',
+                        url: '/handbook/growth/sales/who-we-do-business-with',
+                    },
+                    {
+                        name: 'Historical import',
+                        url: '/handbook/growth/sales/historical-import',
                     },
                 ],
             },
         ],
     },
     {
-        name: 'Ops & finance',
+        name: 'Design',
         url: '',
         children: [
             {
-                name: 'Finance',
-                url: '/handbook/people/finance',
+                name: 'Our philosophy',
+                url: '/handbook/design/philosophy',
             },
             {
-                name: 'Merch store',
-                url: '/handbook/company/merch-store',
+                name: 'Product design process',
+                url: '/handbook/design/process',
+            },
+            {
+                name: 'Designing posthog.com',
+                url: '/handbook/design/designing-posthog-website',
             },
         ],
     },
@@ -502,46 +544,16 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Product',
+        name: 'Growth',
         url: '',
         children: [
             {
-                name: 'Overview',
-                url: '/handbook/product/product-team',
+                name: 'Growth reviews',
+                url: '/handbook/growth/growth-engineering/growth-sessions',
             },
             {
-                name: 'Product metrics',
-                url: '/handbook/product/metrics',
-            },
-            {
-                name: 'User feedback',
-                url: '/handbook/product/user-feedback',
-            },
-            {
-                name: 'Releasing as beta',
-                url: '/handbook/product/releasing-as-beta',
-            },
-            {
-                name: 'In-app prompts',
-                url: '/handbook/product/in-app-prompts',
-            },
-        ],
-    },
-    {
-        name: 'Design',
-        url: '',
-        children: [
-            {
-                name: 'Our philosophy',
-                url: '/handbook/design/philosophy',
-            },
-            {
-                name: 'Product design process',
-                url: '/handbook/design/process',
-            },
-            {
-                name: 'Designing posthog.com',
-                url: '/handbook/design/designing-posthog-website',
+                name: 'Pricing principles',
+                url: '/handbook/engineering/feature-pricing',
             },
         ],
     },
@@ -610,68 +622,130 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Customer success',
+        name: 'Ops & finance',
         url: '',
         children: [
             {
-                name: 'Customer support',
-                url: '/handbook/growth/customer-support',
+                name: 'Finance',
+                url: '/handbook/people/finance',
             },
             {
-                name: 'Sales overview',
-                url: '/handbook/growth/sales/overview',
+                name: 'Merch store',
+                url: '/handbook/company/merch-store',
+            },
+        ],
+    },
+    {
+        name: 'People',
+        url: '',
+        children: [
+            {
+                name: 'Compensation',
+                url: '/handbook/people/compensation',
             },
             {
-                name: 'Sales operations',
-                url: '/handbook/growth/sales/sales-operations',
+                name: 'Share options',
+                url: '/handbook/people/share-options',
+            },
+            {
+                name: 'Benefits',
+                url: '/handbook/people/benefits',
+            },
+            {
+                name: 'Time off',
+                url: '/handbook/people/time-off',
+            },
+            {
+                name: 'Spending money',
+                url: '/handbook/people/spending-money',
+            },
+            {
+                name: 'Progression',
+                url: '/handbook/people/career-progression',
+            },
+            {
+                name: 'Training',
+                url: '/handbook/people/training',
+            },
+            {
+                name: 'Side gigs',
+                url: '/handbook/people/side-gigs',
+            },
+            {
+                name: 'Feedback',
+                url: '/handbook/people/feedback',
+            },
+            {
+                name: 'Onboarding',
+                url: '/handbook/people/onboarding',
+            },
+            {
+                name: 'Offboarding',
+                url: '/handbook/people/offboarding',
+            },
+            {
+                name: 'HR processes',
+                url: '/handbook/people/grievances',
+            },
+            {
+                name: 'Hiring process',
+                url: '',
                 children: [
                     {
-                        name: 'Managing our CRM',
-                        url: '/handbook/growth/sales/crm',
+                        name: 'Overview',
+                        url: '/handbook/people/hiring-process',
                     },
                     {
-                        name: 'New customer onboarding',
-                        url: '/handbook/growth/sales/customer-onboarding',
+                        name: 'How to interview',
+                        url: '/handbook/people/hiring-process/how-to-interview',
                     },
                     {
-                        name: 'YC onboarding',
-                        url: '/handbook/growth/sales/yc-onboarding',
+                        name: 'Engineering hiring',
+                        url: '/handbook/people/hiring-process/engineering-hiring',
                     },
                     {
-                        name: 'Demos',
-                        url: '/handbook/growth/sales/demos',
+                        name: 'Marketing hiring',
+                        url: '/handbook/people/hiring-process/marketing-hiring',
                     },
                     {
-                        name: 'Contracts',
-                        url: '/handbook/growth/sales/contracts',
+                        name: 'Operations hiring',
+                        url: '/handbook/people/hiring-process/operations-hiring',
                     },
                     {
-                        name: 'Billing',
-                        url: '/handbook/growth/sales/billing',
+                        name: 'Design hiring',
+                        url: '/handbook/people/hiring-process/design-hiring',
                     },
                     {
-                        name: 'Who we do business with',
-                        url: '/handbook/growth/sales/who-we-do-business-with',
-                    },
-                    {
-                        name: 'Historical import',
-                        url: '/handbook/growth/sales/historical-import',
+                        name: 'Exec hiring',
+                        url: '/handbook/people/hiring-process/exec-hiring',
                     },
                 ],
             },
         ],
     },
     {
-        name: 'Growth',
+        name: 'Product',
         url: '',
         children: [
             {
-                name: 'Growth reviews',
-                url: '/handbook/growth/growth-engineering/growth-sessions',
+                name: 'Overview',
+                url: '/handbook/product/product-team',
             },
             {
-                name: 'Pricing principles',
-                url: '/handbook/engineering/feature-pricing',
+                name: 'Product metrics',
+                url: '/handbook/product/metrics',
+            },
+            {
+                name: 'User feedback',
+                url: '/handbook/product/user-feedback',
+            },
+            {
+                name: 'Releasing as beta',
+                url: '/handbook/product/releasing-as-beta',
+            },
+            {
+                name: 'In-app prompts',
+                url: '/handbook/product/in-app-prompts',
             },
         ],
     },
