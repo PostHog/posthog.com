@@ -95,7 +95,7 @@ export const Handbook: React.FC = () => {
 
             <PostLayout article={false} title={'Handbook'} hideSidebar hideSurvey>
                 <section>
-                    <div className="flex flex-col md:items-center md:flex-end md:flex-row-reverse gap-8 md:gap-2">
+                    <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="-mt-16 md:-mt-12">
                             <StaticImage
                                 src="../../contents/images/search-hog-4.png"
