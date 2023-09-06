@@ -95,22 +95,24 @@ export const Handbook: React.FC = () => {
 
             <PostLayout article={false} title={'Handbook'} hideSidebar hideSurvey>
                 <section>
-                    <div className="md:float-right overflow-hidden -my-16 md:-mt-8 md:ml-4 mb-4">
-                        <StaticImage
-                            src="../../contents/images/search-hog-4.png"
-                            alt="This hog has an answer"
-                            width={400}
-                            placeholder="blurred"
-                        />
+                    <div className="flex flex-col md:items-center md:flex-end md:flex-row-reverse gap-8 md:gap-2">
+                        <div className="-mt-16 md:-mt-12">
+                            <StaticImage
+                                src="../../contents/images/search-hog-4.png"
+                                alt="This hog has an answer"
+                                width={400}
+                                placeholder="blurred"
+                            />
+                        </div>
+                        <div>
+                            <h1 className="font-bold text-5xl mb-6">Company handbook</h1>
+                            <h3 className="text-xl">👋 Welcome!</h3>
+                            <h5 className="opacity-60 font-semibold leading-tight mb-8 max-w-lg">
+                                This handbook simply explains how we work. It has been one of the most important things
+                                we've ever made.
+                            </h5>
+                        </div>
                     </div>
-                    <h1 className="font-bold text-5xl mb-6">Company handbook</h1>
-                    <h3 className="text-xl">👋 Welcome!</h3>
-                    <h5 className="opacity-60 font-semibold leading-tight mb-8 max-w-lg">
-                        This handbook simply explains how we work. It has been one of the most important things we've
-                        ever made.
-                    </h5>
-
-                    <div className="clear-both"></div>
 
                     {chapters.map((category) => {
                         return (
