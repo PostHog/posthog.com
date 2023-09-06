@@ -31,7 +31,7 @@ Analyzing these values is relatively easy. Create a [new insight](https://app.po
 
 ### First pageview
 
-We can also calculate the first touch as the first page a user lands on. To do this, we can [create an insight](https://app.posthog.com/insights/new), go to the SQL tab, and use HogQL. Here we query for the first `$pageview` event for a user, then get the `$current_url` of this event. This looks like this:
+We can also calculate the first touch as the first page a user lands on. To do this, we can [create an insight](https://app.posthog.com/insights/new), go to the SQL tab, and use [HogQL](/docs/hogql). Here we query for the first `$pageview` event for a user, then get the `$current_url` of this event. This looks like this:
 
 ```sql
 SELECT 
