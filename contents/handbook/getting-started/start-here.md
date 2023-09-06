@@ -7,37 +7,37 @@ showTitle: true
 Welcome. This handbook simply explains how we work. It has been one of the most important things we've ever made.
 
 _Chapter 1_
-# [What is PostHog?](what-is-posthog)
+# [What is PostHog?](../what-is-posthog)
 
 _Chapter 2_
-# [A wide company with small teams](wide-company)
+# [A wide company with small teams](../wide-company)
 
 _Chapter 3_
-# [Provinding a world class engineering environment](world-class-engineering)
+# [Provinding a world class engineering environment](../world-class-engineering)
 
 _Chapter 4_
-# [Deciding which products to build](which-products)
+# [Deciding which products to build](../which-products)
 
 _Chapter 5_
-# [How we get users](how-we-get-users)
+# [How we get users](../how-we-get-users)
 
 _Chapter 6_
-# [Enduringly low prices](low-prices)
+# [Enduringly low prices](../low-prices)
 
 _Chapter 7_
-# [How we make users happy](making-users-happy)
+# [How we make users happy](../making-users-happy)
 
 _Chapter 8_
-# [How we make money](how-we-make-money)
+# [How we make money](../how-we-make-money)
 
 _Chapter 9_
-# [How we're building a world class team](strong-team)
+# [How we're building a world class team](../strong-team)
 
 _Chapter 10_
-# [Not running out of money](finance)
+# [Not running out of money](../finance)
 
 _Chapter 11_
-# [How we got here](story)
+# [How we got here](../story)
 
 _Chapter 12_
 # Where are we now
@@ -47,7 +47,7 @@ _Chapter 12_
 - current priorities
 
 _Chapter 13_
-# [Where are we going?](future)
+# [Where are we going?](../future)
 $100M by 2026, working backwards
 
 _Chapter 6_

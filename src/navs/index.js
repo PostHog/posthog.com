@@ -18,55 +18,55 @@ export const handbookSidebar = [
             },
             {
                 name: '2. A wide company with small teams',
-                url: '/handbook/',
+                url: '/handbook/wide-company',
             },
             {
                 name: '3. Providing a world-class engineering environment',
-                url: '/handbook/',
+                url: '/handbook/world-class-engineering',
             },
             {
                 name: '4. Deciding which products to build',
-                url: '/handbook/',
+                url: '/handbook/which-products',
             },
             {
                 name: '5. How we get users',
-                url: '/handbook/',
+                url: '/handbook/how-we-get-users',
             },
             {
                 name: '6. Enduringly low prices',
-                url: '/handbook/',
+                url: '/handbook/low-prices',
             },
             {
                 name: '7. How we make users happy',
-                url: '/handbook/',
+                url: '/handbook/making-users-happy',
             },
             {
                 name: '8. How we make money',
-                url: '/handbook/',
+                url: '/handbook/how-we-make-money',
             },
             {
                 name: "9. How we're building a world-class team",
-                url: '/handbook/',
+                url: '/handbook/strong-team',
             },
             {
-                name: '10. Not running out of money',
-                url: '/handbook/',
+                name: '!! 10. Not running out of money',
+                url: '/handbook/finance',
             },
             {
                 name: '11. How we got here',
-                url: '/handbook/',
+                url: '/handbook/story',
             },
             {
-                name: '12. Where we are now',
+                name: '!! 12. Where we are now',
                 url: '/handbook/',
             },
             {
                 name: '13. Where are we going?',
-                url: '/handbook/',
+                url: '/handbook/future',
             },
             {
                 name: '14. How you can help',
-                url: '/handbook/',
+                url: '!! /handbook/',
             },
         ],
     },
