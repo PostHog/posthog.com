@@ -77,7 +77,7 @@ So, we enable partial updates on our client side SDKs. Whenever there's an error
 
 ![partial flag eval](../images/blog/flag-resiliency/partial-eval.png)
 
-As we've noted before, the only flags that can fail evaluation are ones that depend on specific properties. Further, if a property change is triggering flag evaluation, the client SDK can send these new properties alongside the request, and we use these properties as overrides for flag evaluation.
+As we've noted before, the only flags that can fail evaluation are ones that depend on specific properties. Further, if a property change is triggering flag evaluation, the client SDK can send these new properties alongside the request, and we use these properties as overrides for flag evaluation. We automatically send these properties for all properties set via the SDK helpers.
 
 This solution is special because flags that affect the most people will almost never go down. Flags affecting a small % (property based) can be unavailable more often. This is one reason we recommend creating flags that match all people when possible.
 
@@ -141,3 +141,17 @@ In the long term, having this sync python service that can't handle app level ti
 The next step is to make sure flags remain reliable with all the exciting features we have in the works. Our main goal is to ensure none of these new features detract from reliability, since when it comes to flag, reliability is a lot more important than that shiny new feature.
 
 And if you are interested in shiny new features, you can see what we're working on via our [public roadmap](/roadmap) or [repo](https://github.com/PostHog/posthog/).
+
+## Appendix: The metrics
+
+This post would be incomplete without talking about the metrics.
+
+Our p99 latency went down from about ~500ms to 300ms, while the p90 latency tanked to ~60ms.
+
+As you can imagine, the p90 is so low because these requests don't touch the database at all, everything is handled in memory. What was surprising to me was that 90% of requests fall into this category.
+
+
+
+When we are in incident mode, i.e. the app is down completely, feature flag p99 latency drops down to ~80ms as well, because we start skipping all database related flags where these properties weren't sent.
+
+You can see a similar story on [our status page](https://status.posthog.com/uptime/1t4b8gf5psbc?page=3), where feature flags related incidents went down.
