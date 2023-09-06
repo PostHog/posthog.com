@@ -150,7 +150,7 @@ Our p99 latency went down from about ~500ms to 300ms, while the p90 latency tank
 
 As you can imagine, the p90 is so low because these requests don't touch the database at all, everything is handled in memory. What was surprising to me was that 90% of requests fall into this category.
 
-
+![latency](../images/blog/flag-resiliency/latency.png)
 
 When we are in incident mode, i.e. the app is down completely, feature flag p99 latency drops down to ~80ms as well, because we start skipping all database related flags where these properties weren't sent.
 
