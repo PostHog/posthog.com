@@ -9,7 +9,7 @@ export const handbookSidebar = [
     },
     {
         name: 'Chapters',
-        url: '/handbook/chapters/what-is-posthog',
+        url: '/handbook/what-is-posthog',
         icon: 'Book',
         children: [
             {
@@ -71,8 +71,7 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Handbook',
-        url: '/handbook',
+        name: 'Existing content that needs to be accounted for',
     },
     {
         name: 'Getting started',

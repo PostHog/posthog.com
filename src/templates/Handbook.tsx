@@ -270,6 +270,7 @@ export default function Handbook({
                         </div>
                     }
                     menu={menu}
+                    menuWidth={{ left: 400 }}
                     sidebar={
                         <HandbookSidebar
                             contributors={contributors}
