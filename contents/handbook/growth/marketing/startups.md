@@ -1,14 +1,14 @@
 ---
-title: Startups
+title: PostHog for Startups
 sidebar: Handbook
 showTitle: true
 ---
 
 [PostHog for Startups](https://posthog.com/startups) is our program to support early stage companies. We offer generous credits together with a bunch of extra goodies. This page covers how we run the program.
 
-> The YC Deal is a separate deal that we do for the latest batch of YC companies and has [its own page here](/handbook/growth/sales/yc-onboarding). 
+> The YC Deal is a separate programme that the CS team mostly manage. This is a deal for the latest batch of YC companies and has [its own page here](/handbook/growth/sales/yc-onboarding). 
 
-Any company that is <2 years old and has raised $5m in funding or less is eligible. 
+Any company that is <2 years old and has raised $5m in funding or less is eligible for PostHog for Startups. 
 
 ## What happens after companies apply
 
@@ -60,4 +60,3 @@ Referred customers should apply for the PostHog for Startups program as normal, 
 There are currently no limits on how many startups can be referred into the program successfully. 
 
 Customer can also refer an investor, or startup accelerator. If an investor or accelerator signs up as a PostHog for Startups partner, we will double the credits of the referring customer to a total of $100,000. 
-

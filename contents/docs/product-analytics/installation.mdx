@@ -3,13 +3,13 @@ title: Product analytics installation
 sidebar: Docs
 showTitle: true
 availability:
-    free: none
+    free: full
     selfServe: full
     enterprise: full
 ---
 import Tab from "components/Tab"
 import Frameworks from "../integrate/\_snippets/frameworks.mdx"
-import API from "../integrate/\_snippets/api.mdx"
+import APIInstall from '../integrate/_snippets/install-api.mdx'
 import WebInstall from '../integrate/_snippets/install-web.mdx'
 import ReactInstall from '../integrate/_snippets/install-react.mdx'
 import NodeInstall from '../integrate/_snippets/install-node.mdx'
@@ -21,7 +21,7 @@ import ReactNativeInstall from '../integrate/_snippets/install-react-native.mdx'
 import AndroidInstall from '../integrate/_snippets/install-android.mdx'
 import IOSInstall from '../integrate/_snippets/install-ios.mdx'
 import JavaInstall from '../integrate/_snippets/install-java.mdx'
-import RustInstall from '../integrate/_snippets/install-react-native.mdx'
+import RustInstall from '../integrate/_snippets/install-rust.mdx'
 import FlutterInstall from '../integrate/_snippets/install-flutter.mdx'
 import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
 
@@ -32,7 +32,7 @@ To start, install PostHog in the app you want to collect data in.
 > **Tip**: Even if you have multiple customer-facing products (e.g., a marketing website + iOS app + web app), it's best to have them share the same project. This enables you to track the user across their journey across different platforms. See [organizations & projects docs](/manual/organizations-and-projects) for more.
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['guides', 'api', 'Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Flutter']}>
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Elixir', 'Flutter', 'guides', 'api']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>React</Tab>
@@ -98,7 +98,10 @@ To start, install PostHog in the app you want to collect data in.
             <Frameworks />
         </Tab.Panel>
         <Tab.Panel>
-            <API />
+            <APIInstall />
+            <blockquote>
+            For more details, see our <a href="/docs/api">API docs</a>
+            </blockquote>
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>

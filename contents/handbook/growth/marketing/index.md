@@ -39,11 +39,11 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
  
 ### Things we want to be good at
 
+- **Social media:** Specifically Twitter, where we've seen good traction posting on James' personal account and the PostHog brand account. We do a minimal amount of posting on PostHog's LinkedIn account to keep it active, but it's not an important channel for us. We don't use any other social media channels. 
+
 - **Paid ads:** An agency should keep handling this for us, but we shouldn’t get better at it internally. This includes out of home, should we ever decide to do this. We see paid ads as a hygiene factor. 
  
 - **Incentivised campaigns** - e.g. GitHub stars campaign. It's not clear how these can be repeatable sources of successful word of mouth growth for us, but they will occasionally be useful.
-
-- **Social media:** This is different from 'being cool and interesting people in online communities'. We don't get high quality traction (yet) on places like LinkedIn/Twitter, and we're not spending any time at all on Facebook/Instagram/TikTok. We are currently trying out Twitter. 
 
 ### Things we might want to be good at but haven't tested yet
 
@@ -57,7 +57,7 @@ PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-visi
 
 - **PR:** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch. 
 
-- **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (ie. not our target audience). 
+- **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (ie. not our target audience). We tried this and didn't get traction. 
 
 ## How marketing works
 
@@ -123,58 +123,13 @@ The Marketing team's main focus is acquisition of customers in our [ideal custom
 
 We have established that _word of mouth_ is the most effective way to do this – virtually all of our high quality signups have come organically. 
 
-Here are the channels we use, in _rough_ order of priority:
- 
-### Content
-
-- **SEO content** is high value and genuinely useful content that targets the keywords we think are most relevant to our customers. We do 'clean' SEO – i.e. no buying backlinks or writing clickbait. 'No clickbait' doesn't mean content has to be boring! Our aim is to increase our organic reach on Google, basically. We put a small percentage of our monthly paid ads budget behind this type of content on LinkedIn and Twitter to increase awareness.
-
-- **Shareable content** is content we think users and audiences outside PostHog will just find interesting. These may be technical deep dives, or articles that give an insight into how PostHog works. We don't expect these to turn directly into signups, but they help us to build our unique and distinctive brand in the open source community. We may post this content on sites like Hacker News and Reddit, but only when we think it will be of genuine interest to those communities (and sometimes people outside PostHog beat us to it, which is great).
-
-- **Email content:** We send out [Product for Engineers](/handbook/growth/marketing/newsletter) every 2-3 weeks. We run this on Substack.
-
-- **YouTube content** is tutorials or informative videos (usually based on blogs) targeting our ICP on [YouTube](https://www.youtube.com/@PostHog) to expand awareness of PostHog and provide an alternative to written content.
- 
-### Paid ads
-
-We advertise on Google Search for _conversion_, and Twitter, LinkedIn, Reddit, and Quora for _awareness_. We use paid ads as a cheat code to accelerate learning, e.g. which SEO keywords work, testing out product positioning, as well as to ensure we are easily discoverable when people search for PostHog specifically ('branded keywords'). However, paids ads are expensive so our focus is always on organic growth first unless we find a paid channel that's wildly profitable. Generally, we split our spend 2/3 awareness vs. 1/3 conversion.
-
-### Startups
-
-We run two startup plans:
-
-- [YC deal](/handbook/growth/sales/yc-onboarding)
-- [PostHog for Startups](/handbook/growth/marketing/startups)
-
-We create the ad copy and run the office hours, while the CS team handle billing and onboarding. 
- 
-### Sponsorships
-
-We periodically run sponsorship campaigns:
-
-- **Commercial sponsorship:** Sponsoring newsletters, podcasts, and events that are likely to reach our target audience. We try to keep a relatively narrow focus here. Newsletters have worked best for us so far.
-
-- **Open source sponsorship:** Sponsoring open source projects and developers that have helped us build PostHog. Sometimes we do cross-promotion with them, but it's not necessary – this is more about giving back to the community.
-
-### Twitter
-
-We're investing more effort in Twitter in 2023 to figure out if this is a channel we want to consistently invest a lot of time in. If the answer is yes, we'll add more to the Handbook about how we use Twitter effectively. Our hypothesis is that it is the best social media platform for us to reach our target user with frequently shared pieces of engaging, transparent content about PostHog. 
- 
-### Press
-
-While we don't actively do PR, we occasionally put out press releases ourselves for funding announcements. 
-
-## Target customer and messaging
-
-We have written up a series of [value propositions](/handbook/growth/marketing/value-propositions) ('value props'). These communicate PostHog's benefits in a clear and specific way to our target user, and help us ensure that we are communicating consistently across all of our different channels.
-
-See our [customer personas page](/handbook/growth/marketing/customer-personas) for more information about what is important to our target users and how we ensuring they have the best possible experience with PostHog across all product and marketing touchpoints.
+Our channels are listed in the sidebar, including those currently on hiatus. By far, our most important channel is Content & SEO.  
 
 ## Competitors
 
 Sometimes we summarise our findings into internal reports to help us stay informed and understand how other products are developing. Our collection of summaries isn't exhaustive and cannot be shared publicly as it often includes details of the experiences of individual user experiences whose privacy we don't want to sacrifice. However, PostHog team members can find our competitor summaries in [the relevant folder of the Marketing shared drive](https://drive.google.com/drive/folders/1RdzCKhGjJ3f7RbzvBkVjKfPXZ0lbBefY?usp=sharing). 
 
-## Who we are
+## Who the marketing team are
 
 The Marketing Small Team page is maintained [here](/handbook/small-teams/marketing). By 2026, we still want to be a very small but highly effective and responsive team (15-20 people), rather than a very large marketing team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
 

@@ -26,15 +26,14 @@ import JavaInstall from '../../integrate/_snippets/install-java.mdx'
 
 <JavaInstall />
 
-## Making calls
 
-### Capturing events
+## Capturing events
 
 import JavaSendEvents from '../../integrate/send-events/_snippets/send-events-java.mdx'
 
 <JavaSendEvents />
 
-### Setting user properties
+## Setting user properties
 
 To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
@@ -57,8 +56,16 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 
 For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-### Alias
+## Alias
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+
+## Feature flags
+
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
+
+<FeatureFlagsLibsIntro />
+
+Feature flags are not supported yet in our Java SDK. However, you can integrate them into your project by using the [PostHog API](/docs/feature-flags/adding-feature-flag-code?tab=api).

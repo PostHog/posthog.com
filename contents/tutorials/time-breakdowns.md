@@ -12,7 +12,7 @@ By default, PostHog provides an easy way to group events by week, day, and even 
 
 ## Time of day breakdown
 
-We start with an easy scenario: breaking down what part of the day events take place in. To do this, we [create an insight](https://app.posthog.com/insights/new) and then break it down by checking if the event timestamp is in the morning, afternoon, evening, or night. We use a HogQL `multiIf()` expression using the hours of the day to check against `toHour(timestamp)` like so:
+We start with an easy scenario: breaking down what part of the day events take place in. To do this, we [create an insight](https://app.posthog.com/insights/new) and then break it down by checking if the event timestamp is in the morning, afternoon, evening, or night. We use a HogQL `multiIf()` [expression](/docs/hogql/expressions) using the hours of the day to check against `toHour(timestamp)` like so:
 
 ```sql
 multiIf(
@@ -37,7 +37,7 @@ PostHog enables you to group data by hour for single-day date ranges. If you wan
 
 ## Minute-by-minute breakdown
 
-If hourly isn’t enough for you, we can move down to by the minute. We use an SQL insight for this. To make one, select the "SQL" tab when [creating an insight](https://app.posthog.com/insights/new). In this insight, we select a formatted count of `toStartOfMinute(timestamp)` where the timestamp is in the past day and order by the time (`minute`). In HogQL, this looks like this:
+If hourly isn’t enough for you, we can move down to by the minute. We use an [SQL insight](/docs/product-analytics/sql) for this. To make one, select the "SQL" tab when [creating an insight](https://app.posthog.com/insights/new). In this insight, we select a formatted count of `toStartOfMinute(timestamp)` where the timestamp is in the past day and order by the time (`minute`). In HogQL, this looks like this:
 
 ```sql
 select 

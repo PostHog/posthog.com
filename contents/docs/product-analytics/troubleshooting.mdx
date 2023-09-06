@@ -5,9 +5,9 @@ title: Troubleshooting and FAQs
 
 There are a few common reasons that you may not see events appear in your project:
 
-### 1. The library is being configured incorrectly. (this is usually the issue)
+### 1. Your library is configured incorrectly
 
-The main reason that certain evets are missing is usually a misconfiguration.
+This is the most common reason events may be missing. To debug if this issue, you can try send events to `https://webhook.site/`:
 
 > Warning: Make sure to not use sensitive data while debugging using third-party tools.
 
@@ -63,49 +63,53 @@ posthog = PostHog::Client.new({
 
 </MultiLanguage>
 
-3. Make sure that the SDK sends a couple of events.
-4. See if the incoming events arrive as expected.
+3. Send a few events from your app.
+
+If events are *not* visible in webhook.site, that means you have misconfigured your PostHog library, or incorrectly formatted your events. Consult our [installation guide](/docs/product-analytics/installation) for how to initialize PostHog.
+
+If events are indeed visible in webhook.site, these means that you have configured your PostHog correctly.
 
 ![Events visible on webhook.site](../../images/docs/product-analytics/events-in-webhook.site.png)
 
-### 2. There is a bug within the library being used.
+### 2. There is a bug the library
 
-Certain events could fail to reach PostHog if there is a bug in the used library. (this is quite uncommon)
+Sometimes, bugs in the PostHog library may be the cause of missing events. However, this is quite uncommon.
 
-#### Web libraries
-1. Open the devtools and switch to the network tab.
-2. Look for the failed requests to app.posthog.com/e (or eu.posthog.com/e if using the EU Cloud).
+To debug if this is the issue, most of our SDKs have an option to enable debug logging. Consult the relevant [SDK docs](/docs/libraries) for how to do this.
+
+If you're using the [JavaScript web](/docs/libraries/js) library, you can identify failed requests using the network tab in your browser devtools:
+
+1. Open devtools in your browser and switch to the network tab.
+2. Identify the failed requests to app.posthog.com/e (or eu.posthog.com/e if you're using EU Cloud).
 3. Right click one of those request and click Copy -> Copy as cURL.
+4. See below on how to [report your issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) and attach your cURL command to get further support.
 
 ![network request being sent to posthog](../../images/docs/product-analytics/network-request-to-posthog.png)
 
-3. See how to [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) to get further support.
-
-#### Other libraries
-See the respective debugging guides, e.g. [Node.js debugging](https://posthog.com/docs/libraries/node#debugging-and-exceptions).
-
 ### 3. Events are not ingested after being received by PostHog.
 
-If the library is configured correctly and successfully sending events to PostHog. Events could get lost in the ingestion pipeline e.g. when there is an [active incident](https://status.posthog.com).
+If your library is configured correctly and successfully sending events to PostHog, events may get lost in the ingestion pipeline – e.g. if there is an [active incident](https://status.posthog.com).
 
-#### Web libraries
-1. Open the devtools and switch to the network tab.
-2. Right click one of the network requests to posthog.com/e (or eu.posthog.com/e if using the EU Cloud) and select Copy -> Copy as cURL.
-3. Format the request as specified in [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue)
-4. Try to send the cURL directly.
-5. Wait 1 hour and check if the event is still not visible in PostHog. Also make sure PostHog cloud is not experiencing an [active incident](https://status.posthog.com) as that could cause an ingestion lag.
-6. See how to [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) to get further support.
+To confirm if this is the issue, use the following steps:
 
-#### Other libraries
-1. Track your outgoing network requests using something like [Wireshark](https://www.wireshark.org/).
-2. Format the request as specified in [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue)
-3. Try to send the cURL directly.
-4. Wait 1 hour and check if the event is still not visible in PostHog. Also make sure PostHog cloud is not experiencing an [active incident](https://status.posthog.com) as that could cause an ingestion lag.
-5. See how to [Report your specific issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) to get further support.
+1. Ensure that PostHog is not [experiencing an incident](https://status.posthog.com), as this may cause ingestion lags.
 
-## Report your specific issue
+2. Check your PostHog app for any [ingestion warnings](https://app.posthog.com/data-management/ingestion-warnings).
 
-1. The copied cURL command will look similar to this:
+3. Send your event as a cURL request directly
+    - i) Copy your cURL request.
+         - If you're using the JavaScript web library, you can copy the cURL request from the network tab in your browser devtools.
+         - If you're using any other library, you can track your outgoing network requests using something like [Wireshark](https://www.wireshark.org/) and format them as a cURL request.
+    - ii) [Decode your request](/docs/product-analytics/troubleshooting#step-1-decode-your-curl-command).
+    - iii) Send your event a cURL request. Wait 1 hour and check if the event is still not visible in PostHog.
+
+Once you have confirmed there is an issue with event ingestion, you can [report your issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) to get further support.
+
+## Report your issue
+
+### Step 1: Decode your cURL command
+
+1. Your copied cURL command will look similar to this:
 ```
 curl 'http://localhost:3000/e?ip=1&_=1691496272289&ver=1.53.4' \
   -H 'Origin: http://localhost:3000' \
@@ -117,7 +121,7 @@ curl 'http://localhost:3000/e?ip=1&_=1691496272289&ver=1.53.4' \
 
 3. Visit [base64decode.org](https://www.base64decode.org/) and paste the encoded string.
 
-4. Click decode and paste the decoded output into this format:.
+4. Click decode and paste the decoded output into this format:
 
 ```
 POST https://[your-instance].com/capture/
@@ -135,7 +139,9 @@ Body:
 }
 ```
 
-5. [Send a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion) (or contact the [EU-Cloud support](https://eu.posthog.com/home#supportModal=bug%3Aingestion)). Make sure to include the request from the previous step in the following format:
+### Step 2: Submit a support ticket
+
+1. [Submit a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion) (or contact the [EU-Cloud support](https://eu.posthog.com/home#supportModal=bug%3Aingestion)). Submit your issue in the below format, and also include the decoded request from step 1.
 ```
 # Library:
 // e.g.

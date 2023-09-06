@@ -48,7 +48,8 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                 page,
                 pageSize: 100,
             },
-            fields: ['id', 'folder'],
+            fields: ['id', 'folder', 'post_tags'],
+            populate: ['post_tags'],
         })
 
         const categories = await fetch(`${apiHost}/api/post-categories?${query}`).then((res) => res.json())
@@ -87,6 +88,9 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                 const category = allStrapiPostCategories.find(
                     (category) => category?.attributes?.folder === path.split('/')[0]
                 )
+                const tag = category?.attributes?.post_tags?.data?.find(
+                    (tag) => tag?.attributes?.folder === path.split('/')[1]
+                )
                 const authorIDs = authorData?.map(({ profile_id }) => profile_id) || []
                 const data = {
                     slug,
@@ -104,6 +108,13 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                         ? {
                               post_category: {
                                   connect: [category.id],
+                              },
+                          }
+                        : null),
+                    ...(tag
+                        ? {
+                              post_tag: {
+                                  connect: [tag.id],
                               },
                           }
                         : null),
@@ -171,7 +182,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
             }
             allMDXPosts: allMdx(
                 filter: {
-                    fields: { slug: { regex: "/^/blog|^/tutorials|^/customers|^/spotlight/" } }
+                    fields: { slug: { regex: "/^/blog|^/tutorials|^/customers|^/spotlight|^/library/" } }
                     frontmatter: { date: { ne: null } }
                 }
             ) {
@@ -203,7 +214,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                 }
             }
             blog: allMdx(
-                filter: { fields: { slug: { regex: "/^/blog/" } }, frontmatter: { featuredImageType: { eq: "full" } } }
+                filter: {
+                    fields: { slug: { regex: "/^/blog|^/spotlight/" } }
+                    frontmatter: { featuredImageType: { eq: "full" } }
+                }
             ) {
                 nodes {
                     fields {

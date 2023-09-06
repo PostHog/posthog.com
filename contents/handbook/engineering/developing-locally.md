@@ -78,8 +78,8 @@ This is a faster alternative to get up and running. If you don't want to or can'
 2. Install the `build-essential` package:
 
     ```bash
-    sudo apt install -y build-essential
-    ````
+    sudo apt install -y build-essential optipng
+    ```
 
 ## Common prerequisites for both macOS & Linux
 

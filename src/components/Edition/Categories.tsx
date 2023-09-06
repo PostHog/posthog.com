@@ -13,42 +13,60 @@ const query = qs.stringify(
                 },
             },
         },
-        populate: '*',
+        populate: ['post_tags.posts'],
     },
     {
         encodeValuesOnly: true,
     }
 )
 
-export default function Categories({ setSelectedCategories, selectedCategories, setParams, root }) {
+export default function Categories({ setSelectedCategories, selectedCategories, root }) {
     const containerEl = useRef(null)
     const [categories, setCategories] = useState([])
     const [open, setOpen] = useState(false)
+
+    const getTags = (label) =>
+        categories
+            .find((category) => category?.attributes?.label === label)
+            ?.attributes?.post_tags?.data.map((tag) => tag?.attributes?.label)
 
     useEffect(() => {
         fetchCategories(query).then((categories) => {
             const selectedCategory = categories.find((category) => category.attributes?.folder === root)
             if (selectedCategory) {
-                setSelectedCategories([selectedCategory])
+                setSelectedCategories({
+                    [selectedCategory.attributes?.label]: selectedCategory.attributes?.post_tags?.data.map(
+                        (tag) => tag?.attributes?.label
+                    ),
+                })
             }
             setCategories(categories)
         })
     }, [])
 
-    const handleClick = (newCategory) => {
-        const newCategories = selectedCategories.some((selectedCategory) => selectedCategory.id === newCategory.id)
-            ? selectedCategories.filter((selectedCategory) => selectedCategory.id !== newCategory.id)
-            : [...selectedCategories, newCategory]
+    const handleCategoryClick = (newCategory) => {
+        let newCategories
+        if (selectedCategories[newCategory]) {
+            const { [newCategory]: _tags, ...rest } = selectedCategories
+            newCategories = rest
+        } else {
+            newCategories = { ...selectedCategories, [newCategory]: getTags(newCategory) }
+        }
         setSelectedCategories(newCategories)
-        setParams({
-            filters: {
-                post_category: {
-                    id: {
-                        $in: newCategories.map((category) => category.id),
-                    },
-                },
-            },
-        })
+    }
+
+    const handleTagClick = (category, tag, active) => {
+        let newCategories = { ...selectedCategories }
+        if (active) {
+            newCategories[category] = newCategories[category].filter((selectedTag) => selectedTag !== tag)
+        } else {
+            newCategories[category] = [...(newCategories[category] ?? []), tag]
+        }
+        if (newCategories[category].length <= 0) {
+            const { [category]: _tags, ...rest } = newCategories
+            newCategories = rest
+        }
+        setSelectedCategories(newCategories)
     }
 
     useEffect(() => {
@@ -79,13 +97,14 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                         className="absolute grid gap-y-2 right-0 bg-accent dark:bg-accent-dark p-2 border border-border dark:border-dark rounded mt-1"
                     >
                         {categories.map((category) => {
-                            const active = selectedCategories.some(
-                                (selectedCategory) => selectedCategory.id === category.id
+                            const active = Object.keys(selectedCategories).some(
+                                (selectedCategory) => selectedCategory === category.attributes.label
                             )
+                            const tags = category.attributes.post_tags?.data
                             return (
-                                <Menu.Item key={category.id}>
+                                <Menu.Item as="span" key={category.id}>
                                     <button
-                                        onClick={() => handleClick(category)}
+                                        onClick={() => handleCategoryClick(category.attributes.label, active)}
                                         className="text-left whitespace-nowrap flex items-center space-x-2"
                                     >
                                         <span
@@ -95,8 +114,43 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                                         >
                                             {active && <Check />}
                                         </span>
-                                        <span className="text-sm">{category?.attributes?.label}</span>
+                                        <span className="text-sm">{category.attributes.label}</span>
                                     </button>
+                                    {tags?.length > 0 && (
+                                        <div className="ml-2 mt-2 grid gap-y-2">
+                                            {tags?.map((tag) => {
+                                                if (tag.attributes?.posts?.data?.length <= 0) return null
+                                                const active = selectedCategories[category.attributes.label]?.some(
+                                                    (selectedTag) => selectedTag === tag.attributes.label
+                                                )
+                                                return (
+                                                    <Menu.Item as="span" key={tag.id}>
+                                                        <button
+                                                            onClick={() =>
+                                                                handleTagClick(
+                                                                    category.attributes.label,
+                                                                    tag.attributes.label,
+                                                                    active
+                                                                )
+                                                            }
+                                                            className="text-left whitespace-nowrap flex items-center space-x-2"
+                                                        >
+                                                            <span
+                                                                className={`w-4 h-4 rounded-sm border text-white ${
+                                                                    active
+                                                                        ? 'bg-red border-red'
+                                                                        : 'border-border dark:border-dark'
+                                                                }`}
+                                                            >
+                                                                {active && <Check />}
+                                                            </span>
+                                                            <span className="text-sm">{tag.attributes.label}</span>
+                                                        </button>
+                                                    </Menu.Item>
+                                                )
+                                            })}
+                                        </div>
+                                    )}
                                 </Menu.Item>
                             )
                         })}

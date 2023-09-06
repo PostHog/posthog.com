@@ -14,8 +14,6 @@ features:
     groupAnalytics: true
 ---
 
-import CohortExpansionSnippet from '../\_snippets/cohort-expansion'
-
 This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
 
 ## Installation
@@ -24,15 +22,13 @@ import PythonInstall from '../../integrate/_snippets/install-python.mdx'
 
 <PythonInstall />
 
-## Making Calls
-
-### Capturing events
+## Capturing events
 
 import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-python.mdx'
 
 <PythonSendEvents />
 
-### Setting user properties
+## Setting user properties
 
 To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
@@ -49,157 +45,31 @@ posthog.capture(
 
 For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-### Alias
+## Alias
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
 We strongly recommend reading our docs on [alias](/docs/getting-started/identify-users) to best understand how to correctly use this method.
 
-### Feature flags
+## Feature flags
 
-PostHog's [Feature Flags](/docs/user-guides/feature-flags) allow you to safely deploy and roll back new features.
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-When using them with one of libraries, you should check if a feature flag is enabled and use the result to toggle functionality on and off in you application.
+<FeatureFlagsLibsIntro />
 
-**How to check if a flag is enabled**
+import PythonFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-python.mdx'
 
-> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true`, `false`, or a string variant value.
+<PythonFeatureFlagsCode />
 
-```python
-posthog.feature_enabled('beta-feature', 'distinct id')
-# returns True or False or None
-```
+### Local Evaluation
 
-**Example use case**
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
-Here's how you might send different users a different version of your homepage, for example:
+<LocalEvaluationIntro />
 
-```python
-def homepage(request):
-    template = "new.html" if posthog.feature_enabled('new_ui', 'distinct id') else "old.html"
-    return render_template(template, request=request)
-```
+For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
 
-> **Note:** Feature flags are persistent for users across sessions. Read more about feature flag persistence on our [dedicated page](/docs/user-guides/feature-flags#feature-flag-persistence).
-
-**Get a flag value**
-
-If you're using multivariate feature flags, you can also get not just whether the flag is enabled, but what value its enabled to.
-
-> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true`, `false`, or a string variant value.
-
-```python
-posthog.get_feature_flag('beta-feature', 'distinct id')
-# returns string or True or False or None
-```
-
-**Overriding server properties**
-
-Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
-
-For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
-
-```python
-posthog.get_feature_flag('beta-feature', 'distinct id', person_properties={'is_authorized': True})
-# returns string or None
-```
-
-The same holds for groups. If you have a group name `organisation`, you can add properties like so:
-
-```python
-posthog.get_feature_flag('beta-feature', 'distinct id', groups={'organisation': 'google'}, group_properties={'organisation': {'is_authorized': True})
-# returns string or None
-```
-
-**Default overridden properties**
-
-Before posthog-python v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
-
-As of posthog-python v3.0, the default now is to disregard the server IP, not add the GeoIP properties, and not use the values for feature flag evaluations.
-
-You can go back to previous behaviour by doing setting the `disable_geoip` argument in your initialization to `False`:
-
-```python
-
-posthog = Posthog('api_key', disable_geoip=False)
-
-```
-
-The list of properties that this overrides:
-
-1. $geoip_city_name
-2. $geoip_country_name
-3. $geoip_country_code
-4. $geoip_continent_name
-5. $geoip_continent_code
-6. $geoip_postal_code
-7. $geoip_time_zone
-
-
-You can also explicitly chose to override / not override properties for a single capture or feature flag request like so:
-
-```python
-posthog.get_feature_flag("beta-feature", "distinct_id", disable_geoip=True|False)
-```
-
-```python
-posthog.capture('test id', 'test event', disable_geoip=True|False)
-```
-
-**Getting all flag values**
-
-You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
-
-```python
-posthog.get_all_flags('distinct id', groups={}, person_properties={'is_authorized': True}, group_properties={})
-# returns dict of flag key and value pairs.
-```
-
-#### Feature Flag Payloads
-
-Payloads allow you to retrieve a value that is associated with the matched flag. The value can be a
-string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app.
-
-```python
-posthog.get_feature_flag_payload('feature-flag-key', 'distinct id')
-```
-
-#### Local Evaluation
-
-> **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
-
-> **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
-
-> **Note:** A single local evaluation call is billed as equivalent to 10 `decide`requests. [More info](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation).
-
-All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
-
-1. The library must be initialised with a personal API key
-2. You must know all person or group properties the flag depends on.
-
-Then, the flag can be evaluated locally. The method signature looks exactly like above
-
-```python
-posthog.get_feature_flag('beta-feature', 'distinct id', person_properties={'is_authorized': True})
-# returns string or None
-```
-
-> **Note:** New feature flag definitions are polled every 30 seconds by default, which means there will be up to a 30 second delay between you changing the flag definition, and it reflecting on your servers. You can change this default on the client by setting `posthog.poll_interval = <value in seconds>`.
-
-This works for `get_all_flags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
-
-```python
-posthog.get_all_flags('distinct id', groups={}, person_properties={'is_authorized': True}, group_properties={})
-# returns dict of flag key and value pairs.
-```
-
-**Restricting evaluation to local only**
-
-Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `only_evaluate_locally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
-
-<CohortExpansionSnippet />
-
-### Experiments (A/B tests)
+## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
@@ -212,7 +82,7 @@ if variant == 'variant-name':
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
 
-### Group analytics
+## Group analytics
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
@@ -234,6 +104,34 @@ posthog.group_identify('company', 'company_id_in_your_db', {
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+
+## GeoIP properties
+
+Before posthog-python v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
+
+As of posthog-python v3.0, the default now is to disregard the server IP, not add the GeoIP properties, and not use the values for feature flag evaluations.
+
+You can go back to previous behaviour by doing setting the `disable_geoip` argument in your initialization to `False`:
+
+```python
+posthog = Posthog('api_key', disable_geoip=False)
+```
+
+The list of properties that this overrides:
+
+1. $geoip_city_name
+2. $geoip_country_name
+3. $geoip_country_code
+4. $geoip_continent_name
+5. $geoip_continent_code
+6. $geoip_postal_code
+7. $geoip_time_zone
+
+You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
+
+```python
+posthog.capture('test id', 'test event', disable_geoip=True|False)
+```
 
 ## Serverless environments (Render/Lambda/...)
 

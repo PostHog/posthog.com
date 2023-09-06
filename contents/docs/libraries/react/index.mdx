@@ -148,177 +148,23 @@ useEffect(() => {
 
 Typescript helps protect against these errors.
 
-### Feature flags
+## Feature Flags
 
-Feature flags are a powerful way to test new features and roll them out to a subset of your users. You can use feature flags to enable/disable features, change the behavior of a feature, or even change the UI of a feature.
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-PostHog provides several hooks to make it easy to use feature flags in your React app.
+<FeatureFlagsLibsIntro />
 
-| Hook | Description |
-| --- | --- |
-| `useFeatureFlagEnabled` | Returns a boolean indicating whether the feature flag is enabled. |
-| `useFeatureFlagPayload` | Returns the payload of the feature flag. |
-| `useFeatureFlagVariantKey` | Returns the variant key of the feature flag. |
-| `useActiveFeatureFlags` | Returns an array of active feature flags. |
+import ReactFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-react.mdx'
 
-For example, to show a welcome message if the feature flag is enabled:
+<ReactFeatureFlagsCode />
 
-```react
-import { useFeatureFlagEnabled } from 'posthog-js/react'
+### Bootstrapping Flags
 
-function App() {
-  const showWelcomeMessage = useFeatureFlagEnabled('cool-flag')
+import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
 
-  return (
-    <div className="App">
-      {
-        showWelcomeMessage ? (
-          <div>
-            <h1>Welcome!</h1>
-            <p>Thanks for trying out our feature flags.</p>
-          </div>
-        ) : (
-          <div>
-            <h2>No welcome message</h2>
-            <p>Because the feature flag evaluated to false.</p>
-          </div>
-        )
-      }
-    </div>
-  );
-}
+<BootstrappingIntro />
 
-export default App;
-```
-
-To show a different message depending on the variant key:
-
-```react
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
-import { useState, useEffect } from 'react'
-
-function App() {
-  const variantKey = useFeatureFlagVariantKey('show-welcome-message')
-  const [ welcomeMessage, setWelcomeMessage ] = useState('')
-
-  useEffect(() => {
-    if (variantKey === 'variant-a') {
-      setWelcomeMessage('Welcome to the Alpha!')
-    } else if (variantKey === 'variant-b') {
-      setWelcomeMessage('Welcome to the Beta!')
-    }
-  }, [variantKey])
-
-  return (
-    <div className="App">
-      {
-        welcomeMessage ? (
-          <div>
-            <h1>{welcomeMessage}</h1>
-            <p>Thanks for trying out our feature flags.</p>
-          </div>
-        ) : (
-          <div>
-            <h2>No welcome message</h2>
-            <p>Because the feature flag evaluated to false.</p>
-          </div>
-        )
-      }
-    </div>
-  );
-}
-
-export default App;
-```
-
-To load the message and title from the feature flag payload:
-
-```react
-import { useFeatureFlagPayload } from 'posthog-js/react'
-
-function App() {
-  const payload = useFeatureFlagPayload('show-welcome-message')
-
-    return (
-                <>
-                {
-                    payload?.welcomeMessage ? (
-                        <div className="welcome-message">
-                            <h2>{payload?.welcomeTitle}</h2>
-                            <p>{payload.welcomeMessage}</p>
-                        </div>
-                    ) : <div>
-                        <h2>No welcome message</h2>
-                        <p>Because the feature flag evaluated to false.</p>
-                    </div>
-                }
-        </>
-    )
-}
-```
-
-### Feature flags React Component
-
-If you don't wish to handle any kind of feature flag related logic handling, you can use our react component instead of the hooks above.
-
-This has the added benefit of capturing metrics like how many times a user interacts with this feature automatically.
-
-You still need the [`PostHogProvider`](/docs/libraries/react#installation) at the top level for this to work.
-
-```react
-import { PostHogFeature } from 'posthog-js/react'
-
-function App() {
-
-    return (
-        <PostHogFeature flag='show-welcome-message' match={true}>
-            <div>
-                <h1>Hello</h1>
-                <p>Thanks for trying out our feature flags.</p>
-            </div>
-        </PostHogFeature>
-    )
-}
-```
-
-The `match` on the component can be either `true`, or the variant key, to match on a specific variant.
-
-If you also want to show a default message, you can pass these in the `fallback` attribute.
-
-If your flag has a payload, you can pass a function to children whose first argument is the payload. For example:
-
-
-```react
-import { PostHogFeature } from 'posthog-js/react'
-
-function App() {
-
-    return (
-        <PostHogFeature flag='show-welcome-message' match={true}>
-           {(payload) => {
-                return (
-                    <div>
-                        <h1>{payload.welcomeMessage}</h1>
-                        <p>Thanks for trying out our feature flags.</p>
-                    </div>
-                )
-           }}
-        </PostHogFeature>
-    )
-}
-```
-
-If you wish to customise logic around when the component is considered visible, you can pass in `visibilityObserverOptions` to the feature. These take the same options as the [IntersectionObserver API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). By default, we use a threshold of 0.1. 
-
-#### Customising analytics
-
-By default, this component tracks views and interactions. However, you can disable these by setting `trackInteraction` and `trackView` on the component like so:
-
-```react
-<PostHogFeature flag={'show-hello'} match={true} trackInteraction={false} trackView={false}>
-    <div data-testid="helloDiv">Hello</div>
-</PostHogFeature>
-```
+For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
 
 ### Experiments (A/B tests)
 

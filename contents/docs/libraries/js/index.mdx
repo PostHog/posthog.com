@@ -32,15 +32,13 @@ We recommend putting PostHog both on your homepage and your application if appli
 
 You can also configure "permitted domains" in your [project settings](https://app.posthog.com/project/settings). These are domains where you'll be able to record user sessions and use the PostHog toolbar.
 
-## Usage
-
-### Capturing events
+## Capturing events
 
 import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web.mdx'
 
 <WebSendEvents />
 
-### Setting user properties
+## Setting user properties
 
 To set [user properties](/docs/data/user-properties), include them when capturing an event:
 
@@ -67,7 +65,7 @@ This creates a special `$set` event that is sent to PostHog.
 
 For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-### Identifying users
+## Identifying users
 
 > We strongly recommend reading our docs on [identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
@@ -76,13 +74,13 @@ import JSIdentify from './\_snippets/identify.mdx'
 <JSIdentify />
 
 
-### Alias
+## Alias
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-### Reset after logout
+## Reset after logout
 
 If a user logs out, you should call `reset` to unlink any future events made on that device with that user. 
 
@@ -100,7 +98,7 @@ If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
 posthog.reset(true)
 ```
 
-### Super Properties
+## Super Properties
 
 Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $pageview, an autocaptured button click, or anything else.
 
@@ -129,7 +127,7 @@ posthog.register_once({
 
 Using `register_once` will ensure that if a property is already set, it will not be set again. For example, if the user already has property `"icecream pref": "vanilla"`, calling `posthog.register_once({"icecream pref": "chocolate"})` will **not** update the property.
 
-#### Removing stored Super Properties
+### Removing stored Super Properties
 
 Setting Super Properties creates a cookie on the client with the respective properties and their values. In order to stop sending a Super Property with events and remove the cookie, you can use `posthog.unregister`, like so:
 
@@ -139,7 +137,7 @@ posthog.unregister('icecream pref')
 
 This will remove the Super Property and subsequent events will not include it.
 
-### Opt users out
+## Opt users out
 
 PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner).
 
@@ -167,73 +165,25 @@ Opt a user back in:
 posthog.opt_in_capturing()
 ```
 
-### Feature Flags
+## Feature Flags
 
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-PostHog v1.10.0 introduced [Feature Flags](/docs/user-guides/feature-flags), which allow you to safely deploy and roll back new features.
+<FeatureFlagsLibsIntro />
 
-Here's how you can use them:
+import WebFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-web.mdx'
 
--   Do something when the feature flags load:
+<WebFeatureFlagsCode />
 
-    The argument `callback(flags: string[])` will be called when the feature flags are loaded.
+### Bootstrapping Flags
 
-    In case the flags are already loaded, it'll be called immediately. Additionally, it will also be called when the flags are re-loaded e.g. after calling `identify` or `reloadFeatureFlags`.
+import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
 
-```js-web
-posthog.onFeatureFlags(callback)
-```
+<BootstrappingIntro />
 
--   Check if a feature is enabled:
+For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
 
-```js-web
-posthog.isFeatureEnabled('keyword')
-```
-
--   By default, this function will send a `$feature_flag_called` event to your instance every time it's called so you're able to do analytics. You can disable this by passing the send_event property:
-
-```js-web
-posthog.isFeatureEnabled('keyword', { send_event: false })
-```
-
-
--   Trigger a reload of the feature flags:
-
-```js-web
-posthog.reloadFeatureFlags()
-```
-
-Note that `reloadFeatureFlags()` does not send `$feature_flag_called` events. These events are only sent when you query for a feature flag
-using the `getFeatureFlag()` or `isFeatureEnabled()` functions.
-
-### Experiments (A/B tests)
-
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
-
-```js-web
-// Ensure flags are loaded before usage.
-// You'll only need to call this on the code the first time a user visits.
-// See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
-posthog.onFeatureFlags(function() {
-    // feature flags should be available at this point
-    if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
-        // do something
-    }
-})
-
-// Otherwise, you can just do:
-if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
-    // do something
-}
-
-// You can also test your code by overriding the feature flag:
-// e.g., posthog.feature_flags.override({'experiment-feature-flag-key': 'test'})
-```
-
-It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
-
-
-#### Overriding server properties
+### Overriding server properties
 
 Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls:
 
@@ -289,72 +239,6 @@ The list of properties that this overrides:
 
 This enables any geolocation-based flags to work without manually setting these properties.
 
-#### Feature Flag Payloads
-
-Payloads allow you to retrieve a value that is associated with the matched flag. The value can be a
-string, boolean, number, dictionary, or array. This allows for custom configurations based on values defined in the posthog app.
-
-```js-web
-posthog.getFeatureFlagPayload('keyword')
-```
-
-#### Bootstrapping Flags
-
-There is a delay between loading the library and feature flags becoming available to use. For some cases, like redirecting users to a different page based on a feature flag, this is extremely detrimental, as the flags load after the redirect logic occurs, thus never working.
-
-In cases like these, where you want flags to be immediately available on page load, you can use the bootstrap library option.
-
-This allows you to pass in a distinctID and feature flags during library initialisation, like so:
-
-```js-web
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    bootstrap: {
-        distinctID: 'your-anonymous-id',
-        featureFlags: {
-            'flag-1': true,
-            'variant-flag': 'control',
-            'other-flag': false,
-        },
-    },
-})
-```
-
-To compute these flag values, use the corresponding `getAllFlags` method in your server-side library. Note that bootstrapping flags requires server-side initialisation.
-
-If the ID you're passing in is an identified ID (that is, an ID with which you've called `posthog.identify()` elsewhere), you can also pass in the `isIdentifiedID` bootstrap option, which ensures that this ID is treated as an identified ID in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling `identify` again.
-
-```js-web
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-    bootstrap: {
-        distinctID: 'your-identified-id',
-        isIdentifiedID: true,
-        featureFlags: {
-            'flag-1': true,
-            'variant-flag': 'control',
-            'other-flag': false,
-        },
-    },
-})
-```
-
-> **Note:** Passing in a distinctID to bootstrap replaces any existing IDs, which means you may fail to connect any old anonymous user events with the logged in person, if your logic calls identify in the frontend immediately on login. In this case, you can omit passing in the distinctID.
-
-#### Early access feature management
-
-Early access features give you the option to release feature flags that can be controlled by your users. More information on this can be found [here](/docs/feature-flags/early-access-feature-management).
-
-```js-web
-posthog.getEarlyAccessFeatures((previewItemData) => {
-    // do something with early access feature
-})
-```
-
-```js-web
-posthog.updateEarlyAccessFeatureEnrollment(flagKey, 'true')
-```
-
 #### Enriched analytics
 
 You can send enriched analytics data for feature flags, which helps uncover replays where people interact with a flag, target people who've interacted with a feature, or build cohorts of people who've viewed a feature.
@@ -377,7 +261,47 @@ posthog.capture('$feature_interaction', { feature_flag: flag, $set: { [`$feature
 
 [Here's a code example for the entire React component](https://github.com/PostHog/posthog-js/blob/master/react/src/components/PostHogFeature.tsx).
 
-### Group analytics
+## Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```js-web
+// Ensure flags are loaded before usage.
+// You'll only need to call this on the code the first time a user visits.
+// See this doc for more details: https://posthog.com/docs/feature-flags/manual#ensuring-flags-are-loaded-before-usage
+posthog.onFeatureFlags(function() {
+    // feature flags should be available at this point
+    if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+        // do something
+    }
+})
+
+// Otherwise, you can just do:
+if (posthog.getFeatureFlag('experiment-feature-flag-key')  == 'variant-name') {
+    // do something
+}
+
+// You can also test your code by overriding the feature flag:
+// e.g., posthog.feature_flags.override({'experiment-feature-flag-key': 'test'})
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
+## Early access feature management
+
+Early access features give you the option to release feature flags that can be controlled by your users. More information on this can be found [here](/docs/feature-flags/early-access-feature-management).
+
+```js-web
+posthog.getEarlyAccessFeatures((previewItemData) => {
+    // do something with early access feature
+})
+```
+
+```js-web
+posthog.updateEarlyAccessFeatureEnrollment(flagKey, 'true')
+```
+
+## Group analytics
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 

@@ -36,7 +36,7 @@ In contrast, PostHog is a comprhensive Product OS that includes product analytic
 Matomo charges extra for product analytics features like funnel analysis, cohorts, path analysis, and session recording, and they're not tightly integrated. In PostHog, these are core features in all editions, including the open source release, while [Experimentation](/product/experimentation-suite) is [free up to 1 million events per month](/pricing).
 
 ### 2. Seamless integration with modern data stacks
-PostHog is built to work seamlessly with your data stack. That means we offer data import and export integrations with [most popular data warehouses](#integrations-and-data-sources), as well as numerous integrations with CRMs (Hubspot, Salesforce), data platforms (Segment, Airbyte, Rudderstack), engineering tools (PagerDuty, Sentry), and more via the [PostHog App Store](/apps).
+PostHog is built to work seamlessly with your data stack. That means we offer data import and export integrations with [most popular data warehouses](#integrations-and-data-sources), as well as numerous integrations with CRMs (Hubspot, Salesforce), data platforms (Segment, Airbyte, Rudderstack), engineering tools, and more via [PostHog apps](/apps).
 
 ### 3. It's built for engineers
 PostHog is about giving engineering and product teams the tools they need to build better products. The core product analytics tools are part of this, but we go further by providing market-leading feature flag functionality, and integrating Session Recording so you can deploy one platform that does everything, rather than integrating multiple discrete tools into your stack.

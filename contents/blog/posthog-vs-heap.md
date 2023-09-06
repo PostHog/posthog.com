@@ -370,12 +370,6 @@ In Heap, data warehouse integrations are only available on Heap Premier, or as a
             <td>Export data to a PostgreSQL instance</td>
         </tr>
         <tr>
-            <td><strong>Databricks</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Open source data lakehouse</td>
-        </tr>
-        <tr>
             <td><strong>RudderStack</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -461,12 +455,6 @@ In Heap, data warehouse integrations are only available on Heap Premier, or as a
             <td>ETL data pipelines</td>
         </tr>
         <tr>
-            <td><strong>Shopify</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync customer and order data</td>
-        </tr>
-        <tr>
             <td><strong>Stripe</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -528,12 +516,6 @@ As an open source platform designed for technical teams, PostHog integrates with
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Track impact of releases in analytics</td>
-        </tr>
-        <tr>
-            <td><strong>PagerDuty</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Create custom alerts based on thresholds</td>
         </tr>
         <tr>
             <td><strong>Sentry</strong></td>
@@ -809,7 +791,7 @@ If you user privacy is a primary concern for you, consider our [open source Dock
 
 ### Can you use PostHog on e-commerce websites?
 
-Absolutely. PostHog is [easy to integrate with Shopify](/docs/libraries/shopify), and we have a[Shopify](/apps/shopify) integration for importing order and revenue data into PostHog for analysis. You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/libraries/wordpress). 
+Absolutely. PostHog is [easy to integrate with Shopify](/docs/libraries/shopify). You can easily install PostHog on other e-commerce platforms [using our Javascript snippet](/docs/integrate) – see our guides to [setting up Webflow analytics](/tutorials/webflow) and [Wordpress](/docs/libraries/wordpress). 
 
 ### Can PostHog replace Google Analytics?
 

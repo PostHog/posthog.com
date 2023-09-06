@@ -62,9 +62,7 @@ export const Intro = ({ image = true }) => {
                     Play back sessions to diagnose UI issues, improve support, and get context for nuanced user
                     behavior.
                 </h3>
-                <CallToAction to="/docs/session-replay/manual#enabling-session-recording">
-                    Record your first session
-                </CallToAction>
+                <CallToAction to="/docs/session-replay/installation">Record your first session</CallToAction>
             </div>
 
             {image && (

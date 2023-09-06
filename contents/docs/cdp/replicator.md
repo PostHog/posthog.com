@@ -8,6 +8,8 @@ tags:
 
 import MigratingEvents from "../migrate/snippets/migrating-events.mdx"
 
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
+
 The Replicator app copies events from one PostHog instance to another, at the moment they are ingested. No changes are made to the events by this app if it runs in isolation.
 
 If this app is deployed in a chain then any changes made to the event data before the Replicator runs will also be copied to the new instance. Otherwise, no changes will be copied.

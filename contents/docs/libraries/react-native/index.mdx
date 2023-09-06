@@ -30,7 +30,7 @@ import RNSendEvents from '../../integrate/send-events/_snippets/send-events-reac
 
 <RNSendEvents />
 
-### Identify
+## Identify
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
@@ -38,11 +38,11 @@ import ReactNativeIdentify from './\_snippets/identify.mdx'
 
 <ReactNativeIdentify />
 
-#### Setting user properties via an event
+## Setting user properties via an event
 
 When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
-##### $set
+### $set
 
 **Example**
 
@@ -54,7 +54,7 @@ posthog.capture('some event', { $set: { userProperty: 'value' } })
 
 When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
-##### $set_once
+### $set_once
 
 **Example**
 
@@ -66,7 +66,7 @@ posthog.capture('some event', { $set_once: { userProperty: 'value' } })
 
 `$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
 
-### Super Properties
+## Super Properties
 
 Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, an autocaptured touch, or anything else.
 
@@ -85,7 +85,7 @@ The call above ensures that every event sent by the user will include `"icecream
 
 However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.identify`. More information on this can be found on the [Sending User Information section](#sending-user-information).
 
-#### Removing stored Super Properties
+### Removing stored Super Properties
 
 Super Properties are persisted across sessions so you have to explicitly remove them if they are no longer relevant. In order to stop sending a Super Property with events, you can use `posthog.unregister`, like so:
 
@@ -97,7 +97,7 @@ This will remove the Super Property and subsequent events will not include it.
 
 If you are doing this as part of a user logging out you can instead simply use `posthog.reset` which takes care of clearing all stored Super Properties and more.
 
-### Flush
+## Flush
 
 You can set the number of events in the configuration that should queue before flushing.
 Setting this to `1` will send events immediately and will use more battery. This is set to `20` by default.
@@ -113,7 +113,7 @@ posthog.flush()
 await posthog.flushAsync()
 ```
 
-### Reset
+## Reset
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
@@ -121,7 +121,7 @@ To reset the user's ID and anonymous ID, call `reset`. Usually you would do this
 posthog.reset()
 ```
 
-### Opt in/out
+## Opt in/out
 
 By default, PostHog has tracking enabled unless it is forcefully disabled by default using the option `{ enable: false }`.
 
@@ -136,85 +136,25 @@ posthog.optOut() // opt out
 
 If you still wish capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
 
-### Feature Flags
+## Feature Flags
 
-Feature Flags can be loaded directly or via a helpful hook
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-```js
-import { useFeatureFlag } from 'posthog-react-native'
+<FeatureFlagsLibsIntro />
 
-const MyComponent = () => {
-    const showFlaggedFeature = useFeatureFlag('my-flag-id')
-    const multiVariantFeature = useFeatureFlag('my-multivariant-feature-flag-id')
+import ReactNativeFeatureFlagsCode from "../../integrate/feature-flags-code/_snippets/feature-flags-code-react-native.mdx"
 
-    if (showFlaggedFeature === undefined) {
-        // the response is undefined if the flags are being loaded
-        return null
-    }
+<ReactNativeFeatureFlagsCode />
 
-    return showFlaggedFeature ? <Text>Testing feature 😄</Text> : <Text>Not Testing feature 😢</Text>
-}
-```
+### Bootstrapping Flags
 
-Alternatively you can call load the feature flags directly:
+import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
 
-```js
-// Defaults to undefined if not loaded yet or if there was a problem loading
-posthog.getFeatureFlag('my-flag')
-// Multi variant feature flags are returned as a string
-posthog.getFeatureFlag('my-multivariant-flag')
-```
+<BootstrappingIntro />
 
-PostHog will load feature flags when instantiated and will refresh whenever other methods are called that could affect the flag such as `.group()`. If you have the need to forcefully trigger the refresh however you can use `reloadFeatureFlagsAsync`
+For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
 
-```js
-posthog.reloadFeatureFlagsAsync().then((refreshedFlags) => console.log(refreshedFlags))
-```
-
-#### Bootstrapping Flags
-
-There is a delay between loading the library and feature flags becoming available to use. For some cases, like redirecting users to a different page based on a feature flag, this is extremely detrimental, as the flags load after the redirect logic occurs, thus never working.
-
-In cases like these, where you want flags to be immediately available on page load, you can use the bootstrap library option.
-
-This allows you to pass in a distinctID and feature flags during library initialisation, like so:
-
-```js
-const posthog = await Posthog.initAsync('<ph_project_api_key>', {
-    host: 'https://app.posthog.com',
-    bootstrap: {
-        distinctID: 'your-anonymous-id',
-        featureFlags: {
-            'flag-1': true,
-            'variant-flag': 'control',
-            'other-flag': false,
-        },
-    },
-})
-```
-
-To compute these flag values, use the corresponding `getAllFlags` method in your server-side library. Note that bootstrapping flags requires server-side initialisation.
-
-If the ID you're passing in is an identified ID (that is, an ID with which you've called `posthog.identify()` elsewhere), you can also pass in the `isIdentifiedID` bootstrap option, which ensures that this ID is treated as an identified ID in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling `identify` again.
-
-```js
-const posthog = await Posthog.initAsync('<ph_project_api_key>', {
-    host: 'https://app.posthog.com',
-    bootstrap: {
-        distinctID: 'your-identified-id',
-        isIdentifiedID: true,
-        featureFlags: {
-            'flag-1': true,
-            'variant-flag': 'control',
-            'other-flag': false,
-        },
-    },
-})
-```
-
-> **Note:** Passing in a distinctID to bootstrap replaces any existing IDs, which means you may fail to connect any old anonymous user events with the logged in person, if your logic calls identify in the frontend immediately on login. In this case, you can omit passing in the distinctID.
-
-### Experiments (A/B tests)
+## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
@@ -238,7 +178,7 @@ const MyComponent = () => {
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
-### Group analytics
+## Group analytics
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 

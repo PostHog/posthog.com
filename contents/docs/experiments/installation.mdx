@@ -1,0 +1,103 @@
+---
+title: A/B testing installation
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: full
+    enterprise: full
+---
+
+A/B testing enables you to test the impact of product changes and understand how they affect your users' behaviour. For example:
+
+- How changes to your onboarding flow affect your signup rate.
+- If different designs of your app's dashboard increase user engagement and retention.
+- The impact a free trial period versus money-back guarantee to determine which results in more customers.
+
+A/B tests are also referred to as "experiments", and this is how we refer to them in the PostHog app.
+
+To start using A/B tests, install PostHog in the library you want to run tests in:
+
+import Tab from "components/Tab"
+import WebInstall from '../integrate/_snippets/install-web.mdx'
+import ReactInstall from '../integrate/_snippets/install-react.mdx'
+import NodeInstall from '../integrate/_snippets/install-node.mdx'
+import PythonInstall from '../integrate/_snippets/install-python.mdx'
+import PHPInstall from '../integrate/_snippets/install-php.mdx'
+import RubyInstall from '../integrate/_snippets/install-ruby.mdx'
+import GoInstall from '../integrate/_snippets/install-go.mdx'
+import ReactNativeInstall from '../integrate/_snippets/install-react-native.mdx'
+import AndroidInstall from '../integrate/_snippets/install-android.mdx'
+import IOSInstall from '../integrate/_snippets/install-ios.mdx'
+
+<!-- prettier-ignore -->
+<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>React</Tab>
+        <Tab>Node.js</Tab>
+        <Tab>Python</Tab>
+        <Tab>PHP</Tab>
+        <Tab>Ruby</Tab>
+        <Tab>Go</Tab>
+        <Tab>React Native</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+        <Tab>Java</Tab>
+        <Tab>Rust</Tab>
+        <Tab>Elixir</Tab>
+        <Tab>API</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <WebInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <NodeInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PHPInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <RubyInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GoInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ReactNativeInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <AndroidInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <IOSInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <blockquote class='warning-note'>
+                Since feature flags are not supported yet in our <a href="/docs/libraries/java">Java SDK</a>, see our docs on <a href="/docs/experiments/running-experiments-without-feature-flags">how to run experiments without feature flags</a>.         
+            </blockquote>
+        </Tab.Panel>
+        <Tab.Panel>
+            <blockquote class='warning-note'>
+                Since feature flags are not supported yet in our community-maintained <a href="/docs/libraries/rust">Rust SDK</a>, see our docs on <a href="/docs/experiments/running-experiments-without-feature-flags">how to run experiments without feature flags</a>.
+            </blockquote>
+        </Tab.Panel>
+        <Tab.Panel>
+            <blockquote class='warning-note'>
+                Since feature flags are not supported yet in our <a href="/docs/libraries/elixir">Elixir SDK</a>, see our docs on <a href="/docs/experiments/running-experiments-without-feature-flags">how to run experiments without feature flags</a>. 
+            </blockquote>
+        </Tab.Panel>
+        <Tab.Panel>
+            <blockquote class='warning-note'>
+                To run an experiment using the <a href="/docs/api">PostHog API</a>, see our docs on <a href="/docs/experiments/running-experiments-without-feature-flags">how to run experiments without feature flags</a>. 
+            </blockquote>
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

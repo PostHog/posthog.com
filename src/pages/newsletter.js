@@ -22,7 +22,7 @@ export const NewsletterPage = () => {
                 <div className="font-semibold pb-2 text-lg opacity-60 text-center">Subscribe to...</div>
                 <h1 className="text-5xl lg:text-6xl mb-3 text-center">Product for Engineers</h1>
                 <p className="font-semibold text-lg opacity-60 text-center leading-tight">
-                    Our newsletter about making better products
+                    Helping engineers and founders flex their product muscles
                 </p>
 
                 <div className="md:grid md:grid-cols-5 md:gap-12 px-4 lg:px-12 pb-8 max-w-6xl mx-auto items-center">
@@ -35,13 +35,13 @@ export const NewsletterPage = () => {
                     </div>
                     <div className="col-span-3 pt-6">
                         <p className="mb-3 text-lg">
-                            <strong>Here's what you'll find inside:</strong>
+                            <strong>Recent issues include:</strong>
                         </p>
 
                         <ul className="space-y-2 m-0 mb-8 p-0">
-                            <Benefit text="Info to help engineers build better products" />
-                            <Benefit text="The latest tutorials and tips from fast-growing startups" />
-                            <Benefit text="Curated advice on building great products" />
+                            <Benefit text="How to talk to users (as an engineer)" />
+                            <Benefit text="What we've learned about product-market fit" />
+                            <Benefit text="When, why, and how GitHub uses feature flags" />
                         </ul>
 
                         <h4 className="relative text-lg">

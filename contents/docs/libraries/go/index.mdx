@@ -14,8 +14,6 @@ features:
     groupAnalytics: true
 ---
 
-import CohortExpansionSnippet from '../\_snippets/cohort-expansion'
-
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
 ## Installation
@@ -24,15 +22,13 @@ import GoInstall from '../../integrate/_snippets/install-go.mdx'
 
 <GoInstall />
 
-## Making calls
-
-### Capturing events
+## Capturing events
 
 import GoSendEvents from '../../integrate/send-events/_snippets/send-events-go.mdx'
 
 <GoSendEvents />
 
-### Setting user properties
+## Setting user properties
 
 To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
@@ -53,140 +49,31 @@ client.Enqueue(posthog.Capture{
 
 For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-### Alias
+## Alias
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-### Feature flags
+## Feature flags
 
-> Note that to use feature flags you must specify `PersonalApiKey` in the [options passed to `posthog.NewWithConfig`](#usage).
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-**How to check if a flag is enabled**
+<FeatureFlagsLibsIntro />
 
-> **Note:** Whenever we face an error computing the flag, the library returns `undefined`, instead of `true`, `false`, or a string variant value.
+import GoFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-go.mdx'
 
-```go
-// IsFeatureEnabled(FeatureFlagPayload) (interface{}, error)
-isFlagEnabledForUser, err := client.IsFeatureEnabled(
-		FeatureFlagPayload{
-			Key:        "flag-key",
-			DistinctId: "distinct-id",
-		},
-	)
+<GoFeatureFlagsCode />
 
-if (isFlagEnabledForUser) {
-  // Do something differently for this user
-}
-```
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
-> If your feature flag relies entirely on rollout percentage (i.e. it has no filters), `isFeatureEnabled` will provide a fast response, allowing it to be used in the logic for API endpoints, for example. Flags that depend on filters require a call to the PostHog API so will take longer.
+### Local Evaluation
 
-> **Note:** Whenever we face an error computing the flag, the library returns `nil`, instead of `true` or `false` or a string variant value.
+<LocalEvaluationIntro />
 
-**Get a flag value**
+For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
 
-If you're using multivariate feature flags, you can also get the value of the flag, as well as whether or not it is enabled.
-
-> **Note:** Whenever we face an error computing the flag, the library returns `None`, instead of `true` or `false` or a string variant value.
-
-```go
-// GetFeatureFlag(FeatureFlagPayload) (interface{}, error)
-enabledVariant, err := client.GetFeatureFlag(
-		FeatureFlagPayload{
-			Key:        "multivariate-flag",
-			DistinctId: "distinct-id",
-		},
-)
-```
-
-**Overriding server properties**
-
-Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
-
-For example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
-
-```go
-enabledVariant, err := client.GetFeatureFlag(
-		FeatureFlagPayload{
-			Key:        "multivariate-flag",
-			DistinctId: "distinct-id",
-      PersonProperties: posthog.NewProperties().
-        Set("is_authorized", true),
-		},
-)
-```
-
-The same holds for groups. if you have a group name `organisation`, you can add properties like so:
-
-```go
-enabledVariant, err := client.GetFeatureFlag(
-		FeatureFlagPayload{
-			Key:        "multivariate-flag",
-			DistinctId: "distinct-id",
-      Groups:          Groups{"organisation": "some-company"},
-			GroupProperties: map[string]Properties{"organisation": NewProperties().Set("is_authorized", true)},
-		},
-)
-```
-
-#### Getting all flag values
-
-You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
-
-```go
-featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
-		DistinctId: "distinct-id",
-})
-```
-
-#### Local Evaluation
-
-> **Note:** This feature requires version 2.0 of the library, which in turn requires a minimum PostHog version of 1.38
-
-> **Note:** A single local evaluation call is billed as equivalent to 10 `decide`requests. [More info](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation).
-
-All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. You must know all person or group properties the flag depends on.
-
-The method call looks just like above
-
-```go
-enabledVariant, err := client.GetFeatureFlag(
-		FeatureFlagPayload{
-			Key:        "multivariate-flag",
-			DistinctId: "distinct-id",
-      PersonProperties: posthog.NewProperties().
-        Set("is_authorized", true),
-		},
-)
-```
-
-This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
-
-```go
-featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
-		DistinctId: "distinct-id",
-})
-```
-
-#### Restricting evaluation to local only
-
-Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the OnlyEvaluateLocally parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns None, instead of going to PostHog's servers to get the value.
-
-<CohortExpansionSnippet />
-
-#### Reloading feature flags
-
-When initializing PostHog, you can configure the interval at which feature flags are polled (fetched from the server). However, if you need to force a reload, you can use `ReloadFeatureFlags`:
-
-```go
-client.ReloadFeatureFlags()
-
-// Do something with feature flags here
-```
-
-### Experiments (A/B tests)
+## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
@@ -205,7 +92,7 @@ if variant == "variant-name" {
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
-### Group analytics
+## Group analytics
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 

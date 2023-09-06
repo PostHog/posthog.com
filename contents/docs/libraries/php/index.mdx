@@ -14,8 +14,6 @@ features:
     groupAnalytics: true
 ---
 
-import CohortExpansionSnippet from '../_snippets/cohort-expansion'
-
 This is an optional library you can install if you're working with PHP. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
 ## Installation
@@ -24,15 +22,13 @@ import PHPInstall from '../../integrate/_snippets/install-php.mdx'
 
 <PHPInstall />
 
-## Making calls
-
-### Capturing events
+## Capturing events
 
 import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php.mdx'
 
 <PHPSendEvents />
 
-### Setting user properties
+## Setting user properties
 
 To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
 
@@ -53,83 +49,29 @@ PostHog::capture(array(
 
 For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-### Alias
+## Alias
 
 Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-### Feature flags
+## Feature flags
 
-#### How to check if a flag is enabled
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
-To check if a feature flag is enabled for a given user, use `isFeatureEnabled`, like so:
+<FeatureFlagsLibsIntro />
 
-```php
-if (PostHog::isFeatureEnabled('my-amazing-flag', 'some distinct id')) {
-    // do something here
-}
-```
+import PHPFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-php.mdx'
 
-#### Get a flag value
+<PHPFeatureFlagsCode />
 
-if you're using multivariate feature flags, you can also get not just whether the flag is enabled, but what value its enabled to.
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
-```php
-PostHog::getFeatureFlag('multivariate-flag', 'some distinct id');
-// returns string or true or false or null
-```
+### Local Evaluation
 
-#### Overriding server properties
+<LocalEvaluationIntro />
 
-Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls.
-
-FOr example, if the `beta-feature` depends on the `is_authorized` property, and you know the value of the property, you can tell PostHog to use this property, like so:
-
-```php
-PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized" => true])
-// the third argument is for groups
-```
-
-The same holds for groups. If you have a group name `organisation`, you can add properties like so:
-
-```php
-PostHog::getFeatureFlag('beta-feature', 'some distinct id', ["organisation" => "some-company"], [], ["organisation" => ["is_authorized" => true]])
-```
-
-#### Getting all flag values
-
-You can also get all known flag values as well. This is useful when you want to seed a frontend client with initial known flags. Like all methods above, this also takes optional person and group properties, if known.
-
-```php
-PostHog::getAllFlags('distinct id')
-```
-
-#### Local Evaluation
-> **Note:** To enable local evaluation of feature flags you must also set a `personal_api_key` when configuring the integration, as described in the [Installation](#installation) section.
-> **Note:** This feature requires version 3.0 of the library, which in turn requires a minimum PostHog version of 1.38
-> **Note:** A single local evaluation call is billed as equivalent to 10 `decide`requests. [More info](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation).
-
-All feature flag evaluation requires an API request to your PostHog servers to get a response. However, where latency matters, you can evaluate flags locally. This is much faster, and requires two things to work:
-1. The library must be initialised with a personal API key
-2. You must know all person or group properties the flag depends on.
-Then, the flag can be evaluated locally. The method signature looks exactly like above.
-
-```php
-PostHog::getFeatureFlag('beta-feature', 'some distinct id', [], ["is_authorized" => true])
-// the third argument is for groups
-```
-
-This works for `getAllFlags` as well. It evaluates all flags locally if possible. If even one flag isn't locally evaluable, it falls back to decide.
-
-```php
-PostHog::getAllFlags('distinct id', ["organisation" => "some-company"], [], ["organisation" => ["is_authorized" => true]])
-```
-
-**Restricting evaluation to local only**
-Sometimes, performance might matter to you so much that you never want an HTTP request roundtrip delay when computing flags. In this case, you can set the `onlyEvaluateLocally` parameter to true, which tries to compute flags only with the properties it has. If it fails to compute a flag, it returns `None`, instead of going to PostHog's servers to get the value.
-
-<CohortExpansionSnippet />
+For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
 
 ### Experiments (A/B tests)
 

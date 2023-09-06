@@ -12,12 +12,12 @@ With batch exports, data can be exported to a Snowflake database table.
 
 ## Creating the batch export
 
-1. Navigate to the exports page in your PostHog instance (Quick links if you use [PostHog Cloud US](https://app.posthog.com/exports) or [PostHog Cloud EU](https://eu.posthog.com/exports)).
-2. Click "Create Export."
-2. Select **Snowflake** as the batch export type.
-3. Fill in the necessary [configuration details](#snowflake-configuration).
-4. Click on "Create Export."
-5. Done! The batch export will schedule its first run on the start of the next period.
+1. Navigate to the exports page in your PostHog instance (Quick links if you use [PostHog Cloud US](https://app.posthog.com/batch_exports) or [PostHog Cloud EU](https://eu.posthog.com/batch_exports)).
+2. Click "Create export workflow".
+3. Select **Snowflake** as the batch export type.
+4. Fill in the necessary [configuration details](#snowflake-configuration).
+5. Finalize the creation by clicking on "Create".
+6. Done! The batch export will schedule its first run on the start of the next period.
 
 ## Snowflake configuration
 
@@ -51,3 +51,11 @@ CREATE TABLE IF NOT EXISTS "{database}"."{schema}"."{table_name}" (
 )
 COMMENT = 'PostHog events table'
 ```
+
+> **Note:** This is the same query used by PostHog Batch Exports if the table is not present in your database. Notice that the database, schema, and table_name parameters are surrounded by double quotes to respect the casing provided during configuration.
+
+### File staging
+
+Batch exports use Snowflake's [internal table stages](https://docs.snowflake.com/en/user-guide/data-load-local-file-system-create-stage#table-stages) to stage the files copied into your Snowflake tables. We recommend using separate tables to export data from PostHog to avoid conflicting with other workflows that use internal table stages.
+
+> **Note:** This differs from the old PostHog Snowflake export app which required extra configuration and used S3 or GCS as an external stage.
