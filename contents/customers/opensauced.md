@@ -29,7 +29,7 @@ When Brian Douglas left his role as GitHub’s Director of Developer Advocacy in
 
 While seeking funding, Brian applied to [PostHog for Startups](/startups) — a program designed to accelerate early-stage teams toward product-market fit as fast as possible. Members receive numerous benefits, including $50,000 in free PostHog credits for the first year (and founder merch too). Armed with this, Brian asked his investor network how he could maximize PostHog’s potential.
 
-“I spoke to Anna Debenham at [Boldstart VC](https://boldstart.vc/) and told her: I’m an engineer, not a product manager,” says Brian. “I explained that we had all this data, but I didn’t know how to slice and dice it. She taught me how to start picking metrics and building insights so we could track things in line with our bottom-up strategy.”
+“I spoke to Anna Debenham at [boldstart](https://boldstart.vc/) and told her: I’m an engineer, not a product manager,” says Brian. “I explained that we had all this data, but I didn’t know how to slice and dice it. She taught me how to start picking metrics and building insights so we could track things in line with our bottom-up strategy.”
 
 ![OpenSauced](../images/customers/opensauced/opensauced-pizza.png)
 <Caption>OpenSauced joined PostHog for Startups and claimed $50,000 in free credits</Caption>
@@ -53,8 +53,8 @@ OpenSauced’s developer relations manager also uses PostHog to track website en
     imageSource="/images/customers/anna.jpg"
     size="md"
     name="Anna Debenham"
-    title="Operating Partner, Boldstart VC"
-    quote={`“Temporary placeholder. Will secure a quote from Anna to go here.”`}
+    title="Operating Partner, Boldstart"
+    quote={`“PostHog is ideal for startups. It is a really solid analytics tool, but features like feature flags and experiments become even more useful as the company grows. It saves founders like Brian time, as they have the right toolsfrom day one.”`}
 />
 </BorderWrapper>
 
