@@ -30,6 +30,6 @@ If you are ever worried about this, please talk to Charles and he can help you f
 
 ## Getting signoff
 
-We ask you to please just check in with the relevant Exec team member for your team (ie. James, Tim, Charles, or Luke) to get their confirmation before going ahead with any side gigs. 
+We ask you to please just check in with the relevant Exec team member for your team (ie. James, Tim, or Charles) to get their confirmation before going ahead with any side gigs. 
 
 If your side gig existed before you joined PostHog, this will usually be covered as part of the interview process. 

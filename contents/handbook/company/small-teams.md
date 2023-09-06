@@ -136,7 +136,7 @@ Spend money when it makes sense to do so. See our general policy on spending mon
 
 #### How do you keep the product together as a company?
 
-Luke is ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
+James and Tim are ultimately responsible for us having (i) no gaps in product (ii) eliminating duplicate work (iii) making sure all Small Teams are working on something rational. This is how we manage the product.
 
 #### How do you stop duplicate work?
 
