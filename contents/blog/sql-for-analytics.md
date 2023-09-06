@@ -30,7 +30,7 @@ SQL provides complete customization into the retrival and formatting of analytic
 
 ### 1. Your data
 
-Interacting with data is the reason SQL exists. Data is generally stored in a table in a database, which is an organized collection of data, like a rigid spreadsheet.
+Data is generally stored in a table in a database, which is an organized collection of rows, like a rigid spreadsheet.
 
 The important part of data in relation to SQL is the structure, types, and names. Knowing this enables you to retrieve the right data for your analysis. It is also useful to know how your app captures and set values, so you can tie data to real usage.
 
