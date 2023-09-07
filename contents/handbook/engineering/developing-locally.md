@@ -251,7 +251,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 1. Create the virtual environment in current directory called 'env':
 
     ```bash
-    python3 -m venv env
+    python3.10 -m venv env
     ```
 
 1. Activate the virtual environment:
