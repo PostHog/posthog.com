@@ -3,8 +3,7 @@ title: Not running out of money
 sidebar: Handbook
 showTitle: true
 ---
-
-## Stay calm and default alive
+## Stay calm and default alive
 
 We don't optimize for short run revenue growth, but we do make sure we have enough money to never feel dependent on future fundraising.
 

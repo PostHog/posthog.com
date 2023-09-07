@@ -4,6 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
+**TL;DR:** $100M by 2026, working backwards
 ## Will PostHog sell?
 
 What motivates us is building an epic product and company.

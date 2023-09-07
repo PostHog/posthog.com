@@ -49,7 +49,7 @@ export const handbookSidebar = [
                 url: '/handbook/strong-team',
             },
             {
-                name: '!! 10. Not running out of money',
+                name: '10. Not running out of money',
                 url: '/handbook/finance',
             },
             {
@@ -57,8 +57,8 @@ export const handbookSidebar = [
                 url: '/handbook/story',
             },
             {
-                name: '!! 12. Where we are now',
-                url: '/handbook/',
+                name: '12. Where we are now',
+                url: '/handbook/current-status',
             },
             {
                 name: '13. Where are we going?',
@@ -66,7 +66,7 @@ export const handbookSidebar = [
             },
             {
                 name: '14. How you can help',
-                url: '!! /handbook/',
+                url: '/handbook/hello-world',
             },
         ],
     },
