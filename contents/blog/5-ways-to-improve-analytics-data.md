@@ -27,10 +27,10 @@ As your product grows, the amount of analytics data grows with it. Without namin
 For example, let's say you're capturing signup metrics. Your team might capture events differently and with multiple names: 
 
 - Web developer: Captures `Create Account` when a user clicks a button to begin signing up.
-- iOS developer: Captures the same event, but names it `user_sign_up`.
-- Android developer: Calls it `create account`, but this is only captured when they have finished signing up.
+- iOS developer: Captures the same event but names it `user_sign_up`.
+- Android developer: Calls it `create account` but this is only captured when they have finished signing up.
 
-Now you need to remember all these differences when looking at your data! Annoying! Using a naming convention prevents these problems. 
+Now, you must remember all these differences when looking at your data! Annoying! Using a naming convention prevents these problems. 
 
 ### Suggested naming guide
 
@@ -79,7 +79,7 @@ Now you need to remember all these differences when looking at your data! Annoyi
 
 ## 2. Filter out internal users
 
-The most common mistake we see is developers inadvertently inflating their own metrics. When building or testing their apps, they send many events but then forget to filter them out afterwards. This leads to massive bias in their data!
+The most common mistake we see is developers inadvertently inflating their own metrics. When building or testing their apps, they send many events but forget to filter them out afterward. This leads to massive bias in their data!
 
 For this reason, it's important to filter out events sent by your own team. There are a few ways to do this:
 
@@ -103,30 +103,30 @@ Backend analytics are more reliable than frontend analytics. There are 3 reasons
 
 Thus, when possible, log events on your server instead of on your client.
 
-That doesn't mean that frontend analytics are entirely useless, though. As long as you're aware that they're only showing a portion of your data, they can still be a useful. 
+That doesn't mean that frontend analytics are entirely useless, though. As long as you know they're only showing a portion of your data, they can still be useful. 
 
-Below is guide to help you decide when to rely on frontend or backend analytics:
+Below is a guide to help you decide when to rely on frontend or backend analytics:
 
-- Use frontend analytics if want to:
+- Use frontend analytics if you want to:
   - Understand user journeys, such as the sequence of pages a user visits.
   - Track user interactions like clicks, scrolls, or form submissions.
   - Gather data on client-side performance, like page load times and responsiveness.
 
 - Use backend analytics (or query your database) if:
   - You need accurate data – e.g., the number of users that signed up in the last week.
-  - You want to analyze data alongside other business metrics, or integrate it into other tools.
+  - You want to analyze data alongside other business metrics.
 
 ## 4. Deploy a reverse proxy
 
 As mentioned above, tracking blockers can prevent your events from being sent. To make your frontend analytics more reliable, you can capture your events using a reverse proxy.
 
-A reverse proxy enables you to send events to your analytics provider through your domain instead of your provider's domain. This makes events less likely to be intercepted by tracking blockers.
+A reverse proxy enables you to send events to your analytics provider through your domain instead of your provider's. This makes events less likely to be intercepted by tracking blockers.
 
 > **Tip:** If you're using PostHog to capture events, here's how you can [set up a reverse proxy](/docs/advanced/proxy).
 
 ## 5. Version your events
 
-As your application evolves, so do the events you track. Implementing a versioning system for your events ensures you can easily distinguish between older and newer events, especially when significant changes occur.
+As your application evolves, so do the events you track. Implementing a versioning system for events ensures you can easily distinguish between older and newer events, especially when significant changes occur.
 
 For example, if you initially tracked an event as `registration:sign_up_button_click` and later revamped your registration flow, you can introduce a new version of this event `registration_v2:sign_up_button_click`. This way, you preserve historical data on the old event while making it easy to compare the impact of your new changes.
 
