@@ -47,7 +47,7 @@ export default function Customer({ data, pageContext: { tableOfContents } }) {
                 article
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
-            <section className="mb-20 article-content customer-content">
+            <section className="sm:mb-20 lg:mb-0 xl:mb-20 article-content customer-content">
                 <h1 className="text-5xl leading-none mt-0">{title}</h1>
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>
