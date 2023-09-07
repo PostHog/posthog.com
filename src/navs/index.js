@@ -257,6 +257,10 @@ export const handbookSidebar = [
                 url: '/handbook/design/process',
             },
             {
+                name: 'Product design for engineers',
+                url: '/handbook/engineering/product-design',
+            },
+            {
                 name: 'Brand assets',
                 url: '/handbook/company/brand-assets',
             },
@@ -347,10 +351,6 @@ export const handbookSidebar = [
                     {
                         name: 'Feature ownership',
                         url: '/handbook/engineering/feature-ownership',
-                    },
-                    {
-                        name: 'Working with product design',
-                        url: '/handbook/engineering/product-design',
                     },
                     {
                         name: 'Releasing a new version',
@@ -737,6 +737,10 @@ export const handbookSidebar = [
                 url: '/handbook/small-teams/website-docs',
             },
             {
+                name: 'Community',
+                url: '/handbook/small-teams/website-docs/community',
+            },
+            {
                 name: 'Designing PostHog.com',
                 url: '/handbook/design/designing-posthog-website',
             },
@@ -757,11 +761,11 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/markdown',
                     },
                     {
-                        name: 'Jobs',
+                        name: 'Posting a new job',
                         url: '/handbook/engineering/posthog-com/jobs',
                     },
                     {
-                        name: 'Roadmap',
+                        name: 'Managing the company roadmap',
                         url: '/handbook/engineering/posthog-com/roadmap',
                     },
                 ],
