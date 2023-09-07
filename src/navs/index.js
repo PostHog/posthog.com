@@ -179,77 +179,23 @@ export const handbookSidebar = [
                 name: 'Security',
                 url: '/handbook/company/security',
             },
-            {
-                name: 'Brand assets',
-                url: '/handbook/company/brand-assets',
-            },
         ],
     },
     {
-        name: 'Small teams',
-        url: '',
-        children: [
-            {
-                name: 'Team structure',
-                url: '/handbook/small-teams/team-structure',
-            },
-            {
-                name: 'Customer Success',
-                url: '/handbook/small-teams/customer-success',
-            },
-            {
-                name: 'Exec',
-                url: '/handbook/small-teams/exec',
-            },
-            {
-                name: 'Feature Success',
-                url: '/handbook/small-teams/feature-success',
-            },
-            {
-                name: 'Growth',
-                url: '/handbook/small-teams/growth',
-            },
-            {
-                name: 'Infrastructure',
-                url: '/handbook/small-teams/infrastructure',
-            },
-            {
-                name: 'Marketing',
-                url: '/handbook/small-teams/marketing',
-            },
-            {
-                name: 'People & Ops',
-                url: '/handbook/small-teams/people',
-            },
-            {
-                name: 'Pipeline',
-                url: '/handbook/small-teams/pipeline',
-            },
-            {
-                name: 'Product Analytics',
-                url: '/handbook/small-teams/product-analytics',
-            },
-            {
-                name: 'Monitoring',
-                url: '/handbook/small-teams/monitoring',
-            },
-            {
-                name: 'Website & Docs',
-                url: '/handbook/small-teams/website-docs',
-            },
-            {
-                name: 'Data Warehouse',
-                url: '/handbook/small-teams/dw',
-            },
-        ],
+        name: 'Team structure',
+        url: '/handbook/small-teams/team-structure',
     },
     {
-        name: 'Departments',
+        name: 'Departments & teams',
     },
     {
         name: 'Customer success',
         url: '',
         children: [
+            {
+                name: 'Team',
+                url: '/handbook/small-teams/customer-success',
+            },
             {
                 name: 'Customer support',
                 url: '/handbook/growth/customer-support',
@@ -311,8 +257,12 @@ export const handbookSidebar = [
                 url: '/handbook/design/process',
             },
             {
-                name: 'Designing posthog.com',
-                url: '/handbook/design/designing-posthog-website',
+                name: 'Brand assets',
+                url: '/handbook/company/brand-assets',
+            },
+            {
+                name: 'Art requests',
+                url: '/handbook/design/art-requests',
             },
         ],
     },
@@ -320,6 +270,36 @@ export const handbookSidebar = [
         name: 'Engineering',
         url: '',
         children: [
+            {
+                name: 'Small teams',
+            },
+            {
+                name: 'Data Warehouse',
+                url: '/handbook/small-teams/dw',
+            },
+            {
+                name: 'Feature Success',
+                url: '/handbook/small-teams/feature-success',
+            },
+            {
+                name: 'Infrastructure',
+                url: '/handbook/small-teams/infrastructure',
+            },
+            {
+                name: 'Monitoring',
+                url: '/handbook/small-teams/monitoring',
+            },
+            {
+                name: 'Pipeline',
+                url: '/handbook/small-teams/pipeline',
+            },
+            {
+                name: 'Product Analytics',
+                url: '/handbook/small-teams/product-analytics',
+            },
+            {
+                name: 'Resources',
+            },
             {
                 name: 'Getting started',
                 url: '',
@@ -443,32 +423,6 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'PostHog.com',
-                url: '',
-                children: [
-                    {
-                        name: 'Developing the website',
-                        url: '/handbook/engineering/posthog-com/developing-the-website',
-                    },
-                    {
-                        name: 'MDX setup',
-                        url: '/handbook/engineering/posthog-com/mdx-setup',
-                    },
-                    {
-                        name: 'Markdown',
-                        url: '/handbook/engineering/posthog-com/markdown',
-                    },
-                    {
-                        name: 'Jobs',
-                        url: '/handbook/engineering/posthog-com/jobs',
-                    },
-                    {
-                        name: 'Roadmap',
-                        url: '/handbook/engineering/posthog-com/roadmap',
-                    },
-                ],
-            },
-            {
                 name: 'ClickHouse manual',
                 url: '',
                 children: [
@@ -543,9 +497,23 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Exec',
+        url: '',
+        children: [
+            {
+                name: 'Team',
+                url: '/handbook/small-teams/exec',
+            },
+        ],
+    },
+    {
         name: 'Growth',
         url: '',
         children: [
+            {
+                name: 'Team',
+                url: '/handbook/small-teams/growth',
+            },
             {
                 name: 'Growth reviews',
                 url: '/handbook/growth/growth-engineering/growth-sessions',
@@ -560,6 +528,10 @@ export const handbookSidebar = [
         name: 'Marketing & content',
         url: '',
         children: [
+            {
+                name: 'Team',
+                url: '/handbook/small-teams/marketing',
+            },
             {
                 name: 'Overview',
                 url: '/handbook/growth/marketing',
@@ -625,6 +597,10 @@ export const handbookSidebar = [
         url: '',
         children: [
             {
+                name: 'Team',
+                url: '/handbook/small-teams/people',
+            },
+            {
                 name: 'Finance',
                 url: '/handbook/people/finance',
             },
@@ -638,6 +614,10 @@ export const handbookSidebar = [
         name: 'People',
         url: '',
         children: [
+            {
+                name: 'Team',
+                url: '/handbook/small-teams/people',
+            },
             {
                 name: 'Compensation',
                 url: '/handbook/people/compensation',
@@ -745,6 +725,46 @@ export const handbookSidebar = [
             {
                 name: 'In-app prompts',
                 url: '/handbook/product/in-app-prompts',
+            },
+        ],
+    },
+    {
+        name: 'Website & Docs',
+        url: '',
+        children: [
+            {
+                name: 'Team',
+                url: '/handbook/small-teams/website-docs',
+            },
+            {
+                name: 'Designing PostHog.com',
+                url: '/handbook/design/designing-posthog-website',
+            },
+            {
+                name: 'Developing PostHog.com',
+                url: '',
+                children: [
+                    {
+                        name: 'Developing the website',
+                        url: '/handbook/engineering/posthog-com/developing-the-website',
+                    },
+                    {
+                        name: 'MDX setup',
+                        url: '/handbook/engineering/posthog-com/mdx-setup',
+                    },
+                    {
+                        name: 'Markdown',
+                        url: '/handbook/engineering/posthog-com/markdown',
+                    },
+                    {
+                        name: 'Jobs',
+                        url: '/handbook/engineering/posthog-com/jobs',
+                    },
+                    {
+                        name: 'Roadmap',
+                        url: '/handbook/engineering/posthog-com/roadmap',
+                    },
+                ],
             },
         ],
     },
