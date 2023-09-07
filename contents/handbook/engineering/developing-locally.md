@@ -315,6 +315,8 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 ./bin/start
 ```
 
+> **Friendly tip:** If you get the error `Configuration property "enable.ssl.certificate.verification" not supported in this build: OpenSSL not available at build time`, make sure your environment is using the right `openssl` version by setting [those](https://github.com/xmlsec/python-xmlsec/issues/261#issuecomment-1630889826) environment variables, and then run `./bin/start` again.
+
 Open [http://localhost:8000](http://localhost:8000) to see the app.
 
 > **Note:** The first time you run this command you might get an error that says "layout.html is not defined". Make sure you wait until the frontend is finished compiling and try again.
