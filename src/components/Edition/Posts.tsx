@@ -359,7 +359,7 @@ export default function Posts({ children, articleView }) {
                         },
                     },
                     {
-                        post_tag: {
+                        post_tags: {
                             label: {
                                 $in: tags,
                             },

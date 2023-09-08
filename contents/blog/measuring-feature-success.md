@@ -86,7 +86,7 @@ At this stage, success is significant usage by the target user. What this portio
 
 The feature should also be issue free and work as intended. Bug reports or confusion on how to use the feature are bad signs.
 
-To evaluate success after launch, we watch session replays and track metrics that match specific criteria we care about. For example, we might look at the session recordings of power users who are in our ICP and paying customers. We also might create a dashboard to show usage and the feature’s impact.
+To evaluate success after launch, we did [real user monitoring](/blog/real-user-monitoring) by watching session replays and tracking metrics that matched criteria we care about. For example, we might look at the session recordings of power users who are in our ICP and paying customers. We also might create a dashboard to show usage and the feature’s impact.
 
 In Yakko’s case, he: 
 
