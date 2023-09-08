@@ -2490,10 +2490,6 @@ export const docsMenu = {
                     url: '',
                     children: [
                         {
-                            url: '/docs/cdp/advanced-geoip',
-                            name: 'Advanced GeoIP Enricher',
-                        },
-                        {
                             url: '/docs/cdp/automatic-cohort-creator',
                             name: 'Automatic Cohort Creator',
                         },
