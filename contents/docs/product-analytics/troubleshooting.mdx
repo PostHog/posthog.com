@@ -82,7 +82,7 @@ If you're using the [JavaScript web](/docs/libraries/js) library, you can identi
 1. Open devtools in your browser and switch to the network tab.
 2. Identify the failed requests to app.posthog.com/e (or eu.posthog.com/e if you're using EU Cloud).
 3. Right click one of those request and click Copy -> Copy as cURL.
-4. See below on how to [report your issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) and attach your cURL command to get further support.
+4. See below on how to [report your issue](#report-your-issue) and attach your cURL command to get further support.
 
 ![network request being sent to posthog](../../images/docs/product-analytics/network-request-to-posthog.png)
 
@@ -103,7 +103,41 @@ To confirm if this is the issue, use the following steps:
     - ii) [Decode your request](/docs/product-analytics/troubleshooting#step-1-decode-your-curl-command).
     - iii) Send your event a cURL request. Wait 1 hour and check if the event is still not visible in PostHog.
 
-Once you have confirmed there is an issue with event ingestion, you can [report your issue](/docs/product-analytics/troubleshooting#report-your-specific-issue) to get further support.
+Once you have confirmed there is an issue with event ingestion, you can [report your issue](#report-your-issue) to get further support.
+
+## Does PostHog block bots by default?
+
+Yes, PostHog blocks most known bots by default. Bots we block are listed below.
+
+| **Google bots**        | **Non-Google bots** |
+|------------------------|---------------------|
+| 'adsbot-google'        | 'ahrefsbot'         |
+| 'apis-google'          | 'applebot'          |
+| 'duplexweb-google'     | 'baiduspider'       |
+| 'feedfetcher-google'   | 'bingbot'           |
+| 'google favicon'       | 'bingpreview'       |
+| 'google web preview'   | 'bot.htm'           |
+| 'google-read-aloud'    | 'bot.php'           |
+| 'googlebot'            | 'crawler'           |
+| 'googleweblight'       | 'duckduckbot'       |
+| 'mediapartners-google' | 'facebookexternal'  |
+| 'storebot-google'      | 'facebookcatalog'   |
+|                        | 'gptbot'            |
+|                        | 'hubspot'           |
+|                        | 'linkedinbot'       |
+|                        | 'mj12bot'           |
+|                        | 'petalbot'          |
+|                        | 'pinterest'         |
+|                        | 'prerender'         |
+|                        | 'rogerbot'          |
+|                        | 'screaming frog',   |
+|                        | 'semrushbot',       |
+|                        | 'sitebulb',         |
+|                        | 'twitterbot',       |
+|                        | 'yahoo! slurp',     |
+|                        | 'yandexbot',        |
+
+Want a bot added to this list? Request it via the in-app feedback form, or raise an issue in the `posthog-js` [GitHub repo](https://github.com/PostHog/posthog-js/issues).
 
 ## Report your issue
 
