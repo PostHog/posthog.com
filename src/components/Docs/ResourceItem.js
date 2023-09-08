@@ -12,7 +12,7 @@ export default function ResourceItem({ title, description, Image, gatsbyImage, u
                             {type}
                         </h6>
                     )}
-                    <h4 className="m-0 text-lg text-primary dark:text-primary-dark">{title}</h4>
+                    <h4 className="m-0 text-lg leading-tight text-primary dark:text-primary-dark">{title}</h4>
                     <p className="text-primary/60 dark:text-primary-dark/60 text-sm m-0">{description}</p>
                 </div>
                 <div className="flex justify-end w-full h-24">

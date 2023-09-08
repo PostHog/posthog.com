@@ -79,7 +79,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
     await Promise.all(
         posts.map(
             ({
-                frontmatter: { title, date, featuredImage, authorData },
+                frontmatter: { title, date, featuredImage, authorData, category: postTag, tags: postTags },
                 fields: { slug },
                 parent: { relativePath: path },
                 rawBody,
@@ -88,8 +88,11 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                 const category = allStrapiPostCategories.find(
                     (category) => category?.attributes?.folder === path.split('/')[0]
                 )
-                const tag = category?.attributes?.post_tags?.data?.find(
-                    (tag) => tag?.attributes?.folder === path.split('/')[1]
+
+                const tags = category?.attributes?.post_tags?.data?.filter(
+                    (tag) =>
+                        tag?.attributes?.label?.toLowerCase() === postTag?.toLowerCase() ||
+                        postTags?.some((postTag) => postTag.toLowerCase() === tag?.attributes?.label?.toLowerCase())
                 )
                 const authorIDs = authorData?.map(({ profile_id }) => profile_id) || []
                 const data = {
@@ -111,10 +114,10 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                               },
                           }
                         : null),
-                    ...(tag
+                    ...(tags?.length > 0
                         ? {
-                              post_tag: {
-                                  connect: [tag.id],
+                              post_tags: {
+                                  connect: tags.map((tag) => tag.id),
                               },
                           }
                         : null),
@@ -198,6 +201,8 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     frontmatter {
                         title
                         date
+                        category
+                        tags
                         authorData {
                             name
                         }
@@ -214,7 +219,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                 }
             }
             blog: allMdx(
-                filter: { fields: { slug: { regex: "/^/blog/" } }, frontmatter: { featuredImageType: { eq: "full" } } }
+                filter: {
+                    fields: { slug: { regex: "/^/blog|^/spotlight/" } }
+                    frontmatter: { featuredImageType: { eq: "full" } }
+                }
             ) {
                 nodes {
                     fields {

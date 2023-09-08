@@ -27,6 +27,7 @@ import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
 import { Startups } from './components/Startups'
 import { TracksCTA } from './components/TracksCTA'
+import { ZendeskTicket } from './components/ZendeskTicket'
 
 export const shortcodes = {
     ArrayCTA,
@@ -56,4 +57,5 @@ export const shortcodes = {
     StarRepoButton,
     Startups,
     TracksCTA,
+    ZendeskTicket,
 }
