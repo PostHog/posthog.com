@@ -16,7 +16,12 @@ tags:
 
 Feature flags are a tool to conditionally turn on or off code and components. They enable you to safely deploy or roll back new features, which helps you follow the [best practice of disconnecting deployment from release](/blog/github-gitlab-feature-flags#why-do-github-and-gitlab-use-feature-flags).
 
-The basic functionality of feature flags is simple enough to build yourself. The challenge comes as you scale and your needs become more complex. This post goes over the functionality of a feature flag service, the challenges of building a service in-house, the benefits of feature flags as a service, and how to make the build vs. buy decision.
+The basic functionality of feature flags is simple enough to build yourself. The challenge comes as you scale and your needs become more complex. In this post, we'll cover:
+
+- The functionality of a feature flag service.
+- The challenges of building a service in-house.
+- The benefits of feature flags as a service.
+- How to make the build vs. buy decision.
 
 ## How does a feature flag service work?
 
@@ -60,7 +65,7 @@ The path to improving this requires building increasingly complicated features, 
 
 Beyond these are features like targeting logic, caching for speed, or resiliency for parts of the service going down. Each adds to the likelihood of introducing bugs and creating tech debt. 
 
-Feature flag services become a classic build vs. buy decision. Building a feature flag service works well if you have a clear, simple use case. As you scale, the benefits of "outsourcing" the work to a provider of feature flags as a service become clearer.
+Feature flag services become a classic build vs. buy decision. Building a feature flag service works well if you have a clear, simple use case. As you scale, "outsourcing" the work to a feature flags as a service provider becomes more attractive.
 
 ## How do feature flags _as a service_ work?
 
@@ -76,7 +81,7 @@ posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
 is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user')
 ```
 
-Feature flag services also contain features for more complicated use cases including: 
+Feature flag services also contain features for more complicated use cases, such as: 
 
 - Targeting feature flags for percentage rollouts, [betas](/tutorials/public-beta-program), [testing in production](/blog/testing-in-production), and more.
 - Multi-variant flags that enable A/B testing.
