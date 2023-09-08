@@ -1053,8 +1053,8 @@
         { "source": "/raquel", "destination": "/community/profiles/491" },
         { "source": "/jamesg", "destination": "/community/profiles/90" },
         { "source": "/jams", "destination": "/community/profiles/90" },
-
-        { "source": "/docs/surveys/manual", "destination": "/docs/surveys" }
+        { "source": "/docs/surveys/manual", "destination": "/docs/surveys" },
+        { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" }
     ],
     "rewrites": [
         {
