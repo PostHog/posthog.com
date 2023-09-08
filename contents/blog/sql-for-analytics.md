@@ -1,6 +1,6 @@
 ---
 title: The basics of SQL for analytics
-date: 2023-09-06
+date: 2023-09-08
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
