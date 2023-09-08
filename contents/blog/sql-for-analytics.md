@@ -14,13 +14,13 @@ tags:
  - Explainers
 ---
 
-One of SQL’s most important use cases is analytics. There are many ways to slice, modify, and interpret analytics data. SQL provides the depth and customizability to get insights from it, answer questions, and make data-driven decisions.
+Analytics is one of SQL's most important use cases. There are many ways to slice, modify, and interpret analytics data. SQL provides the depth and customizability to get insights from it, answer questions, and make data-driven decisions.
 
 This post goes over how to analyze your analytics data with SQL and recommendations for your analysis process.
 
 ## The building blocks of SQL
 
-SQL provides complete customization into the retrival and formatting of analytics data. Because of the limitless options for doing this, it is useful to break down the analysis process into three main blocks: your analytics data, the SQL query, and the results.
+SQL provides complete customization into the retrieval and formatting of analytics data. Because of the limitless options for doing this, it is useful to break down the analysis process into three main blocks: your analytics data, the SQL query, and the results.
 
 ![Building blocks](../images/blog/sql-for-analytics/blocks.png)
 
@@ -100,7 +100,7 @@ The options analytics platform provide are a subset of all possible queries sinc
 
 ![All possible SQL queries](../images/blog/sql-for-analytics/possible.png)
 
-Although analytics platforms try to cover as many types of analysis and data as possible, they can’t do everything. Many types of queries aren’t possible to template. This is because the format of data for everyone’s analytics is different. For example, the your filters might be too complex or your data might be in a format visualizations can’t handle. With SQL knowledge, you can create queries using your own data format and get results relevant to you.
+Although analytics platforms try to cover as many types of analysis and data as possible, they can’t do everything. Many types of queries aren’t possible to template. This is because the format of data for everyone’s analytics is different. For example, your filters might be too complex or your data might be in a format visualizations can’t handle. With SQL knowledge, you can create queries using your own data format and get results relevant to you.
 
 The second reason to use SQL in analytics is its **availability**. SQL is one of the most popular programming languages and is the standard way to interact with data in databases. There is a massive amount of content about best practices and how to learn it. The syntax is relatively simple and intuitive too. Many people and platforms already use it. This makes it easier to adopt and work on as a team.
 
