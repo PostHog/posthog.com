@@ -425,6 +425,10 @@ export const handbookSidebar = [
                         name: 'Roadmap',
                         url: '/handbook/engineering/posthog-com/roadmap',
                     },
+                    {
+                        name: 'Editing API docs',
+                        url: '/handbook/engineering/posthog-com/api-docs',
+                    },
                 ],
             },
             {

@@ -5,160 +5,68 @@ sidebar: Docs
 showTitle: true
 ---
 
-This section of our Docs explains how to pull or push data from/to our API. PostHog has an API available on all tiers of PostHog cloud pricing, including the free tier, and for every self-hosted version.
+PostHog has a powerful API that enables you to capture, evaluate, create, update, and delete nearly all of your information in PostHog. You can use it to [pull information into your app](/tutorials/customer-facing-analytics), update metadata programtically, [capture events from any language that can send HTTP requests](/tutorials/api-capture-events), and more.
 
-Please note that PostHog makes use of two different APIs, serving different purposes and using different mechanisms for authentication.
+The API is available for all users and instances. It contains two types of endpoints:
 
-One API is used for pushing data into PostHog. This uses the 'Team API Key' that is included in the [frontend snippet](/docs/integrate/client/js). This API Key is **public**, and is what we use in our frontend integration to push events into PostHog, as well as to check for feature flags, for instance.
+1. **[Public POST-only endpoints](/docs/api/post-only-endpoints)** used for capturing events, batching events, updating person or group information, and evaluating feature flags. These don't require authentication, but use [your project API key](https://app.posthog.com/project/settings) to handle the request.
 
-The other API is more powerful and allows you to perform any action as if you were an authenticated user utilizing the PostHog UI. It is mostly used for getting data out of PostHog, as well as other private actions such as creating a feature flag. This uses a 'Personal API Key' which you need to create manually (instructions [below](#authentication)). This API Key is **private** and you should not make it public nor share it with anyone. It gives you access to all the data held by your PostHog instance, which includes sensitive information.
+2. **Private `GET`, `POST`, `PATCH`, `DELETE` endpoints** used for creating, updating, or deleting nearly all other non-event data in PostHog. They give the same access as if you were logged into your PostHog instance, but require authentication with your personal API key. 
 
-These API Docs refer mostly to the **private API**, performing authentication as outlined below. The only exception is the [POST-only public endpoints](/docs/api/post-only-endpoints) section. This section explicitly informs you on how to perform authentication. For endpoints in all other sections, authentication is done as described below.
+> You must make API requests to the correct domain. These are `https://app.posthog.com` for US Cloud, `https://eu.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
 
-## Authentication
+## Private endpoint authentication
 
 import InstallAPI from '../integrate/_snippets/install-api.mdx'
 
 <InstallAPI />
 
-## Tips
+## Rate limiting
 
-- The [`/users/@me/` endpoint](/docs/api/user) gives you useful information about the current user.
-- The `/api/event_definition/` and `/api/property_definition` endpoints provide the possible event names and properties you can use throughout the rest of the API.
-- The maximum size of a POST request body is governed by `settings.DATA_UPLOAD_MAX_MEMORY_SIZE`, and is 20MB by default.
+Private `GET`, `POST`, `PATCH`, `DELETE` endpoints are rate limited. Public POST-only endpoints are **not** rate limited. A rule of thumb for whether rate limits apply is if the personal API key is used for authentication. 
+
+There are separate limits for different kinds of resources.
+
+- For all analytics endpoints (such as calculating insights, retrieving persons, or retrieving session recordings), the rate limits are `240/minute` and `1200/hour`.
+
+- The [HogQL query](/docs/hogql#api-access) endpoint (`/api/project/:id/query`) has a rate limit of `120/hour`.
+
+- For the rest of the create, read, update, delete endpoints, the rate limits are `480/minute` and `4800/hour`.
+
+- For Public POST-only endpoints like event capture (`/capture`) and feature flag evaluation (`/decide`), there are no rate limits.
+
+These limits apply to **the entire team** (i.e. all users within your PostHog organization). For example, if a script requesting feature flag metadata hits the rate limit, and another user, using a different personal API key, makes a single request to the persons API, this gets rate limited as well.
+
+For large or regular exports of events, use [batch exports](/docs/cdp/batch-exports).
+
+> **Want to use the PostHog API beyond these limits?** Email us at [customers@posthog.com](to:customers@posthog.com).
 
 ## Pagination
 
-Sometimes requests are paginated. If that's the case, it'll be in the following format:
+Requests are paginated if the results are higher than the limit, usually 100 (sometimes 500 or 1000). Pagination happens in the following format:
 
 ```json
 {
-    "next": "https://posthog.example.com/api/person/?cursor=cD0yMjgxOTA2",
-    "previous": null,
-    "results": [
-        ...
-    ]
+  "next": "https://app.posthog.com/api/person/?cursor=cD0yMjgxOTA2",
+  "previous": null,
+  "results": [
+    // ...
+  ]
 }
 ```
 
 You can then just call the `"next"` URL to get the next set of results.
 
-## Rate limiting
+## Tips
 
-All requests to PostHog, except for evaluating feature flags and sending events (i.e. the [POST-only public endpoints](/docs/api/post-only-endpoints)), are rate limited.
+- The [`/users/@me/` endpoint](/docs/api/user) gives you useful information about the current user.
 
-In practice, a rule of thumb for whether rate limits apply or not is to check if a personal API key is used for auth. Everything using a personal API key for auth is rate limited.
+- The `/api/event_definition/` and `/api/property_definition` endpoints provide the possible event names and properties you can use throughout the rest of the API.
 
-There's separate limits for different kinds of resources.
+- The maximum size of a POST request body is governed by `settings.DATA_UPLOAD_MAX_MEMORY_SIZE`, and is 20MB by default.
 
-For all CRUD endpoints, the rate limits are `480/minute` and `4800/hour`. 
+- By default, the PostHog API returns results from the last project you visited in the UI. To override this behavior, you can pass in your project API key as a query parameter in the request like `api/event/?token=my_project_api_key`.
 
-For all analytics endpoints (such as calculating insights, retrieving persons, retrieving session recordings), the rate limits are `240/minute` and `1200/hour`.
+- You can download the OpenAPI spec a.k.a. API schema at [https://app.posthog.com/api/schema/](https://app.posthog.com/api/schema/)
 
-Note that these limits apply to the entire team (ie all users within your PostHog Organization), so if you have a feature-flag requesting script that hits the rate limit, and another user, using a different API key, makes just a single request to the persons API, this would get rate limited as well.
-
-For large or regular exports of events we would recommend [using export apps](https://posthog.com/docs/migrate/export-events).
-
-If want to use the PostHog API beyond these limits (for example by using PostHog to power your user-facing dashboards) then please email us at [customers@posthog.com](to:customers@posthog.com).
-
-## Specifying a project when using the API
-
-By default, if you're accessing the API, PostHog will return results from the last project you visited in the UI. To override this behavior, you can pass in your Project API Key (public token) as a query parameter in the request. This ensures you will get data from the project associated with that token.
-
-**Example**
-
-```
-api/event/?token=my_project_api_key
-```
-
-#### cURL example for self-hosted PostHog
-
-```bash
-POSTHOG_PERSONAL_API_KEY=phx_qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0
-curl \
---header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-https://posthog.example.com/api/person/
-```
-
-#### cURL example for PostHog Cloud
-
-```bash
-POSTHOG_PERSONAL_API_KEY=phx_qTjsppKJqYLr2YskbsLXmu46eW1oH0r3jZkmKaERlf0
-curl \
---header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-https://app.posthog.com/api/person/
-```
- 
-## Contributing to API docs
-
-API docs are generated using [drf-spectacular](https://drf-spectacular.readthedocs.io/en/latest/readme.html). It looks at the Django models and djangorestframework serializers.
-
-Note: We don't automatically add new API endpoints to the sidebar, so you'll need to add those to [src/navs/index.js](https://github.com/PostHog/posthog.com/blob/master/src/navs/index.js)
-
-You can add a `help_text="Field that does x"` attribute to any Model or Serializer field to help users understand what a specific field is used for:
-
-```python
-class Insight(models.Model):
-    last_refresh: models.DateTimeField = models.DateTimeField(blank=True, null=True, help_text="When the cache for the result of this insight was last refreshed.")
-
-class InsightSerializer(TaggedItemSerializerMixin, InsightBasicSerializer):
-    filters_hash = serializers.CharField(
-        read_only=True,
-        help_text="A hash of the filters that generate this insight.",
-    )
-```
-
-To add a description to the top of a page, add a comment to the **viewset** class:
-
-```python
-class InsightViewSet(TaggedItemViewSetMixin, StructuredViewSetMixin, viewsets.ModelViewSet):
-    """
-    Stores saved insights along with their entire configuration options. Saved insights can be stored as standalone
-    reports or part of a dashboard.
-    """
-```
-
-You can do the same thing for specific endpoints.
-
-```python
-@action(methods=["GET", "POST"], detail=False)
-def trend(self, request: request.Request, *args: Any, **kwargs: Any) -> Response:
-    """
-    Test comment, which [even supports markdown](https://example.com)
-    """
-```
-
-To check what any changes will roughly look like locally, you can go to http://127.0.0.1:8000/api/schema/redoc/.
-
-### Insights serializer
-
-The serializer for insight [lives here](https://github.com/PostHog/posthog/blob/master/posthog/api/insight_serializers.py). Each time an insight gets created we check it against these serializers, and we'll send an error to Sentry (but not the user) if it doesn't match, to ensure the API docs are up to date.
-
-### Documenting custom endpoints
-
-If you have an `@action` endpoint or a custom endpoint (that doesn't use DRF) you can still document by providing a serializer for the request and response.
-
-```python
-from drf_spectacular.utils import OpenApiResponse
-from posthog.api.documentation import extend_schema
-@extend_schema(
-    request=FunnelSerializer,
-    responses=OpenApiResponse(
-        response=FunnelStepsResultsSerializer,
-        description="Note, if funnel_viz_type is set the response will be different.",
-     ),
-    methods=["POST"],
-    tags=["funnel"],
-    operation_id="Funnels",
-)
-@action(methods=["GET", "POST"], detail=False)
-def funnel(self, request: request.Request, *args: Any, **kwargs: Any) -> Response:
-```
-
-### Testing API docs locally
-
-To test or develop the API docs locally, you need to create a personal API key (see top of this page) and then export it before running gatsby, in the same terminal window:
-
-```bash
-export POSTHOG_PERSONAL_API_KEY=yourkey
-```
+- You can view the API schema with Swagger UI at [https://app.posthog.com/api/schema/swagger-ui/](https://app.posthog.com/api/schema/swagger-ui/)
