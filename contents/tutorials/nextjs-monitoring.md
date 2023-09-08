@@ -8,9 +8,9 @@ featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ['configuration', 'session replay', 'insights']
 ---
 
-Monitoring a Next.js app for performance regressions, loading speed, and errors enables you to be confident your app is providing the best possible experience.
+Monitoring a Next.js app for performance regressions, loading speed, and errors helps you be confident your app is providing the best possible experience. [Real user monitoring](/blog/real-user-monitoring) is a best practice for apps looking to optimize their user experience.
 
-In this tutorial, we'll create a basic Next.js app, setup PostHog to monitor errors and performance, and then build a dashboard to analyze this information.```
+In this tutorial, we'll create a basic Next.js app, setup PostHog to monitor errors and performance, and then build a dashboard to analyze this information.
 
 > Already have a Next.js app? [Click here to skip to the PostHog installation](#set-up-posthog).
 
