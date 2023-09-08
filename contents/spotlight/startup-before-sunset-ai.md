@@ -6,7 +6,7 @@ showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: ../images/blog/startup_beforesunset.png
 featuredImageType: full
 category: Startups
 ---

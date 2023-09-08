@@ -14,6 +14,7 @@ import { shortcodes } from '../mdxGlobalComponents'
 import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
 import MobileSidebar from 'components/Docs/MobileSidebar'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -107,6 +108,7 @@ export default function BlogPost({ data, pageContext, location }) {
         ...shortcodes,
     }
     const { tableOfContents } = pageContext
+    const { fullWidthContent } = useLayoutData()
 
     return (
         <>
@@ -129,13 +131,19 @@ export default function BlogPost({ data, pageContext, location }) {
                 date={date}
                 tags={tags}
             />
-            <div className="xl:float-right xl:max-w-[350px] xl:ml-4 xl:mb-4">
-                <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
-            </div>
-            <div className="article-content">
-                <MDXProvider components={components}>
-                    <MDXRenderer>{body}</MDXRenderer>
-                </MDXProvider>
+            <div className="@container">
+                <div className="flex flex-col-reverse items-start @2xl:flex-row gap-8 2xl:gap-12">
+                    <div
+                        className={`article-content flex-1 transition-all ${fullWidthContent ? 'w-full' : 'max-w-2xl'}`}
+                    >
+                        <MDXProvider components={components}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
+                    <div className={`shrink basis-72 @2xl:reasonable:sticky top-[128px] ${fullWidthContent ? '' : ''}`}>
+                        <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
+                    </div>
+                </div>
             </div>
         </>
     )

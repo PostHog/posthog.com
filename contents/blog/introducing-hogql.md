@@ -18,7 +18,7 @@ featuredImageType: full
 
 Today, we're releasing a major new feature as a public beta: the ability to directly query your PostHog data using SQL. We call this [HogQL](/docs/product-analytics/hogql) because... hedgehogs love SQL, probably?
 
-You can use HogQL expressions to, among other things, enhance insights, filter event lists, and (most importantly) write full queries to analyze data in any way you want. 
+You can use [HogQL expressions](/docs/hogql/expressions) to enhance insights, filter event lists, and write full queries to analyze data in any way you want. 
 
 PostHog's existing insights are already incredibly powerful. HogQL turns insights Super Saiyan.
 
@@ -115,7 +115,7 @@ Just hit that 'Open as a new insight' button (see above), tweak the JSON (if you
 
 _What's that? Notebooks haven't launched, yet? But they're the future of everyth... oh, my bad!"_. 🥸
 
-Moving on... you can also use HogQL expressions (e.g. `properties.$screen_width * $properties.screen_height`) and aggregations (e.g. `sum(properties.price)`) as columns. This is helpful not just for generating tables that summarize person and event information, but also for exploring the data in new and totally custom ways. 
+Moving on... you can also use [HogQL expressions](/docs/hogql/expressions) (e.g. `properties.$screen_width * $properties.screen_height`) and aggregations (e.g. `sum(properties.price)`) as columns. This is helpful not just for generating tables that summarize person and event information, but also for exploring the data in new and totally custom ways. 
 
 You could, for example, use HogQL to run currency conversions and normalize data into a single currency in its own column, or even extrapolate and project revenue, and usage figures, into the future. 
 
