@@ -22,6 +22,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const Job = path.resolve(`src/templates/Job.tsx`)
     const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
+    const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -257,6 +258,22 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     totalCount
                 }
             }
+            postCategories: allPostCategory(filter: { attributes: { folder: { ne: null } } }) {
+                nodes {
+                    attributes {
+                        label
+                        folder
+                        post_tags {
+                            data {
+                                attributes {
+                                    label
+                                    folder
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             plugins: allPlugin(filter: { url: { regex: "/github.com/" } }) {
                 nodes {
                     id
@@ -435,6 +452,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 tableOfContents,
                 slug,
+                post: true,
             },
         })
     })
@@ -467,6 +485,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 tableOfContents,
                 slug,
+                post: true,
             },
         })
     })
@@ -481,9 +500,33 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 tableOfContents,
                 slug,
+                post: true,
             },
         })
     })
+
+    result.data.postCategories.nodes.forEach(
+        ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
+            createPage({
+                path: `/${categoryFolder}`,
+                component: PostListingTemplate,
+                context: {
+                    post: true,
+                },
+            })
+
+            post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
+                createPage({
+                    path: `/${categoryFolder}/${slugify(tagLabel, { lower: true, strict: true })}`,
+                    component: PostListingTemplate,
+                    context: {
+                        selectedTag: tagLabel,
+                        post: true,
+                    },
+                })
+            })
+        }
+    )
 
     result.data.spotlights.nodes.forEach((node) => {
         const { slug } = node.fields
@@ -495,6 +538,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 tableOfContents,
                 slug,
+                post: true,
             },
         })
     })
@@ -508,6 +552,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 id: node.id,
                 tableOfContents,
+                post: true,
             },
         })
     })

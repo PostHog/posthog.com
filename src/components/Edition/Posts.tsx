@@ -3,13 +3,12 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isToday from 'dayjs/plugin/isToday'
 import Link from 'components/Link'
-import { Heart, RightArrow } from 'components/Icons'
+import { Heart } from 'components/Icons'
 import { useInView } from 'react-intersection-observer'
 import { Skeleton } from 'components/Questions/QuestionsTable'
 import { usePosts } from './hooks/usePosts'
 import { useUser } from 'hooks/useUser'
 import Tooltip from 'components/Tooltip'
-import pluralize from 'pluralize'
 import { Login } from 'components/Community/Sidebar'
 import Layout from 'components/Layout'
 import Modal from 'components/Modal'
@@ -20,10 +19,12 @@ import { QuestionData, StrapiResult } from 'lib/strapi'
 import { useLocation } from '@reach/router'
 import { communityMenu } from '../../navs'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { navigate } from 'gatsby'
 import NewPost from './NewPost'
-import Categories from './Categories'
 import { Questions as QuestionForm } from 'components/Squeak'
+import TableOfContents from 'components/PostLayout/TableOfContents'
+import { PostProvider } from 'components/PostLayout/context'
+import useMenu from './hooks/useMenu'
+import { IMenu } from 'components/PostLayout/types'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -177,30 +178,15 @@ const Post = ({
     )
 }
 
-const getCategoryParams = (root) => (root !== 'posts' ? { filters: { post_category: { folder: { $eq: root } } } } : {})
-
-const getCategoryLabels = (selectedCategories) => {
-    const categories = Object.keys(selectedCategories)
-    return categories?.length <= 0 ? 'All posts' : categories.map((label) => pluralize(label)).join(', ')
-}
-
-function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelectedCategories, selectedCategories }) {
+function PostsListing({ articleView, posts, isLoading, fetchMore }) {
     const breakpoints = useBreakpoint()
 
     return articleView && breakpoints.sm ? null : (
         <div
             className={`${
-                articleView ? 'reasonable:sticky top-[108px] w-full md:w-[20rem] flex-shrink-0' : 'flex-grow'
+                articleView ? 'reasonable:sticky top-[108px] w-full md:w-[20rem] flex-shrink-0 pt-4' : 'flex-grow'
             }`}
         >
-            <div className="my-4 flex justify-between space-x-2">
-                <h5 className="m-0 line-clamp-1 leading-[2]">{getCategoryLabels(selectedCategories)}</h5>
-                <Categories
-                    setSelectedCategories={setSelectedCategories}
-                    selectedCategories={selectedCategories}
-                    root={root}
-                />
-            </div>
             <div
                 className={
                     articleView
@@ -210,7 +196,7 @@ function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelec
             >
                 <ul
                     className={`divide-y divide-border dark:divide-border-dark list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
-                        articleView && !breakpoints.sm ? 'h-[80vh] overflow-auto' : ''
+                        articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto' : ''
                     }`}
                 >
                     {posts.map(({ id, attributes }, index) => {
@@ -313,7 +299,20 @@ export const Sidebar = () => {
 
 export const PostsContext = createContext<{ mutate?: () => Promise<void> }>({})
 
-export default function Posts({ children, articleView }) {
+const menusByRoot = {
+    tutorials: communityMenu.children[2],
+}
+
+const isListingView = (pathname: string, children?: IMenu[]): boolean | undefined => {
+    return (
+        children &&
+        children.some((child: IMenu) => {
+            return child.url === pathname || isListingView(pathname, child.children)
+        })
+    )
+}
+
+export default function Posts({ children, pageContext: { selectedTag: initialSelectedTag } }) {
     const { user, logout, isModerator } = useUser()
     const didMount = useRef(false)
     const name = [user?.profile.firstName, user?.profile.lastName].filter(Boolean).join(' ')
@@ -322,12 +321,40 @@ export default function Posts({ children, articleView }) {
     const [prev, setPrev] = useState<string | null>(null)
     const [newPostModalOpen, setNewPostModalOpen] = useState(false)
     const root = pathname.split('/')[1]
-    const [params, setParams] = useState(getCategoryParams(root))
+    const [params, setParams] = useState({})
     const { posts, isLoading, fetchMore, mutate } = usePosts({ params })
-    const [selectedCategories, setSelectedCategories] = useState({})
+    const [selectedTag, setSelectedTag] = useState(initialSelectedTag)
+    const postsSidebar = useMenu()
+    const articleView = !isListingView(pathname, postsSidebar)
 
     const handleNewPostSubmit = () => {
         setNewPostModalOpen(false)
+    }
+
+    const getCategoryParams = () => {
+        if (root === 'posts') {
+            return {}
+        }
+        return {
+            filters: {
+                $and: [
+                    {
+                        post_category: {
+                            folder: {
+                                $eq: root,
+                            },
+                        },
+                    },
+                    {
+                        post_tags: {
+                            label: {
+                                $in: [selectedTag],
+                            },
+                        },
+                    },
+                ],
+            },
+        }
     }
 
     useEffect(() => {
@@ -336,42 +363,21 @@ export default function Posts({ children, articleView }) {
         } else {
             didMount.current = true
         }
+        const newRoot = pathname.split('/')[1]
+        const prevRoot = prev?.split('/')[1]
+        if (newRoot === prevRoot && !initialSelectedTag) return
+        setSelectedTag(initialSelectedTag)
     }, [pathname])
 
     useEffect(() => {
-        const tags = []
-        const categories = []
-        Object.keys(selectedCategories).forEach((category) => {
-            if (selectedCategories[category].length <= 0) {
-                categories.push(category)
-            } else {
-                selectedCategories[category].forEach((tag) => tags.push(tag))
-            }
-        })
-        setParams({
-            filters: {
-                $or: [
-                    {
-                        post_category: {
-                            label: {
-                                $in: categories,
-                            },
-                        },
-                    },
-                    {
-                        post_tag: {
-                            label: {
-                                $in: tags,
-                            },
-                        },
-                    },
-                ],
-            },
-        })
-    }, [selectedCategories])
+        const params = getCategoryParams()
+        if (params) setParams(params)
+    }, [root, selectedTag])
+
+    const menu = menusByRoot[root]
 
     return (
-        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
+        <Layout parent={communityMenu} activeInternalMenu={menu ?? communityMenu.children[0]}>
             <PostsContext.Provider value={{ mutate }}>
                 <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
                     <div className="px-4">
@@ -426,10 +432,22 @@ export default function Posts({ children, articleView }) {
                         </div>
                     </section>
                     <section className="md:flex md:space-x-8 my-4 md:my-8 items-start">
+                        <div
+                            className={`reasonable:sticky top-[108px] pt-3 w-[15rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
+                        >
+                            <div className="max-h-[85vh] overflow-auto snap-y pb-24">
+                                <PostProvider
+                                    value={{
+                                        title: 'Posts',
+                                        menu: postsSidebar,
+                                        isMenuItemActive: ({ url }) => url === pathname,
+                                    }}
+                                >
+                                    <TableOfContents />
+                                </PostProvider>
+                            </div>
+                        </div>
                         <PostsListing
-                            selectedCategories={selectedCategories}
-                            setSelectedCategories={setSelectedCategories}
-                            root={root}
                             fetchMore={fetchMore}
                             posts={posts}
                             isLoading={isLoading}
@@ -440,17 +458,6 @@ export default function Posts({ children, articleView }) {
                                 articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'
                             }`}
                         >
-                            {articleView && (
-                                <button
-                                    onClick={() => navigate(prev ? -1 : '/posts')}
-                                    className="inline-flex md:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
-                                >
-                                    <RightArrow className="-scale-x-100 w-6" />
-                                    <span className="text-red dark:text-yellow text-[15px] font-semibold line-clamp-1 text-left">
-                                        Back to {getCategoryLabels(selectedCategories)}
-                                    </span>
-                                </button>
-                            )}
                             <div>{children}</div>
                             {articleView && (
                                 <div className="mt-12 max-w-2xl">

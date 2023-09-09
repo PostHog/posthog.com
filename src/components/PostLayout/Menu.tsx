@@ -66,7 +66,6 @@ export default function Menu({
             : ''
     } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''}`
     const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
-
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -80,7 +79,12 @@ export default function Menu({
                 })
             )
         }
-        setOpen(isMenuItemActive?.({ name, url }) || url === pathname || (children && isOpen(children)))
+        setOpen(
+            url?.startsWith(`/${pathname.split('/')[1]}`) ||
+                isMenuItemActive?.({ name, url }) ||
+                url === pathname ||
+                (children && isOpen(children))
+        )
         setIsActive(isMenuItemActive?.({ name, url }) || url?.split('?')[0] === pathname)
     }, [pathname])
 

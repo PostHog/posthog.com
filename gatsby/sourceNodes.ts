@@ -272,4 +272,20 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
     }
     await createRoadmapItems()
+
+    const postCategories = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?populate=*`).then(
+        (res) => res.json()
+    )
+
+    postCategories.data.forEach(({ id, ...other }) => {
+        const node = {
+            id: createNodeId(`post-category-${id}`),
+            internal: {
+                type: `PostCategory`,
+                contentDigest: createContentDigest(other),
+            },
+            ...other,
+        }
+        createNode(node)
+    })
 }
