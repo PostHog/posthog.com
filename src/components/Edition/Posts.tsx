@@ -25,6 +25,7 @@ import TableOfContents from 'components/PostLayout/TableOfContents'
 import { PostProvider } from 'components/PostLayout/context'
 import useMenu from './hooks/useMenu'
 import { IMenu } from 'components/PostLayout/types'
+import MobileNav from 'components/PostLayout/MobileNav'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -183,7 +184,7 @@ function PostsListing({ articleView, posts, isLoading, fetchMore }) {
 
     return articleView && breakpoints.sm ? null : (
         <div
-            className={`${
+            className={`mr-8 lg:ml-8 ml-0 ${
                 articleView ? 'reasonable:sticky top-[108px] w-full md:w-[20rem] flex-shrink-0 pt-4' : 'flex-grow'
             }`}
         >
@@ -312,7 +313,7 @@ const isListingView = (pathname: string, children?: IMenu[]): boolean | undefine
     )
 }
 
-export default function Posts({ children, pageContext: { selectedTag: initialSelectedTag } }) {
+export default function Posts({ children, pageContext: { selectedTag: initialSelectedTag, title } }) {
     const { user, logout, isModerator } = useUser()
     const didMount = useRef(false)
     const name = [user?.profile.firstName, user?.profile.lastName].filter(Boolean).join(' ')
@@ -324,7 +325,8 @@ export default function Posts({ children, pageContext: { selectedTag: initialSel
     const [params, setParams] = useState({})
     const { posts, isLoading, fetchMore, mutate } = usePosts({ params })
     const [selectedTag, setSelectedTag] = useState(initialSelectedTag)
-    const postsSidebar = useMenu()
+    const { activeMenu, defaultMenu } = useMenu()
+    const postsSidebar = activeMenu?.length <= 0 ? defaultMenu : activeMenu
     const articleView = !isListingView(pathname, postsSidebar)
 
     const handleNewPostSubmit = () => {
@@ -379,99 +381,100 @@ export default function Posts({ children, pageContext: { selectedTag: initialSel
     return (
         <Layout parent={communityMenu} activeInternalMenu={menu ?? communityMenu.children[0]}>
             <PostsContext.Provider value={{ mutate }}>
-                <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
-                    <div className="px-4">
-                        <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-12 border border-border dark:border-dark">
-                            <Login onSubmit={() => setLoginModalOpen(false)} />
+                <PostProvider
+                    value={{
+                        title: title || 'Posts',
+                        menu: postsSidebar,
+                        isMenuItemActive: ({ url }) => url === pathname,
+                    }}
+                >
+                    <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
+                        <div className="px-4">
+                            <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-12 border border-border dark:border-dark">
+                                <Login onSubmit={() => setLoginModalOpen(false)} />
+                            </div>
                         </div>
-                    </div>
-                </Modal>
-                <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
-                    <NewPost onSubmit={handleNewPostSubmit} />
-                </Modal>
-                <div className="px-4 md:px-5 md:mt-8 mb-12 max-w-screen-2xl mx-auto">
-                    <section>
-                        <div className="py-4 px-2 md:py-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col md:flex-row justify-between items-center sticky top-[-1px]">
-                            <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
-                            <div className="flex space-x-6 items-center md:mt-0 mt-2 justify-between">
-                                {user ? (
-                                    <span className="flex">
-                                        <p className="text-sm m-0 pr-2 mr-2 border-r border-border dark:border-dark">
-                                            Signed in as{' '}
-                                            <Link
-                                                className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
-                                                to={`/community/profiles/${user?.profile.id}`}
-                                            >
-                                                {name}
-                                            </Link>
-                                        </p>
-                                        {isModerator && (
+                    </Modal>
+                    <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
+                        <NewPost onSubmit={handleNewPostSubmit} />
+                    </Modal>
+                    <MobileNav menu={defaultMenu} className="lg:hidden mb-6 mt-0" />
+                    <div className="px-4 md:px-5 md:mt-8 mb-12 max-w-screen-2xl mx-auto">
+                        <section>
+                            <div className="py-4 px-2 md:py-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col md:flex-row justify-between items-center sticky top-[-1px]">
+                                <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
+                                <div className="flex space-x-6 items-center md:mt-0 mt-2 justify-between">
+                                    {user ? (
+                                        <span className="flex">
+                                            <p className="text-sm m-0 pr-2 mr-2 border-r border-border dark:border-dark">
+                                                Signed in as{' '}
+                                                <Link
+                                                    className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
+                                                    to={`/community/profiles/${user?.profile.id}`}
+                                                >
+                                                    {name}
+                                                </Link>
+                                            </p>
+                                            {isModerator && (
+                                                <button
+                                                    className="text-sm pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
+                                                    onClick={() => setNewPostModalOpen(!newPostModalOpen)}
+                                                >
+                                                    New post
+                                                </button>
+                                            )}
                                             <button
-                                                className="text-sm pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
-                                                onClick={() => setNewPostModalOpen(!newPostModalOpen)}
+                                                className="text-sm dark:text-yellow text-red font-semibold"
+                                                onClick={() => logout()}
                                             >
-                                                New post
+                                                Logout
                                             </button>
-                                        )}
+                                        </span>
+                                    ) : (
                                         <button
-                                            className="text-sm dark:text-yellow text-red font-semibold"
-                                            onClick={() => logout()}
+                                            onClick={() => setLoginModalOpen(true)}
+                                            className="text-sm text-red dark:text-yellow font-semibold"
                                         >
-                                            Logout
+                                            Sign in
                                         </button>
-                                    </span>
-                                ) : (
-                                    <button
-                                        onClick={() => setLoginModalOpen(true)}
-                                        className="text-sm text-red dark:text-yellow font-semibold"
-                                    >
-                                        Sign in
-                                    </button>
+                                    )}
+                                </div>
+                            </div>
+                        </section>
+                        <section className="md:flex my-4 md:my-8 items-start">
+                            <div
+                                className={`lg:block hidden reasonable:sticky top-[108px] pt-3 w-[15rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
+                            >
+                                <div className="max-h-[85vh] overflow-auto snap-y pb-24">
+                                    <TableOfContents />
+                                </div>
+                            </div>
+                            <PostsListing
+                                fetchMore={fetchMore}
+                                posts={posts}
+                                isLoading={isLoading}
+                                articleView={articleView}
+                            />
+                            <div
+                                className={`${
+                                    articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'
+                                }`}
+                            >
+                                <div>{children}</div>
+                                {articleView && (
+                                    <div className="mt-12 max-w-2xl">
+                                        <QuestionForm
+                                            disclaimer={false}
+                                            subject={false}
+                                            buttonText="Leave a comment"
+                                            slug={pathname}
+                                        />
+                                    </div>
                                 )}
                             </div>
-                        </div>
-                    </section>
-                    <section className="md:flex md:space-x-8 my-4 md:my-8 items-start">
-                        <div
-                            className={`reasonable:sticky top-[108px] pt-3 w-[15rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
-                        >
-                            <div className="max-h-[85vh] overflow-auto snap-y pb-24">
-                                <PostProvider
-                                    value={{
-                                        title: 'Posts',
-                                        menu: postsSidebar,
-                                        isMenuItemActive: ({ url }) => url === pathname,
-                                    }}
-                                >
-                                    <TableOfContents />
-                                </PostProvider>
-                            </div>
-                        </div>
-                        <PostsListing
-                            fetchMore={fetchMore}
-                            posts={posts}
-                            isLoading={isLoading}
-                            articleView={articleView}
-                        />
-                        <div
-                            className={`${
-                                articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'
-                            }`}
-                        >
-                            <div>{children}</div>
-                            {articleView && (
-                                <div className="mt-12 max-w-2xl">
-                                    <QuestionForm
-                                        disclaimer={false}
-                                        subject={false}
-                                        buttonText="Leave a comment"
-                                        slug={pathname}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    </section>
-                </div>
+                        </section>
+                    </div>
+                </PostProvider>
             </PostsContext.Provider>
         </Layout>
     )

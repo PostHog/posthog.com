@@ -512,6 +512,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 component: PostListingTemplate,
                 context: {
                     post: true,
+                    title: categoryLabel,
                 },
             })
 
@@ -522,6 +523,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     context: {
                         selectedTag: tagLabel,
                         post: true,
+                        title: tagLabel,
                     },
                 })
             })
