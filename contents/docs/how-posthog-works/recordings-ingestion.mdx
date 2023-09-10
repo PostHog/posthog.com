@@ -4,110 +4,22 @@ title: Session recordings ingestion
 
 ## Overview
 
-This is aimed at PostHog employees and goes into detail in order to allow them to support recordings while we're evolving the architecture
+This is aimed at PostHog employees and goes into detail in order to allow them to support the Session Replay product.
 
 We use `rrweb` to collect "snapshot data" from the browser. This data is gathered by the capture API and sent to ingestion.
 
-Because we use kafka for ingestion there is a maximum allowed message size and snapshot data is often larger than that. 
+Because we use kafka for ingestion there is a maximum allowed message size and snapshot data is often larger than that. Replay has its own ingestion infrastrcture with larger limits. 
 
-So, in Capture we compress the data and split it into chunks. The plugin server runs a "recordings ingestion" workload which uses our ingestion pipeline to send each recording event for storage in ClickHouse
+We store recording snapshot data in blob storage and aggregated session information in the `session_replay_events` table. As a result in Capture (`posthog-recordings` deployment) we no longer need to chunk recordings.
 
-```mermaid
-flowchart TB
-    clickHouse_session_recording_events_table[(Session recording events table)]
-    received_snapshot_event[clients send snapshot data]
-    kafka_recordings_topic>Kafka recordings topic]
-    kafka_clickhouse_recordings_topic>Kafka clickhouse recordings topic]
-
-    subgraph recordings ingestion workload
-        recordings_consumer-->kafka_clickhouse_recordings_topic
-        kafka_clickhouse_recordings_topic-->clickHouse_session_recording_events_table
-    end
-
-    received_snapshot_event --> capture
-    capture -->|compress and chunk to fit into kafka messages| kafka_recordings_topic
-    kafka_recordings_topic --> recordings_consumer
-```
-
-## Evolution to blob storage
-
-This is in progress.
-
-Storing snapshot data in ClickHouse is not ideal. It's not a good fit for the data model and it's not a good fit for the workload. So, recordings storage is being moved to blob storage. We use AWS S3 for blob storage but in theory any S3 compatible API such as Minio would work as well. 
-
-This uses a new ingestion workload which batches sessions to disk and periodically flushes them to blob storage. This is to allow us to write fewer files to storage reducing the operational cost of the system.
-
-```mermaid
-flowchart TB
-    clickHouse_session_recording_events_table[(Session recording events table)]
-    received_snapshot_event[clients send snapshot data]
-    kafka_recordings_topic>Kafka recordings topic]
-    kafka_clickhouse_recordings_topic>Kafka clickhouse recordings topic]
-
-    subgraph recordings ingestion workload
-        recordings_consumer-->kafka_clickhouse_recordings_topic
-        kafka_clickhouse_recordings_topic-->clickHouse_session_recording_events_table
-    end
-
-    subgraph recordings blob ingestion workload
-        recordings_blob_consumer-->|1. statefully batch|disk
-        disk-->recordings_blob_consumer
-        recordings_blob_consumer-->|2. periodic flush|blob_storage
-    end
-
-
-    received_snapshot_event --> capture
-    capture -->|compress and chunk to fit into kafka messages| kafka_recordings_topic
-    kafka_recordings_topic --> recordings_consumer
-    kafka_recordings_topic --> recordings_blob_consumer
-```
+The ingestion workload batches sessions to disk and periodically flushes them to blob storage. This is to allow us to write fewer files to storage reducing the operational cost of the system.
 
 
 ## Recording metadata
 
-This is in progress.
+The ingestion workload generates metadata and stores it in the `session_replay_events` table in ClickHouse. This will be used to power the session replay UI. It uses the [ClickHouse Aggregating MergeTree engine](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/aggregatingmergetree) to power the table. 
 
-While the snapshot data is stored in ClickHouse [we use materialised columns](https://posthog.com/blog/clickhouse-materialized-columns) to generate metadata about the recording. Things like how long it is, or how many mouse clicks are in the recording.
-
-Once we migrate storage out of ClickHouse that won't be possible any more.
-
-So, we're adding a new ingestion workload which will generate this metadata and store it in a new table in ClickHouse. This will be used to power the session replay UI. It uses the [ClickHouse Aggregating MergeTree engine](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/aggregatingmergetree) to power the table. 
-
-In combination with the blob storage ingestion workload this means we're storing at least a hundred times less data per row in ClickHouse. And compressing it about twice as much. 🔥
-
-```mermaid
-flowchart TB
-    clickHouse_session_recording_events_table[(Session recording events table)]
-    clickhouse_replay_summary_table[(Session replay summary table)]
-    received_snapshot_event[clients send snapshot data]
-    kafka_recordings_topic>Kafka recordings topic]
-    kafka_clickhouse_recordings_topic>Kafka clickhouse recordings topic]
-    kafka_clickhouse_replay_summary_topic>Kafka clickhouse replay summary topic]
-
-    subgraph recordings ingestion workload
-        recordings_consumer-->kafka_clickhouse_recordings_topic
-        kafka_clickhouse_recordings_topic-->clickHouse_session_recording_events_table
-
-        recordings_consumer-->kafka_clickhouse_replay_summary_topic
-        kafka_clickhouse_replay_summary_topic-->clickhouse_replay_summary_table
-    end
-
-    subgraph recordings blob ingestion workload
-        recordings_blob_consumer-->|1. statefully batch|disk
-        disk-->recordings_blob_consumer
-        recordings_blob_consumer-->|2. periodic flush|blob_storage
-    end
-
-
-    received_snapshot_event --> capture
-    capture -->|compress and chunk to fit into kafka messages| kafka_recordings_topic
-    kafka_recordings_topic --> recordings_consumer
-    kafka_recordings_topic --> recordings_blob_consumer
-```
-
-## End state
-
-After 21 days have passed the (very large) session_recording_events table is redundant and the system simplifies to:
+In combination with the blob storage ingestion workload this means we're storing at least a hundred times less data per row in ClickHouse than in the original infrastructure. And compressing it about twice as much. 🔥
 
 ```mermaid
 flowchart TB
@@ -116,17 +28,14 @@ flowchart TB
     kafka_recordings_topic>Kafka recordings topic]
     kafka_clickhouse_replay_summary_topic>Kafka clickhouse replay summary topic]
     
-    subgraph recordings ingestion workload
-        recordings_consumer-->kafka_clickhouse_replay_summary_topic
-        kafka_clickhouse_replay_summary_topic-->clickhouse_replay_summary_table
-    end
     subgraph recordings blob ingestion workload
         recordings_blob_consumer-->|1. statefully batch|disk
         disk-->recordings_blob_consumer
         recordings_blob_consumer-->|2. periodic flush|blob_storage
+        recordings_blob_consumer-->|3. after flush|kafka_clickhouse_replay_summary_topic
+        kafka_clickhouse_replay_summary_topic-->clickhouse_replay_summary_table
     end
     received_snapshot_event --> capture
-    capture -->|compress and chunk to fit into kafka messages| kafka_recordings_topic
-    kafka_recordings_topic --> recordings_consumer
+    capture -->|compress into kafka messages| kafka_recordings_topic
     kafka_recordings_topic --> recordings_blob_consumer
 ```
