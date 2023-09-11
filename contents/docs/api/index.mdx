@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog has a powerful API that enables you to capture, evaluate, create, update, and delete nearly all of your information in PostHog. You can use it to [pull information into your app](/tutorials/customer-facing-analytics), update metadata programtically, [capture events from any language that can send HTTP requests](/tutorials/api-capture-events), and more.
+PostHog has a powerful API that enables you to capture, evaluate, create, update, and delete nearly all of your information in PostHog. You can use it to [pull information into your app](/tutorials/customer-facing-analytics), update metadata programmatically, [capture events from any language that can send HTTP requests](/tutorials/api-capture-events), and more.
 
 The API is available for all users and instances. It contains two types of endpoints:
 
@@ -31,7 +31,7 @@ There are separate limits for different kinds of resources.
 
 - The [HogQL query](/docs/hogql#api-access) endpoint (`/api/project/:id/query`) has a rate limit of `120/hour`.
 
-- For the rest of the create, read, update, delete endpoints, the rate limits are `480/minute` and `4800/hour`.
+- For the rest of the create, read, update, and delete endpoints, the rate limits are `480/minute` and `4800/hour`.
 
 - For Public POST-only endpoints like event capture (`/capture`) and feature flag evaluation (`/decide`), there are no rate limits.
 

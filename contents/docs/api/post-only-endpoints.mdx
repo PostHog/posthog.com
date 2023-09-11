@@ -4,11 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog provides POST-only public endpoints to capture events, update user or group data, evaluate feature flags and more. These use your [project API key](https://app.posthog.com/project/settings) and do not return any sensitive data from your PostHog instance.
+PostHog provides POST-only public endpoints to capture events, update user or group data, evaluate feature flags, and more. These use your [project API key](https://app.posthog.com/project/settings) and do not return any sensitive data from your PostHog instance.
 
 ## Sending events
 
-PostHog is event-based meaning your analytics data takes the form of a value sent by a specific user with optional addition data. Much of the functionality of PostHog, including updating users or groups, combining users, and evaluating feature flags, is driven by this event-based structure. [Our SDKs](/docs/libraries) handle the different types of events for you, but with the API, you need to send the right type of event (listed below) to get the functionality you want. The default PostHog events have the `$` prefix. 
+PostHog is event-based meaning your analytics data takes the form of a value sent by a specific user with optional additional data. Much of the functionality of PostHog, including updating users or groups, combining users, and evaluating feature flags, is driven by this event-based structure. [Our SDKs](/docs/libraries) handle the different types of events for you, but with the API, you need to send the right type of event (listed below) to get the functionality you want. The default PostHog events have the `$` prefix. 
 
 > **Note:** Make sure to send API requests to the correct domain. These are `https://app.posthog.com` for US Cloud, `https://eu.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
 
