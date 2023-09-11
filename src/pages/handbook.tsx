@@ -94,7 +94,7 @@ export const Handbook: React.FC = () => {
             <SEO image="/images/handbook.png" title="Handbook - PostHog" />
 
             <PostLayout article={false} title={'Handbook'} hideSidebar hideSurvey>
-                <section>
+                <section className="max-w-4xl mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="-mt-16 md:-mt-12">
                             <StaticImage
@@ -104,7 +104,7 @@ export const Handbook: React.FC = () => {
                                 placeholder="blurred"
                             />
                         </div>
-                        <div>
+                        <div className="md:flex-1">
                             <h1 className="font-bold text-5xl mb-6">Company handbook</h1>
                             <h3 className="text-xl">👋 Welcome!</h3>
                             <h5 className="opacity-60 font-semibold leading-tight mb-8 max-w-lg">
@@ -118,7 +118,7 @@ export const Handbook: React.FC = () => {
                         return (
                             <div key={category.name} className="mb-16">
                                 <h4 className="text-base font-normal opacity-60">{category.name}</h4>
-                                <ol className="p-0 -ml-3 -mr-2 space-y-0.5 max-w-4xl">
+                                <ol className="p-0 -ml-3 -mr-2 space-y-0.5">
                                     {category.links.map((link) => {
                                         return (
                                             <li key={link.to} className="list-none">
