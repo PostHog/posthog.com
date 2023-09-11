@@ -1,11 +1,11 @@
 ---
 title: How to set up Python A/B testing
-date: 2023-09-07
+date: 2023-09-11
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-14.png
-tags: []
+tags: ['experimentation', 'feature flags']
 ---
 
 A/B testing enables you to experiment with how changes to your app affect metrics you care about. PostHog makes it easy to set up [A/B tests](/ab-testing) in Python. This tutorial shows you how to create a basic Python app with Flask, add PostHog to it, and then set up an A/B test to compare button variants.
@@ -43,23 +43,27 @@ def hello_world():
   return "<p>Hello, World!</p>"
 ```
 
-Afterwards, create a `/blog/<string:slug>` route with a "Like" button. Add `POST` handler to the route that prints "Liked!" when clicked and returns a confirmation.
+Afterward, create a `/blog/<string:slug>` route that returns a response with a "Like" button. Add `POST` handler to the route that returns returns a confirmation when clicked.
 
 ```python
 # ab-test-demo/hello.py
-from flask import Flask, request
+from flask import Flask, request, make_response
 
 # ... app, hello_world()
 
 @app.route("/blog/<string:slug>", methods=["GET", "POST"])
 def blog(slug):
+
+  response = make_response()
+
   if request.method == "GET":
-    return f"""
+    response.data = f"""
       <p>Welcome to the blog post: {slug}</p>
       <form method="post" action="/blog/{slug}">
           <input type="submit" value="Like" name="like"/>
       </form>
     """
+    return response
   elif request.method == "POST":
     return f"<p>Thanks for liking {slug}</p>"
 ```
@@ -70,37 +74,57 @@ Finally run `flask --app hello run` and go to `http://127.0.0.1:5000` to see
 
 ## Setting up PostHog
 
-Next, we install and set up PostHog using the [Python SDK](/docs/libraries/python).
+Next, we install PostHog [Python SDK](/docs/libraries/python) and the `uuid` package to generate user IDs.
 
 ```bash
-pip install posthog
+pip install posthog uuid
 ```
 
-Initialize PostHog to our `hello.py` file using your project API key and instance address from [your project settings](https://app.posthog.com/project/settings). In our `blog` route, use PostHog to capture a "liked post" event with a property of `slug` property. Since we don’t have user IDs, we use slugs as [our "target" user IDs](/tutorials/group-page-machine-flags).
+We import both into our `hello.py` file then use your project API key and instance address from [your project settings](https://app.posthog.com/project/settings) to initialize a PostHog client.
 
 ```python
-from flask import Flask, request
+# ab-test-demo/hello.py
+from flask import Flask, request, make_response
 from posthog import Posthog
+import uuid
 
 posthog = Posthog(
   '<ph_project_api_key>', 
   host='<ph_instance_address>'
 )
 
-# ... app, hello_world()
+# ... app, hello_world(), blog()
+```
+
+In our `blog` route, set up a UUID user ID using a cookie. If the user ID doesn't exist, we generate a new one and set it as a cookie. If it does, we get it from the cookie.
+
+With this `user_id` value, we then use PostHog to capture a "liked post" event with a `slug` property.
+
+```python
+# ... posthog, app, hello_world()
 
 @app.route("/blog/<string:slug>", methods=["GET", "POST"])
 def blog(slug):
+
+  response = make_response()
+
+  if 'user_id' not in request.cookies:
+    user_id = str(uuid.uuid4())
+    response.set_cookie('user_id', user_id)
+  else:
+    user_id = request.cookies.get('user_id')
+
   if request.method == "GET":
-    return f"""
+    response.data = f"""
       <p>Welcome to the blog post: {slug}</p>
       <form method="post" action="/blog/{slug}">
           <input type="submit" value="Like" name="like"/>
       </form>
     """
+    return response
   elif request.method == "POST":
     posthog.capture(
-      slug, 
+      user_id, 
       "liked post", 
       {
         'slug': slug
@@ -123,37 +147,48 @@ We are now ready to create and set up our A/B test. To do this, go to the [exper
 
 With the A/B test created, we can now implement it in our Flask app. 
 
-Back in our blog route, add a check with PostHog of the `blog-like` flag. If it returns `test`, we return a new button component. If not, return the same component as before.
+Back in our blog route, add a check with PostHog of the `blog-like` flag using the `user_id`. If it returns `test`, we return a new button component. If not, return the same component as before.
 
-```bash
+```python
 # ab-test-demo/hello.py
 
 # ... posthog, flask, hello_world()
 
 @app.route("/blog/<string:slug>", methods=["GET", "POST"])
 def blog(slug):
+
+  response = make_response()
+
+  if 'user_id' not in request.cookies:
+    user_id = str(uuid.uuid4())
+    response.set_cookie('user_id', user_id)
+  else:
+    user_id = request.cookies.get('user_id')
+
 	flag_key = "blog-like"
-  flag = posthog.get_feature_flag(flag_key, slug)
+  flag = posthog.get_feature_flag(flag_key, user_id)
 
   if request.method == "GET":
     if (flag == 'test'):
-      return f"""
+      response.data = f"""
         <p>Welcome to the very cool blog: {slug}</p>
         <form method="post" action="/blog/{slug}">
             <input type="submit" value="Like this cool blog" name="like"/>
         </form>
       """
+      return response
 
-    return f"""
+    response.data = f"""
       <p>Welcome to the blog post: {slug}</p>
       <form method="post" action="/blog/{slug}">
           <input type="submit" value="Like" name="like"/>
       </form>
     """
+    return response
 # ... elif
 ```
 
-Restart your app and check a few pages for the new component. You can also add an [optional override](/docs/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag to show a specific value to users with specific properties (like `slug`). 
+Restart your app and check a few pages for the new component. You can also add an [optional override](/docs/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag to show a value to users with specific properties (like `intial_slug` if you set that up). 
 
 ![A/B test in app](../images/tutorials/python-ab-testing/test.png)
 
@@ -163,7 +198,7 @@ Lastly, we must capture the experiment details in our event. Do this by adding `
 # ... posthog, flask, hello_world(), blog GET
 elif request.method == "POST":
     posthog.capture(
-      slug, 
+      user_id, 
       "liked post", 
       {
         'slug': slug,
