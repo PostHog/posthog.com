@@ -1042,6 +1042,10 @@ export const docsMenu = {
                             },
                         },
                         {
+                            name: 'Framer',
+                            url: '/tutorials/framer-analytics',
+                        },
+                        {
                             name: 'Gatsby',
                             url: '/docs/libraries/gatsby',
                             badge: {
@@ -1087,6 +1091,10 @@ export const docsMenu = {
                         {
                             name: 'Vue.js',
                             url: '/docs/libraries/vue-js',
+                        },
+                        {
+                            name: 'Webflow',
+                            url: '/tutorials/webflow',
                         },
                         {
                             name: 'WordPress',
