@@ -1,5 +1,5 @@
 ---
-title: Why (and how) you should decouple deployment from release
+title: Why you should decouple deployment from release (and how) 
 date: 2023-09-07
 author: ["ian-vanagas"]
 showTitle: true
@@ -32,7 +32,7 @@ This whole process is the software delivery process. Deployment and release are 
 
 ## Why should you decouple deployment and release?
 
-Without restrictions, deployed code is released code. This coupling of deployment and release can cause two main issues:
+By default, deployed code is released code. This coupling of deployment and release can cause two main issues:
 
 1. Problems isolated to the new code due to deployment. For example, a value saving locally but not in production due to an unexpected interaction with the production database.
 
@@ -52,7 +52,6 @@ On top of lowering the risk of issues, decoupling can increase developer product
 
 - Promote trunk-based development by merging to `main` more often instead of changes waiting on branches. Reduces merge conflicts.
 
-Although decoupling deployment from release requires work to implement, the benefits are often worth it.
 
 ## How we decouple deployment from release at PostHog
 
@@ -92,7 +91,7 @@ As mentioned, decoupling deployment from release is a best practice. To prove th
 Now that you understand the merits of decoupling deployments from release, but how do you make this happen? Two of the easiest ways to get started are:
 
 1. **Feature flags.** Deploy features behind [feature flags](/docs/feature-flags). Use conditional and percentage rollouts to roll out features to the internal team, beta users, and canary release.
-2. **Dark launch.** Launch new routes and features, but hide them from users (don’t link or notify them). Test and use the production code internally. For example, create a new feature page, don’t link to it anywhere, and access it directly with a link.
+2. **Dark launch.** Launch new routes and features, but hide them from users (don’t link or notify them). For example, create a new feature page, don’t link to it anywhere, and access it directly with a link.
 
 Both of these are great ways to start because they are simple. You can apply them to non-breaking changes, get comfortable with the process, and then decouple breaking changes with bigger impacts. Doing this provides an understanding of what code you should test in production and what is good to ship after testing locally.
 
