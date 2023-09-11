@@ -8,11 +8,13 @@ featuredImage: ../images/tutorials/banners/tutorial-14.png
 tags: []
 ---
 
-A/B testing enables you to experiment with how changes to your app affect metrics you care about. PostHog makes it easy to set up [A/B testing](/ab-testing) in Python. This tutorial shows you how to create a basic Python app with Flask, add PostHog to it, and then set up an A/B test to compare button variants.
+A/B testing enables you to experiment with how changes to your app affect metrics you care about. PostHog makes it easy to set up [A/B tests](/ab-testing) in Python. This tutorial shows you how to create a basic Python app with Flask, add PostHog to it, and then set up an A/B test to compare button variants.
 
 ## Creating a basic Flask app
 
-To showcase A/B testing, create an app using [Flask](https://flask.palletsprojects.com/), a Python web framework. To start, create a folder for our app named `ab-test-demo` and a file named `hello.py` in that folder.
+To demonstrate how to implement A/B testing, we'll create an app using [Flask](https://flask.palletsprojects.com/), a Python web framework. 
+
+To start, create a folder for our app named `ab-test-demo` and a file named `hello.py` in that folder.
 
 ```bash
 mkdir ab-test-demo
@@ -66,7 +68,7 @@ Finally run `flask --app hello run` and go to `http://127.0.0.1:5000` to see
 
 ![Hello World!](../images/tutorials/python-ab-testing//hello.png)
 
-## Adding PostHog
+## Setting up PostHog
 
 Next, we install and set up PostHog using the [Python SDK](/docs/libraries/python).
 
