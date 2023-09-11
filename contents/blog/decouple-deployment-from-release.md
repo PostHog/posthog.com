@@ -14,17 +14,17 @@ tags:
  - Explainers
 ---
 
-Releasing a big feature can be nerve-racking. When deploying it, you don't know if it will work in production, break the build, or cause issues. Without the right processes in place, the safety of your releases is a big question mark.
+Releasing a big feature can be nerve-racking. When deploying it, you don't know if it will work in production, break your app, or cause issues. Without the right processes in place, the safety of your releases is a big question mark.
 
 A best practice for improving this is decoupling deployment and release. What does this mean, though? This post goes over the differences between the two, why you should decouple them, examples, and how to get started.
 
 ## What are the differences between deployment and release?
 
-The process of delivering code starts with writing and testing code locally. After completing a piece of code, it often goes through reviews and more tests before integrating with existing code. 
+The process of delivering code starts with writing and testing code locally. After completing a piece of code, it often goes through reviews and more tests before integrating with the existing codebase. 
 
-Once integrated, the new code deploys. Deployment means getting code from a local machine or repository into production. Your application or build containing the new code is available on production infrastructure.
+Once integrated, the new code deploys. Deployment means getting code from a local machine or repository into production. Your app or build containing the new code becomes available on production infrastructure.
 
-A release is when new code is put into use and made available to users. By default, as soon as code is deployed, it is automatically released. This is because there is nothing preventing users or systems from accessing the new code that exists on production infrastructure.
+A release is when new code is put into use or made available to users. By default, as soon as code is deployed, it is automatically released. This is because there is nothing preventing users or systems from accessing the new code available on production infrastructure.
 
 This means teams often hold deployments until they are confident the code is ready to release.
 
@@ -36,31 +36,31 @@ The coupling of deployment and release can cause two main issues:
 
 1. New code doesn't work as expected. For example, a value saving locally but not in production due to an unexpected interaction with the production database.
 
-2. It breaks other features or the entire application. For example, values created by new features corrupt other data unexpectedly and crashes the application in production.
+2. It breaks other features or the entire app. For example, values created by new features corrupt other data unexpectedly and crashes the app in production.
 
 By preventing new code from automatically releasing after a deployment, you lower the risk of these issues. This is known as **decoupling deployment from release**.
 
-Doing this enables [testing code in production](/blog/testing-in-production). This process identifies issues arising from production infrastructure and integration with the full release.
+Doing this enables [testing code in production](/blog/testing-in-production). This process helps you discover issues arising from production infrastructure and the new code's integration with the real release.
 
 On top of lowering the risk of issues, decoupling can increase developer productivity and app reliability. The specific benefits include:
 
-- Improves developer confidence knowing they can test in production before releasing and that there is an easy way to roll back changes without affecting users.
+- Improves developer confidence knowing they can test in production and that there is an easy way to roll back changes without affecting users.
 
 - Increase deployment frequency by removing the need to wait for a formal release. 
 
 - Developers can follow [trunk-based development](https://trunkbaseddevelopment.com/) and merge to `main` more often instead of waiting on branches. This increases shipping velocity and reduces merge conflicts.
 
-- Developers can pass off releases to product managers and marketers once they deploy. Elaborate launches and stakeholder coordination can be done without needing to hold up development.
+- Developers can pass off releases to product managers and marketers once they deploy. They can coordinate elaborate launches and stakeholders without holding up development.
 
-- Less downtime from fewer broken releases applications. Easier rollbacks when an issue does occur because infrastructure (like [feature flags](/feature-flags)) is already in place.
+- Less downtime from fewer broken releases. Easier rollbacks when an issue does occur because infrastructure (like [feature flags](/feature-flags)) is already in place.
 
 ## How we decouple deployment from release at PostHog
 
-As an example of decoupling deployment from release, we can look at what we do at PostHog. We deploy many changes behind feature flags and release them after testing and improving them in production. At any time, there are [30+ flags](https://github.com/PostHog/posthog/blob/03eb1dcaec3cf5064a1ace4433f2f77d6676b634/frontend/src/lib/constants.tsx#L118C1-L118C1) in use in PostHog. They are created and updated daily.
+As an example of decoupling deployment from release, we can look at what we do at PostHog. We deploy many changes behind feature flags and release them after testing them in production. At any time, there are [30+ flags](https://github.com/PostHog/posthog/blob/03eb1dcaec3cf5064a1ace4433f2f77d6676b634/frontend/src/lib/constants.tsx#L118C1-L118C1) in use in PostHog. They are created and updated daily.
 
 ![PostHog's flags](../images/blog/decouple-deployment-from-release/flags.png)
 
-These flags help us test new features in production, roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed without releasing:
+These flags help us dogfood features, roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed without releasing:
 
 - Loading person data from ClickHouse to improve performance.
 - Product-specific onboarding.
@@ -89,15 +89,15 @@ As mentioned, decoupling deployment from release is a best practice. To prove th
 
 ## How you can decouple deployment from release
 
-Now that you understand the merits of decoupling deployments from release, but how do you make this happen? Two of the easiest ways to get started are:
+Now that you understand the merits of decoupling deployments from release and some examples of how top companies do it, how do you make it happen yourself? Two of the easiest ways to get started are:
 
 1. **Feature flags.** Deploy features behind [feature flags](/docs/feature-flags). Use conditional and percentage rollouts to roll out features to the internal team, beta users, and canary release.
 
 2. **Dark launch.** Launch new routes and features, but hide them from users (don’t link or notify them). For example, create a new feature page, don’t link to it anywhere, and access it directly with a link.
 
-Both of these are great ways to start because they are simple. You can apply them to non-breaking changes, get comfortable with the process, and then decouple breaking changes with bigger impacts. Doing this provides an understanding of what code you should test in production and what is good to ship after testing locally.
+Both of these are great ways to start because they are simple. You can apply them to non-breaking changes, get comfortable with the process, and work towards decoupling all changes. Doing this provides an understanding of what code you should test in production and what is good to ship after testing locally.
 
-As you scale further, you can take inspiration from the examples we provided and try:
+As you scale further, you can take inspiration from the examples and try:
 
 - **Staging environment.** Create an environment mimicking production and test changes in it before releasing them to users. Run smoke tests in staging.
 
@@ -105,7 +105,7 @@ As you scale further, you can take inspiration from the examples we provided and
 
 - **Automate testing, monitoring, and alerts.** Track performance, error rate, and other key metrics for newly deployed code. Roll back or alert developers automatically when there is a problem, instead of having them monitor themselves.
 
-Decoupling deployment from release is not static. The requirements change as your team and application change. Aspiring to decouple lowers the risk of released issues, improves developer productivity, and creates a more reliable app. 
+Decoupling deployment from release is an ever-moving goal post. What it means is always changing and the process can always be improved. What stays the same is the benefits of lower risk of released issues, improved developer productivity, and a more reliable app. 
 
 ## Further reading
 
