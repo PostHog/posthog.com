@@ -94,6 +94,10 @@ export const handbookSidebar = [
                 url: '/handbook/company/communication',
             },
             {
+                name: 'Kudos',
+                url: '/handbook/company/kudos',
+            },
+            {
                 name: 'Management',
                 url: '/handbook/company/management',
             },
