@@ -26,7 +26,7 @@ const chapters = [
             { order: '11', name: 'How we got here', to: '/handbook/story' },
             { order: '12', name: 'Where we are now', to: '/handbook/current-status' },
             { order: '13', name: 'Where are we going?', to: '/handbook/future' },
-            { order: '14', name: 'How you can help', to: '/handbook/hello-world' },
+            { order: '14', name: 'How you can help', to: '/handbook/help' },
         ],
     },
 ]
