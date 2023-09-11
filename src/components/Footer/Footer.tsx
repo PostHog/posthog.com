@@ -316,7 +316,7 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 export function Footer(): JSX.Element {
     const social: Social[] = [
         {
-            Icon: <Twitter className="w-6 h-6 box-border fill-current" />,
+            Icon: <Twitter className="w-5 h-5 box-border fill-current" />,
             url: 'https://twitter.com/posthog',
         },
         {
@@ -365,7 +365,7 @@ export function Footer(): JSX.Element {
             </div>
 
             <div className="flex justify-center">
-                <ul className="list-none px-0 py-2 flex space-x-4">
+                <ul className="list-none px-0 py-2 flex space-x-4 items-center">
                     {social.map(({ Icon, url }: Social) => {
                         return (
                             <li key={url}>
