@@ -9,6 +9,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 export default function Hero({
     title,
     subtitle,
+    postHogDoesThat,
     image,
     mainCTA,
     pricingCTA,
@@ -16,6 +17,7 @@ export default function Hero({
 }: {
     title: string
     subtitle: string
+    postHogDoesThat: boolean
     image: {
         image: ImageDataLike
         width: number | string
@@ -42,21 +44,21 @@ export default function Hero({
                     <h1 id="overview" className="text-5xl lg:text-6xl 2xl:text-7xl my-2 md:mt-0">
                         {title}
                     </h1>
-                    <h2 className="opacity-75">PostHog does that.</h2>
+                    {postHogDoesThat && <h2 className="opacity-75">PostHog does that.</h2>}
                     <p
                         className="text-lg font-semibold opacity-70 mt-4"
                         dangerouslySetInnerHTML={{ __html: subtitle }}
                     />
-                    {pricingCTA && mainCTA && (
-                        <div className="flex space-x-3 items-center">
-                            <CallToAction to={mainCTA.url} size="md" className="">
-                                {mainCTA.title}
-                            </CallToAction>
+                    <div className="flex space-x-3 items-center">
+                        <CallToAction to={mainCTA.url} size="md" className="">
+                            {mainCTA.title}
+                        </CallToAction>
+                        {pricingCTA && (
                             <CallToAction type="secondary" to={pricingCTA.url} size="md" className="">
                                 {pricingCTA.title}
                             </CallToAction>
-                        </div>
-                    )}
+                        )}
+                    </div>
                     {customers && customers.nodes.length > 0 && (
                         <ul className="m-0 p-0 list-none mt-16 flex flex-wrap items-center">
                             {customers.nodes.map(({ fields: { slug }, frontmatter: { customer, logo, logoDark } }) => {
