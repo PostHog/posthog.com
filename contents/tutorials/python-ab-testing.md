@@ -96,7 +96,7 @@ posthog = Posthog(
 # ... app, hello_world(), blog()
 ```
 
-In our `blog` route, set up a UUID user ID using a cookie. If the user ID doesn't exist, we generate a new one and set it as a cookie. If it does, we get it from the cookie.
+In our `blog` route, set up a UUID user ID using a cookie. If the user ID doesn't exist, we generate a new one and set it as a cookie. If it does, we get it from the cookie. We use this UUID from the cookie for targeting our A/B test.
 
 With this `user_id` value, we then use PostHog to capture a "liked post" event with a `slug` property.
 
