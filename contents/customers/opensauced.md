@@ -27,7 +27,7 @@ When Brian Douglas left his role as GitHub’s Director of Developer Advocacy in
 
 “I actually added PostHog to OpenSauced even before we started raising money,” says Brian. “That ended up being one of the best things I’d ever done too, because I could track the weekly active users in some of the default insights. It helped me validate the idea even before we started raising and building the team.”
 
-While seeking funding, Brian applied to [PostHog for Startups](/startups) — a program designed to accelerate early-stage teams toward product-market fit as fast as possible. Members receive numerous benefits, including $50,000 in free PostHog credits for the first year (and founder merch too). Armed with this, Brian asked his investor network how he could maximize PostHog’s potential.
+While seeking funding, Brian applied to [PostHog for Startups](/startups) — a program designed to accelerate early-stage teams [toward product-market fit](/blog/product-market-fit-game) as fast as possible. Members receive numerous benefits, including $50,000 in free PostHog credits for the first year (and founder merch too). Armed with this, Brian asked his investor network how he could maximize PostHog’s potential.
 
 “I spoke to Anna Debenham at [boldstart](https://boldstart.vc/) and told her: I’m an engineer, not a product manager,” says Brian. “I explained that we had all this data, but I didn’t know how to slice and dice it. She taught me how to start picking metrics and building insights so we could track things in line with our bottom-up strategy.”
 
