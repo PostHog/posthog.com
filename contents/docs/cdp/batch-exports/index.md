@@ -22,6 +22,7 @@ Batch exports are designed to power any complimentary analytics use cases outsid
 
 Every batch export exports data to a destination using the configuration parameters provided when creating a batch export. The following destinations are currently supported:
 
+* [BigQuery](/docs/cdp/batch-exports/bigquery)
 * [S3](/docs/cdp/batch-exports/s3)
 * [Snowflake](/docs/cdp/batch-exports/snowflake)
 
@@ -68,7 +69,7 @@ Immediately afterwards, the historical export runs that fall within the bounds s
 
 ## How do batch exports work?
 
-As previously mentioned, batch exports are implemented on [Temporal](https://www.temporal.io/). More in detail, each supported destination is defined as a [Temporal Workflow](https://docs.temporal.io/workflows), with a [Workflow Type](https://docs.temporal.io/workflows#workflow-type) that indicates which destination is implemented in it. 
+As previously mentioned, batch exports are implemented on [Temporal](https://www.temporal.io/). More in detail, each supported destination is defined as a [Temporal Workflow](https://docs.temporal.io/workflows), with a [Workflow Type](https://docs.temporal.io/workflows#workflow-type) that indicates which destination is implemented in it.
 
 For example, the Workflow of `s3-export` type contains the code to export data from PostHog to AWS S3. This way, PostHog maintains a map of destinations to Workflow Types, so whenever a user selects a destination, like Snowflake, we can check the map to arrive at the Workflow Type `snowflake-export`.
 
