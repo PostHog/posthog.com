@@ -32,19 +32,13 @@ This means teams often hold deployments until they are confident the code is rea
 
 ## Why should you separate deployment and release?
 
-The coupling of deployment and release can cause two main issues:
+The main issue caused by coupling deployment and release is new code not working as expected in production. Because it is released automatically, this means users are impacted by issues. For example, queries that worked locally timing out on production data.
 
-1. New code may not work as expected. For example, queries that worked locally timing out on production data.
+By preventing new code from automatically releasing after a deployment, you lower the risk of this issue. This is called **decoupling deployment from release**.
 
-2. It breaks other features or the entire app. For example, values created by new features corrupt other data unexpectedly and crashes the app in production.
+Decoupling can lower the risk of issues, increase developer productivity, and improve app reliability. The specific benefits include:
 
-By preventing new code from automatically releasing after a deployment, you lower the risk of these issues. This is called **decoupling deployment from release**.
-
-Doing so enables you to [test your code safely in production](/blog/testing-in-production) and catch any issues before they impact your users.
-
-On top of lowering the risk of issues, decoupling can increase developer productivity and app reliability. The specific benefits include:
-
-- Improves developer confidence knowing they can test in production and that there is an easy way to roll back changes without affecting users.
+- Improves developer confidence knowing they can [test in production](/blog/testing-in-production) and that there is an easy way to roll back changes without affecting users.
 
 - Increase deployment frequency by removing the need to wait for a formal release. 
 
@@ -52,11 +46,11 @@ On top of lowering the risk of issues, decoupling can increase developer product
 
 - Developers can pass off releases to product managers and marketers once they deploy. They can coordinate elaborate launches and stakeholders without holding up development.
 
-- Less downtime from fewer broken releases. Easier rollbacks when an issue does occur because infrastructure (like [feature flags](/feature-flags)) is already in place.
+- Less downtime from broken releases and easier rollbacks when an issue does occur.
 
 ## How we decouple deployment from release at PostHog
 
-As an example of decoupling deployment from release, we can look at what we do at PostHog. We deploy many changes behind feature flags and release them after testing them in production. At any time, there are [30+ flags](https://github.com/PostHog/posthog/blob/03eb1dcaec3cf5064a1ace4433f2f77d6676b634/frontend/src/lib/constants.tsx#L118C1-L118C1) in use in PostHog. They are created and updated daily.
+As an example of decoupling deployment from release, we can look at what we do at PostHog. We deploy many changes behind [feature flags](/feature-flags) and release them after testing them in production. At any time, there are [30+ flags](https://github.com/PostHog/posthog/blob/03eb1dcaec3cf5064a1ace4433f2f77d6676b634/frontend/src/lib/constants.tsx#L118C1-L118C1) in use in PostHog. They are created and updated daily.
 
 ![PostHog's flags](../images/blog/decouple-deployment-from-release/flags.png)
 
