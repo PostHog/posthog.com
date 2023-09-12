@@ -38,7 +38,7 @@ Here's how to set these up so that the app has access only to the dataset it nee
 
 ![Create custom role for batch exports](../../../images/docs/batch-exports/bigquery/create-role.png)
 
-5. Grant the Service Account access to run jobs in your Google Cloud project. This can be done by granting the `BigQuery Jobs User` role on your project, or with the role we have just created in the previous step.
+5. Grant the Service Account access to run jobs in your Google Cloud project. This can be done by granting the `BigQuery Jobs User` role or the role we created in the previous step on your project.
 
 Navigate to IAM and click on Grant Access to arrive at this screen:
 
