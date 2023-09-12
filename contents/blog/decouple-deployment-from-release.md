@@ -87,7 +87,7 @@ Now that you understand the merits of decoupling deployments from release and so
 
 1. **Feature flags.** Deploy features behind [feature flags](/docs/feature-flags). Use conditional rollouts to roll out features to the internal team, beta users, and canary release.
 
-2. **Dark launch.** Launch new routes and features, but hide them from users (don’t link or notify them). For example, create a new feature page and don’t link to it anywhere so that it's only accessable using a direct link (that only your team knows).
+2. **Dark launch.** Launch new routes and features, but hide them from users (don’t link or notify them). For example, create a new feature page and don’t link to it anywhere so that it's only accessible using a direct link (that only your team knows).
 
 Both of these are great ways to start because they are simple. You can apply them to non-breaking changes, get comfortable with the process, and work towards decoupling all changes. Doing this provides an understanding of what code you should test in production and what is good to ship after testing locally.
 
