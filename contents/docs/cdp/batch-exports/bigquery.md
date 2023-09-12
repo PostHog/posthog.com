@@ -81,7 +81,7 @@ This is the schema of all the fields that are exported to BigQuery.
 
 ## Creating the batch export
 
-1. Navigate to the exports page in your PostHog instance (Quick links if you use [PostHog Cloud US](https://app.posthog.com/batch_exports) or [PostHog Cloud EU](https://eu.posthog.com/batch_exports)).
+1. Navigate to the exports page in your PostHog instance (Quick links if you use [PostHog Cloud US](https://app.posthog.com/project/apps?tab=batch_exports) or [PostHog Cloud EU](https://eu.posthog.com/project/apps?tab=batch_exports)).
 2. Click "Create export workflow".
 3. Select **BigQuery** as the batch export destination.
 4. Fill in the necessary [configuration details](#bigquery-configuration).
