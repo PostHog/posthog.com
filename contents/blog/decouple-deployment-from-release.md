@@ -56,8 +56,7 @@ As an example of decoupling deployment from release, we can look at what we do a
 
 These flags help us dogfood features, roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed 5 new features without releasing them.
 
-We also dark launch features using feature flags. This means they are available in production, but hidden from users. For example, they might only be accessible through the API, don’t have navigation links, or only have limited options shown to users.
-
+We also dark launch features using feature flags. This means they are available in production but hidden from users. For example, they might only be accessible through the API, don’t have navigation links, or only have limited options shown to users.
 
 All this enables us to ship and get features into the hands of users faster at PostHog. 
 
