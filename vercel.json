@@ -1086,6 +1086,7 @@
         { "source": "/docs/batch-exports/s3", "destination": "/docs/cdp/batch-exports/s3" },
         { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" },
         { "source": "/blog/startup-golioth", "destination": "/spotlight/startup-golioth" },
-        { "source": "/blog/startup-unified", "destination": "/spotlight/startup-unified" }
+        { "source": "/blog/startup-unified", "destination": "/spotlight/startup-unified" },
+        { "source": "/handbook/engineering", "destination": "/handbook/engineering/developing-locally" }
     ]
 }
