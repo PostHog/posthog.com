@@ -14,7 +14,7 @@ tags:
  - Explainers
 ---
 
-Releasing a big feature can be nerve-racking. When deploying it, you don't know if it will work in production, break your app, or cause issues. Without the right processes in place, the safety of your releases is a big question mark.
+Releasing a big feature can be nerve-racking. When deploying it, you don't know if it will work in production, break your app, or cause other issues. Without the right processes in place, the safety of your releases is a big question mark.
 
 A best practice for improving this is decoupling deployment and release. What does this mean, though? This post goes over the differences between the two, why you should decouple them, examples, and how to get started.
 
@@ -24,7 +24,7 @@ The process of delivering code starts with writing and testing code locally. Aft
 
 Once integrated, the new code deploys. Deployment means getting code from a local machine or repository into production. Your app or build containing the new code becomes available on production infrastructure.
 
-A release is when new code is put into use or made available to users. By default, as soon as code is deployed, it is automatically released. This is because there is nothing preventing users or systems from accessing the new code available on production infrastructure.
+A release is when the new code is made available to users. By default, as soon as code is deployed, it is automatically released. This is because there is nothing preventing users or systems from accessing the new code available on production infrastructure.
 
 This means teams often hold deployments until they are confident the code is ready to release.
 
@@ -34,13 +34,13 @@ This means teams often hold deployments until they are confident the code is rea
 
 The coupling of deployment and release can cause two main issues:
 
-1. New code doesn't work as expected. For example, a value saving locally but not in production due to an unexpected interaction with the production database.
+1. New code may not work as expected. For example, queries that worked locally timing out on production data.
 
 2. It breaks other features or the entire app. For example, values created by new features corrupt other data unexpectedly and crashes the app in production.
 
-By preventing new code from automatically releasing after a deployment, you lower the risk of these issues. This is known as **decoupling deployment from release**.
+By preventing new code from automatically releasing after a deployment, you lower the risk of these issues. This is called **decoupling deployment from release**.
 
-Doing this enables [testing code in production](/blog/testing-in-production). This process helps you discover issues arising from production infrastructure and the new code's integration with the real release.
+Doing so enables you to [test your code safely in production](/blog/testing-in-production) and catch any issues before they impact your users.
 
 On top of lowering the risk of issues, decoupling can increase developer productivity and app reliability. The specific benefits include:
 
@@ -60,18 +60,12 @@ As an example of decoupling deployment from release, we can look at what we do a
 
 ![PostHog's flags](../images/blog/decouple-deployment-from-release/flags.png)
 
-These flags help us dogfood features, roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed without releasing:
+These flags help us dogfood features, roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed 5 new features without releasing them.
 
-- Loading person data from ClickHouse to improve performance.
-- Product-specific onboarding.
-- A frontend for the new batch export system.
-- Additional person and group options on dashboards for our customer success team.
+We also dark launch features using feature flags. This means they are available in production, but hidden from users. For example, they might only be accessible through the API, don’t have navigation links, or only have limited options shown to users.
 
-We also dark launch features such as our upgraded batch exports system and data warehouse. This might mean they are only accessible through the API, don’t have navigation links, or only have limited options in the released code.
 
-Each of these changes runs through an extensive testing suite locally and on pull requests. This includes unit, integration, end-to-end, and visual tests. This enables us to be confident when deploying in the first place.
-
-Decoupling deployment from release enables us to ship and get features into the hands of users faster at PostHog. 
+All this enables us to ship and get features into the hands of users faster at PostHog. 
 
 ## How top companies decouple deployment from release
 
@@ -91,9 +85,9 @@ As mentioned, decoupling deployment from release is a best practice. To prove th
 
 Now that you understand the merits of decoupling deployments from release and some examples of how top companies do it, how do you make it happen yourself? Two of the easiest ways to get started are:
 
-1. **Feature flags.** Deploy features behind [feature flags](/docs/feature-flags). Use conditional and percentage rollouts to roll out features to the internal team, beta users, and canary release.
+1. **Feature flags.** Deploy features behind [feature flags](/docs/feature-flags). Use conditional rollouts to roll out features to the internal team, beta users, and canary release.
 
-2. **Dark launch.** Launch new routes and features, but hide them from users (don’t link or notify them). For example, create a new feature page, don’t link to it anywhere, and access it directly with a link.
+2. **Dark launch.** Launch new routes and features, but hide them from users (don’t link or notify them). For example, create a new feature page and don’t link to it anywhere so that it's only accessable using a direct link (that only your team knows).
 
 Both of these are great ways to start because they are simple. You can apply them to non-breaking changes, get comfortable with the process, and work towards decoupling all changes. Doing this provides an understanding of what code you should test in production and what is good to ship after testing locally.
 
