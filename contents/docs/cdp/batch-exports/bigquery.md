@@ -10,23 +10,7 @@ availability:
 
 Batch exports can be used to export data to a BigQuery table.
 
-## Creating the batch export
-
-1. Navigate to the exports page in your PostHog instance (Quick links if you use [PostHog Cloud US](https://app.posthog.com/batch_exports) or [PostHog Cloud EU](https://eu.posthog.com/batch_exports)).
-2. Click "Create export workflow".
-3. Select **BigQuery** as the batch export destination.
-4. Fill in the necessary [configuration details](#bigquery-configuration).
-5. Finalize the creation by clicking on "Create".
-6. Done! The batch export will schedule its first run on the start of the next period.
-
-## BigQuery configuration
-
-Configuring a batch export targeting BigQuery requires the following BigQuery-specific configuration values:
-* **Table ID:** The ID of a BigQuery table where to export the data. This is not the fully-qualified name of a table, so omit the dataset and project IDs. For example for the fully-qualified table name `project-123:dataset:MyExportTable` only `MyExporTable` is to be used as the table ID.
-* **Dataset ID:** The ID of a BigQuery dataset where the table to export the data is located. Only the dataset ID is required, so omit the project ID. For example for the dataset `project-123:my-dataset` only `my-dataset` is to be used as the dataset ID.
-* **Google Cloud JSON key file:** In order to access your BigQuery instance, we use a Service Account. When creating one, a JSON key file will be generated. That JSON file needs to be uploaded here. See [here](#setting-up-bigquery-access) for more information.
-
-### Setting up BigQuery access
+## Setting up BigQuery access
 
 To set the right permissions up for a batch export targeting BigQuery, you will need:
 
@@ -94,3 +78,19 @@ This is the schema of all the fields that are exported to BigQuery.
 | site_url              | `STRING`    | The $current_url property of the event                                           |
 | timestamp             | `TIMESTAMP` | The timestamp associated with an event                                           |
 | bq_ingested_timestamp | `TIMESTAMP` | The timestamp when the event was sent to BigQuery                                |
+
+## Creating the batch export
+
+1. Navigate to the exports page in your PostHog instance (Quick links if you use [PostHog Cloud US](https://app.posthog.com/batch_exports) or [PostHog Cloud EU](https://eu.posthog.com/batch_exports)).
+2. Click "Create export workflow".
+3. Select **BigQuery** as the batch export destination.
+4. Fill in the necessary [configuration details](#bigquery-configuration).
+5. Finalize the creation by clicking on "Create".
+6. Done! The batch export will schedule its first run on the start of the next period.
+
+## BigQuery configuration
+
+Configuring a batch export targeting BigQuery requires the following BigQuery-specific configuration values:
+* **Table ID:** The ID of a BigQuery table where to export the data. This is not the fully-qualified name of a table, so omit the dataset and project IDs. For example for the fully-qualified table name `project-123:dataset:MyExportTable` only `MyExporTable` is to be used as the table ID.
+* **Dataset ID:** The ID of a BigQuery dataset where the table to export the data is located. Only the dataset ID is required, so omit the project ID. For example for the dataset `project-123:my-dataset` only `my-dataset` is to be used as the dataset ID.
+* **Google Cloud JSON key file:** In order to access your BigQuery instance, we use a Service Account. When creating one, a JSON key file will be generated. That JSON file needs to be uploaded here. See [here](#setting-up-bigquery-access) for more information.
