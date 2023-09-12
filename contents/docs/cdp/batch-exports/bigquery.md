@@ -58,7 +58,7 @@ Grant either the `BigQuery Data Owner` role, or your custom role created in step
 
 ![Sharing dataset](../../../images/docs/batch-exports/bigquery/dataset-grant-access.png)
 
-8. All done! After completing these steps you can create a BigQuery batch export and your data will start flowing from PostHog to BigQuery.
+8. All done! After completing these steps you can create a BigQuery [batch export in PostHog](https://app.posthog.com/project/apps?tab=batch_exports) and your data will start flowing from PostHog to BigQuery.
 
 ## Event schema
 
