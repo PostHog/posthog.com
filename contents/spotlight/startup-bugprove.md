@@ -13,7 +13,7 @@ category: Startups
 
 > Each month, we speak to a team enrolled in [PostHog for Startups](/startups) about the way they work and the challenges they face. This month we spoke to Bugprove about their approach to developer and influencer marketing. 
 
-[Bugprove](https://bugprove.com/) is a firmware analysis platform for IoT devices which helps security researchers and manufacturers meet their compliance needs. Since 2022 it’s helped teams scan for vulnerabilities, fix them with AI, and monitor emerging threats. 
+[Bugprove](https://bugprove.com/) is a firmware analysis platform for IoT devices which helps security researchers and manufacturers meet their compliance needs. It helps teams scan for vulnerabilities, fix them with AI, and monitor emerging threats. 
 
 Yet, as a niche developer tool focused mainly on security researchers, it faces a significant challenge: how can it effectively reach its target audience and establish itself without wasting money?
 
