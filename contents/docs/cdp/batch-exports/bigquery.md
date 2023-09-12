@@ -29,7 +29,7 @@ Configuring a batch export targeting BigQuery requires the following BigQuery-sp
 
 ### Setting up BigQuery access
 
-To set the right permissions up for a batch export targetting BigQuery, you will need:
+To set the right permissions up for a batch export targeting BigQuery, you will need:
 
 1. A Service Account.
 2. A dataset which has permissions allowing the service account to access it.
@@ -57,7 +57,7 @@ Here's how to set these up so that the app has access only to the dataset it nee
 
 5. Grant the Service Account access to run jobs in your Google Cloud project. This can be done by granting the `BigQuery Jobs User` role on your project, or with the role we have just created in the previous step.
 
-Navigate to IAM and click on Grant Acess to arrive at this screen:
+Navigate to IAM and click on Grant Access to arrive at this screen:
 
 ![Project grant](../../images/docs/batch-exports/bigquery/project-grant.png)
 
