@@ -1,6 +1,6 @@
 ---
 title: "How Bugprove uses influencer marketing to grow word of mouth"
-date: 2023-08-31
+date: 2023-09-13
 author: ["joe-martin"]
 showTitle: true
 rootpage: /blog
