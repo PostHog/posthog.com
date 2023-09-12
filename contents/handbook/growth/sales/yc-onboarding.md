@@ -21,6 +21,8 @@ For startups in the W23 batch:
   - Pair with you to ensure you pass calls correctly
 - Get the batphone - CEO on whatsapp/text
 
+If a founder refers us to another YC company, both founders get an additional $5k of credit for PostHog Cloud plus a copy of the PMF guide. 
+
 For previous batches:
 
 - Get $50k of credit for PostHog Cloud for 12 months ($25k / 6 months for anyone not in the last 4 batches).
