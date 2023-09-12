@@ -2309,6 +2309,10 @@ export const docsMenu = {
                             name: 'Snowflake',
                             url: '/docs/cdp/batch-exports/snowflake',
                         },
+                        {
+                            name: 'BigQuery',
+                            url: '/docs/cdp/batch-exports/bigquery',
+                        },
                     ],
                 },
                 {
