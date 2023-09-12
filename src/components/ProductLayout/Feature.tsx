@@ -33,7 +33,7 @@ export const FeatureGrid = ({ features, className = '' }: IFeatureGridProps) => 
     return (
         <SectionWrapper className="max-w-full">
             <ul
-                className={`grid list-none m-0 max-w-screen-4xl space-y-8 md:space-y-0 mx-auto p-0 ${getTailwindGridCol(
+                className={`grid list-none m-0 max-w-screen-4xl mx-auto p-0 gap-4 ${getTailwindGridCol(
                     length
                 )} ${className}`}
             >
@@ -56,7 +56,7 @@ export const FeatureDescription = ({ children, className = '' }: { children: Rea
 export const Feature = ({ title, description, className = '', icon }: IFeature) => {
     const Icon = ProductIcons[icon] || NotProductIcons[icon]
     return (
-        <li className={`sm:p-6 sm:pb-8  ${className}`}>
+        <li className={`bg-accent dark:bg-accent-dark rounded-lg sm:p-6 sm:pb-8  ${className}`}>
             {Icon && <Icon className="w-10 h-10 mb-4 opacity-50" />}
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
