@@ -64,20 +64,20 @@ Grant either the `BigQuery Data Owner` role, or your custom role created in step
 
 This is the schema of all the fields that are exported to BigQuery.
 
-| Field                 | Type        | Description                                                                      |
-|-----------------------|-------------|----------------------------------------------------------------------------------|
-| uuid                  | `STRING`    | The unique ID of the event within PostHog                                        |
-| event                 | `STRING`    | The name of the event that was sent                                              |
-| properties            | `STRING`    | A JSON object with all the properties sent along with an event                   |
-| elements              | `STRING`    | A string of elements surrounding an [autocaptured](/docs/data/autocapture) event |
-| set                   | `STRING`    | A JSON object with any person properties sent with the `$set` field              |
-| set_once              | `STRING`    | A JSON object with any person properties sent with the `$set_once` field         |
-| distinct_id           | `STRING`    | The `distinct_id` of the user who sent the event                                 |
-| team_id               | `STRING`    | The `team_id` for the event                                                      |
-| ip                    | `STRING`    | The IP address that was sent with the event                                      |
-| site_url              | `STRING`    | The $current_url property of the event                                           |
-| timestamp             | `TIMESTAMP` | The timestamp associated with an event                                           |
-| bq_ingested_timestamp | `TIMESTAMP` | The timestamp when the event was sent to BigQuery                                |
+| Field                 | Type        | Description                                                                                                         |
+|-----------------------|-------------|---------------------------------------------------------------------------------------------------------------------|
+| uuid                  | `STRING`    | The unique ID of the event within PostHog                                                                           |
+| event                 | `STRING`    | The name of the event that was sent                                                                                 |
+| properties            | `STRING`    | A JSON object with all the properties sent along with an event                                                      |
+| elements              | `STRING`    | A string of elements surrounding an [autocaptured](/docs/data/autocapture) event                                    |
+| set                   | `STRING`    | A JSON object with any person properties sent with the `$set` field                                                 |
+| set_once              | `STRING`    | A JSON object with any person properties sent with the `$set_once` field                                            |
+| distinct_id           | `STRING`    | The `distinct_id` of the user who sent the event                                                                    |
+| team_id               | `STRING`    | The `team_id` for the event                                                                                         |
+| ip                    | `STRING`    | The IP address that was sent with the event                                                                         |
+| site_url              | `STRING`    | The $current_url property of the event. This field has been kept for backwards compatibility and will be deprecated |
+| timestamp             | `TIMESTAMP` | The timestamp associated with an event                                                                              |
+| bq_ingested_timestamp | `TIMESTAMP` | The timestamp when the event was sent to BigQuery                                                                   |
 
 ## Creating the batch export
 
