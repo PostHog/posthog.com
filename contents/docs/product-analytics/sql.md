@@ -6,14 +6,14 @@ availability:
     enterprise: full
 ---
 
-SQL insights enable you to directly access data in PostHog using SQL queries. They're powered by [HogQL](/docs/hogql).
-
+SQL insights enable you to directly access data in PostHog using [SQL queries](/blog/sql-for-analytics). They're powered by [HogQL](/docs/hogql).
 
 ## SQL commands
 
 You create SQL queries out of a list of commands that shape what data, filters, aggregations, and ordering we want to see. 
 
 > SQL queries in PostHog don’t require the trailing semi-colon (`;`) of traditional SQL queries.
+
 ### SELECT
 
 Use `SELECT` to select data (usually columns, transformations, or aggregations) from one or more tables in the database.
@@ -180,7 +180,7 @@ HogQL provides many functions for accessing, modifying, and calculating data fro
 
 You can find a full list of these in [supported ClickHouse functions](/docs/hogql/clickhouse-functions).
 
-### JSON
+#### JSON
 
 You can access nested data in JSON and objects directly.
 
@@ -205,7 +205,7 @@ Specialized `JSONExtract` functions exist for different data types including:
 - `JSONExtractString`
 - `JSONExtractBool`
 
-### Array
+#### Array
 
 - `arrayElement(arr, n)`: Retrieves the element with the index of n from the array `arr`.
 - `arrayJoin(arr)`: Takes a row and generates multiple rows for the number of elements in the array. It copies all the column values, except the column where this function is applied. It replaces the applied column with the corresponding array value.
@@ -221,7 +221,7 @@ GROUP BY flag
 ORDER BY count() desc
 ```
 
-### Date and time
+#### Date and time
 
 - `now()`, `today()`, `yesterday()`: Returns the current time, date, or yesterday’s date respectively.
 - `interval`: A length of time for use in arithmetic operations with other dates and times.
@@ -241,7 +241,7 @@ WHERE timestamp > now() - interval 1 day
 
 > Read more examples in [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns) and [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters).
 
-### String
+#### String
 
 - `extract`: Extracts a fragment of a string using a regular expression.
 - `concat`: Concatenates strings listed without separator.
@@ -259,7 +259,7 @@ from events
 where event = '$autocapture'
 ```
 
-### Sparkline
+#### Sparkline
 
 A sparkline is a tiny graph contained in one cell of your query result. As an argument, it takes an array of integers.
 

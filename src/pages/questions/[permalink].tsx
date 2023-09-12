@@ -21,7 +21,7 @@ type QuestionPageProps = {
 
 export default function QuestionPage(props: QuestionPageProps) {
     const { permalink } = props?.params || {}
-    const { question, isLoading } = useQuestion(permalink)
+    const { question, isLoading, mutate } = useQuestion(permalink)
     const { user, isModerator } = useUser()
     const { removeTopic } = useQuestion(permalink)
 
@@ -110,7 +110,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                                 question.attributes.zendeskTicketID ? 'grid-cols-2' : ''
                             }`}
                         >
-                            <ZendeskTicket question={question} questionID={question.id} />
+                            <ZendeskTicket mutateQuestion={mutate} question={question} questionID={question.id} />
                             <div className={`pt-4 ${question.attributes.zendeskTicketID ? 'pl-4' : ''}`}>
                                 <div className="flex items-center justify-between mb-2">
                                     <h4 className="text-xs text-primary dark:text-primary-dark opacity-70 p-0 m-0 font-semibold uppercase">

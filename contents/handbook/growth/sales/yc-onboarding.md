@@ -15,11 +15,13 @@ We want to support other YC companies using PostHog because:
 For startups in the W23 batch:
 
 - Get $50k of credit for PostHog Cloud for 12 months
-- Choose between a free pair of Airpods or a Timbuk2 backpack
+- _All founders_ get a Timbuk2 backpack
 - Book into a free YC group setup session where we will…
   - Build a dashboard for the batch with your product growth metrics
   - Pair with you to ensure you pass calls correctly
 - Get the batphone - CEO on whatsapp/text
+
+If a founder refers us to another YC company, both founders get an additional $5k of credit for PostHog Cloud plus a copy of the PMF guide. 
 
 For previous batches:
 
