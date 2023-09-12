@@ -12,7 +12,7 @@ Batch exports can be used to export data to a BigQuery table.
 
 ## Setting up BigQuery access
 
-To set the right permissions up for a batch export targeting BigQuery, you will need:
+To set up the right permissions for a batch export targeting BigQuery, you need:
 
 1. A Service Account.
 2. A dataset which has permissions allowing the service account to access it.
