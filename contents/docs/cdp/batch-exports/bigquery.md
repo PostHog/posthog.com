@@ -94,4 +94,4 @@ Configuring a batch export targeting BigQuery requires the following BigQuery-sp
 * **Table ID:** The ID of the destination BigQuery table. This is not the fully-qualified name of a table, so omit the dataset and project IDs. For example for the fully-qualified table name `project-123:dataset:MyExportTable`, use only `MyExportTable` as the table ID.
 
 * **Dataset ID:** The ID of a BigQuery dataset where the table to export the data is located. Only the dataset ID is required, so omit the project ID. For example for the dataset `project-123:my-dataset` only `my-dataset` is to be used as the dataset ID.
-* **Google Cloud JSON key file:** In order to access your BigQuery instance, we use a Service Account. When creating one, a JSON key file will be generated. That JSON file needs to be uploaded here. See [here](#setting-up-bigquery-access) for more information.
+* **Google Cloud JSON key file:** The JSON key file for your BigQuery Service Account to access your instance. Generated on Service Account creation. See [here](#setting-up-bigquery-access) for more information.
