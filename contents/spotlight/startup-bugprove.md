@@ -45,7 +45,7 @@ The best route, according to Dora, is to let go of the reins and remember that i
 
 “So, he goes on, tries the tool, and we were just hoping that it would work well. Then he uses dark mode and we just weren’t ready for that at that point. It looked bad and our poor product designer almost fainted. Luckily, John found it funny and switched back to light mode and it worked great from then on. It was an authentic moment, so we were happy with it in the end.”
 
-(Bugprove has since made improvements to dark mode.)
+(Bugprove is planning to make improvements to dark mode in the near future.)
 
 > **Putting it into practice:** Trying to enforce strict brand guidelines or scripts will only stymie collaboration. It’s better to let influencers lead on how to best communicate your message to their audience if you can. 
 
