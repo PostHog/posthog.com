@@ -2701,6 +2701,12 @@ const menu = [
                     { name: 'Questions', url: '/ab-testing/questions' },
                 ],
             },
+            {
+                name: 'Product OS',
+                icon: 'Stack',
+                color: 'salmon',
+                url: '/product-os',
+            },
         ],
     },
     pricingMenu,
