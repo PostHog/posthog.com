@@ -17,7 +17,7 @@ toolsUsed:
 date: 2023-09-01
 ---
 
-Snappy is an employee and customer giving platform which in early 2023 faced a problem familiar to most fast-growing startups — teams had chosen their own tools and data had become fragmented across many different products and disciplines. 
+Snappy is an employee and customer giving platform. In early 2023, it faced a problem familiar to most fast-growing startups — teams had chosen their own tools and data had become fragmented across many different products and disciplines. 
 
 Feature flags, for example, were overseen by the product team yet managed in LaunchDarkly by the engineering team. Surveys were housed in UserSnap; product data was siloed in Amplitude, and the B2B and B2C teams had different processes for analysis and session replays. 
 
