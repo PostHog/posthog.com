@@ -45,7 +45,7 @@ export default function useMenu(): { activeMenu: IMenu[]; defaultMenu: IMenu[] }
         })
         return {
             name: label,
-            url: `/${categoryFolder}`,
+            url: children.length > 0 ? '' : `/${categoryFolder}`,
             ...(children.length > 0 ? { children } : null),
         }
     })
