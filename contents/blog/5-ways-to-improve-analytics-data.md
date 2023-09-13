@@ -1,6 +1,6 @@
 ---
 date: 2023-09-13
-title: 5 ways to improve your analytics data
+title: 5 ways to improve your product analytics data
 rootPage: /blog
 sidebar: Blog
 showTitle: true
