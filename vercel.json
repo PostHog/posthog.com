@@ -938,9 +938,9 @@
             "destination": "/docs/experiments/running-experiments-without-feature-flags"
         },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
-        { "source": "/docs/apps/feedback-widget", "destination": "/docs/surveys/manual" },
+        { "source": "/docs/apps/feedback-widget", "destination": "/docs/surveys/" },
         { "source": "/apps/feedback-widget", "destination": "/docs/surveys" },
-        { "source": "/apps/user-interviewer", "destination": "/docs/surveys/manual" },
+        { "source": "/apps/user-interviewer", "destination": "/docs/surveys/" },
         { "source": "/jobs", "destination": "/careers" },
         {
             "source": "/docs/getting-started/estimating-usage-costs",
