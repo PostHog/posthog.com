@@ -2,8 +2,9 @@ import { ArrowLeft, ArrowRight } from '@posthog/icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useRef } from 'react'
 import Link from 'components/Link'
+import { CardItemInterface, CardItemType } from 'types'
 
-const cards = [
+const cards: CardItemType = [
     {
         top: 'You enjoy "jumping on a quick call" with sales',
         bottom: (
@@ -20,7 +21,14 @@ const cards = [
             </>
         ),
         color: '#FFD89E',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/i-love-telemarketing.png" />,
+        Image: (
+            <StaticImage
+                alt="i-love-telemarketing.png"
+                quality={100}
+                placeholder="none"
+                src="./images/i-love-telemarketing.png"
+            />
+        ),
         ImageSize: 'w-[calc(100%_+_5rem)] -mt-4',
     },
     {
@@ -35,7 +43,9 @@ const cards = [
             </>
         ),
         color: '#DCE7D0',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/wasting-money.png" />,
+        Image: (
+            <StaticImage alt="wasting-money.png" quality={100} placeholder="none" src="./images/wasting-money.png" />
+        ),
         ImageSize: 'w-full mt-8',
     },
     {
@@ -55,21 +65,28 @@ const cards = [
             </>
         ),
         color: '#D9E1FC',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/try-buy.png" />,
+        Image: <StaticImage alt="try-buy.png" quality={100} placeholder="none" src="./images/try-buy.png" />,
         ImageSize: 'w-[240px] -mt-4',
     },
     {
         top: 'You think your email is a good trade for that free whitepaper',
         bottom: <>Please press Ctrl + W now, or ask your network administrator to close your window.</>,
         color: '#FDBAF2',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/bad-trade.png" />,
+        Image: <StaticImage alt="bad-trade.png" quality={100} placeholder="none" src="./images/bad-trade.png" />,
         ImageSize: 'w-full mt-4',
     },
     {
         top: 'You give out your credit card details to strangers',
         bottom: <>You'd rather buy a product you've never used instead of a generous free trial?</>,
         color: '#FFD89E',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/stranger-danger.png" />,
+        Image: (
+            <StaticImage
+                alt="stranger-danger.png"
+                quality={100}
+                placeholder="none"
+                src="./images/stranger-danger.png"
+            />
+        ),
         ImageSize: 'w-[230px] mt-6',
     },
     {
@@ -84,7 +101,14 @@ const cards = [
             </>
         ),
         color: '#DCE7D0',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/commitment-issues.png" />,
+        Image: (
+            <StaticImage
+                alt="commitment-issues.png"
+                quality={100}
+                placeholder="none"
+                src="./images/commitment-issues.png"
+            />
+        ),
         ImageSize: 'w-full mt-4',
     },
     {
@@ -99,28 +123,37 @@ const cards = [
             </>
         ),
         color: '#D9E1FC',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/i-hate-change.png" />,
+        Image: (
+            <StaticImage alt="i-hate-change.png" quality={100} placeholder="none" src="./images/i-hate-change.png" />
+        ),
         ImageSize: 'w-full',
     },
     {
         top: "You'd rather buy disparate tools and mangle them together",
         bottom: <>Apologies. Our focus is for you to engineer your product, not your data.</>,
         color: '#FDBAF2',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/mangle.png" />,
+        Image: <StaticImage alt="mangle.png" quality={100} placeholder="none" src="./images/mangle.png" />,
         ImageSize: 'w-[230px] mt-6',
     },
     {
         top: 'You like buying a whole product suite to get access to one tool',
         bottom: <>Alas we don't force people to buy stuff they don't use. We suit people who want to pay by product.</>,
         color: '#FFD89E',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/creative-suite-sucks.png" />,
+        Image: (
+            <StaticImage
+                alt="creative-suite-sucks.png"
+                quality={100}
+                placeholder="none"
+                src="./images/creative-suite-sucks.png"
+            />
+        ),
         ImageSize: 'w-[230px] mt-4',
     },
     {
         top: 'You think CSMs are your friends',
         bottom: <>Honey, those emails are automated.</>,
         color: '#D9E1FC',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/csms.png" />,
+        Image: <StaticImage alt="csms.png" quality={100} placeholder="none" src="./images/csms.png" />,
         ImageSize: 'w-[230px] mt-8',
     },
     {
@@ -139,21 +172,21 @@ const cards = [
             </>
         ),
         color: '#FFD89E',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/training.png" />,
+        Image: <StaticImage alt="training.png" quality={100} placeholder="none" src="./images/training.png" />,
         ImageSize: 'w-[250px] mt-8',
     },
     {
         top: "Data privacy isn't a big deal to you. (GDP-what now?)",
         bottom: <>Get cookie-less tracking, regional hosting, and raw database access.</>,
         color: '#FDBAF2',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/gdpwut.png" />,
+        Image: <StaticImage alt="gdpwut.png" quality={100} placeholder="none" src="./images/gdpwut.png" />,
         ImageSize: 'w-[250px] mt-8',
     },
     {
         top: 'Networking events are your things',
         bottom: <>We put on an event once. It was a disaster. Never again.</>,
         color: '#FFD89E',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/ru-bizdev.png" />,
+        Image: <StaticImage alt="ru-bizdev.png" quality={100} placeholder="none" src="./images/ru-bizdev.png" />,
         ImageSize: 'w-[250px]',
     },
     {
@@ -176,12 +209,12 @@ const cards = [
             </>
         ),
         color: '#DCE7D0',
-        Image: <StaticImage quality={100} placeholder="none" src="./images/loop-hole.png" />,
+        Image: <StaticImage alt="loop-hole.png" quality={100} placeholder="none" src="./images/loop-hole.png" />,
         ImageSize: 'w-full',
     },
 ]
 
-const Card = ({ top, bottom, Image, ImageSize, color }) => {
+const Card = ({ top, bottom, Image, ImageSize, color }: CardItemInterface) => {
     return (
         <li
             style={{ backgroundColor: color || 'white' }}

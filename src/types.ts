@@ -166,3 +166,13 @@ export enum AvailableFeature {
     INVOICE_PAYMENTS = 'invoice_payments',
     SUPPORT_SLAS = 'support_slas',
 }
+
+export interface CardItemInterface {
+    top: string | JSX.Element
+    bottom: JSX.Element
+    color: string
+    Image: JSX.Element
+    ImageSize: string
+}
+
+export type CardItemType = CardItemInterface[]
