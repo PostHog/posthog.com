@@ -29,7 +29,7 @@ One week later than originally promised... welcome to the first HogMail of 2023.
 
 - [How to track performance marketing in PostHog](https://posthog.com/tutorials/performance-marketing): How to set up UTM tracking for your campaigns and attribution. See also: [how our marketing team uses PostHog](https://posthog.com/blog/posthog-marketing).
 
-- [How to do a canary release using PostHog](https://posthog.com/tutorials/canary-release): Step-by-step guide to gradually rolling out a new feature release.
+- [How to do a canary release using PostHog](/tutorials/canary-release): Step-by-step guide to gradually rolling out a new feature release.
 
 ## #talking-points
 

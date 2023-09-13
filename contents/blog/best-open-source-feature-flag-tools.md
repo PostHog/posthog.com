@@ -121,7 +121,7 @@ Harness has several open source options depending on company size and the level 
 
 ![unleash](../images/blog/open-source-feature-flags/unleash.png)
 
-[Unleash](https://www.getunleash.io/) lets you safely test and release new features with defined rules. The platform removes pressure from developers and lets them play around with features safely. The Canary release feature allows you to strategically manage gradual rollouts, identify issues and use kill switches to roll back in seconds. Unleash is not an analytics platform, and you’ll need to connect a third-party platform to visualize analytics on experiments like A/B tests.
+[Unleash](https://www.getunleash.io/) lets you safely test and release new features with defined rules. The platform removes pressure from developers and lets them play around with features safely. The [canary release](/tutorials/canary-release) feature allows you to strategically manage gradual rollouts, identify issues and use kill switches to roll back in seconds. Unleash is not an analytics platform, and you’ll need to connect a third-party platform to visualize analytics on experiments like A/B tests.
 
 ### Who is Unleash for?
 
