@@ -14,13 +14,13 @@ showTitle: true
 ### Other companies
 
 * Atlassian - multi product, inbound, dev centric company, totally dominant in their categories, scaled way beyond $1bn
-* AWS - multi product, pricing model, ux (!)
+* AWS - multi product, pricing model, UX (!)
 * Pager Duty - pricing model, product led growth
 * Hubspot - built a $25bn company despite competing with Salesforce
-* GitLab - whilst we run _very_ differently and have a different business model, we were inspired by their transparency
-* Sentry - branding and bottom up approach
+* GitLab - while we run _very_ differently and have a different business model, we were inspired by their transparency
+* Sentry - branding and bottom-up approach
 * Algolia - developers doing marketing
-* GitHub - enterprise go to market is 200 developers forcing their company to buy us
+* GitHub - enterprise go-to-market is 200 developers forcing their company to buy us
 
 ## Timeline
 
@@ -100,15 +100,15 @@ We've now got 2 Customer Success people dealing with all (inbound) requests. We 
 
 We had a fantastic year. While the tech market crashed, we grew 6x and reached $MM in revenue, with a sub-2 month CAC payback period. We're now aiming to hit $10M ARR as our next goal, with a gross margin of 70% - both of which should mean we've got all the metrics needed for the next fundraise.
 
-We optimized revenue growth, through implementing a product-led CRM for our customer success team, adding to our marketing team size, and creating a 2-person growth engineering team. These teams all make a big difference!
+We optimized revenue growth by implementing a product-led CRM for our customer success team, adding to our marketing team size, and creating a 2-person growth engineering team. These teams all make a big difference!
 
 We deepened all of our product areas significantly - we're frequently winning as a standalone session recording, feature flagging or experimentation tool. Session recording usage started to match product analytics usage.
 
-Our infra is far more stable and scalable - much more of it runs as code. We can now offer EU- or US-based hosting for our customers' data.
+Our infrastructure is far more stable and scalable - much more of it runs as code. We can now offer EU- or US-based hosting for our customers' data.
 
 We're 38 people in lots of countries. We're not adding lots of headcount over the next 12 months though - we're staying lean and letting revenue continue to rise rapidly. 
 
-### Feb 2023: focus on mass adoption
+### Feb 2023: Focus on mass adoption
 
 We're very doing well at monetizing high-growth startups due to our optimization work, averaging over 15% MoM for the last 6 months. 
 
@@ -116,18 +116,18 @@ We've decided to double down on mass adoption of the platform in high potential 
 
 In the product, we're working on making the experience slicker, and we have plans for a standlone quality CDP in Q2.
 
-### March 2023: decided to ship a warehouse
+### March 2023: Decided to ship a warehouse
 
-For a long time, we were happy competing with lots of $1bn-2bn companies, each providing point solutions. We felt our market was just the sum of all of theirs.
+For a long time, we were happy competing with lots of $1-2 billion companies, each providing point solutions. We felt our market was just the sum of all of theirs.
 
-But we kept seeing companies streaming their PostHog data to a warehouse - such as [BigQuery](https://cloud.google.com/bigquery). We even lost our then largest customer for this reason - we their source of truth became their warehouse instead of PostHog.
+But we kept seeing companies streaming their PostHog data to a warehouse - such as [BigQuery](https://cloud.google.com/bigquery). We even lost our then-largest customer for this reason - where their source of truth became their warehouse instead of PostHog.
 
 So... we decided we would ship our own warehouse so we would remain the source of truth for customer and product data. This would let us offer a better integrated offering to our customers, and it'd mean we could work on a bigger challenge.
 
-### Aug 2023: growth continues
+### Aug 2023: Growth continues
 
 We've doubled revenue so far this year without any increase in headcount. We've hit 15.7% MoM for the last 12 months. Our CAC payback is now just 5 days. Our numbers are exceptional. We even discounted several of our products. We've added 10 extra roles and will be profitable in around a year.
 
-We have user surveys and the warehouse in private beta.
+We have user surveys and the data warehouse in private beta.
 
-Our infra has become pleasingly stable. The biggest challenge is scaling our data pipeline and making sure we give as much responsibility as we can to each small team owning each product for their own pipelines, where rational to do so.
+Our infrastructure has become pleasingly stable. The biggest challenge is scaling our data pipeline and making sure we give as much responsibility as we can to each small team owning each product for their own pipelines, where rational to do so.
