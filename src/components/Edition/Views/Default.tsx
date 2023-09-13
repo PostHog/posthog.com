@@ -165,7 +165,7 @@ const Post = ({
     )
 }
 
-const Skeleton = () => {
+export const Skeleton = () => {
     return (
         <div className="flex space-x-4 items-center pt-4">
             <div className="flex-shrink-0">

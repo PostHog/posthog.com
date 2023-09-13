@@ -21,6 +21,7 @@ import MobileNav from 'components/PostLayout/MobileNav'
 import Default from './Views/Default'
 import Blog from './Views/Blog'
 import Newsletter from './Views/Newsletter'
+import Customers from './Views/Customers'
 dayjs.extend(relativeTime)
 
 const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>, 'meta'> }) => {
@@ -105,24 +106,17 @@ const menusByRoot = {
     tutorials: communityMenu.children[2],
 }
 
-const isListingView = (pathname: string, children?: IMenu[]): boolean | undefined => {
-    return (
-        children &&
-        children.some((child: IMenu) => {
-            return child.url === pathname || isListingView(pathname, child.children)
-        })
-    )
-}
-
-export default function Posts({ children, pageContext: { selectedTag: initialTag, title } }) {
+export default function Posts({
+    children,
+    pageContext: { selectedTag: initialTag, title, article: articleView = true },
+}) {
     const [loginModalOpen, setLoginModalOpen] = useState(false)
     const { pathname } = useLocation()
     const [newPostModalOpen, setNewPostModalOpen] = useState(false)
-    const [root, setRoot] = useState(pathname.split('/')[1])
+    const [root, setRoot] = useState(pathname.split('/')[1] !== 'posts' ? pathname.split('/')[1] : undefined)
     const [selectedTag, setSelectedTag] = useState(initialTag)
     const { activeMenu, defaultMenu } = useMenu()
     const postsSidebar = activeMenu?.length <= 0 ? defaultMenu : activeMenu
-    const articleView = !isListingView(pathname, postsSidebar)
     const params = {
         filters: {
             $and: [
@@ -205,6 +199,8 @@ export default function Posts({ children, pageContext: { selectedTag: initialTag
                         {{
                             '/blog': <Blog />,
                             '/newsletter': <Newsletter />,
+                            '/spotlight': <Blog title="Spotlight" />,
+                            '/customers': <Customers />,
                         }[pathname] || <Default>{children}</Default>}
                     </div>
                 </PostProvider>

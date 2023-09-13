@@ -453,6 +453,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 tableOfContents,
                 slug,
                 post: true,
+                article: true,
             },
         })
     })
@@ -486,6 +487,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 tableOfContents,
                 slug,
                 post: true,
+                article: true,
             },
         })
     })
@@ -501,8 +503,19 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 tableOfContents,
                 slug,
                 post: true,
+                article: true,
             },
         })
+    })
+
+    createPage({
+        path: `/posts`,
+        component: PostListingTemplate,
+        context: {
+            post: true,
+            title: 'Posts',
+            article: false,
+        },
     })
 
     result.data.postCategories.nodes.forEach(
@@ -513,6 +526,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 context: {
                     post: true,
                     title: categoryLabel,
+                    article: false,
                 },
             })
 
@@ -524,6 +538,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         selectedTag: tagLabel,
                         post: true,
                         title: tagLabel,
+                        article: false,
                     },
                 })
             })
@@ -541,6 +556,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 tableOfContents,
                 slug,
                 post: true,
+                article: true,
             },
         })
     })
@@ -555,6 +571,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 tableOfContents,
                 post: true,
+                article: true,
             },
         })
     })
