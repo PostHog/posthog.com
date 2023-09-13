@@ -66,7 +66,7 @@ export const handbookSidebar = [
             },
             {
                 name: '14. How you can help',
-                url: '/handbook/hello-world',
+                url: '/handbook/help',
             },
         ],
     },
@@ -771,6 +771,10 @@ export const handbookSidebar = [
                     {
                         name: 'Managing the company roadmap',
                         url: '/handbook/engineering/posthog-com/roadmap',
+                    },
+                    {
+                        name: 'Editing API docs',
+                        url: '/handbook/engineering/posthog-com/api-docs',
                     },
                 ],
             },

@@ -22,9 +22,9 @@ Everything else is a means to this end! We often do onboarding in person to acce
 
 You can list and categorize issues
 
-If you want someone to see an issue, @mention them and/or slack them the link.
+If you want someone to see an issue, @mention them and/or Slack them the link.
 
-### Don't yolo merge
+### Don't yolo merge
 
 Do not "yolo merge" ie force a change to our website or platform without someone else checking it. This should _only_ happen in emergencies, _even_ for simple changes. It is _so_ frequent that we find issues. If you have _any_ doubt, get someone else to look at it first.
 
@@ -34,6 +34,8 @@ Bias for impact. If you can just pick up the work, do so. We want a culture of i
 
 It is fine (and encouraged) to pick up side quests or to deviate from your goals if you think you should. Especially if someone is a quick fix, do it yourself as part of our value - that everyone codes.
 
+If you aren't able to make a change yourself, create an issue in GitHub. Avoid assigning todos in Slack as a means of getting someone to pick up a task. It's hard to track and easy to forget.
+
 ### Do things as publicly as possible by default
 
 For discussions, public repos are the best place. Then private ones, then Slack public channels, then Slack private channels or DMs. This is part of our "We are open source" value, and helps with general context setting for the wider team, which means everyone can work more autonomously.
@@ -42,9 +44,9 @@ There are only a few exceptions to what we can't share publicly, for example if 
 
 Internally, _everything_ can be shared apart from people issues - such as HR / personal (ie recruitment or health data).
 
-### Be proactive with Community questions
+### Be proactive with community questions
 
-Don't _only_ help the community when you're the person on support hero in your small team. No matter what your goals may be, if you can quickly ship fixes to real life user problems, then you are going to build goodwill, word of mouth growth and a better product all in one swoop.
+Don't _only_ help the community when you're the person on support hero in your small team. No matter what your goals may be, if you can quickly ship fixes to real life user problems, then you are going to build goodwill, word of mouth growth, and a better product all in one swoop.
 
 You can find these in [posthog.com/questions](https://posthog.com/questions).
 
@@ -82,7 +84,7 @@ We expect you to pick out the very most important thing you can think of, and wo
 
 We judge your performance based on the impact you deliver overall, no matter what your role.
 
-## 5. Bias for impact
+### 5. Bias for impact
 
 Proactive people are the most successful at PostHog. Prioritize hard and make sure you focus your energy on what's most valuable of our customers / company then take ownership of making it happen.
 
