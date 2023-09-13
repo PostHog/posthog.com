@@ -313,7 +313,7 @@
         { "source": "/handbook/company/branding", "destination": "/handbook/company/brand-assets" },
         { "source": "/docs/tutorials/:path*", "destination": "/tutorials/:path*" },
         { "source": "/docs/self-host/hobby-deployment", "destination": "/docs/self-host/deploy/hobby" },
-        { "source": "/handbook/engineering/ee-setup", "destination": "/docs/contribute/developing-locally" },
+        { "source": "/handbook/engineering/ee-setup", "destination": "/handbook/engineering/developing-locally" },
         {
             "source": "/docs/self-host/runbook/clickhouse/vertical_scaling",
             "destination": "/docs/self-host/runbook/clickhouse/vertical-scaling"
@@ -736,7 +736,7 @@
         },
         {
             "source": "/docs/feature-flags/multivariate-flags",
-            "destination": "/docs/feature-flags/creating-feature-flag"
+            "destination": "/docs/feature-flags/creating-feature-flags"
         },
         {
             "source": "/docs/feature-flags/libraries",
@@ -866,7 +866,8 @@
         { "source": "/roadmap/changelog/2023", "destination": "/changelog/2023" },
         { "source": "/changelog", "destination": "/changelog/2023" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
-        { "source": "/apps/advanced-geoip", "destination": "/cdp/advanced-geoip" },
+        { "source": "/apps/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
+        { "source": "/cdp/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
         { "source": "/apps/airbyte-export", "destination": "/cdp/airbyte-export" },
         { "source": "/apps/amazon-kinesis", "destination": "/cdp/amazon-kinesis" },
         { "source": "/apps/automatic-cohort-creator", "destination": "/cdp/automatic-cohort-creator" },
@@ -932,7 +933,8 @@
         { "source": "/apps/zendesk-connector", "destination": "/cdp/zendesk-connector" },
         { "source": "/apps/user-interview", "destination": "/apps/user-interviewer" },
         { "source": "/docs/apps/replicator", "destination": "/docs/cdp/replicator" },
-        { "source": "/docs/apps/advanced-geoip", "destination": "/docs/cdp/advanced-geoip" },
+        { "source": "/docs/apps/advanced-geoip", "destination": "/docs/cdp/geoip-enrichment" },
+        { "source": "/docs/cdp/advanced-geoip", "destination": "/docs/cdp/geoip-enrichment" },
         { "source": "/docs/apps/airbyte-export", "destination": "/docs/cdp/airbyte-export" },
         { "source": "/docs/apps/amazon-kinesis", "destination": "/docs/cdp/amazon-kinesis" },
         { "source": "/docs/apps/automatic-cohort-creator", "destination": "/docs/cdp/automatic-cohort-creator" },
@@ -1053,8 +1055,8 @@
         { "source": "/raquel", "destination": "/community/profiles/491" },
         { "source": "/jamesg", "destination": "/community/profiles/90" },
         { "source": "/jams", "destination": "/community/profiles/90" },
-
-        { "source": "/docs/surveys/manual", "destination": "/docs/surveys" }
+        { "source": "/docs/surveys/manual", "destination": "/docs/surveys" },
+        { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" }
     ],
     "rewrites": [
         {
@@ -1071,6 +1073,7 @@
         },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/docs/apps/feedback-widget", "destination": "/docs/surveys/manual" },
+        { "source": "/apps/feedback-widget", "destination": "/docs/surveys" },
         { "source": "/apps/user-interviewer", "destination": "/docs/surveys/manual" },
         { "source": "/jobs", "destination": "/careers" },
         { "source": "/login", "destination": "https://app.posthog.com/login" },
@@ -1081,6 +1084,8 @@
         { "source": "/docs/data/data-management", "destination": "/docs/data" },
         { "source": "/docs/batch-exports", "destination": "/docs/cdp/batch-exports" },
         { "source": "/docs/batch-exports/s3", "destination": "/docs/cdp/batch-exports/s3" },
-        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" }
+        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" },
+        { "source": "/blog/startup-golioth", "destination": "/spotlight/startup-golioth" },
+        { "source": "/blog/startup-unified", "destination": "/spotlight/startup-unified" }
     ]
 }

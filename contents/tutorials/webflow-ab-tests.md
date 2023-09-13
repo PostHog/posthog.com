@@ -59,7 +59,7 @@ Back in the Webflow site designer, click the "Pages" tab on the left panel, hove
 </script>
 ```
 
-Once you do this, go back to PostHog and click "Launch" on the experiment. When you publish the changes and reload your Webflow page, there should be a 50% chance you see the new CTA. If not, add `posthog.feature_flags.override({'cta': 'test'})` to the custom code you just added (but don’t forget to remove it). You can check the variations in incognito windows in your browser.
+Once you do this, go back to PostHog and click "Launch" on the experiment. When you publish the changes and reload your Webflow page, there should be a 50% chance you see the new CTA. If not, add `posthog.featureFlags.override({'cta': 'test'})` to the custom code you just added (but don’t forget to remove it). You can check the variations in incognito windows in your browser.
 
 ![CTA changed](../images/tutorials/webflow-ab-tests/cta.png)
 

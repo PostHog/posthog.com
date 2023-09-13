@@ -32,7 +32,11 @@ const LikeButton = ({ liked, handleClick, className = '' }) => {
     return (
         <button
             disabled={!user}
-            className={`${liked ? 'text-red' : 'text-inherit disabled:opacity-60'} ${className}`}
+            className={`rounded-full flex justify-center items-center p-1.5 w-8 h-8 mt-6 relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] active:text-red active:bg-red/20 dark:active:text-red dark:active:bg-red/20 ${
+                liked
+                    ? 'text-red bg-red/20'
+                    : 'bg-border/50 hover:bg-border/75 dark:bg-border-dark/50 dark:hover:bg-border-dark/75 text-primary/50 dark:text-primary-dark/50 hover:text-primary/75 dark:hover:text-primary-dark/75 disabled:opacity-60'
+            } ${className}`}
             onClick={handleClick}
         >
             {user ? (
@@ -90,7 +94,7 @@ const Post = ({
     }
 
     useEffect(() => {
-        if (active && typeof window !== 'undefined' && !breakpoints.md) {
+        if (active && typeof window !== 'undefined' && !breakpoints.sm) {
             containerRef?.current?.scrollIntoView({ block: 'center', inline: 'nearest' })
             window.scrollTo({ top: 0 })
         }
@@ -104,20 +108,57 @@ const Post = ({
     const defaultImage = post_category?.data?.attributes?.defaultImage?.data?.attributes?.url
 
     return (
-        <li ref={containerRef} className="snap-start last:pb-24">
-            <span className="flex items-center" ref={fetchMore ? ref : null}>
-                <Link
-                    className={`text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit flex-grow`}
-                    to={slug}
+        <li ref={containerRef} className="snap-start last:pb-24 grid grid-cols-[32px_1fr] gap-2">
+            <LikeButton liked={liked} handleClick={handleLike} />
+            <span className={`flex items-center ${articleView ? 'py-1' : ''}`} ref={fetchMore ? ref : null}>
+                <div
+                    className={`rounded-md p-2 transition-all flex-grow ${
+                        active ? 'bg-accent dark:bg-accent-dark' : ''
+                    }`}
                 >
+                    {category && <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>}
                     <div
-                        className={`flex space-x-6 border rounded-md p-2 transition-all flex-grow ${
-                            active
-                                ? 'border-border dark:border-dark bg-accent dark:bg-accent-dark'
-                                : 'border-transparent dark:border-transparent hover:border-border dark:hover:border-dark'
+                        className={` items-baseline ${active ? 'flex flex-col gap-1' : ''} ${
+                            articleView ? 'flex flex-col gap-1' : 'inline'
                         }`}
                     >
-                        <div className="sm:w-[150px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden md:self-start self-center relative z-10">
+                        <Link
+                            className={`inline m-0 font-semibold !leading-tight line-clamp-2 text-inherit hover:text-red dark:hover:text-yellow hover:text-inherit dark:text-inherit dark:hover:text-inherit ${
+                                articleView ? 'text-[.933rem]' : 'text-base mr-1.5'
+                            }`}
+                            to={slug}
+                        >
+                            {title}
+                        </Link>
+                        <span className={`${articleView ? 'inline-flex gap-1' : 'inline-flex gap-1'}`}>
+                            {authors?.data?.length > 0 && (
+                                <span
+                                    className={`font-medium leading-none opacity-60 hidden sm:inline overflow-hidden text-ellipsis whitespace-nowrap ${
+                                        articleView ? 'text-sm' : 'text-[.933rem]'
+                                    }`}
+                                >
+                                    {authors?.data
+                                        .map(({ id, attributes: { firstName, lastName } }) => {
+                                            const name = [firstName, lastName].filter(Boolean).join(' ')
+                                            return name
+                                        })
+                                        .join(', ')}
+                                </span>
+                            )}
+                            <span
+                                className={`font-medium leading-none opacity-60 ${
+                                    articleView ? 'text-sm' : 'text-[.933rem]'
+                                }`}
+                            >
+                                {day.isToday() ? 'Today' : day.fromNow()}
+                            </span>
+                        </span>
+                    </div>
+                    <div className="hidden sm:w-[100px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden md:self-start self-center relative z-10">
+                        <Link
+                            className={`text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit flex-grow`}
+                            to={slug}
+                        >
                             {imageURL?.endsWith('.mp4') ? (
                                 <video className="object-cover w-full h-full" src={imageURL} />
                             ) : (
@@ -128,34 +169,9 @@ const Post = ({
                                     src={imageURL || defaultImage || '/banner.png'}
                                 />
                             )}
-                        </div>
-                        <div>
-                            <span>
-                                {category && (
-                                    <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>
-                                )}
-                                <p className="m-0 text-base md:text-lg font-bold !leading-tight line-clamp-2">
-                                    {title}
-                                </p>
-                            </span>
-                            <ul className="m-0 p-0 list-none flex space-x-2 items-center mt-1">
-                                {authors?.data?.length > 0 && (
-                                    <li className="text-sm font-medium leading-none pr-2 border-r border-light dark:border-dark opacity-60 sm:block hidden overflow-hidden text-ellipsis whitespace-nowrap">
-                                        {authors?.data
-                                            .map(({ id, attributes: { firstName, lastName } }) => {
-                                                const name = [firstName, lastName].filter(Boolean).join(' ')
-                                                return name
-                                            })
-                                            .join(', ')}
-                                    </li>
-                                )}
-                                <li className="text-sm font-medium leading-none flex-shrink-0">
-                                    <span className="opacity-60">{day.isToday() ? 'Today' : day.fromNow()}</span>
-                                </li>
-                            </ul>
-                        </div>
+                        </Link>
                     </div>
-                </Link>
+                </div>
             </span>
         </li>
     )
@@ -171,8 +187,12 @@ const getCategoryLabels = (selectedCategories) => {
 function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelectedCategories, selectedCategories }) {
     const breakpoints = useBreakpoint()
 
-    return articleView && breakpoints.md ? null : (
-        <div className={`${articleView ? 'sticky top-[108px] w-full lg:w-[30rem] flex-shrink-0' : 'flex-grow'}`}>
+    return articleView && breakpoints.sm ? null : (
+        <div
+            className={`${
+                articleView ? 'reasonable:sticky top-[108px] w-full md:w-[20rem] flex-shrink-0' : 'flex-grow'
+            }`}
+        >
             <div className="my-4 flex justify-between space-x-2">
                 <h5 className="m-0 line-clamp-1 leading-[2]">{getCategoryLabels(selectedCategories)}</h5>
                 <Categories
@@ -189,8 +209,8 @@ function PostsListing({ articleView, posts, isLoading, fetchMore, root, setSelec
                 }
             >
                 <ul
-                    className={` list-none p-0 m-0 flex flex-col space-y-4 snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
-                        articleView && !breakpoints.md ? 'h-[80vh] overflow-auto' : ''
+                    className={`divide-y divide-border dark:divide-border-dark list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
+                        articleView && !breakpoints.sm ? 'h-[80vh] overflow-auto' : ''
                     }`}
                 >
                     {posts.map(({ id, attributes }, index) => {
@@ -230,9 +250,7 @@ const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>
                             className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
                         >
                             <span className="flex justify-between items-center">
-                                <span className="text-base overflow-hidden text-ellipsis whitespace-nowrap">
-                                    {subject}
-                                </span>
+                                <span className="text-base line-clamp-2 text-ellipsis ">{subject}</span>
                                 <span className="flex-shrink-0 text-black dark:text-white text-xs flex space-x-1 items-center opacity-70">
                                     <span className="w-4">
                                         <Chat />
@@ -341,7 +359,7 @@ export default function Posts({ children, articleView }) {
                         },
                     },
                     {
-                        post_tag: {
+                        post_tags: {
                             label: {
                                 $in: tags,
                             },
@@ -367,12 +385,12 @@ export default function Posts({ children, articleView }) {
                 </Modal>
                 <div className="px-4 md:px-5 md:mt-8 mb-12 max-w-screen-2xl mx-auto">
                     <section>
-                        <div className="py-4 md:py-2 border-b md:border-t border-border dark:border-dark text-center md:flex justify-between items-center sticky top-[-1px]">
-                            <p className="m-0 opacity-80">The latest from the PostHog community</p>
+                        <div className="py-4 px-2 md:py-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col md:flex-row justify-between items-center sticky top-[-1px]">
+                            <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
                             <div className="flex space-x-6 items-center md:mt-0 mt-2 justify-between">
                                 {user ? (
                                     <span className="flex">
-                                        <p className="m-0 pr-2 mr-2 border-r border-border dark:border-dark">
+                                        <p className="text-sm m-0 pr-2 mr-2 border-r border-border dark:border-dark">
                                             Signed in as{' '}
                                             <Link
                                                 className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
@@ -383,14 +401,14 @@ export default function Posts({ children, articleView }) {
                                         </p>
                                         {isModerator && (
                                             <button
-                                                className="pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
+                                                className="text-sm pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
                                                 onClick={() => setNewPostModalOpen(!newPostModalOpen)}
                                             >
                                                 New post
                                             </button>
                                         )}
                                         <button
-                                            className="dark:text-yellow text-red font-semibold"
+                                            className="text-sm dark:text-yellow text-red font-semibold"
                                             onClick={() => logout()}
                                         >
                                             Logout
@@ -399,7 +417,7 @@ export default function Posts({ children, articleView }) {
                                 ) : (
                                     <button
                                         onClick={() => setLoginModalOpen(true)}
-                                        className="text-yellow font-semibold"
+                                        className="text-sm text-red dark:text-yellow font-semibold"
                                     >
                                         Sign in
                                     </button>
@@ -407,7 +425,7 @@ export default function Posts({ children, articleView }) {
                             </div>
                         </div>
                     </section>
-                    <section className="lg:flex lg:space-x-12 my-4 md:my-8 items-start">
+                    <section className="md:flex md:space-x-8 my-4 md:my-8 items-start">
                         <PostsListing
                             selectedCategories={selectedCategories}
                             setSelectedCategories={setSelectedCategories}
@@ -419,13 +437,13 @@ export default function Posts({ children, articleView }) {
                         />
                         <div
                             className={`${
-                                articleView ? 'flex-grow' : 'sticky top-[108px] w-[30rem] flex-shrink-0 block'
+                                articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'
                             }`}
                         >
                             {articleView && (
                                 <button
                                     onClick={() => navigate(prev ? -1 : '/posts')}
-                                    className="inline-flex lg:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                                    className="inline-flex md:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                                 >
                                     <RightArrow className="-scale-x-100 w-6" />
                                     <span className="text-red dark:text-yellow text-[15px] font-semibold line-clamp-1 text-left">
@@ -435,7 +453,7 @@ export default function Posts({ children, articleView }) {
                             )}
                             <div>{children}</div>
                             {articleView && (
-                                <div className="mt-12 max-w-lg">
+                                <div className="mt-12 max-w-2xl">
                                     <QuestionForm
                                         disclaimer={false}
                                         subject={false}

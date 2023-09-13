@@ -14,7 +14,7 @@ To add a HogQL filter:
 1. Create a [new insight](https://app.posthog.com/insights/new)
 2. Open the filter dropdown, and click "Add filter" below your data series
 3. Select HogQL from the options
-4. Write your expression, and click "Add HogQL expression" to apply it
+4. Write your [expression](/docs/hogql/expressions), and click "Add HogQL expression" to apply it
 
 HogQL filters are available on every type of insight from trends to funnels to lifecycle.
 

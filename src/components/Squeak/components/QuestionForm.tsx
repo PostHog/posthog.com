@@ -365,7 +365,7 @@ export const QuestionForm = ({
     }, [archived])
 
     useEffect(() => {
-        setView(null)
+        setView(initialView || null)
     }, [slug])
 
     return (

@@ -12,7 +12,7 @@ By default, PostHog provides an easy way to group events by week, day, and even 
 
 ## Time of day breakdown
 
-We start with an easy scenario: breaking down what part of the day events take place in. To do this, we [create an insight](https://app.posthog.com/insights/new) and then break it down by checking if the event timestamp is in the morning, afternoon, evening, or night. We use a HogQL `multiIf()` expression using the hours of the day to check against `toHour(timestamp)` like so:
+We start with an easy scenario: breaking down what part of the day events take place in. To do this, we [create an insight](https://app.posthog.com/insights/new) and then break it down by checking if the event timestamp is in the morning, afternoon, evening, or night. We use a HogQL `multiIf()` [expression](/docs/hogql/expressions) using the hours of the day to check against `toHour(timestamp)` like so:
 
 ```sql
 multiIf(
