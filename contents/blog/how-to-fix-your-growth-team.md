@@ -77,62 +77,25 @@ Anecdote: story of airbags. If you have your airbags, you can increase your spee
 
 ## Problem 3: Your experiment win rate is low
 
-as an industry, we don't spend enough time estimating. Like, we have an idea, and then, you know, we rice it, we say this is an L, or an N, then we just try to get the PM picks the roadmap from there.
+You keep trying new ideas, but none of experiments have the expected outcome. "You need better ideas", says Alexey, "and, counter-intuitively, the way to do this is to improve the estimates of your current ideas".
 
+Typically teams prioritize their roadmaps by using frameworks such as [RICE](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/) and assigning t-shirt size estimates ("S", "M", "L"). This doesn't go deep enough, and leads to teams wasting time building pointless things. It doesn't make sense to spend only five minutes estimating something your team will spend weeks on.
 
-### How to fix it
+### How to fix it 
 
-is you actually spend an hour per idea that you're thinking of doing, and you actually try to do a bottom sub estimate of the dollar impact that the idea will have.
+Once you have shortlisted the ideas you want to work on, the next step is spend an additional hour on each one and estimate the dollar impact. The result is that you have a higher win rate, because you know **exactly** what to expect from your experiments.
 
-You improve your win rate by adding fidelity to your estimates. 
+This approach was made famous by Facebook Messenger's VP of growth Darius Contractor and his [EVELYN framework](https://www.drift.com/blog/secret-to-faster-growth/). He even shares a handy [airtable with real examples you can copy](https://airtable.com/appzs6HT2ggrJt9pN/shrInOxl0SL1Xmauk/tblTQFEMcXAaEgSpM/viwZessbXpiA8q2jd?blocks=bipMQFWTjqu0HI3wv).
 
+Alexey says that one of their biggest wins from following this approach:
 
-https://www.drift.com/blog/secret-to-faster-growth/
-From Darius: 
-> Opportunity sizing do can be very hard to accurately. That’s part of the reason a lot of teams, even great growth teams, don’t go deep on opportunities, I think. Because they feel like it’s too much of a tax to getting something out the door. But what I’ve learned over my years doing it is that while it is a bit of a tax up front, it gets much easier over time. If you put in 10 units of effort to opportunity-size the first project, it ends up being three units for the second project and then two units for all following projects. Because it turns out that eight of the things you did for the first project are just the same for all the projects. It’s the same surface, it’s the same conversion rate, it’s the same data pool. It ends up that you just get really good at it really fast, you surprise yourself by how easy. Then, honestly, it becomes like flossing. The first few times you floss you’re like, “This is annoying.” When you floss, you’re like, “I feel dirty. I need to go floss.” You know?
+"At MasterClass, we had one-size-fits-all pricing. We knew we would eventually need to add tiered pricing, but this would be a huge, months-long company efforts. We struggled to prioritize it."
 
-Eventually, "Darius: Like, “Why are we running experiments that we don’t have opportunity sizes for?” Eventually, your team will be saying this."
+Enter EVELYN. Alexey knew they needed a dollar estimate of the impact.
 
-e.g lets say you want to add paypal to your site
+"Instead of building the entire backend, we built a simple [fake door test](https://posthog.com/tutorials/fake-door-test) on the frontend. Users could select their preferred tier, but at checkout we let them know that they were being upgraded to the best tier and at the cheapest price. In reality, this was actually the existing one-size-fits-all pricing.
 
-But, yeah, you come up with better ideas. You have a higher than rate by actually spending a little bit more time estimating your ideas by saying, hey, the example we use is if you're going to add PayPal to your site, how big a win do you think that's going to be?
-
-
-Right? okay, let's go talk to some friends where PMs are similar companies, and let's see what their PayPal volume is.
-
-
-Let's go cut that by US versus international. Let's go look at our conversion today. Like, what's the... There's a bunch more work that you can do that improves your linear. 
-
-**Another example**
-
-Like, by doing a little bit more research, like, for example, if you're thinking of doing something and all of your competitors, you have two ideas and all of your competitors do want to be a deal, but not the other. Like, probably they tested that, right? Yeah. So, like... Going to doing the research and saying, how common a pattern is this?
-
-wow. And checking, like, hey, what is actually working for our competitors?
-
-
-<!-- Share Airtable or include image on how to do it? -->
-
-**Alexey shares an example of how his growth team actually pulled this off once, **
-
-Real stories we can share
-A lot of the interesting wins where the eng work is lower
-
-This is a Masterclass was $180 a year 
-
-We’re not capturing all the value for people who value it differently
-
-But different pricing is multiple
-
-We built the frontend and not the backend
-
-Now we have a dollar amount
-
-But biz ops says not credit card
-
-But people didn’t have credit card
-
-And now we have actual dollar amount. Now we can ask 2 months of all the eng time to support this project.
-So now that was a much easier ask 
+Now we knew how much money the company could make by implementing. Then it was incredibly easy to ask for the rest of the company to work on this for a few months!"
 
 ## Problem 4: Your experiment win size is low
 
