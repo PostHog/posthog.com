@@ -1,6 +1,6 @@
 ---
 date: 2023-09-13
-title: The 13 best open-source (and self-hosted) analytics tools
+title: The 14 best open-source (and self-hosted) analytics tools
 rootPage: /blog
 sidebar: Blog
 showTitle: true
