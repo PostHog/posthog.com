@@ -18,7 +18,7 @@ toolsUsed:
 date: 2023-08-31
 ---
 ​
-A team of vetern API engineers founded Speakeasy with a mission to make every API easy to create and consume. Dozens of teams, including Writer, Airbyte and Codat, now trust [Speakeasy](https://speakeasyapi.dev/) to provide the tools that give their APIs a great developer experience: idiomatic SDKs in 8+ languages, Terraform providers and world-class reference docs.
+A team of veteran API engineers founded Speakeasy with a mission to make every API easy to create and consume. Dozens of teams, including Writer, Airbyte and Codat, now trust [Speakeasy](https://speakeasyapi.dev/) to provide the tools that give their APIs a great developer experience: idiomatic SDKs in 8+ languages, Terraform providers and world-class reference docs.
 
 Internally, the team relies on PostHog for both product development and marketing activities, a practice they've maintained since the early days.
 
