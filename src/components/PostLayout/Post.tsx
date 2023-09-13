@@ -44,7 +44,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
 
     return (
         <div className="">
-            {menu && mobileMenu && <MobileNav menu={menu} />}
+            {menu && mobileMenu && <MobileNav className="flex md:hidden" menu={menu} />}
             <div
                 className={`w-full relative md:flex justify-between mx-auto transition-all ${
                     fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
