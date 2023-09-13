@@ -1,6 +1,6 @@
 ---
 title: Why your growth team isn't winning (and how to fix it)
-date: 2023-08-22
+date: 2023-09-13
 author: ["lior-neu-ner"]
 showTitle: true
 rootpage: /blog
@@ -16,8 +16,7 @@ tags:
 
 There are telltale signals when a growth team isn't succeeding: stagnating metrics, unmet KPIs, and burnt out engineers. Everyone is frustrated, but how do you fix it?
 
-[Alexey Komissarouk](https://alexeymk.com/), former head of growth engineering at [MasterClass](https://www.masterclass.com/), has seen it all. In this post, Alexey shares his advice on how to get your growth team winning again.
-// todo : add more cred to alexey
+[Alexey Komissarouk](https://alexeymk.com/), former head of growth engineering at [MasterClass](https://www.masterclass.com/), has seen it all. He grew Masterclass xyz... In this post, Alexey shares his advice on how to get your growth team winning again.
 
 TLDR; there are 3 areas to investigate:
 
@@ -25,46 +24,26 @@ TLDR; there are 3 areas to investigate:
 2. Your experiment win rate.
 3. Your experiment win size.
 
-
 ## Problem 1: Your team is moving too slowly
 
-Your PM complains that the team is moving slow. The engineering team says there is too much technical debt. Sound familiar?
+Your PM complains that the team is moving slow. The engineering team says there is too much technical debt. Sound familiar? This is caused by engineers having the wrong mindset.
 
-this is caused by mindset. Eng nee
-"engineers hate doing growth."
-
-And the reason they hate doing growth is because it's sort of a nap them up to the way that they've been taught, right, in two ways.
-
-
-first of all, they've been taught that, like, in class, they've all part engineering problems, right? You go to school and you're like, I've got this algorithm down to, like, end log in, and it's beautiful.
-
-**And so, the first thing that happens is they just have a slow velocity because their quality is too high, right?**
-
-Or, like, I wrote this operating system code and it's, like, really complicated, like, know, it's all the requirements and the code is really, like, elegant.
-
-
-Yeah. so, like, all their career, they're looking solve hard problems. And then they get into the industry and then, like, they, you know, they do Google or whatever their first job is, and they're taught that you get promoted for, like, creating a complicated system, right?
-
-Like, there's sort of this reward that, like, you can't get the senior level unless you, like, deliver a submission, like, you know, like,
+Slow velocity is usually a result of code quality being too high. "Engineers hate doing growth. They want to implement elegant solutions to complex problems. Growth engineering is the opposite of that", says Alexey.
 
 ### How to fix it
 
-Start with engineers
-Asked them to prioritize things (he has blog newsletter)
-And you say, okay, what is actually the technical? What is actually slowing it down? Let's prioritize it. Let's vote on what we think is going to be used.
+First, sit with the engineering team and prioritize your technical debt. Figure out what is actually slowing you down (or likely to), and by how much. Once you have a ranked list, assign 10%-20% of engineering time to cleaning this up.
 
-Growth eng requres different mindset.
-At the same time, look at the last 20 experiments and find shortcuts. 
-At the same time, let's go look at the last 20 experiments that we wanted to run. Oh, this one, you could just take this shortcut.
+Second (and more importantly), encourage your team to take shortcuts. The role of a growth engineer is not to necessarily build feature, but rather to validate whether building a feature is a good idea or not. 
 
-every time the P.N. asking for a feature, you don't need You just need to estimate what takes the validate, whether that feature is a good idea, which is a different thing than building features, which is the only thing you've ever done before if you haven't worked on a growth.
+With this in mind, a good team exercise for this is to look at your last 20 experiments and identify which ones you could have validated faster. Thomas Owers, former growth lead at [Let's Do This](https://www.letsdothis.com/), has [good advice](/blog/how-to-start-a-growth-team#thomass-golden-rule-make-your-code-changes-as-small-as-possible) on this:
 
-2 way compromise. Get team team to list out problems. Assigned 10% of time 
-
-
-"I have never met an eng team that hasnt complained about tech debt
+"Instead of asking 'How long will a project take?', ask 'What can you do in only 1 week? 3 days? Half a day?'. Often you'll find that you can reduce the scope of the change while still being able to validate your hypothesis".
 
 ---
+
+## Problem 2: Your team is afraid of causing outages
+
 (This below might need to be another heading)
 
 another cause is breakages and outages. Make sure you have alerting in place
@@ -96,7 +75,7 @@ Really good component tests are valuable – reusable components be strongly tes
 
 Anecdote: story of airbags. If you have your airbags, you can increase your spee
 
-## Problem 2: Increasing you experiment win-rate
+## Problem 3: Your experiment win rate is low
 
 as an industry, we don't spend enough time estimating. Like, we have an idea, and then, you know, we rice it, we say this is an L, or an N, then we just try to get the PM picks the roadmap from there.
 
@@ -124,9 +103,6 @@ Right? okay, let's go talk to some friends where PMs are similar companies, and 
 
 Let's go cut that by US versus international. Let's go look at our conversion today. Like, what's the... There's a bunch more work that you can do that improves your linear. 
 
-<!-- Share Airtable or include image on how to do it? -->
-
-
 **Another example**
 
 Like, by doing a little bit more research, like, for example, if you're thinking of doing something and all of your competitors, you have two ideas and all of your competitors do want to be a deal, but not the other. Like, probably they tested that, right? Yeah. So, like... Going to doing the research and saying, how common a pattern is this?
@@ -134,70 +110,7 @@ Like, by doing a little bit more research, like, for example, if you're thinking
 wow. And checking, like, hey, what is actually working for our competitors?
 
 
-
-
-## Problem 3: Increasing your experiment win-size
-
-Start with:
-"Its been a few quarters, and you got all low hanging and easy effort fruit". Now what?
-
-Youve found your local maxima
-
-In size of bet and impact. So in an ideal world, find a small change and it's computer. But you find it relatively quickly.
-
-
-
-
-Usually, by the time you've been working on things for a couple of quarters, the big wins are going to come from big changes.
-
-
-And big changes will usually take more effort.
-
-Advice usually depends on company stage: https://jwegan.com/growth-hacking/managing-growth-teams-portfolio-step-step-guide/ 
-
-### How to fix it
-
-https://jwegan.com/growth-hacking/managing-growth-teams-portfolio-step-step-guide/
-
-From John Egan: Lever 2: Increase the number of high quality project ideas
-Once you have a good process to select projects, the second lever is to increase the pool of good projects you have to select from. To do this you need to make sure it is not just the Product Manager’s job to come up with ideas for the roadmap,
-
-That means every engineer, every designer, every analyst, should be required to contribute experiment ideas
-
-When it is everyone’s job to contribute to experiment ideas, the number and pipeline of experiment ideas will dramatically increase. With proper training and feedback you can ensure that those ideas are high quality -> Lever 1: Increase the rigor of your project selection process
-
----
-maybe:
-
-Lever 3: Maximize impact of every experiment you ship
-
-The final lever is to make sure you are really maximizing the impact of every experiment you ship. The way to do this is related to lever 2 of building a bottoms-up culture. Every engineer should have ownership over experiments they are assigned to work on, even if it wasn’t originally their idea. What ownership means is that they should be striving to figure out how to make the experiment as impactful as possible by improving on the initial idea or by coming up with additional variants to test. Doing this will help make sure you are squeezing as much juice as possible out of every experiment. If a team of 10 engineers works on 120 experiments/quarter there is no way a single person can think deeply about each and every one of the 120 experiment ideas. Taking a bottoms-up model where the people spending the most time working on an experiment idea are empowered to come up with suggestion and figure out how to maximize that idea will help make sure you’re not leaving any money on the table.
-
----
-**Not growths problem?**
-
-Just like, just crank on the optimization that you'll be fine. And eventually, you find the local maxima there where you're like, cool, I need to go, you know, I need to be able to be or either partnership panel, like, now you need to more in the big best.
-
-
-But when I do that, I would do that at the quarter level, not at the team level, like, like, I would at planning, I would say, Hey, from now on, we're going to be taking one or two big bets a quarter.
-
-
-going to staff a different team of like maybe two or three engineers. And they're going to have a whole quarter and maybe a second quarter to go like chase this.
-
-
-But we're going to treat them as the new business line. We're not going to treat them as like, you know, another part of the growth team.
-
-
-Like growth is funded by the local max on the team, right? It's given the things work like this, I can get you to last 10, 20, 30, 40% of this.
-
-
-If you start using growth teams to do to go zero to one on a bunch of things, or you're taking bigger swings, you can do that.
-
-
-It's a little bit, it's a little bit like, it's not as close to the fit, right? It's one of those things where...
-
-
-You know, if you do a bunch of big projects, the only small number of them, first of all, like, if you spend six weeks on something and it doesn't work, it's much harder to decide if you're going to do a meal or two or not.
+<!-- Share Airtable or include image on how to do it? -->
 
 **Alexey shares an example of how his growth team actually pulled this off once, **
 
@@ -220,6 +133,31 @@ But people didn’t have credit card
 
 And now we have actual dollar amount. Now we can ask 2 months of all the eng time to support this project.
 So now that was a much easier ask 
+
+## Problem 4: Your experiment win size is low
+
+Your growth team has been around for a few quarters and you've picked all the low hanging fruit. Your new experiments require more efforts AND have less impact. Now what?
+
+[John Egan](https://jwegan.com/growth-hacking/managing-growth-teams-portfolio-step-step-guide/), former head of growth engineering at Pinterest, recommends two levers you can pull:
+
+1. Increase the number of high quality project ideas.
+2. Maximize the impact of every experiment you ship.
+
+### Increase the number of high quality project ideas
+
+The best way to do this is create a bottom-up culture where it's the job of **every single person** to come up with ideas. That means every engineer, designer, data scientist, sales rep, marketer etc.
+
+When it's everyone's job to do this, the number of ideas increases dramatically. Then, by applying the estimation process mentioned above, you distill the list to only the best ideas.
+
+> **💡 Tip:** To create an inclusive ideas culture, make your [brainstorms asynchronous](https://source.opennews.org/articles/redesigning-brainstorming-asynchronous/).
+
+### Maximize the impact of every experiment you ship
+
+The way to do this is also related to creating a bottom-up culture: Every engineer should own the experiments they are working on and be empowered to make it as impactful as possible – even if it wasn't originally their idea! 
+
+They should be hypothesizing how to improve and iterate on their experiments. This ensures that you squeeze as much impact as possible from every idea.
+
+
 
 ---
 Closing thoughts:
