@@ -942,7 +942,6 @@
         { "source": "/apps/feedback-widget", "destination": "/docs/surveys" },
         { "source": "/apps/user-interviewer", "destination": "/docs/surveys/manual" },
         { "source": "/jobs", "destination": "/careers" },
-        { "source": "/login", "destination": "https://app.posthog.com/login" },
         {
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
