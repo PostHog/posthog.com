@@ -1,5 +1,5 @@
 ---
-date: 2023-09-06
+date: 2023-09-13
 title: 5 ways to improve your analytics data
 rootPage: /blog
 sidebar: Blog
@@ -9,7 +9,7 @@ author:
   - anna-debenham
 featuredImage: ../images/blog/super-hog-pink.png
 featuredImageType: full
-category: General
+category: Engineering
 tags:
   - Product analytics
 ---
@@ -118,7 +118,7 @@ As mentioned above, tracking blockers can prevent your events from being sent. T
 
 A reverse proxy enables you to send events to your analytics provider through your domain instead of your provider's. This makes events less likely to be intercepted by tracking blockers.
 
-> **Tip:** If you're using PostHog to capture events, here's how you can [set up a reverse proxy](/docs/advanced/proxy).
+> 💡 **PostHog Tip:** If you're using PostHog to capture events, here's how you can [set up a reverse proxy](/docs/advanced/proxy).
 
 ## 5. Version your events
 
