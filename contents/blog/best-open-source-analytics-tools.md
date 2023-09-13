@@ -10,12 +10,12 @@ author:
   - andy-vandervell
 featuredImage: ../images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/vN-aGs5M2k4
 category: General
 tags:
   - Open source
   - Guides
 ---
+**Author:** [Andy Vandervell](https://posthog.com/community/profiles/62)
 
 There's no shortage of high-quality open-source analytics tools. In this guide we've split them into two categories:
 
@@ -178,7 +178,7 @@ Umami is available via an MIT license. There is no monetized features or hosting
 - **Alternative to:** Google Analytics
 - [Ackee on GitHub](https://github.com/electerious/Ackee)
 
-[Ackee](https://ackee.electerious.com/) is a barebone, Node.js based analytics tool with a strong focus on privacy. It doesn't store any cookies, and supports numerous methods of self-hosted deployments. You can also build custom tools upon Ackee using its GraphQL API.
+[Ackee](https://ackee.electerious.com/) is a barebones Node.js based analytics tool with a strong focus on privacy. It doesn't store any cookies, and supports numerous methods of self-hosted deployments. You can also build custom tools upon Ackee using its GraphQL API.
 
 #### Who is Ackee for?
 
@@ -192,7 +192,7 @@ Ackee is ideally suited to engineers who need analytics for hobby projects. You 
 - Unlimited domain tracking
 
 #### Open source license and monetization
-Acke is an entirely free project that's distributed under a permissive MIT license.
+Ackee is an entirely free project that's distributed under a permissive MIT license.
 
 ### Open Web Analytics
 
