@@ -22,7 +22,7 @@ The name comes from the phrase “canary in a coal mine” which alludes to mine
 
 ## Prerequisites for canary releases
 
-To set up a canary release in PostHog, we use feature flags, but before we set them up, we need user identification.
+To set up a canary release in PostHog, we use feature flags. To get those working, we need to set up user identification.
 
 Feature flags check the distinct ID of the user to decide if they should return `true` or `false`. This means users need a distinct ID unless the feature flag rolls out to everyone. Our snippet and JavaScript Web SDK automatically create anonymous ones, but [identifying users](/docs/integrate/identifying-users) with a value you set (like email) is a better option.
 
