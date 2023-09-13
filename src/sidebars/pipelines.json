@@ -112,10 +112,6 @@
         "url": "/cdp/property-filter"
     },
     {
-        "name": "Property Flattener",
-        "url": "/cdp/property-flattener"
-    },
-    {
         "name": "Redshift (Export)",
         "url": "/cdp/redshift-export"
     },
