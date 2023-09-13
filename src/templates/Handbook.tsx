@@ -35,6 +35,7 @@ import TeamRoadmap from 'components/TeamRoadmap'
 import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
 import { TutorialTags } from 'components/Tutorials/constants/tags'
+import { Emoji } from 'components/Emoji'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -248,6 +249,7 @@ export default function Handbook({
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
         TutorialTags,
+        Emoji,
         ...shortcodes,
     }
 
