@@ -47,16 +47,14 @@ Navigate to IAM and click on Grant Access to arrive at this screen:
 > In the screenshot above, we have used a custom role named `Testing PostHog BatchExports` with the permissions listed in the previous step.
 
 6. Create a dataset within a BigQuery project (ours is called `BatchExports`, but any name will do).
-7. Follow the instructions on [granting access to a dataset in BigQuery](https://cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset):
+7. Use the Sharing and Add Principal buttons to grant access to your dataset with your Service Account created in step 1. Next, assign either the `BigQuery Data Owner` role or your custom role created in step 4 to provide permissions for the dataset access. Read the full instructions on [granting access to the dataset in BigQuery](https://cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) if unclear.
 
 ![Sharing dataset](../../../images/docs/batch-exports/bigquery/dataset-sharing.png)
 ![Add principal](../../../images/docs/batch-exports/bigquery/dataset-add-principal.png)
 
-Use the Sharing and Add Principal buttons to share your dataset with your new Service Account created in step 1.
+> In the screenshot below, we grant our Service Account access to the `BatchExports` data set and assign the `Testing PostHog BatchExports` role permissions for it.
 
-Grant either the `BigQuery Data Owner` role, or your custom role created in step 4 to the Service Account. In the screenshot below, we have used a custom role named `Testing PostHog BatchExports`.
-
-![Sharing dataset](../../../images/docs/batch-exports/bigquery/dataset-grant-access.png)
+![Dataset grant access](../../../images/docs/batch-exports/bigquery/dataset-grant-access.png)
 
 8. All done! After completing these steps you can create a BigQuery [batch export in PostHog](https://app.posthog.com/project/apps?tab=batch_exports) and your data will start flowing from PostHog to BigQuery.
 
