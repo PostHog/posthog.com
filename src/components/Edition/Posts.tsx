@@ -114,66 +114,56 @@ const isListingView = (pathname: string, children?: IMenu[]): boolean | undefine
     )
 }
 
-export default function Posts({ children, pageContext: { selectedTag: initialSelectedTag, title } }) {
-    const didMount = useRef(false)
+export default function Posts({ children, pageContext: { selectedTag: initialTag, title } }) {
     const [loginModalOpen, setLoginModalOpen] = useState(false)
     const { pathname } = useLocation()
-    const [prev, setPrev] = useState<string | null>(null)
     const [newPostModalOpen, setNewPostModalOpen] = useState(false)
-    const root = pathname.split('/')[1]
-    const [params, setParams] = useState({})
-    const { posts, isLoading, isValidating, fetchMore, mutate } = usePosts({ params })
-    const [selectedTag, setSelectedTag] = useState(initialSelectedTag)
+    const [root, setRoot] = useState(pathname.split('/')[1])
+    const [selectedTag, setSelectedTag] = useState(initialTag)
     const { activeMenu, defaultMenu } = useMenu()
     const postsSidebar = activeMenu?.length <= 0 ? defaultMenu : activeMenu
     const articleView = !isListingView(pathname, postsSidebar)
+    const params = {
+        filters: {
+            $and: [
+                ...(root !== 'posts'
+                    ? [
+                          {
+                              post_category: {
+                                  folder: {
+                                      $eq: root,
+                                  },
+                              },
+                          },
+                      ]
+                    : []),
+                ...(selectedTag
+                    ? [
+                          {
+                              post_tags: {
+                                  label: {
+                                      $in: [selectedTag],
+                                  },
+                              },
+                          },
+                      ]
+                    : []),
+            ],
+        },
+    }
+    const { posts, isLoading, isValidating, fetchMore, mutate } = usePosts({ params })
 
     const handleNewPostSubmit = () => {
         setNewPostModalOpen(false)
     }
 
-    const getCategoryParams = () => {
-        if (root === 'posts') {
-            return {}
-        }
-        return {
-            filters: {
-                $and: [
-                    {
-                        post_category: {
-                            folder: {
-                                $eq: root,
-                            },
-                        },
-                    },
-                    {
-                        post_tags: {
-                            label: {
-                                $in: [selectedTag],
-                            },
-                        },
-                    },
-                ],
-            },
-        }
-    }
-
     useEffect(() => {
-        if (didMount.current) {
-            setPrev(pathname)
-        } else {
-            didMount.current = true
+        if (!articleView) {
+            const newRoot = pathname.split('/')[1]
+            setRoot(newRoot === 'posts' ? undefined : newRoot)
+            setSelectedTag(initialTag)
         }
-        const newRoot = pathname.split('/')[1]
-        const prevRoot = prev?.split('/')[1]
-        if (newRoot === prevRoot && !initialSelectedTag) return
-        setSelectedTag(initialSelectedTag)
     }, [pathname])
-
-    useEffect(() => {
-        const params = getCategoryParams()
-        if (params) setParams(params)
-    }, [root, selectedTag])
 
     const menu = menusByRoot[root]
 

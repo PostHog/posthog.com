@@ -51,7 +51,11 @@ export default function useMenu(): { activeMenu: IMenu[]; defaultMenu: IMenu[] }
     })
     const defaultMenu = useMemo(() => [{ name: 'All posts', url: '/posts' }, ...categoryMenu], [])
     const [activeMenu, setActiveMenu] = useState(
-        categoryMenu.filter(({ url }) => url.startsWith(`/${pathname.split('/')[1]}`))
+        categoryMenu.filter(
+            ({ url, children }) =>
+                url.startsWith(`/${pathname.split('/')[1]}`) ||
+                children?.some(({ url }) => url.startsWith(`/${pathname.split('/')[1]}`))
+        )
     )
 
     useEffect(() => {
