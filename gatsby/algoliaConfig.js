@@ -150,7 +150,7 @@ module.exports = {
                             title: 'Handbook',
                             type: 'handbook',
                             slug: 'handbook',
-                            path_ranking: 2,
+                            path_ranking: 1,
                             headings: [
                                 { value: 'Company', depth: 2 },
                                 { value: 'How we work', depth: 2 },

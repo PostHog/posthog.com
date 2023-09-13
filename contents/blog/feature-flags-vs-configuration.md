@@ -43,7 +43,7 @@ Remote config is especially relied on for mobile apps. This is because mobile ap
 
 [Feature flags](/docs/feature-flags) function nearly the same as configurations. They are a key that returns a value when called with a service, but they often include detail on the user as well.
 
-> **Note:** For simplicity, we assume you are using an external feature flag service. Of course, you could (and many do) build your own feature flag tool. This might include some of the functionality below.
+> **Note:** For simplicity, we assume you are using an [external feature flag service](/blog/feature-flags-as-a-service). Of course, you could (and many do) build your own feature flag tool. This might include some of the functionality below.
 
 The big difference compared to configurations is feature flags’ expanded functionality:
 
