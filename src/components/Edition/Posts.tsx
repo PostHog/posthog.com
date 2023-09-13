@@ -126,7 +126,7 @@ export default function Posts({ children, pageContext: { selectedTag: initialTag
     const params = {
         filters: {
             $and: [
-                ...(root !== 'posts'
+                ...(root
                     ? [
                           {
                               post_category: {
@@ -161,9 +161,9 @@ export default function Posts({ children, pageContext: { selectedTag: initialTag
         if (!articleView) {
             const newRoot = pathname.split('/')[1]
             setRoot(newRoot === 'posts' ? undefined : newRoot)
-            setSelectedTag(initialTag)
+            setSelectedTag(newRoot === 'posts' ? undefined : initialTag)
         }
-    }, [pathname])
+    }, [pathname, articleView])
 
     const menu = menusByRoot[root]
 

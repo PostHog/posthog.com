@@ -1,6 +1,7 @@
 import Link from 'components/Link'
 import dayjs from 'dayjs'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 export const Skeleton = () => {
     return (
@@ -15,21 +16,34 @@ export const Skeleton = () => {
     )
 }
 
-export default function PostCard({ title, featuredImage, date, excerpt, slug }) {
+export default function PostCard({ title, featuredImage, date, excerpt, slug, fetchMore }) {
     const postDate = dayjs(date).format('MMM D, YYYY')
     const imageURL = `https://posthog.com${featuredImage?.url}`
 
+    const { ref, inView } = useInView({
+        threshold: 0,
+        triggerOnce: true,
+    })
+
+    useEffect(() => {
+        if (inView) {
+            fetchMore()
+        }
+    }, [inView])
+
     return (
-        <Link
-            className="!text-inherit p-3 border border-transparent hover:border-border dark:hover:border-dark rounded-md hover:bg-accent dark:hover:bg-accent-dark transition-colors block h-full relative active:top-[1px] active:scale-[.99]"
-            to={slug}
-        >
-            <div className="w-full aspect-video rounded-md overflow-hidden">
-                <img className="w-full h-full object-cover" src={imageURL} />
-            </div>
-            <p className="m-0 text-sm mt-2">{postDate}</p>
-            <h3 className="my-1 text-xl leading-tight">{title}</h3>
-            {excerpt && <p className="m-0 text-sm">{excerpt}</p>}
-        </Link>
+        <div ref={fetchMore ? ref : null}>
+            <Link
+                className="!text-inherit p-3 border border-transparent hover:border-border dark:hover:border-dark rounded-md hover:bg-accent dark:hover:bg-accent-dark transition-colors block h-full relative active:top-[1px] active:scale-[.99]"
+                to={slug}
+            >
+                <div className="w-full aspect-video rounded-md overflow-hidden">
+                    <img className="w-full h-full object-cover" src={imageURL} />
+                </div>
+                <p className="m-0 text-sm mt-2">{postDate}</p>
+                <h3 className="my-1 text-xl leading-tight">{title}</h3>
+                {excerpt && <p className="m-0 text-sm">{excerpt}</p>}
+            </Link>
+        </div>
     )
 }

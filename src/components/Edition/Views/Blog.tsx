@@ -6,7 +6,7 @@ import Breadcrumb from '../Breadcrumb'
 
 export default function Blog() {
     const { posts } = useContext(PostsContext)
-    const [featuredPost, ...rest] = posts.slice(0, 10)
+    const [featuredPost, ...rest] = posts
 
     return (
         <div className="mx-auto max-w-screen-xl">

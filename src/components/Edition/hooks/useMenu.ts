@@ -49,14 +49,18 @@ export default function useMenu(): { activeMenu: IMenu[]; defaultMenu: IMenu[] }
             ...(children.length > 0 ? { children } : null),
         }
     })
+
     const defaultMenu = useMemo(() => [{ name: 'All posts', url: '/posts' }, ...categoryMenu], [])
-    const [activeMenu, setActiveMenu] = useState(
-        categoryMenu.filter(
+    const getActiveMenu = () => {
+        const menu = categoryMenu.filter(
             ({ url, children }) =>
                 url.startsWith(`/${pathname.split('/')[1]}`) ||
                 children?.some(({ url }) => url.startsWith(`/${pathname.split('/')[1]}`))
         )
-    )
+        if (menu.length === 1) return menu[0].children || defaultMenu
+        return menu
+    }
+    const [activeMenu, setActiveMenu] = useState(getActiveMenu())
 
     useEffect(() => {
         if (pathname === '/posts') {
