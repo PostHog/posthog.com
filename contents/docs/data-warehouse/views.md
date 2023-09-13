@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-The PostHog data warehouse supports views. With views, you can save your most used queries and reference them in subsequent queries.
+In the PostHog data warehouse, you can save your most used queries as **views** and reference them in subsequent queries.
 
 ### Creating a view
 
