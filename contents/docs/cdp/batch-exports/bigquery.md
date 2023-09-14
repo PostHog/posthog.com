@@ -38,7 +38,7 @@ Here's how to set these up so that the app has access only to the dataset it nee
 
 ![Create custom role for batch exports](../../../images/docs/batch-exports/bigquery/create-role.png)
 
-This step can be skipped if using the built-in roles `BigQuery Data Owner` and `BigQuery Job User` in the steps that follow.
+This step can be skipped if using the built-in roles `BigQuery Data Editor` and `BigQuery Job User` in the steps that follow.
 
 5. Grant the Service Account access to run jobs in your Google Cloud project. This can be done by granting the `BigQuery Jobs User` role or the role we created in the previous step on your project.
 
@@ -49,7 +49,7 @@ Navigate to IAM and click on Grant Access to arrive at this screen:
 > In the screenshot above, we have used a custom role named `Testing PostHog BatchExports` with the permissions listed in the previous step.
 
 6. Create a dataset within a BigQuery project (ours is called `BatchExports`, but any name will do).
-7. Use the Sharing and Add Principal buttons to grant access to your dataset with your Service Account created in step 1. Next, assign either the `BigQuery Data Owner` role or your custom role created in step 4 to provide permissions for the dataset access. Read the full instructions on [granting access to the dataset in BigQuery](https://cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) if unclear.
+7. Use the Sharing and Add Principal buttons to grant access to your dataset with your Service Account created in step 1. Next, assign either the `BigQuery Data Editor` role or your custom role created in step 4 to provide permissions for the dataset access. Read the full instructions on [granting access to the dataset in BigQuery](https://cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) if unclear.
 
 ![Sharing dataset](../../../images/docs/batch-exports/bigquery/dataset-sharing.png)
 ![Add principal](../../../images/docs/batch-exports/bigquery/dataset-add-principal.png)
