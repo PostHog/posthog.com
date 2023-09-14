@@ -28,7 +28,7 @@ Here's how to set these up so that the app has access only to the dataset it nee
 
 ![Create JSON private key](../../../images/docs/batch-exports/bigquery/create-private-key-json.png)
 
-4. Create a role which has only the specific permissions the batch export requires (listed below), or use the built in `BigQuery Data Owner` and `BigQuery Job User` roles. If you create a custom role, you will need:
+4. (Optional) Create a role which has only the specific permissions the batch export requires:
    * `bigquery.datasets.get`
    * `bigquery.jobs.create`
    * `bigquery.tables.create`
@@ -37,6 +37,8 @@ Here's how to set these up so that the app has access only to the dataset it nee
    * `bigquery.tables.updateData`
 
 ![Create custom role for batch exports](../../../images/docs/batch-exports/bigquery/create-role.png)
+
+This step can be skipped if using the built-in roles `BigQuery Data Owner` and `BigQuery Job User` in the steps that follow.
 
 5. Grant the Service Account access to run jobs in your Google Cloud project. This can be done by granting the `BigQuery Jobs User` role or the role we created in the previous step on your project.
 
