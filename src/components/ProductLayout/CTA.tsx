@@ -1,8 +1,33 @@
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SectionWrapper } from './Section'
 import { ICTA } from './types'
+import usePostHog from 'hooks/usePostHog'
+import { useLocation } from '@reach/router'
+
+export const PricingCTA = (props: { title: string; url: string }) => {
+    const [cta, setCTA] = useState({ title: props.title, url: props.url })
+    const posthog = usePostHog()
+    const { pathname } = useLocation()
+    const experiment = /^\/feature-flags|^\/ab-testing/gi.test(pathname)
+
+    useEffect(() => {
+        posthog?.onFeatureFlags(() => {
+            const payload = posthog.getFeatureFlagPayload('product-ctas')
+            if (payload?.title && payload?.url) {
+                const cta = { title: payload.title, url: payload.url }
+                if (experiment) setCTA(cta)
+            }
+        })
+    }, [posthog])
+
+    return (
+        <CallToAction type="secondary" to={cta.url} size="sm">
+            {cta.title}
+        </CallToAction>
+    )
+}
 
 export default function CTA({ title, subtitle, image, mainCTA, pricingCTA }: ICTA) {
     const gatsbyImage = image && getImage(image)
@@ -16,11 +41,7 @@ export default function CTA({ title, subtitle, image, mainCTA, pricingCTA }: ICT
                         <CallToAction to={mainCTA.url} size="sm">
                             {mainCTA.title}
                         </CallToAction>
-                        {pricingCTA && (
-                            <CallToAction type="secondary" to={pricingCTA.url} size="sm">
-                                {pricingCTA.title}
-                            </CallToAction>
-                        )}
+                        {pricingCTA && <PricingCTA {...pricingCTA} />}
                     </div>
                 </div>
                 {gatsbyImage && (
