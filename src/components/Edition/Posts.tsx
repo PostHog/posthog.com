@@ -22,6 +22,7 @@ import Default from './Views/Default'
 import Blog from './Views/Blog'
 import Newsletter from './Views/Newsletter'
 import Customers from './Views/Customers'
+import { useLayoutData } from 'components/Layout/hooks'
 dayjs.extend(relativeTime)
 
 const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>, 'meta'> }) => {
@@ -151,6 +152,8 @@ export default function Posts({
         setNewPostModalOpen(false)
     }
 
+    const { fullWidthContent } = useLayoutData()
+
     useEffect(() => {
         if (!articleView) {
             const newRoot = pathname.split('/')[1]
@@ -195,7 +198,11 @@ export default function Posts({
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
                     <MobileNav menu={defaultMenu} className="lg:hidden mb-6 mt-0" />
-                    <div className="px-4 md:px-5 md:mt-8 mb-12 max-w-screen-2xl mx-auto">
+                    <div
+                        className={`px-4 md:px-5 md:mt-8 mb-12 max-w-screen-2xl mx-auto transition-all ${
+                            fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl box-content'
+                        }`}
+                    >
                         {{
                             '/blog': <Blog />,
                             '/newsletter': <Newsletter />,
