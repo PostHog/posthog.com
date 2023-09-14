@@ -22,7 +22,7 @@ import Default from './Views/Default'
 import Blog from './Views/Blog'
 import Newsletter from './Views/Newsletter'
 import Customers from './Views/Customers'
-//import { useLayoutData } from 'components/Layout/hooks'
+import { useLayoutData } from 'components/Layout/hooks'
 dayjs.extend(relativeTime)
 
 const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>, 'meta'> }) => {
@@ -107,6 +107,25 @@ const menusByRoot = {
     tutorials: communityMenu.children[2],
 }
 
+const Router = ({ children }: { children: React.ReactNode }) => {
+    const { fullWidthContent } = useLayoutData()
+    const { pathname } = useLocation()
+    return (
+        <div
+            className={`px-4 md:px-5 md:mt-8 mb-12 mx-auto transition-all ${
+                fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
+            }`}
+        >
+            {{
+                '/blog': <Blog />,
+                '/newsletter': <Newsletter />,
+                '/spotlight': <Blog title="Spotlight" />,
+                '/customers': <Customers />,
+            }[pathname] || <Default>{children}</Default>}
+        </div>
+    )
+}
+
 export default function Posts({
     children,
     pageContext: { selectedTag: initialTag, title, article: articleView = true },
@@ -161,7 +180,6 @@ export default function Posts({
     }, [pathname, articleView])
 
     const menu = menusByRoot[root]
-    //const { fullWidthContent } = useLayoutData()
 
     return (
         <Layout parent={communityMenu} activeInternalMenu={menu ?? communityMenu.children[0]}>
@@ -197,14 +215,7 @@ export default function Posts({
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
                     <MobileNav menu={defaultMenu} className="lg:hidden mb-6 mt-0" />
-                    <div className={`px-4 md:px-5 md:mt-8 mb-12 max-w-screen-2xl mx-auto transition-all `}>
-                        {{
-                            '/blog': <Blog />,
-                            '/newsletter': <Newsletter />,
-                            '/spotlight': <Blog title="Spotlight" />,
-                            '/customers': <Customers />,
-                        }[pathname] || <Default>{children}</Default>}
-                    </div>
+                    <Router>{children}</Router>
                 </PostProvider>
             </PostsContext.Provider>
         </Layout>

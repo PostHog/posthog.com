@@ -2,6 +2,7 @@ import { CallToAction } from 'components/CallToAction'
 import dayjs from 'dayjs'
 import React, { useContext } from 'react'
 import { PostsContext } from './Posts'
+import Link from 'components/Link'
 
 const Skeleton = () => {
     return (
@@ -33,7 +34,14 @@ export default function FeaturedPost({ title, date, authors, featuredImage, slug
                     </div>
                     <div>
                         <p className="m-0 text-[15px] opacity-75">{postDate}</p>
-                        <h2 className="mt-2 mb-3 text-3xl lg:text-4xl">{title}</h2>
+                        <h2 className="mt-2 mb-3 text-3xl lg:text-4xl">
+                            <Link
+                                to={slug}
+                                className="text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
+                            >
+                                {title}
+                            </Link>
+                        </h2>
                         {authors?.data?.length > 0 && (
                             <ul className="list-none m-0 p-0 flex space-x-2 items-center">
                                 {authors.data.map(({ id, attributes: { firstName, lastName, avatar } }) => {

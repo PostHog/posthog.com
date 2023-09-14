@@ -12,6 +12,7 @@ import { useInView } from 'react-intersection-observer'
 import { QuestionForm } from 'components/Squeak'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isToday from 'dayjs/plugin/isToday'
+import { useLayoutData } from 'components/Layout/hooks'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -96,14 +97,11 @@ const Post = ({
     const defaultImage = post_category?.data?.attributes?.defaultImage?.data?.attributes?.url
 
     return (
-        <li
-            ref={containerRef}
-            className="snap-start border-t border-light dark:border-dark first:border-t-0 last:pb-24 grid grid-cols-[32px_1fr] gap-2"
-        >
+        <li ref={containerRef} className="snap-start last:pb-24 grid grid-cols-[32px_1fr] gap-2">
             <LikeButton liked={liked} handleClick={handleLike} />
             <span className={`flex items-center ${articleView ? 'py-1' : ''}`} ref={fetchMore ? ref : null}>
                 <Link
-                    className={`inline m-0 font-semibold !leading-tight line-clamp-2 text-inherit hover:text-red dark:hover:text-yellow hover:text-inherit dark:text-inherit dark:hover:text-inherit rounded-md p-2 transition-transform flex-grow hover:bg-accent dark:hover:bg-accent-dark ${
+                    className={`inline m-0 font-semibold !leading-tight line-clamp-2 text-inherit hover:text-primary dark:hover:text-primary-dark hover:text-inherit dark:text-inherit dark:hover:text-inherit rounded-md p-2 hover:transition-transform flex-grow hover:bg-accent dark:hover:bg-accent-dark relative hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] ${
                         active ? 'bg-accent dark:bg-accent-dark' : ''
                     } ${articleView ? 'text-[.933rem]' : 'text-base mr-1.5'}`}
                     to={slug}
@@ -114,7 +112,7 @@ const Post = ({
                             articleView ? 'flex flex-col gap-1' : 'inline'
                         }`}
                     >
-                        {title}
+                        <span className="mr-1">{title}</span>
                         <span className={`${articleView ? 'inline-flex gap-1' : 'inline-flex gap-1'}`}>
                             {authors?.data?.length > 0 && (
                                 <span
@@ -181,12 +179,13 @@ export const Skeleton = () => {
 function PostsListing() {
     const { posts, fetchMore, isValidating, isLoading, articleView } = useContext(PostsContext)
     const breakpoints = useBreakpoint()
+    const { fullWidthContent } = useLayoutData()
 
     return articleView && breakpoints.sm ? null : (
         <div
-            className={`mr-8 lg:ml-8 ml-0 ${
+            className={`transition-all ${fullWidthContent ? 'ml-0 lg:ml-8 mr-8 xl:mr-16' : 'ml-0 lg:ml-8 mr-16'} ${
                 articleView
-                    ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] flex-shrink-0 pt-4'
+                    ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] flex-shrink-0'
                     : 'flex-grow'
             }`}
         >
@@ -229,6 +228,7 @@ export default function Default({ children }) {
     const name = [user?.profile.firstName, user?.profile.lastName].filter(Boolean).join(' ')
     const { setNewPostModalOpen, newPostModalOpen, setLoginModalOpen, articleView } = useContext(PostsContext)
     const { pathname } = useLocation()
+    const { fullWidthContent } = useLayoutData()
 
     return (
         <>
@@ -275,7 +275,7 @@ export default function Default({ children }) {
             </section>
             <section className="md:flex my-4 md:my-8 items-start">
                 <div
-                    className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-[15rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
+                    className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-52 flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
                 >
                     <div className="max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24">
                         <TableOfContents />
@@ -285,7 +285,9 @@ export default function Default({ children }) {
                 <div
                     className={`${articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'}`}
                 >
-                    <div>{children}</div>
+                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-4xl px-0'}`}>
+                        {children}
+                    </div>
                     {articleView && (
                         <div className="mt-12 max-w-2xl">
                             <QuestionForm
