@@ -19,6 +19,7 @@ export default function ClientPost({
     CTA,
     publishedAt,
     post_category,
+    excerpt,
     getPost,
 }: {
     title: string
@@ -29,6 +30,7 @@ export default function ClientPost({
     publishedAt: string
     post_category: { data: { id: number } }
     id: number
+    excerpt: string
     getPost: () => Promise<void>
 }) {
     const { mutate } = useContext(PostsContext)
@@ -67,6 +69,7 @@ export default function ClientPost({
                         ctaURL: CTA?.url,
                         ctaLabel: CTA?.label,
                         category: post_category?.data?.id,
+                        excerpt,
                     }}
                     onSubmit={handleNewPostSubmit}
                 />
