@@ -37,6 +37,8 @@ From a recruitment perspective, we focus on diversifying the top of the recruitm
 * Members of the LGBTQ+ community
 * Those with a disability, whether visible or not
 
+We send all applicants an optional survey to complete as part of their application auto-reply email via Ashby, and will begin to report on this data regularly in Q4 2023. We are also working on a method to track this data throughout the interview process. 
+
 #### Diverse job boards
 
 In addition to posting on our own website, LinkedIn, YC, and AngelList, we look for job boards that specifically target underrepresented groups. We are always testing and learning to see which are most effective. Previous places we have advertised include: 
@@ -64,9 +66,11 @@ We are iterating on our use of the Rooney rule as we still have a few challenges
 * For some roles (e.g. Full-Stack Engineer), we hire ongoingly. This makes the Rooney rule a little harder to make meaningful, but we also want to make sure to keep the pipeline as diverse as possible. Our rule of thumb is that we need to have had an underrepresented candidate at final stage in the previous 3 months for any role that is opening ongoingly. 
 * We need to work out how to be fast, deliver a great candidate experience, and also increase diversity in our hiring. This means that occasionally we should be open to not following the Rooney rule if the alternative is not hire at all for a critical role. If we decide to make an exception for a particular hire, we will transparently communicate to the team why the exception was made.
 
+When we decide we would like to make an offer to a candidate, that acts as the trigger for Coua to check if we have followed the rule for a particular hire. If we haven't, we will then decide with James/Tim if we want to make an exception, and why. In the past we have also let candidates know (if practical) that this forms part of our process and that there may be a delay in their offer. 
+
 #### Pronoun visibility
 
-Adding pronouns to visible parts of your online profiles such as Zoom, email, and Slack is a small action anyone on the team can take, as it can have a positive impact on trans and non-binary people by signaling to them that they are welcome at PostHog. This is because sharing your pronouns is a simple way to normalize not assuming someone's pronouns or gender. If you conduct a lot of interviews, you might like to include this alongside your Zoom display name in particular. 
+Adding pronouns to visible parts of your online profiles such as Meet, email, and Slack is a small action anyone on the team can take, as it can have a positive impact on trans and non-binary people by signaling to them that they are welcome at PostHog. This is because sharing your pronouns is a simple way to normalize not assuming someone's pronouns or gender. If you conduct a lot of interviews, you might like to include this alongside your Meet display name in particular. 
 
 #### Paid (and flexible) SuperDays
 

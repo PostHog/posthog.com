@@ -20,6 +20,6 @@ We use Monday All-Hands as an opportunity to acknowledge cool things that people
 
 You can use `/kudos @person for [reason]` to give someone kudos in Slack whenever you want. The kudos gift won't be visible in the chat for anyone else, but the gifted person will probably enjoy seeing themselves in All-Hands on Monday. 
 
-To list all kudos from the last week, use `/kudos show [daysPast=7]`.
+To list all kudos from the last week, use `/kudos show [daysPast=7]`. For now, this _only_ works on a Monday. 
 
 Alternatively, you can just write directly into the All-Hands doc, though this relies on you remembering things that happened the previous week. 

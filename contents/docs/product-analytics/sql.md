@@ -6,7 +6,7 @@ availability:
     enterprise: full
 ---
 
-SQL insights enable you to directly access data in PostHog using SQL queries. They're powered by [HogQL](/docs/hogql).
+SQL insights enable you to directly access data in PostHog using [SQL queries](/blog/sql-for-analytics). They're powered by [HogQL](/docs/hogql).
 
 ## SQL commands
 
