@@ -954,7 +954,6 @@
         { "source": "/blog/startup-unified", "destination": "/spotlight/startup-unified" },
         { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" }
     ],
-    // CAUTION: Rewrites are different from redirects. Only add a rewrite if you're certain that's what you want and not a redirect.
     "rewrites": [
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
         { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
