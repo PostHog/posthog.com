@@ -29,7 +29,7 @@ const PopularPage = ({ icon, label, url }: PopularPageProps) => {
                 
                 "
                 >
-                    <div className="w-8 h-8 box-border">{icon}</div>
+                    <div className="w-8 h-8 box-border text-white">{icon}</div>
                 </div>
                 <h4 className="text-center text-base leading-tight font-semibold">{label}</h4>
             </Link>
