@@ -12,7 +12,7 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import { useQuestions } from 'hooks/useQuestions'
 import { QuestionData, StrapiResult } from 'lib/strapi'
 import { useLocation } from '@reach/router'
-import { communityMenu } from '../../navs'
+import { communityMenu, companyMenu } from '../../navs'
 import NewPost from './NewPost'
 import { PostProvider } from 'components/PostLayout/context'
 import useMenu from './hooks/useMenu'
@@ -104,7 +104,8 @@ export const Sidebar = () => {
 export const PostsContext = createContext({})
 
 const menusByRoot = {
-    tutorials: communityMenu.children[2],
+    tutorials: { parent: communityMenu, activeInternalNav: communityMenu.children[2] },
+    blog: { parent: companyMenu, activeInternalNav: companyMenu.children[5] },
 }
 
 const Router = ({ children }: { children: React.ReactNode }) => {
@@ -179,10 +180,10 @@ export default function Posts({
         }
     }, [pathname, articleView])
 
-    const menu = menusByRoot[root]
+    const menu = menusByRoot[root] || { parent: communityMenu, activeInternalNav: communityMenu.children[0] }
 
     return (
-        <Layout parent={communityMenu} activeInternalMenu={menu ?? communityMenu.children[0]}>
+        <Layout parent={menu.parent} activeInternalMenu={menu.activeInternalMenu}>
             <PostsContext.Provider
                 value={{
                     mutate,
