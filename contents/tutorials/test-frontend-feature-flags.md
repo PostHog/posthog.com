@@ -79,7 +79,7 @@ root.render(
 );
 ```
 
-With this setup, events are automatically captured, and we can set up our feature flag.
+With this setup, events are automatically captured, and we can set up our [React feature flag](/tutorials/react-feature-flags).
 
 ## Setting up our feature flag
 
