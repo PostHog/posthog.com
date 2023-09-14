@@ -63,4 +63,4 @@ As a solo founder, Phil works across a lot of different areas, but running these
 
 “I get ideas from Twitter, or even just as random thoughts when I’m in the shower,” says Phil. “It’s exciting to be able to test these ideas so quickly, even when I’m spread so thin. When I got that first boost to newsletter conversion, I just said to myself that running these experiments was like my new job.”
 
-“And that’s the thing about these sorts of tests. If you can make a 4% increase here, a 5% increase there…it doesn’t sound like much, but it’s really just money on the table. These improvements all stack up.”
+“And that’s the thing about these sorts of tests. If you can make a 4% increase here, a 5% increase there... it doesn’t sound like much, but it’s really just money on the table. These improvements all stack up.”
