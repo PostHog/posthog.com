@@ -85,38 +85,26 @@ The way to do this is also related to creating a bottom-up culture: Every engine
 
 In practice, this means they should be working to improve the initial hypothesis and coming up with further iterations to test. This also means giving them the freedom to fail, without being overly harsh on them.
 
-## Problem 4: Your team is afraid of causing outages
+## Problem 4: Your team is afraid of making mistakes
 
-(This below might need to be another heading)
+If your team is not making mistakes, you're not moving fast enough. 
 
-another cause is breakages and outages. Make sure you have alerting in place
+In fact, it's not uncommon for growth teams to cause major incidents. And their goal should not be to avoid them!
 
-Your goal as eng team is not to avoid accidents. If you have zero accidents, you're not moving fast enough
+"There's an anecdote that when airbags were first introduced in cars, the average speed on the highway went up. This is essentially what you want to do for your growth team. Give them freedom to make mistakes, but make sure they can be quickly be resolved when they occur."
 
-"Let's see. Yeah, I mean, really good business alerting is really important. I don't know if you run into this, but like, what lets me comfortably shift things without tests is if the business metric fails, I wanna detect it **immediately**.
+### How to fix it
 
-**Writing tests are a waste of time for an experiment that may only live 1 week**. what are all the other layers of safety that you can get that allows you to move faster that improves your experiment velocity because it reduces the amount of busy work that you have to do as an engineer.
+You aim should be to build a resilient system that can rapidly recover from mistakes or incidents.
 
-I want a page and I wanna roll back. Like, like, if you build the system. Nicely. Then it will say, hey, this feature flag got flipped or this rollout got released and then this metric immediately fell."
+In the context of growth teams, there a few ways to do this:
 
-(On how to move faster). He talks about setting up the right tooling
-Talked about Error Boundary components.
-Know all of your critical errors becomes sev 2 -
+- Monitor critical metrics and set up alerts. Ensure you can quickly roll back changes using [configurators or feature flags](https://posthog.com/blog/feature-flags-vs-configuration).
+- Set up [review apps](https://seanconnolly.dev/review-applications) so your team can easily test and dogfood your experiments.
+- To test releases in production, set up [conditional overrides](/docs/experiments/testing-and-launching) so you can quickly test each experiment variant.
+- Instead of crashing your app when rendering errors occur, display a fallback UI. In React, you can easily add these with [Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) (and similar concepts existing in other frameworks).
 
-Force parameters - Making sure you’re adding to the right variant. Making sure its easy to replicate
-Really good component tests are valuable – reusable components be strongly tested. So nobody can be added to component framework and break your experiment
-
-
-- Testing & Release
-    - Testing Philosophy: Integration and Components, No Snapshot/FE tests for experiments
-        - Test Plan
-    - Review Apps
-    - Force Parameters - making sure easy to repro
-    - Chrome Extensions for Analytics Events
-    - Advanced: Experiment Aware Tests (these are hard)
-    - Error Boundaries
-
-Anecdote: story of airbags. If you have your airbags, you can increase your spee
+Notice that none of the solutions involve writing tests, which are a **waste of time** for experiments that may only last for a week.
 
 ## Final tip: Your team may be tired
 
@@ -126,9 +114,9 @@ It's common for engineers to start feeling bored after a few quarters and there'
 
 ### How to fix it
 
-Rotate your engineers. By offering them opportunities to switch teams or projects, you can expose them to new challenges and rekindle their enthusiasm.
+Rotate your engineers. Rekindle their enthusiasm and expose them to new challenges. Offer them opportunities to change teams or projects.
 
-This has many benefits, such as increasing knowledge sharing across teams and diversifying their skill sets. More importantly, it significantly reduces the risk of losing a talented engineer.
+This has many benefits, like increasing knowledge sharing across teams and diversifying their skill sets. More importantly, it significantly reduces the risk of losing a talented engineer.
 
 ## Further reading
 
