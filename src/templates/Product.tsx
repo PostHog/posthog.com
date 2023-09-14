@@ -381,6 +381,7 @@ export const query = graphql`
                         }
                     }
                     sections {
+                        featuresType
                         features {
                             title
                             description

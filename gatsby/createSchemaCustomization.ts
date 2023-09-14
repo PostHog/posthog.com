@@ -179,6 +179,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type MdxFrontmatterProductSections {
+      image: File
+    }
   `)
     createTypes([
         schema.buildObjectType({

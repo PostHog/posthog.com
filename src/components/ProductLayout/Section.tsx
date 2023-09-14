@@ -1,7 +1,7 @@
 import React from 'react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { IMarquee, ISection, ISectionHeading, ISectionWrapper } from './types'
-import { FeatureList } from './Feature'
+import { FeatureGrid, FeatureList } from './Feature'
 import TwoCol from './TwoCol'
 import slugify from 'slugify'
 import { CallToAction } from 'components/CallToAction'
@@ -18,7 +18,7 @@ export const SectionHeading = ({ title, subtitle }: ISectionHeading) => {
                 </h2>
             )}
             {subtitle && typeof subtitle === 'string' ? (
-                <p className="text-base font-semibold opacity-70 m-0">{subtitle}</p>
+                <p className="text-base font-semibold opacity-70 m-0" dangerouslySetInnerHTML={{ __html: subtitle }} />
             ) : (
                 subtitle
             )}
@@ -91,13 +91,16 @@ export default function Section({
     imageFrame = true,
     className = '',
     callout,
+    featuresType = 'list',
 }: ISection) {
     const gatsbImage = image && getImage(image)
     return (
         <div className={className} style={{ alignSelf: align }}>
             {(title || subtitle) && <SectionHeading title={title} subtitle={subtitle} />}
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
-            {features && features?.length > 0 && <FeatureList features={features} />}
+            {features &&
+                features?.length > 0 &&
+                (featuresType === 'card' ? <FeatureGrid features={features} /> : <FeatureList features={features} />)}
             {gatsbImage && (
                 <GatsbyImage
                     alt={title || ''}
