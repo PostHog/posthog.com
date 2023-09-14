@@ -19,7 +19,7 @@ export default function InternalSidebar({ tableOfContents, mobile = true }) {
                                 url={navItem.url}
                                 name={navItem.value}
                                 depth={navItem.depth}
-                                className="jumpTo text-[15px] pl-6"
+                                className="jumpTo text-sm 2xl:text-[15px] pl-6"
                             />
                         </li>
                     )

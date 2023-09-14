@@ -32,17 +32,17 @@ export default function PostCard({ title, featuredImage, date, excerpt, slug, fe
     }, [inView])
 
     return (
-        <div ref={fetchMore ? ref : null}>
+        <div className="h-full" ref={fetchMore ? ref : null}>
             <Link
-                className="!text-inherit p-3 border border-transparent hover:border-border dark:hover:border-dark rounded-md hover:bg-accent dark:hover:bg-accent-dark transition-colors block h-full relative active:top-[1px] active:scale-[.99]"
+                className="!text-inherit py-2 md:p-3 font-normal border border-transparent hover:border-border dark:hover:border-dark rounded-md hover:bg-accent dark:hover:bg-accent-dark hover:scale-[1.01] transition-colors block h-full relative active:top-[1px] active:scale-[.99]"
                 to={slug}
             >
                 <div className="w-full aspect-video rounded-md overflow-hidden">
                     <img className="w-full h-full object-cover" src={imageURL || '/banner.png'} />
                 </div>
-                <p className="m-0 text-sm mt-2">{postDate}</p>
+                <p className="m-0 text-sm mt-3 opacity-75">{postDate}</p>
                 <h3 className="my-1 text-xl leading-tight">{title}</h3>
-                {excerpt && <p className="m-0 text-sm">{excerpt}</p>}
+                {excerpt && <p className="m-0 text-[15px] line-clamp-3">{excerpt}</p>}
             </Link>
         </div>
     )

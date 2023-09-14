@@ -96,13 +96,17 @@ const Post = ({
     const defaultImage = post_category?.data?.attributes?.defaultImage?.data?.attributes?.url
 
     return (
-        <li ref={containerRef} className="snap-start last:pb-24 grid grid-cols-[32px_1fr] gap-2">
+        <li
+            ref={containerRef}
+            className="snap-start border-t border-light dark:border-dark first:border-t-0 last:pb-24 grid grid-cols-[32px_1fr] gap-2"
+        >
             <LikeButton liked={liked} handleClick={handleLike} />
             <span className={`flex items-center ${articleView ? 'py-1' : ''}`} ref={fetchMore ? ref : null}>
-                <div
-                    className={`rounded-md p-2 transition-all flex-grow ${
+                <Link
+                    className={`inline m-0 font-semibold !leading-tight line-clamp-2 text-inherit hover:text-red dark:hover:text-yellow hover:text-inherit dark:text-inherit dark:hover:text-inherit rounded-md p-2 transition-transform flex-grow hover:bg-accent dark:hover:bg-accent-dark ${
                         active ? 'bg-accent dark:bg-accent-dark' : ''
-                    }`}
+                    } ${articleView ? 'text-[.933rem]' : 'text-base mr-1.5'}`}
+                    to={slug}
                 >
                     {category && <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>}
                     <div
@@ -110,14 +114,7 @@ const Post = ({
                             articleView ? 'flex flex-col gap-1' : 'inline'
                         }`}
                     >
-                        <Link
-                            className={`inline m-0 font-semibold !leading-tight line-clamp-2 text-inherit hover:text-red dark:hover:text-yellow hover:text-inherit dark:text-inherit dark:hover:text-inherit ${
-                                articleView ? 'text-[.933rem]' : 'text-base mr-1.5'
-                            }`}
-                            to={slug}
-                        >
-                            {title}
-                        </Link>
+                        {title}
                         <span className={`${articleView ? 'inline-flex gap-1' : 'inline-flex gap-1'}`}>
                             {authors?.data?.length > 0 && (
                                 <span
@@ -143,9 +140,8 @@ const Post = ({
                         </span>
                     </div>
                     <div className="hidden sm:w-[100px] sm:h-[85px] w-[50px] h-[50px] flex-shrink-0 bg-accent dark:bg-accent-dark rounded-sm overflow-hidden md:self-start self-center relative z-10">
-                        <Link
+                        <span
                             className={`text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit flex-grow`}
-                            to={slug}
                         >
                             {imageURL?.endsWith('.mp4') ? (
                                 <video className="object-cover w-full h-full" src={imageURL} />
@@ -157,9 +153,9 @@ const Post = ({
                                     src={imageURL || defaultImage || '/banner.png'}
                                 />
                             )}
-                        </Link>
+                        </span>
                     </div>
-                </div>
+                </Link>
             </span>
         </li>
     )
@@ -202,7 +198,7 @@ function PostsListing() {
                 }
             >
                 <ul
-                    className={`divide-y divide-border dark:divide-border-dark list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
+                    className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto' : ''
                     }`}
                 >

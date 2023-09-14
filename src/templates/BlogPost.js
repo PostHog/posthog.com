@@ -140,7 +140,11 @@ export default function BlogPost({ data, pageContext, location }) {
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>
-                    <div className={`shrink basis-72 @2xl:reasonable:sticky top-[128px] ${fullWidthContent ? '' : ''}`}>
+                    <div
+                        className={`shrink basis-72 @2xl:reasonable:sticky top-[128px] w-full ${
+                            fullWidthContent ? '' : ''
+                        }`}
+                    >
                         <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
                     </div>
                 </div>
