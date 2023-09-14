@@ -36,30 +36,33 @@ productSections: [
       title: "A single home for all product usage data",
     },
     sections: [
-      features: [
-        {
-            icon: 'Events',
-            title: 'Events',
-            description:
-                'Raw activity data like clicks, pageviews, and any custom events you send from your codebase',
-        },
-        {
-            icon: 'Actions',
-            title: 'Actions',
-            description: 'Synthetic events that can be retroactively created from interactions with the DOM',
-        },
-        {
-            icon: 'User',
-            title: 'Persons',
-            description:
-                "Individual level user activity and properties from both identified (logged in) and anonymous users",
-        },
-        {
-            icon: 'Annotation',
-            title: 'Annotations',
-            description: 'Add context around product updates ship or when website traffic spikes',
-        },
-      ]
+      {
+        featuresType: card,
+        features: [
+          {
+              icon: 'Events',
+              title: 'Events',
+              description:
+                  'Raw activity data like clicks, pageviews, and any custom events you send from your codebase',
+          },
+          {
+              icon: 'Actions',
+              title: 'Actions',
+              description: 'Synthetic events that can be retroactively created from interactions with the DOM',
+          },
+          {
+              icon: 'User',
+              title: 'Persons',
+              description:
+                  "Individual level user activity and properties from both identified (logged in) and anonymous users",
+          },
+          {
+              icon: 'Annotation',
+              title: 'Annotations',
+              description: 'Add context around product updates ship or when website traffic spikes',
+          },
+        ]
+      }
     ]
   ],
   [
