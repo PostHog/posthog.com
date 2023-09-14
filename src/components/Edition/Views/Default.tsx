@@ -112,7 +112,7 @@ const Post = ({
                             articleView ? 'flex flex-col gap-1' : 'inline'
                         }`}
                     >
-                        {title}
+                        <span className="mr-1">{title}</span>
                         <span className={`${articleView ? 'inline-flex gap-1' : 'inline-flex gap-1'}`}>
                             {authors?.data?.length > 0 && (
                                 <span
