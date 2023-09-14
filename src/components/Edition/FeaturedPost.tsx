@@ -35,7 +35,7 @@ export default function FeaturedPost({ title, date, authors, featuredImage, slug
                         <p className="m-0">{postDate}</p>
                         <h2 className="mt-2 mb-3">{title}</h2>
                         {authors?.data?.length > 0 && (
-                            <ul className="list-none m-0 p-0">
+                            <ul className="list-none m-0 p-0 flex space-x-2 items-center">
                                 {authors.data.map(({ id, attributes: { firstName, lastName, avatar } }) => {
                                     const image = avatar?.data?.attributes?.url
                                     const name = [firstName, lastName].filter(Boolean).join(' ')
