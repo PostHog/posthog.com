@@ -76,7 +76,7 @@ As mentioned, decoupling deployment from release is a best practice. To prove th
 
 ## How you can decouple deployment from release
 
-Now that you understand the merits of decoupling deployments from release and some examples of how top companies do it, how do you make it happen yourself? Two of the easiest ways to get started are:
+Now that you understand the merits of decoupling deployments from release and some examples of how top companies do it, how can you do it yourself? Two of the easiest ways to get started are:
 
 1. **Feature flags.** Deploy features behind [feature flags](/docs/feature-flags). Use conditional rollouts to roll out features to the internal team, beta users, and canary release.
 
