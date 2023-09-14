@@ -28,7 +28,7 @@ Here's how to set these up so that the app has access only to the dataset it nee
 
 ![Create JSON private key](../../../images/docs/batch-exports/bigquery/create-private-key-json.png)
 
-4. (Optional) Create a role which has only the specific permissions the batch export requires:
+4. Create a role which has only the specific permissions the batch export requires:
    * `bigquery.datasets.get`
    * `bigquery.jobs.create`
    * `bigquery.tables.create`
