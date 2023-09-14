@@ -35,7 +35,7 @@ Phil was familiar with the _concept_ of A/B testing, but had never tried actuall
 <Caption>Tests in PostHog can have multiple variants, but Phil kept his simple and split traffic 50/50 between the original (left) and the test (right) versions</Caption>
 
 
-As soon as the test was running Phil started to see a clear winner — enough that, even though PostHog tracks statistical significance automatically, he was confident in selecting a winner prematurely. 
+As soon as the test was running, Phil started to see a clear winner – enough that, even though PostHog tracks statistical significance automatically, he was confident in selecting a winner prematurely. 
 
 “I made the call to end the experiment early and deploy the test version,” says Phil. “It took less that two weeks to get that result and the difference was enough to justify it. At no point did the original control version perform better than the variant. I set it live and have been getting more subscriptions ever since!” 
 
