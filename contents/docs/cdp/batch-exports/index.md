@@ -49,7 +49,7 @@ Each run has:
 4. The option of retrying a specific run.
 
 
-## Historical exports
+## Exporting historical data
 
 You can use batch exports for past data stored in PostHog, known as historical data. For this, you don't need to create a new batch export. The batch export already knows the destination where we wish to send historical data. It only requires the boundaries for the data you want to export, in other words, a start and an end date.
 
