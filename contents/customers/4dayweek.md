@@ -59,7 +59,7 @@ One example of this came from a test to change the H1 on 4DayWeek, adapting it f
 
 “Very quickly I could see that people preferred the first version,” says Phil. “It said it more concisely and wasn’t trying to be too clever. That’s an example of when even getting a negative result can be helpful, because it helps you avoid mistakes. That’s why I run these tests!”
 
-As a solo founder Phil is obviously working across a lot of different areas, but running these sorts of test — even when they are unsuccessful — has become a major priority for him. He finds he’s constantly getting new ideas. 
+As a solo founder, Phil works across a lot of different areas, but running these sorts of test – even when they are unsuccessful – has become a priority. He finds he’s constantly getting new ideas. 
 
 “I get ideas from Twitter, or even just as random thoughts when I’m in the shower,” says Phil. “It’s exciting to be able to test these ideas so quickly, even when I’m spread so thin. When I got that first boost to newsletter conversion? I just said to myself that running these experiments was like my new job.”
 
