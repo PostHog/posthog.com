@@ -285,7 +285,7 @@ export default function Default({ children }) {
                 <div
                     className={`${articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'}`}
                 >
-                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
+                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-4xl px-0'}`}>
                         {children}
                     </div>
                     {articleView && (

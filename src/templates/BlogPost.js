@@ -138,13 +138,7 @@ export default function BlogPost({ data, pageContext, location }) {
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>
-                    <div
-                        className={`shrink basis-72 @2xl:reasonable:sticky @2xl:reasonable:overflow-auto @2xl:max-h-[calc(100vh_-_128px)] top-[128px] @2xl:pr-1 w-full ${
-                            fullWidthContent ? '' : ''
-                        }`}
-                    >
-                        <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
-                    </div>
+                    <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
                 </div>
             </div>
         </>

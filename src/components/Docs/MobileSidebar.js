@@ -4,7 +4,7 @@ import InternalSidebarLink from './InternalSidebarLink'
 export default function InternalSidebar({ tableOfContents, mobile = true }) {
     return (
         <aside
-            className={`p-4 block ${
+            className={`shrink basis-96 w-full @2xl:reasonable:sticky @2xl:reasonable:overflow-auto @2xl:max-h-[calc(100vh_-_128px)] top-[128px] @2xl:pr-1 p-4 block ${
                 mobile ? 'lg:hidden' : ''
             } bg-accent dark:bg-accent-dark border border-border dark:border-dark rounded-md`}
         >
