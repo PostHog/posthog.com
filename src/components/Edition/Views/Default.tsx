@@ -189,7 +189,9 @@ function PostsListing() {
     return articleView && breakpoints.sm ? null : (
         <div
             className={`mr-8 lg:ml-8 ml-0 ${
-                articleView ? 'reasonable:sticky top-[108px] w-full md:w-[20rem] flex-shrink-0 pt-4' : 'flex-grow'
+                articleView
+                    ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] flex-shrink-0 pt-4'
+                    : 'flex-grow'
             }`}
         >
             <div
@@ -277,9 +279,9 @@ export default function Default({ children }) {
             </section>
             <section className="md:flex my-4 md:my-8 items-start">
                 <div
-                    className={`lg:block hidden reasonable:sticky top-[108px] pt-3 w-[15rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
+                    className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-[15rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
                 >
-                    <div className="max-h-[85vh] overflow-auto snap-y pb-24">
+                    <div className="max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24">
                         <TableOfContents />
                     </div>
                 </div>
