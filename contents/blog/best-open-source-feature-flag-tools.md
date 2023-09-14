@@ -26,13 +26,13 @@ Feature flags, aka feature toggles, turn specific functions on and off during ru
 
 - **Controlling feature access** to certain features based on user criteria, such as location, device type or subscription level.
 
-- **Beta feature opt-in**, enabling users can autonomously subscribe to new features.
+- **Beta feature opt-in**, enabling users can autonomously test new features.
 
 In this guide, we’ll explore some of the best open source feature flag tools, all of which are either totally free or offer generous free plans. If you want to run experiments as well, we recommend reading our guide to the [best open-source A/B testing tools](/blog/best-open-source-ab-testing-tools).
 
 > **Changelog:**
 > - **Mar 15, 2023:** Removed DevCycle, added Flipt. Updated copy and screenshots.
-> – **Sep 14, 2023:** Removed Harness, added Flipper and FeatBit, added SDKs
+> - **Sep 14, 2023:** Removed Harness, added Flipper and FeatBit, added SDKs
 
 ## 1. PostHog
 
@@ -44,7 +44,7 @@ In this guide, we’ll explore some of the best open source feature flag tools, 
 
 [PostHog](https://posthog.com) is an all-in-one platform that captures and visualizes all the data your team needs in one place. In addition to feature flags, it offers comprehensive product analytics, session replay, A/B testing, and user surveys.
 
-PostHog's [feature flags](/docs/feature-flags) also power its [A/B testing features](/docs/experiments), so you can test product changes with A/B tests or define user segments for feature access. Multivariate flags enable you to test several variants of the same interchangeable elements.
+PostHog's [feature flags](/docs/feature-flags) enable conditional roll outs, multivariate flags, JSON payloads, automated usage reports, local evaluation, and more. They power its [A/B testing features](/docs/experiments), so you can test product changes for their impact on key metrics. They also enable [early access feature management](/docs/feature-flags/early-access-feature-management), so you can run product betas with ease.
 
 ### Supported libraries
 
@@ -115,14 +115,14 @@ PostHog's [feature flags](/docs/feature-flags) also power its [A/B testing featu
 
 - Extensive library support
 - All-in-one analytics platform
-- A/B testing features (hosted version only)
+- A/B testing features (Cloud version only)
 - Multivariate flags for several variations per test
 - Target by user properties and percentage
 - Free third-party apps to enrich your data
 
 ### How much does it cost?
 
-There are no limits on feature flag usage in the open source edition, though A/B testing isn't available. PostHog's hosted edition includes 1 million API requests per month for free – see the [feature flag pricing page](/pricing?product=feature-flags) for more info.
+There are no limits on feature flag usage in the open source edition, though A/B testing isn't available. PostHog's Cloud edition includes 1 million API requests per month for free – see the [feature flag pricing page](/pricing?product=feature-flags) for more info.
 
 ## 2. Flagsmith
 
@@ -134,7 +134,7 @@ There are no limits on feature flag usage in the open source edition, though A/B
 
 [Flagsmith](https://flagsmith.com/) is a feature flag tool that makes it easy to test and deploy new functional and visual changes to users without pushing updates to code. All flags in Flagsmith are capable of being configured for cross-platform remote configuration, so you can alter an app in real-time without having to wait for app store approval.
 
-Flagsmith is heavily user-focused. You can use the tooling to create detailed user segments based on store traits, and roll out features based on those identifiers. The platform doesn’t provide full analytics however, so a third-party provider will be required for visibility on any testing you want to carry out.
+Flagsmith is heavily user-focused. You can use the tooling to create detailed user segments based on store traits, and roll out features based on those identifiers. The platform doesn’t provide full analytics however, so a third-party provider is required for visibility on usage or testing.
 
 ### Supported SDKs
 
@@ -220,7 +220,7 @@ Flagsmith is free up to 50,000 requests per month when you choose the cloud solu
 - **GitHub stars:** 9k
 - [Flagsmith on GitHub](https://github.com/Unleash/unleash)
 
-[Unleash](https://www.getunleash.io/) lets you safely test and release new features with defined rules. The platform removes pressure from developers and lets them play around with features safely. The [canary release](/tutorials/canary-release) feature allows you to strategically manage gradual rollouts, identify issues and use kill switches to roll back in seconds. Unleash is not an analytics platform, and you’ll need to connect a third-party platform to visualize analytics on experiments like A/B tests.
+[Unleash](https://www.getunleash.io/) lets you safely test and release new features with defined rules. The platform removes pressure from developers and lets them deploy features safely. The [canary release](/tutorials/canary-release) feature enables you to strategically manage gradual rollouts, identify issues, and use kill switches to roll back in seconds. Unleash is not an analytics platform, so you must connect a third-party platform to visualize analytics on usage or experiments.
 
 ### Supported SDKs
 
@@ -306,7 +306,7 @@ Unleash is free for two environments when you self-host. A managed version is al
 - **GitHub stars:** 4.9k
 - [GrowthBook on GitHub](https://github.com/growthbook/growthbook/)
 
-[GrowthBook](https://www.growthbook.io/) is a warehouse native, open-source feature flagging and experimentation platform built to help companies make better data-driven decisions. Its flag tool features advanced targeting, gradual rollouts and experiments. The platform is highly customizable and gives users the option to choose between a full testing platform, a plugin toggle tool, or a data analysis engine.
+[GrowthBook](https://www.growthbook.io/) is a warehouse native, open-source feature flagging and experimentation platform built to help companies make better data-driven decisions. Its flag tool features advanced targeting, gradual rollouts, and experiments. The platform is highly customizable and gives users the option to choose between a full testing platform, a plugin toggle tool, or a data analysis engine.
 
 ### Supported SDKs
 
@@ -481,7 +481,7 @@ Nothing. There is no paid version of Flipt. It's distributed under a GPL-3.0 lic
 - **GitHub stars:** 3.4k
 - [Flipper on GitHub](https://github.com/flippercloud/flipper)
 
-Flipper is a rebuilt version of the [feature flag platform used GitHub](https://posthog.com/blog/github-gitlab-feature-flags), maintained by a small team of ex-GitHub engineers. It supports all the common use cases for feature flags, such as boolean flags, group targeted flags, and targeting by actors or a percentage of actors. It currently only supports Ruby applications, though support for other languages is planned.
+Flipper is a rebuilt version of the [feature flag platform used GitHub](/blog/github-gitlab-feature-flags), maintained by a small team of ex-GitHub engineers. It supports all the common use cases for feature flags, such as boolean flags, group targeted flags, and targeting by actors or a percentage of actors. It currently only supports Ruby applications, though support for other languages is planned.
 
 ### Supported SDKs
 
