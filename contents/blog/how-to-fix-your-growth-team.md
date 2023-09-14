@@ -14,7 +14,7 @@ tags:
   - Product metrics
 ---
 
-There are telltale signals when a growth team isn't succeeding: stagnating metrics, unmet KPIs, and burnt out engineers. Everyone is frustrated, but how do you fix it?
+There are tell-tale signs when a growth team isn't succeeding: Stuck metrics, unmet KPIs, and burnt out engineers. Everyone is frustrated, but how do you fix it?
 
 [Alexey Komissarouk](https://alexeymk.com/), former head of growth engineering at [MasterClass](https://www.masterclass.com/), has seen it all. He grew Masterclass xyz... In this post, Alexey shares his advice on how to get your growth team winning again.
 
@@ -36,13 +36,56 @@ First, sit with the engineering team and prioritize your technical debt. Figure 
 
 Second (and more importantly), encourage your team to take shortcuts. The role of a growth engineer is not to necessarily build feature, but rather to validate whether building a feature is a good idea or not. 
 
-With this in mind, a good team exercise for this is to look at your last 20 experiments and identify which ones you could have validated faster. Thomas Owers, former growth lead at [Let's Do This](https://www.letsdothis.com/), has [good advice](/blog/how-to-start-a-growth-team#thomass-golden-rule-make-your-code-changes-as-small-as-possible) on this:
+With this in mind, a good team exercise is to look at your last 20 experiments and identify which ones you could have validated faster. Thomas Owers, former growth lead at [Let's Do This](https://www.letsdothis.com/), has [good advice](/blog/how-to-start-a-growth-team#thomass-golden-rule-make-your-code-changes-as-small-as-possible) on this:
 
 "Instead of asking 'How long will a project take?', ask 'What can you do in only 1 week? 3 days? Half a day?'. Often you'll find that you can reduce the scope of the change while still being able to validate your hypothesis".
 
----
+## Problem 2: Your experiment win rate is low
 
-## Problem 2: Your team is afraid of causing outages
+You keep trying new ideas, but none of experiments are working. "You need better ideas", says Alexey, "and, counter-intuitively, the way to do this is to improve the estimates of your current ideas".
+
+Typically, teams prioritize their roadmaps by using frameworks such as [RICE](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/) and assigning t-shirt size estimates ("S", "M", "L"). This doesn't go deep enough, and leads to teams wasting time building pointless things. It doesn't make sense spending only five minutes estimating something your team will spend weeks on.
+
+### How to fix it 
+
+Once you have shortlisted the ideas you want to work on, the next step is spend an additional hour on each one and estimate the dollar impact. Because you know **exactly** what to expect from your experiments, the result is a higher win rate.
+
+This approach was made famous by Facebook Messenger's VP of growth Darius Contractor and his [EVELYN framework](https://www.drift.com/blog/secret-to-faster-growth/). He even shares a handy [sheet with real examples you can copy](https://airtable.com/appzs6HT2ggrJt9pN/shrInOxl0SL1Xmauk/tblTQFEMcXAaEgSpM/viwZessbXpiA8q2jd?blocks=bipMQFWTjqu0HI3wv).
+
+Alexey says that one of their biggest wins came from following this approach:
+
+"At MasterClass, we had one-size-fits-all pricing. We knew we would eventually need to add tiered pricing, but this would be a huge, months-long company efforts. We struggled to prioritize it."
+
+Enter EVELYN. Alexey knew they needed a dollar estimate of the impact.
+
+"Instead of building the entire backend, we built a simple [fake door test](https://posthog.com/tutorials/fake-door-test) on the frontend. Users could select their preferred tier, but at checkout we let them know that they were being upgraded to the best tier and at the cheapest price. In reality, this was actually the existing one-size-fits-all pricing.
+
+Now we knew how much money the company could make by implementing tiered pricing. We prioritzed it immediately and it was incredibly easy to ask the rest of the company to work on this for a few months!"
+
+## Problem 3: Your experiment win size is low
+
+Your growth team has been around for a few quarters and you've picked all the low hanging fruit. Your new experiments require more efforts AND have less impact. Now what?
+
+[John Egan](https://jwegan.com/growth-hacking/managing-growth-teams-portfolio-step-step-guide/), former head of growth engineering at Pinterest, recommends two levers you can pull:
+
+1. Increase the number of high quality project ideas.
+2. Maximize the impact of every experiment you ship.
+
+### Increase the number of high quality project ideas
+
+The best way to do this is create a bottom-up culture where it's the job of **every single person** to come up with ideas. That means every engineer, designer, data scientist, sales rep, marketer etc.
+
+When it's everyone's job to do this, the number of ideas increases dramatically. Then, by applying the EVENLYN framework mentioned above, you distill the list to only the best ideas.
+
+> **💡 Tip:** To create an inclusive ideas culture, make your [brainstorms asynchronous](https://source.opennews.org/articles/redesigning-brainstorming-asynchronous/).
+
+### Maximize the impact of every experiment you ship
+
+The way to do this is also related to creating a bottom-up culture: Every engineer should own the experiments they are working on. They must be empowered to make them as impactful as possible – even if it wasn't originally their idea! 
+
+In practice, this means they should be working to improve the initial hypothesis and coming up with further iterations to test. This also means giving them the freedom to fail, without being overly harsh on them.
+
+## Problem 4: Your team is afraid of causing outages
 
 (This below might need to be another heading)
 
@@ -75,82 +118,17 @@ Really good component tests are valuable – reusable components be strongly tes
 
 Anecdote: story of airbags. If you have your airbags, you can increase your spee
 
-## Problem 3: Your experiment win rate is low
+## Final tip: Your team may be tired
 
-You keep trying new ideas, but none of experiments have the expected outcome. "You need better ideas", says Alexey, "and, counter-intuitively, the way to do this is to improve the estimates of your current ideas".
+It's okay if your engineers are tired. Growth engineering may not be as fulfilling for some people, especially if they yearn to build deep and complex systems.
 
-Typically teams prioritize their roadmaps by using frameworks such as [RICE](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/) and assigning t-shirt size estimates ("S", "M", "L"). This doesn't go deep enough, and leads to teams wasting time building pointless things. It doesn't make sense to spend only five minutes estimating something your team will spend weeks on.
+It's common for engineers to start feeling bored after a few quarters and there's no shame in this. A symptom of this is diminishing returns from the team's work. There's an easy fix for it, though:
 
-### How to fix it 
+### How to fix it
 
-Once you have shortlisted the ideas you want to work on, the next step is spend an additional hour on each one and estimate the dollar impact. The result is that you have a higher win rate, because you know **exactly** what to expect from your experiments.
+Rotate your engineers. By offering them opportunities to switch teams or projects, you can expose them to new challenges and rekindle their enthusiasm.
 
-This approach was made famous by Facebook Messenger's VP of growth Darius Contractor and his [EVELYN framework](https://www.drift.com/blog/secret-to-faster-growth/). He even shares a handy [airtable with real examples you can copy](https://airtable.com/appzs6HT2ggrJt9pN/shrInOxl0SL1Xmauk/tblTQFEMcXAaEgSpM/viwZessbXpiA8q2jd?blocks=bipMQFWTjqu0HI3wv).
-
-Alexey says that one of their biggest wins from following this approach:
-
-"At MasterClass, we had one-size-fits-all pricing. We knew we would eventually need to add tiered pricing, but this would be a huge, months-long company efforts. We struggled to prioritize it."
-
-Enter EVELYN. Alexey knew they needed a dollar estimate of the impact.
-
-"Instead of building the entire backend, we built a simple [fake door test](https://posthog.com/tutorials/fake-door-test) on the frontend. Users could select their preferred tier, but at checkout we let them know that they were being upgraded to the best tier and at the cheapest price. In reality, this was actually the existing one-size-fits-all pricing.
-
-Now we knew how much money the company could make by implementing. Then it was incredibly easy to ask for the rest of the company to work on this for a few months!"
-
-## Problem 4: Your experiment win size is low
-
-Your growth team has been around for a few quarters and you've picked all the low hanging fruit. Your new experiments require more efforts AND have less impact. Now what?
-
-[John Egan](https://jwegan.com/growth-hacking/managing-growth-teams-portfolio-step-step-guide/), former head of growth engineering at Pinterest, recommends two levers you can pull:
-
-1. Increase the number of high quality project ideas.
-2. Maximize the impact of every experiment you ship.
-
-### Increase the number of high quality project ideas
-
-The best way to do this is create a bottom-up culture where it's the job of **every single person** to come up with ideas. That means every engineer, designer, data scientist, sales rep, marketer etc.
-
-When it's everyone's job to do this, the number of ideas increases dramatically. Then, by applying the estimation process mentioned above, you distill the list to only the best ideas.
-
-> **💡 Tip:** To create an inclusive ideas culture, make your [brainstorms asynchronous](https://source.opennews.org/articles/redesigning-brainstorming-asynchronous/).
-
-### Maximize the impact of every experiment you ship
-
-The way to do this is also related to creating a bottom-up culture: Every engineer should own the experiments they are working on and be empowered to make it as impactful as possible – even if it wasn't originally their idea! 
-
-They should be hypothesizing how to improve and iterate on their experiments. This ensures that you squeeze as much impact as possible from every idea.
-
-
-
----
-Closing thoughts:
-
-Growth eng can get tired. It makes sense to rotate them
-
-You just got tired. Like, it's okay. That makes sense. That isn't a bad thing. But like, it's not just because one team is like starting to see diminishing returns doesn't mean that they aren't there.
-
-And to rotate them between growth and core product or growth on the platform. Because sometimes you need to work on something else, right?
-
-There's no shame, like, if they're bored of it, they don't like it at all, and they're willing to tolerate it and then, right?
-
-
-Like, you know, I was a good soldier for a quarter or two, but like, I'm done with this, right?
-
-
-Because they just legitimately need to change, like, they like it, but they want to do something else, right? Regardless, yeah, like, if an engineer is hired or something, and they're a good engineer, you should go find something else so they can do the
-
-If youre seeing your win rate or win size is going down.
-Or your team is tired and need to go somewhere 
-
-At open-door I spent first 2 years top of funnel
-
-When I came to manage the team
-
-There are wins here you just got tired.
-
-Just because one team cantf find, doesn’t mean its not their
-
-It makes a lot of sense to rotate teams inside of growth . Sometimes 
+This has many benefits, such as increasing knowledge sharing across teams and diversifying their skill sets. More importantly, it significantly reduces the risk of losing a talented engineer.
 
 ## Further reading
 
