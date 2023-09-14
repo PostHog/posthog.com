@@ -738,7 +738,6 @@ export const communityMenu = {
                         { name: 'Site apps', url: '/tutorials/categories/site-apps' },
                         { name: 'Team collaboration', url: '/tutorials/categories/team-collaboration' },
                         { name: 'Toolbar', url: '/tutorials/categories/toolbar' },
-                        { name: 'UTM segmentation', url: '/tutorials/categories/utm-segmentation' },
                     ],
                 },
                 {
