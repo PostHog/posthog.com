@@ -28,7 +28,7 @@ The fact that Phil builds in public made him naturally curious about PostHog, be
 
 Phil was familiar with the _concept_ of A/B testing, but had never tried actually running a test before. Thankfully, with a little help from ChatGPT and [PostHog’s documentation](/tutorials/categories/experimentation), he quickly got up to speed and began planning how to run A/B tests that could make 4DayWeek even more successful.  
 
-“Everything test has to begin with a hypothesis,” says Phil. “In my case, I wanted to test if social proofs would help increase the number of newsletter signups. My hypothesis was that users would be more likely to convert if they had an indication that the service was popular and trusted by lots of people.”
+“Every test has to begin with a hypothesis,” says Phil. “In my case, I wanted to test if social proofs would help increase the number of newsletter signups. My hypothesis was that users would be more likely to convert if they had an indication that the service was popular and trusted by lots of people.”
 
 ​
 ![PostHog 4dayweek experiment](../images/customers/4dayweek/4dayweek-before-after.png)
