@@ -1,6 +1,6 @@
 ---
 title: Why your growth team isn't winning (and how to fix it)
-date: 2023-09-13
+date: 2023-09-14
 author: ["lior-neu-ner"]
 showTitle: true
 rootpage: /blog
@@ -12,11 +12,14 @@ category: Product growth
 tags: 
   - Guides
   - Product metrics
+  - Product engineers
 ---
 
 There are tell-tale signs when a growth team isn't succeeding: Stuck metrics, unmet KPIs, and burnt out engineers. Everyone is frustrated, but how do you fix it?
 
-[Alexey Komissarouk](https://alexeymk.com/), former head of growth engineering at [MasterClass](https://www.masterclass.com/), has seen it all. He grew Masterclass xyz... In this post, Alexey shares his advice on how to get your growth team winning again.
+[Alexey Komissarouk](https://alexeymk.com/), former head of growth engineering at [MasterClass](https://www.masterclass.com/), has seen it all. He grew Masterclass xyz... 
+
+In this post, Alexey shares his advice on how to get your growth team winning again.
 
 TLDR; there are 3 areas to investigate:
 
@@ -26,7 +29,7 @@ TLDR; there are 3 areas to investigate:
 
 ## Problem 1: Your team is moving too slowly
 
-Your PM complains that the team is moving slow. The engineering team says there is too much technical debt. Sound familiar? This is caused by engineers having the wrong mindset.
+Your PM complains that the team is moving too slowly. The engineering team says there is too much technical debt. Sound familiar? This is caused by engineers having the wrong mindset.
 
 Slow velocity is usually a result of code quality being too high. "Engineers hate doing growth. They want to implement elegant solutions to complex problems. Growth engineering is the opposite of that", says Alexey.
 
@@ -34,7 +37,7 @@ Slow velocity is usually a result of code quality being too high. "Engineers hat
 
 First, sit with the engineering team and prioritize your technical debt. Figure out what is actually slowing you down (or likely to), and by how much. Once you have a ranked list, assign 10%-20% of engineering time to cleaning this up.
 
-Second (and more importantly), encourage your team to take shortcuts. The role of a growth engineer is not to necessarily build feature, but rather to validate whether building a feature is a good idea or not. 
+Second (and more importantly), urge your team to take shortcuts. The role of a growth engineer is not to necessarily build features, but rather to validate whether a feature should exist. 
 
 With this in mind, a good team exercise is to look at your last 20 experiments and identify which ones you could have validated faster. Thomas Owers, former growth lead at [Let's Do This](https://www.letsdothis.com/), has [good advice](/blog/how-to-start-a-growth-team#thomass-golden-rule-make-your-code-changes-as-small-as-possible) on this:
 
@@ -42,15 +45,19 @@ With this in mind, a good team exercise is to look at your last 20 experiments a
 
 ## Problem 2: Your experiment win rate is low
 
-You keep trying new ideas, but none of experiments are working. "You need better ideas", says Alexey, "and, counter-intuitively, the way to do this is to improve the estimates of your current ideas".
+You keep trying new ideas, but none of experiments are working. 
 
-Typically, teams prioritize their roadmaps by using frameworks such as [RICE](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/) and assigning t-shirt size estimates ("S", "M", "L"). This doesn't go deep enough, and leads to teams wasting time building pointless things. It doesn't make sense spending only five minutes estimating something your team will spend weeks on.
+"You need better ideas", says Alexey, "and, counter-intuitively, the way to do this is to spend more time adding clear estimates to your current ideas".
+
+Typically, teams prioritize their roadmaps by using frameworks such as [RICE](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/) and assigning t-shirt size estimates ("S", "M", "L"). This doesn't go deep enough, and leads to teams wasting time building pointless things. 
+
+It doesn't make sense spending only five minutes estimating something your team will spend weeks on.
 
 ### How to fix it 
 
-Once you have shortlisted the ideas you want to work on, the next step is spend an additional hour on each one and estimate the dollar impact. Because you know **exactly** what to expect from your experiments, the result is a higher win rate.
+Once you have shortlisted the ideas you want to work on, the next step is to estimate the dollar impact of each one. Because you'll know **exactly** what to expect from your experiments, the result is a higher win rate.
 
-This approach was made famous by Facebook Messenger's VP of growth Darius Contractor and his [EVELYN framework](https://www.drift.com/blog/secret-to-faster-growth/). He even shares a handy [sheet with real examples you can copy](https://airtable.com/appzs6HT2ggrJt9pN/shrInOxl0SL1Xmauk/tblTQFEMcXAaEgSpM/viwZessbXpiA8q2jd?blocks=bipMQFWTjqu0HI3wv).
+This approach was made famous by Facebook Messenger's VP of growth Darius Contractor and his [EVELYN framework](https://www.drift.com/blog/secret-to-faster-growth/) (He even shares a handy [sheet with real examples you can copy](https://airtable.com/appzs6HT2ggrJt9pN/shrInOxl0SL1Xmauk/tblTQFEMcXAaEgSpM/viwZessbXpiA8q2jd?blocks=bipMQFWTjqu0HI3wv)).
 
 Alexey says that one of their biggest wins came from following this approach:
 
@@ -58,9 +65,9 @@ Alexey says that one of their biggest wins came from following this approach:
 
 Enter EVELYN. Alexey knew they needed a dollar estimate of the impact.
 
-"Instead of building the entire backend, we built a simple [fake door test](https://posthog.com/tutorials/fake-door-test) on the frontend. Users could select their preferred tier, but at checkout we let them know that they were being upgraded to the best tier and at the cheapest price. In reality, this was actually the existing one-size-fits-all pricing.
+"Instead of building the entire backend, we built a simple [fake door test](https://posthog.com/tutorials/fake-door-test) on the frontend. Users would select their preferred tier, but at checkout we let them know that they were being upgraded to the best tier and at the cheapest price. In reality, this was actually the existing one-size-fits-all pricing.
 
-Now we knew how much money the company could make by implementing tiered pricing. We prioritzed it immediately and it was incredibly easy to ask the rest of the company to work on this for a few months!"
+Now we knew how much money the company could stand to make! We prioritzed it immediately and it was incredibly easy to ask the rest of the company to work on this for a few months."
 
 ## Problem 3: Your experiment win size is low
 
@@ -75,21 +82,21 @@ Your growth team has been around for a few quarters and you've picked all the lo
 
 The best way to do this is create a bottom-up culture where it's the job of **every single person** to come up with ideas. That means every engineer, designer, data scientist, sales rep, marketer etc.
 
-When it's everyone's job to do this, the number of ideas increases dramatically. Then, by applying the EVENLYN framework mentioned above, you distill the list to only the best ideas.
+When it's everyone's job to do this, the number of ideas increases dramatically. Then, by applying the EVENLYN framework mentioned above, you can distill the list to only the best ideas.
 
 > **💡 Tip:** To create an inclusive ideas culture, make your [brainstorms asynchronous](https://source.opennews.org/articles/redesigning-brainstorming-asynchronous/).
 
 ### Maximize the impact of every experiment you ship
 
-The way to do this is also related to creating a bottom-up culture: Every engineer should own the experiments they are working on. They must be empowered to make them as impactful as possible – even if it wasn't originally their idea! 
+Every engineer must own the experiments they are working on and be empowered to make them as impactful as possible – even if it wasn't originally their idea! 
 
-In practice, this means they should be working to improve the initial hypothesis and coming up with further iterations to test. This also means giving them the freedom to fail, without being overly harsh on them.
+In practice, this means they should be working to improve the initial hypothesis and coming up with further iterations to test. This also means giving them the freedom to fail without being overly harsh on them.
 
 ## Problem 4: Your team is afraid of making mistakes
 
 If your team is not making mistakes, you're not moving fast enough. 
 
-In fact, it's not uncommon for growth teams to cause major incidents. And their goal should not be to avoid them!
+In fact, it's not uncommon for growth teams to cause major incidents! And their goal must not be to avoid them.
 
 "There's an anecdote that when airbags were first introduced in cars, the average speed on the highway went up. This is essentially what you want to do for your growth team. Give them freedom to make mistakes, but make sure they can be quickly be resolved when they occur."
 
@@ -110,13 +117,15 @@ Notice that none of the solutions involve writing tests, which are a **waste of 
 
 It's okay if your engineers are tired. Growth engineering may not be as fulfilling for some people, especially if they yearn to build deep and complex systems.
 
-It's common for engineers to start feeling bored after a few quarters and there's no shame in this. A symptom of this is diminishing returns from the team's work. There's an easy fix for it, though:
+It's common for engineers to start feeling bored after a few quarters and there's no shame in it. A symptom of this is diminishing returns from the team's work. 
+
+There's an easy fix for it, though:
 
 ### How to fix it
 
 Rotate your engineers. Rekindle their enthusiasm and expose them to new challenges. Offer them opportunities to change teams or projects.
 
-This has many benefits, like increasing knowledge sharing across teams and diversifying their skill sets. More importantly, it significantly reduces the risk of losing a talented engineer.
+This has many benefits, like fostering knowledge sharing across teams and diversifying their skill sets. Most importantly though, it significantly reduces the risk of losing a talented engineer.
 
 ## Further reading
 
