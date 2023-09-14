@@ -16,7 +16,7 @@ toolsUsed:
 date: 2023-09-15
 ---
 
-[4DayWeek](https://4dayweek.io/) is the world’s largest job board for employers offering a better work-life balance than the traditional 9 to 5. Created by solo founder Phil McParlane, the platform has experience incredible growth since it was launched and is regularly featured in publications such as Time, Fortune and Bloomberg — success which Phil puts partly down to his decision to build in public. 
+[4DayWeek](https://4dayweek.io/) is the world’s largest job board for employers offering a better work-life balance than the traditional 9 to 5. Created by solo founder Phil McParlane, the platform has experience incredible growth since it was launched and is regularly featured in publications such as Time, Fortune and Bloomberg — Phil credits some of this success down to his decision to build in public. 
 
 “Building in public is a great way to get validation from the community,” says Phil. “It’s especially important in the early days of launching a product, when you want to get feedback, encourage discussion and ensure you’re staying accountable to all your promises!”
 
