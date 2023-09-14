@@ -20,7 +20,7 @@ date: 2023-09-15
 
 “Building in public is a great way to get validation from the community,” says Phil. “It’s especially important in the early days of launching a product, when you want to get feedback, encourage discussion and ensure you’re staying accountable to all your promises!”
 
-The fact that Phil builds in public also made him naturally curious about PostHog, which also prides itself on its [transparency and open source culture](/handbook/company/values). 
+The fact that Phil builds in public made him naturally curious about PostHog, because we also value [transparency and building in public](/handbook/company/values). 
 
 “I found out about PostHog through a friend in a Telegram group initially,” says Phil. “And I just knew from the content, the documentation, and the transparency that this was a good fit for me. I immediately became convinced that I needed to start A/B testing things with PostHog.”
 
