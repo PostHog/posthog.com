@@ -42,7 +42,7 @@ In this guide, we’ll explore some of the best open source feature flag tools, 
 - **GitHub stars:** 13.3k
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-[PostHog](https://posthog.com) is an all-in-one platform that captures and visualizes all the data your team needs in one place. In addition to feature flags, it offers comprehensive product analytics, session replay, A/B testing, and user surveys.
+[PostHog](https://posthog.com) is an all-in-one suite of product and data tools. In addition to feature flags, it offers comprehensive product analytics, session replay, A/B testing, and user surveys.
 
 PostHog's [feature flags](/docs/feature-flags) enable conditional roll outs, multivariate flags, JSON payloads, automated usage reports, local evaluation, and more. They power its [A/B testing features](/docs/experiments), so you can test product changes for their impact on key metrics. They also enable [early access feature management](/docs/feature-flags/early-access-feature-management), so you can run product betas with ease.
 
@@ -110,6 +110,8 @@ PostHog's [feature flags](/docs/feature-flags) enable conditional roll outs, mul
 	</tbody>
 </table>
 </div>
+
+> You can also evaluate feature flags using [PostHog's API](/docs/feature-flags/adding-feature-flag-code?tab=api) from any language that can make HTTP requests. 
 
 ### Features and benefits
 
