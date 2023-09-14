@@ -21,15 +21,18 @@ Feature flags, aka feature toggles, turn specific functions on and off during ru
 [Feature flag benefits](/blog/feature-flag-benefits-use-cases) include:
 
 - **Safely releasing new features** by eliminating complex branching and gradually rolling out feature access.
+
 - **Running multivariate tests**, so you can understand the impact of new features and changes.
+
 - **Controlling feature access** to certain features based on user criteria, such as location, device type or subscription level.
-- **Beta feature opt-in**, so users can autonomously subscribe to new features.
+
+- **Beta feature opt-in**, enabling users can autonomously subscribe to new features.
 
 In this guide, we’ll explore some of the best open source feature flag tools, all of which are either totally free or offer generous free plans. If you want to run experiments as well, we recommend reading our guide to the [best open-source A/B testing tools](/blog/best-open-source-ab-testing-tools).
 
 > **Changelog:**
 > - **Mar 15, 2023:** Removed DevCycle, added Flipt. Updated copy and screenshots.
-> – **Sep 14, 2023:** Removed Harness, added Flipper and FeatBit, added supported SDKs
+> – **Sep 14, 2023:** Removed Harness, added Flipper and FeatBit, added SDKs
 
 ## 1. PostHog
 
@@ -398,7 +401,7 @@ Growthbook’s open source self-hosted plan is free forever, with unlimited flag
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
 	<tbody>
-		<tr>feat
+		<tr>
         	<td>Javascript</td>
         	<td className="text-center"><span className="text-green text-lg">✔</span></td>
     	</tr>
