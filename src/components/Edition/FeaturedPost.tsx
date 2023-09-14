@@ -35,7 +35,10 @@ export default function FeaturedPost({ title, date, authors, featuredImage, slug
                     <div>
                         <p className="m-0 text-[15px] opacity-75">{postDate}</p>
                         <h2 className="mt-2 mb-3 text-3xl lg:text-4xl">
-                            <Link to={slug} className="text-primary dark:text-primary-dark">
+                            <Link
+                                to={slug}
+                                className="text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
+                            >
                                 {title}
                             </Link>
                         </h2>
