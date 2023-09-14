@@ -51,7 +51,7 @@ As soon as the test was running, Phil started to see a clear winner – enough t
 
 ### Even a negative result is a useful result
 
-Part of the value in running these experiments for Phil is that they help validate ideas and ward off blind optimism — a trap many other solo founders have fallen prey to. 
+Phil values running experiments because they help validate ideas and ward off blind optimism – a trap many solo founders fall prey to. 
 
 “Often I think of a change I can make and I feel it’s just definitely going to improve everything,” admits Phil. “But with experiments I can test them and realize that it actually won’t improve anything. To be honest, many tests I run don’t really lead to success in the way I’d expected!”
 
