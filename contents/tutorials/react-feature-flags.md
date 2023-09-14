@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-11.png
 tags: ['feature flags']
 ---
 
-Feature flags help you release features and conditional show content in your React apps. This tutorial shows you how to create a basic React app, add PostHog, create a feature flag, and then implement the flag to control content in your app.
+[Feature flags](/docs/feature-flags) help you release features and conditional show content in your React apps. This tutorial shows you how to create a basic React app, add PostHog, create a feature flag, and then implement the flag to control content in your app.
 
 ## Create your React app
 
@@ -78,7 +78,7 @@ Once done, go back to your app running locally, refresh, and you should see an e
 
 ## Creating a feature flag
 
-With PostHog set up, your React app is ready for feature flags. To create one, go to the [feature flag tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Enter a flag key (like `cool-react-homepage`), set the release condition to roll out to 100% of users, and press "Save."
+With PostHog set up, your React app is ready for feature flags. To create one, go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Enter a flag key (like `cool-react-homepage`), set the release condition to roll out to 100% of users, and press "Save."
 
 ![Creating a flag in PostHog](../images/tutorials/react-feature-flags/flag.png)
 
