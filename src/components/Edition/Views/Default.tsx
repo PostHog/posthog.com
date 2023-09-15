@@ -87,7 +87,7 @@ const Post = ({
             containerRef?.current?.scrollIntoView({ block: 'center', inline: 'nearest' })
             window.scrollTo({ top: 0 })
         }
-    }, [pathname])
+    }, [articleView])
 
     useEffect(() => {
         setLiked(user?.profile?.postLikes?.some((post) => post.id === id))
