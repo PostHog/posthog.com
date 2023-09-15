@@ -14,7 +14,7 @@ In the PostHog data warehouse, you can save your most used queries as **views** 
 
 Query views are created directly inside the HogQL editor. If the query has valid view characteristics, the "Save as view" button will be enabled. You will be prompted to give the view a name which will be the name that can be refeneced in other queries. For a query to be a valid view, all fields being accessed must be aliased. The alias names will be how you access the fields on the view. 
 
-> **Note:** Currently, nested views are not supported. You cannot create a view based on other views only base PostHog models.
+> **Note:** Currently, nested views are not supported. You cannot create a view based on other views, only base PostHog models.
 
 ![valid view](../../images/features/data-warehouse/valid-view.png)
 
