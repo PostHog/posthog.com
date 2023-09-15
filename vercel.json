@@ -1056,7 +1056,8 @@
         { "source": "/jamesg", "destination": "/community/profiles/90" },
         { "source": "/jams", "destination": "/community/profiles/90" },
         { "source": "/docs/surveys/manual", "destination": "/docs/surveys" },
-        { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" }
+        { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" },
+        { "source": "/docs/cdp/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" }
     ],
     "rewrites": [
         {
