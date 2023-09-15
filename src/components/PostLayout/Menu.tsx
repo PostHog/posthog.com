@@ -54,7 +54,7 @@ export default function Menu({
     ...other
 }: IMenu): JSX.Element | null {
     if (hidden) return null
-    const { isMenuItemActive } = usePost()
+    const { isMenuItemActive, isMenuItemOpen } = usePost()
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
     const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
@@ -80,7 +80,7 @@ export default function Menu({
             )
         }
         setOpen(
-            url?.startsWith(`/${pathname.split('/')[1]}`) ||
+            isMenuItemOpen?.({ name, url }) ||
                 isMenuItemActive?.({ name, url }) ||
                 url === pathname ||
                 (children && isOpen(children))

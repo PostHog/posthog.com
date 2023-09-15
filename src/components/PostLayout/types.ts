@@ -91,4 +91,5 @@ export interface IProps {
     stickySidebar?: boolean
     hideWidthToggle?: boolean
     isMenuItemActive?: ({ name, url }: { name: string; url?: string }) => boolean
+    isMenuItemOpen?: ({ name, url }: { name: string; url?: string }) => boolean | undefined
 }

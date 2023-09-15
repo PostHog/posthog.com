@@ -236,6 +236,7 @@ export default function Posts({
                         title: title || 'Posts',
                         menu: postsSidebar,
                         isMenuItemActive: ({ url }) => url === pathname,
+                        isMenuItemOpen: ({ url }) => url?.startsWith(`/${pathname.split('/')[1]}`),
                     }}
                 >
                     <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
