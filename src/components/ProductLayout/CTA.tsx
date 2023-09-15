@@ -14,10 +14,13 @@ export const PricingCTA = (props: { title: string; url: string }) => {
 
     useEffect(() => {
         posthog?.onFeatureFlags(() => {
-            const payload = posthog.getFeatureFlagPayload('product-ctas')
-            if (payload?.title && payload?.url) {
-                const cta = { title: payload.title, url: payload.url }
-                if (experiment) setCTA(cta)
+            if (experiment) {
+                const bookDemo = posthog.getFeatureFlag('product-book-a-demo') === 'book-a-demo'
+                const cta = {
+                    title: bookDemo ? 'Book a demo' : 'View pricing',
+                    url: bookDemo ? '/book-a-demo' : '/pricing',
+                }
+                setCTA(cta)
             }
         })
     }, [posthog])
