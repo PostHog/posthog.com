@@ -15,7 +15,7 @@ tags:
   - Product engineers
 ---
 
-There are tell-tale signs when a growth team isn't succeeding: Stuck metrics, missed KPIs, and burnt-out engineers. Everyone is frustrated, but how do you fix it?
+There are telltale signs when a growth team isn't succeeding: Stuck metrics, missed KPIs, and burnt-out engineers. Everyone is frustrated, but how do you fix it?
 
 [Alexey Komissarouk](https://alexeymk.com/), former head of growth engineering at [MasterClass](https://www.masterclass.com/), has seen it all. He grew Masterclass xyz... 
 
@@ -65,7 +65,7 @@ Alexey says that one of their biggest wins came from following this approach:
 
 Enter EVELYN. Alexey knew they needed a dollar estimate of the impact.
 
-"Instead of building the entire backend, we created a simple [fake door test](https://posthog.com/tutorials/fake-door-test) on the frontend. Users could select their preferred tier – but at checkout, we let them know they were being upgraded to the best tier and at the cheapest price. In reality, this was actually the existing one-size-fits-all pricing.
+"Instead of building the entire backend, we created a simple [fake door test](/tutorials/fake-door-test) on the frontend. Users could select their preferred tier – but at checkout, we let them know they were being upgraded to the best tier and at the cheapest price. In reality, this was actually the existing one-size-fits-all pricing.
 
 Now we knew how much money the company stood to make! We prioritized it immediately, and it was incredibly easy to ask the rest of the company to work on it for a few months."
 
