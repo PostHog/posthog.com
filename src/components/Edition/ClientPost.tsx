@@ -9,6 +9,7 @@ import React, { useContext, useState } from 'react'
 import NewPost from './NewPost'
 import { navigate } from 'gatsby'
 import { PostsContext } from './Posts'
+import Title from './Title'
 
 export default function ClientPost({
     id,
@@ -87,7 +88,7 @@ export default function ClientPost({
                 </div>
             )}
             <div className={`flex flex-col py-4`}>
-                <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1`}>{title}</h1>
+                <Title>{title}</Title>
                 <p className="m-0">
                     <span className="opacity-70">{dayjs(date || publishedAt).format('MMM DD, YYYY')}</span>
 

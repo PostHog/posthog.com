@@ -23,6 +23,7 @@ import Blog from './Views/Blog'
 import Newsletter from './Views/Newsletter'
 import Customers from './Views/Customers'
 import { useLayoutData } from 'components/Layout/hooks'
+import qs from 'qs'
 dayjs.extend(relativeTime)
 
 const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>, 'meta'> }) => {
@@ -103,6 +104,8 @@ export const Sidebar = () => {
 
 export const PostsContext = createContext({})
 
+export const PostContext = createContext({})
+
 const menusByRoot = {
     tutorials: { parent: communityMenu, activeInternalNav: communityMenu.children[2] },
     blog: { parent: companyMenu, activeInternalNav: companyMenu.children[5] },
@@ -111,19 +114,50 @@ const menusByRoot = {
 const Router = ({ children }: { children: React.ReactNode }) => {
     const { fullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
+    const { user } = useUser()
+    const [postID, setPostID] = useState()
+
+    useEffect(() => {
+        fetch(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${qs.stringify(
+                {
+                    fields: ['id'],
+                    filters: {
+                        slug: {
+                            $eq: pathname,
+                        },
+                    },
+                },
+                { encodeValuesOnly: true }
+            )}`
+        )
+            .then((res) => res.json())
+            .then((posts) => {
+                if (posts?.data?.length > 0) {
+                    setPostID(posts.data[0].id)
+                }
+            })
+    }, [pathname])
+
     return (
-        <div
-            className={`px-4 md:px-5 md:mt-8 mb-12 mx-auto transition-all ${
-                fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
-            }`}
+        <PostContext.Provider
+            value={{
+                postID,
+            }}
         >
-            {{
-                '/blog': <Blog />,
-                '/newsletter': <Newsletter />,
-                '/spotlight': <Blog title="Spotlight" />,
-                '/customers': <Customers />,
-            }[pathname] || <Default>{children}</Default>}
-        </div>
+            <div
+                className={`px-4 md:px-5 md:mt-8 mb-12 mx-auto transition-all ${
+                    fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
+                }`}
+            >
+                {{
+                    '/blog': <Blog />,
+                    '/newsletter': <Newsletter />,
+                    '/spotlight': <Blog title="Spotlight" />,
+                    '/customers': <Customers />,
+                }[pathname] || <Default>{children}</Default>}
+            </div>
+        </PostContext.Provider>
     )
 }
 

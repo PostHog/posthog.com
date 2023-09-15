@@ -16,6 +16,7 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import Topics from 'components/PostLayout/Topics'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import Title from 'components/Edition/Title'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -48,7 +49,7 @@ export default function Customer({ data, pageContext: { tableOfContents } }) {
                 image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
             <section className="article-content customer-content">
-                <h1 className="text-4xl leading-none mt-0">{title}</h1>
+                <Title>{title}</Title>
                 <MDXProvider components={components}>
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>

@@ -8,23 +8,17 @@ import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import React, { useContext } from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { Heading } from 'components/Heading'
 import TutorialsSlider from 'components/TutorialsSlider'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import { useLayoutData } from 'components/Layout/hooks'
+import { PostContext } from 'components/Edition/Posts'
+import Title from 'components/Edition/Title'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
-
-const Title = ({ children, className = '' }) => {
-    return (
-        <h1 className={`text-3xl md:text-4xl lg:text-4xl mb-1 mt-6 lg:mt-1 dark:text-primary-dark ${className}`}>
-            {children}
-        </h1>
-    )
-}
 
 export const Intro = ({
     featuredImage,
@@ -62,13 +56,13 @@ export const Intro = ({
                                 }`}
                             >
                                 <p className="m-0 opacity-70 order-last lg:order-first lg:text-white">{date}</p>
-                                <Title className="lg:text-white text-primary">{title}</Title>
+                                <Title className="lg:text-white text-primary dark:text-white">{title}</Title>
                             </div>
                         </>
                     )}
                 </div>
             )}
-            {(featuredVideo || featuredImageType !== 'full') && <Title className="lg:mt-7 mt-4">{title}</Title>}
+            {(featuredVideo || featuredImageType !== 'full') && <Title>{title}</Title>}
             {contributors && (
                 <div className="lg:hidden my-3">
                     {contributors.map((contributor) => (

@@ -3,8 +3,6 @@ import { useUser } from 'hooks/useUser'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { PostsContext } from '../Posts'
 import TableOfContents from 'components/PostLayout/TableOfContents'
-import { Heart } from 'components/Icons'
-import Tooltip from 'components/Tooltip'
 import { useLocation } from '@reach/router'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import dayjs from 'dayjs'
@@ -13,33 +11,9 @@ import { QuestionForm } from 'components/Squeak'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isToday from 'dayjs/plugin/isToday'
 import { useLayoutData } from 'components/Layout/hooks'
+import LikeButton from '../LikeButton'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
-
-const LikeButton = ({ liked, handleClick, className = '' }) => {
-    const { user } = useUser()
-    return (
-        <button
-            disabled={!user}
-            className={`rounded-full flex justify-center items-center p-1.5 w-8 h-8 mt-6 relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] active:text-red active:bg-red/20 dark:active:text-red dark:active:bg-red/20 ${
-                liked
-                    ? 'text-red bg-red/20'
-                    : 'bg-border/50 hover:bg-border/75 dark:bg-border-dark/50 dark:hover:bg-border-dark/75 text-primary/50 dark:text-primary-dark/50 hover:text-primary/75 dark:hover:text-primary-dark/75 disabled:opacity-60'
-            } ${className}`}
-            onClick={handleClick}
-        >
-            {user ? (
-                <Heart className="w-full h-auto" active={liked} />
-            ) : (
-                <Tooltip content="Sign in to like this post">
-                    <span className="relative">
-                        <Heart className="w-full h-auto" active={liked} />
-                    </span>
-                </Tooltip>
-            )}
-        </button>
-    )
-}
 
 const Post = ({
     id,
@@ -49,16 +23,12 @@ const Post = ({
     publishedAt,
     post_category,
     authors,
-    likes,
     slug,
     fetchMore,
     articleView,
 }) => {
     const containerRef = useRef()
     const { pathname } = useLocation()
-    const { likePost, user } = useUser()
-    const [liked, setLiked] = useState(false)
-    const [likeCount, setLikeCount] = useState(likes?.data?.length || 0)
     const category = post_category?.data?.attributes?.label
     const active = pathname === slug
     const breakpoints = useBreakpoint()
@@ -75,13 +45,6 @@ const Post = ({
         }
     }, [inView])
 
-    const handleLike = (e) => {
-        e.preventDefault()
-        setLiked(!liked)
-        setLikeCount(likeCount + (!liked ? 1 : -1))
-        likePost(id, liked)
-    }
-
     useEffect(() => {
         if (active && typeof window !== 'undefined' && !breakpoints.sm) {
             containerRef?.current?.scrollIntoView({ block: 'center', inline: 'nearest' })
@@ -89,16 +52,15 @@ const Post = ({
         }
     }, [articleView])
 
-    useEffect(() => {
-        setLiked(user?.profile?.postLikes?.some((post) => post.id === id))
-    }, [user])
-
     const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
     const defaultImage = post_category?.data?.attributes?.defaultImage?.data?.attributes?.url
 
     return (
-        <li ref={containerRef} className="snap-start last:pb-24 grid grid-cols-[32px_1fr] gap-2">
-            <LikeButton liked={liked} handleClick={handleLike} />
+        <li
+            ref={containerRef}
+            className={`snap-start last:pb-24 ${!articleView ? 'grid grid-cols-[32px_1fr] gap-2 items-center' : ''}`}
+        >
+            {!articleView && <LikeButton postID={id} />}
             <span className={`flex items-center ${articleView ? 'py-1' : ''}`} ref={fetchMore ? ref : null}>
                 <Link
                     className={`inline m-0 font-semibold !leading-tight line-clamp-2 text-inherit hover:text-primary dark:hover:text-primary-dark hover:text-inherit dark:text-inherit dark:hover:text-inherit rounded-md p-2 hover:transition-transform flex-grow hover:bg-accent dark:hover:bg-accent-dark relative hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] ${
