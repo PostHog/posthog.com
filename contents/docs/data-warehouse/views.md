@@ -20,7 +20,7 @@ Query views are created directly inside the HogQL editor. If the query has valid
 
 ### Extending PostHog models with views
 
-PostHog data warehouse views are a powerful tool for extending existing PostHog models for easier data access. For example, if you wanted to associate your Stripe customer data with product usage data of your users, you would normally need to manually set up a join. With views, you can attach views to PostHog models so that you can directly access those fields on the PostHog table. 
+Views are a powerful tool for extending existing PostHog models for easier data access. For example, if you wanted to associate your Stripe customer data with product usage data of your users, you would normally need to manually set up a join. With views, you can attach views to PostHog models so that you can directly access those fields on the PostHog table. 
 
 The view link prompt is on the data warehouse page under the PostHog tab.
 
