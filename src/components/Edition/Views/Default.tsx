@@ -1,6 +1,6 @@
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { PostsContext } from '../Posts'
 import TableOfContents from 'components/PostLayout/TableOfContents'
 import { useLocation } from '@reach/router'
@@ -68,7 +68,9 @@ const Post = ({
                     } ${articleView ? 'text-[.933rem]' : 'text-base mr-1.5'}`}
                     to={slug}
                 >
-                    {category && <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>}
+                    {pathname === '/posts' && category && (
+                        <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>
+                    )}
                     <div
                         className={` items-baseline ${active ? 'flex flex-col gap-1' : ''} ${
                             articleView ? 'flex flex-col gap-1' : 'inline'

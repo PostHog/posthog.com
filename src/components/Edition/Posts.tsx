@@ -114,7 +114,6 @@ const menusByRoot = {
 const Router = ({ children }: { children: React.ReactNode }) => {
     const { fullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
-    const { user } = useUser()
     const [postID, setPostID] = useState()
 
     useEffect(() => {
