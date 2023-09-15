@@ -2601,7 +2601,7 @@ export const docsMenu = {
                 {
                     name: 'Views',
                     url: '/docs/data-warehouse/views',
-                    icon: 'Code',
+                    icon: 'Calculator',
                     color: 'salmon',
                     badge: {
                         title: 'Beta',
