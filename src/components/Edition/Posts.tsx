@@ -24,6 +24,8 @@ import Newsletter from './Views/Newsletter'
 import Customers from './Views/Customers'
 import { useLayoutData } from 'components/Layout/hooks'
 import qs from 'qs'
+import { RightArrow } from 'components/Icons'
+import { navigate } from 'gatsby'
 dayjs.extend(relativeTime)
 
 const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>, 'meta'> }) => {
@@ -164,6 +166,7 @@ export default function Posts({
     children,
     pageContext: { selectedTag: initialTag, title, article: articleView = true },
 }) {
+    const didMount = useRef(false)
     const [loginModalOpen, setLoginModalOpen] = useState(false)
     const { pathname } = useLocation()
     const [newPostModalOpen, setNewPostModalOpen] = useState(false)
@@ -171,6 +174,7 @@ export default function Posts({
     const [selectedTag, setSelectedTag] = useState(initialTag)
     const { activeMenu, defaultMenu } = useMenu()
     const postsSidebar = activeMenu?.length <= 0 ? defaultMenu : activeMenu
+    const [prev, setPrev] = useState<string | null>(null)
     const params = {
         filters: {
             $and: [
@@ -213,6 +217,14 @@ export default function Posts({
         }
     }, [pathname, articleView])
 
+    useEffect(() => {
+        if (didMount.current) {
+            setPrev(pathname)
+        } else {
+            didMount.current = true
+        }
+    }, [pathname])
+
     const menu = menusByRoot[root] || { parent: communityMenu, activeInternalNav: communityMenu.children[0] }
 
     return (
@@ -250,6 +262,17 @@ export default function Posts({
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
                     <MobileNav menu={defaultMenu} className="lg:hidden mb-6 mt-0" />
+                    {articleView && (
+                        <button
+                            onClick={() => navigate(prev ? -1 : '/posts')}
+                            className="inline-flex md:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                        >
+                            <RightArrow className="-scale-x-100 w-6" />
+                            <span className="text-red dark:text-yellow text-[15px] font-semibold line-clamp-1 text-left">
+                                Back to posts
+                            </span>
+                        </button>
+                    )}
                     <Router>{children}</Router>
                 </PostProvider>
             </PostsContext.Provider>
