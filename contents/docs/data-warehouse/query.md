@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-The PostHog data warehouse is accessed through the same interface as [HogQL](/docs/product-analytics/hogql). 
+The PostHog data warehouse is accessed through [SQL insights](/docs/product-analytics/sql). 
 
 ### Managing your data sources
 
