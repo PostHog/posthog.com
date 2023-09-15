@@ -2505,10 +2505,6 @@ export const docsMenu = {
                     url: '',
                     children: [
                         {
-                            url: '/docs/cdp/automatic-cohort-creator',
-                            name: 'Automatic Cohort Creator',
-                        },
-                        {
                             url: '/docs/cdp/geoip-enrichment',
                             name: 'GeoIP Enricher',
                         },
