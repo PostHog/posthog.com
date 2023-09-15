@@ -7,6 +7,8 @@ tags:
     - unduplicator
 ---
 
+This app is deprecated. It doesn't do anything intelligent to unduplicate events, it simply assigns a UUID to the event based on timestamp and properties (depending on settings), a much better way to achive this unduplication is to make sure to send a UUID and a timestamp with every event you send to PostHog. If the event has the same values for these 4: `[UUID, timestamp, distinct_id and event name]` then our database will eventually unduplicate by removing the event that was ingested earlier.
+
 This app prevents duplicate events from being ingested into PostHog. It's particularly helpful if you're backfilling information while you're already ingesting ongoing events.
 
 ## How it works
