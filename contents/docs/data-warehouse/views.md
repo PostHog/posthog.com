@@ -14,7 +14,7 @@ In the PostHog data warehouse, you can save your most used queries as **views** 
 
 Query views are created directly inside SQL insights. If the query has valid view characteristics, the "Save as view" button is enabled. When clicked, you are prompted to give the view a name which can then be referenced in other queries. 
 
-For a query to be a valid view, all fields being accessed must be aliased. The alias names are how you access the fields on the view. 
+For a query to be a valid view, all fields being accessed must be aliased (with the SQL `as` keyword). The alias names are how you access the fields on the view. 
 
 > **Note:** Currently, nested views are not supported. You cannot create a view based on other views, only base PostHog models.
 
