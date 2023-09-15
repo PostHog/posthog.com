@@ -354,7 +354,7 @@
         { "source": "/schedule-demo", "destination": "/book-a-demo" },
         { "source": "/apps/airbyte-export/docs", "destination": "/docs/apps/airbyte-export" },
         { "source": "/apps/amazon-kinesis/docs", "destination": "/docs/apps/amazon-kinesis" },
-        { "source": "/apps/automatic-cohort-creator/docs", "destination": "/docs/apps/automatic-cohort-creator" },
+        { "source": "/apps/automatic-cohort-creator/docs", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/apps/bigquery-export/docs", "destination": "/docs/apps/bigquery-export" },
         { "source": "/apps/bitbucket-release-tracker/docs", "destination": "/docs/apps/bitbucket-release-tracker" },
         { "source": "/apps/braze/docs", "destination": "/docs/apps/braze" },
@@ -752,7 +752,7 @@
         { "source": "/cdp/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
         { "source": "/apps/airbyte-export", "destination": "/cdp/airbyte-export" },
         { "source": "/apps/amazon-kinesis", "destination": "/cdp/amazon-kinesis" },
-        { "source": "/apps/automatic-cohort-creator", "destination": "/cdp/automatic-cohort-creator" },
+        { "source": "/apps/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/apps/avo-inspector", "destination": "/cdp/avo-inspector" },
         { "source": "/apps/bigquery-export", "destination": "/cdp/bigquery-export" },
         { "source": "/apps/bitbucket-release-tracker", "destination": "/cdp/" },
@@ -818,7 +818,7 @@
         { "source": "/docs/cdp/advanced-geoip", "destination": "/docs/cdp/geoip-enrichment" },
         { "source": "/docs/apps/airbyte-export", "destination": "/docs/cdp/airbyte-export" },
         { "source": "/docs/apps/amazon-kinesis", "destination": "/docs/cdp/amazon-kinesis" },
-        { "source": "/docs/apps/automatic-cohort-creator", "destination": "/docs/cdp/automatic-cohort-creator" },
+        { "source": "/docs/apps/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/docs/apps/avo-inspector", "destination": "/docs/cdp/avo-inspector" },
         { "source": "/docs/apps/bigquery-export", "destination": "/docs/cdp/bigquery-export" },
         { "source": "/docs/apps/bitbucket-release-tracker", "destination": "/docs/cdp/bitbucket-release-tracker" },
@@ -952,7 +952,8 @@
         { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" },
         { "source": "/blog/startup-golioth", "destination": "/spotlight/startup-golioth" },
         { "source": "/blog/startup-unified", "destination": "/spotlight/startup-unified" },
-        { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" }
+        { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" },
+        { "source": "/docs/cdp/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" }
     ],
     "rewrites": [
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },

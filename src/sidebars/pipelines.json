@@ -20,10 +20,6 @@
         "url": "/cdp/amazon-kinesis"
     },
     {
-        "name": "Automatic Cohort Creator",
-        "url": "/cdp/automatic-cohort-creator"
-    },
-    {
         "name": "BigQuery",
         "url": "/cdp/bigquery-export"
     },
