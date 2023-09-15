@@ -24,6 +24,6 @@ For a query to be a valid view, all fields being accessed must be aliased (with 
 
 Views are a powerful tool for extending existing PostHog models for easier data access. For example, if you wanted to associate your Stripe customer data with product usage data of your users, you would normally need to manually set up a join. With views, you can attach views to PostHog models so that you can directly access those fields on the PostHog table. 
 
-The view link prompt is on the data warehouse page under the PostHog tab.
+To link a view to a PostHog table, go to the [data warehouse section](https://app.posthog.com/data-warehouse/posthog), select the PostHog tab, and click "Link table to view." Select your tables, keys to join, and press save. Once done, when you query that PostHog table, you can access the data from your view.
 
 ![view link](../../images/features/data-warehouse/view-link.png)
