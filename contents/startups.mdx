@@ -15,7 +15,7 @@ images:
     - './images/startup-credit.png'
     - './images/startup-heart.png'
     - './images/yc_logo.png'
-    - './images/assembly_logo.png'
+    - './images/better_capital_logo.jpg'
     - './images/goliath_logo.jpg'
 ---
 
@@ -117,23 +117,24 @@ import refer from './images/startup-refer.png'
 
 <section class="my-24 px-5">
   <div class="max-w-screen-2xl mx-auto">
-    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">Trusted by the world's most successful startups and accelerators</h3>
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-3 sm:mb-8 lg:mb-3">Recommended by the world's leading startup accelerators</h3>
+    <h3 className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 opacity-75 text-primary text-center text-lg pb-8">(And <a href="/blog/categories/startups">their startups</a> like us too).</h3>
     <div class="flex justify-center">
       <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-3 lg:grid-cols-3 justify-evenly relative text-center sm:text-left">
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[10])} alt="YC logo" objectFit="contain"  align="center" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Y Combinator</h5>
-          <p class="m-0 text-[15px]">The world's leading startup accelerator relies on PostHog. A/B experiments have helped improve engagement by +40%, while gathering +30% more data than other tools. <a href="/customers/ycombinator">Read more.</a></p>
+          <p class="m-0 text-[15px]">The world's leading startup accelerator uses PostHog. A/B tests improved engagement by +40%, while gathering +30% more data than other tools. <a href="/customers/ycombinator">Read more.</a></p>
         </li>
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
-          <GatsbyImage image={getImage(props?.images[11])} alt="AssemblyAI" objectFit="contain" style={{ maxWidth: 200 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">AssemblyAI</h5>
-          <p class="m-0 text-[15px]">AssemblyAI tried Mixpanel, but had to limit ingestion to avoid exorbitant bills. They switched to PostHog and now track much more data, without any throttling. <a href="/customers/assemblyai">Read more.</a></p>
+          <GatsbyImage image={getImage(props?.images[11])} alt="Better Capital" objectFit="contain" style={{ maxWidth: 200 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Better Capital</h5>
+          <p class="m-0 text-[15px]">India's leading early-stage VC recommends PostHog for it's portfolio of 200+ startups, including teams like Slice, Open, and Teachmint.</p>
         </li>
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[12])} alt="Goliath" objectFit="contain" style={{ maxWidth: 200 }} />
           <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Golioth</h5>
-          <p class="m-0 text-[15px]">Golioth has put PostHog at the heart of it's product development cycle since joining the startup program. Dashboards and insights help them build better products, faster. <a href="/spotlight/startup-golioth">Read more.</a></p>
+          <p class="m-0 text-[15px]">Golioth has put PostHog at the heart of its product development cycle since joining the startup program to help them build better products, faster. <a href="/spotlight/startup-golioth">Read more.</a></p>
         </li>
       </ul>
     </div>
