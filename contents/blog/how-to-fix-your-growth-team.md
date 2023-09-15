@@ -19,7 +19,7 @@ There are telltale signs when a growth team isn't succeeding: Stuck metrics, mis
 
 [Alexey Komissarouk](https://alexeymk.com/), former head of growth engineering at [MasterClass](https://www.masterclass.com/), has seen it all. He grew Masterclass xyz... 
 
-Alexey shared his advice with us on how to get your growth team winning again. Here are the key takeaways:
+Alexey shared his advice with us on how to get your growth team winning again. Here are the key problems to investigate:
 
 ## Problem 1: Your team is moving too slowly
 
