@@ -12,6 +12,6 @@ The PostHog data warehouse is accessed through the same interface as [HogQL](/do
 
 ### Managing your data sources
 
-You can find your data warehouse data sources under the "Data Warehouse" page found on the navigation bar. On this page, you can view and manage the tables and fields that power PostHog. These are all queryable on the HogQL interface. You will also be able to view and manage the external tables that you have added.
+You can find your data sources in the [Data Warehouse tab](https://app.posthog.com/warehouse). On this page, you can view your PostHog generated tables and fields. You can also create, manage, view and delete external tables and their related fields.
 
 ![data warehouse external tab](../../images/features/data-warehouse/dw-external.png)
