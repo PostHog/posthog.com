@@ -2498,10 +2498,6 @@ export const docsMenu = {
                             url: '/docs/cdp/taxonomy-standardizer',
                             name: 'Taxonomy Standardizer',
                         },
-                        {
-                            url: '/docs/cdp/unduplicator',
-                            name: 'Unduplicator',
-                        },
                     ],
                 },
                 {

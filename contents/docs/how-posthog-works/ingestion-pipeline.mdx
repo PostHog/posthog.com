@@ -26,6 +26,11 @@ graph TD
 
     Kafka2 <-..- ClickHouse
 ```
+## Why am I seeing duplicate events?
+
+We recommend sending a UUID with every request, and some of our libraries such as `posthog-js` will do this automatically. If you don't send UUIDs for every event, it's possible you may see duplicate events in PostHog. 
+
+If you're using a library which doesn't currently support UUIDs for every event, please consider creating a PR or filing an issue in GitHub.
 
 ## Capture API
 
