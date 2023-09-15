@@ -64,9 +64,15 @@ export const Intro = ({
             )}
             {(featuredVideo || featuredImageType !== 'full') && <Title>{title}</Title>}
             {contributors && (
-                <div className="lg:hidden my-3">
-                    {contributors.map((contributor) => (
-                        <Contributor image={contributor.image} name={contributor.name} key={contributor.name} text />
+                <div className="my-3">
+                    {contributors.map(({ profile_id, image, name }) => (
+                        <Contributor
+                            url={profile_id && `/community/profiles/${profile_id}`}
+                            image={image}
+                            name={name}
+                            key={name}
+                            text
+                        />
                     ))}
                 </div>
             )}
@@ -174,6 +180,7 @@ export const query = graphql`
                         }
                     }
                     name
+                    profile_id
                 }
             }
             parent {
