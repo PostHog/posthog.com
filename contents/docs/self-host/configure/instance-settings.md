@@ -10,7 +10,7 @@ import Sunset from "../\_snippets/sunset-disclaimer.mdx"
 
 When self-hosting PostHog there are several instance settings that can be adjusted according to your needs. These settings are available as of [PostHog 1.33.0](/blog/the-posthog-array-1-33-0), if you're running an older version, settings can only be set using [Environment variables][env-vars].
 
-Instance settings can be managed by [staff users](#staff-users) by visiting the _Instance settings_ page (`/instance/status/configuration`). Some setting configurations cannot be managed this way, and in particular, settings that determine how PostHog should behave at runtime must be set using [Environment variables][env-vars]. Please review the [Environment variables][env-vars] list for further details.
+Instance settings can be managed by [staff users](#staff-users) by visiting the _Instance settings_ page (`/instance/settings`). Some setting configurations cannot be managed this way, and in particular, settings that determine how PostHog should behave at runtime must be set using [Environment variables][env-vars]. Please review the [Environment variables][env-vars] list for further details.
 
 The actual list of settings that can be updated varies depending on which version of PostHog you're running. The Instance settings page will provide a detailed list and description of all settings available.
 
