@@ -952,7 +952,9 @@
         { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" },
         { "source": "/blog/startup-golioth", "destination": "/spotlight/startup-golioth" },
         { "source": "/blog/startup-unified", "destination": "/spotlight/startup-unified" },
-        { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" }
+        { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" },
+        { "source": "/docs/cdp/unduplicator", "destination": "/docs/cdp" },
+        { "source": "/cdp/unduplicator", "destination": "/docs/cdp" }
     ],
     "rewrites": [
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
