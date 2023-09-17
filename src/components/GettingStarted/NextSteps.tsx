@@ -106,7 +106,6 @@ export const Apps = () => {
             url="/docs/apps"
             links={[
                 { name: 'Browse apps', to: '/apps' },
-                { name: 'Import Stripe data into PostHog', to: '/tutorials/stripe-payment-data' },
                 { name: 'Filter out unwanted events', to: '/tutorials/fewer-unwanted-events' },
                 { name: 'Build your own app', to: '/docs/apps/build' },
             ]}

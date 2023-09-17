@@ -12,7 +12,7 @@ Content is the main pillar of our marketing strategy. As our products are quite 
 
 ## Content strategy
 
-Content is a long-term strategy and we'e focused on high-quality content that's genuinely valuable to users. Our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets.
+Content is a long-term strategy and we're focused on high-quality content that's genuinely valuable to users. Our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets.
 
 We **win on depth**, not breadth – a few high-quality pieces > a larger number of medium quality pieces. We have four content buckets:
 
@@ -27,7 +27,6 @@ We **win on depth**, not breadth – a few high-quality pieces > a larger number
 ### Good to knows
 
 - The marketing team is responsible for all the above – mostly Andy and Ian, but James Hawkins, Joe and Charles also contribute. The Website & Docs team owns our [reference documentation](/docs). 
-
 
 - You can view planned content on the [Marketing project board](https://github.com/orgs/PostHog/projects/8?card_filter_query=label%3Acontent) using the "content" label filter. All planned content should have an issue.
 
@@ -137,22 +136,21 @@ tags:
 ---
  ```
 
-## Distribution
+## Distribution channels
 
 We repurpose and distribute content in a mixture of channels - those we want to be good at, and those we put minimal effort into out of habit and good practice.
 
 ### High effort
 
-- SEO - _Andy_
-- Newsletter - _Andy_
-- PostHog LinkedIn - _Andy (but other people post here as well)_
-- PostHog Twitter - _Charles (but other people post here as well)_
-- James' personal Twitter - _James H_
-- YouTube - _Ian_
+- SEO - _Andy and Ian_
+- Newsletter - _Andy and Ian_
+- PostHog Twitter - _Andy (outsourced to Mouneil)_
+- James' personal Twitter - _Andy (outsourced to Mouneil)_
 
 ### Low effort/hygiene
 
+- PostHog LinkedIn - _whoever wrote the content_
 - User Slack - _whoever wrote the content_
 - Hacker News - _only for Show HN announcements, otherwise do not post here and hope others do it outside PostHog_
-- LinkedIn paid ads - _Charles (outsourced)_
-- Twitter paid ads - _Andy (outsourced)_
+- LinkedIn paid ads - _Charles (outsourced to Hey)_
+- Twitter paid ads - _Charles (outsourced to Hey)_

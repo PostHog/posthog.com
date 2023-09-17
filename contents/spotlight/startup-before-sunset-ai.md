@@ -76,3 +76,4 @@ In BeforeSunset's case, the team responded to the first launch by speaking to us
 
 **More success stories from PostHog for Startups**
 - [How Golioth designs new IoT software and drives product development](/spotlights/startup-golioth)
+- [How Bugprove uses influencer marketing to grow word of mouth](/spotlights/startup-bugprove)

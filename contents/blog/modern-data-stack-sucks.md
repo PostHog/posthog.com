@@ -99,7 +99,7 @@ The problem with the modern data stack is that it often fails the people it was 
 - Data security, safety, and privacy requirements.
 - Lack of knowledge of data available or how to use it.
 
-For example, engineers might need to write optimized SQL queries to understand customer feature usage. This requires an understanding of SQL, data availability, data structure, as well as access. All this does is slow down their work, blocking them from shipping new features and improvements efficiently.
+For example, engineers might need to write optimized SQL queries to understand customer feature usage. This requires an [understanding of SQL](/blog/sql-for-analytics), data availability, data structure, as well as access. All this does is slow down their work, blocking them from shipping new features and improvements efficiently.
 
 ## How we are fixing the modern data stack
 
