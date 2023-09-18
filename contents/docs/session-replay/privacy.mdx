@@ -114,8 +114,9 @@ Note that adding `ph-no-capture` will also prevent any [autocapture](/docs/data/
 
 ## Good privacy - try to mask all email / password related things
 
-To strike a balance of usefulness versus privacy friendly, you can choose to only mask content that looks like it contains an email or password.
-With passwords, it is important to note that typically the "click to show password" buttons, turn the input type to `text` which would then reveal the value. If we check for something else like the `id` field then we can ensure that it is never captured (you of course need to ensure this field is added)
+You can mask content that looks like it contains an email or password.
+
+For passwords, it is important to note that "click to show password" buttons typically turn the input type to `text`. This would then reveal the password. Thus instead of checking for `type='password'`, you need to check a different field, like `id`:
 
 ```
 {
