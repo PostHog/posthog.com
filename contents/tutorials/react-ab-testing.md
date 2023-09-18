@@ -108,7 +108,7 @@ With PostHog set up, your React app is ready for the A/B test. To create one, go
 
 ![A/B test set up](../images/tutorials/react-ab-testing/ab-test.png)
 
-You can customize it further with a description, secondary metrics, or more variants (for [A/B/n testing](/tutorials/abn-testing)). 
+You can customize it further with a description, secondary metrics, or more variants (for [multivariate testing](/tutorials/abn-testing)). 
 
 ## Implementing the experiment
 
