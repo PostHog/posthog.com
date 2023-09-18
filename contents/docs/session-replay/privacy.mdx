@@ -72,8 +72,8 @@ You can further control the text that gets masked. For example, by only masking 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        // `maskTextFn` only applies to selected elements, so make sure to set to "*" if you want this to work globally
-        // REMINDER - This does not apply to input elements.
+        // `maskTextFn` only applies to selected elements, so make sure to set to "*" if you want this to work globally.
+        // This does not apply to input elements.
         maskTextSelector: "*", 
         maskTextFn: (text) => {
             // A simple email regex - you may want to use something more advanced
