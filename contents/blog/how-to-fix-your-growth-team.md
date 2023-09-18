@@ -17,7 +17,7 @@ tags:
 
 There are telltale signs when a growth team isn't succeeding: Stuck metrics, missed KPIs, and burnt-out engineers. Everyone is frustrated, but how do you fix it?
 
-[Alexey Komissarouk](https://alexeymk.com/), former head of growth engineering at [MasterClass](https://www.masterclass.com/), has seen it all. He grew Masterclass xyz... 
+[Alexey Komissarouk](https://alexeymk.com/) has seen it all. He's worked in growth for more than 8 years. Most recently, he was [Masterclass's](https://www.masterclass.com/) head of growth engineering, where he grew the growth engineering org to 25 people across 5 teams.
 
 Alexey shared his advice with us on how to get your growth team winning again. Here are the key problems to investigate:
 
@@ -25,7 +25,7 @@ Alexey shared his advice with us on how to get your growth team winning again. H
 
 Your PM complains that the team is moving too slowly. The engineering team says there is too much technical debt. Sound familiar? This is caused by engineers having the wrong mindset.
 
-Slow velocity is usually a result of [over-engineering](https://www.joelonsoftware.com/2001/04/21/dont-let-architecture-astronauts-scare-you/). "Engineers hate doing growth. They want to implement elegant solutions to complex problems. Growth engineering is the opposite of that", says Alexey.
+Slow velocity is usually a result of [over-engineering](https://www.joelonsoftware.com/2001/04/21/dont-let-architecture-astronauts-scare-you/). "Many engineers don't have a growth engineering mindset. They want to implement elegant solutions to complex problems. Growth engineering is the opposite of that", says Alexey.
 
 ### How to fix it
 
@@ -84,7 +84,7 @@ The best way to do this is to create a bottom-up culture where it's the job of *
 
 When it's everyone's job to do this, the number of ideas increases dramatically. Then, by applying the EVELYN framework mentioned above, you can prioritize and distill the list to only the best ideas.
 
-> **💡 Tip:** To create an inclusive ideas culture, make your [brainstorms asynchronous](https://source.opennews.org/articles/redesigning-brainstorming-asynchronous/).
+> **💡 Tip:** To foster an inclusive ideas culture, make your [brainstorms asynchronous](https://source.opennews.org/articles/redesigning-brainstorming-asynchronous/).
 
 ### Make your engineers own their experiments
 
