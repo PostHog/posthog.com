@@ -1,6 +1,6 @@
 ---
 title: Why your growth team isn't winning (and how to fix it)
-date: 2023-09-14
+date: 2023-09-18
 author: ["lior-neu-ner"]
 showTitle: true
 rootpage: /blog
@@ -19,7 +19,21 @@ There are telltale signs when a growth team isn't succeeding: Stuck metrics, mis
 
 [Alexey Komissarouk](https://alexeymk.com/) has seen it all. He's worked in growth for more than 8 years. Most recently, he was [Masterclass's](https://www.masterclass.com/) head of growth engineering, where he grew the growth engineering org to 25 people across 5 teams.
 
-Alexey shared his advice with us on how to get your growth team winning again. Here are the key problems to investigate:
+Alexey shared his advice with us on how to get your growth team winning again.
+
+## The formula for a winning growth team
+
+The three most significant factors affecting your growth team's impact are:
+
+1. Their experiment win rate – i.e., the percentage of experiments that are successful.
+2. Their average win size – e.g., the average increase in revenue from each experiment.
+3. Their velocity – i.e., how long it takes to ship each experiment. 
+
+![The formula for a winning growth team](../images/blog/how-to-fix-your-growth-team/growth-team-formula.png)
+
+If you have problems in any of these areas, it drags down your entire team's impact.
+
+With this in mind, Alexey shares key problem areas to investigate:
 
 ## Problem 1: Your team is moving too slowly
 
@@ -83,8 +97,6 @@ Your growth team has been around for a few quarters and you've picked all the lo
 The best way to do this is to create a bottom-up culture where it's the job of **every single person** to come up with ideas. That means every engineer, designer, data scientist, sales rep, marketer, etc.
 
 When it's everyone's job to do this, the number of ideas increases dramatically. Then, by applying the EVELYN framework mentioned above, you can prioritize and distill the list to only the best ideas.
-
-> **💡 Tip:** To foster an inclusive ideas culture, make your [brainstorms asynchronous](https://source.opennews.org/articles/redesigning-brainstorming-asynchronous/).
 
 ### Make your engineers own their experiments
 
