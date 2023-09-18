@@ -1,6 +1,6 @@
 ---
 title: How to set up React A/B testing
-date: 2023-09-15
+date: 2023-09-18
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -160,6 +160,6 @@ After confirming it works, remove the `featureFlags.override` call, go back to y
 
 ## Further reading
 
-- [How YC's biggest startups run A/B tests (with examples)](/blog/ab-testing-examples)
-- [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers)
-- [How to set up A/B/n testing](/tutorials/abn-testing)
+- [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
+- [How to do holdout testing](/tutorials/holdout-testing)
+- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
