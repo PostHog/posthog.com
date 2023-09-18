@@ -28,7 +28,9 @@ graph TD
 ```
 ## Why am I seeing duplicate events?
 
-We recommend sending a UUID with every request, and some of our libraries such as `posthog-js` will do this automatically. If you don't send UUIDs for every event, we wouldn't be able to know it's the same event and hence we wouldn't be able to unduplicate it for you. Events with the same uuid, event name, timestamp and distinct_id are considered duplicates and will be eventually unduplicated. Keep in mind that failures and retries happen, so your application or our library might send the same event multiple times, which if you don't set UUIDs would end up in PostHog as separate events.
+We recommend sending a `uuid` value with every captured event. Events with the same UUID, event name, timestamp, and `distinct_id` are considered duplicates and are eventually de-duplicated. 
+
+This is important because failures and retries happen, so your application or our library might send the same event multiple times. If you don't send UUIDs for every event, we aren't able to know if it's the same event, and hence we are not able to de-duplicate it for you.  
 
 If you're using a library which doesn't currently support UUIDs for every event, please consider creating a PR or filing an issue in GitHub.
 
