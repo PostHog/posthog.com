@@ -117,6 +117,12 @@ const fields: {
         Component: TextArea,
         hubspotField: 'message',
     },
+    {
+        name: 'whereDidYouHearAboutPostHog',
+        placeHolder: 'Where did you first hear about PostHog?',
+        Component: Input,
+        hubspotField: 'where_did_you_first_hear_about_posthog_',
+    },
 ]
 interface IInputProps {
     setFieldValue: (
@@ -313,6 +319,7 @@ const ValidationSchema = Yup.object().shape({
     product: Yup.string().required("Please select the product you're interested in"),
     personalizedDemo: Yup.string().required('Please select an option'),
     details: Yup.string().nullable(),
+    whereDidYouHearAboutPostHog: Yup.string().nullable(),
 })
 
 export default function Contact({
