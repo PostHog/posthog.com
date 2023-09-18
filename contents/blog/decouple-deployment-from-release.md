@@ -1,6 +1,6 @@
 ---
 title: Why you should decouple deployment from release (and how) 
-date: 2023-09-14
+date: 2023-09-18
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -61,7 +61,6 @@ We also dark launch features using feature flags. This means they are available 
 All this enables us to ship and get features into the hands of users faster at PostHog. 
 
 ## How top companies decouple deployment from release
-
 
 - [Netflix](https://netflixtechblog.com/automated-canary-analysis-at-netflix-with-kayenta-3260bc7acc69) A/B tests [every change](https://netflixtechblog.com/its-all-a-bout-testing-the-netflix-experimentation-platform-4e1ca458c15) before release, and does [phased rollouts](https://netflixtechblog.com/safe-updates-of-client-applications-at-netflix-1d01c71a930c) for every release. They use a [canary](/tutorials/canary-release), where they direct a small number of users to the new version, while a majority stay on the old one. Netflix then uses automated canary analysis to compare key metrics, score each variant, and report to developers. This system reduces risk while increasing developer productivity.
 
