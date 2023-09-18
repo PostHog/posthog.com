@@ -100,3 +100,66 @@ To do so, you should add the CSS class name `ph-no-capture` to elements which sh
 ```
 
 Note that adding `ph-no-capture` will also prevent any [autocapture](/docs/data/autocapture) events from being captured from that element.
+
+
+# Common example configs
+
+## Maximum privacy - mask everything
+
+```
+{
+    maskAllInputs: true,
+    maskTextSelector: "*"
+}
+```
+
+## Good privacy - try to mask all email / password related things
+
+To strike a balance of usefulness versus privacy friendly, you can choose to only mask content that looks like it contains an email or password.
+With passwords, it is important to note that typically the "click to show password" buttons, turn the input type to `text` which would then reveal the value. If we check for something else like the `id` field then we can ensure that it is never captured (you of course need to ensure this field is added)
+
+```
+{
+    maskAllInputs: true,
+    maskInputFn: (text, element) => {
+        const maskTypes = ['email', 'password']
+
+        if (
+            maskTypes.indexOf(element?.attributes['type']?.value) !== -1 ||
+            maskTypes.indexOf(element?.attributes['id']?.value) !== -1
+        ) {
+            return '*'.repeat(text.length)
+        }
+        return text
+    },
+    maskTextSelector: '*',
+    maskTextFn(text) {
+        // A simple email regex - you may want to use something more advanced
+        const emailRegex = /(\S+)@(\S+\.\S+)/g
+
+        return text.replace(emailRegex, (match, g1, g2) => {
+            // Replace each email with asterisks - ben@posthog.com becomes ***@***********
+            return '*'.repeat(g1.length) + '@' + '*'.repeat(g2.length)
+        })
+    }
+}
+```
+
+
+## Selective privacy - only reveal things that are marked as safe
+
+Instead of selectively masking, we can selectively _unmask_ fields that you are sure are safe.
+This assumes you are adding a data attribute to every "safe" element like `<p data-record="true">I will be visible!</p>`
+
+```
+{
+    maskAllInputs: true,
+    maskInputFn: (text, element) => {
+        if (element?.dataset['record'] === 'true') {
+            return text
+        }
+        return '*'.repeat(text.length)
+    },
+    maskTextSelector: ":not([data-record='true'])",
+}
+```
