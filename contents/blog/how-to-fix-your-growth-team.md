@@ -55,7 +55,7 @@ Then, use this dollar amount together with your effort estimates to calculate a 
 
 ![How to calculate your EVELYN score](../images/blog/how-to-fix-your-growth-team/evelyn-score.png)
 
-Because you'll have a clearer idea of what to expect from your experiments, the result is a higher win rate.
+Because you'll have a clearer idea of what to expect from your experiments, you'll prioritize the ones that are more likely to win.
 
 This approach was made famous by Facebook Messenger's VP of growth Darius Contractor and his [EVELYN framework](https://www.drift.com/blog/secret-to-faster-growth/) (He even shares a [handy sheet with real examples you can copy](https://airtable.com/appzs6HT2ggrJt9pN/shrInOxl0SL1Xmauk/tblTQFEMcXAaEgSpM/viwZessbXpiA8q2jd?blocks=bipMQFWTjqu0HI3wv)).
 
@@ -82,7 +82,7 @@ Your growth team has been around for a few quarters and you've picked all the lo
 
 The best way to do this is to create a bottom-up culture where it's the job of **every single person** to come up with ideas. That means every engineer, designer, data scientist, sales rep, marketer, etc.
 
-When it's everyone's job to do this, the number of ideas increases dramatically. Then, by applying the EVENLYN framework mentioned above, you can distill the list to only the best ideas.
+When it's everyone's job to do this, the number of ideas increases dramatically. Then, by applying the EVELYN framework mentioned above, you can prioritize and distill the list to only the best ideas.
 
 > **💡 Tip:** To create an inclusive ideas culture, make your [brainstorms asynchronous](https://source.opennews.org/articles/redesigning-brainstorming-asynchronous/).
 
@@ -97,13 +97,13 @@ In practice, this means:
 - Engineers work to improve the initial hypothesis.
 - Engineers develop further iterations to test. 
 - Removing processes that prevent engineers from making quick decisions on their own.
-- Allowing engineers space to fail without being harsh on them.
+- Giving engineers space to fail without being harsh on them.
 
 ## Problem 4: Your team is afraid of making mistakes
 
 If your team is not making mistakes, you're not moving fast enough. 
 
-In fact, it's not uncommon for growth teams to cause a few incidents! And their goal must not be to avoid them.
+In fact, it's common for growth teams to cause a few incidents! And they won't succeed if they are focused on avoiding them.
 
 "When airbags were [introduced](https://www.purdue.edu/uns/html4ever/2006/060927ManneringOffset.html) in cars, the average speed on the highway went up. This is essentially what you want to do for your growth team. Give them the freedom to make mistakes, but make sure they resolve them quickly."
 
@@ -113,9 +113,12 @@ Your aim should be to build a resilient system that can rapidly recover from mis
 
 In the context of growth teams, there are a few ways to do this:
 
-- Monitor critical metrics and set up alerts. Ensure you can quickly roll back changes using [configurators or feature flags](https://posthog.com/blog/feature-flags-vs-configuration).
+- Monitor critical metrics and set up alerts. Ensure you can quickly roll back changes using [feature flags](/blog/feature-flags-vs-configuration).
+
 - Set up [review apps](https://seanconnolly.dev/review-applications) so your team can easily test and dogfood your experiments.
+
 - To test releases in production, set up [conditional overrides](/docs/experiments/testing-and-launching) so you can quickly test each experiment variant.
+
 - Instead of crashing your app when rendering errors occur, display a fallback UI. In React, you can easily add these with [Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) (and similar concepts existing in other frameworks).
 
 Notice that none of the solutions involve writing tests, which can be a **waste of time** for experiments that only last a week. Instead, consider what it would take to comfortably ship changes without tests.
@@ -126,7 +129,6 @@ It's okay if your engineers are tired. Growth engineering may not be as fulfilli
 
 It's common for engineers to start feeling unsatisfied after a few quarters, and there's no shame in it. A symptom of this is diminishing returns from the team's work. 
 
-There's an easy fix for it, though:
 
 ### How to fix it
 
