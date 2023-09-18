@@ -32,7 +32,7 @@ This means teams often hold deployments until they are confident the code is rea
 
 ## Why should you separate deployment and release?
 
-The main issue caused by coupling deployment and release is new code not working as expected in production. Because it is released automatically, this means users are impacted by issues. For example, queries that worked locally timing out on production data.
+The main issue caused by coupling deployment and release is new code not working as expected in production. For example, queries that worked locally timing out on production data.
 
 By preventing new code from automatically releasing after a deployment, you lower the risk of this issue. This is called **decoupling deployment from release**.
 
@@ -50,7 +50,7 @@ Decoupling can lower the risk of issues, increase developer productivity, and im
 
 ## How we decouple deployment from release at PostHog
 
-As an example of decoupling deployment from release, we can look at what we do at PostHog. We deploy many changes behind [feature flags](/feature-flags) and release them after testing them in production. At any time, there are [30+ flags](https://github.com/PostHog/posthog/blob/03eb1dcaec3cf5064a1ace4433f2f77d6676b634/frontend/src/lib/constants.tsx#L118C1-L118C1) in use in PostHog. They are created and updated daily.
+We deploy many changes behind [feature flags](/feature-flags) and release them after testing them in production. At any time, there are [30+ flags](https://github.com/PostHog/posthog/blob/03eb1dcaec3cf5064a1ace4433f2f77d6676b634/frontend/src/lib/constants.tsx#L118C1-L118C1) in use in PostHog. They are created and updated daily.
 
 ![PostHog's flags](../images/blog/decouple-deployment-from-release/flags.png)
 
@@ -62,7 +62,6 @@ All this enables us to ship and get features into the hands of users faster at P
 
 ## How top companies decouple deployment from release
 
-As mentioned, decoupling deployment from release is a best practice. To prove this, here are more examples of how top companies decouple deployment from release and what that specifically looks like:
 
 - [Netflix](https://netflixtechblog.com/automated-canary-analysis-at-netflix-with-kayenta-3260bc7acc69) A/B tests [every change](https://netflixtechblog.com/its-all-a-bout-testing-the-netflix-experimentation-platform-4e1ca458c15) before release, and does [phased rollouts](https://netflixtechblog.com/safe-updates-of-client-applications-at-netflix-1d01c71a930c) for every release. They use a [canary](/tutorials/canary-release), where they direct a small number of users to the new version, while a majority stay on the old one. Netflix then uses automated canary analysis to compare key metrics, score each variant, and report to developers. This system reduces risk while increasing developer productivity.
 
@@ -80,7 +79,7 @@ Now that you understand the merits of decoupling deployments from release and so
 
 1. **Feature flags.** Deploy features behind [feature flags](/docs/feature-flags). Use conditional rollouts to roll out features to the internal team, beta users, and canary release.
 
-2. **Dark launch.** Launch new routes and features, but hide them from users (don’t link or notify them). For example, create a new feature page and don’t link to it anywhere so that it's only accessible using a direct link (that only your team knows).
+2. **Dark launch.** Launch new routes and features, but hide them from users (don’t link or notify them). For example, create a new feature page and don’t link to it anywhere, so it's only accessible using a direct link (that only your team knows).
 
 Both of these are great ways to start because they are simple. You can apply them to non-breaking changes, get comfortable with the process, and work towards decoupling all changes. Doing this provides an understanding of what code you should test in production and what is good to ship after testing locally.
 
