@@ -8,7 +8,7 @@ This is aimed at PostHog employees and goes into detail in order to allow them t
 
 We use `rrweb` to collect "snapshot data" from the browser. This data is gathered by the capture API and sent to ingestion.
 
-Because we use kafka for ingestion there is a maximum allowed message size and snapshot data is often larger than that. Replay has its own ingestion infrastrcture with larger limits. 
+Because we use kafka for ingestion there is a maximum allowed message size and snapshot data is often larger than that. Replay has its own ingestion infrastructure with larger limits. 
 
 We store recording snapshot data in blob storage and aggregated session information in the `session_replay_events` table. As a result in Capture (`posthog-recordings` deployment) we no longer need to chunk recordings.
 
