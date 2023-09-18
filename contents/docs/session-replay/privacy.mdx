@@ -24,7 +24,8 @@ You can control the masking more granularly by using `maskInputFn` to customize 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskAllInputs: true, // Important - this needs to be true for the below function to be called
+        // `maskInputFn` only applies to selected elements, so make sure to set this to true if you want this to work globally
+        maskAllInputs: true,
         maskInputFn: (text, element) => {
             if (element?.attributes['type']?.value === 'search') {
                 // If this is a search input, don't mask it
@@ -41,24 +42,27 @@ posthog.init('<ph_project_api_key>', {
 
 General text is not masked by default, but we provide multiple options for masking text:
 
+> **IMPORTANT**: The `text` related config options only apply to non-input text. Inputs are masked differently and as such have separate methods as detailed above
+
 ### Mask all text
 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskTextSelector: "*" // Masks all text elements
+        maskTextSelector: "*" // Masks all text elements (not including inputs)
     }
 })
 ```
 
 ### Mask or un-mask specific text
 
-You can use a CSS selector to mask specific elements. For example, you may want to mask all elements with the class `password` or the ID `sensitive`.
+You can use a CSS selector to mask specific elements. For example, you may want to mask all elements with the class `email` or the ID `sensitive`.
 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskTextSelector: ".password, #sensitive" // masks all elements with the class "password" or the ID "sensitive"
+        // REMINDER - This does not apply to input elements.
+        maskTextSelector: ".email, #sensitive" // masks all elements with the class "email" or the ID "sensitive"
     }
 })
 ```
@@ -68,7 +72,9 @@ You can further control the text that gets masked. For example, by only masking 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskTextSelector: "*", // The below function only applies to selected elements, so make sure to set to "*" if you want this to work globally
+        // `maskTextFn` only applies to selected elements, so make sure to set to "*" if you want this to work globally
+        // REMINDER - This does not apply to input elements.
+        maskTextSelector: "*", 
         maskTextFn: (text) => {
             // A simple email regex - you may want to use something more advanced
             const emailRegex = /(\S+)@(\S+\.\S+)/g
@@ -81,7 +87,6 @@ posthog.init('<ph_project_api_key>', {
     }
 })
 ```
-
 
 
 ## Other Elements
