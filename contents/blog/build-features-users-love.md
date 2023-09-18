@@ -112,7 +112,7 @@ GitHub claims Copilot writes 40% of its users’ code. How did they get this num
 Testing is vital for building great features. Lior explains some common pitfalls. “Generating numbers is easy; generating numbers you should trust is hard!”
 
 **[Feature flag best practices and tips](https://posthog.com/blog/feature-flag-best-practices) by Ian Vanagas.**
-Feature flags are an essential tool for releasing and testing new features. See also: [How to do a canary release with feature flags](https://posthog.com/tutorials/canary-release).
+Feature flags are an essential tool for releasing and testing new features. See also: [How to do a canary release with feature flags](/tutorials/canary-release).
 
 ## 🤔 More good reads
 **[Rooting Out Red Tape At Your Startup](https://blog.staysaasy.com/p/rooting-out-red-tape-at-your-startup) by Stay SaaSy.**

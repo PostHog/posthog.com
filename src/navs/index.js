@@ -831,7 +831,6 @@ export const communityMenu = {
                         { name: 'Site apps', url: '/tutorials/categories/site-apps' },
                         { name: 'Team collaboration', url: '/tutorials/categories/team-collaboration' },
                         { name: 'Toolbar', url: '/tutorials/categories/toolbar' },
-                        { name: 'UTM segmentation', url: '/tutorials/categories/utm-segmentation' },
                     ],
                 },
                 {
@@ -2592,20 +2591,12 @@ export const docsMenu = {
                             url: '/docs/cdp/taxonomy-standardizer',
                             name: 'Taxonomy Standardizer',
                         },
-                        {
-                            url: '/docs/cdp/unduplicator',
-                            name: 'Unduplicator',
-                        },
                     ],
                 },
                 {
                     name: 'Event transformation',
                     url: '',
                     children: [
-                        {
-                            url: '/docs/cdp/automatic-cohort-creator',
-                            name: 'Automatic Cohort Creator',
-                        },
                         {
                             url: '/docs/cdp/geoip-enrichment',
                             name: 'GeoIP Enricher',
@@ -2684,6 +2675,26 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/setup',
                     icon: 'Book',
                     color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Query',
+                    url: '/docs/data-warehouse/query',
+                    icon: 'HogQL',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Views',
+                    url: '/docs/data-warehouse/views',
+                    icon: 'Calculator',
+                    color: 'salmon',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
