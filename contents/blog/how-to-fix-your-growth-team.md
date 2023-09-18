@@ -21,7 +21,7 @@ There are telltale signs when a growth team isn't succeeding: Stuck metrics, mis
 
 Alexey shared his advice with us on how to get your growth team winning again.
 
-## The formula for a winning growth team
+## The formula of a winning growth team
 
 The three most significant factors affecting your growth team's impact are:
 
