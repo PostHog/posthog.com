@@ -286,8 +286,8 @@ FullStory is _primarily_ a session replay tool, while PostHog is all-in-one plat
         <tr>
             <td><strong>Data retention</strong></td>
 		<td className="text-center">1 month<sup>*</sup></td>
-            <td className="text-center"><
-                strong>PostHog Cloud (free):</strong> 1 month
+            <td className="text-center">
+                <strong>PostHog Cloud (free):</strong> 1 month
                 <br />
                 <strong>PostHog Cloud (paid):</strong> 3 months
                 <br />
