@@ -12,7 +12,7 @@ If it requires a new team to build it – which it usually will – we'll start 
 
 That person builds the MVP, and the only goal is to figure out if anyone will use it. With some products, the MVP may have more scope if we feel especially confident. Once the new product is in a non-embarassing state (that won't harm our brand), we add pricing to it and position it on our website. This drives much more demand. At this stage, the goal is to get the product to product-market fit in PostHog's platform, which means working with customers until we have 5 delighted, paying customers. 
 
-Once all this is done – which we'd expect to take a few months – we can start to innovate. This usually means some kind of platform play - for example, extending the product to enhance everything else we're working on, or shipping a new product that'd work well with it.
+Once all this is done – which we'd expect to take a few months – we can start to innovate. This usually means some kind of platform play - for example, extending the product to enhance everything else we're working on, or shipping another new product that'd work well with it.
 
 ## Engineers talk to users and provide support
 
