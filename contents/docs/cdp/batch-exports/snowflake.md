@@ -14,7 +14,7 @@ With batch exports, data can be exported to a Snowflake database table.
 
 1. Navigate to the exports page in your PostHog instance (Quick links if you use [PostHog Cloud US](https://app.posthog.com/batch_exports) or [PostHog Cloud EU](https://eu.posthog.com/batch_exports)).
 2. Click "Create export workflow".
-3. Select **Snowflake** as the batch export type.
+3. Select **Snowflake** as the batch export destination.
 4. Fill in the necessary [configuration details](#snowflake-configuration).
 5. Finalize the creation by clicking on "Create".
 6. Done! The batch export will schedule its first run on the start of the next period.

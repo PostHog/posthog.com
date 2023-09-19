@@ -176,9 +176,6 @@ export default function ZendeskTicket({ question, questionID }) {
     }
 
     const getTicket = async (id) => {
-        if (!id) {
-            id = await linkTicket()
-        }
         const { ticket } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/zendesk/${id}`, {
             headers: { Authorization: `Bearer ${await getJwt()}` },
         }).then((res) => res.json())
@@ -186,10 +183,17 @@ export default function ZendeskTicket({ question, questionID }) {
     }
 
     useEffect(() => {
-        getTicket(question.attributes.zendeskTicketID).then((ticket) => {
+        const handleQuestionChange = async () => {
+            let ticketID = question.attributes.zendeskTicketID
+            if (!ticketID) {
+                ticketID = await linkTicket()
+                return
+            }
+            const ticket = await getTicket(ticketID)
             setTicket(ticket)
             setLoading(false)
-        })
+        }
+        handleQuestionChange()
     }, [question])
 
     return !loading && ticket ? (

@@ -20,7 +20,7 @@ tags:
 Happy holidays from PostHog! PostHog 1.31.0 is our last release of the year, introducing Group Analytics, improved Correlation Analysis, a revamped user experience on Insights and 350+ more improvements and fixes. Please note that Postgres-based installations are no longer supported for PostHog 1.31.0.
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of v1.30.0 and you must <a href="/docs/migrate/migrate-between-posthog-instances" target="_blank">upgrade to ClickHouse</a> first.
+<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports Postgres as of v1.30.0 and you must upgrade to ClickHouse first.
 </blockquote>
 
 ## PostHog 1.31.0 release notes

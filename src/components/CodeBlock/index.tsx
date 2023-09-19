@@ -184,7 +184,7 @@ export const CodeBlock = ({
                 <div className="bg-accent dark:bg-accent-dark text-sm flex items-center w-full rounded-t">
                     {selector === 'tabs' && languages.length > 1 ? (
                         <Tab.Group onChange={(index) => onChange?.(languages[index])}>
-                            <Tab.List className="flex items-center gap-[1px]">
+                            <Tab.List className="flex items-center gap-[1px] flex-wrap">
                                 {languages.map((option) => (
                                     <Tab
                                         key={option.language}

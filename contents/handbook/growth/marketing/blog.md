@@ -12,7 +12,7 @@ Content is the main pillar of our marketing strategy. As our products are quite 
 
 ## Content strategy
 
-Content is a long-term strategy and we'e focused on high-quality content that's genuinely valuable to users. Our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets.
+Content is a long-term strategy and we're focused on high-quality content that's genuinely valuable to users. Our strategy is to go _deeper_ and create better content as we grow, not simply push out more articles for its own sake. For this reason, we never set ourselves specific content output targets.
 
 We **win on depth**, not breadth – a few high-quality pieces > a larger number of medium quality pieces. We have four content buckets:
 
