@@ -15,10 +15,21 @@ The deletion is not immediate meaning that recordings may still appear for a sho
 Pinned or Shared recordings are kept for as long as they are actively in use. Alternatively, any individual recording that you would like to preserve for longer can be done by downloading them locally. Downloaded recordings can then be imported back into PostHog for future playback, even if the original recording has expired.
 
 
-## Clickhouse Self-hosted 
+## Self-hosted 
 
-Self-hosted installations are able to control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. 
+In order to make PostHog cheaper and easier to run and maintain. 
+We are deprecating storing recordings in ClickHouse. 
+All releases after 19th September 2023 only officially support blob storage backed recordings.
 
-Please note, for versions of PostHog that rely on Clickhouse storage. You need to manage the available capacity. Ensure you increase volume capacity before changing the `RECORDINGS_TTL_WEEKS` value (even if you're decreasing the value). ClickHouse requires abundant free disk space to manage the `session_recording_events` table.
+Self-hosted installations, pinned to earlier versions, 
+are able to control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. 
 
-In later versions (which do not use Clickhouse for recording storage), the installation will be relying on its configured blob storage. And the much smaller `session_replay_events` table which does not need management differently to other tables.
+Please note, 
+for versions of PostHog that rely on Clickhouse storage, 
+you need to manage the available capacity. 
+Ensure you increase volume capacity before changing the `RECORDINGS_TTL_WEEKS` value (even if you're decreasing the value). 
+ClickHouse requires abundant free disk space to manage the `session_recording_events` table.
+
+In later versions (which do not use Clickhouse for recording storage), 
+the installation will be relying on its configured blob storage. 
+You can manage storage using blob storage lifecycle policies.
