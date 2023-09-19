@@ -4,39 +4,24 @@ sidebar: Handbook
 showTitle: true
 ---
 
-YouTube could be a massive channel for organic traffic. Our small amount of [YouTube content (especially tutorials)](https://www.youtube.com/channel/UCoP6ql8QkyOoVpBU4P8LM6w) has a decent amount (x000s) of views. Many potential and current users in our [ICP](/handbook/growth/marketing/customer-personas) rely on YouTube for informative content. Users [have asked for it](https://posthog.slack.com/archives/C02KGGDCA6Q/p1667921203713659).
+We experimented with [YouTube](https://www.youtube.com/@PostHog) from November 2022 to July 2023, but have paused creation and publishing for now. We may try again in the future.
 
-We have lots of content (blog, tutorial) that can relatively easily turn into video content. As a start, we should turn tutorial and SEO blog content into video content and post it on YouTube. 
+Although videos were driving X00s of views each (some hit X000s), and we received some positive feedback, we didn't see an increase in signups, traffic, or mentions from the videos. For example, the video on [why and how we use GitHub as our CMS](https://www.youtube.com/watch?v=Z2-dSM2i2_Y) got 3,000 views in 1 one week, but made no noticeable impact on signups.
 
-What we (Ian) need:
+We also were starting to run out of obvious tutorial and SEO blog content to turn into videos. Basically, we ran out of low-hanging fruit. New videos would have taken increasing amounts of time.
 
-- Something to say (a script or notes)
-- A way to record
-- A way to edit
-- Title, thumbnail, publishing
+## Learnings
 
-## Roadmap
+- The less PostHog-related videos did better across all three types.
+- Title and thumbnail matter more than video content. 
+- YouTube growth compounds heavily, but it requires multiple years and 100s of videos to reach the scale we'd need for a meaningful impact.
+- Lighting is what makes the most difference in video quality.
+- The [PostHog demo](https://www.youtube.com/watch?v=BPDmpepEwSY) is the most important and popular video we have. It should be updated at some point.
+- [OBS](https://obsproject.com/) works well to manage the recording of videos (screen, audio, webcam).
+- Only 2.5% of video traffic came from `posthog.com`. 60% came from YouTube features like search, channel pages, or recommendations.
 
-v1:
+## Types of videos we made
 
-- Ian records using Loom, my equipment, basic tutorials, basically the same script as article, light editing (from me), and templated thumbnails.
-- Goal: consistently publish at least 2 videos per week, with x00s of views each, >0 signups attributable per week.
-
-v2:
-
-- Use Loom, slightly upgrade equipment, more advanced (longer) tutorials, more work on the script, a freelance editor, and custom thumbnails (from Lottie).
-- Goal: consistently publish 2 higher quality videos per week, some reaching x000s  of views, >5 signups attributable per week.
-
-v3:
-
-- Use Loom or other software, same equipment, record blog posts and [YouTube-specific content](https://github.com/PostHog/posthog.com/issues/4586), better scripts,  freelance editor, custom thumbnails (from Lottie or freelancer).
-- Goal: publish 3 high-quality videos per week (at least 1 featuring non-tutorial content), consistently reaching x000s, some videos reaching x0000. >10 signups attributable per week.
-
-## Distribution
-Distributing these videos will consist of:
-- Relying on YouTube's algorithm
-- Embed the video in the related tutorial
-- Sending to general channel in user Slack
-- If SEO or non-tutorial videos, posting on social
-
-There is a lot to learn here, but YouTube could become a massive, differentiated channel for us.
+1. Tutorials like [How to bootstrap feature flags](https://youtu.be/9z1axmXdqV8)
+2. SEO-ish content like [The best GA4 alternatives for apps and websites](https://youtu.be/ImcNUnqDoUQ)
+3. "Essay" videos like [The modern data stack sucks](https://youtu.be/9z1axmXdqV8)

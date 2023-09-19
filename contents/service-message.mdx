@@ -13,7 +13,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 </div>
 
 <h1 className="text-center px-2 md:px-8 text-3xl md:text-5xl xl:text-6xl relative z-20">
-  We have scheduled maintenance on <span className="text-red">August 29th</span>
+  We have scheduled maintenance on <span className="text-red">September 14th</span>
 </h1>
 
 <Hero
@@ -23,27 +23,27 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 <details>
   <summary>What are you doing during the maintenance?</summary>
   <p>
-      We're planning to upgrade the Postgres database for our US cloud, moving from Aurora 11 to Aurora 15. This will make PostHog faster, and much more scalable. 
+      We're planning to upgrade the Postgres database for our EU cloud, moving from Aurora 11 to Aurora 15. This will make PostHog faster, and much more scalable. 
   </p>
   <p>
-      This is planned maintenance, so there's <a href="https://github.com/PostHog/posthog-cloud-infra/issues/1987">a public GitHub issue</a> if you'd like to follow the technical discussion.
+      This is planned maintenance, so there's <a href="https://github.com/PostHog/posthog-cloud-infra/issues/2027">a public GitHub issue</a> if you'd like to follow the technical discussion.
   </p>
   </details>
 
   <details>
   <summary>Why will you pause ingestion, and for how long?</summary>
   <p>
-    We can't efficiently upgrade the database while it's in use, so we'll temporarily pause ingestion while work is underway. We expect it to take around four hours, starting at 06:00 EDT (05:00 CDT / 03:00 PDT / 10:00 UTC), August 29th.
+    We can't efficiently upgrade the database while it's in use, so we'll temporarily pause ingestion while work is underway. We expect it to take around four hours, and we'll start at 17:00 UTC (18:00 BST / 18:00 WEST / 19:00 CEST / 20:00 EEST).
   </p>
   </details>
 
 <details>
 <summary>What will the impact be?</summary>
   <p>
-    This work will only impact users on our US Cloud, regardless of where the teams are physically located. Self-hosted, hobby, and EU Cloud users are unaffected.
+    This work will only impact users on our EU Cloud, regardless of where the teams are physically located. Self-hosted, hobby, and US cloud users are unaffected. The US cloud has already been upgraded in a previous maintenance.
 </p>
 <p>
-    Teams on the US Cloud will still be able to log in and analyze historic data as normal, but no new data will be ingested while the maintenance is underway. Instead, we'll queue that data and ingest it once the work is complete. We expect it to take approximately four hours.
+    Teams on the EU Cloud will still be able to log in and analyze historic data as normal, but no new data will be ingested while the maintenance is underway. Instead, we'll queue that data and ingest it once the work is complete. We expect it to take approximately four hours.
 </p>
 <p>
     Feature flags and experiments will function as expected for your users, but you won't be able to make changes to them until the upgrade is complete. Flags set to persist across authentication steps will not persist for new users who are identified during the upgrade.

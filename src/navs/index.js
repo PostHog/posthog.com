@@ -94,6 +94,10 @@ export const handbookSidebar = [
                 url: '/handbook/company/communication',
             },
             {
+                name: 'Kudos',
+                url: '/handbook/company/kudos',
+            },
+            {
                 name: 'Management',
                 url: '/handbook/company/management',
             },
@@ -425,6 +429,10 @@ export const handbookSidebar = [
                         name: 'Roadmap',
                         url: '/handbook/engineering/posthog-com/roadmap',
                     },
+                    {
+                        name: 'Editing API docs',
+                        url: '/handbook/engineering/posthog-com/api-docs',
+                    },
                 ],
             },
             {
@@ -540,6 +548,10 @@ export const handbookSidebar = [
                 url: '/handbook/design/process',
             },
             {
+                name: 'Art requests',
+                url: '/handbook/design/art-requests',
+            },
+            {
                 name: 'Designing posthog.com',
                 url: '/handbook/design/designing-posthog-website',
             },
@@ -554,15 +566,7 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing',
             },
             {
-                name: 'Personas',
-                url: '/handbook/growth/marketing/customer-personas',
-            },
-            {
-                name: 'Testimonials',
-                url: '/handbook/growth/marketing/testimonials',
-            },
-            {
-                name: 'Value propositions',
+                name: 'Value proposition',
                 url: '/handbook/growth/marketing/value-propositions',
             },
             {
@@ -574,23 +578,23 @@ export const handbookSidebar = [
                         url: '/handbook/growth/marketing/blog',
                     },
                     {
-                        name: 'Sponsorship',
-                        url: '/handbook/growth/marketing/open-source-sponsorship',
+                        name: 'Email & newsletter',
+                        url: '/handbook/growth/marketing/newsletter',
                     },
                     {
                         name: 'Paid ads',
                         url: '/handbook/growth/marketing/paid',
                     },
                     {
-                        name: 'Email',
-                        url: '/handbook/growth/marketing/newsletter',
+                        name: 'Sponsorships',
+                        url: '/handbook/growth/marketing/open-source-sponsorship',
                     },
                     {
                         name: 'In-app',
                         url: '/handbook/growth/marketing/in-app',
                     },
                     {
-                        name: 'Startups',
+                        name: 'PostHog for Startups',
                         url: '/handbook/growth/marketing/startups',
                     },
                     {
@@ -601,11 +605,19 @@ export const handbookSidebar = [
                         name: 'YouTube',
                         url: '/handbook/growth/marketing/youtube',
                     },
-                    {
-                        name: 'Dashboard templates',
-                        url: '/handbook/growth/marketing/templates',
-                    },
                 ],
+            },
+            {
+                name: 'Product announcements',
+                url: '/handbook/growth/marketing/product-announcements',
+            },
+            {
+                name: 'Testimonials',
+                url: '/handbook/growth/marketing/testimonials',
+            },
+            {
+                name: 'Dashboard templates',
+                url: '/handbook/growth/marketing/templates',
             },
         ],
     },
@@ -726,7 +738,6 @@ export const communityMenu = {
                         { name: 'Site apps', url: '/tutorials/categories/site-apps' },
                         { name: 'Team collaboration', url: '/tutorials/categories/team-collaboration' },
                         { name: 'Toolbar', url: '/tutorials/categories/toolbar' },
-                        { name: 'UTM segmentation', url: '/tutorials/categories/utm-segmentation' },
                     ],
                 },
                 {
@@ -1034,6 +1045,10 @@ export const docsMenu = {
                             },
                         },
                         {
+                            name: 'Framer',
+                            url: '/tutorials/framer-analytics',
+                        },
+                        {
                             name: 'Gatsby',
                             url: '/docs/libraries/gatsby',
                             badge: {
@@ -1079,6 +1094,10 @@ export const docsMenu = {
                         {
                             name: 'Vue.js',
                             url: '/docs/libraries/vue-js',
+                        },
+                        {
+                            name: 'Webflow',
+                            url: '/tutorials/webflow',
                         },
                         {
                             name: 'WordPress',
@@ -1224,12 +1243,20 @@ export const docsMenu = {
                             url: '/docs/hogql/guide',
                         },
                         {
+                            name: 'Expressions',
+                            url: '/docs/hogql/expressions',
+                        },
+                        {
                             name: 'Supported ClickHouse functions',
                             url: '/docs/hogql/clickhouse-functions',
                         },
                         {
                             name: 'Supported aggregations',
                             url: '/docs/hogql/aggregations',
+                        },
+                        {
+                            name: 'Tutorials',
+                            url: '/docs/hogql/tutorials',
                         },
                     ],
                 },
@@ -1671,10 +1698,6 @@ export const docsMenu = {
                             url: '/docs/migrate/migrate-to-cloud',
                         },
                         {
-                            name: 'Migrate between PostHog instances',
-                            url: '/docs/migrate/migrate-between-posthog-instances',
-                        },
-                        {
                             name: 'Migrate from Amplitude',
                             url: '/docs/migrate/migrate-from-amplitude',
                         },
@@ -1860,6 +1883,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Tutorials and guides',
+                    url: '/docs/product-analytics/tutorials',
+                    icon: 'GraduationCap',
+                    color: 'red',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
@@ -1909,6 +1938,16 @@ export const docsMenu = {
                     url: '/docs/product-analytics/lifecycle',
                     icon: 'Lifecycle',
                     color: 'yellow',
+                },
+                {
+                    name: 'SQL',
+                    url: '/docs/product-analytics/sql',
+                    icon: 'HogQL',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Notifications',
@@ -1980,6 +2019,12 @@ export const docsMenu = {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/session-replay/troubleshooting',
                     icon: 'Question',
+                    color: 'purple',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/session-replay/tutorials',
+                    icon: 'GraduationCap',
                     color: 'blue',
                 },
                 {
@@ -1989,7 +2034,7 @@ export const docsMenu = {
                     name: 'Console log recording',
                     url: '/docs/session-replay/console-log-recording',
                     icon: 'Code',
-                    color: 'blue',
+                    color: 'red',
                 },
                 {
                     name: 'Network performance',
@@ -2069,6 +2114,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Tutorials and guides',
+                    url: '/docs/feature-flags/tutorials',
+                    icon: 'GraduationCap',
+                    color: 'blue',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -2088,16 +2139,6 @@ export const docsMenu = {
                     url: '/docs/feature-flags/early-access-feature-management',
                     icon: 'Features',
                     color: 'purple',
-                },
-                {
-                    name: 'Surveys',
-                    url: '/docs/surveys/manual',
-                    icon: 'Message',
-                    color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
             ],
         },
@@ -2155,6 +2196,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Tutorials and guides',
+                    url: '/docs/experiments/tutorials',
+                    icon: 'GraduationCap',
+                    color: 'blue',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -2174,6 +2221,57 @@ export const docsMenu = {
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'Flag',
                     color: 'yellow',
+                },
+            ],
+        },
+        {
+            name: 'Surveys',
+            url: '/docs/surveys',
+            icon: 'Message',
+            color: 'blue',
+            children: [
+                {
+                    name: 'Surveys',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/surveys',
+                    icon: 'Home',
+                    color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Installation',
+                    url: '/docs/surveys/installation',
+                    icon: 'Book',
+                    color: 'blue',
+                },
+                {
+                    name: 'Setup',
+                    url: '/docs/surveys/setup',
+                    icon: 'Toggle',
+                    color: 'red',
+                },
+                {
+                    name: 'Creating a survey',
+                    url: '/docs/surveys/new',
+                    icon: 'Features',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Targeting',
+                    url: '/docs/surveys/targeting',
+                    icon: 'Target',
+                    color: 'green',
+                },
+                {
+                    name: 'Survey events',
+                    url: '/docs/surveys/events',
+                    icon: 'Send',
+                    color: 'purple',
                 },
             ],
         },
@@ -2214,6 +2312,10 @@ export const docsMenu = {
                             name: 'Snowflake',
                             url: '/docs/cdp/batch-exports/snowflake',
                         },
+                        {
+                            name: 'BigQuery',
+                            url: '/docs/cdp/batch-exports/bigquery',
+                        },
                     ],
                 },
                 {
@@ -2221,12 +2323,8 @@ export const docsMenu = {
                     url: '',
                     children: [
                         {
-                            url: '/docs/cdp/amazon-kinesis',
-                            name: 'Amazon Kinesis',
-                        },
-                        {
-                            url: '/docs/cdp/bitbucket-release-tracker',
-                            name: 'BitBucket',
+                            url: '/docs/cdp/segment',
+                            name: 'Segment',
                         },
                         {
                             url: '/docs/cdp/replicator',
@@ -2237,36 +2335,8 @@ export const docsMenu = {
                             },
                         },
                         {
-                            url: '/docs/cdp/github-release-tracker',
-                            name: 'GitHub Releases',
-                        },
-                        {
-                            url: '/docs/cdp/github-star-sync',
-                            name: 'GitHub Stars',
-                        },
-                        {
-                            url: '/docs/cdp/gitlab-release-tracker',
-                            name: 'GitLab',
-                        },
-                        {
-                            url: '/docs/cdp/heartbeat',
-                            name: 'Heartbeat',
-                        },
-                        {
-                            url: '/docs/cdp/ingestion-alert',
-                            name: 'Ingestion Alert',
-                        },
-                        {
-                            url: '/docs/cdp/email-scoring',
-                            name: 'Email Scoring',
-                        },
-                        {
                             url: '/docs/cdp/n8n',
                             name: 'n8n',
-                        },
-                        {
-                            url: '/docs/cdp/orbit',
-                            name: 'Orbit',
                         },
                         {
                             url: '/docs/cdp/redshift-import',
@@ -2277,20 +2347,8 @@ export const docsMenu = {
                             name: 'Rudderstack',
                         },
                         {
-                            url: '/docs/cdp/segment',
-                            name: 'Segment',
-                        },
-                        {
                             url: '/docs/cdp/sentry-connector',
                             name: 'Sentry',
-                        },
-                        {
-                            url: '/docs/cdp/twitter-followers',
-                            name: 'Twitter',
-                        },
-                        {
-                            url: '/docs/cdp/zapier-connector',
-                            name: 'Zapier',
                         },
                         {
                             url: '/docs/cdp/zendesk-connector',
@@ -2331,14 +2389,6 @@ export const docsMenu = {
                             name: 'Customer.io',
                         },
                         {
-                            url: '/docs/cdp/databricks',
-                            name: 'Databricks',
-                            badge: {
-                                title: 'Beta',
-                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                            },
-                        },
-                        {
                             url: '/docs/cdp/engage-connector',
                             name: 'Engage.so',
                         },
@@ -2361,10 +2411,6 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/intercom',
                             name: 'Intercom',
-                        },
-                        {
-                            url: '/docs/cdp/pagerduty-connector',
-                            name: 'PagerDuty',
                         },
                         {
                             url: '/docs/cdp/postgres-export',
@@ -2418,10 +2464,6 @@ export const docsMenu = {
                             url: '/docs/cdp/pace-integration',
                             name: 'Pace',
                         },
-                        {
-                            url: '/docs/cdp/zapier-connector',
-                            name: 'Zapier',
-                        },
                     ],
                 },
                 {
@@ -2456,28 +2498,12 @@ export const docsMenu = {
                             url: '/docs/cdp/taxonomy-standardizer',
                             name: 'Taxonomy Standardizer',
                         },
-                        {
-                            url: '/docs/cdp/unduplicator',
-                            name: 'Unduplicator',
-                        },
                     ],
                 },
                 {
                     name: 'Event transformation',
                     url: '',
                     children: [
-                        {
-                            url: '/docs/cdp/advanced-geoip',
-                            name: 'Advanced GeoIP Enricher',
-                        },
-                        {
-                            url: '/docs/cdp/automatic-cohort-creator',
-                            name: 'Automatic Cohort Creator',
-                        },
-                        {
-                            url: '/docs/cdp/currency-normalization',
-                            name: 'Currency Normalizer',
-                        },
                         {
                             url: '/docs/cdp/geoip-enrichment',
                             name: 'GeoIP Enricher',
@@ -2556,6 +2582,26 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/setup',
                     icon: 'Book',
                     color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Query',
+                    url: '/docs/data-warehouse/query',
+                    icon: 'HogQL',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Views',
+                    url: '/docs/data-warehouse/views',
+                    icon: 'Calculator',
+                    color: 'salmon',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',

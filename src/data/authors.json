@@ -349,6 +349,14 @@
         "profile_id": 684
     },
     {
+        "handle": "anna-debenham",
+        "name": "Anna Debenham",
+        "role": "Contributor",
+        "image": "../../static/images/authors/contributor-posthog.png",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/anna-debenham/"
+    },
+    {
         "handle": "tomas-farias",
         "name": "Tomás Farías Santana",
         "role": "Software Engineer",

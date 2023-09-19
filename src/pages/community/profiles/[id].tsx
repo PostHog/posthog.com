@@ -271,7 +271,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOp
                         {profile.twitter && (
                             <li>
                                 <Link to={profile.twitter}>
-                                    <Twitter className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
+                                    <Twitter className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
                                 </Link>
                             </li>
                         )}

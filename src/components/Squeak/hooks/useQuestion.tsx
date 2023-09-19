@@ -398,5 +398,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         archive,
         pinTopics,
         escalate,
+        mutate,
     }
 }

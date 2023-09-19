@@ -16,7 +16,7 @@ This tutorial shows you how to calculate bounce rate in PostHog. To get started,
 
 ## Calculating bounce rate with SQL insights
 
-To calculate bounce rate, we need data from `raw_session_replay_events`, which we can access with [SQL insights](/docs/product-analytics/hogql#sql-insights). To create a new SQL insight, go to the insight tab, click [new insight](https://app.posthog.com/insights/new), then go to the SQL tab. This is where we write our SQL statement.
+To calculate bounce rate, we need data from `raw_session_replay_events`, which we can access with [SQL insights](/docs/product-analytics/sql). To create a new SQL insight, go to the insight tab, click [new insight](https://app.posthog.com/insights/new), then go to the SQL tab. This is where we write our SQL statement.
 
 We count a bounce as a session where the user is active for less than 10 seconds. To do this in SQL, we use a count of sessions (using `session_id`) where `active_milliseconds` is less than `10000` and divide by the total session count, then multiply by `100`. Together, this looks like this:
 

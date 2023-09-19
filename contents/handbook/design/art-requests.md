@@ -17,6 +17,8 @@ Lottie, PostHog's in-house graphic designer, handles all requests for branding a
 
 You can see what Lottie is working on via the [Art & Brand Planning project board](https://github.com/orgs/PostHog/projects/65/views/2).
 
+To search through our current hedgehog assets library go to the [Hoggies file](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0%3A1&mode=design&t=kquJnyBOtmHTYUvv-1) in Figma and search for anything you need, all artwork has been tagged with various actions/emotions to make for easier location of your perfect hedgehog. If you can't find what you are looking for, request a new one!
+
 Lottie gets lots of requests for work. To help plan and prioritize this work, please follow this process for requesting work:
 
 - Create a [new art and branding request issue](https://github.com/PostHog/posthog.com/issues/new/choose) on the posthog.com repo using the issue template

@@ -15,7 +15,7 @@ tags:
   - Explainers
 ---
 
-There are lots of ways to do analytics. You can do SQL. You can do it in the cloud. You can not do it at all and hire an analytics agency or consultancy instead. But by far one of the most popular (and, we think, best) ways is _self-service_ analytics. 
+There are lots of ways to do analytics. You can [do SQL](/blog/sql-for-analytics). You can do it in the cloud. You can not do it at all and hire an analytics agency or consultancy instead. But by far one of the most popular (and, we think, best) ways is _self-service_ analytics. 
 
 That’s a term which covers a lot of popular analytics platforms, including PostHog, Mixpanel and Amplitude. But what does it mean, exactly? 
 

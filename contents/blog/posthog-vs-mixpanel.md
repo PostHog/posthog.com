@@ -620,12 +620,6 @@ As an open source platform designed for technical teams, PostHog integrates with
             <td>Track impact of releases in analytics</td>
         </tr>
         <tr>
-            <td><strong>PagerDuty</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Create custom alerts based on thresholds</td>
-        </tr>
-        <tr>
             <td><strong>Sentry</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -683,12 +677,6 @@ It's easy to track marketing conversions in PostHog, but you can't currently con
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Automate onboarding and retention messaging</td>
-        </tr>
-        <tr>
-            <td><strong>Orbit</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track community metrics</td>
         </tr>
         <tr>
             <td><strong>Pace</strong></td>

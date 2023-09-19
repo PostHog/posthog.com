@@ -4,7 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Marketing takes responsibility for coordinating and publicizing news about PostHog, including product announcements. We do this mainly through [weekly changelog updates][(/changelog)], which summarize product updates
+> This page is about planned marketing announcements, not [engineering incidents](handbook/engineering/incidents) (though we do help with those too). 
+
+Marketing takes responsibility for coordinating and publicizing news about PostHog, including product announcements. We do this mainly through [weekly changelog updates](/changelog), which summarize product updates
 
 In addition to the weekly updates we also send one monthly email to users, summarizing highlights. Some users, such as those in [the startups program](/startups), also get dedicated newsletter which may announce relevant features. 
 

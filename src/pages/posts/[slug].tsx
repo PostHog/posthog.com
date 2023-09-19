@@ -5,7 +5,8 @@ import React, { useEffect, useState } from 'react'
 
 export default function Post({ params }) {
     const [post, setPost] = useState(null)
-    useEffect(() => {
+
+    const getPost = () => {
         const slug = `/posts/${params.slug}`
         const query = qs.stringify(
             {
@@ -20,10 +21,14 @@ export default function Post({ params }) {
                 encodeValuesOnly: true,
             }
         )
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query}`)
+        return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query}`)
             .then((res) => res.json())
-            .then((post) => setPost(post?.data?.[0]?.attributes))
+            .then((post) => setPost(post?.data?.[0]))
+    }
+
+    useEffect(() => {
+        getPost()
     }, [params])
 
-    return post ? <ClientPost {...post} /> : <Skeleton />
+    return post ? <ClientPost {...post.attributes} id={post.id} getPost={getPost} /> : <Skeleton />
 }

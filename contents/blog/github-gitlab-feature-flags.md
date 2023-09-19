@@ -52,7 +52,7 @@ Although GitHub only details parts of its feature flag usage, GitLab details its
 
 The process starts before writing any code. An engineer creates a rollout plan for the feature and flag. They [detail this in an issue](https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/issue_templates/Feature%20Flag%20Roll%20Out.md). This issue contains owners, stakeholders, expectations, rollout steps for different environments (non-production, production, global), and rollback steps. They refine the rollout plan with engineers and product managers.
 
-After the plan is created, developers write code and wrapped with GitLab’s feature flag service. Once done, it rolls out following the steps detailed in the issue. 
+After the plan is created, developers write code and wrap with GitLab’s [feature flag service](/blog/feature-flags-as-a-service). Once done, it rolls out following the steps detailed in the issue. 
 
 As an example, the first rollout steps ensure the feature deploys to non-production environments and the flag is enabled in those environments. They do this through their Slack-based "chatops" service with the commands below:
 

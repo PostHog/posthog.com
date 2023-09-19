@@ -1,11 +1,12 @@
 ---
 title: Google Pub/Sub
 github: https://github.com/vendasta/pubsub-plugin
-installUrl: https://app.posthog.com/project/apps?name=Pub%2FSub%20Export
 thumbnail: ../../cdp/thumbnails/pub-sub-export.png
 tags:
     - pub-sub
 ---
+
+> This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 This app sends events from PostHog to a [Google Cloud Pub/Sub](https://cloud.google.com/pubsub/) topic when they are ingested. It's [used by teams such as Vendasta](https://posthog.com/customers/vendasta).
 

@@ -13,11 +13,11 @@ category: Engineering
 
 The value (or non-value) null can be the bane of a programmer’s existence. Null can work as expected in one language and context, then act in completely unexpected ways in another language or context.
 
-We had challenges working with null during the [release of HogQL](/blog/introducing-hogql), which added direct SQL access to your data. Michael and I realized null values for properties were leading to inaccurate results and customer confusion. This post covers our efforts to figure out and implement a solution for this.
+We had challenges working with null during the [release of HogQL](/blog/introducing-hogql), which added [direct SQL access](/docs/product-analytics/sql) to your data. Michael and I realized null values for properties were leading to inaccurate results and customer confusion. This post covers our efforts to figure out and implement a solution for this.
 
 ## The problem with null in HogQL
 
-The issue with null in HogQL was that [ClickHouse](/docs/how-posthog-works/clickhouse), the database we use to store and process data, is **strict** about nulls. If any value in an expression is null, then [the entire expression is null](https://clickhouse.com/docs/en/sql-reference/functions#null-processing). Here are two HogQL expressions showcasing why this is a problem:
+The issue with null in HogQL was that [ClickHouse](/docs/how-posthog-works/clickhouse), the database we use to store and process data, is **strict** about nulls. If any value in an expression is null, then [the entire expression is null](https://clickhouse.com/docs/en/sql-reference/functions#null-processing). Here are two [HogQL expressions](/docs/hogql/expressions) showcasing why this is a problem:
 
 1. `sumIf(properties.money, event = 'no problems') + sumIf(properties.money - 10, event = 'some problems')` returns null if either of the sides of the equation is null. This happens if there are no matching events (named `no problems` or `some problems`) or the property (`money`) is null.
 2. `concat('money: ', properties.money)` returns null if the `money` property does not exist, though users might expect either `'money: '`  or `'money: null'`
