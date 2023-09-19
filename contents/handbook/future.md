@@ -18,7 +18,7 @@ We're excited by:
 
 We're *not* excited by:
 
-* building a $1 billion company - we think going _much_ further is where the real challenge lies
+* selling the company for $1 billion - we think we can build a much bigger company by staying independent
 
 ## $100M by 2026
 
