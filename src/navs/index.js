@@ -2250,22 +2250,10 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Setup',
-                    url: '/docs/surveys/setup',
-                    icon: 'Toggle',
-                    color: 'red',
-                },
-                {
                     name: 'Creating a survey',
-                    url: '/docs/surveys/new',
-                    icon: 'Features',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Targeting',
-                    url: '/docs/surveys/targeting',
+                    url: '/docs/surveys/creating-surveys',
                     icon: 'Target',
-                    color: 'green',
+                    color: 'yellow',
                 },
                 {
                     name: 'Survey events',
