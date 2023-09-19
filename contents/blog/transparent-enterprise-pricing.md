@@ -118,4 +118,4 @@ If having SAML integration, project permissions and a whole lot of set up and on
 
 Our final hurdle is to make it so Scale and Cloud users can upgrade to Enterprise themselves without our intervention. It's coming soon.
 
-If all this talk of self-serving and automation isn't for you then don't worry – you can still always [contact sales](/get-in-touch#contact). We love hearing from our customers, but it's your choice when you do.
+If all this talk of self-serving and automation isn't for you then don't worry – you can still always [contact sales](/contact-sales). We love hearing from our customers, but it's your choice when you do.
