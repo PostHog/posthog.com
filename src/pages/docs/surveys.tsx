@@ -20,7 +20,7 @@ type FeatureFlagsProps = {
 
 export const Intro = ({ image = true }) => (
     <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row gap-8 pt-2 mb-8">
-        <div className="p-4 md:p-8">
+        <div className="p-4 md:p-8 shrink-0">
             <h1 className="text-4xl mt-0 mb-2">Surveys</h1>
             <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                 Collect feedback from your users.
