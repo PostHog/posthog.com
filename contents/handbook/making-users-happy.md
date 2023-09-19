@@ -16,11 +16,9 @@ Once all this is done – which we'd expect to take a few months – we can star
 
 ## Engineers talk to users and provide support
 
-If you are working on a product at PostHog that hasn't hit product-market fit, then you should be _as close as possible_ to  your users, feeling whatever they feel so you have as much signal as possible to make the product great.
+You should be _as close as possible_ to  your users, feeling whatever they feel so you have as much signal as possible to make the product great.
 
-_Only once_ this has happened do we have centralized support. However, even once you're at this stage, this support is always from a developer so we don't needlessly triage problems from one place to another before they wind up in an engineer's hands anyway. We'd rather fewer people with deeper technical knowledge who can fix bugs and update docs as they go, since in the long run that will lead to the best product _and_ the lowest support cost, especially as our users are technical and problem solving is part of their nature.
-
-No matter what stage a product, our engineers work hand in hand with our customers (also engineers) whenever they are building something.
+For established products with a lot of usage questions (how do I create an insight that does X for example), Customer Success helps with support.
 
 For example, before a new product is even made, we'll add it to our [public roadmap](/roadmap). Once it ships, we'll use our own tools to get customer interviews, feedback, and data, and we'll always aim to "close the loop" with users - coming back with a) a pull request, b) a GitHub issue they can follow in the open, or c) at least saying why we can't do a feature they've asked for.
 
