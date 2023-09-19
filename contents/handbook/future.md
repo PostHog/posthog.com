@@ -24,7 +24,7 @@ We're *not* excited by:
 
 We want to hit $100 million in annual revenue by the end of 2026.
 
-We've set this since it's ambitious and keeps us accountable for some kind of financial output, but working backwards we can do it. When we set the goal, we needed 9% monthly grow. We've overperformed, and that means  as of today, it's around 7%.
+We've set this since it's ambitious and keeps us accountable for some kind of financial output, but working backwards we can do it.We need around 7% monthly revenue growth to hit this.
 
 ## Secondaries over selling
 

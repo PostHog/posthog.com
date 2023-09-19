@@ -22,6 +22,18 @@ showTitle: true
 * Algolia - developers doing marketing
 * GitHub - enterprise go-to-market is 200 developers forcing their company to buy us
 
+## Handbook
+
+Like many things at PostHog, the handbook has scrappy origins.
+
+[Tim](../community/profiles/108) and [James](../community/profiles/71) were planning on launching on [HackerNews](https://news.ycombinator.com/), and we wanted to look as mature as possible - we felt that few people would want to use a flaky new startup's product seriously. So we asked ourselves - how do we signal that we're mature? We looked around at some big, boring companies and realized they all had huge footer sections on their websites with lots of links!
+
+So we thought, how do we produce a lot of content to add to our footer when the product, at that time, was so simple? We should write up how we want to work.
+
+Once we started writing it, we realized it would transform our company. Every team member, and even strangers on the internet could suggest changes. If you're doing something in public, you're going to think it through better. Ultimately, it made us treat the company as our product.
+
+It's a classic example of getting information by doing than by planning too carefully.
+
 ## Timeline
 
 ### Jan 2020: The start

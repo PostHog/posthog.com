@@ -4,7 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## How we build a product
+User happiness is of fundamental importance. So, how do we achieve this?
+
+## Building products that people want
 
 First, someone internally will suggest an idea. Sometimes this will come from James and Tim, but it has just as frequently come from anyone else on the team.
 
