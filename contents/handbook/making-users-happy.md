@@ -6,7 +6,7 @@ showTitle: true
 
 ## How we build a product
 
-First, someone internally will suggest an idea. Usually this will come from James and Tim, but it has just as frequently come from anyone else on the team.
+First, someone internally will suggest an idea. Sometimes this will come from James and Tim, but it has just as frequently come from anyone else on the team.
 
 If it requires a new team to build it – which it usually will – we'll start by hiring an ex-founder who is technical. We'll onboard them into the existing team that has the most overlap. This helps get them used to working with our codebase, and with the culture we look for from each team.
 
