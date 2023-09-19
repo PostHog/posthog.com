@@ -952,6 +952,7 @@
         { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" },
         { "source": "/blog/startup-golioth", "destination": "/spotlight/startup-golioth" },
         { "source": "/blog/startup-unified", "destination": "/spotlight/startup-unified" },
+        { "source": "/handbook/engineering", "destination": "/handbook/engineering/developing-locally" },
         { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" },
         { "source": "/docs/cdp/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/docs/cdp/unduplicator", "destination": "/docs/cdp" },
