@@ -6,6 +6,7 @@ import Markdown from './Markdown'
 import slugify from 'slugify'
 import { Edit } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
+import { isURL } from 'lib/utils'
 
 const buttons = [
     {
@@ -109,8 +110,15 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
         accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'] },
     })
 
-    const replaceSelection = (selectionStart: number, selectionEnd: number, text: string) => {
+    const replaceSelection = (selectionStart?: number, selectionEnd?: number, text = '') => {
         return value.substring(0, selectionStart) + text + value.substring(selectionEnd, value.length)
+    }
+
+    const getTextSelection = () => {
+        const selectionStart = textarea?.current?.selectionStart
+        const selectionEnd = textarea?.current?.selectionEnd
+        const selectedText = textarea?.current?.value.slice(selectionStart, selectionEnd)
+        return { selectedText, selectionStart, selectionEnd }
     }
 
     const handleClick = (
@@ -120,21 +128,29 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
     ) => {
         e.preventDefault()
 
-        if (textarea.current) {
-            const selectionStart = textarea.current.selectionStart
-            const selectionEnd = textarea.current.selectionEnd
-            const selectedText = textarea.current.value.slice(selectionStart, selectionEnd)
-            textarea.current.focus()
-            setValue(replaceSelection(selectionStart, selectionEnd, replaceWith(selectedText)))
-            setCursor(cursor)
-        }
+        const { selectionStart, selectionEnd, selectedText } = getTextSelection()
+        textarea?.current?.focus()
+        setValue(replaceSelection(selectionStart, selectionEnd, replaceWith(selectedText)))
+        setCursor(cursor)
     }
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setValue(e.target.value)
     }
 
+    const replaceSelectionWithLink = (url: string) => {
+        const { selectionStart, selectionEnd, selectedText } = getTextSelection()
+        if (selectedText) {
+            textarea?.current?.focus()
+            setValue(replaceSelection(selectionStart, selectionEnd, `[${selectedText}](${url})`))
+        }
+    }
+
     const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+        const text = e.clipboardData.getData('text')
+        if (text && isURL(text)) {
+            replaceSelectionWithLink(text)
+        }
         const images = Array.from(e.clipboardData.items).filter((item) =>
             ['image/jpeg', 'image/png'].includes(item.type)
         )
