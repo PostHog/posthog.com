@@ -43,7 +43,7 @@ Remote config is especially relied on for mobile apps. This is because mobile ap
 
 [Feature flags](/docs/feature-flags) function nearly the same as configurations. They are a key that returns a value when called with a service, but they often include detail on the user as well.
 
-> **Note:** For simplicity, we assume you are using an external feature flag service. Of course, you could (and many do) build your own feature flag tool. This might include some of the functionality below.
+> **Note:** For simplicity, we assume you are using an [external feature flag service](/blog/feature-flags-as-a-service). Of course, you could (and many do) build your own feature flag tool. This might include some of the functionality below.
 
 The big difference compared to configurations is feature flags’ expanded functionality:
 
@@ -67,7 +67,7 @@ A problem both face is testing, as both require different testing strategies tha
 
 - Feature flags need to be mocked to test all potential paths. Variants can be forgotten about and not tested, leading to issues. For a tutorial on how to test feature flags, see "[Testing frontend feature flags with React, Jest, and PostHog](/tutorials/test-frontend-feature-flags)."
 
-- Configs are often forgotten in testing altogether. To test well, they require integration tests, shadowing, and/or [canary releases](https://posthog.com/tutorials/canary-release), which require a lot of work. Bad configs have caused major outages at companies like [Cloudflare](https://web.archive.org/web/20211006135542/https://blog.cloudflare.com/todays-outage-post-mortem-82515/), [Facebook](https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/s), and [Google](https://blog.google/inside-google/company-announcements/todays-outage-for-several-google/).
+- Configs are often forgotten in testing altogether. To test well, they require integration tests, shadowing, and/or [canary releases](/tutorials/canary-release), which require a lot of work. Bad configs have caused major outages at companies like [Cloudflare](https://web.archive.org/web/20211006135542/https://blog.cloudflare.com/todays-outage-post-mortem-82515/), [Facebook](https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/s), and [Google](https://blog.google/inside-google/company-announcements/todays-outage-for-several-google/).
 
 ## Which should you choose?
 

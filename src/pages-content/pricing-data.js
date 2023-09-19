@@ -91,7 +91,7 @@ const faqs = [
     },
     {
         q: 'How long do you retain recordings?',
-        a: 'Recordings are kept on Clickhouse-based installations for 3 weeks.',
+        a: 'Recordings are kept on Clickhouse-based installations for 1 month. For paid customers on PostHog cloud, recordings are kept for 3 months.',
         author: {
             q: {
                 image: <StaticImage alt="" width={40} src="./images/hog-6.png" />,

@@ -6,7 +6,8 @@ Depending on how your app or website is built, recordings can take a lot of disk
 
 ## PostHog Cloud
 
-Recordings are automatically deleted after **3 weeks**. The deletion is not immediate meaning that they may still appear for a short time in the UI after the 3 week period or if manually deleted via the UI. 
+Recordings are automatically deleted after **1 month** (**3 months** for paid customers). 
+The deletion is not immediate meaning that recordings may still appear for a short time in the UI after the retention period expires or when manually deleted via the UI. 
 
 
 ### Preserving recordings
@@ -14,6 +15,21 @@ Recordings are automatically deleted after **3 weeks**. The deletion is not imme
 Pinned or Shared recordings are kept for as long as they are actively in use. Alternatively, any individual recording that you would like to preserve for longer can be done by downloading them locally. Downloaded recordings can then be imported back into PostHog for future playback, even if the original recording has expired.
 
 
-## Clickhouse Self-hosted 
+## Self-hosted 
 
-Self-hosted is the same as Cloud, except you are able to control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. Please note, if your Clickhouse storage is nearing capacity, you'll want to temporarily increase your volume size before running the command above (even if you're decreasing the value). Otherwise, the command can hang.
+In order to make PostHog cheaper and easier to run and maintain. 
+We are deprecating storing recordings in ClickHouse. 
+All releases after 19th September 2023 only officially support blob storage backed recordings.
+
+Self-hosted installations, pinned to earlier versions, 
+are able to control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. 
+
+Please note, 
+for versions of PostHog that rely on Clickhouse storage, 
+you need to manage the available capacity. 
+Ensure you increase volume capacity before changing the `RECORDINGS_TTL_WEEKS` value (even if you're decreasing the value). 
+ClickHouse requires abundant free disk space to manage the `session_recording_events` table.
+
+In later versions (which do not use Clickhouse for recording storage), 
+the installation will be relying on its configured blob storage. 
+You can manage storage using blob storage lifecycle policies.

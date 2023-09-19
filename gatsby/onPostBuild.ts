@@ -83,6 +83,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                 fields: { slug },
                 parent: { relativePath: path },
                 rawBody,
+                excerpt,
             }) => {
                 const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
                 const category = allStrapiPostCategories.find(
@@ -104,6 +105,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                         url: featuredImage?.childImageSharp?.gatsbyImageData?.images?.fallback?.src,
                     },
                     body: rawBody,
+                    excerpt,
                     authors: {
                         connect: authorIDs,
                     },
@@ -208,7 +210,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         }
                         featuredImage {
                             childImageSharp {
-                                gatsbyImageData(width: 150, quality: 100)
+                                gatsbyImageData(width: 650, height: 350, quality: 100)
                             }
                         }
                         authorData {
@@ -216,6 +218,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         }
                     }
                     rawBody
+                    excerpt(pruneLength: 250)
                 }
             }
             blog: allMdx(
