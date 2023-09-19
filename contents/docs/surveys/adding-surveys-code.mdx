@@ -1,0 +1,86 @@
+---
+title: Adding survey code
+sidebar: Docs
+showTitle: true
+availability:
+    free: none
+    selfServe: full
+    enterprise: full
+---
+
+> **Note:** Adding code is **not required** for [popover surveys](/docs/surveys/creating-surveys#display-mode).
+
+If you're using PostHog's [survey API](/docs/surveys/creating-surveys#display-mode) to integrate a custom survey UI, you'll need to add your code before launching.
+
+There are 2 steps:
+
+## Step 1: Fetch your active surveys
+
+To fetch the surveys which are currently enabled for your user, call `posthog.getActiveMatchingSurveys()`. 
+
+Alternatively, if you wish to do survey targeting yourself, you can call `posthog.getSurveys()` to return a list of all surveys on PostHog.
+
+Both methods return a callback with a `surveys` object:
+
+```json
+// Example surveys object:
+[{
+  "id": "your_survey_id",
+  "name": "Your survey name",
+  "description": "Metadata describing your survey",
+  "type": "api", // can be either "api" or "popover"
+  "linked_flag_key": null, //Linked feature flag key, if any.
+  "targeting_flag_key": "your_survey_targeting_flag_key",
+  "questions": [
+    {
+      "type": "single_choice",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "question": "Are you enjoying PostHog?"
+    }
+  ],
+  "conditions": null,
+  "start_date": "2023-09-19T13:10:49.505000Z",
+  "end_date": null
+}]
+```
+
+Thus you can use show your user a survey using code like this:
+
+```js-web
+posthog.getActiveMatchingSurveys((surveys) => {
+    // Make sure you filter for surveys that are of type `"api"`. 
+    // This prevents accidentally showing popover surveys to your users.
+    const filteredSurveys = surveys.filter(survey => survey.type === 'api'));
+    if (filteredSurveys.length > 0) {
+        // show the survey using your custom UI
+        showSurvey(filteredSurveys[0]);
+    }
+})
+```
+
+> **Note:** If you're using a URL or selector targeting options, you'll need to poll `posthog.getActiveMatchingSurveys()` to get the most updated results.
+
+## Step 2: Capture survey events
+
+You can capture user interactions with your surveys using the following 3 events:
+
+```js-web
+// 1. When a user has seen a survey
+posthog.capture("survey shown", {
+    $survey_id: {survey.id} // required
+})
+
+// 2. When a user has dismissed a survey
+posthog.capture("survey dismissed", {
+    $survey_id: {survey.id} // required
+})
+
+// 3. When a user has responded to a survey
+posthog.capture("survey sent", {
+    $survey_id: {survey.id} // required
+    $survey_response: {survey_response} // required
+})
+```
