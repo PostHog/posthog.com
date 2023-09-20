@@ -55,12 +55,13 @@ We make a request to fetch feature flags when:
 3. A user's [properties](/docs/product-analytics/user-properties) are updated.
 4. You ask us to reload feature flags (`posthog.reloadFeatureFlags()`)
 
-For your frontend, you can estimate feature flag requests roughly by doing the following:
+For the [JavaScript web SDK](/docs/libraries/js), you can estimate how many feature flag requests you will make by doing the following:
 
-1. Open your product page, and check the networks tab in chrome inspector tools for the number of `/decide` requests.
+1. Check the networks tab in Chrome inspector tools for the number of `/decide` requests.
 2. Find out your number of monthly page views
+3. Multiply the number your number of `/decide` requests by your monthly page views
 
-A rough estimate for the total requests is (1)*(2). For example, if on refresh, you see 2 `/decide` requests per pageview and you have ~150,000 pageviews, your monthly feature flag requests should be around ~300,000.
+For example, if on refresh, you see 2 `/decide` requests per pageview and you have ~150,000 pageviews, your monthly feature flag requests should be around ~300,000.
 
 ### Backend SDKS
 
