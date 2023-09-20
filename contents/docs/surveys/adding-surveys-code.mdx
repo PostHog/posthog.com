@@ -10,15 +10,14 @@ availability:
 
 > **Note:** Adding code is **not required** for [popover surveys](/docs/surveys/creating-surveys#display-mode).
 
-If you're using PostHog's [survey API](/docs/surveys/creating-surveys#display-mode) to integrate a custom survey UI, you'll need to add your code before launching.
+If you're using PostHog's [survey API](/docs/surveys/creating-surveys#display-mode) to create a custom survey UI, there are 2 steps to integrating with PostHog:
 
-There are 2 steps:
 
-## Step 1: Fetch your active surveys
+## Step 1: Fetch active surveys
 
-To fetch the surveys which are currently enabled for your user, call `posthog.getActiveMatchingSurveys()`. 
+To fetch the surveys currently enabled for a user, call `posthog.getActiveMatchingSurveys()`. 
 
-Alternatively, if you wish to do survey targeting yourself, you can call `posthog.getSurveys()` to return a list of all surveys on PostHog.
+Alternatively, if you wish to do survey targeting yourself, you can call `posthog.getSurveys()` to return a list of all surveys from PostHog.
 
 Both methods return a callback with a `surveys` object:
 
@@ -68,7 +67,7 @@ posthog.getActiveMatchingSurveys((surveys) => {
 You can capture user interactions with your surveys using the following 3 events:
 
 ```js-web
-// 1. When a user has seen a survey
+// 1. When a user is shown a survey
 posthog.capture("survey shown", {
     $survey_id: {survey.id} // required
 })
