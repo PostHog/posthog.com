@@ -25,7 +25,7 @@ import posthog from 'posthog-js'
 posthog.init('<ph_project_api_key>', { api_host: '<ph_instance_address>' })
 ```
 
-If you don't want to send a bunch of test data while you're developing, you could do the following:
+If you don't want to send test data while you're developing, you can do the following:
 
 ```js-web
 if (!window.location.host.includes('127.0.0.1') && !window.location.host.includes('localhost')) {
