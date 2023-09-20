@@ -1,5 +1,5 @@
 ---
-title: Adding survey code
+title: Implementing custom surveys
 sidebar: Docs
 showTitle: true
 availability:
@@ -8,10 +8,9 @@ availability:
     enterprise: full
 ---
 
-> **Note:** Adding code is **not required** for [popover surveys](/docs/surveys/creating-surveys#display-mode).
+> **Note:** This is **not required** for [popover surveys](/docs/surveys/creating-surveys#display-mode).
 
 If you're using PostHog's [survey API](/docs/surveys/creating-surveys#display-mode) to create a custom survey UI, there are 2 steps to integrating with PostHog:
-
 
 ## Step 1: Fetch active surveys
 
@@ -64,7 +63,7 @@ posthog.getActiveMatchingSurveys((surveys) => {
 
 ## Step 2: Capture survey events
 
-You can capture user interactions with your surveys using the following 3 events:
+To show survey results in PostHog, you need to capture user interactions with your surveys using the following 3 events:
 
 ```js-web
 // 1. When a user is shown a survey
