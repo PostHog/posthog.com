@@ -48,12 +48,12 @@ Evaluating feature flags requires making a request to PostHog. However, you can 
 
 ### Frontend SDKs
 
-We make a request to fetch feature flags when:
+We make a request to fetch feature flags (using the [`/decide` endpoint](https://posthog.com/docs/api/post-only-endpoints#feature-flags)) when:
 
 1. The PostHog SDK is initialized
 2. A user is [identified](/docs/data/identify) 
 3. A user's [properties](/docs/product-analytics/user-properties) are updated.
-4. You ask us to reload feature flags (`posthog.reloadFeatureFlags()`)
+4. You call `posthog.reloadFeatureFlags()` in your code.
 
 For the [JavaScript web SDK](/docs/libraries/js), you can estimate how many feature flag requests you will make by doing the following:
 
