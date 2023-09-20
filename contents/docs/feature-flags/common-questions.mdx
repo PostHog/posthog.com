@@ -48,7 +48,7 @@ Evaluating feature flags requires making a request to PostHog. However, you can 
 
 ### Frontend SDKs
 
-We make a request to get feature flags everytime the posthog SDK is initialised, whenever user identity changes, or whenever you set new properties on the person.
+We make a request to get feature flags every time the posthog SDK is initialised, whenever user identity changes, or whenever you set new properties on the person.
 
 For your frontend, you can estimate feature flag requests roughly by doing the following:
 
@@ -59,7 +59,7 @@ A rough estimate for the total requests is (1)*(2). For example, if on refresh, 
 
 ### Backend SDKS
 
-If you're not using local evaluation, a request to get feature flags is made everytime you call `posthog.get_feature_flag()` on your backend. To estimate total usage here, you'll need to figure out what your business logic is for calling this - it could be once per request, in which case it's the same as the number of your backend API requests.
+If you're not using local evaluation, a request to get feature flags is made every time you call `posthog.get_feature_flag()` on your backend. To estimate total usage here, you'll need to figure out what your business logic is for calling this - it could be once per request, in which case it's the same as the number of your backend API requests.
 
 If you're using local evaluation, the number of requests per day is always 10*(number of posthog instances initialised per server)*(number of servers)*(60 / posthog SDK's poll interval in seconds)*60*24
 
