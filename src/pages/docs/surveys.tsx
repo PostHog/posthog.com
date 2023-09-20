@@ -8,7 +8,7 @@ import ResourceItem from 'components/Docs/ResourceItem'
 import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 
-type FeatureFlagsProps = {
+type SurveysProps = {
     data: {
         tutorials: {
             edges: {
@@ -46,7 +46,7 @@ export const Content = () => {
     return <></>
 }
 
-const FeatureFlags: React.FC<FeatureFlagsProps> = () => {
+const Surveys: React.FC<SurveysProps> = () => {
     return (
         <Layout>
             <SEO title="Surveys - Docs - PostHog" />
@@ -59,4 +59,4 @@ const FeatureFlags: React.FC<FeatureFlagsProps> = () => {
     )
 }
 
-export default FeatureFlags
+export default Surveys
