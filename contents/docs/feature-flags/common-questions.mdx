@@ -43,6 +43,30 @@ import FAQFalseOrNoneEvents from "./snippets/faq-false-or-none-events.mdx"
 
 Evaluating feature flags requires making a request to PostHog. However, you can [evaluate feature flags locally](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) instead – without having to make a request to PostHog.
 
+
+## How can I estimate the number of feature flag requests I'll be charged for?
+
+### Frontend SDKs
+
+We make a request to get feature flags everytime the posthog SDK is initialised, whenever user identity changes, or whenever you set new properties on the person.
+
+For your frontend, you can estimate feature flag requests roughly by doing the following:
+
+1. Open your product page, and check the networks tab in chrome inspector tools for the number of `/decide` requests.
+2. Find out your number of monthly page views
+
+A rough estimate for the total requests is (1)*(2). For example, if on refresh, you see 2 `/decide` requests per pageview and you have ~150,000 pageviews, your monthly feature flag requests should be around ~300,000.
+
+### Backend SDKS
+
+If you're not using local evaluation, a request to get feature flags is made everytime you call `posthog.get_feature_flag()` on your backend. To estimate total usage here, you'll need to figure out what your business logic is for calling this - it could be once per request, in which case it's the same as the number of your backend API requests.
+
+If you're using local evaluation, the number of requests per day is always 10*(number of posthog instances initialised per server)*(number of servers)*(60 / posthog SDK's poll interval in seconds)*60*24
+
+So, for example, if your poll interval is 30 seconds (the default on most SDKs), and you have one server, and one posthog instance, your number of requests per day comes out to be 10*(60/30)*60*24, or 28,800 per day.
+
+Note that local evaluation costs are independent of how many times you evaluate feature flags. So, more often than not, it's a good deal to use local evaluation on your backend.
+
 ## How can I reduce the cost of feature flags?
 
 If your feature flag usage or costs are too high, there a few methods to reduce them:
