@@ -46,8 +46,8 @@ You can target your survey to specific users based on:
 
 - **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled.
 
-- **Page URL contains:** Where the current URL matches or contains a specific string. For example, you can target a survey to only show on `https://posthog.com/docs`, or show on all docs pages by using the `*` wildcard: `https://posthog.com/docs/*`.
-
+- **Page URL contains:** Where the current URL contains a specific string.
+  
 - **Selector matches:** Whether a specific element appears on the page with the specified class name or ID. For example, you can target a survey with `#my-button` or `.my-button` selector.
 
 - **User/group properties:** You can target a survey to users who have a specific [user](/docs/product-analytics/user-properties) or [group property](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`.
