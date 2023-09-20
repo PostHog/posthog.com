@@ -2262,9 +2262,9 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
-                    name: 'Survey events',
-                    url: '/docs/surveys/events',
-                    icon: 'Send',
+                    name: 'Viewing results',
+                    url: '/docs/surveys/viewing-results',
+                    icon: 'Graph',
                     color: 'purple',
                 },
             ],
