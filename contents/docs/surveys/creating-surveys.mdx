@@ -21,13 +21,13 @@ Here's a breakdown of each field in the form:
 There are two options for displaying a survey:
 
 1. **Popover:** Use PostHog's prebuilt user interfaces to show survey's as a popover in the bottom corner of the screen.
-2. **API:** Implement your own survey UI and use PostHog for handling logic and events.
+
+2. **API:** Implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
 
 ### Question type
 
-PostHog supports a number of different questions types. All survey types are available for both popover and API display modes.
+PostHog supports multiple questions types. All survey types are available for both popover and API display modes.
 
-Below is a table showing the different questions types:
 
 |                        |                                                                                                       |
 |------------------------|-------------------------------------------------------------------------------------------------------|
@@ -40,7 +40,7 @@ Below is a table showing the different questions types:
 
 ### Targeting
 
-This specifies the conditions a user must meet in order to be shown the survey. The user must meet **ALL** of the conditions you set to be eligible.
+This specifies the conditions a user must meet to be shown the survey. A user must meet **ALL** the conditions to be eligible.
 
 You can target your survey to specific users based on:
 
