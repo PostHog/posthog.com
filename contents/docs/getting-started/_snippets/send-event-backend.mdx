@@ -5,7 +5,7 @@ client.capture({
     distinctId: 'distinct_id',
     event: 'order_created',
     properties: {
-        orderId: '#0054'
+        order_id: '#0054'
         subtotal: 3599,
         customerName: 'Max Hedgehog',
     },
@@ -17,7 +17,7 @@ posthog.capture(
     'distinct_id',
     'order_created',
     {
-        'orderId': '#0054',
+        'order_id': '#0054',
         'subtotal': 3599,
         'customerName': 'Max Hedgehog',
     }
@@ -29,7 +29,7 @@ PostHog::capture(array(
   'distinctId' => 'distinct_id',
   'event' => 'order_created',
   'properties' => array(
-    'orderId' => '#0054'
+    'order_id' => '#0054'
     'subtotal' => 3599,
     'customerName' => 'Max Hedgehog'
   )
@@ -41,7 +41,7 @@ posthog.capture({
     distinct_id: 'distinct_id',
     event: 'order_created',
     properties: {
-        orderId: '#0054',
+        order_id: '#0054',
         subtotal: 3599,
         customerName: 'Max Hedgehog'
     }
@@ -53,7 +53,7 @@ client.Enqueue(posthog.Capture{
   DistinctId: "distinct_id",
   Event:      "order_created",
   Properties: posthog.NewProperties().
-    Set("orderId", "#0054").
+    Set("order_id", "#0054").
     Set("subtotal", 3599).
     Set("customerName", "Max Hedgehog"),
 })
@@ -65,7 +65,7 @@ posthog.capture(
   "movie_played",
   new HashMap<String, Object>() {
     {
-      put("orderId", "#0054");
+      put("order_id", "#0054");
       put("subtotal", 3599);
       put("customerName", "Max Hedgehog");
     }

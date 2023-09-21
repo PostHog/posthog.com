@@ -71,7 +71,7 @@ To add a custom event to your Shopify checkout page, add a script like this to y
         created_at: '{{ order.created_at }}', 
         order_number: '{{ order.order_number }}',
         userId: '{{ customer.id }}',
-        orderId: '{{ checkout.order_id }}',
+        order_id: '{{ checkout.order_id }}',
         "products": [{% for line_item in line_items %}{
             "productId": '{{ line_item.product.type }}',
             "colorId": '{{ line_item.variant.option1 }}',
