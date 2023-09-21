@@ -2256,9 +2256,15 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Survey events',
-                    url: '/docs/surveys/events',
-                    icon: 'Send',
+                    name: 'Adding your code',
+                    url: '/docs/surveys/adding-surveys-code',
+                    icon: 'Code',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Viewing results',
+                    url: '/docs/surveys/viewing-results',
+                    icon: 'Graph',
                     color: 'purple',
                 },
             ],
