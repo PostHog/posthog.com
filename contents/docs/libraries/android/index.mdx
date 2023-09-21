@@ -49,7 +49,7 @@ userProps.put("string", "value1");
 userProps.put("integer", 2);
 
 PostHog.with(this)
-       .capture("Button B Clicked", new Properties()
+       .capture("button_b_clicked", new Properties()
                                         .putValue("color", "blue")
                                         .putValue("$set", userProps));
 ```
@@ -69,7 +69,7 @@ userProps.put("string", "value1");
 userProps.put("integer", 2);
 
 PostHog.with(this)
-       .capture("Button B Clicked", new Properties()
+       .capture("button_b_clicked", new Properties()
                                         .putValue("color", "blue")
                                         .putValue("$set_once", userProps));
 ```

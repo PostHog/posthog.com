@@ -24,7 +24,7 @@ If you are using [a different library](/docs/integrate#libraries) or the [API](/
 
 ```js
 posthog.capture(
-  'movie played', 
+  'movie_played', 
   { 
     movieId: 'Return of the Hedgehogs', 
     category: 'thriller' 
@@ -35,7 +35,7 @@ posthog.capture(
 ```php
 PostHog::capture(array(
   'distinctId' => 'ian@posthog.com',
-  'event' => 'movie played',
+  'event' => 'movie_played',
   'properties' => array(
     'movieId' => 'Return of the Hedgehogs',
     'category' => 'thriller'
@@ -46,7 +46,7 @@ PostHog::capture(array(
 ```ruby
 posthog.capture({
   distinct_id: 'ian@posthog.com',
-  event: 'movie played',
+  event: 'movie_played',
   properties: {
     movie_id: 'Return of the Hedgehogs',
     category: 'thriller'
@@ -57,7 +57,7 @@ posthog.capture({
 ```node
 client.capture({
   distinctId: 'ian@posthog.com',
-  event: 'movie played',
+  event: 'movie_played',
   properties: {
       movieId: 'Return of the Hedgehogs',
       category: 'thriller',
@@ -68,7 +68,7 @@ client.capture({
 ```python
 posthog.capture(
   'ian@posthog.com', 
-  'movie played', 
+  'movie_played', 
   {
     'movie_id': 'Return of the Hedgehogs',
     'category': 'thriller'

@@ -6,7 +6,7 @@ import Intro from "./intro.mdx"
 
 ```java
 posthog.capture("distinct_id_of_the_user", 
-    "user signed up");
+    "user_signed_up");
 ```
 
 <NamingTip />
@@ -14,7 +14,7 @@ posthog.capture("distinct_id_of_the_user",
 <SettingProperties />
 
 ```java
-posthog.capture("distinct_id_of_the_user", "user signed up", new HashMap<String, Object>() {
+posthog.capture("distinct_id_of_the_user", "user_signed_up", new HashMap<String, Object>() {
   {
     put("login_type", "email");
     put("is_free_trial", true);

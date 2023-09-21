@@ -43,11 +43,11 @@ To set [properties](/docs/data/user-properties) on your users via an event, you 
 **Example**
 
 ```objectivec
-[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++", @"$set":@{ @"userProp": "value1" } }];
+[[PHGPostHog sharedPostHog] capture:@"signed_up" properties:@{ @"plan": @"Pro++", @"$set":@{ @"userProp": "value1" } }];
 ```
 
 ```swift
-posthog.capture("Signed Up", properties: ["plan": "Pro++", "$set": ["userProp": "value1"] ])
+posthog.capture("signed_up", properties: ["plan": "Pro++", "$set": ["userProp": "value1"] ])
 ```
 
 **Usage**
@@ -59,11 +59,11 @@ When capturing an event, you can pass a property called `$set` as an event prope
 **Example**
 
 ```objectivec
-[[PHGPostHog sharedPostHog] capture:@"Signed Up" properties:@{ @"plan": @"Pro++", @"$set_once":@{ @"userProp": "value1" } }];
+[[PHGPostHog sharedPostHog] capture:@"signed_up" properties:@{ @"plan": @"Pro++", @"$set_once":@{ @"userProp": "value1" } }];
 ```
 
 ```swift
-posthog.capture("Signed Up", properties: ["plan": "Pro++", "$set_once": ["userProp": "value1"] ])
+posthog.capture("signed_up", properties: ["plan": "Pro++", "$set_once": ["userProp": "value1"] ])
 ```
 
 **Usage**
@@ -82,12 +82,12 @@ configuration.flushAt = 1;
 You can also manually flush the queue:
 
 ```objectivec
-[[PHGPostHog sharedPostHog] capture:@"Logged Out"];
+[[PHGPostHog sharedPostHog] capture:@"logged_out"];
 [[PHGPostHog sharedPostHog] flush]
 ```
 
 ```swift
-posthog.capture('Logged Out')
+posthog.capture('logged_out')
 posthog.flush()
 ```
 

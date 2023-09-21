@@ -81,7 +81,7 @@ With these, our route now looks like this:
 app.get('/', (req, res) => {
   client.capture({
     distinctId: req.query.id,
-    event: 'first request',
+    event: 'first_request',
     properties: {
       $set: { firstRequestComplete: true },
     },
@@ -119,7 +119,7 @@ app.get('/', async (req, res) => {
   if (!completedFirstRequest) {
     client.capture({
       distinctId: req.query.id,
-      event: 'first request',
+      event: 'first_request',
       properties: {
         $set: { firstRequestComplete: true },
       },
@@ -131,7 +131,7 @@ app.get('/', async (req, res) => {
   // Else, it is a subsequent request
   client.capture({
     distinctId: req.query.id,
-    event: 'subsequent request'
+    event: 'subsequent_request'
   })
   res.send('Welcome Back!')
 })
@@ -181,7 +181,7 @@ app.get('/', async (req, res) => {
   if (!completedFirstRequest) {
     client.capture({
       distinctId: req.query.id,
-      event: 'first request',
+      event: 'first_request',
       properties: {
         $set: { firstRequestComplete: true },
       },
@@ -194,7 +194,7 @@ app.get('/', async (req, res) => {
   // Else, it is a subsequent request
   client.capture({
     distinctId: req.query.id,
-    event: 'subsequent request'
+    event: 'subsequent_request'
   })
   res.send('Welcome Back!')
 })

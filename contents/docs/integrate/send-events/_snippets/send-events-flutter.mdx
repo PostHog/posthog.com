@@ -8,7 +8,7 @@ import Intro from "./intro.mdx"
 import 'package:posthog_flutter/posthog_flutter.dart';
 
 Posthog.capture(
-  eventName: 'user signed up',
+  eventName: 'user_signed_up',
 );
 ```
 
@@ -18,7 +18,7 @@ Posthog.capture(
 
 ```
 Posthog.capture(
-  eventName: 'user signed up',
+  eventName: 'user_signed_up',
   properties: {
     'login_type': 'email',
     'is_free_trial': true

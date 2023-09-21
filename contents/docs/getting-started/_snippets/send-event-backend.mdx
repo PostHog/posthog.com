@@ -3,7 +3,7 @@
 ```node
 client.capture({
     distinctId: 'distinct_id',
-    event: 'Order created',
+    event: 'order_created',
     properties: {
         orderId: '#0054'
         subtotal: 3599,
@@ -15,7 +15,7 @@ client.capture({
 ```python
 posthog.capture(
     'distinct_id',
-    'Order created',
+    'order_created',
     {
         'orderId': '#0054',
         'subtotal': 3599,
@@ -27,7 +27,7 @@ posthog.capture(
 ```php
 PostHog::capture(array(
   'distinctId' => 'distinct_id',
-  'event' => 'Order created',
+  'event' => 'order_created',
   'properties' => array(
     'orderId' => '#0054'
     'subtotal' => 3599,
@@ -39,7 +39,7 @@ PostHog::capture(array(
 ```ruby
 posthog.capture({
     distinct_id: 'distinct_id',
-    event: 'Order created',
+    event: 'order_created',
     properties: {
         orderId: '#0054',
         subtotal: 3599,
@@ -51,7 +51,7 @@ posthog.capture({
 ```go
 client.Enqueue(posthog.Capture{
   DistinctId: "distinct_id",
-  Event:      "Order created",
+  Event:      "order_created",
   Properties: posthog.NewProperties().
     Set("orderId", "#0054").
     Set("subtotal", 3599).
@@ -62,7 +62,7 @@ client.Enqueue(posthog.Capture{
 ```java
 posthog.capture(
   "distinct id",
-  "movie played",
+  "movie_played",
   new HashMap<String, Object>() {
     {
       put("orderId", "#0054");
