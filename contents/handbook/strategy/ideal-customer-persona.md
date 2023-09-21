@@ -46,7 +46,7 @@ Each team will focus more or less on different members of the product team. This
 **Counter argument**:
 
 - We have good PMF with engineers and not yet with product people.
-- Instead we should make the tool much simpler and more accessible to product managers so we can better work for them and the companies with product manager led cultures. 
+- Instead we should make the tool much simpler and more accessible to product managers so we can better work for them and the companies with product manager led cultures.
 - This could potentially help us grow faster in the short-term.
 - However, I find this less convincing for long-term growth and less clearly differentiates PostHog.
 
@@ -60,7 +60,7 @@ Each team will focus more or less on different members of the product team. This
 ### What is a high-_potential_ customer and why do they matter?
 
 - Our product is very sticky. By being the default choice at the highest potential startups we can grow with them and learn from them. Other small stage (but less high-potential) companies index on what they use.
-- High-potential startups haven’t cracked it product-market fit yet but are rapidly iterating towards it. They are founded by excellent product people that likely played key IC roles in other companies or founded a company previously. Often in top accelerators.
+- High-potential startups haven’t cracked their product-market fit yet but are rapidly iterating towards it. They are founded by excellent product people that likely played key IC roles in other companies or founded a company previously. Often in top accelerators.
 - Compared to the individual contributor personas in high-growth startups, at high-potential startups the CTO/technical co-founder will often take more of a lead.
 - We want to be the first tool that technical founders add to their product.
 - Example: James and Tim pivoting and exploring ideas before and during YC
