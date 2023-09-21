@@ -65,16 +65,15 @@ For example, if on refresh, you see 2 `/decide` requests per pageview and you ha
 
 ### Backend SDKS
 
-
 #### Without local evaluation 
 
 If you're not using [local evaluation](/docs/feature-flags/local-evaluation), a request to get feature flags is made every time you call `posthog.get_feature_flag()` on your backend. Your estimated usage will be however many times you are calling this code.
 
 #### With local evaluation
 
-If you're using [local evaluation](https://posthog.com/docs/feature-flags/local-evaluation), each local evaluation request charges 10 credits and by default are made every 30 seconds. Thus assuming your server is constantly running and making 2 requests per minute, your will be charged `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
+If you're using [local evaluation](/docs/feature-flags/local-evaluation), each local evaluation request charges 10 credits and by default are made every 30 seconds. Assuming your server is constantly running and making 2 requests per minute, you will be charged `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
 
-Note that this figure is for a single server and a single instance of PostHog. If you have multiple servers or multiple instances of PostHog, you will need to multiply your estimates too.
+> **Note:** This figure is for a single server and a single instance of PostHog. If you have multiple servers, PostHog instances, or a different poll duration, you need to multiply your estimates too.
 
 ## How can I reduce the cost of feature flags?
 
