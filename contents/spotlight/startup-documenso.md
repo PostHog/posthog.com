@@ -58,7 +58,7 @@ Inspired by these surges, Documenso now announces similar milestones whenever it
 
 > **Putting it into practice:** Documenso encourages contributions with a bounty program that posts new issues into their Discord community. Swag is a powerful tool for incentivizing users too! 
 
-![Documenso store](../images/blog/documenso-store.png)
+![Documenso store](../images/blog/documenso_store.png)
 <Caption>Documenso uses merch as an incentive for encouraging contributors</Caption>
 
 ### 4. Create incentives
