@@ -177,11 +177,18 @@ export default function Posts({
     const [prev, setPrev] = useState<string | null>(null)
     const params = {
         filters: {
-            $and: [
+            $or: [
                 ...(root
                     ? [
                           {
                               post_category: {
+                                  folder: {
+                                      $eq: root,
+                                  },
+                              },
+                          },
+                          {
+                              crosspost_categories: {
                                   folder: {
                                       $eq: root,
                                   },
@@ -203,6 +210,7 @@ export default function Posts({
             ],
         },
     }
+
     const { posts, isLoading, isValidating, fetchMore, mutate } = usePosts({ params })
 
     const handleNewPostSubmit = () => {
