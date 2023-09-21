@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-14.png
-tags: []
+tags: ['events']
 ---
 
 Webhooks enable you to send data from one platform to another when an event happens. This enables you to run whatever workflows and code to handle those events.
