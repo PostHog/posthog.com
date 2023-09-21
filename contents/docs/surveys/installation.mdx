@@ -7,8 +7,13 @@ availability:
     selfServe: full
     enterprise: full
 ---
-import WebInstall from '../integrate/_snippets/install-web.mdx'
 
-To get started with surveys, first install PostHog in your app:
+> **Important:** When installing PostHog via a package manager, surveys require `posthog-js v1.67+`.
+
+Surveys are a great tool to collect qualitative feedback from your users.
+
+To get started with surveys, add PostHog to your web app by installing our [Javascript web SDK](/docs/libraries/js). There are two methods to do so:
+
+import WebInstall from '../integrate/_snippets/install-web.mdx'
 
 <WebInstall />
