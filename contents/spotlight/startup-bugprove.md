@@ -75,4 +75,5 @@ As a result, Bugprove is always exploring new channels and trying to find new wa
 
 **More success stories from PostHog for Startups**
 - [How Golioth designs new software and drives product development](/spotlights/startup-golioth)
+- [How Documenso got 5,000 stars and grew an active GitHub community](/spotlights/startup-documenso)
 - [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](spotlights/startup-before-sunset-ai)

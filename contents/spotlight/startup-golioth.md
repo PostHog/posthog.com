@@ -62,5 +62,6 @@ At Golioth, this focus on sales doesn’t mean that everyone spends their time c
 **More success stories from PostHog for Startups**
 - [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](startup-before-sunset-ai)
 - [How Bugprove uses influencer marketing to grow word of mouth](/spotlights/startup-bugprove)
+- [How Documenso got 5,000 stars and grew an active GitHub community](/spotlights/startup-documenso)
 
 
