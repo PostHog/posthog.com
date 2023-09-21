@@ -25,10 +25,10 @@ The [final PostHog release to officially support ClickHouse stored recordings](h
 
 Or edit your docker compose file to replace `image: posthog/posthog:$POSTHOG_APP_TAG` with `image: posthog/posthog:9c68581779c78489cfe737cfa965b73f7fc5503c`
 
+### Managing storage
+
 Self-hosted installations, pinned to earlier versions, 
 are able to control the TTL by updating the `RECORDINGS_TTL_WEEKS` configuration on your instance settings page. 
-
-### Managing storage
 
 Please note, 
 for versions of PostHog that rely on Clickhouse storage, 
@@ -38,4 +38,4 @@ ClickHouse requires abundant free disk space to manage the `session_recording_ev
 
 In later versions (which do not use Clickhouse for recording storage), 
 the installation will be relying on its configured blob storage. 
-You can manage storage using blob storage lifecycle policies.
+You can manage storage using blob storage lifecycle policies. This will vary by environment.
