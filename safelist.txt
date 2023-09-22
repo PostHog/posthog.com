@@ -68,7 +68,9 @@ h-full
 justify-start
 justify-start
 left-16
+lg:-mt-8
 lg:before:hidden
+lg:float-right
 lg:grid-cols-1
 lg:grid-cols-10
 lg:grid-cols-2
@@ -85,6 +87,7 @@ lg:grid-rows-3
 lg:grid-rows-4
 lg:justify-center
 lg:mb-8
+lg:ml-4
 lg:ml-6
 lg:my-0
 line-clamp-1

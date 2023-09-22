@@ -13,7 +13,7 @@ export const SectionHeading = ({ title, subtitle }: ISectionHeading) => {
     return (
         <div className="mb-6">
             {title && (
-                <h2 className="text-3xl pt-4 m-0 -mt-4" id={slugify(title.replace('&-', ''), { lower: true })}>
+                <h2 className="text-4xl pt-4 m-0 -mt-4" id={slugify(title.replace('&-', ''), { lower: true })}>
                     {title}
                 </h2>
             )}
