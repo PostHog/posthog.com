@@ -619,6 +619,10 @@ export const handbookSidebar = [
                 name: 'Dashboard templates',
                 url: '/handbook/growth/marketing/templates',
             },
+            {
+                name: 'Style guide',
+                url: '/handbook/growth/marketing/posthog-style-guide',
+            },
         ],
     },
     {
