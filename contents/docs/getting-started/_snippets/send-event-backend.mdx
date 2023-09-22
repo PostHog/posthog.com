@@ -7,7 +7,7 @@ client.capture({
     properties: {
         order_id: '#0054'
         subtotal: 3599,
-        customerName: 'Max Hedgehog',
+        customer_name: 'Max Hedgehog',
     },
 })
 ```
@@ -19,7 +19,7 @@ posthog.capture(
     {
         'order_id': '#0054',
         'subtotal': 3599,
-        'customerName': 'Max Hedgehog',
+        'customer_name': 'Max Hedgehog',
     }
 )
 ```
@@ -31,7 +31,7 @@ PostHog::capture(array(
   'properties' => array(
     'order_id' => '#0054'
     'subtotal' => 3599,
-    'customerName' => 'Max Hedgehog'
+    'customer_name' => 'Max Hedgehog'
   )
 ));
 ```
@@ -43,7 +43,7 @@ posthog.capture({
     properties: {
         order_id: '#0054',
         subtotal: 3599,
-        customerName: 'Max Hedgehog'
+        customer_name: 'Max Hedgehog'
     }
 })
 ```
@@ -55,7 +55,7 @@ client.Enqueue(posthog.Capture{
   Properties: posthog.NewProperties().
     Set("order_id", "#0054").
     Set("subtotal", 3599).
-    Set("customerName", "Max Hedgehog"),
+    Set("customer_name", "Max Hedgehog"),
 })
 ```
 
@@ -67,7 +67,7 @@ posthog.capture(
     {
       put("order_id", "#0054");
       put("subtotal", 3599);
-      put("customerName", "Max Hedgehog");
+      put("customer_name", "Max Hedgehog");
     }
   }
 );

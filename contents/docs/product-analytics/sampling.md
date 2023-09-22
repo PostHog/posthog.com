@@ -12,7 +12,7 @@ Results sampling is a feature aimed at significantly speeding up the loading tim
 
 Processing a lot of data can take some time, so we can offer faster results by sampling a portion of the data and extrapolating the results.
 
-For instance, say you have set up a funnel looking at the conversion from a 'Pageview' event to a 'user_signed_up' event over 180 days, and that within those parameters, PostHog would have to aggregate 1 billion events to compute a result. If we were to turn on sampling at a 0.1 (10%) rate, we'd scan 100 million events, and then multiply the result by 10. 
+For instance, say you have set up a funnel looking at the conversion from a '$pageview' event to a 'user_signed_up' event over 180 days, and that within those parameters, PostHog would have to aggregate 1 billion events to compute a result. If we were to turn on sampling at a 0.1 (10%) rate, we'd scan 100 million events, and then multiply the result by 10. 
 
 As a result of doing this, we can provide an answer much faster, so you don't have to sit around waiting for the insight to load. The tradeoff is that the result you get is not 100% accurate, but the higher the sampling rate and the more events you have, the closer the sampled result will be to the actual result, thus minimizing the tradeoff.
 

@@ -50,7 +50,7 @@ To set [user properties](/docs/data/user-properties), include the properties you
 
 ```node
 client.capture({
-    distinctId: 'distinct id',
+    distinctId: 'distinct_id_of_the_user',
     event: 'movie_played',
     properties: {
         $set: { name: 'Max Hedgehog'  },
@@ -219,12 +219,12 @@ For example:
 ```node
 export const handler() {
   client.capture({
-    distinctId: 'distinct id',
+    distinctId: 'distinct_id_of_the_user',
     event: 'thing_happened'
   })
 
   client.capture({
-    distinctId: 'distinct id',
+    distinctId: 'distinct_id_of_the_user',
     event: 'other_thing_happened'
   })
 

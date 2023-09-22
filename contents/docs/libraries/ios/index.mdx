@@ -43,11 +43,11 @@ To set [properties](/docs/data/user-properties) on your users via an event, you 
 **Example**
 
 ```objectivec
-[[PHGPostHog sharedPostHog] capture:@"signed_up" properties:@{ @"plan": @"Pro++", @"$set":@{ @"userProp": "value1" } }];
+[[PHGPostHog sharedPostHog] capture:@"signed_up" properties:@{ @"plan": @"Pro++", @"$set":@{ @"user_property_name": "your_value" } }];
 ```
 
 ```swift
-posthog.capture("signed_up", properties: ["plan": "Pro++", "$set": ["userProp": "value1"] ])
+posthog.capture("signed_up", properties: ["plan": "Pro++", "$set": ["user_property_name": "your_value"] ])
 ```
 
 **Usage**
@@ -59,11 +59,11 @@ When capturing an event, you can pass a property called `$set` as an event prope
 **Example**
 
 ```objectivec
-[[PHGPostHog sharedPostHog] capture:@"signed_up" properties:@{ @"plan": @"Pro++", @"$set_once":@{ @"userProp": "value1" } }];
+[[PHGPostHog sharedPostHog] capture:@"signed_up" properties:@{ @"plan": @"Pro++", @"$set_once":@{ @"user_property_name": "your_value" } }];
 ```
 
 ```swift
-posthog.capture("signed_up", properties: ["plan": "Pro++", "$set_once": ["userProp": "value1"] ])
+posthog.capture("signed_up", properties: ["plan": "Pro++", "$set_once": ["user_property_name": "your_value"] ])
 ```
 
 **Usage**

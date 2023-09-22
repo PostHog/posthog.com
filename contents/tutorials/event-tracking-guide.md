@@ -127,10 +127,10 @@ posthog.capture(
 
 ```php
 PostHog::capture(array(
-  'distinctId' => 'user:123',
+  'distinctId' => 'distinct_id_of_your_user',
   'event' => 'movie_played',
   'properties' => array(
-    'movieId' => '123',
+    'movie_id' => '123',
     'category' => 'romcom'
   )
 ));
@@ -187,7 +187,7 @@ posthog.capture(
 
 ```php
 PostHog::capture(array(
-  'distinctId' => 'user:123',
+  'distinctId' => 'distinct_id_of_your_user',
   'event' => 'movie_played',
   'properties' => array(
     '$set' => array(

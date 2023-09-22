@@ -26,7 +26,7 @@ If you are using [a different library](/docs/integrate#libraries) or the [API](/
 posthog.capture(
   'movie_played', 
   { 
-    movieId: 'Return of the Hedgehogs', 
+    movie_id: 'Return of the Hedgehogs', 
     category: 'thriller' 
   }
 );
@@ -37,7 +37,7 @@ PostHog::capture(array(
   'distinctId' => 'ian@posthog.com',
   'event' => 'movie_played',
   'properties' => array(
-    'movieId' => 'Return of the Hedgehogs',
+    'movie_id' => 'Return of the Hedgehogs',
     'category' => 'thriller'
   )
 ));
@@ -59,7 +59,7 @@ client.capture({
   distinctId: 'ian@posthog.com',
   event: 'movie_played',
   properties: {
-      movieId: 'Return of the Hedgehogs',
+      movie_id: 'Return of the Hedgehogs',
       category: 'thriller',
   },
 })
@@ -81,7 +81,7 @@ client.Enqueue(posthog.Capture{
   DistinctId: "ian@posthog.com",
   Event:      "movie played",
   Properties: posthog.NewProperties().
-    Set("movieId", "Return of the Hedgehogs").
+    Set("movie_id", "Return of the Hedgehogs").
     Set("category", "thriller"),
 })
 ```
