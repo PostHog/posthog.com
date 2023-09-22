@@ -17,55 +17,59 @@ export const handbookSidebar = [
                 url: '/handbook/what-is-posthog',
             },
             {
-                name: '2. A wide company with small teams',
-                url: '/handbook/wide-company',
+                name: '2. How we got here',
+                url: '/handbook/story',
             },
             {
-                name: '3. Providing a world-class engineering environment',
-                url: '/handbook/world-class-engineering',
-            },
-            {
-                name: '4. Deciding which products to build',
-                url: '/handbook/which-products',
-            },
-            {
-                name: '5. How we get users',
+                name: '3. How we get users',
                 url: '/handbook/how-we-get-users',
+            },
+            {
+                name: '4. How we make users happy',
+                url: '/handbook/making-users-happy',
+            },
+            {
+                name: '5. How we make money',
+                url: '/handbook/how-we-make-money',
             },
             {
                 name: '6. Enduringly low prices',
                 url: '/handbook/low-prices',
             },
             {
-                name: '7. How we make users happy',
-                url: '/handbook/making-users-happy',
+                name: '7. Deciding which products to build',
+                url: '/handbook/which-products',
             },
             {
-                name: '8. How we make money',
-                url: '/handbook/how-we-make-money',
+                name: '8. A wide company with small teams',
+                url: '/handbook/wide-company',
             },
             {
                 name: "9. How we're building a world-class team",
                 url: '/handbook/strong-team',
             },
             {
-                name: '10. Not running out of money',
+                name: '10. What we value',
+                url: '/handbook/values',
+            },
+            {
+                name: '11. Providing a world-class engineering environment',
+                url: '/handbook/world-class-engineering',
+            },
+            {
+                name: '12. Not running out of money',
                 url: '/handbook/finance',
             },
             {
-                name: '11. How we got here',
-                url: '/handbook/story',
-            },
-            {
-                name: '12. Where we are now',
+                name: '13. Where we are now',
                 url: '/handbook/current-status',
             },
             {
-                name: '13. Where are we going?',
+                name: '14. Where are we going?',
                 url: '/handbook/future',
             },
             {
-                name: '14. How you can help',
+                name: '15. How you can help',
                 url: '/handbook/help',
             },
         ],
