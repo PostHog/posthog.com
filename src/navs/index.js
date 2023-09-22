@@ -9,7 +9,7 @@ export const handbookSidebar = [
     },
     {
         name: 'Chapters',
-        url: '/handbook/what-is-posthog',
+        url: '',
         icon: 'Book',
         children: [
             {
