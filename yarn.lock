@@ -2654,10 +2654,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@posthog/icons@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.0.3.tgz#5042deee103b4c4aec3cfa9dd62be805279e154f"
-  integrity sha512-iKlGeTPitp8jzoQGCMxn4NukqC7qXx9BzQs+kQnyOdSbOg8Xn0qnlhndFIjjY6kuF7JWCffuAxPI1r254RNSeQ==
+"@posthog/icons@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.0.4.tgz#0688be211cc73c5dfb4454d199f21cfe0b7dcea9"
+  integrity sha512-tcc8T1N/AbCz2MS4fnWvdtGNzx/eb9F1qjBK8gFvMgdAMJ+Ju/5ycbpsv13yCsrOk2NJJSAFNxGU86WcWCDRhQ==
 
 "@redocly/ajv@^8.6.5":
   version "8.6.5"
