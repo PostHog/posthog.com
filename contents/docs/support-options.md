@@ -102,7 +102,7 @@ There are four ways to get free support:
 * Join >1,500 developers in [our public Slack group](/slack) to ask other PostHog users, or our AI support bot Max-AI. 
 * Open an issue in our [main project's GitHub repo](https://github.com/posthog/posthog)
 
-We are very grateful for folks that do this the other way around and help answer others' questions. You may just end up with some [merch](https://merch.posthog.com/) for particularly good answers :)
+We are very grateful to people that do this the other way around and help answer others' questions. You may just end up with some [merch](https://merch.posthog.com/) for particularly good answers!
 
 ## In-app Support
 
