@@ -962,3 +962,21 @@ export const HogQL = ({ className = '', ...other }: { className?: string }): JSX
         />
     </svg>
 )
+export const Annotation = ({ className = '', ...other }: { className?: string }): JSX.Element => (
+    <svg
+        width="26"
+        height="30"
+        viewBox="0 0 26 30"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`fill-current ${className}`}
+        {...other}
+    >
+        <path
+            d="M13.0044 1.125V28.875M0.988281 8.0625L25.0205 21.9375M0.989735 21.9375L25.0219 8.0625"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+        />
+    </svg>
+)

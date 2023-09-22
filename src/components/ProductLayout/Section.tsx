@@ -89,11 +89,12 @@ export default function Section({
     align,
     sections,
     imageFrame = true,
+    hideImage,
     className = '',
     callout,
     featuresType = 'list',
 }: ISection) {
-    const gatsbImage = image && getImage(image)
+    const gatsbImage = !hideImage && image && getImage(image)
     return (
         <div className={className} style={{ alignSelf: align }}>
             {(title || subtitle) && <SectionHeading title={title} subtitle={subtitle} />}

@@ -385,6 +385,7 @@ export const query = graphql`
                         features {
                             title
                             description
+                            icon
                         }
                     }
                     features {
@@ -392,6 +393,7 @@ export const query = graphql`
                         description
                     }
                     imageFrame
+                    hideImage
                     image {
                         childImageSharp {
                             gatsbyImageData
