@@ -239,7 +239,7 @@ export default function About() {
 
   posthog.capture({
     distinctId: 'ian@posthog.com', // replace with a user's distinct ID
-    event: 'server-side event'
+    event: 'server_side_event_name'
   })
 
   return (

@@ -5,6 +5,7 @@ import React from 'react'
 import { useLocation } from '@reach/router'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import { PricingCTA } from './CTA'
 
 export default function Hero({
     title,
@@ -49,16 +50,16 @@ export default function Hero({
                         className="text-lg font-semibold opacity-70 mt-4"
                         dangerouslySetInnerHTML={{ __html: subtitle }}
                     />
-                    <div className="flex space-x-3 items-center">
-                        <CallToAction to={mainCTA.url} size="md" className="">
-                            {mainCTA.title}
-                        </CallToAction>
-                        {pricingCTA && (
-                            <CallToAction type="secondary" to={pricingCTA.url} size="md" className="">
-                                {pricingCTA.title}
+                    {pricingCTA && mainCTA && (
+                        <div className="flex space-x-3 items-center">
+                            <CallToAction to={mainCTA.url} size="md" className="">
+                                {mainCTA.title}
                             </CallToAction>
-                        )}
-                    </div>
+                            {pricingCTA && (
+                                <PricingCTA {...pricingCTA} />
+                            )}
+                        </div>
+                    )}
                     {customers && customers.nodes.length > 0 && (
                         <ul className="m-0 p-0 list-none mt-16 flex flex-wrap items-center">
                             {customers.nodes.map(({ fields: { slug }, frontmatter: { customer, logo, logoDark } }) => {

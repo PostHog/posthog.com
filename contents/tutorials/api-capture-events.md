@@ -28,7 +28,7 @@ To capture events, all we need is a project API key, the data we want to send, a
 # curl
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
-    "event": "Request",
+    "event": "request",
     "distinct_id": "ian@posthog.com"
 }' <ph_instance_address>/capture/
 ```
@@ -41,7 +41,7 @@ headers = {
 
 body = {
     "api_key": '<ph_project_api_key>',
-    "event": "Request",
+    "event": "request",
     "properties": {
         "distinct_id": "ian@posthog.com"
     }
@@ -73,7 +73,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
 		},
     "timestamp": "2022-09-21 09:03:11.913767",
     "distinct_id": "ian@posthog.com",
-    "event": "big request"
+    "event": "big_request"
 }' <ph_instance_address>/capture/
 ```
     
@@ -85,7 +85,7 @@ headers = {
 
 body = {
     "api_key": '<ph_project_api_key>',
-    "event": "big request",
+    "event": "big_request",
 		"timestamp": "2022-10-21 09:03:11.913767",
     "properties": {
         "distinct_id": "ian@posthog.com",
@@ -110,14 +110,14 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "batch": [
         {
-            "event": "batched event",
+            "event": "batched_event",
             "properties" : {
 								"distinct_id": "ian@posthog.com",
                 "number_in_batch": 1
             }
         },
         {
-            "event": "batched event",
+            "event": "batched_event",
             "properties" : {
 								"distinct_id": "ian@posthog.com",
                 "number_in_batch": 2
@@ -139,14 +139,14 @@ body = {
     "api_key": "<ph_project_api_key>",
     "batch": [
         {
-            "event": "batched event",
+            "event": "batched_event",
             "properties" : {
                 "distinct_id": "ian@posthog.com",
                 "number_in_batch": 1
             }
         },
         {
-            "event": "batched event",
+            "event": "batched_event",
             "properties" : {
                 "distinct_id": "ian@posthog.com",
                 "number_in_batch": 2

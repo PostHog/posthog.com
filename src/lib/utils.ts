@@ -108,3 +108,6 @@ export const kebabCase = (string) =>
         .toLowerCase()
 
 export const squeakProfileLink = (profile) => (profile ? `/community/profiles/${profile.id}` : '')
+
+export const isURL = (text: string) =>
+    /^(http(s):\/\/.)[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/gi.test(text)

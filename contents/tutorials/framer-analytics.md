@@ -50,7 +50,7 @@ Once done, delete the existing code and add a button that captures an event with
 ```js
 export default function CaptureButton() {
     const handleClick = () => {
-        window.posthog.capture("clicked homepage button", {
+        window.posthog.capture("clicked_homepage_button", {
             $set_once: { clicked_homepage_button: true },
         })
     }

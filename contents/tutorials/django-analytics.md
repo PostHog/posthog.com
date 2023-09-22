@@ -293,7 +293,7 @@ class PostListView(ListView):
             for post in context['posts']:
                 posthog.capture(
                     self.request.user.email, 
-                    'blog view', 
+                    'blog_view', 
                     {'blog': post.title}
                 )
         return context
