@@ -95,7 +95,7 @@ PostHog provides a free basic level of support to everyone via the community, wi
 
 ## Community Support
 
-There are four ways to get free support:
+There are three ways to get community support:
 
 * Ask a question directly in these Docs at the bottom of the page, or check out [our database](/questions) of previously answered questions. We try to respond to as many of these as we can!
 * [Send a support ticket via the app](https://app.posthog.com/home#supportModal) to send it to the relevant team. We try to respond to as many of these as we can. 
