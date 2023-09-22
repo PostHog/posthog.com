@@ -5,12 +5,11 @@ export const handbookSidebar = [
     {
         name: 'Table of contents',
         url: '/handbook',
-        icon: 'Info',
+        // icon: 'Info',
     },
     {
         name: 'Chapters',
         url: '',
-        icon: 'Book',
         children: [
             {
                 name: '1. What is PostHog?',
@@ -75,15 +74,11 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Existing content that needs to be accounted for',
+        name: 'Departments & teams',
     },
-
     {
         name: 'Team structure',
         url: '/handbook/small-teams/team-structure',
-    },
-    {
-        name: 'Departments & teams',
     },
     {
         name: 'Customer success',
