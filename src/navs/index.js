@@ -78,20 +78,6 @@ export const handbookSidebar = [
         name: 'Existing content that needs to be accounted for',
     },
     {
-        name: 'Getting started',
-        url: '',
-        children: [
-            {
-                name: 'Start here',
-                url: '/handbook/getting-started/start-here',
-            },
-            {
-                name: 'Meetings',
-                url: '/handbook/getting-started/meetings',
-            },
-        ],
-    },
-    {
         name: 'Company',
         url: '',
         children: [
@@ -124,6 +110,10 @@ export const handbookSidebar = [
             {
                 name: 'Small teams',
                 url: '/handbook/company/small-teams',
+            },
+            {
+                name: 'Meetings',
+                url: '/handbook/getting-started/meetings',
             },
             {
                 name: 'Goal setting',

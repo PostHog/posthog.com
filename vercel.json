@@ -961,7 +961,8 @@
         { "source": "/handbook/strategy/ideal-customer-persona", "destination": "/handbook/making-users-happy" },
         { "source": "/handbook/strategy/business-model", "destination": "/handbook/how-we-make-money" },
         { "source": "/handbook/strategy/objectives", "destination": "/handbook/help" },
-        { "source": "/handbook/strategy/investors", "destination": "/about" }
+        { "source": "/handbook/strategy/investors", "destination": "/about" },
+        { "source": "/handbook/start-here", "destination": "/handbook/people/onboarding" }
     ],
     "rewrites": [
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
