@@ -1,19 +1,19 @@
 ---
-title: "How Documenso got 5,000 stars and grew an active GitHub community"
+title: "How Documenso got 4,000 stars and grew an active GitHub community"
 date: 2023-09-12
 author: ["joe-martin"]
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/startup_bugprove.png
+featuredImage: ../images/blog/startup_documenso.jpg
 featuredImageType: full
 category: Startups
 ---
 
 > Each month, we speak to a team enrolled in [PostHog for Startups](/startups) about the way they work. This time, we spoke to Documenso about how they’ve grown their GitHub community. 
 
-Documenso, the open source alternative to Docusign, launched in November 2022 but has grown rapidly. The project already has over 5,000 GitHub stars at the time of writing and the team track their Star progress closely, viewing it as a vital community metric.
+Documenso, the open source alternative to Docusign, launched in November 2022 but has grown rapidly. The project already has over 4,000 GitHub stars at the time of writing and the team track their Star progress closely, viewing it as a vital community metric.
 
 “We track Star, Forks and Contributors on a weekly basis,” says Florent Merian from Documenso. “Stars are mainly useful to us as a social proof. They show that users trust us, and encourage others to do the same — but they also inspire us in the work we do!”
 
@@ -38,13 +38,13 @@ The open source community was an obvious place for the team to focus initially, 
 
 A hard-learned lesson for Documenso was that the team started off trying to build a following in Slack, which they came to realize wasn’t the best platform for their users. Eventually, they decided to migrate to Discord as a community hub.
 
-“Switching to Discord was a key moment for us,” says Florent. “We wanted to double down on our community building and make the whole project community driven — which meant we needed to move to a more developer-friendly environment.”
+“Switching to Discord was a key moment for us,” says Florent. “We like Slack, but wanted to double down on our community building and make the whole project community driven — which meant we needed to move to a more developer-friendly environment.”
 
 As the community settled in, the team created topics for conversation and tried to encourage GitHub contributions and bug reports. This focus on GitHub was essential because, while Discord was a great place to engage users, GitHub was the _real_ heart of the project. 
 
 “We focus on Discord and Twitter now, but we want everything to link back to GitHub and compound the effects there. GitHub really is our main channel and our key focus. That’s where Documenso really lives. It doesn’t live on Documenso.com. It lives on GitHub.”
 
-> **Putting it into practice:** Do everything you can to direct users to GitHub, using CTAs and banners on other platforms. You can use issue templates and a comprehensive README to help users communicate with you and lower the barrier to entry. 
+> **Putting it into practice:** Do everything you can to direct users to GitHub, using CTAs and banners on other platforms. You can use issue templates, discussions, wiki pages, and a comprehensive README to help users communicate with you and lower the barrier to entry. 
 
 ### 3. Find reasons to celebrate
 
@@ -54,7 +54,7 @@ Twitter and Discord certainly helped the team grow its GitHub presence, but it�
 
 Inspired by these surges, Documenso now announces similar milestones whenever it can — posting about product updates and new contributions in order to continuously drive users back to the repo. Anything which helps excite and engage users, helps. 
 
-“We use Discord and Twitter to celebrate milestones, celebrate contributions, and contributions whenever we can,” says Florent. “We’re really thankful for every external contribution, no matter how big they are. Even if you just fix a typo in the README file, that's fantastic. We really want to highlight all those elements and celebrate them.”
+“We use Discord and Twitter to celebrate milestones and contributions whenever we can,” says Florent. “We’re really thankful for every external contribution, no matter how big they are. Even if you just fix a typo in the README file, that's fantastic. We really hope people will contribute to our mission and help us take on a billion-dollar empire by building an open source document signing experience.”
 
 > **Putting it into practice:** Documenso encourages contributions with a bounty program that posts new issues into their Discord community. Swag is a powerful tool for incentivizing users too! 
 
