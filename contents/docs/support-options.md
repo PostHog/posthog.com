@@ -110,7 +110,7 @@ Anybody using PostHog Cloud can raise a bug, submit feedback or otherwise ask fo
 
 ## Dedicated Slack
 
-Our preference for paid customers is to support them through a private Slack channel. This is because it helps teams realize they're on the same side - it's just more fun for everyone, which helps drive engagement.
+Our preference for paid customers is to support them through a private Slack channel. This helps us all get on the same side - and it's just more fun for everyone.
 
 We will select the right team for you at PostHog. This typically includes the Customer Success and Engineering teams.
 
