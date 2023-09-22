@@ -110,36 +110,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Strategy',
-        url: '',
-        children: [
-            {
-                name: 'Strategy overview',
-                url: '/handbook/strategy/overview',
-            },
-            {
-                name: 'Ideal Customer Persona',
-                url: '/handbook/strategy/ideal-customer-persona',
-            },
-            {
-                name: 'Business model',
-                url: '/handbook/strategy/business-model',
-            },
-            {
-                name: 'Objectives',
-                url: '/handbook/strategy/objectives',
-            },
-            {
-                name: 'Roadmap',
-                url: '/roadmap',
-            },
-            {
-                name: 'Brand',
-                url: '/handbook/strategy/brand',
-            },
-        ],
-    },
-    {
         name: 'How we work',
         url: '',
         children: [
@@ -275,6 +245,10 @@ export const handbookSidebar = [
             {
                 name: 'Art requests',
                 url: '/handbook/design/art-requests',
+            },
+            {
+                name: 'Brand strategy',
+                url: '/handbook/strategy/brand',
             },
         ],
     },
