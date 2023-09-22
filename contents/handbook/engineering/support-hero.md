@@ -8,7 +8,7 @@ showTitle: true
 
 Every week, we assign one person to be the "Support Hero" per engineering team (alternative names "Secondary", "Support Sidekick", "Infra Hero", "Luigi"). If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the satisfaction of helping them out, and contribute to a lot of different parts of our system. Your first priority should be dealing with alerts or Sentry alerts are high priority. After that, it's responding to customer support requests. Depending on how busy the week is you can do some feature work too.
 
-
+Marcus will act as triage for Product Analytics and Pipeline due to the high volume of tickets for those teams.  He will resolve tickets if possible, and escalate to the Engineering team responsible if he needs further help.
 
 ### Expectations
 
@@ -41,7 +41,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
   - If it's an email, make sure you format your message as an email and only send a single message, not multiple
 - Follow up!
-- Housekeeping. Once a customer issue/question has been addressed, close the ticket on [Zendesk](#zendesk) or [Unthread](#unthread) to make it easy to identify outstanding conversations.
+- Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) to make it easy to identify outstanding conversations.
 
 ### Prioritizing requests
 
@@ -93,7 +93,7 @@ From time to time, customers will request to get their apps added to PostHog Clo
 
 We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
-Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email. We also use [Halp](https://www.atlassian.com/software/halp).
+Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 
 Zendesk will get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, and also community questions. These tickets will come with links to the issue or the question posted in the community so you can answer them in the appropriate platform, rather than on Zendesk itself.
 
@@ -114,25 +114,11 @@ Tips:
 * Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
 * Low priority tickets don't send emails to the requester and can be viewed in aggregation and closed without a public reply. High and normal priority tickets send an email about a helpdesk ticket being created, so we should respond publicly there.
 
-### Unthread
+### Pylon
 
-Our Customer Success team uses Unthread to track the resolution of threads in Slack connect channels with our high priority customers.  By default, threads are assigned to the CS person who owns the relationship with the customer.  If they need Support Hero assistance they will create a Zendesk ticket for the team.
+Our Customer Success team uses [Pylon](https://app.usepylon.com) to turn Slack threads into Zendesk tickets.  When creating a ticket by adding the :ticket: emoji, the customer or CS team can assign the thread to a team which will route the Zendesk ticket to the correct place.  These will normally be marked as high priority and you can respond to them either in Zendesk or Slack, as there is a two-way sync.
 
-#### Using Unthread
-
-* The [Slack Unthread app](https://posthog.slack.com/app_redirect?app=A03U6F0P6KG) will notify you if a conversation is assigned to you with a link to the relevant Slack thread.
-
-* You can also see conversations which have been assigned to you in the Unthread app Home page.
-
-* You can close a conversation by using the context menu either in the Unthread app Home page or the More Actions context menu in the Slack thread itself.  Adding a ✅ reaction to a thread will also mark it as closed (👀 will move it to in progress)
-
-* You can also re-assign the conversation in the same way if you need (for example) a secondary person to take over.
-
-* If you want to have an internal discussion about the thread away from the customer channel you can post a thread to the triage channel (currently #team-customer-success).
-
-* Try and close conversations once resolved, so we can track MTTR for our high priority customers.
-
-#### Community questions
+### Community questions
 
 At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (These questions also appear in the relevant category in the [PostHog community](/questions).)
 

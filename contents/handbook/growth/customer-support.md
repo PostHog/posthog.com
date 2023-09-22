@@ -17,17 +17,17 @@ We have a few different routes for users to contact us. As an open source compan
 These are the ways in which customers can currently reach us:
 
 - **Questions** - this offers users the best possible experience, as they can search [previously answered questions](/questions) that have been asked anywhere on posthog.com in our Docs!
+- **In-app** - this adds extra PostHog context to Zendesk tickets and allows us to work with customers 1:1 to get the problem solved
 - **Slack** - our active [PostHog Users Slack](https://posthog.com/slack) community frequently post questions, and for higher-paying (or potential higher-paying) customers, through a dedicated channel on our main company Slack
-- **Email** - a user may email hey@posthog.com with a specific support query
 - **GitHub** - sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them
 
 ### Engineers are Support Heroes
 
-We intentionally have not hired a single person dedicated to customer support. The direct interaction between our engineering team and our users is _hugely_ valuable, and an important part of building trust in our community is the ability for users to talk directly with the people who are actually building the product.
+Whilst Marcus is here in a support role to triage and escalate issues for specific teams, the direct interaction between our engineering team and our users is _hugely_ valuable, and an important part of building trust in our community is the ability for users to talk directly with the people who are actually building the product.
 
 Providing support is a responsibility shared across our engineering teams - we expect everyone to jump in and help a user if you see they have a question or problem (though obviously not at the same time!) Once you have made the initial contact or response, it is your responsibility to see it through or explicitly hand over to someone else if they are better-equipped to help.
 
-One person takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
+One person from each team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries in Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
 
 ### Tutorial content and workshops
 
