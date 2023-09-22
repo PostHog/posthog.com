@@ -27,7 +27,7 @@ curl -v -L \
 -d '  {
     "api_key": "<ph_project_api_key>",
     "distinct_id": "distinct_id_of_your_user",
-    "groups": { # Required only for group-based feature flags
+    "groups": { # Optional. Required only for group-based feature flags
         "group_type": "group_id" # Replace "group_type" with the name of your group type. Replace "group_id" with the id of your group.
     },
     "person_properties": {"<personProp1>": "<personVal1>"}, # Optional. Include any properties used to calculate the value of the feature flag.
