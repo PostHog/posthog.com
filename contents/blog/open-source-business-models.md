@@ -7,12 +7,10 @@ showTitle: true
 hideAnchor: true
 author:
   - mo-shehu
-category: Startups
 tags:
   - Open source
+  - Startups
 ---
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/L1Ovbzs7vyo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 So, you’ve decided to build an open-source product.
 
@@ -20,7 +18,7 @@ While your choice is highly commendable, the resounding applause from devs on Gi
 
 Just one thing: **you need to build a community.**
 
-<iframe src="https://giphy.com/embed/OF0yOAufcWLfi" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/celebs-jimmy-fallon-OF0yOAufcWLfi">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/OF0yOAufcWLfi" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p>
 
 Open-source requires a decently-sized, highly engaged community for any business model to work. People have to believe in your solution enough to contribute code, comments, or cash to it. If money is a priority for your business, open-source might not be the path for you.
 
@@ -35,7 +33,7 @@ The downside is that support-based open source business models tend to return lo
 
 At PostHog, we started with the support model before running into one problem: developers typically want to wrangle your software themselves before paying for help or maintenance. 
 
-<iframe src="https://giphy.com/embed/pVsn5LJEgMKxa" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/xbox-ps4-tells-pVsn5LJEgMKxa">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/pVsn5LJEgMKxa" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 This makes it a hard sell, but you can overcome this if you have more ‘clout’ by being a large project with hundreds of contributions and thousands of commits. [RedHat](https://www.redhat.com/en) is a good example of a support-based open source company.
 
@@ -44,7 +42,7 @@ With this option, you offer users the option to either host your product on thei
 
 The downside of the hosted model is that it’s not very defensible. You’ll likely face competition from hosting providers who simply host your free edition and charge their users for extra value-adds, cutting you out of the deal completely. 
 
-<iframe src="https://giphy.com/embed/j4ksBQ70a3ECh2VObN" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/lastmanstandingfox-foxtv-last-man-standing-j4ksBQ70a3ECh2VObN">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/j4ksBQ70a3ECh2VObN" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 The hosting business model is also much harder to pull off without a solid, popular product. [MongoDB](https://www.mongodb.com/) and [Sentry](https://sentry.io) are two examples of products that lets you self-host or host with a 3rd party provider.
 
@@ -53,24 +51,20 @@ This option requires you to build and maintain two editions of your product: the
 
 The major advantage of this approach — and one of our biggest selling points — is that you don’t need to process user data through 3rd parties. This makes it easier to gain adoption in larger companies that hold data privacy as a core part of their ethos.
 
-<iframe src="https://giphy.com/embed/3HELB2Qwfu9dV1ZGYY" width="480" height="282" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/3HELB2Qwfu9dV1ZGYY">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/3HELB2Qwfu9dV1ZGYY" width="480" height="282" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 
 The downside is that you have to build and maintain two editions of your product: the community edition and the source-available edition. This means hiring a larger, costlier engineering team and possibly raising venture capital at the start to fund your operations. Due to these factors, it might take longer for you to get to revenue. And because you’re maintaining two editions of your product, you’ll need to clearly indicate which features contributors can work on and which ones are off-limits.
 
 At PostHog, we launched a (paid) hosted edition first before moving to an open-core model and allowing self-hosting. Many other companies are experimenting with the concept of ‘buyer-based open core,’ which means that you [charge differently](https://www.heavybit.com/library/video/commercial-open-source-business-strategies/) for features depending on who cares the most about them. Company executives always want more functionality and tend to be less price-sensitive than, say, a developer or individual contributor, so there’s more room to expand your codebase and make money. The downside is that it takes a lot of work to separate your open-source code from your proprietary code.
 
-<iframe src="https://giphy.com/embed/9Y74y9h95QBizsNfd8" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/paidoff-trutv-paid-off-michael-torpey-9Y74y9h95QBizsNfd8">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/9Y74y9h95QBizsNfd8" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 ## Option #4: Donations
 This approach is great if you created your product as a hobby and are fine with earning a minimal amount of money each month to cover small expenses. It quickly becomes unfeasible if you want to maintain an entire engineering team on donations. You can enjoy quite a bit of success going the donation route if you have a stellar product, but these are outliers and shouldn’t be used as revenue benchmarks. Besides, if you already have a great product that’s raking in donations, you probably shouldn’t be reading this post.
 
-<iframe src="https://giphy.com/embed/3o6Zt3OhbsQ5VLPmBW" width="480" height="338" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/southparkgifs-3o6Zt3OhbsQ5VLPmBW">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/3o6Zt3OhbsQ5VLPmBW" width="480" height="338" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 ## Pick what works for you
 
 There are many ways to monetize open-source software, and the approach you choose will depend on how much maintenance you’d like to take on, how large a team you’d like to assemble, and how much money you’re looking to raise — whether in organic revenue or through venture capital. Whichever approach you take, focus on building an outstanding product and an engaged community at all times, as those advantages accrue to you indefinitely.
-
-Loved this? Let us know on [Twitter](https://twitter.com/PostHog) or [LinkedIn](https://linkedin.com/company/posthog), and subscribe to our [newsletter](/newsletter) for more posts on startups, growth, and analytics.
-
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
