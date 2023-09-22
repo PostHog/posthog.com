@@ -1,4 +1,4 @@
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction, TrackedCTA } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import { SectionWrapper } from './Section'
@@ -26,9 +26,9 @@ export const PricingCTA = (props: { title: string; url: string }) => {
     }, [posthog])
 
     return (
-        <CallToAction type="secondary" to={cta.url} size="sm">
+        <TrackedCTA event={{ name: 'clicked product pricing CTA' }} type="secondary" to={cta.url} size="sm">
             {cta.title}
-        </CallToAction>
+        </TrackedCTA>
     )
 }
 
