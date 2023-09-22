@@ -1,6 +1,6 @@
 ```go
 client.Enqueue(posthog.Identify{
-  DistinctId: "user:123",
+  DistinctId: "distinct_id_of_your_user",
   Properties: posthog.NewProperties().
     Set("email", "john@doe.com").
     Set("proUser", false),

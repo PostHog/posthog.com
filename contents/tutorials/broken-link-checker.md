@@ -76,7 +76,7 @@ export default function NotFound() {
   const posthog = usePostHog();
 
   useEffect(() => {
-    posthog.capture('not-found');
+    posthog.capture('not_found');
   }, []);
 
   return (

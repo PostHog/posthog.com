@@ -370,7 +370,7 @@ export default function Post({ post }) {
   
   function likePost() {
     posthog.capture(
-      'post liked',
+      'post_liked',
       {
         post: post.title,
         author: post.author,
