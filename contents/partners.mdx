@@ -1,0 +1,81 @@
+---
+title: PostHog partners directory
+showTitle: false
+showSidebar: true
+width: lg
+images: 
+    - './images/wave_hog.png'
+    - './images/smart_hog.png'
+    - './images/science_hog.png'
+---
+
+import { StaticImage } from 'gatsby-plugin-image'
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+import Table from './_includes/partner-table.mdx'
+
+<Hero
+    title="Partners of PostHog"
+    subtitle="Want to create a custom solution on top of our open source codebase? Our partners can help!"
+    ctas={[
+        <CallToAction href="/contact-sales">Get in touch</CallToAction>,
+    ]}
+/>
+
+<section class="my-24 px-5">
+  <div class="max-w-screen-2xl mx-auto">
+    <h3 class="text-2xl lg:text-3xl m-0 text-center mb-6 sm:mb-16 lg:mb-8">What can our partners help with?</h3>
+    <div class="flex justify-center">
+      <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-3 lg:grid-cols-3 justify-evenly relative text-center sm:text-left">
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[1])} alt="Startup credit" objectFit="contain" style={{ maxWidth: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Implementation</h5>
+          <p class="m-0 text-[15px]">Struggling to get started? Partners can help you get the most out of your data by creating bespoke queries, dashboards, and more.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[2])} alt="Startup spotlight" objectFit="contain" style={{ maxWidth: 185 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Deployment</h5>
+          <p class="m-0 text-[15px]">PostHog no longer supports self-hosted instances, so if you need these services then a partner can help fill the gap.</p>
+        </li>
+        <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
+          <GatsbyImage image={getImage(props?.images[0])} alt="Startup merch" objectFit="contain" style={{ maxWidth: 150 }} />
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Integrations</h5>
+          <p class="m-0 text-[15px]">Apps connect PostHog to other software, such as a CRM. We have plenty of ready-made integrations, but partners can help make more.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<Section title="Our partners" titleSize="sm" size="md">
+    <Table />
+</Section>
+
+<section class="my-24 px-5">
+<div class="max-w-screen-md mx-auto space-y-1">
+<details>
+<summary>How do I add myself as a partner?</summary>
+<p>If you'd like to become a partner, simply <a href="/contact-sales">get in touch</a> and let us know how you intend to work with us. We'll get back to you.</p>
+</details>
+
+<details> 
+<summary>Are partners accredited?</summary>
+<p>No. We don't currently offer any sort of certification or accreditation for partners. We've worked with all of the partners above and believe that they're capable to providing assistance, but we offer no guarantees. </p>
+</details>
+
+<details>
+<summary>Do I have to be on a Paid or Enterprise plan to work with a partner?</summary>
+<p>No, we enforce no such restrictions. You can work with partners using self-hosted, free, or hobby deployments. </p>
+</details>
+
+<details>
+<summary>Can you help me with my self-hosted instance?</summary>
+<p>Unfortunately not. We <a href="/blog/sunsetting-helm-support-posthog">sunset</a> and no longer provide any support for self-hosted deployments. </p>
+</details>
+
+<details>
+<summary>Do you have special deals for startups?</summary>
+<p>Yes! Apply to our <a href="/startups">PostHog for startups program</a> to unlock a wealth of benefits for eligible teams, including over $50,000 in PostHog credit! </p>
+</details>
+</div>
+</section>
+
