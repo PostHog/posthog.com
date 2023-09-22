@@ -55,7 +55,7 @@ submitButton.addEventListener('click', function(event) {
 
   // Capture the values in PostHog
   posthog.capture(
-    'form submitted', 
+    'form_submitted', 
     {
       name: name, 
       email: email

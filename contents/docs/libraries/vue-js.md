@@ -125,7 +125,7 @@ export default {
   watch: {
     // whenever question changes, this function will run
     foo(newFoo, oldFoo) {
-      this.$posthog.capture("Foo Changed", {foo: newFoo});
+      this.$posthog.capture("foo_changed", {foo: newFoo});
     },
   },
   created() {
@@ -201,7 +201,7 @@ Then, access PostHog by calling `this.$posthog`.
 
 export default {
   created() {
-    this.$posthog.capture("App Created!");
+    this.$posthog.capture("app_created");
   }
 }
 ```

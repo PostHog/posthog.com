@@ -41,7 +41,7 @@ const MyComponent = () => {
     const posthog = usePostHog()
 
     useEffect(() => {
-        posthog.capture("MyComponent loaded", { foo: "bar" })
+        posthog.capture("mycomponent_loaded", { foo: "bar" })
     }, [])
 }
 ```
@@ -73,9 +73,9 @@ import { posthog, posthogAsync} from './posthog'
 export function MyApp1() {
     useEffect(async () => {
         // Use posthog optionally with the possibility that it may still be loading
-        posthog?.capture('MyApp1 loaded')
+        posthog?.capture('myapp1_loaded')
         // OR use posthog via the promise
-        (await posthogAsync).capture('MyApp1 loaded')
+        (await posthogAsync).capture('myapp1_loaded')
     }, [])
 
     return <View>Your app code</View>

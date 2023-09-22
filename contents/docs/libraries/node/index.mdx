@@ -50,8 +50,8 @@ To set [user properties](/docs/data/user-properties), include the properties you
 
 ```node
 client.capture({
-    distinctId: 'distinct id',
-    event: 'movie played',
+    distinctId: 'distinct_id_of_the_user',
+    event: 'movie_played',
     properties: {
         $set: { name: 'Max Hedgehog'  },
         $set_once: { initial_url: '/blog' },
@@ -123,8 +123,8 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 ```node
 client.capture({
-    event: 'some event',
-    distinctId: '[user distinct id]',
+    event: 'some_event',
+    distinctId: 'user_distinct_id',
     groups: { company: 'company_id_in_your_db' },
 })
 ```
@@ -175,7 +175,7 @@ You can also explicitly chose to enable or disable GeoIP for a single capture re
 ```node
 client.capture({
   distinctId: distinctId,
-  event: 'your-event',
+  event: 'your_event',
   disableGeoip: `true`,
 })
 ```
@@ -219,13 +219,13 @@ For example:
 ```node
 export const handler() {
   client.capture({
-    distinctId: 'distinct id',
-    event: 'thing happened'
+    distinctId: 'distinct_id_of_the_user',
+    event: 'thing_happened'
   })
 
   client.capture({
-    distinctId: 'distinct id',
-    event: 'other thing happened'
+    distinctId: 'distinct_id_of_the_user',
+    event: 'other_thing_happened'
   })
 
   // So far 2 events are queued but not sent

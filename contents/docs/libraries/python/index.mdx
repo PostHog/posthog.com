@@ -91,7 +91,7 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 -   Capture an event and associate it with a group
 
 ```python
-posthog.capture('[user distinct id]', 'some event', groups={'company': 'company_id_in_your_db'})
+posthog.capture('user_distinct_id', 'some_event', groups={'company': 'company_id_in_your_db'})
 ```
 
 -   Update properties on a group
@@ -130,7 +130,7 @@ The list of properties that this overrides:
 You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
 
 ```python
-posthog.capture('test id', 'test event', disable_geoip=True|False)
+posthog.capture('test_id', 'test_event', disable_geoip=True|False)
 ```
 
 ## Serverless environments (Render/Lambda/...)

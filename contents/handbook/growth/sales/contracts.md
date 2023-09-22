@@ -22,7 +22,7 @@ You will likely need to use the [Pricing Calculator](https://docs.google.com/spr
 
 We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, routing and signature.  Ask Cameron or Simon for access if you don't have it.
 
-1. The [order form template](https://app.pandadoc.com/a/#/templates/RtobD55j4R2RgtVgTNd9Cd) to use is titled `CUSTOMER NAME - PostHog Cloud (Enterprise) Order Form - <MMM YYYY> TEMPLATE` 
+1. The [order form template](https://app.pandadoc.com/a/#/templates/wu9XwvL5cyjrasUPkppZuj) to use is titled `[COMPANY LEGAL NAME] - PostHog Cloud [ENTERPRISE] Order Form - [DDMMYYYY]` 
 2. When looking at the template, click the link to **Use this template** in the top bar.
 3. In the Add recipients box which pops up:
    1. Replace `CUSTOMER NAME` with their actual company name
@@ -40,9 +40,15 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
    * **Contract.EffectiveDate** - The start date of the contract expressed in the format `01 Feb 2023`
    * **Contract.EnterprisePrice** - The price of the Enterprise add-on, from the pricing calculator
    * **Contract.EventLimit** - The total amount of events that can be captured over the contract term (not the monthly amount)
-   * **Contract.EventPrice** - The price for the Product Analytics component, from the pricing calculator
+   * **Contract.EventPrice** - The price for the up-front Product Analytics component, from the pricing calculator
+   * **Contract.EventOverage** - The overage rate for Product Analytics, should the customer go over their Event Limit
+   * **Contract.GroupsPrice** - The price for the up-front Group Analytics component, from the pricing calculator
    * **Contract.RecordingLimit** - The total amount of recordings that can be captured over the contract term (not the monthly amount)
-   * **Contract.RecordingPrice** - The price for the Session Recording component, from the pricing calculator
+   * **Contract.RecordingPrice** - The price for the Session Replay component, from the pricing calculator
+   * **Contract.RecordingOverage** - The overage rate Session Replay, should the customer go over their Recording Limit
+   * **Contract.FeatureFlagLimit** - The total amount of Feature Flag requests that can be captured over the contract term (not the monthly amount)
+   * **Contract.FeatureFlagPrice** - The price for the Feature Flag component, from the pricing calculator
+   * **Contract.FeatureFlagOverage** - The overage rate Feature Flag, should the customer go over their Feature Flag Limit
    * **Contract.Term** - The term in months of the contract (12 months by default)
 7. If an MSA is being used rather than the standard terms you will need to replace the following text:
    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: https://posthog.com/privacy (collectively the “Agreement”)
@@ -61,7 +67,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 4. Click Send at the top of the document and add a message explaining the context of the order form.
 5. Once the Client and then PostHog have signed it you should get an email to confirm completion.
 6. Don't forget to link to a deal in HubSpot and close the associated deal.
-7. You'll also need to set them on an annual [Billing](/handbook/growth/sales/billing) plan in Stripe.
+7. Zapier will [automatically add](https://zapier.com/app/zap/207715331) a record in the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01H9QPTRYEZVGFTJ84XMCYQFSK) with the PandaDoc Order Form ID.  See the [Billing](/handbook/growth/sales/billing) page for steps on how to use this and automate the setup of their Stripe billing components.
 8. Celebrate!
 
 ## Master Services Agreement (MSA)

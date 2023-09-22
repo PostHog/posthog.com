@@ -5,7 +5,7 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```rust
-let mut event = Event::new("user signed up", "distinct_id_of_the_user");
+let mut event = Event::new("user_signed_up", "distinct_id_of_the_user");
 client.capture(event).unwrap();
 ```
 
@@ -14,7 +14,7 @@ client.capture(event).unwrap();
 <SettingProperties />
 
 ```rust
-let mut event = Event::new("user signed up", "distinct_id_of_the_user");
+let mut event = Event::new("user_signed_up", "distinct_id_of_the_user");
 
 event.insert_prop("login_type", "email").unwrap();
 event.insert_prop("is_free_trial", true).unwrap();
