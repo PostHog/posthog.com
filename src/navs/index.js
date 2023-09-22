@@ -77,24 +77,6 @@ export const handbookSidebar = [
     {
         name: 'Existing content that needs to be accounted for',
     },
-    {
-        name: 'Company',
-        url: '',
-        children: [
-            {
-                name: 'Story',
-                url: '/handbook/company/story',
-            },
-            {
-                name: 'Team',
-                url: '/handbook/company/team',
-            },
-            {
-                name: 'Investors',
-                url: '/handbook/strategy/investors',
-            },
-        ],
-    },
 
     {
         name: 'Team structure',
