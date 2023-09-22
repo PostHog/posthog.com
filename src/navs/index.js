@@ -1607,20 +1607,6 @@ export const docsMenu = {
                             url: '/docs/self-host',
                         },
                         {
-                            name: 'Upgrading PostHog',
-                            url: '',
-                            children: [
-                                {
-                                    name: 'Overview',
-                                    url: '/docs/runbook/upgrading-posthog',
-                                },
-                                {
-                                    name: 'Upgrade notes',
-                                    url: '/docs/runbook/upgrade-notes',
-                                },
-                            ],
-                        },
-                        {
                             name: 'Configure',
                             url: '',
                             children: [
@@ -1637,10 +1623,6 @@ export const docsMenu = {
                                     url: '/docs/self-host/configure/securing-posthog',
                                 },
                                 {
-                                    name: 'Monitoring with Grafana',
-                                    url: '/docs/self-host/configure/monitoring-with-grafana',
-                                },
-                                {
                                     name: 'Running behind a proxy',
                                     url: '/docs/self-host/configure/running-behind-proxy',
                                 },
@@ -1649,154 +1631,8 @@ export const docsMenu = {
                                     url: '/docs/self-host/configure/email',
                                 },
                                 {
-                                    name: 'Helm chart configuration',
-                                    url: '/docs/self-host/deploy/configuration',
-                                },
-                                {
-                                    name: 'Deploying ClickHouse using Altinity.Cloud',
-                                    url: '/docs/self-host/configure/using-altinity-cloud',
-                                },
-                                {
                                     name: 'Configuring Slack',
                                     url: '/docs/self-host/configure/slack',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Runbook',
-                            url: '',
-                            children: [
-                                {
-                                    name: 'Overview',
-                                    url: '/docs/runbook',
-                                },
-                                {
-                                    name: 'Async migrations',
-                                    url: '',
-                                    children: [
-                                        {
-                                            name: 'Overview',
-                                            url: '/docs/runbook/async-migrations',
-                                        },
-                                        {
-                                            name: '0001-events-sample-by',
-                                            url: '/docs/runbook/async-migrations/0001-events-sample-by',
-                                        },
-                                        {
-                                            name: '0002_events_sample_by',
-                                            url: '/docs/runbook/async-migrations/0002-events-sample-by',
-                                        },
-                                        {
-                                            name: '0003_fill_person_distinct_id2',
-                                            url: '/docs/runbook/async-migrations/0003-fill-person-distinct-id2',
-                                        },
-                                    ],
-                                },
-                                {
-                                    name: 'Services',
-                                    url: '',
-                                    children: [
-                                        {
-                                            name: 'ClickHouse',
-                                            url: '/docs/runbook/services/clickhouse',
-                                            children: [
-                                                {
-                                                    name: 'Backup',
-                                                    url: '/docs/runbook/services/clickhouse/backup',
-                                                },
-                                                {
-                                                    name: 'Debug hanging / freezing process',
-                                                    url: '/docs/runbook/services/clickhouse/debug-hanging-freezing-process',
-                                                },
-                                                {
-                                                    name: 'Horizontal scaling (Sharding & replication)',
-                                                    url: '/docs/runbook/services/clickhouse/sharding-and-replication',
-                                                },
-                                                {
-                                                    name: 'Kafka Engine',
-                                                    url: '/docs/runbook/services/clickhouse/kafka-engine',
-                                                },
-                                                {
-                                                    name: 'Resize disk',
-                                                    url: '/docs/runbook/services/clickhouse/resize-disk',
-                                                },
-                                                {
-                                                    name: 'Restore',
-                                                    url: '/docs/runbook/services/clickhouse/restore',
-                                                },
-                                                {
-                                                    name: 'Vertical scaling',
-                                                    url: '/docs/runbook/services/clickhouse/vertical-scaling',
-                                                },
-                                                {
-                                                    name: 'Debugging load',
-                                                    url: '/docs/runbook/services/clickhouse/debugging-load',
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            name: 'Kafka',
-                                            url: '/docs/runbook/services/kafka',
-                                            children: [
-                                                {
-                                                    name: 'Resize disk',
-                                                    url: '/docs/runbook/services/kafka/resize-disk',
-                                                },
-                                                {
-                                                    name: 'Log retention',
-                                                    url: '/docs/runbook/services/kafka/log-retention',
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            name: 'PostgreSQL',
-                                            url: '/docs/runbook/services/postgresql',
-                                            children: [
-                                                {
-                                                    name: 'Resize disk',
-                                                    url: '/docs/runbook/services/postgresql/resize-disk',
-                                                },
-                                                {
-                                                    name: 'Troubleshooting long-running migrations',
-                                                    url: '/docs/runbook/services/postgresql/long-migrations',
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            name: 'Plugin server',
-                                            url: '/docs/runbook/services/plugin-server',
-                                            children: [
-                                                {
-                                                    name: 'Overview',
-                                                    url: '/docs/runbook/services/plugin-server',
-                                                },
-                                                {
-                                                    name: 'Jobs not executing',
-                                                    url: '/docs/runbook/services/plugin-server/jobs',
-                                                },
-                                                {
-                                                    name: 'Scheduled tasks not executing',
-                                                    url: '/docs/runbook/services/plugin-server/scheduled-tasks',
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            name: 'MinIO',
-                                            url: '/docs/runbook/services/minio',
-                                        },
-                                        {
-                                            name: 'Redis',
-                                            url: '/docs/runbook/services/redis',
-                                        },
-                                        {
-                                            name: 'Zookeeper',
-                                            url: '/docs/runbook/services/zookeeper',
-                                        },
-                                    ],
-                                },
-                                {
-                                    name: 'Disaster recovery',
-                                    url: '/docs/runbook/disaster-recovery',
                                 },
                             ],
                         },
