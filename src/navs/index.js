@@ -95,60 +95,7 @@ export const handbookSidebar = [
             },
         ],
     },
-    {
-        name: 'How we work',
-        url: '',
-        children: [
-            {
-                name: 'Culture',
-                url: '/handbook/company/culture',
-            },
-            {
-                name: 'Values',
-                url: '/handbook/company/values',
-            },
-            {
-                name: 'Small teams',
-                url: '/handbook/company/small-teams',
-            },
-            {
-                name: 'Meetings',
-                url: '/handbook/getting-started/meetings',
-            },
-            {
-                name: 'Goal setting',
-                url: '/handbook/company/goal-setting',
-            },
-            {
-                name: 'Diversity and inclusion',
-                url: '/handbook/company/diversity',
-            },
-            {
-                name: 'Communication',
-                url: '/handbook/company/communication',
-            },
-            {
-                name: 'Kudos',
-                url: '/handbook/company/kudos',
-            },
-            {
-                name: 'Management',
-                url: '/handbook/company/management',
-            },
-            {
-                name: 'Sprints',
-                url: '/handbook/company/sprints',
-            },
-            {
-                name: 'Offsites',
-                url: '/handbook/company/offsites',
-            },
-            {
-                name: 'Security',
-                url: '/handbook/company/security',
-            },
-        ],
-    },
+
     {
         name: 'Team structure',
         url: '/handbook/small-teams/team-structure',
@@ -669,6 +616,60 @@ export const handbookSidebar = [
                     {
                         name: 'Exec hiring',
                         url: '/handbook/people/hiring-process/exec-hiring',
+                    },
+                ],
+            },
+            {
+                name: 'How we work',
+                url: '',
+                children: [
+                    {
+                        name: 'Culture',
+                        url: '/handbook/company/culture',
+                    },
+                    {
+                        name: 'Values',
+                        url: '/handbook/company/values',
+                    },
+                    {
+                        name: 'Small teams',
+                        url: '/handbook/company/small-teams',
+                    },
+                    {
+                        name: 'Meetings',
+                        url: '/handbook/getting-started/meetings',
+                    },
+                    {
+                        name: 'Goal setting',
+                        url: '/handbook/company/goal-setting',
+                    },
+                    {
+                        name: 'Diversity and inclusion',
+                        url: '/handbook/company/diversity',
+                    },
+                    {
+                        name: 'Communication',
+                        url: '/handbook/company/communication',
+                    },
+                    {
+                        name: 'Kudos',
+                        url: '/handbook/company/kudos',
+                    },
+                    {
+                        name: 'Management',
+                        url: '/handbook/company/management',
+                    },
+                    {
+                        name: 'Sprints',
+                        url: '/handbook/company/sprints',
+                    },
+                    {
+                        name: 'Offsites',
+                        url: '/handbook/company/offsites',
+                    },
+                    {
+                        name: 'Security',
+                        url: '/handbook/company/security',
                     },
                 ],
             },
