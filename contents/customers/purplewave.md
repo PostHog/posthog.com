@@ -19,7 +19,7 @@ Now, the team plans to 3x that growth — something it can only do by adopting m
 
 “Previously a lot of teams operated on gut decisions and intuition,” says Purplewave’s Product Owner, Matt Amick. “We had data, but it wasn’t mobilized well because it was accessed through Tableau, which isn’t the easiest to use. We started looking around for something that could help us make decisions based on data — and that’s when we found PostHog!”
 
-“A lot of the other companies we spoke to were using tools like [Amplitude](/blog/posthog-vs-amplitude), but they all said they try to get you in and then charge you a million dollars once you’re set up...Our team is all about just being honest and not hiding stuff, so we preferred PostHog.”
+“A lot of the other companies we spoke to were using tools like [Amplitude](/blog/posthog-vs-amplitude), but they all said they try to get you in and then charge you a million dollars once you’re set up... Our team is all about just being honest and not hiding stuff, so we preferred PostHog.”
 
 Purplewave began using many PostHog features, including [analytics](/product-analytics), [flags](/feature-flags), and [replays](/session-replay) — and when user surveys launched in their first beta state, the team adopted that too.
 
