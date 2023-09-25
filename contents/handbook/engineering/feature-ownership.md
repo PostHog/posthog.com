@@ -56,6 +56,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Stickiness | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/stickiness</span>  |
 | Toolbar | [Team Monitoring][Team Monitoring]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
 | Trends | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/trends</span>  |
+| Web Analytics                            | [Team Web Analytics][Team Web Analytics]                                                                   | <span class="lemon-tag gh-tag">feature/web-analytics</span>        |
 
 
 ## Why did we establish feature owners?
@@ -78,6 +79,7 @@ Some of the features we are building may exist in other products already. It is 
 [@yakkomajuri]: https://github.com/yakkomajuri
 [@timgl]: https://github.com/timgl
 [Team Product Analytics]: /handbook/small-teams/product-analytics
+[Team Web Analytics]: /handbook/small-teams/web-analytics
 [Team Monitoring]: /handbook/small-teams/monitoring
 [Team Pipeline]: /handbook/small-teams/pipeline
 [Team Infrastructure]: /handbook/small-teams/infrastructure
