@@ -10,11 +10,15 @@
   - Redshift and maybe replicator depending on demands
   - Add logs/metrics/alerting
   - Higher frequency
-- Webhooks v2.1 - Tiina Turban
-  - Svix/delivery reliability
-  - Design and build a high level automation thing that webhooks/actions can use
-  - Behavioural cohorts for feature flags
-  - Alerting on events thresholds
+- Webhooks v2 - Tiina Turban
+  - the new delivery system that can 
+  	- retries
+ 	- observability to both users and us for success rate, retry count, latency
+ 	- endpoint disabling
+ 	- multiple webhook destinations
+ 	- UI
+ 	- can be used for automation for other teams needs
+ - move webhooks, resthooks and onEvent apps to use the new system
 - PoE - Brett Hoerner
   - KV store for person overrides
   - Stretch: Squash person overrides 
