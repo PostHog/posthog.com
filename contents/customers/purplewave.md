@@ -13,7 +13,7 @@ toolsUsed:
 date: 2023-09-15
 ---
 
-[Purplewave](https://www.purplewave.com/) is the world’s leading two-way marketplace for heavy duty equipment such as construction and agriculture fleets. The team of 220 people maintains a platform trusted by 4.75m annual visitors, with more than 150 fleet-scale auctions each year. 
+[Purplewave](https://www.purplewave.com/) is the world’s leading two-way marketplace for heavy duty equipment, such as construction and agriculture fleets. The team of 220 people maintains a platform trusted by 4.75m annual visitors, with more than 150 fleet-scale auctions each year. 
 
 Now, the team plans to 3x that growth — something it can only do by adopting more scalable systems for collecting and handling user feedback about the platform. 
 
