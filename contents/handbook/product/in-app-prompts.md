@@ -36,8 +36,6 @@ It will only show one prompt a day, no matter how many prompt feature flags are 
 
 It's recommended to run the prompt for yourself first to make sure it works as expected. You can keep changing the text and refreshing. When you click one of the buttons, it won't show you the popup again. The easiest way to retest it is to change the feature flag name (make sure to keep the user property `${feature_flag_name}` up to date) and run this in your [javascript console](https://developer.chrome.com/docs/devtools/console/javascript/) `localStorage.removeItem("prompt-last-seen")`.
 
-If you have any questions message Luke
-
 ## Examples
 
 ### Modal prompt

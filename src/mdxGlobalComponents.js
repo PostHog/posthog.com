@@ -9,6 +9,7 @@ import { Images } from './components/Careers/Images'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
 import { lib } from './components/Edition/lib'
+import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import { GDPRForm } from './components/GDPRForm'
 import { HiddenSection } from './components/HiddenSection'
@@ -39,6 +40,7 @@ export const shortcodes = {
     CompensationCalculator,
     ContentViewer,
     lib,
+    Emoji,
     FeatureAvailability,
     GDPRForm,
     HiddenSection,
