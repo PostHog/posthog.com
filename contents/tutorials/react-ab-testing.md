@@ -43,7 +43,7 @@ Finally, run `npm start` and go to [http://localhost:3000/](http://localhost:
 
 ## Adding PostHog
 
-To use PostHog to manage and track our A/B test, we must install and set it up. We do this by installing the `posthog-js` library to get access to the [React SDK](https://posthog-git-react-feature-flags-post-hog.vercel.app/docs/libraries/react).
+To use PostHog to manage and track our A/B test, we must install and set it up. We do this by installing the `posthog-js` library to get access to the [React SDK](/docs/libraries/react).
 
 ```bash
 npm install posthog-js
