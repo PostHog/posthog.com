@@ -116,6 +116,6 @@ To quote one of our team "process is scar tissue" - it often overcorrects, but b
 
 ## There are plenty of problems
 
-As a company with high autonomy and low coordination, shipping
+As a company with high autonomy and low coordination, shipping things that affect multiple teams is _a lot_ harder than shipping something within a single team. You may need extra meetings, or to form a temporary project team, or you may just fail!
 
 At scale, this has meant performance has, well, um, been a performance to solve.
