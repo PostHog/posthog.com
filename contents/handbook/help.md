@@ -56,7 +56,7 @@ A beginner's guide to some of our custom Slack emojis and various anecdotes you'
 
 * <Emoji name="bad-internet" src="/images/emojis/bad-internet.png" /> Yakko always had bad internet when demoing. <em>Always.</em>
 
-* [Jams](/jams) wore a skin tight green all-body suit for months to improve his Zoom background game without us realizing.
+* [Jams](/community/profiles/90) wore a skin tight green all-body suit for months to improve his Zoom background game without us realizing.
 
 * <Emoji name="ben-peace" src="/images/emojis/ben-peace.png" /> Ben has the same pose in 90% of PostHog photos. It's a reference to a meme.
 
