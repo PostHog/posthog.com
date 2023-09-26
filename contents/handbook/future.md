@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-**TL;DR:** Mid term, it's $100 million ARR by 2026, working backwards from there. Longer term, outcompete top down competitors worth $50 billion. If we get that far, we'll have helped _tens of millions_ of engineers build better products.
+**TL;DR:** Mid term, it's $100 million ARR by 2026, working backwards from there. Longer term, outcompete top-down competitors worth $50 billion. If we get that far, we'll have helped _tens of millions_ of engineers build better products.
 
 ## Will PostHog sell?
 
