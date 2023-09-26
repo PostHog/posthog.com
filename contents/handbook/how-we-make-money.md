@@ -16,7 +16,7 @@ All the other rules here are based on what we felt would be the best experience 
 
 Before a user has decided to buy the product, we should let them try it for free. Not only does this mean they can immediately self-serve without having to get budget internally, it reduces the need for a large sales team to convince them otherwise. When someone is looking for a solution, they are ready to install it if we can get out of the way commercially.
 
-Once a user likes the product, we don't want to create a big decision around continuing to expand their usage with us. (For example, if we suddenly charged a large recurring price per month.) Instead we charge a tiny fraction of a cent for each extra event they send.
+Once a user likes the product, we don't want to create a big decision around continuing to expand their usage with us. (For example, if we suddenly charged a large recurring price per month.) Instead, we charge a tiny fraction of a cent for each extra event they send.
 
 ## Charge based on what people use, and give users control
 
@@ -30,13 +30,16 @@ Overall, these principles mean that they will spend less than they otherwise wou
 
 ## Be the cheapest for each individual product
 
-We can make it up on selling other products to the customer over time. This way, it's always a no brainer to pick PostHog, we get as much word of mouth growth as possible, _and_ our single product competitors can't compete since they have nowhere to go.
+We can make it up on selling other products to the customer over time. This way, it's always a no-brainer to pick PostHog, we get as much word of mouth growth as possible, _and_ our single product competitors can't compete since they have nowhere to go.
 
 ## Principles for dealing with big customers
 
 The most important thing here is to remain focused on building the best product, not on what a single big customer needs.
 
 * **We don’t care about losing deals.** If we have to walk away from a deal because we'd have to compromise on these principles, we will. We can do this because we have a really strong growth engine with our ICP customers.
+
 * **We don't contract deliverables,** and we especially don't contract to provide deliverables by a certain date. This is because, on principle, a single customer is forcing us to build something.
+
 * **We will build things for a big customer, as long as we are confident they won’t be the only user of that thing.** Re-shuffling the roadmap order a bit could make sense - but adding new things that others wouldn't use, doesn't.
+
 * **Customers need to try PostHog before they expect us to change things.** We love feedback from customers. We don't love big requirement documents from people that haven't used our product before.
