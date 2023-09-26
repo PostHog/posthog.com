@@ -136,6 +136,17 @@ Over the next few months, we're planning to try out paid ads on G2 and Stack Ove
 
 ## What next?
 
+Experiment, experiment, experiment. Start by running 2-3 small experiments at a time across multiple channels. Each experiment will need ~$500 and 2 weeks to run to get meaningful data. 
+
+Which channels to start with depend slightly on the type of product you have. If you're completely unsure, I'd go:
+- Google Search - brand keywords (ie. your product's name)
+- Google Search - relevant keywords to your product
+- Twitter/Quora - cheap awareness campaigns
+
+Then you can branch out into other channels. For reference, at PostHog we got Google, Twitter, and LinkedIn going in the first couple of months, and then focused on getting good results from them. After that, we added new channels slowly - every 3 months or so - to make sure we were still doing a good job on existing channels. 
+
+## Moar reading
+
 - Make sure you're covering [all your marketing bases](/blog/dev-marketing-for-startups).
 
 - Read about [how our marketing team uses PostHog](/blog/posthog-marketing).
