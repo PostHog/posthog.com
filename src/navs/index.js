@@ -2766,7 +2766,7 @@ const menu = [
             {
                 name: 'Surveys',
                 icon: 'Message',
-                color: 'salmon',
+                color: 'green',
                 url: '/surveys',
                 children: [
                     { name: 'Features', url: '/surveys' },

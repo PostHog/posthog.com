@@ -1,6 +1,5 @@
 import React from 'react'
 import { IFeature, IFeatureGridProps } from './types'
-import * as PostHogIcons from '@posthog/icons'
 import * as ProductIcons from 'components/ProductIcons'
 import * as NotProductIcons from 'components/NotProductIcons'
 import * as PostHogIcons from '@posthog/icons'
