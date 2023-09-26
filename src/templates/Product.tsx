@@ -159,6 +159,7 @@ export default function Product({ data, location, pageContext }) {
     const {
         title,
         subtitle,
+        postHogDoesThat,
         description,
         productFeatures,
         productSections,
@@ -179,6 +180,7 @@ export default function Product({ data, location, pageContext }) {
                 pricingCTA={productPricingCTA}
                 title={title}
                 subtitle={subtitle}
+                postHogDoesThat={postHogDoesThat}
                 image={productHero}
                 customers={customers}
                 video={productHero?.video?.publicURL}
@@ -305,6 +307,7 @@ export const query = graphql`
             frontmatter {
                 title
                 subtitle
+                postHogDoesThat
                 description
                 productTeam
                 productBlog {
@@ -382,9 +385,11 @@ export const query = graphql`
                         }
                     }
                     sections {
+                        featuresType
                         features {
                             title
                             description
+                            icon
                         }
                     }
                     features {
@@ -392,6 +397,7 @@ export const query = graphql`
                         description
                     }
                     imageFrame
+                    hideImage
                     image {
                         childImageSharp {
                             gatsbyImageData

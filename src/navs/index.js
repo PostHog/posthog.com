@@ -2777,6 +2777,12 @@ const menu = [
                     { name: 'Questions', url: '/surveys/questions' },
                 ],
             },
+            {
+                name: 'Product OS',
+                icon: 'Stack',
+                color: 'salmon',
+                url: '/product-os',
+            },
         ],
     },
     pricingMenu,
