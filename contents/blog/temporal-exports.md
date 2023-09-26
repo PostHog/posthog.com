@@ -1,6 +1,6 @@
 ---
 title: Why and how we moved exports to Temporal
-date: 2023-09-19
+date: 2023-09-26
 author: ["tomas-farias", "ian-vanagas"]
 showTitle: true
 rootpage: /blog
