@@ -19,7 +19,7 @@ tags:
 
 There's no shortage of powerful open-source analytics tools. In this guide we've split them into two categories:
 
-- [Analytics tools](#the-best-open-source-analytics-tools) that collect data and help you understand user behavior. This includes product analytics platforms, but also web analytics, session recording, and AB testing tools.
+- [Self-hosted analytics tools](#the-best-open-source-analytics-tools) that collect data and help you understand user behavior. This includes product analytics platforms, but also web analytics, session recording, and AB testing tools.
 
 - [Dashboarding tools](#the-best-open-source-dashboard-and-bi-tools) that connect to data sources (e.g. a data warehouse) for building dashboards, insights, interactive visualizations, and real-time data logging.
 
