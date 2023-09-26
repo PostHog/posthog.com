@@ -355,5 +355,11 @@
         "image": "../../static/images/authors/contributor-posthog.png",
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/anna-debenham/"
+    },
+    {
+        "handle": "tomas-farias",
+        "name": "Tomás Farías Santana",
+        "role": "Software Engineer",
+        "image": "../../contents/images/team/tomas.png"
     }
 ]
