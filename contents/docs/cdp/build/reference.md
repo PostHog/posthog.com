@@ -357,7 +357,7 @@ async function runEveryMinute({ config }) {
     const metrics = await response.json()
 
   // posthog.capture is also available in apps by default
-    posthog.capture('github metrics', { 
+    posthog.capture('github_metrics', { 
         stars: metrics.stargazers_count,
         open_issues: metrics.open_issues_count,
         forks: metrics.forks_count,

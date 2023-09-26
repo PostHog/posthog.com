@@ -81,26 +81,11 @@
             "source": "/docs/tutorials/1-minute/integrate-with-gtm",
             "destination": "/docs/integrate/google-tag-manager"
         },
-        {
-            "source": "/docs/tutorials/1-minute/integrate-with-metabase",
-            "destination": "/docs/integrate/metabase"
-        },
-        {
-            "source": "/docs/tutorials/1-minute/integrate-with-nuxt-js",
-            "destination": "/docs/integrate/nuxt-js"
-        },
-        {
-            "source": "/docs/tutorials/1-minute/integrate-with-retool",
-            "destination": "/docs/integrate/retool"
-        },
-        {
-            "source": "/docs/tutorials/1-minute/integrate-with-shopify",
-            "destination": "/docs/integrate/shopify"
-        },
-        {
-            "source": "/docs/tutorials/1-minute/integrate-with-wordpress",
-            "destination": "/docs/integrate/wordpress"
-        },
+        { "source": "/docs/tutorials/1-minute/integrate-with-metabase", "destination": "/docs/integrate/metabase" },
+        { "source": "/docs/tutorials/1-minute/integrate-with-nuxt-js", "destination": "/docs/integrate/nuxt-js" },
+        { "source": "/docs/tutorials/1-minute/integrate-with-retool", "destination": "/docs/integrate/retool" },
+        { "source": "/docs/tutorials/1-minute/integrate-with-shopify", "destination": "/docs/integrate/shopify" },
+        { "source": "/docs/tutorials/1-minute/integrate-with-wordpress", "destination": "/docs/integrate/wordpress" },
         { "source": "/docs/configuring-posthog/email", "destination": "/docs/self-host/configure/email" },
         {
             "source": "/docs/configuring-posthog/environment-variables",
@@ -313,7 +298,7 @@
         { "source": "/handbook/company/branding", "destination": "/handbook/company/brand-assets" },
         { "source": "/docs/tutorials/:path*", "destination": "/tutorials/:path*" },
         { "source": "/docs/self-host/hobby-deployment", "destination": "/docs/self-host/deploy/hobby" },
-        { "source": "/handbook/engineering/ee-setup", "destination": "/docs/contribute/developing-locally" },
+        { "source": "/handbook/engineering/ee-setup", "destination": "/handbook/engineering/developing-locally" },
         {
             "source": "/docs/self-host/runbook/clickhouse/vertical_scaling",
             "destination": "/docs/self-host/runbook/clickhouse/vertical-scaling"
@@ -329,10 +314,7 @@
         { "source": "/handbook/engineering/mdx", "destination": "/handbook/engineering/posthog-com/mdx-setup" },
         { "source": "/docs/contribute/project-structure", "destination": "/handbook/engineering/project-structure" },
         { "source": "/docs/contribute/stack", "destination": "/handbook/engineering/stack" },
-        {
-            "source": "/tutorials/categories/session-recordings",
-            "destination": "/tutorials/categories/session-replay"
-        },
+        { "source": "/tutorials/categories/session-recordings", "destination": "/tutorials/categories/session-replay" },
         {
             "source": "/docs/contribute/contribute-to-website",
             "destination": "/handbook/engineering/posthog-com/developing-the-website"
@@ -366,41 +348,37 @@
         { "source": "/peterelbaum", "destination": "/?utm_campaign=peterelbaum" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
-        {
-            "source": "/docs/self-host/migrate-to-cloud",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
-        },
+        { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
         { "source": "/tutorials/categories/plugins", "destination": "/tutorials/categories/apps" },
         { "source": "/trial", "destination": "/pricing" },
         { "source": "/schedule-demo", "destination": "/book-a-demo" },
         { "source": "/apps/airbyte-export/docs", "destination": "/docs/apps/airbyte-export" },
         { "source": "/apps/amazon-kinesis/docs", "destination": "/docs/apps/amazon-kinesis" },
-        { "source": "/apps/automatic-cohort-creator/docs", "destination": "/docs/apps/automatic-cohort-creator" },
+        { "source": "/apps/automatic-cohort-creator/docs", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/apps/bigquery-export/docs", "destination": "/docs/apps/bigquery-export" },
         { "source": "/apps/bitbucket-release-tracker/docs", "destination": "/docs/apps/bitbucket-release-tracker" },
         { "source": "/apps/braze/docs", "destination": "/docs/apps/braze" },
-        { "source": "/apps/currency-normalization/docs", "destination": "/docs/apps/currency-normalization" },
+        { "source": "/apps/currency-normalization/docs", "destination": "/docs/apps" },
         { "source": "/apps/customer-io/docs", "destination": "/docs/apps/customer-io" },
-        { "source": "/apps/databricks/docs", "destination": "/docs/apps/databricks" },
+        { "source": "/apps/databricks/docs", "destination": "/docs/apps/" },
         { "source": "/apps/downsampling/docs", "destination": "/docs/apps/downsampling" },
-        { "source": "/apps/email-scoring/docs", "destination": "/docs/apps/email-scoring" },
+        { "source": "/apps/email-scoring/docs", "destination": "/docs/apps/" },
         { "source": "/apps/engage-connector/docs", "destination": "/docs/apps/engage-connector" },
         { "source": "/apps/event-sequence-timer/docs", "destination": "/docs/apps/event-sequence-timer" },
         { "source": "/apps/first-time-event-tracker/docs", "destination": "/docs/apps/first-time-event-tracker" },
         { "source": "/apps/geoip-enrichment/docs", "destination": "/docs/apps/geoip-enrichment" },
         { "source": "/apps/github-release-tracker/docs", "destination": "/docs/apps/github-release-tracker" },
-        { "source": "/apps/github-star-sync/docs", "destination": "/docs/apps/github-star-sync" },
         { "source": "/apps/gitlab-release-tracker/docs", "destination": "/docs/apps/gitlab-release-tracker" },
         { "source": "/apps/google-cloud-export/docs", "destination": "/docs/apps/google-cloud-export" },
         { "source": "/apps/google-pub-sub-connector/docs", "destination": "/docs/apps/google-pub-sub-connector" },
-        { "source": "/apps/heartbeat/docs", "destination": "/docs/apps/heartbeat" },
+        { "source": "/apps/heartbeat/docs", "destination": "/docs/apps/" },
         { "source": "/apps/hubspot-connector/docs", "destination": "/docs/apps/hubspot-connector" },
-        { "source": "/apps/ingestion-alert/docs", "destination": "/docs/apps/ingestion-alert" },
+        { "source": "/apps/ingestion-alert/docs", "destination": "/docs/apps" },
         { "source": "/apps/intercom/docs", "destination": "/docs/apps/intercom" },
         { "source": "/apps/migrator-3000/docs", "destination": "/docs/apps/migrator-3000" },
         { "source": "/apps/n8n/docs", "destination": "/docs/apps/n8n" },
-        { "source": "/apps/orbit/docs", "destination": "/docs/apps/orbit" },
-        { "source": "/apps/pagerduty-connector/docs", "destination": "/docs/apps/pagerduty-connector" },
+        { "source": "/apps/orbit/docs", "destination": "/docs/apps/" },
+        { "source": "/apps/pagerduty-connector/docs", "destination": "/docs/apps" },
         { "source": "/apps/postgres-export/docs", "destination": "/docs/apps/postgres-export" },
         { "source": "/apps/property-filter/docs", "destination": "/docs/apps/property-filter" },
         { "source": "/apps/property-flattener/docs", "destination": "/docs/apps/" },
@@ -420,11 +398,11 @@
         { "source": "/apps/timestamp-parser/docs", "destination": "/docs/apps/timestamp-parser" },
         { "source": "/apps/twilio/docs", "destination": "/docs/apps/twilio" },
         { "source": "/apps/twitter-followers/docs", "destination": "/docs/apps/twitter-followers" },
-        { "source": "/apps/unduplicator/docs", "destination": "/docs/apps/unduplicator" },
+        { "source": "/apps/unduplicator/docs", "destination": "/docs/cdp" },
         { "source": "/apps/url-normalizer/docs", "destination": "/docs/apps/url-normalizer" },
         { "source": "/apps/user-agent-populator/docs", "destination": "/docs/apps/user-agent-populator" },
         { "source": "/apps/variance-connector/docs", "destination": "/docs/apps/variance-connector" },
-        { "source": "/apps/zapier-connector/docs", "destination": "/docs/apps/zapier-connector" },
+        { "source": "/apps/zapier-connector/docs", "destination": "/docs/apps" },
         { "source": "/apps/zendesk-connector/docs", "destination": "/docs/apps/zendesk-connector" },
         { "source": "/blog/the-posthog-array-1-37-1", "destination": "/blog/the-posthog-array-1-37-0" },
         { "source": "/handbook/engineering/app-west", "destination": "/handbook/small-teams/experimentation" },
@@ -520,7 +498,7 @@
         { "source": "/docs/cloud/proxy", "destination": "/docs/integrate/proxy" },
         {
             "source": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/self-host/migrate/migrate-from-amplitude",
@@ -528,19 +506,19 @@
         },
         {
             "source": "/docs/self-host/migrate-from-postgres-to-clickhouse",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/migrate/migrate-to-another-self-hosted-instance",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
             "source": "/docs/migrate/migrate-between-cloud-and-self-hosted",
-            "destination": "/docs/migrate/migrate-between-posthog-instances"
+            "destination": "/docs/migrate/migrate-to-cloud"
         },
         { "source": "/handbook/product/pm-rampup", "destination": "/handbook/people/ramp-up/product-manager" },
         {
@@ -614,98 +592,29 @@
             "source": "/docs/architecture/ingestion-pipeline",
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
         },
-        {
-            "source": "/docs/self-host/deploy/hobby",
-            "destination": "/docs/self-host/open-source/deployment"
-        },
-        {
-            "source": "/docs/self-host/deploy/support",
-            "destination": "/docs/self-host/open-source/support"
-        },
-        {
-            "source": "/docs/self-host/deploy/hosting-costs",
-            "destination": "/docs/self-host/enterprise/hosting-costs"
-        },
-        {
-            "source": "/blog/using-posting",
-            "destination": "/blog/using-posthog"
-        },
-        {
-            "source": "/docs/libraries/slack",
-            "destination": "/manual/subscriptions"
-        },
-        {
-            "source": "/docs/integrate/client/snippet-installation",
-            "destination": "/docs/integrate"
-        },
-        {
-            "source": "/tutorials/feature-flags",
-            "destination": "/manual/feature-flags"
-        },
-        {
-            "source": "/tutorials/posthog-for-vuejs",
-            "destination": "/docs/libraries/vue-js"
-        },
-        {
-            "source": "/blog/categories/comparisons",
-            "destination": "/blog/tags/comparisons"
-        },
-        {
-            "source": "/blog/categories/guides",
-            "destination": "/blog/tags/guides"
-        },
-        {
-            "source": "/blog/categories/product-analytics",
-            "destination": "/blog/tags/product-analytics"
-        },
-        {
-            "source": "/blog/categories/product-analytics",
-            "destination": "/blog/tags/product-analytics"
-        },
-        {
-            "source": "/blog/categories/product-updates",
-            "destination": "/blog/tags/product-updates"
-        },
-        {
-            "source": "/blog/categories/release-notes",
-            "destination": "/blog/tags/release-notes"
-        },
-        {
-            "source": "/blog/categories/privacy",
-            "destination": "/blog/tags/privacy"
-        },
-        {
-            "source": "/blog/categories/open-source",
-            "destination": "/blog/tags/open-source"
-        },
-        {
-            "source": "/blog/tags/startups",
-            "destination": "/blog/categories/startups"
-        },
-        {
-            "source": "/docs/integrate/badge",
-            "destination": "/docs/contribute/badge"
-        },
-        {
-            "source": "/blog/introduction-to-customer-retention",
-            "destination": "/blog/customer-churn-analysis-guide"
-        },
-        {
-            "source": "/docs/getting-started/cloud",
-            "destination": "/docs/getting-started/start-here"
-        },
-        {
-            "source": "/docs/integrate/ingest-live-data",
-            "destination": "/docs/getting-started/send-events"
-        },
-        {
-            "source": "/enterprise",
-            "destination": "/contact-sales?edition=enterprise"
-        },
-        {
-            "source": "/docs/self-host/open-source/deployment",
-            "destination": "/docs/self-host"
-        },
+        { "source": "/docs/self-host/deploy/hobby", "destination": "/docs/self-host/open-source/deployment" },
+        { "source": "/docs/self-host/deploy/support", "destination": "/docs/self-host/open-source/support" },
+        { "source": "/docs/self-host/deploy/hosting-costs", "destination": "/docs/self-host/enterprise/hosting-costs" },
+        { "source": "/blog/using-posting", "destination": "/blog/using-posthog" },
+        { "source": "/docs/libraries/slack", "destination": "/manual/subscriptions" },
+        { "source": "/docs/integrate/client/snippet-installation", "destination": "/docs/integrate" },
+        { "source": "/tutorials/feature-flags", "destination": "/manual/feature-flags" },
+        { "source": "/tutorials/posthog-for-vuejs", "destination": "/docs/libraries/vue-js" },
+        { "source": "/blog/categories/comparisons", "destination": "/blog/tags/comparisons" },
+        { "source": "/blog/categories/guides", "destination": "/blog/tags/guides" },
+        { "source": "/blog/categories/product-analytics", "destination": "/blog/tags/product-analytics" },
+        { "source": "/blog/categories/product-analytics", "destination": "/blog/tags/product-analytics" },
+        { "source": "/blog/categories/product-updates", "destination": "/blog/tags/product-updates" },
+        { "source": "/blog/categories/release-notes", "destination": "/blog/tags/release-notes" },
+        { "source": "/blog/categories/privacy", "destination": "/blog/tags/privacy" },
+        { "source": "/blog/categories/open-source", "destination": "/blog/tags/open-source" },
+        { "source": "/blog/tags/startups", "destination": "/blog/categories/startups" },
+        { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
+        { "source": "/blog/introduction-to-customer-retention", "destination": "/blog/customer-churn-analysis-guide" },
+        { "source": "/docs/getting-started/cloud", "destination": "/docs/getting-started/start-here" },
+        { "source": "/docs/integrate/ingest-live-data", "destination": "/docs/getting-started/send-events" },
+        { "source": "/enterprise", "destination": "/contact-sales?edition=enterprise" },
+        { "source": "/docs/self-host/open-source/deployment", "destination": "/docs/self-host" },
         { "source": "/docs/integrate/android", "destination": "/docs/libraries/android" },
         { "source": "/docs/integrate/api", "destination": "/docs/libraries/api" },
         { "source": "/docs/integrate/curl", "destination": "/docs/libraries/curl" },
@@ -722,50 +631,23 @@
         { "source": "/docs/integrate/react-native", "destination": "/docs/libraries/react-native" },
         { "source": "/docs/integrate/ruby", "destination": "/docs/libraries/ruby" },
         { "source": "/docs/integrate/rust", "destination": "/docs/libraries/rust" },
-        {
-            "source": "/docs/integrate/identifying-users",
-            "destination": "/docs/product-analytics/identify"
-        },
-        {
-            "source": "/docs/integrate/user-properties",
-            "destination": "/docs/product-analytics/user-properties"
-        },
-        {
-            "source": "/docs/data/user-properties",
-            "destination": "/docs/product-analytics/user-properties"
-        },
+        { "source": "/docs/integrate/identifying-users", "destination": "/docs/product-analytics/identify" },
+        { "source": "/docs/integrate/user-properties", "destination": "/docs/product-analytics/user-properties" },
+        { "source": "/docs/data/user-properties", "destination": "/docs/product-analytics/user-properties" },
         {
             "source": "/docs/feature-flags/multivariate-flags",
-            "destination": "/docs/feature-flags/creating-feature-flag"
+            "destination": "/docs/feature-flags/creating-feature-flags"
         },
-        {
-            "source": "/docs/feature-flags/libraries",
-            "destination": "/docs/feature-flags/"
-        },
-        {
-            "source": "/docs/feature-flags/manual",
-            "destination": "/docs/feature-flags/installation"
-        },
+        { "source": "/docs/feature-flags/libraries", "destination": "/docs/feature-flags/" },
+        { "source": "/docs/feature-flags/manual", "destination": "/docs/feature-flags/installation" },
         {
             "source": "/docs/feature-flags/rollout-strategies",
             "destination": "/docs/feature-flags/creating-feature-flags"
         },
-        {
-            "source": "/docs/feature-flags/payloads",
-            "destination": "/docs/feature-flags/creating-feature-flags"
-        },
-        {
-            "source": "/docs/integrate",
-            "destination": "/docs/getting-started/install"
-        },
-        {
-            "source": "/docs/integrate/ingest-historic-data",
-            "destination": "/docs/migrate/ingest-historic-data"
-        },
-        {
-            "source": "/blog/categories/hogmail",
-            "destination": "/blog/categories/newsletter"
-        },
+        { "source": "/docs/feature-flags/payloads", "destination": "/docs/feature-flags/creating-feature-flags" },
+        { "source": "/docs/integrate", "destination": "/docs/getting-started/install" },
+        { "source": "/docs/integrate/ingest-historic-data", "destination": "/docs/migrate/ingest-historic-data" },
+        { "source": "/blog/categories/hogmail", "destination": "/blog/categories/newsletter" },
 
         { "source": "/docs/integrate/third-party/docusaurus", "destination": "/docs/libraries/docusaurus" },
         { "source": "/docs/integrate/third-party/gatsby", "destination": "/docs/libraries/gatsby" },
@@ -866,39 +748,39 @@
         { "source": "/roadmap/changelog/2023", "destination": "/changelog/2023" },
         { "source": "/changelog", "destination": "/changelog/2023" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
-        { "source": "/apps/advanced-geoip", "destination": "/cdp/advanced-geoip" },
+        { "source": "/apps/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
+        { "source": "/cdp/advanced-geoip", "destination": "/cdp/geoip-enrichment" },
         { "source": "/apps/airbyte-export", "destination": "/cdp/airbyte-export" },
         { "source": "/apps/amazon-kinesis", "destination": "/cdp/amazon-kinesis" },
-        { "source": "/apps/automatic-cohort-creator", "destination": "/cdp/automatic-cohort-creator" },
+        { "source": "/apps/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/apps/avo-inspector", "destination": "/cdp/avo-inspector" },
         { "source": "/apps/bigquery-export", "destination": "/cdp/bigquery-export" },
         { "source": "/apps/bitbucket-release-tracker", "destination": "/cdp/" },
-        { "source": "/apps/currency-normalization", "destination": "/cdp/currency-normalization" },
+        { "source": "/apps/currency-normalization", "destination": "/cdp/" },
         { "source": "/apps/customer-io", "destination": "/cdp/customer-io" },
-        { "source": "/apps/databricks", "destination": "/cdp/databricks" },
+        { "source": "/apps/databricks", "destination": "/cdp/" },
         { "source": "/apps/downsampling", "destination": "/cdp/downsampling" },
-        { "source": "/apps/email-scoring", "destination": "/cdp/email-scoring" },
+        { "source": "/apps/email-scoring", "destination": "/cdp/" },
         { "source": "/apps/engage-connector", "destination": "/cdp/engage-connector" },
         { "source": "/apps/event-sequence-timer", "destination": "/cdp/event-sequence-timer" },
         { "source": "/apps/filter-out", "destination": "/cdp/filter-out" },
         { "source": "/apps/first-time-event-tracker", "destination": "/cdp/first-time-event-tracker" },
         { "source": "/apps/geoip-enrichment", "destination": "/cdp/geoip-enrichment" },
         { "source": "/apps/github-release-tracker", "destination": "/cdp/github-release-tracker" },
-        { "source": "/apps/github-star-sync", "destination": "/cdp/github-star-sync" },
         { "source": "/apps/gitlab-release-tracker", "destination": "/cdp/gitlab-release-tracker" },
         { "source": "/apps/google-cloud-export", "destination": "/cdp/google-cloud-export" },
         { "source": "/apps/google-pub-sub-connector", "destination": "/cdp/google-pub-sub-connector" },
-        { "source": "/apps/heartbeat", "destination": "/cdp/heartbeat" },
+        { "source": "/apps/heartbeat", "destination": "/cdp/" },
         { "source": "/apps/hubspot-connector", "destination": "/cdp/hubspot-connector" },
-        { "source": "/apps/ingestion-alert", "destination": "/cdp/ingestion-alert" },
+        { "source": "/apps/ingestion-alert", "destination": "/cdp/" },
         { "source": "/apps/intercom", "destination": "/cdp/intercom" },
         { "source": "/apps/laudspeaker-connector", "destination": "/cdp/laudspeaker-connector" },
         { "source": "/apps/memphis-exporter", "destination": "/cdp/memphis-exporter" },
         { "source": "/apps/n8n", "destination": "/cdp/n8n" },
-        { "source": "/apps/orbit", "destination": "/cdp/orbit" },
+        { "source": "/apps/orbit", "destination": "/cdp/" },
         { "source": "/apps/outfunnel-exporter", "destination": "/cdp/outfunnel-exporter" },
         { "source": "/apps/pace-integration", "destination": "/cdp/pace-integration" },
-        { "source": "/apps/pagerduty-connector", "destination": "/cdp/pagerduty-connector" },
+        { "source": "/apps/pagerduty-connector", "destination": "/cdp/" },
         { "source": "/apps/patterns-connector", "destination": "/cdp/patterns-connector" },
         { "source": "/apps/postgres-export", "destination": "/cdp/postgres-export" },
         { "source": "/apps/property-filter", "destination": "/cdp/property-filter" },
@@ -923,7 +805,7 @@
         { "source": "/apps/timestamp-parser", "destination": "/cdp/timestamp-parser" },
         { "source": "/apps/twilio", "destination": "/cdp/twilio" },
         { "source": "/apps/twitter-followers", "destination": "/cdp/" },
-        { "source": "/apps/unduplicator", "destination": "/cdp/unduplicator" },
+        { "source": "/apps/unduplicator", "destination": "/cdp/" },
         { "source": "/apps/url-normalizer", "destination": "/cdp/url-normalizer" },
         { "source": "/apps/url-query", "destination": "/cdp/url-query" },
         { "source": "/apps/user-agent-populator", "destination": "/cdp/user-agent-populator" },
@@ -932,18 +814,19 @@
         { "source": "/apps/zendesk-connector", "destination": "/cdp/zendesk-connector" },
         { "source": "/apps/user-interview", "destination": "/apps/user-interviewer" },
         { "source": "/docs/apps/replicator", "destination": "/docs/cdp/replicator" },
-        { "source": "/docs/apps/advanced-geoip", "destination": "/docs/cdp/advanced-geoip" },
+        { "source": "/docs/apps/advanced-geoip", "destination": "/docs/cdp/geoip-enrichment" },
+        { "source": "/docs/cdp/advanced-geoip", "destination": "/docs/cdp/geoip-enrichment" },
         { "source": "/docs/apps/airbyte-export", "destination": "/docs/cdp/airbyte-export" },
         { "source": "/docs/apps/amazon-kinesis", "destination": "/docs/cdp/amazon-kinesis" },
-        { "source": "/docs/apps/automatic-cohort-creator", "destination": "/docs/cdp/automatic-cohort-creator" },
+        { "source": "/docs/apps/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/docs/apps/avo-inspector", "destination": "/docs/cdp/avo-inspector" },
         { "source": "/docs/apps/bigquery-export", "destination": "/docs/cdp/bigquery-export" },
         { "source": "/docs/apps/bitbucket-release-tracker", "destination": "/docs/cdp/bitbucket-release-tracker" },
-        { "source": "/docs/apps/currency-normalization", "destination": "/docs/cdp/currency-normalization" },
+        { "source": "/docs/apps/currency-normalization", "destination": "/docs/cdp" },
         { "source": "/docs/apps/customer-io", "destination": "/docs/cdp/customer-io" },
-        { "source": "/docs/apps/databricks", "destination": "/docs/cdp/databricks" },
+        { "source": "/docs/apps/databricks", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/downsampling", "destination": "/docs/cdp/downsampling" },
-        { "source": "/docs/apps/email-scoring", "destination": "/docs/cdp/email-scoring" },
+        { "source": "/docs/apps/email-scoring", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/engage-connector", "destination": "/docs/cdp/engage-connector" },
         { "source": "/docs/apps/event-sequence-timer", "destination": "/docs/cdp/event-sequence-timer" },
         { "source": "/docs/apps/filter-out", "destination": "/docs/cdp/filter-out" },
@@ -954,17 +837,17 @@
         { "source": "/docs/apps/gitlab-release-tracker", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/google-cloud-export", "destination": "/docs/cdp/google-cloud-export" },
         { "source": "/docs/apps/google-pub-sub-connector", "destination": "/docs/cdp/google-pub-sub-connector" },
-        { "source": "/docs/apps/heartbeat", "destination": "/docs/cdp/heartbeat" },
+        { "source": "/docs/apps/heartbeat", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/hubspot-connector", "destination": "/docs/cdp/hubspot-connector" },
-        { "source": "/docs/apps/ingestion-alert", "destination": "/docs/cdp/ingestion-alert" },
+        { "source": "/docs/apps/ingestion-alert", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/intercom", "destination": "/docs/cdp/intercom" },
         { "source": "/docs/apps/laudspeaker-connector", "destination": "/docs/cdp/laudspeaker-connector" },
         { "source": "/docs/apps/memphis-exporter", "destination": "/docs/cdp/memphis-exporter" },
         { "source": "/docs/apps/n8n", "destination": "/docs/cdp/n8n" },
-        { "source": "/docs/apps/orbit", "destination": "/docs/cdp/orbit" },
+        { "source": "/docs/apps/orbit", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/outfunnel-exporter", "destination": "/docs/cdp/outfunnel-exporter" },
         { "source": "/docs/apps/pace-integration", "destination": "/docs/cdp/pace-integration" },
-        { "source": "/docs/apps/pagerduty-connector", "destination": "/docs/cdp/pagerduty-connector" },
+        { "source": "/docs/apps/pagerduty-connector", "destination": "/docs/cdp" },
         { "source": "/docs/apps/patterns-connector", "destination": "/docs/cdp/patterns-connector" },
         { "source": "/docs/apps/postgres-export", "destination": "/docs/cdp/postgres-export" },
         { "source": "/docs/apps/property-filter", "destination": "/docs/cdp/property-filter" },
@@ -989,20 +872,14 @@
         { "source": "/docs/apps/timestamp-parser", "destination": "/docs/cdp/timestamp-parser" },
         { "source": "/docs/apps/twilio", "destination": "/docs/cdp/twilio" },
         { "source": "/docs/apps/twitter-followers", "destination": "/docs/cdp/twitter-followers" },
-        { "source": "/docs/apps/unduplicator", "destination": "/docs/cdp/unduplicator" },
+        { "source": "/docs/apps/unduplicator", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/url-normalizer", "destination": "/docs/cdp/url-normalizer" },
         { "source": "/docs/apps/url-query", "destination": "/docs/cdp/url-query" },
         { "source": "/docs/apps/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" },
         { "source": "/docs/apps/variance-connector", "destination": "/docs/cdp/variance-connector" },
-        { "source": "/docs/apps/zapier-connector", "destination": "/docs/cdp/zapier-connector" },
-        {
-            "source": "/questions/aliasing-device-i-ds-to-user-i-ds",
-            "destination": "/docs/product-analytics/identify"
-        },
-        {
-            "source": "/docs/data/identify",
-            "destination": "/docs/product-analytics/identify"
-        },
+        { "source": "/docs/apps/zapier-connector", "destination": "/docs/cdp/" },
+        { "source": "/questions/aliasing-device-i-ds-to-user-i-ds", "destination": "/docs/product-analytics/identify" },
+        { "source": "/docs/data/identify", "destination": "/docs/product-analytics/identify" },
         { "source": "/questions/how-do-i-trigger-custom-pageview", "destination": "/docs/data/events" },
         {
             "source": "/questions/what-does-pageview-means-scattered-across-the-site",
@@ -1047,26 +924,24 @@
         { "source": "/tutorials/tracking-teams", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/tutorials/revenue", "destination": "/tutorials" },
         { "source": "/tutorials/how-to-segment-users", "destination": "/tutorials/power-users" },
-        { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" }
-    ],
-    "rewrites": [
-        {
-            "source": "/community/profiles/:path*",
-            "destination": "/community/profiles/[id]/index.html"
-        },
-        { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
-        { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
-        { "source": "/careers/(.*)", "destination": "/careers" },
+        { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" },
+        { "source": "/tim", "destination": "/community/profiles/108" },
+        { "source": "/marius", "destination": "/community/profiles/1" },
+        { "source": "/raquel", "destination": "/community/profiles/491" },
+        { "source": "/jamesg", "destination": "/community/profiles/90" },
+        { "source": "/jams", "destination": "/community/profiles/90" },
+        { "source": "/docs/surveys/manual", "destination": "/docs/surveys" },
+        { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" },
         { "source": "/api", "destination": "/docs/api" },
         {
             "source": "/tutorials/experiments",
             "destination": "/docs/experiments/running-experiments-without-feature-flags"
         },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
-        { "source": "/docs/apps/feedback-widget", "destination": "/docs/surveys/manual" },
-        { "source": "/apps/user-interviewer", "destination": "/docs/surveys/manual" },
+        { "source": "/docs/apps/feedback-widget", "destination": "/docs/surveys/" },
+        { "source": "/apps/feedback-widget", "destination": "/docs/surveys" },
+        { "source": "/apps/user-interviewer", "destination": "/docs/surveys/" },
         { "source": "/jobs", "destination": "/careers" },
-        { "source": "/login", "destination": "https://app.posthog.com/login" },
         {
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
@@ -1074,6 +949,25 @@
         { "source": "/docs/data/data-management", "destination": "/docs/data" },
         { "source": "/docs/batch-exports", "destination": "/docs/cdp/batch-exports" },
         { "source": "/docs/batch-exports/s3", "destination": "/docs/cdp/batch-exports/s3" },
-        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" }
+        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" },
+        { "source": "/blog/startup-golioth", "destination": "/spotlight/startup-golioth" },
+        { "source": "/blog/startup-unified", "destination": "/spotlight/startup-unified" },
+        { "source": "/handbook/engineering", "destination": "/handbook/engineering/developing-locally" },
+        { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" },
+        { "source": "/docs/cdp/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
+        { "source": "/docs/cdp/unduplicator", "destination": "/docs/cdp" },
+        { "source": "/cdp/unduplicator", "destination": "/docs/cdp" },
+        { "source": "/handbook/strategy/overview", "destination": "/handbook/future" },
+        { "source": "/handbook/strategy/ideal-customer-persona", "destination": "/handbook/making-users-happy" },
+        { "source": "/handbook/strategy/business-model", "destination": "/handbook/how-we-make-money" },
+        { "source": "/handbook/strategy/objectives", "destination": "/handbook/help" },
+        { "source": "/handbook/strategy/investors", "destination": "/about" },
+        { "source": "/handbook/start-here", "destination": "/handbook/people/onboarding" }
+    ],
+    "rewrites": [
+        { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
+        { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
+        { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
+        { "source": "/careers/(.*)", "destination": "/careers" }
     ]
 }

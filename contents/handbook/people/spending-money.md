@@ -179,15 +179,19 @@ We do not pre-approve your travel expenses, and trust team members to make the r
 
 If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Grace or Charles.
 
-### Budget for socializing
+### Budget for working together/socializing
 
-As a global, all-remote team, we don't get many regular opportunities to socialize with each other outside of offsites.
+As a global, all-remote team, we don't get many regular opportunities to work with each other or socialize outside of offsites.
 
-We strongly encourage team members to try and meet up with each other in person when practical, and provide everyone with an $1500 quarterly budget to cover the cost of travel, accommodation, and meals. Beyond staying within the spending limit, please just spend the money in the best interests of the company (ie. not spending $500/night for 3 nights in a fancy hotel!).
+**Working together**
 
-We find that team members use this to visit each other when they live in geographically similar locations (e.g. a train journey or short flight away) or to go out for dinner when they happen to be passing through the same city. However there are no specific constraints on this. Feel free to post any upcoming travel plans in the #whereintheworld channel in Slack and see who is available to meet up!
+We strongly encourage team members to try and work together in person when practical, and provide everyone with an $1500 quarterly budget to cover the cost of travel, accommodation, and meals. This isn't limited to just working with people in your team, but we do expect that you have a reasonable reason you need to work together. Beyond staying within the spending limit, please just spend the money in the best interests of the company (ie. not spending $500/night for 3 nights in a fancy hotel!).
 
 This budget is _in addition_ to things like in-person onboarding and team offsites. Any unused budget does not roll over into the next quarter. 
+
+**Socializing**
+
+If you're in the same place as other team members, even if you aren't directly working together, PostHog will cover the cost of a dinner or a fun activity.  This will also come out of your $1500 quarterly budget. Again, just spend the money in the best interests of the company.
 
 ### Carbon offsetting
 

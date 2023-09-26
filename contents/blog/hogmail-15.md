@@ -24,8 +24,6 @@ category: Newsletter
 
 ## #tutorials-and-guides
 
-💸 [How to get Stripe revenue data into PostHog](https://posthog.com/tutorials/stripe-payment-data): How to import Stripe data and what to do once it's there.
-
 🔎 [Tracking pageviews in single page apps](https://posthog.com/tutorials/spa): All the ways to track pageviews in single page apps (SPA) using PostHog.
 
 📉 [How to calculate and lower churn rate with PostHog](https://posthog.com/tutorials/churn-rate): Master using session recordings, cohorts, and actions to lower churn.

@@ -139,18 +139,18 @@ if (posthog.isFeatureEnabled('new-groups-feature')) {
 ```
 
 ```python
-if posthog.feature_enabled("new-groups-feature", "[user distinct id]", groups={"company": "company_id_in_your_db"}):
+if posthog.feature_enabled("new-groups-feature", "user_distinct_id", groups={"company": "company_id_in_your_db"}):
     # Do something
 ```
 
 ```php
-if (PostHog::isFeatureEnabled('new-groups-feature', '[user distinct id]', false, array("company" => "company_id_in_your_db"))) {
+if (PostHog::isFeatureEnabled('new-groups-feature', 'user_distinct_id', false, array("company" => "company_id_in_your_db"))) {
     // Do something
 }
 ```
 
 ```node
-const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', '[user distinct id]', false, { company: 'company_id_in_your_db' })
+const isFlagEnabled = await posthog.isFeatureEnabled('new-groups-feature', 'user_distinct_id', false, { company: 'company_id_in_your_db' })
 
 if (isFlagEnabled) {
     // Toggle feature-flag specific behavior

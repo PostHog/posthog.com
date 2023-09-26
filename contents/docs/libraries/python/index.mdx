@@ -28,42 +28,6 @@ import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-
 
 <PythonSendEvents />
 
-#### Default overridden properties
-
-Before posthog-python v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
-
-As of posthog-python v3.0, the default now is to disregard the server IP, not add the GeoIP properties, and not use the values for feature flag evaluations.
-
-You can go back to previous behaviour by doing setting the `disable_geoip` argument in your initialization to `False`:
-
-```python
-
-posthog = Posthog('api_key', disable_geoip=False)
-
-```
-
-The list of properties that this overrides:
-
-1. $geoip_city_name
-2. $geoip_country_name
-3. $geoip_country_code
-4. $geoip_continent_name
-5. $geoip_continent_code
-6. $geoip_postal_code
-7. $geoip_time_zone
-
-
-You can also explicitly chose to override / not override properties for a single capture or feature flag request like so:
-
-
-```python
-posthog.capture('test id', 'test event', disable_geoip=True|False)
-```
-
-```python
-posthog.get_feature_flag("beta-feature", "distinct_id", disable_geoip=True|False)
-```
-
 ## Setting user properties
 
 To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
@@ -127,7 +91,7 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 -   Capture an event and associate it with a group
 
 ```python
-posthog.capture('[user distinct id]', 'some event', groups={'company': 'company_id_in_your_db'})
+posthog.capture('user_distinct_id', 'some_event', groups={'company': 'company_id_in_your_db'})
 ```
 
 -   Update properties on a group
@@ -140,6 +104,34 @@ posthog.group_identify('company', 'company_id_in_your_db', {
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+
+## GeoIP properties
+
+Before posthog-python v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
+
+As of posthog-python v3.0, the default now is to disregard the server IP, not add the GeoIP properties, and not use the values for feature flag evaluations.
+
+You can go back to previous behaviour by doing setting the `disable_geoip` argument in your initialization to `False`:
+
+```python
+posthog = Posthog('api_key', disable_geoip=False)
+```
+
+The list of properties that this overrides:
+
+1. $geoip_city_name
+2. $geoip_country_name
+3. $geoip_country_code
+4. $geoip_continent_name
+5. $geoip_continent_code
+6. $geoip_postal_code
+7. $geoip_time_zone
+
+You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
+
+```python
+posthog.capture('test_id', 'test_event', disable_geoip=True|False)
+```
 
 ## Serverless environments (Render/Lambda/...)
 

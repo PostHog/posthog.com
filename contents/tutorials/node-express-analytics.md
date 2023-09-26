@@ -275,7 +275,7 @@ First, let’s set up custom event capture. We’ll capture an event when the us
 app.post('/email', (req, res) => {
     client.capture({
         distinctId: req.body.email,
-        event: 'signed up',
+        event: 'signed_up',
         properties: {
             email: req.body.email
         }
@@ -317,7 +317,7 @@ Finally, use the cookie parser, along with a JSON parse to get the cookie object
 app.post('/email', (req, res) => {
     client.capture({
         distinctId: req.body.email,
-        event: 'signed up',
+        event: 'signed_up',
         properties: {
             email: req.body.email
         }

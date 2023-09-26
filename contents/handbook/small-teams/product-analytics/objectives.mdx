@@ -1,16 +1,12 @@
-## Q3 2023 Goals
+## Q4 2023 Goals
 
-1. Port all our insights over to HogQL.
-- make it possible to graph/chart/funnel _other_ data than just events (see: data warehouse)
-- adds a "to sql" button above every insight, giving users tools to investigate data integrity issues without involving support
-- makes it much easier to connect pieces of data in the app (persons modal -> show events not persons)
-- makes partially implemented features available across all insights (e.g. there's STILL no group name breakdowns in trends...)
-- makes it possible for insights on notebooks to be interlinked jupiter style (e.g. `select from {previous_chart_results} join {other_chart_results}`)
+1. Project "NoteForce Exploration 3000" (Michael, Thomas)
+  - Pair up with Team Monitoring to complete projects Data Exploration, Notebooks and PostHog 3000.
+  - Release new navigation and insight editor.
+  - Work more HogQL prompts into the interface.
+  - Build metrics into the system, introduce Metric Mondays.
 
-2. Sleeker insight editor UI
-- make insight filters compatible with PostHog 3000
-- make insight filters compatible with notebooks
-- consider a HogQL-powered "GUI" for multi-breakdowns
-- involve other app teams early
-
-
+2. Project "Finish the darned Query Engine" (Tom, Marius)
+  - Finish insight HogQL conversion.
+  - Support non-event data sources on HogQL insights (BI tools for data warehouse).
+  - Build tools to measure HogQL query performance, and catch regressions before they hit users.

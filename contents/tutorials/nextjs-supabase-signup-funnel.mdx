@@ -342,7 +342,7 @@ const Index = () => {
 
   if(user) {
     posthog.identify(user.email, user)
-    posthog.capture('loggedIn')
+    posthog.capture('logged_in')
   }
 
 ```

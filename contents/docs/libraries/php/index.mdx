@@ -97,8 +97,8 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 ```php
 PostHog::capture(array(
-    'distinctId' => '[user distinct id]',
-    'event' => 'some event',
+    'distinctId' => 'user_distinct_id',
+    'event' => 'some_event',
     '$groups' => array("company" => "company_id_in_your_db")
 ));
 ```

@@ -286,7 +286,12 @@ FullStory is _primarily_ a session replay tool, while PostHog is all-in-one plat
         <tr>
             <td><strong>Data retention</strong></td>
 		<td className="text-center">1 month<sup>*</sup></td>
-            <td className="text-center">3 weeks</td>
+            <td className="text-center">
+                <strong>PostHog Cloud (free):</strong> 1 month
+                <br />
+                <strong>PostHog Cloud (paid):</strong> 3 months
+                <br />
+            </td>
             <td></td>
         </tr>
         <tr>
@@ -385,22 +390,10 @@ Below are some of the most popular apps and integrations for FullStory and PostH
             <td>Export events for use in Zaps</td>
         </tr>
         <tr>
-            <td><strong>Shopify</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync customer and order data </td>
-        </tr>
-        <tr>
             <td><strong>Stripe</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Sync customer and invoice data</td>
-        </tr>
-        <tr>
-            <td><strong>PagerDuty</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive customized alerts from insights</td>
         </tr>
         <tr>
             <td><strong>Intercom</strong></td>

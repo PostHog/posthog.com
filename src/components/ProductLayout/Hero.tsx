@@ -5,6 +5,7 @@ import React from 'react'
 import { useLocation } from '@reach/router'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import { PricingCTA } from './CTA'
 
 export default function Hero({
     title,
@@ -54,9 +55,7 @@ export default function Hero({
                             <CallToAction to={mainCTA.url} size="md" className="">
                                 {mainCTA.title}
                             </CallToAction>
-                            <CallToAction type="secondary" to={pricingCTA.url} size="md" className="">
-                                {pricingCTA.title}
-                            </CallToAction>
+                            <PricingCTA {...pricingCTA} />
                         </div>
                     )}
                     {customers && customers.nodes.length > 0 && (

@@ -140,7 +140,7 @@ In `index.js`, set up a state for the call to action button and a `useEffect()` 
 
 To check the flag, import `useFeatureFlagEnabled` from `posthog-js/react`, use it to call the flag name (`main-cta`), and change the state of the button text to "Learn more" if `true`.
 
-> **Note:** Use `posthog.feature_flags.override({'main-cta': 'test'})` to make sure it is working, but remove it when we go to release.
+> **Note:** Use `posthog.featureFlags.override({'main-cta': 'test'})` to make sure it is working, but remove it when we go to release.
 
 ```js
 // pages/index.js
@@ -152,7 +152,7 @@ export default function Home() {
 
   const [ ctaState, setCtaState ] = useState('Click me')
   const posthog = usePostHog()
-  posthog.feature_flags.override({'main-cta': 'test'})
+  posthog.featureFlags.override({'main-cta': 'test'})
   const ctaVariant = useFeatureFlagVariantKey('main-cta')
 
   useEffect(() => {

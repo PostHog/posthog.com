@@ -17,7 +17,7 @@ Check the **feature flags tab** on [the persons page](https://app.posthog.com/pe
 
 ### 2. Check you're calling `identify()` before evaluating the flag
 
-If you're [identifying]((/docs/product-analytics/identify)) users, they may see a different value for a feature flag before and after you call `identify()`. 
+If you're [identifying](/docs/product-analytics/identify) users, they may see a different value for a feature flag before and after you call `identify()`. 
 
 To ensure they experience consistent behavior, check that you call `identify()` before evaluating the feature flag.
 
@@ -42,6 +42,38 @@ import FAQFalseOrNoneEvents from "./snippets/faq-false-or-none-events.mdx"
 ## How can I reduce the latency of feature flag requests on my server?
 
 Evaluating feature flags requires making a request to PostHog. However, you can [evaluate feature flags locally](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) instead – without having to make a request to PostHog.
+
+
+## How can I estimate the number of feature flag requests I'll be charged for?
+
+### Frontend SDKs
+
+We make a request to fetch feature flags (using the [`/decide` endpoint](https://posthog.com/docs/api/post-only-endpoints#feature-flags)) when:
+
+1. The PostHog SDK is initialized
+2. A user is [identified](/docs/data/identify) 
+3. A user's [properties](/docs/product-analytics/user-properties) are updated.
+4. You call `posthog.reloadFeatureFlags()` in your code.
+
+For the [JavaScript web SDK](/docs/libraries/js), you can estimate how many feature flag requests you will make by doing the following:
+
+1. Check the networks tab in Chrome inspector tools for the number of `/decide` requests.
+2. Find out your number of monthly page views
+3. Multiply the number your number of `/decide` requests by your monthly page views
+
+For example, if on refresh, you see 2 `/decide` requests per pageview and you have ~150,000 pageviews, your monthly feature flag requests should be around ~300,000.
+
+### Backend SDKS
+
+#### Without local evaluation 
+
+If you're not using [local evaluation](/docs/feature-flags/local-evaluation), a request to get feature flags is made every time you call `posthog.get_feature_flag()` on your backend. Your estimated usage will be however many times you are calling this code.
+
+#### With local evaluation
+
+If you're using [local evaluation](/docs/feature-flags/local-evaluation), each local evaluation request charges 10 credits and by default are made every 30 seconds. Assuming your server is constantly running and making 2 requests per minute, you will be charged `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
+
+> **Note:** This figure is for a single server and a single instance of PostHog. If you have multiple servers, PostHog instances, or a different poll duration, you need to multiply your estimates too.
 
 ## How can I reduce the cost of feature flags?
 

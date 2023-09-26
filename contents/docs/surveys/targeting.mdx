@@ -1,0 +1,16 @@
+---
+title: Targeting
+---
+
+## Survey targeting
+
+When you create a survey, it'll save as a draft until you're ready to launch it. You can target your survey to specific users based on:
+
+1. **Page URL contains.** You can target a survey to a specific page URL, or a page URL that contains a specific string. For example, you can target a survey to `https://posthog.com/docs` or `https://posthog.com/docs/*` with the string "/docs".
+2. **Selector.** You can target a survey based on whether a specific element appears on your page with either class name or ID. For example, you can target a survey with `#my-button` or `.my-button`.
+3. **Linked feature flag.** You can target a survey to users who have a specific feature flag enabled. For example, you're rolling out a new feature flag "new-landing-page" and want to gather feedback only from users who have that flag enabled.
+4. **User/group properties.** You can target a survey to users who have a specific user or group property. For example, you can target a survey to users who have a property `is_paying` set to `true`.
+
+> All targeting properties behave in a "AND" manner, meaning that a survey will only be shown to a user if _all_ of the above conditions are met.
+
+![Survey targeting](../../images/docs/surveys/targeting-options.png)

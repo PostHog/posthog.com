@@ -34,6 +34,7 @@ import TeamMembers from 'components/TeamMembers'
 import { CategoryData } from 'components/Blog/constants/categories'
 import { TutorialTags } from 'components/Tutorials/constants/tags'
 import { companyMenu, docsMenu } from '../navs'
+import { Emoji } from 'components/Emoji'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -247,6 +248,7 @@ export default function Handbook({
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
         TutorialTags,
+        Emoji,
         ...shortcodes,
     }
 
@@ -269,6 +271,7 @@ export default function Handbook({
                         </div>
                     }
                     menu={menu}
+                    menuWidth={{ left: 400 }}
                     sidebar={
                         <HandbookSidebar
                             contributors={contributors}

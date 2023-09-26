@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-HogQL is our take on SQL (Structured Query Language), a language used to manage and access data. HogQL is effectively a wrapper around ClickHouse SQL, with a few tweaks, such as simplified event and person property access.
+HogQL is our take on SQL (Structured Query Language), a language used to manage and access data. HogQL is effectively a wrapper around [ClickHouse SQL](https://clickhouse.com/docs/en/sql-reference), with a few tweaks, such as simplified event and person property access.
 
 **Is HogQL _real_ SQL?** Yes, it's a translation layer over ClickHouse SQL. You can use most ClickHouse features in HogQL, including JOINs and subqueries. To learn more about ClickHouse, and how it differs from traditional SQL databases, read [PostHog's ClickHouse Manual](https://posthog.com/handbook/engineering/clickhouse).
 
@@ -16,13 +16,15 @@ HogQL is our take on SQL (Structured Query Language), a language used to manage 
 
 ## HogQL expressions
 
-HogQL expressions can be used inside insights and dashboards as filters and/or breakdown values. When filtering or breaking down, select the "HogQL" tab, and add your expression.
+[HogQL expressions](/docs/hogql/expressions) enable you to directly access, filter, and breakdown your data using SQL. They can be used wherever event filters can including dashboards, trends, funnels, and the event explorer.
+
+To use them, select the "HogQL" tab when filtering or breaking down and add your expression.
 
 ![HogQL trends breakdown filter](../../images/features/hogql/trends-breakdown.png)
 
 ## SQL insights
 
-SQL insights enables you to create and edit insights using full SQL queries instead of the UI. Clicking the `{}` button in the top right corner of an insight shows you the SQL schema used to generate the insight which you can edit.
+[SQL insights](/docs/product-analytics/sql) enable you to create and edit insights using full SQL queries instead of the UI. Clicking the `{}` button in the top right corner of an insight shows you the SQL schema used to generate the insight which you can edit.
 
 ![HogQL SQL insight](../../images/features/hogql/insights-sql.png)
 
@@ -76,3 +78,4 @@ While in the public beta, the response format may still change.
 - [Guide to using HogQL](/docs/hogql/guide)
 - [Supported ClickHouse functions](/docs/hogql/clickhouse-functions)
 - [Supported aggregations](/docs/hogql/aggregations)
+- [Tutorials](/docs/hogql/tutorials)

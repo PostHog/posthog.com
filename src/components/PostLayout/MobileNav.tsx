@@ -105,7 +105,7 @@ export const MenuContainer = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed w-full h-full bg-accent/60 dark:bg-accent-dark/60 top-0 left-0 z-[999999]"
+            className="fixed w-full h-full bg-accent/60 dark:bg-accent-dark/60 top-0 left-0 z-[99999999]"
         >
             <motion.div
                 onClick={(e) => e.stopPropagation()}
@@ -192,7 +192,7 @@ export default function MobileNav() {
         <>
             <button
                 onClick={() => setOpen('menu')}
-                className="font-bold px-5 py-2 lg:hidden flex w-full items-center justify-between border-b border-border dark:border-border-dark group -mt-1"
+                className="font-bold px-5 py-2 md:hidden flex w-full items-center justify-between border-b border-border dark:border-border-dark group -mt-1"
             >
                 <span className="flex items-center space-x-2 group-active:top-[0.5px] group-active:scale-[.98] transition-all">
                     {menu?.parent?.name && <span>{menu?.parent?.name}</span>}

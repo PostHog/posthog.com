@@ -26,11 +26,14 @@ Click "Edit code" once the new worker has been saved following "Deploy". (And if
 const API_HOST = "app.posthog.com" // Change to "eu.posthog.com" for the EU region
 
 async function handleRequest(event) {
-    const pathname = new URL(event.request.url).pathname
+    const url = new URL(event.request.url)
+    const pathname = url.pathname
+    const search = url.search
+    const pathWithParams = pathname + search
     if (pathname.startsWith("/static/")) {
-        return retrieveStatic(event, pathname)
+        return retrieveStatic(event, pathWithParams)
     } else {
-        return forwardRequest(event, pathname)
+        return forwardRequest(event, pathWithParams)
     }
 }
 
@@ -43,10 +46,10 @@ async function retrieveStatic(event, pathname) {
     return response
 }
 
-async function forwardRequest(event, pathname) {
+async function forwardRequest(event, pathWithSearch) {
     const request = new Request(event.request)
     request.headers.delete("cookie")
-    return await fetch(`https://${API_HOST}${pathname}`, request)
+    return await fetch(`https://${API_HOST}${pathWithSearch}`, request)
 }
 
 addEventListener("fetch", (event) => {

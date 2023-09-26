@@ -36,7 +36,7 @@ Testing in production includes techniques like:
 
 - **Feedback and [surveys](/docs/surveys/manual):** Understanding how users are experiencing a product through qualitative feedback.
 
-- **Monitoring:** Tracking app, query and site performance, error rate, and logs.
+- **[Real user monitoring](/blog/real-user-monitoring):** Tracking app, query and site performance, error rate, and logs.
 
 - **Load, spike, soak testing:** Checking code for issues and performance when under a high volume or stressful load.
 

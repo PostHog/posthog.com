@@ -14,6 +14,10 @@ export const quickLinks = [
         to: '/docs/libraries/docusaurus',
     },
     {
+        name: 'Framer',
+        to: '/tutorials/framer-analytics',
+    },
+    {
         name: 'Gatsby',
         to: '/docs/libraries/gatsby',
     },
@@ -56,6 +60,10 @@ export const quickLinks = [
     {
         name: 'Vue.js',
         to: '/docs/libraries/vue-js',
+    },
+    {
+        name: 'Webflow',
+        to: '/tutorials/webflow',
     },
     {
         name: 'WordPress',
