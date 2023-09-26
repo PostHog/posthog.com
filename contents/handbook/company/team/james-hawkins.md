@@ -44,6 +44,7 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 - I can help you get constructive feedback on your performance.
 - I can help you figure out how to build relationships with people.
 - I can help you figure out what to do in your career.
+- I can give you design feedback on something you're working on.
 - I can help be a rubber duck.
 - I can help bounce ideas around.
 
@@ -53,27 +54,39 @@ I tend to work 9am to 5pm with an hour for lunch, then I have a gap to have dinn
 - Ship :) Lots of things will be on fire in a startup all the time. Make sure you're moving the needle every week.
 - Due to my role, it's easy for me to accidentally steer you. Sometimes this means your team will get confused. Be communicative back to your team if I've changed your direction. And you don't have to listen to me.
 
-### Personal strategy as of Q1 2023
+### Personal strategy for Q4 2023
 
-- make sure every team reaches an ["Innovating" state](https://danlebrero.com/2022/07/06/an-elegant-puzzle-systems-of-engineer-management-book-summary/)
-- encourage the company to increase overall adoption whilst not harming revenue growth rate
+- make sure every team reaches an ["Innovating" state](https://danlebrero.com/2022/07/06/an-elegant-puzzle-systems-of-engineer-management-book-summary/) and can work autonomously from the exec team
+- help build a better understanding of our top of funnel
+- help figure out if we can repeatedly land bigger deals
+- help teams figure out how to collaborate better on cross-team projects
+- help out with redesigning the app and content writing
 
 ### Execution todo
 
-- Clarify product strategy better over the next year
-  - This will make the next round of OKRs smoother and will reduce micromanagement
-  - Get us on the path to overtake our competitors, not to follow them
-- Make sure all teams that report to me reach an innovating state
-  - Encourage better Focus (vision, strategy, all hands, OKRs)
-  - More speed (encourage shipping early and iteration over huge PRs)
-  - Higher quality (design and marketing especially)
+- Get lots of big reference customers
+  - We will need our larger companies to adopt a lot of our products and to be happy with performance to be references next time we fundraise. Historically our performance for our biggest customers has been worse than the thousands of smaller ones.
+  - We are seeing more, larger, startups, coming in and expect this trend to continue as we ship a warehouse, ETL, BI etc. So we need to make sure the bigger ones are happy. We can use the revenue from these longer term to reduce pricing elsewhere to grow faster.
+  - I am joining bigger customers on regular calls to make sure I'm aware of what they need and so we collaborate with them.
+- Make sure each small team has strong leadership - we need to find a pipeline team leader
 - Personal
-  - 4 exercise (strength or cardio) sessions a week
-  - make sure planting is planned so I grow lots of my own food in the spring and summer
+  - Maintain current exercise regime - 2 x cardio, 3-4 x weights sessions a week - minimize plate changes when working out with Tim
+  - Grow my own veg for Christmas lunch
   
 ### Archived todo
 
 It makes me feel better crossing stuff out, rather than deleting it, thus:
+
+- ~~Make sure all teams that report to me reach an innovating state~~ Really pleased this happened. Now we need to figure this out for _all_ teams.
+  - ~~Encourage better Focus (vision, strategy, all hands, OKRs)~~
+  - ~~More speed (encourage shipping early and iteration over huge PRs)~~
+  - ~~Higher quality (design and marketing especially)~~
+- ~~Clarify product strategy better over the next year~~ I think we nailed this - tl;dr lots of products in one place.
+  - ~~This will make the next round of OKRs smoother and will reduce micromanagement~~ It did
+  - ~~Get us on the path to overtake our competitors, not to follow them~~ 100% certain we can do this now
+- ~~Personal~~
+  - ~~4 exercise (strength or cardio) sessions a week~~ Done. Pleased with myself. The key was not drinking and setting up a home gym so I had more energy and could find time.
+  - ~~make sure planting is planned so I grow lots of my own food in the spring and summer~~ Done. This went pretty well. Learned a lot for next year too.
 - ~~2 strength sessions a week~~ did more like 3-4
 - ~~1 bike ride a week. Note: solved this by commuting to pick up my daughter from nursery every week. Double win!~~
 - ~~Experiment with larger order values as opportunities arise. Note: hired someone to do this.~~
