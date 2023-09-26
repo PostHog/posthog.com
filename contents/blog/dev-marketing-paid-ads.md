@@ -26,7 +26,7 @@ I've split this into two sections - general misconceptions and then what we've l
 
 Paid ads are a _subset_ of marketing. Every time you talk about your product in _any_ kind of context, you are doing marketing. This includes your website, turning up to events, writing content, posting on Twitter, chatting in an external Discord group, creating a YouTube tutorial, etc.
 
-This means taking paid ads seriously, but don't spend all your time here. At PostHog, paid ads take up ~10-20% of our marketing team's time in an everage week. We spend 60%+ on writing. 
+This means taking paid ads seriously, but don't spend all your time here. At PostHog, paid ads take up ~10-20% of our marketing team's time in an average week. We spend 60%+ on writing. 
 
 ### All paid ads are basically the same
 
