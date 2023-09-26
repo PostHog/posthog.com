@@ -22,7 +22,8 @@ const OpenSourceDescription = () => {
 const EnterpriseDescription = () => {
     return (
         <ul className={descriptionClassName}>
-            <li className={descriptionItemClassName}>SAML, extra security, compliance, and permissioning features.</li>
+            <li className={descriptionItemClassName}>SSO enforcement and SAML SSO.</li>
+            <li className={descriptionItemClassName}>Compliance and advanced permissioning features.</li>
             <li className={descriptionItemClassName}>Dedicated support, training, and custom pricing. </li>
         </ul>
     )
