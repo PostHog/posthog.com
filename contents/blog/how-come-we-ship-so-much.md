@@ -82,7 +82,7 @@ We tend to hire people with more experience, who we find tend to work better wit
 
 I went to a superb talk by Jeff Lawson (who runs Twilio), who felt the greatest innovation at Amazon was how it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
 
-PostHog works like a group of startups. For each of our products, there is a team of up to 6, who can ship with minimal intereference from the rest of the company. We hire a lot of ex technical founders to help here.
+PostHog works like a group of startups. For each of our products, there is a team of up to 6, who can ship with minimal interference from the rest of the company. We hire a lot of ex technical founders to help here.
 
 ## Nearly everyone is an engineer
 
