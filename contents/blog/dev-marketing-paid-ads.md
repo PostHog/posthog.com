@@ -34,7 +34,7 @@ Very crudely, your ads will have one of two objectives - _conversion_ or _awaren
 
 Conversion means that you want people to click on your ad and then do something like sign up for your product. You can define conversion how you like - this is just a typical example. Conversion is easy to measure, which is why marketers like it. However, you are generally only _capturing_ demand from people already aware of your product. 
 
-Awareness means you want people to see your ad. Maybe they won't click on it - that's ok. Your objective is to just get the word out so that someone is exposed to your product enough times that at some point they Google 'super cool product' and come sign up. Awareness-based ads are a small part of _creating_ demand. Awareness takes more effort to measure, but is totally possible - see below.  
+Awareness means you want people to see your ad. Maybe they won't click on it - that's ok. Your objective is to just get the word out so that someone is exposed to your product enough times that at some point they Google 'super cool product' and come sign up. Awareness-based ads are a small part of _creating_ demand. This takes more effort to measure, but is totally possible - see below.  
 
 We split our budget 50-50 between the two. This is not a 'rule' - just don't spend it all on conversion. 
 
