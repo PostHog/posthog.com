@@ -2299,8 +2299,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Adding your code',
-                    url: '/docs/surveys/adding-surveys-code',
+                    name: 'Implementing custom surveys',
+                    url: '/docs/surveys/implementing-custom-surveys',
                     icon: 'Code',
                     color: 'salmon',
                 },
