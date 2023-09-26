@@ -27,6 +27,7 @@ export const PricingCalculator = () => {
         eventNumber,
         featureFlagSliderValue,
         featureFlagNumber,
+        featureFlagCost,
     } = useValues(pricingSliderLogic)
     const { setSessionRecordingSliderValue, setSliderValue, setFeatureFlagSliderValue } = useActions(pricingSliderLogic)
 
@@ -101,6 +102,9 @@ export const PricingCalculator = () => {
                                 />
                             </div>
                         </div>
+                        <div className="border-b border-border dark:border-dark p-2 text-center">
+                            <span className="text-lg font-bold">${sessionRecordingCost.toLocaleString()}</span>
+                        </div>
                         <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
                             <span className="w-5 h-5 flex absolute top-3 left-3">{<FeatureFlags />}</span>
                             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
@@ -122,7 +126,7 @@ export const PricingCalculator = () => {
                             </div>
                         </div>
                         <div className="border-b border-border dark:border-dark p-2 text-center">
-                            <span className="text-lg font-bold">${sessionRecordingCost.toLocaleString()}</span>
+                            <span className="text-lg font-bold">${featureFlagCost.toLocaleString()}</span>
                         </div>
                         <div className="col-span-3 p-4">
                             <strong>Monthly estimate</strong>
