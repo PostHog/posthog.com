@@ -38,4 +38,6 @@ We have zero outbound sales, and a hyper efficient go-to-market, largely driven 
 
 When you're doing engineering, you're in the business of building up large, abstracted models in your head of how the code works. That takes time and requires focus. Doing a ton of meetings is a great way to screw this up.
 
-For those not doing customer success or recruitment (ie: mainly engineering and marketing), we therefore have meeting-free days every Tuesday and Thursday. We encourage you to call it out if things are going into your calendar on these days. Since we also are all remote, these usually give you lengths of uninterrupted time to get your work done.
+We therefore have meeting-free days every Tuesday and Thursday. We encourage you to call it out if things are going into your calendar on these days. Since we also are all remote, these usually give you lengths of uninterrupted time to get your work done.
+
+(The only exceptions to this rule are for customer success and recruitment who may need to have external meetings with users/candidates on these days in order to do their jobs!)
