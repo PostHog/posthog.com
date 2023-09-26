@@ -480,21 +480,21 @@ That's it! Our survey is ready to go!
 
 ### Option 2: Use PostHog's prebuilt survey UI
 
-Alternatively, if you find it tedious to build and maintain your own UI, you can simply use PostHog's prebuilt surveys. 
-
-To do so, set display mode to **`Popover`** when creating your survey.
+Alternatively, if you find it tedious to build and maintain your own UI, you can simply use PostHog's prebuilt surveys. There are variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and PostHog will handle all the display logic and event capturing for you.
+ 
+To create a survey with a prebuilt UI, set the display mode to **`Popover`** when creating your survey. There are no further code changes needed!
 
 ![Popover survey set up](../images/tutorials/react-surveys/create-popover-survey.png)
 
-There are variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and PostHog will handle all the display logic and event capturing for you.
-
-### Viewing results
+## Viewing results
 
 After interacting with your survey, you can view results by selecting the survey from the [surveys tab](https://app.posthog.com/surveys). You'll see data on:
 
 - How many users have seen the survey.
 - How many users have dismissed the survey.
 - Responses.
+
+You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 ![Popover survey set up](../images/tutorials/react-surveys/survey-results.png)
 
