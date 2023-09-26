@@ -2,7 +2,7 @@ import cntl from 'cntl'
 import { Discount } from 'components/NotProductIcons'
 import { LogSlider } from 'components/Pricing/PricingSlider/LogSlider'
 import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { Analytics, SessionRecording } from 'components/ProductIcons'
+import { Analytics, SessionRecording, FeatureFlags } from 'components/ProductIcons'
 import { useActions, useValues } from 'kea'
 import React, { useEffect } from 'react'
 import Link from 'components/Link'
@@ -25,8 +25,10 @@ export const PricingCalculator = () => {
         monthlyTotal,
         sessionRecordingEventNumber,
         eventNumber,
+        featureFlagSliderValue,
+        featureFlagNumber,
     } = useValues(pricingSliderLogic)
-    const { setSessionRecordingSliderValue, setSliderValue } = useActions(pricingSliderLogic)
+    const { setSessionRecordingSliderValue, setSliderValue, setFeatureFlagSliderValue } = useActions(pricingSliderLogic)
 
     useEffect(() => {
         setSliderValue(13.815510557964274)
@@ -96,6 +98,26 @@ export const PricingCalculator = () => {
                                     max={500000}
                                     onChange={(value) => setSessionRecordingSliderValue(value)}
                                     value={sessionRecordingSliderValue}
+                                />
+                            </div>
+                        </div>
+                        <div className="border-b border-light dark:border-dark col-span-3 p-2 pl-10 relative">
+                            <span className="w-5 h-5 flex absolute top-3 left-3">{<FeatureFlags />}</span>
+                            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
+                                <strong>Feature flags</strong>
+                                <span>
+                                    <span className="text-lg font-bold">{featureFlagNumber.toLocaleString()}</span>{' '}
+                                    <span className="opacity-60 text-sm">requests</span>
+                                </span>
+                            </div>
+                            <div className="pt-4 pb-6">
+                                <LogSlider
+                                    stepsInRange={100}
+                                    marks={[1000000, 10000000, 100000000, 1000000000]}
+                                    min={1000000}
+                                    max={1000000000}
+                                    onChange={(value) => setFeatureFlagSliderValue(value)}
+                                    value={featureFlagSliderValue}
                                 />
                             </div>
                         </div>
