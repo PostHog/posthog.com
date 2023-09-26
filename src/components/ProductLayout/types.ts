@@ -98,6 +98,7 @@ export interface ISection {
     subtitle?: string
     features?: IFeature[]
     image?: ImageDataLike
+    hideImage?: boolean
     content?: string
     align?: string
     sections?: ISection[]
