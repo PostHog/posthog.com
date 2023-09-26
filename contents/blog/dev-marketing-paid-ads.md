@@ -122,6 +122,7 @@ Not 'paid ads' in the traditional sense, but I wanted to share a few creators wh
 - [Tech Lead Digest](https://techleaddigest.net/), [Programming Digest](https://programmingdigest.net/)
 - [Software Lead Weekly](https://softwareleadweekly.com/)
 - [Architecture Notes](https://architecturenotes.co/)
+- [Hackernewsletter](https://hackernewsletter.com/)
 
 Smaller newsletters that we also have supported:
 
