@@ -104,7 +104,7 @@ For non-God tier product people, such as me, I think it's easier to build a bett
 
 ## We raised venture capital
 
-Obviously, this matters. We didn't raise a ridiculous amount - we have done a $3M seed, $9M series A and a $15M series B. We have a lot of it left and will be profitable next year.
+Obviously, this matters. We didn't raise or spend a ridiculous amount compared to other companies we compete with - we have done a $3M seed, $9M series A and a $15M series B. We have a lot of it left and will be profitable next year.
 
 Raising money does let build more stuff, but if you _should_ is very questionable and a topic for another time.
 
