@@ -40,7 +40,9 @@ Awareness means you want people to see your ad. Maybe they won't click on it - t
 
 Everyone who works at a tech company basically thinks they are immune to ads because they are super smart and have never seen an ad for a new product, clicked on it, and then signed up. Your _quantitative_ attribution data in PostHog or whatever analytics tool you are using will seem to back this up. 
 
-This is why we ask all users where they heard about PostHog whenever they sign up or book a demo. Enough of them say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of users. Especially ones with money. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place. 
+This is why we ask all users where they heard about PostHog whenever they sign up or book a demo - it's a simple (optional) free text field. Enough of them say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of users. Especially ones with money. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place. 
+
+(Alternatively, you could argue paid ads don't work because everyone uses adblock. However, remember a lot of people use a work computer where installing adblock isn't an option. Don't assume everyone works at a startup like you where you can install what you like.)
 
 ### An agency will solve all your problems
 
@@ -52,29 +54,81 @@ I personally like [the Demand Curve program](https://www.demandcurve.com/growth-
 
 ## Channel-by-channel tips
 
+This is not a comprehensive guide on how to set up each channel (use Demand Curve or similar for this) - these are just some non-obvious things we wish we'd known at the start. 
+
 ### Google Search
+
+- Good for conversion, bad for awareness.
+- Do not let Google enable any of their bullshit AI-type suggested/dynamic/whatever keyword generator tools - they always result in weirdly worded ads that were clearly not written by a human. Use your _own_ research about what keywords your target user is likely to search for, not what Google suggests. 
+- If you have an SEO article that ranks well (top 3) make sure you aren't bidding on the same keywords - it's wasted money.
+- Bidding on your own brand may feel like a waste of money, but it's super cheap and defends you against competitor ads. 
 
 ### Google Display
 
+- Good if you a) want to attract bots and irrelevant 'conversions', and b) you want not control about where Google serves them. Do not be seduced by the incredible cheap cost per acquisition (CPA). Avoid. 
+
 ### Twitter
+
+- Good for awareness, bad for conversion.
+- We prefer promoting our own organic tweets over creating specific ads.
+- Good paid channel for reaching devs generally.
+- Cheap but the targeting is quite basic (Twitter make you think it's much more sophisticated than it is). 
 
 ### LinkedIn
 
+- Good for awareness, bad for conversion.
+- It is very easy to do ads that stand out here because 90% are so boring and corporate.
+- Good paid channel for reaching founder-type devs - people who are more self-promotery basically.
+- Expensive but hands-down the best targeting of any platform. 
+
 ### Reddit
+
+- Very cheap but useless. Very rudimentary ad tools.
+- Invest the time in being an active member of relevant subreddits where you contribute actual value to those people. This takes a lot more work, but it's also fun if you can do Reddit as part of your job. 
 
 ### Quora
 
+- Dark horse - good for conversion and awareness.
+- Quite cheap, good targeting.
+- Seriously, I don't know why more people don't use Quora. 
+
 ### Product Hunt
+
+- Good for awareness and conversion _if_ you have a cheap (<$10/mo) product.
+- Full of indiehackers/entrepreneurs/wannapreneurs, most of whom do not want to spend any money.
+- Kinda ok targeting but the majority of the audience is non-technical. 
 
 ### Carbon Ads
 
+- Expensive. Lots of people rave about them. We don't.
+- We got neither awareness nor conversion when we ran campaigns there.
+
 ### Bing
+
+- Fun fact - this is the only route to advertise on DuckDuckGo!
+- Unfun fact - you can only advertise on the Bing ads network, and they decide where the ads go. You can't say 'serve ads on DuckDuckGo only'.
+- Quite cheap. Good only if you want to target users at large enterprises where they are forced to use Bing. 
 
 ### Sponsoring newsletters
 
+Not 'paid ads' in the traditional sense, but I wanted to share a few creators who write genuinely good content and we've had success working with. You're looking at $1,000-$10,000 per issue depending on reach. Aim to do short bursts of activity, not long-running campaigns (as you'll saturate their audience):
+
+- [TLDR](https://tldr.tech/)
+- [Pointer](https://www.pointer.io/)
+- [Bytes](https://bytes.dev/), [React newsletter](https://reactnewsletter.com/)
+- [Tech Lead Digest](https://techleaddigest.net/), [Programming Digest](https://programmingdigest.net/)
+- [Software Lead Weekly](https://softwareleadweekly.com/)
+- [Architecture Notes](https://architecturenotes.co/)
+
+Smaller newsletters that we also have supported:
+
+- [Level Up](https://levelup.patkua.com/)
+- [Console](https://console.dev/)
+- [FOSS Weekly](https://fossweekly.beehiiv.com/)
+
 ### A couple we haven't tried yet
 
-Over the next few months, we're planning to try out paid ads on G2 and Stack Overflow. We think G2 will be useful for reaching larger companies who are running more formal processes to replace their tools by trying several options first. Stack Overflow we have heard is (anecdotally) good for general awareness-building, but not conversion. Both are quite expensive but very focused options to consider for dev tools. 
+Over the next few months, we're planning to try out paid ads on G2 and Stack Overflow. We think G2 will be useful for reaching larger companies who are running more formal processes to replace their tools by trying several options first. Stack Overflow we have heard is (anecdotally) good for general awareness-building, but not conversion. Both are quite expensive but very focused options to consider for dev tools. I'll update this article with our findings!
 
 ## What next?
 
