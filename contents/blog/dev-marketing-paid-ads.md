@@ -14,7 +14,7 @@ tags:
   - Guides
 ---
 
-Since starting PostHog in 2020, we’ve learned a bunch about what does and doesn’t work when it comes to [marketing to engineers](/dev-marketing-for-startups). Paid ads is a slightly scary area because it is _very_ easy to waste a bunch of money doing stuff that doesn't work. And a lot of it doesn't work. 
+Since starting PostHog in 2020, we’ve learned a bunch about what does and doesn’t work when it comes to [marketing to engineers](/blog/dev-marketing-for-startups). Paid ads is a slightly scary area because it is _very_ easy to waste a bunch of money doing stuff that doesn't work. And a lot of it doesn't work. 
 
 In this article, my intention is to share specific, actionable advice for early-stage startups building dev tools in particular. I'm assuming that you've already decided that running paid ads is something that makes sense for your company. 
 
