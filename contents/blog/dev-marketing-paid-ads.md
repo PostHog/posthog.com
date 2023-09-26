@@ -14,9 +14,9 @@ tags:
   - Guides
 ---
 
-Since starting PostHog in 2020, we’ve learned a bunch about what does and doesn’t work when it comes to [marketing to engineers](/dev-marketing-for-startups). Paid ads is a slightly scary area because it is _very_ easy to waste a bunch of money doing stuff that doesn't work. 
+Since starting PostHog in 2020, we’ve learned a bunch about what does and doesn’t work when it comes to [marketing to engineers](/dev-marketing-for-startups). Paid ads is a slightly scary area because it is _very_ easy to waste a bunch of money doing stuff that doesn't work. And a lot of it doesn't work. 
 
-In this article, my intention is to share specific, actionable advice for early-stage startups building dev tools in particular. 
+In this article, my intention is to share specific, actionable advice for early-stage startups building dev tools in particular. I'm assuming that you've already decided that running paid ads is something that makes sense for your company. 
 
 I've split this into two sections - general misconceptions and then what we've learned, channel-by-channel. 
 
@@ -26,7 +26,7 @@ I've split this into two sections - general misconceptions and then what we've l
 
 Paid ads are a _subset_ of marketing. Every time you talk about your product in _any_ kind of context, you are doing marketing. This includes your website, turning up to events, writing content, posting on Twitter, chatting in an external Discord group, creating a YouTube tutorial, etc.
 
-This means taking paid ads seriously, but don't spend all your time here. At PostHog, paid ads take up ~10-20% of our marketing team's time in an average week. We spend 60%+ on writing. 
+This means taking paid ads seriously (because of the $$$), but don't spend all your time here. At PostHog, paid ads take up ~10% of our marketing team's time in an average week. We spend 80%+ on writing. 
 
 ### All paid ads are basically the same
 
@@ -36,13 +36,13 @@ Conversion means that you want people to click on your ad and then do something 
 
 Awareness means you want people to see your ad. Maybe they won't click on it - that's ok. Your objective is to just get the word out so that someone is exposed to your product enough times that at some point they Google 'super cool product' and come sign up. Awareness-based ads are a small part of _creating_ demand. Awareness takes more effort to measure, but is totally possible - see below.  
 
+We split our budget 50-50 between the two. This is not a 'rule' - just don't spend it all on conversion. 
+
 ### Paid ads don't work on developers
 
-Everyone who works at a tech company basically thinks they are immune to ads because they are super smart and have never seen an ad for a new product, clicked on it, and then signed up. Your _quantitative_ attribution data in PostHog or whatever analytics tool you are using will seem to back this up. 
+Everyone who works at a tech company basically thinks they are immune to ads because they are super good at internetting, and have never seen an ad for a new product, clicked on it, and then signed up. Your _quantitative_ attribution data in PostHog or whatever analytics tool you are using will seem to back this up. 
 
-This is why we ask all users where they heard about PostHog whenever they sign up or book a demo - it's a simple (optional) free text field. Enough of them say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of users. Especially ones with money. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place. 
-
-(Alternatively, you could argue paid ads don't work because everyone uses adblock. However, remember a lot of people use a work computer where installing adblock isn't an option. Don't assume everyone works at a startup like you where you can install what you like.)
+This is why we ask all users where they heard about PostHog whenever they sign up or book a demo - it's a simple (optional) free text field. Enough of our users say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of them. Especially ones with money to spend on behalf of their company. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place. 
 
 ### An agency will solve all your problems
 
@@ -65,7 +65,9 @@ This is not a comprehensive guide on how to set up each channel (use Demand Curv
 
 ### Google Display
 
-- Good if you a) want to attract bots and irrelevant 'conversions', and b) you want not control about where Google serves them. Do not be seduced by the incredible cheap cost per acquisition (CPA). Avoid. 
+- Good if you a) want to attract bots and irrelevant 'conversions', and b) you want zero control over where Google actually shows them (hello spammy healthcare Android apps!).
+- Do not be seduced by the incredible cheap cost per acquisition (CPA).
+- Avoid. 
 
 ### Twitter
 
@@ -78,13 +80,14 @@ This is not a comprehensive guide on how to set up each channel (use Demand Curv
 
 - Good for awareness, bad for conversion.
 - It is very easy to do ads that stand out here because 90% are so boring and corporate.
-- Good paid channel for reaching founder-type devs - people who are more self-promotery basically.
+- Good paid channel for reaching founder-type devs - and people who are more self-promotery, basically.
 - Expensive but hands-down the best targeting of any platform. 
 
 ### Reddit
 
-- Very cheap but useless. Very rudimentary ad tools.
-- Invest the time in being an active member of relevant subreddits where you contribute actual value to those people. This takes a lot more work, but it's also fun if you can do Reddit as part of your job. 
+- Very cheap but poor for awareness or conversion. Very rudimentary ad tools.
+- Instead, invest the time in being an active member of relevant subreddits where you contribute actual value to those people. This takes a lot more work.
+- Redditors hate ads nearly as much as HN readers do. Nearly. 
 
 ### Quora
 
@@ -96,7 +99,7 @@ This is not a comprehensive guide on how to set up each channel (use Demand Curv
 
 - Good for awareness and conversion _if_ you have a cheap (<$10/mo) product.
 - Full of indiehackers/entrepreneurs/wannapreneurs, most of whom do not want to spend any money.
-- Kinda ok targeting but the majority of the audience is non-technical. 
+- Kinda ok targeting but the majority of the audience is non-technical - tread carefully. 
 
 ### Carbon Ads
 
@@ -137,5 +140,3 @@ Over the next few months, we're planning to try out paid ads on G2 and Stack Ove
 - Read about [how our marketing team uses PostHog](/blog/posthog-marketing).
 
 - Check out [PostHog’s Marketing Handbook](/handbook/growth/marketing) – and copy it if you want to!
-
-- Have money? Hire someone who can write content and has a deep understanding of SEO. Do not hire an SEO consultant. Don’t have money? Learn how to SEO good with [Ahrefs](https://ahrefs.com/seo) (chapters 6 and 7 are wayyy less important).
