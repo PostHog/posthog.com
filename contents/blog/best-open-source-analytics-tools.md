@@ -1,6 +1,6 @@
 ---
 date: 2023-09-13
-title: The 14 best open-source (and self-hosted) analytics tools
+title: The best open-source analytics tools you can self-host
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -17,13 +17,13 @@ tags:
 ---
 **Author:** [Andy Vandervell](https://posthog.com/community/profiles/62)
 
-There's no shortage of high-quality open-source analytics tools. In this guide we've split them into two categories:
+There's no shortage of powerful open-source analytics tools. In this guide we've split them into two categories:
 
-- [Analytics tools](#the-best-open-source-analytics-tools) that collect data and help you understand user behavior. This includes product analytics platforms, but also web analytics, session recording, and AB testing tools.
+- [Self-hosted analytics tools](#the-best-open-source-analytics-tools) that collect data and help you understand user behavior. This includes product analytics platforms, but also web analytics, session recording, and AB testing tools.
 
 - [Dashboarding tools](#the-best-open-source-dashboard-and-bi-tools) that connect to data sources (e.g. a data warehouse) for building dashboards, insights, interactive visualizations, and real-time data logging.
 
-We've chosen each entry carefully based on a broad range factors, community size and activity, our own experience using them, and publicly available feedback.
+We've chosen each entry carefully based on a broad range factors, such as community size and activity, our own experience using them, and publicly available feedback.
 
 We have separate guides on [open-source feature flag tools](/blog/best-open-source-feature-flag-tools) and [open-source AB testing products](/blog/best-open-source-ab-testing-tools).
 
