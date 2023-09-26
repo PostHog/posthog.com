@@ -4,7 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
-**TL;DR:** $100 million ARR by 2026, working backwards
+**TL;DR:** Mid term, it's $100 million ARR by 2026, working backwards from there. Longer term, outcompete top-down competitors worth $50 billion. If we get that far, we'll have helped _tens of millions_ of engineers build better products.
+
 ## Will PostHog sell?
 
 What motivates us is building an epic product and company.
@@ -24,11 +25,11 @@ We're *not* excited by:
 
 We want to hit $100 million in annual revenue by the end of 2026.
 
-We've set this since it's ambitious and keeps us accountable for some kind of financial output, but working backwards we can do it.We need around 7% monthly revenue growth to hit this.
+We've set this since it's ambitious and keeps us accountable for some kind of financial output, but working backwards we can do it. We need around 7% monthly revenue growth to hit this.
 
 ## Secondaries over selling
 
-Everyone at PostHog has options in the company - that means they can be a shareholder. This keeps everyone focused on our long-term interests.
+Everyone at PostHog has options in the company – that means they can be a shareholder. This keeps everyone focused on our long-term interests.
 
 However, at different stages of the company's life, the value of each person's stock may be hundreds of thousands, millions, or even tens of millions of dollars. If someone doesn't have much capital but has $10 million in stock options, they'll start wanting us to sell.
 

@@ -10,7 +10,7 @@ Most companies build their product with a particular user in mind. We built _eve
 
 So when it comes to marketing and sales, we are optimizing for developer experience.
 
-## Context - why we're like this
+## Context – why we're like this
 
 We've met multiple successful founders in our space, with companies well over $100M in annual revenue, filled with regret! The one regret they _all_ had in common was letting go of their growth engine (people recommending their product to each other) and getting focused on sales. They all wound up exiting. That's why they told us this stuff.
 
@@ -32,7 +32,7 @@ Things you won't find our marketing team doing: removing information from our we
 
 Most companies call it their "marketing website". You already know it's going to be crappy.
 
-We treat ours as a product. With real investment. When we were just a couple of people, we realized that our website _is_ our sales team - since our users would want to self-serve as much as possible.
+We treat ours as a product. With real investment. When we were just a couple of people, we realized that our website _is_ our sales team – since our users would want to self-serve as much as possible.
 
 We also realized when we started that all our competitors had crappy marketing websites.
 

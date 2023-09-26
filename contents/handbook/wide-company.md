@@ -10,7 +10,9 @@ Part of our strategy is to provide all the tools in one for evaluating feature s
 
 This means we need to ship a _lot_ of products into one platform. We can see a need for at least 20. That's a lot of engineering work.
 
-After we'd started hiring, we asked ourselves a question - how could we structure the company to optimize for speed above everything else? I happened to go to an excellent talk by Jeff Lawson (Twilio CEO). It made me realize I should be asking, "Who ships more per person, a startup or an enterprise?" Clearly the former. Let's structure like a series of startups then.
+After we'd started hiring, we asked ourselves a question – how could we structure the company to optimize for speed above everything else? 
+
+I happened to go to an excellent talk by Jeff Lawson (Twilio CEO). It made me realize I should be asking, "Who ships more per person, a startup or an enterprise?" Clearly the former. Let's structure like a series of startups then.
 
 ## Small teams
 
@@ -18,18 +20,18 @@ We decided that we should split PostHog into a series of small teams, each worki
 
 As with any startup, the principles that govern these small teams are:
 
-- can decide what to build within their own products
-- can ship without outside interference as far as possible
-  - no product by default
-  - [no design by default](/handbook/design/process)
-- should work directly with its own users (until it has hit product-market fit within PostHog's platform)
-- should be small
+- Can decide what to build within their own products
+- Can ship without outside interference as far as possible
+  - No product by default
+  - [No design by default](/handbook/design/process)
+- Should work directly with its own users (until it has hit product-market fit within PostHog's platform)
+- Should be small
 
 ## Goal setting
 
 When you build a startup from scratch, you are in an existential crisis. One day you might be building a gym, the next day a software product for accountants. The problem changes. At PostHog, we give each small team a product to build. (James and Tim focus on _which_ products we should build, as they often need sequencing.)
 
-Once we had product-market fit (and we had reached 15 people or so), we realized we needed to set some kind of goals. We started by using OKRs as they're pretty standard.
+Once we had [product-market fit](/blog/product-market-fit-game) (and we had reached 15 people or so), we realized we needed to set some kind of goals. We started by using OKRs as they're pretty standard.
 
 *However*, one of our engineers one day told me "I realized I needed to change my objective. Then I started rewriting my OKRs into the handbook. I realized I was spending time stressing about the wording of it, which was going to have zero impact on what I knew I had to build." That seemed pretty silly, so instead we make a point of calling them just "goals". We intentionally don't sweat the wording.
 
