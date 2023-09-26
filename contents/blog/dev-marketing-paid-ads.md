@@ -1,5 +1,5 @@
 ---
-date: 2023-09-28
+date: 2023-09-26
 title: Burning money on paid ads - what we've learned
 rootPage: /blog
 sidebar: Blog
