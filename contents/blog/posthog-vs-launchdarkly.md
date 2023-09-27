@@ -35,9 +35,9 @@ These tools add an extra layer of analysis unavailable in LaunchDarkly. They ena
 
 ### 2. We’re transparent (in many ways)
 
-PostHog is open source. Our code, culture, and strategy are public on GitHub and our [handbook](/handbook). While LaunchDarkly open-sourced some code (like SDKs), most is closed-source.
+PostHog is open source. Our code, culture, and strategy are public on GitHub and our [handbook](/handbook). While LaunchDarkly open sourced some code (like SDKs), most is closed-source.
 
-On top of being open-source, we are also self-serve. No need to "talk to sales" or "schedule a demo" if you don’t want to. You can sign up and try all the features PostHog offers for free.
+On top of being open source, we are also self-serve. No need to "talk to sales" or "schedule a demo" if you don’t want to. You can sign up and try all the features PostHog offers for free.
 
 Our [pricing](/pricing) is also transparent. It is a two-tier usage-based model, which we make easy to predict. This is simpler than LaunchDarkly’s multi-tier combination of charging for seats, monthly context instances, and add-ons. If you worry about overages, you can set up billing limits in PostHog too.
 
@@ -53,7 +53,7 @@ LaunchDarkly focuses on enterprise users, managers, and DevOps. This means more 
 
 ### Platform
 
-Both PostHog and LaunchDarkly built the infrastructure to use flags and experiments fast and effectively with your current app. PostHog does this more openly, both being open-source and self-service. 
+Both PostHog and LaunchDarkly built the infrastructure to use flags and experiments fast and effectively with your current app. PostHog does this more openly, both being open source and self-service. 
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
