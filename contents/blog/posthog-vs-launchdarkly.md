@@ -27,7 +27,7 @@ This post goes over their differences, platforms, features, pricing, reporting, 
 
 ### 1. It is an all-in-one platform
 
-PostHog brings all the tools engineers for testing, release, and measurement the success of new features. Beyond the [feature flag](/docs/feature-flags) and [A/B testing](/docs/experiments) tools, this includes product analytics, session replays, surveys, and more.
+PostHog brings all the tools engineers need for testing, release, and measurement the success of new features. Beyond the [feature flag](/docs/feature-flags) and [A/B testing](/docs/experiments) tools, this includes product analytics, session replays, surveys, and more.
 
 ![All in one](../images/blog/posthog-vs-launchdarkly/all.png)
 
