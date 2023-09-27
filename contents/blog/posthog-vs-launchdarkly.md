@@ -19,7 +19,7 @@ One glance at both PostHog and LaunchDarkly’s homepages explains a lot about e
 1. LaunchDarkly is an enterprise-focused feature management tool with feature flags, experiments, and related workflows.
 2. PostHog is an all-in-one suite of product and data tools, including feature management and experimentation, but also extending to session replays, analytics and user surveys.
 
-Both provide feature flagging and experimentation functionality. Using these features enable you to [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, configure your app remotely, customize experiences, and more.
+Both provide feature flagging and experimentation functionality. Using these features enable you to [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, [configure your app remotely](/blog/feature-flags-vs-configuration), customize experiences, and more.
 
 This post goes over the differences, platforms, features, pricing, reporting, integrations, and frequently asked questions about both.
 
@@ -27,7 +27,7 @@ This post goes over the differences, platforms, features, pricing, reporting, in
 
 ### 1. It is an all-in-one platform
 
-PostHog brings all the tools engineers need for testing, release, and measurement the success of new features. Beyond the [feature flag](/docs/feature-flags) and [A/B testing](/docs/experiments) tools, this includes product analytics, session replays, surveys, and more.
+PostHog brings all the tools engineers need for testing, release, and measurement the success of new features. Beyond the [feature flag](/docs/feature-flags) and [A/B testing](/docs/experiments) tools, this includes product analytics, [session replays](/docs/session-replay), [surveys](/docs/surveys), and more.
 
 ![All in one](../images/blog/posthog-vs-launchdarkly/all.png)
 
@@ -45,15 +45,15 @@ Our [pricing](/pricing) is also transparent. It is a two-tier usage-based model,
 
 PostHog is built for high-growth startups. This means it is simple for engineers to implement themselves. We have many [SDKs](/docs/libraries), [tutorials](/tutorials), and docs to help you get started quickly with any type of app.
 
-After setting up, PostHog aligns with startups as they scale up, providing tools like advanced product analytics, CDPs, and data warehousing to combine the tools they need into one. 
+After setting up, PostHog aligns with startups as they scale up, providing tools like advanced product analytics, [CDPs](/docs/cdp), and [data warehousing](/docs/data-warehouse) to combine the tools they need into one. 
 
 LaunchDarkly focuses on enterprise users, managers, and DevOps. This means more focus on governance and integrations. 
 
-# Comparing PostHog and LaunchDarkly
+## Comparing PostHog and LaunchDarkly
 
 ### Platform
 
-Both PostHog and LaunchDarkly built the infrastructure to use flags and experiments fast and effectively with your current app. PostHog does this more openly, both being open source and self-service. 
+Both PostHog and LaunchDarkly built the infrastructure to use flags and experiments fast and effectively with your current app. PostHog does this more openly, both being open source and self-service. It also has a wider range of product and data tools built in.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -107,6 +107,18 @@ Both PostHog and LaunchDarkly built the infrastructure to use flags and experime
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Flags available on frontend application load</td>
+        </tr>
+        <tr>
+            <td>SQL</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Query flag and product data directly via SQL</td>
+        </tr>
+        <tr>
+            <td>Session replays</td>
+            <td className="text-center"><span className="text-green text-lg">✔</span></td>
+            <td className="text-center"><span className="text-red text-lg">✖</span></td>
+            <td>Real user playback of flag session</td>
         </tr>
     </tbody>
 </table>
@@ -260,7 +272,7 @@ PostHog and LaunchDarkly have relatively similar experimentation feature sets, e
 </table>
 </div>
 
-PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the peeking problem and end your experiment at the right time.
+PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the [peeking problem](/blog/ab-testing-mistakes) and end your experiment at the right time.
 
 ![Run time calculator](../images/blog/posthog-vs-launchdarkly/runtime.png)
 
@@ -302,19 +314,74 @@ PostHog and LaunchDarkly price significantly differently.
 </table>
 </div>
 
-PostHog’s feature flag pricing is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
+PostHog’s [feature flag pricing](/pricing?product=feature-flags) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
 
 ![PostHog pricing](../images/blog/posthog-vs-launchdarkly/posthog-price.png)
 
-LaunchDarkly’s pricing is more complicated. They charge by seat starting at $10/seat/month. On top of this, they charge based on "monthly context instances" (MCIs) also known as monthly active users. The pro plan only gets 1,000 frontend MCIs per month.
+LaunchDarkly’s pricing is more complicated. They charge by seat starting at $10/seat/month. On top of this, they charge based on "monthly context instances" (MCIs) also known as monthly active users. The pro plan only gets 1,000 frontend MCIs per month. You must upgrade to the $20/seat/month to more than 1,000 MCIs, then pay more beyond 10,000.
 
 ![LaunchDarkly pricing](../images/blog/posthog-vs-launchdarkly/launchdarkly-price.png)
 
-As mentioned earlier, many of the security, approval, and workflow features that differentiate them are only available at the opaque "Enterprise" level. 
+As mentioned earlier, many of the security, approval, and workflow features that differentiate them are only available at the opaque "Enterprise" level.
 
-### Reporting
+#### Example scenarios
 
-LaunchDarkly features basic reporting but requires other platforms for more advanced analysis. PostHog builds in advanced analysis like SQL querying, conversion funnels, and dashboards and combines flag data with other product data.
+To give you an idea of what pricing looks like in reality, here are some example situations and their estimated costs for both PostHog and LaunchDarkly.
+
+<div className="overflow-x-auto -mx-5 px-5">
+<table className="w-full mt-4" style="min-width: 600px;">
+    <thead>
+        <tr>
+            <th>Seats</th>
+            <th>MAUs</th>
+            <th>Requests</th>
+            <th>Request location</th>
+            <th>PostHog cost</th>
+            <th>LaunchDarkly cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>5</td>
+            <td>10,000</td>
+            <td>1,000,000</td>
+            <td>Frontend</td>
+            <td>$0</td>
+            <td>$100</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>1000</td>
+            <td>1,000,000</td>
+            <td>Backend</td>
+            <td>$0</td>
+            <td>$200</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>20,000</td>
+            <td>4,000,000</td>
+            <td>Frontend</td>
+            <td>$300</td>
+            <td>$500 + cost of 10,000 MCIs</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>5000</td>
+            <td>15,000,000</td>
+            <td>Backend</td>
+            <td>$1400</td>
+            <td>$600</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+> **Note:** Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage to depend on the polling duration and active number of servers. If you use flags with one server polling every 30 seconds, this amount is under 1M requests (meaning free). Also PostHog has volume discounts on flags over 2 million requests per month. 
+
+### Reporting and analytics
+
+Although both LaunchDarkly has basic reporting features, PostHog has a more expansive analytics suite. Visualizations, funnels, retention, SQL querying and session replays are all integrated with flags and A/B testing data. This enables you to do deeper analysis on their impact and combine them with other product and usage data.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -334,34 +401,28 @@ LaunchDarkly features basic reporting but requires other platforms for more adva
             <td>Capture usage and calls related to flags</td>
         </tr>
         <tr>
-            <td>Basic visualizations</td>
+            <td>Trends</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Trends, conversion</td>
+            <td>Graphs of flag usage</td>
         </tr>
         <tr>
-            <td>Advanced visualizations</td>
+            <td>Funnel visualization</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Funnels, retention</td>
+            <td>Analyze impact of flags on funnels</td>
         </tr>
         <tr>
-            <td>Dashboard</td>
+            <td>Retention</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Analytics for a flag</td>
+            <td>User retention related to flags</td>
         </tr>
         <tr>
-            <td>Session replays</td>
+            <td>Breakdowns</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Real user playback of flag session</td>
-        </tr>
-        <tr>
-            <td>SQL</td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Interact with flag data via SQL</td>
+            <td>Breakdown analytics by properties</td>
         </tr>
         <tr>
             <td>Dashboards</td>
@@ -527,9 +588,13 @@ Many of LaunchDarkly’s advanced compliance tools are only available on their e
 
 PostHog is built for startups and their engineers. It provides all the tools startups need to build successful products. The people who find PostHog most useful are founders, [product engineers](/blog/what-is-a-product-engineer), and growth engineers.
 
+Companies who use PostHog feature flags and experiments include [Y Combinator](/customers/ycombinator), [Vendasta](/customers/vendasta), and [AssemblyAI](/customers/assemblyai).
+
 ### Who is LaunchDarkly useful for?
 
 LaunchDarkly is built for enterprises wanting to follow software development best practices. This means managing features, de-risking releases, experimenting with changes, and coordinating deploys. The people who find LaunchDarkly most useful are engineering managers, site reliability engineers, and product managers.
+
+Companies who use LaunchDarkly include IBM, Atlassian, Bayer, and HP.
 
 ### How much does PostHog cost?
 
