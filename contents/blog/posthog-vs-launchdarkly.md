@@ -1,6 +1,6 @@
 ---
 title: "In-depth: PostHog vs LaunchDarkly"
-date: 2023-09-25
+date: 2023-09-27
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -88,7 +88,7 @@ Both PostHog and LaunchDarkly built the infrastructure to use flags and experime
             <td>Proxies</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Reverse proxy to avoid blockers.</td>
+            <td>Reverse proxy to avoid blockers</td>
         </tr>
         <tr>
             <td>API</td>
@@ -161,13 +161,13 @@ Both PostHog and LaunchDarkly offer all the functionality you expect for feature
             <td>Environments</td>
             <td className="text-center">Partial</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Manage flags for dev, stage, prod.</td>
+            <td>Manage flags for dev, stage, prod</td>
         </tr>
         <tr>
             <td>Scheduling</td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center">Enterprise</td>
-            <td>Schedule flags to turn on or off.</td>
+            <td>Schedule flags to turn on or off</td>
         </tr>
         <tr>
             <td>Workflows</td>
@@ -337,13 +337,13 @@ LaunchDarkly features basic reporting but requires other platforms for more adva
             <td>Basic visualizations</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Trends, conversion.</td>
+            <td>Trends, conversion</td>
         </tr>
         <tr>
             <td>Advanced visualizations</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Funnels, retention.</td>
+            <td>Funnels, retention</td>
         </tr>
         <tr>
             <td>Dashboard</td>
@@ -495,7 +495,7 @@ Both PostHog and LaunchDarkly enable companies to remain secure and compliant wi
             <td>2FA</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Enforce login with two-factor authentication.</td>
+            <td>Enforce login with two-factor authentication</td>
         </tr>
         <tr>
             <td>SAML/SSO</td>
