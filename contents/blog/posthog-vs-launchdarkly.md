@@ -17,9 +17,9 @@ tags:
 One glance at both PostHog and LaunchDarkly’s homepages explains a lot about each of them. It shows:
 
 1. LaunchDarkly is an enterprise-focused feature management tool with feature flags, experiments, and related workflows.
-2. PostHog is an all-in-one suite of product and data tools, including feature management and experimentation, but also extending to session replays, analytics and user surveys.
+2. PostHog is an all-in-one suite of product and data tools, including feature management and experimentation, but also extending to session replays, analytics, and user surveys.
 
-Both provide feature flagging and experimentation functionality. Using these features enable you to [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, [configure your app remotely](/blog/feature-flags-vs-configuration), customize experiences, and more.
+Both provide feature flagging and experimentation functionality. Using these features enables you to [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, [configure your app remotely](/blog/feature-flags-vs-configuration), customize experiences, and more.
 
 This post goes over the differences, platforms, features, pricing, reporting, integrations, and frequently asked questions about both.
 
@@ -27,7 +27,7 @@ This post goes over the differences, platforms, features, pricing, reporting, in
 
 ### 1. It is an all-in-one platform
 
-PostHog brings all the tools engineers need for testing, release, and measurement the success of new features. Beyond the [feature flag](/docs/feature-flags) and [A/B testing](/docs/experiments) tools, this includes product analytics, [session replays](/docs/session-replay), [surveys](/docs/surveys), and more.
+PostHog brings all the tools engineers need for testing, releasing, and measuring the success of new features. Beyond the [feature flag](/docs/feature-flags) and [A/B testing](/docs/experiments) tools, this includes product analytics, [session replays](/docs/session-replay), [surveys](/docs/surveys), and more.
 
 ![All in one](../images/blog/posthog-vs-launchdarkly/all.png)
 
@@ -377,11 +377,11 @@ To give you an idea of what pricing looks like in reality, here are some example
 </table>
 </div>
 
-> **Note:** Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage to depend on the polling duration and active number of servers. If you use flags with one server polling every 30 seconds, this amount is under 1M requests (meaning free). Also PostHog has volume discounts on flags over 2 million requests per month. 
+> **Note:** Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage to depend on the polling duration and active number of servers. If you use flags with one server polling every 30 seconds, this amount is under 1M requests (meaning free). PostHog also has volume discounts on flags over 2 million requests per month. 
 
 ### Reporting and analytics
 
-Although both LaunchDarkly has basic reporting features, PostHog has a more expansive analytics suite. Visualizations, funnels, retention, SQL querying and session replays are all integrated with flags and A/B testing data. This enables you to do deeper analysis on their impact and combine them with other product and usage data.
+Although LaunchDarkly has basic reporting features, PostHog has a more expansive analytics suite. Visualizations, funnels, retention, SQL querying, and session replays are all integrated with flags and A/B testing data. This enables you to do deeper analysis of their impact and combine them with other product and usage data.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -507,7 +507,7 @@ Both PostHog and LaunchDarkly have a range of integrations that enable them to i
 </table>
 </div>
 
-LaunchDarkly has more pre-built integrations, but some are only available on higher paid plans, and others replicate functionality which is built-in to PostHog as standard. These include environments as a service, observability tools, workflow management, and more.
+LaunchDarkly has more pre-built integrations, but some are only available on higher paid plans, and others replicate functionality built-in to PostHog as standard. These include environments as a service, observability tools, workflow management, and more.
 
 PostHog’s event-based structure enables you to import data from anywhere for use with flags and experiments. The free API enables you to connect, edit, and capture from anywhere too.
 
@@ -588,13 +588,13 @@ Many of LaunchDarkly’s advanced compliance tools are only available on their e
 
 PostHog is built for startups and their engineers. It provides all the tools startups need to build successful products. The people who find PostHog most useful are founders, [product engineers](/blog/what-is-a-product-engineer), and growth engineers.
 
-Companies who use PostHog feature flags and experiments include [Y Combinator](/customers/ycombinator), [Vendasta](/customers/vendasta), and [AssemblyAI](/customers/assemblyai).
+Companies that use PostHog feature flags and experiments include [Y Combinator](/customers/ycombinator), [Vendasta](/customers/vendasta), and [AssemblyAI](/customers/assemblyai).
 
 ### Who is LaunchDarkly useful for?
 
 LaunchDarkly is built for enterprises wanting to follow software development best practices. This means managing features, de-risking releases, experimenting with changes, and coordinating deploys. The people who find LaunchDarkly most useful are engineering managers, site reliability engineers, and product managers.
 
-Companies who use LaunchDarkly include IBM, Atlassian, Bayer, and HP.
+Companies that use LaunchDarkly include IBM, Atlassian, Bayer, and HP.
 
 ### How much does PostHog cost?
 
@@ -618,13 +618,13 @@ PostHog lets you use all its features for free. Once you upgrade to paid, you ge
 
 Feature flags and experiments are simple. They are a few lines of code in all of your favorite languages. They can even be set up on no-code site builders like [Framer](/tutorials/framer-analytics) or [Webflow](/tutorials/webflow-ab-tests).
 
-The process requires signing up for PostHog, installing the snippet or SDK in your app, creating the flag in PostHog, and implement the flag evaluation and relevant logic in your app. In many of the SDKs, we handle important aspects like local evaluation and event capture for you. 
+The process requires signing up for PostHog, installing the snippet or SDK in your app, creating the flag in PostHog, and implementing the flag evaluation and relevant logic in your app. In many of the SDKs, we handle important aspects like local evaluation and event capture for you. 
 
 Much of the PostHog implementation, like user identification, is reused across products. Because PostHog is an all-in-one platform, analytics capture for targeting and A/B testing doesn’t need set up or connection either.
 
 ### How long does it take to implement LaunchDarkly?
 
-Installing LaunchDarkly is relatively simple, depending on your needs and compliance requirements. The most basic form is starting your LaunchDarkly trial, installing their SDK, setting up a client or provider, identify users or contexts, calling flags, and capturing events. 
+Installing LaunchDarkly is relatively simple, depending on your needs and compliance requirements. The most basic form is starting your LaunchDarkly trial, installing their SDK, setting up a client or provider, identifying users or contexts, calling flags, and capturing events. 
 
 The differences with PostHog are needing to import user context data, set up context identification, capture the flag or A/B test usage, and import analytics into the platform.
 
