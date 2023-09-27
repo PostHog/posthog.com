@@ -21,7 +21,7 @@ One glance at both PostHog and LaunchDarkly’s homepages explains a lot about e
 
 Both provide feature flagging and experimentation functionality. Using these features enable you to [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, configure your app remotely, customize experiences, and more.
 
-This post goes over their differences, platforms, features, pricing, reporting, integrations, and frequently asked questions about both.
+This post goes over the differences, platforms, features, pricing, reporting, integrations, and frequently asked questions about both.
 
 ## How is PostHog different?
 
