@@ -2353,6 +2353,10 @@ export const docsMenu = {
                             name: 'BigQuery',
                             url: '/docs/cdp/batch-exports/bigquery',
                         },
+                        {
+                            name: 'Postgres',
+                            url: '/docs/cdp/batch-exports/postgres',
+                        },
                     ],
                 },
                 {
