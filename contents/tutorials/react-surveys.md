@@ -23,7 +23,7 @@ cd react-flags
 
 Next, replace the boilerplate code in `src/App.js` with the following:
 
-```js
+```react
 // src/App.js
 import './App.css';
 
@@ -52,7 +52,7 @@ npm install posthog-js
 
 Once installed, import PostHog into `src/index.js` and set up a client using a project API key and instance address from the [project settings](https://app.posthog.com/project/settings). Then, wrap the app with `PostHogProvider` to access PostHog in any component.
 
-```js
+```react
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -212,7 +212,7 @@ The first part of handling our display logic is fetching the survey from PostHog
 
 To fetch the active surveys, we use the `usePostHog` hook to retrieve our PostHog instance. Then, we call `posthog.getActiveMatchingSurveys()` using `useEffect()`:
 
-```js
+```react
 // src/App.js
 import './App.css';
 import { useEffect, useState } from 'react';
@@ -275,7 +275,7 @@ export default App;
 
 We can use this survey object to configure our `Survey` component:
 
-```js
+```react
   // ... rest of your code ...
 
   const [surveyTitle, setSurveyTitle] = useState(false);
@@ -310,7 +310,7 @@ Finally, we want to make sure we don't show the survey again to users who have e
 
 We use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to store this data. Then, we'll add a check to show the survey based on whether the user has already interacted with it or not:
 
-```js
+```react
 // src/App.js
 
 function App() {
@@ -365,7 +365,7 @@ There are 3 events to capture:
 
 You can capture these events using `posthog.capture()`:
 
-```js
+```react
   // ... rest of your code ...
 
   const handleDismiss = () => {
@@ -373,7 +373,7 @@ You can capture these events using `posthog.capture()`:
     console.log("Survey dismissed!");
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey dismissed", {
-      $survey_id: {surveyID} // required
+      $survey_id: surveyID // required
     })
   };
 
@@ -382,15 +382,15 @@ You can capture these events using `posthog.capture()`:
     console.log("User submitted:", value);
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
     posthog.capture("survey sent", {
-      $survey_id: {surveyID}, // required
-      $survey_response: {value} // required
+      $survey_id: surveyID, // required
+      $survey_response: value // required
     })
   };
 
   useEffect(() => {
     if (posthog && surveyID && showSurvey) {
       posthog.capture("survey seen", {
-        $survey_id: {surveyID} // required
+        $survey_id: surveyID // required
       })
     }
   }, [showSurvey, surveyID, posthog])
@@ -400,7 +400,7 @@ You can capture these events using `posthog.capture()`:
 
 Altogether, your code should look like this:
 
-```js
+```react
 // src/App.js
 import { usePostHog } from 'posthog-js/react';
 import './App.css';
@@ -451,7 +451,7 @@ function App() {
   useEffect(() => {
     if (posthog && surveyID && showSurvey) {
       posthog.capture("survey seen", {
-        $survey_id: {surveyID} // required
+        $survey_id: surveyID // required
       })
     }
   }, [showSurvey, surveyID, posthog])
@@ -479,9 +479,15 @@ That's it! Our survey is ready to go!
 
 For a much faster set up, you can use PostHog's prebuilt surveys. There are variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and PostHog handles all the display logic and event capture for you.
  
-To create a survey with a prebuilt UI, set the display mode to **`Popover`** when creating your survey. There are no further code changes needed!
+To create a survey with a prebuilt UI, set the display mode to **`Popover`** when creating your survey:
 
 ![Popover survey set up](../images/tutorials/react-surveys/create-popover-survey.png)
+
+Then, select the question type you want and configure the survey as you like. Click "Save as draft" and then "Launch".
+
+Your survey is now live and you should see it in your app. There are no further code changes needed!
+
+![Popover survey in app](../images/tutorials/react-surveys/popover-survey-in-app.png)
 
 ## Viewing results
 
@@ -497,5 +503,6 @@ You can also filter these results based on [user properties](/docs/product-analy
 
 ## Further reading
 
+- [How to write great product survey questions (with examples)](/blog/product-survey-questions)
 - [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
 - [How to measure your NPS score in PostHog](/tutorials/nps-survey)
