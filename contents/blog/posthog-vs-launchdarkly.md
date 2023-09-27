@@ -17,7 +17,7 @@ tags:
 One glance at both PostHog and LaunchDarkly’s homepages explains a lot about each of them. It shows:
 
 1. LaunchDarkly is an enterprise-focused feature management tool with feature flags, experiments, and related workflows.
-2. PostHog is an all-in-one suite of product and data tools, including feature management and experimentation. 
+2. PostHog is an all-in-one suite of product and data tools, including feature management and experimentation, but also extending to session replays, analytics and user surveys.
 
 Both provide feature flagging and experimentation functionality. Using these features enable you to [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, configure your app remotely, customize experiences, and more.
 
@@ -35,11 +35,11 @@ These tools add an extra layer of analysis unavailable in LaunchDarkly. They ena
 
 ### 2. We’re transparent (in many ways)
 
-PostHog is open-source. Our code, culture, and strategy are public on GitHub and our [handbook](/handbook). While LaunchDarkly open-sourced some code (like SDKs), most is closed-source.
+PostHog is open source. Our code, culture, and strategy are public on GitHub and our [handbook](/handbook). While LaunchDarkly open-sourced some code (like SDKs), most is closed-source.
 
 On top of being open-source, we are also self-serve. No need to "talk to sales" or "schedule a demo" if you don’t want to. You can sign up and try all the features PostHog offers for free.
 
-Our [pricing](/pricing) is also transparent. It is a two-tier request-based model, which we try to make easy to predict. This is simpler than LaunchDarkly’s multi-tier combination of charging for seats, monthly context instances, and add-ons. If you worry about overages, you can set up billing limits in PostHog too.
+Our [pricing](/pricing) is also transparent. It is a two-tier usage-based model, which we make easy to predict. This is simpler than LaunchDarkly’s multi-tier combination of charging for seats, monthly context instances, and add-ons. If you worry about overages, you can set up billing limits in PostHog too.
 
 ### 3. Built for startups and engineers
 
@@ -114,7 +114,7 @@ Both PostHog and LaunchDarkly built the infrastructure to use flags and experime
 
 ### Feature management
 
-Both PostHog and LaunchDarkly all the functionality you expect for feature management using feature flags. 
+Both PostHog and LaunchDarkly offer all the functionality you expect for feature management using feature flags. 
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -446,7 +446,7 @@ Both PostHog and LaunchDarkly have a range of integrations that enable them to i
 </table>
 </div>
 
-LaunchDarkly has more pre-built integrations, but some are only available on higher paid plans, and others are built-in to PostHog. These include environments as a service, observability tools, workflow management, and more.
+LaunchDarkly has more pre-built integrations, but some are only available on higher paid plans, and others replicate functionality which is built-in to PostHog as standard. These include environments as a service, observability tools, workflow management, and more.
 
 PostHog’s event-based structure enables you to import data from anywhere for use with flags and experiments. The free API enables you to connect, edit, and capture from anywhere too.
 
