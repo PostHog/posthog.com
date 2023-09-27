@@ -498,7 +498,7 @@ export const handbookSidebar = [
         children: [
             {
                 name: 'Team',
-                url: '/handbook/small-teams/people',
+                url: '/handbook/small-teams/ops',
             },
             {
                 name: 'Finance',
