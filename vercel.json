@@ -931,6 +931,10 @@
         { "source": "/jamesg", "destination": "/community/profiles/90" },
         { "source": "/jams", "destination": "/community/profiles/90" },
         { "source": "/docs/surveys/manual", "destination": "/docs/surveys" },
+        { "source": "/docs/surveys/setup", "destination": "/docs/surveys/installation" },
+        { "source": "/docs/surveys/new", "destination": "/docs/surveys/creating-surveys" },
+        { "source": "/docs/surveys/targeting", "destination": "/docs/surveys/creating-surveys" },
+        { "source": "/docs/surveys/events", "destination": "/docs/surveys/implementing-custom-surveys" },
         { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" },
         { "source": "/api", "destination": "/docs/api" },
         {
