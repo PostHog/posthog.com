@@ -1,6 +1,6 @@
 ---
 title: How to set up feature flags in Go
-date: 2023-09-26
+date: 2023-09-27
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -48,7 +48,7 @@ Once created, run `go run main.go` and go to `localhost:8080` to see the respons
 
 To evaluate flags consistently, we need a consistent user ID across requests. Because we are making web requests, we can use cookies to store this value. In our HTTP handler, we can set up logic to check for a `user_id` in cookies using the `http` package’s `Cookie` function. If it exists, we set it as a `userID` variable. If it doesn’t, we generate an ID using a UUID generator.
 
-To start with this, install Google’s UUID generator.
+To start with this, install Google’s [UUID generator](https://github.com/google/uuid).
 
 ```bash
 go get github.com/google/uuid
