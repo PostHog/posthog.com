@@ -1,5 +1,5 @@
 ---
-title: How to set up Golang feature flags
+title: How to set up feature flags in Go
 date: 2023-09-26
 author: ["ian-vanagas"]
 showTitle: true
@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-8.png
 tags: ["feature-flags"]
 ---
 
-Feature flags are a critical part of delivering code safely. This tutorial shows you how to use them in Go (Golang). We create a basic HTTP server, add PostHog, create a feature flag, and implement it in our app to change the response content.
+[Feature flags](/docs/feature-flags) are a critical part of delivering code safely. This tutorial shows you how to use them in Go (Golang). We'll create a basic HTTP server, add PostHog, create a feature flag, and implement it in our app to change the response content.
 
 ## Creating a Go HTTP server
 
@@ -54,7 +54,7 @@ To start with this, install Google’s UUID generator.
 go get github.com/google/uuid
 ```
 
-Next in the `http.HandleFunc` function, write the logic to set a `userID` variable by either getting the `user_id` cookie or creating one using the UUID package we just installed. Our handler function now looks like this:
+Next, in the `http.HandleFunc` function, write the logic to set a `userID` variable by either getting the `user_id` cookie or creating one using the UUID package we just installed. Our handler function now looks like this:
 
 ```go
 // main.go
@@ -84,7 +84,9 @@ We use this `userID` value later to capture PostHog events and evaluate feature 
 
 ## Adding PostHog
 
-Next, we add PostHog. First, install it:
+Next, we add PostHog. PostHog handles our feature flag evaluation and event capture related to their use.
+
+To install it, run the following command:
 
 ```bash
 go get github.com/posthog/posthog-go
