@@ -8,9 +8,9 @@ featuredImage: ../images/tutorials/banners/surveys-hog.jpg
 tags: ['surveys']
 ---
 
-[Surveys](/docs/surveys) are a great tool to collect qualitative feedback from your users. This tutorial shows you how to implement a survey in your React app.
+[Surveys](/docs/surveys) are a great tool to collect qualitative feedback from your users. This tutorial shows you how to implement a survey in a React app. 
 
-We'll cover creating a basic React app, adding PostHog, creating a survey, and then adding the code to show the survey and collect responses.
+We'll create a basic React app, add PostHog, create a survey, and then add the code to show the survey in-app and collect responses.
 
 ## Creating a React app
 
@@ -98,7 +98,7 @@ Click "Save as draft" and then on the next screen click "Launch". We're now read
 
 ![Custom survey set up](../images/tutorials/react-surveys/create-api-survey.png)
 
-### Adding the surveys code
+### Adding the survey code
 
 There are three parts to adding code for our custom survey:
 
@@ -110,7 +110,7 @@ There are three parts to adding code for our custom survey:
 
 We've created an example survey UI for this tutorial. To use it, create a new file in `./src` folder called `Survey.js` and paste the following code:
 
-```js
+```react
 // src/Survey.js
 import React from 'react';
 
@@ -166,7 +166,7 @@ button {
 
 Finally, integrate the component into `App.js`:
 
-```
+```react
 // src/App.js
 import './App.css';
 import { useState } from 'react';
@@ -202,22 +202,22 @@ function App() {
 export default App;
 ```
 
-This will show a survey popup every time you visit `localhost:3000`.
+This shows a survey popup every time you visit your app's homepage.
 
 ![Custom survey UI](../images/tutorials/react-surveys/survey-ui.png)
 
-
 #### 2. Add the logic for displaying it.
 
-The first part of handling our display logic is fetching the survey from PostHog. PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom targeting options](/docs/surveys/creating-surveys#targeting) a user must meet to be eligible for a survey). 
+The first part of handling our display logic is fetching the survey from PostHog. PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom targeting options](/docs/surveys/creating-surveys#targeting)). 
 
 To fetch the active surveys, we use the `usePostHog` hook to retrieve our PostHog instance. Then, we call `posthog.getActiveMatchingSurveys()` using `useEffect()`:
 
 ```js
 // src/App.js
-import { usePostHog } from 'posthog-js/react';
 import './App.css';
 import { useEffect, useState } from 'react';
+import Survey from './Survey';
+import { usePostHog } from 'posthog-js/react';
 
 function App() {
   // ... rest of your code ...
@@ -227,8 +227,7 @@ function App() {
     posthog.getActiveMatchingSurveys((surveys) => {
       // TODO: configure the survey
     }); 
-  },
-  [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
+  }, [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
   
   // ... rest of your code ...
 }
@@ -290,8 +289,7 @@ We can use this survey object to configure our `Survey` component:
         setSurveyTitle(survey.questions[0].question)
       }
     }); 
-  },
-  [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
+  }, [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
   
   // ... rest of your code ...
 
@@ -308,9 +306,9 @@ We can use this survey object to configure our `Survey` component:
  </div>
 ```
 
-Finally, we want to make sure we don't show the survey again to users who have either submitted a response or dismissed it. 
+Finally, we want to make sure we don't show the survey again to users who have either submitted or dismissed it. 
 
-We'll use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to store this data. Then, we'll show the survey based on whether the user has already interacted with it or not:
+We use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to store this data. Then, we'll add a check to show the survey based on whether the user has already interacted with it or not:
 
 ```js
 // src/App.js
@@ -423,8 +421,7 @@ function App() {
         setSurveyTitle(survey.questions[0].question)
       }
     }); 
-  },
-  [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
+  }, [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
 
   useEffect(() => {
     // Check local storage to see if the user has already seen this particular survey
@@ -437,7 +434,7 @@ function App() {
     console.log("Survey dismissed!");
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey dismissed", {
-      $survey_id: {surveyID} // required
+      $survey_id: surveyID // required
     })
   };
 
@@ -446,8 +443,8 @@ function App() {
     console.log("User submitted:", value);
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
     posthog.capture("survey sent", {
-      $survey_id: {surveyID}, // required
-      $survey_response: {value} // required
+      $survey_id: surveyID, // required
+      $survey_response: value // required
     })
   };
 
@@ -480,7 +477,7 @@ That's it! Our survey is ready to go!
 
 ### Option 2: Use PostHog's prebuilt survey UI
 
-Alternatively, if you find it tedious to build and maintain your own UI, you can simply use PostHog's prebuilt surveys. There are variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and PostHog will handle all the display logic and event capturing for you.
+For a much faster set up, you can use PostHog's prebuilt surveys. There are variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and PostHog handles all the display logic and event capture for you.
  
 To create a survey with a prebuilt UI, set the display mode to **`Popover`** when creating your survey. There are no further code changes needed!
 
