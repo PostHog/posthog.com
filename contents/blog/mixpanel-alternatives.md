@@ -50,11 +50,11 @@ Data correct as of July 2023.
 
 According to [reviews on G2.com](https://www.g2.com/products/mixpanel/reviews), [summarized by Senja](https://senja.io/tools/review-mining/share?s=NOmOO5mS), companies use PostHog because:
 
-1. **It replaces multiple tools:** PostHog can replace Mixpanel (product analytics), LaunchDarkly (feature flags and A/B testing), and Hotjar (session replay and surveys), creating a single source of truth.
+1. **It replaces multiple tools:** PostHog can replace Mixpanel (product analytics), LaunchDarkly (feature flags and A/B testing), and Hotjar (session replay and surveys), creating a single source of truth. This simplifies workflows and ensures all their data is in one place.
 
-2. **Pricing is transparent and scalable:** Reviewers appreciate PostHog's transparent, scalable pricing model. The generous free tier includes 1 million analytics events and 15,000 session replays each month. Companies eligible for [PostHog for Startups](/startups) also get $50k in free credits.
+2. **Pricing is transparent and scalable:** Reviewers appreciate PostHog's pricing scales reasonably as they grow, ensuring they don't overspend their budgets. PostHog offers a [generous free tier](/pricing), and companies eligible for [PostHog for Startups](/startups) get $50k in additional free credits.
 
-3. **They need to understand their users:** PostHog includes every tool necessary to understand users and improve producrts. This means using funnels to track conversion, watching session replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
+3. **They need to understand their users:** PostHog includes every tool necessary to understand users and improve products. This means using funnels to track conversion, watching session replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
 
 ### How does PostHog compare to Mixpanel?
 
