@@ -14,7 +14,7 @@ Batch exports can be used to export data to a Postgres table.
 
 1. Make sure PostHog can access your Postgres database.
 
-> **Note:** Wherever your Postgres database is hosted, make sure the host is set to accept all incoming connections so that PostHog can connect to the database and insert events. If this is not possible in your case, consider exporting data to a different destination (like [S3](./s3.md)) and then setting up your own system for getting data into your Postgres database.
+> **Note:** Wherever your Postgres database is hosted, make sure the host is set to accept all incoming connections so that PostHog can connect to the database and insert events. PostHog does not guarantee a static list of IP addresses to whitelist. If this is not possible in your case, consider exporting data to a different destination (like [S3](./s3.md)) and then setting up your own system for getting data into your Postgres database.
 
 2. Create a Postgres user with table creation privileges.
 
