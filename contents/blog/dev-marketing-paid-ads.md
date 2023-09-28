@@ -1,6 +1,6 @@
 ---
 date: 2023-09-28
-title: Burning money on paid ads - what we've learned
+title: Burning money on paid ads for a dev tool - what we've learned
 rootPage: /blog
 sidebar: Blog
 showTitle: true
