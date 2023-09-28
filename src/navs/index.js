@@ -683,6 +683,16 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Web Analytics',
+        url: '',
+        children: [
+            {
+                name: 'Team',
+                url: '/handbook/small-teams/web-analytics',
+            },
+        ],
+    },
+    {
         name: 'Website & Docs',
         url: '',
         children: [
