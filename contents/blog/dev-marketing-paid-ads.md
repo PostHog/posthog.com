@@ -72,7 +72,7 @@ This is not a comprehensive guide on how to set up each channel (use Demand Curv
 ### Twitter
 
 - Good for awareness, bad for conversion.
-- We prefer promoting our own organic tweets over creating specific ads.
+- We prefer promoting our own organic tweets over creating specific ads - promote an individual (e.g. founder) over the company account for better engagement. 
 - Good paid channel for reaching devs generally.
 - Cheap but the targeting is quite basic (Twitter make you think it's much more sophisticated than it is). 
 
