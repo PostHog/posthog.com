@@ -12,9 +12,9 @@ hideAnchor: true
 category: PostHog news
 ---
 
-In June we launched the public beta of our user surveys tool, which in its first incarnation enabled you to ask simple questions with an open text field. Now, after many iterations and additions, the beta is over and we’re introducing new pricing for [PostHog surveys](/docs/surveys). 
+In June we launched the public beta of our user surveys tool. Now, after many iterations and additions, the beta is over and we’re introducing new pricing for [PostHog surveys](/docs/surveys). 
 
-As with other PostHog tools there’s a generous free tier which enables everyone to get started and is suitable for small projects and MVPs. Beyond that, billing is based on usage via the number of responses you receive — no base rates, no additional fees.  
+As usual, we've created a generous free tier that enables everyone to get started – ideal for small projects and MVPs. Billing is based the number of responses you receive – no base rates, no additional fees.  
 
 The new **pricing kicks in on October 19th**, but we're also giving users who participated in the beta an enhanced plan with 1,000 free monthly responses to thank them for their support. We’ll also honor any annual contracts and users on these plans won’t pay for surveys until their contract renews. 
 
@@ -26,11 +26,13 @@ The new **pricing kicks in on October 19th**, but we're also giving users who pa
 | 1,001-5,000 | $0.03 |
 | 5,001+ | $0.02 |
 
+## Why did we build surveys?
+
 We’ve prioritized surveys over the last few months to finally close the loop and turn PostHog into a truly all-in-one product stack. You can now gather user research, test changes, deploy them, observe behaviors, and measure results all in one place, in a way no other platform allows.
 
 Naturally, all the tools interconnect as well. Surveys linked to flags, results visible in insights and replays? PostHog does that.
 
-We’ve made sure that surveys are perfect for the most common use-cases, including [NPS surveys](/tutorials/nps-survey), customer satisfaction surveys, and Superhuman’s [product-market fit survey](/blog/measure-product-market-fit). However, there’s a lot more you can do beyond this, such as using the link question type to arrange user interviews!
+We’ve made sure that surveys are perfect for the most common use-cases, including [NPS surveys](/tutorials/nps-survey), customer satisfaction surveys, and [product-market fit surveys](/blog/measure-product-market-fit). However, there’s a lot more you can do beyond this, such as using the link question type to arrange user interviews!
 
 Here’s a quick summary of some of the work we’ve done, and major features we’ve added in the two months since the beta launched:
 
