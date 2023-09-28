@@ -1,6 +1,6 @@
 ---
 date: 2023-09-28
-title: Burning money on paid ads - what we've learned
+title: Burning money on paid ads for a dev tool – what we've learned
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -18,7 +18,7 @@ Since starting PostHog in 2020, we’ve learned a bunch about what does and does
 
 This article shares specific, actionable advice for early-stage startups building dev tools in particular. I'm assuming that you've already decided that running paid ads is something that makes sense for your company. 
 
-I've split this into two sections - general misconceptions and then what we've learned, channel-by-channel. 
+I've split this into two sections – general misconceptions and then what we've learned, channel-by-channel. 
 
 ## Clearing up some misconceptions
 
@@ -30,25 +30,25 @@ This means taking paid ads seriously (because of the $$$), but don't spend all y
 
 ### All paid ads are basically the same
 
-Very crudely, your ads will have one of two objectives - _conversion_ or _awareness_. 
+Very crudely, your ads will have one of two objectives – _conversion_ or _awareness_. 
 
-Conversion means that you want people to click on your ad and then do something like sign up for your product. You can define conversion how you like - this is just a typical example. Conversion is easy to measure, which is why marketers like it. However, you are generally only _capturing_ demand from people already aware of your product. 
+Conversion means that you want people to click on your ad and then do something like sign up for your product. You can define conversion how you like – this is just a typical example. Conversion is easy to measure, which is why marketers like it. However, you are generally only _capturing_ demand from people already aware of your product. 
 
-Awareness means you want people to see your ad. Maybe they won't click on it - that's ok. Your objective is to just get the word out so that someone is exposed to your product enough times that at some point they Google 'super cool product' and come sign up. Awareness-based ads are a small part of _creating_ demand. This takes more effort to measure, but is totally possible - see below.  
+Awareness means you want people to see your ad. Maybe they won't click on it – that's ok. Your objective is to just get the word out so that someone is exposed to your product enough times that at some point they Google 'super cool product' and come sign up. Awareness-based ads are a small part of _creating_ demand. This takes more effort to measure, but is totally possible - see below.  
 
-We split our budget 50-50 between the two. This is not a 'rule' - just don't spend it all on conversion. 
+We split our budget 50-50 between the two. This is not a 'rule' – just don't spend it all on conversion. 
 
 ### Paid ads don't work on developers
 
-Everyone who works at a tech company basically thinks they are immune to ads because they are super good at internetting, and have never seen an ad for a new product, clicked on it, and then signed up. Your _quantitative_ attribution data in PostHog or whatever analytics tool you are using will seem to back this up. 
+Everyone who works at a tech company basically thinks they are immune to ads because they are super good at internetting, and have never seen an ad for a new product, clicked on it, and then signed up. Your _quantitative_ attribution data in PostHog, or whatever analytics tool you are using, will seem to back this up. 
 
-This is why we ask all users where they heard about PostHog whenever they sign up or book a demo - it's a simple (optional) free text field. Enough of our users say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of them. Especially ones with money to spend on behalf of their company. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place. 
+This is why we ask all users where they heard about PostHog whenever they sign up or book a demo – it's a simple (optional) free text field. Enough of our users say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of them. Especially ones with money to spend on behalf of their company. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place. 
 
 ### An agency will solve all your problems
 
-I'm a big fan of hiring an agency if you're a startup - paying $5-10k/mo for a small, outsourced team is way more efficient at this stage than hiring one paid ads specialist. Look in Europe - US agencies can be 2-3x more expensive. We use [Hey](https://www.heydigital.co/) and like them. 
+I'm a big fan of hiring an agency if you're a startup – paying $5-10k/mo for a small, outsourced team is way more efficient at this stage than hiring one paid ads specialist. Look in Europe – US agencies can be 2-3x more expensive. We use [Hey](https://www.heydigital.co/) and like them. 
 
-_However,_ I really recommend you get personally familiar with each of the main channels I've listed below first. Working with an agency isn't just set and forget - you need to constantly give feedback, ask questions, and suggest new ideas if you want to get the most out of them. 
+_However,_ I really recommend you get personally familiar with each of the main channels I've listed below first. Working with an agency isn't just set and forget – you need to constantly give feedback, ask questions, and suggest new ideas if you want to get the most out of them. 
 
 I personally like [the Demand Curve course](https://www.demandcurve.com/growth-program), which will give you a great grounding in all the major paid ad channels – it helped get us off the ground and means we're much better equipped to give our agency feedback. Outsource the legwork, not your critical thinking. 
 
@@ -59,8 +59,8 @@ This is not a comprehensive guide on how to set up each channel (use Demand Curv
 ### Google Search
 
 - Good for conversion, bad for awareness.
-- Do not let Google enable any of their bullshit AI-type suggested/dynamic/whatever keyword generator tools - they always result in weirdly worded ads that were clearly not written by a human. Use your _own_ research about what keywords your target user is likely to search for, not what Google suggests. 
-- If you have an SEO article that ranks well (top 3) make sure you aren't bidding on the same keywords - it's wasted money.
+- Do not let Google enable any of their bullshit AI-type suggested/dynamic/whatever keyword generator tools – they always result in weirdly worded ads that were clearly not written by a human. Use your _own_ research about what keywords your target user is likely to search for, not what Google suggests.
+- If you have an SEO article that ranks well (top 3) make sure you aren't bidding on the same keywords – it's wasted money.
 - Bidding on your own brand may feel like a waste of money, but it's super cheap and defends you against competitor ads. 
 
 ### Google Display
@@ -81,7 +81,7 @@ This is not a comprehensive guide on how to set up each channel (use Demand Curv
 
 - Good for awareness, bad for conversion.
 - It is very easy to do ads that stand out here because 90% are so boring and corporate.
-- Good paid channel for reaching founder-type devs - and people who are more self-promotery, basically.
+- Good paid channel for reaching founder-type devs – and people who are more self-promotery, basically.
 - Expensive but hands-down the best targeting of any platform. 
 
 ### Reddit
@@ -92,7 +92,7 @@ This is not a comprehensive guide on how to set up each channel (use Demand Curv
 
 ### Quora
 
-- Dark horse - good for conversion and awareness.
+- Dark horse – good for conversion and awareness.
 - Quite cheap, good targeting.
 - Seriously, I don't know why more people don't use Quora. 
 
@@ -109,8 +109,8 @@ This is not a comprehensive guide on how to set up each channel (use Demand Curv
 
 ### Bing
 
-- Fun fact - this is the only route to advertise on DuckDuckGo!
-- Unfun fact - you can only advertise on the Bing ads network, and they decide where the ads go. You can't say 'serve ads on DuckDuckGo only'.
+- Fun fact – this is the only route to advertise on DuckDuckGo!
+- Unfun fact – you can only advertise on the Bing ads network, and they decide where the ads go. You can't say 'serve ads on DuckDuckGo only'.
 - Quite cheap. Good only if you want to target users at large enterprises where they are forced to use Bing. 
 
 ### Sponsoring newsletters
@@ -140,16 +140,14 @@ Over the next few months, we're planning to try out paid ads on G2 and Stack Ove
 Experiment, experiment, experiment. Start by running 2-3 small experiments at a time across multiple channels. Each experiment will need ~$500 and 2 weeks to run to get meaningful data. 
 
 Which channels to start with depend slightly on the type of product you have. If you're completely unsure, I'd go:
-- Google Search - brand keywords (ie. your product's name)
-- Google Search - relevant keywords to your product
-- Twitter/Quora - cheap awareness campaigns
+- Google Search – brand keywords (ie. your product's name)
+- Google Search – relevant keywords to your product
+- Twitter/Quora – cheap awareness campaigns
 
 Then you can branch out into other channels. For reference, at PostHog we got Google, Twitter, and LinkedIn going in the first couple of months, and then focused on getting good results from them. After that, we added new channels slowly - every 3 months or so - to make sure we were still doing a good job on existing channels. 
 
 ## Moar reading
 
 - Make sure you're covering [all your marketing bases](/blog/dev-marketing-for-startups).
-
 - Read about [how our marketing team uses PostHog](/blog/posthog-marketing).
-
 - Check out [PostHog’s Marketing Handbook](/handbook/growth/marketing) – and copy it if you want to!
