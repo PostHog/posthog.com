@@ -134,7 +134,7 @@ Smaller newsletters that we also have supported:
 
 Over the next few months, we're planning to try out paid ads on G2 and Stack Overflow. We think G2 will be useful for reaching larger companies who are running more formal processes to replace their tools by trying several options first. Stack Overflow we have heard is (anecdotally) good for general awareness-building, but not conversion. Both are quite expensive but very focused options to consider for dev tools. I'll update this article with our findings!
 
-## What next?
+## How to get started with paid ads
 
 Experiment, experiment, experiment. Start by running 2-3 small experiments at a time across multiple channels. Each experiment will need ~$500 and 2 weeks to run to get meaningful data. 
 
