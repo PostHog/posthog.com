@@ -50,7 +50,7 @@ I'm a big fan of hiring an agency if you're a startup - paying $5-10k/mo for a s
 
 _However,_ I really recommend you get personally familiar with each of the main channels I've listed below first. Working with an agency isn't just set and forget - you need to constantly give feedback, ask questions, and suggest new ideas if you want to get the most out of them. 
 
-I personally like [the Demand Curve program](https://www.demandcurve.com/growth-program) – it helped get us off the ground and means we're much better equipped to give our agency feedback. Outsource the legwork, not your critical thinking. 
+I personally like [the Demand Curve course](https://www.demandcurve.com/growth-program), which will give you a great grounding in all the major paid ad channels – it helped get us off the ground and means we're much better equipped to give our agency feedback. Outsource the legwork, not your critical thinking. 
 
 ## Channel-by-channel tips
 
@@ -74,7 +74,8 @@ This is not a comprehensive guide on how to set up each channel (use Demand Curv
 - Good for awareness, bad for conversion.
 - We prefer promoting our own organic tweets over creating specific ads - promote an individual (e.g. founder) over the company account for better engagement. 
 - Good paid channel for reaching devs generally.
-- Cheap but the targeting is quite basic (Twitter make you think it's much more sophisticated than it is). 
+- Cheap but the targeting is quite basic (Twitter make you think it's much more sophisticated than it is).
+- Turn off replies to ads (or have thick skin!)
 
 ### LinkedIn
 
