@@ -8,17 +8,19 @@ featuredImage: ../images/tutorials/banners/tutorial-14.png
 tags: ['events']
 ---
 
-Webhooks enable you to send data from one platform to another when an event happens. This enables you to run whatever workflows and code to handle those events.
+Webhooks enable you to send data from one platform to another when an event happens. This enables you to run workflows and code to handle those events.
 
 To showcase the power of webhooks, we are going to capture Calendly meeting data into PostHog using Val Town, a platform for writing and running JavaScript functions in your browser. 
 
-> **Note:** Calendly webhooks requires their professional plan.
+> **Note:** Calendly webhooks requires subscribing their professional plan.
 
 ## Set up your Val Town webhook handler
 
 Before we set anything up in Calendly, we set up our webhook handler function in [Val Town](https://val.town/). 
 
-To get started, create a variable file in Val Town with your `phProjectAPIKey`. Get your project API key from your [project settings](https://app.posthog.com/project/settings), go to Val Town, create a function like `let phProjectAPIKey = ‘<ph_project_api_key>’` and press "Run". This saves the value for us to reference as `@me.phProjectAPIKey` later.
+To get started, we'll create a variable file in Val Town with your PostHog API key. 
+
+You can get your project API key from your [project settings](https://app.posthog.com/project/settings). Then, go to Val Town, create a function with the code `let phProjectAPIKey = ‘<ph_project_api_key>’` and press "Run". This saves the value for us to reference as `@me.phProjectAPIKey` later.
 
 ![Project API key Val](../images/tutorials/calendly-webhooks/val.png)
 
