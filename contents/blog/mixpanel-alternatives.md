@@ -37,7 +37,11 @@ PostHog is an all-in-one platform that combines product analytics, session repla
 
 ### Who uses PostHog?
 
-PostHog is popular among product-minded engineering teams, especially at startups and mid-size enterprises. Unlike most Mixpanel alternatives, it actively courts engineers who want to understand user behavior, as well as product managers.
+Typical PostHog users are:
+
+- Product-minded engineering teams
+- Data-savvy product managers
+- Startups and mid-size enterprises looking to replace multiple legacy tools
 
 Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
 
@@ -91,7 +95,10 @@ Unlike its predecessor, Universal Analytics (GA3), it's event-based, and introdu
 
 ### Who uses GA4?
 
-Historically, Google Analytics is mostly used by marketing and content teams, but Google is courting more developers and product teams with GA4's event-based tracking. 
+Typical GA4 users are:
+- Marketing and content teams
+- Large news and content publishers
+- Enterprises who also use BigQuery
 
 Google's huge scale means GA4 is used by both the biggest global corporations to SMBs of every kind. It is ubiquitous.
 
@@ -139,7 +146,11 @@ Amplitude is an analytics and testing tool with a particular focus on large ente
 
 ### Who uses Amplitude?
 
-Amplitude skews toward non-technical users, like product managers and designers, over software engineers. Especially those at large, Fortune 500 companies.
+Typical Amplitude users are:
+
+- Non-technical product managers
+- Data teams at large enterprises
+- Growth engineering and marketing teams
 
 While it offers a limited free tier for startups, high prices are a barrier. As one reviewer [points out](https://www.g2.com/products/amplitude-analytics/reviews/amplitude-analytics-review-7933567): "The high price tag poses a challenge for small businesses, early-stage, and even medium-sized startups."
 
@@ -187,7 +198,14 @@ Heap was acquired in September 2023 by Contentsquare, marketing and e-commerce a
 
 ### Who uses Heap?
 
+Typical Heap users are:
+
+- Non-technical product managers
+- Marketing and design teams
+
 Heap has an even greater emphasis on non-technical users than all the tools in this list, particularly product managers at mid-size SaaS companies. Heap sells itself as not requiring significant engineering support.
+
+Customers include Amway, Evenbrite, and Freshworks.
 
 ### Why do companies use Heap?
 
@@ -210,3 +228,14 @@ Heap is less popular than Mixpanel. Heap is deployed on 3,200 (0.3%) of the top 
 - **Fewer integrations:** While Heap has integrations with most third-party tools for things like A/B testing, or marketing automation, Mixpanel has more. To use just one example, Heap offers just two official survey integrations (Appcues and Delighted), while Mixpanel has nine. 
 
 > **Bottom line:** Heap is the best Mixpanel alternative for non-technical product teams with understaffed engineering teams.
+
+## Pendo
+
+
+
+## Honorable mentions
+
+- Kissmetrics
+- PIWIK Pro
+- Countly
+- Snowplow
