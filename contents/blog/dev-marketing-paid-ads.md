@@ -128,7 +128,7 @@ Not 'paid ads' in the traditional sense, but I wanted to share a few creators wh
 Smaller newsletters that we also have supported:
 
 - [Level Up](https://levelup.patkua.com/)
-- [Console](https://console.dev/)
+- [Console](https://console.substack.com/)
 - [FOSS Weekly](https://fossweekly.beehiiv.com/)
 
 ### A couple we haven't tried yet
