@@ -1,6 +1,6 @@
 ---
 title: "In-depth: PostHog vs LaunchDarkly"
-date: 2023-09-27
+date: 2023-09-29
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -17,6 +17,7 @@ tags:
 One glance at both PostHog and LaunchDarkly’s homepages explains a lot about each of them. It shows:
 
 1. LaunchDarkly is an enterprise-focused feature management tool with feature flags, experiments, and related workflows.
+
 2. PostHog is an all-in-one suite of product and data tools, including feature management and experimentation, but also extending to session replays, analytics, and user surveys.
 
 Both provide feature flagging and experimentation functionality. Using these features enables you to [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, [configure your app remotely](/blog/feature-flags-vs-configuration), customize experiences, and more.
@@ -60,62 +61,62 @@ Both PostHog and LaunchDarkly built the infrastructure to use flags and experime
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td>PostHog</td>
-            <td>LaunchDarkly</td>
+            <td><strong>PostHog</strong></td>
+            <td><strong>LaunchDarkly</strong></td>
             <td></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Open source</td>
+            <td><strong>Open source</strong></td>
             <td className="text-center">Full</td>
             <td className="text-center">Partial</td>
             <td>Code publicly accessible</td>
         </tr>
         <tr>
-            <td>Self-service</td>
+            <td><strong>Self-service</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>No need to talk to sales</td>
         </tr>
         <tr>
-            <td>All major SDKs</td>
+            <td><strong>All major SDKs</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>JavaScript, Android, iOS, Python, and more</td>
         </tr>
         <tr>
-            <td>Proxies</td>
+            <td><strong>Proxies</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Reverse proxy to avoid blockers</td>
         </tr>
         <tr>
-            <td>API</td>
+            <td><strong>API</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center">Pro</td>
             <td>Edit and evaluate flags with API</td>
         </tr>
         <tr>
-            <td>Local evaluation (aka streaming)</td>
+            <td><strong>Local evaluation (aka streaming)</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Faster flags by not having to rely on the server for evaluation</td>
         </tr>
         <tr>
-            <td>Bootstrapping</td>
+            <td><strong>Bootstrapping</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Flags available on frontend application load</td>
         </tr>
         <tr>
-            <td>SQL</td>
+            <td><strong>SQL</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Query flag and product data directly via SQL</td>
         </tr>
         <tr>
-            <td>Session replays</td>
+            <td><strong>Session replays</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Real user playback of flag session</td>
@@ -126,87 +127,87 @@ Both PostHog and LaunchDarkly built the infrastructure to use flags and experime
 
 ### Feature management
 
-Both PostHog and LaunchDarkly offer all the functionality you expect for feature management using feature flags. 
+Both PostHog and LaunchDarkly offer all the functionality you expect for feature management using feature flags.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td>PostHog</td>
-            <td>LaunchDarkly</td>
+            <td><strong>PostHog</strong></td>
+            <td><strong>LaunchDarkly</strong></td>
             <td></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Boolean flags</td>
+            <td><strong>Boolean flags</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Simple flags returning true or flag</td>
         </tr>
         <tr>
-            <td>Percentage rollouts</td>
+            <td><strong>Percentage rollouts</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Target percentages of a group</td>
         </tr>
         <tr>
-            <td>Custom targeting</td>
+            <td><strong>Custom targeting</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Target users based on user properties, custom contexts</td>
         </tr>
         <tr>
-            <td>Multivariate flags</td>
+            <td><strong>Multivariate flags</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Flags with multiple customizable values</td>
         </tr>
         <tr>
-            <td>JSON payloads</td>
+            <td><strong>JSON payloads</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Flags return JSON</td>
         </tr>
         <tr>
-            <td>Environments</td>
+            <td><strong>Environments</strong></td>
             <td className="text-center">Partial</td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Manage flags for dev, stage, prod</td>
         </tr>
         <tr>
-            <td>Scheduling</td>
+            <td><strong>Scheduling</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center">Enterprise</td>
             <td>Schedule flags to turn on or off</td>
         </tr>
         <tr>
-            <td>Workflows</td>
+            <td><strong>Workflows</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center">Enterprise</td>
             <td>Manage changes to flags</td>
         </tr>
         <tr>
-            <td>Lifecycle management</td>
+            <td><strong>Lifecycle management</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Display new and old flags</td>
         </tr>
         <tr>
-            <td>Triggers</td>
+            <td><strong>Triggers</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Trigger changes based on metrics</td>
         </tr>
         <tr>
-            <td>Unlimited targeting size</td>
+            <td><strong>Unlimited targeting size</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center">Enterprise</td>
             <td>Target contexts of any size</td>
         </tr>
         <tr>
-            <td>Early access management</td>
+            <td><strong>Early access management</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Manage betas, test features</td>
@@ -226,44 +227,44 @@ PostHog and LaunchDarkly have relatively similar experimentation feature sets, e
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td>PostHog</td>
-            <td>LaunchDarkly</td>
+            <td><strong>PostHog</strong></td>
+            <td><strong>LaunchDarkly</strong></td>
             <td></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Custom goals</td>
+            <td><strong>Custom goals</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Customize metrics that test tracks</td>
         </tr>
         <tr>
-            <td>Secondary metrics</td>
+            <td><strong>Secondary metrics</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Monitor impact on unrelated metrics</td>
         </tr>
         <tr>
-            <td>Statistical significance calculation</td>
+            <td><strong>Statistical significance calculation</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Calculate if changes make a statistically significant impact</td>
         </tr>
         <tr>
-            <td>Split testing</td>
+            <td><strong>Split testing</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Split participants into groups</td>
         </tr>
         <tr>
-            <td>Multivariate (A/B/n) testing</td>
+            <td><strong>Multivariate (A/B/n) testing</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Test multiple variants of a change</td>
         </tr>
         <tr>
-            <td>Recommended run time</td>
+            <td><strong>Recommended run time</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Calculate the recommended run time for your experiments</td>
@@ -285,28 +286,28 @@ PostHog and LaunchDarkly price significantly differently.
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td className="text-center">PostHog</td>
-            <td className="text-center">LaunchDarkly</td>
+            <td className="text-center"><strong>PostHog</strong></td>
+            <td className="text-center"><strong>LaunchDarkly</strong></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Pricing</td>
+            <td><strong>Pricing</strong></td>
             <td className="text-center">Simple per request pricing</td>
             <td className="text-center">Based on MAU + seats + add-ons</td>
         </tr>
         <tr>
-            <td>Free plan</td>
+            <td><strong>Free plan</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center">Trial only</td>
         </tr>
         <tr>
-            <td>Free experiments</td>
+            <td><strong>Free experiments</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
         </tr>
         <tr>
-            <td>Free collaboration</td>
+            <td><strong>Free collaboration</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
         </tr>
@@ -332,12 +333,12 @@ To give you an idea of what pricing looks like in reality, here are some example
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-            <th>Seats</th>
-            <th>MAUs</th>
-            <th>Requests</th>
-            <th>Request location</th>
-            <th>PostHog cost</th>
-            <th>LaunchDarkly cost</th>
+            <th><strong>Seats</strong></th>
+            <th><strong>MAUs</strong></th>
+            <th><strong>Requests</strong></th>
+            <th><strong>Request location</strong></th>
+            <th><strong>PostHog cost</strong></th>
+            <th><strong>LaunchDarkly cost</strong></th>
         </tr>
     </thead>
     <tbody>
@@ -388,50 +389,50 @@ Although LaunchDarkly has basic reporting features, PostHog has a more expansive
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td>PostHog</td>
-            <td>LaunchDarkly</td>
+            <td><strong>PostHog</strong></td>
+            <td><strong>LaunchDarkly</strong></td>
             <td></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Analytics</td>
+            <td><strong>Analytics</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Capture usage and calls related to flags</td>
         </tr>
         <tr>
-            <td>Trends</td>
+            <td><strong>Trends</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Graphs of flag usage</td>
         </tr>
         <tr>
-            <td>Funnel visualization</td>
+            <td><strong>Funnel visualization</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Analyze impact of flags on funnels</td>
         </tr>
         <tr>
-            <td>Retention</td>
+            <td><strong>Retention</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>User retention related to flags</td>
         </tr>
         <tr>
-            <td>Breakdowns</td>
+            <td><strong>Breakdowns</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Breakdown analytics by properties</td>
         </tr>
         <tr>
-            <td>Dashboards</td>
+            <td><strong>Dashboards</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Multiple customizable insights for a flag</td>
         </tr>
         <tr>
-            <td>Non-flag data</td>
+            <td><strong>Non-flag data</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Combine flag data with other product data</td>
@@ -449,56 +450,56 @@ Both PostHog and LaunchDarkly have a range of integrations that enable them to i
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td>PostHog</td>
-            <td>LaunchDarkly</td>
+            <td><strong>PostHog</strong></td>
+            <td><strong>LaunchDarkly</strong></td>
             <td></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Free integrations</td>
+            <td><strong>Free integrations</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td>Use integrations on the free plan</td>
         </tr>
         <tr>
-            <td>Exports</td>
+            <td><strong>Exports</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center">Add-on</td>
             <td>Export data to other sources</td>
         </tr>
         <tr>
-            <td>Imports</td>
+            <td><strong>Imports</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Import data from source</td>
         </tr>
         <tr>
-            <td>Slack</td>
+            <td><strong>Slack</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Alerts for Slack</td>
         </tr>
         <tr>
-            <td>Teams</td>
+            <td><strong>Teams</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Alerts for Microsoft Teams</td>
         </tr>
         <tr>
-            <td>Zapier</td>
+            <td><strong>Zapier</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Trigger Zapier automations</td>
         </tr>
         <tr>
-            <td>Sentry</td>
+            <td><strong>Sentry</strong></td>
             <td className="text-center">Two way</td>
             <td className="text-center">One way</td>
             <td>Connect to Sentry data</td>
         </tr>
         <tr>
-            <td>Edge tools</td>
+            <td><strong>Edge tools</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Use edge networks</td>
@@ -522,56 +523,56 @@ Both PostHog and LaunchDarkly enable companies to remain secure and compliant wi
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td>PostHog</td>
-            <td>LaunchDarkly</td>
+            <td><strong>PostHog</strong></td>
+            <td className="text-center"><strong>LaunchDarkly</strong></td>
             <td></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>User privacy options</td>
+            <td><strong>User privacy options</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Anonymize users, drop personal data</td>
         </tr>
         <tr>
-            <td>History, audit logs</td>
+            <td><strong>History, audit logs</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center">Pro</td>
             <td>Manage and view flag edits and related users</td>
         </tr>
         <tr>
-            <td>GDPR ready</td>
+            <td><strong>GDPR ready</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Can be compliant with GDPR</td>
         </tr>
         <tr>
-            <td>SOC2</td>
+            <td><strong>SOC2</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>SOC 2 security certification</td>
         </tr>
         <tr>
-            <td>2FA</td>
+            <td><strong>2FA</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
             <td>Enforce login with two-factor authentication</td>
         </tr>
         <tr>
-            <td>SAML/SSO</td>
+            <td><strong>SAML/SSO</strong></td>
             <td className="text-center">Enterprise</td>
             <td className="text-center">$10/seat/month or Enterprise</td>
             <td>Use SAML or single sign-on authentication</td>
         </tr>
         <tr>
-            <td>Approvals</td>
+            <td><strong>Approvals</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center">Enterprise</td>
             <td>Require approvals to change flags</td>
         </tr>
         <tr>
-            <td>Permissioning</td>
+            <td><strong>Permissioning</strong></td>
             <td className="text-center"><span className="text-red text-lg">✖</span></td>
             <td className="text-center">Enterprise</td>
             <td>Control who can edit and modify flags</td>
