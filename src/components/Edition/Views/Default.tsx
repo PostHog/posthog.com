@@ -6,12 +6,13 @@ import TableOfContents from 'components/PostLayout/TableOfContents'
 import { useLocation } from '@reach/router'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import dayjs from 'dayjs'
-import { useInView } from 'react-intersection-observer'
 import { QuestionForm } from 'components/Squeak'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isToday from 'dayjs/plugin/isToday'
 import { useLayoutData } from 'components/Layout/hooks'
 import LikeButton from '../LikeButton'
+import { child, container } from 'components/CallToAction'
+import Spinner from 'components/Spinner'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -34,17 +35,6 @@ const Post = ({
     const breakpoints = useBreakpoint()
     const day = dayjs(date || publishedAt)
 
-    const { ref, inView } = useInView({
-        threshold: 0,
-        triggerOnce: true,
-    })
-
-    useEffect(() => {
-        if (inView) {
-            fetchMore()
-        }
-    }, [inView])
-
     useEffect(() => {
         if (active && typeof window !== 'undefined' && !breakpoints.sm) {
             containerRef?.current?.scrollIntoView({ block: 'center', inline: 'nearest' })
@@ -61,7 +51,7 @@ const Post = ({
             className={`snap-start last:pb-24 ${!articleView ? 'grid grid-cols-[32px_1fr] gap-2 items-center' : ''}`}
         >
             {!articleView && <LikeButton postID={id} />}
-            <span className={`flex items-center ${articleView ? 'py-1' : ''}`} ref={fetchMore ? ref : null}>
+            <span className={`flex items-center ${articleView ? 'py-1' : ''}`}>
                 <Link
                     className={`inline m-0 font-semibold !leading-tight line-clamp-2 text-inherit hover:text-primary dark:hover:text-primary-dark hover:text-inherit dark:text-inherit dark:hover:text-inherit rounded-md p-2 hover:transition-transform flex-grow hover:bg-accent dark:hover:bg-accent-dark relative hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] ${
                         active ? 'bg-accent dark:bg-accent-dark' : ''
@@ -141,7 +131,7 @@ export const Skeleton = () => {
 }
 
 function PostsListing() {
-    const { posts, fetchMore, isValidating, isLoading, articleView } = useContext(PostsContext)
+    const { posts, fetchMore, isValidating, isLoading, articleView, hasMore } = useContext(PostsContext)
     const breakpoints = useBreakpoint()
     const { fullWidthContent } = useLayoutData()
 
@@ -166,19 +156,23 @@ function PostsListing() {
                     }`}
                 >
                     {posts.map(({ id, attributes }, index) => {
-                        return (
-                            <Post
-                                articleView={articleView}
-                                key={id}
-                                {...attributes}
-                                id={id}
-                                fetchMore={posts.length === index + 1 && fetchMore}
-                            />
-                        )
+                        return <Post articleView={articleView} key={id} {...attributes} id={id} />
                     })}
-                    {(isLoading || isValidating) && (
-                        <li>
-                            <Skeleton />
+                    {hasMore && (
+                        <li className="mt-4 mb-24">
+                            <button
+                                onClick={fetchMore}
+                                disabled={isLoading || isValidating}
+                                className={`${container()} w-full`}
+                            >
+                                <span className={`${child()}`}>
+                                    {isLoading || isValidating ? (
+                                        <Spinner className="!w-6 !h-6 mx-auto text-white" />
+                                    ) : (
+                                        'Load more'
+                                    )}
+                                </span>
+                            </button>
                         </li>
                     )}
                 </ul>

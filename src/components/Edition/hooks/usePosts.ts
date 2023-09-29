@@ -28,11 +28,15 @@ export const usePosts = ({ params }: { params: any }) => {
         return data?.reduce((acc, cur) => [...(acc || []), ...(cur.data || [])], []) ?? []
     }, [size, data])
 
+    const total = data && data[0]?.meta?.pagination?.total
+    const hasMore = total ? posts?.length < total : false
+
     return {
         posts,
         isLoading,
         isValidating,
         fetchMore: () => setSize(size + 1),
         mutate,
+        hasMore,
     }
 }

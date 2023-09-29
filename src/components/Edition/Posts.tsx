@@ -211,7 +211,7 @@ export default function Posts({
         },
     }
 
-    const { posts, isLoading, isValidating, fetchMore, mutate } = usePosts({ params })
+    const { posts, isLoading, isValidating, fetchMore, mutate, hasMore } = usePosts({ params })
 
     const handleNewPostSubmit = () => {
         setNewPostModalOpen(false)
@@ -249,6 +249,7 @@ export default function Posts({
                     setLoginModalOpen,
                     loginModalOpen,
                     articleView,
+                    hasMore,
                 }}
             >
                 <PostProvider
