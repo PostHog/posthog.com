@@ -23,7 +23,7 @@ These are the ways in which customers can currently reach us:
 
 ### Engineers are Support Heroes
 
-Whilst our support engineer, Marcus, is here to triage and escalate issues for specific teams, the direct interaction between our engineering team and our users is _hugely_ valuable. An important part of building trust in our community is the ability for users to talk directly with the engineers at PostHog who are actually building the product.
+Our Support Engineer, [Marcus](https://posthog.com/community/profiles/1036), will work directly with the according engineering team to triage and escalate certain issues, since the direct interaction between our engineering team and our users is _hugely_ valuable. An important part of building trust in our community is the ability for users to talk directly with the engineers at PostHog who are actually building the product.
 
 Providing support is a responsibility shared across our engineering teams - we expect everyone to jump in and help a user if you see they have a question or problem (though obviously not at the same time!) Once you have made the initial contact or response, it is your responsibility to see it through or explicitly hand over to someone else if they are better-equipped to help.
 
