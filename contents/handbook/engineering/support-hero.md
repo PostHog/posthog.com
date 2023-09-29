@@ -8,7 +8,7 @@ showTitle: true
 
 Every week, we assign one person to be the "Support Hero" per engineering team (alternative names "Secondary", "Support Sidekick", "Infra Hero", "Luigi"). If this is you this week, congratulations! Support hero is an intense but super fun week where you get to talk to a bunch of users, get the satisfaction of helping them out, and contribute to a lot of different parts of our system. Your first priority should be dealing with alerts or Sentry alerts are high priority. After that, it's responding to customer support requests. Depending on how busy the week is you can do some feature work too.
 
-Marcus will act as triage for Product Analytics and Pipeline due to the high volume of tickets for those teams.  He will resolve tickets if possible, and escalate to the Engineering team responsible if he needs further help.
+[Marcus](https://posthog.com/community/profiles/1036), our Support Engineer, will triage tickets for the Product Analytics and Pipeline team, due to the high volume of tickets those teams get. He will resolve tickets if possible, and escalate to the Engineering team responsible if he needs further help.
 
 ### Expectations
 
