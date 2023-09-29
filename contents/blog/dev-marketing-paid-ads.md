@@ -151,3 +151,5 @@ Then you can branch out into other channels. For reference, at PostHog we got Go
 - Make sure you're covering [all your marketing bases](/blog/dev-marketing-for-startups).
 - Read about [how our marketing team uses PostHog](/blog/posthog-marketing).
 - Check out [PostHog’s Marketing Handbook](/handbook/growth/marketing) – and copy it if you want to!
+
+> **If you enjoyed this article**, [subscribe to Product for Engineers](https://newsletter.posthog.com/), where we share more like this every two weeks or so.
