@@ -23,11 +23,19 @@ PostHog is an all-in-one platform that combines product analytics, session repla
  
 ### Key features
 
+![product analytics](../images/blog/mixpanel-alternatives/posthog-product-analytics.png)
+
 - **Product analytics**, including funnel insights, user paths, retention analysis, custom trends, and dynamic user cohorts. Power users can create custom insights using SQL.
+
+![product analytics](../images/blog/mixpanel-alternatives/posthog-replay.png)
 
 - **Session replays** with event timelines, console logs, and network activity. You can also download recordings to save them beyond the standard 90-day retention policy.
 
+![feature flags](../images/blog/mixpanel-alternatives/posthog-feature-flags.png)
+
 - **Feature flags** with local evaluation (for faster performance) and JSON payloads, so you can make changes to your product without deploying new code. 
+
+![ab testing](../images/blog/mixpanel-alternatives/posthog-ab-tests.png)
 
 - **A/B tests** with up to 9 test variations, primary and secondary metrics. Automatically calculates recommended duration, sample size, and statistical significance.
 
@@ -118,8 +126,6 @@ As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/
 **Bottom line:** GA4 is the best Mixpanel alternative for marketing teams who want to track ROI on campaigns.
 
 ## Amplitude
-
-IMAGE
 
 ### What is Amplitude?
 
