@@ -461,7 +461,7 @@ To give you an idea of what pricing looks like in reality, here are some example
 
 > **Note:** Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage depending on the polling duration and active number of servers. If you use locally evaluated flags with one server polling every 30 seconds, this amount is under 1M requests (free). PostHog also has volume discounts on flags over 2 million requests per month.
 
-### **Integrations**
+### Integrations
 
 GrowthBook has integrations with data warehouses and analytics tools they rely on, but little beyond that. PostHog has a wider range of integrations. 
 
@@ -605,13 +605,13 @@ GrowthBook, like PostHog, is free to self-host. This doesn’t count infrastruct
 
 GrowthBook Cloud is free for up to 3 users and 10M requests per month. Its "Pro" plan is $20/seat/month and provides access to premium features. They also have an Enterprise plan that adds more security and compliance tools as well as a higher request limit. 
 
-### **Does GrowthBook or PostHog offer free trials?**
+### Does GrowthBook or PostHog offer free trials?
 
 GrowthBook is free to self-host and has a free cloud tier with unlimited flags and experiments for up to 3 users.
 
 PostHog lets you use all its features for free. Once you upgrade to paid, you get 1M flag requests, 1M events, and 15,000 recordings for free each month. If your usage stays below this, PostHog remains free.
 
-### **How long does it take to implement PostHog?**
+### How long does it take to implement PostHog?
 
 Feature flags and experiments are simple. They are a few lines of code in any of your favorite languages. They can even be set up on no-code site builders like [Framer](/tutorials/framer-analytics) or [Webflow](/tutorials/webflow-ab-tests).
 
@@ -619,7 +619,7 @@ The process requires signing up for PostHog, installing the snippet or SDK in yo
 
 You can reuse the PostHog implementation, like user identification, across products. Because PostHog is an all-in-one platform, analytics capture for targeting and A/B testing results doesn’t need set up or connection either.
 
-### **How long does it take to implement GrowthBook?**
+### How long does it take to implement GrowthBook?
 
 The basic GrowthBook implementation is relatively similar to PostHog.  The need to define data twice as well as integrate external tools makes it longer.
 
