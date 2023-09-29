@@ -13,9 +13,11 @@ tags:
   - Comparisons
 ---
 
+
+
 ## PostHog
 
-IMAGE HERE
+![posthog](../images/blog/mixpanel-alternatives/posthog.png)
 
 ### What is PostHog?
 
@@ -23,19 +25,11 @@ PostHog is an all-in-one platform that combines product analytics, session repla
  
 ### Key features
 
-![product analytics](../images/blog/mixpanel-alternatives/posthog-product-analytics.png)
-
 - **Product analytics**, including funnel insights, user paths, retention analysis, custom trends, and dynamic user cohorts. Power users can create custom insights using SQL.
-
-![product analytics](../images/blog/mixpanel-alternatives/posthog-replay.png)
 
 - **Session replays** with event timelines, console logs, and network activity. You can also download recordings to save them beyond the standard 90-day retention policy.
 
-![feature flags](../images/blog/mixpanel-alternatives/posthog-feature-flags.png)
-
 - **Feature flags** with local evaluation (for faster performance) and JSON payloads, so you can make changes to your product without deploying new code. 
-
-![ab testing](../images/blog/mixpanel-alternatives/posthog-ab-tests.png)
 
 - **A/B tests** with up to 9 test variations, primary and secondary metrics. Automatically calculates recommended duration, sample size, and statistical significance.
 
@@ -75,11 +69,11 @@ PostHog and Mixpanel offer similar product analytics features, but they diverge 
 
 3. **Real user feedback and data in one:** Mixpanel's singular focus on product analytics is somewhat limiting. You need to look elsewhere to see how real users use your product, or gather feedback on what they think. PostHog closes this loop by combining hard data with actionable user feedback.
 
-**Bottom line:** PostHog is the best Mixpanel alternative to startups and mid-size companies, especially if they're stuck using a confusing collection of individual tools.
+> **Bottom line:** PostHog is the best Mixpanel alternative to startups and mid-size companies, especially if they're stuck using a confusing collection of individual tools.
 
 ## Google Analytics 4 (GA4)
 
-[IMAGE]
+![GA4](../images/blog/mixpanel-alternatives/GA4.png)
 
 ### What is Google Analytics 4?
 
@@ -123,9 +117,11 @@ As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/
 
 3. **Mixpanel is platform-agnostic:** While there's nothing stopping you from exporting GA4 data to non-Google platforms, it's mainly designed to play nicely with Google-owned products. Mixpanel happily integrates with a wide range or third-party tools across A/B testing, marketing automation, attribution, and beyond.
 
-**Bottom line:** GA4 is the best Mixpanel alternative for marketing teams who want to track ROI on campaigns.
+> **Bottom line:** GA4 is the best Mixpanel alternative for marketing teams who want to track ROI on campaigns.
 
 ## Amplitude
+
+![amplitude](../images/blog/mixpanel-alternatives/ammplitude.png)
 
 ### What is Amplitude?
 
@@ -169,12 +165,11 @@ Amplitude is deployed by 6,973 (0.7%) of the top 1 million websites in 2023. Mix
 
 - **Collaboration features:** While both products offer some twist on shareable notebooks, Mixpanel's collaboration features are more mature. Mixpanel chose to [sunset A/B testing and messaging](https://mixpanel.com/blog/why-were-sunsetting-messaging-and-experiments/) features in 2021 to double down on product analytics.
 
-**Bottom line:** Amplitude is the best Mixpanel alternative for large enterprise companies who want to reduce the load on expensive, overworked data science teams. 
-
+> **Bottom line:** Amplitude is the best Mixpanel alternative for large enterprise companies who want to reduce the load on expensive, overworked data science teams. 
 
 ## Heap
 
-IMAGE
+![heap](../images/blog/mixpanel-alternatives/heap.png)
 
 ### What is Heap?
 
@@ -214,4 +209,4 @@ Heap is less popular than Mixpanel. Heap is deployed on 3,200 (0.3%) of the top 
 
 - **Fewer integrations:** While Heap has integrations with most third-party tools for things like A/B testing, or marketing automation, Mixpanel has more. To use just one example, Heap offers just two official survey integrations (Appcues and Delighted), while Mixpanel has nine. 
 
-**Bottom line:** Heap is the best Mixpanel alternative for non-technical product teams with understaffed engineering teams.
+> **Bottom line:** Heap is the best Mixpanel alternative for non-technical product teams with understaffed engineering teams.
