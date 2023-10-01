@@ -18,7 +18,7 @@ While your choice is highly commendable, the resounding applause from devs on Gi
 
 Just one thing: **you need to build a community.**
 
-<iframe src="https://giphy.com/embed/OF0yOAufcWLfi" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p>
+<iframe src="https://giphy.com/embed/OF0yOAufcWLfi" width="480" height="238" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 Open-source requires a decently-sized, highly engaged community for any business model to work. People have to believe in your solution enough to contribute code, comments, or cash to it. If money is a priority for your business, open-source might not be the path for you.
 

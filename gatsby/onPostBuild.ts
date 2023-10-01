@@ -187,7 +187,11 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
             }
             allMDXPosts: allMdx(
                 filter: {
-                    fields: { slug: { regex: "/^/blog|^/tutorials|^/customers|^/spotlight|^/library/" } }
+                    fields: {
+                        slug: {
+                            regex: "/^/blog|^/tutorials|^/customers|^/spotlight|^/founders|^/product-engineers|^/features/"
+                        }
+                    }
                     frontmatter: { date: { ne: null } }
                 }
             ) {

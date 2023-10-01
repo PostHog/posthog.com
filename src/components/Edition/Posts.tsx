@@ -177,18 +177,11 @@ export default function Posts({
     const [prev, setPrev] = useState<string | null>(null)
     const params = {
         filters: {
-            $or: [
+            $and: [
                 ...(root
                     ? [
                           {
                               post_category: {
-                                  folder: {
-                                      $eq: root,
-                                  },
-                              },
-                          },
-                          {
-                              crosspost_categories: {
                                   folder: {
                                       $eq: root,
                                   },
