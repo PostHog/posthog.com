@@ -51,6 +51,8 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
 
 ### How does PostHog compare to Mixpanel?
 
+PostHog's built-in features make it the obvious choice if you like the idea of consolidating around one platform. Mixpanel's offers plentiful third-party integrations for features it doesn't have, but this creates a messy workflow for teams.
+
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
@@ -114,7 +116,7 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
             <td><strong>Notebooks</strong></td>
             <td className="text-center">Public beta</td>            
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Create, share and collaborate notebooks</td>
+            <td>Create shareable notebooks for analysis</td>
         </tr>                           
     </tbody>
 </table>
@@ -124,7 +126,7 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
 
 ### How popular is PostHog?
 
-PostHog is the fastest Mixpanel alternative in the market, according to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant.
+According to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, _PostHog is the fastest growing Mixpanel alternative_ in the market,
 
 **PostHog** is deployed by 2,365 (0.2%) of the top 1 million websites in 2023, up +327% from 554 the previous year. **Mixpanel** is deployed by 5,218 (0.5%), down -17% from 6,295 the previous year.
 
@@ -140,7 +142,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 > ### Bottom line 
 >
-> PostHog is the best Mixpanel alternative for startups and mid-size companies, especially if they're stuck using a confusing collection of individual tools. It's also the only tool designed for engineers.
+> PostHog is the best Mixpanel alternative for startups and mid-size companies, especially those who would rather use one integrated platform instead of multiple, more expensive tools. It's also the best alternative for engineers.
 
 ## Google Analytics 4 (GA4)
 
