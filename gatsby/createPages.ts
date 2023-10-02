@@ -199,7 +199,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 filter: {
                     isFuture: { eq: false }
                     frontmatter: { date: { ne: null } }
-                    fields: { slug: { regex: "/^/library/" } }
+                    fields: { slug: { regex: "/^/library|^/founders|^/product-engineers|^/features/" } }
                 }
             ) {
                 totalCount

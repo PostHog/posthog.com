@@ -152,6 +152,9 @@ const Router = ({ children }: { children: React.ReactNode }) => {
                 }`}
             >
                 {{
+                    '/product-engineers': <Blog title="Product engineers" />,
+                    '/features': <Blog title="Features" />,
+                    '/founders': <Blog title="Founders" />,
                     '/blog': <Blog />,
                     '/newsletter': <Newsletter />,
                     '/spotlight': <Blog title="Spotlight" />,

@@ -63,7 +63,7 @@ export const Intro = ({
                 </div>
             )}
             {(featuredVideo || featuredImageType !== 'full') && <Title>{title}</Title>}
-            {contributors && (
+            {contributors?.[0] && (
                 <div className="my-3">
                     {contributors.map(({ profile_id, image, name }) => (
                         <Contributor
