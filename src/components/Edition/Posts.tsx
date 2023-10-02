@@ -152,6 +152,9 @@ const Router = ({ children }: { children: React.ReactNode }) => {
                 }`}
             >
                 {{
+                    '/product-engineers': <Blog title="Product engineers" />,
+                    '/features': <Blog title="Features" />,
+                    '/founders': <Blog title="Founders" />,
                     '/blog': <Blog />,
                     '/newsletter': <Newsletter />,
                     '/spotlight': <Blog title="Spotlight" />,
@@ -177,18 +180,11 @@ export default function Posts({
     const [prev, setPrev] = useState<string | null>(null)
     const params = {
         filters: {
-            $or: [
+            $and: [
                 ...(root
                     ? [
                           {
                               post_category: {
-                                  folder: {
-                                      $eq: root,
-                                  },
-                              },
-                          },
-                          {
-                              crosspost_categories: {
                                   folder: {
                                       $eq: root,
                                   },

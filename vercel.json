@@ -249,7 +249,6 @@
         { "source": "/blog/the-posthog-array-1-15-1", "destination": "/blog/the-posthog-array-1-15-0" },
         { "source": "/handbook/people/team-structure/design", "destination": "/handbook/design/philosophy" },
         { "source": "/handbook/design/about-design", "destination": "/handbook/design/philosophy" },
-
         { "source": "/product-features/self-hosted", "destination": "/product-os" },
         { "source": "/product-features/event-autocapture", "destination": "/product-os" },
         { "source": "/product-features/trends", "destination": "/product-analytics" },
@@ -262,7 +261,6 @@
         { "source": "/product/quantitative-analysis", "destination": "/product-analytics" },
         { "source": "/product/correlation-analysis", "destination": "/product-analytics" },
         { "source": "/product-features", "destination": "/product-analytics" },
-
         { "source": "/product", "destination": "/product-analytics", "statusCode": 301 },
         { "source": "/product/funnels", "destination": "/product-analytics" },
         { "source": "/product/trends", "destination": "/product-analytics" },
@@ -273,7 +271,6 @@
         { "source": "/product/experimentation-suite", "destination": "/ab-testing" },
         { "source": "/product/heatmaps", "destination": "/tutorials/toolbar", "statusCode": 301 },
         { "source": "/heatmaps", "destination": "/tutorials/toolbar" },
-
         { "source": "/docs/tutorials/aarrr-framework", "destination": "/tutorials/aarrr-framework" },
         {
             "source": "/docs/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog",
@@ -648,20 +645,17 @@
         { "source": "/docs/integrate", "destination": "/docs/getting-started/install" },
         { "source": "/docs/integrate/ingest-historic-data", "destination": "/docs/migrate/ingest-historic-data" },
         { "source": "/blog/categories/hogmail", "destination": "/blog/categories/newsletter" },
-
         { "source": "/docs/integrate/third-party/docusaurus", "destination": "/docs/libraries/docusaurus" },
         { "source": "/docs/integrate/third-party/gatsby", "destination": "/docs/libraries/gatsby" },
         {
             "source": "/docs/integrate/third-party/google-tag-manager",
             "destination": "/docs/libraries/google-tag-manager"
         },
-
         { "source": "/manual/feature-flags", "destination": "/docs/feature-flags/manual" },
         { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" },
         { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
         { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags/manual" },
-
         { "source": "/manual/", "destination": "/docs/product-analytics/" },
         { "source": "/manual/correlation", "destination": "/docs/product-analytics/correlation" },
         { "source": "/manual/dashboards", "destination": "/docs/product-analytics/dashboards" },
@@ -678,7 +672,6 @@
         { "source": "/manual/toolbar", "destination": "/docs/toolbar" },
         { "source": "/docs/product-analytics/toolbar", "destination": "/docs/toolbar" },
         { "source": "/manual/trends", "destination": "/docs/product-analytics/trends" },
-
         { "source": "/manual/actions", "destination": "/docs/data/actions" },
         { "source": "/manual/annotations", "destination": "/docs/data/annotations" },
         { "source": "/manual/application-settings", "destination": "/docs/data/application-settings" },
@@ -696,17 +689,13 @@
         { "source": "/manual/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/manual/team-collaboration", "destination": "/docs/data/team-collaboration" },
         { "source": "/manual/utm-segmentation", "destination": "/docs/data/utm-segmentation" },
-
         { "source": "/manual/support", "destination": "/docs/support-options" },
         { "source": "/manual/glossary", "destination": "/docs/glossary" },
-
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
         { "source": "/docs/integrate/cdp", "destination": "/docs/advanced/cdp" },
         { "source": "/docs/integrate/proxy", "destination": "/docs/advanced/proxy" },
-
         { "source": "/docs/integrate/badge", "destination": "/docs/contribute/badge" },
         { "source": "/docs/integrate/libraries", "destination": "/docs/libraries" },
-
         { "source": "/docs/data/notifications-and-alerts", "destination": "/docs/product-analytics/subscriptions" },
         { "source": "/handbook/engineering/oncall-rotation", "destination": "/handbook/engineering/oncall" },
         { "source": "/docs/integrate/next-js", "destination": "/docs/libraries/next-js" },
@@ -714,7 +703,6 @@
         { "source": "/docs/integrate/rudderstack", "destination": "/docs/libraries/rudderstack" },
         { "source": "/docs/integrate/segment", "destination": "/docs/libraries/segment" },
         { "source": "/docs/sdks/ios", "destination": "/docs/libraries/ios" },
-
         { "source": "/docs/self-host/deploy/aws", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/azure", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/digital-ocean", "destination": "/docs/self-host" },
@@ -909,13 +897,7 @@
         {
             "source": "/pricing",
             "destination": "/pricing?product=ab-testing",
-            "has": [
-                {
-                    "type": "query",
-                    "key": "product",
-                    "value": "experiments"
-                }
-            ]
+            "has": [{ "type": "query", "key": "product", "value": "experiments" }]
         },
         { "source": "/tutorials/cohorts", "destination": "/docs/data/cohorts" },
         { "source": "/tutorials/retention", "destination": "/tutorials/feature-retention" },
@@ -953,7 +935,120 @@
         { "source": "/blog/startup-golioth", "destination": "/spotlight/startup-golioth" },
         { "source": "/blog/startup-unified", "destination": "/spotlight/startup-unified" },
         { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" },
-        { "source": "/docs/cdp/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" }
+        { "source": "/docs/cdp/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
+        { "source": "/blog/posthog-marketing", "destination": "/features/posthog-marketing" },
+        { "source": "/blog/asynchronous-remote-companies", "destination": "/founders/asynchronous-remote-companies" },
+        { "source": "/blog/ceo-diary-2", "destination": "/founders/ceo-diary-2" },
+        { "source": "/blog/ceo-diary-4", "destination": "/founders/ceo-diary-4" },
+        {
+            "source": "/blog/creating-ideal-customer-profile",
+            "destination": "/founders/creating-ideal-customer-profile"
+        },
+        { "source": "/blog/dev-marketing-for-startups", "destination": "/founders/dev-marketing-for-startups" },
+        { "source": "/blog/early-stage-analytics", "destination": "/founders/early-stage-analytics" },
+        {
+            "source": "/blog/early-stage-startup-hiring-strategy",
+            "destination": "/founders/early-stage-startup-hiring-strategy"
+        },
+        { "source": "/blog/equity-share-options-explained", "destination": "/founders/equity-share-options-explained" },
+        { "source": "/blog/features-sell", "destination": "/founders/features-sell" },
+        { "source": "/blog/first-ops-hire", "destination": "/founders/first-ops-hire" },
+        { "source": "/blog/hacker-news-premortem", "destination": "/founders/hacker-news-premortem" },
+        {
+            "source": "/blog/how-to-run-a-transparent-company",
+            "destination": "/founders/how-to-run-a-transparent-company"
+        },
+        {
+            "source": "/blog/how-to-treat-your-pricing-like-a-product",
+            "destination": "/founders/how-to-treat-your-pricing-like-a-product"
+        },
+        { "source": "/blog/inflated-risk-seems-riskier", "destination": "/founders/inflated-risk-seems-riskier" },
+        { "source": "/blog/making-something-people-want", "destination": "/founders/making-something-people-want" },
+        { "source": "/blog/measure-product-market-fit", "destination": "/founders/measure-product-market-fit" },
+        { "source": "/blog/multi-product-pricing", "destination": "/founders/multi-product-pricing" },
+        { "source": "/blog/north-star-metrics", "destination": "/founders/north-star-metrics" },
+        { "source": "/blog/planning-a-company-offsite", "destination": "/founders/planning-a-company-offsite" },
+        { "source": "/blog/posthog-first-five", "destination": "/founders/posthog-first-five" },
+        { "source": "/blog/postmortem-rebrand", "destination": "/founders/postmortem-rebrand" },
+        { "source": "/blog/pricing-lessons", "destination": "/founders/pricing-lessons" },
+        { "source": "/blog/product-360", "destination": "/founders/product-360" },
+        { "source": "/blog/product-at-posthog", "destination": "/founders/product-at-posthog" },
+        { "source": "/blog/product-led-growth", "destination": "/founders/product-led-growth" },
+        { "source": "/blog/product-market-fit-game", "destination": "/founders/product-market-fit-game" },
+        { "source": "/blog/recommended-reading", "destination": "/founders/recommended-reading" },
+        { "source": "/blog/registering-trademarks", "destination": "/founders/registering-trademarks" },
+        { "source": "/blog/remote-culture", "destination": "/founders/remote-culture" },
+        {
+            "source": "/blog/startup-finance-without-finance",
+            "destination": "/founders/startup-finance-without-finance"
+        },
+        { "source": "/blog/startup-ops-toolkit", "destination": "/founders/startup-ops-toolkit" },
+        {
+            "source": "/blog/stop-treating-engineers-differently",
+            "destination": "/founders/stop-treating-engineers-differently"
+        },
+        { "source": "/blog/story-about-pivots", "destination": "/founders/story-about-pivots" },
+        { "source": "/blog/using-vc-carefully", "destination": "/founders/using-vc-carefully" },
+        { "source": "/blog/vc-or-bootstrap", "destination": "/founders/vc-or-bootstrap" },
+        { "source": "/blog/what-motivates-me", "destination": "/founders/what-motivates-me" },
+        { "source": "/blog/what-to-ask-in-interviews", "destination": "/founders/what-to-ask-in-interviews" },
+        { "source": "/blog/writing-for-developers", "destination": "/founders/writing-for-developers" },
+        { "source": "/blog/build-features-users-love", "destination": "/newsletter/build-features-users-love" },
+        { "source": "/blog/compound-startups", "destination": "/newsletter/compound-startups" },
+        { "source": "/blog/product-for-engineers-1", "destination": "/newsletter/product-for-engineers-1" },
+        { "source": "/blog/saas-pricing-lessons", "destination": "/newsletter/saas-pricing-lessons" },
+        {
+            "source": "/blog/10x-engineers-do-user-interviews",
+            "destination": "/product-engineers/10x-engineers-do-user-interviews"
+        },
+        {
+            "source": "/blog/5-ways-to-improve-analytics-data",
+            "destination": "/product-engineers/5-ways-to-improve-analytics-data"
+        },
+        { "source": "/blog/aarrr-pirate-funnel", "destination": "/product-engineers/aarrr-pirate-funnel" },
+        { "source": "/blog/ab-testing-examples", "destination": "/product-engineers/ab-testing-examples" },
+        {
+            "source": "/blog/ab-testing-guide-for-engineers",
+            "destination": "/product-engineers/ab-testing-guide-for-engineers"
+        },
+        { "source": "/blog/ab-testing-mistakes", "destination": "/product-engineers/ab-testing-mistakes" },
+        { "source": "/blog/b2b-saas-product-metrics", "destination": "/product-engineers/b2b-saas-product-metrics" },
+        {
+            "source": "/blog/churn-rate-vs-retention-rate",
+            "destination": "/product-engineers/churn-rate-vs-retention-rate"
+        },
+        {
+            "source": "/blog/feature-flag-benefits-use-cases",
+            "destination": "/product-engineers/feature-flag-benefits-use-cases"
+        },
+        {
+            "source": "/blog/feature-flag-best-practices",
+            "destination": "/product-engineers/feature-flag-best-practices"
+        },
+        {
+            "source": "/blog/feature-flags-vs-configuration",
+            "destination": "/product-engineers/feature-flags-vs-configuration"
+        },
+        {
+            "source": "/blog/github-gitlab-feature-flags",
+            "destination": "/product-engineers/github-gitlab-feature-flags"
+        },
+        { "source": "/blog/growth-loops", "destination": "/product-engineers/growth-loops" },
+        {
+            "source": "/blog/how-to-start-a-growth-team",
+            "destination": "/product-engineers/how-to-start-a-growth-team"
+        },
+        { "source": "/blog/interview-snapshot-guide", "destination": "/product-engineers/interview-snapshot-guide" },
+        { "source": "/blog/measuring-feature-success", "destination": "/product-engineers/measuring-feature-success" },
+        { "source": "/blog/product-health-metrics", "destination": "/product-engineers/product-health-metrics" },
+        { "source": "/blog/product-survey-questions", "destination": "/product-engineers/product-survey-questions" },
+        { "source": "/blog/real-user-monitoring", "destination": "/product-engineers/real-user-monitoring" },
+        {
+            "source": "/blog/running-group-targeted-ab-tests",
+            "destination": "/product-engineers/running-group-targeted-ab-tests"
+        },
+        { "source": "/blog/sql-for-analytics", "destination": "/product-engineers/sql-for-analytics" },
+        { "source": "/blog/yc-2-years-on", "destination": "/yc-2-years-on" }
     ],
     "rewrites": [
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },

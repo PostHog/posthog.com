@@ -1,13 +1,15 @@
 ---
 date: 2021-08-25
 title: Winning from the back - late mover advantage
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
 author:
   - james-hawkins
 featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
-tags:
-  - Founders
-  - Product
+category: CEO diaries
 ---
 
 _We are open source_ is [literally our top value](../handbook/company/values)... and what better way to be transparent than to share a diary?
