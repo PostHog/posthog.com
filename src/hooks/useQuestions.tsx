@@ -24,6 +24,9 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
         },
         sort: 'createdAt:desc',
         filters: {
+            subject: {
+                $ne: '',
+            },
             $or: [
                 {
                     archived: {
