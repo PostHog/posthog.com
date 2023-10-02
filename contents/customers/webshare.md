@@ -53,7 +53,7 @@ Experiments the team have tried include adding explainer videos to the homepage 
 
 ### A single source of truth: building a data warehouse within PostHog
 
-However, Webshare doesn’t just use PostHog to run experiments and track product data — teams also forward other data to it from other platforms too. In effect PostHog has become Webshare’s data warehouse, holding all information the company has and enabling analysis of it in one place. 
+However, Webshare doesn’t just use PostHog to run experiments and track product data – teams also forward other data to it from other platforms too. In effect PostHog has become Webshare’s data warehouse, holding all information the company has and enabling analysis of it in one place. 
 
 “Every email, every Intercom message — basically every time we interact with a customer on any platform, that all goes into PostHog,” says Utku. “We track all of our KPIs there, as well as product usage, conversion rates, marketing campaigns, and so on.” 
 
