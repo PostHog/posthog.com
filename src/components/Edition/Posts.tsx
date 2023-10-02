@@ -184,11 +184,22 @@ export default function Posts({
                 ...(root
                     ? [
                           {
-                              post_category: {
-                                  folder: {
-                                      $eq: root,
+                              $or: [
+                                  {
+                                      post_category: {
+                                          folder: {
+                                              $eq: root,
+                                          },
+                                      },
                                   },
-                              },
+                                  {
+                                      crosspost_categories: {
+                                          folder: {
+                                              $eq: root,
+                                          },
+                                      },
+                                  },
+                              ],
                           },
                       ]
                     : []),

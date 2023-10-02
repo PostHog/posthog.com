@@ -48,7 +48,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                 page,
                 pageSize: 100,
             },
-            fields: ['id', 'folder', 'post_tags'],
+            fields: ['id', 'folder', 'label', 'post_tags'],
             populate: ['post_tags'],
         })
 
@@ -70,65 +70,136 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
                 Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
                 'content-type': 'application/json',
             },
-        }).catch((err) => console.error(err))
+        })
+            .then((res) => res.json())
+            .then(({ error }) => {
+                if (error) {
+                    console.error(error, data?.path)
+                }
+            })
+            .catch((err) => console.error(err))
+    }
+
+    const createTag = async (tag, category) => {
+        const label = tag.charAt(0).toUpperCase() + tag.slice(1)
+        console.log(`creating tag: ${label}`)
+        const body = JSON.stringify({
+            data: {
+                label,
+                post_category: {
+                    connect: [category?.id],
+                },
+            },
+        })
+        const { data } = await fetch(`${apiHost}/api/post-tags`, {
+            method: 'POST',
+            body,
+            headers: {
+                Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+                'content-type': 'application/json',
+            },
+        })
+            .then((res) => res.json())
+            .catch((err) => console.error(err))
+        category?.attributes?.post_tags?.data?.push(data)
+
+        return data
+    }
+
+    const createCategory = async (folder) => {
+        const label = (folder.charAt(0).toUpperCase() + folder.slice(1)).replaceAll('-', ' ')
+        console.log(`creating category: ${label}`)
+        const body = JSON.stringify({
+            data: {
+                label,
+                folder,
+            },
+        })
+        const { data } = await fetch(`${apiHost}/api/post-categories?populate=*`, {
+            method: 'POST',
+            body,
+            headers: {
+                Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+                'content-type': 'application/json',
+            },
+        })
+            .then((res) => res.json())
+            .catch((err) => console.error(err))
+        allStrapiPostCategories.push(data)
+        return allStrapiPostCategories.find((category) => category === data)
     }
 
     await getAllStrapiPosts()
     await getAllStrapiPostCategories()
+    const postPromises: Promise<any>[] = []
+    for (const {
+        frontmatter: { title, date, featuredImage, authorData, category: postTag, tags: postTags, crosspost },
+        fields: { slug },
+        parent: { relativePath: path },
+        rawBody,
+        excerpt,
+    } of posts) {
+        const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
+        const category =
+            allStrapiPostCategories.find((category) => category?.attributes?.folder === path.split('/')[0]) ||
+            (await createCategory(path.split('/')[0]))
 
-    await Promise.all(
-        posts.map(
-            ({
-                frontmatter: { title, date, featuredImage, authorData, category: postTag, tags: postTags },
-                fields: { slug },
-                parent: { relativePath: path },
-                rawBody,
-                excerpt,
-            }) => {
-                const existingPost = allExistingStrapiPosts.find((post) => post?.attributes?.path === path)
-                const category = allStrapiPostCategories.find(
-                    (category) => category?.attributes?.folder === path.split('/')[0]
-                )
-
-                const tags = category?.attributes?.post_tags?.data?.filter(
-                    (tag) =>
-                        tag?.attributes?.label?.toLowerCase() === postTag?.toLowerCase() ||
-                        postTags?.some((postTag) => postTag.toLowerCase() === tag?.attributes?.label?.toLowerCase())
-                )
-                const authorIDs = authorData?.map(({ profile_id }) => profile_id) || []
-                const data = {
-                    slug,
-                    path,
-                    title,
-                    date,
-                    featuredImage: {
-                        url: featuredImage?.childImageSharp?.gatsbyImageData?.images?.fallback?.src,
-                    },
-                    body: rawBody,
-                    excerpt,
-                    authors: {
-                        connect: authorIDs,
-                    },
-                    ...(category
-                        ? {
-                              post_category: {
-                                  connect: [category.id],
-                              },
-                          }
-                        : null),
-                    ...(tags?.length > 0
-                        ? {
-                              post_tags: {
-                                  connect: tags.map((tag) => tag.id),
-                              },
-                          }
-                        : null),
-                }
-
-                return limit(() => createOrUpdateStrapiPost(data, existingPost?.id))
+        let tags = []
+        for (const tagLabel of postTag?.toLowerCase() ? [postTag.toLowerCase()] : postTags || []) {
+            let tag = category?.attributes?.post_tags?.data?.find(
+                (tag) =>
+                    tag?.attributes?.label?.toLowerCase() === postTag?.toLowerCase() ||
+                    postTags?.some((postTag) => postTag.toLowerCase() === tag?.attributes?.label?.toLowerCase())
+            )
+            if (!tag) {
+                tag = await createTag(tagLabel, category)
             }
-        )
-    )
+            tags.push(tag)
+        }
+        const authorIDs = authorData?.map(({ profile_id }) => profile_id)?.filter((id) => id) || []
+        const data = {
+            slug,
+            path,
+            title,
+            date,
+            featuredImage: {
+                url: featuredImage?.childImageSharp?.gatsbyImageData?.images?.fallback?.src,
+            },
+            body: rawBody,
+            excerpt,
+            authors: {
+                connect: authorIDs,
+            },
+            ...(category
+                ? {
+                      post_category: {
+                          connect: [category.id],
+                      },
+                  }
+                : null),
+            ...(tags?.length > 0
+                ? {
+                      post_tags: {
+                          connect: tags.map((tag) => tag.id),
+                      },
+                  }
+                : null),
+            ...(crosspost?.length > 0
+                ? {
+                      crosspost_categories: {
+                          connect: crosspost.map(
+                              (crosspostCategory) =>
+                                  allStrapiPostCategories.find(
+                                      (category) => category?.attributes?.label === crosspostCategory
+                                  )?.id
+                          ),
+                      },
+                  }
+                : null),
+        }
+        postPromises.push(limit(() => createOrUpdateStrapiPost(data, existingPost?.id)))
+    }
+    await Promise.all(postPromises)
     await Promise.all(
         roadmaps.map(({ title, date: roadmapDate, media, description, cta }) => {
             const slug = slugify(title, { lower: true })
@@ -220,6 +291,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         authorData {
                             profile_id
                         }
+                        crosspost
                     }
                     rawBody
                     excerpt(pruneLength: 250)

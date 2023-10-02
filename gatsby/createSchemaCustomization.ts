@@ -179,6 +179,24 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type PostTagAttributes {
+        label: String
+        folder: String
+    }
+    type PostTagData {
+      attributes: PostTagAttributes
+    }
+    type PostTags {
+        data: [PostTagData]
+    }
+    type PostCategoryAttributes {
+        label: String
+        folder: String
+        post_tags: PostTags
+    }
+    type PostCategory implements Node {
+      attributes: PostCategoryAttributes
+    }
   `)
     createTypes([
         schema.buildObjectType({
