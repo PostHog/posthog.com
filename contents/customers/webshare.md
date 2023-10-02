@@ -16,7 +16,9 @@ toolsUsed:
 date: 2023-10-01
 ---
 
-[Webshar](https://www.webshare.io/homepage) is a leading proxy server provider, enabling more than 100,000 users to connect using high-speed proxies in over 50 countries. Originally founded in 2018 by Utku Zihnioglu, Webshare has grown explosively and now serves over 250bn proxy requests each month — but retains the experimental, data-led approach it had in the early days. 
+[Webshare](https://www.webshare.io/homepage) is a leading proxy server provider, enabling more than 100,000 users to connect using high-speed proxies in over 50 countries. 
+
+Originally founded in 2018 by Utku Zihnioglu, Webshare has grown explosively. It now serves over 250bn proxy requests each month, but it retains the experimental, data-led approach it had in the early days. 
 
 “We have all our funnels nailed down, but we’re constantly running experiments on top of them,” says Utku, Webshare’s founder and CEO. “We’re really passionate about testing new ideas to get customers the best product we can.”
 
