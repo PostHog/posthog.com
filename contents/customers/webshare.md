@@ -24,7 +24,7 @@ Originally founded in 2018 by Utku Zihnioglu, Webshare has grown explosively. It
 
 In the early days, the team used a mix of tools to facilitate this customer-centric approach – Mixpanel for analytics, Hotjar for session replays, plus a handful of internal tools to fill the gaps left by these platforms. 
 
-“We had to build our own tools for feature flags, because Mixpanel doesn’t do that,” says Utku. “We were using FullStory too…but we started looking for a replacement in 2021 because those tools just weren’t working for us anymore.”
+“We had to build our own tools for feature flags, because Mixpanel doesn’t do that,” says Utku. “We were using FullStory too... but we started looking for a replacement in 2021 because those tools just weren’t working for us anymore.”
 
 “That’s when we found PostHog, and realized it does everything we needed all at once, including feature flags!”
 
