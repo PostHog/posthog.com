@@ -126,9 +126,9 @@ PostHog's built-in features make it the obvious choice if you like the idea of c
 
 ### How popular is PostHog?
 
-According to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, _PostHog is the fastest growing Mixpanel alternative_ in the market,
+According to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, _PostHog is the fastest growing Mixpanel alternative_ in the market.
 
-**PostHog** is deployed by 2,365 (0.2%) of the top 1 million websites in 2023, up +327% from 554 the previous year. **Mixpanel** is deployed by 5,218 (0.5%), down -17% from 6,295 the previous year.
+As of Jul 2023, **PostHog** is deployed by 2,365 (0.2%) of the top 1 million websites in 2023, up +327% from 554 the previous year. **Mixpanel** is deployed by 5,218 (0.5%), down -17% from 6,295 the previous year.
 
 ### Why do companies use PostHog?
 
@@ -263,7 +263,7 @@ Amplitude is deployed by 6,973 (0.7%) of the top 1 million websites in 2023. Mix
 
 Heap describes itself as a Digital Insights Platform. Unpacking that a bit, it means Heap offers both product analytics and session replay, while also supporting marketing use cases with multitouch attribution.
 
-Heap was acquired in September 2023 by Contentsquare, marketing and e-commerce analytics firm, and announced plans to integrate the two products. 
+Heap was acquired in September 2023 by Contentsquare, a marketing and e-commerce analytics firm, and announced plans to integrate the two products. 
 
 ### Key features
 
