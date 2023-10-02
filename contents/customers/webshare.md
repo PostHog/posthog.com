@@ -33,7 +33,7 @@ In the early days, the team used a mix of tools to facilitate this customer-cent
 
 ### How Webshare increased conversion rates by 26% with experiments
 
-Since 2021 Webshare has used PostHog to provide many of the tools they had previously fragmented across multiple platforms, such as Mixpanel and Hotjar. The team uses PostHog for analytics, session replays, feature flags, and A/B experiments — especially experiments. 
+Since 2021, Webshare has used PostHog to provide many of the tools they had previously fragmented across multiple platforms, such as Mixpanel and Hotjar. The team uses PostHog for analytics, session replays, feature flags, and A/B experiments – especially experiments. 
 
 “We’re running about 20 experiments at any moment,” says Utku. “We test every change with an experiment because sometimes it’s the small, ridiculous things which increase conversion rates. Just moving a button from the left to the right, or tweaking the call to action, can increase conversion by 4-5%.”
 
