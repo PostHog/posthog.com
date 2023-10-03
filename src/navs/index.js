@@ -2281,10 +2281,6 @@ export const docsMenu = {
                     url: '/docs/surveys',
                     icon: 'Home',
                     color: 'seagreen',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Installation',
@@ -2770,6 +2766,8 @@ const menu = [
                 url: '/surveys',
                 children: [
                     { name: 'Features', url: '/surveys' },
+                    { name: 'Pricing', url: '/surveys/pricing' },
+                    { name: 'Customers', url: '/surveys/customers' },
                     { name: 'Docs', url: '/docs/surveys/manual' },
                     { name: 'Comparisons', url: '/surveys/comparisons' },
                     { name: 'Tutorials', url: '/surveys/tutorials' },
