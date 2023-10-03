@@ -14,37 +14,37 @@ tags:
     - Guides
 ---
 
-One glance at both PostHog and LaunchDarkly’s homepages explains a lot about each of them. It shows:
+PostHog and LaunchDarkly both offer feature flagging and A/B testing, which allow you [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, [configure your app remotely](/blog/feature-flags-vs-configuration), customize experiences, and more.
 
-1. LaunchDarkly is an enterprise-focused feature management tool with feature flags, experiments, and related workflows.
+But how are they different? If you remember nothing else, remember these two points:
 
-2. PostHog is an all-in-one suite of product and data tools, including feature management and experimentation, but also extending to session replays, analytics, and user surveys.
+1. LaunchDarkly only does feature flags and experiments.
 
-Both provide feature flagging and experimentation functionality. Using these features enables you to [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, [configure your app remotely](/blog/feature-flags-vs-configuration), customize experiences, and more.
+2. PostHog is an all-in-one platform that does flags, experiments and a whole bunch more, including analytics, session replays, and user surveys.
 
-This post goes over the differences, platforms, features, pricing, reporting, integrations, and frequently asked questions about both.
+In this post, we'll cover these differences in more detail, comparing features, pricing, reporting, integrations, and frequently asked questions about both.
 
 ## How is PostHog different?
 
 ### 1. It is an all-in-one platform
 
-PostHog brings all the tools engineers need for testing, releasing, and measuring the success of new features. Beyond the [feature flag](/docs/feature-flags) and [A/B testing](/docs/experiments) tools, this includes product analytics, [session replays](/docs/session-replay), [surveys](/docs/surveys), and more.
+PostHog includes all the tools product teams need to test, release, and measure the success of new features. Beyond the [feature flag](/docs/feature-flags) and [A/B testing](/docs/experiments) tools, this includes product analytics, [session replays](/docs/session-replay), [surveys](/docs/surveys), and more.
 
 ![All in one](../images/blog/posthog-vs-launchdarkly/all.png)
 
-These tools add an extra layer of analysis unavailable in LaunchDarkly. They enable you to make better decisions about features you’ve shipped and what you’re building next. They also enable you to combine data from multiple tools (such as user properties) for use in flags and experiments.
+These tools add an extra layer of analysis unavailable in LaunchDarkly. They enable you to make better decisions about features you’ve shipped and what you’re building next. They also enable you to combine data from multiple tools, such as user properties from analytics, for use in flags and experiments.
 
 ### 2. We’re transparent (in many ways)
 
-PostHog is open source. Our code, culture, and strategy are public on GitHub and our [handbook](/handbook). While LaunchDarkly open sourced some code (like SDKs), most is closed-source.
+PostHog is open source. Our code, culture, and strategy are public [on GitHub](https://github.com/PostHog/posthog) and our [handbook](/handbook). While LaunchDarkly open sourced some code (like SDKs), most is closed source.
 
-On top of being open source, we are also self-serve. No need to "talk to sales" or "schedule a demo" if you don’t want to. You can sign up and try all the features PostHog offers for free.
+We're also self-serve. No need to "talk to sales" or "schedule a demo" unless you want to – we're always [happy to chat](/book-a-demo). You can sign up and try all the features PostHog offers for free.
 
 Our [pricing](/pricing) is also transparent. It is a two-tier usage-based model, which we make easy to predict. This is simpler than LaunchDarkly’s multi-tier combination of charging for seats, monthly context instances, and add-ons. If you worry about overages, you can set up billing limits in PostHog too.
 
 ### 3. Built for startups and engineers
 
-PostHog is built for high-growth startups. This means it is simple for engineers to implement themselves. We have many [SDKs](/docs/libraries), [tutorials](/tutorials), and docs to help you get started quickly with any type of app.
+PostHog is built for high-growth startups. This means it's simple for engineers to implement themselves. We have many [SDKs](/docs/libraries), [tutorials](/tutorials), and docs to help you get started quickly with any type of app.
 
 After setting up, PostHog aligns with startups as they scale up, providing tools like advanced product analytics, [CDPs](/docs/cdp), and [data warehousing](/docs/data-warehouse) to combine the tools they need into one. 
 
