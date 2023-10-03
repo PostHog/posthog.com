@@ -26,7 +26,7 @@ Imagine if you had your qualitative and quantitative data side-by-side, along wi
 
 That’s the vision we have for PostHog — an all-in-one platform where you can research users, observe usage, analyze data, test ideas, deploy changes, and measure impact consistently, and easily. No more tool juggling, compatibility wrestling, unclear pricing, or botched integrations; just a single, open-source platform that does it all.
 
-Surveys aren’t [our defining feature](/handbook/company/values#we-havent-built-our-defining-feature-yet), but they’re an essential part of this vision because they bring qualitative data into PostHog alongside the quantitative and intuitive data we already collected through events and session replays. 
+Surveys aren’t [our defining feature](/handbook/company/values#we-havent-built-our-defining-feature-yet), but they’re an essential part of this vision. They add valuable real user feedback to the powerful, qualitative data you can already analyze using PostHog
 
 ## What's new in PostHog surveys?
 
