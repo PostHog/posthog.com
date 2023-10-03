@@ -34,7 +34,7 @@ In this article we’ll explore the crucial differences and similarities between
 ## How is PostHog different?
 
 ### 1. PostHog is an all-in one platform
-PostHog brings all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, A/B testing, and session capturing features. Pendo, on the other hand, is a more limited, and requires you to adopt other platforms, such as Hotjar or LaunchDarkly, to get comparable functionality to PostHog.
+PostHog brings all the tools engineers need to measure success, run experiments, and more, into one platform. It’s a complete, all-in-one product OS, with robust analytics, feature flagging, A/B testing, and session capturing features. Pendo, on the other hand, is a more limited, and requires you to adopt other platforms, such as Hotjar or [LaunchDarkly](/blog/posthog-vs-launchdarkly), to get comparable functionality to PostHog.
 
 ### 2. PostHog is built for engineers
 We built PostHog to support technically-savvy product managers and engineers — especially [engineers with a product focus in their role](/blog/what-is-a-product-engineer). As such, PostHog includes many powerful features that aren’t available in tools like Pendo, which are built for more general audiences.
