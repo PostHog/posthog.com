@@ -226,7 +226,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                         const name = [firstName, lastName].filter(Boolean).join(' ')
                         return (
                             <li
-                                className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded min-h-28 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px]"
+                                className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded min-h-28 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] group"
                                 key={name}
                             >
                                 <Link
@@ -241,7 +241,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                             </p>
                                         </div>
 
-                                        <span className="flex items-center gap-2">
+                                        <span className="flex items-center gap-2 mt-1">
                                             {country && (
                                                 <span className="!leading-none text-2xl">
                                                     {country === 'world' ? (
@@ -250,6 +250,31 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                                         <ReactCountryFlag svg countryCode={country} />
                                                     )}
                                                 </span>
+                                            )}
+                                            {leadTeams?.data?.some(({ attributes: { name } }) => name === teamName) ? (
+                                                <button
+                                                    onClick={(e) => {
+                                                        if (isModerator) {
+                                                            e.preventDefault()
+                                                            handleTeamLead(member.id, true)
+                                                        }
+                                                    }}
+                                                    className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white"
+                                                >
+                                                    Team lead
+                                                </button>
+                                            ) : (
+                                                isModerator && (
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.preventDefault()
+                                                            handleTeamLead(member.id, false)
+                                                        }}
+                                                        className="group-hover:visible inline-block border-2 border-white/40 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-white/40 invisible"
+                                                    >
+                                                        Team lead
+                                                    </button>
+                                                )
                                             )}
                                         </span>
                                     </div>
@@ -263,10 +288,10 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                 </Link>
                                 {isModerator && (
                                     <button
-                                        className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent dark:bg-accent-dark border border-border dark:border-dark absolute -top-1 -right-1"
+                                        className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent dark:bg-accent-dark border border-border dark:border-dark absolute -top-3 -right-3"
                                         onClick={(e) => removeTeamMember(member)}
                                     >
-                                        <Close className="w-2 h-2" />
+                                        <Close className="w-3 h-3" />
                                     </button>
                                 )}
                             </li>
