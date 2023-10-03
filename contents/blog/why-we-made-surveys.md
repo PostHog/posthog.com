@@ -20,11 +20,17 @@ Why is this important? Because spreading everything out across multiple platform
 
 It’s also a pain having to log in and out of new platforms all the time. 
 
-Imagine instead if you could create surveys triggered by the same events you track in your analytics, or if you could trace a survey response back to a session replay in a single platform. Imagine if you could test changes with an A/B experiment and launch surveys alongside them to collect feedback, then turn that into a feature flag and roll it out without ever switching tools.
+Imagine creating surveys triggered by the same events you track in your analytics
 
-Imagine if you had your qualitative and quantitative data side-by-side, along with everything you need to dissect it and act on your findings. 
+Imagine tracing a survey response back to session replay in just a few clicks.
 
-That’s the vision we have for PostHog — an all-in-one platform where you can research users, observe usage, analyze data, test ideas, deploy changes, and measure impact consistently, and easily. No more tool juggling, compatibility wrestling, unclear pricing, or botched integrations; just a single, open-source platform that does it all.
+Imagine trialling a new feature as an A/B test, collecting feedback on it with surveys, and finally shipping the new feature to everyone, without ever switching tools.
+
+Imagine your qualitative and quantitative data in one place, connected to the tools you need dissect and act on it.
+
+That’s the vision we have for PostHog – an all-in-one platform where you can research users, observe usage, analyze data, test ideas, deploy changes, and measure impact consistently, and easily. 
+
+No more tool juggling, compatibility wrestling, unclear pricing, or botched integrations – just a single, open-source platform that does it all.
 
 Surveys aren’t [our defining feature](/handbook/company/values#we-havent-built-our-defining-feature-yet), but they’re an essential part of this vision. They add valuable real user feedback to the powerful, qualitative data you can already analyze using PostHog
 
