@@ -28,14 +28,15 @@ That’s the vision we have for PostHog — an all-in-one platform where you can
 
 Surveys aren’t [our defining feature](/handbook/company/values#we-havent-built-our-defining-feature-yet), but they’re an essential part of this vision because they bring qualitative data into PostHog alongside the quantitative and intuitive data we already collected through events and session replays. 
 
-They're _so_ essential that we've heavily prioritized them. Here's a look at the progress since the beta started, and the pace of when new features dropped:
+## What's new in PostHog surveys?
 
-- **[June 20th:](/changelog/2023#surveys-beta-released)** Beta launched with open text surveys
-- **[July 25th:](/changelog/2023#emoji-and-number-surveys-types-released)** Emoji and number rating survey types added
-- **[August 8th:](/changelog/2023#multiple-choice-surveys-released)** Multiple choice surveys added
-- **[August 18th:](/changelog/2023#wait-periods-now-available-for-surveys)** Wait periods and thank you messages added
-- **[September 14th:](/changelog/2023#automatic-nps-scoring-added-to-surveys)** Automatic NPS calculation added
+Since we shipped the [initial beta in June](/changelog/2023#surveys-beta-released) with open text surveys, we've added:
 
-Basically, we’ve made sure that surveys are perfect for the most common use-cases, including [NPS surveys](/tutorials/nps-survey), customer satisfaction surveys, and [product-market fit surveys](/blog/measure-product-market-fit). 
+- **[July 25:](/changelog/2023#emoji-and-number-surveys-types-released)** Emoji and number rating survey types
+- **[August 8:](/changelog/2023#multiple-choice-surveys-released)** Multiple choice surveys
+- **[August 18:](/changelog/2023#wait-periods-now-available-for-surveys)** Wait periods and thank you messages
+- **[September 14:](/changelog/2023#automatic-nps-scoring-added-to-surveys)** Automatic NPS calculation
+
+These features make surveys perfect for the most common use-cases, including [NPS surveys](/tutorials/nps-survey), customer satisfaction surveys, and [product-market fit surveys](/blog/measure-product-market-fit). 
 
 Dozens of teams participated in the beta and hundreds of developers contributed PRs and ideas to help us get this far. There are over 81,000 engineers in the PostHog community now, and we couldn’t have built surveys without their support and feedback — and we’re thrilled to release surveys fully so they can start collecting feedback from their communities too. 
