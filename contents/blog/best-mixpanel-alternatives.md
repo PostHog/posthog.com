@@ -15,7 +15,7 @@ tags:
 
 The four most popular alternatives to Mixpanel are:
 
-- **[PostHog](#posthog):** An all-in-one platform that replaces multiple tools, including Mixpanel. It's the fastest growing Mixpanel alternative in the market.
+- **[PostHog](#posthog):** An all-in-one platform that replaces multiple tools. The fastest growing Mixpanel alternative in 2023.
 - **[Google Analytics 4](#google-analytics-4-ga4):** Google's latest, which now offers more for product teams.
 - **[Amplitude](#amplitude):** Mixpanel's long-time rival and a popular choice for large enterprises.
 - **[Heap](#heap):** A mid-market alternative that also offers session replay, and autocaptures events.
@@ -28,7 +28,7 @@ In this guide, we explore how they compare to Mixpanel, who uses them, and which
 
 ### What is PostHog?
 
-PostHog combines product analytics, session replay, feature flags, A/B testing, and user surveys into one platform. This means it's not just an alternative to Mixpanel, it's also a Launch Darkly, Hotjar, and Optimizely alternative, too. 
+PostHog is an open-source product that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one platform. This means it's not just an alternative to Mixpanel, it's also a Launch Darkly, Hotjar, and Optimizely alternative, too. 
  
 ### Key features
 
@@ -137,7 +137,7 @@ PostHog also supports autocapture. This means you don't have to manually instrum
 
 ### How popular is PostHog?
 
-According to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, _PostHog is the fastest growing Mixpanel alternative_ in the market.
+According to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, PostHog is the fastest growing Mixpanel alternative in the market.
 
 As of July 2023, **PostHog** is deployed by 2,365 (0.2%) of the top 1 million websites in 2023, up +327% from 554 the previous year. **Mixpanel** is deployed by 5,218 (0.5%), down -17% from 6,295 the previous year.
 
