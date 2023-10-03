@@ -16,7 +16,7 @@ Today, we’ve announced user surveys are out of beta and in general release, co
 
 Launches like this are always exciting for us, but this one is _especially_ notable because it firmly establishes PostHog as an all-in-one tool for building better products. 
 
-Why is this important? Because spreading everything out across multiple platforms _sucks_. Replays in HotJar, feature flags in LaunchDarkly, analytics in Amplitude (but not your SQL insights, those go somewhere else), and experiments in Google Optimize? That only lays a foundation for frustration, incompatibility, and inconsistency.
+Why is this important? Because spreading everything out across multiple platforms _sucks_. Replays in HotJar, feature flags in LaunchDarkly, surveys in Pendo, analytics in Amplitude (but not your SQL insights, those go somewhere else), and experiments in Google Optimize? That only lays a foundation for frustration, incompatibility, and inconsistency.
 
 It’s also a pain having to log in and out of new platforms all the time. 
 
