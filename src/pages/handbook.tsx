@@ -9,7 +9,7 @@ const chapters = [
     {
         name: 'Chapters',
         links: [
-            { order: '1', name: 'What is PostHog?', to: '/handbook/what-is-posthog' },
+            { order: '1', name: 'Why does PostHog exist?', to: '/handbook/why-does-posthog-exist' },
             { order: '2', name: 'How we got here', to: '/handbook/story' },
             { order: '3', name: 'How we get users', to: '/handbook/how-we-get-users' },
             { order: '4', name: 'How we make users happy', to: '/handbook/making-users-happy' },
