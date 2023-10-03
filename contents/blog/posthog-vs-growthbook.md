@@ -1,6 +1,6 @@
 ---
 title: "In-depth: PostHog vs GrowthBook"
-date: 2023-09-29
+date: 2023-10-03
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -23,7 +23,7 @@ This post goes over their differences, platforms, features, pricing, reporting, 
 
 ## How is PostHog different?
 
-### 1. It is an all-in-one platform
+### 1. PostHog is an all-in-one platform
 
 PostHog brings together all the tools engineers need for testing, releasing, and measuring the success of new features. Feature flags and A/B testing are only part of a suite of tools PostHog offers.
 
@@ -33,17 +33,17 @@ PostHog combines usage, performance, and behavioral data with flags and experime
 
 Having all these product and data tools together enables you to do better analysis of shipped features and make better decisions about what you are building next. 
 
-### 2. Built for startups and engineers
+### 2. PostHog is built for startups and engineers
 
 PostHog is built for high-growth startups. This means it is simple for founders and engineers to implement themselves. There are many [SDKs](/docs/libraries), [tutorials](/tutorials), and [docs](/docs) to help you get started quickly with any type of app.
 
-After setting up, PostHog aligns with startups as they scale up. It  provides tools like advanced product analytics, [SQL querying](/docs/product-analytics/sql), [CDPs](/docs/cdp), and [data warehousing](/docs/data-warehouse) to combine the tools they need into one.
+As startups scale, PostHog also provides the mores advanced tools they need to succeed. These include like advanced product analytics, [SQL querying](/docs/product-analytics/sql), [CDPs](/docs/cdp), and [data warehousing](/docs/data-warehouse).
 
 GrowthBook, on the other hand, focuses only on later-stage, larger companies than PostHog. Many of their features, like their analytical A/B testing suite, are great for data teams which also come at a later stage.
 
-### 3. Ease of setup
+### 3. PostHog is easier to setup
 
-GrowthBook requires more setup than PostHog. This is for a few reasons:
+GrowthBook requires more setup than PostHog as it relies heavily on external tools and writing SQL:
 
 1. To get data into GrowthBook, you must integrate a data source. 
 2. To track data related to flags and experiments, you connect to an analytics tool.
@@ -208,8 +208,9 @@ Both PostHog and GrowthBook offer all the functionality you expect from feature 
 
 Experimentation is where PostHog and GrowthBook’s functionality diverges. Both enable you to create [A/B/n tests](/tutorials/abn-testing) with custom goals and calculate statistical significance. The big difference between them is:
 
-- GrowthBook’s A/B testing is statistically focused and deeper. It offers frequentist This does require writing SQL queries for integrations with event trackers as well as goals and analysis. It also requires more statistics knowledge to take advantage of.
-- PostHog has similar functionality with a simpler interface and no need to write SQL.
+- GrowthBook’s A/B testing provides more potential statistical depth. It offers both Bayesian and Frequentist engines, value capping, regression adjustment, and testing corrections. These do require statistics knowledge to take advantage of.
+
+- PostHog provides a simpler interface and no need to write SQL or connect to external services.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -522,11 +523,11 @@ GrowthBook has integrations with data warehouses and analytics tools they rely o
 </table>
 </div>
 
-PostHog’s event-based structure enables you to import data from anywhere for use with flags and experiments. The free API enables you to connect, edit, and capture from anywhere too.
+PostHog’s event-based structure enables you to import data from anywhere for use with flags and experiments. The free API enables you to connect, edit, and capture from anywhere too. For example, you can import data from [warehouses](/docs/data-warehouse), [no-code site builders](/tutorials/webflow-ab-tests), [Segment](/docs/cdp/segment), and more.
 
 ### Security and compliance
 
-Both PostHog and GrowthBook enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
+Both PostHog and GrowthBook enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs. 
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
