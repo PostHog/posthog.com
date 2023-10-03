@@ -7,11 +7,9 @@ tags:
     - s3 export
 ---
 
-> **Important:** This app has been replaced by [a new export system](/docs/cdp/batch-exports), which is currently in public beta. This app is no longer available.
+> **Important:** This app has been depreciated in favor of the [S3 batch exports destination](/docs/cdp/batch-exports/s3). 
 
 This app enables you to export events to Amazon S3 on ingestion. Archive your data, or simply free it up for other kinds of analysis, by integrating export right into your event processing pipeline.
-
-> **Note: ** Currently, this plugin does not support exporting of historical data and will only export data that is ingested while the app is enabled. We're actively looking into adding support for historical exports.
 
 ## Installation
 
