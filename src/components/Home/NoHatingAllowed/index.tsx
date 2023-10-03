@@ -179,6 +179,13 @@ const cards = [
         Image: <StaticImage quality={100} placeholder="none" src="./images/loop-hole.png" />,
         ImageSize: 'w-full',
     },
+    {
+        top: 'Your CRM is a Rolodex',
+        bottom: <>We don't even use phones, though we do have a fax number for legal and compliance reasons.</>,
+        color: '#D9E1FC',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/rolodex.png" />,
+        ImageSize: 'w-[230px] -mt-4',
+    },
 ]
 
 const Card = ({ top, bottom, Image, ImageSize, color }) => {

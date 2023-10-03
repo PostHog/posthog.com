@@ -22,8 +22,8 @@ export default function OnePlatform() {
                 <li className="list-none">
                     <StaticImage
                         src="./images/tutorials-tutorials-tutorials.png"
-                        alt="Balmer Hog"
-                        className="max-w-[213px] h-[200px]"
+                        alt="Ballmer Hog"
+                        className="max-w-[194px] h-[200px]"
                     />
                     <h3 className="text-xl pt-4 mb-2 text-seagreen dark:text-teal">Tutorials, tutorials, tutorials!</h3>
                     <p>
