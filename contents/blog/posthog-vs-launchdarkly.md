@@ -1,6 +1,6 @@
 ---
 title: "In-depth: PostHog vs LaunchDarkly"
-date: 2023-09-29
+date: 2023-10-03
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -227,12 +227,18 @@ PostHog and LaunchDarkly have relatively similar experimentation feature sets, e
     <thead>
         <tr>
             <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
+            <td className="text-center"><strong>PostHog</strong></td>
             <td><strong>LaunchDarkly</strong></td>
             <td></td>
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td><strong>Free usage</strong></td>
+            <td className="text-center">1M requests per month</td>
+            <td className="text-center">None, paid add-on</td>
+            <td>How many experiments can you run for free?</td>
+        </tr>
         <tr>
             <td><strong>Custom goals</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -333,52 +339,54 @@ To give you an idea of what pricing looks like in reality, here are some example
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-            <th><strong>Seats</strong></th>
-            <th><strong>MAUs</strong></th>
-            <th><strong>Requests</strong></th>
-            <th><strong>Request location</strong></th>
-            <th><strong>PostHog cost</strong></th>
-            <th><strong>LaunchDarkly cost</strong></th>
+            <td><strong>Seats</strong></td>
+            <td><strong>MAUs</strong></td>
+            <td><strong>Requests</strong></td>
+            <td><strong>Request location</strong></td>
+            <td><strong>PostHog cost</strong></td>
+            <td><strong>LaunchDarkly cost</strong></td>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>5</td>
-            <td>10,000</td>
+            <td>5000</td>
             <td>1,000,000</td>
-            <td>Frontend</td>
+            <td>Backend</td>
             <td>$0</td>
             <td>$100</td>
         </tr>
         <tr>
             <td>10</td>
-            <td>1000</td>
+            <td>15,000</td>
             <td>1,000,000</td>
-            <td>Backend</td>
-            <td>$0</td>
-            <td>$200</td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>20,000</td>
-            <td>4,000,000</td>
             <td>Frontend</td>
-            <td>$300</td>
-            <td>$500 + cost of 10,000 MCIs</td>
+            <td>$0</td>
+            <td>$200 + cost of 5000 MAUs</td>
         </tr>
         <tr>
             <td>20</td>
-            <td>5000</td>
-            <td>15,000,000</td>
+            <td>25,000</td>
+            <td>5,000,000</td>
             <td>Backend</td>
+            <td>$400</td>
+            <td>$400</td>
+        </tr>
+        <tr>
+            <td>30</td>
+            <td>50,000</td>
+            <td>15,000,000</td>
+            <td>Frontend</td>
             <td>$1400</td>
-            <td>$600</td>
+            <td>??? (Enterprise)</td>
         </tr>
     </tbody>
 </table>
 </div>
 
-> **Note:** Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage to depend on the polling duration and active number of servers. If you use flags with one server polling every 30 seconds, this amount is under 1M requests (meaning free). PostHog also has volume discounts on flags over 2 million requests per month. 
+> **Notes:** 
+> - Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage to depend on the polling duration and active number of servers. If you use flags with one server polling every 30 seconds, this amount is under 1M requests (meaning free). 
+> - PostHog has volume discounts on flags over 2 million requests per month. 
 
 ### Reporting and analytics
 
@@ -465,7 +473,7 @@ Both PostHog and LaunchDarkly have a range of integrations that enable them to i
         <tr>
             <td><strong>Exports</strong></td>
             <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Add-on</td>
+            <td className="text-center">Enterprise</td>
             <td>Export data to other sources</td>
         </tr>
         <tr>
