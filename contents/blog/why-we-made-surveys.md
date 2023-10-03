@@ -12,7 +12,7 @@ featuredImageType: full
 category: Inside PostHog
 ---
 
-Today, we’ve announced user surveys are out of beta and in general release, complete with [new pricing](/pricing). Short version? Pricing is usage-based, with a free tier for small projects and an improved offer for everyone who participated in the beta. 
+Today, we’ve announced [user surveys](/surveys) are out of beta and in general release, complete with [new pricing](/pricing). Short version? Pricing is usage-based, with a free tier for small projects and an improved offer for everyone who participated in the beta. 
 
 Launches like this are always exciting for us, but this one is _especially_ notable because it firmly establishes PostHog as an all-in-one tool for building better products. 
 
