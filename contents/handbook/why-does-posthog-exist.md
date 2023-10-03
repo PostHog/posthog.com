@@ -1,5 +1,5 @@
 ---
-title: What is PostHog? Our mission and strategy
+title: Why does PostHog exist? Our mission and strategy
 sidebar: Handbook
 showTitle: true
 ---
