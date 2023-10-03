@@ -350,7 +350,7 @@ To give you an idea of what pricing looks like in reality, here are some example
     <tbody>
         <tr>
             <td>5</td>
-            <td>5000</td>
+            <td>5,000</td>
             <td>1,000,000</td>
             <td>Backend</td>
             <td>$0</td>
@@ -377,7 +377,7 @@ To give you an idea of what pricing looks like in reality, here are some example
             <td>50,000</td>
             <td>15,000,000</td>
             <td>Frontend</td>
-            <td>$1400</td>
+            <td>$1,400</td>
             <td>??? (Enterprise)</td>
         </tr>
     </tbody>
