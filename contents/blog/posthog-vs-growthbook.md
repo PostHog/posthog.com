@@ -13,9 +13,9 @@ tags:
  - Guides
 ---
 
-PostHog and GrowthBook share big similarities. Both provide open-source, self-serve feature flags and experimentation. Beyond this, there are big differences:
+PostHog and GrowthBook share a lot of similarities. Both provide open source, self-serve feature flags and experimentation. Beyond this, there are big differences:
 
-- GrowthBook is a warehouse-native feature flag and experiments. It focuses on integrating with the product and data tools you already use.
+- GrowthBook is a warehouse-native feature flag and experiments platform. It focuses on integrating with the product and data tools you already use.
 
 - PostHog is an all-in-one product and data platform. Beyond [feature flags](/docs/feature-flags) and [experiments](/docs/experiments), it includes [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [surveys](/docs/surveys), [CDP](/docs/cdp), and more.
 
@@ -25,7 +25,7 @@ This post goes over their differences, platforms, features, pricing, reporting, 
 
 ### 1. It is an all-in-one platform
 
-PostHog brings all the tools engineers need for testing, releasing, and measuring the success of new features. Feature flags and A/B testing are only part of a suite of tools PostHog offers.
+PostHog brings together all the tools engineers need for testing, releasing, and measuring the success of new features. Feature flags and A/B testing are only part of a suite of tools PostHog offers.
 
 ![PostHog homepage features](../images/blog/posthog-vs-growthbook/build.png)
 
@@ -39,7 +39,7 @@ PostHog is built for high-growth startups. This means it is simple for founders 
 
 After setting up, PostHog aligns with startups as they scale up. It  provides tools like advanced product analytics, [SQL querying](/docs/product-analytics/sql), [CDPs](/docs/cdp), and [data warehousing](/docs/data-warehouse) to combine the tools they need into one.
 
-Being warehouse native means GrowthBook focuses on later-stage, larger companies than PostHog. Many of their features, like their  analytical A/B testing suite, are great for data teams which also come at a later stage.
+GrowthBook, on the other hand, focuses only on later-stage, larger companies than PostHog. Many of their features, like their analytical A/B testing suite, are great for data teams which also come at a later stage.
 
 ### 3. Ease of setup
 
@@ -296,7 +296,7 @@ Experimentation is where PostHog and GrowthBook’s functionality diverges. Both
 
 ### Reporting and analytics
 
-Beyond experiment reports built with SQL, GrowthBook offers no reporting or analytics tools. They rely entirely on external event tracking and visualization tools. 
+GrowthBook offers no reporting or analytics tools other than the ability to query experiment reports with SQL. As a result, GrowthBook forces users to rely on external event tracking and visualization tools. 
 
 PostHog provides all the visualizations and product tools for evaluating the success of your features and app. These include trends, funnels, retention, SQL querying, and session replays integrated with your flags and A/B testing data. This enables you to do deeper analysis of their impact and combine them with other product and usage data.
 
