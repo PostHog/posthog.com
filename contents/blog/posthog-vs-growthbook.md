@@ -370,9 +370,9 @@ PostHog provides all the visualizations and product tools for evaluating the suc
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
-            <th></th>
-            <th className="text-center">PostHog</th>
-            <th className="text-center">GrowthBook</th>
+            <td></td>
+            <td className="text-center"><strong>PostHog</strong></td>
+            <td className="text-center"><strong>GrowthBook</strong></td>
         </tr>
     </thead>
     <tbody>
@@ -460,7 +460,9 @@ To give you an idea of what pricing looks like in reality, here are some example
 </table>
 </div>
 
-> **Note:** Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage depending on the polling duration and active number of servers. If you use locally evaluated flags with one server polling every 30 seconds, this amount is under 1M requests (free). PostHog also has volume discounts on flags over 2 million requests per month.
+> **Notes:** 
+> - Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage depending on the polling duration and active number of servers. If you use locally evaluated flags with one server polling every 30 seconds, this amount is under 1M requests (free). 
+> - PostHog has volume discounts on flags over 2 million requests per month.
 
 ### Integrations
 
