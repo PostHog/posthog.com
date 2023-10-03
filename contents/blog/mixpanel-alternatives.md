@@ -15,10 +15,10 @@ tags:
 
 The four most popular alternatives to Mixpanel are:
 
-1. **[PostHog](#posthog):** An open-source, all-in-one platform that includes analytics, A/B testing, features flags, session replay, and user surveys.
-2. **[Google Analytics 4](#google-analytics-4-ga4):** The latest version of Google's analytics platform that now offers more for product teams.
-3. **[Amplitude](#amplitude):** Mixpanel's long-time rival and a popular choice among large enterprise customers.
-4. **[Heap](#heap):** A mid-market alternative that also offers session replay, and autocaptures events.
+- **[PostHog](#posthog):** An open-source, all-in-one platform that includes analytics, A/B testing, features flags, session replay, and user surveys.
+- **[Google Analytics 4](#google-analytics-4-ga4):** The latest version of Google's analytics platform that now offers more for product teams.
+- **[Amplitude](#amplitude):** Mixpanel's long-time rival and a popular choice among large enterprise customers.
+- **[Heap](#heap):** A mid-market alternative that also offers session replay, and autocaptures events.
 
 In this guide, we explore how they compare to Mixpanel, who uses them, and which is the best Mixpanel alternative depending on your needs.
 
