@@ -454,7 +454,7 @@ To give you an idea of what pricing looks like in reality, here are some example
             <td>20</td>
             <td>15,000,000</td>
             <td>$1400</td>
-            <td>$400 + ???</td>
+            <td>??? (Enterprise)</td>
         </tr>
     </tbody>
 </table>
