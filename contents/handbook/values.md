@@ -8,9 +8,9 @@ These are principles for the behavior we care about:
 
 ## 1. We are open source
 
-Building a huge community around a free-for-life product is key to [PostHog's strategy](/handbook/what-is-posthog).
+Building a huge community around a free-for-life product is key to [PostHog's strategy](/handbook/why-does-posthog-exist).
 
-We default to transparency with everything we work on. That means we make public our handbook, [our roadmap](/handbook/strategy/roadmap), [how we pay](/handbook/people/compensation) (or even [let go of](/handbook/people/offboarding)) people, [what our strategy is](/handbook/what-is-posthog), and [who we have raised money from](/handbook/strategy/investors). Internally, we go even further – providing financial information, live updates on fundraising, and board slide access.
+We default to transparency with everything we work on. That means we make public our handbook, [our roadmap](/handbook/strategy/roadmap), [how we pay](/handbook/people/compensation) (or even [let go of](/handbook/people/offboarding)) people, [what our strategy is](/handbook/why-does-posthog-exist), and [who we have raised money from](/handbook/strategy/investors). Internally, we go even further – providing financial information, live updates on fundraising, and board slide access.
 
 This enables the strongest community growth possible. It causes the core team to raise the bar on their work, it provides the context needed for people to work across multiple timezones, and it enables a deep work-heavy and meeting-light culture. It creates trust.
 

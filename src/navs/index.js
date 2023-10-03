@@ -13,7 +13,7 @@ export const handbookSidebar = [
         children: [
             {
                 name: '1. What is PostHog?',
-                url: '/handbook/what-is-posthog',
+                url: '/handbook/why-does-posthog-exist',
             },
             {
                 name: '2. How we got here',
