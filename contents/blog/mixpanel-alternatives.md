@@ -15,12 +15,12 @@ tags:
 
 The four most popular alternatives to Mixpanel are:
 
-1. **PostHog:** An open-source, all-in-one platform that combines analytics with features like A/B testing, feature flags, session replay, and user surveys.
-2. **Google Analytics 4:** The latest version of Google's analytics platform, which adopts many of the ideas first defined by Mixpanel.
-3. **Amplitude:** Mixpanel's long-time rival and a popular choice among large enterprise customers.
-4. **Heap:** A mid-market alternative that also offers session replay.
+1. **[PostHog](#posthog):** An open-source, all-in-one platform that includes analytics, A/B testing, features flags, session replay, and user surveys.
+2. **[Google Analytics 4](#google-analytics-4-ga4):** The latest version of Google's analytics platform that now offers more for product teams.
+3. **[Amplitude](#amplitude):** Mixpanel's long-time rival and a popular choice among large enterprise customers.
+4. **[Heap](#heap):** A mid-market alternative that also offers session replay, and autocaptures events.
 
-In this guide, we explore how they compare to Mixpanel, who uses them, and which is the best Mixpanel alternative depending your needs.
+In this guide, we explore how they compare to Mixpanel, who uses them, and which is the best Mixpanel alternative depending on your needs.
 
 ## PostHog
 
@@ -488,10 +488,12 @@ Heap is less popular than Mixpanel. Heap is deployed on 3,200 (0.3%) of the top 
 
 This guide focuses on the most popular Mixpanel alternatives, but these aren't the only ones. Here are some honorable mentions that are worth also worth considering:
 
-- **Pendo** describes itself as a product experience platform, which means it combines analytics with other tools useful for product teams, like in-app guides, user feedback widgets, roadmap planning, and product discovery.  
+- **[Pendo](https://www.pendo.io/)**, which describes itself as a product experience platform, which means it combines analytics with other tools useful for product teams, like in-app guides, user feedback widgets, roadmap planning, and product discovery.  
 
-- **Kissmetrics** is more focused on marketing and e-commerce use cases than Mixpanel. It's worth considering if you want to focus more on channel attribution and revenue tracking, but don't want to use GA4.
+- **[Kissmetrics](https://www.kissmetrics.io/)**, which is more focused on marketing and e-commerce use cases than Mixpanel. It's worth considering if you want to focus more on channel attribution and revenue tracking, but don't want to use GA4.
 
-- **Snowplow:** Snowplow is a powerful, open-source behavioral data platform. It can replace tools like Mixpanel and Google Analytics, but it's only suitable for companies with well-staffed data science teams. It's mostly used by large enterprises with the resources to self-host and model data internally. 
+- **[Snowplow](https://snowplow.io/)**, a powerful, open-source behavioral data platform. It can replace tools like Mixpanel and Google Analytics, but it's only suitable for companies with well-staffed data science teams. It's mostly used by large enterprises with the resources to self-host and model data internally. 
 
-- **Countly:** Countly's product analytics tool can be self-hosted, making it useful for companies that need to retain complete control over their first-party data – e.g. healthcare. Unlike Snowplow, however, it doesn't require a data science team. 
+- **[Countly](https://countly.com/)**, a product analytics tool can be self-hosted, making it useful for companies that need to retain complete control over their first-party data – e.g. healthcare. Unlike Snowplow, however, it doesn't require a data science team.
+
+- **[June](https://www.june.so/)**, a more accessible take on product analytics that focuses on automatically generated reports. It's predominantly used by seed stage and Series A B2B SaaS startups.
