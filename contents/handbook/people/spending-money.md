@@ -152,7 +152,7 @@ While PostHog will use the money saved from not having office space for real lif
 
 You can spend up to $300/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself.
 
-We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and Tim will add you. This membership costs the full budget per month, so please keep that in mind when opting in.
+We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and Kendal will add you. This membership costs the full budget per month, so please keep that in mind when opting in.
 
 ## Travel
 
