@@ -543,6 +543,10 @@ export const handbookSidebar = [
                 url: '/handbook/people/career-progression',
             },
             {
+                name: 'Clubs',
+                url: '/handbook/people/clubs',
+            },
+            {
                 name: 'Training',
                 url: '/handbook/people/training',
             },
