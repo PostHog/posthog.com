@@ -17,7 +17,7 @@ The four most popular alternatives to Mixpanel are:
 
 - **[PostHog](#posthog)** – An all-in-one platform that replaces multiple tools. The fastest growing Mixpanel alternative in 2023.
 
-- **[Google Analytics 4](#google-analytics-4-ga4):** – Google's latest, which now offers more for product teams.
+- **[Google Analytics 4](#google-analytics-4-ga4)** – Google's latest, which now offers more for product teams.
 
 - **[Amplitude](#amplitude)** – Mixpanel's long-time rival and a popular choice for large enterprises.
 
@@ -507,3 +507,5 @@ This guide focuses on the most popular Mixpanel alternatives, but these aren't t
 - **[Snowplow](https://snowplow.io/)**, a powerful, open-source behavioral data platform. It can replace tools like Mixpanel, but it's only suitable for companies with well-staffed data science teams. It's mostly used by large enterprises.
 
 - **[June](https://www.june.so/)**, a lightweight take on product analytics that focuses on auto generated reports. It's popular among seed stage and Series A B2B SaaS startups, though its free tier includes only 1,000 active monthly users.
+
+<ArrayCTA />
