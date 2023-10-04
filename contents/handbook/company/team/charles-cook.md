@@ -10,7 +10,7 @@ This guide might be helpful in working with me.
 
 As a manager (60%):
 - I am the exec responsible for all things ops, finance, people, and legal at PostHog
-- I am the exec responsible for marketing and CS at PostHog
+- I am the exec responsible for marketing and customer success at PostHog
 
 As an individual contributor (40%), in order of priority right now:
 - People
