@@ -24,14 +24,6 @@ const query = (offset: number, options?: UseQuestionsOptions) => {
         },
         sort: 'createdAt:desc',
         filters: {
-            subject: {
-                $ne: '',
-            },
-            slugs: {
-                slug: {
-                    $notContainsi: '/community/profiles',
-                },
-            },
             $or: [
                 {
                     archived: {

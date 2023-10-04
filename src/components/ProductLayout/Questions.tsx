@@ -9,6 +9,16 @@ export default function Questions({ topicId }: { topicId: number }) {
         limit: 20,
         sortBy: 'newest',
         topicId,
+        filters: {
+            subject: {
+                $ne: '',
+            },
+            slugs: {
+                slug: {
+                    $notContainsi: '/community/profiles',
+                },
+            },
+        },
     })
     return (
         <div className="max-w-screen-2xl mx-auto">
