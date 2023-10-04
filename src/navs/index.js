@@ -1341,6 +1341,11 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Command palette',
+                    url: '/docs/cmd-k',
+                    icon: 'Search',
+                },
+                {
                     name: 'Apps',
                     url: '/docs/apps',
                     icon: 'Apps',
