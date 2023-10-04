@@ -18,9 +18,9 @@ The four most popular alternatives to Mixpanel are:
 - **[PostHog](#posthog):** An all-in-one platform that replaces multiple tools. The fastest growing Mixpanel alternative in 2023.
 - **[Google Analytics 4](#google-analytics-4-ga4):** Google's latest, which now offers more for product teams.
 - **[Amplitude](#amplitude):** Mixpanel's long-time rival and a popular choice for large enterprises.
-- **[Heap](#heap):** A mid-market alternative that also offers session replay, and autocaptures events.
+- **[Heap](#heap):** A mid-market alternative that also offers session replay and event autocapture.
 
-In this guide, we explore how they compare to Mixpanel, who uses them, and which is the best Mixpanel alternative depending on your needs.
+In this guide, we explore how they compare to Mixpanel, who uses them, and how to select an alternative depending on your needs.
 
 ## PostHog
 
@@ -28,7 +28,7 @@ In this guide, we explore how they compare to Mixpanel, who uses them, and which
 
 ### What is PostHog?
 
-PostHog is an open-source product that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one platform. This means it's not just an alternative to Mixpanel, it's also a Launch Darkly, Hotjar, and Optimizely alternative, too. 
+PostHog is an open-source product that combines product analytics, session replay, feature flags, A/B testing, and user surveys into one platform. This means it's not just an alternative to Mixpanel, but also [LaunchDarkly](/blog/posthog-vs-launchdarkly), Hotjar, and Optimizely. 
  
 ### Key features
 
@@ -56,7 +56,7 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
 
 PostHog is the only choice if you like the idea of consolidating around one platform. Mixpanel offers third-party integrations for features it doesn't have, but this creates a messy workflow for teams.
  
-PostHog also supports autocapture. This means you don't have to manually instrument events. Instead, PostHog starts collecting data from the moment you implement its tracking snippet.
+PostHog also supports autocapture. This means you don't have to manually instrument events. Instead, PostHog starts collecting data from the moment you implement its tracking snippet or JavaScript Web SDK.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -153,7 +153,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 > ### Bottom line 
 >
-> PostHog is the best Mixpanel alternative for startups and mid-size companies. It replaces Mixpanel and numerous other tools, saving money and time. Power user features, like an SQL insight builder and console logs, make it a good choice for engineering-led teams, too.
+> PostHog is the best Mixpanel alternative for startups and mid-size companies. It replaces Mixpanel and numerous other tools, saving money and time. Power user features, like an SQL insight builder and session replay logs, make it a good choice for engineering-led teams, too.
 
 ## Google Analytics 4 (GA4)
 
@@ -369,6 +369,7 @@ On paper, Amplitude and Mixpanel are very similar, but they differ in focus and 
 2. **Large-scale experimentation:** Unlike Mixpanel, Amplitude offers a built-in experimentation add-on. This enables companies to run experiments on users using existing cohorts created in Amplitude.
 
 3. **Resolving data quality problems:** Companies that use Amplitude, particularly large ones, often migrate from outdated, or self-built, tools that generate poor quality data. Amplitude helps them fix that, while also making analytics more accessible.
+
 ### How popular is Amplitude?
 
 Amplitude is slightly more popular than Mixpanel, according to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant:
