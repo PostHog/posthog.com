@@ -9,8 +9,8 @@ This guide might be helpful in working with me.
 ## Areas of responsibility
 
 As a manager (60%):
-- I am the exec responsible for all things ops, finance, people, and legal at PostHog. 
-- I am the exec responsible for marketing at PostHog, and act as the Small Team leader
+- I am the exec responsible for all things ops, finance, people, and legal at PostHog
+- I am the exec responsible for marketing and CS at PostHog
 
 As an individual contributor (40%), in order of priority right now:
 - People
@@ -29,6 +29,9 @@ As an individual contributor (40%), in order of priority right now:
 - Marketing
   - Figuring out how to grow our word of mouth
   - Running weekly sprint planning meetings
+- CS
+  - General project management/systems stuff
+  - Figuring out our complete funnel from marketing all the way to revenue
 
 ## Quirks
 
@@ -62,5 +65,5 @@ As an individual contributor (40%), in order of priority right now:
 - Tell me what we could be doing better from a company-building perspective. Or stuff we should avoid!
 - Give feedback on our marketing content - especially if you are a developer! Product engineers are our target audience. 
 - Let me know when I need to slow down and do something to a higher standard. 
-- I try to make sure our ops & people systems for things have an absolutely minimal impact on your time. Please don't make me (or Grace/Kendal) chase you for boring admin stuff like expenses. 
+- I try to make sure our ops & people systems for things have an absolutely minimal impact on your time. Please don't make me (or Kendal) chase you for boring admin stuff like expenses. 
 - If you need something from me, let me know when you need it by. Otherwise I'll probably do it immediately to get it off my plate, which might come at the expense of something more important.  
