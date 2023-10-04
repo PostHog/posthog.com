@@ -67,7 +67,7 @@ The performance review process centres on a single person for one hour, involves
 
 ## Quarterly team surveys
 
-We run quarterly surveys using the _Pulse Surveys by Deel_ Slack app. These are set up to run automatically, including reminder messages in Slack, so you don't need to chase people manually. Charles, Grace, and Coua have admin access to the surveys in Slack. 
+We run quarterly surveys using the _Pulse Surveys by Deel_ Slack app. These are set up to run automatically, including reminder messages in Slack, so you don't need to chase people manually. Charles and Coua have admin access to the surveys in Slack. 
 
 The questions are based on the ones used by [Culture Amp](https://www.cultureamp.com/) and cover categories such as Company Confidence, Culture, Growth etc. on a 1 ('strongly disagree') to 5 ('strongly agree') scale. The benchmark used is against Culture Amp’s ‘new tech’ companies with less than 200 people. We then take the average score out of 5 and multiple it by 20 to get a % number. A bit rough, but close enough so we can compare with the benchmark.
 

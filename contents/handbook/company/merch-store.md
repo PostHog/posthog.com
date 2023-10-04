@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We have a [merch store](https://merch.posthog.com/) where our community can purchase high quality PostHog-branded merch. As we have a limited number of Shopify admins on our current plan, message Grace or Charles in the #team-people-and-ops channel if you need any help sending out merch or gift cards, as you probably won't be able to do it yourself. 
+We have a [merch store](https://merch.posthog.com/) where our community can purchase high quality PostHog-branded merch. As we have a limited number of Shopify admins on our current plan, message Charles in the #team-people-and-ops channel if you need any help sending out merch or gift cards, as you probably won't be able to do it yourself. 
 
 ## How do we think about merch?
 
@@ -16,7 +16,7 @@ We care about:
 
 ## How do we manufacture merch?
 
-We use [Printfection](https://app.printfection.com/account/dashboard_merchandise.php) to manufacture and store our merch - request access from the Marketing team or Grace if required. Anyone can suggest a product for us to sell or give away. 
+We use [Printfection](https://app.printfection.com/account/dashboard_merchandise.php) to manufacture and store our merch - request access from the Marketing team if required. Anyone can suggest a product for us to sell or give away. 
 
 1. The Marketing team ultimately decide on what items we wish to sell or give away (including how many and sizes)
 2. Lottie provide assets to produce and order these items in to stock
