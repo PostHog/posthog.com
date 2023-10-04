@@ -46,6 +46,14 @@ export default function Questions({ data, pageContext }: IProps) {
                     $null: true,
                 },
             },
+            subject: {
+                $ne: '',
+            },
+            slugs: {
+                slug: {
+                    $notContainsi: '/community/profiles',
+                },
+            },
         },
     })
 
