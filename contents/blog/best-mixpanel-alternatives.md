@@ -15,10 +15,13 @@ tags:
 
 The four most popular alternatives to Mixpanel are:
 
-- **[PostHog](#posthog):** An all-in-one platform that replaces multiple tools. The fastest growing Mixpanel alternative in 2023.
-- **[Google Analytics 4](#google-analytics-4-ga4):** Google's latest, which now offers more for product teams.
-- **[Amplitude](#amplitude):** Mixpanel's long-time rival and a popular choice for large enterprises.
-- **[Heap](#heap):** A mid-market alternative that also offers session replay, and autocaptures events.
+- **[PostHog](#posthog)** – An all-in-one platform that replaces multiple tools. The fastest growing Mixpanel alternative in 2023.
+
+- **[Google Analytics 4](#google-analytics-4-ga4):** – Google's latest, which now offers more for product teams.
+
+- **[Amplitude](#amplitude)** – Mixpanel's long-time rival and a popular choice for large enterprises.
+
+- **[Heap](#heap)** – A mid-market alternative that also offers session replay, and autocaptures events.
 
 In this guide, we explore how they compare to Mixpanel, who uses them, and which is the best Mixpanel alternative depending on your needs.
 
@@ -53,10 +56,6 @@ Typical PostHog users are:
 Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
 
 ### How does PostHog compare to Mixpanel?
-
-PostHog is the only choice if you like the idea of consolidating around one platform. Mixpanel offers third-party integrations for features it doesn't have, but this creates a messy workflow for teams.
- 
-PostHog also supports autocapture. This means you don't have to manually instrument events. Instead, PostHog starts collecting data from the moment you implement its tracking snippet.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -133,13 +132,17 @@ PostHog also supports autocapture. This means you don't have to manually instrum
 </table>
 </div>
 
-![posthog](../images/blog/mixpanel-alternatives/posthog.png)
+PostHog is the only choice if you like the idea of consolidating around one platform. Mixpanel offers third-party integrations for features it doesn't have, but this creates a messy workflow for teams.
+ 
+PostHog also supports autocapture. This means you don't have to manually instrument events. Instead, PostHog starts collecting data from the moment you implement its tracking snippet.
 
 ### How popular is PostHog?
 
 According to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant, PostHog is the fastest growing Mixpanel alternative in the market.
 
 As of July 2023, **PostHog** is deployed by 2,365 (0.2%) of the top 1 million websites in 2023, up +327% from 554 the previous year. **Mixpanel** is deployed by 5,218 (0.5%), down -17% from 6,295 the previous year.
+
+![posthog](../images/blog/mixpanel-alternatives/posthog.png)
 
 ### Why do companies use PostHog?
 
@@ -183,10 +186,6 @@ Typical GA4 users are:
 Google's huge scale means GA4 is used by both the biggest global corporations to SMBs of every kind. It is ubiquitous.
 
 ### How does GA4 compare to Mixpanel?
-
-GA4 and Mixpanel are only superficially similar. They cover the same basics, but GA4 is better-suited to content and marketing teams, while Mixpanel is designed for product teams. 
-
-Note, GA4 doesn't support group analytics. This makes it easy to track aggregated usage at an account level, rather than at a user level – useful for tracking behavior in B2B products.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -252,10 +251,26 @@ Note, GA4 doesn't support group analytics. This makes it easy to track aggregate
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td>Admin level control over event approval, tags and descriptions</td>
- </tr> 
+ </tr>
+  <tr>
+ <td><strong>Transparent pricing</strong></td>
+ <td className="text-center"><span className="text-red text-lg">✖</span></td> 
+ <td className="text-center"><span className="text-green text-lg">✔</span></td> 
+ <td>Public pricing calculator</td>
+ </tr>  
  </tbody>
 </table>
 </div>
+
+GA4 and Mixpanel are only superficially similar. They cover the same basics, but GA4 is better-suited to content and marketing teams, while Mixpanel is designed for product teams. 
+
+Note, GA4 doesn't support group analytics. This makes it easy to track aggregated usage at an account level, rather than at a user level – useful for tracking behavior in B2B products.
+
+### How popular is GA4?
+
+Google Analytics remains the most-used analytics tool in the world by a large margin. 
+
+As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/) run GA4 – another 35.7% were still running GA3.
 
 ![GA4](../images/blog/mixpanel-alternatives/GA4.png)
 
@@ -266,12 +281,6 @@ Note, GA4 doesn't support group analytics. This makes it easy to track aggregate
 2. **It's powerful and free:** Likewise, Google's scale means GA4 is completely free to most small and medium-sized businesses. This, combined with strong analytical tools and the large ecosystem of GA experts to call upon, makes it a safe choice.
 
 3. **To track marketing ROI:** GA4 is predominantly used by marketing and e-commerce teams to track campaign ROI. It's also popular among large content publishers for its scalability.
-
-### How popular is GA4?
-
-Google Analytics remains the most-used analytics tool in the world by a large margin. 
-
-As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/) run GA4 – another 35.7% were still running GA3.
 
 > ### Bottom line
 >
@@ -302,12 +311,11 @@ Typical Amplitude users are:
 - Non-technical product managers
 - Data teams at large enterprises
 - Growth engineering and marketing teams
+- Companies with stringent compliance needs
 
 While it offers a limited free tier for startups, high prices are a barrier. As one reviewer [points out](https://www.g2.com/products/amplitude-analytics/reviews/amplitude-analytics-review-7933567): "The high price tag poses a challenge for small businesses, early-stage, and even medium-sized startups."
 
 ### How does Amplitude compare to Mixpanel?
-
-On paper, Amplitude and Mixpanel are very similar, but they differ in focus and approach. While both products serve large enterprise customers, Amplitude is more focused on these users. Unlike Mixpanel, pricing isn't transparent.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -360,7 +368,15 @@ On paper, Amplitude and Mixpanel are very similar, but they differ in focus and 
 </table>
 </div>
 
-![amplitude](../images/blog/mixpanel-alternatives/ammplitude.png)
+On paper, Amplitude and Mixpanel are very similar, but they differ in focus and approach. While both products serve large enterprise customers, Amplitude is more focused on these users. Unlike Mixpanel, for example, pricing isn't transparent.
+
+### How popular is Amplitude?
+
+Amplitude is slightly more popular than Mixpanel, according to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant:
+
+As of July 2023, Amplitude is deployed by 6,973 (0.7%) of the top 1 million websites in 2023. Mixpanel is deployed by 5,218 (0.5%).
+
+![amplitude](../images/blog/mixpanel-alternatives/amplitude-website.png)
 
 ### Why do companies use Amplitude?
 
@@ -369,11 +385,6 @@ On paper, Amplitude and Mixpanel are very similar, but they differ in focus and 
 2. **Large-scale experimentation:** Unlike Mixpanel, Amplitude offers a built-in experimentation add-on. This enables companies to run experiments on users using existing cohorts created in Amplitude.
 
 3. **Resolving data quality problems:** Companies that use Amplitude, particularly large ones, often migrate from outdated, or self-built, tools that generate poor quality data. Amplitude helps them fix that, while also making analytics more accessible.
-### How popular is Amplitude?
-
-Amplitude is slightly more popular than Mixpanel, according to [data compiled by Jason Packer](https://www.linkedin.com/posts/jhpacker_just-updated-the-popularity-numbers-on-my-activity-7112462135120601088-YLdh/), an independent analytics consultant:
-
-As of July 2023, Amplitude is deployed by 6,973 (0.7%) of the top 1 million websites in 2023. Mixpanel is deployed by 5,218 (0.5%).
 
 > ### Bottom line
 >
@@ -409,12 +420,6 @@ Heap puts a strong focus on supporting non-technical product managers via autoca
 Customers include Amway, Eventbrite, and Freshworks.
 
 ### How does Heap compare to Mixpanel?
-
-Session replay and autocapture support make Heap a good Mixpanel alternative for product teams.
-
-Heap has a healthy integration library for things like A/B testing, or marketing automation, but Mixpanel's is better. For example, Heap has two official survey integrations (Appcues and Delighted), while Mixpanel has nine.
-
-Mixpanel also offers a more generous free tier of up to 20 million events; Heap is limited to 10,000 monthly users.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -467,6 +472,16 @@ Mixpanel also offers a more generous free tier of up to 20 million events; Heap 
 </table>
 </div>
 
+Session replay and autocapture support make Heap a good Mixpanel alternative for product teams.
+
+Heap has a healthy integration library for things like A/B testing, or marketing automation, but Mixpanel's is better. For example, Heap has two official survey integrations (Appcues and Delighted), while Mixpanel has nine.
+
+Mixpanel also offers a more generous free tier of up to 20 million events; Heap is limited to 10,000 monthly users.
+
+### How popular is Heap?
+
+Heap is less popular than Mixpanel. Heap is deployed on 3,200 (0.3%) of the top 1 million websites, while Mixpanel is used by 5,218.
+
 ![heap](../images/blog/mixpanel-alternatives/heap.png)
 
 ### Why do companies use Heap?
@@ -476,10 +491,6 @@ Mixpanel also offers a more generous free tier of up to 20 million events; Heap 
 2. **To improve data collection** Companies with limited engineering resources find Heap's autocapture ensures important events aren't missed.
 
 3. **Low information density** Reviewers on G2 appreciate Heap's user-friendly interface, which tends toward lower information density than competing tools.
-
-### How popular is Heap?
-
-Heap is less popular than Mixpanel. Heap is deployed on 3,200 (0.3%) of the top 1 million websites, while Mixpanel is used by 5,218. 
 
 > ### Bottom line 
 >
