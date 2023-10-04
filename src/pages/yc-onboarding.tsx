@@ -24,7 +24,7 @@ export const YCOnboarding = () => {
                             Exclusive PostHog merch for founders<sup>2</sup>
                         </li>
                         <li>Access to our YC founder community</li>
-                        <li>Free 1-hour group setup sessions</li>
+                        <li>Onboarding session to get you started</li>
                         <li>Our CEO on WhatsApp or text</li>
                     </p>
                 </div>
