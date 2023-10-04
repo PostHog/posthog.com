@@ -56,7 +56,7 @@ If you ever need change of scenery, we offer a monthly budget towards [coworking
 
 ### Meeting up 
 
-We do regular [team offsites](/handbook/company/offsites) - recent trips have included Aruba, Iceland, and Portugal! Small Teams also have their own offsites at least once a year. 
+We do regular [team offsites](/handbook/company/offsites) - recent trips have included Aruba, Iceland, Portugal and Aruba! Small Teams also have their own offsites at least once a year. 
 
 We also give all team members a [$1,500/quarter budget](/handbook/people/spending-money#budget-for-socializing) to meet up in person _in addition_ to the offsite budget
 
