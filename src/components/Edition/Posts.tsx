@@ -294,6 +294,16 @@ export const Sidebar = () => {
     const { questions: newestQuestions } = useQuestions({
         limit: 5,
         sortBy: 'newest',
+        filters: {
+            subject: {
+                $ne: '',
+            },
+            slugs: {
+                slug: {
+                    $notContainsi: '/community/profiles',
+                },
+            },
+        },
     })
 
     return (

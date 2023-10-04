@@ -58,6 +58,14 @@ export default function Questions({ data, pageContext }: IProps) {
                     $eq: data?.squeakTopic?.squeakId,
                 },
             },
+            subject: {
+                $ne: '',
+            },
+            slugs: {
+                slug: {
+                    $notContainsi: '/community/profiles',
+                },
+            },
         },
     })
 
