@@ -1,6 +1,6 @@
 ---
 title: "The most popular Mixpanel alternatives, compared"
-date: 2023-10-03
+date: 2023-10-04
 rootPage: /blog
 sidebar: Blog
 showTitle: true
