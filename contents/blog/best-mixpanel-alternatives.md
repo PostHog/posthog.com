@@ -57,10 +57,6 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
 
 ### How does PostHog compare to Mixpanel?
 
-PostHog is the only choice if you like the idea of consolidating around one platform. Mixpanel offers third-party integrations for features it doesn't have, but this creates a messy workflow for teams.
- 
-PostHog also supports autocapture. This means you don't have to manually instrument events. Instead, PostHog starts collecting data from the moment you implement its tracking snippet or JavaScript Web SDK.
-
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
  <thead>
