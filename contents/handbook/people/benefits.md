@@ -52,7 +52,7 @@ As we are fully remote, we provide [all equipment](/handbook/people/spending-mon
 
 If you ever need change of scenery, we offer a monthly budget towards [coworking or café working](/handbook/people/spending-money#work-space), or [WeWork All Access](https://www.wework.com/solutions/wework-all-access).
 
-> Please message Tim to get added to our company WeWork account. 
+> Please message Kendal to get added to our company WeWork account. 
 
 ### Meeting up 
 
