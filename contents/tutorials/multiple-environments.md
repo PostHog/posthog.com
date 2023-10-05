@@ -6,7 +6,7 @@ author: ['ian-vanagas']
 date: 2023-01-13
 featuredTutorial: false
 featuredImage: ../images/tutorials/banners/tutorial-1.png
-tags: ["configuration"]
+tags: ["configuration", 'product os']
 ---
 
 Many software development teams use multiple environments to split up their code, such as development, staging, and production. This ensures changes in development don’t affect production, helps teams test before release, and increases the quality of code that reaches end users.

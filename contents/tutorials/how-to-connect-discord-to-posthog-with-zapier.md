@@ -6,7 +6,7 @@ featuredImage: ../images/tutorials/banners/discord-connector.png
 featuredTutorial: false
 date: 2022-05-04
 author: ['joe-martin']
-tags: ['apps', 'zapier', 'toolbar', 'subscriptions']
+tags: ['apps', 'zapier', 'toolbar', 'subscriptions', 'cdp']
 ---
 
 - *Level:* Easy 🦔

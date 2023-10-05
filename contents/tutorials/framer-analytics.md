@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-7.png
-tags: []
+tags: ['session replay', 'product analytics', 'feature flags']
 ---
 
 [Framer](https://www.framer.com/) is a popular no-code site builder that makes it easy to design a high-quality site. 

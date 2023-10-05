@@ -7,7 +7,7 @@ featuredVideo: https://www.youtube-nocookie.com/embed/KRW5jxZ4H-I
 featuredTutorial: false
 date: 2022-10-03
 author: ['ian-vanagas']
-tags: ['configuration']
+tags: ['configuration', 'product os']
 ---
 
 - **Level:** Medium 🦔🦔

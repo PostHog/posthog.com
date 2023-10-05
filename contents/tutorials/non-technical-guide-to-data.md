@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-28
 featuredImage: ../images/tutorials/banners/tutorial-9.png
-tags: ["data management"]
+tags: ["data management", 'product os']
 ---
 
 Non-technical users have many tools in PostHog for gaining insights from their product data. You don’t need to be a software engineer, but you do need some knowledge of your data. Knowing the formatting and structure of your data, for example, is key to getting the most out of PostHog as a non-technical user.

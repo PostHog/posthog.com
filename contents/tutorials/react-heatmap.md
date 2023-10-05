@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/toolbar.png
-tags: ["heatmaps", "toolbar"]
+tags: ["heatmaps", "toolbar", 'product os']
 ---
 
 Understanding where users click your site or app shows you what interests them. A heatmap can visualize these clicks to make this analysis easier.

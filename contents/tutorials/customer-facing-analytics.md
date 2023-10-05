@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-9.png
-tags: ['insights']
+tags: ['insights', 'product analytics']
 ---
 
 If you are a host, content platform, or some other type of B2B2C product, your users might want to know their traffic or usage metrics. To put it another way: if your users have their own users, sometimes your users want analytics about their users. Customer-facing analytics are analytics you capture and display to your users to fulfill this need.

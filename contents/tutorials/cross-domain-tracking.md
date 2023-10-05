@@ -6,7 +6,7 @@ author: ['ian-vanagas']
 date: 2022-11-08
 featuredTutorial: false
 featuredImage: ../images/tutorials/banners/tutorial-3.png
-tags: ['configuration', 'persons', 'sessions']
+tags: ['configuration', 'persons', 'sessions', 'product analytics', 'product os']
 ---
 
 Many companies use multiple domains for different parts of their products. A common structures include one domain for the marketing website and another (subdomain) for the app, multiple connected domains, and separate domains for documentation and community sections. This is great for having different content and ensuring no conflicts but causes issues when it comes to tracking.

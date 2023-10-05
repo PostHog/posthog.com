@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/nextjs-analytics.png
-tags: ['configuration']
+tags: ['configuration', 'product os']
 ---
 
 To ensure compliance with privacy regulations like GDPR, you may need to ask for content from users to track them using cookies. PostHog has tools to help you give users the ability to opt-in or out. 

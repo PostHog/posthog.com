@@ -6,7 +6,7 @@ showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/posthog-for-vuejs.png
 featuredVideo: https://www.youtube-nocookie.com/embed/uxkaYnX78_o
-tags: ['configuration']
+tags: ['configuration', 'product os']
 ---
 
 With internet privacy regulations, like GDPR, coming into effect, managing cookies is becoming increasingly important. Cookies are pieces of information apps set in users’ browsers to help them store information and identity. It’s possible to use [PostHog without cookies](/tutorials/cookieless-tracking), but it’s simpler to use them.

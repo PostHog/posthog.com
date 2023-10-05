@@ -5,7 +5,7 @@ showTitle: true
 featuredImage: ../images/tutorials/banners/tutorial-16.png
 featuredVideo: https://www.youtube-nocookie.com/embed/cMFz_xFlHaE
 author: ["yakko-majuri", "andy-vandervell"]
-tags: ["funnels", "correlation analysis", "paths", "session replay", "experimentation"]
+tags: ["funnels", "correlation analysis", "paths", 'product analytics']
 date: 2022-04-20
 ---
 

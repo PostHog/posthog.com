@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/tutorial-8.png
 author: ["lukas-smith"]
-tags: ["apps", "configuration", "data management"]
+tags: ["apps", "configuration", "data management", 'product os']
 date: 2022-07-01
 ---
 

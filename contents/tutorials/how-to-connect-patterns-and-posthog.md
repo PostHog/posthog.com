@@ -5,7 +5,7 @@ showTitle: true
 author: ['patterns']
 date: 2022-09-13
 featuredImage: ../images/tutorials/banners/patterns-app-tutorial.png
-tags: ["apps"]
+tags: ["apps", 'cdp']
 ---
 
 _Estimated reading time: 8 minutes_ ☕☕

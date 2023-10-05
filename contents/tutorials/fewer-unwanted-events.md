@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-20
 featuredImage: ../images/tutorials/banners/tutorial-8.png
-tags: ['events', 'apps', 'data management']
+tags: ['events', 'apps', 'data management', 'product os', 'product analytics']
 ---
 
 **Estimated reading time:** 5 minutes ☕

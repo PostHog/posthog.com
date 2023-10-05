@@ -5,7 +5,7 @@ showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-10
 featuredImage: ../images/tutorials/banners/tutorial-15.png
-tags: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions']
+tags: ['insights', 'trends', 'lifecycle', 'cohorts', 'actions', 'product analytics']
 ---
 
 - **Level:** Easy 🦔

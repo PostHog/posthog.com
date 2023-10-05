@@ -113,31 +113,31 @@ export const postsMenu: IMenu[] = [
         children: [
             {
                 name: 'Product OS',
-                url: '/tutorials/product-os',
+                url: '/tutorials/categories/product-os',
             },
             {
                 name: 'Product analytics',
-                url: '/tutorials/product-analytics',
+                url: '/tutorials/categories/product-analytics',
             },
             {
                 name: 'Session replay',
-                url: '/tutorials/session-replay',
+                url: '/tutorials/categories/session-replay',
             },
             {
                 name: 'Feature flags',
-                url: '/tutorials/feature-flags',
+                url: '/tutorials/categories/feature-flags',
             },
             {
                 name: 'A/B testing',
-                url: '/tutorials/ab-testing',
+                url: '/tutorials/categories/experimentation',
             },
             {
                 name: 'Surveys',
-                url: '/tutorials/surveys',
+                url: '/tutorials/categories/surveys',
             },
             {
                 name: 'CDP',
-                url: '/tutorials/cdp',
+                url: '/tutorials/categories/cdp',
             },
         ],
     },

@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredImage: ../images/tutorials/banners/variance-connector.png
 author: ["noah-brier"]
-tags: ['apps']
+tags: ['apps', 'cdp']
 date: 2022-07-01
 ---
 

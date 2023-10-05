@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: ['events', 'persons']
+tags: ['events', 'persons', 'product analytics, 'product os'']
 ---
 
 PostHog provides [libraries](/docs/integrate?tab=sdks) that make it easy to capture events in popular languages. These libraries are basically wrappers around the API. They handle and automate common tasks like capturing pageviews.

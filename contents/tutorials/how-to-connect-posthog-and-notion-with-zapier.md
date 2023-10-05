@@ -6,7 +6,7 @@ featuredImage: ../images/tutorials/banners/notion-connector.png
 featuredTutorial: false
 date: 2022-05-04
 author: ['joe-martin']
-tags: ['apps', 'zapier', 'subscriptions']
+tags: ['apps', 'zapier', 'subscriptions', 'cdp', 'product os']
 ---
 - *Level:* Easy 🦔
 - *Estimated reading time:* 5 minutes ☕️

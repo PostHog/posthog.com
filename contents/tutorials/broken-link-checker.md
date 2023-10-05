@@ -5,9 +5,12 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: ['actions', 'configuration']
+tags: ['actions', 'configuration', 'product os']
 ---
-Broken links and 404s are frustrating for users. Without a way to check for them, you might not realize they exist and can’t fix them. This tutorial shows you how to create a broken link checker for a Next.js app that sends a notification in Slack when a user visits a page that doesn’t exist.
+
+Broken links and 404s are frustrating for users. Without a way to check for them, you might not realize they exist and can’t fix them. 
+
+This tutorial shows you how to create a broken link checker for a Next.js app that sends a notification in Slack when a user visits a page that doesn’t exist.
 
 ## Creating a Next.js app and adding PostHog
 
@@ -108,8 +111,10 @@ Since we want to send our 404s and broken links to somewhere we check frequently
 
 To do this: 
 
-1. Go to the [Slack developer dashboard](https://api.slack.com/apps?new_app=1), create an app from scratch, name it, select your workspace, and click "Create App." 
+1. Go to the [Slack developer dashboard](https://api.slack.com/apps?new_app=1), create an app from scratch, name it, select your workspace, and click "Create App."
+
 2. Next, go to "Incoming Webhooks," activate them, click "add new webhook to workspace," select a channel (I made a new `404s-broken-links` channel for it), and click allow.
+
 3. Copy your webhook URL for use in PostHog.
 
 ## Creating an action and sending it to Slack
@@ -117,8 +122,11 @@ To do this:
 With our Slack webhook, we can set up an action that triggers the webhook when someone hits a 404 or broken link. 
 
 1. Go to your [project settings](https://app.posthog.com/project/settings#webhook), scroll to webhook integration, paste your Slack webhook link, and click "test and save."
+
 2. After successfully sending a test event, you can set up your action. To create it, [go to actions](https://app.posthog.com/data-management/actions) in PostHog, click "New action," select "From event or pageview," and match your "not found" custom event. 
+
 3. Select "Post to webhook when this action is triggered," set your message format to `[user.pathname] by [user.name]`, and press save.
+
 4. Visit [http://localhost:3000/test](http://localhost:3000/test) again, and you’ll see a message in your Slack channel.
 
 ![Slack](../images/tutorials/broken-link-checker/slack.mp4)

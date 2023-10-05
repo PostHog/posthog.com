@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-6.png
-tags: ['events']
+tags: ['events', 'product analytics']
 ---
 
 RSS is a popular format for providing feeds of content. For example, GitHub uses it to provide feeds of releases, blogs provide feeds of new posts, and status pages provide feeds of incidents

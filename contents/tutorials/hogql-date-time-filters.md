@@ -5,7 +5,7 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredImage: ../images/tutorials/banners/tutorial-9.png
-tags: ["hogql", "insights"]
+tags: ["hogql", "insights", 'product analytics']
 ---
 
 Since there are infinite ways to break down time, there are infinite ways to filter based on time. HogQL unlocks more of these in PostHog, and in this tutorial we'll go through examples of how to use do that.
