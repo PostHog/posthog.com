@@ -2602,14 +2602,6 @@ export const docsMenu = {
                             url: '/docs/cdp/build/reference',
                         },
                         {
-                            name: 'Using the PostHog API',
-                            url: '/docs/cdp/build/api',
-                        },
-                        {
-                            name: 'Jobs',
-                            url: '/docs/cdp/build/jobs',
-                        },
-                        {
                             name: 'Testing',
                             url: '/docs/cdp/build/testing',
                         },
