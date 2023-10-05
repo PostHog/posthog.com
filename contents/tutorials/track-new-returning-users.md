@@ -4,7 +4,6 @@ date: 2023-04-26
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-18.png
 tags: ["trends", "cohorts", 'product analytics']
 ---
 

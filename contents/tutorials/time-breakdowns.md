@@ -4,7 +4,6 @@ date: 2023-07-27
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-6.png
 tags: ['hogql', 'insights', product analytics']
 ---
 

@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-22
-featuredImage: ../images/tutorials/banners/tutorial-10.png
 tags: ["stickiness", "dashboards", "retention", 'product analytics']
 ---
 

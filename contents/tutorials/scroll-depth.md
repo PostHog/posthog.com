@@ -4,7 +4,6 @@ date: 2023-04-13
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-16.png
 featuredVideo: https://www.youtube-nocookie.com/embed/T9MbFiDU6hY
 tags: ["configuration", "insights", 'product analytics']
 ---

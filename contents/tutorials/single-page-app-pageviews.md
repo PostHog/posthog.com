@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas', 'yakko-majuri']
 date: 2022-10-17
-featuredImage: ../images/tutorials/banners/tutorial-13.png
 featuredVideo: https://www.youtube-nocookie.com/embed/I_WJc8T5lL8
 tags: ['configuration', 'events', 'product analytics']
 ---

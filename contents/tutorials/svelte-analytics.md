@@ -4,7 +4,6 @@ date: 2023-04-11
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/svelte-analytics.png
 tags: ["configuration", "feature flags", "persons", "events"]
 ---
 

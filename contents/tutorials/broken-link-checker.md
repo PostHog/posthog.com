@@ -4,7 +4,6 @@ date: 2023-06-01
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-12.png
 tags: ['actions', 'configuration', 'product os']
 ---
 

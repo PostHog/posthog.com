@@ -4,7 +4,6 @@ date: 2023-02-01
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-5.png
 tags: ['insights', 'persons', 'product os']
 ---
 

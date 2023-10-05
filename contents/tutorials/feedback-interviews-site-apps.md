@@ -5,7 +5,6 @@ author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
 featuredTutorial: true
-featuredImage: ../images/tutorials/banners/growth.png
 tags: ["surveys"]
 ---
 
@@ -15,7 +14,7 @@ PostHog’s [surveys](/docs/surveys/manual) help automate the process of getting
 
 ## Getting your app ready for surveys
 
-To add surveys, you need either [the snippet or the JavaScript library](/docs/integrate) set up in your app. You also must add `opt_in_site_apps: true` to the initialization of either of these. For the snippet, this looks like this:
+To add surveys, you need either [the snippet or the JavaScript library](/docs/integrate) set up in your app. You also must add `opt_in_site_apps: true` to the initialization of either of these. For the snippet, this looks like this:
 
 ```html
 <script>

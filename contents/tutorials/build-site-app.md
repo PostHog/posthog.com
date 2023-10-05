@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-02
-featuredImage: ../images/tutorials/banners/tutorial-1.png
 tags: ["apps", "site-apps", 'product os']
 ---
 

@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-04
-featuredImage: ../images/tutorials/banners/momentum-dash.png
 tags: ['apps', 'product os']
 ---
 

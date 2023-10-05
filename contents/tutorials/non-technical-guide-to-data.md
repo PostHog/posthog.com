@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-28
-featuredImage: ../images/tutorials/banners/tutorial-9.png
 tags: ["data management", 'product os']
 ---
 

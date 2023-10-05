@@ -4,7 +4,6 @@ date: 2023-08-18
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-7.png
 tags: ['session replay', 'product analytics', 'feature flags']
 ---
 

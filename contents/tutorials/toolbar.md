@@ -2,7 +2,6 @@
 title: "Using the PostHog Toolbar to visualize behavior and create actions"
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/toolbar.png
 author: ['yakko-majuri', 'andy-vandervell']
 tags:
     - heatmaps

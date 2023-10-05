@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['joe-martin']
 date: 2022-10-04
-featuredImage: ../images/tutorials/banners/create-new-events-the-easy-way.png
 featuredVideo: https://www.youtube-nocookie.com/embed/C_zNykBHlTI
 tags: ["actions", "toolbar", 'product os']
 ---

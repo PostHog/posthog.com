@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-09-26
-featuredImage: ../images/tutorials/banners/tutorial-8.png
 featuredVideo: https://www.youtube-nocookie.com/embed/CVu6ObmOR8Q
 tags: ['trends', 'sessions', 'product analytics']
 ---

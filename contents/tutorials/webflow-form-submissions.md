@@ -4,7 +4,6 @@ date: 2023-06-22
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-18.png
 tags: ["configuration", 'surveys']
 ---
 

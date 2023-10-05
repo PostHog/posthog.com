@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2023-01-02
-featuredImage: ../images/tutorials/banners/tutorial-1.png
 tags: ['session replay', 'sentry']
 ---
 

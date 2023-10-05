@@ -2,7 +2,6 @@
 title: Building a tracking cookies consent banner in React
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/tutorial-3.png
 featuredVideo: https://www.youtube-nocookie.com/embed/KRW5jxZ4H-I
 featuredTutorial: false
 date: 2022-10-03

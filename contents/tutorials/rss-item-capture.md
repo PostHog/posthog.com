@@ -4,7 +4,6 @@ date: 2023-08-30
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-6.png
 tags: ['events', 'product analytics']
 ---
 

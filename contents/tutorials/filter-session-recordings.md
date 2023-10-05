@@ -2,7 +2,6 @@
 title: "How to use filters + session replays to understand user friction" 
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/tutorial-12.png
 featuredTutorial: false
 author: ['joe-martin']
 tags: ['session replay']

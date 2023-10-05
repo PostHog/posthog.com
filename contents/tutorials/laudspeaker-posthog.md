@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['laudspeaker']
 date: 2023-01-26
-featuredImage: ../images/tutorials/banners/tutorial-1.png
 tags: ["apps", "site-apps", 'cdp']
 ---
 

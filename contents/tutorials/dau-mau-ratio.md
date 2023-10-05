@@ -4,7 +4,6 @@ date: 2023-05-29
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-14.png
 tags: ["insights", "trends", 'product analytics']
 ---
 

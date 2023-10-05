@@ -4,7 +4,6 @@ date: 2023-07-13
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ['configuration', 'product os']
 ---
 
@@ -16,7 +15,7 @@ In this tutorial, we build a basic Next.js app, set up PostHog, build a cookie c
 
 ## Create a Next.js app and add PostHog
 
-First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Run the command below, select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
+First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Run the command below, select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
 ```bash
 npx create-next-app@latest cookie-banner
@@ -39,7 +38,7 @@ export function PHProvider({ children }) {
 }
 ```
 
-We can then import the `PHProvider` component from the`provider.js` file in our `app/layout.js` file, and wrap our app in it.
+We can then import the `PHProvider` component from the`provider.js` file in our `app/layout.js` file, and wrap our app in it.
 
 ```js
 // app/layout.js
@@ -176,7 +175,7 @@ Now when we click these buttons, they set a value in local storage saying whethe
 
 ## Conditionally rendering the banner
 
-Lastly, we need the banner to disappear when the user has opted in or out and not show up on future visits if so. To do this, we can check the methods `has_opted_out_capturing` and `has_opted_in_capturing`, and if either is true, return `null` (like we do before the frontend has mounted). Our `useEffect` call now looks like this:
+Lastly, we need the banner to disappear when the user has opted in or out and not show up on future visits if so. To do this, we can check the methods `has_opted_out_capturing` and `has_opted_in_capturing`, and if either is true, return `null` (like we do before the frontend has mounted). Our `useEffect` call now looks like this:
 
 ```js
 useEffect(() => {

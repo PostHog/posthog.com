@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['igor-kotua']
 date: 2022-07-06
-featuredImage: ../images/tutorials/banners/css-selectors-for-actions.png
 tags: ["actions", "toolbar", 'product analytics']
 ---
 

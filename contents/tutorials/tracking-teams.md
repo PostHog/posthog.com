@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 date: 2021-04-08
-featuredImage: ../images/tutorials/banners/tutorial-5.png
 tags: ['configuration', 'product analytics']
 ---
 

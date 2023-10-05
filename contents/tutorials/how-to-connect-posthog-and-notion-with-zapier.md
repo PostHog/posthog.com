@@ -2,7 +2,6 @@
 title: How to automatically organize PostHog actions in Notion
 sidebar: Docs
 showTitle: true
-featuredImage: ../images/tutorials/banners/notion-connector.png
 featuredTutorial: false
 date: 2022-05-04
 author: ['joe-martin']
