@@ -42,7 +42,7 @@ This section is dedicated to tools that actively collect data on user behavior. 
 
 - **GitHub Stars:** 13.3k
 - **Language(s):** TypeScript (53%) and Python (42%)
-- **Alternative to:** Mixpanel, Amplitude, Hotjar, FullStory, LaunchDarkly
+- **Alternative to:** [Mixpanel](/blog/best-mixpanel-alternatives), Amplitude, Hotjar, FullStory, LaunchDarkly
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
 [PostHog](https://posthog.com/) is an all-in-one platform designed to give engineers and product managers a complete view of user behavior. It's built on the highly-scalable ClickHouse OLAP database.
