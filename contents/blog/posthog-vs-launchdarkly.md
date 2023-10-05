@@ -11,7 +11,6 @@ featuredImageType: full
 category: General
 tags:
     - Comparisons
-    - Guides
 ---
 
 PostHog and LaunchDarkly both offer feature flagging and A/B testing, which allow you [de-risk releases](/blog/decouple-deployment-from-release), increase engineering velocity, [configure your app remotely](/blog/feature-flags-vs-configuration), customize experiences, and more.

@@ -11,7 +11,6 @@ featuredImage: ../images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: Product growth
 tags:
-  - Product analytics
   - Explainers
 ---
 ## What is product analytics?

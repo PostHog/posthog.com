@@ -11,8 +11,6 @@ author: ["andy-vandervell"]
 category: General
 tags:
   - Comparisons
-  - Product analytics
-  - Session recording
 ---
 
 Want to know how PostHog and Heap are different? If you remember nothing else, remember these two points:

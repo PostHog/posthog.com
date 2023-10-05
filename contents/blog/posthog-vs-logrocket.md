@@ -12,7 +12,6 @@ author:
 category: General
 tags:
     - Comparisons
-    - Guides
 ---
 
 LogRocket is a frontend monitoring platform which, like PostHog, combines multiple tools into one platform. In this article we’ll explain some of the biggest similarities and differences between PostHog and LogRocket, but here’s the short version:
