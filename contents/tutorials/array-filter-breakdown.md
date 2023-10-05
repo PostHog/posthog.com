@@ -1,6 +1,6 @@
 ---
 title: How to filter and breakdown arrays with HogQL
-date: 2023-10-04
+date: 2023-10-05
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -57,7 +57,7 @@ Once you get individual number or string values from the breakdown, you can modi
 
 Once you break down your array, you might find it contains values you don't care about. You can use filters to remove them. Filtering arrays is relatively similar to breaking down, except you must provide values you want to filter out.
 
-To add a filter, click the filter dropdown next to your data series, click "Add filter," select HogQL, and add your expression.
+To add a filter, click the filter dropdown next to your data series, click "Add filter," select HogQL, and add your expression. You can also use filters in the [events explorer tab](https://app.posthog.com/events).
 
 To start, you can remove empty arrays with a `notEmpty()` check. For example, to remove empty arrays from the `$active_feature_flags` by filtering for the HogQL expression:
 
@@ -78,6 +78,12 @@ If you want to filter arrays for specific values you can use `has`, `hasAll`, an
 - `hasAll()` filters for arrays containing all of another array of elements. `hasAll(arr, ['test', 'cool'])` matches arrays containing both `'test'` and `'cool'`.
 
 - `hasAny()` filters for arrays containing any of another array of elements. `hasAny(arr, ['test', 'cool'])` matches arrays containing either `'test'` or `'cool'`.
+
+> **Notes:**
+>
+> - If you get the error "Nested type Array(String) cannot be inside Nullable type" (or similar), you can wrap your property value in a `assumeNotNull` expression like `has(assumeNotNull(arr), 'test')`.
+> 
+> - When selecting a number, you need to wrap it in [single quotes](/docs/hogql/guide#strings-and-quotes). For example, `has(arr, '1')` matches arrays containing the number `1`.
 
 If you want to filter arrays by the first, last, or specific index value, you can use `arrayElement(arr, n)` again too.
 
