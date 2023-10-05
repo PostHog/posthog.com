@@ -9,28 +9,32 @@ export const YCOnboarding = () => {
         <Layout>
             <div className="flex flex-col items-stretch w-full max-w-4xl mx-auto">
                 <Spacer />
-                <h1 className="centered">PostHog YC Onboarding</h1>
+                <h1 className="centered">You've found our secret Y Combinator offer!</h1>
                 <br />
                 <p>
-                    Welcome to our super secret YC onboarding page! We're very happy to see you. Please let us know what
-                    you're interested in using the form below.
+                    We offer special benefits for teams in the current batch - things we'd have found useful during our
+                    W20 batch, including:
                 </p>
-                <p>
-                    The setup calls take place with our Customer Success team, and run for about an hour. Before the
-                    call, we recommend you <a href="https://app.posthog.com/">sign up to our Cloud version</a> and try
-                    your hand at
-                    <Link to="/docs/integrate"> installing our snippet</Link> on your website. Doing so would allow us
-                    to tailor the onboarding to your needs, leveraging data from your own website instead of demo data.
-                    However, if you prefer to get a demo first, we'll be happy to spend 30 minutes to walk you through
-                    our features.
-                </p>
-                <p>
-                    Following the demo, we'll send over to you your choice of either Apple AirPods or a Timbuk2
-                    backpack. Due to boring customs reasons, if you live outside the US or Canada, we'll offer you a
-                    $150 merch gift card or make a $150 Open Collective donation of your choice. We'll also add $50K of
-                    credit to your PostHog Stripe account which is valid for 12 months ($25K / 6 months for past YC
-                    batches).
-                </p>
+                <div className="flex justify-center">
+                    <p className="text-center w-4/5">
+                        <li>
+                            $50,000 in PostHog credit for 12 months<sup>1</sup>
+                        </li>
+                        <li>
+                            Exclusive PostHog merch for founders<sup>2</sup>
+                        </li>
+                        <li>Access to our YC founder community</li>
+                        <li>Onboarding session to get you started</li>
+                        <li>Our CEO on WhatsApp or text</li>
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        To apply, complete the form below, then{' '}
+                        <a href="https://app.posthog.com/signup">sign-up for PostHog Cloud</a> and{' '}
+                        <Link to="/docs/integrate">install the snippet</Link>. We'll be in touch soon after.
+                    </p>
+                </div>
                 <HubSpotForm
                     customFields={{
                         yc_reason: {
@@ -40,6 +44,14 @@ export const YCOnboarding = () => {
                     }}
                     formID="1c421f4a-320a-4c2a-8879-e37ccfcdea87"
                 />
+            </div>
+            <div className="flex justify-center mt-4">
+                <p className="text-center w-4/5 text-xs mb-10">
+                    <sup>1</sup> Applicants from previous batches receive $25,000 for 6 months instead.
+                    <br />
+                    <sup>2</sup> Boring custom reasons mean users outside US/Canada get a $150 PostHog merch voucher
+                    instead.
+                </p>
             </div>
         </Layout>
     )
