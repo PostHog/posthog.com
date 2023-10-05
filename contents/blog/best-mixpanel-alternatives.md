@@ -65,52 +65,52 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
  </thead>
  <tbody>
  <tr>
- <td><p class="!mb-0"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Session replays</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replays</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Experiments</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Experiments</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track where users click and why</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track where users click and why</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Open source</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Build your own apps and contribute code</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Open source</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Build your own apps and contribute code</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>SQL insight builder</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Write your own insights using SQL</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>SQL insight builder</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Write your own insights using SQL</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr> 
  <tr>
- <td><p class="!mb-0"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
  <td className="text-center text-sm">Public beta</td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr> 
@@ -186,52 +186,52 @@ Google's huge scale means GA4 is used by both the biggest global corporations to
  </thead>
  <tbody>
  <tr>
- <td><p class="!mb-0"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Marketing analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track content and advertising performance</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Marketing analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track content and advertising performance</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr> 
  <tr>
- <td><p class="!mb-0"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Google Ads integration</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track ROI on Google marketing campaigns</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Google Ads integration</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track ROI on Google marketing campaigns</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Predictive insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">AI-powered alerts when metrics chanage</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Predictive insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">AI-powered alerts when metrics chanage</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Natural language insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Fetch insights using natural language queries</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Natural language insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Fetch insights using natural language queries</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Realtime dashboards</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track website activity in realtime</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Realtime dashboards</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track website activity in realtime</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  </tr> 
  <tr>
- <td><p class="!mb-0"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  </tr>
   <tr>
- <td><p class="!mb-0"><strong>Transparent pricing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Public pricing calculator</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Transparent pricing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Public pricing calculator</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  </tr>  
@@ -300,39 +300,39 @@ While it offers a limited free tier for startups, high prices are a barrier. As 
  <thead>
  <tr>
  <td className="w-3/12"></td>
- <td class="text-center"><strong>Amplitude</strong></td>
+ <td class="text-center px-0"><strong>Amplitude</strong></td>
  <td class="text-center"><strong>Mixpanel</strong></td>
  <td></td>
  </tr>
  </thead>
  <tbody>
  <tr>
- <td><p class="!mb-0"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr> 
  <tr>
- <td><p class="!mb-0"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Natural language insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Fetch insights using natural language queries</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Natural language insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Fetch insights using natural language queries</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  </tr> 
  <tr>
- <td><p class="!mb-0"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  </tr> 
@@ -406,32 +406,32 @@ Customers include Amway, Eventbrite, and Freshworks.
  </thead>
  <tbody>
  <tr>
- <td><p class="!mb-0"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr> 
  <tr>
- <td><p class="!mb-0"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
  </tr> 
  <tr>
- <td><p class="!mb-0"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  </tr>
  <tr>
- <td><p class="!mb-0"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  </tr> 
  <tr>
- <td><p class="!mb-0"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
+ <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  </tr> 
