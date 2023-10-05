@@ -1495,6 +1495,10 @@ export const docsMenu = {
                             url: '/docs/api/user',
                         },
                         {
+                            name: 'Query',
+                            url: '/docs/api/query',
+                        },
+                        {
                             name: 'Data model',
                             url: '/docs/data-model',
                         },
