@@ -62,9 +62,15 @@ export const Intro = ({
                     )}
                 </div>
             )}
+            {!featuredVideo && !featuredImage && (
+                <>
+                    <Title className="text-primary dark:text-primary-dark">{title}</Title>
+                    <p className="m-0 ml-10 opacity-70 order-last">{date}</p>
+                </>
+            )}
             {(featuredVideo || featuredImageType !== 'full') && <Title>{title}</Title>}
             {contributors?.[0] && (
-                <div className="my-3">
+                <div className={`my-3`}>
                     {contributors.map(({ profile_id, image, name }) => (
                         <Contributor
                             url={profile_id && `/community/profiles/${profile_id}`}
