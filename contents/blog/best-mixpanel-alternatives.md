@@ -16,11 +16,8 @@ tags:
 The four most popular alternatives to Mixpanel are:
 
 - **[PostHog](#posthog)** – An all-in-one platform that replaces multiple tools. The fastest growing Mixpanel alternative in 2023.
-
 - **[Google Analytics 4](#google-analytics-4-ga4)** – Google's latest, which now offers more for product teams.
-
 - **[Amplitude](#amplitude)** – Mixpanel's long-time rival and a popular choice for large enterprises.
-
 - **[Heap](#heap)** – A mid-market alternative that also offers session replay, and event autocapture.
 
 In this guide, we explore how they compare to Mixpanel, who uses them, and how to select an alternative depending on your needs.
@@ -57,76 +54,65 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
 
 ### How does PostHog compare to Mixpanel?
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
+<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
+<table className="w-full mt-4">
  <thead>
  <tr>
  <td className="w-3/12"></td>
- <td><strong>PostHog</strong></td>
- <td><strong>Mixpanel</strong></td>
- <td></td>
+ <td class="text-center"><strong>PostHog</strong></td>
+ <td class="text-center"><strong>Mixpanel</strong></td>
  </tr>
  </thead>
  <tbody>
  <tr>
- <td><strong>Product analytics</strong></td>
+ <td><p class="!mb-0"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td>Custom trends, funnels, and retention analysis</td>
  </tr>
  <tr>
- <td><strong>Session replays</strong></td>
+ <td><p class="!mb-0"><strong>Session replays</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Watch real users use your product; diagnose bugs</td>
  </tr>
  <tr>
- <td><strong>Feature flags</strong></td>
+ <td><p class="!mb-0"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Roll out features safely; toggle features for cohorts or individuals</td>
  </tr>
  <tr>
- <td><strong>Experiments</strong></td>
+ <td><p class="!mb-0"><strong>Experiments</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Test changes and analyze their impact</td>
  </tr>
  <tr>
- <td><strong>User surveys</strong></td>
+ <td><p class="!mb-0"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Ask users for qualitative feedback and gather responses</td>
  </tr>
  <tr>
- <td><strong>Heatmaps</strong></td>
+ <td><p class="!mb-0"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track where users click and why</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Track where users click and why</td>
  </tr>
  <tr>
- <td><strong>Open source</strong></td>
+ <td><p class="!mb-0"><strong>Open source</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Build your own apps and contribute code</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Build your own apps and contribute code</td>
  </tr>
  <tr>
- <td><strong>Autocapture</strong></td>
+ <td><p class="!mb-0"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Capture events without manual instrumentation</td>
  </tr>
  <tr>
- <td><strong>SQL insight builder</strong></td>
+ <td><p class="!mb-0"><strong>SQL insight builder</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Write your own insights using SQL</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Write your own insights using SQL</td>
  </tr> 
  <tr>
- <td><strong>Notebooks</strong></td>
- <td className="text-center">Public beta</td> 
+ <td><p class="!mb-0"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
+ <td className="text-center text-sm">Public beta</td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td>Collaborate on analysis in shareable notebooks</td>
  </tr> 
  </tbody>
 </table>
@@ -154,9 +140,10 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
 
-> ### Bottom line 
->
+> #### Bottom line 
 > PostHog is the best Mixpanel alternative for startups and mid-size companies. It replaces Mixpanel and numerous other tools, saving money and time. Power user features, like an SQL insight builder and session replay logs, make it a good choice for engineering-led teams, too.
+
+<br />
 
 ## Google Analytics 4 (GA4)
 
@@ -187,76 +174,66 @@ Google's huge scale means GA4 is used by both the biggest global corporations to
 
 ### How does GA4 compare to Mixpanel?
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
+<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
+<table className="w-full mt-4">
  <thead>
  <tr>
  <td className="w-3/12"></td>
- <td><strong>GA4</strong></td>
- <td><strong>Mixpanel</strong></td>
+ <td class="text-center"><strong>GA4</strong></td>
+ <td class="text-center"><strong>Mixpanel</strong></td>
  <td></td>
  </tr>
  </thead>
  <tbody>
  <tr>
- <td><strong>Product analytics</strong></td>
+ <td><p class="!mb-0"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td>Custom trends, funnels, and retention analysis</td>
  </tr>
  <tr>
- <td><strong>Marketing analytics</strong></td>
+ <td><p class="!mb-0"><strong>Marketing analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track content and advertising performance</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td>Track content and advertising performance</td>
  </tr> 
  <tr>
- <td><strong>Notebooks</strong></td>
+ <td><p class="!mb-0"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td>Collaborate on analysis in shareable notebooks</td>
  </tr>
  <tr>
- <td><strong>Google Ads integration</strong></td>
+ <td><p class="!mb-0"><strong>Google Ads integration</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track ROI on Google marketing campaigns</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td>Track ROI on Google marketing campaigns</td>
  </tr>
  <tr>
- <td><strong>Predictive insights</strong></td>
+ <td><p class="!mb-0"><strong>Predictive insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">AI-powered alerts when metrics chanage</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>AI-powered alerts when metrics chanage</td>
  </tr>
  <tr>
- <td><strong>Natural language insights</strong></td>
+ <td><p class="!mb-0"><strong>Natural language insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Fetch insights using natural language queries</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Fetch insights using natural language queries</td>
  </tr>
  <tr>
- <td><strong>Group analytics</strong></td>
+ <td><p class="!mb-0"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td>Track metrics at account or company level</td>
  </tr>
  <tr>
- <td><strong>Realtime dashboards</strong></td>
+ <td><p class="!mb-0"><strong>Realtime dashboards</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track website activity in realtime</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td>Track website activity in real time</td>
  </tr> 
  <tr>
- <td><strong>Data governance</strong></td>
+ <td><p class="!mb-0"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td>Admin level control over event approval, tags and descriptions</td>
  </tr>
   <tr>
- <td><strong>Transparent pricing</strong></td>
+ <td><p class="!mb-0"><strong>Transparent pricing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Public pricing calculator</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td>Public pricing calculator</td>
  </tr>  
  </tbody>
 </table>
@@ -282,9 +259,10 @@ As of July 2023, [30.5% of the top 1 million websites](https://www.linkedin.com/
 
 3. **To track marketing ROI:** GA4 is predominantly used by marketing and e-commerce teams to track campaign ROI. It's also popular among large content publishers for its scalability.
 
-> ### Bottom line
->
+> #### Bottom line
 > GA4 is the best Mixpanel alternative for marketing teams who want to track ROI on campaigns, and a good option for B2C and e-commerce platforms. Product teams, especially those working on B2B products, should look elsewhere.
+
+<br />
 
 ## Amplitude
 
@@ -317,52 +295,46 @@ While it offers a limited free tier for startups, high prices are a barrier. As 
 
 ### How does Amplitude compare to Mixpanel?
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
+<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
+<table className="w-full mt-4">
  <thead>
  <tr>
  <td className="w-3/12"></td>
- <td><strong>Amplitude</strong></td>
- <td><strong>Mixpanel</strong></td>
+ <td class="text-center"><strong>Amplitude</strong></td>
+ <td class="text-center"><strong>Mixpanel</strong></td>
  <td></td>
  </tr>
  </thead>
  <tbody>
  <tr>
- <td><strong>Product analytics</strong></td>
+ <td><p class="!mb-0"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td>Custom trends, funnels, and retention analysis</td>
  </tr>
  <tr>
- <td><strong>A/B testing</strong></td>
+ <td><p class="!mb-0"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Collaborate on analysis in shareable notebooks</td>
  </tr> 
  <tr>
- <td><strong>Notebooks</strong></td>
+ <td><p class="!mb-0"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td>Collaborate on analysis in shareable notebooks</td>
  </tr>
  <tr>
- <td><strong>Natural language insights</strong></td>
+ <td><p class="!mb-0"><strong>Natural language insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Fetch insights using natural language queries</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Fetch insights using natural language queries</td>
  </tr>
  <tr>
- <td><strong>Group analytics</strong></td>
+ <td><p class="!mb-0"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td>Track metrics at account or company level</td>
  </tr> 
  <tr>
- <td><strong>Data governance</strong></td>
+ <td><p class="!mb-0"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td>Admin level control over event approval, tags and descriptions</td>
  </tr> 
  </tbody>
 </table>
@@ -386,9 +358,10 @@ As of July 2023, Amplitude is deployed by 6,973 (0.7%) of the top 1 million webs
 
 3. **Resolving data quality problems:** Companies that use Amplitude, particularly large ones, often migrate from outdated, or self-built, tools that generate poor quality data. Amplitude helps them fix that, while also making analytics more accessible.
 
-> ### Bottom line
->
-> Amplitude is the best Mixpanel alternative for large enterprise companies who want to reduce the load on expensive, overworked data science teams. Startups and mid-size companies might find there are better-value alternatives.
+> #### Bottom line
+> Amplitude is the best Mixpanel alternative for large enterprise companies who want to reduce the load on expensive, overworked data science teams. Startups and mid-size companies might find there are better-value alternatives
+
+<br />
 
 ## Heap
 
@@ -421,52 +394,46 @@ Customers include Amway, Eventbrite, and Freshworks.
 
 ### How does Heap compare to Mixpanel?
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
+<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
+<table className="w-full mt-4">
  <thead>
  <tr>
  <td className="w-3/12"></td>
- <td><strong>Heap</strong></td>
- <td><strong>Mixpanel</strong></td>
+ <td class="text-center"><strong>Heap</strong></td>
+ <td class="text-center"><strong>Mixpanel</strong></td>
  <td></td>
  </tr>
  </thead>
  <tbody>
  <tr>
- <td><strong>Product analytics</strong></td>
+ <td><p class="!mb-0"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td>Custom trends, funnels, and retention analysis</td>
  </tr>
  <tr>
- <td><strong>Autocapture</strong></td>
+ <td><p class="!mb-0"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Capture events without manual instrumentation</td>
  </tr> 
  <tr>
- <td><strong>Session replay</strong></td>
+ <td><p class="!mb-0"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-red text-lg">✖</span></td>
- <td>Watch real users use your product; diagnose bugs</td>
  </tr> 
  <tr>
- <td><strong>Notebooks</strong></td>
+ <td><p class="!mb-0"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
  <td className="text-center"><span className="text-red text-lg">✖</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td>Collaborate on analysis in shareable notebooks</td>
  </tr>
  <tr>
- <td><strong>Group analytics</strong></td>
+ <td><p class="!mb-0"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td>Track metrics at account or company level</td>
  </tr> 
  <tr>
- <td><strong>Data governance</strong></td>
+ <td><p class="!mb-0"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
  <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td>Admin level control over event approval, tags and descriptions</td>
  </tr> 
  </tbody>
 </table>
@@ -492,10 +459,12 @@ Heap is less popular than Mixpanel. Heap is deployed on 3,200 (0.3%) of the top 
 
 3. **Low information density** Reviewers on G2 appreciate Heap's user-friendly interface, which tends toward lower information density than competing tools.
 
-> ### Bottom line 
->
+> #### Bottom line 
 > Heap is basically Mixpanel with autocapture. This makes it a decent choice for non-technical product teams, but it's not radically different.
+
+<br />
  
+
 ## Honorable mentions
 
 This guide focuses on the most popular Mixpanel alternatives, but these aren't the only ones. Here are some honorable mentions that are worth also worth considering:
