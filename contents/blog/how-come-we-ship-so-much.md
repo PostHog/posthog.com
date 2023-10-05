@@ -90,7 +90,7 @@ PostHog works like a group of startups - with lots of [small teams](/handbook/co
 
 It's simple, but if you have lots of spending and focus outside of engineering, you won't get as much built.
 
-We are around 45 people, 38 of whom are engineers.
+At the time of writing, [we are 37 people](../team), only 11 of whom are in Go To Market or Operations roles (and 6 of those 11 have at least some engineering in their background).
 
 We don't do outbound sales, our [marketing team](/handbook/small-teams/marketing) is very small, we only have one product manager, our [exec team](/handbook/small-teams/exec) only has 3 people. These things are all by design (and were possible because of our market - the majority of engineers generally want docs and to try something instead of demos and salespeople to deal with).
 
@@ -121,3 +121,9 @@ To quote one of our team "process is scar tissue" - it often overcorrects, but b
 As a company with high autonomy and low coordination, shipping things that affect multiple teams is _a lot_ harder than shipping something within a single team. You may need extra meetings, or to form a temporary project team, or you may just fail!
 
 Since we handle a lot of data, at scale, this has meant performance has, well, um, been a performance to solve. Performance is a very broad area to solve for - ranging from our infrastructure all the way through to our UX, and thus involves a lot of coordination and dependencies.
+
+## It's a matter of tradeoffs
+
+The most important thing is that you figure out if you value speed and autonomy over polish and control. Which path will help you achieve your company's mission better?
+
+Once you've done that, optimize how your company works around that, and accept - there are tradeoffs! Just make them consciously.
