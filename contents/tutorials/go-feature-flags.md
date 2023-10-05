@@ -4,7 +4,6 @@ date: 2023-09-27
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-8.png
 tags: ["feature-flags"]
 ---
 
