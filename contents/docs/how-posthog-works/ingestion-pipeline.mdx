@@ -143,7 +143,7 @@ To determine what to do at this stage, we need to make a call to PostgreSQL to d
 
 ###### Merging two Persons
 
-In the third scenario, where we have inadvertently created two Persons for the same user, we will need to merge them. Note that PostHog has a few built-in protections, in which case the merge will not aborted. ([more info](https://posthog.com/docs/integrate/identifying-users#considerations)). 
+In the third scenario, where we have inadvertently created two Persons for the same user, we will need to merge them. Note that PostHog has a few built-in protections, in which case the merge will not be aborted. ([more info](https://posthog.com/docs/integrate/identifying-users#considerations)). 
 
 
 In the case of an `$identify` call, we will merge the person tied to `$anon_distinct_id` (`person_2`) into the person identified by `distinct_id` (`person_1`). 
