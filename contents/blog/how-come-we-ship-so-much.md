@@ -66,7 +66,9 @@ When we started, we felt that if product designers dictate to engineers, the bes
 
 As we grew, we realized that engineers _can_ design the UX of a product. Especially if we hire people that have this skillset.
 
-We have people that can help engineers with design, but they are very happy to work reactively and fast - and they don't block merging work during QA. This means we _do_ ship work where the design isn't perfect, but we won't drop things that are important and will keep improving them.
+We invested quite a lot in getting our design _system_ up and running, and worked with a designer to get it done. Then we moved onto this "no design by default" phase. Had we been in this phase from the beginning, the app would have been very inconsistent... at best.
+
+Today, we have people that can help engineers with design, but they are very happy to work reactively and fast - and they don't block merging work during QA. This means we _do_ ship work where the design isn't perfect, but we won't drop things that are important and will keep improving them.
 
 For example, we've redesigned this entire website ~5 times.
 
@@ -118,4 +120,4 @@ To quote one of our team "process is scar tissue" - it often overcorrects, but b
 
 As a company with high autonomy and low coordination, shipping things that affect multiple teams is _a lot_ harder than shipping something within a single team. You may need extra meetings, or to form a temporary project team, or you may just fail!
 
-At scale, this has meant performance has, well, um, been a performance to solve.
+Since we handle a lot of data, at scale, this has meant performance has, well, um, been a performance to solve. Performance is a very broad area to solve for - ranging from our infrastructure all the way through to our UX, and thus involves a lot of coordination and dependencies.
