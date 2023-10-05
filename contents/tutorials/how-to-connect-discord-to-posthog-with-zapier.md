@@ -20,7 +20,7 @@ In this tutorial we’ll explore how to achieve this with PostHog’s Zapier plu
 
 First, we need to create the action which we want to use as a trigger in PostHog.
 
-In this example we’ll use the [toolbar](/docs/user-guides/toolbar) to create a simple action based on a form submission on [PostHog’s Contact Sales form](https://posthog.com/get-in-touch#contact), but you can also check [the Actions docs](/docs/user-guides/actions) for information about creating custom actions, or understanding how actions differ from events.
+In this example we’ll use the [toolbar](/docs/user-guides/toolbar) to create a simple action based on a form submission on [PostHog’s Contact Sales form](https://posthog.com/contact-sales), but you can also check [the Actions docs](/docs/user-guides/actions) for information about creating custom actions, or understanding how actions differ from events.
 
 ![Create action](../images/tutorials/discord/discord-create-action.png)
 

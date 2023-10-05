@@ -72,8 +72,8 @@ Third, once the library is installed and configured, events can be captured by c
 ```python
 def movie_played(movie):
 	posthog.capture(
-		'distinct id', 
-		'movie played', 
+		'distinct_id', 
+		'movie_played', 
 		{
 			'movie_id': movie.id,
 			'category': movie.category
@@ -120,17 +120,17 @@ As shown above in Python and below in a variety of other languages, properties a
 
 ```js
 posthog.capture(
-  '[event-name]', 
+  'event_name', 
   { property1: 'value', property2: 'another value' }
 );
 ```
 
 ```php
 PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
+  'distinctId' => 'distinct_id_of_your_user',
+  'event' => 'movie_played',
   'properties' => array(
-    'movieId' => '123',
+    'movie_id' => '123',
     'category' => 'romcom'
   )
 ));
@@ -138,8 +138,8 @@ PostHog::capture(array(
 
 ```ruby
 posthog.capture({
-  distinct_id: 'distinct id',
-  event: 'movie played',
+  distinct_id: 'distinct_id',
+  event: 'movie_played',
   properties: {
     movie_id: '123',
     category: 'romcom'
@@ -166,7 +166,7 @@ Properties can also be set for individual users using the `set` and `set_once` m
 
 ```js
 posthog.capture(
-  'Set some user properties', 
+  'set_some_user_properties', 
   { 
     $set: { location: 'London'  },
     $set_once: { referred_by: 'some ID' },
@@ -176,8 +176,8 @@ posthog.capture(
 
 ```python
 posthog.capture(
-  'distinct id',
-  event='movie played',
+  'distinct_id',
+  event='movie_played',
   properties={ 
     '$set': { 'location' : 'London' },
     '$set_once': { 'referred_by': 'some ID' }
@@ -187,8 +187,8 @@ posthog.capture(
 
 ```php
 PostHog::capture(array(
-  'distinctId' => 'user:123',
-  'event' => 'movie played',
+  'distinctId' => 'distinct_id_of_your_user',
+  'event' => 'movie_played',
   'properties' => array(
     '$set' => array(
       'location' => 'London'
@@ -202,8 +202,8 @@ PostHog::capture(array(
 
 ```ruby
 posthog.capture({
-  distinct_id: 'distinct id',
-  event: 'movie played',
+  distinct_id: 'distinct_id',
+  event: 'movie_played',
   properties: {
     $set: { location: 'London' },
     $set_once: { referred_by: 'some ID' }
@@ -241,17 +241,17 @@ For example, if you had multiple deployments for different companies in your pro
 ```js
 // All subsequent events will be associated with company `id:5`
 posthog.group('company', 'id:5');
-posthog.capture('some event')
+posthog.capture('some_event')
 ```
 
 ```python
-posthog.capture('[distinct id]', 'some event', groups={'company': 'id:5'})
+posthog.capture('distinct_id', 'some_event', groups={'company': 'id:5'})
 ```
 
 ```go
 client.Enqueue(posthog.Capture{
-    DistinctId: "[distinct id]",
-    Event:      "some event",
+    DistinctId: "distinct_id",
+    Event:      "some_event",
     Groups: posthog.NewGroups().
         Set("company", "id:5").
 })
@@ -259,22 +259,22 @@ client.Enqueue(posthog.Capture{
 
 ```node
 posthog.capture({
-    event: "some event",
-    distinctId: '[distinct id]',
+    event: "some_event",
+    distinctId: 'distinct_id',
     groups: { company: 'company_id_in_your_db' }
 })
 ```
 
 ```php
 PostHog::capture(array(
-    'distinctId' => '[distinct id]',
-    'event' => 'some event',
+    'distinctId' => 'distinct_id',
+    'event' => 'some_event',
     '$groups' => array("company" => "id:5")
 ));
 ```
 
 ```segment
-analytics.track('[event name]', {
+analytics.track('event_name', {
     "$groups": {
         "company": "id:5"
     }

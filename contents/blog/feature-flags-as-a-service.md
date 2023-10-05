@@ -103,7 +103,7 @@ With feature flags as a service, you gain more confidence in:
 
 In fewer words, you pass your potential problems off to them. 
 
-![Problems](../images/blog/feature-flags-as-a-service/problems.png)
+![Problems](../images/blog/feature-flags-as-a-service/problems.jpg)
 
 ## Deciding whether to build or buy
 

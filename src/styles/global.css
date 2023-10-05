@@ -108,7 +108,7 @@ h3 {
 }
 
 h4 {
-    @apply text-base leading-normal mb-3;
+    @apply text-[1.25rem] leading-normal mb-3;
 
     code {
         @apply !font-bold !text-xl;

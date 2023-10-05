@@ -47,7 +47,7 @@ When capturing an event, you can pass a property called `$set` as an event prope
 **Example**
 
 ```js
-posthog.capture('some event', { $set: { userProperty: 'value' } })
+posthog.capture('some_event', { $set: { userProperty: 'value' } })
 ```
 
 **Usage**
@@ -59,7 +59,7 @@ When capturing an event, you can pass a property called `$set` as an event prope
 **Example**
 
 ```js
-posthog.capture('some event', { $set_once: { userProperty: 'value' } })
+posthog.capture('some_event', { $set_once: { userProperty: 'value' } })
 ```
 
 **Usage**
@@ -189,7 +189,7 @@ Group analytics allows you to associate the events for that person's session wit
 ```js
 posthog.group('company', 'company_id_in_your_db')
 
-posthog.capture('upgraded plan') // this event is associated with company ID `company_id_in_your_db`
+posthog.capture('upgraded_plan') // this event is associated with company ID `company_id_in_your_db`
 ```
 
 -   Associate the events for this session with a group AND update the properties of that group

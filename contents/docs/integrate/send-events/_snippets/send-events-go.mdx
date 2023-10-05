@@ -7,7 +7,7 @@ import Intro from "./intro.mdx"
 ```go
 client.Enqueue(posthog.Capture{
   DistinctId: "distinct_id_of_the_user",
-  Event: "user signed up",
+  Event: "user_signed_up",
 })
 ```
 
@@ -18,7 +18,7 @@ client.Enqueue(posthog.Capture{
 ```go
   client.Enqueue(posthog.Capture{
     DistinctId: "distinct_id_of_the_user",
-    Event:      "User signed up",
+    Event:      "user_signed_up",
     Properties: posthog.NewProperties().
       Set("login_type", "email").
       Set("is_free_trial", true),

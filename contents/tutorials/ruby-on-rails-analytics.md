@@ -250,7 +250,7 @@ def create
     if @article.save
       $posthog.capture(
         distinct_id: @article.author,
-        event: 'Article created',
+        event: 'article_created',
         properties: {
           title: @article.title
         }
@@ -281,7 +281,7 @@ def create
     if @article.save
       $posthog.capture(
         distinct_id: @article.author,
-        event: 'Article created',
+        event: 'article_created',
         properties: {
           title: @article.title
         }

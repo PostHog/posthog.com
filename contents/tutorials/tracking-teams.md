@@ -86,7 +86,7 @@ If we still want to keep some record of an event coming from a specific person, 
 * Event will be associated with the organization, but we have 
 * a way of tracing it back to the individual person if we want to.
 */
-posthog.capture('some event', { personEmail: user.email })
+posthog.capture('some_event', { personEmail: user.email })
 ```
 
 When using our JavaScript library, you can also simplify this with `posthog.register`:

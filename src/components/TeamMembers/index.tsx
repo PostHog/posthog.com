@@ -211,9 +211,9 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
     )
 
     return (
-        <>
+        <section className="@container">
             <h4>Team members</h4>
-            <ul className="list-none m-0 p-0 grid sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            <ul className="list-none m-0 p-0 grid gap-6 grid-cols-1 @lg:grid-cols-2">
                 {loading ? (
                     <li>
                         <Skeleton />
@@ -225,19 +225,25 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                             member?.attributes ?? {}
                         const name = [firstName, lastName].filter(Boolean).join(' ')
                         return (
-                            <li className="!m-0 group relative" key={name}>
+                            <li
+                                className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded min-h-28 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] group"
+                                key={name}
+                            >
                                 <Link
-                                    className="!text-inherit flex space-x-4 items-center py-3 relative active:top-[1px] active:scale-[.99] transition-all px-4 hover:bg-accent dark:hover:bg-accent-dark rounded h-full"
+                                    className="flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
                                     to={`/community/profiles/${member.id}`}
                                 >
-                                    <figure className="mb-0">
-                                        <ContributorImage image={avatar?.data?.attributes?.url} />
-                                    </figure>
-                                    <div>
-                                        <span className="flex items-center md:flex-row space-x-2">
-                                            <p className="!text-lg !font-bold !m-0 !leading-none">{name}</p>
+                                    <div className="flex flex-col justify-between px-3 pt-4 pb-3 w-full mr-24 @lg:mr-28">
+                                        <div>
+                                            <h3 className="!m-0 text-base leading-tight">{name}</h3>
+                                            <p className="text-primary/50 !m-0 !text-sm dark:text-primary-dark/50">
+                                                {companyRole}
+                                            </p>
+                                        </div>
+
+                                        <span className="flex items-center gap-2 mt-1">
                                             {country && (
-                                                <span className="!leading-none">
+                                                <span className="!leading-none text-2xl">
                                                     {country === 'world' ? (
                                                         '🌎'
                                                     ) : (
@@ -271,15 +277,21 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                                 )
                                             )}
                                         </span>
-                                        <p className="!text-sm !mb-0 opacity-50 !leading-none !mt-1">{companyRole}</p>
                                     </div>
+
+                                    <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0">
+                                        <img
+                                            src={avatar?.data?.attributes?.url}
+                                            className="w-[150px] @lg:max-h-28 @lg:w-auto"
+                                        />
+                                    </figure>
                                 </Link>
                                 {isModerator && (
                                     <button
-                                        className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent dark:bg-accent-dark border border-border dark:border-dark absolute -top-1 -right-1"
+                                        className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent dark:bg-accent-dark border border-border dark:border-dark absolute -top-3 -right-3"
                                         onClick={(e) => removeTeamMember(member)}
                                     >
-                                        <Close className="w-2 h-2" />
+                                        <Close className="w-3 h-3" />
                                     </button>
                                 )}
                             </li>
@@ -288,6 +300,6 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                 )}
                 {isModerator && <AddTeamMember handleChange={addTeamMember} />}
             </ul>
-        </>
+        </section>
     )
 }

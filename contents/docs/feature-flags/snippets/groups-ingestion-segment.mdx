@@ -2,7 +2,7 @@
 
 ```js
 // Capturing an event with groups
-analytics.track('[event name]', {
+analytics.track('event_name', {
     "$groups": {
         "company": "id:5"
     }
@@ -25,7 +25,7 @@ For backend libraries you need to send a distinct id (as with any other .track c
 
 ```python
 # Capturing an event with groups
-analytics.track('distinct_id', '[event name]', {
+analytics.track('distinct_id', 'event_name', {
     "$groups": {
         "company": "id:5"
     }

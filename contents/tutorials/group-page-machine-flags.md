@@ -96,7 +96,7 @@ posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
 
 posthog.capture(
   "canada-cloud-1", 
-  "server identify", 
+  "server_identify", 
   {
     "server_id": "canada-cloud-1"
   }
@@ -141,7 +141,7 @@ if (is_first_interaction):
 	# Do cool stuff here
 	
 	posthog.capture(
-    'did cool stuff',
+    'did_cool_stuff',
     'ian@posthog.com',
     {
       'is_first_interaction': False

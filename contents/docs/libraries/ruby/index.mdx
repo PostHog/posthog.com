@@ -114,8 +114,8 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 
 ```ruby
 posthog.capture({
-    distinct_id: 'distinct id',
-    event: 'movie played',
+    distinct_id: 'distinct_id_of_the_user',
+    event: 'movie_played',
     properties: {
         movie_id: '123',
         category: 'romcom'

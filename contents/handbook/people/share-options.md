@@ -131,7 +131,7 @@ The Operations team is currently in the process of enabling us to both grant opt
 
 ### I have a question that is not covered here!
  
-Ask Charles or Grace - ideally in a public Slack channel (if appropriate) for better visibility. 
+Ask Charles - ideally in a public Slack channel (if appropriate) for better visibility. 
 
 ### May I suggest a change to our share option plan or my share option document?
  

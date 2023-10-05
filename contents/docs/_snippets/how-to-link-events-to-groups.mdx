@@ -28,7 +28,7 @@ posthog.capture('user_signed_up')
 ```python
 # ❌ Not possible
 posthog.capture(
-    '[user distinct id]',
+    'user_distinct_id',
     'user_signed_up',
     groups={
         'company': 'company_id_in_your_db',
@@ -38,7 +38,7 @@ posthog.capture(
 
 # ✅ Allowed
 posthog.capture(
-    '[user distinct id]',
+    'user_distinct_id',
     'user_signed_up',
     groups={
         'company': 'company_id_in_your_db',
@@ -50,7 +50,7 @@ posthog.capture(
 ```go
 // ❌ Not possible
 client.Enqueue(posthog.Capture{
-    DistinctId: "[user distinct id]",
+    DistinctId: "user_distinct_id",
     Event: "user_signed_up",
     Groups: posthog.NewGroups().
         Set("company", "company_id_in_your_db").
@@ -59,7 +59,7 @@ client.Enqueue(posthog.Capture{
 
 // ✅ Allowed
 client.Enqueue(posthog.Capture{
-    DistinctId: "[user distinct id]",
+    DistinctId: "user_distinct_id",
     Event: "user_signed_up",
     Groups: posthog.NewGroups().
         Set("company", "company_id_in_your_db").
@@ -70,7 +70,7 @@ client.Enqueue(posthog.Capture{
 // ✅ Allowed
 posthog.capture({
     event: 'user_signed_up',
-    distinctId: '[user distinct id]',
+    distinctId: 'user_distinct_id',
     groups: { 
         company: 'company_id_in_your_db',
         channel: 'channel_id_in_your_db'
@@ -81,13 +81,13 @@ posthog.capture({
 ```php
 // ❌ Not possible
 PostHog::capture(array(
-    'distinctId' => '[user distinct id]',
+    'distinctId' => 'user_distinct_id',
     'event' => 'user_signed_up',
     '$groups' => array("company" => "company_id_in_your_db", "company" => "another_company_id_in_your_db")
 ));
 // ✅ Allowed
 PostHog::capture(array(
-    'distinctId' => '[user distinct id]',
+    'distinctId' => 'user_distinct_id',
     'event' => 'user_signed_up',
     '$groups' => array("company" => "company_id_in_your_db", "channel" => "channel_id_in_your_db")
 ));

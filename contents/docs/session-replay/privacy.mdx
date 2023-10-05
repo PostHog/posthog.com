@@ -24,7 +24,8 @@ You can control the masking more granularly by using `maskInputFn` to customize 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskAllInputs: true, // Important - this needs to be true for the below function to be called
+        // `maskInputFn` only applies to selected elements, so make sure to set this to true if you want this to work globally
+        maskAllInputs: true,
         maskInputFn: (text, element) => {
             if (element?.attributes['type']?.value === 'search') {
                 // If this is a search input, don't mask it
@@ -43,22 +44,25 @@ General text is not masked by default, but we provide multiple options for maski
 
 ### Mask all text
 
+> **IMPORTANT**: The `text` related config options only apply to non-input text. Inputs are masked differently and have separate methods (as detailed [above](#input-elements)).
+
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskTextSelector: "*" // Masks all text elements
+        maskTextSelector: "*" // Masks all text elements (not including inputs)
     }
 })
 ```
 
 ### Mask or un-mask specific text
 
-You can use a CSS selector to mask specific elements. For example, you may want to mask all elements with the class `password` or the ID `sensitive`.
+You can use a CSS selector to mask specific elements. For example, you may want to mask all elements with the class `email` or the ID `sensitive`.
 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskTextSelector: ".password, #sensitive" // masks all elements with the class "password" or the ID "sensitive"
+        maskTextSelector: ".email, #sensitive" // masks all elements with the class "email" or the ID "sensitive". This does not apply to input elements.
+
     }
 })
 ```
@@ -68,7 +72,9 @@ You can further control the text that gets masked. For example, by only masking 
 ```ts
 posthog.init('<ph_project_api_key>', {
     session_recording: {
-        maskTextSelector: "*", // The below function only applies to selected elements, so make sure to set to "*" if you want this to work globally
+        // `maskTextFn` only applies to selected elements, so make sure to set to "*" if you want this to work globally.
+        // This does not apply to input elements.
+        maskTextSelector: "*", 
         maskTextFn: (text) => {
             // A simple email regex - you may want to use something more advanced
             const emailRegex = /(\S+)@(\S+\.\S+)/g
@@ -83,7 +89,6 @@ posthog.init('<ph_project_api_key>', {
 ```
 
 
-
 ## Other Elements
 
 If your application displays sensitive user information outside of input or text fields, or if there are areas of your application that you simply don't want to capture, you need to update your codebase to prevent PostHog from capturing this information during session recordings.
@@ -95,3 +100,66 @@ To do so, you should add the CSS class name `ph-no-capture` to elements which sh
 ```
 
 Note that adding `ph-no-capture` will also prevent any [autocapture](/docs/data/autocapture) events from being captured from that element.
+
+## Common example configs
+
+### Maximum privacy - mask everything
+
+```
+{
+    maskAllInputs: true,
+    maskTextSelector: "*"
+}
+```
+
+### Limited privacy - try to mask all email / password related things
+
+You can mask content that looks like it contains an email or password.
+
+For passwords, it is important to note that "click to show password" buttons typically turn the input type to `text`. This would then reveal the password. Thus instead of checking for `type='password'`, you need to check a different field, like `id`:
+
+```
+{
+    maskAllInputs: true,
+    maskInputFn: (text, element) => {
+        const maskTypes = ['email', 'password']
+
+        if (
+            maskTypes.indexOf(element?.attributes['type']?.value) !== -1 ||
+            maskTypes.indexOf(element?.attributes['id']?.value) !== -1
+        ) {
+            return '*'.repeat(text.length)
+        }
+        return text
+    },
+    maskTextSelector: '*',
+    maskTextFn(text) {
+        // A simple email regex - you may want to use something more advanced
+        const emailRegex = /(\S+)@(\S+\.\S+)/g
+
+        return text.replace(emailRegex, (match, g1, g2) => {
+            // Replace each email with asterisks - ben@posthog.com becomes ***@***********
+            return '*'.repeat(g1.length) + '@' + '*'.repeat(g2.length)
+        })
+    }
+}
+```
+
+
+### Selective privacy - only reveal things that are marked as safe
+
+Instead of selectively masking, we can selectively _unmask_ fields that you are sure are safe.
+This assumes you are adding a data attribute to every "safe" element like `<p data-record="true">I will be visible!</p>`
+
+```
+{
+    maskAllInputs: true,
+    maskInputFn: (text, element) => {
+        if (element?.dataset['record'] === 'true') {
+            return text
+        }
+        return '*'.repeat(text.length)
+    },
+    maskTextSelector: ":not([data-record='true'])",
+}
+```

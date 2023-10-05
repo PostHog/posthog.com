@@ -197,6 +197,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type PostCategory implements Node {
       attributes: PostCategoryAttributes
     }
+    type ProductSectionsSectionsFeatures {
+      title: String
+      description: String
+      icon: String
+    }
+    type ProductSectionsSections {
+      featuresType: String
+      features: [ProductSectionsSectionsFeatures]
+    }
+    type MdxFrontmatterProductSections implements Node {
+      sections: [ProductSectionsSections]
+    }
   `)
     createTypes([
         schema.buildObjectType({

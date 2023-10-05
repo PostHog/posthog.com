@@ -59,7 +59,7 @@ That doesn't work without the Oxford.
 
 While we default to American English in most things, we prefer using the British-style en dash ( – ) with a space either side rather than the longer em dash with no spaces (—) used in American English.
 
-> - **Example:** "Don’t up vote your own content, and don’t ask other people to – post it and pray."
+> **Example:** "Don’t up vote your own content, and don’t ask other people to – post it and pray."
 
 Please don't use a hyphen instead of en dash. On Macs, holding down `Option` and the hyphen key will give you an en dash.
 
@@ -67,17 +67,17 @@ Please don't use a hyphen instead of en dash. On Macs, holding down `Option` and
 
 **Allow** is another way of saying permit.
 
-> - **Example:** Your partner allows you to stay up late and play video games.
+> **Example:** Your partner allows you to stay up late and play video games.
 
 **Enable** means providing the means or opportunity. 
 
-> - **Example:** PostHog enables you to understand user behavior.
+> **Example:** PostHog enables you to understand user behavior.
 
 In most cases, PostHog enables users to do things.
 
 ### Add extra line breaks between long bullet points
 
-Sections with long bullet point items are hard to read without extra line breaks. For example, this passage:
+Sections with long bullet point items are hard to read without extra line breaks (when looking at Markdown). For example, this passage:
 
 > - **Feature flags:** PostHog offers robust, multivariate feature flags which support JSON payloads. This enables you to push real-time changes to your product without needing to redeploy. Visit our feature flag page for more information. LogRocket doesn’t have any in-built feature flag functions.
 >- **Experiments:** PostHog offers multivariate experimentation, which enables you to test changes and discover statistically relevant insights. Visit the experimentation page for more information. LogRocket doesn’t have any in-built experimentation features.
@@ -95,7 +95,7 @@ This isn't necessary for shorter bullet point lists.
 
 ### Use straight apostrophes and quote marks
 
-Many writing tools, such as Google Docs, Notion and Word, will add curly quotes and apostrophes. Please avoid using these. They can normally be turned off in the settings.
+Many writing tools, such as Google Docs, Notion and Word, add curly quotes and apostrophes. Please avoid using these. They can normally be turned off in the settings.
 
 ### Capitalize proper names as appropriate
 
@@ -107,11 +107,11 @@ Both can be correct depending on usage.
 
 Open source should be hyphenated when it appears before a noun.
 
-> - **Example:** "The open-source community is awesome"
+> **Example:** "The open-source community is awesome"
 
 But should be written without a hyphen in other contexts.
 
-> - **Example:** "PostHog loves being open source."
+> **Example:** "PostHog loves being open source."
 
 ### Capitalize acronyms and define where needed
 
@@ -128,6 +128,17 @@ Write "Documentation style guide", not "Documentation Style Guide".
 In code samples, use the conventions of the language the code is written in.
 
 For example, JavaScript uses `PascalCase` for class/constructor names, and `camelCase` for most other names. Python uses `PascalCase` for classes, and `snake_case` for most other names. And so on.
+
+### Use snake case for PostHog events and properties.
+
+Use `snake_case`, not `camelCase` or `PascalCase` for PostHog event and property names. For example:
+
+```js
+posthog.capture('user_signed_up', {
+  user_id: '123',
+  username: 'Jane Doe',
+})
+```
 
 ### Always provide a link
 

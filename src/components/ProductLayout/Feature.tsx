@@ -1,5 +1,6 @@
 import React from 'react'
 import { IFeature, IFeatureGridProps } from './types'
+import * as PostHogIcons from '@posthog/icons'
 import * as ProductIcons from 'components/ProductIcons'
 import * as NotProductIcons from 'components/NotProductIcons'
 import { SectionWrapper } from './Section'
@@ -33,7 +34,7 @@ export const FeatureGrid = ({ features, className = '' }: IFeatureGridProps) => 
     return (
         <SectionWrapper className="max-w-full">
             <ul
-                className={`grid list-none m-0 max-w-screen-4xl space-y-8 md:space-y-0 mx-auto p-0 ${getTailwindGridCol(
+                className={`grid list-none m-0 max-w-screen-4xl mx-auto p-0 gap-4 ${getTailwindGridCol(
                     length
                 )} ${className}`}
             >
@@ -50,13 +51,15 @@ export const FeatureTitle = ({ children, className = '' }: { children: React.Rea
 )
 
 export const FeatureDescription = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-    <p className={`m-0 text-[15px] ${className}`}>{children}</p>
+    <p className={`m-0 text-[15px] ${className}`}>
+        <div dangerouslySetInnerHTML={{ __html: children }} />
+    </p>
 )
 
 export const Feature = ({ title, description, className = '', icon }: IFeature) => {
-    const Icon = ProductIcons[icon] || NotProductIcons[icon]
+    const Icon = ProductIcons[icon] || NotProductIcons[icon] || PostHogIcons[icon]
     return (
-        <li className={`sm:p-6 sm:pb-8  ${className}`}>
+        <li className={`bg-accent dark:bg-accent-dark rounded-lg sm:p-6 sm:pb-8  ${className}`}>
             {Icon && <Icon className="w-10 h-10 mb-4 opacity-50" />}
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
