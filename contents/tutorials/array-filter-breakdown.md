@@ -8,9 +8,9 @@ featuredImage: ../images/tutorials/banners/tutorial-17.png
 tags: ['hogql', 'insights']
 ---
 
-Arrays (aka lists) are a useful way to store multiple values related to each other under the same key. Although arrays can be a bit tricky to utilize with standard PostHog filters, [HogQL expressions](/docs/hogql/expressions) unlock the ability to make full use of them. 
+Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. Although arrays can be a bit tricky to utilize with standard PostHog filters, [HogQL expressions](/docs/hogql/expressions) unlock the ability to make full use of them. 
 
-This tutorial shows you how to access the arrays in your data, use them in breakdowns, and set up filters with and for them.
+This tutorial shows you how to access arrays in your data, use them in breakdowns, and set up filters with and for them.
 
 > **Fun fact:** A group of hedgehogs is known as an array. This is an inspiration for our name and [mascot](/community/profiles/720).
 
@@ -71,13 +71,13 @@ notEmpty(
 
 ![Filter HogQL](../images/tutorials/array-filter-breakdown/filter.png)
 
-If you want to filter arrays for specific values, you can use `has`, `hasAll`, and `hasAny`:
+If you want to filter arrays for specific values you can use `has`, `hasAll`, and `hasAny`:
 
 - `has()` filters for arrays containing an element. `has(arr, 'test')` matches arrays containing `'test'`.
 
 - `hasAll()` filters for arrays containing all of another array of elements. `hasAll(arr, ['test', 'cool'])` matches arrays containing both `'test'` and `'cool'`.
 
-- `hasAny()` filters for arrays containing any of another array of elements. `hasAny(arr, ['test', 'cool']` matches arrays containing either `'test'` or `'cool'`.
+- `hasAny()` filters for arrays containing any of another array of elements. `hasAny(arr, ['test', 'cool'])` matches arrays containing either `'test'` or `'cool'`.
 
 If you want to filter arrays by the first, last, or specific index value, you can use `arrayElement(arr, n)` again too.
 
