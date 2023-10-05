@@ -111,7 +111,7 @@ export default function BlogPost({ data, pageContext, location }) {
     const { fullWidthContent } = useLayoutData()
 
     return (
-        <>
+        <article className="@container">
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
@@ -131,17 +131,15 @@ export default function BlogPost({ data, pageContext, location }) {
                 date={date}
                 tags={tags}
             />
-            <div className="@container">
-                <div className="lg:mb-7 mb-4">
-                    <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
-                </div>
+            <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
                 <div className={`article-content flex-1 transition-all`}>
                     <MDXProvider components={components}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
                 </div>
+                <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
             </div>
-        </>
+        </article>
     )
 }
 

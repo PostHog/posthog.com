@@ -5,7 +5,7 @@ export default function InternalSidebar({ tableOfContents, mobile = true }) {
     return (
         tableOfContents?.length > 0 && (
             <aside
-                className={`shrink basis-96 w-full @2xl:reasonable:sticky @2xl:reasonable:overflow-auto @2xl:max-h-[calc(100vh_-_128px)] top-[128px] @2xl:pr-1 p-4 block ${
+                className={`shrink-0 basis-72 w-full @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_148px)] @3xl:top-[128px] @3xl:pr-1 p-4 block ${
                     mobile ? 'lg:hidden' : ''
                 } bg-accent dark:bg-accent-dark border border-border dark:border-dark rounded-md`}
             >
@@ -20,7 +20,7 @@ export default function InternalSidebar({ tableOfContents, mobile = true }) {
                                     url={navItem.url}
                                     name={navItem.value}
                                     depth={navItem.depth}
-                                    className="jumpTo text-sm 2xl:text-[15px] pl-6"
+                                    className="jumpTo text-sm @4xl:text-[15px] pl-6"
                                 />
                             </li>
                         )
