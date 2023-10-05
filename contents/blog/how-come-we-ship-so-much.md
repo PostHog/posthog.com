@@ -19,14 +19,14 @@ Clearly there are exceptions, but we ship a _lot_ faster than the average compan
 
 Our first line of code was January 22nd, 2020, after a pivot during a YC batch. From zero on that day, we have built
 
-* product analytics
-* session replay
-* feature flags
-* a/b testing
+* [product analytics](../product-analytics)
+* [session replay](../session-replay)
+* [feature flags](../feature-flags)
+* [a/b testing](../ab-testing)
 * heatmaps
-* SDKs for all of the above
-* a basic CDP to stream data to warehouses
-* data warehouse MVP
+* [SDKs](../docs/libraries) for all of the above
+* a basic [CDP](../cdp) to stream data to warehouses
+* [data warehouse](../docs/data-warehouse) MVP
 * a wildly extensive website
 * ... and those are things that have worked
 
@@ -36,7 +36,7 @@ One of the most common questions I get asked is how do we manage to build so muc
 
 ## We designed the company around speed
 
-We provide an all-in-one platform to help engineers build better products. We have a list of 25+ products we want to build.
+We provide an all-in-one platform to help engineers build better products. We have a list of [25+ products](../handbook/which-products) we want to build.
 
 That means we had to design our company primarily for speed.
 
@@ -48,9 +48,9 @@ For example, if you are shipping the latest iPhone, complete design control is _
 
 I _suspect_ that you could still get higher quality with more autonomy - my approach would probably be having lots of designers and engineers collaborating with relatively few product managers, but I cannot speak to the above as well since my experience is building a multi product platform.
 
-## No product management by default
+## No product management by default
 
-The responsibilities of a product manager still exist, but our engineers (the concept internally is a "product engineer"):
+The responsibilities of a product manager still exist, but our engineers (the concept internally is a "[product engineer](what-is-a-product-engineer)"):
 
 * decide what to build within their product (and they often suggest new products - but the decision on this is made by my cofounder and me)
 * talk to users
@@ -70,7 +70,7 @@ We have people that can help engineers with design, but they are very happy to w
 
 For example, we've redesigned this entire website ~5 times.
 
-## Hiring is key
+## Hiring is key
 
 I think 90%+ of an organization's problems are solved by hiring right.
 
@@ -80,9 +80,9 @@ We tend to hire people with more experience, who we find tend to work better wit
 
 ## Small teams
 
-I went to a superb talk by Jeff Lawson (who runs Twilio), who felt the greatest innovation at Amazon was how it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
+I went to a superb talk by [Jeff Lawson](https://www.linkedin.com/in/jeffiel) (who runs [Twilio](https://twilio.com/)). He described how the greatest innovation at [Amazon](https://www.amazon.com/) was that it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
 
-PostHog works like a group of startups. For each of our products, there is a team of up to 6, who can ship with minimal interference from the rest of the company. We hire a lot of ex technical founders to help here.
+PostHog works like a group of startups - with lots of [small teams](/handbook/company/small-teams). For each of our products, there is a team of up to 6, who can ship with minimal interference from the rest of the company. We hire a lot of ex technical founders to help here.
 
 ## Nearly everyone is an engineer
 
@@ -90,7 +90,7 @@ It's simple, but if you have lots of spending and focus outside of engineering, 
 
 We are around 45 people, 38 of whom are engineers.
 
-We don't do outbound sales, our marketing team is very small, we only have one product manager, our exec team only has 3 people. These things are all by design (and were possible because of our market - the majority of engineers generally want docs and to try something instead of demos and salespeople to deal with).
+We don't do outbound sales, our [marketing team](/handbook/small-teams/marketing) is very small, we only have one product manager, our [exec team](/handbook/small-teams/exec) only has 3 people. These things are all by design (and were possible because of our market - the majority of engineers generally want docs and to try something instead of demos and salespeople to deal with).
 
 ## No meeting Tuesdays/Thursdays
 
@@ -106,11 +106,11 @@ For non-God tier product people, such as me, I think it's easier to build a bett
 
 Obviously, this matters. We didn't raise or spend a ridiculous amount compared to other companies we compete with - we have done a $3M seed, $9M series A and a $15M series B. We have a lot of it left and will be profitable next year.
 
-Raising money does let build more stuff, but if you _should_ is very questionable and a topic for another time.
+Raising money does let build more stuff, but if you _should_ is very questionable and [a topic for another time](vc-or-bootstrap).
 
 ## Trust and feedback over process
 
-This is one of our values. It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
+This is one of [our values](/handbook/company/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
 
 To quote one of our team "process is scar tissue" - it often overcorrects, but because humans are risk adverse it feels natural to implement them when a company starts growing 
 
