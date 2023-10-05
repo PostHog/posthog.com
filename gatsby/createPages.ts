@@ -23,6 +23,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
+    const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
 
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -217,6 +218,42 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         tags
                     }
                 }
+            }
+            library: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/library/" } }
+                }
+            ) {
+                totalCount
+            }
+            founders: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/founders/" } }
+                }
+            ) {
+                totalCount
+            }
+            productEngineers: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/product-engineers/" } }
+                }
+            ) {
+                totalCount
+            }
+            features: allMdx(
+                filter: {
+                    isFuture: { eq: false }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/features/" } }
+                }
+            ) {
+                totalCount
             }
             spotlights: allMdx(
                 filter: {
@@ -413,7 +450,55 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    createPaginatedPages({ totalCount: result.data.blogPosts.totalCount, base: '/blog/all', template: BlogTemplate })
+    createPaginatedPages({
+        totalCount: result.data.blogPosts.totalCount,
+        base: '/blog/all',
+        template: PaginationTemplate,
+        extraContext: {
+            regex: '/^/blog/',
+            title: 'Blog',
+        },
+    })
+
+    createPaginatedPages({
+        totalCount: result.data.library.totalCount,
+        base: '/library/all',
+        template: PaginationTemplate,
+        extraContext: {
+            regex: '/^/library/',
+            title: 'Library',
+        },
+    })
+
+    createPaginatedPages({
+        totalCount: result.data.founders.totalCount,
+        base: '/founders/all',
+        template: PaginationTemplate,
+        extraContext: {
+            regex: '/^/founders/',
+            title: 'Founders',
+        },
+    })
+
+    createPaginatedPages({
+        totalCount: result.data.productEngineers.totalCount,
+        base: '/product-engineers/all',
+        template: PaginationTemplate,
+        extraContext: {
+            regex: '/^/product-engineers/',
+            title: 'Product engineers',
+        },
+    })
+
+    createPaginatedPages({
+        totalCount: result.data.features.totalCount,
+        base: '/features/all',
+        template: PaginationTemplate,
+        extraContext: {
+            regex: '/^/features/',
+            title: 'Features',
+        },
+    })
 
     result.data.allMdx.nodes.forEach((node) => {
         createPage({
