@@ -15,6 +15,7 @@ This may seem straightforward, but it’s important to follow the methodology an
 In this tutorial, we’ll explain how to measure NPS in PostHog using the surveys tool and how to interpret results. 
 
 ### How does NPS work?
+
 Simply put, you ask your users how likely they are to recommend your product to others, on a scale of 0 (unlikely) to 10 (likely). You then group the responses as follows:
 
 - **1 - 6**: Detractors. These users are unlikely to recommend your product and may damage your growth.
@@ -28,19 +29,23 @@ After running the survey, apply the following calculation: `NPS = % OF PROMOTERS
 This calculation returns a result ranging from -100 to +100. The higher the score, the better - and anything above +70 is indicative of a market-leading product.
 
 ### Creating an NPS survey in PostHog
-The first step is to [create a new survey in PostHog](https://app.posthog.com/surveys/new), using the Surveys tool. If it isn’t already selected, set the Display Mode to ‘Popover’.
+
+The first step is to install PostHog's [snippet](/docs/getting-started/install?tab=snippet) or [JavaScript Web SDK](/docs/libraries/js), and make sure survey popups are enabled in the configuration on the [survey tab](https://app.posthog.com/surveys).
+
+Next, [create a new survey in PostHog](https://app.posthog.com/surveys/new), using the Surveys tool. If it isn’t already selected, set the Display Mode to ‘Popover’.
 
 You can name the survey whatever you want, but it’s important that the customer-facing element asks the question in the same way as any other NPS survey.
 
 To do this, enter **‘How likely are you to recommend this product to a friend?’** in the Question field. Leave the optional description blank. 
 
-NPS surveys collect responses on a scale of 1-10, so set the Question Type to ‘Rating’. Change the Display Type to ‘Number’, and the Scale to ‘1 - 10’. 
+NPS surveys collect responses on a scale of 1-10, so set the Question Type to ‘Rating’. Change the Display Type to ‘Number’, and the Scale to ‘1 - 10’.
 
-We want to make sure that users understand what each number means, so set the Lower Bound Label to ‘Unlikely’ and the Upper Bound Label to ‘Likely’. You should now see a complete NPS survey in the live preview, and can tailor the appearance to match your brand. 
+We want to make sure that users understand what each number means, so set the Lower Bound Label to ‘Unlikely’ and the Upper Bound Label to ‘Very Likely’. You should now see a complete NPS survey in the live preview, and can tailor the appearance to match your brand. 
 
 ![Create an NPS survey](../images/tutorials/nps-survey/nps_survey_1.png)
 
 ### Targeting your NPS survey
+
 The default behaviour for surveys is to target all users. You can choose to override this and target users based on the URL they are on, user properties, or use a particular feature flag. 
 
 To collect a valid result, you need at least 100 responses, so it’s important not to target too narrowly. However, you _also_ want to target users who are familiar with your product to get a meaningful result. Good options for striking a balance include…
@@ -56,9 +61,16 @@ If you set targeting options for your survey, you also need to decide the releas
 Next, you can save your survey and press Launch to start collecting responses. 
 
 ### Calculating your NPS score in PostHog
+
 Once you’ve launched your survey, the next step is to wait for some responses. After that, it’s time to analyze the results!
 
-Head to the Insights section and [create a new Trends insight](https://app.posthog.com/insights/new). Create a global filter using the 'Survey name' property to match your NPS survey, so that we're only judging results from the NPS survey specifically.
+Search for and click on your survey in the [Surveys tab](https://app.posthog.com/surveys), and you see the results. This includes surveys shown, dismissed, a chart of responses, and a graph of the NPS score. PostHog automatically creates and calculates NPS score for you when you select the "Rating" survey type.
+
+![NPS survey results](../images/tutorials/nps-survey/survey-results.png)
+
+### Digging deeper into your NPS score
+
+You can also do custom analysis of your responses and NPS score in insights. Start by [creating a new Trends insight](https://app.posthog.com/insights/new). Create a global filter using the 'Survey name' property to match your NPS survey, so that we're only judging results from the NPS survey specifically.
 
 ![PostHog net promoter score](../images/tutorials/nps-survey/nps_survey_6.png)
 
@@ -95,6 +107,7 @@ Select 'Enable Formula Mode' to get started, and enter the following formula:
 Save your insight. The resulting figure is your NPS score! 
 
 ### What is a good NPS score?
+
 NPS scores can range from -100 to +100. Anything above 0 is good and means you have more promoters than passives or detractors. Anything below 0 indicates users are unhappy with your product and your growth may be in decline. 
 
 Benchmark NPS scores can vary by industry. When comparing your NPS score to a benchmark, it's important to compare yourself to direct competitors, rather than different industries or leading brands that compete at a different level. B2B software products typically have an NPS of +40, for example, while telecom providers have an average NPS of +30, and healthcare providers have an average of +50. Market-leading companies within an industry will generally score +60 to +70.
