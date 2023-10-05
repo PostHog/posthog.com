@@ -112,7 +112,7 @@ Raising money does let build more stuff, but if you _should_ is very questionabl
 
 This is one of [our values](/handbook/company/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
 
-To quote one of our team "process is scar tissue" - it often overcorrects, but because humans are risk adverse it feels natural to implement them when a company starts growing 
+To quote one of our team "process is scar tissue" - it often overcorrects, but because [humans are risk adverse](https://www.adamjuliangoldstein.com/blog/anxiety-algorithm/) it feels natural to implement them when a company starts growing. Humans, therefore, will overcorrect by default and that's why large corporations are (in more cases than not) irrationally-obstructive to getting work done.
 
 ## There are plenty of problems
 
