@@ -37,7 +37,7 @@ export default function PostCard({ title, featuredImage, date, excerpt, slug, fe
                 className="!text-inherit py-2 md:p-3 font-normal border border-transparent hover:border-border dark:hover:border-dark rounded-md hover:bg-accent dark:hover:bg-accent-dark hover:scale-[1.01] transition-colors block h-full relative active:top-[1px] active:scale-[.99]"
                 to={slug}
             >
-                <div className="w-full aspect-video rounded-md overflow-hidden">
+                <div className="w-full aspect-video rounded-md overflow-hidden bg-accent dark:bg-accent-dark">
                     <img className="w-full h-full object-cover" src={imageURL || '/banner.png'} />
                 </div>
                 <p className="m-0 text-sm mt-3 opacity-75">{postDate}</p>
