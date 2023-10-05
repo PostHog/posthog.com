@@ -1341,6 +1341,11 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Command palette',
+                    url: '/docs/cmd-k',
+                    icon: 'Search',
+                },
+                {
                     name: 'Apps',
                     url: '/docs/apps',
                     icon: 'Apps',
@@ -2600,14 +2605,6 @@ export const docsMenu = {
                         {
                             name: 'Developer reference',
                             url: '/docs/cdp/build/reference',
-                        },
-                        {
-                            name: 'Using the PostHog API',
-                            url: '/docs/cdp/build/api',
-                        },
-                        {
-                            name: 'Jobs',
-                            url: '/docs/cdp/build/jobs',
                         },
                         {
                             name: 'Testing',
