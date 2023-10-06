@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-2.png
 tags: ['feature flags', 'cohorts']
 ---
 
-Phased rollouts, also known as phased releases, are a way to roll out new features safely. They are a way to [test a feature works in production](/blog/testing-in-production) with a small group before incrementally moving to progressively bigger (and more important) groups. 
+Phased rollouts, also known as phased releases, are a way to roll out new features safely by [testing a feature works in production](/blog/testing-in-production) with a small group before incrementally moving to progressively bigger (and more important) groups. 
 
 This tutorial shows how to set up a phased rollout using feature flags and cohorts in PostHog.
 
@@ -67,7 +67,7 @@ When it is time for the next phase of the rollout, all you do is update the flag
 
 ## Using cohorts for phased rollouts
 
-A good way to organize rollout phases when using feature flags is cohorts. These able you to define all your rollout phases and the beginning of the process and simply swap them in the feature flag. If you repeatedly do phased rollouts, you can also reuse them.
+A good way to organize rollout phases when using feature flags is cohorts. These enable you to define all your rollout phases and the beginning of the process and simply swap them in the feature flag. You can also reuse them if you run repeated phase rollouts. 
 
 To create a cohort, go to the [cohorts tab](https://app.posthog.com/cohorts) and click "New Cohort." Set up the properties you want the cohorts to have as well as the details on the cohort. Again, it is useful to add details on the group and dates.
 
