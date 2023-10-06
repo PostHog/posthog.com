@@ -1,17 +1,13 @@
 ---
 date: 2023-09-28
 title: Burning money on paid ads for a dev tool – what we've learned
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
 author:
   - charles-cook
 featuredImage: ../images/blog/transparency.jpeg
 featuredImageType: full
-category: Startups
 tags:
-  - Guides
+  - Founders
+  - Marketing
 ---
 
 Since starting PostHog in 2020, we’ve learned a bunch about what does and doesn’t work when it comes to [marketing to engineers](/blog/dev-marketing-for-startups). Paid ads is a slightly scary area because it is _very_ easy to waste a bunch of money doing stuff that doesn't work. And a lot of it doesn't work. 
