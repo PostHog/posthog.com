@@ -1,16 +1,14 @@
 ---
 title: "How Spotify (and PostHog) build successful features"
 date: 2023-05-17
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
 author: ["ian-vanagas"]
 featuredImage: ../images/blog/prodhog.png
 featuredImageType: full
-category: Newsletter
 tags:
-  - Explainers
+  - Product engineers
+  - Engineering
+crosspost:
+  - Product engineers  
 ---
 
 > This post is from our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. We send it (roughly) every two weeks.

@@ -1,16 +1,14 @@
 ---
 date: 2023-04-27
 title: "10 things we've learned about pricing for SaaS startups"
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/equity.png
 featuredImageType: full
-category: Startups
 tags:
-  - Guides
+  - Founders
+  - Revenue
+crosspost:
+  - Founders   
 ---
 
 > Originally published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. Don't miss out... [subscribe here](https://newsletter.posthog.com/subscribe).

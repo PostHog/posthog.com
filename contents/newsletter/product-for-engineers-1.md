@@ -1,16 +1,14 @@
 ---
 date: 2023-03-14
 title: "What we've learned about talking to users"
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/newsletter-hog.png
 featuredImageType: full
-category: Newsletter
 tags:
   - Product engineers
+  - User research
+crosspost:
+  - Product engineers  
 ---
 
 > This post is from our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks.

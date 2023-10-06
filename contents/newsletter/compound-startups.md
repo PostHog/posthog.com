@@ -1,17 +1,15 @@
 ---
 date: 2023-03-30
 title: "The conformist startup rule you can ignore"
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
 author: ["andy-vandervell"]
 featuredImage: ../images/blog/newsletter-hog.png
 featuredImageType: full
-category: Newsletter
 tags:
-  - Explainers
-  - Product engineers
+  - Founders
+  - Product
+  - Product-market fit
+crosspost:
+  - Founders
 ---
 
 > This post is from our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. We send it (roughly) every two weeks.
