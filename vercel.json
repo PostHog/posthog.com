@@ -1062,7 +1062,11 @@
         { "source": "/handbook/strategy/business-model", "destination": "/handbook/how-we-make-money" },
         { "source": "/handbook/strategy/objectives", "destination": "/handbook/help" },
         { "source": "/handbook/strategy/investors", "destination": "/about" },
-        { "source": "/handbook/start-here", "destination": "/handbook/people/onboarding" }
+        { "source": "/handbook/start-here", "destination": "/handbook/people/onboarding" },
+        { "source": "/blog/tags/product-analytics", "destination": "/product-engineers/product-analytics" },
+        { "source": "/blog/tags/marketing", "destination": "/founders/marketing" },
+        { "source": "/blog/tags/session-recording", "destination": "/tutorials/categories/session-replay" },
+        { "source": "/blog/categories/newsletter", "destination": "/blog/categories/newsletter" }
     ],
     "rewrites": [
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
