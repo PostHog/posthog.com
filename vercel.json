@@ -1066,7 +1066,7 @@
         { "source": "/blog/tags/product-analytics", "destination": "/product-engineers/product-analytics" },
         { "source": "/blog/tags/marketing", "destination": "/founders/marketing" },
         { "source": "/blog/tags/session-recording", "destination": "/tutorials/categories/session-replay" },
-        { "source": "/blog/categories/newsletter", "destination": "/blog/categories/newsletter" },
+        { "source": "/blog/categories/newsletter", "destination": "/newsletter" },
         { "source": "/blog/dev-marketing-paid-ads", "destination": "/founders/dev-marketing-paid-ads" }
     ],
     "rewrites": [
