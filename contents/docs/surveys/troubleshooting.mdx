@@ -1,0 +1,54 @@
+---
+title: Troubleshooting and FAQs
+---
+
+Having trouble with surveys? Below are some tips for getting past some common issues
+
+The most common solution is...
+
+#### Update posthog-js
+
+Surveys requires either the latest version of the [PostHog snippet](/docs/libraries/js#option-1-add-the-javascript-snippet-to-your-html) or version 1.81.3 or greater of `posthog-js` to be installed on your website.
+
+We're always making improvements to the surveys feature, so you'll want to make sure that you're running the latest version.
+
+To check the version that you're using, you can run the following in your browser console:
+
+```js
+window.posthog.LIB_VERSION
+```
+
+## Surveys still not showing up
+
+There are a few reasons why your survey might not be showing up:
+
+### 1. Configuration is off
+
+Surveys are enabled through the surveys opt in toggle in the [app](https://app.posthog.com/surveys). If you're not seeing any surveys, make sure that this toggle is enabled.
+
+You can read more about [posthog-js configurations here](/docs/integrate/client/js#config).
+
+### 2. Content security policy
+
+When surveys are enabled, postHog-js will fetch a `survey.js` script from the PostHog server. (This is not included in the default posthog-js to minimize the default bundle size)
+
+Depending on your content security policy, this script may be blocked. You may need to add `https://app.posthog.com` (or your host URL if you are self hosted) to your list.
+
+If PostHog is being blocked by your content security policy, you should see an error message in your developer console with more details.
+
+### 3. Proxies
+
+If you're running behind a proxy, the `/static/survey.js` endpoint may be blocked. You can read more about how to configure your proxy to allow this endpoint [here:](https://posthog.com/docs/self-host/configure/running-behind-proxy#public-endpoints)
+
+### 3. Ad/tracking blockers
+
+Some ad/tracking blockers will block PostHog from fetching `posthog-js`. If you're testing your app locally, you may need to disable any ad/tracking blockers that you're running in your browser.
+
+## Debugging surveys in console
+
+You can call `getActiveMatchingSurveys` in your browser console to see which surveys are currently active for the user. If the method doesn't exist, it means that you're not running the latest version of `posthog-js`.  
+
+```js
+posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
+```
+
