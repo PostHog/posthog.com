@@ -59,7 +59,7 @@ posthog.getActiveMatchingSurveys((surveys) => {
 })
 ```
 
-> **Important:** `posthog.getActiveMatchingSurveys()` will always true if a user meets the targeting conditions, even if a user has already seen, dismissed or responded to a survey. 
+> **Important:** `posthog.getActiveMatchingSurveys()` will always return an active survey if a user meets the targeting conditions, even if a user has already seen, dismissed or responded to a survey.
 
 > **Note:** If you're using a URL or selector targeting options, you'll need to poll `posthog.getActiveMatchingSurveys()` to get the most updated results.
 
@@ -84,3 +84,49 @@ posthog.capture("survey sent", {
     $survey_response: {survey_response} // required
 })
 ```
+
+### Question types
+
+If you want to make the most of PostHog's automatic survey analysis, you'll need to capture survey responses in these formats:
+
+#### Open text and single choice questions
+
+```js-web
+posthog.capture("survey sent", {
+    $survey_id: {survey.id} // required
+    $survey_response: {response} // value of the text input or selected choice
+})
+```
+
+#### Multiple choice questions
+
+```js-web
+posthog.capture("survey sent", {
+    $survey_id: {survey.id} // required
+    $survey_response: ["response_1", 8, "response_2"] // array of values of the selected choices
+})
+```
+
+#### Rating questions
+
+```js-web
+posthog.capture("survey sent", {
+    $survey_id: {survey.id} // required
+    $survey_response: {rating} // rating is a number
+})
+```
+
+## Multiple question surveys
+
+If you have a survey with multiple questions, you can capture the responses to each question using the following syntax:
+
+```js-web
+posthog.capture("survey sent", {
+    $survey_id: {survey.id} // required
+    $survey_response: {survey_response}
+    $survey_response_1: {survey_response_1}
+    $survey_response_2: {survey_response_2}
+})
+```
+
+Where `$survey_response` is the response to the first question, `$survey_response_1` is the response to the second question, and so on, like in an array mapping.
