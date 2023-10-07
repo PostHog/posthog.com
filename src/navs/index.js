@@ -175,7 +175,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Data Warehouse',
-                url: '/handbook/small-teams/dw',
+                url: '/handbook/small-teams/data-warehouse',
             },
             {
                 name: 'Feature Success',
@@ -199,7 +199,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Web Analytics',
-                'url': '/handbook/small-teams/web-analytics',
+                url: '/handbook/small-teams/web-analytics',
             },
             {
                 name: 'Resources',

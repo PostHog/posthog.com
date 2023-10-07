@@ -966,7 +966,8 @@
         { "source": "/handbook/strategy/business-model", "destination": "/handbook/how-we-make-money" },
         { "source": "/handbook/strategy/objectives", "destination": "/handbook/help" },
         { "source": "/handbook/strategy/investors", "destination": "/about" },
-        { "source": "/handbook/start-here", "destination": "/handbook/people/onboarding" }
+        { "source": "/handbook/start-here", "destination": "/handbook/people/onboarding" },
+        { "source": "/handbook/small-teams/dw", "destination": "/handbook/small-teams/data-warehouse" }
     ],
     "rewrites": [
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
