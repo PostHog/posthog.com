@@ -64,9 +64,9 @@ Long meaningless words kept creeping their way into our written application, so 
 
 We brainstormed the least enterprise things we could do, pink Comic Sans typography and a sprinkle of emojis seemed like the right course. Many takes later and delirium setting in, we produced these never-shared-before YC application and demo videos 🙈 If you can work out what Tim is saying in the first few seconds we’ll send you some "[awesome swag](https://merch.posthog.com)". Please forgive my weirdly intense camera stare - it was late.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/XKzv-t8-YtU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/XKzv-t8-YtU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/cpmy3By1sWo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/cpmy3By1sWo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Ramen millionaire
 
