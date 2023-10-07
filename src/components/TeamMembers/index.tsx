@@ -117,12 +117,12 @@ const AddTeamMember = ({ handleChange }) => {
             />
         </li>
     ) : (
-        <li className="!m-0 !text-inherit flex space-x-4 items-center py-3 relative active:top-[1px] active:scale-[.99] transition-transform px-4 hover:bg-accent dark:hover:bg-accent-dark rounded h-full group">
-            <button onClick={() => setShowMods(true)} className="flex items-center space-x-2 w-full">
+        <li className="!m-0 !text-inherit flex space-x-4 items-center relative active:top-[1px] active:scale-[.99] transition-transform h-full group">
+            <button onClick={() => setShowMods(true)} className="flex items-center space-x-2 w-full p-2 hover:bg-accent dark:hover:bg-accent-dark rounded">
                 <span className=" w-[32px] h-[32px] flex justify-center items-center p-1 rounded-full bg-accent dark:bg-accent-dark border group-hover:border-border dark:group-hover:border-dark border-transparent transition-colors">
                     <Plus className="w-full h-full" />
                 </span>
-                <span className="font-semibold">Add team member</span>
+                <span className="font-semibold text-sm">Add team member</span>
             </button>
         </li>
     )
