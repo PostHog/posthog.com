@@ -27,7 +27,7 @@ export const postsMenu: IMenu[] = [
             },
             {
                 name: 'Ops & finance',
-                url: '/founders/ops-finance',
+                url: '/founders/ops-and-finance',
             },
             {
                 name: 'People',
@@ -47,7 +47,7 @@ export const postsMenu: IMenu[] = [
             },
             {
                 name: 'Sales & CS',
-                url: '/founders/sales-customer-success',
+                url: '/founders/sales-and-cs',
             },
         ],
     },
@@ -65,7 +65,7 @@ export const postsMenu: IMenu[] = [
             },
             {
                 name: 'Growth engineering',
-                url: '/product engineers/growth',
+                url: '/product-engineers/growth',
             },
             {
                 name: 'Product analytics',
@@ -87,15 +87,15 @@ export const postsMenu: IMenu[] = [
         children: [
             {
                 name: 'CEO diaries',
-                url: '/blog/categories/ceo-diaries',
+                url: '/blog/ceo-diaries',
             },
             {
                 name: 'PostHog news',
-                url: '/blog/categories/posthog-news',
+                url: '/blog/posthog-news',
             },
             {
                 name: 'Inside PostHog',
-                url: '/blog/categories/inside-posthog',
+                url: '/blog/inside-posthog',
             },
         ],
     },
@@ -113,31 +113,31 @@ export const postsMenu: IMenu[] = [
         children: [
             {
                 name: 'Product OS',
-                url: '/tutorials/categories/product-os',
+                url: '/tutorials/product-os',
             },
             {
                 name: 'Product analytics',
-                url: '/tutorials/categories/product-analytics',
+                url: '/tutorials/product-analytics',
             },
             {
                 name: 'Session replay',
-                url: '/tutorials/categories/session-replay',
+                url: '/tutorials/session-replay',
             },
             {
                 name: 'Feature flags',
-                url: '/tutorials/categories/feature-flags',
+                url: '/tutorials/feature-flags',
             },
             {
                 name: 'A/B testing',
-                url: '/tutorials/categories/experimentation',
+                url: '/tutorials/experimentation',
             },
             {
                 name: 'Surveys',
-                url: '/tutorials/categories/surveys',
+                url: '/tutorials/surveys',
             },
             {
                 name: 'CDP',
-                url: '/tutorials/categories/cdp',
+                url: '/tutorials/cdp',
             },
         ],
     },
@@ -147,7 +147,7 @@ export const postsMenu: IMenu[] = [
     },
     {
         name: 'PostHog news',
-        url: '/blog/categories/posthog-news',
+        url: '/blog/posthog-news',
     },
     {
         name: 'Spotlight',

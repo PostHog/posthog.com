@@ -147,9 +147,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
         let tags = []
         for (const tagLabel of postTag?.toLowerCase() ? [postTag.toLowerCase()] : postTags || []) {
             let tag = category?.attributes?.post_tags?.data?.find(
-                (tag) =>
-                    tag?.attributes?.label?.toLowerCase() === postTag?.toLowerCase() ||
-                    postTags?.some((postTag) => postTag.toLowerCase() === tag?.attributes?.label?.toLowerCase())
+                (tag) => tag?.attributes?.label?.toLowerCase() === tagLabel?.toLowerCase()
             )
             if (!tag) {
                 tag = await createTag(tagLabel, category)
@@ -558,16 +556,16 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     }
 
     // Tutorials OG
-    for (const post of data.tutorials.nodes) {
-        const { featuredImage } = post.frontmatter
-        const image = fs.readFileSync(featuredImage.absolutePath, {
-            encoding: 'base64',
-        })
-        await createOG({
-            html: tutorialTemplate({ image }),
-            slug: post.fields.slug,
-        })
-    }
+    // for (const post of data.tutorials.nodes) {
+    //     const { featuredImage } = post.frontmatter
+    //     const image = fs.readFileSync(featuredImage.absolutePath, {
+    //         encoding: 'base64',
+    //     })
+    //     await createOG({
+    //         html: tutorialTemplate({ image }),
+    //         slug: post.fields.slug,
+    //     })
+    // }
 
     await browser.close()
 }

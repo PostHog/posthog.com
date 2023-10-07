@@ -123,7 +123,7 @@ const menusByRoot = {
     blog: { parent: companyMenu, activeInternalNav: companyMenu.children[5] },
 }
 
-const Router = ({ children }: { children: React.ReactNode }) => {
+const Router = ({ children, prev }: { children: React.ReactNode; prev: string | null }) => {
     const { fullWidthContent } = useLayoutData()
     const { pathname } = useLocation()
     const [postID, setPostID] = useState()
@@ -161,15 +161,19 @@ const Router = ({ children }: { children: React.ReactNode }) => {
                     fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
                 }`}
             >
-                {{
-                    '/product-engineers': <Blog title="Product engineers" />,
-                    '/features': <Blog title="Features" />,
-                    '/founders': <Blog title="Founders" />,
-                    '/blog': <Blog />,
-                    '/newsletter': <Newsletter />,
-                    '/spotlight': <Blog title="Spotlight" />,
-                    '/customers': <Customers />,
-                }[pathname] || <Default>{children}</Default>}
+                {prev ? (
+                    <Default>{children}</Default>
+                ) : (
+                    {
+                        '/product-engineers': <Blog title="Product engineers" />,
+                        '/features': <Blog title="Features" />,
+                        '/founders': <Blog title="Founders" />,
+                        '/blog': <Blog />,
+                        '/newsletter': <Newsletter />,
+                        '/spotlight': <Blog title="Spotlight" />,
+                        '/customers': <Customers />,
+                    }[pathname] || <Default>{children}</Default>
+                )}
             </div>
         </PostContext.Provider>
     )
@@ -299,7 +303,7 @@ export default function Posts({
                             </span>
                         </button>
                     )}
-                    <Router>{children}</Router>
+                    <Router prev={prev}>{children}</Router>
                 </PostProvider>
             </PostsContext.Provider>
         </Layout>
