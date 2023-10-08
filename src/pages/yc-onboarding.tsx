@@ -44,7 +44,7 @@ export const YCOnboarding = () => {
                             {features.map((feature) => {
                                 return (
                                     <li key={feature} className="flex space-x-2">
-                                        <Check2 className="w-6 text-seagreen" />
+                                        <Check2 className="w-5 text-seagreen dark:text-white/40" />
                                         <span dangerouslySetInnerHTML={{ __html: feature }} />
                                     </li>
                                 )
@@ -60,7 +60,7 @@ export const YCOnboarding = () => {
                     </div>
                     <div className="order-2 md:order-2 mb-12">
                         <h3 className="mb-1">How to apply</h3>
-                        <ol>
+                        <ol className="mb-4">
                             <li>Complete the form below</li>
                             <li>
                                 <Link to="https://app.posthog.com/signup" external>
