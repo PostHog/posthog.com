@@ -3,12 +3,15 @@ import Layout from '../components/Layout'
 import { Spacer } from '../components/Spacer'
 import { Link } from 'gatsby'
 import HubSpotForm from 'components/HubSpotForm'
+import YCsign from '../images/max-yc.png'
 
 export const YCOnboarding = () => {
     return (
         <Layout>
             <div className="flex flex-col items-stretch w-full max-w-4xl mx-auto">
                 <Spacer />
+                <img src={YCsign} alt="A hedgehog by the YC sign" style={{ width: '35%' }} className="center" />
+                <br />
                 <h1 className="centered">You've found our secret Y Combinator offer!</h1>
                 <br />
                 <p>
