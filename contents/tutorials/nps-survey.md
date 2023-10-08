@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-4.png
 tags: ['surveys', 'insights']
 ---
 
-One of the most well-known and useful types of survey for businesses is a Net Promoter Score ([NPS](https://en.wikipedia.org/wiki/Net_promoter_score_)). It acts as a metric for user satisfaction and growth. In its simplest form, it involves asking users likely they are to recommend your product or service, so you can gauge [product-market fit](/blog/measure-product-market-fit). 
+One of the most well-known and useful types of survey for businesses is a Net Promoter Score ([NPS](https://en.wikipedia.org/wiki/Net_promoter_score_)). It acts as a metric for user satisfaction and growth. In its simplest form, it involves asking users how likely they are to recommend your product or service, so you can gauge [product-market fit](/blog/measure-product-market-fit). 
 
 This may seem straightforward, but it’s important to follow the methodology and phrasing precisely to collect a valid result. 
 
