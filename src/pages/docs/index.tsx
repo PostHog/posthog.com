@@ -20,7 +20,7 @@ const quickLinks = [
     },
     {
         icon: 'RewindPlay',
-        name: 'Session recording',
+        name: 'Session replay',
         to: '/docs/session-replay',
         description: 'Play back sessions to diagnose UI issues and get inspired',
         color: 'yellow',
@@ -40,6 +40,13 @@ const quickLinks = [
         color: 'purple',
     },
     {
+        icon: 'Chat',
+        name: 'Surveys',
+        to: '/docs/surveys',
+        description: 'Ask your users questions to get qualitative feedback',
+        color: 'blue',
+    },
+    {
         icon: 'Person',
         name: 'CDP',
         to: '/docs/cdp',
@@ -51,7 +58,7 @@ const quickLinks = [
         name: 'Data warehouse',
         to: '/docs/data-warehouse',
         description: 'Extend PostHog by adding your own functionality',
-        color: 'teal',
+        color: 'seagreen',
     },
 ]
 
