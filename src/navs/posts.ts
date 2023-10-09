@@ -4,10 +4,14 @@ export const postsMenu: IMenu[] = [
     {
         name: 'All posts',
         url: '/posts',
+        icon: 'Newspaper',
+        color: 'blue',
     },
     {
         name: 'Founders',
         url: '/founders',
+        icon: 'Rocket',
+        color: 'purple',
         children: [
             {
                 name: 'Being a founder',
@@ -58,6 +62,8 @@ export const postsMenu: IMenu[] = [
     {
         name: 'Product engineers',
         url: '/product-engineers',
+        icon: 'Helmet',
+        color: 'orange',
         children: [
             {
                 name: 'AB testing',
@@ -88,9 +94,11 @@ export const postsMenu: IMenu[] = [
     {
         name: 'Blog',
         url: '/blog/',
+        icon: 'Newspaper',
+        color: 'teal',
         children: [
             {
-                name: 'CEO diaries',
+                name: 'CEO diaries!',
                 url: '/blog/ceo-diaries',
             },
             {
@@ -105,15 +113,21 @@ export const postsMenu: IMenu[] = [
     },
     {
         name: 'Changelog',
-        url: '/changelog/',
+        url: '/changelog',
+        icon: 'Calendar',
+        color: 'salmon',
     },
     {
         name: 'Customer stories',
-        url: '/customers/',
+        url: '/customers',
+        icon: 'Person',
+        color: 'yellow',
     },
     {
         name: 'Guides & tutorials',
         url: '/tutorials',
+        icon: 'Map',
+        color: 'red',
         children: [
             {
                 name: 'Product OS',
@@ -162,13 +176,13 @@ export const postsMenu: IMenu[] = [
     {
         name: 'Newsletter',
         url: '/newsletter/',
-    },
-    {
-        name: 'PostHog news',
-        url: '/posthog-news',
+        icon: 'Letter',
+        color: 'green',
     },
     {
         name: 'Spotlight',
         url: '/spotlight',
+        icon: 'Spotlight',
+        color: 'blue',
     },
 ]
