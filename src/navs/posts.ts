@@ -98,7 +98,7 @@ export const postsMenu: IMenu[] = [
         color: 'teal',
         children: [
             {
-                name: 'CEO diaries!',
+                name: 'CEO diaries',
                 url: '/blog/ceo-diaries',
             },
             {

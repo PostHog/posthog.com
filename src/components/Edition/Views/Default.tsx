@@ -271,7 +271,7 @@ function PostsListing() {
         <div
             className={`
                 transition-all 
-                ${fullWidthContent ? 'ml-0 mr-8 xl:mr-16' : 'ml-0 lg:ml-8 mr-16'} 
+                ${fullWidthContent ? 'ml-0 lg:ml-8 mr-8 xl:mr-16' : 'ml-0 lg:ml-8 mr-16'} 
                 ${
                     articleView
                         ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] -ml-6 flex-shrink-0 border-r border-border dark:border-dark border-l'
@@ -293,9 +293,11 @@ function PostsListing() {
                         : ''
                 }
             >
+                {!articleView && <h2 className="pt-4 text-xl mb-2">All posts</h2>}
+
                 <ul
                     className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
-                        articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto' : ''
+                        articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
                     }`}
                 >
                     {posts.map(({ id, attributes }, index) => {
@@ -336,9 +338,10 @@ export default function Default({ children }) {
             <section className="md:flex my-4 md:my-0 items-start">
                 {!articleView && (
                     <div
-                        className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-52 flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
+                        className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-full h-screen md:w-[14rem] lg:w-[18rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative pr-4 border-r border-border dark:border-border-dark ${
+                            fullWidthContent ? 'pl-2' : 'pl-4'
+                        }`}
                     >
-                        <CommunityBar />
                         <div className="max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 mt-[-2px]">
                             <TableOfContents />
                         </div>
