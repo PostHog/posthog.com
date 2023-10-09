@@ -34,19 +34,18 @@ const CommunityBar = () => {
                 fullWidthContent ? 'px-6' : 'px-4'
             }`}
         >
-            <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
-            <div className="flex space-x-6 items-center md:mt-0 mt-2 justify-between">
-                {user ? (
-                    <span className="flex">
-                        <p className="text-sm m-0 pr-2 mr-2 border-r border-border dark:border-dark">
-                            Signed in as{' '}
-                            <Link
-                                className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
-                                to={`/community/profiles/${user?.profile.id}`}
-                            >
-                                {name}
-                            </Link>
-                        </p>
+            {user ? (
+                <div className="flex items-center justify-between w-full">
+                    <p className="text-sm m-0 p-0">
+                        Signed in as{' '}
+                        <Link
+                            className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
+                            to={`/community/profiles/${user?.profile.id}`}
+                        >
+                            {name}
+                        </Link>
+                    </p>
+                    <span>
                         {isModerator && (
                             <button
                                 className="text-sm pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
@@ -59,12 +58,15 @@ const CommunityBar = () => {
                             Logout
                         </button>
                     </span>
-                ) : (
+                </div>
+            ) : (
+                <>
+                    <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
                     <CallToAction type="secondary" size="xs" onClick={() => setLoginModalOpen(true)}>
                         Sign in
                     </CallToAction>
-                )}
-            </div>
+                </>
+            )}
         </div>
     )
 }
@@ -265,14 +267,23 @@ function PostsListing() {
 
     return articleView && breakpoints.sm ? null : (
         <div
-            className={`transition-all ${fullWidthContent ? 'ml-0 mr-8 xl:mr-16' : 'border-l ml-0 lg:ml-8 mr-16'} ${
-                articleView
-                    ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] -ml-6 flex-shrink-0 border-r border-border dark:border-dark'
-                    : 'flex-grow'
-            }`}
+            className={`
+                transition-all 
+                ${fullWidthContent ? 'ml-0 mr-8 xl:mr-16' : 'ml-0 lg:ml-8 mr-16'} 
+                ${
+                    articleView
+                        ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] -ml-6 flex-shrink-0 border-r border-border dark:border-dark border-l'
+                        : 'flex-grow'
+                }
+                ${fullWidthContent && articleView ? '' : ''}
+            `}
         >
-            <CommunityBar />
-            {articleView && <PostFilters />}
+            {articleView && (
+                <>
+                    <CommunityBar />
+                    <PostFilters />
+                </>
+            )}
             <div
                 className={
                     articleView
@@ -333,7 +344,9 @@ export default function Default({ children }) {
                 )}
                 <PostsListing />
                 <div
-                    className={`${articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'}`}
+                    className={`${
+                        articleView ? 'flex-grow pt-8' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'
+                    }`}
                 >
                     <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-4xl px-0'}`}>
                         {children}

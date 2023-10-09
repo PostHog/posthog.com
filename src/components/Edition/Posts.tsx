@@ -158,7 +158,7 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
         >
             <div
                 className={`px-4 md:px-5 md:mt-0 mb-12 md:mb-0 mx-auto transition-all ${
-                    fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
+                    fullWidthContent ? 'max-w-full -ml-5' : 'max-w-screen-3xl box-content'
                 }`}
             >
                 {prev ? (
