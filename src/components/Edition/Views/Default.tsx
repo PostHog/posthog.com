@@ -357,7 +357,7 @@ export default function Default({ children }) {
                         {children}
                     </div>
                     {articleView && (
-                        <div className="mt-12 max-w-2xl">
+                        <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
                             <QuestionForm
                                 disclaimer={false}
                                 subject={false}
