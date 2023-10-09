@@ -124,7 +124,7 @@ export default function Menu({
                 ) : name && url ? (
                     <MenuLink
                         onClick={() => {
-                            handleLinkClick && handleLinkClick()
+                            handleLinkClick && handleLinkClick({ name, url, topLevel })
                             if (isWithChild) {
                                 setOpen(!open)
                             }

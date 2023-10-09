@@ -2,6 +2,10 @@ import { IMenu } from 'components/PostLayout/types'
 
 export const postsMenu: IMenu[] = [
     {
+        name: 'All posts',
+        url: '/posts',
+    },
+    {
         name: 'Founders',
         url: '/founders',
         children: [
@@ -161,10 +165,10 @@ export const postsMenu: IMenu[] = [
     },
     {
         name: 'PostHog news',
-        url: '/blog/posthog-news',
+        url: '/posthog-news',
     },
     {
         name: 'Spotlight',
-        url: '/blog/spotlight',
+        url: '/spotlight',
     },
 ]

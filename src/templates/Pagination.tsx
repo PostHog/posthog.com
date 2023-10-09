@@ -8,7 +8,7 @@ import PaginationContainer from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
 import CommunityCTA from 'components/CommunityCTA'
 import { communityMenu } from '../navs'
-import useMenu from 'components/Edition/hooks/useMenu'
+import { postsMenu as menu } from '../navs/posts'
 
 const Pagination = ({
     data: {
@@ -16,13 +16,11 @@ const Pagination = ({
     },
     pageContext: { numPages, currentPage, base, title },
 }) => {
-    const { activeMenu, defaultMenu } = useMenu()
-    const postsSidebar = activeMenu?.length <= 0 ? defaultMenu : activeMenu
     return (
         <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
             <SEO title={`All ${title} posts - PostHog`} />
 
-            <PostLayout article={false} title={title} hideSidebar hideSurvey menu={postsSidebar}>
+            <PostLayout article={false} title={title} hideSidebar hideSurvey menu={menu}>
                 <Posts
                     title="All posts"
                     action={

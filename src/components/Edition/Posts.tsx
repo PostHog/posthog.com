@@ -15,7 +15,6 @@ import { useLocation } from '@reach/router'
 import { communityMenu, companyMenu } from '../../navs'
 import NewPost from './NewPost'
 import { PostProvider } from 'components/PostLayout/context'
-import useMenu from './hooks/useMenu'
 import { IMenu } from 'components/PostLayout/types'
 import MobileNav from 'components/PostLayout/MobileNav'
 import Default from './Views/Default'
@@ -26,6 +25,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import qs from 'qs'
 import { RightArrow } from 'components/Icons'
 import { navigate } from 'gatsby'
+import { postsMenu as menu } from '../../navs/posts'
 dayjs.extend(relativeTime)
 
 const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>, 'meta'> }) => {
@@ -179,20 +179,8 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
     )
 }
 
-export default function Posts({
-    children,
-    pageContext: { selectedTag: initialTag, title, article: articleView = true },
-}) {
-    const didMount = useRef(false)
-    const [loginModalOpen, setLoginModalOpen] = useState(false)
-    const { pathname } = useLocation()
-    const [newPostModalOpen, setNewPostModalOpen] = useState(false)
-    const [root, setRoot] = useState(pathname.split('/')[1] !== 'posts' ? pathname.split('/')[1] : undefined)
-    const [selectedTag, setSelectedTag] = useState(initialTag)
-    const { activeMenu, defaultMenu } = useMenu()
-    const postsSidebar = activeMenu?.length <= 0 ? defaultMenu : activeMenu
-    const [prev, setPrev] = useState<string | null>(null)
-    const params = {
+export const getParams = (root, tag) => {
+    return {
         filters: {
             $and: [
                 ...(root
@@ -217,12 +205,12 @@ export default function Posts({
                           },
                       ]
                     : []),
-                ...(selectedTag
+                ...(tag
                     ? [
                           {
                               post_tags: {
                                   label: {
-                                      $in: [selectedTag],
+                                      $in: [tag],
                                   },
                               },
                           },
@@ -231,6 +219,21 @@ export default function Posts({
             ],
         },
     }
+}
+
+export default function Posts({
+    children,
+    pageContext: { selectedTag: initialTag, title, article: articleView = true },
+}) {
+    const didMount = useRef(false)
+    const [loginModalOpen, setLoginModalOpen] = useState(false)
+    const { pathname } = useLocation()
+    const [newPostModalOpen, setNewPostModalOpen] = useState(false)
+    const [root, setRoot] = useState(pathname.split('/')[1] !== 'posts' ? pathname.split('/')[1] : undefined)
+    const [tag, setTag] = useState(initialTag)
+    const [prev, setPrev] = useState<string | null>(null)
+
+    const [params, setParams] = useState(getParams(root, initialTag))
 
     const { posts, isLoading, isValidating, fetchMore, mutate, hasMore } = usePosts({ params })
 
@@ -239,25 +242,23 @@ export default function Posts({
     }
 
     useEffect(() => {
-        if (!articleView) {
-            const newRoot = pathname.split('/')[1]
-            setRoot(newRoot === 'posts' ? undefined : newRoot)
-            setSelectedTag(newRoot === 'posts' ? undefined : initialTag)
-        }
-    }, [pathname, articleView])
-
-    useEffect(() => {
         if (didMount.current) {
             setPrev(pathname)
         } else {
             didMount.current = true
         }
+        if (pathname === '/posts') {
+            setRoot(undefined)
+            setTag(undefined)
+        }
     }, [pathname])
 
-    const menu = menusByRoot[root] || { parent: communityMenu, activeInternalNav: communityMenu.children[0] }
+    useEffect(() => {
+        setParams(getParams(root, tag))
+    }, [root, tag])
 
     return (
-        <Layout parent={menu.parent} activeInternalMenu={menu.activeInternalMenu}>
+        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
             <PostsContext.Provider
                 value={{
                     mutate,
@@ -271,12 +272,24 @@ export default function Posts({
                     loginModalOpen,
                     articleView,
                     hasMore,
+                    setTag,
+                    setRoot,
                 }}
             >
                 <PostProvider
                     value={{
                         title: title || 'Posts',
-                        menu: postsSidebar,
+                        menu: menu.map((menuItem) => ({
+                            ...menuItem,
+                            handleLinkClick: ({ name, url, topLevel }) => {
+                                if (topLevel) {
+                                    setRoot(url === '/posts' ? undefined : url?.split('/')[1])
+                                    setTag(undefined)
+                                } else {
+                                    setTag(name)
+                                }
+                            },
+                        })),
                         isMenuItemActive: ({ url }) => url === pathname,
                         isMenuItemOpen: ({ url }) => url?.startsWith(`/${pathname.split('/')[1]}`),
                     }}
@@ -291,7 +304,7 @@ export default function Posts({
                     <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
-                    <MobileNav menu={defaultMenu} className="lg:hidden mb-6 mt-0" />
+                    <MobileNav menu={menu} className="lg:hidden mb-6 mt-0" />
                     {articleView && (
                         <button
                             onClick={() => navigate(prev ? -1 : '/posts')}

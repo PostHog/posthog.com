@@ -21,7 +21,7 @@ export interface IMenu {
     url?: string
     children?: IMenu[]
     className?: string
-    handleLinkClick?: () => void
+    handleLinkClick?: ({ name, url, topLevel }: { name: string; url?: string; topLevel?: boolean }) => void
     topLevel?: boolean
     menuType?: 'scroll' | 'standard'
     badge?: {

@@ -1,7 +1,7 @@
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import React, { useContext, useEffect, useRef } from 'react'
-import { PostsContext } from '../Posts'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { PostsContext, getParams } from '../Posts'
 import TableOfContents from 'components/PostLayout/TableOfContents'
 import { useLocation } from '@reach/router'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
@@ -13,6 +13,11 @@ import { useLayoutData } from 'components/Layout/hooks'
 import LikeButton from '../LikeButton'
 import { child, container } from 'components/CallToAction'
 import Spinner from 'components/Spinner'
+import { Menu } from '@headlessui/react'
+import { usePost } from 'components/PostLayout/hooks'
+import { ChevronDown } from '@posthog/icons'
+import useMenu from '../hooks/useMenu'
+import { postsMenu as menu } from '../../../navs/posts'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -130,6 +135,79 @@ export const Skeleton = () => {
     )
 }
 
+const PostFilters = () => {
+    const { pathname } = useLocation()
+    const { setRoot, setTag } = useContext(PostsContext)
+    const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
+    return (
+        <div className="relative flex space-x-2 pb-2">
+            <div className="w-full flex-grow">
+                <Menu>
+                    <Menu.Button className="flex space-x-1 items-center py-1 px-2 rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm justify-between w-full h-full">
+                        <div className="flex space-x-1 items-center">
+                            <span>Posts</span>
+                            <span>→</span>
+                            <span>{activeMenu?.name}</span>
+                        </div>
+                        <div>
+                            <ChevronDown className="w-6 h-6 -mb-[2px]" />
+                        </div>
+                    </Menu.Button>
+                    <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 py-1 w-full bottom-0 left-0 translate-y-full">
+                        {menu.map((menu, index) => {
+                            const { name, url } = menu
+                            return (
+                                <Menu.Item key={`${name}-${index}`}>
+                                    <button
+                                        onClick={() => {
+                                            setActiveMenu(menu)
+                                            setRoot(url === '/posts' ? undefined : url?.split('/')[1])
+                                            setTag(undefined)
+                                        }}
+                                        className="py-1 px-2 !text-inherit text-left"
+                                    >
+                                        {name}
+                                    </button>
+                                </Menu.Item>
+                            )
+                        })}
+                    </Menu.Items>
+                </Menu>
+            </div>
+            <div className="flex-grow-0">
+                <Menu>
+                    <Menu.Button className="flex space-x-1 items-center py-1 px-2 rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm justify-between">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M3 5H21M9 19H15M6 12H18"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                            />
+                        </svg>
+                    </Menu.Button>
+                    <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 py-1 w-full bottom-0 right-0 translate-y-full">
+                        {activeMenu?.children?.map(({ name, url }, index) => {
+                            return (
+                                <Menu.Item key={`${name}-${index}`}>
+                                    <button
+                                        onClick={() => {
+                                            setTag(name)
+                                        }}
+                                        className="py-1 px-2 !text-inherit text-left"
+                                    >
+                                        {name}
+                                    </button>
+                                </Menu.Item>
+                            )
+                        })}
+                    </Menu.Items>
+                </Menu>
+            </div>
+        </div>
+    )
+}
+
 function PostsListing() {
     const { posts, fetchMore, isValidating, isLoading, articleView, hasMore } = useContext(PostsContext)
     const breakpoints = useBreakpoint()
@@ -143,6 +221,7 @@ function PostsListing() {
                     : 'flex-grow'
             }`}
         >
+            {articleView && <PostFilters />}
             <div
                 className={
                     articleView
@@ -232,13 +311,15 @@ export default function Default({ children }) {
                 </div>
             </section>
             <section className="md:flex my-4 md:my-8 items-start">
-                <div
-                    className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-52 flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
-                >
-                    <div className="max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24">
-                        <TableOfContents />
+                {!articleView && (
+                    <div
+                        className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-52 flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
+                    >
+                        <div className="max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24">
+                            <TableOfContents />
+                        </div>
                     </div>
-                </div>
+                )}
                 <PostsListing />
                 <div
                     className={`${articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'}`}
