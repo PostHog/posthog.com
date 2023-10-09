@@ -4,6 +4,19 @@ import usePostHog from '../../hooks/usePostHog'
 import React from 'react'
 
 const sizes = {
+    xs: cntl`
+    rounded-[4px]
+    text-[12px]
+    font-bold
+    px-2
+    py-0.5
+    translate-y-[-2px]
+    hover:translate-y-[-3px]
+    active:translate-y-[-1px]
+    border-[1px]
+    mx-[-1.5px]
+    group-disabled:hover:!translate-y-[-2px]
+    `,
     sm: cntl`
     rounded-[6px]
     text-[13px]
@@ -119,6 +132,7 @@ const containerTypes = {
 }
 
 const containerSizes = {
+    xs: cntl`border-[1px] relative top-[1px] rounded-[4px]`,
     sm: cntl`border-[1.5px] relative top-[1px] rounded-[6px]`,
     md: cntl`border-[1.5px] relative top-[2px] rounded-[6px]`,
     lg: cntl`border-[1.5px] relative top-[2px] rounded-[8px]`,

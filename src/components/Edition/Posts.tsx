@@ -157,7 +157,7 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
             }}
         >
             <div
-                className={`px-4 md:px-5 md:mt-8 mb-12 mx-auto transition-all ${
+                className={`px-4 md:px-5 md:mt-0 mb-12 md:mb-0 mx-auto transition-all ${
                     fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
                 }`}
             >
@@ -304,7 +304,7 @@ export default function Posts({
                     <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
-                    <MobileNav menu={menu} className="lg:hidden mb-6 mt-0" />
+                    <MobileNav menu={menu} className="md:hidden mb-6 mt-0" />
                     {articleView && (
                         <button
                             onClick={() => navigate(prev ? -1 : '/posts')}
