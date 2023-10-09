@@ -115,8 +115,10 @@ const Post = ({
                             ? 'bg-accent dark:bg-accent-dark font-bold border-border dark:border-border-dark'
                             : 'border-transparent hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99]'
                     } 
-                    ${fullWidthContent ? 'p-2 lg:px-6' : 'p-2 lg:px-4'}
-                    ${articleView ? 'text-[.933rem]' : 'text-base mr-1.5'}`}
+                    ${fullWidthContent ? 'p-2 ' : 'p-2 lg:px-4'}
+                    ${articleView ? 'text-[.933rem]' : 'text-base mr-1.5'}
+                    ${fullWidthContent && articleView ? 'lg:px-6' : ''} 
+                    `}
                     to={slug}
                 >
                     {pathname === '/posts' && category && (
@@ -337,7 +339,7 @@ export default function Default({ children }) {
                         className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-52 flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
                     >
                         <CommunityBar />
-                        <div className="max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24">
+                        <div className="max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 mt-[-2px]">
                             <TableOfContents />
                         </div>
                     </div>

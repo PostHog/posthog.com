@@ -37,7 +37,7 @@ export const Intro = ({
             {!featuredVideo && featuredImage && (
                 <div className="relative flex flex-col">
                     <GatsbyImage
-                        className={`rounded-md z-0 relative ${
+                        className={`rounded-sm z-0 relative ${
                             featuredImageType === 'full'
                                 ? `before:h-3/4 before:left-0 before:right-0 ${
                                       titlePosition === 'bottom' ? 'before:bottom-0' : 'before:top-0'
