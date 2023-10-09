@@ -26,6 +26,13 @@ graph TD
 
     Kafka2 <-..- ClickHouse
 ```
+## Why am I seeing duplicate events?
+
+We recommend sending a `uuid` value with every captured event. Events with the same UUID, event name, timestamp, and `distinct_id` are considered duplicates and are eventually de-duplicated. 
+
+This is important because failures and retries happen, so your application or our library might send the same event multiple times. If you don't send UUIDs for every event, we aren't able to know if it's the same event, and hence we are not able to de-duplicate it for you.  
+
+Some of our SDKs, such as JavaScript Web, do this automatically, other SDKs allow you to pass UUIDs. If you're using an SDK which doesn't currently support UUIDs for every event, please consider creating a PR or filing an issue in GitHub.
 
 ## Capture API
 
@@ -136,7 +143,7 @@ To determine what to do at this stage, we need to make a call to PostgreSQL to d
 
 ###### Merging two Persons
 
-In the third scenario, where we have inadvertently created two Persons for the same user, we will need to merge them. Note that PostHog has a few built-in protections, in which case the merge will not aborted. ([more info](https://posthog.com/docs/integrate/identifying-users#considerations)). 
+In the third scenario, where we have inadvertently created two Persons for the same user, we will need to merge them. Note that PostHog has a few built-in protections, in which case the merge will not be aborted. ([more info](https://posthog.com/docs/integrate/identifying-users#considerations)). 
 
 
 In the case of an `$identify` call, we will merge the person tied to `$anon_distinct_id` (`person_2`) into the person identified by `distinct_id` (`person_1`). 

@@ -66,15 +66,15 @@ To add a custom event to your Shopify checkout page, add a script like this to y
 ```html
 {% if first_time_accessed %}
 <script>
-    posthog.capture('order-submitted', {
+    posthog.capture('order_submitted', {
         value: '{{ order.total_price }}', 
         created_at: '{{ order.created_at }}', 
         order_number: '{{ order.order_number }}',
         userId: '{{ customer.id }}',
-        orderId: '{{ checkout.order_id }}',
+        order_id: '{{ checkout.order_id }}',
         "products": [{% for line_item in line_items %}{
-            "productId": '{{ line_item.product.type }}',
-            "colorId": '{{ line_item.variant.option1 }}',
+            "product_id": '{{ line_item.product.type }}',
+            "color_id": '{{ line_item.variant.option1 }}',
             "size": '{{ line_item.variant.option2 }}',
             "quantity": {{ line_item.quantity }},
             "price": {{ line_item.final_price| divided_by: 100.0 }},

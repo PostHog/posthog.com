@@ -19,8 +19,8 @@ If you are planning on taking a day off or you won't be available, please find s
 ### Rotations
 
 - [Secondary - Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
-- [Secondary - Experimentation](https://posthog.pagerduty.com/schedules#P04FUTJ)
-- [Secondary - Session recordings](https://posthog.pagerduty.com/schedules#PUPERAV)
+- [Secondary - Feature Success](https://posthog.pagerduty.com/schedules#P04FUTJ)
+- [Secondary - Monitoring](https://posthog.pagerduty.com/schedules#PUPERAV)
 - [Secondary – Pipeline](https://posthog.pagerduty.com/schedules#PM8YSH8)
 - [Secondary - Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 
@@ -30,6 +30,7 @@ There are a couple of channels that customer requests come in so make sure you k
 - [Zendesk](https://posthoghelp.zendesk.com/agent/filters/5586845866651) - look for the dedicated folder for your team. If new tickets are created, then a slack notification will be sent also to your team's dedicated support channel.
 - [PostHog Users' Slack](/slack), specifically `#community` and `#general` or elsewhere should be redirected to using [the bug button](https://app.posthog.com/home#supportModal) within the app, which provides us with all the context and helps triage. We do not commit to providing support through Slack, and should suggest users who prefer this channel ask @Max-AI as a first port of call.
 - Sentry issues, either [directly](https://sentry.io/organizations/posthog/issues/?project=1899813) or in `#sentry` in our main Slack.
+- [Community forums](/questions) - each small team can decide how to handle questions pertaining to their part of the product, but we suggest working with your small team's marketing representative to make sure each question gets answered. (Read more in the [Community](/handbook/small-teams/website-docs/community) section of the handbook.)
 
 ### Communication
 
@@ -47,7 +48,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 
 As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero. At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
 
-1. Any requests where you are tagged by the Customer Success team in a dedicated slack channel as there will be some urgency needed
+1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel as there will be some urgency needed
 1. Open Zendesk tickets for your team that have `high` priority (high-paying customers)
 1. Open Zendesk tickets for your team that have `normal` priority (paying customers)
 1. [Community questions](https://posthog.com/questions/)
@@ -101,7 +102,7 @@ Zendesk will get populated with new issues from people outside the PostHog organ
 
 You can access the app via [posthoghelp.zendesk.com](https://posthoghelp.zendesk.com).
 
-The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting to!
+The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting with!
 
 #### How to use Zendesk
 
@@ -136,7 +137,7 @@ Our Customer Success team uses Unthread to track the resolution of threads in Sl
 
 At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (These questions also appear in the relevant category in the [PostHog community](/questions).)
 
-Community questions appear in Zendesk.
+Community questions appear in Zendesk but tickets are closed automatically if they're resolved directly on the website.
 
 #### Answering questions
 

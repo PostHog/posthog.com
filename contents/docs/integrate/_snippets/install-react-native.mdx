@@ -41,7 +41,7 @@ const MyComponent = () => {
     const posthog = usePostHog()
 
     useEffect(() => {
-        posthog.capture("MyComponent loaded", { foo: "bar" })
+        posthog.capture("mycomponent_loaded", { foo: "bar" })
     }, [])
 }
 ```
@@ -73,9 +73,9 @@ import { posthog, posthogAsync} from './posthog'
 export function MyApp1() {
     useEffect(async () => {
         // Use posthog optionally with the possibility that it may still be loading
-        posthog?.capture('MyApp1 loaded')
+        posthog?.capture('myapp1_loaded')
         // OR use posthog via the promise
-        (await posthogAsync).capture('MyApp1 loaded')
+        (await posthogAsync).capture('myapp1_loaded')
     }, [])
 
     return <View>Your app code</View>
@@ -102,7 +102,7 @@ export const posthog = await PostHog.initAsync("<ph_project_api_key>", {
     flushInterval?: number = 10000
     // If set to false, tracking will be disabled until `optIn` is called
     enable?: boolean = true,
-    // Whether to track that `getFeatureFlag` was called (used by Expriements)
+    // Whether to track that `getFeatureFlag` was called (used by Experiments)
     sendFeatureFlagEvent?: boolean = true,
     // Whether to load feature flags when initialised or not
     preloadFeatureFlags?: boolean = true,

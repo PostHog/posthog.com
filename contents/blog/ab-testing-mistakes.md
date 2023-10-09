@@ -107,7 +107,7 @@ Sometimes we're so eager to get results from our experiments, we jump straight t
 
 Imagine you're running an experiment with a 50/50 split between control and test. You roll out the experiment to all your users, but a day after launch, you notice that your change is causing the app to crash for all test users. You immediately stop the experiment and fix the root cause of the crash. However, restarting the experiment now will produce unreliable results since many users have already seen your change.
 
-To avoid this problem, you should first test your experiment with a small rollout (e.g., 5% of users) for a few days. Once you're confident everything works correctly, you can start the experiment with the remaining users.
+To avoid this problem, you should first test your experiment with a [small rollout](/tutorials/phased-rollout) (e.g., 5% of users) for a few days. Once you're confident everything works correctly, you can start the experiment with the remaining users.
 
 Here is a list of what to check during your test rollout:
 * Logging is working correctly

@@ -101,11 +101,11 @@ function FlagOverrides() {
             <p className="leading-tight">
                 When developing locally, you can set a flag's value in your browser’s console.
             </p>
-            <CodeBlock code={`posthog.feature_flags.override({"myFlag": "test"})`} language="js" />
+            <CodeBlock code={`posthog.featureFlags.override({"myFlag": "test"})`} language="js" />
             <p className="leading-tight">
                 This will persist until you call override again with the argument <code>false</code>.
             </p>
-            <CodeBlock code={`posthog.feature_flags.override(false)`} language="js" />
+            <CodeBlock code={`posthog.featureFlags.override(false)`} language="js" />
         </div>
     )
 }

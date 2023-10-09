@@ -27,7 +27,7 @@ Apps can optionally pass a `timestamp`, which needs to be in ISO 8601 format. If
 ##### Example usage
 
 ```ts
-posthog.capture('Stripe Customer Subscribed', {
+posthog.capture('stripe_customer_subscribed', {
   distinct_id: 'a user id',
   timestamp: new Date(subscription.created*1000).toISOString()
 })

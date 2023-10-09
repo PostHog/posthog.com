@@ -14,7 +14,7 @@ tags: ['surveys']
 
 ## Creating a Next.js app and installing PostHog
 
-First, once **[Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/)**, create a Next.js app. Run the command below, select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
+First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Run the command below, select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
 ```bash
 npx create-next-app@latest surveys
@@ -27,7 +27,7 @@ cd surveys
 npm i posthog-js
 ```
 
-Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project API key and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive, a check for the window, and `opt_in_site_apps` set to `true` (which we use for surveys later). Altogether, this looks like this:
+Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project API key and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive and a check for the window. Altogether, this looks like this:
 
 ```js-web
 // app/providers.js
@@ -37,8 +37,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
-		opt_in_site_apps: true
+    api_host: '<ph_instance_address>'
   })
 }
 
@@ -68,15 +67,17 @@ After setting this up and running `npm run dev`, your app is ready for surveys.
 
 ## Creating a basic survey
 
-With our app and PostHog set up, we can go to the [surveys tab](https://app.posthog.com/surveys) in PostHog and click "Create survey." Enter a name, question, and any of the other details you want (like targeting). Once done, click "Save as draft."
+With our app and PostHog set up, we can go to the [surveys tab](https://app.posthog.com/surveys) in PostHog and enable the surveys popup if it isn’t already.
 
-![Feedback survey video](../images/tutorials/survey/feedback.mp4)
+![Enable surveys](../images/tutorials/survey/enable.mp4)
 
-Before launching our survey, we need to enable the [survey site app](https://app.posthog.com/project/apps/611). Either click the link on your draft survey page or go to the [apps tab](https://app.posthog.com/project/apps) and search for "Surveys app," enable it, and press save. 
+Aftwards click "Create survey." Enter a name, question, and any of the other details you want (like targeting). Once done, click "Save as draft," make sure everything looks good, then click "Launch."
 
-Once done, go back to your draft survey and click "Launch". In your app, you will now see your survey in the bottom right of the page. PostHog automatically tracks surveys shown, dismissed, and submitted along with the responses and user details for each.
+![Feedback survey video](../images/tutorials/survey/create-survey.mp4)
 
-![Survey in-app](../images/tutorials/survey/survey.png)
+In your app, you will now see your survey in the bottom right of the page. PostHog automatically tracks surveys shown, dismissed, and submitted along with the responses and user details for each.
+
+![Survey in-app](../images/tutorials/survey/in-app.png)
 
 ## Creating a custom survey
 

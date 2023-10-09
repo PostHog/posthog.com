@@ -32,7 +32,7 @@ SELECT
    distinct_id, 
    min(timestamp) as first_occurrence
 FROM events
-WHERE event = 'user signed up'
+WHERE event = 'user_signed_up'
 GROUP BY distinct_id
 ORDER BY first_occurrence
 LIMIT 1

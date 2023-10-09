@@ -6,7 +6,7 @@ import Intro from "./intro.mdx"
 
 ```python
 posthog.capture('distinct_id_of_the_user', 
-    'user signed up')
+    'user_signed_up')
 ```
 
 <NamingTip />
@@ -16,7 +16,7 @@ posthog.capture('distinct_id_of_the_user',
 ```
 posthog.capture(
     "distinct_id_of_the_user", 
-    "user signed up", 
+    "user_signed_up", 
     {
         "login_type": "email", 
         "is_free_trial": "true"
@@ -29,5 +29,5 @@ posthog.capture(
 If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
 
 ```python
-posthog.capture('distinct id', '$pageview', {'$current_url': 'https://example.com'})
+posthog.capture('distinct_id_of_the_user', '$pageview', {'$current_url': 'https://example.com'})
 ```

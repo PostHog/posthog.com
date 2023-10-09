@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight } from '@posthog/icons'
+import { ChevronDown } from '@posthog/icons'
 import React, { useEffect, useState } from 'react'
 import { slideButtons } from './slideButtons'
 import { ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Cdp, DataWarehouse, Sql, Api } from './Slides'
@@ -67,7 +67,7 @@ export default function Slider() {
 
     return (
         <div className="-mt-8 md:mt-0 hidden md:block">
-            <div className="hidden md:block px-[50px]">
+            <div className="hidden md:block px-8 lg:px-[50px]">
                 <ul className="m-0 grid grid-cols-7 list-none max-w-full lg:max-w-7xl xl:mx-auto p-0">
                     {slideButtons.map((slide, index) => {
                         return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
@@ -78,9 +78,9 @@ export default function Slider() {
                 <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center  lg:static">
                     <button
                         onClick={() => handleArrow(activeSlide - 1, slides.length - 1)}
-                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
+                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-6"
                     >
-                        <ArrowLeft className="w-10" />
+                        <ChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark" />
                     </button>
                 </div>
                 <div className="flex-1 list-none max-w-full lg:max-w-7xl xl:max-w-7xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex flex-nowrap snap-mandatory snap-x overflow-x-auto overflow-y-hidden">
@@ -90,12 +90,13 @@ export default function Slider() {
                         </SlideContainer>
                     ))}
                 </div>
-                <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center  lg:static">
+                <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center lg:static">
                     <button
                         onClick={() => handleArrow(activeSlide + 1, 0)}
-                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
+                        className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-6 box-border"
                     >
-                        <ArrowRight className="w-10" />
+                        <ChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark" />
+
                     </button>
                 </div>
             </div>

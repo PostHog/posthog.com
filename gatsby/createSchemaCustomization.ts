@@ -179,6 +179,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type ProductSectionsSectionsFeatures {
+      title: String
+      description: String
+      icon: String
+    }
+    type ProductSectionsSections {
+      featuresType: String
+      features: [ProductSectionsSectionsFeatures]
+    }
+    type MdxFrontmatterProductSections implements Node {
+      sections: [ProductSectionsSections]
+    }
   `)
     createTypes([
         schema.buildObjectType({

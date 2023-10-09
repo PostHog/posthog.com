@@ -78,7 +78,7 @@ This is a faster alternative to get up and running. If you don't want to or can'
 2. Install the `build-essential` package:
 
     ```bash
-    sudo apt install -y build-essential optipng
+    sudo apt install -y build-essential
     ```
 
 ## Common prerequisites for both macOS & Linux
@@ -251,7 +251,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 1. Create the virtual environment in current directory called 'env':
 
     ```bash
-    python3 -m venv env
+    python3.10 -m venv env
     ```
 
 1. Activate the virtual environment:
@@ -314,6 +314,8 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 ```bash
 ./bin/start
 ```
+
+> **Friendly tip:** If you get the error `Configuration property "enable.ssl.certificate.verification" not supported in this build: OpenSSL not available at build time`, make sure your environment is using the right `openssl` version by setting [those](https://github.com/xmlsec/python-xmlsec/issues/261#issuecomment-1630889826) environment variables, and then run `./bin/start` again.
 
 Open [http://localhost:8000](http://localhost:8000) to see the app.
 

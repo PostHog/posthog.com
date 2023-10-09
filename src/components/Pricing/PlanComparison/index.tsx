@@ -103,8 +103,8 @@ const ProductTiersModal = ({
     return (
         <Modal open={modalOpen} setOpen={setModalOpen}>
             <div className="flex items-center w-full h-full justify-center">
-                <div className="text-left max-w-xl bg-accent dark:bg-accent-dark rounded-md relative w-full p-8 m-8">
-                    <p className="mb-1">{capitalizeFirstLetter(plan.name)} pricing</p>
+                <div className="text-left max-w-xl border border-border dark:border-dark shadow-xl bg-white dark:bg-accent-dark rounded-md relative w-full p-8 m-8">
+                    <p className="mb-1 font-bold">{capitalizeFirstLetter(plan.name)} pricing</p>
                     <p className="mb-1">
                         <span className="font-bold text-base">
                             $

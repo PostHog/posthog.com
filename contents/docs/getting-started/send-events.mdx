@@ -39,7 +39,7 @@ On the client-side, we can use the `capture` method, with the first argument bei
 <MultiLanguage selector="tabs">
 
 ```js-web
-posthog.capture('User signed up')
+posthog.capture('user_signed_up')
 ```
 
 </MultiLanguage>
@@ -62,9 +62,9 @@ We include extra information on events by adding a second parameter in our captu
 <MultiLanguage selector="tabs">
 
 ```js-web
-posthog.capture('Plan purchased', {
+posthog.capture('plan_purchased', {
     price: 1599,
-    planId: 'XYZ12345',
+    plan_id: 'XYZ12345',
     frequency: 'monthly',
     features: {
         'SSO': true,

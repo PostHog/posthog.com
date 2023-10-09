@@ -14,7 +14,7 @@ tags: ['hogql', 'trends']
 
 Every autocapture event contains data on the "location" of that event in your code. It does this by creating an element chain from the specific element a user interacted with like `<a>`, `<input>`, or `<button>` to highest-level components like a `<body>` or `<div>` tag.
 
-We can access the element chain by using the autocapture series, then using `elements_chain`  in our HogQL expression.
+We can access the element chain by using the autocapture series, then using `elements_chain`  in our [HogQL expression](/docs/hogql/expressions).
 
 ![Element chain](../images/tutorials/hogql-autocapture/element-chain.mp4)
 
@@ -31,7 +31,7 @@ We can also get the full component, where getting the first or last index might 
 - To breakdown by the first component in the chain, use `arrayElement(splitByChar(';', elements_chain), 1)`
 - To breakdown by the last component in the chain, use `arrayElement(splitByChar(';', elements_chain), -1)`
 
-You can use this method to other get components or elements at other indexes or run other [array-specific functions](/docs/product-analytics/hogql#arrays-and-strings-in-common).
+You can use this method to other get components or elements at other indexes or run other [array-specific functions](/tutorials/array-filter-breakdown).
 
 ## Breaking down by attributes
 

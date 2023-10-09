@@ -161,7 +161,7 @@ export default function App({ Component, pageProps }) {
   const router = useRouter()
   useEffect(() => {
     const handleRouteChange = () => {
-      posthog.capture('left page', {
+      posthog.capture('left_page', {
         'max scroll percentage': maxPercentage.current,
         'max scroll pixels': maxPixels.current,
         'last scroll percentage': Math.min(1, (window.innerHeight + window.pageYOffset) / document.body.offsetHeight),

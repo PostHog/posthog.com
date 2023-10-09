@@ -32,7 +32,7 @@ export default function useTopicsNav() {
                 nav.push({
                     name: label,
                     url: `/questions/topic/${slug}`,
-                    icon: <Icon />,
+                    icon: Icon && <Icon />,
                 })
             })
         })

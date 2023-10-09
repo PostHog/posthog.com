@@ -8,7 +8,7 @@ posthog.capture('user_signed_up')
 
 ```python
 posthog.capture(
-    '[user distinct id]',
+    'user_distinct_id',
     'user_signed_up',
     groups={'company': 'company_id_in_your_db'}
 )
@@ -16,7 +16,7 @@ posthog.capture(
 
 ```go
 client.Enqueue(posthog.Capture{
-    DistinctId: "[user distinct id]",
+    DistinctId: "user_distinct_id",
     Event: "user_signed_up",
     Groups: posthog.NewGroups().
         Set("company", "company_id_in_your_db").
@@ -26,14 +26,14 @@ client.Enqueue(posthog.Capture{
 ```node
 posthog.capture({
     event: 'user_signed_up',
-    distinctId: '[user distinct id]',
+    distinctId: 'user_distinct_id',
     groups: { company: 'company_id_in_your_db' }
 })
 ```
 
 ```php
 PostHog::capture(array(
-    'distinctId' => '[user distinct id]',
+    'distinctId' => 'user_distinct_id',
     'event' => 'user_signed_up',
     '$groups' => array("company" => "company_id_in_your_db")
 ));
@@ -60,7 +60,7 @@ analytics.track('user_signed_up', {
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "event": "user_signed_up",
-    "distinct_id": "[user distinct id]",
+    "distinct_id": "user_distinct_id",
     "properties": {
         "$groups": {"company": "company_id_in_your_db"}
     }
