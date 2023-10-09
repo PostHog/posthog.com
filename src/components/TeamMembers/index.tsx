@@ -118,12 +118,15 @@ const AddTeamMember = ({ handleChange }) => {
             />
         </li>
     ) : (
-        <li className="!m-0 !text-inherit flex space-x-4 items-center py-3 relative active:top-[1px] active:scale-[.99] transition-transform px-4 hover:bg-accent dark:hover:bg-accent-dark rounded h-full group">
-            <button onClick={() => setShowMods(true)} className="flex items-center space-x-2 w-full">
+        <li className="!m-0 !text-inherit flex space-x-4 items-center relative active:top-[1px] active:scale-[.99] transition-transform h-full group">
+            <button
+                onClick={() => setShowMods(true)}
+                className="flex items-center space-x-2 w-full p-2 hover:bg-accent dark:hover:bg-accent-dark rounded"
+            >
                 <span className=" w-[32px] h-[32px] flex justify-center items-center p-1 rounded-full bg-accent dark:bg-accent-dark border group-hover:border-border dark:group-hover:border-dark border-transparent transition-colors">
                     <Plus className="w-full h-full" />
                 </span>
-                <span className="font-semibold">Add team member</span>
+                <span className="font-semibold text-sm">Add team member</span>
             </button>
         </li>
     )
@@ -259,7 +262,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                                             handleTeamLead(member.id, true)
                                                         }
                                                     }}
-                                                    className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white"
+                                                    className="inline-block border-2 border-red/50 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-red bg-white dark:bg-transparent"
                                                 >
                                                     Team lead
                                                 </button>
@@ -270,9 +273,9 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                                             e.preventDefault()
                                                             handleTeamLead(member.id, false)
                                                         }}
-                                                        className="group-hover:visible inline-block border-2 border-white/40 rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-white/40 invisible"
+                                                        className="group-hover:visible inline-block border-2 border-primary/10 dark:border-primary-dark/10 border-dashed rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-primary/40 dark:text-primary-dark/40 invisible"
                                                     >
-                                                        Team lead
+                                                        Team lead?
                                                     </button>
                                                 )
                                             )}

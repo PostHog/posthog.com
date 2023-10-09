@@ -14,7 +14,7 @@ PostHog’s [surveys](/docs/surveys/manual) help automate the process of getting
 
 ## Getting your app ready for surveys
 
-To add surveys, you need either [the snippet or the JavaScript library](/docs/integrate) set up in your app. You also must add `opt_in_site_apps: true` to the initialization of either of these. For the snippet, this looks like this:
+To add surveys, you need either [the snippet or the JavaScript library](/docs/integrate) set up in your app. For the snippet, this looks like this:
 
 ```html
 <script>
@@ -22,26 +22,21 @@ To add surveys, you need either [the snippet or the JavaScript library](/docs/in
   posthog.init(
     <ph_project_api_key>,
     {
-      api_host:'<ph_instance_address>',
-      opt_in_site_apps: true
+      api_host:'<ph_instance_address>'
     }
   )
 </script>
 ```
 
-Next, opt into the surveys beta by opening the account dropdown in the top right of your PostHog instance, selecting "Enable beta features," and then activating "Surveys."****
+Next, go to the [surveys page](https://app.posthog.com/surveys) and enable survey popups if you haven't already.
 
-![Beta opt-in video](../images/tutorials/feedback-interviews-site-apps/beta.mp4)
-
-Finally, enable and save the ["Surveys" site app](https://app.posthog.com/project/apps/611) in the "Browse Apps" tab.
-
-![Site app](../images/tutorials/feedback-interviews-site-apps/app.png)
+![Enable surveys video](../images/tutorials/feedback-interviews-site-apps/enable.mp4)
 
 ## Creating your first feedback survey
 
-Once you’ve set up your app to use surveys, you can create your first one to gather feedback. To do this, go to the [surveys tab](https://app.posthog.com/surveys) in your PostHog instance and click "New survey." On this page, add a name and question. In this example, we ask for feedback on an imaginary product named "HogBox" and its upload feature, so our question reflects this. We also want to target the `/upload` URL so we include that under "Targeting."
+Once you’ve set up your app to use surveys, you can create your first one to gather feedback. To do this, go to the [surveys tab](https://app.posthog.com/surveys) in your PostHog instance and click "New survey." On this page, add a name and question. In this example, we ask for feedback on an upload feature, so our question reflects this. We also want to target the `/upload` URL so we include that under "Targeting."
 
-![Creating the feedback survey](../images/tutorials/feedback-interviews-site-apps/feedback.png)
+![Creating the feedback survey](../images/tutorials/feedback-interviews-site-apps/feedback.mp4)
 
 Feel free to add a description or change any of the style options and press "Save as draft" once ready. On the overview page, you can click "Launch" because we already did all the setup. Once launched, you see the prompt in your app and results are captured into PostHog for you to see.
 
@@ -55,7 +50,7 @@ To control who sees the prompt, we can use a feature flag. To create one, go to 
 
 Next, go to the [surveys tab](https://app.posthog.com/surveys) and click "New survey." Add a name like "User interview," link the `user-interview` feature flag you just created, change the type from "Open text" to "Link," add your question, booking link, and change the "Submit button text." Altogether, this might look like this:
 
-![Interview survey](../images/tutorials/feedback-interviews-site-apps/interview.png)
+![Interview survey](../images/tutorials/feedback-interviews-site-apps/interview.mp4)
 
 Once you customize it to your liking, click "Save as draft" and then "Launch" to show it to all the users in the flag rollout.
 
@@ -64,5 +59,5 @@ Once you customize it to your liking, click "Save as draft" and then "Launch" to
 ## Further reading
 
 - [The 80/20 of early-stage startup analytics](/blog/early-stage-analytics)
-- [How to build a site app](/tutorials/build-site-app)
 - [How we made something people want](/blog/making-something-people-want)
+- [How to write great product survey questions (with examples)](/blog/product-survey-questions)

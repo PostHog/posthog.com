@@ -175,7 +175,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Data Warehouse',
-                url: '/handbook/small-teams/dw',
+                url: '/handbook/small-teams/data-warehouse',
             },
             {
                 name: 'Feature Success',
@@ -196,6 +196,10 @@ export const handbookSidebar = [
             {
                 name: 'Product Analytics',
                 url: '/handbook/small-teams/product-analytics',
+            },
+            {
+                name: 'Web Analytics',
+                url: '/handbook/small-teams/web-analytics',
             },
             {
                 name: 'Resources',
@@ -498,7 +502,7 @@ export const handbookSidebar = [
         children: [
             {
                 name: 'Team',
-                url: '/handbook/small-teams/people',
+                url: '/handbook/small-teams/ops',
             },
             {
                 name: 'Finance',
@@ -683,16 +687,6 @@ export const handbookSidebar = [
             {
                 name: 'In-app prompts',
                 url: '/handbook/product/in-app-prompts',
-            },
-        ],
-    },
-    {
-        name: 'Web Analytics',
-        url: '',
-        children: [
-            {
-                name: 'Team',
-                url: '/handbook/small-teams/web-analytics',
             },
         ],
     },

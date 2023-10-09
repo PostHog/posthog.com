@@ -84,6 +84,8 @@ A beginner's guide to some of our custom Slack emojis and various anecdotes you'
 
 * When we hit 10,000 GitHub stars, [Ian](../community/profiles/269) read every username on a live stream that took over 6 hours.
 
+* We like to nail things. It's not uncommon to see a GitHub issue titled "Nail [feature name]". Sometimes we'll even assign an absurd version number like "3000". (The codename for the next generation UI of the PostHog app is referred to as PostHog 3000, and other projects have also adopted this naming convention as well.)
+
 ## And if you don't work here...
 
 [Apply for a job at PostHog](../careers)!
