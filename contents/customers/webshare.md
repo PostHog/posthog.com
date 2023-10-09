@@ -59,7 +59,7 @@ However, Webshare doesn’t just use PostHog to run experiments and track produc
 
 The team does, reluctantly, maintain a [Google Analytics](/blog/ga4-alternatives) account alongside PostHog, but it’s used only for tracking advertising performance. All other data can, and is, sent to PostHog so the team can track it there. 
 
-“That’s why PostHog is our favorite tool; it’s the single source of truth for us. We knew exactly what we wanted to do when we were coming from Mixpanel and Hotjar. We wanted to move away from all these separate tools, and put everything in one place. PostHog absolutely nails is.”
+“That’s why PostHog is our favorite tool; it’s the single source of truth for us. We knew exactly what we wanted to do when we were coming from Mixpanel and Hotjar. We wanted to move away from all these separate tools, and put everything in one place. PostHog absolutely nails it.”
 
 
 
