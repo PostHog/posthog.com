@@ -1,80 +1,131 @@
 ---
-title: How to set up surveys in React
-date: 2023-09-27
+title: How to set up surveys in Next.js
+date: 2023-10-09
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/surveys-hog.jpg
+featuredImage: ../images/tutorials/banners/surveys-next-js-hog.png
 tags: ['surveys']
 ---
 
-[Surveys](/docs/surveys) are a great tool to collect qualitative feedback from your users. This tutorial shows you how to implement a survey in a React app. 
+[Surveys](https://posthog.com/docs/surveys) are an excellent way to get feedback from your users. In this guide, we show you how to add a survey to your Next.js app.
 
-We'll create a basic React app, add PostHog, create a survey, and then add the code to show the survey in-app and collect responses.
+We'll create a basic Next.js app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.
 
-## Creating a React app
+> Already have a Next.js app? [Skip to adding PostHog and setting up the A/B test](#adding-posthog).
 
-First, create a React app using `create-react-app` and go into the newly created `react-survey` folder.
+## Creating a Next.js app
+
+First, make sure [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (14.6.0 or newer). Then create a Next.js app:
 
 ```bash
-npx create-react-app react-survey
-cd react-flags
+npx create-next-app@latest
 ```
 
-Next, replace the boilerplate code in `src/App.js` with the following:
+Name it whatever you like (we call ours `next-surveys`). Select **No** for TypeScript, **Yes** for `use app router`, **No** for Tailwind CSS and the defaults for every other option.
 
-```react
-// src/App.js
-import './App.css';
+Next, replace the boilerplate code in app/page.js with the following:
 
-function App() {
+```js
+// app/page.js
+'use client'
+
+import styles from './page.module.css'
+
+export default function Home() {
   return (
-    <div className="App">
-      <h1>This is our survey tutorial</h1>
-    </div>
-  );
+    <main className={styles.main}>
+      <div className="App">
+        <h1>This is our Next.js survey tutorial</h1>
+      </div>
+    </main>
+  )
 }
-
-export default App;
 ```
 
-Finally, run `npm start` and go to [http://localhost:3000/](http://localhost:3000/) to see our new homepage.
+Finally, run `npm run dev` and go to http://localhost:3000/ to see our new homepage.
 
-![Basic react app setup to show surveys](../images/tutorials/react-surveys/setup.png) 
+![Basic Next.js app](../images/tutorials/nextjs-surveys/basic-app.png)
 
 ## Adding PostHog
 
-PostHog will manage our survey and track our results. To use [PostHog's React SDK](/docs/libraries/react), install `posthog-js`:
+We'll use PostHog to control our survey and monitor results (if you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup)). 
+
+First set up PostHog for use on the [client-side](/docs/libraries/next-js#app-router) by installing the [JavaScript react SDK](/docs/libraries/react):
 
 ```bash
 npm install posthog-js
 ```
 
-Once installed, import PostHog into `src/index.js` and set up a client using a project API key and instance address from the [project settings](https://app.posthog.com/project/settings). Then, wrap the app with `PostHogProvider` to access PostHog in any component.
+Then integrate PostHog by creating a `providers.js` file in your app folder and exporting a `PHProvider` component:
 
-```react
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+```js-web
+// app/providers.js
+'use client'
+
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 
-posthog.init('<ph_project_api_key>', {
-  api_host: '<ph_instance_address>',
-})
+if (typeof window !== 'undefined') {
+  posthog.init("<ph_project_api_key>", {
+    api_host: "<ph_instance_address>", // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+    capture_pageview: false,
+  })
+}
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <PostHogProvider client={posthog}>
-      <App />
-    </PostHogProvider>
-  </React.StrictMode>
-);
+export function PHProvider({ children }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
 ```
 
-With PostHog set up, our React app is ready for the survey.
+Once created, you can import `PHProvider` into your `layout/js` file and wrap your app with it:
+
+```js-web
+// app/layout.js
+import './globals.css'
+import { PHProvider } from './providers'
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <PHProvider>
+        <body>{children}</body>
+      </PHProvider>
+    </html>
+  )
+}
+```
+
+To test everything has been set up correctly, you can use `useEffect` and the `usePostHog` hook to capture an event:
+
+```js-web
+'use client'
+
+import { usePostHog } from 'posthog-js/react'
+import { useEffect } from 'react'
+import styles from './page.module.css'
+
+export default function Home() {
+  const posthog = usePostHog()
+  useEffect(() => {
+    if (posthog) {
+      posthog.capture('successfully_setup');
+    }
+  }, [posthog])
+
+  return (
+    <main className={styles.main}>
+      <div className="App">
+        <h1>This is our Next.js survey tutorial</h1>
+      </div>
+    </main>
+  )
+}
+```
+
+After reloading `localhost:3000`, you should see events appear in your [PostHog events explorer](https://app.posthog.com/events).
+
+![Test events in the PostHog events explorer](../images/tutorials/nextjs-surveys/test-events.png)
 
 ## Creating a survey
 
@@ -87,12 +138,12 @@ This tutorial will cover how to implement both options:
 
 ## Option 1: Implement your own survey UI
 
-First, create a survey in PostHog by going to the [surveys tab](https://app.posthog.com/surveys) and clicking "New survey." Then, set up your survey with the following:
+First, create a survey in PostHog by going to the [surveys tab](https://app.posthog.com/surveys) and clicking "New survey." Then, set up your survey with the following settings:
 
-1. Add a name (like `my-first-survey`)
-2. Set the display mode to `API`
-3. Set the question type to `Rating`, question title to `How likely are you to recommend us to a friend?`, display type to `number` and scale to `1-10`.
-4. You can leave the remaining optional properties blank (such as `Targeting` or `Thank you message`).
+1. Add a name (like `my-first-survey`).
+2. Set the display mode to `API`.
+3. Select the `Rating` question type. Set the question title to `How likely are you to recommend us to a friend?`, display type to `number` and scale to `1-10`.
+4. Leave the remaining optional properties blank (such as `Targeting` or `Thank you message`).
 
 Click "Save as draft" and then on the next screen click "Launch". We're now ready to integrate this survey into our app.
 
@@ -100,20 +151,18 @@ Click "Save as draft" and then on the next screen click "Launch". We're now read
 
 ### Adding the survey code
 
-There are three parts to adding code for our custom survey:
+There are four parts to adding code for our custom survey:
 
 1. Create the survey UI.
-2. Add the logic for displaying it.
+2. Add the server-side logic for displaying it.
 3. Capture interactions from it.
 
 #### 1. Create the survey UI
 
-We've created an example survey UI for this tutorial. To use it, create a new file in `./src` folder called `Survey.js` and paste the following code:
+We've created a sample survey UI for this tutorial. To use it, create a new file in `./app` folder called `Survey.js` and paste the following code:
 
 ```react
-// src/Survey.js
-import React from 'react';
-
+// app/Survey.js
 function Survey({ title, onDismiss, onSubmit }) {
   const [selectedValue, setSelectedValue] = React.useState(null);
 
@@ -144,14 +193,14 @@ function Survey({ title, onDismiss, onSubmit }) {
 export default Survey;
 ```
 
-Then, add the following CSS styles to your `index.css` file:
+Then, add the following CSS styles to your `page.module.css` file:
 
 ```css
-.survey-popup {
+.survey {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 300px;
+  width: 400px;
   padding: 20px;
   background-color: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -161,45 +210,44 @@ Then, add the following CSS styles to your `index.css` file:
 
 .button {
   margin: 5px;
+  padding: 5px;
 }
 ```
 
-Finally, integrate the component into `App.js`:
+Finally, integrate the component into `page.js`:
 
 ```react
-// src/App.js
-import './App.css';
-import { useState } from 'react';
-import Survey from './Survey';
+import { useState } from 'react'
+import styles from './page.module.css'
 
-function App() {
-  const [showSurvey, setShowSurvey] = useState(true);
+function Survey({ title, onDismiss, onSubmit }) {
+  const [selectedValue, setSelectedValue] = useState(null);
 
-  const handleDismiss = () => {
-    setShowSurvey(false);
-    console.log("Survey dismissed!");
-  };
+  const handleSelect = (value) => {
+    setSelectedValue(value);
+  }
 
-  const handleSubmit = (value) => {
-    setShowSurvey(false);
-    console.log("User submitted:", value);
-  };
+  const handleSubmit = () => {
+    onSubmit(selectedValue);
+  }
 
   return (
-    <div className="App">
-      <h1>This is our survey tutorial</h1>
-      {showSurvey && (
-        <Survey
-          title="Rate our service"
-          onDismiss={handleDismiss}
-          onSubmit={handleSubmit}
-        />
-      )}
+    <div className={styles.survey}>
+      <h2>{title}</h2>
+      <div>
+        {[...Array(10)].map((_, i) => (
+          <button className={styles.button} key={i + 1} onClick={() => handleSelect(i + 1)}>{i + 1}</button>
+        ))}
+      </div>
+      <div>
+        <button className={styles.button} onClick={onDismiss}>Dismiss</button>
+        <button className={styles.button} onClick={handleSubmit}>Submit</button>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default Survey;
 ```
 
 This shows a survey popup every time you visit your app's homepage.
@@ -475,34 +523,6 @@ export default App;
 
 That's it! Our survey is ready to go!
 
-### Option 2: Use PostHog's prebuilt survey UI
 
-For a much faster set up, you can use PostHog's prebuilt surveys. There are variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and PostHog handles all the display logic and event capture for you.
- 
-To create a survey with a prebuilt UI, set the display mode to **`Popover`** when creating your survey:
-
-![Popover survey set up](../images/tutorials/react-surveys/create-popover-survey.png)
-
-Then, select the question type you want and configure the survey as you like. Click "Save as draft" and then "Launch".
-
-Your survey is now live and you should see it in your app. There are no further code changes needed!
-
-![Popover survey in app](../images/tutorials/react-surveys/popover-survey-in-app.png)
-
-## Viewing results
-
-After interacting with your survey, you can view results by selecting the survey from the [surveys tab](https://app.posthog.com/surveys). You'll see data on:
-
-- How many users have seen the survey.
-- How many users have dismissed the survey.
-- Responses.
-
-You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
-
-![Popover survey set up](../images/tutorials/react-surveys/survey-results.png)
 
 ## Further reading
-
-- [How to write great product survey questions (with examples)](/blog/product-survey-questions)
-- [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
-- [How to measure your NPS score in PostHog](/tutorials/nps-survey)
