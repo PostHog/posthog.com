@@ -133,7 +133,7 @@ Both PostHog and GrowthBook have the infrastructure to use flags and experiments
 </table>
 </div>
 
-## Feature flags
+### Feature flags
 
 Both PostHog and GrowthBook offer all the functionality you expect from feature flags. 
 
@@ -204,7 +204,7 @@ Both PostHog and GrowthBook offer all the functionality you expect from feature 
 
 - **[Bootstrapping](/docs/feature-flags/bootstrapping):** PostHog’s JavaScript web SDK enables you to pass flags directly from the backend before the app loads. This ensures they're available immediately and prevents flickering. GrowthBook instead recommends moving the A/B test or flag logic earlier in the page load (server-side) to prevent this.
 
-## Experimentation
+### Experimentation
 
 Experimentation is where PostHog and GrowthBook’s functionality diverges. Both enable you to create [A/B/n tests](/tutorials/abn-testing) with custom goals and calculate statistical significance, but:
 
@@ -364,7 +364,7 @@ PostHog provides all the visualizations and product tools for evaluating the suc
 </table>
 </div>
 
-## Pricing
+### Pricing
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
