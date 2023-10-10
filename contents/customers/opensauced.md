@@ -54,7 +54,7 @@ OpenSauced’s developer relations manager also uses PostHog to track website en
     size="md"
     name="Anna Debenham"
     title="Operating Partner, Boldstart"
-    quote={`“PostHog is ideal for startups. It is a really solid analytics tool, but features like feature flags and experiments become even more useful as the company grows. It saves founders like Brian time, as they have the right toolsfrom day one.”`}
+    quote={`“PostHog is ideal for startups. It is a really solid analytics tool, but features like feature flags and experiments become even more useful as the company grows. It saves founders like Brian time, as they have the right tools from day one.”`}
 />
 </BorderWrapper>
 
