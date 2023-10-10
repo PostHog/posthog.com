@@ -131,4 +131,4 @@ Since we handle a lot of data, at scale, this has meant performance has, well, u
 
 The most important thing is that you figure out if you value speed and autonomy over polish and control. Which path will help you achieve your company's mission better?
 
-Once you've done that, optimize how your company works around that, and accept - there are tradeoffs! Just make them consciously.
+Once you've done that, optimize how your company works around that, and accept – there are tradeoffs! Just make them consciously.
