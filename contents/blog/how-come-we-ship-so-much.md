@@ -19,16 +19,18 @@ Clearly there are exceptions, but we ship a _lot_ faster than the average compan
 
 Our first line of code was January 22nd, 2020, after a pivot during a YC batch. From zero on that day, we have built
 
-* [product analytics](../product-analytics)
-* [session replay](../session-replay)
-* [feature flags](../feature-flags)
-* [a/b testing](../ab-testing)
-* heatmaps
-* [SDKs](../docs/libraries) for all of the above
-* a basic [CDP](../cdp) to stream data to warehouses
-* [data warehouse](../docs/data-warehouse) MVP
-* a wildly extensive website
-* ... and those are things that have worked
+* [Product analytics](/product-analytics)
+* [Session replay](/session-replay)
+* [Feature flags](/feature-flags)
+* [A/B testing](/ab-testing)
+* [User surveys](/docs/surveys)
+* Heatmaps
+* [SDKs](/docs/libraries) for all of the above
+* A basic [CDP](/docs/cdp) to stream data to warehouses
+* [Data warehouse](/docs/data-warehouse) MVP
+* A wildly extensive website
+
+...and those are things that have worked.
 
 All of the above are being used a lot too - we're ingesting 10s of billions of events a month, have 10s of thousands of companies regularly using our service and over 100K user sign ups.
 
