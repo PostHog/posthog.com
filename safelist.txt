@@ -113,6 +113,10 @@ opacity-60
 opacity-75
 pb-48
 pb-72
+pl-[calc(1rem_+_0rem)]
+pl-[calc(1rem_+_1rem)]
+pl-[calc(1rem_+_2rem)]
+pl-[calc(1rem_+_3rem)]
 pr-32
 rotate-180
 rotate-45

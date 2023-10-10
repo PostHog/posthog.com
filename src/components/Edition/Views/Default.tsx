@@ -271,10 +271,10 @@ function PostsListing() {
         <div
             className={`
                 transition-all 
-                ${fullWidthContent ? 'ml-0 lg:ml-8 mr-8 xl:mr-16' : 'ml-0 lg:ml-8 mr-16'} 
+                ${fullWidthContent ? 'ml-0 mr-8 2xl:mr-16' : 'ml-0 mr-16'} 
                 ${
                     articleView
-                        ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] -ml-6 flex-shrink-0 border-r border-border dark:border-dark border-l'
+                        ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] -ml-6 flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
                         : 'flex-grow'
                 }
                 ${fullWidthContent && articleView ? '' : ''}
@@ -338,7 +338,7 @@ export default function Default({ children }) {
             <section className="md:flex my-4 md:my-0 items-start">
                 {!articleView && (
                     <div
-                        className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-full h-screen md:w-[14rem] lg:w-[18rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative pr-4 border-r border-border dark:border-border-dark ${
+                        className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-full h-screen md:w-[14rem] lg:w-[18rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative pr-4 2xl:border-r border-border dark:border-border-dark ${
                             fullWidthContent ? 'pl-2' : 'pl-4'
                         }`}
                     >
@@ -349,13 +349,9 @@ export default function Default({ children }) {
                 )}
                 <PostsListing />
                 <div
-                    className={`${
-                        articleView ? 'flex-grow pt-8' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'
-                    }`}
+                    className={`${articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'}`}
                 >
-                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-4xl px-0'}`}>
-                        {children}
-                    </div>
+                    <div className={`transition-all`}>{children}</div>
                     {articleView && (
                         <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
                             <QuestionForm

@@ -17,6 +17,7 @@ import MobileSidebar from 'components/Docs/MobileSidebar'
 import { useLayoutData } from 'components/Layout/hooks'
 import { PostContext } from 'components/Edition/Posts'
 import Title from 'components/Edition/Title'
+import Upvote from 'components/Edition/Upvote'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -25,7 +26,6 @@ export const Intro = ({
     featuredVideo,
     title,
     featuredImageType,
-    contributors,
     titlePosition = 'bottom',
     date,
     tags,
@@ -69,8 +69,16 @@ export const Intro = ({
                 </>
             )}
             {(featuredVideo || featuredImageType !== 'full') && <Title>{title}</Title>}
+        </div>
+    )
+}
+
+export const Contributors = ({ contributors }) => {
+    return (
+        <>
+            <div className="text-sm opacity-50 px-4 mb-2">Posted by</div>
             {contributors?.[0] && (
-                <div className={`my-3`}>
+                <div className={`mb-4 flex flex-col gap-4`}>
                     {contributors.map(({ profile_id, image, name }) => (
                         <Contributor
                             url={profile_id && `/community/profiles/${profile_id}`}
@@ -82,11 +90,11 @@ export const Intro = ({
                     ))}
                 </div>
             )}
-        </div>
+        </>
     )
 }
 
-export default function BlogPost({ data, pageContext, location }) {
+export default function BlogPost({ data, pageContext, location, mobile = false }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
     const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
@@ -128,22 +136,33 @@ export default function BlogPost({ data, pageContext, location }) {
                         : featuredImage?.publicURL
                 }
             />
-            <Intro
-                title={title}
-                featuredImage={featuredImage}
-                featuredVideo={featuredVideo}
-                featuredImageType={featuredImageType}
-                contributors={contributors}
-                date={date}
-                tags={tags}
-            />
+
             <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
-                <div className={`article-content flex-1 transition-all`}>
-                    <MDXProvider components={components}>
-                        <MDXRenderer>{body}</MDXRenderer>
-                    </MDXProvider>
+                <div className={`article-content flex-1 transition-all pt-8 w-full`}>
+                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-2xl px-0'}`}>
+                        <Intro
+                            title={title}
+                            featuredImage={featuredImage}
+                            featuredVideo={featuredVideo}
+                            featuredImageType={featuredImageType}
+                            contributors={contributors}
+                            date={date}
+                            tags={tags}
+                        />
+                        <MDXProvider components={components}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
                 </div>
-                <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
+                <aside
+                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-border-dark pt-4 ${
+                        mobile ? 'lg:hidden' : ''
+                    } `}
+                >
+                    <Upvote />
+                    <Contributors contributors={contributors} />
+                    <MobileSidebar tableOfContents={tableOfContents} mobile={false} contributors={contributors} />
+                </aside>
             </div>
         </article>
     )
