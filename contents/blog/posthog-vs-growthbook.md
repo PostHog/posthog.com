@@ -13,13 +13,13 @@ tags:
  - Guides
 ---
 
-PostHog and GrowthBook share a lot of similarities. Both provide open source, self-serve feature flags and experimentation. Beyond this, there are big differences:
+PostHog and GrowthBook both provide open source, self-serve feature flags and experimentation, but they're different in two important ways:
 
 - GrowthBook is a warehouse-native feature flag and experiments platform. It focuses on integrating with the product and data tools you already use.
 
 - PostHog is an all-in-one product and data platform. Beyond [feature flags](/docs/feature-flags) and [experiments](/docs/experiments), it includes [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [surveys](/docs/surveys), [CDP](/docs/cdp), and more.
 
-This post goes over their differences, platforms, features, pricing, reporting, integrations, and frequently asked questions.
+In this post we'll cover these differences in more detail, and answer frequently asked questions about both tools.
 
 ## How is PostHog different?
 
@@ -29,7 +29,7 @@ PostHog brings together all the tools engineers need for testing, releasing, and
 
 ![PostHog homepage features](../images/blog/posthog-vs-growthbook/build.png)
 
-PostHog combines usage, performance, and behavioral data with flags and experiments. PostHog’s [data warehouse](/docs/data-warehouse) also enables you to pull in data from external sources (like GrowthBook is reliant on).
+PostHog combines usage, performance, and behavioral data with flags and experiments. PostHog’s [data warehouse](/docs/data-warehouse) also enables you to pull in data from external sources.
 
 Having all these product and data tools together enables you to do better analysis of shipped features and make better decisions about what you are building next. 
 
@@ -56,7 +56,7 @@ PostHog needs none of this. You use the same app and SDKs for managing and evalu
 
 ### Platform
 
-Both PostHog and GrowthBook have the infrastructure to use flags and experiments effectively with your current app. PostHog has a wider range of product and data tools built in, while GrowthBook relies on integrations with 3rd parties.
+Both PostHog and GrowthBook have the infrastructure to use flags and experiments effectively with your current app. PostHog has a wider range of product and data tools built in, while GrowthBook relies on third-party integrations
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -200,17 +200,17 @@ Both PostHog and GrowthBook offer all the functionality you expect from feature 
 </table>
 </div>
 
-- **Targeting:** GrowthBooks custom targeting with attributes needs to be set every session and defined in-app before use. It is also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/user-properties)) on users. You don’t need to pre-defined them and unlimited custom values are free.
+- **Targeting:** GrowthBooks custom targeting with attributes needs to be set every session and defined in-app before use. It's also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/user-properties)) on users. You don’t need to pre-define them and unlimited custom values are free.
 
-- **[Bootstrapping](/docs/feature-flags/bootstrapping):** PostHog’s JavaScript web SDK enables you to pass flags directly from the backend before the app loads. This makes sure they are available right away and prevents flickering. GrowthBook instead recommends moving the A/B test or flag logic earlier in the page load (server-side) to prevent this.
+- **[Bootstrapping](/docs/feature-flags/bootstrapping):** PostHog’s JavaScript web SDK enables you to pass flags directly from the backend before the app loads. This ensures they're available immediately and prevents flickering. GrowthBook instead recommends moving the A/B test or flag logic earlier in the page load (server-side) to prevent this.
 
 ## Experimentation
 
-Experimentation is where PostHog and GrowthBook’s functionality diverges. Both enable you to create [A/B/n tests](/tutorials/abn-testing) with custom goals and calculate statistical significance. The big difference between them is:
+Experimentation is where PostHog and GrowthBook’s functionality diverges. Both enable you to create [A/B/n tests](/tutorials/abn-testing) with custom goals and calculate statistical significance, but:
 
-- GrowthBook’s A/B testing provides more potential statistical depth. It offers both Bayesian and Frequentist engines, value capping, regression adjustment, and testing corrections. These do require statistics knowledge to take advantage of.
+- GrowthBook’s A/B testing provides more potential statistical depth, such as Bayesian and Frequentist engines, value capping, regression adjustment, and testing corrections. These do require statistics expertise to use reliably, though.
 
-- PostHog provides a simpler interface and no need to write SQL or connect to external services.
+- PostHog provides a simpler interface and no need to write SQL, or connect to external services – a better experience for users without a background in data science.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
