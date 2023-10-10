@@ -48,7 +48,7 @@ Before you start making changes, think hard about what your product should be op
 
 For example, if you are shipping the latest iPhone, complete design control is _more_ important to your users than having all the features. Likewise, if you are building software and are building a tiny product that has better UX than an incumbent, design and control matters.
 
-I _suspect_ that you could still get higher quality with more autonomy - my approach would probably be having lots of designers and engineers collaborating with relatively few product managers, but I cannot speak to the above as well since my experience is building a multi product platform.
+I _suspect_ that you could still get higher quality with more autonomy – I'd probably have lots of designers and engineers collaborating with relatively few product managers, but I can't speak to the above as confidently since my experience is building a multi-product platform.
 
 ## No product management by default
 
