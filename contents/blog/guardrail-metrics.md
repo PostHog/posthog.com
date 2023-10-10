@@ -33,8 +33,11 @@ Guardrail metrics enable you to protect your overall experience and key metrics 
 As a developer, using guardrail metrics provides benefits like:
 
 - More confidence A/B tests aren’t causing problems. You spend less time checking for the negative impact of an experiment.
+
 - A more accurate source of issues than bug reports or general metrics. Developers don’t need to guess if an A/B test is causing an issue, guardrail metrics can tell them.
+
 - More confidence in the results of the experiment knowing it doesn’t have broader negative effects.
+
 - Promoting a culture of experimentation knowing A/B tests are safer to do. Creates trust between teams knowing other teams’ A/B tests won’t affect them.
 
 ### Why Airbnb uses guardrail metrics
@@ -64,8 +67,11 @@ It is important to have a mix of metrics from each category to ensure a broad en
 For more insight into what specific metrics you should try, you can look at what other companies use as guardrail metrics. 
 
 - Airbnb: revenue, bounce rate, page load speed, seats booked for experiences.
+
 - [Square](https://developer.squareup.com/blog/lessons-learned-from-running-web-experiments/): bottom of funnel conversion, page load speed
+
 - [Bing](https://exp-platform.com/Documents/2017-08%20KDDMetricInterpretationPitfalls.pdf): page load time, page returns
+
 - [Netflix](https://www.adventuresinwhy.com/pdf/beyond_ab_testing.pdf): sample mismatch ratio, engagement, retention, conversion.
 
 Other potential guardrail metrics include clickthrough rate, active users, customer lifetime value, and pageviews. 
@@ -77,9 +83,13 @@ Other potential guardrail metrics include clickthrough rate, active users, custo
 Now that you know all about guardrail metrics, it’s time to implement them in your A/B tests. 
 
 1. Create an experiment in PostHog.
+
 2. Fill out the key name, variants, goal metric, and any other details. Adding details about the guardrail metrics to the description is useful.
+
 3. Under "secondary metrics," click "Add metric," and set up the trend or funnel you want as a guardrail. 
+
 4. Click "Save," implement the experiment in your app, and press "Launch."
+
 5. Guardrail metrics display alongside your goal metrics on the experiment detail screen.
 
 Another way to track guardrail metrics is by creating them as an insight or dashboard. This enables you to completely customize your guardrail metrics as well as reuse them across experiments. You can then send them to your email or Slack with a [subscription](/docs/product-analytics/subscriptions). 
