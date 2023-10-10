@@ -17,7 +17,7 @@ tags:
 
 Clearly there are exceptions, but we ship a _lot_ faster than the average company.
 
-Our first line of code was January 22nd, 2020, after a pivot during a YC batch. From zero on that day, we have built
+Our first line of code was January 22nd, 2020, after a pivot during a YC batch. Since then we've shipped:
 
 * [Product analytics](/product-analytics)
 * [Session replay](/session-replay)
