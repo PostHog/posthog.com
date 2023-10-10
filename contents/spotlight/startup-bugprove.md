@@ -33,7 +33,7 @@ However, this long tail could make YouTube a poor fit for other types of product
 
 > **Putting it into practice:** Use a tool such as PostHog to track where users are coming from (often [using UTMs](/tutorials/performance-marketing)) and think about what behavior you want to encourage. Then you can experiment with different channels and get a clear read on how each one performs.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zs86OYea8Wk?si=jxjFSBG0WjIJVEV9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/zs86OYea8Wk?si=jxjFSBG0WjIJVEV9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### 2. Make room for authentic engagements
 
