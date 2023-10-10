@@ -52,15 +52,18 @@ I _suspect_ that you could still get higher quality with more autonomy – I'd p
 
 ## No product management by default
 
-The responsibilities of a product manager still exist, but our engineers (the concept internally is a "[product engineer](what-is-a-product-engineer)"):
+The responsibilities of a product manager still exist, but our engineers:
 
-* decide what to build within their product (and they often suggest new products - but the decision on this is made by my cofounder and me)
-* talk to users
-* have complete access to metrics (especially for their own product - ie revenue, hosting cost, staff cost)
+* Talk to users.
+* Decide what to build within their product (and sometimes pitch whole new products).
+* Have complete access to metrics like revenue, hosting costs, and (soon) staff costs, for their product.
 
-We have one product manager who happily steps in reactively if a small team needs more support.
+The concept internally is a "[product engineer](/blog/what-is-a-product-engineer)" – i.e. an engineer who is product-minded and autonomous, rather than filing tickets mindlessly.
 
-The above _requires_ a lot of context setting from the company. We are _particularly transparent_ - sharing board slides, financial information, fundraising progress before, during and after it happens, and much more. See our public handbook for a lot of this stuff.
+We have one product manager who steps in reactively if a small team needs more support.
+
+The above _requires_ a lot of context setting from the company. We are _unusually transparent_ – we share board slides, financial information, fundraising progress before, during and after it happens, and much more. 
+
 
 ## No design by default
 
