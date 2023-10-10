@@ -18,6 +18,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import { PostContext } from 'components/Edition/Posts'
 import Title from 'components/Edition/Title'
 import Upvote from 'components/Edition/Upvote'
+import LikeButton from 'components/Edition/LikeButton'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -31,44 +32,20 @@ export const Intro = ({
     tags,
     imageURL,
 }) => {
+    const { postID } = useContext(PostContext)
+
     return (
-        <div className="lg:mb-7 mb-4 overflow-hidden">
+        <div className="">
+            <div>
+                <Title className="text-primary dark:text-primary-dark">{title}</Title>
+                <p className="!m-0 opacity-70">{date}</p>
+                {postID && <LikeButton className="mt-2 mb-4" postID={postID} />}
+            </div>
+
             {featuredVideo && <iframe src={featuredVideo} />}
             {!featuredVideo && featuredImage && (
-                <div className="relative flex flex-col">
-                    <GatsbyImage
-                        className={`rounded-sm z-0 relative ${
-                            featuredImageType === 'full'
-                                ? `before:h-3/4 before:left-0 before:right-0 ${
-                                      titlePosition === 'bottom' ? 'before:bottom-0' : 'before:top-0'
-                                  } before:z-[1] before:absolute ${
-                                      titlePosition === 'bottom' ? 'before:bg-gradient-to-t' : 'before:bg-gradient-to-b'
-                                  } before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] lg:before:block before:hidden`
-                                : ''
-                        }`}
-                        image={getImage(featuredImage)}
-                    />
-                    {featuredImageType === 'full' && (
-                        <>
-                            <div
-                                className={`lg:absolute flex flex-col lg:px-8 lg:py-4 ${
-                                    titlePosition === 'bottom' ? 'bottom-0' : 'top-0'
-                                }`}
-                            >
-                                <p className="m-0 opacity-70 order-last lg:order-first lg:text-white">{date}</p>
-                                <Title className="lg:text-white text-primary dark:text-white">{title}</Title>
-                            </div>
-                        </>
-                    )}
-                </div>
+                <GatsbyImage className={`rounded-sm z-0}`} image={getImage(featuredImage)} />
             )}
-            {!featuredVideo && !featuredImage && (
-                <>
-                    <Title className="text-primary dark:text-primary-dark">{title}</Title>
-                    <p className="m-0 ml-10 opacity-70 order-last">{date}</p>
-                </>
-            )}
-            {(featuredVideo || featuredImageType !== 'full') && <Title>{title}</Title>}
         </div>
     )
 }

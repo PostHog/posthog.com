@@ -125,29 +125,15 @@ const Post = ({
                         <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>
                     )}
                     <div
-                        className={` items-baseline ${active ? 'flex flex-col gap-1' : ''} ${
-                            articleView ? 'flex flex-col gap-1' : 'inline'
+                        className={`items-baseline ${active ? 'flex  gap-1' : ''} ${
+                            articleView ? 'flex gap-4' : 'inline'
                         }`}
                     >
-                        <span className="mr-1">{title}</span>
-                        <span className={`${articleView ? 'inline-flex gap-1' : 'inline-flex gap-1'}`}>
-                            {authors?.data?.length > 0 && (
-                                <span
-                                    className={`font-medium leading-none opacity-60 hidden sm:inline overflow-hidden text-ellipsis whitespace-nowrap ${
-                                        articleView ? 'text-sm' : 'text-[.933rem]'
-                                    }`}
-                                >
-                                    {authors?.data
-                                        .map(({ id, attributes: { firstName, lastName } }) => {
-                                            const name = [firstName, lastName].filter(Boolean).join(' ')
-                                            return name
-                                        })
-                                        .join(', ')}
-                                </span>
-                            )}
+                        <span className="mr-1 flex-1">{title}</span>
+                        <span className={`${articleView ? 'text-right flex-0 basis-22' : 'inline-flex gap-1'}`}>
                             <span
                                 className={`font-medium leading-none opacity-60 ${
-                                    articleView ? 'text-sm' : 'text-[.933rem]'
+                                    articleView ? 'text-[.813rem]' : 'text-[.933rem]'
                                 }`}
                             >
                                 {day.isToday() ? 'Today' : day.fromNow()}

@@ -182,6 +182,13 @@ h4 {
     blockquote {
         letter-spacing: initial;
 
+        h2,
+        h3,
+        h4,
+        h5 {
+            @apply mt-0 mb-0.5;
+        }
+
         code {
             @apply bg-gray-accent dark:bg-gray-accent-dark;
         }
