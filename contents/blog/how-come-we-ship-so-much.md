@@ -34,7 +34,7 @@ Our first line of code was January 22nd, 2020, after a pivot during a YC batch. 
 
 All of the above are being used a lot too – we're ingesting 10s of billions of events a month, have 10s of thousands of companies regularly using our service and over 100K user sign ups.
 
-One of the most common questions I get asked is how do we manage to build so much so quickly.
+One of the most common questions I get asked is how do we manage to build so much, so quickly.
 
 ## We designed the company around speed
 
