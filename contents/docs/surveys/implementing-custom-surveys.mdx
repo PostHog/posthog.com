@@ -59,7 +59,7 @@ posthog.getActiveMatchingSurveys((surveys) => {
 })
 ```
 
-> **Important:** `posthog.getActiveMatchingSurveys()` will always return an active survey if a user meets the targeting conditions, even if a user has already seen, dismissed or responded to a survey.
+> **Important:** `posthog.getActiveMatchingSurveys()` will always return an active survey if the user meets the targeting conditions, even if they have already seen, dismissed or responded to the survey.
 
 > **Note:** If you're using a URL or selector targeting options, you'll need to poll `posthog.getActiveMatchingSurveys()` to get the most updated results.
 
