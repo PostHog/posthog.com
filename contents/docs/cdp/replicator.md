@@ -6,8 +6,6 @@ tags:
     - replicator
 ---
 
-import MigratingEvents from "../migrate/snippets/migrating-events.mdx"
-
 > This app is currently unavailable while we develop [a new export system](https://github.com/PostHog/posthog/issues/15997). It will be back again soon!
 
 The Replicator app copies events from one PostHog instance to another, at the moment they are ingested. No changes are made to the events by this app if it runs in isolation.
@@ -23,8 +21,6 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 Both versions of PostHog should ideally be running the same version.
 
 ## Using the Replicator app
-
-<MigratingEvents/>
 
 1. Log in to your PostHog instance
 2. Click 'Apps' on the left-hand tool bar
