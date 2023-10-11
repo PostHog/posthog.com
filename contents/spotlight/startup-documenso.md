@@ -1,6 +1,6 @@
 ---
 title: "How Documenso got 4,000 stars and grew an active GitHub community"
-date: 2023-09-12
+date: 2023-10-11
 author: ["joe-martin"]
 showTitle: true
 rootpage: /blog
