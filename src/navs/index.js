@@ -1637,7 +1637,8 @@ export const docsMenu = {
                                                 },
                                                 {
                                                     name: 'Debug hanging / freezing process',
-                                                    url: '/docs/runbook/services/clickhouse/debug-hanging-freezing-process',
+                                                    url:
+                                                        '/docs/runbook/services/clickhouse/debug-hanging-freezing-process',
                                                 },
                                                 {
                                                     name: 'Horizontal scaling (Sharding & replication)',
@@ -2326,6 +2327,12 @@ export const docsMenu = {
                     url: '/docs/surveys/viewing-results',
                     icon: 'Graph',
                     color: 'purple',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/surveys/troubleshooting',
+                    icon: 'Question',
+                    color: 'seagreen',
                 },
             ],
         },
