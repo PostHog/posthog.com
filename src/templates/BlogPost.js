@@ -134,7 +134,9 @@ export default function BlogPost({ data, pageContext, location }) {
             <div className="@container">
                 <div className="flex flex-col-reverse items-start @2xl:flex-row gap-8 2xl:gap-12">
                     <div
-                        className={`article-content flex-1 transition-all ${fullWidthContent ? 'w-full' : 'max-w-2xl'}`}
+                        className={`article-content flex-1 transition-all w-full ${
+                            fullWidthContent ? 'md:w-full' : 'md:max-w-2xl'
+                        }`}
                     >
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
