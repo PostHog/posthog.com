@@ -454,6 +454,7 @@ The `/decide` endpoint can be disabled by setting `advanced_disable_decide = tru
 -   **Session recording**. The endpoint contains information on where to send relevant session recording events.
 -   **Compression**. The endpoint contains information on what compression methods are supported on the backend (e.g. LZ64, gzip) for event payloads.
 -   **Feature flags**. The endpoint contains the feature flags enabled for the current person.
+-   **Surveys**. The endpoint contains information on whether surveys should be enabled or not.
 -   **Toolbar**. The endpoint contains authentication information and other toolbar capabilities information required to run it.
 
 Any custom event capturing (`posthog.capture`), `$identify`, `$set`, `$set_once` and basically any other calls not detailed above will work as expected when `/decide` is disabled.

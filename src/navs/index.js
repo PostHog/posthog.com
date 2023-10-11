@@ -2327,6 +2327,12 @@ export const docsMenu = {
                     icon: 'Graph',
                     color: 'purple',
                 },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/surveys/troubleshooting',
+                    icon: 'Question',
+                    color: 'seagreen',
+                },
             ],
         },
         {
