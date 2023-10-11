@@ -30,7 +30,9 @@ export default function FeaturedPost({ title, date, authors, featuredImage, slug
             ) : (
                 <>
                     <div className="w-full aspect-video rounded-md overflow-hidden">
-                        <img className="w-full h-full object-cover" src={imageURL} />
+                        <Link to={slug}>
+                            <img className="w-full h-full object-cover" src={imageURL} />
+                        </Link>
                     </div>
                     <div>
                         <p className="m-0 text-[15px] opacity-75">{postDate}</p>

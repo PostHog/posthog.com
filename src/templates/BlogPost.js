@@ -17,6 +17,8 @@ import MobileSidebar from 'components/Docs/MobileSidebar'
 import { useLayoutData } from 'components/Layout/hooks'
 import { PostContext } from 'components/Edition/Posts'
 import Title from 'components/Edition/Title'
+import Upvote from 'components/Edition/Upvote'
+import LikeButton from 'components/Edition/LikeButton'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -25,52 +27,35 @@ export const Intro = ({
     featuredVideo,
     title,
     featuredImageType,
-    contributors,
     titlePosition = 'bottom',
     date,
     tags,
     imageURL,
 }) => {
+    const { postID } = useContext(PostContext)
+
     return (
-        <div className="lg:mb-7 mb-4 overflow-hidden">
+        <div className="">
+            <div>
+                <Title className="text-primary dark:text-primary-dark">{title}</Title>
+                <p className="!m-0 opacity-70">{date}</p>
+                {postID && <LikeButton className="mt-2 mb-4" postID={postID} />}
+            </div>
+
             {featuredVideo && <iframe src={featuredVideo} />}
             {!featuredVideo && featuredImage && (
-                <div className="relative flex flex-col">
-                    <GatsbyImage
-                        className={`rounded-sm z-0 relative ${
-                            featuredImageType === 'full'
-                                ? `before:h-3/4 before:left-0 before:right-0 ${
-                                      titlePosition === 'bottom' ? 'before:bottom-0' : 'before:top-0'
-                                  } before:z-[1] before:absolute ${
-                                      titlePosition === 'bottom' ? 'before:bg-gradient-to-t' : 'before:bg-gradient-to-b'
-                                  } before:from-black/75 [text-shadow:0_2px_10px_rgba(0,0,0,0.4)] lg:before:block before:hidden`
-                                : ''
-                        }`}
-                        image={getImage(featuredImage)}
-                    />
-                    {featuredImageType === 'full' && (
-                        <>
-                            <div
-                                className={`lg:absolute flex flex-col lg:px-8 lg:py-4 ${
-                                    titlePosition === 'bottom' ? 'bottom-0' : 'top-0'
-                                }`}
-                            >
-                                <p className="m-0 opacity-70 order-last lg:order-first lg:text-white">{date}</p>
-                                <Title className="lg:text-white text-primary dark:text-white">{title}</Title>
-                            </div>
-                        </>
-                    )}
-                </div>
+                <GatsbyImage className={`rounded-sm z-0}`} image={getImage(featuredImage)} />
             )}
-            {!featuredVideo && !featuredImage && (
-                <>
-                    <Title className="text-primary dark:text-primary-dark">{title}</Title>
-                    <p className="m-0 ml-10 opacity-70 order-last">{date}</p>
-                </>
-            )}
-            {(featuredVideo || featuredImageType !== 'full') && <Title>{title}</Title>}
+        </div>
+    )
+}
+
+export const Contributors = ({ contributors }) => {
+    return (
+        <>
+            <div className="text-sm opacity-50 px-4 mb-2">Posted by</div>
             {contributors?.[0] && (
-                <div className={`my-3`}>
+                <div className={`mb-4 flex flex-col gap-4`}>
                     {contributors.map(({ profile_id, image, name }) => (
                         <Contributor
                             url={profile_id && `/community/profiles/${profile_id}`}
@@ -82,11 +67,11 @@ export const Intro = ({
                     ))}
                 </div>
             )}
-        </div>
+        </>
     )
 }
 
-export default function BlogPost({ data, pageContext, location }) {
+export default function BlogPost({ data, pageContext, location, mobile = false }) {
     const { postData } = data
     const { body, excerpt, fields } = postData
     const { date, title, featuredImage, featuredVideo, featuredImageType, contributors, description, tags, category } =
@@ -128,22 +113,33 @@ export default function BlogPost({ data, pageContext, location }) {
                         : featuredImage?.publicURL
                 }
             />
-            <Intro
-                title={title}
-                featuredImage={featuredImage}
-                featuredVideo={featuredVideo}
-                featuredImageType={featuredImageType}
-                contributors={contributors}
-                date={date}
-                tags={tags}
-            />
+
             <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
-                <div className={`article-content flex-1 transition-all`}>
-                    <MDXProvider components={components}>
-                        <MDXRenderer>{body}</MDXRenderer>
-                    </MDXProvider>
+                <div className={`article-content flex-1 transition-all pt-8 w-full`}>
+                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-2xl px-0'}`}>
+                        <Intro
+                            title={title}
+                            featuredImage={featuredImage}
+                            featuredVideo={featuredVideo}
+                            featuredImageType={featuredImageType}
+                            contributors={contributors}
+                            date={date}
+                            tags={tags}
+                        />
+                        <MDXProvider components={components}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
                 </div>
-                <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
+                <aside
+                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-border-dark pt-4 ${
+                        mobile ? 'lg:hidden' : ''
+                    } `}
+                >
+                    <Upvote />
+                    <Contributors contributors={contributors} />
+                    <MobileSidebar tableOfContents={tableOfContents} mobile={false} contributors={contributors} />
+                </aside>
             </div>
         </article>
     )

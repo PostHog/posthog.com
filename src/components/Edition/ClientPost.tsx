@@ -89,7 +89,7 @@ export default function ClientPost({
             )}
             <div className={`flex flex-col py-4`}>
                 <Title>{title}</Title>
-                <p className="md:-mt-3 ml-10 mb-0">
+                <p className="">
                     <span className="opacity-70">{dayjs(date || publishedAt).format('MMM DD, YYYY')}</span>
 
                     {isModerator && (

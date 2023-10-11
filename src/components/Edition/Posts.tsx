@@ -43,7 +43,7 @@ const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>
                             className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
                         >
                             <span className="flex justify-between items-center">
-                                <span className="text-base line-clamp-2 text-ellipsis ">{subject}</span>
+                                <span className="text-[15px] line-clamp-2 text-ellipsis leading-tight">{subject}</span>
                                 <span className="flex-shrink-0 text-black dark:text-white text-xs flex space-x-1 items-center opacity-70">
                                     <span className="w-4">
                                         <Chat />
@@ -157,8 +157,8 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
             }}
         >
             <div
-                className={`px-4 md:px-5 md:mt-0 mb-12 md:mb-0 mx-auto transition-all ${
-                    fullWidthContent ? 'max-w-full -ml-5' : 'max-w-screen-3xl box-content'
+                className={`px-4 md:px-0 2xl:px-5 md:mt-0 mb-12 md:mb-0 mx-auto transition-all ${
+                    fullWidthContent ? 'max-w-full -mx-5' : 'max-w-screen-3xl box-content'
                 }`}
             >
                 {prev ? (

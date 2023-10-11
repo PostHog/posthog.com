@@ -125,29 +125,15 @@ const Post = ({
                         <p className="m-0 text-sm font-medium opacity-60 flex-shrink-0">{category}</p>
                     )}
                     <div
-                        className={` items-baseline ${active ? 'flex flex-col gap-1' : ''} ${
-                            articleView ? 'flex flex-col gap-1' : 'inline'
+                        className={`items-baseline ${active ? 'flex  gap-1' : ''} ${
+                            articleView ? 'flex gap-4' : 'inline'
                         }`}
                     >
-                        <span className="mr-1">{title}</span>
-                        <span className={`${articleView ? 'inline-flex gap-1' : 'inline-flex gap-1'}`}>
-                            {authors?.data?.length > 0 && (
-                                <span
-                                    className={`font-medium leading-none opacity-60 hidden sm:inline overflow-hidden text-ellipsis whitespace-nowrap ${
-                                        articleView ? 'text-sm' : 'text-[.933rem]'
-                                    }`}
-                                >
-                                    {authors?.data
-                                        .map(({ id, attributes: { firstName, lastName } }) => {
-                                            const name = [firstName, lastName].filter(Boolean).join(' ')
-                                            return name
-                                        })
-                                        .join(', ')}
-                                </span>
-                            )}
+                        <span className="mr-1 flex-1">{title}</span>
+                        <span className={`${articleView ? 'text-right flex-0 basis-22' : 'inline-flex gap-1'}`}>
                             <span
                                 className={`font-medium leading-none opacity-60 ${
-                                    articleView ? 'text-sm' : 'text-[.933rem]'
+                                    articleView ? 'text-[.813rem]' : 'text-[.933rem]'
                                 }`}
                             >
                                 {day.isToday() ? 'Today' : day.fromNow()}
@@ -271,10 +257,10 @@ function PostsListing() {
         <div
             className={`
                 transition-all 
-                ${fullWidthContent ? 'ml-0 mr-8 xl:mr-16' : 'ml-0 lg:ml-8 mr-16'} 
+                ${fullWidthContent ? 'ml-0 mr-8 2xl:mr-16' : 'ml-0 mr-16'} 
                 ${
                     articleView
-                        ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] -ml-6 flex-shrink-0 border-r border-border dark:border-dark border-l'
+                        ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] -ml-6 flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
                         : 'flex-grow'
                 }
                 ${fullWidthContent && articleView ? '' : ''}
@@ -293,9 +279,11 @@ function PostsListing() {
                         : ''
                 }
             >
+                {!articleView && <h2 className="pt-4 text-xl mb-2">All posts</h2>}
+
                 <ul
                     className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
-                        articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto' : ''
+                        articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
                     }`}
                 >
                     {posts.map(({ id, attributes }, index) => {
@@ -336,9 +324,10 @@ export default function Default({ children }) {
             <section className="md:flex my-4 md:my-0 items-start">
                 {!articleView && (
                     <div
-                        className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-52 flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative`}
+                        className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-full h-screen md:w-[14rem] lg:w-[18rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative pr-4 2xl:border-r border-border dark:border-border-dark ${
+                            fullWidthContent ? 'pl-2' : 'pl-4'
+                        }`}
                     >
-                        <CommunityBar />
                         <div className="max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 mt-[-2px]">
                             <TableOfContents />
                         </div>
@@ -346,15 +335,11 @@ export default function Default({ children }) {
                 )}
                 <PostsListing />
                 <div
-                    className={`${
-                        articleView ? 'flex-grow pt-8' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'
-                    }`}
+                    className={`${articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'}`}
                 >
-                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-4xl px-0'}`}>
-                        {children}
-                    </div>
+                    <div className={`transition-all`}>{children}</div>
                     {articleView && (
-                        <div className="mt-12 max-w-2xl">
+                        <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
                             <QuestionForm
                                 disclaimer={false}
                                 subject={false}
