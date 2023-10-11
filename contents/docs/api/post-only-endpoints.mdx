@@ -49,7 +49,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     }
     # ...
   ]
-}' https://app.posthog.com/capture/ 
+}' https://app.posthog.com/batch/ 
 ```
 
 ### Alias
@@ -114,9 +114,10 @@ Updates user information. Read more in our [identify docs](/docs/product-analyti
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",
   "timestamp": "2020-08-16 09:03:11.913767",
-  "context": {},
+  "properties": {
+    "$set": {},
+  },
   "distinct_id": "1234",
-  "$set": {},
   "event": "$identify"
 }' https://app.posthog.com/capture/
 ```
@@ -126,7 +127,9 @@ curl -v -L --header "Content-Type: application/json" -d '{
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",
-  "properties": {},
+  "properties": {
+    "title": "TheTitle"
+  },
   "timestamp": "2020-08-16T09:03:11.913767",
   "distinct_id": "1234",
   "event": "$pageview"
@@ -138,7 +141,9 @@ curl -v -L --header "Content-Type: application/json" -d '{
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",
-  "properties": {},
+  "properties": {
+    "$screen_name": "TheScreen"
+  },
   "timestamp": "2020-08-16T09:03:11.913767",
   "distinct_id": "1234",
   "event": "$screen"
