@@ -352,6 +352,7 @@
         { "source": "/ebenezer", "destination": "/?utm_campaign=ebenezer" },
         { "source": "/codu", "destination": "/?utm_campaign=codu" },
         { "source": "/peterelbaum", "destination": "/?utm_campaign=peterelbaum" },
+        { "source": "/theo", "destination": "/?utm_source=theo&utm_campaign=theo" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
