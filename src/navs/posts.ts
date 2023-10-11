@@ -88,6 +88,8 @@ export const postsMenu: IMenu[] = [
     {
         name: 'Blog',
         url: '/blog/',
+        icon: 'Newspaper',
+        color: 'yellow',
         children: [
             {
                 name: 'CEO diaries',
@@ -106,14 +108,20 @@ export const postsMenu: IMenu[] = [
     {
         name: 'Changelog',
         url: '/changelog/',
+        icon: 'Calendar',
+        color: 'red',
     },
     {
         name: 'Customer stories',
         url: '/customers/',
+        icon: 'Person',
+        color: 'yellow',
     },
     {
         name: 'Guides & tutorials',
         url: '/tutorials',
+        icon: 'Map',
+        color: 'salmon',
         children: [
             {
                 name: 'Product OS',
@@ -162,6 +170,8 @@ export const postsMenu: IMenu[] = [
     {
         name: 'Newsletter',
         url: '/newsletter/',
+        icon: 'Newspaper',
+        color: 'green',
     },
     {
         name: 'PostHog news',
