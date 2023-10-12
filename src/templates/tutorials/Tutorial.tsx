@@ -91,12 +91,12 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                 </div>
             )}
             {view === 'Article' && (
-                <div className="xl:float-right xl:max-w-[350px] xl:ml-4 xl:mb-4">
+                <div className="xl:reasonable:sticky top-[128px] xl:float-right xl:max-w-[250px] xl:ml-4 xl:mb-4">
                     <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
                 </div>
             )}
             {view === 'Article' ? (
-                <div className="article-content">
+                <div className="article-content xl:overflow-hidden">
                     <MDXProvider components={components}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
