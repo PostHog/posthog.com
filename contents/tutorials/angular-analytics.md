@@ -84,7 +84,7 @@ Now, we can run `ng serve` in our terminal and go to [`http://localhost:4200/`](
 
 ![In-app video](../images/tutorials/angular-analytics/app.mp4)
 
-## Install PostHog
+## Installing PostHog
 
 With our app set up, it’s time to install and set up PostHog. To start, install the JavaScript web SDK:
 
@@ -117,7 +117,7 @@ Once set up, go back to your app, refresh, and PostHog autocaptures events. This
 
 You might notice that moving between pages only captures a single, initial pageview. This is because PostHog only captures pageview events when pages load, and as a single-page app, Angular only loads once. We must write more code to capture pageviews for each route change.
 
-## Capture pageviews
+## Capturing pageviews
 
 Because Angular acts as a single-page app, we must set up a way to capture pageviews beyond the initial load. We can do this using the router. 
 
@@ -155,7 +155,7 @@ posthog.init(
 )
 ```
 
-## Capture custom events
+## Capturing custom events
 
 Beyond pageviews, there might be more events you want to capture. To do this, you can capture custom events with PostHog. 
 
