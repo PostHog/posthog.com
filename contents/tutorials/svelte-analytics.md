@@ -323,6 +323,8 @@ To avoid having multiple users identified as one, make sure to call `posthog.res
 
 This ensures when a user logs out, the events after they do aren’t connected to them, and future users who log in aren’t also connected.
 
+> **Note:** Be careful to only reset when a user logs out, **not** on every request. If you reset on every request, you create an excess of new anonymous users and new session recordings.
+
 ## Using feature flags
 
 The last feature of PostHog to set up is feature flags. Feature flags enable you to conditionally run code based on users, properties, and more. To showcase them, we are going to set up a flag that conditionally shows a call-to-action in our blog posts.
