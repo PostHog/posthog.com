@@ -484,7 +484,7 @@ Yes, PostHog has much of the same functionality as Google Analytics, but much of
 
 GA4 has a free tier which should be sufficient for most startups and scale-ups. Larger enterprises with higher data collection and export requirements will need to upgrade to GA360, which starts at $50,000 per year. A good rule of thumb is that if you're exporting more than 1 million events per day, or querying data with more than 10 million events, you'll need to upgrade to GA360 (see a full breakdown on [their website](https://support.google.com/analytics/answer/11202874)). 
 
-PostHog has transparent pricing based on the usage. It’s free to get started and completely free for the first 1 million events. After this free monthly allowance you'll pay $0.00031/event, and PostHog charges progressively less the more you use. We recommend trying [our pricing calculator](/pricing) and reading our [guide for estimating your usage](/docs/billing/estimating-usage-costs).
+PostHog has transparent pricing based on the usage. It’s free to get started and completely free for the first 1 million analytics events. After this free monthly allowance you'll pay $0.00031/event, and PostHog charges progressively less the more you use. We recommend trying [our pricing calculator](/pricing) and reading our [guide for estimating your usage](/docs/billing/estimating-usage-costs).
 
 ### Does PostHog offer a free trial?
 
