@@ -124,7 +124,7 @@ As explained above, PostHog offers a wider selection of features than Google Ana
 </table>
 </div>
 
-## Analytics features comparision
+## Analytics features comparison
 
 Both GA4 and PostHog offer analytics, but _what_ they offer is drastically different. The key differences are:
 
