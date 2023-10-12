@@ -12,7 +12,7 @@ Method | When? | Limitations
 --- | --- | ---
 PostHog UI - click "Export" on the events table | You need to export a small number of events | 3,500 events
 Events API | Great for one-off smaller exports | 1 day date range and 3,500 events
-[Batch exports](/batch_exports) | You need to export a large number of events, can be used for continuous exports | No limits
+[Batch exports](/docs/cdp/batch-exports) | You need to export a large number of events, can be used for continuous exports | No limits
 
 If you're looking to migrate to a new PostHog instance follow the [migrating between PostHog instances guide](/docs/migrate/migrate-between-cloud-and-self-hosted).
 

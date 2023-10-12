@@ -974,7 +974,7 @@
         { "source": "/handbook/strategy/investors", "destination": "/about" },
         { "source": "/handbook/start-here", "destination": "/handbook/people/onboarding" },
         { "source": "/handbook/small-teams/dw", "destination": "/handbook/small-teams/data-warehouse" },
-        { "source": "/tutorials/migrate-eu-cloud", "destination": "https://posthog.com/docs/migrate/migrate-to-cloud" },
-        { "source": "/docs/migrate/migrate-broken-self-hosted", "destination": "https://posthog.com/docs/migrate/migrate-to-cloud" }
+        { "source": "/tutorials/migrate-eu-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
+        { "source": "/docs/migrate/migrate-broken-self-hosted", "destination": "/docs/migrate/migrate-to-cloud" }
     ]
 }
