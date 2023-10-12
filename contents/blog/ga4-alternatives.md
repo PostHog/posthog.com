@@ -144,6 +144,8 @@ See [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) 
 </table>
 </div>
 
+For a full comparison between PostHog and Google Analytics, check our [in-depth guide](/blog/posthog-vs-ga4).
+
 > #### Verdict
 >
 > [PostHog](https://posthog.com/) is an all-in-one platform for tracking user behavior in apps and websites. While it's a [powerful tool for marketing](/blog/posthog-marketing) in the right hands, it's best deployed by product and engineering teams seeking deep insights into how users use their product. Integrated session recording, A/B testing, survey, and feature flag tools mean it can also replace several other products in your tech stack.
