@@ -19,6 +19,7 @@ import { ChevronDown, Filter, Newspaper } from '@posthog/icons'
 import useMenu from '../hooks/useMenu'
 import { postsMenu as menu } from '../../../navs/posts'
 import Community from 'components/Home/Community'
+import { Icon, getIcon } from 'components/PostLayout/Menu'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -194,15 +195,15 @@ const PostFilters = () => {
             <div className="w-full flex-grow">
                 <Menu>
                     <Menu.Button className="flex items-center relative mx-2 py-1 pl-2 pr-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all h-full">
-                        <div className="flex items-center">
-                            <Newspaper className="w-6 h-6 text-red mr-1" />
+                        <div className="flex items-center space-x-2">
+                            <Icon icon={activeMenu?.icon} color={activeMenu?.color} />
                             <span className="text-base font-bold">{activeMenu?.name}</span>
                             <ChevronDown className="w-6 h-6 -mb-[2px]" />
                         </div>
                     </Menu.Button>
                     <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-0 left-2 right-2 translate-y-full">
                         {menu.map((menu, index) => {
-                            const { name, url } = menu
+                            const { name, url, icon, color } = menu
                             return (
                                 <Menu.Item key={`${name}-${index}`}>
                                     <button
@@ -211,9 +212,10 @@ const PostFilters = () => {
                                             setRoot(url === '/posts' ? undefined : url?.split('/')[1])
                                             setTag(undefined)
                                         }}
-                                        className="py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50"
+                                        className="py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50 flex space-x-2 items-center"
                                     >
-                                        {name}
+                                        <Icon icon={icon} color={color} />
+                                        <span>{name}</span>
                                     </button>
                                 </Menu.Item>
                             )
