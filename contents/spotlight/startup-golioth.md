@@ -60,8 +60,8 @@ At Golioth, this focus on sales doesn’t mean that everyone spends their time c
 “You need to constantly be working towards sales,” says Jonathan, “Because that first sale is the most important — and so are is the second, the third, the fifth, the eleventh. They’re all important and so you need to be learning about it. As someone who came from a technical product management background I really wish I’d spent more time learning about sales!”
 
 **More success stories from PostHog for Startups**
-- [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](startup-before-sunset-ai)
-- [How Bugprove uses influencer marketing to grow word of mouth](/spotlights/startup-bugprove)
-- [How Documenso got 5,000 stars and grew an active GitHub community](/spotlights/startup-documenso)
+- [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](/spotlight/startup-before-sunset-ai)
+- [How Bugprove uses influencer marketing to grow word of mouth](/spotlight/startup-bugprove)
+- [How Documenso got 5,000 stars and grew an active GitHub community](/spotlight/startup-documenso)
 
 
