@@ -24,9 +24,9 @@ Guardrail metrics act as an early warning system for A/B tests. When they hit a 
 
 > **Secondary vs guardrail metric:** Guardrail metrics are a subset of secondary metrics. A secondary metric is a non-goal metric you monitor for either positive or negative impacts in A/B tests. Guardrail metrics generally monitor for **negative** impacts.
 
-## Why use guardrail metrics
+## Why use guardrail metrics?
 
-Guardrail metrics enable you to protect your overall experience and key metrics while optimizing parts of your product with A/B tests
+Guardrail metrics enable you to protect your overall experience and key metrics while optimizing parts of your product with A/B tests.
 
 As a developer, using guardrail metrics provides benefits like:
 
@@ -38,7 +38,7 @@ As a developer, using guardrail metrics provides benefits like:
 
 - Promoting a culture of experimentation knowing A/B tests are safer to do. Creates trust between teams knowing other teams’ A/B tests won’t affect them.
 
-### Why Airbnb uses guardrail metrics
+### Case study: Airbnb
 
 [Airbnb](https://medium.com/airbnb-engineering/designing-experimentation-guardrails-ed6a976ec669) relies on guardrails to enable teams to run A/B tests while keeping the overall experience strong. They found A/B tests often positively impact one team’s metrics, while negatively impacting another. For example, if they didn’t display house rules, they saw an increase in bookings but a decrease in ratings.
 
@@ -46,25 +46,25 @@ When a guardrail metric triggers, it escalates and stakeholders decide whether t
 
 ![](../images/blog/guardrail-metrics/trigger.png)
 
-## What guardrail metrics should you pick?
+## How to choose guardrail metrics
 
-As a general guideline, you should pick metrics important to the entire product or company. These are often [north star](/blog/north-star-metrics) or [product health](/blog/product-health-metrics) metrics. Specifically, Airbnb breaks guardrail metrics into three categories
+As a general guideline, you should pick metrics important to the entire product or company. These are often [north star](/blog/north-star-metrics) or [product health](/blog/product-health-metrics) metrics. Airbnb breaks guardrail metrics into three categories:
 
 - Key business metrics
 - User experience metrics
 - Strategic priority metrics
 
-It is important to have a mix of metrics from each category to ensure a broad enough coverage of potential issues. It is also important to not have too many metrics. Adding one increases the likelihood of false positives, which limits the throughput of experiments. For example, an [A/A test](/tutorials/aa-testing) with a significance level of 0.05 would expect to cause the following amount of false positives:
+You need a mix of metrics from each category to ensure you don't miss potential issues. Just remember that each guardrail metric you add also increases the likelihood of false positives. 
 
-- With 3 guardrail metrics, you would have at least one false alert approximately 14% of the time.
-- With 10 guardrail metrics, approximately 40% of the time.
-- With 25 guardrail metrics, approximately 73% of the time.
+For example, an [A/A test](/tutorials/aa-testing) with 3 guardrail metrics, and a significance level of 0.05, would cause a false alert approximately 14% of the time. The risk increases to 40% with 10 guardrail metrics, and a massive 73% with 25 guardrail metrics.
+
+More false positives means you run fewer tests, limiting the pace of improvements. 
 
 ### Example guardrail metrics
 
-For more insight into what specific metrics you should try, you can look at what other companies use as guardrail metrics. 
+Potential guardrail metrics include clickthrough rate, active users, customer lifetime value, and pageviews. Here are some real-world examples:
 
-- Airbnb: revenue, bounce rate, page load speed, seats booked for experiences.
+- [Airbnb](https://medium.com/airbnb-engineering/designing-experimentation-guardrails-ed6a976ec669): revenue, bounce rate, page load speed, seats booked for experiences.
 
 - [Square](https://developer.squareup.com/blog/lessons-learned-from-running-web-experiments/): bottom of funnel conversion, page load speed
 
@@ -72,11 +72,9 @@ For more insight into what specific metrics you should try, you can look at what
 
 - [Netflix](https://www.adventuresinwhy.com/pdf/beyond_ab_testing.pdf): sample mismatch ratio, engagement, retention, conversion.
 
-Other potential guardrail metrics include clickthrough rate, active users, customer lifetime value, and pageviews. 
+To help pick a metric, it's useful to know which secondary metrics have stopped experiments in the past. These are your company's [revealed preference](https://en.wikipedia.org/wiki/Revealed_preference) for guardrail metrics and likely make good choices to formalize.
 
-> **Tip:** To help pick a metric, **i**t is useful to know what secondary metrics you have stopped experiments for in the past. These are the organization’s [revealed preference](https://en.wikipedia.org/wiki/Revealed_preference) for guardrail metrics and likely make good choices to formalize.
-
-## Your step-by-step guide to implementing guardrail metrics
+##  Implementing guardrail metrics in PostHog
 
 Now that you know all about guardrail metrics, it’s time to implement them in your A/B tests. 
 
