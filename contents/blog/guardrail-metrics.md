@@ -40,11 +40,15 @@ As a developer, using guardrail metrics provides benefits like:
 
 ### Case study: Airbnb
 
-[Airbnb](https://medium.com/airbnb-engineering/designing-experimentation-guardrails-ed6a976ec669) relies on guardrails to enable teams to run A/B tests while keeping the overall experience strong. They found A/B tests often positively impact one team’s metrics, while negatively impacting another. For example, if they didn’t display house rules, they saw an increase in bookings but a decrease in ratings.
+[Airbnb](https://medium.com/airbnb-engineering/designing-experimentation-guardrails-ed6a976ec669) is a good case study for why guardrails are useful and how to implement them.
 
-When a guardrail metric triggers, it escalates and stakeholders decide whether to continue the test or not. Guardrails at Airbnb flag ~25 experiments per month for review. 80% of these eventually launch after stakeholder discussion. They stop ~5 per month before launch, which means they prevent 5 potential negative impacts.
+A team responsible for increasing bookings ran a test where the house rules weren't shown at checkout. This increased bookings, but decreased one of the test's guardrail metrics: review ratings.
 
-![](../images/blog/guardrail-metrics/trigger.png)
+When an A/B test triggers a guardrail metric at Airbnb, it's immediately escalated to a group of stakeholders who decide whether to continue the test or not.
+
+![Airbnb guardrail process](../images/blog/guardrail-metrics/trigger.png)
+
+Out of the thousands of experiments that run at Airbnb each month, guardrails trigger ~25 for review. 80% of these rollout after stakeholder discussion. They decide to pause ~5 experiments per month, which means they prevent 5 potentially major impacts to critical metrics and product areas.
 
 ## How to choose guardrail metrics
 
@@ -72,6 +76,8 @@ Potential guardrail metrics include clickthrough rate, active users, customer li
 
 - [Netflix](https://www.adventuresinwhy.com/pdf/beyond_ab_testing.pdf): sample mismatch ratio, engagement, retention, conversion.
 
+- [Ebay](https://innovation.ebayinc.com/tech/research/measuring-success-with-experimentation/): purchases, bought items, gross merchandise bought.
+
 To help pick a metric, it's useful to know which secondary metrics have stopped experiments in the past. These are your company's [revealed preference](https://en.wikipedia.org/wiki/Revealed_preference) for guardrail metrics and likely make good choices to formalize.
 
 ##  Implementing guardrail metrics in PostHog
@@ -87,6 +93,8 @@ Now that you know all about guardrail metrics, it’s time to implement them in 
 4. Click "Save," implement the experiment in your app, and press "Launch."
 
 5. Guardrail metrics display alongside your goal metrics on the experiment detail screen.
+
+![Guardrail metrics in PostHog](../images/blog/guardrail-metrics/guardrail.png)
 
 Another way to track guardrail metrics is by creating them as an insight or dashboard. This enables you to completely customize your guardrail metrics as well as reuse them across experiments. You can then send them to your email or Slack with a [subscription](/docs/product-analytics/subscriptions). 
 
