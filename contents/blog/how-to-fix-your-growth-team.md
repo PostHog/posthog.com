@@ -61,7 +61,7 @@ Alexey says that **one of their biggest wins came from following this approach**
 
 "At MasterClass, we had a single subscription type. We knew we would eventually need to add tiered pricing, but this would be a huge, months-long company effort. We had no idea how much this would impact our revenue, so we struggled to prioritize it.
 
-I knew we needed a dollar estimate, so we created a simple [fake door test](/tutorials/fake-door-test). Users could select their preferred tier – but at checkout, we let them know they were being upgraded to the best tier and at the cheapest price. In reality, this was the existing one-size-fits-all pricing, and we hadn't actually built any of the functionality to support the new tiers.
+I knew we needed a dollar estimate, so we created a simple [fake door test](/tutorials/fake-door-test). Users could select their preferred tier – but at checkout, we let them know they were being upgraded to the best tier and at the cheapest price. In reality, this was the existing one-size-fits-all pricing, and we hadn't actually built any of the functionality to support these new tiers.
 
 This saved us months of engineering time and enabled us to understand how much we could gain if we built this. Once we knew how much money the company stood to make, we prioritized it immediately! And it was incredibly easy to ask the rest of the company to work on it for a few months."
 
