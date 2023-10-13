@@ -40,7 +40,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",
   "batch": [
     {
-      "event": "batched event name 1",
+      "event": "batched_event_name_1",
       "properties": {
         "distinct_id": "user distinct id",
         "account_type": "pro"
@@ -49,7 +49,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     }
     # ...
   ]
-}' https://app.posthog.com/capture/ 
+}' https://app.posthog.com/batch/ 
 ```
 
 ### Alias
@@ -114,9 +114,10 @@ Updates user information. Read more in our [identify docs](/docs/product-analyti
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",
   "timestamp": "2020-08-16 09:03:11.913767",
-  "context": {},
+  "properties": {
+    "$set": {},
+  },
   "distinct_id": "1234",
-  "$set": {},
   "event": "$identify"
 }' https://app.posthog.com/capture/
 ```
@@ -126,7 +127,9 @@ curl -v -L --header "Content-Type: application/json" -d '{
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",
-  "properties": {},
+  "properties": {
+    "title": "TheTitle"
+  },
   "timestamp": "2020-08-16T09:03:11.913767",
   "distinct_id": "1234",
   "event": "$pageview"
@@ -138,7 +141,9 @@ curl -v -L --header "Content-Type: application/json" -d '{
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",
-  "properties": {},
+  "properties": {
+    "$screen_name": "TheScreen"
+  },
   "timestamp": "2020-08-16T09:03:11.913767",
   "distinct_id": "1234",
   "event": "$screen"
@@ -167,7 +172,7 @@ import APIFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/featu
 }
 ```
 
-**Meaning:** A `200: OK` response means we have successfully received the payload, it is in the correct format, and the project API key (token) is valid. It **does not** imply that events are valid and will be ingested. As mentioned under [Invalid events](#invalid-events), certain event validation errors may cause an event not to be ingested.
+**Meaning:** A `200: OK` response means we have successfully received the payload, it is in the correct format, and the project API key (api_key) is valid. It **does not** imply that events are valid and will be ingested. As mentioned under [Invalid events](#invalid-events), certain event validation errors may cause an event not to be ingested.
 
 ### Status code: 400
 
@@ -235,7 +240,7 @@ import APIFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/featu
 
 ## Invalid events
 
-We perform basic validation on the payload and project API key (token), returning a failure response if an error is encountered.
+We perform basic validation on the payload and project API key (api_key), returning a failure response if an error is encountered.
 
 PostHog **does not return an error** to the client when the following happens:
 

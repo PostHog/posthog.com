@@ -91,7 +91,7 @@ You’ll need to set environment variables for these. [See (private) instruction
 
 We <3 contributions big and small. In priority order (although everything is appreciated) with the most helpful first:
 
-- Join our [Slack community](https://posthog.com/slack)
+- Ask a [question in our community](https://posthog.com/questions)
 - Submit [bug reports and give us feedback in the app](https://app.posthog.com/home#supportModal)! 
 - Vote on features or get early access to beta functionality in our [roadmap](https://posthog.com/roadmap)
 - Open a PR

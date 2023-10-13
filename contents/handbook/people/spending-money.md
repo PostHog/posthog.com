@@ -26,7 +26,7 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
 
-You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #team-people-and-ops channel in Slack afterwards and tag Charles and Grace to get reimbursed manually. 
+You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #team-people-and-ops channel in Slack afterwards and tag Charles to get reimbursed manually. 
 
 ### Brex
 
@@ -47,8 +47,8 @@ By default, the email forwarding feature only accepts emails from your PostHog a
 
 ### Your personal card
 
-- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles or Grace to purchase it for you on theirs in the first instance. 
-- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Charles and Grace to get reimbursed manually.  
+- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles to purchase it for you on theirs in the first instance. 
+- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Charles to get reimbursed manually.  
 
 Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! Again, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
 
@@ -56,7 +56,7 @@ Accidentally bought something on the company card when it was a personal expense
 
 If your purchase fits within the policy below, there is no need to ask. We _cannot_ pay you back for anything without a receipt if you use your personal card.
 
-If you don't have enough space on your company card, just ask Charles or Grace to increase your limit.
+If you don't have enough space on your company card, just ask Charles to increase your limit.
 
 ## Equipment
 
@@ -75,7 +75,7 @@ These are just general guidelines - the most important thing is that you select 
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
-When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Grace or Charles. (Don't do this if you're in the UK though - use your Revolut card.)
+When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Charles. (Don't do this if you're in the UK though - use your Revolut card.)
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
@@ -152,7 +152,7 @@ While PostHog will use the money saved from not having office space for real lif
 
 You can spend up to $300/month to work in cafés or coworking spaces. You must provide receipts if applicable, and in this case, they must only be for yourself.
 
-We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and Grace or Tim will add you. This membership costs the full budget per month, so please keep that in mind when opting in.
+We have a company WeWork All Access account that allows you to book desks in any of their worldwide locations. If you wish to take advantage of this, post in #team-people-and-ops and Kendal will add you. This membership costs the full budget per month, so please keep that in mind when opting in.
 
 ## Travel
 
@@ -177,7 +177,7 @@ We do not pre-approve your travel expenses, and trust team members to make the r
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
 - Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
 
-If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Grace or Charles.
+If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Charles.
 
 ### Budget for working together/socializing
 
@@ -195,7 +195,7 @@ If you're in the same place as other team members, even if you aren't directly w
 
 ### Carbon offsetting
 
-We offset all carbon emissions generated by team flights using [Wren](https://www.wren.co/), so if you book a flight to meet up with someone, then please let Grace know the departure and destination airports, and she'll log it accordingly. 
+We offset all carbon emissions generated by team flights using [Wren](https://www.wren.co/), so if you book a flight to meet up with someone, then please let Kendal know the departure and destination airports, and she'll log it accordingly. 
 
 ## Customer meetings
 

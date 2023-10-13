@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { button } from 'components/CallToAction'
 import { useLocation } from '@reach/router'
 import Confetti from 'react-confetti'
-import { animateScroll as scroll } from 'react-scroll'
+import usePostHog from 'hooks/usePostHog'
 
 interface CustomFieldOption {
     label: string
@@ -325,9 +325,10 @@ export default function HubSpotForm({
     buttonOptions,
     formOptions,
 }: IProps) {
+    const posthog = usePostHog()
     const { href } = useLocation()
     const [openOptions, setOpenOptions] = useState<string[]>([])
-    const [form, setForm] = useState<{ fields: Field[]; buttonText: string; message: string }>({
+    const [form, setForm] = useState<{ fields: Field[]; buttonText: string; message: string; name: string }>({
         fields: [],
         buttonText: '',
         message: '',
@@ -336,6 +337,13 @@ export default function HubSpotForm({
     const [confetti, setConfetti] = useState(true)
 
     const handleSubmit = async (values) => {
+        const distinctId = posthog?.get_distinct_id()
+        posthog?.identify(distinctId, {
+            email: values.email,
+        })
+        posthog?.capture('form submission', {
+            form_name: form.name,
+        })
         const submission = {
             pageUri: href,
             fields: form.fields.map(({ name, objectTypeId }) => {
@@ -378,6 +386,7 @@ export default function HubSpotForm({
                     fields,
                     buttonText: form.submitText,
                     message: form.inlineMessage,
+                    name: form.name,
                 })
             })
     }, [])

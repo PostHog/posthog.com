@@ -125,7 +125,7 @@ def blog(slug):
   elif request.method == "POST":
     posthog.capture(
       user_id, 
-      "liked post", 
+      "liked_post", 
       {
         'slug': slug
       }
@@ -199,7 +199,7 @@ Lastly, we must capture the experiment details in our event. Do this by adding `
 elif request.method == "POST":
     posthog.capture(
       user_id, 
-      "liked post", 
+      "liked_post", 
       {
         'slug': slug,
         f'$feature/{flag_key}': flag

@@ -79,7 +79,7 @@ def hello_world():
 def show_user(user):
   posthog.capture(
     user, 
-    "visited user page", 
+    "visited_user_page", 
     {
       '$set_once': {'initial_name': user} 
     }
@@ -117,7 +117,7 @@ def show_user(user):
 
   posthog.capture(
     user, 
-    "visited user page", 
+    "visited_user_page", 
     {
       '$set_once': {'initial_name': user}
     }
@@ -147,7 +147,7 @@ def show_user(user):
 
   posthog.capture(
     user, 
-    "visited user page", 
+    "visited_user_page", 
     {
       '$set_once': {'initial_name': user},
       '$feature/new-cool-feature': flag_enabled

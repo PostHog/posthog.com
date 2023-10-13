@@ -2,7 +2,7 @@ Update [posthog-python](https://posthog.com/docs/integrate/server/python) to ver
 
 ```python
 # Capturing an event with groups
-posthog.capture('[user distinct id]', 'some event', groups={'company': 'id:5'})
+posthog.capture('user_distinct_id', 'some_event', groups={'company': 'id:5'})
 
 # Updating group properties
 posthog.group_identify('company', 'id:5', {

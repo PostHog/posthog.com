@@ -1,8 +1,9 @@
 ---
-title: Customer data infrastructure
-subtitle: <span class="text-red font-semibold bg-yellow/10">Product OS is the foundation</span> that all PostHog products are built on.
+title: Product data infrastructure
+subtitle: Product OS is the foundation that all PostHog products are built on. You have access to all PostHog data with the API.
+postHogDoesThat: false
 productHero: {
-  image: ./../images/products/product-os.png
+  image: ../images/products/product-os.png
 }
 template: product
 productFeatures: [
@@ -13,19 +14,9 @@ productFeatures: [
             'Add PostHog.js to your website or web app to track all event data and retroactively define events',
     },
     {
-        icon: 'Annotations',
-        title: 'Annotations',
-        description: 'Add context around product updates ship or when website traffic spikes',
-    },
-    {
         icon: 'Webhooks',
         title: 'Webhooks',
-        description: 'Get notifications for PostHog events in Slack, Teams, and more',
-    },
-    {
-        icon: 'Proxy',
-        title: 'Reverse proxy',
-        description: 'Send events to PostHog Cloud using your own domain',
+        description: 'Fire a hook (to any service that supports webhooks) when any product activity takes place - useful for getting event-related alerts in Slack or Teams.',
     },
     {
         icon: 'Sync',
@@ -34,124 +25,157 @@ productFeatures: [
             "Sync data with Segment or Rudderstack – or use PostHog's built in warehouse",
     },
     {
-        icon: 'Toolbar',
-        title: 'Toolbar',
-        description: 'Add meaning to clicks and pageviews with a point and click',
-    },
-    {
-        icon: 'SyntheticEvent',
-        title: 'Synthetic events',
-        description: 'Retroactive merge multiple event definitions into a single action',
+        icon: 'Proxy',
+        title: 'Reverse proxy',
+        description: 'Send events to PostHog Cloud using your own domain',
     },
 ]
 productSections: [
   [
     {
-      image: ../images/products/product-os/data-warehouse.png,
-      marquee: [
-        {text: "How do I get more feedback about my product?", url: "/tutorials/feedback-interviews-site-apps"},
-        {text: "How do I book more user interviews?", url: "/tutorials/feedback-interviews-site-apps"},
-        {text: "How do I set up a cookie banner?", url: "/tutorials/vue-cookie-banner"},
-        {text: "How do I track groups across my app?", url: "/tutorials/frontend-vs-backend-group-analytics"},
-        {text: "How do I do analytics without cookie banners?", url: "/tutorials/cookieless-tracking"},
-        {text: "How do I get more of my product data in one place?", url: "/blog/modern-data-stack-sucks"},
-        {text: "What analytics should I care about as an early stage startup?", url: "/blog/early-stage-analytics"}
+      title: "A single home for all product usage data",
+      hideImage: true,
+      image: ../images/products/sql/sql-hog.png,
+      sections: [
+        {
+          featuresType: card,
+          features: [
+            {
+                icon: 'Events',
+                title: 'Events',
+                description:
+                    'Raw activity data like clicks, pageviews, and any custom events you send from your codebase',
+            },
+            {
+                icon: 'Actions',
+                title: 'Actions',
+                description: 'Synthetic events that can be retroactively created from interactions with the DOM',
+            },
+            {
+                icon: 'User',
+                title: 'Persons',
+                description:
+                    "Individual level user activity and properties from both identified (logged in) and anonymous users",
+            },
+            {
+                icon: 'Building',
+                title: 'Organizations & groups',
+                description:
+                    "Group users by company to analyze usage or activity in aggregate rather than the individual user",
+            },
+            {
+                icon: 'Annotation',
+                title: 'Annotations',
+                description: 'Add context around product updates ship or when website traffic spikes',
+            },
+          ]
+        }
       ]
-    }
+    },
   ],
   [
     {
-      align: 'center',
-      title: "Data warehouse",
-      content: "<p>Use ours (powered by ClickHouse) or bring your own.</p><p>PostHog syncs with BigQuery, Snowflake, or Redshift with a couple clicks.</p>",
+      image: ../images/products/sql/sql-hog.png,
+      imageFrame: false
     },
     {
-      image: ../images/products/product-os/data-warehouse.png,
-      imageFrame: false
-
-    }
+      align: 'center',
+      title: "A unified way to query product usage data",
+      content: "<p>We created <a href='/docs/hogql'>HogQL</a>, a translation layer over ClickHouse SQL. (You can use most ClickHouse features in HogQL, including JOINs and subqueries.)</p><p>Everything you see in PostHog relies on HogQL queries. If you aren't able to run a query in a PostHog UI, just enter HogQL mode to write the exact query you need.</p><p>You can also query directly from our data warehouse (powered by ClickHouse).</p>"
+    },
   ],
   [
     {
-      marquee: [
-        {text: "How can I get CRM data into PostHog?"},
-        {text: "How can I get sales and revenue data into PostHog?", url: "/tutorials/stripe-payment-data"},
-        {text: "How do I migrate from Mixpanel?", url: "/tutorials/mixpanel-to-posthog"},
-        {text: "How do I connect PostHog to my data platform?", url: "/tutorials/how-to-connect-patterns-and-posthog"}
+      title: "One platform, tons of products",
+      subtitle: "<img src='/images/product-icons.png' alt='PostHog products' class='mt-4 mb-4 lg:float-right lg:-mt-8 lg:ml-4' style='height: 42px;' /><p>PostHog offers 7+ products in one (and counting).</p><p><strong>Use only what you want. But...</strong> if you want to try a new PostHog product, there are several benefits of being on Product OS:</p>",
+      sections: [
+        {
+          featuresType: card,
+          features: [
+            {
+                icon: 'Events',
+                title: 'Retroactive data with autocapture',
+                description:
+                    'If you\’re running a web app with <a href="/docs/product-analytics/autocapture">Autocapture</a> enabled, some PostHog products can backfill historical data, meaning you can get value from a new product without waiting for data to trickle in.',
+            },
+            {
+                icon: 'Actions',
+                title: 'One-click setup with no new account provisioning',
+                description: "Trying a new PostHog product doesn't require new code to be deployed. You don't need to invite your team since they already have PostHog accounts.",
+            },
+          ]
+        }
       ]
-    }
+    },
   ],
   [
     {
-      image: ../images/products/product-os/event-pipelines.png,
+      image: ../images/products/product-os/site-widget.png,
       imageFrame: false
     },
     {
       align: 'center',
-      title: "Event pipelines",
-      content: "<p>PostHog ships with SDKs and a JavaScript snippet (with autocapture).</p><p>Pipelines make it possible to ingest data from sources like Salesforce, Hubspot, and Zendesk – and there’s loads more you can do with a Zapier app.</p>"
+      title: "Site widgets",
+      content: "<p>Install the PostHog.js snippet on your website to get access to a growing library of mini-apps that can be injected into your website's front end.</p><p>This includes utilities like downtime banners, pop-up survey widgets, geo-location notices, and more. (It even powers our own <a href='/docs/surveys'>Surveys</a> product.)</p><p>Since you can toggle site apps on from within PostHog, deploying a new site app doesn't require a code deployment.</p><p><em>This example uses <a href='/apps/notification-bar'>Notification Bar</a> to display a banner. It can be targeted to specific users or groups using feature flags.</em></p>"
      
     },
   ],
   [
     {
-      marquee: [
-        {text: "How do I set up customer facing analytics?", url: "/tutorials/customer-facing-analytics"},
-        {text: "How do I capture usage data from anywhere?", url: "/tutorials/api-capture-events"},
-        {text: "How can I pull data from PostHog into another platform?", url: "/tutorials/api-get-insights-persons"},
-        {text: "How can I evaluate feature flags anywhere?", url: "/tutorials/api-feature-flags"},
-        {text: "How do I keep usage data top of mind?", url: "/tutorials/product-data-in-new-tab"}
+      title: "API",
+      subtitle: "If your business has bespoke data visualization needs that aren't covered by a PostHog product, you can build your own interface with queries using the API and HogQL.",
+      sections: [
+        {
+          featuresType: card,
+          features: [
+            {
+                title: 'Data transformations',
+                description:
+                    'Capture the live event stream and do something with it - like munge PII or add geolocation.',
+            },
+            {
+                title: 'Data out',
+                description: 'Access data from dashboards or metrics from saved insights.',
+            },
+            {
+                title: 'Data augmentation',
+                description:
+                    'Augment event data coming into PostHog with more context and detail',
+            },
+            {
+                title: 'Reverse ETL',
+                description:
+                    'Update and feed context to external products like Hubspot or Salesforce',
+            },
+            {
+                title: 'Build apps',
+                description:
+                    'Develop custom functionality or choose from the 50ish apps in our 3rd party app library',
+            },
+            {
+                title: 'Marketing or product automation',
+                description:
+                    'Activate drip campaign or a push notification based on customer activity',
+            },
+            {
+                title: 'Customer Data Platform (CDP)',
+                description:
+                    'Create a singular customer view by combining event and customer data in one place.',
+            },
+          ]
+        }
       ]
-    }
+    },
   ],
   [
     {
-      title: "API",
-      subtitle: "Build custom functionality or create bespoke views specific to your business needs",
-      sections: [
-        {
-          features: [
-                      {
-                          title: 'Data transformations',
-                          description:
-                              'Capture the live event stream and do something with it - like munge PII or add geolocation.',
-                      },
-                      {
-                          title: 'Data out',
-                          description: 'Access data from dashboards or metrics from saved insights.',
-                      },
-                      {
-                          title: 'Data augmentation',
-                          description:
-                              'Augment event data coming into PostHog with more context and detail',
-                      },
-                      {
-                          title: 'Reverse ETL',
-                          description:
-                              'Update and feed context to external products like Hubspot or Salesforce',
-                      },
-                  ]
-        },
-        {
-        features: [
-              {
-                  title: 'Build apps',
-                  description:
-                      'Develop custom functionality or choose from the 50ish apps in our 3rd party app library',
-              },
-              {
-                  title: 'Marketing or product automation',
-                  description:
-                      'Activate drip campaign or a push notification based on customer activity',
-              },
-              {
-                  title: 'Customer Data Platform (CDP)',
-                  description:
-                      'Create a singular customer view by combining event and customer data in one place.',
-              },
-          ]
-      }
-      ]
+      image: ../images/products/product-os/toolbar.png,
+      imageFrame: false
+    },
+    {
+      align: 'start',
+      title: "Toolbar",
+      content: "<p>If you use PostHog on a website or web app, the Product OS Toolbar can run on your site, letting you:</p><ul><li>Visually define events</li><li>Toggle feature flags on or off</li><li>See a click map showing what people are clicking</li></ul>"
     },
   ],
 ]
@@ -161,15 +185,16 @@ productMainCTA: {
   subtitle: "First 1,000,000 events/mo are free.",
   image: ../images/products/hogs/event-pipelines.png
 }
-productPricingCTA: {
-    title: View pricing,
-    url: /product-os/pricing
-}
 ---
 
 <Hero />
 
 <Sections />
+
+<div className="mb-6">
+  <h2 className="text-4xl pt-4 m-0 -mt-4">But wait, there's more...</h2>
+  <p className="text-base font-semibold opacity-70 m-0">Here are a few more features of Product OS. For more details about how it works, <a href="/docs/product-os">visit the docs</a>.</p>
+</div>
 
 <MainFeatures />
 

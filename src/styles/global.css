@@ -108,7 +108,7 @@ h3 {
 }
 
 h4 {
-    @apply text-base leading-normal mb-3;
+    @apply text-[1.25rem] leading-normal mb-3;
 
     code {
         @apply !font-bold !text-xl;
@@ -132,10 +132,20 @@ h4 {
 
     h2 {
         @apply text-[1.75rem];
+
+        code {
+            @apply !text-[1.75rem];
+        }
     }
 
     h2 + h3 {
         @apply mt-4;
+    }
+
+    h3 {
+        code {
+            @apply !text-xl;
+        }
     }
 
     p,
