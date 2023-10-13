@@ -1,6 +1,6 @@
 ---
 title: An introduction to guardrail metrics for A/B tests
-date: 2023-10-10
+date: 2023-10-13
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
@@ -14,13 +14,11 @@ tags:
  - Explainers
 ---
 
-An [A/B test](/blog/ab-testing-guide-for-engineers) uses a single, goal metric to compare two variants and pick a winner that improves your product. The problem with focusing on a single metric is that it hides the impacts on other metrics. A change improving one part of the product can negatively affect another part, or worse, hurt the entire product.
-
-To help prevent this, teams rely on guardrail metrics when running A/B tests. These are secondary metrics that help protect other parts of the product and the overall experience. This post explains what guardrail metrics are, why you should use them, how to choose the right ones, and how to implement them.
-
 ## What are guardrail metrics?
 
-Guardrail metrics, also known as counter metrics, are secondary metrics in A/B tests monitored to make sure changes don’t negatively impact unexpected areas. They are metrics you don’t want your changes to hurt because they represent key areas of the product.
+An [A/B test](/blog/ab-testing-guide-for-engineers) uses a single, goal metric to compare two variants and pick a winner that improves your product. The problem with focusing on a single metric is that it hides the impacts on other metrics. A change improving one part of the product can negatively affect another part, or worse, hurt the entire product.
+
+To help prevent this, teams rely on guardrail metrics when running A/B tests. These are secondary metrics that help protect other parts of the product and the overall experience. They are metrics you don’t want your changes to hurt because they represent key areas of the product.
 
 Guardrail metrics act as an early warning system for A/B tests. When they hit a negative threshold, teams do more analysis to decide what is causing the negative impact and if they should pause the experiment (using [session replays](/tutorials/explore-insights-session-recordings) is a great way to do this).
 
