@@ -239,7 +239,7 @@ PostHog, on the other hand, focuses on providing insights on product and feature
   </table>
 </div>
 
-PostHog also offers these features to better understand how people are using your product:
+To better understand how people are using your product, PostHog also offers the following features:
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
   <table className="w-full mt-4">
