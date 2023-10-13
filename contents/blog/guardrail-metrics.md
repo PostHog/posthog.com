@@ -18,7 +18,7 @@ tags:
 
 An [A/B test](/blog/ab-testing-guide-for-engineers) uses a single, goal metric to compare two variants and pick a winner that improves your product. The problem with focusing on a single metric is that it hides the impacts on other metrics. A change improving one part of the product can negatively affect another part, or worse, hurt the entire product.
 
-To help prevent this, teams rely on guardrail metrics when running A/B tests. These are secondary metrics that help protect other parts of the product and the overall experience. They are metrics you don’t want your changes to hurt because they represent key areas of the product.
+To prevent this, teams rely on guardrail metrics when running A/B tests. These are secondary metrics that help protect other parts of the product and the overall experience. They are metrics you don’t want your test to hurt because they represent key areas of the product.
 
 Guardrail metrics act as an early warning system for A/B tests. When they hit a negative threshold, teams do more analysis to decide what is causing the negative impact and if they should pause the experiment (using [session replays](/tutorials/explore-insights-session-recordings) is a great way to do this).
 
@@ -48,7 +48,7 @@ When an A/B test triggers a guardrail metric at Airbnb, it's immediately escalat
 
 ![Airbnb guardrail process](../images/blog/guardrail-metrics/trigger.png)
 
-Out of the thousands of experiments that run at Airbnb each month, guardrails trigger ~25 for review. 80% of these rollout after stakeholder discussion. They decide to pause ~5 experiments per month, which means they prevent 5 potentially major impacts to critical metrics and product areas.
+Out of the thousands of experiments that run at Airbnb each month, guardrails trigger ~25 for review. 80% of these rollout after stakeholder discussion. They decide to pause ~5 experiments per month, which prevents 5 potentially major impacts to critical metrics and product areas.
 
 ## How to choose guardrail metrics
 
@@ -66,13 +66,13 @@ More false positives means you run fewer tests, limiting the pace of improvement
 
 ### Example guardrail metrics
 
-Potential guardrail metrics include clickthrough rate, active users, customer lifetime value, and pageviews. Here are some real-world examples:
+Potential guardrail metrics include clickthrough rate, active users, customer lifetime value, conversion rate, and pageviews. Here are some real-world examples:
 
 - [Airbnb](https://medium.com/airbnb-engineering/designing-experimentation-guardrails-ed6a976ec669): revenue, bounce rate, page load speed, seats booked for experiences.
 
-- [Square](https://developer.squareup.com/blog/lessons-learned-from-running-web-experiments/): bottom of funnel conversion, page load speed
+- [Square](https://developer.squareup.com/blog/lessons-learned-from-running-web-experiments/): bottom of funnel conversion, page load speed.
 
-- [Bing](https://exp-platform.com/Documents/2017-08%20KDDMetricInterpretationPitfalls.pdf): page load time, page returns
+- [Bing](https://exp-platform.com/Documents/2017-08%20KDDMetricInterpretationPitfalls.pdf): page load time, page returns.
 
 - [Netflix](https://www.adventuresinwhy.com/pdf/beyond_ab_testing.pdf): sample mismatch ratio, engagement, retention, conversion.
 
@@ -82,9 +82,9 @@ To help pick a metric, it's useful to know which secondary metrics have stopped 
 
 ##  Implementing guardrail metrics in PostHog
 
-Now that you know all about guardrail metrics, it’s time to implement them in your A/B tests. 
+Now that you know all about guardrail metrics, it’s time to implement them in your A/B tests in PostHog. To do this:
 
-1. Create an experiment in PostHog.
+1. Start by [creating an experiment](/docs/experiments/creating-an-experiment) in PostHog.
 
 2. Fill out the key name, variants, goal metric, and any other details. Adding details about the guardrail metrics to the description is useful.
 
@@ -96,9 +96,9 @@ Now that you know all about guardrail metrics, it’s time to implement them in 
 
 ![Guardrail metrics in PostHog](../images/blog/guardrail-metrics/guardrail.png)
 
-Another way to track guardrail metrics is by creating them as an insight or dashboard. This enables you to completely customize your guardrail metrics as well as reuse them across experiments. You can then send them to your email or Slack with a [subscription](/docs/product-analytics/subscriptions). 
+Another way to track guardrail metrics is by creating them as an insight or dashboard. This enables you to completely customize your guardrail metrics as well as reuse them across experiments. You can then send them to your email or Slack with a [subscription](/docs/product-analytics/subscriptions).
 
-Once you’ve done this, you have everything you need for safer, more effective A/B tests set up.
+Once you’ve done this, you have everything you need for safer, more effective A/B tests.
 
 ## Further reading
 
