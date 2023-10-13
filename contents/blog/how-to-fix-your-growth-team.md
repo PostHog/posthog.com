@@ -17,7 +17,7 @@ tags:
 
 There are telltale signs when a growth team is struggling: Stuck metrics, missed KPIs, and burnt-out engineers. Everyone is frustrated, but how do you fix it?
 
-[Alexey Komissarouk](https://alexeymk.com/) has seen it all. He's worked in growth for more than 8 years. Most recently, he was [Masterclass's](https://www.masterclass.com/) head of growth engineering, where he grew the growth engineering org to 25 people across 5 teams.
+[Alexey Komissarouk](https://alexeymk.com/) has seen it all. He's worked in growth for more than 8 years. Most recently, he was [MasterClass's](https://www.masterclass.com/) head of growth engineering, where he grew the growth engineering org to 25 people across 5 teams.
 
 Alexey shared his advice with us on tackling the most common problems growth teams face.
 
