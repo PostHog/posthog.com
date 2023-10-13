@@ -1763,14 +1763,6 @@ export const docsMenu = {
                             url: '/docs/migrate/migrate-from-amplitude',
                         },
                         {
-                            name: 'Migrate to PostHog Cloud EU',
-                            url: '/tutorials/migrate-eu-cloud',
-                        },
-                        {
-                            name: 'Migrate from a broken self-hosted instance',
-                            url: '/docs/migrate/migrate-broken-self-hosted',
-                        },
-                        {
                             name: 'Export your events',
                             url: '/docs/migrate/export-events',
                         },

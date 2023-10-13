@@ -974,6 +974,8 @@
         { "source": "/handbook/strategy/objectives", "destination": "/handbook/help" },
         { "source": "/handbook/strategy/investors", "destination": "/about" },
         { "source": "/handbook/start-here", "destination": "/handbook/people/onboarding" },
-        { "source": "/handbook/small-teams/dw", "destination": "/handbook/small-teams/data-warehouse" }
+        { "source": "/handbook/small-teams/dw", "destination": "/handbook/small-teams/data-warehouse" },
+        { "source": "/tutorials/migrate-eu-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
+        { "source": "/docs/migrate/migrate-broken-self-hosted", "destination": "/docs/migrate/migrate-to-cloud" }
     ]
 }
