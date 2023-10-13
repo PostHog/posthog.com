@@ -338,10 +338,10 @@ export default function HubSpotForm({
 
     const handleSubmit = async (values) => {
         const distinctId = posthog?.get_distinct_id?.()
-        posthog?.identify(distinctId, {
+        posthog?.identify?.(distinctId, {
             email: values.email,
         })
-        posthog?.capture('form submission', {
+        posthog?.capture?.('form submission', {
             form_name: form.name,
         })
         const submission = {

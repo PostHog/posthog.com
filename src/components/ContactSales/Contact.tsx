@@ -339,10 +339,10 @@ export default function Contact({
         initialValues: Object.fromEntries(fields.map((field) => [field.name, initialValues[field.name]])),
         onSubmit: async (values) => {
             const distinctId = posthog?.get_distinct_id?.()
-            posthog?.identify(distinctId, {
+            posthog?.identify?.(distinctId, {
                 email: values.workEmail,
             })
-            posthog?.capture('form submission', {
+            posthog?.capture?.('form submission', {
                 form_name: 'Contact sales',
             })
             const submission = {
