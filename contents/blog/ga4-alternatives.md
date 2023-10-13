@@ -144,7 +144,7 @@ See [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) 
 </table>
 </div>
 
-For a full comparison between PostHog and Google Analytics, check our [in-depth guide](/blog/posthog-vs-ga4).
+Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an in-depth look at the differences
 
 > #### Verdict
 >

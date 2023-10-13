@@ -23,7 +23,7 @@ We’re biased, but PostHog is a great one. When compared with Google Analytics,
 
 This post will go over the basics you must know to make the transition from Google Analytics to PostHog.
 
-> For a full comparison between PostHog and Google Analytics, check our [in-depth guide](/blog/posthog-vs-ga4).
+> Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an in-depth look at the differences
 
 ## Initial PostHog setup
 
