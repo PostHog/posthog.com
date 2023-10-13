@@ -1373,14 +1373,6 @@ export const docsMenu = {
                                     url: '/docs/apps/build/reference',
                                 },
                                 {
-                                    name: 'Using the PostHog API',
-                                    url: '/docs/apps/build/api',
-                                },
-                                {
-                                    name: 'Jobs',
-                                    url: '/docs/apps/build/jobs',
-                                },
-                                {
                                     name: 'Testing',
                                     url: '/docs/apps/build/testing',
                                 },
@@ -1637,8 +1629,7 @@ export const docsMenu = {
                                                 },
                                                 {
                                                     name: 'Debug hanging / freezing process',
-                                                    url:
-                                                        '/docs/runbook/services/clickhouse/debug-hanging-freezing-process',
+                                                    url: '/docs/runbook/services/clickhouse/debug-hanging-freezing-process',
                                                 },
                                                 {
                                                     name: 'Horizontal scaling (Sharding & replication)',
