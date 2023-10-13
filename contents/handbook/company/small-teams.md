@@ -132,7 +132,7 @@ James and Tim will meet every hire we make - it's a standard startup failure for
 
 #### Does a Small Team have a budget?
 
-Spend money when it makes sense to do so. See our general policy on spending money.
+Spend money when it makes sense to do so. See our [general policy on spending money](/handbook/people/spending-money).
 
 #### How do you keep the product together as a company?
 
