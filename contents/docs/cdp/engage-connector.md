@@ -60,12 +60,12 @@ We'd like to thank PostHog community members [Francis Onyishi](https://github.co
 
 ### Who maintains this app?
 
-This app is maintained by the community. If you have issues with the app not functioning as intended, please [let us know](mailto:hello@engage.so)!
+This app is maintained by Engage.so. If you have issues with the app not functioning as intended, please [let them know](mailto:hello@engage.so)!
 
 ### What if I have feedback on this app?
 
-We love feature requests and feedback! Please [tell us what you think](mailto:hello@engage.so)! to tell us what you think.
+We love feature requests and feedback! Please [tell Engage.so what you think](mailto:hello@engage.so)! to tell them what you think.
 
 ### What if my question isn't answered above?
 
-We love answering questions. [Ask us anything](mailto:hello@engage.so).
+We love answering questions. [Ask us anything](/questions).
