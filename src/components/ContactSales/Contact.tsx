@@ -338,11 +338,11 @@ export default function Contact({
     const { handleSubmit, values, handleChange, setFieldValue, errors, validateField } = useFormik({
         initialValues: Object.fromEntries(fields.map((field) => [field.name, initialValues[field.name]])),
         onSubmit: async (values) => {
-            const distinctId = posthog?.get_distinct_id()
-            posthog?.identify(distinctId, {
+            const distinctId = posthog?.get_distinct_id?.()
+            posthog?.identify?.(distinctId, {
                 email: values.workEmail,
             })
-            posthog?.capture('form submission', {
+            posthog?.capture?.('form submission', {
                 form_name: 'Contact sales',
             })
             const submission = {
