@@ -19,6 +19,8 @@ import { PostContext } from 'components/Edition/Posts'
 import Title from 'components/Edition/Title'
 import Upvote from 'components/Edition/Upvote'
 import LikeButton from 'components/Edition/LikeButton'
+import { QuestionForm } from 'components/Squeak'
+import { useLocation } from '@reach/router'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -35,11 +37,10 @@ export const Intro = ({
     const { postID } = useContext(PostContext)
 
     return (
-        <div className="">
+        <div className="mb-6">
             <div>
                 <Title className="text-primary dark:text-primary-dark">{title}</Title>
                 <p className="!m-0 opacity-70">{date}</p>
-                {postID && <LikeButton className="mt-2 mb-4" postID={postID} />}
             </div>
 
             {featuredVideo && <iframe src={featuredVideo} />}
@@ -56,12 +57,13 @@ export const Contributors = ({ contributors }) => {
             <div className="text-sm opacity-50 px-4 mb-2">Posted by</div>
             {contributors?.[0] && (
                 <div className={`mb-4 flex flex-col gap-4`}>
-                    {contributors.map(({ profile_id, image, name }) => (
+                    {contributors.map(({ profile_id, image, name, role }) => (
                         <Contributor
                             url={profile_id && `/community/profiles/${profile_id}`}
                             image={image}
                             name={name}
                             key={name}
+                            role={role}
                             text
                         />
                     ))}
@@ -69,6 +71,10 @@ export const Contributors = ({ contributors }) => {
             )}
         </>
     )
+}
+
+const Sidebar = ({ contributors, tableOfContents }) => {
+    return <></>
 }
 
 export default function BlogPost({ data, pageContext, location, mobile = false }) {
@@ -85,9 +91,10 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         h4: (props) => Heading({ as: 'h4', ...props }),
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
-        pre: MdxCodeBlock,
         inlineCode: InlineCode,
         blockquote: Blockquote,
+        pre: MdxCodeBlock,
+        MultiLanguage: MdxCodeBlock,
         img: ZoomImage,
         video: (props) => (
             <ZoomImage>
@@ -100,6 +107,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
     }
     const { tableOfContents } = pageContext
     const { fullWidthContent } = useLayoutData()
+    const { pathname } = useLocation()
 
     return (
         <article className="@container">
@@ -114,8 +122,8 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 }
             />
 
-            <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
-                <div className={`article-content flex-1 transition-all pt-8 w-full`}>
+            <div className="flex flex-col-reverse @3xl:flex-row gap-8 2xl:gap-12">
+                <div className={`article-content flex-1 transition-all pt-8 w-full overflow-auto`}>
                     <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-2xl px-0'}`}>
                         <Intro
                             title={title}
@@ -126,19 +134,30 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                             date={date}
                             tags={tags}
                         />
+                        <div className="xl:hidden">
+                            <Contributors contributors={contributors} />
+                            <MobileSidebar tableOfContents={tableOfContents} />
+                        </div>
+
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
+                        <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
+                            <QuestionForm
+                                disclaimer={false}
+                                subject={false}
+                                buttonText="Leave a comment"
+                                slug={pathname}
+                            />
+                        </div>
                     </div>
                 </div>
                 <aside
-                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-border-dark pt-4 ${
-                        mobile ? 'lg:hidden' : ''
-                    } `}
+                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-border dark:border-border-dark pt-4 xl:block hidden`}
                 >
                     <Upvote />
                     <Contributors contributors={contributors} />
-                    <MobileSidebar tableOfContents={tableOfContents} mobile={false} contributors={contributors} />
+                    <MobileSidebar tableOfContents={tableOfContents} />
                 </aside>
             </div>
         </article>
@@ -181,6 +200,7 @@ export const query = graphql`
                     }
                     name
                     profile_id
+                    role
                 }
             }
             parent {

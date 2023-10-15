@@ -25,6 +25,7 @@ export const Contributor = ({
     url,
     state,
     text = false,
+    role,
 }: IContributor & { text?: boolean; url?: string }) => {
     const Container = url ? Link : 'div'
     return (
@@ -35,7 +36,7 @@ export const Contributor = ({
             <div className="pr-24">
                 <div className="flex flex-col justify-between px-4 py-2 w-full">
                     <h3 className="mb-0 text-base leading-tight">{text && <span>{name}</span>}</h3>
-                    <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">Company role</p>
+                    {role && <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">{role}</p>}
                 </div>
 
                 {/*

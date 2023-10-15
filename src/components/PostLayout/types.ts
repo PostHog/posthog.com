@@ -13,6 +13,7 @@ export interface IContributor {
     name: string
     url?: string
     state?: any
+    role?: string
 }
 
 export interface IMenu {

@@ -165,17 +165,9 @@ const Post = ({
 
 export const Skeleton = () => {
     return (
-        <div className="flex space-x-4 items-center pt-4">
-            <div className="flex-shrink-0">
-                <div className="w-[32px] h-[32px] bg-accent dark:bg-accent-dark animate-pulse rounded-full" />
-            </div>
-            <div className="flex-grow">
-                <div className="w-[60px] bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
-                <div className="flex items-center space-x-2 max-w-[80%] mt-2">
-                    <div className="w-4/5 bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
-                    <div className="w-2/5 bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
-                </div>
-            </div>
+        <div className="flex items-center space-x-2 w-full mt-2 px-6">
+            <div className="w-4/5 bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
+            <div className="w-2/5 bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
         </div>
     )
 }
@@ -223,29 +215,31 @@ const PostFilters = () => {
                     </Menu.Items>
                 </Menu>
             </div>
-            <div className="flex-grow-0">
-                <Menu>
-                    <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 mb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
-                        <Filter className="w-5 h-5" />
-                    </Menu.Button>
-                    <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 py-1 bottom-0 left-2 right-2 translate-y-full">
-                        {activeMenu?.children?.map(({ name, url }, index) => {
-                            return (
-                                <Menu.Item key={`${name}-${index}`}>
-                                    <button
-                                        onClick={() => {
-                                            setTag(name)
-                                        }}
-                                        className="py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50"
-                                    >
-                                        {name}
-                                    </button>
-                                </Menu.Item>
-                            )
-                        })}
-                    </Menu.Items>
-                </Menu>
-            </div>
+            {activeMenu?.children?.length > 0 && (
+                <div className="flex-grow-0 flex items-center justify-center">
+                    <Menu>
+                        <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
+                            <Filter className="w-5 h-5" />
+                        </Menu.Button>
+                        <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 py-1 bottom-0 left-2 right-2 translate-y-full">
+                            {activeMenu?.children?.map(({ name, url }, index) => {
+                                return (
+                                    <Menu.Item key={`${name}-${index}`}>
+                                        <button
+                                            onClick={() => {
+                                                setTag(name)
+                                            }}
+                                            className="py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50"
+                                        >
+                                            {name}
+                                        </button>
+                                    </Menu.Item>
+                                )
+                            })}
+                        </Menu.Items>
+                    </Menu>
+                </div>
+            )}
         </div>
     )
 }
@@ -291,8 +285,9 @@ function PostsListing() {
                     {posts.map(({ id, attributes }, index) => {
                         return <Post articleView={articleView} key={id} {...attributes} id={id} />
                     })}
+                    {isLoading && <Skeleton />}
                     {hasMore && (
-                        <li className="mt-4 mb-24">
+                        <li className="mt-4 mb-24 px-4">
                             <button
                                 onClick={fetchMore}
                                 disabled={isLoading || isValidating}
@@ -340,16 +335,6 @@ export default function Default({ children }) {
                     className={`${articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'}`}
                 >
                     <div className={`transition-all`}>{children}</div>
-                    {articleView && (
-                        <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
-                            <QuestionForm
-                                disclaimer={false}
-                                subject={false}
-                                buttonText="Leave a comment"
-                                slug={pathname}
-                            />
-                        </div>
-                    )}
                 </div>
             </section>
         </>

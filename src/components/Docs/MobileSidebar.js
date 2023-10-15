@@ -1,7 +1,7 @@
 import React from 'react'
 import InternalSidebarLink from './InternalSidebarLink'
 
-export default function InternalSidebar({ tableOfContents, mobile = true }) {
+export default function InternalSidebar({ tableOfContents }) {
     return (
         tableOfContents?.length > 0 && (
             <div className="">

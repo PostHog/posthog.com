@@ -527,12 +527,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
     result.data.tutorials.nodes.forEach((node) => {
-        const tableOfContents = formatToc(node.headings)
         const { slug } = node.fields
-
+        const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
-            path: replacePath(node.fields.slug),
-            component: TutorialTemplate,
+            path: replacePath(slug),
+            component: BlogPostTemplate,
             context: {
                 id: node.id,
                 tableOfContents,
@@ -650,11 +649,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
         createPage({
-            path: slug,
-            component: CustomerTemplate,
+            path: replacePath(slug),
+            component: BlogPostTemplate,
             context: {
                 id: node.id,
                 tableOfContents,
+                slug,
                 post: true,
                 article: true,
             },
