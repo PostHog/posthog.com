@@ -1,13 +1,13 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
-interface CustomerCardProps {
+interface FeatureProps {
     name: string
     description: string
     image: string
 }
 
-export const Feature = ({ name, description }: CustomerCardProps): JSX.Element => {
+export const Feature = ({ name, description }: FeatureProps): JSX.Element => {
     return (
         <li className="text-center">
             <div className="mb-2">

@@ -23,6 +23,7 @@ import { Quote } from './components/Pricing/Quote'
 import { ProductLayout } from './components/ProductLayout'
 import { CustomerCard } from './components/Products/CustomerCard'
 import { Feature } from './components/Products/Feature'
+import { Subfeature } from './components/Products/Subfeature'
 import { Quote2 } from './components/Quote2'
 import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
@@ -56,6 +57,7 @@ export const shortcodes = {
     ProductLayout,
     CustomerCard,
     Feature,
+    Subfeature,
     Quote2,
     Signatures,
     SlackPage,

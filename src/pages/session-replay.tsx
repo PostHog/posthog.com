@@ -11,6 +11,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { Feature } from 'components/Products/Feature'
+import { Subfeature } from 'components/Products/Subfeature'
 
 const features = [
     '$50,000 in PostHog credit for 12 months<sup>1</sup>',
@@ -124,14 +125,66 @@ export const ProductProductAnalytics = () => {
 
             <div className="max-w-7xl mx-auto px-5 py-12">
                 <h3 className="text-3xl text-center mb-8">Features</h3>
-                <ul className="list-none p-0 grid grid-cols-3 gap-12">
+                <ul className="list-none p-0 grid grid-cols-3 gap-12 mb-8">
                     <Feature
                         name="Event timeline"
                         description="History of everything that happened in a user's session"
                     />
-                    <Feature name="Console logs" description="Debug issues faster by browsing the user’s console" />
+                    <Feature name="Console logs" description="Debug issues faster by browsing the user's console" />
                     <Feature name="Network tab" description="Analyze performance and network calls" />
                 </ul>
+
+                <ul className="list-none p-0 grid grid-cols-5 gap-4">
+                    <Subfeature
+                        title="Capture sessions without extra code"
+                        description="Works with PostHog.js"
+                        icon="Bolt"
+                    />
+                    <Subfeature
+                        title="Automatic playlists"
+                        description="Filter by user behavior or time"
+                        icon="Playlist"
+                    />
+                    <Subfeature
+                        title="Web or mobile session recording"
+                        description="Web or iOS (beta) available"
+                        icon="Mobile"
+                    />
+                    <Subfeature
+                        title="Download recordings"
+                        description="Retain recordings beyond data retention limits"
+                        icon="Download"
+                    />
+                    <Subfeature
+                        title="Block sensitive data"
+                        description="Disable capturing data from any DOM element with CSS"
+                        icon="Mask"
+                    />
+                </ul>
+            </div>
+
+            <div className="bg-accent dark:bg-accent-dark">
+                <div className="max-w-7xl mx-auto px-5 py-12">
+                    <div className="grid grid-cols-2 gap-12">
+                        <div>
+                            <h3 className="text-2xl text-blue">
+                                Answer all of these questions (and more) with PostHog Session Replay.
+                            </h3>
+                        </div>
+                        <div>
+                            <ul className="list-none">
+                                <li className="text-2xl font-bold">
+                                    Where do key events happen in my user's sessions?
+                                </li>
+                                <li className="text-2xl font-bold">
+                                    <Link to="#" className="text-red dark:text-yellow">
+                                        How do I understand my users' behavior in funnels?
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </Layout>
     )
