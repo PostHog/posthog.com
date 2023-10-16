@@ -81,3 +81,10 @@ Under the California Consumer Privacy Act (CCPA), PostHog as a Service Provider 
 We give all PostHog customers the tools to easily comply with their end users' requests under CCPA, including deletion of their data. We provide separate guidance for our customers on how to use PostHog in a CCPA-compliant way in our [Docs](/docs/privacy/ccpa-compliance). 
 
 We receive data collected by our customers from end-users and allow them to understand usage metrics of their products. We don't access customer end-user data unless instructed by a customer, and customer data is never sold to third parties. We do not have access to data collected by our customers who are using a self-hosted version of PostHog from end-users at all, unless they give us access to their instance. 
+
+## Yubikeys
+
+We enforce the use of Yubikeys where-ever we can. We recommend everyone buy two Yubikeys, in case you lose one and for easy of use.
+
+- One [Yubikey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) that you can leave plugged into your Macbook at all times
+- One [Yubikey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) that you can use in case you lose the first one, and to authenticate on your phone
