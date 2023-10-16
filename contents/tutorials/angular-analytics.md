@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-14.png
 tags: ["configuration", "feature flags", "events"]
 ---
 
-Angular is one of the original JavaScript web app frameworks and remains a popular choice for building them. To make your Angular app as good as possible, you need tools like analytics, session replay, and feature flags. PostHog provides these tools and is easy to set up in Angular.
+Angular is one of the original JavaScript web app frameworks and remains a popular choice for building them. To make your Angular app as good as possible, you need tools like [analytics](/docs/product-analytics), [session replay](/docs/session-replay), and [feature flags](/docs/feature-flags). PostHog provides these tools and is easy to set up in Angular.
 
 This tutorial shows you how to set up the tools PostHog provides by creating a basic Angular app, adding PostHog, and then using it to capture events and manage feature flags.
 
@@ -25,7 +25,7 @@ cd angular-ph
 
 ### Adding pages
 
-Our app will be two pages and a link to move between them. This is enough to show the basics of PostHog.
+To show the basics of PostHog, our app will be simple, just two pages and a link to move between them.
 
 To start with creating this app, generate home and about components using the Angular CLI.
 
@@ -111,15 +111,16 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 ```
 
-Once set up, go back to your app, refresh, and PostHog autocaptures events. This includes button clicks, pageviews, pageleaves, and more. It also starts recording sessions if you enable those.
+Once set up, go back to your app, refresh, and PostHog begins autocapturing events. This includes button clicks, pageviews, pageleaves, and more. It also starts recording sessions if you enable those in [your project settings](https://app.posthog.com/project/settings).
 
 ![Events](../images/tutorials/angular-analytics/event.png)
 
-You might notice that moving between pages only captures a single, initial pageview. This is because PostHog only captures pageview events when pages load, and as a single-page app, Angular only loads once. We must write more code to capture pageviews for each route change.
 
 ## Capturing pageviews
 
-Because Angular acts as a single-page app, we must set up a way to capture pageviews beyond the initial load. We can do this using the router. 
+You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Angular creates a single-page app, this event is only fired once. 
+
+ If we want to capture every route change, we must write code to capture pageviews for each.
 
 In `app-routing.module.ts`, import `Router`, `NavigationEnd`, and PostHog. Use these to set up a Router constructor that triggers a `$pageview` capture on `NavigationEnd` events like this:
 
@@ -194,11 +195,11 @@ When users click this button, PostHog captures a custom `home_button_clicked` ev
 
 PostHog enables you to use feature flags to control the release of features and code. We can use one to control the text on our button.
 
-To start, go [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Add a key (like `test-flag`) and set the release conditions to 100% of users. Add any other details, and then press "Save."
+To start, go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Add a key (like `test-flag`) and set the release conditions to 100% of users. Fill in any other details as you like, and then press "Save."
 
 ![Feature flag](../images/tutorials/angular-analytics/flag.png)
 
-To implement our flag, we must change the `home.component.ts` file:
+To implement the flag in our app we must change the `home.component.ts` file as follows:
 
 - Add the `buttonText` as a variable in our `HomeComponent` class.
 
