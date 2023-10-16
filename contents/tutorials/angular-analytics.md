@@ -1,6 +1,6 @@
 ---
 title: How to set up Angular analytics, feature flags, and more
-date: 2023-10-12
+date: 2023-10-16
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -25,7 +25,7 @@ cd angular-ph
 
 ### Adding pages
 
-To show the basics of PostHog, our app will be simple, just two pages and a link to move between them.
+To show the basics of PostHog, we create a simple app, just two pages and a link to move between them.
 
 To start with creating this app, generate home and about components using the Angular CLI.
 
@@ -86,7 +86,7 @@ Now, we can run `ng serve` in our terminal and go to [`http://localhost:4200/`](
 
 ## Installing PostHog
 
-With our app set up, it’s time to install and set up PostHog. To start, install the JavaScript web SDK:
+With our app set up, it’s time to install and set up PostHog. To start, install the [JavaScript web SDK](/docs/libraries/js):
 
 ```bash
 npm i posthog-js
@@ -118,9 +118,9 @@ Once set up, go back to your app, refresh, and PostHog begins autocapturing even
 
 ## Capturing pageviews
 
-You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Angular creates a single-page app, this event is only fired once. 
+You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Angular creates a single-page app, this only happens once, and the Angular router handles subsequent page changes.
 
- If we want to capture every route change, we must write code to capture pageviews for each.
+If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
 In `app-routing.module.ts`, import `Router`, `NavigationEnd`, and PostHog. Use these to set up a Router constructor that triggers a `$pageview` capture on `NavigationEnd` events like this:
 
@@ -199,17 +199,15 @@ To start, go to the [feature flags tab](https://app.posthog.com/feature_flags) i
 
 ![Feature flag](../images/tutorials/angular-analytics/flag.png)
 
-To implement the flag in our app we must change the `home.component.ts` file as follows:
+To implement the flag in our app, we must make the following changes the `home.component.ts` file:
 
-- Add the `buttonText` as a variable in our `HomeComponent` class.
+- Set up a change detector service by importing `ChangeDetectorRef` and using a `constructor` to initialize it.
 
-- Import `ChangeDetectorRef` and use a `constructor` to set it up as a service.
+- Add a `buttonText` state variable in our `HomeComponent` class.
 
-- Use the `ngOnInit()` lifecycle hook to check the flags.
+- Use the `ngOnInit()` lifecycle hook to wait for flags to load with `posthog.onFeatureFlags` then check our flag with `posthog.isFeatureEnabled('test-flag')`.
 
-- In `ngOnInit()`, wait for flags to load with `posthog.onFeatureFlags` then check our flag with `posthog.isFeatureEnabled('test-flag')`.
-
-- If enabled, change the `buttonText` value and use the `changeDetector` to update the variable.
+- If the flag is enabled, change the `buttonText` state and use the `changeDetector` to update the template with the new value.
 
 Altogether, this looks like this:
 
@@ -223,8 +221,9 @@ import posthog from 'posthog-js'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  buttonText: string = 'Click me!';
   constructor(private changeDetector: ChangeDetectorRef) {}
+
+  buttonText: string = 'Click me!';
 
   ngOnInit() {
     posthog.onFeatureFlags(() => {
@@ -244,7 +243,7 @@ export class HomeComponent {
 }
 ```
 
-Lastly, update `home.component.html` to use the `buttonText` value
+Lastly, update `home.component.html` to use the `buttonText` state variable.
 
 ```html
 <h1>Home</h1>
