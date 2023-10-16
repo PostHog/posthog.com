@@ -1,5 +1,5 @@
 ---
-title: An introduction to guardrail metrics for A/B tests
+title: Guardrail metrics for A/B tests, explained
 date: 2023-10-13
 author: ["ian-vanagas"]
 showTitle: true
@@ -20,29 +20,25 @@ Guardrail metrics, also known as counter metrics, are business critical metrics 
 
 Most [A/B tests](/blog/ab-testing-guide-for-engineers) have a single goal metric you use to compare two or more variants, and pick a winner that improves your product. But focusing on a single metric hides the impact a test could have on other metrics, potentially harming the product experience overall.
 
-Product and growth teams define guardrail metrics when running A/B tests to prevent this. They act as an early warning system for A/B tests. For example. a test that simplifies a signup flow would include conversion to paid as guardrail metric
+Product and growth teams use guardrail metrics as an early warning system for A/B tests. For example, a team testing a simplified a signup flow would include "conversion to paid" as guardrail metric because any increase in singups would be negated if fewer users end up paying for the product.
 
-When guardrail metrics hit a negative threshold, teams do more analysis to decide what is causing the negative impact, and if they should pause the experiment – watching [session replays](/tutorials/explore-insights-session-recordings) are a great way to do this.
+When guardrail metrics hit a negative threshold, teams do more analysis to decide what is causing the negative impact and if they should pause the experiment – e.g. by watching [session replays](/tutorials/explore-insights-session-recordings).
 
 ## Are guardrail metrics and seconardy metrics the same?
 
 Guardrail metrics are a subset of secondary metrics. A secondary metric is a non-goal metric you monitor for either positive or negative impacts in A/B tests. Guardrail metrics generally monitor for **negative** impacts.
 
-## Why use guardrail metrics?
+## Benefits of guardrail metrics
 
-Guardrail metrics enable you to protect your overall experience and key metrics while optimizing parts of your product with A/B tests.
-
-As a developer, using guardrail metrics provides benefits like:
+For developers, benefits include:
 
 - More confidence A/B tests aren’t causing problems. You spend less time checking for the negative impact of an experiment.
 
-- A more accurate source of issues than bug reports or general metrics. Developers don’t need to guess if an A/B test is causing an issue, guardrail metrics can tell them.
+- A more accurate source of issues than bug reports or general metrics. You don’t need to guess if an A/B test is causing an issue because guardrail metrics will tell you
 
 - More confidence in the results of the experiment knowing it doesn’t have broader negative effects.
 
 - Promoting a culture of experimentation knowing A/B tests are safer to do. Creates trust between teams knowing other teams’ A/B tests won’t affect them.
-
-### Case study: How Airbnb users guardrail metrics
 
 [Airbnb](https://medium.com/airbnb-engineering/designing-experimentation-guardrails-ed6a976ec669) is a good case study for why guardrails are useful and how to implement them.
 
@@ -54,7 +50,7 @@ When an A/B test triggers a guardrail metric at Airbnb, it's immediately escalat
 
 Out of the thousands of experiments that run at Airbnb each month, guardrails trigger ~25 for review. 80% of these rollout after stakeholder discussion. They decide to pause ~5 experiments per month, which prevents 5 potentially major impacts to critical metrics and product areas.
 
-## How to choose guardrail metrics
+## How to choose your guardrail metrics
 
 As a general guideline, you should pick metrics important to the entire product or company. These are often [north star](/blog/north-star-metrics) or [product health](/blog/product-health-metrics) metrics. Airbnb breaks guardrail metrics into three categories:
 
