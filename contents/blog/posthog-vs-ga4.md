@@ -181,6 +181,14 @@ PostHog, on the other hand, focuses on providing insights on product and feature
       </tr>
       <tr>
         <td>
+          <p class="!mb-0 pb-0.5 !leading-tight"><strong>User profiles</strong></p>
+          <p class="!mb-0 !text-sm text-opacity-75 leading-none">View user demographic data such as country, language, and device type</p>
+        </td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td>
           <p class="!mb-0 pb-0.5 !leading-tight"><strong>UTM tracking</strong></p>
           <p class="!mb-0 !text-sm text-opacity-75 leading-none">Track marketing campaigns with UTM tags</p>
         </td>
@@ -210,30 +218,6 @@ PostHog, on the other hand, focuses on providing insights on product and feature
         </td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
-      </tr>
-      <tr>
-        <td>
-          <p class="!mb-0 pb-0.5 !leading-tight"><strong>Cohorts</strong></p>
-          <p class="!mb-0 !text-sm text-opacity-75 leading-none">Combine users based on properties and events for group analysis</p>
-        </td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-      </tr>
-      <tr>
-        <td>
-          <p class="!mb-0 pb-0.5 !leading-tight"><strong>User profiles</strong></p>
-          <p class="!mb-0 !text-sm text-opacity-75 leading-none">View user demographic data such as country, language, and device type</p>
-        </td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        <td className="text-center"><span className="text-green text-lg">✔</span></td>
-      </tr>
-      <tr>
-        <td>
-          <p class="!mb-0 pb-0.5 !leading-tight"><strong>Data retention</strong></p>
-          <p class="!mb-0 !text-sm text-opacity-75 leading-none">How long historical data is retained</p>
-        </td>
-        <td className="text-center">14 months</td>
-        <td className="text-center">7 years</td>
       </tr>
     </tbody>
   </table>
