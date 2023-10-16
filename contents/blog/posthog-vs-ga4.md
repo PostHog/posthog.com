@@ -5,7 +5,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-kubit/posthog-vs-kubit.jpg
+featuredImage: ../images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
 featuredImageType: full
 author:
     - lior-neu-ner
