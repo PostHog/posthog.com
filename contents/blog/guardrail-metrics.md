@@ -16,15 +16,15 @@ tags:
 
 ## What are guardrail metrics?
 
-Guardrail metrics, also known as counter metrics, are business critical metrics you want to monitor for negative change while conducting A/B tests.
+Guardrail metrics, also known as counter metrics, are business-critical metrics you want to monitor for negative change while conducting A/B tests.
 
-Most [A/B tests](/blog/ab-testing-guide-for-engineers) have a single goal metric you use to compare two or more variants, and pick a winner that improves your product. But focusing on a single metric hides the impact a test could have on other metrics, potentially harming the product experience overall.
+Most [A/B tests](/blog/ab-testing-guide-for-engineers) have a single goal metric you use to compare how two or more variants improve your product. But focusing on a single metric hides the impact a test has on other metrics, potentially harming the product experience overall.
 
-Product and growth teams use guardrail metrics as an early warning system for A/B tests. For example, a team testing a simplified a signup flow would include "conversion to paid" as guardrail metric because any increase in singups would be negated if fewer users end up paying for the product.
+Product and growth teams use guardrail metrics as an early warning system for A/B tests. For example, a team testing a simplified signup flow would include "conversion to paid" as a guardrail metric because any increase in signups is negated if fewer users end up paying for the product.
 
 When guardrail metrics hit a negative threshold, teams do more analysis to decide what is causing the negative impact and if they should pause the experiment – e.g. by watching [session replays](/tutorials/explore-insights-session-recordings).
 
-## Are guardrail metrics and seconardy metrics the same?
+## Are guardrail metrics and secondary metrics the same?
 
 Guardrail metrics are a subset of secondary metrics. A secondary metric is a non-goal metric you monitor for either positive or negative impacts in A/B tests. Guardrail metrics generally monitor for **negative** impacts.
 
@@ -60,7 +60,7 @@ As a general guideline, you should pick metrics important to the entire product 
 
 You need a mix of metrics from each category to ensure you don't miss potential issues. Just remember that each guardrail metric you add also increases the likelihood of false positives. 
 
-For example, an [A/A test](/tutorials/aa-testing) with 3 guardrail metrics, and a significance level of 0.05, would cause a false alert approximately 14% of the time. The risk increases to 40% with 10 guardrail metrics, and a massive 73% with 25 guardrail metrics.
+For example, an [A/A test](/tutorials/aa-testing) with 3 guardrail metrics, and a significance level of 0.05, would cause a false alert approximately 14% of the time. The risk increases to 40% with 10 guardrail metrics and a massive 73% with 25 guardrail metrics.
 
 More false positives means you run fewer tests, limiting the pace of improvements. 
 
