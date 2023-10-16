@@ -453,7 +453,7 @@ GA4 also offers various [privacy controls](https://support.google.com/analytics/
                     <p class="!mb-0 pb-0.5 !leading-tight"><strong>Role-based access control</strong></p>
                 </td>
                 <td className="text-center"><span className="text-green text-lg">✔</span></td>
-                <td className="text-center"><span className="text-green text-lg">✔</span></td>
+                <td className="text-center">Feature flags only</td>
             </tr>
             <tr>
                 <td>
