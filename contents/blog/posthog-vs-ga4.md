@@ -19,7 +19,7 @@ Want to understand how PostHog and Google Analytics 4 (GA4) are different? Here'
 
 - **Google Analytics** is designed for marketers to understand user traffic, performance of different marketing channels, and return on ad spend.
 
-- **PostHog** is an all-in-one platform that *includes* analytics and a whole bunch more – like session replays, A/B testing, surveys, and feature flags. It's built for engineers and product teams.
+- **PostHog** is an all-in-one platform built to help engineers create better products. It includes analytics and a whole bunch more – like session replays, feature flags, A/B testing, and surveys.
 
 In this article we’ll explore these differences in more detail, and take a deep dive into the analytics features of both.
 
@@ -125,9 +125,9 @@ As mentioned above, PostHog offers a wider selection of features than GA4, which
 
 Both GA4 and PostHog offer analytics, but _what_ they offer is drastically different. 
 
-GA4 has better features for calculating ROI on Google Ads and other marketing campaigns. This is particularly useful for e-commerce websites. 
+GA4 has better features for calculating ROI on Google Ads and other marketing campaigns. This is particularly helpful for e-commerce websites. 
 
-PostHog, on the other hand, focuses on providing insights on product and feature usage. The biggest difference is [group analytics](/docs/product-analytics/group-analytics), which enable you to track metrics at an account or company level – a feature which GA4 lacks. This makes PostHog better suited for companies building B2B SaaS products.
+PostHog, on the other hand, focuses on providing insights on product and feature usage. The biggest difference is [group analytics](/docs/product-analytics/group-analytics), which enable you to track metrics at an account or company level – a feature which GA4 lacks. This makes PostHog especially useful for building B2B SaaS products.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
   <table className="w-full mt-4">
@@ -222,7 +222,7 @@ PostHog, on the other hand, focuses on providing insights on product and feature
       <tr>
         <td>
           <p class="!mb-0 pb-0.5 !leading-tight"><strong>User profiles</strong></p>
-          <p class="!mb-0 !text-sm text-opacity-75 leading-none">View user demographics data such as geolocation, language, and device type</p>
+          <p class="!mb-0 !text-sm text-opacity-75 leading-none">View user demographic data such as country, language, and device type</p>
         </td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -239,7 +239,7 @@ PostHog, on the other hand, focuses on providing insights on product and feature
   </table>
 </div>
 
-To better understand how people are using your product, PostHog also offers the following features:
+PostHog also offers the following features to help you understand how people are using your product:
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
   <table className="w-full mt-4">
@@ -319,7 +319,9 @@ On the other hand, it's hard to import data into GA4 because:
 1. The type of data you're allowed to [import into GA4](https://support.google.com/analytics/answer/10071301) is limited. 
 2. You need to constantly upload CSV files manually, or you need to set up an SFTP server to automatically do this for you.
 
-Below is a comparison of some of the most popular apps. For a full list of PostHog’s available integrations, [check our app directory](/apps).
+However, GA4 is well integrated into the Google ecosystem, making it easy to transfer data between it and other Google products.
+
+Below is a comparison of some of the most popular apps. For a full list of PostHog’s available integrations, [check our app directory](/cdp).
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
   <table className="w-full mt-4">
@@ -367,7 +369,17 @@ Below is a comparison of some of the most popular apps. For a full list of PostH
         <td className="text-center"><span className="text-red text-lg">✖</span></td>
       </tr>
       <tr>
-        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Looker Studio</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Visualize events in Looker dashboards.</p></td>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Google Search Console</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Seamlessly import data from your search console.</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Google BigQuery</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Automatically export data to BigQuery</p></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Google Looker Studio</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Visualize events in Looker dashboards.</p></td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
         <td className="text-center"><span className="text-red text-lg">✖</span></td>
       </tr>
@@ -435,6 +447,13 @@ GA4 also offers various [privacy controls](https://support.google.com/analytics/
                 </td>
                 <td className="text-center"><span className="text-lg">ISO 27001</span></td>
                 <td className="text-center"><span className="text-lg">SOC 2</span></td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="!mb-0 pb-0.5 !leading-tight"><strong>Role-based access control</strong></p>
+                </td>
+                <td className="text-center"><span className="text-green text-lg">✔</span></td>
+                <td className="text-center"><span className="text-green text-lg">✔</span></td>
             </tr>
             <tr>
                 <td>
