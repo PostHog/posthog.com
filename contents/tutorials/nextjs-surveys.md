@@ -4,7 +4,7 @@ date: 2023-10-09
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/surveys-next-js-hog.png
+featuredImage: ../images/tutorials/banners/tutorial-12.png
 tags: ['surveys']
 ---
 
@@ -12,7 +12,7 @@ tags: ['surveys']
 
 We'll create a basic Next.js app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.
 
-> Already have a Next.js app? [Skip to adding PostHog and setting up the A/B test](#adding-posthog).
+> Already have a Next.js app? [Skip to adding PostHog](#adding-posthog).
 
 ## Creating a Next.js app
 
@@ -43,7 +43,7 @@ export default function Home() {
 }
 ```
 
-Finally, run `npm run dev` and go to http://localhost:3000/ to see our new homepage.
+Finally, run `npm run dev` and go to `http://localhost:3000` to see our new homepage.
 
 ![Basic Next.js app](../images/tutorials/nextjs-surveys/basic-app.png)
 
@@ -99,6 +99,7 @@ export default function RootLayout({ children }) {
 To test everything has been set up correctly, you can use `useEffect` and the `usePostHog` hook to capture an event:
 
 ```js-web
+// app/page.js
 'use client'
 
 import { usePostHog } from 'posthog-js/react'
@@ -111,7 +112,7 @@ export default function Home() {
     if (posthog) {
       posthog.capture('successfully_setup');
     }
-  }, [posthog])
+  }, [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
 
   return (
     <main className={styles.main}>
@@ -131,30 +132,40 @@ After reloading `localhost:3000`, you should see events appear in your [PostHog 
 
 There are two options for displaying a survey using PostHog:
 
-1. Implement your own survey UI.
-2. Use PostHog's prebuilt survey UI.
+1. Use PostHog's prebuilt survey UI.
+2. Implement your own survey UI.
 
 This tutorial will cover how to implement both options:
 
-## Option 1: Implement your own survey UI
+### Option 1: Use PostHog's prebuilt survey UI
 
-First, create a survey in PostHog by going to the [surveys tab](https://app.posthog.com/surveys) and clicking "New survey." Then, set up your survey with the following settings:
+This is the simplest option. PostHog has a variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and will handles all the display logic and event capture for you.
+ 
+To create a survey with a prebuilt UI, go to the [surveys tab](https://app.posthog.com/surveys) and click "New survey." Then, set up your survey with the following settings:
 
 1. Add a name (like `my-first-survey`).
-2. Set the display mode to `API`.
+2. Set the display mode to `Popover`.
 3. Select the `Rating` question type. Set the question title to `How likely are you to recommend us to a friend?`, display type to `number` and scale to `1-10`.
 4. Leave the remaining optional properties blank (such as `Targeting` or `Thank you message`).
 
-Click "Save as draft" and then on the next screen click "Launch". We're now ready to integrate this survey into our app.
+Click "Save as draft" and then on the next screen click "Launch". 
 
-![Custom survey set up](../images/tutorials/react-surveys/create-api-survey.png)
+![Popover survey set up](../images/tutorials/nextjs-surveys/create-popover-survey.png)
 
-### Adding the survey code
+That's it! Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#viewing-results).
 
-There are four parts to adding code for our custom survey:
+![Popover survey in app](../images/tutorials/nextjs-surveys/popover-survey-example.png)
+
+### Option 2: Implement your own survey UI
+
+First, create a survey in PostHog like in option 1 above, except set the display mode to `API`.
+
+![Custom survey set up](../images/tutorials/nextjs-surveys/create-api-survey.png)
+
+Then, there are three parts to adding code for our custom survey:
 
 1. Create the survey UI.
-2. Add the server-side logic for displaying it.
+2. Add the logic for displaying it.
 3. Capture interactions from it.
 
 #### 1. Create the survey UI
@@ -217,42 +228,45 @@ Then, add the following CSS styles to your `page.module.css` file:
 Finally, integrate the component into `page.js`:
 
 ```react
+// app/page.js
+'use client'
+
 import { useState } from 'react'
 import styles from './page.module.css'
+import Survey from './Survey';
 
-function Survey({ title, onDismiss, onSubmit }) {
-  const [selectedValue, setSelectedValue] = useState(null);
+export default function Home() {
+  const [showSurvey, setShowSurvey] = useState(true);
 
-  const handleSelect = (value) => {
-    setSelectedValue(value);
-  }
+  const handleDismiss = () => {
+    setShowSurvey(false);
+    console.log("Survey dismissed!");
+  };
 
-  const handleSubmit = () => {
-    onSubmit(selectedValue);
-  }
+  const handleSubmit = (value) => {
+    setShowSurvey(false);
+    console.log("User submitted:", value);
+  };
 
   return (
-    <div className={styles.survey}>
-      <h2>{title}</h2>
-      <div>
-        {[...Array(10)].map((_, i) => (
-          <button className={styles.button} key={i + 1} onClick={() => handleSelect(i + 1)}>{i + 1}</button>
-        ))}
+    <main className={styles.main}>
+      <div className="App">
+        <h1>This is our Next.js survey tutorial</h1>
+        {showSurvey && (
+        <Survey
+          title={"Rate our service"}
+          onDismiss={handleDismiss}
+          onSubmit={handleSubmit}
+        />)}
       </div>
-      <div>
-        <button className={styles.button} onClick={onDismiss}>Dismiss</button>
-        <button className={styles.button} onClick={handleSubmit}>Submit</button>
-      </div>
-    </div>
-  );
+    </main>
+  )
 }
-
-export default Survey;
 ```
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/react-surveys/survey-ui.png)
+![Custom survey UI](../images/tutorials/nextjs-surveys/sample-survey-ui.png)
 
 #### 2. Add the logic for displaying it.
 
@@ -261,13 +275,15 @@ The first part of handling our display logic is fetching the survey from PostHog
 To fetch the active surveys, we use the `usePostHog` hook to retrieve our PostHog instance. Then, we call `posthog.getActiveMatchingSurveys()` using `useEffect()`:
 
 ```react
-// src/App.js
-import './App.css';
-import { useEffect, useState } from 'react';
+// app/page.js
+'use client'
+
+import { useState, useEffect } from 'react'
+import styles from './page.module.css'
 import Survey from './Survey';
 import { usePostHog } from 'posthog-js/react';
 
-function App() {
+export default function Home() {
   // ... rest of your code ...
 
   const posthog = usePostHog()
@@ -275,12 +291,10 @@ function App() {
     posthog.getActiveMatchingSurveys((surveys) => {
       // TODO: configure the survey
     }); 
-  }, [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
+  }, [posthog]);
   
   // ... rest of your code ...
 }
-
-export default App;
 ```
 
 `posthog.getActiveMatchingSurveys()` returns a surveys object that looks like this:
@@ -337,21 +351,23 @@ We can use this survey object to configure our `Survey` component:
         setSurveyTitle(survey.questions[0].question)
       }
     }); 
-  }, [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
+  }, [posthog])
   
   // ... rest of your code ...
 
- return (
- <div className="App">
-   <h1>This is our survey tutorial</h1>
-   {showSurvey && (
-     <Survey
-       title={surveyTitle}
-       onDismiss={handleDismiss}
-       onSubmit={handleSubmit}
-     />
-   )}
- </div>
+  return (
+    <main className={styles.main}>
+      <div className="App">
+        <h1>This is our Next.js survey tutorial</h1>
+        {showSurvey && (
+        <Survey
+          title={surveyTitle}
+          onDismiss={handleDismiss}
+          onSubmit={handleSubmit}
+        />)}
+      </div>
+    </main>
+  )
 ```
 
 Finally, we want to make sure we don't show the survey again to users who have either submitted or dismissed it. 
@@ -359,9 +375,6 @@ Finally, we want to make sure we don't show the survey again to users who have e
 We use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to store this data. Then, we'll add a check to show the survey based on whether the user has already interacted with it or not:
 
 ```react
-// src/App.js
-
-function App() {
   // ... rest of your code ...
 
   const [showSurvey, setShowSurvey] = useState(true);
@@ -384,21 +397,7 @@ function App() {
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
   };
 
-  return (
-    <div className="App">
-      <h1>This is our survey tutorial</h1>
-      {showSurvey && (
-        <Survey
-          title={surveyTitle}
-          onDismiss={handleDismiss}
-          onSubmit={handleSubmit}
-        />
-      )}
-    </div>
-  );
-}
-
-export default App;
+  // ... rest of your code ...
 ```
 
 #### 3. Capture interactions from it.
@@ -449,17 +448,19 @@ You can capture these events using `posthog.capture()`:
 Altogether, your code should look like this:
 
 ```react
-// src/App.js
-import { usePostHog } from 'posthog-js/react';
-import './App.css';
-import { useEffect, useState } from 'react';
-import Survey from './Survey';
+// app/page.js
+'use client'
 
-function App() {
-  const posthog = usePostHog()
+import { useState, useEffect } from 'react'
+import styles from './page.module.css'
+import Survey from './Survey';
+import { usePostHog } from 'posthog-js/react';
+
+export default function Home() {
   const [showSurvey, setShowSurvey] = useState(true);
   const [surveyTitle, setSurveyTitle] = useState(false);
   const [surveyID, setSurveyID] = useState(false);
+  const posthog = usePostHog()
 
   useEffect(() => {
     posthog.getActiveMatchingSurveys((surveys) => {
@@ -469,13 +470,7 @@ function App() {
         setSurveyTitle(survey.questions[0].question)
       }
     }); 
-  }, [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
-
-  useEffect(() => {
-    // Check local storage to see if the user has already seen this particular survey
-    const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${surveyID}`);
-    setShowSurvey(!hasInteractedWithSurvey);
-  }, [surveyID]);
+  }, [posthog])
 
   const handleDismiss = () => {
     setShowSurvey(false);
@@ -505,24 +500,37 @@ function App() {
   }, [showSurvey, surveyID, posthog])
 
   return (
-    <div className="App">
-      <h1>This is our survey tutorial</h1>
-      {showSurvey && (
+    <main className={styles.main}>
+      <div className="App">
+        <h1>This is our Next.js survey tutorial</h1>
+        {showSurvey && (
         <Survey
           title={surveyTitle}
           onDismiss={handleDismiss}
           onSubmit={handleSubmit}
-        />
-      )}
-    </div>
-  );
+        />)}
+      </div>
+    </main>
+  )
 }
-
-export default App;
 ```
 
-That's it! Our survey is ready to go!
+Our survey is now ready to go! The next step is to submit responses and view your results.
 
+## Viewing results
 
+After interacting with your survey, you can view results by selecting the survey from the [surveys tab](https://app.posthog.com/surveys). You'll see data on:
+
+- How many users have seen the survey.
+- How many users have dismissed the survey.
+- Responses.
+
+You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+
+![Viewing survey results](../images/tutorials/nextjs-surveys/survey-results.png)
 
 ## Further reading
+
+- [How to write great product survey questions (with examples)](/blog/product-survey-questions)
+- [Get feedback and book user interviews with surveys](/tutorials/feedback-interviews-site-apps)
+- [How to measure your NPS score in PostHog](/tutorials/nps-survey)
