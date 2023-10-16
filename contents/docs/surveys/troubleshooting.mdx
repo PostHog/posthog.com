@@ -54,3 +54,14 @@ You can call `getActiveMatchingSurveys` in your browser console to see which sur
 posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
 ```
 
+## How are surveys priced?
+
+Surveys are priced based on the [number of responses](/pricing?product=surveys). However, because surveys is a tool that utilizes other parts of PostHog, such as events and feature flags, it's important to highlight the underlying costs too.
+
+Whenever a response is sent, it's stored as an event in PostHog, along with survey "shown" and "dismissed" events. Events are free up to the 1st million per month, and then $0.00031 after that. This should be negligible unless you're sending surveys to millions of users a month.
+
+Whenever user properties targeting or linked flags are used in a survey, feature flags are used underneath the hood. Feature flags are free up to the 1st million requests per month, and then $0.0001 after that.
+
+We want to make sure that our customers use surveys without any hidden costs because surveys was built in a way that allows maximum flexibility with the rest of what PostHog offers. For example, because responses are stored as events, you can use PostHog [insights](/docs/features/insights) to analyze your survey responses even further, and to easily export data. Or if you want to create cohorts of users who've responded to a survey in a certain way, you can do that too with cohorts and feature flags.
+
+If you have any questions about pricing or if the underlying costs of your surveys usage supersedes your default usage for your other PostHog subscriptions, please reach out to us through any of these [support options](https://posthog.com/docs/support-options).
