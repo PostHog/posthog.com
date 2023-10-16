@@ -15,35 +15,39 @@ tags:
   - Product engineers
 ---
 
-There are telltale signs when a growth team is struggling: Stuck metrics, missed KPIs, and burnt-out engineers. Everyone is frustrated, but how do you fix it?
+Stuck metrics. Missed KPIs. Burnt out engineers. These are the telltale signs of a growth team in crisis. But how do you fix it?
 
-[Alexey Komissarouk](https://alexeymk.com/) has seen it all. He's worked in growth for more than 8 years. Most recently, he was [MasterClass's](https://www.masterclass.com/) head of growth engineering, where he grew the growth engineering org to 25 people across 5 teams.
+If anyone knows, it's [Alexey Komissarouk](https://alexeymk.com/). He's worked in growth for eight years. First at Opendoor, followed by a three-year stint as Head of Growth Engineering at MasterClass, where he grew the growth engineering org to 25 people across 5 teams.
 
-Alexey shared his advice with us on tackling the most common problems growth teams face.
+These are the most common growth problems he's encountered and how to fix them.
 
-## Problem 1: Your team is moving too slowly
+## Problem 1: Moving too slowly
 
 Your PM complains that the team is moving too slowly. The engineering team says there is too much technical debt. Sound familiar?
 
-Slow velocity is usually a result of over-engineering. "Growth engineering is counter-intuitive, and many engineers don't have the right mindset at first.", says Alexey, "They want to implement elegant solutions to complex problems. Growth engineering is the opposite of that. You need to move fast and iterate quickly."
+Slow velocity is usually a result of over-engineering. "Growth engineering is counter-intuitive, and many engineers don't have the right mindset at first.", says Alexey, 
+
+"They want to implement elegant solutions to complex problems. Growth engineering is the opposite of that. You need to move fast and iterate quickly."
 
 ### How to fix it
 
 First, sit with the engineering team and [prioritize your technical debt](https://alexeymk.com/2021/04/01/a-toolset-for-tackling-technical-debt.html). Figure out what is *actually* slowing you down (or likely to) and by how much. Once you have a ranked list, empower your team to fix it and assign 10%-20% of engineering time to do so.
 
-Second (and more importantly), urge your team to take shortcuts. The role of a growth engineer is not necessarily to build features but rather to validate whether a feature should exist or not. 
+Second (and more importantly), urge your team to take shortcuts. The role of a growth engineer isn't necessarily to build features, but to validate whether a feature should exist or not. 
 
-With this in mind, a good team exercise is to look at your last 20 experiments and identify which ones you could have validated faster. Thomas Owers, former growth lead at [Let's Do This](https://www.letsdothis.com/), has [good advice](/blog/how-to-start-a-growth-team#thomass-golden-rule-make-your-code-changes-as-small-as-possible) on this:
+As a team, look at your last 20 experiments and identify which ones you could have validated faster. Thomas Owers, former growth lead at [Let's Do This](https://www.letsdothis.com/), has [good advice](/blog/how-to-start-a-growth-team#thomass-golden-rule-make-your-code-changes-as-small-as-possible) on this:
 
 "Instead of asking 'How long will a project take?', ask 'What can you do in only 1 week? 3 days? Half a day?'. Often, you'll find that you can reduce the scope of the change while still being able to validate your hypothesis".
 
-## Problem 2: You struggle to prioritize the right projects
+## Problem 2: Prioritization
 
 You keep trying different experiments, but none have a meaningful impact and become a waste of time. It feels like you're always picking the wrong projects to work on.
 
-Alexey says the cause of this is teams not spending enough time estimating the effort and impact of their projects. 
+Alexey says this comes from teams not spending enough time estimating the effort and impact of their projects. 
 
-"Typically, teams prioritize their roadmaps by using frameworks such as [RICE](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/) and assigning t-shirt size estimates ("S", "M", "L"). This doesn't go deep enough. Spending only five minutes estimating the impact from something your team will spend weeks on doesn't make sense."
+"Typically, teams prioritize their roadmaps by using frameworks such as [RICE](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/) and assigning t-shirt size estimates ("S", "M", "L"). This doesn't go deep enough." 
+
+"Spending only five minutes estimating the impact from something your team will spend weeks on doesn't make sense."
 
 ### How to fix it 
 
@@ -59,11 +63,11 @@ Because you'll have a clearer idea of what to expect from your experiments, you'
 
 Alexey says that **one of their biggest wins came from following this approach**:
 
-"At MasterClass, we had a single subscription type. We knew we would eventually need to add tiered pricing, but this would be a huge, months-long company effort. We had no idea how much this would impact our revenue, so we struggled to prioritize it.
+"At MasterClass, we had a single subscription type. We knew we would eventually need to add tiered pricing, but this would be a huge, months-long company effort. We had no idea how much this would impact our revenue, so we struggled to prioritize it."
 
-I knew we needed a dollar estimate, so we created a simple [fake door test](/tutorials/fake-door-test). Users could select their preferred tier – but at checkout, we let them know they were being upgraded to the best tier and at the cheapest price. In reality, this was the existing one-size-fits-all pricing, and we hadn't actually built any of the functionality to support these new tiers.
+"I knew we needed a dollar estimate, so we created a simple [fake door test](/tutorials/fake-door-test). Users could select their preferred tier – but at checkout, we let them know they were being upgraded to the best tier and at the cheapest price. In reality, this was the existing one-size-fits-all pricing, and we hadn't actually built any of the functionality to support these new tiers."
 
-This saved us months of engineering time and enabled us to understand how much we could gain if we built this. Once we knew how much money the company stood to make, we prioritized it immediately! And it was incredibly easy to ask the rest of the company to work on it for a few months."
+"This saved us months of engineering time and enabled us to understand how much we could gain if we built this. Once we knew how much money the company stood to make, we prioritized it immediately! And it was incredibly easy to ask the rest of the company to work on it for a few months."
 
 ## Problem 3: You're running out of experiment ideas
 
@@ -72,9 +76,6 @@ Your growth team has been around for a few quarters and you've picked all the lo
 ### How to fix it
 
 [John Egan](https://jwegan.com/growth-hacking/managing-growth-teams-portfolio-step-step-guide/), former head of growth engineering at Pinterest, recommends two levers you can pull:
-
-1. Make it everyone's job to come up with project ideas.
-2. Make your engineers own their experiments.
 
 #### 1. Make it everyone's job to come up with project ideas
 
@@ -95,13 +96,13 @@ In practice, this means:
 - Removing processes that prevent engineers from making quick decisions on their own.
 - Giving engineers space to fail without being harsh on them.
 
-## Problem 4: Your team is afraid of making mistakes
+## Problem 4: Fear of making mistakes
 
 If your team is not making mistakes, you're not moving fast enough. 
 
 In fact, it's common for growth teams to cause a few incidents! And they won't succeed if they are focused on avoiding them.
 
-"When airbags were [introduced](https://www.purdue.edu/uns/html4ever/2006/060927ManneringOffset.html) in cars, the average speed on the highway went up. This is essentially what you want to do for your growth team. Give them the freedom to make mistakes, but make sure they can resolve them quickly."
+"When airbags were [introduced](https://www.purdue.edu/uns/html4ever/2006/060927ManneringOffset.html) in cars, the average speed on the highway went up. This is essentially what you want to do for your growth team. Give them the freedom to make mistakes, but make sure they can resolve them quickly", says Alexey.
 
 ### How to fix it
 
@@ -119,7 +120,7 @@ In the context of growth teams, there are a few ways to do this:
 
 Notice that none of the solutions involve writing tests, which can be a **waste of time** for experiments that only last a week. Instead, consider what it would take to comfortably ship changes without tests.
 
-## Problem 5: Your engineers are tired
+## Problem 5: Fatigue
 
 It's common for engineers to start feeling unsatisfied after a few quarters, and there's no shame in it. Growth engineering may not be as fulfilling for some people, especially if they yearn to build deep and complex systems. A symptom of this is diminishing returns from your team's work. 
 
