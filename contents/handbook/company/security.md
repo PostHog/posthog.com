@@ -84,7 +84,7 @@ We receive data collected by our customers from end-users and allow them to unde
 
 ## Yubikeys
 
-We enforce the use of Yubikeys where-ever we can. We recommend everyone buy two Yubikeys, in case you lose one and for easy of use.
+We enforce the use of Yubikeys whereever we can. We recommend everyone buy two Yubikeys, in case you lose one and for ease of use.
 
 - One [Yubikey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) that you can leave plugged into your Macbook at all times
 - One [Yubikey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) that you can use in case you lose the first one, and to authenticate on your phone
