@@ -16,13 +16,17 @@ tags:
 
 ## What are guardrail metrics?
 
-An [A/B test](/blog/ab-testing-guide-for-engineers) uses a single, goal metric to compare two variants and pick a winner that improves your product. The problem with focusing on a single metric is that it hides the impacts on other metrics. A change improving one part of the product can negatively affect another part, or worse, hurt the entire product.
+Guardrail metrics, also known as counter metrics, are business critical metrics you want to monitor for negative change while conducting A/B tests.
 
-To prevent this, teams rely on guardrail metrics when running A/B tests. These are secondary metrics that help protect other parts of the product and the overall experience. They are metrics you don’t want your test to hurt because they represent key areas of the product.
+Most [A/B tests](/blog/ab-testing-guide-for-engineers) have a single goal metric you use to compare two or more variants, and pick a winner that improves your product. But focusing on a single metric hides the impact a test could have on other metrics, potentially harming the product experience overall.
 
-Guardrail metrics act as an early warning system for A/B tests. When they hit a negative threshold, teams do more analysis to decide what is causing the negative impact and if they should pause the experiment (using [session replays](/tutorials/explore-insights-session-recordings) is a great way to do this).
+Product and growth teams define guardrail metrics when running A/B tests to prevent this. They act as an early warning system for A/B tests. For example. a test that simplifies a signup flow would include conversion to paid as guardrail metric
 
-> **Secondary vs guardrail metric:** Guardrail metrics are a subset of secondary metrics. A secondary metric is a non-goal metric you monitor for either positive or negative impacts in A/B tests. Guardrail metrics generally monitor for **negative** impacts.
+When guardrail metrics hit a negative threshold, teams do more analysis to decide what is causing the negative impact, and if they should pause the experiment – watching [session replays](/tutorials/explore-insights-session-recordings) are a great way to do this.
+
+## Are guardrail metrics and seconardy metrics the same?
+
+Guardrail metrics are a subset of secondary metrics. A secondary metric is a non-goal metric you monitor for either positive or negative impacts in A/B tests. Guardrail metrics generally monitor for **negative** impacts.
 
 ## Why use guardrail metrics?
 
@@ -38,7 +42,7 @@ As a developer, using guardrail metrics provides benefits like:
 
 - Promoting a culture of experimentation knowing A/B tests are safer to do. Creates trust between teams knowing other teams’ A/B tests won’t affect them.
 
-### Case study: Airbnb
+### Case study: How Airbnb users guardrail metrics
 
 [Airbnb](https://medium.com/airbnb-engineering/designing-experimentation-guardrails-ed6a976ec669) is a good case study for why guardrails are useful and how to implement them.
 
