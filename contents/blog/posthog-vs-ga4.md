@@ -300,8 +300,8 @@ Integrations are another major point of difference between GA4 and PosthHog, esp
 
 On the other hand, it's hard to import data into GA4 because:
 
-1. The type of data you're allowed to [import into GA4](https://support.google.com/analytics/answer/10071301) is limited. 
-2. You need to constantly upload CSV files manually, or you need to set up an SFTP server to automatically do this for you.
+1. The data type and format you're allowed to [import into GA4](https://support.google.com/analytics/answer/10071301) is restrictive. 
+2. You either need to constantly upload CSV files manually, or set up an SFTP server to automatically do this for you.
 
 However, GA4 is well integrated into the Google ecosystem, making it easy to transfer data between it and other Google products.
 
