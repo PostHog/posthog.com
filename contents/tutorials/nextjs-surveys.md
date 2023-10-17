@@ -128,7 +128,7 @@ First, create a Rating survey in PostHog like in option 1 above, except set the 
 
 ![Custom survey set up](../images/tutorials/nextjs-surveys/create-api-survey.png)
 
-Then, there are three parts to adding code for our custom survey:
+Then, there are four parts to adding code for our custom survey:
 
 1. Create the survey UI.
 2. Fetch the survey from PostHog.
@@ -488,7 +488,7 @@ export default function Home() {
 }
 ```
 
-Our survey is now ready to go! The next step is to submit responses and view your results.
+Our survey is now ready to go! The next step is ship the changes, get responses, and view your results.
 
 ## Viewing results
 
