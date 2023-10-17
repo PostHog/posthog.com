@@ -1,6 +1,6 @@
 ---
 title: Fixing growth problems with MasterClass's former Head of Growth
-date: 2023-09-18
+date: 2023-10-17
 author: ["lior-neu-ner"]
 showTitle: true
 rootpage: /blog
