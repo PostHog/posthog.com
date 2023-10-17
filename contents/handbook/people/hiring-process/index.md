@@ -289,4 +289,4 @@ If a candidate needs visa sponsorship, please keep in mind that the process is l
 
 ## E-Verify
 
-We participate in [E-verify](https://www.e-verify.gov/about-e-verify) for all U.S. hires which allows us to verify employment eligibility remotely and continue hiring in multiple states. 
+We participate in [E-verify](https://www.e-verify.gov/about-e-verify) for all U.S. new hires which allows us to verify employment eligibility remotely and continue hiring in multiple states. E-Verify is not used as a tool to pre-screen candidates.
