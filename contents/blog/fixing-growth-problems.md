@@ -1,5 +1,5 @@
 ---
-title: 5 problems every growth team faces (and how to fix them)
+title: Fixing growth problems with MasterClass's former Head of Growth
 date: 2023-09-18
 author: ["lior-neu-ner"]
 showTitle: true
@@ -55,11 +55,11 @@ Once you have shortlisted the ideas you want to work on, the next step is to **e
 
 Then, use this dollar amount together with your effort estimates to calculate a prioritization score:
 
-![How to calculate your prioritization score](../images/blog/how-to-fix-your-growth-team/how-to-calcluate-prioritization-score.png)
+![How to calculate your prioritization score](../images/blog/fixing-growth-problems/how-to-calcluate-prioritization-score.png)
 
 Because you'll have a clearer idea of what to expect from your experiments, you'll prioritize the ones more likely to win. The table below shows an example:
 
-![Example of prioritized projects table](../images/blog/how-to-fix-your-growth-team/prioritization-table.png)
+![Example of prioritized projects table](../images/blog/fixing-growth-problems/prioritization-table.png)
 
 Alexey says that **one of their biggest wins came from following this approach**:
 
