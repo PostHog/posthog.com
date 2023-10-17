@@ -73,23 +73,23 @@ As we grew, we realized that engineers _can_ design the UX of a product. Especia
 
 We invested quite a lot in getting our design _system_ up and running, and worked with a designer to get it done. Then we moved onto this "no design by default" phase. Had we been in this phase from the beginning, the app would have been very inconsistent... at best.
 
-Today, we have people that can help engineers with design, but they are very happy to work reactively and fast - and they don't block merging work during QA. This means we _do_ ship work where the design isn't perfect, but we won't drop things that are important and will keep improving them.
+Today, we have people that can help engineers with design, but they are very happy to work reactively and fast – and they don't block merging work during QA. This means we _do_ ship work where the design isn't perfect, but we won't drop things that are important and will keep improving them.
 
 For example, we've redesigned this entire website ~5 times.
 
 ## Hiring is key
 
-I think 90%+ of an organization's problems are solved by hiring right.
+I think 90%+ of an organization's problems are solved by hiring right – see [what we've learned about hiring](https://newsletter.posthog.com/p/everything-weve-learned-about-hiring).
 
 We have found it invaluable to pay people during our hiring process to do some actual work. We've refined this down to a one day task, which gives us a good sense of how much someone can get done and the quality of their actual code.
 
-We tend to hire people with more experience, who we find tend to work better with more autonomy. (Sidenote: we are working on ways to get better at growing people who are earlier in their careers). I think this is the magic combo when you're an all remote company.
+We tend to hire people with more experience, who we find tend to work better with more autonomy. I think this is the magic combo when you're an all remote company, though we're working on ways to get better at growing people who are earlier in their careers.
 
 ## Small teams
 
-I went to a superb talk by [Jeff Lawson](https://www.linkedin.com/in/jeffiel) (who runs [Twilio](https://twilio.com/)). He described how the greatest innovation at [Amazon](https://www.amazon.com/) was that it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
+I went to a superb talk by [Jeff Lawson](https://www.linkedin.com/in/jeffiel), who runs [Twilio](https://twilio.com/). He described how the greatest innovation at [Amazon](https://www.amazon.com/) was that it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
 
-PostHog works like a group of startups - with lots of [small teams](/handbook/company/small-teams). For each of our products, there is a team of up to 6, who can ship with minimal interference from the rest of the company. We hire a lot of ex technical founders to help here.
+PostHog works like a group of startups with lots of [small teams](/handbook/company/small-teams). Each of our products has a team of up to 6 who can ship with minimal interference from the rest of the company. We hire a lot of former technical founders to help here.
 
 ## Nearly everyone is an engineer
 
@@ -111,7 +111,7 @@ For non-God tier product people, such as me, I think it's easier to build a bett
 
 ## We raised venture capital
 
-Obviously, this matters. We didn't raise or spend a ridiculous amount compared to other companies we compete with - we have done a $3M seed, $9M series A and a $15M series B. We have a lot of it left and will be profitable next year.
+Obviously, this matters. We didn't raise or spend a ridiculous amount compared to other companies we compete with – we have done a $3M seed, $9M series A and a $15M series B. We have a lot of it left and will be profitable next year.
 
 Raising money does let build more stuff, but if you _should_ is very questionable and [a topic for another time](vc-or-bootstrap).
 
