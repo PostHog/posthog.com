@@ -308,7 +308,7 @@ export default function Posts({
                     {articleView && (
                         <button
                             onClick={() => navigate(prev ? -1 : '/posts')}
-                            className="inline-flex md:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                            className="inline-flex md:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 md:mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                         >
                             <RightArrow className="-scale-x-100 w-6" />
                             <span className="text-red dark:text-yellow text-[15px] font-semibold line-clamp-1 text-left">

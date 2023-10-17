@@ -40,7 +40,7 @@ export const Intro = ({
         <div className="mb-6">
             <div>
                 <Title className="text-primary dark:text-primary-dark">{title}</Title>
-                <p className="!m-0 opacity-70">{date}</p>
+                <p className="mb-1 opacity-70">{date}</p>
             </div>
 
             {featuredVideo && <iframe src={featuredVideo} />}
@@ -123,7 +123,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
             />
 
             <div className="flex flex-col-reverse @3xl:flex-row gap-8 2xl:gap-12">
-                <div className={`article-content flex-1 transition-all pt-8 w-full overflow-auto`}>
+                <div className={`article-content flex-1 transition-all md:pt-8 w-full overflow-auto`}>
                     <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-2xl px-0'}`}>
                         <Intro
                             title={title}

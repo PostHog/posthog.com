@@ -31,7 +31,7 @@ export const Contributor = ({
     return (
         <Container
             {...(url ? { to: url, state } : {})}
-            className="flex bg-accent dark:bg-accent-dark border border-light dark:border-dark mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
+            className="flex bg-accent dark:bg-accent-dark border border-light dark:border-dark md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
         >
             <div className="pr-24">
                 <div className="flex flex-col justify-between px-4 py-2 w-full">
