@@ -103,7 +103,7 @@ As mentioned above, PostHog offers a wider selection of features than GA4, which
       </tr>
       <tr>
         <td>
-          <p class="!mb-0 pb-0.5 !leading-tight"><strong>Apps/Integrations</strong></p>
+          <p class="!mb-0 pb-0.5 !leading-tight"><strong>Apps and integrations</strong></p>
           <p class="!mb-0 !text-sm text-opacity-75 leading-none">Push and pull data to other destinations</p>
         </td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -318,7 +318,7 @@ Below is a comparison of some of the most popular apps. For a full list of PostH
     </thead>
     <tbody>
       <tr>
-        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Zapier</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Export events for use in Zaps.</p></td>
+        <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Zapier</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Trigger Zaps with events.</p></td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
       </tr>
@@ -390,7 +390,7 @@ Below is a comparison of some of the most popular apps. For a full list of PostH
 
 ## Privacy, compliance, and security
 
-Compliance can be a bit of a regulatory headache, especially for international organizations who have to adhere to rules such as GDPR. PostHog makes such things simple by offering a choice of where your data is hosted, cookie-less tracking, and a variety of security options to keep your data secure. 
+Compliance can be a bit of a regulatory headache, especially for international organizations who must adhere to rules such as GDPR. PostHog makes such things simple by offering a choice of where your data is hosted, cookie-less tracking, and a variety of security options to keep your data secure. 
 
 GA4 also offers various [privacy controls](https://support.google.com/analytics/answer/9019185), but does not enable you to choose where your data is stored.
 
@@ -429,8 +429,8 @@ GA4 also offers various [privacy controls](https://support.google.com/analytics/
                 <td>
                     <p class="!mb-0 pb-0.5 !leading-tight"><strong>Security certification</strong></p>
                 </td>
-                <td className="text-center"><span className="text-lg">ISO 27001</span></td>
-                <td className="text-center"><span className="text-lg">SOC 2</span></td>
+                <td className="text-center">ISO 27001</td>
+                <td className="text-center">SOC 2</td>
             </tr>
             <tr>
                 <td>
@@ -523,11 +523,11 @@ Yes, PostHog has much of the same functionality as Google Analytics, but much of
 
 GA4 has a free tier which should be sufficient for most startups and scale-ups. Larger enterprises with higher data collection and export requirements will need to upgrade to GA360, which starts at $50,000 per year. A good rule of thumb is that if you're exporting more than 1 million events per day, or querying data with more than 10 million events, you'll need to upgrade to GA360 (see a full breakdown on [their website](https://support.google.com/analytics/answer/11202874)). 
 
-PostHog has transparent pricing based on the usage. It’s free to get started and completely free for the first 1 million analytics events. After this free monthly allowance you'll pay $0.00031/event, and PostHog charges progressively less the more you use. We recommend trying [our pricing calculator](/pricing) and reading our [guide for estimating your usage](/docs/billing/estimating-usage-costs).
+PostHog has transparent pricing based on the usage. It’s free to get started and completely free for the first 1 million analytics events. After this free monthly allowance, you'll pay $0.00031/event, and PostHog charges progressively less the more you use. We recommend trying [our pricing calculator](/pricing) and reading our [guide for estimating your usage](/docs/billing/estimating-usage-costs).
 
 ### Does PostHog offer a free trial?
 
-With PostHog, you don’t need a free trial — it’s free to get started, with a generous monthly allowance of events, replays, and API calls. If you’re within this allowance, PostHog is free to use forever.
+With PostHog, you don’t need a free trial — it’s free to get started, with a generous monthly allowance of events, replays, and feature flag requests. If you’re within this allowance, PostHog is free to use forever.
 
 ### Are there discounts for nonprofits and startups?
 
