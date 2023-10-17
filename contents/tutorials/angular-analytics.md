@@ -25,9 +25,9 @@ cd angular-ph
 
 ### Adding pages
 
-To show the basics of PostHog, we create a simple app, just two pages and a link to move between them.
+To show the basics of PostHog, we create a simple app—just two pages and a link to move between them.
 
-To start with creating this app, generate home and about components using the Angular CLI.
+To start with creating this app, first, generate `home` and `about` components using the Angular CLI.
 
 ```bash
 ng generate component home
@@ -103,7 +103,7 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<ph_instance_address>'
+    api_host:'<ph_instance_address>' // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
   }
 )
 
@@ -111,7 +111,7 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 ```
 
-Once set up, go back to your app, refresh, and PostHog begins autocapturing events. This includes button clicks, pageviews, pageleaves, and more. It also starts recording sessions if you enable those in [your project settings](https://app.posthog.com/project/settings).
+Once set up, go back to your app, refresh, and PostHog begins autocapturing events. This includes button clicks, pageviews, pageleaves, and more. It also starts [recording sessions](/docs/session-replay) if you enable those in [your project settings](https://app.posthog.com/project/settings).
 
 ![Events](../images/tutorials/angular-analytics/event.png)
 
@@ -195,7 +195,7 @@ When users click this button, PostHog captures a custom `home_button_clicked` ev
 
 PostHog enables you to use feature flags to control the release of features and code. We can use one to control the text on our button.
 
-To start, go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Add a key (like `test-flag`) and set the release conditions to 100% of users. Fill in any other details as you like, and then press "Save."
+To start, go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Name your key (like `test-flag`) and set the release conditions to 100% of users. Fill in any other details as you like, and then press "Save."
 
 ![Feature flag](../images/tutorials/angular-analytics/flag.png)
 
@@ -207,7 +207,7 @@ To implement the flag in our app, we must make the following changes the `home.c
 
 - Use the `ngOnInit()` lifecycle hook to wait for flags to load with `posthog.onFeatureFlags` then check our flag with `posthog.isFeatureEnabled('test-flag')`.
 
-- If the flag is enabled, change the `buttonText` state and use the `changeDetector` to update the template with the new value.
+- Check the flag value, update the `buttonText` state, and use the `changeDetector` to update the template accordingly. 
 
 Altogether, this looks like this:
 
