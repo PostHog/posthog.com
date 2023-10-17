@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-12.png
 tags: ['surveys']
 ---
 
-[Surveys](https://posthog.com/docs/surveys) are an excellent way to get feedback from your users. In this guide, we show you how to add a survey to your Next.js app.
+[Surveys](/docs/surveys) are an excellent way to get feedback from your users. In this guide, we show you how to add a survey to your Next.js app.
 
 We'll create a basic Next.js app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.
 
@@ -24,7 +24,7 @@ npx create-next-app@latest
 
 Name it whatever you like (we call ours `next-surveys`). Select **No** for TypeScript, **Yes** for `use app router`, **No** for Tailwind CSS and the defaults for every other option.
 
-Next, replace the boilerplate code in app/page.js with the following:
+Next, replace the placeholder code in `app/page.js` with the following:
 
 ```js
 // app/page.js
@@ -49,9 +49,9 @@ Finally, run `npm run dev` and go to `http://localhost:3000` to see our new home
 
 ## Adding PostHog
 
-We'll use PostHog to control our survey and monitor results (if you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup)). 
+We'll use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup). 
 
-First set up PostHog for use on the [client-side](/docs/libraries/next-js#app-router) by installing the [JavaScript react SDK](/docs/libraries/react):
+First, set up PostHog for use on the [client-side](/docs/libraries/next-js#app-router) by installing the [JavaScript React SDK](/docs/libraries/react):
 
 ```bash
 npm install posthog-js
@@ -69,7 +69,6 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   posthog.init("<ph_project_api_key>", {
     api_host: "<ph_instance_address>", // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-    capture_pageview: false,
   })
 }
 
@@ -78,7 +77,7 @@ export function PHProvider({ children }) {
 }
 ```
 
-Once created, you can import `PHProvider` into your `layout/js` file and wrap your app with it:
+Once created, you can import `PHProvider` into your `layout.js` file and wrap your app with it:
 
 ```js-web
 // app/layout.js
@@ -112,7 +111,7 @@ export default function Home() {
     if (posthog) {
       posthog.capture('successfully_setup');
     }
-  }, [posthog]); // posthog may be undefined until it's had a chance to initialize. Hence use it as a dependency for useEffect
+  }, [posthog]); // posthog may be undefined until it initializes, hence using it as a dependency for useEffect
 
   return (
     <main className={styles.main}>
@@ -139,16 +138,15 @@ This tutorial will cover how to implement both options:
 
 ### Option 1: Use PostHog's prebuilt survey UI
 
-This is the simplest option. PostHog has a variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and will handles all the display logic and event capture for you.
+This is the simplest option. PostHog has a variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and handles all the display logic and event capture for you.
  
-To create a survey with a prebuilt UI, go to the [surveys tab](https://app.posthog.com/surveys) and click "New survey." Then, set up your survey with the following settings:
+To create a survey with a prebuilt UI, go to the [surveys tab](https://app.posthog.com/surveys), click "New survey," and then set up your survey with the following settings:
 
 1. Add a name (like `my-first-survey`).
 2. Set the display mode to `Popover`.
 3. Select the `Rating` question type. Set the question title to `How likely are you to recommend us to a friend?`, display type to `number` and scale to `1-10`.
 4. Leave the remaining optional properties blank (such as `Targeting` or `Thank you message`).
-
-Click "Save as draft" and then on the next screen click "Launch". 
+5. Click "Save as draft" and then on the next screen click "Launch". 
 
 ![Popover survey set up](../images/tutorials/nextjs-surveys/create-popover-survey.png)
 
@@ -170,12 +168,14 @@ Then, there are three parts to adding code for our custom survey:
 
 #### 1. Create the survey UI
 
-We've created a sample survey UI for this tutorial. To use it, create a new file in `./app` folder called `Survey.js` and paste the following code:
+We've created a sample survey UI for this tutorial. To use it, create a new file in `app` folder called `Survey.js` and paste the following code:
 
 ```react
 // app/Survey.js
+import { useState } from "react";
+
 function Survey({ title, onDismiss, onSubmit }) {
-  const [selectedValue, setSelectedValue] = React.useState(null);
+  const [selectedValue, setSelectedValue] = useState(null);
 
   const handleSelect = (value) => {
     setSelectedValue(value);
@@ -272,7 +272,7 @@ This shows a survey popup every time you visit your app's homepage.
 
 The first part of handling our display logic is fetching the survey from PostHog. PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom targeting options](/docs/surveys/creating-surveys#targeting)). 
 
-To fetch the active surveys, we use the `usePostHog` hook to retrieve our PostHog instance. Then, we call `posthog.getActiveMatchingSurveys()` using `useEffect()`:
+To fetch the active surveys, we use the `usePostHog` hook to call `posthog.getActiveMatchingSurveys()` using `useEffect()`:
 
 ```react
 // app/page.js
@@ -289,7 +289,6 @@ export default function Home() {
   const posthog = usePostHog()
   useEffect(() => {
     posthog.getActiveMatchingSurveys((surveys) => {
-      // TODO: configure the survey
     }); 
   }, [posthog]);
   
@@ -372,7 +371,7 @@ We can use this survey object to configure our `Survey` component:
 
 Finally, we want to make sure we don't show the survey again to users who have either submitted or dismissed it. 
 
-We use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to store this data. Then, we'll add a check to show the survey based on whether the user has already interacted with it or not:
+We use [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to store this data. We add a check to show the survey based on whether the user has already interacted with it or not:
 
 ```react
   // ... rest of your code ...
@@ -474,7 +473,6 @@ export default function Home() {
 
   const handleDismiss = () => {
     setShowSurvey(false);
-    console.log("Survey dismissed!");
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');
     posthog.capture("survey dismissed", {
       $survey_id: surveyID // required
@@ -483,7 +481,6 @@ export default function Home() {
 
   const handleSubmit = (value) => {
     setShowSurvey(false);
-    console.log("User submitted:", value);
     localStorage.setItem(`hasInteractedWithSurvey_${surveyID}`, 'true');  
     posthog.capture("survey sent", {
       $survey_id: surveyID, // required
