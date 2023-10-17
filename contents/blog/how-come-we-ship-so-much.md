@@ -50,7 +50,7 @@ For example, if you are shipping the latest iPhone, complete design control is _
 
 I _suspect_ that you could still get higher quality with more autonomy – I'd probably have lots of designers and engineers collaborating with relatively few product managers, but I can't speak to the above as confidently since my experience is building a multi-product platform.
 
-## No product management by default
+## 1. No product management by default
 
 The responsibilities of a product manager still exist, but our engineers:
 
@@ -64,8 +64,7 @@ We have one product manager who steps in reactively if a small team needs more s
 
 The above _requires_ a lot of context setting from the company. We are _unusually transparent_ – we share board slides, financial information, fundraising progress before, during and after it happens, and much more. 
 
-
-## No design by default
+## 2. No design by default
 
 When we started, we felt that if product designers dictate to engineers, the best engineers would eventually quit as they'd want more freedom.
 
@@ -85,13 +84,13 @@ We have found it invaluable to pay people during our hiring process to do some a
 
 We tend to hire people with more experience, who we find tend to work better with more autonomy. I think this is the magic combo when you're an all remote company, though we're working on ways to get better at growing people who are earlier in their careers.
 
-## Small teams
+## 4. Each team is a mini startup
 
 I went to a superb talk by [Jeff Lawson](https://www.linkedin.com/in/jeffiel), who runs [Twilio](https://twilio.com/). He described how the greatest innovation at [Amazon](https://www.amazon.com/) was that it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
 
 PostHog works like a group of startups with lots of [small teams](/handbook/company/small-teams). Each of our products has a team of up to 6 who can ship with minimal interference from the rest of the company. We hire a lot of former technical founders to help here.
 
-## Nearly everyone is an engineer
+## 5. Nearly everyone is an engineer
 
 It's simple, but if you have lots of spending and focus outside of engineering, you won't get as much built.
 
@@ -99,35 +98,39 @@ At the time of writing, [we are 37 people](../team), only 11 of whom are in Go T
 
 We don't do outbound sales, our [marketing team](/handbook/small-teams/marketing) is very small, we only have one product manager, our [exec team](/handbook/small-teams/exec) only has 3 people. These things are all by design (and were possible because of our market - the majority of engineers generally want docs and to try something instead of demos and salespeople to deal with).
 
-## No meeting Tuesdays/Thursdays
+## 6. No meeting Tuesdays and Thursdays
 
-We want a culture where people can deep work. We push back on unnecessary meetings (and yes, there are _definitely_ some that are necessary, we have learned - often painfully).
+We want a culture where people can deep work. We push back on unnecessary meetings. We have learned, often painfully, that some meetings are necessary, but we default to asynchronous communication and adapt where needed.
 
-## We are a late mover
+## 7. We are a late mover
 
-I've had lots of founders tell me that they can't pursue idea X because some other startups are tackling it. This makes me laugh because we simply won't build a new product unless there is a $1bn+ competitor already offering it. We _love_ competition. It shows you that there will be demand. The magic in our platform (after an individual product is working well for our users) is then integrating everything together.
+I've had lots of founders tell me that they can't pursue idea X because some other startups are tackling it. 
+
+This makes me laugh because we simply won't build a new product unless there is a $1bn+ competitor already offering it. We _love_ competition. It shows you there's demand. 
+
+The magic in our platform (after an individual product is working well for our users) is then integrating everything together.
 
 For non-God tier product people, such as me, I think it's easier to build a better version of X than it is to create something entirely new.
 
-## We raised venture capital
+## 8. We raised venture capital
 
 Obviously, this matters. We didn't raise or spend a ridiculous amount compared to other companies we compete with – we have done a $3M seed, $9M series A and a $15M series B. We have a lot of it left and will be profitable next year.
 
-Raising money does let build more stuff, but if you _should_ is very questionable and [a topic for another time](vc-or-bootstrap).
+Raising money does let you build more stuff, but whether you _should_ is very questionable and [a topic for another time](/blog/vc-or-bootstrap).
 
-## Trust and feedback over process
+## 9. Trust and feedback over process
 
 This is one of [our values](/handbook/company/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
 
-To quote one of our team "process is scar tissue" – it often overcorrects, but because [humans are risk adverse](https://www.adamjuliangoldstein.com/blog/anxiety-algorithm/) it feels natural to implement them when a company starts growing. Humans, therefore, will overcorrect by default and that's why large corporations are (in more cases than not) irrationally-obstructive to getting work done.
+To quote one of our team: "process is scar tissue" – it often overcorrects, but because [humans are risk adverse](https://www.adamjuliangoldstein.com/blog/anxiety-algorithm/) it feels natural to implement it when a company starts growing. Humans, therefore, will overcorrect by default and that's why large corporations are (in more cases than not) irrationally-obstructive to getting work done.
 
-## There are plenty of problems
+## What are the drawbacks?
 
 As a company with high autonomy and low coordination, shipping things that affect multiple teams is _a lot_ harder than shipping something within a single team. You may need extra meetings, or to form a temporary project team, or you may just fail!
 
 Since we handle a lot of data, at scale, this has meant performance has, well, um, been a performance to solve. Performance is a very broad area to solve for, ranging from our infrastructure all the way through to our UX, and thus involves a lot of coordination and dependencies.
 
-## It's a matter of tradeoffs
+## Everything is a tradeoff
 
 The most important thing is to figure out if you value speed and autonomy over polish and control. Which path will help you achieve your company's mission better?
 
