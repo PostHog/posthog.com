@@ -23,7 +23,7 @@ We’re biased, but PostHog is a great one. When compared with Google Analytics,
 
 This post will go over the basics you must know to make the transition from Google Analytics to PostHog.
 
-> To get started, [sign up for PostHog](https://app.posthog.com/signup) and get 1 million events and 15,000 session recordings per month, free.
+> Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an in-depth look at the differences
 
 ## Initial PostHog setup
 

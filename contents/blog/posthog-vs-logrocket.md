@@ -749,7 +749,7 @@ More feature-rich product tiers begin at $550 USD per month, but increase depend
 
 PostHog has transparent pricing based on usage. It’s free to get started and completely free for the first 1 million events and 15,000 sessions captured every month.
 
-After this free monthly allowance you'll pay $0.00045/event and $0.005/recording, and PostHog charges progressively less the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
+After this free monthly allowance you'll pay $0.00031/event and $0.005/recording, and PostHog charges progressively less the more you use. Volume, non-profit and [startup discounts](/startups) are available upon request, and we recommend trying [our pricing calculator](/pricing) to estimate your pricing.
 
 ### Do LogRocket and PostHog offer free trials?
 
