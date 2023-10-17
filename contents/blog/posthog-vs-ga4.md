@@ -120,6 +120,7 @@ PostHog offers a wider selection of features than GA4, which focuses solely on a
 </div>
 
 <ArrayCTA /> 
+
 ## Analytics features
 
 Both GA4 and PostHog offer analytics, but _what_ they offer is drastically different. 
