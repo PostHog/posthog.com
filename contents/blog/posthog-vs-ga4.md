@@ -125,7 +125,7 @@ As mentioned above, PostHog offers a wider selection of features than GA4, which
 
 Both GA4 and PostHog offer analytics, but _what_ they offer is drastically different. 
 
-GA4 has better features for calculating ROI on Google Ads and other marketing campaigns. This is particularly helpful for e-commerce websites. 
+GA4 has better features for calculating monetization and ROI on Google Ads and other marketing campaigns. This is particularly helpful for e-commerce websites. 
 
 PostHog, on the other hand, focuses on providing insights on product and feature usage. The biggest difference is [group analytics](/docs/product-analytics/group-analytics), which enable you to track metrics at an account or company level – a feature which GA4 lacks. This makes PostHog especially useful for building B2B SaaS products.
 
@@ -146,6 +146,14 @@ PostHog, on the other hand, focuses on providing insights on product and feature
         </td>
         <td className="text-center"><span className="text-red text-lg">✖</span></td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
+      </tr>
+      <tr>
+        <td>
+          <p class="!mb-0 pb-0.5 !leading-tight"><strong>Monetization analytics</strong></p>
+          <p class="!mb-0 !text-sm text-opacity-75 leading-none">Track purchase value, LTV, and other revenue metrics</p>
+        </td>
+        <td className="text-center"><span className="text-green text-lg">✔</span></td>
+        <td className="text-center"><span className="text-red text-lg">✖</span></td>
       </tr>
       <tr>
         <td>
@@ -277,7 +285,7 @@ PostHog also offers the following features to help you understand how people are
           <p class="!mb-0 pb-0.5 !leading-tight"><strong>SQL access</strong></p>
           <p class="!mb-0 !text-sm text-opacity-75 leading-none">Write your own queries in SQL</p>
         </td>
-        <td className="text-center"><span className="text-red text-lg">✖</span></td>
+        <td className="text-center">Requires BigQuery</td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
         <td></td>
       </tr>
@@ -521,7 +529,9 @@ Yes, PostHog has much of the same functionality as Google Analytics, but much of
 
 ### How much do PostHog and Google Analytics cost?
 
-GA4 has a free tier which should be sufficient for most startups and scale-ups. Larger enterprises with higher data collection and export requirements will need to upgrade to GA360, which starts at $50,000 per year. A good rule of thumb is that if you're exporting more than 1 million events per day, or querying data with more than 10 million events, you'll need to upgrade to GA360 (see a full breakdown on [their website](https://support.google.com/analytics/answer/11202874)). 
+GA4 has a free tier which should be sufficient for most startups and scale-ups. Larger enterprises with higher data collection and export requirements will need to upgrade to GA360, which starts at $50,000 per year. 
+
+A good rule of thumb is that if you're exporting more than 1 million events per day, or querying data with more than 10 million events, you'll need to upgrade to GA360 (see a full breakdown on [their website](https://support.google.com/analytics/answer/11202874)). 
 
 PostHog has transparent pricing based on the usage. It’s free to get started and completely free for the first 1 million analytics events. After this free monthly allowance, you'll pay $0.00031/event, and PostHog charges progressively less the more you use. We recommend trying [our pricing calculator](/pricing) and reading our [guide for estimating your usage](/docs/billing/estimating-usage-costs).
 
