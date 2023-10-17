@@ -156,7 +156,7 @@ That's it! Your survey is now live and you should see it in your app. After subm
 
 ### Option 2: Implement your own survey UI
 
-First, create a survey in PostHog like in option 1 above, except set the display mode to `API`.
+First, create a Rating survey in PostHog like in option 1 above, except set the display mode to `API`.
 
 ![Custom survey set up](../images/tutorials/nextjs-surveys/create-api-survey.png)
 
