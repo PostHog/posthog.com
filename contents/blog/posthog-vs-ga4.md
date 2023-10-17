@@ -1,5 +1,5 @@
 ---
-date: 2023-10-12
+date: 2023-10-17
 title: "In-depth: PostHog vs Google Analytics 4"
 rootPage: /blog
 sidebar: Blog
@@ -17,9 +17,9 @@ tags:
 
 Want to understand how PostHog and Google Analytics 4 (GA4) are different? Here's the short answer:
 
-- **Google Analytics** is designed for marketers to understand user traffic, performance of different marketing channels, and return on ad spend.
+- **Google Analytics** is primarily designed for marketers who want to analyze landing pages, compare marketing channels, and return on ad spend.
 
-- **PostHog** is an all-in-one platform built to help engineers create better products. It includes analytics and a whole bunch more – like session replays, feature flags, A/B testing, and surveys.
+- **PostHog** is an all-in-one platform built to help engineers understand users and create better products. It includes analytics and a whole bunch more, such as session replays, feature flags, A/B testing, and surveys.
 
 In this article we’ll explore these differences in more detail, and take a deep dive into the analytics features of both.
 
@@ -37,11 +37,9 @@ Anyone can use PostHog – just [ask our marketing team](/blog/posthog-marketing
 
 PostHog is built with transparency at its core. We work in the open and give full access to our [source code](https://github.com/PostHog), and enable you to [build integrations](/docs/apps/build) and [other services](/blog/how-we-built-an-app-server) on top of the product. You can even give feedback on [our public roadmap](/roadmap).
 
-<ArrayCTA /> 
+## Core features
 
-## PostHog and Google Analytics feature comparison
-
-As mentioned above, PostHog offers a wider selection of features than GA4, which focuses solely on analytics. This makes PostHog better suited for teams who are building products.
+PostHog offers a wider selection of features than GA4, which focuses solely on analytics. This makes PostHog better suited for teams who are building products.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
   <table className="w-full mt-4">
@@ -121,7 +119,8 @@ As mentioned above, PostHog offers a wider selection of features than GA4, which
   </table>
 </div>
 
-## Analytics features comparison
+<ArrayCTA /> 
+## Analytics features
 
 Both GA4 and PostHog offer analytics, but _what_ they offer is drastically different. 
 
@@ -157,7 +156,7 @@ PostHog, on the other hand, focuses on providing insights on product and feature
       </tr>
       <tr>
         <td>
-          <p class="!mb-0 pb-0.5 !leading-tight"><strong>Marketing analytics</strong></p>
+          <p class="!mb-0 pb-0.5 !leading-tight"><strong>Advertising analytics</strong></p>
           <p class="!mb-0 !text-sm text-opacity-75 leading-none">Track ROI on Google Ads and other marketing campaigns</p>
         </td>
         <td className="text-center"><span className="text-green text-lg">✔</span></td>
@@ -304,9 +303,9 @@ PostHog also offers the following features to help you understand how people are
 
 ## Apps and integrations
 
-Integrations are another major point of difference between GA4 and PosthHog, especially when it comes to importing data. Because PostHog is built to be your single source of truth for viewing data, it's very simple to import data from other sources. 
+Because PostHog is built to be your single source of truth for viewing data, it's very simple to import data from other sources. 
 
-On the other hand, it's hard to import data into GA4 because:
+In contrast, it's hard to import data into GA4 because:
 
 1. The data type and format you're allowed to [import into GA4](https://support.google.com/analytics/answer/10071301) is restrictive. 
 2. You either need to constantly upload CSV files manually, or set up an SFTP server to automatically do this for you.
@@ -398,9 +397,9 @@ Below is a comparison of some of the most popular apps. For a full list of PostH
 
 ## Privacy, compliance, and security
 
-Compliance can be a bit of a regulatory headache, especially for international organizations who must adhere to rules such as GDPR. PostHog makes such things simple by offering a choice of where your data is hosted, cookie-less tracking, and a variety of security options to keep your data secure. 
+PostHog makes GDPR compliance easy by letting you choose where your data is hosted: EU or US. PostHog also offers cookie-less tracking, and a variety of security options to keep your data secure. 
 
-GA4 also offers various [privacy controls](https://support.google.com/analytics/answer/9019185), but does not enable you to choose where your data is stored.
+GA4 also offers various [privacy controls](https://support.google.com/analytics/answer/9019185), but you can't choose where your data is stored.
 
 <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
     <table className="w-full mt-4">
