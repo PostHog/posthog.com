@@ -1,5 +1,5 @@
 ---
-date: 2023-10-19
+date: 2023-10-23
 title: Why we've launched PostHog user surveys
 rootPage: /blog
 sidebar: Blog
