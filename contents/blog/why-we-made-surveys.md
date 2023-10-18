@@ -20,7 +20,7 @@ Why is this important? Because spreading everything out across multiple platform
 
 It’s also a pain having to log in and out of new platforms all the time. 
 
-Imagine creating surveys triggered by the same events you track in your analytics
+Imagine creating surveys triggered by the same events you track in your analytics.
 
 Imagine tracing a survey response back to session replay in just a few clicks.
 
