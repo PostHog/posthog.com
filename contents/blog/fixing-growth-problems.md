@@ -1,5 +1,5 @@
 ---
-title: Fixing growth problems with MasterClass's former Head of Growth
+title: Fixing growth problems with MasterClass's former Head of Growth Engineering
 date: 2023-10-17
 author: ["lior-neu-ner"]
 showTitle: true
