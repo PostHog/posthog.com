@@ -1277,15 +1277,6 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Notebooks',
-                    url: '/docs/notebooks',
-                    icon: 'Notebooks',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'HogQL',
                     url: '/docs/hogql',
                     icon: 'HogQL',
@@ -1319,6 +1310,15 @@ export const docsMenu = {
                             url: '/docs/hogql/tutorials',
                         },
                     ],
+                },
+                {
+                    name: 'Notebooks',
+                    url: '/docs/notebooks',
+                    icon: 'Book',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Toolbar',
