@@ -1,6 +1,6 @@
 ---
 title: How to set up surveys in Next.js
-date: 2023-10-09
+date: 2023-10-18
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
