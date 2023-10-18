@@ -6,7 +6,7 @@ showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-blog-at-desk.png
+featuredImage: ../images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
 featuredImageType: full
 category: Using PostHog
 tags:
