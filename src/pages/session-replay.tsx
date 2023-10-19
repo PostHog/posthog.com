@@ -192,7 +192,7 @@ export const ProductProductAnalytics = () => {
                 </section>
             </div>
 
-            <div className="hidden md:block sticky top-[107px] bg-accent dark:bg-accent-dark border-y border-border dark:border-border-dark z-50">
+            <section className="hidden md:block sticky top-[107px] bg-accent dark:bg-accent-dark border-y border-border dark:border-border-dark z-50">
                 <ul className="list-none flex gap-4 justify-center pt-1">
                     <li>
                         <span className="inline-block text-sm py-2 px-3 border border-light dark:border-dark !border-b-transparent -mb-px font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md">
@@ -235,9 +235,9 @@ export const ProductProductAnalytics = () => {
                         </span>
                     </li>
                 </ul>
-            </div>
+            </section>
 
-            <div className="max-w-7xl mx-auto px-5 py-12">
+            <section className="max-w-7xl mx-auto px-5 py-12">
                 <h3 className="text-3xl text-center mb-8">Features</h3>
                 <ul className="list-none p-0 grid md:grid-cols-3 gap-12 mb-8">
                     <Feature
@@ -275,9 +275,9 @@ export const ProductProductAnalytics = () => {
                         icon="Mask"
                     />
                 </ul>
-            </div>
+            </section>
 
-            <div className="bg-accent dark:bg-accent-dark">
+            <section className="bg-accent dark:bg-accent-dark">
                 <div className="max-w-7xl mx-auto px-5 py-12">
                     <div className="md:grid md:grid-cols-12 md:gap-12">
                         <div className="col-span-5">
@@ -294,8 +294,8 @@ export const ProductProductAnalytics = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="max-w-7xl mx-auto px-5 py-12">
+            </section>
+            <section className="max-w-7xl mx-auto px-5 py-12">
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
@@ -420,135 +420,238 @@ export const ProductProductAnalytics = () => {
                         </Accordion>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <div className="max-w-7xl mx-auto px-5">
-                <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
+                <section>
+                    <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
 
-                <div className="overflow-x-auto max-w-vw -mx-5 px-5 pb-2 mb-20 md:mx-0 md:px-0">
-                    <div className="flex-1 grid grid-cols-6 max-w-7xl text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto">
-                        {/* header row */}
-                        <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-border-dark">
-                            <strong></strong>
-                        </div>
-                        <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
-                            <strong className="block">Hotjar</strong>
-                            <span className="block text-[12px] md:text-sm leading-tight">
-                                <Link to="#">See full comparison</Link>
-                            </span>
-                        </div>
-                        <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
-                            <strong className="block">LogRocket</strong>
-                            <span className="block text-[12px] md:text-sm leading-tight">
-                                <Link to="#">See full comparison</Link>
-                            </span>
-                        </div>
-                        <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
-                            <strong className="block">Matomo</strong>
-                            <span className="block text-[12px] md:text-sm leading-tight">
-                                <Link to="#">See full comparison</Link>
-                            </span>
-                        </div>
-                        <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
-                            <strong className="block">FullStory</strong>
-                            <span className="block text-[12px] md:text-sm leading-tight">
-                                <Link to="#">See full comparison</Link>
-                            </span>
-                        </div>
-                        <div className="bg-white !border-t-2 !border-x-2  !border-l-blue !border-r-blue !border-t-blue dark:bg-accent-dark rounded-sm rounded-bl-none rounded-br-none leading-tight p-2 flex justify-center items-center">
-                            <strong className="block">PostHog logo</strong>
-                        </div>
+                    <div className="overflow-x-auto max-w-vw -mx-5 px-5 pb-2 mb-20 md:mx-0 md:px-0">
+                        <div className="flex-1 grid grid-cols-6 max-w-7xl text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto">
+                            {/* header row */}
+                            <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-border-dark">
+                                <strong></strong>
+                            </div>
+                            <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
+                                <strong className="block">Hotjar</strong>
+                                <span className="block text-[12px] md:text-sm leading-tight">
+                                    <Link to="#">See full comparison</Link>
+                                </span>
+                            </div>
+                            <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
+                                <strong className="block">LogRocket</strong>
+                                <span className="block text-[12px] md:text-sm leading-tight">
+                                    <Link to="#">See full comparison</Link>
+                                </span>
+                            </div>
+                            <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
+                                <strong className="block">Matomo</strong>
+                                <span className="block text-[12px] md:text-sm leading-tight">
+                                    <Link to="#">See full comparison</Link>
+                                </span>
+                            </div>
+                            <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
+                                <strong className="block">FullStory</strong>
+                                <span className="block text-[12px] md:text-sm leading-tight">
+                                    <Link to="#">See full comparison</Link>
+                                </span>
+                            </div>
+                            <div className="bg-white !border-t-2 !border-x-2  !border-l-blue !border-r-blue !border-t-blue dark:bg-accent-dark rounded-sm rounded-bl-none rounded-br-none leading-tight p-2 flex justify-center items-center">
+                                <strong className="block">PostHog logo</strong>
+                            </div>
 
-                        {/* body row */}
-                        <div className="p-2">Single-page app support</div>
-                        <div className="p-2">
-                            <strong>Check</strong>
-                        </div>
-                        <div className="p-2">
-                            <strong>Check</strong>
-                        </div>
-                        <div className="p-2">
-                            <strong>Check</strong>
-                        </div>
-                        <div className="p-2">
-                            <strong>Check</strong>
-                        </div>
-                        <div className="p-2 bg-white !border-x-2 !border-l-blue !border-r-blue">
-                            <strong>Check</strong>
-                        </div>
+                            {/* body row */}
+                            <div className="p-2">Single-page app support</div>
+                            <div className="p-2">
+                                <strong>Check</strong>
+                            </div>
+                            <div className="p-2">
+                                <strong>Check</strong>
+                            </div>
+                            <div className="p-2">
+                                <strong>Check</strong>
+                            </div>
+                            <div className="p-2">
+                                <strong>Check</strong>
+                            </div>
+                            <div className="p-2 bg-white !border-x-2 !border-l-blue !border-r-blue">
+                                <strong>Check</strong>
+                            </div>
 
-                        <div className="p-2">iOS recordings</div>
-                        <div className="p-2">
-                            <strong>X</strong>
-                        </div>
-                        <div className="p-2">
-                            <strong>Check</strong>
-                        </div>
-                        <div className="p-2">
-                            <strong>Check</strong>
-                        </div>
-                        <div className="p-2">
-                            <strong>Check</strong>
-                        </div>
-                        <div className="p-2 bg-white !border-x-2 !border-l-blue !border-r-blue">In beta</div>
+                            <div className="p-2">iOS recordings</div>
+                            <div className="p-2">
+                                <strong>X</strong>
+                            </div>
+                            <div className="p-2">
+                                <strong>Check</strong>
+                            </div>
+                            <div className="p-2">
+                                <strong>Check</strong>
+                            </div>
+                            <div className="p-2">
+                                <strong>Check</strong>
+                            </div>
+                            <div className="p-2 bg-white !border-x-2 !border-l-blue !border-r-blue">In beta</div>
 
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div className="p-2 bg-white !border-x-2 !border-b-2 !border-x-blue !border-b-blue rounded rounded-tl-none rounded-tr-none text-center">
-                            <CallToAction href="#" type="primary" size="md">
-                                Get started - free
-                            </CallToAction>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div className="p-2 bg-white !border-x-2 !border-b-2 !border-x-blue !border-b-blue rounded rounded-tl-none rounded-tr-none text-center">
+                                <CallToAction href="#" type="primary" size="md">
+                                    Get started - free
+                                </CallToAction>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <h3 className="text-center mb-4">So, what's best for you?</h3>
-                <div className="mb-20 grid md:grid-cols-2 gap-4">
-                    <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
-                        <ul>
-                            <li>
-                                You need heatmaps or scrollmaps
-                                <ul>
-                                    <li className="text-sm">PostHog is currently limited to clickmaps</li>
-                                </ul>
-                            </li>
-                            <li>Error tracking and alerting</li>
-                            <li>
-                                Mobile SDKs (in progress...)
-                                <ul>
-                                    <li>
-                                        <Link to="https://github.com/PostHog/posthog/issues/13269" external>
-                                            React Native
-                                        </Link>{' '}
-                                        |&nbsp;
-                                        <Link to="https://github.com/PostHog/posthog/issues/12344" external>
-                                            iOS
-                                        </Link>{' '}
-                                        |&nbsp;
-                                        <Link to="https://github.com/PostHog/posthog/issues/13267" external>
-                                            Android
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </VsCompetitor>
-                    <VsPostHog>
-                        <ul>
-                            <li>
-                                Interlinking with feature flags and insights
-                                <ul>
-                                    <li className="text-sm">Jump between them easily</li>
-                                </ul>
-                            </li>
-                            <li>Collaboration, sharing, and embedding exporting recordings</li>
-                            <li>No limits on how many recordings captured</li>
-                        </ul>
-                    </VsPostHog>
-                </div>
+                <section className="mb-20">
+                    <h3 className="text-center mb-8">So, what's best for you?</h3>
+                    <div className="mb-8 grid md:grid-cols-2 gap-4">
+                        <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
+                            <ul>
+                                <li>
+                                    You need heatmaps or scrollmaps
+                                    <ul>
+                                        <li className="text-sm">PostHog is currently limited to clickmaps</li>
+                                    </ul>
+                                </li>
+                                <li>Error tracking and alerting</li>
+                                <li>
+                                    Mobile SDKs (in progress...)
+                                    <ul>
+                                        <li>
+                                            <Link to="https://github.com/PostHog/posthog/issues/13269" external>
+                                                React Native
+                                            </Link>{' '}
+                                            |&nbsp;
+                                            <Link to="https://github.com/PostHog/posthog/issues/12344" external>
+                                                iOS
+                                            </Link>{' '}
+                                            |&nbsp;
+                                            <Link to="https://github.com/PostHog/posthog/issues/13267" external>
+                                                Android
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </VsCompetitor>
+                        <VsPostHog>
+                            <ul>
+                                <li>
+                                    Interlinking with feature flags and insights
+                                    <ul>
+                                        <li className="text-sm">Jump between them easily</li>
+                                    </ul>
+                                </li>
+                                <li>Collaboration, sharing, and embedding exporting recordings</li>
+                                <li>No limits on how many recordings captured</li>
+                            </ul>
+                        </VsPostHog>
+                    </div>
+
+                    <p className="text-center text-sm font-medium">
+                        Have questions about PostHog? <br className="md:hidden" />
+                        <Link to="/questions/session-replay">Ask the community</Link> or{' '}
+                        <Link to="/contact-sales">book a demo</Link>.
+                    </p>
+                </section>
+
+                <section className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center">Install &amp; customize</h3>
+
+                    <div className="text-center">block from homepage goes here (with additional 1st slide)</div>
+                </section>
+
+                <section className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center">Explore the docs</h3>
+
+                    <div className="text-center">
+                        Each column should be a docs subsection for that product (based on a key of some kind?)
+                    </div>
+                </section>
+
+                <section className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
+
+                    <p className="text-center mb-2">
+                        PostHog works in small teams. The Monitoring team are the folks responsible for building session
+                        replay.
+                    </p>
+                    <p className="text-center">(Shockingly, this team prefers their pizza without pineapple.)</p>
+
+                    <div className="text-center">people grid here, and bonus points for any listed job</div>
+                </section>
+
+                <section className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center">Roadmap &amp; changelog</h3>
+
+                    <p className="text-center">Here’s what the team is up to.</p>
+
+                    <div className="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h4 className="opacity-60 text-base">Latest update</h4>
+
+                            <div className="text-sm opacity-60">Sept 2023</div>
+                            <h4>
+                                <Link
+                                    to="#"
+                                    className="text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                                >
+                                    Update title
+                                </Link>
+                            </h4>
+                            <p>latest update here</p>
+
+                            <CallToAction href="/changelog" type="secondary" size="sm">
+                                Visit the changelog
+                            </CallToAction>
+                        </div>
+
+                        <div>
+                            <h4 className="opacity-60 text-base">Up next</h4>
+                            roadmap widget(s) go here
+                        </div>
+                    </div>
+                </section>
+
+                <section className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center">Questions?</h3>
+
+                    <p className="text-center">See more questions (or ask your own!) in our community forums.</p>
+
+                    <div className="text-center">
+                        <CallToAction href="/questions/session-replay" type="secondary" size="sm">
+                            View session replay questions
+                        </CallToAction>
+                    </div>
+
+                    <div className="text-center">question table here</div>
+                </section>
+
+                <section className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center">Pairs with...</h3>
+
+                    <p className="text-center">
+                        PostHog products are natively designed to be interoperable using Product OS.
+                    </p>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                        <div className="bg-accent dark:bg-accent-dark rounded-md p-4">
+                            icon
+                            <h4 className="mt-2 mb-0">
+                                <Link to="/product-analytics">Product analytics</Link>
+                            </h4>
+                            <p>Jump into a playlist of session recordings directly from any time series in a graph</p>
+                        </div>
+                    </div>
+                </section>
+                <section className="mb-20">
+                    <div className="text-center">Call to action section from homepage</div>
+                </section>
             </div>
         </Layout>
     )
