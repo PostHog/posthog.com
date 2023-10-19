@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import { ContributorImage } from 'components/PostLayout/Contributors'
 import Link from 'components/Link'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
