@@ -1059,7 +1059,6 @@
             "destination": "/product-engineers/running-group-targeted-ab-tests"
         },
         { "source": "/blog/sql-for-analytics", "destination": "/product-engineers/sql-for-analytics" },
-        { "source": "/blog/yc-2-years-on", "destination": "/yc-2-years-on" },
 
         { "source": "/docs/cdp/unduplicator", "destination": "/docs/cdp" },
         { "source": "/cdp/unduplicator", "destination": "/docs/cdp" },
