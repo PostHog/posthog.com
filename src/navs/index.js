@@ -1373,14 +1373,6 @@ export const docsMenu = {
                                     url: '/docs/apps/build/reference',
                                 },
                                 {
-                                    name: 'Using the PostHog API',
-                                    url: '/docs/apps/build/api',
-                                },
-                                {
-                                    name: 'Jobs',
-                                    url: '/docs/apps/build/jobs',
-                                },
-                                {
                                     name: 'Testing',
                                     url: '/docs/apps/build/testing',
                                 },
@@ -1760,14 +1752,6 @@ export const docsMenu = {
                         {
                             name: 'Migrate from Amplitude',
                             url: '/docs/migrate/migrate-from-amplitude',
-                        },
-                        {
-                            name: 'Migrate to PostHog Cloud EU',
-                            url: '/tutorials/migrate-eu-cloud',
-                        },
-                        {
-                            name: 'Migrate from a broken self-hosted instance',
-                            url: '/docs/migrate/migrate-broken-self-hosted',
                         },
                         {
                             name: 'Export your events',

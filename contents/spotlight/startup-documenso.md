@@ -74,6 +74,6 @@ The team uses cash incentives and branded merchandise to incentivize and reward 
 > **Putting it into practice:** Identify what sort of incentives will inspire your users, such as money, merch, or charitable donations. Create a system whereby you can issue these rewards quickly, and constantly remind users how to earn them and spread the word!
 
 **More success stories from PostHog for Startups**
-- [How Golioth designs new software and drives product development](/spotlights/startup-golioth)
-- [How Bugprove uses influencer marketing to grow word of mouth](/spotlights/startup-bugprove)
-- [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](spotlights/startup-before-sunset-ai)
+- [How Golioth designs new software and drives product development](//startup-golioth)
+- [How Bugprove uses influencer marketing to grow word of mouth](/spotlight/startup-bugprove)
+- [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](spotlight/startup-before-sunset-ai)

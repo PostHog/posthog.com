@@ -74,6 +74,6 @@ As a result, Bugprove is always exploring new channels and trying to find new wa
 > **Putting it into practice:** User research is a critical part of any marketing strategy, and you can never become compliant with a single channel. You need to constantly talk to your users to identify new opportunities. 
 
 **More success stories from PostHog for Startups**
-- [How Golioth designs new software and drives product development](/spotlights/startup-golioth)
-- [How Documenso got 4,000 stars and grew an active GitHub community](/spotlights/startup-documenso)
-- [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](spotlights/startup-before-sunset-ai)
+- [How Golioth designs new software and drives product development](/spotlight/startup-golioth)
+- [How Documenso got 4,000 stars and grew an active GitHub community](/spotlight/startup-documenso)
+- [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](spotlight/startup-before-sunset-ai)

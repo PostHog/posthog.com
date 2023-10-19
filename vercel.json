@@ -1075,6 +1075,8 @@
         { "source": "/blog/tags/session-recording", "destination": "/tutorials/categories/session-replay" },
         { "source": "/blog/categories/newsletter", "destination": "/newsletter" },
         { "source": "/blog/dev-marketing-paid-ads", "destination": "/founders/dev-marketing-paid-ads" },
-        { "source": "/handbook/small-teams/dw", "destination": "/handbook/small-teams/data-warehouse" }
+        { "source": "/handbook/small-teams/dw", "destination": "/handbook/small-teams/data-warehouse" },
+        { "source": "/tutorials/migrate-eu-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
+        { "source": "/docs/migrate/migrate-broken-self-hosted", "destination": "/docs/migrate/migrate-to-cloud" }
     ]
 }
