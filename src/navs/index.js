@@ -852,7 +852,7 @@ export const communityMenu = {
             name: 'Newsletter',
             icon: 'Newspaper',
             color: 'green',
-            url: '/newsletter',
+            url: 'https://posthog.com/newsletter',
         },
         {
             name: 'Merch',
@@ -887,7 +887,7 @@ export const companyMenu = {
             name: 'Blog',
             icon: 'Newspaper',
             color: 'yellow',
-            url: '/blog',
+            url: 'https://posthog.com/blog',
             children: [
                 {
                     name: 'Blog',
