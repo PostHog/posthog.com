@@ -1075,6 +1075,11 @@
         { "source": "/blog/dev-marketing-paid-ads", "destination": "/founders/dev-marketing-paid-ads" },
         { "source": "/handbook/small-teams/dw", "destination": "/handbook/small-teams/data-warehouse" },
         { "source": "/tutorials/migrate-eu-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
-        { "source": "/docs/migrate/migrate-broken-self-hosted", "destination": "/docs/migrate/migrate-to-cloud" }
+        { "source": "/docs/migrate/migrate-broken-self-hosted", "destination": "/docs/migrate/migrate-to-cloud" },
+        { "source": "/blog/categories/ceo-diaries", "destination": "/blog/ceo-diaries" },
+        { "source": "/blog/categories/engineering", "destination": "/blog/engineering" },
+        { "source": "/blog/categories/inside-posthog", "destination": "/blog/inside-posthog" },
+        { "source": "/blog/categories/posthog-news", "destination": "/blog/posthog-news" },
+        { "source": "/blog/categories/using-posthog", "destination": "/blog/using-posthog" }
     ]
 }
