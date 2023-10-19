@@ -85,6 +85,37 @@ const Card = ({ question, url }) => {
     )
 }
 
+const VsCompetitor = ({ title, children }) => {
+    return (
+        <div
+            className={`rounded-md p-4 border border-light dark:border-dark bg-white/50 dark:bg-accent-dark flex flex-col-reverse md:flex-row gap-4`}
+        >
+            <div className="flex-1">
+                <h4 className="leading-tight">{title}</h4>
+                {children}
+            </div>
+            <div className="shrink-0 basis-[167px] text-center">
+                <StaticImage src="../images/products/competitors-sr.png" className="max-w-[167px]" />
+            </div>
+        </div>
+    )
+}
+const VsPostHog = ({ children }) => {
+    return (
+        <div
+            className={`rounded-md p-4 border-2 border-blue dark:border-blue bg-white/50 dark:bg-accent-dark flex flex-col md:flex-row gap-4`}
+        >
+            <div className="shrink-0 basis-[145px] text-center">
+                <StaticImage src="../images/products/competitors-hog.png" className="max-w-[145px]" />
+            </div>
+            <div className="flex-1">
+                <h4 className="leading-tight">Reasons to choose (PostHog logo)</h4>
+                {children}
+            </div>
+        </div>
+    )
+}
+
 const Accordion = ({ children, label, active, initialOpen = false, className = '' }) => {
     const [open, setOpen] = useState(initialOpen)
     return (
@@ -388,6 +419,135 @@ export const ProductProductAnalytics = () => {
                             </p>
                         </Accordion>
                     </div>
+                </div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-5">
+                <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
+
+                <div className="overflow-x-auto max-w-vw -mx-5 px-5 pb-2 mb-20 md:mx-0 md:px-0">
+                    <div className="flex-1 grid grid-cols-6 max-w-7xl text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto">
+                        {/* header row */}
+                        <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-border-dark">
+                            <strong></strong>
+                        </div>
+                        <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
+                            <strong className="block">Hotjar</strong>
+                            <span className="block text-[12px] md:text-sm leading-tight">
+                                <Link to="#">See full comparison</Link>
+                            </span>
+                        </div>
+                        <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
+                            <strong className="block">LogRocket</strong>
+                            <span className="block text-[12px] md:text-sm leading-tight">
+                                <Link to="#">See full comparison</Link>
+                            </span>
+                        </div>
+                        <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
+                            <strong className="block">Matomo</strong>
+                            <span className="block text-[12px] md:text-sm leading-tight">
+                                <Link to="#">See full comparison</Link>
+                            </span>
+                        </div>
+                        <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
+                            <strong className="block">FullStory</strong>
+                            <span className="block text-[12px] md:text-sm leading-tight">
+                                <Link to="#">See full comparison</Link>
+                            </span>
+                        </div>
+                        <div className="bg-white !border-t-2 !border-x-2  !border-l-blue !border-r-blue !border-t-blue dark:bg-accent-dark rounded-sm rounded-bl-none rounded-br-none leading-tight p-2 flex justify-center items-center">
+                            <strong className="block">PostHog logo</strong>
+                        </div>
+
+                        {/* body row */}
+                        <div className="p-2">Single-page app support</div>
+                        <div className="p-2">
+                            <strong>Check</strong>
+                        </div>
+                        <div className="p-2">
+                            <strong>Check</strong>
+                        </div>
+                        <div className="p-2">
+                            <strong>Check</strong>
+                        </div>
+                        <div className="p-2">
+                            <strong>Check</strong>
+                        </div>
+                        <div className="p-2 bg-white !border-x-2 !border-l-blue !border-r-blue">
+                            <strong>Check</strong>
+                        </div>
+
+                        <div className="p-2">iOS recordings</div>
+                        <div className="p-2">
+                            <strong>X</strong>
+                        </div>
+                        <div className="p-2">
+                            <strong>Check</strong>
+                        </div>
+                        <div className="p-2">
+                            <strong>Check</strong>
+                        </div>
+                        <div className="p-2">
+                            <strong>Check</strong>
+                        </div>
+                        <div className="p-2 bg-white !border-x-2 !border-l-blue !border-r-blue">In beta</div>
+
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div className="p-2 bg-white !border-x-2 !border-b-2 !border-x-blue !border-b-blue rounded rounded-tl-none rounded-tr-none text-center">
+                            <CallToAction href="#" type="primary" size="md">
+                                Get started - free
+                            </CallToAction>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 className="text-center mb-4">So, what's best for you?</h3>
+                <div className="mb-20 grid md:grid-cols-2 gap-4">
+                    <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
+                        <ul>
+                            <li>
+                                You need heatmaps or scrollmaps
+                                <ul>
+                                    <li className="text-sm">PostHog is currently limited to clickmaps</li>
+                                </ul>
+                            </li>
+                            <li>Error tracking and alerting</li>
+                            <li>
+                                Mobile SDKs (in progress...)
+                                <ul>
+                                    <li>
+                                        <Link to="https://github.com/PostHog/posthog/issues/13269" external>
+                                            React Native
+                                        </Link>{' '}
+                                        |&nbsp;
+                                        <Link to="https://github.com/PostHog/posthog/issues/12344" external>
+                                            iOS
+                                        </Link>{' '}
+                                        |&nbsp;
+                                        <Link to="https://github.com/PostHog/posthog/issues/13267" external>
+                                            Android
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </VsCompetitor>
+                    <VsPostHog>
+                        <ul>
+                            <li>
+                                Interlinking with feature flags and insights
+                                <ul>
+                                    <li className="text-sm">Jump between them easily</li>
+                                </ul>
+                            </li>
+                            <li>Collaboration, sharing, and embedding exporting recordings</li>
+                            <li>No limits on how many recordings captured</li>
+                        </ul>
+                    </VsPostHog>
                 </div>
             </div>
         </Layout>
