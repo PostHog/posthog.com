@@ -42,6 +42,8 @@ Since we shipped the [initial beta in June](/changelog/2023#surveys-beta-release
 - **[August 8:](/changelog/2023#multiple-choice-surveys-released)** Multiple choice surveys
 - **[August 18:](/changelog/2023#wait-periods-now-available-for-surveys)** Wait periods and thank you messages
 - **[September 14:](/changelog/2023#automatic-nps-scoring-added-to-surveys)** Automatic NPS calculation
+- **[October 10:](/changelog/2023#surveys-get-a-makeover)** Redesign and multiple step surveys
+- **[October 19:](/changelog/2023#survey-templates-added)** Survey templates for NPS, CSAT, CES and more
 
 These features make surveys perfect for the most common use-cases, including [NPS surveys](/tutorials/nps-survey), customer satisfaction surveys, and [product-market fit surveys](/blog/measure-product-market-fit). 
 
