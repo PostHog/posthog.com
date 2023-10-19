@@ -93,7 +93,7 @@ export const postsMenu: IMenu[] = [
     },
     {
         name: 'Blog',
-        url: '/blog/',
+        url: '/blog',
         icon: 'Newspaper',
         color: 'teal',
         children: [
@@ -183,7 +183,7 @@ export const postsMenu: IMenu[] = [
     },
     {
         name: 'Newsletter',
-        url: '/newsletter/',
+        url: '/newsletter',
         icon: 'Newspaper',
         color: 'green',
     },

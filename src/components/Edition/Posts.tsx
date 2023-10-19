@@ -121,8 +121,9 @@ export const PostsContext = createContext({})
 export const PostContext = createContext({})
 
 const menusByRoot = {
-    tutorials: { parent: communityMenu, activeInternalNav: communityMenu.children[2] },
-    blog: { parent: companyMenu, activeInternalNav: companyMenu.children[5] },
+    tutorials: { parent: communityMenu, activeInternalMenu: communityMenu.children[2] },
+    blog: { parent: companyMenu, activeInternalMenu: companyMenu.children[5] },
+    newsletter: { parent: communityMenu, activeInternalMenu: communityMenu.children[4] },
 }
 
 const Router = ({ children, prev }: { children: React.ReactNode; prev: string | null }) => {
@@ -235,6 +236,9 @@ export default function Posts({
     const [tag, setTag] = useState(initialTag)
     const [prev, setPrev] = useState<string | null>(null)
     const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
+    const [layoutMenu, setLayoutMenu] = useState(
+        menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] }
+    )
 
     const [params, setParams] = useState(getParams(root, initialTag))
 
@@ -254,7 +258,9 @@ export default function Posts({
             setRoot(undefined)
             setTag(undefined)
         }
-        setActiveMenu(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
+        if (articleView || pathname === '/posts') {
+            setLayoutMenu(menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] })
+        }
     }, [pathname])
 
     useEffect(() => {
@@ -262,7 +268,7 @@ export default function Posts({
     }, [root, tag])
 
     return (
-        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
+        <Layout parent={layoutMenu.parent} activeInternalMenu={layoutMenu.activeInternalMenu}>
             <PostsContext.Provider
                 value={{
                     mutate,
@@ -280,6 +286,7 @@ export default function Posts({
                     setRoot,
                     tag,
                     activeMenu,
+                    setActiveMenu,
                 }}
             >
                 <PostProvider
@@ -287,10 +294,11 @@ export default function Posts({
                         title: title || 'Posts',
                         menu: menu.map((menuItem) => ({
                             ...menuItem,
-                            handleLinkClick: ({ name, url, topLevel }) => {
+                            handleLinkClick: ({ name, url: activeURL, topLevel }) => {
                                 if (topLevel) {
-                                    setRoot(url === '/posts' ? undefined : url?.split('/')[1])
+                                    setRoot(activeURL === '/posts' ? undefined : activeURL?.split('/')[1])
                                     setTag(undefined)
+                                    setActiveMenu(menu.find(({ url }) => url === activeURL))
                                 } else {
                                     setTag(name)
                                 }

@@ -742,14 +742,14 @@ export const handbookSidebar = [
 
 export const communityMenu = {
     name: 'Community',
-    url: '/posts',
+    url: 'https://posthog.com/posts',
     icon: 'Chat',
     children: [
         {
             name: 'Posts',
             icon: 'Newspaper',
             color: 'red',
-            url: '/posts',
+            url: 'https://posthog.com/posts',
         },
         {
             name: 'Questions',
@@ -761,7 +761,7 @@ export const communityMenu = {
             name: 'Guides',
             icon: 'Map',
             color: 'red',
-            url: '/tutorials',
+            url: 'https://posthog.com/tutorials',
             children: [
                 {
                     name: 'All guides',

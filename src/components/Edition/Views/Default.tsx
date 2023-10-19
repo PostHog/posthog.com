@@ -175,7 +175,7 @@ export const Skeleton = () => {
 }
 
 export const PostFilters = () => {
-    const { setRoot, setTag, tag, activeMenu } = useContext(PostsContext)
+    const { setRoot, setTag, tag, activeMenu, setActiveMenu } = useContext(PostsContext)
     const { fullWidthContent } = useLayoutData()
     const breakpoints = useBreakpoint()
 
@@ -210,6 +210,7 @@ export const PostFilters = () => {
                                 <Menu.Item key={`${name}-${index}`}>
                                     <button
                                         onClick={() => {
+                                            setActiveMenu(menu)
                                             setRoot(url === '/posts' ? undefined : url?.split('/')[1])
                                             setTag(undefined)
                                             if (breakpoints.sm) {
