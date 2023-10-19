@@ -109,6 +109,14 @@ export const postsMenu: IMenu[] = [
                 name: 'Inside PostHog',
                 url: '/blog/inside-posthog',
             },
+            {
+                name: 'Using PostHog',
+                url: '/blog/using-posthog',
+            },
+            {
+                name: 'General',
+                url: '/blog/general',
+            },
         ],
     },
     {

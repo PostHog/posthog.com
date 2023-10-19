@@ -948,7 +948,6 @@
         { "source": "/handbook/engineering", "destination": "/handbook/engineering/developing-locally" },
         { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" },
         { "source": "/docs/cdp/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
-        { "source": "/blog/posthog-marketing", "destination": "/features/posthog-marketing" },
         { "source": "/blog/asynchronous-remote-companies", "destination": "/founders/asynchronous-remote-companies" },
         { "source": "/blog/ceo-diary-2", "destination": "/founders/ceo-diary-2" },
         { "source": "/blog/ceo-diary-4", "destination": "/founders/ceo-diary-4" },
@@ -1060,7 +1059,6 @@
             "destination": "/product-engineers/running-group-targeted-ab-tests"
         },
         { "source": "/blog/sql-for-analytics", "destination": "/product-engineers/sql-for-analytics" },
-        { "source": "/blog/yc-2-years-on", "destination": "/yc-2-years-on" },
 
         { "source": "/docs/cdp/unduplicator", "destination": "/docs/cdp" },
         { "source": "/cdp/unduplicator", "destination": "/docs/cdp" },
@@ -1077,6 +1075,12 @@
         { "source": "/blog/dev-marketing-paid-ads", "destination": "/founders/dev-marketing-paid-ads" },
         { "source": "/handbook/small-teams/dw", "destination": "/handbook/small-teams/data-warehouse" },
         { "source": "/tutorials/migrate-eu-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
-        { "source": "/docs/migrate/migrate-broken-self-hosted", "destination": "/docs/migrate/migrate-to-cloud" }
+        { "source": "/docs/migrate/migrate-broken-self-hosted", "destination": "/docs/migrate/migrate-to-cloud" },
+        { "source": "/blog/categories/ceo-diaries", "destination": "/blog/ceo-diaries" },
+        { "source": "/blog/categories/engineering", "destination": "/blog/engineering" },
+        { "source": "/blog/categories/inside-posthog", "destination": "/blog/inside-posthog" },
+        { "source": "/blog/categories/posthog-news", "destination": "/blog/posthog-news" },
+        { "source": "/blog/categories/using-posthog", "destination": "/blog/using-posthog" },
+        { "source": "/blog/categories/general", "destination": "/blog/general" }
     ]
 }
