@@ -79,7 +79,7 @@ export default function ClientPost({
             </Modal>
             <SEO title={title + ' - PostHog'} />
             <article
-                className={`article-content mx-auto transition-all py-6 md:px-8 2xl:px-12 ${
+                className={`article-content mx-auto transition-all pb-6 md:py-6 md:px-8 2xl:px-12 ${
                     fullWidthContent ? 'max-w-full' : 'max-w-2xl'
                 }`}
             >
@@ -94,9 +94,9 @@ export default function ClientPost({
                         </ZoomImage>
                     </div>
                 )}
-                <div className={`flex flex-col py-4`}>
+                <div className={`flex flex-col pt-4`}>
                     <Title>{title}</Title>
-                    <p className="">
+                    <p className="!mb-0">
                         <span className="opacity-70">{dayjs(date || publishedAt).format('MMM DD, YYYY')}</span>
 
                         {isModerator && (
