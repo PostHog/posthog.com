@@ -234,6 +234,7 @@ export default function Posts({
     const [root, setRoot] = useState(pathname.split('/')[1] !== 'posts' ? pathname.split('/')[1] : undefined)
     const [tag, setTag] = useState(initialTag)
     const [prev, setPrev] = useState<string | null>(null)
+    const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
 
     const [params, setParams] = useState(getParams(root, initialTag))
 
@@ -253,6 +254,7 @@ export default function Posts({
             setRoot(undefined)
             setTag(undefined)
         }
+        setActiveMenu(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
     }, [pathname])
 
     useEffect(() => {
@@ -277,6 +279,7 @@ export default function Posts({
                     setTag,
                     setRoot,
                     tag,
+                    activeMenu,
                 }}
             >
                 <PostProvider
@@ -292,6 +295,7 @@ export default function Posts({
                                     setTag(name)
                                 }
                             },
+                            children: undefined,
                         })),
                         isMenuItemActive: ({ url }) => url === pathname,
                         isMenuItemOpen: ({ url }) => url?.startsWith(`/${pathname.split('/')[1]}`),
@@ -318,7 +322,7 @@ export default function Posts({
                     <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
-                    <div className="mt-2 mb-4 md:hidden">
+                    <div className="pt-2 mb-4 lg:hidden">
                         <PostFilters />
                     </div>
                     {articleView && (

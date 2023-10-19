@@ -1,12 +1,11 @@
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { PostsContext, getParams } from '../Posts'
+import React, { useContext, useEffect, useRef } from 'react'
+import { PostsContext } from '../Posts'
 import TableOfContents from 'components/PostLayout/TableOfContents'
 import { useLocation } from '@reach/router'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import dayjs from 'dayjs'
-import { QuestionForm } from 'components/Squeak'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isToday from 'dayjs/plugin/isToday'
 import { useLayoutData } from 'components/Layout/hooks'
@@ -14,12 +13,10 @@ import LikeButton from '../LikeButton'
 import { CallToAction, child, container } from 'components/CallToAction'
 import Spinner from 'components/Spinner'
 import { Menu } from '@headlessui/react'
-import { usePost } from 'components/PostLayout/hooks'
 import { ChevronDown, Filter, Newspaper } from '@posthog/icons'
-import useMenu from '../hooks/useMenu'
-import { postsMenu as menu } from '../../../navs/posts'
-import Community from 'components/Home/Community'
 import { Icon, getIcon } from 'components/PostLayout/Menu'
+import { navigate } from 'gatsby'
+import { postsMenu as menu } from '../../../navs/posts'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
@@ -178,10 +175,9 @@ export const Skeleton = () => {
 }
 
 export const PostFilters = () => {
-    const { pathname } = useLocation()
-    const { setRoot, setTag, tag } = useContext(PostsContext)
-    const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
+    const { setRoot, setTag, tag, activeMenu } = useContext(PostsContext)
     const { fullWidthContent } = useLayoutData()
+    const breakpoints = useBreakpoint()
 
     return (
         <div
@@ -194,7 +190,16 @@ export const PostFilters = () => {
                     <Menu.Button className="flex items-center relative mx-2 pl-2 pr-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all h-full">
                         <div className="flex items-center space-x-2">
                             <Icon icon={activeMenu?.icon} color={activeMenu?.color} />
-                            <span className="text-base font-bold">{activeMenu?.name}</span>
+                            <div className="text-sm flex space-x-1 items-center">
+                                <span className="font-bold">{activeMenu?.name}</span>
+                                {tag && (
+                                    <>
+                                        <span>→</span>
+                                        <span className="font-bold">{tag}</span>
+                                    </>
+                                )}
+                            </div>
+
                             <ChevronDown className="w-6 h-6 -mb-[2px]" />
                         </div>
                     </Menu.Button>
@@ -205,9 +210,11 @@ export const PostFilters = () => {
                                 <Menu.Item key={`${name}-${index}`}>
                                     <button
                                         onClick={() => {
-                                            setActiveMenu(menu)
                                             setRoot(url === '/posts' ? undefined : url?.split('/')[1])
                                             setTag(undefined)
+                                            if (breakpoints.sm) {
+                                                navigate(url)
+                                            }
                                         }}
                                         className="py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50 flex space-x-2 items-center"
                                     >
@@ -234,6 +241,9 @@ export const PostFilters = () => {
                                             activeMenu?.url === '/posts' ? undefined : activeMenu?.url?.split('/')[1]
                                         )
                                         setTag(undefined)
+                                        if (breakpoints.sm) {
+                                            navigate(activeMenu?.url)
+                                        }
                                     }}
                                     className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/30 hover:dark:bg-border/30 ${
                                         !tag ? 'font-bold bg-border/50 dark:bg-border/50' : ''
@@ -248,6 +258,9 @@ export const PostFilters = () => {
                                         <button
                                             onClick={() => {
                                                 setTag(name)
+                                                if (breakpoints.sm) {
+                                                    navigate(url)
+                                                }
                                             }}
                                             className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/30 hover:dark:bg-border/30 ${
                                                 tag === name ? 'font-bold bg-border/50 dark:bg-border/50' : ''
@@ -267,7 +280,8 @@ export const PostFilters = () => {
 }
 
 function PostsListing() {
-    const { posts, fetchMore, isValidating, isLoading, articleView, hasMore } = useContext(PostsContext)
+    const { posts, fetchMore, isValidating, isLoading, articleView, hasMore, activeMenu, tag } =
+        useContext(PostsContext)
     const breakpoints = useBreakpoint()
     const { fullWidthContent } = useLayoutData()
 
@@ -295,7 +309,17 @@ function PostsListing() {
                         : ''
                 }
             >
-                {!articleView && <h2 className="pt-4 text-xl mb-2">All posts</h2>}
+                {!articleView && (
+                    <h2 className="pt-4 text-xl mb-2 space-x-2 flex-wrap md:flex hidden">
+                        <span>{activeMenu?.name}</span>
+                        {tag && (
+                            <>
+                                <span>→</span>
+                                <span>{tag}</span>
+                            </>
+                        )}
+                    </h2>
+                )}
 
                 <ul
                     className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
