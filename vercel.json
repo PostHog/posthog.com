@@ -1080,6 +1080,7 @@
         { "source": "/blog/categories/engineering", "destination": "/blog/engineering" },
         { "source": "/blog/categories/inside-posthog", "destination": "/blog/inside-posthog" },
         { "source": "/blog/categories/posthog-news", "destination": "/blog/posthog-news" },
-        { "source": "/blog/categories/using-posthog", "destination": "/blog/using-posthog" }
+        { "source": "/blog/categories/using-posthog", "destination": "/blog/using-posthog" },
+        { "source": "/blog/categories/general", "destination": "/blog/general" }
     ]
 }
