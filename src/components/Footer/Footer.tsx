@@ -146,6 +146,14 @@ const linklist: IProps[] = [
                 url: '/templates',
             },
             {
+                title: 'Founders',
+                url: '/founders/all',
+            },
+            {
+                title: 'Product engineers',
+                url: '/product-engineers/all',
+            },
+            {
                 title: 'Tracks',
                 url: '/tracks',
             },
@@ -243,7 +251,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Blog',
-                url: '/blog',
+                url: '/blog/all',
             },
             {
                 title: 'Investors',
