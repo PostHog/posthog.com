@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { PostsContext } from '../Posts'
 import FeaturedPost from '../FeaturedPost'
 import PostsGrid from '../PostsGrid'
-import Breadcrumb from '../Breadcrumb'
+import LandingPageNotice from '../LandingPageNotice'
 
 export default function Blog({ title = 'Blog' }) {
     const { posts } = useContext(PostsContext)
@@ -10,7 +10,7 @@ export default function Blog({ title = 'Blog' }) {
 
     return (
         <div className="mx-auto max-w-screen-xl">
-            <Breadcrumb title={title} />
+            <LandingPageNotice title={title} />
             <FeaturedPost {...featuredPost?.attributes} />
             <PostsGrid posts={rest} />
         </div>

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { PostsContext } from '../Posts'
 import FeaturedPost from '../FeaturedPost'
-import Breadcrumb from '../Breadcrumb'
+import LandingPageNotice from '../LandingPageNotice'
 import PostsGrid from '../PostsGrid'
 
 export default function Customers() {
@@ -10,7 +10,7 @@ export default function Customers() {
 
     return (
         <div className="mx-auto max-w-screen-xl">
-            <Breadcrumb title="Customer stories" />
+            <LandingPageNotice title="Customer stories" />
             <FeaturedPost {...featuredPost?.attributes} />
             <PostsGrid posts={rest} />
         </div>

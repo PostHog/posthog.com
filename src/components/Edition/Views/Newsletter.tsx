@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { PostsContext } from '../Posts'
 import FeaturedPost from '../FeaturedPost'
 import PostsGrid from '../PostsGrid'
-import Breadcrumb from '../Breadcrumb'
+import LandingPageNotice from '../LandingPageNotice'
 import { StaticImage } from 'gatsby-plugin-image'
 
 export default function Newsletter() {
@@ -11,7 +11,7 @@ export default function Newsletter() {
 
     return (
         <div className="mx-auto max-w-screen-xl">
-            <Breadcrumb title="Newsletter" />
+            <LandingPageNotice title="Newsletter" />
             <FeaturedPost {...featuredPost?.attributes} />
             <div className="md:grid md:grid-cols-5 md:gap-12 px-4 lg:px-12 pb-8 max-w-4xl mx-auto items-center border-border dark:border-dark border-2 rounded-md my-12 mt-24">
                 <div className="col-span-2 text-right -mt-24 -mb-12">
