@@ -948,7 +948,6 @@
         { "source": "/handbook/engineering", "destination": "/handbook/engineering/developing-locally" },
         { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" },
         { "source": "/docs/cdp/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
-        { "source": "/blog/posthog-marketing", "destination": "/features/posthog-marketing" },
         { "source": "/blog/asynchronous-remote-companies", "destination": "/founders/asynchronous-remote-companies" },
         { "source": "/blog/ceo-diary-2", "destination": "/founders/ceo-diary-2" },
         { "source": "/blog/ceo-diary-4", "destination": "/founders/ceo-diary-4" },
