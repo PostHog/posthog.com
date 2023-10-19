@@ -475,7 +475,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
 
     // Docs and Handbook OG
-    for (const post of data.docsHandbook.nodes) {
+    for (const post of [...data.docsHandbook.nodes, ...data.tutorials.nodes]) {
         const { title } = post.frontmatter
         const { timeToRead, excerpt, fields, parent } = post
         const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
@@ -506,7 +506,16 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                 excerpt,
                 lastUpdated,
                 contributors,
-                breadcrumbs: [{ name: fields.slug.startsWith('/docs') ? 'Docs' : 'Handbook' }, ...(breadcrumbs || [])],
+                breadcrumbs: [
+                    {
+                        name: fields.slug.startsWith('/docs')
+                            ? 'Docs'
+                            : fields.slug.startsWith('/tutorials')
+                            ? 'Tutorials'
+                            : 'Handbook',
+                    },
+                    ...(breadcrumbs || []),
+                ],
             }),
             slug: fields.slug,
         })

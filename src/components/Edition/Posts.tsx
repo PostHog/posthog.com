@@ -26,6 +26,8 @@ import qs from 'qs'
 import { RightArrow } from 'components/Icons'
 import { navigate } from 'gatsby'
 import { postsMenu as menu } from '../../navs/posts'
+import { Authentication } from 'components/Squeak'
+import { PostFilters } from './Views/Default'
 dayjs.extend(relativeTime)
 
 const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>, 'meta'> }) => {
@@ -274,6 +276,7 @@ export default function Posts({
                     hasMore,
                     setTag,
                     setRoot,
+                    tag,
                 }}
             >
                 <PostProvider
@@ -297,18 +300,31 @@ export default function Posts({
                     <Modal open={loginModalOpen} setOpen={setLoginModalOpen}>
                         <div className="px-4">
                             <div className="p-4 max-w-[450px] mx-auto relative rounded-md dark:bg-dark bg-light mt-12 border border-border dark:border-dark">
-                                <Login onSubmit={() => setLoginModalOpen(false)} />
+                                <p className="m-0 text-sm font-bold dark:text-white">
+                                    Note: PostHog.com authentication is separate from your PostHog app.
+                                </p>
+                                <p className="text-sm my-2 dark:text-white">
+                                    We suggest signing up with your personal email. Soon you'll be able to link your
+                                    PostHog app account.
+                                </p>
+                                <Authentication
+                                    onAuth={() => setLoginModalOpen(false)}
+                                    showBanner={false}
+                                    showProfile={false}
+                                />
                             </div>
                         </div>
                     </Modal>
                     <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
-                    <MobileNav menu={menu} className="md:hidden mb-6 mt-0" />
+                    <div className="mt-2 mb-4 lg:hidden">
+                        <PostFilters />
+                    </div>
                     {articleView && (
                         <button
                             onClick={() => navigate(prev ? -1 : '/posts')}
-                            className="inline-flex md:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 md:mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                            className="ml-4 inline-flex md:hidden space-x-1 items-center relative px-2 pt-1.5 pb-1 md:mb-4 md:mb-8 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                         >
                             <RightArrow className="-scale-x-100 w-6" />
                             <span className="text-red dark:text-yellow text-[15px] font-semibold line-clamp-1 text-left">

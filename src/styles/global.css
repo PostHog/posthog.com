@@ -850,6 +850,19 @@ ul {
     }
 }
 
+.active-sidebar-item {
+    &:before {
+        background: #f54e00;
+        bottom: 4px;
+        border-radius: 2px;
+        content: '';
+        left: 6px;
+        position: absolute;
+        top: 4px;
+        width: 4px;
+    }
+}
+
 .images-slider > li {
     &:nth-of-type(even) {
         margin-left: -12%;

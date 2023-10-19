@@ -38,17 +38,7 @@ export const Contributor = ({
                     <h3 className="mb-0 text-base leading-tight">{text && <span>{name}</span>}</h3>
                     {role && <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">{role}</p>}
                 </div>
-
-                {/*
-                <span className="flex items-center gap-2">
-                    {country === 'world' ? '🌎' : <ReactCountryFlag svg countryCode={country} />}
-                    <span className="opacity-50 text-sm">
-                        {country === 'world' ? 'Planet Earth' : location || country}
-                    </span>
-                </span>
-                */}
             </div>
-
             <ContributorImage
                 className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
                 image={image}

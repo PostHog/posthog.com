@@ -52,25 +52,61 @@ export const Intro = ({
 }
 
 export const Contributors = ({ contributors }) => {
-    return (
+    return contributors?.[0] ? (
         <>
             <div className="text-sm opacity-50 px-4 mb-2">Posted by</div>
-            {contributors?.[0] && (
-                <div className={`mb-4 flex flex-col gap-4`}>
-                    {contributors.map(({ profile_id, image, name, role }) => (
-                        <Contributor
-                            url={profile_id && `/community/profiles/${profile_id}`}
-                            image={image}
-                            name={name}
-                            key={name}
-                            role={role}
-                            text
-                        />
-                    ))}
-                </div>
-            )}
+            <div className={`mb-4 flex flex-col gap-4`}>
+                {contributors.map(({ profile_id, image, name, role }) => (
+                    <Contributor
+                        url={profile_id && `/community/profiles/${profile_id}`}
+                        image={image}
+                        name={name}
+                        key={name}
+                        role={role}
+                        text
+                    />
+                ))}
+            </div>
         </>
-    )
+    ) : null
+}
+
+const ContributorsSmall = ({ contributors }) => {
+    return contributors?.[0] ? (
+        <div className="flex space-x-2 items-center mb-4">
+            <div className="text-sm opacity-50">Posted by</div>
+
+            <div>
+                <ul className="flex list-none !m-0 !p-0 space-x-2">
+                    {contributors.map(({ profile_id, image, name, role }) => {
+                        const url = profile_id && `/community/profiles/${profile_id}`
+                        const Container = url ? Link : 'div'
+                        const gatsbyImage = image && getImage(image)
+                        return (
+                            <li className="!mb-0" key={name}>
+                                <Container className="flex space-x-2 items-center" {...(url ? { to: url } : {})}>
+                                    <span>
+                                        {typeof image === 'string' ? (
+                                            <img src={image} />
+                                        ) : gatsbyImage ? (
+                                            <GatsbyImage
+                                                image={gatsbyImage}
+                                                alt={name}
+                                                className="w-6 h-6 border-border border dark:border-dark rounded-full"
+                                            />
+                                        ) : (
+                                            ''
+                                        )}
+                                    </span>
+                                    <span>{name}</span>
+                                </Container>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+        </div>
+    ) : null
 }
 
 const Sidebar = ({ contributors, tableOfContents }) => {
@@ -115,16 +151,16 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
-                image={
-                    featuredImageType === 'full'
-                        ? `/og-images/${fields.slug.replace(/\//g, '')}.jpeg`
-                        : featuredImage?.publicURL
-                }
+                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
 
-            <div className="flex flex-col-reverse @3xl:flex-row gap-8 2xl:gap-12">
+            <div className="flex flex-col-reverse @3xl:flex-row">
                 <div className={`article-content flex-1 transition-all md:pt-8 w-full overflow-auto`}>
-                    <div className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-2xl px-0'}`}>
+                    <div
+                        className={`mx-auto transition-all ${
+                            fullWidthContent ? 'max-w-full' : 'max-w-2xl'
+                        }  md:px-8 2xl:px-12`}
+                    >
                         <Intro
                             title={title}
                             featuredImage={featuredImage}
@@ -135,13 +171,14 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                             tags={tags}
                         />
                         <div className="xl:hidden">
-                            <Contributors contributors={contributors} />
+                            <ContributorsSmall contributors={contributors} />
                             <MobileSidebar tableOfContents={tableOfContents} />
                         </div>
 
                         <MDXProvider components={components}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
+                        <Upvote className="mt-6" />
                         <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
                             <QuestionForm
                                 disclaimer={false}
@@ -155,7 +192,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 <aside
                     className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full border-x border-border dark:border-border-dark pt-4 xl:block hidden`}
                 >
-                    <Upvote />
+                    <Upvote className="mx-2 mb-4" />
                     <Contributors contributors={contributors} />
                     <MobileSidebar tableOfContents={tableOfContents} />
                 </aside>
@@ -195,7 +232,7 @@ export const query = graphql`
                     id
                     image {
                         childImageSharp {
-                            gatsbyImageData(width: 38, height: 38)
+                            gatsbyImageData
                         }
                     }
                     name

@@ -111,7 +111,7 @@ export default function ProfilePage({ params }: PageProps) {
     return (
         <>
             <SEO title={`Community Profile - PostHog`} />
-            <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
+            <Layout parent={communityMenu}>
                 <Modal setOpen={setEditModalOpen} open={editModalOpen}>
                     <div
                         onClick={() => setEditModalOpen(false)}

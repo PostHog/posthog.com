@@ -192,7 +192,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
         <>
             <button
                 onClick={() => setOpen('menu')}
-                className={`font-bold px-5 flex w-full items-center justify-between border-b border-border dark:border-border-dark group -mt-1 ${className}`}
+                className={`font-bold px-5 py-2 flex w-full items-center justify-between border-b border-border dark:border-border-dark group -mt-1 ${className}`}
             >
                 <span className="flex items-center space-x-2 group-active:top-[0.5px] group-active:scale-[.98] transition-all">
                     {menu?.parent?.name && <span>{menu?.parent?.name}</span>}

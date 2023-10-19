@@ -31,7 +31,7 @@ const CommunityBar = () => {
     const { fullWidthContent } = useLayoutData()
     return (
         <div
-            className={`py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col md:flex-row justify-between items-center sticky top-[-1px] ${
+            className={`py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col lg:flex-row justify-between items-center sticky top-[-1px] lg:space-y-0 space-y-2 ${
                 fullWidthContent ? 'px-6' : 'px-4'
             }`}
         >
@@ -63,7 +63,12 @@ const CommunityBar = () => {
             ) : (
                 <>
                     <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
-                    <CallToAction type="secondary" size="xs" onClick={() => setLoginModalOpen(true)}>
+                    <CallToAction
+                        type="secondary"
+                        size="xs"
+                        className="lg:w-auto w-full"
+                        onClick={() => setLoginModalOpen(true)}
+                    >
                         Sign in
                     </CallToAction>
                 </>
@@ -172,9 +177,9 @@ export const Skeleton = () => {
     )
 }
 
-const PostFilters = () => {
+export const PostFilters = () => {
     const { pathname } = useLocation()
-    const { setRoot, setTag } = useContext(PostsContext)
+    const { setRoot, setTag, tag } = useContext(PostsContext)
     const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
     const { fullWidthContent } = useLayoutData()
 
@@ -186,14 +191,14 @@ const PostFilters = () => {
         >
             <div className="w-full flex-grow">
                 <Menu>
-                    <Menu.Button className="flex items-center relative mx-2 py-1 pl-2 pr-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all h-full">
+                    <Menu.Button className="flex items-center relative mx-2 pl-2 pr-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all h-full">
                         <div className="flex items-center space-x-2">
                             <Icon icon={activeMenu?.icon} color={activeMenu?.color} />
                             <span className="text-base font-bold">{activeMenu?.name}</span>
                             <ChevronDown className="w-6 h-6 -mb-[2px]" />
                         </div>
                     </Menu.Button>
-                    <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-0 left-2 right-2 translate-y-full">
+                    <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
                         {menu.map((menu, index) => {
                             const { name, url, icon, color } = menu
                             return (
@@ -221,7 +226,22 @@ const PostFilters = () => {
                         <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
                             <Filter className="w-5 h-5" />
                         </Menu.Button>
-                        <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 py-1 bottom-0 left-2 right-2 translate-y-full">
+                        <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
+                            <Menu.Item>
+                                <button
+                                    onClick={() => {
+                                        setRoot(
+                                            activeMenu?.url === '/posts' ? undefined : activeMenu?.url?.split('/')[1]
+                                        )
+                                        setTag(undefined)
+                                    }}
+                                    className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/30 hover:dark:bg-border/30 ${
+                                        !tag ? 'font-bold bg-border/50 dark:bg-border/50' : ''
+                                    }`}
+                                >
+                                    All
+                                </button>
+                            </Menu.Item>
                             {activeMenu?.children?.map(({ name, url }, index) => {
                                 return (
                                     <Menu.Item key={`${name}-${index}`}>
@@ -229,7 +249,9 @@ const PostFilters = () => {
                                             onClick={() => {
                                                 setTag(name)
                                             }}
-                                            className="py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50"
+                                            className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/30 hover:dark:bg-border/30 ${
+                                                tag === name ? 'font-bold bg-border/50 dark:bg-border/50' : ''
+                                            }`}
                                         >
                                             {name}
                                         </button>
@@ -253,13 +275,11 @@ function PostsListing() {
         <div
             className={`
                 transition-all 
-                ${fullWidthContent ? 'ml-0 mr-8 2xl:mr-16' : 'ml-0 mr-16'} 
                 ${
                     articleView
-                        ? 'lg:sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] -ml-6 flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
-                        : 'flex-grow'
+                        ? 'sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
+                        : 'flex-grow md:px-8 2xl:px-12'
                 }
-                ${fullWidthContent && articleView ? '' : ''}
             `}
         >
             {articleView && (
@@ -334,7 +354,7 @@ export default function Default({ children }) {
                 <div
                     className={`${articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'}`}
                 >
-                    <div className={`transition-all`}>{children}</div>
+                    {children}
                 </div>
             </section>
         </>
