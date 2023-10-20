@@ -2,29 +2,29 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { Privacy } from 'components/NotProductIcons'
-import { Shield, Server, Database, Code } from '@posthog/icons'
+import { IconShield, IconServer, IconDatabase, IconCode } from '@posthog/icons'
 
 const features = [
     {
-        icon: <Shield />,
+        icon: <IconShield />,
         title: 'Privacy controls',
         description: 'Track users without cookies, anonymize users, configure a reverse proxy',
         color: 'purple',
     },
     {
-        icon: <Server />,
+        icon: <IconServer />,
         title: 'Choose your hosting location',
         description: 'Store user data in the US or EU depending on your needs',
         color: 'seagreen dark:text-teal',
     },
     {
-        icon: <Database />,
+        icon: <IconDatabase />,
         title: 'Full access to customer data',
         description: 'API offers total access to customer and event data',
         color: 'orange dark:text-yellow',
     },
     {
-        icon: <Code />,
+        icon: <IconCode />,
         title: 'Check out the source code',
         description: 'Audit the entire PostHog codebase on GitHub for compliance or just peace of mind',
         color: 'blue',

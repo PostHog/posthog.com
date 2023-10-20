@@ -7,54 +7,54 @@ import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
-import { LightBulb } from '@posthog/icons'
+import { IconLightBulb } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const quickLinks = [
     {
-        icon: 'Graph',
+        icon: 'IconGraph',
         name: 'Product analytics',
         to: '/docs/product-analytics',
         description: 'Better understand your users and build better products',
         color: 'blue',
     },
     {
-        icon: 'RewindPlay',
+        icon: 'IconRewindPlay',
         name: 'Session replay',
         to: '/docs/session-replay',
         description: 'Play back sessions to diagnose UI issues and get inspired',
         color: 'yellow',
     },
     {
-        icon: 'Toggle',
+        icon: 'IconToggle',
         name: 'Feature flags',
         to: '/docs/feature-flags',
         description: 'Toggle features to test the impact before rolling out',
         color: 'seagreen',
     },
     {
-        icon: 'Flask',
+        icon: 'IconFlask',
         name: 'A/B testing',
         to: '/docs/experiments',
         description: 'A/B test UI changes and new features',
         color: 'purple',
     },
     {
-        icon: 'Chat',
+        icon: 'IconChat',
         name: 'Surveys',
         to: '/docs/surveys',
         description: 'Ask your users questions to get qualitative feedback',
         color: 'blue',
     },
     {
-        icon: 'Person',
+        icon: 'IconPerson',
         name: 'CDP',
         to: '/docs/cdp',
         description: 'Get a complete picture of all your data',
         color: 'yellow',
     },
     {
-        icon: 'Server',
+        icon: 'IconServer',
         name: 'Data warehouse',
         to: '/docs/data-warehouse',
         description: 'Extend PostHog by adding your own functionality',
@@ -100,7 +100,7 @@ export const DocsIndex = () => {
                 </section>
 
                 <div className="flex gap-1 items-center mb-8">
-                    <LightBulb className="w-6 h-6 text-primary dark:text-primary-dark opacity-50" />
+                    <IconLightBulb className="w-6 h-6 text-primary dark:text-primary-dark opacity-50" />
                     <p className="text-sm m-0">
                         <strong>Tip:</strong> Open search with <KeyboardShortcut text="/" /> , then{' '}
                         <KeyboardShortcut text="Tab" size="sm" /> to search docs

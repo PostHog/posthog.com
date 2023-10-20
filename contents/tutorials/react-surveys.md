@@ -159,7 +159,7 @@ Then, add the following CSS styles to your `index.css` file:
   z-index: 1000;
 }
 
-button {
+.button {
   margin: 5px;
 }
 ```

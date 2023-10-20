@@ -1,40 +1,50 @@
-import { Graph, RewindPlay, Toggle, Flask, Person, Server, Database, Terminal } from '@posthog/icons'
+import {
+    IconGraph,
+    IconRewindPlay,
+    IconToggle,
+    IconFlask,
+    IconMessage,
+    IconPerson,
+    IconServer,
+    IconDatabase,
+    IconTerminal,
+} from '@posthog/icons'
 
 export const slideButtons = [
     {
         title: 'Product analytics',
-        Icon: Graph,
+        Icon: IconGraph,
         color: 'blue',
     },
     {
         title: 'Session replay',
-        Icon: RewindPlay,
+        Icon: IconRewindPlay,
         color: 'yellow',
     },
     {
         title: 'Feature flags',
-        Icon: Toggle,
+        Icon: IconToggle,
         color: 'teal',
     },
     {
         title: 'A/B testing',
-        Icon: Flask,
+        Icon: IconFlask,
         color: 'purple',
     },
     {
+        title: 'Surveys',
+        Icon: IconMessage,
+        color: 'salmon',
+    },
+    {
         title: 'CDP',
-        Icon: Person,
+        Icon: IconPerson,
         color: 'yellow',
     },
     {
         title: 'Data warehouse',
-        Icon: Server,
+        Icon: IconServer,
         color: 'seagreen',
-    },
-    {
-        title: 'SQL',
-        Icon: Database,
-        color: 'salmon',
     },
     /*
     {

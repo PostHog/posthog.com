@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import Layout from '../Layout'
 import Link from 'components/Link'
-import HubSpotForm from 'components/HubSpotForm'
-import YCsign from '../images/max-yc.png'
 import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
-import { Check2 } from 'components/Icons'
-import { RewindPlay } from '@posthog/icons'
+import { IconRewindPlay, IconMinus, IconPlus, IconGraph } from '@posthog/icons'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import { CallToAction } from 'components/CallToAction'
@@ -13,7 +10,6 @@ import { CustomerCard } from 'components/Products/CustomerCard'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import Tooltip from 'components/Tooltip'
-import { Chevron, Close, Close2, Minus, Plus } from 'components/Icons'
 import { graphql, useStaticQuery } from 'gatsby'
 
 const features = [
@@ -96,7 +92,7 @@ const VsCompetitor = ({ title, children }) => {
                 {children}
             </div>
             <div className="shrink-0 basis-[167px] text-center">
-                <StaticImage src="../images/products/competitors-sr.png" className="max-w-[167px]" />
+                <StaticImage src="../../images/products/competitors-sr.png" className="max-w-[167px]" />
             </div>
         </div>
     )
@@ -107,7 +103,7 @@ const VsPostHog = ({ children }) => {
             className={`rounded-md p-4 border-2 border-blue dark:border-blue bg-white/50 dark:bg-accent-dark flex flex-col md:flex-row gap-4`}
         >
             <div className="shrink-0 basis-[145px] text-center">
-                <StaticImage src="../images/products/competitors-hog.png" className="max-w-[145px]" />
+                <StaticImage src="../../images/products/competitors-hog.png" className="max-w-[145px]" />
             </div>
             <div className="flex-1">
                 <h4 className="leading-tight">Reasons to choose (PostHog logo)</h4>
@@ -128,7 +124,7 @@ const Accordion = ({ children, label, active, initialOpen = false, className = '
             >
                 <div className={`${active ? '' : ''} flex justify-between items-center text-left`}>
                     <p className="m-0 font-bold text-sm text-red dark:text-yellow">{label}</p>
-                    {open ? <Minus /> : <Plus />}
+                    {open ? <IconMinus className="w-4" /> : <IconPlus className="w-4" />}
                 </div>
             </button>
             <div className={` ${open ? 'pb-2' : 'hidden'}`}>{children}</div>
@@ -136,7 +132,7 @@ const Accordion = ({ children, label, active, initialOpen = false, className = '
     )
 }
 
-export const SessionReplay = () => {
+export const ProductSessionReplay = () => {
     const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
@@ -168,10 +164,10 @@ export const SessionReplay = () => {
     `)
     return (
         <Layout>
-            <div className="max-w-7xl mx-auto px-5 py-12">
+            <div className="max-w-7xl mx-auto px-5 py-20">
                 <div className="flex gap-1 justify-center items-center mb-2">
                     <span className="w-5 h-5 text-yellow">
-                        <RewindPlay />
+                        <IconRewindPlay />
                     </span>
                     <span className="text-[15px] font-semibold text-opacity-60">Session replay</span>
                 </div>
@@ -183,7 +179,7 @@ export const SessionReplay = () => {
                 </p>
 
                 <StaticImage
-                    src="../images/products/screenshot-session-replay.png"
+                    src="../../images/products/screenshot-session-replay.png"
                     alt=""
                     className="w-full max-w-[1330px] -mr-[60px]"
                 />
@@ -214,7 +210,7 @@ export const SessionReplay = () => {
                 </section>
             </div>
 
-            <section className="hidden md:block sticky top-[107px] bg-accent dark:bg-accent-dark border-y border-border dark:border-border-dark z-50">
+            <section className="hidden md:block sticky top-[-1px] reasonable:top-[107px] bg-accent dark:bg-accent-dark border-y border-border dark:border-border-dark z-50">
                 <ul className="list-none flex gap-4 justify-center pt-1">
                     <li>
                         <span className="inline-block text-sm py-2 px-3 border border-light dark:border-dark !border-b-transparent -mb-px font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md">
@@ -259,7 +255,7 @@ export const SessionReplay = () => {
                 </ul>
             </section>
 
-            <section className="max-w-7xl mx-auto px-5 py-12">
+            <section className="max-w-7xl mx-auto px-5 py-20">
                 <h3 className="text-3xl text-center mb-8">Features</h3>
                 <ul className="list-none p-0 grid md:grid-cols-3 gap-12 mb-8">
                     <Feature
@@ -283,33 +279,33 @@ export const SessionReplay = () => {
                     <Subfeature
                         title="Capture sessions without extra code"
                         description="Works with PostHog.js"
-                        icon="Bolt"
+                        icon="IconBolt"
                     />
                     <Subfeature
                         title="Automatic playlists"
                         description="Filter by user behavior or time"
-                        icon="Playlist"
+                        icon="IconPlaylist"
                     />
                     <Subfeature
                         title="Web or mobile session recording"
                         description="Web or iOS (beta) available"
-                        icon="Mobile"
+                        icon="IconPhone"
                     />
                     <Subfeature
                         title="Download recordings"
                         description="Retain recordings beyond data retention limits"
-                        icon="Download"
+                        icon="IconDownload"
                     />
                     <Subfeature
                         title="Block sensitive data"
                         description="Disable capturing data from any DOM element with CSS"
-                        icon="Mask"
+                        icon="IconPassword"
                     />
                 </ul>
             </section>
 
             <section className="bg-accent dark:bg-accent-dark">
-                <div className="max-w-7xl mx-auto px-5 py-12">
+                <div className="max-w-7xl mx-auto px-5 py-20">
                     <div className="md:grid md:grid-cols-12 md:gap-12">
                         <div className="col-span-5">
                             <h3 className="text-4xl md:text-5xl text-blue leading-tight">
@@ -326,7 +322,7 @@ export const SessionReplay = () => {
                     </div>
                 </div>
             </section>
-            <section className="max-w-7xl mx-auto px-5 py-12">
+            <section className="max-w-7xl mx-auto px-5 py-20">
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
@@ -339,7 +335,7 @@ export const SessionReplay = () => {
                     <div className="w-80">image</div>
                 </div>
 
-                <div className="md:flex justify-between gap-12">
+                <div className="md:flex justify-between items-start gap-12">
                     <div className="flex-1 grid grid-cols-3 max-w-4xl text-sm md:text-base">
                         {/* header row */}
                         <div className="bg-accent dark:bg-accent-dark rounded-sm leading-tight p-2 mt-2">
@@ -671,13 +667,16 @@ export const SessionReplay = () => {
                     </p>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        <div className="bg-accent dark:bg-accent-dark rounded-md p-4">
-                            icon
-                            <h4 className="mt-2 mb-0">
-                                <Link to="/product-analytics">Product analytics</Link>
-                            </h4>
-                            <p>Jump into a playlist of session recordings directly from any time series in a graph</p>
-                        </div>
+                        <Link
+                            to="/product-analytics"
+                            className="bg-accent dark:bg-accent-dark rounded-md p-6 relative hover:top-[-1px] hover:scale-[1.01] active:top-[1px] active:scale-[1] transition-all"
+                        >
+                            <IconGraph className="w-8 opacity-50 text-primary dark:text-primary-dark" />
+                            <h4 className="mt-2 mb-0">Product analytics</h4>
+                            <p className="text-primary dark:text-primary-dark mb-0 text-[15px]">
+                                Jump into a playlist of session recordings directly from any time series in a graph
+                            </p>
+                        </Link>
                     </div>
                 </section>
                 <section className="mb-20">
@@ -688,4 +687,4 @@ export const SessionReplay = () => {
     )
 }
 
-export default SessionReplay
+export default ProductSessionReplay

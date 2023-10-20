@@ -8,7 +8,7 @@ import { fetchCategories } from './lib'
 import { useUser } from 'hooks/useUser'
 import slugify from 'slugify'
 import { useDropzone } from 'react-dropzone'
-import { Upload } from '@posthog/icons'
+import { IconUpload } from '@posthog/icons'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import transformValues from 'components/Squeak/util/transformValues'
 import Spinner from 'components/Spinner'
@@ -122,7 +122,7 @@ const Image = ({ setFieldValue, featuredImage }) => {
         <div className="relative flex justify-center items-center p-4 h-[250px]" {...getRootProps()}>
             <input className="hidden" {...getInputProps()} />
             <div className="w-7 h-7 opacity-60">
-                <Upload />
+                <IconUpload />
             </div>
             <button type="button" onClick={open} className="absolute w-full h-full inset-0" />
         </div>
