@@ -10,7 +10,7 @@ Shipping them in the right order is key to a fast return on investment from ever
 
 Products we build into the platform should:
 
-* Be recognizable/positioned as products that our ICP already uses. We don't want to ship a new product unless it already has [product-market fit](/blog/product-market-fit-game) somewhere else. 
+* Be recognizable/positioned as products that our [Ideal Customer Profile (ICP)](blog/creating-ideal-customer-profile) already uses. We don't want to ship a new product unless it already has [product-market fit](/blog/product-market-fit-game) somewhere else. 
 
 * Improve our other products – for example, by using or adding to customer or product data
 
