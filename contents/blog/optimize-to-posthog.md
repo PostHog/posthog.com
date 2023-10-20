@@ -88,9 +88,13 @@ After completing these, click "Save as draft." You can then implement your exper
 ### How are creating PostHog experiments different than Optimize?
 
 - PostHog doesn’t need an editor page URL. The same experiment can be set up on multiple pages.
+
 - Instead of variant cards, you create experiments with variants and then implemented differently in your app or website.
+
 - PostHog automatically splits the traffic evenly between variants. You can change this by editing the feature flag after creating the experiment.
+
 - Experiments roll out to all your users. You can again adjust the targeting by editing the feature flag. Targeting can use person or group properties such as device, location, or custom properties.
+
 - Optimize limits the number of experiments to 5. PostHog lets you run unlimited.
 
 ## Implementing your experiment
@@ -161,7 +165,7 @@ Beyond the preset experiment results, you can analyze related events with PostHo
 
 Optimize made a big deal about preventing "flickering." The underlying reason for this is the site loading before the experiment data from Optimize loaded. Optimize solved this with an "anti-flicker" snippet which loads Optimize before the page loads. The problem with this method is that it hurts page performance needing to load an external service before the page loads.
 
-PostHog solves the flickering problem in a different, but similar way. It relies on [bootstrapping](/docs/feature-flags/bootstrapping) the experiments underlying feature flags. This enables experiments to be available as soon as the page loads. It also provides you control over the usage and implementation of the flags. 
+PostHog solves the flickering problem in a different, but similar way. It relies on [bootstrapping](/docs/feature-flags/bootstrapping) the experiment's underlying feature flags. This enables experiments to be available as soon as the page loads. It also provides you control over the usage and implementation of the flags. 
 
 To learn how to set up bootstrapping, check out these tutorials:
 
