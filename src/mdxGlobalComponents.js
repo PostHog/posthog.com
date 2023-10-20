@@ -25,6 +25,7 @@ import { CustomerCard } from './components/Products/CustomerCard'
 import { Feature } from './components/Products/Feature'
 import { Subfeature } from './components/Products/Subfeature'
 import { Quote2 } from './components/Quote2'
+import { SessionReplay } from './components/SessionReplay'
 import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
 import { Squeak } from './components/Squeak'
@@ -59,6 +60,7 @@ export const shortcodes = {
     Feature,
     Subfeature,
     Quote2,
+    SessionReplay,
     Signatures,
     SlackPage,
     Squeak,
