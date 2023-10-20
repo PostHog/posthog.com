@@ -45,3 +45,9 @@ Why would we invest money in cold calls or emails that harm our reputation and 9
 Customers _buy_ from us, we don't _sell_ to them. It means we can instead invest our money in shipping more (and better) products, at lower prices than our competitors, to provide a sustainable advantage.
 
 Fun fact: the total spend we have on marketing and sales per customer we acquire pays itself off within 5 days of them signing up for a paid plan. "Best in class" is considered to be [one year](https://openviewpartners.com/blog/cac-payback-basics-what-it-is-how-to-calculate-it-and-why-it-matters/)...!
+
+## What is our ideal customer profile? 
+
+We build for the highest-performing **product teams** (engineers, PMs, designers) building the **most loved products** at **high-growth startups**. We focus specifically on  **product engineers** (full-stack engineers skewed towards the frontend) but it should be usable by everyone in the product team. We want to be the first tool that technical founders add to their product.
+
+Why? We believe that the best tech companies are increasingly engineering-led. By building for the best product engineers, we'll create a positive feedback loop of being the best product for them. This is clearly differentiated from others in the space which are focused on less technical PMs.
