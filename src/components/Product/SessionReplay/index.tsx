@@ -1,32 +1,47 @@
 import React, { useState } from 'react'
 import Layout from '../../Layout'
 import Link from 'components/Link'
-import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image'
 import { IconRewindPlay, IconMinus, IconPlus, IconGraph, IconCheck, IconX } from '@posthog/icons'
-import { useValues } from 'kea'
-import { layoutLogic } from 'logic/layoutLogic'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
-import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
 import { PlanComparison } from 'components/Pricing/PlanComparison'
 import ContentViewer from 'components/ContentViewer'
 import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
 import { docsMenu } from '../../../navs'
 import { MenuItem } from 'components/PostLayout/Menu'
-import { TeamMember, teamQuery } from 'components/Team'
-import { CardContainer, Card as RoadmapCard } from 'components/Roadmap'
-import { InProgress } from 'components/Roadmap/InProgress'
-import { useRoadmap } from 'hooks/useRoadmap'
 import TeamRoadmap from 'components/TeamRoadmap'
 import RecentChange from '../RecentChange'
 import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
-import Logo from 'components/Logo'
-import { Check, Check2 } from 'components/Icons'
+import Comparison from '../Comparison'
+
+const comparison = [
+    {
+        feature: 'Single-page app support',
+        companies: {
+            Hotjar: true,
+            LogRocket: true,
+            Matomo: true,
+            FullStory: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'iOS recordings',
+        companies: {
+            Hotjar: false,
+            LogRocket: true,
+            Matomo: true,
+            FullStory: true,
+            PostHog: 'In beta',
+        },
+    },
+]
 
 const features = [
     '$50,000 in PostHog credit for 12 months<sup>1</sup>',
@@ -422,88 +437,7 @@ export const ProductSessionReplay = () => {
             <div className="max-w-7xl mx-auto px-5">
                 <section>
                     <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-
-                    <div className="overflow-x-auto max-w-vw -mx-5 px-5 pb-2 mb-20 md:mx-0 md:px-0">
-                        <div className="flex-1 grid grid-cols-6 max-w-7xl text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto">
-                            {/* header row */}
-                            <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-border-dark">
-                                <strong></strong>
-                            </div>
-                            <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
-                                <strong className="block">Hotjar</strong>
-                                <span className="block text-[12px] md:text-sm leading-tight">
-                                    <Link to="#">See full comparison</Link>
-                                </span>
-                            </div>
-                            <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
-                                <strong className="block">LogRocket</strong>
-                                <span className="block text-[12px] md:text-sm leading-tight">
-                                    <Link to="#">See full comparison</Link>
-                                </span>
-                            </div>
-                            <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
-                                <strong className="block">Matomo</strong>
-                                <span className="block text-[12px] md:text-sm leading-tight">
-                                    <Link to="#">See full comparison</Link>
-                                </span>
-                            </div>
-                            <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
-                                <strong className="block">FullStory</strong>
-                                <span className="block text-[12px] md:text-sm leading-tight">
-                                    <Link to="#">See full comparison</Link>
-                                </span>
-                            </div>
-                            <div className="bg-white dark:bg-accent-dark !border-t-2 !border-x-2  !border-l-blue !border-r-blue !border-t-blue rounded-sm rounded-bl-none rounded-br-none leading-tight p-2 flex justify-center items-center">
-                                <Logo className="w-32" />
-                            </div>
-
-                            {/* body row */}
-                            <div className="p-2">Single-page app support</div>
-                            <div className="p-2">
-                                <IconCheck className="w-8 text-green" />
-                            </div>
-                            <div className="p-2">
-                                <IconCheck className="w-8 text-green" />
-                            </div>
-                            <div className="p-2">
-                                <IconCheck className="w-8 text-green" />{' '}
-                            </div>
-                            <div className="p-2">
-                                <IconCheck className="w-8 text-green" />{' '}
-                            </div>
-                            <div className="p-2 bg-white dark:bg-accent-dark !border-x-2 !border-l-blue !border-r-blue">
-                                <IconCheck className="w-8 text-green" />{' '}
-                            </div>
-
-                            <div className="p-2">iOS recordings</div>
-                            <div className="p-2">
-                                <IconX className="w-8 text-red" />
-                            </div>
-                            <div className="p-2">
-                                <IconCheck className="w-8 text-green" />
-                            </div>
-                            <div className="p-2">
-                                <IconCheck className="w-8 text-green" />
-                            </div>
-                            <div className="p-2">
-                                <IconCheck className="w-8 text-green" />
-                            </div>
-                            <div className="p-2 bg-white dark:bg-accent-dark !border-x-2 !border-l-blue !border-r-blue">
-                                In beta
-                            </div>
-
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div className="p-2 bg-white dark:bg-accent-dark !border-x-2 !border-b-2 !border-x-blue !border-b-blue rounded rounded-tl-none rounded-tr-none text-center">
-                                <CallToAction href="#" type="primary" size="md">
-                                    Get started - free
-                                </CallToAction>
-                            </div>
-                        </div>
-                    </div>
+                    <Comparison comparison={comparison} />
                 </section>
 
                 <section className="mb-20">
