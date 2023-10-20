@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Layout from '../Layout'
+import Layout from '../../Layout'
 import Link from 'components/Link'
 import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
-import { IconRewindPlay, IconMinus, IconPlus, IconGraph } from '@posthog/icons'
+import { IconRewindPlay, IconMinus, IconPlus, IconGraph, IconCheck, IconX } from '@posthog/icons'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import { CallToAction } from 'components/CallToAction'
@@ -11,6 +11,22 @@ import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
+import { PlanComparison } from 'components/Pricing/PlanComparison'
+import ContentViewer from 'components/ContentViewer'
+import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
+import { docsMenu } from '../../../navs'
+import { MenuItem } from 'components/PostLayout/Menu'
+import { TeamMember, teamQuery } from 'components/Team'
+import { CardContainer, Card as RoadmapCard } from 'components/Roadmap'
+import { InProgress } from 'components/Roadmap/InProgress'
+import { useRoadmap } from 'hooks/useRoadmap'
+import TeamRoadmap from 'components/TeamRoadmap'
+import RecentChange from '../RecentChange'
+import TeamMembers from '../TeamMembers'
+import Questions from '../Questions'
+import CTA from 'components/Home/CTA'
+import Logo from 'components/Logo'
+import { Check, Check2 } from 'components/Icons'
 
 const features = [
     '$50,000 in PostHog credit for 12 months<sup>1</sup>',
@@ -92,7 +108,7 @@ const VsCompetitor = ({ title, children }) => {
                 {children}
             </div>
             <div className="shrink-0 basis-[167px] text-center">
-                <StaticImage src="../../images/products/competitors-sr.png" className="max-w-[167px]" />
+                <StaticImage src="../../../images/products/competitors-sr.png" className="max-w-[167px]" />
             </div>
         </div>
     )
@@ -103,7 +119,7 @@ const VsPostHog = ({ children }) => {
             className={`rounded-md p-4 border-2 border-blue dark:border-blue bg-white/50 dark:bg-accent-dark flex flex-col md:flex-row gap-4`}
         >
             <div className="shrink-0 basis-[145px] text-center">
-                <StaticImage src="../../images/products/competitors-hog.png" className="max-w-[145px]" />
+                <StaticImage src="../../../images/products/competitors-hog.png" className="max-w-[145px]" />
             </div>
             <div className="flex-1">
                 <h4 className="leading-tight">Reasons to choose (PostHog logo)</h4>
@@ -129,6 +145,45 @@ const Accordion = ({ children, label, active, initialOpen = false, className = '
             </button>
             <div className={` ${open ? 'pb-2' : 'hidden'}`}>{children}</div>
         </>
+    )
+}
+
+const DocLinks = ({ menu }) => {
+    const organized = {}
+    let currentMenu
+    menu.forEach((menuItem) => {
+        const { name } = menuItem
+        if (!('url' in menuItem)) {
+            currentMenu = name
+            organized[name] = []
+        } else if (currentMenu) {
+            organized[currentMenu].push(menuItem)
+        }
+    })
+
+    const menuOrganized = Object.keys(organized)
+
+    return (
+        <ul className={`list-none m-0 p-0 flex justify-center space-x-20`}>
+            {menuOrganized.map((title) => {
+                return (
+                    <li key={title}>
+                        <p className="opacity-50 m-0 font-semibold">{title}</p>
+                        <ul className="list-none m-0 p-0 mt-2 gap-y-4 flex flex-col">
+                            {organized[title].map(({ name, icon, color, url, badge }) => {
+                                return (
+                                    <li key={name + url} to={url}>
+                                        <Link to={url}>
+                                            <MenuItem badge={badge} color={color} icon={icon} name={name} />
+                                        </Link>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </li>
+                )
+            })}
+        </ul>
     )
 }
 
@@ -179,7 +234,7 @@ export const ProductSessionReplay = () => {
                 </p>
 
                 <StaticImage
-                    src="../../images/products/screenshot-session-replay.png"
+                    src="../../../images/products/screenshot-session-replay.png"
                     alt=""
                     className="w-full max-w-[1330px] -mr-[60px]"
                 />
@@ -332,103 +387,18 @@ export const ProductSessionReplay = () => {
                             Either way, your first 15,000 recordings are free – every month.
                         </p>
                     </div>
-                    <div className="w-80">image</div>
+                    <div className="w-80">
+                        <StaticImage
+                            placeholder="none"
+                            quality={100}
+                            src="../../Home/Slider/images/session-recording-hog.png"
+                            alt=""
+                        />
+                    </div>
                 </div>
 
                 <div className="md:flex justify-between items-start gap-12">
-                    <div className="flex-1 grid grid-cols-3 max-w-4xl text-sm md:text-base">
-                        {/* header row */}
-                        <div className="bg-accent dark:bg-accent-dark rounded-sm leading-tight p-2 mt-2">
-                            <strong>Plans</strong>
-                        </div>
-                        <div className="bg-accent dark:bg-accent-dark rounded-sm leading-tight p-2 mt-2">
-                            <strong className="block">Free</strong>
-                            <span className="block text-[12px] md:text-sm leading-tight opacity-75">
-                                No credit card required
-                            </span>
-                        </div>
-                        <div className="bg-accent dark:bg-accent-dark rounded-sm leading-tight p-2 mt-2">
-                            <strong className="block">Unlimited</strong>
-                            <span className="block text-[12px] md:text-sm leading-tight opacity-75">
-                                All features, no limitations
-                            </span>
-                        </div>
-
-                        {/* body row */}
-                        <div className="p-2">Recordings</div>
-                        <div className="p-2">
-                            <strong>15,000</strong>
-                            <span className="opacity-75 text-[12px] md:text-sm">/mo</span>
-                        </div>
-                        <div className="p-2">
-                            <strong>Unlimited</strong>
-                        </div>
-
-                        <div className="p-2">Data retention</div>
-                        <div className="p-2">
-                            <strong>1 month</strong>
-                        </div>
-                        <div className="p-2">
-                            <strong>3 months</strong>
-                        </div>
-
-                        {/* header row */}
-                        <div className="col-span-3 bg-accent dark:bg-accent-dark rounded-sm leading-tight p-2 mt-2">
-                            <strong>Features</strong>
-                        </div>
-
-                        <div className="p-2">
-                            <Tooltip
-                                content={() => (
-                                    <>
-                                        <p className="text-sm m-0">Description!</p>
-                                    </>
-                                )}
-                                tooltipClassName="max-w-[325px] shadow-xl rounded text-xs backdrop-blur bg-white dark:bg-accent-dark px-4 py-2"
-                                placement="right"
-                            >
-                                <span className="border-b border-dotted border-border dark:border-border-dark">
-                                    Console logs
-                                </span>
-                            </Tooltip>
-                        </div>
-                        <div className="p-2">
-                            <strong>Yes</strong>
-                        </div>
-                        <div className="p-2">
-                            <strong>Yes</strong>
-                        </div>
-
-                        {/* header row */}
-                        <div className="col-span-3 bg-accent dark:bg-accent-dark rounded-sm leading-tight p-2 mt-2 mb-1">
-                            <strong>Monthly pricing</strong>
-                        </div>
-                        <div className="px-2 py-1">First 15,000 recordings</div>
-                        <div className="px-2 py-1">
-                            <strong>Free</strong>
-                        </div>
-                        <div className="px-2 py-1">
-                            <strong>Free</strong>
-                        </div>
-                        <div className="px-2 py-1">15,001 - 50,000</div>
-                        <div className="px-2 py-1">
-                            <strong>-</strong>
-                        </div>
-                        <div className="px-2 py-1">
-                            <strong>$0.0050</strong>
-                        </div>
-                        <div></div>
-                        <div>
-                            <CallToAction href="#" type="primary" size="md">
-                                Get started - free
-                            </CallToAction>
-                        </div>
-                        <div>
-                            <CallToAction href="#" type="primary" size="md">
-                                Get started - free
-                            </CallToAction>
-                        </div>
-                    </div>
+                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
 
                     <div className="w-80">
                         <h4 className="text-3xl">FAQs</h4>
@@ -483,49 +453,51 @@ export const ProductSessionReplay = () => {
                                     <Link to="#">See full comparison</Link>
                                 </span>
                             </div>
-                            <div className="bg-white !border-t-2 !border-x-2  !border-l-blue !border-r-blue !border-t-blue dark:bg-accent-dark rounded-sm rounded-bl-none rounded-br-none leading-tight p-2 flex justify-center items-center">
-                                <strong className="block">PostHog logo</strong>
+                            <div className="bg-white dark:bg-accent-dark !border-t-2 !border-x-2  !border-l-blue !border-r-blue !border-t-blue rounded-sm rounded-bl-none rounded-br-none leading-tight p-2 flex justify-center items-center">
+                                <Logo className="w-32" />
                             </div>
 
                             {/* body row */}
                             <div className="p-2">Single-page app support</div>
                             <div className="p-2">
-                                <strong>Check</strong>
+                                <IconCheck className="w-8 text-green" />
                             </div>
                             <div className="p-2">
-                                <strong>Check</strong>
+                                <IconCheck className="w-8 text-green" />
                             </div>
                             <div className="p-2">
-                                <strong>Check</strong>
+                                <IconCheck className="w-8 text-green" />{' '}
                             </div>
                             <div className="p-2">
-                                <strong>Check</strong>
+                                <IconCheck className="w-8 text-green" />{' '}
                             </div>
-                            <div className="p-2 bg-white !border-x-2 !border-l-blue !border-r-blue">
-                                <strong>Check</strong>
+                            <div className="p-2 bg-white dark:bg-accent-dark !border-x-2 !border-l-blue !border-r-blue">
+                                <IconCheck className="w-8 text-green" />{' '}
                             </div>
 
                             <div className="p-2">iOS recordings</div>
                             <div className="p-2">
-                                <strong>X</strong>
+                                <IconX className="w-8 text-red" />
                             </div>
                             <div className="p-2">
-                                <strong>Check</strong>
+                                <IconCheck className="w-8 text-green" />
                             </div>
                             <div className="p-2">
-                                <strong>Check</strong>
+                                <IconCheck className="w-8 text-green" />
                             </div>
                             <div className="p-2">
-                                <strong>Check</strong>
+                                <IconCheck className="w-8 text-green" />
                             </div>
-                            <div className="p-2 bg-white !border-x-2 !border-l-blue !border-r-blue">In beta</div>
+                            <div className="p-2 bg-white dark:bg-accent-dark !border-x-2 !border-l-blue !border-r-blue">
+                                In beta
+                            </div>
 
                             <div></div>
                             <div></div>
                             <div></div>
                             <div></div>
                             <div></div>
-                            <div className="p-2 bg-white !border-x-2 !border-b-2 !border-x-blue !border-b-blue rounded rounded-tl-none rounded-tr-none text-center">
+                            <div className="p-2 bg-white dark:bg-accent-dark !border-x-2 !border-b-2 !border-x-blue !border-b-blue rounded rounded-tl-none rounded-tr-none text-center">
                                 <CallToAction href="#" type="primary" size="md">
                                     Get started - free
                                 </CallToAction>
@@ -588,17 +560,20 @@ export const ProductSessionReplay = () => {
                 </section>
 
                 <section className="mb-20">
-                    <h3 className="text-3xl lg:text-4xl text-center">Install &amp; customize</h3>
+                    <h3 className="text-3xl lg:text-4xl text-center mb-0">Install &amp; customize</h3>
+                    <p className="mt-0 opacity-50 text-center">
+                        Here are some ways you can fine tune how you implement session replays.
+                    </p>
 
-                    <div className="text-center">block from homepage goes here (with additional 1st slide)</div>
+                    <ContentViewer sticky={false} scrollToTop={false} content={[...SessionReplay]} />
                 </section>
 
                 <section className="mb-20">
-                    <h3 className="text-3xl lg:text-4xl text-center">Explore the docs</h3>
-
-                    <div className="text-center">
-                        Each column should be a docs subsection for that product (based on a key of some kind?)
-                    </div>
+                    <h3 className="text-3xl lg:text-4xl text-center mb-0">Explore the docs</h3>
+                    <p className="mt-0 opacity-70 text-center">
+                        Get a more technical overview of how everything works in our docs.
+                    </p>
+                    <DocLinks menu={docsMenu.children[2].children} />
                 </section>
 
                 <section className="mb-20">
@@ -608,9 +583,7 @@ export const ProductSessionReplay = () => {
                         PostHog works in small teams. The Monitoring team are the folks responsible for building session
                         replay.
                     </p>
-                    <p className="text-center">(Shockingly, this team prefers their pizza without pineapple.)</p>
-
-                    <div className="text-center">people grid here, and bonus points for any listed job</div>
+                    <TeamMembers teamName="Monitoring" />
                 </section>
 
                 <section className="mb-20">
@@ -620,27 +593,12 @@ export const ProductSessionReplay = () => {
 
                     <div className="grid md:grid-cols-2 gap-12">
                         <div>
-                            <h4 className="opacity-60 text-base">Latest update</h4>
-
-                            <div className="text-sm opacity-60">Sept 2023</div>
-                            <h4>
-                                <Link
-                                    to="#"
-                                    className="text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
-                                >
-                                    Update title
-                                </Link>
-                            </h4>
-                            <p>latest update here</p>
-
-                            <CallToAction href="/changelog" type="secondary" size="sm">
-                                Visit the changelog
-                            </CallToAction>
+                            <RecentChange team="Monitoring" />
                         </div>
 
                         <div>
                             <h4 className="opacity-60 text-base">Up next</h4>
-                            roadmap widget(s) go here
+                            <TeamRoadmap team="Monitoring" />
                         </div>
                     </div>
                 </section>
@@ -650,13 +608,13 @@ export const ProductSessionReplay = () => {
 
                     <p className="text-center">See more questions (or ask your own!) in our community forums.</p>
 
-                    <div className="text-center">
+                    <div className="text-center mb-8">
                         <CallToAction href="/questions/session-replay" type="secondary" size="sm">
                             View session replay questions
                         </CallToAction>
                     </div>
 
-                    <div className="text-center">question table here</div>
+                    <Questions topicId={20} />
                 </section>
 
                 <section className="mb-20">
@@ -680,7 +638,7 @@ export const ProductSessionReplay = () => {
                     </div>
                 </section>
                 <section className="mb-20">
-                    <div className="text-center">Call to action section from homepage</div>
+                    <CTA />
                 </section>
             </div>
         </Layout>

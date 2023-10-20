@@ -36,9 +36,10 @@ interface IProps {
     title?: string
     initialIndex?: number
     scrollToTop?: boolean
+    sticky?: boolean
 }
 
-export default function ContentViewer({ content, title, initialIndex, scrollToTop = true }: IProps) {
+export default function ContentViewer({ content, title, initialIndex, scrollToTop = true, sticky = true }: IProps) {
     const [currentIndex, setCurrentIndex] = useState<number | null>(initialIndex ?? null)
     const [contentView, setContentView] = useState('Article')
     const currentContent = currentIndex !== null && content[currentIndex]
@@ -63,7 +64,7 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
     return (
         <div className="flex md:flex-row flex-col md:space-y-0 space-y-12 gap-x-6 lg:gap-x-12 relative">
             <motion.div className="flex-shrink-0 w-auto md:max-w-[350px] -mx-5 md:mx-0">
-                <div className="reasonable:sticky reasonable:top-[108px] pl-5 md:px-0">
+                <div className={`${sticky ? 'reasonable:sticky reasonable:top-[108px]' : ''} pl-5 md:px-0`}>
                     {title && <h3 className="text-lg mb-2">{title}</h3>}
                     <ul className="list-none m-0 p-0 flex md:space-x-0 space-x-2 md:grid md:gap-y-1 snap-x overflow-x-auto">
                         {content.map(({ title, author, image, tags, code, video, type }, index) => {

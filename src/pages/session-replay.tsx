@@ -1,2 +1,2 @@
-import ProductSessionReplay from 'components/SessionReplay'
+import ProductSessionReplay from 'components/Product/SessionReplay'
 export default ProductSessionReplay
