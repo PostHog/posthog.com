@@ -5,7 +5,7 @@ import HubSpotForm from 'components/HubSpotForm'
 import YCsign from '../images/max-yc.png'
 import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
 import { Check2 } from 'components/Icons'
-import { RewindPlay } from '@posthog/icons'
+import { IconRewindPlay } from '@posthog/icons'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import { CallToAction } from 'components/CallToAction'
@@ -145,7 +145,7 @@ export const ProductProductAnalytics = () => {
             <div className="max-w-7xl mx-auto px-5 py-12">
                 <div className="flex gap-1 justify-center items-center mb-2">
                     <span className="w-5 h-5 text-yellow">
-                        <RewindPlay />
+                        <IconRewindPlay />
                     </span>
                     <span className="text-[15px] font-semibold text-opacity-60">Session replay</span>
                 </div>
@@ -252,12 +252,12 @@ export const ProductProductAnalytics = () => {
                     <Subfeature
                         title="Capture sessions without extra code"
                         description="Works with PostHog.js"
-                        icon="Bolt"
+                        icon="IconBolt"
                     />
                     <Subfeature
                         title="Automatic playlists"
                         description="Filter by user behavior or time"
-                        icon="Playlist"
+                        icon="IconPlaylist"
                     />
                     <Subfeature
                         title="Web or mobile session recording"

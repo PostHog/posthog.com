@@ -1,25 +1,25 @@
 import {
-    Badge,
-    Brackets,
-    Clock,
-    Columns,
-    Download,
-    Filter,
-    Funnels,
-    Gear,
-    GridMasonry,
-    Lifecycle,
-    Trends,
-    Stickiness,
-    Pulse,
-    Retention,
-    Rewind,
-    People,
-    Share,
-    Target,
-    Terminal,
-    TestTube,
-    UserPaths,
+    IconBadge,
+    IconBrackets,
+    IconClock,
+    IconColumns,
+    IconDownload,
+    IconFilter,
+    IconFunnels,
+    IconGear,
+    IconGridMasonry,
+    IconLifecycle,
+    IconTrends,
+    IconStickiness,
+    IconPulse,
+    IconRetention,
+    IconRewind,
+    IconPeople,
+    IconShare,
+    IconTarget,
+    IconTerminal,
+    IconTestTube,
+    IconUserPaths,
 } from '@posthog/icons'
 import Link from 'components/Link'
 import { motion } from 'framer-motion'
@@ -80,12 +80,12 @@ const FeatureList = ({ features, className = '' }) => {
 
 export const ProductAnalytics = () => {
     const features = [
-        { title: 'Funnels', Icon: Funnels },
-        { title: 'Graphs & trends', Icon: Trends },
-        { title: 'User paths', Icon: UserPaths },
-        { title: 'Stickiness', Icon: Stickiness },
-        { title: 'Lifecycle', Icon: Lifecycle },
-        { title: 'Retention', Icon: Retention },
+        { title: 'Funnels', Icon: IconFunnels },
+        { title: 'Graphs & trends', Icon: IconTrends },
+        { title: 'User paths', Icon: IconUserPaths },
+        { title: 'Stickiness', Icon: IconStickiness },
+        { title: 'Lifecycle', Icon: IconLifecycle },
+        { title: 'Retention', Icon: IconRetention },
     ]
     return (
         <div className="md:bg-[#1371FF] rounded-md md:text-white flex items-end h-full">
@@ -149,9 +149,9 @@ export const ProductAnalytics = () => {
 
 export const SessionReplay = () => {
     const features = [
-        { title: 'Event timeline', Icon: Clock },
-        { title: 'Console logs', Icon: Terminal },
-        { title: 'Network requests', Icon: Pulse },
+        { title: 'Event timeline', Icon: IconClock },
+        { title: 'Console logs', Icon: IconTerminal },
+        { title: 'Network requests', Icon: IconPulse },
     ]
     return (
         <div className="md:bg-[#F2AD46] rounded-md text-primary flex items-end h-full">
@@ -216,9 +216,9 @@ export const SessionReplay = () => {
 
 export const FeatureFlags = () => {
     const features = [
-        { title: 'Multivariate flags', Icon: TestTube },
-        { title: 'JSON payloads', Icon: Brackets },
-        { title: 'Instant rollbacks', Icon: Rewind },
+        { title: 'Multivariate flags', Icon: IconTestTube },
+        { title: 'JSON payloads', Icon: IconBrackets },
+        { title: 'Instant rollbacks', Icon: IconRewind },
     ]
     return (
         <div className=" md:bg-[#29DBBB] rounded-md text-primary flex items-end h-full">
@@ -290,9 +290,9 @@ export const FeatureFlags = () => {
 
 export const ABTesting = () => {
     const features = [
-        { title: 'Goals & secondary metrics', Icon: Badge },
-        { title: 'Targeting & exclusion rules ', Icon: Target },
-        { title: 'Dynamic cohort support', Icon: People },
+        { title: 'Goals & secondary metrics', Icon: IconBadge },
+        { title: 'Targeting & exclusion rules ', Icon: IconTarget },
+        { title: 'Dynamic cohort support', Icon: IconPeople },
     ]
 
     return (
@@ -367,9 +367,9 @@ export const ABTesting = () => {
 
 export const Cdp = () => {
     const features = [
-        { title: 'Sources', Icon: Download },
-        { title: 'Destinations', Icon: Share },
-        { title: 'Transformations', Icon: Gear },
+        { title: 'Sources', Icon: IconDownload },
+        { title: 'Destinations', Icon: IconShare },
+        { title: 'Transformations', Icon: IconGear },
     ]
     return (
         <div className="md:bg-[#FCC779] rounded-md text-primary flex items-end h-full">
@@ -475,9 +475,9 @@ export const DataWarehouse = () => {
 
 export const Sql = () => {
     const features = [
-        { title: 'Breakdowns', Icon: Columns },
-        { title: 'Filters', Icon: Filter },
-        { title: 'Aggregations', Icon: GridMasonry },
+        { title: 'Breakdowns', Icon: IconColumns },
+        { title: 'Filters', Icon: IconFilter },
+        { title: 'Aggregations', Icon: IconGridMasonry },
     ]
 
     return (

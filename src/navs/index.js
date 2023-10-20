@@ -1969,7 +1969,7 @@ export const docsMenu = {
                     name: 'Correlation analysis',
                     url: '/docs/product-analytics/correlation',
                     color: 'blue',
-                    icon: 'ArrowUpRight',
+                    icon: 'IconArrowUpRight',
                 },
                 {
                     name: 'Retention',

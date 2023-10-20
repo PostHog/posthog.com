@@ -1,5 +1,5 @@
 import { Listbox } from '@headlessui/react'
-import { ChevronDown, Search } from '@posthog/icons'
+import { IconChevronDown, IconSearch } from '@posthog/icons'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
@@ -24,7 +24,7 @@ const PriorityDropdown = ({ priority, ticketID, setTicket }) => {
                 <Listbox.Button className="text-sm flex items-center font-bold">
                     <span>{priority ? capitalize(priority) : 'None'}</span>
                     <span>
-                        <ChevronDown className="w-5" />
+                        <IconChevronDown className="w-5" />
                     </span>
                 </Listbox.Button>
                 <Listbox.Options className="absolute z-10 whitespace-nowrap right-0 list-none p-0 m-0 mt-1 rounded-md bg-white text-black text-sm font-semibold divide-y divide-border cursor-pointer border border-border">
@@ -78,7 +78,7 @@ const GroupDropdown = ({ groupID, ticketID, setTicket, disabled }) => {
                             >
                                 <span>{groups.find((group) => group.id === groupID)?.name}</span>
                                 <span>
-                                    <ChevronDown className="w-5" />
+                                    <IconChevronDown className="w-5" />
                                 </span>
                             </div>
                         )
@@ -115,7 +115,7 @@ const StatusDropdown = ({ status, ticketID, setTicket }) => {
                 <Listbox.Button className="text-sm flex items-center font-bold">
                     <span>{capitalize(status)}</span>
                     <span>
-                        <ChevronDown className="w-5" />
+                        <IconChevronDown className="w-5" />
                     </span>
                 </Listbox.Button>
                 <Listbox.Options className="absolute z-10 whitespace-nowrap right-0 list-none p-0 m-0 mt-1 rounded-md bg-white text-black text-sm font-semibold divide-y divide-border cursor-pointer border border-border">
@@ -212,7 +212,7 @@ export default function ZendeskTicket({ question, questionID }) {
                     externalNoIcon
                     className="font-bold text-sm"
                 >
-                    <Search className="w-4 text-black dark:text-white opacity-60 hover:opacity:100 transition-opacity" />
+                    <IconSearch className="w-4 text-black dark:text-white opacity-60 hover:opacity:100 transition-opacity" />
                 </Link>
             </div>
 
