@@ -2761,9 +2761,15 @@ const menu = [
                 ],
             },
             {
+                name: 'Surveys',
+                icon: 'Chat',
+                color: 'salmon',
+                url: '/surveys',
+            },
+            {
                 name: 'Product OS',
                 icon: 'Stack',
-                color: 'salmon',
+                color: 'blue',
                 url: '/product-os',
             },
         ],

@@ -1,7 +1,7 @@
 import { IconChevronDown } from '@posthog/icons'
 import React, { useEffect, useState } from 'react'
 import { slideButtons } from './slideButtons'
-import { ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Cdp, DataWarehouse, Sql, Api } from './Slides'
+import { ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Surveys, Cdp, DataWarehouse } from './Slides'
 import { useInView } from 'react-intersection-observer'
 
 const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
@@ -35,7 +35,7 @@ const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
         </li>
     )
 }
-const slides = [ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Cdp, DataWarehouse, Sql]
+const slides = [ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Surveys, Cdp, DataWarehouse]
 
 const SlideContainer = ({ children, index, setActiveSlide }) => {
     const [viewRef, inView] = useInView({ threshold: 0.5 })

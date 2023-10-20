@@ -365,6 +365,51 @@ export const ABTesting = () => {
     )
 }
 
+export const Surveys = () => {
+    const features = [
+        { title: 'Multiple choice, text, rating, emoji responses', Icon: IconColumns },
+        { title: 'User targeting', Icon: IconFilter },
+        { title: 'Customization', Icon: IconGridMasonry },
+        { title: 'No-code or APi', Icon: IconGridMasonry },
+    ]
+
+    return (
+        <div className="md:bg-[#D42F18] rounded-md text-white flex items-end h-full">
+            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
+                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
+                    <div className="h-full">
+                        <StaticImage
+                            alt="A hog analyzing NPS results"
+                            placeholder="none"
+                            quality={100}
+                            objectFit="contain"
+                            className="w-full h-full py-10 max-h-96"
+                            src="../../../../contents/images/products/surveys/survey-hog.png"
+                        />
+                    </div>
+                </ImageContainer>
+                <ContentContainer className="md:col-span-7 lg:col-span-6">
+                    <Content>
+                        <Title title={'Surveys'} />
+                        <Subtitle subtitle="Collect feedback from your users" />
+                        <FeatureList features={features} />
+
+                        <CallToAction
+                            href="/surveys"
+                            type="custom"
+                            size="md"
+                            className="md:!w-auto !w-full"
+                            childClassName="!bg-[#D42F18]"
+                        >
+                            Explore
+                        </CallToAction>
+                    </Content>
+                </ContentContainer>
+            </div>
+        </div>
+    )
+}
+
 export const Cdp = () => {
     const features = [
         { title: 'Sources', Icon: IconDownload },
