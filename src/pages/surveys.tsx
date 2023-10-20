@@ -149,13 +149,14 @@ export const ProductSurveys = () => {
                     Ask anything with <span className="text-red dark:text-yellow">no-code surveys</span>
                 </h1>
                 <p className="text-lg font-semibold text-center text-opacity-75">
-                    Freeform text responses, multiple choice, NPS, ratings, emoji reactions, and more
+                    Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji
+                    reactions. Or build your own UI with the API.
                 </p>
 
                 <StaticImage
-                    src="../images/products/screenshot-session-replay.png"
-                    alt=""
-                    className="w-full max-w-[1330px] -mr-[60px]"
+                    src="../images/products/screenshot-surveys.png"
+                    alt="PostHog surveys"
+                    className="w-full max-w-[1360px] rounded overflow-hidden"
                 />
             </div>
         </Layout>

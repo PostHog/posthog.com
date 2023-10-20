@@ -394,7 +394,7 @@ export const Surveys = () => {
                 <ContentContainer className="md:col-span-10 lg:col-span-8">
                     <Content>
                         <Title title={'Surveys'} />
-                        <Subtitle subtitle="Collect feedback from your users" />
+                        <Subtitle subtitle="Collect in-app feedback from your users" />
                         <FeatureList features={features} />
 
                         <CallToAction
