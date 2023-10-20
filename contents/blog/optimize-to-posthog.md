@@ -1,6 +1,6 @@
 ---
 title: An intro to PostHog for Google Optimize users
-date: 2023-10-18
+date: 2023-10-20
 author: ["ian-vanagas"]
 showTitle: true
 rootpage: /blog
