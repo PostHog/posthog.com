@@ -3,16 +3,16 @@ import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
-    IconRewindPlay,
     IconBolt,
-    IconPlaylist,
-    IconPhone,
-    IconDownload,
-    IconPassword,
     IconGraph,
     IconFlask,
     IconToggle,
+    IconPieChart,
+    IconPeople,
+    IconNotification,
+    IconRewindPlay,
 } from '@posthog/icons'
+import { SQL } from 'components/ProductIcons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
@@ -21,7 +21,7 @@ import { Subfeature } from 'components/Products/Subfeature'
 import { graphql, useStaticQuery } from 'gatsby'
 import { PlanComparison } from 'components/Pricing/PlanComparison'
 import ContentViewer from 'components/ContentViewer'
-import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
+import ProductAnalytics from 'components/Home/CodeBlocks/ProductAnalytics'
 import { docsMenu } from '../../../navs'
 import TeamRoadmap from 'components/TeamRoadmap'
 import RecentChange from '../RecentChange'
@@ -50,8 +50,9 @@ const team = 'Product Analytics'
 
 const features = [
     {
-        title: 'Event timeline',
-        description: "History of everything that happened in a user's session",
+        title: 'Funnels',
+        description:
+            'Filter steps by user property, cohort, or event. Track conversion time between steps. More more more.',
         image: <StaticImage src="./images/timeline.png" width={420} />,
     },
     {
@@ -69,75 +70,82 @@ const features = [
 const subfeaturesItemCount = 5
 const subfeatures = [
     {
-        title: 'Capture sessions without extra code',
-        description: 'Works with PostHog.js',
         icon: <IconBolt />,
+        title: 'Autocapture',
+        description:
+            'Add PostHog.js to your website or web app to track all event data and retroactively define events',
     },
     {
-        title: 'Automatic playlists',
-        description: 'Filter by user behavior or time',
-        icon: <IconPlaylist />,
+        icon: <IconPieChart />,
+        title: 'Data visualization',
+        description: 'Filter data by user property, group data, and use formulas in queries',
     },
     {
-        title: 'Web or mobile session recording',
-        description: 'Web or iOS (beta) available',
-        icon: <IconPhone />,
+        icon: <SQL />,
+        title: 'SQL',
+        description: 'Use PostHog’s filtering interface or switch into SQL mode for more powerful querying',
     },
     {
-        title: 'Download recordings',
-        description: 'Retain recordings beyond data retention limits',
-        icon: <IconDownload />,
+        icon: <IconNotification />,
+        title: 'Dashboards and insight subscriptions',
+        description: 'Share insights with teams, and get updates when results change',
     },
     {
-        title: 'Block sensitive data',
-        description: 'Disable capturing data from any DOM element with CSS',
-        icon: <IconPassword />,
+        icon: <IconPeople />,
+        title: 'Group analytics',
+        description: 'Analyze how any group of people (like an organization) use your product',
     },
 ]
 
 const questions = [
     {
-        question: 'Where do key events happen in my user’s sessions?',
+        question: 'How are my metrics changing over time?',
     },
     {
-        question: "How do I understand my users' behavior in funnels?",
-        url: '#',
+        question: 'How does the usage of two feature compare?',
     },
     {
-        question: 'How do I understand my user journeys?',
-        url: '#',
+        question: "How does last week's release affect engagement?",
     },
     {
-        question: 'How can I understand what my power users are doing?',
-        url: '#',
+        question: 'What long-term patterns are we seeing?',
     },
     {
-        question: 'How do I figure out how to lower churn?',
-        url: '#',
+        question: 'Which cohorts can we find from usage patterns?',
     },
     {
-        question: 'What errors are being logged to the console?',
+        question: 'How do event properties change over time?',
     },
     {
-        question: 'How does my user experience differ across regions?',
+        question: 'How do far are my users scrolling down my app?',
+        url: '/tutorials/scroll-depth',
     },
     {
-        question: 'What is a user’s DOM interactive time?',
-        url: '#',
+        question: 'How to I track performance marketing?',
+        url: '/tutorials/performance-marketing',
     },
     {
-        question: 'How fast does my app load?',
+        question: 'How do I track my ads?',
     },
     {
-        question: 'What is a user’s First Contentful Paint time?',
-        url: '#',
+        question: 'How do I track ad conversion?',
+        url: '/tutorials/performance-marketing#tracking-conversion-from-traffic-to-signups',
     },
     {
-        question: 'What is a user’s Page Loaded time?',
-        url: '#',
+        question: 'How can I find my power users? / What are my power users doing differently?',
+        url: '/tutorials/power-users#identifying-your-power-user',
     },
     {
-        question: 'How does my user experience differ across devices?',
+        question: 'Where do my users spend the most time on?',
+        url: '/tutorials/session-metrics',
+    },
+    {
+        question: 'How do I get insights about my data using regex?',
+        url: '/tutorials/regex-basics',
+    },
+    {
+        question: 'How do I measure growth loops?',
+        url: '/blog/growth-loops#measuring-your-growth-loop',
     },
 ]
 
@@ -157,6 +165,7 @@ const faqs = [
     },
 ]
 
+const comparisonColumnCount = 6
 const comparison = [
     {
         feature: 'Single-page app support',
@@ -178,117 +187,28 @@ const comparison = [
             PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">In beta</a>',
         },
     },
-    {
-        feature: 'Android recordings',
-        companies: {
-            Hotjar: false,
-            LogRocket: true,
-            Matomo: false,
-            FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">On the roadmap</a>',
-        },
-    },
-    {
-        feature: 'Identity detection',
-        companies: {
-            Hotjar: false,
-            LogRocket: true,
-            Matomo: true,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target recordings by URL',
-        companies: {
-            Hotjar: true,
-            LogRocket: true,
-            Matomo: true,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target by sample size',
-        companies: {
-            Hotjar: true,
-            LogRocket: false,
-            Matomo: true,
-            FullStory: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Filter recordings by user or event',
-        companies: {
-            Hotjar: true,
-            LogRocket: true,
-            Matomo: true,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Rage-click detection',
-        companies: {
-            Hotjar: true,
-            LogRocket: true,
-            Matomo: false,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Privacy masking for sensitive content',
-        companies: {
-            Hotjar: true,
-            LogRocket: true,
-            Matomo: true,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Export recordings',
-        companies: {
-            Hotjar: true,
-            LogRocket: false,
-            Matomo: true,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Recording retention policy',
-        companies: {
-            Hotjar: '12 months',
-            LogRocket: '1 month',
-            Matomo: '24 months',
-            FullStory: '1 month',
-            PostHog: 'Up to 3 months',
-        },
-    },
 ]
 
 const pairsWithItemCount = 3
 const PairsWithArray = [
     {
-        icon: <IconGraph />,
-        product: 'Product analytics',
-        description: 'Jump into a playlist of session recordings directly from any time series in a graph',
-        url: '/product-analytics',
+        icon: <IconRewindPlay />,
+        product: 'Session Replay',
+        description:
+            'Jump into a playlist of session recordings directly from any point in a graph, or segment of a funnel',
+        url: '/session-replay',
     },
     {
         icon: <IconToggle />,
         product: 'Feature flags',
-        description: "See which feature flags are enabled for a user's session",
+        description: 'See which feature flags were enabled for a user during a session',
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
         product: 'A/B testing',
         description:
-            'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
+            'Filter data down to users within an active experiment, whether part of a control group or a test variant',
         url: '/ab-testing',
     },
 ]
@@ -425,7 +345,7 @@ export const ProductProductAnalytics = () => {
                 </div>
 
                 <div className="md:flex justify-between items-start gap-12">
-                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
+                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['product_analytics']} />
 
                     <div className="md:w-96 md:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
@@ -440,7 +360,7 @@ export const ProductProductAnalytics = () => {
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                        <Comparison comparison={comparison} />
+                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
                     </section>
 
                     <section className="mb-20">
@@ -449,42 +369,26 @@ export const ProductProductAnalytics = () => {
                             <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
                                 <ul>
                                     <li>
-                                        You need heatmaps or scrollmaps
+                                        Time-based analysis for web analytics (e.g. time on page)
                                         <ul className="pl-6">
-                                            <li className="text-sm">PostHog is currently limited to clickmaps</li>
+                                            <li className="text-sm">(We're working on this!)</li>
                                         </ul>
                                     </li>
-                                    <li>Error tracking and alerting</li>
-                                    <li>
-                                        Mobile SDKs (in progress...)
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                <Link to="https://github.com/PostHog/posthog/issues/13269" external>
-                                                    React Native
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/12344" external>
-                                                    iOS
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/13267" external>
-                                                    Android
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    <li>Natural language processing for creating insights</li>
+                                    <li>Predictive analytics for extrapolating events into the future</li>
+                                    <li>Alerting for when events move beyond set thresholds</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
                                     <li>
-                                        Interlinking with feature flags and insights
-                                        <ul className="pl-6">
-                                            <li className="text-sm">Jump between them easily</li>
-                                        </ul>
+                                        Linking between analytics and other features, so you can jump from a graph to a
+                                        relevant recording
                                     </li>
-                                    <li>Collaboration, sharing, and embedding exporting recordings</li>
-                                    <li>No limits on how many recordings captured</li>
+                                    <li>Wide range of insight types for analyzing data</li>
+                                    <li>Formula mode and SQL access to enable deeper analysis</li>
+                                    <li>Automatic correlation analysis to find significant events</li>
+                                    <li>Group analytics for teams with B2B customers</li>
                                 </ul>
                             </VsPostHog>
                         </div>
@@ -503,7 +407,7 @@ export const ProductProductAnalytics = () => {
                         Here are some ways you can fine tune how you implement {product.lowercase}.
                     </p>
 
-                    <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...SessionReplay]} />
+                    <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...ProductAnalytics]} />
                 </section>
 
                 <section id="docs" className="mb-20">
@@ -511,7 +415,7 @@ export const ProductProductAnalytics = () => {
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[2].children} />
+                    <DocLinks menu={docsMenu.children[1].children} />
                 </section>
 
                 <section id="team" className="mb-20">

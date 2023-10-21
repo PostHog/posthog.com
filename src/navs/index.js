@@ -1881,55 +1881,55 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/product-analytics',
-                    icon: 'Home',
+                    icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
                     name: 'Installation',
                     url: '/docs/product-analytics/installation',
-                    icon: 'Book',
+                    icon: 'IconBook',
                     color: 'blue',
                 },
                 {
                     name: 'Capturing events',
                     url: '/docs/product-analytics/capture-events',
-                    icon: 'Send',
+                    icon: 'IconSend',
                     color: 'orange',
                 },
                 {
                     name: 'Creating insights',
                     url: '/docs/product-analytics/insights',
-                    icon: 'Graph',
+                    icon: 'IconGraph',
                     color: 'red',
                 },
                 {
                     name: 'Identifying users',
                     url: '/docs/product-analytics/identify',
-                    icon: 'Person',
+                    icon: 'IconPerson',
                     color: 'purple',
                 },
                 {
                     name: 'Setting user properties',
                     url: '/docs/product-analytics/user-properties',
-                    icon: 'Profile',
+                    icon: 'IconProfile',
                     color: 'seagreen',
                 },
                 {
                     name: 'Group analytics',
                     url: '/docs/product-analytics/group-analytics',
-                    icon: 'People',
+                    icon: 'IconPeople',
                     color: 'orange',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/product-analytics/troubleshooting',
-                    icon: 'Question',
+                    icon: 'IconQuestion',
                     color: 'blue',
                 },
                 {
                     name: 'Tutorials and guides',
                     url: '/docs/product-analytics/tutorials',
-                    icon: 'GraduationCap',
+                    icon: 'IconGraduationCap',
                     color: 'red',
                 },
                 {
@@ -1938,31 +1938,31 @@ export const docsMenu = {
                 {
                     name: 'Graphs & trends',
                     url: '/docs/product-analytics/trends',
-                    icon: 'Trends',
+                    icon: 'IconGraph',
                     color: 'blue',
                 },
                 {
                     name: 'Funnels',
                     url: '/docs/product-analytics/funnels',
-                    icon: 'Funnels',
+                    icon: 'IconFunnels',
                     color: 'yellow',
                 },
                 {
                     name: 'Dashboards',
                     url: '/docs/product-analytics/dashboards',
-                    icon: 'Dashboard',
+                    icon: 'IconDashboard',
                     color: 'purple',
                 },
                 {
                     name: 'User paths',
                     url: '/docs/product-analytics/paths',
-                    icon: 'UserPaths',
+                    icon: 'IconUserPaths',
                     color: 'seagreen',
                 },
                 {
                     name: 'Stickiness',
                     url: '/docs/product-analytics/stickiness',
-                    icon: 'Stickiness',
+                    icon: 'IconStickiness',
                     color: 'red',
                 },
                 {
@@ -1974,19 +1974,19 @@ export const docsMenu = {
                 {
                     name: 'Retention',
                     url: '/docs/product-analytics/retention',
-                    icon: 'Retention',
+                    icon: 'IconRetention',
                     color: 'seagreen',
                 },
                 {
                     name: 'Lifecycle',
                     url: '/docs/product-analytics/lifecycle',
-                    icon: 'Lifecycle',
+                    icon: 'IconLifecycle',
                     color: 'yellow',
                 },
                 {
                     name: 'SQL',
                     url: '/docs/product-analytics/sql',
-                    icon: 'HogQL',
+                    icon: 'IconHogQL',
                     color: 'purple',
                     badge: {
                         title: 'Beta',
@@ -1996,7 +1996,7 @@ export const docsMenu = {
                 {
                     name: 'Notifications',
                     url: '/docs/product-analytics/subscriptions',
-                    icon: 'Bell',
+                    icon: 'IconBell',
                     color: 'red',
                 },
                 {
@@ -2005,19 +2005,19 @@ export const docsMenu = {
                 {
                     name: 'Autocapture',
                     url: '/docs/product-analytics/autocapture',
-                    icon: 'Bolt',
+                    icon: 'IconBolt',
                     color: 'red',
                 },
                 {
                     name: 'Data management',
                     url: '/docs/data',
-                    icon: 'Database',
+                    icon: 'IconDatabase',
                     color: 'blue',
                 },
                 {
                     name: 'Sampling',
                     url: '/docs/product-analytics/sampling',
-                    icon: 'Sampling',
+                    icon: 'IconSampling',
                     color: 'purple',
                     badge: {
                         title: 'Beta',
@@ -2038,37 +2038,37 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/session-replay',
-                    icon: 'Home',
+                    icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
                     name: 'Installation',
                     url: '/docs/session-replay/installation',
-                    icon: 'Book',
+                    icon: 'IconBook',
                     color: 'blue',
                 },
                 {
                     name: 'Watching recordings',
                     url: '/docs/session-replay/how-to-watch-recordings',
-                    icon: 'App',
+                    icon: 'IconApp',
                     color: 'orange',
                 },
                 {
                     name: 'Controlling which sessions you record',
                     url: '/docs/session-replay/how-to-control-which-sessions-you-record',
-                    icon: 'Toggle',
+                    icon: 'IconToggle',
                     color: 'red',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/session-replay/troubleshooting',
-                    icon: 'Question',
+                    icon: 'IconQuestion',
                     color: 'purple',
                 },
                 {
                     name: 'Tutorials and guides',
                     url: '/docs/session-replay/tutorials',
-                    icon: 'GraduationCap',
+                    icon: 'IconGraduationCap',
                     color: 'blue',
                 },
                 {
@@ -2077,37 +2077,37 @@ export const docsMenu = {
                 {
                     name: 'Console log recording',
                     url: '/docs/session-replay/console-log-recording',
-                    icon: 'Code',
+                    icon: 'IconCode',
                     color: 'red',
                 },
                 {
                     name: 'Network performance',
                     url: '/docs/session-replay/network-recording',
-                    icon: 'Dashboard',
+                    icon: 'IconDashboard',
                     color: 'seagreen',
                 },
                 {
                     name: 'Privacy controls',
                     url: '/docs/session-replay/privacy',
-                    icon: 'Shield',
+                    icon: 'IconShield',
                     color: 'orange',
                 },
                 {
                     name: 'Sharing and embedding',
                     url: '/docs/session-replay/sharing',
-                    icon: 'Share',
+                    icon: 'IconShare',
                     color: 'purple',
                 },
                 {
                     name: 'Data retention',
                     url: '/docs/session-replay/data-retention',
-                    icon: 'Calendar',
+                    icon: 'IconCalendar',
                     color: 'seagreen',
                 },
                 {
                     name: 'Iframe recording',
                     url: '/docs/session-replay/iframes',
-                    icon: 'Code',
+                    icon: 'IconCode',
                     color: 'salmon',
                 },
             ],
@@ -2124,43 +2124,43 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/feature-flags',
-                    icon: 'Home',
+                    icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
                     name: 'Installation',
                     url: '/docs/feature-flags/installation',
-                    icon: 'Book',
+                    icon: 'IconBook',
                     color: 'blue',
                 },
                 {
                     name: 'Creating feature flags',
                     url: '/docs/feature-flags/creating-feature-flags',
-                    icon: 'Flag',
+                    icon: 'IconFlag',
                     color: 'orange',
                 },
                 {
                     name: 'Adding your code',
                     url: '/docs/feature-flags/adding-feature-flag-code',
-                    icon: 'Code',
+                    icon: 'IconCode',
                     color: 'salmon',
                 },
                 {
                     name: 'Testing your flag',
                     url: '/docs/feature-flags/testing',
-                    icon: 'TestTube',
+                    icon: 'IconTestTube',
                     color: 'purple',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/feature-flags/common-questions',
-                    icon: 'Question',
+                    icon: 'IconQuestion',
                     color: 'seagreen',
                 },
                 {
                     name: 'Tutorials and guides',
                     url: '/docs/feature-flags/tutorials',
-                    icon: 'GraduationCap',
+                    icon: 'IconGraduationCap',
                     color: 'blue',
                 },
                 {
@@ -2169,19 +2169,19 @@ export const docsMenu = {
                 {
                     name: 'Server-side local evaluation',
                     url: '/docs/feature-flags/local-evaluation',
-                    icon: 'Bolt',
+                    icon: 'IconBolt',
                     color: 'orange',
                 },
                 {
                     name: 'Client-side bootstrapping',
                     url: '/docs/feature-flags/bootstrapping',
-                    icon: 'Laptop',
+                    icon: 'IconLaptop',
                     color: 'salmon',
                 },
                 {
                     name: 'Early access feature management',
                     url: '/docs/feature-flags/early-access-feature-management',
-                    icon: 'Features',
+                    icon: 'IconFeatures',
                     color: 'purple',
                 },
             ],
@@ -2198,7 +2198,7 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/experiments',
-                    icon: 'Home',
+                    icon: 'IconHome',
                     color: 'seagreen',
                 },
                 /*
@@ -2212,37 +2212,37 @@ export const docsMenu = {
                 {
                     name: 'Installation',
                     url: '/docs/experiments/installation',
-                    icon: 'Book',
+                    icon: 'IconBook',
                     color: 'blue',
                 },
                 {
                     name: 'Creating an experiment',
                     url: '/docs/experiments/creating-an-experiment',
-                    icon: 'Target',
+                    icon: 'IconTarget',
                     color: 'orange',
                 },
                 {
                     name: 'Adding your code',
                     url: '/docs/experiments/adding-experiment-code',
-                    icon: 'Code',
+                    icon: 'IconCode',
                     color: 'salmon',
                 },
                 {
                     name: 'Testing and launching',
                     url: '/docs/experiments/testing-and-launching',
-                    icon: 'Rocket',
+                    icon: 'IconRocket',
                     color: 'purple',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/experiments/common-questions',
-                    icon: 'Question',
+                    icon: 'IconQuestion',
                     color: 'seagreen',
                 },
                 {
                     name: 'Tutorials and guides',
                     url: '/docs/experiments/tutorials',
-                    icon: 'GraduationCap',
+                    icon: 'IconGraduationCap',
                     color: 'blue',
                 },
                 {
@@ -2251,19 +2251,19 @@ export const docsMenu = {
                 {
                     name: 'Statistical significance',
                     url: '/docs/experiments/significance',
-                    icon: 'TestTube',
+                    icon: 'IconTestTube',
                     color: 'orange',
                 },
                 {
                     name: 'Under the hood',
                     url: '/docs/experiments/under-the-hood',
-                    icon: 'Calculator',
+                    icon: 'IconCalculator',
                     color: 'purple',
                 },
                 {
                     name: 'Experiments without feature flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
-                    icon: 'Flag',
+                    icon: 'IconFlag',
                     color: 'yellow',
                 },
             ],
@@ -2272,7 +2272,7 @@ export const docsMenu = {
             name: 'Surveys',
             url: '/docs/surveys',
             icon: 'Message',
-            color: 'blue',
+            color: 'salmon',
             children: [
                 {
                     name: 'Surveys',
@@ -2280,7 +2280,7 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/surveys',
-                    icon: 'Home',
+                    icon: 'IconHome',
                     color: 'seagreen',
                     badge: {
                         title: 'Beta',
@@ -2290,31 +2290,31 @@ export const docsMenu = {
                 {
                     name: 'Installation',
                     url: '/docs/surveys/installation',
-                    icon: 'Book',
+                    icon: 'IconBook',
                     color: 'blue',
                 },
                 {
                     name: 'Creating a survey',
                     url: '/docs/surveys/creating-surveys',
-                    icon: 'Target',
+                    icon: 'IconTarget',
                     color: 'yellow',
                 },
                 {
                     name: 'Implementing custom surveys',
                     url: '/docs/surveys/implementing-custom-surveys',
-                    icon: 'Code',
+                    icon: 'IconCode',
                     color: 'salmon',
                 },
                 {
                     name: 'Viewing results',
                     url: '/docs/surveys/viewing-results',
-                    icon: 'Graph',
+                    icon: 'IconGraph',
                     color: 'purple',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/surveys/troubleshooting',
-                    icon: 'Question',
+                    icon: 'IconQuestion',
                     color: 'seagreen',
                 },
             ],
@@ -2614,13 +2614,13 @@ export const docsMenu = {
                 {
                     name: 'Overview',
                     url: '/docs/data-warehouse',
-                    icon: 'Home',
+                    icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
                     name: 'Setup',
                     url: '/docs/data-warehouse/setup',
-                    icon: 'Book',
+                    icon: 'IconBook',
                     color: 'blue',
                     badge: {
                         title: 'Beta',
@@ -2630,7 +2630,7 @@ export const docsMenu = {
                 {
                     name: 'Query',
                     url: '/docs/data-warehouse/query',
-                    icon: 'HogQL',
+                    icon: 'IconHogQL',
                     color: 'purple',
                     badge: {
                         title: 'Beta',
@@ -2640,7 +2640,7 @@ export const docsMenu = {
                 {
                     name: 'Views',
                     url: '/docs/data-warehouse/views',
-                    icon: 'Calculator',
+                    icon: 'IconCalculator',
                     color: 'salmon',
                     badge: {
                         title: 'Beta',

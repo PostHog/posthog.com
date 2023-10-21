@@ -4,6 +4,15 @@ import Link from 'components/Link'
 import Logo from 'components/Logo'
 import React from 'react'
 const companies = {
+    Amplitude: {
+        comparisonURL: '/blog/posthog-vs-amplitude',
+    },
+    FullStory: {
+        comparisonURL: '/blog/posthog-vs-fullstory',
+    },
+    Heap: {
+        comparisonURL: '/blog/posthog-vs-heap',
+    },
     Hotjar: {
         comparisonURL: '/blog/posthog-vs-hotjar',
     },
@@ -13,16 +22,16 @@ const companies = {
     Matomo: {
         comparisonURL: '/blog/posthog-vs-matomo',
     },
-    FullStory: {
-        comparisonURL: '/blog/posthog-vs-fullstory',
+    Mixpanel: {
+        comparisonURL: '/blog/posthog-vs-mixpanel',
     },
     Pendo: {
         comparisonURL: '/blog/posthog-vs-pendo',
     },
-    Sprig: {
+    PostHog: {
         comparisonURL: '',
     },
-    PostHog: {
+    Sprig: {
         comparisonURL: '',
     },
 }

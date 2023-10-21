@@ -157,6 +157,7 @@ const faqs = [
     },
 ]
 
+const comparisonColumnCount = 6
 const comparison = [
     {
         feature: 'Single-page app support',
@@ -441,7 +442,7 @@ export const ProductSessionReplay = () => {
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                        <Comparison comparison={comparison} />
+                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
                     </section>
 
                     <section className="mb-20">
