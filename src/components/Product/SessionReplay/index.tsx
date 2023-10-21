@@ -42,6 +42,7 @@ const product = {
     slug: 'session-replay',
     lowercase: 'session replay',
     capitalized: 'Session Replay',
+    freeTier: '15,000 recordings',
 }
 
 const team = 'Monitoring'
@@ -402,7 +403,7 @@ export const ProductSessionReplay = () => {
                         <p className="">
                             Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
                             <br className="hidden lg:block" />
-                            Either way, your first 15,000 recordings are free – every month.
+                            Either way, your first {product.freeTier} are free – every month.
                         </p>
                     </div>
                     <div className="md:w-96">
