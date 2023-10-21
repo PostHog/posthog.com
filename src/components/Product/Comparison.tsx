@@ -71,7 +71,7 @@ export default function Comparison({ comparison, columnCount }) {
                 {comparison.map(({ feature, companies }) => {
                     return (
                         <>
-                            <div className="p-2 text-sm">{feature}</div>
+                            <div className="p-2 text-sm" dangerouslySetInnerHTML={{ __html: feature }}></div>
                             {activeCompanies.map((company) => {
                                 const featureAvailable = companies[company]
                                 return (

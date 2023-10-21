@@ -48,25 +48,6 @@ const product = {
 
 const team = 'Product Analytics'
 
-const features = [
-    {
-        title: 'Funnels',
-        description:
-            'Filter steps by user property, cohort, or event. Track conversion time between steps. More more more.',
-        image: <StaticImage src="./images/timeline.png" width={420} />,
-    },
-    {
-        title: 'Console logs',
-        description: "Debug issues faster by browsing the user's console",
-        image: <StaticImage src="./images/console.png" width={420} />,
-    },
-    {
-        title: 'Network monitor',
-        description: 'Analyze performance and network calls',
-        image: <StaticImage src="./images/network.png" width={420} />,
-    },
-]
-
 const subfeaturesItemCount = 5
 const subfeatures = [
     {
@@ -168,23 +149,473 @@ const faqs = [
 const comparisonColumnCount = 6
 const comparison = [
     {
-        feature: 'Single-page app support',
+        feature: '<strong>Funnels</strong>',
         companies: {
-            Hotjar: true,
-            LogRocket: true,
-            Matomo: true,
-            FullStory: true,
+            Amplitude: '',
+            Mixpanel: '',
+            Heap: '',
+            Pendo: '',
+            PostHog: '',
+        },
+    },
+    {
+        feature: 'Conversion funnels',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
             PostHog: true,
         },
     },
     {
-        feature: 'iOS recordings',
+        feature: 'Historical trends',
         companies: {
-            Hotjar: false,
-            LogRocket: true,
-            Matomo: false,
-            FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">In beta</a>',
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Time to convert insights',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Sequential step order',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Strict step order',
+        companies: {
+            Amplitude: true,
+            Mixpanel: false,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Any step order',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Exclusion events',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Conversion windows',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Reveal user paths between steps',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Anomaly detection',
+        companies: {
+            Amplitude: true,
+            Mixpanel: false,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Filter internal and test users',
+        companies: {
+            Amplitude: false,
+            Mixpanel: false,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Filter by cohort',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Filter by user property',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Breakdown by user property',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Correlation analysis',
+        companies: {
+            Amplitude: true,
+            Mixpanel: false,
+            Heap: true,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: '<strong>Path analysis</strong>',
+        companies: {
+            Amplitude: '',
+            Mixpanel: '',
+            Heap: '',
+            Pendo: '',
+            PostHog: '',
+        },
+    },
+    {
+        feature: 'Reveal paths from a start point',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Reveal paths from an end point',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Reveal paths between points',
+        companies: {
+            Amplitude: false,
+            Mixpanel: true,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Reveal paths within funnels',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Zoom in/out',
+        companies: {
+            Amplitude: true,
+            Mixpanel: false,
+            Heap: false,
+            Pendo: false,
+            PostHog: false,
+        },
+    },
+    {
+        feature: 'Define number of users on path',
+        companies: {
+            Amplitude: false,
+            Mixpanel: false,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Track pageviews',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Track custom events',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Filter internal and test users',
+        companies: {
+            Amplitude: false,
+            Mixpanel: false,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Filter by cohort',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Filter by events or user property',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Include and exclude Wildcards',
+        companies: {
+            Amplitude: false,
+            Mixpanel: false,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Exclusion events',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Hide repeating steps',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: false,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Regex for path cleaning',
+        companies: {
+            Amplitude: false,
+            Mixpanel: false,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Max number of steps',
+        companies: {
+            Amplitude: '50',
+            Mixpanel: '120+',
+            Heap: '10',
+            Pendo: '20',
+            PostHog: '20',
+        },
+    },
+    {
+        feature: '<strong>Dashboards</strong>',
+        companies: {
+            Amplitude: '',
+            Mixpanel: '',
+            Heap: '',
+            Pendo: '',
+            PostHog: '',
+        },
+    },
+    {
+        feature: 'User-level permissions',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Project-level permissions',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Dashboard-level permissions',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Share dashboards externally',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Embed dashboards anywhere',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Subscribe to dashboards',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Pinned dashboards',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: '',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Dashboard & insight tags',
+        companies: {
+            Amplitude: false,
+            Mixpanel: false,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Webhooks',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: false,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Annotations',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: false,
+            Pendo: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Private insights',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: false,
+        },
+    },
+    {
+        feature: 'Apps / integrations',
+        companies: {
+            Amplitude: '70+',
+            Mixpanel: '50+',
+            Heap: '40+',
+            Pendo: '40+',
+            PostHog: '50+',
         },
     },
 ]
@@ -200,13 +631,13 @@ const PairsWithArray = [
     },
     {
         icon: <IconToggle />,
-        product: 'Feature flags',
+        product: 'Feature Flags',
         description: 'See which feature flags were enabled for a user during a session',
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
-        product: 'A/B testing',
+        product: 'A/B Testing',
         description:
             'Filter data down to users within an active experiment, whether part of a control group or a test variant',
         url: '/ab-testing',
@@ -292,11 +723,10 @@ export const ProductProductAnalytics = () => {
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     <h3 className="text-3xl text-center mb-8">Features</h3>
-                    <ul className="list-none p-0 grid md:grid-cols-3 gap-12 mb-8">
-                        {features.map((feature, index) => {
-                            return <Feature {...feature} key={index} />
-                        })}
-                    </ul>
+
+                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-lg p-10 text-center mb-6">
+                        @eli slider goes here
+                    </div>
 
                     <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
                         {subfeatures.map((subfeature, index) => {
