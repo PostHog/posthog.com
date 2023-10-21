@@ -1,0 +1,2 @@
+import ProductProductAnalytics from 'components/Product/ProductAnalytics'
+export default ProductProductAnalytics

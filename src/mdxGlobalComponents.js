@@ -20,6 +20,7 @@ import { Label } from './components/Label'
 import { List } from './components/List'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
+import { ProductAnalytics } from './components/Product/ProductAnalytics'
 import { SessionReplay } from './components/Product/SessionReplay'
 import { Surveys } from './components/Product/Surveys'
 import { ProductLayout } from './components/ProductLayout'
@@ -62,6 +63,7 @@ export const shortcodes = {
     List,
     OverflowXSection,
     Quote,
+    ProductAnalytics,
     SessionReplay,
     Surveys,
     ProductLayout,
