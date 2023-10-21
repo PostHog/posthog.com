@@ -1,0 +1,511 @@
+import React from 'react'
+import Layout from '../../Layout'
+import Link from 'components/Link'
+import { StaticImage } from 'gatsby-plugin-image'
+import { IconBrackets, IconGraph, IconFlask, IconToggle, IconPeople, IconRewindPlay } from '@posthog/icons'
+import { MultivariateTesting } from 'components/ProductIcons'
+import { SplitTesting } from 'components/NotProductIcons'
+import { CallToAction } from 'components/CallToAction'
+import { CustomerCard } from 'components/Products/CustomerCard'
+import { Hero } from 'components/Products/Hero'
+import { Feature } from 'components/Products/Feature'
+import { Subfeature } from 'components/Products/Subfeature'
+import { graphql, useStaticQuery } from 'gatsby'
+import { PlanComparison } from 'components/Pricing/PlanComparison'
+import ContentViewer from 'components/ContentViewer'
+import AbTesting from 'components/Home/CodeBlocks/AbTesting'
+import Install from '../Install'
+import { docsMenu } from '../../../navs'
+import TeamRoadmap from 'components/TeamRoadmap'
+import RecentChange from '../RecentChange'
+import TeamMembers from '../TeamMembers'
+import Questions from '../Questions'
+import CTA from 'components/Home/CTA'
+import Comparison from '../Comparison'
+import { PairsWith } from 'components/Products/PairsWith'
+import { PairsWithItem } from 'components/Products/PairsWith/item'
+import { Question } from 'components/Products/Question'
+import { VsCompetitor } from 'components/Products/Competitor'
+import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
+import { DocLinks } from 'components/Products/DocsLinks'
+import { SmoothScroll } from 'components/Products/SmoothScroll'
+import { FAQ } from 'components/Products/FAQ'
+
+const product = {
+    slug: 'ab-testing',
+    lowercase: 'A/B testing',
+    capitalized: 'A/B Testing',
+    freeTier: '1,000,000 requests',
+}
+
+const team = 'Feature Success'
+
+const featuresPerRow = 3
+const features = [
+    {
+        title: 'Customizable goals',
+        description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance',
+        image: <StaticImage src="./images/goals.png" width={428} />,
+    },
+    {
+        title: 'Targeting & exclusion rules',
+        description: 'Set criteria for user location, user property, cohort, or group',
+        image: <StaticImage src="./images/targeting.png" width={428} />,
+    },
+    {
+        title: 'Recommendations',
+        description: 'Automatic suggestions for duration, sample size, and confidence threshold in a winning variant',
+        image: <StaticImage src="./images/recommendations.png" width={428} />,
+    },
+]
+
+const subfeaturesItemCount = 3
+const subfeatures = [
+    {
+        title: 'Built on Feature Flags',
+        description: 'All the benefits of feature flags with added functionality around stat-sig experiments',
+        icon: <IconToggle />,
+    },
+    {
+        title: 'JSON payloads',
+        description: 'Modify website content per-variant without additional deployments',
+        icon: <IconBrackets />,
+    },
+    {
+        title: 'Split testing',
+        description: 'Automatically split traffic between variants',
+        icon: <SplitTesting />,
+    },
+    {
+        title: 'Multivariate testing',
+        description: 'Test up to 9 variants against a control',
+        icon: <MultivariateTesting />,
+    },
+    {
+        title: 'Dynamic cohort support',
+        description: 'Add new users to an experiment automatically by setting a user property',
+        icon: <IconPeople />,
+    },
+]
+
+const questions = [
+    {
+        question: 'Does this new onboarding flow increase conversion?',
+        url: '#',
+    },
+    {
+        question: 'How does this affect adoption in Europe?',
+        url: '#',
+    },
+    {
+        question: 'Will enterprise customers like this new feature?',
+        url: '#',
+    },
+]
+
+const faqs = [
+    {
+        question: 'How do I know what my volume is?',
+        children: "Here's teh answer",
+    },
+    {
+        question: 'Do I pay anything for stored recordings?',
+        children: 'answer',
+    },
+    {
+        question: 'Is there a free trial on the Unlimited (paid) plan?',
+        children:
+            '<p class="text-sm">We have a generous free tier on every paid plan so you can try out the features before paying any money (though you will need to enter your credit card info). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch.</a></p>',
+    },
+]
+
+const comparisonColumnCount = 5
+const comparison = [
+    {
+        feature: 'Unlimited experiments',
+        companies: {
+            AmplitudeExperiments: true,
+            Optimizely: true,
+            VWO: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Multivariate experiments',
+        companies: {
+            AmplitudeExperiments: true,
+            Optimizely: true,
+            VWO: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Secondary goals',
+        companies: {
+            AmplitudeExperiments: true,
+            Optimizely: true,
+            VWO: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Minimum goals',
+        companies: {
+            AmplitudeExperiments: true,
+            Optimizely: true,
+            VWO: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Duration prediction',
+        companies: {
+            AmplitudeExperiments: false,
+            Optimizely: false,
+            VWO: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Cross-domain experiments',
+        companies: {
+            AmplitudeExperiments: false,
+            Optimizely: true,
+            VWO: true,
+            PostHog: false,
+        },
+    },
+    {
+        feature: 'Traffic allocation',
+        companies: {
+            AmplitudeExperiments: false,
+            Optimizely: true,
+            VWO: true,
+            PostHog: false,
+        },
+    },
+    {
+        feature: 'Target by location',
+        companies: {
+            AmplitudeExperiments: true,
+            Optimizely: true,
+            VWO: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Target by cohort',
+        companies: {
+            Pendo: true,
+            Optimizely: true,
+            VWO: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Target by user property',
+        companies: {
+            Pendo: true,
+            Optimizely: true,
+            VWO: false,
+            PostHog: true,
+        },
+    },
+]
+
+const pairsWithItemCount = 3
+const PairsWithArray = [
+    {
+        icon: <IconGraph />,
+        product: 'Product analytics',
+        description: 'Run analysis based on the value of a test, or build a cohort of users from a test variant',
+        url: '/product-analytics',
+    },
+    {
+        icon: <IconRewindPlay />,
+        product: 'Session replay',
+        description:
+            'Watch recordings of users in a variant to discover nuances in why they did or didn’t complete the goal',
+        url: '/session-replay',
+    },
+    {
+        icon: <IconToggle />,
+        product: 'Feature flags',
+        description: 'Make changes to the feature flag the experiment uses - including JSON payload for each variant',
+        url: '/feature-flags',
+    },
+]
+
+export const ProductAbTesting = () => {
+    const { ycombinator, vendasta, assemblyai } = useStaticQuery(graphql`
+        fragment ProductCustomerFragment on Mdx {
+            fields {
+                slug
+            }
+            frontmatter {
+                logo {
+                    publicURL
+                }
+                logoDark {
+                    publicURL
+                }
+            }
+        }
+        {
+            ycombinator: mdx(slug: { eq: "customers/ycombinator" }) {
+                ...ProductCustomerFragment
+            }
+            vendasta: mdx(slug: { eq: "customers/vendasta" }) {
+                ...ProductCustomerFragment
+            }
+            assemblyai: mdx(slug: { eq: "customers/assemblyai" }) {
+                ...ProductCustomerFragment
+            }
+        }
+    `)
+    return (
+        <Layout>
+            <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
+                <Hero
+                    color="purple"
+                    icon={<IconFlask />}
+                    product={product.capitalized}
+                    title='Test changes with <span class="text-red dark:text-yellow">statistical significance</span>'
+                    description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
+                />
+
+                <div className="">
+                    <StaticImage src="./images/screenshot-ab-testing.png" alt="" className="w-full max-w-[1361px]" />
+                </div>
+
+                <section className="md:-mt-20">
+                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
+                        <CustomerCard
+                            outcome="boosted engagement by 40%"
+                            quote="Y Combinator uses PostHog's experimentation suite to try new ideas, some of which have led to significant improvements."
+                            customer={ycombinator}
+                        />
+                        <CustomerCard
+                            outcome="increased registrations by 30%"
+                            quote="This experiment cuts that in half to a 30% drop-off – a 50% improvement without a single user complaining!"
+                            customer={vendasta}
+                        />
+                        <CustomerCard
+                            outcome="unthrottled event ingestion from a previous analytics provider, leading to better insights"
+                            quote="PostHog, which can do both experiments and analytics in one, was clearly the winner."
+                            customer={assemblyai}
+                        />
+                    </ul>
+                </section>
+            </div>
+
+            <SmoothScroll className="" />
+
+            <div id="features">
+                <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
+                    <h3 className="text-3xl text-center mb-8">Features</h3>
+                    <ul className={`list-none p-0 grid md:grid-cols-${featuresPerRow} gap-12 mb-8`}>
+                        {features.map((feature, index) => {
+                            return <Feature {...feature} key={index} />
+                        })}
+                    </ul>
+
+                    <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
+                        {subfeatures.map((subfeature, index) => {
+                            return <Subfeature {...subfeature} key={index} />
+                        })}
+                    </ul>
+                </section>
+
+                <section className="bg-accent dark:bg-accent-dark">
+                    <div className="max-w-7xl mx-auto px-5 py-20">
+                        <div className="md:grid md:grid-cols-12 md:gap-12">
+                            <div className="col-span-5">
+                                <h3 className="text-4xl md:text-5xl text-blue leading-tight">
+                                    Answer all of these questions (and more) with PostHog {product.capitalized}.
+                                </h3>
+                            </div>
+                            <div className="col-span-7 relative after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
+                                <ul className="list-none p-0">
+                                    {questions.map((question, index) => {
+                                        return <Question {...question} key={index} />
+                                    })}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <section id="pricing" className="max-w-7xl mx-auto px-5 py-20">
+                <div className="flex flex-col-reverse md:flex-row md:gap-12">
+                    <div className="flex-1">
+                        <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
+                        <p className="">
+                            Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
+                            <br className="hidden lg:block" />
+                            Either way, your first {product.freeTier} are free – every month.
+                        </p>
+                    </div>
+                    <div className="md:w-96">
+                        <StaticImage
+                            placeholder="none"
+                            quality={100}
+                            src="../../Home/Slider/images/session-recording-hog.png"
+                            alt=""
+                        />
+                    </div>
+                </div>
+
+                <div className="md:flex justify-between items-start gap-12">
+                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['feature_flags']} />
+
+                    <div className="md:w-96 md:mt-4">
+                        <h4 className="text-3xl">FAQs</h4>
+                        {faqs.map((faq, index) => {
+                            return <FAQ {...faq} key={index} />
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            <div className="max-w-7xl mx-auto px-5">
+                <div id="posthog-vs">
+                    <section>
+                        <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
+                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
+                    </section>
+
+                    <section className="mb-20">
+                        <h3 className="text-center mb-8">So, what's best for you?</h3>
+                        <div className="mb-8 grid md:grid-cols-2 gap-4">
+                            <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
+                                <ul>
+                                    <li>
+                                        No-code experiments or CMS capabilities
+                                        <ul className="pl-6">
+                                            <li className="text-sm">
+                                                You'll still need a designer/engineer to create experiments
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        No integration with Google Ads
+                                        <ul className="pl-6">
+                                            <li className="text-sm">
+                                                PostHog can't run ad experiments, or target users into an experiment
+                                                based on an ad variant engagement.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </VsCompetitor>
+                            <VsPostHog>
+                                <ul>
+                                    <li>
+                                        Integration with other PostHog products
+                                        <ul className="pl-6">
+                                            <li className="text-sm">
+                                                Attach surveys to experiments or view replays for a test group. Analyze
+                                                results beyond your initial hypothesis or goal metric.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>Automated recommendations for sample sizes and runtime</li>
+                                    <li>
+                                        Automatic significance calculator – to help you figure out the winning variant
+                                        as quickly as possible
+                                    </li>
+                                    <li>
+                                        Robust targeting and exclusion options, including cohorts and location
+                                        <ul className="pl-6">
+                                            <li className="text-sm">
+                                                Anything you monitor in analytics, you can target in an experiment
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </VsPostHog>
+                        </div>
+
+                        <p className="text-center text-sm font-medium">
+                            Have questions about PostHog? <br className="md:hidden" />
+                            <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
+                            <Link to="/contact-sales">book a demo</Link>.
+                        </p>
+                    </section>
+                </div>
+
+                <section id="installation" className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
+                    <p className="mt-0 opacity-50 text-center mb-12">
+                        Here are some ways you can fine tune how you implement {product.lowercase}.
+                    </p>
+
+                    <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...AbTesting]} />
+                </section>
+
+                <section id="docs" className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
+                    <p className="mt-0 text-opacity-70 text-center">
+                        Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
+                    </p>
+                    <DocLinks menu={docsMenu.children[4].children} />
+                </section>
+
+                <section id="team" className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
+
+                    <p className="text-center mb-2">
+                        PostHog works in small teams. The {team} team are the folks responsible for building session
+                        replay.
+                    </p>
+                    <TeamMembers teamName={team} />
+                </section>
+
+                <section id="roadmap" className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
+
+                    <p className="text-center mb-8">Here’s what the team is up to.</p>
+
+                    <div className="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <RecentChange team={team} />
+                        </div>
+
+                        <div>
+                            <h4 className="opacity-60 text-base">Up next</h4>
+                            <TeamRoadmap team={team} />
+                        </div>
+                    </div>
+                </section>
+
+                <section id="questions" className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
+
+                    <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
+
+                    <div className="text-center mb-8">
+                        <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
+                            View {product.lowercase} questions
+                        </CallToAction>
+                    </div>
+
+                    <Questions topicId={45} />
+                </section>
+
+                <PairsWith items={pairsWithItemCount}>
+                    {PairsWithArray.map((card, index) => {
+                        return <PairsWithItem {...card} key={index} />
+                    })}
+                </PairsWith>
+            </div>
+            <div className="max-w-7xl mx-auto px-5 relative">
+                <section className="mb-20">
+                    <CTA />
+                </section>
+            </div>
+        </Layout>
+    )
+}
+
+export default ProductAbTesting

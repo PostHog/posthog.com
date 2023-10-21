@@ -7,6 +7,9 @@ const companies = {
     Amplitude: {
         comparisonURL: '/blog/posthog-vs-amplitude',
     },
+    AmplitudeExperiment: {
+        comparisonURL: '',
+    },
     Flagsmith: {
         comparisonURL: '',
     },
@@ -44,6 +47,9 @@ const companies = {
         comparisonURL: '',
     },
     Sprig: {
+        comparisonURL: '',
+    },
+    VWO: {
         comparisonURL: '',
     },
 }
