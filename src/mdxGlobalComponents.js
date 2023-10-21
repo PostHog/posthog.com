@@ -21,6 +21,7 @@ import { List } from './components/List'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
 import { SessionReplay } from './components/Product/SessionReplay'
+import { Surveys } from './components/Product/Surveys'
 import { ProductLayout } from './components/ProductLayout'
 import { Competitor } from './components/Products/Competitor'
 import { CustomerCard } from './components/Products/CustomerCard'
@@ -62,6 +63,7 @@ export const shortcodes = {
     OverflowXSection,
     Quote,
     SessionReplay,
+    Surveys,
     ProductLayout,
     Competitor,
     CustomerCard,

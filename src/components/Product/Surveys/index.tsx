@@ -3,7 +3,7 @@ import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
-    IconRewindPlay,
+    IconMessage,
     IconBolt,
     IconPlaylist,
     IconPhone,
@@ -39,13 +39,13 @@ import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 
 const product = {
-    slug: 'session-replay',
-    lowercase: 'session replay',
-    capitalized: 'Session Replay',
-    freeTier: '15,000 recordings',
+    slug: 'surveys',
+    lowercase: 'surveys',
+    capitalized: 'Surveys',
+    freeTier: '250 responses',
 }
 
-const team = 'Monitoring'
+const team = 'Feature Success'
 
 const subfeaturesItemCount = 5
 const subfeatures = [
@@ -274,7 +274,7 @@ const PairsWithArray = [
     },
 ]
 
-export const ProductSessionReplay = () => {
+export const ProductSurveys = () => {
     const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
@@ -308,17 +308,16 @@ export const ProductSessionReplay = () => {
         <Layout>
             <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
                 <Hero
-                    color="yellow"
-                    icon={<IconRewindPlay />}
+                    color="salmon"
+                    icon={<IconMessage />}
                     product={product.capitalized}
-                    title="Watch visitors interact with your app"
-                    description='Session Replay helps you <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
-                    website.'
+                    title='Ask anything with <span class="text-red dark:text-yellow">no-code surveys</span>'
+                    description="Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control."
                 />
 
-                <div className="-mr-[20px] md:-mr-[60px]">
+                <div className="">
                     <StaticImage
-                        src="../../../images/products/screenshot-session-replay.png"
+                        src="../../../images/products/screenshot-surveys.png"
                         alt=""
                         className="w-full max-w-[1330px]"
                     />
@@ -564,4 +563,4 @@ export const ProductSessionReplay = () => {
     )
 }
 
-export default ProductSessionReplay
+export default ProductSurveys

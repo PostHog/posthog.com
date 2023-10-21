@@ -2762,7 +2762,7 @@ const menu = [
             },
             {
                 name: 'Surveys',
-                icon: 'Chat',
+                icon: 'Message',
                 color: 'salmon',
                 url: '/surveys',
             },
