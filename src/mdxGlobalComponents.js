@@ -23,6 +23,7 @@ import { Quote } from './components/Pricing/Quote'
 import { AbTesting } from './components/Product/AbTesting'
 import { FeatureFlags } from './components/Product/FeatureFlags'
 import { ProductAnalytics } from './components/Product/ProductAnalytics'
+import { ProductOS } from './components/Product/ProductOS'
 import { SessionReplay } from './components/Product/SessionReplay'
 import { Surveys } from './components/Product/Surveys'
 import { ProductLayout } from './components/ProductLayout'
@@ -68,6 +69,7 @@ export const shortcodes = {
     AbTesting,
     FeatureFlags,
     ProductAnalytics,
+    ProductOS,
     SessionReplay,
     Surveys,
     ProductLayout,
