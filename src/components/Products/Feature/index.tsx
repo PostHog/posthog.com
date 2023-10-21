@@ -14,7 +14,7 @@ export const Feature = ({ title, description, image }: FeatureProps): JSX.Elemen
                 {image}
             </div>
             <h4 className="mb-0 text-lg">{title}</h4>
-            <p className="text-[15px]">{description}</p>
+            <p className="text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
         </li>
     )
 }

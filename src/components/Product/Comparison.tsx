@@ -16,18 +16,26 @@ const companies = {
     FullStory: {
         comparisonURL: '/blog/posthog-vs-fullstory',
     },
+    Pendo: {
+        comparisonUrl: '/blog/posthog-vs-pendo',
+    },
+    Sprig: {
+        comparisonUrl: '',
+    },
     PostHog: {
         comparisonURL: '',
     },
 }
 
-export default function Comparison({ comparison }) {
+export default function Comparison({ comparison, columnCount }) {
     const activeCompanies = Object.keys(companies).filter((company) =>
         comparison.some(({ companies }) => Object.keys(companies).includes(company))
     )
     return (
         <div className="overflow-x-auto max-w-vw -mx-5 px-5 pb-2 mb-10 md:mb-20 md:mx-0 md:px-0">
-            <div className="flex-1 grid grid-cols-6 max-w-7xl text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto min-w-[600px] md:min-w-fit">
+            <div
+                className={`flex-1 grid grid-cols-${columnCount} max-w-7xl text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto min-w-[600px] md:min-w-fit`}
+            >
                 {/* header row */}
                 <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-border-dark">
                     <strong></strong>

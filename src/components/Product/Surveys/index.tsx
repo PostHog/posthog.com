@@ -4,14 +4,12 @@ import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
     IconMessage,
-    IconBolt,
-    IconPlaylist,
-    IconPhone,
-    IconDownload,
-    IconPassword,
+    IconClock,
     IconGraph,
     IconFlask,
     IconToggle,
+    IconPieChart,
+    IconNotification,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -42,83 +40,82 @@ const product = {
     slug: 'surveys',
     lowercase: 'surveys',
     capitalized: 'Surveys',
-    freeTier: '250 responses',
+    freeTier: '250 survey responses',
 }
 
 const team = 'Feature Success'
 
-const subfeaturesItemCount = 5
+const features = [
+    {
+        title: 'Question types',
+        description: 'Multiple choice, multi-select, numerical rating, emoji reaction, embedded links',
+        image: <StaticImage src="./images/question-types.png" width={428} />,
+    },
+    {
+        title: 'Templates',
+        description: 'Choose from the library or start from scratch',
+        image: <StaticImage src="./images/templates.png" width={428} />,
+    },
+    {
+        title: 'Targeting',
+        description: 'Target by URL, user property, or feature flag when used with Feature Flags',
+        image: <StaticImage src="./images/targeting.png" width={428} />,
+    },
+    {
+        title: 'Multi-step surveys',
+        description: 'Up to 10 questions',
+        image: <StaticImage src="./images/steps.png" width={428} />,
+    },
+    {
+        title: 'Link somewhere',
+        description: 'Send users to a webpage or invite them to book a meeting with a calendar invite',
+        image: <StaticImage src="./images/link-scheduler.png" width={428} />,
+    },
+    {
+        title: 'No-code? Yes. API? Yes.',
+        description:
+            "Using PostHog.js? No more code required. But want to create your own UI? Check out the <a href='/docs/surveys/implementing-custom-surveys'>Surveys API</a>.",
+        image: <StaticImage src="./images/api.png" width={428} />,
+    },
+]
+
+const subfeaturesItemCount = 3
 const subfeatures = [
     {
-        title: 'Capture sessions without extra code',
-        description: 'Works with PostHog.js',
-        icon: <IconBolt />,
+        title: 'Aggregated results',
+        description: 'See feedback summarized and broken down per response',
+        icon: <IconPieChart />,
     },
     {
-        title: 'Automatic playlists',
-        description: 'Filter by user behavior or time',
-        icon: <IconPlaylist />,
+        title: 'Slack notifications',
+        description: 'Send realtime survey responses to a Slack channel',
+        icon: <IconNotification />,
     },
     {
-        title: 'Web or mobile session recording',
-        description: 'Web or iOS (beta) available',
-        icon: <IconPhone />,
-    },
-    {
-        title: 'Download recordings',
-        description: 'Retain recordings beyond data retention limits',
-        icon: <IconDownload />,
-    },
-    {
-        title: 'Block sensitive data',
-        description: 'Disable capturing data from any DOM element with CSS',
-        icon: <IconPassword />,
+        title: 'Customizable wait periods',
+        description: 'Set a delay before the survey opens',
+        icon: <IconClock />,
     },
 ]
 
 const questions = [
     {
-        question: 'Where do key events happen in my user’s sessions?',
+        question: 'How likely are you to recommend this product to a friend?',
+        url: 'https://posthog-git-experiment-post-hog.vercel.app/tutorials/nps-survey',
     },
     {
-        question: "How do I understand my users' behavior in funnels?",
+        question: 'Would you like to be interviewed by our product team?',
         url: '#',
     },
     {
-        question: 'How do I understand my user journeys?',
+        question: 'How would you feel if you could no longer use this product?',
+    },
+    {
+        question: "How satisfied are you with the support you've received?",
+    },
+    {
+        question: 'Would you like to book a user interview?',
         url: '#',
-    },
-    {
-        question: 'How can I understand what my power users are doing?',
-        url: '#',
-    },
-    {
-        question: 'How do I figure out how to lower churn?',
-        url: '#',
-    },
-    {
-        question: 'What errors are being logged to the console?',
-    },
-    {
-        question: 'How does my user experience differ across regions?',
-    },
-    {
-        question: 'What is a user’s DOM interactive time?',
-        url: '#',
-    },
-    {
-        question: 'How fast does my app load?',
-    },
-    {
-        question: 'What is a user’s First Contentful Paint time?',
-        url: '#',
-    },
-    {
-        question: 'What is a user’s Page Loaded time?',
-        url: '#',
-    },
-    {
-        question: 'How does my user experience differ across devices?',
     },
 ]
 
@@ -138,115 +135,150 @@ const faqs = [
     },
 ]
 
+const comparisonColumnCount = 5
 const comparison = [
     {
-        feature: 'Single-page app support',
+        feature: 'Customizable pop-ups',
         companies: {
+            Pendo: true,
             Hotjar: true,
-            LogRocket: true,
-            Matomo: true,
-            FullStory: true,
+            Sprig: true,
             PostHog: true,
         },
     },
     {
-        feature: 'iOS recordings',
+        feature: 'Live previews',
         companies: {
+            Pendo: true,
+            Hotjar: true,
+            Sprig: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Multi-step surveys',
+        companies: {
+            Pendo: true,
+            Hotjar: true,
+            Sprig: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'API access',
+        companies: {
+            Pendo: true,
+            Hotjar: true,
+            Sprig: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Single choice questions',
+        companies: {
+            Pendo: true,
+            Hotjar: true,
+            Sprig: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Multiple choice questions',
+        companies: {
+            Pendo: true,
+            Hotjar: true,
+            Sprig: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Open text questions',
+        companies: {
+            Pendo: true,
+            Hotjar: true,
+            Sprig: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Numerical rating questions',
+        companies: {
+            Pendo: true,
+            Hotjar: true,
+            Sprig: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Emoji rating questions',
+        companies: {
+            Pendo: true,
+            Hotjar: true,
+            Sprig: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Third-party link support',
+        companies: {
+            Pendo: true,
             Hotjar: false,
-            LogRocket: true,
-            Matomo: false,
-            FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">In beta</a>',
+            Sprig: true,
+            PostHog: true,
         },
     },
     {
-        feature: 'Android recordings',
+        feature: 'Target by property',
         companies: {
+            Pendo: true,
+            Hotjar: true,
+            Sprig: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Target by URL',
+        companies: {
+            Pendo: true,
+            Hotjar: true,
+            Sprig: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Target by feature flag',
+        companies: {
+            Pendo: false,
             Hotjar: false,
-            LogRocket: true,
-            Matomo: false,
-            FullStory: true,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">On the roadmap</a>',
+            Sprig: false,
+            PostHog: true,
         },
     },
     {
-        feature: 'Identity detection',
+        feature: 'Survey scheduling',
         companies: {
+            Pendo: true,
             Hotjar: false,
-            LogRocket: true,
-            Matomo: true,
-            FullStory: true,
-            PostHog: true,
+            Sprig: false,
+            PostHog: false,
         },
     },
     {
-        feature: 'Target recordings by URL',
+        feature: 'Export responses',
         companies: {
+            Pendo: true,
             Hotjar: true,
-            LogRocket: true,
-            Matomo: true,
-            FullStory: true,
+            Sprig: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Target by sample size',
+        feature: 'Slack integration',
         companies: {
+            Pendo: true,
             Hotjar: true,
-            LogRocket: false,
-            Matomo: true,
-            FullStory: false,
+            Sprig: true,
             PostHog: true,
-        },
-    },
-    {
-        feature: 'Filter recordings by user or event',
-        companies: {
-            Hotjar: true,
-            LogRocket: true,
-            Matomo: true,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Rage-click detection',
-        companies: {
-            Hotjar: true,
-            LogRocket: true,
-            Matomo: false,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Privacy masking for sensitive content',
-        companies: {
-            Hotjar: true,
-            LogRocket: true,
-            Matomo: true,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Export recordings',
-        companies: {
-            Hotjar: true,
-            LogRocket: false,
-            Matomo: true,
-            FullStory: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Recording retention policy',
-        companies: {
-            Hotjar: '12 months',
-            LogRocket: '1 month',
-            Matomo: '24 months',
-            FullStory: '1 month',
-            PostHog: 'Up to 3 months',
         },
     },
 ]
@@ -323,6 +355,7 @@ export const ProductSurveys = () => {
                     />
                 </div>
 
+                {/*
                 <section>
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
@@ -347,28 +380,18 @@ export const ProductSurveys = () => {
                         />
                     </ul>
                 </section>
+                */}
             </div>
 
-            <SmoothScroll />
+            <SmoothScroll className="-mt-24" />
+
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     <h3 className="text-3xl text-center mb-8">Features</h3>
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-12 mb-8">
-                        <Feature
-                            image={<StaticImage src="./images/timeline.png" width={420} />}
-                            name="Event timeline"
-                            description="History of everything that happened in a user's session"
-                        />
-                        <Feature
-                            image={<StaticImage src="./images/network.png" width={420} />}
-                            name="Console logs"
-                            description="Debug issues faster by browsing the user's console"
-                        />
-                        <Feature
-                            image={<StaticImage src="./images/console.png" width={420} />}
-                            name="Network tab"
-                            description="Analyze performance and network calls"
-                        />
+                        {features.map((feature, index) => {
+                            return <Feature {...feature} key={index} />
+                        })}
                     </ul>
 
                     <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
@@ -418,7 +441,7 @@ export const ProductSurveys = () => {
                 </div>
 
                 <div className="md:flex justify-between items-start gap-12">
-                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
+                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['surveys']} />
 
                     <div className="md:w-96 md:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
@@ -433,7 +456,7 @@ export const ProductSurveys = () => {
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                        <Comparison comparison={comparison} />
+                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
                     </section>
 
                     <section className="mb-20">
@@ -442,42 +465,24 @@ export const ProductSurveys = () => {
                             <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
                                 <ul>
                                     <li>
-                                        You need heatmaps or scrollmaps
-                                        <ul className="pl-6">
-                                            <li className="text-sm">PostHog is currently limited to clickmaps</li>
-                                        </ul>
-                                    </li>
-                                    <li>Error tracking and alerting</li>
-                                    <li>
-                                        Mobile SDKs (in progress...)
+                                        Forms
                                         <ul className="pl-6">
                                             <li className="text-sm">
-                                                <Link to="https://github.com/PostHog/posthog/issues/13269" external>
-                                                    React Native
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/12344" external>
-                                                    iOS
-                                                </Link>{' '}
-                                                |&nbsp;
-                                                <Link to="https://github.com/PostHog/posthog/issues/13267" external>
-                                                    Android
-                                                </Link>
+                                                PostHog offers multi-step surveys, but they won't be full-page forms
+                                                such as Typeform or Google Forms
                                             </li>
                                         </ul>
                                     </li>
+                                    <li>AI-powered analysis or recommendations based on results</li>
+                                    <li>Limited formatting options</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>
-                                        Interlinking with feature flags and insights
-                                        <ul className="pl-6">
-                                            <li className="text-sm">Jump between them easily</li>
-                                        </ul>
-                                    </li>
-                                    <li>Collaboration, sharing, and embedding exporting recordings</li>
-                                    <li>No limits on how many recordings captured</li>
+                                    <li>No-code surveys with customizable colors and removable branding</li>
+                                    <li>Automatic NPS score calculations</li>
+                                    <li>Robust targeting &amp; integration with feature flags</li>
+                                    <li>Tight integration with analytics, experiments, and session replay</li>
                                 </ul>
                             </VsPostHog>
                         </div>
@@ -490,21 +495,23 @@ export const ProductSurveys = () => {
                     </section>
                 </div>
 
-                <section id="installation" className="mb-20">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
-                    <p className="mt-0 opacity-50 text-center mb-12">
-                        Here are some ways you can fine tune how you implement {product.lowercase}.
-                    </p>
+                {/*
+        <section id="installation" className="mb-20">
+          <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
+          <p className="mt-0 opacity-50 text-center mb-12">
+            Here are some ways you can fine tune how you implement {product.lowercase}.
+          </p>
 
-                    <ContentViewer sticky={false} scrollToTop={false} content={[...SessionReplay]} />
-                </section>
+          <ContentViewer sticky={false} scrollToTop={false} content={[...SessionReplay]} />
+        </section>
+        */}
 
                 <section id="docs" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[2].children} />
+                    <DocLinks menu={docsMenu.children[5].children} />
                 </section>
 
                 <section id="team" className="mb-20">
