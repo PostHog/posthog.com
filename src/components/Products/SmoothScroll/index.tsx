@@ -38,7 +38,7 @@ export const SmoothScroll = ({ className }): JSX.Element => {
                                 to={id}
                                 hashSpy
                                 spy
-                                activeClass="!border-light !dark:border-dark !border-b-transparent font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md"
+                                activeClass="!border-border dark:!border-border-dark !border-b-transparent dark:!border-b-transparent font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md"
                             >
                                 {label}
                             </Link>
