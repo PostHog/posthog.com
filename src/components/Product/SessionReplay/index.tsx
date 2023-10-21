@@ -350,53 +350,54 @@ export const ProductSessionReplay = () => {
             </div>
 
             <SmoothScroll />
+            <div id="features">
+                <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
+                    <h3 className="text-3xl text-center mb-8">Features</h3>
+                    <ul className="list-none p-0 grid md:grid-cols-3 gap-12 mb-8">
+                        <Feature
+                            image={<StaticImage src="./images/timeline.png" width={420} />}
+                            name="Event timeline"
+                            description="History of everything that happened in a user's session"
+                        />
+                        <Feature
+                            image={<StaticImage src="./images/network.png" width={420} />}
+                            name="Console logs"
+                            description="Debug issues faster by browsing the user's console"
+                        />
+                        <Feature
+                            image={<StaticImage src="./images/console.png" width={420} />}
+                            name="Network tab"
+                            description="Analyze performance and network calls"
+                        />
+                    </ul>
 
-            <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
-                <h3 className="text-3xl text-center mb-8">Features</h3>
-                <ul className="list-none p-0 grid md:grid-cols-3 gap-12 mb-8">
-                    <Feature
-                        image={<StaticImage src="./images/timeline.png" width={420} />}
-                        name="Event timeline"
-                        description="History of everything that happened in a user's session"
-                    />
-                    <Feature
-                        image={<StaticImage src="./images/network.png" width={420} />}
-                        name="Console logs"
-                        description="Debug issues faster by browsing the user's console"
-                    />
-                    <Feature
-                        image={<StaticImage src="./images/console.png" width={420} />}
-                        name="Network tab"
-                        description="Analyze performance and network calls"
-                    />
-                </ul>
+                    <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
+                        {subfeatures.map((subfeature, index) => {
+                            return <Subfeature {...subfeature} key={index} />
+                        })}
+                    </ul>
+                </section>
 
-                <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
-                    {subfeatures.map((subfeature, index) => {
-                        return <Subfeature {...subfeature} key={index} />
-                    })}
-                </ul>
-            </section>
-
-            <section className="bg-accent dark:bg-accent-dark">
-                <div className="max-w-7xl mx-auto px-5 py-20">
-                    <div className="md:grid md:grid-cols-12 md:gap-12">
-                        <div className="col-span-5">
-                            <h3 className="text-4xl md:text-5xl text-blue leading-tight">
-                                Answer all of these questions (and more) with PostHog {product.capitalized}.
-                            </h3>
-                        </div>
-                        <div className="col-span-7 relative after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
-                            <ul className="list-none p-0">
-                                {questions.map((question, index) => {
-                                    return <Question {...question} key={index} />
-                                })}
-                            </ul>
+                <section className="bg-accent dark:bg-accent-dark">
+                    <div className="max-w-7xl mx-auto px-5 py-20">
+                        <div className="md:grid md:grid-cols-12 md:gap-12">
+                            <div className="col-span-5">
+                                <h3 className="text-4xl md:text-5xl text-blue leading-tight">
+                                    Answer all of these questions (and more) with PostHog {product.capitalized}.
+                                </h3>
+                            </div>
+                            <div className="col-span-7 relative after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
+                                <ul className="list-none p-0">
+                                    {questions.map((question, index) => {
+                                        return <Question {...question} key={index} />
+                                    })}
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <section className="max-w-7xl mx-auto px-5 py-20">
+                </section>
+            </div>
+            <section id="pricing" className="max-w-7xl mx-auto px-5 py-20">
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
@@ -429,65 +430,67 @@ export const ProductSessionReplay = () => {
             </section>
 
             <div className="max-w-7xl mx-auto px-5">
-                <section>
-                    <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                    <Comparison comparison={comparison} />
-                </section>
+                <div id="posthog-vs">
+                    <section>
+                        <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
+                        <Comparison comparison={comparison} />
+                    </section>
 
-                <section className="mb-20">
-                    <h3 className="text-center mb-8">So, what's best for you?</h3>
-                    <div className="mb-8 grid md:grid-cols-2 gap-4">
-                        <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
-                            <ul>
-                                <li>
-                                    You need heatmaps or scrollmaps
-                                    <ul className="pl-6">
-                                        <li className="text-sm">PostHog is currently limited to clickmaps</li>
-                                    </ul>
-                                </li>
-                                <li>Error tracking and alerting</li>
-                                <li>
-                                    Mobile SDKs (in progress...)
-                                    <ul className="pl-6">
-                                        <li className="text-sm">
-                                            <Link to="https://github.com/PostHog/posthog/issues/13269" external>
-                                                React Native
-                                            </Link>{' '}
-                                            |&nbsp;
-                                            <Link to="https://github.com/PostHog/posthog/issues/12344" external>
-                                                iOS
-                                            </Link>{' '}
-                                            |&nbsp;
-                                            <Link to="https://github.com/PostHog/posthog/issues/13267" external>
-                                                Android
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </VsCompetitor>
-                        <VsPostHog>
-                            <ul>
-                                <li>
-                                    Interlinking with feature flags and insights
-                                    <ul className="pl-6">
-                                        <li className="text-sm">Jump between them easily</li>
-                                    </ul>
-                                </li>
-                                <li>Collaboration, sharing, and embedding exporting recordings</li>
-                                <li>No limits on how many recordings captured</li>
-                            </ul>
-                        </VsPostHog>
-                    </div>
+                    <section className="mb-20">
+                        <h3 className="text-center mb-8">So, what's best for you?</h3>
+                        <div className="mb-8 grid md:grid-cols-2 gap-4">
+                            <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
+                                <ul>
+                                    <li>
+                                        You need heatmaps or scrollmaps
+                                        <ul className="pl-6">
+                                            <li className="text-sm">PostHog is currently limited to clickmaps</li>
+                                        </ul>
+                                    </li>
+                                    <li>Error tracking and alerting</li>
+                                    <li>
+                                        Mobile SDKs (in progress...)
+                                        <ul className="pl-6">
+                                            <li className="text-sm">
+                                                <Link to="https://github.com/PostHog/posthog/issues/13269" external>
+                                                    React Native
+                                                </Link>{' '}
+                                                |&nbsp;
+                                                <Link to="https://github.com/PostHog/posthog/issues/12344" external>
+                                                    iOS
+                                                </Link>{' '}
+                                                |&nbsp;
+                                                <Link to="https://github.com/PostHog/posthog/issues/13267" external>
+                                                    Android
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </VsCompetitor>
+                            <VsPostHog>
+                                <ul>
+                                    <li>
+                                        Interlinking with feature flags and insights
+                                        <ul className="pl-6">
+                                            <li className="text-sm">Jump between them easily</li>
+                                        </ul>
+                                    </li>
+                                    <li>Collaboration, sharing, and embedding exporting recordings</li>
+                                    <li>No limits on how many recordings captured</li>
+                                </ul>
+                            </VsPostHog>
+                        </div>
 
-                    <p className="text-center text-sm font-medium">
-                        Have questions about PostHog? <br className="md:hidden" />
-                        <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                        <Link to="/contact-sales">book a demo</Link>.
-                    </p>
-                </section>
+                        <p className="text-center text-sm font-medium">
+                            Have questions about PostHog? <br className="md:hidden" />
+                            <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
+                            <Link to="/contact-sales">book a demo</Link>.
+                        </p>
+                    </section>
+                </div>
 
-                <section className="mb-20">
+                <section id="installation" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
                     <p className="mt-0 opacity-50 text-center mb-12">
                         Here are some ways you can fine tune how you implement {product.lowercase}.
@@ -496,7 +499,7 @@ export const ProductSessionReplay = () => {
                     <ContentViewer sticky={false} scrollToTop={false} content={[...SessionReplay]} />
                 </section>
 
-                <section className="mb-20">
+                <section id="docs" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
@@ -504,7 +507,7 @@ export const ProductSessionReplay = () => {
                     <DocLinks menu={docsMenu.children[2].children} />
                 </section>
 
-                <section className="mb-20">
+                <section id="team" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
@@ -514,7 +517,7 @@ export const ProductSessionReplay = () => {
                     <TeamMembers teamName={team} />
                 </section>
 
-                <section className="mb-20">
+                <section id="roadmap" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
 
                     <p className="text-center mb-8">Here’s what the team is up to.</p>
@@ -531,7 +534,7 @@ export const ProductSessionReplay = () => {
                     </div>
                 </section>
 
-                <section className="mb-20">
+                <section id="questions" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
                     <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
