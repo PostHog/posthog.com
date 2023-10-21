@@ -18,7 +18,7 @@ export const Hero = ({ icon, product, title, description }: HeroProps): JSX.Elem
                 <span className="w-6 h-6 text-yellow">{icon}</span>
                 <span className="text-[15px] font-semibold text-opacity-60">{product}</span>
             </div>
-            <h1 className="text-6xl text-center mb-2">{title}</h1>
+            <h1 className="text-5xl md:text-6xl text-center mb-4 md:mb-2">{title}</h1>
             <p
                 className="text-lg font-semibold text-center text-opacity-75 mb-5"
                 dangerouslySetInnerHTML={{ __html: description }}

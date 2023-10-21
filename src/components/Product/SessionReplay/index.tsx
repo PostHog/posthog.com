@@ -20,6 +20,7 @@ import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
 import Comparison from '../Comparison'
+import Logo from 'components/Logo'
 
 const comparison = [
     {
@@ -37,9 +38,99 @@ const comparison = [
         companies: {
             Hotjar: false,
             LogRocket: true,
+            Matomo: false,
+            FullStory: true,
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/12344">In beta</a>',
+        },
+    },
+    {
+        feature: 'Android recordings',
+        companies: {
+            Hotjar: false,
+            LogRocket: true,
+            Matomo: false,
+            FullStory: true,
+            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13267">On the roadmap</a>',
+        },
+    },
+    {
+        feature: 'Identity detection',
+        companies: {
+            Hotjar: false,
+            LogRocket: true,
             Matomo: true,
             FullStory: true,
-            PostHog: 'In beta',
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Target recordings by URL',
+        companies: {
+            Hotjar: true,
+            LogRocket: true,
+            Matomo: true,
+            FullStory: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Target by sample size',
+        companies: {
+            Hotjar: true,
+            LogRocket: false,
+            Matomo: true,
+            FullStory: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Filter recordings by user or event',
+        companies: {
+            Hotjar: true,
+            LogRocket: true,
+            Matomo: true,
+            FullStory: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Rage-click detection',
+        companies: {
+            Hotjar: true,
+            LogRocket: true,
+            Matomo: false,
+            FullStory: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Privacy masking for sensitive content',
+        companies: {
+            Hotjar: true,
+            LogRocket: true,
+            Matomo: true,
+            FullStory: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Export recordings',
+        companies: {
+            Hotjar: true,
+            LogRocket: false,
+            Matomo: true,
+            FullStory: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Recording retention policy',
+        companies: {
+            Hotjar: '12 months',
+            LogRocket: '1 month',
+            Matomo: '24 months',
+            FullStory: '1 month',
+            PostHog: 'Up to 3 months',
         },
     },
 ]
@@ -138,7 +229,9 @@ const VsPostHog = ({ children }) => {
                 <StaticImage src="../../../images/products/competitors-hog.png" className="max-w-[145px]" />
             </div>
             <div className="flex-1">
-                <h4 className="leading-tight">Reasons to choose (PostHog logo)</h4>
+                <h4 className="leading-tight flex items-end gap-2">
+                    <span>Reasons to choose</span> <Logo className="w-32" />
+                </h4>
                 {children}
             </div>
         </div>
@@ -244,7 +337,7 @@ export const ProductSessionReplay = () => {
                     website.'
                 />
 
-                <div className="-mr-[60px]">
+                <div className="-mr-[20px] md:-mr-[60px]">
                     <StaticImage
                         src="../../../images/products/screenshot-session-replay.png"
                         alt=""
@@ -253,7 +346,7 @@ export const ProductSessionReplay = () => {
                 </div>
 
                 <section>
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="improved conversion rates by 10-20%"
                             quote="We wouldn't have noticed that needed fixing without PostHog's session replays."
@@ -323,7 +416,7 @@ export const ProductSessionReplay = () => {
                 </ul>
             </section>
 
-            <section className="max-w-7xl mx-auto px-5 py-20">
+            <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                 <h3 className="text-3xl text-center mb-8">Features</h3>
                 <ul className="list-none p-0 grid md:grid-cols-3 gap-12 mb-8">
                     <Feature
@@ -413,7 +506,7 @@ export const ProductSessionReplay = () => {
                 <div className="md:flex justify-between items-start gap-12">
                     <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
 
-                    <div className="w-80">
+                    <div className="md:w-80">
                         <h4 className="text-3xl">FAQs</h4>
 
                         <Accordion initialOpen label="How do I know what my volume is?">
@@ -445,15 +538,15 @@ export const ProductSessionReplay = () => {
                             <ul>
                                 <li>
                                     You need heatmaps or scrollmaps
-                                    <ul>
+                                    <ul className="pl-6">
                                         <li className="text-sm">PostHog is currently limited to clickmaps</li>
                                     </ul>
                                 </li>
                                 <li>Error tracking and alerting</li>
                                 <li>
                                     Mobile SDKs (in progress...)
-                                    <ul>
-                                        <li>
+                                    <ul className="pl-6">
+                                        <li className="text-sm">
                                             <Link to="https://github.com/PostHog/posthog/issues/13269" external>
                                                 React Native
                                             </Link>{' '}
@@ -474,7 +567,7 @@ export const ProductSessionReplay = () => {
                             <ul>
                                 <li>
                                     Interlinking with feature flags and insights
-                                    <ul>
+                                    <ul className="pl-6">
                                         <li className="text-sm">Jump between them easily</li>
                                     </ul>
                                 </li>
