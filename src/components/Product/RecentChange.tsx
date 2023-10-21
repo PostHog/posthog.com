@@ -40,11 +40,16 @@ export default function RecentChange({ team }) {
                 <Markdown>{description}</Markdown>
             </div>
 
-            {cta?.url && (
-                <CallToAction to={cta.url} type="secondary" size="sm" className="mt-2">
-                    {cta.label}
+            <div className="flex gap-2">
+                {cta?.url && (
+                    <CallToAction to={cta.url} type="secondary" size="sm" className="mt-2">
+                        {cta.label}
+                    </CallToAction>
+                )}
+                <CallToAction to="/changelog" type="secondary" size="sm" className="mt-2">
+                    Visit changelog
                 </CallToAction>
-            )}
+            </div>
         </div>
     )
 }

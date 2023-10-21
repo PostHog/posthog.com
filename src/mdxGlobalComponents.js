@@ -22,8 +22,12 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
 import { SessionReplay } from './components/Product/SessionReplay'
 import { ProductLayout } from './components/ProductLayout'
+import { Competitor } from './components/Products/Competitor'
 import { CustomerCard } from './components/Products/CustomerCard'
+import { DocsLinks } from './components/Products/DocsLinks'
 import { Feature } from './components/Products/Feature'
+import { PairsWith } from './components/Products/PairsWith'
+import { SmoothScroll } from './components/Products/SmoothScroll'
 import { Subfeature } from './components/Products/Subfeature'
 import { Quote2 } from './components/Quote2'
 import { Signatures } from './components/Signatures'
@@ -57,8 +61,12 @@ export const shortcodes = {
     Quote,
     SessionReplay,
     ProductLayout,
+    Competitor,
     CustomerCard,
+    DocsLinks,
     Feature,
+    PairsWith,
+    SmoothScroll,
     Subfeature,
     Quote2,
     Signatures,

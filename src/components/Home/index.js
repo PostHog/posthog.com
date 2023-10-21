@@ -50,7 +50,9 @@ const Home = () => {
                     subtitle="Fresh from our keyboards"
                     cta={{ url: '/tutorials', title: 'Explore all tutorials' }}
                 />*/}
-                <CTA />
+                <div className="relative">
+                    <CTA />
+                </div>
             </Layout>
         </>
     )

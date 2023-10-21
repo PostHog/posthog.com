@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -13,15 +13,28 @@ import { PlanComparison } from 'components/Pricing/PlanComparison'
 import ContentViewer from 'components/ContentViewer'
 import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
 import { docsMenu } from '../../../navs'
-import { MenuItem } from 'components/PostLayout/Menu'
 import TeamRoadmap from 'components/TeamRoadmap'
 import RecentChange from '../RecentChange'
 import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
 import Comparison from '../Comparison'
-import Logo from 'components/Logo'
 import { Accordion } from 'components/Products/Accordion'
+import { PairsWith } from 'components/Products/PairsWith'
+import { PairsWithItem } from 'components/Products/PairsWith/item'
+import { Card } from 'components/Products/Card'
+import { VsCompetitor } from 'components/Products/Competitor'
+import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
+import { DocLinks } from 'components/Products/DocsLinks'
+import { SmoothScroll } from 'components/Products/SmoothScroll'
+
+const product = {
+    slug: 'session-replay',
+    lowercase: 'session replay',
+    capitalized: 'Session Replay',
+}
+
+const team = 'Monitoring'
 
 const comparison = [
     {
@@ -136,14 +149,6 @@ const comparison = [
     },
 ]
 
-const features = [
-    '$50,000 in PostHog credit for 12 months<sup>1</sup>',
-    'Exclusive PostHog merch for founders<sup>2</sup>',
-    'Access to our YC founder Slack community',
-    'Onboarding session to get you started',
-    'Our CEO on WhatsApp or SMS',
-]
-
 const cards = [
     {
         question: 'Where do key events happen in my user’s sessions?',
@@ -190,67 +195,8 @@ const cards = [
     },
 ]
 
-const Card = ({ question, url }) => {
-    return (
-        <>
-            {url ? (
-                <li className="text-2xl font-bold">
-                    <Link to={url} className="block text-red dark:text-yellow font-bold py-1">
-                        {question}
-                    </Link>
-                </li>
-            ) : (
-                <li className="text-2xl font-bold py-1">{question}</li>
-            )}
-        </>
-    )
-}
-
-const VsCompetitor = ({ title, children }) => {
-    return (
-        <div
-            className={`rounded-md p-4 border border-light dark:border-dark bg-white/50 dark:bg-accent-dark flex flex-col-reverse md:flex-row gap-4`}
-        >
-            <div className="flex-1">
-                <h4 className="leading-tight">{title}</h4>
-                {children}
-            </div>
-            <div className="shrink-0 basis-[167px] text-center">
-                <StaticImage src="../../../images/products/competitors-sr.png" className="max-w-[167px]" />
-            </div>
-        </div>
-    )
-}
-const VsPostHog = ({ children }) => {
-    return (
-        <div
-            className={`rounded-md p-4 border-2 border-blue dark:border-blue bg-white/50 dark:bg-accent-dark flex flex-col md:flex-row gap-4`}
-        >
-            <div className="shrink-0 basis-[145px] text-center">
-                <StaticImage src="../../../images/products/competitors-hog.png" className="max-w-[145px]" />
-            </div>
-            <div className="flex-1">
-                <h4 className="leading-tight flex items-end gap-2">
-                    <span>Reasons to choose</span> <Logo className="w-32" />
-                </h4>
-                {children}
-            </div>
-        </div>
-    )
-}
-
-const WorksWith = ({ children, items }) => {
-    return (
-        <section className="mb-20">
-            <h3 className="text-3xl lg:text-4xl text-center">Pairs with...</h3>
-
-            <p className="text-center">PostHog products are natively designed to be interoperable using Product OS.</p>
-            <div className={`grid gap-8 md:grid-cols-${items}`}>{children}</div>
-        </section>
-    )
-}
-
-const WorksWithArray = [
+const pairsWithItemCount = 3
+const PairsWithArray = [
     {
         icon: <IconGraph />,
         product: 'Product analytics',
@@ -271,63 +217,6 @@ const WorksWithArray = [
         url: '/ab-testing',
     },
 ]
-
-const WorksWithItem = ({ icon, product, description, url }) => {
-    return (
-        <>
-            <Link
-                to={url}
-                className="bg-accent dark:bg-accent-dark rounded-md p-6 relative hover:top-[-1px] hover:scale-[1.01] active:top-[1px] active:scale-[1] transition-all"
-            >
-                <span className="inline-block w-8 opacity-50 text-primary dark:text-primary-dark">{icon}</span>
-                <h4 className="mt-2 mb-0">{product}</h4>
-                <p className="text-primary dark:text-primary-dark mb-0 text-[15px] opacity-75">{description}</p>
-            </Link>
-        </>
-    )
-}
-
-const DocLinks = ({ menu }) => {
-    const organized = {}
-    let currentMenu
-    menu.forEach((menuItem) => {
-        const { name } = menuItem
-        if (!('url' in menuItem)) {
-            currentMenu = name
-            organized[name] = []
-        } else if (currentMenu) {
-            organized[currentMenu].push(menuItem)
-        }
-    })
-
-    const menuOrganized = Object.keys(organized)
-
-    return (
-        <ul className={`list-none m-0 p-0 flex flex-col md:flex-row justify-center gap-4 md:gap-20`}>
-            {menuOrganized.map((title) => {
-                return (
-                    <li key={title}>
-                        <p className="opacity-50 m-0 font-semibold">{title}</p>
-                        <ul className="list-none m-0 p-0 mt-2 flex flex-col">
-                            {organized[title].map(({ name, icon, color, url, badge }) => {
-                                return (
-                                    <li key={name + url} to={url}>
-                                        <Link
-                                            to={url}
-                                            className="flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
-                                        >
-                                            <MenuItem badge={badge} color={color} icon={icon} name={name} />
-                                        </Link>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </li>
-                )
-            })}
-        </ul>
-    )
-}
 
 export const ProductSessionReplay = () => {
     const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
@@ -361,12 +250,12 @@ export const ProductSessionReplay = () => {
     `)
     return (
         <Layout>
-            <div className="max-w-7xl mx-auto px-5 py-10 md:py-20">
+            <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
                 <Hero
                     icon={<IconRewindPlay />}
-                    product="Session replay"
+                    product={product.capitalized}
                     title="Watch visitors interact with your app"
-                    description='Session replay helps you <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
+                    description='Session Replay helps you <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
                     website.'
                 />
 
@@ -404,50 +293,7 @@ export const ProductSessionReplay = () => {
                 </section>
             </div>
 
-            <section className="hidden md:block sticky top-[-1px] reasonable:top-[107px] bg-accent dark:bg-accent-dark border-y border-border dark:border-border-dark z-50">
-                <ul className="list-none flex gap-4 justify-center pt-1">
-                    <li>
-                        <span className="inline-block text-sm py-2 px-3 border border-light dark:border-dark !border-b-transparent -mb-px font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md">
-                            Features
-                        </span>
-                    </li>
-                    <li>
-                        <span className="inline-block text-sm py-2 px-3 border border-transparent border-b-transparent -mb-px text-opacity-60 hover:border hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md">
-                            Pricing
-                        </span>
-                    </li>
-                    <li>
-                        <span className="inline-block text-sm py-2 px-3 border border-transparent border-b-transparent -mb-px text-opacity-60 hover:border hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md">
-                            PostHog vs...
-                        </span>
-                    </li>
-                    <li>
-                        <span className="inline-block text-sm py-2 px-3 border border-transparent border-b-transparent -mb-px text-opacity-60 hover:border hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md">
-                            Installation
-                        </span>
-                    </li>
-                    <li>
-                        <span className="inline-block text-sm py-2 px-3 border border-transparent border-b-transparent -mb-px text-opacity-60 hover:border hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md">
-                            Docs
-                        </span>
-                    </li>
-                    <li>
-                        <span className="inline-block text-sm py-2 px-3 border border-transparent border-b-transparent -mb-px text-opacity-60 hover:border hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md">
-                            Meet the team
-                        </span>
-                    </li>
-                    <li>
-                        <span className="inline-block text-sm py-2 px-3 border border-transparent border-b-transparent -mb-px text-opacity-60 hover:border hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md">
-                            Roadmap &amp; changelog
-                        </span>
-                    </li>
-                    <li>
-                        <span className="inline-block text-sm py-2 px-3 border border-transparent border-b-transparent -mb-px text-opacity-60 hover:border hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md">
-                            Questions
-                        </span>
-                    </li>
-                </ul>
-            </section>
+            <SmoothScroll />
 
             <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                 <h3 className="text-3xl text-center mb-8">Features</h3>
@@ -503,7 +349,7 @@ export const ProductSessionReplay = () => {
                     <div className="md:grid md:grid-cols-12 md:gap-12">
                         <div className="col-span-5">
                             <h3 className="text-4xl md:text-5xl text-blue leading-tight">
-                                Answer all of these questions (and more) with PostHog Session Replay.
+                                Answer all of these questions (and more) with PostHog {product.capitalized}.
                             </h3>
                         </div>
                         <div className="col-span-7 relative after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
@@ -521,7 +367,7 @@ export const ProductSessionReplay = () => {
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
                         <p className="">
-                            Use session replay free. Or enter a credit card for advanced features.{' '}
+                            Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
                             <br className="hidden lg:block" />
                             Either way, your first 15,000 recordings are free – every month.
                         </p>
@@ -612,23 +458,23 @@ export const ProductSessionReplay = () => {
 
                     <p className="text-center text-sm font-medium">
                         Have questions about PostHog? <br className="md:hidden" />
-                        <Link to="/questions/session-replay">Ask the community</Link> or{' '}
+                        <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
                         <Link to="/contact-sales">book a demo</Link>.
                     </p>
                 </section>
 
                 <section className="mb-20">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-0">Install &amp; customize</h3>
-                    <p className="mt-0 opacity-50 text-center">
-                        Here are some ways you can fine tune how you implement session replays.
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
+                    <p className="mt-0 opacity-50 text-center mb-12">
+                        Here are some ways you can fine tune how you implement {product.lowercase}.
                     </p>
 
                     <ContentViewer sticky={false} scrollToTop={false} content={[...SessionReplay]} />
                 </section>
 
                 <section className="mb-20">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-0">Explore the docs</h3>
-                    <p className="mt-0 opacity-70 text-center">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
+                    <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
                     <DocLinks menu={docsMenu.children[2].children} />
@@ -638,49 +484,50 @@ export const ProductSessionReplay = () => {
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
-                        PostHog works in small teams. The Monitoring team are the folks responsible for building session
+                        PostHog works in small teams. The {team} team are the folks responsible for building session
                         replay.
                     </p>
-                    <TeamMembers teamName="Monitoring" />
+                    <TeamMembers teamName={team} />
                 </section>
 
                 <section className="mb-20">
-                    <h3 className="text-3xl lg:text-4xl text-center">Roadmap &amp; changelog</h3>
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
 
-                    <p className="text-center">Here’s what the team is up to.</p>
+                    <p className="text-center mb-8">Here’s what the team is up to.</p>
 
                     <div className="grid md:grid-cols-2 gap-12">
                         <div>
-                            <RecentChange team="Monitoring" />
+                            <RecentChange team={team} />
                         </div>
 
                         <div>
                             <h4 className="opacity-60 text-base">Up next</h4>
-                            <TeamRoadmap team="Monitoring" />
+                            <TeamRoadmap team={team} />
                         </div>
                     </div>
                 </section>
 
                 <section className="mb-20">
-                    <h3 className="text-3xl lg:text-4xl text-center">Questions?</h3>
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
-                    <p className="text-center">See more questions (or ask your own!) in our community forums.</p>
+                    <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
 
                     <div className="text-center mb-8">
-                        <CallToAction href="/questions/session-replay" type="secondary" size="sm">
-                            View session replay questions
+                        <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
+                            View {product.lowercase} questions
                         </CallToAction>
                     </div>
 
                     <Questions topicId={20} />
                 </section>
 
-                <WorksWith items={3}>
-                    {WorksWithArray.map((card, index) => {
-                        return <WorksWithItem {...card} key={index} />
+                <PairsWith items={pairsWithItemCount}>
+                    {PairsWithArray.map((card, index) => {
+                        return <PairsWithItem {...card} key={index} />
                     })}
-                </WorksWith>
-
+                </PairsWith>
+            </div>
+            <div className="max-w-7xl mx-auto px-5 relative">
                 <section className="mb-20">
                     <CTA />
                 </section>
