@@ -48,6 +48,24 @@ const product = {
 
 const team = 'Monitoring'
 
+const features = [
+    {
+        title: 'Event timeline',
+        description: "History of everything that happened in a user's session",
+        image: <StaticImage src="./images/timeline.png" width={420} />,
+    },
+    {
+        title: 'Console logs',
+        description: "Debug issues faster by browsing the user's console",
+        image: <StaticImage src="./images/console.png" width={420} />,
+    },
+    {
+        title: 'Network monitor',
+        description: 'Analyze performance and network calls',
+        image: <StaticImage src="./images/network.png" width={420} />,
+    },
+]
+
 const subfeaturesItemCount = 5
 const subfeatures = [
     {
@@ -356,21 +374,9 @@ export const ProductSessionReplay = () => {
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     <h3 className="text-3xl text-center mb-8">Features</h3>
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-12 mb-8">
-                        <Feature
-                            image={<StaticImage src="./images/timeline.png" width={420} />}
-                            name="Event timeline"
-                            description="History of everything that happened in a user's session"
-                        />
-                        <Feature
-                            image={<StaticImage src="./images/network.png" width={420} />}
-                            name="Console logs"
-                            description="Debug issues faster by browsing the user's console"
-                        />
-                        <Feature
-                            image={<StaticImage src="./images/console.png" width={420} />}
-                            name="Network tab"
-                            description="Analyze performance and network calls"
-                        />
+                        {features.map((feature, index) => {
+                            return <Feature {...feature} key={index} />
+                        })}
                     </ul>
 
                     <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
