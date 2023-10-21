@@ -17,10 +17,10 @@ const companies = {
         comparisonURL: '/blog/posthog-vs-fullstory',
     },
     Pendo: {
-        comparisonUrl: '/blog/posthog-vs-pendo',
+        comparisonURL: '/blog/posthog-vs-pendo',
     },
     Sprig: {
-        comparisonUrl: '',
+        comparisonURL: '',
     },
     PostHog: {
         comparisonURL: '',

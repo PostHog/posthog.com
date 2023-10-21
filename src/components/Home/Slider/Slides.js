@@ -387,7 +387,7 @@ export const Surveys = () => {
                             quality={100}
                             objectFit="contain"
                             className="w-full h-full py-4 md:py-10 max-h-96"
-                            src="../../../../contents/images/products/surveys/survey-hog.png"
+                            src="../../Product/surveys/images/survey-hog.png"
                         />
                     </div>
                 </ImageContainer>
