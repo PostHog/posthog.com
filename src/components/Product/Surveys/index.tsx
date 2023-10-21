@@ -10,6 +10,7 @@ import {
     IconToggle,
     IconPieChart,
     IconNotification,
+    IconRewindPlay,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -288,21 +289,21 @@ const PairsWithArray = [
     {
         icon: <IconGraph />,
         product: 'Product analytics',
-        description: 'Jump into a playlist of session recordings directly from any time series in a graph',
+        description: 'Use insights to breakdown average scores, analyze results over time, or find trends.',
         url: '/product-analytics',
     },
     {
         icon: <IconToggle />,
         product: 'Feature flags',
-        description: "See which feature flags are enabled for a user's session",
+        description: 'Connect a survey to a feature flag to gather feedback on your latest ideas and tests.',
         url: '/feature-flags',
     },
     {
-        icon: <IconFlask />,
-        product: 'A/B testing',
+        icon: <IconRewindPlay />,
+        product: 'Session replay',
         description:
-            'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
-        url: '/ab-testing',
+            "Watch recordings of users completing a survey to understand full context about a user's behavior.",
+        url: '/session-replay',
     },
 ]
 
@@ -552,7 +553,7 @@ export const ProductSurveys = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicId={20} />
+                    <Questions topicId={64} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>
