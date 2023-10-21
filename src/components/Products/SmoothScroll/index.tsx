@@ -29,14 +29,14 @@ export const SmoothScroll = (): JSX.Element => {
                     return (
                         <li key={id}>
                             <Link
-                                offset={-149}
+                                offset={-169}
                                 className="!text-inherit inline-block text-sm py-2 px-3 border border-transparent border-b-transparent -mb-px text-opacity-60 hover:border hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md cursor-pointer"
                                 smooth
                                 duration={300}
                                 to={id}
                                 hashSpy
                                 spy
-                                activeClass="border-light dark:border-dark !border-b-transparent font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md"
+                                activeClass="!border-light !dark:border-dark !border-b-transparent font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md"
                             >
                                 {label}
                             </Link>
