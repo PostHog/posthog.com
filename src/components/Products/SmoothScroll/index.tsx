@@ -21,9 +21,11 @@ const menuItems: { label: string; id: string }[] = [
     { label: 'Questions', id: 'questions' },
 ]
 
-export const SmoothScroll = (): JSX.Element => {
+export const SmoothScroll = ({ className }): JSX.Element => {
     return (
-        <section className="hidden md:block sticky top-[-1px] reasonable:top-[107px] bg-accent dark:bg-accent-dark border-y border-border dark:border-border-dark z-50 mb-12">
+        <section
+            className={`hidden md:block sticky top-[-1px] reasonable:top-[107px] bg-accent dark:bg-accent-dark border-y border-border dark:border-border-dark z-50 mb-12 ${className}`}
+        >
             <ul className="list-none flex gap-4 justify-center pt-1">
                 {menuItems.map(({ label, id }) => {
                     return (
