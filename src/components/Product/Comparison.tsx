@@ -43,13 +43,13 @@ const companies = {
     Pendo: {
         comparisonURL: '/blog/posthog-vs-pendo',
     },
-    PostHog: {
-        comparisonURL: '',
-    },
     Sprig: {
         comparisonURL: '',
     },
     VWO: {
+        comparisonURL: '',
+    },
+    PostHog: {
         comparisonURL: '',
     },
 }
