@@ -7,14 +7,23 @@ const companies = {
     Amplitude: {
         comparisonURL: '/blog/posthog-vs-amplitude',
     },
+    Flagsmith: {
+        comparisonURL: '',
+    },
     FullStory: {
         comparisonURL: '/blog/posthog-vs-fullstory',
+    },
+    GrowthBook: {
+        comparisonURL: '',
     },
     Heap: {
         comparisonURL: '/blog/posthog-vs-heap',
     },
     Hotjar: {
         comparisonURL: '/blog/posthog-vs-hotjar',
+    },
+    LaunchDarkly: {
+        comparisonURL: '',
     },
     LogRocket: {
         comparisonURL: '/blog/posthog-vs-logrocket',
@@ -24,6 +33,9 @@ const companies = {
     },
     Mixpanel: {
         comparisonURL: '/blog/posthog-vs-mixpanel',
+    },
+    Optimizely: {
+        comparisonURL: '',
     },
     Pendo: {
         comparisonURL: '/blog/posthog-vs-pendo',

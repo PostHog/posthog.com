@@ -40,7 +40,7 @@ import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
 
 const product = {
-    slug: 'product analytics',
+    slug: 'product-analytics',
     lowercase: 'product analytics',
     capitalized: 'Product Analytics',
     freeTier: '1,000,000 events',

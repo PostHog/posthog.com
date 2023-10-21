@@ -3,14 +3,18 @@ import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
-    IconMessage,
     IconClock,
+    IconDecisionTree,
     IconGraph,
-    IconFlask,
-    IconToggle,
-    IconPieChart,
-    IconNotification,
+    IconLoading,
     IconRewindPlay,
+    IconRevert,
+    IconShield,
+    IconStack,
+    IconTerminal,
+    IconToggle,
+    IconUnlock,
+    IconUserPaths,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -20,7 +24,7 @@ import { Subfeature } from 'components/Products/Subfeature'
 import { graphql, useStaticQuery } from 'gatsby'
 import { PlanComparison } from 'components/Pricing/PlanComparison'
 import ContentViewer from 'components/ContentViewer'
-import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
+import FeatureFlags from 'components/Home/CodeBlocks/FeatureFlags'
 import { docsMenu } from '../../../navs'
 import TeamRoadmap from 'components/TeamRoadmap'
 import RecentChange from '../RecentChange'
@@ -36,12 +40,13 @@ import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
+import Install from '../Install'
 
 const product = {
-    slug: 'surveys',
-    lowercase: 'surveys',
-    capitalized: 'Surveys',
-    freeTier: '250 survey responses',
+    slug: 'feature-flags',
+    lowercase: 'feature flags',
+    capitalized: 'Feature Flags',
+    freeTier: '1,000,000 requests',
 }
 
 const team = 'Feature Success'
@@ -49,75 +54,100 @@ const team = 'Feature Success'
 const featuresPerRow = 3
 const features = [
     {
-        title: 'Question types',
-        description: 'Multiple choice, multi-select, numerical rating, emoji reaction, embedded links',
-        image: <StaticImage src="./images/question-types.png" width={428} />,
+        title: 'Release conditions',
+        description: 'Customize your rollout strategy by user or group properties, cohort, or trafic percentage',
+        image: <StaticImage src="./images/release-conditions.png" width={420} />,
     },
     {
-        title: 'Templates',
-        description: 'Choose from the library or start from scratch',
-        image: <StaticImage src="./images/templates.png" width={428} />,
+        title: 'Multivariate feature flags',
+        description: 'Simultaneously test multiple versions against a control group',
+        image: <StaticImage src="./images/multivariate.png" width={420} />,
     },
     {
-        title: 'Targeting',
-        description: 'Target by URL, user property, or feature flag when used with Feature Flags',
-        image: <StaticImage src="./images/targeting.png" width={428} />,
-    },
-    {
-        title: 'Multi-step surveys',
-        description: 'Up to 10 questions',
-        image: <StaticImage src="./images/steps.png" width={428} />,
-    },
-    {
-        title: 'Link somewhere',
-        description: 'Send users to a webpage or invite them to book a meeting with a calendar invite',
-        image: <StaticImage src="./images/link-scheduler.png" width={428} />,
-    },
-    {
-        title: 'No-code? Yes. API? Yes.',
+        title: 'Test changes without touching your codebase',
         description:
-            "Using PostHog.js? No more code required. But want to create your own UI? Check out the <a href='/docs/surveys/implementing-custom-surveys'>Surveys API</a>.",
-        image: <StaticImage src="./images/api.png" width={428} />,
+            'JSON payloads let you change text, visuals, or entire blocks of code without subsequent deployments',
+        image: <StaticImage src="./images/payloads.png" width={420} />,
+    },
+    {
+        title: 'Developer-friendly automation',
+        description:
+            'Automated usage reports, IP address resolution (for location-based targeting), and recall user properties to avoid passing them manually every time',
+        image: <StaticImage src="./images/reports.png" width={420} />,
+    },
+    {
+        title: 'Early access feature opt-in widget',
+        description: 'Allow users to opt in to (or out of) specified features. Or use the API to build your own UI.',
+        image: <StaticImage src="./images/early-access.png" width={420} />,
     },
 ]
 
-const subfeaturesItemCount = 3
+const subfeaturesItemCount = 4
 const subfeatures = [
     {
-        title: 'Aggregated results',
-        description: 'See feedback summarized and broken down per response',
-        icon: <IconPieChart />,
-    },
-    {
-        title: 'Slack notifications',
-        description: 'Send realtime survey responses to a Slack channel',
-        icon: <IconNotification />,
-    },
-    {
-        title: 'Customizable wait periods',
-        description: 'Set a delay before the survey opens',
         icon: <IconClock />,
+        title: 'History & activity feed',
+        description: 'See who hit a feature flag, the flag’s value, and which page they were on',
+    },
+    {
+        icon: <IconDecisionTree />,
+        title: 'Local evaluation',
+        description: 'Improves speed by caching a flag’s value on initial load',
+    },
+    {
+        icon: <IconRevert />,
+        title: 'Instant rollbacks',
+        description: 'Disable a feature without touching your codebase',
+    },
+    {
+        icon: <IconLoading />,
+        title: 'Bootstrapping',
+        description: 'Get flags and values to trigger changes immediately on page load',
+    },
+    {
+        icon: <IconUnlock />,
+        title: 'Persist flags across authentication steps',
+        description: 'Make sure users have a consistent experience after login',
+    },
+    {
+        icon: <IconShield />,
+        title: 'Flag administration',
+        description: 'See the history of a feature flag or control who can modify flags with user roles',
+    },
+    {
+        icon: <IconTerminal />,
+        title: 'SDKs or API',
+        description: 'Copy code snippets for your library of choice, or implement yourself with the API',
+    },
+    {
+        icon: <IconStack />,
+        title: 'Multi-environment support',
+        description: 'Test flags in local development or staging by using the same flag key across PostHog projects',
     },
 ]
 
 const questions = [
     {
-        question: 'How likely are you to recommend this product to a friend?',
-        url: 'https://posthog-git-experiment-post-hog.vercel.app/tutorials/nps-survey',
+        question: 'How do I test features internally?',
+        url: '/blog/feature-flag-benefits-use-cases#3-test-changes-in-production',
     },
     {
-        question: 'Would you like to be interviewed by our product team?',
-        url: '#',
+        question: 'How do I set up a beta?',
     },
     {
-        question: 'How would you feel if you could no longer use this product?',
+        question: 'How do I test bug fixes?',
     },
     {
-        question: "How satisfied are you with the support you've received?",
+        question: 'How do I set up an allow or deny list?',
+        url: '/blog/feature-flag-benefits-use-cases#4-manage-access',
     },
     {
-        question: 'Would you like to book a user interview?',
-        url: '#',
+        question: 'How do I do a canary release?',
+        url: '/tutorials/canary-release',
+    },
+    {
+        question: 'How do I sample events for a high-volume API?',
+        url: '/tutorials/track-high-volume-apis',
     },
 ]
 
@@ -137,149 +167,125 @@ const faqs = [
     },
 ]
 
-const comparisonColumnCount = 5
+const comparisonColumnCount = 6
 const comparison = [
     {
-        feature: 'Customizable pop-ups',
+        feature: 'Target by percentage',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            LaunchDarkly: true,
+            Optimizely: true,
+            Flagsmith: true,
+            GrowthBook: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Live previews',
+        feature: 'Target by user properties',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            LaunchDarkly: true,
+            Optimizely: true,
+            Flagsmith: true,
+            GrowthBook: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Multi-step surveys',
+        feature: 'Flag scheduling',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'API access',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Single choice questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Multiple choice questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Open text questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Numerical rating questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Emoji rating questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Third-party link support',
-        companies: {
-            Pendo: true,
-            Hotjar: false,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target by property',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target by URL',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target by feature flag',
-        companies: {
-            Pendo: false,
-            Hotjar: false,
-            Sprig: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Survey scheduling',
-        companies: {
-            Pendo: true,
-            Hotjar: false,
-            Sprig: false,
+            LaunchDarkly: true,
+            Optimizely: false,
+            Flagsmith: false,
+            GrowthBook: false,
             PostHog: false,
         },
     },
     {
-        feature: 'Export responses',
+        feature: 'Experimentation',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            LaunchDarkly: true,
+            Optimizely: true,
+            Flagsmith: true,
+            GrowthBook: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Slack integration',
+        feature: 'Multivariate flags',
         companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
+            LaunchDarkly: true,
+            Optimizely: false,
+            Flagsmith: true,
+            GrowthBook: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Unlimited flags for free',
+        companies: {
+            LaunchDarkly: false,
+            Optimizely: true,
+            Flagsmith: true,
+            GrowthBook: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Free third-party plugins',
+        companies: {
+            LaunchDarkly: true,
+            Optimizely: false,
+            Flagsmith: true,
+            GrowthBook: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Activity logs',
+        companies: {
+            LaunchDarkly: true,
+            Optimizely: false,
+            Flagsmith: true,
+            GrowthBook: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Data export',
+        companies: {
+            LaunchDarkly: true,
+            Optimizely: true,
+            Flagsmith: false,
+            GrowthBook: true,
+            PostHog: false,
+        },
+    },
+    {
+        feature: 'Multi-environment support',
+        companies: {
+            LaunchDarkly: true,
+            Optimizely: true,
+            Flagsmith: true,
+            GrowthBook: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Automatic IP resolution',
+        companies: {
+            LaunchDarkly: false,
+            Optimizely: false,
+            Flagsmith: false,
+            GrowthBook: false,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'Recall user properties by default',
+        companies: {
+            LaunchDarkly: false,
+            Optimizely: false,
+            Flagsmith: false,
+            GrowthBook: false,
             PostHog: true,
         },
     },
@@ -289,27 +295,27 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
-        product: 'Product analytics',
-        description: 'Use insights to breakdown average scores, analyze results over time, or find trends.',
+        product: 'Product Analytics',
+        description:
+            "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
         url: '/product-analytics',
     },
     {
-        icon: <IconToggle />,
-        product: 'Feature flags',
-        description: 'Connect a survey to a feature flag to gather feedback on your latest ideas and tests.',
-        url: '/feature-flags',
+        icon: <IconUserPaths />,
+        product: 'User paths',
+        description: 'See how a flag’s value influenced an intended outcome',
+        url: '/product-analytics',
     },
     {
         icon: <IconRewindPlay />,
-        product: 'Session replay',
-        description:
-            "Watch recordings of users completing a survey to understand full context about a user's behavior.",
+        product: 'Session Replay',
+        description: 'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
         url: '/session-replay',
     },
 ]
 
-export const ProductSurveys = () => {
-    const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
+export const ProductFeatureFlags = () => {
+    const { phantom, contra, speakeasy } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -324,16 +330,13 @@ export const ProductSurveys = () => {
             }
         }
         {
+            phantom: mdx(slug: { eq: "customers/phantom" }) {
+                ...ProductCustomerFragment
+            }
             contra: mdx(slug: { eq: "customers/contra" }) {
                 ...ProductCustomerFragment
             }
-            hasura: mdx(slug: { eq: "customers/hasura" }) {
-                ...ProductCustomerFragment
-            }
-            netdata: mdx(slug: { eq: "customers/netdata" }) {
-                ...ProductCustomerFragment
-            }
-            pry: mdx(slug: { eq: "customers/pry" }) {
+            speakeasy: mdx(slug: { eq: "customers/speakeasy" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -342,51 +345,39 @@ export const ProductSurveys = () => {
         <Layout>
             <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
                 <Hero
-                    color="salmon"
-                    icon={<IconMessage />}
+                    color="seagreen"
+                    icon={<IconToggle />}
                     product={product.capitalized}
-                    title='Ask anything with <span class="text-red dark:text-yellow">no-code surveys</span>'
-                    description="Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control."
+                    title='<span class="text-red dark:text-yellow">Safely roll out features</span> to specific users or groups'
+                    description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
                 />
 
                 <div className="">
-                    <StaticImage
-                        src="../../../images/products/screenshot-surveys.png"
-                        alt=""
-                        className="w-full max-w-[1330px]"
-                    />
+                    <StaticImage src="./images/screenshot-feature-flags.png" alt="" className="w-full max-w-[1361px]" />
                 </div>
 
-                {/*
                 <section>
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="improved conversion rates by 10-20%"
-                            quote="We wouldn't have noticed that needed fixing without PostHog's session replays."
-                            customer={hasura}
+                            outcome="cut failure rates by 90%"
+                            quote="Feature flags are crucial for us. We use them as kill switches for all our features."
+                            customer={phantom}
                         />
                         <CustomerCard
                             outcome="increased registrations by 30%"
-                            quote="From [funnels], we could easily jump to session replays to see the drop-off point."
+                            quote="Enables a ‘slow rollout’ strategy... while also analyzing feature adoption and performance in the same tool."
                             customer={contra}
                         />
                         <CustomerCard
-                            outcome="reduced back-and-forth in community support"
-                            quote="Session replay is... an essential tool for Netdata."
-                            customer={netdata}
-                        />
-                        <CustomerCard
-                            outcome="improved registrations by 20-30%"
-                            quote="Even Pry's support team... uses replays to understand how... bug occurred."
-                            customer={pry}
+                            outcome="improved feature roll-out with flags"
+                            quote="The integrated insights and feature flags help us monitor how users with specific flags enabled are using features"
+                            customer={speakeasy}
                         />
                     </ul>
                 </section>
-                */}
             </div>
 
-            <SmoothScroll className="-mt-24" />
-
+            <SmoothScroll />
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     <h3 className="text-3xl text-center mb-8">Features</h3>
@@ -443,7 +434,7 @@ export const ProductSurveys = () => {
                 </div>
 
                 <div className="md:flex justify-between items-start gap-12">
-                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['surveys']} />
+                    <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['feature_flags']} />
 
                     <div className="md:w-96 md:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
@@ -466,25 +457,32 @@ export const ProductSurveys = () => {
                         <div className="mb-8 grid md:grid-cols-2 gap-4">
                             <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
                                 <ul>
-                                    <li>
-                                        Forms
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                PostHog offers multi-step surveys, but they won't be full-page forms
-                                                such as Typeform or Google Forms
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>AI-powered analysis or recommendations based on results</li>
-                                    <li>Limited formatting options</li>
+                                    <li>Flag scheduling</li>
+                                    <li>Triggers and workflows to enable/disable flags on other events</li>
+                                    <li>Enterprise-level support</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>No-code surveys with customizable colors and removable branding</li>
-                                    <li>Automatic NPS score calculations</li>
-                                    <li>Robust targeting &amp; integration with feature flags</li>
-                                    <li>Tight integration with analytics, experiments, and session replay</li>
+                                    <li>
+                                        Integration with other analysis products
+                                        <ul className="pl-6">
+                                            <li className="text-sm">
+                                                View replays attached to a flag, analyze data based on a flag, etc.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        JSON payloads
+                                        <ul className="pl-6">
+                                            <li className="text-sm">
+                                                Flags can return JSON and trigger other in-app changes (like displaying
+                                                a banner)
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>Targeting options</li>
+                                    <li>Early access management suite for toggling betas or new features</li>
                                 </ul>
                             </VsPostHog>
                         </div>
@@ -497,23 +495,21 @@ export const ProductSurveys = () => {
                     </section>
                 </div>
 
-                {/*
-        <section id="installation" className="mb-20">
-          <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
-          <p className="mt-0 opacity-50 text-center mb-12">
-            Here are some ways you can fine tune how you implement {product.lowercase}.
-          </p>
+                <section id="installation" className="mb-20">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
+                    <p className="mt-0 opacity-50 text-center mb-12">
+                        Here are some ways you can fine tune how you implement {product.lowercase}.
+                    </p>
 
-          <ContentViewer sticky={false} scrollToTop={false} content={[...SessionReplay]} />
-        </section>
-        */}
+                    <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...FeatureFlags]} />
+                </section>
 
                 <section id="docs" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[5].children} />
+                    <DocLinks menu={docsMenu.children[3].children} />
                 </section>
 
                 <section id="team" className="mb-20">
@@ -554,7 +550,7 @@ export const ProductSurveys = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicId={64} />
+                    <Questions topicId={28} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>
@@ -572,4 +568,4 @@ export const ProductSurveys = () => {
     )
 }
 
-export default ProductSurveys
+export default ProductFeatureFlags

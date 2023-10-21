@@ -48,6 +48,7 @@ const product = {
 
 const team = 'Monitoring'
 
+const featuresPerRow = 3
 const features = [
     {
         title: 'Event timeline',
@@ -374,7 +375,7 @@ export const ProductSessionReplay = () => {
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     <h3 className="text-3xl text-center mb-8">Features</h3>
-                    <ul className="list-none p-0 grid md:grid-cols-3 gap-12 mb-8">
+                    <ul className={`list-none p-0 grid md:grid-cols-${featuresPerRow} gap-12 mb-8`}>
                         {features.map((feature, index) => {
                             return <Feature {...feature} key={index} />
                         })}
