@@ -14,7 +14,7 @@ interface HeroProps {
 export const Hero = ({ color, icon, product, title, description }: HeroProps): JSX.Element => {
     return (
         <section>
-            <div className="flex gap-1 justify-center items-center mb-3">
+            <div className="flex gap-1.5 justify-center items-center mb-3">
                 <span className={`w-6 h-6 text-${color}`}>{icon}</span>
                 <span className="text-[15px] font-semibold text-opacity-60">{product}</span>
             </div>
