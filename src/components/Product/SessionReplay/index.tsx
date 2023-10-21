@@ -21,6 +21,7 @@ import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
 import Comparison from '../Comparison'
 import Logo from 'components/Logo'
+import { Accordion } from 'components/Products/Accordion'
 
 const comparison = [
     {
@@ -235,25 +236,6 @@ const VsPostHog = ({ children }) => {
                 {children}
             </div>
         </div>
-    )
-}
-
-const Accordion = ({ children, label, active, initialOpen = false, className = '' }) => {
-    const [open, setOpen] = useState(initialOpen)
-    return (
-        <>
-            <button
-                onClick={() => setOpen(!open)}
-                type="button"
-                className={`py-3 w-full border-t first:border-0 border-border dark:border-dark ${className}`}
-            >
-                <div className={`${active ? '' : ''} flex justify-between items-center text-left`}>
-                    <p className="m-0 font-bold text-sm text-red dark:text-yellow">{label}</p>
-                    {open ? <IconMinus className="w-4" /> : <IconPlus className="w-4" />}
-                </div>
-            </button>
-            <div className={` ${open ? 'pb-2' : 'hidden'}`}>{children}</div>
-        </>
     )
 }
 
@@ -544,7 +526,7 @@ export const ProductSessionReplay = () => {
                             Either way, your first 15,000 recordings are free – every month.
                         </p>
                     </div>
-                    <div className="w-80">
+                    <div className="md:w-96">
                         <StaticImage
                             placeholder="none"
                             quality={100}
@@ -557,7 +539,7 @@ export const ProductSessionReplay = () => {
                 <div className="md:flex justify-between items-start gap-12">
                     <PlanComparison showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
 
-                    <div className="md:w-80">
+                    <div className="md:w-96 md:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
 
                         <Accordion initialOpen label="How do I know what my volume is?">
