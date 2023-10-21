@@ -27,6 +27,7 @@ import { CustomerCard } from './components/Products/CustomerCard'
 import { DocsLinks } from './components/Products/DocsLinks'
 import { Feature } from './components/Products/Feature'
 import { PairsWith } from './components/Products/PairsWith'
+import { Question } from './components/Products/Question'
 import { SmoothScroll } from './components/Products/SmoothScroll'
 import { Subfeature } from './components/Products/Subfeature'
 import { Quote2 } from './components/Quote2'
@@ -66,6 +67,7 @@ export const shortcodes = {
     DocsLinks,
     Feature,
     PairsWith,
+    Question,
     SmoothScroll,
     Subfeature,
     Quote2,

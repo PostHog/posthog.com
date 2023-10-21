@@ -22,7 +22,7 @@ import Comparison from '../Comparison'
 import { Accordion } from 'components/Products/Accordion'
 import { PairsWith } from 'components/Products/PairsWith'
 import { PairsWithItem } from 'components/Products/PairsWith/item'
-import { Card } from 'components/Products/Card'
+import { Question } from 'components/Products/Question'
 import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { DocLinks } from 'components/Products/DocsLinks'
@@ -149,7 +149,7 @@ const comparison = [
     },
 ]
 
-const cards = [
+const questions = [
     {
         question: 'Where do key events happen in my user’s sessions?',
     },
@@ -354,8 +354,8 @@ export const ProductSessionReplay = () => {
                         </div>
                         <div className="col-span-7 relative after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
                             <ul className="list-none p-0">
-                                {cards.map((card, index) => {
-                                    return <Card {...card} key={index} />
+                                {questions.map((question, index) => {
+                                    return <Question {...question} key={index} />
                                 })}
                             </ul>
                         </div>

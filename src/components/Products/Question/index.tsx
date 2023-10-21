@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 
-export const Card = ({ question, url }) => {
+export const Question = ({ question, url }) => {
     return (
         <>
             {url ? (
