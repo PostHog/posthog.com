@@ -2,7 +2,17 @@ import React from 'react'
 import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
-import { IconRewindPlay, IconMinus, IconPlus, IconGraph, IconFlask, IconToggle } from '@posthog/icons'
+import {
+    IconRewindPlay,
+    IconBolt,
+    IconPlaylist,
+    IconPhone,
+    IconDownload,
+    IconPassword,
+    IconGraph,
+    IconFlask,
+    IconToggle,
+} from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
@@ -19,7 +29,6 @@ import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
 import Comparison from '../Comparison'
-import { Accordion } from 'components/Products/Accordion'
 import { PairsWith } from 'components/Products/PairsWith'
 import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { Question } from 'components/Products/Question'
@@ -27,6 +36,7 @@ import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
+import { FAQ } from 'components/Products/FAQ'
 
 const product = {
     slug: 'session-replay',
@@ -35,6 +45,97 @@ const product = {
 }
 
 const team = 'Monitoring'
+
+const subfeaturesItemCount = 5
+const subfeatures = [
+    {
+        title: 'Capture sessions without extra code',
+        description: 'Works with PostHog.js',
+        icon: <IconBolt />,
+    },
+    {
+        title: 'Automatic playlists',
+        description: 'Filter by user behavior or time',
+        icon: <IconPlaylist />,
+    },
+    {
+        title: 'Web or mobile session recording',
+        description: 'Web or iOS (beta) available',
+        icon: <IconPhone />,
+    },
+    {
+        title: 'Download recordings',
+        description: 'Retain recordings beyond data retention limits',
+        icon: <IconDownload />,
+    },
+    {
+        title: 'Block sensitive data',
+        description: 'Disable capturing data from any DOM element with CSS',
+        icon: <IconPassword />,
+    },
+]
+
+const questions = [
+    {
+        question: 'Where do key events happen in my user’s sessions?',
+    },
+    {
+        question: "How do I understand my users' behavior in funnels?",
+        url: '#',
+    },
+    {
+        question: 'How do I understand my user journeys?',
+        url: '#',
+    },
+    {
+        question: 'How can I understand what my power users are doing?',
+        url: '#',
+    },
+    {
+        question: 'How do I figure out how to lower churn?',
+        url: '#',
+    },
+    {
+        question: 'What errors are being logged to the console?',
+    },
+    {
+        question: 'How does my user experience differ across regions?',
+    },
+    {
+        question: 'What is a user’s DOM interactive time?',
+        url: '#',
+    },
+    {
+        question: 'How fast does my app load?',
+    },
+    {
+        question: 'What is a user’s First Contentful Paint time?',
+        url: '#',
+    },
+    {
+        question: 'What is a user’s Page Loaded time?',
+        url: '#',
+    },
+    {
+        question: 'How does my user experience differ across devices?',
+    },
+]
+
+const faqs = [
+    {
+        question: 'How do I know what my volume is?',
+        children: "Here's teh answer",
+    },
+    {
+        question: 'Do I pay anything for stored recordings?',
+        children: 'answer',
+    },
+    {
+        question: 'Is there a free trial on the Unlimited (paid) plan?',
+        children:
+            '<p class="text-sm">We have a generous free tier on every paid plan so you can try out the features before paying any money (though you will need to enter your credit card info). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch.</a></p>',
+    },
+]
 
 const comparison = [
     {
@@ -146,52 +247,6 @@ const comparison = [
             FullStory: '1 month',
             PostHog: 'Up to 3 months',
         },
-    },
-]
-
-const questions = [
-    {
-        question: 'Where do key events happen in my user’s sessions?',
-    },
-    {
-        question: "How do I understand my users' behavior in funnels?",
-        url: '#',
-    },
-    {
-        question: 'How do I understand my user journeys?',
-        url: '#',
-    },
-    {
-        question: 'How can I understand what my power users are doing?',
-        url: '#',
-    },
-    {
-        question: 'How do I figure out how to lower churn?',
-        url: '#',
-    },
-    {
-        question: 'What errors are being logged to the console?',
-    },
-    {
-        question: 'How does my user experience differ across regions?',
-    },
-    {
-        question: 'What is a user’s DOM interactive time?',
-        url: '#',
-    },
-    {
-        question: 'How fast does my app load?',
-    },
-    {
-        question: 'What is a user’s First Contentful Paint time?',
-        url: '#',
-    },
-    {
-        question: 'What is a user’s Page Loaded time?',
-        url: '#',
-    },
-    {
-        question: 'How does my user experience differ across devices?',
     },
 ]
 
@@ -315,32 +370,10 @@ export const ProductSessionReplay = () => {
                     />
                 </ul>
 
-                <ul className="list-none p-0 grid grid-cols-2 md:grid-cols-5 gap-4">
-                    <Subfeature
-                        title="Capture sessions without extra code"
-                        description="Works with PostHog.js"
-                        icon="IconBolt"
-                    />
-                    <Subfeature
-                        title="Automatic playlists"
-                        description="Filter by user behavior or time"
-                        icon="IconPlaylist"
-                    />
-                    <Subfeature
-                        title="Web or mobile session recording"
-                        description="Web or iOS (beta) available"
-                        icon="IconPhone"
-                    />
-                    <Subfeature
-                        title="Download recordings"
-                        description="Retain recordings beyond data retention limits"
-                        icon="IconDownload"
-                    />
-                    <Subfeature
-                        title="Block sensitive data"
-                        description="Disable capturing data from any DOM element with CSS"
-                        icon="IconPassword"
-                    />
+                <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
+                    {subfeatures.map((subfeature, index) => {
+                        return <Subfeature {...subfeature} key={index} />
+                    })}
                 </ul>
             </section>
 
@@ -387,19 +420,9 @@ export const ProductSessionReplay = () => {
 
                     <div className="md:w-96 md:mt-4">
                         <h4 className="text-3xl">FAQs</h4>
-
-                        <Accordion initialOpen label="How do I know what my volume is?">
-                            hello world
-                        </Accordion>
-                        <Accordion label="Do I pay anything for stored recordings?">hello world</Accordion>
-                        <Accordion label="Is there a free trial on the Unlimited (paid) plan?">
-                            <p>
-                                We have a generous free tier on every paid plan so you can try out the features before
-                                paying any money (though you will need to enter your credit card info). If you have
-                                additional needs, such as enterprise features, please{' '}
-                                <Link to="/contact-sales">get in touch.</Link>
-                            </p>
-                        </Accordion>
+                        {faqs.map((faq, index) => {
+                            return <FAQ {...faq} key={index} />
+                        })}
                     </div>
                 </div>
             </section>

@@ -25,6 +25,7 @@ import { ProductLayout } from './components/ProductLayout'
 import { Competitor } from './components/Products/Competitor'
 import { CustomerCard } from './components/Products/CustomerCard'
 import { DocsLinks } from './components/Products/DocsLinks'
+import { FAQ } from './components/Products/FAQ'
 import { Feature } from './components/Products/Feature'
 import { PairsWith } from './components/Products/PairsWith'
 import { Question } from './components/Products/Question'
@@ -65,6 +66,7 @@ export const shortcodes = {
     Competitor,
     CustomerCard,
     DocsLinks,
+    FAQ,
     Feature,
     PairsWith,
     Question,

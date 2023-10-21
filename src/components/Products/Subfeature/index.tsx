@@ -16,7 +16,7 @@ export const Subfeature = ({ title, description, className = '', icon }: IFeatur
     const Icon = PostHogIcons[icon]
     return (
         <li className={`bg-accent dark:bg-accent-dark rounded-lg p-4 sm:p-6 sm:pb-8  ${className}`}>
-            {Icon && <Icon className="w-10 h-10 mb-4 opacity-50" />}
+            {icon && <span className="inline-block w-10 h-10 mb-4 opacity-50">{icon}</span>}
             <FeatureTitle>{title}</FeatureTitle>
             <FeatureDescription>{description}</FeatureDescription>
         </li>
