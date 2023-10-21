@@ -37,6 +37,7 @@ import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
+import Install from '../Install'
 
 const product = {
     slug: 'session-replay',
@@ -497,7 +498,7 @@ export const ProductSessionReplay = () => {
                         Here are some ways you can fine tune how you implement {product.lowercase}.
                     </p>
 
-                    <ContentViewer sticky={false} scrollToTop={false} content={[...SessionReplay]} />
+                    <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...SessionReplay]} />
                 </section>
 
                 <section id="docs" className="mb-20">
