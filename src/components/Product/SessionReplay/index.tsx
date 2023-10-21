@@ -5,6 +5,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { IconRewindPlay, IconMinus, IconPlus, IconGraph, IconCheck, IconX } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
+import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -234,25 +235,22 @@ export const ProductSessionReplay = () => {
     `)
     return (
         <Layout>
-            <div className="max-w-7xl mx-auto px-5 py-20">
-                <div className="flex gap-1 justify-center items-center mb-2">
-                    <span className="w-5 h-5 text-yellow">
-                        <IconRewindPlay />
-                    </span>
-                    <span className="text-[15px] font-semibold text-opacity-60">Session replay</span>
-                </div>
-                <h1 className="text-6xl text-center">Watch visitors interact with your app</h1>
-                <p className="text-lg font-semibold text-center text-opacity-75">
-                    Session replay helps you <span className="text-red dark:text-yellow">diagnose issues</span> and{' '}
-                    <span className="text-red dark:text-yellow">understand user behavior</span> in your product or
-                    website.
-                </p>
-
-                <StaticImage
-                    src="../../../images/products/screenshot-session-replay.png"
-                    alt=""
-                    className="w-full max-w-[1330px] -mr-[60px]"
+            <div className="max-w-7xl mx-auto px-5 py-10 md:py-20">
+                <Hero
+                    icon={<IconRewindPlay />}
+                    product="Session replay"
+                    title="Watch visitors interact with your app"
+                    description='Session replay helps you <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
+                    website.'
                 />
+
+                <div className="-mr-[60px]">
+                    <StaticImage
+                        src="../../../images/products/screenshot-session-replay.png"
+                        alt=""
+                        className="w-full max-w-[1330px]"
+                    />
+                </div>
 
                 <section>
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4">
