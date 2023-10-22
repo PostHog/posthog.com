@@ -133,17 +133,38 @@ const questions = [
 
 const faqs = [
     {
-        question: 'How do I know what my volume is?',
-        children: "Here's teh answer",
-    },
-    {
-        question: 'Do I pay anything for stored recordings?',
-        children: 'answer',
-    },
-    {
-        question: 'Is there a free trial on the Unlimited (paid) plan?',
+        question: 'How do I know what my event volume is?',
         children:
-            '<p class="text-sm">We have a generous free tier on every paid plan so you can try out the features before paying any money (though you will need to enter your credit card info). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch.</a></p>',
+            "The easiest way is to sign up for the Free plan - no credit card required. You'll get an accurate volume projection after just a few days.",
+    },
+    {
+        question: 'Do I pay anything for stored events?',
+        children:
+            'No, you only pay the fee per captured event in a given month (i.e. you only pay when each event is first received). There are no additional costs or fees.',
+    },
+    {
+        question: 'How long do you retain event data?',
+        children:
+            'Data is guaranteed to be retained for 7 years on any paid plan and 1 year on a free plan. After 1 year, data may be moved into cold storage so queries may run more slowly.',
+    },
+    {
+        question: 'Is there a free trial on paid plans?',
+        children:
+            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
+    },
+    {
+        question: 'What currency are your prices in?',
+        children: 'All prices are in US Dollars (USD), excluding taxes.',
+    },
+    {
+        question: 'Do you offer a discount for non-profits?',
+        children:
+            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+    },
+    {
+        question: 'Are there any minimums or annual commitments?',
+        children:
+            'Nope. We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of an enterprise agreement.',
     },
 ]
 
@@ -683,7 +704,7 @@ export const ProductProductAnalytics = () => {
                     icon={<IconGraph />}
                     product={product.capitalized}
                     title="Product analytics with autocapture"
-                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/ab-testing'>A/B testing</a>, and <a href='/surveys'>surveys</a>."
+                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>Session Replay</a>, <a href='/feature-flags'>Feature Flags</a>, <a href='/ab-testing'>A/B Testing</a>, and <a href='/surveys'>Surveys</a>."
                 />
 
                 <div className="">

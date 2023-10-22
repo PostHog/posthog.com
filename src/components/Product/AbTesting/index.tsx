@@ -105,17 +105,28 @@ const questions = [
 
 const faqs = [
     {
-        question: 'How do I know what my volume is?',
-        children: "Here's teh answer",
-    },
-    {
-        question: 'Do I pay anything for stored recordings?',
-        children: 'answer',
-    },
-    {
-        question: 'Is there a free trial on the Unlimited (paid) plan?',
+        question: 'How do I know what my request volume is?',
         children:
-            '<p class="text-sm">We have a generous free tier on every paid plan so you can try out the features before paying any money (though you will need to enter your credit card info). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch.</a></p>',
+            "The easiest way is to sign up for the Free plan - no credit card required. You'll get an accurate volume projection after just a few days.",
+    },
+    {
+        question: 'Is there a free trial on paid plans?',
+        children:
+            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
+    },
+    {
+        question: 'What currency are your prices in?',
+        children: 'All prices are in US Dollars (USD), excluding taxes.',
+    },
+    {
+        question: 'Do you offer a discount for non-profits?',
+        children:
+            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+    },
+    {
+        question: 'Are there any minimums or annual commitments?',
+        children:
+            'Nope. We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of an enterprise agreement.',
     },
 ]
 
