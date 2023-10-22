@@ -18,6 +18,7 @@ import {
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
+import { TutorialCard } from 'components/Products/TutorialCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
@@ -516,6 +517,36 @@ export const ProductFeatureFlags = () => {
                         </p>
                     </section>
                 </div>
+
+                <section id="tutorials">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                    <p className="mt-0 text-opacity-75 text-center mb-12">
+                        Visit the <Link to="/tutorials">tutorials</Link> section for more.
+                    </p>
+
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                        <TutorialCard
+                            title="How to do a canary release with feature flags in PostHog"
+                            description="A canary release or canary deployment is the process of rolling out a new feature to a subset of users before releasing it to a larger group. Once satisfied with tests and analysis, the feature rolls out to a larger group (or everyone)."
+                            url="/tutorials/canary-release"
+                        />
+                        <TutorialCard
+                            title="How to evaluate and update feature flags with the PostHog API"
+                            description='Learn how to use the <code class="text-[13px]">decide</code> endpoint to evaluate your feature flags (both boolean and multivariate), get data about them, and update them.'
+                            url="/tutorials/api-feature-flags"
+                        />
+                        <TutorialCard
+                            title="How to bootstrap feature flags in React and Express"
+                            description="Bootstrapping feature flags make them available as soon as React and PostHog load on the client side. This enables use cases like routing to different pages on load, all feature flagged content being available on first load, and visual consistency."
+                            url="/tutorials/bootstrap-feature-flags-react"
+                        />
+                        <TutorialCard
+                            title="How to set up Angular feature flags"
+                            description="Learn you how to set up the tools PostHog provides by creating a basic Angular app, adding PostHog, and then using it to capture events and manage feature flags."
+                            url="/tutorials/angular-analytics"
+                        />
+                    </ul>
+                </section>
 
                 <section id="installation" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>

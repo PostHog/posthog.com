@@ -106,7 +106,7 @@ const subfeatures = [
 const questions = [
     {
         question: 'How likely are you to recommend this product to a friend?',
-        url: 'https://posthog-git-experiment-post-hog.vercel.app/tutorials/nps-survey',
+        url: '/tutorials/nps-survey',
     },
     {
         question: 'Would you like to be interviewed by our product team?',
@@ -500,8 +500,11 @@ export const ProductSurveys = () => {
                     </section>
                 </div>
 
-                <section id="tutorials" className="pt-48 -mt-48">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-6">Tutorials</h3>
+                <section id="tutorials">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                    <p className="mt-0 text-opacity-75 text-center mb-12">
+                        Visit the <Link to="/tutorials">tutorials</Link> section for more.
+                    </p>
 
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <TutorialCard

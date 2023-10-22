@@ -16,7 +16,7 @@ export const TutorialCard = ({ title, description, url }: TutorialCardProps): JS
     return (
         <li className="bg-accent dark:bg-accent-dark p-6 rounded flex flex-col items-start">
             <p className="text-lg font-bold m-0 leading-tight mb-1">{title}</p>
-            <p className="text-sm flex-1">{description}</p>
+            <p className="text-sm flex-1" dangerouslySetInnerHTML={{ __html: description }} />
             <CallToAction to={url} type="secondary" size="sm">
                 Read more
             </CallToAction>

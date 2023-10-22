@@ -7,6 +7,7 @@ import { MultivariateTesting } from 'components/ProductIcons'
 import { SplitTesting } from 'components/NotProductIcons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
+import { TutorialCard } from 'components/Products/TutorialCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
@@ -448,6 +449,36 @@ export const ProductAbTesting = () => {
                         </p>
                     </section>
                 </div>
+
+                <section id="tutorials">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                    <p className="mt-0 text-opacity-75 text-center mb-12">
+                        Visit the <Link to="/tutorials">tutorials</Link> section for more.
+                    </p>
+
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                        <TutorialCard
+                            title="Running experiments on new users"
+                            description="Optimizing the initial experience of new users is critical for turning them into existing users. Products have a limited amount of time and attention from new users before they leave and churn."
+                            url="/tutorials/new-user-experiments"
+                        />
+                        <TutorialCard
+                            title="How to set up A/B/n testing"
+                            description="A/B/n testing is like an A/B test where you compare multiple (n) variants instead of just two. It can be especially useful for small but impactful changes where many options are available like copy, styles, or pages."
+                            url="/tutorials/abn-testing"
+                        />
+                        <TutorialCard
+                            title="How to run holdout testing"
+                            description="Holdout testing is a type of A/B testing that measures the long term effects of product changes. In holdout testing, a small group of users is not shown your changes for a long period of time, typically weeks or months after your experiment ends."
+                            url="/tutorials/holdout-testing"
+                        />
+                        <TutorialCard
+                            title="How to do A/A testing"
+                            description="An A/A test is the same as an A/B test except both groups receive the same code or components. Teams run A/A tests to ensure their A/B test service, functionality, and implementation work as expected and provides accurate results."
+                            url="/tutorials/aa-testing"
+                        />
+                    </ul>
+                </section>
 
                 <section id="installation" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>

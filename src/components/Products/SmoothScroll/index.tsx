@@ -14,6 +14,7 @@ const menuItems: { label: string; id: string }[] = [
         label: 'PostHog vs...',
         id: 'posthog-vs',
     },
+    { label: 'Tutorials', id: 'tutorials' },
     { label: 'Installation', id: 'installation' },
     { label: 'Docs', id: 'docs' },
     { label: 'Meet the team', id: 'team' },
