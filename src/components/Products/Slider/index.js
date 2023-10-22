@@ -67,12 +67,18 @@ export default function Slider() {
         scrollIntoView(newActiveSlide)
     }
 
-    useEffect(() => {
+    const setSlideHeight = () => {
         if (containerRef) {
             containerRef.current.style.height = `${
                 document.getElementById(`home-slide-${activeSlide}`).querySelector('.slide').offsetHeight
             }px`
         }
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setSlideHeight()
+        }, 0)
     }, [activeSlide])
 
     return (

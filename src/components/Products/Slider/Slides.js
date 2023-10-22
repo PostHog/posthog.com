@@ -119,10 +119,10 @@ export const Funnels = () => {
             <h2 className="text-center text-4xl">Find drop-off across a series of actions</h2>
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
+                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" height={335} />
                 </div>
                 <div className="col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
+                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" height={335} />
                 </div>
             </div>
 
