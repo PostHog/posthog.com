@@ -784,7 +784,7 @@ export const ProductProductAnalytics = () => {
                     <StaticImage
                         src="./images/screenshot-product-analytics.png"
                         alt=""
-                        className="w-full max-w-[1361px]"
+                        className="w-full max-w-[1360px]"
                     />
                 </div>
 

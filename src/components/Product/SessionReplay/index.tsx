@@ -358,13 +358,11 @@ export const ProductSessionReplay = () => {
                     website.'
                 />
 
-                <div className="-mr-[20px] md:-mr-[60px]">
-                    <StaticImage
-                        src="../../../images/products/screenshot-session-replay.png"
-                        alt=""
-                        className="w-full max-w-[1330px]"
-                    />
-                </div>
+                <StaticImage
+                    src="../../../images/products/screenshot-session-replay.png"
+                    alt=""
+                    className="w-full max-w-[1360.5px]"
+                />
 
                 <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
