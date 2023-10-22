@@ -375,7 +375,7 @@ export const ProductFeatureFlags = () => {
                     <StaticImage src="./images/screenshot-feature-flags.png" alt="" className="w-full max-w-[1361px]" />
                 </div>
 
-                <section>
+                <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="cut failure rates by 90%"

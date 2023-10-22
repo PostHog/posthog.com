@@ -288,11 +288,9 @@ export const ProductAbTesting = () => {
                     description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
                 />
 
-                <div className="">
-                    <StaticImage src="./images/screenshot-ab-testing.png" alt="" className="w-full max-w-[1361px]" />
-                </div>
+                <StaticImage src="./images/screenshot-ab-testing.png" alt="" className="w-full max-w-[1361px]" />
 
-                <section className="md:-mt-20">
+                <section id="customers" className="-mt-20">
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="boosted engagement by 40%"
