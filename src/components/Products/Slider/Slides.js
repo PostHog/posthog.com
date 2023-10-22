@@ -61,6 +61,15 @@ const ImageContainer = ({ children, className = '' }) => {
     return <div className={`relative order-2 md:order-1 ${className}`}>{children}</div>
 }
 
+const Subfeature = ({ name, description }) => {
+    return (
+        <li>
+            <h4 className="mb-0 text-lg">{name}</h4>
+            <p className="text-sm mb-0">{description}</p>
+        </li>
+    )
+}
+
 const FeatureList = ({ features, className = '' }) => {
     return (
         <ul className={`list-none m-0 p-0 flex flex-col gap-4 md:gap-1 lg:gap-2 lg:mt-2 pt-2 pb-4 ${className}`}>
@@ -81,7 +90,7 @@ const FeatureList = ({ features, className = '' }) => {
     )
 }
 
-export const ProductAnalytics = () => {
+export const Funnels = () => {
     const features = [
         { title: 'Funnels', Icon: IconFunnels },
         { title: 'Graphs & trends', Icon: IconTrends },
@@ -90,74 +99,67 @@ export const ProductAnalytics = () => {
         { title: 'Lifecycle', Icon: IconLifecycle },
         { title: 'Retention', Icon: IconRetention },
     ]
+    const subfeatures = [
+        {
+            name: 'Filtering',
+            description:
+                'Set filters for individual steps – or the entire funnel – by user property, group or cohort, or event property',
+        },
+        {
+            name: 'Graph types',
+            description:
+                'Track user progression between steps, conversion time between each step, and how a funnel’s conversion rate changes over time',
+        },
+        {
+            name: 'Step ordering',
+            description:
+                'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
+        },
+        {
+            name: 'Granular controls',
+            description:
+                'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
+        },
+    ]
+
     return (
-        <div className="md:bg-[#1371FF] rounded-md md:text-white flex items-end h-full">
-            <div className="relative md:grid grid-cols-16 md:gap-8 w-full">
-                <ImageContainer className="md:pl-8 col-span-10">
-                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 md:-mb-2">
-                        <StaticImage
-                            loading="eager"
-                            alt="A funnel insight with 4 steps showing how many users dropped off during a sign-up flow"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className=":w-full md:max-w-[1029px] md:shadow-2xl md:-rotate-1"
-                            src="../../../../contents/images/products/product-analytics/product-analytics.png"
-                        />
-                    </div>
-                    <div className="absolute -bottom-2 right-0 md:hidden">
-                        <div>
-                            <StaticImage
-                                loading="eager"
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/product-analytics-hog.png"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="col-span-6">
-                    <Content>
-                        <Title title={'Product analytics'} />
-                        <FeatureList features={features} className="grid grid-cols-2 2xl:flex" />
-                        <CallToAction
-                            href="/product-analytics"
-                            type="custom"
-                            size="md"
-                            className="md:!w-auto !w-full"
-                            childClassName="!bg-[#1371FF]"
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute -bottom-2 right-0 hidden md:block">
-                        <div>
-                            <StaticImage
-                                loading="eager"
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/product-analytics-hog.png"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+            <h2 className="text-center text-4xl">Find drop-off across a series of actions</h2>
+            <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-5">
+                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
+                </div>
+                <div className="col-span-7">
+                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
+                </div>
             </div>
+
+            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+                {subfeatures.map((subfeature, index) => {
+                    return <Subfeature {...subfeature} key={index} />
+                })}
+            </ul>
         </div>
     )
 }
 
-export const SessionReplay = () => {
+export const Trends = () => {
     const features = [
         { title: 'Event timeline', Icon: IconClock },
         { title: 'Console logs', Icon: IconTerminal },
         { title: 'Network requests', Icon: IconPulse },
     ]
     return (
-        <div className="md:bg-[#F2AD46] rounded-md text-primary flex items-end h-full">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark h-full">
+            <h2 className="text-center">Find drop-off across a series of actions</h2>
+            <div className="grid grid-cols-12">
+                <div className="col-span-5">
+                    <StaticImage src="./images/funnel-basic.png" className="w-full" />
+                </div>
+                <div className="col-span-7">
+                    <StaticImage src="./images/funnel-grouped.png" className="w-full" />
+                </div>
+            </div>
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
                     <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 -mb-2">
@@ -185,7 +187,7 @@ export const SessionReplay = () => {
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content className="">
-                        <Title title={'Session replay'} />
+                        <Title title={'Trends'} />
                         <Description description="Watch users interacting with your app or website. Available for web and iOS." />
                         <p className="text-sm hidden xl:block opacity-60 pt-2 mb-1">(Android support coming soon.)</p>
                         <FeatureList features={features} className="grid md:grid-cols-2 lg:flex" />
@@ -213,11 +215,41 @@ export const SessionReplay = () => {
                     </div>
                 </ContentContainer>
             </div>
+            <ul className="grid grid-cols-4 gap-8">
+                <li>
+                    <h4>Filtering</h4>
+                    <p className="text-sm">
+                        Set filters for individual steps – or the entire funnel – by user property, group or cohort, or
+                        event property
+                    </p>
+                </li>
+                <li>
+                    <h4>Graph types</h4>
+                    <p className="text-sm">
+                        Track user progression between steps, conversion time between each step, and how a funnel’s
+                        conversion rate changes over time
+                    </p>
+                </li>
+                <li>
+                    <h4>Step ordering</h4>
+                    <p className="text-sm">
+                        Choose between a sequential series of steps, a strict order, or any order of steps that lead to
+                        conversion
+                    </p>
+                </li>
+                <li>
+                    <h4>Granular controls</h4>
+                    <p className="text-sm">
+                        Set conversion window limit, add exclusionary steps, set attribution type, and see the relative
+                        conversion rate between each step
+                    </p>
+                </li>
+            </ul>
         </div>
     )
 }
 
-export const FeatureFlags = () => {
+export const UserPaths = () => {
     const features = [
         { title: 'Multivariate flags', Icon: IconTestTube },
         { title: 'JSON payloads', Icon: IconBrackets },
@@ -259,7 +291,7 @@ export const FeatureFlags = () => {
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
-                        <Title title={'Feature flags'} />
+                        <Title title={'User paths'} />
                         <Subtitle className="text-[14px] md:text-[18px]" />
                         <Description description="Safely roll out features to select users or cohorts." />
                         <FeatureList features={features} className="" />
@@ -291,7 +323,7 @@ export const FeatureFlags = () => {
     )
 }
 
-export const ABTesting = () => {
+export const CorrelationAnalysis = () => {
     const features = [
         { title: 'Goals & secondary metrics', Icon: IconBadge },
         { title: 'Targeting & exclusion rules ', Icon: IconTarget },
@@ -336,7 +368,7 @@ export const ABTesting = () => {
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
-                        <Title title={'A/B testing'} />
+                        <Title title={'Correlation analysis'} />
                         <Description description={'Run tests with statistical significance.'} />
                         <FeatureList features={features} />
 
@@ -368,7 +400,7 @@ export const ABTesting = () => {
     )
 }
 
-export const Surveys = () => {
+export const Retention = () => {
     const features = [
         { title: 'Five question types (Multiple choice, text, rating, NPS, emoji reaction)', Icon: IconCheckbox },
         { title: 'User targeting', Icon: IconTarget },
@@ -393,7 +425,7 @@ export const Surveys = () => {
                 </ImageContainer>
                 <ContentContainer className="md:col-span-10 lg:col-span-8">
                     <Content>
-                        <Title title={'Surveys'} />
+                        <Title title={'Retention'} />
                         <Subtitle subtitle="Collect in-app feedback from your users" />
                         <FeatureList features={features} />
 
@@ -413,7 +445,7 @@ export const Surveys = () => {
     )
 }
 
-export const Cdp = () => {
+export const Stickiness = () => {
     const features = [
         { title: 'Sources', Icon: IconDownload },
         { title: 'Destinations', Icon: IconShare },
@@ -436,7 +468,7 @@ export const Cdp = () => {
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
-                        <Title title={'Customer data platform'} />
+                        <Title title={'Stickiness'} />
                         <Description description="60+ data connections available now. Full CDP coming soon." />
                         <FeatureList features={features} />
 
@@ -457,7 +489,7 @@ export const Cdp = () => {
     )
 }
 
-export const DataWarehouse = () => {
+export const Lifecycle = () => {
     return (
         <div className="md:bg-[#29DBBB] rounded-md text-primary flex items-end h-full">
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
@@ -486,7 +518,7 @@ export const DataWarehouse = () => {
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
-                        <Title title={'Data warehouse'} />
+                        <Title title={'Lifecycle'} />
                         <Subtitle subtitle="Full data warehouse product coming soon" />
                         <Description
                             description="Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API."
@@ -521,7 +553,7 @@ export const DataWarehouse = () => {
     )
 }
 
-export const Sql = () => {
+export const Dashboards = () => {
     const features = [
         { title: 'Breakdowns', Icon: IconColumns },
         { title: 'Filters', Icon: IconFilter },
@@ -545,7 +577,7 @@ export const Sql = () => {
                 </ImageContainer>
                 <ContentContainer className="md:col-span-7 lg:col-span-6">
                     <Content>
-                        <Title title={'SQL'} />
+                        <Title title={'Dashboards'} />
                         <Subtitle subtitle="Directly query data stored in PostHog via SQL." />
                         <FeatureList features={features} />
 
@@ -557,44 +589,6 @@ export const Sql = () => {
                             childClassName="!bg-[#D42F18]"
                         >
                             Explore
-                        </CallToAction>
-                    </Content>
-                </ContentContainer>
-            </div>
-        </div>
-    )
-}
-
-export const Api = () => {
-    return (
-        <div className="bg-[#EB9D2A] rounded-md flex items-end h-full">
-            <div className="relative grid grid-cols-16 gap-2 lg:gap-4 min-h-[300px] lg:min-h-[400px] w-full">
-                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="h-full">
-                        <StaticImage
-                            alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full h-full py-10"
-                            src="../../../../contents/images/products/api/coder-hog.png"
-                        />
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'API'} />
-                        <Subtitle subtitle="Build custom functionality or create bespoke views specific to your business needs." />
-
-                        <CallToAction
-                            href="/docs/api"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10"
-                            childClassName="!bg-[#EB9D2A] border-black !text-black group-hover:text-black
-                    "
-                        >
-                            Explore the API
                         </CallToAction>
                     </Content>
                 </ContentContainer>

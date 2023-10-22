@@ -1,7 +1,7 @@
 import { IconChevronDown } from '@posthog/icons'
 import React, { useEffect, useState } from 'react'
 import { slideButtons } from './slideButtons'
-import { ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Surveys, Cdp, DataWarehouse } from './Slides'
+import { Funnels, Trends, UserPaths, CorrelationAnalysis, Retention, Stickiness, Lifecycle, Dashboards } from './Slides'
 import { useInView } from 'react-intersection-observer'
 
 const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
@@ -35,7 +35,7 @@ const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
         </li>
     )
 }
-const slides = [ProductAnalytics, SessionReplay, FeatureFlags, ABTesting, Surveys, Cdp, DataWarehouse]
+const slides = [Funnels, Trends, UserPaths, CorrelationAnalysis, Retention, Stickiness, Lifecycle, Dashboards]
 
 const SlideContainer = ({ children, index, setActiveSlide }) => {
     const [viewRef, inView] = useInView({ threshold: 0.5 })
@@ -68,7 +68,7 @@ export default function Slider() {
     return (
         <div className="-mt-8 md:mt-0 hidden md:block">
             <div className="hidden md:block px-8 lg:px-[50px]">
-                <ul className="m-0 grid grid-cols-7 list-none max-w-full lg:max-w-7xl xl:mx-auto p-0">
+                <ul className="m-0 grid grid-cols-8 list-none max-w-full lg:max-w-7xl xl:mx-auto p-0">
                     {slideButtons.map((slide, index) => {
                         return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
                     })}

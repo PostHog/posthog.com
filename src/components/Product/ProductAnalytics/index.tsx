@@ -722,7 +722,7 @@ export const ProductProductAnalytics = () => {
 
             <SmoothScroll />
             <div id="features">
-                <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
+                <section className="mx-auto px-5 mb-10 md:mb-20">
                     <h3 className="text-3xl text-center mb-8">Features</h3>
 
                     <Slider />
