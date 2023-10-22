@@ -422,13 +422,14 @@ export const ProductFeatureFlags = () => {
             <section id="pricing" className="max-w-7xl mx-auto px-5 py-20">
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
+                        image=
+                        {<StaticImage src="../../../images/products/competitors-sr.png" className="max-w-[167px]" />}
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
                         <p className="">
                             Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
                             <br className="hidden lg:block" />
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
-
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
                             <strong>Note:</strong> Feature Flags and A/B Testing are currently packaged together and
                             share volume limits.
@@ -467,7 +468,15 @@ export const ProductFeatureFlags = () => {
                     <section className="mb-20">
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 grid md:grid-cols-2 gap-4">
-                            <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
+                            <VsCompetitor
+                                title="Reasons a competitor might be better for you (for now...)"
+                                image={
+                                    <StaticImage
+                                        src="../../../images/products/competitors-ff.png"
+                                        className="max-w-[176px]"
+                                    />
+                                }
+                            >
                                 <ul>
                                     <li>Flag scheduling</li>
                                     <li>Triggers and workflows to enable/disable flags on other events</li>

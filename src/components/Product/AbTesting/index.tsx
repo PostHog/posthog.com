@@ -383,7 +383,15 @@ export const ProductAbTesting = () => {
                     <section className="mb-20">
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 grid md:grid-cols-2 gap-4">
-                            <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
+                            <VsCompetitor
+                                title="Reasons a competitor might be better for you (for now...)"
+                                image={
+                                    <StaticImage
+                                        src="../../../images/products/competitors-ab.png"
+                                        className="max-w-[189px]"
+                                    />
+                                }
+                            >
                                 <ul>
                                     <li>
                                         No-code experiments or CMS capabilities
