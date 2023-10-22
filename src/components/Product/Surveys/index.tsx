@@ -14,6 +14,7 @@ import {
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
+import { TutorialCard } from 'components/Products/TutorialCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
@@ -497,6 +498,33 @@ export const ProductSurveys = () => {
                         </p>
                     </section>
                 </div>
+
+                <section id="tutorials">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Tutorials</h3>
+
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                        <TutorialCard
+                            title="How to run a fake door test"
+                            description='A fake door test is when you create a "fake" UI or experience for a product or feature you are thinking of building.'
+                            url="/tutorials/fake-door-test"
+                        />
+                        <TutorialCard
+                            title="Get feedback and book user interviews with surveys"
+                            description="PostHog's surveys help automate the process of getting feedback and booking interviews. In this tutorial, we show how to set up surveys to do both."
+                            url="/tutorials/feedback-interviews-site-apps"
+                        />
+                        <TutorialCard
+                            title="How to measure your NPS score in PostHog"
+                            description="Asking NPS asking users how likely they are to recommend your product or service, so you can gauge product-market fit."
+                            url="/tutorials/nps-survey"
+                        />
+                        <TutorialCard
+                            title="How to create custom surveys"
+                            description="Use the API to create a completely custom experience."
+                            url="/tutorials/survey"
+                        />
+                    </ul>
+                </section>
 
                 {/*
         <section id="installation" className="mb-20">

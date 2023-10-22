@@ -39,6 +39,7 @@ import { Question } from './components/Products/Question'
 import { Slider } from './components/Products/Slider'
 import { SmoothScroll } from './components/Products/SmoothScroll'
 import { Subfeature } from './components/Products/Subfeature'
+import { TutorialCard } from './components/Products/TutorialCard'
 import { Quote2 } from './components/Quote2'
 import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
@@ -88,6 +89,7 @@ export const shortcodes = {
     Slider,
     SmoothScroll,
     Subfeature,
+    TutorialCard,
     Quote2,
     Signatures,
     SlackPage,
