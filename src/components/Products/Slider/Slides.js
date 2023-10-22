@@ -442,7 +442,7 @@ export const HogQL = () => {
         {
             name: 'Aggregations',
             description:
-                '<code>count</code>, <code>min</code>, <code>max</code>, <code>sum</code>, <code>avg</code>, and about 90 more',
+                '<code class="text-[13px]">count</code>, <code class="text-[13px]">min</code>, <code class="text-[13px]">max</code>, <code class="text-[13px]">sum</code>, <code class="text-[13px]">avg</code>, and about 90 more',
         },
     ]
     return (
