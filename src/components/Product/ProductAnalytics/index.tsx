@@ -877,12 +877,23 @@ export const ProductProductAnalytics = () => {
                     <section className="mb-20">
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 grid md:grid-cols-2 gap-4">
-                            <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
+                            <VsCompetitor
+                                title="Reasons a competitor might be better for you (for now...)"
+                                image={
+                                    <StaticImage
+                                        src="../../../images/products/competitors-pa.png"
+                                        className="max-w-[171px]"
+                                    />
+                                }
+                            >
                                 <ul>
                                     <li>
                                         Time-based analysis for web analytics (e.g. time on page)
                                         <ul className="pl-6">
-                                            <li className="text-sm">(We're working on this!)</li>
+                                            <li className="text-sm">
+                                                (We're{' '}
+                                                <Link to="/handbook/small-teams/web-analytics">working on this</Link>!)
+                                            </li>
                                         </ul>
                                     </li>
                                     <li>Natural language processing for creating insights</li>

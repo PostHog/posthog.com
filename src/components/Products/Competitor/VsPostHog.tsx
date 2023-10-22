@@ -10,7 +10,7 @@ export const VsPostHog = ({ children }) => {
             <div className="shrink-0 basis-[145px] text-center">
                 <StaticImage src="../../../images/products/competitors-hog.png" className="max-w-[145px]" />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 mb-auto">
                 <h4 className="leading-tight flex items-end gap-2">
                     <span>Reasons to choose</span> <Logo className="w-32" />
                 </h4>
