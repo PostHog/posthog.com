@@ -34,6 +34,7 @@ import { FAQ } from './components/Products/FAQ'
 import { Feature } from './components/Products/Feature'
 import { PairsWith } from './components/Products/PairsWith'
 import { Question } from './components/Products/Question'
+import { Slider } from './components/Products/Slider'
 import { SmoothScroll } from './components/Products/SmoothScroll'
 import { Subfeature } from './components/Products/Subfeature'
 import { Quote2 } from './components/Quote2'
@@ -80,6 +81,7 @@ export const shortcodes = {
     Feature,
     PairsWith,
     Question,
+    Slider,
     SmoothScroll,
     Subfeature,
     Quote2,

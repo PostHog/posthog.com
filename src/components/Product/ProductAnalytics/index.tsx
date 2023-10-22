@@ -38,6 +38,7 @@ import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
+import Slider from 'components/Products/Slider'
 
 const product = {
     slug: 'product-analytics',
@@ -724,9 +725,7 @@ export const ProductProductAnalytics = () => {
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     <h3 className="text-3xl text-center mb-8">Features</h3>
 
-                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-lg p-10 text-center mb-6">
-                        @eli slider goes here
-                    </div>
+                    <Slider />
 
                     <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
                         {subfeatures.map((subfeature, index) => {
