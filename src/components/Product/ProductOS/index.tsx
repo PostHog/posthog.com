@@ -52,13 +52,15 @@ import { TextCard } from 'components/Products/TextCard'
 const ProductIcon = ({ name, url, color, icon }) => {
     return (
         <Tooltip content={name}>
-            <Link to={url} className={`inline-flex bg-${color}/10 text-${color} dark:text-${color} rounded p-2`}>
-                <span
-                    className={`w-6 h-6 text-${color} hover:text-${color} dark:text-${color} dark:hover:text-${color}`}
-                >
-                    {icon}
-                </span>
-            </Link>
+            <span className="relative">
+                <Link to={url} className={`inline-flex bg-${color}/10 text-${color} dark:text-${color} rounded p-2`}>
+                    <span
+                        className={`w-6 h-6 text-${color} hover:text-${color} dark:text-${color} dark:hover:text-${color}`}
+                    >
+                        {icon}
+                    </span>
+                </Link>
+            </span>
         </Tooltip>
     )
 }
