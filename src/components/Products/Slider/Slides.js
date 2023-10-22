@@ -64,7 +64,7 @@ const ImageContainer = ({ children, className = '' }) => {
 const Subfeature = ({ name, description }) => {
     return (
         <li>
-            <h4 className="mb-0 text-lg">{name}</h4>
+            <h4 className="mb-1 text-lg leading-tight">{name}</h4>
             <p className="text-sm mb-0" dangerouslySetInnerHTML={{ __html: description }} />
         </li>
     )
@@ -157,12 +157,36 @@ export const Trends = () => {
     return (
         <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
             <h2 className="text-center text-4xl">Trends</h2>
-            <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
+            <div className="overflow-x-auto flex gap-8">
+                <div>
+                    <StaticImage
+                        src="../../Product/ProductAnalytics/images/screenshot-trend-bar.png"
+                        className="h-96 shadow-xl"
+                    />
                 </div>
-                <div className="col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
+                <div>
+                    <StaticImage
+                        src="../../Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png"
+                        className="h-96 shadow-xl"
+                    />
+                </div>
+                <div>
+                    <StaticImage
+                        src="../../Product/ProductAnalytics/images/screenshot-trend-area.png"
+                        className="h-96 shadow-xl"
+                    />
+                </div>
+                <div>
+                    <StaticImage
+                        src="../../Product/ProductAnalytics/images/screenshot-trend-sparkline.png"
+                        className="h-96 shadow-xl"
+                    />
+                </div>
+                <div>
+                    <StaticImage
+                        src="../../Product/ProductAnalytics/images/screenshot-trend-map.png"
+                        className="h-96 shadow-xl"
+                    />
                 </div>
             </div>
 
@@ -178,35 +202,37 @@ export const Trends = () => {
 export const UserPaths = () => {
     const subfeatures = [
         {
-            name: 'Feature 1',
-            description: 'Description 1',
+            name: 'Step insights',
+            description: 'See who dropped off at each step, who did or didn’t complete a step, and the drop-off rate.',
         },
         {
-            name: 'Feature 2',
-            description: 'Description 2',
+            name: 'Wildcard groups',
+            description: 'Group similar steps into a mega-step (where any of a group of events can trigger a step).',
         },
         {
-            name: 'Feature 3',
-            description: 'Description 3',
+            name: 'Exclusion events',
+            description: 'Prevent specific events from appearing in a path.',
         },
         {
-            name: 'Feature 4',
-            description: 'Description 4',
+            name: 'Granular controls',
+            description: 'Visualize any sequence of page views, screen views or events, with up to 20 steps.',
         },
     ]
     return (
         <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
-            <h2 className="text-center text-4xl">User paths</h2>
-            <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
-                </div>
-                <div className="col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
-                </div>
+            <div className="text-center">
+                <h2 className="text-4xl mb-2">User paths</h2>
+                <p className="opacity-75 mb-2">
+                    Set start and end points to see how users navigate your product, website, or conversion funnel.
+                </p>
             </div>
 
-            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+            <StaticImage
+                src="../../Product/ProductAnalytics/images/screenshot-paths.png"
+                className="w-full shadow-xl"
+            />
+
+            <ul className="grid grid-cols-4 gap-8 list-none p-0 mt-4">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}
@@ -236,17 +262,22 @@ export const CorrelationAnalysis = () => {
     ]
     return (
         <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
-            <h2 className="text-center text-4xl">Correlation analysis</h2>
-            <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
-                </div>
-                <div className="col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
-                </div>
+            <div className="text-center">
+                <h2 className="text-4xl mb-2">Correlation analysis</h2>
+                <p className="opacity-75 mb-2 max-w-2xl mx-auto">
+                    When analyzing funnels, correlation analysis highlights significant events or properties that may be
+                    useful in determining how likely someone is to converting or churning.
+                </p>
             </div>
 
-            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+            <div className="!-mb-20">
+                <StaticImage
+                    src="../../Product/ProductAnalytics/images/screenshot-correlation-analysis.png"
+                    className="w-full"
+                />
+            </div>
+
+            <ul className="hidden grid grid-cols-3 xl:grid-cols-5 gap-8 list-none p-0">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}
@@ -256,37 +287,22 @@ export const CorrelationAnalysis = () => {
 }
 
 export const Retention = () => {
-    const subfeatures = [
-        {
-            name: 'Feature 1',
-            description: 'Description 1',
-        },
-        {
-            name: 'Feature 2',
-            description: 'Description 2',
-        },
-        {
-            name: 'Feature 3',
-            description: 'Description 3',
-        },
-        {
-            name: 'Feature 4',
-            description: 'Description 4',
-        },
-    ]
+    const subfeatures = []
     return (
         <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
-            <h2 className="text-center text-4xl">Retention</h2>
-            <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
-                </div>
-                <div className="col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
-                </div>
+            <div className="text-center">
+                <h2 className="text-4xl mb-2">Retention</h2>
+                <p className="opacity-75 mb-2 max-w-2xl mx-auto">
+                    See how many users return on subsequent days after first visiting your site or product.
+                </p>
             </div>
 
-            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+            <StaticImage
+                src="../../Product/ProductAnalytics/images/screenshot-retention.png"
+                className="w-full shadow-xl mb-4"
+            />
+
+            <ul className="hidden grid grid-cols-3 xl:grid-cols-5 gap-8 list-none p-0">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}
@@ -296,37 +312,22 @@ export const Retention = () => {
 }
 
 export const Stickiness = () => {
-    const subfeatures = [
-        {
-            name: 'Feature 1',
-            description: 'Description 1',
-        },
-        {
-            name: 'Feature 2',
-            description: 'Description 2',
-        },
-        {
-            name: 'Feature 3',
-            description: 'Description 3',
-        },
-        {
-            name: 'Feature 4',
-            description: 'Description 4',
-        },
-    ]
+    const subfeatures = []
     return (
         <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
-            <h2 className="text-center text-4xl">Stickiness</h2>
-            <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
-                </div>
-                <div className="col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
-                </div>
+            <div className="text-center">
+                <h2 className="text-4xl mb-2">Stickiness</h2>
+                <p className="opacity-75 mb-2 max-w-2xl mx-auto">
+                    Learn how many times users perform a specific event in a period of time.
+                </p>
             </div>
 
-            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+            <StaticImage
+                src="../../Product/ProductAnalytics/images/screenshot-stickiness.png"
+                className="w-full shadow-xl mb-4"
+            />
+
+            <ul className="hidden grid grid-cols-3 xl:grid-cols-5 gap-8 list-none p-0">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}
@@ -336,37 +337,23 @@ export const Stickiness = () => {
 }
 
 export const Lifecycle = () => {
-    const subfeatures = [
-        {
-            name: 'Feature 1',
-            description: 'Description 1',
-        },
-        {
-            name: 'Feature 2',
-            description: 'Description 2',
-        },
-        {
-            name: 'Feature 3',
-            description: 'Description 3',
-        },
-        {
-            name: 'Feature 4',
-            description: 'Description 4',
-        },
-    ]
+    const subfeatures = []
     return (
         <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
-            <h2 className="text-center text-4xl">Lifecycle</h2>
-            <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
-                </div>
-                <div className="col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
-                </div>
+            <div className="text-center">
+                <h2 className="text-4xl mb-2">Lifecycle</h2>
+                <p className="opacity-75 mb-2 max-w-2xl mx-auto">
+                    Discover how your active users break down, highlighting those who have recently stopped being active
+                    or those who have just become active for the first time.
+                </p>
             </div>
 
-            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+            <StaticImage
+                src="../../Product/ProductAnalytics/images/screenshot-lifecycle.png"
+                className="w-full shadow-xl mb-4"
+            />
+
+            <ul className="hidden grid grid-cols-3 xl:grid-cols-5 gap-8 list-none p-0">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}
@@ -378,35 +365,42 @@ export const Lifecycle = () => {
 export const Dashboards = () => {
     const subfeatures = [
         {
-            name: 'Feature 1',
-            description: 'Description 1',
+            name: 'Dashboard filtering',
+            description:
+                'Filter saved insights on a dashboard by anything - event properties, user properties, cohorts - even if a feature flag was active during a user’s session.',
         },
         {
-            name: 'Feature 2',
-            description: 'Description 2',
+            name: 'Embeddable dashboards with auto-refresh',
+            description:
+                'Embed a dashboard iframe and always have near-realtime data - great for showing KPIs on a TV.',
         },
         {
-            name: 'Feature 3',
-            description: 'Description 3',
+            name: 'Weekly updates by Slack or email',
+            description:
+                'Send dashboard updates to a Slack channel or to colleagues via email at any recurring frequency.',
         },
         {
-            name: 'Feature 4',
-            description: 'Description 4',
+            name: 'Access restrictions',
+            description: 'Limit dashboard access with role-based permissions or using private projects.',
+        },
+        {
+            name: 'Customizable layouts',
+            description: 'Configure how many insights appear per row or column.',
         },
     ]
     return (
         <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
-            <h2 className="text-center text-4xl">Dashboards</h2>
-            <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
-                </div>
-                <div className="col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
-                </div>
+            <div className="text-center">
+                <h2 className="text-4xl mb-2">Dashboards</h2>
+                <p className="opacity-75 mb-2">(They're exactly what they sound like.)</p>
             </div>
 
-            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+            <StaticImage
+                src="../../Product/ProductAnalytics/images/screenshot-dashboards.png"
+                className="w-full shadow-xl mb-4"
+            />
+
+            <ul className="grid grid-cols-3 xl:grid-cols-5 gap-8 list-none p-0">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}
