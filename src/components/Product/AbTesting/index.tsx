@@ -345,6 +345,10 @@ export const ProductAbTesting = () => {
                             <br className="hidden lg:block" />
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
+                        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
+                            <strong>Note:</strong> A/B Testing and Feature Flags are currently packaged together and
+                            share volume limits.
+                        </div>
                     </div>
                     <div className="md:w-96">
                         <StaticImage

@@ -10,43 +10,43 @@ const companies = {
     AmplitudeExperiment: {
         comparisonURL: '',
     },
-    Flagsmith: {
-        comparisonURL: '',
-    },
-    FullStory: {
-        comparisonURL: '/blog/posthog-vs-fullstory',
-    },
-    GrowthBook: {
-        comparisonURL: '',
+    Mixpanel: {
+        comparisonURL: '/blog/posthog-vs-mixpanel',
     },
     Heap: {
         comparisonURL: '/blog/posthog-vs-heap',
     },
+    FullStory: {
+        comparisonURL: '/blog/posthog-vs-fullstory',
+    },
     Hotjar: {
         comparisonURL: '/blog/posthog-vs-hotjar',
     },
-    LaunchDarkly: {
+    Optimizely: {
         comparisonURL: '',
     },
-    LogRocket: {
-        comparisonURL: '/blog/posthog-vs-logrocket',
-    },
-    Matomo: {
-        comparisonURL: '/blog/posthog-vs-matomo',
-    },
-    Mixpanel: {
-        comparisonURL: '/blog/posthog-vs-mixpanel',
-    },
-    Optimizely: {
+    LaunchDarkly: {
         comparisonURL: '',
     },
     Pendo: {
         comparisonURL: '/blog/posthog-vs-pendo',
     },
-    Sprig: {
-        comparisonURL: '',
+    Matomo: {
+        comparisonURL: '/blog/posthog-vs-matomo',
+    },
+    LogRocket: {
+        comparisonURL: '/blog/posthog-vs-logrocket',
     },
     VWO: {
+        comparisonURL: '',
+    },
+    Flagsmith: {
+        comparisonURL: '',
+    },
+    GrowthBook: {
+        comparisonURL: '',
+    },
+    Sprig: {
         comparisonURL: '',
     },
     PostHog: {
@@ -74,11 +74,11 @@ export default function Comparison({ comparison, columnCount }) {
                             <Logo className="w-32" />
                         </div>
                     ) : (
-                        <div key={company} className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2">
+                        <div key={company} className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 text-center">
                             <strong className="block">{company}</strong>
                             {comparisonURL && (
                                 <span className="block text-[12px] md:text-sm leading-tight">
-                                    <Link to={comparisonURL}>See full comparison</Link>
+                                    <Link to={comparisonURL}>Compare to PostHog</Link>
                                 </span>
                             )}
                         </div>
@@ -95,9 +95,9 @@ export default function Comparison({ comparison, columnCount }) {
                                 return (
                                     <div
                                         key={company}
-                                        className={`p-2 ${
+                                        className={`p-2 text-center flex justify-center ${
                                             company.toLowerCase() === 'posthog'
-                                                ? 'bg-white dark:bg-accent-dark !border-x-2 !border-l-blue !border-r-blue min-w-[200px] flex justify-center'
+                                                ? 'bg-white dark:bg-accent-dark !border-x-2 !border-l-blue !border-r-blue min-w-[200px]'
                                                 : ''
                                         }`}
                                     >
