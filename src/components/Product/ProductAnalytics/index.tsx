@@ -50,6 +50,7 @@ const product = {
 }
 
 const team = 'Product Analytics'
+const teamSlug = '/handbook/small-teams/product-analytics'
 
 const subfeaturesItemCount = 5
 const subfeatures = [
@@ -944,8 +945,8 @@ export const ProductProductAnalytics = () => {
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
-                        PostHog works in small teams. The {team} team are the folks responsible for building session
-                        replay.
+                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                        building {product.lowercase}.
                     </p>
                     <TeamMembers teamName={team} />
                 </section>
