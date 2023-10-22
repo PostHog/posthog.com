@@ -15,6 +15,7 @@ import {
 import { SQL } from 'components/ProductIcons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
+import { TutorialCard } from 'components/Products/TutorialCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
@@ -50,6 +51,7 @@ const product = {
 }
 
 const team = 'Product Analytics'
+const teamSlug = '/handbook/small-teams/product-analytics'
 
 const subfeaturesItemCount = 5
 const subfeatures = [
@@ -786,7 +788,7 @@ export const ProductProductAnalytics = () => {
                     />
                 </div>
 
-                <section>
+                <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="gathers 30% more data than with Google Analytics"
@@ -923,6 +925,48 @@ export const ProductProductAnalytics = () => {
                     </section>
                 </div>
 
+                <section id="tutorials">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                    <p className="mt-0 text-opacity-75 text-center mb-12">
+                        Visit the <Link to="/tutorials">tutorials</Link> section for more.
+                    </p>
+
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                        <TutorialCard
+                            title="How to calculate and lower churn rate"
+                            description="In this tutorial, we will calculate and visualize the churn rate then use PostHog’s features of session recordings, cohorts, and actions to lower it."
+                            url="/tutorials/churn-rate"
+                        />
+                        <TutorialCard
+                            title="How to filter and breakdown arrays with HogQL"
+                            description="Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. PostHog's HogQL expressions unlock the ability to make full use of them."
+                            url="/tutorials/array-filter-breakdown"
+                        />
+                        <TutorialCard
+                            title="Calculate bounce rate"
+                            description="Bounce rate is the percentage of users who leave your page immediately after visiting. It is a popular marketing metric showing the relevance and engagement of content for site visitors."
+                            url="/tutorials/bounce-rate"
+                        />
+                        <TutorialCard
+                            title="How to calculate DAU/MAU ratio"
+                            description="The ratio of daily active users over monthly active users shows what percentage of your users are active and use your product every day."
+                            url="/tutorials/dau-mau-ratio"
+                        />
+                        {/*
+                        <TutorialCard
+                            title="Set up customer-facing analytics using Posthog, Next.js, and Tremor"
+                            description="If you run a B2B2C product (like web hosting or a content platform), your users might want to know the usage metrics of their end users."
+                            url="/tutorials/customer-facing-analytics"
+                        />
+                        <TutorialCard
+                            title="Get insight and person info with the PostHog API"
+                            description="This tutorial uses <code>GET</code> requests to retrieve information on insights and persons from your project."
+                            url="/tutorials/api-get-insights-persons"
+                        />
+                        */}
+                    </ul>
+                </section>
+
                 <section id="installation" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
                     <p className="mt-0 opacity-50 text-center mb-12">
@@ -944,8 +988,8 @@ export const ProductProductAnalytics = () => {
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
-                        PostHog works in small teams. The {team} team are the folks responsible for building session
-                        replay.
+                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                        building {product.lowercase}.
                     </p>
                     <TeamMembers teamName={team} />
                 </section>

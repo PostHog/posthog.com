@@ -47,6 +47,7 @@ const product = {
 }
 
 const team = 'Feature Success'
+const teamSlug = '/handbook/small-teams/feature-success'
 
 const featuresPerRow = 3
 const features = [
@@ -105,7 +106,7 @@ const subfeatures = [
 const questions = [
     {
         question: 'How likely are you to recommend this product to a friend?',
-        url: 'https://posthog-git-experiment-post-hog.vercel.app/tutorials/nps-survey',
+        url: '/tutorials/nps-survey',
     },
     {
         question: 'Would you like to be interviewed by our product team?',
@@ -371,7 +372,7 @@ export const ProductSurveys = () => {
                 </div>
 
                 {/*
-                <section>
+                <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="improved conversion rates by 10-20%"
@@ -500,7 +501,10 @@ export const ProductSurveys = () => {
                 </div>
 
                 <section id="tutorials">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Tutorials</h3>
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                    <p className="mt-0 text-opacity-75 text-center mb-12">
+                        Visit the <Link to="/tutorials">tutorials</Link> section for more.
+                    </p>
 
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <TutorialCard
@@ -549,8 +553,8 @@ export const ProductSurveys = () => {
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
-                        PostHog works in small teams. The {team} team are the folks responsible for building session
-                        replay.
+                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                        building {product.lowercase}.
                     </p>
                     <TeamMembers teamName={team} />
                 </section>

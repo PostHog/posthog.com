@@ -6,10 +6,17 @@ import {
     IconAsterisk,
     IconBolt,
     IconBuilding,
+    IconCursor,
     IconEye,
     IconFlask,
     IconGraph,
+    IconMessage,
     IconPeople,
+    IconPerson,
+    IconPlus,
+    IconRevert,
+    IconRewindPlay,
+    IconServer,
     IconStack,
     IconToggle,
 } from '@posthog/icons'
@@ -39,6 +46,20 @@ import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
+import Tooltip from 'components/Tooltip'
+import { TextCard } from 'components/Products/TextCard'
+
+const ProductIcon = ({ name, url, color, icon }) => {
+    return (
+        <Tooltip content={name}>
+            <Link to={url} className={`inline-flex bg-${color}/10 text-${color} dark:text-${color} rounded p-2`}>
+                <span className="w-6 h-6 text-${color} hover:text-${color} dark:text-${color} dark:hover:text-${color}">
+                    {icon}
+                </span>
+            </Link>
+        </Tooltip>
+    )
+}
 
 const product = {
     slug: 'product-os',
@@ -375,18 +396,218 @@ export const ProductOS = () => {
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     {/*
-          <h3 className="text-3xl text-center mb-8">Features</h3>
-          <ul className={`list-none p-0 grid md:grid-cols-${featuresPerRow} gap-12 mb-8`}>
-            {features.map((feature, index) => {
-              return <Feature {...feature} key={index} />
-            })}
-          </ul>
-          */}
-
-                    <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
-                        {subfeatures.map((subfeature, index) => {
-                            return <Subfeature {...subfeature} key={index} />
+                    <h3 className="text-3xl text-center mb-8">Features</h3>
+                    <ul className={`list-none p-0 grid md:grid-cols-${featuresPerRow} gap-12 mb-8`}>
+                        {features.map((feature, index) => {
+                        return <Feature {...feature} key={index} />
                         })}
+                    </ul>
+                    */}
+
+                    <div className="mb-16">
+                        <h2 className="text-4xl text-center mb-8">
+                            A single <span className="text-red dark:text-yellow">home</span> for all product usage data
+                        </h2>
+                        <ul className={`list-none p-0 grid md:grid-cols-${subfeaturesItemCount} gap-4`}>
+                            {subfeatures.map((subfeature, index) => {
+                                return <Subfeature {...subfeature} key={index} />
+                            })}
+                        </ul>
+                    </div>
+
+                    <div className="flex flex-col-reverse items-center md:flex-row md:gap-8 mb-20">
+                        <div className="flex-1">
+                            <h2 className="text-4xl">
+                                A unified way to <span className="text-red dark:text-yellow">query</span> product usage
+                                data
+                            </h2>
+                            <p>
+                                We created <Link to="/docs/hogql">HogQL</Link>, a translation layer over ClickHouse SQL.
+                                (You can use most ClickHouse features in HogQL, including JOINs and subqueries.)
+                            </p>
+
+                            <p>
+                                Everything you see in PostHog relies on HogQL queries. If you aren't able to run a query
+                                in a PostHog UI, just enter HogQL mode to write the exact query you need.
+                            </p>
+
+                            <p>You can also query directly from our data warehouse (powered by ClickHouse).</p>
+                        </div>
+                        <aside className="shrink-0 basis-[500px]">
+                            <StaticImage src="./images/sql-hog.png" alt="" className="w-full max-w-[562px]" />
+                        </aside>
+                    </div>
+
+                    <div className="mb-20">
+                        <div className="flex gap-8 flex-col-reverse md:flex-row">
+                            <div className="flex-1">
+                                <h2 className="text-4xl">
+                                    One platform, <span className="text-red dark:text-yellow">loads of products</span>
+                                </h2>
+                                <p className="max-w-2xl">
+                                    PostHog offers 7+ products in one (and counting).{' '}
+                                    <strong>Use only what you want. But...</strong> if you want to try a new PostHog
+                                    product, there are benefits of using Product OS as your platform for all your
+                                    product data.
+                                </p>
+                            </div>
+                            <div className="shrink-0 flex gap-2">
+                                <ProductIcon
+                                    name="Product analytics"
+                                    url="/product-analytics"
+                                    color="blue"
+                                    icon={<IconGraph />}
+                                />
+                                <ProductIcon
+                                    name="Session replay"
+                                    url="/session-replay"
+                                    color="yellow"
+                                    icon={<IconRewindPlay />}
+                                />
+                                <ProductIcon
+                                    name="Feature flags"
+                                    url="/feature-flags"
+                                    color="seagreen"
+                                    icon={<IconToggle />}
+                                />
+                                <ProductIcon name="A/B testing" url="/ab-testing" color="purple" icon={<IconFlask />} />
+                                <ProductIcon name="CDP" url="/cdp" color="yellow" icon={<IconPerson />} />
+                                <ProductIcon
+                                    name="Data warehouse"
+                                    url="/data-warehouse"
+                                    color="seagreen"
+                                    icon={<IconServer />}
+                                />
+                                <ProductIcon name="Surveys" url="/surveys" color="salmon" icon={<IconMessage />} />
+                                <ProductIcon name="Browse apps" url="/apps" color="blue" icon={<IconPlus />} />
+                            </div>
+                        </div>
+                        <ul className={`list-none p-0 grid md:grid-cols-2 gap-8`}>
+                            <Subfeature
+                                title="Retroactive data with autocapture"
+                                description="If you’re running a web app with <a href='/docs/product-analytics/autocapture'>autocapture</a> enabled, some PostHog products can backfill historical data, meaning you can get value from a new product without waiting for data to trickle in."
+                                icon={<IconRevert />}
+                            />
+                            <Subfeature
+                                title="One-click setup with no new account provisioning"
+                                description="Trying a new PostHog product doesn't require new code to be deployed. You don't need to invite your team since they already have PostHog accounts."
+                                icon={<IconCursor />}
+                            />
+                        </ul>
+                    </div>
+                </section>
+
+                <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
+                    <div className="flex flex-col md:flex-row gap-8 items-center">
+                        <div>
+                            <h2 className="text-4xl mb-2">Site widgets</h2>
+                            <p className="max-w-2xl">
+                                Install the PostHog.js snippet on your website to get access to a growing library of
+                                mini-apps that can be injected into your website's front end.
+                            </p>
+
+                            <p>
+                                This includes utilities like downtime banners, pop-up survey widgets, geo-location
+                                notices, and more. (It even powers our own Surveys product.)
+                            </p>
+
+                            <p>
+                                Since you can toggle site apps on from within PostHog, deploying a new site app doesn't
+                                require a code deployment.
+                            </p>
+
+                            <p>
+                                This example uses Notification Bar to display a banner. It can be targeted to specific
+                                users or groups using feature flags.
+                            </p>
+                        </div>
+                        <div>
+                            <StaticImage src="./images/site-widget.png" alt="" className="w-full max-w-[780px]" />
+                        </div>
+                    </div>
+                </section>
+
+                <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
+                    <h2 className="text-4xl mb-2">API</h2>
+                    <p className="max-w-2xl">
+                        If your business has bespoke data visualization needs that aren't covered by a PostHog product,
+                        you can build your own interface with queries using the API and HogQL.
+                    </p>
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                        <TextCard
+                            title="Data transformations"
+                            description="Capture the live event stream and do something with it - like munge PII or add geolocation."
+                        />
+                        <TextCard
+                            title="Data out"
+                            description="Access data from dashboards or metrics from saved insights."
+                        />
+                        <TextCard
+                            title="Data augmentation"
+                            description="Augment event data coming into PostHog with more context and detail."
+                        />
+                        <TextCard
+                            title="Reverse ETL"
+                            description="Update and feed context to external products like Hubspot or Salesforce."
+                        />
+                        <TextCard
+                            title="Build apps or pipelines"
+                            description="Create your own interface that uses PostHog event and customer data."
+                        />
+                        <TextCard
+                            title="Marketing or product automation"
+                            description="Activate drip campaign or a push notification based on customer activity."
+                        />
+                        <TextCard
+                            title="Customized CDP"
+                            description="Create a singular customer view by combining event and customer data in one place."
+                        />
+                    </ul>
+                </section>
+
+                <section className="max-w-7xl mx-auto px-5">
+                    <div className="flex flex-col md:flex-row gap-8 items-center">
+                        <div>
+                            <h2 className="text-4xl mb-2">Toolbar</h2>
+                            <p className="max-w-2xl">
+                                If you use PostHog on a website or web app, the Product OS Toolbar can run on your site,
+                                letting you:
+                            </p>
+                            <ul>
+                                <li>Visually define events</li>
+                                <li>Toggle feature flags on or off</li>
+                                <li>See a click map showing what people are clicking</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <StaticImage src="./images/toolbar.png" alt="" className="w-full max-w-[614px]" />
+                        </div>
+                    </div>
+                </section>
+
+                <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
+                    <h2 className="text-4xl mb-2">But wait, there's more...</h2>
+                    <p>
+                        Here are a few more features of Product OS. For more details about how it works,{' '}
+                        <Link to="/docs">visit the docs</Link>.
+                    </p>
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                        <TextCard
+                            title="Autocapture"
+                            description="Add PostHog.js to your website or web app to track all event data and retroactively define events."
+                        />
+                        <TextCard
+                            title="Webhooks"
+                            description="Fire a hook (to any service that supports webhooks) when any product activity takes place - useful for getting event-related alerts in Slack or Teams."
+                        />
+                        <TextCard
+                            title="Warehouse sync"
+                            description="Sync data with Segment or Rudderstack – or use PostHog's built in warehouse."
+                        />
+                        <TextCard
+                            title="Reverse proxy"
+                            description="Send events to PostHog Cloud using your own domain."
+                        />
                     </ul>
                 </section>
 

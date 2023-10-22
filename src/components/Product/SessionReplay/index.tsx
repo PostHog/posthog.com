@@ -15,6 +15,7 @@ import {
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
+import { TutorialCard } from 'components/Products/TutorialCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
@@ -48,6 +49,7 @@ const product = {
 }
 
 const team = 'Monitoring'
+const teamSlug = '/handbook/small-teams/monitoring'
 
 const featuresPerRow = 3
 const features = [
@@ -364,7 +366,7 @@ export const ProductSessionReplay = () => {
                     />
                 </div>
 
-                <section>
+                <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="improved conversion rates by 10-20%"
@@ -516,6 +518,36 @@ export const ProductSessionReplay = () => {
                     </section>
                 </div>
 
+                <section id="tutorials">
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                    <p className="mt-0 text-opacity-75 text-center mb-12">
+                        Visit the <Link to="/tutorials">tutorials</Link> section for more.
+                    </p>
+
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                        <TutorialCard
+                            title="How to use session replays to get a deeper understanding of user behavior"
+                            description="In this tutorial, we focus on the connections session replays have with insights and visualizations. These connections enable deeper exploration and understanding of user behavior."
+                            url="/tutorials/explore-insights-session-recordings"
+                        />
+                        <TutorialCard
+                            title="How to use filters + session replays to understand user friction"
+                            description="We’ll explain how to use PostHog’s various filters and features to find relevant session replays quickly."
+                            url="/tutorials/filter-session-recordings"
+                        />
+                        <TutorialCard
+                            title="How to only record the sessions you want"
+                            description="As you scale, the number of recordings can go beyond what you need. Use PostHog’s configuration options to only record the sessions you want."
+                            url="/tutorials/limit-session-recordings"
+                        />
+                        <TutorialCard
+                            title="Improve web app performance using PostHog session replays"
+                            description="Learn the important metrics for measuring page load speed and how to identify opportunities to improve performance."
+                            url="/tutorials/performance-metrics"
+                        />
+                    </ul>
+                </section>
+
                 <section id="installation" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
                     <p className="mt-0 opacity-50 text-center mb-12">
@@ -537,8 +569,8 @@ export const ProductSessionReplay = () => {
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
-                        PostHog works in small teams. The {team} team are the folks responsible for building session
-                        replay.
+                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                        building {product.lowercase}.
                     </p>
                     <TeamMembers teamName={team} />
                 </section>

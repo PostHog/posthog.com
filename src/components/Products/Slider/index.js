@@ -99,8 +99,8 @@ export default function Slider() {
                     })}
                 </ul>
             </div>
-            <div className="flex items-center mx-auto">
-                <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center  lg:static">
+            <div className="flex items-start mx-auto">
+                <div className="mt-64 shrink-0 basis-[50px] hidden md:flex justify-center items-center lg:static">
                     <button
                         onClick={() => handleArrow(activeSlide - 1, slides.length - 1)}
                         className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-6"
@@ -118,7 +118,7 @@ export default function Slider() {
                         </SlideContainer>
                     ))}
                 </div>
-                <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center lg:static">
+                <div className="mt-64 shrink-0 basis-[50px] hidden md:flex justify-center items-center lg:static">
                     <button
                         onClick={() => handleArrow(activeSlide + 1, 0)}
                         className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-6 box-border"
