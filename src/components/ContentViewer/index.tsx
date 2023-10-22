@@ -130,7 +130,7 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
                 </div>
             </motion.div>
             {currentContent && (
-                <div className="article-content md:flex-1">
+                <div className="article-content md:flex-1 md:w-0">
                     <h1 className="mb-6 text-xl md:text-2xl">{currentContent.title}</h1>
                     {currentContent.video && (
                         <div className="mb-6 flex space-x-2">
