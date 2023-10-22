@@ -65,7 +65,7 @@ const Subfeature = ({ name, description }) => {
     return (
         <li>
             <h4 className="mb-0 text-lg">{name}</h4>
-            <p className="text-sm mb-0">{description}</p>
+            <p className="text-sm mb-0" dangerouslySetInnerHTML={{ __html: description }} />
         </li>
     )
 }
@@ -407,6 +407,51 @@ export const Dashboards = () => {
             </div>
 
             <ul className="grid grid-cols-4 gap-8 list-none p-0">
+                {subfeatures.map((subfeature, index) => {
+                    return <Subfeature {...subfeature} key={index} />
+                })}
+            </ul>
+        </div>
+    )
+}
+
+export const HogQL = () => {
+    const subfeatures = [
+        {
+            name: 'Breakdowns',
+            description: 'Group data by multiple columns',
+        },
+        {
+            name: 'Filters',
+            description:
+                'Use filters nearly everywhere data exists, like in dashboards, data series, breakdowns, funnels, and the event explorer',
+        },
+        {
+            name: 'Aggregations',
+            description:
+                '<code>count</code>, <code>min</code>, <code>max</code>, <code>sum</code>, <code>avg</code>, and about 90 more',
+        },
+    ]
+    return (
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+            <div className="text-center">
+                <h2 className="text-4xl mb-2">HogQL</h2>
+                <p className="opacity-75 mb-2">
+                    Directly query data stored in PostHog via our SQL transition layer, HogQL.
+                </p>
+                <CallToAction href="/docs/hogql" type="secondary">
+                    Explore the docs
+                </CallToAction>
+            </div>
+
+            <div className="overflow-hidden relative after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
+                <StaticImage
+                    src="../../Product/ProductAnalytics/images/screenshot-hogql.png"
+                    className="w-full shadow-xl"
+                />
+            </div>
+
+            <ul className="grid grid-cols-3 gap-8 list-none p-0">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}

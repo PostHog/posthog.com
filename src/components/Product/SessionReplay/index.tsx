@@ -351,7 +351,7 @@ export const ProductSessionReplay = () => {
                     color="yellow"
                     icon={<IconRewindPlay />}
                     product={product.capitalized}
-                    title="Watch visitors interact with your app"
+                    title="Watch how users <span class='text-red dark:text-yellow'>experience</span> your app"
                     description='Session Replay helps you <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
                     website.'
                 />

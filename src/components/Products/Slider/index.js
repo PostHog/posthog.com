@@ -1,7 +1,17 @@
 import { IconChevronDown } from '@posthog/icons'
 import React, { useEffect, useState } from 'react'
 import { slideButtons } from './slideButtons'
-import { Funnels, Trends, UserPaths, CorrelationAnalysis, Retention, Stickiness, Lifecycle, Dashboards } from './Slides'
+import {
+    Funnels,
+    Trends,
+    UserPaths,
+    CorrelationAnalysis,
+    Retention,
+    Stickiness,
+    Lifecycle,
+    Dashboards,
+    HogQL,
+} from './Slides'
 import { useInView } from 'react-intersection-observer'
 
 const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
@@ -35,7 +45,7 @@ const SlideButton = ({ title, Icon, color, activeSlide, index }) => {
         </li>
     )
 }
-const slides = [Funnels, Trends, UserPaths, CorrelationAnalysis, Retention, Stickiness, Lifecycle, Dashboards]
+const slides = [Funnels, Trends, UserPaths, CorrelationAnalysis, Retention, Stickiness, Lifecycle, Dashboards, HogQL]
 
 const SlideContainer = ({ children, index, setActiveSlide }) => {
     const [viewRef, inView] = useInView({ threshold: 0.5 })
@@ -67,14 +77,14 @@ export default function Slider() {
 
     return (
         <div className="-mt-8 md:mt-0 hidden md:block">
-            <div className="hidden md:block px-8 lg:px-[50px]">
-                <ul className="m-0 grid grid-cols-8 list-none max-w-full lg:max-w-7xl xl:mx-auto p-0">
+            <div className="hidden md:block px-8 lg:px-[50px] xl:px-4">
+                <ul className="m-0 grid grid-cols-9 list-none max-w-full lg:max-w-7xl xl:mx-auto xl:max-w-screen-2xl p-0">
                     {slideButtons.map((slide, index) => {
                         return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
                     })}
                 </ul>
             </div>
-            <div className="flex items-center max-w-screen-2xl mx-auto">
+            <div className="flex items-center mx-auto">
                 <div className="shrink-0 basis-[50px] hidden md:flex justify-center items-center  lg:static">
                     <button
                         onClick={() => handleArrow(activeSlide - 1, slides.length - 1)}
@@ -83,7 +93,7 @@ export default function Slider() {
                         <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark" />
                     </button>
                 </div>
-                <div className="flex-1 list-none max-w-full lg:max-w-7xl xl:max-w-7xl 2xl:max-w-7xl w-full mx-auto m-0 p-0 flex flex-nowrap snap-mandatory snap-x overflow-x-auto overflow-y-hidden">
+                <div className="flex-1 list-none max-w-full lg:max-w-7xl xl:max-w-screen-2xl 2xl:max-w-screen-2xl w-full mx-auto m-0 mb-12 p-0 flex flex-nowrap snap-mandatory snap-x overflow-x-auto overflow-y-hidden">
                     {slides.map((Slide, index) => (
                         <SlideContainer setActiveSlide={setActiveSlide} key={index} index={index}>
                             <Slide />

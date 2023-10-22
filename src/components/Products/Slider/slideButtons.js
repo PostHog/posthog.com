@@ -15,6 +15,7 @@ import {
     IconTerminal,
     IconToggle,
     IconUserPaths,
+    IconHogQL,
 } from '@posthog/icons'
 
 export const slideButtons = [
@@ -58,11 +59,9 @@ export const slideButtons = [
         Icon: IconDashboard,
         color: 'seagreen',
     },
-    /*
     {
-        title: 'API',
-        Icon: Terminal,
-        color: 'blue',
+        title: 'HogQL',
+        Icon: IconHogQL,
+        color: 'red',
     },
-    */
 ]
