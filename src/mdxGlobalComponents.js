@@ -32,6 +32,7 @@ import { CustomerCard } from './components/Products/CustomerCard'
 import { DocsLinks } from './components/Products/DocsLinks'
 import { FAQ } from './components/Products/FAQ'
 import { Feature } from './components/Products/Feature'
+import { Marquee } from './components/Products/Marquee'
 import { PairsWith } from './components/Products/PairsWith'
 import { Question } from './components/Products/Question'
 import { Slider } from './components/Products/Slider'
@@ -79,6 +80,7 @@ export const shortcodes = {
     DocsLinks,
     FAQ,
     Feature,
+    Marquee,
     PairsWith,
     Question,
     Slider,

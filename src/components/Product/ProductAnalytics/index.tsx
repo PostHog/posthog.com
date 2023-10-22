@@ -27,6 +27,7 @@ import TeamRoadmap from 'components/TeamRoadmap'
 import RecentChange from '../RecentChange'
 import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
+import { Marquee } from 'components/Products/Marquee'
 import CTA from 'components/Home/CTA'
 import Comparison from '../Comparison'
 import { PairsWith } from 'components/Products/PairsWith'
@@ -81,33 +82,28 @@ const subfeatures = [
 
 const questions = [
     {
-        question: 'How are my metrics changing over time?',
+        question: 'Where are people getting stuck in my flow?',
+        url: '/tutorials/funnels',
     },
     {
-        question: 'How does the usage of two feature compare?',
+        question: 'Where are users dropping off?',
+        url: '/tutorials/funnels#step-3-explore-user-paths-between-steps-in-the-funnel',
     },
     {
-        question: "How does last week's release affect engagement?",
+        question: 'How do I calculate new vs returning users?',
+        url: '/tutorials/track-new-returning-users',
     },
     {
-        question: 'What long-term patterns are we seeing?',
+        question: 'What’s my churn rate? / How can I lower my churn rate?',
+        url: '/tutorials/churn-rate',
     },
     {
-        question: 'Which cohorts can we find from usage patterns?',
+        question: 'What features have the highest churn?',
+        url: '/tutorials/churn-rate#lifecycle-charts',
     },
     {
-        question: 'How do event properties change over time?',
-    },
-    {
-        question: 'How do far are my users scrolling down my app?',
-        url: '/tutorials/scroll-depth',
-    },
-    {
-        question: 'How to I track performance marketing?',
-        url: '/tutorials/performance-marketing',
-    },
-    {
-        question: 'How do I track my ads?',
+        question: 'Which of my features increase user retention?',
+        url: '/tutorials/feature-retention',
     },
     {
         question: 'How do I track ad conversion?',
@@ -126,8 +122,82 @@ const questions = [
         url: '/tutorials/regex-basics',
     },
     {
+        question: 'How are my metrics changing over time?',
+    },
+    {
+        question: 'How does the usage of two feature compare?',
+    },
+    {
+        question: "How does last week's release affect engagement?",
+    },
+    {
+        question: 'Which step(s) have the highest friction or time to convert?',
+    },
+    {
+        question: 'What long-term patterns are we seeing?',
+    },
+    {
+        question: 'What are possible causes of success or failure?',
+        url: '/tutorials/funnels#step-2-evaluate-correlated-events',
+    },
+    {
+        question: 'Which cohorts can we find from usage patterns?',
+    },
+    {
+        question: 'How are changes improving my activation flow?',
+        url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
+    },
+    {
+        question: 'How do event properties change over time?',
+    },
+    {
+        question: 'How is seasonality affecting conversion?',
+    },
+    {
+        question: 'How do far are my users scrolling down my app?',
+        url: '/tutorials/scroll-depth',
+    },
+    {
+        question: 'How to I track performance marketing?',
+        url: '/tutorials/performance-marketing',
+    },
+    {
+        question: 'How are my ads converting to paying customers?',
+    },
+    {
+        question: 'Which parts of our product are people using?',
+    },
+    {
+        question: 'Where are users getting stuck?',
+    },
+    {
         question: 'How do I measure growth loops?',
         url: '/blog/growth-loops#measuring-your-growth-loop',
+    },
+    {
+        question: 'What events correlate to success in my product?',
+    },
+    {
+        question: 'What properties correlate to success in my product?',
+    },
+    {
+        question: 'What events mean users are less likely to complete a funnel?',
+        url: '/tutorials/funnels#step-2-evaluate-correlated-events',
+    },
+    {
+        question: 'What properties mean users are less likely to complete a funnel?',
+        url: '/tutorials/funnels#step-2-evaluate-correlated-events',
+    },
+    {
+        question: 'How many users return to use my product each day?',
+        url: '/tutorials/track-new-returning-users#calculating-returning-users',
+    },
+    {
+        question: 'How many users return to use my product each week?',
+        url: '/tutorials/track-new-returning-users',
+    },
+    {
+        question: 'What features do users come back to use?',
     },
 ]
 
@@ -756,22 +826,11 @@ export const ProductProductAnalytics = () => {
                 </section>
 
                 <section className="bg-accent dark:bg-accent-dark">
-                    <div className="max-w-7xl mx-auto px-5 py-20">
-                        <div className="md:grid md:grid-cols-12 md:gap-12">
-                            <div className="col-span-5">
-                                <h3 className="text-4xl md:text-5xl text-blue leading-tight">
-                                    Answer all of these questions (and more) with PostHog {product.capitalized}.
-                                </h3>
-                            </div>
-                            <div className="col-span-7 relative after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
-                                <ul className="list-none p-0">
-                                    {questions.map((question, index) => {
-                                        return <Question {...question} key={index} />
-                                    })}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <Marquee product={product.capitalized}>
+                        {questions.map((question, index) => {
+                            return <Question {...question} key={index} />
+                        })}
+                    </Marquee>
                 </section>
             </div>
             <section id="pricing" className="max-w-7xl mx-auto px-5 py-20">

@@ -18,6 +18,7 @@ import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
+import { Marquee } from 'components/Products/Marquee'
 import { graphql, useStaticQuery } from 'gatsby'
 import { PlanComparison } from 'components/Pricing/PlanComparison'
 import ContentViewer from 'components/ContentViewer'
@@ -97,49 +98,46 @@ const subfeatures = [
 ]
 
 const questions = [
-    {
-        question: 'Where do key events happen in my user’s sessions?',
-    },
+    { question: 'Where do key events happen in my user’s sessions?' },
     {
         question: "How do I understand my users' behavior in funnels?",
-        url: '#',
+        url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
     },
     {
         question: 'How do I understand my user journeys?',
-        url: '#',
+        url: '/tutorials/explore-insights-session-recordings#watching-journeys-from-user-paths',
     },
     {
         question: 'How can I understand what my power users are doing?',
-        url: '#',
+        url: '/tutorials/explore-insights-session-recordings#find-and-analyze-outliers-in-trend-graphs',
     },
+    { question: 'How do I figure out how to lower churn?', url: '/tutorials/churn-rate#session-recordings' },
+    { question: 'How do I improve my support experience?', url: '/tutorials/session-recordings-for-support' },
+    { question: 'How do I see where errors happen?', url: '/tutorials/session-recordings-for-support' },
+    { question: 'How do I get bug recreation steps easily?' },
     {
-        question: 'How do I figure out how to lower churn?',
-        url: '#',
+        question: 'Why are users dropping off in my funnel?',
+        url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
     },
+    { question: 'What’s making my users angry or frustrated?', url: '/tutorials/toolbar' },
+    { question: 'Which screens are loading slowly?', url: '/tutorials/performance-metrics' },
     {
-        question: 'What errors are being logged to the console?',
+        question: 'How can I improve customer support with screen recordings?',
+        url: '/tutorials/session-recordings-for-support',
     },
+    { question: 'How do I understand sources of friction in my app?', url: '/tutorials/filter-session-recordings' },
+    { question: 'What errors are being logged to the console?' },
+    { question: 'What warnings are being logged to the console?' },
     {
-        question: 'How does my user experience differ across regions?',
+        question: 'What is a user’s First Contentful Paint time',
+        url: '/tutorials/performance-metrics#1-first-contentful-paint',
     },
-    {
-        question: 'What is a user’s DOM interactive time?',
-        url: '#',
-    },
-    {
-        question: 'How fast does my app load?',
-    },
-    {
-        question: 'What is a user’s First Contentful Paint time?',
-        url: '#',
-    },
-    {
-        question: 'What is a user’s Page Loaded time?',
-        url: '#',
-    },
-    {
-        question: 'How does my user experience differ across devices?',
-    },
+    { question: 'What is a user’s Dom Interactive time', url: '/tutorials/performance-metrics#2-dom-interactive' },
+    { question: 'What is a user’s Page Loaded time', url: '/tutorials/performance-metrics#3-page-loaded' },
+    { question: 'How fast does my app load?' },
+    { question: 'How does my user experience differ across devices?' },
+    { question: 'How does my user experience differ across regions?' },
+    { question: 'How do I optimize site performance?', url: '/tutorials/performance-metrics#optimization-cheat-sheet' },
 ]
 
 const faqs = [
@@ -410,22 +408,11 @@ export const ProductSessionReplay = () => {
                 </section>
 
                 <section className="bg-accent dark:bg-accent-dark">
-                    <div className="max-w-7xl mx-auto px-5 py-20">
-                        <div className="md:grid md:grid-cols-12 md:gap-12">
-                            <div className="col-span-5">
-                                <h3 className="text-4xl md:text-5xl text-blue leading-tight">
-                                    Answer all of these questions (and more) with PostHog {product.capitalized}.
-                                </h3>
-                            </div>
-                            <div className="col-span-7 relative after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
-                                <ul className="list-none p-0">
-                                    {questions.map((question, index) => {
-                                        return <Question {...question} key={index} />
-                                    })}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <Marquee product={product.capitalized}>
+                        {questions.map((question, index) => {
+                            return <Question {...question} key={index} />
+                        })}
+                    </Marquee>
                 </section>
             </div>
             <section id="pricing" className="max-w-7xl mx-auto px-5 py-20">
