@@ -40,6 +40,7 @@ import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
 import Slider from 'components/Products/Slider'
+import MobileSlides from 'components/Products/MobileSlides'
 
 const product = {
     slug: 'product-analytics',
@@ -817,6 +818,7 @@ export const ProductProductAnalytics = () => {
                     <h3 className="text-3xl text-center mb-8">Features</h3>
 
                     <Slider />
+                    <MobileSlides />
 
                     <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
                         {subfeatures.map((subfeature, index) => {
