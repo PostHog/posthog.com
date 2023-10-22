@@ -873,7 +873,7 @@ export const ProductProductAnalytics = () => {
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
+                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} truncate />
                     </section>
 
                     <section className="mb-20">
