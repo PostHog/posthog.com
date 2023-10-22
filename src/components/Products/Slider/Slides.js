@@ -138,66 +138,70 @@ export const Funnels = () => {
 export const Trends = () => {
     const subfeatures = [
         {
-            name: 'Feature 1',
-            description: 'Description 1',
+            name: 'Trends',
+            description:
+                'Plot any event over time, such as a feature being used. You can even do math and multiple series.',
         },
         {
-            name: 'Feature 2',
-            description: 'Description 2',
+            name: 'Advanced filtering',
+            description:
+                'Apply however many filters you need to or breakdown by any event, user or group property with advanced logic.',
         },
         {
-            name: 'Feature 3',
-            description: 'Description 3',
+            name: 'Breakdown tables',
+            description: 'Break out your trends by any event property.',
         },
         {
-            name: 'Feature 4',
-            description: 'Description 4',
+            name: 'Sampling',
+            description: 'Speed up long running queries across large datasets in one click.',
         },
     ]
     return (
         <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
-            <h2 className="text-center text-4xl">Trends</h2>
-            <div className="overflow-x-auto flex gap-8">
-                <div className="flex-shrink-0 w-1/2">
+            <div className="text-center">
+                <h2 className="text-4xl">Visualize user data with graphs, tables, charts, maps, and more</h2>
+            </div>
+            <div className="overflow-x-auto flex gap-8 pb-4 -mx-8 px-8">
+                <div className="flex-shrink-0 w-2/3">
                     <StaticImage
                         objectPosition="left"
-                        height={384}
+                        height={420}
                         objectFit="cover"
                         src="../../Product/ProductAnalytics/images/screenshot-trend-bar.png"
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-1/2">
+                <div className="flex-shrink-0 w-2/3">
                     <StaticImage
                         objectPosition="left"
-                        height={384}
+                        height={420}
                         objectFit="cover"
                         src="../../Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png"
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-1/2">
+                <div className="flex-shrink-0 w-2/3">
                     <StaticImage
                         objectPosition="left"
-                        height={384}
+                        height={420}
                         objectFit="cover"
                         src="../../Product/ProductAnalytics/images/screenshot-trend-area.png"
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-1/2">
+                <div className="flex-shrink-0 w-2/3">
                     <StaticImage
                         objectPosition="left"
-                        height={384}
+                        height={420}
                         objectFit="cover"
                         src="../../Product/ProductAnalytics/images/screenshot-trend-sparkline.png"
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-1/2">
+                <div className="flex-shrink-0 w-2/3">
                     <StaticImage
                         objectPosition="left"
-                        height={384}
+                        height={420}
                         objectFit="cover"
                         src="../../Product/ProductAnalytics/images/screenshot-trend-map.png"
                         className="shadow-xl h-full"
