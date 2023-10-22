@@ -158,34 +158,49 @@ export const Trends = () => {
         <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
             <h2 className="text-center text-4xl">Trends</h2>
             <div className="overflow-x-auto flex gap-8">
-                <div>
+                <div className="flex-shrink-0 w-1/2">
                     <StaticImage
+                        objectPosition="left"
+                        height={384}
+                        objectFit="cover"
                         src="../../Product/ProductAnalytics/images/screenshot-trend-bar.png"
-                        className="h-96 shadow-xl"
+                        className="shadow-xl h-full"
                     />
                 </div>
-                <div>
+                <div className="flex-shrink-0 w-1/2">
                     <StaticImage
+                        objectPosition="left"
+                        height={384}
+                        objectFit="cover"
                         src="../../Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png"
-                        className="h-96 shadow-xl"
+                        className="shadow-xl h-full"
                     />
                 </div>
-                <div>
+                <div className="flex-shrink-0 w-1/2">
                     <StaticImage
+                        objectPosition="left"
+                        height={384}
+                        objectFit="cover"
                         src="../../Product/ProductAnalytics/images/screenshot-trend-area.png"
-                        className="h-96 shadow-xl"
+                        className="shadow-xl h-full"
                     />
                 </div>
-                <div>
+                <div className="flex-shrink-0 w-1/2">
                     <StaticImage
+                        objectPosition="left"
+                        height={384}
+                        objectFit="cover"
                         src="../../Product/ProductAnalytics/images/screenshot-trend-sparkline.png"
-                        className="h-96 shadow-xl"
+                        className="shadow-xl h-full"
                     />
                 </div>
-                <div>
+                <div className="flex-shrink-0 w-1/2">
                     <StaticImage
+                        objectPosition="left"
+                        height={384}
+                        objectFit="cover"
                         src="../../Product/ProductAnalytics/images/screenshot-trend-map.png"
-                        className="h-96 shadow-xl"
+                        className="shadow-xl h-full"
                     />
                 </div>
             </div>
