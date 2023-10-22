@@ -6,7 +6,7 @@ import {
     IconAsterisk,
     IconBolt,
     IconBuilding,
-    IconCursor,
+    IconCursorClick,
     IconEye,
     IconFlask,
     IconGraph,
@@ -491,7 +491,7 @@ export const ProductOS = () => {
                             <Subfeature
                                 title="One-click setup with no new account provisioning"
                                 description="Trying a new PostHog product doesn't require new code to be deployed. You don't need to invite your team since they already have PostHog accounts."
-                                icon={<IconCursor />}
+                                icon={<IconCursorClick />}
                             />
                         </ul>
                     </div>
