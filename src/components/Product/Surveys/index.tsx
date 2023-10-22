@@ -367,7 +367,7 @@ export const ProductSurveys = () => {
                     <StaticImage
                         src="../../../images/products/screenshot-surveys.png"
                         alt=""
-                        className="w-full max-w-[1330px]"
+                        className="w-full max-w-[1360px]"
                     />
                 </div>
 
