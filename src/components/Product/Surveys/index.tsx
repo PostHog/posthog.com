@@ -399,7 +399,7 @@ export const ProductSurveys = () => {
                 */}
             </div>
 
-            <SmoothScroll className="-mt-24" />
+            <SmoothScroll className="-mt-24" exclude={['Installation']} />
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
