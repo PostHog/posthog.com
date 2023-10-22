@@ -91,14 +91,6 @@ const FeatureList = ({ features, className = '' }) => {
 }
 
 export const Funnels = () => {
-    const features = [
-        { title: 'Funnels', Icon: IconFunnels },
-        { title: 'Graphs & trends', Icon: IconTrends },
-        { title: 'User paths', Icon: IconUserPaths },
-        { title: 'Stickiness', Icon: IconStickiness },
-        { title: 'Lifecycle', Icon: IconLifecycle },
-        { title: 'Retention', Icon: IconRetention },
-    ]
     const subfeatures = [
         {
             name: 'Filtering',
@@ -144,455 +136,281 @@ export const Funnels = () => {
 }
 
 export const Trends = () => {
-    const features = [
-        { title: 'Event timeline', Icon: IconClock },
-        { title: 'Console logs', Icon: IconTerminal },
-        { title: 'Network requests', Icon: IconPulse },
+    const subfeatures = [
+        {
+            name: 'Feature 1',
+            description: 'Description 1',
+        },
+        {
+            name: 'Feature 2',
+            description: 'Description 2',
+        },
+        {
+            name: 'Feature 3',
+            description: 'Description 3',
+        },
+        {
+            name: 'Feature 4',
+            description: 'Description 4',
+        },
     ]
     return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark h-full">
-            <h2 className="text-center">Find drop-off across a series of actions</h2>
-            <div className="grid grid-cols-12">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+            <h2 className="text-center text-4xl">Trends</h2>
+            <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full" />
+                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
                 </div>
                 <div className="col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full" />
+                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
                 </div>
             </div>
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="md:pt-4 mdlg:pt-0 mdlg:-mt-2 lg:-mt-2 xl:-mt-6 -mb-2">
-                        <StaticImage
-                            objectPosition="bottom"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full md:max-w-[1029px] md:shadow-2xl md:rotate-1"
-                            src="../../../../contents/images/products/session-replay/session-replay.png"
-                            alt="A session recording of a fake application called Hogflix"
-                        />
-                    </div>
-                    <div className="absolute bottom-0 right-1 md:hidden">
-                        <div>
-                            <StaticImage
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/session-recording-hog.png"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content className="">
-                        <Title title={'Trends'} />
-                        <Description description="Watch users interacting with your app or website. Available for web and iOS." />
-                        <p className="text-sm hidden xl:block opacity-60 pt-2 mb-1">(Android support coming soon.)</p>
-                        <FeatureList features={features} className="grid md:grid-cols-2 lg:flex" />
 
-                        <CallToAction
-                            href="/session-replay"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                            childClassName="!bg-[#F2AD46] border-black !text-black group-hover:text-black"
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute bottom-0 right-1 hidden md:block">
-                        <div>
-                            <StaticImage
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/session-recording-hog.png"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
-            </div>
-            <ul className="grid grid-cols-4 gap-8">
-                <li>
-                    <h4>Filtering</h4>
-                    <p className="text-sm">
-                        Set filters for individual steps – or the entire funnel – by user property, group or cohort, or
-                        event property
-                    </p>
-                </li>
-                <li>
-                    <h4>Graph types</h4>
-                    <p className="text-sm">
-                        Track user progression between steps, conversion time between each step, and how a funnel’s
-                        conversion rate changes over time
-                    </p>
-                </li>
-                <li>
-                    <h4>Step ordering</h4>
-                    <p className="text-sm">
-                        Choose between a sequential series of steps, a strict order, or any order of steps that lead to
-                        conversion
-                    </p>
-                </li>
-                <li>
-                    <h4>Granular controls</h4>
-                    <p className="text-sm">
-                        Set conversion window limit, add exclusionary steps, set attribution type, and see the relative
-                        conversion rate between each step
-                    </p>
-                </li>
+            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+                {subfeatures.map((subfeature, index) => {
+                    return <Subfeature {...subfeature} key={index} />
+                })}
             </ul>
         </div>
     )
 }
 
 export const UserPaths = () => {
-    const features = [
-        { title: 'Multivariate flags', Icon: IconTestTube },
-        { title: 'JSON payloads', Icon: IconBrackets },
-        { title: 'Instant rollbacks', Icon: IconRewind },
+    const subfeatures = [
+        {
+            name: 'Feature 1',
+            description: 'Description 1',
+        },
+        {
+            name: 'Feature 2',
+            description: 'Description 2',
+        },
+        {
+            name: 'Feature 3',
+            description: 'Description 3',
+        },
+        {
+            name: 'Feature 4',
+            description: 'Description 4',
+        },
     ]
     return (
-        <div className=" md:bg-[#29DBBB] rounded-md text-primary flex items-end h-full">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
-                    <div className="absolute right-0 -top-2 lg:top-4 xl:right-10 w-5/6 mdlg:w-3/4 lg:w-3/5 z-10">
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            className="w-full -rotate-1 shadow-2xl"
-                            src="./images/feature-flags-1.png"
-                            alt="A code snippet to check if the feature flag 'nav' is enabled"
-                        />
-                    </div>
-                    <div className="absolute left-8 bottom-1 xl:left-16 lg:bottom-4 xl:-bottom-4 w-5/6 mdlg:w-3/4 lg:w-3/5">
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            className="w-full rotate-1 shadow-2xl"
-                            src="./images/feature-flags-2.png"
-                            alt="A filter for rolling out a feature flag to 50% of organizations in a cohort"
-                        />
-                    </div>
-                    <div className="absolute bottom-0 right-0 md:hidden z-10">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/feature-flags-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'User paths'} />
-                        <Subtitle className="text-[14px] md:text-[18px]" />
-                        <Description description="Safely roll out features to select users or cohorts." />
-                        <FeatureList features={features} className="" />
-
-                        <CallToAction
-                            href="/feature-flags"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                            childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black"
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute bottom-0 right-0 md:block hidden">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                                src="./images/feature-flags-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+            <h2 className="text-center text-4xl">User paths</h2>
+            <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-5">
+                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
+                </div>
+                <div className="col-span-7">
+                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
+                </div>
             </div>
+
+            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+                {subfeatures.map((subfeature, index) => {
+                    return <Subfeature {...subfeature} key={index} />
+                })}
+            </ul>
         </div>
     )
 }
 
 export const CorrelationAnalysis = () => {
-    const features = [
-        { title: 'Goals & secondary metrics', Icon: IconBadge },
-        { title: 'Targeting & exclusion rules ', Icon: IconTarget },
-        { title: 'Dynamic cohort support', Icon: IconPeople },
+    const subfeatures = [
+        {
+            name: 'Feature 1',
+            description: 'Description 1',
+        },
+        {
+            name: 'Feature 2',
+            description: 'Description 2',
+        },
+        {
+            name: 'Feature 3',
+            description: 'Description 3',
+        },
+        {
+            name: 'Feature 4',
+            description: 'Description 4',
+        },
     ]
-
     return (
-        <div className="md:bg-[#9C19BD] rounded-md text-white flex items-end h-full">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px] ">
-                    <div className="absolute left-2 top-5 w-[150%] md:w-3/4">
-                        <StaticImage
-                            alt="A graph depicting an increasing trend line showing improvement in an experiment over time"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full rotate-1 shadow-2xl"
-                            src="./images/ab-testing-2.png"
-                        />
-                    </div>
-                    <div className="absolute right-0 -top-2 w-[100%] md:w-3/4">
-                        <StaticImage
-                            alt="A slider set at 20% showing how long an experiment will need to be run in order to get the specified improvement"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full -rotate-1 shadow-2xl"
-                            src="./images/ab-testing-1.png"
-                        />
-                    </div>
-                    <div className="absolute bottom-0 right-0 md:hidden">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
-                                src="./images/experiment-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'Correlation analysis'} />
-                        <Description description={'Run tests with statistical significance.'} />
-                        <FeatureList features={features} />
-
-                        <CallToAction
-                            href="/ab-testing"
-                            type="custom"
-                            size="md"
-                            className="md:!w-auto !w-full"
-                            childClassName="!bg-[#9C19BD]
-                    "
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute bottom-0 right-0 hidden md:block">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
-                                src="./images/experiment-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+            <h2 className="text-center text-4xl">Correlation analysis</h2>
+            <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-5">
+                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
+                </div>
+                <div className="col-span-7">
+                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
+                </div>
             </div>
+
+            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+                {subfeatures.map((subfeature, index) => {
+                    return <Subfeature {...subfeature} key={index} />
+                })}
+            </ul>
         </div>
     )
 }
 
 export const Retention = () => {
-    const features = [
-        { title: 'Five question types (Multiple choice, text, rating, NPS, emoji reaction)', Icon: IconCheckbox },
-        { title: 'User targeting', Icon: IconTarget },
-        { title: 'Customize the on-page popup', Icon: IconPalette },
-        { title: 'No-code or API', Icon: IconMagicWand },
+    const subfeatures = [
+        {
+            name: 'Feature 1',
+            description: 'Description 1',
+        },
+        {
+            name: 'Feature 2',
+            description: 'Description 2',
+        },
+        {
+            name: 'Feature 3',
+            description: 'Description 3',
+        },
+        {
+            name: 'Feature 4',
+            description: 'Description 4',
+        },
     ]
-
     return (
-        <div className="md:bg-[#D42F18] rounded-md text-white flex items-end h-full">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="pl-8 md:col-span-6 lg:col-span-8 sm:min-h-[300px] lg:min-h-[400px]">
-                    <div className="h-full">
-                        <StaticImage
-                            alt="A hog analyzing NPS results"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full h-full py-4 md:py-10 max-h-96"
-                            src="../../Product/surveys/images/survey-hog.png"
-                        />
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-10 lg:col-span-8">
-                    <Content>
-                        <Title title={'Retention'} />
-                        <Subtitle subtitle="Collect in-app feedback from your users" />
-                        <FeatureList features={features} />
-
-                        <CallToAction
-                            href="/surveys"
-                            type="custom"
-                            size="md"
-                            className="md:!w-auto !w-full"
-                            childClassName="!bg-[#D42F18]"
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                </ContentContainer>
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+            <h2 className="text-center text-4xl">Retention</h2>
+            <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-5">
+                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
+                </div>
+                <div className="col-span-7">
+                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
+                </div>
             </div>
+
+            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+                {subfeatures.map((subfeature, index) => {
+                    return <Subfeature {...subfeature} key={index} />
+                })}
+            </ul>
         </div>
     )
 }
 
 export const Stickiness = () => {
-    const features = [
-        { title: 'Sources', Icon: IconDownload },
-        { title: 'Destinations', Icon: IconShare },
-        { title: 'Transformations', Icon: IconGear },
+    const subfeatures = [
+        {
+            name: 'Feature 1',
+            description: 'Description 1',
+        },
+        {
+            name: 'Feature 2',
+            description: 'Description 2',
+        },
+        {
+            name: 'Feature 3',
+            description: 'Description 3',
+        },
+        {
+            name: 'Feature 4',
+            description: 'Description 4',
+        },
     ]
     return (
-        <div className="md:bg-[#FCC779] rounded-md text-primary flex items-end h-full">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="flex items-center pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
-                    <div className="h-full">
-                        <StaticImage
-                            alt="A hedgehog standing in front of a leaky pipe of data"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full h-full"
-                            src="../../../../contents/images/products/cdp/pipeline-hog.png"
-                        />
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'Stickiness'} />
-                        <Description description="60+ data connections available now. Full CDP coming soon." />
-                        <FeatureList features={features} />
-
-                        <CallToAction
-                            href="/cdp"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                            childClassName="!bg-[#FCC779] border-black !text-black group-hover:text-black
-                    "
-                        >
-                            Browse connections
-                        </CallToAction>
-                    </Content>
-                </ContentContainer>
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+            <h2 className="text-center text-4xl">Stickiness</h2>
+            <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-5">
+                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
+                </div>
+                <div className="col-span-7">
+                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
+                </div>
             </div>
+
+            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+                {subfeatures.map((subfeature, index) => {
+                    return <Subfeature {...subfeature} key={index} />
+                })}
+            </ul>
         </div>
     )
 }
 
 export const Lifecycle = () => {
+    const subfeatures = [
+        {
+            name: 'Feature 1',
+            description: 'Description 1',
+        },
+        {
+            name: 'Feature 2',
+            description: 'Description 2',
+        },
+        {
+            name: 'Feature 3',
+            description: 'Description 3',
+        },
+        {
+            name: 'Feature 4',
+            description: 'Description 4',
+        },
+    ]
     return (
-        <div className="md:bg-[#29DBBB] rounded-md text-primary flex items-end h-full">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="md:pl-8 md:col-span-9 lg:col-span-10">
-                    <div className="h-full">
-                        <StaticImage
-                            alt="An artist's depiction of a data warehouse"
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full h-full py-10 max-h-96"
-                            src="../../../../contents/images/products/data-warehouse/data-warehouse.png"
-                        />
-                    </div>
-                    <div className="absolute bottom-0 right-4 md:hidden">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
-                                src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'Lifecycle'} />
-                        <Subtitle subtitle="Full data warehouse product coming soon" />
-                        <Description
-                            description="Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API."
-                            className="!text-sm pb-4"
-                        />
-
-                        <CallToAction
-                            href="/docs/data-warehouse"
-                            type="custom"
-                            size="md"
-                            className="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
-                            childClassName="!bg-[#29DBBB] border-black !text-black group-hover:text-black
-                    "
-                        >
-                            Learn more
-                        </CallToAction>
-                    </Content>
-                    <div className="absolute bottom-0 right-4 md:block hidden">
-                        <div>
-                            <StaticImage
-                                alt=""
-                                placeholder="none"
-                                quality={100}
-                                className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
-                                src="../../../../contents/images/products/data-warehouse/warehouse-hog.png"
-                            />
-                        </div>
-                    </div>
-                </ContentContainer>
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+            <h2 className="text-center text-4xl">Lifecycle</h2>
+            <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-5">
+                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
+                </div>
+                <div className="col-span-7">
+                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
+                </div>
             </div>
+
+            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+                {subfeatures.map((subfeature, index) => {
+                    return <Subfeature {...subfeature} key={index} />
+                })}
+            </ul>
         </div>
     )
 }
 
 export const Dashboards = () => {
-    const features = [
-        { title: 'Breakdowns', Icon: IconColumns },
-        { title: 'Filters', Icon: IconFilter },
-        { title: 'Aggregations', Icon: IconGridMasonry },
+    const subfeatures = [
+        {
+            name: 'Feature 1',
+            description: 'Description 1',
+        },
+        {
+            name: 'Feature 2',
+            description: 'Description 2',
+        },
+        {
+            name: 'Feature 3',
+            description: 'Description 3',
+        },
+        {
+            name: 'Feature 4',
+            description: 'Description 4',
+        },
     ]
-
     return (
-        <div className="md:bg-[#D42F18] rounded-md text-white flex items-end h-full">
-            <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
-                <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10 min-h-[300px] lg:min-h-[400px]">
-                    <div className="h-full">
-                        <StaticImage
-                            alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
-                            placeholder="none"
-                            quality={100}
-                            objectFit="contain"
-                            className="w-full h-full py-10 max-h-96"
-                            src="../../../../contents/images/products/sql/sql-hog.png"
-                        />
-                    </div>
-                </ImageContainer>
-                <ContentContainer className="md:col-span-7 lg:col-span-6">
-                    <Content>
-                        <Title title={'Dashboards'} />
-                        <Subtitle subtitle="Directly query data stored in PostHog via SQL." />
-                        <FeatureList features={features} />
-
-                        <CallToAction
-                            href="/docs/hogql"
-                            type="custom"
-                            size="md"
-                            className="md:!w-auto !w-full"
-                            childClassName="!bg-[#D42F18]"
-                        >
-                            Explore
-                        </CallToAction>
-                    </Content>
-                </ContentContainer>
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+            <h2 className="text-center text-4xl">Dashboards</h2>
+            <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-5">
+                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" />
+                </div>
+                <div className="col-span-7">
+                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" />
+                </div>
             </div>
+
+            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+                {subfeatures.map((subfeature, index) => {
+                    return <Subfeature {...subfeature} key={index} />
+                })}
+            </ul>
         </div>
     )
 }
