@@ -326,7 +326,7 @@ const PairsWithArray = [
 ]
 
 export const ProductSurveys = () => {
-    const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
+    const { purplewave } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -341,16 +341,7 @@ export const ProductSurveys = () => {
             }
         }
         {
-            contra: mdx(slug: { eq: "customers/contra" }) {
-                ...ProductCustomerFragment
-            }
-            hasura: mdx(slug: { eq: "customers/hasura" }) {
-                ...ProductCustomerFragment
-            }
-            netdata: mdx(slug: { eq: "customers/netdata" }) {
-                ...ProductCustomerFragment
-            }
-            pry: mdx(slug: { eq: "customers/pry" }) {
+            purplewave: mdx(slug: { eq: "customers/purplewave" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -379,33 +370,15 @@ export const ProductSurveys = () => {
                         placeholder="none"
                     />
                 </div>
-
-                {/*
                 <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                    <ul className="list-none p-0 grid md:grid-cols-1 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="improved conversion rates by 10-20%"
-                            quote="We wouldn't have noticed that needed fixing without PostHog's session replays."
-                            customer={hasura}
-                        />
-                        <CustomerCard
-                            outcome="increased registrations by 30%"
-                            quote="From [funnels], we could easily jump to session replays to see the drop-off point."
-                            customer={contra}
-                        />
-                        <CustomerCard
-                            outcome="reduced back-and-forth in community support"
-                            quote="Session replay is... an essential tool for Netdata."
-                            customer={netdata}
-                        />
-                        <CustomerCard
-                            outcome="improved registrations by 20-30%"
-                            quote="Even Pry's support team... uses replays to understand how... bug occurred."
-                            customer={pry}
+                            outcome="reached a 25% response rate with surveys"
+                            quote="I hate having to switch software. With PostHog, all our data and survey responses were centralized in one platform."
+                            customer={purplewave}
                         />
                     </ul>
                 </section>
-                */}
             </div>
 
             <SmoothScroll exclude={['Installation']} />
