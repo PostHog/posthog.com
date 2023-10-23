@@ -58,6 +58,7 @@ const internalProductNames: {
     'session-replay': 'session_replay',
     'feature-flags': 'feature_flags',
     'ab-testing': 'ab_testing',
+    surveys: 'surveys',
 }
 
 const pricingGroupsToShowOverride: {

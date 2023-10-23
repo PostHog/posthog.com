@@ -1,7 +1,7 @@
 import CodeBlock from 'components/Home/CodeBlock'
 import React from 'react'
 import Link from 'components/Link'
-import { LightBulb } from '@posthog/icons'
+import { IconLightBulb } from '@posthog/icons'
 
 function TrackEvent() {
     return (
@@ -47,7 +47,7 @@ function TrackEvent() {
             </div>
             <div className="flex gap-1 pt-4">
                 <span className="w-12 h-12 md:h-6 md:w-6">
-                    <LightBulb />
+                    <IconLightBulb />
                 </span>
                 <p className="opacity-75">
                     You can also use <Link to="/docs/product-analytics/autocapture">autocapture</Link> to retroactively

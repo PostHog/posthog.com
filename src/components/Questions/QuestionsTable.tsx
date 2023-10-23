@@ -2,14 +2,12 @@ import React, { useEffect } from 'react'
 
 import Link from 'components/Link'
 import { QuestionData, StrapiResult } from 'lib/strapi'
-import { Check2 } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
 import Markdown from 'components/Squeak/components/Markdown'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { Close, Pin } from 'components/NotProductIcons'
 import { useInView } from 'react-intersection-observer'
-import { Clock } from '@posthog/icons'
+import { IconCheckCircle, IconClock, IconPin, IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 dayjs.extend(relativeTime)
 
@@ -79,17 +77,17 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
             >
                 <div className="grid grid-cols-12 items-center w-full">
                     <div className="col-span-12 md:col-span-7 2xl:col-span-8 flex items-center space-x-4">
-                        <div className="w-4 flex-shrink-0">
+                        <div className="w-5 flex-shrink-0">
                             {pinned ? (
                                 <Tooltip content="Pinned">
                                     <span className="relative text-primary/60 dark:text-primary-dark/60">
-                                        <Pin className="w-4 h-4" />
+                                        <IconPin />
                                     </span>
                                 </Tooltip>
                             ) : resolved ? (
                                 <Tooltip content="Resolved">
                                     <span className="relative text-green">
-                                        <Check2 />
+                                        <IconCheckCircle />
                                     </span>
                                 </Tooltip>
                             ) : isModerator ? (
@@ -97,13 +95,13 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
                                 'moderator' ? (
                                     <Tooltip content="Pending response">
                                         <span className="relative text-yellow">
-                                            <Clock />
+                                            <IconClock />
                                         </span>
                                     </Tooltip>
                                 ) : (
                                     <Tooltip content="Needs response">
                                         <span className="relative text-red">
-                                            <Close />
+                                            <IconX />
                                         </span>
                                     </Tooltip>
                                 )

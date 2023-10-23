@@ -83,6 +83,7 @@ module.exports = {
             'primary-dark': '#fff',
             yellow: '#F7A501',
             footer: '#08042f',
+            highlight: 'rgba(235,157,42,.2)',
             transparent: 'transparent',
             tan: '#EEEFE9',
             'gray-accent': '#D0D1C9',
