@@ -9,7 +9,6 @@ const React = require('react')
 
 import { initKea, wrapElement } from './kea'
 import HandbookLayout from './src/templates/Handbook'
-import Product from './src/templates/Product'
 import Job from './src/templates/Job'
 import { UserProvider } from './src/hooks/useUser'
 import Posts from './src/components/Edition/Posts'
