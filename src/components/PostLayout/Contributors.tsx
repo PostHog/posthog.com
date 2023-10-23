@@ -50,6 +50,26 @@ export const ContributorImage = ({ image, name, className = '', imgClassName = '
     )
 }
 
+export const ContributorSmall = ({
+    image,
+    name,
+    url,
+    state,
+    text = false,
+}: IContributor & { text?: boolean; url?: string }) => {
+    const Container = url ? Link : 'div'
+    return (
+        <Container {...(url ? { to: url, state } : {})} className="flex space-x-2 items-center no-underline">
+            <ContributorImageSmall
+                className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
+                image={image}
+                name={name}
+            />
+            {text && <span className="author text-[14px] font-semibold">{name}</span>}
+        </Container>
+    )
+}
+
 export const Contributor = ({
     image,
     name,
@@ -57,8 +77,7 @@ export const Contributor = ({
     state,
     text = false,
     role,
-    size,
-}: IContributor & { text?: boolean; url?: string; size?: string }) => {
+}: IContributor & { text?: boolean; url?: string }) => {
     const Container = url ? Link : 'div'
     return (
         <Container
@@ -71,19 +90,11 @@ export const Contributor = ({
                     {role && <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">{role}</p>}
                 </div>
             </div>
-            {size === 'sm' ? (
-                <ContributorImageSmall
-                    image={image}
-                    name={name}
-                    className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
-                />
-            ) : (
-                <ContributorImage
-                    className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
-                    image={image}
-                    name={name}
-                />
-            )}
+            <ContributorImage
+                className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
+                image={image}
+                name={name}
+            />
         </Container>
     )
 }
@@ -128,11 +139,11 @@ export default function Contributors({
                                     )}
                                 >
                                     <span className="relative">
-                                        <Contributor size="sm" image={image} name={name} url={url} state={state} />
+                                        <ContributorSmall image={image} name={name} url={url} state={state} />
                                     </span>
                                 </Tooltip>
                             ) : (
-                                <Contributor size="sm" image={image} name={name} url={url} state={state} text />
+                                <ContributorSmall image={image} name={name} url={url} state={state} text />
                             )}
                         </li>
                     )
