@@ -18,6 +18,7 @@ tags:
 
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
 
 **Contents:**
 
@@ -46,232 +47,55 @@ Our MIT License isn’t just for show. You can access [our source code](https://
 
 This table compares the Amplitude Analytics 'Growth' plan to PostHog Cloud, our fully-managed SaaS offering.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-	<thead>
-    	<tr>
-            <td className="w-3/12"></td>
-        	<td className="w-3/12 text-center"><strong>Amplitude Analytics</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog Cloud</strong></td>
-    	</tr>
-	</thead>
-	<tbody>
-    	<tr>
-        	<td>Transparent pricing</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-       		<td>Self-serve</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-       	    <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Multi-site</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Event autocapture</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Funnel analysis</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Cohort analysis</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Conversion tracking</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Retention tracking</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Revenue tracking</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>UTM tracking</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-		<tr>
-        	<td>Event tracking</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Feature Flags</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Heatmaps</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Session Replay</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Experimentation</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-		<tr>
-        	<td>Predictive analytics</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-    	</tr>
-		<tr>
-            <td><strong>User surveys</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-    	<tr>
-        	<td>Hedgehogs</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-	</tbody>
-</table>
-</div>
+<ComparisonTable column1="Amplitude Analytics" column2="PostHog">
+  <ComparisonRow column1={false} column2={true} feature="Transparent pricing" />
+  <ComparisonRow column1={false} column2={true} feature="Self-serve" />
+  <ComparisonRow column1={true} column2={true} feature="Multi-site" />
+  <ComparisonRow column1={false} column2={true} feature="Event autocapture" />
+  <ComparisonRow column1={true} column2={true} feature="Funnel analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Cohort analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Conversion tracking" />
+  <ComparisonRow column1={true} column2={true} feature="Retention tracking" />
+  <ComparisonRow column1={true} column2={true} feature="Revenue tracking" />
+  <ComparisonRow column1={true} column2={true} feature="UTM tracking" />
+  <ComparisonRow column1={true} column2={true} feature="Event tracking" />
+  <ComparisonRow column1={false} column2={true} feature="Feature flags" />
+  <ComparisonRow column1={false} column2={true} feature="Heatmaps" />
+  <ComparisonRow column1={false} column2={true} feature="Session replay" />
+  <ComparisonRow column1={false} column2={true} feature="Experimentation" />
+  <ComparisonRow column1={true} column2={true} feature="Predictive analytics" />
+  <ComparisonRow column1={false} column2={true} feature="User surveys" />
+  <ComparisonRow column1={false} column2={true} feature="Hedgehogs" />
+</ComparisonTable>
 
 ## Integrations and data sources
 
 Both Amplitude and PostHog integrate with a large number of data sources. The table below is a snapshot of what each platform offers – check out the [PostHog App Store](/apps) for a full list of what's available.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-	<thead>
-    	<tr>
-        	<td className="w-3/12"></td>
-        	<td className="w-3/12 text-center"><strong>Amplitude Analytics</strong></td>
-        	<td className="w-3/12 text-center"><strong>PostHog</strong></td>
-    	</tr>
-	</thead>
-	<tbody>
-    	<tr>
-        	<td><strong>Export</strong></td>
-        	<td></td>
-        	<td></td>
-    	</tr>
-    	<tr>
-        	<td>Redshift</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Google Cloud Storage</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-       		<td>Snowflake</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-       	    <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Amazon S3</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-   		</tr>
-    	<tr>
-        	<td>Google BigQuery</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td> 
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Google Pub/Sub</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>RudderStack</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Hubspot</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-		<tr>
-        	<td>Salesforce</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-		<tr>
-        	<td>Sentry</td>
-        	<td className="text-center"><span className="text-red text-lg">✖</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-		<tr>
-        	<td>API</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td><strong>Import</strong></td>
-        	<td></td>
-        	<td></td>
-    	</tr>
-    	<tr>
-        	<td>Redshift</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Google Cloud Storage</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Snowflake</td>
-			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Amazon S3</td>
-			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>Segment</td>
-			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>      
-    	</tr>
-    	<tr>
-        	<td>Sentry</td>
-			<td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>        
-    	</tr>
-    	<tr>
-        	<td>Zendesk</td>
-			<td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-    	<tr>
-        	<td>API</td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-        	<td className="text-center"><span className="text-green text-lg">✔</span></td>
-    	</tr>
-	</tbody>
-</table>
-</div>
+
+<ComparisonTable column1="Amplitude Analytics" column2="PostHog">
+  <ComparisonHeader category="Export" />
+  <ComparisonRow column1={true} column2={true} feature="Redshift" />
+  <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" />
+  <ComparisonRow column1={true} column2={true} feature="Snowflake" />
+  <ComparisonRow column1={true} column2={true} feature="Amazon S3" />
+  <ComparisonRow column1={true} column2={true} feature="Google BigQuery" />
+  <ComparisonRow column1={false} column2={true} feature="Google Pub/Sub" />
+  <ComparisonRow column1={false} column2={true} feature="RudderStack" />
+  <ComparisonRow column1={true} column2={true} feature="Hubspot" />
+  <ComparisonRow column1={true} column2={true} feature="Salesforce" />
+  <ComparisonRow column1={false} column2={true} feature="Sentry" />
+  <ComparisonRow column1={true} column2={true} feature="API" />
+  <ComparisonHeader category="Import" />
+  <ComparisonRow column1={true} column2={true} feature="Redshift" />
+  <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" />
+  <ComparisonRow column1={true} column2={true} feature="Snowflake" />
+  <ComparisonRow column1={true} column2={true} feature="Amazon S3" />
+  <ComparisonRow column1={true} column2={true} feature="Segment" />
+  <ComparisonRow column1={false} column2={true} feature="Sentry" />
+  <ComparisonRow column1={true} column2={true} feature="Zendesk" />
+  <ComparisonRow column1={true} column2={true} feature="API" />
+</ComparisonTable>
 
 ## Strengths of PostHog
 
