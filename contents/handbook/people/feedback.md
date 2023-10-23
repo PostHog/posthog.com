@@ -29,7 +29,7 @@ We run full team 360-degree feedback session as part of every offsite. The sessi
 
 - Everyone is responsible for noting down and actioning their own feedback (ie. the people team won't do this for you).
 
-- What is discussed is for the benefit of those present and should not be shared with others who were not present. It is ok to follow up with anyone on feedback you received or gave after the session. 
+- What is discussed is for the benefit of those present and does not need to be shared with others who were not present. It is ok to follow up with anyone on feedback you received or gave after the session. 
 
 ### How to give good feedback
 
