@@ -10,17 +10,11 @@ showTitle: true
 
 Ask in the `#team-infrastructure` Slack channel for someone to add you.
 
-To give someone access (important to follow these steps!):
-1. navigate to [IAM](https://console.aws.amazon.com/iamv2/home#/users)
-2. Use the `Add Users` button at the top right to add their PostHog email as username and select 'password'.
-3. Important! Untick 'User must create a new password at next sign-in', as that'll cause issues with MFA.
-4. Pick `AWS Management Console access` and add them to the `Team` group
-5. Slack the username, password and console link to new user.
-6. User has to log in, set up MFA, log out, and then change password. They may need to log out again.
-
-#### IMPORTANT: You must log out and then log back in!
-
-This is because of MFA. Just adding MFA isn't quite enough for AWS console so if you are seeing a bunch of really weird permissions errors. Log out, then log back in using your MFA token. This should resolve everything!
+To give someone access
+1. Go [to this link](https://us-east-1.console.aws.amazon.com/singlesignon/home?region=us-east-1#!/instances/7223d5d28068c4d6/users) while logged in
+2. Use their email address as their username
+3. Add them to the "developers" group on the next step
+4. Tell them to use http://go/aws to log in
 
 ### Permissions errors using AWS CLI
 
