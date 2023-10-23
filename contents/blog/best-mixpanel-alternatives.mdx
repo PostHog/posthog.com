@@ -126,70 +126,18 @@ Google's huge scale means GA4 is used by both the biggest global corporations to
 
 ### How does GA4 compare to Mixpanel?
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>GA4</strong></td>
- <td class="text-center"><strong>Mixpanel</strong></td>
- <td></td>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Marketing analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track content and advertising performance</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr> 
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Google Ads integration</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track ROI on Google marketing campaigns</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Predictive insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">AI-powered alerts when metrics chanage</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Natural language insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Fetch insights using natural language queries</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Realtime dashboards</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track website activity in realtime</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- </tr> 
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr>
-  <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Transparent pricing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Public pricing calculator</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr>  
- </tbody>
-</table>
-</div>
+<ComparisonTable column1="GA4" column2="Mixpanel">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Marketing analytics" description="Track content and advertising performance" />
+  <ComparisonRow column1={false} column2={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
+  <ComparisonRow column1={true} column2={true} feature="Google Ads integration" description="Track ROI on Google marketing campaigns" />
+  <ComparisonRow column1={true} column2={false} feature="Predictive insights" description="AI-powered alerts when metrics chanage" />
+  <ComparisonRow column1={true} column2={true} feature="Natural language insights" description="Fetch insights using natural language queries" />
+  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
+  <ComparisonRow column1={true} column2={false} feature="Realtime dashboards" description="Track website activity in realtime" />
+  <ComparisonRow column1={false} column2={true} feature="Data governance" description="Admin level control over event approval, tags and descriptions" />
+  <ComparisonRow column1={false} column2={true} feature="Transparent pricing" description="Public pricing calculator" />
+</ComparisonTable>
 
 GA4 and Mixpanel are only superficially similar. They cover the same basics, but GA4 is better-suited to content and marketing teams, while Mixpanel is designed for product teams. 
 
@@ -247,50 +195,14 @@ While it offers a limited free tier for startups, high prices are a barrier. As 
 
 ### How does Amplitude compare to Mixpanel?
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center px-0"><strong>Amplitude</strong></td>
- <td class="text-center"><strong>Mixpanel</strong></td>
- <td></td>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>A/B testing</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr> 
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Natural language insights</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Fetch insights using natural language queries</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr> 
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr> 
- </tbody>
-</table>
-</div>
+<ComparisonTable column1="Amplitude" column2="Mixpanel">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Collaborate on analysis in shareable notebooks" />
+  <ComparisonRow column1={true} column2={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
+  <ComparisonRow column1={true} column2={false} feature="Natural language insights" description="Fetch insights using natural language queries" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
+  <ComparisonRow column1={true} column2={true} feature="Data governance" description="Admin level control over event approval, tags and descriptions" />
+</ComparisonTable>
 
 On paper, Amplitude and Mixpanel are very similar, but they differ in focus and approach. While both products serve large enterprise customers, Amplitude is more focused on these users. Unlike Mixpanel, for example, pricing isn't transparent.
 
@@ -346,50 +258,14 @@ Customers include Amway, Eventbrite, and Freshworks.
 
 ### How does Heap compare to Mixpanel?
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>Heap</strong></td>
- <td class="text-center"><strong>Mixpanel</strong></td>
- <td></td>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr> 
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replay</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr> 
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
- <td className="text-center"><span className="text-red text-lg">✖</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Group analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track metrics at account or company level</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr> 
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Data governance</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Admin level control over event approval, tags and descriptions</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- </tr> 
- </tbody>
-</table>
-</div>
+<ComparisonTable column1="Heap" column2="Mixpanel">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={false} column2={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at account or company level" />
+  <ComparisonRow column1={true} column2={true} feature="Data governance" description="Admin level control over event approval, tags and descriptions" />
+</ComparisonTable>
 
 Session replay and autocapture support make Heap a good Mixpanel alternative for product teams.
 
