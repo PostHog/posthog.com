@@ -13,6 +13,9 @@ tags:
   - Comparisons
 ---
 
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
 The four most popular alternatives to Mixpanel are:
 
 - **[PostHog](#posthog)** – An all-in-one platform that replaces multiple tools. The fastest growing Mixpanel alternative in 2023.
@@ -54,69 +57,18 @@ Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasur
 
 ### How does PostHog compare to Mixpanel?
 
-<div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
-<table className="w-full mt-4">
- <thead>
- <tr>
- <td className="w-3/12"></td>
- <td class="text-center"><strong>PostHog</strong></td>
- <td class="text-center"><strong>Mixpanel</strong></td>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Product analytics</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Custom trends, funnels, and retention analysis</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Session replays</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Watch real users use your product; diagnose bugs</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Feature flags</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Roll out features safely; toggle features for cohorts or individuals</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Experiments</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Test changes and analyze their impact</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>User surveys</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Ask users for qualitative feedback and gather responses</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Heatmaps</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Track where users click and why</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Open source</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Build your own apps and contribute code</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Autocapture</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Capture events without manual instrumentation</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr>
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>SQL insight builder</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Write your own insights using SQL</p></td>
- <td className="text-center"><span className="text-green text-lg">✔</span></td> 
- <td className="text-center"><span className="text-red text-lg">✖</span></td>
- </tr> 
- <tr>
- <td><p class="!mb-0 pb-0.5 !leading-tight"><strong>Notebooks</strong></p><p class="!mb-0 !text-sm text-opacity-75 leading-none">Collaborate on analysis in shareable notebooks</p></td>
- <td className="text-center text-sm">Public beta</td> 
- <td className="text-center"><span className="text-green text-lg">✔</span></td>
- </tr> 
- </tbody>
-</table>
-</div>
+<ComparisonTable competitor="Mixpanel">
+<ComparisonRow posthog={true} competitor={true} feature="Product analytics" description="Custom trends, funnels, and retention analysis" />
+<ComparisonRow posthog={true} competitor={false} feature="Session replays" description="Watch real users use your product; diagnose bugs" />
+<ComparisonRow posthog={true} competitor={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+<ComparisonRow posthog={true} competitor={false} feature="Experiments" description="Test changes and analyze their impact" />
+<ComparisonRow posthog={true} competitor={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+<ComparisonRow posthog={true} competitor={false} feature="Heatmaps" description="Track where users click and why" />
+<ComparisonRow posthog={true} competitor={false} feature="Open source" description="Build your own apps and contribute code" />
+<ComparisonRow posthog={true} competitor={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+<ComparisonRow posthog={true} competitor={false} feature="SQL insight builder" description="Write your own insights using SQL" />
+<ComparisonRow posthog="Public beta" competitor={true} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
+</ComparisonTable>
 
 PostHog is the only choice if you like the idea of consolidating around one platform. Mixpanel offers third-party integrations for features it doesn't have, but this creates a messy workflow for teams.
  
