@@ -445,7 +445,7 @@ export const ProductSessionReplay = () => {
                 </div>
             </section>
 
-            <div className="max-w-7xl mx-auto px-5">
+            <div className="max-w-7xl mx-auto">
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>

@@ -61,12 +61,14 @@ export default function Comparison({ comparison, columnCount, truncate }) {
     )
     return (
         <>
-            <div className={`max-w-vw -mx-5 px-5 pb-2 mb-10 md:mb-20 md:mx-0 md:px-0`}>
+            <div
+                className={`max-w-vw -mx-5 pl-5 pb-2 mb-10 md:mb-20 md:mx-0 pl-5 overflow-x-auto [justify-content:_safe_center]`}
+            >
                 <div
                     className={`flex-1 grid grid-cols-${columnCount} max-w-7xl text-sm md:text-base divide-y divide-border dark:divide-border-dark mx-auto min-w-[600px] md:min-w-fit ${
                         collapsed
-                            ? 'h-[460px] overflow-hidden relative after:absolute after:w-full after:h-24 after:bottom-0 after:left-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10'
-                            : 'overflow-x-auto '
+                            ? 'h-[460px]  overflow-y-hidden relative after:absolute after:w-full after:h-24 after:bottom-0 after:left-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10'
+                            : ' '
                     }`}
                 >
                     {/* header row */}
