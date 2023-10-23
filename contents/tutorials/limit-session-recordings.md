@@ -4,7 +4,6 @@ date: 2023-03-22
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-17.png
 tags: ["session replay", "configuration"]
 ---
 

@@ -200,6 +200,13 @@ h4 {
     blockquote {
         letter-spacing: initial;
 
+        h2,
+        h3,
+        h4,
+        h5 {
+            @apply mt-0 mb-0.5;
+        }
+
         code {
             @apply bg-gray-accent dark:bg-gray-accent-dark;
         }
@@ -855,6 +862,19 @@ ul {
         border-radius: 2px;
         content: '';
         left: -12px;
+        position: absolute;
+        top: 4px;
+        width: 4px;
+    }
+}
+
+.active-sidebar-item {
+    &:before {
+        background: #f54e00;
+        bottom: 4px;
+        border-radius: 2px;
+        content: '';
+        left: 6px;
         position: absolute;
         top: 4px;
         width: 4px;

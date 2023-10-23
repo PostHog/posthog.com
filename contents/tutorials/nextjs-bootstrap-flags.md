@@ -4,7 +4,6 @@ date: 2023-07-04
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/nextjs-analytics.png
 tags: ["configuration", "feature flags"]
 ---
 
@@ -14,7 +13,7 @@ In this tutorial, we create a basic Next.js app, set up [feature flags](/docs/fe
 
 ## Create Next.js app and add PostHog
 
-First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
+First, once [Node is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/), create a Next.js app. Select **No** for TypeScript, **Yes** for `use app router`, and the defaults for every other option.
 
 ```bash
 npx create-next-app@latest middle-bootstrap

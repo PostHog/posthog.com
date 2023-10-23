@@ -4,8 +4,7 @@ date: 2023-03-03
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-1.png
-tags: ["configuration", "events"]
+tags: ["configuration", "events", 'product os']
 ---
 
 PostHog is a great [alternative to Mixpanel](/blog/best-mixpanel-alternatives), especially if you want to replace other tools for session replay and A/B testing.

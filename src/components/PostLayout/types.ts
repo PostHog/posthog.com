@@ -13,6 +13,7 @@ export interface IContributor {
     name: string
     url?: string
     state?: any
+    role?: string
 }
 
 export interface IMenu {
@@ -21,7 +22,7 @@ export interface IMenu {
     url?: string
     children?: IMenu[]
     className?: string
-    handleLinkClick?: () => void
+    handleLinkClick?: ({ name, url, topLevel }: { name: string; url?: string; topLevel?: boolean }) => void
     topLevel?: boolean
     menuType?: 'scroll' | 'standard'
     badge?: {
@@ -91,4 +92,5 @@ export interface IProps {
     stickySidebar?: boolean
     hideWidthToggle?: boolean
     isMenuItemActive?: ({ name, url }: { name: string; url?: string }) => boolean
+    isMenuItemOpen?: ({ name, url }: { name: string; url?: string }) => boolean | undefined
 }

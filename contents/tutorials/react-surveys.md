@@ -4,7 +4,6 @@ date: 2023-09-27
 author: ["lior-neu-ner"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/surveys-hog.jpg
 tags: ['surveys']
 ---
 
@@ -14,14 +13,14 @@ We'll create a basic React app, add PostHog, create a survey, and then add the c
 
 ## Creating a React app
 
-First, create a React app using `create-react-app` and go into the newly created `react-survey` folder.
+First, create a React app using `create-react-app` and go into the newly created `react-survey` folder.
 
 ```bash
 npx create-react-app react-survey
 cd react-flags
 ```
 
-Next, replace the boilerplate code in `src/App.js` with the following:
+Next, replace the boilerplate code in `src/App.js` with the following:
 
 ```react
 // src/App.js
@@ -38,7 +37,7 @@ function App() {
 export default App;
 ```
 
-Finally, run `npm start` and go to [http://localhost:3000/](http://localhost:3000/) to see our new homepage.
+Finally, run `npm start` and go to [http://localhost:3000/](http://localhost:3000/) to see our new homepage.
 
 ![Basic react app setup to show surveys](../images/tutorials/react-surveys/setup.png) 
 
@@ -50,7 +49,7 @@ PostHog will manage our survey and track our results. To use [PostHog's React SD
 npm install posthog-js
 ```
 
-Once installed, import PostHog into `src/index.js` and set up a client using a project API key and instance address from the [project settings](https://app.posthog.com/project/settings). Then, wrap the app with `PostHogProvider` to access PostHog in any component.
+Once installed, import PostHog into `src/index.js` and set up a client using a project API key and instance address from the [project settings](https://app.posthog.com/project/settings). Then, wrap the app with `PostHogProvider` to access PostHog in any component.
 
 ```react
 import React from 'react';

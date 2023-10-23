@@ -44,7 +44,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
 
     return (
         <div className="">
-            {menu && mobileMenu && <MobileNav />}
+            {menu && mobileMenu && <MobileNav className="flex md:hidden" menu={menu} />}
             <div
                 className={`w-full relative md:flex justify-between mx-auto transition-all ${
                     fullWidthContent ? 'max-w-full' : 'max-w-screen-2xl'
@@ -75,7 +75,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     style={contentWidth && !fullWidthContent ? { width: '100%', maxWidth: contentWidth } : {}}
                     key={`${title}-article`}
                     id="content-menu-wrapper"
-                    className={`article-content py-4 box-border w-full flex-shrink mx-auto transition-all ${
+                    className={`py-4 box-border w-full flex-shrink mx-auto transition-all ${
                         !fullWidthContent && sidebar && !hideSidebar ? ' max-w-3xl' : 'max-w-screen-2xl'
                     }`}
                 >
@@ -90,7 +90,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     <aside
                         key={`${title}-sidebar`}
                         style={{ maxWidth: menuWidth?.right ?? defaultMenuWidth.right }}
-                        className="flex-shrink-0 pt-4 w-full justify-self-end my-10 lg:my-0 h-full lg:px-0 px-4 box-border lg:flex hidden flex-col reasonable:sticky reasonable:top-[108px]"
+                        className="flex-shrink-0 pt-4 w-full justify-self-end my-10 lg:my-0 h-full box-border lg:flex hidden flex-col reasonable:sticky reasonable:top-[108px] mr-8"
                     >
                         <div
                             className={`${

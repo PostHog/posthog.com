@@ -4,8 +4,7 @@ date: 2023-02-01
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-5.png
-tags: ['insights', 'persons']
+tags: ['insights', 'persons', 'product os']
 ---
 
 An API or application programming interface is how computers talk to each other. They are powerful access points to applications, data, and processing.

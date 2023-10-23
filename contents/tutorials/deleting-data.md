@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['yakko-majuri']
 date: 2021-07-14
-featuredImage: ../images/tutorials/banners/deleting-data.png
-tags: ['configuration', 'data management']
+tags: ['configuration', 'data management', 'product os']
 ---
 
 > <strong>Important:</strong> Bulk data deletion is done at your own risk. We do not yet provide a standard way to delete data in bulk, so you must be extremely careful when performing such an operation. We do not take responsibility for any loss of data as a result of this process.

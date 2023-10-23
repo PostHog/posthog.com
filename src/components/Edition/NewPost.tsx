@@ -142,8 +142,9 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
             ctaLabel: '',
             ctaURL: '',
             category: undefined,
+            excerpt: '',
         },
-        onSubmit: async ({ title, body, images, ctaLabel, ctaURL, category, featuredImage }) => {
+        onSubmit: async ({ title, body, images, ctaLabel, ctaURL, category, featuredImage, excerpt }) => {
             try {
                 const jwt = await getJwt()
                 const profileID = user?.profile?.id
@@ -169,6 +170,7 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
                         post_category: {
                             connect: [category],
                         },
+                        excerpt,
                         ...(uploadedFeaturedImage || featuredImage === null
                             ? {
                                   featuredImage: {
@@ -212,6 +214,15 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
                                 initialValue={initialValues?.body}
                                 setFieldValue={setFieldValue}
                                 values={values}
+                            />
+                        </Accordion>
+                        <Accordion initialOpen label="Excerpt" active={!!values.excerpt}>
+                            <textarea
+                                rows={5}
+                                name="excerpt"
+                                onChange={(e) => setFieldValue('excerpt', e.target.value)}
+                                placeholder="Excerpt"
+                                className="px-4 py-2 border-none w-full dark:bg-accent-dark resize-none"
                             />
                         </Accordion>
                         <Categories setFieldValue={setFieldValue} value={values.category} />
