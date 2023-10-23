@@ -355,12 +355,7 @@ export const ProductAbTesting = () => {
                         </div>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            src="../../Home/Slider/images/session-recording-hog.png"
-                            alt=""
-                        />
+                        <StaticImage placeholder="none" quality={100} src="../hogs/ab-testing-hog.png" alt="" />
                     </div>
                 </div>
 

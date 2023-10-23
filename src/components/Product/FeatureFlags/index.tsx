@@ -429,8 +429,6 @@ export const ProductFeatureFlags = () => {
             <section id="pricing" className="max-w-7xl mx-auto px-5 py-20">
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
-                        image=
-                        {<StaticImage src="../../../images/products/competitors-sr.png" className="max-w-[167px]" />}
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
                         <p className="">
                             Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
@@ -444,12 +442,7 @@ export const ProductFeatureFlags = () => {
                     </div>
 
                     <div className="md:w-96">
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            src="../../Home/Slider/images/session-recording-hog.png"
-                            alt=""
-                        />
+                        <StaticImage placeholder="none" quality={100} src="../hogs/feature-flags-hog.png" alt="" />
                     </div>
                 </div>
 

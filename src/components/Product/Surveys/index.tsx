@@ -81,7 +81,7 @@ const features = [
     {
         title: 'No-code? Yes. API? Yes.',
         description:
-            "Using PostHog.js? No more code required. But want to create your own UI? Check out the <a href='/docs/surveys/implementing-custom-surveys'>Surveys API</a>.",
+            "Using PostHog.js? No more code required. But want to create your own UI? Check out the <a href='/docs/api/surveys'>Surveys API</a>.",
         image: <StaticImage src="./images/api.png" width={428} />,
         fade: true,
     },
@@ -438,12 +438,7 @@ export const ProductSurveys = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            src="../../Home/Slider/images/session-recording-hog.png"
-                            alt=""
-                        />
+                        <StaticImage placeholder="none" quality={100} src="../hogs/surveys-hog.png" alt="" />
                     </div>
                 </div>
 

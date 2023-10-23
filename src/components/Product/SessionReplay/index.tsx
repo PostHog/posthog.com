@@ -429,12 +429,7 @@ export const ProductSessionReplay = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage
-                            placeholder="none"
-                            quality={100}
-                            src="../../Home/Slider/images/session-recording-hog.png"
-                            alt=""
-                        />
+                        <StaticImage placeholder="none" quality={100} src="../hogs/session-replay-hog.png" alt="" />
                     </div>
                 </div>
 

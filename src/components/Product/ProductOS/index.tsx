@@ -316,10 +316,16 @@ export const ProductOS = () => {
 
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     <h2 className="text-4xl mb-2">API</h2>
-                    <p className="max-w-2xl">
+                    <p className="max-w-2xl mb-2">
                         If your business has bespoke data visualization needs that aren't covered by a PostHog product,
                         you can build your own interface with queries using the API and HogQL.
                     </p>
+                    <div className="mb-8">
+                        <CallToAction to="/docs/api" type="secondary" size="sm">
+                            Explore the API
+                        </CallToAction>
+                    </div>
+
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <TextCard
                             title="Data transformations"
@@ -360,11 +366,16 @@ export const ProductOS = () => {
                                 If you use PostHog on a website or web app, the Product OS Toolbar can run on your site,
                                 letting you:
                             </p>
-                            <ul>
+                            <ul className="mb-6">
                                 <li>Visually define events</li>
                                 <li>Toggle feature flags on or off</li>
                                 <li>See a click map showing what people are clicking</li>
                             </ul>
+                            <div>
+                                <CallToAction to="/docs/toolbar" type="secondary" size="sm">
+                                    Learn more
+                                </CallToAction>
+                            </div>
                         </div>
                         <div className="order-1 md:order-2">
                             <StaticImage
