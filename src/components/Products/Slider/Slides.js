@@ -161,8 +161,8 @@ export const Trends = () => {
             <div className="text-center">
                 <h2 className="text-4xl">Visualize user data with graphs, tables, charts, maps, and more</h2>
             </div>
-            <div className="overflow-x-auto flex gap-8 pb-4 -mx-8 px-8">
-                <div className="flex-shrink-0 w-2/3">
+            <div className="product-slider overflow-x-auto flex gap-8 pb-4 -mx-8 px-8">
+                <div className="flex-shrink-0 w-3/5">
                     <StaticImage
                         objectPosition="left"
                         height={420}
@@ -171,7 +171,7 @@ export const Trends = () => {
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-2/3">
+                <div className="flex-shrink-0 w-3/5">
                     <StaticImage
                         objectPosition="left"
                         height={420}
@@ -180,7 +180,7 @@ export const Trends = () => {
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-2/3">
+                <div className="flex-shrink-0 w-3/5">
                     <StaticImage
                         objectPosition="left"
                         height={420}
@@ -189,7 +189,7 @@ export const Trends = () => {
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-2/3">
+                <div className="flex-shrink-0 w-3/5">
                     <StaticImage
                         objectPosition="left"
                         height={420}
@@ -198,7 +198,7 @@ export const Trends = () => {
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-2/3">
+                <div className="flex-shrink-0 w-3/5">
                     <StaticImage
                         objectPosition="left"
                         height={420}
