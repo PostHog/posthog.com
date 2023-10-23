@@ -1,6 +1,6 @@
 ---
 title: How to do redirect testing
-date: 2023-10-19
+date: 2023-10-23
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
@@ -122,7 +122,7 @@ Click the button on each page to capture a custom event in PostHog. We need it f
 
 ## Creating our A/B test
 
-Our A/B test compares these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
+Our A/B test compares these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) (our name for A/B tests) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
 
 ![A/B test set up](../images/tutorials/redirect-testing/test.png)
 
@@ -132,7 +132,7 @@ Because we are working locally, you can click "Launch" right after and head back
 
 Next.js enables you to run middleware that intercepts and modifies requests for your app. We can use it to run our redirect test.
 
-To start, create a `middleware.js` file in the base `redirect-test` directory. Match both the `/test` and `/control` paths and have the `/test` path redirect to control as a placeholder.
+To start, create a `middleware.js` file in the base `redirect-test` directory. We want it to run on both the `/test` and `/control` paths, so we add them to the matcher config. For now, we have the `/test` path redirect to `/control` as a placeholder.
 
 ```js
 // redirect-test/middleware.js
@@ -150,10 +150,12 @@ export const config = {
 };
 ```
 
-Next, we set up the logic for user IDs so we can target our test. We want the user experience to be consistent so we:
+### Getting or creating a user ID for flag evaluation
 
-1. Check if a user ID exists in the PostHog cookie, and use it if so.
-2. Create a user ID and bootstrap it to the client if not.
+To evaluate the flags for the experiment in our middleware, we need a distinct user ID to target. We want the user experience to be consistent so we:
+
+1. Check if a `distinct_id` exists in the PostHog cookie, and use it if so.
+2. Create a `distinct_id` and bootstrap it to the client if not.
 
 This requires using your project API key to get the cookies, parsing them as JSON, and potentially creating a distinct ID using `crypto.randomUUID()`. Altogether, this looks like this:
 
@@ -167,9 +169,11 @@ export async function middleware(request) {
 
   let distinct_id;
   if (cookie) {
+    // Use PostHog distinct_id 
     distinct_id = JSON.parse(cookie.value).distinct_id;
   } else {
-    distinct_id= crypto.randomUUID();
+    // Create new distinct_id
+    distinct_id = crypto.randomUUID();
   }
 //... rest of code
 ```
@@ -194,14 +198,15 @@ We evaluate the flag by making a POST request to the `https://app.posthog.com/de
     })
   };
   
+  // Evaluate experiment flag
   const ph_request = await fetch(
     'https://app.posthog.com/decide?v=3', // or eu
     requestOptions
   );
   const data = await ph_request.json();
-
   const flagResponse = data.featureFlags['main-redirect']
 
+  // Redirect to correct page
   if (request.nextUrl.pathname=== '/test' && flagResponse === 'control') {
     return NextResponse.redirect(new URL('/control', request.url))
   }
@@ -215,13 +220,11 @@ We evaluate the flag by making a POST request to the `https://app.posthog.com/de
 
 ### Capturing exposure
 
-To get accurate results for our experiment, we also need to capture a `$feature_flag_called` exposure event. This requires another POST request. We can add this in like this:
-
+To get accurate results for our experiment, we also need to capture a `$feature_flag_called` exposure event after the feature flag has been evaluated, but before redirecting. This requires another POST request like this:
 ```js
-//... rest of code
-const flagResponse = data.featureFlags['main-redirect']
+//... rest of code, after flag evaluation
 
-// Capture events, for exposure
+// Capture exposure event
 const eventOptions = {
   method: 'POST',
   headers: {
@@ -243,20 +246,21 @@ const eventRequest = await fetch(
   eventOptions
 );
 
-if (request.nextUrl.pathname === '/test' && flagResponse === 'control') {
-//... rest of code
+//... rest of code, redirect logic
 ```
 
 ## Bootstrapping the data
 
-The final piece to our redirect test is bootstrapping the user ID (and flags while we are at it). This provides the experiment data to the client-side PostHog initialization immediately and keeps the experience consistent across pageloads.
+The final piece to our redirect test is bootstrapping the user distinct ID (and flags while we are at it).
 
-Bootstrapping requires formatting the flags and ID and then creating a `bootstrapData` cookie on the response. We also want to add a check for the `bootstrapData` cookie when we are creating the distinct ID so we don’t get two different IDs whenever we redirect.
+> **Why is bootstrapping necessary?** If we didn't bootstrap the distinct ID, PostHog would set a second distinct ID for the same user on the frontend. This disconnects the flag evaluation from the experiment goal tracking on the frontend, breaking our experiment.
+
+We create a `bootstrapData` cookie with the flags and distinct ID data and then add it to the response. We also add a check for the `bootstrapData` cookie in the middleware when we are creating the distinct ID so we don’t get two different IDs whenever we redirect.
 
 When put together with everything else, our final `middleware.js` file looks like this:
 
 ```js
-// middleware.js
+// middleware.js 
 import { NextResponse } from 'next/server'
 
 export async function middleware(request) {
@@ -267,6 +271,7 @@ export async function middleware(request) {
 
   let distinct_id;
   if (bootstrapCookie) {
+    // Use bootstrap cookie distinct_id
     distinct_id = JSON.parse(bootstrapCookie.value).distinctId;
   } else if (cookie) {
     distinct_id = JSON.parse(cookie.value).distinct_id;
@@ -315,6 +320,7 @@ export async function middleware(request) {
     eventOptions
   );
 
+  // Format flags and distinct_id for bootstrap cookie
   const bootstrapData = {
     distinctId: distinct_id,
     featureFlags: data.featureFlags
@@ -322,6 +328,7 @@ export async function middleware(request) {
 
   if (request.nextUrl.pathname === '/test' && flagResponse === 'control') {
     const newResponse = NextResponse.redirect(new URL('/control', request.url))
+    // Set the bootstrap data cookie on the response
     newResponse.cookies.set('bootstrapData', JSON.stringify(bootstrapData))
     return newResponse
   }
@@ -358,8 +365,9 @@ import { PostHogProvider } from 'posthog-js/react'
 import cookieCutter from 'cookie-cutter'
 
 if (typeof window !== 'undefined') {
-  const bootstrapData = cookieCutter.get('bootstrapData')
 
+  // Get the bootstrap cookie data from the middleware
+  const bootstrapData = cookieCutter.get('bootstrapData')
   let parsedBootstrapData = {}
   if (flags) {
     parsedBootstrapData = JSON.parse(flags)
