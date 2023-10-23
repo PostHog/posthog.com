@@ -26,7 +26,7 @@ const companies = {
         comparisonURL: '',
     },
     LaunchDarkly: {
-        comparisonURL: '',
+        comparisonURL: '/blog/posthog-vs-launchdarkly',
     },
     Pendo: {
         comparisonURL: '/blog/posthog-vs-pendo',
@@ -44,7 +44,7 @@ const companies = {
         comparisonURL: '',
     },
     GrowthBook: {
-        comparisonURL: '',
+        comparisonURL: '/blog/posthog-vs-growthbook',
     },
     Sprig: {
         comparisonURL: '',
