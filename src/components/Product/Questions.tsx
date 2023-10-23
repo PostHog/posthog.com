@@ -2,12 +2,16 @@ import QuestionsTable from 'components/Questions/QuestionsTable'
 import { useQuestions } from 'hooks/useQuestions'
 import React from 'react'
 
-export default function Questions({ topicId }) {
+export default function Questions({ topicIds = [] }) {
     const { questions, isLoading } = useQuestions({
         limit: 10,
         sortBy: 'newest',
-        topicId,
         filters: {
+            topics: {
+                id: {
+                    $in: [topicIds],
+                },
+            },
             subject: {
                 $ne: '',
             },

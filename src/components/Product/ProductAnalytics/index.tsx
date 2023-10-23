@@ -1022,7 +1022,7 @@ export const ProductProductAnalytics = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicId={20} />
+                    <Questions topicIds={[20]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>

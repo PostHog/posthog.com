@@ -533,7 +533,7 @@ export const ProductAbTesting = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicId={45} />
+                    <Questions topicIds={[45]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>

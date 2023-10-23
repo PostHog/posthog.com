@@ -603,7 +603,7 @@ export const ProductFeatureFlags = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicId={28} />
+                    <Questions topicIds={[28]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>
