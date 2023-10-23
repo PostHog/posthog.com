@@ -20,7 +20,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const DashboardTemplate = path.resolve(`src/templates/Template.js`)
     const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
-    const ProductTemplate = path.resolve(`src/templates/Product.tsx`)
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
 
     // Tutorials
@@ -615,25 +614,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             })
         }
     }
-
-    await Promise.all(
-        result.data.product.nodes.map((node) => {
-            return new Promise<void>((res) => {
-                const { slug } = node.fields
-                createPage({
-                    path: slug,
-                    component: ProductTemplate,
-                    context: {
-                        id: node.id,
-                        blogTags: node?.frontmatter?.productBlog?.tags ?? [''],
-                        tutorialTags: node?.frontmatter?.productTutorialTags ?? [''],
-                        customerURLs: node?.frontmatter?.customerURLs ?? [''],
-                    },
-                })
-                res()
-            })
-        })
-    )
 
     result.data.roadmapYears.group.forEach(({ fieldValue: year }) => {
         createPage({
