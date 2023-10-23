@@ -54,35 +54,35 @@ const features = [
     {
         title: 'Question types',
         description: 'Multiple choice, multi-select, numerical rating, emoji reaction, embedded links',
-        image: <StaticImage src="./images/question-types.png" width={428} />,
+        image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
     },
     {
         title: 'Templates',
         description: 'Choose from the library or start from scratch',
-        image: <StaticImage src="./images/templates.png" width={428} />,
+        image: <StaticImage src="./images/templates.png" width={428} placeholder="none" />,
         background: true,
         fade: true,
     },
     {
         title: 'Targeting',
         description: 'Target by URL, user property, or feature flag when used with Feature Flags',
-        image: <StaticImage src="./images/targeting.png" width={428} />,
+        image: <StaticImage src="./images/targeting.png" width={428} placeholder="none" />,
     },
     {
         title: 'Multi-step surveys',
         description: 'Up to 10 questions',
-        image: <StaticImage src="./images/steps.png" width={428} />,
+        image: <StaticImage src="./images/steps.png" width={428} placeholder="none" />,
     },
     {
         title: 'Link somewhere',
         description: 'Send users to a webpage or invite them to book a meeting with a calendar invite',
-        image: <StaticImage src="./images/link-scheduler.png" width={428} />,
+        image: <StaticImage src="./images/link-scheduler.png" width={428} placeholder="none" />,
     },
     {
         title: 'No-code? Yes. API? Yes.',
         description:
             "Using PostHog.js? No more code required. But want to create your own UI? Check out the <a href='/docs/api/surveys'>Surveys API</a>.",
-        image: <StaticImage src="./images/api.png" width={428} />,
+        image: <StaticImage src="./images/api.png" width={428} placeholder="none" />,
         fade: true,
     },
 ]
@@ -368,8 +368,9 @@ export const ProductSurveys = () => {
                 <div className="">
                     <StaticImage
                         src="../../../images/products/screenshot-surveys.png"
-                        alt=""
+                        alt="Screenshot of survey results in PostHog"
                         className="w-full max-w-[1360px]"
+                        placeholder="none"
                     />
                 </div>
 
@@ -464,7 +465,16 @@ export const ProductSurveys = () => {
                     <section className="mb-20">
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
-                            <VsCompetitor title="Reasons a competitor might be better for you (for now...)">
+                            <VsCompetitor
+                                title="Reasons a competitor might be better for you (for now...)"
+                                image={
+                                    <StaticImage
+                                        src="../../../images/products/competitors-surveys.png"
+                                        className="max-w-[159px]"
+                                        placeholder="none"
+                                    />
+                                }
+                            >
                                 <ul>
                                     <li>
                                         Forms

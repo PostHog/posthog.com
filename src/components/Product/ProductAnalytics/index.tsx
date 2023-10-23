@@ -783,8 +783,9 @@ export const ProductProductAnalytics = () => {
                 <div className="">
                     <StaticImage
                         src="./images/screenshot-product-analytics.png"
-                        alt=""
+                        alt="Screenshot of PostHog Product Analytics"
                         className="w-full max-w-[1360px]"
+                        placeholder="none"
                     />
                 </div>
 

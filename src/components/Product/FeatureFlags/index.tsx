@@ -140,12 +140,6 @@ const questions = [
         url: '/blog/feature-flag-benefits-use-cases#3-test-changes-in-production',
     },
     {
-        question: 'How do I set up a beta?',
-    },
-    {
-        question: 'How do I test bug fixes?',
-    },
-    {
         question: 'How do I set up an allow or deny list?',
         url: '/blog/feature-flag-benefits-use-cases#4-manage-access',
     },
@@ -156,6 +150,12 @@ const questions = [
     {
         question: 'How do I sample events for a high-volume API?',
         url: '/tutorials/track-high-volume-apis',
+    },
+    {
+        question: 'How do I set up a beta?',
+    },
+    {
+        question: 'How do I test bug fixes?',
     },
 ]
 
@@ -377,7 +377,12 @@ export const ProductFeatureFlags = () => {
                 />
 
                 <div className="">
-                    <StaticImage src="./images/screenshot-feature-flags.png" alt="" className="w-full max-w-[1361px]" />
+                    <StaticImage
+                        src="./images/screenshot-feature-flags.png"
+                        alt="Screenshot of a feature flag in PostHog"
+                        className="w-full max-w-[1361px]"
+                        placeholder="none"
+                    />
                 </div>
 
                 <section id="customers" className="-mt-36 pt-36">

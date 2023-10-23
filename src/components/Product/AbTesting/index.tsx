@@ -97,15 +97,12 @@ const subfeatures = [
 const questions = [
     {
         question: 'Does this new onboarding flow increase conversion?',
-        url: '#',
     },
     {
         question: 'How does this affect adoption in Europe?',
-        url: '#',
     },
     {
         question: 'Will enterprise customers like this new feature?',
-        url: '#',
     },
 ]
 
@@ -291,7 +288,12 @@ export const ProductAbTesting = () => {
                     description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
                 />
 
-                <StaticImage src="./images/screenshot-ab-testing.png" alt="" className="w-full max-w-[1361px]" />
+                <StaticImage
+                    src="./images/screenshot-ab-testing.png"
+                    alt="Screenshot of managing an A/B test in PostHog"
+                    className="w-full max-w-[1361px]"
+                    placeholder="none"
+                />
 
                 <section id="customers" className="-mt-20">
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
@@ -333,7 +335,7 @@ export const ProductAbTesting = () => {
                 </section>
 
                 <section className="bg-accent dark:bg-accent-dark">
-                    <Marquee product={product.capitalized}>
+                    <Marquee product={product.capitalized} shortFade={true}>
                         {questions.map((question, index) => {
                             return <Question {...question} key={index} />
                         })}

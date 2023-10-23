@@ -363,8 +363,9 @@ export const ProductSessionReplay = () => {
 
                 <StaticImage
                     src="../../../images/products/screenshot-session-replay.png"
-                    alt=""
+                    alt="Screenshot of Session Replay in PostHog"
                     className="w-full max-w-[1360.5px]"
+                    placeholder="none"
                 />
 
                 <section id="customers" className="-mt-36 pt-36">
