@@ -414,8 +414,7 @@ export const ProductOS = () => {
                 </section>
             </div>
 
-            <div className="max-w-7xl mx-auto px-5">
-                {/*
+            <div className="hidden max-w-7xl mx-auto px-5">
                 <section id="questions" className="mb-20">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
@@ -427,9 +426,9 @@ export const ProductOS = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicId={20} />
+                    <Questions topicIds={[27]} />
+                    {/*<Questions topicIds={[27, 38, 46, 36, 25, 51, 26, 54, 47]} /> */}
                 </section>
-                */}
             </div>
             <div className="max-w-7xl mx-auto relative">
                 <section className="mb-20">
