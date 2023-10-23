@@ -2687,6 +2687,14 @@ export const pricingMenu = {
             color: 'purple',
             url: '/pricing?product=ab-testing',
         },
+        /*
+        {
+            name: 'Surveys',
+            icon: 'Chat',
+            color: 'red',
+            url: '/pricing?product=surveys',
+        },
+        */
     ],
 }
 
