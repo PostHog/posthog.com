@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-10-31
-featuredImage: ../images/tutorials/banners/tutorial-5.png
-tags: ['trends', 'cohorts', 'session replay']
+tags: ['trends', 'cohorts', 'session replay', 'product analytics']
 ---
 
 Power users are your best and most important customers. They're knowledgable, willing to learn, and more likely to give feedback than average users. They're also more demanding.

@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-12-23
-featuredImage: ../images/tutorials/banners/deep-dive.png
 tags: ['insights', 'session replay']
 --- 
 

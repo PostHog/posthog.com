@@ -199,7 +199,6 @@ title: How to filter out internal users
 author: ["joe-martin"]
 featuredTutorial: false
 featuredVideo: https://www.youtube-nocookie.com/embed/2bptTniYPGc
-featuredImage: ../images/tutorials/banners/tutorial-17.png
 tags: ['filters', 'settings']
 ---
 ```

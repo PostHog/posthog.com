@@ -13,6 +13,7 @@ author:
 category: General
 tags:
   - Open source
+  - Guides
 ---
 
 Also known as split testing or multivariate testing, A/B testing is the practice of splitting your audience to test variations of a product design, new feature, call to action, landing page – anything you can imagine, really.

@@ -4,8 +4,7 @@ date: 2023-01-18
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-4.png
-tags: ["insights"]
+tags: ["insights", 'product analytics']
 ---
 
 Regular expressions or regex is a way to search text for patterns. It is a structure of symbols that finds text matching what you want. In doing so, it is a powerful way to filter and validate strings of text.

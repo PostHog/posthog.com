@@ -4,9 +4,8 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-09-26
-featuredImage: ../images/tutorials/banners/tutorial-8.png
 featuredVideo: https://www.youtube-nocookie.com/embed/CVu6ObmOR8Q
-tags: ['trends', 'sessions']
+tags: ['trends', 'sessions', 'product analytics']
 ---
 
 Analyzing where users spend their time in your product is vital for understanding which features they value most. There are numerous ways to do this, but one of the most common is tracking metrics like time on site, average session duration, and pages per session. 

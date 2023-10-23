@@ -4,8 +4,7 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2022-11-02
-featuredImage: ../images/tutorials/banners/tutorial-1.png
-tags: ["apps", "site-apps"]
+tags: ["apps", "site-apps", 'product os']
 ---
 
 Site apps make it quick and easy to add features such as forms and banners to your site through our JavaScript library. This enables you to do things like capture feedback, add notifications, provide support, and more. These apps can then capture data for analysis in PostHog. You can learn 

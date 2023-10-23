@@ -12,7 +12,6 @@ author:
   - joe-martin
 category: General
 tags:
-  - Guides
   - Comparisons
 ---
 

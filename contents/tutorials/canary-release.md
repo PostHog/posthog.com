@@ -4,7 +4,6 @@ sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
 date: 2023-09-12
-featuredImage: ../images/tutorials/banners/tutorial-2.png
 tags: ["feature flags", "persons"]
 ---
 

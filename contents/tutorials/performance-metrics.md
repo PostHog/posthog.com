@@ -5,7 +5,6 @@ showTitle: true
 author: ['lior-neu-ner']
 date: 2023-04-13
 featuredTutorial: true
-featuredImage: ../images/tutorials/banners/sessions.png
 tags: ["session replay"]
 ---
 

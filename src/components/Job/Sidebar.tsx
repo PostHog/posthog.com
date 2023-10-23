@@ -3,7 +3,7 @@ import Tooltip from 'components/Tooltip'
 import { kebabCase } from 'lib/utils'
 import Link from 'components/Link'
 import ReactCountryFlag from 'react-country-flag'
-import { ContributorImage } from 'components/PostLayout/Contributors'
+import { ContributorImageSmall } from 'components/PostLayout/Contributors'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 
 import { IconPineapple, IconPizza, IconThumbsDown, IconThumbsUp } from '@posthog/icons'
@@ -87,7 +87,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                                         )}
                                     >
                                         <span className="relative">
-                                            <ContributorImage
+                                            <ContributorImageSmall
                                                 name={name}
                                                 image={avatar}
                                                 className="!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary"
@@ -111,7 +111,7 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
                     active:top-[0.5px]
                     active:scale-[.98]"
                     >
-                        <ContributorImage
+                        <ContributorImageSmall
                             className="w-[40px] h-[40px] bg-orange border-2 border-white dark:border-primary border-solid"
                             image={teamLead?.avatar?.url}
                             name={teamLeadName}

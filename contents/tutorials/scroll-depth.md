@@ -4,9 +4,8 @@ date: 2023-04-13
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-16.png
 featuredVideo: https://www.youtube-nocookie.com/embed/T9MbFiDU6hY
-tags: ["configuration", "insights"]
+tags: ["configuration", "insights", 'product analytics']
 ---
     
 You can waste a lot of effort on parts of pages people never see. While [session replay](/tutorials/explore-insights-session-recordings) is great for understanding individual sessions, an aggregate understanding of how much of a page is viewed is valuable too. This is where tracking scroll depth can be helpful. 

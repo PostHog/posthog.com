@@ -4,9 +4,8 @@ sidebar: Docs
 showTitle: true
 author: ["ian-vanagas"]
 date: 2023-01-12
-featuredImage: ../images/tutorials/banners/webflow.png
 featuredVideo: https://www.youtube-nocookie.com/embed/2dNSr93N5Ns
-tags: ["configuration"]
+tags: ["configuration", 'product analytics', 'session replay']
 ---
 
 Webflow is one of the most popular no-code site builders. It makes building high-quality marketing sites, blogs, landing pages, and ecommerce stores a breeze. 

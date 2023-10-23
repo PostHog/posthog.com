@@ -4,7 +4,6 @@ date: 2023-03-20
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-3.png
 featuredVideo: https://www.youtube-nocookie.com/embed/E9QA0xPDpUk
 tags: ['feature flags', 'experimentation']
 ---

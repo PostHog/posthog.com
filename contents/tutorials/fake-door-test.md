@@ -4,7 +4,6 @@ date: 2023-08-17
 author: ["ian-vanagas"]
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-15.png
 tags: ['surveys', 'actions']
 ---
 
@@ -16,7 +15,7 @@ This tutorial shows you how to set up a fake door test with PostHog. We'll build
 
 ## Creating an app and adding PostHog
 
-We are going to build a basic app to run our fake door test on. We do this with Next.js, which requires installing Node. After doing so, run the command below, select **No for TypeScript**, **Yes for `use app router`**, and the defaults for every other option.
+We are going to build a basic app to run our fake door test on. We do this with Next.js, which requires installing Node. After doing so, run the command below, select **No for TypeScript**, **Yes for `use app router`**, and the defaults for every other option.
 
 ```bash
 npx create-next-app@latest fake-door
@@ -135,7 +134,7 @@ Next, we can set up the survey we mention. To do this, go to the [surveys tab in
 3. Add a target on URLs containing `/new`.
 4. Click "Save as draft."
 
-Because we set `opt_in_site_apps: true` in our PostHog initialization earlier, all we need to do is enable the survey site app. Either click the link on your draft survey page or go to the [apps tab](https://app.posthog.com/project/apps) and search for "Surveys app," enable it, and press save.
+Because we set `opt_in_site_apps: true` in our PostHog initialization earlier, all we need to do is enable the survey site app. Either click the link on your draft survey page or go to the [apps tab](https://app.posthog.com/project/apps) and search for "Surveys app," enable it, and press save.
 
 > **Don’t want a popover?** You can learn how to implement an integrated, custom survey component in our "[How to create custom surveys](/tutorials/survey)" tutorial.
 
