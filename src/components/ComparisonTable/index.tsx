@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ComparisonTable = ({ competitor, children }) => {
+export const ComparisonTable = ({ column1, column2, children }) => {
     return (
         <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
             <table className="w-full mt-4">
@@ -8,10 +8,10 @@ export const ComparisonTable = ({ competitor, children }) => {
                     <tr>
                         <td className=""></td>
                         <td className="text-center">
-                            <strong>PostHog</strong>
+                            <strong>{column1}</strong>
                         </td>
                         <td className="text-center">
-                            <strong>{competitor}</strong>
+                            <strong>{column2}</strong>
                         </td>
                     </tr>
                 </thead>
