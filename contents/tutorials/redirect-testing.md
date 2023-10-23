@@ -8,7 +8,7 @@ featuredImage: ../images/tutorials/banners/tutorial-16.png
 tags: ['experimentation', 'feature flags']
 ---
 
-Redirect testing is a way to A/B test web pages by redirecting users to one or the other. It is a popular way to split test landing pages, for example.
+Redirect testing is a way to A/B test web pages by redirecting users to one or the other.
 
 To show you how to set up a redirect test with PostHog, we create a two-page Next.js app, create an experiment in PostHog, and then implement it in our app using middleware and feature flags. 
 
@@ -114,13 +114,15 @@ export default function Test() {
 }
 ```
 
-Now we can run `npm run dev`, go to each of our pages, `http://localhost:3000/control` and `http://localhost:3000/test`, to see that they work, and click the button to capture a custom event in PostHog (we need it to create our experiment).
+Now run `npm run dev`. Go to each of our pages to see that they work: `http://localhost:3000/control` and `http://localhost:3000/test`. 
+
+Click the button on each page to capture a custom event in PostHog. We need it for our goal metric in our A/B test.
 
 ![Events](../images/tutorials/redirect-testing/events.png)
 
-## Creating our experiment
+## Creating our A/B test
 
-Our A/B test compares these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) in PostHog and click "New experiment." Choose a name, feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
+Our A/B test compares these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
 
 ![A/B test set up](../images/tutorials/redirect-testing/test.png)
 
