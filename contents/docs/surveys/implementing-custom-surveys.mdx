@@ -87,37 +87,6 @@ posthog.capture("survey sent", {
 })
 ```
 
-### Question types
-
-If you want to make the most of PostHog's automatic survey analysis, you'll need to capture survey responses in these formats:
-
-#### Open text and single choice questions
-
-```js-web
-posthog.capture("survey sent", {
-    $survey_id: {survey.id} // required
-    $survey_response: {response} // value of the text input or selected choice
-})
-```
-
-#### Multiple choice questions
-
-```js-web
-posthog.capture("survey sent", {
-    $survey_id: {survey.id} // required
-    $survey_response: ["response_1", 8, "response_2"] // array of values of the selected choices
-})
-```
-
-#### Rating questions
-
-```js-web
-posthog.capture("survey sent", {
-    $survey_id: {survey.id} // required
-    $survey_response: {rating} // rating is a number
-})
-```
-
 ## Multiple question surveys
 
 If you have a survey with multiple questions, you can capture the responses to each question using the following syntax:
@@ -131,4 +100,4 @@ posthog.capture("survey sent", {
 })
 ```
 
-Where `$survey_response` is the response to the first question, `$survey_response_1` is the response to the second question, and so on, like in an array mapping.
+If you want to make the most of PostHog's automatic survey analysis and results visualizations page, you'll need to capture survey responses in the above formats.
