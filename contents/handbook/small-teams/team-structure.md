@@ -22,6 +22,7 @@ Our small teams are:
 - [People & Ops](/handbook/small-teams/people)
 - [Pipeline](/handbook/small-teams/pipeline)
 - [Product Analytics](/handbook/small-teams/product-analytics)
+- [Web Analytics](/handbook/small-teams/web-analytics)
 - [Website & Docs](/handbook/small-teams/website-docs)
 
 ## Reporting lines

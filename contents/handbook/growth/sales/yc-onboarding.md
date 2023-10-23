@@ -206,5 +206,4 @@ To create a giftcard in Open Collective:
 ## Responsibilities
 
 - James H and Kendal manage 1-1 comms with YC companies initially
-- Cameron handles YC onboarding calls, billing, and HubSpot
-- Grace manages Printfection, Open Collective, and Shopify
+- Simon and Joe handle the rest

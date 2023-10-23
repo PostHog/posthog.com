@@ -13,7 +13,7 @@ import pluralize from 'pluralize'
 import { Login } from 'components/Community/Sidebar'
 import Layout from 'components/Layout'
 import Modal from 'components/Modal'
-import { Chat } from '@posthog/icons'
+import { IconChat } from '@posthog/icons'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { useQuestions } from 'hooks/useQuestions'
 import { QuestionData, StrapiResult } from 'lib/strapi'
@@ -253,7 +253,7 @@ const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>
                                 <span className="text-base line-clamp-2 text-ellipsis ">{subject}</span>
                                 <span className="flex-shrink-0 text-black dark:text-white text-xs flex space-x-1 items-center opacity-70">
                                     <span className="w-4">
-                                        <Chat />
+                                        <IconChat />
                                     </span>
                                     <span>{numReplies}</span>
                                 </span>
@@ -294,6 +294,16 @@ export const Sidebar = () => {
     const { questions: newestQuestions } = useQuestions({
         limit: 5,
         sortBy: 'newest',
+        filters: {
+            subject: {
+                $ne: '',
+            },
+            slugs: {
+                slug: {
+                    $notContainsi: '/community/profiles',
+                },
+            },
+        },
     })
 
     return (

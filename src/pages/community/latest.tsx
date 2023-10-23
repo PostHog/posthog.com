@@ -5,7 +5,19 @@ import { useQuestions } from 'hooks/useQuestions'
 import CommunityLayout, { SectionTitle } from 'components/Community/Layout'
 
 export default function CommunityPage() {
-    const { questions, fetchMore, isLoading } = useQuestions({ limit: 10 })
+    const { questions, fetchMore, isLoading } = useQuestions({
+        limit: 10,
+        filters: {
+            subject: {
+                $ne: '',
+            },
+            slugs: {
+                slug: {
+                    $notContainsi: '/community/profiles',
+                },
+            },
+        },
+    })
     return (
         <CommunityLayout title="Latest">
             <div id="recent-questions" className="mb-12 xl:-mx-6">

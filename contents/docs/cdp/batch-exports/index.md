@@ -25,6 +25,7 @@ Every batch export exports data to a destination using the configuration paramet
 * [BigQuery](/docs/cdp/batch-exports/bigquery)
 * [S3](/docs/cdp/batch-exports/s3)
 * [Snowflake](/docs/cdp/batch-exports/snowflake)
+* [Postgres](/docs/cdp/batch-exports/postgres)
 
 Support for new destinations will be added based on demand. You can follow development of new destinations [here](https://github.com/PostHog/posthog/issues/15997).
 

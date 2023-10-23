@@ -19,7 +19,7 @@ export const AboutStory = () => {
                         weeks later, we'd gone past 1,500 stars on GitHub.
                     </p>
 
-                    <CallToAction to="/handbook/company/story" className="w-full mdlg:w-auto">
+                    <CallToAction to="/handbook/story#timeline" className="w-full mdlg:w-auto">
                         Continue reading
                     </CallToAction>
                 </div>

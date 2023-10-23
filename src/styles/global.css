@@ -37,6 +37,24 @@ code {
     }
 }
 
+/* test
+.product-scrollbar::-webkit-scrollbar {
+    width: 12px;
+}
+
+.product-scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+    background: yellow;
+}
+
+.product-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    background: blue;
+}
+*/
+
 /* links and text */
 
 *,
@@ -108,7 +126,7 @@ h3 {
 }
 
 h4 {
-    @apply text-base leading-normal mb-3;
+    @apply text-[1.25rem] leading-normal mb-3;
 
     code {
         @apply !font-bold !text-xl;
@@ -132,10 +150,20 @@ h4 {
 
     h2 {
         @apply text-[1.75rem];
+
+        code {
+            @apply !text-[1.75rem];
+        }
     }
 
     h2 + h3 {
         @apply mt-4;
+    }
+
+    h3 {
+        code {
+            @apply !text-xl;
+        }
     }
 
     p,

@@ -31,7 +31,7 @@ We can also get the full component, where getting the first or last index might 
 - To breakdown by the first component in the chain, use `arrayElement(splitByChar(';', elements_chain), 1)`
 - To breakdown by the last component in the chain, use `arrayElement(splitByChar(';', elements_chain), -1)`
 
-You can use this method to other get components or elements at other indexes or run other [array-specific functions](/docs/product-analytics/hogql#arrays-and-strings-in-common).
+You can use this method to other get components or elements at other indexes or run other [array-specific functions](/tutorials/array-filter-breakdown).
 
 ## Breaking down by attributes
 

@@ -1,45 +1,90 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
-import { Spacer } from '../components/Spacer'
-import { Link } from 'gatsby'
+import Link from 'components/Link'
 import HubSpotForm from 'components/HubSpotForm'
+import YCsign from '../images/max-yc.png'
+import { StaticImage } from 'gatsby-plugin-image'
+import { Check2 } from 'components/Icons'
+import { useValues } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
+
+const features = [
+    '$50,000 in PostHog credit for 12 months<sup>1</sup>',
+    'Exclusive PostHog merch for founders<sup>2</sup>',
+    'Access to our YC founder Slack community',
+    'Onboarding session to get you started',
+    'Our CEO on WhatsApp or SMS',
+]
 
 export const YCOnboarding = () => {
+    const { websiteTheme } = useValues(layoutLogic)
+    const darkMode = websiteTheme === 'dark'
     return (
         <Layout>
-            <div className="flex flex-col items-stretch w-full max-w-4xl mx-auto">
-                <Spacer />
-                <h1 className="centered">PostHog YC Onboarding</h1>
-                <br />
-                <p>
-                    Welcome to our super secret YC onboarding page! We're very happy to see you. Please let us know what
-                    you're interested in using the form below.
-                </p>
-                <p>
-                    The setup calls take place with our Customer Success team, and run for about an hour. Before the
-                    call, we recommend you <a href="https://app.posthog.com/">sign up to our Cloud version</a> and try
-                    your hand at
-                    <Link to="/docs/integrate"> installing our snippet</Link> on your website. Doing so would allow us
-                    to tailor the onboarding to your needs, leveraging data from your own website instead of demo data.
-                    However, if you prefer to get a demo first, we'll be happy to spend 30 minutes to walk you through
-                    our features.
-                </p>
-                <p>
-                    Following the demo, we'll send over to you your choice of either Apple AirPods or a Timbuk2
-                    backpack. Due to boring customs reasons, if you live outside the US or Canada, we'll offer you a
-                    $150 merch gift card or make a $150 Open Collective donation of your choice. We'll also add $50K of
-                    credit to your PostHog Stripe account which is valid for 12 months ($25K / 6 months for past YC
-                    batches).
-                </p>
-                <HubSpotForm
-                    customFields={{
-                        yc_reason: {
-                            type: 'radioGroup',
-                            cols: 1,
-                        },
-                    }}
-                    formID="1c421f4a-320a-4c2a-8879-e37ccfcdea87"
-                />
+            <div className="lg:py-12 py-4 px-5">
+                <section className="mb-12">
+                    <div className="text-center">
+                        <img
+                            src={YCsign}
+                            alt="A hedgehog by the YC sign"
+                            className="max-w-full max-h-72 mx-auto mb-8"
+                        />
+
+                        <h1 className="text-3xl md:text-5xl mt-4 mb-2">You've found our secret Y Combinator offer!</h1>
+                        <p className="m-0 text-lg">
+                            We offer special benefits for teams in the current batch - things we'd have found useful
+                            during our W20 batch.
+                        </p>
+                    </div>
+                </section>
+                <section className="grid md:grid-cols-2 max-w-5xl mx-auto md:gap-x-16 gap-y-12">
+                    <div className="order-1 md:order-2">
+                        <h3 className="mt-1 mb-4">Benefits</h3>
+                        <ul className="list-none m-0 mb-8 p-0 mt-2 flex flex-col space-y-1">
+                            {features.map((feature) => {
+                                return (
+                                    <li key={feature} className="flex space-x-2">
+                                        <Check2 className="w-5 text-seagreen dark:text-white/40" />
+                                        <span dangerouslySetInnerHTML={{ __html: feature }} />
+                                    </li>
+                                )
+                            })}
+                        </ul>
+
+                        <p className="text-sm">
+                            <sup>1</sup> Applicants from previous batches receive $25,000 for 6 months instead.
+                            <br />
+                            <sup>2</sup> Boring international customs reasons mean users outside US/Canada get a $150
+                            PostHog merch voucher instead.
+                        </p>
+                    </div>
+                    <div className="order-2 md:order-2 mb-12">
+                        <h3 className="mb-1">How to apply</h3>
+                        <ol className="mb-4">
+                            <li>Complete the form below</li>
+                            <li>
+                                <Link to="https://app.posthog.com/signup" external>
+                                    Sign up for PostHog Cloud
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/docs/getting-started/install" external>
+                                    Install the snippet
+                                </Link>{' '}
+                                in your product
+                            </li>
+                        </ol>
+                        <HubSpotForm
+                            customFields={{
+                                yc_reason: {
+                                    type: 'radioGroup',
+                                    cols: 1,
+                                },
+                            }}
+                            formID="1c421f4a-320a-4c2a-8879-e37ccfcdea87"
+                        />
+                    </div>
+                </section>
             </div>
         </Layout>
     )

@@ -1,4 +1,10 @@
 {
+    "rewrites": [
+        { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
+        { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
+        { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
+        { "source": "/careers/(.*)", "destination": "/careers" }
+    ],
     "redirects": [
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -346,6 +352,7 @@
         { "source": "/ebenezer", "destination": "/?utm_campaign=ebenezer" },
         { "source": "/codu", "destination": "/?utm_campaign=codu" },
         { "source": "/peterelbaum", "destination": "/?utm_campaign=peterelbaum" },
+        { "source": "/theo", "destination": "/?utm_source=theo&utm_campaign=theo" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
@@ -931,6 +938,10 @@
         { "source": "/jamesg", "destination": "/community/profiles/90" },
         { "source": "/jams", "destination": "/community/profiles/90" },
         { "source": "/docs/surveys/manual", "destination": "/docs/surveys" },
+        { "source": "/docs/surveys/setup", "destination": "/docs/surveys/installation" },
+        { "source": "/docs/surveys/new", "destination": "/docs/surveys/creating-surveys" },
+        { "source": "/docs/surveys/targeting", "destination": "/docs/surveys/creating-surveys" },
+        { "source": "/docs/surveys/events", "destination": "/docs/surveys/implementing-custom-surveys" },
         { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" },
         { "source": "/api", "destination": "/docs/api" },
         {
@@ -956,12 +967,47 @@
         { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" },
         { "source": "/docs/cdp/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/docs/cdp/unduplicator", "destination": "/docs/cdp" },
-        { "source": "/cdp/unduplicator", "destination": "/docs/cdp" }
-    ],
-    "rewrites": [
-        { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
-        { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
-        { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
-        { "source": "/careers/(.*)", "destination": "/careers" }
+        { "source": "/cdp/unduplicator", "destination": "/docs/cdp" },
+        { "source": "/handbook/strategy/overview", "destination": "/handbook/future" },
+        { "source": "/handbook/strategy/ideal-customer-persona", "destination": "/handbook/making-users-happy" },
+        { "source": "/handbook/strategy/business-model", "destination": "/handbook/how-we-make-money" },
+        { "source": "/handbook/strategy/objectives", "destination": "/handbook/help" },
+        { "source": "/handbook/strategy/investors", "destination": "/about" },
+        { "source": "/handbook/start-here", "destination": "/handbook/people/onboarding" },
+        { "source": "/handbook/small-teams/dw", "destination": "/handbook/small-teams/data-warehouse" },
+        { "source": "/tutorials/migrate-eu-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
+        { "source": "/docs/migrate/migrate-broken-self-hosted", "destination": "/docs/migrate/migrate-to-cloud" },
+
+        { "source": "/product-analytics/pricing", "destination": "/product-analytics#pricing" },
+        { "source": "/product-analytics/customers", "destination": "/product-analytics#customers" },
+        { "source": "/product-analytics/comparisons", "destination": "/product-analytics#posthog-vs" },
+        { "source": "/product-analytics/documentation", "destination": "/product-analytics#docs" },
+        { "source": "/product-analytics/tutorials", "destination": "/product-analytics#tutorials" },
+        { "source": "/product-analytics/roadmap", "destination": "/product-analytics#roadmap" },
+        { "source": "/product-analytics/questions", "destination": "/product-analytics#questions" },
+
+        { "source": "/session-replay/pricing", "destination": "/session-replay#pricing" },
+        { "source": "/session-replay/customers", "destination": "/session-replay#customers" },
+        { "source": "/session-replay/comparisons", "destination": "/session-replay#posthog-vs" },
+        { "source": "/session-replay/documentation", "destination": "/session-replay#docs" },
+        { "source": "/session-replay/tutorials", "destination": "/session-replay#tutorials" },
+        { "source": "/session-replay/roadmap", "destination": "/session-replay#roadmap" },
+        { "source": "/session-replay/questions", "destination": "/session-replay#questions" },
+
+        { "source": "/feature-flags/pricing", "destination": "/feature-flags#pricing" },
+        { "source": "/feature-flags/customers", "destination": "/feature-flags#customers" },
+        { "source": "/feature-flags/comparisons", "destination": "/feature-flags#posthog-vs" },
+        { "source": "/feature-flags/documentation", "destination": "/feature-flags#docs" },
+        { "source": "/feature-flags/tutorials", "destination": "/feature-flags#tutorials" },
+        { "source": "/feature-flags/roadmap", "destination": "/feature-flags#roadmap" },
+        { "source": "/feature-flags/questions", "destination": "/feature-flags#questions" },
+
+        { "source": "/ab-testing/pricing", "destination": "/ab-testing#pricing" },
+        { "source": "/ab-testing/customers", "destination": "/ab-testing#customers" },
+        { "source": "/ab-testing/comparisons", "destination": "/ab-testing#posthog-vs" },
+        { "source": "/ab-testing/documentation", "destination": "/ab-testing#docs" },
+        { "source": "/ab-testing/tutorials", "destination": "/ab-testing#tutorials" },
+        { "source": "/ab-testing/roadmap", "destination": "/ab-testing#roadmap" },
+        { "source": "/ab-testing/questions", "destination": "/ab-testing#questions" }
     ]
 }

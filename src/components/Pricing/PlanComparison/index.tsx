@@ -103,8 +103,8 @@ const ProductTiersModal = ({
     return (
         <Modal open={modalOpen} setOpen={setModalOpen}>
             <div className="flex items-center w-full h-full justify-center">
-                <div className="text-left max-w-xl bg-accent dark:bg-accent-dark rounded-md relative w-full p-8 m-8">
-                    <p className="mb-1">{capitalizeFirstLetter(plan.name)} pricing</p>
+                <div className="text-left max-w-xl border border-border dark:border-dark shadow-xl bg-white dark:bg-accent-dark rounded-md relative w-full p-8 m-8">
+                    <p className="mb-1 font-bold">{capitalizeFirstLetter(plan.name)} pricing</p>
                     <p className="mb-1">
                         <span className="font-bold text-base">
                             $
@@ -341,7 +341,15 @@ export const allProductsData = graphql`
     }
 `
 
-export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?: string[] }): JSX.Element => {
+export const PlanComparison = ({
+    groupsToShow,
+    showCTA = true,
+    showHeaders = true,
+}: {
+    groupsToShow?: string[]
+    showCTA?: boolean
+    showHeaders?: boolean
+}): JSX.Element => {
     const posthog = usePostHog()
 
     const staticProducts: BillingProductV2Type[] = useStaticQuery(allProductsData).allProductData.edges[0].node.products
@@ -365,79 +373,82 @@ export const PlanComparison = ({ groupsToShow, showCTA = true }: { groupsToShow?
     return (
         <div className={`w-full relative mb-0 space-y-4 -mt-8 md:mt-0`}>
             {/* PLAN HEADERS */}
-            <div className="flex flex-wrap sticky top-[56px] lg:top-[108px] z-10 -mx-4 md:mx-0 bg-light dark:bg-dark">
-                <div
-                    className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium border-b border-border dark:border-dark pb-4 pl-4 md:pl-0`}
-                >
-                    <p className="font-bold mb-0">PostHog OS ships with all products</p>
-                    <p className="text-primary/50 dark:text-primary-dark/50 text-sm mb-0">
-                        Start with our generous free tiers and subcribe when you need more volume. Set billing limits so
-                        you never receive an unexpected bill.
-                    </p>
-                </div>
+            {showHeaders && (
+                <div className="flex flex-wrap sticky top-[56px] lg:top-[108px] z-10 -mx-4 md:mx-0 bg-light dark:bg-dark">
+                    <div
+                        className={`basis-[100%] md:basis-0 flex-1 py-2 pr-6 text-[14px] font-medium border-b border-border dark:border-dark pb-4 pl-4 md:pl-0`}
+                    >
+                        <p className="font-bold mb-0">PostHog OS ships with all products</p>
+                        <p className="text-primary/50 dark:text-primary-dark/50 text-sm mb-0">
+                            Start with our generous free tiers and subcribe when you need more volume. Set billing
+                            limits so you never receive an unexpected bill.
+                        </p>
+                    </div>
 
-                <div className="w-full md:flex-[0_0_60%] flex border-b border-border dark:border-border-dark px-4 md:gap-4">
-                    {staticPlans.map((plan) => (
-                        <div
-                            key={`${plan.plan_key}-header`}
-                            className={`py-2 px-2 text-sm leading-tight w-full pb-4  border-l border-accent dark:border-accent-dark first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
-                        >
-                            <div className="flex-1 flex flex-col h-full justify-between">
-                                <div>
-                                    {!groupsToShow ||
-                                    !groupsToShow.some((product_name) =>
-                                        inclusionOnlyProducts.includes(product_name)
-                                    ) ? (
-                                        <>
-                                            <p className="font-bold mb-0 text-center md:text-left">
-                                                {plan.free_allocation ? 'Free' : 'Paid'}
-                                            </p>
-                                            <p className="hidden md:block text-primary/50 dark:text-primary-dark/50 text-sm mb-3">
-                                                {plan.free_allocation
-                                                    ? 'Generous free usage on every product. Best for early-stage startups and hobbyists.'
-                                                    : 'The whole hog. Pay per use with billing limits to control spend. Priority support.'}
-                                            </p>
-                                        </>
-                                    ) : groupsToShow.some((product_name) =>
-                                          inclusionOnlyProducts.includes(product_name)
-                                      ) ? (
-                                        <>
-                                            <div className="mb-2">
+                    <div className="w-full md:flex-[0_0_60%] flex border-b border-border dark:border-border-dark px-4 md:gap-4">
+                        {staticPlans.map((plan) => (
+                            <div
+                                key={`${plan.plan_key}-header`}
+                                className={`py-2 px-2 text-sm leading-tight w-full pb-4  border-l border-accent dark:border-accent-dark first:border-l-0 md:pr-0 md:pl-0 md:border-0`}
+                            >
+                                <div className="flex-1 flex flex-col h-full justify-between">
+                                    <div>
+                                        {!groupsToShow ||
+                                        !groupsToShow.some((product_name) =>
+                                            inclusionOnlyProducts.includes(product_name)
+                                        ) ? (
+                                            <>
                                                 <p className="font-bold mb-0 text-center md:text-left">
-                                                    {plan.free_allocation ? 'Free' : 'Included'}
+                                                    {plan.free_allocation ? 'Free' : 'Paid'}
                                                 </p>
-                                                {!plan.free_allocation && (
-                                                    <p className="hidden md:block text-primary/50 dark:text-primary-dark/50 text-sm mb-3">
-                                                        With any paid product plan
+                                                <p className="hidden md:block text-primary/50 dark:text-primary-dark/50 text-sm mb-3">
+                                                    {plan.free_allocation
+                                                        ? 'Generous free usage on every product. Best for early-stage startups and hobbyists.'
+                                                        : 'The whole hog. Pay per use with billing limits to control spend. Priority support.'}
+                                                </p>
+                                            </>
+                                        ) : groupsToShow.some((product_name) =>
+                                              inclusionOnlyProducts.includes(product_name)
+                                          ) ? (
+                                            <>
+                                                <div className="mb-2">
+                                                    <p className="font-bold mb-0 text-center md:text-left">
+                                                        {plan.free_allocation ? 'Free' : 'Included'}
                                                     </p>
-                                                )}
-                                            </div>
-                                        </>
-                                    ) : null}
+                                                    {!plan.free_allocation && (
+                                                        <p className="hidden md:block text-primary/50 dark:text-primary-dark/50 text-sm mb-3">
+                                                            With any paid product plan
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </>
+                                        ) : null}
+                                    </div>
+                                    {showCTA && (
+                                        <TrackedCTA
+                                            event={{
+                                                name: `clicked Get started - free`,
+                                                type: 'cloud',
+                                            }}
+                                            type="primary"
+                                            size="md"
+                                            className="shadow-md !w-auto"
+                                            to={`https://${
+                                                posthog?.isFeatureEnabled &&
+                                                posthog?.isFeatureEnabled('direct-to-eu-cloud')
+                                                    ? 'eu'
+                                                    : 'app'
+                                            }.posthog.com/signup`}
+                                        >
+                                            Get started - free
+                                        </TrackedCTA>
+                                    )}
                                 </div>
-                                {showCTA && (
-                                    <TrackedCTA
-                                        event={{
-                                            name: `clicked Get started - free`,
-                                            type: 'cloud',
-                                        }}
-                                        type="primary"
-                                        size="md"
-                                        className="shadow-md !w-auto"
-                                        to={`https://${
-                                            posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
-                                                ? 'eu'
-                                                : 'app'
-                                        }.posthog.com/signup`}
-                                    >
-                                        Get started - free
-                                    </TrackedCTA>
-                                )}
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
             {/* PRODUCTS */}
             {staticProducts?.map((product) => {
                 console.log(product.name)

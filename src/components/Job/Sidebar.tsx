@@ -2,12 +2,11 @@ import React from 'react'
 import Tooltip from 'components/Tooltip'
 import { kebabCase } from 'lib/utils'
 import Link from 'components/Link'
-import { Pineapple, Pizza } from 'components/NotProductIcons'
 import ReactCountryFlag from 'react-country-flag'
 import { ContributorImage } from 'components/PostLayout/Contributors'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 
-import { ThumbDown, ThumbUp } from 'components/Icons/Icons'
+import { IconPineapple, IconPizza, IconThumbsDown, IconThumbsUp } from '@posthog/icons'
 
 interface ITeam {
     frontmatter: {
@@ -126,17 +125,17 @@ export default function Sidebar({ team, teamLead, teamName, teamSlug }: ISidebar
             <SidebarSection title="Pineapple on pizza?" className="-mt-2">
                 <div className="space-x-2 flex items-center mb-4 text-lg font-semibold">
                     <span className="w-8 h-8 relative top-[-1px] -mr-1">
-                        <Pineapple />
+                        <IconPineapple />
                     </span>
                     <span>+</span>
                     <span className="w-7 h-7 relative top-[1px]">
-                        <Pizza />
+                        <IconPizza />
                     </span>
                     <span>=</span>
                     {pineapplePercentage >= 50 ? (
-                        <ThumbUp className="w-8 h-8 fill-green" />
+                        <IconThumbsUp className="w-8 h-8 fill-green" />
                     ) : (
-                        <ThumbDown className="w-8 h-8 fill-green" />
+                        <IconThumbsDown className="w-8 h-8 fill-red" />
                     )}
                 </div>
                 <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">{pineappleText(pineapplePercentage)}</p>

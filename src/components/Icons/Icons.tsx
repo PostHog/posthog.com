@@ -1511,6 +1511,26 @@ export const Platform = (props): JSX.Element => {
     )
 }
 
+export const Playlist = (props): JSX.Element => {
+    return (
+        <svg {...props} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clipPath="url(#a)">
+                <path d="M15.51 12.044a.802.802 0 0 0-1.218.686v7.54a.802.802 0 0 0 1.217.686l6.22-3.77a.802.802 0 0 0 0-1.372l-6.22-3.77Z" />
+                <path
+                    fillRule="evenodd"
+                    d="M2.5 5.75A.75.75 0 0 1 3.25 5h13.51a.75.75 0 0 1 0 1.5H3.25a.75.75 0 0 1-.75-.75Zm0 6.25a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 2.5 12Zm0 6.25a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1-.75-.75Z"
+                    clipRule="evenodd"
+                />
+            </g>
+            <defs>
+                <clipPath id="a">
+                    <path d="M0 0h24v24H0z" />
+                </clipPath>
+            </defs>
+        </svg>
+    )
+}
+
 export const Dashboards = (props): JSX.Element => {
     return (
         <svg {...props} width="36" height="20" viewBox="0 0 36 20" fill="none" xmlns="http://www.w3.org/2000/svg">

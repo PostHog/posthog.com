@@ -17,7 +17,7 @@ tags:
 ---
 _(Welcome to another episode of PostHog's Community Conversations where we chat to our contributors and users.)_
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dL-GaQlA6bo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/dL-GaQlA6bo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Unlike most tech founders, Leo Anthias didn’t study computer science at university. Instead, he took Persian History and Modern American Drama after a chance encounter with a professor who made medieval history fascinating. Despite his non-tech academic background, however, Leo has been coding for years, from early roles as CTO of Kivo, a YC-backed document collaboration start-up, to his current job as CEO and co-founder of Datapane.
 

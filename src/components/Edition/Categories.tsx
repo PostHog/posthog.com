@@ -1,5 +1,5 @@
 import { Menu } from '@headlessui/react'
-import { Check, ChevronDown } from '@posthog/icons'
+import { IconCheck, IconChevronDown } from '@posthog/icons'
 import React, { useEffect, useRef, useState } from 'react'
 import { fetchCategories } from './lib'
 import qs from 'qs'
@@ -89,7 +89,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                     className={`text-left text-sm flex space-x-2 justify-between items-end relative px-4 py-1 rounded border border-b-3 hover:border-light dark:hover:border-dark bg-accent dark:bg-accent-dark border-light dark:border-dark hover:top-[0px] hover:scale-[1]`}
                 >
                     <span>Categories</span>
-                    <ChevronDown className="w-5 mb-[-1px]" />
+                    <IconChevronDown className="w-5 mb-[-1px]" />
                 </Menu.Button>
                 {open && categories?.length > 0 && (
                     <Menu.Items
@@ -112,7 +112,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                                                 active ? 'bg-red border-red' : 'border-border dark:border-dark'
                                             }`}
                                         >
-                                            {active && <Check />}
+                                            {active && <IconCheck />}
                                         </span>
                                         <span className="text-sm">{category.attributes.label}</span>
                                     </button>
@@ -142,7 +142,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                                                                         : 'border-border dark:border-dark'
                                                                 }`}
                                                             >
-                                                                {active && <Check />}
+                                                                {active && <IconCheck />}
                                                             </span>
                                                             <span className="text-sm">{tag.attributes.label}</span>
                                                         </button>
