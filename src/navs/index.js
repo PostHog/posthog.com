@@ -1478,6 +1478,10 @@ export const docsMenu = {
                             url: '/docs/api/session-recordings',
                         },
                         {
+                            name: 'Surveys',
+                            url: '/docs/api/surveys',
+                        },
+                        {
                             name: 'Trends',
                             url: '/docs/api/trend',
                         },
