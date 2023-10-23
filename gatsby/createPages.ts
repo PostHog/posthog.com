@@ -155,21 +155,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            product: allMdx(filter: { frontmatter: { template: { eq: "product" } } }) {
-                nodes {
-                    id
-                    frontmatter {
-                        productBlog {
-                            tags
-                        }
-                        productTutorialTags
-                        customerURLs
-                    }
-                    fields {
-                        slug
-                    }
-                }
-            }
             blogPosts: allMdx(
                 filter: {
                     isFuture: { eq: false }
