@@ -356,7 +356,7 @@ export const ProductSurveys = () => {
     `)
     return (
         <Layout>
-            <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
+            <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0 -mb-20">
                 <Hero
                     color="salmon"
                     icon={<IconMessage />}
@@ -401,7 +401,7 @@ export const ProductSurveys = () => {
                 */}
             </div>
 
-            <SmoothScroll className="-mt-24" exclude={['Installation']} />
+            <SmoothScroll exclude={['Installation']} />
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
