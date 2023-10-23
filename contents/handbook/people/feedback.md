@@ -27,7 +27,9 @@ We run full team 360-degree feedback session as part of every offsite. The sessi
 
 - That being said, avoid piling on and repeating feedback others have given unless you have a different perspective or can add more context. It is ok to say "+1 to what X said about Y" and move on. Do not spend 2min repeating the same point that has already been made by someone else. 
 
-- Everyone is responsible for noting down and actioning their own feedback (ie. the people team won't do this for you). 
+- Everyone is responsible for noting down and actioning their own feedback (ie. the people team won't do this for you).
+
+- What is discussed is for the benefit of those present and should not be shared with others who were not present. It is ok to follow up with anyone on feedback you received or gave after the session. 
 
 ### How to give good feedback
 
