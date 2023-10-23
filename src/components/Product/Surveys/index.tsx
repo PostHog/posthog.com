@@ -38,6 +38,7 @@ import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
+import { SEO } from 'components/seo'
 
 const product = {
     slug: 'surveys',
@@ -356,6 +357,11 @@ export const ProductSurveys = () => {
     `)
     return (
         <Layout>
+            <SEO
+                title="Surveys - PostHog"
+                description="Ask anything with no-code surveys – or use the API for complete control."
+                image={`/images/og/surveys.jpg`}
+            />
             <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0 -mb-20">
                 <Hero
                     color="salmon"

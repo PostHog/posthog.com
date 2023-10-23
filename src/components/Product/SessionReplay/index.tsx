@@ -40,6 +40,7 @@ import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
+import { SEO } from 'components/seo'
 
 const product = {
     slug: 'session-replay',
@@ -351,6 +352,11 @@ export const ProductSessionReplay = () => {
     `)
     return (
         <Layout>
+            <SEO
+                title="Session Replay - PostHog"
+                description="Session Replay helps you diagnose issues and understand user behavior in your product or website."
+                image={`/images/og/session-replay.jpg`}
+            />
             <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
                 <Hero
                     color="yellow"

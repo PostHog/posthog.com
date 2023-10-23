@@ -48,6 +48,7 @@ import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
 import Tooltip from 'components/Tooltip'
 import { TextCard } from 'components/Products/TextCard'
+import { SEO } from 'components/seo'
 
 const ProductIcon = ({ name, url, color, icon }) => {
     return (
@@ -133,9 +134,14 @@ export const ProductOS = () => {
     `)
     return (
         <Layout>
+            <SEO
+                title="Product OS - PostHog"
+                description="The product data infrastructure that powers the PostHog platform"
+                image={`/images/og/product-os.jpg`}
+            />
             <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
                 <Hero
-                    color="salmon"
+                    color="blue"
                     icon={<IconStack />}
                     product={product.capitalized}
                     title="Product data infrastructure"

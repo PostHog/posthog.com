@@ -43,6 +43,7 @@ import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
+import { SEO } from 'components/seo'
 
 const product = {
     slug: 'feature-flags',
@@ -367,6 +368,11 @@ export const ProductFeatureFlags = () => {
     `)
     return (
         <Layout>
+            <SEO
+                title="Feature Flags - PostHog"
+                description="Safely roll out features to specific users or groups."
+                image={`/images/og/feature-flags.jpg`}
+            />
             <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
                 <Hero
                     color="seagreen"

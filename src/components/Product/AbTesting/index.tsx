@@ -32,6 +32,7 @@ import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
+import { SEO } from 'components/seo'
 
 const product = {
     slug: 'ab-testing',
@@ -279,6 +280,11 @@ export const ProductAbTesting = () => {
     `)
     return (
         <Layout>
+            <SEO
+                title="A/B Testing - PostHog"
+                description="Run statistically-significant multivariate tests and robust targeting & exclusion rules."
+                image={`/images/og/ab-testing.jpg`}
+            />
             <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
                 <Hero
                     color="purple"

@@ -42,6 +42,7 @@ import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
 import Slider from 'components/Products/Slider'
 import MobileSlides from 'components/Products/MobileSlides'
+import { SEO } from 'components/seo'
 
 const product = {
     slug: 'product-analytics',
@@ -771,6 +772,11 @@ export const ProductProductAnalytics = () => {
     `)
     return (
         <Layout>
+            <SEO
+                title="Product Analytics - PostHog"
+                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, A/B Testing, and Surveys."
+                image={`/images/og/product-analytics.jpg`}
+            />
             <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
                 <Hero
                     color="blue"
