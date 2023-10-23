@@ -49,16 +49,19 @@ const features = [
         title: 'Customizable goals',
         description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance',
         image: <StaticImage src="./images/goals.png" width={428} />,
+        border: true,
     },
     {
         title: 'Targeting & exclusion rules',
         description: 'Set criteria for user location, user property, cohort, or group',
-        image: <StaticImage src="./images/targeting.png" width={428} />,
+        image: <StaticImage src="./images/targeting-ab.png" width={428} />,
+        border: true,
     },
     {
         title: 'Recommendations',
         description: 'Automatic suggestions for duration, sample size, and confidence threshold in a winning variant',
         image: <StaticImage src="./images/recommendations.png" width={428} />,
+        border: true,
     },
 ]
 

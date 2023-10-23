@@ -60,28 +60,33 @@ const features = [
         title: 'Release conditions',
         description: 'Customize your rollout strategy by user or group properties, cohort, or trafic percentage',
         image: <StaticImage src="./images/release-conditions.png" width={420} />,
+        border: true,
     },
     {
         title: 'Multivariate feature flags',
         description: 'Simultaneously test multiple versions against a control group',
         image: <StaticImage src="./images/multivariate.png" width={420} />,
+        border: true,
     },
     {
         title: 'Test changes without touching your codebase',
         description:
             'JSON payloads let you change text, visuals, or entire blocks of code without subsequent deployments',
         image: <StaticImage src="./images/payloads.png" width={420} />,
+        border: true,
     },
     {
         title: 'Developer-friendly automation',
         description:
             'Automated usage reports, IP address resolution (for location-based targeting), and recall user properties to avoid passing them manually every time',
         image: <StaticImage src="./images/reports.png" width={420} />,
+        border: true,
     },
     {
         title: 'Early access feature opt-in widget',
         description: 'Allow users to opt in to (or out of) specified features. Or use the API to build your own UI.',
         image: <StaticImage src="./images/early-access.png" width={420} />,
+        border: true,
     },
 ]
 

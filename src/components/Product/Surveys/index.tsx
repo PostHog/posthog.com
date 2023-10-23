@@ -60,6 +60,8 @@ const features = [
         title: 'Templates',
         description: 'Choose from the library or start from scratch',
         image: <StaticImage src="./images/templates.png" width={428} />,
+        background: true,
+        fade: true,
     },
     {
         title: 'Targeting',
@@ -81,6 +83,7 @@ const features = [
         description:
             "Using PostHog.js? No more code required. But want to create your own UI? Check out the <a href='/docs/surveys/implementing-custom-surveys'>Surveys API</a>.",
         image: <StaticImage src="./images/api.png" width={428} />,
+        fade: true,
     },
 ]
 
@@ -109,18 +112,17 @@ const questions = [
         url: '/tutorials/nps-survey',
     },
     {
+        question: 'Would you like to book a user interview?',
+        url: '/tutorials/feedback-interviews-site-apps',
+    },
+    {
         question: 'Would you like to be interviewed by our product team?',
-        url: '#',
     },
     {
         question: 'How would you feel if you could no longer use this product?',
     },
     {
         question: "How satisfied are you with the support you've received?",
-    },
-    {
-        question: 'Would you like to book a user interview?',
-        url: '#',
     },
 ]
 
@@ -418,7 +420,7 @@ export const ProductSurveys = () => {
                 </section>
 
                 <section className="bg-accent dark:bg-accent-dark">
-                    <Marquee product={product.capitalized}>
+                    <Marquee product={product.capitalized} shortFade={true}>
                         {questions.map((question, index) => {
                             return <Question {...question} key={index} />
                         })}
