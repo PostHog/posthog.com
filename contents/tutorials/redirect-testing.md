@@ -10,7 +10,7 @@ tags: ['experimentation', 'feature flags']
 
 Redirect testing is a way to A/B test web pages by redirecting users to one or the other.
 
-To show you how to set up a redirect test with PostHog, we create a two-page Next.js app, create an experiment in PostHog, and then implement it in our app using middleware and feature flags. 
+To show you how to set up a redirect test with PostHog, we create a two-page Next.js app, create an A/B test in PostHog, and then implement it in our app using middleware and feature flags. 
 
 > **Note:** Although we are using Next.js in this tutorial, this method works with any framework where you can do server-side redirects.
 
