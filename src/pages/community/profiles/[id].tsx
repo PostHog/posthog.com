@@ -169,7 +169,7 @@ export default function ProfilePage({ params }: PageProps) {
                                     </div>
 
                                     {profile?.biography && (
-                                        <section>
+                                        <section className="article-content">
                                             <h3>Biography</h3>
 
                                             <Markdown>{profile.biography}</Markdown>
