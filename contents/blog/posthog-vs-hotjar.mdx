@@ -51,90 +51,26 @@ We built PostHog to support technically-savvy product managers and engineers –
 
 Because we build for engineers first, we're also open source. You can check out [PostHog’s source code](https://github.com/PostHog), [build integrations](/docs/apps/build) or [other services](/blog/how-we-built-an-app-server) on top of the product, and even [give feedback or interact with the team via GitHub](https://github.com/PostHog). Transparency, including transparent pricing, is one of our core values.
 
-<ArrayCTA />
-
 ## Core features
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-          <td className="w-3/12"></td>
-            <td><strong>Hotjar</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Session replays</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch real users use your product.</td>
-        </tr>
-        <tr>
-            <td><strong>Heatmaps</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Visualize where users click in your app or website.</td>
-        </tr>
-        <tr>
-            <td><strong>Product analytics</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track events and conversion; analyze user behavior.</td>
-        </tr>
-        <tr>
-            <td><strong>Feature flags</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Roll out features safely; toggle features for cohorts or individuals.</td>
-        </tr>
-        <tr>
-            <td><strong>A/B testing</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Test changes and analyze impact.</td>
-        </tr>
-        <tr>
-            <td><strong>In-app prompts and messages</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send messages to users in your app.</td>
-        </tr>
-        <tr>
-            <td><strong>Surveys</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Capture user feedback with surveys. </td>
-        </tr>
-        <tr>
-            <td><strong>Customer interview scheduling</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>In-app widget for requesting customer interviews.</td>
-        </tr>
-        <tr>
-            <td><strong>User interview recordings and transcriptions</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong>Apps</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Push and pull data to other destinations</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+
+<ComparisonTable column1="Hotjar" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Session replays" description="Watch real users use your product." />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click in your app or website." />
+  <ComparisonRow column1={false} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior." />
+  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals." />
+  <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Test changes and analyze impact." />
+  <ComparisonRow column1={false} column2={true} feature="In-app prompts and messages" description="Send messages to users in your app." />
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Capture user feedback with surveys." />
+  <ComparisonRow column1={true} column2={true} feature="Customer interview scheduling" description="In-app widget for requesting customer interviews" />
+  <ComparisonRow column1={true} column2={false} feature="User interview recordings and transcriptions" />
+  <ComparisonRow column1={true} column2={true} feature="Apps" description="Push and pull data to other destinations" />
+</ComparisonTable>
 
 - **Session replays:** [Session replays](/session-replay) in PostHog recreate exactly what real users see and how they use your product. They also enable you to debug problems using built-in [console logs](/docs/session-replay/manual#console-logs-recording), [performance monitoring](/tutorials/performance-metrics) and the [DOM explorer](/blog/posthog-changelog#experimental-dom-explorer-mode).
 
 - **Feature flags:** PostHog includes [multivariate feature flags](/feature-flags) that support JSON payloads. Teams can use feature flags to offer different features or UI choices to users, to trigger in-app messages, and more.
 
 - **A/B testing:** In PostHog, you can use the [experimentation suite](/ab-testing) to create multivariate tests within your product, such as showing some users a different page layout to others. Over time, you can build an understanding of which page performs better, correlate results with other events, and deploy a final version.
-
 
 ### Session replays
 
@@ -144,223 +80,52 @@ Session replays are an essential tool for understanding how people use your prod
 
 Both Hotjar and PostHog offer session replays:
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-			<td className="w-3/12"></td>
-            <td><strong>Hotjar</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Free replay allowance</strong></td>
-            <td className="text-center">~1k per month (max 35 per day) on Basic plan</td>
-            <td className="text-center">15k per month.</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong>Price for first 50k sessions</strong></td>
-            <td className="text-center">~$200 per month (max 1.5k sessions per day)</td>
-            <td className="text-center">$175 per month.</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong>Browser app replays</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch real users use your product.</td>
-        </tr>
-        <tr>
-            <td><strong>Connected to product analytics</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>View replays for specific users and events.</td>
-        </tr>
-        <tr>
-            <td><strong>Console logs</strong></td>
-            <td className="text-center">Only in Scale plan</td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Debug user problems and app errors.</td>
-        </tr>
-        <tr>
-            <td><strong>Performance monitoring</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Monitor network activity and performance.</td>
-        </tr>   
-        <tr>
-            <td><strong>iOS app replays</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Planned Q2 2023</td>
-            <td>Record user sessions in iOS apps.</td>
-        </tr>
-        <tr>
-            <td><strong>Android app replays</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Planned 2023</td>
-            <td>Record user sessions in Android apps.</td>
-        </tr>     
-        <tr>
-            <td><strong>Custom playlists</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Create playlists of related replays.</td>
-        </tr>   
-        <tr>
-            <td><strong>Download replays</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Save replay files offline for storage.</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Hotjar" column2="PostHog">
+  <ComparisonRow column1="~1k per month (max 35 per day) on Basic plan" column2="15,000/mo" feature="Free replay allowance" />
+  <ComparisonRow column1="~$200 per month (max 1.5k sessions per day)" column2="$175/mo" feature="Price for first 50k sessions" />
+  <ComparisonRow column1={true} column2={true} feature="Browser app replays" description="Watch real users use your product." />
+  <ComparisonRow column1={false} column2={true} feature="Connected to product analytics" description="View replays for specific users and events." />
+  <ComparisonRow column1="Only in Scale plan" column2={true} feature="Console logs" description="Debug user problems and app errors." />
+  <ComparisonRow column1={false} column2={true} feature="Performance monitoring" description="Monitor network activity and performance" />
+  <ComparisonRow column1={false} column2="Planned Q2 2023" feature="iOS app replays" description="Record user sessions in iOS apps." />
+  <ComparisonRow column1={false} column2="Planned 2023" feature="Android app replays" description="Record user sessions in Android apps." />
+  <ComparisonRow column1={false} column2={true} feature="Custom playlists" description="Create playlists of related replays." />
+  <ComparisonRow column1={true} column2={true} feature="Download replays" description="Save replay files offline for storage." />
+</ComparisonTable>
 
-- **Recording retention:** Hotjar keeps all replays for 365 days. PostHog retains all replays for three weeks, but retains replays saved to a playlist forever. PostHog also enables you to download replays as a `.json` file for safe keeping.
+- **Recording retention:** Hotjar keeps all replays for 365 days. PostHog retains all replays for up to three months, but retains replays saved to a playlist forever. PostHog also enables you to download replays as a `.json` file for safe keeping.
 
 ### Heatmaps
 
 Heatmaps visualize user activity in your app. They use colors or numbers to show which parts of the page people are interacting with the most. Both Hotjar and PostHog offer heatmaps, although PostHog's offering is more limited:
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-			<td className="w-3/12"></td>
-            <td><strong>Hotjar</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Click and tap heatmaps</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Show where users are clicking.</td>
-        </tr>
-        <tr>
-            <td><strong>Move heatmaps</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Show where users have moved their mouse on the screen.</td>
-        </tr>
-        <tr>
-            <td><strong>Scroll heatmaps</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Show how far down the page your users scroll.</td>
-        </tr>
-        <tr>
-            <td><strong>Rage clicks</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Show where users repeatedly click in a short period of time.</td>
-        </tr>
-        <tr>
-            <td><strong>Combine rage click data with product analytics</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>View related events and funnel data for users who rage click.</td>
-        </tr>
-        <tr>
-            <td><strong>Heatmap data filters</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Filter heatmaps by date, country etc.</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Hotjar" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Click and tap heatmaps" description="Show where users are clicking." />
+  <ComparisonRow column1={true} column2={false} feature="Move heatmaps" description="Show where users have moved their mouse on the screen." />
+  <ComparisonRow column1={true} column2={false} feature="Scroll heatmaps" description="Show how far down the page your users scroll." />
+  <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Show where users repeatedly click in a short period of time." />
+  <ComparisonRow column1={false} column2={true} feature="Combine rage click data with product analytics" description="View related events and funnel data for users who rage click." />
+  <ComparisonRow column1={true} column2={true} feature="Heatmap data filters" description="Filter heatmaps by date, country etc." />
+</ComparisonTable>
 
 ### Product analytics
 
 Although product analytics is not a core focus for Hotjar, they do offer basic features, such as event tracking, funnels, and trend insights. However, these are **only available on Hotjar's Observe Scale plan**, and their offering is more limited than PostHog's:
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-			<td className="w-3/12"></td>
-            <td><strong>Hotjar</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Event tracking</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Log page views, clicks and other custom events.</td>
-        </tr>
-        <tr>
-            <td><strong>Trends</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track your data over time and visualize in charts.</td>
-        </tr>
-        <tr>
-            <td><strong>Funnels</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Visualize conversion rates and drop-offs.</td>
-        </tr>
-        <tr>
-            <td><strong>Dashboards</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Display a collection of insights and trends.</td>
-        </tr>
-        <tr>
-            <td><strong>Correlation analysis</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Automatically highlight factors affecting funnel conversion rates.</td>
-        </tr>
-        <tr>
-            <td><strong>Group analytics</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Group events by users in the same company, project, or any other attribute.</td>
-        </tr>
-        <tr>
-            <td><strong>Lifecycle insights</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Break down events from new, returning, resurrecting, and dormant users.</td>
-        </tr>
-        <tr>
-            <td><strong>Retention insights</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Understand churn with returning user actions.</td>
-        </tr>
-       <tr>
-            <td><strong>Stickiness insights</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>See how many times users perform an event in a period of time.</td>
-        </tr>
-         <tr>
-            <td><strong>Path insights</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Inspect how users journey through your product.</td>
-        </tr>
-        <tr>
-            <td><strong>Toolbar</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>View insights on your live website or app with an overlay.</td>
-        </tr>
-    </tbody>
-</table>
-</div>
 
+<ComparisonTable column1="Hotjar" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Log page views, clicks and other custom events." />
+  <ComparisonRow column1={true} column2={true} feature="Trends" description="Track your data over time and visualize in charts." />
+  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Visualize conversion rates and drop-offs." />
+  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Display a collection of insights and trends." />
+  <ComparisonRow column1={false} column2={true} feature="Correlation analysis" description="Automatically highlight factors affecting funnel conversion rates." />
+  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Group events by users in the same company, project, or any other attribute." />
+  <ComparisonRow column1={false} column2={true} feature="Lifecycle insights" description="Break down events from new, returning, resurrecting, and dormant users." />
+  <ComparisonRow column1={false} column2={true} feature="Retention insights" description="Understand churn with returning user actions." />
+  <ComparisonRow column1={false} column2={true} feature="Stickiness insights" description="See how many times users perform an event in a period of time." />
+  <ComparisonRow column1={false} column2={true} feature="Path insights" description="Inspect how users journey through your product." />
+  <ComparisonRow column1={false} column2={true} feature="Toolbar" description="View insights on your live website or app with an overlay." />
+</ComparisonTable>
 
 ### In-app messages and user research
 
@@ -372,62 +137,15 @@ The main difference is, because Hotjar is designed for less technical users, it 
 
 Below, we've listed the different methods for communicating with and collecting user feedback in Hotjar and PostHog.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-	<td className="w-3/12"></td>
-            <td><strong>Hotjar</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Collect text input</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Suggestion box on your site where users can express frustration or delight.</td>
-        </tr>
-        <tr>
-            <td><strong>Schedule customer interviews</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send users a link to schedule a feedback meeting.</td>
-        </tr>
-        <tr>
-            <td><strong>Custom user targeting</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Define who should see your widgets with your own data.</td>
-        </tr>
-        <tr>
-            <td><strong>Surveys</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Capture user feedback with surveys. </td>
-        </tr>
-        <tr>
-            <td><strong>User interview recordings and transcriptions</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong>Notification bar</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Display a customized banner on your site.</td>
-        </tr>
-        <tr>
-            <td><strong>In-app popups</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Highlight features in your app.</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Hotjar" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Collect text input" description="Suggestion box on your site where users can express frustration or delight." />
+  <ComparisonRow column1={true} column2={true} feature="Schedule customer interviews" description="Send users a link to schedule a feedback meeting." />
+  <ComparisonRow column1={false} column2={true} feature="Custom user targeting" description="Define who should see your widgets with your own data." />
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Capture user feedback with surveys." />
+  <ComparisonRow column1={true} column2={false} feature="User interview recordings and transcriptions" />
+  <ComparisonRow column1={false} column2={true} feature="Notification bar" description="Display a customized banner on your site." />
+  <ComparisonRow column1={false} column2={true} feature="In-app popups" description="Highlight features in your app." />
+</ComparisonTable>
 
 ### Apps and integrations
 Both Hotjar and PostHog have a wide selection of apps and integrations. Both also include integrations with tools such as Zapier, which enable you to move data to even more platforms.
@@ -437,86 +155,20 @@ One unique advantage of PostHog is that, because it is open source, it’s easy 
 
 Below, we've listed a few of the most popular integrations used across PostHog and HotJar. PostHog offers more than 50 apps, so for a full list of PostHog's integrations, please [check the app library](/apps).
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Hotjar</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Hubspot</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync event and person data.</td>
-        </tr>
-        <tr>
-            <td><strong>Salesforce</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync event and person data.</td>
-        </tr>
-        <tr>
-            <td><strong>Zapier</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Export events for use in Zaps.</td>
-        </tr>
-        <tr>
-            <td><strong>Stripe</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync customer and invoice data.</td>
-        </tr>
-        <tr>
-            <td><strong>Slack</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive notifications about new data.</td>
-        </tr>
-        <tr>
-            <td><strong>Discord</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive notifications about new data.</td>
-        </tr>
-        <tr>
-            <td><strong>MS Teams</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive notifications about new data.</td>
-        </tr>
-        <tr>
-            <td><strong>Intercom</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Extract and load data to external platforms.</td>
-        </tr>
-        <tr>
-            <td><strong>Customer.io</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync data between platforms.</td>
-        </tr>
-        <tr>
-            <td><strong>Sentry</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ingest Sentry errors for analysis.</td>
-        </tr>
-        <tr>
-            <td><strong>Segment</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ingest events from Segment.</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+
+<ComparisonTable column1="Hotjar" column2="PostHog">
+  <ComparisonRow column1={false} column2={true} feature="Hubspot" description="Sync event and person data." />
+  <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Sync event and person data." />
+  <ComparisonRow column1={true} column2={true} feature="Zapier" description="Export events for use in Zaps." />
+  <ComparisonRow column1={false} column2={true} feature="Stripe" description="Sync customer and invoice data." />
+  <ComparisonRow column1={true} column2={true} feature="Slack" description="Receive notifications about new data." />
+  <ComparisonRow column1={false} column2={true} feature="Discord" description="Receive notifications about new data." />
+  <ComparisonRow column1={true} column2={true} feature="MS Teams" description="Receive notifications about new data." />
+  <ComparisonRow column1={false} column2={true} feature="Intercom" description="Extract and load data to external platforms." />
+  <ComparisonRow column1={false} column2={true} feature="Customer.io" description="Sync data between platforms." />
+  <ComparisonRow column1={false} column2={true} feature="Sentry" description="Ingest Sentry errors for analysis." />
+  <ComparisonRow column1={true} column2={true} feature="Segment" description="Ingest events from Segment." />
+</ComparisonTable>
 
 > **Want more?** Visit the [PostHog the app directory](/apps) for a full list of supported integrations.
 
@@ -524,49 +176,13 @@ Below, we've listed a few of the most popular integrations used across PostHog a
 
 Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPPA and GDPR can require teams to store data in certain locations, or to protect data in certain ways. 
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Hotjar</strong></td>
-            <td><strong>PostHog</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>SOC 2 certified</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Information security process audited</td>
-        </tr>	    
-        <tr>
-            <td><strong>GDPR compliant</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>EU hosting or data residency available.</td>
-        </tr>
-        <tr>
-            <td><strong>HIPAA compliant</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Business Associate Agreement available.</td>
-        </tr>
-        <tr>
-            <td><strong>Data anonymization</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Remove personally identifiable information.</td>
-        </tr>
-        <tr>
-            <td><strong>Cookie-less tracking option</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Use session replays and analytics without cookie consent banners</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Hotjar" column2="PostHog">
+  <ComparisonRow column1={false} column2={true} feature="SOC 2 certified" description="Information security process audited" />
+  <ComparisonRow column1={true} column2={true} feature="GDPR compliant" description="EU hosting or data residency available." />
+  <ComparisonRow column1={false} column2={false} feature="HIPAA compliant" description="Business Associate Agreement available." />
+  <ComparisonRow column1={true} column2={true} feature="Data anonymization" description="Remove personally identifiable information." />
+  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
+</ComparisonTable>
 
 ## Frequently asked questions
 - [Who is Hotjar useful for?](#who-is-hotjar-useful-for)
