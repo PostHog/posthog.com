@@ -13,6 +13,9 @@ tags:
  - Guides
 ---
 
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
 PostHog and GrowthBook both provide open source, self-serve feature flags and experimentation, but they're different in two important ways:
 
 - GrowthBook is a warehouse-native feature flag and experiments platform. It focuses on integrating with the product and data tools you already use.
@@ -35,9 +38,9 @@ Having all these product and data tools together enables you to do better analys
 
 ### 2. PostHog is built for startups and engineers
 
-PostHog is built for high-growth startups. This means it is simple for founders and engineers to implement themselves. There are many [SDKs](/docs/libraries), [tutorials](/tutorials), and [docs](/docs) to help you get started quickly with any type of app.
+PostHog is built for high-growth startups. This means it is simple for founders and engineers to implement themselves. There are many [SDKs](/docs/libraries), [tutorials](/tutorials), and [docs](/docs) to help you get started quickly with any type of app.
 
-As startups scale, PostHog also provides the more advanced tools they need to succeed. These include advanced product analytics, [SQL querying](/docs/product-analytics/sql), [CDPs](/docs/cdp), and [data warehousing](/docs/data-warehouse).
+As startups scale, PostHog also provides the more advanced tools they need to succeed. These include advanced product analytics, [SQL querying](/docs/product-analytics/sql), [CDPs](/docs/cdp), and [data warehousing](/docs/data-warehouse).
 
 GrowthBook, on the other hand, focuses only on later-stage, larger companies than PostHog. Many of their features, like their analytical A/B testing suite, are great for data teams which also come at a later stage.
 
@@ -210,7 +213,7 @@ Experimentation is where PostHog and GrowthBook’s functionality diverges. Both
 
 - GrowthBook’s A/B testing provides more potential statistical depth, such as Bayesian and Frequentist engines, value capping, regression adjustment, and testing corrections. These do require statistics expertise to use reliably, though.
 
-- PostHog provides a simpler interface and no need to write SQL or connect to external services – a better experience for users without a background in data science.
+- PostHog provides a simpler interface and no need to write SQL or connect to external services – a better experience for users without a background in data science.
 
 <div className="overflow-x-auto -mx-5 px-5">
 <table className="w-full mt-4" style="min-width: 600px;">
@@ -287,7 +290,7 @@ Experimentation is where PostHog and GrowthBook’s functionality diverges. Both
 </table>
 </div>
 
-- **Recommended run time:** PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the [peeking problem](/blog/ab-testing-mistakes) and end your experiment at the right time.
+- **Recommended run time:** PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the [peeking problem](/blog/ab-testing-mistakes) and end your experiment at the right time.
 
 ![Recommended run time calculator](../images/blog/posthog-vs-growthbook/runtime.png)
 
@@ -405,7 +408,7 @@ PostHog provides all the visualizations and product tools for evaluating the suc
 </table>
 </div>
 
-PostHog’s [feature flag pricing](/pricing?product=feature-flags) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
+PostHog’s [feature flag pricing](/pricing?product=feature-flags) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
 
 ![Pricing](../images/blog/posthog-vs-growthbook/pricing.png)
 
@@ -460,8 +463,8 @@ To give you an idea of what pricing looks like in reality, here are some example
 </table>
 </div>
 
-> **Notes:** 
-> - Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage depending on the polling duration and active number of servers. If you use locally evaluated flags with one server polling every 30 seconds, this amount is under 1M requests (free). 
+> **Notes:** 
+> - Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage depending on the polling duration and active number of servers. If you use locally evaluated flags with one server polling every 30 seconds, this amount is under 1M requests (free). 
 > - PostHog has volume discounts on flags over 2 million requests per month.
 
 ### Integrations
@@ -586,9 +589,9 @@ Both PostHog and GrowthBook enable companies to remain secure and compliant with
 
 ### Who is PostHog useful for?
 
-PostHog is built for startups and their engineers. It provides all the tools startups need to build successful products. The people who find PostHog most useful are founders, [product engineers](/blog/what-is-a-product-engineer), and growth engineers.
+PostHog is built for startups and their engineers. It provides all the tools startups need to build successful products. The people who find PostHog most useful are founders, [product engineers](/blog/what-is-a-product-engineer), and growth engineers.
 
-Companies that use PostHog feature flags and experiments include [Y Combinator](/customers/ycombinator), [Vendasta](/customers/vendasta), and [AssemblyAI](/customers/assemblyai).
+Companies that use PostHog feature flags and experiments include [Y Combinator](/customers/ycombinator), [Vendasta](/customers/vendasta), and [AssemblyAI](/customers/assemblyai).
 
 ### Who is GrowthBook useful for?
 
@@ -598,7 +601,7 @@ Companies that use GrowthBook include Patreon, Deezer, and Pepsi.
 
 ### How much does PostHog cost?
 
-Feature flags and experiments are free for up to 1M requests per month. Beyond that, it costs $0.0001/request (or $1 per 10,000 requests). There are discounts for high-volume users, non-profits, and [startups](/startups).
+Feature flags and experiments are free for up to 1M requests per month. Beyond that, it costs $0.0001/request (or $1 per 10,000 requests). There are discounts for high-volume users, non-profits, and [startups](/startups).
 
 Other products, like product analytics and session replay, have separate but similarly structured pricing.
 
@@ -616,7 +619,7 @@ PostHog lets you use all its features for free. Once you upgrade to paid, you ge
 
 ### How long does it take to implement PostHog?
 
-Feature flags and experiments are simple. They are a few lines of code in any of your favorite languages. They can even be set up on no-code site builders like [Framer](/tutorials/framer-analytics) or [Webflow](/tutorials/webflow-ab-tests).
+Feature flags and experiments are simple. They are a few lines of code in any of your favorite languages. They can even be set up on no-code site builders like [Framer](/tutorials/framer-analytics) or [Webflow](/tutorials/webflow-ab-tests).
 
 The process requires signing up for PostHog, installing the snippet or SDK in your app, creating the flag in PostHog, and implementing the flag evaluation and relevant logic in your app. Many of the SDKs handle important aspects like local evaluation and event capture for you.
 
