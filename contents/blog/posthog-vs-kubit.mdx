@@ -54,230 +54,47 @@ Kubit, on the other hand, is _incredibly_ closed source. There's no public prici
 ## PostHog and Kubit feature comparison
 As explained above, PostHog offers a wider selection of feature than Kubit, which focuses solely on product analytics.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-          <td className="w-3/12"></td>
-            <td><strong>Kubit</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Product analytics</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track events and conversion; analyze user behavior</td>
-        </tr>
-        <tr>
-            <td><strong>Session replays</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch real users use your product; diagnose bugs</td>
-        </tr>
-        <tr>
-            <td><strong>Feature flags</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Roll out features safely; toggle features for cohorts or individuals</td>
-        </tr>
-        <tr>
-            <td><strong>User surveys</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ask users for qualitative feedback and gather responses</td>
-        </tr>
-        <tr>
-            <td><strong>Experiments</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Test changes and analyze impact</td>
-        </tr>
-        <tr>
-            <td><strong>Heatmaps</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track where users click</td>
-        </tr>
-        <tr>
-            <td><strong>Event pipelines</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Push and pull data to enrich customer profiles</td>
-        </tr>
-        <tr>
-            <td><strong>Open source</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Build your own apps and contribute code</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-
-<ArrayCTA/>
+<ComparisonTable column1="Kubit" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
+  <ComparisonRow column1={false} column2={true} feature="Session replays" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={false} column2={true} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={false} column2={true} feature="Experiments" description="Test changes and analyze impact" />
+  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="Track where users click" />
+  <ComparisonRow column1={false} column2={true} feature="Event pipelines" description="Push and pull data to enrich customer profiles" />
+  <ComparisonRow column1={false} column2={true} feature="Open source" description="Build your own apps and contribute code" />
+</ComparisonTable>
 
 ## Product analytics comparison
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-          <td className="w-3/12"></td>
-            <td><strong>Kubit</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Funnel analysis</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track users through a sequence of events</td>
-        </tr>
-        <tr>
-            <td><strong>Path analysis</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Chart how users get from A to B</td>
-        </tr>
-        <tr>
-            <td><strong>Retention analysis</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Visualize which users stay, for how long</td>
-        </tr>
-        <tr>
-            <td><strong>Lifecycle analysis</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Understand who is dormant, churning, and thriving</td>
-        </tr>
-        <tr>
-            <td><strong>Correlation analysis</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Identify predictors and shared commonalities</td>
-        </tr>
-        <tr>
-            <td><strong>Dashboards</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Save insights into a shared workspace</td>
-        </tr>
-        <tr>
-            <td><strong>Formulas</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Calculate unique insights, with math</td>
-        </tr>
-        <tr>
-            <td><strong>SQL access</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Use code to directly query the data</td>
-        </tr>
-        <tr>
-            <td><strong>Group analytics</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Gather individual users into larger organizations</td>
-        </tr>
-        <tr>
-            <td><strong>Predictive analytics</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Extrapolate from now, into the future</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Kubit" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Funnel analysis" description="Track users through a sequence of events" />
+  <ComparisonRow column1={true} column2={true} feature="Path analysis" description="Chart how users get from A to B" />
+  <ComparisonRow column1={true} column2={true} feature="Retention analysis" description="Visualize which users stay, for how long" />
+  <ComparisonRow column1={false} column2={true} feature="Lifecycle analysis" description="Understand who is dormant, churning, and thriving" />
+  <ComparisonRow column1={false} column2={true} feature="Correlation analysis" description="Identify predictors and shared commonalities" />
+  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Save insights into a shared workspace" />
+  <ComparisonRow column1={true} column2={true} feature="Formulas" description="Calculate unique insights, with math" />
+  <ComparisonRow column1={false} column2={true} feature="SQL access" description="Use code to directly query the data" />
+  <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Gather individual users into larger organizations" />
+  <ComparisonRow column1={true} column2={false} feature="Predictive analytics" description="Extrapolate from now, into the future" />
+</ComparisonTable>
 
 ## Collaboration tools 
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Kubit</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>User permissions</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Control user roles and levels of access</td>
-        </tr>
-        <tr>
-            <td><strong>Notebooks</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>A built-in scratch pad for making notes, and more</td>
-        </tr>
-        <tr>
-            <td><strong>Public insights</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Make insights available without login</td>
-        </tr>
-        <tr>
-            <td><strong>Public dashboards</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Make dashboards available without login</td>
-        </tr>
-        <tr>
-            <td><strong>Export dashboards</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Export dashboards as reports</td>
-        </tr>
-        <tr>
-            <td><strong>Dashboard subscriptions</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive regular alerts about new data</td>
-        </tr>
-        <tr>
-            <td><strong>Embeddable dashboards</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Embed dashboards in other pages</td>
-        </tr>
-        <tr>
-            <td><strong>Slack integration</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive notifications about new data</td>
-        </tr>
-        <tr>
-            <td><strong>Discord integration</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive notifications about new data</td>
-        </tr>
-        <tr>
-            <td><strong>MS Teams integration</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Receive notifications about new data</td>
-        </tr>
-        <tr>
-            <td><strong>Data management suite</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Categorize and define a list of events and properties</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Kubit" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="User permissions" description="Control user roles and levels of access" />
+  <ComparisonRow column1={true} column2={true} feature="Notebooks" description="A built-in scratch pad for making notes, and more" />
+  <ComparisonRow column1={true} column2={true} feature="Public insights" description="Make insights available without login" />
+  <ComparisonRow column1={false} column2={true} feature="Public dashboards" description="Make dashboards available without login" />
+  <ComparisonRow column1={true} column2={true} feature="Export dashboards" description="Export dashboards as reports" />
+  <ComparisonRow column1={false} column2={true} feature="Dashboard subscriptions" description="Receive regular alerts about new data" />
+  <ComparisonRow column1={false} column2={true} feature="Embeddable dashboards" description="Embed dashboards in other pages" />
+  <ComparisonRow column1={false} column2={true} feature="Slack integration" description="Receive notifications about new data" />
+  <ComparisonRow column1={false} column2={true} feature="Discord integration" description="Receive notifications about new data" />
+  <ComparisonRow column1={false} column2={true} feature="MS Teams integration" description="Receive notifications about new data" />
+  <ComparisonRow column1={true} column2={true} feature="Data management suite" description="Categorize and define a list of events and properties" />
+</ComparisonTable>
 
 > ### Should you use autocapture?
 > 
@@ -290,56 +107,16 @@ PostHog supports a wide range of client and server libraries, but not all featur
 
 Kubit, on the other hand, is a closed-source, no-code product. Because it's designed to work on top of a data warehouse, it doesn't use SDKs or libraries in the traditional sense. You can only use it if you have your event data in a data warehouse already.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Kubit</strong></td>
-            <td><strong>PostHog</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>JavaScript</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>React Native</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>React</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>Flutter</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>iOS</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>Android</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>Ruby</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Kubit" column2="PostHog">
+  <ComparisonRow column1={false} column2={true} feature="JavaScript" />
+  <ComparisonRow column1={false} column2={true} feature="React Native" />
+  <ComparisonRow column1={false} column2={true} feature="React" />
+  <ComparisonRow column1={false} column2={true} feature="Flutter" />
+  <ComparisonRow column1={false} column2={true} feature="iOS" />
+  <ComparisonRow column1={false} column2={true} feature="Android" />
+  <ComparisonRow column1={false} column2={true} feature="Ruby" />
+</ComparisonTable>
 
-<ArrayCTA/>
 
 ## Security and compliance
 
@@ -347,52 +124,16 @@ Compliance can be a bit of a regulatory headache, especially for international o
 
 Kubit is similar on most fronts, but lacks the option for EU hosting (despite claiming to be GDPR ready) and doesn’t offer two-factor authentication itself (it’s offered exclusively via an integration with Google OAuth).
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Kubit</strong></td>
-            <td><strong>PostHog</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>GDPR ready</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>Data anonymization</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>Cookie-less tracking option</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>SOC 2 certified</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>SAML/SSO available</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-        <tr>
-            <td><strong>2FA available</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Kubit" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="GDPR ready" />
+  <ComparisonRow column1={false} column2={true} feature="Data anonymization" />
+  <ComparisonRow column1={false} column2={true} feature="Cookie-less tracking option" />
+  <ComparisonRow column1={true} column2={true} feature="SOC 2 certified" />
+  <ComparisonRow column1={true} column2={true} feature="SAML/SSO available" />
+  <ComparisonRow column1={false} column2={true} feature="2FA available" />
+</ComparisonTable>
 
 > ### To cookie, or not to cookie?
->
 > To ensure compliance with local privacy regulations, you may need to ask users for their permission to track them with cookies. PostHog has [tools to help you do that](/tutorials/react-cookie-banner), but if you’d rather not use cookies to track users then [you can do that too](/tutorials/cookieless-tracking). 
 
 ## Frequently asked questions
