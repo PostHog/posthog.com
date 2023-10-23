@@ -57,7 +57,8 @@ export const Contributor = ({
     state,
     text = false,
     role,
-}: IContributor & { text?: boolean; url?: string }) => {
+    size,
+}: IContributor & { text?: boolean; url?: string; size?: string }) => {
     const Container = url ? Link : 'div'
     return (
         <Container
@@ -70,11 +71,19 @@ export const Contributor = ({
                     {role && <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">{role}</p>}
                 </div>
             </div>
-            <ContributorImage
-                className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
-                image={image}
-                name={name}
-            />
+            {size === 'sm' ? (
+                <ContributorImageSmall
+                    image={image}
+                    name={name}
+                    className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
+                />
+            ) : (
+                <ContributorImage
+                    className={url ? 'hover:border-red hover:z-10 dark:hover:border-red' : ''}
+                    image={image}
+                    name={name}
+                />
+            )}
         </Container>
     )
 }
@@ -119,11 +128,11 @@ export default function Contributors({
                                     )}
                                 >
                                     <span className="relative">
-                                        <Contributor image={image} name={name} url={url} state={state} />
+                                        <Contributor size="sm" image={image} name={name} url={url} state={state} />
                                     </span>
                                 </Tooltip>
                             ) : (
-                                <Contributor image={image} name={name} url={url} state={state} text />
+                                <Contributor size="sm" image={image} name={name} url={url} state={state} text />
                             )}
                         </li>
                     )
