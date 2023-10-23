@@ -7,7 +7,7 @@ import { sfBenchmark } from './compensation_data/sf_benchmark'
 import { levelModifier } from './compensation_data/level_modifier'
 import { stepModifier } from './compensation_data/step_modifier'
 import { currencyData } from './compensation_data/currency'
-import { Multiply } from '@posthog/icons'
+import { IconMultiply } from '@posthog/icons'
 
 const formatCur = (val: number, currency = 'USD') => {
     currency = currencyData[currency] ? currency : 'USD'
@@ -208,19 +208,19 @@ export const CompensationCalculator = ({
                             </Factor>
                             <Factor>
                                 <span>
-                                    <Multiply className="w-6 h-6 inline-flex -ml-1" /> Location factor
+                                    <IconMultiply className="w-6 h-6 inline-flex -ml-1" /> Location factor
                                 </span>{' '}
                                 <span>{currentLocation?.locationFactor}</span>
                             </Factor>
                             <Factor>
                                 <span>
-                                    <Multiply className="w-6 h-6 inline-flex -ml-1" /> Level modifier
+                                    <IconMultiply className="w-6 h-6 inline-flex -ml-1" /> Level modifier
                                 </span>{' '}
                                 <span>{levelModifier[level]}</span>
                             </Factor>
                             <Factor>
                                 <span>
-                                    <Multiply className="w-6 h-6 inline-flex -ml-1" /> Step modifier
+                                    <IconMultiply className="w-6 h-6 inline-flex -ml-1" /> Step modifier
                                 </span>{' '}
                                 <span>
                                     {stepModifier[step][0]} - {stepModifier[step][1]}

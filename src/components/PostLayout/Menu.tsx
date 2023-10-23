@@ -53,6 +53,34 @@ export const Icon = ({ color, icon }: { color?: string; icon: string | React.Rea
         </span>
     )
 }
+export const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
+
+export const MenuItem = ({ icon, color, badge, name }) => {
+    return icon ? (
+        <span
+            className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
+                color ? 'items-center' : 'items-center'
+            }`}
+        >
+            <Icon icon={icon} color={color} />
+            <span className={`${color ? '' : 'opacity-100'} group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}>
+                {name}
+            </span>
+            {badge?.title && <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>}
+        </span>
+    ) : (
+        <>
+            <span>
+                <span
+                    className={`${color ? '' : 'opacity-50'} group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}
+                >
+                    {name}
+                </span>
+                {badge?.title && <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>}
+            </span>
+        </>
+    )
+}
 
 export default function Menu({
     name,
@@ -79,7 +107,6 @@ export default function Menu({
             ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
             : ''
     } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''}`
-    const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -160,43 +187,7 @@ export default function Menu({
                                 />
                             )}
                         </AnimatePresence>
-                        {icon ? (
-                            <span
-                                className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
-                                    color ? 'items-center' : 'items-center'
-                                }`}
-                            >
-                                <Icon icon={icon} color={color} />
-                                <span
-                                    className={`${color ? '' : 'opacity-100'} group-hover:opacity-100 ${
-                                        badge?.title ? 'mr-1.5' : ''
-                                    }`}
-                                >
-                                    {name}
-                                </span>
-                                {badge?.title && (
-                                    <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>
-                                )}
-                            </span>
-                        ) : (
-                            <>
-                                <span>
-                                    <span
-                                        className={`${color ? '' : 'opacity-50'} group-hover:opacity-100 ${
-                                            badge?.title ? 'mr-1.5' : ''
-                                        }`}
-                                    >
-                                        {name}
-                                    </span>
-                                    {badge?.title && (
-                                        <span className={`${badgeClasses} ${badge.className || ''}`}>
-                                            {' '}
-                                            {badge.title}
-                                        </span>
-                                    )}
-                                </span>
-                            </>
-                        )}
+                        <MenuItem badge={badge} color={color} icon={icon} name={name} />
                         {isWithChild && <Chevron open={open ?? false} />}
                     </MenuLink>
                 ) : (

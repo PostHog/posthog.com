@@ -4,13 +4,13 @@ export const postsMenu: IMenu[] = [
     {
         name: 'All posts',
         url: '/posts',
-        icon: 'Newspaper',
+        icon: 'IconNewspaper',
         color: 'blue',
     },
     {
         name: 'Founders',
         url: '/founders',
-        icon: 'Rocket',
+        icon: 'IconRocket',
         color: 'purple',
         children: [
             {
@@ -62,7 +62,7 @@ export const postsMenu: IMenu[] = [
     {
         name: 'Product engineers',
         url: '/product-engineers',
-        icon: 'Helmet',
+        icon: 'IconHelmet',
         color: 'orange',
         children: [
             {
@@ -94,7 +94,7 @@ export const postsMenu: IMenu[] = [
     {
         name: 'Blog',
         url: '/blog',
-        icon: 'Newspaper',
+        icon: 'IconNewspaper',
         color: 'teal',
         children: [
             {
@@ -122,75 +122,75 @@ export const postsMenu: IMenu[] = [
     {
         name: 'Changelog',
         url: '/changelog',
-        icon: 'Calendar',
+        icon: 'IconCalendar',
         color: 'salmon',
     },
     {
         name: 'Customer stories',
         url: '/customers',
-        icon: 'Person',
+        icon: 'IconPerson',
         color: 'yellow',
     },
     {
         name: 'Guides & tutorials',
         url: '/tutorials',
-        icon: 'Map',
+        icon: 'IconMap',
         color: 'red',
         children: [
             {
                 name: 'Product OS',
                 url: '/tutorials/product-os',
-                icon: 'Stack',
+                icon: 'IconStack',
                 color: 'salmon',
             },
             {
                 name: 'Product analytics',
                 url: '/tutorials/product-analytics',
-                icon: 'Graph',
+                icon: 'IconGraph',
                 color: 'blue',
             },
             {
                 name: 'Session replay',
                 url: '/tutorials/session-replay',
                 color: 'yellow',
-                icon: 'RewindPlay',
+                icon: 'IconRewindPlay',
             },
             {
                 name: 'Feature flags',
                 url: '/tutorials/feature-flags',
-                icon: 'Toggle',
+                icon: 'IconToggle',
                 color: 'seagreen',
             },
             {
                 name: 'A/B testing',
                 url: '/tutorials/experimentation',
-                icon: 'Flask',
+                icon: 'IconFlask',
                 color: 'purple',
             },
             {
                 name: 'Surveys',
                 url: '/tutorials/surveys',
-                icon: 'Message',
+                icon: 'IconMessage',
                 color: 'blue',
             },
             {
                 name: 'CDP',
                 url: '/tutorials/cdp',
                 color: 'yellow',
-                icon: 'Person',
+                icon: 'IconPerson',
             },
         ],
     },
     {
         name: 'Newsletter',
         url: '/newsletter',
-        icon: 'Newspaper',
+        icon: 'IconLetter',
         color: 'green',
     },
     {
         name: 'Spotlight',
         url: '/spotlight',
-        icon: 'Spotlight',
+        icon: 'IconSpotlight',
         color: 'blue',
     },
 ]

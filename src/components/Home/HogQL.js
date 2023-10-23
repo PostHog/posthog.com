@@ -3,7 +3,7 @@ import React from 'react'
 import { AppLibrary, EventPipelines, SQL } from 'components/ProductIcons'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
-import { ChevronDown } from '@posthog/icons'
+import { IconChevronDown } from '@posthog/icons'
 
 const examples = [
     {
@@ -59,7 +59,7 @@ export default function HogQL() {
                             return (
                                 <li className="list-none relative pl-8" key={title}>
                                     <span className="inline-block w-6 h-6 -rotate-90 absolute top-0 left-0 opacity-60">
-                                        <ChevronDown />
+                                        <IconChevronDown />
                                     </span>
                                     <p className="m-0 text-base">{title}</p>
                                     {example ? (

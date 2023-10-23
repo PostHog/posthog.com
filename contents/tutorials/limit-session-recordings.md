@@ -7,7 +7,7 @@ sidebar: Docs
 tags: ["session replay", "configuration"]
 ---
 
-Session replays help you get a deep understanding of how users are using your product. We strongly recommend them for [early-stage startups](/blog/early-stage-analytics), but as you scale the number of recordings can go beyond what you need.
+Session replays help you get a deep understanding of how users are using your product. We strongly recommend them for [early-stage startups](/blog/early-stage-analytics), but as you scale, the number of recordings can go beyond what you need.
 
 Instead of turning session replays off entirely, you can use PostHog’s configuration options to only record the sessions you want. This tutorial shows you three ways to do this. 
 

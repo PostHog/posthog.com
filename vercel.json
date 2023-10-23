@@ -1081,6 +1081,38 @@
         { "source": "/blog/categories/inside-posthog", "destination": "/blog/inside-posthog" },
         { "source": "/blog/categories/posthog-news", "destination": "/blog/posthog-news" },
         { "source": "/blog/categories/using-posthog", "destination": "/blog/using-posthog" },
-        { "source": "/blog/categories/general", "destination": "/blog/general" }
+        { "source": "/blog/categories/general", "destination": "/blog/general" },
+
+        { "source": "/product-analytics/pricing", "destination": "/product-analytics#pricing" },
+        { "source": "/product-analytics/customers", "destination": "/product-analytics#customers" },
+        { "source": "/product-analytics/comparisons", "destination": "/product-analytics#posthog-vs" },
+        { "source": "/product-analytics/documentation", "destination": "/product-analytics#docs" },
+        { "source": "/product-analytics/tutorials", "destination": "/product-analytics#tutorials" },
+        { "source": "/product-analytics/roadmap", "destination": "/product-analytics#roadmap" },
+        { "source": "/product-analytics/questions", "destination": "/product-analytics#questions" },
+
+        { "source": "/session-replay/pricing", "destination": "/session-replay#pricing" },
+        { "source": "/session-replay/customers", "destination": "/session-replay#customers" },
+        { "source": "/session-replay/comparisons", "destination": "/session-replay#posthog-vs" },
+        { "source": "/session-replay/documentation", "destination": "/session-replay#docs" },
+        { "source": "/session-replay/tutorials", "destination": "/session-replay#tutorials" },
+        { "source": "/session-replay/roadmap", "destination": "/session-replay#roadmap" },
+        { "source": "/session-replay/questions", "destination": "/session-replay#questions" },
+
+        { "source": "/feature-flags/pricing", "destination": "/feature-flags#pricing" },
+        { "source": "/feature-flags/customers", "destination": "/feature-flags#customers" },
+        { "source": "/feature-flags/comparisons", "destination": "/feature-flags#posthog-vs" },
+        { "source": "/feature-flags/documentation", "destination": "/feature-flags#docs" },
+        { "source": "/feature-flags/tutorials", "destination": "/feature-flags#tutorials" },
+        { "source": "/feature-flags/roadmap", "destination": "/feature-flags#roadmap" },
+        { "source": "/feature-flags/questions", "destination": "/feature-flags#questions" },
+
+        { "source": "/ab-testing/pricing", "destination": "/ab-testing#pricing" },
+        { "source": "/ab-testing/customers", "destination": "/ab-testing#customers" },
+        { "source": "/ab-testing/comparisons", "destination": "/ab-testing#posthog-vs" },
+        { "source": "/ab-testing/documentation", "destination": "/ab-testing#docs" },
+        { "source": "/ab-testing/tutorials", "destination": "/ab-testing#tutorials" },
+        { "source": "/ab-testing/roadmap", "destination": "/ab-testing#roadmap" },
+        { "source": "/ab-testing/questions", "destination": "/ab-testing#questions" }
     ]
 }
