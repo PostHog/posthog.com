@@ -115,18 +115,18 @@ export const Funnels = () => {
     ]
 
     return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
-            <h2 className="text-center text-4xl">Find drop-off across a series of actions</h2>
-            <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-5">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark p-4 md:p-8 space-y-6">
+            <h2 className="text-3xl md:text-4xl text-center">Find drop-off across a series of actions</h2>
+            <div className="grid md:grid-cols-12 gap-4">
+                <div className="md:col-span-5">
                     <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" height={335} />
                 </div>
-                <div className="col-span-7">
+                <div className="md:col-span-7">
                     <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" height={335} />
                 </div>
             </div>
 
-            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+            <ul className="grid md:grid-cols-4 gap-8 list-none p-0">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}
@@ -157,12 +157,14 @@ export const Trends = () => {
         },
     ]
     return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark p-4 md:p-8 space-y-6">
             <div className="text-center">
-                <h2 className="text-4xl">Visualize user data with graphs, tables, charts, maps, and more</h2>
+                <h2 className="text-3xl md:text-4xl">
+                    Visualize user data with graphs, tables, charts, maps, and more
+                </h2>
             </div>
             <div className="product-slider overflow-x-auto flex gap-8 pb-4 -mx-8 px-8">
-                <div className="flex-shrink-0 w-3/5">
+                <div className="flex-shrink-0 w-full md:w-3/5">
                     <StaticImage
                         objectPosition="left"
                         height={420}
@@ -171,7 +173,7 @@ export const Trends = () => {
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-3/5">
+                <div className="flex-shrink-0 w-full md:w-3/5">
                     <StaticImage
                         objectPosition="left"
                         height={420}
@@ -180,7 +182,7 @@ export const Trends = () => {
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-3/5">
+                <div className="flex-shrink-0 w-full md:w-3/5">
                     <StaticImage
                         objectPosition="left"
                         height={420}
@@ -189,7 +191,7 @@ export const Trends = () => {
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-3/5">
+                <div className="flex-shrink-0 w-full md:w-3/5">
                     <StaticImage
                         objectPosition="left"
                         height={420}
@@ -198,7 +200,7 @@ export const Trends = () => {
                         className="shadow-xl h-full"
                     />
                 </div>
-                <div className="flex-shrink-0 w-3/5">
+                <div className="flex-shrink-0 w-full md:w-3/5">
                     <StaticImage
                         objectPosition="left"
                         height={420}
@@ -209,7 +211,7 @@ export const Trends = () => {
                 </div>
             </div>
 
-            <ul className="grid grid-cols-4 gap-8 list-none p-0">
+            <ul className="grid md:grid-cols-4 gap-8 list-none p-0">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}
@@ -238,9 +240,9 @@ export const UserPaths = () => {
         },
     ]
     return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark p-4 md:p-8 space-y-6">
             <div className="text-center">
-                <h2 className="text-4xl mb-2">User paths</h2>
+                <h2 className="text-3xl md:text-4xl mb-2">User paths</h2>
                 <p className="opacity-75 mb-2">
                     Set start and end points to see how users navigate your product, website, or conversion funnel.
                 </p>
@@ -251,7 +253,7 @@ export const UserPaths = () => {
                 className="w-full shadow-xl"
             />
 
-            <ul className="grid grid-cols-4 gap-8 list-none p-0 mt-4">
+            <ul className="grid md:grid-cols-4 gap-8 list-none p-0 mt-4">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}
@@ -280,16 +282,16 @@ export const CorrelationAnalysis = () => {
         },
     ]
     return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark p-4 md:p-8 space-y-6">
             <div className="text-center">
-                <h2 className="text-4xl mb-2">Correlation analysis</h2>
+                <h2 className="text-3xl md:text-4xl mb-2">Correlation analysis</h2>
                 <p className="opacity-75 mb-2 max-w-2xl mx-auto">
                     When analyzing funnels, correlation analysis highlights significant events or properties that may be
                     useful in determining how likely someone is to converting or churning.
                 </p>
             </div>
 
-            <div className="!-mb-20">
+            <div className="md:!-mb-20">
                 <StaticImage
                     src="../../Product/ProductAnalytics/images/screenshot-correlation-analysis.png"
                     className="w-full"
@@ -308,9 +310,9 @@ export const CorrelationAnalysis = () => {
 export const Retention = () => {
     const subfeatures = []
     return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark p-4 md:p-8 space-y-6">
             <div className="text-center">
-                <h2 className="text-4xl mb-2">Retention</h2>
+                <h2 className="text-3xl md:text-4xl mb-2">Retention</h2>
                 <p className="opacity-75 mb-2 max-w-2xl mx-auto">
                     See how many users return on subsequent days after first visiting your site or product.
                 </p>
@@ -333,9 +335,9 @@ export const Retention = () => {
 export const Stickiness = () => {
     const subfeatures = []
     return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark p-4 md:p-8 space-y-6">
             <div className="text-center">
-                <h2 className="text-4xl mb-2">Stickiness</h2>
+                <h2 className="text-3xl md:text-4xl mb-2">Stickiness</h2>
                 <p className="opacity-75 mb-2 max-w-2xl mx-auto">
                     Learn how many times users perform a specific event in a period of time.
                 </p>
@@ -358,9 +360,9 @@ export const Stickiness = () => {
 export const Lifecycle = () => {
     const subfeatures = []
     return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark p-4 md:p-8 space-y-6">
             <div className="text-center">
-                <h2 className="text-4xl mb-2">Lifecycle</h2>
+                <h2 className="text-3xl md:text-4xl mb-2">Lifecycle</h2>
                 <p className="opacity-75 mb-2 max-w-2xl mx-auto">
                     Discover how your active users break down, highlighting those who have recently stopped being active
                     or those who have just become active for the first time.
@@ -408,9 +410,9 @@ export const Dashboards = () => {
         },
     ]
     return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark p-4 md:p-8 space-y-6">
             <div className="text-center">
-                <h2 className="text-4xl mb-2">Dashboards</h2>
+                <h2 className="text-3xl md:text-4xl mb-2">Dashboards</h2>
                 <p className="opacity-75 mb-2">(They're exactly what they sound like.)</p>
             </div>
 
@@ -419,7 +421,7 @@ export const Dashboards = () => {
                 className="w-full shadow-xl mb-4"
             />
 
-            <ul className="grid grid-cols-3 xl:grid-cols-5 gap-8 list-none p-0">
+            <ul className="grid md:grid-cols-3 xl:grid-cols-5 gap-8 list-none p-0">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}
@@ -446,9 +448,9 @@ export const HogQL = () => {
         },
     ]
     return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark py-8 px-8 space-y-6">
+        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark p-4 md:p-8 space-y-6">
             <div className="text-center">
-                <h2 className="text-4xl mb-2">HogQL</h2>
+                <h2 className="text-3xl md:text-4xl mb-2">HogQL</h2>
                 <p className="opacity-75 mb-2">
                     Directly query data stored in PostHog via our SQL transition layer, HogQL.
                 </p>
@@ -457,14 +459,14 @@ export const HogQL = () => {
                 </CallToAction>
             </div>
 
-            <div className="overflow-hidden relative after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
+            <div className="md:overflow-hidden relative md:after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
                 <StaticImage
                     src="../../Product/ProductAnalytics/images/screenshot-hogql.png"
                     className="w-full shadow-xl"
                 />
             </div>
 
-            <ul className="grid grid-cols-3 gap-8 list-none p-0">
+            <ul className="grid md:grid-cols-3 gap-8 list-none p-0">
                 {subfeatures.map((subfeature, index) => {
                     return <Subfeature {...subfeature} key={index} />
                 })}

@@ -431,7 +431,7 @@ export const ProductOS = () => {
                 </section>
                 */}
             </div>
-            <div className="max-w-7xl mx-auto px-5 relative">
+            <div className="max-w-7xl mx-auto relative">
                 <section className="mb-20">
                     <CTA />
                 </section>

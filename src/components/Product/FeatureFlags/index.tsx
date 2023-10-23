@@ -467,7 +467,7 @@ export const ProductFeatureFlags = () => {
 
                     <section className="mb-20">
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
-                        <div className="mb-8 grid md:grid-cols-2 gap-4">
+                        <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
                                 title="Reasons a competitor might be better for you (for now...)"
                                 image={
@@ -518,11 +518,11 @@ export const ProductFeatureFlags = () => {
 
                 <section id="tutorials">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
-                    <p className="mt-0 text-opacity-75 text-center mb-12">
+                    <p className="mt-0 text-opacity-75 text-center mb-6">
                         Visit the <Link to="/tutorials">tutorials</Link> section for more.
                     </p>
 
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20 mx-5 md:mx-0">
                         <TutorialCard
                             title="How to do a canary release with feature flags in PostHog"
                             description="A canary release or canary deployment is the process of rolling out a new feature to a subset of users before releasing it to a larger group. Once satisfied with tests and analysis, the feature rolls out to a larger group (or everyone)."
@@ -546,7 +546,7 @@ export const ProductFeatureFlags = () => {
                     </ul>
                 </section>
 
-                <section id="installation" className="mb-20">
+                <section id="installation" className="mb-20 px-5 md:px-0">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
                     <p className="mt-0 opacity-50 text-center mb-12">
                         Here are some ways you can fine tune how you implement {product.lowercase}.
@@ -555,7 +555,7 @@ export const ProductFeatureFlags = () => {
                     <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...FeatureFlags]} />
                 </section>
 
-                <section id="docs" className="mb-20">
+                <section id="docs" className="mb-20 px-5 md:px-0">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
@@ -563,7 +563,7 @@ export const ProductFeatureFlags = () => {
                     <DocLinks menu={docsMenu.children[3].children} />
                 </section>
 
-                <section id="team" className="mb-20">
+                <section id="team" className="mb-20 px-5">
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
@@ -573,7 +573,7 @@ export const ProductFeatureFlags = () => {
                     <TeamMembers teamName={team} />
                 </section>
 
-                <section id="roadmap" className="mb-20">
+                <section id="roadmap" className="mb-20 px-5">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
 
                     <p className="text-center mb-8">Here’s what the team is up to.</p>
@@ -590,7 +590,7 @@ export const ProductFeatureFlags = () => {
                     </div>
                 </section>
 
-                <section id="questions" className="mb-20">
+                <section id="questions" className="mb-20 px-5">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
                     <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
@@ -610,7 +610,7 @@ export const ProductFeatureFlags = () => {
                     })}
                 </PairsWith>
             </div>
-            <div className="max-w-7xl mx-auto px-5 relative">
+            <div className="max-w-7xl mx-auto relative">
                 <section className="mb-20">
                     <CTA />
                 </section>

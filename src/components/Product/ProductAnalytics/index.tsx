@@ -873,7 +873,7 @@ export const ProductProductAnalytics = () => {
 
                     <section className="mb-20">
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
-                        <div className="mb-8 grid md:grid-cols-2 gap-4">
+                        <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
                                 title="Reasons a competitor might be better for you (for now...)"
                                 image={
@@ -922,11 +922,11 @@ export const ProductProductAnalytics = () => {
 
                 <section id="tutorials">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
-                    <p className="mt-0 text-opacity-75 text-center mb-12">
+                    <p className="mt-0 text-opacity-75 text-center mb-6">
                         Visit the <Link to="/tutorials">tutorials</Link> section for more.
                     </p>
 
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20 mx-5 md:mx-0">
                         <TutorialCard
                             title="How to calculate and lower churn rate"
                             description="In this tutorial, we will calculate and visualize the churn rate then use PostHog’s features of session recordings, cohorts, and actions to lower it."
@@ -962,7 +962,7 @@ export const ProductProductAnalytics = () => {
                     </ul>
                 </section>
 
-                <section id="installation" className="mb-20">
+                <section id="installation" className="mb-20 px-5 md:px-0">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
                     <p className="mt-0 opacity-50 text-center mb-12">
                         Here are some ways you can fine tune how you implement {product.lowercase}.
@@ -971,7 +971,7 @@ export const ProductProductAnalytics = () => {
                     <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...ProductAnalytics]} />
                 </section>
 
-                <section id="docs" className="mb-20">
+                <section id="docs" className="mb-20 px-5 md:px-0">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
@@ -979,7 +979,7 @@ export const ProductProductAnalytics = () => {
                     <DocLinks menu={docsMenu.children[1].children} />
                 </section>
 
-                <section id="team" className="mb-20">
+                <section id="team" className="mb-20 px-5">
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
                     <p className="text-center mb-2">
@@ -989,7 +989,7 @@ export const ProductProductAnalytics = () => {
                     <TeamMembers teamName={team} />
                 </section>
 
-                <section id="roadmap" className="mb-20">
+                <section id="roadmap" className="mb-20 px-5">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
 
                     <p className="text-center mb-8">Here’s what the team is up to.</p>
@@ -1006,7 +1006,7 @@ export const ProductProductAnalytics = () => {
                     </div>
                 </section>
 
-                <section id="questions" className="mb-20">
+                <section id="questions" className="mb-20 px-5">
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
                     <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
@@ -1026,7 +1026,7 @@ export const ProductProductAnalytics = () => {
                     })}
                 </PairsWith>
             </div>
-            <div className="max-w-7xl mx-auto px-5 relative">
+            <div className="max-w-7xl mx-auto relative">
                 <section className="mb-20">
                     <CTA />
                 </section>
