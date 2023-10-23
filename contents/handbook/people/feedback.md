@@ -21,7 +21,7 @@ We run full team 360-degree feedback session as part of every offsite. The sessi
 
 - Preparation includes reading our handbook about how to be a good feedback [giver](/handbook/people/feedback#how-to-give-good-feedback) and [receiver](/handbook/people/feedback#how-to-receive-feedback-well).
 
-- Feedback to be 70% constructive – this is an opportunity to help each other to grow. 
+- As a guide the mix of positive and constructive feedback will vary. You should spend more time talking over the constructive even if you have a long list of positive things to share – this is an opportunity to help each other to grow. 
 
 - Everyone is  expected to give feedback to everyone, even if they don’t work together directly. It may be very short feedback, which is ok! 
 
