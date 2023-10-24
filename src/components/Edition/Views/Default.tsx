@@ -13,7 +13,7 @@ import LikeButton from '../LikeButton'
 import { CallToAction, child, container } from 'components/CallToAction'
 import Spinner from 'components/Spinner'
 import { Menu } from '@headlessui/react'
-import { ChevronDown, Filter, Newspaper } from '@posthog/icons'
+import { IconChevronDown, IconFilter, IconX } from '@posthog/icons'
 import { Icon, getIcon } from 'components/PostLayout/Menu'
 import { navigate } from 'gatsby'
 import { postsMenu as menu } from '../../../navs/posts'
@@ -180,94 +180,42 @@ export const PostFilters = () => {
     const breakpoints = useBreakpoint()
 
     return (
-        <div
-            className={`relative flex space-x-2 pb-2 border-b border-border dark:border-border-dark ${
-                fullWidthContent ? 'pl-2 pr-4' : 'pr-2'
-            }`}
-        >
-            <div className="w-full flex-grow">
-                <Menu>
-                    <Menu.Button className="flex items-center relative mx-2 pl-2 pr-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all h-full">
-                        <div className="flex items-center space-x-2">
-                            <Icon icon={activeMenu?.icon} color={activeMenu?.color} />
-                            <div className="text-sm flex space-x-1 items-center">
-                                <span className="font-bold">{activeMenu?.name}</span>
-                                {tag && (
-                                    <>
-                                        <span>→</span>
-                                        <span className="font-bold">{tag}</span>
-                                    </>
-                                )}
-                            </div>
-
-                            <ChevronDown className="w-6 h-6 -mb-[2px]" />
-                        </div>
-                    </Menu.Button>
-                    <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
-                        {menu.map((menu, index) => {
-                            const { name, url, icon, color } = menu
-                            return (
-                                <Menu.Item key={`${name}-${index}`}>
-                                    <button
-                                        onClick={() => {
-                                            setActiveMenu(menu)
-                                            setRoot(url === '/posts' ? undefined : url?.split('/')[1])
-                                            setTag(undefined)
-                                            if (breakpoints.sm) {
-                                                navigate(url)
-                                            }
-                                        }}
-                                        className="py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50 flex space-x-2 items-center"
-                                    >
-                                        <Icon icon={icon} color={color} />
-                                        <span>{name}</span>
-                                    </button>
-                                </Menu.Item>
-                            )
-                        })}
-                    </Menu.Items>
-                </Menu>
-            </div>
-            {activeMenu?.children?.length > 0 && (
-                <div className="flex-grow-0 flex items-center justify-center">
+        <>
+            <div
+                className={`relative flex space-x-2 pb-2 border-b border-border dark:border-border-dark ${
+                    fullWidthContent ? 'pl-2 pr-4' : 'pr-2'
+                }`}
+            >
+                <div className="w-full flex-grow">
                     <Menu>
-                        <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
-                            <Filter className="w-5 h-5" />
+                        <Menu.Button className="flex items-center relative mx-2 pl-2 pr-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all h-full">
+                            <div className="flex items-center space-x-2">
+                                <Icon icon={activeMenu?.icon} color={activeMenu?.color} />
+                                <div className="text-sm flex space-x-1 items-center">
+                                    <span className="font-bold">{activeMenu?.name}</span>
+                                </div>
+
+                                <IconChevronDown className="w-6 h-6 -mb-[2px]" />
+                            </div>
                         </Menu.Button>
-                        <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
-                            <Menu.Item>
-                                <button
-                                    onClick={() => {
-                                        setRoot(
-                                            activeMenu?.url === '/posts' ? undefined : activeMenu?.url?.split('/')[1]
-                                        )
-                                        setTag(undefined)
-                                        if (breakpoints.sm) {
-                                            navigate(activeMenu?.url)
-                                        }
-                                    }}
-                                    className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/30 hover:dark:bg-border/30 ${
-                                        !tag ? 'font-bold bg-border/50 dark:bg-border/50' : ''
-                                    }`}
-                                >
-                                    All
-                                </button>
-                            </Menu.Item>
-                            {activeMenu?.children?.map(({ name, url }, index) => {
+                        <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
+                            {menu.map((menu, index) => {
+                                const { name, url, icon, color } = menu
                                 return (
                                     <Menu.Item key={`${name}-${index}`}>
                                         <button
                                             onClick={() => {
-                                                setTag(name)
+                                                setActiveMenu(menu)
+                                                setRoot(url === '/posts' ? undefined : url?.split('/')[1])
+                                                setTag(undefined)
                                                 if (breakpoints.sm) {
                                                     navigate(url)
                                                 }
                                             }}
-                                            className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/30 hover:dark:bg-border/30 ${
-                                                tag === name ? 'font-bold bg-border/50 dark:bg-border/50' : ''
-                                            }`}
+                                            className="py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/50 hover:dark:bg-border/50 flex space-x-2 items-center"
                                         >
-                                            {name}
+                                            <Icon icon={icon} color={color} />
+                                            <span>{name}</span>
                                         </button>
                                     </Menu.Item>
                                 )
@@ -275,8 +223,73 @@ export const PostFilters = () => {
                         </Menu.Items>
                     </Menu>
                 </div>
+                {activeMenu?.children?.length > 0 && (
+                    <div className="flex-grow-0 flex items-center justify-center">
+                        <Menu>
+                            <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
+                                <IconFilter className="w-5 h-5" />
+                            </Menu.Button>
+                            <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-50 bottom-2 left-2 right-2 translate-y-full overflow-hidden">
+                                <Menu.Item>
+                                    <button
+                                        onClick={() => {
+                                            setRoot(
+                                                activeMenu?.url === '/posts'
+                                                    ? undefined
+                                                    : activeMenu?.url?.split('/')[1]
+                                            )
+                                            setTag(undefined)
+                                            if (breakpoints.sm) {
+                                                navigate(activeMenu?.url)
+                                            }
+                                        }}
+                                        className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/30 hover:dark:bg-border/30 ${
+                                            !tag ? 'font-bold bg-border/50 dark:bg-border/50' : ''
+                                        }`}
+                                    >
+                                        All
+                                    </button>
+                                </Menu.Item>
+                                {activeMenu?.children?.map(({ name, url }, index) => {
+                                    return (
+                                        <Menu.Item key={`${name}-${index}`}>
+                                            <button
+                                                onClick={() => {
+                                                    setTag(name)
+                                                    if (breakpoints.sm) {
+                                                        navigate(url)
+                                                    }
+                                                }}
+                                                className={`py-1.5 px-2 first:pt-2 last:pb-2 !text-inherit text-left hover:bg-border/30 hover:dark:bg-border/30 ${
+                                                    tag === name ? 'font-bold bg-border/50 dark:bg-border/50' : ''
+                                                }`}
+                                            >
+                                                {name}
+                                            </button>
+                                        </Menu.Item>
+                                    )
+                                })}
+                            </Menu.Items>
+                        </Menu>
+                    </div>
+                )}
+            </div>
+            {tag && (
+                <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-border dark:border-border-dark -mb-1">
+                    <span
+                        className="
+                        after:h-6 after:w-6 after:absolute after:left-[39px] after:top-[-6px] after:border after:border-t-0 after:border-r-0 after:border-border dark:after:border-border-dark after:rounded-bl after:content-['']
+                    "
+                    ></span>
+                    <div className="pl-[43px] -mt-0.5">
+                        <span className="inline-flex gap-1 items-center text-[13px] rounded-full border border-light dark:border-dark pl-1.5 pr-2 pt-1 pb-1">
+                            <IconX className="w-3 h-3 inline-block bg-border dark:bg-border-dark p-1 box-content rounded-full" />
+                            <span>{tag}</span>
+                        </span>
+                    </div>
+                </div>
             )}
-        </div>
+        </>
     )
 }
 
@@ -292,7 +305,7 @@ function PostsListing() {
                 transition-all 
                 ${
                     articleView
-                        ? 'sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
+                        ? 'flex flex-col h-[calc(100vh_-_108px)] sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
                         : 'flex-grow md:px-8 2xl:px-12'
                 }
             `}
@@ -306,7 +319,7 @@ function PostsListing() {
             <div
                 className={
                     articleView
-                        ? 'after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative'
+                        ? 'after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative '
                         : ''
                 }
             >
@@ -323,7 +336,7 @@ function PostsListing() {
                 )}
 
                 <ul
-                    className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-y-auto overflow-x-hidden ${
+                    className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
                     }`}
                 >
