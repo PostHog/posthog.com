@@ -8,7 +8,7 @@ import CheckIcon from '../../../images/check.svg'
 import MinusIcon from '../../../images/x.svg'
 import './styles/index.scss'
 import Modal from 'components/Modal'
-import { capitalizeFirstLetter } from '../../../utils'
+import { capitalizeFirstLetter, toFixedMin } from '../../../utils'
 import Label from 'components/Label'
 import { graphql, useStaticQuery } from 'gatsby'
 import { ExternalLink } from 'components/Icons'
@@ -195,7 +195,9 @@ const ProductTiers = ({ plan }: { plan?: BillingV2PlanType }): JSX.Element => {
                             </div>
                         ) : (
                             <>
-                                <span className="font-bold text-base">${parseFloat(tier.unit_amount_usd)}</span>
+                                <span className="font-bold text-base">
+                                    ${toFixedMin(parseFloat(tier.unit_amount_usd), 2)}
+                                </span>
                                 {/* the product types we have are plural, so we need to singularlize them and this works for now */}
                                 <span className="text-gray">/{plan.unit ? plan.unit.replace(/s$/, '') : 'unit'}</span>
                                 <p className="text-sm mb-0">
