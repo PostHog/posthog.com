@@ -38,7 +38,14 @@ const convertLargeNumberToWords = (
         denominator = 1000
     }
 
-    return `${previousNum ? `${(previousNum / denominator).toFixed(0)}-` : multipleTiers ? 'first ' : ''}${(
+    let prevDenominator = 1
+    if (previousNum && previousNum >= 1000000) {
+        prevDenominator = 1000000
+    } else if (previousNum && previousNum >= 1000) {
+        prevDenominator = 1000
+    }
+
+    return `${previousNum ? `${((previousNum + 1) / prevDenominator).toFixed(0)}-` : multipleTiers ? 'First ' : ''}${(
         num / denominator
     ).toFixed(0)}${denominator === 1000000 ? ' million' : denominator === 1000 ? 'k' : ''}${
         !previousNum && multipleTiers ? ` ${productType}s/mo` : ''
