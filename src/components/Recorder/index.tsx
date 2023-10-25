@@ -10,6 +10,7 @@ import dayjs from 'dayjs'
 import Tooltip from './Tooltip'
 // import * as EBML from "ts-ebml";
 import * as tus from 'tus-js-client'
+import { CallToAction } from 'components/CallToAction'
 
 interface Props {
     open: boolean
@@ -191,10 +192,10 @@ export default function Recorder({ setOpen, step, setStep, onSubmit }: Props): R
     return (
         <div>
             {step === 'pre' ? (
-                <div className="w-full">
+                <div className="w-full relative z-50">
                     <Listbox value={selectedDevice} onChange={setSelectedDevice}>
                         <div className="relative mt-1">
-                            <Listbox.Button className="relative flex w-full cursor-default flex-row items-center justify-start rounded-md bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm">
+                            <Listbox.Button className="border border-light dark:border-dark relative flex w-full cursor-default flex-row items-center justify-start rounded-md bg-white mb-2 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm">
                                 {/* <MicrophoneIcon
                                     className="mr-2 h-5 w-5 text-gray-400"
                                     aria-hidden="true"
@@ -219,12 +220,12 @@ export default function Recorder({ setOpen, step, setStep, onSubmit }: Props): R
                                 leaveFrom="opacity-100"
                                 leaveTo="opacity-0"
                             >
-                                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                <Listbox.Options className="bg-white list-none border border-light dark:border-dark pl-0 absolute mt-1 max-h-60 w-full overflow-auto rounded-md py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                     {audioDevices.map((audioDevice, i) => (
                                         <Listbox.Option
                                             key={i}
                                             className={({ active }) =>
-                                                `relative cursor-default select-none py-2 pl-10 pr-4 text-gray-900 ${
+                                                `relative cursor-pointer select-none py-2 px-4 hover:bg-accent dark:hover:bg-accent-dark ${
                                                     active ? 'bg-gray-200' : ''
                                                 }`
                                             }
@@ -255,13 +256,9 @@ export default function Recorder({ setOpen, step, setStep, onSubmit }: Props): R
                             </Transition>
                         </div>
                     </Listbox>
-                    <button
-                        type="button"
-                        className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-indigo-500 px-4 py-2 text-sm font-semibold leading-6 text-white shadow transition duration-150 ease-in-out hover:bg-indigo-400 disabled:cursor-not-allowed"
-                        onClick={() => void handleRecording()}
-                    >
-                        <span>Start recording</span>
-                    </button>
+                    <CallToAction className="disabled:cursor-not-allowed w-full" onClick={() => void handleRecording()}>
+                        Start recording
+                    </CallToAction>
                 </div>
             ) : null}
             {step === 'in' ? (
@@ -313,37 +310,39 @@ export default function Recorder({ setOpen, step, setStep, onSubmit }: Props): R
                     <div className="flex items-center justify-center">
                         <button
                             type="button"
-                            className="inline-flex items-center rounded-md bg-indigo-500 px-4 py-2 text-sm font-semibold leading-6 text-white shadow transition duration-150 ease-in-out hover:bg-indigo-400 disabled:cursor-not-allowed"
+                            className="bg-button-shadow dark:bg-button-shadow-dark border-[1.5px] relative top-[2px] rounded-[8px] w-auto text-primary inline-block border-button text-center group disabled:opacity-50 disabled:cursor-not-allowed  group disabled:cursor-not-allowed"
                             disabled={submitting}
                             onClick={() => void handleUpload()}
                         >
-                            {submitting ? (
-                                <>
-                                    <svg
-                                        className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <circle
-                                            className="opacity-25"
-                                            cx="12"
-                                            cy="12"
-                                            r="10"
-                                            stroke="currentColor"
-                                            strokeWidth="4"
-                                        ></circle>
-                                        <path
-                                            className="opacity-75"
-                                            fill="currentColor"
-                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                        ></path>
-                                    </svg>
-                                    Uploading...
-                                </>
-                            ) : (
-                                <>Save to cloud</>
-                            )}
+                            <span className="relative text-center w-auto bg-orange text-primary hover:text-primary dark:text-primary dark:hover:text-primary border-button dark:border-button-dark dark:bg-orange rounded-[8px] text-[15px] font-bold border-[1.5px] px-5 py-2 -translate-y-1 hover:-translate-y-1.5 active:-translate-y-0.5 mx-[-1.5px] group-disabled:hover:!-translate-y-1 group-disabled:hover:!translate-y-0 block active:transition-all active:duration-100 select-none">
+                                {submitting ? (
+                                    <>
+                                        <svg
+                                            className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <circle
+                                                className="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                strokeWidth="4"
+                                            ></circle>
+                                            <path
+                                                className="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                            ></path>
+                                        </svg>
+                                        Uploading...
+                                    </>
+                                ) : (
+                                    <>Send recording</>
+                                )}
+                            </span>
                         </button>
                         <button
                             type="button"

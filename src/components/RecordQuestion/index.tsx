@@ -1,7 +1,7 @@
 import { FormikErrors } from 'formik'
 import React, { Dispatch, InputHTMLAttributes, SetStateAction, useRef, useState } from 'react'
 import { useFormik } from 'formik'
-import { button } from 'components/CallToAction'
+import { CallToAction, button } from 'components/CallToAction'
 import * as Yup from 'yup'
 import { useLocation } from '@reach/router'
 import Link from 'components/Link'
@@ -376,10 +376,12 @@ export default function RecordVideo({
     return (
         <>
             {recorderOpen && (
-                <div className="absolute w-screen h-screen">
+                <div className="max-w-2xl mx-auto">
                     <div className="fixed inset-0 overflow-y-auto z-[5000000]">
                         <div className="flex min-h-full items-center justify-center p-4 text-center">
                             <div className="w-fit transform rounded bg-white p-6 text-left align-middle shadow-xl transition-all z-[5000001]">
+                                <h2 className="mb-2">Select your recording device</h2>
+                                <p className="text-sm">Be sure to allow your access to your microphone.</p>
                                 <Recorder
                                     step={step}
                                     setStep={setStep}
@@ -387,6 +389,9 @@ export default function RecordVideo({
                                     setOpen={setRecorderOpen}
                                     onSubmit={() => setSubmitted(true)}
                                 />
+                                <p className="text-sm mt-4 text-center mb-0 opacity-75">
+                                    We'll ask you which tab you want to share next!
+                                </p>
                             </div>
                             <div
                                 className="fixed inset-0 bg-black bg-opacity-25 z-[5000000]"
@@ -407,7 +412,7 @@ export default function RecordVideo({
                             />
                         </div>
                     )}
-                    <div className="bg-light dark:bg-dark border border-light dark:border-dark px-6 py-8 rounded-md mt-4">
+                    <div className="max-w-2xl mt-24 mx-auto bg-light dark:bg-dark border border-light dark:border-dark px-6 py-8 rounded-md mt-4">
                         <h4>
                             ✅ <strong>Message received!</strong>
                         </h4>
@@ -415,43 +420,50 @@ export default function RecordVideo({
                             A member of the PostHog team will get back to you as soon as we've had a chance to review
                             your information.&nbsp;
                         </p>
-                        <p className="mb-0">
+                        <p className="mb-2">
                             If you have any questions in the meantime, <Link to="/questions">let us know</Link>!
                         </p>
+
+                        <CallToAction href="/">Back to PostHog.com</CallToAction>
                     </div>
                 </>
             ) : (
-                <form onSubmit={handleSubmit}>
-                    <p className="text-sm">
-                        <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
-                        form at a breakneck pace!
-                    </p>
-                    <div className="grid border border-light dark:border-dark rounded overflow-hidden">
-                        {fields.map(({ Component, name, placeHolder, type = 'text', options = [] }, index) => {
-                            return (
-                                <Component
-                                    autoFocus={index === 0}
-                                    key={name}
-                                    onChange={handleChange}
-                                    value={values[name]}
-                                    name={name}
-                                    placeholder={placeHolder}
-                                    setFieldValue={setFieldValue}
-                                    values={values}
-                                    type={type}
-                                    options={options}
-                                    errors={errors}
-                                    validateField={validateField}
-                                    openOptions={openOptions}
-                                    setOpenOptions={setOpenOptions}
-                                />
-                            )
-                        })}
+                <div className="w-screen h-screen flex justify-center items-center">
+                    <div className="max-w-2xl mx-auto">
+                        <h2>Let's record dat question!</h2>
+                        <form onSubmit={handleSubmit}>
+                            <p className="text-sm">
+                                <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through
+                                the form at a breakneck pace!
+                            </p>
+                            <div className="grid border border-light dark:border-dark rounded overflow-hidden">
+                                {fields.map(({ Component, name, placeHolder, type = 'text', options = [] }, index) => {
+                                    return (
+                                        <Component
+                                            autoFocus={index === 0}
+                                            key={name}
+                                            onChange={handleChange}
+                                            value={values[name]}
+                                            name={name}
+                                            placeholder={placeHolder}
+                                            setFieldValue={setFieldValue}
+                                            values={values}
+                                            type={type}
+                                            options={options}
+                                            errors={errors}
+                                            validateField={validateField}
+                                            openOptions={openOptions}
+                                            setOpenOptions={setOpenOptions}
+                                        />
+                                    )
+                                })}
+                            </div>
+                            <button className={button(undefined, 'full', 'mt-4', 'md')} type="submit">
+                                Start recording
+                            </button>
+                        </form>
                     </div>
-                    <button className={button(undefined, 'full', 'mt-4', 'md')} type="submit">
-                        Start recording
-                    </button>
-                </form>
+                </div>
             )}
         </>
     )

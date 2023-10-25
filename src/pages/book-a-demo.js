@@ -59,9 +59,9 @@ export default function BookADemo() {
                 <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
                     <div className="md:flex items-center md:space-x-4">
                         <p className="mb-2 md:mb-0 text-[15px]">
-                            Have a quick question? Record a video with your question and we'll get
+                            Have a quick question? Record a video with your question and we'll get back to you.
                         </p>
-                        <CallToAction type="secondary" to="/record-question" className="whitespace-nowrap">
+                        <CallToAction type="secondary" size="sm" to="/record-question">
                             Record a video question
                         </CallToAction>
                         {recorderOpen && (
