@@ -12,7 +12,7 @@ We maintain a robust security program that follows best practice in order to mee
 
 This page covers SOC 2, GDPR, and CCPA compliance.
 
-## Multi-factor authentiction 
+## Multi-factor authentication 
 
 We enforce the use of hardware security keys wherever we can. Every team members gets two of these, most commonly:
 
