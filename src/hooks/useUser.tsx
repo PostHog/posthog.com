@@ -94,7 +94,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }, [])
 
     const getJwt = async () => {
-        console.log('getJwt', jwt)
         return jwt || localStorage.getItem('jwt')
     }
 
