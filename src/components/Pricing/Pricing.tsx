@@ -98,7 +98,7 @@ const Pricing = (): JSX.Element => {
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
             <section>
                 <div
-                    className={`grid md:grid-cols-2 md:mt-12 md:mt-18 md:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
+                    className={`grid md:grid-cols-2 md:mt-8 md:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
                 >
                     <div className="md:order-2">
                         <StaticImage
@@ -111,14 +111,17 @@ const Pricing = (): JSX.Element => {
                     </div>
                     <div className="md:order-1">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">Pricing</h1>
-                        <p className="text-base font-medium opacity-60 leading-tight">
+                        <p className="text-base font-medium opacity-60 leading-tight mb-4">
                             Use PostHog free forever (with generous usage limits). <br className="hidden lg:block" />
                             Or pay per use and get unrestricted access to everything.
+                        </p>
+                        <p className="text-base font-medium opacity-60 leading-tight">
+                            Each product is priced separately.
                         </p>
                     </div>
                 </div>
             </section>
-            <section className={`${section} mb-12 mt-12 md:px-4`}>
+            <section className={`${section} mb-12 mt-8 md:px-4`}>
                 <PlanComparison groupsToShow={groupsToShow} />
             </section>
 

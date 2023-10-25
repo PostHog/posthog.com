@@ -870,14 +870,13 @@ ul {
 
 .active-sidebar-item {
     &:before {
-        background: #f54e00;
-        bottom: 4px;
+        @apply bg-red absolute;
+        bottom: 2px;
         border-radius: 2px;
         content: '';
-        left: 6px;
-        position: absolute;
-        top: 4px;
-        width: 4px;
+        left: 0px;
+        top: 2px;
+        width: 2px;
     }
 }
 

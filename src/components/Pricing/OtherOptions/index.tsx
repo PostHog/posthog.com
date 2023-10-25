@@ -1,9 +1,9 @@
 import { CallToAction } from 'components/CallToAction'
 import { GitHub } from 'components/Icons'
-import { Enterprise as EnterpriseIcon } from 'components/NotProductIcons'
+import { IconShield } from '@posthog/icons'
 import React from 'react'
 
-const descriptionClassName = `list-none m-0 p-0 grid gap-y-1`
+const descriptionClassName = `m-0 pl-4 grid gap-y-1`
 const descriptionItemClassName = `text-sm opacity-80`
 
 const OpenSourceDescription = () => {
@@ -39,7 +39,7 @@ interface ISection {
 const sections: ISection[] = [
     {
         title: 'Enterprise',
-        icon: <EnterpriseIcon />,
+        icon: <IconShield className="w-7 h-7" />,
         description: <EnterpriseDescription />,
         cta: {
             url: '/contact-sales?edition=enterprise',
