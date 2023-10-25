@@ -274,6 +274,7 @@ export const PostFilters = () => {
                     </div>
                 )}
             </div>
+
             {tag && (
                 <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-border dark:border-border-dark -mb-1">
                     <span
@@ -283,7 +284,7 @@ export const PostFilters = () => {
                     ></span>
                     <div className="pl-[43px] -mt-0.5">
                         <span className="inline-flex gap-1 items-center text-[13px] rounded-full border border-light dark:border-dark pl-1.5 pr-2 pt-1 pb-1">
-                            <IconX className="w-3 h-3 inline-block bg-border dark:bg-border-dark p-1 box-content rounded-full" />
+                            <IconX className="hidden w-3 h-3 inline-block bg-border dark:bg-border-dark p-1 box-content rounded-full" />
                             <span>{tag}</span>
                         </span>
                     </div>
