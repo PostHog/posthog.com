@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import * as tus from 'tus-js-client'
 
 async function uploadFile(fileName: string, file: File): Promise<void> {
     return new Promise((resolve, reject) => {
