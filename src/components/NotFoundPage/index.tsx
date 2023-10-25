@@ -5,6 +5,8 @@ import Layout from '../Layout'
 import Lottie from 'react-lottie'
 import { StaticImage } from 'gatsby-plugin-image'
 import SearchBox from 'components/Search/SearchBox'
+import Pico8 from "react-pico-8";
+import {Carts, Controls, Fullscreen, Pause, Reset, Sound} from "react-pico-8/buttons";
 
 export default function NotFoundPage(): JSX.Element {
     const posthog = usePostHog()
@@ -33,23 +35,23 @@ export default function NotFoundPage(): JSX.Element {
                     />
 
                     <div className="sm:!absolute right-0 -mt-12 sm:mt-0 sm:-right-12 lg:-right-24 bottom-0 md:-bottom-28 h-[400px] w-[400px] sm:h-[500px] sm:w-[500px] lg:h-[600px] lg:w-[600px]">
-                        {hogData ? (
-                            <Lottie
-                                options={{
-                                    loop: true,
-                                    autoplay: true,
-                                    animationData: hogData,
-                                }}
-                            />
-                        ) : (
-                            <StaticImage
-                                src="../../images/astrohog.gif"
-                                alt="Space hog"
-                                placeholder="blurred"
-                                className="w-[250px] sm:w-[500px] rotate-12"
-                            />
-                        )}
+                        <Pico8 src="/supermax/supermax3.js"
+                               autoPlay={true}
+                               hideCursor={false}
+                               center={true}
+                               blockKeys={false}
+                               usePointer={true}
+                               unpauseOnReset={true}
+                        >
+                            <Controls/>
+                            <Reset/>
+                            <Sound/>
+                            <Pause/>
+                            <Carts/>
+                            <Fullscreen/>
+                        </Pico8>
                     </div>
+
 
                     <div className="text-[15px] opacity-75 -mt-12 sm:mt-0 mb-4">
                         <strong>404:</strong> <s>Hog</s> Page not found
