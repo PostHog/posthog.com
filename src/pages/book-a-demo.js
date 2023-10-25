@@ -12,6 +12,10 @@ export default function BookADemo() {
     const [recorderOpen, setRecorderOpen] = useState(false)
     const [step, setStep] = useState('pre')
 
+    const handleClose = () => {
+        if (step === 'pre') setRecorderOpen(false)
+    }
+
     return (
         <Layout>
             <SEO title="Book a demo – PostHog" />
@@ -62,11 +66,9 @@ export default function BookADemo() {
                         </CallToAction>
                         {recorderOpen && (
                             <div className="absolute w-screen h-screen">
-                                <div className="fixed inset-0 bg-black bg-opacity-25 z-[5000000]"></div>
-
-                                <div className="fixed inset-0 overflow-y-auto z-[5000001]">
+                                <div className="fixed inset-0 overflow-y-auto z-[5000000]">
                                     <div className="flex min-h-full items-center justify-center p-4 text-center">
-                                        <div className="w-fit transform rounded bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                        <div className="w-fit transform rounded bg-white p-6 text-left align-middle shadow-xl transition-all z-[5000001]">
                                             <Recorder
                                                 step={step}
                                                 setStep={setStep}
@@ -74,6 +76,10 @@ export default function BookADemo() {
                                                 setOpen={setRecorderOpen}
                                             />
                                         </div>
+                                        <div
+                                            className="fixed inset-0 bg-black bg-opacity-25 z-[5000000]"
+                                            onClick={handleClose}
+                                        ></div>
                                     </div>
                                 </div>
                             </div>
