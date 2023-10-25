@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useRef, useState } from 'react'
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'components/Link'
@@ -28,6 +28,8 @@ import { navigate } from 'gatsby'
 import { postsMenu as menu } from '../../navs/posts'
 import { Authentication } from 'components/Squeak'
 import { PostFilters } from './Views/Default'
+import { CallToAction, child, container } from 'components/CallToAction'
+
 dayjs.extend(relativeTime)
 
 const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>, 'meta'> }) => {
@@ -70,7 +72,7 @@ const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>
 }
 
 export const Sidebar = () => {
-    const { user } = useUser()
+    const { user, logout, isModerator } = useUser()
     const { questions: subscribedQuestions } = useQuestions({
         limit: 5,
         sortBy: 'activity',
@@ -100,19 +102,66 @@ export const Sidebar = () => {
             },
         },
     })
+    const { setNewPostModalOpen, newPostModalOpen, setLoginModalOpen, articleView } = useContext(PostsContext)
+    const name = [user?.profile.firstName, user?.profile.lastName].filter(Boolean).join(' ')
 
     return (
-        <div>
-            <h5 className="my-4">Discussions</h5>
-            {user && (
-                <SidebarSection title="Subscribed threads">
-                    <Questions questions={subscribedQuestions} />
+        <>
+            <div className="lg:hidden my-4">
+                <h5 className="my-4">Community account</h5>
+                {user ? (
+                    <>
+                        <p className="text-sm m-0 p-0">
+                            Signed in as{' '}
+                            <Link
+                                className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
+                                to={`/community/profiles/${user?.profile.id}`}
+                            >
+                                {name}
+                            </Link>
+                        </p>
+                        <span>
+                            {isModerator && (
+                                <button
+                                    className="text-sm pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
+                                    onClick={() => setNewPostModalOpen(!newPostModalOpen)}
+                                >
+                                    New post
+                                </button>
+                            )}
+                            <button
+                                className="text-sm dark:text-yellow text-red font-semibold"
+                                onClick={() => logout()}
+                            >
+                                Logout
+                            </button>
+                        </span>
+                    </>
+                ) : (
+                    <>
+                        <CallToAction
+                            type="secondary"
+                            size="xs"
+                            className="lg:w-auto w-full"
+                            onClick={() => setLoginModalOpen(true)}
+                        >
+                            Sign in
+                        </CallToAction>
+                    </>
+                )}
+            </div>
+            <div>
+                <h5 className="my-4">Discussions</h5>
+                {user && (
+                    <SidebarSection title="Subscribed threads">
+                        <Questions questions={subscribedQuestions} />
+                    </SidebarSection>
+                )}
+                <SidebarSection title="Latest community questions">
+                    <Questions questions={newestQuestions} />
                 </SidebarSection>
-            )}
-            <SidebarSection title="Latest community questions">
-                <Questions questions={newestQuestions} />
-            </SidebarSection>
-        </div>
+            </div>
+        </>
     )
 }
 
@@ -330,7 +379,7 @@ export default function Posts({
                     <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
-                    <div className="sticky top-[57px] md:hidden lg:top-[108px] bg-light dark:bg-dark pt-2 mb-0 z-10 lg:hidden">
+                    <div className="sticky top-0 reasonable:top-[57px] md:hidden lg:top-[108px] bg-light dark:bg-dark pt-2 mb-0 z-10 lg:hidden">
                         <PostFilters />
                     </div>
                     {articleView && (

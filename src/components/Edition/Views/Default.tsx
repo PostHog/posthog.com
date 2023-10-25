@@ -26,9 +26,9 @@ const UserBar = () => {
     const { setNewPostModalOpen, newPostModalOpen, setLoginModalOpen, articleView } = useContext(PostsContext)
     const { pathname } = useLocation()
     return (
-        <div className="flex flex-col gap-1 @xs:flex-row justify-between items-center w-full">
+        <div className="flex gap-1 flex-col @xs:flex-row items-center justify-between w-full">
             {user ? (
-                <div className="flex items-center justify-between w-full">
+                <>
                     <p className="text-sm m-0 p-0">
                         Signed in as{' '}
                         <Link
@@ -51,7 +51,7 @@ const UserBar = () => {
                             Logout
                         </button>
                     </span>
-                </div>
+                </>
             ) : (
                 <>
                     <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
