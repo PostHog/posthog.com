@@ -52,13 +52,13 @@ import { useState, useEffect } from 'react'
 
 function App() {
   const variantKey = useFeatureFlagVariantKey('show-welcome-message')
-  const [ welcomeMessage, setWelcomeMessage ] = useState('')
+  let welcomeMessage = ''
 
   useEffect(() => {
     if (variantKey === 'variant-a') {
-      setWelcomeMessage('Welcome to the Alpha!')
+      welcomeMessage = 'Welcome to the Alpha!'
     } else if (variantKey === 'variant-b') {
-      setWelcomeMessage('Welcome to the Beta!')
+      welcomeMessage = 'Welcome to the Beta!'
     }
   }, [variantKey])
 
