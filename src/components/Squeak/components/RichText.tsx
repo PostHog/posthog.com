@@ -78,7 +78,14 @@ const buttons = [
     },
 ]
 
-export default function RichText({ initialValue = '', setFieldValue, autoFocus, values, onSubmit }: any) {
+export default function RichText({
+    initialValue = '',
+    setFieldValue,
+    autoFocus,
+    values,
+    onSubmit,
+    maxLength = 2000,
+}: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
     const [cursor, setCursor] = useState<number | null>(null)
@@ -212,7 +219,7 @@ export default function RichText({ initialValue = '', setFieldValue, autoFocus, 
                         required
                         id="body"
                         placeholder={'Type more details...'}
-                        maxLength={2000}
+                        maxLength={maxLength}
                         onKeyDown={handleKeyDown}
                     />
                     {isDragActive && (
