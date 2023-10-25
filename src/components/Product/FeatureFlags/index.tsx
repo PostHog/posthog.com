@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
@@ -44,6 +43,7 @@ import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
 import { SEO } from 'components/seo'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const product = {
     slug: 'feature-flags',
@@ -366,14 +366,15 @@ export const ProductFeatureFlags = () => {
             }
         }
     `)
+    const { fullWidthContent } = useLayoutData()
     return (
-        <Layout>
+        <>
             <SEO
                 title="Feature Flags - PostHog"
                 description="Safely roll out features to specific users or groups."
                 image={`/images/og/feature-flags.jpg`}
             />
-            <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="seagreen"
                     icon={<IconToggle />}
@@ -382,7 +383,7 @@ export const ProductFeatureFlags = () => {
                     description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
                 />
 
-                <div className="">
+                <div className="text-center">
                     <StaticImage
                         src="./images/screenshot-feature-flags.png"
                         alt="Screenshot of a feature flag in PostHog"
@@ -437,7 +438,10 @@ export const ProductFeatureFlags = () => {
                     </Marquee>
                 </section>
             </div>
-            <section id="pricing" className="max-w-7xl mx-auto px-5 py-20">
+            <section
+                id="pricing"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
+            >
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
@@ -469,7 +473,7 @@ export const ProductFeatureFlags = () => {
                 </div>
             </section>
 
-            <div className="max-w-7xl mx-auto">
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -626,7 +630,7 @@ export const ProductFeatureFlags = () => {
                     <CTA />
                 </section>
             </div>
-        </Layout>
+        </>
     )
 }
 
