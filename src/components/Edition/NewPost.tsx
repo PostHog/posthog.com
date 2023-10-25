@@ -214,6 +214,7 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
                                 initialValue={initialValues?.body}
                                 setFieldValue={setFieldValue}
                                 values={values}
+                                maxLength={524288}
                             />
                         </Accordion>
                         <Accordion initialOpen label="Excerpt" active={!!values.excerpt}>
