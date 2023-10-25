@@ -79,7 +79,7 @@ export default function ClientPost({
             </Modal>
             <SEO title={title + ' - PostHog'} />
             <article
-                className={`article-content mx-auto transition-all pb-6 md:py-6 md:px-8 2xl:px-12 ${
+                className={`article-content mx-auto transition-all pb-6 md:py-6 md:pb-20 md:px-8 2xl:px-12 ${
                     fullWidthContent ? 'max-w-full' : 'max-w-2xl'
                 }`}
             >
