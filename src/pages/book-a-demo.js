@@ -47,6 +47,17 @@ export default function BookADemo() {
                         </CallToAction>
                     </div>
                 </div>
+                <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
+                    <div className="md:flex items-center md:space-x-4">
+                        <p className="mb-2 md:mb-0 text-[15px]">
+                            Have a quick question? Record a video with your question and we'll get
+                        </p>
+
+                        <CallToAction type="secondary" to="/contact-sales" className="whitespace-nowrap">
+                            Record a video question
+                        </CallToAction>
+                    </div>
+                </div>
                 <iframe
                     src="https://www.youtube-nocookie.com/embed/BPDmpepEwSY"
                     className="rounded shadow-xl order-2 md:order-3"
