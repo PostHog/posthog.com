@@ -199,7 +199,7 @@ export default function NewPost({ onSubmit, initialValues, postID }) {
     return (
         <div className="max-w-[450px] h-full ml-auto relative bg-white dark:bg-accent-dark overflow-auto border-l border-border dark:border-dark">
             <form className="m-0 flex flex-col h-full" onSubmit={handleSubmit}>
-                <div className="border-b border-border dark:border-dark overflow-hidden">
+                <div className="border-b border-border dark:border-dark">
                     <div className="grid grid-cols-1 divide-y divide-border dark:divide-border-dark border-border dark:border-dark w-full items-center">
                         <input
                             required
