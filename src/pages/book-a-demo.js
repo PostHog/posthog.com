@@ -53,7 +53,7 @@ export default function BookADemo() {
                             Have a quick question? Record a video with your question and we'll get
                         </p>
 
-                        <CallToAction type="secondary" to="/contact-sales" className="whitespace-nowrap">
+                        <CallToAction type="secondary" to="/record-question" className="whitespace-nowrap">
                             Record a video question
                         </CallToAction>
                     </div>
