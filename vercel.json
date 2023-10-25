@@ -1113,6 +1113,7 @@
         { "source": "/ab-testing/documentation", "destination": "/ab-testing#docs" },
         { "source": "/ab-testing/tutorials", "destination": "/ab-testing#tutorials" },
         { "source": "/ab-testing/roadmap", "destination": "/ab-testing#roadmap" },
-        { "source": "/ab-testing/questions", "destination": "/ab-testing#questions" }
+        { "source": "/ab-testing/questions", "destination": "/ab-testing#questions" },
+        { "source": "/handbook/what-is-posthog", "destination": "/handbook/why-does-posthog-exist" }
     ]
 }
