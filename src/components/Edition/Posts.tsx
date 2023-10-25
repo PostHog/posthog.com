@@ -330,7 +330,7 @@ export default function Posts({
                     <Modal open={newPostModalOpen} setOpen={setNewPostModalOpen}>
                         <NewPost onSubmit={handleNewPostSubmit} />
                     </Modal>
-                    <div className="sticky top-[57px] md:top-[108px] bg-light dark:bg-dark pt-2 -mb-4 md:mb-4 z-10 lg:hidden">
+                    <div className="sticky top-[57px] md:hidden lg:top-[108px] bg-light dark:bg-dark pt-2 mb-0 z-10 lg:hidden">
                         <PostFilters />
                     </div>
                     {articleView && (
