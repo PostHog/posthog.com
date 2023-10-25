@@ -11,6 +11,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 import Confetti from 'react-confetti'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import usePostHog from 'hooks/usePostHog'
+import Recorder from 'components/Recorder'
 
 const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark group active:bg-white dark:active:bg-border-dark/50 hover:bg-white/25 dark:hover:bg-border-dark/25 focus-within:bg-white dark:focus-within:bg-border-dark/50 relative text-left`
 
@@ -317,6 +318,11 @@ export default function RecordVideo({
     const [submitted, setSubmitted] = useState(false)
     const [openOptions, setOpenOptions] = useState<string[]>([])
     const [confetti, setConfetti] = useState(true)
+    const [recorderOpen, setRecorderOpen] = useState(false)
+    const [step, setStep] = useState('pre')
+    const handleClose = () => {
+        if (step === 'pre') setRecorderOpen(false)
+    }
     const { handleSubmit, values, handleChange, setFieldValue, errors, validateField } = useFormik({
         initialValues: Object.fromEntries(fields.map((field) => [field.name, initialValues[field.name]])),
         onSubmit: async (values) => {
@@ -355,9 +361,10 @@ export default function RecordVideo({
                 return err
             })
             if (res.status === 200) {
-                setSubmitted(true)
                 scroll.scrollToTop()
             }
+
+            setRecorderOpen(true)
         },
         validationSchema: ValidationSchema,
         validateOnChange: false,
@@ -365,11 +372,6 @@ export default function RecordVideo({
 
     return submitted ? (
         <>
-            {confetti && (
-                <div className="fixed inset-0">
-                    <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
-                </div>
-            )}
             <div className="bg-light dark:bg-dark border border-light dark:border-dark px-6 py-8 rounded-md mt-4">
                 <h4>
                     ✅ <strong>Message received!</strong>
