@@ -11,6 +11,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 import Confetti from 'react-confetti'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import usePostHog from 'hooks/usePostHog'
+import Recorder from 'components/Recorder'
 
 const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark group active:bg-white dark:active:bg-border-dark/50 hover:bg-white/25 dark:hover:bg-border-dark/25 focus-within:bg-white dark:focus-within:bg-border-dark/50 relative text-left`
 
@@ -317,6 +318,12 @@ export default function RecordVideo({
     const [submitted, setSubmitted] = useState(false)
     const [openOptions, setOpenOptions] = useState<string[]>([])
     const [confetti, setConfetti] = useState(true)
+    const [recorderOpen, setRecorderOpen] = useState(false)
+    const [step, setStep] = useState<'pre' | 'in' | 'post'>('pre')
+
+    const handleClose = () => {
+        if (step === 'pre') setRecorderOpen(false)
+    }
     const { handleSubmit, values, handleChange, setFieldValue, errors, validateField } = useFormik({
         initialValues: Object.fromEntries(fields.map((field) => [field.name, initialValues[field.name]])),
         onSubmit: async (values) => {
@@ -355,65 +362,94 @@ export default function RecordVideo({
                 return err
             })
             if (res.status === 200) {
-                setSubmitted(true)
                 scroll.scrollToTop()
+                setRecorderOpen(true)
             }
         },
         validationSchema: ValidationSchema,
         validateOnChange: false,
     })
 
-    return submitted ? (
+    return (
         <>
-            {confetti && (
-                <div className="fixed inset-0">
-                    <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
+            {recorderOpen && (
+                <div className="absolute w-screen h-screen">
+                    <div className="fixed inset-0 overflow-y-auto z-[5000000]">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                            <div className="w-fit transform rounded bg-white p-6 text-left align-middle shadow-xl transition-all z-[5000001]">
+                                <Recorder
+                                    step={step}
+                                    setStep={setStep}
+                                    open={recorderOpen}
+                                    setOpen={setRecorderOpen}
+                                    onSubmit={() => setSubmitted(true)}
+                                />
+                            </div>
+                            <div
+                                className="fixed inset-0 bg-black bg-opacity-25 z-[5000000]"
+                                onClick={handleClose}
+                            ></div>
+                        </div>
+                    </div>
                 </div>
             )}
-            <div className="bg-light dark:bg-dark border border-light dark:border-dark px-6 py-8 rounded-md mt-4">
-                <h4>
-                    ✅ <strong>Message received!</strong>
-                </h4>
-                <p>
-                    A member of the PostHog team will get back to you as soon as we've had a chance to review your
-                    information.&nbsp;
-                </p>
-                <p className="mb-0">
-                    If you have any questions in the meantime, <Link to="/questions">let us know</Link>!
-                </p>
-            </div>
+            {submitted ? (
+                <>
+                    {confetti && (
+                        <div className="fixed inset-0">
+                            <Confetti
+                                onConfettiComplete={() => setConfetti(false)}
+                                recycle={false}
+                                numberOfPieces={1000}
+                            />
+                        </div>
+                    )}
+                    <div className="bg-light dark:bg-dark border border-light dark:border-dark px-6 py-8 rounded-md mt-4">
+                        <h4>
+                            ✅ <strong>Message received!</strong>
+                        </h4>
+                        <p>
+                            A member of the PostHog team will get back to you as soon as we've had a chance to review
+                            your information.&nbsp;
+                        </p>
+                        <p className="mb-0">
+                            If you have any questions in the meantime, <Link to="/questions">let us know</Link>!
+                        </p>
+                    </div>
+                </>
+            ) : (
+                <form onSubmit={handleSubmit}>
+                    <p className="text-sm">
+                        <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
+                        form at a breakneck pace!
+                    </p>
+                    <div className="grid border border-light dark:border-dark rounded overflow-hidden">
+                        {fields.map(({ Component, name, placeHolder, type = 'text', options = [] }, index) => {
+                            return (
+                                <Component
+                                    autoFocus={index === 0}
+                                    key={name}
+                                    onChange={handleChange}
+                                    value={values[name]}
+                                    name={name}
+                                    placeholder={placeHolder}
+                                    setFieldValue={setFieldValue}
+                                    values={values}
+                                    type={type}
+                                    options={options}
+                                    errors={errors}
+                                    validateField={validateField}
+                                    openOptions={openOptions}
+                                    setOpenOptions={setOpenOptions}
+                                />
+                            )
+                        })}
+                    </div>
+                    <button className={button(undefined, 'full', 'mt-4', 'md')} type="submit">
+                        Start recording
+                    </button>
+                </form>
+            )}
         </>
-    ) : (
-        <form onSubmit={handleSubmit}>
-            <p className="text-sm">
-                <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the form at a
-                breakneck pace!
-            </p>
-            <div className="grid border border-light dark:border-dark rounded overflow-hidden">
-                {fields.map(({ Component, name, placeHolder, type = 'text', options = [] }, index) => {
-                    return (
-                        <Component
-                            autoFocus={index === 0}
-                            key={name}
-                            onChange={handleChange}
-                            value={values[name]}
-                            name={name}
-                            placeholder={placeHolder}
-                            setFieldValue={setFieldValue}
-                            values={values}
-                            type={type}
-                            options={options}
-                            errors={errors}
-                            validateField={validateField}
-                            openOptions={openOptions}
-                            setOpenOptions={setOpenOptions}
-                        />
-                    )
-                })}
-            </div>
-            <button className={button(undefined, 'full', 'mt-4', 'md')} type="submit">
-                Start recording
-            </button>
-        </form>
     )
 }
