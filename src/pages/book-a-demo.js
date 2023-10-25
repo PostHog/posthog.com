@@ -5,8 +5,13 @@ import Layout from 'components/Layout'
 import { SignupCTA } from 'components/SignupCTA'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
+import { useState } from 'react';
+import Recorder from 'components/Recorder'
 
 export default function BookADemo() {
+    const [recorderOpen, setRecorderOpen] = useState(false)
+    const [step, setStep] = useState("pre");
+
     return (
         <Layout>
             <SEO title="Book a demo – PostHog" />
@@ -53,9 +58,21 @@ export default function BookADemo() {
                             Have a quick question? Record a video with your question and we'll get
                         </p>
 
-                        <CallToAction type="secondary" to="/contact-sales" className="whitespace-nowrap">
+                        <CallToAction type="secondary" onClick={() => setRecorderOpen(true)} className="whitespace-nowrap">
                             Record a video question
                         </CallToAction>
+
+                        {recorderOpen && <div className='absolute w-screen h-screen'>
+                            <div className='fixed inset-0 bg-black bg-opacity-25 z-[5000000]'></div>
+
+                            <div className='fixed inset-0 overflow-y-auto z-[5000001]'>
+                                <div className='flex min-h-full items-center justify-center p-4 text-center'>
+                                    <div className='w-fit transform rounded bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                                        <Recorder step={step} setStep={setStep} open={recorderOpen} setOpen={setRecorderOpen} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>}
                     </div>
                 </div>
                 <iframe

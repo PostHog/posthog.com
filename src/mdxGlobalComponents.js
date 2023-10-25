@@ -1,4 +1,4 @@
-// AUTO GENERATED FILE
+// AUTO GENERATED FILE 
 
 import { ArrayCTA } from './components/ArrayCTA'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
@@ -22,6 +22,7 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
 import { ProductLayout } from './components/ProductLayout'
 import { Quote2 } from './components/Quote2'
+import { Recorder } from './components/Recorder'
 import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
 import { Squeak } from './components/Squeak'
@@ -31,33 +32,34 @@ import { TracksCTA } from './components/TracksCTA'
 import { ZendeskTicket } from './components/ZendeskTicket'
 
 export const shortcodes = {
-    ArrayCTA,
-    BasicHedgehogImage,
-    BorderWrapper,
-    CallToAction,
-    Caption,
-    Images,
-    CompensationCalculator,
-    ContentViewer,
-    lib,
-    Emoji,
-    FeatureAvailability,
-    GDPRForm,
-    HiddenSection,
-    HubSpotForm,
-    KeyboardShortcut,
-    LPCTA,
-    Label,
-    List,
-    OverflowXSection,
-    Quote,
-    ProductLayout,
-    Quote2,
-    Signatures,
-    SlackPage,
-    Squeak,
-    StarRepoButton,
-    Startups,
-    TracksCTA,
-    ZendeskTicket,
+	ArrayCTA,
+	BasicHedgehogImage,
+	BorderWrapper,
+	CallToAction,
+	Caption,
+	Images,
+	CompensationCalculator,
+	ContentViewer,
+	lib,
+	Emoji,
+	FeatureAvailability,
+	GDPRForm,
+	HiddenSection,
+	HubSpotForm,
+	KeyboardShortcut,
+	LPCTA,
+	Label,
+	List,
+	OverflowXSection,
+	Quote,
+	ProductLayout,
+	Quote2,
+	Recorder,
+	Signatures,
+	SlackPage,
+	Squeak,
+	StarRepoButton,
+	Startups,
+	TracksCTA,
+	ZendeskTicket
 }
