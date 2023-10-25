@@ -1,5 +1,5 @@
 import React, { useState, useRef, Fragment, useEffect } from 'react'
-import RecordRTC, { invokeSaveAsDialog } from 'recordrtc'
+import RecordRTC from 'recordrtc'
 import { Listbox, Transition } from '@headlessui/react'
 // import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 // import { MicrophoneIcon, PauseIcon } from "@heroicons/react/24/outline";
@@ -28,10 +28,6 @@ export default function Recorder({ setOpen, step, setStep }: Props): React.React
     const [submitting, setSubmitting] = useState<boolean>(false)
     const [duration, setDuration] = useState<number>(0)
     const videoRef = useRef<null | HTMLVideoElement>(null)
-
-    useEffect(() => {
-        setStep('pre')
-    }, [open])
 
     const handleRecording = async () => {
         const screenStream = await navigator.mediaDevices.getDisplayMedia({
@@ -85,9 +81,6 @@ export default function Recorder({ setOpen, step, setStep }: Props): React.React
         recorderRef.current.stopRecording(() => {
             if (recorderRef.current) {
                 setBlob(recorderRef.current.getBlob())
-                // getSeekableBlob(recorderRef.current.getBlob(), function (fixedBlob) {
-                //     setBlob(fixedBlob);
-                // });
                 steam?.getTracks().map((track) => track.stop())
             }
         })
@@ -355,7 +348,7 @@ export default function Recorder({ setOpen, step, setStep }: Props): React.React
                             type="button"
                             className="ml-auto inline-flex items-center rounded-md bg-[#dc2625] px-4 py-2 text-sm font-semibold leading-6 text-white shadow transition duration-150 ease-in-out hover:opacity-80 disabled:cursor-not-allowed"
                             onClick={() => {
-                                void setOpen(false)
+                                void handleDelete()
                             }}
                         >
                             Cancel
