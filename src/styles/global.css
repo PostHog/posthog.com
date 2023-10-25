@@ -435,6 +435,18 @@ h4 {
     }
 }
 
+.footnotes {
+    @apply border-t border-border dark:border-border-dark pt-4;
+
+    hr {
+        @apply hidden;
+    }
+
+    li {
+        @apply text-sm;
+    }
+}
+
 /* When used in article on-page nav, only show on mobile viewports... */
 
 .article-content .jumpTo:before {
