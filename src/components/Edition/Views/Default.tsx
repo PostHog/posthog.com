@@ -336,6 +336,52 @@ function PostsListing() {
                     </h2>
                 )}
 
+                {!articleView && (
+                    <>
+                        {activeMenu?.children?.length > 0 && (
+                            <>
+                                {activeMenu?.name === 'Founders' && (
+                                    <ul className="flex gap-px px-0 py-2 mb-4 list-none w-full overflow-x-auto flex-wrap border-y border-border dark:border-border-dark">
+                                        <div className="relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]">
+                                            <button
+                                                className={`flex flex-col items-center text-center w-24 px-4 h-full py-2 rounded gap-2 hover:bg-border/30 hover:dark:bg-border/30 ${
+                                                    tag === name ? 'font-bold bg-border/50 dark:bg-border/50' : ''
+                                                }`}
+                                            >
+                                                <span className="bg-red/10 rounded-full p-2 w-16 h-16"></span>
+                                                <span className="text-sm leading-tight">All</span>
+                                            </button>
+                                        </div>
+                                        {activeMenu?.children?.map(({ name, url }, index) => {
+                                            return (
+                                                <div
+                                                    key={`${name}-${index}`}
+                                                    className="relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                                >
+                                                    <button
+                                                        onClick={() => {
+                                                            navigate(url)
+                                                        }}
+                                                        className={`flex flex-col items-center text-center w-24 px-4 h-full py-2 rounded gap-2 hover:bg-border/30 hover:dark:bg-border/30 ${
+                                                            tag === name
+                                                                ? 'font-bold bg-border/50 dark:bg-border/50'
+                                                                : ''
+                                                        }`}
+                                                    >
+                                                        <span className="bg-red/10 rounded-full p-2 w-16 h-16"></span>
+                                                        <span className="text-sm leading-tight">{name}</span>
+                                                    </button>
+                                                </div>
+                                            )
+                                        })}
+                                    </ul>
+                                )}
+                                {tag === 'Being a founder' && <>YES you are a founder</>}
+                            </>
+                        )}
+                    </>
+                )}
+
                 <ul
                     className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
