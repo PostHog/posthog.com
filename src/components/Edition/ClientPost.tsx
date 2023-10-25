@@ -119,7 +119,7 @@ export default function ClientPost({
                     <ClientPostMarkdown>{body}</ClientPostMarkdown>
                 </div>
                 {CTA?.label && CTA?.url && (
-                    <CallToAction size="md" type="outline" to={CTA.url}>
+                    <CallToAction size="md" type="outline" externalNoIcon to={CTA.url}>
                         {CTA.label}
                     </CallToAction>
                 )}
