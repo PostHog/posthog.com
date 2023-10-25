@@ -16,9 +16,10 @@ interface Props {
     setOpen: (value: boolean) => void
     step: string
     setStep: (value: ((prevState: 'pre' | 'in' | 'post') => 'pre' | 'in' | 'post') | 'pre' | 'in' | 'post') => void
+    onSubmit: () => void
 }
 
-export default function Recorder({ setOpen, step, setStep }: Props): React.ReactElement {
+export default function Recorder({ setOpen, step, setStep, onSubmit }: Props): React.ReactElement {
     const [steam, setStream] = useState<null | MediaStream>(null)
     const [blob, setBlob] = useState<null | Blob>(null)
     const recorderRef = useRef<null | RecordRTC>(null)
@@ -167,7 +168,7 @@ export default function Recorder({ setOpen, step, setStep }: Props): React.React
                         console.log('Download %s from %s', upload.url)
                         setOpen(false)
                         console.log('successfully uploaded file')
-                        // add a 'we have received your message' page
+                        onSubmit()
                     },
                 })
 
