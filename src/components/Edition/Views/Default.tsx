@@ -341,42 +341,59 @@ function PostsListing() {
                         {activeMenu?.children?.length > 0 && (
                             <>
                                 {activeMenu?.name === 'Founders' && (
-                                    <ul className="flex gap-px px-0 py-2 mb-4 list-none w-full overflow-x-auto flex-wrap border-y border-border dark:border-border-dark">
-                                        <div className="relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]">
-                                            <button
-                                                className={`flex flex-col items-center text-center w-24 px-4 h-full py-2 rounded gap-2 hover:bg-border/30 hover:dark:bg-border/30 ${
-                                                    tag === name ? 'font-bold bg-border/50 dark:bg-border/50' : ''
-                                                }`}
-                                            >
-                                                <span className="bg-red/10 rounded-full p-2 w-16 h-16"></span>
-                                                <span className="text-sm leading-tight">All</span>
-                                            </button>
+                                    <>
+                                        <div className="bg-accent dark:bg-accent-dark p-8 rounded border border-light dark:border-border-dark mb-8">
+                                            <h2 className="text-xl mb-2">Welcome to our founder's hub</h2>
+                                            <p>
+                                                Here's a collection of resources geared for founders. It combines
+                                                lessons we've learned along the way - both articles we've written
+                                                ourselves, as well as links to other resource that we used while
+                                                building PostHog.
+                                            </p>
+                                            <p className="mb-0">
+                                                Missing a topic you'd like to learn more about?{' '}
+                                                <Link to="https://x.com/posthog" external>
+                                                    Mention us on X
+                                                </Link>{' '}
+                                                and we'll add it to our list!
+                                            </p>
                                         </div>
-                                        {activeMenu?.children?.map(({ name, url }, index) => {
-                                            return (
-                                                <div
-                                                    key={`${name}-${index}`}
-                                                    className="relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                        <ul className="flex gap-px px-0 py-2 mb-4 list-none w-full overflow-x-auto flex-wrap border-y border-border dark:border-border-dark">
+                                            <div className="relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]">
+                                                <button
+                                                    className={`flex flex-col items-center text-center w-24 px-4 h-full py-2 rounded gap-2 hover:bg-border/30 hover:dark:bg-border/30 ${
+                                                        tag === name ? 'font-bold bg-border/50 dark:bg-border/50' : ''
+                                                    }`}
                                                 >
-                                                    <button
-                                                        onClick={() => {
-                                                            navigate(url)
-                                                        }}
-                                                        className={`flex flex-col items-center text-center w-24 px-4 h-full py-2 rounded gap-2 hover:bg-border/30 hover:dark:bg-border/30 ${
-                                                            tag === name
-                                                                ? 'font-bold bg-border/50 dark:bg-border/50'
-                                                                : ''
-                                                        }`}
+                                                    <span className="bg-red/10 rounded-full p-2 w-16 h-16"></span>
+                                                    <span className="text-sm leading-tight">All</span>
+                                                </button>
+                                            </div>
+                                            {activeMenu?.children?.map(({ name, url }, index) => {
+                                                return (
+                                                    <div
+                                                        key={`${name}-${index}`}
+                                                        className="relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                                     >
-                                                        <span className="bg-red/10 rounded-full p-2 w-16 h-16"></span>
-                                                        <span className="text-sm leading-tight">{name}</span>
-                                                    </button>
-                                                </div>
-                                            )
-                                        })}
-                                    </ul>
+                                                        <button
+                                                            onClick={() => {
+                                                                navigate(url)
+                                                            }}
+                                                            className={`flex flex-col items-center text-center w-24 px-4 h-full py-2 rounded gap-2 hover:bg-border/30 hover:dark:bg-border/30 ${
+                                                                tag === name
+                                                                    ? 'font-bold bg-border/50 dark:bg-border/50'
+                                                                    : ''
+                                                            }`}
+                                                        >
+                                                            <span className="bg-red/10 rounded-full p-2 w-16 h-16"></span>
+                                                            <span className="text-sm leading-tight">{name}</span>
+                                                        </button>
+                                                    </div>
+                                                )
+                                            })}
+                                        </ul>
+                                    </>
                                 )}
-                                {tag === 'Being a founder' && <>YES you are a founder</>}
                             </>
                         )}
                     </>
