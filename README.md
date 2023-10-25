@@ -32,7 +32,7 @@ This is the repository for the PostHog website. It contains:
 
 1. **Pre-installation**
 
-    Install [Node](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/). (If you're on a Mac with Apple Silicon and get an error with `-86` in it, you may need to [install Rosetta](https://osxdaily.com/2020/12/04/how-install-rosetta-2-apple-silicon-mac/).
+    Install [Node](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/). (If you're on a Mac with Apple Silicon and get an error with `-86` in it, you may need to [install Rosetta](https://osxdaily.com/2020/12/04/how-install-rosetta-2-apple-silicon-mac/).)
     ```bash
     npm install --global yarn
     ```
