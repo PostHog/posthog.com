@@ -29,6 +29,10 @@ export default function Recorder({ setOpen, step, setStep }: Props): React.React
     const [duration, setDuration] = useState<number>(0)
     const videoRef = useRef<null | HTMLVideoElement>(null)
 
+    useEffect(() => {
+        setStep('pre')
+    }, [open])
+
     const handleRecording = async () => {
         const screenStream = await navigator.mediaDevices.getDisplayMedia({
             video: {
