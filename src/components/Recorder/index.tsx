@@ -16,11 +16,12 @@ interface Props {
     open: boolean
     setOpen: (value: boolean) => void
     step: string
+    uniqueId: string
     setStep: (value: ((prevState: 'pre' | 'in' | 'post') => 'pre' | 'in' | 'post') | 'pre' | 'in' | 'post') => void
     onSubmit: () => void
 }
 
-export default function Recorder({ setOpen, step, setStep, onSubmit }: Props): React.ReactElement {
+export default function Recorder({ setOpen, step, setStep, onSubmit, uniqueId }: Props): React.ReactElement {
     const [steam, setStream] = useState<null | MediaStream>(null)
     const [blob, setBlob] = useState<null | Blob>(null)
     const recorderRef = useRef<null | RecordRTC>(null)
@@ -136,7 +137,6 @@ export default function Recorder({ setOpen, step, setStep, onSubmit }: Props): R
     const handleUpload = async () => {
         if (!blob || !videoRef.current) return
 
-        const dateString = 'Recording - ' + dayjs().format('D MMM YYYY') + Math.floor(Math.random() * 90) + 10 + '.webm'
         setSubmitting(true)
 
         try {
@@ -152,7 +152,7 @@ export default function Recorder({ setOpen, step, setStep, onSubmit }: Props): R
                     removeFingerprintOnSuccess: false,
                     metadata: {
                         bucketName: 'videos',
-                        objectName: dateString,
+                        objectName: `${uniqueId}.webm`,
                         contentType: 'video/webm',
                         cacheControl: '3600',
                     },

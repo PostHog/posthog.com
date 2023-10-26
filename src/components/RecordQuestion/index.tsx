@@ -12,6 +12,7 @@ import Confetti from 'react-confetti'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import usePostHog from 'hooks/usePostHog'
 import Recorder from 'components/Recorder'
+import { createClient } from '@supabase/supabase-js'
 
 const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark border-b border-light dark:border-dark group active:bg-white dark:active:bg-border-dark/50 hover:bg-white/25 dark:hover:bg-border-dark/25 focus-within:bg-white dark:focus-within:bg-border-dark/50 relative text-left`
 
@@ -177,6 +178,15 @@ function Input(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) {
     )
 }
 
+function generateRandomID(length = 10) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    let result = ''
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length))
+    }
+    return result
+}
+
 function Radio(props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { label?: string }) {
     const {
         setFieldValue,
@@ -318,6 +328,7 @@ export default function RecordVideo({
     const [submitted, setSubmitted] = useState(false)
     const [openOptions, setOpenOptions] = useState<string[]>([])
     const [confetti, setConfetti] = useState(true)
+    const [submissionId, setSubmissionId] = useState<string>('')
     const [recorderOpen, setRecorderOpen] = useState(false)
 
     const [step, setStep] = useState<'pre' | 'in' | 'post'>('pre')
@@ -367,6 +378,27 @@ export default function RecordVideo({
                 setRecorderOpen(true)
             }
 
+            const supabase = createClient(
+                'https://lkmbdqgomhvlbqqblkga.supabase.co',
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxrbWJkcWdvbWh2bGJxcWJsa2dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgyMzM2MTMsImV4cCI6MjAxMzgwOTYxM30.TndT-c0Ae2EyV2Fp0w5nFf2jhOrGXThsMcM9VNi6DWM'
+            )
+            const uniqueId = generateRandomID()
+            await supabase.from('prospect').insert(
+                {
+                    unique_id: uniqueId,
+                    name: `${values['firstName']} ${values['lastName']}`,
+                    workEmail: values['workEmail'],
+                    companyName: values['companyName'],
+                    role: values['role'],
+                    monthlyActiveUsers: values['monthlyActiveUsers'],
+                    product: values['product'],
+                    monthlyEvents: values['monthlyEvents'],
+                },
+                {
+                    returning: 'minimal',
+                }
+            )
+            setSubmissionId(uniqueId)
             setRecorderOpen(true)
         },
         validationSchema: ValidationSchema,
@@ -387,6 +419,7 @@ export default function RecordVideo({
                                     setStep={setStep}
                                     open={recorderOpen}
                                     setOpen={setRecorderOpen}
+                                    uniqueId={submissionId}
                                     onSubmit={() => setSubmitted(true)}
                                 />
                                 <p className="text-sm mt-4 text-center mb-0 opacity-75">
