@@ -5,12 +5,7 @@ import Layout from '../Layout'
 import { StaticImage } from 'gatsby-plugin-image'
 import SearchBox from 'components/Search/SearchBox'
 import Pico8 from 'react-pico-8'
-import { Controls,
-    Reset,
-    Pause,
-    Sound,
-    Carts,
-    Fullscreen } from 'react-pico-8/buttons'
+import { Controls, Reset, Pause, Sound, Carts, Fullscreen } from 'react-pico-8/buttons'
 import 'react-pico-8/styles.css'
 
 export default function NotFoundPage(): JSX.Element {
@@ -64,12 +59,12 @@ export default function NotFoundPage(): JSX.Element {
                                 unpauseOnReset={true}
                                 placeholder="placeholder.png"
                             >
-                                <Controls/>
-                                <Reset/>
-                                <Pause/>
-                                <Sound/>
-                                <Carts/>
-                                <Fullscreen/>
+                                <Controls />
+                                <Reset />
+                                <Pause />
+                                <Sound />
+                                <Carts />
+                                <Fullscreen />
                             </Pico8>
                         ) : (
                             <StaticImage
@@ -98,7 +93,7 @@ export default function NotFoundPage(): JSX.Element {
                         </div>
 
                         <CallToAction type="secondary" width="84" onClick={() => setGameOn(true)}>
-                            Take me back to the homepage
+                            Let's have some fun!
                         </CallToAction>
 
                         <p className="mt-8 text-sm text-white/70">
