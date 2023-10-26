@@ -6,9 +6,7 @@ import { Listbox, Transition } from '@headlessui/react'
 // import { ResumeIcon, TrashIcon } from "@radix-ui/react-icons";
 // import { StopIcon } from "@heroicons/react/24/solid";
 import StopTime from './StopTime'
-import dayjs from 'dayjs'
 import Tooltip from './Tooltip'
-// import * as EBML from "ts-ebml";
 import * as tus from 'tus-js-client'
 import { CallToAction } from 'components/CallToAction'
 
@@ -266,8 +264,9 @@ export default function Recorder({ setOpen, step, setStep, onSubmit, uniqueId }:
                     <Tooltip title="Finish recording">
                         <div
                             onClick={handleStop}
-                            className="flex cursor-pointer flex-row items-center justify-center rounded pr-2 text-lg hover:bg-gray-200"
+                            className="flex cursor-pointer p-1.5 flex-row items-center justify-center rounded pr-2 text-lg hover:bg-[#e5e7eb]"
                         >
+                            <div className="bg-[#ff623f] h-5 w-5 rounded"></div>
                             {/* <StopIcon className="h-8 w-8 text-[#ff623f]" aria-hidden="true" /> */}
                             <StopTime running={!pause} duration={duration} setDuration={setDuration} />
                         </div>

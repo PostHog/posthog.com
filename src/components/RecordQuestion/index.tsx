@@ -412,8 +412,12 @@ export default function RecordVideo({
                     <div className="fixed inset-0 overflow-y-auto z-[5000000]">
                         <div className="flex min-h-full items-center justify-center p-4 text-center">
                             <div className="w-fit transform rounded bg-white p-6 text-left align-middle shadow-xl transition-all z-[5000001]">
-                                <h2 className="mb-2">Select your recording device</h2>
-                                <p className="text-sm">Be sure to allow your access to your microphone.</p>
+                                {step === 'pre' ? (
+                                    <>
+                                        <h2 className="mb-2">Select your recording device</h2>
+                                        <p className="text-sm">Be sure to allow your access to your microphone.</p>
+                                    </>
+                                ) : null}
                                 <Recorder
                                     step={step}
                                     setStep={setStep}
@@ -422,9 +426,11 @@ export default function RecordVideo({
                                     uniqueId={submissionId}
                                     onSubmit={() => setSubmitted(true)}
                                 />
-                                <p className="text-sm mt-4 text-center mb-0 opacity-75">
-                                    We'll ask you which tab you want to share next!
-                                </p>
+                                {step === 'pre' ? (
+                                    <p className="text-sm mt-4 text-center mb-0 opacity-75">
+                                        We'll ask you which tab you want to share next!
+                                    </p>
+                                ) : null}
                             </div>
                             <div
                                 className="fixed inset-0 bg-black bg-opacity-25 z-[5000000]"
