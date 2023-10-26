@@ -149,8 +149,21 @@ export const ProductOS = () => {
                     description="Product OS is the foundation that all PostHog products are built on. You have access to all PostHog data with the API."
                 />
 
-                <div className="text-center mb-12">
-                    <StaticImage src="./images/product-os.png" alt="" className="w-full max-w-[423px]" />
+                <div className="text-center mb-12 max-w-screen overflow-x-hidden -mx-8 md:mx-0">
+                    <StaticImage
+                        src="./images/product-os-world-desktop.png"
+                        alt=""
+                        className="hidden md:block max-w-[1118px] mx-auto"
+                        placeholder="blurred"
+                    />
+                    <div className="-mx-12">
+                        <StaticImage
+                            src="./images/product-os-world-mobile.png"
+                            alt=""
+                            className="md:hidden w-full"
+                            placeholder="blurred"
+                        />
+                    </div>
                 </div>
 
                 {/*
