@@ -35,7 +35,7 @@ export default function NotFoundPage(): JSX.Element {
                     <div className="sm:!absolute right-0 -mt-12 sm:mt-0 sm:-right-12 lg:-right-24 bottom-0 md:-bottom-28 h-[400px] w-[400px] sm:h-[500px] sm:w-[500px] lg:h-[600px] lg:w-[600px]">
                         {gameOn ? (
                             <Pico8
-                                src="/supermax/supermax3.js"
+                                src="/supermax/supermax.js"
                                 autoPlay={true}
                                 hideCursor={false}
                                 center={true}
