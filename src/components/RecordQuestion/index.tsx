@@ -386,7 +386,7 @@ export default function RecordVideo({
             await supabase.from('prospect').insert(
                 {
                     unique_id: uniqueId,
-                    name: values['firstName'],
+                    name: `${values['firstName']} ${values['lastName']}`,
                     workEmail: values['workEmail'],
                     companyName: values['companyName'],
                     role: values['role'],
