@@ -90,7 +90,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     <aside
                         key={`${title}-sidebar`}
                         style={{ maxWidth: menuWidth?.right ?? defaultMenuWidth.right }}
-                        className="flex-shrink-0 pt-4 w-full justify-self-end my-10 lg:my-0 h-full box-border lg:flex hidden flex-col reasonable:sticky reasonable:top-[108px] mr-8"
+                        className="flex-shrink-0 pt-4 pl-4 w-full justify-self-end my-10 lg:my-0 box-border lg:flex hidden flex-col reasonable:sticky reasonable:top-[108px] mr-8 border-l border-light dark:border-dark"
                     >
                         <div
                             className={`${
@@ -102,7 +102,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         <div className="flex flex-grow items-end">
                             <div className="sticky bottom-0 w-full">
                                 {tableOfContents && tableOfContents?.length > 0 && (
-                                    <div className="px-4 lg:px-8 lg:pb-4 lg:block hidden">
+                                    <div className="px-0 -mx-1 lg:pb-4 lg:block hidden">
                                         <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
                                             Jump to:
                                         </h4>
