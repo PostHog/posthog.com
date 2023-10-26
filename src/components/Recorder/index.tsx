@@ -132,11 +132,10 @@ export default function Recorder({ setOpen, step, setStep, onSubmit, uniqueId }:
 
     const handleUpload = async () => {
         if (!blob || !videoRef.current) return
-
         setSubmitting(true)
 
         try {
-            return new Promise((resolve, reject) => {
+            await new Promise((resolve, reject) => {
                 const upload = new tus.Upload(blob.slice(), {
                     endpoint: 'https://lkmbdqgomhvlbqqblkga.supabase.co/storage/v1/upload/resumable',
                     retryDelays: [0, 3000, 5000, 10000, 20000],
@@ -285,7 +284,7 @@ export default function Recorder({ setOpen, step, setStep, onSubmit, uniqueId }:
                             disabled={submitting}
                             onClick={() => void handleUpload()}
                         >
-                            <span className="relative text-center w-auto bg-orange text-primary hover:text-primary dark:text-primary dark:hover:text-primary border-button dark:border-button-dark dark:bg-orange rounded-[8px] text-[15px] font-bold border-[1.5px] px-5 py-2 -translate-y-1 hover:-translate-y-1.5 active:-translate-y-0.5 mx-[-1.5px] group-disabled:hover:!-translate-y-1 group-disabled:hover:!translate-y-0 block active:transition-all active:duration-100 select-none">
+                            <span className="flex relative text-center w-auto bg-orange text-primary hover:text-primary dark:text-primary dark:hover:text-primary border-button dark:border-button-dark dark:bg-orange rounded-[8px] text-[15px] font-bold border-[1.5px] px-5 py-2 -translate-y-1 hover:-translate-y-1.5 active:-translate-y-0.5 mx-[-1.5px] group-disabled:hover:!-translate-y-1 group-disabled:hover:!translate-y-0 block active:transition-all active:duration-100 select-none">
                                 {submitting ? (
                                     <>
                                         <svg
