@@ -260,12 +260,12 @@ export const PostFilters = () => {
                                         All
                                     </button>
                                 </Menu.Item>
-                                {activeMenu?.children?.map(({ name, url }, index) => {
+                                {activeMenu?.children?.map(({ name, url, tag }, index) => {
                                     return (
                                         <Menu.Item key={`${name}-${index}`}>
                                             <button
                                                 onClick={() => {
-                                                    setTag(name)
+                                                    setTag(tag || name)
                                                     if (breakpoints.sm) {
                                                         navigate(url)
                                                     }
@@ -297,7 +297,7 @@ export const PostFilters = () => {
                             <button onClick={() => setTag(undefined)}>
                                 <IconX className="w-3 h-3 inline-block bg-border dark:bg-border-dark p-1 box-content rounded-full" />
                             </button>
-                            <span>{tag}</span>
+                            <span>{activeMenu?.children?.find((menuItem) => menuItem.tag === tag)?.name || tag}</span>
                         </span>
                     </div>
                 </div>
@@ -355,7 +355,11 @@ function PostsListing() {
                         <Intro />
                         <Tags />
 
-                        {tag && <h3 className="text-lg">{tag}</h3>}
+                        {tag && (
+                            <h3 className="text-lg">
+                                {activeMenu?.children?.find((menuItem) => menuItem.tag === tag)?.name || tag}
+                            </h3>
+                        )}
                     </>
                 )}
                 <ul

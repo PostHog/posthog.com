@@ -48,10 +48,10 @@ export default function Tags() {
                     return (
                         <Tag
                             key={`${menuItem.name}-${index}`}
-                            active={tag === menuItem.name}
+                            active={tag && (tag === menuItem.tag || tag === menuItem.name)}
                             {...menuItem}
                             onClick={() => {
-                                setTag(menuItem.name)
+                                setTag(menuItem.tag || menuItem.name)
                                 navigate(menuItem.url)
                             }}
                         />
