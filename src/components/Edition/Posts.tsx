@@ -107,7 +107,7 @@ export const Sidebar = () => {
 
     return (
         <>
-            <div className="lg:hidden my-4">
+            <div className="lg:hidden my-4 px-2">
                 <h5 className="my-4">Community account</h5>
                 {user ? (
                     <>
@@ -150,7 +150,7 @@ export const Sidebar = () => {
                     </>
                 )}
             </div>
-            <div>
+            <div className="px-2">
                 <h5 className="my-4">Discussions</h5>
                 {user && (
                     <SidebarSection title="Subscribed threads">
