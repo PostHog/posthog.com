@@ -327,7 +327,7 @@ export default function RecordVideo({
     const { href } = useLocation()
     const [submitted, setSubmitted] = useState(false)
     const [openOptions, setOpenOptions] = useState<string[]>([])
-    const [confetti, setConfetti] = useState(true)
+    const [confetti, setConfetti] = useState(false)
     const [submissionId, setSubmissionId] = useState<string>('')
     const [recorderOpen, setRecorderOpen] = useState(true)
 
