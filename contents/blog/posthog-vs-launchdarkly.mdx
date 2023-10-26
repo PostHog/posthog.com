@@ -58,165 +58,36 @@ LaunchDarkly focuses on enterprise users, managers, and DevOps. This means more 
 
 Both PostHog and LaunchDarkly built the infrastructure to use flags and experiments fast and effectively with your current app. PostHog does this more openly, both being open source and self-service. It also has a wider range of product and data tools built in.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>LaunchDarkly</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Open source</strong></td>
-            <td className="text-center">Full</td>
-            <td className="text-center">Partial</td>
-            <td>Code publicly accessible</td>
-        </tr>
-        <tr>
-            <td><strong>Self-service</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>No need to talk to sales</td>
-        </tr>
-        <tr>
-            <td><strong>All major SDKs</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>JavaScript, Android, iOS, Python, and more</td>
-        </tr>
-        <tr>
-            <td><strong>Proxies</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Reverse proxy to avoid blockers</td>
-        </tr>
-        <tr>
-            <td><strong>API</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Pro</td>
-            <td>Edit and evaluate flags with API</td>
-        </tr>
-        <tr>
-            <td><strong>Local evaluation (aka streaming)</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Faster flags by not having to rely on the server for evaluation</td>
-        </tr>
-        <tr>
-            <td><strong>Bootstrapping</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Flags available on frontend application load</td>
-        </tr>
-        <tr>
-            <td><strong>SQL</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Query flag and product data directly via SQL</td>
-        </tr>
-        <tr>
-            <td><strong>Session replays</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Real user playback of flag session</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="LaunchDarkly">
+  <ComparisonRow column1={true} column2="Partial" feature="Open source" description="Code publicly accessible" />
+  <ComparisonRow column1={true} column2={false} feature="Self-service" description="No need to talk to sales" />
+  <ComparisonRow column1={true} column2={true} feature="All major SDKs" description="JavaScript, Android, iOS, Python, and more" />
+  <ComparisonRow column1={true} column2={true} feature="Proxies" description="Reverse proxy to avoid blockers" />
+  <ComparisonRow column1={true} column2="Pro" feature="API" description="Edit and evaluate flags with API" />
+  <ComparisonRow column1={true} column2={true} feature="Local evaluation (aka streaming)" description="Faster flags by not having to rely on the server for evaluation" />
+  <ComparisonRow column1={true} column2={true} feature="Bootstrapping" description="Flags available on frontend application load" />
+  <ComparisonRow column1={true} column2={false} feature="SQL" description="Query flag and product data directly via SQL" />
+  <ComparisonRow column1={true} column2={false} feature="Session replays" description="Real user playback of flag session" />
+</ComparisonTable>
 
 ### Feature management
 
 Both PostHog and LaunchDarkly offer all the functionality you expect for feature management using feature flags.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>LaunchDarkly</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Boolean flags</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Simple flags returning true or flag</td>
-        </tr>
-        <tr>
-            <td><strong>Percentage rollouts</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Target percentages of a group</td>
-        </tr>
-        <tr>
-            <td><strong>Custom targeting</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Target users based on user properties, custom contexts</td>
-        </tr>
-        <tr>
-            <td><strong>Multivariate flags</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Flags with multiple customizable values</td>
-        </tr>
-        <tr>
-            <td><strong>JSON payloads</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Flags return JSON</td>
-        </tr>
-        <tr>
-            <td><strong>Environments</strong></td>
-            <td className="text-center">Partial</td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Manage flags for dev, stage, prod</td>
-        </tr>
-        <tr>
-            <td><strong>Scheduling</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Enterprise</td>
-            <td>Schedule flags to turn on or off</td>
-        </tr>
-        <tr>
-            <td><strong>Workflows</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Enterprise</td>
-            <td>Manage changes to flags</td>
-        </tr>
-        <tr>
-            <td><strong>Lifecycle management</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Display new and old flags</td>
-        </tr>
-        <tr>
-            <td><strong>Triggers</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Trigger changes based on metrics</td>
-        </tr>
-        <tr>
-            <td><strong>Unlimited targeting size</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Enterprise</td>
-            <td>Target contexts of any size</td>
-        </tr>
-        <tr>
-            <td><strong>Early access management</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Manage betas, test features</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="LaunchDarkly">
+  <ComparisonRow column1={true} column2={true} feature="Boolean flags" description="Simple flags returning true or flag" />
+  <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
+  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
+  <ComparisonRow column1={true} column2={true} feature="Multivariate flags" description="Flags with multiple customizable values" />
+  <ComparisonRow column1={true} column2={true} feature="JSON payloads" description="Flags return JSON" />
+  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, stage, prod" />
+  <ComparisonRow column1={true} column2="Enterprise" feature="Scheduling" description="Schedule flags to turn on or off" />
+  <ComparisonRow column1={false} column2="" feature="Workflows" description="Manage changes to flags" />
+  <ComparisonRow column1={false} column2={true} feature="Lifecycle management" description="Display new and old flags" />
+  <ComparisonRow column1={false} column2={true} feature="Triggers" description="Trigger changes based on metrics" />
+  <ComparisonRow column1={true} column2="Enterprise" feature="Unlimited targeting size" description="Target contexts of any size" />
+  <ComparisonRow column1={true} column2={false} feature="Early access management" description="Manage betas, test features" />
+</ComparisonTable>
 
 LaunchDarkly’s enterprise plan unlocks advanced workflow features like scheduling, lifecycle management, triggers, and more. PostHog’s [API](/docs/api) enables you to mimic this functionality if needed, but it isn’t built into the UI.
 
@@ -224,62 +95,16 @@ LaunchDarkly’s enterprise plan unlocks advanced workflow features like schedul
 
 PostHog and LaunchDarkly have relatively similar experimentation feature sets, enabling you to run [A/B/n tests](/tutorials/abn-testing) with custom goals and calculate if they have a statistically significant impact.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td className="text-center"><strong>PostHog</strong></td>
-            <td><strong>LaunchDarkly</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Free usage</strong></td>
-            <td className="text-center">1M requests per month</td>
-            <td className="text-center">None, paid add-on</td>
-            <td>How many experiments can you run for free?</td>
-        </tr>
-        <tr>
-            <td><strong>Custom goals</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Customize metrics that test tracks</td>
-        </tr>
-        <tr>
-            <td><strong>Secondary metrics</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Monitor impact on unrelated metrics</td>
-        </tr>
-        <tr>
-            <td><strong>Statistical significance calculation</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Calculate if changes make a statistically significant impact</td>
-        </tr>
-        <tr>
-            <td><strong>Split testing</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Split participants into groups</td>
-        </tr>
-        <tr>
-            <td><strong>Multivariate (A/B/n) testing</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Test multiple variants of a change</td>
-        </tr>
-        <tr>
-            <td><strong>Recommended run time</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Calculate the recommended run time for your experiments</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="LaunchDarkly">
+  <ComparisonRow column1="1M requests per month" column2="None, paid add-on" feature="Free usage" description="How many experiments can you run for free?" />
+  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that test tracks" />
+  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Statistical significance calculation" description="Calculate if changes make a statistically significant impact" />
+  <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
+  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
+  <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Calculate the recommended run time for your experiments" />
+</ComparisonTable>
+
 
 PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the [peeking problem](/blog/ab-testing-mistakes) and end your experiment at the right time.
 
@@ -287,41 +112,14 @@ PostHog automatically calculates a recommended run time based on past data and m
 
 ### Pricing
 
-PostHog and LaunchDarkly price significantly differently. 
+PostHog and LaunchDarkly are priced significantly different. 
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td className="text-center"><strong>PostHog</strong></td>
-            <td className="text-center"><strong>LaunchDarkly</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Pricing</strong></td>
-            <td className="text-center">Simple per request pricing</td>
-            <td className="text-center">Based on MAU + seats + add-ons</td>
-        </tr>
-        <tr>
-            <td><strong>Free plan</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Trial only</td>
-        </tr>
-        <tr>
-            <td><strong>Free experiments</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-        </tr>
-        <tr>
-            <td><strong>Free collaboration</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="LaunchDarkly">
+  <ComparisonRow column1="Per-request pricing" column2="Based on MAU + seats + add-ons" feature="Pricing" />
+  <ComparisonRow column1={true} column2="Trial only" feature="Free plan" />
+  <ComparisonRow column1={true} column2={false} feature="Free experiments" />
+  <ComparisonRow column1={true} column2={false} feature="Free collaboration" />
+</ComparisonTable>
 
 PostHog’s [feature flag pricing](/pricing?product=feature-flags) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
 
@@ -394,129 +192,30 @@ To give you an idea of what pricing looks like in reality, here are some example
 
 Although LaunchDarkly has basic reporting features, PostHog has a more expansive analytics suite. Visualizations, funnels, retention, SQL querying, and session replays are all integrated with flags and A/B testing data. This enables you to do deeper analysis of their impact and combine them with other product and usage data.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>LaunchDarkly</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Analytics</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Capture usage and calls related to flags</td>
-        </tr>
-        <tr>
-            <td><strong>Trends</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Graphs of flag usage</td>
-        </tr>
-        <tr>
-            <td><strong>Funnel visualization</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Analyze impact of flags on funnels</td>
-        </tr>
-        <tr>
-            <td><strong>Retention</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>User retention related to flags</td>
-        </tr>
-        <tr>
-            <td><strong>Breakdowns</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Breakdown analytics by properties</td>
-        </tr>
-        <tr>
-            <td><strong>Dashboards</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Multiple customizable insights for a flag</td>
-        </tr>
-        <tr>
-            <td><strong>Non-flag data</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Combine flag data with other product data</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="LaunchDarkly">
+  <ComparisonRow column1={true} column2={true} feature="Analytics" description="Capture usage and calls related to flags" />
+  <ComparisonRow column1={true} column2={true} feature="Trends" description="Graphs of flag usage" />
+  <ComparisonRow column1={true} column2={false} feature="Funnel visualization" description="Analyze impact of flags on funnels" />
+  <ComparisonRow column1={true} column2={false} feature="Retention" description="User retention related to flags" />
+  <ComparisonRow column1={true} column2={false} feature="Breakdowns" description="Breakdown analytics by properties" />
+  <ComparisonRow column1={true} column2={false} feature="Dashboards" description="Multiple customizable insights for a flag" />
+  <ComparisonRow column1={true} column2={false} feature="Non-flag data" description="Combine flag data with other product data" />
+</ComparisonTable>
 
 ### Integrations
 
 Both PostHog and LaunchDarkly have a range of integrations that enable them to import, export, enhance, and make use of data. 
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>LaunchDarkly</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Free integrations</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Use integrations on the free plan</td>
-        </tr>
-        <tr>
-            <td><strong>Exports</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Enterprise</td>
-            <td>Export data to other sources</td>
-        </tr>
-        <tr>
-            <td><strong>Imports</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Import data from source</td>
-        </tr>
-        <tr>
-            <td><strong>Slack</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Alerts for Slack</td>
-        </tr>
-        <tr>
-            <td><strong>Teams</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Alerts for Microsoft Teams</td>
-        </tr>
-        <tr>
-            <td><strong>Zapier</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Trigger Zapier automations</td>
-        </tr>
-        <tr>
-            <td><strong>Sentry</strong></td>
-            <td className="text-center">Two way</td>
-            <td className="text-center">One way</td>
-            <td>Connect to Sentry data</td>
-        </tr>
-        <tr>
-            <td><strong>Edge tools</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Use edge networks</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="LaunchDarkly">
+  <ComparisonRow column1={true} column2={false} feature="Free integrations" description="Use integrations on the free plan" />
+  <ComparisonRow column1={true} column2="Enterprise" feature="Exports" description="Export data to other sources" />
+  <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from source" />
+  <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
+  <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Alerts for Microsoft Teams" />
+  <ComparisonRow column1={true} column2={true} feature="Zapier" description="Trigger Zapier automations" />
+  <ComparisonRow column1="Two-way" column2="One-way" feature="Sentry" description="Connect to Sentry data" />
+  <ComparisonRow column1={false} column2={true} feature="Edge tools" description="Use edge networks" />
+</ComparisonTable>
 
 LaunchDarkly has more pre-built integrations, but some are only available on higher paid plans, and others replicate functionality built-in to PostHog as standard. These include environments as a service, observability tools, workflow management, and more.
 
@@ -528,68 +227,16 @@ PostHog’s [data warehouse](/docs/data-warehouse) is in private beta and will s
 
 Both PostHog and LaunchDarkly enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td className="text-center"><strong>LaunchDarkly</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>User privacy options</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Anonymize users, drop personal data</td>
-        </tr>
-        <tr>
-            <td><strong>History, audit logs</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Pro</td>
-            <td>Manage and view flag edits and related users</td>
-        </tr>
-        <tr>
-            <td><strong>GDPR ready</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Can be compliant with GDPR</td>
-        </tr>
-        <tr>
-            <td><strong>SOC2</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>SOC 2 security certification</td>
-        </tr>
-        <tr>
-            <td><strong>2FA</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Enforce login with two-factor authentication</td>
-        </tr>
-        <tr>
-            <td><strong>SAML/SSO</strong></td>
-            <td className="text-center">Enterprise</td>
-            <td className="text-center">$10/seat/month or Enterprise</td>
-            <td>Use SAML or single sign-on authentication</td>
-        </tr>
-        <tr>
-            <td><strong>Approvals</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Enterprise</td>
-            <td>Require approvals to change flags</td>
-        </tr>
-        <tr>
-            <td><strong>Permissioning</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Enterprise</td>
-            <td>Control who can edit and modify flags</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="LaunchDarkly">
+  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
+  <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
+  <ComparisonRow column1={true} column2="Pro" feature="GDPR-ready" description="Can be compliant with GDPR" />
+  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
+  <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
+  <ComparisonRow column1="Enterprise" column2="$10/seat/month or Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
+  <ComparisonRow column1={true} column2="Enterprise" feature="Approvals" description="Require approvals to change flags" />
+  <ComparisonRow column1={true} column2="Enterprise" feature="Permissioning" description="Control who can edit and modify flags" />
+</ComparisonTable>
 
 Many of LaunchDarkly’s advanced compliance tools are only available on their enterprise plans. PostHog also features SSO and SAML in its enterprise edition.
 
