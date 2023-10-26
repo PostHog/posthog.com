@@ -2688,10 +2688,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@posthog/icons@^0.1.22":
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.1.22.tgz#082129cf2230c3637c5ab836fef8e39b526876e2"
-  integrity sha512-nhxyrMgjy5xbUHAfYhY/1H6T1gjcRAtMnV0DOm55SM7qvcfr139vvTnOOdpnPzxZm1tkFfQdDKfzHKEa8opN0g==
+"@posthog/icons@^0.1.23":
+  version "0.1.23"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.1.23.tgz#fff03621cba8364acfddb93c62885d7306ec5544"
+  integrity sha512-i2we7s6Q0Mdw3nkCUJ9qh802J+xD9OSgpsmAJVisM7xjJC/ZohvFAGJPk/ewHL2dMR5EtJB6V5j0O9PFwElziw==
 
 "@radix-ui/primitive@1.0.1":
   version "1.0.1"

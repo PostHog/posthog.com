@@ -6,7 +6,7 @@ import StopTime from './StopTime'
 import Tooltip from './Tooltip'
 import * as tus from 'tus-js-client'
 import { CallToAction } from 'components/CallToAction'
-import { IconMicrophone, IconPause, IconPlay } from '@posthog/icons'
+import { IconMicrophone, IconPause, IconPlay, IconTrash } from '@posthog/icons'
 
 interface Props {
     open: boolean
@@ -262,8 +262,8 @@ export default function Recorder({ setOpen, step, setStep, onSubmit, uniqueId }:
                         </div>
                     </Tooltip>
                     <Tooltip title="Cancel recording">
-                        <div onClick={handleDelete} className="ml-1 cursor-pointer rounded p-1 hover:bg-gray-200">
-                            {/* <TrashIcon className="h-6 w-6 text-gray-400" aria-hidden="true" /> */}
+                        <div onClick={handleDelete} className="ml-1 cursor-pointer rounded p-1 hover:bg-[#e5e7eb]">
+                            <IconTrash className="h-5 w-5 text-gray-400" aria-hidden="true" />
                         </div>
                     </Tooltip>
                 </div>
