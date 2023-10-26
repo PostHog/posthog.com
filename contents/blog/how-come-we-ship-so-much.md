@@ -1,6 +1,6 @@
 ---
 date: 2023-09-26
-title: "Why we ship faster than your company, probably"
+title: "Why we ship faster than your company (probably)"
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -34,10 +34,11 @@ Our first line of code was January 22nd, 2020, after a pivot during a YC batch. 
 
 All of the above are being used a lot too – we're ingesting 10s of billions of events a month, have 10s of thousands of companies regularly using our service and over 100K user sign ups.
 
-I often get asked how we build so much, so quickly. The answer is simple: we deliberately designed our company for speed. Here's how.
+I often get asked how we build so much, so quickly. The answer is simple: we deliberately designed our company for speed.
 
+## How we optimized PostHog for speed
 
-## 1. No product management by default
+### 1. No product management by default
 
 The responsibilities of a product manager still exist, but our engineers:
 
@@ -51,7 +52,7 @@ We have one product manager who steps in reactively if a small team needs more s
 
 The above _requires_ a lot of context setting from the company. We are _unusually transparent_ – we share board slides, financial information, fundraising progress before, during and after it happens, and much more. 
 
-## 2. No design by default
+### 2. No design by default
 
 When we started, we felt that if product designers dictate to engineers, the best engineers would eventually quit as they'd want more freedom.
 
@@ -63,7 +64,7 @@ Today, we have people that can help engineers with design, but they are very hap
 
 For example, we've redesigned this entire website ~5 times.
 
-## 3. Hiring is key
+### 3. Hiring is key
 
 I think 90%+ of an organization's problems are solved by hiring right – see [what we've learned about hiring](https://newsletter.posthog.com/p/everything-weve-learned-about-hiring).
 
@@ -71,13 +72,13 @@ We have found it invaluable to pay people during our hiring process to do some a
 
 We tend to hire people with more experience, who we find tend to work better with more autonomy. I think this is the magic combo when you're an all remote company, though we're working on ways to get better at growing people who are earlier in their careers.
 
-## 4. Each team is a mini startup
+### 4. Each team is a mini startup
 
 I went to a superb talk by [Jeff Lawson](https://www.linkedin.com/in/jeffiel), who runs [Twilio](https://twilio.com/). He described how the greatest innovation at [Amazon](https://www.amazon.com/) was that it felt like thousands of small startups. Simply speaking, a startup gets more done per person than a big corporate.
 
 PostHog works like a group of startups with lots of [small teams](/handbook/company/small-teams). Each of our products has a team of up to 6 who can ship with minimal interference from the rest of the company. We hire a lot of former technical founders to help here.
 
-## 5. Nearly everyone is an engineer
+### 5. Nearly everyone is an engineer
 
 It's simple, but if you have lots of spending and focus outside of engineering, you won't get as much built.
 
@@ -85,11 +86,11 @@ At the time of writing, [we are 37 people](../team), only 11 of whom are in Go T
 
 We don't do outbound sales, our [marketing team](/handbook/small-teams/marketing) is very small, we only have one product manager, and our [exec team](/handbook/small-teams/exec) is only 3 people. These things are all by design. We're product-led because our ideal users, engineers, want to try something rather than sit on a call.
 
-## 6. No meeting Tuesdays and Thursdays
+### 6. No meeting Tuesdays and Thursdays
 
 We want a culture where people can deep work. We push back on unnecessary meetings. We have learned, often painfully, that some meetings are necessary, but we default to asynchronous communication and adapt where needed.
 
-## 7. We are a late mover
+### 7. We are a late mover
 
 I've had lots of founders tell me that they can't pursue idea X because some other startups are tackling it. 
 
@@ -99,13 +100,13 @@ The magic in our platform (after an individual product is working well for our u
 
 For non-God tier product people, such as me, I think it's easier to build a better version of X than it is to create something entirely new.
 
-## 8. We raised venture capital
+### 8. We raised venture capital
 
 Obviously, this matters. We didn't raise or spend a ridiculous amount compared to other companies we compete with – we have done a $3M seed, $9M series A and a $15M series B. We have a lot of it left and will be profitable next year.
 
 Raising money does let you build more stuff, but whether you _should_ is very questionable and [a topic for another time](/blog/vc-or-bootstrap).
 
-## 9. Trust and feedback over process
+### 9. Trust and feedback over process
 
 This is one of [our values](/handbook/company/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
 
@@ -122,6 +123,7 @@ Before you start making changes, think hard about what your product should be op
 For example, if you are shipping the latest iPhone, complete design control is _more_ important to your users than having all the features. 
 
 Likewise, if you're building small software product that has better UX than an incumbent, design and control matters. I _suspect_ you could still get higher quality with more autonomy – I'd probably have lots of designers and engineers collaborating with relatively few product managers, but I can't speak to the above as confidently since my experience is building a multi-product platform.
+
 ## Everything is a tradeoff
 
 The most important thing is to figure out if you value speed and autonomy over polish and control. Which path will help you achieve your company's mission better?
