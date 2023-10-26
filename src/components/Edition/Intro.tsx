@@ -4,19 +4,22 @@ import { PostsContext } from './Posts'
 
 const Founders = () => {
     return (
-        <div className="bg-accent dark:bg-accent-dark p-8 rounded border border-light dark:border-border-dark">
-            <h2 className="text-xl mb-2">Welcome to our founder's hub</h2>
-            <p>
-                Here's a collection of resources geared for founders. It combines lessons we've learned along the way -
-                both articles we've written ourselves, as well as links to other resource that we used while building
-                PostHog.
+        <div className="bg-accent dark:bg-accent-dark px-6 py-4 mt-8 md:mt-0 rounded border border-light dark:border-border-dark">
+            <h2 className="text-lg mb-2">Welcome to our founder's hub</h2>
+            <p className="text-sm">
+                These are the best pieces of content we can find on the internet for all the major disciplines you need
+                to build a successful company around your product – and what we've learned from each link along the way.
             </p>
-            <p className="mb-0">
-                Missing a topic you'd like to learn more about?{' '}
+            <p className="text-sm mb-0">
+                Long term, we want{' '}
+                <Link to="https://github.com/PostHog/posthog.com/issues/7011">
+                    anyone to be able to post stuff here
+                </Link>
+                . In the meantime, if we are missing a topic you’d like to learn more about –
                 <Link to="https://x.com/posthog" external>
-                    Mention us on X
-                </Link>{' '}
-                and we'll add it to our list!
+                    tell us on X
+                </Link>
+                !
             </p>
         </div>
     )

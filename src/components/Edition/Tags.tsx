@@ -15,12 +15,12 @@ const Tag = ({ name, active, onClick, icon, color }) => {
             >
                 {Icon && (
                     <span
-                        className={`bg-${color}/10 rounded-full p-2 w-16 h-16 flex items-center justify-center text-${color}`}
+                        className={`bg-${color}/10 rounded-full p-2 w-12 h-12 flex items-center justify-center text-${color}`}
                     >
-                        <Icon className="w-8" />
+                        <Icon className="w-6" />
                     </span>
                 )}
-                <span className={`text-sm leading-tight ${Icon ? '' : 'mt-auto'}`}>{name}</span>
+                <span className={`text-[13px] leading-tight ${Icon ? '' : 'mt-auto'}`}>{name}</span>
             </button>
         </li>
     )
@@ -29,31 +29,33 @@ const Tag = ({ name, active, onClick, icon, color }) => {
 export default function Tags() {
     const { activeMenu, tag, setTag, setRoot } = useContext(PostsContext)
     return activeMenu?.children?.length > 0 ? (
-        <ul className="list-none m-0 p-0 flex snap-x overflow-y-hidden overflow-x-auto my-8">
-            <Tag
-                icon="IconRocket"
-                color="purple"
-                name="All"
-                active={!tag}
-                onClick={() => {
-                    setRoot(activeMenu?.url === '/posts' ? undefined : activeMenu?.url?.split('/')[1])
-                    setTag(undefined)
-                    navigate(activeMenu?.url)
-                }}
-            />
-            {activeMenu?.children?.map((menuItem, index) => {
-                return (
-                    <Tag
-                        key={`${menuItem.name}-${index}`}
-                        active={tag === menuItem.name}
-                        {...menuItem}
-                        onClick={() => {
-                            setTag(menuItem.name)
-                            navigate(menuItem.url)
-                        }}
-                    />
-                )
-            })}
-        </ul>
+        <div className="-mx-4 px-4 md:mx-0 md:px-0 border-y my-4 py-2 overflow-y-hidden overflow-x-auto border-light dark:border-border-dark">
+            <ul className="list-none p-0 flex gap-x-1 snap-x   ">
+                <Tag
+                    icon="IconRocket"
+                    color="purple"
+                    name="All"
+                    active={!tag}
+                    onClick={() => {
+                        setRoot(activeMenu?.url === '/posts' ? undefined : activeMenu?.url?.split('/')[1])
+                        setTag(undefined)
+                        navigate(activeMenu?.url)
+                    }}
+                />
+                {activeMenu?.children?.map((menuItem, index) => {
+                    return (
+                        <Tag
+                            key={`${menuItem.name}-${index}`}
+                            active={tag === menuItem.name}
+                            {...menuItem}
+                            onClick={() => {
+                                setTag(menuItem.name)
+                                navigate(menuItem.url)
+                            }}
+                        />
+                    )
+                })}
+            </ul>
+        </div>
     ) : null
 }

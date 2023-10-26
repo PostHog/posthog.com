@@ -146,19 +146,19 @@ export const postsMenu: IMenu[] = [
             {
                 name: 'Inside PostHog',
                 url: '/blog/inside-posthog',
-                icon: 'IconBlog',
+                icon: 'IconLogomark',
                 color: 'seagreen',
             },
             {
                 name: 'Using PostHog',
                 url: '/blog/using-posthog',
-                icon: 'IconPostHog',
+                icon: 'IconGraduationCap',
                 color: 'salmon',
             },
             {
                 name: 'General',
                 url: '/blog/general',
-                icon: 'IconNewsletter',
+                icon: 'IconNewspaper',
                 color: 'green',
             },
         ],

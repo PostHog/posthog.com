@@ -330,7 +330,19 @@ function PostsListing() {
                 {!articleView && (
                     <>
                         <h2 className="pt-4 text-xl mb-2 space-x-2 flex-wrap md:flex hidden">
-                            <span>{activeMenu?.name}</span>
+                            {activeMenu?.children?.length > 0 && (
+                                <>
+                                    {activeMenu?.name === 'Founders' ? (
+                                        <>Founder's hub</>
+                                    ) : activeMenu?.name === 'Product engineers' ? (
+                                        <>Product engineer's hub</>
+                                    ) : (
+                                        <>{activeMenu?.name}</>
+                                    )}
+                                    &nbsp;
+                                </>
+                            )}
+
                             {tag && (
                                 <>
                                     <span>→</span>
