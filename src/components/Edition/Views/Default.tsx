@@ -286,7 +286,9 @@ export const PostFilters = () => {
                     ></span>
                     <div className="pl-[43px] -mt-0.5">
                         <span className="inline-flex gap-1 items-center text-[13px] rounded-full border border-light dark:border-dark pl-1.5 pr-2 pt-1 pb-1">
-                            <IconX className="hidden w-3 h-3 inline-block bg-border dark:bg-border-dark p-1 box-content rounded-full" />
+                            <button onClick={() => setTag(undefined)}>
+                                <IconX className="w-3 h-3 inline-block bg-border dark:bg-border-dark p-1 box-content rounded-full" />
+                            </button>
                             <span>{tag}</span>
                         </span>
                     </div>

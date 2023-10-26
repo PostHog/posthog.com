@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
@@ -771,9 +770,9 @@ export const ProductProductAnalytics = () => {
             }
         }
     `)
-    const fullWidthContent = useLayoutData()
+    const { fullWidthContent } = useLayoutData()
     return (
-        <Layout>
+        <>
             <SEO
                 title="Product Analytics - PostHog"
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, A/B Testing, and Surveys."
@@ -1043,7 +1042,7 @@ export const ProductProductAnalytics = () => {
                     <CTA />
                 </section>
             </div>
-        </Layout>
+        </>
     )
 }
 

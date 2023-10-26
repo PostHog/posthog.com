@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
@@ -41,6 +40,7 @@ import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
 import { SEO } from 'components/seo'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const product = {
     slug: 'session-replay',
@@ -350,14 +350,15 @@ export const ProductSessionReplay = () => {
             }
         }
     `)
+    const { fullWidthContent } = useLayoutData()
     return (
-        <Layout>
+        <>
             <SEO
                 title="Session Replay - PostHog"
                 description="Session Replay helps you diagnose issues and understand user behavior in your product or website."
                 image={`/images/og/session-replay.jpg`}
             />
-            <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="yellow"
                     icon={<IconRewindPlay />}
@@ -367,12 +368,14 @@ export const ProductSessionReplay = () => {
                     website.'
                 />
 
-                <StaticImage
-                    src="../../../images/products/screenshot-session-replay.png"
-                    alt="Screenshot of Session Replay in PostHog"
-                    className="w-full max-w-[1360.5px]"
-                    placeholder="none"
-                />
+                <div className="text-center">
+                    <StaticImage
+                        src="../../../images/products/screenshot-session-replay.png"
+                        alt="Screenshot of Session Replay in PostHog"
+                        className="w-full max-w-[1360.5px]"
+                        placeholder="none"
+                    />
+                </div>
 
                 <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
@@ -425,7 +428,10 @@ export const ProductSessionReplay = () => {
                     </Marquee>
                 </section>
             </div>
-            <section id="pricing" className="max-w-7xl mx-auto px-5 py-20">
+            <section
+                id="pricing"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
+            >
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
@@ -452,7 +458,7 @@ export const ProductSessionReplay = () => {
                 </div>
             </section>
 
-            <div className="max-w-7xl mx-auto">
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -620,7 +626,7 @@ export const ProductSessionReplay = () => {
                     <CTA />
                 </section>
             </div>
-        </Layout>
+        </>
     )
 }
 
