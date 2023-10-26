@@ -1,0 +1,59 @@
+import { navigate } from 'gatsby'
+import React, { useContext } from 'react'
+import { PostsContext } from './Posts'
+import * as Icons from '@posthog/icons'
+
+const Tag = ({ name, active, onClick, icon, color }) => {
+    const Icon = Icons[icon]
+    return (
+        <li className="relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] snap-start">
+            <button
+                onClick={onClick}
+                className={`flex flex-col items-center text-center w-24 px-4 h-full py-2 rounded gap-2 hover:bg-border/30 hover:dark:bg-border/30 ${
+                    active ? 'font-bold bg-border/50 dark:bg-border/50' : ''
+                }`}
+            >
+                {Icon && (
+                    <span
+                        className={`bg-${color}/10 rounded-full p-2 w-16 h-16 flex items-center justify-center text-${color}`}
+                    >
+                        <Icon className="w-8" />
+                    </span>
+                )}
+                <span className={`text-sm leading-tight ${Icon ? '' : 'mt-auto'}`}>{name}</span>
+            </button>
+        </li>
+    )
+}
+
+export default function Tags() {
+    const { activeMenu, tag, setTag, setRoot } = useContext(PostsContext)
+    return activeMenu?.children?.length > 0 ? (
+        <ul className="list-none m-0 p-0 flex snap-x overflow-y-hidden overflow-x-auto my-8">
+            <Tag
+                icon="IconRocket"
+                color="purple"
+                name="All"
+                active={!tag}
+                onClick={() => {
+                    setRoot(activeMenu?.url === '/posts' ? undefined : activeMenu?.url?.split('/')[1])
+                    setTag(undefined)
+                    navigate(activeMenu?.url)
+                }}
+            />
+            {activeMenu?.children?.map((menuItem, index) => {
+                return (
+                    <Tag
+                        key={`${menuItem.name}-${index}`}
+                        active={tag === menuItem.name}
+                        {...menuItem}
+                        onClick={() => {
+                            setTag(menuItem.name)
+                            navigate(menuItem.url)
+                        }}
+                    />
+                )
+            })}
+        </ul>
+    ) : null
+}
