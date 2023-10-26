@@ -14,6 +14,7 @@ tags:
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
 PostHog and GrowthBook both provide open source, self-serve feature flags and experimentation, but they're different in two important ways:
@@ -61,147 +62,33 @@ PostHog needs none of this. You use the same app and SDKs for managing and evalu
 
 Both PostHog and GrowthBook have the infrastructure to use flags and experiments effectively with your current app. PostHog has a wider range of product and data tools built in, while GrowthBook relies on third-party integrations
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>GrowthBook</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-       <tr>
-            <td><strong>Open source</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Code publicly accessible</td>
-        </tr>
-       <tr>
-            <td><strong>Self-service</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>No need to talk to sales</td>
-        </tr>
-       <tr>
-            <td><strong>SDKs</strong></td>
-            <td className="text-center">14</td>
-            <td className="text-center">11</td>
-            <td>Including JavaScript, Android, iOS, and Python.</td>
-        </tr>
-       <tr>
-            <td><strong>Native data sources</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Compute metrics and results without integrations</td>
-        </tr>
-       <tr>
-            <td><strong>Proxies</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Reverse proxy to avoid blockers</td>
-        </tr>
-       <tr>
-            <td><strong>Self-hostable</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Host on your own infrastructure</td>
-        </tr>
-       <tr>
-            <td><strong>API</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Beta</td>
-            <td>Edit and evaluate flags with API</td>
-        </tr>
-       <tr>
-            <td><strong>Local evaluation (aka streaming)</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Faster flags by not having to rely on the server for evaluation</td>
-        </tr>
-       <tr>
-            <td><strong>SQL</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Query flag and product data directly via SQL</td>
-        </tr>
-       <tr>
-            <td><strong>Session replays</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Real user playback of flag session</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="GrowthBook">
+  <ComparisonRow column1={true} column2={true} feature="Open source" description="Code publicly accessible" />
+  <ComparisonRow column1={true} column2={true} feature="Self-service" description="No need to talk to sales" />
+  <ComparisonRow column1="14" column2="11" feature="SDKs" description="Including JavaScript, Android, iOS, and Python" />
+  <ComparisonRow column1={true} column2={false} feature="Native data sources" description="Compute metrics and results without integrations" />
+  <ComparisonRow column1={true} column2={true} feature="Proxies" description="Reverse proxy to avoid blockers" />
+  <ComparisonRow column1={true} column2={true} feature="Self-hostable" description="Host on your own infrastructure" />
+  <ComparisonRow column1={true} column2="Beta" feature="API" description="Edit and evaluate flags with API" />
+  <ComparisonRow column1={true} column2={true} feature="Local evaluation (aka streaming)" description="Faster flags by not having to rely on the server for evaluation" />
+  <ComparisonRow column1={true} column2={true} feature="SQL" description="Query flag and product data directly via SQL" />
+  <ComparisonRow column1={true} column2={false} feature="Session replays" description="Real user playback of flag session" />
+</ComparisonTable>
 
 ### Feature flags
 
 Both PostHog and GrowthBook offer all the functionality you expect from feature flags. 
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>GrowthBook</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-       <tr>
-            <td><strong>Boolean flags</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Simple flags returning true or flag</td>
-        </tr>
-       <tr>
-            <td><strong>Percentage rollouts</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Target percentages of a group</td>
-        </tr>
-       <tr>
-            <td><strong>Custom targeting</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Target users based on user properties, custom contexts</td>
-        </tr>
-       <tr>
-            <td><strong>JSON payloads</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Flags return JSON</td>
-        </tr>
-       <tr>
-            <td><strong>Environments</strong></td>
-            <td className="text-center">Partial</td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Manage flags for dev, stage, prod</td>
-        </tr>
-       <tr>
-            <td><strong>Scheduling</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Schedule flags to turn on or off</td>
-        </tr>
-       <tr>
-            <td><strong>Early access management</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Manage betas, test features</td>
-        </tr>
-       <tr>
-            <td><strong>Bootstrapping</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Flags available on frontend application load</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="GrowthBook">
+  <ComparisonRow column1={true} column2={true} feature="Boolean flags" description="Simple flags returning true or flag" />
+  <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
+  <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
+  <ComparisonRow column1={true} column2={true} feature="JSON payloads" description="Flags return JSON" />
+  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, stage, prod" />
+  <ComparisonRow column1={false} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
+  <ComparisonRow column1={true} column2={false} feature="Early access management" description="Manage betas, test features" />
+  <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
+</ComparisonTable>
 
 - **Targeting:** GrowthBook's custom targeting using attributes must be set every session and defined in-app before use. It's also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/user-properties)) on users. You don’t need to pre-define them and unlimited custom values are free.
 
@@ -215,80 +102,18 @@ Experimentation is where PostHog and GrowthBook’s functionality diverges. Both
 
 - PostHog provides a simpler interface and no need to write SQL or connect to external services – a better experience for users without a background in data science.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>GrowthBook</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-       <tr>
-            <td><strong>Custom goals</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Customize metrics that test tracks</td>
-        </tr>
-       <tr>
-            <td><strong>Secondary metrics</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Monitor impact on unrelated metrics</td>
-        </tr>
-       <tr>
-            <td><strong>Native goal tracking</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Track impact on goals without external sources</td>
-        </tr>
-       <tr>
-            <td><strong>Statistical significance calculation</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Calculate if changes make a statistically significant impact</td>
-        </tr>
-       <tr>
-            <td><strong>Split testing</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Split participants into groups</td>
-        </tr>
-       <tr>
-            <td><strong>Multivariate (A/B/n) testing</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Test multiple variants of a change</td>
-        </tr>
-       <tr>
-            <td><strong>Recommended run time</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Calculate the recommended run time for your experiments</td>
-        </tr>
-       <tr>
-            <td><strong>Namespaces</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Avoid conflicts by assigning all users to a namespace</td>
-        </tr>
-       <tr>
-            <td><strong>Visual editor</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Create and edit experiments in your app</td>
-        </tr>
-       <tr>
-            <td><strong>Statistics engine</strong></td>
-            <td className="text-center">Bayesian</td>
-            <td className="text-center">Bayesian, Frequentist</td>
-            <td>How the success of an experiment is calculated</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="GrowthBook">
+  <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that test tracks" />
+  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
+  <ComparisonRow column1={true} column2={false} feature="Native goal tracking" description="Track impact on goals without external sources" />
+  <ComparisonRow column1={true} column2={true} feature="Statistical significance calculation" description="Calculate if changes make a statistically significant impact" />
+  <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
+  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
+  <ComparisonRow column1={true} column2={false} feature="Recommended run time" description="Calculate the recommended run time for your experiments" />
+  <ComparisonRow column1={false} column2={true} feature="Namespaces" description="Avoid conflicts by assigning all users to a namespace" />
+  <ComparisonRow column1={false} column2={true} feature="Visual editor" description="Create and edit experiments in your app" />
+  <ComparisonRow column1="Bayesian" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the success of an experiment is calculated" />
+</ComparisonTable>
 
 - **Recommended run time:** PostHog automatically calculates a recommended run time based on past data and minimally acceptable improvements. This helps you avoid the [peeking problem](/blog/ab-testing-mistakes) and end your experiment at the right time.
 
@@ -304,109 +129,26 @@ GrowthBook offers no reporting or analytics tools other than the ability to quer
 
 PostHog provides all the visualizations and product tools for evaluating the success of your features and app. These include trends, funnels, retention, SQL querying, and session replays integrated with your flags and A/B testing data. This enables you to do deeper analysis of their impact and combine them with other product and usage data.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>GrowthBook</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-       <tr>
-            <td><strong>Analytics</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Capture usage and calls related to flags</td>
-        </tr>
-       <tr>
-            <td><strong>Experiment reports</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Show the results of an experiment</td>
-        </tr>
-       <tr>
-            <td><strong>Trends</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Graphs of flag usage</td>
-        </tr>
-       <tr>
-            <td><strong>Funnel visualization</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Analyze impact of flags on funnels</td>
-        </tr>
-       <tr>
-            <td><strong>Retention</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>User retention related to flags</td>
-        </tr>
-       <tr>
-            <td><strong>Breakdowns</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Breakdown reports by properties</td>
-        </tr>
-       <tr>
-            <td><strong>Dashboards</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Multiple customizable insights for a flag</td>
-        </tr>
-       <tr>
-            <td><strong>Non-flag data</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Combine flag data with other product data</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="GrowthBook">
+  <ComparisonRow column1={true} column2={false} feature="Analytics" description="Capture usage and calls related to flags" />
+  <ComparisonRow column1={true} column2={true} feature="Experiment reports" description="Show the results of an experiment" />
+  <ComparisonRow column1={true} column2={false} feature="Trends" description="Graphs of flag usage" />
+  <ComparisonRow column1={true} column2={false} feature="Funnel visualization" description="Analyze impact of flags on funnels" />
+  <ComparisonRow column1={true} column2={false} feature="Retention" description="User retention related to flags" />
+  <ComparisonRow column1={true} column2={true} feature="Breakdowns" description="Breakdown reports by properties" />
+  <ComparisonRow column1={true} column2={false} feature="Dashboards" description="Multiple customizable insights for a flag" />
+  <ComparisonRow column1={true} column2={false} feature="Non-flag data" description="Combine flag data with other product data" />
+</ComparisonTable>
 
 ### Pricing
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td></td>
-            <td className="text-center"><strong>PostHog</strong></td>
-            <td className="text-center"><strong>GrowthBook</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-       <tr>
-            <td><strong>Pricing</strong></td>
-            <td className="text-center">Per request</td>
-            <td className="text-center">Seat-based</td>
-        </tr>
-       <tr>
-            <td><strong>Free plan</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-       <tr>
-            <td><strong>Free experiments</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-        </tr>
-       <tr>
-            <td><strong>Free collaboration</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">3 seats free, then $20/seat/month</td>
-        </tr>
-       <tr>
-            <td><strong>Fully transparent</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="GrowthBook">
+  <ComparisonRow column1="Per request" column2="Seat-based" feature="Pricing" />
+  <ComparisonRow column1={true} column2={true} feature="Free plan" />
+  <ComparisonRow column1={true} column2={true} feature="Free experiments" />
+  <ComparisonRow column1={true} column2="3 seats free, then $20/seat/month" feature="Free collaboration" />
+  <ComparisonRow column1={true} column2={false} feature="Fully transparent" />
+</ComparisonTable>
 
 PostHog’s [feature flag pricing](/pricing?product=feature-flags) is pay-per-request (and A/B tests use feature flags). There is a generous free tier of 1M requests per month with all features, add-ons, and integrations available.
 
@@ -471,62 +213,15 @@ To give you an idea of what pricing looks like in reality, here are some example
 
 GrowthBook has integrations with data warehouses and analytics tools they rely on, but little beyond that. PostHog has a wider range of integrations. 
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>GrowthBook</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Exports</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Export data to other sources</td>
-        </tr>
-        <tr>
-            <td><strong>Imports</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Import data from sources</td>
-        </tr>
-        <tr>
-            <td><strong>Slack</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Alerts for Slack</td>
-        </tr>
-        <tr>
-            <td><strong>Teams</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Alerts for Microsoft Teams</td>
-        </tr>
-        <tr>
-            <td><strong>Zapier</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Trigger Zapier automations</td>
-        </tr>
-        <tr>
-            <td><strong>Sentry</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Connect to Sentry data</td>
-        </tr>
-        <tr>
-            <td><strong>Datadog</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Capture flag data in Datadog</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="GrowthBook">
+  <ComparisonRow column1={true} column2={false} feature="Exports" description="Export data to other sources" />
+  <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from sources" />
+  <ComparisonRow column1={true} column2={true} feature="Slack" description="Alerts for Slack" />
+  <ComparisonRow column1={true} column2={false} feature="Teams" description="Alerts for Microsoft Teams" />
+  <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
+  <ComparisonRow column1={true} column2={false} feature="Sentry" description="Connect to Sentry data" />
+  <ComparisonRow column1={false} column2={true} feature="Datadog" description="Capture flag data in Datadog" />
+</ComparisonTable>
 
 PostHog’s event-based structure enables you to import data from anywhere for use with flags and experiments. The free API enables you to connect, edit, and capture from anywhere too. For example, you can import data from [warehouses](/docs/data-warehouse), [no-code site builders](/tutorials/webflow-ab-tests), [Segment](/docs/cdp/segment), and more.
 
@@ -534,56 +229,14 @@ PostHog’s event-based structure enables you to import data from anywhere for u
 
 Both PostHog and GrowthBook enable companies to remain secure and compliant with privacy regulations. Companies can customize the levels of user privacy related to these platforms to their needs. 
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>GrowthBook</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-       <tr>
-            <td><strong>User privacy options</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Anonymize users, drop personal data</td>
-        </tr>
-       <tr>
-            <td><strong>History, audit logs</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Enterprise</td>
-            <td>Manage and view flag edits and related users</td>
-        </tr>
-       <tr>
-            <td><strong>GDPR ready</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Can be compliant with GDPR</td>
-        </tr>
-       <tr>
-            <td><strong>SOC2</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>SOC 2 security certification</td>
-        </tr>
-       <tr>
-            <td><strong>2FA</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Enforce login with two-factor authentication</td>
-        </tr>
-       <tr>
-            <td><strong>SAML/SSO</strong></td>
-            <td className="text-center">Enterprise</td>
-            <td className="text-center">Enterprise</td>
-            <td>Use SAML or single sign-on authentication</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="PostHog" column2="GrowthBook">
+  <ComparisonRow column1={true} column2={true} feature="User privacy options" description="Anonymize users, drop personal data" />
+  <ComparisonRow column1={true} column2="Enterprise" feature="History, audit logs" description="Manage and view flag edits and related users" />
+  <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
+  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
+  <ComparisonRow column1={true} column2={false} feature="2FA" description="Enforce login with two-factor authentication" />
+  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
+</ComparisonTable>
 
 ## Frequently asked questions
 
