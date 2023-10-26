@@ -31,7 +31,7 @@ const Tag = ({ name, active, onClick, icon, color }) => {
 export default function Tags() {
     const { activeMenu, tag, setTag, setRoot } = useContext(PostsContext)
     return activeMenu?.children?.length > 0 ? (
-        <div className="-mx-4 px-4 md:-mx-8 md:px-8 xl:-mx-12 xl:px-12 border-y my-4 py-2 overflow-y-hidden overflow-x-auto border-light dark:border-border-dark">
+        <div className="-mx-4 pl-2 pr-4 md:-mx-8 md:pl-4 md:pr-8 2xl:-mx-12 2xl:pl-8 2xl:pr-12 border-y my-4 py-2 overflow-y-hidden overflow-x-auto border-light dark:border-border-dark">
             <ul className="list-none p-0 flex gap-x-1 snap-x   ">
                 <Tag
                     icon="IconRocket"
