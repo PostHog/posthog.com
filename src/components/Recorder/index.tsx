@@ -1,10 +1,9 @@
 import React, { useState, useRef, Fragment, useEffect } from 'react'
 import RecordRTC from 'recordrtc'
 import { Listbox, Transition } from '@headlessui/react'
-// import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+// import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
 // import { MicrophoneIcon, PauseIcon } from "@heroicons/react/24/outline";
 // import { ResumeIcon, TrashIcon } from "@radix-ui/react-icons";
-// import { StopIcon } from "@heroicons/react/24/solid";
 import StopTime from './StopTime'
 import Tooltip from './Tooltip'
 import * as tus from 'tus-js-client'
@@ -218,7 +217,7 @@ export default function Recorder({ setOpen, step, setStep, onSubmit, uniqueId }:
                                 leaveFrom="opacity-100"
                                 leaveTo="opacity-0"
                             >
-                                <Listbox.Options className="bg-white list-none border border-light dark:border-dark pl-0 absolute mt-1 max-h-60 w-full overflow-auto rounded-md py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                <Listbox.Options className="bg-white list-none border border-light dark:border-dark pl-0 z-20 mt-[-5px] absolute mt-1 max-h-60 w-full overflow-auto rounded-md py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                     {audioDevices.map((audioDevice, i) => (
                                         <Listbox.Option
                                             key={i}
@@ -238,14 +237,6 @@ export default function Recorder({ setOpen, step, setStep, onSubmit, uniqueId }:
                                                     >
                                                         {audioDevice.label}
                                                     </span>
-                                                    {selected ? (
-                                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                                                            {/* <CheckIcon
-                                                                className="h-5 w-5"
-                                                                aria-hidden="true"
-                                                            /> */}
-                                                        </span>
-                                                    ) : null}
                                                 </>
                                             )}
                                         </Listbox.Option>
@@ -267,7 +258,6 @@ export default function Recorder({ setOpen, step, setStep, onSubmit, uniqueId }:
                             className="flex cursor-pointer p-1.5 flex-row items-center justify-center rounded pr-2 text-lg hover:bg-[#e5e7eb]"
                         >
                             <div className="bg-[#ff623f] h-5 w-5 rounded"></div>
-                            {/* <StopIcon className="h-8 w-8 text-[#ff623f]" aria-hidden="true" /> */}
                             <StopTime running={!pause} duration={duration} setDuration={setDuration} />
                         </div>
                     </Tooltip>
