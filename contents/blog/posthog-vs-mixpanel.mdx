@@ -14,6 +14,7 @@ tags:
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
 Want to know how PostHog and Mixpanel are different? If you remember nothing else, remember these two points:
@@ -42,68 +43,16 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 ### Platform
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-			<td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Product analytics</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track events and conversion; analyze user behavior</td>
-        </tr>
-        <tr>
-            <td><strong>Session replays</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Watch real users use your product; diagnose bugs</td>
-        </tr>
-        <tr>
-            <td><strong>Feature flags</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Roll out features safely; toggle features for cohorts or individuals</td>
-        </tr>
-        <tr>
-            <td><strong>Experiments</strong></td>
-            <td className="text-center">Enterprise</td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Test changes and analyze their impact</td>
-        </tr>
-        <tr>
-            <td><strong>User surveys</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ask users for qualitative feedback and gather responses</td>
-        </tr>
-        <tr>
-            <td><strong>Heatmaps</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track where users click and why</td>
-        </tr>
-        <tr>
-            <td><strong>Event pipelines</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Push and pull data to enrich customer profiles</td>
-        </tr>
-        <tr>
-            <td><strong>Open source</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Build your own apps and contribute code</td>
-        </tr>        
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
+  <ComparisonRow column1={false} column2={true} feature="Session replay" description="Watch real users use your product; diagnose bugs" />
+  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1="Enterprise" column2={true} feature="Experiments" description="Test changes and analyze their impact" />
+  <ComparisonRow column1={false} column2={true} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
+  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="Track where users click and why" />
+  <ComparisonRow column1={true} column2={true} feature="Event pipelines" description="Push and pull data to enrich customer profiles" />
+  <ComparisonRow column1={false} column2={true} feature="Open source" description="Build your own apps and contribute code" />
+</ComparisonTable>
 
 - **Experiments:** Mixpanel offers an experiments feature in its Enterprise plan, but it's limited to running simple A/B tests. PostHog's experimentation suite supports A/B and multivariate tests using our integrated feature flagging. Visit our [experimentation product page](/product/experimentation-suite) for more info.
 
@@ -115,86 +64,19 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 ### Product analytics
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-			<td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Graphs and trends</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Build custom insights and visualizations</td>
-        </tr>
-        <tr>
-            <td><strong>Dashboards</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Combine insights into shareable dashboards</td>
-        </tr>
-        <tr>
-            <td><strong>Funnels</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Understand conversion between events, pages</td>
-        </tr>
-        <tr>
-            <td><strong>Cohorts</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Combine users based on properties and events for group analysis</td>
-        </tr>
-        <tr>
-            <td><strong>User paths</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track user flows and where they drop-off</td>
-        </tr>
-        <tr>
-            <td><strong>Retention</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Analyze user and revenue retention</td>
-        </tr>
-        <tr>
-            <td><strong>UTM tracking</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track marketing campaigns with UTM tags</td>
-        </tr>
-        <tr>
-            <td><strong>Correlation analysis</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Suggested events and properties that lead to success or failure</td>
-        </tr>
-        <tr>
-            <td><strong>Group analytics</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Understand how organizations use your product</td>
-        </tr>
-        <tr>
-            <td><strong>Formulas</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Use custom formulas to calculate unique insights</td>
-        </tr>
-        <tr>
-            <td><strong>Query editor</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Coming Q1 2023</td>
-            <td>Write your own queries in SQL</td>
-        </tr>          
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
+  <ComparisonRow column1={true} column2={true} feature="Dashboards" description="Combine insights into shareable dashboards" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Understand conversion between events, pages" />
+  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
+  <ComparisonRow column1={true} column2={true} feature="User paths" description="Track user flows and where they drop-off" />
+  <ComparisonRow column1={true} column2={true} feature="Retention" description="Analyze user and revenue retention" />
+  <ComparisonRow column1={true} column2={true} feature="UTM tracking" description="Track marketing campaigns with UTM tags" />
+  <ComparisonRow column1={false} column2={true} feature="Correlation analysis" description="Suggested events and properties that lead to success or failure" />
+  <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Understand how organizations use your product" />
+  <ComparisonRow column1={true} column2={true} feature="Formulas" description="Use custom formulas to calculate unique insights" />
+  <ComparisonRow column1={true} column2={true} feature="Query editor" description="Write your own queries in SQL" />
+</ComparisonTable>
 
 - **Correlation analysis:** When viewing a funnel in PostHog, [correlation analysis](/product/correlation-analysis) automatically suggests events and properties that correlate to success or failure. We use transparent, testable statistical models – no phony "AI" here.
 
@@ -206,62 +88,15 @@ PostHog is [built on transparency](/blog/how-to-run-a-transparent-company). Our 
 
 PostHog and Mixpanel both support a broad range of tracking options and libraries, and manual event instrumentation. But PostHog also supports event autocapture, so you don't have to manually instrument all your events to track them,
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-            <tr>
-            <td><strong>Event tracking</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track manually instrumented events</td>
-        </tr>
-        <tr>
-            <td><strong>Autocapture</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Automatically track events without instrumentation</td>
-        </tr>
-        <tr>
-            <td><strong>Combined events</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track related events as a single trackable action or behavior</td>
-        </tr>
-        <tr>
-            <td><strong>Reverse proxy available</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send events from your own domain to capture more data</td>
-        </tr>
-        <tr>
-            <td><strong>Cross-domain tracking</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track users across domains and sub-domains</td>
-        </tr>
-        <tr>
-            <td><strong>Server-side tracking</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send events from your server</td>
-        </tr>
-        <tr>
-            <td><strong>Capture API</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send events through an API</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Track manually instrumented events" />
+  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Automatically track events without instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Combined events" description="Track related events as a single trackable action or behavior" />
+  <ComparisonRow column1={true} column2={true} feature="Reverse proxy available" description="Send events from your own domain to capture more data" />
+  <ComparisonRow column1={true} column2={true} feature="Cross-domain tracking" description="Track users across domains and sub-domains" />
+  <ComparisonRow column1={true} column2={true} feature="Server-side tracking" description="Send events from your server" />
+  <ComparisonRow column1={true} column2={true} feature="Capture API" description="Send events through an API" />
+</ComparisonTable>
 
 > ### Why autocapture?
 >
@@ -275,62 +110,15 @@ PostHog and Mixpanel both support a broad range of tracking options and librarie
 
 ### Client libraries
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td><strong>Notes for PostHog</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>JavaScript</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Recommended for full PostHog functionality</td>
-        </tr>
-        <tr>
-            <td><strong>React Native</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Session recording not available</td>
-        </tr>
-        <tr>
-            <td><strong>Flutter</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Event tracking and user identification only</td>
-        </tr>
-        <tr>
-            <td><strong>iOS (Swift)</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Autocapture and session replays not available</td>
-        </tr>
-        <tr>
-            <td><strong>iOS (Objective-C)</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Autocapture and session replays not available</td>
-        </tr>
-        <tr>
-            <td><strong>Android</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Event tracking and user identification only</td>
-        </tr>
-        <tr>
-            <td><strong>Unity</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="JavaScript" description="Recommended for full PostHog functionality" />
+  <ComparisonRow column1={true} column2={true} feature="React Native" description="Session recording not available" />
+  <ComparisonRow column1={true} column2={true} feature="Flutter" description="Event tracking and user identification only" />
+  <ComparisonRow column1={true} column2={true} feature="iOS (Swift)" description="Autocapture and session replays not available" />
+  <ComparisonRow column1={true} column2={true} feature="iOS (Objective-C)" description="Autocapture and session replays not available" />
+  <ComparisonRow column1={true} column2={true} feature="Android" description="Event tracking and user identification only" />
+  <ComparisonRow column1={true} column2={false} feature="Unity" description="" />
+</ComparisonTable>
 
 - **JavaScript snippet:** All client libraries support event tracking and user identification for product analytics, but we recommend using PostHog's JavaScript snippet to enjoy all our features. See our [client library documentation](/docs/getting-started/install?tab=snippet) for more information.
 
@@ -405,8 +193,6 @@ Some PostHog features, such as session replays and autocapture, are only availab
 </table>
 </div>
 
-<ArrayCTA />
-
 ## Integrations
 
 Mixpanel claims over 50 official integrations covering a wide-range of use cases. Given its focus on product analytics alone, many of these integrations connect to third-party tools for A/B testing, feature flag, and marketing use cases.
@@ -423,224 +209,48 @@ The [PostHog App Store](/apps) has over 50 apps as well, though not all of these
 
 ### Data Export
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Export API</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Export data via API</td>
-        </tr>
-        <tr>
-            <td><strong>Amazon Redshift</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Export data to Redshift</td>
-        </tr>
-        <tr>
-            <td><strong>Amazon S3</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Export data to S3 bucket</td>
-        </tr>
-        <tr>
-            <td><strong>Azure Blob Storage</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Export data to Microsoft Azure</td>
-        </tr>
-        <tr>
-            <td><strong>Google Cloud Storage</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Export data to GCS</td>
-        </tr>
-        <tr>
-            <td><strong>Snowflake</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Export data to Snowflake database</td>
-        </tr>
-        <tr>
-            <td><strong>Google BigQuery</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Export data to BigQuery for analysis</td>
-        </tr>
-        <tr>
-            <td><strong>RudderStack</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync event and person data</td>
-        </tr>
-        <tr>
-            <td><strong>Airbyte</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Extract and load data to external platforms</td>
-        </tr>
-        <tr>
-            <td><strong>Fivetran</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Extract and load data to external platforms</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Export API" description="Export data via API" />
+  <ComparisonRow column1={true} column2={true} feature="Amazon Redshift" description="Export data to Redshift" />
+  <ComparisonRow column1={true} column2={true} feature="Amazon S3" description="Export data to S3 bucket" />
+  <ComparisonRow column1={true} column2={true} feature="Azure Blob Storage" description="Export data to Microsoft Azure" />
+  <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" description="Export data to GCS" />
+  <ComparisonRow column1={true} column2={true} feature="Snowflake" description="Export data to Snowflake database" />
+  <ComparisonRow column1={true} column2={true} feature="BigQuery" description="Export data to Google BigQuery for analysis" />
+  <ComparisonRow column1={true} column2={true} feature="RudderStack" description="Sync event and person data" />
+  <ComparisonRow column1={true} column2={true} feature="Airbyte" description="Extract and load data to external platforms" />
+  <ComparisonRow column1={true} column2={false} feature="Fivetran" description="Extract and load data to external platforms" />
+</ComparisonTable>
 
 ### Data Import
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-			<td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-			<td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Import API</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>API for importing data</td>
-        </tr>
-        <tr>
-            <td><strong>Amazon Redshift</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Import data from Redshift for analysis</td>
-        </tr>
-        <tr>
-            <td><strong>Amazon S3</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ingest data from S3 bucket for analysis</td>
-        </tr>
-        <tr>
-            <td><strong>Google Cloud Storage</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ingest data from GCS bucket for analysis</td>
-        </tr>
-        <tr>
-            <td><strong>Google Pub/Sub</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Import events from Pub/Sub topics</td>
-        </tr>
-        <tr>
-            <td><strong>Snowflake</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Import Snowflake data for analysis</td>
-        </tr>
-        <tr>
-            <td><strong>Snowplow</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ingest events from behavioral data platform</td>
-        </tr>
-        <tr>
-            <td><strong>Segment</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ingest events tracked in Segment</td>
-        </tr>
-        <tr>
-            <td><strong>RudderStack</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Ingest events tracked in RudderStack</td>
-        </tr>
-        <tr>
-            <td><strong>Hightouch</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Reverse ETL data to multiple platforms</td>
-        </tr>
-        <tr>
-            <td><strong>Census</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Reverse ETL data to multiple platforms</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Import API" description="API for importing data" />
+  <ComparisonRow column1={true} column2={true} feature="Amazon Redshift" description="Import data from Redshift for analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Amazon S3" description="Ingest data from S3 bucket for analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Google Cloud Storage" description="Ingest data from GCS bucket for analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Google Pub/Sub" description="Import events from Pub/Sub topics" />
+  <ComparisonRow column1={true} column2={true} feature="Snowflake" description="Import Snowflake data for analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Snowplow" description="Ingest events from behavioral data platform" />
+  <ComparisonRow column1={true} column2={true} feature="Segment" description="Ingest events tracked in Segment" />
+  <ComparisonRow column1={true} column2={true} feature="RudderStack" description="Ingest events tracked in RudderStack" />
+  <ComparisonRow column1={true} column2={true} feature="Hightouch" description="Reverse ETL data to multiple platforms" />
+  <ComparisonRow column1={true} column2={true} feature="Census" description="Reverse ETL data to multiple platforms" />
+</ComparisonTable>
 
 ### Dev tools & support
 
 As an open source platform designed for technical teams, PostHog integrates with numerous developer tools and platforms. This isn't an area of strong support for Mixpanel.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-			<td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BitBucket Release Tracker</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track impact of releases in analytics</td>
-        </tr>
-        <tr>
-            <td><strong>GitHub Release Tracker</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track impact of releases in analytics</td>
-        </tr>
-        <tr>
-            <td><strong>GitHub Star Sync</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track GitHub star growth</td>
-        </tr>
-        <tr>
-            <td><strong>GitLab Release Tracker</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track impact of releases in analytics</td>
-        </tr>
-        <tr>
-            <td><strong>Sentry</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Connect errors to individual users</td>
-        </tr>
-        <tr>
-            <td><strong>Retool</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Build internal tools using your usage data</td>
-        </tr>
-        <tr>
-            <td><strong>Zendesk</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track tickets as events, add context to tickets</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={false} column2={true} feature="BitBucket Release Tracker" description="Track impact of releases in analytics" />
+  <ComparisonRow column1={false} column2={true} feature="GitHub Release Tracker" description="Track impact of releases in analytics" />
+  <ComparisonRow column1={false} column2={true} feature="GitHub Star Sync" description="Track GitHub star growth" />
+  <ComparisonRow column1={false} column2={true} feature="GitLab Release Tracker" description="Track impact of releases in analytics" />
+  <ComparisonRow column1={false} column2={true} feature="Sentry" description="Connect errors to individual users" />
+  <ComparisonRow column1={false} column2={true} feature="Retool" description="Build internal tools using your usage data" />
+  <ComparisonRow column1={true} column2={true} feature="Zendesk" description="Track tickets as events, add context to tickets" />
+</ComparisonTable>
 
 ### Marketing & sales
 
@@ -650,198 +260,45 @@ Mixpanel has a specific advantage in connecting to Google and Facebook's adverti
 
 It's easy to track marketing conversions in PostHog, but you can't currently connect that directly to campaign spending data.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Customer.io</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync data and trigger workflows in Customer.io</td>
-        </tr>
-        <tr>
-            <td><strong>Hubspot</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync customer data to and from Hubspot</td>
-        </tr>
-        <tr>
-            <td><strong>Engage</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Automate onboarding and retention messaging</td>
-        </tr>
-        <tr>
-            <td><strong>Pace</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Identify enterprise sales leads</td>
-        </tr>
-        <tr>
-            <td><strong>Salesforce</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Sync customer data to and from Salesforce</td>
-        </tr>
-        <tr>
-            <td><strong>Sendgrid</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Automate email workflows</td>
-        </tr>
-        <tr>
-            <td><strong>Twitter</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track Twitter follower growth</td>
-        </tr>
-        <tr>
-            <td><strong>Variance</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Define PQLs with real analytics data</td>
-        </tr>
-        <tr>
-            <td><strong>Facebook Ads</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Track Facebook ad ROI</td>
-        </tr>
-        <tr>
-            <td><strong>Google Ads</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Track Google ad ROI</td>
-        </tr>
-        <tr>
-            <td><strong>Mailchimp</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td>Automate marketing emails</td>
-        </tr>
-        <tr>
-            <td><strong>Intercom</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Automate your product comms</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Customer.io" description="Sync data and trigger workflows in Customer.io" />
+  <ComparisonRow column1={true} column2={true} feature="Hubspot" description="Sync customer data to and from Hubspot" />
+  <ComparisonRow column1={true} column2={true} feature="Engage" description="Automate onboarding and retention messaging" />
+  <ComparisonRow column1={true} column2={true} feature="Pace" description="Identify enterprise sales leads" />
+  <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Sync customer data to and from Salesforce" />
+  <ComparisonRow column1={true} column2={true} feature="Sendgrid" description="Automate email workflows" />
+  <ComparisonRow column1={true} column2={true} feature="Twitter" description="Track Twitter follower growth" />
+  <ComparisonRow column1={true} column2={true} feature="Variance" description="Define PQLs with real analytics data" />
+  <ComparisonRow column1={true} column2={false} feature="Facebook Ads" description="Track Facebook ad ROI" />
+  <ComparisonRow column1={true} column2={false} feature="Google Ads" description="Track Google ad ROI" />
+  <ComparisonRow column1={true} column2={false} feature="Mailchimp" description="Automate marketing emails" />
+  <ComparisonRow column1={true} column2={true} feature="Intercom" description="Automate your product comms" />
+</ComparisonTable>
 
 ### Alerts & automation
 
 Mixpanel and PostHog both support popular messaging apps and automation platforms, though PostHog also supports Discord and the open-source Zapier alternative, n8n.
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Slack</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send alerts and reports to Slack</td>
-        </tr>
-        <tr>
-            <td><strong>Discord</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send alerts and reports to Discord</td>
-        </tr>
-        <tr>
-            <td><strong>Microsoft Teams</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Send alerts and reports to Teams</td>
-        </tr>
-        <tr>
-            <td><strong>n8n</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Open source workflow automation</td>
-        </tr>
-        <tr>
-            <td><strong>Twilio</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Automate SMS alerts on events</td>
-        </tr>
-        <tr>
-            <td><strong>Zapier</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Automate workflows on events</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-
-<ArrayCTA />
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="Slack" description="Send alerts and reports to Slack" />
+  <ComparisonRow column1={false} column2={true} feature="Discord" description="Send alerts and reports to Discord" />
+  <ComparisonRow column1={true} column2={true} feature="Microsoft Teams" description="Send alerts and reports to Teams" />
+  <ComparisonRow column1={false} column2={true} feature="n8n" description="Open source workflow automation" />
+  <ComparisonRow column1={false} column2={true} feature="Twilio" description="Automate SMS alerts on events" />
+  <ComparisonRow column1={true} column2={true} feature="Zapier" description="Automate workflows on events" />
+</ComparisonTable>
 
 ## Privacy, admin & security
 
 ### Privacy compliance
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>GDPR compliant</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>EU hosting or data residency available</td>
-        </tr>
-        <tr>
-            <td><strong>HIPAA compliant</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center">Self-host only</td>
-            <td>Business Associate Agreement available</td>
-        </tr>
-        <tr>
-            <td><strong>Data anonymization</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Remove personally identifiable information</td>
-        </tr>
-        <tr>
-            <td><strong>Self-hosting option</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Self-host and keep complete control of your data</td>
-        </tr>
-        <tr>
-            <td><strong>Cookie-less tracking option</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Use analytics without cookie consent banners</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="GDPR compliant" description="EU hosting or data residency available" />
+  <ComparisonRow column1={true} column2="Self-host only" feature="HIPAA compliant" description="Business Associate Agreement available" />
+  <ComparisonRow column1={true} column2={true} feature="Data anonymization" description="Remove personally identifiable information" />
+  <ComparisonRow column1={false} column2={true} feature="Self-hosting option" description="Self-host and keep complete control of your data" />
+  <ComparisonRow column1={false} column2={true} feature="Cookieless tracking option" description="Use analytics without cookie consent banners" />
+</ComparisonTable>
 
 - **Self-hosting:** While we recommend most customers use PostHog Cloud, PostHog can be self-hosted on your own infrastructure so you keep control of all your data. This is useful for businesses that handle highly sensitive information, such as defense or health data, but it is more expensive than using PostHog Cloud. See: [Who should self-host PostHog?](#who-should-selfhost-posthog)
 
@@ -851,56 +308,14 @@ Mixpanel and PostHog both support popular messaging apps and automation platform
 
 ### Admin & security
 
-<div className="overflow-x-auto -mx-5 px-5">
-<table className="w-full mt-4" style="min-width: 600px;">
-    <thead>
-        <tr>
-            <td className="w-3/12"></td>
-            <td><strong>Mixpanel</strong></td>
-            <td><strong>PostHog</strong></td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>SOC 2 certification</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Externally audited security</td>
-        </tr>
-        <tr>
-            <td><strong>SAML/SSO</strong></td>
-            <td className="text-center">Enterprise</td>
-            <td className="text-center">Enterprise</td>
-            <td>Organization single sign-on</td>
-        </tr>
-        <tr>
-            <td><strong>Access levels</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Assign access levels to team members</td>
-        </tr>
-        <tr>
-            <td><strong>Multiple organizations</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Create orgs for all your internal teams</td>
-        </tr>
-        <tr>
-            <td><strong>Multiple projects</strong></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td className="text-center"><span className="text-green text-lg">✔</span></td>
-            <td>Track multiple products and domains</td>
-        </tr>
-        <tr>
-            <td><strong>Private projects</strong></td>
-            <td className="text-center"><span className="text-red text-lg">✖</span></td>
-            <td className="text-center">Enterprise</td>
-            <td>Create hidden projects with user permissions</td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<ComparisonTable column1="Mixpanel" column2="PostHog">
+  <ComparisonRow column1={true} column2={true} feature="SOC 2 certification" description="Externally audited security" />
+  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Organization single sign-on" />
+  <ComparisonRow column1={true} column2={true} feature="Access levels" description="Assign access levels to team members" />
+  <ComparisonRow column1={true} column2={true} feature="Multiple organizations" description="Create orgs for all your internal teams" />
+  <ComparisonRow column1={true} column2={true} feature="Multiple projects" description="Track multiple products and domains" />
+  <ComparisonRow column1={false} column2="Enterprise" feature="Private projects" description="Create hidden projects with user permissions" />
+</ComparisonTable>
 
 - **PostHog Enterprise:** Our [Enterprise tier](/enterprise) includes single sign-on, private projects, and a dedicated Slack support channel.
 
