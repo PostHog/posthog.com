@@ -5,7 +5,13 @@ import Layout from '../Layout'
 import { StaticImage } from 'gatsby-plugin-image'
 import SearchBox from 'components/Search/SearchBox'
 import Pico8 from 'react-pico-8'
-import { Carts, Controls, Fullscreen, Pause, Reset, Sound } from 'react-pico-8/buttons'
+import { Controls,
+    Reset,
+    Pause,
+    Sound,
+    Carts,
+    Fullscreen } from 'react-pico-8/buttons'
+import 'react-pico-8/styles.css'
 
 export default function NotFoundPage(): JSX.Element {
     const posthog = usePostHog()
@@ -32,23 +38,38 @@ export default function NotFoundPage(): JSX.Element {
                         className="!absolute top-0 -right-8 max-h-full"
                     />
 
+                    <style>
+                        {`
+          ._wk9CD {
+            width: 0;
+            height: 0;
+          }
+          
+          ._kXWCq {
+            width:384px;
+            height:384px;
+          }
+        `}
+                    </style>
                     <div className="sm:!absolute right-0 -mt-12 sm:mt-0 sm:-right-12 lg:-right-24 bottom-0 md:-bottom-28 h-[400px] w-[400px] sm:h-[500px] sm:w-[500px] lg:h-[600px] lg:w-[600px]">
                         {gameOn ? (
                             <Pico8
                                 src="/supermax/supermax.js"
                                 autoPlay={true}
+                                legacyButtons={false}
                                 hideCursor={false}
                                 center={true}
                                 blockKeys={false}
                                 usePointer={true}
                                 unpauseOnReset={true}
+                                placeholder="placeholder.png"
                             >
-                                <Controls />
-                                <Reset />
-                                <Sound />
-                                <Pause />
-                                <Carts />
-                                <Fullscreen />
+                                <Controls/>
+                                <Reset/>
+                                <Pause/>
+                                <Sound/>
+                                <Carts/>
+                                <Fullscreen/>
                             </Pico8>
                         ) : (
                             <StaticImage
