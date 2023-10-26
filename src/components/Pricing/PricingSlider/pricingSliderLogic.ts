@@ -8,6 +8,8 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
     let finalCost = 0
     let alreadyCountedEvents = 0
 
+    console.log(pricingSliderLogic.values.availableProducts)
+
     const tiers = pricingSliderLogic.values.availableProducts
         .find((product) => product.type === pricingOption)
         ?.plans.find((plan) => plan.tiers)?.tiers
@@ -31,7 +33,7 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
     return Math.round(finalCost)
 }
 
-export type PricingOptionType = 'product_analytics' | 'session_replay' | 'feature_flags'
+export type PricingOptionType = 'product_analytics' | 'session_replay' | 'feature_flags' | 'surveys'
 
 export const pricingSliderLogic = kea<pricingSliderLogicType>({
     connect: {
@@ -47,8 +49,17 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
         setSessionRecordingInputValue: (value: number) => ({ value }),
         setFeatureFlagSliderValue: (value: number) => ({ value }),
         setFeatureFlagInputValue: (value: number) => ({ value }),
+        setSurveyResponseSliderValue: (value: number) => ({ value }),
+        setSurveyResponseInputValue: (value: number) => ({ value }),
     },
     reducers: {
+        surveyResponseNumber: [
+            250,
+            {
+                setSurveyResponseSliderValue: (_: null, { value }: { value: number }) => Math.round(sliderCurve(value)),
+                setSurveyResponseInputValue: (_: null, { value }: { value: number }) => value * 1000000,
+            },
+        ],
         featureFlagNumber: [
             1000000,
             {
@@ -100,6 +111,21 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
                 setSessionRecordingInputValue: (_: null, { value }: { value: number }) => value,
             },
         ],
+        surveyResponseSliderValue: [
+            null,
+            {
+                setSurveyResponseSliderValue: (_: null, { value }: { value: number }) => value,
+                setSurveyResponseInputValue: (_: null, { value }: { value: number }) => inverseCurve(value * 1000000),
+            },
+        ],
+        surveyResponseInputValue: [
+            1,
+            {
+                setSurveyResponseSliderValue: (_: null, { value }: { value: number }) =>
+                    Math.round(sliderCurve(value) / 1000000),
+                setSurveyResponseInputValue: (_: null, { value }: { value: number }) => value,
+            },
+        ],
         featureFlagSliderValue: [
             null,
             {
@@ -147,13 +173,25 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
                 return calculatePrice(featureFlagNumber, 'feature_flags')
             },
         ],
+        surveyResponseCost: [
+            (s) => [s.surveyResponseNumber],
+            (surveyResponseNumber: number) => {
+                return calculatePrice(surveyResponseNumber, 'surveys')
+            },
+        ],
         monthlyTotal: [
-            (s) => [s.sessionRecordingEventNumber, s.eventNumber, s.featureFlagNumber],
-            (sessionRecordingEventNumber: number, eventNumber: number, featureFlagNumber: number) => {
+            (s) => [s.sessionRecordingEventNumber, s.eventNumber, s.featureFlagNumber, s.surveyResponseNumber],
+            (
+                sessionRecordingEventNumber: number,
+                eventNumber: number,
+                featureFlagNumber: number,
+                surveyResponseNumber: number
+            ) => {
                 return (
                     calculatePrice(eventNumber, 'product_analytics') +
                     calculatePrice(sessionRecordingEventNumber, 'session_replay') +
-                    calculatePrice(featureFlagNumber, 'feature_flags')
+                    calculatePrice(featureFlagNumber, 'feature_flags') +
+                    calculatePrice(surveyResponseNumber, 'surveys')
                 )
             },
         ],
