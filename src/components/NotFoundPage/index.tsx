@@ -2,18 +2,16 @@ import React, { useEffect, useState } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
-import Lottie from 'react-lottie'
 import { StaticImage } from 'gatsby-plugin-image'
 import SearchBox from 'components/Search/SearchBox'
-import Pico8 from "react-pico-8";
-import {Carts, Controls, Fullscreen, Pause, Reset, Sound} from "react-pico-8/buttons";
+import Pico8 from 'react-pico-8'
+import { Carts, Controls, Fullscreen, Pause, Reset, Sound } from 'react-pico-8/buttons'
 
 export default function NotFoundPage(): JSX.Element {
     const posthog = usePostHog()
-    const [hogData, setHogData] = useState<any | null>(null)
+    const [gameOn, setGameOn] = useState(false)
 
     useEffect(() => {
-        import('../../../static/lotties/astrohog.json').then((data) => setHogData(data.default))
         posthog?.capture('page_404')
     }, [])
 
@@ -35,23 +33,33 @@ export default function NotFoundPage(): JSX.Element {
                     />
 
                     <div className="sm:!absolute right-0 -mt-12 sm:mt-0 sm:-right-12 lg:-right-24 bottom-0 md:-bottom-28 h-[400px] w-[400px] sm:h-[500px] sm:w-[500px] lg:h-[600px] lg:w-[600px]">
-                        <Pico8 src="/supermax/supermax3.js"
-                               autoPlay={true}
-                               hideCursor={false}
-                               center={true}
-                               blockKeys={false}
-                               usePointer={true}
-                               unpauseOnReset={true}
-                        >
-                            <Controls/>
-                            <Reset/>
-                            <Sound/>
-                            <Pause/>
-                            <Carts/>
-                            <Fullscreen/>
-                        </Pico8>
+                        {gameOn ? (
+                            <Pico8
+                                src="/supermax/supermax3.js"
+                                autoPlay={true}
+                                hideCursor={false}
+                                center={true}
+                                blockKeys={false}
+                                usePointer={true}
+                                unpauseOnReset={true}
+                            >
+                                <Controls />
+                                <Reset />
+                                <Sound />
+                                <Pause />
+                                <Carts />
+                                <Fullscreen />
+                            </Pico8>
+                        ) : (
+                            <StaticImage
+                                src="../../images/astrohog.gif"
+                                alt="Space hog"
+                                placeholder="blurred"
+                                className="w-[250px] sm:w-[500px] rotate-12"
+                                onClick={() => setGameOn(true)}
+                            />
+                        )}
                     </div>
-
 
                     <div className="text-[15px] opacity-75 -mt-12 sm:mt-0 mb-4">
                         <strong>404:</strong> <s>Hog</s> Page not found
@@ -68,7 +76,7 @@ export default function NotFoundPage(): JSX.Element {
                             </p>
                         </div>
 
-                        <CallToAction type="secondary" width="84" to="/">
+                        <CallToAction type="secondary" width="84" onClick={() => setGameOn(true)}>
                             Take me back to the homepage
                         </CallToAction>
 
