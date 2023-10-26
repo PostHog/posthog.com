@@ -20,20 +20,15 @@ import { postsMenu as menu } from '../../../navs/posts'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
-const CommunityBar = () => {
+const UserBar = () => {
     const { user, logout, isModerator } = useUser()
     const name = [user?.profile.firstName, user?.profile.lastName].filter(Boolean).join(' ')
     const { setNewPostModalOpen, newPostModalOpen, setLoginModalOpen, articleView } = useContext(PostsContext)
     const { pathname } = useLocation()
-    const { fullWidthContent } = useLayoutData()
     return (
-        <div
-            className={`py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col lg:flex-row justify-between items-center sticky top-[-1px] lg:space-y-0 space-y-2 ${
-                fullWidthContent ? 'px-6' : 'px-4'
-            }`}
-        >
+        <div className="flex gap-1 flex-col @xs:flex-row items-center justify-between w-full">
             {user ? (
-                <div className="flex items-center justify-between w-full">
+                <>
                     <p className="text-sm m-0 p-0">
                         Signed in as{' '}
                         <Link
@@ -56,7 +51,7 @@ const CommunityBar = () => {
                             Logout
                         </button>
                     </span>
-                </div>
+                </>
             ) : (
                 <>
                     <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
@@ -70,6 +65,19 @@ const CommunityBar = () => {
                     </CallToAction>
                 </>
             )}
+        </div>
+    )
+}
+
+const CommunityBar = () => {
+    const { fullWidthContent } = useLayoutData()
+    return (
+        <div
+            className={`@container py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center sticky top-[-1px] border-b border-border dark:border-border-dark lg:space-y-0 space-y-2 ${
+                fullWidthContent ? 'px-6' : 'pl-4 pr-2'
+            }`}
+        >
+            <UserBar />
         </div>
     )
 }
@@ -308,7 +316,7 @@ function PostsListing() {
                 transition-all 
                 ${
                     articleView
-                        ? 'flex flex-col h-[calc(100vh_-_108px)] sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
+                        ? 'flex flex-col h-[calc(100vh_-_108px)] sticky top-0 z-10 reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
                         : 'flex-grow md:px-8 2xl:px-12'
                 }
             `}
@@ -382,11 +390,20 @@ export default function Default({ children }) {
             <section className="md:flex my-4 md:my-0 items-start">
                 {!articleView && (
                     <div
-                        className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-full h-screen md:w-[14rem] lg:w-[18rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative pr-4 2xl:border-r border-border dark:border-border-dark ${
-                            fullWidthContent ? 'pl-2' : 'pl-4'
-                        }`}
+                        className={`lg:block hidden lg:sticky top-0 z-10 reasonable:top-[108px] w-full h-screen md:w-[14rem] lg:w-[20rem] xl:w-[24rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative lg:border-x border-border dark:border-border-dark`}
                     >
-                        <div className="max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 mt-[-2px]">
+                        <div
+                            className={`@container py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col lg:flex-row justify-between items-center sticky top-[-1px] border-b border-border dark:border-border-dark lg:space-y-0 space-y-2 ${
+                                fullWidthContent ? 'px-6' : 'pl-4 pr-2'
+                            }`}
+                        >
+                            <UserBar />
+                        </div>
+                        <div
+                            className={`max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 pt-3 pr-4 mt-[-2px] ${
+                                fullWidthContent ? 'pl-2' : 'pl-4'
+                            }`}
+                        >
                             <TableOfContents />
                         </div>
                     </div>
