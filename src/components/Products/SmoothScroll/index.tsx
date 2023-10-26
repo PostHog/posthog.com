@@ -26,7 +26,7 @@ export const SmoothScroll = ({ className = '', exclude = [] }): JSX.Element => {
     const [activeTab, setActiveTab] = useState(0)
     return (
         <div className="hidden md:block sticky top-[-1px] reasonable:top-[107px] z-50 overflow-x-auto overflow-y-hidden bg-accent dark:bg-accent-dark mb-12">
-            <section className={`border-y border-border dark:border-border-dark ${className}`}>
+            <section className={`border-y border-border dark:border-dark ${className}`}>
                 <ul className="list-none flex gap-4 pt-1 [justify-content:_safe_center]">
                     {menuItems
                         .filter(({ label }) => !exclude.includes(label))
@@ -37,7 +37,7 @@ export const SmoothScroll = ({ className = '', exclude = [] }): JSX.Element => {
                                         offset={-169}
                                         className={`!text-inherit whitespace-nowrap inline-block text-sm py-2 px-3 border border-transparent border-b-transparent -mb-px text-opacity-60 hover:border hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md cursor-pointer ${
                                             index === activeTab
-                                                ? '!border-border dark:!border-border-dark !border-b-transparent dark:!border-b-transparent font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md'
+                                                ? '!border-border dark:!border-dark !border-b-transparent dark:!border-b-transparent font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md'
                                                 : ''
                                         }`}
                                         smooth

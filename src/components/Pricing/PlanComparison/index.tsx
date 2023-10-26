@@ -394,7 +394,7 @@ export const PlanComparison = ({
                         </p>
                     </div>
 
-                    <div className="w-full md:flex-[0_0_60%] flex border-b border-border dark:border-border-dark px-4 md:gap-4">
+                    <div className="w-full md:flex-[0_0_60%] flex border-b border-border dark:border-dark px-4 md:gap-4">
                         {staticPlans.map((plan) => (
                             <div
                                 key={`${plan.plan_key}-header`}

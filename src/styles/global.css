@@ -436,7 +436,7 @@ h4 {
 }
 
 .footnotes {
-    @apply border-t border-border dark:border-border-dark pt-4;
+    @apply border-t border-border dark:border-dark pt-4;
 
     hr {
         @apply hidden;

@@ -72,7 +72,7 @@ export default function Comparison({ comparison, columnCount, truncate }) {
                     }`}
                 >
                     {/* header row */}
-                    <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-border-dark">
+                    <div className="bg-accent dark:bg-accent-dark leading-tight p-2 mt-2 border-t border-border dark:border-dark">
                         <strong></strong>
                     </div>
                     {activeCompanies.map((company) => {
