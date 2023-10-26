@@ -119,9 +119,9 @@ Since we handle a lot of data, at scale, this has meant performance has, well, u
 
 Before you start making changes, think hard about what your product should be optimized for.
 
-For example, if you are shipping the latest iPhone, complete design control is _more_ important to your users than having all the features. Likewise, if you're building small software product that has better UX than an incumbent, design and control matters.
+For example, if you are shipping the latest iPhone, complete design control is _more_ important to your users than having all the features. 
 
-I _suspect_ you could still get higher quality with more autonomy – I'd probably have lots of designers and engineers collaborating with relatively few product managers, but I can't speak to the above as confidently since my experience is building a multi-product platform.
+Likewise, if you're building small software product that has better UX than an incumbent, design and control matters. I _suspect_ you could still get higher quality with more autonomy – I'd probably have lots of designers and engineers collaborating with relatively few product managers, but I can't speak to the above as confidently since my experience is building a multi-product platform.
 ## Everything is a tradeoff
 
 The most important thing is to figure out if you value speed and autonomy over polish and control. Which path will help you achieve your company's mission better?
