@@ -349,19 +349,13 @@ function PostsListing() {
                                     ) : (
                                         <>{activeMenu?.name}</>
                                     )}
-                                    &nbsp;
-                                </>
-                            )}
-
-                            {tag && (
-                                <>
-                                    <span>→</span>
-                                    <span>{tag}</span>
                                 </>
                             )}
                         </h2>
                         <Intro />
                         <Tags />
+
+                        {tag && <h3 className="text-lg">{tag}</h3>}
                     </>
                 )}
                 <ul
@@ -428,7 +422,11 @@ export default function Default({ children }) {
                 )}
                 <PostsListing />
                 <div
-                    className={`${articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'}`}
+                    className={`${
+                        articleView
+                            ? 'flex-grow'
+                            : 'sticky top-[108px] h-screen basis-[20rem] flex-shrink-0 block pl-4 border-l border-light dark:border-dark'
+                    }`}
                 >
                     {children}
                 </div>

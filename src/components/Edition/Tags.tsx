@@ -10,12 +10,14 @@ const Tag = ({ name, active, onClick, icon, color }) => {
             <button
                 onClick={onClick}
                 className={`flex flex-col items-center text-center w-24 px-4 h-full py-2 rounded gap-2 hover:bg-border/30 hover:dark:bg-border/30 ${
-                    active ? 'font-bold bg-border/50 dark:bg-border/50' : ''
+                    active ? 'font-bold ' : ''
                 }`}
             >
                 {Icon && (
                     <span
-                        className={`bg-${color}/10 rounded-full p-2 w-12 h-12 flex items-center justify-center text-${color}`}
+                        className={`rounded-full p-2 w-12 h-12 flex items-center justify-center ${
+                            active ? `bg-${color} text-white` : `bg-${color}/10 text-${color}`
+                        }`}
                     >
                         <Icon className="w-6" />
                     </span>
@@ -29,7 +31,7 @@ const Tag = ({ name, active, onClick, icon, color }) => {
 export default function Tags() {
     const { activeMenu, tag, setTag, setRoot } = useContext(PostsContext)
     return activeMenu?.children?.length > 0 ? (
-        <div className="-mx-4 px-4 md:mx-0 md:px-0 border-y my-4 py-2 overflow-y-hidden overflow-x-auto border-light dark:border-border-dark">
+        <div className="-mx-4 px-4 md:-mx-8 md:px-8 border-y my-4 py-2 overflow-y-hidden overflow-x-auto border-light dark:border-border-dark">
             <ul className="list-none p-0 flex gap-x-1 snap-x   ">
                 <Tag
                     icon="IconRocket"
