@@ -59,10 +59,11 @@ export default function BookADemo() {
                 <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
                     <div className="md:flex items-center md:space-x-4">
                         <p className="mb-2 md:mb-0 text-[15px]">
-                            Have a quick question? Record a video with your question and we'll get back to you.
+                            Don't want to sit on a video call but still need help evaluating PostHog? Record a video
+                            with your question and we'll get get back to you asap.
                         </p>
-                        <CallToAction type="secondary" size="sm" to="/record-question">
-                            Record a video question
+                        <CallToAction type="secondary" size="sm" to="/record-question" className="whitespace-nowrap">
+                            Record a question
                         </CallToAction>
                         {recorderOpen && (
                             <div className="absolute w-screen h-screen">
