@@ -329,7 +329,7 @@ export default function RecordVideo({
     const [openOptions, setOpenOptions] = useState<string[]>([])
     const [confetti, setConfetti] = useState(true)
     const [submissionId, setSubmissionId] = useState<string>('')
-    const [recorderOpen, setRecorderOpen] = useState(false)
+    const [recorderOpen, setRecorderOpen] = useState(true)
 
     const [step, setStep] = useState<'pre' | 'in' | 'post'>('pre')
 

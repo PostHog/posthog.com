@@ -1,13 +1,12 @@
 import React, { useState, useRef, Fragment, useEffect } from 'react'
 import RecordRTC from 'recordrtc'
 import { Listbox, Transition } from '@headlessui/react'
-// import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
-// import { MicrophoneIcon, PauseIcon } from "@heroicons/react/24/outline";
-// import { ResumeIcon, TrashIcon } from "@radix-ui/react-icons";
+// import { , TrashIcon } from "@radix-ui/react-icons";
 import StopTime from './StopTime'
 import Tooltip from './Tooltip'
 import * as tus from 'tus-js-client'
 import { CallToAction } from 'components/CallToAction'
+import { IconMicrophone, IconPause, IconPlay } from '@posthog/icons'
 
 interface Props {
     open: boolean
@@ -193,19 +192,10 @@ export default function Recorder({ setOpen, step, setStep, onSubmit, uniqueId }:
                     <Listbox value={selectedDevice} onChange={setSelectedDevice}>
                         <div className="relative mt-1">
                             <Listbox.Button className="border border-light dark:border-dark relative flex w-full cursor-default flex-row items-center justify-start rounded-md bg-white mb-2 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm">
-                                {/* <MicrophoneIcon
-                                    className="mr-2 h-5 w-5 text-gray-400"
-                                    aria-hidden="true"
-                                /> */}
+                                <IconMicrophone className="mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                                 <span className="block truncate">
                                     {selectedDevice?.label ?? 'No device selected'}
                                     {selectedDevice?.label === '' ? 'Enabled' : null}
-                                </span>
-                                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                    {/* <ChevronUpDownIcon
-                                        className="h-5 w-5 text-gray-400"
-                                        aria-hidden="true"
-                                    /> */}
                                 </span>
                             </Listbox.Button>
                             <Transition
@@ -263,19 +253,11 @@ export default function Recorder({ setOpen, step, setStep, onSubmit, uniqueId }:
                     </Tooltip>
                     <div className="mx-2 h-6 w-px bg-[#E7E9EB]"></div>
                     <Tooltip title={pause ? 'Resume' : 'Pause'}>
-                        <div onClick={handlePause} className="cursor-pointer rounded p-1 hover:bg-gray-200">
+                        <div onClick={handlePause} className="cursor-pointer rounded p-1 hover:bg-[#e5e7eb]">
                             {pause ? (
-                                <span>test</span>
+                                <IconPlay className="h-5 w-5 text-gray-400" aria-hidden="true" />
                             ) : (
-                                // <ResumeIcon
-                                //     className="h-6 w-6 text-gray-400"
-                                //     aria-hidden="true"
-                                // />
-                                <span>test</span>
-                                // <PauseIcon
-                                //     className="h-6 w-6 text-gray-400"
-                                //     aria-hidden="true"
-                                // />
+                                <IconPause className="h-5 w-5 text-gray-400" aria-hidden="true" />
                             )}
                         </div>
                     </Tooltip>
