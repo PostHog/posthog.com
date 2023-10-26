@@ -34,21 +34,8 @@ Our first line of code was January 22nd, 2020, after a pivot during a YC batch. 
 
 All of the above are being used a lot too – we're ingesting 10s of billions of events a month, have 10s of thousands of companies regularly using our service and over 100K user sign ups.
 
-One of the most common questions I get asked is how do we manage to build so much, so quickly.
+I often get asked how we build so much, so quickly. The answer is simple: we deliberately designed our company for speed. Here's how.
 
-## We designed the company around speed
-
-We provide an all-in-one platform to help engineers build better products. We have a list of [25+ products](../handbook/which-products) we want to build.
-
-That means we had to design our company primarily for speed.
-
-## These ideas may _suck_ for you
-
-Before you start making changes, think hard about what your product should be optimized for.
-
-For example, if you are shipping the latest iPhone, complete design control is _more_ important to your users than having all the features. Likewise, if you are building software and are building a tiny product that has better UX than an incumbent, design and control matters.
-
-I _suspect_ that you could still get higher quality with more autonomy – I'd probably have lots of designers and engineers collaborating with relatively few product managers, but I can't speak to the above as confidently since my experience is building a multi-product platform.
 
 ## 1. No product management by default
 
@@ -76,7 +63,7 @@ Today, we have people that can help engineers with design, but they are very hap
 
 For example, we've redesigned this entire website ~5 times.
 
-## Hiring is key
+## 3. Hiring is key
 
 I think 90%+ of an organization's problems are solved by hiring right – see [what we've learned about hiring](https://newsletter.posthog.com/p/everything-weve-learned-about-hiring).
 
@@ -96,7 +83,7 @@ It's simple, but if you have lots of spending and focus outside of engineering, 
 
 At the time of writing, [we are 37 people](../team), only 11 of whom are in Go To Market or Operations roles (and 6 of those 11 have at least some engineering in their background).
 
-We don't do outbound sales, our [marketing team](/handbook/small-teams/marketing) is very small, we only have one product manager, our [exec team](/handbook/small-teams/exec) only has 3 people. These things are all by design (and were possible because of our market - the majority of engineers generally want docs and to try something instead of demos and salespeople to deal with).
+We don't do outbound sales, our [marketing team](/handbook/small-teams/marketing) is very small, we only have one product manager, and our [exec team](/handbook/small-teams/exec) is only 3 people. These things are all by design. We're product-led because our ideal users, engineers, want to try something rather than sit on a call.
 
 ## 6. No meeting Tuesdays and Thursdays
 
@@ -130,6 +117,11 @@ As a company with high autonomy and low coordination, shipping things that affec
 
 Since we handle a lot of data, at scale, this has meant performance has, well, um, been a performance to solve. Performance is a very broad area to solve for, ranging from our infrastructure all the way through to our UX, and thus involves a lot of coordination and dependencies.
 
+Before you start making changes, think hard about what your product should be optimized for.
+
+For example, if you are shipping the latest iPhone, complete design control is _more_ important to your users than having all the features. Likewise, if you're building small software product that has better UX than an incumbent, design and control matters.
+
+I _suspect_ you could still get higher quality with more autonomy – I'd probably have lots of designers and engineers collaborating with relatively few product managers, but I can't speak to the above as confidently since my experience is building a multi-product platform.
 ## Everything is a tradeoff
 
 The most important thing is to figure out if you value speed and autonomy over polish and control. Which path will help you achieve your company's mission better?
