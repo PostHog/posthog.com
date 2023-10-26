@@ -75,7 +75,7 @@ const CommunityBar = () => {
     const { fullWidthContent } = useLayoutData()
     return (
         <div
-            className={`@container py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center sticky top-[-1px] border-b border-border dark:border-border-dark lg:space-y-0 space-y-2 ${
+            className={`@container py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center sticky top-[-1px] border-b border-border dark:border-dark lg:space-y-0 space-y-2 ${
                 fullWidthContent ? 'px-6' : 'pl-4 pr-2'
             }`}
         >
@@ -125,7 +125,7 @@ const Post = ({
                     className={`inline m-0 font-semibold border-t border-b !leading-tight line-clamp-2 text-inherit hover:text-primary dark:hover:text-primary-dark hover:text-inherit dark:text-inherit dark:hover:text-inherit hover:transition-transform flex-grow hover:bg-accent dark:hover:bg-accent-dark relative 
                     ${
                         active
-                            ? 'bg-accent dark:bg-accent-dark font-bold border-border dark:border-border-dark'
+                            ? 'bg-accent dark:bg-accent-dark font-bold border-border dark:border-dark'
                             : 'border-transparent hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99]'
                     } 
                     ${fullWidthContent ? 'p-2 ' : 'p-2 lg:px-4'}
@@ -192,7 +192,7 @@ export const PostFilters = () => {
     return (
         <>
             <div
-                className={`relative flex space-x-2 pb-2 border-b border-border dark:border-border-dark ${
+                className={`relative flex space-x-2 pb-2 border-b border-border dark:border-dark ${
                     fullWidthContent ? 'pl-2 pr-4' : 'pr-2'
                 }`}
             >
@@ -286,10 +286,10 @@ export const PostFilters = () => {
             </div>
 
             {tag && (
-                <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-border dark:border-border-dark -mb-1">
+                <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-border dark:border-dark -mb-1">
                     <span
                         className="
-                        after:h-6 after:w-6 after:absolute after:left-[39px] after:top-[-6px] after:border after:border-t-0 after:border-r-0 after:border-border dark:after:border-border-dark after:rounded-bl after:content-['']
+                        after:h-6 after:w-6 after:absolute after:left-[39px] after:top-[-6px] after:border after:border-t-0 after:border-r-0 after:border-border dark:after:border-dark after:rounded-bl after:content-['']
                     "
                     ></span>
                     <div className="pl-[43px] -mt-0.5">
@@ -402,10 +402,10 @@ export default function Default({ children }) {
             <section className="md:flex my-4 md:my-0 items-start">
                 {!articleView && (
                     <div
-                        className={`lg:block hidden lg:sticky top-0 z-10 reasonable:top-[108px] w-full h-screen md:w-[14rem] lg:w-[20rem] xl:w-[24rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative lg:border-x border-border dark:border-border-dark`}
+                        className={`lg:block hidden lg:sticky top-0 z-10 reasonable:top-[108px] w-full h-screen md:w-[14rem] lg:w-[20rem] xl:w-[24rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative lg:border-x border-border dark:border-dark`}
                     >
                         <div
-                            className={`@container py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col lg:flex-row justify-between items-center sticky top-[-1px] border-b border-border dark:border-border-dark lg:space-y-0 space-y-2 ${
+                            className={`@container py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col lg:flex-row justify-between items-center sticky top-[-1px] border-b border-border dark:border-dark lg:space-y-0 space-y-2 ${
                                 fullWidthContent ? 'px-6' : 'pl-4 pr-2'
                             }`}
                         >
