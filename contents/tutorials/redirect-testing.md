@@ -105,7 +105,7 @@ export default function Test() {
   return (
     <main>
       <h1>Hello from the bright side!</h1>
-			<p>Clicking this button will bring you happiness</p>
+      <p>Clicking this button will bring you happiness</p>
       <button onClick={() => posthog.capture("main_button_clicked")}>
         I want to be happy!
       </button>
@@ -153,10 +153,12 @@ export const config = {
 
 ### Getting or creating a user ID for flag evaluation
 
-To evaluate the flags for the experiment in our middleware, we need a distinct user ID to target. We want the user experience to be consistent so we:
+To evaluate the experiment flag in our middleware, we need a distinct user ID to target. This needs to be consistent because we want the same user to see the same variant of the experiment every time.
+
+To do this, we need to:
 
 1. Check if a `distinct_id` exists in the PostHog cookie, and use it if so.
-2. Create a `distinct_id` and bootstrap it to the client if not.
+2. Create a `distinct_id` if not.
 
 This requires using your project API key to get the cookies, parsing them as JSON, and potentially creating a distinct ID using `crypto.randomUUID()`. Altogether, this looks like this:
 
@@ -181,11 +183,12 @@ export async function middleware(request) {
 
 ### Evaluating our redirect test with PostHog
 
-With our distinct ID, we can use the PostHog API to evaluate the `main-redirect` feature flag we set up earlier (because we can’t use PostHog SDKs in Next.js middleware). 
+With our distinct ID, we use the PostHog API to check the value of the `main-redirect` feature flag for a user (because [we can’t use PostHog SDKs in Next.js middleware](https://vercel.com/docs/functions/edge-functions/edge-runtime#supported-apis)). This is known as evaluating the feature flag.
 
-We evaluate the flag by making a POST request to the `https://app.posthog.com/decide?v=3` route (replace `app` with `eu` if you’re on EU Cloud) with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
+Specifically, we evaluate the flag by making a POST request to the `https://app.posthog.com/decide?v=3` route (replace `app` with `eu` if you’re on EU Cloud) with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
 
 ```js
+// redirect-test/middleware.js
 //... rest of code
 
 	const requestOptions = {
@@ -221,7 +224,8 @@ We evaluate the flag by making a POST request to the `https://app.posthog.com/de
 
 ### Capturing exposure
 
-To get accurate results for our experiment, we also need to capture a `$feature_flag_called` exposure event after the feature flag has been evaluated, but before redirecting. This requires another POST request like this:
+To get accurate results for our experiment, we also need to capture a `$feature_flag_called` event after the feature flag has been evaluated, but before redirecting. This is known as an exposure event and shows a user is part of the experiment. It requires another POST request like this:
+
 ```js
 //... rest of code, after flag evaluation
 
@@ -252,9 +256,9 @@ const eventRequest = await fetch(
 
 ## Bootstrapping the data
 
-The final piece to our redirect test is bootstrapping the user distinct ID (and flags while we are at it).
+The final piece to our redirect test is bootstrapping the user distinct ID (and flags while we are at it). Bootstrapping is adding the flag and user data from the server to the client library so it is available as soon as the client PostHog library loads.
 
-> **Why is bootstrapping necessary?** If we didn't bootstrap the distinct ID, PostHog would set a second distinct ID for the same user on the frontend. This disconnects the flag evaluation from the experiment goal tracking on the frontend, breaking our experiment.
+> **Why is bootstrapping necessary?** If we didn't bootstrap the distinct ID, PostHog would set a second distinct ID for the same user on the frontend. When calculating the results of the experiment, PostHog wouldn't know the two were connected, creating a broken test.
 
 We create a `bootstrapData` cookie with the flags and distinct ID data and then add it to the response. We also add a check for the `bootstrapData` cookie in the middleware when we are creating the distinct ID so we don’t get two different IDs whenever we redirect.
 
