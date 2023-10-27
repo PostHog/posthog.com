@@ -90,7 +90,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     <aside
                         key={`${title}-sidebar`}
                         style={{ maxWidth: menuWidth?.right ?? defaultMenuWidth.right }}
-                        className="flex-shrink-0 pt-4 pl-4 w-full justify-self-end my-10 lg:my-0 box-border lg:flex hidden flex-col reasonable:sticky reasonable:top-[108px] mr-8 border-l border-light dark:border-dark"
+                        className="flex-shrink-0 pt-4 pl-4 w-full justify-self-end my-10 lg:my-0 box-border hidden xl:flex flex-col reasonable:sticky reasonable:top-[108px] mr-8 border-l border-light dark:border-dark"
                     >
                         <div
                             className={`${
