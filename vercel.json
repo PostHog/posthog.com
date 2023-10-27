@@ -46,7 +46,8 @@
         { "source": "/handbook/company/structure", "destination": "/handbook/people/team-structure/why-small-teams" },
         { "source": "/handbook/people/team", "destination": "/handbook/company/team" },
         { "source": "/handbook/growth/customer-success", "destination": "/handbook/growth/customer-support" },
-        { "source": "/handbook/getting-started", "destination": "/handbook/getting-started/start-here" },
+        { "source": "/handbook/getting-started", "destination": "/handbook" },
+        { "source": "/handbook/getting-started/start-here", "destination": "/handbook" },
         {
             "source": "/handbook/people/team-structure/user-experience",
             "destination": "/handbook/people/team-structure/core-experience"
