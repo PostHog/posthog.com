@@ -12,7 +12,7 @@ export default function SidebarSection({
     className?: string
 }) {
     return (
-        <div className={`${className}`}>
+        <div className={`mb-8 ${className}`}>
             {(title || action) && (
                 <div className="flex items-center justify-between mb-2">
                     {title && (
