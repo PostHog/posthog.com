@@ -13,6 +13,8 @@ import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
 import { useLocation } from '@reach/router'
 import { pricingMenu } from '../../navs'
+import tractorHog from '../../../static/lotties/tractor-hog.json'
+import Lottie from 'react-lottie'
 
 export const section = cntl`
     max-w-6xl
@@ -101,12 +103,12 @@ const Pricing = (): JSX.Element => {
                     className={`grid md:grid-cols-2 md:mt-8 md:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
                 >
                     <div className="md:order-2">
-                        <StaticImage
-                            alt="The cutest hedgehog you've ever seen driving a red tractor"
-                            src={'./images/tractor-hog.png'}
-                            className="max-w-screen-sm"
-                            loading="eager"
-                            placeholder="none"
+                        <Lottie
+                            options={{
+                                loop: false,
+                                autoplay: true,
+                                animationData: tractorHog,
+                            }}
                         />
                     </div>
                     <div className="md:order-1">
