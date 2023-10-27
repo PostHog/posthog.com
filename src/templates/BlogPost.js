@@ -161,7 +161,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 <div className={`article-content flex-1 transition-all md:pt-8 w-full overflow-auto`}>
                     <div
                         className={`mx-auto transition-all ${
-                            fullWidthContent ? 'max-w-full' : 'max-w-2xl'
+                            fullWidthContent ? 'max-w-full' : 'max-w-3xl'
                         }  md:px-8 2xl:px-12`}
                     >
                         <Intro
