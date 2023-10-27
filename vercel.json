@@ -46,7 +46,8 @@
         { "source": "/handbook/company/structure", "destination": "/handbook/people/team-structure/why-small-teams" },
         { "source": "/handbook/people/team", "destination": "/handbook/company/team" },
         { "source": "/handbook/growth/customer-success", "destination": "/handbook/growth/customer-support" },
-        { "source": "/handbook/getting-started", "destination": "/handbook/getting-started/start-here" },
+        { "source": "/handbook/getting-started", "destination": "/handbook" },
+        { "source": "/handbook/getting-started/start-here", "destination": "/handbook" },
         {
             "source": "/handbook/people/team-structure/user-experience",
             "destination": "/handbook/people/team-structure/core-experience"
@@ -1113,6 +1114,7 @@
         { "source": "/ab-testing/documentation", "destination": "/ab-testing#docs" },
         { "source": "/ab-testing/tutorials", "destination": "/ab-testing#tutorials" },
         { "source": "/ab-testing/roadmap", "destination": "/ab-testing#roadmap" },
-        { "source": "/ab-testing/questions", "destination": "/ab-testing#questions" }
+        { "source": "/ab-testing/questions", "destination": "/ab-testing#questions" },
+        { "source": "/handbook/what-is-posthog", "destination": "/handbook/why-does-posthog-exist" }
     ]
 }

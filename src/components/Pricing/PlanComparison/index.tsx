@@ -8,7 +8,7 @@ import CheckIcon from '../../../images/check.svg'
 import MinusIcon from '../../../images/x.svg'
 import './styles/index.scss'
 import Modal from 'components/Modal'
-import { capitalizeFirstLetter } from '../../../utils'
+import { capitalizeFirstLetter, toFixedMin } from '../../../utils'
 import Label from 'components/Label'
 import { graphql, useStaticQuery } from 'gatsby'
 import { ExternalLink } from 'components/Icons'
@@ -38,7 +38,14 @@ const convertLargeNumberToWords = (
         denominator = 1000
     }
 
-    return `${previousNum ? `${(previousNum / denominator).toFixed(0)}-` : multipleTiers ? 'first ' : ''}${(
+    let prevDenominator = 1
+    if (previousNum && previousNum >= 1000000) {
+        prevDenominator = 1000000
+    } else if (previousNum && previousNum >= 1000) {
+        prevDenominator = 1000
+    }
+
+    return `${previousNum ? `${((previousNum + 1) / prevDenominator).toFixed(0)}-` : multipleTiers ? 'First ' : ''}${(
         num / denominator
     ).toFixed(0)}${denominator === 1000000 ? ' million' : denominator === 1000 ? 'k' : ''}${
         !previousNum && multipleTiers ? ` ${productType}s/mo` : ''
@@ -188,7 +195,9 @@ const ProductTiers = ({ plan }: { plan?: BillingV2PlanType }): JSX.Element => {
                             </div>
                         ) : (
                             <>
-                                <span className="font-bold text-base">${parseFloat(tier.unit_amount_usd)}</span>
+                                <span className="font-bold text-base">
+                                    ${toFixedMin(parseFloat(tier.unit_amount_usd), 2)}
+                                </span>
                                 {/* the product types we have are plural, so we need to singularlize them and this works for now */}
                                 <span className="text-gray">/{plan.unit ? plan.unit.replace(/s$/, '') : 'unit'}</span>
                                 <p className="text-sm mb-0">
@@ -385,7 +394,7 @@ export const PlanComparison = ({
                         </p>
                     </div>
 
-                    <div className="w-full md:flex-[0_0_60%] flex border-b border-border dark:border-border-dark px-4 md:gap-4">
+                    <div className="w-full md:flex-[0_0_60%] flex border-b border-border dark:border-dark px-4 md:gap-4">
                         {staticPlans.map((plan) => (
                             <div
                                 key={`${plan.plan_key}-header`}

@@ -21,6 +21,7 @@ In order to run the PostHog website locally, you need the following installed:
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) – version control system
 - [Node.js](https://nodejs.org/en/download/) – server runtime
 - [Yarn](https://classic.yarnpkg.com/en/docs/install) (version 1.x) – package manager for Node.js
+- [Apple Rosetta](https://support.apple.com/en-gb/HT211861) (version 2) – dynamic binary translator for Apple silicon
 
 If you are unfamiliar with using Git from the command line (or just prefer graphical interfaces), use the [GitHub Desktop app](https://desktop.github.com/).
 

@@ -1,6 +1,6 @@
 import { CallToAction } from 'components/CallToAction'
 import Modal from 'components/Modal'
-import Markdown from 'components/Squeak/components/Markdown'
+import ClientPostMarkdown from 'components/Squeak/components/ClientPostMarkdown'
 import { ZoomImage } from 'components/ZoomImage'
 import SEO from 'components/seo'
 import dayjs from 'dayjs'
@@ -79,8 +79,8 @@ export default function ClientPost({
             </Modal>
             <SEO title={title + ' - PostHog'} />
             <article
-                className={`article-content mx-auto transition-all pb-6 md:py-6 md:px-8 2xl:px-12 ${
-                    fullWidthContent ? 'max-w-full' : 'max-w-2xl'
+                className={`article-content mx-auto transition-all pb-6 md:py-6 md:pb-20 md:px-8 2xl:px-12 ${
+                    fullWidthContent ? 'max-w-full' : 'max-w-3xl'
                 }`}
             >
                 {imageURL && (
@@ -116,10 +116,10 @@ export default function ClientPost({
                     </p>
                 </div>
                 <div className="my-2 article-content">
-                    <Markdown>{body}</Markdown>
+                    <ClientPostMarkdown>{body}</ClientPostMarkdown>
                 </div>
                 {CTA?.label && CTA?.url && (
-                    <CallToAction size="md" type="outline" to={CTA.url}>
+                    <CallToAction size="md" type="outline" externalNoIcon to={CTA.url}>
                         {CTA.label}
                     </CallToAction>
                 )}

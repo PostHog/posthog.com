@@ -435,6 +435,18 @@ h4 {
     }
 }
 
+.footnotes {
+    @apply border-t border-border dark:border-dark pt-4;
+
+    hr {
+        @apply hidden;
+    }
+
+    li {
+        @apply text-sm;
+    }
+}
+
 /* When used in article on-page nav, only show on mobile viewports... */
 
 .article-content .jumpTo:before {
@@ -870,14 +882,13 @@ ul {
 
 .active-sidebar-item {
     &:before {
-        background: #f54e00;
-        bottom: 4px;
+        @apply bg-red absolute;
+        bottom: 2px;
         border-radius: 2px;
         content: '';
-        left: 6px;
-        position: absolute;
-        top: 4px;
-        width: 4px;
+        left: 0px;
+        top: 2px;
+        width: 2px;
     }
 }
 

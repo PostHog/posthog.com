@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../../Layout'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import { IconBrackets, IconGraph, IconFlask, IconToggle, IconPeople, IconRewindPlay } from '@posthog/icons'
@@ -33,6 +32,7 @@ import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
 import { SEO } from 'components/seo'
+import { useLayoutData } from 'components/Layout/hooks'
 
 const product = {
     slug: 'ab-testing',
@@ -278,14 +278,15 @@ export const ProductAbTesting = () => {
             }
         }
     `)
+    const { fullWidthContent } = useLayoutData()
     return (
-        <Layout>
+        <>
             <SEO
                 title="A/B Testing - PostHog"
                 description="Run statistically-significant multivariate tests and robust targeting & exclusion rules."
                 image={`/images/og/ab-testing.jpg`}
             />
-            <div className="max-w-7xl mx-auto px-5 py-10 md:pt-20 pb-0">
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="purple"
                     icon={<IconFlask />}
@@ -294,12 +295,14 @@ export const ProductAbTesting = () => {
                     description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">Product Analytics</a> and <a href="/session-replay">Session Replay</a>.'
                 />
 
-                <StaticImage
-                    src="./images/screenshot-ab-testing.png"
-                    alt="Screenshot of managing an A/B test in PostHog"
-                    className="w-full max-w-[1361px]"
-                    placeholder="none"
-                />
+                <div className="text-center">
+                    <StaticImage
+                        src="./images/screenshot-ab-testing.png"
+                        alt="Screenshot of managing an A/B test in PostHog"
+                        className="w-full max-w-[1361px]"
+                        placeholder="none"
+                    />
+                </div>
 
                 <section id="customers" className="-mt-20">
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
@@ -348,7 +351,10 @@ export const ProductAbTesting = () => {
                     </Marquee>
                 </section>
             </div>
-            <section id="pricing" className="max-w-7xl mx-auto px-5 py-20">
+            <section
+                id="pricing"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
+            >
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
@@ -379,7 +385,7 @@ export const ProductAbTesting = () => {
                 </div>
             </section>
 
-            <div className="max-w-7xl mx-auto">
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -553,7 +559,7 @@ export const ProductAbTesting = () => {
                     <CTA />
                 </section>
             </div>
-        </Layout>
+        </>
     )
 }
 

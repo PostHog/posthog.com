@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Tab as HeadlessTab } from '@headlessui/react'
 import { classNames } from 'lib/utils'
+import Slider from 'components/Slider'
 
 export const Tab: React.FC & {
     Group: typeof HeadlessTab.Group
@@ -62,10 +63,7 @@ TabGroup.displayName = 'TabGroup'
 
 const TabList: typeof HeadlessTab.List = ({ children, className, ...props }) => {
     return (
-        <HeadlessTab.List
-            {...props}
-            className={`-mx-4 px-4 sm:mx-0 sm:px-0 flex whitespace-nowrap gap-x-[1px] border-b border-light dark:border-dark overflow-x-auto overflow-y-hidden ${className}`}
-        >
+        <HeadlessTab.List {...props} as={Slider}>
             {children}
         </HeadlessTab.List>
     )
