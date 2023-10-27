@@ -48,19 +48,15 @@ export default App;
 
 ```react
 import { useFeatureFlagVariantKey } from 'posthog-js/react'
-import { useState, useEffect } from 'react'
 
 function App() {
   const variantKey = useFeatureFlagVariantKey('show-welcome-message')
-  const [ welcomeMessage, setWelcomeMessage ] = useState('')
-
-  useEffect(() => {
-    if (variantKey === 'variant-a') {
-      setWelcomeMessage('Welcome to the Alpha!')
-    } else if (variantKey === 'variant-b') {
-      setWelcomeMessage('Welcome to the Beta!')
-    }
-  }, [variantKey])
+  let welcomeMessage = '' 
+  if (variantKey === 'variant-a') {
+    welcomeMessage = 'Welcome to the Alpha!'
+  } else if (variantKey === 'variant-b') {
+    welcomeMessage = 'Welcome to the Beta!'
+  }  
 
   return (
     <div className="App">
