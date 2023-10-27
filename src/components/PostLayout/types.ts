@@ -22,7 +22,17 @@ export interface IMenu {
     url?: string
     children?: IMenu[]
     className?: string
-    handleLinkClick?: ({ name, url, topLevel }: { name: string; url?: string; topLevel?: boolean }) => void
+    handleLinkClick?: ({
+        name,
+        url,
+        topLevel,
+        tag,
+    }: {
+        name: string
+        url?: string
+        topLevel?: boolean
+        tag?: string
+    }) => void
     topLevel?: boolean
     menuType?: 'scroll' | 'standard'
     badge?: {
@@ -31,6 +41,7 @@ export interface IMenu {
     }
     color?: string
     hidden?: boolean
+    tag?: string
 }
 
 export interface ICrumb {

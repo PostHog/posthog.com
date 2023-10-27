@@ -343,13 +343,13 @@ export default function Posts({
                         title: title || 'Posts',
                         menu: menu.map((menuItem) => ({
                             ...menuItem,
-                            handleLinkClick: ({ name, url: activeURL, topLevel }) => {
+                            handleLinkClick: ({ name, url: activeURL, topLevel, tag }) => {
                                 if (topLevel) {
                                     setRoot(activeURL === '/posts' ? undefined : activeURL?.split('/')[1])
                                     setTag(undefined)
                                     setActiveMenu(menu.find(({ url }) => url === activeURL))
                                 } else {
-                                    setTag(name)
+                                    setTag(tag || name)
                                 }
                             },
                             children: undefined,

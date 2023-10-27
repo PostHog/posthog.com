@@ -13,6 +13,8 @@ import OtherOptions from './OtherOptions'
 import { PricingCalculator } from './PricingCalculator'
 import { useLocation } from '@reach/router'
 import { pricingMenu } from '../../navs'
+import tractorHog from '../../../static/lotties/tractor-hog.json'
+import Lottie from 'react-lottie'
 
 export const section = cntl`
     max-w-6xl
@@ -96,18 +98,20 @@ const Pricing = (): JSX.Element => {
         >
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
-            <section>
+            <section className="w-screen overflow-x-hidden">
                 <div
-                    className={`grid md:grid-cols-2 md:mt-8 md:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
+                    className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
                 >
                     <div className="md:order-2">
-                        <StaticImage
-                            alt="The cutest hedgehog you've ever seen driving a red tractor"
-                            src={'./images/tractor-hog.png'}
-                            className="max-w-screen-sm"
-                            loading="eager"
-                            placeholder="none"
-                        />
+                        <div className="scale-[1.75] sm:scale-[1.4] md:scale-[1.1] lg:scale-[1.1] py-8 pl-20 sm:pl-28 md:p-0 md:scale-110 -mr-0 md:-mr-56 lg:-mr-64 xl:-mr-80">
+                            <Lottie
+                                options={{
+                                    loop: false,
+                                    autoplay: true,
+                                    animationData: tractorHog,
+                                }}
+                            />
+                        </div>
                     </div>
                     <div className="md:order-1">
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">Pricing</h1>

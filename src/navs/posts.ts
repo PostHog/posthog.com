@@ -92,6 +92,7 @@ export const postsMenu: IMenu[] = [
                 url: '/product-engineers/ab-testing',
                 icon: 'Flask',
                 color: 'green',
+                tag: 'AB testing',
             },
             {
                 name: 'Feature management',
@@ -186,6 +187,7 @@ export const postsMenu: IMenu[] = [
                 url: '/tutorials/product-os',
                 icon: 'IconStack',
                 color: 'salmon',
+                tag: 'Product os',
             },
             {
                 name: 'Product analytics',
@@ -206,12 +208,6 @@ export const postsMenu: IMenu[] = [
                 color: 'seagreen',
             },
             {
-                name: 'A/B testing',
-                url: '/tutorials/experimentation',
-                icon: 'IconFlask',
-                color: 'purple',
-            },
-            {
                 name: 'Surveys',
                 url: '/tutorials/surveys',
                 icon: 'IconMessage',
@@ -222,6 +218,7 @@ export const postsMenu: IMenu[] = [
                 url: '/tutorials/cdp',
                 color: 'yellow',
                 icon: 'IconPerson',
+                tag: 'Cdp',
             },
         ],
     },
