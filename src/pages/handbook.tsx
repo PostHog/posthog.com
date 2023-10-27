@@ -142,6 +142,7 @@ export const Handbook: React.FC = () => {
                         )
                     })}
 
+                    {/*
                     <h4>Top links</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {otherLinks.map((category) => {
@@ -164,6 +165,7 @@ export const Handbook: React.FC = () => {
                             )
                         })}
                     </div>
+                    */}
                 </section>
 
                 <section className="space-y-8"></section>
