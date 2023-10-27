@@ -8,9 +8,9 @@ featuredImage: ../images/tutorials/banners/tutorial-16.png
 tags: ['experimentation', 'feature flags']
 ---
 
-Redirect testing is a way to A/B test web pages by redirecting users to one or the other.
+Redirect testing is a way to [A/B test](/ab-testing) web pages by redirecting users to one or the other.
 
-To show you how to set up a redirect test with PostHog, we create a two-page Next.js app, create an A/B test in PostHog, and then implement it in our app using middleware and feature flags. 
+To show you how to do a redirect test with PostHog, we set up a two-page Next.js app, create an A/B test in PostHog, and then implement it in our app using middleware and feature flags. 
 
 > **Note:** Although we are using Next.js in this tutorial, this method works with any framework where you can do server-side redirects.
 
@@ -116,21 +116,21 @@ export default function Test() {
 
 Now run `npm run dev`. Go to each of our pages to see that they work: `http://localhost:3000/control` and `http://localhost:3000/test`. 
 
-Click the button on each page to capture a custom event in PostHog. We need it for our goal metric in our A/B test.
+Click the button on each page to capture a custom event in PostHog.
 
 ![Events](../images/tutorials/redirect-testing/events.png)
 
 ## Creating our A/B test
 
-Our A/B test compares these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) (our name for A/B tests) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
+Our A/B test will compare these two pages to see which drives more button clicks. To do this, we go to the [experiment tab](https://app.posthog.com/experiments) (our name for A/B tests) in PostHog and click "New experiment." Name your experiment and feature flag key (like `main-redirect`), set your experiment goal to `main_button_clicked`, and click "Save as draft."
 
 ![A/B test set up](../images/tutorials/redirect-testing/test.png)
 
-Because we are working locally, you can click "Launch" right after and head back to your app to implement it. 
+Because we are working locally, you can click "Launch" immediately.
 
 ## Setting up the redirect test middleware
 
-Next.js enables you to run middleware that intercepts and modifies requests for your app. We can use it to run our redirect test.
+Next.js enables you to run [middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) that intercepts and modifies requests for your app. We use it for our redirect test.
 
 To start, create a `middleware.js` file in the base `redirect-test` directory. We want it to run on both the `/test` and `/control` paths, so we add them to the matcher config. For now, we have the `/test` path redirect to `/control` as a placeholder.
 
@@ -140,6 +140,7 @@ import { NextResponse } from 'next/server'
 
 export async function middleware(request) {
   if (request.nextUrl.pathname=== '/test') {
+   // Placeholder for now. We'll replace this code in the next step
     return NextResponse.redirect(new URL('/control', request.url))
   }
   return NextResponse.next()
@@ -182,7 +183,7 @@ export async function middleware(request) {
 
 With our distinct ID, we can use the PostHog API to evaluate the `main-redirect` feature flag we set up earlier (because we can’t use PostHog SDKs in Next.js middleware). 
 
-We evaluate the flag by making a POST request to the `https://app.posthog.com/decide?v=3` route (replace `app` with `eu` if you’re on EU Cloud) with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, this looks like this:
+We evaluate the flag by making a POST request to the `https://app.posthog.com/decide?v=3` route (replace `app` with `eu` if you’re on EU Cloud) with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
 
 ```js
 //... rest of code
@@ -200,7 +201,7 @@ We evaluate the flag by making a POST request to the `https://app.posthog.com/de
   
   // Evaluate experiment flag
   const ph_request = await fetch(
-    'https://app.posthog.com/decide?v=3', // or eu
+    'https://app.posthog.com/decide?v=3', // or eu.posthog.com
     requestOptions
   );
   const data = await ph_request.json();
