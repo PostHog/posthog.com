@@ -7,6 +7,9 @@ noindex: true
 ---
 
 import Table from './_includes/example-table.mdx'
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ComparisonHeader } from 'components/ComparisonTable/header'
 
 <Hero
     title="Self-hosted alternative to Google Analytics"
@@ -44,6 +47,7 @@ import Table from './_includes/example-table.mdx'
 </Section>
 
 <Section>
+<h4>Comparison tables, from imported components</h4>
 <ComparisonTable column1="Pendo" column2="PostHog">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
   <ComparisonRow column1={false} column2={true} feature="Session replays" description="Watch real users use your product; diagnose bugs" />
