@@ -19,23 +19,14 @@ Clearly there are exceptions, but we ship a lot faster than the average company.
 Our first line of code was January 22nd, 2020, after a pivot during a YC batch. Since then, we've shipped:
 
 * [Product analytics](/product-analytics)
-
 * [Session replay](/session-replay)
-
 * [Feature flags](/feature-flags)
-
 * [A/B testing](/ab-testing)
-
 * [User surveys](/docs/surveys)
-
 * Heatmaps
-
 * [SDKs](/docs/libraries) for all the above
-
 * A basic [CDP](/docs/cdp) to stream data to warehouses
-
 * [Data warehouse](/docs/data-warehouse) MVP
-
 * A wildly extensive website
 
 ...and those are just the things that worked.
@@ -46,7 +37,19 @@ I often get asked how we build so much, so quickly. The answer is simple: we del
 
 ## How we designed PostHog for speed
 
-### 1. No product management by default
+### 1. No design by default
+
+When we started, we felt the best engineers would eventually quit if they felt dictated to by product designers. Product engineers need autonomy and freedom to enjoy their work.
+
+As we grew, we realized that engineers can design the UX of a product. Especially if we hire people that have this skill set, and provide a framework for their work.
+
+We invested considerable time getting our design *system* up and running, and worked with a designer to get it done. Then we moved onto this "no design by default" phase. Had we been in this phase from the beginning, the app would have been very inconsistent... at best.
+
+Today, we have people that can help engineers with design, but they are very happy to work reactively and fast – and they don't block merging work during QA. This means we do ship work where the design isn't perfect, but we won't drop things that are important and will keep improving them.
+
+For example, we've redesigned this entire website ~5 times.
+
+### 2. No product management by default
 
 The responsibilities of a product manager still exist, but our engineers:
 
@@ -61,18 +64,6 @@ The concept internally is a "[product engineer](/blog/what-is-a-product-engineer
 We have one product manager who steps in reactively if a small team needs more support.
 
 The above requires a lot of context setting from the company. To that end, we're *unusually transparent*. We share board slides, financial information, fundraising progress before, during and after it happens, and much more.
-
-### 2. No design by default
-
-When we started, we felt the best engineers would eventually quit if they felt dictated to by product designers. Product engineers need autonomy and freedom to enjoy their work.
-
-As we grew, we realized that engineers can design the UX of a product. Especially if we hire people that have this skill set, and provide a framework for their work.
-
-We invested considerable time getting our design *system* up and running, and worked with a designer to get it done. Then we moved onto this "no design by default" phase. Had we been in this phase from the beginning, the app would have been very inconsistent... at best.
-
-Today, we have people that can help engineers with design, but they are very happy to work reactively and fast – and they don't block merging work during QA. This means we do ship work where the design isn't perfect, but we won't drop things that are important and will keep improving them.
-
-For example, we've redesigned this entire website ~5 times.
 
 ### 3. Hiring with intention
 
