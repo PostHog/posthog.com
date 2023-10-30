@@ -35,7 +35,6 @@ import { Marquee } from './components/Products/Marquee'
 import { MobileSlides } from './components/Products/MobileSlides'
 import { PairsWith } from './components/Products/PairsWith'
 import { Question } from './components/Products/Question'
-import { Slider } from './components/Products/Slider'
 import { SmoothScroll } from './components/Products/SmoothScroll'
 import { Subfeature } from './components/Products/Subfeature'
 import { TextCard } from './components/Products/TextCard'
@@ -85,7 +84,6 @@ export const shortcodes = {
     MobileSlides,
     PairsWith,
     Question,
-    Slider,
     SmoothScroll,
     Subfeature,
     TextCard,

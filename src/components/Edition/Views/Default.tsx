@@ -17,23 +17,20 @@ import { IconChevronDown, IconFilter, IconX } from '@posthog/icons'
 import { Icon, getIcon } from 'components/PostLayout/Menu'
 import { navigate } from 'gatsby'
 import { postsMenu as menu } from '../../../navs/posts'
+import Intro from '../Intro'
+import Tags from '../Tags'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 
-const CommunityBar = () => {
+const UserBar = () => {
     const { user, logout, isModerator } = useUser()
     const name = [user?.profile.firstName, user?.profile.lastName].filter(Boolean).join(' ')
     const { setNewPostModalOpen, newPostModalOpen, setLoginModalOpen, articleView } = useContext(PostsContext)
     const { pathname } = useLocation()
-    const { fullWidthContent } = useLayoutData()
     return (
-        <div
-            className={`py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col lg:flex-row justify-between items-center sticky top-[-1px] lg:space-y-0 space-y-2 ${
-                fullWidthContent ? 'px-6' : 'px-4'
-            }`}
-        >
+        <div className="flex gap-1 flex-col @xs:flex-row items-center justify-between w-full">
             {user ? (
-                <div className="flex items-center justify-between w-full">
+                <>
                     <p className="text-sm m-0 p-0">
                         Signed in as{' '}
                         <Link
@@ -56,7 +53,7 @@ const CommunityBar = () => {
                             Logout
                         </button>
                     </span>
-                </div>
+                </>
             ) : (
                 <>
                     <p className="m-0 opacity-80 text-sm">The latest from the PostHog community</p>
@@ -70,6 +67,19 @@ const CommunityBar = () => {
                     </CallToAction>
                 </>
             )}
+        </div>
+    )
+}
+
+const CommunityBar = () => {
+    const { fullWidthContent } = useLayoutData()
+    return (
+        <div
+            className={`@container py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center sticky top-[-1px] border-b border-border dark:border-dark lg:space-y-0 space-y-2 ${
+                fullWidthContent ? 'px-6' : 'pl-4 pr-2'
+            }`}
+        >
+            <UserBar />
         </div>
     )
 }
@@ -115,7 +125,7 @@ const Post = ({
                     className={`inline m-0 font-semibold border-t border-b !leading-tight line-clamp-2 text-inherit hover:text-primary dark:hover:text-primary-dark hover:text-inherit dark:text-inherit dark:hover:text-inherit hover:transition-transform flex-grow hover:bg-accent dark:hover:bg-accent-dark relative 
                     ${
                         active
-                            ? 'bg-accent dark:bg-accent-dark font-bold border-border dark:border-border-dark'
+                            ? 'bg-accent dark:bg-accent-dark font-bold border-border dark:border-dark'
                             : 'border-transparent hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99]'
                     } 
                     ${fullWidthContent ? 'p-2 ' : 'p-2 lg:px-4'}
@@ -182,7 +192,7 @@ export const PostFilters = () => {
     return (
         <>
             <div
-                className={`relative flex space-x-2 pb-2 border-b border-border dark:border-border-dark ${
+                className={`relative flex space-x-2 pb-2 border-b border-border dark:border-dark ${
                     fullWidthContent ? 'pl-2 pr-4' : 'pr-2'
                 }`}
             >
@@ -250,12 +260,12 @@ export const PostFilters = () => {
                                         All
                                     </button>
                                 </Menu.Item>
-                                {activeMenu?.children?.map(({ name, url }, index) => {
+                                {activeMenu?.children?.map(({ name, url, tag }, index) => {
                                     return (
                                         <Menu.Item key={`${name}-${index}`}>
                                             <button
                                                 onClick={() => {
-                                                    setTag(name)
+                                                    setTag(tag || name)
                                                     if (breakpoints.sm) {
                                                         navigate(url)
                                                     }
@@ -276,16 +286,18 @@ export const PostFilters = () => {
             </div>
 
             {tag && (
-                <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-border dark:border-border-dark -mb-1">
+                <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-border dark:border-dark -mb-1">
                     <span
                         className="
-                        after:h-6 after:w-6 after:absolute after:left-[39px] after:top-[-6px] after:border after:border-t-0 after:border-r-0 after:border-border dark:after:border-border-dark after:rounded-bl after:content-['']
+                        after:h-6 after:w-6 after:absolute after:left-[39px] after:top-[-6px] after:border after:border-t-0 after:border-r-0 after:border-border dark:after:border-dark after:rounded-bl after:content-['']
                     "
                     ></span>
                     <div className="pl-[43px] -mt-0.5">
                         <span className="inline-flex gap-1 items-center text-[13px] rounded-full border border-light dark:border-dark pl-1.5 pr-2 pt-1 pb-1">
-                            <IconX className="hidden w-3 h-3 inline-block bg-border dark:bg-border-dark p-1 box-content rounded-full" />
-                            <span>{tag}</span>
+                            <button onClick={() => setTag(undefined)}>
+                                <IconX className="w-3 h-3 inline-block bg-border dark:bg-border-dark p-1 box-content rounded-full" />
+                            </button>
+                            <span>{activeMenu?.children?.find((menuItem) => menuItem.tag === tag)?.name || tag}</span>
                         </span>
                     </div>
                 </div>
@@ -303,10 +315,11 @@ function PostsListing() {
     return articleView && breakpoints.sm ? null : (
         <div
             className={`
+                min-w-0
                 transition-all 
                 ${
                     articleView
-                        ? 'flex flex-col h-[calc(100vh_-_108px)] sticky top-[20px] reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
+                        ? 'flex flex-col h-[calc(100vh_-_108px)] sticky top-0 z-10 reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
                         : 'flex-grow md:px-8 2xl:px-12'
                 }
             `}
@@ -325,17 +338,30 @@ function PostsListing() {
                 }
             >
                 {!articleView && (
-                    <h2 className="pt-4 text-xl mb-2 space-x-2 flex-wrap md:flex hidden">
-                        <span>{activeMenu?.name}</span>
-                        {tag && (
-                            <>
-                                <span>→</span>
-                                <span>{tag}</span>
-                            </>
-                        )}
-                    </h2>
-                )}
+                    <>
+                        <h2 className="pt-4 text-xl mb-2 space-x-2 flex-wrap md:flex hidden">
+                            {activeMenu?.children?.length > 0 && (
+                                <>
+                                    {activeMenu?.name === 'Founders' ? (
+                                        <>Founder's hub</>
+                                    ) : activeMenu?.name === 'Product engineers' ? (
+                                        <>Product engineer's hub</>
+                                    ) : (
+                                        <>{activeMenu?.name}</>
+                                    )}
+                                </>
+                            )}
+                        </h2>
+                        <Intro />
+                        <Tags />
 
+                        {tag && (
+                            <h3 className="text-lg">
+                                {activeMenu?.children?.find((menuItem) => menuItem.tag === tag)?.name || tag}
+                            </h3>
+                        )}
+                    </>
+                )}
                 <ul
                     className={`list-none p-0 m-0 flex flex-col snap-y snap-proximity overflow-x-hidden ${
                         articleView && !breakpoints.sm ? 'h-[85vh] overflow-auto mt-[-2px]' : ''
@@ -380,18 +406,31 @@ export default function Default({ children }) {
             <section className="md:flex my-4 md:my-0 items-start">
                 {!articleView && (
                     <div
-                        className={`lg:block hidden lg:sticky top-[20px] reasonable:top-[108px] pt-3 w-full h-screen md:w-[14rem] lg:w-[18rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative pr-4 2xl:border-r border-border dark:border-border-dark ${
-                            fullWidthContent ? 'pl-2' : 'pl-4'
-                        }`}
+                        className={`lg:block hidden lg:sticky top-0 z-10 reasonable:top-[108px] w-full h-screen md:w-[14rem] lg:w-[20rem] xl:w-[24rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative lg:border-x border-border dark:border-dark`}
                     >
-                        <div className="max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 mt-[-2px]">
+                        <div
+                            className={`@container py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col lg:flex-row justify-between items-center sticky top-[-1px] border-b border-border dark:border-dark lg:space-y-0 space-y-2 ${
+                                fullWidthContent ? 'px-6' : 'pl-4 pr-2'
+                            }`}
+                        >
+                            <UserBar />
+                        </div>
+                        <div
+                            className={`max-h-screen reasonable:max-h-[85vh] overflow-auto snap-y pb-24 pt-3 pr-4 mt-[-2px] ${
+                                fullWidthContent ? 'pl-2' : 'pl-4'
+                            }`}
+                        >
                             <TableOfContents />
                         </div>
                     </div>
                 )}
                 <PostsListing />
                 <div
-                    className={`${articleView ? 'flex-grow' : 'sticky top-[108px] basis-[20rem] flex-shrink-0 block'}`}
+                    className={`${
+                        articleView
+                            ? 'flex-grow'
+                            : 'sticky top-[108px] h-screen basis-[20rem] flex-shrink-0 block pl-4 border-l border-light dark:border-dark'
+                    }`}
                 >
                     {children}
                 </div>

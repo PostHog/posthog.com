@@ -192,20 +192,24 @@ const linklist: IProps[] = [
         url: '/handbook',
         items: [
             {
-                title: 'Getting started',
-                url: '/handbook/getting-started/start-here',
+                title: "Why we're here",
+                url: '/handbook/why-does-posthog-exist',
             },
             {
-                title: 'Company',
-                url: '/handbook/company/story',
-            },
-            {
-                title: 'Strategy',
-                url: '/handbook/strategy/overview',
+                title: 'Our story',
+                url: '/handbook/story',
             },
             {
                 title: 'How we work',
                 url: '/handbook/company/culture',
+            },
+            {
+                title: 'Values',
+                url: '/handbook/values',
+            },
+            {
+                title: 'Tips for working here',
+                url: '/handbook/help',
             },
             {
                 title: 'Small teams',
@@ -220,20 +224,12 @@ const linklist: IProps[] = [
                 url: '/handbook/engineering/developing-locally',
             },
             {
-                title: 'Product',
-                url: '/handbook/product/product-team',
-            },
-            {
                 title: 'Design',
                 url: '/handbook/design/philosophy',
             },
             {
                 title: 'Marketing',
                 url: '/handbook/growth/marketing',
-            },
-            {
-                title: 'Customer success',
-                url: '/handbook/growth/strategy',
             },
         ],
     },

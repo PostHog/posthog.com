@@ -107,7 +107,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                     </div>
                 </div>
                 {view === 'Article' && (
-                    <aside className="shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-border-dark pt-4">
+                    <aside className="shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-dark pt-4">
                         <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
                     </aside>
                 )}

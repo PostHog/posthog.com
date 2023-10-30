@@ -93,6 +93,7 @@ export default function Menu({
     badge,
     color,
     hidden,
+    tag,
     ...other
 }: IMenu): JSX.Element | null {
     if (hidden) return null
@@ -165,7 +166,7 @@ export default function Menu({
                 ) : name && url ? (
                     <MenuLink
                         onClick={() => {
-                            handleLinkClick && handleLinkClick({ name, url, topLevel })
+                            handleLinkClick && handleLinkClick({ name, url, topLevel, tag })
                             if (isWithChild) {
                                 setOpen(!open)
                             }
