@@ -141,4 +141,8 @@ Your persona is the voice of your user. It should guide your product development
 
 Incorporate them into team meetings and encourage your team to always ask, "How will this benefit our key personas?". By doing so, you build a culture of empathy for your users, ensuring that you can build the best products for them.
 
-## 
+## Further reading
+
+- [10x engineers talk to users](/product-engineers/10x-engineers-do-user-interviews)
+- [How to turn user interviews into actionable snapshots](/product-engineers/interview-snapshot-guide)
+- [How to write great product survey questions (with examples)](/product-engineers/product-survey-questions)
